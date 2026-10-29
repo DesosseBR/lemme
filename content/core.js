@@ -4,7 +4,7 @@ const R = String.raw;
 const C = (t, n, r) => ({ t, n, r: r || "" });
 
 const LEMME = window.LEMME = {
-  SUBJECTS: [], EXERCISES: [], DM: [], KHOLLES: [], RAPPELS: {}, PDFS: [],
+  SUBJECTS: [], EXERCISES: [], DM: [], KHOLLES: [], RAPPELS: {}, NOTIONS: {}, PDFS: [],
   BANKS: [
     { name: "X-ENS", desc: "Polytechnique et les ENS. Les sujets les plus longs et les plus ouverts." },
     { name: "Mines-Ponts", desc: "Mines Paris, Ponts, ISAE-Supaero, Télécom et d'autres écoles." },
@@ -16,7 +16,8 @@ const LEMME = window.LEMME = {
   exercises(list) { this.EXERCISES.push(...list); },
   dm(list) { this.DM.push(...list); },
   kholles(list) { this.KHOLLES.push(...list); },
-  rappels(map) { Object.assign(this.RAPPELS, map); }
+  rappels(map) { Object.assign(this.RAPPELS, map); },
+  notions(map) { Object.assign(this.NOTIONS, map); }
 };
 
 /* Rappels de cours partagés entre plusieurs matières */

@@ -299,3 +299,266 @@ LEMME.exercises([
   methode: R`Un pivot de Gauss par blocs, $\begin{pmatrix}I&0\\-C&I\end{pmatrix}$ à gauche et $\begin{pmatrix}I&-B\\0&I\end{pmatrix}$ à droite, transforme $\begin{pmatrix}I&B\\C&D\end{pmatrix}$ en $\begin{pmatrix}I&0\\0&D-CB\end{pmatrix}$.`
 }
 ]);
+
+LEMME.rappels({
+  "o-poly-commute": { t: "Les polynômes en u commutent", b: R`Pour tous $P,Q\in\mathbb K[X]$ : $P(u)\circ Q(u) = (PQ)(u) = Q(u)\circ P(u)$. En particulier, tout $P(u)$ commute avec $u$, et si $h$ commute avec $u$, alors $h$ commute avec tout $P(u)$.` },
+  "o-lemme-noyaux": { t: "Lemme des noyaux", b: R`Si $P$ et $Q$ sont premiers entre eux, alors $\ker(PQ)(u) = \ker P(u)\oplus\ker Q(u)$.` },
+  "o-bezout-poly": { t: "Théorème de Bézout pour les polynômes", b: R`$P$ et $Q$ sont premiers entre eux si et seulement s'il existe $A,B\in\mathbb K[X]$ tels que $AP+BQ = 1$. En évaluant en $u$ : $A(u)P(u)+B(u)Q(u) = \mathrm{Id}_E$.` },
+  "o-poly-induit": { t: "Polynôme et endomorphisme induit", b: R`Si $F$ est stable par $u$ et $u_F$ est l'endomorphisme induit, alors pour tout polynôme $P$ et tout $x\in F$ : $P(u)(x) = P(u_F)(x)$.` },
+  "o-rolle": { t: "Théorème de Rolle", b: R`Si $g$ est continue sur $[a,b]$, dérivable sur $]a,b[$ et $g(a) = g(b)$, il existe $c\in\,]a,b[$ avec $g'(c) = 0$. Donc si $g$ a $p$ zéros distincts, $g'$ en a au moins $p-1$, un dans chaque intervalle entre deux zéros consécutifs.` },
+  "o-det-multilin": { t: "Linéarité du déterminant par colonne", b: R`Le déterminant est linéaire par rapport à chaque colonne quand les autres sont fixées : $$\det(C_1+\varepsilon e_1,C_2,\dots,C_n) = \det(C_1,C_2,\dots,C_n)+\varepsilon\det(e_1,C_2,\dots,C_n).$$ Si deux lignes (ou deux colonnes) sont égales, le déterminant est nul.` },
+  "o-det-mult": { t: "Le déterminant est multiplicatif", b: R`$\det(AB) = \det(A)\det(B)$ et $\det(\lambda A) = \lambda^n\det A$ pour $A\in\mathcal M_n(\mathbb K)$. Mais en général $\det(A+B)\neq\det A+\det B$.` },
+  "o-somme-geo-c": { t: "Somme géométrique complexe", b: R`Pour $q\in\mathbb C$ : $\displaystyle\sum_{k=0}^{n-1}q^k = \frac{1-q^n}{1-q}$ si $q\neq1$, et $n$ si $q = 1$.` },
+  "o-racines-unite": { t: "Racines n-ièmes de l'unité", b: R`Avec $\omega = e^{2i\pi/n}$ : $\mathbb U_n = \{\omega^k : 0\leqslant k\leqslant n-1\}$, et $\omega^s = 1\iff n$ divise $s$.` },
+  "o-division-euclid": { t: "Division euclidienne des polynômes", b: R`Pour $B\neq0$, il existe un unique couple $(Q,R)$ avec $A = BQ+R$ et $\deg R<\deg B$. $B$ divise $A$ si et seulement si $R = 0$.` },
+  "o-tri-complexe": { t: "Inégalité triangulaire", b: R`Pour des complexes : $\left|\sum z_k\right|\leqslant\sum|z_k|$, et $|zz'| = |z|\,|z'|$. Si $|\omega| = 1$, alors $|\omega^k| = 1$.` },
+  "o-rang-produit": { t: "Rang d'un produit", b: R`$\operatorname{rg}(AB)\leqslant\min\big(\operatorname{rg} A,\operatorname{rg} B\big)$, car $\operatorname{Im}(AB)\subset\operatorname{Im} A$ et $AB$ est l'image de l'image de $B$.` },
+  "o-semblables": { t: "Matrices semblables", b: R`$B = P^{-1}AP$ avec $P$ inversible. Ce sont les matrices d'un même endomorphisme dans deux bases. Elles ont même trace, même déterminant, même polynôme caractéristique.` },
+  "o-chi": { t: "Polynôme caractéristique", b: R`$\chi_A(X) = \det(XI_n-A)$ : polynôme unitaire de degré $n$, dont les racines sont les valeurs propres de $A$. Il en a donc au plus $n$.` },
+  "o-poly-infini": { t: "Deux polynômes égaux en une infinité de points", b: R`Si deux polynômes coïncident en une infinité de points, ils sont égaux : leur différence a une infinité de racines, elle est nulle.` }
+});
+
+LEMME.exercises([
+{
+  id: "o-al-10", subj: "oraux", year: "mp", chap: 0, concours: "c1", level: 5, time: "50 min",
+  title: "Le bicommutant d'un endomorphisme",
+  enonce: R`<p>Soit $\mathbb K$ un corps, $E$ un $\mathbb K$-espace vectoriel de dimension finie $n$ et $u\in\mathcal L(E)$. On note $C(u)$ le commutant de $u$, et $C^2(u)$ le bicommutant de $u$ : l'ensemble des endomorphismes de $E$ qui commutent avec <span data-k="tous">tous</span> les éléments de $C(u)$.</p><ol><li>Vérifier que $C^2(u)$ est une sous-algèbre de $\mathcal L(E)$ contenant $\mathbb K[u]$.</li><li>On suppose $u$ nilpotent d'indice $n$. Montrer que $C^2(u) = \mathbb K[u]$.</li><li>Soit $E_1$ et $E_2$ deux sous-espaces supplémentaires de $E$ stables par $u$. On note $u_1$ (resp. $u_2$) l'endomorphisme induit par $u$ sur $E_1$ (resp. $E_2$). On suppose que les polynômes minimaux $\pi_1$, $\pi_2$ de $u_1$, $u_2$ sont premiers entre eux, et que $C^2(u_1) = \mathbb K[u_1]$ et $C^2(u_2) = \mathbb K[u_2]$. Montrer que $C^2(u) = \mathbb K[u]$.</li></ol>`,
+  decode: {
+    donnees: [R`$C(u) = \{v : vu = uv\}$ : ceux qui commutent avec $u$.`, R`$C^2(u)$ : ceux qui commutent avec tout le monde dans $C(u)$.`, R`$\mathbb K[u] = \{P(u) : P\in\mathbb K[X]\}$ : les polynômes en $u$.`],
+    but: R`Montrer qu'on a toujours $\mathbb K[u]\subset C^2(u)$, et l'égalité dans deux situations.`,
+    cles: {
+      tous: R`Pour être dans $C^2(u)$, il faut commuter avec chaque $h\in C(u)$, pas seulement avec $u$.`,
+      vandermonde: R`On applique $u^{n-1}$ : tous les termes avec un $u^k$, $k\geqslant1$, deviennent $u^{n-1+k} = 0$.`,
+      pv: R`$p_v$ applique $v$ au morceau dans $E_1$ et « oublie » le morceau dans $E_2$. C'est un outil pour tester $h$ sur $E_1$.`,
+      recolle: R`$P$ est construit pour valoir $P_1$ sur $E_1$ et $P_2$ sur $E_2$, grâce aux « interrupteurs » $A\pi_1$ et $B\pi_2$.`
+    }
+  },
+  steps: [
+    { t: "Q1 · Ce qu'il faut vérifier", b: R`<p>Une sous-algèbre de $\mathcal L(E)$ doit contenir $0$ et $\mathrm{Id}_E$, être stable par combinaison linéaire et par composition.</p><p>$0$ et $\mathrm{Id}_E$ commutent avec tout endomorphisme, donc avec tous les éléments de $C(u)$ : ils sont dans $C^2(u)$.</p>` },
+    { t: "Q1 · Stabilité par combinaison", b: R`<p>Soit $v,w\in C^2(u)$, $\lambda,\mu\in\mathbb K$ et $h\in C(u)$. Par linéarité de $h$ :</p>$$(\lambda v+\mu w)\circ h = \lambda\,v\circ h+\mu\,w\circ h = \lambda\,h\circ v+\mu\,h\circ w = h\circ(\lambda v+\mu w).$$` },
+    { t: "Q1 · Stabilité par composition", b: R`<p>On fait passer $h$ de droite à gauche, en commutant d'abord avec $w$, puis avec $v$ :</p>$$(v\circ w)\circ h = v\circ(h\circ w) = (v\circ h)\circ w = (h\circ v)\circ w = h\circ(v\circ w).$$` },
+    { t: "Q1 · K[u] ⊂ C²(u)", b: R`<p>Si $h\in C(u)$, alors par définition $h\circ u = u\circ h$ : $u$ commute avec tout élément de $C(u)$, donc $u\in C^2(u)$. Une sous-algèbre contenant $u$ contient $\mathrm{Id}$, toutes les puissances $u^k$ et leurs combinaisons linéaires : $\mathbb K[u]\subset C^2(u)$.</p>` },
+    { t: "Q2 · Une base adaptée", b: R`<p>$u$ est nilpotent d'indice $n$ : $u^n = 0$ et $u^{n-1}\neq0$. Il existe $x_0$ avec $u^{n-1}(x_0)\neq0$. Montrons que $\mathcal B = \big(x_0,u(x_0),\dots,u^{n-1}(x_0)\big)$ est libre. Si $\sum_{k=0}^{n-1}\lambda_ku^k(x_0) = 0$, on <span data-k="vandermonde">applique $u^{n-1}$</span> : il reste $\lambda_0u^{n-1}(x_0) = 0$, donc $\lambda_0 = 0$. On applique ensuite $u^{n-2}$ pour obtenir $\lambda_1 = 0$, et ainsi de suite. $\mathcal B$ est libre et a $n$ vecteurs : c'est une base.</p>` },
+    { t: "Q2 · Le commutant est K[u]", b: R`<p>Soit $v\in C(u)$. On décompose $v(x_0) = \sum_ka_ku^k(x_0)$ et on pose $w = \sum_ka_ku^k\in\mathbb K[u]$. Pour tout $j$, comme $v$ et $w$ commutent avec $u^j$ :</p>$$v\big(u^j(x_0)\big) = u^j\big(v(x_0)\big) = u^j\big(w(x_0)\big) = w\big(u^j(x_0)\big).$$<p>$v$ et $w$ coïncident sur la base $\mathcal B$, donc $v = w\in\mathbb K[u]$. Ainsi $C(u) = \mathbb K[u]$, l'autre inclusion étant immédiate.</p>`, rappels: ["o-poly-commute"] },
+    { t: "Q2 · Conclure", b: R`<p>Soit $h\in C^2(u)$. Comme $u\in C(u)$, $h$ commute avec $u$ : $h\in C(u) = \mathbb K[u]$. Donc $C^2(u)\subset\mathbb K[u]$, et Q1 donne l'égalité.</p><p><b>Exemple $n = 2$ :</b> avec $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $\begin{pmatrix}a&b\\c&d\end{pmatrix}N = \begin{pmatrix}0&a\\0&c\end{pmatrix}$ et $N\begin{pmatrix}a&b\\c&d\end{pmatrix} = \begin{pmatrix}c&d\\0&0\end{pmatrix}$. Ils sont égaux si et seulement si $c = 0$ et $a = d$ : la matrice vaut $aI+bN\in\mathbb K[N]$.</p>` },
+    { t: "Q3 · Étape 1 : E_i = ker π_i(u)", b: R`<p>Pour $x\in E_i$ : $\pi_i(u)(x) = \pi_i(u_i)(x) = 0$, donc $E_i\subset\ker\pi_i(u)$. Par le lemme des noyaux ($\pi_1,\pi_2$ premiers entre eux) :</p>$$\ker\pi_1(u)\oplus\ker\pi_2(u) = \ker(\pi_1\pi_2)(u) = E,$$<p>car $(\pi_1\pi_2)(u)$ s'annule sur $E_1$ et sur $E_2$. En dimensions : $n = \dim E_1+\dim E_2\leqslant\dim\ker\pi_1(u)+\dim\ker\pi_2(u) = n$. Il y a donc égalité partout, et $E_i = \ker\pi_i(u)$.</p>`, rappels: ["o-poly-induit", "o-lemme-noyaux"] },
+    { t: "Q3 · Étape 2 : E_i est stable par tout h ∈ C(u)", b: R`<p>Si $h$ commute avec $u$, il commute avec $\pi_i(u)$. Pour $x\in E_i = \ker\pi_i(u)$ :</p>$$\pi_i(u)\big(h(x)\big) = h\big(\pi_i(u)(x)\big) = h(0) = 0,$$<p>donc $h(x)\in E_i$. C'est vrai en particulier pour $h\in C^2(u)$, car $C^2(u)\subset C(u)$.</p>`, rappels: ["o-poly-commute"] },
+    { t: "Q3 · Étape 3 : l'outil p_v", b: R`<p>Soit $h\in C^2(u)$ et $h_1$ sa restriction à $E_1$. Soit $v\in C(u_1)$. On définit <span data-k="pv">$p_v\in\mathcal L(E)$</span> par $p_v(x_1+x_2) = v(x_1)$, pour $x_1\in E_1$, $x_2\in E_2$. Montrons $p_v\in C(u)$. Comme $u(x_1)\in E_1$ et $u(x_2)\in E_2$ :</p>$$p_v\big(u(x)\big) = v\big(u_1(x_1)\big),\qquad u\big(p_v(x)\big) = u_1\big(v(x_1)\big) = v\big(u_1(x_1)\big).$$` },
+    { t: "Q3 · Étape 3 : h₁ ∈ C²(u₁)", b: R`<p>Comme $p_v\in C(u)$ et $h\in C^2(u)$ : $h\circ p_v = p_v\circ h$. Pour $x_1\in E_1$, sachant $v(x_1)\in E_1$ et $h(x_1)\in E_1$ :</p>$$h_1\big(v(x_1)\big) = h\big(p_v(x_1)\big) = p_v\big(h(x_1)\big) = v\big(h_1(x_1)\big).$$<p>$h_1$ commute avec tout $v\in C(u_1)$ : $h_1\in C^2(u_1) = \mathbb K[u_1]$. De même $h_2\in\mathbb K[u_2]$. On écrit $h_1 = P_1(u_1)$ et $h_2 = P_2(u_2)$.</p>` },
+    { t: "Q3 · Étape 4 : recoller", b: R`<p>Par Bézout, $A\pi_1+B\pi_2 = 1$, donc $\mathrm{Id}_E = A(u)\pi_1(u)+B(u)\pi_2(u)$. Sur $E_1$, $\pi_1(u) = 0$, donc $x = B(u)\pi_2(u)(x)$ pour $x\in E_1$. On <span data-k="recolle">recolle</span> avec $P = P_2A\pi_1+P_1B\pi_2$. Pour $x\in E_1$ :</p>$$P(u)(x) = P_2(u)A(u)\underbrace{\pi_1(u)(x)}_{=0}+P_1(u)\underbrace{B(u)\pi_2(u)(x)}_{=x} = P_1(u_1)(x) = h(x).$$<p>De même $P(u) = h$ sur $E_2$. Donc $h = P(u)\in\mathbb K[u]$ sur $E = E_1\oplus E_2$, et avec Q1, $C^2(u) = \mathbb K[u]$.</p>`, rappels: ["o-bezout-poly", "o-poly-induit"] }
+  ],
+  piege: R`Confondre $C(u)$ et $C^2(u)$ : pour être dans $C^2(u)$, commuter avec $u$ ne suffit pas, il faut commuter avec tout le commutant.`,
+  methode: R`Pour décrire un commutant, trouve une base de la forme $\big(x_0,u(x_0),\dots\big)$ : un endomorphisme qui commute avec $u$ est alors déterminé par l'image de $x_0$.`
+},
+{
+  id: "o-al-11", subj: "oraux", year: "mp", chap: 0, concours: "c1", level: 4, time: "35 min",
+  title: "Zéros d'une somme de puissances et un déterminant positif",
+  enonce: R`<ol><li>Soit $a_1,\dots,a_p$ des réels distincts et $t_1,\dots,t_p$ des réels non tous nuls. On pose $f(x) = t_1x^{a_1}+\dots+t_px^{a_p}$ pour $x\in\,]0,+\infty[$. Montrer que $f$ s'annule en au plus $p-1$ points. <i>Indication : raisonner par récurrence.</i></li><li>Soit $a_1<a_2<\dots<a_n$ et $0<x_1<x_2<\dots<x_n$ des réels. Montrer que le déterminant $D = \det\big(x_i^{a_j}\big)_{1\leqslant i,j\leqslant n}$ est strictement positif. <i>Indication : raisonner par récurrence et faire varier $x_n$.</i></li></ol>`,
+  decode: {
+    donnees: [R`Des exposants réels quelconques (pas forcément entiers), mais distincts.`, R`On travaille sur $]0,+\infty[$, où $x^a = e^{a\ln x}$ est bien défini et strictement positif.`],
+    but: R`Une majoration du nombre de zéros, puis le signe d'un déterminant « de Vandermonde généralisé ».`,
+    cles: {
+      diviser: R`Multiplier $f$ par $x^{-a_p}>0$ ne change pas ses zéros, mais transforme le terme $t_px^{a_p}$ en une constante, qui disparaîtra en dérivant.`,
+      forme: R`$g'$ est encore une somme de $p-1$ puissances, avec des exposants distincts : on peut lui appliquer l'hypothèse de récurrence.`,
+      domine: R`Pour $a_j<a_n$, $\frac{x^{a_j}}{x^{a_n}} = x^{a_j-a_n}\to0$ quand $x\to+\infty$ : le terme d'exposant le plus grand l'emporte.`
+    }
+  },
+  steps: [
+    { t: "Q1 · L'énoncé de récurrence", b: R`<p>$\mathcal H_p$ : « pour tous $a_1,\dots,a_p$ distincts et $t_1,\dots,t_p$ non tous nuls, $f$ s'annule au plus $p-1$ fois sur $]0,+\infty[$ ».</p><p><b>Initialisation :</b> pour $p = 1$, $f(x) = t_1x^{a_1}$ avec $t_1\neq0$ et $x^{a_1}>0$ : $f$ ne s'annule jamais, soit $0 = p-1$ fois.</p>` },
+    { t: "Q1 · Se débarrasser d'un terme", b: R`<p>Soit $p\geqslant2$, on suppose $\mathcal H_{p-1}$. On <span data-k="diviser">multiplie par $x^{-a_p}$</span> :</p>$$g(x) = x^{-a_p}f(x) = \sum_{i=1}^{p-1}t_ix^{a_i-a_p}+t_p.$$<p>Comme $x^{-a_p}>0$, $f$ et $g$ ont exactement les mêmes zéros.</p>` },
+    { t: "Q1 · Un cas facile", b: R`<p>Si $t_1 = \dots = t_{p-1} = 0$, alors $t_p\neq0$ et $g = t_p$ est une constante non nulle : aucun zéro.</p>` },
+    { t: "Q1 · Le cas général par l'absurde", b: R`<p>Sinon, supposons que $f$, donc $g$, ait au moins $p$ zéros $x_1<\dots<x_p$. $g$ est dérivable sur $]0,+\infty[$. Par Rolle sur chaque $[x_i,x_{i+1}]$, $g'$ a au moins $p-1$ zéros distincts. Or</p>$$g'(x) = \sum_{i=1}^{p-1}(a_i-a_p)\,t_i\,x^{a_i-a_p-1}.$$`, rappels: ["o-rolle"] },
+    { t: "Q1 · Appliquer l'hypothèse", b: R`<p>$g'$ a <span data-k="forme">la même forme</span> avec $p-1$ termes : les exposants $a_i-a_p-1$ sont distincts, et les coefficients $(a_i-a_p)t_i$ sont non tous nuls, car $a_i\neq a_p$ et les $t_i$ ($i<p$) sont non tous nuls. Par $\mathcal H_{p-1}$, $g'$ a au plus $p-2$ zéros. Contradiction avec « au moins $p-1$ ». Donc $f$ a au plus $p-1$ zéros.</p><p><b>Exemple :</b> $x^2-3x+2 = (x-1)(x-2)$ : $3$ termes, $2$ zéros. La borne est atteinte.</p>` },
+    { t: "Q2 · Récurrence et fonction auxiliaire", b: R`<p>Pour $n = 1$ : $D = x_1^{a_1}>0$. Soit $n\geqslant2$, on suppose le résultat au rang $n-1$. On fixe $x_1<\dots<x_{n-1}$ et on remplace $x_n$ par une variable $x$ :</p>$$f(x) = \det\begin{pmatrix}x_1^{a_1}&\cdots&x_1^{a_n}\\\vdots&&\vdots\\x_{n-1}^{a_1}&\cdots&x_{n-1}^{a_n}\\x^{a_1}&\cdots&x^{a_n}\end{pmatrix}.$$<p>On veut montrer $f(x_n)>0$.</p>` },
+    { t: "Q2 · Développer selon la dernière ligne", b: R`$$f(x) = \sum_{j=1}^nt_jx^{a_j},\qquad t_j = (-1)^{n+j}\Delta_{n,j},$$<p>où $\Delta_{n,j}$ est le mineur obtenu en supprimant la dernière ligne et la colonne $j$. En particulier $t_n = \Delta_{n,n} = \det\big(x_i^{a_j}\big)_{i,j\leqslant n-1}>0$ par hypothèse de récurrence. Les $t_j$ sont donc non tous nuls.</p>`, rappels: ["o-dev-det"] },
+    { t: "Q2 · Les zéros de f", b: R`<p>Pour $x = x_i$ avec $i\leqslant n-1$, la dernière ligne est égale à la ligne $i$ : $f(x_i) = 0$. Cela fait $n-1$ zéros, et par Q1, $f$ en a au plus $n-1$. Donc $f$ ne s'annule pas sur $]x_{n-1},+\infty[$.</p>`, rappels: ["o-det-multilin"] },
+    { t: "Q2 · Le signe", b: R`<p>Quand $x\to+\infty$, <span data-k="domine">le terme d'exposant $a_n$ domine</span> : $f(x)\sim t_nx^{a_n}\to+\infty$. Donc $f$ prend des valeurs positives sur $]x_{n-1},+\infty[$. Elle y est continue et ne s'annule pas : par le TVI, elle garde un signe constant, donc $f>0$ sur cet intervalle. En particulier $D = f(x_n)>0$.</p>`, rappels: ["tvi"] }
+  ],
+  piege: R`En Q1, appliquer Rolle directement à $f$ : $f'$ a encore $p$ termes et la récurrence ne fonctionne pas. Il faut d'abord diviser par $x^{a_p}$.`,
+  methode: R`Pour majorer le nombre de zéros d'une somme de fonctions, élimine un terme (division, puis dérivation) et utilise Rolle avec une récurrence.`,
+  viz: { type: "plot", title: "f(x) = x² − 3x + 2 + t·x^0,5 : jamais plus de 3 zéros", x: [0.01, 4], y: [-2, 4], xlabel: "x", params: [{ k: "t", label: "t", min: -3, max: 3, step: 0.1, v: 0 }], curves: [{ label: "f(x)", f: (x, p) => x * x - 3 * x + 2 + p.t * Math.sqrt(x) }] }
+},
+{
+  id: "o-al-12", subj: "oraux", year: "mp", chap: 0, concours: "c1", level: 4, time: "40 min",
+  title: "Transformée de Fourier discrète et divisibilité par Xⁿ − 1",
+  enonce: R`<p>Soit $n\geqslant1$ et $\omega = \exp\left(\frac{2i\pi}n\right)$. Pour $P\in\mathbb C[X]$, on définit</p>$$\mathcal F(P) = \sum_{k=0}^{n-1}P(\omega^k)X^k\qquad\text{et}\qquad\check{\mathcal F}(P) = \sum_{k=0}^{n-1}P(\omega^{-k})X^k.$$<ol><li>Montrer que $\mathcal F$ et $\check{\mathcal F}$ sont des endomorphismes de $\mathbb C[X]$.</li><li>Calculer $\check{\mathcal F}\circ\mathcal F$ et en déduire que $\mathcal F$ est un automorphisme de $\mathbb C_{n-1}[X]$, dont on précisera la réciproque.</li><li>Soit $P\in\mathbb Z[X]$ tel que $|P(z)|\leqslant1$ pour tout $z\in\mathbb U_n$, et tel qu'il existe $z\in\mathbb U_n$ racine de $P$. Montrer que $X^n-1$ divise $P$. <i>On admet que si $P$ et $A$ sont à coefficients entiers et $A$ unitaire, le quotient et le reste de la division euclidienne de $P$ par $A$ sont à coefficients entiers.</i></li></ol>`,
+  decode: {
+    donnees: [R`$\mathcal F(P)$ est le polynôme dont les coefficients sont les valeurs de $P$ aux racines $n$-ièmes de l'unité.`],
+    but: R`Inverser $\mathcal F$, puis s'en servir pour retrouver les coefficients d'un reste à partir de ses valeurs.`,
+    cles: {
+      base: R`Une application linéaire est déterminée par ses valeurs sur une base : on calcule donc $\check{\mathcal F}\circ\mathcal F$ sur chaque $X^\ell$.`,
+      fubini: R`On échange l'ordre de deux sommes finies : $\sum_k\sum_j = \sum_j\sum_k$. Aucune condition n'est nécessaire pour des sommes finies.`,
+      entier: R`Un entier relatif de valeur absolue strictement inférieure à $1$ est forcément $0$.`
+    }
+  },
+  steps: [
+    { t: "Q1 · Linéarité", b: R`<p>Pour $P,Q\in\mathbb C[X]$ et $\lambda,\mu\in\mathbb C$ : $(\lambda P+\mu Q)(\omega^k) = \lambda P(\omega^k)+\mu Q(\omega^k)$, donc</p>$$\mathcal F(\lambda P+\mu Q) = \lambda\mathcal F(P)+\mu\mathcal F(Q).$$<p>Et $\mathcal F(P)\in\mathbb C_{n-1}[X]\subset\mathbb C[X]$. Même raisonnement pour $\check{\mathcal F}$.</p>` },
+    { t: "Q2 · Calcul sur la base canonique", b: R`<p>On calcule <span data-k="base">sur chaque $X^\ell$</span>. D'abord $\mathcal F(X^\ell) = \sum_k\omega^{k\ell}X^k$. Puis, par linéarité de $\check{\mathcal F}$ :</p>$$\check{\mathcal F}\big(\mathcal F(X^\ell)\big) = \sum_{k=0}^{n-1}\omega^{k\ell}\sum_{j=0}^{n-1}\omega^{-jk}X^j = \sum_{j=0}^{n-1}\left(\sum_{k=0}^{n-1}\big(\omega^{\ell-j}\big)^k\right)X^j,$$<p>en <span data-k="fubini">échangeant les deux sommes finies</span>.</p>` },
+    { t: "Q2 · La somme géométrique", b: R`<p>Avec $q = \omega^{\ell-j}$, on a $q^n = (\omega^n)^{\ell-j} = 1$. Donc :</p><ul><li>si $q\neq1$ : $\sum_kq^k = \frac{1-q^n}{1-q} = 0$ ;</li><li>si $q = 1$, c'est-à-dire $\ell\equiv j\ [n]$ : la somme vaut $n$.</li></ul>`, rappels: ["o-somme-geo-c", "o-racines-unite"] },
+    { t: "Q2 · Le résultat", b: R`<p>Pour $\ell\in\{0,\dots,n-1\}$, le seul $j\in\{0,\dots,n-1\}$ avec $j\equiv\ell\ [n]$ est $j = \ell$. Donc $\check{\mathcal F}\circ\mathcal F(X^\ell) = nX^\ell$, et par linéarité :</p>$$\forall P\in\mathbb C_{n-1}[X],\quad\check{\mathcal F}\big(\mathcal F(P)\big) = nP.$$<p>Plus généralement, pour tout $\ell$, $\check{\mathcal F}\circ\mathcal F(X^\ell) = nX^{r}$, où $r$ est le reste de $\ell$ modulo $n$.</p>` },
+    { t: "Q2 · Automorphisme", b: R`<p>$\mathcal F$ et $\check{\mathcal F}$ envoient $\mathbb C_{n-1}[X]$ dans lui-même. On a $\left(\frac1n\check{\mathcal F}\right)\circ\mathcal F = \mathrm{Id}$ sur $\mathbb C_{n-1}[X]$, donc $\mathcal F$ y est injectif. En dimension finie, c'est un automorphisme, de réciproque $\frac1n\check{\mathcal F}$.</p>`, rappels: ["o-dim-finie-bij"] },
+    { t: "Q3 · Division euclidienne", b: R`<p>On divise $P$ par $X^n-1$, unitaire : $P = Q(X^n-1)+R$ avec $Q,R\in\mathbb Z[X]$ et $\deg R\leqslant n-1$. On écrit $R = \sum_{j=0}^{n-1}r_jX^j$ avec $r_j\in\mathbb Z$. Comme $(\omega^k)^n = 1$ : $R(\omega^k) = P(\omega^k)$ pour tout $k$.</p>`, rappels: ["o-division-euclid"] },
+    { t: "Q3 · Retrouver les coefficients de R", b: R`<p>Par Q2, puisque $R\in\mathbb C_{n-1}[X]$ :</p>$$nR = \check{\mathcal F}\big(\mathcal F(R)\big) = \check{\mathcal F}\left(\sum_kP(\omega^k)X^k\right) = \sum_{j=0}^{n-1}\left(\sum_{k=0}^{n-1}P(\omega^k)\,\omega^{-jk}\right)X^j.$$<p>En identifiant les coefficients : $nr_j = \sum_{k=0}^{n-1}P(\omega^k)\,\omega^{-jk}$.</p>` },
+    { t: "Q3 · Majorer", b: R`<p>$\mathbb U_n = \{\omega^k\}$, et un des $\omega^{k_0}$ est racine de $P$. Par l'inégalité triangulaire, avec $|\omega^{-jk}| = 1$ et $|P(\omega^k)|\leqslant1$ :</p>$$n|r_j|\leqslant\sum_{k\neq k_0}|P(\omega^k)|\leqslant n-1,\quad\text{donc}\quad|r_j|\leqslant\frac{n-1}n<1.$$<p>Or $r_j$ est <span data-k="entier">un entier</span> : $r_j = 0$. Donc $R = 0$ et $X^n-1$ divise $P$.</p>`, rappels: ["o-tri-complexe"] },
+    { t: "Pourquoi les coefficients entiers sont essentiels", b: R`<p>Avec $n = 2$ et $P = \frac{X-1}2$ : $P(1) = 0$ et $|P(-1)| = 1$. Les hypothèses sur les valeurs sont vérifiées, mais $X^2-1$ ne divise pas $P$, qui est de degré $1$. L'argument « entier de valeur absolue $<1$ » est donc indispensable.</p>` }
+  ],
+  piege: R`Oublier de vérifier $R\in\mathbb C_{n-1}[X]$ avant d'appliquer $\check{\mathcal F}\circ\mathcal F = n\,\mathrm{Id}$ : la formule n'est vraie que sur $\mathbb C_{n-1}[X]$.`,
+  methode: R`Pour tester la divisibilité par $X^n-1$, fais la division euclidienne et évalue aux racines $n$-ièmes de l'unité : le reste y prend les mêmes valeurs que $P$.`
+},
+{
+  id: "o-al-13", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 3, time: "20 min",
+  title: "u + v = Id et rangs complémentaires : deux projecteurs",
+  enonce: R`<p>Soit $u$ et $v$ deux endomorphismes d'un $\mathbb K$-espace vectoriel $E$ de dimension $n$ tels que $u+v = \mathrm{Id}_E$ et $\operatorname{rg}(u)+\operatorname{rg}(v)\leqslant n$. Montrer que $u$ et $v$ sont des projecteurs.</p>`,
+  decode: {
+    donnees: [R`$u+v = \mathrm{Id}_E$, donc $v = \mathrm{Id}_E-u$.`, R`Une inégalité sur les rangs.`],
+    but: R`Montrer $u^2 = u$ et $v^2 = v$.`,
+    cles: {
+      cle: R`Si $v(x) = 0$, l'égalité $x = u(x)+v(x)$ devient $x = u(x)$ : $x$ est une image de $u$.`
+    }
+  },
+  steps: [
+    { t: "ker v ⊂ Im u", b: R`<p>Soit $x\in\ker v$. <span data-k="cle">Alors</span> $x = \mathrm{Id}_E(x) = u(x)+v(x) = u(x)$, donc $x\in\operatorname{Im} u$.</p>` },
+    { t: "Les rangs sont complémentaires", b: R`<p>Par le théorème du rang : $\dim\ker v = n-\operatorname{rg}(v)\leqslant\operatorname{rg}(u)$, donc $n\leqslant\operatorname{rg}(u)+\operatorname{rg}(v)$. Avec l'hypothèse : $\operatorname{rg}(u)+\operatorname{rg}(v) = n$.</p>`, rappels: ["o-rang-thm"] },
+    { t: "ker v = Im u", b: R`<p>On a $\ker v\subset\operatorname{Im} u$ et $\dim\ker v = n-\operatorname{rg} v = \operatorname{rg} u = \dim\operatorname{Im} u$. Une inclusion entre sous-espaces de même dimension finie est une égalité. Par symétrie des rôles : $\ker u = \operatorname{Im} v$.</p>` },
+    { t: "Les composées sont nulles", b: R`<p>Pour tout $x$ : $u(x)\in\operatorname{Im} u = \ker v$, donc $v(u(x)) = 0$ : $v\circ u = 0$. De même $u\circ v = 0$.</p>` },
+    { t: "Conclure", b: R`<p>On compose $u+v = \mathrm{Id}$ par $u$ à gauche : $u^2+u\circ v = u$, donc $u^2 = u$. À droite par $v$ : $u\circ v+v^2 = v$, donc $v^2 = v$. $u$ et $v$ sont des projecteurs.</p><p><b>Exemple :</b> $u = p$ projecteur et $v = \mathrm{Id}-p$. <b>Sans l'hypothèse sur les rangs, c'est faux :</b> $u = 2\,\mathrm{Id}$, $v = -\mathrm{Id}$ vérifient $u+v = \mathrm{Id}$, avec $\operatorname{rg} u+\operatorname{rg} v = 2n$.</p>` }
+  ],
+  piege: R`Oublier que l'égalité de dimensions ne suffit pas seule : il faut aussi l'inclusion $\ker v\subset\operatorname{Im} u$ pour conclure à l'égalité.`,
+  methode: R`Pour montrer qu'un endomorphisme est un projecteur, vise $u\circ v = 0$ avec $v = \mathrm{Id}-u$ : c'est exactement $u^2 = u$.`
+},
+{
+  id: "o-al-14", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 4, time: "25 min",
+  title: "Une fonction multiplicative sur les matrices détecte l'inversibilité",
+  enonce: R`<p>Soit $\mathbb K$ un corps et $f : \mathcal M_n(\mathbb K)\to\mathbb K$ une fonction <span data-k="nc">non constante</span> telle que</p>$$\forall(A,B)\in\mathcal M_n(\mathbb K)^2,\quad f(AB) = f(A)f(B).$$<p>Montrer que $f(A) = 0$ si et seulement si $A$ n'est pas inversible.</p>`,
+  decode: {
+    donnees: [R`$f$ transforme les produits de matrices en produits de scalaires, comme le déterminant.`, R`$f$ n'est pas constante.`],
+    but: R`Montrer que $f$ s'annule exactement sur les matrices non inversibles.`,
+    cles: {
+      nc: R`Il existe deux matrices $A$ et $B$ avec $f(A)\neq f(B)$. C'est cette hypothèse qui exclut $f\equiv0$ et $f\equiv1$.`,
+      idem: R`Un scalaire qui vérifie $x^2 = x$ vaut $0$ ou $1$, car $x(x-1) = 0$ dans un corps.`,
+      nr: R`Une matrice avec $r$ coefficients égaux à $1$ juste au-dessus de la diagonale, et des $0$ ailleurs. Elle est de rang $r$ et strictement triangulaire supérieure.`
+    }
+  },
+  steps: [
+    { t: "Calculer f(Iₙ)", b: R`<p>Avec $A = B = I_n$ : $f(I_n) = f(I_n)^2$, donc <span data-k="idem">$f(I_n)\in\{0,1\}$</span>. Si $f(I_n) = 0$, alors pour toute $A$ : $f(A) = f(AI_n) = f(A)f(I_n) = 0$, et $f$ serait constante. Donc $f(I_n) = 1$.</p>` },
+    { t: "Calculer f(0)", b: R`<p>De même $f(0) = f(0)^2\in\{0,1\}$. Si $f(0) = 1$, alors pour toute $A$ : $f(0) = f(A\cdot0) = f(A)f(0)$, donc $f(A) = 1$ : $f$ constante. Donc $f(0) = 0$.</p>` },
+    { t: "Sens direct, par contraposée", b: R`<p>Si $A$ est inversible : $1 = f(I_n) = f(AA^{-1}) = f(A)f(A^{-1})$, donc $f(A)\neq0$. Par contraposée : $f(A) = 0\implies A$ non inversible.</p>` },
+    { t: "Une matrice nilpotente de rang r", b: R`<p>Soit $r\in\{0,\dots,n-1\}$ et <span data-k="nr">$N_r = \sum_{i=1}^rE_{i,i+1}$</span>. Ses colonnes $2,\dots,r+1$ contiennent chacune un $1$, sur des lignes différentes : $\operatorname{rg}N_r = r$. Elle est strictement triangulaire, donc nilpotente : $N_r^n = 0$. Alors $f(N_r)^n = f(N_r^n) = f(0) = 0$, et dans un corps, $f(N_r) = 0$.</p><p><b>Exemple $n = 3$, $r = 2$ :</b> $N_2 = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}$.</p>` },
+    { t: "Sens réciproque", b: R`<p>Soit $A$ non inversible, de rang $r<n$. $A$ et $N_r$ ont même rang, donc sont équivalentes : $A = PN_rQ$ avec $P,Q$ inversibles. Alors</p>$$f(A) = f(P)\,f(N_r)\,f(Q) = 0.$$`, rappels: ["o-rang-equiv"] },
+    { t: "Exemples", b: R`<p>$f = \det$ convient, mais aussi $f(A) = (\det A)^2$, ou $f(A) = |\det A|$ sur $\mathbb R$. L'exercice montre que toutes partagent cette propriété du déterminant.</p>` }
+  ],
+  piege: R`Oublier de calculer $f(I_n)$ et $f(0)$ : sans eux, on ne peut rien dire, et c'est là que sert l'hypothèse « non constante ».`,
+  methode: R`Pour une fonction multiplicative, teste-la sur les éléments remarquables ($I_n$, $0$, les nilpotents), puis utilise la réduction $A = PJ_rQ$ ou $A = PN_rQ$.`
+},
+{
+  id: "o-al-15", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 4, time: "35 min",
+  title: "Une matrice de trace nulle est semblable à une matrice de diagonale nulle",
+  enonce: R`<p>Soit $A\in\mathcal M_n(\mathbb C)$.</p><ol><li>Montrer que si $A$ n'est pas une homothétie, alors il existe $x\in\mathcal M_{n,1}(\mathbb C)$ tel que la famille $(x,Ax)$ soit libre.</li><li>On suppose $\operatorname{Tr}(A) = 0$. Montrer que $A$ est semblable à une matrice de diagonale nulle.</li></ol>`,
+  decode: {
+    donnees: [R`$A$ est une matrice complexe carrée.`],
+    but: R`Trouver un vecteur « non propre », puis construire une base où la diagonale est nulle.`,
+    cles: {
+      lie: R`$(x,Ax)$ liée avec $x\neq0$ signifie $Ax = \lambda x$ : $x$ est un vecteur propre.`,
+      col: R`La première colonne d'une matrice contient les coordonnées de l'image du premier vecteur de base. Ici $a(x_0) = Ax_0$ est le deuxième vecteur de la base.`
+    }
+  },
+  steps: [
+    { t: "Q1 · Par contraposée", b: R`<p>Supposons que pour tout $x$, $(x,Ax)$ soit <span data-k="lie">liée</span>, et montrons que $A$ est une homothétie. Soit $(e_1,\dots,e_n)$ la base canonique. Chaque $e_i\neq0$, donc $Ae_i = \lambda_ie_i$ pour un $\lambda_i$.</p>` },
+    { t: "Q1 · Comparer les λᵢ", b: R`<p>Pour $i\geqslant2$, $e_i-e_1\neq0$, donc $A(e_i-e_1) = \mu_i(e_i-e_1)$. Par linéarité :</p>$$\lambda_ie_i-\lambda_1e_1 = \mu_ie_i-\mu_ie_1.$$<p>Comme $(e_1,e_i)$ est libre, on identifie : $\lambda_i = \mu_i$ et $\lambda_1 = \mu_i$. Donc $\lambda_i = \lambda_1$ pour tout $i$, et $A = \lambda_1I_n$.</p>` },
+    { t: "Q2 · Récurrence", b: R`<p>$\mathcal H_n$ : « toute matrice de $\mathcal M_n(\mathbb C)$ de trace nulle est semblable à une matrice de diagonale nulle ». Pour $n = 1$ : $A = (a)$ avec $a = 0$ : c'est déjà le cas.</p>`, rappels: ["recurrence"] },
+    { t: "Q2 · Le cas d'une homothétie", b: R`<p>Soit $A\in\mathcal M_{n+1}(\mathbb C)$ de trace nulle. Si $A = \lambda I_{n+1}$, alors $\operatorname{Tr} A = (n+1)\lambda = 0$, donc $A = 0$, de diagonale nulle.</p>` },
+    { t: "Q2 · Une base bien choisie", b: R`<p>Sinon, par Q1, il existe $x_0$ avec $(x_0,Ax_0)$ libre. On complète en une base $\mathcal B = (x_0,Ax_0,e_3,\dots,e_{n+1})$. Dans $\mathcal B$, <span data-k="col">la première colonne</span> est $(0,1,0,\dots,0)^\top$. Donc $A$ est semblable à</p>$$B = \begin{pmatrix}0&L\\c&C\end{pmatrix},\qquad C\in\mathcal M_n(\mathbb C).$$<p>Deux matrices semblables ont même trace : $0 = \operatorname{Tr} B = 0+\operatorname{Tr} C$, donc $\operatorname{Tr} C = 0$.</p>`, rappels: ["o-semblables"] },
+    { t: "Q2 · Utiliser l'hypothèse de récurrence", b: R`<p>Par $\mathcal H_n$, il existe $P_1$ inversible avec $P_1^{-1}CP_1 = N_1$ de diagonale nulle. On pose $P = \begin{pmatrix}1&0\\0&P_1\end{pmatrix}$, d'inverse $\begin{pmatrix}1&0\\0&P_1^{-1}\end{pmatrix}$. Par produit par blocs :</p>$$P^{-1}BP = \begin{pmatrix}0&LP_1\\P_1^{-1}c&P_1^{-1}CP_1\end{pmatrix} = \begin{pmatrix}0&\ast\\\ast&N_1\end{pmatrix}.$$<p>Sa diagonale est nulle, et elle est semblable à $A$.</p>`, rappels: ["o-blocs"] }
+  ],
+  piege: R`En Q1, utiliser seulement les $e_i$ : on obtient que chaque $e_i$ est propre, mais pas que les valeurs propres sont égales. Les vecteurs $e_i-e_1$ sont indispensables.`,
+  methode: R`Pour fabriquer une matrice semblable de forme imposée, choisis une base qui commence par $x_0$ et $Ax_0$, puis fais une récurrence sur le bloc restant.`
+},
+{
+  id: "o-al-16", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 3, time: "25 min",
+  title: "AB et BA ont le même polynôme caractéristique",
+  enonce: R`<p>Soit $A,B\in\mathcal M_n(\mathbb C)$. Montrer que les polynômes caractéristiques de $AB$ et $BA$ sont égaux :</p><ol><li>lorsque $A$ est inversible ;</li><li>dans le cas général.</li></ol>`,
+  decode: {
+    donnees: [R`$\chi_M(X) = \det(XI_n-M)$.`],
+    but: R`Montrer $\chi_{AB} = \chi_{BA}$, d'abord facilement, puis par un argument de prolongement.`,
+    cles: {
+      fini: R`$\chi_A$ est un polynôme non nul de degré $n$ : il a au plus $n$ racines. Donc $A-\lambda I_n$ est inversible pour tous les $\lambda$ sauf au plus $n$.`,
+      poly: R`Les coefficients de $zI_n-(A-\lambda I_n)B$ sont des polynômes en $\lambda$, et un déterminant est une somme de produits de coefficients : c'est un polynôme en $\lambda$.`
+    }
+  },
+  steps: [
+    { t: "Q1 · AB et BA sont semblables", b: R`<p>Si $A$ est inversible : $AB = A(BA)A^{-1}$. Donc $AB$ et $BA$ sont semblables, et pour tout $x\in\mathbb C$ :</p>$$\det(xI_n-AB) = \det\big(A(xI_n-BA)A^{-1}\big) = \det A\,\det(xI_n-BA)\,\det A^{-1} = \det(xI_n-BA).$$<p>Les deux polynômes coïncident en tout $x$ : ils sont égaux.</p>`, rappels: ["o-det-mult", "o-semblables"] },
+    { t: "Q2 · Un contre-exemple instructif", b: R`<p>Dans le cas général, $AB$ et $BA$ ne sont pas forcément semblables. Avec $A = \begin{pmatrix}1&0\\0&0\end{pmatrix}$ et $B = \begin{pmatrix}0&1\\0&0\end{pmatrix}$ : $AB = \begin{pmatrix}0&1\\0&0\end{pmatrix}\neq0$ et $BA = 0$. Elles ne sont pas semblables, mais toutes deux ont pour polynôme caractéristique $X^2$. Il faut donc une autre idée.</p>` },
+    { t: "Q2 · Perturber A", b: R`<p>Soit $S$ l'ensemble des racines de $\chi_A$ : <span data-k="fini">un ensemble fini</span>. Pour $\lambda\notin S$, $A-\lambda I_n$ est inversible, donc par Q1 :</p>$$\forall z\in\mathbb C,\quad\det\big(zI_n-(A-\lambda I_n)B\big) = \det\big(zI_n-B(A-\lambda I_n)\big).$$`, rappels: ["o-chi"] },
+    { t: "Q2 · Un polynôme en λ", b: R`<p>Fixons $z\in\mathbb C$ et posons</p>$$\varphi(\lambda) = \det\big(zI_n-(A-\lambda I_n)B\big)-\det\big(zI_n-B(A-\lambda I_n)\big).$$<p><span data-k="poly">C'est un polynôme en $\lambda$.</span> Il s'annule pour tout $\lambda\notin S$, c'est-à-dire en une infinité de points : il est nul.</p>`, rappels: ["o-poly-infini"] },
+    { t: "Q2 · Conclure", b: R`<p>En particulier $\varphi(0) = 0$ : $\det(zI_n-AB) = \det(zI_n-BA)$, c'est-à-dire $\chi_{AB}(z) = \chi_{BA}(z)$. Ceci pour tout $z\in\mathbb C$ : $\chi_{AB} = \chi_{BA}$.</p>` }
+  ],
+  piege: R`Croire que $AB$ et $BA$ sont toujours semblables : c'est faux, seul leur polynôme caractéristique est le même.`,
+  methode: R`Pour étendre un résultat des matrices inversibles à toutes les matrices, remplace $A$ par $A-\lambda I_n$ et utilise qu'un polynôme nul en une infinité de points est nul.`
+},
+{
+  id: "o-al-17", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 3, time: "20 min",
+  title: "Si det(A + X) = det A + det X pour tout X, alors A = 0",
+  enonce: R`<p>Soit $n\geqslant2$ et $A\in\mathcal M_n(\mathbb C)$ telle que</p>$$\forall X\in\mathcal M_n(\mathbb C),\quad\det(A+X) = \det(A)+\det(X).$$<ol><li>Montrer que $A$ n'est pas inversible.</li><li>Montrer que $A$ est nulle.</li></ol>`,
+  decode: {
+    donnees: [R`Une propriété d'additivité du déterminant, qui est fausse en général.`, R`$n\geqslant2$.`],
+    but: R`Montrer que seule la matrice nulle vérifie cette propriété.`,
+    cles: {
+      choix: R`Toute la difficulté est de choisir le bon $X$ : il doit être non inversible, mais « compléter » $A$ en une matrice inversible.`,
+      complement: R`$J_r$ garde les $r$ premières coordonnées, $I_n-J_r$ garde les $n-r$ dernières : leur somme vaut $I_n$.`
+    }
+  },
+  steps: [
+    { t: "Q1 · Prendre X = A", b: R`<p>$\det(2A) = 2^n\det A$, car on multiplie chacune des $n$ colonnes par $2$. L'hypothèse donne $2^n\det A = 2\det A$, soit $(2^n-2)\det A = 0$. Comme $n\geqslant2$, $2^n\geqslant4>2$, donc $\det A = 0$ : $A$ n'est pas inversible.</p>`, rappels: ["o-det-mult"] },
+    { t: "Q2 · Par l'absurde", b: R`<p>Supposons $A\neq0$, de rang $r$. Comme $A$ est non nulle et non inversible : $0<r<n$. Il existe $P,Q$ inversibles avec $A = P\begin{pmatrix}I_r&0\\0&0\end{pmatrix}Q$.</p>`, rappels: ["o-rang-equiv"] },
+    { t: "Q2 · Le bon choix de X", b: R`<p>On <span data-k="choix">choisit</span> $B = P\begin{pmatrix}0&0\\0&I_{n-r}\end{pmatrix}Q$. Son rang est $n-r<n$ (car $r>0$) : $\det B = 0$. Mais <span data-k="complement">les deux blocs se complètent</span> :</p>$$A+B = P\,I_n\,Q = PQ,$$<p>qui est inversible : $\det(A+B)\neq0$.</p>` },
+    { t: "Q2 · La contradiction", b: R`<p>L'hypothèse donne $\det(A+B) = \det A+\det B = 0+0 = 0$, contradiction. Donc $A = 0$. Réciproquement, $A = 0$ vérifie bien la propriété.</p><p><b>Pour s'en souvenir :</b> le déterminant n'est pas additif. Par exemple $\det(I_2+I_2) = 4\neq2 = \det I_2+\det I_2$.</p>` }
+  ],
+  piege: R`Essayer des $X$ simples comme $I_n$ ou $-A$ : ils ne mènent à rien. Il faut construire $X$ à partir de la forme réduite de $A$.`,
+  methode: R`Écris $A = PJ_rQ$ : beaucoup de questions sur les matrices de rang $r$ se ramènent à $J_r$, où tout est explicite.`
+},
+{
+  id: "o-al-18", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 4, time: "30 min",
+  title: "Une inégalité de déterminants avec une matrice de rang 1",
+  enonce: R`<p>Soit $A,B\in\mathcal M_n(\mathbb R)$ avec $\operatorname{rg}(B) = 1$. Montrer que</p>$$\det(A+B)\det(A-B)\leqslant\big(\det A\big)^2.$$`,
+  decode: {
+    donnees: [R`$B$ est de rang $1$ : toutes ses colonnes sont proportionnelles à un même vecteur.`],
+    but: R`Comparer $\det(A+B)\det(A-B)$ et $(\det A)^2$.`,
+    cles: {
+      e11: R`$E_{11}$ est la matrice dont le seul coefficient non nul est un $1$ en haut à gauche. Toute matrice de rang $1$ lui est équivalente.`,
+      col: R`$A'+\varepsilon E_{11}$ ne diffère de $A'$ que par sa première colonne, à laquelle on ajoute $\varepsilon e_1$.`,
+      carre: R`$(a+b)(a-b) = a^2-b^2\leqslant a^2$, car un carré réel est positif.`
+    }
+  },
+  steps: [
+    { t: "Se ramener à E₁₁", b: R`<p>$B$ est de rang $1$, donc équivalente à <span data-k="e11">$E_{11}$</span> : $B = PE_{11}Q$ avec $P,Q$ inversibles. On pose $A' = P^{-1}AQ^{-1}$, de sorte que $A = PA'Q$ et</p>$$A\pm B = P(A'\pm E_{11})Q.$$`, rappels: ["o-rang-equiv"] },
+    { t: "Simplifier le produit", b: R`<p>Par multiplicativité du déterminant :</p>$$\det(A+B)\det(A-B) = (\det P\det Q)^2\det(A'+E_{11})\det(A'-E_{11}).$$`, rappels: ["o-det-mult"] },
+    { t: "La clé : linéarité par colonne", b: R`<p>Pour $\varepsilon = \pm1$, <span data-k="col">seule la première colonne change</span>. Par linéarité du déterminant par rapport à cette colonne :</p>$$\det(A'+\varepsilon E_{11}) = \det A'+\varepsilon\det(e_1,C_2',\dots,C_n') = \det A'+\varepsilon\Delta,$$<p>où $\Delta$ est le mineur de $A'$ obtenu en supprimant la ligne $1$ et la colonne $1$ (on développe $\det(e_1,C_2',\dots)$ selon la première colonne).</p>`, rappels: ["o-det-multilin", "o-dev-det"] },
+    { t: "L'inégalité", b: R`<p><span data-k="carre">Par l'identité remarquable</span> :</p>$$\det(A'+E_{11})\det(A'-E_{11}) = (\det A')^2-\Delta^2\leqslant(\det A')^2.$$` },
+    { t: "Conclure", b: R`<p>On multiplie par $(\det P\det Q)^2\geqslant0$, ce qui conserve l'inégalité :</p>$$\det(A+B)\det(A-B)\leqslant(\det P\det A'\det Q)^2 = (\det A)^2.$$<p><b>Exemples :</b> avec $A = I_2$, $B = E_{11}$ : $2\times0 = 0\leqslant1$. Avec $A = I_2$, $B = E_{12}$ : $1\times1 = 1\leqslant1$, et l'égalité est atteinte.</p>` }
+  ],
+  piege: R`Vouloir développer $\det(A+B)$ directement : c'est impossible sans structure. Le passage à $E_{11}$ concentre toute la perturbation dans une seule colonne.`,
+  methode: R`Une matrice de rang $1$ s'écrit $PE_{11}Q$ : la perturbation $A\mapsto A+B$ devient une modification d'une seule colonne, sur laquelle le déterminant est affine.`
+},
+{
+  id: "o-al-19", subj: "oraux", year: "mp", chap: 0, concours: "mp", level: 4, time: "20 min",
+  title: "Un groupe de matrices qui n'est pas dans GLₙ",
+  enonce: R`<p>Soit $n\geqslant2$.</p><ol><li>Déterminer un groupe multiplicatif de matrices de $\mathcal M_n(\mathbb C)$ qui ne soit pas un sous-groupe de $GL_n(\mathbb C)$.</li><li>Montrer que tous les éléments d'un tel groupe ont le même rang.</li></ol>`,
+  decode: {
+    donnees: [R`On cherche un ensemble de matrices qui est un groupe pour le produit matriciel, avec son propre élément neutre.`],
+    but: R`Un exemple, puis une propriété générale de tous ces groupes.`,
+    cles: {
+      neutre: R`Le neutre du groupe n'est pas forcément $I_n$. Ici c'est $E_{11}$ : il joue le rôle de « $1$ » seulement à l'intérieur du groupe.`,
+      inverse: R`L'inverse dans le groupe : un élément $h$ du groupe tel que $gh = hg = e$, où $e$ est le neutre du groupe (pas $I_n$).`
+    }
+  },
+  steps: [
+    { t: "Q1 · Le candidat", b: R`<p>Pour $a\in\mathbb C^\ast$, on pose $M(a) = \begin{pmatrix}a&0\\0&0_{n-1}\end{pmatrix}$, et $G = \{M(a) : a\in\mathbb C^\ast\}$. Un calcul direct donne $M(a)M(b) = M(ab)$ : $G$ est stable par produit, et ce produit est associatif.</p>` },
+    { t: "Q1 · Neutre et inverses", b: R`<ul><li><span data-k="neutre">Neutre</span> : $e = M(1) = E_{11}$, car $M(a)M(1) = M(1)M(a) = M(a)$.</li><li><span data-k="inverse">Inverse</span> : $M(a)M\big(\tfrac1a\big) = M(1) = e$.</li></ul><p>$G$ est un groupe (et même commutatif). Mais ses éléments sont de rang $1<n$ : aucun n'est inversible. $G\not\subset GL_n(\mathbb C)$.</p>` },
+    { t: "Q2 · Les relations utiles", b: R`<p>Soit $G$ un groupe multiplicatif de matrices, de neutre $e$, et $g\in G$. Alors $g = eg$, et il existe $h\in G$ avec $e = gh$.</p>` },
+    { t: "Q2 · Comparer les rangs", b: R`<p>Le rang d'un produit est au plus le rang de chaque facteur :</p>$$\operatorname{rg}(g) = \operatorname{rg}(eg)\leqslant\operatorname{rg}(e),\qquad\operatorname{rg}(e) = \operatorname{rg}(gh)\leqslant\operatorname{rg}(g).$$<p>Donc $\operatorname{rg}(g) = \operatorname{rg}(e)$ pour tout $g\in G$ : tous les éléments ont le même rang, celui du neutre.</p>`, rappels: ["o-rang-produit"] },
+    { t: "Pour aller plus loin", b: R`<p>Dans l'exemple de Q1, le rang commun est $1$. Si le neutre est $I_n$, le rang commun est $n$ et on retrouve un sous-groupe de $GL_n(\mathbb C)$.</p>` }
+  ],
+  piege: R`Supposer que le neutre est $I_n$ : c'est faux en général, et c'est précisément le piège de la question 1.`,
+  methode: R`Dans un groupe de matrices, écris $g = eg$ et $e = gh$, puis utilise $\operatorname{rg}(AB)\leqslant\min(\operatorname{rg} A,\operatorname{rg} B)$.`
+}
+]);

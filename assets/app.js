@@ -216,12 +216,12 @@ function exercisePage(eid) {
     <section class="panelbox" aria-labelledby="h-en">
       <h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>
       <div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
-        <div class="prose enonce">${e.enonce}</div>
+        <div class="prose enonce">${annotate(e.enonce, e)}</div>
         <div class="decode">
           <div><h4>Ce que l'énoncé te donne</h4><ul>${d.donnees.map(x => `<li>${x}</li>`).join("")}</ul></div>
           <div><h4>Ce qu'on te demande</h4>${d.but}</div>
         </div>
-        ${Object.keys(d.cles || {}).length ? `<p style="margin:14px 2px 0;font-size:13.5px;color:var(--muted)">Clique sur les mots surlignés pour leur définition.</p>` : ""}
+        <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Souligné en bleu : une notion de cours, avec sa définition</span></p>
       </div>
       ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}
     </section>
@@ -297,10 +297,9 @@ function concoursPage() {
 function oralPage() {
   const om = sid("oraux"), nEx = EXERCISES.filter(e => e.subj === "oraux").length;
   return phead({ crumb: [["Oraux"]], title: "Réussir les oraux", photo: "oral" }) + `<div class="wrap layout full">
-    <a class="oral-band" href="#oraux-maths"><span class="k">Mathématiques</span><h2>Préparer les oraux de maths</h2><p>${om.years.mp.length} chapitres, un onglet par concours : CCINP, Mines-Télécom, Centrale, Mines-Ponts. ${plural(nEx, "exercice")} corrigés pas à pas.</p><span class="btn btn-yellow">Voir les chapitres ${I.arrow}</span></a>
     <article class="prose">
     <div class="cards">
-      <div class="card"><h3>Mathématiques</h3><p>Un ou deux exercices au tableau, avec des indications si tu bloques.</p></div>
+      <a class="card card-link" href="#oraux-maths"><h3>Mathématiques</h3><p>Un ou deux exercices au tableau, avec des indications si tu bloques.</p><span class="card-go">${om.years.mp.length} chapitres · ${plural(nEx, "exercice")} corrigés ${I.arrow}</span></a>
       <div class="card"><h3>Physique</h3><p>Souvent un problème ouvert : modéliser, estimer, discuter.</p></div>
       <div class="card"><h3>Avec Python</h3><p>Certaines épreuves demandent de programmer en direct.</p></div>
       <div class="card"><h3>TIPE</h3><p>Présenter ton travail, puis répondre au jury sur ta démarche.</p></div>
@@ -379,6 +378,58 @@ document.addEventListener("click", e => {
   openRappel(b.dataset.r, (b.dataset.ctx || "").split(","));
 });
 
+/* ---------- Notions de cours soulignées en bleu ---------- */
+const NOTIONS = window.LEMME.NOTIONS || {};
+const NOTION_LIST = Object.entries(NOTIONS).map(([id, n]) => { try { return { id, re: new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu") }; } catch (e) { return null; } }).filter(Boolean);
+function annotateText(txt, used, skip) {
+  let pieces = [{ t: txt }];
+  for (const n of NOTION_LIST) {
+    if (used.has(n.id) || skip.has(n.id)) continue;
+    for (let i = 0; i < pieces.length; i++) {
+      const pc = pieces[i]; if (pc.w) continue;
+      const m = n.re.exec(pc.t); if (!m) continue;
+      pieces.splice(i, 1, { t: pc.t.slice(0, m.index) }, { t: m[0], w: n.id }, { t: pc.t.slice(m.index + m[0].length) });
+      used.add(n.id); break;
+    }
+  }
+  return pieces.map(pc => pc.w ? `<span class="nt" data-n="${pc.w}" tabindex="0" role="button">${pc.t}</span>` : pc.t).join("");
+}
+/* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
+function annotate(html, ex, used) {
+  if (!html || !NOTION_LIST.length) return html || "";
+  used = used || new Set();
+  const skip = new Set((ex && ex.noNotions) || []);
+  const parts = html.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
+  let block = 0, out = "";
+  for (const part of parts) {
+    if (!part) continue;
+    if (part[0] === "<") {
+      const tag = part.toLowerCase();
+      if (/^<(pre|code)\b/.test(tag) || /^<span\b[^>]*data-[kn]=/.test(tag)) block++;
+      else if (block && /^<\/(pre|code|span)>/.test(tag)) block--;
+      else if (block && /^<span\b/.test(tag)) block++;
+      out += part;
+    } else if (part[0] === "$" || block) out += part;
+    else out += annotateText(part, used, skip);
+  }
+  return out;
+}
+function openNotion(id) {
+  const n = NOTIONS[id]; if (!n) return;
+  closeRappel(true); closeTip();
+  drawerReturn = document.activeElement;
+  const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
+  const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body">${n.b}</div>`;
+  document.body.append(scrim, dr);
+  scrim.addEventListener("click", () => closeRappel());
+  $(".close", dr).addEventListener("click", () => closeRappel());
+  $(".close", dr).focus();
+  typeset(dr);
+}
+document.addEventListener("click", e => { const n = e.target.closest("[data-n]"); if (n) { e.stopPropagation(); openNotion(n.dataset.n); } });
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-n]")) { e.preventDefault(); openNotion(e.target.dataset.n); } });
+
 /* ---------- Infobulles de l'énoncé ---------- */
 let tipFor = null;
 function closeTip() { const t = $(".tip"); if (t) t.remove(); if (tipFor) tipFor.classList.remove("open"); tipFor = null; }
@@ -408,7 +459,7 @@ function bindKeys(root, ex) {
 
 /* Rédaction complète d'un corrigé, et sa vue en grand */
 function redaction(e) {
-  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${esc(st.t)}</b></p>${st.b}`).join("");
+  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
 }
 let bigReturn = null;
 function openBig(e) {
@@ -416,7 +467,7 @@ function openBig(e) {
   bigReturn = document.activeElement;
   const ov = document.createElement("div"); ov.className = "bigread"; ov.id = "bigread"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "big-t");
   ov.innerHTML = `<div class="big-bar"><span id="big-t">${esc(e.title)}</span>${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" href="pdf/corrige-${e.id}.pdf" download>${I.dl} PDF</a>` : ""}<button class="iconbtn" type="button" data-close aria-label="Fermer">${I.close}</button></div>
-    <div class="big-body"><div class="big-col prose enonce"><h2>Énoncé</h2>${e.enonce}<h2>Corrigé</h2>${redaction(e)}<div class="bilan" style="margin-top:28px"><div class="trap"><h4>Le piège</h4>${e.piege}</div><div class="meth"><h4>La méthode</h4>${e.methode}</div></div></div></div>`;
+    <div class="big-body"><div class="big-col prose enonce"><h2>Énoncé</h2>${annotate(e.enonce, e)}<h2>Corrigé</h2>${redaction(e)}<div class="bilan" style="margin-top:28px"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div></div></div>`;
   document.body.appendChild(ov); document.body.style.overflow = "hidden";
   $("[data-close]", ov).addEventListener("click", () => closeBig());
   $("[data-close]", ov).focus();
@@ -447,8 +498,8 @@ function mountPlayer(e, host) {
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
-            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${e.piege}</div><div class="meth"><h4>La méthode</h4>${e.methode}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `<span class="count">Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${st.b}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
+            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
+            : `<span class="count">Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">

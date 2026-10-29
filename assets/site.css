@@ -471,3 +471,22 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 @media (max-width:900px){.chapters .ccs{display:none}}
 
 .tabs [aria-selected="true"]:hover,.tabs [aria-current="page"]:hover{color:var(--ink)}
+
+/* Notions de cours soulignées en bleu */
+:root{--blue:#2453D6}
+@media (prefers-color-scheme: dark){:root{--blue:#86A8FF}}
+:root[data-zone="commando"]{--blue:#86A8FF}
+.nt{color:var(--blue);text-decoration:underline;text-decoration-color:var(--blue);text-decoration-thickness:2px;text-underline-offset:3px;cursor:pointer;border-radius:3px;transition:background var(--t-fast)}
+.nt:hover,.nt:focus-visible{background:color-mix(in srgb,var(--blue) 12%,transparent)}
+.drawer .nt-kicker{color:var(--blue)}
+.legend-k{display:flex;flex-wrap:wrap;gap:6px 18px;margin:14px 2px 0;font-size:13.5px;color:var(--muted)}
+.legend-k span{display:inline-flex;align-items:center;gap:8px}
+.legend-k i{width:18px;height:6px;border-radius:2px;display:inline-block}
+.legend-k i.lk{background:var(--yellow-soft);border-bottom:2px dotted var(--yellow)}
+.legend-k i.ln{height:0;border-bottom:2px solid var(--blue)}
+.scrim{z-index:95}.drawer{z-index:96}.tip{z-index:97}
+.card-link{display:block;text-decoration:none;transition:border-color var(--t-fast),transform var(--t-mid) var(--ease-out)}
+.card-link:hover{border-color:var(--navy);transform:translateY(-2px)}
+.card-link .card-go{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-weight:700;font-size:14.5px;color:var(--navy)}
+@media (prefers-color-scheme: dark){.card-link .card-go{color:var(--yellow)}}
+.card-link .card-go svg{width:16px;height:16px}

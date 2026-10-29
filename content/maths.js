@@ -568,7 +568,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La courbe monte vers +∞ quand x approche 0", x: [0.01, 3], y: [-1, 12], xlabel: "x", curves: [{ label: "1/x + ln x", f: x => 1 / x + Math.log(x) }, { label: "ln x", f: x => Math.log(x) }] }
 },
 {
-  id: "ex-lim-x-puiss-racine", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "8 min",
+  id: "ex-lim-x-puiss-racine", noNotions: ["base"], subj: "maths", year: "mpsi", chap: 7, level: 3, time: "8 min",
   title: "Limite de x^√x en 0⁺",
   tt: R`Limite de $x^{\sqrt{x}}$ en $0^+$`,
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}x^{\sqrt x}$.</p>`,
@@ -591,7 +591,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "x^√x remonte vers 1 quand x tend vers 0", x: [0.0005, 2], y: [0, 2.2], xlabel: "x", curves: [{ label: "x^√x", f: x => Math.pow(x, Math.sqrt(x)) }], hlines: [{ y: () => 1, label: "1" }] }
 },
 {
-  id: "ex-lim-ln-puiss-inv-ln", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "12 min",
+  id: "ex-lim-ln-puiss-inv-ln", noNotions: ["base"], subj: "maths", year: "mpsi", chap: 7, level: 3, time: "12 min",
   title: "Limite de |ln x|^(1/ln x) en 0⁺",
   tt: R`Limite de $|\ln x|^{1/\ln x}$ en $0^+$`,
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}|\ln x|^{\frac{1}{\ln x}}$.</p>`,

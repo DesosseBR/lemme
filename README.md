@@ -67,6 +67,10 @@ Créer `tex/resumes/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-08.tex`
 
 Créer `tex/cours/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-15.tex`), un document LaTeX qui commence par `\usepackage{lemme}`. Il apparaît automatiquement dans l'onglet « Cours » du chapitre.
 
+### Une notion de cours (soulignée en bleu)
+
+Les notions sont dans `content/notions.js`. Le site souligne automatiquement en bleu la première apparition de chaque notion dans les énoncés et les corrigés. Pour en ajouter une : `"id": { p: "expression régulière", t: "Titre", b: R\`définition\` }`. Pour désactiver une notion dans un exercice où le mot a un autre sens : `noNotions: ["id"]`.
+
 ### Un exercice d'oral
 
 Dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).
