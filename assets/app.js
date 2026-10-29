@@ -9,6 +9,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const app = $("#app");
 const sid = id => SUBJECTS.find(s => s.id === id);
+const VISIBLE = SUBJECTS.filter(s => !s.hidden);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const pad = n => String(n).padStart(2, "0");
 const plural = (n, w) => `${n} ${w}${n > 1 ? "s" : ""}`;
@@ -22,7 +23,8 @@ const PHOTOS = {
   si: ["photo-1524514587686-e2909d726e9b", "Isis França"],
   info: ["photo-1675602488453-c3897a475af5", "Bermix Studio"],
   anglais: ["photo-1530608031805-8e170c1b793a", "Jonathan Singer"],
-  oral: ["photo-1758685845906-6f705cde4fb7", "Vitaly Gariev"]
+  oral: ["photo-1758685845906-6f705cde4fb7", "Vitaly Gariev"],
+  commando: ["photo-1588450248442-1c8357368dba", "Simon Infanger"]
 };
 const src = (k, w) => `https://images.unsplash.com/${PHOTOS[k][0]}?auto=format&fit=crop&w=${w}&q=72`;
 const img = (k, sizes = "100vw", eager = false) => `<img src="${src(k, 1200)}" srcset="${src(k, 640)} 640w, ${src(k, 1200)} 1200w, ${src(k, 2000)} 2000w" sizes="${sizes}" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.style.visibility='hidden'">`;
@@ -67,8 +69,8 @@ $$(".yearswitch button").forEach(b => b.addEventListener("click", () => {
 window.addEventListener("resize", paintYear);
 
 /* ---------- Menus ---------- */
-$("#dd-mat").innerHTML = SUBJECTS.map(s => `<a href="#s-${s.id}"><img class="thumb" src="${src(s.id, 120)}" alt="" loading="lazy">${s.name}</a>`).join("");
-$("#foot-subj").innerHTML = SUBJECTS.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join("");
+$("#dd-mat").innerHTML = VISIBLE.map(s => `<a href="#s-${s.id}"><img class="thumb" src="${src(s.id, 120)}" alt="" loading="lazy">${s.name}</a>`).join("");
+$("#foot-subj").innerHTML = VISIBLE.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join("");
 $("#credits").textContent = "Photos : Unsplash · " + [...new Set(Object.values(PHOTOS).map(p => p[1]))].join(", ");
 const ddBtns = $$(".dd > .navbtn");
 function closeMenus(except) { ddBtns.forEach(b => { if (b !== except) { b.setAttribute("aria-expanded", "false"); $("#" + b.getAttribute("aria-controls")).hidden = true; } }); }
@@ -107,7 +109,7 @@ function phead({ crumb, title, meta = "", tabs = "", photo, tall }) {
 }
 function exCard(e) {
   const s = sid(e.subj), c = s.years[e.year][e.chap], pb = e.kind === "probleme";
-  return `<a class="excard" href="#e-${e.id}"><span class="top"><span class="kind${pb ? " pb" : ""}">${pb ? "Problème" : "Exercice"} · ${s.name} ${YEARS[e.year]}</span>${lvl(e.level)}</span><b>${esc(e.title)}</b><span class="foot"><span>${esc(c.t)}</span><span>·</span><span>${e.time}</span></span></a>`;
+  return `<a class="excard" href="#e-${e.id}"><span class="top"><span class="kind${pb ? " pb" : ""}">${pb ? "Problème" : "Exercice"} · ${s.hidden ? s.name : s.name + " " + YEARS[e.year]}</span>${lvl(e.level)}</span><b>${esc(e.title)}</b><span class="foot"><span>${esc(c.t)}</span><span>·</span><span>${e.time}</span></span></a>`;
 }
 function tabsHtml(list, cur) { return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}</div>`; }
@@ -125,7 +127,7 @@ function home() {
 
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>Les matières</h2><a href="#exercices">Tous les exercices ${I.arrow}</a></div>
-    <div class="subjects stagger">${SUBJECTS.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3><span class="bar"></span><small>${s.years.mpsi.length} chapitres en MPSI · ${s.years.mp.length} en MP</small></span></a>`).join("")}</div>
+    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3><span class="bar"></span><small>${s.years.mpsi.length} chapitres en MPSI · ${s.years.mp.length} en MP</small></span></a>`).join("")}</div>
   </div></section>
 
   <section class="sec"><div class="wrap showcase">
@@ -170,7 +172,7 @@ function subjectPage(id) {
 let chapTab = null;
 function chapterPage(id, y, i) {
   const s = sid(id); if (!s || !s.years[y] || !s.years[y][i]) return notFound();
-  if (year !== y) setYear(y);
+  if (year !== y && !s.hidden) setYear(y);
   const list = s.years[y], c = list[i], exs = exOf(id, y, i);
   const rs = `resume-${id}-${y}-${pad(i + 1)}`, cs = `cours-${id}-${y}-${pad(i + 1)}`;
   const tabs = [];
@@ -184,20 +186,20 @@ function chapterPage(id, y, i) {
   else body = exs.length ? `<div class="exgrid stagger">${exs.map(exCard).join("")}</div>` : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
-  return phead({ crumb: [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: tabsHtml(tabs, chapTab) })
-    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${s.name} · ${YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
+  return phead({ crumb: s.hidden ? [["Concours", "#concours"], [s.name, "#commando"]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: s.hidden ? `<span class="tag y">Topologie · ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: tabsHtml(tabs, chapTab) })
+    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${s.hidden ? s.name + " · Topologie" : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
 }
 
 let enonceMode = "interactif";
 function exercisePage(eid) {
   const e = EXERCISES.find(x => x.id === eid); if (!e) return notFound();
   const s = sid(e.subj), c = s.years[e.year][e.chap], pb = e.kind === "probleme";
-  if (year !== e.year) setYear(e.year);
+  if (year !== e.year && !s.hidden) setYear(e.year);
   const hasPdf = PDFS.has("enonce-" + e.id);
   const d = e.decode || { donnees: [], but: "", cles: {} };
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year).slice(0, 2);
-  return phead({ crumb: [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.name} · ${YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
+  return phead({ crumb: s.hidden ? [[s.name, "#commando"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
+    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + `<div class="wrap"><div class="ex-layout">
     <section class="panelbox" aria-labelledby="h-en">
       <h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>
@@ -219,11 +221,11 @@ function exercisePage(eid) {
 
 let exFilter = "all";
 function exercisesPage(onlyClassics) {
-  const list = EXERCISES.filter(e => e.year === year && (exFilter === "all" || e.subj === exFilter) && (!onlyClassics || e.classique));
+  const list = EXERCISES.filter(e => e.year === year && !sid(e.subj).hidden && (exFilter === "all" || e.subj === exFilter) && (!onlyClassics || e.classique));
   const title = onlyClassics ? "Classiques" : "Exercices corrigés";
   return phead({ crumb: [[title]], title, meta: `<span class="tag y">${YEARS[year]}</span>` })
   + `<div class="wrap layout full"><div>
-    <div class="filters" role="group" aria-label="Filtrer par matière"><button type="button" class="chip" data-f="all" aria-pressed="${exFilter === "all"}">Toutes</button>${SUBJECTS.map(s => `<button type="button" class="chip" data-f="${s.id}" aria-pressed="${exFilter === s.id}">${s.name}</button>`).join("")}</div>
+    <div class="filters" role="group" aria-label="Filtrer par matière"><button type="button" class="chip" data-f="all" aria-pressed="${exFilter === "all"}">Toutes</button>${VISIBLE.map(s => `<button type="button" class="chip" data-f="${s.id}" aria-pressed="${exFilter === s.id}">${s.name}</button>`).join("")}</div>
     ${list.length ? `<div class="exgrid stagger">${list.map(exCard).join("")}</div>` : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "MP" : "MPSI"}.`)}
   </div></div>`;
 }
@@ -263,7 +265,9 @@ function khollesPage() {
 }
 
 function concoursPage() {
-  return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full"><article class="prose">
+  return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
+    <a class="cmd-band" href="#commando"><span class="tx"><span class="k">Nouveau · Niveau ★★★★★</span><h2>Formation commando <span style="white-space:nowrap">X-ENS</span></h2><p>Les exercices les plus durs, corrigés sans sauter une seule étape.</p><span><span class="btn btn-yellow">Entrer dans la formation ${I.arrow}</span></span></span><span class="ph">${img("commando", "(max-width:820px) 100vw, 45vw")}</span></a>
+    <article class="prose">
     <h2>Les banques</h2>
     <div class="cards">${BANKS.map(b => `<div class="card"><h3>${b.name}</h3><p>${b.desc}</p></div>`).join("")}</div>
     <h2>L'année de MP</h2>
@@ -289,6 +293,32 @@ function oralPage() {
     <h2>Ce qui fait la différence</h2>
     <ul><li>Réfléchir à voix haute, même quand tu hésites.</li><li>Tester une idée sur un cas simple.</li><li>Écouter : une indication est une aide, pas un piège.</li><li>Pour CCINP, travailler la banque officielle d'exercices d'oral.</li></ul>
   </article></div>`;
+}
+
+function commandoPage() {
+  const s = sid("xens"), list = s.years.mp;
+  const next = ["Fonctions d'une variable réelle", "Intégration", "Suites et séries", "Fonctions de plusieurs variables", "Équations différentielles"];
+  return `
+  <section class="hero"><div class="photo">${img("commando", "100vw", true)}</div><div class="wrap">
+    <h1><span class="line"><span>Formation</span></span><span class="line"><span><span class="mark">commando</span></span></span><span class="line"><span>X-ENS.</span></span></h1>
+    <p>Les exercices les plus durs du programme, corrigés sans sauter une seule étape.</p>
+    <div class="ctas"><a class="btn btn-yellow" href="#c-xens-mp-0">Commencer l'entraînement ${I.arrow}</a><a class="btn btn-glass" href="#concours">Retour aux concours</a></div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="cmd-rules stagger">
+      <div><b>★★★★★</b><span>Tous les exercices sont au niveau des concours X-ENS.</span></div>
+      <div><b>Aucune étape sautée</b><span>Chaque ligne du corrigé est justifiée, avec le rappel de cours utilisé.</span></div>
+      <div><b>Le cours d'abord</b><span>Chaque sous-chapitre commence par un résumé et ses formules à connaître.</span></div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="sec-title"><h2>Chapitre 1 · ${esc(s.part)}</h2></div>
+    <ol class="chapters stagger">${list.map((c, i) => { const n = exOf("xens", "mp", i).length, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); return (n || r) ? `<li><a href="#c-xens-mp-${i}"><span class="num">1.${i + 1}</span><h3>${esc(c.t)}</h3><span class="info">${r ? "<span>Résumé</span>" : ""}${n ? `<span><b>${n}</b> exos</span>` : ""}<svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>` : `<li><div class="soonrow"><span class="num">1.${i + 1}</span><h3>${esc(c.t)}</h3><span class="info">En préparation</span></div></li>`; }).join("")}</ol>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="sec-title"><h2>La suite du programme</h2></div>
+    <ul class="roadmap">${next.map((t, k) => `<li>Chapitre ${k + 2} · ${t}</li>`).join("")}</ul>
+  </div></section>`;
 }
 
 function notFound() {
@@ -484,7 +514,7 @@ function mountPdf(el) {
 /* ---------- Visualisations ---------- */
 function tokens() {
   const cs = getComputedStyle(document.documentElement), g = k => cs.getPropertyValue(k).trim();
-  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches || document.documentElement.dataset.zone === "commando";
   return { line: g("--line"), muted: g("--muted"), ink: g("--ink"), bg: g("--bg"), c: dark ? [g("--yellow"), "#8FB3FF", "#C9D2EA"] : [g("--navy"), "#E0A200", "#7C88A8"] };
 }
 function niceStep(range, target) { const raw = range / target, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
@@ -579,6 +609,7 @@ function route(keepScroll) {
   player = null; closeRappel(true); closeBig(true); closeTip();
   let html, m, ex = null;
   if (h === "accueil") html = home();
+  else if (h === "commando" || h === "s-xens") html = commandoPage();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
   else if ((m = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/))) html = chapterPage(m[1], m[2], +m[3]);
   else if ((m = h.match(/^e-([a-z0-9-]+)$/))) { ex = EXERCISES.find(x => x.id === m[1]); html = exercisePage(m[1]); }
@@ -590,6 +621,9 @@ function route(keepScroll) {
   else if (h === "concours") html = concoursPage();
   else if (h === "oral") html = oralPage();
   else html = notFound();
+  const zone = h === "commando" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
+  if (zone) document.documentElement.dataset.zone = "commando"; else delete document.documentElement.dataset.zone;
+  const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = zone ? "#05070C" : "#0F2557";
   app.classList.remove("enter"); void app.offsetWidth;
   app.innerHTML = html; app.classList.add("enter");
   closeMenus(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");

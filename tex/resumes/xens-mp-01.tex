@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage{lemme}
+\usepackage{tabularx,array,colortbl}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\renewcommand\lemmemeta{Formation commando X-ENS · Topologie · 1}
+\renewcommand\lemmeurl{lemme-ryq6.vercel.app/\#commando}
+\renewcommand{\leq}{\leqslant}\renewcommand{\geq}{\geqslant}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\begin{document}
+
+\lemmetitle{Formation commando X-ENS · Résumé de cours}{Topologie : les généralités}
+
+\lemmenotions{Dans tout le résumé, $(E,d)$ est un espace métrique et $\K = \R$ ou $\mathbb{C}$.}
+
+\lemmesection{1. Normes et distances}
+
+\begin{ldef}[Norme]
+Une norme sur un $\K$-espace vectoriel $E$ est une application $x\mapsto\|x\|$ à valeurs dans $\R_+$ telle que
+\[\|x\| = 0\iff x = 0,\qquad \|\lambda x\| = |\lambda|\,\|x\|,\qquad \|x+y\|\leq\|x\|+\|y\|.\]
+\end{ldef}
+
+Dans $\R^n$, les trois normes à connaître sont $\|x\|_1 = \sum|x_i|$, $\|x\|_2 = \sqrt{\sum x_i^2}$ et $\|x\|_\infty = \max|x_i|$. Pour les fonctions bornées sur un ensemble $X$ : $\|f\|_\infty = \sup_X|f|$, la norme de la convergence uniforme.
+
+\begin{ldef}[Distance]
+Une distance sur un ensemble $E$ vérifie : $d(x,y) = 0\iff x = y$, \ $d(x,y) = d(y,x)$, \ $d(x,z)\leq d(x,y)+d(y,z)$.
+\end{ldef}
+
+\begin{itemize}
+\item Une norme donne une distance : $d(x,y) = \|x-y\|$. C'est celle qu'on utilise par défaut.
+\item La \textbf{distance discrète} vaut $0$ si $x = y$ et $1$ sinon. Elle sert de contre-exemple.
+\item Diamètre : $\delta(A) = \sup_{x,y\in A}d(x,y)$. Une partie est \textbf{bornée} si son diamètre est fini, c'est-à-dire si elle tient dans une boule.
+\item Distance d'un point à une partie non vide : $d(x,A) = \inf_{y\in A}d(x,y)$. Attention, $d(A,B) = 0$ n'implique pas $A = B$.
+\end{itemize}
+
+\lemmesection{2. Boules, ouverts, fermés}
+
+$B(a,r) = \{x : d(a,x)<r\}$ est la boule ouverte, $B_f(a,r) = \{x : d(a,x)\leq r\}$ la boule fermée, $S(a,r) = \{x : d(a,x) = r\}$ la sphère.
+
+\begin{ldef}[Ouvert, fermé]
+$\Omega$ est \textbf{ouvert} si autour de chacun de ses points, il contient une boule : $\forall x\in\Omega,\ \exists\rho>0,\ B(x,\rho)\subset\Omega$. \\
+$F$ est \textbf{fermé} si son complémentaire est ouvert.
+\end{ldef}
+
+\begin{lthm}[Stabilité]
+\begin{itemize}
+\item $\varnothing$ et $E$ sont ouverts et fermés.
+\item Une réunion \emph{quelconque} d'ouverts est ouverte ; une intersection \emph{finie} d'ouverts est ouverte.
+\item Une intersection \emph{quelconque} de fermés est fermée ; une réunion \emph{finie} de fermés est fermée.
+\end{itemize}
+\end{lthm}
+
+\begin{lnote}[Attention]
+Une intersection infinie d'ouverts peut ne pas être ouverte : $\bigcap_{n\geq1}\left]-\frac1n,\frac1n\right[ = \{0\}$.
+\end{lnote}
+
+Une boule ouverte est un ouvert, une boule fermée est un fermé. $V$ est un \textbf{voisinage} de $x$ s'il contient un ouvert qui contient $x$.
+
+\lemmesection{3. Adhérence, intérieur, frontière}
+
+\begin{ldef}[Adhérence et intérieur]
+L'\textbf{adhérence} $\overline A$ est le plus petit fermé qui contient $A$. \\
+L'\textbf{intérieur} $\mathring A$ est le plus grand ouvert contenu dans $A$. \\
+La \textbf{frontière} est $\operatorname{Fr}(A) = \overline A\setminus\mathring A$.
+\end{ldef}
+
+\begin{lthm}[Caractérisations]
+\[x\in\overline A\iff\forall\varepsilon>0,\ B(x,\varepsilon)\cap A\neq\varnothing\iff d(x,A) = 0.\]
+\[x\in\mathring A\iff\exists\varepsilon>0,\ B(x,\varepsilon)\subset A.\]
+$A$ est fermé si et seulement si $A = \overline A$ ; ouvert si et seulement si $A = \mathring A$.
+\end{lthm}
+
+\begin{itemize}
+\item $A$ est \textbf{dense} dans $E$ si $\overline A = E$. Par exemple, $\mathbb{Q}$ et $\R\setminus\mathbb{Q}$ sont denses dans $\R$.
+\item Dans un espace normé, $\overline{B(0,1)} = B_f(0,1)$. Dans un espace métrique quelconque, on a seulement l'inclusion $\subset$.
+\item $a$ est un \textbf{point isolé} de $A$ si une boule autour de $a$ ne contient aucun autre point de $A$. $a$ est un \textbf{point d'accumulation} de $A$ si toute boule autour de $a$ contient un point de $A$ autre que $a$.
+\end{itemize}
+
+\begin{ldef}[Topologie induite]
+Sur une partie $A$ munie de la distance restreinte, les ouverts sont les $\Omega\cap A$ et les fermés les $F\cap A$, où $\Omega$ est ouvert et $F$ fermé dans $E$.
+\end{ldef}
+
+\lemmesection{4. Continuité}
+
+\begin{ldef}[Continuité en un point]
+$f : (E,d)\to(E',d')$ est continue en $a$ si
+\[\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x\in E,\quad d(a,x)<\alpha\implies d'(f(a),f(x))<\varepsilon.\]
+\end{ldef}
+
+\begin{lthm}[Continuité globale]
+$f$ est continue sur $E$ si et seulement si l'image réciproque de tout ouvert est un ouvert, si et seulement si l'image réciproque de tout fermé est un fermé.
+\end{lthm}
+
+\begin{itemize}
+\item La composée de fonctions continues est continue. Dans un espace normé, la somme et le produit par un scalaire sont continus.
+\item L'image directe d'un ouvert par une fonction continue n'est pas forcément ouverte.
+\item Un \textbf{homéomorphisme} est une bijection continue dont la réciproque est continue.
+\end{itemize}
+
+\begin{ldef}[Continuité uniforme et fonctions lipschitziennes]
+$f$ est \textbf{uniformément continue} si le même $\alpha$ convient pour tous les points :
+\[\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y\in E,\quad d(x,y)<\alpha\implies d'(f(x),f(y))<\varepsilon.\]
+$f$ est \textbf{$k$-lipschitzienne} si $d'(f(x),f(y))\leq k\,d(x,y)$ pour tous $x,y$.
+\end{ldef}
+
+\begin{lthm}[La chaîne à retenir]
+Lipschitzienne $\implies$ uniformément continue $\implies$ continue. \\
+Les réciproques sont fausses : $x\mapsto\sqrt x$ est uniformément continue sur $\R_+$ sans être lipschitzienne, et $x\mapsto\frac1x$ est continue sur $]0,1]$ sans être uniformément continue.
+\end{lthm}
+
+\lemmesection{5. Normes et distances équivalentes}
+
+Deux normes $N_1$ et $N_2$ sont \textbf{équivalentes} s'il existe $a,b>0$ avec $aN_1\leq N_2\leq bN_1$. Elles définissent alors les mêmes ouverts, les mêmes fermés, les mêmes fonctions continues. En dimension finie, toutes les normes sont équivalentes.
+
+\lemmesection{6. Produits et limites}
+
+\begin{itemize}
+\item Sur $E = E_1\times\dots\times E_n$, la distance produit est $d(x,y) = \max_i d_i(x_i,y_i)$. Ses boules sont des produits de boules.
+\item $f = (f_1,\dots,f_n)$ est continue si et seulement si chaque composante $f_i$ l'est.
+\item Une fonction continue en chaque variable séparément n'est pas forcément continue : $\frac{xy}{x^2+y^2}$, prolongée par $0$ en $(0,0)$.
+\item La distance $d : E\times E\to\R$ est continue (et même $2$-lipschitzienne).
+\item Les limites se composent, passent aux sommes et aux produits, et respectent les inégalités larges, comme dans $\R$.
+\end{itemize}
+
+\newpage
+\lemmesection{Les formules à connaître}
+
+\renewcommand{\arraystretch}{1.55}\arrayrulecolor{line}
+\begin{tabularx}{\linewidth}{>{\sffamily\small\color{muted}\raggedright\arraybackslash}m{4.4cm} X}
+Inégalité triangulaire & $d(x,z)\leq d(x,y)+d(y,z)$ \\ \hline
+Inégalité renversée & $|d(x,z)-d(y,z)|\leq d(x,y)$ \\ \hline
+Normes usuelles sur $\R^n$ & $\|x\|_1 = \sum|x_i|$, \quad $\|x\|_2 = \sqrt{\sum x_i^2}$, \quad $\|x\|_\infty = \max|x_i|$ \\ \hline
+Comparaison sur $\R^n$ & $\|x\|_\infty\leq\|x\|_2\leq\|x\|_1\leq n\,\|x\|_\infty$ \\ \hline
+Diamètre & $\delta(A) = \sup_{x,y\in A}d(x,y)$ \\ \hline
+Distance à une partie & $d(x,A) = \inf_{y\in A}d(x,y)$ \\ \hline
+Lipschitz de $d(\cdot,A)$ & $|d(x,A)-d(y,A)|\leq d(x,y)$ \\ \hline
+Boules & $B(a,r) = \{d(a,x)<r\}$, \quad $B_f(a,r) = \{d(a,x)\leq r\}$ \\ \hline
+Ouvert & $\forall x\in\Omega,\ \exists\rho>0,\ B(x,\rho)\subset\Omega$ \\ \hline
+Adhérence & $x\in\overline A\iff\forall\varepsilon>0,\ B(x,\varepsilon)\cap A\neq\varnothing\iff d(x,A) = 0$ \\ \hline
+Intérieur & $x\in\mathring A\iff\exists\varepsilon>0,\ B(x,\varepsilon)\subset A$ \\ \hline
+Complémentaires & $\mathring A = E\setminus\overline{E\setminus A}$, \quad $\overline A = E\setminus(E\setminus A)^{\circ}$ \\ \hline
+Frontière & $\operatorname{Fr}(A) = \overline A\setminus\mathring A$ \\ \hline
+Continuité & $\forall\varepsilon>0,\ \exists\alpha>0,\ d(a,x)<\alpha\implies d'(f(a),f(x))<\varepsilon$ \\ \hline
+Continuité uniforme & $\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y,\ d(x,y)<\alpha\implies d'(f(x),f(y))<\varepsilon$ \\ \hline
+Lipschitzienne & $d'(f(x),f(y))\leq k\,d(x,y)$ \\ \hline
+Normes équivalentes & $a\,N_1\leq N_2\leq b\,N_1$ \\ \hline
+Distance produit & $d(x,y) = \max_i d_i(x_i,y_i)$ \\ \hline
+Max de deux réels & $\max(a,b) = \frac12\big(a+b+|a-b|\big)$ \\ \hline
+\end{tabularx}
+
+\end{document}

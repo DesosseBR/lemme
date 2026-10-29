@@ -9,7 +9,7 @@ const { execFile } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "maths", "physique", "chimie", "si", "info", "anglais"];
+const ORDER = ["core", "maths", "physique", "chimie", "si", "info", "anglais", "commando"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));
@@ -27,7 +27,7 @@ const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": "
 const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp);/g, m => ENT[m]);
 const UNI = { "ℤ": "$\\mathbb{Z}$", "ℝ": "$\\mathbb{R}$", "ℂ": "$\\mathbb{C}$", "ℕ": "$\\mathbb{N}$", "ℚ": "$\\mathbb{Q}$", "★": "",
   "∘": "$\\circ$", "⌊": "$\\lfloor$", "⌋": "$\\rfloor$", "⊂": "$\\subset$", "⇒": "$\\Rightarrow$", "→": "$\\to$", "∞": "$\\infty$", "√": "$\\surd$",
-  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$" };
+  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "" };
 const UNI_RE = new RegExp("[" + Object.keys(UNI).join("") + "]", "g");
 function escText(s) {
   return decode(s)
