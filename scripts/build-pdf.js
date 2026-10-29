@@ -9,7 +9,7 @@ const { execFile } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "maths", "physique", "chimie", "si", "info", "anglais", "commando"];
+const ORDER = ["core", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));
@@ -27,7 +27,7 @@ const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": "
 const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp);/g, m => ENT[m]);
 const UNI = { "ℤ": "$\\mathbb{Z}$", "ℝ": "$\\mathbb{R}$", "ℂ": "$\\mathbb{C}$", "ℕ": "$\\mathbb{N}$", "ℚ": "$\\mathbb{Q}$", "★": "",
   "∘": "$\\circ$", "⌊": "$\\lfloor$", "⌋": "$\\rfloor$", "⊂": "$\\subset$", "⇒": "$\\Rightarrow$", "→": "$\\to$", "∞": "$\\infty$", "√": "$\\surd$",
-  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "" };
+  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "", "◎": "", "∑": "$\\sum$", "ᵀ": "$^{\\top}$", "₀": "$_0$", "₁": "$_1$", "₂": "$_2$", "ₙ": "$_n$", "⁻": "$^{-}$" };
 const UNI_RE = new RegExp("[" + Object.keys(UNI).join("") + "]", "g");
 function escText(s) {
   return decode(s)
@@ -100,7 +100,7 @@ for (const s of L.SUBJECTS) {
 for (const e of L.EXERCISES) {
   if (ONLY && e.subj !== ONLY) continue;
   const s = L.SUBJECTS.find(x => x.id === e.subj), c = s.years[e.year][e.chap];
-  const kind = e.kind === "probleme" ? "Problème" : "Exercice";
+  const kind = e.concours ? "Oral " + (L.CONCOURS || {})[e.concours] : (e.kind === "probleme" ? "Problème" : "Exercice");
   jobs.push({ name: `enonce-${e.id}`, tex: doc({
     meta: `${s.name} · ${YEARS[e.year]} · ${c.t}`, kicker: `${kind} · ${s.name} ${YEARS[e.year]} · ${e.time}`, titleTex: e.tt, title: e.title,
     url: `Corrigé pas à pas : ${SITE_URL}/#e-${e.id}`,

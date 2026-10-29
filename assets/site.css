@@ -458,3 +458,16 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 .cmd-band .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.15) brightness(.8)}
 .cmd-band .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#05070C,rgba(5,7,12,.25) 45%,transparent)}
 @media (max-width:820px){.cmd-band{grid-template-columns:1fr}.cmd-band .ph{min-height:200px;order:-1}.cmd-band .ph::after{background:linear-gradient(0deg,#05070C,transparent 70%)}}
+
+/* ---------- Oraux de maths ---------- */
+.oral-band{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:clamp(26px,4vw,44px);border-radius:24px;background:var(--navy);color:var(--on-navy);text-decoration:none;margin-bottom:56px;transition:transform var(--t-mid) var(--ease-out)}
+.oral-band:hover{transform:translateY(-3px)}
+.oral-band .k{font-size:13px;font-weight:700;color:var(--yellow);letter-spacing:.06em;text-transform:uppercase}
+.oral-band h2{margin:0;font-size:clamp(28px,3.4vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.02}
+.oral-band p{margin:0 0 8px;font-family:var(--f-read);color:var(--on-navy-muted);font-size:17px;max-width:38em}
+.chapters .ccs{display:inline-flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.chapters .ccs i{font-style:normal;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.chapters .ccs i.on{background:var(--yellow);border-color:var(--yellow);color:var(--on-yellow)}
+@media (max-width:900px){.chapters .ccs{display:none}}
+
+.tabs [aria-selected="true"]:hover,.tabs [aria-current="page"]:hover{color:var(--ink)}

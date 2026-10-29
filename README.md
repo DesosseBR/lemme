@@ -67,6 +67,10 @@ Créer `tex/resumes/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-08.tex`
 
 Créer `tex/cours/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-15.tex`), un document LaTeX qui commence par `\usepackage{lemme}`. Il apparaît automatiquement dans l'onglet « Cours » du chapitre.
 
+### Un exercice d'oral
+
+Dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).
+
 ## Demande type pour Claude
 
 > Dans le repo DesosseBR/lemme, ajoute 3 exercices corrigés au chapitre « Séries entières » (Maths MP), dans content/maths.js uniquement, puis régénère les PDF de maths.
