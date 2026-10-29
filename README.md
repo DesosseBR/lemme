@@ -71,6 +71,14 @@ Créer `tex/cours/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-15.tex`),
 
 Les notions sont dans `content/notions.js`. Le site souligne automatiquement en bleu la première apparition de chaque notion dans les énoncés et les corrigés. Pour en ajouter une : `"id": { p: "expression régulière", t: "Titre", b: R\`définition\` }`. Pour désactiver une notion dans un exercice où le mot a un autre sens : `noNotions: ["id"]`.
 
+### Un exercice de physique (énoncé et corrigé côte à côte)
+
+Ajouter `side: true` à l'exercice, écrire les questions dans une liste `<ol>` de l'énoncé, et donner à chaque étape le numéro de sa question : `{ q: 2, t: "…", b: R\`…\` }`. La question en cours est surlignée dans l'énoncé.
+
+Les figures sont des SVG insérés dans le texte : `<figure class="fig"><svg viewBox="0 0 L H" width="L" height="H">…</svg><figcaption>légende</figcaption></figure>` (voir les fonctions d'aide en bas de `content/physique.js`). Pour les PDF, `scripts/build-pdf.js` les convertit en `tex/fig/*.pdf` avec Chromium (`scripts/svg2pdf.py`, Playwright requis).
+
+`viz` peut être une liste. Types d'animation supplémentaires : `tige` (perle sur une tige en rotation) et `sismo` (sismomètre). Les notions de physique de `content/notions.js` portent `d: "phys"` : elles ne sont soulignées qu'en physique.
+
 ### Un exercice d'oral
 
 Dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).

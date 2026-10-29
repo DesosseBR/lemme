@@ -4,6 +4,7 @@
   --on-navy:#F2F5FF; --on-navy-muted:#B3BEDD;
   --yellow:#FFC93C; --yellow-hover:#FFD566; --on-yellow:#101935; --yellow-soft:#FFF4CF;
   --bg:#F5F7FC; --bg-2:#E9EDF6; --surface:#FFFFFF; --ink:#101935; --muted:#5A6484; --line:#DCE2EF;
+  --red:#C8362B; --gold-ink:#B07A00; --green:#1F7A4D;
   --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
   --f-read:"Literata","Iowan Old Style",Georgia,serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
@@ -17,6 +18,7 @@
     --navy:#0E1D49; --navy-deep:#070F2E; --navy-line:#263B76;
     --yellow:#FFD05A; --yellow-hover:#FFDB80; --yellow-soft:#2F2A14;
     --bg:#0A1230; --bg-2:#0F1A3E; --surface:#111C44; --ink:#E9EEFB; --muted:#9AA6C9; --line:#22305C;
+    --red:#FF7B6E; --gold-ink:#FFC93C; --green:#5FD49A;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -18px rgba(0,0,0,.6);
     color-scheme:dark;
   }
@@ -490,3 +492,44 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 .card-link .card-go{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-weight:700;font-size:14.5px;color:var(--navy)}
 @media (prefers-color-scheme: dark){.card-link .card-go{color:var(--yellow)}}
 .card-link .card-go svg{width:16px;height:16px}
+
+/* ---------- Physique : énoncé et corrigé côte à côte ---------- */
+.ex-layout.wide{max-width:1360px}
+.side-hint{margin:0;font-size:14.5px;color:var(--muted)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:24px;align-items:start}
+.split > .side-en{position:sticky;top:84px;max-height:calc(100vh - 104px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+@media (max-width:1020px){.split{grid-template-columns:minmax(0,1fr)}.split > .side-en{position:static;max-height:none}}
+.enonce ol{padding-left:1.4em}
+.enonce ol > li{padding:8px 12px;margin:4px 0 4px -12px;border-radius:12px;border-left:3px solid transparent;transition:background var(--t-mid) var(--ease),border-color var(--t-mid) var(--ease)}
+.enonce ol > li::marker{font-family:var(--f-display);font-weight:800}
+.enonce ol > li.qon{background:var(--yellow-soft);border-left-color:var(--yellow)}
+
+/* Figures */
+.fig{margin:18px 0;padding:14px 14px 10px;background:var(--bg);border:1px solid var(--line);border-radius:16px}
+.fig > svg{display:block;width:100%;height:auto;max-height:340px;margin:0 auto;font-family:"Latin Modern Roman","CMU Serif",var(--f-read);overflow:visible}
+.fig figcaption{font-family:var(--f-display);font-size:13.5px;color:var(--muted);margin-top:8px;text-align:center;line-height:1.45}
+.fig .k{stroke:var(--ink);fill:none;stroke-width:1.6}
+.fig .thin{stroke:var(--muted);fill:none;stroke-width:1;stroke-dasharray:4 4}
+.fig .ax{stroke:var(--muted);fill:none;stroke-width:1.2}
+.fig .axh{fill:var(--muted)}
+.fig .body{fill:var(--bg-2);stroke:var(--ink);stroke-width:1.6}
+.fig .mass{fill:var(--yellow);stroke:var(--ink);stroke-width:1.6}
+.fig .hatch{stroke:var(--muted);stroke-width:1.1}
+.fig .vb{stroke:var(--blue,#2453D6);stroke-width:2.4}.fig .hb{fill:var(--blue,#2453D6)}
+.fig .vr{stroke:var(--red);stroke-width:2.6}.fig .hr{fill:var(--red)}
+.fig .vg{stroke:var(--gold-ink);stroke-width:2.6}.fig .hg{fill:var(--gold-ink)}
+.fig .vk{stroke:var(--ink);stroke-width:2.2}.fig .hk{fill:var(--ink)}
+.fig .vv{stroke:var(--green);stroke-width:2.4}.fig .hv{fill:var(--green)}
+.fig text{fill:var(--ink);font-size:15px}
+.fig text.it{font-style:italic}
+.fig text.sm{font-size:12.5px;fill:var(--muted);font-style:normal}
+.fig text.r{fill:var(--red)}.fig text.g{fill:var(--gold-ink)}.fig text.b{fill:var(--blue,#2453D6)}.fig text.v{fill:var(--green)}
+.figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.figrow .fig{margin:0}
+.player .fig{background:var(--surface)}
+
+/* Animations */
+.viz-canvas.anim{aspect-ratio:4/3;max-height:480px}
+.viz-canvas.anim.tall{aspect-ratio:16/8}
+.anim-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.anim-info{font-family:var(--f-display);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}

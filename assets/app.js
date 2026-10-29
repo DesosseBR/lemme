@@ -212,10 +212,9 @@ function exercisePage(eid) {
   if (e.concours) lastConc = e.concours;
   return phead({ crumb: s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
     meta: `<span class="tag y">${e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
-  + `<div class="wrap"><div class="ex-layout">
-    <section class="panelbox" aria-labelledby="h-en">
-      <h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>
-      <div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
+  + (() => {
+    const enHead = `<h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>`;
+    const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
         <div class="prose enonce">${annotate(e.enonce, e)}</div>
         <div class="decode">
           <div><h4>Ce que l'énoncé te donne</h4><ul>${d.donnees.map(x => `<li>${x}</li>`).join("")}</ul></div>
@@ -223,12 +222,20 @@ function exercisePage(eid) {
         </div>
         <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Souligné en bleu : une notion de cours, avec sa définition</span></p>
       </div>
-      ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}
-    </section>
-    ${e.viz ? `<section class="panelbox" aria-labelledby="h-viz"><h2 id="h-viz">${e.viz.title || "Visualiser"}</h2><div id="viz"></div></section>` : ""}
-    <section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download>${I.dl} Télécharger le corrigé PDF</a>` : ""}</h2><div id="player" class="player"></div></section>
-    ${others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : ""}
+      ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}`;
+    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download>${I.dl} Télécharger le corrigé PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
+    const viz = [].concat(e.viz || []).map((v, k) => `<section class="panelbox" aria-labelledby="h-viz${k}"><h2 id="h-viz${k}">${v.title || "Visualiser"}</h2><div id="viz${k ? k : ""}"></div></section>`).join("");
+    const more = others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
+    if (e.side) return `<div class="wrap"><div class="ex-layout wide">
+      <p class="side-hint">L'énoncé reste affiché à gauche pendant que tu avances dans le corrigé : la question en cours y est surlignée.</p>
+      <div class="split"><section class="panelbox side-en" aria-labelledby="h-en">${enHead}${enBody}</section>${cor}</div>
+      ${viz}${more}
+    </div></div>`;
+    return `<div class="wrap"><div class="ex-layout">
+    <section class="panelbox" aria-labelledby="h-en">${enHead}${enBody}</section>
+    ${viz}${cor}${more}
   </div></div>`;
+  })();
 }
 
 let exFilter = "all";
@@ -399,14 +406,17 @@ function annotate(html, ex, used) {
   if (!html || !NOTION_LIST.length) return html || "";
   used = used || new Set();
   const skip = new Set((ex && ex.noNotions) || []);
+  /* Les notions de physique (d: "phys") ne servent qu'en physique, et inversement. */
+  const phys = !!ex && ex.subj === "physique";
+  for (const id in NOTIONS) if ((NOTIONS[id].d === "phys") !== phys) skip.add(id);
   const parts = html.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   let block = 0, out = "";
   for (const part of parts) {
     if (!part) continue;
     if (part[0] === "<") {
       const tag = part.toLowerCase();
-      if (/^<(pre|code)\b/.test(tag) || /^<span\b[^>]*data-[kn]=/.test(tag)) block++;
-      else if (block && /^<\/(pre|code|span)>/.test(tag)) block--;
+      if (/^<(pre|code|svg|figure)\b/.test(tag) || /^<span\b[^>]*data-[kn]=/.test(tag)) block++;
+      else if (block && /^<\/(pre|code|span|svg|figure)>/.test(tag)) block--;
       else if (block && /^<span\b/.test(tag)) block++;
       out += part;
     } else if (part[0] === "$" || block) out += part;
@@ -499,7 +509,7 @@ function mountPlayer(e, host) {
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `<span class="count">Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
+            : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">
@@ -514,6 +524,13 @@ function mountPlayer(e, host) {
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
     }));
     closeTip(); bindKeys(host, e);
+    if (e.side) {
+      const q = last ? 0 : (st.q || 0);
+      const lis = $$(".side-en .enonce > ol > li");
+      lis.forEach((li, k) => li.classList.toggle("qon", k + 1 === q));
+      const on = lis[q - 1], box = $(".side-en");
+      if (on && box && box.scrollHeight > box.clientHeight) box.scrollTo({ top: Math.max(0, on.offsetTop - 80), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
     typeset(host);
     const top = host.closest(".panelbox").getBoundingClientRect().top;
     if (top < 72 || top > innerHeight * .6) host.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
@@ -596,6 +613,8 @@ function niceStep(range, target) { const raw = range / target, p = Math.pow(10, 
 const fmt = v => { const a = Math.abs(v); return (a !== 0 && (a < 0.01 || a >= 1e4)) ? v.toExponential(1) : String(+v.toFixed(3)).replace(".", ","); };
 function mountViz(host, spec) {
   if (spec.type === "dicho") return mountDicho(host);
+  if (spec.type === "tige") return mountTige(host, spec);
+  if (spec.type === "sismo") return mountSismo(host, spec);
   const p = {}; (spec.params || []).forEach(x => p[x.k] = x.v);
   host.innerHTML = `${(spec.params || []).length ? `<div class="viz-ctrl">${spec.params.map(x => `<div><label for="vz-${x.k}">${x.label}<output id="vo-${x.k}">${fmt(x.v)}${x.unit ? " " + x.unit : ""}</output></label><input type="range" id="vz-${x.k}" min="${x.min}" max="${x.max}" step="${x.step}" value="${x.v}"></div>`).join("")}</div>` : ""}
     <canvas class="viz-canvas" role="img" aria-label="${esc((spec.title || "Graphique").replace(/\$/g, ""))}"></canvas>
@@ -675,6 +694,120 @@ function mountDicho(host) {
   reset(); paint();
 }
 
+/* ---------- Animations de physique ---------- */
+function animControls(host, params, p) {
+  return `${params.length ? `<div class="viz-ctrl">${params.map(x => `<div><label for="vz-${x.k}">${x.label}<output id="vo-${x.k}">${fmt(x.v)}${x.unit ? " " + x.unit : ""}</output></label><input type="range" id="vz-${x.k}" min="${x.min}" max="${x.max}" step="${x.step}" value="${x.v}"></div>`).join("")}</div>` : ""}`;
+}
+function bindSliders(host, params, p, onChange) {
+  params.forEach(x => $(`#vz-${x.k}`, host).addEventListener("input", ev => { p[x.k] = +ev.target.value; $(`#vo-${x.k}`, host).textContent = fmt(p[x.k]) + (x.unit ? " " + x.unit : ""); onChange(); }));
+}
+function arrowTo(g, x1, y1, x2, y2, color, w) {
+  const a = Math.atan2(y2 - y1, x2 - x1), L = Math.hypot(x2 - x1, y2 - y1); if (L < 2) return;
+  g.strokeStyle = g.fillStyle = color; g.lineWidth = w || 2.4; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2 - 7 * Math.cos(a), y2 - 7 * Math.sin(a)); g.stroke();
+  g.beginPath(); g.moveTo(x2, y2); g.lineTo(x2 - 11 * Math.cos(a - .42), y2 - 11 * Math.sin(a - .42)); g.lineTo(x2 - 11 * Math.cos(a + .42), y2 - 11 * Math.sin(a + .42)); g.closePath(); g.fill();
+}
+function canvasCtx(cv) {
+  const W = cv.clientWidth, H = cv.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2.5);
+  if (cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); return { g, W, H };
+}
+const tok = () => { const cs = getComputedStyle(document.documentElement), v = k => cs.getPropertyValue(k).trim(); return { ink: v("--ink"), muted: v("--muted"), line: v("--line"), blue: v("--blue"), red: v("--red"), gold: v("--gold-ink"), yellow: v("--yellow"), bg2: v("--bg-2") }; };
+
+/* Perle sur une tige en rotation, vue de dessus */
+function mountTige(host, spec) {
+  const params = spec.params || [], p = {}; params.forEach(x => p[x.k] = x.v);
+  host.innerHTML = animControls(host, params, p) + `<canvas class="viz-canvas anim" role="img" aria-label="Animation de la perle sur la tige en rotation, vue de dessus"></canvas>
+    <div class="anim-bar"><button class="btn btn-yellow btn-sm" type="button" data-play>Lancer</button><button class="btn btn-ghost btn-sm" type="button" data-reset>Recommencer</button><span class="anim-info" aria-live="polite"></span></div>
+    <div class="viz-legend"><span><i style="background:var(--red)"></i>Force d'inertie d'entraînement</span><span><i style="background:var(--gold-ink)"></i>Force de Coriolis</span><span><i style="background:var(--blue)"></i>Trajectoire vue du sol</span></div>`;
+  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host);
+  const L = spec.l, r0 = spec.r0, l0 = spec.l0 || 0;
+  let t, r, v, th, trail, running = false, out = false, last = 0;
+  const reset = () => { t = 0; r = r0; v = 0; th = 0; trail = [[r0, 0]]; out = false; running = false; play.textContent = "Lancer"; info.textContent = ""; draw(); };
+  function step(dt) {
+    const w = p.w, kc = p.kc || 0, n = 40, h = dt / n;
+    for (let i = 0; i < n && !out; i++) {
+      const a = (w * w - kc) * r + kc * l0;
+      v += a * h; r += v * h; th += w * h; t += h;
+      if (Math.abs(r) >= L) { out = true; r = Math.sign(r) * L; }
+    }
+    trail.push([r, th]); if (trail.length > 1500) trail.shift();
+    if (out) { running = false; play.textContent = "Lancer"; info.textContent = `La perle sort de la tige au bout de ${fmt(+t.toFixed(2))} s.`; }
+    else info.textContent = `t = ${fmt(+t.toFixed(2))} s · r = ${fmt(+(r * 100).toFixed(1))} cm${spec.slow && spec.slow < 1 ? " · ralenti ×" + fmt(Math.round(1 / spec.slow)) : ""}`;
+  }
+  function draw() {
+    if (!cv.isConnected) return;
+    const T = tok(), { g, W, H } = canvasCtx(cv);
+    const cx = W / 2, cy = H / 2, S = Math.min(W, H) * 0.44 / L;
+    g.strokeStyle = T.line; g.lineWidth = 1; g.setLineDash([4, 5]);
+    g.beginPath(); g.arc(cx, cy, L * S, 0, 7); g.stroke(); g.setLineDash([]);
+    arrowTo(g, cx - L * S - 14, cy, cx + L * S + 22, cy, T.muted, 1.3); arrowTo(g, cx, cy + L * S + 14, cx, cy - L * S - 22, T.muted, 1.3);
+    g.fillStyle = T.muted; g.font = "italic 14px serif"; g.fillText("x", cx + L * S + 14, cy + 18); g.fillText("y", cx + 8, cy - L * S - 14);
+    g.strokeStyle = T.blue; g.lineWidth = 2; g.beginPath();
+    trail.forEach(([rr, a], k) => { const X = cx + rr * S * Math.cos(a), Y = cy - rr * S * Math.sin(a); k ? g.lineTo(X, Y) : g.moveTo(X, Y); }); g.stroke();
+    const c = Math.cos(th), sn = Math.sin(th);
+    g.lineCap = "round"; g.strokeStyle = T.ink; g.lineWidth = 9; g.globalAlpha = .18;
+    g.beginPath(); g.moveTo(cx - L * S * c, cy + L * S * sn); g.lineTo(cx + L * S * c, cy - L * S * sn); g.stroke(); g.globalAlpha = 1;
+    g.lineWidth = 2; g.beginPath(); g.moveTo(cx - L * S * c, cy + L * S * sn); g.lineTo(cx + L * S * c, cy - L * S * sn); g.stroke(); g.lineCap = "butt";
+    if ((p.kc || 0) > 0) { g.strokeStyle = T.muted; g.lineWidth = 1.5; g.beginPath(); const n = 14; for (let k = 0; k <= n; k++) { const s = r * k / n, off = (k % 2 ? 5 : -5) * (k > 0 && k < n ? 1 : 0); g.lineTo(cx + s * S * c - off * sn, cy - s * S * sn - off * c); } g.stroke(); }
+    const bx = cx + r * S * c, by = cy - r * S * sn, w = p.w;
+    const fie = w * w * r, fic = -2 * w * v, K = 90 / Math.max(1e-6, w * w * L), cap = q => Math.max(-130, Math.min(130, q));
+    arrowTo(g, bx, by, bx + cap(fie * K) * c, by - cap(fie * K) * sn, T.red, 2.8);
+    arrowTo(g, bx, by, bx + cap(fic * K) * (-sn), by - cap(fic * K) * c, T.gold, 2.8);
+    g.fillStyle = T.yellow; g.strokeStyle = T.ink; g.lineWidth = 1.6; g.beginPath(); g.arc(bx, by, 8, 0, 7); g.fill(); g.stroke();
+    g.fillStyle = T.ink; g.beginPath(); g.arc(cx, cy, 3.5, 0, 7); g.fill(); g.font = "italic 14px serif"; g.fillText("O", cx - 16, cy + 16);
+  }
+  function loop(ts) {
+    if (!cv.isConnected) return;
+    if (running) { const dt = Math.min(0.05, (ts - last) / 1000 || 0); step(dt * (spec.slow || 1)); }
+    last = ts; draw(); if (running) requestAnimationFrame(loop);
+  }
+  play.addEventListener("click", () => { if (out) reset(); running = !running; play.textContent = running ? "Pause" : "Reprendre"; last = performance.now(); if (running) requestAnimationFrame(loop); });
+  $("[data-reset]", host).addEventListener("click", reset);
+  bindSliders(host, params, p, reset);
+  new ResizeObserver(draw).observe(cv); matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  reset();
+}
+
+/* Sismomètre : le sol bouge, la masse reste presque immobile si ω ≫ ω0 */
+function mountSismo(host, spec) {
+  const params = spec.params || [], p = {}; params.forEach(x => p[x.k] = x.v);
+  host.innerHTML = animControls(host, params, p) + `<canvas class="viz-canvas anim tall" role="img" aria-label="Animation du sismomètre et de son enregistrement"></canvas>
+    <div class="anim-bar"><button class="btn btn-yellow btn-sm" type="button" data-play>Pause</button><span class="anim-info" aria-live="polite"></span></div>
+    <div class="viz-legend"><span><i style="background:var(--muted)"></i>Mouvement du sol z<sub>s</sub>(t)</span><span><i style="background:var(--blue)"></i>Enregistrement X(t)</span></div>`;
+  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host);
+  let t = 0, running = true, last = performance.now();
+  const resp = () => { const x = p.x, Q = p.Q, re = 1 - x * x, im = x / Q, den = re * re + im * im; return { G: x * x / Math.sqrt(den), phi: Math.atan2(-x * x * im, x * x * re) }; };
+  function draw() {
+    if (!cv.isConnected) return;
+    const T = tok(), { g, W, H } = canvasCtx(cv), w = p.x, { G, phi } = resp();
+    const zs = t2 => Math.cos(w * t2), X = t2 => G * Math.cos(w * t2 + phi), A = 26;
+    const bx = Math.min(240, W * 0.42), gy = H - 40, z = zs(t) * A, base = gy - z;
+    g.strokeStyle = T.muted; g.lineWidth = 1.2;
+    for (let k = 0; k < bx; k += 10) { g.beginPath(); g.moveTo(k, base + 4); g.lineTo(k - 8, base + 14); g.stroke(); }
+    g.beginPath(); g.moveTo(0, base + 4); g.lineTo(bx, base + 4); g.stroke();
+    const left = bx * 0.18, right = bx * 0.82, top = base - (H - 90);
+    g.strokeStyle = T.ink; g.lineWidth = 2; g.beginPath(); g.moveTo(left, top); g.lineTo(right, top); g.moveTo(left, top); g.lineTo(left, base); g.lineTo(right, base); g.stroke();
+    const mid = (left + right) / 2, heq = (base - top) * 0.5, my = base - heq - X(t) * A;
+    g.strokeStyle = T.muted; g.lineWidth = 1.5; g.beginPath(); const n = 12, y0 = top, y1 = my - 14;
+    for (let k = 0; k <= n; k++) { const yy = y0 + (y1 - y0) * k / n, off = (k % 2 ? 9 : -9) * (k > 0 && k < n ? 1 : 0); k ? g.lineTo(mid + off, yy) : g.moveTo(mid, yy); } g.stroke();
+    g.strokeStyle = T.ink; g.lineWidth = 1.6; g.beginPath(); g.moveTo(mid, my + 14); g.lineTo(mid, my + 34); g.moveTo(mid - 10, my + 34); g.lineTo(mid + 10, my + 34); g.stroke();
+    g.beginPath(); g.moveTo(mid - 14, base - 46); g.lineTo(mid - 14, base - 18); g.lineTo(mid + 14, base - 18); g.lineTo(mid + 14, base - 46); g.moveTo(mid, base - 18); g.lineTo(mid, base); g.stroke();
+    g.fillStyle = T.yellow; g.strokeStyle = T.ink; g.fillRect(mid - 26, my - 14, 52, 28); g.strokeRect(mid - 26, my - 14, 52, 28);
+    g.strokeStyle = T.line; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(mid + 30, my); g.lineTo(bx + 10, my); g.stroke(); g.setLineDash([]);
+    const cx0 = bx + 30, cw = W - cx0 - 14, cyM = H / 2, span = 12;
+    g.strokeStyle = T.line; g.lineWidth = 1; g.beginPath(); g.moveTo(cx0, cyM); g.lineTo(cx0 + cw, cyM); g.stroke();
+    const plot = (f, color, wd) => { g.strokeStyle = color; g.lineWidth = wd; g.beginPath(); for (let k = 0; k <= 300; k++) { const tt = t - span + span * k / 300, xx = cx0 + cw * k / 300, yy = cyM - f(tt) * A * 1.6; k ? g.lineTo(xx, yy) : g.moveTo(xx, yy); } g.stroke(); };
+    plot(zs, T.muted, 1.6); plot(X, T.blue, 2.6);
+    g.fillStyle = T.muted; g.font = "12px sans-serif"; g.fillText("sismogramme", cx0, 18);
+    info.textContent = `ω/ω₀ = ${fmt(w)} · amplitude enregistrée / amplitude du sol = ${fmt(+G.toFixed(2))}`;
+  }
+  function loop(ts) { if (!cv.isConnected) return; if (running) t += Math.min(0.05, (ts - last) / 1000) * 2.2; last = ts; draw(); requestAnimationFrame(loop); }
+  play.addEventListener("click", () => { running = !running; play.textContent = running ? "Pause" : "Reprendre"; });
+  bindSliders(host, params, p, draw);
+  matchMedia("(prefers-reduced-motion: reduce)").matches && (running = false, play.textContent = "Lancer");
+  requestAnimationFrame(loop);
+}
+
 /* ---------- Routeur ---------- */
 let lastRoute = "";
 function route(keepScroll) {
@@ -725,7 +858,7 @@ function wire(ex) {
       const lz = $("#en-pdf [data-lazy]"); if (enonceMode === "pdf" && lz) { lz.removeAttribute("data-lazy"); mountPdf(lz); }
     }));
     bindKeys($(".enonce", app), ex);
-    if (ex.viz) mountViz($("#viz"), ex.viz);
+    [].concat(ex.viz || []).forEach((v, k) => mountViz($("#viz" + (k ? k : "")), v));
     mountPlayer(ex, $("#player"));
   }
 }

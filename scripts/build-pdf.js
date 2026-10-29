@@ -5,7 +5,7 @@
            node scripts/build-pdf.js maths      (une seule matière)
    Produit pdf/*.pdf et content/pdfs.js (liste des PDF disponibles pour le site). */
 const fs = require("fs"), path = require("path"), vm = require("vm"), crypto = require("crypto");
-const { execFile } = require("child_process");
+const { execFile, execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
@@ -27,7 +27,7 @@ const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": "
 const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp);/g, m => ENT[m]);
 const UNI = { "ℤ": "$\\mathbb{Z}$", "ℝ": "$\\mathbb{R}$", "ℂ": "$\\mathbb{C}$", "ℕ": "$\\mathbb{N}$", "ℚ": "$\\mathbb{Q}$", "★": "",
   "∘": "$\\circ$", "⌊": "$\\lfloor$", "⌋": "$\\rfloor$", "⊂": "$\\subset$", "⇒": "$\\Rightarrow$", "→": "$\\to$", "∞": "$\\infty$", "√": "$\\surd$",
-  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "", "◎": "", "∑": "$\\sum$", "ᵀ": "$^{\\top}$", "₀": "$_0$", "₁": "$_1$", "₂": "$_2$", "ₙ": "$_n$", "⁻": "$^{-}$" };
+  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "", "◎": "", "∑": "$\\sum$", "ᵀ": "$^{\\top}$", "₀": "$_0$", "₁": "$_1$", "₂": "$_2$", "ₙ": "$_n$", "⁻": "$^{-}$", "ω": "$\\omega$", "θ": "$\\theta$", "λ": "$\\lambda$", "≈": "$\\approx$", "ₛ": "$_s$", "×": "$\\times$" };
 const UNI_RE = new RegExp("[" + Object.keys(UNI).join("") + "]", "g");
 function escText(s) {
   return decode(s)
@@ -37,11 +37,19 @@ function escText(s) {
     .replace(/\^/g, "\\textasciicircum{}")
     .replace(UNI_RE, c => UNI[c]);
 }
+const FIGS = new Map();
 function toTex(html) {
   if (!html) return "";
   const store = [];
   const keep = s => { store.push(s); return "\u0000" + (store.length - 1) + "\u0000"; };
   let s = html;
+  /* Figures SVG : converties en PDF (tex/fig/<empreinte>.pdf) puis incluses avec leur légende */
+  s = s.replace(/<figure class="fig">\s*(<svg[\s\S]*?<\/svg>)\s*<figcaption>([\s\S]*?)<\/figcaption>\s*<\/figure>/g, (_, svg, cap) => {
+    const h = crypto.createHash("sha1").update(svg).digest("hex").slice(0, 16);
+    const w = +(svg.match(/viewBox="0 0 (\d+)/) || [0, 360])[1];
+    FIGS.set(h, svg);
+    return keep(`\n\\begin{center}\\includegraphics[width=${Math.min(0.62, w / 360 * 0.55).toFixed(2)}\\linewidth]{${path.join(ROOT, "tex", "fig", h + ".pdf")}}\\par\\vspace{0.2em}{\\small\\color{black!70}${toTex(cap)}\\par}\\end{center}\n`);
+  });
   s = s.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/g, (_, c) => keep("\n\\begin{lstlisting}\n" + decode(c) + "\n\\end{lstlisting}\n"));
   s = s.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => keep("\n\\[" + decode(m) + "\\]\n"));
   s = s.replace(/\$([^$]+?)\$/g, (_, m) => keep("$" + decode(m) + "$"));
@@ -72,7 +80,7 @@ function toTex(html) {
 /* ---------- Documents ---------- */
 function doc({ meta, kicker, title, titleTex, body, url }) {
   return `\\documentclass[11pt]{article}
-\\usepackage{lemme}
+\\usepackage{lemme}${body.includes("\\includegraphics") ? "\n\\usepackage{graphicx}" : ""}
 \\renewcommand\\lemmemeta{${escText(meta)}}
 \\renewcommand\\lemmeurl{${escText(url || SITE_URL)}}
 \\begin{document}
@@ -136,6 +144,14 @@ if (fs.existsSync(coursDir)) for (const f of fs.readdirSync(coursDir)) if (f.end
 
 /* ---------- Compilation ---------- */
 const BUILD = path.join(ROOT, "build"), OUT = path.join(ROOT, "pdf");
+/* Figures manquantes : SVG vers PDF avec Chromium (scripts/svg2pdf.py, Playwright) */
+const FIGDIR = path.join(ROOT, "tex", "fig"); fs.mkdirSync(FIGDIR, { recursive: true });
+const missing = [...FIGS].filter(([h]) => !fs.existsSync(path.join(FIGDIR, h + ".pdf")));
+if (missing.length) {
+  const list = path.join(BUILD, "figs.json"); fs.mkdirSync(BUILD, { recursive: true });
+  fs.writeFileSync(list, JSON.stringify(missing.map(([h, svg]) => ({ out: path.join(FIGDIR, h + ".pdf"), svg }))));
+  execFileSync("python3", [path.join(__dirname, "svg2pdf.py"), list], { stdio: "inherit" });
+}
 fs.mkdirSync(BUILD, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
 const hashFile = path.join(OUT, ".hashes.json");
 const hashes = fs.existsSync(hashFile) ? JSON.parse(fs.readFileSync(hashFile, "utf8")) : {};
