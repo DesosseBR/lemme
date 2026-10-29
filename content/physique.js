@@ -77,9 +77,9 @@ LEMME.exercises([
 {
   id: "ex-rc", subj: "physique", year: "mpsi", chap: 2, classique: true, level: 1, time: "12 min",
   title: "Charge d'un condensateur",
-  enonce: R`<p>Un condensateur <span data-k="decharge">initialement déchargé</span>, de capacité $C = 100\ \mathrm{nF}$, est chargé à travers une résistance $R = 10\ \mathrm{k\Omega}$ par un générateur de tension constante $E$. Établir $u_C(t)$, puis le temps au bout duquel $u_C$ atteint $99\,\%$ de $E$.</p>`,
+  enonce: R`<p>Un condensateur <span data-k="decharge">initialement déchargé</span>, de capacité $C = 100\ \mathrm{nF}$, est chargé à travers une résistance $R = 10\ \mathrm{k}\Omega$ par un générateur de tension constante $E$. Établir $u_C(t)$, puis le temps au bout duquel $u_C$ atteint $99\,\%$ de $E$.</p>`,
   decode: {
-    donnees: [R`$C = 100\ \mathrm{nF} = 10^{-7}\ \mathrm F$`, R`$R = 10\ \mathrm{k\Omega} = 10^{4}\ \Omega$`, R`Tension $E$ constante, interrupteur fermé à $t = 0$.`],
+    donnees: [R`$C = 100\ \mathrm{nF} = 10^{-7}\ \mathrm F$`, R`$R = 10\ \mathrm{k}\Omega = 10^{4}\ \Omega$`, R`Tension $E$ constante, interrupteur fermé à $t = 0$.`],
     but: R`La loi $u_C(t)$, puis l'instant où $u_C = 0{,}99\,E$.`,
     cles: { decharge: R`À $t=0$, $u_C(0) = 0$. C'est la condition initiale.` }
   },

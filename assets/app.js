@@ -212,7 +212,7 @@ function exercisePage(eid) {
       ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}
     </section>
     ${e.viz ? `<section class="panelbox" aria-labelledby="h-viz"><h2 id="h-viz">${e.viz.title || "Visualiser"}</h2><div id="viz"></div></section>` : ""}
-    <section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas</h2><div id="player" class="player"></div></section>
+    <section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download>${I.dl} Télécharger le corrigé PDF</a>` : ""}</h2><div id="player" class="player"></div></section>
     ${others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : ""}
   </div></div>`;
 }
@@ -352,6 +352,28 @@ function bindKeys(root, ex) {
   });
 }
 
+/* Rédaction complète d'un corrigé, et sa vue en grand */
+function redaction(e) {
+  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${esc(st.t)}</b></p>${st.b}`).join("");
+}
+let bigReturn = null;
+function openBig(e) {
+  closeBig(true); closeTip();
+  bigReturn = document.activeElement;
+  const ov = document.createElement("div"); ov.className = "bigread"; ov.id = "bigread"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "big-t");
+  ov.innerHTML = `<div class="big-bar"><span id="big-t">${esc(e.title)}</span>${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" href="pdf/corrige-${e.id}.pdf" download>${I.dl} PDF</a>` : ""}<button class="iconbtn" type="button" data-close aria-label="Fermer">${I.close}</button></div>
+    <div class="big-body"><div class="big-col prose enonce"><h2>Énoncé</h2>${e.enonce}<h2>Corrigé</h2>${redaction(e)}<div class="bilan" style="margin-top:28px"><div class="trap"><h4>Le piège</h4>${e.piege}</div><div class="meth"><h4>La méthode</h4>${e.methode}</div></div></div></div>`;
+  document.body.appendChild(ov); document.body.style.overflow = "hidden";
+  $("[data-close]", ov).addEventListener("click", () => closeBig());
+  $("[data-close]", ov).focus();
+  bindKeys(ov, e); typeset(ov);
+}
+function closeBig(silent) {
+  const ov = $("#bigread"); if (!ov) return;
+  ov.remove(); document.body.style.overflow = ""; closeTip();
+  if (!silent && bigReturn && bigReturn.focus) bigReturn.focus();
+}
+
 /* ---------- Corrigé pas à pas ---------- */
 let player = null;
 function mountPlayer(e, host) {
@@ -371,7 +393,7 @@ function mountPlayer(e, host) {
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
-            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${e.piege}</div><div class="meth"><h4>La méthode</h4>${e.methode}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}`
+            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${e.piege}</div><div class="meth"><h4>La méthode</h4>${e.methode}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
             : `<span class="count">Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${st.b}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
         </div>
       </div>
@@ -381,6 +403,7 @@ function mountPlayer(e, host) {
         <span class="hint"><kbd>←</kbd><kbd>→</kbd></span>
       </div>`;
     $$("[data-go]", host).forEach(b => b.addEventListener("click", () => show(+b.dataset.go, +b.dataset.go >= state.i ? 1 : -1)));
+    const big = $("[data-big]", host); if (big) big.addEventListener("click", () => openBig(e));
     $$("[data-step]", host).forEach(b => b.addEventListener("click", () => {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
@@ -400,8 +423,8 @@ function mountPlayer(e, host) {
   };
 }
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) closeRappel(); return; }
-  if (!player || $("#drawer") || e.altKey || e.ctrlKey || e.metaKey) return;
+  if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) closeRappel(); else if ($("#bigread")) closeBig(); return; }
+  if (!player || $("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey) return;
   const t = e.target; if (t && (t.matches("input,textarea,select") || t.isContentEditable)) return;
   if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); player.key(e.key); }
 });
@@ -553,7 +576,7 @@ function route(keepScroll) {
   const h = location.hash.slice(1) || "accueil";
   if (h !== lastRoute) { if (!/^c-/.test(h) || lastRoute.replace(/-\d+$/, "") !== h.replace(/-\d+$/, "")) chapTab = null; if (!/^s-/.test(h)) subjTab = "chapitres"; enonceMode = "interactif"; }
   lastRoute = h;
-  player = null; closeRappel(true); closeTip();
+  player = null; closeRappel(true); closeBig(true); closeTip();
   let html, m, ex = null;
   if (h === "accueil") html = home();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
