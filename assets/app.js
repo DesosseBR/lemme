@@ -197,7 +197,7 @@ function exercisePage(eid) {
   const d = e.decode || { donnees: [], but: "", cles: {} };
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year).slice(0, 2);
   return phead({ crumb: [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.name} · ${YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--yellow);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
+    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.name} · ${YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + `<div class="wrap"><div class="ex-layout">
     <section class="panelbox" aria-labelledby="h-en">
       <h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>

@@ -234,7 +234,7 @@ kbd{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 
 .excard .foot{display:flex;gap:12px;align-items:center;font-size:13.5px;color:var(--muted);margin-top:auto}
 .lvl{display:inline-flex;gap:1px;line-height:1}
 .lvl i{font-style:normal;font-size:14px;color:var(--line)}
-.lvl i.on{color:var(--yellow)}
+.lvl i.on{color:var(--ink)}
 
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .chip{border:1.5px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14.5px;transition:all var(--t-fast)}
