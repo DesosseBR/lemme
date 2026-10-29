@@ -1,6 +1,5 @@
-/* Chimie : programme, résumés, exercices corrigés, DM et questions de khôlle.
-   Pour ajouter un exercice : copier un objet de LEMME.exercises([...]) ci-dessous,
-   changer son id (unique), son chapitre (chap = index du chapitre, en partant de 0) et son contenu. */
+/* Contenu de la matière : programme, résumés, rappels de cours, exercices, problèmes, DM et khôlles.
+   Le format est décrit dans README.md. */
 
 LEMME.subject({
   id: "chimie", name: "Chimie", short: "Chimie", sym: "⇌",
@@ -37,17 +36,35 @@ LEMME.subject({
   }
 });
 
+
+LEMME.rappels({
+  "ordre1": { t: "Loi de vitesse d'ordre 1", b: R`Pour $A\to$ produits avec $v = k[A]$ : $[A](t) = [A]_0\,e^{-kt}$.` },
+  "demi-vie": { t: "Temps de demi-réaction", b: R`Pour un ordre 1 : $t_{1/2} = \dfrac{\ln2}{k}$, indépendant de la concentration initiale.` }
+});
+
 LEMME.exercises([
 {
-  id: "ex-cinetique", subj: "chimie", year: "mpsi", chap: 1, level: 1, time: "10 min",
-  title: "Temps de conversion pour une réaction d'ordre 1",
-  enonce: R`<p>Une réaction d'ordre 1 a un temps de demi-réaction $t_{1/2} = 20\ \mathrm{min}$. Combien de temps faut-il pour consommer $90\,\%$ du réactif ?</p>`,
+  id: "ex-cinetique", subj: "chimie", year: "mpsi", chap: 1, classique: true, level: 1, time: "10 min",
+  title: "Conversion à 90 % pour un ordre 1",
+  enonce: R`<p>Une réaction d'ordre 1 a un <span data-k="t12">temps de demi-réaction</span> $t_{1/2} = 20\ \mathrm{min}$. Combien de temps faut-il pour consommer $90\,\%$ du réactif ?</p>`,
+  decode: {
+    donnees: [R`Ordre 1 et $t_{1/2} = 20\ \mathrm{min}$.`],
+    but: R`L'instant où il ne reste que $10\,\%$ du réactif.`,
+    cles: { t12: R`La durée au bout de laquelle la moitié du réactif a été consommée.` }
+  },
   steps: [
-    ["Constante de vitesse", R`$$k = \frac{\ln2}{t_{1/2}} \approx 3{,}47\times10^{-2}\ \mathrm{min^{-1}}.$$`],
-    ["Loi de vitesse intégrée", R`<p>$[A] = [A]_0e^{-kt}$. Il reste $10\,\%$ quand $e^{-kt} = 0{,}1$, soit $t = \dfrac{\ln 10}{k}$.</p>`],
-    ["Résultat", R`$$t = t_{1/2}\,\frac{\ln10}{\ln2} \approx 20\times3{,}32 \approx 66\ \mathrm{min}.$$`]
+    { t: "Constante de vitesse", b: R`$$k = \frac{\ln2}{t_{1/2}} \approx 3{,}47\times10^{-2}\ \mathrm{min^{-1}}.$$`, rappels: ["demi-vie"] },
+    { t: "Loi intégrée", b: R`<p>$[A] = [A]_0e^{-kt}$. Il reste $10\,\%$ quand $e^{-kt} = 0{,}1$, soit $t = \dfrac{\ln10}{k}$.</p>`, rappels: ["ordre1"] },
+    { t: "Résultat", b: R`$$t = t_{1/2}\,\frac{\ln10}{\ln2} \approx 20\times3{,}32 \approx 66\ \mathrm{min}.$$` }
   ],
-  piege: R`Croire que $90\,\%$ prennent $1{,}8$ fois $t_{1/2}$ : la décroissance est exponentielle, pas linéaire.`,
-  methode: R`Pour un ordre 1, raisonne en nombre de demi-vies : $90\,\%$ consommés correspond à environ $3{,}3$ demi-vies.`
+  piege: R`Croire que $90\,\%$ prennent $1{,}8\,t_{1/2}$ : la décroissance est exponentielle, pas linéaire.`,
+  methode: R`Raisonne en demi-vies : $90\,\%$ consommés correspondent à environ $3{,}3$ demi-vies.`,
+  viz: {
+    type: "plot", title: "Chaque demi-vie divise la quantité restante par deux", x: [0, 150], y: [0, 1.05], xlabel: "t (min)", ylabel: "[A] / [A]₀",
+    params: [{ k: "h", label: "Demi-vie t½", min: 5, max: 60, step: 1, v: 20, unit: "min" }],
+    curves: [{ label: "[A] / [A]₀", f: (t, p) => Math.exp(-t * Math.LN2 / p.h) }],
+    hlines: [{ y: () => 0.1, label: "10 % restant" }],
+    vlines: [{ x: p => p.h * Math.LN10 / Math.LN2, label: "90 % consommés" }]
+  }
 }
 ]);

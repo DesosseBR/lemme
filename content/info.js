@@ -1,6 +1,5 @@
-/* Informatique : programme, résumés, exercices corrigés, DM et questions de khôlle.
-   Pour ajouter un exercice : copier un objet de LEMME.exercises([...]) ci-dessous,
-   changer son id (unique), son chapitre (chap = index du chapitre, en partant de 0) et son contenu. */
+/* Contenu de la matière : programme, résumés, rappels de cours, exercices, problèmes, DM et khôlles.
+   Le format est décrit dans README.md. */
 
 LEMME.subject({
   id: "info", name: "Informatique", short: "Info", sym: "λ",
@@ -28,13 +27,25 @@ LEMME.subject({
   }
 });
 
+
+LEMME.rappels({
+  "invariant": { t: "Invariant de boucle", b: R`Une propriété vraie avant la boucle et conservée par chaque tour. À la sortie, elle prouve la correction de l'algorithme.` },
+  "variant": { t: "Variant de boucle", b: R`Un entier positif qui décroît strictement à chaque tour. Son existence prouve que la boucle termine.` },
+  "complexite-log": { t: "Complexité logarithmique", b: R`Si la taille du problème est au moins divisée par $2$ à chaque étape, le nombre d'étapes est au plus $\lfloor\log_2n\rfloor+1$, soit $O(\log n)$.` }
+});
+
 LEMME.exercises([
 {
-  id: "ex-dicho", subj: "info", year: "mpsi", chap: 3, level: 1, time: "15 min",
-  title: "Recherche dichotomique : code, preuve, complexité",
-  enonce: R`<p>Écrire une fonction <code>appartient(L, x)</code> qui teste si <code>x</code> est dans la liste triée <code>L</code> par dichotomie. Prouver sa terminaison et donner sa complexité.</p>`,
+  id: "ex-dicho", subj: "info", year: "mpsi", chap: 3, classique: true, level: 1, time: "15 min",
+  title: "Recherche dichotomique",
+  enonce: R`<p>Écrire une fonction <code>appartient(L, x)</code> qui teste si <code>x</code> est dans la liste <span data-k="triee">triée</span> <code>L</code> par dichotomie. Prouver sa terminaison et donner sa complexité.</p>`,
+  decode: {
+    donnees: [R`Une liste <code>L</code> triée dans l'ordre croissant, de longueur $n$.`],
+    but: R`Un code correct, une preuve de terminaison, une complexité.`,
+    cles: { triee: R`<code>L[0] &lt;= L[1] &lt;= … &lt;= L[n-1]</code>. C'est ce qui permet d'éliminer une moitié à chaque tour.` }
+  },
   steps: [
-    ["Code", R`<pre><code>def appartient(L, x):
+    { t: "Le code", b: R`<pre><code>def appartient(L, x):
     g, d = 0, len(L) - 1
     while g &lt;= d:
         m = (g + d) // 2
@@ -44,12 +55,13 @@ LEMME.exercises([
             g = m + 1
         else:
             d = m - 1
-    return False</code></pre>`],
-    ["Invariant", R`<p>Si $x$ est dans $L$, alors il est dans $L[g..d]$. C'est vrai au départ et chaque mise à jour l'élimine seulement d'une zone où il ne peut pas être, car $L$ est triée.</p>`],
-    ["Terminaison", R`<p>Le variant $d-g+1$ est un entier positif qui décroît strictement à chaque tour.</p>`],
-    ["Complexité", R`<p>La taille de la zone est au moins divisée par $2$ à chaque tour : au plus $\lfloor\log_2 n\rfloor+1$ tours, soit $O(\log n)$.</p>`]
+    return False</code></pre>` },
+    { t: "Invariant", b: R`<p>Si <code>x</code> est dans <code>L</code>, alors il est dans <code>L[g..d]</code>. Chaque mise à jour n'écarte qu'une zone où <code>x</code> ne peut pas être, car <code>L</code> est triée.</p>`, rappels: ["invariant"] },
+    { t: "Terminaison", b: R`<p>$d-g+1$ est un entier positif tant que la boucle tourne, et il décroît strictement à chaque tour.</p>`, rappels: ["variant"] },
+    { t: "Complexité", b: R`<p>La zone de recherche est au moins divisée par $2$ à chaque tour : au plus $\lfloor\log_2n\rfloor+1$ tours, soit $O(\log n)$.</p>`, rappels: ["complexite-log"] }
   ],
   piege: R`Écrire <code>g = m</code> au lieu de <code>g = m + 1</code> : la boucle peut ne jamais terminer.`,
-  methode: R`Pour toute boucle <code>while</code>, donne un variant (terminaison) et un invariant (correction). C'est attendu à l'écrit.`
+  methode: R`Pour toute boucle <code>while</code>, donne un variant pour la terminaison et un invariant pour la correction.`,
+  viz: { type: "dicho", title: "Lance la recherche et suis g, m et d tour par tour" }
 }
 ]);

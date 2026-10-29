@@ -1,398 +1,26 @@
-<title>Lemme</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lemme · Prépa MPSI et MP</title>
+<meta name="description" content="Cours, résumés et corrigés interactifs pour la prépa MPSI et MP : maths, physique, chimie, SI, informatique et anglais.">
+<meta name="theme-color" content="#0F2557">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='9' fill='%230F2557'/%3E%3Crect x='7' y='20' width='20' height='6' rx='2' fill='%23FFC93C'/%3E%3Ctext x='17' y='22' font-family='Arial' font-weight='800' font-size='19' fill='%23F2F5FF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>
-/* Layout : bandeaux bleu marine qui encadrent des pages claires de poly ; le jaune est un surligneur, il marque seulement ce qui compte. */
-:root{
-  --navy:#0F2557;
-  --navy-deep:#0A1A40;
-  --navy-line:#24396F;
-  --on-navy:#F2F5FF;
-  --on-navy-muted:#AEB9DA;
-  --yellow:#FFC93C;
-  --yellow-hover:#FFD566;
-  --on-yellow:#101935;
-  --yellow-soft:#FFF4CF;
-  --bg:#F5F7FC;
-  --surface:#FFFFFF;
-  --ink:#101935;
-  --muted:#586283;
-  --line:#DCE2EF;
-  --danger:#C2362E;
-  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --f-read:"Literata", "Iowan Old Style", "Georgia", serif;
-  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --r:10px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --navy:#0E1D49; --navy-deep:#081236; --navy-line:#263B76; --on-navy:#F2F5FF; --on-navy-muted:#AEB9DA;
-    --yellow:#FFD05A; --yellow-hover:#FFDB80; --on-yellow:#101935; --yellow-soft:#3A3315;
-    --bg:#0B1430; --surface:#121E45; --ink:#E9EEFB; --muted:#9DA9CB; --line:#24315C; --danger:#FF7A6E;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --navy:#0E1D49; --navy-deep:#081236; --navy-line:#263B76; --on-navy:#F2F5FF; --on-navy-muted:#AEB9DA;
-  --yellow:#FFD05A; --yellow-hover:#FFDB80; --on-yellow:#101935; --yellow-soft:#3A3315;
-  --bg:#0B1430; --surface:#121E45; --ink:#E9EEFB; --muted:#9DA9CB; --line:#24315C; --danger:#FF7A6E;
-  color-scheme:dark;
-}
-
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-display);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-button{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;border-radius:4px}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
-
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-mark,.hl{background:linear-gradient(transparent 52%, var(--yellow) 52%, var(--yellow) 92%, transparent 92%);color:inherit;padding:0 .08em}
-
-/* ---------- Bandeau du haut ---------- */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
-.promo{background:var(--navy-deep);color:var(--on-navy)}
-.promo .wrap{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;padding-block:9px;font-size:14px;text-align:center}
-.promo a{color:var(--yellow);font-weight:700;text-decoration:none}
-.promo a:hover{text-decoration:underline}
-
-/* ---------- En-tête ---------- */
-.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--line)}
-.head-row{display:flex;align-items:center;gap:20px;padding-block:14px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo-mark{width:36px;height:36px;border-radius:9px;background:var(--navy);display:grid;place-items:center;position:relative;overflow:hidden}
-.logo-mark::after{content:"";position:absolute;left:7px;right:7px;bottom:9px;height:7px;background:var(--yellow);border-radius:2px}
-.logo-mark span{position:relative;z-index:1;color:var(--on-navy);font-weight:800;font-size:20px;line-height:1;margin-top:-4px}
-.logo b{font-weight:800;font-size:26px;letter-spacing:-.03em}
-
-.yearswitch{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px;flex-shrink:0}
-.yearswitch button{border:0;background:transparent;padding:8px 16px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;color:var(--muted)}
-.yearswitch button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy)}
-
-.mainnav{display:flex;align-items:center;gap:4px;margin-left:auto}
-.navbtn{display:flex;align-items:center;gap:6px;border:0;background:transparent;padding:10px 12px;border-radius:8px;font-weight:600;font-size:15.5px;cursor:pointer;text-decoration:none;white-space:nowrap}
-.navbtn:hover,.navbtn[aria-expanded="true"]{background:var(--bg)}
-.navbtn svg{width:12px;height:12px;transition:transform .2s ease}
-.navbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
-.iconbtn{width:42px;height:42px;display:grid;place-items:center;border:0;background:transparent;border-radius:8px;cursor:pointer}
-.iconbtn:hover{background:var(--bg)}
-.iconbtn svg{width:20px;height:20px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--f-display);font-weight:700;font-size:15px;line-height:1;padding:13px 20px;border-radius:8px;border:2px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s ease, transform .15s ease}
-.btn:active{transform:translateY(1px)}
-.btn-yellow{background:var(--yellow);color:var(--on-yellow)}
-.btn-yellow:hover{background:var(--yellow-hover)}
-.btn-navy{background:var(--navy);color:var(--on-navy)}
-.btn-line{border-color:currentColor;background:transparent}
-.btn-sm{padding:10px 14px;font-size:14px}
-.burger{display:none}
-
-/* Menus déroulants */
-.dd{position:relative}
-.panel{position:absolute;top:calc(100% + 10px);left:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 48px -24px rgba(10,26,64,.35);padding:10px;min-width:280px;z-index:55}
-.panel a{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:9px;text-decoration:none}
-.panel a:hover{background:var(--bg)}
-.panel .sym{width:36px;height:36px;border-radius:8px;background:var(--yellow-soft);display:grid;place-items:center;font-family:var(--f-read);font-size:18px;flex-shrink:0;color:var(--ink)}
-.panel b{display:block;font-size:15px}
-.panel small{color:var(--muted);font-size:13px}
-.panel.mega{display:grid;grid-template-columns:repeat(2,minmax(240px,1fr));gap:2px;min-width:560px}
-
-/* Recherche */
-.searchbar{border-top:1px solid var(--line);background:var(--surface)}
-.searchbar .wrap{padding-block:12px}
-.search{position:relative}
-.search input{width:100%;font:inherit;font-size:16px;padding:13px 16px 13px 44px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
-.search input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px var(--yellow-soft)}
-.search .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
-.results{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 24px 48px -24px rgba(10,26,64,.35);max-height:380px;overflow:auto;z-index:56;padding:6px}
-.results a{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:8px;text-decoration:none}
-.results a:hover,.results a:focus{background:var(--bg)}
-.results small{color:var(--muted);flex-shrink:0}
-.results p{margin:0;padding:12px;color:var(--muted)}
-
-@media (max-width:1060px){
-  .mainnav{display:none}
-  .burger{display:grid;margin-left:auto}
-  .mainnav.open{display:flex;flex-direction:column;align-items:stretch;position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);padding:12px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px));max-height:80vh;overflow:auto;gap:2px}
-  .mainnav.open .panel{position:static;box-shadow:none;border:0;min-width:0;padding:0 0 6px 8px}
-  .mainnav.open .panel.mega{grid-template-columns:1fr;min-width:0}
-  .mainnav.open .btn{margin-top:8px}
-}
-@media (max-width:560px){
-  .head-row{gap:10px}
-  .logo b{font-size:22px}
-  .yearswitch button{padding:7px 11px}
-}
-
-/* ---------- Hero ---------- */
-.hero{background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:64px 72px;position:relative}
-.hero h1{font-weight:800;font-size:clamp(38px,5.6vw,68px);line-height:1;letter-spacing:-.035em;margin:0 0 20px;text-wrap:balance}
-.hero h1 .hl{background:linear-gradient(transparent 58%, var(--yellow) 58%, var(--yellow) 90%, transparent 90%);color:var(--on-navy)}
-.hero p.lede{font-family:var(--f-read);font-size:19px;line-height:1.6;color:var(--on-navy-muted);max-width:32em;margin:0 0 28px}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
-.hero .btn-line{color:var(--on-navy)}
-.hero-facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;padding-top:22px;border-top:1px solid var(--navy-line)}
-.hero-facts div{display:flex;flex-direction:column}
-.hero-facts b{font-size:26px;font-weight:800;color:var(--yellow);font-variant-numeric:tabular-nums;line-height:1.1}
-.hero-facts span{font-size:14px;color:var(--on-navy-muted)}
-.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
-.hero .eyebrow{color:var(--yellow);margin-bottom:16px}
-.hero-bg{position:absolute;inset:0;pointer-events:none;opacity:.5}
-.hero-bg span{position:absolute;font-family:var(--f-read);font-style:italic;color:var(--navy-line);white-space:nowrap;user-select:none}
-
-/* Fiche de poly dans le hero */
-.fiche{background:var(--surface);color:var(--ink);border-radius:14px;padding:26px 26px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);transform:rotate(1.5deg);position:relative;min-width:0}
-.fiche::before{content:"";position:absolute;inset:auto 18px -10px 18px;height:20px;background:var(--surface);opacity:.5;border-radius:0 0 14px 14px;transform:rotate(-2.5deg);z-index:-1}
-.fiche .thm{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.chip.y{background:var(--yellow);border-color:var(--yellow);color:var(--on-yellow);font-weight:500}
-.chip.n{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
-.fiche h3{margin:0 0 8px;font-size:19px;font-weight:700}
-.fiche .math-box{font-family:var(--f-read);font-size:16px;line-height:1.7;overflow-x:auto}
-.fiche .note{margin-top:14px;padding:12px 14px;border-radius:9px;background:var(--yellow-soft);font-family:var(--f-read);font-size:14.5px}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-block:44px 52px}.fiche{transform:none}}
-
-/* ---------- Sections ---------- */
-.sec{padding-block:80px}
-.sec.tight{padding-top:0}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
-.sec-head h2{font-weight:800;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
-.sec-head p{margin:10px 0 0;color:var(--muted);font-family:var(--f-read);max-width:40em}
-.sec-head .eyebrow{color:var(--muted)}
-@media (max-width:700px){.sec{padding-block:52px}}
-
-/* Grille des matières */
-.subjects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-@media (max-width:900px){.subjects{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.subjects{grid-template-columns:1fr}}
-.subj{display:flex;flex-direction:column;gap:14px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:14px;text-decoration:none;transition:border-color .15s ease, transform .15s ease;min-width:0}
-.subj:hover{border-color:var(--navy);transform:translateY(-2px)}
-.subj-top{display:flex;justify-content:space-between;align-items:center}
-.subj .sym{width:48px;height:48px;border-radius:12px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-family:var(--f-read);font-size:24px}
-.subj h3{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
-.subj p{margin:0;color:var(--muted);font-family:var(--f-read);font-size:15px}
-.subj .counts{display:flex;gap:16px;font-size:14px;color:var(--muted);margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
-.subj .counts b{color:var(--ink)}
-.arrow{width:18px;height:18px;color:var(--muted)}
-
-/* Bloc exercice mis en avant */
-.feature{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
-@media (max-width:900px){.feature{grid-template-columns:1fr;gap:24px}}
-
-/* Rubriques entraînement */
-.tracks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-@media (max-width:1000px){.tracks{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:640px){.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.track{display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:14px;background:var(--navy);color:var(--on-navy);text-decoration:none;min-height:170px;transition:transform .15s ease}
-.track:hover{transform:translateY(-2px)}
-.track b{font-size:20px;font-weight:800;letter-spacing:-.01em}
-.track span{color:var(--on-navy-muted);font-size:14.5px;font-family:var(--f-read)}
-.track i{margin-top:auto;font-style:normal;color:var(--yellow);font-weight:700;font-size:14px}
-
-/* Newsletter (split) */
-.split{display:grid;grid-template-columns:1fr 1fr;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
-@media (max-width:860px){.split{grid-template-columns:1fr}}
-.split-art{background:var(--navy);position:relative;min-height:340px;overflow:hidden}
-.split-art .card{position:absolute;background:var(--surface);color:var(--ink);border-radius:12px;padding:16px 18px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);font-family:var(--f-read);font-size:14px;width:min(78%,320px)}
-.split-art .card .chip{margin-bottom:8px}
-.split-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0}
-@media (max-width:560px){.split-body{padding:28px 20px}}
-.split-body h2{font-size:clamp(28px,3vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
-.split-body p{margin:0;color:var(--muted);font-family:var(--f-read)}
-
-/* Formulaire */
-form.wl{display:flex;flex-direction:column;gap:14px}
-.field{display:flex;flex-direction:column;gap:6px;min-width:0}
-.field label,.field legend{font-weight:700;font-size:14.5px}
-.inrow{display:flex;gap:10px;flex-wrap:wrap}
-.inrow > *{flex:1 1 200px}
-.field input,.field select{font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);width:100%}
-.field input:focus,.field select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px var(--yellow-soft)}
-fieldset.field{border:0;padding:0;margin:0}
-.seg{display:flex;flex-wrap:wrap;gap:8px}
-.seg label{font-weight:500}
-.seg input{position:absolute;opacity:0;pointer-events:none}
-.seg span{display:inline-block;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;cursor:pointer;font-size:14.5px;background:var(--bg)}
-.seg input:checked + span{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
-.seg input:focus-visible + span{outline:3px solid var(--yellow);outline-offset:2px}
-.fine{font-size:13px;color:var(--muted);margin:0}
-.err{color:var(--danger);font-size:14px;margin:0;min-height:1.3em}
-.ok{padding:18px 20px;border-radius:12px;background:var(--yellow-soft)}
-.ok b{display:block;font-size:18px}
-.ok p{margin:4px 0 0}
-
-/* ---------- Pages de contenu ---------- */
-.pagehead{background:var(--navy);color:var(--on-navy)}
-.pagehead .wrap{padding-block:34px 38px}
-.crumbs{display:flex;flex-wrap:wrap;gap:6px 10px;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--on-navy-muted);margin-bottom:16px}
-.crumbs a{text-decoration:none}
-.crumbs a:hover{color:var(--yellow)}
-.crumbs span[aria-hidden]{opacity:.5}
-.pagehead h1{font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1.03;letter-spacing:-.035em;margin:0;text-wrap:balance}
-.pagehead p{font-family:var(--f-read);color:var(--on-navy-muted);margin:14px 0 0;max-width:44em;font-size:17px}
-.pagehead .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.pagehead .chip{background:transparent;border-color:var(--navy-line);color:var(--on-navy-muted)}
-.pagehead .chip.y{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}
-.tabs{display:flex;gap:4px;margin-top:24px}
-.tabs a{padding:10px 18px;border-radius:8px 8px 0 0;text-decoration:none;font-weight:700;color:var(--on-navy-muted);background:transparent}
-.tabs a[aria-current="page"]{background:var(--bg);color:var(--ink)}
-.pagehead.has-tabs .wrap{padding-bottom:0}
-
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;padding-block:44px 80px}
-@media (max-width:960px){.layout{grid-template-columns:1fr}}
-.side{display:flex;flex-direction:column;gap:16px;min-width:0}
-.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
-.box h3{margin:0 0 10px;font-size:16px;font-weight:700}
-.box p{margin:0 0 12px;font-family:var(--f-read);font-size:15px;color:var(--muted)}
-.box.navy{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
-.box.navy p{color:var(--on-navy-muted)}
-.sidelist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
-.sidelist a{display:flex;gap:10px;padding:7px 8px;border-radius:7px;text-decoration:none;font-size:14.5px}
-.sidelist a:hover{background:var(--bg)}
-.sidelist a[aria-current="page"]{background:var(--yellow-soft);font-weight:700}
-.sidelist .n{font-family:var(--f-mono);font-size:12px;color:var(--muted);width:22px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
-
-/* Liste de chapitres */
-.chapters{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.chapters li + li{border-top:1px solid var(--line)}
-.chapters a{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 20px;text-decoration:none}
-.chapters a:hover{background:var(--bg)}
-.chapters .num{font-family:var(--f-mono);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
-.chapters h3{margin:0;font-size:18px;font-weight:700;letter-spacing:-.01em}
-.chapters p{margin:3px 0 0;font-family:var(--f-read);color:var(--muted);font-size:14.5px}
-.chapters .badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-@media (max-width:640px){.chapters a{grid-template-columns:36px minmax(0,1fr)}.chapters .badges{grid-column:2;justify-content:flex-start}}
-
-/* Article / prose */
-.prose{font-family:var(--f-read);font-size:17.5px;line-height:1.75;min-width:0}
-.prose h2{font-family:var(--f-display);font-weight:800;font-size:28px;letter-spacing:-.025em;line-height:1.15;margin:44px 0 14px}
-.prose h2:first-child{margin-top:0}
-.prose h3{font-family:var(--f-display);font-weight:700;font-size:20px;margin:28px 0 8px}
-.prose p{margin:0 0 16px;max-width:68ch}
-.prose ul,.prose ol{margin:0 0 16px;padding-left:1.3em;max-width:68ch}
-.prose li{margin-bottom:8px}
-.prose code{font-family:var(--f-mono);font-size:.86em;background:var(--bg);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
-.prose pre{background:var(--navy-deep);color:var(--on-navy);padding:18px 20px;border-radius:12px;overflow-x:auto;font-size:14.5px;line-height:1.6}
-.prose pre code{background:none;border:0;padding:0;color:inherit}
-.prose a{color:inherit;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
-.mjx-scroll,.prose mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
-mjx-container{font-size:108%!important}
-
-.resume{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--yellow);border-radius:12px;padding:22px 26px}
-.resume ul{margin:0;padding-left:1.1em}
-.resume li{margin-bottom:12px}
-.resume li:last-child{margin-bottom:0}
-.todo{padding:18px 20px;border-radius:12px;background:var(--bg);border:1.5px dashed var(--line);font-family:var(--f-display);font-size:15px;color:var(--muted)}
-.notions{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
-.notions span{font-family:var(--f-display);font-size:14px;padding:6px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
-
-/* Cartes exercice */
-.exlist{display:grid;gap:12px}
-.excard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:12px;text-decoration:none;font-family:var(--f-display)}
-.excard:hover{border-color:var(--navy)}
-.excard b{font-size:17px;display:block}
-.excard small{color:var(--muted);font-size:13.5px}
-.excard .badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-@media (max-width:560px){.excard{grid-template-columns:1fr}.excard .badges{justify-content:flex-start}}
-.stars{letter-spacing:2px;color:var(--yellow)}
-
-.enonce{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 28px}
-.enonce > .eyebrow{color:var(--muted);margin-bottom:10px}
-@media (max-width:560px){.enonce,.resume{padding:18px}}
-.reveal{margin:24px 0}
-.steps{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
-.steps li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:20px 24px;margin:0}
-.steps li + li{border-top:1px solid var(--line)}
-.steps .lab{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:5px}
-.steps .lab b{display:block;color:var(--ink);font-size:20px;font-family:var(--f-display);letter-spacing:0;margin-bottom:2px}
-.steps .body p:last-child{margin-bottom:0}
-@media (max-width:640px){.steps li{grid-template-columns:1fr;gap:4px;padding:18px}}
-.callouts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-@media (max-width:700px){.callouts{grid-template-columns:1fr}}
-.callout{padding:18px 20px;border-radius:12px;font-size:16px;line-height:1.65}
-.callout b{display:block;font-family:var(--f-display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.callout.trap{background:var(--yellow-soft)}
-.callout.meth{background:var(--navy);color:var(--on-navy)}
-.callout.meth b{color:var(--yellow)}
-
-.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;flex-wrap:wrap}
-.pager a{flex:1 1 240px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:var(--surface);font-family:var(--f-display)}
-.pager a:hover{border-color:var(--navy)}
-.pager small{display:block;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
-.pager b{font-size:16px}
-.pager .next{text-align:right}
-
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.filters button{border:1.5px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14.5px}
-.filters button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
-
-.cards2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:700px){.cards2{grid-template-columns:1fr}}
-.infocard{padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-family:var(--f-display)}
-.infocard h3{margin:0 0 6px;font-size:18px}
-.infocard p{margin:0;color:var(--muted);font-family:var(--f-read);font-size:15.5px}
-.timeline{list-style:none;padding:0;margin:0 0 16px;border-left:3px solid var(--yellow);font-family:var(--f-display)}
-.timeline li{position:relative;padding:0 0 18px 22px;margin:0}
-.timeline li::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--navy);border:3px solid var(--bg)}
-.timeline b{display:block;font-size:16px}
-.timeline span{color:var(--muted);font-family:var(--f-read);font-size:15.5px}
-.qlist{counter-reset:q;list-style:none;padding:0;margin:0 0 20px}
-.qlist li{counter-increment:q;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;padding:12px 0;border-bottom:1px solid var(--line);margin:0}
-.qlist li::before{content:counter(q, decimal-leading-zero);font-family:var(--f-mono);font-size:13px;color:var(--muted);padding-top:4px}
-
-/* Offres */
-.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:880px}
-@media (max-width:700px){.plans{grid-template-columns:1fr}}
-.plan{display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:16px;background:var(--surface);border:1.5px solid var(--line);position:relative}
-.plan.main{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
-.plan h3{margin:0;font-family:var(--f-mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
-.plan .price{font-size:54px;font-weight:800;letter-spacing:-.04em;line-height:1;display:flex;align-items:baseline;gap:8px}
-.plan .price small{font-size:16px;font-weight:500;letter-spacing:0;color:var(--muted)}
-.plan.main .price small{color:var(--on-navy-muted)}
-.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-family:var(--f-read)}
-.plan li{display:grid;grid-template-columns:22px 1fr;gap:8px}
-.plan li::before{content:"";width:16px;height:16px;margin-top:5px;border-radius:4px;background:var(--yellow)}
-.plan .fine{margin-top:auto}
-.plan.main .fine{color:var(--on-navy-muted)}
-.plan .flag{position:absolute;top:-13px;right:20px;background:var(--yellow);color:var(--on-yellow);font-weight:800;font-size:13px;padding:5px 10px;border-radius:6px}
-
-/* Panneau propriétaire */
-.owner{margin-top:28px}
-.tbl{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums;font-family:var(--f-display)}
-th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font-family:var(--f-mono);font-size:11.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-
-/* ---------- Pied de page ---------- */
-footer.site{background:var(--navy-deep);color:var(--on-navy);margin-top:0}
-.foot{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding-block:60px 40px}
-@media (max-width:900px){.foot{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.foot{grid-template-columns:1fr}}
-.foot h4{margin:0 0 14px;font-size:15px}
-.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.foot a{text-decoration:none;color:var(--on-navy-muted)}
-.foot a:hover{color:var(--yellow)}
-.foot .tag{font-family:var(--f-read);font-size:19px;line-height:1.45;margin:16px 0 10px;max-width:22em}
-.foot .small{color:var(--on-navy-muted);font-size:14px;margin:0}
-.foot .logo-mark{background:var(--yellow)}
-.foot .logo-mark span{color:var(--navy-deep)}
-.foot .logo-mark::after{background:var(--navy-deep)}
-.foot-bottom{border-top:1px solid var(--navy-line)}
-.foot-bottom .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:20px;font-size:14px;color:var(--on-navy-muted)}
-
-[hidden]{display:none!important}
-</style>
-
-<div class="promo"><div class="wrap"><span>Cours, résumés et exercices corrigés de MPSI et MP, en accès libre.</span><a href="#exercices">Voir les exercices →</a></div></div>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
 
 <header class="site-head">
   <div class="wrap head-row">
-    <a class="logo" href="#accueil" aria-label="Lemme, accueil"><span class="logo-mark" aria-hidden="true"><span>L</span></span><b>Lemme</b></a>
-    <div class="yearswitch" role="group" aria-label="Choisir l'année">
-      <button type="button" id="yr-mpsi" data-year="mpsi" aria-pressed="true">MPSI</button>
-      <button type="button" id="yr-mp" data-year="mp" aria-pressed="false">MP</button>
+    <a class="logo" href="#accueil" aria-label="Lemme, accueil"><span class="logo-mark" aria-hidden="true"></span><b>Lemme</b></a>
+    <div class="yearswitch" role="group" aria-label="Année"><span class="pill" aria-hidden="true"></span>
+      <button type="button" data-year="mpsi" aria-pressed="true">MPSI</button>
+      <button type="button" data-year="mp" aria-pressed="false">MP</button>
     </div>
     <nav class="mainnav" id="mainnav" aria-label="Navigation principale">
       <div class="dd">
@@ -402,33 +30,30 @@ footer.site{background:var(--navy-deep);color:var(--on-navy);margin-top:0}
       <div class="dd">
         <button class="navbtn" type="button" aria-expanded="false" aria-controls="dd-train">S'entraîner <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="panel" id="dd-train" hidden>
-          <a href="#exercices"><span class="sym">✎</span><span><b>Exercices corrigés</b><small>Toutes matières, par chapitre</small></span></a>
-          <a href="#dm"><span class="sym">DM</span><span><b>Devoirs maison</b><small>Sujets complets à rendre</small></span></a>
-          <a href="#ds"><span class="sym">DS</span><span><b>Devoirs surveillés</b><small>Méthode et gestion du temps</small></span></a>
-          <a href="#kholles"><span class="sym">K</span><span><b>Khôlles</b><small>Questions de cours à maîtriser</small></span></a>
+          <a href="#exercices"><span class="ico">Ex</span>Exercices corrigés</a>
+          <a href="#classiques"><span class="ico">★</span>Classiques</a>
+          <a href="#dm"><span class="ico">DM</span>Devoirs maison</a>
+          <a href="#ds"><span class="ico">DS</span>Devoirs surveillés</a>
+          <a href="#kholles"><span class="ico">K</span>Khôlles</a>
         </div>
       </div>
       <div class="dd">
         <button class="navbtn" type="button" aria-expanded="false" aria-controls="dd-conc">Concours <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="panel" id="dd-conc" hidden>
-          <a href="#concours"><span class="sym">★</span><span><b>Préparation concours</b><small>Banques, calendrier, stratégie</small></span></a>
-          <a href="#oral"><span class="sym">◎</span><span><b>Oraux</b><small>Déroulé, attentes, conseils</small></span></a>
+          <a href="#concours"><span class="ico">C</span>Préparation concours</a>
+          <a href="#oral"><span class="ico">O</span>Oraux</a>
         </div>
       </div>
-            <button class="iconbtn" type="button" id="search-toggle" aria-label="Rechercher un chapitre" aria-expanded="false" aria-controls="searchbar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-      <a class="btn btn-yellow" href="#exercices">Exercices corrigés</a>
+      <button class="iconbtn" type="button" id="search-toggle" aria-label="Rechercher" aria-expanded="false" aria-controls="searchbar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     </nav>
-    <button class="iconbtn burger" type="button" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainnav"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <button class="iconbtn burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainnav"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="searchbar" id="searchbar" hidden>
-    <div class="wrap">
-      <div class="search">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <label for="q" class="sr" hidden>Rechercher</label>
-        <input id="q" type="search" placeholder="Un chapitre, une notion : réduction, Kepler, dichotomie…" autocomplete="off" aria-label="Rechercher un chapitre ou un exercice">
-        <div class="results" id="results" hidden></div>
-      </div>
-    </div>
+    <div class="wrap"><div class="search">
+      <svg class="lens" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Réduction, Kepler, dichotomie…" autocomplete="off" aria-label="Rechercher un chapitre ou un exercice">
+      <div class="results" id="results" hidden></div>
+    </div></div>
   </div>
 </header>
 
@@ -436,33 +61,23 @@ footer.site{background:var(--navy-deep);color:var(--on-navy);margin-top:0}
 
 <footer class="site">
   <div class="wrap foot">
-    <div>
-      <a class="logo" href="#accueil"><span class="logo-mark" aria-hidden="true"><span>L</span></span><b>Lemme</b></a>
-      <p class="tag">Des cours, des résumés et des corrigés détaillés pour réussir sa prépa MPSI et MP.</p>
-      <p class="small">Écrit par un ancien élève de MP. Projet indépendant, sans lien avec les concours cités.</p>
-    </div>
+    <div><a class="logo" href="#accueil"><span class="logo-mark" aria-hidden="true"></span><b>Lemme</b></a><p class="tagline">Cours, résumés et corrigés pas à pas pour la prépa MPSI et MP.</p></div>
     <div><h4>Matières</h4><ul id="foot-subj"></ul></div>
-    <div><h4>S'entraîner</h4><ul><li><a href="#exercices">Exercices corrigés</a></li><li><a href="#dm">Devoirs maison</a></li><li><a href="#ds">Devoirs surveillés</a></li><li><a href="#kholles">Khôlles</a></li></ul></div>
-    <div><h4>Concours</h4><ul><li><a href="#concours">Préparation concours</a></li><li><a href="#oral">Oraux</a></li><li><a href="#exercices">Tous les exercices</a></li></ul></div>
+    <div><h4>S'entraîner</h4><ul><li><a href="#exercices">Exercices corrigés</a></li><li><a href="#classiques">Classiques</a></li><li><a href="#dm">Devoirs maison</a></li><li><a href="#ds">Devoirs surveillés</a></li><li><a href="#kholles">Khôlles</a></li></ul></div>
+    <div><h4>Concours</h4><ul><li><a href="#concours">Préparation</a></li><li><a href="#oral">Oraux</a></li></ul></div>
   </div>
-  <div class="foot-bottom"><div class="wrap"><span>© 2026 Lemme</span><span>Contenu gratuit · nouvelles corrections chaque semaine</span></div></div>
+  <div class="foot-bottom"><div class="wrap"><span>© 2026 Lemme · Projet indépendant, sans lien avec les concours cités.</span><span id="credits"></span></div></div>
 </footer>
 
 <script>
 window.MathJax = {
   tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]], processEscapes: true },
   svg: { fontCache: "global" },
-  options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code", "input"] },
-  startup: { typeset: false, ready: () => { MathJax.startup.defaultReady(); window.__mj = true; typeset(); } }
+  options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code", "input", "canvas"] },
+  startup: { typeset: false, ready: () => { MathJax.startup.defaultReady(); MathJax.startup.promise.then(() => window.__lemmeTypeset && window.__lemmeTypeset()); } }
 };
-function typeset(){
-  if (!window.__mj || !window.MathJax || !MathJax.typesetPromise) return;
-  const el = document.getElementById("app");
-  try { MathJax.typesetClear([el]); } catch(e){}
-  MathJax.typesetPromise([el]).catch(()=>{});
-}
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+<script src="vendor/mathjax/tex-svg.js" defer></script>
 <script src="content/core.js"></script>
 <script src="content/maths.js"></script>
 <script src="content/physique.js"></script>
@@ -470,325 +85,7 @@ function typeset(){
 <script src="content/si.js"></script>
 <script src="content/info.js"></script>
 <script src="content/anglais.js"></script>
-<script>
-(function(){
-const { SUBJECTS, EXERCISES, DM, KHOLLES, BANKS } = window.LEMME;
-const YEARS = { mpsi: "MPSI", mp: "MP" };
-const app = document.getElementById("app");
-const sid = id => SUBJECTS.find(s => s.id === id);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
-const pad = n => String(n).padStart(2, "0");
-const arrow = `<svg class="arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const exFor = (s, y, c) => EXERCISES.filter(e => e.subj === s && e.year === y && (c === undefined || e.chap === c));
-const stars = n => `<span class="stars" aria-label="Difficulté ${n} sur 3">${"★".repeat(n)}<span style="opacity:.3">${"★".repeat(3-n)}</span></span>`;
-
-let year = "mpsi";
-try { const y = localStorage.getItem("lemme-year"); if (y === "mp" || y === "mpsi") year = y; } catch(e){}
-
-function setYear(y, rerender){
-  year = y;
-  try { localStorage.setItem("lemme-year", y); } catch(e){}
-  document.querySelectorAll(".yearswitch button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.year === y)));
-  if (rerender) route();
-}
-document.querySelectorAll(".yearswitch button").forEach(b => b.addEventListener("click", () => {
-  const h = location.hash.slice(1);
-  const m = h.match(/^c-([a-z]+)-(mpsi|mp)-\d+$/);
-  setYear(b.dataset.year, false);
-  if (m) location.hash = "s-" + m[1]; else route();
-}));
-
-/* ---------- Menus ---------- */
-const megaPanel = document.getElementById("dd-mat");
-megaPanel.innerHTML = SUBJECTS.map(s => `<a href="#s-${s.id}"><span class="sym">${s.sym}</span><span><b>${s.name}</b><small>${s.years.mpsi.length + s.years.mp.length} chapitres · MPSI et MP</small></span></a>`).join("");
-document.getElementById("foot-subj").innerHTML = SUBJECTS.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join("");
-
-const ddBtns = [...document.querySelectorAll(".dd > .navbtn")];
-function closeAll(except){ ddBtns.forEach(b => { if (b !== except){ b.setAttribute("aria-expanded","false"); document.getElementById(b.getAttribute("aria-controls")).hidden = true; } }); }
-ddBtns.forEach(b => b.addEventListener("click", e => {
-  e.stopPropagation();
-  const open = b.getAttribute("aria-expanded") === "true";
-  closeAll(b);
-  b.setAttribute("aria-expanded", String(!open));
-  document.getElementById(b.getAttribute("aria-controls")).hidden = open;
-}));
-document.addEventListener("click", e => { if (!e.target.closest(".dd")) closeAll(); if (!e.target.closest(".search")) document.getElementById("results").hidden = true; });
-document.addEventListener("keydown", e => { if (e.key === "Escape"){ closeAll(); document.getElementById("results").hidden = true; } });
-const nav = document.getElementById("mainnav"), burger = document.getElementById("burger");
-burger.addEventListener("click", () => { const o = nav.classList.toggle("open"); burger.setAttribute("aria-expanded", String(o)); });
-
-/* ---------- Recherche ---------- */
-const sbar = document.getElementById("searchbar"), stog = document.getElementById("search-toggle"), q = document.getElementById("q"), results = document.getElementById("results");
-stog.addEventListener("click", () => { const o = sbar.hidden; sbar.hidden = !o; stog.setAttribute("aria-expanded", String(o)); if (o) q.focus(); });
-const INDEX = [];
-SUBJECTS.forEach(s => ["mpsi","mp"].forEach(y => s.years[y].forEach((c, i) => INDEX.push({ href:`#c-${s.id}-${y}-${i}`, label:c.t, meta:`${s.short} · ${YEARS[y]}`, text:(c.t+" "+c.n+" "+s.name).toLowerCase() }))));
-EXERCISES.forEach(e => INDEX.push({ href:`#e-${e.id}`, label:e.title, meta:`Exercice · ${sid(e.subj).short} ${YEARS[e.year]}`, text:(e.title+" "+sid(e.subj).name).toLowerCase() }));
-const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-INDEX.forEach(x => x.n = norm(x.text));
-q.addEventListener("input", () => {
-  const v = norm(q.value.trim());
-  if (!v){ results.hidden = true; return; }
-  const hits = INDEX.filter(x => v.split(/\s+/).every(w => x.n.includes(w))).slice(0, 12);
-  results.innerHTML = hits.length ? hits.map(h => `<a href="${h.href}"><span>${esc(h.label)}</span><small>${h.meta}</small></a>`).join("") : `<p>Aucun résultat pour « ${esc(q.value)} ». Essaie un nom de chapitre, comme « séries » ou « induction ».</p>`;
-  results.hidden = false;
-});
-
-/* ---------- Composants ---------- */
-const pagehead = (crumbs, title, lede, extra = "") => `<section class="pagehead${extra.includes('class="tabs"') ? " has-tabs" : ""}"><div class="wrap"><nav class="crumbs" aria-label="Fil d'Ariane"><a href="#accueil">Accueil</a>${crumbs.map(c => `<span aria-hidden="true">/</span>${c[1] ? `<a href="${c[1]}">${c[0]}</a>` : `<span>${c[0]}</span>`}`).join("")}</nav><h1>${title}</h1>${lede ? `<p>${lede}</p>` : ""}${extra}</div></section>`;
-
-function exCard(e){
-  const s = sid(e.subj);
-  return `<a class="excard" href="#e-${e.id}"><span><b>${esc(e.title)}</b><small>${s.short} · ${YEARS[e.year]} · ${esc(s.years[e.year][e.chap].t)} · ${e.time}</small></span><span class="badges">${stars(e.level)}</span></a>`;
-}
-
-/* ---------- Pages ---------- */
-function home(){
-  const free = EXERCISES.find(e => e.id === "ex-recurrence");
-  const nCh = SUBJECTS.reduce((a,s) => a + s.years.mpsi.length + s.years.mp.length, 0);
-  const formulas = ["∑ 1/k²", "e^{iπ}+1=0", "∇·E = ρ/ε₀", "PV = nRT", "χ_A(A)=0", "∫ f", "ΔS ≥ 0", "dim E = dim ker f + rg f", "λ = h/p", "O(n log n)"];
-  const pos = [[4,8,34],[58,4,22],[70,62,26],[8,72,20],[38,86,18],[86,30,30],[24,40,16],[50,50,15],[90,82,22],[2,28,17]];
-  return `
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true">${formulas.map((f,i) => `<span style="left:${pos[i][0]}%;top:${pos[i][1]}%;font-size:${pos[i][2]}px">${f}</span>`).join("")}</div>
-    <div class="wrap">
-      <div>
-        <div class="eyebrow">Prépa scientifique · MPSI · MP</div>
-        <h1>Toute ta prépa, <span class="hl">corrigée</span> et expliquée.</h1>
-        <p class="lede">Les cours du programme officiel, un résumé par chapitre et des exercices corrigés pas à pas. Plus les DM, les DS, les khôlles et la préparation aux concours. Gratuit.</p>
-        <div class="ctas"><a class="btn btn-yellow" href="#s-maths">Commencer par les maths</a><a class="btn btn-line" href="#e-${free.id}">Voir un corrigé gratuit</a></div>
-        <div class="hero-facts">
-          <div><b>6</b><span>matières</span></div>
-          <div><b>${nCh}</b><span>chapitres au programme</span></div>
-                    <div><b>${EXERCISES.length}</b><span>exercices corrigés</span></div>
-        </div>
-      </div>
-      <div class="fiche">
-        <div class="thm"><span class="chip n">Théorème</span><span class="chip">Maths · MP · Réduction</span></div>
-        <h3>Critère de diagonalisabilité</h3>
-        <div class="math-box">Une matrice $A\in\mathcal M_n(\mathbb K)$ est diagonalisable si et seulement si
-        $$\sum_{\lambda\in\operatorname{Sp}(A)}\dim E_\lambda(A) = n.$$</div>
-        <div class="note"><b>À retenir :</b> $n$ valeurs propres distinctes suffisent, mais ne sont pas nécessaires.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec"><div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Apprends par matière</div><h2>Six matières, tout le programme.</h2><p>Choisis ta matière. L'année affichée suit le sélecteur MPSI / MP en haut de la page.</p></div></div>
-    <div class="subjects">${SUBJECTS.map(s => `<a class="subj" href="#s-${s.id}"><div class="subj-top"><span class="sym">${s.sym}</span>${arrow}</div><h3>${s.name}</h3><p>${s.intro}</p><div class="counts"><span><b>${s.years.mpsi.length}</b> en MPSI</span><span><b>${s.years.mp.length}</b> en MP</span><span><b>${EXERCISES.filter(e=>e.subj===s.id).length}</b> exercices</span></div></a>`).join("")}</div>
-  </div></section>
-
-  <section class="sec tight"><div class="wrap feature">
-    <div class="sec-head" style="margin:0"><div><div class="eyebrow">Un exemple de corrigé</div><h2>Un corrigé comme en colle.</h2><p>Chaque correction suit le même plan : l'idée, les étapes, le piège qui coûte des points et la méthode à réutiliser.</p><div style="margin-top:22px"><a class="btn btn-navy" href="#e-${free.id}">Lire le corrigé complet</a></div></div></div>
-    <div class="enonce prose"><div class="eyebrow">Énoncé · ${sid(free.subj).short} ${YEARS[free.year]} · ${stars(free.level)}</div>${free.enonce}<div class="callouts" style="margin-top:8px"><div class="callout trap"><b>Le piège</b>${free.piege}</div><div class="callout meth"><b>La méthode</b>${free.methode}</div></div></div>
-  </div></section>
-
-  <section class="sec tight"><div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">S'entraîner</div><h2>De la colle au concours.</h2></div></div>
-    <div class="tracks">
-      <a class="track" href="#dm"><b>DM</b><span>Des sujets complets, avec un barème pour te corriger.</span><i>Voir les sujets →</i></a>
-      <a class="track" href="#ds"><b>DS</b><span>Gérer ses quatre heures et rédiger pour le correcteur.</span><i>La méthode →</i></a>
-      <a class="track" href="#kholles"><b>Khôlles</b><span>Les questions de cours qui tombent, chapitre par chapitre.</span><i>Les questions →</i></a>
-      <a class="track" href="#concours"><b>Concours</b><span>Banques, calendrier et stratégie de révision.</span><i>Se préparer →</i></a>
-      <a class="track" href="#oral"><b>Oraux</b><span>Ce qu'attendent les examinateurs, épreuve par épreuve.</span><i>Les conseils →</i></a>
-    </div>
-  </div></section>
-`;
-}
-
-function subjectPage(id){
-  const s = sid(id); if (!s) return notFound();
-  const list = s.years[year];
-  const tabs = `<div class="tabs" role="tablist">${["mpsi","mp"].map(y => `<a href="#s-${s.id}" data-y="${y}" ${y===year?'aria-current="page"':""}>${YEARS[y]} · ${s.years[y].length} chapitres</a>`).join("")}</div>`;
-  return pagehead([["Matières"],[s.name]], `${s.name} en ${YEARS[year]}`, s.intro, tabs) + `
-  <div class="wrap layout">
-    <div>
-      <ol class="chapters">${list.map((c,i) => { const n = exFor(s.id, year, i).length; return `<li><a href="#c-${s.id}-${year}-${i}"><span class="num">${pad(i+1)}</span><span><h3>${esc(c.t)}</h3><p>${esc(c.n)}</p></span><span class="badges">${c.r ? '<span class="chip">Résumé</span>' : '<span class="chip" style="opacity:.6">Résumé à venir</span>'}${n ? `<span class="chip y">${n} exercice${n>1?"s":""}</span>` : ""}</span></a></li>`; }).join("")}</ol>
-    </div>
-    <aside class="side">
-      <div class="box"><h3>Comment travailler un chapitre</h3><p>Lis le résumé juste après le cours. Refais les exercices sans regarder la correction, puis compare ta rédaction étape par étape.</p></div>
-      <div class="box navy"><h3>Tous les exercices</h3><p>Les exercices corrigés de toutes les matières, au même endroit.</p><a class="btn btn-yellow btn-sm" href="#exercices">Voir les exercices</a></div>
-      <div class="box"><h3>Autres matières</h3><ul class="sidelist">${SUBJECTS.filter(x=>x.id!==s.id).map(x => `<li><a href="#s-${x.id}"><span class="n">${x.sym}</span>${x.name}</a></li>`).join("")}</ul></div>
-    </aside>
-  </div>`;
-}
-
-function chapterPage(id, y, i){
-  const s = sid(id); if (!s || !s.years[y] || !s.years[y][i]) return notFound();
-  if (year !== y) setYear(y, false);
-  const list = s.years[y], c = list[i], exs = exFor(id, y, i);
-  const prev = list[i-1], next = list[i+1];
-  return pagehead([[s.name, `#s-${s.id}`],[YEARS[y]]], esc(c.t), "", `<div class="meta"><span class="chip y">Chapitre ${pad(i+1)}</span><span class="chip">${s.name} · ${YEARS[y]}</span><span class="chip">${exs.length} exercice${exs.length>1?"s":""} corrigé${exs.length>1?"s":""}</span></div>`) + `
-  <div class="wrap layout">
-    <article class="prose">
-      <h2>Au programme</h2>
-      <div class="notions">${c.n.split(", ").map(x => `<span>${esc(x)}</span>`).join("")}</div>
-      <h2>Résumé de cours</h2>
-      ${c.r ? `<div class="resume">${c.r}</div>` : `<div class="todo">Le résumé de ce chapitre est en cours de rédaction. Les notions au programme sont listées ci-dessus.</div>`}
-      <h2>Exercices corrigés</h2>
-      ${exs.length ? `<div class="exlist">${exs.map(exCard).join("")}</div>` : `<div class="todo">Les exercices de ce chapitre arrivent bientôt. De nouvelles corrections sont ajoutées chaque semaine.</div>`}
-      <nav class="pager" aria-label="Chapitres voisins">
-        ${prev ? `<a href="#c-${id}-${y}-${i-1}"><small>← Chapitre précédent</small><b>${esc(prev.t)}</b></a>` : "<span></span>"}
-        ${next ? `<a class="next" href="#c-${id}-${y}-${i+1}"><small>Chapitre suivant →</small><b>${esc(next.t)}</b></a>` : "<span></span>"}
-      </nav>
-    </article>
-    <aside class="side">
-      <div class="box"><h3>${s.name} · ${YEARS[y]}</h3><ul class="sidelist">${list.map((x,j) => `<li><a href="#c-${id}-${y}-${j}" ${j===i?'aria-current="page"':""}><span class="n">${pad(j+1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div>
-    </aside>
-  </div>`;
-}
-
-function exercisePage(eid){
-  const e = EXERCISES.find(x => x.id === eid); if (!e) return notFound();
-  const s = sid(e.subj), c = s.years[e.year][e.chap];
-  return pagehead([[s.name, `#s-${s.id}`],[c.t, `#c-${s.id}-${e.year}-${e.chap}`]], esc(e.title), "", `<div class="meta"><span class="chip y">Corrigé détaillé</span><span class="chip">${s.short} · ${YEARS[e.year]}</span><span class="chip">Temps conseillé : ${e.time}</span><span class="chip">Difficulté ${"★".repeat(e.level)}</span></div>`) + `
-  <div class="wrap layout">
-    <article class="prose">
-      <div class="enonce"><div class="eyebrow">Énoncé</div>${e.enonce}</div>
-      <div class="reveal" id="reveal"><p style="font-family:var(--f-display);color:var(--muted);margin-bottom:12px">Cherche d'abord seul pendant ${e.time}. La correction est juste en dessous.</p><button class="btn btn-navy" type="button" id="show-sol">Afficher la correction</button></div>
-      <div id="sol" hidden>
-        <h2>Correction détaillée</h2>
-        <ol class="steps">${e.steps.map((st,k) => `<li><div class="lab"><b>${k+1}</b>${esc(st[0])}</div><div class="body">${st[1]}</div></li>`).join("")}</ol>
-        <div class="callouts"><div class="callout trap"><b>Le piège</b>${e.piege}</div><div class="callout meth"><b>La méthode à retenir</b>${e.methode}</div></div>
-      </div>
-    </article>
-    <aside class="side">
-      <div class="box"><h3>Le chapitre</h3><p>${esc(c.t)}</p><a class="btn btn-line btn-sm" href="#c-${s.id}-${e.year}-${e.chap}">Revoir le résumé</a></div>
-      <div class="box"><h3>Autres exercices</h3><ul class="sidelist">${EXERCISES.filter(x => x.id !== e.id && x.subj === e.subj).slice(0,6).map(x => `<li><a href="#e-${x.id}"><span class="n">${YEARS[x.year]}</span>${esc(x.title)}</a></li>`).join("") || "<li>Bientôt d'autres exercices.</li>"}</ul></div>
-    </aside>
-  </div>`;
-}
-
-let exFilter = "all";
-function exercisesPage(){
-  const list = EXERCISES.filter(e => (exFilter === "all" || e.subj === exFilter) && e.year === year);
-  return pagehead([["S'entraîner"],["Exercices corrigés"]], `Exercices corrigés · ${YEARS[year]}`, "Chaque exercice est rattaché à un chapitre du programme, avec une correction détaillée étape par étape.") + `
-  <div class="wrap" style="padding-block:40px 80px">
-    <div class="filters" role="group" aria-label="Filtrer par matière">
-      <button type="button" data-f="all" aria-pressed="${exFilter==="all"}">Toutes</button>
-      ${SUBJECTS.map(s => `<button type="button" data-f="${s.id}" aria-pressed="${exFilter===s.id}">${s.short}</button>`).join("")}
-    </div>
-    <div class="exlist">${list.length ? list.map(exCard).join("") : `<div class="todo">Pas encore d'exercice pour cette matière en ${YEARS[year]}. Passe à l'autre année avec le sélecteur en haut.</div>`}</div>
-  </div>`;
-}
-
-function dmPage(){
-  return pagehead([["S'entraîner"],["Devoirs maison"]], "Devoirs maison", "Des sujets complets, à traiter comme un vrai DM : au propre, en rédigeant chaque justification.") + `
-  <div class="wrap layout"><article class="prose">
-    <h2>Comment tirer le maximum d'un DM</h2>
-    <ul><li>Traite-le en plusieurs sessions courtes plutôt qu'en une nuit.</li><li>Bloqué sur une question ? Admets-la et continue : le DM sert à s'entraîner sur toute la longueur.</li><li>Relis le résumé du chapitre avant de commencer.</li><li>Rédige au propre : le DM t'entraîne aussi à la présentation attendue en DS.</li></ul>
-    ${DM.map(d => `<h2>${esc(d.title)}</h2><div class="meta" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"><span class="chip">${sid(d.subj).short} · ${YEARS[d.year]}</span><span class="chip">Corrigé à venir</span></div><div class="enonce">${d.body}</div>`).join("")}
-  </article>
-  <aside class="side"><div class="box navy"><h3>Les corrigés de DM</h3><p>Les corrigés complets, question par question, sont en cours de rédaction.</p></div></aside></div>`;
-}
-
-function dsPage(){
-  return pagehead([["S'entraîner"],["Devoirs surveillés"]], "Devoirs surveillés", "Un DS se gagne autant par la méthode que par le cours. Voici comment aborder les quatre heures.") + `
-  <div class="wrap layout"><article class="prose">
-    <h2>Avant le DS</h2>
-    <ul><li>Relis les résumés des chapitres au programme et refais les démonstrations de cours : elles tombent souvent en première question.</li><li>Refais deux ou trois exercices types sans regarder la correction.</li><li>Dors. Une nuit blanche coûte plus de points qu'elle n'en rapporte.</li></ul>
-    <h2>Pendant le DS : un plan pour 4 heures</h2>
-    <ol class="timeline">
-      <li><b>0 à 15 min · Lire tout le sujet</b><span>Repère les parties indépendantes et les questions de cours.</span></li>
-      <li><b>15 min à 3 h 15 · Traiter les parties dans l'ordre qui t'arrange</b><span>Commence par ce que tu sais faire. Change de partie après 15 minutes bloqué.</span></li>
-      <li><b>3 h 15 à 3 h 45 · Grappiller</b><span>Reviens sur les questions laissées, en admettant les résultats intermédiaires.</span></li>
-      <li><b>3 h 45 à 4 h · Relire</b><span>Vérifie les numéros de questions, encadre les résultats.</span></li>
-    </ol>
-    <h2>Rédiger pour le correcteur</h2>
-    <ul><li>Annonce ce que tu montres, puis montre-le.</li><li>Cite le théorème utilisé et vérifie ses hypothèses à voix haute, sur la copie.</li><li>Encadre les résultats et numérote clairement chaque question.</li><li>Vérifie l'homogénéité d'un résultat de physique avant de l'encadrer.</li></ul>
-    <h2>Sujets type DS</h2>
-    <div class="todo">Les premiers sujets type DS, avec barème et corrigé détaillé, sont en cours de rédaction.</div>
-  </article>
-  <aside class="side"><div class="box"><h3>Bon réflexe</h3><p>Une question admise proprement vaut mieux qu'une question bâclée : écris « On admet le résultat de la question 3 » et continue.</p></div></aside></div>`;
-}
-
-function khollesPage(){
-  return pagehead([["S'entraîner"],["Khôlles"]], "Khôlles", "Une heure au tableau, souvent à trois élèves, avec une question de cours puis un exercice. Voici ce qu'il faut savoir refaire.") + `
-  <div class="wrap layout"><article class="prose">
-    <h2>Comment se passe une khôlle</h2>
-    <div class="cards2" style="margin-bottom:20px">
-      <div class="infocard"><h3>La question de cours</h3><p>Un énoncé ou une démonstration du programme de la semaine. Ne pas la savoir coûte cher.</p></div>
-      <div class="infocard"><h3>L'exercice</h3><p>Le khôlleur veut voir comment tu réfléchis : parle, propose des pistes, même incomplètes.</p></div>
-    </div>
-    ${KHOLLES.map(k => `<h2>${sid(k.subj).name} · ${YEARS[k.year]}</h2><ol class="qlist">${k.qs.map(x => `<li><span>${x}</span></li>`).join("")}</ol>`).join("")}
-  </article>
-  <aside class="side"><div class="box"><h3>Le jour J</h3><p>Écris le titre de l'exercice au tableau, fais un schéma, et dis à voix haute ce que tu essaies. Le silence est ce qui pénalise le plus.</p></div></aside></div>`;
-}
-
-function concoursPage(){
-  return pagehead([["Concours"],["Préparation concours"]], "Préparer les concours", "Les grandes banques de la filière MP, le calendrier de l'année de MP et une stratégie de révision réaliste.") + `
-  <div class="wrap layout"><article class="prose">
-    <h2>Les banques de concours</h2>
-    <div class="cards2">${BANKS.map(b => `<div class="infocard"><h3>${b.name}</h3><p>${b.desc}</p></div>`).join("")}</div>
-    <h2>Le calendrier de l'année de MP</h2>
-    <ol class="timeline">
-      <li><b>Décembre à janvier · Inscriptions</b><span>Sur le site du SCEI, qui centralise les inscriptions aux concours.</span></li>
-      <li><b>Avril à mai · Écrits</b><span>Plusieurs semaines d'épreuves, souvent enchaînées.</span></li>
-      <li><b>Juin à juillet · Oraux</b><span>Pour les admissibles, avec les épreuves de TIPE.</span></li>
-      <li><b>Juillet · Résultats et affectation</b><span>Classement des vœux et propositions d'écoles.</span></li>
-    </ol>
-    <p>Les dates exactes changent chaque année : vérifie-les sur <a href="https://www.scei-concours.fr" target="_blank" rel="noopener">scei-concours.fr</a>.</p>
-    <h2>Une stratégie de révision</h2>
-    <ul><li>Dès janvier, fais un sujet complet en temps limité toutes les deux semaines.</li><li>Garde un carnet d'erreurs : chaque faute de DS y va, avec la bonne méthode.</li><li>Révise par blocs du programme, en alternant MPSI et MP.</li><li>Les dernières semaines, priorité aux annales des concours que tu vises.</li></ul>
-    <h2>Annales commentées</h2>
-    <div class="todo">Les annales commentées sont en cours de rédaction. Les sujets officiels restent disponibles sur les sites des concours.</div>
-  </article>
-  <aside class="side"><div class="box navy"><h3>Ton plan de révision</h3><p>Commence par les résumés de cours, puis enchaîne avec les exercices corrigés de chaque chapitre.</p><a class="btn btn-yellow btn-sm" href="#exercices">Voir les exercices</a></div></aside></div>`;
-}
-
-function oralPage(){
-  return pagehead([["Concours"],["Oraux"]], "Réussir les oraux", "À l'oral, l'examinateur évalue ta réflexion autant que ton résultat. Voici comment t'y préparer.") + `
-  <div class="wrap layout"><article class="prose">
-    <h2>Les grandes familles d'oraux</h2>
-    <div class="cards2">
-      <div class="infocard"><h3>Oraux de mathématiques</h3><p>Un ou deux exercices au tableau, avec des questions qui guident si tu bloques.</p></div>
-      <div class="infocard"><h3>Oraux de physique</h3><p>Souvent un problème ouvert : modéliser, faire des hypothèses, estimer des ordres de grandeur.</p></div>
-      <div class="infocard"><h3>Oraux avec Python</h3><p>Certaines épreuves demandent de programmer en direct : entraîne-toi à écrire vite et proprement.</p></div>
-      <div class="infocard"><h3>TIPE</h3><p>Présentation d'un travail personnel, puis questions du jury sur ta démarche.</p></div>
-    </div>
-    <h2>Ce que les examinateurs attendent</h2>
-    <ul><li>Une réflexion à voix haute, même quand tu hésites.</li><li>Des idées testées rapidement sur un cas simple.</li><li>De l'écoute : une indication de l'examinateur est une aide, pas un piège.</li><li>Un tableau organisé, de gauche à droite.</li></ul>
-    <h2>S'entraîner efficacement</h2>
-    <ul><li>Simule des oraux à deux : l'un khôlle, l'autre passe au tableau.</li><li>Pour CCINP, travaille la banque officielle d'exercices d'oral, publiée par le concours.</li><li>Chronomètre-toi et filme-toi une fois : tu verras tout de suite ce qui ne va pas.</li></ul>
-  </article>
-  <aside class="side"><div class="box"><h3>Le bon état d'esprit</h3><p>Un oral n'est pas un écrit au tableau. Ce qui compte, c'est le dialogue avec l'examinateur.</p></div></aside></div>`;
-}
-
-function notFound(){
-  return pagehead([["Page introuvable"]], "Cette page n'existe pas.", "Le lien est peut-être ancien. Repars de l'accueil ou cherche un chapitre avec la loupe.", `<div style="margin-top:20px"><a class="btn btn-yellow" href="#accueil">Retour à l'accueil</a></div>`);
-}
-
-/* ---------- Routeur ---------- */
-function route(){
-  const h = location.hash.slice(1) || "accueil";
-  let html, m;
-  if (h === "accueil") html = home();
-  else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
-  else if ((m = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/))) html = chapterPage(m[1], m[2], +m[3]);
-  else if ((m = h.match(/^e-([a-z0-9-]+)$/))) html = exercisePage(m[1]);
-  else if (h === "exercices") html = exercisesPage();
-  else if (h === "dm") html = dmPage();
-  else if (h === "ds") html = dsPage();
-  else if (h === "kholles") html = khollesPage();
-  else if (h === "concours") html = concoursPage();
-  else if (h === "oral") html = oralPage();
-  else html = notFound();
-  app.innerHTML = html;
-  closeAll(); nav.classList.remove("open"); burger.setAttribute("aria-expanded","false");
-  results.hidden = true;
-  wire();
-  typeset();
-  window.scrollTo(0, 0);
-}
-
-function wire(){
-  app.querySelectorAll(".tabs a[data-y]").forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); setYear(a.dataset.y, true); }));
-  app.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => { exFilter = b.dataset.f; route(); }));
-  const sh = document.getElementById("show-sol");
-  if (sh) sh.addEventListener("click", () => { document.getElementById("sol").hidden = false; document.getElementById("reveal").hidden = true; typeset(); });
-}
-
-setYear(year, false);
-window.addEventListener("hashchange", route);
-route();
-})();
-</script>
+<script src="content/pdfs.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

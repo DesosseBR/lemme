@@ -1,6 +1,5 @@
-/* Anglais : programme, résumés, exercices corrigés, DM et questions de khôlle.
-   Pour ajouter un exercice : copier un objet de LEMME.exercises([...]) ci-dessous,
-   changer son id (unique), son chapitre (chap = index du chapitre, en partant de 0) et son contenu. */
+/* Contenu de la matière : programme, résumés, rappels de cours, exercices, problèmes, DM et khôlles.
+   Le format est décrit dans README.md. */
 
 LEMME.subject({
   id: "anglais", name: "Anglais", short: "Anglais", sym: "Aa",
@@ -20,6 +19,5 @@ LEMME.subject({
   }
 });
 
-LEMME.exercises([
 
-]);
+LEMME.exercises([]);

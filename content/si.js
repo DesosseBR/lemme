@@ -1,6 +1,5 @@
-/* Sciences de l'ingénieur : programme, résumés, exercices corrigés, DM et questions de khôlle.
-   Pour ajouter un exercice : copier un objet de LEMME.exercises([...]) ci-dessous,
-   changer son id (unique), son chapitre (chap = index du chapitre, en partant de 0) et son contenu. */
+/* Contenu de la matière : programme, résumés, rappels de cours, exercices, problèmes, DM et khôlles.
+   Le format est décrit dans README.md. */
 
 LEMME.subject({
   id: "si", name: "Sciences de l'ingénieur", short: "SI", sym: "⚙",
@@ -31,18 +30,38 @@ LEMME.subject({
   }
 });
 
+
+LEMME.rappels({
+  "premier-ordre-si": { t: "Système du premier ordre", b: R`$H(p) = \dfrac{K}{1+\tau p}$. Réponse à un échelon $E_0$ : $s(t) = KE_0\big(1-e^{-t/\tau}\big)$, avec $t_{5\%} = 3\tau$.` },
+  "ftbf": { t: "Boucle fermée à retour unitaire", b: R`$\text{FTBF}(p) = \dfrac{H(p)}{1+H(p)}$.` },
+  "erreur-statique": { t: "Erreur statique", b: R`$\varepsilon_s = \lim_{t\to+\infty}\big(e(t)-s(t)\big)$ pour une entrée en échelon.` }
+});
+
 LEMME.exercises([
 {
-  id: "ex-premier-ordre", subj: "si", year: "mpsi", chap: 2, level: 2, time: "15 min",
-  title: "Premier ordre en boucle ouverte et en boucle fermée",
-  enonce: R`<p>Un système a pour fonction de transfert $H(p) = \dfrac{K}{1+\tau p}$ avec $K = 2$ et $\tau = 0{,}5\ \mathrm{s}$. On le place dans une boucle à retour unitaire. Comparer le temps de réponse à $5\,\%$ et l'erreur statique pour un échelon $E_0$.</p>`,
+  id: "ex-premier-ordre", subj: "si", year: "mpsi", chap: 2, classique: true, level: 2, time: "15 min",
+  title: "Premier ordre en boucle ouverte et fermée",
+  enonce: R`<p>Un système a pour fonction de transfert $H(p) = \dfrac{K}{1+\tau p}$ avec $K = 2$ et $\tau = 0{,}5\ \mathrm s$. On le place dans une boucle à <span data-k="retour">retour unitaire</span>. Comparer le temps de réponse à $5\,\%$ et l'erreur statique pour un échelon $E_0$.</p>`,
+  decode: {
+    donnees: [R`$K = 2$, $\tau = 0{,}5\ \mathrm s$, entrée en échelon d'amplitude $E_0$.`],
+    but: R`Comparer rapidité et précision avant et après bouclage.`,
+    cles: { retour: R`La sortie est comparée directement à la consigne : l'écart $e - s$ commande le système.` }
+  },
   steps: [
-    ["Boucle ouverte", R`<p>$t_{5\%} = 3\tau = 1{,}5\ \mathrm{s}$ et la sortie tend vers $KE_0 = 2E_0$.</p>`],
-    ["Boucle fermée", R`$$\text{FTBF} = \frac{H}{1+H} = \frac{K}{1+K+\tau p} = \frac{\frac{K}{1+K}}{1+\frac{\tau}{1+K}p}.$$<p>Gain $\frac23$ et constante de temps $\tau' = \frac{\tau}{3} \approx 0{,}17\ \mathrm{s}$.</p>`],
-    ["Rapidité", R`<p>$t_{5\%} = 3\tau' = 0{,}5\ \mathrm{s}$ : la boucle fermée est trois fois plus rapide.</p>`],
-    ["Précision", R`$$\varepsilon_s = E_0-\frac23E_0 = \frac{E_0}{1+K} = \frac{E_0}{3}.$$`]
+    { t: "Boucle ouverte", b: R`<p>$t_{5\%} = 3\tau = 1{,}5\ \mathrm s$ et la sortie tend vers $KE_0 = 2E_0$.</p>`, rappels: ["premier-ordre-si"] },
+    { t: "Boucle fermée", b: R`$$\text{FTBF} = \frac{K}{1+K+\tau p} = \frac{\frac{K}{1+K}}{1+\frac{\tau}{1+K}p}.$$<p>Gain $\frac23$ et constante de temps $\tau' = \frac\tau3 \approx 0{,}17\ \mathrm s$.</p>`, rappels: ["ftbf"] },
+    { t: "Rapidité", b: R`<p>$t_{5\%} = 3\tau' = 0{,}5\ \mathrm s$ : la boucle fermée est trois fois plus rapide.</p>` },
+    { t: "Précision", b: R`$$\varepsilon_s = E_0-\frac23E_0 = \frac{E_0}{1+K} = \frac{E_0}{3}.$$`, rappels: ["erreur-statique"] }
   ],
   piege: R`Confondre le gain statique de la boucle ouverte et celui de la boucle fermée.`,
-  methode: R`Mets toujours une fonction de transfert sous forme canonique pour lire directement gain et constante de temps.`
+  methode: R`Mets toujours une fonction de transfert sous forme canonique pour lire directement gain et constante de temps.`,
+  viz: {
+    type: "plot", title: "Augmente K : la boucle fermée devient plus rapide et plus précise", x: [0, 3], y: [0, 2.2], xlabel: "t (s)", ylabel: "s / E₀",
+    params: [{ k: "K", label: "Gain K", min: 0.5, max: 10, step: 0.5, v: 2 }],
+    curves: [
+      { label: "Boucle fermée", f: (t, p) => (p.K / (1 + p.K)) * (1 - Math.exp(-t * (1 + p.K) / 0.5)) },
+      { label: "Consigne", f: () => 1 }
+    ]
+  }
 }
 ]);

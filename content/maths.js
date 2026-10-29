@@ -1,6 +1,5 @@
-/* Mathématiques : programme, résumés, exercices corrigés, DM et questions de khôlle.
-   Pour ajouter un exercice : copier un objet de LEMME.exercises([...]) ci-dessous,
-   changer son id (unique), son chapitre (chap = index du chapitre, en partant de 0) et son contenu. */
+/* Contenu de la matière : programme, résumés, rappels de cours, exercices, problèmes, DM et khôlles.
+   Le format est décrit dans README.md. */
 
 LEMME.subject({
   id: "maths", name: "Mathématiques", short: "Maths", sym: "∫",
@@ -87,93 +86,217 @@ LEMME.subject({
   }
 });
 
+
+LEMME.rappels({
+  "limite-monotone": { t: "Théorème de la limite monotone", b: R`Une suite réelle croissante et majorée converge. Une suite croissante non majorée tend vers $+\infty$.` },
+  "dl-usuels": { t: "Développements limités usuels en 0", b: R`$$e^x = 1+x+\frac{x^2}{2}+o(x^2),\qquad \sin x = x-\frac{x^3}{6}+o(x^3),$$ $$\cos x = 1-\frac{x^2}{2}+o(x^2),\qquad \ln(1+x) = x-\frac{x^2}{2}+o(x^2).$$` },
+  "equivalents-somme": { t: "On ne somme pas des équivalents", b: R`$f\sim g$ et $h\sim k$ n'impliquent pas $f+h\sim g+k$. Pour une somme ou une différence, on passe aux développements limités.` },
+  "theoreme-rang": { t: "Théorème du rang", b: R`Si $E$ est de dimension finie et $f\in\mathcal L(E,F)$, alors $\dim E = \dim\ker f + \operatorname{rg} f$.` },
+  "image-base": { t: "Image et base", b: R`Si $(e_1,\dots,e_n)$ est une base de $E$, alors $\operatorname{Im} f = \operatorname{Vect}\big(f(e_1),\dots,f(e_n)\big)$.` },
+  "valeurs-propres-distinctes": { t: "Valeurs propres distinctes", b: R`Une matrice de $\mathcal M_n(\mathbb K)$ qui possède $n$ valeurs propres distinctes est diagonalisable. La réciproque est fausse.` },
+  "puissance-diagonalisable": { t: "Puissance d'une matrice diagonalisable", b: R`Si $A = PDP^{-1}$, alors $A^n = PD^nP^{-1}$, et $D^n$ s'obtient en élevant chaque coefficient diagonal à la puissance $n$.` },
+  "spectral": { t: "Théorème spectral", b: R`Toute matrice symétrique réelle est diagonalisable dans une base orthonormée de vecteurs propres.` },
+  "dalembert-se": { t: "Règle de d'Alembert pour les séries entières", b: R`Si $a_n\neq0$ à partir d'un certain rang et $\left|\dfrac{a_{n+1}}{a_n}\right|\to\ell\in[0,+\infty]$, alors $R = \dfrac{1}{\ell}$ (avec $\frac10 = +\infty$ et $\frac1{+\infty}=0$).` },
+  "derivation-se": { t: "Dérivation d'une série entière", b: R`Sur $]-R,R[$, on dérive terme à terme sans changer le rayon : $\left(\sum a_nx^n\right)' = \sum na_nx^{n-1}$.` },
+  "serie-geometrique": { t: "Série géométrique", b: R`Pour $|q|<1$ : $\displaystyle\sum_{n\ge0}q^n = \frac{1}{1-q}$.` },
+  "loi-geometrique": { t: "Loi géométrique", b: R`$X\sim\mathcal G(p)$ : $P(X=k) = p(1-p)^{k-1}$ pour $k\ge1$. C'est le rang du premier succès.` },
+  "fonction-generatrice": { t: "Fonction génératrice", b: R`$G_X(t) = E\big(t^X\big) = \sum_k P(X=k)\,t^k$. Si $G_X$ est dérivable en $1$, alors $E(X) = G_X'(1)$.` },
+  "continuite-point-fixe": { t: "Limite d'une suite récurrente", b: R`Si $u_{n+1} = f(u_n)$, si $(u_n)$ converge vers $\ell$ et si $f$ est continue en $\ell$, alors $\ell = f(\ell)$.` },
+  "quantite-conjuguee": { t: "Quantité conjuguée", b: R`Pour $a,b\ge0$ non tous deux nuls : $\sqrt a - \sqrt b = \dfrac{a-b}{\sqrt a + \sqrt b}$.` },
+  "duplication-cos": { t: "Formule de duplication", b: R`$1+\cos\theta = 2\cos^2\dfrac{\theta}{2}$.` },
+  "cayley-hamilton": { t: "Théorème de Cayley-Hamilton", b: R`Pour toute $A\in\mathcal M_n(\mathbb K)$ : $\chi_A(A) = 0$.` },
+  "scinde-C": { t: "Polynômes sur ℂ", b: R`Tout polynôme non constant de $\mathbb C[X]$ est scindé. $\chi_A$ est donc scindé et ses racines sont les valeurs propres de $A$.` }
+});
+
 LEMME.exercises([
 {
-  id: "ex-recurrence", subj: "maths", year: "mpsi", chap: 0, free: true, level: 1, time: "10 min",
+  id: "ex-recurrence", subj: "maths", year: "mpsi", chap: 0, classique: true, level: 1, time: "10 min",
   title: "Une majoration par récurrence",
-  enonce: R`<p>Montrer que pour tout entier $n\ge1$ :</p>$$\sum_{k=1}^{n}\frac{1}{k^2} \le 2 - \frac{1}{n}$$<p>En déduire que la suite des sommes partielles converge.</p>`,
+  enonce: R`<p>Montrer que pour tout entier $n\ge1$ :</p>$$\sum_{k=1}^{n}\frac{1}{k^2} \le 2 - \frac{1}{n}$$<p>En déduire que <span data-k="sp">la suite des sommes partielles</span> converge.</p>`,
+  decode: {
+    donnees: [R`Une somme $S_n = \sum_{k=1}^n \frac1{k^2}$ de termes positifs.`],
+    but: R`Majorer $S_n$ pour tout $n$, puis en tirer la convergence.`,
+    cles: { sp: R`C'est la suite $(S_n)_{n\ge1}$, où $S_n$ est la somme des $n$ premiers termes.` }
+  },
   steps: [
-    ["Idée", R`<p>Le majorant dépend de $n$ : c'est le signal d'une récurrence. On ne peut pas récurrer directement sur « la somme est majorée par $2$ », car cette inégalité ne se transmet pas d'un rang au suivant.</p>`],
-    ["Initialisation", R`<p>Pour $n=1$, la somme vaut $1$ et le majorant vaut $2-1=1$. On a bien $1\le1$.</p>`],
-    ["Hérédité", R`<p>On suppose $S_n \le 2-\frac1n$. Alors</p>$$S_{n+1} \le 2-\frac1n+\frac{1}{(n+1)^2}.$$<p>Il suffit de montrer $\dfrac{1}{(n+1)^2} \le \dfrac1n-\dfrac{1}{n+1} = \dfrac{1}{n(n+1)}$, ce qui est vrai car $n(n+1) < (n+1)^2$. Donc $S_{n+1}\le 2-\frac{1}{n+1}$.</p>`],
-    ["Conclusion", R`<p>$(S_n)$ est croissante (on ajoute des termes positifs) et majorée par $2$. Par le théorème de la limite monotone, elle converge.</p>`]
+    { t: "L'idée", b: R`<p>Le majorant dépend de $n$ : c'est le signal d'une récurrence. On ne peut pas récurrer sur « $S_n\le2$ », car cette inégalité ne se transmet pas d'un rang au suivant.</p>`, rappels: ["recurrence"] },
+    { t: "Initialisation", b: R`<p>Pour $n=1$ : $S_1 = 1$ et $2-\frac11 = 1$. On a bien $S_1\le 1$.</p>` },
+    { t: "Hérédité", b: R`<p>On suppose $S_n \le 2-\frac1n$. Alors</p>$$S_{n+1} = S_n + \frac{1}{(n+1)^2} \le 2-\frac1n+\frac{1}{(n+1)^2}.$$<p>Il reste à montrer que $\dfrac{1}{(n+1)^2} \le \dfrac1n-\dfrac{1}{n+1}$.</p>` },
+    { t: "Le calcul clé", b: R`$$\frac1n-\frac1{n+1} = \frac{1}{n(n+1)} \ge \frac{1}{(n+1)^2}\quad\text{car } n(n+1)\le(n+1)^2.$$<p>Donc $S_{n+1}\le 2-\frac{1}{n+1}$ : la propriété est héréditaire.</p>` },
+    { t: "Conclusion", b: R`<p>$(S_n)$ est croissante, car on ajoute des termes positifs, et majorée par $2$. Elle converge.</p>`, rappels: ["limite-monotone"] }
   ],
-  piege: R`Écrire « $S_n\le2$ donc $S_{n+1}\le2$ » est faux : ajouter un terme positif peut faire dépasser $2$. L'hérédité est alors à zéro.`,
-  methode: R`Quand une majoration constante ne passe pas par récurrence, cherche une majoration plus forte qui dépend de $n$.`
+  piege: R`Écrire « $S_n\le2$ donc $S_{n+1}\le2$ » est faux : ajouter un terme positif peut faire dépasser $2$.`,
+  methode: R`Quand une majoration constante ne passe pas par récurrence, cherche une majoration plus forte qui dépend de $n$.`,
+  viz: {
+    type: "seq", title: "Les sommes $S_n$ restent sous $2-1/n$", n: [1, 30], y: [0, 2.1],
+    series: [
+      { label: "S_n", style: "bar", f: n => { let s = 0; for (let k = 1; k <= n; k++) s += 1 / (k * k); return s; } },
+      { label: "2 − 1/n", style: "line", f: n => 2 - 1 / n }
+    ],
+    hlines: [{ y: () => Math.PI * Math.PI / 6, label: "π²/6, la limite" }]
+  }
 },
 {
-  id: "ex-dl-limite", subj: "maths", year: "mpsi", chap: 14, level: 1, time: "8 min",
-  title: "Calculer une limite avec des développements limités",
+  id: "ex-dl-limite", subj: "maths", year: "mpsi", chap: 14, classique: true, level: 1, time: "8 min",
+  title: "Une limite par développements limités",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0}\frac{e^x-1-\sin x}{x^2}$.</p>`,
+  decode: {
+    donnees: [R`Numérateur et dénominateur tendent vers $0$ : forme indéterminée $\frac00$.`],
+    but: R`Trouver la limite en $0$.`,
+    cles: {}
+  },
   steps: [
-    ["Idée", R`<p>Forme indéterminée $\frac00$. Le dénominateur est d'ordre $2$, donc on développe le numérateur à l'ordre $2$.</p>`],
-    ["Développements", R`$$e^x = 1+x+\frac{x^2}{2}+o(x^2),\qquad \sin x = x+o(x^2).$$`],
-    ["Calcul", R`$$e^x-1-\sin x = \frac{x^2}{2}+o(x^2),\quad\text{donc}\quad\frac{e^x-1-\sin x}{x^2} = \frac12+o(1).$$`],
-    ["Conclusion", R`<p>La limite vaut $\dfrac12$.</p>`]
+    { t: "L'idée", b: R`<p>Le dénominateur est d'ordre $2$. On développe donc le numérateur à l'ordre $2$.</p>` },
+    { t: "Les DL", b: R`$$e^x = 1+x+\frac{x^2}{2}+o(x^2),\qquad \sin x = x+o(x^2).$$`, rappels: ["dl-usuels"] },
+    { t: "On assemble", b: R`$$e^x-1-\sin x = \frac{x^2}{2}+o(x^2)\quad\text{donc}\quad \frac{e^x-1-\sin x}{x^2} = \frac12+o(1).$$` },
+    { t: "Conclusion", b: R`<p>La limite vaut $\dfrac12$.</p>` }
   ],
-  piege: R`Remplacer $e^x-1$ par $x$ et $\sin x$ par $x$ donne $\frac{0}{x^2}$ : on ne soustrait jamais des équivalents. Il faut aller assez loin dans les DL.`,
-  methode: R`Développe chaque terme à l'ordre du dénominateur. Si tout s'annule, monte d'un ordre.`
+  piege: R`Remplacer $e^x-1$ par $x$ et $\sin x$ par $x$ donne $0$ au numérateur : on ne soustrait jamais des équivalents.`,
+  methode: R`Développe chaque terme à l'ordre du dénominateur. Si tout s'annule, monte d'un ordre.`,
+  viz: {
+    type: "plot", title: "La fonction s'approche de 1/2 en 0", x: [-2, 2], y: [0, 1.4], xlabel: "x",
+    curves: [{ label: "(eˣ − 1 − sin x) / x²", f: x => Math.abs(x) < 1e-4 ? NaN : (Math.exp(x) - 1 - Math.sin(x)) / (x * x) }],
+    hlines: [{ y: () => 0.5, label: "1/2" }]
+  }
 },
 {
   id: "ex-rang", subj: "maths", year: "mpsi", chap: 16, level: 2, time: "15 min",
   title: "Noyau, image et théorème du rang",
-  enonce: R`<p>Soit $f:\mathbb R_2[X]\to\mathbb R_2[X]$ définie par $f(P) = P'$.</p><ol><li>Montrer que $f$ est linéaire.</li><li>Déterminer $\ker f$ et $\operatorname{Im} f$.</li><li>Vérifier le théorème du rang.</li></ol>`,
+  enonce: R`<p>Soit $f:\mathbb R_2[X]\to\mathbb R_2[X]$ définie par $f(P) = P'$.</p><ol><li>Montrer que $f$ est linéaire.</li><li>Déterminer $\ker f$ et $\operatorname{Im} f$.</li><li>Vérifier <span data-k="rang">le théorème du rang</span>.</li></ol>`,
+  decode: {
+    donnees: [R`$\mathbb R_2[X]$ : les polynômes de degré au plus $2$, un espace de dimension $3$.`, R`$f$ associe à $P$ sa dérivée.`],
+    but: R`Décrire noyau et image, puis vérifier une égalité de dimensions.`,
+    cles: { rang: R`$\dim\mathbb R_2[X] = \dim\ker f + \operatorname{rg} f$.` }
+  },
   steps: [
-    ["Linéarité", R`<p>Pour $P,Q$ et $\lambda$ réel : $(\lambda P+Q)' = \lambda P'+Q'$, donc $f(\lambda P+Q) = \lambda f(P)+f(Q)$.</p>`],
-    ["Noyau", R`<p>$P' = 0 \iff P$ est constant. Donc $\ker f = \mathbb R_0[X]$, de dimension $1$.</p>`],
-    ["Image", R`<p>Pour $P = a+bX+cX^2$, $P' = b+2cX$. Donc $\operatorname{Im} f \subset \mathbb R_1[X]$. Réciproquement, $b+dX = f\big(bX+\tfrac d2X^2\big)$. Ainsi $\operatorname{Im} f = \mathbb R_1[X]$, de dimension $2$.</p>`],
-    ["Théorème du rang", R`$$\dim\mathbb R_2[X] = 3 = 1 + 2 = \dim\ker f + \operatorname{rg} f.$$`]
+    { t: "Linéarité", b: R`<p>Pour $P,Q$ et $\lambda$ réel : $(\lambda P+Q)' = \lambda P'+Q'$, donc $f(\lambda P+Q) = \lambda f(P)+f(Q)$.</p>` },
+    { t: "Noyau", b: R`<p>$P' = 0 \iff P$ est constant. Donc $\ker f = \mathbb R_0[X]$, de dimension $1$.</p>` },
+    { t: "Image", b: R`<p>Sur la base $(1,X,X^2)$ : $f(1)=0$, $f(X)=1$, $f(X^2)=2X$. Donc $\operatorname{Im} f = \operatorname{Vect}(1,2X) = \mathbb R_1[X]$, de dimension $2$.</p>`, rappels: ["image-base"] },
+    { t: "Théorème du rang", b: R`$$\dim\mathbb R_2[X] = 3 = 1 + 2 = \dim\ker f + \operatorname{rg} f.$$`, rappels: ["theoreme-rang"] }
   ],
-  piege: R`Oublier la double inclusion pour l'image : montrer $\operatorname{Im} f\subset\mathbb R_1[X]$ ne suffit pas, il faut aussi montrer que tout polynôme de degré au plus 1 est atteint (ou conclure par les dimensions).`,
-  methode: R`Pour trouver une image, calcule $f$ sur une base : $\operatorname{Im} f = \operatorname{Vect}\big(f(1),f(X),f(X^2)\big) = \operatorname{Vect}(0,1,2X)$.`
+  piege: R`Montrer seulement $\operatorname{Im} f\subset\mathbb R_1[X]$ ne suffit pas : il faut l'égalité.`,
+  methode: R`Pour trouver une image, calcule $f$ sur une base : l'image est engendrée par ces vecteurs.`
 },
 {
-  id: "ex-diago", subj: "maths", year: "mp", chap: 1, level: 2, time: "20 min",
+  id: "ex-diago", subj: "maths", year: "mp", chap: 1, classique: true, level: 2, time: "20 min",
   title: "Diagonaliser pour calculer une puissance",
-  enonce: R`<p>Soit $A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. Diagonaliser $A$ puis calculer $A^n$ pour $n\in\mathbb N$.</p>`,
+  enonce: R`<p>Soit $A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. <span data-k="diag">Diagonaliser</span> $A$ puis calculer $A^n$ pour $n\in\mathbb N$.</p>`,
+  decode: {
+    donnees: [R`Une matrice $2\times2$ symétrique réelle.`],
+    but: R`Écrire $A = PDP^{-1}$ avec $D$ diagonale, puis en déduire $A^n$.`,
+    cles: { diag: R`Trouver $P$ inversible et $D$ diagonale telles que $A = PDP^{-1}$.` }
+  },
   steps: [
-    ["Polynôme caractéristique", R`$$\chi_A(X) = (X-2)^2-1 = (X-1)(X-3).$$<p>Deux valeurs propres distinctes en dimension $2$ : $A$ est diagonalisable.</p>`],
-    ["Vecteurs propres", R`<p>$E_1 = \operatorname{Vect}\begin{pmatrix}1\\-1\end{pmatrix}$ et $E_3 = \operatorname{Vect}\begin{pmatrix}1\\1\end{pmatrix}$.</p>`],
-    ["Diagonalisation", R`$$P = \begin{pmatrix}1&1\\-1&1\end{pmatrix},\quad D = \begin{pmatrix}1&0\\0&3\end{pmatrix},\quad P^{-1} = \frac12\begin{pmatrix}1&-1\\1&1\end{pmatrix},\quad A = PDP^{-1}.$$`],
-    ["Puissance", R`$$A^n = PD^nP^{-1} = \frac12\begin{pmatrix}3^n+1&3^n-1\\3^n-1&3^n+1\end{pmatrix}.$$<p>Vérification pour $n=1$ : on retrouve $\begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>`]
+    { t: "Polynôme caractéristique", b: R`$$\chi_A(X) = (X-2)^2-1 = (X-1)(X-3).$$<p>Deux valeurs propres distinctes en dimension $2$ : $A$ est diagonalisable.</p>`, rappels: ["valeurs-propres-distinctes"] },
+    { t: "Vecteurs propres", b: R`<p>$E_1 = \operatorname{Vect}\begin{pmatrix}1\\-1\end{pmatrix}$ et $E_3 = \operatorname{Vect}\begin{pmatrix}1\\1\end{pmatrix}$.</p>` },
+    { t: "Diagonalisation", b: R`$$P = \begin{pmatrix}1&1\\-1&1\end{pmatrix},\quad D = \begin{pmatrix}1&0\\0&3\end{pmatrix},\quad P^{-1} = \frac12\begin{pmatrix}1&-1\\1&1\end{pmatrix}.$$` },
+    { t: "La puissance", b: R`$$A^n = PD^nP^{-1} = \frac12\begin{pmatrix}3^n+1&3^n-1\\3^n-1&3^n+1\end{pmatrix}.$$<p>Pour $n=1$, on retrouve bien $A$.</p>`, rappels: ["puissance-diagonalisable"] }
   ],
-  piege: R`Écrire $A^n = P^{-1}D^nP$ au lieu de $PD^nP^{-1}$. Vérifie toujours le cas $n=1$ ou $n=0$.`,
-  methode: R`Une matrice symétrique réelle est toujours diagonalisable (théorème spectral) : ici les vecteurs propres sont même orthogonaux.`
+  piege: R`Écrire $A^n = P^{-1}D^nP$. Vérifie toujours le cas $n=1$.`,
+  methode: R`Une matrice symétrique réelle est toujours diagonalisable, même sans calcul.`
 },
 {
   id: "ex-serie-entiere", subj: "maths", year: "mp", chap: 5, level: 2, time: "15 min",
   title: "Rayon et somme d'une série entière",
-  enonce: R`<p>Déterminer le rayon de convergence puis la somme de $\displaystyle\sum_{n\ge0}\frac{n}{2^n}x^n$.</p>`,
+  enonce: R`<p>Déterminer <span data-k="rayon">le rayon de convergence</span> puis la somme de $\displaystyle\sum_{n\ge0}\frac{n}{2^n}x^n$.</p>`,
+  decode: {
+    donnees: [R`$a_n = \dfrac{n}{2^n}$.`],
+    but: R`Trouver $R$, puis une expression simple de la somme sur $]-R,R[$.`,
+    cles: { rayon: R`Le réel $R$ tel que la série converge pour $|x|<R$ et diverge pour $|x|>R$.` }
+  },
   steps: [
-    ["Rayon", R`$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{n+1}{2n} \xrightarrow[n\to\infty]{} \frac12,\quad\text{donc } R = 2.$$`],
-    ["Série de référence", R`<p>Pour $|u|<1$, $\displaystyle\sum u^n = \frac{1}{1-u}$. En dérivant puis en multipliant par $u$ :</p>$$\sum_{n\ge0} n u^n = \frac{u}{(1-u)^2}.$$`],
-    ["Somme", R`<p>Avec $u = \frac x2$ et $|x|<2$ :</p>$$\sum_{n\ge0}\frac{n}{2^n}x^n = \frac{x/2}{(1-x/2)^2} = \frac{2x}{(2-x)^2}.$$`]
+    { t: "Le rayon", b: R`$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{n+1}{2n} \longrightarrow \frac12,\quad\text{donc } R = 2.$$`, rappels: ["dalembert-se"] },
+    { t: "La série de référence", b: R`<p>Pour $|u|<1$, on dérive $\sum u^n = \frac{1}{1-u}$, puis on multiplie par $u$ :</p>$$\sum_{n\ge0} n u^n = \frac{u}{(1-u)^2}.$$`, rappels: ["serie-geometrique", "derivation-se"] },
+    { t: "La somme", b: R`<p>Avec $u = \frac x2$ et $|x|<2$ :</p>$$\sum_{n\ge0}\frac{n}{2^n}x^n = \frac{2x}{(2-x)^2}.$$` }
   ],
-  piege: R`Oublier de préciser le domaine $]-2,2[$ sur lequel l'égalité est valable.`,
-  methode: R`Pour une série en $n\,u^n$ ou $n^2u^n$, pars de la série géométrique et dérive : l'opérateur $u\frac{d}{du}$ fait apparaître le facteur $n$.`
+  piege: R`Oublier de préciser que l'égalité n'est valable que sur $]-2,2[$.`,
+  methode: R`Pour une série en $n\,u^n$, pars de la série géométrique et dérive.`,
+  viz: {
+    type: "plot", title: "Les sommes partielles rejoignent la somme sur ]−2, 2[", x: [-1.9, 1.9], y: [-1, 8], xlabel: "x",
+    params: [{ k: "N", label: "Nombre de termes N", min: 1, max: 40, step: 1, v: 4 }],
+    curves: [
+      { label: "Somme 2x/(2−x)²", f: x => 2 * x / ((2 - x) * (2 - x)) },
+      { label: "Somme partielle", f: (x, p) => { let s = 0; for (let n = 0; n <= p.N; n++) s += n * Math.pow(x / 2, n); return s; } }
+    ]
+  }
 },
 {
   id: "ex-geometrique", subj: "maths", year: "mp", chap: 12, level: 1, time: "10 min",
-  title: "Espérance d'une loi géométrique par la fonction génératrice",
-  enonce: R`<p>Soit $X\sim\mathcal G(p)$ avec $p\in]0,1[$. Calculer $G_X$ puis $E(X)$.</p>`,
+  title: "Espérance d'une loi géométrique",
+  enonce: R`<p>Soit $X\sim\mathcal G(p)$ avec $p\in\,]0,1[$. Calculer <span data-k="gx">la fonction génératrice</span> $G_X$, puis $E(X)$.</p>`,
+  decode: {
+    donnees: [R`$X$ est le rang du premier succès dans des épreuves indépendantes de probabilité de succès $p$.`],
+    but: R`Obtenir $G_X$ sous forme simple, puis la dériver en $1$.`,
+    cles: { gx: R`$G_X(t) = E(t^X) = \sum_k P(X=k)\,t^k$.` }
+  },
   steps: [
-    ["Fonction génératrice", R`<p>Avec $q = 1-p$ et $|t|<\frac1q$ :</p>$$G_X(t) = \sum_{k\ge1}pq^{k-1}t^k = pt\sum_{j\ge0}(qt)^j = \frac{pt}{1-qt}.$$`],
-    ["Dérivée", R`$$G_X'(t) = \frac{p(1-qt)+pqt}{(1-qt)^2} = \frac{p}{(1-qt)^2}.$$`],
-    ["Espérance", R`$$E(X) = G_X'(1) = \frac{p}{p^2} = \frac1p.$$`]
+    { t: "La loi", b: R`<p>Avec $q = 1-p$ : $P(X=k) = pq^{k-1}$ pour $k\ge1$.</p>`, rappels: ["loi-geometrique"] },
+    { t: "Fonction génératrice", b: R`$$G_X(t) = \sum_{k\ge1}pq^{k-1}t^k = pt\sum_{j\ge0}(qt)^j = \frac{pt}{1-qt}\quad\text{pour } |t|<\tfrac1q.$$`, rappels: ["fonction-generatrice", "serie-geometrique"] },
+    { t: "Dérivée", b: R`$$G_X'(t) = \frac{p}{(1-qt)^2}.$$` },
+    { t: "Espérance", b: R`$$E(X) = G_X'(1) = \frac{p}{p^2} = \frac1p.$$` }
   ],
-  piege: R`La loi géométrique commence à $k=1$ (rang du premier succès). Commencer la somme à $0$ change tout.`,
-  methode: R`$E(X) = G_X'(1)$ et $V(X) = G_X''(1)+G_X'(1)-G_X'(1)^2$.`
+  piege: R`La loi géométrique commence à $k=1$. Commencer la somme à $0$ fausse tout.`,
+  methode: R`$E(X) = G_X'(1)$ et $V(X) = G_X''(1)+G_X'(1)-G_X'(1)^2$.`,
+  viz: {
+    type: "seq", title: "La loi de X et son espérance 1/p", n: [1, 20], y: [0, 0.8],
+    params: [{ k: "p", label: "Probabilité de succès p", min: 0.05, max: 0.8, step: 0.01, v: 0.3 }],
+    series: [{ label: "P(X = k)", style: "bar", f: (k, p) => p.p * Math.pow(1 - p.p, k - 1) }],
+    vlines: [{ x: p => 1 / p.p, label: "E(X) = 1/p" }]
+  }
+},
+{
+  id: "pb-suite-racine", kind: "probleme", subj: "maths", year: "mpsi", chap: 6, classique: true, level: 2, time: "45 min",
+  title: "Une suite définie par une racine",
+  enonce: R`<p>On définit $u_0 = 0$ et, pour tout $n$, $u_{n+1} = \sqrt{2+u_n}$.</p><ol><li>Montrer que $0\le u_n\le 2$ pour tout $n$.</li><li>Montrer que $(u_n)$ est croissante.</li><li>En déduire qu'elle converge et déterminer sa limite $\ell$.</li><li>Montrer que $|u_{n+1}-2| \le \frac12|u_n-2|$, puis majorer $|u_n-2|$.</li><li>Pour $\theta\in[0,\frac\pi2]$, vérifier que $\sqrt{2+2\cos\theta} = 2\cos\frac\theta2$. En déduire <span data-k="explicite">une expression explicite</span> de $u_n$.</li></ol>`,
+  decode: {
+    donnees: [R`Une suite récurrente $u_{n+1} = f(u_n)$ avec $f(x) = \sqrt{2+x}$ et $u_0 = 0$.`],
+    but: R`Étudier la convergence, la vitesse de convergence, puis trouver $u_n$ en fonction de $n$.`,
+    cles: { explicite: R`Une formule qui donne $u_n$ directement à partir de $n$, sans passer par les termes précédents.` }
+  },
+  steps: [
+    { t: "Q1 · Encadrement", b: R`<p>Récurrence. $u_0 = 0\in[0,2]$. Si $0\le u_n\le2$, alors $2\le 2+u_n\le4$, donc $\sqrt2\le u_{n+1}\le2$. En particulier $u_{n+1}\in[0,2]$.</p>`, rappels: ["recurrence"] },
+    { t: "Q2 · Monotonie", b: R`$$u_{n+1}-u_n = \sqrt{2+u_n}-u_n = \frac{2+u_n-u_n^2}{\sqrt{2+u_n}+u_n} = \frac{(2-u_n)(1+u_n)}{\sqrt{2+u_n}+u_n}.$$<p>Le dénominateur est strictement positif et, d'après Q1, le numérateur est positif. La suite est croissante.</p>`, rappels: ["quantite-conjuguee"] },
+    { t: "Q3 · Convergence", b: R`<p>$(u_n)$ est croissante et majorée par $2$ : elle converge vers $\ell\in[0,2]$. Comme $f$ est continue, $\ell = \sqrt{2+\ell}$, donc $\ell^2-\ell-2 = (\ell-2)(\ell+1) = 0$. Comme $\ell\ge0$, $\ell = 2$.</p>`, rappels: ["limite-monotone", "continuite-point-fixe"] },
+    { t: "Q4 · Vitesse", b: R`$$|u_{n+1}-2| = \left|\sqrt{2+u_n}-2\right| = \frac{|u_n-2|}{\sqrt{2+u_n}+2} \le \frac{|u_n-2|}{2}.$$<p>Par récurrence, $|u_n-2| \le \dfrac{|u_0-2|}{2^n} = \dfrac{1}{2^{n-1}}$.</p>`, rappels: ["quantite-conjuguee"] },
+    { t: "Q5 · La formule", b: R`<p>$2+2\cos\theta = 4\cos^2\frac\theta2$ et $\cos\frac\theta2\ge0$ pour $\theta\in[0,\frac\pi2]$, d'où $\sqrt{2+2\cos\theta} = 2\cos\frac\theta2$.</p>`, rappels: ["duplication-cos"] },
+    { t: "Q5 · Conclusion", b: R`<p>$u_0 = 0 = 2\cos\frac\pi2$. Si $u_n = 2\cos\frac{\pi}{2^{n+1}}$, alors $u_{n+1} = \sqrt{2+2\cos\frac{\pi}{2^{n+1}}} = 2\cos\frac{\pi}{2^{n+2}}$. Donc</p>$$u_n = 2\cos\frac{\pi}{2^{n+1}}.$$<p>On retrouve $u_n\to2$.</p>` }
+  ],
+  piege: R`En Q3, écrire « $\ell = \sqrt{2+\ell}$ » sans avoir prouvé la convergence. L'équation du point fixe ne vaut que si la suite converge.`,
+  methode: R`Pour une suite $u_{n+1} = f(u_n)$ : encadrer, étudier le signe de $u_{n+1}-u_n$, conclure par la limite monotone, puis identifier la limite par continuité.`,
+  viz: {
+    type: "seq", title: "La suite monte vers 2, de plus en plus vite", n: [0, 12], y: [0, 2.2],
+    series: [{ label: "u_n", style: "bar", f: n => 2 * Math.cos(Math.PI / Math.pow(2, n + 1)) }],
+    hlines: [{ y: () => 2, label: "limite 2" }]
+  }
+},
+{
+  id: "pb-nilpotentes", kind: "probleme", subj: "maths", year: "mp", chap: 1, classique: true, level: 2, time: "30 min",
+  title: "Autour des matrices nilpotentes",
+  enonce: R`<p>Soit $N\in\mathcal M_n(\mathbb C)$ <span data-k="nilp">nilpotente</span> : il existe $p\ge1$ tel que $N^p = 0$.</p><ol><li>Montrer que $0$ est la seule valeur propre de $N$.</li><li>En déduire $\chi_N$, puis montrer que $N^n = 0$.</li><li>Montrer que $I_n - N$ est inversible et exprimer son inverse.</li><li>Montrer qu'une matrice nilpotente non nulle n'est pas diagonalisable.</li></ol>`,
+  decode: {
+    donnees: [R`$N^p = 0$ pour un certain $p$, éventuellement plus grand que $n$.`],
+    but: R`Décrire le spectre, le polynôme caractéristique, puis deux conséquences.`,
+    cles: { nilp: R`Une puissance de $N$ est la matrice nulle.` }
+  },
+  steps: [
+    { t: "Q1 · Spectre", b: R`<p>Si $NX = \lambda X$ avec $X\neq0$, alors $0 = N^pX = \lambda^pX$, donc $\lambda = 0$. Et $0$ est bien valeur propre : $(\det N)^p = \det(N^p) = 0$, donc $N$ n'est pas inversible.</p>` },
+    { t: "Q2 · Polynôme caractéristique", b: R`<p>$\chi_N$ est unitaire de degré $n$, scindé sur $\mathbb C$, et sa seule racine est $0$ : $\chi_N = X^n$. Par Cayley-Hamilton, $N^n = 0$.</p>`, rappels: ["scinde-C", "cayley-hamilton"] },
+    { t: "Q3 · Inverse", b: R`$$(I_n-N)\left(I_n+N+\dots+N^{p-1}\right) = I_n - N^p = I_n.$$<p>Donc $I_n-N$ est inversible, d'inverse $\sum_{k=0}^{p-1}N^k$.</p>` },
+    { t: "Q4 · Non diagonalisable", b: R`<p>Si $N = PDP^{-1}$ avec $D$ diagonale, les coefficients de $D$ sont les valeurs propres, toutes nulles. Donc $D = 0$ puis $N = 0$. Une nilpotente non nulle n'est donc pas diagonalisable.</p>` }
+  ],
+  piege: R`En Q1, oublier de montrer que $0$ est effectivement valeur propre.`,
+  methode: R`L'identité $I - N^p = (I-N)(I+N+\dots+N^{p-1})$ est l'analogue matriciel de la somme géométrique.`
 }
 ]);
 
 LEMME.dm([
-  { subj: "maths", year: "mpsi", title: "DM 1 · Suite définie par une racine", free: true,
+  { subj: "maths", year: "mpsi", title: "Suite définie par une racine", corrige: "pb-suite-racine",
     body: R`<p>On définit $u_0 = 0$ et $u_{n+1} = \sqrt{2+u_n}$.</p><ol><li>Montrer que $0\le u_n\le 2$ pour tout $n$.</li><li>Montrer que $(u_n)$ est croissante.</li><li>En déduire qu'elle converge et déterminer sa limite $\ell$.</li><li>Montrer que $|u_{n+1}-2| \le \frac12|u_n-2|$, puis majorer $|u_n-2|$.</li><li>Pour $\theta\in[0,\frac\pi2]$, vérifier que $\sqrt{2+2\cos\theta} = 2\cos\frac\theta2$. En déduire une expression explicite de $u_n$.</li></ol>` },
-  { subj: "maths", year: "mp", title: "DM 2 · Autour des matrices nilpotentes",
+  { subj: "maths", year: "mp", title: "Matrices nilpotentes", corrige: "pb-nilpotentes",
     body: R`<p>Soit $N\in\mathcal M_n(\mathbb C)$ telle que $N^p = 0$ pour un entier $p\ge1$.</p><ol><li>Montrer que $0$ est la seule valeur propre de $N$.</li><li>En déduire $\chi_N$ puis montrer que $N^n = 0$.</li><li>Montrer que $I_n - N$ est inversible et exprimer son inverse.</li><li>Montrer qu'une matrice nilpotente non nulle n'est pas diagonalisable.</li></ol>` }
 ]);
 
 LEMME.kholles([
-  { subj: "maths", year: "mpsi", qs: ["Démontrer que $\\sqrt2$ est irrationnel.", "Démontrer la formule du binôme de Newton.", "Énoncer et démontrer le théorème de Bézout.", "Démontrer l'inégalité de Cauchy-Schwarz.", "Énoncer et démontrer le théorème du rang.", "Démontrer le théorème de Rolle."] },
+  { subj: "maths", year: "mpsi", qs: [R`Démontrer que $\sqrt2$ est irrationnel.`, "Démontrer la formule du binôme de Newton.", "Énoncer et démontrer le théorème de Bézout.", "Démontrer l'inégalité de Cauchy-Schwarz.", "Énoncer et démontrer le théorème du rang.", "Démontrer le théorème de Rolle."] },
   { subj: "maths", year: "mp", qs: ["Montrer que des vecteurs propres associés à des valeurs propres distinctes forment une famille libre.", "Énoncer le lemme d'Abel et en déduire la définition du rayon de convergence.", "Montrer qu'une limite uniforme de fonctions continues est continue.", "Énoncer le théorème spectral.", "Calculer espérance et variance d'une loi de Poisson."] }
 ]);

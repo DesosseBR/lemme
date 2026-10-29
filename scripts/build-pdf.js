@@ -1,0 +1,148 @@
+#!/usr/bin/env node
+/* Génère les PDF de Lemme à partir du contenu (content/*.js) et des cours écrits à la main (tex/cours/*.tex).
+   Usage : node scripts/build-pdf.js            (reconstruit seulement ce qui a changé)
+           node scripts/build-pdf.js --force    (tout reconstruire)
+           node scripts/build-pdf.js maths      (une seule matière)
+   Produit pdf/*.pdf et content/pdfs.js (liste des PDF disponibles pour le site). */
+const fs = require("fs"), path = require("path"), vm = require("vm"), crypto = require("crypto");
+const { execFile } = require("child_process");
+
+const ROOT = path.resolve(__dirname, "..");
+const SITE_URL = "lemme-ryq6.vercel.app";
+const ORDER = ["core", "maths", "physique", "chimie", "si", "info", "anglais"];
+const args = process.argv.slice(2);
+const FORCE = args.includes("--force");
+const ONLY = args.find(a => !a.startsWith("--"));
+
+/* ---------- Charger le contenu ---------- */
+const sandbox = { window: {} };
+vm.createContext(sandbox);
+for (const f of ORDER) vm.runInContext(fs.readFileSync(path.join(ROOT, "content", f + ".js"), "utf8"), sandbox, { filename: f + ".js" });
+const L = sandbox.window.LEMME;
+const YEARS = { mpsi: "MPSI", mp: "MP" };
+const pad = n => String(n).padStart(2, "0");
+
+/* ---------- HTML + LaTeX vers LaTeX ---------- */
+const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": " " };
+const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp);/g, m => ENT[m]);
+const UNI = { "ℤ": "$\\mathbb{Z}$", "ℝ": "$\\mathbb{R}$", "ℂ": "$\\mathbb{C}$", "ℕ": "$\\mathbb{N}$", "★": "" };
+function escText(s) {
+  return decode(s)
+    .replace(/\\/g, "\\textbackslash{}")
+    .replace(/([&%#_{}])/g, "\\$1")
+    .replace(/~/g, "\\textasciitilde{}")
+    .replace(/\^/g, "\\textasciicircum{}")
+    .replace(/[ℤℝℂℕ★]/g, c => UNI[c]);
+}
+function toTex(html) {
+  if (!html) return "";
+  const store = [];
+  const keep = s => { store.push(s); return "\u0000" + (store.length - 1) + "\u0000"; };
+  let s = html;
+  s = s.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/g, (_, c) => keep("\n\\begin{lstlisting}\n" + decode(c) + "\n\\end{lstlisting}\n"));
+  s = s.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => keep("\n\\[" + decode(m) + "\\]\n"));
+  s = s.replace(/\$([^$]+?)\$/g, (_, m) => keep("$" + decode(m) + "$"));
+  s = s.replace(/<code>([\s\S]*?)<\/code>/g, (_, c) => keep("\\texttt{" + escText(c) + "}"));
+  const tags = [];
+  s = s.replace(/<[^>]+>/g, t => { tags.push(t); return "\u0001" + (tags.length - 1) + "\u0001"; });
+  s = escText(s);
+  s = s.replace(/\u0001(\d+)\u0001/g, (_, i) => {
+    const t = tags[+i].toLowerCase();
+    if (/^<p\b/.test(t)) return "\n\n";
+    if (t === "</p>") return "\n\n";
+    if (/^<ul\b/.test(t)) return "\n\\begin{itemize}\n";
+    if (t === "</ul>") return "\n\\end{itemize}\n";
+    if (/^<ol\b/.test(t)) return "\n\\begin{enumerate}\n";
+    if (t === "</ol>") return "\n\\end{enumerate}\n";
+    if (/^<li\b/.test(t)) return "\n\\item ";
+    if (/^<(b|strong)\b/.test(t)) return "\\textbf{";
+    if (/^<\/(b|strong)>/.test(t)) return "}";
+    if (/^<(i|em)\b/.test(t)) return "\\emph{";
+    if (/^<\/(i|em)>/.test(t)) return "}";
+    if (/^<br/.test(t)) return "\\\\\n";
+    return "";
+  });
+  s = s.replace(/\u0000(\d+)\u0000/g, (_, i) => store[+i]);
+  return s.replace(/\n{3,}/g, "\n\n").trim();
+}
+
+/* ---------- Documents ---------- */
+function doc({ meta, kicker, title, body, url }) {
+  return `\\documentclass[11pt]{article}
+\\usepackage{lemme}
+\\renewcommand\\lemmemeta{${escText(meta)}}
+\\renewcommand\\lemmeurl{${escText(url || SITE_URL)}}
+\\begin{document}
+\\lemmetitle{${escText(kicker)}}{${escText(title)}}
+${body}
+\\end{document}
+`;
+}
+
+const jobs = [];
+for (const s of L.SUBJECTS) {
+  if (ONLY && s.id !== ONLY) continue;
+  for (const y of ["mpsi", "mp"]) s.years[y].forEach((c, i) => {
+    if (!c.r) return;
+    const meta = `${s.name} · ${YEARS[y]} · Chapitre ${pad(i + 1)}`;
+    jobs.push({ name: `resume-${s.id}-${y}-${pad(i + 1)}`, tex: doc({
+      meta, kicker: `Résumé de cours · ${s.name} ${YEARS[y]}`, title: c.t,
+      body: `\\lemmenotions{Au programme : ${escText(c.n)}.}\n\\lemmesection{L'essentiel}\n${toTex(c.r)}`
+    }) });
+  });
+}
+for (const e of L.EXERCISES) {
+  if (ONLY && e.subj !== ONLY) continue;
+  const s = L.SUBJECTS.find(x => x.id === e.subj), c = s.years[e.year][e.chap];
+  const kind = e.kind === "probleme" ? "Problème" : "Exercice";
+  jobs.push({ name: `enonce-${e.id}`, tex: doc({
+    meta: `${s.name} · ${YEARS[e.year]} · ${c.t}`, kicker: `${kind} · ${s.name} ${YEARS[e.year]} · ${e.time}`, title: e.title,
+    url: `Corrigé pas à pas : ${SITE_URL}/#e-${e.id}`,
+    body: toTex(e.enonce)
+  }) });
+}
+L.DM.forEach((d, k) => {
+  if (ONLY && d.subj !== ONLY) return;
+  const s = L.SUBJECTS.find(x => x.id === d.subj);
+  jobs.push({ name: `dm-${d.subj}-${d.year}-${k + 1}`, tex: doc({
+    meta: `${s.name} · ${YEARS[d.year]} · Devoir maison`, kicker: `Devoir maison · ${s.name} ${YEARS[d.year]}`, title: d.title,
+    url: d.corrige ? `Corrigé pas à pas : ${SITE_URL}/#e-${d.corrige}` : SITE_URL,
+    body: toTex(d.body)
+  }) });
+});
+/* Cours écrits à la main : tex/cours/<matiere>-<annee>-<nn>.tex (document complet utilisant \usepackage{lemme}) */
+const coursDir = path.join(ROOT, "tex", "cours");
+if (fs.existsSync(coursDir)) for (const f of fs.readdirSync(coursDir)) if (f.endsWith(".tex") && (!ONLY || f.startsWith(ONLY + "-")))
+  jobs.push({ name: "cours-" + f.replace(/\.tex$/, ""), tex: fs.readFileSync(path.join(coursDir, f), "utf8") });
+
+/* ---------- Compilation ---------- */
+const BUILD = path.join(ROOT, "build"), OUT = path.join(ROOT, "pdf");
+fs.mkdirSync(BUILD, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
+const hashFile = path.join(OUT, ".hashes.json");
+const hashes = fs.existsSync(hashFile) ? JSON.parse(fs.readFileSync(hashFile, "utf8")) : {};
+const styHash = crypto.createHash("sha1").update(fs.readFileSync(path.join(ROOT, "tex", "lemme.sty"))).digest("hex").slice(0, 8);
+const todo = jobs.filter(j => {
+  j.hash = styHash + crypto.createHash("sha1").update(j.tex).digest("hex").slice(0, 12);
+  return FORCE || hashes[j.name] !== j.hash || !fs.existsSync(path.join(OUT, j.name + ".pdf"));
+});
+const env = { ...process.env, TEXINPUTS: path.join(ROOT, "tex") + "//:" };
+const run = j => new Promise(res => {
+  fs.writeFileSync(path.join(BUILD, j.name + ".tex"), j.tex);
+  execFile("latexmk", ["-xelatex", "-interaction=nonstopmode", "-halt-on-error", "-quiet", "-outdir=" + BUILD, j.name + ".tex"], { cwd: BUILD, env, maxBuffer: 1 << 24 }, err => {
+    if (err) { const log = path.join(BUILD, j.name + ".log"); const tail = fs.existsSync(log) ? fs.readFileSync(log, "utf8").split("\n").filter(l => l.startsWith("!") || /^l\.\d+/.test(l)).slice(0, 6).join("\n") : String(err); res({ j, ok: false, tail }); return; }
+    fs.copyFileSync(path.join(BUILD, j.name + ".pdf"), path.join(OUT, j.name + ".pdf"));
+    hashes[j.name] = j.hash; res({ j, ok: true });
+  });
+});
+(async () => {
+  console.log(`${jobs.length} documents, ${todo.length} à compiler.`);
+  const failed = []; let k = 0;
+  const workers = Array.from({ length: 4 }, async () => { while (k < todo.length) { const r = await run(todo[k++]); if (!r.ok) failed.push(r); else process.stdout.write("."); } });
+  await Promise.all(workers);
+  fs.writeFileSync(hashFile, JSON.stringify(hashes, null, 1));
+  const all = fs.readdirSync(OUT).filter(f => f.endsWith(".pdf")).map(f => f.replace(/\.pdf$/, "")).sort();
+  fs.writeFileSync(path.join(ROOT, "content", "pdfs.js"), "/* Généré par scripts/build-pdf.js : ne pas modifier à la main. */\nLEMME.PDFS = " + JSON.stringify(all) + ";\n");
+  console.log(`\n${todo.length - failed.length} compilés, ${failed.length} en erreur.`);
+  failed.forEach(f => console.log("✗ " + f.j.name + "\n" + f.tail));
+  process.exit(failed.length ? 1 : 0);
+})();
