@@ -27,6 +27,7 @@
 \setlist[enumerate]{label={\sffamily\bfseries\color{navy}\arabic*.},leftmargin=1.8em,itemsep=0.55em,topsep=0.6em}
 \RequirePackage{listings}
 \lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{goldsoft!40},frame=none,xleftmargin=0.8em,framexleftmargin=0.6em,aboveskip=0.9em,belowskip=0.9em,columns=fullflexible,keepspaces=true,showstringspaces=false}
+\RequirePackage{needspace}
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \RequirePackage[hidelinks]{hyperref}
@@ -58,7 +59,19 @@
 }
 % Intertitre
 \newcommand\lemmesection[1]{%
-  \par\vspace{1.1em}{\sffamily\bfseries\large\color{navy}#1\par}\vspace{0.3em}}
+  \par\needspace{7\baselineskip}\vspace{1.1em}{\sffamily\bfseries\large\color{navy}#1\par}\vspace{0.3em}}
 % Encadré « au programme »
 \newcommand\lemmenotions[1]{%
   {\sffamily\small\color{muted}#1\par}}
+
+% Encadrés pour les résumés et les cours
+\RequirePackage[most]{tcolorbox}
+\tcbset{lemmebase/.style={enhanced,arc=6pt,boxrule=0pt,left=12pt,right=12pt,top=9pt,bottom=9pt,
+  before skip=0.8em,after skip=0.8em,fonttitle=\sffamily\bfseries\small,coltitle=navy,
+  attach title to upper={\par\vspace{0.35em}}}}
+% Théorème : fond jaune pâle
+\newtcolorbox{lthm}[1][]{lemmebase,colback=goldsoft,title={#1}}
+% Définition : fond gris-bleu clair
+\newtcolorbox{ldef}[1][]{lemmebase,colback=line!45,title={#1}}
+% Méthode ou mise en garde : fond marine, texte clair
+\newtcolorbox{lnote}[1][]{lemmebase,colback=navy,colupper=white,coltitle=gold,title={#1}}

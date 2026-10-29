@@ -83,6 +83,9 @@ const jobs = [];
 for (const s of L.SUBJECTS) {
   if (ONLY && s.id !== ONLY) continue;
   for (const y of ["mpsi", "mp"]) s.years[y].forEach((c, i) => {
+    /* Un résumé rédigé à la main dans tex/resumes/<matiere>-<annee>-<nn>.tex remplace le résumé généré. */
+    const hand = path.join(ROOT, "tex", "resumes", `${s.id}-${y}-${pad(i + 1)}.tex`);
+    if (fs.existsSync(hand)) { jobs.push({ name: `resume-${s.id}-${y}-${pad(i + 1)}`, tex: fs.readFileSync(hand, "utf8") }); return; }
     if (!c.r) return;
     const meta = `${s.name} · ${YEARS[y]} · Chapitre ${pad(i + 1)}`;
     jobs.push({ name: `resume-${s.id}-${y}-${pad(i + 1)}`, tex: doc({

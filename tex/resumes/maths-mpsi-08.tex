@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage{lemme}
+\usepackage{tabularx,array,colortbl}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\renewcommand\lemmemeta{Mathématiques · MPSI · Chapitre 08}
+\renewcommand\lemmeurl{lemme-ryq6.vercel.app}
+\renewcommand{\leq}{\leqslant}\renewcommand{\geq}{\geqslant}
+\newcommand{\R}{\mathbb{R}}
+\begin{document}
+
+\lemmetitle{Résumé de cours · Mathématiques MPSI}{Limites et continuité}
+
+\lemmenotions{Dans tout le résumé, $I$ est un intervalle de $\R$ non réduit à un point, $f : I\to\R$, et $a$ est un point de $I$ ou une extrémité de $I$ (éventuellement $\pm\infty$).}
+
+\lemmesection{1. La notion de limite}
+
+L'idée : $f(x)$ se rapproche autant qu'on veut de $\ell$, dès que $x$ est assez proche de $a$.
+
+\begin{ldef}[Limite finie]
+$f$ tend vers $\ell\in\R$ en $a\in\R$ si
+\[\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x\in I,\quad |x-a|\leq\alpha \implies |f(x)-\ell|\leq\varepsilon.\]
+En $+\infty$, on remplace « $|x-a|\leq\alpha$ » par « $x\geq A$ » ($A$ réel).
+\end{ldef}
+
+\begin{ldef}[Limite infinie]
+$f$ tend vers $+\infty$ en $a$ si, pour tout $M$, on a $f(x)\geq M$ dès que $x$ est assez proche de $a$.
+\end{ldef}
+
+\begin{lthm}[À retenir]
+\begin{itemize}
+\item La limite, si elle existe, est \textbf{unique}. On la note $\lim_a f$ ou $\lim_{x\to a}f(x)$.
+\item Une fonction qui a une limite \textbf{finie} en $a$ est \textbf{bornée} au voisinage de $a$.
+\end{itemize}
+\end{lthm}
+
+\lemmesection{2. Limites et suites}
+
+\begin{lthm}[Caractérisation séquentielle]
+$f(x)\xrightarrow[x\to a]{}\ell$ si et seulement si, pour toute suite $(x_n)$ d'éléments de $I$ qui tend vers $a$, on a $f(x_n)\to\ell$.
+\end{lthm}
+
+\begin{lnote}[Méthode]
+Pour montrer qu'une fonction \textbf{n'a pas} de limite en $a$ : trouver deux suites qui tendent vers $a$ et dont les images ont des limites différentes.
+\end{lnote}
+
+\lemmesection{3. Calculer une limite}
+
+\begin{itemize}
+\item \textbf{Opérations.} Les limites passent aux sommes, produits et quotients, sauf dans les formes indéterminées.
+\item \textbf{Composition.} Si $f\to b$ en $a$ et $g\to\ell$ en $b$, alors $g\circ f\to\ell$ en $a$.
+\item \textbf{Inégalités.} Si $f\leq g$ près de $a$ et si les limites existent, alors $\lim f\leq\lim g$. Une inégalité \emph{stricte} devient \emph{large} à la limite.
+\end{itemize}
+
+\begin{lthm}[Encadrement et comparaison]
+\begin{itemize}
+\item Si $g\leq f\leq h$ près de $a$ et si $g$ et $h$ tendent vers le même $\ell$, alors $f\to\ell$.
+\item Si $g\leq f$ près de $a$ et $g\to+\infty$, alors $f\to+\infty$.
+\end{itemize}
+\end{lthm}
+
+\lemmesection{4. Limites à gauche et à droite}
+
+La limite à droite en $a$ ne regarde que les $x>a$ ; la limite à gauche, que les $x<a$. On les note $\lim_{x\to a^+}f(x)$ et $\lim_{x\to a^-}f(x)$. Si elles existent et sont égales, on obtient la limite \emph{épointée} en $a$ (on ignore la valeur $f(a)$).
+
+\begin{lthm}[Théorème de la limite monotone]
+Une fonction monotone sur $]a,b[$ admet des limites, finies ou infinies, en $a$ et en $b$.
+
+Si $f$ est croissante : sa limite en $b$ est $\sup f$ si $f$ est majorée, $+\infty$ sinon. De plus, en tout point intérieur, $f$ a une limite à gauche et une à droite, qui encadrent $f(a)$.
+\end{lthm}
+
+\lemmesection{5. Continuité}
+
+\begin{ldef}[Continuité en un point]
+$f$ est \textbf{continue en $a\in I$} si $\lim_{x\to a}f(x) = f(a)$. Elle est continue sur $I$ si elle l'est en tout point de $I$.
+\end{ldef}
+
+\begin{itemize}
+\item Version séquentielle : $f$ est continue en $a$ si et seulement si $x_n\to a\implies f(x_n)\to f(a)$.
+\item En un point intérieur, continue $\iff$ continue à gauche \emph{et} à droite. Pratique pour une fonction définie « par morceaux ».
+\item Sommes, produits, quotients et composées de fonctions continues sont continues.
+\end{itemize}
+
+\lemmesection{6. Les grands théorèmes}
+
+\begin{lthm}[Théorème des valeurs intermédiaires]
+Si $f$ est continue sur un \textbf{intervalle}, elle prend toutes les valeurs comprises entre deux valeurs qu'elle atteint.
+
+Autrement dit : l'image d'un intervalle par une fonction continue est un intervalle.
+\end{lthm}
+
+\begin{lthm}[Théorème des bornes atteintes]
+Une fonction continue sur un \textbf{segment} $[a,b]$ est bornée et atteint son minimum et son maximum. L'image d'un segment est un segment.
+\end{lthm}
+
+\begin{itemize}
+\item Une fonction continue et injective sur un intervalle est strictement monotone.
+\item Ces théorèmes demandent un \emph{intervalle} : $x\mapsto 1/x$ change de signe sur $\R^*$ sans jamais s'annuler.
+\end{itemize}
+
+\lemmesection{7. Fonctions à valeurs complexes}
+
+$f : I\to\mathbb{C}$ tend vers $\ell$ si $|f(x)-\ell|\to0$. On travaille avec les parties réelle et imaginaire : $f\to\ell \iff \operatorname{Re}f\to\operatorname{Re}\ell$ et $\operatorname{Im}f\to\operatorname{Im}\ell$. Même chose pour la continuité. Le théorème des valeurs intermédiaires n'a plus de sens, mais une fonction complexe continue sur un segment reste bornée.
+
+\newpage
+\lemmesection{Les formules à connaître}
+
+\renewcommand{\arraystretch}{1.55}\arrayrulecolor{line}
+\begin{tabularx}{\linewidth}{>{\sffamily\small\color{muted}\raggedright\arraybackslash}m{4.3cm} X}
+Limite finie en $a$ & $\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x\in I,\ |x-a|\leq\alpha\implies|f(x)-\ell|\leq\varepsilon$ \\ \hline
+Limite finie en $+\infty$ & $\forall\varepsilon>0,\ \exists A\in\R,\ \forall x\in I,\ x\geq A\implies|f(x)-\ell|\leq\varepsilon$ \\ \hline
+Limite $+\infty$ en $a$ & $\forall M\in\R,\ \exists\alpha>0,\ \forall x\in I,\ |x-a|\leq\alpha\implies f(x)\geq M$ \\ \hline
+Limite $+\infty$ en $+\infty$ & $\forall M\in\R,\ \exists A\in\R,\ \forall x\in I,\ x\geq A\implies f(x)\geq M$ \\ \hline
+Limite à droite & $\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x\in I,\ a<x<a+\alpha\implies|f(x)-\ell|\leq\varepsilon$ \\ \hline
+Caractérisation séquentielle & $f\xrightarrow[a]{}\ell \iff \big(\forall(x_n)\in I^{\mathbb N},\ x_n\to a\implies f(x_n)\to\ell\big)$ \\ \hline
+Encadrement & $|f(x)-\ell|\leq\varepsilon(x)$ avec $\varepsilon(x)\xrightarrow[x\to a]{}0 \implies f(x)\xrightarrow[x\to a]{}\ell$ \\ \hline
+Limite monotone, $f$ croissante & $\displaystyle\lim_{x\to a^-}f(x)\leq f(a)\leq\lim_{x\to a^+}f(x)$ \\ \hline
+Continuité en $a$ & $\displaystyle\lim_{x\to a}f(x) = f(a)$ \\ \hline
+Inégalité triangulaire renversée & $\big||x|-|a|\big|\leq|x-a|$, donc $x\mapsto|x|$ est continue \\ \hline
+Formes indéterminées & $(+\infty)+(-\infty)$, \quad $0\times\infty$, \quad $\dfrac00$, \quad $\dfrac{\infty}{\infty}$, \quad $1^{\infty}$, \quad $0^0$, \quad $\infty^0$ \\ \hline
+\end{tabularx}
+
+\vspace{0.6em}\lemmesection{Limites usuelles}
+\renewcommand{\arraystretch}{2.4}
+
+\begin{tabularx}{\linewidth}{X X}
+$\displaystyle\lim_{x\to0}\frac{\sin x}{x} = 1$ & $\displaystyle\lim_{x\to0}\frac{1-\cos x}{x^2} = \frac12$ \\
+$\displaystyle\lim_{x\to0}\frac{e^x-1}{x} = 1$ & $\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{x} = 1$ \\
+$\displaystyle\lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta} = 0$ \quad ($\alpha,\beta>0$) & $\displaystyle\lim_{x\to+\infty}\frac{x^\beta}{e^{\gamma x}} = 0$ \quad ($\beta,\gamma>0$) \\
+$\displaystyle\lim_{x\to0^+}x^\beta\,|\ln x|^\alpha = 0$ \quad ($\alpha,\beta>0$) & $\displaystyle\lim_{x\to+\infty}\Big(1+\frac1x\Big)^{x} = e$ \\
+\end{tabularx}
+
+\end{document}

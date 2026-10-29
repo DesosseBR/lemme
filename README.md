@@ -59,6 +59,10 @@ Ajouter une entrée dans `LEMME.rappels({...})` du fichier de la matière : `"id
 
 Remplir le troisième argument de `C(titre, notions, résumé)` dans le chapitre concerné.
 
+### Un résumé rédigé à la main
+
+Créer `tex/resumes/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-08.tex`). Il remplace le résumé généré automatiquement. Encadrés disponibles : `ldef` (définition), `lthm` (théorème), `lnote` (méthode).
+
 ### Un cours complet en PDF
 
 Créer `tex/cours/<matiere>-<annee>-<nn>.tex` (par exemple `maths-mpsi-15.tex`), un document LaTeX qui commence par `\usepackage{lemme}`. Il apparaît automatiquement dans l'onglet « Cours » du chapitre.
