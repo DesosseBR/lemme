@@ -36,7 +36,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-dicho", subj: "info", year: "mpsi", chap: 3, classique: true, level: 1, time: "15 min",
+  id: "ex-dicho", subj: "info", year: "mpsi", chap: 3, classique: true, level: 2, time: "15 min",
   title: "Recherche dichotomique",
   enonce: R`<p>Écrire une fonction <code>appartient(L, x)</code> qui teste si <code>x</code> est dans la liste <span data-k="triee">triée</span> <code>L</code> par dichotomie. Prouver sa terminaison et donner sa complexité.</p>`,
   decode: {

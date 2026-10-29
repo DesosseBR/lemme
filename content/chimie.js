@@ -44,7 +44,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-cinetique", subj: "chimie", year: "mpsi", chap: 1, classique: true, level: 1, time: "10 min",
+  id: "ex-cinetique", subj: "chimie", year: "mpsi", chap: 1, classique: true, level: 2, time: "10 min",
   title: "Conversion à 90 % pour un ordre 1",
   enonce: R`<p>Une réaction d'ordre 1 a un <span data-k="t12">temps de demi-réaction</span> $t_{1/2} = 20\ \mathrm{min}$. Combien de temps faut-il pour consommer $90\,\%$ du réactif ?</p>`,
   decode: {

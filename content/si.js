@@ -39,7 +39,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-premier-ordre", subj: "si", year: "mpsi", chap: 2, classique: true, level: 2, time: "15 min",
+  id: "ex-premier-ordre", subj: "si", year: "mpsi", chap: 2, classique: true, level: 3, time: "15 min",
   title: "Premier ordre en boucle ouverte et fermée",
   enonce: R`<p>Un système a pour fonction de transfert $H(p) = \dfrac{K}{1+\tau p}$ avec $K = 2$ et $\tau = 0{,}5\ \mathrm s$. On le place dans une boucle à <span data-k="retour">retour unitaire</span>. Comparer le temps de réponse à $5\,\%$ et l'erreur statique pour un échelon $E_0$.</p>`,
   decode: {

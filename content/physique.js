@@ -75,7 +75,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-rc", subj: "physique", year: "mpsi", chap: 2, classique: true, level: 1, time: "12 min",
+  id: "ex-rc", subj: "physique", year: "mpsi", chap: 2, classique: true, level: 2, time: "12 min",
   title: "Charge d'un condensateur",
   enonce: R`<p>Un condensateur <span data-k="decharge">initialement déchargé</span>, de capacité $C = 100\ \mathrm{nF}$, est chargé à travers une résistance $R = 10\ \mathrm{k}\Omega$ par un générateur de tension constante $E$. Établir $u_C(t)$, puis le temps au bout duquel $u_C$ atteint $99\,\%$ de $E$.</p>`,
   decode: {
@@ -103,7 +103,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-chute", subj: "physique", year: "mpsi", chap: 5, level: 1, time: "12 min",
+  id: "ex-chute", subj: "physique", year: "mpsi", chap: 5, level: 2, time: "12 min",
   title: "Chute avec frottement linéaire",
   enonce: R`<p>Une bille de masse $m$ est lâchée sans vitesse initiale. Elle subit son poids et une force de frottement $-\alpha\vec v$. Déterminer $v(t)$ et <span data-k="vlim">la vitesse limite</span>.</p>`,
   decode: {
@@ -130,7 +130,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "pb-pendule", kind: "probleme", subj: "physique", year: "mpsi", chap: 6, classique: true, level: 2, time: "40 min",
+  id: "pb-pendule", kind: "probleme", subj: "physique", year: "mpsi", chap: 6, classique: true, level: 3, time: "40 min",
   title: "Le pendule simple et ses limites",
   enonce: R`<p>Un point matériel de masse $m$ est suspendu à un fil inextensible de longueur $\ell$, de masse négligeable. On repère sa position par l'angle $\theta$ avec la verticale.</p><ol><li>Établir l'équation du mouvement.</li><li>Dans <span data-k="petits">l'approximation des petits angles</span>, donner la période $T_0$. Application : $\ell = 1{,}0\ \mathrm m$, $g = 9{,}8\ \mathrm{m\,s^{-2}}$.</li><li>Par une méthode énergétique, exprimer la vitesse au point bas pour un lâcher sans vitesse à l'angle $\theta_0$.</li><li>Expliquer pourquoi la période augmente avec l'amplitude.</li></ol>`,
   decode: {
@@ -153,7 +153,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-young", subj: "physique", year: "mp", chap: 2, classique: true, level: 1, time: "10 min",
+  id: "ex-young", subj: "physique", year: "mp", chap: 2, classique: true, level: 2, time: "10 min",
   title: "Interfrange des fentes d'Young",
   enonce: R`<p>Deux fentes distantes de $a = 0{,}50\ \mathrm{mm}$ sont éclairées par une source de longueur d'onde $\lambda = 600\ \mathrm{nm}$. L'écran est à $D = 1{,}0\ \mathrm m$. Calculer <span data-k="interfrange">l'interfrange</span>.</p>`,
   decode: {

@@ -38,7 +38,7 @@ const I = {
   dl: `<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m-4-4 4 4 4-4M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   full: `<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 7V3h4M17 7V3h-4M3 13v4h4M17 13v4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
-const lvl = n => `<span class="lvl" aria-label="Difficulté ${n} sur 3">${[1, 2, 3].map(k => `<i class="${k <= n ? "on" : ""}"></i>`).join("")}</span>`;
+const lvl = n => `<span class="lvl" role="img" aria-label="Difficulté ${n} sur 5">${[1, 2, 3, 4, 5].map(k => `<i class="${k <= n ? "on" : ""}" aria-hidden="true">★</i>`).join("")}</span>`;
 
 /* ---------- MathJax ---------- */
 let mjQueue = Promise.resolve();
@@ -197,7 +197,7 @@ function exercisePage(eid) {
   const d = e.decode || { donnees: [], but: "", cles: {} };
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year).slice(0, 2);
   return phead({ crumb: [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.name} · ${YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag">${["", "Accessible", "Intermédiaire", "Exigeant"][e.level]}</span>` })
+    meta: `<span class="tag y">${pb ? "Problème" : "Exercice"}</span><span class="tag">${s.name} · ${YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--yellow);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + `<div class="wrap"><div class="ex-layout">
     <section class="panelbox" aria-labelledby="h-en">
       <h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>

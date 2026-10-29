@@ -110,7 +110,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-recurrence", subj: "maths", year: "mpsi", chap: 0, classique: true, level: 1, time: "10 min",
+  id: "ex-recurrence", subj: "maths", year: "mpsi", chap: 0, classique: true, level: 2, time: "10 min",
   title: "Une majoration par récurrence",
   enonce: R`<p>Montrer que pour tout entier $n\ge1$ :</p>$$\sum_{k=1}^{n}\frac{1}{k^2} \le 2 - \frac{1}{n}$$<p>En déduire que <span data-k="sp">la suite des sommes partielles</span> converge.</p>`,
   decode: {
@@ -137,7 +137,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-dl-limite", subj: "maths", year: "mpsi", chap: 14, classique: true, level: 1, time: "8 min",
+  id: "ex-dl-limite", subj: "maths", year: "mpsi", chap: 14, classique: true, level: 2, time: "8 min",
   title: "Une limite par développements limités",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0}\frac{e^x-1-\sin x}{x^2}$.</p>`,
   decode: {
@@ -160,7 +160,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-rang", subj: "maths", year: "mpsi", chap: 16, level: 2, time: "15 min",
+  id: "ex-rang", subj: "maths", year: "mpsi", chap: 16, level: 3, time: "15 min",
   title: "Noyau, image et théorème du rang",
   enonce: R`<p>Soit $f:\mathbb R_2[X]\to\mathbb R_2[X]$ définie par $f(P) = P'$.</p><ol><li>Montrer que $f$ est linéaire.</li><li>Déterminer $\ker f$ et $\operatorname{Im} f$.</li><li>Vérifier <span data-k="rang">le théorème du rang</span>.</li></ol>`,
   decode: {
@@ -178,7 +178,7 @@ LEMME.exercises([
   methode: R`Pour trouver une image, calcule $f$ sur une base : l'image est engendrée par ces vecteurs.`
 },
 {
-  id: "ex-diago", subj: "maths", year: "mp", chap: 1, classique: true, level: 2, time: "20 min",
+  id: "ex-diago", subj: "maths", year: "mp", chap: 1, classique: true, level: 3, time: "20 min",
   title: "Diagonaliser pour calculer une puissance",
   enonce: R`<p>Soit $A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. <span data-k="diag">Diagonaliser</span> $A$ puis calculer $A^n$ pour $n\in\mathbb N$.</p>`,
   decode: {
@@ -196,7 +196,7 @@ LEMME.exercises([
   methode: R`Une matrice symétrique réelle est toujours diagonalisable, même sans calcul.`
 },
 {
-  id: "ex-serie-entiere", subj: "maths", year: "mp", chap: 5, level: 2, time: "15 min",
+  id: "ex-serie-entiere", subj: "maths", year: "mp", chap: 5, level: 3, time: "15 min",
   title: "Rayon et somme d'une série entière",
   enonce: R`<p>Déterminer <span data-k="rayon">le rayon de convergence</span> puis la somme de $\displaystyle\sum_{n\ge0}\frac{n}{2^n}x^n$.</p>`,
   decode: {
@@ -221,7 +221,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-geometrique", subj: "maths", year: "mp", chap: 12, level: 1, time: "10 min",
+  id: "ex-geometrique", subj: "maths", year: "mp", chap: 12, level: 2, time: "10 min",
   title: "Espérance d'une loi géométrique",
   enonce: R`<p>Soit $X\sim\mathcal G(p)$ avec $p\in\,]0,1[$. Calculer <span data-k="gx">la fonction génératrice</span> $G_X$, puis $E(X)$.</p>`,
   decode: {
@@ -245,7 +245,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "pb-suite-racine", kind: "probleme", subj: "maths", year: "mpsi", chap: 6, classique: true, level: 2, time: "45 min",
+  id: "pb-suite-racine", kind: "probleme", subj: "maths", year: "mpsi", chap: 6, classique: true, level: 3, time: "45 min",
   title: "Une suite définie par une racine",
   enonce: R`<p>On définit $u_0 = 0$ et, pour tout $n$, $u_{n+1} = \sqrt{2+u_n}$.</p><ol><li>Montrer que $0\le u_n\le 2$ pour tout $n$.</li><li>Montrer que $(u_n)$ est croissante.</li><li>En déduire qu'elle converge et déterminer sa limite $\ell$.</li><li>Montrer que $|u_{n+1}-2| \le \frac12|u_n-2|$, puis majorer $|u_n-2|$.</li><li>Pour $\theta\in[0,\frac\pi2]$, vérifier que $\sqrt{2+2\cos\theta} = 2\cos\frac\theta2$. En déduire <span data-k="explicite">une expression explicite</span> de $u_n$.</li></ol>`,
   decode: {
@@ -270,7 +270,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "pb-nilpotentes", kind: "probleme", subj: "maths", year: "mp", chap: 1, classique: true, level: 2, time: "30 min",
+  id: "pb-nilpotentes", kind: "probleme", subj: "maths", year: "mp", chap: 1, classique: true, level: 3, time: "30 min",
   title: "Autour des matrices nilpotentes",
   enonce: R`<p>Soit $N\in\mathcal M_n(\mathbb C)$ <span data-k="nilp">nilpotente</span> : il existe $p\ge1$ tel que $N^p = 0$.</p><ol><li>Montrer que $0$ est la seule valeur propre de $N$.</li><li>En déduire $\chi_N$, puis montrer que $N^n = 0$.</li><li>Montrer que $I_n - N$ est inversible et exprimer son inverse.</li><li>Montrer qu'une matrice nilpotente non nulle n'est pas diagonalisable.</li></ol>`,
   decode: {
@@ -319,7 +319,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-lim-croissante", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "15 min",
+  id: "ex-lim-croissante", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 3, time: "15 min",
   title: "Une fonction strictement croissante n'atteint pas sa limite",
   enonce: R`<p>Soit $f : [0,+\infty[\,\to\mathbb R$ une fonction <span data-k="sc">strictement croissante</span> qui admet <span data-k="lim">une limite finie</span> $\ell\in\mathbb R$ en $+\infty$.</p><p>Montrer que $f(x)<\ell$ pour tout $x\in[0,+\infty[$.</p>`,
   decode: {
@@ -350,7 +350,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-3x2-exp", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-3x2-exp", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de 3x² − eˣ en +∞",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\big(3x^2-e^x\big)$.</p>`,
   decode: {
@@ -377,7 +377,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-racine-quotient", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "10 min",
+  id: "ex-lim-racine-quotient", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
   title: "Limite d'un quotient avec une racine",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac{\sqrt{x^2+x+1}}{x+1}$.</p><p>Que se passe-t-il en $-\infty$ ?</p>`,
   decode: {
@@ -405,7 +405,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-x-exp-racine", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "ex-lim-x-exp-racine", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Limite de x·e^(−√x) en +∞",
   tt: R`Limite de $x\,e^{-\sqrt{x}}$ en $+\infty$`,
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}x\,e^{-\sqrt x}$.</p>`,
@@ -434,7 +434,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-cos-exp", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-cos-exp", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de x·cos(eˣ) / (x² + 1) en +∞",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac{x\cos\left(e^x\right)}{x^2+1}$.</p>`,
   decode: {
@@ -464,7 +464,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-partie-entiere", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-partie-entiere", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de ⌊x⌋ / x en +∞",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac1x\lfloor x\rfloor$, où $\lfloor x\rfloor$ désigne <span data-k="pe">la partie entière</span> de $x$.</p>`,
   decode: {
@@ -491,7 +491,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ex-lim-x2-sin", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-x2-sin", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de x² + x·sin x en +∞",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\big(x^2+x\sin x\big)$.</p>`,
   decode: {
@@ -545,7 +545,7 @@ LEMME.rappels({
 
 LEMME.exercises([
 {
-  id: "ex-lim-inv-ln", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-inv-ln", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de 1/x + ln x en 0⁺",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}\left(\frac1x+\ln x\right)$.</p>`,
   decode: {
@@ -568,7 +568,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La courbe monte vers +∞ quand x approche 0", x: [0.01, 3], y: [-1, 12], xlabel: "x", curves: [{ label: "1/x + ln x", f: x => 1 / x + Math.log(x) }, { label: "ln x", f: x => Math.log(x) }] }
 },
 {
-  id: "ex-lim-x-puiss-racine", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
+  id: "ex-lim-x-puiss-racine", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "8 min",
   title: "Limite de x^√x en 0⁺",
   tt: R`Limite de $x^{\sqrt{x}}$ en $0^+$`,
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}x^{\sqrt x}$.</p>`,
@@ -591,7 +591,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "x^√x remonte vers 1 quand x tend vers 0", x: [0.0005, 2], y: [0, 2.2], xlabel: "x", curves: [{ label: "x^√x", f: x => Math.pow(x, Math.sqrt(x)) }], hlines: [{ y: () => 1, label: "1" }] }
 },
 {
-  id: "ex-lim-ln-puiss-inv-ln", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "12 min",
+  id: "ex-lim-ln-puiss-inv-ln", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "12 min",
   title: "Limite de |ln x|^(1/ln x) en 0⁺",
   tt: R`Limite de $|\ln x|^{1/\ln x}$ en $0^+$`,
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}|\ln x|^{\frac{1}{\ln x}}$.</p>`,
@@ -616,7 +616,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La limite 1 est atteinte, mais très lentement", x: [0.000001, 0.9], y: [0, 2], xlabel: "x", curves: [{ label: "|ln x|^(1/ln x)", f: x => Math.pow(Math.abs(Math.log(x)), 1 / Math.log(x)) }], hlines: [{ y: () => 1, label: "1" }] }
 },
 {
-  id: "ex-lim-sinx-x", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 1, time: "6 min",
+  id: "ex-lim-sinx-x", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "6 min",
   title: "La limite de sin x / x en 0",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0}\frac{\sin x}{x}$.</p>`,
   decode: {
@@ -637,7 +637,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "sin x / x vaut presque 1 près de 0", x: [-12, 12], y: [-0.4, 1.2], xlabel: "x", curves: [{ label: "sin x / x", f: x => Math.abs(x) < 1e-6 ? 1 : Math.sin(x) / x }], hlines: [{ y: () => 1, label: "1" }] }
 },
 {
-  id: "ex-lim-x-sin-ln", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "6 min",
+  id: "ex-lim-x-sin-ln", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "6 min",
   title: "Limite de x·sin(ln x) en 0⁺",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to0^+}x\sin(\ln x)$.</p>`,
   decode: {
@@ -679,7 +679,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La fonction vaut 0 sur ]0, 1[", x: [0.01, 3.5], y: [-0.2, 1.2], xlabel: "x", curves: [{ label: "⌊x⌋ / x", f: x => Math.floor(x) / x }] }
 },
 {
-  id: "ex-lim-ln-lnln", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ex-lim-ln-lnln", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Limite de ln(x)·ln(ln x) en 1⁺",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to1^+}\ln(x)\ln(\ln x)$.</p>`,
   decode: {
@@ -700,7 +700,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La courbe part de 0 en x = 1", x: [1.0001, 3], y: [-0.5, 0.2], xlabel: "x", curves: [{ label: "ln(x)·ln(ln x)", f: x => Math.log(x) * Math.log(Math.log(x)) }] }
 },
 {
-  id: "ex-lim-sin2x-pi", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "ex-lim-sin2x-pi", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Limite de sin(2x)/(π − 2x) en π/2",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to\pi/2}\frac{\sin(2x)}{\pi-2x}$.</p>`,
   decode: {
@@ -722,7 +722,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La fonction vaut presque 1 autour de π/2", x: [0, 3.14], y: [-0.4, 1.2], xlabel: "x", curves: [{ label: "sin(2x) / (π − 2x)", f: x => Math.abs(Math.PI - 2 * x) < 1e-6 ? 1 : Math.sin(2 * x) / (Math.PI - 2 * x) }], vlines: [{ x: () => Math.PI / 2, label: "π/2" }], hlines: [{ y: () => 1, label: "1" }] }
 },
 {
-  id: "ex-lim-x-1-lnx", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "6 min",
+  id: "ex-lim-x-1-lnx", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "6 min",
   title: "Limite de (x − 1)/ln x en 1",
   enonce: R`<p>Déterminer $\displaystyle\lim_{x\to1}\frac{x-1}{\ln x}$.</p>`,
   decode: {
@@ -746,7 +746,7 @@ LEMME.exercises([
 
 LEMME.exercises([
 {
-  id: "ct-x-abs-x", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 1, time: "10 min",
+  id: "ct-x-abs-x", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "10 min",
   title: "Continuité d'une fonction définie par morceaux",
   enonce: R`<p>Étudier la continuité de la fonction $f$ définie sur $\mathbb R$ par</p>$$f(x) = \begin{cases}x^2 & \text{si } x\geqslant0,\\ -x^2 & \text{si } x<0.\end{cases}$$`,
   decode: {
@@ -770,7 +770,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "Les deux morceaux se raccordent en 0", x: [-2, 2], y: [-4, 4], xlabel: "x", curves: [{ label: "x² si x ≥ 0", f: x => x >= 0 ? x * x : NaN }, { label: "−x² si x < 0", f: x => x < 0 ? -x * x : NaN }] }
 },
 {
-  id: "ct-sup-fg", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "ct-sup-fg", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Le maximum de deux fonctions continues",
   enonce: R`<p>Soit $f,g : I\to\mathbb R$ deux fonctions continues. Montrer que la fonction $\sup(f,g)$, définie par $\sup(f,g)(x) = \max\big(f(x),g(x)\big)$, est continue.</p>`,
   decode: {
@@ -791,7 +791,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "Le max suit toujours la plus haute des deux courbes", x: [0, 7], y: [-1.2, 1.2], xlabel: "x", curves: [{ label: "max(sin, cos)", f: x => Math.max(Math.sin(x), Math.cos(x)) }, { label: "sin x", f: x => Math.sin(x) }, { label: "cos x", f: x => Math.cos(x) }] }
 },
 {
-  id: "ct-egalite-fg", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  id: "ct-egalite-fg", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
   title: "Deux fonctions qui se croisent",
   enonce: R`<p>Soit $f,g : [a,b]\to\mathbb R$ continues telles que $\big(g(a)-f(a)\big)\big(g(b)-f(b)\big)\leqslant0$. Montrer qu'il existe $x\in[a,b]$ tel que $f(x) = g(x)$.</p>`,
   decode: {
@@ -812,7 +812,7 @@ LEMME.exercises([
   methode: R`Pour résoudre $f(x) = g(x)$, étudie le signe de $g-f$ et applique le TVI à cette différence.`
 },
 {
-  id: "ex-continue-non-bornee", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "6 min",
+  id: "ex-continue-non-bornee", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "6 min",
   title: "Une fonction continue ni minorée ni majorée",
   enonce: R`<p>Donner un exemple de fonction continue sur $[0,+\infty[$ qui n'est ni minorée, ni majorée.</p>`,
   decode: {
@@ -834,7 +834,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "Les oscillations grandissent sans limite", x: [0, 40], y: [-40, 40], xlabel: "x", curves: [{ label: "x·cos x", f: x => x * Math.cos(x) }, { label: "x", f: x => x }, { label: "−x", f: x => -x }] }
 },
 {
-  id: "ex-continue-sans-limite", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "ex-continue-sans-limite", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Une fonction continue sans limite en 0",
   enonce: R`<p>Donner un exemple de fonction continue sur $]0,+\infty[$ qui n'a pas de limite en $0$.</p>`,
   decode: {
@@ -855,7 +855,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "cos(1/x) oscille de plus en plus vite près de 0", x: [0.005, 0.6], y: [-1.2, 1.2], xlabel: "x", curves: [{ label: "cos(1/x)", f: x => Math.cos(1 / x) }] }
 },
 {
-  id: "ex-nulle-part-continue", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "12 min",
+  id: "ex-nulle-part-continue", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "12 min",
   title: "Une fonction continue en aucun point",
   enonce: R`<p>Donner un exemple de fonction définie sur $\mathbb R$ qui n'est continue en aucun point.</p>`,
   decode: {
@@ -880,7 +880,7 @@ LEMME.exercises([
 
 LEMME.exercises([
 {
-  id: "ct-periodique-limite", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "ct-periodique-limite", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Une fonction périodique qui a une limite",
   enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ une fonction <span data-k="per">périodique</span> qui admet une limite finie $\ell$ en $+\infty$. Que dire de $f$ ?</p>`,
   decode: {
@@ -903,7 +903,7 @@ LEMME.exercises([
   methode: R`Pour exploiter une périodicité avec une limite à l'infini, compare $f(x)$ et $f(x+nT)$ quand $n\to+\infty$.`
 },
 {
-  id: "ct-reciproque-bornee", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "25 min",
+  id: "ct-reciproque-bornee", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "25 min",
   title: "Limite infinie et images réciproques bornées",
   enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$. Montrer l'équivalence entre :</p><ol><li>$\displaystyle\lim_{x\to+\infty}|f(x)| = \lim_{x\to-\infty}|f(x)| = +\infty$ ;</li><li>pour tout segment $[a,b]$, <span data-k="preimage">$f^{-1}([a,b])$</span> est une partie bornée.</li></ol>`,
   decode: {
@@ -926,7 +926,7 @@ LEMME.exercises([
   methode: R`Quand un énoncé mélange limites et ensembles, reviens à la définition quantifiée de la limite et traduis chaque phrase en inégalités.`
 },
 {
-  id: "ct-pe-carre", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "15 min",
+  id: "ct-pe-carre", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "15 min",
   title: "Continuité de ⌊x⌋ + (x − ⌊x⌋)²",
   enonce: R`<p>Étudier la continuité de $f : x\mapsto\lfloor x\rfloor+\big(x-\lfloor x\rfloor\big)^2$.</p>`,
   decode: {
@@ -949,7 +949,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "La courbe ne saute jamais", x: [-2, 3], y: [-2, 3.2], xlabel: "x", curves: [{ label: "⌊x⌋ + (x − ⌊x⌋)²", f: x => Math.floor(x) + Math.pow(x - Math.floor(x), 2) }, { label: "⌊x⌋", f: x => (x - Math.floor(x) > 0.995 ? NaN : Math.floor(x)) }] }
 },
 {
-  id: "ct-croissante-fsurx", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "20 min",
+  id: "ct-croissante-fsurx", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "20 min",
   title: "f croissante et f(x)/x décroissante",
   enonce: R`<p>Soit $f : \mathbb R_+^*\to\mathbb R$ telle que $x\mapsto f(x)$ est croissante et $x\mapsto\dfrac{f(x)}x$ est décroissante. Montrer que $f$ est continue.</p>`,
   decode: {
@@ -971,7 +971,7 @@ LEMME.exercises([
   methode: R`Une fonction monotone a des limites latérales partout. Pour montrer sa continuité, prouve que ces deux limites valent $f(a)$.`
 },
 {
-  id: "tvi-surjective", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "8 min",
+  id: "tvi-surjective", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "8 min",
   title: "Continue, ni minorée ni majorée, donc surjective",
   enonce: R`<p>Soit $f$ une fonction réelle continue sur un intervalle $I$. On suppose que $f$ n'est ni minorée, ni majorée. Montrer que $f$ est <span data-k="surj">surjective</span> sur $\mathbb R$.</p>`,
   decode: {
@@ -991,7 +991,7 @@ LEMME.exercises([
   methode: R`Pour montrer qu'une fonction continue atteint une valeur, regarde son image : c'est un intervalle.`
 },
 {
-  id: "tvi-generalise", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 3, time: "20 min",
+  id: "tvi-generalise", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 4, time: "20 min",
   title: "Le théorème des valeurs intermédiaires généralisé",
   enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ continue, possédant des limites $\ell$ et $\ell'$ (finies ou infinies) en $-\infty$ et $+\infty$. Montrer que toute valeur <span data-k="strict">strictement comprise</span> entre $\ell$ et $\ell'$ est prise par $f$.</p>`,
   decode: {
@@ -1016,7 +1016,7 @@ LEMME.exercises([
 
 LEMME.exercises([
 {
-  id: "tvi-point-fixe-a", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 1, time: "10 min",
+  id: "tvi-point-fixe-a", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "10 min",
   title: "Point fixe quand f([a, b]) ⊂ [a, b]",
   enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ continue telle que $f([a,b])\subset[a,b]$. Montrer que $f$ admet <span data-k="pf">un point fixe</span>.</p>`,
   decode: {
@@ -1038,7 +1038,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "cos envoie [0, 1] dans [0, 1] : sa courbe croise y = x", x: [0, 1], y: [0, 1], xlabel: "x", curves: [{ label: "cos x", f: x => Math.cos(x) }, { label: "y = x", f: x => x }], vlines: [{ x: () => 0.739085, label: "point fixe ≈ 0,739" }] }
 },
 {
-  id: "tvi-point-fixe-b", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  id: "tvi-point-fixe-b", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "10 min",
   title: "Point fixe quand [a, b] ⊂ f([a, b])",
   enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ continue telle que $[a,b]\subset f([a,b])$. Montrer que $f$ admet un point fixe.</p>`,
   decode: {
@@ -1058,7 +1058,7 @@ LEMME.exercises([
   methode: R`Choisis les points où évaluer la fonction auxiliaire en fonction de ce que dit l'hypothèse.`
 },
 {
-  id: "tvi-cordes", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "20 min",
+  id: "tvi-cordes", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "20 min",
   title: "Le théorème des cordes horizontales",
   enonce: R`<p>Soit $f : [0,1]\to\mathbb R$ continue avec $f(0) = f(1)$. Montrer que pour tout $n\in\mathbb N^*$, il existe $x_0\in\left[0,1-\frac1n\right]$ tel que</p>$$f(x_0) = f\left(x_0+\frac1n\right).$$`,
   decode: {
@@ -1084,7 +1084,7 @@ LEMME.exercises([
   }
 },
 {
-  id: "ba-limite-finie-bornee", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "12 min",
+  id: "ba-limite-finie-bornee", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 3, time: "12 min",
   title: "Continue avec une limite finie, donc bornée",
   enonce: R`<p>Soit $f : [0,+\infty[\,\to\mathbb R$ continue, admettant une limite finie $\ell$ en $+\infty$. Montrer que $f$ est <span data-k="bornee">bornée</span>.</p>`,
   decode: {
@@ -1105,7 +1105,7 @@ LEMME.exercises([
   methode: R`Pour borner une fonction sur un intervalle infini : la limite contrôle la fonction loin, la continuité sur un segment contrôle le reste.`
 },
 {
-  id: "ba-periodique-bornee", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "6 min",
+  id: "ba-periodique-bornee", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "6 min",
   title: "Une fonction continue périodique est bornée",
   enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ continue et périodique de période $T>0$. Montrer que $f$ est bornée.</p>`,
   decode: {
@@ -1124,7 +1124,7 @@ LEMME.exercises([
   methode: R`Une fonction périodique se comprend entièrement sur une période. Ramène toujours l'étude à $[0,T]$.`
 },
 {
-  id: "ba-periodique-demi", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "20 min",
+  id: "ba-periodique-demi", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "20 min",
   title: "Toutes les valeurs sur une demi-période",
   enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ continue et périodique de période $T>0$. Justifier l'existence d'un réel $x$ tel que</p>$$f\big([x,x+T/2]\big) = \operatorname{Im}(f).$$`,
   decode: {
@@ -1147,7 +1147,7 @@ LEMME.exercises([
   methode: R`Pour qu'un intervalle atteigne toutes les valeurs, il suffit qu'il contienne un point de minimum et un point de maximum.`
 },
 {
-  id: "tvi-extremum-translation", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "25 min",
+  id: "tvi-extremum-translation", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "25 min",
   title: "Translations qui laissent une valeur inchangée",
   enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ continue avec $f(a) = f(b)$ et $a<b$. Montrer qu'il existe $\alpha>0$ tel que</p>$$\forall t\in[0,\alpha],\ \exists x\in[a,b-\alpha],\quad f(x+t) = f(x).$$`,
   decode: {
@@ -1170,7 +1170,7 @@ LEMME.exercises([
   methode: R`Autour d'un maximum, $f$ monte puis descend : la fonction $x\mapsto f(x+t)-f(x)$ y change de signe.`
 },
 {
-  id: "ct-max-glissant", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "30 min",
+  id: "ct-max-glissant", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "30 min",
   title: "Le maximum glissant est continu",
   enonce: R`<p>Soit $f : [0,+\infty[\,\to\mathbb R$ continue. Pour $x\geqslant0$, on pose $g(x) = \displaystyle\max_{t\in[0,x]}f(t)$. Montrer que $g$ est définie, continue et croissante.</p>`,
   decode: {
@@ -1201,7 +1201,7 @@ LEMME.exercises([
 
 LEMME.exercises([
 {
-  id: "ef-f2x-fx", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "12 min",
+  id: "ef-f2x-fx", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "12 min",
   title: "Les fonctions telles que f(2x) = f(x)",
   enonce: R`<p>Déterminer les fonctions $f : \mathbb R\to\mathbb R$ <span data-k="cont0">continues en $0$</span> vérifiant $f(2x) = f(x)$ pour tout réel $x$.</p>`,
   decode: {
@@ -1223,7 +1223,7 @@ LEMME.exercises([
   methode: R`Dans une équation fonctionnelle, itère la relation pour amener la variable vers le point où tu connais la continuité.`
 },
 {
-  id: "ef-additive", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 3, time: "30 min",
+  id: "ef-additive", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 4, time: "30 min",
   title: "Les fonctions additives et continues",
   enonce: R`<p>Déterminer les fonctions continues $f : \mathbb R\to\mathbb R$ vérifiant</p>$$f(x+y) = f(x)+f(y)\quad\text{pour tous } x,y\in\mathbb R.\qquad(*)$$`,
   decode: {
@@ -1246,7 +1246,7 @@ LEMME.exercises([
   methode: R`Équation fonctionnelle et continuité : trouve $f$ sur les entiers, puis sur les rationnels, puis étends à $\mathbb R$ par densité et continuité.`
 },
 {
-  id: "ef-multiplicative", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "20 min",
+  id: "ef-multiplicative", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "20 min",
   title: "Les fonctions continues telles que f(x + y) = f(x)f(y)",
   enonce: R`<p>Déterminer les fonctions continues $f : \mathbb R\to\mathbb R$ vérifiant</p>$$f(x+y) = f(x)f(y)\quad\text{pour tous } x,y\in\mathbb R.$$<p>On pourra utiliser le résultat sur les fonctions additives continues.</p>`,
   decode: {
@@ -1269,7 +1269,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "Les solutions non nulles : les exponentielles e^(ax)", x: [-3, 3], y: [0, 6], xlabel: "x", params: [{ k: "a", label: "a", min: -2, max: 2, step: 0.1, v: 0.7 }], curves: [{ label: "e^(ax)", f: (x, p) => Math.exp(p.a * x) }] }
 },
 {
-  id: "ef-involution", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "20 min",
+  id: "ef-involution", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "20 min",
   title: "Les fonctions telles que f∘f = Id sur [0, +∞[",
   enonce: R`<p>Déterminer les fonctions continues $f : [0,+\infty[\,\to[0,+\infty[$ vérifiant $f\big(f(x)\big) = x$ pour tout $x\geqslant0$.</p>`,
   decode: {
@@ -1291,7 +1291,7 @@ LEMME.exercises([
   methode: R`Pour une équation fonctionnelle avec continuité, commence par montrer que $f$ est monotone, puis compare $f(x)$ et $x$.`
 },
 {
-  id: "ap-cesaro-fonction", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "30 min",
+  id: "ap-cesaro-fonction", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "30 min",
   title: "Si f(x + 1) − f(x) → ℓ, alors f(x)/x → ℓ",
   enonce: R`<p>Soit $f : [0,+\infty[\,\to\mathbb R$ continue telle que $f(x+1)-f(x)\xrightarrow[x\to+\infty]{}\ell\in\mathbb R$. Montrer que $\dfrac{f(x)}x\xrightarrow[x\to+\infty]{}\ell$.</p>`,
   decode: {
@@ -1315,7 +1315,7 @@ LEMME.exercises([
   viz: { type: "plot", title: "Avec f(x) = 2x + √x : f(x + 1) − f(x) → 2 et f(x)/x → 2", x: [1, 200], y: [1.5, 3.2], xlabel: "x", curves: [{ label: "f(x) / x", f: x => (2 * x + Math.sqrt(x)) / x }, { label: "f(x + 1) − f(x)", f: x => 2 + Math.sqrt(x + 1) - Math.sqrt(x) }], hlines: [{ y: () => 2, label: "ℓ = 2" }] }
 },
 {
-  id: "ap-suite-milieu", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "25 min",
+  id: "ap-suite-milieu", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "25 min",
   title: "Une suite qui converge vers un point fixe",
   enonce: R`<p>Soit $f : [a,b]\to[a,b]$ vérifiant $|f(y)-f(x)|\leqslant|y-x|$ pour tous $x,y\in[a,b]$. On définit $u_0\in[a,b]$ et</p>$$u_{n+1} = \frac{u_n+f(u_n)}2.$$<p>Montrer que $(u_n)$ converge vers <span data-k="pf">un point fixe</span> de $f$.</p>`,
   decode: {
@@ -1339,7 +1339,7 @@ LEMME.exercises([
   viz: { type: "seq", title: "Avec f = cos sur [0, 1], la suite converge vers le point fixe", n: [0, 15], y: [0, 1.05], params: [{ k: "u0", label: "u₀", min: 0, max: 1, step: 0.05, v: 0.05 }], series: [{ label: "u_n", style: "line", f: (n, p) => { let u = p.u0; for (let k = 0; k < n; k++) u = (u + Math.cos(u)) / 2; return u; } }], hlines: [{ y: () => 0.739085, label: "point fixe ≈ 0,739" }] }
 },
 {
-  id: "ap-commutent", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "30 min",
+  id: "ap-commutent", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "30 min",
   title: "Deux fonctions qui commutent se rencontrent",
   enonce: R`<p>Soit $f,g : [a,b]\to[a,b]$ continues vérifiant $f\circ g = g\circ f$. Montrer qu'il existe $x_0\in[a,b]$ tel que $f(x_0) = g(x_0)$.</p>`,
   decode: {
@@ -1362,7 +1362,7 @@ LEMME.exercises([
   methode: R`Quand $f\circ g = g\circ f$, $g$ envoie les points fixes de $f$ sur des points fixes de $f$ : itérer $g$ est souvent la clé.`
 },
 {
-  id: "ap-ff-2f-id", subj: "maths", year: "mpsi", chap: 7, level: 3, time: "40 min",
+  id: "ap-ff-2f-id", subj: "maths", year: "mpsi", chap: 7, level: 5, time: "40 min",
   title: "Les fonctions telles que f∘f = 2f − Id",
   enonce: R`<p>Déterminer les fonctions continues $f : \mathbb R\to\mathbb R$ vérifiant</p>$$f\circ f = 2f-\mathrm{Id}.\qquad(*)$$`,
   decode: {

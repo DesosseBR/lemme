@@ -39,7 +39,7 @@ Ajouter un objet dans `LEMME.exercises([...])` :
   subj: "maths", year: "mpsi", // "mpsi" ou "mp"
   chap: 14,                    // index du chapitre dans la liste de l'année, à partir de 0
   classique: true,             // facultatif : apparaît dans « Classiques »
-  level: 1, time: "10 min",    // difficulté de 1 à 3
+  level: 3, time: "10 min",    // difficulté de 1 à 5 étoiles
   title: "…",
   enonce: R`<p>… <span data-k="mot">terme à expliquer</span> …</p>`,
   decode: { donnees: [R`…`], but: R`…`, cles: { mot: R`définition affichée au clic` } },
