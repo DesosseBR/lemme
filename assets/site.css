@@ -298,8 +298,8 @@ mjx-container{font-size:105%!important}
 .seg{display:inline-flex;background:var(--bg-2);border-radius:999px;padding:3px;margin-left:auto}
 .seg button{border:0;background:transparent;padding:7px 14px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(10,26,64,.15)}
-.enonce [data-k]{background:linear-gradient(transparent 62%,var(--yellow-soft) 62%);border-bottom:2px dotted var(--yellow);cursor:help;padding:0 2px;border-radius:2px;transition:background var(--t-fast)}
-.enonce [data-k]:hover,.enonce [data-k].open{background:var(--yellow-soft)}
+.enonce [data-k],.player [data-k]{background:linear-gradient(transparent 62%,var(--yellow-soft) 62%);border-bottom:2px dotted var(--yellow);cursor:help;padding:0 2px;border-radius:2px;transition:background var(--t-fast)}
+.enonce [data-k]:hover,.enonce [data-k].open,.player [data-k]:hover,.player [data-k].open{background:var(--yellow-soft)}
 .decode{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 @media (max-width:640px){.decode{grid-template-columns:1fr}}
 .decode > div{padding:16px 18px;border-radius:16px;background:var(--bg);font-size:16px;line-height:1.6}

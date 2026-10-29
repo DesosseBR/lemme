@@ -100,5 +100,12 @@
  "enonce-ex-dicho": "160b72638136d60b6d27",
  "dm-maths-mpsi-1": "160b72638c4394744941",
  "dm-maths-mp-2": "160b726359618742609d",
- "dm-physique-mpsi-3": "160b7263581210975bd0"
+ "dm-physique-mpsi-3": "160b7263581210975bd0",
+ "enonce-ex-lim-x-exp-racine": "160b7263da4693f79350",
+ "enonce-ex-lim-racine-quotient": "160b72638d71ea13157b",
+ "enonce-ex-lim-3x2-exp": "160b72636ecb68f033b8",
+ "enonce-ex-lim-croissante": "160b72631c7bb60dae2e",
+ "enonce-ex-lim-partie-entiere": "160b7263401360bd83a8",
+ "enonce-ex-lim-cos-exp": "160b72635fafecb5dc15",
+ "enonce-ex-lim-x2-sin": "160b7263c0a8326b8ef6"
 }

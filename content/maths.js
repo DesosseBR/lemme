@@ -300,3 +300,219 @@ LEMME.kholles([
   { subj: "maths", year: "mpsi", qs: [R`Démontrer que $\sqrt2$ est irrationnel.`, "Démontrer la formule du binôme de Newton.", "Énoncer et démontrer le théorème de Bézout.", "Démontrer l'inégalité de Cauchy-Schwarz.", "Énoncer et démontrer le théorème du rang.", "Démontrer le théorème de Rolle."] },
   { subj: "maths", year: "mp", qs: ["Montrer que des vecteurs propres associés à des valeurs propres distinctes forment une famille libre.", "Énoncer le lemme d'Abel et en déduire la définition du rayon de convergence.", "Montrer qu'une limite uniforme de fonctions continues est continue.", "Énoncer le théorème spectral.", "Calculer espérance et variance d'une loi de Poisson."] }
 ]);
+
+/* ---------- Chapitre « Limites et continuité » (MPSI, chap: 7) ---------- */
+LEMME.rappels({
+  "limite-monotone-fct": { t: "Limite monotone pour les fonctions", b: R`Si $f$ est croissante sur $[a,+\infty[$, alors $f$ admet une limite en $+\infty$ : c'est $\sup f$ si $f$ est majorée, et $+\infty$ sinon.` },
+  "passage-limite": { t: "Passage à la limite dans une inégalité", b: R`Si $f(t)\leqslant g(t)$ pour $t$ assez grand et si $f$ et $g$ ont des limites finies $\ell$ et $\ell'$, alors $\ell\leqslant\ell'$. Attention : une inégalité stricte $f<g$ ne donne que $\ell\leqslant\ell'$.` },
+  "absurde": { t: "Raisonnement par l'absurde", b: R`Pour montrer une propriété $P$, on suppose que $P$ est fausse et on en déduit une contradiction. Donc $P$ est vraie.` },
+  "croissances-comparees": { t: "Croissances comparées", b: R`Pour $\alpha,\beta,\gamma>0$ : $$\lim_{x\to+\infty}\frac{x^\beta}{e^{\gamma x}} = 0,\qquad \lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta} = 0.$$ L'exponentielle l'emporte sur les puissances, qui l'emportent sur le logarithme.` },
+  "formes-indeterminees": { t: "Formes indéterminées", b: R`Les opérations sur les limites ne permettent pas de conclure dans les cas $(+\infty)-(+\infty)$, $0\times\infty$, $\dfrac00$ et $\dfrac\infty\infty$. Il faut alors transformer l'expression : factoriser, utiliser la forme exponentielle, encadrer…` },
+  "operations-limites": { t: "Limites et opérations", b: R`Si $f\to\ell$ et $g\to\ell'$, alors $f+g\to\ell+\ell'$ et $fg\to\ell\ell'$. Avec des limites infinies : $(+\infty)\times\ell = +\infty$ si $\ell>0$, et $-\infty$ si $\ell<0$.` },
+  "racine-carre": { t: "Racine d'un carré", b: R`Pour tout réel $x$ : $\sqrt{x^2} = |x|$. Donc $\sqrt{x^2} = x$ si $x\geqslant0$, et $\sqrt{x^2} = -x$ si $x<0$.` },
+  "composition-limites": { t: "Limite d'une composée", b: R`Si $u(x)\to b$ quand $x\to a$, et si $g(X)\to\ell$ quand $X\to b$, alors $g\big(u(x)\big)\to\ell$ quand $x\to a$. Exemple : si $u(x)\to-\infty$, alors $e^{u(x)}\to0$.` },
+  "borne-zero": { t: "Borné fois tend vers zéro", b: R`Si $g$ est bornée au voisinage de $a$ et si $f\to0$ en $a$, alors $fg\to0$ en $a$. Justification : $|f g|\leqslant M|f|$.` },
+  "encadrement": { t: "Théorème d'encadrement", b: R`Si $g\leqslant f\leqslant h$ au voisinage de $a$ et si $g$ et $h$ tendent vers le même réel $\ell$, alors $f$ tend vers $\ell$.` },
+  "partie-entiere": { t: "Partie entière", b: R`$\lfloor x\rfloor$ est l'unique entier $n$ tel que $n\leqslant x<n+1$. On en déduit l'encadrement utile $x-1<\lfloor x\rfloor\leqslant x$.` },
+  "minoration-infini": { t: "Limite infinie par minoration", b: R`Si $g\leqslant f$ au voisinage de $a$ et si $g\to+\infty$ en $a$, alors $f\to+\infty$ en $a$.` }
+});
+
+LEMME.exercises([
+{
+  id: "ex-lim-croissante", subj: "maths", year: "mpsi", chap: 7, classique: true, level: 2, time: "15 min",
+  title: "Une fonction strictement croissante n'atteint pas sa limite",
+  enonce: R`<p>Soit $f : [0,+\infty[\,\to\mathbb R$ une fonction <span data-k="sc">strictement croissante</span> qui admet <span data-k="lim">une limite finie</span> $\ell\in\mathbb R$ en $+\infty$.</p><p>Montrer que $f(x)<\ell$ pour tout $x\in[0,+\infty[$.</p>`,
+  decode: {
+    donnees: [R`$f$ est strictement croissante sur $[0,+\infty[$.`, R`$f(x)\to\ell$ quand $x\to+\infty$, avec $\ell$ réel.`],
+    but: R`Une inégalité <b>stricte</b> : $f(x)<\ell$ pour tout $x$. Autrement dit, $f$ reste sous $\ell$ et ne la touche jamais.`,
+    cles: {
+      sc: R`Si $x<y$, alors $f(x)<f(y)$ : l'inégalité est stricte, $f$ n'est jamais constante sur un morceau.`,
+      lim: R`$f(x)$ se rapproche autant qu'on veut de $\ell$ quand $x$ devient grand.`,
+      large: R`Une inégalité large autorise l'égalité : $f(x)\leqslant\ell$. Ici, il faudra ensuite exclure le cas $f(x)=\ell$.`,
+      fixe: R`On choisit un $x$ quelconque et on ne le change plus. C'est la variable $t$ qui va tendre vers $+\infty$.`,
+      contradiction: R`Deux affirmations incompatibles : ici $f(b)>\ell$ et $f(b)\leqslant\ell$. L'hypothèse de départ est donc fausse.`
+    }
+  },
+  steps: [
+    { t: "Découper le problème", b: R`<p>On veut une inégalité stricte. On procède en deux temps, ce qui est plus clair :</p><ol><li>montrer d'abord l'inégalité <span data-k="large">large</span> $f(x)\leqslant\ell$ ;</li><li>montrer ensuite que l'égalité $f(x)=\ell$ est impossible.</li></ol>` },
+    { t: "L'inégalité large", b: R`<p>Soit $x\geqslant0$ <span data-k="fixe">fixé</span>. Pour tout $t\geqslant x$, la croissance de $f$ donne</p>$$f(x)\leqslant f(t).$$<p>On fait tendre $t$ vers $+\infty$ : le membre de droite tend vers $\ell$, le membre de gauche ne bouge pas. Par passage à la limite dans une inégalité large :</p>$$f(x)\leqslant\ell.$$`, rappels: ["passage-limite", "limite-monotone-fct"] },
+    { t: "Pourquoi ce n'est pas fini", b: R`<p>Le passage à la limite ne donne jamais mieux qu'une inégalité large. Même en partant de $f(x)<f(t)$, on obtient seulement $f(x)\leqslant\ell$. Il faut un argument de plus pour exclure $f(x)=\ell$ : c'est là qu'intervient la stricte croissance.</p>`, rappels: ["passage-limite"] },
+    { t: "Exclure l'égalité", b: R`<p>Raisonnons par l'absurde : supposons qu'il existe $a\geqslant0$ avec $f(a)=\ell$.</p><p>Prenons n'importe quel $b>a$, par exemple $b=a+1$. Comme $f$ est strictement croissante, $f(b)>f(a)=\ell$.</p><p>Mais l'étape précédente donne $f(b)\leqslant\ell$. C'est une <span data-k="contradiction">contradiction</span>.</p>`, rappels: ["absurde"] },
+    { t: "Conclusion", b: R`<p>Pour tout $x\geqslant0$, on a $f(x)\leqslant\ell$ et $f(x)\neq\ell$, donc</p>$$f(x)<\ell.$$<p>Une fonction strictement croissante s'approche de sa limite sans jamais l'atteindre.</p>` }
+  ],
+  piege: R`Passer directement à la limite dans $f(x)<f(t)$ et écrire $f(x)<\ell$. Le passage à la limite transforme toujours une inégalité stricte en inégalité large.`,
+  methode: R`Pour une inégalité stricte avec une limite : obtenir d'abord l'inégalité large par passage à la limite, puis exclure le cas d'égalité, souvent par l'absurde.`,
+  viz: {
+    type: "plot", title: "La courbe se rapproche de ℓ sans jamais la toucher", x: [0, 10], y: [0, 1.2], xlabel: "x",
+    params: [{ k: "v", label: "Vitesse d'approche", min: 0.2, max: 2, step: 0.1, v: 0.6 }],
+    curves: [{ label: "f(x) = ℓ − e^(−vx), avec ℓ = 1", f: (x, p) => 1 - Math.exp(-p.v * x) }],
+    hlines: [{ y: () => 1, label: "ℓ = 1" }]
+  }
+},
+{
+  id: "ex-lim-3x2-exp", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  title: "Limite de 3x² − eˣ en +∞",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\big(3x^2-e^x\big)$.</p>`,
+  decode: {
+    donnees: [R`Deux termes qui tendent tous deux vers $+\infty$ : $3x^2$ et $e^x$.`],
+    but: R`Savoir lequel « gagne », puis en déduire la limite.`,
+    cles: {
+      fi: R`On ne peut pas conclure par les règles de calcul : le résultat dépend de la vitesse à laquelle chaque terme tend vers l'infini.`,
+      prep: R`Le terme qui grandit le plus vite. Ici $e^x$, car l'exponentielle l'emporte sur toute puissance de $x$.`
+    }
+  },
+  steps: [
+    { t: "Reconnaître le problème", b: R`<p>$3x^2\to+\infty$ et $e^x\to+\infty$. On est face à $(+\infty)-(+\infty)$ : c'est une <span data-k="fi">forme indéterminée</span>. On ne peut rien conclure sans transformer l'expression.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Qui l'emporte ?", b: R`<p>Par croissances comparées, l'exponentielle grandit beaucoup plus vite que $x^2$. Le <span data-k="prep">terme prépondérant</span> est donc $e^x$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Factoriser", b: R`<p>On met $e^x$ en facteur :</p>$$3x^2-e^x = e^x\left(3x^2e^{-x}-1\right).$$<p>Vérification : en développant, on retrouve bien $3x^2-e^x$.</p>` },
+    { t: "Limite de chaque facteur", b: R`<p>Par croissances comparées, $x^2e^{-x} = \dfrac{x^2}{e^x}\to0$, donc</p>$$3x^2e^{-x}-1\longrightarrow -1.$$<p>Et $e^x\to+\infty$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Conclusion", b: R`<p>Un produit de la forme $(+\infty)\times(-1)$ tend vers $-\infty$ :</p>$$\lim_{x\to+\infty}\big(3x^2-e^x\big) = -\infty.$$`, rappels: ["operations-limites"] }
+  ],
+  piege: R`Conclure « $+\infty-\infty = 0$ ». Une forme indéterminée peut donner n'importe quelle limite, ou aucune.`,
+  methode: R`Devant $(+\infty)-(+\infty)$, on factorise par le terme qui grandit le plus vite. Il reste un facteur dont la limite se lit directement.`,
+  viz: {
+    type: "plot", title: "eˣ finit toujours par dépasser 3x²", x: [0, 5.5], y: [0, 120], xlabel: "x",
+    curves: [{ label: "eˣ", f: x => Math.exp(x) }, { label: "3x²", f: x => 3 * x * x }],
+    vlines: [{ x: () => 3.733, label: "croisement vers x ≈ 3,7" }]
+  }
+},
+{
+  id: "ex-lim-racine-quotient", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "10 min",
+  title: "Limite d'un quotient avec une racine",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac{\sqrt{x^2+x+1}}{x+1}$.</p><p>Que se passe-t-il en $-\infty$ ?</p>`,
+  decode: {
+    donnees: [R`Le numérateur et le dénominateur tendent vers $+\infty$.`],
+    but: R`Lever la forme $\dfrac{\infty}{\infty}$ en $+\infty$, puis refaire l'étude en $-\infty$.`,
+    cles: {
+      fi: R`$\dfrac{\infty}{\infty}$ : le résultat dépend de la vitesse de croissance du haut et du bas.`,
+      prep: R`Dans $x^2+x+1$, c'est $x^2$ qui domine quand $x$ est grand. Dans $x+1$, c'est $x$.`,
+      abs: R`$\sqrt{x^2}$ vaut $|x|$, pas $x$. La différence compte dès que $x$ est négatif.`
+    }
+  },
+  steps: [
+    { t: "Reconnaître le problème", b: R`<p>Le haut et le bas tendent vers $+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> du type $\dfrac{\infty}{\infty}$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Factoriser sous la racine", b: R`<p>Sous la racine, le <span data-k="prep">terme prépondérant</span> est $x^2$. On le met en facteur :</p>$$x^2+x+1 = x^2\left(1+\frac1x+\frac1{x^2}\right).$$<p>Donc $\sqrt{x^2+x+1} = \sqrt{x^2}\,\sqrt{1+\frac1x+\frac1{x^2}} = |x|\sqrt{1+\frac1x+\frac1{x^2}}$.</p>`, rappels: ["racine-carre"] },
+    { t: "Factoriser le dénominateur", b: R`$$x+1 = x\left(1+\frac1x\right).$$<p>Le quotient devient</p>$$\frac{\sqrt{x^2+x+1}}{x+1} = \frac{|x|}{x}\cdot\frac{\sqrt{1+\frac1x+\frac1{x^2}}}{1+\frac1x}.$$` },
+    { t: "En +∞", b: R`<p>Pour $x>0$, $|x| = x$, donc $\dfrac{|x|}{x} = 1$. Les termes $\frac1x$ et $\frac1{x^2}$ tendent vers $0$, donc la deuxième fraction tend vers $\dfrac{\sqrt1}{1} = 1$.</p>$$\lim_{x\to+\infty}\frac{\sqrt{x^2+x+1}}{x+1} = 1.$$`, rappels: ["operations-limites"] },
+    { t: "En −∞", b: R`<p>Pour $x<0$, <span data-k="abs">$|x| = -x$</span>, donc $\dfrac{|x|}{x} = -1$. La deuxième fraction tend toujours vers $1$. La limite vaut donc</p>$$\lim_{x\to-\infty}\frac{\sqrt{x^2+x+1}}{x+1} = -1.$$<p>C'est logique : le numérateur est positif et le dénominateur négatif pour $x$ très négatif.</p>`, rappels: ["racine-carre"] }
+  ],
+  piege: R`Écrire $\sqrt{x^2} = x$ : c'est faux pour $x<0$, et on trouverait à tort la limite $1$ en $-\infty$.`,
+  methode: R`Pour un quotient infini sur infini, factorise le terme prépondérant en haut et en bas. Sous une racine, $\sqrt{x^2} = |x|$.`,
+  viz: {
+    type: "plot", title: "Limite 1 à droite, −1 à gauche", x: [-30, 30], y: [-3, 3], xlabel: "x",
+    curves: [{ label: "√(x²+x+1) / (x+1)", f: x => Math.abs(x + 1) < 0.05 ? NaN : Math.sqrt(x * x + x + 1) / (x + 1) }],
+    hlines: [{ y: () => 1, label: "1" }, { y: () => -1, label: "−1" }]
+  }
+},
+{
+  id: "ex-lim-x-exp-racine", subj: "maths", year: "mpsi", chap: 7, level: 2, time: "10 min",
+  title: "Limite de x·e^(−√x) en +∞",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}x\,e^{-\sqrt x}$.</p>`,
+  decode: {
+    donnees: [R`$x\to+\infty$ et $e^{-\sqrt x}\to0$.`],
+    but: R`Savoir qui l'emporte entre $x$, qui grandit, et $e^{-\sqrt x}$, qui s'écrase vers $0$.`,
+    cles: {
+      fi: R`$(+\infty)\times0$ : on ne peut pas conclure sans savoir lequel des deux facteurs va « plus vite ».`,
+      expo: R`Pour $x>0$, $x = e^{\ln x}$. Écrire tout le produit comme une seule exponentielle permet de ramener le produit à une somme dans l'exposant.`,
+      prep: R`Entre $\ln x$ et $\sqrt x$, c'est $\sqrt x$ qui grandit le plus vite.`
+    }
+  },
+  steps: [
+    { t: "Reconnaître le problème", b: R`<p>$x\to+\infty$ et $e^{-\sqrt x}\to0$ : c'est une <span data-k="fi">forme indéterminée</span> du type $(+\infty)\times0$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Tout passer en exponentielle", b: R`<p>Pour $x>0$, on écrit <span data-k="expo">$x = e^{\ln x}$</span>. Alors</p>$$x\,e^{-\sqrt x} = e^{\ln x}\,e^{-\sqrt x} = e^{\ln x-\sqrt x}.$$<p>Il suffit maintenant de trouver la limite de l'exposant $\ln x-\sqrt x$.</p>` },
+    { t: "L'exposant", b: R`<p>$\ln x-\sqrt x$ est une forme $(+\infty)-(+\infty)$. Le <span data-k="prep">terme prépondérant</span> est $\sqrt x$, qu'on factorise :</p>$$\ln x-\sqrt x = \sqrt x\left(\frac{\ln x}{\sqrt x}-1\right).$$<p>Par croissances comparées, $\dfrac{\ln x}{\sqrt x} = \dfrac{\ln x}{x^{1/2}}\to0$. La parenthèse tend vers $-1$ et $\sqrt x\to+\infty$, donc l'exposant tend vers $-\infty$.</p>`, rappels: ["croissances-comparees", "operations-limites"] },
+    { t: "Conclusion", b: R`<p>L'exposant tend vers $-\infty$ et $e^X\to0$ quand $X\to-\infty$. Par composition :</p>$$\lim_{x\to+\infty}x\,e^{-\sqrt x} = 0.$$`, rappels: ["composition-limites"] },
+    { t: "Une autre méthode", b: R`<p>On peut poser $X = \sqrt x$, qui tend vers $+\infty$. Alors $x = X^2$ et</p>$$x\,e^{-\sqrt x} = X^2e^{-X} = \frac{X^2}{e^X}\longrightarrow0$$<p>par croissances comparées. Les deux méthodes donnent bien sûr le même résultat.</p>`, rappels: ["croissances-comparees", "composition-limites"] }
+  ],
+  piege: R`Dire « $e^{-\sqrt x}\to0$ donc le produit tend vers $0$ » sans justification : c'est une forme indéterminée, il faut montrer que l'exponentielle l'emporte.`,
+  methode: R`Pour un produit avec une exponentielle, tout écrire sous la forme $e^{(\dots)}$ et étudier l'exposant. Ou bien faire un changement de variable qui fait apparaître une croissance comparée connue.`,
+  viz: {
+    type: "plot", title: "Le produit monte un peu, puis retombe vers 0", x: [0, 100], y: [0, 0.6], xlabel: "x",
+    curves: [{ label: "x·e^(−√x)", f: x => x * Math.exp(-Math.sqrt(x)) }],
+    vlines: [{ x: () => 4, label: "maximum en x = 4" }]
+  }
+},
+{
+  id: "ex-lim-cos-exp", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  title: "Limite de x·cos(eˣ) / (x² + 1) en +∞",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac{x\cos\left(e^x\right)}{x^2+1}$.</p>`,
+  decode: {
+    donnees: [R`Un cosinus, qui oscille entre $-1$ et $1$.`, R`Une fraction $\dfrac{x}{x^2+1}$.`],
+    but: R`Trouver la limite, alors que $\cos(e^x)$ n'en a pas.`,
+    cles: {
+      osc: R`$e^x\to+\infty$, donc $\cos(e^x)$ continue d'osciller entre $-1$ et $1$ sans jamais se stabiliser : il n'a pas de limite.`,
+      bornee: R`Il existe $M$ tel que $|g(x)|\leqslant M$. Ici, $|\cos(e^x)|\leqslant1$.`
+    }
+  },
+  steps: [
+    { t: "Le problème", b: R`<p>On ne peut pas utiliser les règles sur les produits : $\cos(e^x)$ <span data-k="osc">n'a pas de limite</span> en $+\infty$. En revanche, il est <span data-k="bornee">borné</span>.</p>` },
+    { t: "Séparer les deux morceaux", b: R`$$\frac{x\cos\left(e^x\right)}{x^2+1} = \underbrace{\frac{x}{x^2+1}}_{\text{tend vers }0\,?}\times\underbrace{\cos\left(e^x\right)}_{\text{borné}}.$$` },
+    { t: "La fraction tend vers 0", b: R`<p>On factorise par $x^2$ au dénominateur :</p>$$\frac{x}{x^2+1} = \frac{x}{x^2\left(1+\frac1{x^2}\right)} = \frac1x\cdot\frac{1}{1+\frac1{x^2}}\longrightarrow0\times1 = 0.$$`, rappels: ["operations-limites"] },
+    { t: "Justifier par un encadrement", b: R`<p>Pour $x>0$, comme $|\cos(e^x)|\leqslant1$ :</p>$$\left|\frac{x\cos\left(e^x\right)}{x^2+1}\right|\leqslant\frac{x}{x^2+1}.$$<p>Le majorant tend vers $0$, donc l'expression tend vers $0$.</p>`, rappels: ["borne-zero", "encadrement"] },
+    { t: "Conclusion", b: R`$$\lim_{x\to+\infty}\frac{x\cos\left(e^x\right)}{x^2+1} = 0.$$` }
+  ],
+  piege: R`Chercher la limite de $\cos(e^x)$ : elle n'existe pas. Il suffit qu'il soit borné.`,
+  methode: R`Une fonction bornée multipliée par une fonction qui tend vers $0$ tend vers $0$. On le justifie par $|fg|\leqslant M|f|$.`,
+  viz: {
+    type: "plot", title: "L'oscillation est coincée entre deux courbes qui tendent vers 0", x: [0, 6], y: [-0.6, 0.6], xlabel: "x",
+    curves: [
+      { label: "x·cos(eˣ) / (x² + 1)", f: x => x * Math.cos(Math.exp(x)) / (x * x + 1) },
+      { label: "x / (x² + 1)", f: x => x / (x * x + 1) },
+      { label: "− x / (x² + 1)", f: x => -x / (x * x + 1) }
+    ]
+  }
+},
+{
+  id: "ex-lim-partie-entiere", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  title: "Limite de ⌊x⌋ / x en +∞",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\frac1x\lfloor x\rfloor$, où $\lfloor x\rfloor$ désigne <span data-k="pe">la partie entière</span> de $x$.</p>`,
+  decode: {
+    donnees: [R`$\lfloor x\rfloor\to+\infty$ et $\frac1x\to0$.`],
+    but: R`Lever la forme $0\times(+\infty)$.`,
+    cles: {
+      pe: R`Le plus grand entier inférieur ou égal à $x$. Par exemple $\lfloor 3{,}7\rfloor = 3$ et $\lfloor 5\rfloor = 5$.`,
+      fi: R`$0\times(+\infty)$ : on ne peut pas conclure par les règles de calcul.`,
+      gendarmes: R`Si $f$ est coincée entre deux fonctions qui ont la même limite, elle a aussi cette limite.`
+    }
+  },
+  steps: [
+    { t: "Le problème", b: R`<p>$\frac1x\to0$ et $\lfloor x\rfloor\to+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> $0\times(+\infty)$. La partie entière ne se manipule pas bien dans les calculs : on va l'encadrer.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Encadrer la partie entière", b: R`<p>Par définition, $\lfloor x\rfloor\leqslant x<\lfloor x\rfloor+1$. La partie de droite donne $\lfloor x\rfloor>x-1$. D'où</p>$$x-1<\lfloor x\rfloor\leqslant x.$$`, rappels: ["partie-entiere"] },
+    { t: "Diviser par x", b: R`<p>Pour $x>0$, on peut diviser par $x$ sans changer le sens des inégalités :</p>$$1-\frac1x<\frac{\lfloor x\rfloor}{x}\leqslant1.$$` },
+    { t: "Conclure par encadrement", b: R`<p>À gauche, $1-\frac1x\to1$. À droite, la constante $1$. Par le <span data-k="gendarmes">théorème d'encadrement</span> :</p>$$\lim_{x\to+\infty}\frac{\lfloor x\rfloor}{x} = 1.$$`, rappels: ["encadrement"] }
+  ],
+  piege: R`Diviser l'encadrement par $x$ sans vérifier que $x>0$. Ici c'est le cas, car $x\to+\infty$.`,
+  methode: R`Avec une partie entière, utilise toujours l'encadrement $x-1<\lfloor x\rfloor\leqslant x$, puis le théorème d'encadrement.`,
+  viz: {
+    type: "plot", title: "⌊x⌋/x fait des dents de scie qui se resserrent vers 1", x: [0.5, 20], y: [0, 1.2], xlabel: "x",
+    curves: [{ label: "⌊x⌋ / x", f: x => Math.floor(x) / x }, { label: "1 − 1/x", f: x => 1 - 1 / x }],
+    hlines: [{ y: () => 1, label: "1" }]
+  }
+},
+{
+  id: "ex-lim-x2-sin", subj: "maths", year: "mpsi", chap: 7, level: 1, time: "8 min",
+  title: "Limite de x² + x·sin x en +∞",
+  enonce: R`<p>Déterminer $\displaystyle\lim_{x\to+\infty}\big(x^2+x\sin x\big)$.</p>`,
+  decode: {
+    donnees: [R`$x^2\to+\infty$.`, R`$x\sin x$ oscille de plus en plus fort, sans limite.`],
+    but: R`Montrer que la somme tend tout de même vers $+\infty$.`,
+    cles: {
+      sinus: R`$\sin x$ prend toutes les valeurs entre $-1$ et $1$ sur chaque intervalle de longueur $2\pi$ : il n'a pas de limite en $+\infty$.`,
+      minorer: R`Trouver une fonction plus petite que la nôtre, mais assez simple pour connaître sa limite.`
+    }
+  },
+  steps: [
+    { t: "Le problème", b: R`<p>On ne peut pas additionner des limites : <span data-k="sinus">$\sin x$ n'a pas de limite</span>, donc $x\sin x$ non plus. L'idée est de <span data-k="minorer">minorer</span> l'expression.</p>` },
+    { t: "Minorer le sinus", b: R`<p>Pour tout $x$, $\sin x\geqslant-1$. Pour $x\geqslant0$, on peut multiplier par $x$ sans changer le sens :</p>$$x\sin x\geqslant-x.$$` },
+    { t: "Minorer l'expression", b: R`<p>En ajoutant $x^2$ :</p>$$x^2+x\sin x\geqslant x^2-x = x(x-1).$$` },
+    { t: "Le minorant tend vers +∞", b: R`<p>$x\to+\infty$ et $x-1\to+\infty$, donc leur produit $x(x-1)\to+\infty$.</p>`, rappels: ["operations-limites"] },
+    { t: "Conclusion", b: R`<p>Notre expression est plus grande qu'une fonction qui tend vers $+\infty$. Par minoration :</p>$$\lim_{x\to+\infty}\big(x^2+x\sin x\big) = +\infty.$$`, rappels: ["minoration-infini"] }
+  ],
+  piege: R`Multiplier $\sin x\geqslant-1$ par $x$ sans préciser $x\geqslant0$ : pour $x<0$, l'inégalité changerait de sens.`,
+  methode: R`Pour montrer qu'une limite vaut $+\infty$ quand un terme oscille, minore l'expression par une fonction simple qui tend vers $+\infty$.`,
+  viz: {
+    type: "plot", title: "La courbe reste au-dessus de x² − x, qui tend vers +∞", x: [0, 8], y: [-2, 70], xlabel: "x",
+    curves: [{ label: "x² + x·sin x", f: x => x * x + x * Math.sin(x) }, { label: "x² − x", f: x => x * x - x }]
+  }
+}
+]);

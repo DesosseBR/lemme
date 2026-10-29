@@ -340,6 +340,18 @@ function openTip(el, html) {
   typeset(t);
 }
 
+/* Mots surlignés (énoncé et corrigé) : un clic affiche leur explication */
+function bindKeys(root, ex) {
+  if (!root) return;
+  $$("[data-k]", root).forEach(k => {
+    k.setAttribute("tabindex", "0"); k.setAttribute("role", "button");
+    const html = (ex.decode && ex.decode.cles && ex.decode.cles[k.dataset.k]) || "";
+    const toggle = ev => { ev.stopPropagation(); if (tipFor === k) closeTip(); else openTip(k, html); };
+    k.addEventListener("click", toggle);
+    k.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(ev); } });
+  });
+}
+
 /* ---------- Corrigé pas à pas ---------- */
 let player = null;
 function mountPlayer(e, host) {
@@ -373,6 +385,7 @@ function mountPlayer(e, host) {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
     }));
+    closeTip(); bindKeys(host, e);
     typeset(host);
     const top = host.closest(".panelbox").getBoundingClientRect().top;
     if (top < 72 || top > innerHeight * .6) host.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
@@ -578,13 +591,7 @@ function wire(ex) {
       $("#en-int").hidden = enonceMode !== "interactif"; $("#en-pdf").hidden = enonceMode !== "pdf";
       const lz = $("#en-pdf [data-lazy]"); if (enonceMode === "pdf" && lz) { lz.removeAttribute("data-lazy"); mountPdf(lz); }
     }));
-    $$(".enonce [data-k]", app).forEach(k => {
-      k.setAttribute("tabindex", "0"); k.setAttribute("role", "button");
-      const html = (ex.decode && ex.decode.cles[k.dataset.k]) || "";
-      const toggle = ev => { ev.stopPropagation(); if (tipFor === k) closeTip(); else openTip(k, html); };
-      k.addEventListener("click", toggle);
-      k.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(ev); } });
-    });
+    bindKeys($(".enonce", app), ex);
     if (ex.viz) mountViz($("#viz"), ex.viz);
     mountPlayer(ex, $("#player"));
   }
