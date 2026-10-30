@@ -816,3 +816,448 @@ LEMME.exercises([
 }
 ]);
 })();
+
+/* ---------- MP · 7. Topologie des EVN (1) ---------- */
+LEMME.rappels({
+  "k-ferme-seq": { t: "Fermé : caractérisation séquentielle", b: R`<div class="sbox">$$F\ \text{fermé}\iff\big(x_n\in F,\ x_n\to x\ \Rightarrow\ x\in F\big).$$</div><p>L'image réciproque d'un fermé par une application continue est fermée ; l'image réciproque d'un ouvert est ouverte.</p>` },
+  "k-compact-seq": { t: "Compacité (Bolzano-Weierstrass)", b: R`<p>$K$ est compact si toute suite de $K$ a une sous-suite qui converge dans $K$. En dimension finie, compact $\iff$ fermé borné.</p><div class="sbox">$$(x_n)\in K^{\mathbb N}\ \Longrightarrow\ \exists\varphi,\ x_{\varphi(n)}\to\ell\in K.$$</div>` },
+  "k-trigo-mat": { t: "Trigonalisation sur ℂ", b: R`<p>Toute matrice de $\mathcal M_n(\mathbb C)$ est semblable à une matrice triangulaire supérieure, dont la diagonale porte les valeurs propres :</p><div class="sbox">$$A = PTP^{-1},\qquad T\ \text{triangulaire},\qquad\operatorname{diag}(T) = (\lambda_1,\dots,\lambda_n).$$</div>` },
+  "k-cpa": { t: "Connexité par arcs", b: R`<p>$A$ est connexe par arcs si deux points de $A$ sont toujours reliés par un chemin continu à valeurs dans $A$. L'image d'un connexe par arcs par une application continue est connexe par arcs ; dans $\mathbb R$, ce sont les intervalles.</p><div class="sbox">$$A\ \text{c.p.a.},\ f\ \text{continue}\ \Longrightarrow\ f(A)\ \text{c.p.a.}$$</div>` },
+  "k-valeur-adh": { t: "Valeur d'adhérence", b: R`<p>$\ell$ est valeur d'adhérence de $(u_n)$ si une sous-suite converge vers $\ell$, ce qui équivaut à :</p><div class="sbox">$$\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\quad|u_n-\ell|< \varepsilon.$$</div><p>(La suite revient près de $\ell$ une infinité de fois.)</p>` }
+});
+
+(() => {
+const { FIG, S, f1, GRAPH } = window.__LA;
+LEMME.exercises([
+{
+  id: "kh-15-1", subj: "kholles", year: "mp", chap: 7, level: 3, time: "25 min",
+  title: "Graphe fermé et continuité",
+  enonce: R`<p>Soient $E,F$ deux espaces vectoriels normés et $f : E\to F$. On note $\Gamma_f = \{(x,f(x)),\ x\in E\}\subset E\times F$.</p><ol><li>Montrer que si $f$ est continue, $\Gamma_f$ est fermé.</li><li>Montrer que la réciproque est fausse avec $f : \mathbb R\to\mathbb R$, $f(x) = \frac1x$ pour $x\neq0$ et $f(0) = 0$.</li><li>On suppose que $f(E)$ est contenu dans un compact $K$ de $F$ et que $\Gamma_f$ est fermé. Montrer que $f$ est continue.</li></ol>`,
+  decode: { donnees: [R`Sur $E\times F$, $(x_n,y_n)\to(x,y)\iff x_n\to x$ et $y_n\to y$.`], but: R`Relier continuité et fermeture du graphe.`, cles: {
+    seq: R`$\Gamma_f$ fermé $\iff$ dès que $x_n\to x$ et $f(x_n)\to y$, on a $y = f(x)$.`,
+    graphe: R`Le graphe de $\frac1x$ est une hyperbole (fermée dans $\mathbb R^2\setminus\{0\}\times\mathbb R$) et le point $(0,0)$, isolé : aucune suite de points du graphe ne s'approche de $(0,y)$.`,
+    sous: R`Si $f(x_n)\not\to f(x)$, on extrait une sous-suite qui reste à distance $\geqslant\varepsilon$ de $f(x)$, puis (compacité) une sous-sous-suite qui converge vers un $y$.` } },
+  steps: [
+    { q: 1, t: "Continue implique graphe fermé", h: R`<p>Caractérisation séquentielle : <span data-k="seq">si $(x_n,f(x_n))\to(x,y)$</span>, la continuité donne $f(x_n)\to f(x)$, et l'unicité de la limite $y = f(x)$.</p>`, b: R`<p>Soit $(x_n,f(x_n))\to(x,y)$. Alors $x_n\to x$, donc $f(x_n)\to f(x)$ par continuité. Par unicité de la limite, $y = f(x)$ : $(x,y)\in\Gamma_f$. Donc $\Gamma_f$ est fermé.</p>`, rappels: ["k-ferme-seq", "o-a-seq-cont"] },
+    { q: 2, t: "Contre-exemple", h: R`<p>Le graphe de $\frac1x$ ne s'approche jamais de l'axe vertical à distance finie : <span data-k="graphe">il n'a pas de point d'accumulation « au-dessus » de $0$</span>.</p>`, b: R`<p>Si $(x_n,f(x_n))\to(x,y)$ avec $x\neq0$ : $x_n\neq0$ à partir d'un rang et $\frac1{x_n}\to\frac1x$, donc $y = f(x)$. Si $x = 0$ : soit $x_n = 0$ à partir d'un rang ($y = 0 = f(0)$), soit une sous-suite de $x_n\neq0$ tend vers $0$, et $|f(x_n)| = \frac1{|x_n|}\to+\infty$ ne converge pas. <span data-k="graphe">Le graphe est fermé</span>, mais $f$ n'est pas continue en $0$.</p>` + GRAPH({ w: 380, h: 220, x: [-3, 3], y: [-3.5, 3.5], xt: [], yt: [], curves: [{ f: x => Math.abs(x) < 0.29 ? NaN : 1 / x, c: "b" }], extra: (X, Y) => `<circle cx="${f1(X(0))}" cy="${f1(Y(0))}" r="5" class="mass"/>` }, R`Le graphe de $f$ : les deux branches de l'hyperbole et le point isolé $(0,0)$. Il est fermé, mais $f$ n'est pas continue.`, "Graphe fermé discontinu") },
+    { q: 3, t: "Avec un compact", h: R`<p>Par l'absurde, <span data-k="sous">une sous-suite reste loin de $f(x)$</span>. La compacité fournit une valeur d'adhérence $y$, que le graphe fermé force à valoir $f(x)$.</p>`, b: R`<p>Soit $x_n\to x$ et supposons $f(x_n)\not\to f(x)$ : il existe $\varepsilon>0$ et une sous-suite avec $\|f(x_{\varphi(n)})-f(x)\|\geqslant\varepsilon$. Les $f(x_{\varphi(n)})$ sont dans le compact $K$ : <span data-k="sous">une sous-suite converge vers un $y$</span>, avec $\|y-f(x)\|\geqslant\varepsilon$. Mais $(x_{\varphi\circ\psi(n)},f(x_{\varphi\circ\psi(n)}))\to(x,y)$ et $\Gamma_f$ est fermé, donc $y = f(x)$ : contradiction.</p><div class="sbox">$$\Gamma_f\ \text{fermé et}\ f(E)\subset K\ \text{compact}\ \Longrightarrow\ f\ \text{continue}.$$</div>`, rappels: ["k-compact-seq", "absurde"] }
+  ],
+  ctx: { "k-ferme-seq": R`<p>Appliqué au graphe dans $E\times F$.</p>`, "o-a-seq-cont": R`<p>$x_n\to x\Rightarrow f(x_n)\to f(x)$.</p>`, "k-compact-seq": R`<p>Pour la suite $f(x_{\varphi(n)})\in K$.</p>`, "absurde": R`<p>On suppose $f(x_n)\not\to f(x)$.</p>` },
+  piege: R`Oublier de passer par une sous-suite : $f(x_n)$ peut ne pas converger du tout, mais elle a des sous-suites convergentes grâce au compact.`,
+  methode: R`Pour montrer $f(x_n)\to f(x)$ dans un compact : montrer que $f(x)$ est la seule valeur d'adhérence possible.`
+},
+{
+  id: "kh-15-2", subj: "kholles", year: "mp", chap: 7, level: 2, time: "25 min",
+  title: "O(n) est compact, GLₙ est un ouvert dense",
+  enonce: R`<ol><li>Montrer que $O_n(\mathbb R) = \{M\in\mathcal M_n(\mathbb R) : M^\top M = I_n\}$ est fermé et borné, donc compact.</li><li>Montrer que $GL_n(\mathbb C)$ est un ouvert de $\mathcal M_n(\mathbb C)$.</li><li>Soit $A\in\mathcal M_n(\mathbb C)$. Montrer que $A-\frac1kI_n$ est inversible pour $k$ assez grand. En déduire que $GL_n(\mathbb C)$ est dense. Même question sur $\mathbb R$.</li><li>Application : en déduire que $\det(I_n+AB) = \det(I_n+BA)$ pour toutes $A,B$.</li></ol>`,
+  decode: { donnees: [R`$\mathcal M_n(\mathbb K)$ est de dimension finie : toutes les normes sont équivalentes.`], but: R`Trois propriétés topologiques des groupes de matrices.`, cles: {
+    colonnes: R`$M^\top M = I_n$ : les colonnes de $M$ forment une famille orthonormée, donc chaque coefficient vérifie $|m_{ij}|\leqslant1$.`,
+    det: R`$GL_n = \det^{-1}(\mathbb C^\ast)$, image réciproque d'un ouvert par une application continue (polynomiale).`,
+    fini: R`$A-\frac1kI_n$ n'est pas inversible ssi $\frac1k$ est valeur propre de $A$ : au plus $n$ valeurs de $k$.` } },
+  steps: [
+    { q: 1, t: "Compacité de O(n)", h: R`<p>Fermé : image réciproque de $\{I_n\}$ par $M\mapsto M^\top M$, continue. Borné : <span data-k="colonnes">les colonnes sont unitaires</span>.</p>`, b: R`<p>$\varphi : M\mapsto M^\top M$ est continue (polynomiale en les coefficients), et $O_n(\mathbb R) = \varphi^{-1}(\{I_n\})$ est fermé. <span data-k="colonnes">Les colonnes sont unitaires</span>, donc $\|M\|_\infty\leqslant1$ : borné. En dimension finie, fermé borné $\Rightarrow$ compact.</p>`, rappels: ["k-ferme-seq", "k-compact-dimfinie"] },
+    { q: 2, t: "GLₙ est ouvert", h: R`<p><span data-k="det">Image réciproque de l'ouvert $\mathbb C^\ast$</span> par le déterminant, continu.</p>`, b: R`<p>$\det$ est polynomial en les coefficients, donc continu, et <span data-k="det">$GL_n(\mathbb C) = \det^{-1}(\mathbb C^\ast)$</span>, image réciproque d'un ouvert : c'est un ouvert.</p>`, rappels: ["o-a-image-rec"] },
+    { q: 3, t: "GLₙ est dense", h: R`<p>On perturbe $A$ par une petite homothétie. <span data-k="fini">Seul un nombre fini de perturbations sont mauvaises</span>.</p>`, b: R`<p><span data-k="fini">$\det(A-\frac1kI_n) = 0\iff\frac1k\in\operatorname{sp}(A)$</span>, et le spectre a au plus $n$ éléments. Donc pour $k$ assez grand, $A_k = A-\frac1kI_n\in GL_n$, et $A_k\to A$. Le même argument marche sur $\mathbb R$ (valeurs propres réelles en nombre fini).</p><div class="sbox">$$\overline{GL_n(\mathbb K)} = \mathcal M_n(\mathbb K).$$</div>`, rappels: ["o-a-adh-seq"] },
+    { q: 4, t: "Une application de la densité", h: R`<p>Égalité vraie pour $A$ inversible (par similitude), et les deux membres sont continus en $A$ : on passe à la limite.</p>`, b: R`<p>Si $A$ est inversible, $I_n+BA = A^{-1}(I_n+AB)A$, d'où l'égalité des déterminants. Pour $A$ quelconque, $A_k\to A$ avec $A_k$ inversible, et $A\mapsto\det(I_n+AB)-\det(I_n+BA)$ est continue, nulle sur $GL_n$ dense : nulle partout.</p>` }
+  ],
+  ctx: { "k-ferme-seq": R`<p>$O_n = \varphi^{-1}(\{I_n\})$.</p>`, "k-compact-dimfinie": R`<p>Dans $\mathcal M_n(\mathbb R)$.</p>`, "o-a-image-rec": R`<p>$\det^{-1}(\mathbb C^\ast)$.</p>`, "o-a-adh-seq": R`<p>$A$ est limite de la suite $(A_k)$ d'inversibles.</p>` },
+  piege: R`Croire que $GL_n(\mathbb R)$ est fermé : la suite $\frac1kI_n$ est inversible et tend vers $0$, non inversible.`,
+  methode: R`Prouver une identité matricielle continue : la prouver pour les inversibles, puis densité.`
+},
+{
+  id: "kh-15-3", subj: "kholles", year: "mp", chap: 7, level: 3, time: "30 min",
+  title: "Densité des matrices diagonalisables",
+  enonce: R`<ol><li>Soit $A\in\mathcal M_n(\mathbb C)$, écrite $A = PTP^{-1}$ avec $T$ triangulaire supérieure de diagonale $(t_1,\dots,t_n)$. Construire des matrices triangulaires $T_k\to T$ à coefficients diagonaux deux à deux distincts.</li><li>En déduire que l'ensemble $\Delta_n(\mathbb C)$ des matrices diagonalisables est dense dans $\mathcal M_n(\mathbb C)$.</li><li>Montrer que pour $n\geqslant2$, $\Delta_n(\mathbb R)$ n'est pas dense dans $\mathcal M_n(\mathbb R)$, en considérant $R = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$ (complétée par des zéros).</li><li>Application : retrouver Cayley-Hamilton sur $\mathbb C$ à partir du cas diagonalisable.</li></ol>`,
+  decode: { donnees: [R`Toute matrice complexe est trigonalisable.`], but: R`Approcher toute matrice par des matrices diagonalisables.`, cles: {
+    pert: R`On ajoute $\frac{j}{k}$ au $j$-ième coefficient diagonal. Pour $k$ assez grand, les $t_j+\frac jk$ sont distincts : deux d'entre eux ne coïncident que pour un nombre fini de valeurs de $k$.`,
+    discr: R`Pour $M\in\mathcal M_2(\mathbb R)$, $\delta(M) = \operatorname{tr}(M)^2-4\det M$ est continu ; $\delta(R) = -4< 0$, donc $\delta< 0$ près de $R$ : valeurs propres non réelles.`,
+    ch: R`$A\mapsto\chi_A(A)$ est continue (coefficients polynomiaux en ceux de $A$), nulle sur $\Delta_n(\mathbb C)$.` } },
+  steps: [
+    { q: 1, t: "Séparer les valeurs propres", h: R`<p>On <span data-k="pert">perturbe la diagonale de $T$ par des quantités différentes</span> qui tendent vers $0$.</p>`, b: R`<p>Posons $T_k = T+\operatorname{diag}\left(\frac1k,\frac2k,\dots,\frac nk\right)$. $T_k\to T$. Pour $i\neq j$, $t_i+\frac ik = t_j+\frac jk\iff k = \frac{j-i}{t_i-t_j}$ (si $t_i\neq t_j$) ou jamais (si $t_i = t_j$, car $i\neq j$) : <span data-k="pert">au plus une valeur de $k$ par paire</span>. Pour $k$ assez grand, les coefficients diagonaux de $T_k$ sont distincts.</p>`, rappels: ["k-trigo-mat"] },
+    { q: 2, t: "Densité", h: R`<p>$T_k$ triangulaire à valeurs propres distinctes : diagonalisable. On revient avec $P$, et $M\mapsto PMP^{-1}$ est continue.</p>`, b: R`<p>$T_k$ a $n$ valeurs propres distinctes, donc est diagonalisable, comme $A_k = PT_kP^{-1}$. Et $A_k\to PTP^{-1} = A$ (continuité du produit matriciel).</p><div class="sbox">$$\overline{\Delta_n(\mathbb C)} = \mathcal M_n(\mathbb C).$$</div>`, rappels: ["valeurs-propres-distinctes"] },
+    { q: 3, t: "Sur ℝ, c'est faux", h: R`<p>Près de la rotation $R$, les matrices <span data-k="discr">ont un discriminant négatif</span> (continuité) : elles ne sont pas diagonalisables sur $\mathbb R$.</p>`, b: R`<p>Pour $n = 2$ : <span data-k="discr">$\delta(M) = \operatorname{tr}(M)^2-4\det M$</span> est continu et $\delta(R) = -4$. Il existe donc une boule $B(R,r)$ où $\delta< 0$ : les matrices de cette boule n'ont pas de valeur propre réelle, donc ne sont pas diagonalisables sur $\mathbb R$. $\Delta_2(\mathbb R)$ ne rencontre pas $B(R,r)$ : il n'est pas dense. Pour $n\geqslant3$, même argument avec le bloc $R$ complété par des zéros (le polynôme caractéristique garde un facteur sans racine réelle, par continuité des coefficients).</p>` },
+    { q: 4, t: "Cayley-Hamilton par densité", h: R`<p>Pour une matrice diagonalisable, c'est un calcul direct. Puis <span data-k="ch">l'application $A\mapsto\chi_A(A)$ est continue</span>.</p>`, b: R`<p>Si $A = PDP^{-1}$, $\chi_A(A) = P\chi_A(D)P^{-1} = P\operatorname{diag}(\chi_A(\lambda_i))P^{-1} = 0$. <span data-k="ch">$A\mapsto\chi_A(A)$ est continue</span> et nulle sur le dense $\Delta_n(\mathbb C)$ : elle est nulle partout.</p><div class="sbox">$$\forall A\in\mathcal M_n(\mathbb C),\qquad\chi_A(A) = 0.$$</div>` }
+  ],
+  ctx: { "k-trigo-mat": R`<p>$A = PTP^{-1}$.</p>`, "valeurs-propres-distinctes": R`<p>$T_k$ a $n$ valeurs propres distinctes.</p>` },
+  piege: R`Perturber $A$ par $\frac1kI_n$ : cela décale toutes les valeurs propres de la même quantité, sans les séparer.`,
+  methode: R`Densité d'une propriété générique : trigonaliser, puis perturber la diagonale pour séparer les valeurs propres.`
+},
+{
+  id: "kh-15-4", subj: "kholles", year: "mp", chap: 7, level: 3, time: "25 min",
+  title: "Connexité par arcs de GLₙ(ℂ) et GLₙ(ℝ)",
+  enonce: R`<ol><li>Montrer que $GL_n(\mathbb R)$ n'est pas connexe par arcs.</li><li>Soient $A,B\in GL_n(\mathbb C)$. Montrer que $P(z) = \det\big((1-z)A+zB\big)$ est un polynôme non nul en $z$.</li><li>En déduire un chemin continu de $A$ à $B$ dans $GL_n(\mathbb C)$. Conclure.</li><li>Montrer que $GL_n^+(\mathbb R) = \{\det>0\}$ contient $I_n$ et $\operatorname{diag}(-1,-1,1,\dots,1)$, et relier ces deux matrices par un chemin dans $GL_n^+(\mathbb R)$.</li></ol>`,
+  decode: { donnees: [R`$\det$ est continu ; $\mathbb C$ privé d'un nombre fini de points est connexe par arcs.`], but: R`Comparer la connexité de $GL_n$ sur $\mathbb R$ et sur $\mathbb C$.`, cles: {
+    image: R`Si $GL_n(\mathbb R)$ était connexe par arcs, $\det(GL_n(\mathbb R)) = \mathbb R^\ast$ le serait (image continue).`,
+    contour: R`Le segment $[0,1]$ peut passer par une racine de $P$ ; on le remplace par un chemin de $\mathbb C$ de $0$ à $1$ qui évite les racines (en nombre fini).`,
+    rot: R`$\begin{pmatrix}\cos t&-\sin t\\\sin t&\cos t\end{pmatrix}$ va de $I_2$ ($t = 0$) à $-I_2$ ($t = \pi$) en restant de déterminant $1$.` } },
+  steps: [
+    { q: 1, t: "Sur ℝ : deux morceaux", h: R`<p><span data-k="image">Le déterminant envoie $GL_n(\mathbb R)$ sur $\mathbb R^\ast$</span>, qui n'est pas un intervalle.</p>`, b: R`<p>$\det : GL_n(\mathbb R)\to\mathbb R^\ast$ est continu et surjectif ($\det\operatorname{diag}(t,1,\dots,1) = t$). <span data-k="image">Si $GL_n(\mathbb R)$ était connexe par arcs, $\mathbb R^\ast$ le serait</span>, or ce n'est pas un intervalle. Concrètement, un chemin de $I_n$ à $\operatorname{diag}(-1,1,\dots,1)$ ferait passer $\det$ de $1$ à $-1$, donc par $0$ (TVI).</p>`, rappels: ["k-cpa"] },
+    { q: 2, t: "Un polynôme non nul", h: R`<p>$P(0) = \det A\neq0$.</p>`, b: R`<p>$P(z)$ est un déterminant dont les coefficients sont affines en $z$ : c'est un polynôme en $z$. $P(0) = \det A\neq0$, donc $P\neq0$, et $P$ a un nombre fini de racines (aucune n'est $0$ ou $1$).</p>` },
+    { q: 3, t: "Contourner les racines", h: R`<p>On relie $0$ à $1$ <span data-k="contour">par un chemin du plan complexe qui évite les racines de $P$</span> (par exemple un arc de cercle légèrement décalé).</p>`, b: R`<p>Soit $\gamma : [0,1]\to\mathbb C$ continu, $\gamma(0) = 0$, $\gamma(1) = 1$, <span data-k="contour">évitant les racines de $P$</span> (possible car elles sont en nombre fini : par exemple $\gamma(s) = s+i\eta\sin(\pi s)$ pour un $\eta$ bien choisi). Alors $s\mapsto(1-\gamma(s))A+\gamma(s)B$ est continu, va de $A$ à $B$ et reste dans $GL_n(\mathbb C)$.</p><div class="sbox">$$GL_n(\mathbb C)\ \text{est connexe par arcs}.$$</div>` + FIG(340, 140, (() => { const X = v => 50 + v * 240; let s = `<line class="ax" x1="20" y1="100" x2="330" y2="100"/>`; s += `<path class="vb" style="fill:none;stroke-width:2.2" d="M${X(0)} 100 Q ${X(0.5)} 10 ${X(1)} 100"/>`; for (const [x, y] of [[0.35, 0], [0.62, 0], [0.8, 0.25]]) s += `<circle cx="${f1(X(x))}" cy="${f1(100 - y * 200)}" r="5" class="body" style="fill:var(--red)"/>`; return s + `<circle cx="${X(0)}" cy="100" r="5" class="mass"/><circle cx="${X(1)}" cy="100" r="5" class="mass"/>` + S(X(0), 120, "0", "middle") + S(X(1), 120, "1", "middle"); })(), R`Les racines de $P$ (en rouge) sont en nombre fini : un chemin de $0$ à $1$ dans $\mathbb C$ peut les contourner. Sur $\mathbb R$, impossible : on est coincé sur la droite.`, "Chemin évitant les racines") },
+    { q: 4, t: "Dans GLₙ⁺(ℝ)", h: R`<p>Une <span data-k="rot">rotation d'angle variable</span> dans le plan des deux premiers vecteurs.</p>`, b: R`<p>$\operatorname{diag}(-1,-1,1,\dots,1)$ a pour déterminant $1>0$. Le chemin $t\mapsto\operatorname{diag}(R_t,I_{n-2})$, avec <span data-k="rot">$R_t$ la rotation d'angle $t$</span>, est continu, de déterminant $1$, et va de $I_n$ ($t = 0$) à $\operatorname{diag}(-1,-1,1,\dots,1)$ ($t = \pi$). (On peut montrer que $GL_n^+(\mathbb R)$ est connexe par arcs : $GL_n(\mathbb R)$ a exactement deux « morceaux ».)</p>` }
+  ],
+  ctx: { "k-cpa": R`<p>$\det$ est continu ; les connexes par arcs de $\mathbb R$ sont les intervalles.</p>` },
+  piege: R`Utiliser le segment $[A,B]$ directement : il peut rencontrer des matrices non inversibles (par exemple $A = I_n$, $B = -I_n$, qui passe par $0$).`,
+  methode: R`Relier deux points en évitant un ensemble fini : passer par le plan complexe.`
+},
+{
+  id: "kh-15-5", subj: "kholles", year: "mp", chap: 7, level: 4, time: "30 min",
+  title: "Valeurs d'adhérence d'une suite à petits pas",
+  enonce: R`<p>Soit $(u_n)$ une suite réelle bornée telle que $u_{n+1}-u_n\to0$. On note $V$ l'ensemble de ses valeurs d'adhérence.</p><ol><li>Justifier que $V$ est non vide, et que $V\subset[\ell^-,\ell^+]$ où $\ell^- = \min V$ et $\ell^+ = \max V$ (on admet que $V$ est fermé).</li><li>Soit $c\in\,]\ell^-,\ell^+[$. Montrer que $c\in V$.</li><li>Conclure que $V = [\ell^-,\ell^+]$. Donner un exemple où $V = [-1,1]$.</li><li>Montrer que l'hypothèse $u_{n+1}-u_n\to0$ est nécessaire.</li></ol>`,
+  decode: { donnees: [R`$(u_n)$ bornée ; les pas tendent vers $0$.`], but: R`Montrer que l'ensemble des valeurs d'adhérence est un intervalle.`, cles: {
+    bw: R`Bolzano-Weierstrass : toute suite réelle bornée a une valeur d'adhérence.`,
+    traverse: R`La suite passe une infinité de fois près de $\ell^-$ (sous $c$) et près de $\ell^+$ (au-dessus de $c$) : elle traverse le niveau $c$ une infinité de fois, à petits pas.`,
+    premier: R`Entre un indice $p\geqslant N$ avec $u_p< c$ et un indice $q>p$ avec $u_q>c$, soit $m$ le premier indice $> p$ avec $u_m\geqslant c$ : $u_{m-1}< c\leqslant u_m$, et $u_m-u_{m-1}< \varepsilon$.` } },
+  steps: [
+    { q: 1, t: "V non vide", h: R`<p><span data-k="bw">Bolzano-Weierstrass</span>. Un fermé borné non vide de $\mathbb R$ a un plus petit et un plus grand élément.</p>`, b: R`<p><span data-k="bw">$(u_n)$ bornée a une sous-suite convergente</span> : $V\neq\emptyset$. $V$ est borné (contenu dans $[\inf u,\sup u]$) et fermé, donc $\ell^- = \min V$ et $\ell^+ = \max V$ existent.</p>`, rappels: ["k-compact-seq"] },
+    { q: 2, t: "Traverser le niveau c", h: R`<p>La suite revient <span data-k="traverse">infiniment souvent sous $c$ et au-dessus de $c$</span>. À chaque traversée, comme les pas sont petits, un terme tombe près de $c$.</p>`, b: R`<p>Soit $\varepsilon>0$ et $N$ avec $|u_{n+1}-u_n|< \varepsilon$ pour $n\geqslant N$. Comme $\ell^-< c$ est valeur d'adhérence, il existe $p\geqslant N$ avec $u_p< c$ ; comme $\ell^+>c$, il existe $q>p$ avec $u_q>c$. <span data-k="premier">Soit $m$ le premier indice $> p$ avec $u_m\geqslant c$</span> : $u_{m-1}< c\leqslant u_m< u_{m-1}+\varepsilon< c+\varepsilon$. Donc $|u_m-c|< \varepsilon$ avec $m>N$. $N$ et $\varepsilon$ étant arbitraires, $c\in V$.</p>`, rappels: ["k-valeur-adh"] },
+    { q: 3, t: "Conclusion et exemple", h: R`<p>$V$ contient ses bornes et tout ce qui est entre. Pour l'exemple : une suite qui oscille de plus en plus lentement entre $-1$ et $1$.</p>`, b: R`<div class="sbox">$$V = [\ell^-,\ell^+].$$</div><p>Exemple : $u_n = \sin\sqrt n$. Ses pas tendent vers $0$ ($|\sin\sqrt{n+1}-\sin\sqrt n|\leqslant\sqrt{n+1}-\sqrt n\to0$), et on a vu (exercice MPSI sur $\sin\sqrt n$) que tout point de $[-1,1]$ est approché à des rangs arbitrairement grands : $V = [-1,1]$.</p>` + GRAPH({ w: 420, h: 200, x: [0, 400], y: [-1.2, 1.2], xt: [0, 100, 200, 300, 400], yt: [-1, 1], curves: [{ f: x => Math.sin(Math.sqrt(Math.round(x))), c: "b", n: 400 }] }, R`$u_n = \sin\sqrt n$ : les oscillations ralentissent, et la suite balaie tout $[-1,1]$.`, "Suite sin racine de n") },
+    { q: 4, t: "L'hypothèse est nécessaire", h: R`<p>Une suite qui saute d'une valeur à l'autre sans passer entre les deux.</p>`, b: R`<p>$u_n = (-1)^n$ : bornée, $V = \{-1,1\}$, pas un intervalle. Ici $|u_{n+1}-u_n| = 2\not\to0$.</p>` }
+  ],
+  ctx: { "k-compact-seq": R`<p>Bolzano-Weierstrass dans $\mathbb R$.</p>`, "k-valeur-adh": R`<p>Pour tout $\varepsilon$ et tout $N$, un $m\geqslant N$ avec $|u_m-c|< \varepsilon$.</p>` },
+  piege: R`Prendre un indice $m$ quelconque entre $p$ et $q$ : il faut le <b>premier</b> passage au-dessus de $c$, pour que le terme précédent soit encore sous $c$.`,
+  methode: R`Une suite à pas tendant vers $0$ ne peut pas sauter un niveau : prendre le premier franchissement.`
+}
+]);
+})();
+
+/* ---------- MP · 7. Topologie des EVN (2) · 8. Convexité ---------- */
+LEMME.rappels({
+  "k-lin-cont": { t: "Continuité d'une application linéaire", b: R`<p>Pour $f$ linéaire entre espaces normés, il y a équivalence :</p><div class="sbox">$$f\ \text{continue}\iff f\ \text{continue en}\ 0\iff\exists C,\ \forall x,\ \|f(x)\|\leqslant C\|x\|.$$</div><p>En dimension finie (au départ), toute application linéaire est continue.</p>` },
+  "k-riesz": { t: "Compacité et dimension", b: R`<p>Dans un espace normé de dimension finie, la boule unité fermée est compacte. En dimension infinie, elle ne l'est jamais (théorème de Riesz, hors programme mais instructif).</p>` },
+  "k-concave-ln": { t: "Concavité du logarithme", b: R`<p>$\ln$ est concave sur $]0,+\infty[$ ($\ln'' = -\frac1{x^2}< 0$) :</p><div class="sbox">$$\alpha\ln u+\beta\ln v\leqslant\ln(\alpha u+\beta v)\qquad(\alpha,\beta\geqslant0,\ \alpha+\beta = 1).$$</div>` }
+});
+
+(() => {
+const { FIG, S, f1, GRAPH } = window.__LA;
+LEMME.exercises([
+{
+  id: "kh-15-6", subj: "kholles", year: "mp", chap: 7, level: 3, time: "20 min",
+  title: "Applications linéaires continues et suites",
+  enonce: R`<p>Soient $E,F$ normés et $f\in\mathcal L(E,F)$. Montrer l'équivalence :</p><ol><li>$f$ est continue ;</li><li>pour toute suite $(u_n)$ de $E$ qui tend vers $0$, la suite $(f(u_n))$ est bornée.</li></ol><p>Puis : 3. Appliquer à $E = \mathbb R[X]$ normé par $\|P\| = \sup_{[0,1]}|P|$ et $f(P) = P(2)$.</p>`,
+  decode: { donnees: [R`$f$ linéaire : $f(\lambda x) = \lambda f(x)$.`], but: R`Une caractérisation faible (bornée au lieu de convergente) qui suffit pourtant.`, cles: {
+    nonborne: R`Si $f$ n'est pas continue, elle n'est pas bornée sur la boule unité : pour tout $n$, il existe $x_n$ avec $\|x_n\|\leqslant1$ et $\|f(x_n)\|\geqslant n^2$.`,
+    ech: R`$u_n = \frac{x_n}n\to0$ mais $\|f(u_n)\| = \frac{\|f(x_n)\|}n\geqslant n$ : non bornée. Le facteur $n^2$ laisse un $n$ après division.`,
+    pn: R`$P_n = \left(\frac{2X}3\right)^n$ : $\sup_{[0,1]}|P_n| = \left(\frac23\right)^n\to0$, mais $P_n(2) = \left(\frac43\right)^n\to+\infty$.` } },
+  steps: [
+    { q: 1, t: "Sens direct", h: R`<p>Continue en $0$ : $f(u_n)\to f(0) = 0$, et une suite convergente est bornée.</p>`, b: R`<p>Si $f$ est continue et $u_n\to0$, alors $f(u_n)\to f(0) = 0$, donc $(f(u_n))$ est bornée.</p>`, rappels: ["k-lin-cont"] },
+    { q: 2, t: "Réciproque par contraposée", h: R`<p>Si $f$ n'est pas continue, elle est <span data-k="nonborne">non bornée sur la boule unité</span>, avec une marge : on prend des valeurs $\geqslant n^2$, puis on <span data-k="ech">divise par $n$</span>.</p>`, b: R`<p>Supposons $f$ non continue : il n'existe pas de $C$ avec $\|f(x)\|\leqslant C\|x\|$, donc <span data-k="nonborne">pour tout $n$, un $x_n$ avec $\|x_n\|\leqslant1$ et $\|f(x_n)\|\geqslant n^2$</span> (par homogénéité). Alors <span data-k="ech">$u_n = \frac{x_n}n\to0$ et $\|f(u_n)\|\geqslant n$</span> : la propriété 2 est fausse.</p><div class="sbox">$$f\ \text{continue}\iff\big(u_n\to0\Rightarrow(f(u_n))\ \text{bornée}\big).$$</div>`, rappels: ["k-contraposee"] },
+    { q: 3, t: "Un exemple non continu", h: R`<p>Un polynôme petit sur $[0,1]$ mais grand en $2$ : <span data-k="pn">une puissance de $\frac{2X}3$</span>.</p>`, b: R`<p><span data-k="pn">$P_n = \left(\frac{2X}3\right)^n\to0$ pour la norme, mais $f(P_n) = \left(\frac43\right)^n$ n'est pas bornée</span>. Donc $f : P\mapsto P(2)$ n'est pas continue (en dimension infinie, une forme linéaire peut être discontinue).</p>` }
+  ],
+  ctx: { "k-lin-cont": R`<p>Continuité en $0$.</p>`, "k-contraposee": R`<p>On montre « non 1 $\Rightarrow$ non 2 ».</p>` },
+  piege: R`Prendre $\|f(x_n)\|\geqslant n$ seulement : après division par $n$, on n'obtient qu'une suite $\geqslant1$, qui peut être bornée.`,
+  methode: R`Linéarité : on peut toujours « renormaliser » une suite ; une marge $n^2$ permet de faire tendre vers $0$ tout en gardant l'image non bornée.`
+},
+{
+  id: "kh-15-8", subj: "kholles", year: "mp", chap: 7, level: 2, time: "20 min",
+  title: "Un fermé borné qui n'est pas compact",
+  enonce: R`<p>Soit $E = \mathbb R[X]$, normé par $\|P\| = \max_k|a_k|$ si $P = \sum a_kX^k$.</p><ol><li>Vérifier que c'est une norme.</li><li>Montrer que la boule unité fermée $B = \{P : \|P\|\leqslant1\}$ est fermée et bornée.</li><li>Montrer que la suite $(X^n)$ n'a aucune sous-suite convergente. Conclure.</li><li>Pourquoi cela n'arrive-t-il pas dans $\mathbb R_d[X]$ ?</li></ol>`,
+  decode: { donnees: [R`Une norme qui regarde le plus grand coefficient.`], but: R`Trouver un fermé borné non compact.`, cles: {
+    dist: R`$\|X^n-X^m\| = 1$ pour $n\neq m$ : deux termes distincts sont toujours à distance $1$.`,
+    cauchy: R`Une suite convergente a des termes de plus en plus proches : $\|u_p-u_q\|\leqslant\|u_p-\ell\|+\|\ell-u_q\|$.` } },
+  steps: [
+    { q: 1, t: "Une norme", h: R`<p>Séparation, homogénéité, inégalité triangulaire coefficient par coefficient.</p>`, b: R`<p>$\|P\| = 0\Rightarrow$ tous les coefficients nuls $\Rightarrow P = 0$. $\|\lambda P\| = |\lambda|\|P\|$. $|a_k+b_k|\leqslant|a_k|+|b_k|\leqslant\|P\|+\|Q\|$, puis on prend le max.</p>`, rappels: ["o-a-norme-def"] },
+    { q: 2, t: "Fermée et bornée", h: R`<p>Bornée par définition. Fermée : une boule fermée l'est toujours (image réciproque de $[0,1]$ par la norme, continue).</p>`, b: R`<p>$B = \|\cdot\|^{-1}([0,1])$, image réciproque d'un fermé par une application $1$-lipschitzienne : fermée. Et bornée par $1$.</p>`, rappels: ["o-a-norme-cont"] },
+    { q: 3, t: "Pas de sous-suite convergente", h: R`<p>Les $X^n$ sont dans $B$ et <span data-k="dist">tous à distance $1$ les uns des autres</span>. Une sous-suite convergente aurait des termes proches.</p>`, b: R`<p>Si $X^{\varphi(n)}\to\ell$, alors pour $n$ grand $\|X^{\varphi(n)}-\ell\|< \frac12$, et <span data-k="cauchy">$\|X^{\varphi(n)}-X^{\varphi(n+1)}\|< 1$</span>, alors que <span data-k="dist">cette distance vaut $1$</span>. Contradiction : $B$ n'est pas compacte.</p><div class="sbox">$$\text{fermé borné}\not\Rightarrow\text{compact en dimension infinie.}$$</div>`, rappels: ["k-compact-seq"] },
+    { q: 4, t: "En dimension finie", h: R`<p>$\mathbb R_d[X]$ est de dimension finie : fermé borné y équivaut à compact.</p>`, b: R`<p>Dans $\mathbb R_d[X]$ (dimension $d+1$), $B\cap\mathbb R_d[X]$ est fermée bornée donc compacte, et la suite $(X^n)$ n'y reste pas (elle sort dès $n>d$). Tout le problème vient de la dimension infinie (théorème de Riesz).</p>`, rappels: ["k-riesz"] }
+  ],
+  ctx: { "o-a-norme-def": R`<p>Trois axiomes.</p>`, "o-a-norme-cont": R`<p>La norme est continue.</p>`, "k-compact-seq": R`<p>Une suite de $B$ sans valeur d'adhérence.</p>`, "k-riesz": R`<p>Boule unité compacte $\iff$ dimension finie.</p>` },
+  piege: R`Appliquer « fermé borné $\Rightarrow$ compact » dans un espace de fonctions ou de polynômes : ce n'est vrai qu'en dimension finie.`,
+  methode: R`Pour montrer qu'une partie n'est pas compacte : y trouver une suite dont les termes restent à distance fixe les uns des autres.`
+},
+{
+  id: "kh-15-9", subj: "kholles", year: "mp", chap: 7, level: 4, time: "30 min",
+  title: "Un théorème de point fixe sur un compact",
+  enonce: R`<p>Soit $K$ une partie compacte non vide d'un espace normé et $f : K\to K$ telle que $\|f(x)-f(y)\|< \|x-y\|$ pour $x\neq y$.</p><ol><li>Montrer que $f$ est continue et que $g(x) = \|f(x)-x\|$ atteint son minimum en un $a\in K$.</li><li>Montrer que $f(a) = a$, et que ce point fixe est unique.</li><li>Soit $u_0\in K$, $u_{n+1} = f(u_n)$. Montrer que $d_n = \|u_n-a\|$ décroît vers une limite $\delta$, puis que $\delta = 0$.</li><li>Montrer que l'hypothèse de compacité est indispensable avec $f(x) = x+\frac1x$ sur $[1,+\infty[$.</li></ol>`,
+  decode: { donnees: [R`$f$ rapproche strictement deux points distincts, mais sans constante $k< 1$.`], but: R`Point fixe unique et convergence des itérées.`, cles: {
+    min: R`Si $g(a)>0$, alors $f(a)\neq a$ et $g(f(a)) = \|f(f(a))-f(a)\|< \|f(a)-a\| = g(a)$ : contradiction avec la minimalité.`,
+    extr: R`Une sous-suite $u_{\varphi(n)}\to b$. Alors $\|b-a\| = \delta$, et $u_{\varphi(n)+1} = f(u_{\varphi(n)})\to f(b)$, d'où $\|f(b)-a\| = \delta$ aussi.`,
+    contrex: R`$|f(x)-f(y)| = |x-y|\left(1-\frac1{xy}\right)< |x-y|$ pour $x\neq y$ dans $[1,+\infty[$, mais $f(x)>x$ : pas de point fixe.` } },
+  steps: [
+    { q: 1, t: "Continuité et minimum", h: R`<p>$f$ est $1$-lipschitzienne. $g$ est continue sur un compact : bornes atteintes.</p>`, b: R`<p>$\|f(x)-f(y)\|\leqslant\|x-y\|$ : $f$ est continue, $g$ aussi. Sur le compact $K$, $g$ atteint son minimum en un point $a$.</p>`, rappels: ["o-a-bornes"] },
+    { q: 2, t: "Le point fixe", h: R`<p><span data-k="min">Si $a$ n'était pas fixe, $f(a)$ ferait mieux que $a$</span>.</p>`, b: R`<p><span data-k="min">Si $g(a)>0$, alors $g(f(a))< g(a)$</span> : absurde. Donc $f(a) = a$. Unicité : si $f(b) = b\neq a$, $\|a-b\| = \|f(a)-f(b)\|< \|a-b\|$, absurde.</p>`, rappels: ["absurde"] },
+    { q: 3, t: "Convergence des itérées", h: R`<p>$d_{n+1} = \|f(u_n)-f(a)\|\leqslant d_n$ : décroissante, positive, converge. Pour montrer $\delta = 0$, on <span data-k="extr">extrait une sous-suite convergente</span> et on applique l'hypothèse stricte à sa limite.</p>`, b: R`<p>$(d_n)$ décroît vers $\delta\geqslant0$. Par compacité, <span data-k="extr">$u_{\varphi(n)}\to b$, avec $\|b-a\| = \delta$ et $\|f(b)-a\| = \lim d_{\varphi(n)+1} = \delta$</span>. Si $b\neq a$ : $\delta = \|f(b)-f(a)\|< \|b-a\| = \delta$, absurde. Donc $b = a$, $\delta = 0$.</p><div class="sbox">$$u_n\xrightarrow[n\to\infty]{}a,\ \text{l'unique point fixe de}\ f.$$</div>`, rappels: ["o-a-limite-monotone", "k-compact-seq"] },
+    { q: 4, t: "Sans compacité", h: R`<p><span data-k="contrex">On calcule $f(x)-f(y)$</span> : le facteur $1-\frac1{xy}$ est $< 1$ mais pas uniformément.</p>`, b: R`<p>$f$ va de $[1,+\infty[$ dans lui-même, et <span data-k="contrex">$|f(x)-f(y)| = |x-y|\left(1-\frac1{xy}\right)< |x-y|$</span>. Mais $f(x) = x+\frac1x>x$ : aucun point fixe, et $u_n\to+\infty$. $[1,+\infty[$ est fermé mais non borné.</p>` }
+  ],
+  ctx: { "o-a-bornes": R`<p>$g$ continue sur le compact $K$.</p>`, "absurde": R`<p>On suppose $g(a)>0$, puis deux points fixes.</p>`, "o-a-limite-monotone": R`<p>$(d_n)$ décroissante minorée.</p>`, "k-compact-seq": R`<p>Extraction dans $K$.</p>` },
+  piege: R`Appliquer le théorème du point fixe de Banach : il faut une constante $k< 1$ uniforme, qu'on n'a pas ici. C'est la compacité qui remplace cette hypothèse.`,
+  methode: R`Sur un compact, pour montrer qu'une quantité atteint $0$ : prendre son minimum et montrer qu'on peut faire mieux s'il n'est pas nul.`
+},
+{
+  id: "kh-15-10", subj: "kholles", year: "mp", chap: 7, level: 3, time: "25 min",
+  title: "Adhérence des suites à support fini",
+  enonce: R`<p>Soit $E$ l'espace des suites réelles convergentes, normé par $\|u\|_\infty = \sup_n|u_n|$, et $A$ l'ensemble des suites nulles à partir d'un certain rang.</p><ol><li>Montrer que $L : u\mapsto\lim u_n$ est une forme linéaire continue sur $E$.</li><li>En déduire que $\overline A\subset c_0 = \{u : u_n\to0\}$.</li><li>Montrer que $c_0\subset\overline A$ en tronquant les suites.</li><li>Montrer que l'intérieur de $A$ est vide.</li></ol>`,
+  decode: { donnees: [R`$A\subset c_0\subset E$.`], but: R`Calculer l'adhérence et l'intérieur de $A$.`, cles: {
+    lip: R`$|\lim u_n-\lim v_n| = \lim|u_n-v_n|\leqslant\|u-v\|_\infty$ : $L$ est $1$-lipschitzienne.`,
+    tronc: R`$u^{(N)} = (u_0,\dots,u_N,0,0,\dots)\in A$ et $\|u-u^{(N)}\|_\infty = \sup_{n>N}|u_n|\to0$ si $u\in c_0$.`,
+    pert: R`$a+\frac r2(1,1,1,\dots)$ est à distance $\frac r2$ de $a$ mais n'est pas à support fini.` } },
+  steps: [
+    { q: 1, t: "La limite est continue", h: R`<p>Linéarité des limites ; <span data-k="lip">majoration par la norme infinie</span>.</p>`, b: R`<p>$L$ est linéaire, et <span data-k="lip">$|L(u)|\leqslant\|u\|_\infty$</span> : $L$ est continue.</p>`, rappels: ["k-lin-cont"] },
+    { q: 2, t: "L'adhérence est dans c₀", h: R`<p>$c_0 = L^{-1}(\{0\})$ est fermé et contient $A$.</p>`, b: R`<p>$c_0 = \ker L$ est fermé (image réciproque de $\{0\}$ par $L$ continue) et $A\subset c_0$. Donc $\overline A\subset c_0$.</p>`, rappels: ["k-ferme-seq"] },
+    { q: 3, t: "Tronquer", h: R`<p>On approche $u\in c_0$ par <span data-k="tronc">ses tronquées</span> : l'erreur est la queue de la suite.</p>`, b: R`<p>Pour $u\in c_0$, <span data-k="tronc">$\|u-u^{(N)}\|_\infty = \sup_{n>N}|u_n|\to0$</span> car $u_n\to0$. Donc $u\in\overline A$.</p><div class="sbox">$$\overline A = c_0.$$</div><p>Contre-exemple : la suite constante $1$ n'est pas dans $\overline A$ (sa limite vaut $1$, et toute suite de $A$ est à distance $\geqslant1$).</p>`, rappels: ["o-a-adh-seq"] },
+    { q: 4, t: "Intérieur vide", h: R`<p>Une boule autour d'un élément de $A$ contient <span data-k="pert">une suite qui ne s'annule jamais</span>.</p>`, b: R`<p>Soit $a\in A$ et $r>0$. <span data-k="pert">$b = a+\frac r2(1,1,\dots)$</span> est dans $B(a,r)$, convergente, mais ses termes valent $\frac r2$ à partir d'un rang : $b\notin A$. Aucune boule n'est incluse dans $A$ : $\mathring A = \emptyset$.</p>` }
+  ],
+  ctx: { "k-lin-cont": R`<p>$|L(u)|\leqslant\|u\|_\infty$.</p>`, "k-ferme-seq": R`<p>$c_0 = L^{-1}(\{0\})$.</p>`, "o-a-adh-seq": R`<p>$u^{(N)}\in A$ tend vers $u$.</p>` },
+  piege: R`Croire que l'adhérence de $A$ est $E$ tout entier : les suites qui tendent vers une limite non nulle restent loin de $A$.`,
+  methode: R`Adhérence : un fermé qui contient $A$ (inclusion) et une approximation explicite (inclusion réciproque).`
+},
+{
+  id: "kh-15-12", subj: "kholles", year: "mp", chap: 7, level: 4, time: "30 min",
+  title: "Le noyau d'une forme linéaire discontinue est dense",
+  enonce: R`<p>Soit $E$ un espace normé (de dimension infinie) et $\varphi$ une forme linéaire non nulle sur $E$.</p><ol><li>Si $\varphi$ est continue, montrer que $\ker\varphi$ est fermé et n'est pas dense.</li><li>Si $\varphi$ n'est pas continue, montrer qu'il existe $(x_n)$ avec $\|x_n\|\leqslant1$ et $|\varphi(x_n)|\geqslant n$.</li><li>En déduire que $\ker\varphi$ est dense.</li><li>Exemple : $E = \mathbb R[X]$, $\|P\| = \sup_{[0,1]}|P|$, $\varphi(P) = P(2)$. Que dire des polynômes qui s'annulent en $2$ ?</li></ol>`,
+  decode: { donnees: [R`$\ker\varphi$ est un hyperplan : $E = \ker\varphi\oplus\mathbb Rx_0$ pour $\varphi(x_0)\neq0$.`], but: R`Montrer qu'un hyperplan est soit fermé, soit dense.`, cles: {
+    corr: R`$y_n = x-\frac{\varphi(x)}{\varphi(x_n)}x_n$ : on corrige $x$ par un petit multiple de $x_n$ pour annuler $\varphi$.`,
+    petit: R`$\|y_n-x\| = \frac{|\varphi(x)|}{|\varphi(x_n)|}\|x_n\|\leqslant\frac{|\varphi(x)|}{n}\to0$.` } },
+  steps: [
+    { q: 1, t: "Cas continu", h: R`<p>Image réciproque de $\{0\}$. Un fermé dense serait $E$ entier, or $\varphi\neq0$.</p>`, b: R`<p>$\ker\varphi = \varphi^{-1}(\{0\})$ est fermé. S'il était dense, il serait égal à son adhérence $E$, donc $\varphi = 0$ : exclu.</p>`, rappels: ["k-ferme-seq"] },
+    { q: 2, t: "Une suite qui fait exploser φ", h: R`<p>Non continue $\iff$ non bornée sur la boule unité.</p>`, b: R`<p>Si $\varphi$ était bornée par $C$ sur la boule unité, on aurait $|\varphi(x)|\leqslant C\|x\|$ et $\varphi$ serait continue. Donc pour tout $n$, il existe $x_n$, $\|x_n\|\leqslant1$, $|\varphi(x_n)|\geqslant n$.</p>`, rappels: ["k-lin-cont"] },
+    { q: 3, t: "Densité", h: R`<p>On <span data-k="corr">corrige $x$ par un multiple de $x_n$</span> pour tomber dans le noyau ; la correction est <span data-k="petit">petite</span> car $\varphi(x_n)$ est grand.</p>`, b: R`<p>Soit $x\in E$. <span data-k="corr">$y_n = x-\frac{\varphi(x)}{\varphi(x_n)}x_n$</span> vérifie $\varphi(y_n) = 0$ et <span data-k="petit">$\|y_n-x\|\leqslant\frac{|\varphi(x)|}n\to0$</span>.</p><div class="sbox">$$\varphi\ \text{non continue}\ \Longrightarrow\ \overline{\ker\varphi} = E.$$</div><p>Un hyperplan est donc fermé ou dense, sans intermédiaire.</p>`, rappels: ["o-a-adh-seq"] },
+    { q: 4, t: "L'exemple", h: R`<p>$\varphi(P) = P(2)$ n'est pas continue pour cette norme (exercice précédent avec $(\frac{2X}3)^n$).</p>`, b: R`<p>$\varphi$ n'est pas continue, donc $\{P : P(2) = 0\}$ est dense : toute fonction polynomiale (et même, par Weierstrass, toute fonction continue sur $[0,1]$) est limite uniforme sur $[0,1]$ de polynômes qui s'annulent en $2$. Surprenant mais logique : la contrainte porte sur un point hors de $[0,1]$.</p>` }
+  ],
+  ctx: { "k-ferme-seq": R`<p>$\ker\varphi = \varphi^{-1}(\{0\})$.</p>`, "k-lin-cont": R`<p>Continue $\iff$ bornée sur la boule unité.</p>`, "o-a-adh-seq": R`<p>$y_n\in\ker\varphi$, $y_n\to x$.</p>` },
+  piege: R`Chercher une forme linéaire discontinue en dimension finie : il n'y en a pas, tout est continu. Il faut un espace de dimension infinie.`,
+  methode: R`Approcher $x$ dans un noyau : corriger par un vecteur sur lequel la forme est très grande.`
+},
+{
+  id: "kh-16-1", subj: "kholles", year: "mp", chap: 8, level: 3, time: "30 min",
+  title: "L'inégalité de Hölder",
+  enonce: R`<ol><li>Soient $\alpha,\beta\geqslant0$ avec $\alpha+\beta = 1$, et $u,v>0$. Montrer que $u^\alpha v^\beta\leqslant\alpha u+\beta v$.</li><li>Soient $p,q>1$ avec $\frac1p+\frac1q = 1$, et $a,b\in(\mathbb R_+)^n$. Montrer que$$\sum_ia_ib_i\leqslant\Big(\sum_ia_i^p\Big)^{1/p}\Big(\sum_ib_i^q\Big)^{1/q}.$$</li><li>Même inégalité pour $f,g$ continues positives sur $[a,b]$ avec des intégrales.</li><li>Retrouver Cauchy-Schwarz, et appliquer avec $p = 3$ à $\sum_{k=1}^nk$.</li></ol>`,
+  decode: { donnees: [R`$\ln$ est concave.`], but: R`Établir une inégalité de produit à partir d'une inégalité de convexité.`, cles: {
+    young: R`Avec $\alpha = \frac1p$, $\beta = \frac1q$ : $xy\leqslant\frac{x^p}p+\frac{y^q}q$ (inégalité de Young), en posant $u = x^p$, $v = y^q$.`,
+    norm: R`On normalise : $x_i = \frac{a_i}{A}$, $y_i = \frac{b_i}B$ avec $A = (\sum a_i^p)^{1/p}$, $B = (\sum b_i^q)^{1/q}$, de sorte que $\sum x_i^p = \sum y_i^q = 1$.` } },
+  steps: [
+    { q: 1, t: "Concavité du logarithme", h: R`<p>On passe au logarithme (croissant) : l'inégalité devient exactement la concavité de $\ln$.</p>`, b: R`<p>$\ln(u^\alpha v^\beta) = \alpha\ln u+\beta\ln v\leqslant\ln(\alpha u+\beta v)$ par concavité. Comme $\exp$ est croissante :</p><div class="sbox">$$u^\alpha v^\beta\leqslant\alpha u+\beta v.$$</div><p>C'est l'inégalité arithmético-géométrique pondérée ($\alpha = \beta = \frac12$ : $\sqrt{uv}\leqslant\frac{u+v}2$).</p>`, rappels: ["k-concave-ln"] },
+    { q: 2, t: "Young puis normalisation", h: R`<p>On en tire <span data-k="young">$xy\leqslant\frac{x^p}p+\frac{y^q}q$</span>. Pour la somme, on <span data-k="norm">normalise</span> pour que les membres de droite valent $1$.</p>`, b: R`<p>Si $A = 0$ ou $B = 0$, tout est nul. Sinon, avec <span data-k="norm">$x_i = a_i/A$, $y_i = b_i/B$</span> et <span data-k="young">Young</span> :</p>$$\sum_ix_iy_i\leqslant\frac1p\sum x_i^p+\frac1q\sum y_i^q = \frac1p+\frac1q = 1.$$<p>En multipliant par $AB$ :</p><div class="sbox">$$\sum a_ib_i\leqslant\Big(\sum a_i^p\Big)^{1/p}\Big(\sum b_i^q\Big)^{1/q}.$$</div>` },
+    { q: 3, t: "Version intégrale", h: R`<p>Même normalisation, puis on intègre Young point par point.</p>`, b: R`<p>Avec $A = (\int f^p)^{1/p}$, $B = (\int g^q)^{1/q}$ supposés $>0$ : $\frac{f(x)g(x)}{AB}\leqslant\frac{f(x)^p}{pA^p}+\frac{g(x)^q}{qB^q}$, et en intégrant, $\frac{\int fg}{AB}\leqslant\frac1p+\frac1q = 1$. (Si $A = 0$, $f = 0$ car continue positive.)</p><div class="sbox">$$\int_a^bfg\leqslant\Big(\int_a^bf^p\Big)^{1/p}\Big(\int_a^bg^q\Big)^{1/q}.$$</div>`, rappels: ["o-a-int-nulle"] },
+    { q: 4, t: "Cas particuliers", h: R`<p>$p = q = 2$ : Cauchy-Schwarz. Pour $p = 3$, $q = \frac32$ : on écrit $k = k\cdot1$.</p>`, b: R`<p>$p = q = 2$ donne $\sum a_ib_i\leqslant\sqrt{\sum a_i^2}\sqrt{\sum b_i^2}$. Avec $p = 3$, $a_k = k$, $b_k = 1$ : $\sum_{k=1}^nk\leqslant\left(\sum k^3\right)^{1/3}n^{2/3}$. Vérification $n = 3$ : $6\leqslant36^{1/3}\cdot9^{1/3} = 324^{1/3}\approx6{,}87$.</p>`, rappels: ["o-b-cs"] }
+  ],
+  ctx: { "k-concave-ln": R`<p>Avec les poids $\alpha$, $\beta$.</p>`, "o-a-int-nulle": R`<p>Si $\int f^p = 0$, alors $f = 0$.</p>`, "o-b-cs": R`<p>Cas $p = q = 2$.</p>` },
+  piege: R`Oublier de normaliser : appliquer Young directement donne $\sum a_ib_i\leqslant\frac1p\sum a_i^p+\frac1q\sum b_i^q$, inégalité vraie mais pas homogène, donc plus faible.`,
+  methode: R`Inégalité homogène : la prouver quand les normes valent $1$, puis normaliser.`
+}
+]);
+})();
+
+/* ---------- MP · 9. Endomorphismes des espaces euclidiens (1) ---------- */
+LEMME.rappels({
+  "k-spectral-mat": { t: "Théorème spectral (forme matricielle)", b: R`<div class="sbox">$$A\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ A = P\,\operatorname{diag}(\lambda_1,\dots,\lambda_n)\,P^\top,\quad P\in O_n(\mathbb R).$$</div><p>Les colonnes de $P$ forment une base orthonormée de vecteurs propres.</p>` },
+  "k-trace-cyc": { t: "Trace d'un produit", b: R`<div class="sbox">$$\operatorname{tr}(AB) = \operatorname{tr}(BA),\qquad\operatorname{tr}(XX^\top M) = X^\top MX.$$</div>` },
+  "k-quad-diag": { t: "Forme quadratique dans une base propre", b: R`<p>Si $A = PDP^\top$ et $Y = P^\top X$ :</p><div class="sbox">$$X^\top AX = Y^\top DY = \sum_i\lambda_iy_i^2,\qquad\|Y\| = \|X\|.$$</div>` },
+  "k-interp-poly": { t: "Un polynôme qui prend des valeurs données", b: R`<p>Par interpolation de Lagrange, il existe un polynôme $Q$ avec $Q(\lambda_i) = \mu_i$ pour des $\lambda_i$ distincts. Si $A = P\operatorname{diag}(\lambda_i)P^{-1}$ :</p><div class="sbox">$$Q(A) = P\operatorname{diag}(\mu_i)P^{-1}.$$</div>` }
+});
+
+(() => {
+const { FIG, S, f1 } = window.__LA;
+LEMME.exercises([
+{
+  id: "kh-18-4", subj: "kholles", year: "mp", chap: 9, level: 2, time: "20 min",
+  title: "Matrices symétriques positives et valeurs propres",
+  enonce: R`<p>Soit $A\in\mathcal S_n(\mathbb R)$. $A$ est positive si $X^\top AX\geqslant0$ pour tout $X$, définie positive si $X^\top AX>0$ pour tout $X\neq0$.</p><ol><li>Montrer que $A$ est positive si et seulement si $\operatorname{sp}(A)\subset\mathbb R_+$.</li><li>Montrer que $A$ est définie positive si et seulement si $\operatorname{sp}(A)\subset\mathbb R_+^\ast$.</li><li>Montrer que pour $A$ définie positive, $\lambda_{\min}\|X\|^2\leqslant X^\top AX\leqslant\lambda_{\max}\|X\|^2$.</li><li>Étudier $\begin{pmatrix}2&-1\\-1&2\end{pmatrix}$ et $\begin{pmatrix}1&2\\2&1\end{pmatrix}$.</li></ol>`,
+  decode: { donnees: [R`Théorème spectral : $A = PDP^\top$, $P$ orthogonale.`], but: R`Lire la positivité sur les valeurs propres.`, cles: {
+    sens1: R`Si $AX = \lambda X$, $X\neq0$ : $X^\top AX = \lambda\|X\|^2$, donc $\lambda$ a le signe de $X^\top AX$.`,
+    somme: R`Dans la base propre, $X^\top AX = \sum\lambda_iy_i^2$ : une somme de termes $\geqslant0$ si tous les $\lambda_i\geqslant0$.` } },
+  steps: [
+    { q: 1, t: "Positive ⇒ valeurs propres ≥ 0", h: R`<p>On teste la positivité sur <span data-k="sens1">un vecteur propre</span>.</p>`, b: R`<p><span data-k="sens1">$0\leqslant X^\top AX = \lambda\|X\|^2$</span>, donc $\lambda\geqslant0$.</p>` },
+    { q: 1, t: "Réciproque", h: R`<p>On diagonalise en base orthonormée : <span data-k="somme">la forme devient une somme de carrés pondérés</span>.</p>`, b: R`<p>$A = PDP^\top$, $Y = P^\top X$ : <span data-k="somme">$X^\top AX = \sum\lambda_iy_i^2\geqslant0$</span>.</p><div class="sbox">$$A\in\mathcal S_n^+\iff\operatorname{sp}(A)\subset\mathbb R_+.$$</div>`, rappels: ["k-spectral-mat", "k-quad-diag"] },
+    { q: 2, t: "Le cas défini", h: R`<p>Même calcul avec des inégalités strictes ; $X\neq0\iff Y\neq0$ car $P$ est inversible.</p>`, b: R`<p>Si $\lambda_i>0$ et $X\neq0$, alors $Y\neq0$ et $\sum\lambda_iy_i^2>0$. Réciproquement $\lambda\|X\|^2>0$ pour un vecteur propre. </p><div class="sbox">$$A\in\mathcal S_n^{++}\iff\operatorname{sp}(A)\subset\mathbb R_+^\ast.$$</div>` },
+    { q: 3, t: "Encadrement de Rayleigh", h: R`<p>On encadre chaque $\lambda_i$ par $\lambda_{\min}$ et $\lambda_{\max}$ dans la somme, et $\|Y\| = \|X\|$.</p>`, b: R`<p>$\lambda_{\min}\sum y_i^2\leqslant\sum\lambda_iy_i^2\leqslant\lambda_{\max}\sum y_i^2$ et $\sum y_i^2 = \|X\|^2$ ($P$ orthogonale). Les bornes sont atteintes sur les vecteurs propres.</p>` },
+    { q: 4, t: "Deux exemples", h: R`<p>Trace et déterminant donnent les valeurs propres en dimension $2$.</p>`, b: R`<ul><li>$\begin{pmatrix}2&-1\\-1&2\end{pmatrix}$ : valeurs propres $1$ et $3$, définie positive. Directement : $2x^2-2xy+2y^2 = x^2+y^2+(x-y)^2$.</li><li>$\begin{pmatrix}1&2\\2&1\end{pmatrix}$ : valeurs propres $3$ et $-1$, pas positive ; avec $X = (1,-1)$, $X^\top AX = -2< 0$. Coefficients positifs ne veut pas dire matrice positive !</li></ul>` }
+  ],
+  ctx: { "k-spectral-mat": R`<p>$A$ symétrique réelle.</p>`, "k-quad-diag": R`<p>$X^\top AX = \sum\lambda_iy_i^2$.</p>` },
+  piege: R`Confondre « matrice positive » et « coefficients positifs » : le deuxième exemple a des coefficients positifs et une valeur propre négative.`,
+  methode: R`Positivité d'une matrice symétrique : passer en base orthonormée de vecteurs propres, la forme devient $\sum\lambda_iy_i^2$.`
+},
+{
+  id: "kh-18-3", subj: "kholles", year: "mp", chap: 9, level: 3, time: "25 min",
+  title: "Caractériser la positivité par la trace",
+  enonce: R`<p>Soit $A\in\mathcal S_n(\mathbb R)$.</p><ol><li>Pour $X\in\mathbb R^n$, montrer que $XX^\top\in\mathcal S_n^+$ et que $\operatorname{tr}(AXX^\top) = X^\top AX$.</li><li>En déduire : si $\operatorname{tr}(AB)\geqslant0$ pour toute $B\in\mathcal S_n^+$, alors $A\in\mathcal S_n^+$.</li><li>Réciproquement, soit $A,B\in\mathcal S_n^+$. En écrivant $B = \sum_i\mu_iE_iE_i^\top$ (théorème spectral), montrer que $\operatorname{tr}(AB)\geqslant0$.</li><li>Montrer que $\operatorname{tr}(AB)$ peut être négatif si $A$ est seulement symétrique.</li></ol>`,
+  decode: { donnees: [R`$\operatorname{tr}(MN) = \operatorname{tr}(NM)$.`], but: R`$A\in\mathcal S_n^+\iff\operatorname{tr}(AB)\geqslant0$ pour toute $B\in\mathcal S_n^+$.`, cles: {
+    rang1: R`$Y^\top(XX^\top)Y = (X^\top Y)^2\geqslant0$ : $XX^\top$ est symétrique positive, de rang $\leqslant1$.`,
+    dec: R`$B = PDP^\top = \sum_i\mu_iE_iE_i^\top$ où $E_i$ est la $i$-ième colonne de $P$ et $\mu_i\geqslant0$.` } },
+  steps: [
+    { q: 1, t: "Matrices de rang 1", h: R`<p><span data-k="rang1">On calcule la forme quadratique de $XX^\top$</span>, et on utilise $\operatorname{tr}(MN) = \operatorname{tr}(NM)$.</p>`, b: R`<p>$(XX^\top)^\top = XX^\top$ et <span data-k="rang1">$Y^\top XX^\top Y = (X^\top Y)^2\geqslant0$</span>. Puis $\operatorname{tr}(AXX^\top) = \operatorname{tr}(X^\top AX) = X^\top AX$ (trace d'un nombre).</p>`, rappels: ["k-trace-cyc"] },
+    { q: 2, t: "Sens réciproque", h: R`<p>On teste l'hypothèse avec les $B = XX^\top$.</p>`, b: R`<p>Avec $B = XX^\top\in\mathcal S_n^+$ : $X^\top AX = \operatorname{tr}(AXX^\top)\geqslant0$ pour tout $X$, donc $A\in\mathcal S_n^+$.</p>` },
+    { q: 3, t: "Sens direct", h: R`<p>On <span data-k="dec">décompose $B$ en somme de matrices de rang 1</span> à coefficients positifs, puis on utilise la question 1.</p>`, b: R`<p><span data-k="dec">$B = \sum\mu_iE_iE_i^\top$ avec $\mu_i\geqslant0$</span>. Par linéarité de la trace :</p>$$\operatorname{tr}(AB) = \sum_i\mu_i\operatorname{tr}(AE_iE_i^\top) = \sum_i\mu_iE_i^\top AE_i\geqslant0.$$<div class="sbox">$$A\in\mathcal S_n^+\iff\forall B\in\mathcal S_n^+,\ \operatorname{tr}(AB)\geqslant0.$$</div>`, rappels: ["k-spectral-mat"] },
+    { q: 4, t: "Contre-exemple", h: R`<p>Si $A$ a une valeur propre négative, on prend pour $B$ le projecteur sur le vecteur propre correspondant.</p>`, b: R`<p>$A = \operatorname{diag}(1,-1)$, $B = \operatorname{diag}(0,1)\in\mathcal S_2^+$ : $\operatorname{tr}(AB) = -1< 0$.</p>` }
+  ],
+  ctx: { "k-trace-cyc": R`<p>$\operatorname{tr}(AXX^\top) = \operatorname{tr}(X^\top AX)$.</p>`, "k-spectral-mat": R`<p>Pour décomposer $B\in\mathcal S_n^+$.</p>` },
+  piege: R`Croire que le produit $AB$ de deux symétriques positives est symétrique positif : il n'est même pas symétrique en général. Seule sa trace est positive.`,
+  methode: R`Les $XX^\top$ engendrent le cône $\mathcal S_n^+$ : tester une propriété linéaire sur ces matrices de rang $1$.`
+},
+{
+  id: "kh-18-5", subj: "kholles", year: "mp", chap: 9, level: 4, time: "35 min",
+  title: "Racines p-ièmes et produit de deux symétriques",
+  enonce: R`<p>Soient $A\in\mathcal S_n^+(\mathbb R)$ et $B\in\mathcal S_n(\mathbb R)$.</p><ol><li>Montrer qu'il existe $R\in\mathcal S_n^+$ avec $R^2 = A$, définie positive si $A$ l'est. Généraliser à $R^p = A$ ($p\geqslant1$).</li><li>Si $A\in\mathcal S_n^{++}$, montrer que $AB$ est semblable à $RBR$, et en déduire que $AB$ est diagonalisable dans $\mathcal M_n(\mathbb R)$.</li><li>Montrer que les valeurs propres de $AB$ sont réelles même si $A$ est seulement positive.</li><li>Trouver $A\in\mathcal S_2^+$ et $B\in\mathcal S_2$ avec $AB$ non diagonalisable.</li></ol>`,
+  decode: { donnees: [R`$A = P\operatorname{diag}(\lambda_i)P^\top$ avec $\lambda_i\geqslant0$.`], but: R`Construire des racines, puis étudier $AB$.`, cles: {
+    racine: R`On prend la racine de chaque valeur propre : $R = P\operatorname{diag}(\sqrt{\lambda_i})P^\top$.`,
+    conj: R`$R^{-1}(AB)R = R^{-1}R^2BR = RBR$, et $RBR$ est symétrique.`,
+    chi: R`$\chi_{AB} = \chi_{R(RB)} = \chi_{(RB)R} = \chi_{RBR}$ (exercice $\chi_{AB} = \chi_{BA}$), et $RBR$ est symétrique.` } },
+  steps: [
+    { q: 1, t: "Racine carrée, racine p-ième", h: R`<p><span data-k="racine">On prend la racine de chaque valeur propre</span> dans la diagonalisation orthogonale.</p>`, b: R`<p><span data-k="racine">$R = P\operatorname{diag}(\sqrt{\lambda_i})P^\top$</span> est symétrique, de valeurs propres $\sqrt{\lambda_i}\geqslant0$ (donc positive), et $R^2 = P\operatorname{diag}(\lambda_i)P^\top = A$. Si les $\lambda_i>0$, les $\sqrt{\lambda_i}>0$. De même $R_p = P\operatorname{diag}(\lambda_i^{1/p})P^\top$ vérifie $R_p^p = A$.</p>`, rappels: ["k-spectral-mat", "o-b-sym-pos"] },
+    { q: 2, t: "AB diagonalisable si A définie positive", h: R`<p>$R$ est inversible : <span data-k="conj">on conjugue $AB$ par $R$</span> et on obtient une matrice symétrique.</p>`, b: R`<p><span data-k="conj">$R^{-1}ABR = RBR$</span>, symétrique réelle, donc diagonalisable (théorème spectral). $AB$ lui est semblable :</p><div class="sbox">$$A\in\mathcal S_n^{++},\ B\in\mathcal S_n\ \Longrightarrow\ AB\ \text{diagonalisable sur}\ \mathbb R.$$</div>`, rappels: ["k-semblables"] },
+    { q: 3, t: "Valeurs propres réelles en général", h: R`<p>$R$ n'est plus inversible, mais <span data-k="chi">$AB$ et $RBR$ ont le même polynôme caractéristique</span>.</p>`, b: R`<p><span data-k="chi">$\chi_{AB} = \chi_{R\cdot RB} = \chi_{RB\cdot R}$</span>, et $RBR$ est symétrique réelle : son polynôme caractéristique est scindé sur $\mathbb R$. Donc les valeurs propres de $AB$ sont réelles.</p>` },
+    { q: 4, t: "Contre-exemple", h: R`<p>On cherche $AB$ nilpotent non nul, avec $A$ positive non inversible.</p>`, b: R`<p>$A = \begin{pmatrix}1&0\\0&0\end{pmatrix}\in\mathcal S_2^+$, $B = \begin{pmatrix}0&1\\1&0\end{pmatrix}$ : $AB = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, nilpotente non nulle, donc non diagonalisable. Valeurs propres réelles ($0$), mais pas diagonalisable : la question 2 a besoin de « définie ».</p>` }
+  ],
+  ctx: { "k-spectral-mat": R`<p>$A = P\operatorname{diag}(\lambda_i)P^\top$.</p>`, "o-b-sym-pos": R`<p>Valeurs propres $\geqslant0$.</p>`, "k-semblables": R`<p>$AB = R(RBR)R^{-1}$.</p>` },
+  piege: R`Croire que $AB$ est symétrique : ce n'est pas le cas, mais il est semblable à une matrice symétrique quand $A$ est définie positive.`,
+  methode: R`Produit d'une symétrique définie positive et d'une symétrique : conjuguer par la racine carrée pour symétriser.`
+},
+{
+  id: "kh-18-6", subj: "kholles", year: "mp", chap: 9, level: 4, time: "35 min",
+  title: "Unicité de la racine carrée d'un auto-adjoint positif",
+  enonce: R`<p>Soit $E$ euclidien et $u\in\mathcal S^+(E)$ (auto-adjoint, positif), de valeurs propres distinctes $\lambda_1,\dots,\lambda_r\geqslant0$.</p><ol><li>Montrer qu'il existe $h\in\mathcal S^+(E)$ avec $h^2 = u$.</li><li>Montrer qu'il existe un polynôme $Q$ avec $Q(\lambda_i) = \sqrt{\lambda_i}$, et que $h = Q(u)$.</li><li>Soit $h'\in\mathcal S^+(E)$ avec $h'^2 = u$. Montrer que $h'$ commute avec $u$, puis stabilise chaque $\ker(u-\lambda_i\mathrm{Id})$.</li><li>Montrer que $h'$ induit sur $\ker(u-\lambda_i\mathrm{Id})$ un auto-adjoint positif de carré $\lambda_i\mathrm{Id}$, et conclure $h' = h$.</li></ol>`,
+  decode: { donnees: [R`$E = \bigoplus_i\ker(u-\lambda_i\mathrm{Id})$, somme orthogonale.`], but: R`Existence et unicité de la racine carrée positive.`, cles: {
+    lag: R`Les $\lambda_i$ sont distincts : un polynôme d'interpolation $Q$ avec $Q(\lambda_i) = \sqrt{\lambda_i}$ existe.`,
+    stab: R`$h'u = h'^3 = uh'$ : $h'$ commute avec $u$, donc stabilise ses sous-espaces propres.`,
+    rest: R`Sur $E_i$, $h'_i$ est auto-adjoint positif avec $h_i'^2 = \lambda_i\mathrm{Id}$ : ses valeurs propres $\mu\geqslant0$ vérifient $\mu^2 = \lambda_i$, donc $\mu = \sqrt{\lambda_i}$, et $h'_i$ diagonalisable a une seule valeur propre : $h'_i = \sqrt{\lambda_i}\mathrm{Id}$.` } },
+  steps: [
+    { q: 1, t: "Existence", h: R`<p>Dans une base orthonormée propre, on prend la racine des valeurs propres.</p>`, b: R`<p>$h$ défini par $h = \sqrt{\lambda_i}\mathrm{Id}$ sur chaque $E_i = \ker(u-\lambda_i\mathrm{Id})$ : auto-adjoint (diagonal en base orthonormée), positif, et $h^2 = u$.</p>`, rappels: ["o-b-spectral"] },
+    { q: 2, t: "h est un polynôme en u", h: R`<p><span data-k="lag">Interpolation de Lagrange</span> sur les valeurs propres distinctes.</p>`, b: R`<p><span data-k="lag">$Q$ avec $Q(\lambda_i) = \sqrt{\lambda_i}$</span>. Sur $E_i$, $Q(u) = Q(\lambda_i)\mathrm{Id} = \sqrt{\lambda_i}\mathrm{Id} = h$. Donc $h = Q(u)$.</p>`, rappels: ["k-interp-poly"] },
+    { q: 3, t: "Toute racine commute avec u", h: R`<p><span data-k="stab">$h'$ commute avec son propre carré</span>.</p>`, b: R`<p><span data-k="stab">$h'u = h'h'^2 = h'^2h' = uh'$</span>. Donc chaque $E_i$ est stable par $h'$.</p>`, rappels: ["k-commute-stable"] },
+    { q: 4, t: "Unicité", h: R`<p>Sur chaque $E_i$, <span data-k="rest">$h'$ est forcé de valoir $\sqrt{\lambda_i}\mathrm{Id}$</span>.</p>`, b: R`<p>L'induit $h'_i$ sur $E_i$ est auto-adjoint positif (restriction d'un tel endomorphisme à un sous-espace stable) avec $h_i'^2 = \lambda_i\mathrm{Id}$. <span data-k="rest">Ses valeurs propres valent $\sqrt{\lambda_i}$, et il est diagonalisable : $h'_i = \sqrt{\lambda_i}\mathrm{Id}$</span>. Donc $h' = h$.</p><div class="sbox">$$\exists!\,h\in\mathcal S^+(E),\ h^2 = u,\qquad h = Q(u).$$</div><p>Sans « positive », c'est faux : $-h$ est aussi une racine, et $\operatorname{diag}(1,-1)$ est une racine symétrique de $I_2$.</p>`, rappels: ["k-stable-induit"] }
+  ],
+  ctx: { "o-b-spectral": R`<p>Base orthonormée propre de $u$.</p>`, "k-interp-poly": R`<p>Points $\lambda_i$, valeurs $\sqrt{\lambda_i}$.</p>`, "k-commute-stable": R`<p>$h'$ commute avec $u$.</p>`, "k-stable-induit": R`<p>$h'_i$ reste diagonalisable.</p>` },
+  piege: R`Oublier « positive » dans l'unicité : $I_2$ a une infinité de racines carrées symétriques (toutes les symétries orthogonales).`,
+  methode: R`Unicité d'une racine : montrer qu'elle commute avec la matrice, puis travailler sur chaque sous-espace propre.`
+},
+{
+  id: "kh-18-7", subj: "kholles", year: "mp", chap: 9, level: 4, time: "30 min",
+  title: "Les matrices de Hilbert sont définies positives",
+  enonce: R`<p>Soit $H_n = \left(\dfrac1{i+j-1}\right)_{1\leqslant i,j\leqslant n}$.</p><ol><li>Sur $\mathbb R_{n-1}[X]$, on pose $\langle P,Q\rangle = \int_0^1PQ$. Montrer que $H_n$ est la matrice de ce produit scalaire dans la base $(1,X,\dots,X^{n-1})$.</li><li>En déduire que $H_n$ est symétrique définie positive.</li><li>Par le déterminant de Cauchy, montrer que $\det H_n = \dfrac{c_n^4}{c_{2n}}$ avec $c_n = \prod_{k=1}^{n-1}k!$.</li><li>Vérifier pour $n = 2$ et $n = 3$.</li></ol>`,
+  decode: { donnees: [R`$\int_0^1t^{i-1}t^{j-1}dt = \frac1{i+j-1}$.`], but: R`Positivité et déterminant d'une matrice célèbre.`, cles: {
+    quad: R`$X^\top H_nX = \sum_{i,j}\frac{x_ix_j}{i+j-1} = \int_0^1\Big(\sum_ix_it^{i-1}\Big)^2dt$.`,
+    cauchy: R`$H_n$ est la matrice de Cauchy $\frac1{a_i+b_j}$ avec $a_i = i$, $b_j = j-1$.`,
+    prod: R`$\prod_{i< j}(j-i) = \prod_{j=2}^n(j-1)! = c_n$, et $\prod_{i,j}(i+j-1) = \prod_{i=1}^n\frac{(i+n-1)!}{(i-1)!} = \frac{c_{2n}}{c_n^2}$.` } },
+  steps: [
+    { q: 1, t: "Une matrice de Gram", h: R`<p>Le coefficient $(i,j)$ est $\langle X^{i-1},X^{j-1}\rangle$.</p>`, b: R`<p>$\langle X^{i-1},X^{j-1}\rangle = \int_0^1t^{i+j-2}dt = \frac1{i+j-1}$ : c'est le coefficient $(i,j)$ de $H_n$.</p>` },
+    { q: 2, t: "Définie positive", h: R`<p><span data-k="quad">La forme quadratique est l'intégrale d'un carré</span>.</p>`, b: R`<p><span data-k="quad">$X^\top H_nX = \int_0^1P(t)^2dt$</span> avec $P = \sum x_it^{i-1}$. C'est $\geqslant0$, et nul ssi $P = 0$ sur $[0,1]$, ssi $X = 0$.</p><div class="sbox">$$H_n\in\mathcal S_n^{++}(\mathbb R).$$</div>`, rappels: ["o-b-sym-pos"] },
+    { q: 3, t: "Le déterminant", h: R`<p><span data-k="cauchy">C'est un déterminant de Cauchy</span> ; on <span data-k="prod">calcule les deux produits</span> en les regroupant en factorielles.</p>`, b: R`<p>Formule de Cauchy avec <span data-k="cauchy">$a_i = i$, $b_j = j-1$</span> : $a_j-a_i = b_j-b_i = j-i$, donc le numérateur vaut $\Big(\prod_{i< j}(j-i)\Big)^2 = c_n^2$. Pour le dénominateur, à $i$ fixé, $\prod_{j=1}^n(i+j-1) = \frac{(i+n-1)!}{(i-1)!}$, puis</p>$$\prod_{i=1}^n(i+n-1)! = n!\,(n+1)!\cdots(2n-1)! = \frac{c_{2n}}{c_n},\qquad\prod_{i=1}^n(i-1)! = c_n.$$<p>Le dénominateur vaut <span data-k="prod">$\frac{c_{2n}}{c_n^2}$</span>, d'où</p><div class="sbox">$$\det H_n = \frac{c_n^2}{c_{2n}/c_n^2} = \frac{c_n^4}{c_{2n}}.$$</div>`, rappels: ["k-det-operations"] },
+    { q: 4, t: "Vérifications", h: R`<p>$c_2 = 1$, $c_3 = 2$, $c_4 = 12$, $c_6 = 1\cdot2\cdot6\cdot24\cdot120 = 34560$.</p>`, b: R`<ul><li>$n = 2$ : $\frac{1}{12} = 1\cdot\frac13-\frac14$.</li><li>$n = 3$ : $\frac{2^4}{34560} = \frac1{2160}$, la valeur trouvée dans l'exercice du déterminant de Cauchy.</li></ul>` }
+  ],
+  ctx: { "o-b-sym-pos": R`<p>$X^\top H_nX>0$ pour $X\neq0$.</p>`, "k-det-operations": R`<p>Formule du déterminant de Cauchy (exercice MPSI).</p>` },
+  piege: R`Conclure « coefficients positifs donc matrice positive » : c'est faux en général ; ici c'est la structure de Gram qui donne la positivité.`,
+  methode: R`Une matrice $\left(\int f_if_j\right)$ est une matrice de Gram : symétrique positive, définie si les $f_i$ sont libres.`
+}
+]);
+})();
+
+/* ---------- MP · 9. Euclidiens (2) · 10. Calcul différentiel ---------- */
+LEMME.rappels({
+  "k-gs-mat": { t: "Gram-Schmidt en matrices", b: R`<p>Si $(C_1,\dots,C_n)$ est une base et $(D_1,\dots,D_n)$ son orthonormalisée de Gram-Schmidt, alors $C_j\in\operatorname{Vect}(D_1,\dots,D_j)$ et $(D_j|C_j)>0$ :</p><div class="sbox">$$C_j = \sum_{i\leqslant j}(D_i|C_j)\,D_i,\qquad r_{jj} = (D_j|C_j)>0.$$</div>` },
+  "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`<p>Une matrice à la fois orthogonale et triangulaire supérieure est diagonale, à coefficients $\pm1$ (son inverse $M^\top$ est triangulaire inférieure et supérieure). Avec des coefficients diagonaux $>0$, c'est $I_n$.</p>` },
+  "k-det-deriv": { t: "Dérivée de det(Iₙ + tM)", b: R`<p>$\det(I_n+tM)$ est un polynôme en $t$ :</p><div class="sbox">$$\det(I_n+tM) = 1+t\operatorname{tr}(M)+O(t^2).$$</div><p>(Dans le développement en somme sur les permutations, seule l'identité donne des termes de degré $\leqslant1$.)</p>` }
+});
+
+(() => {
+const { FIG, S, f1, ARR } = window.__LA;
+LEMME.exercises([
+{
+  id: "kh-18-8", subj: "kholles", year: "mp", chap: 9, level: 4, time: "35 min",
+  title: "Décomposition QR et inégalité de Hadamard",
+  enonce: R`<ol><li>Soit $A\in GL_n(\mathbb R)$ de colonnes $C_1,\dots,C_n$. En orthonormalisant $(C_j)$ par Gram-Schmidt, montrer qu'il existe $Q\in O_n(\mathbb R)$ et $R$ triangulaire supérieure à diagonale $>0$ avec $A = QR$.</li><li>Montrer l'unicité de ce couple.</li><li>Montrer que $|\det A|\leqslant\|C_1\|\cdots\|C_n\|$ pour toute $A\in\mathcal M_n(\mathbb R)$. Cas d'égalité ?</li><li>Interpréter en dimension $2$ et $3$.</li></ol>`,
+  decode: { donnees: [R`Colonnes libres ; Gram-Schmidt produit une base orthonormée $(D_j)$.`], but: R`Factoriser $A$ et majorer son déterminant.`, cles: {
+    coef: R`$C_j = \sum_{i\leqslant j}(D_i|C_j)D_i$ : la matrice $R = \big((D_i|C_j)\big)$ est triangulaire supérieure, et $A = QR$ avec $Q = (D_1|\dots|D_n)$.`,
+    unic: R`$QR = Q'R'\Rightarrow Q'^\top Q = R'R^{-1}$ : orthogonale et triangulaire supérieure à diagonale $>0$, donc $I_n$.`,
+    cs: R`$r_{jj} = (D_j|C_j)\leqslant\|D_j\|\|C_j\| = \|C_j\|$ (Cauchy-Schwarz).` } },
+  steps: [
+    { q: 1, t: "Existence par Gram-Schmidt", h: R`<p>Chaque $C_j$ ne dépend que de $D_1,\dots,D_j$ : <span data-k="coef">les coordonnées forment une matrice triangulaire</span>.</p>`, b: R`<p>Soit $(D_j)$ l'orthonormalisée de $(C_j)$, $Q = (D_1|\dots|D_n)\in O_n(\mathbb R)$. <span data-k="coef">$C_j = \sum_{i\leqslant j}(D_i|C_j)D_i$</span>, d'où $A = QR$ avec $R$ triangulaire supérieure, et $r_{jj} = (D_j|C_j)>0$ par construction.</p>`, rappels: ["k-gs-mat"] },
+    { q: 2, t: "Unicité", h: R`<p><span data-k="unic">Une matrice orthogonale triangulaire à diagonale positive est l'identité</span>.</p>`, b: R`<p>Si $QR = Q'R'$ : <span data-k="unic">$Q'^\top Q = R'R^{-1}$</span>, orthogonale, triangulaire supérieure à diagonale $>0$, donc $I_n$. Ainsi $Q = Q'$ et $R = R'$.</p>`, rappels: ["k-triang-orth"] },
+    { q: 3, t: "Hadamard", h: R`<p>$|\det A| = |\det Q|\det R = \prod r_{jj}$, puis <span data-k="cs">Cauchy-Schwarz sur chaque $r_{jj}$</span>.</p>`, b: R`<p>Si $A$ n'est pas inversible, $\det A = 0$ et c'est clair. Sinon $|\det A| = \prod r_{jj}$ et <span data-k="cs">$r_{jj}\leqslant\|C_j\|$</span>.</p><div class="sbox">$$|\det A|\leqslant\prod_{j=1}^n\|C_j\|.$$</div><p>Égalité (pour $A$ inversible) $\iff$ chaque $C_j$ est colinéaire à $D_j$ $\iff$ les colonnes sont deux à deux orthogonales.</p>`, rappels: ["o-b-cs"] },
+    { q: 4, t: "Interprétation", h: R`<p>$|\det A|$ est l'aire (ou le volume) du parallélogramme (parallélépipède) construit sur les colonnes.</p>`, b: R`<p>L'aire d'un parallélogramme est au plus le produit des longueurs de ses côtés, avec égalité pour un rectangle ; de même pour un volume en dimension $3$.</p>` + FIG(300, 170, (() => { const o = [40, 140]; let s = `<polygon points="40,140 200,140 260,50 100,50" style="fill:var(--yellow);opacity:.3;stroke:var(--ink);stroke-width:1.3"/>`; s += ARR(40, 140, 200, 140, "b", 9) + ARR(40, 140, 100, 50, "r", 9); return s + S(120, 158, "C₁", "middle", "sm b") + S(60, 90, "C₂", "end", "sm r") + `<line class="thin" style="stroke-dasharray:4 3" x1="100" y1="50" x2="100" y2="140"/>`; })(), R`Aire $= \|C_1\|\times$ hauteur $\leqslant\|C_1\|\|C_2\|$ : la hauteur (pointillés) est plus courte que $C_2$.`, "Parallélogramme et Hadamard") }
+  ],
+  ctx: { "k-gs-mat": R`<p>Appliqué aux colonnes de $A$.</p>`, "k-triang-orth": R`<p>$Q'^\top Q = R'R^{-1}$.</p>`, "o-b-cs": R`<p>$(D_j|C_j)\leqslant\|C_j\|$ car $\|D_j\| = 1$.</p>` },
+  piege: R`Oublier l'hypothèse de diagonale $>0$ dans l'unicité : on peut changer simultanément le signe d'une colonne de $Q$ et d'une ligne de $R$.`,
+  methode: R`Majorer un déterminant : factoriser $A = QR$, le déterminant devient un produit de produits scalaires.`
+},
+{
+  id: "kh-18-9", subj: "kholles", year: "mp", chap: 9, level: 4, time: "35 min",
+  title: "Décomposition polaire",
+  enonce: R`<ol><li>Soit $A\in GL_n(\mathbb R)$. Montrer que si $A = OS$ avec $O\in O_n(\mathbb R)$ et $S\in\mathcal S_n^{++}$, alors $S^2 = A^\top A$.</li><li>En déduire l'existence et l'unicité d'une telle écriture.</li><li>Soit $A\in\mathcal M_n(\mathbb R)$ quelconque. Montrer qu'il existe $O\in O_n$ et $S\in\mathcal S_n^+$ avec $A = OS$ (approcher $A$ par des inversibles).</li><li>Calculer la décomposition polaire de $\begin{pmatrix}0&-2\\1&0\end{pmatrix}$.</li></ol>`,
+  decode: { donnees: [R`$A^\top A$ est symétrique définie positive si $A$ est inversible.`], but: R`Écrire $A$ comme une rotation (ou isométrie) fois un étirement.`, cles: {
+    analyse: R`$A^\top A = SO^\top OS = S^2$ : $S$ est la racine carrée positive de $A^\top A$, unique.`,
+    synth: R`$O = AS^{-1}$ : $O^\top O = S^{-1}A^\top AS^{-1} = S^{-1}S^2S^{-1} = I_n$.`,
+    compact: R`$O_n$ est compact : de la suite $(O_k)$ on extrait une sous-suite convergente.` } },
+  steps: [
+    { q: 1, t: "Analyse", h: R`<p><span data-k="analyse">On calcule $A^\top A$</span> : $O$ disparaît.</p>`, b: R`<p><span data-k="analyse">$A^\top A = S^\top O^\top OS = S^2$</span>.</p>` },
+    { q: 2, t: "Existence et unicité", h: R`<p>$S$ est imposée : la racine positive (unique) de $A^\top A$. Puis <span data-k="synth">$O = AS^{-1}$</span>, dont on vérifie l'orthogonalité.</p>`, b: R`<p>$A^\top A\in\mathcal S_n^{++}$ ($X^\top A^\top AX = \|AX\|^2>0$ si $X\neq0$). Soit $S$ son unique racine carrée définie positive et <span data-k="synth">$O = AS^{-1}$ : $O^\top O = I_n$</span>. Unicité : $S$ est forcée (unicité de la racine), puis $O = AS^{-1}$.</p><div class="sbox">$$A\in GL_n(\mathbb R)\ \Longrightarrow\ \exists!(O,S)\in O_n\times\mathcal S_n^{++},\ A = OS.$$</div>`, rappels: ["o-b-sym-pos"] },
+    { q: 3, t: "Cas non inversible", h: R`<p>On approche $A$ par $A_k$ inversibles, on décompose, et <span data-k="compact">on extrait dans le compact $O_n$</span>.</p>`, b: R`<p>$A_k = A-\frac1kI_n\in GL_n$ pour $k$ grand, $A_k = O_kS_k$. <span data-k="compact">Sous-suite $O_{\varphi(k)}\to O\in O_n$</span>. Alors $S_{\varphi(k)} = O_{\varphi(k)}^\top A_{\varphi(k)}\to O^\top A =: S$, limite de matrices symétriques positives, donc dans $\mathcal S_n^+$ (fermé). Et $A = OS$. (Pas d'unicité de $O$ en général.)</p>`, rappels: ["k-compact-seq"] },
+    { q: 4, t: "Un exemple", h: R`<p>$A^\top A$ est diagonale ici : la racine est immédiate.</p>`, b: R`<p>$A = \begin{pmatrix}0&-2\\1&0\end{pmatrix}$ : $A^\top A = \operatorname{diag}(1,4)$, $S = \operatorname{diag}(1,2)$, $O = AS^{-1} = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$ (rotation d'un quart de tour). $A$ étire d'un facteur $2$ selon $e_2$, puis tourne.</p>` }
+  ],
+  ctx: { "o-b-sym-pos": R`<p>$A^\top A$ définie positive, de racine carrée positive unique.</p>`, "k-compact-seq": R`<p>$O_n(\mathbb R)$ est compact.</p>` },
+  piege: R`Prendre $S^2 = AA^\top$ au lieu de $A^\top A$ : ce serait la décomposition $A = S'O$ (étirement puis rotation), une autre écriture.`,
+  methode: R`Décomposition polaire : analyse ($S^2 = A^\top A$) puis synthèse ($O = AS^{-1}$) ; densité et compacité de $O_n$ pour le cas général.`
+},
+{
+  id: "kh-18-10", subj: "kholles", year: "mp", chap: 9, level: 4, time: "35 min",
+  title: "Décomposition de Cholesky",
+  enonce: R`<ol><li>Soit $S\in\mathcal S_n^+$. Montrer qu'il existe $A\in\mathcal M_n(\mathbb R)$ avec $S = A^\top A$.</li><li>Soit $S\in\mathcal S_n^{++}$. Montrer que $\varphi(X,Y) = X^\top SY$ est un produit scalaire sur $\mathbb R^n$.</li><li>En orthonormalisant la base canonique pour $\varphi$, montrer qu'il existe $A$ triangulaire supérieure à diagonale $>0$ avec $S = A^\top A$, et qu'elle est unique.</li><li>Calculer la décomposition de Cholesky de $\begin{pmatrix}4&2\\2&5\end{pmatrix}$.</li></ol>`,
+  decode: { donnees: [R`$S$ symétrique positive (ou définie positive).`], but: R`Écrire $S = A^\top A$ avec $A$ triangulaire.`, cles: {
+    racine: R`$S = R^2 = R^\top R$ avec $R$ la racine carrée symétrique positive.`,
+    passage: R`Si $\mathcal B'$ est $\varphi$-orthonormée et $P$ la matrice de passage de la base canonique à $\mathcal B'$, alors $P^\top SP = I_n$, donc $S = (P^{-1})^\top P^{-1}$ ; $P$ est triangulaire supérieure à diagonale $>0$ (Gram-Schmidt), comme $A = P^{-1}$.`,
+    unic: R`Si $A^\top A = B^\top B$, alors $(AB^{-1})^\top(AB^{-1}) = I_n$ : $AB^{-1}$ est orthogonale, et triangulaire supérieure à diagonale $>0$, donc $I_n$.` } },
+  steps: [
+    { q: 1, t: "Avec la racine carrée", h: R`<p><span data-k="racine">$S$ a une racine carrée symétrique</span>.</p>`, b: R`<p><span data-k="racine">$S = R^2 = R^\top R$</span> avec $R\in\mathcal S_n^+$ : $A = R$ convient.</p>` },
+    { q: 2, t: "Un produit scalaire", h: R`<p>Bilinéaire, symétrique (car $S^\top = S$), défini positif (car $S\in\mathcal S_n^{++}$).</p>`, b: R`<p>$\varphi$ est bilinéaire, $\varphi(Y,X) = Y^\top SX = (X^\top SY)^\top = \varphi(X,Y)$, et $\varphi(X,X)>0$ pour $X\neq0$.</p>`, rappels: ["k-ps-def"] },
+    { q: 3, t: "Gram-Schmidt pour φ", h: R`<p>La matrice de $\varphi$ dans la nouvelle base est $I_n$ ; <span data-k="passage">la formule de changement de base</span> donne $S$ en fonction de la matrice de passage, triangulaire par Gram-Schmidt.</p>`, b: R`<p>Gram-Schmidt pour $\varphi$ appliqué à $(e_1,\dots,e_n)$ donne $\mathcal B'$, avec une matrice de passage $P$ triangulaire supérieure à diagonale $>0$. <span data-k="passage">$P^\top SP = I_n$</span>, donc $S = A^\top A$ avec $A = P^{-1}$, triangulaire supérieure à diagonale $>0$. Unicité : <span data-k="unic">$AB^{-1}$ est orthogonale ($(AB^{-1})^\top AB^{-1} = (B^{-1})^\top SB^{-1} = I_n$)</span> et triangulaire à diagonale $>0$, donc $I_n$.</p>`, rappels: ["k-gram-schmidt", "k-triang-orth"] },
+    { q: 4, t: "Un calcul", h: R`<p>On cherche $A = \begin{pmatrix}a&b\\0&c\end{pmatrix}$ et on identifie $A^\top A$.</p>`, b: R`<p>$A^\top A = \begin{pmatrix}a^2&ab\\ab&b^2+c^2\end{pmatrix}$ : $a = 2$, $b = 1$, $c^2 = 4$, $c = 2$.</p><div class="sbox">$$\begin{pmatrix}4&2\\2&5\end{pmatrix} = \begin{pmatrix}2&0\\1&2\end{pmatrix}\begin{pmatrix}2&1\\0&2\end{pmatrix}.$$</div>` }
+  ],
+  ctx: { "k-ps-def": R`<p>Quatre propriétés pour $\varphi$.</p>`, "k-gram-schmidt": R`<p>Pour le produit scalaire $\varphi$.</p>`, "k-triang-orth": R`<p>$AB^{-1}$ orthogonale et triangulaire.</p>` },
+  piege: R`Chercher une matrice triangulaire pour $S$ seulement positive (non définie) : l'unicité tombe, et la construction par Gram-Schmidt ne marche plus.`,
+  methode: R`Matrice symétrique définie positive = matrice d'un produit scalaire : Gram-Schmidt fournit Cholesky.`
+},
+{
+  id: "kh-18-11", subj: "kholles", year: "mp", chap: 9, level: 3, time: "20 min",
+  title: "Inégalité de Hadamard pour une matrice positive",
+  enonce: R`<p>Soit $S = (s_{ij})\in\mathcal S_n^+(\mathbb R)$.</p><ol><li>Montrer que $s_{ii}\geqslant0$, et traiter le cas $\det S = 0$.</li><li>Si $S$ est définie positive, écrire $S = A^\top A$ (Cholesky) et montrer $s_{ii} = \|C_i\|^2\geqslant a_{ii}^2$.</li><li>En déduire $\det S\leqslant\prod_is_{ii}$. Cas d'égalité ?</li><li>Retrouver l'inégalité de Hadamard sur les colonnes.</li></ol>`,
+  decode: { donnees: [R`$s_{ii} = e_i^\top Se_i\geqslant0$.`], but: R`Majorer le déterminant par le produit des coefficients diagonaux.`, cles: {
+    col: R`$s_{ii} = (A^\top A)_{ii} = \|C_i\|^2$ où $C_i$ est la colonne $i$ de $A$ ; et $C_i$ a pour coordonnée $a_{ii}$ en position $i$.`,
+    det: R`$\det S = (\det A)^2 = \prod a_{ii}^2$.` } },
+  steps: [
+    { q: 1, t: "Cas dégénéré", h: R`<p>Diagonale positive ; si le déterminant est nul, rien à faire.</p>`, b: R`<p>$s_{ii} = e_i^\top Se_i\geqslant0$. Si $\det S = 0$ : $0\leqslant\prod s_{ii}$.</p>` },
+    { q: 2, t: "Avec Cholesky", h: R`<p><span data-k="col">Le coefficient diagonal est la norme au carré d'une colonne de $A$</span>, qui contient $a_{ii}$.</p>`, b: R`<p><span data-k="col">$s_{ii} = \|C_i\|^2 = \sum_ka_{ki}^2\geqslant a_{ii}^2$</span>.</p>`, rappels: ["o-trace-tBB"] },
+    { q: 3, t: "Conclusion", h: R`<p><span data-k="det">$\det S = \prod a_{ii}^2$</span> pour $A$ triangulaire.</p>`, b: R`<div class="sbox">$$\det S = \prod_ia_{ii}^2\leqslant\prod_is_{ii}.$$</div><p>Égalité (pour $S$ définie positive) $\iff$ $A$ diagonale $\iff$ $S$ diagonale.</p>`, rappels: ["k-det-triang"] },
+    { q: 4, t: "Retour aux colonnes", h: R`<p>Avec $S = M^\top M$ : $s_{ii} = \|M_i\|^2$ et $\det S = (\det M)^2$.</p>`, b: R`<p>Pour $M$ quelconque, $S = M^\top M\in\mathcal S_n^+$ : $(\det M)^2\leqslant\prod\|M_i\|^2$, soit $|\det M|\leqslant\prod\|M_i\|$ (exercice QR).</p>` }
+  ],
+  ctx: { "o-trace-tBB": R`<p>$(A^\top A)_{ii} = \sum_ka_{ki}^2$.</p>`, "k-det-triang": R`<p>$\det A = \prod a_{ii}$.</p>` },
+  piege: R`Oublier l\'hypothèse « positive » : $S = \begin{pmatrix}-1&1&1\\1&-1&1\\1&1&-1\end{pmatrix}$ est symétrique, de déterminant $4$, alors que le produit de ses coefficients diagonaux vaut $-1$.`,
+  methode: R`Inégalités sur $\det S$ pour $S$ positive : écrire $S = A^\top A$ avec $A$ triangulaire.`
+},
+{
+  id: "kh-18-12", subj: "kholles", year: "mp", chap: 9, level: 3, time: "25 min",
+  title: "Toute matrice symétrique positive est une matrice de Gram",
+  enonce: R`<p>Soit $S\in\mathcal S_n^+(\mathbb R)$ de rang $p$.</p><ol><li>Montrer qu'il existe $v_1,\dots,v_n\in\mathbb R^n$ avec $S = \big((v_i|v_j)\big)_{i,j}$.</li><li>Montrer qu'on peut prendre $v_1,\dots,v_n\in\mathbb R^p$.</li><li>Réciproquement, montrer qu'une matrice de Gram est symétrique positive, de rang égal au rang de la famille.</li><li>Exemple : trouver trois vecteurs du plan dont la matrice de Gram est $\begin{pmatrix}1&-\frac12&-\frac12\\-\frac12&1&-\frac12\\-\frac12&-\frac12&1\end{pmatrix}$.</li></ol>`,
+  decode: { donnees: [R`$S = P^\top DP$ avec $P\in O_n$, $D = \operatorname{diag}(\lambda_1,\dots,\lambda_p,0,\dots,0)$, $\lambda_i>0$.`], but: R`Représenter $S$ comme une table de produits scalaires.`, cles: {
+    gram: R`$S = A^\top A$ signifie $s_{ij} = C_i^\top C_j = (C_i|C_j)$ où $C_i$ est la colonne $i$ de $A$.`,
+    bloc: R`$A = \sqrt DP$ a ses $n-p$ dernières lignes nulles : ses colonnes vivent dans $\mathbb R^p\times\{0\}$.`,
+    tri: R`$1 = \|v_i\|^2$ et $(v_i|v_j) = -\frac12 = \cos120°$ : trois vecteurs unitaires à $120°$.` } },
+  steps: [
+    { q: 1, t: "Une factorisation", h: R`<p><span data-k="gram">$S = A^\top A$ revient à dire que $S$ est la matrice de Gram des colonnes de $A$</span>.</p>`, b: R`<p>$A = \sqrt DP$ vérifie $A^\top A = P^\top DP = S$. <span data-k="gram">Avec $v_i$ la colonne $i$ de $A$ : $s_{ij} = (v_i|v_j)$</span>.</p>`, rappels: ["k-spectral-mat"] },
+    { q: 2, t: "Dans ℝᵖ", h: R`<p><span data-k="bloc">Les dernières lignes de $A$ sont nulles</span> : on les supprime.</p>`, b: R`<p><span data-k="bloc">$A = \begin{pmatrix}B\\0\end{pmatrix}$ avec $B\in\mathcal M_{p,n}(\mathbb R)$</span>, et $A^\top A = B^\top B$. Les colonnes de $B$ sont dans $\mathbb R^p$.</p>` },
+    { q: 3, t: "Réciproque", h: R`<p>$X^\top GX = \|\sum x_iv_i\|^2$.</p>`, b: R`<p>$G = \big((v_i|v_j)\big)$ est symétrique et $X^\top GX = \big\|\sum x_iv_i\big\|^2\geqslant0$. Son noyau est $\{X : \sum x_iv_i = 0\}$, de dimension $n-\operatorname{rg}(v_i)$, donc $\operatorname{rg}G = \operatorname{rg}(v_1,\dots,v_n)$.</p><div class="sbox">$$\mathcal S_n^+ = \{\text{matrices de Gram de}\ n\ \text{vecteurs}\}.$$</div>`, rappels: ["k-gram"] },
+    { q: 4, t: "Un exemple", h: R`<p><span data-k="tri">Trois vecteurs unitaires à $120°$</span> : de somme nulle, rang $2$.</p>`, b: R`<p>$v_k = \left(\cos\frac{2k\pi}3,\sin\frac{2k\pi}3\right)$, $k = 0,1,2$ : <span data-k="tri">unitaires et $(v_i|v_j) = \cos\frac{2\pi}3 = -\frac12$</span>. Comme la matrice est de rang $2$ (ses lignes ont une somme nulle), on ne pouvait pas faire mieux que le plan.</p>` }
+  ],
+  ctx: { "k-spectral-mat": R`<p>$S = P^\top DP$.</p>`, "k-gram": R`<p>Rang de la matrice de Gram.</p>` },
+  piege: R`Croire qu'il faut $n$ vecteurs libres : une matrice positive non définie correspond à une famille liée.`,
+  methode: R`$S = A^\top A$ et « $S$ matrice de Gram des colonnes de $A$ » sont la même chose.`
+},
+{
+  id: "kh-19-1", subj: "kholles", year: "mp", chap: 10, level: 4, time: "35 min",
+  title: "Différentielle du déterminant",
+  enonce: R`<ol><li>Soit $\varphi : GL_n(\mathbb R)\to\mathcal M_n(\mathbb R)$, $X\mapsto(\det X)X^{-1}$. Montrer que $\varphi(X) = \operatorname{Com}(X)^\top$, et en déduire que $\varphi$ admet un unique prolongement continu $\tilde\varphi$ à $\mathcal M_n(\mathbb R)$.</li><li>Montrer que $\det(I_n+tM) = 1+t\operatorname{tr}M+O(t^2)$.</li><li>Pour $A$ inversible et $B$ quelconque, en déduire $\dfrac{d}{dt}\det(A+tB)\Big|_{t = 0} = \operatorname{tr}\big(\tilde\varphi(A)B\big)$.</li><li>Étendre à $A$ quelconque. Exemple : $n = 2$.</li></ol>`,
+  decode: { donnees: [R`$X\operatorname{Com}(X)^\top = (\det X)I_n$.`], but: R`Calculer la dérivée directionnelle du déterminant.`, cles: {
+    com: R`Les coefficients de $\operatorname{Com}(X)$ sont des déterminants extraits : polynomiaux, donc continus sur tout $\mathcal M_n$.`,
+    dense: R`$GL_n$ est dense : deux prolongements continus coïncident sur un dense, donc partout.`,
+    fact: R`$\det(A+tB) = \det A\det(I_n+tA^{-1}B)$.`,
+    coef: R`$\det(A+tB)$ est un polynôme en $t$ ; son coefficient de $t$ est un polynôme en les coefficients de $A$ et $B$.` } },
+  steps: [
+    { q: 1, t: "La comatrice", h: R`<p>Formule de l'inverse : $X^{-1} = \frac1{\det X}\operatorname{Com}(X)^\top$. <span data-k="com">La comatrice a un sens et est continue partout</span>.</p>`, b: R`<p>Pour $X$ inversible, $\varphi(X) = \operatorname{Com}(X)^\top$. <span data-k="com">$X\mapsto\operatorname{Com}(X)^\top$ est polynomiale, donc continue</span> sur $\mathcal M_n$ : c'est un prolongement. <span data-k="dense">Unique par densité de $GL_n$</span>.</p>`, rappels: ["k-comatrice"] },
+    { q: 2, t: "Le premier ordre de det(I + tM)", h: R`<p>On développe le déterminant comme somme sur les permutations : seule l'identité donne un terme de degré $\leqslant1$ non nul.</p>`, b: R`<p>Dans $\det(I_n+tM) = \sum_\sigma\varepsilon(\sigma)\prod_i(\delta_{\sigma(i)i}+tm_{\sigma(i)i})$, une permutation $\sigma\neq\mathrm{id}$ déplace au moins deux indices, son terme est $O(t^2)$. Le terme de l'identité est $\prod_i(1+tm_{ii}) = 1+t\operatorname{tr}M+O(t^2)$.</p>`, rappels: ["k-det-deriv"] },
+    { q: 3, t: "En A inversible", h: R`<p>On <span data-k="fact">factorise par $\det A$</span> et on applique la question 2 avec $M = A^{-1}B$.</p>`, b: R`<p><span data-k="fact">$\det(A+tB) = \det A\big(1+t\operatorname{tr}(A^{-1}B)+O(t^2)\big)$</span>. La dérivée en $0$ vaut</p><div class="sbox">$$\frac{d}{dt}\det(A+tB)\Big|_{0} = \det A\operatorname{tr}(A^{-1}B) = \operatorname{tr}\big(\operatorname{Com}(A)^\top B\big).$$</div>` },
+    { q: 4, t: "Pour A quelconque", h: R`<p><span data-k="coef">Les deux membres sont des fonctions continues de $A$</span>, égales sur le dense $GL_n$.</p>`, b: R`<p><span data-k="coef">Le coefficient de $t$ dans $\det(A+tB)$ est polynomial en $A$</span>, comme $\operatorname{tr}(\operatorname{Com}(A)^\top B)$ ; égaux sur $GL_n$ dense, ils sont égaux partout. Exemple $n = 2$ : $\det\begin{pmatrix}a+tb_{11}&c+tb_{12}\\d+tb_{21}&e+tb_{22}\end{pmatrix}$ a pour coefficient de $t$ : $eb_{11}+ab_{22}-db_{12}-cb_{21}$, et $\operatorname{Com}(A)^\top = \begin{pmatrix}e&-c\\-d&a\end{pmatrix}$ donne la même trace.</p>`, rappels: ["o-a-diff-def"] }
+  ],
+  ctx: { "k-comatrice": R`<p>$X^{-1} = \frac1{\det X}\operatorname{Com}(X)^\top$.</p>`, "k-det-deriv": R`<p>Avec $M$ quelconque.</p>`, "o-a-diff-def": R`<p>La différentielle de $\det$ en $A$ est $H\mapsto\operatorname{tr}(\operatorname{Com}(A)^\top H)$.</p>` },
+  piege: R`Écrire $\frac d{dt}\det(A+tB) = \det B$ par analogie avec une fonction linéaire : le déterminant n'est pas linéaire.`,
+  methode: R`Dériver une fonction de matrices : le faire en $A$ inversible en factorisant, puis étendre par densité.`
+}
+]);
+})();
