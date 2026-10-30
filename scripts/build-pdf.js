@@ -50,6 +50,8 @@ function toTex(html) {
     FIGS.set(h, svg);
     return keep(`\n\\begin{center}\\includegraphics[width=${Math.min(0.62, w / 360 * 0.55).toFixed(2)}\\linewidth]{${path.join(ROOT, "tex", "fig", h + ".pdf")}}\\par\\vspace{0.2em}{\\small\\color{black!70}${toTex(cap)}\\par}\\end{center}\n`);
   });
+  /* Boutons vers le labo interactif : remplacés par une mention */
+  s = s.replace(/<button[^>]*class="labo-btn"[^>]*>[\s\S]*?<\/button>/g, "<p><i>Labo interactif : voir la version en ligne de ce corrigé.</i></p>");
   /* Tableaux de valeurs */
   s = s.replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (_, t) => {
     const rows = [...t.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(r => [...r[1].matchAll(/<t[hd]>([\s\S]*?)<\/t[hd]>/g)].map(c => toTex(c[1])));

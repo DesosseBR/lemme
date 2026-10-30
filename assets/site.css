@@ -565,3 +565,56 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 .prose table.vals{border-collapse:collapse;margin:12px 0;font-size:15px;font-variant-numeric:tabular-nums}
 .prose table.vals th,.prose table.vals td{border:1px solid var(--line);padding:6px 10px;text-align:center}
 .prose table.vals th{background:var(--bg-2);font-family:var(--f-display);font-weight:700}
+
+/* Labo matrices */
+.lab-ctl{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin-bottom:18px}
+.lab-ctl .viz-ctrl{flex:1;min-width:240px;margin:0}
+.lab-seg{display:inline-flex;flex-wrap:wrap;gap:4px}
+.lab-row{display:flex;flex-wrap:wrap;gap:20px 28px;align-items:flex-start;margin-bottom:16px}
+.lab-row > *{min-width:0;max-width:100%}
+.lab-cap{font-size:13.5px;font-weight:600;color:var(--muted);margin:0 0 8px}
+.lab-op{font-size:26px;font-weight:700;color:var(--muted)}
+.mx{display:inline-grid;gap:3px;font:600 13px/1 var(--f-display);font-variant-numeric:tabular-nums;max-width:100%;overflow-x:auto;padding:2px}
+.mx .c{min-width:30px;height:30px;padding:0 4px;display:grid;place-items:center;border-radius:5px;background:var(--bg-2);color:var(--muted);cursor:pointer;transition:background var(--t-fast),outline-color var(--t-fast);outline:2px solid transparent;outline-offset:1px}
+.mx.sm .c{min-width:26px;height:26px;font-size:12px}
+.mx .c.alt{background:color-mix(in srgb,var(--blue) 16%,var(--bg-2))}
+.mx .c.on{background:var(--navy);color:var(--on-navy)}
+.mx .c.heat{background:color-mix(in srgb,var(--blue) calc(var(--h) * 70%),var(--bg-2));color:var(--ink)}
+.mx .c.neg.heat{background:color-mix(in srgb,var(--red) calc(var(--h) * 70%),var(--bg-2))}
+.mx .c.hl{outline-color:var(--gold-ink)}
+@media (prefers-color-scheme: dark){.mx .c.on{background:var(--yellow);color:var(--on-yellow)}}
+.mx-in{display:inline-grid;gap:4px}
+.mx-in input{width:54px;height:34px;border:1.5px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font:600 14px var(--f-display);text-align:center}
+.lab-note{background:var(--yellow-soft);border-radius:12px;padding:14px 16px;font-family:var(--f-read);font-size:15.5px;line-height:1.6;min-height:4.5em}
+.lab-small{font-size:13.5px;color:var(--muted)}
+.lab-txt{flex:1;min-width:240px;font-family:var(--f-read);font-size:15.5px}
+.lab-txt p{margin:0 0 10px}
+.lab-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.lab-chips span{background:var(--bg-2);border-radius:6px;padding:4px 8px;font:600 13px var(--f-display);font-variant-numeric:tabular-nums}
+.lab-svg{max-width:100%;height:auto}
+.lab-svg .lab-e{stroke:var(--muted);stroke-width:1.6}
+.lab-svg .lab-e.dash{stroke-dasharray:5 4}
+.lab-svg .lab-e.on{stroke:var(--gold-ink);stroke-width:3.2}
+.lab-svg .lab-ah{fill:var(--muted)}
+.lab-svg .lab-ah.on{fill:var(--gold-ink)}
+.lab-svg .lab-v{fill:var(--surface);stroke:var(--navy);stroke-width:1.8}
+.lab-svg .lab-v.on{fill:var(--yellow)}
+.lab-svg .lab-vt{font:600 12px var(--f-display);fill:var(--ink)}
+.lab-svg .lab-vt.sm{font-size:11px;fill:var(--muted)}
+.lab-svg .lab-ax{stroke:var(--line);stroke-width:1.2}
+.lab-svg .lab-proj{stroke:var(--muted);stroke-dasharray:3 3}
+.lab-svg .lab-pt{fill:var(--blue)}
+.lab-svg .lab-pt2{fill:var(--gold-ink)}
+@media (prefers-color-scheme: dark){.lab-svg .lab-v{stroke:var(--yellow)}}
+.spins{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.spins button{display:grid;justify-items:center;gap:2px;min-width:66px;padding:8px 6px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-family:var(--f-display)}
+.spins button b{font-size:22px;line-height:1}
+.spins button small{font-size:11.5px;color:var(--muted)}
+.spins button.up{border-color:var(--blue)}
+.spins button.up b{color:var(--blue)}
+.spins button.dn b{color:var(--red)}
+.lab-fac{margin:0 0 10px;padding-left:20px;font-size:14.5px}
+.lab-fac li{margin:2px 0}
+.labo-btn{display:inline-flex;align-items:center;gap:8px;margin:6px 0 4px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--navy);background:var(--surface);color:var(--navy);font:700 14px var(--f-display);cursor:pointer}
+@media (prefers-color-scheme: dark){.labo-btn{border-color:var(--yellow);color:var(--yellow)}}
+.panelbox.flash{box-shadow:0 0 0 3px var(--yellow)}
