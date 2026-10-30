@@ -23,7 +23,7 @@ LEMME.rappels({
   "t-distance": { t: "Distance", b: R`Une distance sur $E$ vérifie : $d(x,y) = 0\iff x = y$ ; $d(x,y) = d(y,x)$ ; $d(x,z)\leqslant d(x,y)+d(y,z)$ (inégalité triangulaire).` },
   "t-tri-inverse": { t: "Inégalité triangulaire renversée", b: R`Pour tous $x,y,z$ : $|d(x,z)-d(y,z)|\leqslant d(x,y)$. En particulier $d(a,y)\geqslant d(a,x)-d(x,y)$.` },
   "t-distance-discrete": { t: "Distance discrète", b: R`Sur un ensemble $E$ quelconque, $d(x,y) = 0$ si $x = y$ et $d(x,y) = 1$ sinon définit une distance. Pour elle, $B(x,1) = \{x\}$ et $B_f(x,1) = E$.` },
-  "t-boules": { t: "Boules", b: R`$B(a,r) = \{x\in E : d(a,x)<r\}$ est la boule ouverte, $B_f(a,r) = \{x\in E : d(a,x)\leqslant r\}$ la boule fermée.` },
+  "t-boules": { t: "Boules", b: R`$B(a,r) = \{x\in E : d(a,x)< r\}$ est la boule ouverte, $B_f(a,r) = \{x\in E : d(a,x)\leqslant r\}$ la boule fermée.` },
   "t-ouvert": { t: "Ouvert et fermé", b: R`$\Omega$ est ouvert si pour tout $x\in\Omega$, il existe $\rho>0$ avec $B(x,\rho)\subset\Omega$. $F$ est fermé si son complémentaire $E\setminus F$ est ouvert.` },
   "t-adherence": { t: "Adhérence", b: R`$\overline A$ est le plus petit fermé contenant $A$ : si $F$ est fermé et $A\subset F$, alors $\overline A\subset F$. On a les équivalences $$x\in\overline A\iff\forall\varepsilon>0,\ B(x,\varepsilon)\cap A\neq\varnothing\iff d(x,A) = 0.$$ Si $F$ est fermé, $\overline F = F$.` },
   "t-voisinage": { t: "Voisinage", b: R`$V$ est un voisinage de $x$ s'il contient un ouvert contenant $x$, par exemple une boule $B(x,\rho)$. Un ouvert qui contient $x$ est un voisinage de $x$. L'intérieur $\mathring V$ d'un voisinage de $x$ est un ouvert qui contient $x$.` },
@@ -46,7 +46,7 @@ LEMME.exercises([
   title: "L'adhérence d'une boule ouverte est dans la boule fermée",
   enonce: R`<p>Soit $(E,d)$ un espace métrique, $a\in E$ et $r>0$. Montrer que</p>$$\overline{B(a,r)}\subset B_f(a,r).$$`,
   decode: {
-    donnees: [R`$B(a,r) = \{x : d(a,x)<r\}$, la boule ouverte.`, R`$B_f(a,r) = \{x : d(a,x)\leqslant r\}$, la boule fermée.`],
+    donnees: [R`$B(a,r) = \{x : d(a,x)< r\}$, la boule ouverte.`, R`$B_f(a,r) = \{x : d(a,x)\leqslant r\}$, la boule fermée.`],
     but: R`Montrer que tout point adhérent à la boule ouverte est dans la boule fermée.`,
     cles: {
       adh: R`$\overline A$ est le plus petit fermé qui contient $A$. Pour montrer $\overline A\subset F$, il suffit que $F$ soit fermé et contienne $A$.`,
@@ -56,7 +56,7 @@ LEMME.exercises([
   },
   steps: [
     { t: "La stratégie", b: R`<p>On ne calcule pas l'<span data-k="adh">adhérence</span> directement. On utilise sa propriété clé : c'est le plus petit fermé contenant la boule. Il suffit donc de montrer deux choses :</p><ol><li>$B(a,r)\subset B_f(a,r)$ ;</li><li>$B_f(a,r)$ est un fermé.</li></ol>`, rappels: ["t-adherence"] },
-    { t: "La première inclusion", b: R`<p>Si $x\in B(a,r)$, alors $d(a,x)<r$, donc a fortiori $d(a,x)\leqslant r$ : $x\in B_f(a,r)$.</p>` },
+    { t: "La première inclusion", b: R`<p>Si $x\in B(a,r)$, alors $d(a,x)< r$, donc a fortiori $d(a,x)\leqslant r$ : $x\in B_f(a,r)$.</p>` },
     { t: "Ce qu'il faut prouver pour « fermé »", b: R`<p>Par définition, $B_f(a,r)$ est fermée si son <span data-k="compl">complémentaire</span> $U = \{x\in E : d(a,x)>r\}$ est ouvert. On doit donc trouver, autour de chaque point de $U$, une boule entièrement contenue dans $U$.</p>`, rappels: ["t-ouvert"] },
     { t: "Choisir le rayon", b: R`<p>Soit $x\in U$. On pose $\rho = d(a,x)-r$, qui est $>0$ car $x\in U$. C'est la <span data-k="marge">marge</span> dont on dispose.</p>` },
     { t: "La boule reste dans U", b: R`<p>Soit $y\in B(x,\rho)$, donc $d(x,y)<\rho$. Par l'inégalité triangulaire renversée :</p>$$d(a,y)\geqslant d(a,x)-d(x,y)>d(a,x)-\rho = r.$$<p>Donc $y\in U$. Ainsi $B(x,\rho)\subset U$ : $U$ est ouvert, et $B_f(a,r)$ est fermée.</p>`, rappels: ["t-tri-inverse"] },
@@ -130,7 +130,7 @@ LEMME.exercises([
     { t: "Le rayon d'isolement", b: R`<p>Pour chaque $a\in A$, on choisit $r_a>0$ tel que</p>$$]a-r_a,a+r_a[\,\cap A = \{a\}.\qquad(*)$$`, rappels: ["t-isole"] },
     { t: "Associer un rationnel", b: R`<p>L'intervalle $\left]a-\tfrac{r_a}2,a+\tfrac{r_a}2\right[$ est ouvert et non vide : il contient un rationnel, que l'on note $q_a$. On pose $\varphi(a) = q_a$. On prend <span data-k="demi">le rayon moitié</span> exprès.</p>`, rappels: ["t-densite-q"] },
     { t: "Injectivité : l'hypothèse", b: R`<p>Soit $a,b\in A$ avec $q_a = q_b = q$. Par construction, $|a-q|<\tfrac{r_a}2$ et $|b-q|<\tfrac{r_b}2$. Par l'inégalité triangulaire :</p>$$|a-b|\leqslant|a-q|+|q-b|<\frac{r_a+r_b}2\leqslant\max(r_a,r_b).$$` },
-    { t: "Injectivité : la conclusion", b: R`<p>Supposons par exemple $r_a\geqslant r_b$. Alors $|a-b|<r_a$, donc $b\in\,]a-r_a,a+r_a[\,\cap A$. D'après $(*)$, cela force $b = a$. Le cas $r_b\geqslant r_a$ est symétrique.</p>` },
+    { t: "Injectivité : la conclusion", b: R`<p>Supposons par exemple $r_a\geqslant r_b$. Alors $|a-b|< r_a$, donc $b\in\,]a-r_a,a+r_a[\,\cap A$. D'après $(*)$, cela force $b = a$. Le cas $r_b\geqslant r_a$ est symétrique.</p>` },
     { t: "Conclusion", b: R`<p>$\varphi : A\to\mathbb Q$ est injective et $\mathbb Q$ est dénombrable : $A$ est au plus dénombrable.</p>`, rappels: ["t-denombrable"] }
   ],
   piege: R`Choisir $q_a$ dans l'intervalle de rayon $r_a$ entier : deux points proches pourraient alors recevoir le même rationnel, et l'argument d'injectivité ne marche plus.`,

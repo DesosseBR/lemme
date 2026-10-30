@@ -202,7 +202,7 @@ LEMME.exercises([
   decode: {
     donnees: [R`$a_n = \dfrac{n}{2^n}$.`],
     but: R`Trouver $R$, puis une expression simple de la somme sur $]-R,R[$.`,
-    cles: { rayon: R`Le réel $R$ tel que la série converge pour $|x|<R$ et diverge pour $|x|>R$.` }
+    cles: { rayon: R`Le réel $R$ tel que la série converge pour $|x|< R$ et diverge pour $|x|>R$.` }
   },
   steps: [
     { t: "Le rayon", b: R`$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{n+1}{2n} \longrightarrow \frac12,\quad\text{donc } R = 2.$$`, rappels: ["dalembert-se"] },
@@ -304,7 +304,7 @@ LEMME.kholles([
 /* ---------- Chapitre « Limites et continuité » (MPSI, chap: 7) ---------- */
 LEMME.rappels({
   "limite-monotone-fct": { t: "Limite monotone pour les fonctions", b: R`Si $f$ est croissante sur $[a,+\infty[$, alors $f$ admet une limite en $+\infty$ : c'est $\sup f$ si $f$ est majorée, et $+\infty$ sinon.` },
-  "passage-limite": { t: "Passage à la limite dans une inégalité", b: R`Si $f(t)\leqslant g(t)$ pour $t$ assez grand et si $f$ et $g$ ont des limites finies $\ell$ et $\ell'$, alors $\ell\leqslant\ell'$. Attention : une inégalité stricte $f<g$ ne donne que $\ell\leqslant\ell'$.` },
+  "passage-limite": { t: "Passage à la limite dans une inégalité", b: R`Si $f(t)\leqslant g(t)$ pour $t$ assez grand et si $f$ et $g$ ont des limites finies $\ell$ et $\ell'$, alors $\ell\leqslant\ell'$. Attention : une inégalité stricte $f< g$ ne donne que $\ell\leqslant\ell'$.` },
   "absurde": { t: "Raisonnement par l'absurde", b: R`Pour montrer une propriété $P$, on suppose que $P$ est fausse et on en déduit une contradiction. Donc $P$ est vraie.` },
   "croissances-comparees": { t: "Croissances comparées", b: R`Pour $\alpha,\beta,\gamma>0$ : $$\lim_{x\to+\infty}\frac{x^\beta}{e^{\gamma x}} = 0,\qquad \lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta} = 0.$$ L'exponentielle l'emporte sur les puissances, qui l'emportent sur le logarithme.` },
   "formes-indeterminees": { t: "Formes indéterminées", b: R`Les opérations sur les limites ne permettent pas de conclure dans les cas $(+\infty)-(+\infty)$, $0\times\infty$, $\dfrac00$ et $\dfrac\infty\infty$. Il faut alors transformer l'expression : factoriser, utiliser la forme exponentielle, encadrer…` },
@@ -313,7 +313,7 @@ LEMME.rappels({
   "composition-limites": { t: "Limite d'une composée", b: R`Si $u(x)\to b$ quand $x\to a$, et si $g(X)\to\ell$ quand $X\to b$, alors $g\big(u(x)\big)\to\ell$ quand $x\to a$. Exemple : si $u(x)\to-\infty$, alors $e^{u(x)}\to0$.` },
   "borne-zero": { t: "Borné fois tend vers zéro", b: R`Si $g$ est bornée au voisinage de $a$ et si $f\to0$ en $a$, alors $fg\to0$ en $a$. Justification : $|f g|\leqslant M|f|$.` },
   "encadrement": { t: "Théorème d'encadrement", b: R`Si $g\leqslant f\leqslant h$ au voisinage de $a$ et si $g$ et $h$ tendent vers le même réel $\ell$, alors $f$ tend vers $\ell$.` },
-  "partie-entiere": { t: "Partie entière", b: R`$\lfloor x\rfloor$ est l'unique entier $n$ tel que $n\leqslant x<n+1$. On en déduit l'encadrement utile $x-1<\lfloor x\rfloor\leqslant x$.` },
+  "partie-entiere": { t: "Partie entière", b: R`$\lfloor x\rfloor$ est l'unique entier $n$ tel que $n\leqslant x< n+1$. On en déduit l'encadrement utile $x-1<\lfloor x\rfloor\leqslant x$.` },
   "minoration-infini": { t: "Limite infinie par minoration", b: R`Si $g\leqslant f$ au voisinage de $a$ et si $g\to+\infty$ en $a$, alors $f\to+\infty$ en $a$.` }
 });
 
@@ -326,7 +326,7 @@ LEMME.exercises([
     donnees: [R`$f$ est strictement croissante sur $[0,+\infty[$.`, R`$f(x)\to\ell$ quand $x\to+\infty$, avec $\ell$ réel.`],
     but: R`Une inégalité <b>stricte</b> : $f(x)<\ell$ pour tout $x$. Autrement dit, $f$ reste sous $\ell$ et ne la touche jamais.`,
     cles: {
-      sc: R`Si $x<y$, alors $f(x)<f(y)$ : l'inégalité est stricte, $f$ n'est jamais constante sur un morceau.`,
+      sc: R`Si $x< y$, alors $f(x)< f(y)$ : l'inégalité est stricte, $f$ n'est jamais constante sur un morceau.`,
       lim: R`$f(x)$ se rapproche autant qu'on veut de $\ell$ quand $x$ devient grand.`,
       large: R`Une inégalité large autorise l'égalité : $f(x)\leqslant\ell$. Ici, il faudra ensuite exclure le cas $f(x)=\ell$.`,
       fixe: R`On choisit un $x$ quelconque et on ne le change plus. C'est la variable $t$ qui va tendre vers $+\infty$.`,
@@ -336,11 +336,11 @@ LEMME.exercises([
   steps: [
     { t: "Découper le problème", b: R`<p>On veut une inégalité stricte. On procède en deux temps, ce qui est plus clair :</p><ol><li>montrer d'abord l'inégalité <span data-k="large">large</span> $f(x)\leqslant\ell$ ;</li><li>montrer ensuite que l'égalité $f(x)=\ell$ est impossible.</li></ol>` },
     { t: "L'inégalité large", b: R`<p>Soit $x\geqslant0$ <span data-k="fixe">fixé</span>. Pour tout $t\geqslant x$, la croissance de $f$ donne</p>$$f(x)\leqslant f(t).$$<p>On fait tendre $t$ vers $+\infty$ : le membre de droite tend vers $\ell$, le membre de gauche ne bouge pas. Par passage à la limite dans une inégalité large :</p>$$f(x)\leqslant\ell.$$`, rappels: ["passage-limite", "limite-monotone-fct"] },
-    { t: "Pourquoi ce n'est pas fini", b: R`<p>Le passage à la limite ne donne jamais mieux qu'une inégalité large. Même en partant de $f(x)<f(t)$, on obtient seulement $f(x)\leqslant\ell$. Il faut un argument de plus pour exclure $f(x)=\ell$ : c'est là qu'intervient la stricte croissance.</p>`, rappels: ["passage-limite"] },
+    { t: "Pourquoi ce n'est pas fini", b: R`<p>Le passage à la limite ne donne jamais mieux qu'une inégalité large. Même en partant de $f(x)< f(t)$, on obtient seulement $f(x)\leqslant\ell$. Il faut un argument de plus pour exclure $f(x)=\ell$ : c'est là qu'intervient la stricte croissance.</p>`, rappels: ["passage-limite"] },
     { t: "Exclure l'égalité", b: R`<p>Raisonnons par l'absurde : supposons qu'il existe $a\geqslant0$ avec $f(a)=\ell$.</p><p>Prenons n'importe quel $b>a$, par exemple $b=a+1$. Comme $f$ est strictement croissante, $f(b)>f(a)=\ell$.</p><p>Mais l'étape précédente donne $f(b)\leqslant\ell$. C'est une <span data-k="contradiction">contradiction</span>.</p>`, rappels: ["absurde"] },
     { t: "Conclusion", b: R`<p>Pour tout $x\geqslant0$, on a $f(x)\leqslant\ell$ et $f(x)\neq\ell$, donc</p>$$f(x)<\ell.$$<p>Une fonction strictement croissante s'approche de sa limite sans jamais l'atteindre.</p>` }
   ],
-  piege: R`Passer directement à la limite dans $f(x)<f(t)$ et écrire $f(x)<\ell$. Le passage à la limite transforme toujours une inégalité stricte en inégalité large.`,
+  piege: R`Passer directement à la limite dans $f(x)< f(t)$ et écrire $f(x)<\ell$. Le passage à la limite transforme toujours une inégalité stricte en inégalité large.`,
   methode: R`Pour une inégalité stricte avec une limite : obtenir d'abord l'inégalité large par passage à la limite, puis exclure le cas d'égalité, souvent par l'absurde.`,
   viz: {
     type: "plot", title: "La courbe se rapproche de ℓ sans jamais la toucher", x: [0, 10], y: [0, 1.2], xlabel: "x",
@@ -782,7 +782,7 @@ LEMME.exercises([
   },
   steps: [
     { t: "L'idée", b: R`<p>Le maximum n'est pas une opération « classique ». On va l'écrire avec des opérations dont on connaît la continuité : somme, produit par une constante, valeur absolue.</p>` },
-    { t: "Une formule pour le max", b: R`<p>Montrons <span data-k="formule">la formule</span> $\max(a,b) = \frac12\big(a+b+|a-b|\big)$.</p><ul><li>Si $a\geqslant b$ : $|a-b| = a-b$ et $\frac12(a+b+a-b) = a$.</li><li>Si $a<b$ : $|a-b| = b-a$ et $\frac12(a+b+b-a) = b$.</li></ul><p>Dans les deux cas on obtient bien le plus grand des deux.</p>` },
+    { t: "Une formule pour le max", b: R`<p>Montrons <span data-k="formule">la formule</span> $\max(a,b) = \frac12\big(a+b+|a-b|\big)$.</p><ul><li>Si $a\geqslant b$ : $|a-b| = a-b$ et $\frac12(a+b+a-b) = a$.</li><li>Si $a< b$ : $|a-b| = b-a$ et $\frac12(a+b+b-a) = b$.</li></ul><p>Dans les deux cas on obtient bien le plus grand des deux.</p>` },
     { t: "Appliquer à f et g", b: R`$$\sup(f,g) = \frac12\big(f+g+|f-g|\big).$$` },
     { t: "Conclusion", b: R`<p>$f+g$ et $f-g$ sont continues. $|f-g|$ est la composée de $f-g$ par la valeur absolue, qui est continue. La somme et le produit par $\frac12$ conservent la continuité : $\sup(f,g)$ est continue.</p>`, rappels: ["continuite-operations"] }
   ],
@@ -917,8 +917,8 @@ LEMME.exercises([
   },
   steps: [
     { t: "(i) ⇒ (ii) · Préparer", b: R`<p>On suppose (i). Soit $[a,b]$ un segment. Posons <span data-k="A">$A = \max(|a|,|b|)$</span>. Alors $[a,b]\subset[-A,A]$.</p>` },
-    { t: "(i) ⇒ (ii) · Utiliser les limites", b: R`<p>Par définition de $|f|\to+\infty$ en $+\infty$ et en $-\infty$, il existe des réels $M$ et $M'$ tels que</p>$$x>M\implies|f(x)|>A\qquad\text{et}\qquad x<M'\implies|f(x)|>A.$$`, rappels: ["def-limite"] },
-    { t: "(i) ⇒ (ii) · Conclure", b: R`<p>Posons $M'' = \max(M,-M')$. Si $|x|>M''$, alors $x>M$ ou $x<M'$, donc $|f(x)|>A$, donc $f(x)\notin[a,b]$.</p><p>Ainsi, tout $x$ de $f^{-1}([a,b])$ vérifie $|x|\leqslant M''$ : cette partie est <span data-k="borne">bornée</span>.</p>` },
+    { t: "(i) ⇒ (ii) · Utiliser les limites", b: R`<p>Par définition de $|f|\to+\infty$ en $+\infty$ et en $-\infty$, il existe des réels $M$ et $M'$ tels que</p>$$x>M\implies|f(x)|>A\qquad\text{et}\qquad x< M'\implies|f(x)|>A.$$`, rappels: ["def-limite"] },
+    { t: "(i) ⇒ (ii) · Conclure", b: R`<p>Posons $M'' = \max(M,-M')$. Si $|x|>M''$, alors $x>M$ ou $x< M'$, donc $|f(x)|>A$, donc $f(x)\notin[a,b]$.</p><p>Ainsi, tout $x$ de $f^{-1}([a,b])$ vérifie $|x|\leqslant M''$ : cette partie est <span data-k="borne">bornée</span>.</p>` },
     { t: "(ii) ⇒ (i) · Préparer", b: R`<p>On suppose (ii). Soit $A\geqslant0$ quelconque. Le segment $[-A,A]$ a une image réciproque bornée : il existe $M\geqslant0$ tel que</p>$$f^{-1}([-A,A])\subset[-M,M].$$` },
     { t: "(ii) ⇒ (i) · Conclure", b: R`<p>Si $|x|>M$, alors $x\notin f^{-1}([-A,A])$, donc $f(x)\notin[-A,A]$, c'est-à-dire $|f(x)|>A$.</p><p>On a montré : pour tout $A$, il existe $M$ tel que $x>M\implies|f(x)|>A$, et de même pour $x<-M$. C'est exactement $|f|\to+\infty$ en $+\infty$ et en $-\infty$.</p>`, rappels: ["def-limite"] }
   ],
@@ -985,7 +985,7 @@ LEMME.exercises([
   steps: [
     { t: "L'outil", b: R`<p>L'image d'un intervalle par une fonction continue est un intervalle. Donc $f(I)$ est un intervalle.</p>`, rappels: ["image-intervalle"] },
     { t: "Ce que dit l'hypothèse", b: R`<p>$f$ n'est ni minorée ni majorée : l'intervalle $f(I)$ n'est ni minoré ni majoré.</p>` },
-    { t: "Conclusion", b: R`<p>Soit $y$ réel. Il existe $u,v\in f(I)$ avec $u<y<v$. Comme $f(I)$ est un intervalle, il contient tout ce qui est entre $u$ et $v$, donc $y$. Ainsi <span data-k="inter">$f(I) = \mathbb R$</span> : $f$ est surjective.</p>`, rappels: ["tvi"] }
+    { t: "Conclusion", b: R`<p>Soit $y$ réel. Il existe $u,v\in f(I)$ avec $u< y< v$. Comme $f(I)$ est un intervalle, il contient tout ce qui est entre $u$ et $v$, donc $y$. Ainsi <span data-k="inter">$f(I) = \mathbb R$</span> : $f$ est surjective.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Oublier l'hypothèse « $I$ est un intervalle » : sur $\mathbb R^*$, la fonction $x\mapsto\frac1x$ n'est ni minorée ni majorée, et n'atteint pas $0$.`,
   methode: R`Pour montrer qu'une fonction continue atteint une valeur, regarde son image : c'est un intervalle.`
@@ -1004,7 +1004,7 @@ LEMME.exercises([
   },
   steps: [
     { t: "Se simplifier la vie", b: R`<p>Si $\ell = \ell'$, il n'y a aucune valeur strictement entre les deux : rien à montrer. Sinon, <span data-k="quitte">quitte à remplacer $f$ par $-f$</span>, on suppose $\ell<\ell'$. Soit $y\in\,]\ell,\ell'[$.</p>` },
-    { t: "f passe sous y", b: R`<p>Montrons qu'il existe $a$ avec $f(a)<y$. Par l'absurde, si $f(x)\geqslant y$ pour tout $x$, alors en passant à la limite en $-\infty$, on obtient $\ell\geqslant y$. C'est faux, car $y>\ell$.</p>`, rappels: ["absurde", "passage-limite"] },
+    { t: "f passe sous y", b: R`<p>Montrons qu'il existe $a$ avec $f(a)< y$. Par l'absurde, si $f(x)\geqslant y$ pour tout $x$, alors en passant à la limite en $-\infty$, on obtient $\ell\geqslant y$. C'est faux, car $y>\ell$.</p>`, rappels: ["absurde", "passage-limite"] },
     { t: "f passe au-dessus de y", b: R`<p>De même, si $f(x)\leqslant y$ pour tout $x$, la limite en $+\infty$ donne $\ell'\leqslant y$ : faux. Il existe donc $b$ avec $f(b)>y$.</p>`, rappels: ["absurde"] },
     { t: "Appliquer le TVI", b: R`<p>$f$ est continue sur l'intervalle d'extrémités $a$ et $b$, et $y$ est compris entre $f(a)$ et $f(b)$. Par le théorème des valeurs intermédiaires, il existe $x$ avec $f(x) = y$.</p>`, rappels: ["tvi"] }
   ],
@@ -1149,7 +1149,7 @@ LEMME.exercises([
 {
   id: "tvi-extremum-translation", subj: "maths", year: "mpsi", chap: 7, level: 4, time: "25 min",
   title: "Translations qui laissent une valeur inchangée",
-  enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ continue avec $f(a) = f(b)$ et $a<b$. Montrer qu'il existe $\alpha>0$ tel que</p>$$\forall t\in[0,\alpha],\ \exists x\in[a,b-\alpha],\quad f(x+t) = f(x).$$`,
+  enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ continue avec $f(a) = f(b)$ et $a< b$. Montrer qu'il existe $\alpha>0$ tel que</p>$$\forall t\in[0,\alpha],\ \exists x\in[a,b-\alpha],\quad f(x+t) = f(x).$$`,
   decode: {
     donnees: [R`$f$ continue sur $[a,b]$, avec la même valeur aux deux bouts.`],
     but: R`Pour tout décalage $t$ assez petit, trouver $x$ tel que $f$ prenne la même valeur en $x$ et en $x+t$.`,
@@ -1178,15 +1178,15 @@ LEMME.exercises([
     but: R`Trois propriétés : $g$ existe, elle est croissante, elle est continue.`,
     cles: {
       glissant: R`$g(x)$ est le record de $f$ atteint jusqu'à l'instant $x$. Il ne peut que monter avec le temps.`,
-      cas: R`Soit $f$ est en train de battre son record en $a$ ($f(a) = g(a)$), soit elle est en dessous ($f(a)<g(a)$).`,
+      cas: R`Soit $f$ est en train de battre son record en $a$ ($f(a) = g(a)$), soit elle est en dessous ($f(a)< g(a)$).`,
       alpha: R`On choisit $\alpha\leqslant a$ pour que $[a-\alpha,a+\alpha]$ reste dans $[0,+\infty[$.`
     }
   },
   steps: [
     { t: "g est bien définie", b: R`<p>Pour $x\geqslant0$, $f$ est continue sur le segment $[0,x]$ : elle y atteint son maximum. $g(x)$ existe.</p>`, rappels: ["bornes-atteintes"] },
     { t: "g est croissante", b: R`<p>Si $x\leqslant y$, alors $[0,x]\subset[0,y]$ : le maximum sur un ensemble plus grand est plus grand. Donc $g(x)\leqslant g(y)$. C'est un <span data-k="glissant">record glissant</span>.</p>` },
-    { t: "Continuité : deux cas", b: R`<p>Soit $a>0$ (le cas $a = 0$ se traite de même, à droite seulement). On a toujours $f(a)\leqslant g(a)$. On <span data-k="cas">distingue</span> $f(a)<g(a)$ et $f(a) = g(a)$.</p>` },
-    { t: "Cas f(a) < g(a)", b: R`<p>Par continuité de $f$, il existe <span data-k="alpha">$\alpha>0$</span> tel que $f(x)<g(a)$ sur $[a-\alpha,a+\alpha]$. Le record $g(a)$ est atteint en un $t_0<a-\alpha$. Pour $x$ dans $[a-\alpha,a+\alpha]$, le record reste donc $g(a)$ : $g$ est constante près de $a$, donc continue en $a$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Continuité : deux cas", b: R`<p>Soit $a>0$ (le cas $a = 0$ se traite de même, à droite seulement). On a toujours $f(a)\leqslant g(a)$. On <span data-k="cas">distingue</span> $f(a)< g(a)$ et $f(a) = g(a)$.</p>` },
+    { t: "Cas f(a) < g(a)", b: R`<p>Par continuité de $f$, il existe <span data-k="alpha">$\alpha>0$</span> tel que $f(x)< g(a)$ sur $[a-\alpha,a+\alpha]$. Le record $g(a)$ est atteint en un $t_0< a-\alpha$. Pour $x$ dans $[a-\alpha,a+\alpha]$, le record reste donc $g(a)$ : $g$ est constante près de $a$, donc continue en $a$.</p>`, rappels: ["continuite-operations"] },
     { t: "Cas f(a) = g(a) : encadrer", b: R`<p>Soit $\varepsilon>0$. Par continuité de $f$, il existe $\alpha>0$ avec $f(a)-\varepsilon\leqslant f(x)\leqslant f(a)+\varepsilon$ sur $[a-\alpha,a+\alpha]$.</p><ul><li>$g(a-\alpha)\geqslant f(a-\alpha)\geqslant g(a)-\varepsilon$.</li><li>Sur $[0,a]$, $f\leqslant g(a)$, et sur $[a,a+\alpha]$, $f\leqslant g(a)+\varepsilon$. Donc $g(a+\alpha)\leqslant g(a)+\varepsilon$.</li></ul>` },
     { t: "Cas f(a) = g(a) : conclure", b: R`<p>$g$ est croissante, donc pour tout $x\in[a-\alpha,a+\alpha]$ :</p>$$g(a)-\varepsilon\leqslant g(a-\alpha)\leqslant g(x)\leqslant g(a+\alpha)\leqslant g(a)+\varepsilon.$$<p>C'est la définition de la continuité de $g$ en $a$.</p>` }
   ],
@@ -1284,7 +1284,7 @@ LEMME.exercises([
     { t: "f est bijective", b: R`<p>Soit $f$ une solution. La relation $f\circ f = \mathrm{Id}$ montre que <span data-k="bij">$f$ est une bijection</span>, de réciproque elle-même.</p>` },
     { t: "f est strictement monotone", b: R`<p>$f$ est continue et injective sur l'intervalle $[0,+\infty[$ : elle est strictement monotone.</p>`, rappels: ["injective-monotone"] },
     { t: "f est croissante", b: R`<p>Si $f$ était décroissante, on aurait $f(x)\leqslant f(0)$ pour tout $x$ : <span data-k="decr">elle ne serait pas surjective</span> sur $[0,+\infty[$. Donc $f$ est strictement croissante.</p>` },
-    { t: "f(x) = x", b: R`<p>Soit $x\geqslant0$. Si $f(x)<x$, en appliquant $f$ strictement croissante : $f\big(f(x)\big)<f(x)$, c'est-à-dire $x<f(x)$. Contradiction. De même, $f(x)>x$ donnerait $x>f(x)$. Donc $f(x) = x$.</p>`, rappels: ["absurde"] },
+    { t: "f(x) = x", b: R`<p>Soit $x\geqslant0$. Si $f(x)< x$, en appliquant $f$ strictement croissante : $f\big(f(x)\big)< f(x)$, c'est-à-dire $x< f(x)$. Contradiction. De même, $f(x)>x$ donnerait $x>f(x)$. Donc $f(x) = x$.</p>`, rappels: ["absurde"] },
     { t: "Synthèse", b: R`<p>L'identité convient évidemment. C'est la seule solution.</p>` }
   ],
   piege: R`Penser que $x\mapsto\frac1x$ ou $x\mapsto-x$ conviennent : ils vérifient bien $f\circ f = \mathrm{Id}$, mais pas sur $[0,+\infty[$ avec des valeurs dans $[0,+\infty[$.`,
@@ -1379,7 +1379,7 @@ LEMME.exercises([
     { t: "f est croissante et bijective", b: R`<p>Si $f$ était décroissante, $f\circ f$ serait croissante, donc $\mathrm{Id} = 2f-f\circ f$ serait décroissante : absurde. Si $f$ avait une limite finie $\ell$ en $+\infty$, alors $x = 2f(x)-f(f(x))\to2\ell-f(\ell)$, absurde. Donc $f\to+\infty$ en $+\infty$, de même $f\to-\infty$ en $-\infty$ : $f$ est une bijection croissante de $\mathbb R$.</p>`, rappels: ["bijection-continue", "absurde"] },
     { t: "La suite des itérés", b: R`<p>Soit $x$ réel et $u_n = f^n(x)$, défini pour $n\in\mathbb Z$ (les <span data-k="iter">itérés</span>, avec $f^{-1}$ pour les indices négatifs). <span data-k="rec">En appliquant $(*)$ en $f^n(x)$</span> :</p>$$u_{n+2} = 2u_{n+1}-u_n.$$` },
     { t: "Résoudre la récurrence", b: R`<p>L'équation caractéristique $r^2-2r+1 = 0$ a la racine double $1$ : $u_n = \lambda n+\mu$. Avec $u_0 = x$ et $u_1 = f(x)$ :</p>$$f^n(x) = n\big(f(x)-x\big)+x.$$<p>En particulier, $\dfrac{f^n(x)}n\to f(x)-x$ quand $n\to+\infty$.</p>`, rappels: ["rec-lineaire-2"] },
-    { t: "Comparer deux points", b: R`<p>Si $f\neq\mathrm{Id}$, il existe $x$ avec $f(x)\neq x$, par exemple $f(x)>x$. Pour $y$ réel, il existe $p\in\mathbb Z$ avec $p\big(f(x)-x\big)\leqslant y-x<(p+1)\big(f(x)-x\big)$, c'est-à-dire $f^p(x)\leqslant y<f^{p+1}(x)$. En appliquant $f^n$, qui est croissante :</p>$$f^{n+p}(x)\leqslant f^n(y)\leqslant f^{n+p+1}(x).$$` },
+    { t: "Comparer deux points", b: R`<p>Si $f\neq\mathrm{Id}$, il existe $x$ avec $f(x)\neq x$, par exemple $f(x)>x$. Pour $y$ réel, il existe $p\in\mathbb Z$ avec $p\big(f(x)-x\big)\leqslant y-x<(p+1)\big(f(x)-x\big)$, c'est-à-dire $f^p(x)\leqslant y< f^{p+1}(x)$. En appliquant $f^n$, qui est croissante :</p>$$f^{n+p}(x)\leqslant f^n(y)\leqslant f^{n+p+1}(x).$$` },
     { t: "Passer à la limite", b: R`<p>On divise par $n$ et on fait $n\to+\infty$ : les deux bornes tendent vers $f(x)-x$, et le milieu vers $f(y)-y$. Donc <span data-k="const">$f(y)-y = f(x)-x$</span> pour tout $y$.</p>`, rappels: ["encadrement"] },
     { t: "Conclusion", b: R`<p>Il existe une constante $C$ telle que $f(y) = y+C$ pour tout $y$ (cela inclut $f = \mathrm{Id}$, avec $C = 0$). Réciproquement : $f(f(x)) = x+2C$ et $2f(x)-x = x+2C$. Les solutions sont les $x\mapsto x+C$.</p>` }
   ],

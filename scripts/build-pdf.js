@@ -9,7 +9,7 @@ const { execFile, execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux"];
+const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));
@@ -72,7 +72,7 @@ function toTex(html) {
     if (t === "</p>") return "\n\n";
     if (/^<ul\b/.test(t)) return "\n\\begin{itemize}\n";
     if (t === "</ul>") return "\n\\end{itemize}\n";
-    if (/^<ol\b/.test(t)) return "\n\\begin{enumerate}\n";
+    if (/^<ol\b/.test(t)) return /lower-alpha/.test(t) ? "\n\\begin{enumerate}[label=(\\alph*)]\n" : "\n\\begin{enumerate}\n";
     if (t === "</ol>") return "\n\\end{enumerate}\n";
     if (/^<li\b/.test(t)) return "\n\\item ";
     if (/^<(b|strong)\b/.test(t)) return "\\textbf{";

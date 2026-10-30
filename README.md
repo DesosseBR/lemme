@@ -81,7 +81,7 @@ Les figures sont des SVG insérés dans le texte : `<figure class="fig"><svg vie
 
 ### Un exercice d'oral
 
-Dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).
+Les 58 exercices d'analyse CCINP sont dans `content/oraux-analyse.js` (identifiants `o-an-<numéro>`), avec des fonctions d'aide pour les graphes SVG (`window.__LA`). Ailleurs, dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).
 
 ### Indices, rappels appliqués, encadrés
 
