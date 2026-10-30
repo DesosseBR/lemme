@@ -13,7 +13,9 @@ LEMME.subject({
       { t: "Centrale-Supélec 2025 · Mathématiques 2 MP-MPI", n: "Matrices d'interaction, spectre, produit de Kronecker, matrice de transfert, méthode de Laplace", bank: "Centrale-Supélec", annee: 2025, epreuve: "Mathématiques 2", filiere: "MP, MPI", duree: "4 heures", titre: "Un modèle probabiliste de ferromagnétisme", nq: 44, pdf: "sujet-centrale-2025-mp-m2",
         intro: "Le sujet complet, tel qu'il a été distribué. Partie A : spectres de matrices d'interaction (Curie-Weiss, sinus, Ising en dimension 1 et 2, produit de Kronecker). Partie B : magnétisation des modèles d'Ising et de Curie-Weiss. Les corrigés de la partie A et de B-II contiennent un labo interactif qui montre comment chaque matrice est construite." },
       { t: "X-ENS 2025 · Mathématiques A MP-MPI", n: "Réduction de Jordan des nilpotents, polynômes de Laurent, version graduée, couples de matrices", bank: "X-ENS", annee: 2025, epreuve: "Mathématiques A", filiere: "MP, MPI", duree: "4 heures", titre: "Réduction de Jordan et couples de matrices", nq: 18, pdf: "sujet-xens-2025-mp-ma",
-        intro: "Le sujet complet, tel qu'il a été distribué. On démontre le théorème de Jordan pour les nilpotents à l'aide d'un opérateur ξ sur les polynômes de Laurent, puis une version « graduée », qui sert à classer les couples de matrices rectangulaires. Les corrigés des parties I, II, IV et V contiennent un labo interactif." }
+        intro: "Le sujet complet, tel qu'il a été distribué. On démontre le théorème de Jordan pour les nilpotents à l'aide d'un opérateur ξ sur les polynômes de Laurent, puis une version « graduée », qui sert à classer les couples de matrices rectangulaires. Les corrigés des parties I, II, IV et V contiennent un labo interactif." },
+      { t: "Mines-Ponts 2024 · Mathématiques 2 MP-MPI", n: "Matrices d'adjacence, polynôme caractéristique d'un graphe, graphes aléatoires, fonctions de seuil", bank: "Mines-Ponts", annee: 2024, epreuve: "Mathématiques 2", filiere: "MP, MPI", duree: "4 heures", titre: "Phénomènes de seuil dans les graphes", nq: 27, pdf: "sujet-mines-2024-mp-m2",
+        intro: "Le sujet complet, tel qu'il a été distribué. Partie I : matrices d'adjacence et polynôme caractéristique d'un graphe, avec tous les calculs de déterminant détaillés. Parties II et III : graphes aléatoires et fonctions de seuil, avec un labo qui simule le phénomène." }
     ]
   }
 });
@@ -1033,5 +1035,280 @@ LEMME.exercises([
   },
   piege: R`En 15, (iii) ⇒ (ii) n'est pas automatique : il faut d'abord montrer que $R$ est diagonale par blocs, grâce à $HR = RH$. En 17, ne pas oublier qu'on réordonne la base à l'intérieur de chaque bloc de Jordan.`,
   methode: R`Pour classer un couple $(A,B)$ : le coder par $M = \begin{pmatrix}0&B\\A&0\end{pmatrix}$ et $H = \operatorname{diag}(I,-I)$, qui vérifient $HMH^{-1} = -M$, puis réduire simultanément avec la version graduée du théorème de Jordan.`
+}
+]);
+LEMME.rappels({
+  "g-leibniz": { t: "Déterminant par les permutations", b: R`<div class="sbox">$$\det(B) = \sum_{\sigma\in\mathcal S_n}\varepsilon(\sigma)\prod_{i=1}^nb_{\sigma(i),i}.$$</div><p>Une transposition a pour signature $-1$. Une permutation qui n'est pas l'identité déplace au moins deux éléments : elle a au plus $n-2$ points fixes.</p>` },
+  "g-lin-ligne": { t: "Linéarité par rapport à une ligne", b: R`<p>Si la ligne $1$ d'une matrice s'écrit $L = L'+L''$, alors $\det(\dots) = \det(\text{avec }L')+\det(\text{avec }L'')$, les autres lignes restant identiques.</p>` },
+  "g-dev": { t: "Développement suivant une ligne", b: R`<div class="sbox">$$\det B = \sum_{j=1}^n(-1)^{i+j}b_{i,j}\,\Delta_{i,j},$$</div><p>où $\Delta_{i,j}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$. Si la ligne $i$ n'a qu'un coefficient non nul, il ne reste qu'un terme.</p>` },
+  "g-bloc-tri": { t: "Déterminant triangulaire par blocs", b: R`<div class="sbox">$$\det\begin{pmatrix}A&C\\0&D\end{pmatrix} = \det\begin{pmatrix}A&0\\C'&D\end{pmatrix} = \det A\cdot\det D\quad(A,D\ \text{carrées}).$$</div>` },
+  "g-indep": { t: "Indépendance", b: R`<p>Si $Y_1,\dots,Y_m$ sont indépendantes : $P\big(\bigcap_k(Y_k\in B_k)\big) = \prod_kP(Y_k\in B_k)$. Des fonctions de paquets disjoints de variables indépendantes sont indépendantes (lemme des coalitions).</p>` },
+  "g-binom": { t: "Loi binomiale", b: R`<p>Une somme de $N$ variables de Bernoulli indépendantes de paramètre $p$ suit la loi $\mathcal B(N,p)$ :</p><div class="sbox">$$P(Y = k) = \binom Nkp^k(1-p)^{N-k},\qquad E(Y) = Np,\qquad V(Y) = Np(1-p).$$</div>` },
+  "g-tcheb": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance, pour tout $\varepsilon>0$ :</p><div class="sbox">$$P\big(|X-E(X)|\geqslant\varepsilon\big)\leqslant\frac{V(X)}{\varepsilon^2}.$$</div>` },
+  "g-huygens": { t: "Formule de König-Huygens", b: R`<div class="sbox">$$V(X) = E(X^2)-E(X)^2.$$</div>` },
+  "g-indic": { t: "Indicatrices", b: R`<p>$\mathbf 1_A\mathbf 1_B = \mathbf 1_{A\cap B}$ et $E(\mathbf 1_A) = P(A)$. Une variable de Bernoulli est l'indicatrice de l'événement où elle vaut $1$.</p>` }
+});
+
+/* Dessin de graphes pour les énoncés et corrigés */
+window.__GRAPHE = (nodes, edges, w, h, cap, label, hl) => {
+  const { FIG } = window.__LA;
+  let s = "";
+  edges.forEach(([a, b]) => { const [x1, y1] = nodes[a], [x2, y2] = nodes[b]; const on = hl && hl.includes(a) && hl.includes(b); s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${on ? "vr" : "thin"}" style="stroke-dasharray:none;stroke-width:${on ? 2.4 : 1.5}"/>`; });
+  Object.entries(nodes).forEach(([k, [x, y]]) => { s += `<circle cx="${x}" cy="${y}" r="12" style="fill:var(--surface);stroke:var(--ink);stroke-width:1.5"/><text x="${x}" y="${y + 4.5}" text-anchor="middle" class="sm" style="font-weight:600">${k}</text>`; });
+  return FIG(w, h, s, cap, label);
+};
+(() => {
+const GR = window.__GRAPHE;
+const fig1 = GR({ 6: [150, 22], 5: [262, 42], 3: [96, 50], 1: [210, 66], 7: [30, 64], 4: [238, 104], 2: [160, 112], 9: [70, 132], 8: [222, 160] }, [[1, 2], [1, 5], [1, 6], [2, 3], [2, 9], [2, 8]], 300, 185, R`Figure 1 : un graphe à 9 sommets et 6 arêtes.`, "Graphe à 9 sommets");
+const cyc4 = GR({ 1: [40, 70], 2: [110, 25], 3: [110, 115], 4: [180, 70], 5: [250, 70] }, [[1, 2], [1, 3], [2, 4], [3, 4]], 290, 140, R`Le carré $1-2-4-3$ (plus le sommet isolé $5$) : rang $2$, mais pas une étoile.`, "Carré");
+LEMME.exercises([
+{
+  id: "mp24-m2-1", subj: "annales", year: "mp", chap: 3, part: "I (1–5)", kind: "probleme", qnav: true, side: true, level: 2, time: "35 min",
+  title: "Matrices d'adjacence",
+  enonce: R`<p>Un <b>graphe</b> $G = (S,A)$ : $S$ ensemble fini non vide de <b>sommets</b>, $A$ ensemble d'<b>arêtes</b> $\{s,s'\}$ avec $s\neq s'$. Un sommet qui n'appartient à aucune arête est <b>isolé</b>.</p>` + fig1 + R`<p>Une <b>étoile</b> de centre $s$ à $d$ branches : $S = \{s,s_1,\dots,s_d\}$ ($d+1$ sommets) et $A = \{\{s,s_1\},\dots,\{s,s_d\}\}$. $G' = (S',A')$ est une <b>copie</b> de $G$ s'il existe une bijection $\sigma : S'\to S$ telle que $\{s',t'\}\in A'\iff\{\sigma(s'),\sigma(t')\}\in A$.</p>
+<p>Une <span data-k="index">indexation</span> est une bijection $\sigma : [\![1,n]\!]\to S$ ($|S| = n$). La <span data-k="madj">matrice d'adjacence</span> $M_{G,\sigma}\in\mathcal M_n(\mathbb R)$ a pour coefficient $(i,j)$ : $1$ si $\{\sigma(i),\sigma(j)\}\in A$, $0$ sinon. Elle est symétrique, de diagonale nulle.</p>
+<p>Soit $\rho\in\mathcal S_n$ et $M = (m_{i,j})\in\mathcal M_n(\mathbb R)$.</p>
+<ol start="1"><li>Montrer que $M$ et $(m_{\rho(i),\rho(j)})_{1\leqslant i,j\leqslant n}$ sont semblables. En déduire que si $\sigma$ et $\sigma'$ sont deux indexations de $S$, $M_{G,\sigma}$ et $M_{G,\sigma'}$ sont semblables.</li>
+<li>Justifier qu'une matrice d'adjacence d'un graphe non vide est diagonalisable.</li>
+<li>Montrer qu'une matrice d'adjacence d'un graphe non vide n'est jamais de rang $1$.</li>
+<li>Montrer qu'une matrice d'adjacence d'un graphe dont les sommets non isolés forment une étoile est de rang $2$, et représenter un graphe dont la matrice d'adjacence est de rang $2$ et qui n'est pas de ce type.</li></ol>
+<p>On note $\chi_G$ le polynôme caractéristique commun des $M_{G,\sigma}$ ; celui du graphe vide vaut $1$.</p>
+<ol start="5"><li>Soit $G$ un graphe et $G'$ une copie de $G$. Justifier que $\chi_G = \chi_{G'}$.</li></ol>`,
+  decode: {
+    donnees: [R`$M_{G,\sigma}$ : symétrique, à coefficients dans $\{0,1\}$, de diagonale nulle.`, R`Trace nulle : $\operatorname{tr}M_{G,\sigma} = 0$.`],
+    but: R`Les propriétés de base : la matrice ne dépend de l'indexation qu'à similitude près, elle est diagonalisable, et son rang n'est jamais $1$.`,
+    cles: {
+      index: R`Numéroter les sommets de $1$ à $n$. Changer de numérotation, c'est changer l'ordre des lignes et des colonnes de la même façon.`,
+      madj: R`Pour la Figure 1 avec $\sigma = \mathrm{id}$ : la ligne $1$ a des $1$ aux colonnes $2,5,6$ (les voisins de $1$).`,
+      base: R`Dans la base $(e_{\rho(1)},\dots,e_{\rho(n)})$, le coefficient $(i,j)$ est la coordonnée sur $e_{\rho(i)}$ de l'image de $e_{\rho(j)}$, c'est-à-dire $m_{\rho(i),\rho(j)}$.`,
+      rho: R`$\rho = \sigma'^{-1}\circ\sigma$ : il traduit l'indexation $\sigma$ dans l'indexation $\sigma'$, car $\sigma'(\rho(i)) = \sigma(i)$.`,
+      trace: R`Si $M$ est diagonalisable de rang $1$, ses valeurs propres sont $0$ ($n-1$ fois) et un $\lambda\neq0$, et $\operatorname{tr}M = \lambda$.`,
+      cols: R`Le rang est la dimension de l'espace engendré par les colonnes.`
+    }
+  },
+  steps: [
+    { q: 1, t: "La même application dans une autre base", h: R`<p>$(m_{\rho(i),\rho(j)})$ est la matrice de l'endomorphisme canonique de $M$ <span data-k="base">dans la base permutée $(e_{\rho(1)},\dots,e_{\rho(n)})$</span>.</p>`, b: R`<p>Soit $f$ l'endomorphisme de $\mathbb R^n$ de matrice $M$ dans la base canonique : $f(e_j) = \sum_im_{i,j}e_i$. La famille $\mathcal B' = (e_{\rho(1)},\dots,e_{\rho(n)})$ est une base (on a permuté la base canonique). Et</p>$$f(e_{\rho(j)}) = \sum_km_{k,\rho(j)}e_k = \sum_im_{\rho(i),\rho(j)}e_{\rho(i)}\quad(k = \rho(i)).$$<p><span data-k="base">Donc $\operatorname{Mat}_{\mathcal B'}(f) = (m_{\rho(i),\rho(j)})_{i,j}$.</span> Deux matrices du même endomorphisme dans deux bases sont semblables.</p>`, rappels: ["x-passage"] },
+    { q: 1, t: "Deux indexations", h: R`<p>Poser <span data-k="rho">$\rho = \sigma'^{-1}\circ\sigma$</span> et comparer les coefficients.</p>`, b: R`<p>Soit <span data-k="rho">$\rho = \sigma'^{-1}\circ\sigma\in\mathcal S_n$, de sorte que $\sigma = \sigma'\circ\rho$</span>. Notons $m'_{i,j}$ les coefficients de $M_{G,\sigma'}$. Pour tous $i,j$ :</p>$$(M_{G,\sigma})_{i,j} = 1\iff\{\sigma(i),\sigma(j)\}\in A\iff\{\sigma'(\rho(i)),\sigma'(\rho(j))\}\in A\iff m'_{\rho(i),\rho(j)} = 1.$$<p>Donc $M_{G,\sigma} = (m'_{\rho(i),\rho(j)})$, semblable à $M_{G,\sigma'}$ par ce qui précède.</p>` },
+    { q: 2, t: "Théorème spectral", h: R`<p>Symétrique réelle.</p>`, b: R`<p>$\{\sigma(i),\sigma(j)\} = \{\sigma(j),\sigma(i)\}$, donc $(M_{G,\sigma})_{i,j} = (M_{G,\sigma})_{j,i}$ : la matrice est symétrique réelle. Par le théorème spectral, elle est diagonalisable (dans une base orthonormée).</p>`, rappels: ["m2-spectral"] },
+    { q: 3, t: "Les valeurs propres d'une matrice de rang 1", h: R`<p>Diagonalisable de rang $1$ : une seule valeur propre non nulle, <span data-k="trace">égale à la trace</span>. Or la trace est nulle.</p>`, b: R`<p>Supposons $M = M_{G,\sigma}$ de rang $1$. Elle est diagonalisable (Q2) : $M = PDP^{-1}$ avec $D$ diagonale de rang $1$, donc $D$ a exactement un coefficient non nul $\lambda$, les autres valant $0$.</p><p><span data-k="trace">Alors $\operatorname{tr}M = \operatorname{tr}D = \lambda\neq0$.</span> Mais la diagonale de $M$ est nulle (pas de boucle), donc $\operatorname{tr}M = 0$ : contradiction.</p><div class="sbox"><p style="margin:0;text-align:center">Une matrice d'adjacence n'est jamais de rang $1$.</p></div>` },
+    { q: 4, t: "Écrire la matrice d'une étoile", h: R`<p>Indexer le centre en $1$, les $d$ voisins en $2,\dots,d+1$, les sommets isolés à la fin. Le rang ne change pas (Q1).</p>`, b: R`<p>Par Q1, le rang ne dépend pas de l'indexation (rang invariant par similitude). On numérote le centre $1$, les $d$ branches $2,\dots,d+1$, les sommets isolés $d+2,\dots,n$. Alors</p>$$M = \begin{pmatrix}0&1&\cdots&1&0&\cdots\\1&0&\cdots&0&0&\cdots\\\vdots&\vdots&&\vdots&\vdots&\\1&0&\cdots&0&0&\cdots\\0&0&\cdots&0&0&\cdots\\\vdots&&&&&\end{pmatrix}.$$` },
+    { q: 4, t: "Compter les colonnes indépendantes", h: R`<p><span data-k="cols">Le rang est la dimension de l'espace engendré par les colonnes.</span> Il n'y a que deux colonnes non nulles différentes.</p>`, b: R`<p>Colonne $1$ : $c = e_2+\dots+e_{d+1}$. Colonnes $2$ à $d+1$ : toutes égales à $e_1$. Les autres colonnes sont nulles. <span data-k="cols">Donc $\operatorname{Im}M = \operatorname{Vect}(c,e_1)$</span>, et $c$, $e_1$ sont libres (supports disjoints, tous deux non nuls car $d\geqslant1$).</p><div class="sbox">$$\operatorname{rg}M = 2.$$</div>` },
+    { q: 4, t: "Un autre exemple de rang 2", h: R`<p>Chercher un graphe où deux sommets ont exactement les mêmes voisins : leurs colonnes sont égales.</p>`, b: R`<p>Le carré $1-2-4-3-1$ (avec un sommet isolé $5$) :</p>` + cyc4 + R`$$M = \begin{pmatrix}0&1&1&0&0\\1&0&0&1&0\\1&0&0&1&0\\0&1&1&0&0\\0&0&0&0&0\end{pmatrix}.$$<p>Les colonnes $1$ et $4$ valent $e_2+e_3$, les colonnes $2$ et $3$ valent $e_1+e_4$, la colonne $5$ est nulle : $\operatorname{rg}M = 2$. Ce n'est pas une étoile : une étoile à $4$ sommets non isolés aurait un centre relié aux $3$ autres, alors qu'ici chaque sommet n'a que $2$ voisins.</p>` },
+    { q: 5, t: "Une copie a la même matrice", h: R`<p>Transporter une indexation de $G'$ en une indexation de $G$ grâce à la bijection de la copie.</p>`, b: R`<p>Si $G$ est vide, $G'$ aussi, et $\chi_G = \chi_{G'} = 1$. Sinon, soit $\varphi : S'\to S$ la bijection de la copie et $\sigma'$ une indexation de $S'$. Alors $\sigma = \varphi\circ\sigma'$ est une indexation de $S$, et</p>$$(M_{G',\sigma'})_{i,j} = 1\iff\{\sigma'(i),\sigma'(j)\}\in A'\iff\{\varphi(\sigma'(i)),\varphi(\sigma'(j))\}\in A\iff(M_{G,\sigma})_{i,j} = 1.$$<p>Les deux matrices sont <b>égales</b>, donc :</p><div class="sbox">$$\chi_G = \chi_{G'}.$$</div>` }
+  ],
+  ctx: {
+    "x-passage": R`<p>Passage de la base canonique à la base permutée $(e_{\rho(i)})$.</p>`,
+    "m2-spectral": R`<p>$S = M_{G,\sigma}$.</p>`
+  },
+  piege: R`En Q3, raisonner sur les coefficients est long. L'argument « diagonalisable + trace nulle » règle la question en deux lignes.`,
+  methode: R`Changer l'indexation des sommets revient à changer de base par une permutation : rang, polynôme caractéristique et valeurs propres ne dépendent que du graphe.`
+}
+]);
+})();
+(() => {
+const GR = window.__GRAPHE;
+const fig3 = GR({ 4: [205, 22], 3: [95, 60], 5: [30, 75], 1: [225, 80], 2: [150, 120], 7: [55, 150], 6: [230, 170] }, [[4, 1], [5, 3], [5, 7], [3, 7], [3, 2], [2, 1], [1, 6], [2, 6]], 270, 195, R`Figure 3 (a) : un graphe $G$. Le graphe $G\setminus2$ s'obtient en retirant le sommet $2$ et les arêtes $\{2,3\}$, $\{1,2\}$, $\{2,6\}$.`, "Graphe G");
+const dbl = GR({ a: [100, 80], b: [200, 80], 1: [40, 30], 2: [30, 90], 3: [60, 140], 4: [260, 30], 5: [275, 120] }, [["a", 1], ["a", 2], ["a", 3], ["b", 4], ["b", 5], ["a", "b"]], 310, 170, R`Une double étoile avec $d_1 = 3$ et $d_2 = 2$ : centres $a$ et $b$ reliés par une arête.`, "Double étoile", ["a", "b"]);
+LEMME.exercises([
+{
+  id: "mp24-m2-2", subj: "annales", year: "mp", chap: 3, part: "I (6–9)", kind: "probleme", qnav: true, side: true, level: 4, time: "1 h",
+  title: "Polynôme caractéristique d'un graphe",
+  enonce: R`<p>$\chi_G$ désigne le polynôme caractéristique d'une matrice d'adjacence de $G$ : $\chi_G(X) = \det(XI_n-M)$.</p>
+<ol start="6"><li>Soit $G = (S,A)$ avec $|S| = n\geqslant2$. On note $\chi_G(X) = X^n+\sum_{k=0}^{n-1}a_kX^k$. Donner la valeur de $a_{n-1}$ et exprimer $a_{n-2}$ à l'aide de $|A|$.</li>
+<li>En déduire le polynôme caractéristique d'un graphe à $n$ sommets dont les sommets non isolés forment une étoile à $d$ branches ($1\leqslant d\leqslant n-1$). Déterminer alors les valeurs et vecteurs propres d'une matrice d'adjacence de ce graphe.</li></ol>
+<p>Pour $s\in S$, <span data-k="Gs">$G\setminus s$</span> est le graphe de sommets $S\setminus\{s\}$ dont les arêtes sont celles de $A$ qui ne contiennent pas $s$.</p>` + fig3 + R`
+<p>Soient $G_1 = (S_1,A_1)$ et $G_2 = (S_2,A_2)$ non vides avec $S_1\cap S_2 = \varnothing$, $s_1\in S_1$, $s_2\in S_2$, et <span data-k="recolle">$G = (S_1\cup S_2,\ A_1\cup A_2\cup\{\{s_1,s_2\}\})$</span>.</p>
+<ol start="8"><li>Montrer que $\chi_G = \chi_{G_1}\chi_{G_2}-\chi_{G_1\setminus s_1}\chi_{G_2\setminus s_2}$.</li>
+<li>Déterminer le polynôme caractéristique de la double étoile à $d_1+d_2+2$ sommets (deux étoiles disjointes à $d_1$ et $d_2$ branches dont on relie les centres par une arête). Quel est le rang de sa matrice d'adjacence ?</li></ol>`,
+  decode: {
+    donnees: [R`$M$ symétrique, coefficients $0$ ou $1$, diagonale nulle ; $m_{k,\ell} = 1\iff\{k,\ell\}\in A$.`, R`Q4 : rang $2$ pour une étoile. Q2 : diagonalisable.`],
+    but: R`Calculer des polynômes caractéristiques de graphes, en détaillant chaque étape du calcul de déterminant.`,
+    cles: {
+      Gs: R`On retire le sommet $s$ et toutes les arêtes qui le touchent. Sa matrice : celle de $G$ sans la ligne et la colonne de $s$.`,
+      recolle: R`On met $G_1$ et $G_2$ côte à côte et on ajoute une seule arête, entre $s_1$ et $s_2$.`,
+      coef: R`Dans $XI_n-M$ : la diagonale vaut $X$, et hors diagonale le coefficient $(k,\ell)$ vaut $-m_{k,\ell}$.`,
+      fixes: R`Le terme de $\sigma$ contient un facteur $X$ par point fixe, et des constantes ailleurs : son degré est le nombre de points fixes.`,
+      transpo: R`$\tau = (k\ \ell)$ : $\varepsilon(\tau) = -1$, et le produit vaut $X^{n-2}\times(-m_{\ell,k})\times(-m_{k,\ell}) = m_{k,\ell}^2X^{n-2} = m_{k,\ell}X^{n-2}$.`,
+      mult: R`$M$ diagonalisable : la multiplicité de $0$ dans $\chi_M$ est $\dim\ker M = n-\operatorname{rg}M$.`,
+      ordre: R`On numérote $s_1$ en premier dans $S_1$, puis $s_2$ en premier dans $S_2$ (indice $n_1+1$) : l'arête ajoutée est le coefficient $(1,n_1+1)$.`,
+      lin: R`Ligne $1$ de $XI-M$ $=$ (ligne $1$ de $XI_{n_1}-M_1$, puis des $0$) $+$ ($0$, …, $0$, $-1$ en colonne $n_1+1$, puis des $0$).`
+    }
+  },
+  steps: [
+    { q: 6, t: "Écrire le déterminant avec les permutations", h: R`<p>Formule de Leibniz pour $\det(XI_n-M)$ : <span data-k="coef">diagonale $X$, hors diagonale $-m_{k,\ell}$</span>.</p>`, b: R`<p>Soit $M$ une matrice d'adjacence de $G$ et $B = XI_n-M$ : <span data-k="coef">$b_{i,i} = X$ (car $m_{i,i} = 0$) et $b_{k,\ell} = -m_{k,\ell}$ pour $k\neq\ell$</span>. Par la formule de Leibniz :</p>$$\chi_G(X) = \sum_{\sigma\in\mathcal S_n}\varepsilon(\sigma)\prod_{i=1}^nb_{\sigma(i),i}.$$<p>Dans le produit, chaque point fixe $i$ ($\sigma(i) = i$) donne un facteur $X$, chaque autre indice donne une constante $-m_{\sigma(i),i}$. <span data-k="fixes">Le terme de $\sigma$ est donc de degré au plus le nombre de points fixes de $\sigma$.</span></p>`, rappels: ["g-leibniz"] },
+    { q: 6, t: "Trier les permutations selon leurs points fixes", h: R`<p>$n$ points fixes : l'identité. $n-1$ : impossible. $n-2$ : les transpositions. Les autres : degré $\leqslant n-3$.</p>`, b: R`<ul><li><b>$n$ points fixes</b> : $\sigma = \mathrm{id}$, $\varepsilon = 1$, terme $X^n$.</li><li><b>Exactement $n-1$ points fixes</b> : impossible. Si $\sigma$ fixe tous les éléments sauf un, $j$, alors $\sigma(j)$ ne peut être aucun des autres (déjà images d'eux-mêmes), donc $\sigma(j) = j$.</li><li><b>Exactement $n-2$ points fixes</b> : $\sigma$ échange deux éléments $k<\ell$, c'est la transposition $(k\ \ell)$.</li><li><b>Au plus $n-3$ points fixes</b> : terme de degré $\leqslant n-3$.</li></ul><p>Donc $\chi_G(X) = X^n+\sum_{k< \ell}T_{k,\ell}+R(X)$ avec $\deg R\leqslant n-3$, où $T_{k,\ell}$ est le terme de la transposition $(k\ \ell)$.</p>` },
+    { q: 6, t: "Le terme d'une transposition", h: R`<p><span data-k="transpo">Signature $-1$, $n-2$ facteurs $X$, et les deux facteurs $-m_{\ell,k}$, $-m_{k,\ell}$.</span></p>`, b: R`<p>Pour $\tau = (k\ \ell)$ : $\varepsilon(\tau) = -1$. Les indices $i\notin\{k,\ell\}$ sont fixes et donnent $X^{n-2}$. Pour $i = k$ : $b_{\tau(k),k} = b_{\ell,k} = -m_{\ell,k}$ ; pour $i = \ell$ : $b_{k,\ell} = -m_{k,\ell}$. Comme $m_{\ell,k} = m_{k,\ell}\in\{0,1\}$ :</p>$$T_{k,\ell} = (-1)\cdot X^{n-2}\cdot(-m_{k,\ell})(-m_{k,\ell}) = -m_{k,\ell}^2X^{n-2} = -m_{k,\ell}X^{n-2}.$$<p>Donc $T_{k,\ell} = -X^{n-2}$ si $\{k,\ell\}$ est une arête, et $0$ sinon.</p>` },
+    { q: 6, t: "Lire les coefficients", h: R`<p>Aucun terme de degré $n-1$ ; en degré $n-2$, on compte les arêtes.</p>`, b: R`<p>$\chi_G = X^n-\Big(\sum_{k< \ell}m_{k,\ell}\Big)X^{n-2}+R(X)$, et $\sum_{k< \ell}m_{k,\ell}$ compte chaque arête une fois. Aucun terme n'est de degré $n-1$ :</p><div class="sbox">$$a_{n-1} = 0,\qquad a_{n-2} = -|A|.$$</div><p>Vérification : $a_{n-1} = -\operatorname{tr}M = 0$. Exemple : un seul segment ($n = 2$) donne $\chi = \det\begin{pmatrix}X&-1\\-1&X\end{pmatrix} = X^2-1$, et $a_0 = -1 = -|A|$.</p>` },
+    { q: 7, t: "0 est racine d'ordre n − 2", h: R`<p>Rang $2$ (Q4) et diagonalisable (Q2) : <span data-k="mult">la multiplicité de $0$ est $\dim\ker M = n-2$</span>.</p>`, b: R`<p>Par Q4, $\operatorname{rg}M = 2$, donc $\dim\ker M = n-2$. $M$ est diagonalisable (Q2), donc <span data-k="mult">$0$ est racine de $\chi_G$ de multiplicité exactement $n-2$</span> : $\chi_G = X^{n-2}Q$ avec $Q$ unitaire de degré $2$ et $Q(0)\neq0$.</p>` },
+    { q: 7, t: "Identifier Q avec Q6", h: R`<p>Développer $X^{n-2}(X^2+\alpha X+\beta)$ et comparer avec $a_{n-1} = 0$, $a_{n-2} = -d$.</p>`, b: R`<p>Écrivons $Q = X^2+\alpha X+\beta$ : $\chi_G = X^n+\alpha X^{n-1}+\beta X^{n-2}$. Par Q6, $\alpha = a_{n-1} = 0$ et $\beta = a_{n-2} = -|A| = -d$ (l'étoile a $d$ arêtes).</p><div class="sbox">$$\chi_G = X^n-dX^{n-2} = X^{n-2}(X-\sqrt d)(X+\sqrt d).$$</div><p>Valeurs propres : $0$ (multiplicité $n-2$), $\sqrt d$ et $-\sqrt d$ (simples).</p>` },
+    { q: 7, t: "Vecteurs propres pour 0", h: R`<p>Avec l'indexation de Q4 : les colonnes $2,\dots,d+1$ sont égales, les dernières sont nulles.</p>`, b: R`<p>Indexation de Q4 (centre $1$, branches $2,\dots,d+1$, isolés $d+2,\dots,n$). Les colonnes $2,\dots,d+1$ valent toutes $e_1$, donc $M(e_j-e_2) = e_1-e_1 = 0$ pour $3\leqslant j\leqslant d+1$. Les colonnes $d+2,\dots,n$ sont nulles : $Me_j = 0$.</p><p>La famille $(e_3-e_2,\dots,e_{d+1}-e_2,\ e_{d+2},\dots,e_n)$ est libre et compte $(d-1)+(n-d-1) = n-2$ vecteurs : c'est une base de $\ker M$.</p>` },
+    { q: 7, t: "Vecteurs propres pour ±√d", h: R`<p>Chercher $\varepsilon = (x,1,\dots,1,0,\dots,0)$ : la première coordonnée de $M\varepsilon$ vaut $d$, les suivantes valent $x$.</p>`, b: R`<p>Pour $\varepsilon = (x,1,\dots,1,0,\dots,0)$ ($d$ fois $1$) : $(M\varepsilon)_1 = $ somme des coordonnées $2$ à $d+1$ $= d$ ; pour $2\leqslant i\leqslant d+1$, $(M\varepsilon)_i = x$ ; les autres coordonnées sont nulles. On veut $M\varepsilon = \lambda\varepsilon$ : $d = \lambda x$ et $x = \lambda$, donc $\lambda^2 = d$.</p><div class="sbox">$$E_{\sqrt d} = \operatorname{Vect}(\sqrt d,1,\dots,1,0,\dots,0),\qquad E_{-\sqrt d} = \operatorname{Vect}(-\sqrt d,1,\dots,1,0,\dots,0).$$</div><p>Vérification pour $\sqrt d$ : $M\varepsilon = (d,\sqrt d,\dots,\sqrt d,0,\dots) = \sqrt d\,(\sqrt d,1,\dots,1,0,\dots)$.</p>` },
+    { q: 8, t: "Écrire la matrice par blocs", h: R`<p><span data-k="ordre">Numéroter $s_1$ en premier, puis les autres sommets de $S_1$, puis $s_2$, puis le reste de $S_2$.</span></p>`, b: R`<p>Soient $n_1 = |S_1|$, $n_2 = |S_2|$, $n = n_1+n_2$. <span data-k="ordre">On numérote $s_1$ en $1$, $S_1$ en $1,\dots,n_1$, $s_2$ en $n_1+1$ et $S_2$ en $n_1+1,\dots,n$.</span> Avec $M_1$, $M_2$ les matrices de $G_1$, $G_2$ et $E\in\mathcal M_{n_1,n_2}$ ayant un seul $1$, en position $(1,1)$ :</p>$$M = \begin{pmatrix}M_1&E\\E^{\mathsf T}&M_2\end{pmatrix},\qquad XI_n-M = \begin{pmatrix}XI_{n_1}-M_1&-E\\-E^{\mathsf T}&XI_{n_2}-M_2\end{pmatrix}.$$<p>On écrit aussi $M_i = \begin{pmatrix}0&L_i\\L_i^{\mathsf T}&N_i\end{pmatrix}$, où $N_i$ est la matrice de $G_i\setminus s_i$ et $L_i$ une ligne.</p>` },
+    { q: 8, t: "Couper la première ligne en deux", h: R`<p><span data-k="lin">Linéarité du déterminant par rapport à la ligne $1$</span> : on sépare le $-1$ de l'arête ajoutée.</p>`, b: R`<p>Seule la ligne $1$ contient un coefficient non nul de $-E$ : le $-1$ en colonne $n_1+1$. <span data-k="lin">On écrit cette ligne comme une somme</span>, d'où $\chi_G = D_1+\Delta$ avec</p>$$D_1 = \det\begin{pmatrix}XI_{n_1}-M_1&0\\-E^{\mathsf T}&XI_{n_2}-M_2\end{pmatrix},\qquad\Delta = \det\big(\text{même matrice, ligne }1 = (0,\dots,0,-1,0,\dots,0)\big).$$<p>$D_1$ est triangulaire par blocs : $D_1 = \det(XI_{n_1}-M_1)\det(XI_{n_2}-M_2) = \chi_{G_1}\chi_{G_2}$.</p>`, rappels: ["g-lin-ligne", "g-bloc-tri"] },
+    { q: 8, t: "Développer Δ suivant la première ligne", h: R`<p>Un seul coefficient non nul, $-1$ en position $(1,n_1+1)$ : un seul terme.</p>`, b: R`<p>Développement suivant la ligne $1$ :</p>$$\Delta = (-1)^{1+(n_1+1)}\cdot(-1)\cdot\det C = (-1)^{n_1+1}\det C,$$<p>où $C$ est obtenue en supprimant la ligne $1$ et la colonne $n_1+1$. En rangeant les lignes (sommets de $S_1\setminus s_1$, puis $s_2$, puis $S_2\setminus s_2$) et les colonnes ($s_1$, puis $S_1\setminus s_1$, puis $S_2\setminus s_2$) :</p>$$C = \begin{pmatrix}-L_1^{\mathsf T}&XI-N_1&0\\-1&0&-L_2\\0&0&XI-N_2\end{pmatrix}.$$<p>La ligne de $s_2$ contient le $-1$ de $-E^{\mathsf T}$ (colonne $s_1$) et $-L_2$.</p>`, rappels: ["g-dev"] },
+    { q: 8, t: "Calculer det C", h: R`<p>$C$ est triangulaire par blocs (le bloc en bas à gauche est nul). Puis développer le premier bloc suivant sa dernière ligne.</p>`, b: R`<p>Le bloc formé des $n_1$ premières lignes et colonnes est $T = \begin{pmatrix}-L_1^{\mathsf T}&XI-N_1\\-1&0\end{pmatrix}$, et sous lui il n'y a que des zéros : $\det C = \det T\cdot\det(XI-N_2) = \det T\cdot\chi_{G_2\setminus s_2}$.</p><p>La dernière ligne de $T$ (ligne $n_1$) n'a que le $-1$ en colonne $1$ :</p>$$\det T = (-1)^{n_1+1}\cdot(-1)\cdot\det(XI-N_1) = (-1)^{n_1}\chi_{G_1\setminus s_1}.$$`, rappels: ["g-bloc-tri", "g-dev"] },
+    { q: 8, t: "Rassembler les signes", h: R`<p>$(-1)^{n_1+1}\times(-1)^{n_1} = (-1)^{2n_1+1} = -1$.</p>`, b: R`$$\Delta = (-1)^{n_1+1}\cdot(-1)^{n_1}\chi_{G_1\setminus s_1}\chi_{G_2\setminus s_2} = -\chi_{G_1\setminus s_1}\chi_{G_2\setminus s_2}.$$<div class="sbox">$$\chi_G = \chi_{G_1}\chi_{G_2}-\chi_{G_1\setminus s_1}\chi_{G_2\setminus s_2}.$$</div><p>(Si $n_1 = 1$, $G_1\setminus s_1$ est le graphe vide, de polynôme $1$, et le calcul reste valable.)</p><p>Vérification sur deux sommets reliés ($G_1$, $G_2$ réduits à un sommet) : $X\cdot X-1\cdot1 = X^2-1$, comme en Q6.</p>` },
+    { q: 9, t: "Les quatre polynômes nécessaires", h: R`<p>Q7 pour chaque étoile (qui a $d_i+1$ sommets), et $G_i\setminus s_i$ : $d_i$ sommets sans arête.</p>`, b: R`<p>Soit $G_i$ l'étoile de centre $s_i$ à $d_i$ branches : $d_i+1$ sommets, donc par Q7 (avec $n = d_i+1$, $d = d_i$) : $\chi_{G_i} = X^{d_i+1}-d_iX^{d_i-1}$.</p><p>$G_i\setminus s_i$ : les $d_i$ feuilles, sans aucune arête. Sa matrice est nulle : $\chi_{G_i\setminus s_i} = \det(XI_{d_i}) = X^{d_i}$.</p>` + dbl },
+    { q: 9, t: "Développer le produit", h: R`<p>Q8, puis développer terme à terme, sans rien sauter.</p>`, b: R`<p>Notons $D = d_1+d_2$. Par Q8 :</p>$$\chi_G = (X^{d_1+1}-d_1X^{d_1-1})(X^{d_2+1}-d_2X^{d_2-1})-X^{d_1}X^{d_2}.$$<p>Les quatre produits : $X^{d_1+1}X^{d_2+1} = X^{D+2}$ ; $X^{d_1+1}\cdot(-d_2X^{d_2-1}) = -d_2X^{D}$ ; $(-d_1X^{d_1-1})X^{d_2+1} = -d_1X^{D}$ ; $(-d_1X^{d_1-1})(-d_2X^{d_2-1}) = d_1d_2X^{D-2}$. Et $-X^{d_1}X^{d_2} = -X^D$. En regroupant :</p><div class="sbox">$$\chi_G = X^{D+2}-(d_1+d_2+1)X^{D}+d_1d_2X^{D-2},\qquad D = d_1+d_2.$$</div><p>Vérification avec Q6 : $a_{n-2} = -(d_1+d_2+1)$, et la double étoile a bien $d_1+d_2+1$ arêtes.</p>` },
+    { q: 9, t: "Le rang", h: R`<p>Factoriser par $X^{D-2}$ : le facteur restant ne s'annule pas en $0$. Diagonalisable : multiplicité de $0$ $= \dim\ker M$.</p>`, b: R`<p>$\chi_G = X^{D-2}\big(X^4-(d_1+d_2+1)X^2+d_1d_2\big)$, et le second facteur vaut $d_1d_2\neq0$ en $0$ (car $d_1,d_2\geqslant1$) : $0$ est racine de multiplicité exactement $D-2$. $M$ est diagonalisable (Q2), donc $\dim\ker M = D-2$, et par le théorème du rang ($D+2$ sommets) :</p><div class="sbox">$$\operatorname{rg}M = (D+2)-(D-2) = 4.$$</div>`, rappels: ["x-rang"] }
+  ],
+  ctx: {
+    "g-leibniz": R`<p>$B = XI_n-M$.</p>`,
+    "g-lin-ligne": R`<p>Ligne $1$ de $XI_n-M$, coupée en deux.</p>`,
+    "g-bloc-tri": R`<p>$D_1$, puis $C$, sont triangulaires par blocs.</p>`,
+    "g-dev": R`<p>Ligne $1$ de $\Delta$, puis dernière ligne de $T$ : un seul coefficient non nul à chaque fois.</p>`,
+    "x-rang": R`<p>Matrice de taille $D+2$, noyau de dimension $D-2$.</p>`
+  },
+  piege: R`En Q8, se tromper dans les signes du développement : $(-1)^{i+j}$ dépend de la position <b>dans la matrice dont on développe</b>. En Q7, oublier de justifier que $0$ est racine d'ordre <b>exactement</b> $n-2$ (diagonalisabilité).`,
+  methode: R`Pour un polynôme caractéristique de graphe : Leibniz pour les premiers coefficients (degré = nombre de points fixes), linéarité par rapport à une ligne puis développement pour recoller deux graphes.`
+}
+]);
+})();
+LEMME.exercises([
+{
+  id: "mp24-m2-3", subj: "annales", year: "mp", chap: 3, part: "I–II (10–16)", kind: "probleme", qnav: true, side: true, level: 3, time: "45 min",
+  title: "Graphes aléatoires et une première fonction de seuil",
+  enonce: R`<p>On suppose $n\geqslant2$ et on note <span data-k="N">$N = \binom n2 = \frac{n(n-1)}2$</span>, $\Omega_n$ l'ensemble des graphes de sommets $S = [\![1,n]\!]$, $p_n\in\,]0,1[$ et $q_n = 1-p_n$. Pour $i\neq j$, $X_{\{i,j\}}(G) = 1$ si $\{i,j\}$ est une arête de $G$, $0$ sinon. Pour $G = (S,A)$ :</p>$$\{G\} = \bigcap_{\{i,j\}\in A}(X_{\{i,j\}} = 1)\cap\bigcap_{\{i,j\}\notin A}(X_{\{i,j\}} = 0).\qquad(1)$$<p>On munit $\Omega_n$ d'une probabilité $P$ telle que les $X_{\{i,j\}}$ soient des <span data-k="bern">variables de Bernoulli indépendantes de paramètre $p_n$</span> : chaque arête est présente avec probabilité $p_n$, indépendamment des autres.</p>
+<ol start="10"><li>Soit $G = (S,A)\in\Omega_n$. Déterminer $P(\{G\})$ en fonction de $p_n$, $q_n$, $N$ et $a = \operatorname{card}(A)$. Retrouver $P(\Omega_n) = 1$.</li></ol>
+<p>Une <span data-k="seuil">fonction de seuil</span> pour une propriété $\mathcal P_n$ est une suite $(t_k)_{k\geqslant2}$ de réels $>0$ telle que : si $p_n = o(t_n)$, la probabilité que $\mathcal P_n$ soit réalisée tend vers $0$ ; si $t_n = o(p_n)$, elle tend vers $1$.</p>
+<h4>Partie II · Section A – Deux inégalités</h4>
+<p>Soit $X$ une variable aléatoire à valeurs dans $\mathbb N$ admettant une espérance et une variance.</p>
+<ol start="11"><li>Montrer que $P(X>0)\leqslant E(X)$.</li>
+<li>Montrer que si $E(X)\neq0$, alors $P(X = 0)\leqslant\dfrac{V(X)}{E(X)^2}$. Indication : $(X = 0)\subset\big(|X-E(X)|\geqslant E(X)\big)$.</li></ol>
+<h4>Section B – Une fonction de seuil</h4>
+<ol start="13"><li>Quelle est la loi de la variable $A_n$ égale au nombre d'arêtes d'un graphe de $\Omega_n$ ?</li>
+<li>Montrer que si $p_n = o\big(\frac1{n^2}\big)$, alors $\lim P(A_n>0) = 0$.</li>
+<li>Montrer que si $\frac1{n^2} = o(p_n)$, alors $\lim P(A_n>0) = 1$.</li>
+<li>En déduire une propriété $\mathcal P_n$ et sa fonction de seuil associée.</li></ol>`,
+  decode: {
+    donnees: [R`$N$ paires de sommets, chacune est une arête avec probabilité $p_n$, indépendamment.`, R`$X$ à valeurs dans $\mathbb N$ : $X>0\iff X\geqslant1$.`],
+    but: R`Modéliser un graphe aléatoire, puis montrer qu'avoir au moins une arête bascule de « presque jamais » à « presque toujours » autour de $p_n\approx\frac1{n^2}$.`,
+    cles: {
+      N: R`Pour $n = 4$ : $N = 6$ paires possibles $\{1,2\},\{1,3\},\{1,4\},\{2,3\},\{2,4\},\{3,4\}$.`,
+      bern: R`On tire à pile ou face (pièce truquée, probabilité $p_n$) pour chaque paire, indépendamment.`,
+      seuil: R`Le point de bascule : bien en dessous de $t_n$, la propriété n'arrive presque jamais ; bien au-dessus, presque toujours.`,
+      prod: R`Par (1) et l'indépendance : un facteur $p_n$ par arête présente, un facteur $q_n$ par paire absente.`,
+      compte: R`Il y a $\binom Na$ graphes ayant exactement $a$ arêtes : on choisit $a$ paires parmi les $N$.`,
+      kP: R`Pour $k\geqslant1$ : $P(X = k)\leqslant kP(X = k)$.`,
+      inclu: R`Si $X = 0$, alors $|X-E(X)| = |0-E(X)| = E(X)$.`,
+      equiv: R`$N = \frac{n(n-1)}2\leqslant\frac{n^2}2$, et $N\geqslant\frac{n^2}4$ pour $n\geqslant2$ (car $n-1\geqslant\frac n2$).`
+    }
+  },
+  steps: [
+    { q: 10, t: "La probabilité d'un graphe donné", h: R`<p>Utiliser (1) et <span data-k="prod">l'indépendance</span>.</p>`, b: R`<p>Par (1) et l'indépendance des $X_{\{i,j\}}$ :</p>$$P(\{G\}) = \prod_{\{i,j\}\in A}P(X_{\{i,j\}} = 1)\times\prod_{\{i,j\}\notin A}P(X_{\{i,j\}} = 0) = p_n^{\,a}\,q_n^{\,N-a},$$<p>car il y a $a$ paires dans $A$ et $N-a$ paires hors de $A$.</p><div class="sbox">$$P(\{G\}) = p_n^{\,a}\,q_n^{\,N-a}.$$</div>`, rappels: ["g-indep"] },
+    { q: 10, t: "Retrouver P(Ω_n) = 1", h: R`<p>Regrouper les graphes selon leur nombre d'arêtes : <span data-k="compte">$\binom Na$ graphes ont $a$ arêtes</span>. Puis binôme.</p>`, b: R`<p>$\Omega_n$ est la réunion disjointe des $\{G\}$. On les regroupe selon $a\in[\![0,N]\!]$ : <span data-k="compte">il y a $\binom Na$ graphes à $a$ arêtes</span>, chacun de probabilité $p_n^aq_n^{N-a}$. Donc</p>$$P(\Omega_n) = \sum_{a=0}^N\binom Nap_n^{\,a}q_n^{\,N-a} = (p_n+q_n)^N = 1^N = 1.$$` },
+    { q: 11, t: "Majorer P(X > 0)", h: R`<p>$P(X>0) = \sum_{k\geqslant1}P(X = k)$ et <span data-k="kP">$1\leqslant k$</span>.</p>`, b: R`<p>$X$ est à valeurs entières, donc $(X>0) = \bigcup_{k\geqslant1}(X = k)$ (réunion disjointe) :</p>$$P(X>0) = \sum_{k=1}^{+\infty}P(X = k)\leqslant\sum_{k=1}^{+\infty}kP(X = k) = \sum_{k=0}^{+\infty}kP(X = k) = E(X).$$<p>(Le terme $k = 0$ est nul.) C'est l'inégalité de Markov avec $a = 1$.</p>` },
+    { q: 12, t: "Bienaymé-Tchebychev", h: R`<p><span data-k="inclu">Si $X = 0$, l'écart à la moyenne vaut exactement $E(X)$.</span></p>`, b: R`<p>$X\geqslant0$ et $E(X)\neq0$, donc $E(X)>0$. <span data-k="inclu">Si $X = 0$, alors $|X-E(X)| = E(X)$</span> : $(X = 0)\subset\big(|X-E(X)|\geqslant E(X)\big)$. Par Bienaymé-Tchebychev avec $\varepsilon = E(X)>0$ :</p><div class="sbox">$$P(X = 0)\leqslant P\big(|X-E(X)|\geqslant E(X)\big)\leqslant\frac{V(X)}{E(X)^2}.$$</div>`, rappels: ["g-tcheb"] },
+    { q: 13, t: "Une loi binomiale", h: R`<p>$A_n = \sum_{i< j}X_{\{i,j\}}$.</p>`, b: R`<p>On compte les arêtes : $A_n = \sum_{1\leqslant i< j\leqslant n}X_{\{i,j\}}$, somme de $N$ variables de Bernoulli indépendantes de paramètre $p_n$.</p><div class="sbox">$$A_n\sim\mathcal B(N,p_n),\qquad E(A_n) = Np_n,\qquad V(A_n) = Np_nq_n.$$</div>`, rappels: ["g-binom"] },
+    { q: 14, t: "Sous le seuil", h: R`<p>Q11 avec $X = A_n$, et <span data-k="equiv">$N\leqslant\frac{n^2}2$</span>.</p>`, b: R`<p>Par Q11 : $0\leqslant P(A_n>0)\leqslant E(A_n) = Np_n$. Et <span data-k="equiv">$N\leqslant\frac{n^2}2$</span>, donc $Np_n\leqslant\frac12n^2p_n$. Or $p_n = o\big(\frac1{n^2}\big)$ signifie $n^2p_n\to0$. Par encadrement :</p><div class="sbox">$$\lim_{n\to+\infty}P(A_n>0) = 0.$$</div>` },
+    { q: 15, t: "Au-dessus du seuil", h: R`<p>$P(A_n>0) = 1-P(A_n = 0)$ et Q12 : $\frac{V}{E^2} = \frac{Npq}{(Np)^2} = \frac q{Np}$.</p>`, b: R`<p>$E(A_n) = Np_n>0$, donc par Q12 :</p>$$0\leqslant P(A_n = 0)\leqslant\frac{Np_nq_n}{(Np_n)^2} = \frac{q_n}{Np_n}\leqslant\frac1{Np_n}.$$<p><span data-k="equiv">$N\geqslant\frac{n^2}4$</span>, donc $\frac1{Np_n}\leqslant\frac4{n^2p_n}$. L'hypothèse $\frac1{n^2} = o(p_n)$ signifie $n^2p_n\to+\infty$. Donc $P(A_n = 0)\to0$ et</p><div class="sbox">$$\lim_{n\to+\infty}P(A_n>0) = 1.$$</div>` },
+    { q: 16, t: "La propriété et son seuil", h: R`<p>$(A_n>0)$ : « le graphe a au moins une arête ».</p>`, b: R`<p>Q14 et Q15 disent exactement que :</p><div class="sbox"><p style="margin:0;text-align:center">$\mathcal P_n$ : « le graphe possède au moins une arête » admet la fonction de seuil $t_k = \dfrac1{k^2}$.</p></div><p>Ordre de grandeur : il y a environ $\frac{n^2}2$ paires. Si $p_n\ll\frac1{n^2}$, le nombre moyen d'arêtes tend vers $0$ ; si $p_n\gg\frac1{n^2}$, il tend vers l'infini et, grâce à Q12, il est très concentré.</p><button type="button" class="labo-btn" data-labo="seuil">Voir le seuil dans le labo ↓</button>` }
+  ],
+  ctx: {
+    "g-indep": R`<p>Les $N$ variables $X_{\{i,j\}}$ sont indépendantes.</p>`,
+    "g-tcheb": R`<p>$\varepsilon = E(X)>0$.</p>`,
+    "g-binom": R`<p>$N$ variables $X_{\{i,j\}}$, de paramètre $p_n$.</p>`
+  },
+  viz: { type: "lab", mode: "seuil", title: "Labo : graphes aléatoires et phénomène de seuil" },
+  piege: R`En Q15, il faut une minoration de $N$ ($N\geqslant\frac{n^2}4$), pas seulement $N\sim\frac{n^2}2$, ou bien raisonner avec l'équivalent proprement. En Q12, ne pas oublier que $E(X)>0$ est nécessaire pour appliquer Tchebychev.`,
+  methode: R`Méthode du premier et du second moment : $P(X>0)\leqslant E(X)$ pour montrer que $X$ est nul, et $P(X = 0)\leqslant\frac{V(X)}{E(X)^2}$ pour montrer qu'il ne l'est pas.`
+}
+]);
+(() => {
+const PRE3 = R`<p>Pour un graphe $G$, $s_G$ et $a_G$ sont ses nombres de sommets et d'arêtes. On fixe $G_0 = (S_0,A_0)$ avec $s_0 = s_{G_0}\geqslant2$ et $a_0 = a_{G_0}\geqslant1$, et on étudie la propriété $\mathcal P_n$ : « contenir une copie de $G_0$ ». <span data-k="Xn0">$X_n^0(G)$ est le nombre de copies de $G_0$ contenues dans $G$</span>. On note :</p><ul><li><span data-k="C0">$\mathcal C_0$ l'ensemble des copies $H = (S_H,A_H)$ de $G_0$ avec $S_H\subset[\![1,n]\!]$</span> ;</li><li>pour $H$ avec $S_H\subset[\![1,n]\!]$, $X_H(G) = 1$ si $H\subset G$, $0$ sinon ;</li><li><span data-k="omega">$\omega_0 = \min\limits_{H\subset G_0,\ a_H\geqslant1}\dfrac{s_H}{a_H}$</span>.</li></ul>`;
+window.__MP3PRE = PRE3;
+LEMME.exercises([
+{
+  id: "mp24-m2-4", subj: "annales", year: "mp", chap: 3, part: "III (17–21)", kind: "probleme", qnav: true, side: true, level: 4, time: "45 min",
+  title: "Copies d'un graphe : premier moment",
+  enonce: PRE3 + R`<ol start="17"><li>Montrer que $E(X_H) = p_n^{a_H}$.</li>
+<li>Soit $S'_0$ un ensemble fixé de cardinal $s_0$, et $c_0$ le nombre de graphes de sommets $S'_0$ qui sont des copies de $G_0$. Exprimer $|\mathcal C_0|$ à l'aide de $c_0$ et, avec un majorant simple de $c_0$, justifier que $|\mathcal C_0|\leqslant n^{s_0}$.</li>
+<li>Exprimer $X_n^0$ à l'aide des $X_H$ et montrer que $E(X_n^0) = \sum_{H\in\mathcal C_0}P(H\subset G)\leqslant n^{s_0}p_n^{a_0}$.</li>
+<li>En déduire que si $p_n = o(n^{-\omega_0})$, alors $\lim P(X_n^0>0) = 0$. Indication : introduire $H_0\subset G_0$ réalisant le minimum $\omega_0$.</li></ol>
+<p>On suppose désormais que $\lim\big(n^{\omega_0}p_n\big) = +\infty$.</p>
+<ol start="21"><li>Montrer que $$E\big((X_n^0)^2\big) = \sum_{(H,H')\in\mathcal C_0^2}P(H\cup H'\subset G) = \sum_{(H,H')\in\mathcal C_0^2}p_n^{2a_0-a_{H\cap H'}}.$$</li></ol>`,
+  decode: {
+    donnees: [R`Chaque arête est présente avec probabilité $p_n$, indépendamment (partie II).`, R`$H\subset G$ : $S_H\subset S$ et $A_H\subset A$.`],
+    but: R`Compter les copies de $G_0$ dans un graphe aléatoire. Si $p_n\ll n^{-\omega_0}$, même la partie la plus « dense » de $G_0$ n'apparaît pas.`,
+    cles: {
+      Xn0: R`Exemple : si $G_0$ est un triangle, $X_n^0(G)$ est le nombre de triangles de $G$.`,
+      C0: R`Toutes les façons de placer $G_0$ sur les sommets $1,\dots,n$. Toutes ont $s_0$ sommets et $a_0$ arêtes.`,
+      omega: R`Le plus petit rapport « sommets / arêtes » parmi les morceaux de $G_0$ ayant au moins une arête : le morceau le plus dense dicte le seuil. Pour une arête seule : $\omega_0 = \frac21 = 2$.`,
+      inter: R`$H\subset G\iff$ toutes les arêtes de $H$ sont dans $G$ (les sommets $S_H\subset[\![1,n]\!]$ sont toujours là).`,
+      choix: R`Choisir une copie, c'est choisir son ensemble de sommets ($\binom n{s_0}$ façons), puis l'une des $c_0$ copies sur cet ensemble.`,
+      bij: R`Une copie de $G_0$ sur $S'_0$ est déterminée par une bijection $S'_0\to S_0$ : il y en a au plus $s_0!$.`,
+      contient: R`Si $G$ contient une copie de $G_0$, il contient l'image de $H_0$ par cette copie, qui est une copie de $H_0$.`,
+      union: R`$H\subset G$ et $H'\subset G$ $\iff$ $H\cup H'\subset G$, avec $H\cup H' = (S_H\cup S_{H'},A_H\cup A_{H'})$.`
+    }
+  },
+  steps: [
+    { q: 17, t: "Une intersection d'événements indépendants", h: R`<p><span data-k="inter">$H\subset G$ signifie que chaque arête de $H$ est présente.</span></p>`, b: R`<p>$S_H\subset[\![1,n]\!]$ est inclus dans les sommets de tout $G\in\Omega_n$, donc <span data-k="inter">$H\subset G\iff A_H\subset A\iff X_{\{i,j\}}(G) = 1$ pour tout $\{i,j\}\in A_H$</span>. Par indépendance :</p>$$E(X_H) = P(H\subset G) = \prod_{\{i,j\}\in A_H}P(X_{\{i,j\}} = 1) = p_n^{\,a_H}.$$`, rappels: ["g-indep", "g-indic"] },
+    { q: 18, t: "Compter les copies", h: R`<p><span data-k="choix">D'abord l'ensemble des sommets, puis la copie sur cet ensemble.</span></p>`, b: R`<p>Toute copie de $G_0$ a $s_0$ sommets. <span data-k="choix">Choisir $H\in\mathcal C_0$, c'est choisir $S_H$ parmi les $\binom n{s_0}$ parties à $s_0$ éléments, puis une des $c_0$ copies ayant ces sommets</span> ($c_0$ ne dépend pas de l'ensemble choisi, par bijection). Donc</p><div class="sbox">$$|\mathcal C_0| = \binom n{s_0}c_0.$$</div>` },
+    { q: 18, t: "Majorer", h: R`<p><span data-k="bij">$c_0\leqslant s_0!$</span>, et $\binom n{s_0}s_0! = n(n-1)\cdots(n-s_0+1)$.</p>`, b: R`<p><span data-k="bij">Une copie de $G_0$ de sommets $S'_0$ est déterminée par une bijection $\varphi : S'_0\to S_0$ (ses arêtes sont les $\{s',t'\}$ avec $\{\varphi(s'),\varphi(t')\}\in A_0$). Il y a $s_0!$ bijections, donc $c_0\leqslant s_0!$.</span> Ainsi</p>$$|\mathcal C_0|\leqslant\binom n{s_0}s_0! = \frac{n!}{(n-s_0)!} = n(n-1)\cdots(n-s_0+1)\leqslant n^{s_0}$$<p>(produit de $s_0$ facteurs, tous $\leqslant n$).</p>` },
+    { q: 19, t: "Somme d'indicatrices", h: R`<p>Compter les copies, c'est sommer les $X_H$. Puis linéarité de l'espérance et Q17.</p>`, b: R`<p>$X_n^0(G)$ est le nombre de $H\in\mathcal C_0$ tels que $H\subset G$ : $X_n^0 = \sum_{H\in\mathcal C_0}X_H$. Par linéarité et Q17 (chaque $H\in\mathcal C_0$ a $a_0$ arêtes) :</p>$$E(X_n^0) = \sum_{H\in\mathcal C_0}E(X_H) = \sum_{H\in\mathcal C_0}P(H\subset G) = |\mathcal C_0|\,p_n^{a_0}.$$<div class="sbox">$$E(X_n^0) = \sum_{H\in\mathcal C_0}P(H\subset G)\leqslant n^{s_0}p_n^{a_0}.$$</div>`, rappels: ["g-indic"] },
+    { q: 20, t: "Le morceau le plus dense", h: R`<p>Soit $H_0\subset G_0$ réalisant le minimum : $s_{H_0} = \omega_0a_{H_0}$. Compter les copies de $H_0$ plutôt que celles de $G_0$.</p>`, b: R`<p>L'ensemble des $H\subset G_0$ avec $a_H\geqslant1$ est fini et non vide ($G_0$ lui-même), donc le minimum est atteint en un $H_0$. Notons $\alpha = a_{H_0}\geqslant1$ et $\sigma = s_{H_0}$ : $\sigma = \omega_0\alpha$ (et $\sigma\geqslant2$).</p><p>Soit $Y_n$ le nombre de copies de $H_0$ dans $G$. Q19 appliquée à $H_0$ à la place de $G_0$ :</p>$$E(Y_n)\leqslant n^{\sigma}p_n^{\alpha} = \big(n^{\omega_0}p_n\big)^{\alpha}.$$` },
+    { q: 20, t: "Conclure", h: R`<p><span data-k="contient">Toute copie de $G_0$ contient une copie de $H_0$</span> : $(X_n^0>0)\subset(Y_n>0)$. Puis Q11.</p>`, b: R`<p>$p_n = o(n^{-\omega_0})$ signifie $n^{\omega_0}p_n\to0$, donc $E(Y_n)\to0$ ($\alpha\geqslant1$). Par Q11, $P(Y_n>0)\leqslant E(Y_n)\to0$. <span data-k="contient">Si $G$ contient une copie de $G_0$, il contient une copie de $H_0$ : $(X_n^0>0)\subset(Y_n>0)$.</span> Donc</p><div class="sbox">$$0\leqslant P(X_n^0>0)\leqslant P(Y_n>0)\xrightarrow[n\to+\infty]{}0.$$</div><p>Pourquoi $H_0$ et pas $G_0$ ? Q19 donnerait seulement $n^{s_0}p_n^{a_0}$, qui peut ne pas tendre vers $0$ : c'est le morceau le plus dense qui est le plus difficile à voir apparaître.</p>`, rappels: ["g-indic"] },
+    { q: 21, t: "Développer le carré", h: R`<p>$(\sum_HX_H)^2 = \sum_{(H,H')}X_HX_{H'}$, et <span data-k="union">$X_HX_{H'} = X_{H\cup H'}$</span>.</p>`, b: R`$$(X_n^0)^2 = \Big(\sum_{H\in\mathcal C_0}X_H\Big)\Big(\sum_{H'\in\mathcal C_0}X_{H'}\Big) = \sum_{(H,H')\in\mathcal C_0^2}X_HX_{H'}.$$<p>$X_HX_{H'}$ est l'indicatrice de $(H\subset G)\cap(H'\subset G)$, c'est-à-dire de <span data-k="union">$(H\cup H'\subset G)$</span>. Par linéarité :</p>$$E\big((X_n^0)^2\big) = \sum_{(H,H')\in\mathcal C_0^2}P(H\cup H'\subset G).$$`, rappels: ["g-indic"] },
+    { q: 21, t: "Compter les arêtes de H ∪ H′", h: R`<p>Q17 avec $H\cup H'$, et $a_{H\cup H'} = a_H+a_{H'}-a_{H\cap H'}$.</p>`, b: R`<p>Par Q17, $P(H\cup H'\subset G) = p_n^{a_{H\cup H'}}$. Les arêtes communes sont comptées deux fois dans $a_H+a_{H'}$, donc $a_{H\cup H'} = a_H+a_{H'}-a_{H\cap H'} = 2a_0-a_{H\cap H'}$, où $H\cap H' = (S_H\cap S_{H'},A_H\cap A_{H'})$.</p><div class="sbox">$$E\big((X_n^0)^2\big) = \sum_{(H,H')\in\mathcal C_0^2}P(H\cup H'\subset G) = \sum_{(H,H')\in\mathcal C_0^2}p_n^{2a_0-a_{H\cap H'}}.$$</div>` }
+  ],
+  ctx: {
+    "g-indep": R`<p>Les $X_{\{i,j\}}$, $\{i,j\}\in A_H$.</p>`,
+    "g-indic": R`<p>$X_H = \mathbf 1_{(H\subset G)}$.</p>`
+  },
+  piege: R`En Q20, appliquer directement Q19 à $G_0$ ne marche pas en général : $n^{s_0}p_n^{a_0}$ ne tend pas forcément vers $0$. Il faut passer par le sous-graphe le plus dense $H_0$.`,
+  methode: R`Pour compter des motifs dans un graphe aléatoire : écrire le nombre de motifs comme une somme d'indicatrices, puis utiliser la linéarité de l'espérance.`
+}
+]);
+})();
+LEMME.exercises([
+{
+  id: "mp24-m2-5", subj: "annales", year: "mp", chap: 3, part: "III (22–27)", kind: "probleme", qnav: true, side: true, level: 5, time: "1 h",
+  title: "Copies d'un graphe : second moment et fonction de seuil",
+  enonce: window.__MP3PRE + R`<p>On suppose $\lim\big(n^{\omega_0}p_n\big) = +\infty$. Pour $k\in[\![0,s_0]\!]$, on note <span data-k="sigk">$\Sigma_k = \sum_{(H,H')\in\mathcal C_0^2,\ s_{H\cap H'} = k}P(H\cup H'\subset G)$</span>.</p>
+<ol start="22"><li>Montrer que $\Sigma_0\leqslant\big(E(X_n^0)\big)^2$.</li>
+<li>Soit $k\in[\![1,s_0]\!]$. Montrer que $\Sigma_k\leqslant\displaystyle\sum_{H\in\mathcal C_0}\binom{s_0}k\binom{n-s_0}{s_0-k}c_0\,p_n^{2a_0}p_n^{-\frac k{\omega_0}}$.</li>
+<li>Justifier que pour tous entiers $1\leqslant q\leqslant r$, $\dbinom rqr^{-q}\geqslant\dfrac1{q!}\Big(1-\dfrac{q-1}q\Big)^q$, et en déduire que pour $k\in[\![1,s_0]\!]$, $\Sigma_k = o\Big(\big(E(X_n^0)\big)^2\Big)$.</li>
+<li>Montrer que $\lim\dfrac{V(X_n^0)}{\big(E(X_n^0)\big)^2} = 0$.</li>
+<li>Montrer que $(k^{-\omega_0})_{k\geqslant2}$ est une fonction de seuil pour $\mathcal P_n$.</li>
+<li>Retrouver le résultat de Q16, et déterminer une fonction de seuil pour la propriété « contenir une copie de l'étoile à $d$ branches » ($d\geqslant1$ fixé).</li></ol>`,
+  decode: {
+    donnees: [R`Q21 : $E\big((X_n^0)^2\big) = \sum_{(H,H')}p_n^{2a_0-a_{H\cap H'}}$.`, R`$E(X_n^0) = |\mathcal C_0|\,p_n^{a_0}$ et $|\mathcal C_0| = \binom n{s_0}c_0$ (Q18, Q19).`, R`Q12 : $P(X = 0)\leqslant\frac{V(X)}{E(X)^2}$.`],
+    but: R`Montrer que, au-dessus de $n^{-\omega_0}$, le nombre de copies est concentré autour de sa moyenne (second moment), donc presque toujours $>0$.`,
+    cles: {
+      Xn0: R`Exemple : si $G_0$ est un triangle, $X_n^0(G)$ est le nombre de triangles de $G$.`,
+      C0: R`Toutes les façons de placer $G_0$ sur les sommets $1,\dots,n$. Toutes ont $s_0$ sommets et $a_0$ arêtes.`,
+      omega: R`Le plus petit rapport « sommets / arêtes » parmi les morceaux de $G_0$ ayant au moins une arête : le morceau le plus dense dicte le seuil.`,
+      sigk: R`On range les couples $(H,H')$ selon le nombre $k$ de sommets communs. $\Sigma_0$ : couples disjoints. $\Sigma_k$, $k\geqslant1$ : couples qui se chevauchent.`,
+      disj: R`Sans sommet commun, pas d'arête commune : $a_{H\cap H'} = 0$ et $p_n^{2a_0} = P(H\subset G)P(H'\subset G)$.`,
+      dense: R`$H\cap H'\subset H$, copie de $G_0$ : si $a_{H\cap H'}\geqslant1$, alors $\frac{k}{a_{H\cap H'}}\geqslant\omega_0$, donc $a_{H\cap H'}\leqslant\frac k{\omega_0}$.`,
+      decr: R`$p_n\in\,]0,1[$ : $t\mapsto p_n^t$ est décroissante, donc diminuer l'exposant augmente la valeur.`,
+      nbH: R`À $H$ fixé : on choisit les $k$ sommets communs dans $S_H$, puis les $s_0-k$ autres hors de $S_H$, puis l'une des $c_0$ copies.`,
+      prodq: R`$\binom rq\frac{q!}{r^q} = \prod_{i=0}^{q-1}\frac{r-i}r$, et chaque facteur est $\geqslant\frac{r-q+1}r = 1-\frac{q-1}r\geqslant1-\frac{q-1}q$.`,
+      ratio: R`$\frac{\Sigma_k}{E(X_n^0)^2}\leqslant K\,n^{-k}p_n^{-k/\omega_0} = K\big(n^{\omega_0}p_n\big)^{-k/\omega_0}$, avec $K$ indépendant de $n$.`,
+      decomp: R`$E\big((X_n^0)^2\big) = \Sigma_0+\Sigma_1+\dots+\Sigma_{s_0}$ (on a rangé tous les couples selon $k$).`,
+      etoile: R`Un sous-graphe d'une étoile ayant $a\geqslant1$ arêtes contient le centre et au moins $a$ feuilles : $s_H\geqslant a+1$.`
+    }
+  },
+  steps: [
+    { q: 22, t: "Les couples sans sommet commun", h: R`<p><span data-k="disj">Sans sommet commun, pas d'arête commune</span> : le terme vaut $p_n^{2a_0}$.</p>`, b: R`<p>Si $s_{H\cap H'} = 0$, alors $S_H\cap S_{H'} = \varnothing$, donc aucune arête commune : <span data-k="disj">$a_{H\cap H'} = 0$ et $P(H\cup H'\subset G) = p_n^{2a_0}$</span> (Q21). Donc $\Sigma_0$ est une somme de termes $p_n^{2a_0}$, sur une partie de $\mathcal C_0^2$ :</p>$$\Sigma_0\leqslant\sum_{(H,H')\in\mathcal C_0^2}p_n^{2a_0} = \big(|\mathcal C_0|\,p_n^{a_0}\big)^2 = \big(E(X_n^0)\big)^2.$$` },
+    { q: 23, t: "Majorer chaque terme", h: R`<p><span data-k="dense">La densité de $H\cap H'$ est contrôlée par $\omega_0$</span>, puis <span data-k="decr">$p_n^t$ décroît en $t$</span>.</p>`, b: R`<p>Soit $(H,H')$ avec $s_{H\cap H'} = k\geqslant1$. Si $a_{H\cap H'}\geqslant1$ : $H\cap H'$ est un sous-graphe de $H$, copie de $G_0$, donc correspond à un sous-graphe de $G_0$ avec autant de sommets et d'arêtes, et <span data-k="dense">$\frac k{a_{H\cap H'}}\geqslant\omega_0$, soit $a_{H\cap H'}\leqslant\frac k{\omega_0}$</span>. C'est encore vrai si $a_{H\cap H'} = 0$. Donc $2a_0-a_{H\cap H'}\geqslant2a_0-\frac k{\omega_0}$, et comme <span data-k="decr">$t\mapsto p_n^t$ décroît</span> :</p>$$P(H\cup H'\subset G) = p_n^{2a_0-a_{H\cap H'}}\leqslant p_n^{2a_0-\frac k{\omega_0}}.$$` },
+    { q: 23, t: "Compter les H′ pour un H donné", h: R`<p><span data-k="nbH">Choisir les sommets communs, les sommets nouveaux, puis la copie.</span></p>`, b: R`<p>À $H$ fixé, <span data-k="nbH">les $H'\in\mathcal C_0$ avec $|S_H\cap S_{H'}| = k$ s'obtiennent en choisissant $k$ sommets dans $S_H$ ($\binom{s_0}k$ façons), $s_0-k$ sommets hors de $S_H$ ($\binom{n-s_0}{s_0-k}$ façons), puis une des $c_0$ copies de $G_0$ sur cet ensemble</span>. Il y en a $\binom{s_0}k\binom{n-s_0}{s_0-k}c_0$. En sommant :</p><div class="sbox">$$\Sigma_k\leqslant\sum_{H\in\mathcal C_0}\binom{s_0}k\binom{n-s_0}{s_0-k}c_0\,p_n^{2a_0}p_n^{-\frac k{\omega_0}}.$$</div>` },
+    { q: 24, t: "L'inégalité sur les coefficients binomiaux", h: R`<p><span data-k="prodq">Écrire $\binom rq\frac{q!}{r^q}$ comme un produit de $q$ facteurs.</span></p>`, b: R`<p><span data-k="prodq">$\binom rqr^{-q} = \frac{r(r-1)\cdots(r-q+1)}{q!\,r^q} = \frac1{q!}\prod_{i=0}^{q-1}\frac{r-i}r$.</span> Pour $0\leqslant i\leqslant q-1$ : $\frac{r-i}r\geqslant\frac{r-q+1}r = 1-\frac{q-1}r\geqslant1-\frac{q-1}q\geqslant0$ (car $r\geqslant q$). Le produit de $q$ facteurs positifs est donc minoré :</p><div class="sbox">$$\binom rqr^{-q}\geqslant\frac1{q!}\Big(1-\frac{q-1}q\Big)^q = \frac1{q!\,q^q}.$$</div>` },
+    { q: 24, t: "Écrire le quotient Σ_k / E(X)²", h: R`<p>$E(X_n^0)^2 = |\mathcal C_0|^2p_n^{2a_0}$ et $|\mathcal C_0| = \binom n{s_0}c_0$ : beaucoup de facteurs se simplifient.</p>`, b: R`<p>La somme de Q23 a $|\mathcal C_0|$ termes égaux, et $E(X_n^0)^2 = |\mathcal C_0|\cdot\binom n{s_0}c_0\cdot p_n^{2a_0}$. Donc</p>$$0\leqslant\frac{\Sigma_k}{E(X_n^0)^2}\leqslant\frac{|\mathcal C_0|\binom{s_0}k\binom{n-s_0}{s_0-k}c_0\,p_n^{2a_0}p_n^{-k/\omega_0}}{|\mathcal C_0|\binom n{s_0}c_0\,p_n^{2a_0}} = \binom{s_0}k\frac{\binom{n-s_0}{s_0-k}}{\binom n{s_0}}\,p_n^{-k/\omega_0}.$$` },
+    { q: 24, t: "Majorer le quotient de binomiaux", h: R`<p>En haut : $\binom{n-s_0}{s_0-k}\leqslant n^{s_0-k}$. En bas : l'inégalité précédente avec $r = n$, $q = s_0$.</p>`, b: R`<p>$\binom{n-s_0}{s_0-k}\leqslant\frac{(n-s_0)^{s_0-k}}{(s_0-k)!}\leqslant n^{s_0-k}$. Et pour $n\geqslant s_0$ : $\binom n{s_0}\geqslant\frac{n^{s_0}}{s_0!\,s_0^{s_0}}$. Donc</p>$$\frac{\Sigma_k}{E(X_n^0)^2}\leqslant\binom{s_0}k\,s_0!\,s_0^{s_0}\cdot\frac{n^{s_0-k}}{n^{s_0}}\,p_n^{-k/\omega_0} = K\,n^{-k}p_n^{-k/\omega_0},\qquad K = \binom{s_0}k\,s_0!\,s_0^{s_0}.$$` },
+    { q: 24, t: "Conclure avec l'hypothèse", h: R`<p><span data-k="ratio">$n^{-k}p_n^{-k/\omega_0} = (n^{\omega_0}p_n)^{-k/\omega_0}$.</span></p>`, b: R`<p><span data-k="ratio">$n^{-k}p_n^{-k/\omega_0} = \big(n^{\omega_0}p_n\big)^{-k/\omega_0}$</span>, et $n^{\omega_0}p_n\to+\infty$ avec $\frac k{\omega_0}>0$ : ce terme tend vers $0$.</p><div class="sbox">$$\forall k\in[\![1,s_0]\!],\qquad\Sigma_k = o\Big(\big(E(X_n^0)\big)^2\Big).$$</div>` },
+    { q: 25, t: "Variance et Σ_k", h: R`<p>König-Huygens, et <span data-k="decomp">$E((X_n^0)^2) = \Sigma_0+\dots+\Sigma_{s_0}$</span>.</p>`, b: R`<p><span data-k="decomp">Chaque couple $(H,H')$ a un nombre $k\in[\![0,s_0]\!]$ de sommets communs, donc $E\big((X_n^0)^2\big) = \sum_{k=0}^{s_0}\Sigma_k$</span>. Par König-Huygens et Q22 :</p>$$0\leqslant V(X_n^0) = \sum_{k=0}^{s_0}\Sigma_k-E(X_n^0)^2 = \underbrace{\Sigma_0-E(X_n^0)^2}_{\leqslant0}+\sum_{k=1}^{s_0}\Sigma_k\leqslant\sum_{k=1}^{s_0}\Sigma_k.$$`, rappels: ["g-huygens"] },
+    { q: 25, t: "Passer à la limite", h: R`<p>Diviser par $E(X_n^0)^2>0$ ; somme d'un nombre <b>fixe</b> de termes qui tendent vers $0$.</p>`, b: R`<p>$E(X_n^0) = |\mathcal C_0|p_n^{a_0}>0$ pour $n\geqslant s_0$. En divisant :</p>$$0\leqslant\frac{V(X_n^0)}{E(X_n^0)^2}\leqslant\sum_{k=1}^{s_0}\frac{\Sigma_k}{E(X_n^0)^2}\xrightarrow[n\to+\infty]{}0$$<p>par Q24 (somme de $s_0$ termes, $s_0$ ne dépend pas de $n$).</p><div class="sbox">$$\lim_{n\to+\infty}\frac{V(X_n^0)}{\big(E(X_n^0)\big)^2} = 0.$$</div>` },
+    { q: 26, t: "Les deux côtés du seuil", h: R`<p>Côté $0$ : Q20. Côté $1$ : Q12 et Q25.</p>`, b: R`<ul><li>Si $p_n = o(n^{-\omega_0})$ : Q20 donne $P(X_n^0>0)\to0$.</li><li>Si $n^{-\omega_0} = o(p_n)$, c'est-à-dire $n^{\omega_0}p_n\to+\infty$ : par Q12 et Q25, $P(X_n^0 = 0)\leqslant\frac{V(X_n^0)}{E(X_n^0)^2}\to0$, donc $P(X_n^0>0)\to1$.</li></ul><p>Or $(X_n^0>0)$ est exactement « $G$ contient une copie de $G_0$ ».</p><div class="sbox"><p style="margin:0;text-align:center">$(k^{-\omega_0})_{k\geqslant2}$ est une fonction de seuil pour « contenir une copie de $G_0$ ».</p></div><button type="button" class="labo-btn" data-labo="seuil">Voir le seuil dans le labo ↓</button>`, rappels: ["g-tcheb"] },
+    { q: 27, t: "Une arête : on retrouve Q16", h: R`<p>$G_0$ = une arête : son seul sous-graphe avec au moins une arête est lui-même.</p>`, b: R`<p>« Avoir au moins une arête » $\iff$ « contenir une copie de $G_0 = (\{1,2\},\{\{1,2\}\})$ ». Le seul $H\subset G_0$ avec $a_H\geqslant1$ est $G_0$ : $\omega_0 = \frac21 = 2$. Fonction de seuil : $k^{-2}$, comme en Q16.</p>` },
+    { q: 27, t: "L'étoile à d branches", h: R`<p><span data-k="etoile">Un sous-graphe d'étoile à $a$ arêtes a au moins $a+1$ sommets.</span> Le minimum de $\frac{s_H}{a_H}$ est atteint pour l'étoile entière.</p>`, b: R`<p>Soit $G_0$ l'étoile à $d$ branches et $H\subset G_0$ avec $a_H = a\geqslant1$. <span data-k="etoile">Les $a$ arêtes de $H$ contiennent le centre et $a$ feuilles distinctes, donc $s_H\geqslant a+1$</span>, et</p>$$\frac{s_H}{a_H}\geqslant\frac{a+1}a = 1+\frac1a\geqslant1+\frac1d\qquad(a\leqslant d).$$<p>L'égalité est atteinte pour $H = G_0$ ($d+1$ sommets, $d$ arêtes). Donc $\omega_0 = 1+\frac1d$ :</p><div class="sbox"><p style="margin:0;text-align:center">$\big(k^{-1-\frac1d}\big)_{k\geqslant2}$ est une fonction de seuil pour « contenir une étoile à $d$ branches ».</p></div><p>Pour $d = 1$ (une arête), on retrouve $k^{-2}$. Plus $d$ est grand, plus le seuil se rapproche de $k^{-1}$.</p>` }
+  ],
+  ctx: {
+    "g-huygens": R`<p>$X = X_n^0$.</p>`,
+    "g-tcheb": R`<p>Via Q12, appliquée à $X = X_n^0$.</p>`
+  },
+  viz: { type: "lab", mode: "seuil", title: "Labo : seuil pour une étoile à d branches" },
+  piege: R`En Q23, la majoration $a_{H\cap H'}\leqslant\frac k{\omega_0}$ vient de la définition de $\omega_0$ comme minimum sur les sous-graphes de $G_0$ : c'est là que sert le « morceau le plus dense ». En Q25, la somme porte sur un nombre fixe de termes ($s_0$), ce qui autorise le passage à la limite.`,
+  methode: R`Méthode du second moment : si $V(X) = o\big(E(X)^2\big)$, alors $X>0$ avec probabilité tendant vers $1$. On découpe $E(X^2)$ selon le chevauchement des motifs.`
 }
 ]);

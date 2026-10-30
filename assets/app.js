@@ -51,6 +51,7 @@ let mjQueue = Promise.resolve();
 function typeset(el) {
   if (!el || !window.MathJax || !MathJax.typesetPromise) return;
   mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).then(() => fitMath(el)).catch(() => {});
+  return mjQueue;
 }
 /* Formules trop larges : on réduit la taille au lieu d'afficher une barre de défilement */
 function fitMath(root) {
@@ -233,10 +234,10 @@ function exercisePage(eid) {
           <div><h4>Ce que l'énoncé te donne</h4><ul>${d.donnees.map(x => `<li>${x}</li>`).join("")}</ul></div>
           <div><h4>Ce qu'on te demande</h4>${d.but}</div>
         </div>
-        <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Souligné en bleu : une notion de cours, avec sa définition</span></p>
+        <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Surligné en bleu : une notion de cours, avec sa définition</span></p>
       </div>
       ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}`;
-    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
+    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor" class="cor-h"><span class="sr-only">Corrigé pas à pas</span>${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
     const viz = [].concat(e.viz || []).map((v, k) => `<section class="panelbox" aria-labelledby="h-viz${k}"><h2 id="h-viz${k}">${v.title || "Visualiser"}</h2><div id="viz${k ? k : ""}"></div></section>`).join("");
     const more = others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
     if (e.side) return `<div class="wrap wrap-wide"><div class="ex-layout wide">
@@ -402,7 +403,7 @@ function notFound() {
 /* ---------- Rappels de cours ---------- */
 function rchip(id, ex) {
   const r = RAPPELS[id]; if (!r) return "";
-  return `<button type="button" class="rchip" data-r="${id}"${ex && ex.id ? ` data-ex="${ex.id}"` : ""}>${I.book}${esc(r.t)}</button>`;
+  return `<button type="button" class="rchip" data-r="${id}"${ex && ex.id ? ` data-ex="${ex.id}"` : ""}>${esc(r.t)}</button>`;
 }
 let drawerReturn = null;
 function openRappel(id, exId) {
@@ -492,12 +493,18 @@ function openTip(el, html) {
   closeTip();
   const t = document.createElement("div"); t.className = "tip"; t.setAttribute("role", "tooltip"); t.innerHTML = html;
   document.body.appendChild(t);
-  const r = el.getBoundingClientRect(), w = t.offsetWidth;
-  const left = Math.max(16, Math.min(r.left + scrollX, scrollX + innerWidth - w - 16));
-  t.style.left = left + "px"; t.style.top = (r.bottom + scrollY + 10) + "px";
-  t.style.setProperty("--ax", Math.max(14, Math.min(w - 26, r.left + scrollX - left + r.width / 2 - 6)) + "px");
+  const place = () => {
+    if (!t.isConnected) return;
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    const left = Math.max(16, Math.min(r.left + scrollX, scrollX + innerWidth - w - 16));
+    const below = r.bottom + 10 + h <= innerHeight - 8 || r.top - 10 - h < 72;
+    t.classList.toggle("up", !below);
+    t.style.left = left + "px"; t.style.top = (below ? r.bottom + scrollY + 10 : r.top + scrollY - 10 - h) + "px";
+    t.style.setProperty("--ax", Math.max(14, Math.min(w - 26, r.left + scrollX - left + r.width / 2 - 6)) + "px");
+  };
+  place();
   el.classList.add("open"); tipFor = el;
-  typeset(t);
+  const p = typeset(t); if (p) p.then(place);
 }
 
 /* Mots surlignés (énoncé et corrigé) : un clic affiche leur explication */
@@ -565,7 +572,6 @@ function mountPlayer(e, host) {
       <div class="nav">
         <button class="btn btn-ghost" type="button" data-step="-1" ${state.i === 0 ? "disabled style=\"opacity:.4;cursor:default\"" : ""}>${I.left} Précédent</button>
         ${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}
-        <span class="hint"><kbd>←</kbd><kbd>→</kbd></span>
       </div>`;
     $$("[data-q]", host).forEach(b => b.addEventListener("click", () => { const k = e.steps.findIndex(x => String(x.q) === b.dataset.q); show(k, k >= state.i ? 1 : -1); }));
     $$("[data-go]", host).forEach(b => b.addEventListener("click", () => show(+b.dataset.go, +b.dataset.go >= state.i ? 1 : -1)));
@@ -678,7 +684,10 @@ function labBind(host, sel, onHover, onLeave) {
 const labSeg = (name, opts, cur) => `<span class="seg lab-seg" role="group" aria-label="${name}">${opts.map(o => `<button type="button" data-v="${o[0]}" aria-pressed="${o[0] === cur}">${o[1]}</button>`).join("")}</span>`;
 const labRange = (k, label, min, max, step, v) => `<div><label for="lb-${k}">${label}<output id="lbo-${k}">${nf(v)}</output></label><input type="range" id="lb-${k}" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
 function labWire(host, st, draw) {
-  $$("input[type=range][data-k]", host).forEach(r => r.addEventListener("input", () => { st[r.dataset.k] = +r.value; draw(); }));
+  $$("input[type=range][data-k]", host).forEach(r => {
+    r.addEventListener("input", () => { const o = $("#lbo-" + r.dataset.k, host); if (o) o.textContent = nf(+r.value); });
+    r.addEventListener("change", () => { st[r.dataset.k] = +r.value; draw(); });
+  });
   $$(".lab-seg", host).forEach(g => $$("button", g).forEach(b => b.addEventListener("click", () => { st[g.dataset.s] = b.dataset.v; draw(); })));
 }
 /* Graphe sur un cercle : sommets 1..n, arêtes ou flèches */
@@ -927,7 +936,45 @@ function labJordan(host) {
   draw();
 }
 
-function mountLab(host, spec) { ({ cycle: labCycle, kron: labKron, transfer: labTransfer, spec: labSpec, xi: labXi, jordan: labJordan })[spec.mode](host, spec); }
+/* Mode 7 : graphes aléatoires et fonction de seuil (Mines-Ponts 2024) */
+function labSeuil(host) {
+  const st = { v: "e", n: 40, lc: 0, seed: 1 };
+  const props = { e: { t: "Au moins une arête", w: 2, d: 1 }, s2: { t: "Une étoile à 2 branches", w: 1.5, d: 2 }, s3: { t: "Une étoile à 3 branches", w: 4 / 3, d: 3 } };
+  let rs = 12345; const rnd = () => { rs = (rs * 1103515245 + 12345) & 0x7fffffff; return rs / 0x7fffffff; };
+  const sample = (n, p) => { const deg = new Array(n).fill(0), E = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (rnd() < p) { deg[i]++; deg[j]++; E.push([i, j]); } return { deg, E }; };
+  const holds = (g, d) => g.deg.some(x => x >= d);
+  function draw() {
+    const P = props[st.v], n = st.n, c = Math.pow(10, st.lc), p = Math.min(1, c * Math.pow(n, -P.w));
+    rs = 1000 + st.seed * 7919;
+    const g = sample(n, p);
+    let hit = -1; g.deg.forEach((x, i) => { if (hit < 0 && x >= P.d) hit = i; });
+    const W = 300, cx = 150, R = 125, pos = i => [cx + R * Math.cos(2 * Math.PI * i / n - Math.PI / 2), cx + R * Math.sin(2 * Math.PI * i / n - Math.PI / 2)];
+    let s = "";
+    g.E.forEach(([i, j]) => { const [x1, y1] = pos(i), [x2, y2] = pos(j), on = hit >= 0 && (i === hit || j === hit); s += `<line x1="${fx(x1)}" y1="${fx(y1)}" x2="${fx(x2)}" y2="${fx(y2)}" class="lab-e${on ? " on" : ""}"/>`; });
+    for (let i = 0; i < n; i++) { const [x, y] = pos(i); s += `<circle cx="${fx(x)}" cy="${fx(y)}" r="${n > 60 ? 2.5 : 4}" class="lab-v${i === hit ? " on" : ""}" style="stroke-width:1.2"/>`; }
+    // courbe : probabilité estimée en fonction de c
+    const grid = Array.from({ length: 21 }, (_, k) => -1.5 + k * 0.15), T = 60;
+    rs = 777 + n;
+    const pts = grid.map(l => { const pp = Math.min(1, Math.pow(10, l) * Math.pow(n, -P.w)); let ok = 0; for (let t = 0; t < T; t++) if (holds(sample(n, pp), P.d)) ok++; return [l, ok / T]; });
+    const CW = 360, CH = 200, X = l => 40 + (l + 1.5) / 3 * (CW - 56), Y = v => CH - 30 - v * (CH - 50);
+    let cs = `<line x1="40" y1="${Y(0)}" x2="${CW - 10}" y2="${Y(0)}" class="lab-ax"/><line x1="40" y1="${Y(0)}" x2="40" y2="${Y(1) - 6}" class="lab-ax"/>`;
+    [[0, "0"], [0.5, "0,5"], [1, "1"]].forEach(([v, t]) => { cs += `<text x="34" y="${fx(Y(v) + 4)}" text-anchor="end" class="lab-vt sm">${t}</text>`; });
+    [[-1, "0,1"], [0, "1"], [1, "10"]].forEach(([l, t]) => { cs += `<line x1="${fx(X(l))}" y1="${Y(0)}" x2="${fx(X(l))}" y2="${Y(0) + 4}" class="lab-ax"/><text x="${fx(X(l))}" y="${Y(0) + 17}" text-anchor="middle" class="lab-vt sm">${t}</text>`; });
+    cs += `<text x="${CW - 10}" y="${Y(0) - 6}" text-anchor="end" class="lab-vt sm">c</text>`;
+    cs += `<path d="${pts.map(([l, v], k) => `${k ? "L" : "M"}${fx(X(l))} ${fx(Y(v))}`).join(" ")}" style="fill:none;stroke:var(--blue);stroke-width:2.4"/>`;
+    cs += `<line x1="${fx(X(st.lc))}" y1="${Y(0)}" x2="${fx(X(st.lc))}" y2="${Y(1)}" style="stroke:var(--gold-ink);stroke-dasharray:4 3;stroke-width:1.5"/>`;
+    const wt = P.w === 2 ? "2" : P.w === 1.5 ? "3/2" : "4/3";
+    host.innerHTML = `<div class="lab-ctl">${labSeg("Propriété", Object.entries(props).map(([k, o]) => [k, o.t]), st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}<div class="viz-ctrl">${labRange("n", "Nombre de sommets n", 10, 120, 10, n)}${labRange("lc", "log₁₀ c", -1.5, 1.5, 0.1, st.lc)}</div></div>
+      <div class="lab-row"><div><div class="lab-cap">Un graphe tiré au hasard : n = ${n}, p = c · n<sup>−ω₀</sup> = ${nf(p, 5)}, ${g.E.length} arête${g.E.length > 1 ? "s" : ""}</div><svg viewBox="0 0 ${W} ${W}" width="${W}" height="${W}" class="lab-svg" role="img" aria-label="Graphe aléatoire">${s}</svg><div><button type="button" class="btn btn-ghost btn-sm" data-re="1">Tirer un autre graphe</button></div></div>
+      <div><div class="lab-cap">Probabilité de la propriété (simulée, ${T} tirages par point) en fonction de c</div><svg viewBox="0 0 ${CW} ${CH}" width="${CW}" height="${CH}" class="lab-svg" role="img" aria-label="Courbe de seuil">${cs}</svg></div></div>
+      <div class="lab-note"><b>${P.t} : ω₀ = ${wt}.</b> On prend p<sub>n</sub> = c · n<sup>−ω₀</sup>, c'est-à-dire c fois la fonction de seuil. Quand c est petit (p<sub>n</sub> = o(n<sup>−ω₀</sup>) à la limite), la propriété n'apparaît presque jamais ; quand c est grand, presque toujours. ${hit >= 0 ? `Dans le graphe tiré, le sommet en jaune ${P.d === 1 ? "porte une arête" : `a au moins ${P.d} voisins`} : la propriété est réalisée.` : "Dans le graphe tiré, la propriété n'est pas réalisée."}</div>`;
+    labWire(host, st, draw);
+    $("[data-re]", host).addEventListener("click", () => { st.seed++; draw(); });
+  }
+  draw();
+}
+
+function mountLab(host, spec) { ({ cycle: labCycle, kron: labKron, transfer: labTransfer, spec: labSpec, xi: labXi, jordan: labJordan, seuil: labSeuil })[spec.mode](host, spec); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-labo]"); if (!b) return; const t = document.getElementById("lab-" + b.dataset.labo); if (t) { t.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); t.closest(".panelbox").classList.add("flash"); setTimeout(() => t.closest(".panelbox").classList.remove("flash"), 1400); } });
 
 
