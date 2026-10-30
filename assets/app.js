@@ -210,8 +210,9 @@ function exercisePage(eid) {
   const d = e.decode || { donnees: [], but: "", cles: {} };
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year).slice(0, 2);
   if (e.concours) lastConc = e.concours;
-  return phead({ crumb: s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: `<span class="tag y">${e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
+  const ann = e.subj === "annales";
+  return phead({ crumb: ann ? [["Concours", "#concours"], [c.bank, "#banque-" + bslug(c.bank)], [c.epreuve + " " + c.annee, `#c-annales-mp-${e.chap}`], ["Partie " + e.part]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
+    meta: ann ? `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">Partie ${esc(e.part)} · ${qrange(e)}</span>` : `<span class="tag y">${e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + (() => {
     const enHead = `<h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>`;
     const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
@@ -295,7 +296,7 @@ function concoursPage() {
     <a class="cmd-band" href="#commando"><span class="tx"><span class="k">Nouveau · Niveau ★★★★★</span><h2>Formation commando <span style="white-space:nowrap">X-ENS</span></h2><p>Les exercices les plus durs, corrigés sans sauter une seule étape.</p><span><span class="btn btn-yellow">Entrer dans la formation ${I.arrow}</span></span></span><span class="ph">${img("commando", "(max-width:820px) 100vw, 45vw")}</span></a>
     <article class="prose">
     <h2>Les banques</h2>
-    <div class="cards">${BANKS.map(b => `<div class="card"><h3>${b.name}</h3><p>${b.desc}</p></div>`).join("")}</div>
+    <div class="cards">${BANKS.map(b => { const n = sujetsOf(b.name).length; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}"><h3>${b.name}</h3><p>${b.desc}</p><span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card"><h3>${b.name}</h3><p>${b.desc}</p></div>`; }).join("")}</div>
     <h2>L'année de MP</h2>
     <ul class="steps-list">
       <li><b>Décembre · janvier</b><span>Inscriptions sur le site du SCEI.</span></li>
@@ -306,6 +307,31 @@ function concoursPage() {
     <h2>Réviser</h2>
     <ul><li>Dès janvier, un sujet complet en temps limité toutes les deux semaines.</li><li>Un carnet d'erreurs : chaque faute de DS, avec la bonne méthode.</li><li>Les dernières semaines, les annales des concours que tu vises.</li></ul>
   </article></div>`;
+}
+
+const bslug = n => norm(n).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const ANN = () => (sid("annales") || { years: { mp: [] } }).years.mp;
+const sujetsOf = bank => ANN().map((c, i) => ({ c, i })).filter(x => x.c.bank === bank);
+const qrange = e => { const q = e.steps.map(st => st.q).filter(Boolean); return q.length ? `Q${Math.min(...q)} à Q${Math.max(...q)}` : ""; };
+function banquePage(slug) {
+  const b = BANKS.find(x => bslug(x.name) === slug); if (!b) return notFound();
+  const list = sujetsOf(b.name);
+  return phead({ crumb: [["Concours", "#concours"], [b.name]], title: esc(b.name), meta: `<span class="tag y">${plural(list.length, "sujet")}</span><span class="tag">Écrits</span>`, photo: "hero" }) + `<div class="wrap layout full"><div>
+    <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 28px;max-width:46em">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
+    <ol class="chapters stagger">${list.map(({ c, i }) => `<li><a href="#c-annales-mp-${i}"><span class="num">${c.annee}</span><h3>${esc(c.epreuve)} · ${esc(c.filiere)} <span style="font-weight:500;color:var(--muted)">· ${esc(c.titre)}</span></h3><span class="info"><span><b>${c.nq}</b> questions</span><svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>`).join("")}</ol>
+  </div></div>`;
+}
+function sujetPage(i) {
+  const c = ANN()[i]; if (!c) return notFound();
+  const parts = exOf("annales", "mp", i);
+  return phead({ crumb: [["Concours", "#concours"], [c.bank, "#banque-" + bslug(c.bank)], [c.epreuve + " " + c.annee]], title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span><span class="tag">${c.nq} questions</span>` }) + `<div class="wrap layout full"><div>
+    <h2 style="margin:0 0 14px">Le sujet</h2>
+    <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 18px;max-width:46em">${c.intro}</p>
+    <div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}"></div>
+    <h2 style="margin:40px 0 8px">Le corrigé, question par question</h2>
+    <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 24px;max-width:46em">Une page par partie. L'énoncé reste affiché à côté du corrigé, et chaque question est découpée en étapes avec un indice.</p>
+    <ol class="chapters stagger">${parts.map(e => `<li><a href="#e-${e.id}"><span class="num">${esc(e.part)}</span><h3>${esc(e.title)}</h3><span class="info"><span><b>${qrange(e)}</b></span><svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>`).join("")}</ol>
+  </div></div>`;
 }
 
 function oralPage() {
@@ -477,8 +503,10 @@ function bindKeys(root, ex) {
 
 /* Rédaction complète d'un corrigé, et sa vue en grand */
 function redaction(e) {
+  if (e.qnav) return e.steps.map((st, k) => `${k === 0 || e.steps[k - 1].q !== st.q ? `<h3 class="rq">Question ${st.q}</h3>` : ""}<p class="rt"><b>Étape ${qpos(e, k)[0]} · ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
   return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
 }
+function qpos(e, k) { const q = e.steps[k].q, same = e.steps.map((st, j) => [st, j]).filter(x => x[0].q === q); return [same.findIndex(x => x[1] === k) + 1, same.length]; }
 let bigReturn = null;
 function openBig(e) {
   closeBig(true); closeTip();
@@ -511,13 +539,15 @@ function mountPlayer(e, host) {
     state.i = Math.max(0, Math.min(n, i));
     const last = state.i === n;
     const st = e.steps[state.i];
-    host.innerHTML = `
+    const qs = e.qnav ? [...new Set(e.steps.map(x => x.q))] : [];
+    const curQ = last ? null : st.q;
+    host.innerHTML = `${qs.length ? `<div class="qnav" role="group" aria-label="Aller à une question">${qs.map(q => `<button type="button" data-q="${q}" aria-pressed="${q === curQ}">Q${q}</button>`).join("")}</div>` : ""}
       <div class="prog">${Array.from({ length: n + 1 }, (_, k) => `<button type="button" class="${k <= state.i ? "done" : ""}" data-go="${k}" aria-label="${k === n ? "Bilan" : "Étape " + (k + 1)}"></button>`).join("")}</div>
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, e)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3>${st.h ? `<details class="hint"><summary><span class="hint-ico" aria-hidden="true">?</span>Indice : le coup d'œil<span class="hint-sub">pourquoi cette idée</span></summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}<div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
+            : `<span class="count">${e.qnav ? `Question ${st.q} · Étape ${qpos(e, state.i)[0]} sur ${qpos(e, state.i)[1]}` : `${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}`}</span><h3>${esc(st.t)}</h3>${st.h ? `<details class="hint"><summary><span class="hint-ico" aria-hidden="true">?</span>Indice : le coup d'œil<span class="hint-sub">pourquoi cette idée</span></summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}<div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">
@@ -525,6 +555,7 @@ function mountPlayer(e, host) {
         ${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}
         <span class="hint"><kbd>←</kbd><kbd>→</kbd></span>
       </div>`;
+    $$("[data-q]", host).forEach(b => b.addEventListener("click", () => { const k = e.steps.findIndex(x => String(x.q) === b.dataset.q); show(k, k >= state.i ? 1 : -1); }));
     $$("[data-go]", host).forEach(b => b.addEventListener("click", () => show(+b.dataset.go, +b.dataset.go >= state.i ? 1 : -1)));
     const big = $("[data-big]", host); if (big) big.addEventListener("click", () => openBig(e));
     $$("[data-step]", host).forEach(b => b.addEventListener("click", () => {
@@ -535,8 +566,9 @@ function mountPlayer(e, host) {
     if (e.side) {
       const q = last ? 0 : (st.q || 0);
       const lis = $$(".side-en .enonce > ol > li");
-      lis.forEach((li, k) => li.classList.toggle("qon", k + 1 === q));
-      const on = lis[q - 1], box = $(".side-en");
+      const num = li => { const ol = li.parentElement; return (ol.hasAttribute("start") ? +ol.getAttribute("start") : 1) + [...ol.children].indexOf(li); };
+      lis.forEach(li => li.classList.toggle("qon", num(li) === q));
+      const on = lis.find(li => num(li) === q), box = $(".side-en");
       if (on && box && box.scrollHeight > box.clientHeight) box.scrollTo({ top: Math.max(0, on.offsetTop - 80), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     }
     typeset(host);
@@ -828,6 +860,8 @@ function route(keepScroll) {
   else if (h === "commando" || h === "s-xens") html = commandoPage();
   else if (h === "oraux-maths" || h === "s-oraux") html = orauxMathsPage();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
+  else if ((m = h.match(/^banque-([a-z0-9-]+)$/))) html = banquePage(m[1]);
+  else if ((m = h.match(/^c-annales-mp-(\d+)$/))) html = sujetPage(+m[1]);
   else if ((m = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/))) html = chapterPage(m[1], m[2], +m[3]);
   else if ((m = h.match(/^e-([a-z0-9-]+)$/))) { ex = EXERCISES.find(x => x.id === m[1]); html = exercisePage(m[1]); }
   else if (h === "exercices") html = exercisesPage(false);

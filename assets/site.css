@@ -332,6 +332,12 @@ input[type=range]{width:100%;accent-color:var(--navy);height:22px}
 /* Corrigé pas à pas */
 .player{position:relative}
 .player .prog{display:flex;gap:6px;margin-bottom:24px}
+.player .qnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.player .qnav button{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);min-width:44px;min-height:32px;padding:4px 10px;border-radius:8px;cursor:pointer;font:600 13.5px/1 inherit;font-variant-numeric:tabular-nums;transition:border-color var(--t-fast),background var(--t-fast)}
+.player .qnav button:hover{border-color:var(--ink)}
+.player .qnav button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+@media (prefers-color-scheme: dark){.player .qnav button[aria-pressed="true"]{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}}
+.prose h3.rq{margin:28px 0 6px;font-size:19px;letter-spacing:-.01em}
 .player .prog button{flex:1;height:6px;border-radius:3px;border:0;background:var(--line);cursor:pointer;padding:0;position:relative;overflow:hidden}
 .player .prog button::after{content:"";position:absolute;inset:0;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform var(--t-mid) var(--ease-out)}
 .player .prog button.done::after{transform:scaleX(1)}

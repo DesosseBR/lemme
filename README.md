@@ -11,6 +11,7 @@ assets/app.js         Navigation, lecteur PDF, visualisations, corrigé pas à p
 content/core.js       Socle commun et rappels partagés
 content/<matiere>.js  Chapitres, résumés, rappels, exercices, problèmes, DM, khôlles
 content/kholles-*.js  Exercices classiques de khôlle (sujet caché « kholles », visibles seulement page Khôlles)
+content/annales.js    Sujets de concours (sujet caché « annales ») : PDF d'origine pdf/sujet-*.pdf + corrigé par partie, visibles depuis Concours > banque
 content/pdfs.js       Généré : liste des PDF disponibles
 tex/lemme.sty         Style LaTeX commun des PDF
 tex/cours/            Cours complets écrits à la main (optionnel)
