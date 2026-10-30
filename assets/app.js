@@ -12,7 +12,7 @@ const sid = id => SUBJECTS.find(s => s.id === id);
 const VISIBLE = SUBJECTS.filter(s => !s.hidden);
 const CONC = window.LEMME.CONCOURS || {};
 const homeOf = s => s.home || "#commando";
-const parentOf = s => s.id === "oraux" ? ["Oraux", "#oral"] : ["Concours", "#concours"];
+const parentOf = s => s.id === "oraux" ? ["Oraux", "#oral"] : s.id === "kholles" ? ["Khôlles", "#kholles"] : ["Concours", "#concours"];
 let lastConc = null;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const pad = n => String(n).padStart(2, "0");
@@ -113,7 +113,7 @@ function phead({ crumb, title, meta = "", tabs = "", photo, tall }) {
 }
 function exCard(e) {
   const s = sid(e.subj), c = s.years[e.year][e.chap], pb = e.kind === "probleme";
-  return `<a class="excard" href="#e-${e.id}"><span class="top"><span class="kind${pb ? " pb" : ""}">${e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice") + " · " + (s.hidden ? s.name : s.name + " " + YEARS[e.year])}</span>${lvl(e.level)}</span><b>${esc(e.title)}</b><span class="foot"><span>${esc(c.t)}</span><span>·</span><span>${e.time}</span></span></a>`;
+  return `<a class="excard" href="#e-${e.id}"><span class="top"><span class="kind${pb ? " pb" : ""}">${e.subj === "kholles" ? "Khôlle · " + YEARS[e.year] : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice") + " · " + (s.hidden ? s.name : s.name + " " + YEARS[e.year])}</span>${lvl(e.level)}</span><b>${esc(e.title)}</b><span class="foot"><span>${esc(c.t)}</span><span>·</span><span>${e.time}</span></span></a>`;
 }
 function tabsHtml(list, cur) { return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}</div>`; }
@@ -197,8 +197,8 @@ function chapterPage(id, y, i) {
   else body = exs.length ? `<div class="exgrid stagger">${exs.map(exCard).join("")}</div>` : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
-  return phead({ crumb: s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : s.hidden ? `<span class="tag y">Topologie · ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: tabsHtml(tabs, chapTab) })
-    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : s.hidden ? s.name + " · Topologie" : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
+  return phead({ crumb: s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">Topologie · ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: tabsHtml(tabs, chapTab) })
+    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : id === "kholles" ? s.name + " · " + YEARS[y] : s.hidden ? s.name + " · Topologie" : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
 }
 
 let enonceMode = "interactif";
@@ -211,7 +211,7 @@ function exercisePage(eid) {
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year).slice(0, 2);
   if (e.concours) lastConc = e.concours;
   return phead({ crumb: s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: `<span class="tag y">${e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
+    meta: `<span class="tag y">${e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + (() => {
     const enHead = `<h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>`;
     const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
@@ -275,12 +275,19 @@ function dsPage() {
   </article></div>`;
 }
 
+function khollesEx() {
+  const s = sid("kholles"); if (!s || !(s.years[year] || []).length) return "";
+  const list = s.years[year];
+  return `<div style="margin-top:40px"><h2 style="font-family:var(--f-display,inherit);margin:0 0 8px">Exercices classiques de khôlle</h2><p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 24px;max-width:46em">Les grands classiques posés en khôlle, rangés par chapitre et corrigés pas à pas.</p>
+    <ol class="chapters stagger">${list.map((c, i) => { const n = exOf("kholles", year, i).length; return `<li><a href="#c-kholles-${year}-${i}"><span class="num">${pad(i + 1)}</span><h3>${esc(c.t)}</h3><span class="info">${n ? `<span><b>${n}</b> exo${n > 1 ? "s" : ""}</span>` : ""}<svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>`; }).join("")}</ol></div>`;
+}
+
 function khollesPage() {
   const groups = KHOLLES.filter(k => k.year === year);
   return phead({ crumb: [["Khôlles"]], title: "Questions de khôlle", meta: `<span class="tag y">${YEARS[year]}</span>`, photo: "oral" }) + `<div class="wrap layout full"><article class="prose">
     <p>Une heure au tableau : une question de cours, puis un exercice. Voici les questions de cours à savoir refaire.</p>
     ${groups.length ? groups.map(k => `<h2>${sid(k.subj).name}</h2><ol class="qlist">${k.qs.map(x => `<li><span>${x}</span></li>`).join("")}</ol>`).join("") : empty("Bientôt", "")}
-  </article></div>`;
+  </article>${khollesEx()}</div>`;
 }
 
 function concoursPage() {
