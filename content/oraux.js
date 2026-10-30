@@ -562,3 +562,315 @@ LEMME.exercises([
   methode: R`Dans un groupe de matrices, écris $g = eg$ et $e = gh$, puis utilise $\operatorname{rg}(AB)\leqslant\min(\operatorname{rg} A,\operatorname{rg} B)$.`
 }
 ]);
+
+/* ---------- Oraux · Dénombrement (chapitre 6) : X-ENS ----------
+   Champ h d'une étape : l'indice « coup d'œil ». Champ ctx : rappel de cours appliqué à l'exercice. */
+LEMME.CONCOURS.x = "X-ENS";
+(() => {
+const ch = LEMME.SUBJECTS.find(s => s.id === "oraux").years.mp[5];
+if (!ch.cc.includes("x")) ch.cc.push("x");
+
+const f1 = v => +v.toFixed(1);
+const FIG = (w, h, body, cap, label) => `<figure class="fig"><svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${label}">${body}</svg><figcaption>${cap}</figcaption></figure>`;
+const S = (x, y, t, a = "start", cls = "sm") => `<text x="${f1(x)}" y="${f1(y)}" class="${cls}" text-anchor="${a}">${t}</text>`;
+const TI = (x, y, t, a = "middle", cls = "it") => `<text x="${f1(x)}" y="${f1(y)}" class="${cls}" text-anchor="${a}">${t}</text>`;
+const ARR = (x1, y1, x2, y2, c = "k", h = 8) => {
+  const a = Math.atan2(y2 - y1, x2 - x1), bx = x2 - h * Math.cos(a), by = y2 - h * Math.sin(a), w = h * 0.42;
+  return `<line class="v${c}" style="stroke-width:1.6" x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(bx)}" y2="${f1(by)}"/><polygon class="h${c}" points="${[[x2, y2], [bx + w * Math.sin(a), by - w * Math.cos(a)], [bx - w * Math.sin(a), by + w * Math.cos(a)]].map(q => q.map(f1).join(",")).join(" ")}"/>`;
+};
+
+/* ===== Dominos ===== */
+const C = 24;
+/* t : suite de "|" (domino vertical, 1 colonne) et "=" (deux dominos horizontaux, 2 colonnes) */
+const board = (x0, y0, t, shade) => {
+  let x = x0, s = "";
+  for (const p of t) {
+    const fill = shade && shade.has(x - x0) ? "mass" : "body";
+    if (p === "|") { s += `<rect class="${fill}" x="${x + 2}" y="${y0 + 2}" width="${C - 4}" height="${2 * C - 4}" rx="3"/>`; x += C; }
+    else { s += `<rect class="${fill}" x="${x + 2}" y="${y0 + 2}" width="${2 * C - 4}" height="${C - 4}" rx="3"/><rect class="${fill}" x="${x + 2}" y="${y0 + C + 2}" width="${2 * C - 4}" height="${C - 4}" rx="3"/>`; x += 2 * C; }
+  }
+  return s;
+};
+const TIL = { 1: ["|"], 2: ["||", "="], 3: ["|||", "|=", "=|"], 4: ["||||", "||=", "|=|", "=||", "=="] };
+const figDominos = FIG(560, 300, [1, 2, 3, 4].map((n, r) => {
+  const y = 18 + r * 70; let x = 92, s = TI(14, y + 30, `n = ${n}`, "start") + S(14, y + 48, `t<tspan dy="3" font-size="9">${n}</tspan><tspan dy="-3"> = ${TIL[n].length}</tspan>`);
+  for (const t of TIL[n]) { s += board(x, y, t); x += n * C + 16; }
+  return s;
+}).join(""),
+  R`Tous les pavages pour $n\leqslant4$. Un domino vertical occupe une colonne ; deux dominos horizontaux superposés occupent deux colonnes.`,
+  "Tous les pavages d'un ruban de 2 lignes et n colonnes pour n de 1 à 4");
+const figCoupe = (() => {
+  const grid = (x0, y0, n) => { let s = ""; for (let i = 0; i < n; i++) for (let j = 0; j < 2; j++) s += `<rect x="${x0 + i * C}" y="${y0 + j * C}" width="${C}" height="${C}" style="fill:var(--bg-2);stroke:var(--line)"/>`; return s; };
+  const y1 = 30, y2 = 120, n = 6;
+  return FIG(520, 210,
+    S(10, y1 - 10, "Cas 1 : la dernière colonne est un domino vertical") +
+    grid(20, y1, n) + `<rect x="20" y="${y1}" width="${n * C}" height="${2 * C}" class="thin" style="stroke-dasharray:none;stroke:var(--blue);stroke-width:1.5"/>` + TI(20 + n * C / 2, y1 + C + 5, "t<tspan dy=\"3\" font-size=\"10\">n</tspan>", "middle", "it b") + S(20 + n * C / 2, y1 + 2 * C + 16, "n colonnes", "middle") +
+    `<rect class="mass" x="${20 + n * C + 2}" y="${y1 + 2}" width="${C - 4}" height="${2 * C - 4}" rx="3"/>` +
+    S(10, y2 - 10, "Cas 2 : la case en haut à droite est couverte par un domino horizontal") +
+    grid(20, y2, n - 1) + `<rect x="20" y="${y2}" width="${(n - 1) * C}" height="${2 * C}" class="thin" style="stroke-dasharray:none;stroke:var(--blue);stroke-width:1.5"/>` + TI(20 + (n - 1) * C / 2, y2 + C + 5, "t<tspan dy=\"3\" font-size=\"10\">n−1</tspan>", "middle", "it b") + S(20 + (n - 1) * C / 2, y2 + 2 * C + 16, "n − 1 colonnes", "middle") +
+    `<rect class="mass" x="${20 + (n - 1) * C + 2}" y="${y2 + 2}" width="${2 * C - 4}" height="${C - 4}" rx="3"/><rect class="mass" x="${20 + (n - 1) * C + 2}" y="${y2 + C + 2}" width="${2 * C - 4}" height="${C - 4}" rx="3"/>` +
+    S(20 + (n + 1) * C + 14, y2 + 20, "forcé : la case du bas") + S(20 + (n + 1) * C + 14, y2 + 36, "ne peut plus être couverte") + S(20 + (n + 1) * C + 14, y2 + 52, "que par un horizontal"),
+    R`Pour un ruban à $n+1$ colonnes, tout dépend de la façon dont est couverte la case en haut à droite. Les deux cas ne se recouvrent pas et épuisent toutes les possibilités.`,
+    "Les deux façons de terminer un pavage");
+})();
+
+/* ===== Permutations ===== */
+/* Diagramme sagittal : i en haut, sigma(i) en bas ; les points fixes en jaune */
+const perm = (x0, y0, sg, title, gap = 34) => {
+  const n = sg.length, X = i => x0 + i * gap;
+  let s = title ? S(x0 + (n - 1) * gap / 2, y0 - 16, title, "middle") : "";
+  sg.forEach((v, i) => {
+    const fixe = v === i + 1;
+    s += ARR(X(i), y0 + 10, X(v - 1), y0 + 60, fixe ? "g" : "b");
+  });
+  for (let i = 0; i < n; i++) {
+    const fixe = sg[i] === i + 1;
+    s += `<circle cx="${X(i)}" cy="${y0}" r="9" class="${fixe ? "mass" : "body"}"/>` + TI(X(i), y0 + 4, i + 1, "middle", "") .replace("<text", '<text style="font-size:11px"');
+    s += `<circle cx="${X(i)}" cy="${y0 + 70}" r="9" class="${sg.indexOf(i + 1) === i ? "mass" : "body"}"/>` + TI(X(i), y0 + 74, i + 1, "middle", "").replace("<text", '<text style="font-size:11px"');
+  }
+  return s;
+};
+const figPerm3 = FIG(560, 150,
+  perm(30, 36, [2, 3, 1], "dérangement") + perm(150, 36, [3, 1, 2], "dérangement") + perm(270, 36, [1, 3, 2], "1 est fixe") + perm(390, 36, [3, 2, 1], "2 est fixe") +
+  S(490, 40, "en haut : i") + S(490, 110, "en bas : σ(i)"),
+  R`Quelques permutations de $\{1,2,3\}$, dessinées par des flèches $i\to\sigma(i)$. Un point fixe est une flèche verticale (en jaune). Les deux premières n'en ont aucun : $d_3 = 2$.`,
+  "Diagrammes de permutations de 1, 2, 3");
+const figPointsFixes = FIG(560, 170,
+  perm(40, 40, [1, 4, 3, 5, 2], "", 44) +
+  `<rect x="232" y="16" width="300" height="118" rx="12" class="thin"/>` +
+  S(246, 38, "1. on choisit les points fixes : F = {1, 3}") + S(246, 58, "   2 parmi 5 : 10 choix possibles") +
+  S(246, 86, "2. sur les autres, {2, 4, 5}, σ ne fixe rien :") + S(246, 106, "   c'est un dérangement de 3 éléments") + S(246, 126, "   d₃ = 2 choix") +
+  S(40, 160, "exemple : σ = (1, 4, 3, 5, 2) a exactement 2 points fixes"),
+  R`Une permutation de $\{1,\dots,5\}$ avec exactement $2$ points fixes est déterminée par deux choix indépendants : l'ensemble de ses points fixes, puis un dérangement des autres éléments.`,
+  "Décomposer une permutation selon ses points fixes");
+const figEmboite = FIG(460, 190,
+  `<ellipse cx="200" cy="95" rx="185" ry="80" class="body" style="fill:none"/>` + S(14, 22, "{1, …, n}") +
+  `<ellipse cx="230" cy="100" rx="120" ry="52" style="fill:var(--yellow-soft);stroke:var(--gold-ink);stroke-width:1.4"/>` + S(352, 40, "A : m éléments", "start", "sm g") +
+  `<ellipse cx="190" cy="104" rx="52" ry="28" style="fill:var(--yellow);stroke:var(--ink);stroke-width:1.2"/>` + S(190, 108, "B : k éléments", "middle") +
+  S(404, 182, "B ⊂ A ⊂ {1, …, n}", "end"),
+  R`Compter les couples $(A,B)$ avec $B\subset A$, $|A| = m$, $|B| = k$, de deux façons : choisir $B$ puis compléter en $A$, ou choisir $A$ puis $B$ dedans. On obtient $\binom nk\binom{n-k}{m-k} = \binom nm\binom mk$.`,
+  "Deux parties emboîtées");
+const figTriangle = (() => {
+  const n = 5, g = 30, x0 = 70, y0 = 180;
+  let s = ARR(x0 - 10, y0, x0 + (n + 1) * g, y0, "k", 7) + ARR(x0, y0 + 10, x0, y0 - (n + 1) * g, "k", 7) + TI(x0 + (n + 1) * g + 4, y0 + 18, "k", "start") + TI(x0 - 18, y0 - (n + 1) * g + 6, "p", "start");
+  for (let k = 0; k <= n; k++) for (let p = 0; p + k <= n; p++) s += `<circle cx="${x0 + k * g}" cy="${y0 - p * g}" r="5" class="mass"/>`;
+  s += `<rect x="${x0 + 2 * g - 9}" y="${y0 - 3 * g - 9}" width="18" height="${3 * g + 18}" rx="9" class="thin" style="stroke:var(--blue);stroke-dasharray:none;stroke-width:1.6"/>`;
+  s += `<rect x="${x0 - 9}" y="${y0 - 2 * g - 9}" width="${3 * g + 18}" height="18" rx="9" class="thin" style="stroke:var(--red);stroke-dasharray:none;stroke-width:1.6"/>`;
+  s += S(x0 + 2 * g + 14, y0 - 3 * g - 14, "k fixé : p va de 0 à n − k", "start", "sm b") + S(x0 + 3 * g + 16, y0 - 2 * g + 4, "p fixé : k va de 0 à n − p", "start", "sm r");
+  for (let k = 0; k <= n; k++) s += S(x0 + k * g, y0 + 18, k, "middle");
+  return FIG(420, 210, s, R`Les couples $(k,p)$ avec $k+p\leqslant n$ (ici $n = 5$) forment un triangle. On peut le parcourir colonne par colonne ($k$ fixé) ou ligne par ligne ($p$ fixé) : la somme est la même.`, "Triangle des indices d'une somme double");
+})();
+
+/* ===== Dérangements : convergence vers 1/e ===== */
+const dn = [1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961];
+const fact = n => n ? n * fact(n - 1) : 1;
+const figVers1e = (() => {
+  const X = n => 50 + n * 34, Y = y => 190 - y * 300;
+  let s = ARR(40, 190, 420, 190, "k", 7) + ARR(50, 196, 50, 20, "k", 7) + S(424, 206, "n", "end") + TI(58, 28, "d<tspan dy=\"3\" font-size=\"10\">n</tspan><tspan dy=\"-3\"> / n!</tspan>", "start");
+  s += `<line class="thin" x1="50" y1="${f1(Y(1 / Math.E))}" x2="410" y2="${f1(Y(1 / Math.E))}"/>` + S(412, f1(Y(1 / Math.E)) + 18, "1/e ≈ 0,368", "end");
+  s += `<line class="thin" x1="50" y1="${f1(Y(0.5))}" x2="56" y2="${f1(Y(0.5))}" style="stroke-dasharray:none"/>` + S(44, f1(Y(0.5)) + 4, "0,5", "end") + S(44, 194, "0", "end");
+  for (let n = 1; n <= 10; n++) { const v = dn[n] / fact(n); s += `<circle cx="${X(n)}" cy="${f1(Y(v))}" r="4.5" class="mass"/>` + S(X(n), 206, n, "middle"); }
+  return FIG(440, 216, s, R`Les proportions $d_n/n!$ oscillent autour de $1/e$ et s'en approchent très vite : dès $n = 5$, l'écart est inférieur à $10^{-3}$.`, "La proportion de dérangements tend vers un sur e");
+})();
+
+/* ===== Court-circuit ===== */
+const node = (x, y, t, cls = "body") => `<circle cx="${x}" cy="${y}" r="15" class="${cls}"/>` + `<text x="${x}" y="${y + 5}" text-anchor="middle" style="font-size:13px" class="it">${t}</text>`;
+const figCourt = FIG(560, 210,
+  S(14, 22, "Cas 2 : σ(k) ≠ n + 1. On retire n + 1 du cycle.") +
+  S(30, 60, "σ :") + node(90, 56, "j") + ARR(106, 56, 164, 56, "b") + node(180, 56, "n+1", "mass") + ARR(196, 56, 254, 56, "b") + node(270, 56, "k") + ARR(286, 56, 344, 56, "b") + node(360, 56, "σ(k)") + S(400, 60, "…") +
+  S(30, 126, "τ :") + node(90, 122, "j") + `<path class="vg" style="fill:none;stroke-width:1.8" d="M104 114 Q180 74 256 114"/><polygon class="hg" points="256,114 245,113 250,104"/>` + node(270, 122, "k") + ARR(286, 122, 344, 122, "b") + node(360, 122, "σ(k)") + S(400, 126, "…") +
+  S(14, 170, "Cas 1 : σ(k) = n + 1. Les deux éléments s'échangent :") + node(330, 184, "k") + `<path class="vb" style="fill:none;stroke-width:1.6" d="M344 176 Q380 160 416 176"/><path class="vb" style="fill:none;stroke-width:1.6" d="M416 192 Q380 208 344 192"/>` + node(430, 184, "n+1", "mass") + S(460, 188, "on les enlève"),
+  R`Le « court-circuit » : on remplace $j\to n+1\to k$ par $j\to k$. On obtient une permutation $\tau$ de $\{1,\dots,n\}$, toujours sans point fixe.`,
+  "Retirer n plus un du cycle d'un dérangement");
+
+LEMME.rappels({
+  "o-binom": { t: "Coefficient binomial", b: R`<p>Pour $0\leqslant k\leqslant n$, $\binom nk$ (« $k$ parmi $n$ ») est le nombre de parties à $k$ éléments d'un ensemble à $n$ éléments.</p><div class="sbox">$$\begin{gathered}\binom nk = \frac{n!}{k!\,(n-k)!}\\\binom nk = \binom n{n-k},\qquad\binom n0 = \binom nn = 1\end{gathered}$$</div><p><b>Exemple :</b> $\binom42 = \frac{24}{2\times2} = 6$ : les paires de $\{1,2,3,4\}$ sont $12,13,14,23,24,34$.</p>` },
+  "o-binome": { t: "Formule du binôme", b: R`<div class="sbox">$$(a+b)^m = \sum_{k=0}^m\binom mk a^kb^{m-k}.$$</div><p>Avec $a = -1$ et $b = 1$ :</p>$$\sum_{k=0}^m(-1)^k\binom mk = (1-1)^m = \begin{cases}1&\text{si }m = 0\\0&\text{si }m\geqslant1\end{cases}$$<p>(avec la convention $0^0 = 1$).</p>` },
+  "o-partition": { t: "Principe additif (partition)", b: R`<p>Si $E = A_1\cup\dots\cup A_r$ avec des $A_i$ <b>deux à deux disjoints</b>, alors</p><div class="sbox">$$|E| = |A_1|+|A_2|+\dots+|A_r|.$$</div><p>Pour l'utiliser, il faut vérifier deux choses : chaque élément est dans un des $A_i$ (on n'oublie rien), et dans un seul (on ne compte rien deux fois).</p>` },
+  "o-produit": { t: "Principe multiplicatif", b: R`<p>Si un objet est déterminé par une suite de choix, le premier ayant $a$ possibilités et le second $b$ possibilités <b>quel que soit le premier choix</b>, il y a</p><div class="sbox">$$a\times b\ \text{objets}.$$</div><p><b>Exemple :</b> un menu avec $3$ entrées et $4$ plats : $12$ menus.</p>` },
+  "o-bij-card": { t: "Bijection et cardinal", b: R`<p>S'il existe une bijection $f : A\to B$ entre deux ensembles finis, alors</p><div class="sbox">$$|A| = |B|.$$</div><p>Pour montrer que $f$ est bijective, le plus simple est souvent d'écrire sa réciproque $g$ et de vérifier $g\circ f = \mathrm{Id}_A$ et $f\circ g = \mathrm{Id}_B$.</p>` },
+  "o-rec-lin2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`<p>Soit $u_{n+2} = a\,u_{n+1}+b\,u_n$ avec $b\neq0$. On cherche des solutions $r^n$ : $r$ doit vérifier l'<b>équation caractéristique</b></p><div class="sbox">$$r^2 = ar+b.$$</div><p>Si elle a deux racines réelles distinctes $r_1\neq r_2$, alors il existe des constantes $A,B$ (fixées par $u_0$ et $u_1$) telles que</p><div class="sbox">$$u_n = A\,r_1^n+B\,r_2^n\quad\text{pour tout }n.$$</div>` },
+  "o-partie-entiere": { t: "Partie entière", b: R`<p>$\lfloor x\rfloor$ est le plus grand entier inférieur ou égal à $x$ :</p><div class="sbox">$$\lfloor x\rfloor = N\iff N\in\mathbb Z\ \text{et}\ N\leqslant x<N+1.$$</div><p>Méthode pratique : si $x = N+\theta$ avec $N$ entier et $0\leqslant\theta<1$, alors $\lfloor x\rfloor = N$.</p><p><b>Exemples :</b> $\lfloor2{,}7\rfloor = 2$, $\lfloor-2{,}7\rfloor = -3$.</p>` },
+  "o-somme-double": { t: "Intervertir une somme triangulaire", b: R`<p>Les couples $(k,p)$ d'entiers positifs avec $k+p\leqslant n$ peuvent se parcourir dans les deux sens :</p><div class="sbox">$$\sum_{k=0}^n\ \sum_{p=0}^{n-k}a_{k,p} = \sum_{p=0}^n\ \sum_{k=0}^{n-p}a_{k,p}.$$</div><p>Une somme finie ne dépend pas de l'ordre des termes.</p>` },
+  "o-rayon": { t: "Rayon de convergence", b: R`<p>Le rayon $R$ de $\sum a_nz^n$ est caractérisé par : la série converge (absolument) si $|z|<R$, et la suite $(a_nz^n)$ n'est pas bornée si $|z|>R$.</p><div class="sbox">$$|a_n|\leqslant|b_n|\ \Longrightarrow\ R_a\geqslant R_b$$</div><p>Et si $(a_nz_0^n)$ ne tend pas vers $0$, alors $R\leqslant|z_0|$.</p>` },
+  "o-cauchy": { t: "Produit de Cauchy de séries entières", b: R`<p>Si $|z|$ est strictement inférieur aux deux rayons :</p><div class="sbox">$$\begin{gathered}\Big(\sum_{n\geqslant0}a_nz^n\Big)\Big(\sum_{n\geqslant0}b_nz^n\Big) = \sum_{n\geqslant0}c_nz^n\\c_n = \sum_{k=0}^na_kb_{n-k}\end{gathered}$$</div><p>On regroupe les termes $a_kz^k\cdot b_jz^j$ par puissance totale $k+j = n$, comme pour un produit de polynômes.</p>` },
+  "o-exp": { t: "Série de l'exponentielle", b: R`<div class="sbox">$$\begin{gathered}e^z = \sum_{n=0}^{+\infty}\frac{z^n}{n!}\quad(z\in\mathbb C)\\\frac1{1-z} = \sum_{n=0}^{+\infty}z^n\quad(|z|<1)\end{gathered}$$</div><p>Le rayon de la première est $+\infty$, celui de la seconde est $1$.</p>` },
+  "o-unicite": { t: "Unicité des coefficients", b: R`<p>Si $\sum a_nz^n = \sum b_nz^n$ pour tout $z$ d'un disque $|z|<r$ avec $r>0$, alors</p><div class="sbox">$$a_n = b_n\quad\text{pour tout }n.$$</div><p>On peut donc « identifier les coefficients », comme pour des polynômes.</p>` },
+  "o-alternee": { t: "Critère des séries alternées", b: R`<p>Si $(u_n)$ est positive, décroissante et tend vers $0$, alors $\sum(-1)^nu_n$ converge, et son reste $R_n = \sum_{p>n}(-1)^pu_p$ vérifie :</p><div class="sbox">$$\begin{gathered}|R_n|\leqslant u_{n+1}\\R_n\ \text{a le signe de}\ (-1)^{n+1}\end{gathered}$$</div><p>Si $(u_n)$ est <b>strictement</b> décroissante, l'inégalité est stricte.</p>` },
+  "o-telescopage": { t: "Somme télescopique", b: R`<div class="sbox">$$\sum_{k=1}^n(v_k-v_{k-1}) = v_n-v_0.$$</div><p>Les termes intermédiaires s'annulent deux à deux : $(v_1-v_0)+(v_2-v_1)+\dots+(v_n-v_{n-1})$.</p>` }
+});
+
+LEMME.notions({
+  "permutation": { p: "permutations?", t: "Permutation", b: R`<p>Une permutation de $E = \{1,\dots,n\}$ est une bijection $\sigma : E\to E$. On l'écrit souvent par la liste de ses images :</p><div class="sbox">$$\begin{gathered}\sigma = \big(\sigma(1),\dots,\sigma(n)\big)\\|\mathfrak S_n| = n!\end{gathered}$$</div><p><b>Exemple :</b> $\sigma = (2,3,1)$ envoie $1\mapsto2$, $2\mapsto3$, $3\mapsto1$.</p><p><b>Pourquoi $n!$ :</b> $n$ choix pour $\sigma(1)$, puis $n-1$ pour $\sigma(2)$, etc.</p>` },
+  "point-fixe": { p: "points? fixes?", t: "Point fixe", b: R`<p>$i$ est un point fixe de $\sigma$ si</p><div class="sbox">$$\sigma(i) = i.$$</div><p><b>Exemple :</b> $(1,3,2)$ fixe $1$ ; $(2,3,1)$ n'a aucun point fixe. L'identité a $n$ points fixes. Aucune permutation n'en a exactement $n-1$ : si $n-1$ éléments sont fixes, le dernier n'a plus que lui-même comme image.</p>` },
+  "derangement": { p: "dérangements?", t: "Dérangement", b: R`<p>Une permutation <b>sans point fixe</b> :</p><div class="sbox">$$\forall i,\ \sigma(i)\neq i.$$</div><p>On note $d_n$ leur nombre, avec $d_0 = 1$ (la permutation vide n'a aucun point fixe).</p><table class="vals"><tr><th>$n$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><th>$d_n$</th><td>1</td><td>0</td><td>1</td><td>2</td><td>9</td><td>44</td><td>265</td></tr></table><p><b>Image :</b> $n$ personnes reprennent au hasard leur parapluie ; un dérangement est une répartition où personne n'a le sien.</p>` },
+  "coef-binomial": { p: "coefficients? binomiaux|coefficients? binomial", t: "Coefficient binomial", b: R`<div class="sbox">$$\binom nk = \frac{n!}{k!\,(n-k)!} = \frac{n(n-1)\cdots(n-k+1)}{k!}.$$</div><p>Nombre de façons de choisir $k$ objets parmi $n$, sans ordre. <b>Exemple :</b> $\binom52 = \frac{5\times4}{2} = 10$.</p><p><b>Triangle de Pascal :</b> $\binom nk = \binom{n-1}{k-1}+\binom{n-1}k$.</p>` },
+  "partition": { p: "partitions?|partitionne(?:r|nt)?", t: "Partition d'un ensemble", b: R`<p>$(A_1,\dots,A_r)$ est une partition de $E$ si les $A_i$ sont <b>disjoints deux à deux</b> et de réunion $E$ :</p><div class="sbox">$$E = A_1\sqcup\dots\sqcup A_r\ \Longrightarrow\ |E| = \sum_{i=1}^r|A_i|.$$</div><p><b>Exemple :</b> les permutations de $\{1,2,3\}$ classées par nombre de points fixes : $2$ (aucun) $+\,3$ (un) $+\,0$ (deux) $+\,1$ (trois) $= 6$.</p>` },
+  "rec-lineaire": { p: "suites? récurrentes? linéaires?|récurrences? linéaires?", t: "Suite récurrente linéaire d'ordre 2", b: R`<p>Une suite telle que $u_{n+2} = a\,u_{n+1}+b\,u_n$. Elle est entièrement déterminée par $u_0$ et $u_1$.</p><div class="sbox">$$\begin{gathered}r^2 = ar+b\ \text{a deux racines}\ r_1\neq r_2\\\Longrightarrow\ u_n = A\,r_1^n+B\,r_2^n\end{gathered}$$</div><p><b>Exemple :</b> $u_{n+2} = u_{n+1}+2u_n$ : $r^2 = r+2$, racines $2$ et $-1$, donc $u_n = A\,2^n+B(-1)^n$.</p>` },
+  "eq-caracteristique": { p: "équations? caractéristiques?", t: "Équation caractéristique", b: R`<p>Pour $u_{n+2} = a\,u_{n+1}+b\,u_n$, on cherche une solution de la forme $u_n = r^n$ : en divisant par $r^n$,</p><div class="sbox">$$r^{n+2} = a\,r^{n+1}+b\,r^n\iff r^2 = ar+b.$$</div><p>C'est l'équation caractéristique. Ses racines donnent les « briques » $r^n$ des solutions.</p>` },
+  "nombre-or": { p: "nombre d'or", t: "Nombre d'or", b: R`<div class="sbox">$$\begin{gathered}\varphi = \frac{1+\sqrt5}2\approx1{,}618\\\psi = \frac{1-\sqrt5}2 = -\frac1\varphi\approx-0{,}618\end{gathered}$$</div><p>Ce sont les racines de $r^2 = r+1$. Relations utiles : $\varphi+\psi = 1$, $\varphi\psi = -1$, $\varphi-\psi = \sqrt5$.</p>` },
+  "fibonacci": { p: "suite de Fibonacci|Fibonacci", t: "Suite de Fibonacci", b: R`<div class="sbox">$$F_0 = 0,\quad F_1 = 1,\quad F_{n+2} = F_{n+1}+F_n.$$</div><p>Premiers termes : $0,1,1,2,3,5,8,13,21,\dots$ Formule de Binet : $F_n = \dfrac{\varphi^n-\psi^n}{\sqrt5}$.</p>` },
+  "partie-entiere": { p: "parties? entières?", t: "Partie entière", b: R`<div class="sbox">$$\lfloor x\rfloor = N\iff N\in\mathbb Z\ \text{et}\ N\leqslant x<N+1.$$</div><p><b>Entier le plus proche :</b> si $x$ n'est pas un demi-entier, l'entier le plus proche de $x$ est $\big\lfloor x+\tfrac12\big\rfloor$. <b>Exemple :</b> $\lfloor8{,}83+0{,}5\rfloor = 9$.</p>` },
+  "serie-entiere": { p: "séries? entières?", t: "Série entière", b: R`<p>Une série de la forme $\sum a_nz^n$, où $z$ est la variable (réelle ou complexe). C'est un « polynôme de degré infini ».</p><div class="sbox">$$S(z) = \sum_{n=0}^{+\infty}a_nz^n\quad\text{pour }|z|<R.$$</div><p><b>Exemple :</b> $\sum z^n = \frac1{1-z}$ pour $|z|<1$.</p>` },
+  "serie-gen-exp": { p: "séries? génératrices? exponentielles?", t: "Série génératrice exponentielle", b: R`<p>Pour une suite $(u_n)$, c'est la série entière</p><div class="sbox">$$\sum_{n\geqslant0}\frac{u_n}{n!}\,z^n.$$</div><p>On divise par $n!$ quand on compte des objets « étiquetés » (permutations...) : les produits de séries font alors apparaître des $\binom nk$. <b>Exemple :</b> pour $u_n = 1$, on obtient $e^z$.</p>` },
+  "rayon-cv": { p: "rayons? de convergence", t: "Rayon de convergence", b: R`<p>Le nombre $R\in[0,+\infty]$ tel que $\sum a_nz^n$ converge absolument pour $|z|<R$ et diverge grossièrement pour $|z|>R$.</p><div class="sbox">$$|a_n|\leqslant1\ \Longrightarrow\ R\geqslant1.$$</div><p>On compare avec une série connue : ici la série géométrique $\sum z^n$, de rayon $1$.</p>` },
+  "produit-cauchy": { p: "produits? de Cauchy", t: "Produit de Cauchy", b: R`<div class="sbox">$$\begin{gathered}\Big(\sum a_nz^n\Big)\Big(\sum b_nz^n\Big) = \sum c_nz^n\\c_n = \sum_{k=0}^na_kb_{n-k}\end{gathered}$$</div><p><b>Exemple :</b> $c_2 = a_0b_2+a_1b_1+a_2b_0$. Valable pour $|z|$ inférieur aux deux rayons.</p>` },
+  "serie-alternee": { p: "séries? alternées?", t: "Série alternée", b: R`<p>Une série $\sum(-1)^nu_n$ avec $u_n\geqslant0$. Si $(u_n)$ décroît vers $0$, elle converge et son reste est plus petit que le premier terme négligé :</p><div class="sbox">$$\Big|\sum_{p=n+1}^{+\infty}(-1)^pu_p\Big|\leqslant u_{n+1}.$$</div><p><b>Exemple :</b> $\frac1e = 1-1+\frac12-\frac16+\frac1{24}-\dots$, et l'erreur après $\frac1{24}$ est au plus $\frac1{120}$.</p>` },
+  "telescopage": { p: "télescopages?|télescopiques?|télescoper", t: "Télescopage", b: R`<div class="sbox">$$\sum_{k=1}^n(v_k-v_{k-1}) = v_n-v_0.$$</div><p><b>Exemple :</b> $\sum_{k=1}^n\Big(\frac1{k-1}-\frac1k\Big)$ pour $k\geqslant2$ se simplifie de la même façon.</p>` }
+});
+
+LEMME.exercises([
+{
+  id: "o-den-1", subj: "oraux", year: "mp", chap: 5, concours: "x", level: 3, time: "25 min",
+  title: "Pavages d'un ruban par des dominos",
+  enonce: R`<p>On dispose d'un ruban de $2$ lignes et $n$ colonnes ($n\geqslant1$), formé de $2n$ cases carrées, et d'autant de dominos $1\times2$ qu'on veut. Un <span data-k="pavage">pavage</span> du ruban est une façon de le recouvrir entièrement par des dominos, sans chevauchement ni débordement. On note $t_n$ le nombre de pavages, et on pose <span data-k="tzero">$t_0 = 1$</span>.</p>
+<ol>
+<li>Dessiner tous les pavages pour $n\leqslant4$.</li>
+<li>Montrer que $t_{n+1} = t_n+t_{n-1}$ pour tout $n\geqslant1$.</li>
+<li>Exprimer $t_n$ en fonction de $\varphi = \frac{1+\sqrt5}2$ et $\psi = \frac{1-\sqrt5}2$.</li>
+<li>Montrer que, pour <b>tout</b> $n\in\mathbb N$, $t_n$ est <span data-k="proche">l'entier le plus proche</span> de $\dfrac{\varphi^{n+1}}{\sqrt5}$, c'est-à-dire $t_n = \Big\lfloor\dfrac{\varphi^{n+1}}{\sqrt5}+\dfrac12\Big\rfloor$.</li>
+</ol>`,
+  decode: {
+    donnees: [R`Un ruban $2\times n$ et des dominos $1\times2$, posés verticalement ou horizontalement.`, R`La convention $t_0 = 1$.`],
+    but: R`Les petites valeurs, une récurrence, une formule explicite, puis un calcul par partie entière.`,
+    cles: {
+      pavage: R`Un pavage est une liste de dominos qui couvre chaque case <b>exactement une fois</b> :$$\text{cases couvertes} = 2n = 2\times(\text{nombre de dominos}).$$Donc un pavage de $2\times n$ utilise toujours $n$ dominos.`,
+      tzero: R`Le ruban $2\times0$ est vide : il a un seul pavage, celui qui n'utilise aucun domino.$$t_0 = 1.$$Cette convention rend la récurrence vraie dès $n = 1$ : $t_2 = t_1+t_0 = 1+1 = 2$.`,
+      proche: R`Pour un réel $x$ qui n'est pas un demi-entier :$$\text{entier le plus proche de }x = \Big\lfloor x+\frac12\Big\rfloor.$$Exemple : $x = 4{,}96$ donne $\lfloor5{,}46\rfloor = 5$ ; $x = 3{,}04$ donne $\lfloor3{,}54\rfloor = 3$.`,
+      bord: R`La case en haut à droite est la case $(1,n+1)$ : ligne $1$, dernière colonne. Elle doit être couverte par un domino, et il n'y a que deux positions possibles.`
+    }
+  },
+  steps: [
+    { q: 1, t: "Les petits cas, à la main", h: R`<p>En dénombrement, on commence <b>toujours</b> par les petits cas. Ils servent à deviner la récurrence ($1,2,3,5$ : on reconnaît Fibonacci) et à la vérifier ensuite.</p>`, b: R`<p>Un domino vertical occupe une colonne entière. Deux dominos horizontaux, l'un au-dessus de l'autre, occupent deux colonnes. On énumère :</p>` + figDominos + R`<table class="vals"><tr><th>$n$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>$t_n$</th><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td></tr></table><p>Chaque valeur est la somme des deux précédentes : $2 = 1+1$, $3 = 2+1$, $5 = 3+2$.</p>` },
+    { q: 2, t: "Regarder un bord du ruban", h: R`<p>Pour établir une récurrence sur un dénombrement, on fait une <b>partition</b> selon ce qui se passe à une extrémité. Ce qui reste est alors un objet du même type, en plus petit.</p>`, b: R`<p>On prend un pavage du ruban à $n+1$ colonnes et on regarde <span data-k="bord">la case en haut à droite</span>. Deux possibilités, et deux seulement :</p><ul><li><b>Cas 1 :</b> elle est couverte par un domino <b>vertical</b>. Ce domino occupe toute la dernière colonne.</li><li><b>Cas 2 :</b> elle est couverte par un domino <b>horizontal</b>, qui occupe les deux dernières cases de la ligne $1$. Alors la case en bas à droite ne peut plus être couverte par un vertical (la case du dessus est prise) : elle est couverte par un horizontal aussi.</li></ul>` + figCoupe, rappels: ["o-partition"] },
+    { q: 2, t: "Compter chaque cas", h: R`<p>Une fois les cas séparés, on montre que chacun est <b>en bijection</b> avec des pavages plus petits. Les deux cas ne se recouvrent pas : on peut additionner.</p>`, b: R`<ul><li><b>Cas 1 :</b> si on enlève le domino vertical, il reste un pavage quelconque du ruban à $n$ colonnes. Inversement, tout pavage à $n$ colonnes, complété par un vertical, donne un pavage du cas 1. Il y en a donc $t_n$.</li><li><b>Cas 2 :</b> si on enlève les deux horizontaux, il reste un pavage quelconque du ruban à $n-1$ colonnes : il y en a $t_{n-1}$.</li></ul><p>Ces deux cas forment une partition des pavages à $n+1$ colonnes :</p><div class="sbox">$$t_{n+1} = t_n+t_{n-1}\qquad(n\geqslant1).$$</div><p><b>Vérification :</b> $t_5 = t_4+t_3 = 5+3 = 8$. C'est la suite de Fibonacci décalée : $t_n = F_{n+1}$.</p>`, rappels: ["o-partition", "o-bij-card"] },
+    { q: 3, t: "L'équation caractéristique", h: R`<p>Une suite récurrente linéaire d'ordre 2 à coefficients constants : le réflexe est de chercher des solutions de la forme $r^n$.</p>`, b: R`<p>La récurrence $t_{n+2} = t_{n+1}+t_n$ a pour équation caractéristique</p>$$r^2 = r+1\iff r^2-r-1 = 0.$$<p>Discriminant $\Delta = 1+4 = 5>0$ : deux racines réelles</p>$$\varphi = \frac{1+\sqrt5}2\approx1{,}618,\qquad\psi = \frac{1-\sqrt5}2\approx-0{,}618.$$<p>Donc il existe $A,B$ réels tels que $t_n = A\varphi^n+B\psi^n$ pour tout $n$.</p><p><b>Relations utiles :</b> $\varphi+\psi = 1$, $\varphi\psi = -1$, $\varphi-\psi = \sqrt5$.</p>`, rappels: ["o-rec-lin2"] },
+    { q: 3, t: "Trouver les constantes", h: R`<p>Deux inconnues $A,B$ : on utilise les deux premières valeurs $t_0$ et $t_1$, qui déterminent toute la suite.</p>`, b: R`$$\begin{cases}t_0 = A+B = 1\\t_1 = A\varphi+B\psi = 1\end{cases}$$<p>On remplace $B = 1-A$ dans la seconde : $A(\varphi-\psi)+\psi = 1$, donc</p>$$A = \frac{1-\psi}{\varphi-\psi} = \frac\varphi{\sqrt5},\qquad B = 1-A = \frac{\sqrt5-\varphi}{\sqrt5} = -\frac\psi{\sqrt5},$$<p>car $1-\psi = \varphi$ et $\sqrt5-\varphi = \frac{\sqrt5-1}2 = -\psi$. Finalement :</p><div class="sbox">$$t_n = \frac{\varphi^{n+1}-\psi^{n+1}}{\sqrt5}.$$</div><p><b>Contrôle pour $n = 2$ :</b> $\varphi^3 = \varphi\cdot\varphi^2 = \varphi(\varphi+1) = 2\varphi+1$, de même $\psi^3 = 2\psi+1$, donc $t_2 = \frac{2(\varphi-\psi)}{\sqrt5} = 2$.</p>`, rappels: ["o-rec-lin2"] },
+    { q: 4, t: "Entier + petit reste", h: R`<p>Pour calculer une partie entière, on écrit le nombre sous la forme <b>entier $+$ reste</b> et on montre que le reste est dans $[0,1[$. Ici, l'entier sera $t_n$ et le reste viendra de $\psi^{n+1}$, qui est petit car $|\psi|<1$.</p>`, b: R`<p>D'après la formule précédente, $\dfrac{\varphi^{n+1}}{\sqrt5} = t_n+\dfrac{\psi^{n+1}}{\sqrt5}$. Donc</p>$$\frac{\varphi^{n+1}}{\sqrt5}+\frac12 = t_n+\underbrace{\Big(\frac12+\frac{\psi^{n+1}}{\sqrt5}\Big)}_{\theta_n}.$$<p>Il reste à montrer que $0<\theta_n<1$.</p>`, rappels: ["o-partie-entiere"] },
+    { q: 4, t: "Majorer le reste et conclure", h: R`<p>On majore $|\psi|^{n+1}$ par $|\psi|$ : les puissances d'un nombre de module $<1$ sont de plus en plus petites. Le pire cas est $n = 0$.</p>`, b: R`<p>$|\psi| = \frac{\sqrt5-1}2\approx0{,}618<1$, donc pour tout $n\geqslant0$ :</p>$$\Big|\frac{\psi^{n+1}}{\sqrt5}\Big|\leqslant\frac{|\psi|}{\sqrt5} = \frac{\sqrt5-1}{2\sqrt5}\approx0{,}276<\frac12.$$<p>Donc $0<\theta_n<1$, et $t_n$ est un entier : par définition de la partie entière,</p><div class="sbox">$$t_n = \Big\lfloor\frac{\varphi^{n+1}}{\sqrt5}+\frac12\Big\rfloor\quad\text{pour tout }n\in\mathbb N.$$</div><table class="vals"><tr><th>$n$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>10</td></tr><tr><th>$\varphi^{n+1}/\sqrt5$</th><td>0,724</td><td>1,171</td><td>1,894</td><td>3,065</td><td>4,960</td><td>89,003</td></tr><tr><th>$t_n$</th><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td><td>89</td></tr></table><p>Comme $\psi<0$, l'approximation est alternativement au-dessus et au-dessous, et l'écart tend vers $0$ très vite.</p>`, rappels: ["o-partie-entiere"] }
+  ],
+  ctx: {
+    "o-partition": R`<p>L'ensemble des pavages à $n+1$ colonnes est coupé en deux :</p>$$P_{n+1} = \underbrace{\{\text{dernière colonne verticale}\}}_{t_n}\ \sqcup\ \underbrace{\{\text{deux horizontaux à droite}\}}_{t_{n-1}}.$$<p>Disjoints : un domino ne peut pas être à la fois vertical et horizontal. Rien d'oublié : la case en haut à droite est forcément couverte.</p>`,
+    "o-bij-card": R`<p>« Enlever le domino vertical de droite » est une bijection entre les pavages du cas 1 et ceux du ruban à $n$ colonnes ; sa réciproque est « ajouter un vertical à droite ».</p>`,
+    "o-rec-lin2": R`<p>Ici $a = b = 1$ : $r^2 = r+1$, racines $\varphi$ et $\psi$, et $t_n = \frac{\varphi}{\sqrt5}\varphi^n-\frac{\psi}{\sqrt5}\psi^n$, obtenu avec $t_0 = t_1 = 1$.</p>`,
+    "o-partie-entiere": R`<p>On écrit $\frac{\varphi^{n+1}}{\sqrt5}+\frac12 = N+\theta$ avec $N = t_n\in\mathbb Z$ et $\theta = \frac12+\frac{\psi^{n+1}}{\sqrt5}\in\,]0,1[$ car $\big|\frac{\psi^{n+1}}{\sqrt5}\big|\leqslant0{,}28$. Donc $\lfloor\cdot\rfloor = t_n$.</p>`
+  },
+  piege: R`Dans le cas 2, oublier que le domino du bas est <b>forcé</b> : on pourrait croire qu'il reste un ruban « en escalier ». Et ne pas se contenter de « pour $n$ assez grand » : la majoration $0{,}276<\frac12$ marche dès $n = 0$.`,
+  methode: R`Récurrence de dénombrement : partition selon ce qui se passe au bord. Formule explicite : équation caractéristique puis conditions initiales. Partie entière : écrire entier $+$ reste et encadrer le reste.`
+},
+{
+  id: "o-den-2", subj: "oraux", year: "mp", chap: 5, concours: "x", level: 3, time: "35 min",
+  title: "Permutations sans point fixe : une inversion binomiale",
+  enonce: R`<p>Pour $n\geqslant1$, une permutation $\sigma$ de $\{1,\dots,n\}$ est un <span data-k="derange">dérangement</span> si $\sigma(i)\neq i$ pour tout $i$. On note $d_n$ le nombre de dérangements de $\{1,\dots,n\}$, et on pose $d_0 = 1$.</p>
+<ol>
+<li>Calculer $d_1$, $d_2$, $d_3$ et $d_4$.</li>
+<li>Soient $0\leqslant m\leqslant n$. Calculer $\displaystyle S_{n,m} = \sum_{k=0}^m(-1)^k\binom nk\binom{n-k}{m-k}$.</li>
+<li>Montrer que $\displaystyle n! = \sum_{k=0}^n\binom nk\,d_{n-k}$.</li>
+<li>En déduire que $\displaystyle d_n = n!\sum_{k=0}^n\frac{(-1)^k}{k!}$.</li>
+</ol>`,
+  decode: {
+    donnees: [R`$d_n$ compte les permutations sans point fixe, avec $d_0 = 1$.`, R`$\binom nk$ désigne le coefficient binomial « $k$ parmi $n$ ».`],
+    but: R`Une identité sur les coefficients binomiaux, une relation entre $n!$ et les $d_k$, puis l'inversion de cette relation.`,
+    cles: {
+      derange: R`$\sigma$ est un dérangement si et seulement si$$\forall i\in\{1,\dots,n\},\quad\sigma(i)\neq i.$$Exemple : $(2,1)$ est un dérangement de $\{1,2\}$ ; $(1,2)$ (l'identité) n'en est pas un.`,
+      exact: R`« Exactement $k$ points fixes » :$$\big|\{i : \sigma(i) = i\}\big| = k.$$C'est différent de « au moins $k$ » : c'est ce qui rend les $A_k$ disjoints.`,
+      delta: R`Le symbole de Kronecker :$$\delta_{m,0} = \begin{cases}1&\text{si }m = 0\\0&\text{sinon}\end{cases}$$Il « sélectionne » un seul terme dans une somme.`
+    }
+  },
+  steps: [
+    { q: 1, t: "Les premières valeurs", h: R`<p>On dessine les permutations sous forme de flèches $i\to\sigma(i)$ : un point fixe se voit tout de suite (flèche verticale).</p>`, b: R`<ul><li>$n = 1$ : la seule permutation est l'identité, qui fixe $1$. $d_1 = 0$.</li><li>$n = 2$ : $(1,2)$ et $(2,1)$ ; seule $(2,1)$ convient. $d_2 = 1$.</li><li>$n = 3$ : sur les $6$ permutations, seules $(2,3,1)$ et $(3,1,2)$ ne fixent rien. $d_3 = 2$.</li></ul>` + figPerm3 + R`<p>$n = 4$ : un dérangement de $4$ éléments est soit un cycle de longueur $4$ (il y en a $3! = 6$ : on fixe l'image de $1$, puis on enchaîne), soit le produit de deux échanges disjoints, comme $1\leftrightarrow2$ et $3\leftrightarrow4$ ($3$ façons d'apparier $4$ éléments). $d_4 = 6+3 = 9$.</p>` },
+    { q: 2, t: "Transformer le produit de binomiaux", h: R`<p>Quand deux coefficients binomiaux sont « emboîtés » ($\binom nk$ puis $\binom{n-k}{\dots}$), on les écrit avec des factorielles : on voit souvent apparaître un autre produit plus simple, où un seul facteur dépend de $k$.</p>`, b: R`$$\binom nk\binom{n-k}{m-k} = \frac{n!}{k!\,(n-k)!}\cdot\frac{(n-k)!}{(m-k)!\,(n-m)!} = \frac{n!}{k!\,(m-k)!\,(n-m)!}.$$<p>On multiplie et divise par $m!$ :</p><div class="sbox">$$\binom nk\binom{n-k}{m-k} = \frac{n!}{m!\,(n-m)!}\cdot\frac{m!}{k!\,(m-k)!} = \binom nm\binom mk.$$</div><p><b>Interprétation :</b> les deux membres comptent les couples de parties emboîtées $B\subset A$ avec $|B| = k$, $|A| = m$.</p>` + figEmboite, rappels: ["o-binom"] },
+    { q: 2, t: "Sommer avec la formule du binôme", h: R`<p>Une fois $\binom nm$ sorti de la somme, il reste $\sum(-1)^k\binom mk$ : c'est un binôme de Newton avec $a = -1$, $b = 1$.</p>`, b: R`<p>$\binom nm$ ne dépend pas de $k$ : on le factorise.</p>$$S_{n,m} = \binom nm\sum_{k=0}^m(-1)^k\binom mk = \binom nm(1-1)^m.$$<div class="sbox">$$S_{n,m} = \begin{cases}1&\text{si }m = 0\\0&\text{si }1\leqslant m\leqslant n\end{cases}\qquad\text{c'est-à-dire}\ S_{n,m} = \delta_{m,0}.$$</div><p><b>Vérification ($n = 2$, $m = 1$) :</b> $\binom20\binom21-\binom21\binom10 = 2-2 = 0$.</p>`, rappels: ["o-binome"] },
+    { q: 3, t: "Classer les permutations par points fixes", h: R`<p>On veut une somme sur $k$ qui vaut $n!$ : on cherche une partition de toutes les permutations en paquets indexés par $k$. Le nombre de points fixes est le critère naturel.</p>`, b: R`<p>Pour $0\leqslant k\leqslant n$, soit $A_k$ l'ensemble des permutations ayant <span data-k="exact">exactement $k$</span> points fixes. Chaque permutation a un nombre de points fixes bien défini, compris entre $0$ et $n$ : les $A_k$ forment une partition de $\mathfrak S_n$, donc</p>$$n! = |\mathfrak S_n| = \sum_{k=0}^n|A_k|.$$`, rappels: ["o-partition"] },
+    { q: 3, t: "Compter les permutations à k points fixes", h: R`<p>Un élément de $A_k$ se construit en deux choix indépendants : <b>où</b> sont les points fixes, puis <b>ce que fait</b> $\sigma$ ailleurs. Principe multiplicatif.</p>`, b: R`<ul><li>On choisit l'ensemble $F$ des $k$ points fixes : $\binom nk$ choix.</li><li>Sur les $n-k$ autres éléments, $\sigma$ est une permutation qui ne fixe <b>aucun</b> d'entre eux (sinon il y aurait plus de $k$ points fixes) : c'est un dérangement d'un ensemble à $n-k$ éléments, soit $d_{n-k}$ choix.</li></ul>` + figPointsFixes + R`<p>Donc $|A_k| = \binom nk d_{n-k}$, et</p><div class="sbox">$$n! = \sum_{k=0}^n\binom nk\,d_{n-k}.$$</div><p>$k = n$ donne l'identité ($d_0 = 1$), $k = n-1$ donne $0$ ($d_1 = 0$). <b>Vérification ($n = 3$) :</b> $d_3+3d_2+3d_1+d_0 = 2+3+0+1 = 6$.</p>`, rappels: ["o-produit", "o-binom"] },
+    { q: 4, t: "Partir du membre de droite", h: R`<p>On veut « inverser » la relation de la question 3. Idée : partir de la formule à démontrer, développer $(n-k)!$ avec la question 3 elle-même, et espérer que la question 2 tue presque tout.</p>`, b: R`$$n!\sum_{k=0}^n\frac{(-1)^k}{k!} = \sum_{k=0}^n(-1)^k\frac{n!}{k!\,(n-k)!}(n-k)! = \sum_{k=0}^n(-1)^k\binom nk(n-k)!.$$<p>On applique la question 3 à l'entier $n-k$, en écrivant les termes dans l'autre sens ($\binom{n-k}{j} = \binom{n-k}{n-k-j}$) :</p>$$(n-k)! = \sum_{p=0}^{n-k}\binom{n-k}p\,d_p.$$` },
+    { q: 4, t: "Intervertir les deux sommes", h: R`<p>On veut garder $d_p$ « à l'extérieur » pour isoler son coefficient. Il faut donc faire de $p$ l'indice de la somme extérieure.</p>`, b: R`$$n!\sum_{k=0}^n\frac{(-1)^k}{k!} = \sum_{k=0}^n\sum_{p=0}^{n-k}(-1)^k\binom nk\binom{n-k}p\,d_p.$$<p>Les couples $(k,p)$ parcourus sont ceux avec $k,p\geqslant0$ et $k+p\leqslant n$ :</p>` + figTriangle + R`$$= \sum_{p=0}^n d_p\underbrace{\sum_{k=0}^{n-p}(-1)^k\binom nk\binom{n-k}p}_{c_p}.$$`, rappels: ["o-somme-double"] },
+    { q: 4, t: "Reconnaître la question 2", h: R`<p>Le coefficient $c_p$ ressemble à $S_{n,m}$ : il faut juste trouver le bon $m$, grâce à la symétrie $\binom ab = \binom a{a-b}$.</p>`, b: R`<p>Posons $m = n-p$. Alors $\binom{n-k}p = \binom{n-k}{(n-k)-p} = \binom{n-k}{m-k}$, et $k$ va de $0$ à $m$ :</p>$$c_p = \sum_{k=0}^m(-1)^k\binom nk\binom{n-k}{m-k} = S_{n,m} = \delta_{n-p,0}.$$<p>Seul le terme $p = n$ survit :</p><div class="sbox">$$n!\sum_{k=0}^n\frac{(-1)^k}{k!} = d_n.$$</div><p><b>Vérification :</b> $4!\big(1-1+\frac12-\frac16+\frac1{24}\big) = 12-4+1 = 9 = d_4$.</p>`, rappels: ["o-binom"] }
+  ],
+  ctx: {
+    "o-binom": R`<p>On utilise la définition avec les factorielles pour simplifier $(n-k)!$, puis la symétrie</p>$$\binom{n-k}p = \binom{n-k}{n-k-p}$$<p>pour mettre $c_p$ sous la forme de $S_{n,n-p}$.</p>`,
+    "o-binome": R`<p>Avec $a = -1$, $b = 1$ et l'exposant $m$ :</p>$$\sum_{k=0}^m(-1)^k\binom mk = 0^m.$$<p>C'est le seul endroit où le signe $(-1)^k$ sert : il fait tout s'annuler sauf pour $m = 0$.</p>`,
+    "o-partition": R`<p>$\mathfrak S_n = A_0\sqcup A_1\sqcup\dots\sqcup A_n$. Pour $n = 3$ : $|A_0| = 2$, $|A_1| = 3$, $|A_2| = 0$, $|A_3| = 1$, total $6$.</p>`,
+    "o-produit": R`<p>Premier choix : l'ensemble des points fixes ($\binom nk$ façons). Second choix : un dérangement des autres ($d_{n-k}$ façons, quel que soit le premier choix). D'où $|A_k| = \binom nk d_{n-k}$.</p>`,
+    "o-somme-double": R`<p>Ici $a_{k,p} = (-1)^k\binom nk\binom{n-k}p d_p$, sur le triangle $k+p\leqslant n$. On passe de « $k$ dehors » à « $p$ dehors » pour regrouper tous les termes en $d_p$.</p>`
+  },
+  piege: R`Confondre « exactement $k$ points fixes » et « au moins $k$ » : seuls les premiers donnent une partition. Et oublier $d_0 = 1$ : sans lui, l'identité n'est pas comptée.`,
+  methode: R`Pour inverser $u_n = \sum\binom nk v_k$ : développer, intervertir les sommes, et utiliser $\sum_k(-1)^k\binom mk = \delta_{m,0}$. On obtient $v_n = \sum(-1)^{n-k}\binom nk u_k$.`
+},
+{
+  id: "o-den-3", subj: "oraux", year: "mp", chap: 5, concours: "x", level: 4, time: "30 min",
+  title: "Dérangements et série génératrice exponentielle",
+  enonce: R`<p>On note $d_n$ le nombre de permutations de $\{1,\dots,n\}$ sans point fixe, avec $d_0 = 1$. On admet que, pour tout $n\in\mathbb N$, $\displaystyle\sum_{k=0}^n\binom nk d_k = n!$.</p>
+<p>On considère la <span data-k="sge">série génératrice exponentielle</span> $\displaystyle D(z) = \sum_{n=0}^{+\infty}\frac{d_n}{n!}z^n$.</p>
+<ol>
+<li>Montrer que son rayon de convergence $R$ vérifie $R\geqslant1$.</li>
+<li>Montrer que $D(z)\,e^z = \dfrac1{1-z}$ pour $|z|<1$.</li>
+<li>En déduire une expression de $\dfrac{d_n}{n!}$ comme somme finie.</li>
+<li>Montrer que, pour $n\geqslant1$, $d_n$ est l'entier le plus proche de $\dfrac{n!}e$. Que se passe-t-il pour $n = 0$ ? Déterminer enfin $\displaystyle\lim_{n\to\infty}\frac{d_n}{n!}$ et la valeur exacte de $R$.</li>
+</ol>`,
+  decode: {
+    donnees: [R`La relation $\sum_{k=0}^n\binom nk d_k = n!$ (admise, démontrée dans un autre exercice).`, R`Les séries entières de $e^z$ et de $\frac1{1-z}$.`],
+    but: R`Le rayon, une identité de séries entières, puis une formule et une approximation de $d_n$.`,
+    cles: {
+      sge: R`On divise le $n$-ième terme par $n!$ :$$D(z) = \frac{d_0}{0!}+\frac{d_1}{1!}z+\frac{d_2}{2!}z^2+\dots = 1+0+\frac12z^2+\frac13z^3+\frac38z^4+\dots$$Avec ce choix, les produits de séries font apparaître les $\binom nk$.`,
+      inclus: R`Les dérangements sont des permutations particulières :$$\{\text{dérangements}\}\subset\mathfrak S_n\ \Longrightarrow\ d_n\leqslant|\mathfrak S_n| = n!.$$`,
+      reste: R`Le reste d'ordre $n$ de la série qui donne $\frac1e$ :$$R_n = \sum_{p=n+1}^{+\infty}\frac{(-1)^p}{p!} = \frac1e-\sum_{p=0}^n\frac{(-1)^p}{p!}.$$`
+    }
+  },
+  steps: [
+    { q: 1, t: "Comparer à la série géométrique", h: R`<p>Pour minorer un rayon de convergence, on <b>majore</b> les coefficients par ceux d'une série dont on connaît le rayon.</p>`, b: R`<p>Les dérangements sont des permutations, <span data-k="inclus">donc</span> $0\leqslant d_n\leqslant n!$, soit</p>$$0\leqslant\frac{d_n}{n!}\leqslant1.$$<p>Pour $|z|<1$ : $\Big|\dfrac{d_n}{n!}z^n\Big|\leqslant|z|^n$, terme d'une série géométrique convergente. La série $D(z)$ converge absolument, donc $R\geqslant1$.</p>`, rappels: ["o-rayon"] },
+    { q: 2, t: "Repérer un produit de Cauchy", h: R`<p>Une somme $\sum_{k=0}^na_k\,b_{n-k}$ est le coefficient de $z^n$ dans le produit $\big(\sum a_kz^k\big)\big(\sum b_jz^j\big)$. Il faut donc diviser la relation admise par $n!$ pour faire apparaître $\frac{d_k}{k!}$ et $\frac1{(n-k)!}$.</p>`, b: R`<p>On divise la relation admise par $n!$, avec $\binom nk = \frac{n!}{k!(n-k)!}$ :</p>$$1 = \sum_{k=0}^n\frac{d_k}{k!}\cdot\frac1{(n-k)!}.$$<div class="sbox">$$\underbrace{1}_{c_n} = \sum_{k=0}^n\underbrace{\frac{d_k}{k!}}_{a_k}\ \underbrace{\frac1{(n-k)!}}_{b_{n-k}}.$$</div><p>Les $a_k$ sont les coefficients de $D$, les $b_j = \frac1{j!}$ ceux de $e^z$, et les $c_n = 1$ ceux de $\frac1{1-z}$.</p>`, rappels: ["o-cauchy"] },
+    { q: 2, t: "Écrire le produit", h: R`<p>Le produit de Cauchy n'est valable que là où les <b>deux</b> séries convergent : le rayon de $e^z$ est $+\infty$, celui de $D$ au moins $1$.</p>`, b: R`<p>Pour $|z|<1$, les deux séries convergent absolument, donc</p>$$D(z)\,e^z = \sum_{n=0}^{+\infty}\Big(\sum_{k=0}^n\frac{d_k}{k!}\frac1{(n-k)!}\Big)z^n = \sum_{n=0}^{+\infty}z^n = \frac1{1-z}.$$<div class="sbox">$$D(z) = \frac{e^{-z}}{1-z}\qquad(|z|<1).$$</div>`, rappels: ["o-cauchy", "o-exp"] },
+    { q: 3, t: "Développer et identifier", h: R`<p>On a maintenant $D$ comme produit de deux séries connues. Un nouveau produit de Cauchy donne ses coefficients, et l'unicité permet d'identifier avec $\frac{d_n}{n!}$.</p>`, b: R`<p>$e^{-z} = \sum_p\frac{(-1)^p}{p!}z^p$ et $\frac1{1-z} = \sum_qz^q$ (tous les coefficients valent $1$). Le coefficient de $z^n$ du produit est</p>$$\sum_{p=0}^n\frac{(-1)^p}{p!}\times1.$$<p>Par unicité des coefficients d'une série entière :</p><div class="sbox">$$\frac{d_n}{n!} = \sum_{p=0}^n\frac{(-1)^p}{p!} = 1-1+\frac1{2!}-\frac1{3!}+\dots+\frac{(-1)^n}{n!}.$$</div><p><b>Vérification ($n = 4$) :</b> $24\big(\frac12-\frac16+\frac1{24}\big) = 12-4+1 = 9$.</p>`, rappels: ["o-cauchy", "o-unicite", "o-exp"] },
+    { q: 4, t: "Comparer à 1/e", h: R`<p>La somme $\sum_{p\leqslant n}\frac{(-1)^p}{p!}$ est le début de la série de $e^{-1}$. On écrit donc $\frac1e = $ (somme partielle) $+$ (reste), puis on multiplie par $n!$ : comme pour Fibonacci, on obtient « entier $+$ petit reste ».</p>`, b: R`$$\frac1e = \sum_{p=0}^{+\infty}\frac{(-1)^p}{p!} = \frac{d_n}{n!}+R_n,$$<p>où $R_n$ est <span data-k="reste">le reste</span>. En multipliant par $n!$ :</p><div class="sbox">$$\frac{n!}e = d_n+n!\,R_n.$$</div>`, rappels: ["o-exp"] },
+    { q: 4, t: "Majorer le reste", h: R`<p>Le reste d'une série alternée se majore par le premier terme négligé. Ici il vaut $\frac1{(n+1)!}$, et le facteur $n!$ le transforme en $\frac1{n+1}$.</p>`, b: R`<p>$\big(\frac1{p!}\big)$ est positive, strictement décroissante et tend vers $0$ : par le critère des séries alternées,</p>$$|R_n|<\frac1{(n+1)!},\qquad\text{donc}\qquad|n!\,R_n|<\frac{n!}{(n+1)!} = \frac1{n+1}\leqslant\frac12\quad(n\geqslant1).$$<p>Alors $\frac{n!}e+\frac12 = d_n+\theta$ avec $\theta = \frac12+n!R_n\in\,]0,1[$ :</p><div class="sbox">$$d_n = \Big\lfloor\frac{n!}e+\frac12\Big\rfloor\qquad(n\geqslant1).$$</div><p><b>Exemples :</b> $\frac{4!}e\approx8{,}83$ donne $9$ ; $\frac{5!}e\approx44{,}15$ donne $44$.</p><p><b>Pour $n = 0$, c'est faux :</b> $\frac{0!}e+\frac12\approx0{,}87$ a pour partie entière $0$, alors que $d_0 = 1$. La majoration $\frac1{n+1}\leqslant\frac12$ demande bien $n\geqslant1$.</p>`, rappels: ["o-alternee", "o-partie-entiere"] },
+    { q: 4, t: "Limite et rayon exact", h: R`<p>Si une série entière converge en un point $z_0$, son terme général tend vers $0$ en ce point. Donc un terme qui <b>ne</b> tend pas vers $0$ en $z_0 = 1$ interdit $R>1$.</p>`, b: R`<p>La somme partielle tend vers la somme de la série :</p>$$\frac{d_n}{n!}\xrightarrow[n\to\infty]{}\frac1e\approx0{,}368.$$` + figVers1e + R`<p><b>Interprétation :</b> une permutation tirée au hasard n'a aucun point fixe avec une probabilité proche de $37\,\%$, quel que soit $n$ grand.</p><p><b>Rayon :</b> en $z = 1$, le terme général $\frac{d_n}{n!}\cdot1^n$ tend vers $\frac1e\neq0$. Si on avait $R>1$, la série convergerait en $1$ et ce terme tendrait vers $0$ : contradiction. Donc $R\leqslant1$, et avec la question 1 :</p><div class="sbox">$$R = 1.$$</div><p>C'est cohérent avec $D(z) = \frac{e^{-z}}{1-z}$, qui « explose » en $z = 1$.</p>`, rappels: ["o-rayon"] }
+  ],
+  ctx: {
+    "o-rayon": R`<p>Minoration : $\big|\frac{d_n}{n!}\big|\leqslant1$, donc $R\geqslant$ le rayon de $\sum z^n$, c'est-à-dire $1$.</p><p>Majoration : en $z_0 = 1$, $\frac{d_n}{n!}\to\frac1e\neq0$, donc $R\leqslant1$.</p>`,
+    "o-cauchy": R`<p>Utilisé deux fois. D'abord avec $a_k = \frac{d_k}{k!}$, $b_j = \frac1{j!}$ : $c_n = 1$. Ensuite avec $a_p = \frac{(-1)^p}{p!}$, $b_q = 1$ : $c_n = \sum_{p\leqslant n}\frac{(-1)^p}{p!}$.</p>`,
+    "o-exp": R`<p>$e^{-z} = \sum\frac{(-1)^p}{p!}z^p$ (on remplace $z$ par $-z$) et, en $z = 1$, $\frac1e = \sum\frac{(-1)^p}{p!}$.</p>`,
+    "o-unicite": R`<p>Pour $|z|<1$ : $\sum\frac{d_n}{n!}z^n = \sum\Big(\sum_{p\leqslant n}\frac{(-1)^p}{p!}\Big)z^n$, donc les coefficients sont égaux un par un.</p>`,
+    "o-alternee": R`<p>Ici $u_p = \frac1{p!}$, strictement décroissante pour $p\geqslant1$. Le premier terme négligé après le rang $n$ est $u_{n+1} = \frac1{(n+1)!}$.</p>`,
+    "o-partie-entiere": R`<p>$\frac{n!}e+\frac12 = N+\theta$ avec $N = d_n$ et $\theta = \frac12+n!R_n$. Comme $|n!R_n|<\frac12$, on a $0<\theta<1$.</p>`
+  },
+  piege: R`Affirmer que la formule marche aussi pour $n = 0$ : $\lfloor\frac1e+\frac12\rfloor = 0\neq d_0$. Et utiliser le produit de Cauchy sans vérifier que $|z|$ est inférieur aux deux rayons.`,
+  methode: R`Série génératrice exponentielle : une relation $\sum\binom nk a_kb_{n-k} = c_n$ devient $A(z)B(z) = C(z)$. On divise, on redéveloppe, on identifie les coefficients.`
+},
+{
+  id: "o-den-4", subj: "oraux", year: "mp", chap: 5, concours: "x", level: 4, time: "30 min",
+  title: "Dérangements : deux récurrences par une preuve combinatoire",
+  enonce: R`<p>On note $\mathcal D_n$ l'ensemble des permutations de $\{1,\dots,n\}$ sans point fixe et $d_n = |\mathcal D_n|$, avec $d_0 = 1$ et $d_1 = 0$.</p>
+<ol>
+<li>Montrer, <span data-k="combi">par un argument combinatoire</span>, que $d_{n+1} = n\,(d_n+d_{n-1})$ pour tout $n\geqslant1$.</li>
+<li>On pose $u_n = d_n-n\,d_{n-1}$ pour $n\geqslant1$. Calculer $u_{n+1}$ en fonction de $u_n$, puis montrer que $d_n = n\,d_{n-1}+(-1)^n$. Calculer $d_5$ et $d_6$.</li>
+<li>En déduire une formule explicite pour $d_n$.</li>
+</ol>`,
+  decode: {
+    donnees: [R`$d_0 = 1$, $d_1 = 0$ ; $d_n$ compte les dérangements de $\{1,\dots,n\}$.`],
+    but: R`Une récurrence prouvée en comptant, une seconde obtenue par calcul, puis la formule de $d_n$.`,
+    cles: {
+      combi: R`Une preuve combinatoire montre une égalité $|E| = |F|$ en <b>comptant</b> : partition de $E$, bijections entre ensembles. Pas de calcul algébrique. Ici :$$|\mathcal D_{n+1}| = n\times\big(|\mathcal D_n|+|\mathcal D_{n-1}|\big).$$`,
+      image: R`$\sigma(n+1)\neq n+1$ car $\sigma$ n'a pas de point fixe, donc$$\sigma(n+1)\in\{1,\dots,n\}\quad(n\ \text{valeurs possibles}).$$`,
+      antec: R`$j = \sigma^{-1}(n+1)$ est l'unique élément envoyé sur $n+1$ :$$\sigma(j) = n+1.$$Il existe car $\sigma$ est bijective, et $j\neq n+1$ (pas de point fixe), $j\neq k$ (car $\sigma(k)\neq n+1$ dans ce cas).`
+    }
+  },
+  steps: [
+    { q: 1, t: "Classer selon l'image de n + 1", h: R`<p>Le facteur $n$ dans $n(d_n+d_{n-1})$ suggère $n$ paquets de même taille. Le critère naturel : où $\sigma$ envoie le dernier élément $n+1$.</p>`, b: R`<p>Soit $\sigma\in\mathcal D_{n+1}$. Son image <span data-k="image">$k = \sigma(n+1)$</span> est dans $\{1,\dots,n\}$. Pour chaque $k$, on note</p>$$F_k = \{\sigma\in\mathcal D_{n+1} : \sigma(n+1) = k\}.$$<p>Les $F_1,\dots,F_n$ forment une partition de $\mathcal D_{n+1}$. Il suffit de montrer que</p><div class="sbox">$$|F_k| = d_n+d_{n-1}\quad\text{pour chaque }k.$$</div><p>On fixe $k$ et on coupe $F_k$ en deux selon que $\sigma(k) = n+1$ ou non.</p>`, rappels: ["o-partition"] },
+    { q: 1, t: "Cas 1 : k et n + 1 s'échangent", h: R`<p>Si $\sigma$ échange $k$ et $n+1$, ces deux éléments forment un « bloc » à part. Le reste de $\sigma$ est un dérangement de ce qui reste.</p>`, b: R`<p>Soit $G_k = \{\sigma\in F_k : \sigma(k) = n+1\}$. Pour un tel $\sigma$, les $n-1$ autres éléments $\{1,\dots,n\}\setminus\{k\}$ sont envoyés entre eux, sans point fixe.</p><p>Réciproquement, tout dérangement de ces $n-1$ éléments, complété par l'échange $k\leftrightarrow n+1$, donne un élément de $G_k$. C'est une bijection :</p>$$|G_k| = d_{n-1}.$$<p>(Pour $n = 1$ : il reste $0$ élément, et $d_0 = 1$ compte bien la seule possibilité, l'échange $1\leftrightarrow2$.)</p>`, rappels: ["o-bij-card"] },
+    { q: 1, t: "Cas 2 : court-circuiter n + 1", h: R`<p>Si $n+1$ est « au milieu » d'un cycle ($j\to n+1\to k$), on peut le retirer en reliant directement $j$ à $k$. C'est l'idée clé : supprimer un élément sans créer de point fixe.</p>`, b: R`<p>Soit $H_k = F_k\setminus G_k$ : ici $\sigma(k)\neq n+1$. Soit <span data-k="antec">$j = \sigma^{-1}(n+1)$</span>. On définit $\tau$ sur $\{1,\dots,n\}$ par</p><div class="sbox">$$\tau(j) = k,\qquad\tau(i) = \sigma(i)\ \text{pour}\ i\neq j.$$</div>` + figCourt + R`<ul><li>$\tau$ est une permutation de $\{1,\dots,n\}$ : on a seulement « recollé » la flèche $j\to n+1\to k$ en $j\to k$.</li><li>$\tau$ n'a pas de point fixe : $\tau(j) = k\neq j$, et pour $i\neq j$, $\tau(i) = \sigma(i)\neq i$.</li></ul><p><b>Réciproque :</b> à partir de $\tau\in\mathcal D_n$, on pose $j = \tau^{-1}(k)$ et on insère $n+1$ : $\sigma(j) = n+1$, $\sigma(n+1) = k$, $\sigma = \tau$ ailleurs. On obtient un dérangement avec $\sigma(n+1) = k$ et $\sigma(k) = \tau(k)\neq n+1$. Donc $|H_k| = d_n$.</p>`, rappels: ["o-bij-card"] },
+    { q: 1, t: "Assembler", h: R`<p>On additionne les deux cas (partition de $F_k$), puis les $n$ paquets $F_k$ (tous de même taille).</p>`, b: R`$$|F_k| = |G_k|+|H_k| = d_{n-1}+d_n,\qquad d_{n+1} = \sum_{k=1}^n|F_k| = n\,(d_n+d_{n-1}).$$<div class="sbox">$$d_{n+1} = n\,(d_n+d_{n-1})\qquad(n\geqslant1).$$</div><p><b>Vérification :</b> $d_2 = 1\cdot(0+1) = 1$, $d_3 = 2(1+0) = 2$, $d_4 = 3(2+1) = 9$.</p>`, rappels: ["o-partition"] },
+    { q: 2, t: "Une suite qui change seulement de signe", h: R`<p>La récurrence contient $n\,d_n$ et $(n+1)\,d_n$ : en comparant $d_{n+1}-(n+1)d_n$ avec $d_n-n\,d_{n-1}$, on espère une relation très simple.</p>`, b: R`<p>Pour $n\geqslant1$ :</p>$$u_{n+1} = d_{n+1}-(n+1)d_n = n\,d_n+n\,d_{n-1}-(n+1)d_n = -\big(d_n-n\,d_{n-1}\big) = -u_n.$$<div class="sbox">$$u_{n+1} = -u_n.$$</div><p>$(u_n)$ est géométrique de raison $-1$.</p>` },
+    { q: 2, t: "Conclure et calculer", h: R`<p>Une suite géométrique est déterminée par son premier terme : il suffit de calculer $u_1$.</p>`, b: R`<p>$u_1 = d_1-1\cdot d_0 = 0-1 = -1$, donc $u_n = (-1)^{n-1}u_1 = (-1)^n$ :</p><div class="sbox">$$d_n = n\,d_{n-1}+(-1)^n\qquad(n\geqslant1).$$</div><table class="vals"><tr><th>$n$</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><th>$d_n$</th><td>$1\cdot1-1 = 0$</td><td>$2\cdot0+1 = 1$</td><td>$3\cdot1-1 = 2$</td><td>$4\cdot2+1 = 9$</td><td>$5\cdot9-1 = 44$</td><td>$6\cdot44+1 = 265$</td></tr></table>` },
+    { q: 3, t: "Diviser par n! et télescoper", h: R`<p>Dans $d_n = n\,d_{n-1}+\dots$, le facteur $n$ gêne. En divisant par $n!$, il disparaît : $\frac{n\,d_{n-1}}{n!} = \frac{d_{n-1}}{(n-1)!}$. On obtient une différence de termes consécutifs, qui se télescope.</p>`, b: R`$$\frac{d_n}{n!}-\frac{d_{n-1}}{(n-1)!} = \frac{(-1)^n}{n!}\qquad(n\geqslant1).$$<p>On somme pour $k = 1,\dots,n$ : à gauche, tout se simplifie sauf le dernier et le premier terme :</p>$$\frac{d_n}{n!}-\frac{d_0}{0!} = \sum_{k=1}^n\frac{(-1)^k}{k!}.$$<p>Comme $d_0 = 1 = \frac{(-1)^0}{0!}$ :</p><div class="sbox">$$d_n = n!\sum_{k=0}^n\frac{(-1)^k}{k!}.$$</div>`, rappels: ["o-telescopage"] }
+  ],
+  ctx: {
+    "o-partition": R`<p>Deux niveaux de partition :</p>$$\mathcal D_{n+1} = F_1\sqcup\dots\sqcup F_n,\qquad F_k = G_k\sqcup H_k.$$<p>$G_k$ : $\sigma(k) = n+1$ ; $H_k$ : $\sigma(k)\neq n+1$.</p>`,
+    "o-bij-card": R`<p>$G_k\to\mathcal D_{n-1}$ : on enlève l'échange $k\leftrightarrow n+1$. $H_k\to\mathcal D_n$ : on court-circuite $n+1$. Les deux sont bijectives car on sait écrire l'opération inverse.</p>`,
+    "o-telescopage": R`<p>Avec $v_k = \frac{d_k}{k!}$ :</p>$$\sum_{k=1}^n(v_k-v_{k-1}) = v_n-v_0 = \frac{d_n}{n!}-1.$$`
+  },
+  piege: R`Dans le court-circuit, vérifier que $\tau$ n'a pas de point fixe : le seul point modifié est $j$, et $\tau(j) = k\neq j$ précisément parce qu'on est dans le cas $\sigma(k)\neq n+1$. Et ne pas oublier le cas 1, qui donne le terme $d_{n-1}$.`,
+  methode: R`Récurrence combinatoire : partition selon l'image du dernier élément, puis bijection avec des objets plus petits. Récurrence $d_n = n\,d_{n-1}+\dots$ : diviser par $n!$ pour télescoper.`
+}
+]);
+})();

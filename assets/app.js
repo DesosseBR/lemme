@@ -144,7 +144,7 @@ function home() {
     <div class="panelbox player" aria-label="Aperçu d'un corrigé">
       <div class="prog" aria-hidden="true">${demo.steps.map((_, k) => `<button tabindex="-1" class="${k <= 1 ? "done" : ""}"></button>`).join("")}<button tabindex="-1"></button></div>
       <div class="step"><span class="count">Étape 2 sur ${demo.steps.length}</span><h3>${esc(st.t)}</h3><div class="prose">${st.b}</div>
-      <div class="rappels"><span class="lab">Rappels utilisés</span>${(st.rappels || []).map(r => rchip(r, st.rappels)).join("")}</div></div>
+      <div class="rappels"><span class="lab">Rappels utilisés</span>${(st.rappels || []).map(r => rchip(r)).join("")}</div></div>
     </div>
   </div></section>
 
@@ -356,19 +356,20 @@ function notFound() {
 }
 
 /* ---------- Rappels de cours ---------- */
-function rchip(id, ctx) {
+function rchip(id, ex) {
   const r = RAPPELS[id]; if (!r) return "";
-  return `<button type="button" class="rchip" data-r="${id}" data-ctx="${(ctx || []).join(",")}">${I.book}${esc(r.t)}</button>`;
+  return `<button type="button" class="rchip" data-r="${id}"${ex && ex.id ? ` data-ex="${ex.id}"` : ""}>${I.book}${esc(r.t)}</button>`;
 }
 let drawerReturn = null;
-function openRappel(id, ctx) {
+function openRappel(id, exId) {
   const r = RAPPELS[id]; if (!r) return;
+  const ex = exId && EXERCISES.find(x => x.id === exId);
+  const here = ex && ex.ctx && ex.ctx[id];
   closeRappel(true);
   drawerReturn = document.activeElement;
-  const others = (ctx || []).filter(x => x && x !== id && RAPPELS[x]);
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body">${r.b}</div>${others.length ? `<div class="others"><h4>Autres rappels de ce corrigé</h4>${others.map(x => rchip(x, ctx)).join("")}</div>` : ""}`;
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body">${annotate(r.b, ex || null)}</div>${here ? `<div class="here"><h4>Dans cet exercice</h4><div class="body">${annotate(here, ex)}</div></div>` : ""}`;
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());
@@ -382,12 +383,12 @@ function closeRappel(silent) {
 }
 document.addEventListener("click", e => {
   const b = e.target.closest(".rchip"); if (!b) return;
-  openRappel(b.dataset.r, (b.dataset.ctx || "").split(","));
+  openRappel(b.dataset.r, b.dataset.ex);
 });
 
 /* ---------- Notions de cours soulignées en bleu ---------- */
 const NOTIONS = window.LEMME.NOTIONS || {};
-const NOTION_LIST = Object.entries(NOTIONS).map(([id, n]) => { try { return { id, re: new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu") }; } catch (e) { return null; } }).filter(Boolean);
+const NOTION_LIST = Object.entries(NOTIONS).sort((a, b) => (b[1].p.includes(" ") ? 1 : 0) - (a[1].p.includes(" ") ? 1 : 0)).map(([id, n]) => { try { return { id, re: new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu") }; } catch (e) { return null; } }).filter(Boolean);
 function annotateText(txt, used, skip) {
   let pieces = [{ t: txt }];
   for (const n of NOTION_LIST) {
@@ -508,8 +509,8 @@ function mountPlayer(e, host) {
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
-            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, all)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, all)).join("")}</div>` : ""}`}
+            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, e)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
+            : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span><h3>${esc(st.t)}</h3>${st.h ? `<details class="hint"><summary><span class="hint-ico" aria-hidden="true">?</span>Indice : le coup d'œil<span class="hint-sub">pourquoi cette idée</span></summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}<div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">

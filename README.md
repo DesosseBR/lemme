@@ -83,6 +83,13 @@ Les figures sont des SVG insérés dans le texte : `<figure class="fig"><svg vie
 
 Dans `content/oraux.js`, avec `subj: "oraux", year: "mp"`, `chap` = numéro du chapitre (0 à 16) et `concours` = `"ccinp"`, `"mt"` (Mines-Télécom), `"c1"` (Centrale Maths 1) ou `"mp"` (Mines-Ponts).
 
+### Indices, rappels appliqués, encadrés
+
+- Dans une étape, `h: R\`…\`` ajoute un indice repliable « le coup d'œil » : pourquoi on utilise cette idée.
+- Dans un exercice, `ctx: { "id-du-rappel": R\`…\` }` ajoute au rappel une partie « Dans cet exercice ».
+- `<div class="sbox">$$…$$</div>` encadre une formule à retenir (aussi dans les PDF).
+- `<table class="vals">` pour un tableau de valeurs.
+
 ## Demande type pour Claude
 
 > Dans le repo DesosseBR/lemme, ajoute 3 exercices corrigés au chapitre « Séries entières » (Maths MP), dans content/maths.js uniquement, puis régénère les PDF de maths.

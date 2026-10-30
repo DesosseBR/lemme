@@ -50,6 +50,12 @@ function toTex(html) {
     FIGS.set(h, svg);
     return keep(`\n\\begin{center}\\includegraphics[width=${Math.min(0.62, w / 360 * 0.55).toFixed(2)}\\linewidth]{${path.join(ROOT, "tex", "fig", h + ".pdf")}}\\par\\vspace{0.2em}{\\small\\color{black!70}${toTex(cap)}\\par}\\end{center}\n`);
   });
+  /* Tableaux de valeurs */
+  s = s.replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (_, t) => {
+    const rows = [...t.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(r => [...r[1].matchAll(/<t[hd]>([\s\S]*?)<\/t[hd]>/g)].map(c => toTex(c[1])));
+    const n = Math.max(...rows.map(r => r.length));
+    return keep(`\n\\begin{center}\\begin{tabular}{${"|c".repeat(n)}|}\\hline\n${rows.map(r => r.join(" & ") + " \\\\ \\hline").join("\n")}\n\\end{tabular}\\end{center}\n`);
+  });
   s = s.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/g, (_, c) => keep("\n\\begin{lstlisting}\n" + decode(c) + "\n\\end{lstlisting}\n"));
   s = s.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => keep("\n\\[" + decode(m) + "\\]\n"));
   s = s.replace(/\$([^$]+?)\$/g, (_, m) => keep("$" + decode(m) + "$"));
@@ -57,8 +63,11 @@ function toTex(html) {
   const tags = [];
   s = s.replace(/<[^>]+>/g, t => { tags.push(t); return "\u0001" + (tags.length - 1) + "\u0001"; });
   s = escText(s);
+  const divs = [];
   s = s.replace(/\u0001(\d+)\u0001/g, (_, i) => {
     const t = tags[+i].toLowerCase();
+    if (/^<div\b/.test(t)) { const sb = /class="sbox"/.test(t); divs.push(sb); return sb ? "\n\\begin{lsbox}\n" : ""; }
+    if (t === "</div>") return divs.pop() ? "\n\\end{lsbox}\n" : "";
     if (/^<p\b/.test(t)) return "\n\n";
     if (t === "</p>") return "\n\n";
     if (/^<ul\b/.test(t)) return "\n\\begin{itemize}\n";
@@ -80,7 +89,7 @@ function toTex(html) {
 /* ---------- Documents ---------- */
 function doc({ meta, kicker, title, titleTex, body, url }) {
   return `\\documentclass[11pt]{article}
-\\usepackage{lemme}${body.includes("\\includegraphics") ? "\n\\usepackage{graphicx}" : ""}
+\\usepackage{lemme}${body.includes("\\includegraphics") ? "\n\\usepackage{graphicx}" : ""}${body.includes("{lsbox}") ? "\n\\tcbuselibrary{skins}\\newtcolorbox{lsbox}{enhanced,sharp corners,colback=white,colframe=black!85,boxrule=0.6pt,left=6pt,right=6pt,top=3pt,bottom=3pt,drop shadow=black!80}" : ""}
 \\renewcommand\\lemmemeta{${escText(meta)}}
 \\renewcommand\\lemmeurl{${escText(url || SITE_URL)}}
 \\begin{document}
@@ -123,7 +132,7 @@ for (const e of L.EXERCISES) {
     body: `\\lemmesection{Énoncé}\n${toTex(e.enonce)}\n`
       + ((d.donnees && d.donnees.length) || d.but ? `\\begin{ldef}[Décoder l'énoncé]\n${d.donnees && d.donnees.length ? `\\textbf{Ce que l'énoncé te donne.}\n\\begin{itemize}\n${d.donnees.map(x => "\\item " + toTex(x)).join("\n")}\n\\end{itemize}\n` : ""}${d.but ? `\\textbf{Ce qu'on te demande.} ${toTex(d.but)}\n` : ""}\\end{ldef}\n` : "")
       + `\\lemmesection{Corrigé}\n`
-      + e.steps.map((st, k) => `\\par\\needspace{4\\baselineskip}\\vspace{0.5em}{\\sffamily\\bfseries\\color{navy}${k + 1}.~${escText(st.t)}\\par}\\vspace{0.2em}\n${toTex(st.b)}\n`).join("\n")
+      + e.steps.map((st, k) => `\\par\\needspace{4\\baselineskip}\\vspace{0.5em}{\\sffamily\\bfseries\\color{navy}${k + 1}.~${escText(st.t)}\\par}\\vspace{0.2em}\n${st.h ? `{\\small\\itshape\\color{black!65}Le coup d'œil. ${toTex(st.h)}\\par}\\vspace{0.3em}\n` : ""}${toTex(st.b)}\n`).join("\n")
       + `\\begin{lthm}[Le piège]\n${toTex(e.piege)}\n\\end{lthm}\n\\begin{lnote}[La méthode]\n${toTex(e.methode)}\n\\end{lnote}\n`
       + (used.length ? `\\lemmesection{Rappels de cours utilisés}\n\\begin{itemize}\n${used.map(r => `\\item \\textbf{${escText(L.RAPPELS[r].t)}.} ${toTex(L.RAPPELS[r].b)}`).join("\n")}\n\\end{itemize}\n` : "")
   }) });
