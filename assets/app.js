@@ -696,321 +696,301 @@ function mountPdf(el) {
   $("[data-fs]", el).addEventListener("click", () => { if (document.fullscreenElement) document.exitFullscreen(); else if (el.requestFullscreen) el.requestFullscreen().catch(() => {}); });
 }
 
-const fx = v => +(+v).toFixed(1);
-/* ---------- Labo matrices : voir comment une matrice est construite ---------- */
+/* ---------- Labos : explications visuelles, tout est écrit en LaTeX ---------- */
+const L = String.raw;
 const nf = (v, d = 2) => { const r = +(+v).toFixed(d); return (Object.is(r, -0) ? 0 : r).toString().replace(".", ",").replace("-", "−"); };
-const sub = s => `<sub>${s}</sub>`;
-function mxHtml(rows, o = {}) {
-  const m = rows[0].length, bs = o.block || 0;
-  return `<div class="mx${o.small ? " sm" : ""}" style="grid-template-columns:repeat(${m},auto)" role="grid" aria-label="${esc(o.label || "Matrice")}">${rows.map((r, i) => r.map((v, j) => {
-    const on = o.on ? o.on(i, j, v) : v !== 0;
-    const alt = bs && ((Math.floor(i / bs) + Math.floor(j / bs)) % 2) ? " alt" : "";
-    const st = o.heat ? ` style="--h:${Math.min(1, Math.abs(v) / o.heat).toFixed(2)}"` : "";
-    return `<span class="c${on ? " on" : ""}${o.heat ? (v < 0 ? " neg heat" : " heat") : ""}${alt}" data-i="${i}" data-j="${j}"${st} role="gridcell">${o.fmt ? o.fmt(v, i, j) : v}</span>`;
-  }).join("")).join("")}</div>`;
+const tnum = (v, d = 2) => { const r = +(+v).toFixed(d); return (Object.is(r, -0) ? 0 : r).toString().replace(".", "{,}"); };
+const sgn = v => v > 0 ? "+1" : "-1";
+/* Matrice LaTeX dont chaque coefficient est cliquable (\class), avec traits de séparation de blocs */
+function texMat(M, o = {}) {
+  const n = M.length, m = M[0].length, cuts = o.cuts || [];
+  const spec = Array.from({ length: m }, (_, j) => "c" + (cuts.includes(j + 1) && j < m - 1 ? "|" : "")).join("");
+  const rows = M.map((r, i) => r.map((v, j) => `\\class{mc ${o.id || "m"} r${i} c${j}${(o.nz ? o.nz(v, i, j) : v !== 0) ? " nz" : ""}}{${o.f ? o.f(v, i, j) : v}}`).join(" & ") + (cuts.includes(i + 1) && i < n - 1 ? L` \\ \hline ` : L` \\ `)).join("");
+  return L`\left(\begin{array}{` + spec + "}" + rows + L`\end{array}\right)`;
 }
-function labBind(host, sel, onHover, onLeave) {
-  $$(sel + " .c", host).forEach(c => {
-    const go = () => { $$(".c.hl", host).forEach(x => x.classList.remove("hl")); c.classList.add("hl"); onHover(+c.dataset.i, +c.dataset.j); };
-    c.addEventListener("mouseenter", go); c.addEventListener("click", go);
-  });
-  const g = $(sel, host); if (g && onLeave) g.addEventListener("mouseleave", () => { $$(".c.hl", host).forEach(x => x.classList.remove("hl")); onLeave(); });
+const blockCuts = sizes => { const c = []; let s = 0; sizes.forEach(x => { s += x; c.push(s); }); return c; };
+function labShell(host, { intro, ctl, math, expl, extra }) {
+  host.innerHTML = `<div class="lab">${intro ? `<div class="lab-intro">${intro}</div>` : ""}${ctl ? `<div class="lab-ctl">${ctl}</div>` : ""}<div class="lab-main"><div class="lab-math">${math}</div>${extra || ""}</div>${expl ? `<div class="lab-expl">${expl}</div>` : ""}</div>`;
+  typeset(host);
 }
-const labSeg = (name, opts, cur) => `<span class="seg lab-seg" role="group" aria-label="${name}">${opts.map(o => `<button type="button" data-v="${o[0]}" aria-pressed="${o[0] === cur}">${o[1]}</button>`).join("")}</span>`;
-const labRange = (k, label, min, max, step, v) => `<div><label for="lb-${k}">${label}<output id="lbo-${k}">${nf(v)}</output></label><input type="range" id="lb-${k}" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
-function labWire(host, st, draw) {
-  $$("input[type=range][data-k]", host).forEach(r => {
-    r.addEventListener("input", () => { const o = $("#lbo-" + r.dataset.k, host); if (o) o.textContent = nf(+r.value); });
-    r.addEventListener("change", () => { st[r.dataset.k] = +r.value; draw(); });
-  });
-  $$(".lab-seg", host).forEach(g => $$("button", g).forEach(b => b.addEventListener("click", () => { st[g.dataset.s] = b.dataset.v; draw(); })));
+const labSegH = (key, opts, cur) => `<span class="seg lab-seg" data-s="${key}" role="group">${opts.map(o => `<button type="button" data-v="${o[0]}" aria-pressed="${String(o[0]) === String(cur)}">${o[1]}</button>`).join("")}</span>`;
+const stepper = (key, label, v, min, max, step = 1, show) => `<span class="stp"><span class="stp-l">${label}</span><button type="button" data-st="${key}" data-d="${-step}" data-min="${min}" data-max="${max}" aria-label="Diminuer">−</button><b>${show !== undefined ? show : nf(v)}</b><button type="button" data-st="${key}" data-d="${step}" data-min="${min}" data-max="${max}" aria-label="Augmenter">+</button></span>`;
+function labControls(host, st, draw) {
+  $$(".lab-seg", host).forEach(g => $$("button", g).forEach(b => b.addEventListener("click", () => { const v = b.dataset.v; st[g.dataset.s] = isNaN(+v) ? v : +v; draw(); })));
+  $$("[data-st]", host).forEach(b => b.addEventListener("click", () => { const k = b.dataset.st, d = +b.dataset.d; const v = +(st[k] + d).toFixed(4); if (v < +b.dataset.min - 1e-9 || v > +b.dataset.max + 1e-9) return; st[k] = v; draw(); }));
 }
-/* Graphe sur un cercle : sommets 1..n, arêtes ou flèches */
-function cycleSvg(n, edges, o = {}) {
-  const W = 260, c = 130, R = 100, P = k => { const a = Math.PI / 2 - 2 * Math.PI * (k - 1) / n + (o.rot || 0); return [c + R * Math.cos(a), c - R * Math.sin(a)]; };
-  let s = "";
-  edges.forEach(([a, b, cls]) => {
-    const [x1, y1] = P(a), [x2, y2] = P(b);
-    if (a === b) { s += `<circle cx="${fx(x1 + (x1 - c) * 0.16)}" cy="${fx(y1 + (y1 - c) * 0.16)}" r="11" class="lab-e ${cls || ""}" style="fill:none"/>`; return; }
-    if (o.arrows) { const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L, ex = x2 - ux * 13, ey = y2 - uy * 13, sx = x1 + ux * 13, sy = y1 + uy * 13, w = 4.5; s += `<line x1="${fx(sx)}" y1="${fx(sy)}" x2="${fx(ex - ux * 6)}" y2="${fx(ey - uy * 6)}" class="lab-e ${cls || ""}"/><polygon points="${fx(ex)},${fx(ey)} ${fx(ex - ux * 9 - uy * w)},${fx(ey - uy * 9 + ux * w)} ${fx(ex - ux * 9 + uy * w)},${fx(ey - uy * 9 - ux * w)}" class="lab-ah ${cls || ""}"/>`; }
-    else s += `<line x1="${fx(x1)}" y1="${fx(y1)}" x2="${fx(x2)}" y2="${fx(y2)}" class="lab-e ${cls || ""}"/>`;
-  });
-  for (let k = 1; k <= n; k++) { const [x, y] = P(k); s += `<circle cx="${fx(x)}" cy="${fx(y)}" r="12" class="lab-v${(o.hv || []).includes(k) ? " on" : ""}"/><text x="${fx(x)}" y="${fx(y + 4.5)}" text-anchor="middle" class="lab-vt">${k}</text>`; }
-  return `<svg viewBox="0 0 ${W} ${W}" width="${W}" height="${W}" class="lab-svg" role="img" aria-label="${esc(o.label || "Graphe")}">${s}</svg>`;
+function labPick(host, fn) {
+  host.onclick = e => {
+    const g = e.target.closest && e.target.closest(".mc"); if (!g || !host.contains(g)) return;
+    const cl = (g.getAttribute("class") || "").split(/\s+/);
+    const i = +((cl.find(c => /^r\d+$/.test(c)) || "r0").slice(1)), j = +((cl.find(c => /^c\d+$/.test(c)) || "c0").slice(1));
+    $$(".mc.sel", host).forEach(x => x.classList.remove("sel")); g.classList.add("sel");
+    const ex = $(".lab-expl", host); if (ex) { ex.innerHTML = fn(cl[1], i, j); typeset(ex); }
+  };
 }
+const svgWrap = (w, h, s, label) => `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" class="lab-svg" role="img" aria-label="${label}">${s}</svg>`;
+const fx = v => +(+v).toFixed(1);
 
-/* Mode 1 : matrices de décalage C(n,k), J(1) = C(n,1) + C(n,n-1), valeurs propres */
+/* 1. Matrices de décalage C(n,k), J(1), valeurs propres */
 function labCycle(host) {
-  const st = { n: 6, k: 1, v: "C" };
+  const st = { v: "C", n: 6, k: 2 };
   const C = (n, k) => Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => { const I = i + 1, J = j + 1; return ((I <= k && J === I + n - k) || (I >= k + 1 && J === I - k)) ? 1 : 0; }));
+  function circle(n, edges, arrows) {
+    const c = 120, R = 92, P = k => { const a = Math.PI / 2 - 2 * Math.PI * (k - 1) / n; return [c + R * Math.cos(a), c - R * Math.sin(a)]; };
+    let s = "";
+    edges.forEach(([a, b]) => { const [x1, y1] = P(a), [x2, y2] = P(b); const L0 = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L0, uy = (y2 - y1) / L0; const sx = x1 + ux * 14, sy = y1 + uy * 14, ex = x2 - ux * 14, ey = y2 - uy * 14; s += `<line x1="${fx(sx)}" y1="${fx(sy)}" x2="${fx(ex)}" y2="${fx(ey)}" class="lab-e"/>`; if (arrows) s += `<polygon points="${fx(ex)},${fx(ey)} ${fx(ex - ux * 9 - uy * 4.5)},${fx(ey - uy * 9 + ux * 4.5)} ${fx(ex - ux * 9 + uy * 4.5)},${fx(ey - uy * 9 - ux * 4.5)}" class="lab-ah"/>`; });
+    for (let k = 1; k <= n; k++) { const [x, y] = P(k); s += `<circle cx="${fx(x)}" cy="${fx(y)}" r="13" class="lab-v"/><text x="${fx(x)}" y="${fx(y + 5)}" text-anchor="middle" class="lab-vt">${k}</text>`; }
+    return svgWrap(240, 240, s, "Graphe");
+  }
   function draw() {
     const { n } = st; if (st.k > n) st.k = n; const k = st.k;
-    const M = st.v === "C" ? C(n, k) : C(n, 1).map((r, i) => r.map((v, j) => v + C(n, n - 1)[i][j]));
-    const ctl = `<div class="lab-ctl">${labSeg("Matrice", [["C", `C${sub("n,k")}`], ["J", `J${sub("n")}<sup>(1)</sup>`], ["S", "Valeurs propres"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}<div class="viz-ctrl">${labRange("n", "Taille n", 3, 10, 1, n)}${st.v === "C" ? labRange("k", "Décalage k", 1, n, 1, k) : ""}</div></div>`;
-    let body;
-    if (st.v === "S") {
-      const W = 300, c = 150, R = 95, pts = Array.from({ length: n }, (_, j) => [Math.cos(2 * Math.PI * j / n), Math.sin(2 * Math.PI * j / n)]);
-      let s = `<line x1="20" y1="${c}" x2="${W - 20}" y2="${c}" class="lab-ax"/><line x1="${c}" y1="20" x2="${c}" y2="${W - 20}" class="lab-ax"/><circle cx="${c}" cy="${c}" r="${R}" class="lab-ax" style="fill:none"/>`;
-      pts.forEach(([x, y], j) => { s += `<line x1="${fx(c + R * x)}" y1="${fx(c - R * y)}" x2="${fx(c + R * x)}" y2="${c}" class="lab-proj"/><circle cx="${fx(c + R * x)}" cy="${fx(c - R * y)}" r="5" class="lab-pt"/><text x="${fx(c + (R + 16) * x)}" y="${fx(c - (R + 16) * y + 4)}" text-anchor="middle" class="lab-vt sm">ω${String(j).split("").map(d => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("")}</text><circle cx="${fx(c + R * x)}" cy="${c}" r="4" class="lab-pt2"/>`; });
-      s += `<text x="${W - 22}" y="${c - 6}" text-anchor="end" class="lab-vt sm">Re</text>`;
-      body = `<div class="lab-row"><svg viewBox="0 0 ${W} ${W}" width="${W}" height="${W}" class="lab-svg" role="img" aria-label="Racines n-ièmes de l'unité">${s}</svg>
-        <div class="lab-txt"><p>Les points bleus sont les valeurs propres $\\omega_k = e^{2ik\\pi/n}$ de $C_{n,1}$. Comme $C_{n,n-1} = C_{n,1}^{-1}$, la même matrice de passage donne pour $J_n^{(1)}$ les valeurs propres</p><p style="text-align:center">$\\lambda_k = \\omega_k+\\overline{\\omega_k} = 2\\operatorname{Re}(\\omega_k) = 2\\cos\\frac{2k\\pi}n$,</p><p>soit deux fois l'abscisse du point (points jaunes) :</p><div class="lab-chips">${pts.map(([x], j) => `<span>λ${sub(j)} = ${nf(2 * x)}</span>`).join("")}</div><p class="lab-small">Somme : ${nf(pts.reduce((a, p) => a + 2 * p[0], 0))} = trace de $J_n^{(1)}$ (diagonale nulle).</p></div></div>`;
+    const ctl = labSegH("v", [["C", L`$C_{n,k}$`], ["J", L`$J_n^{(1)}$`], ["S", "Valeurs propres"]], st.v) + stepper("n", L`$n$`, n, 3, 8) + (st.v === "C" ? stepper("k", L`$k$`, k, 1, n) : "");
+    if (st.v === "C") {
+      const M = C(n, k);
+      const imgs = Array.from({ length: n }, (_, j) => { const t = (j + k) % n + 1; return `e_{${j + 1}}\\mapsto e_{${t}}`; });
+      labShell(host, {
+        intro: L`<p>La matrice $C_{n,k}$ <b>décale</b> les vecteurs de base de $k$ crans, en tournant. Pour la comprendre, on la lit <b>colonne par colonne</b> : la colonne $j$ est l'image $C_{n,k}e_j$. Clique sur un coefficient pour voir la règle de l'énoncé.</p>`,
+        ctl, math: `$$C_{${n},${k}} = ${texMat(M, { id: "C" })}$$` + L`$$\begin{array}{c}` + imgs.reduce((a, s, i) => a + s + (i % 4 === 3 ? L` \\ ` : L`,\quad `), "").replace(/,\\quad $|\\\\ $/, "") + L`\end{array}$$`,
+        extra: circle(n, Array.from({ length: n }, (_, j) => [j + 1, (j + k) % n + 1]), true),
+        expl: L`<p>Chaque colonne contient un seul $1$ : $C_{${n},${k}}\,e_j = e_{j+${k}}$, en revenant à $1$ après $${n}$. Décaler de ${k} crans revient à décaler ${k} fois d'un cran, donc $C_{n,1}^{\,k} = C_{n,k}$ (Q10). Pour $k = n$, on retrouve $I_n$.</p>`.replace(/\$\{n\}/g, n).replace(/\$\{k\}/g, k)
+      });
+      labPick(host, (id, i, j) => { const I = i + 1, J = j + 1, c1 = I <= k && J === I + n - k, c2 = I >= k + 1 && J === I - k; return c1 ? L`<p>Coefficient $(${I},${J})$ : on a $i = ${I}\leqslant k = ${k}$ et $j = i+n-k = ${I}+${n}-${k} = ${J}$, donc il vaut $1$. Lecture : la colonne $${J}$ envoie $e_{${J}}$ sur $e_{${I}}$.</p>` : c2 ? L`<p>Coefficient $(${I},${J})$ : on a $i = ${I}\geqslant k+1$ et $j = i-k = ${I}-${k} = ${J}$, donc il vaut $1$. Lecture : la colonne $${J}$ envoie $e_{${J}}$ sur $e_{${I}}$.</p>` : L`<p>Coefficient $(${I},${J})$ : ${I <= k ? `comme $i\\leqslant k$, il faudrait $j = i+n-k = ${I + n - k}$` : `comme $i\\geqslant k+1$, il faudrait $j = i-k = ${I - k}$`}. Ce n'est pas le cas : il vaut $0$.</p>`; });
+    } else if (st.v === "J") {
+      const A = C(n, 1), B = C(n, n - 1), M = A.map((r, i) => r.map((v, j) => v + B[i][j]));
+      labShell(host, {
+        intro: L`<p>$J_n^{(1)} = C_{n,1}+C_{n,n-1}$ : le premier terme décale d'un cran en avant, le second d'un cran en arrière. Le coefficient $(i,j)$ vaut donc $1$ exactement quand $i$ et $j$ sont <b>voisins sur le cercle</b>. Clique sur un coefficient.</p>`,
+        ctl, math: `$$J_{${n}}^{(1)} = ${texMat(A, { id: "A" })} + ${texMat(B, { id: "B" })} = ${texMat(M, { id: "J" })}$$`,
+        extra: circle(n, Array.from({ length: n }, (_, j) => [j + 1, (j + 1) % n + 1]), false),
+        expl: L`<p>C'est la matrice d'adjacence du cycle à $${n}$ sommets (Q8) : chaque ligne contient deux $1$, aux colonnes des deux voisins.</p>`.replace("${n}", n)
+      });
+      labPick(host, (id, i, j) => { const I = i + 1, J = j + 1, nb = J === I % n + 1 || I === J % n + 1; return nb ? L`<p>Coefficient $(${I},${J})$ : les sommets $${I}$ et $${J}$ sont voisins sur le cercle, il vaut $1$. Il provient de ${A[i][j] ? L`$C_{n,1}$ (car $i = j+1$ modulo $n$)` : L`$C_{n,n-1}$ (car $j = i+1$ modulo $n$)`}.</p>` : L`<p>Coefficient $(${I},${J})$ : $${I}$ et $${J}$ ne sont pas voisins, il vaut $0$.</p>`; });
     } else {
-      const edges = [];
-      if (st.v === "C") for (let j = 1; j <= n; j++) { const i = (j - 1 + k) % n + 1; edges.push([j, i, ""]); }
-      else for (let j = 1; j <= n; j++) edges.push([j, j % n + 1, ""]);
-      body = `<div class="lab-row"><div><div class="lab-cap">${st.v === "C" ? `C${sub(`${n},${k}`)}` : `J${sub(n)}<sup>(1)</sup> = C${sub(`${n},1`)} + C${sub(`${n},${n - 1}`)}`}</div>${mxHtml(M, { label: "Matrice" })}</div><div><div class="lab-cap">${st.v === "C" ? `e${sub("j")} → e${sub("j+k")} (modulo n)` : "Chaque sommet relié à ses deux voisins"}</div><div data-r="g">${cycleSvg(n, edges, { arrows: st.v === "C" })}</div></div></div><div class="lab-note" data-r="n"></div>`;
+      const c = 120, R = 90; let s = `<line x1="10" y1="${c}" x2="230" y2="${c}" class="lab-ax"/><line x1="${c}" y1="10" x2="${c}" y2="230" class="lab-ax"/><circle cx="${c}" cy="${c}" r="${R}" class="lab-ax" style="fill:none"/>`;
+      for (let j = 0; j < n; j++) { const x = Math.cos(2 * Math.PI * j / n), y = Math.sin(2 * Math.PI * j / n); s += `<line x1="${fx(c + R * x)}" y1="${fx(c - R * y)}" x2="${fx(c + R * x)}" y2="${c}" class="lab-proj"/><circle cx="${fx(c + R * x)}" cy="${fx(c - R * y)}" r="5" class="lab-pt"/><circle cx="${fx(c + R * x)}" cy="${c}" r="4" class="lab-pt2"/>`; }
+      const lam = Array.from({ length: n }, (_, j) => `\\lambda_{${j}} = 2\\cos\\frac{${2 * j}\\pi}{${n}} = ${tnum(2 * Math.cos(2 * Math.PI * j / n))}`);
+      labShell(host, {
+        intro: L`<p>Les valeurs propres de $C_{n,1}$ sont les racines $n$-ièmes de l'unité $\omega_k = e^{2ik\pi/n}$ (points bleus). Comme $C_{n,n-1} = C_{n,1}^{-1}$, la même matrice de passage diagonalise $J_n^{(1)}$, avec les valeurs propres $\lambda_k = \omega_k+\overline{\omega_k} = 2\cos\frac{2k\pi}n$ : deux fois l'abscisse du point (points jaunes).</p>`,
+        ctl, math: L`$$\begin{array}{l}` + lam.join(L` \\ `) + L`\end{array}$$`, extra: svgWrap(240, 240, s, "Racines de l'unité"),
+        expl: L`<p>Vérification : la somme des $\lambda_k$ vaut $${tnum(Array.from({ length: n }, (_, j) => 2 * Math.cos(2 * Math.PI * j / n)).reduce((a, b) => a + b, 0))}$, c'est la trace de $J_n^{(1)}$ (diagonale nulle).</p>`.replace(/\$\{[^}]+\}/, tnum(Array.from({ length: n }, (_, j) => 2 * Math.cos(2 * Math.PI * j / n)).reduce((a, b) => a + b, 0)))
+      });
     }
-    host.innerHTML = ctl + body;
-    labWire(host, st, draw);
-    if (st.v === "S") { typeset(host); return; }
-    const note = $("[data-r=n]", host);
-    const idle = () => { note.innerHTML = st.v === "C" ? `<b>Comment lire la matrice.</b> Chaque <b>colonne j</b> contient un seul 1, à la ligne j + k (on revient à 1 après n). La colonne j donne l'image de e${sub("j")} : C${sub("n,k")} e${sub("j")} = e${sub("j+k")}. Décaler de k crans, c'est décaler k fois d'un cran : <b>C${sub("n,1")}<sup>k</sup> = C${sub("n,k")}</b>. Bouge k jusqu'à n : on retombe sur I${sub("n")}.<br><span class="lab-small">Survole une case pour voir la règle de l'énoncé.</span>` : `<b>Comment lire la matrice.</b> J${sub("n")}<sup>(1)</sup>(i,j) = 1 exactement quand j = i + 1 ou j = i − 1 (modulo n) : la ligne i a deux 1, aux colonnes des deux voisins de i sur le cercle. C'est la matrice d'adjacence du cycle (Q8).<br><span class="lab-small">Survole une case.</span>`; };
-    idle();
-    labBind(host, ".mx", (i, j) => {
-      const I = i + 1, J = j + 1;
-      if (st.v === "C") {
-        const c1 = I <= k && J === I + n - k, c2 = I >= k + 1 && J === I - k;
-        note.innerHTML = `<b>Case (${I}, ${J}).</b> ${c1 ? `i = ${I} ≤ k = ${k} et j = i + n − k = ${I} + ${n} − ${k} = ${J} : <b>1</b>.` : c2 ? `i = ${I} ≥ k + 1 = ${k + 1} et j = i − k = ${I} − ${k} = ${J} : <b>1</b>.` : `${I <= k ? `i ≤ k, il faudrait j = ${I + n - k}` : `i ≥ k + 1, il faudrait j = ${I - k}`} : <b>0</b>.`} ${M[i][j] ? `Donc la colonne ${J} envoie e${sub(J)} sur e${sub(I)}.` : ""}`;
-        $("[data-r=g]", host).innerHTML = cycleSvg(n, Array.from({ length: n }, (_, t) => { const a = t + 1, b = (a - 1 + k) % n + 1; return [a, b, M[i][j] && a === J ? "on" : ""]; }), { arrows: true, hv: [I, J] });
-      } else {
-        const nb = J === I % n + 1 || I === J % n + 1;
-        note.innerHTML = `<b>Case (${I}, ${J}).</b> ${nb ? `Les sommets ${I} et ${J} sont voisins sur le cercle : <b>1</b>. ${C(n, 1)[i][j] ? `Il vient de C${sub("n,1")} (i = j + 1).` : `Il vient de C${sub("n,n−1")} (j = i + 1).`}` : `${I} et ${J} ne sont pas voisins : <b>0</b>.`}`;
-        $("[data-r=g]", host).innerHTML = cycleSvg(n, Array.from({ length: n }, (_, t) => [t + 1, (t + 1) % n + 1, nb && ((t + 1 === I && (t + 1) % n + 1 === J) || (t + 1 === J && (t + 1) % n + 1 === I)) ? "on" : ""]), { hv: [I, J] });
-      }
-    }, () => { idle(); draw(); });
+    labControls(host, st, draw);
   }
   draw();
 }
 
-/* Mode 2 : produit de Kronecker, puis J9(2) */
+/* 2. Produit de Kronecker et J9(2) */
 function labKron(host) {
   const st = { v: "AB", A: [[1, 2], [3, 4]], B: [[0, 1], [1, 2]] };
   const kron = (A, B) => { const r = B.length, s = B[0].length; return Array.from({ length: A.length * r }, (_, i) => Array.from({ length: A[0].length * s }, (_, j) => A[Math.floor(i / r)][Math.floor(j / s)] * B[i % r][j % s])); };
   const I3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], J3 = [[0, 1, 1], [1, 0, 1], [1, 1, 0]];
   const T1 = kron(I3, J3), T2 = kron(J3, I3), T = T1.map((r, i) => r.map((v, j) => v + T2[i][j]));
-  function gridSvg(hl) {
-    const P = v => { const a = Math.floor((v - 1) / 3), b = (v - 1) % 3; return [50 + b * 80, 40 + a * 80]; };
+  const pm = M => L`\begin{pmatrix}` + M.map(r => r.join(" & ")).join(L` \\ `) + L`\end{pmatrix}`;
+  function grid(hl) {
+    const P = v => { const a = Math.floor((v - 1) / 3), b = (v - 1) % 3; return [45 + b * 75, 35 + a * 75]; };
     let s = "";
     for (let u = 1; u <= 9; u++) for (let v = u + 1; v <= 9; v++) {
       const same = Math.floor((u - 1) / 3) === Math.floor((v - 1) / 3), col = (u - 1) % 3 === (v - 1) % 3; if (!same && !col) continue;
-      const [x1, y1] = P(u), [x2, y2] = P(v), far = Math.abs(x2 - x1) > 100 || Math.abs(y2 - y1) > 100;
-      const on = hl && ((hl[0] === u && hl[1] === v) || (hl[0] === v && hl[1] === u));
-      const cls = `lab-e ${same ? "" : "dash"}${on ? " on" : ""}`;
-      if (far) { const mx = (x1 + x2) / 2 + (same ? 0 : -34), my = (y1 + y2) / 2 + (same ? -34 : 0); s += `<path d="M${x1} ${y1} Q${mx} ${my} ${x2} ${y2}" class="${cls}" style="fill:none"/>`; }
-      else s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}"/>`;
+      const [x1, y1] = P(u), [x2, y2] = P(v), far = Math.abs(x2 - x1) > 100 || Math.abs(y2 - y1) > 100, on = hl && ((hl[0] === u && hl[1] === v) || (hl[0] === v && hl[1] === u));
+      const cls = `lab-e${same ? "" : " dash"}${on ? " on" : ""}`;
+      s += far ? `<path d="M${x1} ${y1} Q${(x1 + x2) / 2 + (same ? 0 : -32)} ${(y1 + y2) / 2 + (same ? -32 : 0)} ${x2} ${y2}" class="${cls}" style="fill:none"/>` : `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}"/>`;
     }
-    for (let v = 1; v <= 9; v++) { const [x, y] = P(v); s += `<circle cx="${x}" cy="${y}" r="13" class="lab-v${hl && hl.includes(v) ? " on" : ""}"/><text x="${x}" y="${y + 4.5}" text-anchor="middle" class="lab-vt">${v}</text>`; }
-    return `<svg viewBox="0 0 270 250" width="270" height="250" class="lab-svg" role="img" aria-label="Graphe de la grille 3 par 3">${s}</svg>`;
+    for (let v = 1; v <= 9; v++) { const [x, y] = P(v); s += `<circle cx="${x}" cy="${y}" r="13" class="lab-v${hl && hl.includes(v) ? " on" : ""}"/><text x="${x}" y="${y + 5}" text-anchor="middle" class="lab-vt">${v}</text>`; }
+    return svgWrap(240, 230, s, "Grille 3 par 3");
   }
   function draw() {
-    const ctl = `<div class="lab-ctl">${labSeg("Exemple", [["AB", "A ⊗ B (exemple)"], ["T1", `I${sub(3)} ⊗ J${sub(3)}<sup>(1)</sup>`], ["T2", `J${sub(3)}<sup>(1)</sup> ⊗ I${sub(3)}`], ["T", `J${sub(9)}<sup>(2)</sup> (somme)`]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}</div>`;
-    let body;
+    const ctl = labSegH("v", [["AB", L`$A\otimes B$`], ["T1", L`$I_3\otimes J_3^{(1)}$`], ["T2", L`$J_3^{(1)}\otimes I_3$`], ["T", L`$J_9^{(2)}$`]], st.v);
     if (st.v === "AB") {
-      const inp = (X, nm) => `<div class="mx-in" style="grid-template-columns:repeat(2,auto)">${X.map((r, i) => r.map((v, j) => `<input type="number" step="1" value="${v}" data-m="${nm}" data-i="${i}" data-j="${j}" aria-label="${nm}(${i + 1},${j + 1})">`).join("")).join("")}</div>`;
-      body = `<div class="lab-row" style="align-items:center"><div><div class="lab-cap">A (modifiable)</div>${inp(st.A, "A")}</div><span class="lab-op">⊗</span><div><div class="lab-cap">B (modifiable)</div>${inp(st.B, "B")}</div><span class="lab-op">=</span><div><div class="lab-cap">A ⊗ B : 2 × 2 blocs a${sub("ij")} B</div>${mxHtml(kron(st.A, st.B), { block: 2, on: () => false, label: "A tenseur B" })}</div></div><div class="lab-note" data-r="n"></div>`;
+      const { A, B } = st, K = kron(A, B);
+      const inp = (X, nm) => `<span class="mx-in">${X.map((r, i) => r.map((v, j) => `<input type="number" step="1" value="${v}" data-m="${nm}" data-i="${i}" data-j="${j}" aria-label="${nm} ${i + 1} ${j + 1}">`).join("")).join("")}</span>`;
+      labShell(host, {
+        intro: L`<p>Le produit de Kronecker remplace chaque coefficient $a_{ij}$ de $A$ par le <b>bloc</b> $a_{ij}B$. Modifie $A$ et $B$, puis clique sur un coefficient du résultat pour voir d'où il vient.</p>`,
+        ctl: ctl + `<span class="lab-inputs"><span>$A =$</span>${inp(A, "A")}<span>$B =$</span>${inp(B, "B")}</span>`,
+        math: L`$$A\otimes B = \begin{pmatrix}a_{11}B & a_{12}B\\ a_{21}B & a_{22}B\end{pmatrix} = \begin{pmatrix}` + `${A[0][0]}\\,B & ${A[0][1]}\\,B\\\\ ${A[1][0]}\\,B & ${A[1][1]}\\,B` + L`\end{pmatrix} = ` + texMat(K, { id: "K", cuts: [2, 4], nz: () => false }) + "$$",
+        expl: L`<p>Clique sur un coefficient de la matrice de droite.</p>`
+      });
+      $$(".mx-in input", host).forEach(x => x.addEventListener("change", () => { const v = parseFloat(x.value.replace(",", ".")); st[x.dataset.m][+x.dataset.i][+x.dataset.j] = isFinite(v) ? v : 0; draw(); }));
+      labPick(host, (id, i, j) => { const a = Math.floor(i / 2), b = Math.floor(j / 2), p = i % 2, q = j % 2; return L`<p>Ligne $${i + 1}$ : bloc $${a + 1}$, position $${p + 1}$. Colonne $${j + 1}$ : bloc $${b + 1}$, position $${q + 1}$. Le coefficient vaut</p>$$a_{${a + 1}${b + 1}}\,b_{${p + 1}${q + 1}} = ${A[a][b]}\times${B[p][q]} = ${A[a][b] * B[p][q]}.$$`; });
     } else {
       const M = st.v === "T1" ? T1 : st.v === "T2" ? T2 : T;
-      body = `<div class="lab-row"><div><div class="lab-cap">${st.v === "T1" ? "Blocs diagonaux : 1 · J, les autres 0 · J" : st.v === "T2" ? "Bloc (a, a') = J(a, a') · I₃" : "Somme des deux"}</div>${mxHtml(M, { block: 3, label: "Matrice 9 par 9", small: true })}</div><div><div class="lab-cap">Sommet (a, b) numéroté 3(a − 1) + b</div><div data-r="g">${gridSvg()}</div></div></div><div class="lab-note" data-r="n"></div>`;
+      const head = st.v === "T1" ? L`I_3\otimes J = \begin{pmatrix}J&0&0\\0&J&0\\0&0&J\end{pmatrix}` : st.v === "T2" ? L`J\otimes I_3 = \begin{pmatrix}0&I_3&I_3\\I_3&0&I_3\\I_3&I_3&0\end{pmatrix}` : L`J_9^{(2)} = I_3\otimes J+J\otimes I_3`;
+      labShell(host, {
+        intro: L`<p>Ici $J = J_3^{(1)} = ` + pm(J3) + L`$. On numérote le sommet de la ligne $a$ et de la colonne $b$ de la grille par $3(a-1)+b$. ` + (st.v === "T1" ? L`$I_3\otimes J$ relie les sommets d'une <b>même ligne</b> de la grille (traits pleins).` : st.v === "T2" ? L`$J\otimes I_3$ relie les sommets d'une <b>même colonne</b> (pointillés).` : L`La somme relie les sommets d'une même ligne ou d'une même colonne : chaque sommet a $4$ voisins.`) + " Clique sur un coefficient.</p>",
+        ctl, math: `$$${head} = ${texMat(M, { id: "T", cuts: [3, 6] })}$$`, extra: grid(),
+        expl: L`<p>Clique sur un coefficient égal à $1$ : l'arête correspondante s'allume sur la grille.</p>`
+      });
+      labPick(host, (id, i, j) => {
+        const a = Math.floor(i / 3) + 1, b = i % 3 + 1, a2 = Math.floor(j / 3) + 1, b2 = j % 3 + 1, t1 = a === a2 ? J3[b - 1][b2 - 1] : 0, t2 = b === b2 ? J3[a - 1][a2 - 1] : 0;
+        const g = $(".lab-svg", host); if (g) g.outerHTML = grid(M[i][j] ? [i + 1, j + 1] : null);
+        return L`<p>Ligne $${i + 1}$ : sommet $(a,b) = (${a},${b})$. Colonne $${j + 1}$ : sommet $(${a2},${b2})$. On est dans le bloc $(${a},${a2})$, à la position $(${b},${b2})$.</p>$$\big(I_3\otimes J\big)_{${i + 1},${j + 1}} = (I_3)_{${a}${a2}}\,J_{${b}${b2}} = ${t1},\qquad\big(J\otimes I_3\big)_{${i + 1},${j + 1}} = J_{${a}${a2}}\,(I_3)_{${b}${b2}} = ${t2}.$$` + (st.v === "T" ? L`<p>Somme : $${t1 + t2}$. ${t1 + t2 ? "Les deux sommets sont voisins dans la grille." : "Les deux sommets ne sont pas voisins."}</p>` : "");
+      });
     }
-    host.innerHTML = ctl + body;
-    labWire(host, st, draw);
-    const note = $("[data-r=n]", host);
-    if (st.v === "AB") {
-      const idle = () => { note.innerHTML = `<b>Comment construire A ⊗ B.</b> On remplace chaque coefficient a${sub("ij")} de A par le bloc a${sub("ij")}·B. Les blocs sont colorés en damier. Modifie A ou B, puis survole une case du résultat.`; };
-      idle();
-      $$(".mx-in input", host).forEach(x => x.addEventListener("change", () => { const v = parseFloat(x.value.replace(",", ".")); st[x.dataset.m][+x.dataset.i][+x.dataset.j] = isFinite(v) ? v : 0; draw(); }));
-      labBind(host, ".mx", (i, j) => { const a = Math.floor(i / 2), b = Math.floor(j / 2), p = i % 2, q = j % 2; note.innerHTML = `<b>Case (${i + 1}, ${j + 1}).</b> Ligne ${i + 1} = bloc ${a + 1}, position ${p + 1} ; colonne ${j + 1} = bloc ${b + 1}, position ${q + 1}. Coefficient = a${sub(`${a + 1}${b + 1}`)} × b${sub(`${p + 1}${q + 1}`)} = ${nf(st.A[a][b])} × ${nf(st.B[p][q])} = <b>${nf(st.A[a][b] * st.B[p][q])}</b>.`; }, idle);
-      return;
-    }
-    const M = st.v === "T1" ? T1 : st.v === "T2" ? T2 : T;
-    const idle = () => { note.innerHTML = st.v === "T1" ? `<b>I₃ ⊗ J₃<sup>(1)</sup></b> : le bloc (a, a') vaut I₃(a, a')·J₃<sup>(1)</sup>, donc J sur la diagonale et 0 ailleurs. Il relie les sommets <b>d'une même ligne</b> du dessin (traits pleins).` : st.v === "T2" ? `<b>J₃<sup>(1)</sup> ⊗ I₃</b> : le bloc (a, a') vaut J(a, a')·I₃, donc I₃ hors diagonale. Il relie les sommets <b>d'une même colonne</b> (pointillés).` : `<b>J₉<sup>(2)</sup></b> : (i, j) vaut 1 si i et j sont sur la même ligne ou la même colonne de la grille 3 × 3 (sur un tore, tous sont voisins à n = 3). Chaque sommet a 4 voisins : chaque ligne contient quatre 1.`; };
-    idle();
-    labBind(host, ".mx", (i, j) => {
-      const a = Math.floor(i / 3) + 1, b = i % 3 + 1, a2 = Math.floor(j / 3) + 1, b2 = j % 3 + 1;
-      const t1 = a === a2 ? J3[b - 1][b2 - 1] : 0, t2 = b === b2 ? J3[a - 1][a2 - 1] : 0;
-      note.innerHTML = `<b>Case (${i + 1}, ${j + 1}).</b> Ligne ${i + 1} ↔ sommet (a, b) = (${a}, ${b}) ; colonne ${j + 1} ↔ (${a2}, ${b2}). Bloc (${a}, ${a2}), position (${b}, ${b2}).<br>I₃ ⊗ J : I₃(${a},${a2}) × J(${b},${b2}) = <b>${t1}</b> ; J ⊗ I₃ : J(${a},${a2}) × I₃(${b},${b2}) = <b>${t2}</b>.${st.v === "T" ? ` Somme : <b>${t1 + t2}</b>.` : ""}`;
-      $("[data-r=g]", host).innerHTML = gridSvg(M[i][j] ? [i + 1, j + 1] : null);
-    }, () => { idle(); $("[data-r=g]", host).innerHTML = gridSvg(); });
+    labControls(host, st, draw);
   }
   draw();
 }
 
-/* Mode 3 : matrice de transfert du modèle d'Ising, Z_n(h) = tr(A^n) */
+/* 3. Matrice de transfert du modèle d'Ising */
 function labTransfer(host) {
   const st = { n: 5, b: 0.6, h: 0.3, x: [1, 1, -1, 1, -1, -1, 1, 1] };
   function draw() {
     const { n, b, h } = st, x = st.x.slice(0, n);
-    const A = [[Math.exp(b - h), Math.exp(-b - h)], [Math.exp(-b + h), Math.exp(b + h)]];
-    const kk = v => v === -1 ? 1 : 2;
-    const f = x.map((v, i) => { const w = x[(i + 1) % n]; return { i, v, w, val: Math.exp(b * v * w + h * v), a: kk(v), c: kk(w) }; });
+    const A = [[Math.exp(b - h), Math.exp(-b - h)], [Math.exp(-b + h), Math.exp(b + h)]], kk = v => v === -1 ? 1 : 2;
+    const f = x.map((v, i) => { const w = x[(i + 1) % n]; return { v, w, val: Math.exp(b * v * w + h * v), a: kk(v), c: kk(w) }; });
     const prod = f.reduce((p, t) => p * t.val, 1);
     let Z = 0; for (let m = 0; m < 1 << n; m++) { const y = Array.from({ length: n }, (_, i) => (m >> i) & 1 ? 1 : -1); let t = 1; for (let i = 0; i < n; i++) t *= Math.exp(b * y[i] * y[(i + 1) % n] + h * y[i]); Z += t; }
     let P = [[1, 0], [0, 1]]; for (let i = 0; i < n; i++) P = [[P[0][0] * A[0][0] + P[0][1] * A[1][0], P[0][0] * A[0][1] + P[0][1] * A[1][1]], [P[1][0] * A[0][0] + P[1][1] * A[1][0], P[1][0] * A[0][1] + P[1][1] * A[1][1]]];
     const used = new Set(f.map(t => `${t.a - 1}${t.c - 1}`));
-    host.innerHTML = `<div class="lab-ctl"><div class="viz-ctrl">${labRange("n", "Nombre de particules n", 2, 8, 1, n)}${labRange("b", "β", 0, 1.5, 0.05, b)}${labRange("h", "h", 0, 1, 0.05, h)}</div></div>
-      <div class="lab-cap">Une configuration x (clique sur une particule pour la retourner). Le cercle se referme : x${sub("n+1")} = x${sub("1")}.</div>
-      <div class="spins">${x.map((v, i) => `<button type="button" data-s="${i}" class="${v > 0 ? "up" : "dn"}" aria-label="Particule ${i + 1} : ${v > 0 ? "+1" : "−1"}"><b>${v > 0 ? "↑" : "↓"}</b><small>x${sub(i + 1)} = ${v > 0 ? "+1" : "−1"}</small><small>indice ${kk(v)}</small></button>`).join("")}</div>
-      <div class="lab-row"><div><div class="lab-cap">A : ligne = indice de x${sub("i")}, colonne = indice de x${sub("i+1")}<br>(indice 1 pour −1, indice 2 pour +1)</div>${mxHtml(A, { fmt: (v, i, j) => nf(v), on: (i, j) => used.has(`${i}${j}`), label: "Matrice A" })}<div class="lab-small" style="margin-top:8px">A(i, j) = exp(β·x·y + h·x) avec x = ±1 lu sur la ligne, y sur la colonne.</div></div>
-      <div class="lab-txt"><div class="lab-cap">Le terme de cette configuration dans Z${sub("n")}(h)</div><ol class="lab-fac">${f.map(t => `<li>i = ${t.i + 1} : e<sup>β·(${t.v > 0 ? "+1" : "−1"})(${t.w > 0 ? "+1" : "−1"}) + h·(${t.v > 0 ? "+1" : "−1"})</sup> = A(${t.a}, ${t.c}) = ${nf(t.val, 3)}</li>`).join("")}</ol><p>Produit : <b>${nf(prod, 4)}</b> = A(k${sub(1)},k${sub(2)}) A(k${sub(2)},k${sub(3)}) ⋯ A(k${sub("n")},k${sub(1)}) : un chemin fermé ${f.map(t => t.a).join(" → ")} → ${f[0].a}.</p></div></div>
-      <div class="lab-note"><b>Pourquoi la trace.</b> Le coefficient diagonal (k${sub(1)}, k${sub(1)}) de A<sup>n</sup> est la somme de ces produits sur tous les chemins fermés partant de k${sub(1)} (Q20). Sommer sur k${sub(1)}, c'est prendre la trace, et les chemins fermés correspondent exactement aux 2<sup>n</sup> configurations.<br>Somme des ${1 << n} termes : <b>Z${sub(n)} = ${nf(Z, 4)}</b> &nbsp;·&nbsp; tr(A<sup>${n}</sup>) = <b>${nf(P[0][0] + P[1][1], 4)}</b></div>`;
-    labWire(host, st, draw);
+    const ctl = stepper("n", L`$n$`, n, 2, 8) + stepper("b", L`$\beta$`, b, 0, 1.5, 0.1) + stepper("h", L`$h$`, h, 0, 1, 0.1) + `<span class="spins"><span class="stp-l">Configuration (clique pour retourner) :</span>${x.map((v, i) => `<button type="button" data-s="${i}" class="${v > 0 ? "up" : "dn"}" aria-label="x${i + 1}">$x_{${i + 1}} = ${sgn(v)}$</button>`).join("")}</span>`;
+    labShell(host, {
+      intro: L`<p>Dans le modèle d'Ising, le poids d'une configuration $x$ est un produit de facteurs $e^{\beta x_ix_{i+1}+hx_i}$, chacun ne dépendant que de deux voisins. On range ces $4$ facteurs possibles dans une matrice $2\times2$ : ligne $=$ valeur de $x_i$, colonne $=$ valeur de $x_{i+1}$ (indice $1$ pour $-1$, indice $2$ pour $+1$).</p>`,
+      ctl,
+      math: L`$$A = \begin{pmatrix}e^{\beta-h}&e^{-\beta-h}\\ e^{-\beta+h}&e^{\beta+h}\end{pmatrix} = ` + texMat(A, { id: "A", f: v => tnum(v), nz: (v, i, j) => used.has(`${i}${j}`) }) + "$$"
+        + L`$$\prod_{i=1}^{${n}}e^{\beta x_ix_{i+1}+hx_i} = ` + f.map(t => `A(${t.a},${t.c})`).join("\\,") + " = " + f.map(t => tnum(t.val)).join("\\times") + ` = ${tnum(prod, 4)}$$`
+        + L`$$Z_{${n}}(h) = \sum_{x\in\Lambda_{${n}}}\prod_{i=1}^{${n}}e^{\beta x_ix_{i+1}+hx_i} = ${tnum(Z, 3)},\qquad\operatorname{tr}\big(A^{${n}}\big) = ${tnum(P[0][0] + P[1][1], 3)}.$$`.replace(/\$\{n\}/g, n),
+      expl: "<p></p>"
+    });
+    const ex = $(".lab-expl", host); ex.innerHTML = `<p>Le produit ci-dessus est un <b>chemin fermé</b> dans les indices : $${f.map(t => t.a).join("\\to ")}\\to ${f[0].a}$. D'après Q20, le coefficient diagonal $(k_1,k_1)$ de $A^{n}$ est la somme des produits sur tous les chemins fermés partant de $k_1$. En sommant sur $k_1$, on obtient la trace, et les chemins fermés correspondent exactement aux $2^{n}$ configurations : $Z_n(h) = \\operatorname{tr}(A^n)$. Les coefficients de $A$ utilisés par ta configuration sont en couleur.</p>`; typeset(ex);
+    labControls(host, st, draw);
     $$(".spins button", host).forEach(btn => btn.addEventListener("click", () => { const i = +btn.dataset.s; st.x[i] = -st.x[i]; draw(); }));
   }
   draw();
 }
 
-/* Mode 4 : Curie-Weiss et modèle sinus */
+/* 4. Curie-Weiss et sinus */
 function labSpec(host) {
-  const st = { v: "CW", n: 4, m: 3 };
+  const st = { v: "CW", n: 4, m: 2 };
   function draw() {
-    const ctl = `<div class="lab-ctl">${labSeg("Modèle", [["CW", "Curie-Weiss (Q5)"], ["SI", "Sinus (Q7)"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}<div class="viz-ctrl">${st.v === "CW" ? labRange("n", "Taille n", 2, 8, 1, st.n) : labRange("m", "Taille n", 1, 7, 1, st.m)}</div></div>`;
-    let body;
+    const ctl = labSegH("v", [["CW", "Curie-Weiss (Q5)"], ["SI", "Sinus (Q7)"]], st.v) + (st.v === "CW" ? stepper("n", L`$n$`, st.n, 2, 6) : stepper("m", L`$n$`, st.m, 1, 4));
     if (st.v === "CW") {
-      const n = st.n, J = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => i === j ? 0 : 1 / n)), U = J.map((r, i) => r.map((v, j) => n * v + (i === j ? 1 : 0))), U2 = U.map(r => r.map(() => n));
-      body = `<div class="lab-row" style="align-items:center"><div><div class="lab-cap">J${sub(n)}<sup>(C)</sup></div>${mxHtml(J, { fmt: v => v ? `1/${n}` : "0", small: true, label: "J Curie-Weiss" })}</div><span class="lab-op">→</span><div><div class="lab-cap">U${sub(n)} = n J + I${sub(n)}</div>${mxHtml(U, { small: true, label: "U" })}</div><span class="lab-op">→</span><div><div class="lab-cap">U${sub(n)}<sup>2</sup> = n U${sub(n)}</div>${mxHtml(U2, { small: true, label: "U carré" })}</div></div>
-      <div class="lab-note"><b>Le calcul.</b> Multiplier par n transforme les 1/n en 1, ajouter I${sub(n)} remplit la diagonale : U${sub(n)} n'a que des 1. Chaque coefficient de U${sub(n)}<sup>2</sup> est une somme de n produits 1 × 1, donc vaut ${n} : U${sub(n)}<sup>2</sup> = ${n} U${sub(n)}. Ainsi X<sup>2</sup> − nX annule U${sub(n)} : Sp(U${sub(n)}) ⊂ {0, ${n}}.<br>U${sub(n)}(1, …, 1) = ${n}·(1, …, 1), et tout vecteur de somme nulle est envoyé sur 0 (espace de dimension ${n - 1}). Puis J = (U − I)/n : Sp(J${sub(n)}<sup>(C)</sup>) = {−1/${n}, ${n - 1}/${n}} = {${nf(-1 / n, 3)} ; ${nf((n - 1) / n, 3)}}.</div>`;
+      const n = st.n, J = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => i === j ? 0 : 1)), U = J.map(r => r.map(() => 1)), U2 = U.map(r => r.map(() => n));
+      labShell(host, {
+        intro: L`<p>On part de $J_n^{(C)}$ (des $\frac1n$ partout sauf sur la diagonale), on multiplie par $n$ et on ajoute $I_n$ : on obtient la matrice $U_n$ remplie de $1$. Son carré se calcule de tête, et donne son spectre.</p>`,
+        ctl,
+        math: `$$J_{${n}}^{(C)} = \\frac1{${n}}${texMat(J, { id: "J" })},\\qquad U_{${n}} = ${n}J_{${n}}^{(C)}+I_{${n}} = ${texMat(U, { id: "U" })}$$` + `$$U_{${n}}^2 = ${texMat(U2, { id: "V" })} = ${n}\\,U_{${n}}$$`,
+        expl: L`<p>Chaque coefficient de $U_n^2$ est $\sum_{k=1}^{n}1\times1 = n$, donc $U_n^2 = nU_n$ et $X^2-nX$ annule $U_n$ : $\operatorname{Sp}(U_n)\subset\{0,n\}$. Avec $U_n(1,\dots,1)^{\mathsf T} = n(1,\dots,1)^{\mathsf T}$ et $U_nx = 0$ pour $x$ de somme nulle, $\operatorname{Sp}(U_n) = \{0,n\}$. Enfin $J_n^{(C)} = \frac1n(U_n-I_n)$ :</p>$$\operatorname{Sp}\big(J_{${n}}^{(C)}\big) = \Big\{\frac{0-1}{${n}},\ \frac{${n}-1}{${n}}\Big\} = \Big\{-\frac1{${n}},\ \frac{${n - 1}}{${n}}\Big\}.$$`.replace(/\$\{n\}/g, n).replace(/\$\{n - 1\}/g, n - 1)
+      });
     } else {
       const n = st.m, N = 2 * n + 1, S = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => 2 / Math.sqrt(N) * Math.sin(2 * Math.PI * (i + 1) * (j + 1) / N)));
       const S2 = S.map((r, i) => r.map((_, j) => S[i].reduce((a, _, k) => a + S[i][k] * S[k][j], 0)));
-      body = `<div class="lab-row" style="align-items:center"><div><div class="lab-cap">J${sub(n)}<sup>(S)</sup>(i, j) = 2/√${N} · sin(2π i j / ${N})</div>${mxHtml(S, { fmt: v => nf(v), heat: 0.8, small: true, label: "J sinus" })}</div><span class="lab-op">×</span><div><div class="lab-cap">elle-même</div>${mxHtml(S, { fmt: v => nf(v), heat: 0.8, small: true, label: "J sinus" })}</div><span class="lab-op">=</span><div><div class="lab-cap">J × J (arrondi)</div>${mxHtml(S2, { fmt: v => nf(v), on: (i, j) => i === j, small: true, label: "Produit" })}</div></div><div class="lab-note" data-r="n"><b>Le calcul.</b> La matrice est symétrique (i j = j i), donc J<sup>T</sup> J = J × J. Le coefficient (i, j) du produit est le produit scalaire des colonnes i et j : il vaut 1 si i = j et 0 sinon (Q7, avec la somme de cosinus de Q6). Donc J<sup>T</sup> J = I${sub(n)} : J est orthogonale. Survole une case du produit.</div>`;
+      labShell(host, {
+        intro: L`<p>$J_n^{(S)}(i,j) = \frac2{\sqrt{2n+1}}\sin\frac{2\pi ij}{2n+1}$. Elle est symétrique, donc $J^{\mathsf T}J = J\times J$. On calcule ce produit : on doit trouver $I_n$. Clique sur un coefficient du produit pour voir le calcul.</p>`,
+        ctl,
+        math: `$$J_{${n}}^{(S)} = ${texMat(S, { id: "S", f: v => tnum(v) })},\\qquad \\big(J_{${n}}^{(S)}\\big)^2 = ${texMat(S2, { id: "P", f: v => tnum(v), nz: (v, i, j) => i === j })}$$`,
+        expl: L`<p>Le coefficient $(i,j)$ du produit est le produit scalaire des colonnes $i$ et $j$. Clique sur un coefficient.</p>`
+      });
+      labPick(host, (id, i, j) => { if (id !== "P") return L`<p>Clique sur un coefficient du produit (à droite).</p>`; const a = i + 1, c = j + 1; return a === c ? L`<p>Coefficient $(${a},${a})$ :</p>$$\frac4{${N}}\sum_{k=1}^{${n}}\sin^2\frac{2\pi ${a}k}{${N}} = \frac2{${N}}\sum_{k=1}^{${n}}\Big(1-\cos\frac{4\pi ${a}k}{${N}}\Big) = \frac2{${N}}\Big(${n}+\frac12\Big) = 1,$$<p>car la somme de cosinus vaut $-\frac12$ (Q6, avec $\sin(2\pi\cdot${a}) = 0$).</p>` : L`<p>Coefficient $(${a},${c})$ : avec $\sin a\sin b = \frac12(\cos(a-b)-\cos(a+b))$,</p>$$\frac2{${N}}\sum_{k=1}^{${n}}\Big(\cos\frac{2\pi(${a}-${c})k}{${N}}-\cos\frac{2\pi(${a}+${c})k}{${N}}\Big) = \frac2{${N}}\Big(-\frac12+\frac12\Big) = 0,$$<p>car chaque somme vaut $-\frac12$ par Q6 : $\sin\big(\pi(${a}\mp${c})\big) = 0$.</p>`; });
     }
-    host.innerHTML = ctl + body;
-    labWire(host, st, draw);
-    if (st.v === "SI") {
-      const n = st.m, N = 2 * n + 1, note = $("[data-r=n]", host), base = note.innerHTML;
-      const grids = $$(".mx", host);
-      $$(".c", grids[2]).forEach(c => c.addEventListener("mouseenter", () => {
-        const i = +c.dataset.i + 1, j = +c.dataset.j + 1;
-        note.innerHTML = i === j ? `<b>Case (${i}, ${i}).</b> Σ ${4}/${N}·sin²(2π ${i} k/${N}) = 2/${N}·Σ (1 − cos(4π ${i} k/${N})) = 2/${N}·(${n} − Q6) = 2/${N}·(${n} + 1/2) = <b>1</b>.` : `<b>Case (${i}, ${j}).</b> sin a sin b = ½(cos(a − b) − cos(a + b)) : on obtient deux sommes de cosinus du type Q6, en x = π(${i} − ${j})/${N} et π(${i} + ${j})/${N}. Les sin((2n + 1)x) valent sin(π(${i} ∓ ${j})) = 0, donc le total vaut <b>0</b>.`;
-      }));
-      grids[2].addEventListener("mouseleave", () => note.innerHTML = base);
-    }
+    labControls(host, st, draw);
   }
   draw();
 }
-/* Mode 5 : l'opérateur ξ sur les polynômes de Laurent (X-ENS 2025) */
+
+/* 5. L'opérateur ξ sur les polynômes de Laurent */
 function labXi(host) {
-  const K0 = -6, K1 = 3;
-  const st = { c: { "-3": 1, "-1": 2, "1": 1 }, log: [], n: 2, v: "op" };
-  const term = (a, k) => { const s = a < 0 ? "−" : "+", m = Math.abs(a), co = m === 1 && k !== 0 ? "" : String(m); return `${s} ${co}${k === 0 ? "" : k === 1 ? "X" : `X<sup>${k}</sup>`}`; };
-  const fmtF = c => { const ks = Object.keys(c).map(Number).filter(k => c[k]).sort((a, b) => a - b); if (!ks.length) return "0"; const s = ks.map(k => term(c[k], k)).join(" "); return s.replace(/^\+ /, "").replace(/^− /, "−"); };
+  const presets = [{ "-3": 1, "-1": 2, "1": 1 }, { "-4": 1, "-2": -1, "0": 3 }, { "-2": 2, "-1": 1 }];
+  const st = { v: "op", p: 0, c: { ...presets[0] }, hist: [], n: 2 };
+  const mono = (a, k) => { const m = Math.abs(a), co = m === 1 && k !== 0 ? "" : String(m); return { s: a < 0 ? "-" : "+", t: co + (k === 0 ? "" : k === 1 ? "X" : `X^{${k}}`) }; };
+  const texF = (c, gray) => { const ks = Object.keys(c).map(Number).filter(k => c[k]).sort((a, b) => a - b); if (!ks.length) return "0"; return ks.map((k, i) => { const { s, t } = mono(c[k], k), g = gray && k >= 0; const body = g ? `\\color{#9AA3BA}{\\cancel{${t}}}` : t; return (i === 0 ? (s === "-" ? "-" : "") : ` ${s} `) + body; }).join(""); };
+  const mulX = c => { const r = {}; Object.keys(c).forEach(k => r[+k + 1] = c[k]); return r; };
+  const proj = c => { const r = {}; Object.keys(c).forEach(k => { if (+k < 0) r[k] = c[k]; }); return r; };
   function draw() {
-    const c = st.c;
-    const ctl = `<div class="lab-ctl">${labSeg("Vue", [["op", "Appliquer ξ pas à pas (Q3)"], ["ker", "Noyau de ξⁿ (Q4, Q5)"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}${st.v === "ker" ? `<div class="viz-ctrl">${labRange("n", "n", 1, 6, 1, st.n)}</div>` : ""}</div>`;
-    const cells = [];
-    for (let k = K0; k <= K1; k++) {
-      const v = st.v === "ker" ? (k >= -st.n && k <= -1 ? 1 : 0) : (c[k] || 0);
-      cells.push(`<button type="button" class="xc${k >= 0 ? " pos" : ""}${v ? " on" : ""}" data-k="${k}" ${st.v === "ker" ? "disabled" : ""} aria-label="Coefficient de X puissance ${k}"><small>X<sup>${k}</sup></small><b>${v}</b></button>`);
-    }
-    let body = `<div class="xstrip">${cells.join("")}</div><div class="xleg"><span><i class="d"></i>partie dans D (puissances &lt; 0)</span><span><i class="p"></i>partie dans ℂ[X] (effacée par Π)</span></div>`;
+    const ctl = labSegH("v", [["op", L`Calculer $\xi(F)$ (Q3)`], ["ker", L`Noyau de $\xi^n$ (Q4, Q5)`]], st.v) + (st.v === "op" ? labSegH("p", presets.map((p, i) => [i, `$${texF(p)}$`]), st.p) + `<button type="button" class="btn btn-yellow btn-sm" data-op="xi">Appliquer $\\xi$</button><button type="button" class="btn btn-ghost btn-sm" data-op="r">Recommencer</button>` : stepper("n", L`$n$`, st.n, 1, 5));
     if (st.v === "op") {
-      body += `<p class="lab-cap" style="margin-top:12px">F = ${fmtF(c)} &nbsp;·&nbsp; clique sur une case pour changer un coefficient</p>
-      <div class="xbtn"><button type="button" class="btn btn-ghost btn-sm" data-op="X">× X (décaler à droite)</button><button type="button" class="btn btn-ghost btn-sm" data-op="P">Π (garder les puissances &lt; 0)</button><button type="button" class="btn btn-yellow btn-sm" data-op="XI">ξ = Π(X ·)</button><button type="button" class="btn btn-ghost btn-sm" data-op="R">Réinitialiser</button></div>
-      <div class="lab-note">${st.log.length ? st.log.slice(-3).map(l => `<div>${l}</div>`).join("") : `<b>Comment ça marche.</b> Multiplier par X décale toutes les cases d'un cran vers la droite. Π efface tout ce qui arrive dans la zone grise (puissances ≥ 0). ξ fait les deux : <b>X<sup>−1</sup> est envoyé sur 0</b>, et X<sup>−j</sup> sur X<sup>−j+1</sup> pour j ≥ 2. Essaie : appliquer Π avant ou après ξ donne le même résultat (Q3 a).`}</div>`;
+      const F = st.c, XF = mulX(F), R = proj(XF);
+      labShell(host, {
+        intro: L`<p>$\xi$ agit en deux temps : on <b>multiplie par $X$</b> (toutes les puissances augmentent de $1$), puis $\Pi$ <b>efface</b> les puissances $\geqslant0$ (barrées en gris). Choisis un polynôme $F$ et applique $\xi$ plusieurs fois.</p>`,
+        ctl,
+        math: L`$$\begin{aligned}F &= ` + texF(F) + L`\\ XF &= ` + texF(XF) + L`\\ \xi(F) = \Pi(XF) &= ` + texF(XF, true) + " = " + texF(R) + L`\end{aligned}$$` + (st.hist.length ? L`$$` + st.hist.map(h => h).join(L`\ \xrightarrow{\ \xi\ }\ `) + L`\ \xrightarrow{\ \xi\ }\ ` + texF(F) + "$$" : ""),
+        expl: L`<p>Sur la base : $\xi(X^{-j}) = X^{-j+1}$ si $j\geqslant2$, et $\xi(X^{-1}) = \Pi(1) = 0$. Le terme $X^{-1}$ disparaît à chaque application : en répétant, on finit toujours par obtenir $0$. Remarque (Q3 a) : effacer la partie polynomiale <b>avant</b> de multiplier par $X$ ne change rien, car elle aurait été effacée après.</p>`
+      });
+      $$("[data-op]", host).forEach(b => b.addEventListener("click", () => { if (b.dataset.op === "r") { st.c = { ...presets[st.p] }; st.hist = []; } else { st.hist.push(texF(st.c)); st.c = proj(mulX(st.c)); } draw(); }));
     } else {
-      const n = st.n;
-      body += `<div class="lab-note"><b>ξ<sup>${n}</sup></b> décale de ${n} crans puis efface les puissances ≥ 0. Les monômes X<sup>−1</sup>, …, X<sup>−${n}</sup> (cases jaunes) arrivent tous dans la zone grise : ils forment une base de <b>ker ξ<sup>${n}</sup></b> (Q4). Et tout X<sup>−j</sup> est atteint, comme ξ<sup>${n}</sup>(X<sup>−j−${n}</sup>) : ξ<sup>${n}</sup> est surjectif.<br>Sur D<sub>r</sub> = Vect(X<sup>−r</sup>, …, X<sup>−1</sup>), ξ envoie chaque monôme sur le suivant et X<sup>−1</sup> sur 0 : sa matrice est le bloc de Jordan J<sub>r</sub> (Q5).</div>`;
+      const n = st.n, js = Array.from({ length: n + 3 }, (_, i) => i + 1);
+      labShell(host, {
+        intro: L`<p>Avec Q3 b, $\xi^n(X^{-j}) = \Pi(X^{n-j})$ : on décale de $n$ crans, puis on efface. Les monômes $X^{-1},\dots,X^{-n}$ deviennent des puissances $\geqslant0$ et sont effacés.</p>`,
+        ctl,
+        math: L`$$\begin{array}{c|` + "c".repeat(js.length) + L`} j & ` + js.join(" & ") + L` \\ \hline \xi^{${n}}(X^{-j}) & ` + js.map(j => j <= n ? L`\class{mc z r0 c${j} nz}{0}` : (n - j === -1 ? "X^{-1}" : `X^{${n - j}}`)).join(" & ") + L`\end{array}$$`.replace(/\$\{n\}/g, n),
+        expl: L`<p>Donc $\ker\xi^{${n}} = \operatorname{Vect}(X^{-1},\dots,X^{-${n}})$, de dimension $${n}$ (Q4). Et tout $X^{-j}$ est atteint : $\xi^{${n}}(X^{-j-${n}}) = X^{-j}$, donc $\xi^{${n}}$ est surjectif. Sur $D_r = \operatorname{Vect}(X^{-r},\dots,X^{-1})$, $\xi$ envoie chaque monôme sur le suivant et $X^{-1}$ sur $0$ : sa matrice est le bloc de Jordan $J_r$ (Q5).</p>`.replace(/\$\{n\}/g, n)
+      });
     }
-    host.innerHTML = ctl + body;
-    labWire(host, st, draw);
-    if (st.v !== "op") return;
-    $$(".xc", host).forEach(b => b.addEventListener("click", () => { const k = +b.dataset.k, v = (c[k] || 0) + 1; c[k] = v > 3 ? -2 : v; if (!c[k]) delete c[k]; draw(); }));
-    $$("[data-op]", host).forEach(b => b.addEventListener("click", () => {
-      const before = fmtF(c), o = b.dataset.op; let nc = {};
-      if (o === "R") { st.c = { "-3": 1, "-1": 2, "1": 1 }; st.log = []; return draw(); }
-      if (o === "X" || o === "XI") Object.keys(c).forEach(k => { if (+k + 1 <= K1) nc[+k + 1] = c[k]; }); else nc = { ...c };
-      if (o === "P" || o === "XI") Object.keys(nc).forEach(k => { if (+k >= 0) delete nc[k]; });
-      st.c = nc; st.log.push(`${o === "X" ? "× X" : o === "P" ? "Π" : "ξ"} : ${before} &nbsp;→&nbsp; <b>${fmtF(nc)}</b>`); draw();
-    }));
+    labControls(host, st, draw);
+    $$(".lab-seg[data-s=p] button", host).forEach(b => b.addEventListener("click", () => { st.c = { ...presets[+b.dataset.v] }; st.hist = []; draw(); }));
   }
   draw();
 }
 
-/* Mode 6 : blocs de Jordan, invariants δ_k, version graduée */
+/* 6. Blocs de Jordan, invariant δ_k, version graduée */
 function labJordan(host) {
-  const st = { r: [3, 2, 2, 1], a: [1, 1, 2, 3], v: "simple" };
-  const Z = ["1", "i", "−1", "−i"];
+  const st = { v: "simple", r1: 3, r2: 2, r3: 2, r4: 1, a1: 1, a2: 1, a3: 2, a4: 3, k: 2 };
+  const ZL = ["1", "i", "-1", "-i"];
   function draw() {
-    const r = st.r.filter(x => x > 0), A = st.a.filter((_, i) => st.r[i] > 0), n = r.reduce((p, x) => p + x, 0);
+    const R0 = [st.r1, st.r2, st.r3, st.r4], A0 = [st.a1, st.a2, st.a3, st.a4];
+    const B = R0.map((r, i) => ({ r, a: A0[i] })).filter(x => x.r > 0), r = B.map(x => x.r), n = r.reduce((p, x) => p + x, 0);
     const M = Array.from({ length: n }, () => Array(n).fill(0)); let o = 0; r.forEach(x => { for (let j = 0; j < x - 1; j++) M[o + j + 1][o + j] = 1; o += x; });
-    const kerDim = k => r.reduce((p, x) => p + Math.min(k, x), 0);
-    const kmax = Math.max(...r, 1) + 1;
-    const ctl = `<div class="lab-ctl">${labSeg("Vue", [["simple", "Blocs et invariants (Q2, Q9, Q10)"], ["grad", "Version graduée N = 4 (Q13, Q14)"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}</div>
-      <div class="jb">${st.r.map((x, i) => `<div class="jbi"><span>Bloc ${i + 1}</span><button type="button" data-b="${i}" data-d="-1" aria-label="Réduire le bloc ${i + 1}">−</button><b>${x ? `J<sub>${x}</sub>` : "aucun"}</b><button type="button" data-b="${i}" data-d="1" aria-label="Agrandir le bloc ${i + 1}">+</button>${st.v === "grad" && x ? `<button type="button" class="ja" data-a="${i}" aria-label="Changer a">a = ${st.a[i]}</button>` : ""}</div>`).join("")}</div>`;
-    // chaînes : chaque bloc est une colonne e1 -> e2 -> ... -> er -> 0
-    const W = Math.max(260, r.length * 80 + 40), H = Math.max(...r, 1) * 56 + 50;
-    let s = "";
-    r.forEach((x, i) => {
-      const cx = 50 + i * 80;
-      for (let j = 0; j < x; j++) {
-        const cy = 30 + j * 56, ex = (A[i] + j) % 4, bad = st.v === "grad" && ex === 0;
-        if (j < x - 1) s += `<line x1="${cx}" y1="${cy + 13}" x2="${cx}" y2="${cy + 40}" class="lab-e"/><polygon points="${cx},${cy + 44} ${cx - 4.5},${cy + 35} ${cx + 4.5},${cy + 35}" class="lab-ah"/>`;
-        else s += `<line x1="${cx}" y1="${cy + 13}" x2="${cx}" y2="${cy + 30}" class="lab-e dash"/><text x="${cx}" y="${cy + 44}" text-anchor="middle" class="lab-vt sm">0</text>`;
-        s += `<circle cx="${cx}" cy="${cy}" r="13" class="lab-v ${st.v === "grad" ? "g" + ex : ""}${bad ? " bad" : ""}"/><text x="${cx}" y="${cy + 4.5}" text-anchor="middle" class="lab-vt">${st.v === "grad" ? Z[ex] : `e${String(j + 1).split("").map(d => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("")}`}</text>`;
-      }
-      s += `<text x="${cx}" y="${H - 4}" text-anchor="middle" class="lab-vt sm">J${String(x).split("").map(d => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("")}</text>`;
-    });
-    const chains = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" class="lab-svg" role="img" aria-label="Chaînes de vecteurs">${s}</svg>`;
-    let body;
+    const d = k => r.reduce((p, x) => p + Math.min(Math.max(k, 0), x), 0), kmax = Math.max(...r) + 1;
+    if (st.k > kmax) st.k = kmax;
+    const k = st.k;
+    let off = 0;
+    const chains = B.map(({ r: x, a }) => { const parts = []; for (let j = 0; j < x; j++) { const idx = off + j + 1, killed = st.v === "simple" && j >= x - k; let t = `e_{${idx}}`; if (st.v === "grad") { const e = (a + j) % 4; t = `\\underset{\\class{${e === 0 ? "bad" : "ev"}}{${ZL[e]}}}{e_{${idx}}}`; } else if (killed) t = `\\class{kill}{${t}}`; parts.push(t); } off += x; return parts.join(L`\xrightarrow{\;u\;}`) + L`\xrightarrow{\;u\;}0` + L`\qquad\big(J_{` + x + "}" + (st.v === "grad" ? `,\\ D_{${x},${a}}` : "") + "\\big)"; });
+    const ctl = labSegH("v", [["simple", L`Blocs et invariant $\delta_k$ (Q2, Q10)`], ["grad", L`Version graduée, $N = 4$ (Q13, Q14)`]], st.v)
+      + `<span class="stp-row">` + [1, 2, 3, 4].map(i => stepper("r" + i, `Bloc ${i}`, st["r" + i], 0, 4, 1, st["r" + i] ? `$J_{${st["r" + i]}}$` : "—")).join("") + `</span>`
+      + (st.v === "simple" ? labSegH("k", Array.from({ length: kmax }, (_, i) => [i + 1, `$k = ${i + 1}$`]), k) : `<span class="stp-row">` + [1, 2, 3, 4].map(i => st["r" + i] ? stepper("a" + i, `$a$ (bloc ${i})`, st["a" + i], 0, 3) : "").join("") + `</span>`);
     if (st.v === "simple") {
-      const rows = Array.from({ length: kmax }, (_, k0) => { const k = k0 + 1, d = -kerDim(k - 1) + 2 * kerDim(k) - kerDim(k + 1); return `<tr><td>${k}</td><td>${kerDim(k)}</td><td class="${d ? "hi" : ""}">${d}</td><td>${r.filter(x => x === k).length}</td></tr>`; }).join("");
-      body = `<div class="lab-row"><div><div class="lab-cap">Matrice diag(${r.map(x => `J<sub>${x}</sub>`).join(", ")}) (${n} × ${n})</div>${n ? mxHtml(M, { small: n > 8, label: "Matrice de Jordan" }) : ""}</div><div><div class="lab-cap">Chaque bloc = une chaîne : u envoie chaque vecteur sur le suivant, le dernier sur 0</div>${chains}</div></div>
-        <div class="lab-row"><table class="jt"><thead><tr><th>k</th><th>dim ker M<sup>k</sup></th><th>δ<sub>k</sub>(M)</th><th>blocs de taille k</th></tr></thead><tbody>${rows}</tbody></table>
-        <div class="lab-note" style="flex:1;min-width:260px"><b>Pourquoi δ<sub>k</sub> compte les blocs.</b> Sur une chaîne de longueur r, M<sup>k</sup> tue les k derniers vecteurs (ou toute la chaîne si k ≥ r) : dim ker J<sub>r</sub><sup>k</sup> = min(k, r). Les dimensions s'additionnent sur les blocs (Q2 c). Le « saut du saut » δ<sub>k</sub> = −d<sub>k−1</sub> + 2d<sub>k</sub> − d<sub>k+1</sub> vaut 1 exactement pour le bloc de taille k (Q2 b). Donc <b>δ<sub>k</sub> = nombre de blocs de taille k</b> : il ne dépend que de u, d'où l'unicité (Q10). Change les tailles pour le vérifier.</div></div>`;
+      const ds = Array.from({ length: kmax + 2 }, (_, i) => d(i));
+      const dk = -d(k - 1) + 2 * d(k) - d(k + 1), cnt = r.filter(x => x === k).length;
+      labShell(host, {
+        intro: L`<p>Un endomorphisme nilpotent se découpe en <b>chaînes</b> : $u$ envoie chaque vecteur sur le suivant, et le dernier sur $0$. Une chaîne de longueur $r$, c'est un bloc de Jordan $J_r$. Choisis les tailles des blocs, puis une valeur de $k$ : en couleur, les vecteurs <b>tués</b> par $u^k$.</p>`,
+        ctl,
+        math: `$$M = \\operatorname{diag}(${r.map(x => `J_{${x}}`).join(",")}) = ${texMat(M, { id: "M", cuts: blockCuts(r) })}$$` + L`$$\begin{array}{l}` + chains.join(L` \\[4pt] `) + L`\end{array}$$` + L`$$\begin{array}{c|` + "c".repeat(ds.length) + L`} k & ` + ds.map((_, i) => i).join(" & ") + L` \\ \hline d_k = \dim\ker M^k & ` + ds.join(" & ") + L`\end{array}$$`,
+        expl: L`<p>Sur une chaîne de longueur $r$, $u^k$ tue les $\min(k,r)$ derniers vecteurs : $\dim\ker J_r^k = \min(k,r)$, et ces dimensions s'additionnent sur les blocs (Q2 c). Pour $k = ${k}$ :</p>$$\delta_{${k}} = -d_{${k - 1}}+2d_{${k}}-d_{${k + 1}} = -${d(k - 1)}+2\times${d(k)}-${d(k + 1)} = ${dk}.$$<p>Et il y a bien $${cnt}$ bloc${cnt > 1 ? "s" : ""} de taille $${k}$. C'est le sens de Q2 b et Q10 : $\delta_k$ compte les blocs de taille $k$, et ne dépend que de $u$.</p>`.replace(/\$\{k\}/g, k).replace(/\$\{k - 1\}/g, k - 1).replace(/\$\{k \+ 1\}/g, k + 1).replace(/\$\{d\(k - 1\)\}/g, d(k - 1)).replace(/\$\{d\(k\)\}/g, d(k)).replace(/\$\{d\(k \+ 1\)\}/g, d(k + 1)).replace(/\$\{dk\}/g, dk).replace(/\$\{cnt\}/g, cnt).replace(/\$\{cnt > 1 \? "s" : ""\}/g, cnt > 1 ? "s" : "")
+      });
     } else {
-      const bad = r.some((x, i) => Array.from({ length: x }, (_, j) => (A[i] + j) % 4).includes(0));
-      body = `<div class="lab-row"><div><div class="lab-cap">Chaque vecteur porte sa valeur propre pour h (ζ = i). u fait monter l'exposant de 1 : V<sub>j</sub> → V<sub>j+1</sub>.</div>${chains}</div>
-        <div class="lab-note" style="flex:1;min-width:260px"><b>Le bloc (J<sub>r</sub>, D<sub>r,a</sub>).</b> Dans une chaîne qui commence avec la valeur propre ζ<sup>a</sup>, les vecteurs suivants ont ζ<sup>a+1</sup>, ζ<sup>a+2</sup>, … (Q11 b : u envoie V<sub>j</sub> dans V<sub>j+1</sub>). Clique sur « a = … » pour changer le départ.<br><br><b>Q14 (N = 4, ker(h − id) = {0}).</b> La valeur propre 1 = ζ<sup>0</sup> est interdite (cercles rouges). Une chaîne doit donc rester dans V<sub>1</sub> → V<sub>2</sub> → V<sub>3</sub> et s'arrêter avant de revenir à 1 : seuls les types (1,1), (1,2), (1,3), (2,1), (2,2), (3,1) sont possibles.${bad ? `<br><span style="color:var(--red);font-weight:700">Configuration actuelle impossible en Q14.</span>` : `<br><span style="color:var(--green);font-weight:700">Configuration compatible avec Q14.</span>`}</div></div>`;
+      const bad = B.some(({ r: x, a }) => Array.from({ length: x }, (_, j) => (a + j) % 4).includes(0));
+      labShell(host, {
+        intro: L`<p>Dans la version graduée, chaque vecteur de base est aussi un vecteur propre de $h$. Sous chaque $e_j$, on lit sa valeur propre (ici $\zeta = i$). Une chaîne qui commence avec $\zeta^a$ continue avec $\zeta^{a+1},\zeta^{a+2},\dots$ : $u$ fait monter d'un cran (Q11 b). Choisis le départ $a$ de chaque bloc.</p>`,
+        ctl, math: L`$$\begin{array}{l}` + chains.join(L` \\[10pt] `) + L`\end{array}$$`,
+        expl: L`<p>En Q14, $\ker(h-\mathrm{id}) = \{0\}$ : la valeur propre $1 = \zeta^0$ est interdite (en rouge). Une chaîne doit donc rester dans $V_1\to V_2\to V_3$ et s'arrêter avant de revenir à $1$, ce qui laisse exactement six types : $(1,1),(1,2),(1,3),(2,1),(2,2),(3,1)$.</p>` + (bad ? L`<p><b>Configuration actuelle : impossible en Q14</b> (un vecteur a la valeur propre $1$).</p>` : L`<p><b>Configuration actuelle : compatible avec Q14.</b></p>`)
+      });
     }
-    host.innerHTML = ctl + body;
-    labWire(host, st, draw);
-    $$("[data-b]", host).forEach(b => b.addEventListener("click", () => { const i = +b.dataset.b, v = st.r[i] + +b.dataset.d; if (v < 0 || v > 5) return; if (v === 0 && st.r.filter(x => x > 0).length === 1) return; st.r[i] = v; draw(); }));
-    $$("[data-a]", host).forEach(b => b.addEventListener("click", () => { const i = +b.dataset.a; st.a[i] = (st.a[i] + 1) % 4; draw(); }));
+    labControls(host, st, draw);
   }
   draw();
 }
 
-/* Mode 7 : graphes aléatoires et fonction de seuil (Mines-Ponts 2024) */
+/* 7. Graphes aléatoires et fonction de seuil */
 function labSeuil(host) {
-  const st = { v: "e", n: 40, lc: 0, seed: 1 };
-  const props = { e: { t: "Au moins une arête", w: 2, d: 1 }, s2: { t: "Une étoile à 2 branches", w: 1.5, d: 2 }, s3: { t: "Une étoile à 3 branches", w: 4 / 3, d: 3 } };
-  let rs = 12345; const rnd = () => { rs = (rs * 1103515245 + 12345) & 0x7fffffff; return rs / 0x7fffffff; };
+  const st = { v: "e", n: 40, c: 1, seed: 1 };
+  const props = { e: { t: "au moins une arête", w: 2, d: 1, wt: "2" }, s2: { t: "une étoile à 2 branches", w: 1.5, d: 2, wt: L`\frac32` }, s3: { t: "une étoile à 3 branches", w: 4 / 3, d: 3, wt: L`\frac43` } };
+  let rs = 1; const rnd = () => { rs = (rs * 1103515245 + 12345) & 0x7fffffff; return rs / 0x7fffffff; };
   const sample = (n, p) => { const deg = new Array(n).fill(0), E = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (rnd() < p) { deg[i]++; deg[j]++; E.push([i, j]); } return { deg, E }; };
-  const holds = (g, d) => g.deg.some(x => x >= d);
   function draw() {
-    const P = props[st.v], n = st.n, c = Math.pow(10, st.lc), p = Math.min(1, c * Math.pow(n, -P.w));
-    rs = 1000 + st.seed * 7919;
-    const g = sample(n, p);
-    let hit = -1; g.deg.forEach((x, i) => { if (hit < 0 && x >= P.d) hit = i; });
-    const W = 300, cx = 150, R = 125, pos = i => [cx + R * Math.cos(2 * Math.PI * i / n - Math.PI / 2), cx + R * Math.sin(2 * Math.PI * i / n - Math.PI / 2)];
-    let s = "";
-    g.E.forEach(([i, j]) => { const [x1, y1] = pos(i), [x2, y2] = pos(j), on = hit >= 0 && (i === hit || j === hit); s += `<line x1="${fx(x1)}" y1="${fx(y1)}" x2="${fx(x2)}" y2="${fx(y2)}" class="lab-e${on ? " on" : ""}"/>`; });
+    const P = props[st.v], n = st.n, c = st.c, p = Math.min(1, c * Math.pow(n, -P.w));
+    rs = 1000 + st.seed * 7919; const g = sample(n, p); let hit = -1; g.deg.forEach((x, i) => { if (hit < 0 && x >= P.d) hit = i; });
+    const W = 260, cx = 130, R = 110, pos = i => [cx + R * Math.cos(2 * Math.PI * i / n - Math.PI / 2), cx + R * Math.sin(2 * Math.PI * i / n - Math.PI / 2)];
+    let s = ""; g.E.forEach(([i, j]) => { const [x1, y1] = pos(i), [x2, y2] = pos(j), on = hit >= 0 && (i === hit || j === hit); s += `<line x1="${fx(x1)}" y1="${fx(y1)}" x2="${fx(x2)}" y2="${fx(y2)}" class="lab-e${on ? " on" : ""}"/>`; });
     for (let i = 0; i < n; i++) { const [x, y] = pos(i); s += `<circle cx="${fx(x)}" cy="${fx(y)}" r="${n > 60 ? 2.5 : 4}" class="lab-v${i === hit ? " on" : ""}" style="stroke-width:1.2"/>`; }
-    // courbe : probabilité estimée en fonction de c
-    const grid = Array.from({ length: 21 }, (_, k) => -1.5 + k * 0.15), T = 60;
-    rs = 777 + n;
-    const pts = grid.map(l => { const pp = Math.min(1, Math.pow(10, l) * Math.pow(n, -P.w)); let ok = 0; for (let t = 0; t < T; t++) if (holds(sample(n, pp), P.d)) ok++; return [l, ok / T]; });
-    const CW = 360, CH = 200, X = l => 40 + (l + 1.5) / 3 * (CW - 56), Y = v => CH - 30 - v * (CH - 50);
-    let cs = `<line x1="40" y1="${Y(0)}" x2="${CW - 10}" y2="${Y(0)}" class="lab-ax"/><line x1="40" y1="${Y(0)}" x2="40" y2="${Y(1) - 6}" class="lab-ax"/>`;
-    [[0, "0"], [0.5, "0,5"], [1, "1"]].forEach(([v, t]) => { cs += `<text x="34" y="${fx(Y(v) + 4)}" text-anchor="end" class="lab-vt sm">${t}</text>`; });
-    [[-1, "0,1"], [0, "1"], [1, "10"]].forEach(([l, t]) => { cs += `<line x1="${fx(X(l))}" y1="${Y(0)}" x2="${fx(X(l))}" y2="${Y(0) + 4}" class="lab-ax"/><text x="${fx(X(l))}" y="${Y(0) + 17}" text-anchor="middle" class="lab-vt sm">${t}</text>`; });
-    cs += `<text x="${CW - 10}" y="${Y(0) - 6}" text-anchor="end" class="lab-vt sm">c</text>`;
-    cs += `<path d="${pts.map(([l, v], k) => `${k ? "L" : "M"}${fx(X(l))} ${fx(Y(v))}`).join(" ")}" style="fill:none;stroke:var(--blue);stroke-width:2.4"/>`;
-    cs += `<line x1="${fx(X(st.lc))}" y1="${Y(0)}" x2="${fx(X(st.lc))}" y2="${Y(1)}" style="stroke:var(--gold-ink);stroke-dasharray:4 3;stroke-width:1.5"/>`;
-    const wt = P.w === 2 ? "2" : P.w === 1.5 ? "3/2" : "4/3";
-    host.innerHTML = `<div class="lab-ctl">${labSeg("Propriété", Object.entries(props).map(([k, o]) => [k, o.t]), st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}<div class="viz-ctrl">${labRange("n", "Nombre de sommets n", 10, 120, 10, n)}${labRange("lc", "log₁₀ c", -1.5, 1.5, 0.1, st.lc)}</div></div>
-      <div class="lab-row"><div><div class="lab-cap">Un graphe tiré au hasard : n = ${n}, p = c · n<sup>−ω₀</sup> = ${nf(p, 5)}, ${g.E.length} arête${g.E.length > 1 ? "s" : ""}</div><svg viewBox="0 0 ${W} ${W}" width="${W}" height="${W}" class="lab-svg" role="img" aria-label="Graphe aléatoire">${s}</svg><div><button type="button" class="btn btn-ghost btn-sm" data-re="1">Tirer un autre graphe</button></div></div>
-      <div><div class="lab-cap">Probabilité de la propriété (simulée, ${T} tirages par point) en fonction de c</div><svg viewBox="0 0 ${CW} ${CH}" width="${CW}" height="${CH}" class="lab-svg" role="img" aria-label="Courbe de seuil">${cs}</svg></div></div>
-      <div class="lab-note"><b>${P.t} : ω₀ = ${wt}.</b> On prend p<sub>n</sub> = c · n<sup>−ω₀</sup>, c'est-à-dire c fois la fonction de seuil. Quand c est petit (p<sub>n</sub> = o(n<sup>−ω₀</sup>) à la limite), la propriété n'apparaît presque jamais ; quand c est grand, presque toujours. ${hit >= 0 ? `Dans le graphe tiré, le sommet en jaune ${P.d === 1 ? "porte une arête" : `a au moins ${P.d} voisins`} : la propriété est réalisée.` : "Dans le graphe tiré, la propriété n'est pas réalisée."}</div>`;
-    labWire(host, st, draw);
+    const grid = Array.from({ length: 21 }, (_, k) => -1.5 + k * 0.15), T = 60; rs = 777 + n;
+    const pts = grid.map(l => { const pp = Math.min(1, Math.pow(10, l) * Math.pow(n, -P.w)); let ok = 0; for (let t = 0; t < T; t++) if (sample(n, pp).deg.some(x => x >= P.d)) ok++; return [l, ok / T]; });
+    const CW = 340, CH = 200, X = l => 44 + (l + 1.5) / 3 * (CW - 60), Y = v => CH - 30 - v * (CH - 50);
+    let cs = `<line x1="44" y1="${Y(0)}" x2="${CW - 10}" y2="${Y(0)}" class="lab-ax"/><line x1="44" y1="${Y(0)}" x2="44" y2="${Y(1) - 6}" class="lab-ax"/>`;
+    [[0, "0"], [0.5, "0,5"], [1, "1"]].forEach(([v, t]) => { cs += `<text x="38" y="${fx(Y(v) + 4)}" text-anchor="end" class="lab-vt sm">${t}</text>`; });
+    [[-1, "0,1"], [0, "1"], [1, "10"]].forEach(([l, t]) => { cs += `<text x="${fx(X(l))}" y="${Y(0) + 17}" text-anchor="middle" class="lab-vt sm">${t}</text>`; });
+    cs += `<text x="${CW - 10}" y="${Y(0) - 6}" text-anchor="end" class="lab-vt sm">c</text><path d="${pts.map(([l, v], k) => `${k ? "L" : "M"}${fx(X(l))} ${fx(Y(v))}`).join(" ")}" style="fill:none;stroke:var(--blue);stroke-width:2.4"/><line x1="${fx(X(Math.log10(c)))}" y1="${Y(0)}" x2="${fx(X(Math.log10(c)))}" y2="${Y(1)}" style="stroke:var(--gold-ink);stroke-dasharray:4 3;stroke-width:1.5"/>`;
+    const ctl = labSegH("v", Object.entries(props).map(([k, o]) => [k, o.t[0].toUpperCase() + o.t.slice(1)]), st.v) + stepper("n", L`$n$`, n, 10, 120, 10) + labSegH("c", [[0.1, "$c = 0{,}1$"], [0.3, "$0{,}3$"], [1, "$1$"], [3, "$3$"], [10, "$10$"]], c) + `<button type="button" class="btn btn-ghost btn-sm" data-re="1">Tirer un autre graphe</button>`;
+    labShell(host, {
+      intro: L`<p>On tire un graphe à $n$ sommets où chaque arête est présente avec probabilité $p_n = c\,n^{-\omega_0}$, c'est-à-dire $c$ fois la fonction de seuil. Pour « ${P.t} », $\omega_0 = ${P.wt}$. La courbe montre la probabilité (estimée par simulation) que le graphe ait cette propriété, en fonction de $c$.</p>`.replace("${P.t}", P.t).replace("${P.wt}", P.wt),
+      ctl, math: svgWrap(W, W, s, "Graphe aléatoire"), extra: svgWrap(CW, CH, cs, "Courbe de seuil"),
+      expl: L`<p>Ici $n = ${n}$ et $p_n = ${tnum(c)}\times${n}^{-${P.wt}} = ${tnum(p, 5)}$ : le graphe tiré a $${g.E.length}$ arête${g.E.length > 1 ? "s" : ""}. ${hit >= 0 ? "La propriété est réalisée (sommet en jaune)." : "La propriété n'est pas réalisée."}</p><p>Quand $c\to0$ (c'est-à-dire $p_n = o(n^{-\omega_0})$), la probabilité tend vers $0$ ; quand $c\to+\infty$, elle tend vers $1$. C'est exactement la définition d'une fonction de seuil.</p>`.replace(/\$\{n\}/g, n).replace("${tnum(c)}", tnum(c)).replace("${P.wt}", P.wt).replace("${tnum(p, 5)}", tnum(p, 5)).replace("${g.E.length}", g.E.length).replace('${g.E.length > 1 ? "s" : ""}', g.E.length > 1 ? "s" : "").replace('${hit >= 0 ? "La propriété est réalisée (sommet en jaune)." : "La propriété n\'est pas réalisée."}', hit >= 0 ? "La propriété est réalisée (sommet en jaune)." : "La propriété n'est pas réalisée.")
+    });
+    labControls(host, st, draw);
     $("[data-re]", host).addEventListener("click", () => { st.seed++; draw(); });
   }
   draw();
 }
 
 function mountLab(host, spec) { ({ cycle: labCycle, kron: labKron, transfer: labTransfer, spec: labSpec, xi: labXi, jordan: labJordan, seuil: labSeuil })[spec.mode](host, spec); }
-document.addEventListener("click", e => { const b = e.target.closest("[data-labo]"); if (!b) return; const t = document.getElementById("lab-" + b.dataset.labo); if (t) { t.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); t.closest(".panelbox").classList.add("flash"); setTimeout(() => t.closest(".panelbox").classList.remove("flash"), 1400); } });
+document.addEventListener("click", e => { const b = e.target.closest("[data-labo]"); if (!b) return; const t = document.getElementById("lab-" + b.dataset.labo); if (t) { t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); t.classList.add("flash"); setTimeout(() => t.classList.remove("flash"), 1400); } });
 
 
 /* ---------- Visualisations ---------- */

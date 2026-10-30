@@ -700,3 +700,36 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .drawer .here-go{display:block;width:100%;text-align:left;margin:0 0 6px;padding:8px 12px;border:0;border-radius:8px;background:var(--surface);color:var(--ink);font:600 14px/1.4 var(--f-display);cursor:pointer}
 .drawer .here-go:hover{background:color-mix(in srgb,var(--blue) 10%,var(--surface))}
 .drawer .here{padding-bottom:16px}
+
+/* Labos (version LaTeX) */
+.lab{display:grid;gap:18px}
+.lab-intro{font-family:var(--f-read);font-size:17px;line-height:1.7;max-width:62em}
+.lab-intro p{margin:0}
+.lab .lab-ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0}
+.lab .seg button{font-size:14px}
+.stp{display:inline-flex;align-items:center;gap:8px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--bg-2);font-size:14.5px}
+.stp-l{color:var(--muted);font-weight:600}
+.stp b{min-width:34px;text-align:center;font-weight:700}
+.stp button{width:30px;height:30px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);font:700 16px var(--f-display);cursor:pointer;box-shadow:0 1px 2px rgba(10,26,64,.12)}
+.stp button:hover{background:var(--yellow-soft)}
+.stp-row{display:inline-flex;flex-wrap:wrap;gap:8px}
+.lab-main{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:center}
+.lab-math{flex:1 1 420px;min-width:0;font-size:17px;text-align:center}
+.lab-expl{background:var(--yellow-soft);border-radius:14px;padding:14px 18px;font-family:var(--f-read);font-size:16.5px;line-height:1.7}
+.lab-expl p{margin:0 0 6px}.lab-expl p:last-child{margin:0}
+.lab-inputs{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-read)}
+.lab .mx-in{display:inline-grid;grid-template-columns:repeat(2,auto);gap:4px}
+.lab .mx-in input{width:48px;height:32px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:600 14px var(--f-display);text-align:center}
+.lab .spins{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0}
+.lab .spins button{display:inline-block;min-width:0;padding:4px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-size:14px}
+.lab .spins button.up{border-color:var(--blue)}
+.lab .spins button.dn{border-color:var(--red)}
+.lab .mc{cursor:pointer}
+.lab .mc.nz{fill:var(--blue);color:var(--blue)}
+.lab .mc.sel{fill:var(--gold-ink);color:var(--gold-ink)}
+.lab .mc.sel rect,.lab .mc.nz rect{fill:none}
+.lab .kill{fill:var(--gold-ink)}
+.lab .ev{fill:var(--blue)}
+.lab .bad{fill:var(--red)}
+.panelbox.flash{box-shadow:0 0 0 3px var(--yellow)}
+.lab .seg{margin-left:0}.lab .lab-ctl{justify-content:flex-start}
