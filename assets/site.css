@@ -733,3 +733,22 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .lab .bad{fill:var(--red)}
 .panelbox.flash{box-shadow:0 0 0 3px var(--yellow)}
 .lab .seg{margin-left:0}.lab .lab-ctl{justify-content:flex-start}
+
+/* « Dans cet exercice » : section sobre, séparée par un filet */
+.drawer .here{margin-top:28px;padding:20px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.drawer .here h4{margin:0 0 8px;font-family:var(--f-display);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.drawer .here .body{font-size:17px}
+.drawer .here-lab{margin:16px 0 6px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.drawer .here-quote{background:var(--bg);border-radius:8px;padding:8px 14px}
+.drawer .here-quote .sbox{box-shadow:none;border:0;background:none;padding:0;margin:0}
+.drawer .here-steps{margin-top:18px}
+.drawer .here-go{display:block;width:auto;margin:0;padding:6px 0;border:0;border-radius:0;background:none;color:var(--blue);font:600 15px/1.5 var(--f-display);text-align:left;cursor:pointer}
+.drawer .here-go:hover{background:none;text-decoration:underline;text-underline-offset:3px}
+.drawer .here-go::after{content:" →"}
+/* Notion de cours : mise en page d'une fiche */
+.drawer .notion-body h5{margin:22px 0 6px;font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.drawer .notion-body h5:first-child{margin-top:4px}
+.drawer .notion-body ul{margin:4px 0 8px;padding-left:20px}
+.drawer .notion-body li{margin:4px 0}
+.drawer .here-lab,.drawer .here-steps h4{margin:18px 0 6px;font:600 14px/1.4 var(--f-display);letter-spacing:0;text-transform:none;color:var(--muted)}
+.drawer .here-quote{background:none;border-left:2px solid var(--line);border-radius:0;padding:2px 0 2px 14px}

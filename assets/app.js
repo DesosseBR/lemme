@@ -419,7 +419,7 @@ function openRappel(id, exId, src) {
   const stp = src && !src.closest("#drawer") && src.closest(".step");
   const res = stp && ($$(".prose .sbox", stp)[0] || $(".prose > p", stp) || $(".prose", stp));
   const slot = $(".hq-slot", dr);
-  if (slot) { if (res) { const w = document.createElement("div"); w.innerHTML = `<p class="here-lab">Ce que ça donne à cette étape :</p>`; const q = document.createElement("div"); q.className = "here-quote"; const c = res.cloneNode(true); c.querySelectorAll("button, figure").forEach(x => x.remove()); q.appendChild(c); w.appendChild(q); slot.replaceWith(w); } else slot.remove(); }
+  if (slot) { if (res) { const w = document.createElement("div"); w.innerHTML = `<p class="here-lab">À cette étape</p>`; const q = document.createElement("div"); q.className = "here-quote"; const c = res.cloneNode(true); c.querySelectorAll("button, figure").forEach(x => x.remove()); q.appendChild(c); w.appendChild(q); slot.replaceWith(w); } else slot.remove(); }
   wireHere(dr);
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
@@ -504,13 +504,7 @@ function openNotion(id, src) {
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  const ex = curEx(), own = ex && ex.nctx && ex.nctx[id];
-  let re = null; try { re = new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu"); } catch (e) {}
-  const q = excerpt(src);
-  const links = re ? stepLinks(ex, st => re.test(plainTxt(st.b) + " " + plainTxt(st.h)), "Où on s'en sert dans le corrigé") : "";
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body">${n.b}</div>${own || q || links ? `<div class="here"><h4>Dans cet exercice</h4>${own ? `<div class="body">${annotate(own, ex)}</div>` : ""}${q ? `<p class="here-lab">Le mot apparaît ici :</p><div class="hq-slot"></div>` : ""}${links}</div>` : ""}`;
-  if (q) $(".hq-slot", dr).replaceWith(q);
-  wireHere(dr);
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body">${n.b}</div>`;
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());

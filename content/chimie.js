@@ -53,9 +53,9 @@ LEMME.exercises([
     cles: { t12: R`La durée au bout de laquelle la moitié du réactif a été consommée.` }
   },
   steps: [
-    { t: "Constante de vitesse", b: R`$$k = \frac{\ln2}{t_{1/2}} \approx 3{,}47\times10^{-2}\ \mathrm{min^{-1}}.$$`, rappels: ["demi-vie"] },
-    { t: "Loi intégrée", b: R`<p>$[A] = [A]_0e^{-kt}$. Il reste $10\,\%$ quand $e^{-kt} = 0{,}1$, soit $t = \dfrac{\ln10}{k}$.</p>`, rappels: ["ordre1"] },
-    { t: "Résultat", b: R`$$t = t_{1/2}\,\frac{\ln10}{\ln2} \approx 20\times3{,}32 \approx 66\ \mathrm{min}.$$` }
+    { t: "Loi de vitesse intégrée", h: R`<p>Ordre 1 : $\frac{d[A]}{dt} = -k[A]$. La solution est une exponentielle décroissante.</p>`, b: R`<p>Pour une réaction d'ordre $1$, la vitesse de disparition est proportionnelle à la concentration : $\frac{d[A]}{dt} = -k[A]$. C'est une équation différentielle d'ordre $1$, de solution</p><div class="sbox">$$[A](t) = [A]_0e^{-kt}.$$</div>`, rappels: ["ordre1"] },
+    { t: "Relier k à la demi-vie", h: R`<p>À $t = t_{1/2}$, il reste la moitié : $[A] = \frac{[A]_0}2$.</p>`, b: R`<p>Par définition, à $t = t_{1/2}$ il reste la moitié du réactif :</p>$$[A]_0e^{-kt_{1/2}} = \frac{[A]_0}2\iff e^{-kt_{1/2}} = \frac12\iff-kt_{1/2} = -\ln2\iff k = \frac{\ln2}{t_{1/2}}.$$$$k = \frac{0{,}693}{20}\approx3{,}47\times10^{-2}\ \mathrm{min^{-1}}.$$`, rappels: ["demi-vie"] },
+    { t: "Le temps pour consommer 90 %", h: R`<p>Consommer $90\,\%$, c'est garder $10\,\%$ : $[A] = 0{,}1[A]_0$.</p>`, b: R`<p>Si $90\,\%$ est consommé, il en reste $10\,\%$ :</p>$$[A]_0e^{-kt} = 0{,}1[A]_0\iff e^{-kt} = 0{,}1\iff-kt = \ln0{,}1 = -\ln10\iff t = \frac{\ln10}k.$$<p>On remplace $k = \frac{\ln2}{t_{1/2}}$ :</p>$$t = t_{1/2}\frac{\ln10}{\ln2} = 20\times\frac{2{,}303}{0{,}693}\approx20\times3{,}32.$$<div class="sbox">$$t\approx66\ \mathrm{min}.$$</div><p>Contrôle : $3$ demi-vies laissent $\frac18 = 12{,}5\,\%$ (à $60$ min), $4$ laissent $6{,}25\,\%$ (à $80$ min). $10\,\%$ est bien entre les deux.</p>` }
   ],
   piege: R`Croire que $90\,\%$ prennent $1{,}8\,t_{1/2}$ : la décroissance est exponentielle, pas linéaire.`,
   methode: R`Raisonne en demi-vies : $90\,\%$ consommés correspondent à environ $3{,}3$ demi-vies.`,
