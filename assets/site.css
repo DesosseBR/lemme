@@ -683,3 +683,20 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .rchip:hover{background:color-mix(in srgb,var(--blue) 16%,var(--surface));border:0}
 /* En-tête du corrigé : seulement le bouton PDF */
 .cor-h{display:flex;justify-content:flex-end;margin:0 0 10px;min-height:0}
+
+/* Surlignage plein (fond coloré sur tout le mot) */
+.nt{background:color-mix(in srgb,var(--blue) 14%,transparent);color:inherit;padding:1px 4px;border-radius:5px;text-decoration:none;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.nt:hover,.nt:focus-visible{background:color-mix(in srgb,var(--blue) 24%,transparent)}
+.enonce [data-k],.player [data-k]{background:color-mix(in srgb,var(--yellow) 40%,transparent);padding:1px 4px;border-radius:5px;border-bottom:0}
+.enonce [data-k]:hover,.enonce [data-k].open,.player [data-k]:hover,.player [data-k].open{background:color-mix(in srgb,var(--yellow) 65%,transparent)}
+.legend-k .lk,.legend-k .ln{height:12px!important;border-radius:4px!important}
+/* « Dans cet exercice » : extrait et étapes */
+.drawer .here-lab{margin:10px 0 6px;font-family:var(--f-display);font-size:13px;font-weight:700;color:var(--muted)}
+.drawer .here-quote{background:var(--surface);border-radius:10px;padding:10px 14px;font-size:16px;line-height:1.7}
+.drawer .here-quote > *{margin:0}
+.drawer .here-word{outline:2px solid var(--gold-ink);outline-offset:1px}
+.drawer .here-steps{margin-top:14px}
+.drawer .here-steps h4{margin:0 0 8px}
+.drawer .here-go{display:block;width:100%;text-align:left;margin:0 0 6px;padding:8px 12px;border:0;border-radius:8px;background:var(--surface);color:var(--ink);font:600 14px/1.4 var(--f-display);cursor:pointer}
+.drawer .here-go:hover{background:color-mix(in srgb,var(--blue) 10%,var(--surface))}
+.drawer .here{padding-bottom:16px}

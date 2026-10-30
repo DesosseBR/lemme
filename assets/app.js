@@ -406,15 +406,21 @@ function rchip(id, ex) {
   return `<button type="button" class="rchip" data-r="${id}"${ex && ex.id ? ` data-ex="${ex.id}"` : ""}>${esc(r.t)}</button>`;
 }
 let drawerReturn = null;
-function openRappel(id, exId) {
+function openRappel(id, exId, src) {
   const r = RAPPELS[id]; if (!r) return;
   const ex = exId && EXERCISES.find(x => x.id === exId);
   const here = ex && ex.ctx && ex.ctx[id];
+  const links = stepLinks(ex, st => (st.rappels || []).includes(id), "Utilisé dans le corrigé");
   closeRappel(true);
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body">${annotate(r.b, ex || null)}</div>${here ? `<div class="here"><h4>Dans cet exercice</h4><div class="body">${annotate(here, ex)}</div></div>` : ""}`;
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body">${annotate(r.b, ex || null)}</div>${here || links ? `<div class="here"><h4>Dans cet exercice</h4>${here ? `<div class="body">${annotate(here, ex)}</div>` : ""}<div class="hq-slot"></div>${links}</div>` : ""}`;
+  const stp = src && !src.closest("#drawer") && src.closest(".step");
+  const res = stp && ($$(".prose .sbox", stp)[0] || $(".prose > p", stp) || $(".prose", stp));
+  const slot = $(".hq-slot", dr);
+  if (slot) { if (res) { const w = document.createElement("div"); w.innerHTML = `<p class="here-lab">Ce que ça donne à cette étape :</p>`; const q = document.createElement("div"); q.className = "here-quote"; const c = res.cloneNode(true); c.querySelectorAll("button, figure").forEach(x => x.remove()); q.appendChild(c); w.appendChild(q); slot.replaceWith(w); } else slot.remove(); }
+  wireHere(dr);
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());
@@ -428,7 +434,7 @@ function closeRappel(silent) {
 }
 document.addEventListener("click", e => {
   const b = e.target.closest(".rchip"); if (!b) return;
-  openRappel(b.dataset.r, b.dataset.ex);
+  openRappel(b.dataset.r, b.dataset.ex, b);
 });
 
 /* ---------- Notions de cours soulignées en bleu ---------- */
@@ -470,20 +476,48 @@ function annotate(html, ex, used) {
   }
   return out;
 }
-function openNotion(id) {
+/* Lien avec l'exercice : la phrase où le mot apparaît, et les étapes qui l'utilisent */
+const curEx = () => { const m = location.hash.match(/^#e-([a-z0-9-]+)$/); return m ? EXERCISES.find(x => x.id === m[1]) : null; };
+const plainTxt = h => String(h || "").replace(/<svg[\s\S]*?<\/svg>/g, " ").replace(/<[^>]+>/g, " ");
+function stepLinks(ex, pred, label) {
+  if (!ex || !ex.steps) return "";
+  const ks = ex.steps.map((st, k) => pred(st) ? k : -1).filter(k => k >= 0).slice(0, 6);
+  if (!ks.length) return "";
+  return `<div class="here-steps"><h4>${label}</h4>${ks.map(k => { const st = ex.steps[k]; const pos = ex.qnav ? qpos(ex, k) : null; return `<button type="button" class="here-go" data-go-step="${k}">${st.q ? `Q${st.q}` : `Étape ${k + 1}`}${pos && pos[1] > 1 ? ` · étape ${pos[0]}` : ""} — ${esc(st.t)}</button>`; }).join("")}</div>`;
+}
+function excerpt(src) {
+  if (!src || src.closest("#drawer")) return null;
+  const blk = src.closest("li, p, td, .sbox, .decode > div") ; if (!blk) return null;
+  const c = blk.cloneNode(true);
+  c.querySelectorAll("button, .labo-btn, figure").forEach(x => x.remove());
+  const i = [...blk.querySelectorAll("[data-n], [data-k]")].indexOf(src);
+  const twin = i >= 0 ? c.querySelectorAll("[data-n], [data-k]")[i] : null; if (twin) twin.classList.add("here-word");
+  const w = document.createElement("div"); w.className = "here-quote"; w.appendChild(c.tagName === "LI" ? Object.assign(document.createElement("div"), { innerHTML: c.innerHTML }) : c);
+  return w;
+}
+function wireHere(dr) {
+  $$("[data-go-step]", dr).forEach(b => b.addEventListener("click", () => { const k = +b.dataset.goStep; closeRappel(true); if (player && player.go) player.go(k); }));
+}
+function openNotion(id, src) {
   const n = NOTIONS[id]; if (!n) return;
   closeRappel(true); closeTip();
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body">${n.b}</div>`;
+  const ex = curEx(), own = ex && ex.nctx && ex.nctx[id];
+  let re = null; try { re = new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu"); } catch (e) {}
+  const q = excerpt(src);
+  const links = re ? stepLinks(ex, st => re.test(plainTxt(st.b) + " " + plainTxt(st.h)), "Où on s'en sert dans le corrigé") : "";
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body">${n.b}</div>${own || q || links ? `<div class="here"><h4>Dans cet exercice</h4>${own ? `<div class="body">${annotate(own, ex)}</div>` : ""}${q ? `<p class="here-lab">Le mot apparaît ici :</p><div class="hq-slot"></div>` : ""}${links}</div>` : ""}`;
+  if (q) $(".hq-slot", dr).replaceWith(q);
+  wireHere(dr);
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());
   $(".close", dr).focus();
   typeset(dr);
 }
-document.addEventListener("click", e => { const n = e.target.closest("[data-n]"); if (n) { e.stopPropagation(); openNotion(n.dataset.n); } });
+document.addEventListener("click", e => { const n = e.target.closest("[data-n]"); if (n) { e.stopPropagation(); openNotion(n.dataset.n, n); } });
 document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-n]")) { e.preventDefault(); openNotion(e.target.dataset.n); } });
 
 /* ---------- Infobulles de l'énoncé ---------- */
@@ -595,6 +629,7 @@ function mountPlayer(e, host) {
   }
   intro();
   player = {
+    go(k) { show(k, k >= state.i ? 1 : -1); },
     key(k) {
       if (state.i < 0) { if (k === "ArrowRight") show(0, 1); return; }
       if (k === "ArrowRight" && state.i < n) show(state.i + 1, 1);
