@@ -9,7 +9,7 @@ const { execFile, execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp"];
+const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp", "kholles-mpsi-2"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));

@@ -6,6 +6,8 @@ LEMME.subject({
   intro: "Les grands classiques de khôlle, corrigés pas à pas.",
   years: {
     mpsi: [
+      C("Ensembles, applications, relations", "Injections, surjections, bijections, images directes et réciproques, relations"),
+      C("Calculs : sommes, produits, inégalités", "Sommes, produits, coefficients binomiaux, récurrences, inégalités classiques"),
       C("Nombres réels", "Partie entière, densité, sous-groupes de ℝ"),
       C("Nombres complexes et trigonométrie", "Sommes et produits trigonométriques, homographies"),
       C("Dérivation : Rolle et accroissements finis", "Théorème de Rolle et ses applications"),
@@ -65,7 +67,7 @@ LEMME.rappels({
 const { FIG, S, f1, NL } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-1-1", subj: "kholles", year: "mpsi", chap: 0, level: 1, time: "15 min",
+  id: "kh-1-1", subj: "kholles", year: "mpsi", chap: 2, level: 1, time: "15 min",
   title: "Partie entière d'un quotient",
   enonce: R`<p>Soit $x$ un réel et $n\geqslant1$ un entier.</p><ol><li>Montrer que $\left\lfloor\dfrac{\lfloor nx\rfloor}{n}\right\rfloor = \lfloor x\rfloor$.</li><li>Vérifier le résultat sur $x = 2{,}718$ et $n = 10$, puis l'interpréter en écriture décimale.</li><li>En déduire que pour tous entiers $p,q\geqslant1$ : $\left\lfloor\dfrac{\lfloor x/p\rfloor}{q}\right\rfloor = \left\lfloor\dfrac{x}{pq}\right\rfloor$.</li></ol>`,
   decode: { donnees: [R`$x\in\mathbb R$ quelconque (pas forcément positif), $n\in\mathbb N^\ast$.`], but: R`Montrer qu'un certain nombre est la partie entière de $\lfloor nx\rfloor/n$.`, cles: {
@@ -85,7 +87,7 @@ LEMME.exercises([
   methode: R`Pour montrer $\lfloor y\rfloor = m$ : vérifier que $m$ est entier puis encadrer $m\leqslant y< m+1$.`
 },
 {
-  id: "kh-1-2", subj: "kholles", year: "mpsi", chap: 0, level: 2, time: "20 min",
+  id: "kh-1-2", subj: "kholles", year: "mpsi", chap: 2, level: 2, time: "20 min",
   title: "L'identité d'Hermite",
   enonce: R`<p>Soit $n\geqslant1$ un entier. Pour $x\in\mathbb R$, on pose</p>$$g(x) = \sum_{k=0}^{n-1}\left\lfloor x+\frac kn\right\rfloor-\lfloor nx\rfloor.$$<ol><li>Montrer que $g\left(x+\dfrac1n\right) = g(x)$ pour tout réel $x$.</li><li>Calculer $g$ sur $\left[0,\dfrac1n\right[$.</li><li>En déduire que pour tout réel $x$ : $\displaystyle\sum_{k=0}^{n-1}\left\lfloor x+\frac kn\right\rfloor = \lfloor nx\rfloor$.</li><li>Écrire le cas $n = 2$, puis calculer $\displaystyle\sum_{k=0}^{n-1}\left\lfloor\frac{m+k}{n}\right\rfloor$ pour $m\in\mathbb Z$.</li></ol>`,
   decode: { donnees: [R`$n\geqslant1$ fixé, $x$ réel quelconque.`], but: R`Montrer que $g$ est nulle partout, en utilisant une périodicité.`, cles: {
@@ -104,7 +106,7 @@ LEMME.exercises([
   methode: R`Pour une identité avec des parties entières : étudier la différence des deux membres, montrer qu'elle est périodique, et la calculer sur une seule période.`
 },
 {
-  id: "kh-1-3", subj: "kholles", year: "mpsi", chap: 0, level: 3, time: "25 min",
+  id: "kh-1-3", subj: "kholles", year: "mpsi", chap: 2, level: 3, time: "25 min",
   title: "Parties fractionnaires denses",
   enonce: R`<p>On note $\{y\} = y-\lfloor y\rfloor\in[0,1[$ la partie fractionnaire d'un réel $y$. Soit $(u_n)$ une suite réelle telle que</p>$$u_n\xrightarrow[n\to+\infty]{}+\infty\qquad\text{et}\qquad u_{n+1}-u_n\xrightarrow[n\to+\infty]{}0.$$<ol><li>Soit $y\in\,]0,1[$ et $\varepsilon\in\,]0,y]$. Montrer qu'il existe $p$ tel que $y-\varepsilon< \{u_p\}\leqslant y$.</li><li>En déduire que $\{\{u_n\},\ n\in\mathbb N\}$ est dense dans $[0,1]$.</li><li>Application : $u_n = \sqrt n$, $u_n = \ln n$ et $u_n = \displaystyle\sum_{k=1}^n\frac1k$.</li></ol>`,
   decode: { donnees: [R`$u_n\to+\infty$ : la suite finit par dépasser tout réel.`, R`$u_{n+1}-u_n\to0$ : les pas deviennent aussi petits qu'on veut.`], but: R`Trouver des termes dont la partie fractionnaire est aussi proche qu'on veut d'un $y$ donné.`, cles: {
@@ -124,7 +126,7 @@ LEMME.exercises([
   methode: R`Une suite qui tend vers $+\infty$ à pas tendant vers $0$ ne peut enjamber aucune fenêtre : prendre le dernier terme sous la cible.`
 },
 {
-  id: "kh-1-4", subj: "kholles", year: "mpsi", chap: 0, level: 3, time: "20 min",
+  id: "kh-1-4", subj: "kholles", year: "mpsi", chap: 2, level: 3, time: "20 min",
   title: "Les valeurs de sin(√n) sont denses",
   enonce: R`<p>On considère $A = \{\sin\sqrt n,\ n\in\mathbb N\}$.</p><ol><li>Montrer que pour tous réels $a,b$ : $|\sin a-\sin b|\leqslant|a-b|$.</li><li>Montrer que $A$ est dense dans $[-1,1]$.</li><li>En déduire que la suite $(\sin\sqrt n)$ n'a pas de limite.</li></ol>`,
   decode: { donnees: [R`$\sqrt{n+1}-\sqrt n\to0$ et $\sqrt n\to+\infty$.`], but: R`Approcher tout $c\in[-1,1]$ par un $\sin\sqrt p$.`, cles: {
@@ -142,7 +144,7 @@ LEMME.exercises([
   methode: R`Pour approcher $c$ par $f(u_n)$ : choisir $x$ avec $f(x) = c$ là où les $u_n$ sont serrés, puis utiliser que $f$ est lipschitzienne.`
 },
 {
-  id: "kh-1-5", subj: "kholles", year: "mpsi", chap: 0, level: 2, time: "20 min",
+  id: "kh-1-5", subj: "kholles", year: "mpsi", chap: 2, level: 2, time: "20 min",
   title: "Différences de racines carrées",
   enonce: R`<p>Soit $A = \{\sqrt p-\sqrt q,\ (p,q)\in\mathbb N^2\}$.</p><ol><li>Montrer que pour tout $m\in\mathbb N$ et tout $k\in\mathbb N$ : $k\left(\sqrt{m+1}-\sqrt m\right)\in A$.</li><li>Montrer que $A$ est dense dans $\mathbb R_+$, puis dans $\mathbb R$.</li></ol>`,
   decode: { donnees: [R`$A$ est formé de différences de deux racines carrées d'entiers.`], but: R`Montrer que tout réel est approché par des éléments de $A$.`, cles: {
@@ -160,7 +162,7 @@ LEMME.exercises([
   methode: R`Pour montrer qu'une partie stable par multiples entiers est dense : y trouver des éléments $>0$ aussi petits qu'on veut.`
 },
 {
-  id: "kh-1-6", subj: "kholles", year: "mpsi", chap: 0, level: 3, time: "25 min",
+  id: "kh-1-6", subj: "kholles", year: "mpsi", chap: 2, level: 3, time: "25 min",
   title: "Quotients d'une partie non majorée",
   enonce: R`<p>Soit $A\subset\mathbb R_+$ une partie non majorée et $B = \left\{\dfrac an,\ a\in A,\ n\in\mathbb N^\ast\right\}$.</p><ol><li>Soient $0\leqslant\alpha< \beta$. Montrer qu'il existe $n_0\in\mathbb N^\ast$ tel que, pour $n\geqslant n_0$, les intervalles $I_n = [n\alpha,n\beta]$ et $I_{n+1}$ se chevauchent.</li><li>En déduire que $B$ rencontre $[\alpha,\beta]$, puis que $B$ est dense dans $\mathbb R_+$.</li><li>Exemples : $A = \{2^k,\ k\in\mathbb N\}$, $A = \{$nombres premiers$\}$.</li></ol>`,
   decode: { donnees: [R`$A$ non majorée : pour tout réel $M$, il existe $a\in A$ avec $a\geqslant M$.`], but: R`Trouver $a\in A$ et $n\geqslant1$ avec $\alpha\leqslant\frac an\leqslant\beta$.`, cles: {
@@ -179,7 +181,7 @@ LEMME.exercises([
   methode: R`Pour $\alpha\leqslant\frac an\leqslant\beta$ : multiplier par $n$ et étudier la réunion des intervalles $[n\alpha,n\beta]$.`
 },
 {
-  id: "kh-15-11", subj: "kholles", year: "mpsi", chap: 0, level: 3, time: "30 min",
+  id: "kh-15-11", subj: "kholles", year: "mpsi", chap: 2, level: 3, time: "30 min",
   title: "Sous-groupes de ℝ : discrets ou denses",
   enonce: R`<p>Soit $G$ un sous-groupe de $(\mathbb R,+)$ non réduit à $\{0\}$, et $a = \inf\big(G\cap\,]0,+\infty[\big)$.</p><ol><li>Justifier l'existence de $a$.</li><li>On suppose $a>0$. Montrer que $a\in G$, puis que $G = a\mathbb Z$.</li><li>On suppose $a = 0$. Montrer que $G$ est dense dans $\mathbb R$.</li><li>Montrer que $\mathbb Z+\sqrt2\,\mathbb Z$ est dense dans $\mathbb R$.</li><li>Montrer que $\{\cos n,\ n\in\mathbb Z\}$ est dense dans $[-1,1]$.</li></ol>`,
   decode: { donnees: [R`$G$ stable par différence, contient un $x\neq0$.`], but: R`Une alternative : soit $G$ est l'ensemble des multiples d'un plus petit élément positif, soit $G$ est partout.`, cles: {
@@ -217,7 +219,7 @@ LEMME.rappels({
 const { FIG, S, f1, PL, GRAPH, ARR } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-2-1", subj: "kholles", year: "mpsi", chap: 1, level: 1, time: "15 min",
+  id: "kh-2-1", subj: "kholles", year: "mpsi", chap: 3, level: 1, time: "15 min",
   title: "Sommes de cosinus et de sinus",
   enonce: R`<p>Soit $n\in\mathbb N^\ast$ et $x\in\mathbb R\setminus2\pi\mathbb Z$. On pose $C_n = \displaystyle\sum_{k=1}^n\cos(kx)$ et $S_n = \displaystyle\sum_{k=1}^n\sin(kx)$.</p><ol><li>Calculer $C_n+iS_n$ sous forme d'une somme géométrique.</li><li>En déduire, avec la technique de l'angle moitié :$$C_n = \frac{\sin\frac{nx}2\cos\frac{(n+1)x}2}{\sin\frac x2},\qquad S_n = \frac{\sin\frac{nx}2\sin\frac{(n+1)x}2}{\sin\frac x2}.$$</li><li>Que vaut $S_n$ si $x\in2\pi\mathbb Z$ ? Montrer que, pour $x\notin2\pi\mathbb Z$, $|S_n|\leqslant\dfrac1{\left|\sin\frac x2\right|}$ pour tout $n$.</li></ol>`,
   decode: { donnees: [R`$x\notin2\pi\mathbb Z$, donc $e^{ix}\neq1$.`], but: R`Calculer deux sommes trigonométriques d'un coup, en passant par les complexes.`, cles: {
@@ -235,7 +237,7 @@ LEMME.exercises([
   methode: R`Sommes de $\cos(kx)$ ou $\sin(kx)$ : passer à $\sum e^{ikx}$, somme géométrique, angle moitié, puis partie réelle ou imaginaire.`
 },
 {
-  id: "kh-2-2", subj: "kholles", year: "mpsi", chap: 1, level: 3, time: "25 min",
+  id: "kh-2-2", subj: "kholles", year: "mpsi", chap: 3, level: 3, time: "25 min",
   title: "Produit des sinus et cordes d'un polygone",
   enonce: R`<p>Soit $n\geqslant2$ et $\omega = e^{2i\pi/n}$.</p><ol><li>Montrer que $\displaystyle\prod_{k=1}^{n-1}(1-\omega^k) = n$.</li><li>Calculer $|1-\omega^k|$ et en déduire $P_n = \displaystyle\prod_{k=1}^{n-1}\sin\frac{k\pi}{n}$.</li><li>Interpréter géométriquement le résultat avec un polygone régulier inscrit dans le cercle unité.</li><li>En déduire $\displaystyle\prod_{k=1}^{n-1}\sin\frac{k\pi}{2n}$.</li></ol>`,
   decode: { donnees: [R`$\omega^k$, $0\leqslant k\leqslant n-1$ : les $n$ racines $n$-ièmes de l'unité.`], but: R`Un produit de sinus, calculé grâce à un polynôme.`, cles: {
@@ -254,7 +256,7 @@ LEMME.exercises([
   methode: R`Un produit sur les racines de l'unité : reconnaître la factorisation d'un polynôme et l'évaluer en un point bien choisi.`
 },
 {
-  id: "kh-2-3", subj: "kholles", year: "mpsi", chap: 1, level: 4, time: "35 min",
+  id: "kh-2-3", subj: "kholles", year: "mpsi", chap: 3, level: 4, time: "35 min",
   title: "Homographies qui préservent le cercle unité",
   enonce: R`<p>On note $\mathbb U = \{z\in\mathbb C : |z| = 1\}$. Soient $a,b,c,d\in\mathbb C$ avec $ad-bc\neq0$ et $|c|\neq|d|$ (ce qui assure $cz+d\neq0$ pour $z\in\mathbb U$). On pose $f(z) = \dfrac{az+b}{cz+d}$ et on suppose $|f(z)| = 1$ pour tout $z\in\mathbb U$.</p><ol><li>Montrer que $|a|^2+|b|^2 = |c|^2+|d|^2$ et $a\bar b = c\bar d$.</li><li>En déduire que ($|a| = |c|$ et $|b| = |d|$) ou ($|a| = |d|$ et $|b| = |c|$), puis que le premier cas est impossible.</li><li>Montrer qu'il existe $\alpha\in\mathbb R$ tel que $f(z) = e^{i\alpha}\dfrac{az+b}{\bar bz+\bar a}$, avec $|a|\neq|b|$.</li><li>Réciproquement, vérifier qu'une telle fonction envoie $\mathbb U$ dans $\mathbb U$.</li></ol>`,
   decode: { donnees: [R`$|az+b| = |cz+d|$ pour tout $z$ de module $1$.`, R`$ad-bc\neq0$ : $f$ n'est pas constante.`], but: R`Trouver la forme de toutes ces homographies.`, cles: {
@@ -275,7 +277,7 @@ LEMME.exercises([
   methode: R`Égalité « constante $= 2\operatorname{Re}(wz)$ pour tout $z\in\mathbb U$ » : elle force $w = 0$, car $z$ fait le tour du cercle.`
 },
 {
-  id: "kh-3-1", subj: "kholles", year: "mpsi", chap: 2, level: 2, time: "20 min",
+  id: "kh-3-1", subj: "kholles", year: "mpsi", chap: 4, level: 2, time: "20 min",
   title: "La dérivée d'un polynôme scindé est scindée",
   enonce: R`<p>Soit $P\in\mathbb R[X]$ de degré $n\geqslant2$, scindé sur $\mathbb R$ : $P = c\displaystyle\prod_{i=1}^r(X-x_i)^{m_i}$ avec $x_1< x_2< \dots< x_r$ réels, $m_i\geqslant1$ et $m_1+\dots+m_r = n$.</p><ol><li>Montrer que chaque $x_i$ est racine de $P'$ de multiplicité au moins $m_i-1$.</li><li>Montrer que $P'$ a une racine dans chaque intervalle $]x_i,x_{i+1}[$.</li><li>En déduire que $P'$ est scindé sur $\mathbb R$.</li><li>La réciproque est-elle vraie ? Étudier $Q = X^3-3X+5$.</li></ol>`,
   decode: { donnees: [R`Les racines distinctes $x_1< \dots< x_r$, de multiplicités $m_i$, avec $\sum m_i = n$.`], but: R`Compter assez de racines de $P'$ (avec multiplicité) pour atteindre $\deg P' = n-1$.`, cles: {
@@ -292,7 +294,7 @@ LEMME.exercises([
   methode: R`Pour montrer qu'un polynôme de degré $d$ est scindé : exhiber $d$ racines réelles comptées avec multiplicité.`
 },
 {
-  id: "kh-3-2", subj: "kholles", year: "mpsi", chap: 2, level: 2, time: "20 min",
+  id: "kh-3-2", subj: "kholles", year: "mpsi", chap: 4, level: 2, time: "20 min",
   title: "Rolle avec un facteur exponentiel",
   enonce: R`<p>Soit $f : [a,b]\to\mathbb R$ dérivable avec $f(a) = f(b) = 0$.</p><ol><li>Soit $\lambda\in\mathbb R$. Montrer qu'il existe $c\in\,]a,b[$ tel que $f'(c) = \lambda f(c)$.</li><li>Plus généralement, soit $\varphi$ continue sur $[a,b]$. Montrer qu'il existe $c\in\,]a,b[$ tel que $f'(c) = \varphi(c)f(c)$.</li><li>Application : si $0< a< b$, montrer qu'il existe $c\in\,]a,b[$ tel que la tangente au graphe de $f$ en $c$ passe par l'origine.</li></ol>`,
   decode: { donnees: [R`$f$ dérivable sur $[a,b]$, donc continue ; $f(a) = f(b) = 0$.`], but: R`Trouver un point où $f'-\lambda f$ s'annule.`, cles: {
@@ -328,7 +330,7 @@ LEMME.rappels({
 const { FIG, S, f1, GRAPH } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-4-1", subj: "kholles", year: "mpsi", chap: 3, level: 3, time: "30 min",
+  id: "kh-4-1", subj: "kholles", year: "mpsi", chap: 5, level: 3, time: "30 min",
   title: "Polynômes à valeurs entières",
   enonce: R`<p>On pose $H_0 = 1$ et, pour $n\geqslant1$, $H_n = \dfrac{X(X-1)\cdots(X-n+1)}{n!}$.</p><ol><li>Montrer que $H_n(\mathbb Z)\subset\mathbb Z$ pour tout $n$. En déduire que le produit de $n$ entiers consécutifs est divisible par $n!$.</li><li>Écrire $X^3$ dans la famille $(H_0,H_1,H_2,H_3)$.</li><li>Soit $P\in\mathbb R[X]$ de degré $\leqslant n$. Montrer l'équivalence entre :<ol style="list-style:lower-alpha"><li>$P(\mathbb Z)\subset\mathbb Z$ ;</li><li>$P(0),P(1),\dots,P(n)$ sont des entiers ;</li><li>$P = \sum_{k=0}^n\lambda_kH_k$ avec tous les $\lambda_k\in\mathbb Z$.</li></ol></li><li>Le polynôme $\dfrac{X(X+1)}2$ est-il à coefficients entiers ? Envoie-t-il $\mathbb Z$ dans $\mathbb Z$ ?</li></ol>`,
   decode: { donnees: [R`$H_n$ est de degré $n$, de coefficient dominant $\frac1{n!}$.`], but: R`Caractériser les polynômes qui prennent des valeurs entières sur les entiers.`, cles: {
@@ -348,7 +350,7 @@ LEMME.exercises([
   methode: R`Pour des polynômes à valeurs entières : utiliser la base des $H_k = \binom Xk$ et un système triangulaire.`
 },
 {
-  id: "kh-4-2", subj: "kholles", year: "mpsi", chap: 3, level: 3, time: "25 min",
+  id: "kh-4-2", subj: "kholles", year: "mpsi", chap: 5, level: 3, time: "25 min",
   title: "Racines des polynômes de Legendre sur [0, 1]",
   enonce: R`<p>Pour $n\in\mathbb N$, on pose $W_n = X^n(X-1)^n$ et $R_n = W_n^{(n)}$ (dérivée $n$-ième).</p><ol><li>Déterminer le degré et le coefficient dominant de $R_n$. Calculer $R_1$ et $R_2$.</li><li>Pour $0\leqslant k\leqslant n$, on note $A_k = W_n^{(k)}$. Montrer par récurrence que, pour $k\leqslant n-1$, $0$ et $1$ sont racines de $A_k$, et que $A_k$ a au moins $k$ racines distinctes dans $]0,1[$.</li><li>En déduire que $R_n$ a exactement $n$ racines réelles, simples, toutes dans $]0,1[$.</li></ol>`,
   decode: { donnees: [R`$W_n$ est de degré $2n$, avec $0$ et $1$ racines d'ordre $n$.`], but: R`Localiser les racines de $R_n$ en appliquant Rolle de proche en proche.`, cles: {
@@ -366,7 +368,7 @@ LEMME.exercises([
   methode: R`Dérivées successives d'un polynôme qui a des racines multiples aux bords : Rolle de proche en proche, en comptant les zéros.`
 },
 {
-  id: "kh-4-3", subj: "kholles", year: "mpsi", chap: 3, level: 4, time: "35 min",
+  id: "kh-4-3", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "35 min",
   title: "Legendre : orthogonalité et racines",
   enonce: R`<p>Sur $\mathbb R[X]$, on pose $\langle P,Q\rangle = \displaystyle\int_{-1}^1P(t)Q(t)\,dt$ (c'est un produit scalaire). Pour $n\in\mathbb N$, $L_n = \big((X^2-1)^n\big)^{(n)}$.</p><ol><li>Montrer que pour $k\leqslant n-1$, $\big((X^2-1)^n\big)^{(k)}$ s'annule en $1$ et en $-1$.</li><li>Montrer que $\langle L_n,Q\rangle = 0$ pour tout $Q$ de degré $< n$. En déduire que $(L_n)_{n\in\mathbb N}$ est orthogonale.</li><li>On note $t_1< \dots< t_p$ les points de $]-1,1[$ où $L_n$ change de signe. En considérant $Q = \prod_i(X-t_i)$, montrer que $p\geqslant n$, puis que $L_n$ a $n$ racines simples dans $]-1,1[$.</li><li>Montrer que $\|L_n\|^2 = (2n)!\displaystyle\int_{-1}^1(1-t^2)^n\,dt$, et vérifier pour $n = 1$.</li></ol>`,
   decode: { donnees: [R`$(X^2-1)^n = (X-1)^n(X+1)^n$ : $\pm1$ racines d'ordre $n$.`], but: R`Orthogonalité par intégrations par parties, puis racines par un argument de signe.`, cles: {
@@ -387,7 +389,7 @@ LEMME.exercises([
   methode: R`Un polynôme orthogonal à $\mathbb R_{n-1}[X]$ a $n$ racines simples dans l'intervalle : multiplier par le polynôme de ses changements de signe.`
 },
 {
-  id: "kh-4-4", subj: "kholles", year: "mpsi", chap: 3, level: 4, time: "40 min",
+  id: "kh-4-4", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "40 min",
   title: "Polynômes de Tchebychev",
   enonce: R`<p>On définit $T_0 = 1$, $T_1 = X$ et $T_{n+1} = 2XT_n-T_{n-1}$ pour $n\geqslant1$.</p><ol><li>Montrer que pour $n\geqslant1$, $T_n$ est de degré $n$ et de coefficient dominant $2^{n-1}$. Calculer $T_2,T_3$.</li><li>Montrer que $T_n(\cos\theta) = \cos(n\theta)$ pour tout réel $\theta$, et que $T_n$ est le seul polynôme vérifiant cette propriété.</li><li>Déterminer les racines de $T_n$ et factoriser $T_n$.</li><li>Montrer que $|T_n(x)|\leqslant1$ sur $[-1,1]$ et trouver les points où $|T_n(x)| = 1$.</li><li>Soit $Q$ de degré $n\geqslant1$ et de coefficient dominant $2^{n-1}$. Montrer que $\sup_{[-1,1]}|Q|\geqslant1$. En déduire que tout polynôme unitaire de degré $n$ vérifie $\sup_{[-1,1]}|P|\geqslant\dfrac1{2^{n-1}}$.</li></ol>`,
   decode: { donnees: [R`Une récurrence d'ordre $2$ sur les polynômes.`], but: R`Établir les propriétés de base de $T_n$, jusqu'à sa propriété d'optimalité.`, cles: {
@@ -422,7 +424,7 @@ LEMME.rappels({
 const { FIG, S, f1, GRAPH, ARR } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-4-5", subj: "kholles", year: "mpsi", chap: 3, level: 4, time: "35 min",
+  id: "kh-4-5", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "35 min",
   title: "Tchebychev : orthogonalité et moindres carrés",
   enonce: R`<p>On note $T_n$ le polynôme tel que $T_n(\cos\theta) = \cos(n\theta)$ pour tout $\theta$ ; on admet que $T_n$ est de degré $n$, de coefficient dominant $2^{n-1}$ si $n\geqslant1$. Pour $P,Q\in\mathbb R[X]$ on pose</p>$$\langle P,Q\rangle = \int_{-1}^1\frac{P(t)Q(t)}{\sqrt{1-t^2}}\,dt.$$<ol><li>Justifier la convergence de l'intégrale, et montrer que $\langle P,Q\rangle = \displaystyle\int_0^\pi P(\cos\theta)Q(\cos\theta)\,d\theta$. En déduire que c'est un produit scalaire.</li><li>Montrer que $(T_n)$ est orthogonale et calculer $\|T_n\|^2$.</li><li>Écrire $X^3$ dans la base $(T_0,T_1,T_2,T_3)$, sachant $T_3 = 4X^3-3X$.</li><li>Soit $\mathcal A_n$ l'ensemble des polynômes unitaires de degré $n\geqslant1$. Montrer que $\displaystyle\min_{P\in\mathcal A_n}\int_{-1}^1\frac{P(t)^2}{\sqrt{1-t^2}}\,dt$ existe, vaut $\dfrac{\pi}{2^{2n-1}}$ et n'est atteint que pour $P = 2^{1-n}T_n$.</li></ol>`,
   decode: { donnees: [R`Le poids $\frac{1}{\sqrt{1-t^2}}$ explose en $\pm1$ mais reste intégrable.`], but: R`Utiliser l'orthogonalité des $T_n$ pour minimiser une intégrale.`, cles: {
@@ -441,7 +443,7 @@ LEMME.exercises([
   methode: R`Minimiser $\|P\|$ sur les unitaires de degré $n$ : écrire $P = $ (polynôme orthogonal unitaire) $+$ (reste de degré $< n$) et appliquer Pythagore.`
 },
 {
-  id: "kh-4-6", subj: "kholles", year: "mpsi", chap: 3, level: 2, time: "25 min",
+  id: "kh-4-6", subj: "kholles", year: "mpsi", chap: 5, level: 2, time: "25 min",
   title: "Interpolation de Lagrange",
   enonce: R`<p>Soient $n\in\mathbb N$ et $x_0,\dots,x_n$ des réels deux à deux distincts.</p><ol><li>Pour $k\in\{0,\dots,n\}$, construire $L_k\in\mathbb R_n[X]$ tel que $L_k(x_k) = 1$ et $L_k(x_j) = 0$ pour $j\neq k$.</li><li>Soient $y_0,\dots,y_n$ réels. Montrer qu'il existe un unique $P\in\mathbb R_n[X]$ tel que $P(x_k) = y_k$ pour tout $k$.</li><li>Application : trouver $P\in\mathbb R_2[X]$ avec $P(-1) = 2$, $P(0) = 1$, $P(2) = 5$. Quels sont tous les polynômes (de degré quelconque) qui vérifient ces trois conditions ?</li><li>Montrer que $(L_0,\dots,L_n)$ est une base de $\mathbb R_n[X]$, et exprimer $X^j$ dans cette base. Quelle matrice reconnaît-on ?</li></ol>`,
   decode: { donnees: [R`$n+1$ points d'abscisses distinctes.`], but: R`Trouver le polynôme de plus petit degré qui passe par des points donnés.`, cles: {
@@ -459,7 +461,7 @@ LEMME.exercises([
   methode: R`Pour fabriquer un polynôme aux valeurs imposées : $P = \sum y_kL_k$. Pour l'unicité : compter les racines de la différence.`
 },
 {
-  id: "kh-4-7", subj: "kholles", year: "mpsi", chap: 3, level: 3, time: "25 min",
+  id: "kh-4-7", subj: "kholles", year: "mpsi", chap: 5, level: 3, time: "25 min",
   title: "Les racines de P′ sont dans l'enveloppe des racines de P",
   enonce: R`<p>Soit $P\in\mathbb C[X]$ de degré $n\geqslant2$, de racines $\alpha_1,\dots,\alpha_n$ (répétées selon leur multiplicité).</p><ol><li>Montrer que $\dfrac{P'}{P} = \displaystyle\sum_{k=1}^n\frac1{X-\alpha_k}$.</li><li>Soit $z$ une racine de $P'$ qui n'est pas racine de $P$. Montrer que $z = \displaystyle\sum_{k=1}^n\mu_k\alpha_k$ avec des $\mu_k\geqslant0$ de somme $1$.</li><li>Conclure que toute racine de $P'$ est dans le plus petit polygone convexe contenant les racines de $P$ (théorème de Gauss-Lucas).</li><li>Vérifier sur $P = X(X-3)(X-3i)$.</li></ol>`,
   decode: { donnees: [R`$P = c\prod_{k=1}^n(X-\alpha_k)$ dans $\mathbb C[X]$ (d'Alembert-Gauss).`], but: R`Écrire chaque racine de $P'$ comme moyenne pondérée des racines de $P$.`, cles: {
@@ -478,7 +480,7 @@ LEMME.exercises([
   methode: R`Une équation $\sum\frac{1}{z-\alpha_k} = 0$ : multiplier chaque terme par le conjugué pour obtenir des poids positifs.`
 },
 {
-  id: "kh-4-8", subj: "kholles", year: "mpsi", chap: 3, level: 4, time: "35 min",
+  id: "kh-4-8", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "35 min",
   title: "Quand les racines forment un parallélogramme",
   enonce: R`<p>Soit $P = X^4+aX^3+bX^2+cX+d\in\mathbb C[X]$ dont les quatre racines sont distinctes et non alignées. On pose $\omega = -\frac a4$ et $Q(Y) = P(Y+\omega)$.</p><ol><li>Montrer que $\omega$ est la moyenne des racines et que $Q$ n'a pas de terme en $Y^3$.</li><li>Montrer que les racines de $P$ sont les sommets d'un parallélogramme si et seulement si $Q$ est pair, et que cela équivaut à $a^3-4ab+8c = 0$.</li><li>On suppose cette condition remplie et on écrit $Q = Y^4+pY^2+q$. Montrer que les racines forment un rectangle si et seulement si les deux racines de $Z^2+pZ+q$ ont le même module, puis un carré si et seulement si $p = 0$.</li><li>Exemples : $X^4+4$, puis le polynôme de racines $\pm(2+i)$, $\pm(2-i)$.</li></ol>`,
   decode: { donnees: [R`Quatre racines $z_1,\dots,z_4$, distinctes et non alignées.`], but: R`Traduire une propriété géométrique des racines en une condition sur les coefficients.`, cles: {
@@ -516,7 +518,7 @@ LEMME.rappels({
 const { FIG, S, f1, GRAPH } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-5-1", subj: "kholles", year: "mpsi", chap: 4, level: 3, time: "20 min",
+  id: "kh-5-1", subj: "kholles", year: "mpsi", chap: 6, level: 3, time: "20 min",
   title: "Une série trigonométrique cachée",
   enonce: R`<p>On pose $a = 3+\sqrt7$, $b = 3-\sqrt7$ et, pour $n\in\mathbb N$, $u_n = \sin(\pi a^n)$.</p><ol><li>Montrer que $s_n = a^n+b^n$ est un entier pair. (On pourra utiliser le binôme, ou montrer que $s_{n+2} = 6s_{n+1}-2s_n$.)</li><li>En déduire que $u_n = -\sin(\pi b^n)$.</li><li>Montrer que $\sum u_n$ converge absolument.</li><li>A-t-on $u_n\to0$ si on remplace $a$ par $\sqrt7$ ?</li></ol>`,
   decode: { donnees: [R`$a\approx5{,}65$ et $b\approx0{,}354$, donc $0< b< 1$.`], but: R`Montrer qu'une série dont le terme général paraît « chaotique » converge.`, cles: {
@@ -534,7 +536,7 @@ LEMME.exercises([
   methode: R`Terme en $\sin(\pi a^n)$ avec $a$ algébrique : chercher le conjugué $b$ ($|b|< 1$) qui rend $a^n+b^n$ entier.`
 },
 {
-  id: "kh-5-2", subj: "kholles", year: "mpsi", chap: 4, level: 3, time: "20 min",
+  id: "kh-5-2", subj: "kholles", year: "mpsi", chap: 6, level: 3, time: "20 min",
   title: "Série convergente à termes décroissants",
   enonce: R`<p>Soit $(u_n)_{n\geqslant1}$ une suite <b>décroissante</b> de réels positifs telle que $\sum u_n$ converge.</p><ol><li>Montrer que pour $n\geqslant2$ : $\left(n-\left\lfloor\frac n2\right\rfloor\right)u_n\leqslant\displaystyle\sum_{k=\lfloor n/2\rfloor+1}^{n}u_k$.</li><li>En déduire que $nu_n\to0$, c'est-à-dire $u_n = o\left(\frac1n\right)$.</li><li>Application : retrouver que $\sum\frac1{n^\alpha}$ diverge pour $\alpha\leqslant1$.</li><li>Montrer que le résultat est faux sans l'hypothèse de décroissance, avec $u_n = \frac1n$ si $n$ est un carré parfait et $u_n = \frac1{n^2}$ sinon.</li></ol>`,
   decode: { donnees: [R`$(u_n)$ décroissante et positive ; $\sum u_n$ converge.`], but: R`Montrer que $u_n$ tend vers $0$ plus vite que $\frac1n$.`, cles: {
@@ -552,7 +554,7 @@ LEMME.exercises([
   methode: R`Avec une suite décroissante : minorer un paquet de termes $\sum_{n/2< k\leqslant n}u_k$ par $\frac n2u_n$.`
 },
 {
-  id: "kh-6-1", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "45 min",
+  id: "kh-6-1", subj: "kholles", year: "mpsi", chap: 7, level: 4, time: "45 min",
   title: "Intégrales de Wallis et formule de Stirling",
   enonce: R`<p>Pour $n\in\mathbb N$, on pose $W_n = \displaystyle\int_0^{\pi/2}\sin^nt\,dt$, et pour $n\geqslant1$, $\lambda_n = \dfrac{n!}{n^ne^{-n}\sqrt n}$.</p><ol><li>Montrer que $W_n = \frac{n-1}nW_{n-2}$ pour $n\geqslant2$, et en déduire $W_{2p}$ et $W_{2p+1}$.</li><li>Montrer que $(W_n)$ décroît, que $W_{n+1}\sim W_n$, puis que $nW_nW_{n-1} = \frac\pi2$. En déduire $W_n\sim\sqrt{\frac{\pi}{2n}}$.</li><li>Montrer que $\ln\lambda_{n+1}-\ln\lambda_n = 1-\left(n+\frac12\right)\ln\left(1+\frac1n\right) = -\frac1{12n^2}+O\left(\frac1{n^3}\right)$. En déduire que $(\lambda_n)$ converge vers un réel $L>0$.</li><li>En utilisant $W_{2n}$, montrer que $L = \sqrt{2\pi}$ :$$n!\sim\left(\frac ne\right)^n\sqrt{2\pi n}.$$</li></ol>`,
   decode: { donnees: [R`$W_0 = \frac\pi2$, $W_1 = 1$.`], but: R`Trouver un équivalent de $n!$.`, cles: {
@@ -589,7 +591,7 @@ const { FIG, S, f1, GRAPH } = window.__LA;
 const STAIR = (f, u0, n, a, b, cap, label, lab) => GRAPH({ w: 420, h: 260, x: [0, b], y: [0, b], xt: [], yt: [], curves: [{ f, c: "b", lab }, { f: x => x, c: "k", dash: 1 }], extra: (X, Y) => { let s = "", u = u0, p = `M${f1(X(u))} ${f1(Y(0))}`; for (let k = 0; k < n; k++) { const v = f(u); p += ` L${f1(X(u))} ${f1(Y(v))} L${f1(X(v))} ${f1(Y(v))}`; u = v; } s += `<path class="vr" style="fill:none;stroke-width:1.6" d="${p}"/>` + S(X(u0), Y(0) + 16, "u₀", "middle"); return s; } }, cap, label);
 LEMME.exercises([
 {
-  id: "kh-6-2", subj: "kholles", year: "mpsi", chap: 5, level: 4, time: "40 min",
+  id: "kh-6-2", subj: "kholles", year: "mpsi", chap: 7, level: 4, time: "40 min",
   title: "Développement asymptotique de la série harmonique",
   enonce: R`<p>Pour $n\geqslant1$, $H_n = \displaystyle\sum_{k=1}^n\frac1k$.</p><ol><li>Soit $p>1$. Montrer que $\displaystyle\sum_{k\geqslant n}\frac1{k^p}\sim\frac1{(p-1)n^{p-1}}$.</li><li>On pose $a_n = H_n-\ln n$. Montrer que $a_{n+1}-a_n = O\left(\frac1{n^2}\right)$ et en déduire que $(a_n)$ converge vers un réel $\gamma$.</li><li>On pose $t_n = H_n-\ln n-\gamma$. Trouver un équivalent de $t_n-t_{n+1}$, puis de $t_n$. En déduire $H_n = \ln n+\gamma+\frac1{2n}+o\left(\frac1n\right)$.</li><li>En étudiant $s_n = t_n-\frac1{2n}$, montrer que $H_n = \ln n+\gamma+\frac1{2n}-\frac1{12n^2}+o\left(\frac1{n^2}\right)$.</li></ol>`,
   decode: { donnees: [R`$H_n\to+\infty$ comme $\ln n$.`], but: R`Obtenir les termes successifs du développement de $H_n$.`, cles: {
@@ -607,7 +609,7 @@ LEMME.exercises([
   methode: R`Développement asymptotique d'une suite : retirer les termes connus, étudier la différence de deux termes consécutifs, puis resommer le reste.`
 },
 {
-  id: "kh-6-3", subj: "kholles", year: "mpsi", chap: 5, level: 3, time: "25 min",
+  id: "kh-6-3", subj: "kholles", year: "mpsi", chap: 7, level: 3, time: "25 min",
   title: "Équivalent d'une suite récurrente logarithmique",
   enonce: R`<p>Soit $u_0>0$ et $u_{n+1} = \ln(1+u_n)$.</p><ol><li>Montrer que $(u_n)$ est bien définie, positive, et converge vers $0$.</li><li>Montrer que $\dfrac1{u_{n+1}}-\dfrac1{u_n}\xrightarrow[n\to\infty]{}\dfrac12$.</li><li>En déduire que $u_n\sim\dfrac2n$.</li><li>Faire le même travail pour $v_{n+1} = v_ne^{-v_n}$, $v_0>0$.</li></ol>`,
   decode: { donnees: [R`$\ln(1+x)< x$ pour $x>0$.`], but: R`Trouver la vitesse à laquelle la suite tend vers $0$.`, cles: {
@@ -625,7 +627,7 @@ LEMME.exercises([
   methode: R`Suite $u_{n+1} = f(u_n)\to0$ avec $f(u) = u-au^2+\dots$ : étudier $\frac1{u_{n+1}}-\frac1{u_n}$ puis Cesàro.`
 },
 {
-  id: "kh-6-4", subj: "kholles", year: "mpsi", chap: 5, level: 3, time: "25 min",
+  id: "kh-6-4", subj: "kholles", year: "mpsi", chap: 7, level: 3, time: "25 min",
   title: "Équivalent de la suite uₙ₊₁ = arctan uₙ",
   enonce: R`<p>Soit $u_0>0$ et $u_{n+1} = \arctan(u_n)$.</p><ol><li>Montrer que $(u_n)$ converge vers $0$.</li><li>Pourquoi l'étude de $\frac1{u_{n+1}}-\frac1{u_n}$ ne suffit-elle pas ici ?</li><li>Déterminer la limite de $\dfrac1{u_{n+1}^2}-\dfrac1{u_n^2}$.</li><li>En déduire un équivalent de $u_n$. Comparer avec la suite $w_{n+1} = \sin w_n$, $w_0\in\,]0,\pi[$.</li></ol>`,
   decode: { donnees: [R`$\arctan x< x$ pour $x>0$, et $\arctan x = x-\frac{x^3}3+o(x^3)$.`], but: R`Trouver la vitesse de convergence vers $0$.`, cles: {
@@ -658,7 +660,7 @@ LEMME.rappels({
 const { FIG, S, f1 } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-9-1", subj: "kholles", year: "mpsi", chap: 7, level: 3, time: "25 min",
+  id: "kh-9-1", subj: "kholles", year: "mpsi", chap: 9, level: 3, time: "25 min",
   title: "Produit de nilpotents qui commutent",
   enonce: R`<p>Soit $E$ un espace vectoriel de dimension $n\geqslant1$ et $u_1,\dots,u_n\in\mathcal L(E)$ nilpotents, qui commutent deux à deux.</p><ol><li>On pose $F_0 = E$ et $F_k = \operatorname{Im}(u_1\circ\dots\circ u_k)$. Montrer que $F_k$ est stable par $u_{k+1}$ et que $F_{k+1} = u_{k+1}(F_k)$.</li><li>Montrer que $\dim F_{k+1}< \dim F_k$ tant que $F_k\neq\{0\}$. En déduire $u_1\circ u_2\circ\dots\circ u_n = 0$.</li><li>Montrer par un exemple que l'hypothèse de commutation est indispensable.</li><li>Montrer que le résultat est faux avec seulement $n-1$ endomorphismes.</li></ol>`,
   decode: { donnees: [R`$u_k^{m_k} = 0$ pour un certain $m_k$ ; $u_i\circ u_j = u_j\circ u_i$.`], but: R`Montrer que le produit des $n$ endomorphismes est nul.`, cles: {
@@ -676,7 +678,7 @@ LEMME.exercises([
   methode: R`Pour montrer qu'un produit d'endomorphismes est nul : suivre la dimension des images successives.`
 },
 {
-  id: "kh-9-2", subj: "kholles", year: "mpsi", chap: 7, level: 4, time: "40 min",
+  id: "kh-9-2", subj: "kholles", year: "mpsi", chap: 9, level: 4, time: "40 min",
   title: "Noyaux et images itérés",
   enonce: R`<p>Soit $E$ de dimension $n$ et $f\in\mathcal L(E)$. Pour $k\in\mathbb N$, $N_k = \ker f^k$, $I_k = \operatorname{Im}f^k$, $n_k = \dim N_k$ et $r_k = \dim I_k = n-n_k$.</p><ol><li>Montrer que $(n_k)$ croît et que, dès que $n_{k} = n_{k+1}$, la suite est constante à partir du rang $k$.</li><li>Montrer que $n_{k+1}-n_k = \dim(I_k\cap\ker f)$, et en déduire que $(n_{k+1}-n_k)$ décroît.</li><li>Montrer que $n_k\leqslant kn_1$ et $r_k\geqslant kr_1-(k-1)n$.</li><li>On suppose $f$ nilpotent d'indice $p$. Montrer que $p\leqslant n$.</li><li>On suppose de plus $n_1 = 1$. Montrer qu'il existe $a\in E$ tel que $(a,f(a),\dots,f^{n-1}(a))$ soit une base de $E$.</li></ol>`,
   decode: { donnees: [R`$N_k\subset N_{k+1}$ et $I_{k+1}\subset I_k$.`], but: R`Comprendre comment grossissent les noyaux des puissances de $f$.`, cles: {
@@ -696,7 +698,7 @@ LEMME.exercises([
   methode: R`Noyaux itérés : la suite $(\dim\ker f^k)$ croît avec des sauts décroissants, et stationne dès le premier saut nul.`
 },
 {
-  id: "kh-10-1", subj: "kholles", year: "mpsi", chap: 8, level: 2, time: "15 min",
+  id: "kh-10-1", subj: "kholles", year: "mpsi", chap: 10, level: 2, time: "15 min",
   title: "Matrices à diagonale strictement dominante",
   enonce: R`<p>Soit $A = (a_{ij})\in\mathcal M_n(\mathbb C)$ telle que, pour tout $i$ : $|a_{ii}|>\displaystyle\sum_{j\neq i}|a_{ij}|$.</p><ol><li>Soit $X\in\mathbb C^n$ avec $AX = 0$. En considérant un indice $i$ tel que $|x_i| = \max_j|x_j|$, montrer que $X = 0$.</li><li>En déduire que $A$ est inversible. L'appliquer à $\begin{pmatrix}5&2&-1\\1&-4&2\\0&3&7\end{pmatrix}$.</li><li>Le résultat reste-t-il vrai avec une inégalité large ?</li><li>En déduire que toute valeur propre $\lambda$ d'une matrice $B$ vérifie $|\lambda-b_{ii}|\leqslant\sum_{j\neq i}|b_{ij}|$ pour au moins un $i$.</li></ol>`,
   decode: { donnees: [R`Chaque coefficient diagonal l'emporte (en module) sur la somme des autres coefficients de sa ligne.`], but: R`Montrer que le noyau de $A$ est nul.`, cles: {
@@ -713,7 +715,7 @@ LEMME.exercises([
   methode: R`Pour montrer $\ker A = \{0\}$ avec des inégalités : regarder la ligne de la plus grande coordonnée.`
 },
 {
-  id: "kh-10-2", subj: "kholles", year: "mpsi", chap: 8, level: 3, time: "25 min",
+  id: "kh-10-2", subj: "kholles", year: "mpsi", chap: 10, level: 3, time: "25 min",
   title: "Inverse d'une matrice de coefficients binomiaux",
   enonce: R`<p>Pour $a\in\mathbb R$, on note $\tau_a$ l'endomorphisme de $\mathbb R_n[X]$ défini par $\tau_a(P) = P(X+a)$, et $M_a$ sa matrice dans la base $(1,X,\dots,X^n)$ (lignes et colonnes numérotées de $0$ à $n$).</p><ol><li>Montrer que $M_a = \left(\dbinom ji a^{j-i}\right)_{0\leqslant i,j\leqslant n}$ (avec $\binom ji = 0$ si $i>j$).</li><li>Montrer que $\tau_a\circ\tau_b = \tau_{a+b}$, et en déduire $M_aM_b = M_{a+b}$, puis l'inverse de $M_a$.</li><li>Écrire $M_1$ et $M_1^{-1}$ pour $n = 3$.</li><li>En déduire que pour $0\leqslant i\leqslant j$ : $\displaystyle\sum_{k=i}^j(-1)^{k-i}\binom jk\binom ki = \delta_{ij}$.</li></ol>`,
   decode: { donnees: [R`$\tau_a(X^j) = (X+a)^j$.`], but: R`Inverser une matrice sans aucun calcul de pivot, en passant par l'endomorphisme qu'elle représente.`, cles: {
@@ -746,7 +748,7 @@ LEMME.rappels({
 const { FIG, S, f1, GRAPH } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-11-1", subj: "kholles", year: "mpsi", chap: 9, level: 4, time: "35 min",
+  id: "kh-11-1", subj: "kholles", year: "mpsi", chap: 11, level: 4, time: "35 min",
   title: "Les treize pièces",
   enonce: R`<p>On dispose de $13$ pièces de masses réelles $m_1,\dots,m_{13}$. On constate que, si on retire n'importe laquelle d'entre elles, on peut répartir les $12$ restantes en deux tas de $6$ pièces de même masse totale. On veut montrer que toutes les pièces ont la même masse.</p><ol><li>Traduire l'hypothèse par $AM = 0$, où $M = (m_1,\dots,m_{13})^\top$ et $A\in\mathcal M_{13}(\mathbb Z)$ a des $0$ sur la diagonale et des $\pm1$ ailleurs. Montrer que $U = (1,\dots,1)^\top\in\ker A$.</li><li>Soit $B$ la matrice $12\times12$ obtenue en supprimant la dernière ligne et la dernière colonne de $A$. Montrer que $\det B$ a la même parité que $\det(J-I_{12})$, où $J$ est la matrice remplie de $1$.</li><li>Calculer $\det(J-I_{12})$ et conclure que $\operatorname{rg}A\geqslant12$.</li><li>Conclure. Généraliser à $2n+1$ pièces.</li></ol>`,
   decode: { donnees: [R`Pour chaque pièce $i$, une répartition des $12$ autres en deux tas de $6$ de même masse.`], but: R`Montrer que le vecteur des masses est proportionnel à $(1,\dots,1)$.`, cles: {
@@ -765,7 +767,7 @@ LEMME.exercises([
   methode: R`Pour minorer le rang d'une matrice à coefficients entiers inconnus : trouver un mineur dont on connaît la parité.`
 },
 {
-  id: "kh-11-2", subj: "kholles", year: "mpsi", chap: 9, level: 2, time: "25 min",
+  id: "kh-11-2", subj: "kholles", year: "mpsi", chap: 11, level: 2, time: "25 min",
   title: "Déterminant tridiagonal",
   enonce: R`<p>Pour $x\in\mathbb R$ et $n\geqslant1$, on note $D_n(x)$ le déterminant $n\times n$ qui a des $x$ sur la diagonale, des $1$ juste au-dessus et juste en dessous, et des $0$ ailleurs. On pose $D_0 = 1$.</p><ol><li>Montrer que $D_n = xD_{n-1}-D_{n-2}$ pour $n\geqslant2$.</li><li>Calculer $D_n(2)$ et $D_n\left(\frac52\right)$.</li><li>Pour $x = 2\cos\theta$ avec $\theta\in\,]0,\pi[$, montrer que $D_n = \dfrac{\sin((n+1)\theta)}{\sin\theta}$.</li><li>En déduire les valeurs propres de la matrice $T_n$ qui a des $0$ sur la diagonale et des $1$ juste au-dessus et en dessous.</li></ol>`,
   decode: { donnees: [R`Une matrice tridiagonale : presque que des zéros.`], but: R`Calculer $D_n$ par une récurrence d'ordre $2$.`, cles: {
@@ -783,7 +785,7 @@ LEMME.exercises([
   methode: R`Déterminant tridiagonal : développer pour obtenir une récurrence d'ordre $2$, puis la résoudre.`
 },
 {
-  id: "kh-11-3", subj: "kholles", year: "mpsi", chap: 9, level: 3, time: "30 min",
+  id: "kh-11-3", subj: "kholles", year: "mpsi", chap: 11, level: 3, time: "30 min",
   title: "Déterminant de Hurwitz",
   enonce: R`<p>Soient $r_1,\dots,r_n,a,b$ des réels avec $a\neq b$. On note $A$ la matrice avec $r_1,\dots,r_n$ sur la diagonale, des $a$ au-dessus et des $b$ en dessous, et $J$ la matrice remplie de $1$. Pour $x\in\mathbb R$, $f(x) = \det(A+xJ)$.</p><ol><li>Montrer que $f$ est une fonction affine de $x$.</li><li>Calculer $f(-a)$ et $f(-b)$.</li><li>En déduire $\det A = \dfrac{b\prod_i(r_i-a)-a\prod_i(r_i-b)}{b-a}$.</li><li>Cas particulier : tous les $r_i$ égaux à $r$, et $b = a$ (on passera à la limite).</li></ol>`,
   decode: { donnees: [R`$A+xJ$ : on ajoute $x$ à tous les coefficients.`], but: R`Calculer $\det A = f(0)$ grâce à deux valeurs faciles de $f$.`, cles: {
@@ -813,7 +815,7 @@ LEMME.rappels({
 const { FIG, S, f1, ARR } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-11-4", subj: "kholles", year: "mpsi", chap: 9, level: 2, time: "25 min",
+  id: "kh-11-4", subj: "kholles", year: "mpsi", chap: 11, level: 2, time: "25 min",
   title: "Le déterminant de Vandermonde",
   enonce: R`<p>Pour $a_1,\dots,a_n\in\mathbb C$, on note $V(a_1,\dots,a_n) = \det\big(a_i^{\,j-1}\big)_{1\leqslant i,j\leqslant n}$ (ligne $i$ : $1,a_i,a_i^2,\dots,a_i^{n-1}$).</p><ol><li>On fixe $a_1,\dots,a_{n-1}$ et on remplace $a_n$ par une variable $x$. Montrer que $P(x) = V(a_1,\dots,a_{n-1},x)$ est un polynôme de degré $\leqslant n-1$, de coefficient de $x^{n-1}$ égal à $V(a_1,\dots,a_{n-1})$.</li><li>Trouver $n-1$ racines de $P$, et en déduire $V(a_1,\dots,a_n) = \displaystyle\prod_{1\leqslant i< j\leqslant n}(a_j-a_i)$.</li><li>Calculer $V(1,2,\dots,n)$.</li><li>Retrouver ainsi que, si les $a_i$ sont distincts, il existe un unique polynôme de degré $\leqslant n-1$ prenant des valeurs données aux points $a_i$.</li></ol>`,
   decode: { donnees: [R`Une matrice dont chaque ligne est faite des puissances successives d'un nombre.`], but: R`Calculer ce déterminant sous forme de produit.`, cles: {
@@ -831,7 +833,7 @@ LEMME.exercises([
   methode: R`Déterminant qui dépend d'un paramètre : remplacer une variable par $x$, voir un polynôme, trouver ses racines (lignes égales) et son coefficient dominant.`
 },
 {
-  id: "kh-11-5", subj: "kholles", year: "mpsi", chap: 9, level: 4, time: "40 min",
+  id: "kh-11-5", subj: "kholles", year: "mpsi", chap: 11, level: 4, time: "40 min",
   title: "Le déterminant de Cauchy",
   enonce: R`<p>Soient $a_1,\dots,a_n,b_1,\dots,b_n\in\mathbb C$ avec $a_i+b_j\neq0$ pour tous $i,j$. On pose $C_n = \det\left(\dfrac1{a_i+b_j}\right)_{1\leqslant i,j\leqslant n}$.</p><ol><li>Calculer $C_2$.</li><li>Faire $C_j\leftarrow C_j-C_n$ pour $j< n$, puis $L_i\leftarrow L_i-L_n$ pour $i< n$, et en déduire$$C_n = \frac{\prod_{k=1}^{n-1}(a_n-a_k)(b_n-b_k)}{\prod_{i=1}^n(a_i+b_n)\prod_{j=1}^{n-1}(a_n+b_j)}\,C_{n-1}.$$</li><li>En déduire $C_n = \dfrac{\prod_{i< j}(a_j-a_i)(b_j-b_i)}{\prod_{i,j}(a_i+b_j)}$.</li><li>Application : montrer que la matrice de Hilbert $H = \left(\dfrac1{i+j-1}\right)_{1\leqslant i,j\leqslant n}$ est inversible et calculer $\det H$ pour $n = 2$ et $n = 3$.</li></ol>`,
   decode: { donnees: [R`Tous les dénominateurs $a_i+b_j$ sont non nuls.`], but: R`Calculer le déterminant d'une matrice de fractions.`, cles: {
@@ -850,7 +852,7 @@ LEMME.exercises([
   methode: R`Matrice de fractions $\frac1{a_i+b_j}$ : soustraire une colonne puis une ligne, factoriser, et obtenir une récurrence.`
 },
 {
-  id: "kh-11-6", subj: "kholles", year: "mpsi", chap: 9, level: 3, time: "30 min",
+  id: "kh-11-6", subj: "kholles", year: "mpsi", chap: 11, level: 3, time: "30 min",
   title: "Distance à un sous-espace par le déterminant de Gram",
   enonce: R`<p>Soit $E$ un espace euclidien, $F$ un sous-espace de base $(u_1,\dots,u_q)$, $x\in E$, $p$ le projeté orthogonal de $x$ sur $F$ et $h = x-p$. On note $G(v_1,\dots,v_m) = \big((v_i|v_j)\big)_{i,j}$.</p><ol><li>Montrer que $\det G(v_1,\dots,v_m) = 0$ si la famille est liée.</li><li>Montrer que $\det G(u_1,\dots,u_q,x) = \det G(u_1,\dots,u_q,p)+\|h\|^2\det G(u_1,\dots,u_q)$.</li><li>En déduire $d(x,F)^2 = \dfrac{\det G(u_1,\dots,u_q,x)}{\det G(u_1,\dots,u_q)}$.</li><li>Dans $\mathbb R^4$ usuel, $F = \operatorname{Vect}(u_1,u_2)$ avec $u_1 = (1,1,0,0)$, $u_2 = (0,1,1,1)$. Calculer $d(v,F)$ pour $v = (1,-1,0,0)$ et pour $v = (1,-1,1,0)$.</li></ol>`,
   decode: { donnees: [R`$x = p+h$ avec $p\in F$ et $h\perp F$.`], but: R`Exprimer la distance à $F$ sans calculer le projeté.`, cles: {
@@ -884,7 +886,7 @@ LEMME.rappels({
 const { FIG, S, f1, GRAPH, ARR } = window.__LA;
 LEMME.exercises([
 {
-  id: "kh-15-7", subj: "kholles", year: "mpsi", chap: 6, level: 3, time: "25 min",
+  id: "kh-15-7", subj: "kholles", year: "mpsi", chap: 8, level: 3, time: "25 min",
   title: "Continuité uniforme et limite à l'infini",
   enonce: R`<p>Soit $f : [0,+\infty[\to\mathbb R$ continue, admettant une limite finie $\ell$ en $+\infty$.</p><ol><li>Soit $\varepsilon>0$. Montrer qu'il existe $A>0$ tel que $|f(x)-f(y)|< \varepsilon$ pour tous $x,y\geqslant A$.</li><li>Montrer que $f$ est uniformément continue sur $[0,+\infty[$.</li><li>Application : $g(x) = \dfrac{\sin(x^3)}{1+x}$ est-elle uniformément continue ? Sa dérivée est-elle bornée ?</li><li>Montrer que $h(x) = \sin(x^2)$ n'est pas uniformément continue sur $[0,+\infty[$.</li></ol>`,
   decode: { donnees: [R`$f$ continue partout et $f(x)\to\ell$ en $+\infty$.`], but: R`Trouver un même $\delta$ qui marche sur toute la demi-droite.`, cles: {
@@ -902,7 +904,7 @@ LEMME.exercises([
   methode: R`Continuité uniforme sur une demi-droite : Heine sur un grand segment, contrôle à l'infini, et un recouvrement qui se chevauche.`
 },
 {
-  id: "kh-17-1", subj: "kholles", year: "mpsi", chap: 10, level: 4, time: "30 min",
+  id: "kh-17-1", subj: "kholles", year: "mpsi", chap: 12, level: 4, time: "30 min",
   title: "Norme d'un endomorphisme symétrique",
   enonce: R`<p>Soit $E$ un espace euclidien et $u\in\mathcal L(E)$ symétrique : $(u(x)|y) = (x|u(y))$ pour tous $x,y$. On pose $\|u\| = \sup_{\|x\| = 1}\|u(x)\|$ et $M = \sup_{\|x\| = 1}|(u(x)|x)|$.</p><ol><li>Montrer que $M\leqslant\|u\|$.</li><li>Montrer que pour tous $x,y$ : $4(u(x)|y) = (u(x+y)|x+y)-(u(x-y)|x-y)$.</li><li>En déduire que $|(u(x)|y)|\leqslant M$ pour $\|x\| = \|y\| = 1$, puis que $\|u\| = M$.</li><li>Montrer que le résultat est faux pour la rotation d'angle $\frac\pi2$ du plan.</li></ol>`,
   decode: { donnees: [R`$u$ symétrique ; $|(u(x)|x)|\leqslant M\|x\|^2$ pour tout $x$ (par homogénéité).`], but: R`Calculer la norme de $u$ avec la seule « forme quadratique » $x\mapsto(u(x)|x)$.`, cles: {
@@ -920,7 +922,7 @@ LEMME.exercises([
   methode: R`Pour récupérer une forme bilinéaire symétrique à partir de sa forme quadratique : polarisation, puis identité du parallélogramme.`
 },
 {
-  id: "kh-17-2", subj: "kholles", year: "mpsi", chap: 10, level: 2, time: "25 min",
+  id: "kh-17-2", subj: "kholles", year: "mpsi", chap: 12, level: 2, time: "25 min",
   title: "Minimiser une intégrale par projection",
   enonce: R`<p>On munit $\mathcal C([0,1],\mathbb R)$ du produit scalaire $(f|g) = \int_0^1fg$.</p><ol><li>Montrer que $\displaystyle\inf_{(a,b)\in\mathbb R^2}\int_0^1(x^2-ax-b)^2\,dx$ est le carré de la distance de $x\mapsto x^2$ à un sous-espace $F$ que l'on précisera.</li><li>Trouver le couple $(a,b)$ qui réalise le minimum et calculer ce minimum.</li><li>Même question avec $\displaystyle\int_0^1(\sqrt x-a-bx)^2\,dx$.</li></ol>`,
   decode: { donnees: [R`Une intégrale d'un carré : c'est une norme au carré.`], but: R`Minimiser une distance à un plan de fonctions.`, cles: {
@@ -938,7 +940,7 @@ LEMME.exercises([
   methode: R`Minimiser $\int(f-\text{combinaison})^2$ : c'est une distance à un sous-espace ; écrire les équations normales.`
 },
 {
-  id: "kh-18-1", subj: "kholles", year: "mpsi", chap: 10, level: 2, time: "25 min",
+  id: "kh-18-1", subj: "kholles", year: "mpsi", chap: 12, level: 2, time: "25 min",
   title: "Matrice d'une projection orthogonale",
   enonce: R`<p>Dans $\mathbb R^4$ euclidien usuel, soit $F = \operatorname{Vect}(f_1,f_2)$ avec $f_1 = (1,1,0,0)$ et $f_2 = (1,0,1,1)$.</p><ol><li>Construire une base orthonormée $(\varepsilon_1,\varepsilon_2)$ de $F$ par le procédé de Gram-Schmidt.</li><li>En déduire la matrice $P$ de la projection orthogonale sur $F$ dans la base canonique. Vérifier deux propriétés de $P$.</li><li>En déduire la matrice de la symétrie orthogonale par rapport à $F$.</li><li>Calculer la distance de $e_1 = (1,0,0,0)$ à $F$.</li></ol>`,
   decode: { donnees: [R`$f_1$ et $f_2$ ne sont pas orthogonaux : $(f_1|f_2) = 1$.`], but: R`Écrire la matrice de la projection sur $F$.`, cles: {
@@ -956,7 +958,7 @@ LEMME.exercises([
   methode: R`Matrice d'une projection orthogonale : base orthonormée de $F$ par Gram-Schmidt, puis $P = \sum E_kE_k^\top$.`
 },
 {
-  id: "kh-18-2", subj: "kholles", year: "mpsi", chap: 10, level: 4, time: "35 min",
+  id: "kh-18-2", subj: "kholles", year: "mpsi", chap: 12, level: 4, time: "35 min",
   title: "Familles de vecteurs deux à deux obtus",
   enonce: R`<p>Soit $(u_1,\dots,u_p)$ une famille de vecteurs de $\mathbb R^n$ euclidien telle que $(u_i|u_j)< 0$ pour tous $i\neq j$.</p><ol><li>Soit $\lambda_1,\dots,\lambda_{p-1}$ réels avec $\sum_{i=1}^{p-1}\lambda_iu_i = 0$. En séparant les $\lambda_i$ positifs et négatifs, montrer que $v = \sum_{\lambda_i>0}\lambda_iu_i$ est nul.</li><li>En utilisant $u_p$, montrer que tous les $\lambda_i$ sont nuls. Conclure : $p-1$ vecteurs quelconques de la famille sont libres.</li><li>En déduire que $p\leqslant n+1$.</li><li>Construire $n+1$ vecteurs vérifiant la condition.</li></ol>`,
   decode: { donnees: [R`Tous les angles entre deux vecteurs distincts sont obtus.`], but: R`Borner le nombre de tels vecteurs.`, cles: {
@@ -989,7 +991,7 @@ const { FIG, S, f1 } = window.__LA;
 const BARS = window.__LA.BARS;
 LEMME.exercises([
 {
-  id: "kh-20-1", subj: "kholles", year: "mpsi", chap: 11, level: 3, time: "25 min",
+  id: "kh-20-1", subj: "kholles", year: "mpsi", chap: 13, level: 3, time: "25 min",
   title: "L'urne de Pólya",
   enonce: R`<p>Soient $a,b,c\in\mathbb N^\ast$. Une urne contient $a$ boules rouges et $b$ boules noires. On tire une boule, on note sa couleur, et on la remet avec $c$ boules supplémentaires de la même couleur. On note $R_n$ : « la $n$-ième boule tirée est rouge ».</p><ol><li>Calculer $P(R_1)$, $P(R_2)$ et $P(R_1\cap R_2)$.</li><li>Montrer par récurrence sur $n$ que, <b>pour tous</b> $a,b\geqslant1$, $P(R_n) = \dfrac a{a+b}$.</li><li>Sachant que la deuxième boule est rouge, quelle est la probabilité que la première l'ait été ?</li></ol>`,
   decode: { donnees: [R`Après chaque tirage, l'urne contient $c$ boules de plus, de la couleur tirée.`], but: R`Montrer que la couleur du $n$-ième tirage a toujours la même loi.`, cles: {
@@ -1007,7 +1009,7 @@ LEMME.exercises([
   methode: R`Processus qui « se renouvelle » : conditionner par la première étape et reconnaître le même problème avec d'autres paramètres.`
 },
 {
-  id: "kh-20-2", subj: "kholles", year: "mpsi", chap: 11, level: 4, time: "40 min",
+  id: "kh-20-2", subj: "kholles", year: "mpsi", chap: 13, level: 4, time: "40 min",
   title: "Les boîtes d'allumettes de Banach",
   enonce: R`<p>Un fumeur a deux boîtes de $n$ allumettes, une dans chaque poche. À chaque fois, il choisit une poche au hasard (probabilité $\frac12$, indépendamment) et prend une allumette.</p><ol><li>On s'arrête dès qu'une boîte devient vide. On note $R$ le nombre d'allumettes dans l'autre boîte. Montrer que, pour $1\leqslant k\leqslant n$ : $P(R = k) = \dbinom{2n-k-1}{n-1}\dfrac1{2^{2n-k-1}}$.</li><li>On s'arrête plutôt la première fois qu'il choisit une boîte <b>déjà vide</b> ; $R'$ est le nombre d'allumettes dans l'autre. Montrer que $P(R' = k) = \dbinom{2n-k}{n}\dfrac1{2^{2n-k}}$ pour $0\leqslant k\leqslant n$.</li><li>Montrer que $E(R) = \dbinom{2n}{n}\dfrac{2n}{4^n}$.</li><li>En déduire $E(R)\sim2\sqrt{\dfrac n\pi}$.</li></ol>`,
   decode: { donnees: [R`Des choix gauche/droite indépendants, chacun de probabilité $\frac12$.`], but: R`Loi et espérance du nombre d'allumettes restantes.`, cles: {
@@ -1027,7 +1029,7 @@ LEMME.exercises([
   methode: R`Événement « la $m$-ième étape réalise pour la première fois… » : fixer la dernière étape et dénombrer les précédentes.`
 },
 {
-  id: "kh-20-3", subj: "kholles", year: "mpsi", chap: 11, level: 4, time: "40 min",
+  id: "kh-20-3", subj: "kholles", year: "mpsi", chap: 13, level: 4, time: "40 min",
   title: "Deux urnes et une chaîne de Markov",
   enonce: R`<p>Deux urnes $U_1$, $U_2$ contiennent en tout $n$ boules numérotées de $1$ à $n$. À chaque instant $k\geqslant1$, on choisit un numéro au hasard (uniformément, indépendamment du passé) et on change d'urne la boule correspondante. $N_k$ est le nombre de boules dans $U_1$ après l'instant $k$, et $Z_k = \big(P(N_k = l)\big)_{0\leqslant l\leqslant n}\in\mathbb R^{n+1}$.</p><ol><li>Que dire de la famille d'événements $(N_k = 0),\dots,(N_k = n)$ ?</li><li>Montrer que $Z_{k+1} = \frac1nA_nZ_k$, où $A_n$ a des $0$ sur la diagonale, $l+1$ en position $(l,l+1)$ et $n-l+1$ en position $(l,l-1)$. En déduire $Z_k = \frac1{n^k}A_n^kZ_0$.</li><li>Au départ, chaque boule est placée dans $U_1$ ou $U_2$ avec probabilité $\frac12$, indépendamment. Donner la loi de $N_0$ et montrer que $N_k$ a la même loi pour tout $k$.</li><li>Dans le cas général, montrer que $E(N_{k+1}) = \left(1-\frac2n\right)E(N_k)+1$, et en déduire la limite de $E(N_k)$.</li></ol>`,
   decode: { donnees: [R`Si $N_k = l$, la boule choisie est dans $U_1$ avec probabilité $\frac ln$.`], but: R`Décrire l'évolution de la loi de $N_k$, et trouver une loi qui ne bouge pas.`, cles: {
