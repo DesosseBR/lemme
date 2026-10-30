@@ -50,8 +50,20 @@ const lvl = n => `<span class="lvl" role="img" aria-label="Difficulté ${n} sur 
 let mjQueue = Promise.resolve();
 function typeset(el) {
   if (!el || !window.MathJax || !MathJax.typesetPromise) return;
-  mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).catch(() => {});
+  mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).then(() => fitMath(el)).catch(() => {});
 }
+/* Formules trop larges : on réduit la taille au lieu d'afficher une barre de défilement */
+function fitMath(root) {
+  (root || document).querySelectorAll('mjx-container[display="true"]').forEach(c => {
+    c.style.removeProperty("font-size");
+    const w = c.clientWidth; if (!w) return;
+    const need = c.scrollWidth; if (need <= w + 1) return;
+    c.style.setProperty("font-size", (105 * Math.max(.5, w / need * .97)).toFixed(1) + "%", "important");
+  });
+}
+let fitT = 0;
+window.addEventListener("resize", () => { clearTimeout(fitT); fitT = setTimeout(() => fitMath(document), 150); });
+document.addEventListener("toggle", e => { if (e.target.open) fitMath(e.target); }, true);
 window.__lemmeTypeset = () => typeset(app);
 
 /* ---------- Année ---------- */
@@ -212,7 +224,7 @@ function exercisePage(eid) {
   if (e.concours) lastConc = e.concours;
   const ann = e.subj === "annales";
   return phead({ crumb: ann ? [["Concours", "#concours"], [c.bank, "#banque-" + bslug(c.bank)], [c.epreuve + " " + c.annee, `#c-annales-mp-${e.chap}`], ["Partie " + e.part]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]], title: esc(e.title),
-    meta: ann ? `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">Partie ${esc(e.part)} · ${qrange(e)}</span>` : `<span class="tag y">${e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
+    meta: ann ? `<span class="tag y">${qrange(e)}</span>` : `<span class="tag y">${e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice")}</span><span class="tag">${s.hidden ? s.name : s.name + " · " + YEARS[e.year]}</span><span class="tag">${e.time}</span><span class="tag l" aria-label="Difficulté ${e.level} sur 5"><span style="color:var(--ink);letter-spacing:1px">${"★".repeat(e.level)}</span><span style="opacity:.35;letter-spacing:1px">${"★".repeat(5 - e.level)}</span></span>` })
   + (() => {
     const enHead = `<h2 id="h-en">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>`;
     const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
@@ -224,11 +236,10 @@ function exercisePage(eid) {
         <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Souligné en bleu : une notion de cours, avec sa définition</span></p>
       </div>
       ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}`;
-    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download>${I.dl} Télécharger le corrigé PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
+    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor">Corrigé pas à pas ${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
     const viz = [].concat(e.viz || []).map((v, k) => `<section class="panelbox" aria-labelledby="h-viz${k}"><h2 id="h-viz${k}">${v.title || "Visualiser"}</h2><div id="viz${k ? k : ""}"></div></section>`).join("");
     const more = others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
-    if (e.side) return `<div class="wrap"><div class="ex-layout wide">
-      <p class="side-hint">L'énoncé reste affiché à gauche pendant que tu avances dans le corrigé : la question en cours y est surlignée.</p>
+    if (e.side) return `<div class="wrap wrap-wide"><div class="ex-layout wide">
       <div class="split"><section class="panelbox side-en" aria-labelledby="h-en">${enHead}${enBody}</section>${cor}</div>
       ${viz}${more}
     </div></div>`;
@@ -541,13 +552,14 @@ function mountPlayer(e, host) {
     const st = e.steps[state.i];
     const qs = e.qnav ? [...new Set(e.steps.map(x => x.q))] : [];
     const curQ = last ? null : st.q;
-    host.innerHTML = `${qs.length ? `<div class="qnav" role="group" aria-label="Aller à une question">${qs.map(q => `<button type="button" data-q="${q}" aria-pressed="${q === curQ}">Q${q}</button>`).join("")}</div>` : ""}
-      <div class="prog">${Array.from({ length: n + 1 }, (_, k) => `<button type="button" class="${k <= state.i ? "done" : ""}" data-go="${k}" aria-label="${k === n ? "Bilan" : "Étape " + (k + 1)}"></button>`).join("")}</div>
+    const qi = qs.indexOf(curQ);
+    host.innerHTML = `${qs.length ? `<div class="qnav" role="group" aria-label="Aller à une question">${qs.map((q, k) => `<button type="button" data-q="${q}" class="${last || k < qi ? "done" : ""}" aria-pressed="${q === curQ}">Q${q}</button>`).join("")}<button type="button" data-go="${n}" class="qb" aria-pressed="${last}">Bilan</button></div>` : ""}
+      <div class="prog"${qs.length ? " hidden" : ""}>${Array.from({ length: n + 1 }, (_, k) => `<button type="button" class="${k <= state.i ? "done" : ""}" data-go="${k}" aria-label="${k === n ? "Bilan" : "Étape " + (k + 1)}"></button>`).join("")}</div>
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, e)).join("")}</div>` : ""}<div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `<span class="count">${e.qnav ? `Question ${st.q} · Étape ${qpos(e, state.i)[0]} sur ${qpos(e, state.i)[1]}` : `${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}`}</span><h3>${esc(st.t)}</h3>${st.h ? `<details class="hint"><summary><span class="hint-ico" aria-hidden="true">?</span>Indice : le coup d'œil<span class="hint-sub">pourquoi cette idée</span></summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}<div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
+            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${esc(st.t)}</h3>${st.h ? `<details class="hint"><summary><span class="hint-ico" aria-hidden="true">?</span>Indice</summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}<div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">
@@ -833,7 +845,89 @@ function labSpec(host) {
   }
   draw();
 }
-function mountLab(host, spec) { ({ cycle: labCycle, kron: labKron, transfer: labTransfer, spec: labSpec })[spec.mode](host, spec); }
+/* Mode 5 : l'opérateur ξ sur les polynômes de Laurent (X-ENS 2025) */
+function labXi(host) {
+  const K0 = -6, K1 = 3;
+  const st = { c: { "-3": 1, "-1": 2, "1": 1 }, log: [], n: 2, v: "op" };
+  const term = (a, k) => { const s = a < 0 ? "−" : "+", m = Math.abs(a), co = m === 1 && k !== 0 ? "" : String(m); return `${s} ${co}${k === 0 ? "" : k === 1 ? "X" : `X<sup>${k}</sup>`}`; };
+  const fmtF = c => { const ks = Object.keys(c).map(Number).filter(k => c[k]).sort((a, b) => a - b); if (!ks.length) return "0"; const s = ks.map(k => term(c[k], k)).join(" "); return s.replace(/^\+ /, "").replace(/^− /, "−"); };
+  function draw() {
+    const c = st.c;
+    const ctl = `<div class="lab-ctl">${labSeg("Vue", [["op", "Appliquer ξ pas à pas (Q3)"], ["ker", "Noyau de ξⁿ (Q4, Q5)"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}${st.v === "ker" ? `<div class="viz-ctrl">${labRange("n", "n", 1, 6, 1, st.n)}</div>` : ""}</div>`;
+    const cells = [];
+    for (let k = K0; k <= K1; k++) {
+      const v = st.v === "ker" ? (k >= -st.n && k <= -1 ? 1 : 0) : (c[k] || 0);
+      cells.push(`<button type="button" class="xc${k >= 0 ? " pos" : ""}${v ? " on" : ""}" data-k="${k}" ${st.v === "ker" ? "disabled" : ""} aria-label="Coefficient de X puissance ${k}"><small>X<sup>${k}</sup></small><b>${v}</b></button>`);
+    }
+    let body = `<div class="xstrip">${cells.join("")}</div><div class="xleg"><span><i class="d"></i>partie dans D (puissances &lt; 0)</span><span><i class="p"></i>partie dans ℂ[X] (effacée par Π)</span></div>`;
+    if (st.v === "op") {
+      body += `<p class="lab-cap" style="margin-top:12px">F = ${fmtF(c)} &nbsp;·&nbsp; clique sur une case pour changer un coefficient</p>
+      <div class="xbtn"><button type="button" class="btn btn-ghost btn-sm" data-op="X">× X (décaler à droite)</button><button type="button" class="btn btn-ghost btn-sm" data-op="P">Π (garder les puissances &lt; 0)</button><button type="button" class="btn btn-yellow btn-sm" data-op="XI">ξ = Π(X ·)</button><button type="button" class="btn btn-ghost btn-sm" data-op="R">Réinitialiser</button></div>
+      <div class="lab-note">${st.log.length ? st.log.slice(-3).map(l => `<div>${l}</div>`).join("") : `<b>Comment ça marche.</b> Multiplier par X décale toutes les cases d'un cran vers la droite. Π efface tout ce qui arrive dans la zone grise (puissances ≥ 0). ξ fait les deux : <b>X<sup>−1</sup> est envoyé sur 0</b>, et X<sup>−j</sup> sur X<sup>−j+1</sup> pour j ≥ 2. Essaie : appliquer Π avant ou après ξ donne le même résultat (Q3 a).`}</div>`;
+    } else {
+      const n = st.n;
+      body += `<div class="lab-note"><b>ξ<sup>${n}</sup></b> décale de ${n} crans puis efface les puissances ≥ 0. Les monômes X<sup>−1</sup>, …, X<sup>−${n}</sup> (cases jaunes) arrivent tous dans la zone grise : ils forment une base de <b>ker ξ<sup>${n}</sup></b> (Q4). Et tout X<sup>−j</sup> est atteint, comme ξ<sup>${n}</sup>(X<sup>−j−${n}</sup>) : ξ<sup>${n}</sup> est surjectif.<br>Sur D<sub>r</sub> = Vect(X<sup>−r</sup>, …, X<sup>−1</sup>), ξ envoie chaque monôme sur le suivant et X<sup>−1</sup> sur 0 : sa matrice est le bloc de Jordan J<sub>r</sub> (Q5).</div>`;
+    }
+    host.innerHTML = ctl + body;
+    labWire(host, st, draw);
+    if (st.v !== "op") return;
+    $$(".xc", host).forEach(b => b.addEventListener("click", () => { const k = +b.dataset.k, v = (c[k] || 0) + 1; c[k] = v > 3 ? -2 : v; if (!c[k]) delete c[k]; draw(); }));
+    $$("[data-op]", host).forEach(b => b.addEventListener("click", () => {
+      const before = fmtF(c), o = b.dataset.op; let nc = {};
+      if (o === "R") { st.c = { "-3": 1, "-1": 2, "1": 1 }; st.log = []; return draw(); }
+      if (o === "X" || o === "XI") Object.keys(c).forEach(k => { if (+k + 1 <= K1) nc[+k + 1] = c[k]; }); else nc = { ...c };
+      if (o === "P" || o === "XI") Object.keys(nc).forEach(k => { if (+k >= 0) delete nc[k]; });
+      st.c = nc; st.log.push(`${o === "X" ? "× X" : o === "P" ? "Π" : "ξ"} : ${before} &nbsp;→&nbsp; <b>${fmtF(nc)}</b>`); draw();
+    }));
+  }
+  draw();
+}
+
+/* Mode 6 : blocs de Jordan, invariants δ_k, version graduée */
+function labJordan(host) {
+  const st = { r: [3, 2, 2, 1], a: [1, 1, 2, 3], v: "simple" };
+  const Z = ["1", "i", "−1", "−i"];
+  function draw() {
+    const r = st.r.filter(x => x > 0), A = st.a.filter((_, i) => st.r[i] > 0), n = r.reduce((p, x) => p + x, 0);
+    const M = Array.from({ length: n }, () => Array(n).fill(0)); let o = 0; r.forEach(x => { for (let j = 0; j < x - 1; j++) M[o + j + 1][o + j] = 1; o += x; });
+    const kerDim = k => r.reduce((p, x) => p + Math.min(k, x), 0);
+    const kmax = Math.max(...r, 1) + 1;
+    const ctl = `<div class="lab-ctl">${labSeg("Vue", [["simple", "Blocs et invariants (Q2, Q9, Q10)"], ["grad", "Version graduée N = 4 (Q13, Q14)"]], st.v).replace('class="seg lab-seg"', 'class="seg lab-seg" data-s="v"')}</div>
+      <div class="jb">${st.r.map((x, i) => `<div class="jbi"><span>Bloc ${i + 1}</span><button type="button" data-b="${i}" data-d="-1" aria-label="Réduire le bloc ${i + 1}">−</button><b>${x ? `J<sub>${x}</sub>` : "aucun"}</b><button type="button" data-b="${i}" data-d="1" aria-label="Agrandir le bloc ${i + 1}">+</button>${st.v === "grad" && x ? `<button type="button" class="ja" data-a="${i}" aria-label="Changer a">a = ${st.a[i]}</button>` : ""}</div>`).join("")}</div>`;
+    // chaînes : chaque bloc est une colonne e1 -> e2 -> ... -> er -> 0
+    const W = Math.max(260, r.length * 80 + 40), H = Math.max(...r, 1) * 56 + 50;
+    let s = "";
+    r.forEach((x, i) => {
+      const cx = 50 + i * 80;
+      for (let j = 0; j < x; j++) {
+        const cy = 30 + j * 56, ex = (A[i] + j) % 4, bad = st.v === "grad" && ex === 0;
+        if (j < x - 1) s += `<line x1="${cx}" y1="${cy + 13}" x2="${cx}" y2="${cy + 40}" class="lab-e"/><polygon points="${cx},${cy + 44} ${cx - 4.5},${cy + 35} ${cx + 4.5},${cy + 35}" class="lab-ah"/>`;
+        else s += `<line x1="${cx}" y1="${cy + 13}" x2="${cx}" y2="${cy + 30}" class="lab-e dash"/><text x="${cx}" y="${cy + 44}" text-anchor="middle" class="lab-vt sm">0</text>`;
+        s += `<circle cx="${cx}" cy="${cy}" r="13" class="lab-v ${st.v === "grad" ? "g" + ex : ""}${bad ? " bad" : ""}"/><text x="${cx}" y="${cy + 4.5}" text-anchor="middle" class="lab-vt">${st.v === "grad" ? Z[ex] : `e${String(j + 1).split("").map(d => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("")}`}</text>`;
+      }
+      s += `<text x="${cx}" y="${H - 4}" text-anchor="middle" class="lab-vt sm">J${String(x).split("").map(d => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("")}</text>`;
+    });
+    const chains = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" class="lab-svg" role="img" aria-label="Chaînes de vecteurs">${s}</svg>`;
+    let body;
+    if (st.v === "simple") {
+      const rows = Array.from({ length: kmax }, (_, k0) => { const k = k0 + 1, d = -kerDim(k - 1) + 2 * kerDim(k) - kerDim(k + 1); return `<tr><td>${k}</td><td>${kerDim(k)}</td><td class="${d ? "hi" : ""}">${d}</td><td>${r.filter(x => x === k).length}</td></tr>`; }).join("");
+      body = `<div class="lab-row"><div><div class="lab-cap">Matrice diag(${r.map(x => `J<sub>${x}</sub>`).join(", ")}) (${n} × ${n})</div>${n ? mxHtml(M, { small: n > 8, label: "Matrice de Jordan" }) : ""}</div><div><div class="lab-cap">Chaque bloc = une chaîne : u envoie chaque vecteur sur le suivant, le dernier sur 0</div>${chains}</div></div>
+        <div class="lab-row"><table class="jt"><thead><tr><th>k</th><th>dim ker M<sup>k</sup></th><th>δ<sub>k</sub>(M)</th><th>blocs de taille k</th></tr></thead><tbody>${rows}</tbody></table>
+        <div class="lab-note" style="flex:1;min-width:260px"><b>Pourquoi δ<sub>k</sub> compte les blocs.</b> Sur une chaîne de longueur r, M<sup>k</sup> tue les k derniers vecteurs (ou toute la chaîne si k ≥ r) : dim ker J<sub>r</sub><sup>k</sup> = min(k, r). Les dimensions s'additionnent sur les blocs (Q2 c). Le « saut du saut » δ<sub>k</sub> = −d<sub>k−1</sub> + 2d<sub>k</sub> − d<sub>k+1</sub> vaut 1 exactement pour le bloc de taille k (Q2 b). Donc <b>δ<sub>k</sub> = nombre de blocs de taille k</b> : il ne dépend que de u, d'où l'unicité (Q10). Change les tailles pour le vérifier.</div></div>`;
+    } else {
+      const bad = r.some((x, i) => Array.from({ length: x }, (_, j) => (A[i] + j) % 4).includes(0));
+      body = `<div class="lab-row"><div><div class="lab-cap">Chaque vecteur porte sa valeur propre pour h (ζ = i). u fait monter l'exposant de 1 : V<sub>j</sub> → V<sub>j+1</sub>.</div>${chains}</div>
+        <div class="lab-note" style="flex:1;min-width:260px"><b>Le bloc (J<sub>r</sub>, D<sub>r,a</sub>).</b> Dans une chaîne qui commence avec la valeur propre ζ<sup>a</sup>, les vecteurs suivants ont ζ<sup>a+1</sup>, ζ<sup>a+2</sup>, … (Q11 b : u envoie V<sub>j</sub> dans V<sub>j+1</sub>). Clique sur « a = … » pour changer le départ.<br><br><b>Q14 (N = 4, ker(h − id) = {0}).</b> La valeur propre 1 = ζ<sup>0</sup> est interdite (cercles rouges). Une chaîne doit donc rester dans V<sub>1</sub> → V<sub>2</sub> → V<sub>3</sub> et s'arrêter avant de revenir à 1 : seuls les types (1,1), (1,2), (1,3), (2,1), (2,2), (3,1) sont possibles.${bad ? `<br><span style="color:var(--red);font-weight:700">Configuration actuelle impossible en Q14.</span>` : `<br><span style="color:var(--green);font-weight:700">Configuration compatible avec Q14.</span>`}</div></div>`;
+    }
+    host.innerHTML = ctl + body;
+    labWire(host, st, draw);
+    $$("[data-b]", host).forEach(b => b.addEventListener("click", () => { const i = +b.dataset.b, v = st.r[i] + +b.dataset.d; if (v < 0 || v > 5) return; if (v === 0 && st.r.filter(x => x > 0).length === 1) return; st.r[i] = v; draw(); }));
+    $$("[data-a]", host).forEach(b => b.addEventListener("click", () => { const i = +b.dataset.a; st.a[i] = (st.a[i] + 1) % 4; draw(); }));
+  }
+  draw();
+}
+
+function mountLab(host, spec) { ({ cycle: labCycle, kron: labKron, transfer: labTransfer, spec: labSpec, xi: labXi, jordan: labJordan })[spec.mode](host, spec); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-labo]"); if (!b) return; const t = document.getElementById("lab-" + b.dataset.labo); if (t) { t.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); t.closest(".panelbox").classList.add("flash"); setTimeout(() => t.closest(".panelbox").classList.remove("flash"), 1400); } });
 
 

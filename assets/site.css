@@ -618,3 +618,50 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 .labo-btn{display:inline-flex;align-items:center;gap:8px;margin:6px 0 4px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--navy);background:var(--surface);color:var(--navy);font:700 14px var(--f-display);cursor:pointer}
 @media (prefers-color-scheme: dark){.labo-btn{border-color:var(--yellow);color:var(--yellow)}}
 .panelbox.flash{box-shadow:0 0 0 3px var(--yellow)}
+
+/* Lisibilité : côte à côte plus large, panneaux plus larges, corrigé épuré */
+.wrap.wrap-wide{max-width:1640px}
+.ex-layout.wide{max-width:none}
+.split{grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:20px}
+.split > .panelbox{padding-left:clamp(18px,2vw,28px);padding-right:clamp(18px,2vw,28px)}
+.drawer{width:min(680px,100vw)}
+.drawer .body{font-size:18px}
+mjx-container[display="true"]{scrollbar-width:none}
+mjx-container[display="true"]::-webkit-scrollbar{display:none}
+.sbox{overflow:visible}
+.player .qnav button.done{background:color-mix(in srgb,var(--navy) 10%,var(--surface))}
+.player .qnav button.qb{margin-left:auto}
+@media (prefers-color-scheme: dark){.player .qnav button.done{background:color-mix(in srgb,var(--yellow) 14%,var(--surface))}}
+.player .hint{display:inline-block;margin:0 0 14px}
+.player .hint[open]{display:block}
+.player .hint summary{padding:6px 14px 6px 8px;font-size:14px}
+.player .hint .hint-ico{width:22px;height:22px;font-size:13px}
+.split .step h3{font-size:clamp(21px,1.8vw,26px);margin:2px 0 14px}
+
+/* Labo ξ et Jordan */
+.xstrip{display:flex;flex-wrap:wrap;gap:4px}
+.xc{display:grid;justify-items:center;gap:2px;width:58px;padding:6px 0;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-family:var(--f-display)}
+.xc small{font-size:12px;color:var(--muted)}
+.xc b{font-size:18px;font-variant-numeric:tabular-nums}
+.xc.pos{background:var(--bg-2);border-style:dashed}
+.xc.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.xc.on:not(.pos){background:var(--yellow-soft)}
+.xc:disabled{cursor:default}
+.xleg{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;font-size:13px;color:var(--muted)}
+.xleg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1.5px solid var(--line)}
+.xleg i.d{background:var(--surface)}.xleg i.p{background:var(--bg-2);border-style:dashed}
+.xbtn{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
+.jb{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.jbi{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border:1.5px solid var(--line);border-radius:10px;font-size:13.5px}
+.jbi span{color:var(--muted);font-weight:600}
+.jbi b{min-width:52px;text-align:center}
+.jbi button{min-width:30px;height:30px;border-radius:7px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:700 15px var(--f-display);cursor:pointer}
+.jbi button.ja{font-size:12.5px;padding:0 8px;border-color:var(--blue);color:var(--blue)}
+.jt{border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14.5px}
+.jt th,.jt td{padding:6px 12px;border-bottom:1px solid var(--line);text-align:center}
+.jt th{font-size:12.5px;color:var(--muted);font-weight:700}
+.jt td.hi{background:var(--yellow-soft);font-weight:800}
+.lab-svg .lab-v.g1{fill:color-mix(in srgb,var(--blue) 22%,var(--surface))}
+.lab-svg .lab-v.g2{fill:color-mix(in srgb,var(--green) 25%,var(--surface))}
+.lab-svg .lab-v.g3{fill:color-mix(in srgb,var(--gold-ink) 28%,var(--surface))}
+.lab-svg .lab-v.bad{stroke:var(--red);stroke-width:3;fill:color-mix(in srgb,var(--red) 18%,var(--surface))}
