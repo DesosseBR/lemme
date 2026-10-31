@@ -344,11 +344,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Découper le problème", b: R`<p>On veut une inégalité stricte. On procède en deux temps, ce qui est plus clair :</p><ol><li>montrer d'abord l'inégalité <span data-k="large">large</span> $f(x)\leqslant\ell$ ;</li><li>montrer ensuite que l'égalité $f(x)=\ell$ est impossible.</li></ol>` },
-    { t: "L'inégalité large", b: R`<p>Soit $x\geqslant0$ <span data-k="fixe">fixé</span>. Pour tout $t\geqslant x$, la croissance de $f$ donne</p>$$f(x)\leqslant f(t).$$<p>On fait tendre $t$ vers $+\infty$ : le membre de droite tend vers $\ell$, le membre de gauche ne bouge pas. Par passage à la limite dans une inégalité large :</p>$$f(x)\leqslant\ell.$$`, rappels: ["passage-limite", "limite-monotone-fct"] },
-    { t: "Pourquoi ce n'est pas fini", b: R`<p>Le passage à la limite ne donne jamais mieux qu'une inégalité large. Même en partant de $f(x)< f(t)$, on obtient seulement $f(x)\leqslant\ell$. Il faut un argument de plus pour exclure $f(x)=\ell$ : c'est là qu'intervient la stricte croissance.</p>`, rappels: ["passage-limite"] },
-    { t: "Exclure l'égalité", b: R`<p>Raisonnons par l'absurde : supposons qu'il existe $a\geqslant0$ avec $f(a)=\ell$.</p><p>Prenons n'importe quel $b>a$, par exemple $b=a+1$. Comme $f$ est strictement croissante, $f(b)>f(a)=\ell$.</p><p>Mais l'étape précédente donne $f(b)\leqslant\ell$. C'est une <span data-k="contradiction">contradiction</span>.</p>`, rappels: ["absurde"] },
-    { t: "Conclusion", b: R`<p>Pour tout $x\geqslant0$, on a $f(x)\leqslant\ell$ et $f(x)\neq\ell$, donc</p>$$f(x)<\ell.$$<p>Une fonction strictement croissante s'approche de sa limite sans jamais l'atteindre.</p>` }
+    { t: "Découper le problème", h: R`<p>Une inégalité stricte est difficile à obtenir directement. Sépare : d'abord « $\leqslant$ », puis « $\neq$ ».</p>`, b: R`<p>On veut une inégalité stricte. On procède en deux temps, ce qui est plus clair :</p><ol><li>montrer d'abord l'inégalité <span data-k="large">large</span> $f(x)\leqslant\ell$ ;</li><li>montrer ensuite que l'égalité $f(x)=\ell$ est impossible.</li></ol>` },
+    { t: "L'inégalité large", h: R`<p>Fixe $x$, compare $f(x)$ à $f(t)$ pour $t\geqslant x$, puis fais tendre $t$ vers $+\infty$.</p>`, b: R`<p>Soit $x\geqslant0$ <span data-k="fixe">fixé</span>. Pour tout $t\geqslant x$, la croissance de $f$ donne</p>$$f(x)\leqslant f(t).$$<p>On fait tendre $t$ vers $+\infty$ : le membre de droite tend vers $\ell$, le membre de gauche ne bouge pas. Par passage à la limite dans une inégalité large :</p>$$f(x)\leqslant\ell.$$`, rappels: ["passage-limite", "limite-monotone-fct"] },
+    { t: "Pourquoi ce n'est pas fini", h: R`<p>Si $f(x)< f(t)$ pour tout $t>x$, que donne le passage à la limite : $<$ ou $\leqslant$ ?</p>`, b: R`<p>Le passage à la limite ne donne jamais mieux qu'une inégalité large. Même en partant de $f(x)< f(t)$, on obtient seulement $f(x)\leqslant\ell$. Il faut un argument de plus pour exclure $f(x)=\ell$ : c'est là qu'intervient la stricte croissance.</p>`, rappels: ["passage-limite"] },
+    { t: "Exclure l'égalité", h: R`<p>Suppose $f(a) = \ell$ et regarde un point $b$ un peu plus loin que $a$.</p>`, b: R`<p>Raisonnons par l'absurde : supposons qu'il existe $a\geqslant0$ avec $f(a)=\ell$.</p><p>Prenons n'importe quel $b>a$, par exemple $b=a+1$. Comme $f$ est strictement croissante, $f(b)>f(a)=\ell$.</p><p>Mais l'étape précédente donne $f(b)\leqslant\ell$. C'est une <span data-k="contradiction">contradiction</span>.</p>`, rappels: ["absurde"] },
+    { t: "Conclusion", h: R`<p>Rassemble : $f(x)\leqslant\ell$ et $f(x)\neq\ell$.</p>`, b: R`<p>Pour tout $x\geqslant0$, on a $f(x)\leqslant\ell$ et $f(x)\neq\ell$, donc</p>$$f(x)<\ell.$$<p>Une fonction strictement croissante s'approche de sa limite sans jamais l'atteindre.</p>` }
   ],
   piege: R`Passer directement à la limite dans $f(x)< f(t)$ et écrire $f(x)<\ell$. Le passage à la limite transforme toujours une inégalité stricte en inégalité large.`,
   methode: R`Pour une inégalité stricte avec une limite : obtenir d'abord l'inégalité large par passage à la limite, puis exclure le cas d'égalité, souvent par l'absurde.`,
@@ -372,11 +372,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>$3x^2\to+\infty$ et $e^x\to+\infty$. On est face à $(+\infty)-(+\infty)$ : c'est une <span data-k="fi">forme indéterminée</span>. On ne peut rien conclure sans transformer l'expression.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Qui l'emporte ?", b: R`<p>Par croissances comparées, l'exponentielle grandit beaucoup plus vite que $x^2$. Le <span data-k="prep">terme prépondérant</span> est donc $e^x$.</p>`, rappels: ["croissances-comparees"] },
-    { t: "Factoriser", b: R`<p>On met $e^x$ en facteur :</p>$$3x^2-e^x = e^x\left(3x^2e^{-x}-1\right).$$<p>Vérification : en développant, on retrouve bien $3x^2-e^x$.</p>` },
-    { t: "Limite de chaque facteur", b: R`<p>Par croissances comparées, $x^2e^{-x} = \dfrac{x^2}{e^x}\to0$, donc</p>$$3x^2e^{-x}-1\longrightarrow -1.$$<p>Et $e^x\to+\infty$.</p>`, rappels: ["croissances-comparees"] },
-    { t: "Conclusion", b: R`<p>Un produit de la forme $(+\infty)\times(-1)$ tend vers $-\infty$ :</p>$$\lim_{x\to+\infty}\big(3x^2-e^x\big) = -\infty.$$`, rappels: ["operations-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>Calcule séparément la limite de $3x^2$ et celle de $e^x$.</p>`, b: R`<p>$3x^2\to+\infty$ et $e^x\to+\infty$. On est face à $(+\infty)-(+\infty)$ : c'est une <span data-k="fi">forme indéterminée</span>. On ne peut rien conclure sans transformer l'expression.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Qui l'emporte ?", h: R`<p>Lequel grandit le plus vite : une puissance de $x$ ou l'exponentielle ?</p>`, b: R`<p>Par croissances comparées, l'exponentielle grandit beaucoup plus vite que $x^2$. Le <span data-k="prep">terme prépondérant</span> est donc $e^x$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Factoriser", h: R`<p>Mets le terme le plus rapide en facteur : $3x^2-e^x = e^x(\dots)$.</p>`, b: R`<p>On met $e^x$ en facteur :</p>$$3x^2-e^x = e^x\left(3x^2e^{-x}-1\right).$$<p>Vérification : en développant, on retrouve bien $3x^2-e^x$.</p>` },
+    { t: "Limite de chaque facteur", h: R`<p>$x^2e^{-x} = \frac{x^2}{e^x}$ : croissances comparées.</p>`, b: R`<p>Par croissances comparées, $x^2e^{-x} = \dfrac{x^2}{e^x}\to0$, donc</p>$$3x^2e^{-x}-1\longrightarrow -1.$$<p>Et $e^x\to+\infty$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Conclusion", h: R`<p>Le produit d'un terme qui tend vers $+\infty$ par un terme qui tend vers $-1$.</p>`, b: R`<p>Un produit de la forme $(+\infty)\times(-1)$ tend vers $-\infty$ :</p>$$\lim_{x\to+\infty}\big(3x^2-e^x\big) = -\infty.$$`, rappels: ["operations-limites"] }
   ],
   piege: R`Conclure « $+\infty-\infty = 0$ ». Une forme indéterminée peut donner n'importe quelle limite, ou aucune.`,
   methode: R`Devant $(+\infty)-(+\infty)$, on factorise par le terme qui grandit le plus vite. Il reste un facteur dont la limite se lit directement.`,
@@ -400,11 +400,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Le haut et le bas tendent vers $+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> du type $\dfrac{\infty}{\infty}$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Factoriser sous la racine", b: R`<p>Sous la racine, le <span data-k="prep">terme prépondérant</span> est $x^2$. On le met en facteur :</p>$$x^2+x+1 = x^2\left(1+\frac1x+\frac1{x^2}\right).$$<p>Donc $\sqrt{x^2+x+1} = \sqrt{x^2}\,\sqrt{1+\frac1x+\frac1{x^2}} = |x|\sqrt{1+\frac1x+\frac1{x^2}}$.</p>`, rappels: ["racine-carre"] },
-    { t: "Factoriser le dénominateur", b: R`$$x+1 = x\left(1+\frac1x\right).$$<p>Le quotient devient</p>$$\frac{\sqrt{x^2+x+1}}{x+1} = \frac{|x|}{x}\cdot\frac{\sqrt{1+\frac1x+\frac1{x^2}}}{1+\frac1x}.$$` },
-    { t: "En +∞", b: R`<p>Pour $x>0$, $|x| = x$, donc $\dfrac{|x|}{x} = 1$. Les termes $\frac1x$ et $\frac1{x^2}$ tendent vers $0$, donc la deuxième fraction tend vers $\dfrac{\sqrt1}{1} = 1$.</p>$$\lim_{x\to+\infty}\frac{\sqrt{x^2+x+1}}{x+1} = 1.$$`, rappels: ["operations-limites"] },
-    { t: "En −∞", b: R`<p>Pour $x<0$, <span data-k="abs">$|x| = -x$</span>, donc $\dfrac{|x|}{x} = -1$. La deuxième fraction tend toujours vers $1$. La limite vaut donc</p>$$\lim_{x\to-\infty}\frac{\sqrt{x^2+x+1}}{x+1} = -1.$$<p>C'est logique : le numérateur est positif et le dénominateur négatif pour $x$ très négatif.</p>`, rappels: ["racine-carre"] }
+    { t: "Reconnaître le problème", h: R`<p>Quelle est la limite du numérateur ? du dénominateur ?</p>`, b: R`<p>Le haut et le bas tendent vers $+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> du type $\dfrac{\infty}{\infty}$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Factoriser sous la racine", h: R`<p>Sous la racine, mets $x^2$ en facteur, puis utilise $\sqrt{ab} = \sqrt a\sqrt b$. Attention : $\sqrt{x^2} = |x|$.</p>`, b: R`<p>Sous la racine, le <span data-k="prep">terme prépondérant</span> est $x^2$. On le met en facteur :</p>$$x^2+x+1 = x^2\left(1+\frac1x+\frac1{x^2}\right).$$<p>Donc $\sqrt{x^2+x+1} = \sqrt{x^2}\,\sqrt{1+\frac1x+\frac1{x^2}} = |x|\sqrt{1+\frac1x+\frac1{x^2}}$.</p>`, rappels: ["racine-carre"] },
+    { t: "Factoriser le dénominateur", h: R`<p>Au dénominateur, mets $x$ en facteur.</p>`, b: R`$$x+1 = x\left(1+\frac1x\right).$$<p>Le quotient devient</p>$$\frac{\sqrt{x^2+x+1}}{x+1} = \frac{|x|}{x}\cdot\frac{\sqrt{1+\frac1x+\frac1{x^2}}}{1+\frac1x}.$$` },
+    { t: "En +∞", h: R`<p>En $+\infty$, $x>0$ : que vaut $\frac{|x|}x$ ?</p>`, b: R`<p>Pour $x>0$, $|x| = x$, donc $\dfrac{|x|}{x} = 1$. Les termes $\frac1x$ et $\frac1{x^2}$ tendent vers $0$, donc la deuxième fraction tend vers $\dfrac{\sqrt1}{1} = 1$.</p>$$\lim_{x\to+\infty}\frac{\sqrt{x^2+x+1}}{x+1} = 1.$$`, rappels: ["operations-limites"] },
+    { t: "En −∞", h: R`<p>En $-\infty$, $x< 0$ : que vaut $|x|$, donc $\frac{|x|}x$ ?</p>`, b: R`<p>Pour $x<0$, <span data-k="abs">$|x| = -x$</span>, donc $\dfrac{|x|}{x} = -1$. La deuxième fraction tend toujours vers $1$. La limite vaut donc</p>$$\lim_{x\to-\infty}\frac{\sqrt{x^2+x+1}}{x+1} = -1.$$<p>C'est logique : le numérateur est positif et le dénominateur négatif pour $x$ très négatif.</p>`, rappels: ["racine-carre"] }
   ],
   piege: R`Écrire $\sqrt{x^2} = x$ : c'est faux pour $x<0$, et on trouverait à tort la limite $1$ en $-\infty$.`,
   methode: R`Pour un quotient infini sur infini, factorise le terme prépondérant en haut et en bas. Sous une racine, $\sqrt{x^2} = |x|$.`,
@@ -429,11 +429,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>$x\to+\infty$ et $e^{-\sqrt x}\to0$ : c'est une <span data-k="fi">forme indéterminée</span> du type $(+\infty)\times0$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Tout passer en exponentielle", b: R`<p>Pour $x>0$, on écrit <span data-k="expo">$x = e^{\ln x}$</span>. Alors</p>$$x\,e^{-\sqrt x} = e^{\ln x}\,e^{-\sqrt x} = e^{\ln x-\sqrt x}.$$<p>Il suffit maintenant de trouver la limite de l'exposant $\ln x-\sqrt x$.</p>` },
-    { t: "L'exposant", b: R`<p>$\ln x-\sqrt x$ est une forme $(+\infty)-(+\infty)$. Le <span data-k="prep">terme prépondérant</span> est $\sqrt x$, qu'on factorise :</p>$$\ln x-\sqrt x = \sqrt x\left(\frac{\ln x}{\sqrt x}-1\right).$$<p>Par croissances comparées, $\dfrac{\ln x}{\sqrt x} = \dfrac{\ln x}{x^{1/2}}\to0$. La parenthèse tend vers $-1$ et $\sqrt x\to+\infty$, donc l'exposant tend vers $-\infty$.</p>`, rappels: ["croissances-comparees", "operations-limites"] },
-    { t: "Conclusion", b: R`<p>L'exposant tend vers $-\infty$ et $e^X\to0$ quand $X\to-\infty$. Par composition :</p>$$\lim_{x\to+\infty}x\,e^{-\sqrt x} = 0.$$`, rappels: ["composition-limites"] },
-    { t: "Une autre méthode", b: R`<p>On peut poser $X = \sqrt x$, qui tend vers $+\infty$. Alors $x = X^2$ et</p>$$x\,e^{-\sqrt x} = X^2e^{-X} = \frac{X^2}{e^X}\longrightarrow0$$<p>par croissances comparées. Les deux méthodes donnent bien sûr le même résultat.</p>`, rappels: ["croissances-comparees", "composition-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>$x\to+\infty$ et $e^{-\sqrt x}\to\,?$</p>`, b: R`<p>$x\to+\infty$ et $e^{-\sqrt x}\to0$ : c'est une <span data-k="fi">forme indéterminée</span> du type $(+\infty)\times0$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Tout passer en exponentielle", h: R`<p>Écris $x = e^{\ln x}$ pour tout regrouper en une seule exponentielle.</p>`, b: R`<p>Pour $x>0$, on écrit <span data-k="expo">$x = e^{\ln x}$</span>. Alors</p>$$x\,e^{-\sqrt x} = e^{\ln x}\,e^{-\sqrt x} = e^{\ln x-\sqrt x}.$$<p>Il suffit maintenant de trouver la limite de l'exposant $\ln x-\sqrt x$.</p>` },
+    { t: "L'exposant", h: R`<p>Dans $\ln x-\sqrt x$, mets $\sqrt x$ en facteur.</p>`, b: R`<p>$\ln x-\sqrt x$ est une forme $(+\infty)-(+\infty)$. Le <span data-k="prep">terme prépondérant</span> est $\sqrt x$, qu'on factorise :</p>$$\ln x-\sqrt x = \sqrt x\left(\frac{\ln x}{\sqrt x}-1\right).$$<p>Par croissances comparées, $\dfrac{\ln x}{\sqrt x} = \dfrac{\ln x}{x^{1/2}}\to0$. La parenthèse tend vers $-1$ et $\sqrt x\to+\infty$, donc l'exposant tend vers $-\infty$.</p>`, rappels: ["croissances-comparees", "operations-limites"] },
+    { t: "Conclusion", h: R`<p>Si l'exposant tend vers $-\infty$, vers quoi tend l'exponentielle ?</p>`, b: R`<p>L'exposant tend vers $-\infty$ et $e^X\to0$ quand $X\to-\infty$. Par composition :</p>$$\lim_{x\to+\infty}x\,e^{-\sqrt x} = 0.$$`, rappels: ["composition-limites"] },
+    { t: "Une autre méthode", h: R`<p>Pose $X = \sqrt x$ : alors $x = X^2$.</p>`, b: R`<p>On peut poser $X = \sqrt x$, qui tend vers $+\infty$. Alors $x = X^2$ et</p>$$x\,e^{-\sqrt x} = X^2e^{-X} = \frac{X^2}{e^X}\longrightarrow0$$<p>par croissances comparées. Les deux méthodes donnent bien sûr le même résultat.</p>`, rappels: ["croissances-comparees", "composition-limites"] }
   ],
   piege: R`Dire « $e^{-\sqrt x}\to0$ donc le produit tend vers $0$ » sans justification : c'est une forme indéterminée, il faut montrer que l'exponentielle l'emporte.`,
   methode: R`Pour un produit avec une exponentielle, tout écrire sous la forme $e^{(\dots)}$ et étudier l'exposant. Ou bien faire un changement de variable qui fait apparaître une croissance comparée connue.`,
@@ -456,11 +456,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le problème", b: R`<p>On ne peut pas utiliser les règles sur les produits : $\cos(e^x)$ <span data-k="osc">n'a pas de limite</span> en $+\infty$. En revanche, il est <span data-k="bornee">borné</span>.</p>` },
-    { t: "Séparer les deux morceaux", b: R`$$\frac{x\cos\left(e^x\right)}{x^2+1} = \underbrace{\frac{x}{x^2+1}}_{\text{tend vers }0\,?}\times\underbrace{\cos\left(e^x\right)}_{\text{borné}}.$$` },
-    { t: "La fraction tend vers 0", b: R`<p>On factorise par $x^2$ au dénominateur :</p>$$\frac{x}{x^2+1} = \frac{x}{x^2\left(1+\frac1{x^2}\right)} = \frac1x\cdot\frac{1}{1+\frac1{x^2}}\longrightarrow0\times1 = 0.$$`, rappels: ["operations-limites"] },
-    { t: "Justifier par un encadrement", b: R`<p>Pour $x>0$, comme $|\cos(e^x)|\leqslant1$ :</p>$$\left|\frac{x\cos\left(e^x\right)}{x^2+1}\right|\leqslant\frac{x}{x^2+1}.$$<p>Le majorant tend vers $0$, donc l'expression tend vers $0$.</p>`, rappels: ["borne-zero", "encadrement"] },
-    { t: "Conclusion", b: R`$$\lim_{x\to+\infty}\frac{x\cos\left(e^x\right)}{x^2+1} = 0.$$` }
+    { t: "Le problème", h: R`<p>$\cos(e^x)$ a-t-il une limite ? Est-il borné ?</p>`, b: R`<p>On ne peut pas utiliser les règles sur les produits : $\cos(e^x)$ <span data-k="osc">n'a pas de limite</span> en $+\infty$. En revanche, il est <span data-k="bornee">borné</span>.</p>` },
+    { t: "Séparer les deux morceaux", h: R`<p>Sépare le quotient en (fraction sans cosinus) $\times$ (cosinus).</p>`, b: R`$$\frac{x\cos\left(e^x\right)}{x^2+1} = \underbrace{\frac{x}{x^2+1}}_{\text{tend vers }0\,?}\times\underbrace{\cos\left(e^x\right)}_{\text{borné}}.$$` },
+    { t: "La fraction tend vers 0", h: R`<p>Dans $\frac x{x^2+1}$, mets $x^2$ en facteur au dénominateur.</p>`, b: R`<p>On factorise par $x^2$ au dénominateur :</p>$$\frac{x}{x^2+1} = \frac{x}{x^2\left(1+\frac1{x^2}\right)} = \frac1x\cdot\frac{1}{1+\frac1{x^2}}\longrightarrow0\times1 = 0.$$`, rappels: ["operations-limites"] },
+    { t: "Justifier par un encadrement", h: R`<p>Majore la valeur absolue en utilisant $|\cos|\leqslant1$.</p>`, b: R`<p>Pour $x>0$, comme $|\cos(e^x)|\leqslant1$ :</p>$$\left|\frac{x\cos\left(e^x\right)}{x^2+1}\right|\leqslant\frac{x}{x^2+1}.$$<p>Le majorant tend vers $0$, donc l'expression tend vers $0$.</p>`, rappels: ["borne-zero", "encadrement"] },
+    { t: "Conclusion", h: R`<p>Tout est prêt : conclus.</p>`, b: R`$$\lim_{x\to+\infty}\frac{x\cos\left(e^x\right)}{x^2+1} = 0.$$` }
   ],
   piege: R`Chercher la limite de $\cos(e^x)$ : elle n'existe pas. Il suffit qu'il soit borné.`,
   methode: R`Une fonction bornée multipliée par une fonction qui tend vers $0$ tend vers $0$. On le justifie par $|fg|\leqslant M|f|$.`,
@@ -487,10 +487,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le problème", b: R`<p>$\frac1x\to0$ et $\lfloor x\rfloor\to+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> $0\times(+\infty)$. La partie entière ne se manipule pas bien dans les calculs : on va l'encadrer.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Encadrer la partie entière", b: R`<p>Par définition, $\lfloor x\rfloor\leqslant x<\lfloor x\rfloor+1$. La partie de droite donne $\lfloor x\rfloor>x-1$. D'où</p>$$x-1<\lfloor x\rfloor\leqslant x.$$`, rappels: ["partie-entiere"] },
-    { t: "Diviser par x", b: R`<p>Pour $x>0$, on peut diviser par $x$ sans changer le sens des inégalités :</p>$$1-\frac1x<\frac{\lfloor x\rfloor}{x}\leqslant1.$$` },
-    { t: "Conclure par encadrement", b: R`<p>À gauche, $1-\frac1x\to1$. À droite, la constante $1$. Par le <span data-k="gendarmes">théorème d'encadrement</span> :</p>$$\lim_{x\to+\infty}\frac{\lfloor x\rfloor}{x} = 1.$$`, rappels: ["encadrement"] }
+    { t: "Le problème", h: R`<p>$\frac1x\to\,?$ et $\lfloor x\rfloor\to\,?$</p>`, b: R`<p>$\frac1x\to0$ et $\lfloor x\rfloor\to+\infty$ : c'est une <span data-k="fi">forme indéterminée</span> $0\times(+\infty)$. La partie entière ne se manipule pas bien dans les calculs : on va l'encadrer.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Encadrer la partie entière", h: R`<p>Par définition, $\lfloor x\rfloor\leqslant x<\lfloor x\rfloor+1$.</p>`, b: R`<p>Par définition, $\lfloor x\rfloor\leqslant x<\lfloor x\rfloor+1$. La partie de droite donne $\lfloor x\rfloor>x-1$. D'où</p>$$x-1<\lfloor x\rfloor\leqslant x.$$`, rappels: ["partie-entiere"] },
+    { t: "Diviser par x", h: R`<p>Divise l'encadrement par $x>0$.</p>`, b: R`<p>Pour $x>0$, on peut diviser par $x$ sans changer le sens des inégalités :</p>$$1-\frac1x<\frac{\lfloor x\rfloor}{x}\leqslant1.$$` },
+    { t: "Conclure par encadrement", h: R`<p>Les deux bornes ont-elles la même limite ?</p>`, b: R`<p>À gauche, $1-\frac1x\to1$. À droite, la constante $1$. Par le <span data-k="gendarmes">théorème d'encadrement</span> :</p>$$\lim_{x\to+\infty}\frac{\lfloor x\rfloor}{x} = 1.$$`, rappels: ["encadrement"] }
   ],
   piege: R`Diviser l'encadrement par $x$ sans vérifier que $x>0$. Ici c'est le cas, car $x\to+\infty$.`,
   methode: R`Avec une partie entière, utilise toujours l'encadrement $x-1<\lfloor x\rfloor\leqslant x$, puis le théorème d'encadrement.`,
@@ -513,11 +513,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le problème", b: R`<p>On ne peut pas additionner des limites : <span data-k="sinus">$\sin x$ n'a pas de limite</span>, donc $x\sin x$ non plus. L'idée est de <span data-k="minorer">minorer</span> l'expression.</p>` },
-    { t: "Minorer le sinus", b: R`<p>Pour tout $x$, $\sin x\geqslant-1$. Pour $x\geqslant0$, on peut multiplier par $x$ sans changer le sens :</p>$$x\sin x\geqslant-x.$$` },
-    { t: "Minorer l'expression", b: R`<p>En ajoutant $x^2$ :</p>$$x^2+x\sin x\geqslant x^2-x = x(x-1).$$` },
-    { t: "Le minorant tend vers +∞", b: R`<p>$x\to+\infty$ et $x-1\to+\infty$, donc leur produit $x(x-1)\to+\infty$.</p>`, rappels: ["operations-limites"] },
-    { t: "Conclusion", b: R`<p>Notre expression est plus grande qu'une fonction qui tend vers $+\infty$. Par minoration :</p>$$\lim_{x\to+\infty}\big(x^2+x\sin x\big) = +\infty.$$`, rappels: ["minoration-infini"] }
+    { t: "Le problème", h: R`<p>Peut-on additionner les limites ici ? $x\sin x$ a-t-il une limite ?</p>`, b: R`<p>On ne peut pas additionner des limites : <span data-k="sinus">$\sin x$ n'a pas de limite</span>, donc $x\sin x$ non plus. L'idée est de <span data-k="minorer">minorer</span> l'expression.</p>` },
+    { t: "Minorer le sinus", h: R`<p>Le sinus est toujours $\geqslant-1$. Multiplie par $x\geqslant0$.</p>`, b: R`<p>Pour tout $x$, $\sin x\geqslant-1$. Pour $x\geqslant0$, on peut multiplier par $x$ sans changer le sens :</p>$$x\sin x\geqslant-x.$$` },
+    { t: "Minorer l'expression", h: R`<p>Ajoute $x^2$ des deux côtés.</p>`, b: R`<p>En ajoutant $x^2$ :</p>$$x^2+x\sin x\geqslant x^2-x = x(x-1).$$` },
+    { t: "Le minorant tend vers +∞", h: R`<p>$x(x-1)$ est un produit de deux termes qui tendent vers $+\infty$.</p>`, b: R`<p>$x\to+\infty$ et $x-1\to+\infty$, donc leur produit $x(x-1)\to+\infty$.</p>`, rappels: ["operations-limites"] },
+    { t: "Conclusion", h: R`<p>Si $f\geqslant g$ et $g\to+\infty$, alors $f\to\,?$</p>`, b: R`<p>Notre expression est plus grande qu'une fonction qui tend vers $+\infty$. Par minoration :</p>$$\lim_{x\to+\infty}\big(x^2+x\sin x\big) = +\infty.$$`, rappels: ["minoration-infini"] }
   ],
   piege: R`Multiplier $\sin x\geqslant-1$ par $x$ sans préciser $x\geqslant0$ : pour $x<0$, l'inégalité changerait de sens.`,
   methode: R`Pour montrer qu'une limite vaut $+\infty$ quand un terme oscille, minore l'expression par une fonction simple qui tend vers $+\infty$.`,
@@ -568,10 +568,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Quand $x\to0^+$, $\frac1x\to+\infty$ et $\ln x\to-\infty$. C'est une <span data-k="fi">forme indéterminée</span> $(+\infty)+(-\infty)$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Factoriser le terme dominant", b: R`<p>Le <span data-k="prep">terme prépondérant</span> est $\frac1x$. On le met en facteur :</p>$$\frac1x+\ln x = \frac1x\big(1+x\ln x\big).$$<p>On vérifie en développant : $\frac1x\cdot1 + \frac1x\cdot x\ln x = \frac1x+\ln x$.</p>` },
-    { t: "Limite de la parenthèse", b: R`<p>Par croissances comparées, <span data-k="xlnx">$x\ln x\to0$</span> quand $x\to0^+$. Donc $1+x\ln x\to1$.</p>`, rappels: ["croissances-comparees"] },
-    { t: "Conclusion", b: R`<p>On a un produit de la forme $(+\infty)\times1$ :</p>$$\lim_{x\to0^+}\left(\frac1x+\ln x\right) = +\infty.$$`, rappels: ["operations-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>Limites de $\frac1x$ et de $\ln x$ quand $x\to0^+$ ?</p>`, b: R`<p>Quand $x\to0^+$, $\frac1x\to+\infty$ et $\ln x\to-\infty$. C'est une <span data-k="fi">forme indéterminée</span> $(+\infty)+(-\infty)$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Factoriser le terme dominant", h: R`<p>Le terme le plus « fort » est $\frac1x$ : mets-le en facteur.</p>`, b: R`<p>Le <span data-k="prep">terme prépondérant</span> est $\frac1x$. On le met en facteur :</p>$$\frac1x+\ln x = \frac1x\big(1+x\ln x\big).$$<p>On vérifie en développant : $\frac1x\cdot1 + \frac1x\cdot x\ln x = \frac1x+\ln x$.</p>` },
+    { t: "Limite de la parenthèse", h: R`<p>Croissances comparées en $0$ : $x\ln x\to\,?$</p>`, b: R`<p>Par croissances comparées, <span data-k="xlnx">$x\ln x\to0$</span> quand $x\to0^+$. Donc $1+x\ln x\to1$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Conclusion", h: R`<p>$(+\infty)\times1$.</p>`, b: R`<p>$\frac1x\to+\infty$ et $1+x\ln x\to1$ : on a un produit de la forme $(+\infty)\times1$, qui tend vers $+\infty$ :</p>$$\lim_{x\to0^+}\left(\frac1x+\ln x\right) = +\infty.$$`, rappels: ["operations-limites"] }
   ],
   piege: R`Croire que $\ln x\to-\infty$ « compense » $\frac1x$. Le logarithme tend vers l'infini bien plus lentement que $\frac1x$.`,
   methode: R`Face à $(+\infty)+(-\infty)$, factorise le terme qui va le plus vite à l'infini.`,
@@ -591,10 +591,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>La base et l'exposant tendent vers $0$ : c'est une <span data-k="fi">forme indéterminée</span> $0^0$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Passer en exponentielle", b: R`<p>Pour $x>0$, par définition d'une <span data-k="expo">puissance réelle</span> :</p>$$x^{\sqrt x} = e^{\sqrt x\,\ln x}.$$<p>Il suffit d'étudier l'exposant $\sqrt x\ln x$.</p>`, rappels: ["forme-exp"] },
-    { t: "Limite de l'exposant", b: R`<p>$\sqrt x\ln x = x^{1/2}\ln x$ est de la forme $x^\beta\ln x$ avec $\beta = \frac12>0$. Par croissances comparées en $0$, il tend vers $0$.</p>`, rappels: ["croissances-comparees"] },
-    { t: "Conclusion", b: R`<p>L'exposant tend vers $0$ et l'exponentielle est continue en $0$ :</p>$$\lim_{x\to0^+}x^{\sqrt x} = e^0 = 1.$$`, rappels: ["composition-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>Que tendent la base $x$ et l'exposant $\sqrt x$ ?</p>`, b: R`<p>La base et l'exposant tendent vers $0$ : c'est une <span data-k="fi">forme indéterminée</span> $0^0$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Passer en exponentielle", h: R`<p>Une puissance réelle se définit par $a^b = e^{b\ln a}$ pour $a>0$.</p>`, b: R`<p>Pour $x>0$, par définition d'une <span data-k="expo">puissance réelle</span> :</p>$$x^{\sqrt x} = e^{\sqrt x\,\ln x}.$$<p>Il suffit d'étudier l'exposant $\sqrt x\ln x$.</p>`, rappels: ["forme-exp"] },
+    { t: "Limite de l'exposant", h: R`<p>$\sqrt x\ln x = x^{1/2}\ln x$ : croissances comparées en $0^+$.</p>`, b: R`<p>$\sqrt x\ln x = x^{1/2}\ln x$ est de la forme $x^\beta\ln x$ avec $\beta = \frac12>0$. Par croissances comparées en $0$ ($x^\beta\ln x\to0$ pour tout $\beta>0$), il tend vers $0$. Concrètement : pour $x = 10^{-6}$, $\sqrt x\ln x = 10^{-3}\times(-13{,}8)\approx-0{,}014$.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Conclusion", h: R`<p>L'exponentielle est continue en $0$.</p>`, b: R`<p>L'exposant tend vers $0$ et l'exponentielle est continue en $0$ :</p>$$\lim_{x\to0^+}x^{\sqrt x} = e^0 = 1.$$`, rappels: ["composition-limites"] }
   ],
   piege: R`Dire « $0$ puissance quelque chose, ça fait $0$ » : ici l'exposant tend aussi vers $0$, et c'est lui qui gagne.`,
   methode: R`Dès que l'exposant dépend de $x$, écris $a^b = e^{b\ln a}$ et étudie l'exposant.`,
@@ -615,11 +615,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>On se place sur $]0,1[$, où $\ln x<0$ et $|\ln x|>0$. Quand $x\to0^+$, la base $|\ln x|\to+\infty$ et l'exposant $\frac1{\ln x}\to0$. C'est une <span data-k="fi">forme indéterminée</span> $(+\infty)^0$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Passer en exponentielle", b: R`$$|\ln x|^{\frac1{\ln x}} = \exp\left(\frac{1}{\ln x}\,\ln|\ln x|\right).$$`, rappels: ["forme-exp"] },
-    { t: "Changer de variable", b: R`<p>Posons <span data-k="var">$X = \ln x$</span>. Quand $x\to0^+$, on a $X\to-\infty$. L'exposant s'écrit</p>$$\frac{\ln|X|}{X}.$$`, rappels: ["composition-limites"] },
-    { t: "Limite de l'exposant", b: R`<p>Avec $t = |X| = -X\to+\infty$ : $\dfrac{\ln|X|}{X} = -\dfrac{\ln t}{t}$. Par croissances comparées, <span data-k="ccx">cela tend vers $0$</span>.</p>`, rappels: ["croissances-comparees"] },
-    { t: "Conclusion", b: R`<p>L'exposant tend vers $0$, donc par continuité de l'exponentielle :</p>$$\lim_{x\to0^+}|\ln x|^{\frac1{\ln x}} = e^0 = 1.$$`, rappels: ["composition-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>Pour $x\in\,]0,1[$, quel est le signe de $\ln x$ ? Vers quoi tendent la base et l'exposant ?</p>`, b: R`<p>On se place sur $]0,1[$, où $\ln x<0$ et $|\ln x|>0$. Quand $x\to0^+$, la base $|\ln x|\to+\infty$ et l'exposant $\frac1{\ln x}\to0$. C'est une <span data-k="fi">forme indéterminée</span> $(+\infty)^0$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Passer en exponentielle", h: R`<p>$a^b = \exp(b\ln a)$ avec $a = |\ln x|$ et $b = \frac1{\ln x}$.</p>`, b: R`$$|\ln x|^{\frac1{\ln x}} = \exp\left(\frac{1}{\ln x}\,\ln|\ln x|\right).$$`, rappels: ["forme-exp"] },
+    { t: "Changer de variable", h: R`<p>Pose $X = \ln x$ : vers quoi tend $X$ ?</p>`, b: R`<p>Posons <span data-k="var">$X = \ln x$</span>. Quand $x\to0^+$, on a $X\to-\infty$. L'exposant s'écrit</p>$$\frac{\ln|X|}{X}.$$`, rappels: ["composition-limites"] },
+    { t: "Limite de l'exposant", h: R`<p>Pose $t = -X$ pour te ramener à $\frac{\ln t}t$ en $+\infty$.</p>`, b: R`<p>Avec $t = |X| = -X\to+\infty$ : $\dfrac{\ln|X|}{X} = -\dfrac{\ln t}{t}$. Par croissances comparées, <span data-k="ccx">cela tend vers $0$</span>.</p>`, rappels: ["croissances-comparees"] },
+    { t: "Conclusion", h: R`<p>L'exponentielle est continue en $0$.</p>`, b: R`<p>L'exposant tend vers $0$, donc par continuité de l'exponentielle :</p>$$\lim_{x\to0^+}|\ln x|^{\frac1{\ln x}} = e^0 = 1.$$`, rappels: ["composition-limites"] }
   ],
   piege: R`Oublier la valeur absolue : $\ln x<0$ près de $0$, et le logarithme d'un nombre négatif n'existe pas.`,
   methode: R`Une expression compliquée en $\ln x$ se simplifie souvent en posant $X = \ln x$. Pense à traduire où tend $X$.`,
@@ -637,10 +637,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Le numérateur et le dénominateur tendent vers $0$ : c'est une forme indéterminée $\frac00$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Faire apparaître un taux d'accroissement", b: R`<p>Comme $\sin0 = 0$, on peut écrire</p>$$\frac{\sin x}{x} = \frac{\sin x-\sin0}{x-0}.$$<p>C'est le <span data-k="taux">taux d'accroissement</span> de la fonction $\sin$ entre $0$ et $x$.</p>` },
-    { t: "Utiliser la dérivée", b: R`<p>La fonction $\sin$ est dérivable en $0$, de dérivée $\cos0 = 1$. Le taux d'accroissement tend donc vers $\sin'(0)$.</p>`, rappels: ["taux-accroissement"] },
-    { t: "Conclusion", b: R`$$\lim_{x\to0}\frac{\sin x}{x} = \sin'(0) = \cos0 = 1.$$<p>Ce résultat est à connaître par cœur.</p>` }
+    { t: "Reconnaître le problème", h: R`<p>Remplace $x$ par $0$ en haut et en bas.</p>`, b: R`<p>Le numérateur et le dénominateur tendent vers $0$ : c'est une forme indéterminée $\frac00$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Faire apparaître un taux d'accroissement", h: R`<p>$\sin0 = 0$ : fais apparaître $\frac{\sin x-\sin0}{x-0}$.</p>`, b: R`<p>Comme $\sin0 = 0$, on peut écrire</p>$$\frac{\sin x}{x} = \frac{\sin x-\sin0}{x-0}.$$<p>C'est le <span data-k="taux">taux d'accroissement</span> de la fonction $\sin$ entre $0$ et $x$.</p>` },
+    { t: "Utiliser la dérivée", h: R`<p>La limite d'un taux d'accroissement en $a$ est la dérivée en $a$.</p>`, b: R`<p>La fonction $\sin$ est dérivable en $0$, de dérivée $\cos0 = 1$. Le taux d'accroissement tend donc vers $\sin'(0)$.</p>`, rappels: ["taux-accroissement"] },
+    { t: "Conclusion", h: R`<p>$\sin' = \cos$.</p>`, b: R`$$\lim_{x\to0}\frac{\sin x}{x} = \sin'(0) = \cos0 = 1.$$<p>Ce résultat est à connaître par cœur.</p>` }
   ],
   piege: R`Écrire « $\frac{\sin x}{x}\to\frac00$ donc la limite n'existe pas » : $\frac00$ est une forme indéterminée, pas une absence de limite.`,
   methode: R`Une forme $\frac00$ de la forme $\frac{f(x)-f(a)}{x-a}$ se règle par la dérivée de $f$ en $a$.`,
@@ -659,9 +659,9 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le problème", b: R`<p>$\sin(\ln x)$ <span data-k="osc">n'a pas de limite</span> en $0^+$ : on ne peut pas utiliser la règle sur les produits. Mais il est <span data-k="bornee">borné</span>.</p>` },
-    { t: "Encadrer", b: R`<p>Pour $x>0$ :</p>$$|x\sin(\ln x)| = x\,|\sin(\ln x)|\leqslant x.$$`, rappels: ["borne-zero"] },
-    { t: "Conclusion", b: R`<p>Le majorant $x$ tend vers $0$. Par encadrement :</p>$$\lim_{x\to0^+}x\sin(\ln x) = 0.$$`, rappels: ["encadrement"] }
+    { t: "Le problème", h: R`<p>$\ln x\to-\infty$ : le sinus oscille. Est-il borné ?</p>`, b: R`<p>$\sin(\ln x)$ <span data-k="osc">n'a pas de limite</span> en $0^+$ : on ne peut pas utiliser la règle sur les produits. Mais il est <span data-k="bornee">borné</span>.</p>` },
+    { t: "Encadrer", h: R`<p>Utilise $|\sin|\leqslant1$.</p>`, b: R`<p>Pour $x>0$ :</p>$$|x\sin(\ln x)| = x\,|\sin(\ln x)|\leqslant x.$$`, rappels: ["borne-zero"] },
+    { t: "Conclusion", h: R`<p>Le majorant tend vers $0$ : théorème d'encadrement.</p>`, b: R`<p>Le majorant $x$ tend vers $0$. Par encadrement :</p>$$\lim_{x\to0^+}x\sin(\ln x) = 0.$$`, rappels: ["encadrement"] }
   ],
   piege: R`Chercher la limite de $\sin(\ln x)$ : elle n'existe pas, et on n'en a pas besoin.`,
   methode: R`Borné fois une quantité qui tend vers $0$ : la limite est $0$. On le justifie par $|fg|\leqslant M|f|$.`,
@@ -680,9 +680,9 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le piège apparent", b: R`<p>On pourrait croire à une forme $(+\infty)\times0$. Ce n'est vrai qu'<span data-k="apriori">a priori</span>.</p>` },
-    { t: "Regarder la partie entière", b: R`<p>Pour $x\in\,]0,1[$, <span data-k="pe">$\lfloor x\rfloor = 0$</span>. Donc, sur cet intervalle,</p>$$\frac1x\lfloor x\rfloor = \frac1x\times0 = 0.$$`, rappels: ["partie-entiere"] },
-    { t: "Conclusion", b: R`<p>La fonction est constante égale à $0$ sur $]0,1[$, donc</p>$$\lim_{x\to0^+}\frac1x\lfloor x\rfloor = 0.$$` }
+    { t: "Le piège apparent", h: R`<p>Avant de calculer, regarde ce que vaut $\lfloor x\rfloor$ pour $x$ proche de $0$, mais positif.</p>`, b: R`<p>On pourrait croire à une forme $(+\infty)\times0$. Ce n'est vrai qu'<span data-k="apriori">a priori</span>.</p>` },
+    { t: "Regarder la partie entière", h: R`<p>Pour $0< x< 1$, quel est le plus grand entier $\leqslant x$ ?</p>`, b: R`<p>Pour $x\in\,]0,1[$, <span data-k="pe">$\lfloor x\rfloor = 0$</span>. Donc, sur cet intervalle,</p>$$\frac1x\lfloor x\rfloor = \frac1x\times0 = 0.$$`, rappels: ["partie-entiere"] },
+    { t: "Conclusion", h: R`<p>Une fonction constante sur un voisinage a pour limite cette constante.</p>`, b: R`<p>La fonction est constante égale à $0$ sur $]0,1[$, donc</p>$$\lim_{x\to0^+}\frac1x\lfloor x\rfloor = 0.$$` }
   ],
   piege: R`Appliquer mécaniquement une méthode de forme indéterminée sans regarder ce que vaut vraiment l'expression près du point.`,
   methode: R`Avant de calculer, simplifie l'expression sur un voisinage du point : la partie entière y est souvent constante.`,
@@ -701,9 +701,9 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Quand $x\to1^+$, $\ln x\to0^+$ et $\ln(\ln x)\to-\infty$ : c'est une forme indéterminée $0\times(-\infty)$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Reconnaître une composition", b: R`<p>Posons $X = \ln x$. <span data-k="compo">L'expression s'écrit</span></p>$$\ln(x)\ln(\ln x) = X\ln X,$$<p>et $X\to0^+$ quand $x\to1^+$.</p>`, rappels: ["composition-limites"] },
-    { t: "Conclusion", b: R`<p>Par croissances comparées, <span data-k="xlnx">$X\ln X\to0$</span> quand $X\to0^+$. Donc</p>$$\lim_{x\to1^+}\ln(x)\ln(\ln x) = 0.$$`, rappels: ["croissances-comparees"] }
+    { t: "Reconnaître le problème", h: R`<p>Quand $x\to1^+$, $\ln x\to0^+$. Et $\ln$ d'un nombre qui tend vers $0^+$ ?</p>`, b: R`<p>Quand $x\to1^+$, $\ln x\to0^+$ et $\ln(\ln x)\to-\infty$ : c'est une forme indéterminée $0\times(-\infty)$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Reconnaître une composition", h: R`<p>Pose $X = \ln x$.</p>`, b: R`<p>Posons $X = \ln x$. <span data-k="compo">L'expression s'écrit</span></p>$$\ln(x)\ln(\ln x) = X\ln X,$$<p>et $X\to0^+$ quand $x\to1^+$.</p>`, rappels: ["composition-limites"] },
+    { t: "Conclusion", h: R`<p>Croissances comparées : $X\ln X$ en $0^+$.</p>`, b: R`<p>Par croissances comparées, <span data-k="xlnx">$X\ln X\to0$</span> quand $X\to0^+$. Donc</p>$$\lim_{x\to1^+}\ln(x)\ln(\ln x) = 0.$$`, rappels: ["croissances-comparees"] }
   ],
   piege: R`Oublier que l'étude n'a de sens que pour $x>1$ : pour $x<1$, $\ln x<0$ et $\ln(\ln x)$ n'existe pas.`,
   methode: R`Si l'expression ne dépend que d'une quantité $u(x)$, pose $X = u(x)$ et ramène-toi à une limite connue.`,
@@ -722,10 +722,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Le numérateur et le dénominateur tendent vers $0$ : forme indéterminée $\frac00$, mais en $\frac\pi2$ et non en $0$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Se ramener en 0", b: R`<p>On <span data-k="trans">translate</span> : posons $h = x-\frac\pi2$, qui tend vers $0$. Alors $2x = \pi+2h$ et $\pi-2x = -2h$.</p>`, rappels: ["translation"] },
-    { t: "Simplifier", b: R`<p>Comme <span data-k="sinpi">$\sin(\pi+2h) = -\sin(2h)$</span> :</p>$$\frac{\sin(2x)}{\pi-2x} = \frac{-\sin(2h)}{-2h} = \frac{\sin(2h)}{2h}.$$` },
-    { t: "Conclusion", b: R`<p>Avec $u = 2h\to0$, $\dfrac{\sin u}{u}\to1$. Donc</p>$$\lim_{x\to\pi/2}\frac{\sin(2x)}{\pi-2x} = 1.$$`, rappels: ["composition-limites"] }
+    { t: "Reconnaître le problème", h: R`<p>Remplace $x$ par $\frac\pi2$ : $\sin\pi = \,?$</p>`, b: R`<p>Le numérateur et le dénominateur tendent vers $0$ : forme indéterminée $\frac00$, mais en $\frac\pi2$ et non en $0$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Se ramener en 0", h: R`<p>On sait traiter les limites en $0$ : pose $h = x-\frac\pi2$.</p>`, b: R`<p>On <span data-k="trans">translate</span> : posons $h = x-\frac\pi2$, qui tend vers $0$. Alors $2x = \pi+2h$ et $\pi-2x = -2h$.</p>`, rappels: ["translation"] },
+    { t: "Simplifier", h: R`<p>$\sin(\pi+a) = -\sin a$.</p>`, b: R`<p>Par la formule $\sin(a+b) = \sin a\cos b+\cos a\sin b$ avec $a = \pi$ : $\sin(\pi+2h) = \underbrace{\sin\pi}_{0}\cos2h+\underbrace{\cos\pi}_{-1}\sin2h$, donc <span data-k="sinpi">$\sin(\pi+2h) = -\sin(2h)$</span>. Et $\pi-2x = \pi-(\pi+2h) = -2h$ :</p>$$\frac{\sin(2x)}{\pi-2x} = \frac{-\sin(2h)}{-2h} = \frac{\sin(2h)}{2h}.$$` },
+    { t: "Conclusion", h: R`<p>Pose $u = 2h$ et utilise $\frac{\sin u}u\to1$.</p>`, b: R`<p>Avec $u = 2h\to0$, $\dfrac{\sin u}{u}\to1$. Donc</p>$$\lim_{x\to\pi/2}\frac{\sin(2x)}{\pi-2x} = 1.$$`, rappels: ["composition-limites"] }
   ],
   piege: R`Écrire la flèche « $h\to0$ » en oubliant que c'est $x$ qui tend vers $\frac\pi2$ : $h$ est une fonction de $x$, c'est une composition.`,
   methode: R`Pour une limite en $a\neq0$, pose $x = a+h$ et ramène-toi à une limite usuelle en $0$.`,
@@ -743,10 +743,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Reconnaître le problème", b: R`<p>Forme indéterminée $\frac00$.</p>`, rappels: ["formes-indeterminees"] },
-    { t: "Retourner la fraction", b: R`<p>Comme $\ln1 = 0$ :</p>$$\frac{x-1}{\ln x} = \frac{1}{\dfrac{\ln x-\ln1}{x-1}}.$$<p>Au dénominateur, on reconnaît <span data-k="inv">un taux d'accroissement</span> de $\ln$ en $1$.</p>` },
-    { t: "Utiliser la dérivée", b: R`<p>$\ln$ est dérivable en $1$, de dérivée $\frac11 = 1$. Donc $\dfrac{\ln x-\ln1}{x-1}\to1$.</p>`, rappels: ["taux-accroissement"] },
-    { t: "Conclusion", b: R`$$\lim_{x\to1}\frac{x-1}{\ln x} = \frac11 = 1.$$` }
+    { t: "Reconnaître le problème", h: R`<p>Remplace $x$ par $1$ : $\ln1 = \,?$</p>`, b: R`<p>En $x = 1$ : le numérateur vaut $1-1 = 0$ et le dénominateur $\ln1 = 0$. C'est une forme indéterminée $\frac00$.</p>`, rappels: ["formes-indeterminees"] },
+    { t: "Retourner la fraction", h: R`<p>Écris $\frac{x-1}{\ln x} = 1\Big/\frac{\ln x}{x-1}$ et utilise $\ln1 = 0$.</p>`, b: R`<p>Comme $\ln1 = 0$ :</p>$$\frac{x-1}{\ln x} = \frac{1}{\dfrac{\ln x-\ln1}{x-1}}.$$<p>Au dénominateur, on reconnaît <span data-k="inv">un taux d'accroissement</span> de $\ln$ en $1$.</p>` },
+    { t: "Utiliser la dérivée", h: R`<p>Dérivée de $\ln$ en $1$ ?</p>`, b: R`<p>$\ln$ est dérivable en $1$, de dérivée $\frac11 = 1$. Donc $\dfrac{\ln x-\ln1}{x-1}\to1$.</p>`, rappels: ["taux-accroissement"] },
+    { t: "Conclusion", h: R`<p>L'inverse d'une quantité qui tend vers $1$.</p>`, b: R`$$\lim_{x\to1}\frac{x-1}{\ln x} = \frac11 = 1.$$` }
   ],
   piege: R`Chercher directement un taux d'accroissement dans $\frac{x-1}{\ln x}$ : il est « à l'envers ».`,
   methode: R`Si la fraction est l'inverse d'un taux d'accroissement, retourne-la, calcule la dérivée, puis prends l'inverse.`,
@@ -768,12 +768,12 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La stratégie", b: R`<p>$f$ est continue sur $\mathbb R$ si elle est continue en chaque point $a$. On sépare trois cas : $a>0$, $a<0$, et le point de <span data-k="jonction">jonction</span> $a = 0$.</p>` },
-    { t: "Cas a > 0", b: R`<p>Sur un <span data-k="voisinage">voisinage</span> de $a$, tous les $x$ sont positifs, donc $f(x) = x^2$. Quand $x\to a$, $f(x)\to a^2 = f(a)$ : $f$ est continue en $a$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Cas a < 0", b: R`<p>De même, au voisinage de $a$ on a $f(x) = -x^2\to-a^2 = f(a)$. $f$ est continue en $a$.</p>` },
-    { t: "Cas a = 0, à droite", b: R`<p>On ne peut pas raisonner pareil : tout voisinage de $0$ contient des $x$ positifs et négatifs. On étudie donc chaque côté. Pour $x>0$, $f(x) = x^2\to0 = f(0)$ : $f$ est continue à droite en $0$.</p>`, rappels: ["continuite-droite-gauche"] },
-    { t: "Cas a = 0, à gauche", b: R`<p>Pour $x<0$, $f(x) = -x^2\to0 = f(0)$ : $f$ est continue à gauche en $0$. Étant continue des deux côtés, elle est continue en $0$.</p>`, rappels: ["continuite-droite-gauche"] },
-    { t: "Conclusion et raccourci", b: R`<p>$f$ est continue sur $\mathbb R$. On pouvait aussi remarquer que $f(x) = x\,|x|$ pour tout $x$ : c'est un produit de fonctions continues.</p>`, rappels: ["continuite-operations"] }
+    { t: "La stratégie", h: R`<p>La formule change en $0$ : ce point demande un traitement à part.</p>`, b: R`<p>$f$ est continue sur $\mathbb R$ si elle est continue en chaque point $a$. On sépare trois cas : $a>0$, $a<0$, et le point de <span data-k="jonction">jonction</span> $a = 0$.</p>` },
+    { t: "Cas a > 0", h: R`<p>Près d'un $a>0$, quelle formule donne $f(x)$ ?</p>`, b: R`<p>Sur un <span data-k="voisinage">voisinage</span> de $a$, tous les $x$ sont positifs, donc $f(x) = x^2$. Quand $x\to a$, $f(x)\to a^2 = f(a)$ : $f$ est continue en $a$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Cas a < 0", h: R`<p>Même raisonnement que pour $a>0$, avec l'autre formule.</p>`, b: R`<p>De même, au voisinage de $a$ on a $f(x) = -x^2\to-a^2 = f(a)$. $f$ est continue en $a$.</p>` },
+    { t: "Cas a = 0, à droite", h: R`<p>Calcule la limite de $f(x)$ quand $x\to0$ avec $x>0$, et compare à $f(0)$.</p>`, b: R`<p>On ne peut pas raisonner pareil : tout voisinage de $0$ contient des $x$ positifs et négatifs. On étudie donc chaque côté. Pour $x>0$, $f(x) = x^2\to0 = f(0)$ : $f$ est continue à droite en $0$.</p>`, rappels: ["continuite-droite-gauche"] },
+    { t: "Cas a = 0, à gauche", h: R`<p>Même chose avec $x< 0$.</p>`, b: R`<p>Pour $x<0$, $f(x) = -x^2\to0 = f(0)$ : $f$ est continue à gauche en $0$. Étant continue des deux côtés, elle est continue en $0$.</p>`, rappels: ["continuite-droite-gauche"] },
+    { t: "Conclusion et raccourci", h: R`<p>Peux-tu écrire $f$ avec une seule formule ? Pense à $|x|$.</p>`, b: R`<p>$f$ est continue sur $\mathbb R$. On pouvait aussi remarquer que $f(x) = x\,|x|$ pour tout $x$ : c'est un produit de fonctions continues.</p>`, rappels: ["continuite-operations"] }
   ],
   piege: R`Étudier seulement les formules sans regarder le point de jonction : c'est le seul endroit où la continuité peut casser.`,
   methode: R`Pour une fonction définie par morceaux, la continuité au point de jonction se montre par la continuité à gauche et à droite.`,
@@ -791,10 +791,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'idée", b: R`<p>Le maximum n'est pas une opération « classique ». On va l'écrire avec des opérations dont on connaît la continuité : somme, produit par une constante, valeur absolue.</p>` },
-    { t: "Une formule pour le max", b: R`<p>Montrons <span data-k="formule">la formule</span> $\max(a,b) = \frac12\big(a+b+|a-b|\big)$.</p><ul><li>Si $a\geqslant b$ : $|a-b| = a-b$ et $\frac12(a+b+a-b) = a$.</li><li>Si $a< b$ : $|a-b| = b-a$ et $\frac12(a+b+b-a) = b$.</li></ul><p>Dans les deux cas on obtient bien le plus grand des deux.</p>` },
-    { t: "Appliquer à f et g", b: R`$$\sup(f,g) = \frac12\big(f+g+|f-g|\big).$$` },
-    { t: "Conclusion", b: R`<p>$f+g$ et $f-g$ sont continues. $|f-g|$ est la composée de $f-g$ par la valeur absolue, qui est continue. La somme et le produit par $\frac12$ conservent la continuité : $\sup(f,g)$ est continue.</p>`, rappels: ["continuite-operations"] }
+    { t: "L'idée", h: R`<p>On connaît la continuité des sommes, produits, valeurs absolues. Peut-on exprimer un max avec ça ?</p>`, b: R`<p>Le maximum n'est pas une opération « classique ». On va l'écrire avec des opérations dont on connaît la continuité : somme, produit par une constante, valeur absolue.</p>` },
+    { t: "Une formule pour le max", h: R`<p>Distingue $a\geqslant b$ et $a< b$ pour simplifier $|a-b|$.</p>`, b: R`<p>Montrons <span data-k="formule">la formule</span> $\max(a,b) = \frac12\big(a+b+|a-b|\big)$.</p><ul><li>Si $a\geqslant b$ : $|a-b| = a-b$ et $\frac12(a+b+a-b) = a$.</li><li>Si $a< b$ : $|a-b| = b-a$ et $\frac12(a+b+b-a) = b$.</li></ul><p>Dans les deux cas on obtient bien le plus grand des deux.</p>` },
+    { t: "Appliquer à f et g", h: R`<p>Applique la formule avec $a = f(x)$ et $b = g(x)$.</p>`, b: R`$$\sup(f,g) = \frac12\big(f+g+|f-g|\big).$$` },
+    { t: "Conclusion", h: R`<p>Justifie la continuité de chaque morceau : $f+g$, $f-g$, puis $|f-g|$.</p>`, b: R`<p>$f+g$ et $f-g$ sont continues. $|f-g|$ est la composée de $f-g$ par la valeur absolue, qui est continue. La somme et le produit par $\frac12$ conservent la continuité : $\sup(f,g)$ est continue.</p>`, rappels: ["continuite-operations"] }
   ],
   piege: R`Raisonner « en chaque point, le max vaut $f$ ou $g$, donc il est continu » : le choix entre $f$ et $g$ peut changer d'un point à l'autre.`,
   methode: R`Pour prouver une continuité, écris la fonction à l'aide d'opérations dont tu connais la continuité.`,
@@ -813,10 +813,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Traduire l'hypothèse", b: R`<p>Le produit est $\leqslant0$ : $g(a)-f(a)$ et $g(b)-f(b)$ sont <span data-k="signes">de signes opposés</span> (au sens large).</p>` },
-    { t: "La fonction auxiliaire", b: R`<p>On pose <span data-k="aux">$\varphi = g-f$</span>. Elle est continue sur $[a,b]$ comme différence de fonctions continues, et $\varphi(a)\varphi(b)\leqslant0$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Appliquer le TVI", b: R`<p>$\varphi$ est continue sur l'intervalle $[a,b]$ et $0$ est compris entre $\varphi(a)$ et $\varphi(b)$. Par le théorème des valeurs intermédiaires, il existe $x\in[a,b]$ tel que $\varphi(x) = 0$.</p>`, rappels: ["tvi"] },
-    { t: "Conclusion", b: R`<p>En ce point, $g(x)-f(x) = 0$, c'est-à-dire $f(x) = g(x)$.</p>` }
+    { t: "Traduire l'hypothèse", h: R`<p>Un produit $\leqslant0$ : que dire des signes des deux facteurs ?</p>`, b: R`<p>Le produit est $\leqslant0$ : $g(a)-f(a)$ et $g(b)-f(b)$ sont <span data-k="signes">de signes opposés</span> (au sens large).</p>` },
+    { t: "La fonction auxiliaire", h: R`<p>Résoudre $f(x) = g(x)$, c'est annuler une fonction. Laquelle ?</p>`, b: R`<p>On pose <span data-k="aux">$\varphi = g-f$</span>. Elle est continue sur $[a,b]$ comme différence de fonctions continues, et $\varphi(a)\varphi(b)\leqslant0$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Appliquer le TVI", h: R`<p>Une fonction continue sur un intervalle, qui change de signe : quel théorème ?</p>`, b: R`<p>$\varphi$ est continue sur l'intervalle $[a,b]$ et $0$ est compris entre $\varphi(a)$ et $\varphi(b)$. Par le théorème des valeurs intermédiaires, il existe $x\in[a,b]$ tel que $\varphi(x) = 0$.</p>`, rappels: ["tvi"] },
+    { t: "Conclusion", h: R`<p>Traduis $\varphi(x) = 0$.</p>`, b: R`<p>En ce point, $g(x)-f(x) = 0$, c'est-à-dire $f(x) = g(x)$.</p>` }
   ],
   piege: R`Appliquer le TVI à $f$ et à $g$ séparément : il faut une seule fonction qui change de signe.`,
   methode: R`Pour résoudre $f(x) = g(x)$, étudie le signe de $g-f$ et applique le TVI à cette différence.`
@@ -834,10 +834,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'idée", b: R`<p>Une fonction croissante comme $x$ est minorée par sa valeur en $0$. Il faut donc une fonction qui <span data-k="osc">oscille</span> de plus en plus fort. Candidat : $f(x) = x\cos x$.</p>` },
-    { t: "Continuité", b: R`<p>$f$ est le produit de deux fonctions continues : elle est continue sur $[0,+\infty[$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Non majorée", b: R`<p>Pour $n\in\mathbb N$, $f(2n\pi) = 2n\pi\cos(2n\pi) = 2n\pi$, qui tend vers $+\infty$. Aucun réel $M$ ne peut majorer toutes ces valeurs : $f$ n'est <span data-k="majoree">pas majorée</span>.</p>` },
-    { t: "Non minorée", b: R`<p>$f\big((2n+1)\pi\big) = (2n+1)\pi\cos\big((2n+1)\pi\big) = -(2n+1)\pi$, qui tend vers $-\infty$. $f$ n'est pas minorée.</p>` }
+    { t: "L'idée", h: R`<p>Il faut une fonction qui monte de plus en plus haut ET descend de plus en plus bas. Pense à une oscillation dont l'amplitude grandit.</p>`, b: R`<p>Une fonction croissante comme $x$ est minorée par sa valeur en $0$. Il faut donc une fonction qui <span data-k="osc">oscille</span> de plus en plus fort. Candidat : $f(x) = x\cos x$.</p>` },
+    { t: "Continuité", h: R`<p>Produit de fonctions continues.</p>`, b: R`<p>$f$ est le produit de deux fonctions continues : elle est continue sur $[0,+\infty[$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Non majorée", h: R`<p>Choisis des points où $\cos x = 1$.</p>`, b: R`<p>Pour $n\in\mathbb N$, $f(2n\pi) = 2n\pi\cos(2n\pi) = 2n\pi$, qui tend vers $+\infty$. Aucun réel $M$ ne peut majorer toutes ces valeurs : $f$ n'est <span data-k="majoree">pas majorée</span>.</p>` },
+    { t: "Non minorée", h: R`<p>Choisis des points où $\cos x = -1$.</p>`, b: R`<p>$f\big((2n+1)\pi\big) = (2n+1)\pi\cos\big((2n+1)\pi\big) = -(2n+1)\pi$, qui tend vers $-\infty$. $f$ n'est pas minorée.</p>` }
   ],
   piege: R`Proposer une fonction qui tend vers $+\infty$ : elle est minorée, car continue sur $[0,+\infty[$ et grande à l'infini.`,
   methode: R`Pour montrer qu'une fonction n'est pas majorée, trouve une suite de points dont les images tendent vers $+\infty$.`,
@@ -855,10 +855,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'idée", b: R`<p>Quand $x\to0^+$, $\frac1x\to+\infty$. La fonction $f(x) = \cos\frac1x$ oscille donc de plus en plus vite près de $0$. Elle est continue sur $]0,+\infty[$ comme composée de fonctions continues.</p>`, rappels: ["continuite-operations"] },
-    { t: "La méthode", b: R`<p>Pour montrer qu'il n'y a pas de limite, on cherche <span data-k="deux">deux suites</span> qui tendent vers $0$ et dont les images ont des limites différentes.</p>`, rappels: ["sequentielle"] },
-    { t: "Les deux suites", b: R`<p>Posons $u_n = \dfrac{1}{2n\pi}$ et $v_n = \dfrac{1}{(2n+1)\pi}$ pour $n\geqslant1$. Les deux tendent vers $0$ par valeurs positives.</p>$$f(u_n) = \cos(2n\pi) = 1\qquad f(v_n) = \cos\big((2n+1)\pi\big) = -1.$$` },
-    { t: "Conclusion", b: R`<p>Si $f$ avait une limite $\ell$ en $0$, on aurait $f(u_n)\to\ell$ et $f(v_n)\to\ell$, donc $\ell = 1$ et $\ell = -1$. C'est impossible : $f$ n'a pas de limite en $0$.</p>`, rappels: ["unicite-limite"] }
+    { t: "L'idée", h: R`<p>Cherche une fonction qui oscille de plus en plus vite près de $0$ : $\cos$ de quelque chose qui tend vers $+\infty$.</p>`, b: R`<p>Quand $x\to0^+$, $\frac1x\to+\infty$. La fonction $f(x) = \cos\frac1x$ oscille donc de plus en plus vite près de $0$. Elle est continue sur $]0,+\infty[$ comme composée de fonctions continues.</p>`, rappels: ["continuite-operations"] },
+    { t: "La méthode", h: R`<p>Caractérisation séquentielle : si $f\to\ell$, alors $f(x_n)\to\ell$ pour toute suite $x_n\to0$.</p>`, b: R`<p>Pour montrer qu'il n'y a pas de limite, on cherche <span data-k="deux">deux suites</span> qui tendent vers $0$ et dont les images ont des limites différentes.</p>`, rappels: ["sequentielle"] },
+    { t: "Les deux suites", h: R`<p>Choisis $x$ tel que $\frac1x = 2n\pi$, puis tel que $\frac1x = (2n+1)\pi$.</p>`, b: R`<p>Posons $u_n = \dfrac{1}{2n\pi}$ et $v_n = \dfrac{1}{(2n+1)\pi}$ pour $n\geqslant1$. Les deux tendent vers $0$ par valeurs positives.</p>$$f(u_n) = \cos(2n\pi) = 1\qquad f(v_n) = \cos\big((2n+1)\pi\big) = -1.$$` },
+    { t: "Conclusion", h: R`<p>La limite, si elle existait, serait unique.</p>`, b: R`<p>Si $f$ avait une limite $\ell$ en $0$, on aurait $f(u_n)\to\ell$ et $f(v_n)\to\ell$, donc $\ell = 1$ et $\ell = -1$. C'est impossible : $f$ n'a pas de limite en $0$.</p>`, rappels: ["unicite-limite"] }
   ],
   piege: R`Dire « ça oscille, donc pas de limite » sans preuve : $x\sin\frac1x$ oscille aussi, et pourtant tend vers $0$.`,
   methode: R`Pour prouver qu'une limite n'existe pas : deux suites qui tendent vers le point, des images aux limites différentes.`,
@@ -877,11 +877,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le candidat", b: R`<p>On prend <span data-k="indic">l'indicatrice de $\mathbb Q$</span> : $\mathbf 1_{\mathbb Q}(x) = 1$ si $x\in\mathbb Q$, et $0$ sinon.</p>` },
-    { t: "La méthode", b: R`<p>Si $f$ est continue en $a$, alors pour toute suite $x_n\to a$, on a $f(x_n)\to f(a)$. On va trouver, en chaque point, une suite qui contredit cela.</p>`, rappels: ["sequentielle"] },
-    { t: "En un point irrationnel", b: R`<p>Soit $a\notin\mathbb Q$, donc $f(a) = 0$. Par <span data-k="dense">densité</span>, il existe une suite de rationnels $u_n\to a$. Alors $f(u_n) = 1\to1\neq0 = f(a)$ : $f$ n'est pas continue en $a$.</p>`, rappels: ["densite"] },
-    { t: "En un point rationnel", b: R`<p>Soit $a\in\mathbb Q$, donc $f(a) = 1$. Il existe une suite d'irrationnels $v_n\to a$. Alors $f(v_n) = 0\to0\neq1 = f(a)$ : $f$ n'est pas continue en $a$.</p>`, rappels: ["densite"] },
-    { t: "Conclusion", b: R`<p>Tout réel est rationnel ou irrationnel : $\mathbf 1_{\mathbb Q}$ n'est continue en aucun point de $\mathbb R$.</p>` }
+    { t: "Le candidat", h: R`<p>Une fonction qui « saute » partout : sépare les rationnels et les irrationnels.</p>`, b: R`<p>On prend <span data-k="indic">l'indicatrice de $\mathbb Q$</span> : $\mathbf 1_{\mathbb Q}(x) = 1$ si $x\in\mathbb Q$, et $0$ sinon.</p>` },
+    { t: "La méthode", h: R`<p>Pour montrer qu'une fonction n'est pas continue en $a$ : une suite $x_n\to a$ avec $f(x_n)\not\to f(a)$.</p>`, b: R`<p>Si $f$ est continue en $a$, alors pour toute suite $x_n\to a$, on a $f(x_n)\to f(a)$. On va trouver, en chaque point, une suite qui contredit cela.</p>`, rappels: ["sequentielle"] },
+    { t: "En un point irrationnel", h: R`<p>$\mathbb Q$ est dense : tout irrationnel est limite d'une suite de rationnels.</p>`, b: R`<p>Soit $a\notin\mathbb Q$, donc $f(a) = 0$. Par <span data-k="dense">densité</span>, il existe une suite de rationnels $u_n\to a$. Alors $f(u_n) = 1\to1\neq0 = f(a)$ : $f$ n'est pas continue en $a$.</p>`, rappels: ["densite"] },
+    { t: "En un point rationnel", h: R`<p>Les irrationnels sont aussi denses, par exemple $a+\frac{\sqrt2}n$.</p>`, b: R`<p>Soit $a\in\mathbb Q$, donc $f(a) = 1$. Il existe une suite d'irrationnels $v_n\to a$. Alors $f(v_n) = 0\to0\neq1 = f(a)$ : $f$ n'est pas continue en $a$.</p>`, rappels: ["densite"] },
+    { t: "Conclusion", h: R`<p>Tout réel est dans l'un des deux cas.</p>`, b: R`<p>Tout réel est rationnel ou irrationnel : $\mathbf 1_{\mathbb Q}$ n'est continue en aucun point de $\mathbb R$.</p>` }
   ],
   piege: R`Traiter seulement les irrationnels. Il faut les deux cas pour couvrir tous les réels.`,
   methode: R`Pour prouver une discontinuité en $a$, trouve une suite $x_n\to a$ telle que $f(x_n)$ ne tende pas vers $f(a)$.`
@@ -903,11 +903,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'intuition", b: R`<p>Une fonction périodique répète les mêmes valeurs à l'infini. Si elle se stabilise vers $\ell$, c'est qu'elle valait déjà $\ell$ partout. On va le prouver.</p>` },
-    { t: "Projeter x à l'infini", b: R`<p>Soit $T>0$ une période et $x$ un réel <span data-k="fixe">fixé</span>. Par périodicité, pour tout $n\in\mathbb N$ :</p>$$f(x+nT) = f(x).$$<p>C'est l'idée de <span data-k="proj">projeter</span> le calcul de $f(x)$ à l'infini.</p>`, rappels: ["periodique"] },
-    { t: "Passer à la limite", b: R`<p>Quand $n\to+\infty$, $x+nT\to+\infty$. Par caractérisation séquentielle, $f(x+nT)\to\ell$.</p>`, rappels: ["sequentielle"] },
-    { t: "Comparer", b: R`<p>Mais la suite $\big(f(x+nT)\big)_n$ est constante, égale à $f(x)$ : elle tend aussi vers $f(x)$. Par unicité de la limite, $f(x) = \ell$.</p>`, rappels: ["unicite-limite"] },
-    { t: "Conclusion", b: R`<p>Ceci vaut pour tout réel $x$ : $f$ est constante, égale à $\ell$.</p>` }
+    { t: "L'intuition", h: R`<p>Dessine une fonction périodique non constante : peut-elle se stabiliser en $+\infty$ ?</p>`, b: R`<p>Une fonction périodique répète les mêmes valeurs à l'infini. Si elle se stabilise vers $\ell$, c'est qu'elle valait déjà $\ell$ partout. On va le prouver.</p>` },
+    { t: "Projeter x à l'infini", h: R`<p>Si $T$ est une période, que vaut $f(x+T)$ ? $f(x+2T)$ ? $f(x+nT)$ ?</p>`, b: R`<p>Soit $T>0$ une période et $x$ un réel <span data-k="fixe">fixé</span>. Par périodicité, pour tout $n\in\mathbb N$ :</p>$$f(x+nT) = f(x).$$<p>C'est l'idée de <span data-k="proj">projeter</span> le calcul de $f(x)$ à l'infini.</p>`, rappels: ["periodique"] },
+    { t: "Passer à la limite", h: R`<p>La suite $x+nT$ tend vers $+\infty$ : que donne la caractérisation séquentielle ?</p>`, b: R`<p>Quand $n\to+\infty$, $x+nT\to+\infty$. Par caractérisation séquentielle, $f(x+nT)\to\ell$.</p>`, rappels: ["sequentielle"] },
+    { t: "Comparer", h: R`<p>Une suite constante tend vers sa valeur. Combien de limites peut-elle avoir ?</p>`, b: R`<p>Mais la suite $\big(f(x+nT)\big)_n$ est constante, égale à $f(x)$ : elle tend aussi vers $f(x)$. Par unicité de la limite, $f(x) = \ell$.</p>`, rappels: ["unicite-limite"] },
+    { t: "Conclusion", h: R`<p>$x$ était quelconque.</p>`, b: R`<p>Ceci vaut pour tout réel $x$ : $f$ est constante, égale à $\ell$.</p>` }
   ],
   piege: R`Oublier que la conclusion porte sur un $x$ quelconque : il faut fixer $x$ au début, puis conclure pour tout $x$.`,
   methode: R`Pour exploiter une périodicité avec une limite à l'infini, compare $f(x)$ et $f(x+nT)$ quand $n\to+\infty$.`
@@ -926,11 +926,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "(i) ⇒ (ii) · Préparer", b: R`<p>On suppose (i). Soit $[a,b]$ un segment. Posons <span data-k="A">$A = \max(|a|,|b|)$</span>. Alors $[a,b]\subset[-A,A]$.</p>` },
-    { t: "(i) ⇒ (ii) · Utiliser les limites", b: R`<p>Par définition de $|f|\to+\infty$ en $+\infty$ et en $-\infty$, il existe des réels $M$ et $M'$ tels que</p>$$x>M\implies|f(x)|>A\qquad\text{et}\qquad x< M'\implies|f(x)|>A.$$`, rappels: ["def-limite"] },
-    { t: "(i) ⇒ (ii) · Conclure", b: R`<p>Posons $M'' = \max(M,-M')$. Si $|x|>M''$, alors $x>M$ ou $x< M'$, donc $|f(x)|>A$, donc $f(x)\notin[a,b]$.</p><p>Ainsi, tout $x$ de $f^{-1}([a,b])$ vérifie $|x|\leqslant M''$ : cette partie est <span data-k="borne">bornée</span>.</p>` },
-    { t: "(ii) ⇒ (i) · Préparer", b: R`<p>On suppose (ii). Soit $A\geqslant0$ quelconque. Le segment $[-A,A]$ a une image réciproque bornée : il existe $M\geqslant0$ tel que</p>$$f^{-1}([-A,A])\subset[-M,M].$$` },
-    { t: "(ii) ⇒ (i) · Conclure", b: R`<p>Si $|x|>M$, alors $x\notin f^{-1}([-A,A])$, donc $f(x)\notin[-A,A]$, c'est-à-dire $|f(x)|>A$.</p><p>On a montré : pour tout $A$, il existe $M$ tel que $x>M\implies|f(x)|>A$, et de même pour $x<-M$. C'est exactement $|f|\to+\infty$ en $+\infty$ et en $-\infty$.</p>`, rappels: ["def-limite"] }
+    { t: "(i) ⇒ (ii) · Préparer", h: R`<p>$[a,b]$ est contenu dans un segment centré $[-A,A]$ : choisis $A$.</p>`, b: R`<p>On suppose (i). Soit $[a,b]$ un segment. Posons <span data-k="A">$A = \max(|a|,|b|)$</span>. Alors $[a,b]\subset[-A,A]$.</p>` },
+    { t: "(i) ⇒ (ii) · Utiliser les limites", h: R`<p>Écris la définition de « $|f(x)|\to+\infty$ quand $x\to+\infty$ » avec le seuil $A$.</p>`, b: R`<p>Par définition de $|f|\to+\infty$ en $+\infty$ et en $-\infty$, il existe des réels $M$ et $M'$ tels que</p>$$x>M\implies|f(x)|>A\qquad\text{et}\qquad x< M'\implies|f(x)|>A.$$`, rappels: ["def-limite"] },
+    { t: "(i) ⇒ (ii) · Conclure", h: R`<p>Si $|x|$ est grand, $|f(x)|>A$, donc $f(x)$ ne peut pas être dans $[a,b]$.</p>`, b: R`<p>Posons $M'' = \max(M,-M')$. Si $|x|>M''$, alors $x>M$ ou $x< M'$, donc $|f(x)|>A$, donc $f(x)\notin[a,b]$.</p><p>Ainsi, tout $x$ de $f^{-1}([a,b])$ vérifie $|x|\leqslant M''$ : cette partie est <span data-k="borne">bornée</span>.</p>` },
+    { t: "(ii) ⇒ (i) · Préparer", h: R`<p>Applique (ii) au segment $[-A,A]$.</p>`, b: R`<p>On suppose (ii). Soit $A\geqslant0$ quelconque. Le segment $[-A,A]$ a une image réciproque bornée : il existe $M\geqslant0$ tel que</p>$$f^{-1}([-A,A])\subset[-M,M].$$` },
+    { t: "(ii) ⇒ (i) · Conclure", h: R`<p>Passe au complémentaire : hors de $[-M,M]$, $f(x)$ n'est pas dans $[-A,A]$.</p>`, b: R`<p>Si $|x|>M$, alors $x\notin f^{-1}([-A,A])$, donc $f(x)\notin[-A,A]$, c'est-à-dire $|f(x)|>A$.</p><p>On a montré : pour tout $A$, il existe $M$ tel que $x>M\implies|f(x)|>A$, et de même pour $x<-M$. C'est exactement $|f|\to+\infty$ en $+\infty$ et en $-\infty$.</p>`, rappels: ["def-limite"] }
   ],
   piege: R`Confondre $f^{-1}([a,b])$ avec une fonction réciproque. C'est un ensemble de points, défini pour n'importe quelle fonction.`,
   methode: R`Quand un énoncé mélange limites et ensembles, reviens à la définition quantifiée de la limite et traduis chaque phrase en inégalités.`
@@ -948,11 +948,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La stratégie", b: R`<p>On étudie la continuité en un réel $a$, en <span data-k="cas">distinguant</span> $a\notin\mathbb Z$ et $a\in\mathbb Z$.</p>` },
-    { t: "Cas a non entier", b: R`<p>Sur un petit intervalle autour de $a$, $\lfloor x\rfloor$ est constant égal à $\lfloor a\rfloor$. Donc, près de $a$,</p>$$f(x) = \lfloor a\rfloor+\big(x-\lfloor a\rfloor\big)^2\xrightarrow[x\to a]{}\lfloor a\rfloor+\big(a-\lfloor a\rfloor\big)^2 = f(a).$$<p>$f$ est continue en $a$.</p>`, rappels: ["partie-entiere", "continuite-operations"] },
-    { t: "Cas a entier, à droite", b: R`<p>Pour $x\in[a,a+1[$, $\lfloor x\rfloor = a$, donc $f(x) = a+(x-a)^2\to a$ quand $x\to a^+$. Et $f(a) = a+0 = a$ : $f$ est continue à droite en $a$.</p>`, rappels: ["continuite-droite-gauche"] },
-    { t: "Cas a entier, à gauche", b: R`<p><span data-k="gauche">Pour $x\in[a-1,a[$</span>, $\lfloor x\rfloor = a-1$, donc</p>$$f(x) = a-1+\big(x-(a-1)\big)^2\xrightarrow[x\to a^-]{}a-1+1^2 = a = f(a).$$<p>$f$ est continue à gauche en $a$.</p>`, rappels: ["continuite-droite-gauche"] },
-    { t: "Conclusion", b: R`<p>$f$ est continue à gauche et à droite en tout entier, et continue ailleurs : $f$ est continue sur $\mathbb R$. Le saut de $-1$ de la partie entière est exactement compensé par le carré, qui passe de $1$ à $0$.</p>` }
+    { t: "La stratégie", h: R`<p>Le problème ne peut venir que des points où $\lfloor x\rfloor$ saute : les entiers.</p>`, b: R`<p>On étudie la continuité en un réel $a$, en <span data-k="cas">distinguant</span> $a\notin\mathbb Z$ et $a\in\mathbb Z$.</p>` },
+    { t: "Cas a non entier", h: R`<p>Si $a$ n'est pas entier, $\lfloor x\rfloor$ ne change pas près de $a$.</p>`, b: R`<p>Sur un petit intervalle autour de $a$, $\lfloor x\rfloor$ est constant égal à $\lfloor a\rfloor$. Donc, près de $a$,</p>$$f(x) = \lfloor a\rfloor+\big(x-\lfloor a\rfloor\big)^2\xrightarrow[x\to a]{}\lfloor a\rfloor+\big(a-\lfloor a\rfloor\big)^2 = f(a).$$<p>$f$ est continue en $a$.</p>`, rappels: ["partie-entiere", "continuite-operations"] },
+    { t: "Cas a entier, à droite", h: R`<p>Pour $x$ juste à droite de l'entier $a$, que vaut $\lfloor x\rfloor$ ?</p>`, b: R`<p>Pour $x\in[a,a+1[$, $\lfloor x\rfloor = a$, donc $f(x) = a+(x-a)^2\to a$ quand $x\to a^+$. Et $f(a) = a+0 = a$ : $f$ est continue à droite en $a$.</p>`, rappels: ["continuite-droite-gauche"] },
+    { t: "Cas a entier, à gauche", h: R`<p>Pour $x$ juste à gauche de $a$, $\lfloor x\rfloor = a-1$. Calcule la limite.</p>`, b: R`<p><span data-k="gauche">Pour $x\in[a-1,a[$</span>, $\lfloor x\rfloor = a-1$, donc</p>$$f(x) = a-1+\big(x-(a-1)\big)^2\xrightarrow[x\to a^-]{}a-1+1^2 = a = f(a).$$<p>$f$ est continue à gauche en $a$.</p>`, rappels: ["continuite-droite-gauche"] },
+    { t: "Conclusion", h: R`<p>Compare les limites à gauche, à droite, et $f(a)$.</p>`, b: R`<p>$f$ est continue à gauche et à droite en tout entier, et continue ailleurs : $f$ est continue sur $\mathbb R$. Le saut de $-1$ de la partie entière est exactement compensé par le carré, qui passe de $1$ à $0$.</p>` }
   ],
   piege: R`Conclure « la partie entière n'est pas continue, donc $f$ non plus ». Une somme de fonctions discontinues peut être continue.`,
   methode: R`Avec une partie entière, sépare les points entiers et non entiers, et étudie les entiers par limites à gauche et à droite.`,
@@ -971,11 +971,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'idée", b: R`<p>Une fonction monotone a toujours des limites à gauche et à droite. On va montrer qu'en tout point, elles sont égales à $f(a)$, ce qui donne la continuité.</p>` },
-    { t: "Ce que donne la croissance de f", b: R`<p>Soit $a>0$. Comme $f$ est croissante, ses <span data-k="lg">limites à gauche et à droite</span> existent et</p>$$f(a^-)\leqslant f(a)\leqslant f(a^+).\qquad(1)$$`, rappels: ["monotone-encadrement"] },
-    { t: "Ce que donne la décroissance de f(x)/x", b: R`<p>$x\mapsto\frac{f(x)}x$ est décroissante, donc, <span data-k="sens">avec le sens inversé</span> :</p>$$\lim_{x\to a^+}\frac{f(x)}x\leqslant\frac{f(a)}a\leqslant\lim_{x\to a^-}\frac{f(x)}x.$$<p>Par produit de limites, $\lim_{x\to a^\pm}\frac{f(x)}x = \frac{f(a^\pm)}a$. D'où</p>$$\frac{f(a^+)}a\leqslant\frac{f(a)}a\leqslant\frac{f(a^-)}a.$$`, rappels: ["monotone-encadrement", "operations-limites"] },
-    { t: "Multiplier par a", b: R`<p>Comme $a>0$, on peut multiplier sans changer le sens :</p>$$f(a^+)\leqslant f(a)\leqslant f(a^-).\qquad(2)$$` },
-    { t: "Conclusion", b: R`<p>En combinant (1) et (2) : $f(a^-)\leqslant f(a)\leqslant f(a^+)\leqslant f(a)\leqslant f(a^-)$. Tout est égal : $f(a^-) = f(a) = f(a^+)$. $f$ est continue à gauche et à droite en $a$, donc continue en $a$, et ce pour tout $a>0$.</p>`, rappels: ["continuite-droite-gauche"] }
+    { t: "L'idée", h: R`<p>Une fonction monotone admet des limites à gauche et à droite en tout point. Il suffit de montrer qu'elles valent $f(a)$.</p>`, b: R`<p>Une fonction monotone a toujours des limites à gauche et à droite. On va montrer qu'en tout point, elles sont égales à $f(a)$, ce qui donne la continuité.</p>` },
+    { t: "Ce que donne la croissance de f", h: R`<p>Croissante : à gauche de $a$ les valeurs sont plus petites que $f(a)$, à droite plus grandes.</p>`, b: R`<p>Soit $a>0$. Comme $f$ est croissante, ses <span data-k="lg">limites à gauche et à droite</span> existent et</p>$$f(a^-)\leqslant f(a)\leqslant f(a^+).\qquad(1)$$`, rappels: ["monotone-encadrement"] },
+    { t: "Ce que donne la décroissance de f(x)/x", h: R`<p>Même chose pour $x\mapsto\frac{f(x)}x$, mais décroissante : les inégalités sont dans l'autre sens.</p>`, b: R`<p>$x\mapsto\frac{f(x)}x$ est décroissante, donc, <span data-k="sens">avec le sens inversé</span> :</p>$$\lim_{x\to a^+}\frac{f(x)}x\leqslant\frac{f(a)}a\leqslant\lim_{x\to a^-}\frac{f(x)}x.$$<p>Par produit de limites, $\lim_{x\to a^\pm}\frac{f(x)}x = \frac{f(a^\pm)}a$. D'où</p>$$\frac{f(a^+)}a\leqslant\frac{f(a)}a\leqslant\frac{f(a^-)}a.$$`, rappels: ["monotone-encadrement", "operations-limites"] },
+    { t: "Multiplier par a", h: R`<p>$a>0$ : multiplier par $a$ ne change pas le sens des inégalités.</p>`, b: R`<p>Comme $a>0$, on peut multiplier sans changer le sens :</p>$$f(a^+)\leqslant f(a)\leqslant f(a^-).\qquad(2)$$` },
+    { t: "Conclusion", h: R`<p>Mets bout à bout (1) et (2).</p>`, b: R`<p>En combinant (1) et (2) : $f(a^-)\leqslant f(a)\leqslant f(a^+)\leqslant f(a)\leqslant f(a^-)$. Tout est égal : $f(a^-) = f(a) = f(a^+)$. $f$ est continue à gauche et à droite en $a$, donc continue en $a$, et ce pour tout $a>0$.</p>`, rappels: ["continuite-droite-gauche"] }
   ],
   piege: R`Écrire le même encadrement pour une fonction croissante et pour une fonction décroissante : pour la seconde, il s'inverse.`,
   methode: R`Une fonction monotone a des limites latérales partout. Pour montrer sa continuité, prouve que ces deux limites valent $f(a)$.`
@@ -993,9 +993,9 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'outil", b: R`<p>L'image d'un intervalle par une fonction continue est un intervalle. Donc $f(I)$ est un intervalle.</p>`, rappels: ["image-intervalle"] },
-    { t: "Ce que dit l'hypothèse", b: R`<p>$f$ n'est ni minorée ni majorée : l'intervalle $f(I)$ n'est ni minoré ni majoré.</p>` },
-    { t: "Conclusion", b: R`<p>Soit $y$ réel. Il existe $u,v\in f(I)$ avec $u< y< v$. Comme $f(I)$ est un intervalle, il contient tout ce qui est entre $u$ et $v$, donc $y$. Ainsi <span data-k="inter">$f(I) = \mathbb R$</span> : $f$ est surjective.</p>`, rappels: ["tvi"] }
+    { t: "L'outil", h: R`<p>Que dire de l'image d'un intervalle par une fonction continue ?</p>`, b: R`<p>L'image d'un intervalle par une fonction continue est un intervalle. Donc $f(I)$ est un intervalle.</p>`, rappels: ["image-intervalle"] },
+    { t: "Ce que dit l'hypothèse", h: R`<p>Traduis « non majorée » : pour tout $M$, il existe une valeur $>M$.</p>`, b: R`<p>$f$ n'est ni minorée ni majorée : l'intervalle $f(I)$ n'est ni minoré ni majoré.</p>` },
+    { t: "Conclusion", h: R`<p>Un intervalle contient tout ce qui est entre deux de ses éléments.</p>`, b: R`<p>Soit $y$ réel. Il existe $u,v\in f(I)$ avec $u< y< v$. Comme $f(I)$ est un intervalle, il contient tout ce qui est entre $u$ et $v$, donc $y$. Ainsi <span data-k="inter">$f(I) = \mathbb R$</span> : $f$ est surjective.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Oublier l'hypothèse « $I$ est un intervalle » : sur $\mathbb R^*$, la fonction $x\mapsto\frac1x$ n'est ni minorée ni majorée, et n'atteint pas $0$.`,
   methode: R`Pour montrer qu'une fonction continue atteint une valeur, regarde son image : c'est un intervalle.`
@@ -1013,10 +1013,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Se simplifier la vie", b: R`<p>Si $\ell = \ell'$, il n'y a aucune valeur strictement entre les deux : rien à montrer. Sinon, <span data-k="quitte">quitte à remplacer $f$ par $-f$</span>, on suppose $\ell<\ell'$. Soit $y\in\,]\ell,\ell'[$.</p>` },
-    { t: "f passe sous y", b: R`<p>Montrons qu'il existe $a$ avec $f(a)< y$. Par l'absurde, si $f(x)\geqslant y$ pour tout $x$, alors en passant à la limite en $-\infty$, on obtient $\ell\geqslant y$. C'est faux, car $y>\ell$.</p>`, rappels: ["absurde", "passage-limite"] },
-    { t: "f passe au-dessus de y", b: R`<p>De même, si $f(x)\leqslant y$ pour tout $x$, la limite en $+\infty$ donne $\ell'\leqslant y$ : faux. Il existe donc $b$ avec $f(b)>y$.</p>`, rappels: ["absurde"] },
-    { t: "Appliquer le TVI", b: R`<p>$f$ est continue sur l'intervalle d'extrémités $a$ et $b$, et $y$ est compris entre $f(a)$ et $f(b)$. Par le théorème des valeurs intermédiaires, il existe $x$ avec $f(x) = y$.</p>`, rappels: ["tvi"] }
+    { t: "Se simplifier la vie", h: R`<p>Commence par les cas simples : $\ell = \ell'$, et réduis-toi à $\ell<\ell'$.</p>`, b: R`<p>Si $\ell = \ell'$, il n'y a aucune valeur strictement entre les deux : rien à montrer. Sinon, <span data-k="quitte">quitte à remplacer $f$ par $-f$</span>, on suppose $\ell<\ell'$. Soit $y\in\,]\ell,\ell'[$.</p>` },
+    { t: "f passe sous y", h: R`<p>Par l'absurde : si $f\geqslant y$ partout, que donne le passage à la limite en $-\infty$ ?</p>`, b: R`<p>Montrons qu'il existe $a$ avec $f(a)< y$. Par l'absurde, si $f(x)\geqslant y$ pour tout $x$, alors en passant à la limite en $-\infty$, on obtient $\ell\geqslant y$. C'est faux, car $y>\ell$.</p>`, rappels: ["absurde", "passage-limite"] },
+    { t: "f passe au-dessus de y", h: R`<p>Même raisonnement en $+\infty$.</p>`, b: R`<p>De même, si $f(x)\leqslant y$ pour tout $x$, la limite en $+\infty$ donne $\ell'\leqslant y$ : faux. Il existe donc $b$ avec $f(b)>y$.</p>`, rappels: ["absurde"] },
+    { t: "Appliquer le TVI", h: R`<p>Tu as un point sous $y$ et un point au-dessus : TVI.</p>`, b: R`<p>$f$ est continue sur l'intervalle d'extrémités $a$ et $b$, et $y$ est compris entre $f(a)$ et $f(b)$. Par le théorème des valeurs intermédiaires, il existe $x$ avec $f(x) = y$.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Appliquer le TVI « entre $-\infty$ et $+\infty$ » : le théorème demande deux points réels. Il faut d'abord trouver $a$ et $b$.`,
   methode: R`Pour utiliser une limite dans un TVI, trouve un point réel où $f$ est déjà assez proche de cette limite.`,
@@ -1038,10 +1038,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La fonction auxiliaire", b: R`<p>On pose <span data-k="phi">$\varphi(x) = f(x)-x$</span> sur $[a,b]$. Elle est continue comme différence de fonctions continues. Un point fixe de $f$ est un zéro de $\varphi$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Signe en a", b: R`<p>Par hypothèse, $f(a)\in[a,b]$, donc $f(a)\geqslant a$ et $\varphi(a) = f(a)-a\geqslant0$.</p>` },
-    { t: "Signe en b", b: R`<p>De même, $f(b)\in[a,b]$, donc $f(b)\leqslant b$ et $\varphi(b) = f(b)-b\leqslant0$.</p>` },
-    { t: "Conclusion", b: R`<p>$\varphi$ est continue sur $[a,b]$, positive en $a$ et négative en $b$. Par le théorème des valeurs intermédiaires, elle s'annule en un $x\in[a,b]$ : $f(x) = x$.</p>`, rappels: ["tvi"] }
+    { t: "La fonction auxiliaire", h: R`<p>Un point fixe vérifie $f(x) = x$, c'est-à-dire $f(x)-x = 0$.</p>`, b: R`<p>On pose <span data-k="phi">$\varphi(x) = f(x)-x$</span> sur $[a,b]$. Elle est continue comme différence de fonctions continues. Un point fixe de $f$ est un zéro de $\varphi$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Signe en a", h: R`<p>$f(a)$ est dans $[a,b]$ : donc $f(a)\geqslant\,?$</p>`, b: R`<p>Par hypothèse, $f(a)\in[a,b]$, donc $f(a)\geqslant a$ et $\varphi(a) = f(a)-a\geqslant0$.</p>` },
+    { t: "Signe en b", h: R`<p>$f(b)$ est dans $[a,b]$ : donc $f(b)\leqslant\,?$</p>`, b: R`<p>De même, $f(b)\in[a,b]$, donc $f(b)\leqslant b$ et $\varphi(b) = f(b)-b\leqslant0$.</p>` },
+    { t: "Conclusion", h: R`<p>Une fonction continue qui passe d'un signe $\geqslant0$ à un signe $\leqslant0$.</p>`, b: R`<p>$\varphi$ est continue sur $[a,b]$, positive en $a$ et négative en $b$. Par le théorème des valeurs intermédiaires, elle s'annule en un $x\in[a,b]$ : $f(x) = x$.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Oublier que $\varphi(a)$ et $\varphi(b)$ peuvent être nuls : les inégalités sont larges, et le TVI s'applique quand même.`,
   methode: R`Pour un point fixe, étudie $\varphi(x) = f(x)-x$ et montre qu'elle change de signe.`,
@@ -1059,10 +1059,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La fonction auxiliaire", b: R`<p>Comme pour l'autre version, on pose $\varphi(x) = f(x)-x$, continue sur $[a,b]$. On cherche un zéro.</p>`, rappels: ["continuite-operations"] },
-    { t: "Utiliser l'hypothèse", b: R`<p>$a$ et $b$ sont <span data-k="atteint">atteints</span> par $f$ : il existe $\alpha,\beta\in[a,b]$ avec $f(\alpha) = a$ et $f(\beta) = b$.</p>` },
-    { t: "Les signes", b: R`$$\varphi(\alpha) = a-\alpha\leqslant0\qquad\varphi(\beta) = b-\beta\geqslant0,$$<p>car $\alpha$ et $\beta$ sont dans $[a,b]$.</p>` },
-    { t: "Conclusion", b: R`<p>$\varphi$ est continue sur le segment d'extrémités $\alpha$ et $\beta$ et change de signe : par le TVI, elle s'annule entre les deux. On a trouvé un point fixe.</p>`, rappels: ["tvi"] }
+    { t: "La fonction auxiliaire", h: R`<p>On cherche $x$ avec $f(x) = x$ : quelle fonction doit s'annuler ?</p>`, b: R`<p>Comme pour l'autre version, on pose $\varphi(x) = f(x)-x$, continue sur $[a,b]$. On cherche un zéro.</p>`, rappels: ["continuite-operations"] },
+    { t: "Utiliser l'hypothèse", h: R`<p>$[a,b]\subset f([a,b])$ : $a$ et $b$ ont donc chacun un antécédent.</p>`, b: R`<p>$a$ et $b$ sont <span data-k="atteint">atteints</span> par $f$ : il existe $\alpha,\beta\in[a,b]$ avec $f(\alpha) = a$ et $f(\beta) = b$.</p>` },
+    { t: "Les signes", h: R`<p>Calcule $\varphi$ en ces deux antécédents. Rappel : ils sont dans $[a,b]$.</p>`, b: R`$$\varphi(\alpha) = a-\alpha\leqslant0\qquad\varphi(\beta) = b-\beta\geqslant0,$$<p>car $\alpha$ et $\beta$ sont dans $[a,b]$.</p>` },
+    { t: "Conclusion", h: R`<p>Changement de signe d'une fonction continue.</p>`, b: R`<p>$\varphi$ est continue sur le segment d'extrémités $\alpha$ et $\beta$ et change de signe : par le TVI, elle s'annule entre les deux. On a trouvé un point fixe.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Évaluer $\varphi$ en $a$ et $b$ comme dans l'autre cas : ici on ne connaît pas le signe de $f(a)-a$. Il faut les points $\alpha$ et $\beta$.`,
   methode: R`Choisis les points où évaluer la fonction auxiliaire en fonction de ce que dit l'hypothèse.`
@@ -1080,10 +1080,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La fonction auxiliaire", b: R`<p>Soit $n\geqslant1$. On pose, pour $x\in\left[0,1-\frac1n\right]$,</p>$$\varphi(x) = f\left(x+\frac1n\right)-f(x).$$<p>Elle est continue, et on cherche un zéro de $\varphi$ : une <span data-k="corde">corde horizontale</span> de longueur $\frac1n$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Une somme télescopique", b: R`<p>Calculons <span data-k="somme">la somme</span> de $\varphi$ aux points $\frac kn$ :</p>$$\sum_{k=0}^{n-1}\varphi\left(\frac kn\right) = \sum_{k=0}^{n-1}\left(f\left(\frac{k+1}n\right)-f\left(\frac kn\right)\right) = f(1)-f(0) = 0.$$`, rappels: ["telescopage"] },
-    { t: "Les signes", b: R`<p>Une somme nulle de nombres ne peut pas avoir tous ses termes strictement positifs, ni tous strictement négatifs. Il existe donc deux indices $i,j$ avec $\varphi\left(\frac in\right)\leqslant0$ et $\varphi\left(\frac jn\right)\geqslant0$.</p>` },
-    { t: "Conclusion", b: R`<p>$\varphi$ est continue sur l'intervalle entre $\frac in$ et $\frac jn$, inclus dans $\left[0,1-\frac1n\right]$, et elle y change de signe. Par le TVI, elle s'annule en un $x_0$ : $f(x_0) = f\left(x_0+\frac1n\right)$.</p>`, rappels: ["tvi"] }
+    { t: "La fonction auxiliaire", h: R`<p>On cherche $x$ où $f(x+\frac1n)-f(x)$ s'annule : nomme cette fonction.</p>`, b: R`<p>Soit $n\geqslant1$. On pose, pour $x\in\left[0,1-\frac1n\right]$,</p>$$\varphi(x) = f\left(x+\frac1n\right)-f(x).$$<p>Elle est continue, et on cherche un zéro de $\varphi$ : une <span data-k="corde">corde horizontale</span> de longueur $\frac1n$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Une somme télescopique", h: R`<p>Additionne $\varphi(0)+\varphi(\frac1n)+\dots+\varphi(\frac{n-1}n)$ : presque tout se simplifie.</p>`, b: R`<p>Calculons <span data-k="somme">la somme</span> de $\varphi$ aux points $\frac kn$ :</p>$$\sum_{k=0}^{n-1}\varphi\left(\frac kn\right) = \sum_{k=0}^{n-1}\left(f\left(\frac{k+1}n\right)-f\left(\frac kn\right)\right) = f(1)-f(0) = 0.$$`, rappels: ["telescopage"] },
+    { t: "Les signes", h: R`<p>Des nombres de somme nulle : peuvent-ils être tous $>0$ ?</p>`, b: R`<p>Une somme nulle de nombres ne peut pas avoir tous ses termes strictement positifs, ni tous strictement négatifs. Il existe donc deux indices $i,j$ avec $\varphi\left(\frac in\right)\leqslant0$ et $\varphi\left(\frac jn\right)\geqslant0$.</p>` },
+    { t: "Conclusion", h: R`<p>Tu as un point où $\varphi\leqslant0$ et un où $\varphi\geqslant0$.</p>`, b: R`<p>$\varphi$ est continue sur l'intervalle entre $\frac in$ et $\frac jn$, inclus dans $\left[0,1-\frac1n\right]$, et elle y change de signe. Par le TVI, elle s'annule en un $x_0$ : $f(x_0) = f\left(x_0+\frac1n\right)$.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Évaluer $\varphi$ seulement en $0$ et en $1-\frac1n$ : rien ne garantit un changement de signe entre ces deux points.`,
   methode: R`Quand on cherche un zéro sans connaître de signes, additionne les valeurs en des points bien choisis : une somme nulle force un changement de signe.`,
@@ -1106,10 +1106,10 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La stratégie", b: R`<p>Le théorème des bornes atteintes ne s'applique pas directement : $[0,+\infty[$ n'est pas un segment. On <span data-k="coupe">coupe</span> le domaine en deux morceaux.</p>`, rappels: ["bornes-atteintes"] },
-    { t: "Loin, grâce à la limite", b: R`<p>On applique la définition de la limite avec $\varepsilon = 1$ : il existe $A\geqslant0$ tel que $|f(x)-\ell|\leqslant1$ pour tout $x\geqslant A$. Alors</p>$$|f(x)|\leqslant|f(x)-\ell|+|\ell|\leqslant1+|\ell| = M_1.$$`, rappels: ["def-limite-finie", "inegalite-triangulaire"] },
-    { t: "Près de 0, grâce à la continuité", b: R`<p>Sur le segment $[0,A]$, $f$ est continue donc bornée : il existe $M_2$ tel que $|f(x)|\leqslant M_2$ pour $x\in[0,A]$.</p>`, rappels: ["bornes-atteintes"] },
-    { t: "Conclusion", b: R`<p>Avec $M = \max(M_1,M_2)$, on a $|f(x)|\leqslant M$ pour tout $x\geqslant0$ : $f$ est bornée.</p>` }
+    { t: "La stratégie", h: R`<p>Bornes atteintes : seulement sur un segment. Coupe $[0,+\infty[$ en $[0,A]$ et $[A,+\infty[$.</p>`, b: R`<p>Le théorème des bornes atteintes ne s'applique pas directement : $[0,+\infty[$ n'est pas un segment. On <span data-k="coupe">coupe</span> le domaine en deux morceaux.</p>`, rappels: ["bornes-atteintes"] },
+    { t: "Loin, grâce à la limite", h: R`<p>Définition de la limite avec $\varepsilon = 1$, puis inégalité triangulaire.</p>`, b: R`<p>On applique la définition de la limite avec $\varepsilon = 1$ : il existe $A\geqslant0$ tel que $|f(x)-\ell|\leqslant1$ pour tout $x\geqslant A$. Alors</p>$$|f(x)|\leqslant|f(x)-\ell|+|\ell|\leqslant1+|\ell| = M_1.$$`, rappels: ["def-limite-finie", "inegalite-triangulaire"] },
+    { t: "Près de 0, grâce à la continuité", h: R`<p>Sur un segment, une fonction continue est bornée.</p>`, b: R`<p>Sur le segment $[0,A]$, $f$ est continue donc bornée : il existe $M_2$ tel que $|f(x)|\leqslant M_2$ pour $x\in[0,A]$.</p>`, rappels: ["bornes-atteintes"] },
+    { t: "Conclusion", h: R`<p>Prends le plus grand des deux majorants.</p>`, b: R`<p>Avec $M = \max(M_1,M_2)$, on a $|f(x)|\leqslant M$ pour tout $x\geqslant0$ : $f$ est bornée.</p>` }
   ],
   piege: R`Appliquer le théorème des bornes atteintes sur $[0,+\infty[$ : ce n'est pas un segment, et $x\mapsto x$ y est continue sans être bornée.`,
   methode: R`Pour borner une fonction sur un intervalle infini : la limite contrôle la fonction loin, la continuité sur un segment contrôle le reste.`
@@ -1126,9 +1126,9 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Se ramener à une période", b: R`<p>Par <span data-k="periode">périodicité</span>, toutes les valeurs prises par $f$ sur $\mathbb R$ sont déjà prises sur $[0,T]$ : $f(\mathbb R) = f([0,T])$.</p>`, rappels: ["periodique"] },
-    { t: "Borner sur la période", b: R`<p>$[0,T]$ est un segment et $f$ y est continue : par le théorème des bornes atteintes, il existe $M$ avec $|f(y)|\leqslant M$ pour tout $y\in[0,T]$.</p>`, rappels: ["bornes-atteintes"] },
-    { t: "Conclusion", b: R`<p>Pour tout réel $x$, $f(x)$ est l'une des valeurs prises sur $[0,T]$, donc $|f(x)|\leqslant M$ : $f$ est bornée sur $\mathbb R$.</p>` }
+    { t: "Se ramener à une période", h: R`<p>Tout réel $x$ s'écrit $x = y+kT$ avec $y\in[0,T]$ et $k\in\mathbb Z$.</p>`, b: R`<p>Par <span data-k="periode">périodicité</span>, toutes les valeurs prises par $f$ sur $\mathbb R$ sont déjà prises sur $[0,T]$ : $f(\mathbb R) = f([0,T])$.</p>`, rappels: ["periodique"] },
+    { t: "Borner sur la période", h: R`<p>$[0,T]$ est un segment.</p>`, b: R`<p>$[0,T]$ est un segment et $f$ y est continue : par le théorème des bornes atteintes, il existe $M$ avec $|f(y)|\leqslant M$ pour tout $y\in[0,T]$.</p>`, rappels: ["bornes-atteintes"] },
+    { t: "Conclusion", h: R`<p>$f(x) = f(y)$ avec $y\in[0,T]$.</p>`, b: R`<p>Pour tout réel $x$, $f(x)$ est l'une des valeurs prises sur $[0,T]$, donc $|f(x)|\leqslant M$ : $f$ est bornée sur $\mathbb R$.</p>` }
   ],
   piege: R`Appliquer directement les bornes atteintes sur $\mathbb R$ : ce n'est pas un segment.`,
   methode: R`Une fonction périodique se comprend entièrement sur une période. Ramène toujours l'étude à $[0,T]$.`
@@ -1147,11 +1147,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "L'image de f", b: R`<p>$f(\mathbb R) = f([0,T])$ par périodicité. Sur le segment $[0,T]$, $f$ est continue : l'image est un segment $[m,M]$, avec <span data-k="ab">$m = f(a)$ et $M = f(b)$</span>.</p>`, rappels: ["periodique", "bornes-atteintes"] },
-    { t: "Placer b après a", b: R`<p><span data-k="quitte">Quitte à remplacer $b$ par $b+T$</span>, on peut supposer $a\leqslant b\leqslant a+T$.</p>`, rappels: ["periodique"] },
-    { t: "Le principe", b: R`<p>Si une fenêtre $[x,x+T/2]$ contient un point où $f$ vaut $m$ et un point où $f$ vaut $M$, alors son image est un intervalle contenant $m$ et $M$, donc égal à $[m,M] = \operatorname{Im}(f)$.</p>`, rappels: ["image-intervalle"] },
-    { t: "Premier cas", b: R`<p>Si $b\in[a,a+T/2]$, la fenêtre $[a,a+T/2]$ contient $a$ (où $f = m$) et $b$ (où $f = M$) : $x = a$ convient.</p>` },
-    { t: "Second cas", b: R`<p>Sinon $b\in[a+T/2,a+T]$. La fenêtre $[a+T/2,a+T]$ contient $b$ et $a+T$, où $f(a+T) = f(a) = m$. Donc $x = a+\frac T2$ convient.</p>`, rappels: ["periodique"] }
+    { t: "L'image de f", h: R`<p>Par périodicité, $\operatorname{Im}f = f([0,T])$, et sur un segment une fonction continue atteint son min et son max.</p>`, b: R`<p>$f(\mathbb R) = f([0,T])$ par périodicité. Sur le segment $[0,T]$, $f$ est continue : l'image est un segment $[m,M]$, avec <span data-k="ab">$m = f(a)$ et $M = f(b)$</span>.</p>`, rappels: ["periodique", "bornes-atteintes"] },
+    { t: "Placer b après a", h: R`<p>On peut décaler $b$ d'une période sans changer $f(b)$.</p>`, b: R`<p><span data-k="quitte">Quitte à remplacer $b$ par $b+T$</span>, on peut supposer $a\leqslant b\leqslant a+T$.</p>`, rappels: ["periodique"] },
+    { t: "Le principe", h: R`<p>L'image d'un intervalle par une fonction continue est un intervalle.</p>`, b: R`<p>Si une fenêtre $[x,x+T/2]$ contient un point où $f$ vaut $m$ et un point où $f$ vaut $M$, alors son image est un intervalle contenant $m$ et $M$, donc égal à $[m,M] = \operatorname{Im}(f)$.</p>`, rappels: ["image-intervalle"] },
+    { t: "Premier cas", h: R`<p>Regarde où se trouve $b$ par rapport à $a+\frac T2$.</p>`, b: R`<p>Si $b\in[a,a+T/2]$, la fenêtre $[a,a+T/2]$ contient $a$ (où $f = m$) et $b$ (où $f = M$) : $x = a$ convient.</p>` },
+    { t: "Second cas", h: R`<p>Utilise $f(a+T) = f(a)$.</p>`, b: R`<p>Sinon $b\in[a+T/2,a+T]$. La fenêtre $[a+T/2,a+T]$ contient $b$ et $a+T$, où $f(a+T) = f(a) = m$. Donc $x = a+\frac T2$ convient.</p>`, rappels: ["periodique"] }
   ],
   piege: R`Oublier de justifier que l'image d'une fenêtre est un intervalle : c'est ce qui permet de passer de « contient $m$ et $M$ » à « contient tout $[m,M]$ ».`,
   methode: R`Pour qu'un intervalle atteigne toutes les valeurs, il suffit qu'il contienne un point de minimum et un point de maximum.`
@@ -1170,11 +1170,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Le cas facile", b: R`<p>Si $f$ est constante, n'importe quel $\alpha\in\left]0,b-a\right]$ convient : $f(x+t) = f(x)$ pour tous $x,t$.</p>` },
-    { t: "Un extremum intérieur", b: R`<p>Sinon, $f$ atteint son maximum et son minimum sur $[a,b]$. L'un des deux est <span data-k="interieur">atteint à l'intérieur</span>. <span data-k="moinsf">Quitte à remplacer $f$ par $-f$</span>, le maximum est atteint en $c\in\,]a,b[$.</p>`, rappels: ["bornes-atteintes"] },
-    { t: "Choisir α", b: R`<p>On pose <span data-k="alpha">$\alpha = \min(c-a,b-c)>0$</span>. Ainsi $[c-\alpha,c+\alpha]\subset[a,b]$.</p>` },
-    { t: "La fonction auxiliaire", b: R`<p>Soit $t\in[0,\alpha]$. Sur $[c-t,c]$, on pose $g(x) = f(x+t)-f(x)$, qui est continue. Comme $f$ est maximale en $c$ :</p>$$g(c-t) = f(c)-f(c-t)\geqslant0,\qquad g(c) = f(c+t)-f(c)\leqslant0.$$`, rappels: ["continuite-operations"] },
-    { t: "Conclusion", b: R`<p>Par le TVI, $g$ s'annule en un $x\in[c-t,c]$ : $f(x+t) = f(x)$. Enfin $x\geqslant c-t\geqslant c-\alpha\geqslant a$ et $x\leqslant c\leqslant b-\alpha$ : on a bien $x\in[a,b-\alpha]$.</p>`, rappels: ["tvi"] }
+    { t: "Le cas facile", h: R`<p>Commence par le cas où $f$ est constante.</p>`, b: R`<p>Si $f$ est constante, n'importe quel $\alpha\in\left]0,b-a\right]$ convient : $f(x+t) = f(x)$ pour tous $x,t$.</p>` },
+    { t: "Un extremum intérieur", h: R`<p>Si $f$ n'est pas constante et $f(a) = f(b)$, le max ou le min est atteint strictement entre $a$ et $b$.</p>`, b: R`<p>Sinon, $f$ atteint son maximum et son minimum sur $[a,b]$. L'un des deux est <span data-k="interieur">atteint à l'intérieur</span>. <span data-k="moinsf">Quitte à remplacer $f$ par $-f$</span>, le maximum est atteint en $c\in\,]a,b[$.</p>`, rappels: ["bornes-atteintes"] },
+    { t: "Choisir α", h: R`<p>Il faut pouvoir se décaler de $\alpha$ à gauche et à droite de $c$ sans sortir de $[a,b]$.</p>`, b: R`<p>On pose <span data-k="alpha">$\alpha = \min(c-a,b-c)>0$</span>. Ainsi $[c-\alpha,c+\alpha]\subset[a,b]$.</p>` },
+    { t: "La fonction auxiliaire", h: R`<p>Compare $f(c)$ à ses voisins : $c$ est un maximum.</p>`, b: R`<p>Soit $t\in[0,\alpha]$. Sur $[c-t,c]$, on pose $g(x) = f(x+t)-f(x)$, qui est continue. Comme $f$ est maximale en $c$ :</p>$$g(c-t) = f(c)-f(c-t)\geqslant0,\qquad g(c) = f(c+t)-f(c)\leqslant0.$$`, rappels: ["continuite-operations"] },
+    { t: "Conclusion", h: R`<p>TVI sur $g$, puis vérifie que $x$ est bien dans $[a,b-\alpha]$.</p>`, b: R`<p>Par le TVI, $g$ s'annule en un $x\in[c-t,c]$ : $f(x+t) = f(x)$. Enfin $x\geqslant c-t\geqslant c-\alpha\geqslant a$ et $x\leqslant c\leqslant b-\alpha$ : on a bien $x\in[a,b-\alpha]$.</p>`, rappels: ["tvi"] }
   ],
   piege: R`Oublier de vérifier que le $x$ trouvé est bien dans $[a,b-\alpha]$ : c'est le choix de $\alpha$ qui le garantit.`,
   methode: R`Autour d'un maximum, $f$ monte puis descend : la fonction $x\mapsto f(x+t)-f(x)$ y change de signe.`
@@ -1193,12 +1193,12 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "g est bien définie", b: R`<p>Pour $x\geqslant0$, $f$ est continue sur le segment $[0,x]$ : elle y atteint son maximum. $g(x)$ existe.</p>`, rappels: ["bornes-atteintes"] },
-    { t: "g est croissante", b: R`<p>Si $x\leqslant y$, alors $[0,x]\subset[0,y]$ : le maximum sur un ensemble plus grand est plus grand. Donc $g(x)\leqslant g(y)$. C'est un <span data-k="glissant">record glissant</span>.</p>` },
-    { t: "Continuité : deux cas", b: R`<p>Soit $a>0$ (le cas $a = 0$ se traite de même, à droite seulement). On a toujours $f(a)\leqslant g(a)$. On <span data-k="cas">distingue</span> $f(a)< g(a)$ et $f(a) = g(a)$.</p>` },
-    { t: "Cas f(a) < g(a)", b: R`<p>Par continuité de $f$, il existe <span data-k="alpha">$\alpha>0$</span> tel que $f(x)< g(a)$ sur $[a-\alpha,a+\alpha]$. Le record $g(a)$ est atteint en un $t_0< a-\alpha$. Pour $x$ dans $[a-\alpha,a+\alpha]$, le record reste donc $g(a)$ : $g$ est constante près de $a$, donc continue en $a$.</p>`, rappels: ["continuite-operations"] },
-    { t: "Cas f(a) = g(a) : encadrer", b: R`<p>Soit $\varepsilon>0$. Par continuité de $f$, il existe $\alpha>0$ avec $f(a)-\varepsilon\leqslant f(x)\leqslant f(a)+\varepsilon$ sur $[a-\alpha,a+\alpha]$.</p><ul><li>$g(a-\alpha)\geqslant f(a-\alpha)\geqslant g(a)-\varepsilon$.</li><li>Sur $[0,a]$, $f\leqslant g(a)$, et sur $[a,a+\alpha]$, $f\leqslant g(a)+\varepsilon$. Donc $g(a+\alpha)\leqslant g(a)+\varepsilon$.</li></ul>` },
-    { t: "Cas f(a) = g(a) : conclure", b: R`<p>$g$ est croissante, donc pour tout $x\in[a-\alpha,a+\alpha]$ :</p>$$g(a)-\varepsilon\leqslant g(a-\alpha)\leqslant g(x)\leqslant g(a+\alpha)\leqslant g(a)+\varepsilon.$$<p>C'est la définition de la continuité de $g$ en $a$.</p>` }
+    { t: "g est bien définie", h: R`<p>Une fonction continue sur un segment atteint son maximum.</p>`, b: R`<p>Pour $x\geqslant0$, $f$ est continue sur le segment $[0,x]$ : elle y atteint son maximum. $g(x)$ existe.</p>`, rappels: ["bornes-atteintes"] },
+    { t: "g est croissante", h: R`<p>Plus l'ensemble est grand, plus le maximum est grand.</p>`, b: R`<p>Si $x\leqslant y$, alors $[0,x]\subset[0,y]$ : le maximum sur un ensemble plus grand est plus grand. Donc $g(x)\leqslant g(y)$. C'est un <span data-k="glissant">record glissant</span>.</p>` },
+    { t: "Continuité : deux cas", h: R`<p>Deux situations : en $a$, $f$ est en train de battre son record, ou non.</p>`, b: R`<p>Soit $a>0$ (le cas $a = 0$ se traite de même, à droite seulement). On a toujours $f(a)\leqslant g(a)$. On <span data-k="cas">distingue</span> $f(a)< g(a)$ et $f(a) = g(a)$.</p>` },
+    { t: "Cas f(a) < g(a)", h: R`<p>Si $f(a)$ est strictement sous le record, $f$ reste sous le record autour de $a$.</p>`, b: R`<p>Par continuité de $f$, il existe <span data-k="alpha">$\alpha>0$</span> tel que $f(x)< g(a)$ sur $[a-\alpha,a+\alpha]$. Le record $g(a)$ est atteint en un $t_0< a-\alpha$. Pour $x$ dans $[a-\alpha,a+\alpha]$, le record reste donc $g(a)$ : $g$ est constante près de $a$, donc continue en $a$.</p>`, rappels: ["continuite-operations"] },
+    { t: "Cas f(a) = g(a) : encadrer", h: R`<p>Écris la continuité de $f$ en $a$ avec $\varepsilon$, et encadre $g(a-\alpha)$ et $g(a+\alpha)$.</p>`, b: R`<p>Soit $\varepsilon>0$. Par continuité de $f$, il existe $\alpha>0$ avec $f(a)-\varepsilon\leqslant f(x)\leqslant f(a)+\varepsilon$ sur $[a-\alpha,a+\alpha]$.</p><ul><li>$g(a-\alpha)\geqslant f(a-\alpha)\geqslant g(a)-\varepsilon$.</li><li>Sur $[0,a]$, $f\leqslant g(a)$, et sur $[a,a+\alpha]$, $f\leqslant g(a)+\varepsilon$. Donc $g(a+\alpha)\leqslant g(a)+\varepsilon$.</li></ul>` },
+    { t: "Cas f(a) = g(a) : conclure", h: R`<p>$g$ est croissante : $g(x)$ est entre $g(a-\alpha)$ et $g(a+\alpha)$.</p>`, b: R`<p>$g$ est croissante, donc pour tout $x\in[a-\alpha,a+\alpha]$ :</p>$$g(a)-\varepsilon\leqslant g(a-\alpha)\leqslant g(x)\leqslant g(a+\alpha)\leqslant g(a)+\varepsilon.$$<p>C'est la définition de la continuité de $g$ en $a$.</p>` }
   ],
   piege: R`Croire que le maximum glissant est continu « parce que $f$ l'est », sans preuve : c'est vrai, mais il faut traiter le cas où le record est en train d'être battu.`,
   methode: R`Pour une fonction croissante, il suffit de contrôler deux valeurs, en $a-\alpha$ et $a+\alpha$, pour encadrer tout ce qui est entre les deux.`,
@@ -1223,11 +1223,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Analyse", b: R`<p>On procède par <span data-k="analyse">analyse-synthèse</span>. Soit $f$ une solution. En appliquant l'équation à $\frac x2$ : $f(x) = f\left(2\cdot\frac x2\right) = f\left(\frac x2\right)$.</p>` },
-    { t: "Itérer", b: R`<p>Par récurrence sur $n$, pour tout $x$ réel et tout $n\in\mathbb N$ :</p>$$f\left(\frac x{2^n}\right) = f(x).$$`, rappels: ["recurrence"] },
-    { t: "Passer à la limite", b: R`<p>Fixons $x$. Quand $n\to+\infty$, $\frac x{2^n}\to0$. Par continuité de $f$ en $0$, $f\left(\frac x{2^n}\right)\to f(0)$. Mais cette suite est constante égale à $f(x)$.</p>`, rappels: ["sequentielle"] },
-    { t: "Identifier", b: R`<p>Par unicité de la limite, $f(x) = f(0)$. Ceci pour tout $x$ : $f$ est constante.</p>`, rappels: ["unicite-limite"] },
-    { t: "Synthèse", b: R`<p>Réciproquement, une fonction constante vérifie bien $f(2x) = f(x)$ et est continue en $0$. Les solutions sont exactement les fonctions constantes.</p>` }
+    { t: "Analyse", h: R`<p>Remplace $x$ par $\frac x2$ dans l'équation.</p>`, b: R`<p>On procède par <span data-k="analyse">analyse-synthèse</span>. Soit $f$ une solution. En appliquant l'équation à $\frac x2$ : $f(x) = f\left(2\cdot\frac x2\right) = f\left(\frac x2\right)$.</p>` },
+    { t: "Itérer", h: R`<p>Recommence : $f(x) = f(\frac x2) = f(\frac x4) = \dots$</p>`, b: R`<p>Par récurrence sur $n$, pour tout $x$ réel et tout $n\in\mathbb N$ :</p>$$f\left(\frac x{2^n}\right) = f(x).$$`, rappels: ["recurrence"] },
+    { t: "Passer à la limite", h: R`<p>$\frac x{2^n}\to0$ : utilise la continuité en $0$.</p>`, b: R`<p>Fixons $x$. Quand $n\to+\infty$, $\frac x{2^n}\to0$. Par continuité de $f$ en $0$, $f\left(\frac x{2^n}\right)\to f(0)$. Mais cette suite est constante égale à $f(x)$.</p>`, rappels: ["sequentielle"] },
+    { t: "Identifier", h: R`<p>Une suite constante égale à $f(x)$ qui tend vers $f(0)$.</p>`, b: R`<p>Par unicité de la limite, $f(x) = f(0)$. Ceci pour tout $x$ : $f$ est constante.</p>`, rappels: ["unicite-limite"] },
+    { t: "Synthèse", h: R`<p>N'oublie pas de vérifier que les constantes conviennent.</p>`, b: R`<p>Réciproquement, une fonction constante vérifie bien $f(2x) = f(x)$ et est continue en $0$. Les solutions sont exactement les fonctions constantes.</p>` }
   ],
   piege: R`Oublier la synthèse : l'analyse montre seulement qu'une solution est forcément constante, pas que les constantes conviennent.`,
   methode: R`Dans une équation fonctionnelle, itère la relation pour amener la variable vers le point où tu connais la continuité.`
@@ -1246,11 +1246,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Premières valeurs", b: R`<p>Soit $f$ une solution. <span data-k="choix">Avec $x = y = 0$</span> : $f(0) = 2f(0)$, donc $f(0) = 0$. Avec $y = -x$ : $0 = f(x)+f(-x)$, donc $f$ est impaire.</p>` },
-    { t: "Multiples entiers", b: R`<p>Avec $y = nx$ : $f\big((n+1)x\big) = f(nx)+f(x)$. La suite $\big(f(nx)\big)_n$ est <span data-k="arith">arithmétique</span> de raison $f(x)$, de premier terme $f(0) = 0$. Donc $f(nx) = nf(x)$ pour $n\in\mathbb N$, puis pour $n\in\mathbb Z$ par imparité.</p>`, rappels: ["recurrence"] },
-    { t: "Les rationnels", b: R`<p>Posons $a = f(1)$. Soit $x = \frac pq$ avec $p\in\mathbb Z$, $q\in\mathbb N^*$. D'une part $f\left(\frac pq\right) = p\,f\left(\frac1q\right)$. D'autre part $a = f(1) = f\left(q\cdot\frac1q\right) = q\,f\left(\frac1q\right)$. Donc</p>$$f\left(\frac pq\right) = \frac pq\,a.$$` },
-    { t: "Tous les réels", b: R`<p>Soit $x$ réel. Le rationnel $\frac{\lfloor nx\rfloor}n$ <span data-k="dense">tend vers $x$</span>. Par continuité, $f\left(\frac{\lfloor nx\rfloor}n\right)\to f(x)$. Mais par l'étape précédente, cette quantité vaut $a\frac{\lfloor nx\rfloor}n\to ax$.</p>`, rappels: ["densite", "sequentielle"] },
-    { t: "Conclusion", b: R`<p>Par unicité de la limite, $f(x) = ax$ pour tout réel $x$. Réciproquement, $x\mapsto ax$ est continue et vérifie $(*)$. Les solutions sont les fonctions linéaires $x\mapsto ax$.</p>`, rappels: ["unicite-limite"] }
+    { t: "Premières valeurs", h: R`<p>Choisis des valeurs simples : $x = y = 0$, puis $y = -x$.</p>`, b: R`<p>Soit $f$ une solution. <span data-k="choix">Avec $x = y = 0$</span> : $f(0) = 2f(0)$, donc $f(0) = 0$. Avec $y = -x$ : $0 = f(x)+f(-x)$, donc $f$ est impaire.</p>` },
+    { t: "Multiples entiers", h: R`<p>Avec $y = x$ : $f(2x) = 2f(x)$. Généralise à $f(nx)$.</p>`, b: R`<p>Avec $y = nx$ : $f\big((n+1)x\big) = f(nx)+f(x)$. La suite $\big(f(nx)\big)_n$ est <span data-k="arith">arithmétique</span> de raison $f(x)$, de premier terme $f(0) = 0$. Donc $f(nx) = nf(x)$ pour $n\in\mathbb N$, puis pour $n\in\mathbb Z$ par imparité.</p>`, rappels: ["recurrence"] },
+    { t: "Les rationnels", h: R`<p>Calcule $f(1)$ en écrivant $1 = q\times\frac1q$.</p>`, b: R`<p>Posons $a = f(1)$. Soit $x = \frac pq$ avec $p\in\mathbb Z$, $q\in\mathbb N^*$. D'une part $f\left(\frac pq\right) = p\,f\left(\frac1q\right)$. D'autre part $a = f(1) = f\left(q\cdot\frac1q\right) = q\,f\left(\frac1q\right)$. Donc</p>$$f\left(\frac pq\right) = \frac pq\,a.$$` },
+    { t: "Tous les réels", h: R`<p>Approche $x$ par des rationnels, par exemple $\frac{\lfloor nx\rfloor}n$.</p>`, b: R`<p>Soit $x$ réel. Le rationnel $\frac{\lfloor nx\rfloor}n$ <span data-k="dense">tend vers $x$</span>. Par continuité, $f\left(\frac{\lfloor nx\rfloor}n\right)\to f(x)$. Mais par l'étape précédente, cette quantité vaut $a\frac{\lfloor nx\rfloor}n\to ax$.</p>`, rappels: ["densite", "sequentielle"] },
+    { t: "Conclusion", h: R`<p>Deux expressions de la même limite.</p>`, b: R`<p>Par unicité de la limite, $f(x) = ax$ pour tout réel $x$. Réciproquement, $x\mapsto ax$ est continue et vérifie $(*)$. Les solutions sont les fonctions linéaires $x\mapsto ax$.</p>`, rappels: ["unicite-limite"] }
   ],
   piege: R`S'arrêter aux rationnels : sans la continuité, on ne peut pas étendre $f(x) = ax$ aux irrationnels.`,
   methode: R`Équation fonctionnelle et continuité : trouve $f$ sur les entiers, puis sur les rationnels, puis étends à $\mathbb R$ par densité et continuité.`
@@ -1268,11 +1268,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "f est positive", b: R`<p>Soit $f$ une solution. Pour tout $x$ : $f(x) = f\left(\frac x2+\frac x2\right) = f\left(\frac x2\right)^2\geqslant0$.</p>` },
-    { t: "Le cas où f s'annule", b: R`<p>S'il existe $x_0$ avec $f(x_0) = 0$, alors pour tout $x$ :</p>$$f(x) = f\big((x-x_0)+x_0\big) = f(x-x_0)\,f(x_0) = 0.$$<p>$f$ est la fonction nulle.</p>` },
-    { t: "Passer au logarithme", b: R`<p>Sinon $f>0$ partout, et on pose <span data-k="ln">$g = \ln\circ f$</span>, continue. Pour tous $x,y$ :</p>$$g(x+y) = \ln\big(f(x)f(y)\big) = \ln f(x)+\ln f(y) = g(x)+g(y).$$`, rappels: ["continuite-operations"] },
-    { t: "Utiliser les fonctions additives", b: R`<p>$g$ est continue et additive : <span data-k="add">il existe $a$ réel</span> tel que $g(x) = ax$ pour tout $x$. Donc $f(x) = e^{g(x)} = e^{ax}$.</p>` },
-    { t: "Synthèse", b: R`<p>Réciproquement, la fonction nulle et les fonctions $x\mapsto e^{ax}$ sont continues et vérifient $f(x+y) = f(x)f(y)$. Ce sont exactement les solutions.</p>` }
+    { t: "f est positive", h: R`<p>Écris $x = \frac x2+\frac x2$.</p>`, b: R`<p>Soit $f$ une solution. Pour tout $x$ : $f(x) = f\left(\frac x2+\frac x2\right) = f\left(\frac x2\right)^2\geqslant0$.</p>` },
+    { t: "Le cas où f s'annule", h: R`<p>Si $f(x_0) = 0$, écris $x = (x-x_0)+x_0$.</p>`, b: R`<p>S'il existe $x_0$ avec $f(x_0) = 0$, alors pour tout $x$ :</p>$$f(x) = f\big((x-x_0)+x_0\big) = f(x-x_0)\,f(x_0) = 0.$$<p>$f$ est la fonction nulle.</p>` },
+    { t: "Passer au logarithme", h: R`<p>$\ln$ transforme les produits en sommes.</p>`, b: R`<p>Sinon $f>0$ partout, et on pose <span data-k="ln">$g = \ln\circ f$</span>, continue. Pour tous $x,y$ :</p>$$g(x+y) = \ln\big(f(x)f(y)\big) = \ln f(x)+\ln f(y) = g(x)+g(y).$$`, rappels: ["continuite-operations"] },
+    { t: "Utiliser les fonctions additives", h: R`<p>$g$ est continue et additive : résultat de l'exercice précédent.</p>`, b: R`<p>$g$ est continue et additive : <span data-k="add">il existe $a$ réel</span> tel que $g(x) = ax$ pour tout $x$. Donc $f(x) = e^{g(x)} = e^{ax}$.</p>` },
+    { t: "Synthèse", h: R`<p>Vérifie que $x\mapsto e^{ax}$ et $0$ conviennent.</p>`, b: R`<p>Réciproquement, la fonction nulle et les fonctions $x\mapsto e^{ax}$ sont continues et vérifient $f(x+y) = f(x)f(y)$. Ce sont exactement les solutions.</p>` }
   ],
   piege: R`Prendre le logarithme sans avoir vérifié que $f>0$ : il faut d'abord traiter le cas où $f$ s'annule.`,
   methode: R`Pour une équation « somme devient produit », passe au logarithme pour te ramener à une équation additive.`,
@@ -1291,11 +1291,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "f est bijective", b: R`<p>Soit $f$ une solution. La relation $f\circ f = \mathrm{Id}$ montre que <span data-k="bij">$f$ est une bijection</span>, de réciproque elle-même.</p>` },
-    { t: "f est strictement monotone", b: R`<p>$f$ est continue et injective sur l'intervalle $[0,+\infty[$ : elle est strictement monotone.</p>`, rappels: ["injective-monotone"] },
-    { t: "f est croissante", b: R`<p>Si $f$ était décroissante, on aurait $f(x)\leqslant f(0)$ pour tout $x$ : <span data-k="decr">elle ne serait pas surjective</span> sur $[0,+\infty[$. Donc $f$ est strictement croissante.</p>` },
-    { t: "f(x) = x", b: R`<p>Soit $x\geqslant0$. Si $f(x)< x$, en appliquant $f$ strictement croissante : $f\big(f(x)\big)< f(x)$, c'est-à-dire $x< f(x)$. Contradiction. De même, $f(x)>x$ donnerait $x>f(x)$. Donc $f(x) = x$.</p>`, rappels: ["absurde"] },
-    { t: "Synthèse", b: R`<p>L'identité convient évidemment. C'est la seule solution.</p>` }
+    { t: "f est bijective", h: R`<p>$f\circ f = \mathrm{Id}$ : $f$ a un « inverse ». Lequel ?</p>`, b: R`<p>Soit $f$ une solution. La relation $f\circ f = \mathrm{Id}$ montre que <span data-k="bij">$f$ est une bijection</span>, de réciproque elle-même.</p>` },
+    { t: "f est strictement monotone", h: R`<p>Continue et injective sur un intervalle $\Rightarrow$ ?</p>`, b: R`<p>$f$ est continue et injective sur l'intervalle $[0,+\infty[$ : elle est strictement monotone.</p>`, rappels: ["injective-monotone"] },
+    { t: "f est croissante", h: R`<p>Une fonction décroissante sur $[0,+\infty[$ est majorée par $f(0)$. Peut-elle atteindre toutes les valeurs de $[0,+\infty[$ ?</p>`, b: R`<p>Si $f$ était décroissante, on aurait $f(x)\leqslant f(0)$ pour tout $x$ : <span data-k="decr">elle ne serait pas surjective</span> sur $[0,+\infty[$. Donc $f$ est strictement croissante.</p>` },
+    { t: "f(x) = x", h: R`<p>Si $f(x)< x$, applique $f$ (croissante) aux deux membres.</p>`, b: R`<p>Soit $x\geqslant0$. Si $f(x)< x$, en appliquant $f$ strictement croissante : $f\big(f(x)\big)< f(x)$, c'est-à-dire $x< f(x)$. Contradiction. De même, $f(x)>x$ donnerait $x>f(x)$. Donc $f(x) = x$.</p>`, rappels: ["absurde"] },
+    { t: "Synthèse", h: R`<p>Vérifie que l'identité convient.</p>`, b: R`<p>L'identité convient évidemment. C'est la seule solution.</p>` }
   ],
   piege: R`Penser que $x\mapsto\frac1x$ ou $x\mapsto-x$ conviennent : ils vérifient bien $f\circ f = \mathrm{Id}$, mais pas sur $[0,+\infty[$ avec des valeurs dans $[0,+\infty[$.`,
   methode: R`Pour une équation fonctionnelle avec continuité, commence par montrer que $f$ est monotone, puis compare $f(x)$ et $x$.`
@@ -1314,11 +1314,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Se ramener à ℓ = 0", b: R`<p>On remplace $f$ par $x\mapsto f(x)-\ell x$ : <span data-k="reduc">on peut supposer $\ell = 0$</span>. Soit $\varepsilon>0$. Il existe $A\geqslant0$ tel que $|f(x+1)-f(x)|\leqslant\varepsilon$ pour tout $x\geqslant A$.</p>`, rappels: ["def-limite-finie"] },
-    { t: "Reculer d'unité en unité", b: R`<p>Soit $x\geqslant A$ et $n = \lfloor x-A\rfloor$, de sorte que $x-n\in[A,A+1[$. <span data-k="decr">Par télescopage</span> :</p>$$f(x) = \sum_{k=0}^{n-1}\big(f(x-k)-f(x-k-1)\big)+f(x-n).$$`, rappels: ["telescopage", "partie-entiere"] },
-    { t: "Majorer", b: R`<p>Chaque $x-k-1$ est $\geqslant x-n\geqslant A$, donc chaque terme de la somme est $\leqslant\varepsilon$ en valeur absolue. Et <span data-k="M">$|f(x-n)|\leqslant M$</span>. Par l'inégalité triangulaire :</p>$$|f(x)|\leqslant n\varepsilon+M\leqslant x\varepsilon+M.$$`, rappels: ["inegalite-triangulaire", "bornes-atteintes"] },
-    { t: "Diviser par x", b: R`$$\left|\frac{f(x)}x\right|\leqslant\varepsilon+\frac Mx.$$<p>Pour $x\geqslant A' = \frac M\varepsilon$, on a $\frac Mx\leqslant\varepsilon$.</p>` },
-    { t: "Conclusion", b: R`<p>Pour $x\geqslant\max(A,A')$ et $x>0$ : $\left|\frac{f(x)}x\right|\leqslant2\varepsilon$. Comme $\varepsilon$ est quelconque, $\frac{f(x)}x\to0$, ce qui donne le résultat pour $\ell$ quelconque.</p>`, rappels: ["def-limite-finie"] }
+    { t: "Se ramener à ℓ = 0", h: R`<p>$f(x)-\ell x$ vérifie la même hypothèse avec $0$ à la place de $\ell$.</p>`, b: R`<p>On remplace $f$ par $x\mapsto f(x)-\ell x$ : <span data-k="reduc">on peut supposer $\ell = 0$</span>. Soit $\varepsilon>0$. Il existe $A\geqslant0$ tel que $|f(x+1)-f(x)|\leqslant\varepsilon$ pour tout $x\geqslant A$.</p>`, rappels: ["def-limite-finie"] },
+    { t: "Reculer d'unité en unité", h: R`<p>Écris $f(x)-f(x-n)$ comme une somme de différences $f(y+1)-f(y)$.</p>`, b: R`<p>Soit $x\geqslant A$ et $n = \lfloor x-A\rfloor$, de sorte que $x-n\in[A,A+1[$. <span data-k="decr">Par télescopage</span> :</p>$$f(x) = \sum_{k=0}^{n-1}\big(f(x-k)-f(x-k-1)\big)+f(x-n).$$`, rappels: ["telescopage", "partie-entiere"] },
+    { t: "Majorer", h: R`<p>Chaque différence est $\leqslant\varepsilon$, et $f$ est bornée sur le segment $[A,A+1]$.</p>`, b: R`<p>Chaque $x-k-1$ est $\geqslant x-n\geqslant A$, donc chaque terme de la somme est $\leqslant\varepsilon$ en valeur absolue. Et <span data-k="M">$|f(x-n)|\leqslant M$</span>. Par l'inégalité triangulaire :</p>$$|f(x)|\leqslant n\varepsilon+M\leqslant x\varepsilon+M.$$`, rappels: ["inegalite-triangulaire", "bornes-atteintes"] },
+    { t: "Diviser par x", h: R`<p>Divise par $x$ : il reste $\varepsilon+\frac Mx$.</p>`, b: R`$$\left|\frac{f(x)}x\right|\leqslant\varepsilon+\frac Mx.$$<p>Pour $x\geqslant A' = \frac M\varepsilon$, on a $\frac Mx\leqslant\varepsilon$.</p>` },
+    { t: "Conclusion", h: R`<p>Écris la définition de la limite.</p>`, b: R`<p>Pour $x\geqslant\max(A,A')$ et $x>0$ : $\left|\frac{f(x)}x\right|\leqslant2\varepsilon$. Comme $\varepsilon$ est quelconque, $\frac{f(x)}x\to0$, ce qui donne le résultat pour $\ell$ quelconque.</p>`, rappels: ["def-limite-finie"] }
   ],
   piege: R`Oublier le terme $f(x-n)$ du télescopage : c'est lui qui demande la continuité sur $[A,A+1]$.`,
   methode: R`Pour passer d'une information sur $f(x+1)-f(x)$ à $f(x)$, télescope depuis un segment fixe et majore terme à terme.`,
@@ -1338,11 +1338,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "La suite est bien définie", b: R`<p>Si $u_n\in[a,b]$, alors $f(u_n)\in[a,b]$, et $u_{n+1}$ est <span data-k="milieu">leur milieu</span> : $u_{n+1}\in[a,b]$. Par récurrence, tous les termes existent et restent dans $[a,b]$.</p>`, rappels: ["recurrence"] },
-    { t: "Écart entre deux termes", b: R`<p>Pour $n\geqslant1$ :</p>$$u_{n+1}-u_n = \frac{\big(f(u_n)-f(u_{n-1})\big)+\big(u_n-u_{n-1}\big)}2.$$` },
-    { t: "Le signe se transmet", b: R`<p>Par hypothèse, $|f(u_n)-f(u_{n-1})|\leqslant|u_n-u_{n-1}|$. Le premier morceau ne peut donc pas l'emporter sur le second : <span data-k="signe">$u_{n+1}-u_n$ a le signe de $u_n-u_{n-1}$</span> (au sens large). De proche en proche, tous les écarts ont le signe de $u_1-u_0$ : la suite est monotone.</p>`, rappels: ["lipschitz"] },
-    { t: "Convergence", b: R`<p>$(u_n)$ est monotone et bornée, car à valeurs dans $[a,b]$ : elle converge vers un réel $\ell\in[a,b]$.</p>`, rappels: ["limite-monotone"] },
-    { t: "La limite est un point fixe", b: R`<p>$f$ est lipschitzienne donc continue. En passant à la limite dans la relation de récurrence :</p>$$\ell = \frac{\ell+f(\ell)}2\iff f(\ell) = \ell.$$`, rappels: ["lipschitz", "continuite-point-fixe"] }
+    { t: "La suite est bien définie", h: R`<p>Le milieu de deux points de $[a,b]$ est dans $[a,b]$.</p>`, b: R`<p>Si $u_n\in[a,b]$, alors $f(u_n)\in[a,b]$, et $u_{n+1}$ est <span data-k="milieu">leur milieu</span> : $u_{n+1}\in[a,b]$. Par récurrence, tous les termes existent et restent dans $[a,b]$.</p>`, rappels: ["recurrence"] },
+    { t: "Écart entre deux termes", h: R`<p>Écris $u_{n+1}$ et $u_n$ avec la relation de récurrence, et soustrais.</p>`, b: R`<p>Pour $n\geqslant1$ :</p>$$u_{n+1}-u_n = \frac{\big(f(u_n)-f(u_{n-1})\big)+\big(u_n-u_{n-1}\big)}2.$$` },
+    { t: "Le signe se transmet", h: R`<p>Si $|\alpha|\leqslant|\beta|$, quel est le signe de $\alpha+\beta$ ?</p>`, b: R`<p>Par hypothèse, $|f(u_n)-f(u_{n-1})|\leqslant|u_n-u_{n-1}|$. Notons $\alpha = f(u_n)-f(u_{n-1})$ et $\beta = u_n-u_{n-1}$, avec $|\alpha|\leqslant|\beta|$. Si $\beta\geqslant0$ : $\alpha\geqslant-|\alpha|\geqslant-\beta$, donc $\alpha+\beta\geqslant0$. Si $\beta\leqslant0$ : $\alpha\leqslant|\alpha|\leqslant-\beta$, donc $\alpha+\beta\leqslant0$. Ainsi <span data-k="signe">$u_{n+1}-u_n = \frac{\alpha+\beta}2$ a le signe de $u_n-u_{n-1}$</span> (au sens large). De proche en proche, tous les écarts ont le signe de $u_1-u_0$ : la suite est monotone.</p>`, rappels: ["lipschitz"] },
+    { t: "Convergence", h: R`<p>Monotone et bornée.</p>`, b: R`<p>$(u_n)$ est monotone et bornée, car à valeurs dans $[a,b]$ : elle converge vers un réel $\ell\in[a,b]$.</p>`, rappels: ["limite-monotone"] },
+    { t: "La limite est un point fixe", h: R`<p>Passe à la limite dans $u_{n+1} = \frac{u_n+f(u_n)}2$.</p>`, b: R`<p>$f$ est lipschitzienne donc continue. En passant à la limite dans la relation de récurrence :</p>$$\ell = \frac{\ell+f(\ell)}2\iff f(\ell) = \ell.$$`, rappels: ["lipschitz", "continuite-point-fixe"] }
   ],
   piege: R`Étudier la suite $v_{n+1} = f(v_n)$ à la place : elle peut ne pas converger, par exemple avec $f(x) = a+b-x$. La moyenne avec $u_n$ est essentielle.`,
   methode: R`Pour une suite récurrente, étudie le signe de $u_{n+1}-u_n$ en le comparant à $u_n-u_{n-1}$.`,
@@ -1362,11 +1362,11 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "Par l'absurde", b: R`<p>Supposons que $g-f$ ne s'annule jamais. Étant continue sur l'intervalle $[a,b]$, elle <span data-k="signe">garde un signe constant</span>. Quitte à échanger $f$ et $g$, on suppose $g-f>0$.</p>`, rappels: ["absurde", "tvi"] },
-    { t: "Un point fixe de f", b: R`<p>$f$ envoie $[a,b]$ dans $[a,b]$ et est continue : <span data-k="pf">elle a un point fixe</span> $x$, c'est-à-dire $f(x) = x$.</p>`, rappels: ["tvi"] },
-    { t: "g envoie les points fixes de f sur des points fixes de f", b: R`<p>Si $f(x) = x$, alors $f\big(g(x)\big) = g\big(f(x)\big) = g(x)$ : $g(x)$ est aussi un point fixe de $f$. De plus $g(x)>f(x) = x$.</p>` },
-    { t: "La suite des itérés", b: R`<p>On pose <span data-k="iteres">$u_0 = x$ et $u_{n+1} = g(u_n)$</span>. Par l'étape précédente, chaque $u_n$ est un point fixe de $f$ et $u_{n+1}>u_n$. La suite est croissante et à valeurs dans $[a,b]$ : elle converge vers $\ell\in[a,b]$.</p>`, rappels: ["recurrence", "limite-monotone"] },
-    { t: "La contradiction", b: R`<p>En passant à la limite dans $f(u_n) = u_n$ et $u_{n+1} = g(u_n)$, par continuité de $f$ et $g$ : $f(\ell) = \ell$ et $g(\ell) = \ell$. Donc $g(\ell)-f(\ell) = 0$, ce qui contredit $g-f>0$.</p>`, rappels: ["continuite-point-fixe"] }
+    { t: "Par l'absurde", h: R`<p>Si $g-f$ ne s'annule pas, que dit le TVI sur son signe ?</p>`, b: R`<p>Supposons que $g-f$ ne s'annule jamais. Étant continue sur l'intervalle $[a,b]$, elle <span data-k="signe">garde un signe constant</span>. Quitte à échanger $f$ et $g$, on suppose $g-f>0$.</p>`, rappels: ["absurde", "tvi"] },
+    { t: "Un point fixe de f", h: R`<p>$f$ envoie $[a,b]$ dans lui-même : exercice du point fixe.</p>`, b: R`<p>$f$ envoie $[a,b]$ dans $[a,b]$ et est continue : <span data-k="pf">elle a un point fixe</span> $x$, c'est-à-dire $f(x) = x$.</p>`, rappels: ["tvi"] },
+    { t: "g envoie les points fixes de f sur des points fixes de f", h: R`<p>Calcule $f(g(x))$ en utilisant $f\circ g = g\circ f$.</p>`, b: R`<p>Si $f(x) = x$, alors $f\big(g(x)\big) = g\big(f(x)\big) = g(x)$ : $g(x)$ est aussi un point fixe de $f$. De plus $g(x)>f(x) = x$.</p>` },
+    { t: "La suite des itérés", h: R`<p>Itère $g$ à partir du point fixe : la suite obtenue est monotone et bornée.</p>`, b: R`<p>On pose <span data-k="iteres">$u_0 = x$ et $u_{n+1} = g(u_n)$</span>. Par l'étape précédente, chaque $u_n$ est un point fixe de $f$ et $u_{n+1}>u_n$. La suite est croissante et à valeurs dans $[a,b]$ : elle converge vers $\ell\in[a,b]$.</p>`, rappels: ["recurrence", "limite-monotone"] },
+    { t: "La contradiction", h: R`<p>Passe à la limite dans les deux relations.</p>`, b: R`<p>En passant à la limite dans $f(u_n) = u_n$ et $u_{n+1} = g(u_n)$, par continuité de $f$ et $g$ : $f(\ell) = \ell$ et $g(\ell) = \ell$. Donc $g(\ell)-f(\ell) = 0$, ce qui contredit $g-f>0$.</p>`, rappels: ["continuite-point-fixe"] }
   ],
   piege: R`Chercher directement $x_0$ : on ne sait rien construire. L'absurde donne une information de signe très utile.`,
   methode: R`Quand $f\circ g = g\circ f$, $g$ envoie les points fixes de $f$ sur des points fixes de $f$ : itérer $g$ est souvent la clé.`
@@ -1385,13 +1385,13 @@ LEMME.exercises([
     }
   },
   steps: [
-    { t: "f est injective", b: R`<p>Soit $f$ une solution. Si $f(x) = f(x')$, alors $f(f(x)) = f(f(x'))$, et $(*)$ donne $2f(x)-x = 2f(x')-x'$, donc $x = x'$. $f$ est injective et continue : strictement monotone.</p>`, rappels: ["injective-monotone"] },
-    { t: "f est croissante et bijective", b: R`<p>Si $f$ était décroissante, $f\circ f$ serait croissante, donc $\mathrm{Id} = 2f-f\circ f$ serait décroissante : absurde. Si $f$ avait une limite finie $\ell$ en $+\infty$, alors $x = 2f(x)-f(f(x))\to2\ell-f(\ell)$, absurde. Donc $f\to+\infty$ en $+\infty$, de même $f\to-\infty$ en $-\infty$ : $f$ est une bijection croissante de $\mathbb R$.</p>`, rappels: ["bijection-continue", "absurde"] },
-    { t: "La suite des itérés", b: R`<p>Soit $x$ réel et $u_n = f^n(x)$, défini pour $n\in\mathbb Z$ (les <span data-k="iter">itérés</span>, avec $f^{-1}$ pour les indices négatifs). <span data-k="rec">En appliquant $(*)$ en $f^n(x)$</span> :</p>$$u_{n+2} = 2u_{n+1}-u_n.$$` },
-    { t: "Résoudre la récurrence", b: R`<p>L'équation caractéristique $r^2-2r+1 = 0$ a la racine double $1$ : $u_n = \lambda n+\mu$. Avec $u_0 = x$ et $u_1 = f(x)$ :</p>$$f^n(x) = n\big(f(x)-x\big)+x.$$<p>En particulier, $\dfrac{f^n(x)}n\to f(x)-x$ quand $n\to+\infty$.</p>`, rappels: ["rec-lineaire-2"] },
-    { t: "Comparer deux points", b: R`<p>Si $f\neq\mathrm{Id}$, il existe $x$ avec $f(x)\neq x$, par exemple $f(x)>x$. Pour $y$ réel, il existe $p\in\mathbb Z$ avec $p\big(f(x)-x\big)\leqslant y-x<(p+1)\big(f(x)-x\big)$, c'est-à-dire $f^p(x)\leqslant y< f^{p+1}(x)$. En appliquant $f^n$, qui est croissante :</p>$$f^{n+p}(x)\leqslant f^n(y)\leqslant f^{n+p+1}(x).$$` },
-    { t: "Passer à la limite", b: R`<p>On divise par $n$ et on fait $n\to+\infty$ : les deux bornes tendent vers $f(x)-x$, et le milieu vers $f(y)-y$. Donc <span data-k="const">$f(y)-y = f(x)-x$</span> pour tout $y$.</p>`, rappels: ["encadrement"] },
-    { t: "Conclusion", b: R`<p>Il existe une constante $C$ telle que $f(y) = y+C$ pour tout $y$ (cela inclut $f = \mathrm{Id}$, avec $C = 0$). Réciproquement : $f(f(x)) = x+2C$ et $2f(x)-x = x+2C$. Les solutions sont les $x\mapsto x+C$.</p>` }
+    { t: "f est injective", h: R`<p>Si $f(x) = f(x')$, applique $f$ puis utilise $(*)$.</p>`, b: R`<p>Soit $f$ une solution. Si $f(x) = f(x')$, alors $f(f(x)) = f(f(x'))$, et $(*)$ donne $2f(x)-x = 2f(x')-x'$, donc $x = x'$. $f$ est injective et continue : strictement monotone.</p>`, rappels: ["injective-monotone"] },
+    { t: "f est croissante et bijective", h: R`<p>Si $f$ décroît, $f\circ f$ croît. Regarde aussi les limites en $\pm\infty$.</p>`, b: R`<p>Si $f$ était décroissante, $f\circ f$ serait croissante, donc $\mathrm{Id} = 2f-f\circ f$ serait décroissante : absurde. Si $f$ avait une limite finie $\ell$ en $+\infty$, alors $x = 2f(x)-f(f(x))\to2\ell-f(\ell)$, absurde. Donc $f\to+\infty$ en $+\infty$, de même $f\to-\infty$ en $-\infty$ : $f$ est une bijection croissante de $\mathbb R$.</p>`, rappels: ["bijection-continue", "absurde"] },
+    { t: "La suite des itérés", h: R`<p>Applique $(*)$ au point $f^n(x)$.</p>`, b: R`<p>Soit $x$ réel et $u_n = f^n(x)$, défini pour $n\in\mathbb Z$ (les <span data-k="iter">itérés</span>, avec $f^{-1}$ pour les indices négatifs). <span data-k="rec">En appliquant $(*)$ en $f^n(x)$</span> :</p>$$u_{n+2} = 2u_{n+1}-u_n.$$` },
+    { t: "Résoudre la récurrence", h: R`<p>Suite récurrente linéaire d'ordre $2$ : équation caractéristique $r^2-2r+1 = 0$.</p>`, b: R`<p>L'équation caractéristique $r^2-2r+1 = (r-1)^2 = 0$ a la racine double $1$ : $u_n = (\lambda n+\mu)1^n = \lambda n+\mu$. Avec $u_0 = \mu = x$ et $u_1 = \lambda+\mu = f(x)$, on trouve $\lambda = f(x)-x$ :</p>$$f^n(x) = n\big(f(x)-x\big)+x.$$<p>En particulier, $\dfrac{f^n(x)}n\to f(x)-x$ quand $n\to+\infty$.</p>`, rappels: ["rec-lineaire-2"] },
+    { t: "Comparer deux points", h: R`<p>Encadre $y$ entre deux itérés de $x$, puis applique $f^n$.</p>`, b: R`<p>Si $f\neq\mathrm{Id}$, il existe $x$ avec $f(x)\neq x$, par exemple $f(x)>x$. Pour $y$ réel, il existe $p\in\mathbb Z$ avec $p\big(f(x)-x\big)\leqslant y-x<(p+1)\big(f(x)-x\big)$, c'est-à-dire $f^p(x)\leqslant y< f^{p+1}(x)$. En appliquant $f^n$, qui est croissante :</p>$$f^{n+p}(x)\leqslant f^n(y)\leqslant f^{n+p+1}(x).$$` },
+    { t: "Passer à la limite", h: R`<p>Divise par $n$ et passe à la limite.</p>`, b: R`<p>On divise par $n$ et on fait $n\to+\infty$ : les deux bornes tendent vers $f(x)-x$, et le milieu vers $f(y)-y$. Donc <span data-k="const">$f(y)-y = f(x)-x$</span> pour tout $y$.</p>`, rappels: ["encadrement"] },
+    { t: "Conclusion", h: R`<p>Vérifie que $x\mapsto x+C$ convient.</p>`, b: R`<p>Il existe une constante $C$ telle que $f(y) = y+C$ pour tout $y$ (cela inclut $f = \mathrm{Id}$, avec $C = 0$). Réciproquement : $f(f(x)) = x+2C$ et $2f(x)-x = x+2C$. Les solutions sont les $x\mapsto x+C$.</p>` }
   ],
   piege: R`Confondre $f^n$ (composée $n$ fois) et $f(x)^n$ (puissance) : ici c'est toujours la composition.`,
   methode: R`Une équation $f\circ f = af+b\,\mathrm{Id}$ donne une récurrence linéaire sur les itérés $f^n(x)$ : résous-la, puis exploite la croissance.`
