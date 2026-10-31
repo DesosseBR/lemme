@@ -27,6 +27,13 @@ text{fill:var(--ink);font-size:15px}
 text.it{font-style:italic}
 text.sm{font-size:12.5px;fill:var(--muted);font-style:normal}
 text.r{fill:var(--red)} text.g{fill:var(--gold-ink)} text.b{fill:var(--blue)} text.v{fill:var(--green)}
+.zb{fill:rgba(36,83,214,.13);stroke:var(--blue);stroke-width:2}
+.zr{fill:rgba(200,54,43,.11);stroke:var(--red);stroke-width:2}
+.zg{fill:rgba(176,122,0,.13);stroke:var(--gold-ink);stroke-width:2}
+.zv{fill:rgba(31,122,77,.13);stroke:var(--green);stroke-width:2}
+.dsh{stroke-dasharray:7 5}
+.pt{fill:var(--ink)}.ptr{fill:var(--red)}.ptb{fill:var(--blue)}.ptv{fill:var(--green)}
+.open{fill:#fff;stroke:var(--ink);stroke-width:1.8}
 """
 
 def main(path):

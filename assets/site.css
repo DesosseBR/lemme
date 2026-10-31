@@ -865,3 +865,10 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 @media (max-width:640px){.exhead h1{font-size:23px}.split > .panelbox{padding:18px 16px}.tabs [data-cc]{padding:8px 12px;font-size:14px}}
 .layout > *{min-width:0}
 .layout .btn{max-width:100%;white-space:normal}
+.fig .zb{fill:color-mix(in srgb,var(--blue,#2453D6) 13%,transparent);stroke:var(--blue,#2453D6);stroke-width:2}
+.fig .zr{fill:color-mix(in srgb,var(--red) 11%,transparent);stroke:var(--red);stroke-width:2}
+.fig .zg{fill:color-mix(in srgb,var(--gold-ink) 13%,transparent);stroke:var(--gold-ink);stroke-width:2}
+.fig .zv{fill:color-mix(in srgb,var(--green) 13%,transparent);stroke:var(--green);stroke-width:2}
+.fig .dsh{stroke-dasharray:7 5}
+.fig .pt{fill:var(--ink)}.fig .ptr{fill:var(--red)}.fig .ptb{fill:var(--blue,#2453D6)}.fig .ptv{fill:var(--green)}
+.fig .open{fill:var(--surface);stroke:var(--ink);stroke-width:1.8}
