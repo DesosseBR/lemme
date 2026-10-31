@@ -47,7 +47,58 @@ const I = {
 const DONE = (() => { try { return JSON.parse(localStorage.getItem("lemme-done") || "{}") || {}; } catch (e) { return {}; } })();
 const doneN = id => DONE[id] || 0;
 function setDone(id, n) { if (n > 0) DONE[id] = n; else delete DONE[id]; try { localStorage.setItem("lemme-done", JSON.stringify(DONE)); } catch (e) {} }
-const ttl = e => e.tt || esc(e.title);
+const MT = (() => {
+  const SYM = {"⊂":"\\subset ","⊃":"\\supset ","∘":"\\circ ","≤":"\\leqslant ","≥":"\\geqslant ","⩽":"\\leqslant ","⩾":"\\geqslant ","∈":"\\in ","∉":"\\notin ","ℝ":"\\mathbb R","ℕ":"\\mathbb N","ℤ":"\\mathbb Z","ℂ":"\\mathbb C","ℚ":"\\mathbb Q","𝕂":"\\mathbb K","∑":"\\sum ","∏":"\\prod ","√":"\\sqrt ","∫":"\\int ","→":"\\to ","↦":"\\mapsto ","⇒":"\\Rightarrow ","⇔":"\\iff ","≠":"\\neq ","∞":"\\infty ","Δ":"\\Delta ","𝒫":"\\mathcal P","−":"-","×":"\\times ","∩":"\\cap ","∪":"\\cup ","∖":"\\setminus ","≡":"\\equiv ","∼":"\\sim ","≈":"\\approx ","∀":"\\forall ","∃":"\\exists ","∂":"\\partial ","∇":"\\nabla ","⊥":"\\perp ","∅":"\\emptyset ","±":"\\pm ","α":"\\alpha ","β":"\\beta ","γ":"\\gamma ","δ":"\\delta ","ε":"\\varepsilon ","θ":"\\theta ","λ":"\\lambda ","μ":"\\mu ","ν":"\\nu ","π":"\\pi ","ρ":"\\rho ","σ":"\\sigma ","τ":"\\tau ","φ":"\\varphi ","χ":"\\chi ","ψ":"\\psi ","ω":"\\omega ","ξ":"\\xi ","ζ":"\\zeta ","η":"\\eta ","Γ":"\\Gamma ","Λ":"\\Lambda ","Π":"\\Pi ","Σ":"\\Sigma ","Φ":"\\Phi ","Ω":"\\Omega ","ℓ":"\\ell ","‖":"\\|","⁻¹":"^{-1}","ⁿ":"^n","²":"^2","³":"^3","ᵏ":"^k","ᵖ":"^p","⁰":"^0","¹":"^1","⁴":"^4","ˣ":"^x","₀":"_0","₁":"_1","₂":"_2","₃":"_3","ₙ":"_n","ₖ":"_k","ᵢ":"_i","ⱼ":"_j","ₚ":"_p","ᵣ":"_r"};
+  const FN = {ker:"\\ker",Im:"\\operatorname{Im}",det:"\\det",tr:"\\operatorname{tr}",rg:"\\operatorname{rg}",sin:"\\sin",cos:"\\cos",tan:"\\tan",ln:"\\ln",exp:"\\exp",arctan:"\\arctan",sh:"\\operatorname{sh}",ch:"\\operatorname{ch}",th:"\\operatorname{th}",min:"\\min",max:"\\max",sup:"\\sup",inf:"\\inf",lim:"\\lim",dim:"\\dim",Vect:"\\operatorname{Vect}",Id:"\\mathrm{Id}",deg:"\\deg",pgcd:"\\operatorname{pgcd}"};
+  const SYMRE = new RegExp(Object.keys(SYM).map(s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).sort((a, b) => b.length - a.length).join("|"), "g");
+  const TEXTW = new Set("a à y l d et ou de du des le la les un une en sur par pour avec sans dans est sont si on ne pas que qui au aux ce cet cette son sa ses leur deux trois puis donc mais car".split(" "));
+  const isMath = w => {
+    const core = /\(/.test(w) ? w.replace(/^[«\[]+|[».,;:!?\]]+$/g, "") : w.replace(/^[«(\[]+|[»).,;:!?\]]+$/g, "");
+    if (!core) return false;
+    if (/^Q\d|^(Étape|Partie|Cas)$/i.test(core)) return false;
+    if (/^\(?[ivx]+\)$/.test(w) || /^\(?[a-h]\)$/.test(w)) return false;
+    if (/^[\[\]]?-?[0-9]*[A-Za-z]{0,2}[,;]?[\[\]]?$/.test(w) && /[\[\]]/.test(w)) return true;
+    if (/^\d+[a-zA-Z]{1,2}$/.test(core)) return true;
+    if (SYMRE.test(w)) { SYMRE.lastIndex = 0; return true; }
+    SYMRE.lastIndex = 0;
+    if (/[_^=<>|+*/]/.test(w)) return true;
+    if (FN[core.replace(/\(.*$/, "")] && /^[a-zA-Z]+(\(|$)/.test(core) && core.replace(/\(.*$/, "") !== "ch" ) return true;
+    if (/^[A-Za-z]$/.test(core) && !TEXTW.has(core)) return true;
+    if (/^[A-Za-z]'+$/.test(core)) return true;
+    if (/^[A-Za-z]\(.*\)$/.test(core)) return true;
+    if (/^-?\d+$/.test(core)) return "num";
+    if (/^[A-Za-z]{1,2}\d+$/.test(core) && !/^Q\d/.test(core)) return true;
+    return false;
+  };
+  const conv = s => s.replace(SYMRE, m => SYM[m]).replace(/\b([A-Za-z]+)\b/g, (m, w) => FN[w] || m).replace(/\^\(([^()]*)\)/g, "^{$1}").replace(/_([A-Za-z0-9])/g, "_{$1}").replace(/\^(-?[A-Za-z0-9]+)/g, "^{$1}");
+  return function (t) {
+    if (!t || t.includes("$")) return null;
+    const ws = t.split(/\s+/).filter(Boolean);
+    const cls = ws.map(isMath);
+    const OP = /^(=|<|>|≤|≥|⩽|⩾|≠|⊂|∈|→|⇒|⇔|\+|−|-|\*|×|∘|∩|∪)$/;
+    for (let i = 0; i < ws.length; i++) {
+      if (/^[ay]$/.test(ws[i]) && ((ws[i + 1] && OP.test(ws[i + 1])) || (ws[i - 1] && OP.test(ws[i - 1])))) cls[i] = true;
+      if (cls[i] === "num") cls[i] = (cls[i - 1] === true || cls[i + 1] === true) ? true : false;
+    }
+    if (!cls.some(c => c === true)) return null;
+    const out = [];
+    for (let i = 0; i < ws.length;) {
+      if (cls[i] !== true) { out.push(ws[i]); i++; continue; }
+      let j = i; while (j + 1 < ws.length && cls[j + 1] === true) j++;
+      let seg = ws.slice(i, j + 1).join(" ");
+      let pre = "", post = "";
+      const pm = seg.match(/^«+/); if (pm) { pre = pm[0]; seg = seg.slice(pre.length); }
+      const qm = seg.match(/[».,;:!?]+$/); if (qm) { post = qm[0]; seg = seg.slice(0, -post.length); }
+      if (seg.endsWith(")") && (seg.match(/\(/g) || []).length < (seg.match(/\)/g) || []).length) { seg = seg.slice(0, -1); post = ")" + post; }
+      if (seg.startsWith("(") && (seg.match(/\(/g) || []).length > (seg.match(/\)/g) || []).length) { seg = seg.slice(1); pre += "("; }
+      out.push(pre + "$" + conv(seg).trim() + "$" + post);
+      i = j + 1;
+    }
+    return out.join(" ");
+  };
+})();
+const ttl = e => e.tt || esc(MT(e.title) || e.title);
+const stt = t => esc(MT(t) || t);
 const CC_SHORT = { ccinp: "CCINP", mt: "Mines-Télécom", c1: "Centrale", mp: "Mines-Ponts", x: "X-ENS" };
 const BANK_MARK = { "X-ENS": ["X", "x"], "Mines-Ponts": ["MP", "mp"], "Centrale-Supélec": ["CS", "c1"], "CCINP": ["CCINP", "ccinp"], "e3a-Polytech": ["e3a", "e3a"] };
 const bankMark = (name, big) => { const m = BANK_MARK[name] || [name.slice(0, 2), ""]; return `<span class="bmark${big ? " big" : ""}" data-cc="${m[1]}" aria-hidden="true">${m[0]}</span>`; };
@@ -177,7 +228,7 @@ function home() {
     </div>
     <div class="panelbox player" aria-label="Aperçu d'un corrigé">
       <div class="prog" aria-hidden="true">${demo.steps.map((_, k) => `<button tabindex="-1" class="${k <= 1 ? "done" : ""}"></button>`).join("")}<button tabindex="-1"></button></div>
-      <div class="step"><span class="count">Étape 2 sur ${demo.steps.length}</span><h3>${esc(st.t)}</h3><div class="prose">${st.b}</div>
+      <div class="step"><span class="count">Étape 2 sur ${demo.steps.length}</span><h3>${stt(st.t)}</h3><div class="prose">${st.b}</div>
       <div class="rappels"><span class="lab">Rappels utilisés</span>${(st.rappels || []).map(r => rchip(r)).join("")}</div></div>
     </div>
   </div></section>
@@ -352,7 +403,7 @@ function banquePage(slug) {
   const list = sujetsOf(b.name);
   return phead({ crumb: [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
     <p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
-    <div class="tiles ann stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>
+    <div class="tiles ann vault stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>
   </div></div>`;
 }
 function sujetPage(i) {
@@ -364,7 +415,7 @@ function sujetPage(i) {
     <div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}"></div>
     <h2 style="margin:40px 0 8px">Le corrigé, question par question</h2>
     <p class="lead">Une page par partie, avec l'énoncé à côté du corrigé.</p>
-    <div class="tiles ann stagger">${parts.map(e => tile(`#e-${e.id}`, "Partie " + esc(e.part.replace(/\s*\(.*\)/, "")), ttl(e), doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : "", doneN(e.id) ? "is-done" : "")).join("")}</div>
+    <div class="tiles ann vault stagger">${parts.map(e => tile(`#e-${e.id}`, "Partie " + esc(e.part.replace(/\s*\(.*\)/, "")), ttl(e), doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : "", doneN(e.id) ? "is-done" : "")).join("")}</div>
   </div></div>`;
 }
 
@@ -388,7 +439,7 @@ function orauxMathsPage() {
   return phead({ crumb: [["Oraux", "#oral"], ["Mathématiques"]], title: "Oraux de mathématiques", meta: `<span class="tag y">${list.length} chapitres</span>`, photo: "oral" })
   + `<div class="wrap layout full"><div>
     <p class="lead">Des exercices tombés à l'oral, rangés par chapitre puis par concours.</p>
-    <div class="tiles oral stagger">${list.map((c, i) => { const ks = (c.cc || []).filter(k => EXERCISES.some(e => e.subj === "oraux" && e.chap === i && e.concours === k)); return tile(`#c-oraux-mp-${i}`, pad(i + 1), esc(c.t), ks.map(k => `<i class="ccb" data-cc="${k}">${esc(CC_SHORT[k] || CONC[k])}</i>`).join("")); }).join("")}</div>
+    <div class="tiles oral vault stagger">${list.map((c, i) => { const ks = (c.cc || []).filter(k => EXERCISES.some(e => e.subj === "oraux" && e.chap === i && e.concours === k)); return tile(`#c-oraux-mp-${i}`, pad(i + 1), esc(c.t), ks.map(k => `<i class="ccb" data-cc="${k}">${esc(CC_SHORT[k] || CONC[k])}</i>`).join("")); }).join("")}</div>
   </div></div>`;
 }
 
@@ -410,7 +461,7 @@ function commandoPage() {
   </div></section>
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>Chapitre 1 · ${esc(s.part)}</h2></div>
-    <ol class="chapters stagger">${list.map((c, i) => { const n = exOf("xens", "mp", i).length, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); return (n || r) ? `<li><a href="#c-xens-mp-${i}"><span class="num">1.${i + 1}</span><h3>${esc(c.t)}</h3><span class="info">${r ? "<span>Résumé</span>" : ""}${n ? `<span><b>${n}</b> exos</span>` : ""}<svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>` : `<li><div class="soonrow"><span class="num">1.${i + 1}</span><h3>${esc(c.t)}</h3><span class="info">En préparation</span></div></li>`; }).join("")}</ol>
+    <div class="tiles vault stagger">${list.map((c, i) => { const n = exOf("xens", "mp", i).length, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); return (n || r) ? tile(`#c-xens-mp-${i}`, `1.${i + 1}`, esc(c.t), [r ? "Résumé" : "", n ? `${n} exos` : ""].filter(Boolean).join(" · ")) : `<span class="tile off"><span class="tnum">1.${i + 1}</span><span class="tt">${esc(c.t)}</span><span class="tfoot">En préparation</span></span>`; }).join("")}</div>
   </div></section>
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>La suite du programme</h2></div>
@@ -505,7 +556,7 @@ function stepLinks(ex, pred, label) {
   if (!ex || !ex.steps) return "";
   const ks = ex.steps.map((st, k) => pred(st) ? k : -1).filter(k => k >= 0).slice(0, 6);
   if (!ks.length) return "";
-  return `<div class="here-steps"><h4>${label}</h4>${ks.map(k => { const st = ex.steps[k]; const pos = ex.qnav ? qpos(ex, k) : null; return `<button type="button" class="here-go" data-go-step="${k}">${st.q ? `Q${st.q}` : `Étape ${k + 1}`}${pos && pos[1] > 1 ? ` · étape ${pos[0]}` : ""} — ${esc(st.t)}</button>`; }).join("")}</div>`;
+  return `<div class="here-steps"><h4>${label}</h4>${ks.map(k => { const st = ex.steps[k]; const pos = ex.qnav ? qpos(ex, k) : null; return `<button type="button" class="here-go" data-go-step="${k}">${st.q ? `Q${st.q}` : `Étape ${k + 1}`}${pos && pos[1] > 1 ? ` · étape ${pos[0]}` : ""} — ${stt(st.t)}</button>`; }).join("")}</div>`;
 }
 function excerpt(src) {
   if (!src || src.closest("#drawer")) return null;
@@ -604,8 +655,8 @@ function bindSrc(root) {
 
 /* Rédaction complète d'un corrigé, et sa vue en grand */
 function redaction(e) {
-  if (e.qnav) return e.steps.map((st, k) => `${k === 0 || e.steps[k - 1].q !== st.q ? `<h3 class="rq">Question ${st.q}</h3>` : ""}<p class="rt"><b>Étape ${qpos(e, k)[0]} · ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
-  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
+  if (e.qnav) return e.steps.map((st, k) => `${k === 0 || e.steps[k - 1].q !== st.q ? `<h3 class="rq">Question ${st.q}</h3>` : ""}<p class="rt"><b>Étape ${qpos(e, k)[0]} · ${stt(st.t)}</b></p>${annotate(st.b, e)}`).join("");
+  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${stt(st.t)}</b></p>${annotate(st.b, e)}`).join("");
 }
 function qpos(e, k) { const q = e.steps[k].q, same = e.steps.map((st, j) => [st, j]).filter(x => x[0].q === q); return [same.findIndex(x => x[1] === k) + 1, same.length]; }
 let bigReturn = null;
@@ -646,7 +697,7 @@ function mountPlayer(e, host) {
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, e)).join("")}</div>` : ""}<div class="donebox donebilan">${doneHtml(e)}</div><div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${esc(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
+            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
         </div>
       </div>
       <div class="nav">

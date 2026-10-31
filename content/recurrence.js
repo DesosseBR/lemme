@@ -83,7 +83,6 @@ LEMME.exercises([
 },
 { id: "rc-factorielles", ...C0, level: 2, time: "20 min",
   title: "Un produit de factorielles impaires",
-  tt: R`$1!\,3!\cdots(2n+1)!\geqslant\big((n+1)!\big)^{n+1}$`,
   enonce: R`<p>Montrer que pour tout $n\in\mathbb N^\ast$ :</p>$$1!\times3!\times5!\times\dots\times(2n+1)!\geqslant\big((n+1)!\big)^{n+1}.$$`,
   decode: { donnees: [R`$k! = 1\times2\times\dots\times k$.`, R`Le produit de gauche contient les factorielles des nombres impairs $1,3,\dots,2n+1$.`], but: R`Une inégalité pour tout $n\geqslant1$, par récurrence.`, cles: {} },
   steps: [
