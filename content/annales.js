@@ -23,7 +23,9 @@ LEMME.subject({
       { t: "CNC 2025 · Mathématiques 2 MP", n: "Diagonalisation, trace, semi-normes, matrices symétriques positives", bank: "CNC", annee: 2025, epreuve: "Mathématiques 2", filiere: "MP", duree: "4 heures", titre: "Autour de la trace", nq: 45,
         intro: "Concours National Commun (Maroc), épreuve de Mathématiques 2. Un exercice de diagonalisation 3×3, puis un problème sur la trace : équations matricielles, les semi-normes qui vérifient q(MN) = q(NM), et une caractérisation des matrices symétriques positives par Tr(SU) ≤ Tr(S)." },
       { t: "CCINP 2025 · Mathématiques 1 MP", n: "Connexité par arcs, extrema, projection orthogonale, comparaison série-intégrale", bank: "CCINP", annee: 2025, epreuve: "Mathématiques 1", filiere: "MP", duree: "4 heures", titre: "Autour du théorème de comparaison avec une intégrale", nq: 12,
-        intro: "Deux exercices (une dérivée qui n'est pas connexe par arcs, un minimum par point critique puis par projection orthogonale) et un problème qui démontre le théorème de comparaison série-intégrale, l'applique (séries de Bertrand, constante d'Euler, série de fonctions) et montre par deux contre-exemples que ses hypothèses sont nécessaires." }
+        intro: "Deux exercices (une dérivée qui n'est pas connexe par arcs, un minimum par point critique puis par projection orthogonale) et un problème qui démontre le théorème de comparaison série-intégrale, l'applique (séries de Bertrand, constante d'Euler, série de fonctions) et montre par deux contre-exemples que ses hypothèses sont nécessaires." },
+      { t: "CCINP 2025 · Mathématiques 2 MP", n: "Graphes en Python, SQL, polynômes de Tchebychev, matrices de rang 1", bank: "CCINP", annee: 2025, epreuve: "Mathématiques 2", filiere: "MP", duree: "4 heures", titre: "Matrices de rang 1", nq: 25,
+        intro: "Un exercice d'informatique (graphes en Python, requêtes SQL), un exercice sur les polynômes de Tchebychev et leur produit scalaire, puis un problème sur les matrices de rang 1 : exemples aléatoires, polynômes caractéristique et minimal, diagonalisabilité, et la classification à similitude près par la trace." }
     ]
   }
 });
