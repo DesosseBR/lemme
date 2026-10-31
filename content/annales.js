@@ -21,7 +21,9 @@ LEMME.subject({
       { t: "CNC 2025 · Mathématiques 1 MP", n: "Intégrales à paramètre, séries entières, loi géométrique, équation différentielle, intégrale de Dirichlet", bank: "CNC", annee: 2025, epreuve: "Mathématiques 1", filiere: "MP", duree: "4 heures", titre: "Intégrales à paramètre et intégrale de Dirichlet", nq: 45,
         intro: "Concours National Commun (Maroc), épreuve de Mathématiques 1. Un exercice sur une transformée intégrale, puis un problème qui mène, par une équation différentielle, au calcul de l'intégrale de Dirichlet ∫ sin x / x = π/2." },
       { t: "CNC 2025 · Mathématiques 2 MP", n: "Diagonalisation, trace, semi-normes, matrices symétriques positives", bank: "CNC", annee: 2025, epreuve: "Mathématiques 2", filiere: "MP", duree: "4 heures", titre: "Autour de la trace", nq: 45,
-        intro: "Concours National Commun (Maroc), épreuve de Mathématiques 2. Un exercice de diagonalisation 3×3, puis un problème sur la trace : équations matricielles, les semi-normes qui vérifient q(MN) = q(NM), et une caractérisation des matrices symétriques positives par Tr(SU) ≤ Tr(S)." }
+        intro: "Concours National Commun (Maroc), épreuve de Mathématiques 2. Un exercice de diagonalisation 3×3, puis un problème sur la trace : équations matricielles, les semi-normes qui vérifient q(MN) = q(NM), et une caractérisation des matrices symétriques positives par Tr(SU) ≤ Tr(S)." },
+      { t: "CCINP 2025 · Mathématiques 1 MP", n: "Connexité par arcs, extrema, projection orthogonale, comparaison série-intégrale", bank: "CCINP", annee: 2025, epreuve: "Mathématiques 1", filiere: "MP", duree: "4 heures", titre: "Autour du théorème de comparaison avec une intégrale", nq: 12,
+        intro: "Deux exercices (une dérivée qui n'est pas connexe par arcs, un minimum par point critique puis par projection orthogonale) et un problème qui démontre le théorème de comparaison série-intégrale, l'applique (séries de Bertrand, constante d'Euler, série de fonctions) et montre par deux contre-exemples que ses hypothèses sont nécessaires." }
     ]
   }
 });
