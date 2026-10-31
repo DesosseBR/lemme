@@ -19,7 +19,9 @@ LEMME.subject({
       { t: "e3a-Polytech 2025 · Mathématiques MP", n: "Extrema sous contrainte, transformée de Fourier discrète, séries entières et intégrales", bank: "e3a-Polytech", annee: 2025, epreuve: "Mathématiques", filiere: "MP", duree: "4 heures", titre: "Extrema liés, matrice de Fourier et une série entière", nq: 44, pdf: "sujet-e3a-2025-mp",
         intro: "Le sujet complet, tel qu'il a été distribué (partagé sur maths-concours.fr, licence CC BY-NC-SA 4.0). Trois exercices indépendants : un minimum sous contrainte par trois méthodes, la matrice de la transformée de Fourier discrète et ses valeurs propres, puis l'étude d'une série entière et d'une intégrale associée." },
       { t: "CNC 2025 · Mathématiques 1 MP", n: "Intégrales à paramètre, séries entières, loi géométrique, équation différentielle, intégrale de Dirichlet", bank: "CNC", annee: 2025, epreuve: "Mathématiques 1", filiere: "MP", duree: "4 heures", titre: "Intégrales à paramètre et intégrale de Dirichlet", nq: 45,
-        intro: "Concours National Commun (Maroc), épreuve de Mathématiques 1. Un exercice sur une transformée intégrale, puis un problème qui mène, par une équation différentielle, au calcul de l'intégrale de Dirichlet ∫ sin x / x = π/2." }
+        intro: "Concours National Commun (Maroc), épreuve de Mathématiques 1. Un exercice sur une transformée intégrale, puis un problème qui mène, par une équation différentielle, au calcul de l'intégrale de Dirichlet ∫ sin x / x = π/2." },
+      { t: "CNC 2025 · Mathématiques 2 MP", n: "Diagonalisation, trace, semi-normes, matrices symétriques positives", bank: "CNC", annee: 2025, epreuve: "Mathématiques 2", filiere: "MP", duree: "4 heures", titre: "Autour de la trace", nq: 45,
+        intro: "Concours National Commun (Maroc), épreuve de Mathématiques 2. Un exercice de diagonalisation 3×3, puis un problème sur la trace : équations matricielles, les semi-normes qui vérifient q(MN) = q(NM), et une caractérisation des matrices symétriques positives par Tr(SU) ≤ Tr(S)." }
     ]
   }
 });
