@@ -237,7 +237,7 @@ function exercisePage(eid) {
         <p class="legend-k">${Object.keys(d.cles || {}).length ? `<span><i class="lk"></i>Surligné en jaune : un mot de l'énoncé expliqué</span>` : ""}<span><i class="ln"></i>Surligné en bleu : une notion de cours, avec sa définition</span></p>
       </div>
       ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}`;
-    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor" class="cor-h"><span class="sr-only">Corrigé pas à pas</span>${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
+    const cor = `<section class="panelbox" aria-labelledby="h-cor"><h2 id="h-cor" class="cor-h"><span class="sr-only">Corrigé pas à pas</span>${e.side ? `<span class="legend" aria-hidden="true"><span class="lg lg-n">notion de cours</span><span class="lg lg-k">mot expliqué</span><span class="lg lg-s">donné par l'énoncé</span></span>` : ""}${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
     const viz = [].concat(e.viz || []).map((v, k) => `<section class="panelbox" aria-labelledby="h-viz${k}"><h2 id="h-viz${k}">${v.title || "Visualiser"}</h2><div id="viz${k ? k : ""}"></div></section>`).join("");
     const more = others.length ? `<section><h2 style="font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 16px">Pour continuer</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
     if (e.side) return `<div class="wrap wrap-wide"><div class="ex-layout wide">
@@ -547,6 +547,39 @@ function bindKeys(root, ex) {
   });
 }
 
+/* Renvois à l'énoncé (vert) : un clic montre la donnée dans l'énoncé */
+function srcTarget(v, root) {
+  const box = root || $(".side-en") || $(".enonce");
+  if (!box) return null;
+  if (/^q\d+$/.test(v)) {
+    const q = +v.slice(1);
+    return $$(".enonce ol > li", box).find(li => { const ol = li.parentElement; return (ol.hasAttribute("start") ? +ol.getAttribute("start") : 1) + [...ol.children].indexOf(li) === q && ol.closest(".enonce") === li.closest(".enonce") && !li.parentElement.closest("li"); }) || null;
+  }
+  return $(`[data-def="${v}"]`, box) || $(`.enonce [data-k="${v}"]`, box);
+}
+function bindSrc(root) {
+  $$("[data-src]", root).forEach(k => {
+    if (k.dataset.bound) return; k.dataset.bound = "1";
+    k.setAttribute("tabindex", "0"); k.setAttribute("role", "button");
+    k.setAttribute("title", "Donné dans l'énoncé : cliquer pour le voir");
+    const go = ev => {
+      ev.stopPropagation(); closeTip();
+      const big = k.closest(".bigread");
+      const t = srcTarget(k.dataset.src, big || null);
+      if (!t) return;
+      const rm = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      const box = t.closest(".side-en");
+      if (box && box.scrollHeight > box.clientHeight) { const y = t.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop; box.scrollTo({ top: Math.max(0, y - 90), behavior: rm }); }
+      else t.scrollIntoView({ behavior: rm, block: "center" });
+      $$(".src-flash").forEach(x => x.classList.remove("src-flash"));
+      void t.offsetWidth; t.classList.add("src-flash");
+      setTimeout(() => t.classList.remove("src-flash"), 2600);
+    };
+    k.addEventListener("click", go);
+    k.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(ev); } });
+  });
+}
+
 /* Rédaction complète d'un corrigé, et sa vue en grand */
 function redaction(e) {
   if (e.qnav) return e.steps.map((st, k) => `${k === 0 || e.steps[k - 1].q !== st.q ? `<h3 class="rq">Question ${st.q}</h3>` : ""}<p class="rt"><b>Étape ${qpos(e, k)[0]} · ${esc(st.t)}</b></p>${annotate(st.b, e)}`).join("");
@@ -563,7 +596,7 @@ function openBig(e) {
   document.body.appendChild(ov); document.body.style.overflow = "hidden";
   $("[data-close]", ov).addEventListener("click", () => closeBig());
   $("[data-close]", ov).focus();
-  bindKeys(ov, e); typeset(ov);
+  bindKeys(ov, e); bindSrc(ov); typeset(ov);
 }
 function closeBig(silent) {
   const ov = $("#bigread"); if (!ov) return;
@@ -608,7 +641,7 @@ function mountPlayer(e, host) {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
     }));
-    closeTip(); bindKeys(host, e);
+    closeTip(); bindKeys(host, e); bindSrc(host);
     if (e.side) {
       const q = last ? 0 : (st.q || 0);
       const lis = $$(".side-en .enonce > ol > li");

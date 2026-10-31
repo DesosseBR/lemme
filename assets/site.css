@@ -752,3 +752,15 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .drawer .notion-body li{margin:4px 0}
 .drawer .here-lab,.drawer .here-steps h4{margin:18px 0 6px;font:600 14px/1.4 var(--f-display);letter-spacing:0;text-transform:none;color:var(--muted)}
 .drawer .here-quote{background:none;border-left:2px solid var(--line);border-radius:0;padding:2px 0 2px 14px}
+/* Renvois à l'énoncé : surlignage vert, clic = montrer la donnée dans l'énoncé */
+[data-src]{background:color-mix(in srgb,#16a34a 16%,transparent);padding:1px 4px;border-radius:5px;cursor:pointer;transition:background .15s}
+[data-src]:hover,[data-src]:focus-visible{background:color-mix(in srgb,#16a34a 28%,transparent);outline:none}
+.src-flash{animation:srcflash 2.6s ease-out;border-radius:6px}
+@keyframes srcflash{0%,40%{background:color-mix(in srgb,#16a34a 30%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,#16a34a 45%,transparent)}100%{background:transparent;box-shadow:0 0 0 3px transparent}}
+@media (prefers-reduced-motion:reduce){.src-flash{animation:none;background:color-mix(in srgb,#16a34a 22%,transparent)}}
+.cor-h .legend{display:flex;flex-wrap:wrap;gap:10px;font:500 12.5px/1.4 var(--f-display);color:var(--muted);letter-spacing:0;text-transform:none}
+.cor-h .lg{padding:1px 6px;border-radius:5px}
+.cor-h .lg-n{background:color-mix(in srgb,var(--blue) 14%,transparent)}
+.cor-h .lg-k{background:color-mix(in srgb,var(--yellow) 40%,transparent)}
+.cor-h .lg-s{background:color-mix(in srgb,#16a34a 16%,transparent)}
+.cor-h{justify-content:flex-start;align-items:center;gap:12px}
