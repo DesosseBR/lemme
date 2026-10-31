@@ -1040,5 +1040,11 @@
  "enonce-ord-descente": "160b7263cb803f51a8e6",
  "corrige-ord-descente": "160b7263c19aece13862",
  "enonce-ord-fini": "160b7263d126c0aec9a4",
- "corrige-ord-fini": "160b726361ecd844171a"
+ "corrige-ord-fini": "160b726361ecd844171a",
+ "enonce-e3a25-2": "160b72635805bc597e21",
+ "enonce-e3a25-1": "160b72636cb27a56f14b",
+ "corrige-e3a25-1": "160b7263d9283761275a",
+ "corrige-e3a25-2": "160b7263e8b25d18c54f",
+ "enonce-e3a25-3": "160b7263ce3878f6d745",
+ "corrige-e3a25-3": "160b7263778c7b6a2c81"
 }

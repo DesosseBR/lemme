@@ -10,7 +10,8 @@ const LEMME = window.LEMME = {
     { name: "Mines-Ponts", desc: "Mines Paris, Ponts, ISAE-Supaero, Télécom et d'autres écoles." },
     { name: "Centrale-Supélec", desc: "Écrits exigeants, oraux de maths dont une épreuve avec Python." },
     { name: "CCINP", desc: "Une banque officielle d'exercices d'oral est publiée chaque année." },
-    { name: "e3a-Polytech", desc: "Réseau Polytech. Sujets proches du cours, où la rigueur paie." }
+    { name: "e3a-Polytech", desc: "Réseau Polytech. Sujets proches du cours, où la rigueur paie." },
+    { name: "CNC", desc: "Concours National Commun (Maroc) : l'écrit commun aux grandes écoles d'ingénieurs marocaines." }
   ],
   subject(s) { this.SUBJECTS.push(s); },
   exercises(list) { this.EXERCISES.push(...list); },

@@ -100,7 +100,7 @@ const MT = (() => {
 const ttl = e => e.tt || esc(MT(e.title) || e.title);
 const stt = t => esc(MT(t) || t);
 const CC_SHORT = { ccinp: "CCINP", mt: "Mines-Télécom", c1: "Centrale", mp: "Mines-Ponts", x: "X-ENS" };
-const BANK_MARK = { "X-ENS": ["X", "x"], "Mines-Ponts": ["MP", "mp"], "Centrale-Supélec": ["CS", "c1"], "CCINP": ["CCINP", "ccinp"], "e3a-Polytech": ["e3a", "e3a"] };
+const BANK_MARK = { "X-ENS": ["X", "x"], "Mines-Ponts": ["MP", "mp"], "Centrale-Supélec": ["CS", "c1"], "CCINP": ["CCINP", "ccinp"], "e3a-Polytech": ["e3a", "e3a"], "CNC": ["CNC", "cnc"] };
 const bankMark = (name, big) => { const m = BANK_MARK[name] || [name.slice(0, 2), ""]; return `<span class="bmark${big ? " big" : ""}" data-cc="${m[1]}" aria-hidden="true">${m[0]}</span>`; };
 const BANK_PHOTO = {
   "X-ENS": "Ecole_polytechnique_former_building_entrance.jpg",
