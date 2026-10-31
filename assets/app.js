@@ -51,6 +51,17 @@ const ttl = e => e.tt || esc(e.title);
 const CC_SHORT = { ccinp: "CCINP", mt: "Mines-Télécom", c1: "Centrale", mp: "Mines-Ponts", x: "X-ENS" };
 const BANK_MARK = { "X-ENS": ["X", "x"], "Mines-Ponts": ["MP", "mp"], "Centrale-Supélec": ["CS", "c1"], "CCINP": ["CCINP", "ccinp"], "e3a-Polytech": ["e3a", "e3a"] };
 const bankMark = (name, big) => { const m = BANK_MARK[name] || [name.slice(0, 2), ""]; return `<span class="bmark${big ? " big" : ""}" data-cc="${m[1]}" aria-hidden="true">${m[0]}</span>`; };
+const BANK_PHOTO = {
+  "X-ENS": "Ecole_polytechnique_former_building_entrance.jpg",
+  "Mines-Ponts": "P1250413_Paris_VI_bd_St-Michel_ecole_des_Mines_rwk.jpg",
+  "Centrale-Supélec": "Châtenay-Malabry_-_l'école_Centrale.JPG",
+  "CCINP": "ENSEEIHT_-_01.jpg",
+  "e3a-Polytech": "Polytech_Nice_Sophia.jpg"
+};
+const BANK_PHOTO_CAP = { "X-ENS": "Ancienne entrée de l'École polytechnique, Paris", "Mines-Ponts": "Mines Paris, boulevard Saint-Michel", "Centrale-Supélec": "Ancien campus de Centrale, Châtenay-Malabry", "CCINP": "ENSEEIHT, Toulouse INP (école du concours CCINP)", "e3a-Polytech": "Polytech Nice Sophia" };
+const wsrc = (f, w) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
+const wimg = (f, eager) => `<img src="${wsrc(f, 1600)}" srcset="${wsrc(f, 800)} 800w, ${wsrc(f, 1600)} 1600w" sizes="100vw" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`;
+const wcredit = f => `<a class="wcredit" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}" target="_blank" rel="noopener">Photo : Wikimedia Commons, licence libre (auteur et licence)</a>`;
 const ICHECK = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const tile = (href, num, title, foot, cls) => `<a class="tile${cls ? " " + cls : ""}" href="${href}"><span class="tnum">${num}</span><span class="tt">${title}</span>${foot ? `<span class="tfoot">${foot}</span>` : ""}</a>`;
 const lvl = n => `<span class="lvl" role="img" aria-label="Difficulté ${n} sur 5">${[1, 2, 3, 4, 5].map(k => `<i class="${k <= n ? "on" : ""}" aria-hidden="true">★</i>`).join("")}</span>`;
@@ -130,8 +141,8 @@ results.addEventListener("click", e => { if (e.target.closest("a")) { sbar.hidde
 /* ---------- Composants ---------- */
 const exOf = (s, y, c) => EXERCISES.filter(e => e.subj === s && e.year === y && (c === undefined || e.chap === c));
 function crumbs(list) { return `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="#accueil">Accueil</a>${list.map(c => `<span class="sep" aria-hidden="true">/</span>${c[1] ? `<a href="${c[1]}">${esc(c[0])}</a>` : `<span>${esc(c[0])}</span>`}`).join("")}</nav>`; }
-function phead({ crumb, title, meta = "", tabs = "", photo, tall }) {
-  return `<section class="phead${photo ? " has-photo" : ""}${tall ? " tall" : ""}">${photo ? `<div class="photo">${img(photo, "100vw", true)}</div>` : ""}<div class="wrap">${crumbs(crumb)}<h1>${title}</h1>${meta ? `<div class="meta">${meta}</div>` : ""}${tabs}</div></section>`;
+function phead({ crumb, title, meta = "", tabs = "", photo, tall, wiki }) {
+  return `<section class="phead${photo || wiki ? " has-photo" : ""}${tall ? " tall" : ""}">${wiki ? `<div class="photo">${wimg(wiki, true)}</div>${wcredit(wiki)}` : photo ? `<div class="photo">${img(photo, "100vw", true)}</div>` : ""}<div class="wrap">${crumbs(crumb)}<h1>${title}</h1>${meta ? `<div class="meta">${meta}</div>` : ""}${tabs}</div></section>`;
 }
 function exCard(e) {
   const n = doneN(e.id), pb = e.kind === "probleme";
@@ -319,7 +330,7 @@ function concoursPage() {
   return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
     <article class="prose">
     <h2>Les banques</h2>
-    <div class="cards banks">${BANKS.map(b => { const n = sujetsOf(b.name).length; const inner = `${bankMark(b.name)}<h3>${b.name}</h3><p>${b.desc}</p>`; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}">${inner}<span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card">${inner}</div>`; }).join("")}</div>
+    <div class="cards banks">${BANKS.map(b => { const n = sujetsOf(b.name).length; const inner = `${BANK_PHOTO[b.name] ? `<span class="bph">${wimg(BANK_PHOTO[b.name]).replace("sizes=\"100vw\"", 'sizes="(max-width:700px) 100vw, 40vw"')}${bankMark(b.name)}</span>` : bankMark(b.name)}<h3>${b.name}</h3><p>${b.desc}</p>`; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}">${inner}<span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card">${inner}</div>`; }).join("")}</div>
     <h2>L'année de MP</h2>
     <ul class="steps-list">
       <li><b>Décembre · janvier</b><span>Inscriptions sur le site du SCEI.</span></li>
@@ -339,7 +350,7 @@ const qrange = e => { const q = e.steps.map(st => st.q).filter(Boolean); return 
 function banquePage(slug) {
   const b = BANKS.find(x => bslug(x.name) === slug); if (!b) return notFound();
   const list = sujetsOf(b.name);
-  return phead({ crumb: [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>`, photo: "hero" }) + `<div class="wrap layout full"><div>
+  return phead({ crumb: [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
     <p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
     <div class="tiles ann stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>
   </div></div>`;

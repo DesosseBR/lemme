@@ -872,3 +872,12 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .fig .dsh{stroke-dasharray:7 5}
 .fig .pt{fill:var(--ink)}.fig .ptr{fill:var(--red)}.fig .ptb{fill:var(--blue,#2453D6)}.fig .ptv{fill:var(--green)}
 .fig .open{fill:var(--surface);stroke:var(--ink);stroke-width:1.8}
+.wcredit{position:absolute;right:12px;bottom:8px;font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;z-index:1}
+.wcredit:hover{color:#fff;text-decoration:underline}
+.cards.banks .card{padding:0 0 20px;overflow:hidden}
+.cards.banks .card > :not(.bph){margin-left:24px;margin-right:24px}
+.bph{position:relative;display:block;height:150px;background:var(--navy);margin-bottom:16px}
+.bph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.bph .bmark{position:absolute;left:16px;bottom:-14px;margin:0;box-shadow:0 0 0 3px var(--surface)}
+.cards.banks .card h3{margin-top:22px}
+.cards.banks .card .card-go{margin-top:12px}
