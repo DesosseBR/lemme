@@ -764,3 +764,104 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .cor-h .lg-k{background:color-mix(in srgb,var(--yellow) 40%,transparent)}
 .cor-h .lg-s{background:color-mix(in srgb,#16a34a 16%,transparent)}
 .cor-h{justify-content:flex-start;align-items:center;gap:12px}
+
+/* ===== v3 : blocs, couleurs de concours, page d'exercice ===== */
+[data-cc="ccinp"]{--cc:#2563EB} [data-cc="mt"]{--cc:#D9531E} [data-cc="c1"]{--cc:#B02A62} [data-cc="mp"]{--cc:#0F7A50} [data-cc="x"]{--cc:#5B3BC4} [data-cc="e3a"]{--cc:#0E7490}
+.lead{font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 24px;max-width:46em}
+.navlink{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;transition:background var(--t-fast)}
+.navlink:hover{background:var(--bg-2)}
+.navlink .xens{font-size:11.5px;font-weight:800;padding:3px 7px;border-radius:6px;background:#05070C;color:#FFC93C;letter-spacing:.02em}
+
+/* Blocs (tuiles) */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+.tile{position:relative;display:flex;flex-direction:column;gap:8px;min-height:132px;padding:16px 16px 14px;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:var(--surface);transition:transform var(--t-fast) var(--ease),border-color var(--t-fast),box-shadow var(--t-fast)}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tile .tnum{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.tile .tt{font-weight:700;font-size:15.5px;line-height:1.3;letter-spacing:-.01em}
+.tile .tfoot{margin-top:auto;display:flex;flex-wrap:wrap;gap:4px;font-size:12.5px;color:var(--muted)}
+.tile .tdone{display:inline-flex;align-items:center;gap:4px;color:var(--green);font-weight:700}
+.tile .tdone svg{width:13px;height:13px}
+.tile.is-done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--surface))}
+/* Khôlles : synthwave */
+.tiles.synth .tile{background:linear-gradient(160deg,#1B1036 0%,#140B2A 60%,#0E0820 100%);border-color:#3A1F66;color:#F3EDFF}
+.tiles.synth .tile::after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,#FF3EA5,#7B5CFF);opacity:.55;transition:opacity var(--t-fast)}
+.tiles.synth .tile:hover{border-color:#FF3EA5;box-shadow:0 10px 28px -14px rgba(255,62,165,.6)}
+.tiles.synth .tile:hover::after{opacity:1}
+.tiles.synth .tnum{color:#35E0F5}
+.tiles.synth .tfoot{color:#C9B8F0}
+.tiles.synth .tdone{color:#5CF2B0}
+/* Oraux */
+.tiles.oral .tile{border-left:4px solid #0E7490}
+.tiles.oral .tnum{color:#0E7490}
+@media (prefers-color-scheme: dark){.tiles.oral .tnum{color:#4FD1E6}.tiles.oral .tile{border-left-color:#4FD1E6}}
+.ccb{font-style:normal;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;background:var(--cc);color:#fff;line-height:1.2}
+/* Annales */
+.tiles.ann{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.tiles.ann .tile{border-top:3px solid var(--navy)}
+@media (prefers-color-scheme: dark){.tiles.ann .tile{border-top-color:var(--yellow)}}
+
+/* Onglets de concours en blocs colorés */
+.tabs [data-cc]{position:relative;margin-bottom:10px;border-radius:10px;padding:10px 16px;background:color-mix(in srgb,var(--cc) 30%,transparent);color:#fff;border:1px solid color-mix(in srgb,var(--cc) 70%,transparent)}
+.tabs [data-cc]:hover{background:color-mix(in srgb,var(--cc) 55%,transparent)}
+.tabs [data-cc][aria-selected="true"]{background:var(--cc);color:#fff;border-color:var(--cc);box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.tabs [data-cc] .n{opacity:.85}
+
+/* Marques des banques */
+.bmark{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;background:var(--cc,var(--navy));color:#fff;font-weight:800;font-size:15px;letter-spacing:-.01em;margin-bottom:12px}
+.bmark.big{min-width:64px;height:64px;font-size:22px;border-radius:16px;margin:0 18px 0 0;vertical-align:middle;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.ttl-mark{display:inline-flex;align-items:center}
+.cards.banks .card{display:flex;flex-direction:column}
+
+/* Cartes d'exercices : plus petites */
+.exgrid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.excard{gap:10px;padding:14px 16px 12px;border-radius:14px;min-height:128px}
+.excard:hover{transform:translateY(-2px)}
+.excard .kind{font-size:12px}
+.excard[data-cc] .kind{color:var(--cc)}
+.excard b,.excard .ttl{font-size:15.5px;line-height:1.35;font-weight:700}
+.excard .foot{font-size:12.5px;justify-content:space-between}
+.excard .dn{display:inline-flex;align-items:center;gap:4px;color:var(--green);font-weight:700}
+.excard .dn svg{width:13px;height:13px}
+.excard.done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--surface))}
+.excard mjx-container,.tile mjx-container{font-size:105%!important}
+
+/* Page d'exercice */
+.exhead{background:var(--surface);border-bottom:1px solid var(--line)}
+.exhead .wrap{padding-block:18px 20px}
+.exhead .crumbs{color:var(--muted)}
+.exhead .crumbs a{color:var(--muted)}
+.exh-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;margin-top:10px}
+.exh-t{min-width:0;flex:1 1 420px}
+.exhead h1{margin:0;font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.025em;text-wrap:balance}
+.exmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--muted)}
+.exmeta .k{font-weight:700;color:var(--ink)}
+.exmeta .k[data-cc]{color:var(--cc)}
+.exmeta .dot{opacity:.5}
+.donebox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.donebtn svg{width:15px;height:15px}
+.donestate{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;color:var(--green);padding:9px 14px;border-radius:999px;background:color-mix(in srgb,var(--green) 12%,var(--surface))}
+.donestate svg{width:15px;height:15px}
+.linkbtn{border:0;background:none;padding:8px 4px;color:var(--muted);font-size:13.5px;text-decoration:underline;cursor:pointer}
+.donebilan{margin:22px 0 4px;padding:14px 16px;border-radius:14px;background:var(--bg)}
+.ex-layout{padding-block:20px 80px}
+.pane-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;font-size:15px!important;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:var(--muted)}
+.split > .panelbox{border-radius:16px}
+.split > .side-en{top:76px;max-height:calc(100vh - 92px)}
+.decode{gap:10px;margin-top:18px}
+.decode > div{padding:12px 14px;border-radius:12px;font-size:15px}
+.more{margin-top:12px}
+.more h2{font-size:18px;font-weight:800;margin:12px 0 12px}
+.player .stage{min-height:120px}
+.wrap.wrap-wide{max-width:1440px}
+.excard .foot{display:flex;padding:0;gap:8px;grid-template-columns:none}
+.excard mjx-container,.tile mjx-container{font-size:100%!important}
+.bmark{align-self:flex-start;justify-self:start}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(min(196px,46%),1fr))}
+@media (max-width:520px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{min-height:116px;padding:13px 12px 12px}.tile .tt{font-size:14.5px}.tiles.ann{grid-template-columns:1fr}}
+.exgrid{grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr))}
+.excard,.tile{min-width:0;overflow-wrap:anywhere}
+.excard mjx-container,.tile mjx-container,.exhead mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media (max-width:1020px){.split{grid-template-columns:minmax(0,1fr)}.split > .side-en{position:static;max-height:none}}
+@media (max-width:640px){.exhead h1{font-size:23px}.split > .panelbox{padding:18px 16px}.tabs [data-cc]{padding:8px 12px;font-size:14px}}
+.layout > *{min-width:0}
+.layout .btn{max-width:100%;white-space:normal}
