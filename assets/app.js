@@ -4,7 +4,7 @@
 "use strict";
 const { SUBJECTS, EXERCISES, DM, KHOLLES, BANKS, RAPPELS } = window.LEMME;
 const PDFS = new Set(window.LEMME.PDFS || []);
-const YEARS = { mpsi: "MPSI", mp: "MP" };
+const YEARS = { mpsi: "Sup", mp: "Spé" };
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const app = $("#app");
@@ -210,13 +210,13 @@ function home() {
   return `
   <section class="hero"><div class="photo">${img("hero", "100vw", true)}</div><div class="wrap">
     <h1><span class="line"><span>Toute ta prépa,</span></span><span class="line"><span><span class="mark">corrigée</span></span></span><span class="line"><span>pas à pas.</span></span></h1>
-    <p>Cours, résumés et corrigés interactifs pour la MPSI et la MP.</p>
+    <p>Cours, résumés et corrigés interactifs pour la prépa scientifique, de la Sup à la Spé.</p>
     <div class="ctas"><a class="btn btn-yellow" href="#s-maths">Explorer les matières ${I.arrow}</a><a class="btn btn-glass" href="#e-ex-recurrence">Essayer un corrigé</a></div>
   </div></section>
 
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>Les matières</h2><a href="#exercices">Tous les exercices ${I.arrow}</a></div>
-    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3><span class="bar"></span><small>${s.years.mpsi.length} chapitres en MPSI · ${s.years.mp.length} en MP</small></span></a>`).join("")}</div>
+    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3><span class="bar"></span><small>${s.years.mpsi.length} chapitres en Sup · ${s.years.mp.length} en Spé</small></span></a>`).join("")}</div>
   </div></section>
 
   <section class="sec"><div class="wrap showcase">
@@ -309,7 +309,7 @@ function exercisePage(eid) {
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year && x.chap === e.chap).slice(0, 3);
   if (e.concours) lastConc = e.concours;
   const ann = e.subj === "annales";
-  const cr = ann ? [["Concours", "#concours"], [c.bank, "#banque-" + bslug(c.bank)], [c.epreuve + " " + c.annee, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
+  const cr = ann ? [["Concours", "#concours"], [FIL[filOf(c)], "#concours-" + filOf(c)], [c.bank, `#banque-${bslug(c.bank)}-${filOf(c)}`], [c.epreuve + " " + c.annee, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
   const kind = ann ? qrange(e) : e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice");
   const meta = [`<span class="k"${e.concours ? ` data-cc="${e.concours}"` : ""}>${kind}</span>`, ann ? "" : (s.hidden ? s.name : s.name + " · " + YEARS[e.year]), e.time || "", ann ? "" : lvl(e.level)].filter(Boolean).join(`<span class="dot" aria-hidden="true">·</span>`);
   const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}</div></div></div></section>`;
@@ -339,7 +339,7 @@ function exercisesPage(onlyClassics) {
   return phead({ crumb: [[title]], title, meta: `<span class="tag y">${YEARS[year]}</span>` })
   + `<div class="wrap layout full"><div>
     <div class="filters" role="group" aria-label="Filtrer par matière"><button type="button" class="chip" data-f="all" aria-pressed="${exFilter === "all"}">Toutes</button>${VISIBLE.map(s => `<button type="button" class="chip" data-f="${s.id}" aria-pressed="${exFilter === s.id}">${s.name}</button>`).join("")}</div>
-    ${list.length ? `<div class="exgrid stagger">${list.map(exCard).join("")}</div>` : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "MP" : "MPSI"}.`)}
+    ${list.length ? `<div class="exgrid stagger">${list.map(exCard).join("")}</div>` : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "Spé" : "Sup"}.`)}
   </div></div>`;
 }
 
@@ -377,12 +377,7 @@ function khollesPage() {
   </div></div>`;
 }
 
-function concoursPage() {
-  return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
-    <article class="prose">
-    <h2>Les banques</h2>
-    <div class="cards banks">${BANKS.map(b => { const n = sujetsOf(b.name).length; const inner = `${BANK_PHOTO[b.name] ? `<span class="bph">${wimg(BANK_PHOTO[b.name]).replace("sizes=\"100vw\"", 'sizes="(max-width:700px) 100vw, 40vw"')}${bankMark(b.name)}</span>` : bankMark(b.name)}<h3>${b.name}</h3><p>${b.desc}</p>`; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}">${inner}<span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card">${inner}</div>`; }).join("")}</div>
-    <h2>L'année de MP</h2>
+const CONC_TAIL = `<h2>L'année de Spé</h2>
     <ul class="steps-list">
       <li><b>Décembre · janvier</b><span>Inscriptions sur le site du SCEI.</span></li>
       <li><b>Avril · mai</b><span>Les écrits, sur plusieurs semaines.</span></li>
@@ -392,24 +387,45 @@ function concoursPage() {
     <h2>Réviser</h2>
     <ul><li>Dès janvier, un sujet complet en temps limité toutes les deux semaines.</li><li>Un carnet d'erreurs : chaque faute de DS, avec la bonne méthode.</li><li>Les dernières semaines, les annales des concours que tu vises.</li></ul>
   </article></div>`;
+function concoursPage(f) {
+  if (f) curFil = f;
+  const fcards = `<div class="tiles vault fil stagger">${Object.keys(FIL).map(k => { const n = ANN().filter(c => fils(c).includes(FIL[k])).length; return tile(`#concours-${k}`, "Filière", FIL[k], n ? plural(n, "sujet") : "Bientôt"); }).join("")}</div>`;
+  if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
+    <article class="prose">
+    <h2>Choisis ta filière</h2>
+    <p>Les sujets sont rangés par filière : tu ne vois que les épreuves que tu passeras. Une épreuve commune (langues, informatique commune) apparaît dans chaque filière concernée.</p>
+    ${fcards}`
+    + CONC_TAIL;
+  return phead({ crumb: [["Concours", "#concours"], [FIL[f]]], title: `Concours · filière ${FIL[f]}`, photo: "hero" }) + `<div class="wrap layout full">
+    <article class="prose">
+    ${fcards}
+    <h2>Les banques</h2>
+    <div class="cards banks">${BANKS.map(b => { const n = sujetsOf(b.name, f).length; const inner = `${BANK_PHOTO[b.name] ? `<span class="bph">${wimg(BANK_PHOTO[b.name]).replace("sizes=\"100vw\"", 'sizes="(max-width:700px) 100vw, 40vw"')}${bankMark(b.name)}</span>` : bankMark(b.name)}<h3>${b.name}</h3><p>${b.desc}</p>`; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}-${f}">${inner}<span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card">${inner}</div>`; }).join("")}</div>
+    ` + CONC_TAIL;
 }
 
 const bslug = n => norm(n).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const ANN = () => (sid("annales") || { years: { mp: [] } }).years.mp;
-const sujetsOf = bank => ANN().map((c, i) => ({ c, i })).filter(x => x.c.bank === bank);
+const FIL = { mp: "MP", mpi: "MPI", pc: "PC", psi: "PSI" };
+let curFil = "mp";
+const fils = c => String(c.filiere || "").split(/\s*,\s*/);
+const filOf = c => fils(c).includes(FIL[curFil]) ? curFil : (Object.keys(FIL).find(k => fils(c).includes(FIL[k])) || "mp");
+const sujetsOf = (bank, f) => ANN().map((c, i) => ({ c, i })).filter(x => x.c.bank === bank && (!f || fils(x.c).includes(FIL[f])));
 const qrange = e => { const q = e.steps.map(st => st.q).filter(Boolean); return q.length ? `Q${Math.min(...q)} à Q${Math.max(...q)}` : ""; };
-function banquePage(slug) {
+function banquePage(slug, f) {
   const b = BANKS.find(x => bslug(x.name) === slug); if (!b) return notFound();
-  const list = sujetsOf(b.name);
-  return phead({ crumb: [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
+  if (f) curFil = f;
+  const list = sujetsOf(b.name, f);
+  return phead({ crumb: f ? [["Concours", "#concours"], [FIL[f], "#concours-" + f], [b.name]] : [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
     <p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
-    <div class="tiles ann vault stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>
+    ${f ? "" : `<div class="filters" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a class="chip" href="#banque-${slug}-${k}">${FIL[k]}</a>`).join("")}</div>`}
+    ${list.length ? `<div class="tiles ann vault stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>` : empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "")}
   </div></div>`;
 }
 function sujetPage(i) {
   const c = ANN()[i]; if (!c) return notFound();
   const parts = exOf("annales", "mp", i);
-  return phead({ crumb: [["Concours", "#concours"], [c.bank, "#banque-" + bslug(c.bank)], [c.epreuve + " " + c.annee]], title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
+  return phead({ crumb: [["Concours", "#concours"], [FIL[filOf(c)], "#concours-" + filOf(c)], [c.bank, `#banque-${bslug(c.bank)}-${filOf(c)}`], [c.epreuve + " " + c.annee]], title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
     <h2 style="margin:0 0 14px">Le sujet</h2>
     <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 18px;max-width:46em">${c.intro}</p>
     ${c.pdf ? `<div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}"></div>` : `<p style="font-family:var(--f-read);font-size:16px;color:var(--muted);margin:0">L'énoncé de chaque partie est reproduit à côté de son corrigé.</p>`}
@@ -1308,7 +1324,9 @@ function route(keepScroll) {
   else if (h === "commando" || h === "s-xens") html = commandoPage();
   else if (h === "oraux-maths" || h === "s-oraux") html = orauxMathsPage();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
+  else if ((m = h.match(/^banque-([a-z0-9-]+)-(mp|mpi|pc|psi)$/)) && BANKS.some(x => bslug(x.name) === m[1])) html = banquePage(m[1], m[2]);
   else if ((m = h.match(/^banque-([a-z0-9-]+)$/))) html = banquePage(m[1]);
+  else if ((m = h.match(/^concours-(mp|mpi|pc|psi)$/))) html = concoursPage(m[1]);
   else if ((m = h.match(/^c-annales-mp-(\d+)$/))) html = sujetPage(+m[1]);
   else if ((m = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/))) html = chapterPage(m[1], m[2], +m[3]);
   else if ((m = h.match(/^e-([a-z0-9-]+)$/))) { ex = EXERCISES.find(x => x.id === m[1]); html = exercisePage(m[1]); }
@@ -1327,7 +1345,7 @@ function route(keepScroll) {
   app.classList.remove("enter"); void app.offsetWidth;
   app.innerHTML = html; app.classList.add("enter");
   closeMenus(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
-  document.title = h === "accueil" ? "Lemme · Prépa MPSI et MP" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
+  document.title = h === "accueil" ? "Lemme · Prépa scientifique" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
   wire(ex);
   typeset(app);
   if (!keepScroll) window.scrollTo(0, 0);

@@ -3,7 +3,7 @@
 
 LEMME.subject({
   id: "info", name: "Informatique", short: "Info", sym: "λ",
-  intro: "Le tronc commun en Python : algorithmique, preuves, complexité, graphes, puis programmation dynamique, bases de données et algorithmes pour l'IA en MP.",
+  intro: "Le tronc commun en Python : algorithmique, preuves, complexité, graphes, puis programmation dynamique, bases de données et algorithmes pour l'IA en Spé.",
   years: {
     mpsi: [
       C("Bases de la programmation en Python", "Types, variables, conditions, boucles, fonctions, listes", ""),

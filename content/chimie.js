@@ -3,7 +3,7 @@
 
 LEMME.subject({
   id: "chimie", name: "Chimie", short: "Chimie", sym: "⇌",
-  intro: "Transformations de la matière, structure, solutions aqueuses puis thermodynamique chimique et électrochimie en MP.",
+  intro: "Transformations de la matière, structure, solutions aqueuses puis thermodynamique chimique et électrochimie en Spé.",
   years: {
     mpsi: [
       C("Transformation de la matière", "Avancement, quotient réactionnel, constante d'équilibre, sens d'évolution",

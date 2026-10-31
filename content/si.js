@@ -3,7 +3,7 @@
 
 LEMME.subject({
   id: "si", name: "Sciences de l'ingénieur", short: "SI", sym: "⚙",
-  intro: "Modélisation des systèmes, asservissements, cinématique et statique en MPSI, puis stabilité, correction et dynamique pour l'option SI de MP.",
+  intro: "Modélisation des systèmes, asservissements, cinématique et statique en Sup, puis stabilité, correction et dynamique en Spé.",
   years: {
     mpsi: [
       C("Analyse des systèmes", "Besoin, exigences, diagrammes SysML, chaînes d'information et de puissance", ""),
