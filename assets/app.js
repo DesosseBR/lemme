@@ -211,6 +211,14 @@ function exList(list, emptyHtml) {
   const f = byStars(list);
   return starBar(list) + (f.length ? `<div class="exgrid stagger">${f.map(exCard).join("")}</div>` : empty("Aucun exercice à ce niveau", " Choisis une autre difficulté."));
 }
+function plusList(list) {
+  if (!list.length) return empty("Bientôt", " Les sujets « Aller plus loin » de ce chapitre sont en préparation.");
+  const ids = [...new Set(list.map(e => e.plus))];
+  return `<p class="pl-intro">Des sujets complets, rédigés comme un problème de concours : chaque partie s'appuie sur les précédentes, et tout est corrigé question par question.</p>` + ids.map(k => {
+    const parts = list.filter(e => e.plus === k), f = parts[0], nd = parts.filter(e => doneN(e.id)).length;
+    return `<section class="plsujet"><div class="plh"><span class="plk">Sujet</span><h2>${esc(f.sujet || f.title)}</h2>${f.sujetDesc ? `<p>${f.sujetDesc}</p>` : ""}<span class="plm">${plural(parts.length, "partie")} · ${parts.reduce((a, e) => a + new Set(e.steps.map(st => st.q)).size, 0)} questions${nd ? ` · ${nd} faite${nd > 1 ? "s" : ""}` : ""}</span></div><ol class="plparts">${parts.map(e => `<li><a class="excard${doneN(e.id) ? " done" : ""}" href="#e-${e.id}"><span class="plp">${esc(e.part)}</span><span class="plt">${ttl(e)}</span><span class="plq">${qrange(e)}${doneN(e.id) ? ` · ${ICHECK}Fait` : ""}</span>${I.arrow}</a></li>`).join("")}</ol></section>`;
+  }).join("");
+}
 function tabsHtml(list, cur) { if (!list.length) return ""; return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}</div>`; }
 
@@ -273,7 +281,7 @@ let chapTab = null;
 function chapterPage(id, y, i) {
   const s = sid(id); if (!s || !s.years[y] || !s.years[y][i]) return notFound();
   if (year !== y && !s.hidden) setYear(y);
-  const list = s.years[y], c = list[i], exs = exOf(id, y, i);
+  const list = s.years[y], c = list[i], all = exOf(id, y, i), exs = all.filter(e => !e.plus), plus = all.filter(e => e.plus);
   const rs = `resume-${id}-${y}-${pad(i + 1)}`, cs = `cours-${id}-${y}-${pad(i + 1)}`;
   const tabs = [];
   const oral = id === "oraux";
@@ -286,17 +294,19 @@ function chapterPage(id, y, i) {
     if (PDFS.has(cs)) tabs.push(["cours", "Cours"]);
     tabs.push(["resume", "Résumé"]);
     tabs.push(["exercices", "Exercices", exs.length]);
-    if (!chapTab || !tabs.find(t => t[0] === chapTab)) chapTab = PDFS.has(cs) ? "cours" : (PDFS.has(rs) ? "resume" : (exs.length ? "exercices" : "resume"));
+    if (id === "xens") tabs.push(["plus", "Aller plus loin", new Set(plus.map(e => e.plus)).size]);
+    if (!chapTab || !tabs.find(t => t[0] === chapTab)) chapTab = PDFS.has(cs) ? "cours" : (PDFS.has(rs) ? "resume" : (exs.length ? "exercices" : plus.length ? "plus" : "resume"));
   }
   let body;
   if (oral) { const ce = exs.filter(e => e.concours === chapTab); body = ce.length ? `<div class="exgrid stagger">${ce.map(exCard).join("")}</div>` : empty("Exercices en préparation", ` Les exercices ${CONC[chapTab] || ""} de ce chapitre arrivent bientôt.`); }
   else if (chapTab === "cours") body = `<div data-pdf="${cs}" data-title="Cours · ${esc(c.t)}"></div>`;
   else if (chapTab === "resume") body = (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
+  else if (chapTab === "plus") body = plusList(plus);
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
-  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">Topologie · ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : tabsHtml(tabs, chapTab) })
-    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : id === "kholles" ? s.name + " · " + YEARS[y] : s.hidden ? s.name + " · Topologie" : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
+  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">${esc(xpos(s, i).name)} · ${xpos(s, i).j + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : tabsHtml(tabs, chapTab) })
+    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : id === "kholles" ? s.name + " · " + YEARS[y] : s.hidden ? s.name : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
 }
 
 function doneHtml(e) {
@@ -325,7 +335,7 @@ function exercisePage(eid) {
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year && x.chap === e.chap).slice(0, 3);
   if (e.concours) lastConc = e.concours;
   const ann = e.subj === "annales";
-  const cr = ann ? [...bqCrumbs(c), [c.epreuve, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
+  const cr = ann ? [...bqCrumbs(c), [c.epreuve, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]].concat(e.plus ? [["Aller plus loin"], [e.part]] : []) : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
   const kind = ann ? qrange(e) : e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice");
   const meta = [`<span class="k"${e.concours ? ` data-cc="${e.concours}"` : ""}>${kind}</span>`, ann ? "" : (s.hidden ? s.name : s.name + " · " + YEARS[e.year]), e.time || "", ann ? "" : lvl(e.level)].filter(Boolean).join(`<span class="dot" aria-hidden="true">·</span>`);
   const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}</div></div></div></section>`;
@@ -344,7 +354,7 @@ function exercisePage(eid) {
   const plab = q => (/^(Exercice|Partie|Problème|Question|Thème)/.test(q) ? "" : "Partie ") + q;
   let more;
   if (e.part) {
-    const sib = EXERCISES.filter(x => x.subj === e.subj && x.year === e.year && x.chap === e.chap && x.part);
+    const sib = EXERCISES.filter(x => x.subj === e.subj && x.year === e.year && x.chap === e.chap && x.part && x.plus === e.plus);
     const k = sib.indexOf(e), pv = sib[k - 1], nx = sib[k + 1];
     const home = ann ? `#c-annales-mp-${e.chap}` : `#c-${s.id}-${e.year}-${e.chap}`;
     const card = (x, dir) => x ? `<a class="pnav ${dir}" href="#e-${x.id}"><span class="pdir">${dir === "prev" ? "← Partie précédente" : "Partie suivante →"}</span><span class="plab">${esc(plab(x.part))}</span><span class="ptt">${ttl(x)}</span></a>` : `<span class="pnav ${dir} off"><span class="pdir">${dir === "prev" ? "Début du sujet" : "Fin du sujet"}</span><a class="plab" href="${home}">Retour au sujet</a></span>`;
@@ -520,6 +530,12 @@ function orauxMathsPage() {
   </div></div>`;
 }
 
+function xparts(s) {
+  const out = [];
+  s.years.mp.forEach((c, i) => { const name = c.p || s.part; let g = out.find(x => x.name === name); if (!g) out.push(g = { name, items: [] }); g.items.push({ c, i }); });
+  return out;
+}
+function xpos(s, i) { const P = xparts(s); for (let g = 0; g < P.length; g++) { const j = P[g].items.findIndex(x => x.i === i); if (j >= 0) return { g, j, name: P[g].name }; } return { g: 0, j: i, name: s.part }; }
 function commandoPage() {
   const s = sid("xens"), list = s.years.mp;
   const next = ["Fonctions d'une variable réelle", "Intégration", "Suites et séries", "Fonctions de plusieurs variables", "Équations différentielles"];
@@ -537,12 +553,12 @@ function commandoPage() {
     </div>
   </div></section>
   <section class="sec"><div class="wrap">
-    <div class="sec-title"><h2>Chapitre 1 · ${esc(s.part)}</h2></div>
-    <div class="tiles vault stagger">${list.map((c, i) => { const n = exOf("xens", "mp", i).length, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); return (n || r) ? tile(`#c-xens-mp-${i}`, `1.${i + 1}`, esc(c.t), [r ? "Résumé" : "", n ? `${n} exos` : ""].filter(Boolean).join(" · ")) : `<span class="tile off"><span class="tnum">1.${i + 1}</span><span class="tt">${esc(c.t)}</span><span class="tfoot">En préparation</span></span>`; }).join("")}</div>
+    ${xparts(s).map((g, gi) => `<div class="sec-title"${gi ? ' style="margin-top:40px"' : ""}><h2>Chapitre ${gi + 1} · ${esc(g.name)}</h2></div>
+    <div class="tiles vault stagger">${g.items.map(({ c, i }, j) => { const n = exOf("xens", "mp", i).filter(e => !e.plus).length, pl = new Set(exOf("xens", "mp", i).filter(e => e.plus).map(e => e.plus)).size, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); const foot = [r ? "Résumé" : "", n ? `${n} exos` : "", pl ? plural(pl, "sujet") : ""].filter(Boolean).join(" · "); return foot ? tile(`#c-xens-mp-${i}`, `${gi + 1}.${j + 1}`, esc(c.t), foot) : `<span class="tile off"><span class="tnum">${gi + 1}.${j + 1}</span><span class="tt">${esc(c.t)}</span><span class="tfoot">En préparation</span></span>`; }).join("")}</div>`).join("")}
   </div></section>
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>La suite du programme</h2></div>
-    <ul class="roadmap">${next.map((t, k) => `<li>Chapitre ${k + 2} · ${t}</li>`).join("")}</ul>
+    <ul class="roadmap">${next.map((t, k) => `<li>Chapitre ${k + 1 + xparts(s).length} · ${t}</li>`).join("")}</ul>
   </div></section>`;
 }
 
@@ -1744,7 +1760,7 @@ function route(keepScroll) {
   const fromEx = h !== lastRoute && /^e-/.test(lastRoute) ? lastRoute.slice(2) : null;
   if (h !== lastRoute) {
     if (!/^c-/.test(h) || lastRoute.replace(/-\d+$/, "") !== h.replace(/-\d+$/, "")) chapTab = /^c-/.test(h) ? (tabMem[h] || null) : null;
-    if (fromEx && /^c-/.test(h)) { const fe = EXERCISES.find(x => x.id === fromEx), mm = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/); if (fe && mm && fe.subj === mm[1] && fe.year === mm[2] && fe.chap === +mm[3]) chapTab = mm[1] === "oraux" ? (fe.concours || chapTab) : "exercices"; }
+    if (fromEx && /^c-/.test(h)) { const fe = EXERCISES.find(x => x.id === fromEx), mm = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/); if (fe && mm && fe.subj === mm[1] && fe.year === mm[2] && fe.chap === +mm[3]) chapTab = mm[1] === "oraux" ? (fe.concours || chapTab) : fe.plus ? "plus" : "exercices"; }
     if (!/^s-/.test(h)) subjTab = "chapitres"; enonceMode = "interactif";
   }
   lastRoute = h;

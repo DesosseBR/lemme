@@ -13,7 +13,8 @@ LEMME.subject({
       C("Suites dans un espace métrique", "Suites convergentes, valeurs d'adhérence, caractérisation séquentielle, suites de Cauchy, espaces complets"),
       C("Espaces compacts", "Bolzano-Weierstrass, parties compactes, image continue d'un compact, théorème de Heine"),
       C("Espaces connexes", "Connexité, connexité par arcs, image continue d'un connexe"),
-      C("Espaces vectoriels normés", "Applications linéaires continues, normes équivalentes en dimension finie, compacité en dimension finie")
+      C("Espaces vectoriels normés", "Applications linéaires continues, normes équivalentes en dimension finie, compacité en dimension finie"),
+      Object.assign(C("Groupes abéliens finis", "Ordre et exposant, caractères, décomposition en facteurs invariants, unicité, dénombrement, dual"), { p: "Algèbre" })
     ]
   }
 });

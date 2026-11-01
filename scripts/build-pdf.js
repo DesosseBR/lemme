@@ -9,7 +9,7 @@ const { execFile, execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp", "kholles-mpsi-2", "annales", "logique", "recurrence", "ensembles", "applications", "images", "relations", "annales-e3a25", "annales-cnc25-1", "annales-cnc25-2", "annales-ccinp25-1", "annales-ccinp25-2", "annales-mines23-1", "annales-mines22-p2", "annales-mines24-si", "annales-mines18-ch", "annales-mines24-ic", "annales-mines24-infomp", "annales-mines24-mpi1", "annales-mines24-mpi2", "annales-mines24-anglais", "reduction", "reduction2", "prehilbert", "topo", "topo2"];
+const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp", "kholles-mpsi-2", "annales", "logique", "recurrence", "ensembles", "applications", "images", "relations", "annales-e3a25", "annales-cnc25-1", "annales-cnc25-2", "annales-ccinp25-1", "annales-ccinp25-2", "annales-mines23-1", "annales-mines22-p2", "annales-mines24-si", "annales-mines18-ch", "annales-mines24-ic", "annales-mines24-infomp", "annales-mines24-mpi1", "annales-mines24-mpi2", "annales-mines24-anglais", "reduction", "reduction2", "prehilbert", "topo", "topo2", "xens-groupes"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));
