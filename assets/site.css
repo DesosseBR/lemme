@@ -891,3 +891,4 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .ytitle{font-family:var(--f-display);font-size:26px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .mblock{margin:0 0 20px}
 .mtitle{font-family:var(--f-display);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 10px}
+.steph{font-family:var(--f-display);font-size:22px;margin:8px 0 16px}

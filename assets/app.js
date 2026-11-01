@@ -309,7 +309,7 @@ function exercisePage(eid) {
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year && x.chap === e.chap).slice(0, 3);
   if (e.concours) lastConc = e.concours;
   const ann = e.subj === "annales";
-  const cr = ann ? [["Concours", "#concours"], [FIL[filOf(c)], "#concours-" + filOf(c)], [c.bank, `#banque-${bslug(c.bank)}-${filOf(c)}`], [c.epreuve + " " + c.annee, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
+  const cr = ann ? [...bqCrumbs(c), [c.epreuve, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
   const kind = ann ? qrange(e) : e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice");
   const meta = [`<span class="k"${e.concours ? ` data-cc="${e.concours}"` : ""}>${kind}</span>`, ann ? "" : (s.hidden ? s.name : s.name + " · " + YEARS[e.year]), e.time || "", ann ? "" : lvl(e.level)].filter(Boolean).join(`<span class="dot" aria-hidden="true">·</span>`);
   const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}</div></div></div></section>`;
@@ -422,20 +422,45 @@ function byYearMat(list) {
     return `<section class="yblock"><h2 class="ytitle">${y}</h2>${mats.map(m => `<div class="mblock"><h3 class="mtitle">${m}</h3><div class="tiles ann vault stagger">${ly.filter(x => matOf(x.c) === m).map(({ c, i }) => tile(`#c-annales-mp-${i}`, esc(c.epreuve), esc(c.titre), esc(c.filiere))).join("")}</div></div>`).join("")}</section>`;
   }).join("");
 }
-function banquePage(slug, f) {
+function bqCrumbs(c) {
+  const f = filOf(c), sl = bslug(c.bank), mi = [...MATS, "Autres"].indexOf(matOf(c));
+  return [["Concours", "#concours"], [FIL[f], "#concours-" + f], [c.bank, `#bq/${sl}/${f}`], [matOf(c), `#bq/${sl}/${f}/${mi}`], [String(c.annee), `#bq/${sl}/${f}/${mi}/${c.annee}`]];
+}
+function banquePage(slug, f, mi, year) {
   const b = BANKS.find(x => bslug(x.name) === slug); if (!b) return notFound();
   if (f) curFil = f;
+  const fk = f || "tous";
   const list = sujetsOf(b.name, f);
-  return phead({ crumb: f ? [["Concours", "#concours"], [FIL[f], "#concours-" + f], [b.name]] : [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
-    <p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
+  const ALLM = [...MATS, "Autres"];
+  const m = mi == null ? null : ALLM[mi];
+  const base = `#bq/${slug}/${fk}`;
+  const crumb = [["Concours", "#concours"]].concat(f ? [[FIL[f], "#concours-" + f]] : []).concat([[b.name, m ? base : null]]).concat(m ? [[m, year ? `${base}/${mi}` : null]] : []).concat(year ? [[String(year)]] : []).map(x => x[1] ? x : [x[0]]);
+  const ph = phead({ crumb, title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${f ? `<span class="tag">Filière ${FIL[f]}</span>` : ""}${m ? `<span class="tag">${m}</span>` : ""}${year ? `<span class="tag">${year}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" });
+  let body;
+  if (!list.length) body = empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "");
+  else if (!m) {
+    const mats = ALLM.map((x, k) => ({ x, k, n: list.filter(e => matOf(e.c) === x).length })).filter(o => o.n);
+    body = `<h2 class="steph">Choisis la matière</h2><div class="tiles vault stagger">${mats.map(o => tile(`${base}/${o.k}`, "Matière", o.x, plural(o.n, "sujet"))).join("")}</div>`;
+  } else {
+    const lm = list.filter(e => matOf(e.c) === m);
+    if (!year) {
+      const years = [...new Set(lm.map(e => e.c.annee))].sort((a, c) => c - a);
+      body = `<h2 class="steph">${m} : choisis l'année</h2><div class="tiles vault stagger">${years.map(y => tile(`${base}/${mi}/${y}`, "Session", String(y), plural(lm.filter(e => e.c.annee === y).length, "sujet"))).join("")}</div>`;
+    } else {
+      const ly = lm.filter(e => e.c.annee === year);
+      body = ly.length ? `<h2 class="steph">${m} · ${year}</h2><div class="tiles ann vault stagger">${ly.map(({ c, i }) => tile(`#c-annales-mp-${i}`, esc(c.epreuve), esc(c.titre), esc(c.filiere))).join("")}</div>` : empty("Aucun sujet", "");
+    }
+  }
+  return ph + `<div class="wrap layout full"><div>
+    ${m ? "" : `<p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>`}
     ${f ? "" : `<div class="filters" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a class="chip" href="#banque-${slug}-${k}">${FIL[k]}</a>`).join("")}</div>`}
-    ${list.length ? byYearMat(list) : empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "")}
+    ${body}
   </div></div>`;
 }
 function sujetPage(i) {
   const c = ANN()[i]; if (!c) return notFound();
   const parts = exOf("annales", "mp", i);
-  return phead({ crumb: [["Concours", "#concours"], [FIL[filOf(c)], "#concours-" + filOf(c)], [c.bank, `#banque-${bslug(c.bank)}-${filOf(c)}`], [c.epreuve + " " + c.annee]], title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
+  return phead({ crumb: bqCrumbs(c).concat([[c.epreuve]]), title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
     <h2 style="margin:0 0 14px">Le sujet</h2>
     <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 18px;max-width:46em">${c.intro}</p>
     ${c.pdf ? `<div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}"></div>` : `<p style="font-family:var(--f-read);font-size:16px;color:var(--muted);margin:0">L'énoncé de chaque partie est reproduit à côté de son corrigé.</p>`}
@@ -1334,6 +1359,7 @@ function route(keepScroll) {
   else if (h === "commando" || h === "s-xens") html = commandoPage();
   else if (h === "oraux-maths" || h === "s-oraux") html = orauxMathsPage();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
+  else if ((m = h.match(/^bq\/([a-z0-9-]+)\/(mp|mpi|pc|psi|tous)(?:\/(\d+))?(?:\/(\d{4}))?$/))) html = banquePage(m[1], m[2] === "tous" ? null : m[2], m[3] == null ? null : +m[3], m[4] ? +m[4] : null);
   else if ((m = h.match(/^banque-([a-z0-9-]+)-(mp|mpi|pc|psi)$/)) && BANKS.some(x => bslug(x.name) === m[1])) html = banquePage(m[1], m[2]);
   else if ((m = h.match(/^banque-([a-z0-9-]+)$/))) html = banquePage(m[1]);
   else if ((m = h.match(/^concours-(mp|mpi|pc|psi)$/))) html = concoursPage(m[1]);
