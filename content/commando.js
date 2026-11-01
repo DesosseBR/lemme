@@ -14,7 +14,11 @@ LEMME.subject({
       C("Espaces compacts", "Bolzano-Weierstrass, parties compactes, image continue d'un compact, théorème de Heine"),
       C("Espaces connexes", "Connexité, connexité par arcs, image continue d'un connexe"),
       C("Espaces vectoriels normés", "Applications linéaires continues, normes équivalentes en dimension finie, compacité en dimension finie"),
-      Object.assign(C("Groupes abéliens finis", "Ordre et exposant, caractères, décomposition en facteurs invariants, unicité, dénombrement, dual"), { p: "Algèbre" })
+      Object.assign(C("Groupes abéliens finis", "Ordre et exposant, caractères, décomposition en facteurs invariants, unicité, dénombrement, dual"), { p: "Algèbre" }),
+      Object.assign(C("Groupe symétrique", "Conjugaison, éléments d'ordre 2, automorphismes intérieurs et extérieurs, le cas exceptionnel de S6"), { p: "Algèbre" }),
+      Object.assign(C("Polynômes à plusieurs indéterminées", "Action du groupe symétrique, polynômes alternés, Vandermonde, résultant, intersection de courbes"), { p: "Algèbre" }),
+      Object.assign(C("Corps finis", "Frobenius, restes chinois, factorisation des polynômes, algorithme de Berlekamp"), { p: "Algèbre" }),
+      Object.assign(C("Séries de Fourier", "Noyau de Dirichlet, espaces de Banach, théorème de Baire, Banach-Steinhaus, divergence"), { p: "Analyse" })
     ]
   }
 });
