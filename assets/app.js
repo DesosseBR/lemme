@@ -143,6 +143,7 @@ let year = "mpsi";
 try { const y = localStorage.getItem("lemme-year"); if (y in YEARS) year = y; } catch (e) {}
 const ysw = $(".yearswitch"), pill = $(".yearswitch .pill");
 function paintYear() {
+  document.documentElement.dataset.year = year;
   $$(".yearswitch button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.year === year)));
   const b = $(`.yearswitch button[data-year="${year}"]`);
   if (b) { pill.style.width = b.offsetWidth + "px"; pill.style.transform = `translateX(${b.offsetLeft - 3}px)`; }
@@ -253,7 +254,7 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<ol class="chapters stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<li><a href="#c-${id}-${year}-${i}"><span class="num">${pad(i + 1)}</span><h3>${esc(c.t)}</h3><span class="info">${r ? "<span>Résumé</span>" : ""}${n ? `<span><b>${n}</b> exo${n > 1 ? "s" : ""}</span>` : ""}<svg class="go" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>`; }).join("")}</ol>`;
+    : `<div class="tiles chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="tile chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">Chapitre ${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tdesc">${esc(c.n || "")}</span><span class="tfoot">${r ? "<span>Résumé</span>" : ""}${n ? `<span><b>${n}</b> exo${n > 1 ? "s" : ""}</span>` : ""}${!r && !n ? "<span>En préparation</span>" : ""}</span></a>`; }).join("")}</div>`;
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, meta: `<span class="tag y">${YEARS[year]}</span>`, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }

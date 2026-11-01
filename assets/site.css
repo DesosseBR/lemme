@@ -23,6 +23,9 @@
     color-scheme:dark;
   }
 }
+/* Spé : même logique de couleurs, mais une teinte vert sapin à la place du bleu marine */
+html[data-year="mp"]{--navy:#0D3B36;--navy-deep:#072824;--navy-line:#1F5A52;--on-navy-muted:#AFCFC9}
+@media (prefers-color-scheme: dark){html[data-year="mp"]{--navy:#0B302C;--navy-deep:#061E1B;--navy-line:#1E5149;--bg:#08171A;--bg-2:#0D2226;--surface:#0F272B;--line:#1D3E40}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-display);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -1030,3 +1033,16 @@ a.covrow:hover{background:var(--bg)}
 @media (prefers-reduced-motion:reduce){.sjc,.tfchip{transition:none}}
 .tfcta{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:var(--navy);color:#fff;text-decoration:none;margin:0 0 26px;font-family:var(--f-display);font-size:15px}
 .tfcta svg{width:24px;height:24px;color:var(--yellow);flex-shrink:0}.tfcta:hover{background:var(--navy-deep)}
+
+.chaptiles{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.chaptile{min-height:168px;padding:18px 18px 16px;border-top:3px solid var(--navy)}
+.chaptile .tt{font-size:17px}
+.chaptile .tdesc{font-size:13px;line-height:1.45;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.chaptile .tfoot{gap:12px}
+.chaptile .tfoot b{color:var(--ink)}
+.chaptile:hover{border-color:var(--navy)}
+/* Spé : bandeaux et cartes photo dans la teinte vert sapin */
+html[data-year="mp"] .phead.has-photo::before{background:linear-gradient(90deg,rgba(4,26,23,.95),rgba(13,59,54,.8) 55%,rgba(13,59,54,.58)),rgba(13,59,54,.3)}
+html[data-year="mp"] .hero::before{background:linear-gradient(90deg,rgba(4,26,23,.94) 0%,rgba(10,52,47,.82) 42%,rgba(10,52,47,.35) 75%,rgba(10,52,47,.15) 100%),linear-gradient(0deg,rgba(4,26,23,.6),transparent 40%)}
+html[data-year="mp"] .scard::before{background:linear-gradient(180deg,rgba(13,59,54,.15) 0%,rgba(13,59,54,.55) 50%,rgba(4,26,23,.95) 100%)}
+html[data-year="mp"] .band .photo::after{background:linear-gradient(90deg,var(--navy) 0%,rgba(13,59,54,.2) 40%,transparent)}
