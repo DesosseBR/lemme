@@ -1217,3 +1217,4 @@ img.fi.ld{opacity:1}
 .figrow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
 .figrow>.fig{flex:1 1 260px;margin:0;min-width:0}
 .figrow>.fig svg{max-width:100%;height:auto}
+.side-en .decode{grid-template-columns:1fr}
