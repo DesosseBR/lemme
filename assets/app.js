@@ -325,7 +325,15 @@ function exercisePage(eid) {
   const legend = `<span class="legend" aria-hidden="true"><span class="lg lg-n">notion de cours</span>${Object.keys(d.cles || {}).length ? `<span class="lg lg-k">mot expliqué</span>` : ""}${e.side ? `<span class="lg lg-s">donné par l'énoncé</span>` : ""}</span>`;
   const cor = `<section class="panelbox pane-cor" aria-labelledby="h-cor"><h2 id="h-cor" class="pane-h cor-h">Corrigé ${legend}${PDFS.has("corrige-" + e.id) ? `<a class="btn btn-ghost btn-sm" style="margin-left:auto" href="pdf/corrige-${e.id}.pdf" download aria-label="Télécharger le corrigé en PDF">${I.dl} PDF</a>` : ""}</h2><div id="player" class="player"></div></section>`;
   const viz = [].concat(e.viz || []).map((v, k) => `<section class="panelbox" aria-labelledby="h-viz${k}"><h2 id="h-viz${k}" class="pane-h">${v.title || "Visualiser"}</h2><div id="viz${k ? k : ""}"></div></section>`).join("");
-  const more = others.length ? `<section class="more"><h2>Dans le même chapitre</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
+  const plab = q => (/^(Exercice|Partie|Problème|Question|Thème)/.test(q) ? "" : "Partie ") + q;
+  let more;
+  if (e.part) {
+    const sib = EXERCISES.filter(x => x.subj === e.subj && x.year === e.year && x.chap === e.chap && x.part);
+    const k = sib.indexOf(e), pv = sib[k - 1], nx = sib[k + 1];
+    const home = ann ? `#c-annales-mp-${e.chap}` : `#c-${s.id}-${e.year}-${e.chap}`;
+    const card = (x, dir) => x ? `<a class="pnav ${dir}" href="#e-${x.id}"><span class="pdir">${dir === "prev" ? "← Partie précédente" : "Partie suivante →"}</span><span class="plab">${esc(plab(x.part))}</span><span class="ptt">${ttl(x)}</span></a>` : `<span class="pnav ${dir} off"><span class="pdir">${dir === "prev" ? "Début du sujet" : "Fin du sujet"}</span><a class="plab" href="${home}">Retour au sujet</a></span>`;
+    more = sib.length > 1 ? `<section class="more"><h2>${esc(plab(e.part))} sur ${sib.length}</h2><div class="pnavs">${card(pv, "prev")}${card(nx, "next")}</div></section>` : "";
+  } else more = others.length ? `<section class="more"><h2>Dans le même chapitre</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
   return head + `<div class="wrap wrap-wide"><div class="ex-layout wide">
       <div class="split"><section class="panelbox side-en" aria-labelledby="h-en">${enHead}${enBody}</section>${cor}</div>
       ${viz}${more}
