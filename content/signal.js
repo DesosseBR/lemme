@@ -1,0 +1,115 @@
+/* Physique · Spé · Traitement du signal : filtrage analogique, analyse spectrale, traitement numérique.
+   Énoncés reformulés et figures redessinées pour Lemme ; corrigés rédigés pour Lemme. */
+(() => {
+const R = String.raw;
+const { GRAPH, PL, FIG, S, ARR, f1 } = window.__LA;
+const P = { subj: "physique", year: "mp", chap: 1 };
+const Q = (t, h, b, rappels) => ({ t, h, b, rappels });
+const fr = (v, d = 2) => String(+v.toFixed(d)).replace(".", "{,}");
+const frs = (v, d = 2) => String(+v.toFixed(d)).replace(".", ",");
+
+/* ---------- Outils de dessin ---------- */
+/* spectre : raies verticales */
+const SPEC = (o, lines, cap, label) => GRAPH(Object.assign({}, o, {
+  extra: (X, Y) => lines.map(l => `<line x1="${f1(X(l[0]))}" y1="${f1(Y(0))}" x2="${f1(X(l[0]))}" y2="${f1(Y(l[1]))}" class="v${l[2] || "r"}" style="stroke-width:3.2;stroke-linecap:round"/>` + (l[3] ? S(X(l[0]), Y(l[1]) - 7, l[3], "middle", "sm " + (l[2] || "r")) : "")).join("") + (o.more ? o.more(X, Y) : "")
+}), cap, label);
+/* oscilloscope : grille 10 × 8 divisions, courbes données en divisions */
+const OSC = (curves, info, cap, label) => {
+  const W = 400, H = 320, dx = W / 10, dy = H / 8, ox = 20, oy = 14;
+  let g = "";
+  for (let i = 0; i <= 10; i++) g += `<line x1="${ox + i * dx}" y1="${oy}" x2="${ox + i * dx}" y2="${oy + H}" style="stroke:var(--line);stroke-width:${i === 5 ? 1.4 : 1}"/>`;
+  for (let j = 0; j <= 8; j++) g += `<line x1="${ox}" y1="${oy + j * dy}" x2="${ox + W}" y2="${oy + j * dy}" style="stroke:var(--line);stroke-width:${j === 4 ? 1.4 : 1}"/>`;
+  const c = curves.map(cv => { let d = ""; const n = cv.n || 800; for (let k = 0; k <= n; k++) { const t = 10 * k / n, v = cv.f(t); d += `${k ? "L" : "M"}${f1(ox + t * dx)} ${f1(oy + H / 2 - v * dy)} `; } return `<path d="${d}" class="v${cv.c}" style="fill:none;stroke-width:2.2"/>`; }).join("");
+  return FIG(W + 40, H + 60, g + c + `<text x="${ox}" y="${oy + H + 22}" class="sm">${info[0]}</text><text x="${ox}" y="${oy + H + 40}" class="sm">${info[1]}</text>`, cap, label);
+};
+const sq = (t, P, lo, hi) => ((((t % P) + P) % P) < P / 2 ? hi : lo);
+
+LEMME.rappels({
+  "sig-cplx": { t: "Impédances complexes", b: R`<p>Résistance : $\underline Z = R$. Condensateur : $\underline Z = \dfrac1{jC\omega}$ (circuit ouvert à basse fréquence, fil à haute fréquence). Bobine : $\underline Z = jL\omega$. Pont diviseur : $\underline u_2 = \dfrac{\underline Z_2}{\underline Z_1+\underline Z_2}\,\underline u$.</p>` },
+  "sig-bode": { t: "Diagramme de Bode", b: R`<p>Gain en décibels : $G_{\mathrm{dB}} = 20\log_{10}|\underline H|$, tracé en fonction de $\log_{10}\omega$. Pour $\underline H = 1+j\omega/\omega_1$ : asymptote $0$ dB puis $+20$ dB par décade après $\omega_1$. Pour $\underline H = \dfrac1{1+j\omega/\omega_2}$ : $0$ dB puis $-20$ dB par décade. Les gains en dB d'un produit s'ajoutent.</p>` },
+  "sig-lin": { t: "Filtre linéaire et harmoniques", b: R`<p>Si $e(t) = \sum_n E_n\cos(n\omega t+\varphi_n)$ entre dans un filtre linéaire de fonction de transfert $\underline H$, alors $s(t) = \sum_n|\underline H(jn\omega)|\,E_n\cos\big(n\omega t+\varphi_n+\arg\underline H(jn\omega)\big)$. Un filtre linéaire ne crée <b>aucune</b> fréquence nouvelle.</p>` },
+  "sig-ordre1": { t: "Équation différentielle du premier ordre", b: R`<p>La solution de $\tau\dfrac{ds}{dt}+s = E$ ($E$ constante) est $s(t) = E+K\,e^{-t/\tau}$, où $K$ se fixe par la condition initiale.</p>` },
+  "sig-puiss": { t: "Puissance et valeur efficace", b: R`<p>Une tension $U\cos(\omega t+\varphi)$ dissipe dans $R$ la puissance moyenne $\dfrac{U^2}{2R}$. Pour une somme de sinusoïdes de fréquences <b>différentes</b>, les puissances s'ajoutent (Parseval) : $\langle s^2\rangle = a_0^2+\sum_n\frac{a_n^2+b_n^2}2$.</p>` },
+  "sig-fourier": { t: "Coefficients de Fourier", b: R`<p>Pour $s$ de période $T$, $\Omega = 2\pi/T$ : $s(t) = a_0+\sum_{n\geqslant1}\big(a_n\cos n\Omega t+b_n\sin n\Omega t\big)$ avec $a_0 = \langle s\rangle$, $a_n = \frac2T\int_Ts\cos(n\Omega t)\,dt$, $b_n = \frac2T\int_Ts\sin(n\Omega t)\,dt$. Si $s$ est impaire, $a_n = 0$ ; si $s$ est paire, $b_n = 0$.</p>` },
+  "sig-shannon": { t: "Échantillonnage et repliement", b: R`<p>Échantillonner à $f_e$ fait apparaître, pour chaque raie $f$, des raies aux fréquences $|f\pm kf_e|$. Critère de Shannon : si $f_e>2f_{\max}$, on peut reconstruire le signal sans perte. Sinon, une raie $f>f_e/2$ réapparaît à $|f-kf_e|<f_e/2$ (<b>repliement</b>).</p>` },
+  "sig-ao": { t: "Montage transimpédance (convertisseur courant-tension)", b: R`<p>Un amplificateur opérationnel idéal en régime linéaire impose une masse virtuelle à son entrée $-$ : le courant $i$ qui arrive traverse la résistance de contre-réaction $R'$, et la sortie vaut $u = -R'i$ (ou $+R'i$ selon les conventions). En dehors du régime linéaire, $|u|$ est limitée à $V_{\mathrm{sat}}$.</p>` },
+  "sig-proba": { t: "Variable aléatoire à densité", b: R`<p>Fonction de répartition $F(x) = P(\varepsilon\lt x)$ ; densité $f = F'$, avec $\int f = 1$. Moyenne $\langle\varepsilon\rangle = \int xf(x)\,dx$, moyenne quadratique $\langle\varepsilon^2\rangle = \int x^2f(x)\,dx$.</p>` },
+  "sig-tf": { t: "Transformée de Fourier", b: R`<p>$\tilde I(\nu) = \displaystyle\int_{-\infty}^{+\infty}I(t)e^{-2i\pi\nu t}\,dt$. Pour une impulsion rectangulaire de hauteur $E$ et de durée $\tau$ centrée en $0$ : $\tilde I(\nu) = E\tau\,\operatorname{sinc}(\pi\nu\tau)$, avec $\operatorname{sinc}x = \frac{\sin x}x$. Multiplier un signal par $\cos(2\pi\nu_0t)$ translate son spectre en $\pm\nu_0$.</p>` }
+});
+
+/* ===== figures exercice 1 ===== */
+const circ1 = FIG(420, 230, R`
+<line x1="60" y1="40" x2="140" y2="40" class="vk"/><rect x="140" y="28" width="70" height="24" rx="3" style="fill:var(--surface);stroke:currentColor;stroke-width:1.6"/><text x="175" y="45" class="sm" text-anchor="middle">R2</text>
+<line x1="210" y1="40" x2="300" y2="40" class="vk"/><line x1="300" y1="40" x2="300" y2="70" class="vk"/>
+<rect x="288" y="70" width="24" height="56" rx="3" style="fill:var(--surface);stroke:currentColor;stroke-width:1.6"/><text x="328" y="103" class="sm">R1</text>
+<line x1="300" y1="126" x2="300" y2="150" class="vk"/><line x1="282" y1="150" x2="318" y2="150" class="vk" style="stroke-width:2.6"/><line x1="282" y1="160" x2="318" y2="160" class="vk" style="stroke-width:2.6"/><text x="328" y="160" class="sm">C</text>
+<line x1="300" y1="160" x2="300" y2="200" class="vk"/><line x1="60" y1="200" x2="300" y2="200" class="vk"/>
+<circle cx="60" cy="40" r="4" class="pt"/><circle cx="60" cy="200" r="4" class="pt"/><circle cx="380" cy="40" r="4" class="pt"/><circle cx="380" cy="200" r="4" class="pt"/>
+<line x1="300" y1="40" x2="380" y2="40" class="vk"/><line x1="300" y1="200" x2="380" y2="200" class="vk"/>
+${ARR(40, 192, 40, 48, "b")}<text x="18" y="125" class="it b">vₑ</text>${ARR(395, 192, 395, 48, "r")}<text x="402" y="125" class="it r">vₛ</text>`,
+  R`Le filtre : $R_2$ en série, puis la branche $R_1$, $C$ en série, aux bornes de laquelle on prélève $v_s$ (sortie ouverte).`, "Schéma du filtre");
+const H1 = w => { const a = w * 1e-4, b = w * 1e-3; return Math.sqrt((1 + a * a) / (1 + b * b)); };
+const bode1 = GRAPH({ w: 520, h: 250, x: [1, 6], y: [-25, 5], xt: [1, 2, 3, 4, 5, 6], xtl: ["10", "10²", "10³", "10⁴", "10⁵", "10⁶"], yt: [-20, -10, 0], xl: "ω (rad/s)", yl: "G (dB)",
+  curves: [{ f: x => 20 * Math.log10(H1(10 ** x)), c: "b", lab: [4.4, -16.5, "courbe réelle"] },
+    { f: x => x < 3 ? 0 : x < 4 ? -20 * (x - 3) : -20, c: "r", dash: true, lab: [1.4, 2, "asymptotes"] }],
+  vl: [{ x: 3, t: "ω₂" }, { x: 4, t: "ω₁" }] },
+  R`Diagramme de Bode en gain : $0$ dB à basse fréquence, pente $-20$ dB par décade entre $\omega_2 = 10^3$ et $\omega_1 = 10^4$ rad/s, puis palier à $20\log_{10}0{,}1 = -20$ dB.`, "Diagramme de Bode du filtre");
+const temp1 = GRAPH({ w: 520, h: 240, x: [0, 0.25], y: [-0.1, 1.1], xt: [0.0628, 0.1257, 0.1885, 0.2513], xtl: ["T", "2T", "3T", "4T"], yt: [0.5, 1], xl: "t", yl: "V",
+  curves: [{ f: t => Math.cos(t * 50) ** 2, c: "b", n: 600, lab: [0.005, 1.06, "vₑ"] }, { f: t => 0.5 + 0.0502 * Math.cos(100 * t - 0.0897), c: "r", n: 600, lab: [0.2, 0.62, "vₛ"] }] },
+  R`Entrée $v_e = \cos^2(\omega t)$ (bleu) et sortie $v_s$ (rouge), avec l'échelle de temps $T = \pi/\omega$ dilatée ($\omega$ réduite pour la lisibilité). La composante continue passe entièrement, l'oscillation est divisée par $10$.`, "Entrée et sortie en régime sinusoïdal");
+const step1 = GRAPH({ w: 520, h: 230, x: [0, 5], y: [-0.1, 1.15], xt: [1, 2, 3, 4, 5], xtl: ["τ₂", "2τ₂", "3τ₂", "4τ₂", "5τ₂"], yt: [0.1, 0.5, 1], ytl: ["0,1", "0,5", "1"], xl: "t", yl: "vₛ (V)",
+  curves: [{ f: t => 1 - 0.9 * Math.exp(-t), c: "r" }, { f: t => 1, c: "b", dash: true, lab: [3.5, 1.08, "vₑ = 1 V"] }],
+  extra: (X, Y) => `<circle cx="${f1(X(0))}" cy="${f1(Y(0.1))}" r="4" class="ptr"/>` + S(X(0.08), Y(0.1) + 16, "saut à 0,1 V") },
+  R`Réponse à l'échelon : saut immédiat de $0$ à $0{,}1$ V (le condensateur se comporte comme un fil à l'instant initial), puis montée exponentielle vers $1$ V avec la constante de temps $\tau_2 = 1$ ms.`, "Réponse indicielle");
+
+/* ===== figures exercice 2 ===== */
+const spec2 = (k, cap) => { const h = n => (1 / (n * n)) * Math.pow(1 / Math.sqrt(1 + (n / 5) ** 2), k); const ref = h(1); return SPEC({ w: 480, h: 220, x: [0, 8], y: [0, 1.15], xt: [1, 3, 5, 7], xtl: ["f₀", "3f₀", "5f₀", "7f₀"], yt: [0.5, 1], xl: "f" },
+  [1, 3, 5, 7].map(n => [n, h(n) / ref, k ? "r" : "b", frs(h(n) / ref, 3)]), cap, "Spectre"); };
+
+LEMME.exercises([
+/* ======================== Exercice 1 ======================== */
+{ id: "sig-01", ...P, level: 2, time: "40 min",
+  title: "Un filtre RC à deux paliers : spectre et réponse temporelle",
+  enonce: R`<p>On étudie le circuit ci-dessous, formé d'un condensateur de capacité $C = 10$ nF et de deux résistances $R_1 = 10$ kΩ et $R_2 = 90$ kΩ. La sortie est ouverte (aucun courant n'en sort).</p>${circ1}<ol>
+<li>Sans calcul, en raisonnant sur le schéma, donner le rapport $|v_s/v_e|$ à très basse et à très haute fréquence.</li>
+<li>Établir la fonction de transfert $\underline H = \underline v_s/\underline v_e$ sous la forme $\underline H = H_0\dfrac{1+j\omega\tau_1}{1+j\omega\tau_2}$.</li>
+<li>Tracer le diagramme de Bode asymptotique en gain, en écrivant $\underline H$ comme produit de deux fonctions du premier ordre que l'on précisera.</li>
+<li>Calculer la pulsation de coupure à $-3$ dB.</li>
+<li>Écrire l'équation différentielle reliant $v_s(t)$ et $v_e(t)$.</li>
+<li>L'entrée est $v_e(t) = A\cos^2(\omega t)$ avec $A = 1$ V et $\omega = 5\cdot10^4$ rad/s. Déterminer $v_s(t)$ en régime permanent.</li>
+<li>Toutes les tensions étant nulles pour $t\lt0$ (condensateur déchargé), on applique un échelon $v_e(t) = A = 1$ V pour $t>0$. Déterminer $v_s(t)$ et tracer son allure.</li></ol>`,
+  decode: { donnees: [R`$R_2$ en série ; la sortie est prise aux bornes de la branche $R_1+C$.`, R`$C = 10$ nF, $R_1 = 10$ kΩ, $R_2 = 90$ kΩ.`], but: R`Caractériser complètement le filtre : fréquentiel (Bode, coupure) et temporel (réponse à un signal périodique et à un échelon).`, cles: {} },
+  steps: [
+    Q("Les comportements limites", R`<p>Basse fréquence : condensateur = interrupteur ouvert. Haute fréquence : condensateur = fil.</p>`, R`<p><b>Très basse fréquence</b> ($\omega\to0$) : l'impédance $\frac1{jC\omega}$ devient infinie, le condensateur se comporte comme un <b>interrupteur ouvert</b>. Aucun courant ne circule, donc aucune tension aux bornes de $R_2$ : $v_s = v_e$.</p>$$\Big|\frac{v_s}{v_e}\Big|\xrightarrow[\omega\to0]{}1.$$<p><b>Très haute fréquence</b> ($\omega\to\infty$) : l'impédance du condensateur tend vers $0$, il se comporte comme un <b>fil</b>. Il reste un pont diviseur $R_2$, $R_1$ :</p>$$\Big|\frac{v_s}{v_e}\Big|\xrightarrow[\omega\to\infty]{}\frac{R_1}{R_1+R_2} = \frac{10}{100} = 0{,}1.$$<p>Le filtre laisse passer les basses fréquences et divise par $10$ les hautes : c'est un passe-bas « à palier ».</p>`, ["sig-cplx"]),
+    Q("La fonction de transfert", R`<p>Pont diviseur avec $\underline Z_1 = R_2$ et $\underline Z_2 = R_1+\frac1{jC\omega}$, puis multiplie haut et bas par $jC\omega$.</p>`, R`<p>La sortie étant ouverte, $R_2$ et la branche $(R_1,C)$ sont parcourues par le même courant : c'est un <b>pont diviseur</b>.</p>$$\underline H = \frac{R_1+\frac1{jC\omega}}{R_2+R_1+\frac1{jC\omega}}.$$<p>On multiplie numérateur et dénominateur par $jC\omega$ :</p>$$\underline H = \frac{1+jR_1C\omega}{1+j(R_1+R_2)C\omega}.$$<div class="sbox">$$\underline H = \frac{1+j\omega\tau_1}{1+j\omega\tau_2},\qquad H_0 = 1,\quad\tau_1 = R_1C,$$$$\tau_2 = (R_1+R_2)C.$$</div><p>Applications numériques : $\tau_1 = 10^4\times10^{-8} = 10^{-4}$ s et $\tau_2 = 10^5\times10^{-8} = 10^{-3}$ s. On retrouve les limites : $\underline H\to1$ en $\omega = 0$ et $\underline H\to\frac{\tau_1}{\tau_2} = 0{,}1$ à l'infini.</p>`, ["sig-cplx"]),
+    Q("Le diagramme de Bode", R`<p>$\underline H = (1+j\omega/\omega_1)\times\dfrac1{1+j\omega/\omega_2}$ ; les gains en dB s'ajoutent.</p>`, R`<p>On pose $\omega_1 = \frac1{\tau_1} = 10^4$ rad/s et $\omega_2 = \frac1{\tau_2} = 10^3$ rad/s ($\omega_2\lt\omega_1$). Alors</p>$$\underline H = \underbrace{\Big(1+j\frac\omega{\omega_1}\Big)}_{\underline H_1}\times\underbrace{\frac1{1+j\frac\omega{\omega_2}}}_{\underline H_2},$$$$G_{\mathrm{dB}} = 20\log|\underline H_1|+20\log|\underline H_2|.$$<ul><li>$\underline H_2$ (passe-bas du premier ordre) : asymptote $0$ dB pour $\omega\ll\omega_2$, puis $-20$ dB/décade.</li><li>$\underline H_1$ : asymptote $0$ dB pour $\omega\ll\omega_1$, puis $+20$ dB/décade.</li></ul><p>En additionnant :</p><ul><li>$\omega\lt\omega_2$ : $0+0 = 0$ dB ;</li><li>$\omega_2\lt\omega\lt\omega_1$ : $-20$ dB/décade ;</li><li>$\omega>\omega_1$ : $-20+20 = 0$ dB/décade : palier à $G = 20\log\frac{\omega_2}{\omega_1} = 20\log0{,}1 = -20$ dB.</li></ul>${bode1}`, ["sig-bode"]),
+    Q("La pulsation de coupure", R`<p>Le gain maximal vaut $1$ ; résoudre $|\underline H|^2 = \frac12$.</p>`, R`<p>Le gain maximal est $H_{\max} = 1$ (en $\omega = 0$). La coupure à $-3$ dB est définie par $|\underline H(\omega_c)| = \frac{H_{\max}}{\sqrt2}$, soit $|\underline H|^2 = \frac12$ :</p>$$\frac{1+\omega^2\tau_1^2}{1+\omega^2\tau_2^2} = \frac12\iff2+2\omega^2\tau_1^2 = 1+\omega^2\tau_2^2$$$$\iff\omega^2\big(\tau_2^2-2\tau_1^2\big) = 1.$$<div class="sbox">$$\omega_c = \frac1{\sqrt{\tau_2^2-2\tau_1^2}} = \frac1{\sqrt{10^{-6}-2\cdot10^{-8}}}\approx1{,}01\cdot10^3\ \text{rad/s}.$$</div><p>Comme $\tau_1\ll\tau_2$, $\omega_c\approx\frac1{\tau_2} = \omega_2$ : la coupure est quasiment à la première cassure. (La solution existe car le palier haute fréquence, $-20$ dB, est bien en dessous de $-3$ dB.)</p>`),
+    Q("L'équation différentielle", R`<p>$j\omega\leftrightarrow\dfrac{d}{dt}$.</p>`, R`<p>On écrit $(1+j\omega\tau_2)\underline v_s = (1+j\omega\tau_1)\underline v_e$ et on remplace la multiplication par $j\omega$ par une dérivation :</p><div class="sbox">$$\tau_2\frac{dv_s}{dt}+v_s = v_e+\tau_1\frac{dv_e}{dt}.$$</div>`),
+    Q("Réponse à A cos²(ωt)", R`<p>Linéarise : $\cos^2x = \frac{1+\cos2x}2$. Puis traite séparément le continu et la sinusoïde de pulsation $2\omega$.</p>`, R`<p><b>Décomposition spectrale de l'entrée.</b></p>$$v_e(t) = A\cos^2(\omega t) = \underbrace{\frac A2}_{\text{continu}}+\underbrace{\frac A2\cos(2\omega t)}_{\text{pulsation }2\omega = 10^5\text{ rad/s}}.$$<p>Le filtre étant linéaire, on additionne les réponses à chaque composante.</p><ul><li><b>Continu</b> ($\omega = 0$) : $\underline H(0) = 1$, il sort $\frac A2 = 0{,}5$ V.</li><li><b>Pulsation $2\omega$</b> : $2\omega\tau_1 = 10$ et $2\omega\tau_2 = 100$. $$|\underline H(2j\omega)| = \sqrt{\frac{1+10^2}{1+100^2}} = \sqrt{\frac{101}{10\,001}}\approx0{,}100,$$ $$\arg\underline H(2j\omega) = \arctan10-\arctan100\approx1{,}471-1{,}561$$$$= -0{,}090\ \text{rad}.$$</li></ul><div class="sbox">$$v_s(t) = 0{,}50+0{,}050\cos\big(10^5t-0{,}090\big)\quad(\text{en V}).$$</div><p>La pulsation $2\omega$ est sur le palier haute fréquence : l'ondulation est divisée par $10$ et presque pas déphasée.</p>${temp1}`, ["sig-lin"]),
+    Q("Réponse à un échelon", R`<p>Pour $t>0$, $v_e = A$ est constant : $\tau_2v_s'+v_s = A$. La condition initiale vient du circuit : $u_C(0^+) = 0$.</p>`, R`<p>Pour $t>0$, $\frac{dv_e}{dt} = 0$ et l'équation devient $\tau_2\dfrac{dv_s}{dt}+v_s = A$, de solution</p>$$v_s(t) = A+K\,e^{-t/\tau_2}.$$<p><b>Condition initiale.</b> La tension aux bornes d'un condensateur est continue : $u_C(0^+) = u_C(0^-) = 0$. À $t = 0^+$, le condensateur se comporte donc comme un fil : pont diviseur $R_1$, $R_2$ :</p>$$v_s(0^+) = \frac{R_1}{R_1+R_2}A = 0{,}1A.$$<p>(On le retrouve sur l'équation : en intégrant sur le saut, $\tau_2\Delta v_s = \tau_1\Delta v_e$, donc $\Delta v_s = \frac{\tau_1}{\tau_2}A$.) Donc $A+K = 0{,}1A$, $K = -\frac{R_2}{R_1+R_2}A$ :</p><div class="sbox">$$v_s(t) = A\Big(1-\frac{R_2}{R_1+R_2}e^{-t/\tau_2}\Big)$$$$= 1-0{,}9\,e^{-t/(1\,\text{ms})}\quad(\text{en V}).$$</div>${step1}`, ["sig-ordre1"])
+  ],
+  piege: R`Prendre $v_s(0^+) = 0$ : c'est la tension aux bornes du <b>condensateur</b> qui est nulle à $t = 0^+$, pas $v_s$ (il y a $R_1$ en série).`,
+  methode: R`Pour un signal périodique en entrée d'un filtre linéaire : (1) décomposer en harmoniques, (2) multiplier chaque amplitude par $|\underline H|$ et décaler chaque phase de $\arg\underline H$, (3) sommer.`
+},
+
+/* ======================== Exercice 2 ======================== */
+{ id: "sig-02", ...P, level: 2, time: "30 min",
+  title: "Filtrer un signal triangulaire : un, puis trois filtres en cascade",
+  enonce: R`<p>Un signal triangulaire $e(t)$ de fréquence $f_0 = 50$ Hz ($\omega_0 = 2\pi f_0$) a pour série de Fourier</p>$$e(t) = \frac{8E}{\pi^2}\sum_{p=0}^{\infty}\frac{\cos\big((2p+1)\omega_0t\big)}{(2p+1)^2}.$$<p>Il traverse un filtre linéaire de fonction de transfert $\underline H(j\omega) = \dfrac1{1+j\omega/\omega_c}$.</p><ol>
+<li>Quelle est la nature du filtre ?</li>
+<li>On ignore les déphasages. On veut que la <b>puissance</b> de l'harmonique de rang $5$ soit divisée par $2$. Quelle pulsation de coupure $\omega_c$ choisir ? Quelle est alors l'atténuation en puissance du fondamental et des harmoniques de rangs $3$ et $7$ ? Que vaut, après filtrage, l'amplitude de l'harmonique $7$ rapportée à celle du fondamental ?</li>
+<li>On met en cascade trois filtres identiques, de même $\omega_c$.<br>a) Donner la fonction de transfert de l'ensemble. Quelle hypothèse faut-il faire sur les impédances d'entrée et de sortie ?<br>b) Calculer l'atténuation en puissance des harmoniques $1,3,5,7$, puis le rapport des amplitudes harmonique $7$ / fondamental. Quelle est la pente du gain en dB par décade ?</li></ol>`,
+  decode: { donnees: [R`Les harmoniques sont aux rangs impairs, d'amplitudes en $\frac1{n^2}$.`, R`« Puissance divisée par 2 » : $|\underline H|^2 = \frac12$.`], but: R`Quantifier l'effet d'un passe-bas sur les harmoniques, et le gain obtenu en cascadant plusieurs filtres.`, cles: {} },
+  steps: [
+    Q("Nature du filtre", R`<p>Limites en $0$ et en l'infini.</p>`, R`<p>$\underline H(0) = 1$ et $|\underline H|\to0$ quand $\omega\to\infty$, avec $|\underline H|\sim\frac{\omega_c}\omega$ : c'est un <b>passe-bas du premier ordre</b>, de pulsation de coupure $\omega_c$ (pente $-20$ dB/décade).</p>`),
+    Q("Choix de la coupure", R`<p>$|\underline H(5\omega_0)|^2 = \dfrac1{1+(5\omega_0/\omega_c)^2} = \frac12$.</p>`, R`<p>La puissance d'une composante est proportionnelle au carré de son amplitude, donc elle est multipliée par $|\underline H|^2 = \dfrac1{1+(\omega/\omega_c)^2}$. Pour l'harmonique $5$ :</p>$$\frac1{1+(5\omega_0/\omega_c)^2} = \frac12\iff\frac{5\omega_0}{\omega_c} = 1.$$<div class="sbox">$$\omega_c = 5\omega_0,\qquad f_c = 5f_0 = 250\ \text{Hz}.$$</div>`, ["sig-puiss"]),
+    Q("Atténuations et rapport des amplitudes", R`<p>$|\underline H(n\omega_0)|^2 = \dfrac1{1+(n/5)^2}$.</p>`, R`<p>Avec $\omega_c = 5\omega_0$, pour l'harmonique $n$ : $|\underline H(n\omega_0)|^2 = \dfrac{1}{1+n^2/25} = \dfrac{25}{25+n^2}$.</p>$$\begin{array}{c|c|c}n&|\underline H|^2\ (\text{puissance})&|\underline H|\ (\text{amplitude})\\\hline1&25/26\approx0{,}96&0{,}981\\3&25/34\approx0{,}74&0{,}857\\5&25/50 = 0{,}50&0{,}707\\7&25/74\approx0{,}34&0{,}581\end{array}$$<p><b>Harmonique $7$ / fondamental.</b> Avant filtrage, le rapport des amplitudes vaut $\frac{1/49}{1} = \frac1{49}\approx0{,}020$. Après :</p>$$\frac{A_7}{A_1} = \frac1{49}\times\frac{|\underline H(7\omega_0)|}{|\underline H(\omega_0)|} = \frac1{49}\sqrt{\frac{26}{74}}\approx\frac{0{,}593}{49}\approx0{,}012.$$<p>L'harmonique $7$ n'a été réduit que d'un facteur $1{,}7$ par rapport au fondamental : un premier ordre est peu sélectif.</p>${spec2(1, R`Amplitudes relatives après un filtre ($\omega_c = 5\omega_0$), normalisées par le fondamental. Avant filtrage : $1$ ; $0{,}111$ ; $0{,}040$ ; $0{,}020$.`)}`),
+    Q("a) Trois filtres en cascade", R`<p>Les fonctions de transfert se multiplient si chaque étage n'est pas perturbé par le suivant.</p>`, R`<p>Si la sortie de chaque filtre n'est pas modifiée par le branchement du suivant, la fonction de transfert globale est le produit :</p><div class="sbox">$$\underline H_3(j\omega) = \frac1{\big(1+j\omega/\omega_c\big)^3}.$$</div><p><b>Hypothèse</b> : chaque filtre doit avoir une <b>impédance d'entrée très grande</b> devant l'impédance de sortie du filtre précédent (idéalement : entrée infinie, sortie nulle). On l'obtient en intercalant des montages suiveurs à amplificateur opérationnel. Sans cela, trois cellules RC branchées directement interagissent et la fonction de transfert n'est pas le cube.</p>`),
+    Q("b) Atténuations après trois filtres", R`<p>Il suffit d'élever les valeurs précédentes au cube.</p>`, R`<p>$|\underline H_3|^2 = \big(|\underline H|^2\big)^3$ :</p>$$\begin{array}{c|c|c}n&|\underline H_3|^2\ (\text{puissance})&|\underline H_3|\ (\text{amplitude})\\\hline1&(25/26)^3\approx0{,}89&0{,}943\\3&(25/34)^3\approx0{,}40&0{,}631\\5&(1/2)^3 = 0{,}125&0{,}354\\7&(25/74)^3\approx0{,}039&0{,}196\end{array}$$<p><b>Harmonique $7$ / fondamental</b> :</p>$$\frac{A_7}{A_1} = \frac1{49}\times\frac{0{,}196}{0{,}943}\approx\frac{0{,}208}{49}\approx4{,}2\cdot10^{-3}.$$<p><b>Pente</b> : pour $\omega\gg\omega_c$, $|\underline H_3|\approx(\omega_c/\omega)^3$, donc $G_{\mathrm{dB}}\approx-60\log\frac\omega{\omega_c}$ : <b>$-60$ dB par décade</b>.</p>${spec2(3, R`Amplitudes relatives après trois filtres en cascade : les harmoniques élevés sont bien plus réduits, au prix d'une légère baisse du fondamental.`)}`)
+  ],
+  piege: R`Confondre atténuation en puissance ($|\underline H|^2$) et en amplitude ($|\underline H|$). « $-3$ dB » correspond à une puissance divisée par $2$, soit une amplitude divisée par $\sqrt2$.`,
+  methode: R`Un filtre d'ordre $n$ a une pente de $-20n$ dB par décade : pour éliminer des harmoniques proches de la coupure, on augmente l'ordre plutôt que de baisser la coupure (qui atténuerait aussi le fondamental).`
+}
+]);
+window.__SIG = { SPEC, OSC, sq, fr, frs, Q, P };
+})();

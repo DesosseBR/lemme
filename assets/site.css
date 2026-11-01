@@ -1214,3 +1214,6 @@ img.fi.ld{opacity:1}
 .plparts .go{width:16px;height:16px;color:var(--muted)}
 @media (max-width:640px){.plparts .excard{grid-template-columns:1fr 16px;gap:4px 12px;padding:14px 18px}.plp,.plt,.plq{grid-column:1}.plparts .go{grid-column:2;grid-row:1/4}}
 :root[data-zone="commando"] .plparts .excard.was{box-shadow:inset 0 0 0 2px var(--yellow)}
+.figrow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.figrow>.fig{flex:1 1 260px;margin:0;min-width:0}
+.figrow>.fig svg{max-width:100%;height:auto}
