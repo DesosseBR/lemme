@@ -24,32 +24,33 @@
     </div>
     <nav class="mainnav" id="mainnav" aria-label="Navigation principale">
       <div class="dd">
-        <button class="navbtn" type="button" aria-expanded="false" aria-controls="dd-mat">Matières <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="navbtn" type="button" data-sec="cours" aria-expanded="false" aria-controls="dd-mat">Cours <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="panel mega" id="dd-mat" hidden></div>
       </div>
       <div class="dd">
-        <button class="navbtn" type="button" aria-expanded="false" aria-controls="dd-train">S'entraîner <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="navbtn" type="button" data-sec="exos" aria-expanded="false" aria-controls="dd-train">Exercices <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="panel" id="dd-train" hidden>
-          <a href="#trouver"><span class="ico">⌕</span>Trouver un sujet ou un exercice</a>
-          <a href="#exercices"><span class="ico">Ex</span>Exercices corrigés</a>
-          <a href="#classiques"><span class="ico">★</span>Classiques</a>
-          <a href="#dm"><span class="ico">DM</span>Devoirs maison</a>
-          <a href="#ds"><span class="ico">DS</span>Devoirs surveillés</a>
-          <a href="#kholles"><span class="ico">K</span>Khôlles</a>
-          <a href="#tableau"><span class="ico">%</span>Tableau de bord</a>
+          <a href="#exercices"><b>Exercices corrigés</b><span>Tous les exercices, triés par matière et difficulté</span></a>
+          <a href="#classiques"><b>Classiques</b><span>Ceux qu'il faut avoir faits au moins une fois</span></a>
+          <a href="#kholles"><b>Khôlles</b><span>Questions de cours et exercices d'oral</span></a>
+          <hr>
+          <a href="#dm"><b>Devoirs maison</b></a>
+          <a href="#ds"><b>Devoirs surveillés</b></a>
         </div>
       </div>
       <div class="dd">
-        <button class="navbtn" type="button" aria-expanded="false" aria-controls="dd-conc">Concours <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="navbtn" type="button" data-sec="conc" aria-expanded="false" aria-controls="dd-conc">Concours <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="panel" id="dd-conc" hidden>
-          <a href="#concours"><span class="ico">C</span>Préparation concours</a>
-          <a href="#oral"><span class="ico">O</span>Oraux</a>
+          <a href="#concours"><b>Écrits</b><span>Sujets corrigés par filière et par banque</span></a>
+          <a href="#oral"><b>Oraux</b><span>Méthode et exercices par concours</span></a>
+          <a href="#trouver"><b>Chercher un sujet</b><span>Par mots-clés, année ou difficulté</span></a>
+          <hr>
+          <a href="#commando"><b>Commando X-ENS</b><span>Le niveau au-dessus</span></a>
         </div>
       </div>
-      <a class="navlink" href="#tableau">Tableau de bord</a>
-      <a class="navlink cmdlink" href="#commando">Commando <span class="xens">X-ENS</span></a>
-      <button class="iconbtn" type="button" id="search-toggle" aria-label="Rechercher" aria-expanded="false" aria-controls="searchbar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+      <a class="navlink" data-sec="tab" href="#tableau">Tableau de bord</a>
     </nav>
+    <button class="iconbtn" type="button" id="search-toggle" aria-label="Rechercher" aria-expanded="false" aria-controls="searchbar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     <button class="iconbtn burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainnav"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="searchbar" id="searchbar" hidden>
@@ -66,9 +67,9 @@
 <footer class="site">
   <div class="wrap foot">
     <div><a class="logo" href="#accueil"><span class="logo-mark" aria-hidden="true"></span><b>Lemme</b></a><p class="tagline">Cours, résumés et corrigés pas à pas pour la prépa scientifique, de la Sup à la Spé.</p></div>
-    <div><h4>Matières</h4><ul id="foot-subj"></ul></div>
-    <div><h4>S'entraîner</h4><ul><li><a href="#trouver">Trouver un sujet</a></li><li><a href="#exercices">Exercices corrigés</a></li><li><a href="#classiques">Classiques</a></li><li><a href="#dm">Devoirs maison</a></li><li><a href="#ds">Devoirs surveillés</a></li><li><a href="#kholles">Khôlles</a></li><li><a href="#tableau">Tableau de bord</a></li></ul></div>
-    <div><h4>Concours</h4><ul><li><a href="#concours">Préparation</a></li><li><a href="#oral">Oraux</a></li><li><a href="#commando">Commando X-ENS</a></li></ul></div>
+    <div><h4>Cours</h4><ul id="foot-subj"></ul></div>
+    <div><h4>Exercices</h4><ul><li><a href="#exercices">Exercices corrigés</a></li><li><a href="#classiques">Classiques</a></li><li><a href="#dm">Devoirs maison</a></li><li><a href="#ds">Devoirs surveillés</a></li><li><a href="#kholles">Khôlles</a></li></ul></div>
+    <div><h4>Concours</h4><ul><li><a href="#concours">Écrits</a></li><li><a href="#oral">Oraux</a></li><li><a href="#trouver">Chercher un sujet</a></li><li><a href="#tableau">Tableau de bord</a></li><li><a href="#commando">Commando X-ENS</a></li></ul></div>
   </div>
   <div class="foot-bottom"><div class="wrap"><span>© 2026 Lemme · Projet indépendant, sans lien avec les concours cités.</span><span id="credits"></span></div></div>
 </footer>

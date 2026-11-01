@@ -31,7 +31,7 @@ const PHOTOS = {
   commando: ["photo-1588450248442-1c8357368dba", "Simon Infanger"]
 };
 const src = (k, w) => `https://images.unsplash.com/${PHOTOS[k][0]}?auto=format&fit=crop&w=${w}&q=72`;
-const img = (k, sizes = "100vw", eager = false) => `<img src="${src(k, 1200)}" srcset="${src(k, 640)} 640w, ${src(k, 1200)} 1200w, ${src(k, 2000)} 2000w" sizes="${sizes}" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.style.visibility='hidden'">`;
+const img = (k, sizes = "100vw", eager = false) => `<img src="${src(k, 1200)}" srcset="${src(k, 640)} 640w, ${src(k, 1200)} 1200w, ${src(k, 2000)} 2000w" sizes="${sizes}" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" class="fi" onload="this.classList.add('ld')" onerror="this.style.visibility='hidden'">`;
 
 /* ---------- Icônes ---------- */
 const I = {
@@ -158,7 +158,7 @@ $$(".yearswitch button").forEach(b => b.addEventListener("click", () => {
 window.addEventListener("resize", paintYear);
 
 /* ---------- Menus ---------- */
-$("#dd-mat").innerHTML = VISIBLE.map(s => `<a href="#s-${s.id}"><img class="thumb" src="${src(s.id, 120)}" alt="" loading="lazy">${s.name}</a>`).join("");
+$("#dd-mat").innerHTML = VISIBLE.map(s => `<a href="#s-${s.id}"><b>${s.name}</b></a>`).join("");
 $("#foot-subj").innerHTML = VISIBLE.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join("");
 $("#credits").textContent = "Photos : Unsplash · " + [...new Set(Object.values(PHOTOS).map(p => p[1]))].join(", ");
 const ddBtns = $$(".dd > .navbtn");
@@ -200,6 +200,16 @@ function exCard(e) {
   const n = doneN(e.id), pb = e.kind === "probleme";
   const kind = e.subj === "kholles" ? "Khôlle" : e.concours ? (CC_SHORT[e.concours] || CONC[e.concours]) : e.subj === "annales" ? "Sujet de concours" : (pb ? "Problème" : "Exercice");
   return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}><span class="top"><span class="kind">${kind}</span>${lvl(e.level)}</span><b class="ttl">${ttl(e)}</b><span class="foot"><span>${e.time || ""}</span>${n ? `<span class="dn">${ICHECK}Fait${n > 1 ? " " + n + " fois" : ""}</span>` : ""}</span></a>`;
+}
+let stars = (() => { try { return new Set(JSON.parse(localStorage.getItem("lemme-stars") || "[]")); } catch (_) { return new Set(); } })();
+const byStars = list => stars.size ? list.filter(e => stars.has(e.level || 1)) : list;
+function starBar(list) {
+  const cnt = [1, 2, 3, 4, 5].map(k => list.filter(e => (e.level || 1) === k).length);
+  return `<div class="starbar" role="group" aria-label="Filtrer par difficulté"><span class="sbl">Difficulté</span><button type="button" class="sbtn" data-star="0" aria-pressed="${!stars.size}">Toutes<span class="n">${list.length}</span></button>${cnt.map((n, k) => `<button type="button" class="sbtn" data-star="${k + 1}" aria-pressed="${stars.has(k + 1)}"${n ? "" : " disabled"}><span class="st" aria-label="${k + 1} étoile${k ? "s" : ""}">${"★".repeat(k + 1)}</span><span class="n">${n}</span></button>`).join("")}</div>`;
+}
+function exList(list, emptyHtml) {
+  const f = byStars(list);
+  return starBar(list) + (f.length ? `<div class="exgrid stagger">${f.map(exCard).join("")}</div>` : empty("Aucun exercice à ce niveau", " Choisis une autre difficulté."));
 }
 function tabsHtml(list, cur) { if (!list.length) return ""; return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}</div>`; }
@@ -254,7 +264,7 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<div class="tiles chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="tile chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">Chapitre ${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tdesc">${esc(c.n || "")}</span><span class="tfoot">${r ? "<span>Résumé</span>" : ""}${n ? `<span><b>${n}</b> exo${n > 1 ? "s" : ""}</span>` : ""}${!r && !n ? "<span>En préparation</span>" : ""}</span></a>`; }).join("")}</div>`;
+    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tn">${n ? plural(n, "exercice") : ""}</span></a>`; }).join("")}</div>`;
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, meta: `<span class="tag y">${YEARS[year]}</span>`, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
@@ -282,7 +292,7 @@ function chapterPage(id, y, i) {
   if (oral) { const ce = exs.filter(e => e.concours === chapTab); body = ce.length ? `<div class="exgrid stagger">${ce.map(exCard).join("")}</div>` : empty("Exercices en préparation", ` Les exercices ${CONC[chapTab] || ""} de ce chapitre arrivent bientôt.`); }
   else if (chapTab === "cours") body = `<div data-pdf="${cs}" data-title="Cours · ${esc(c.t)}"></div>`;
   else if (chapTab === "resume") body = (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
-  else body = exs.length ? `<div class="exgrid stagger">${exs.map(exCard).join("")}</div>` : empty("Exercices en préparation", "");
+  else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
   return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">Topologie · ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : tabsHtml(tabs, chapTab) })
@@ -353,7 +363,7 @@ function exercisesPage(onlyClassics) {
   return phead({ crumb: [[title]], title, meta: `<span class="tag y">${YEARS[year]}</span>` })
   + `<div class="wrap layout full"><div>
     <div class="filters" role="group" aria-label="Filtrer par matière"><button type="button" class="chip" data-f="all" aria-pressed="${exFilter === "all"}">Toutes</button>${VISIBLE.map(s => `<button type="button" class="chip" data-f="${s.id}" aria-pressed="${exFilter === s.id}">${s.name}</button>`).join("")}</div>
-    ${list.length ? `<div class="exgrid stagger">${list.map(exCard).join("")}</div>` : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "Spé" : "Sup"}.`)}
+    ${list.length ? exList(list) : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "Spé" : "Sup"}.`)}
   </div></div>`;
 }
 
@@ -403,19 +413,20 @@ const CONC_TAIL = `<h2>L'année de Spé</h2>
   </article></div>`;
 function concoursPage(f) {
   if (f) curFil = f;
-  const fcards = `<div class="tiles vault fil stagger">${Object.keys(FIL).map(k => { const n = ANN().filter(c => fils(c).includes(FIL[k])).length; return tile(`#concours-${k}`, "Filière", FIL[k], n ? plural(n, "sujet") : "Bientôt"); }).join("")}</div>`;
-  if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
+  const nOf = k => ANN().filter(c => fils(c).includes(FIL[k])).length;
+  if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les écrits" }) + `<div class="wrap layout full">
     <article class="prose">
-    <a class="tfcta" href="#trouver"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Chercher un sujet</b> par mots-clés, filière, matière, concours, année ou difficulté</span></a>
     <h2>Choisis ta filière</h2>
-    <p>Les sujets sont rangés par filière : tu ne vois que les épreuves que tu passeras. Une épreuve commune (langues, informatique commune) apparaît dans chaque filière concernée.</p>
-    ${fcards}`
+    <p>Tu ne vois ensuite que les épreuves que tu passeras.</p>
+    <div class="filpick">${Object.keys(FIL).map(k => { const n = nOf(k); return `<a class="filcard" href="#concours-${k}"><b>${FIL[k]}</b><span>${n ? plural(n, "sujet corrigé").replace("sujet corrigés", "sujets corrigés") : "Bientôt"}</span></a>`; }).join("")}</div>
+    <a class="tfcta" href="#trouver"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Chercher un sujet</b> par mots-clés, banque, année ou difficulté</span></a>`
     + CONC_TAIL;
-  return phead({ crumb: [["Concours", "#concours"], [FIL[f]]], title: `Concours · filière ${FIL[f]}`, photo: "hero" }) + `<div class="wrap layout full">
+  const seg = `<div class="filseg" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a href="#concours-${k}"${k === f ? ' aria-current="page"' : ""}>${FIL[k]}</a>`).join("")}</div>`;
+  return phead({ crumb: [["Concours", "#concours"], [FIL[f]]], title: `Écrits · ${FIL[f]}` }) + `<div class="wrap layout full">
     <article class="prose">
-    ${fcards}
+    ${seg}
     <h2>Les banques</h2>
-    <div class="cards banks">${BANKS.map(b => { const n = sujetsOf(b.name, f).length; const inner = `${BANK_PHOTO[b.name] ? `<span class="bph">${wimg(BANK_PHOTO[b.name]).replace("sizes=\"100vw\"", 'sizes="(max-width:700px) 100vw, 40vw"')}${bankMark(b.name)}</span>` : bankMark(b.name)}<h3>${b.name}</h3><p>${b.desc}</p>`; return n ? `<a class="card card-link" href="#banque-${bslug(b.name)}-${f}">${inner}<span class="card-go">${plural(n, "sujet")} corrigé${n > 1 ? "s" : ""} ${I.arrow}</span></a>` : `<div class="card">${inner}</div>`; }).join("")}</div>
+    <div class="banklist">${BANKS.map(b => { const n = sujetsOf(b.name, f).length; const inner = `<span class="bkn">${b.name}</span><span class="bkd">${b.desc}</span><span class="bkc">${n ? plural(n, "sujet") : "Bientôt"}</span>`; return n ? `<a class="bkrow" href="#banque-${bslug(b.name)}-${f}">${inner}${I.arrow}</a>` : `<div class="bkrow off">${inner}<span></span></div>`; }).join("")}</div>
     ` + CONC_TAIL;
 }
 
@@ -450,7 +461,7 @@ function banquePage(slug, f, mi, year) {
   const m = mi == null ? null : ALLM[mi];
   const base = `#bq/${slug}/${fk}`;
   const crumb = [["Concours", "#concours"]].concat(f ? [[FIL[f], "#concours-" + f]] : []).concat([[b.name, m ? base : null]]).concat(m ? [[m, year ? `${base}/${mi}` : null]] : []).concat(year ? [[String(year)]] : []).map(x => x[1] ? x : [x[0]]);
-  const ph = phead({ crumb, title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${f ? `<span class="tag">Filière ${FIL[f]}</span>` : ""}${m ? `<span class="tag">${m}</span>` : ""}${year ? `<span class="tag">${year}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" });
+  const ph = phead({ crumb, title: esc(b.name), meta: `<span class="tag y">Écrits</span>${f ? `<span class="tag">Filière ${FIL[f]}</span>` : ""}${m ? `<span class="tag">${m}</span>` : ""}${year ? `<span class="tag">${year}</span>` : ""}` });
   let body;
   if (!list.length) body = empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "");
   else if (!m) {
@@ -1467,23 +1478,6 @@ function ring(score, size = 132) {
 const badge = score => { const [k, lab, d] = status(score); return `<span class="rbadge ${k}"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>${lab}</span>`; };
 const meter = (lab, v, hint) => `<div class="dmeter"${tipAttr(hint)}><span class="dml">${lab}</span><span class="dmbar"><span style="width:${Math.round(v * 100)}%"></span></span><span class="dmv">${Math.round(v * 100)} %</span></div>`;
 
-/* Calendrier d'activité (16 semaines) */
-function heatmap(M) {
-  const W = 26, cell = 14, gap = 3, today = new Date(); today.setHours(0, 0, 0, 0);
-  const start = new Date(today.getTime() - ((today.getDay() + 6) % 7) * DAY - (W - 1) * 7 * DAY);
-  let s = "", months = "";
-  for (let w = 0; w < W; w++) for (let d = 0; d < 7; d++) {
-    const t = start.getTime() + (w * 7 + d) * DAY; if (t > today.getTime()) continue;
-    const k = dayKey(t), ex = Math.max(0, M.perDay[k] || 0), mn = Math.round((M.days[k] || 0) / 60);
-    const lvl = ex + mn / 30 <= 0 ? 0 : ex + mn / 30 < 2 ? 1 : ex + mn / 30 < 4 ? 2 : ex + mn / 30 < 7 ? 3 : 4;
-    s += `<rect class="hm l${lvl}" x="${32 + w * (cell + gap)}" y="${18 + d * (cell + gap)}" width="${cell}" height="${cell}" rx="3"${tipAttr(`${new Date(t).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })} : ${ex} exercice${ex > 1 ? "s" : ""}, ${mn} min`)}/>`;
-    if (d === 0 && new Date(t).getDate() <= 7) months += `<text class="hmt" x="${32 + w * (cell + gap)}" y="11">${new Date(t).toLocaleDateString("fr-FR", { month: "short" })}</text>`;
-  }
-  const dl = ["lun", "", "mer", "", "ven", "", "dim"].map((x, d) => x ? `<text class="hmt" x="0" y="${29 + d * (cell + gap)}">${x}</text>` : "").join("");
-  const w = 32 + W * (cell + gap), leg = [0, 1, 2, 3, 4].map(l => `<rect class="hm l${l}" x="${w - 118 + l * 18}" y="${18 + 7 * (cell + gap) + 8}" width="${cell}" height="${cell}" rx="3"/>`).join("");
-  return `<svg class="heat" viewBox="0 0 ${w} ${18 + 7 * (cell + gap) + 30}" role="img" aria-label="Calendrier d'activité des 26 dernières semaines">${months}${dl}${s}<text class="hmt" x="${w - 160}" y="${18 + 7 * (cell + gap) + 19}">moins</text>${leg}<text class="hmt" x="${w - 26}" y="${18 + 7 * (cell + gap) + 19}">plus</text></svg>`;
-}
-
 /* Exercices faits par semaine (8 semaines) avec la ligne d'objectif */
 function weekBars(M) {
   const now = new Date(); now.setHours(0, 0, 0, 0);
@@ -1541,97 +1535,88 @@ function dashPage() {
   ttFlush();
   const M = model(), P = M.pref;
   const R = M.ready.find(r => r.b.name === P.bank) || M.ready[0];
-  const others = M.ready.filter(r => r !== R).sort((a, b) => b.score - a.score);
   const proj = projection(M, R), rev = toReview(M), nxt = nextSteps(M, R);
-  const week = M.log.filter(([t]) => t > Date.now() - 7 * DAY).reduce((s, [, , d]) => s + d, 0);
+  const week = Math.max(0, M.log.filter(([t]) => t > Date.now() - 7 * DAY).reduce((s, [, , d]) => s + d, 0));
   const week7 = Object.entries(M.days).filter(([k]) => k >= dayKey(Date.now() - 6 * DAY)).reduce((s, [, v]) => s + v, 0);
-  let streak = 0; for (let i = 0; ; i++) { const k = dayKey(Date.now() - i * DAY); if ((M.perDay[k] || 0) > 0 || (M.days[k] || 0) >= 300) streak++; else if (i > 0) break; if (i > 400) break; }
-  const annDone = M.annF.filter(e => doneN(e.id)).length;
-  const totalTime = Object.values(M.days).reduce((a, b) => a + b, 0);
-  const rated = M.done.filter(e => M.conf[e.id]), confCount = [1, 2, 3].map(v => rated.filter(e => M.conf[e.id] === v).length);
-  const empty = !M.done.length && !totalTime;
-
-  const kpi = (lab, val, sub, tip) => `<div class="kpi"${tipAttr(tip)}><span class="kl">${lab}</span><span class="kv">${val}</span><span class="ks">${sub}</span></div>`;
+  let streak = 0; for (let i = 0; i < 400; i++) { const k = dayKey(Date.now() - i * DAY); if ((M.perDay[k] || 0) > 0 || (M.days[k] || 0) >= 300) streak++; else if (i > 0) break; }
+  const [sk, slab] = status(R.score);
+  /* 8 semaines */
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const mon = now.getTime() - ((now.getDay() + 6) % 7) * DAY;
+  const weeks = [...Array(8)].map((_, i) => { const a = mon - (7 - i) * 7 * DAY, b = a + 7 * DAY; return { a, n: Math.max(0, M.log.filter(([t]) => t >= a && t < b).reduce((s, [, , d]) => s + d, 0)) }; });
+  const wmax = Math.max(P.goal, ...weeks.map(w => w.n), 1);
+  /* à faire : d'abord ce qui est à revoir, puis les suggestions */
+  const todo = [...rev.slice(0, 3).map(x => ({ e: x.e, why: x.c === 3 ? "À revoir · jugé difficile" : `À revoir · fait il y a ${Math.round(x.age)} jours` })), ...nxt.map(x => ({ e: x.e, why: x.why }))].filter((x, i, a) => a.findIndex(y => y.e === x.e) === i).slice(0, 5);
   const bankOpts = BANKS.map(b => `<option${b.name === P.bank ? " selected" : ""}>${esc(b.name)}</option>`).join("");
+  const stat = (v, l) => `<div class="dbs-i"><b>${v}</b><span>${l}</span></div>`;
 
-  return phead({ crumb: [["Tableau de bord"]], title: "Ton tableau de bord", meta: `<span class="tag y">Filière ${M.F}</span><span class="tag">Objectif : ${esc(R.b.name)}</span><span class="tag">J − ${Math.max(0, proj.daysLeft)} avant les écrits</span>` }) + `<div class="wrap dash">
-  <div class="dctl" role="group" aria-label="Réglages">
-    <div class="dfield"><span class="dlab" id="dl-fil">Filière</span><div class="filters" role="group" aria-labelledby="dl-fil">${Object.keys(FIL).map(k => `<button type="button" class="chip" data-dfil="${k}" aria-pressed="${k === P.fil}">${FIL[k]}</button>`).join("")}</div></div>
-    <label class="dfield"><span class="dlab">Concours visé</span><select data-dpref="bank">${bankOpts}</select></label>
-    <label class="dfield"><span class="dlab">Date des écrits</span><input type="date" data-dpref="exam" value="${P.exam}"></label>
-    <label class="dfield"><span class="dlab">Objectif par semaine</span><input type="number" min="1" max="99" data-dpref="goal" value="${P.goal}"></label>
-  </div>
-  ${empty ? `<div class="dempty"><h2>Ton tableau de bord se remplit en travaillant</h2><p>À la fin de chaque exercice, clique sur « Marquer comme fait » puis indique ton ressenti (facile, moyen, difficile). Le temps passé sur les corrigés est compté automatiquement. Tout reste sur ton appareil.</p><a class="btn btn-yellow" href="#exercices">Choisir un premier exercice ${I.arrow}</a></div>` : ""}
+  return phead({ crumb: [["Tableau de bord"]], title: "Tableau de bord" }) + `<div class="wrap db">
+  <section class="db-sum">
+    <div class="db-main">
+      <label class="db-target">Préparation pour <select data-dpref="bank" aria-label="Concours visé">${bankOpts}</select> <span>en ${M.F}</span></label>
+      <div class="db-score"><b data-count="${R.score}">${R.score}</b><span>%</span><em class="db-st ${sk}">${slab}</em></div>
+      <div class="db-bar" role="img" aria-label="Score ${R.score} sur 100, seuil prêt à 75"><span class="db-fill" style="--w:${R.score}%"></span><i style="left:75%"></i></div>
+      <p class="db-proj">${proj.txt}</p>
+    </div>
+    <div class="db-stats">
+      ${stat(M.done.length, `exercices faits${week ? `, dont ${week} cette semaine` : ""}`)}
+      ${stat(fmtH(week7), "de travail sur 7 jours")}
+      ${stat(`${streak} j`, streak > 1 ? "d'affilée" : "de série")}
+      ${stat(Math.max(0, proj.daysLeft), "jours avant les écrits")}
+    </div>
+  </section>
 
-  <section class="dhero">
-    <div class="dready">
-      <div class="dring">${ring(R.score, 168)}<div class="dringv"><b>${R.score}</b><span>%</span></div></div>
-      <div class="drtxt">
-        <span class="dkick">Préparation · ${esc(R.b.name)} · ${M.F}</span>
-        ${badge(R.score)}
-        <p>${proj.txt}</p>
-        ${meter("Programme", R.P, "Part des exercices travaillés dans les matières de ce concours (objectif : la moitié de chaque matière).")}
-        ${meter("Annales", R.A, R.own ? `Parties de sujets ${R.b.name} faites en ${M.F}.` : `Pas encore de sujet ${R.b.name} en ${M.F} : on compte les annales de toutes les banques.`)}
-        ${meter("Maîtrise", R.M, "Moyenne de ton ressenti sur les exercices faits (facile 100 %, moyen 60 %, difficile 25 %).")}
+  <div class="db-grid">
+    <section class="db-card">
+      <h2>Exercices par semaine</h2>
+      <div class="db-weeks" role="img" aria-label="Exercices faits par semaine sur les huit dernières semaines">
+        <span class="db-goal" style="--g:${(P.goal / wmax).toFixed(3)}"><em>objectif ${P.goal}</em></span>
+        ${weeks.map((w, i) => `<div class="db-w${i === 7 ? " cur" : ""}"${tipAttr(`Semaine du ${fmtDate(w.a)} : ${w.n} exercice${w.n > 1 ? "s" : ""}`)}><span class="db-wb" style="--h:${(100 * w.n / wmax).toFixed(1)}%;--d:${i * 40}ms">${w.n ? `<b>${w.n}</b>` : ""}</span><span class="db-wl">${i === 7 ? "cette sem." : fmtDate(w.a)}</span></div>`).join("")}
       </div>
-    </div>
-    <div class="kpis">
-      ${kpi("Exercices faits", M.done.length, `dont ${week} cette semaine`, "Exercices marqués comme faits, toutes matières.")}
-      ${kpi("Sujets de concours", `${annDone}<small>/${M.annF.length}</small>`, `parties faites en ${M.F}`, "Parties d'annales de ta filière marquées comme faites.")}
-      ${kpi("Temps de travail", fmtH(week7), `7 derniers jours · ${fmtH(totalTime)} en tout`, "Temps passé sur les pages d'exercice, onglet visible, 45 min maximum par visite.")}
-      ${kpi("Série", `${streak} j`, streak ? "jours d'affilée" : "travaille aujourd'hui pour la lancer", "Jours consécutifs avec au moins un exercice fait ou 5 minutes de travail.")}
-    </div>
+    </section>
+    <section class="db-card">
+      <h2>Par matière</h2>
+      <div class="db-mats">${M.cover.filter(c => c.total).map((c, i) => `<a class="db-m" href="${c.href}"><span class="db-ml">${c.m}</span><span class="db-mb"><span style="--w:${Math.round(c.p * 100)}%;--d:${i * 50}ms"></span></span><span class="db-mv">${c.n}<small> / ${c.total}</small></span></a>`).join("")}</div>
+    </section>
+  </div>
+
+  <section class="db-card">
+    <h2>À faire ensuite</h2>
+    ${todo.length ? `<ol class="db-todo">${todo.map(x => `<li><a href="#e-${x.e.id}"><span class="db-tt">${esc(x.e.title)}</span><span class="db-tw">${esc(x.why)}</span>${I.arrow}</a></li>`).join("")}</ol>` : `<p class="db-note">Tout est fait. Impressionnant.</p>`}
+    ${!M.done.length ? `<p class="db-note">À la fin d'un exercice, clique sur « Marquer comme fait » : ce tableau se met à jour tout seul. Tout reste sur ton appareil.</p>` : ""}
   </section>
 
-  <section class="dcard dwide"><div class="dhd"><h2>Ton activité</h2><span class="dsub">6 derniers mois · exercices faits et temps de travail</span></div>${heatmap(M)}</section>
-
-  <div class="dgrid">
-    <section class="dcard"><div class="dhd"><h2>Exercices par semaine</h2><span class="dsub">la ligne pointillée est ton objectif</span></div>${weekBars(M)}</section>
-    <section class="dcard"><div class="dhd"><h2>Couverture par matière</h2><span class="dsub">exercices faits sur exercices disponibles</span></div>
-      <div class="cov">${M.cover.filter(c => c.total).map(c => `<a class="covrow" href="${c.href}"${tipAttr(`${c.m} : ${c.n} faits sur ${c.total}. Objectif « programme » : ${c.need}.`)}><span class="covl">${c.m}</span><span class="covbar"><span style="width:${Math.max(c.n ? 2 : 0, Math.round(c.p * 100))}%"></span><i style="left:calc(${Math.round(c.need / c.total * 100)}% - 1px)"></i></span><span class="covv">${c.n}<small>/${c.total}</small></span></a>`).join("")}</div>
-      <p class="dnote">Le trait vertical marque la moitié des exercices : l'objectif retenu pour le score « Programme ».</p>
-    </section>
-  </div>
-
-  <section class="dcard dwide"><div class="dhd"><h2>Tous les concours en ${M.F}</h2><span class="dsub">même travail, niveaux attendus différents</span></div>
-    <div class="dbanks">${[R, ...others].map(r => `<button type="button" class="dbank${r === R ? " on" : ""}" data-dbank="${esc(r.b.name)}" aria-pressed="${r === R}"><span class="dbr">${ring(r.score, 64)}<b>${r.score}</b></span><span class="dbn">${esc(r.b.name)}</span>${badge(r.score)}<span class="dbs">${r.own ? plural(r.nParts, "partie") + " de sujets" : "pas encore de sujet"}</span></button>`).join("")}</div>
-  </section>
-
-  <div class="dgrid">
-    <section class="dcard"><div class="dhd"><h2>À revoir</h2><span class="dsub">ressenti difficile ou exercice ancien</span></div>
-      ${rev.length ? `<ul class="dlist">${rev.map(x => `<li><a href="#e-${x.e.id}"><span class="dlt">${esc(x.e.title)}</span><span class="dlm">${["", "facile", "moyen", "difficile"][x.c] || "sans ressenti"} · fait il y a ${Math.round(x.age)} j</span></a></li>`).join("")}</ul>` : `<p class="dnote">Rien à revoir pour l'instant. Les exercices notés « difficile » apparaîtront ici, puis ceux qui datent de plus de deux semaines.</p>`}
-    </section>
-    <section class="dcard"><div class="dhd"><h2>Prochaines étapes</h2><span class="dsub">choisies pour toi</span></div>
-      ${nxt.length ? `<ul class="dlist">${nxt.map(x => `<li><a href="#e-${x.e.id}"><span class="dlm">${esc(x.why)}</span><span class="dlt">${esc(x.e.title)}</span></a></li>`).join("")}</ul>` : `<p class="dnote">Tout est fait. Impressionnant.</p>`}
-    </section>
-  </div>
-
-  <div class="dgrid">
-    <section class="dcard"><div class="dhd"><h2>Ton ressenti</h2><span class="dsub">${rated.length} exercice${rated.length > 1 ? "s" : ""} évalué${rated.length > 1 ? "s" : ""}</span></div>
-      ${rated.length ? `<div class="feel">${[["Facile", 0, "f1"], ["Moyen", 1, "f2"], ["Difficile", 2, "f3"]].map(([l, i, c]) => `<div class="feelrow"${tipAttr(`${l} : ${confCount[i]} exercice${confCount[i] > 1 ? "s" : ""}`)}><span class="covl">${l}</span><span class="covbar ${c}"><span style="width:${Math.round(100 * confCount[i] / rated.length)}%"></span></span><span class="covv">${confCount[i]}</span></div>`).join("")}</div><p class="dnote">${confCount[2] > confCount[0] ? "Beaucoup d'exercices difficiles : refais-les quelques jours plus tard, sans regarder le corrigé." : "Bon équilibre. Quand un exercice devient facile, passe à un sujet de concours."}</p>` : `<p class="dnote">Après « Marquer comme fait », choisis facile, moyen ou difficile : c'est ce qui alimente la maîtrise et la liste « À revoir ».</p>`}
-    </section>
-    <section class="dcard"><div class="dhd"><h2>Tes données</h2><span class="dsub">stockées sur cet appareil uniquement</span></div>
-      <p class="dnote">Pour passer de l'ordinateur au téléphone, exporte ta progression puis importe le fichier sur l'autre appareil.</p>
-      <div class="drow"><button type="button" class="btn btn-ghost btn-sm" data-dexport>Exporter ma progression</button><label class="btn btn-ghost btn-sm dimport">Importer un fichier<input type="file" accept="application/json" data-dimport hidden></label><button type="button" class="linkbtn" data-dreset>Tout effacer</button></div>
-      <p class="dmsg" role="status" aria-live="polite"></p>
-    </section>
-  </div>
-
-  <details class="dcard dwide dhow"><summary><h2>Comment le score est calculé</h2></summary>
-    <p>Le score de préparation combine trois mesures, puis le compare au niveau attendu par chaque banque :</p>
-    <ul><li><b>Programme (50 %)</b> : dans chaque matière présente aux épreuves de la banque, la part des exercices faits, l'objectif étant la moitié des exercices disponibles.</li><li><b>Annales (30 %)</b> : la part des parties de sujets de cette banque, dans ta filière, que tu as faites.</li><li><b>Maîtrise (20 %)</b> : la moyenne de ton ressenti (facile 100 %, moyen 60 %, difficile 25 %, non renseigné 60 %).</li></ul>
-    <p>Niveau attendu : X-ENS 90 %, Centrale-Supélec et Mines-Ponts 80 %, CNC 65 %, CCINP 62 %, e3a-Polytech 55 %. Au-dessus de 75 %, tu es « prêt » ; entre 45 et 75 %, « en bonne voie ». C'est un indicateur de travail, pas une prédiction de résultat.</p>
+  <details class="db-card db-more">
+    <summary>Réglages, sauvegarde et calcul du score</summary>
+    <div class="db-set">
+      <div class="db-f"><span id="dl-fil">Filière</span><div class="filters" role="group" aria-labelledby="dl-fil">${Object.keys(FIL).map(k => `<button type="button" class="sbtn" data-dfil="${k}" aria-pressed="${k === P.fil}">${FIL[k]}</button>`).join("")}</div></div>
+      <label class="db-f"><span>Date des écrits</span><input type="date" data-dpref="exam" value="${P.exam}"></label>
+      <label class="db-f"><span>Objectif par semaine</span><input type="number" min="1" max="99" data-dpref="goal" value="${P.goal}"></label>
+    </div>
+    <div class="drow"><button type="button" class="btn btn-ghost btn-sm" data-dexport>Exporter ma progression</button><label class="btn btn-ghost btn-sm dimport">Importer un fichier<input type="file" accept="application/json" data-dimport hidden></label><button type="button" class="linkbtn" data-dreset>Tout effacer</button></div>
+    <p class="dmsg" role="status" aria-live="polite"></p>
+    <p class="db-note">Le score combine le programme travaillé (50 %), les sujets de la banque faits dans ta filière (30 %) et ton ressenti sur les exercices faits (20 %), puis le compare au niveau attendu : X-ENS 90 %, Centrale et Mines-Ponts 80 %, CNC 65 %, CCINP 62 %, e3a 55 %. Au-dessus de 75 %, tu es prêt. C'est un indicateur de travail, pas une prédiction.</p>
   </details>
   <div class="dtip" role="tooltip" hidden></div>
 </div>`;
 }
 
 function wireDash() {
-  const host = $(".dash", app); if (!host) return;
-  const re = () => { const y = scrollY; route(true); scrollTo(0, y); };
+  const host = $(".db", app); if (!host) return;
+  const re = () => { const y = scrollY; route(true); scrollTo(0, y); host.classList.add("still"); };
   $$("[data-dfil]", host).forEach(b => b.addEventListener("click", () => { setPref("fil", b.dataset.dfil); re(); }));
-  $$("[data-dbank]", host).forEach(b => b.addEventListener("click", () => { setPref("bank", b.dataset.dbank); re(); }));
   $$("[data-dpref]", host).forEach(i => i.addEventListener("change", () => { let v = i.value; if (i.type === "number") v = Math.max(1, Math.min(99, +v || 10)); setPref(i.dataset.dpref, v); re(); }));
+  /* animation d'entrée : barres et compteur */
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cnt = $("[data-count]", host);
+  if (rm || dashSeen) host.classList.add("in");
+  else {
+    requestAnimationFrame(() => requestAnimationFrame(() => host.classList.add("in")));
+    const to = +cnt.dataset.count, t0 = performance.now(), D = 900;
+    const step = t => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); cnt.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(step); };
+    cnt.textContent = "0"; requestAnimationFrame(step);
+  }
+  dashSeen = true;
   const msg = $(".dmsg", host);
   const KEYS = ["lemme-done", "lemme-log", "lemme-conf", "lemme-time", "lemme-days", "lemme-dash"];
   $("[data-dexport]", host).addEventListener("click", () => {
@@ -1649,7 +1634,6 @@ function wireDash() {
     if (b.dataset.armed) { KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} }); location.reload(); return; }
     b.dataset.armed = "1"; b.textContent = "Effacer toute ma progression ? Clique encore pour confirmer"; setTimeout(() => { if (b.isConnected) { delete b.dataset.armed; b.textContent = "Tout effacer"; } }, 5000);
   });
-  /* infobulles (souris et clavier) */
   const tip = $(".dtip", host);
   const show = (el, x, y) => { tip.textContent = el.dataset.tip; tip.hidden = false; const r = tip.getBoundingClientRect(); tip.style.left = Math.min(innerWidth - r.width - 8, Math.max(8, x - r.width / 2)) + "px"; tip.style.top = Math.max(8, y - r.height - 12) + "px"; };
   $$("[data-tip]", host).forEach(el => {
@@ -1753,10 +1737,16 @@ function wireTrouver() {
 }
 
 /* ---------- Routeur ---------- */
-let lastRoute = "";
+let lastRoute = "", dashSeen = false;
+const tabMem = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-tabs") || "{}"); } catch (_) { return {}; } })();
 function route(keepScroll) {
   const h = location.hash.slice(1) || "accueil";
-  if (h !== lastRoute) { if (!/^c-/.test(h) || lastRoute.replace(/-\d+$/, "") !== h.replace(/-\d+$/, "")) chapTab = null; if (!/^s-/.test(h)) subjTab = "chapitres"; enonceMode = "interactif"; }
+  const fromEx = h !== lastRoute && /^e-/.test(lastRoute) ? lastRoute.slice(2) : null;
+  if (h !== lastRoute) {
+    if (!/^c-/.test(h) || lastRoute.replace(/-\d+$/, "") !== h.replace(/-\d+$/, "")) chapTab = /^c-/.test(h) ? (tabMem[h] || null) : null;
+    if (fromEx && /^c-/.test(h)) { const fe = EXERCISES.find(x => x.id === fromEx), mm = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/); if (fe && mm && fe.subj === mm[1] && fe.year === mm[2] && fe.chap === +mm[3]) chapTab = mm[1] === "oraux" ? (fe.concours || chapTab) : "exercices"; }
+    if (!/^s-/.test(h)) subjTab = "chapitres"; enonceMode = "interactif";
+  }
   lastRoute = h;
   if (typeof trackRoute === "function") trackRoute(h);
   player = null; closeRappel(true); closeBig(true); closeTip();
@@ -1785,6 +1775,9 @@ function route(keepScroll) {
   const zone = h === "commando" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
   if (zone) document.documentElement.dataset.zone = "commando"; else delete document.documentElement.dataset.zone;
   const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = zone ? "#05070C" : "#0F2557";
+  const sec = /^(s|c)-/.test(h) && !/^c-annales/.test(h) && !/^(s|c)-(xens|oraux|kholles)/.test(h) ? "cours" : /^(exercices|classiques|kholles|dm|ds|c-kholles)/.test(h) ? "exos" : /^(concours|oral|trouver|bq\/|banque|c-annales|commando|s-xens|c-xens|oraux|s-oraux|c-oraux)/.test(h) ? "conc" : h === "tableau" ? "tab" : "";
+  $$("[data-sec]").forEach(x => x.classList.toggle("on", x.dataset.sec === sec));
+  $$(".panel a").forEach(a => { if (a.getAttribute("href") === "#" + h) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   head.classList.remove("scrolled");
   app.classList.remove("enter"); void app.offsetWidth;
   app.innerHTML = html; app.classList.add("enter");
@@ -1794,15 +1787,27 @@ function route(keepScroll) {
   if (h === "tableau") wireDash();
   if (h === "trouver") wireTrouver();
   typeset(app);
-  if (!keepScroll) window.scrollTo(0, 0);
+  const back = fromEx && !keepScroll && app.querySelector(`.excard[href="#e-${fromEx}"]`);
+  if (back) {
+    back.classList.add("was");
+    const r = back.getBoundingClientRect();
+    window.scrollTo(0, Math.max(0, scrollY + r.top - (innerHeight - r.height) / 2));
+    setTimeout(() => back.classList.add("fade"), 2600);
+  } else if (!keepScroll) window.scrollTo(0, 0);
   head.classList.toggle("scrolled", scrollY > 8);
 }
 function wire(ex) {
   $$(".tabs [data-tab]", app).forEach(b => b.addEventListener("click", () => {
-    if (/^#s-/.test(location.hash)) subjTab = b.dataset.tab; else chapTab = b.dataset.tab;
+    if (/^#s-/.test(location.hash)) subjTab = b.dataset.tab; else chapTab = b.dataset.tab; if (/^#c-/.test(location.hash)) { tabMem[location.hash.slice(1)] = chapTab; try { sessionStorage.setItem("lemme-tabs", JSON.stringify(tabMem)); } catch (_) {} }
     route(true);
   }));
   $$(".filters [data-f]", app).forEach(b => b.addEventListener("click", () => { exFilter = b.dataset.f; route(true); }));
+  $$(".starbar [data-star]", app).forEach(b => b.addEventListener("click", () => {
+    const k = +b.dataset.star;
+    if (!k) stars.clear(); else if (stars.has(k)) stars.delete(k); else stars.add(k);
+    try { localStorage.setItem("lemme-stars", JSON.stringify([...stars])); } catch (_) {}
+    route(true);
+  }));
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
   $$("[data-pdf]:not([data-lazy])", app).forEach(mountPdf);
   if (ex) {
