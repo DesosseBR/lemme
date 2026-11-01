@@ -46,7 +46,7 @@ const I = {
 };
 const DONE = (() => { try { return JSON.parse(localStorage.getItem("lemme-done") || "{}") || {}; } catch (e) { return {}; } })();
 const doneN = id => DONE[id] || 0;
-function setDone(id, n) { if (n > 0) DONE[id] = n; else delete DONE[id]; try { localStorage.setItem("lemme-done", JSON.stringify(DONE)); } catch (e) {} }
+function setDone(id, n) { if (typeof trackDone === "function" && n !== (DONE[id] || 0)) trackDone(id, n > (DONE[id] || 0) ? 1 : -1); if (n > 0) DONE[id] = n; else delete DONE[id]; try { localStorage.setItem("lemme-done", JSON.stringify(DONE)); } catch (e) {} }
 const MT = (() => {
   const SYM = {"⊂":"\\subset ","⊃":"\\supset ","∘":"\\circ ","≤":"\\leqslant ","≥":"\\geqslant ","⩽":"\\leqslant ","⩾":"\\geqslant ","∈":"\\in ","∉":"\\notin ","ℝ":"\\mathbb R","ℕ":"\\mathbb N","ℤ":"\\mathbb Z","ℂ":"\\mathbb C","ℚ":"\\mathbb Q","𝕂":"\\mathbb K","∑":"\\sum ","∏":"\\prod ","√":"\\sqrt ","∫":"\\int ","→":"\\to ","↦":"\\mapsto ","⇒":"\\Rightarrow ","⇔":"\\iff ","≠":"\\neq ","∞":"\\infty ","Δ":"\\Delta ","𝒫":"\\mathcal P","−":"-","×":"\\times ","∩":"\\cap ","∪":"\\cup ","∖":"\\setminus ","≡":"\\equiv ","∼":"\\sim ","≈":"\\approx ","∀":"\\forall ","∃":"\\exists ","∂":"\\partial ","∇":"\\nabla ","⊥":"\\perp ","∅":"\\emptyset ","±":"\\pm ","α":"\\alpha ","β":"\\beta ","γ":"\\gamma ","δ":"\\delta ","ε":"\\varepsilon ","θ":"\\theta ","λ":"\\lambda ","μ":"\\mu ","ν":"\\nu ","π":"\\pi ","ρ":"\\rho ","σ":"\\sigma ","τ":"\\tau ","φ":"\\varphi ","χ":"\\chi ","ψ":"\\psi ","ω":"\\omega ","ξ":"\\xi ","ζ":"\\zeta ","η":"\\eta ","Γ":"\\Gamma ","Λ":"\\Lambda ","Π":"\\Pi ","Σ":"\\Sigma ","Φ":"\\Phi ","Ω":"\\Omega ","ℓ":"\\ell ","‖":"\\|","ⁿ⁻¹":"^{n-1}","ⁿ⁺¹":"^{n+1}","⁻¹":"^{-1}","ⁿ":"^n","²":"^2","³":"^3","ᵏ":"^k","ᵖ":"^p","⁰":"^0","¹":"^1","⁴":"^4","ˣ":"^x","₀":"_0","₁":"_1","₂":"_2","₃":"_3","ₙ":"_n","ₖ":"_k","ᵢ":"_i","ⱼ":"_j","ₚ":"_p","ᵣ":"_r"};
   const FN = {ker:"\\ker",Im:"\\operatorname{Im}",det:"\\det",tr:"\\operatorname{tr}",rg:"\\operatorname{rg}",sin:"\\sin",cos:"\\cos",tan:"\\tan",ln:"\\ln",exp:"\\exp",arctan:"\\arctan",sh:"\\operatorname{sh}",ch:"\\operatorname{ch}",th:"\\operatorname{th}",min:"\\min",max:"\\max",sup:"\\sup",inf:"\\inf",lim:"\\lim",dim:"\\dim",Vect:"\\operatorname{Vect}",Id:"\\mathrm{Id}",deg:"\\deg",pgcd:"\\operatorname{pgcd}"};
@@ -290,12 +290,17 @@ function chapterPage(id, y, i) {
 
 function doneHtml(e) {
   const n = doneN(e.id);
-  return n ? `<span class="donestate">${ICHECK}Fait ${n} fois</span><button type="button" class="btn btn-ghost btn-sm" data-done="1">Je l'ai refait</button><button type="button" class="linkbtn" data-done="-1">Annuler</button>`
+  const cf = typeof confOf === "function" ? confOf(e.id) : 0;
+  return n ? `<span class="donestate">${ICHECK}Fait ${n} fois</span><button type="button" class="btn btn-ghost btn-sm" data-done="1">Je l'ai refait</button><button type="button" class="linkbtn" data-done="-1">Annuler</button><span class="feelpick" role="group" aria-label="Ton ressenti"><span class="fpl">Ressenti</span>${[[1, "Facile"], [2, "Moyen"], [3, "Difficile"]].map(([v, l]) => `<button type="button" class="chip" data-conf="${v}" aria-pressed="${cf === v}">${l}</button>`).join("")}</span>`
     : `<button type="button" class="btn btn-ghost btn-sm donebtn" data-done="1">${ICHECK}Marquer comme fait</button>`;
 }
 function bindDone(e, root) {
   $$("[data-done]", root || app).forEach(b => b.addEventListener("click", () => {
     setDone(e.id, doneN(e.id) + (+b.dataset.done));
+    $$(".donebox").forEach(x => { x.innerHTML = doneHtml(e); bindDone(e, x); });
+  }));
+  $$("[data-conf]", root || app).forEach(b => b.addEventListener("click", () => {
+    setConf(e.id, confOf(e.id) === +b.dataset.conf ? 0 : +b.dataset.conf);
     $$(".donebox").forEach(x => { x.innerHTML = doneHtml(e); bindDone(e, x); });
   }));
 }
@@ -1355,12 +1360,311 @@ function mountSismo(host, spec) {
   requestAnimationFrame(loop);
 }
 
+/* Lemme · tableau de bord : suivi du travail (exercices faits, temps, ressenti) et préparation aux concours.
+   Tout est stocké dans le navigateur (localStorage). Chargé avant app.js : les fonctions n'utilisent
+   les constantes d'app.js (EXERCISES, BANKS, ...) qu'au moment où elles sont appelées. */
+
+/* ---------- Stockage ---------- */
+const DS = {
+  get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const dayKey = (t = Date.now()) => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+
+/* Journal des exercices faits : [horodatage, id, +1 ou -1] */
+function trackDone(id, delta) {
+  const log = DS.get("lemme-log", []);
+  log.push([Date.now(), id, delta]);
+  DS.set("lemme-log", log.slice(-5000));
+}
+/* Ressenti : 1 facile, 2 moyen, 3 difficile */
+const confOf = id => DS.get("lemme-conf", {})[id] || 0;
+function setConf(id, v) { const c = DS.get("lemme-conf", {}); if (v) c[id] = v; else delete c[id]; DS.set("lemme-conf", c); }
+
+/* Temps passé sur les pages d'exercice (onglet visible uniquement, 45 min max par visite) */
+const TT = { id: null, t0: 0, acc: 0 };
+function ttFlush() {
+  if (!TT.id || !TT.t0) return;
+  const s = Math.min((Date.now() - TT.t0) / 1000, 2700 - TT.acc);
+  TT.t0 = document.visibilityState === "visible" ? Date.now() : 0;
+  if (s < 5) return;
+  TT.acc += s;
+  const per = DS.get("lemme-time", {}), days = DS.get("lemme-days", {}), k = dayKey();
+  per[TT.id] = Math.round((per[TT.id] || 0) + s); days[k] = Math.round((days[k] || 0) + s);
+  DS.set("lemme-time", per); DS.set("lemme-days", days);
+}
+function trackRoute(h) {
+  ttFlush();
+  const m = /^e-([a-z0-9-]+)$/.exec(h);
+  TT.id = m ? m[1] : null; TT.t0 = m && document.visibilityState === "visible" ? Date.now() : 0; TT.acc = 0;
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") { if (TT.id) TT.t0 = Date.now(); } else ttFlush(); });
+setInterval(() => { if (document.visibilityState === "visible") ttFlush(); }, 30000);
+addEventListener("pagehide", ttFlush);
+
+/* ---------- Modèle ---------- */
+const DMATS = [
+  { m: "Mathématiques", subj: ["maths", "kholles", "xens", "oraux"], href: "#s-maths" },
+  { m: "Physique", subj: ["physique"], href: "#s-physique" },
+  { m: "Chimie", subj: ["chimie"], href: "#s-chimie" },
+  { m: "Sciences industrielles", subj: ["si"], href: "#s-si" },
+  { m: "Informatique", subj: ["info"], href: "#s-info" },
+  { m: "Langues", subj: ["anglais"], href: "#s-anglais" }
+];
+/* Niveau attendu par banque (score brut nécessaire pour être « prêt ») */
+const BAR = { "X-ENS": 0.9, "Centrale-Supélec": 0.8, "Mines-Ponts": 0.8, "CCINP": 0.62, "e3a-Polytech": 0.55, "CNC": 0.65 };
+const CONFW = { 1: 1, 2: 0.6, 3: 0.25 };
+function dashPrefs() {
+  const p = DS.get("lemme-dash", {});
+  const now = new Date(), y = now.getMonth() > 4 ? now.getFullYear() + 1 : now.getFullYear();
+  return { fil: p.fil || "mp", bank: p.bank || "Mines-Ponts", goal: p.goal || 10, exam: p.exam || `${y}-04-15` };
+}
+function setPref(k, v) { const p = DS.get("lemme-dash", {}); p[k] = v; DS.set("lemme-dash", p); }
+const matOfEx = e => e.subj === "annales" ? matOf(ANN()[e.chap] || { epreuve: "" }) : (DMATS.find(d => d.subj.includes(e.subj)) || {}).m;
+
+function model() {
+  const pref = dashPrefs(), F = FIL[pref.fil];
+  const done = EXERCISES.filter(e => doneN(e.id));
+  const conf = DS.get("lemme-conf", {}), log = DS.get("lemme-log", []), days = DS.get("lemme-days", {}), time = DS.get("lemme-time", {});
+  /* couverture par matière (hors annales) */
+  const cover = DMATS.map(d => {
+    const all = EXERCISES.filter(e => d.subj.includes(e.subj)), n = all.filter(e => doneN(e.id)).length;
+    return { ...d, total: all.length, n, p: all.length ? n / all.length : 0, need: Math.min(all.length, Math.max(4, Math.ceil(all.length * 0.5))) };
+  });
+  /* annales de la filière */
+  const annF = EXERCISES.filter(e => e.subj === "annales" && ANN()[e.chap] && fils(ANN()[e.chap]).includes(F));
+  const mastery = done.length ? done.reduce((a, e) => a + (CONFW[conf[e.id]] || 0.6), 0) / done.length : 0;
+  const ready = BANKS.map(b => {
+    const parts = annF.filter(e => ANN()[e.chap].bank === b.name);
+    const mats = [...new Set(parts.map(e => matOfEx(e)))];
+    const used = cover.filter(c => (mats.length ? mats : ["Mathématiques", "Physique"]).includes(c.m) && c.total);
+    const P = used.length ? used.reduce((a, c) => a + Math.min(1, c.n / c.need), 0) / used.length : 0;
+    const pool = parts.length ? parts : annF;
+    const A = pool.length ? pool.filter(e => doneN(e.id)).length / pool.length : 0;
+    const raw = 0.5 * P + 0.3 * A + 0.2 * mastery;
+    return { b, P, A, M: mastery, raw, score: Math.min(100, Math.round(100 * raw / (BAR[b.name] || 0.75))), nParts: parts.length, own: parts.length > 0 };
+  });
+  /* activité par jour : exercices faits (journal) et minutes de travail */
+  const perDay = {};
+  log.forEach(([t, , d]) => { const k = dayKey(t); perDay[k] = (perDay[k] || 0) + d; });
+  const firstDone = {};
+  log.forEach(([t, id, d]) => { if (d > 0 && !(id in firstDone)) firstDone[id] = t; });
+  return { pref, F, done, conf, log, days, time, cover, annF, mastery, ready, perDay, firstDone };
+}
+
+/* ---------- Petits composants ---------- */
+const DAY = 864e5;
+const fmtH = s => s >= 3600 ? `${Math.floor(s / 3600)} h ${String(Math.round(s % 3600 / 60)).padStart(2, "0")}` : `${Math.round(s / 60)} min`;
+const fmtDate = t => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+const tipAttr = s => ` data-tip="${String(s).replace(/"/g, "&quot;")}" tabindex="0"`;
+const status = s => s >= 75 ? ["ok", "Prêt", "M4 9l3 3 7-7"] : s >= 45 ? ["mid", "En bonne voie", "M4 9h10"] : ["low", "À construire", "M9 4v6M9 13v1"];
+function ring(score, size = 132) {
+  const r = size / 2 - 9, c = 2 * Math.PI * r, [k] = status(score);
+  return `<svg class="ring ${k}" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-hidden="true"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="rtrack"/>${score > 0 ? "" : "<!--"}<circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="rval" stroke-dasharray="${(c * score / 100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>${score > 0 ? "" : "-->"}</svg>`;
+}
+const badge = score => { const [k, lab, d] = status(score); return `<span class="rbadge ${k}"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>${lab}</span>`; };
+const meter = (lab, v, hint) => `<div class="dmeter"${tipAttr(hint)}><span class="dml">${lab}</span><span class="dmbar"><span style="width:${Math.round(v * 100)}%"></span></span><span class="dmv">${Math.round(v * 100)} %</span></div>`;
+
+/* Calendrier d'activité (16 semaines) */
+function heatmap(M) {
+  const W = 26, cell = 14, gap = 3, today = new Date(); today.setHours(0, 0, 0, 0);
+  const start = new Date(today.getTime() - ((today.getDay() + 6) % 7) * DAY - (W - 1) * 7 * DAY);
+  let s = "", months = "";
+  for (let w = 0; w < W; w++) for (let d = 0; d < 7; d++) {
+    const t = start.getTime() + (w * 7 + d) * DAY; if (t > today.getTime()) continue;
+    const k = dayKey(t), ex = Math.max(0, M.perDay[k] || 0), mn = Math.round((M.days[k] || 0) / 60);
+    const lvl = ex + mn / 30 <= 0 ? 0 : ex + mn / 30 < 2 ? 1 : ex + mn / 30 < 4 ? 2 : ex + mn / 30 < 7 ? 3 : 4;
+    s += `<rect class="hm l${lvl}" x="${32 + w * (cell + gap)}" y="${18 + d * (cell + gap)}" width="${cell}" height="${cell}" rx="3"${tipAttr(`${new Date(t).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })} : ${ex} exercice${ex > 1 ? "s" : ""}, ${mn} min`)}/>`;
+    if (d === 0 && new Date(t).getDate() <= 7) months += `<text class="hmt" x="${32 + w * (cell + gap)}" y="11">${new Date(t).toLocaleDateString("fr-FR", { month: "short" })}</text>`;
+  }
+  const dl = ["lun", "", "mer", "", "ven", "", "dim"].map((x, d) => x ? `<text class="hmt" x="0" y="${29 + d * (cell + gap)}">${x}</text>` : "").join("");
+  const w = 32 + W * (cell + gap), leg = [0, 1, 2, 3, 4].map(l => `<rect class="hm l${l}" x="${w - 118 + l * 18}" y="${18 + 7 * (cell + gap) + 8}" width="${cell}" height="${cell}" rx="3"/>`).join("");
+  return `<svg class="heat" viewBox="0 0 ${w} ${18 + 7 * (cell + gap) + 30}" role="img" aria-label="Calendrier d'activité des 26 dernières semaines">${months}${dl}${s}<text class="hmt" x="${w - 160}" y="${18 + 7 * (cell + gap) + 19}">moins</text>${leg}<text class="hmt" x="${w - 26}" y="${18 + 7 * (cell + gap) + 19}">plus</text></svg>`;
+}
+
+/* Exercices faits par semaine (8 semaines) avec la ligne d'objectif */
+function weekBars(M) {
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const mon = now.getTime() - ((now.getDay() + 6) % 7) * DAY, N = 8;
+  const weeks = [...Array(N)].map((_, i) => { const a = mon - (N - 1 - i) * 7 * DAY, b = a + 7 * DAY; const n = M.log.filter(([t, , d]) => t >= a && t < b).reduce((s, [, , d]) => s + d, 0); return { a, n: Math.max(0, n) }; });
+  const H = 170, X0 = 34, BW = 34, G = 22, max = Math.max(M.pref.goal, ...weeks.map(w => w.n), 4), Y = v => 26 + (H - 26) * (1 - v / max);
+  const ticks = [0, Math.round(max / 2), max];
+  let s = ticks.map(v => `<line class="grid" x1="${X0}" x2="${X0 + N * (BW + G)}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axt" x="${X0 - 8}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`).join("");
+  weeks.forEach((w, i) => {
+    const x = X0 + 10 + i * (BW + G), y = Y(w.n), hgt = H - y;
+    s += hgt > 0 ? `<path class="bar${i === N - 1 ? " cur" : ""}" d="M${x},${H} V${y + 4} q0,-4 4,-4 h${BW - 8} q4,0 4,4 V${H} Z"${tipAttr(`Semaine du ${fmtDate(w.a)} : ${w.n} exercice${w.n > 1 ? "s" : ""}`)}/>` : `<rect class="hit" x="${x}" y="${H - 6}" width="${BW}" height="6"${tipAttr(`Semaine du ${fmtDate(w.a)} : aucun exercice`)}/>`;
+    s += `<text class="axt" x="${x + BW / 2}" y="${H + 18}" text-anchor="middle">${fmtDate(w.a)}</text>`;
+  });
+  s += `<line class="goal" x1="${X0}" x2="${X0 + N * (BW + G)}" y1="${Y(M.pref.goal)}" y2="${Y(M.pref.goal)}"/><text class="goalt" x="${X0 + N * (BW + G)}" y="${Y(M.pref.goal) - 6}" text-anchor="end">objectif : ${M.pref.goal}</text>`;
+  const table = `<details class="dtable"><summary>Voir les données</summary><table class="vals"><tr><th>Semaine du</th><th>Exercices faits</th></tr>${weeks.map(w => `<tr><td>${fmtDate(w.a)}</td><td>${w.n}</td></tr>`).join("")}</table></details>`;
+  return `<svg class="wbars" viewBox="0 0 ${X0 + N * (BW + G) + 6} ${H + 28}" role="img" aria-label="Exercices faits par semaine, huit dernières semaines">${s}<line class="base" x1="${X0}" x2="${X0 + N * (BW + G)}" y1="${H}" y2="${H}"/></svg>${table}`;
+}
+
+/* Rythme et projection vers « prêt » pour le concours visé */
+function projection(M, R) {
+  const four = M.log.filter(([t, , d]) => t > Date.now() - 28 * DAY).reduce((s, [, , d]) => s + d, 0) / 4;
+  const exam = new Date(M.pref.exam + "T08:00:00"), daysLeft = Math.ceil((exam - Date.now()) / DAY);
+  if (R.score >= 75) return { four, daysLeft, txt: `Tu as atteint le niveau « prêt » pour ${R.b.name}. Garde le rythme pour consolider.` };
+  if (four < 0.5) return { four, daysLeft, txt: `Pas encore assez d'activité récente pour une projection. Marque tes exercices comme faits : la courbe apparaîtra dès la première semaine.` };
+  /* nombre d'exercices supplémentaires pour atteindre 75 %, en supposant que chaque exercice fait améliore le score comme la moyenne actuelle */
+  const perEx = M.done.length ? R.score / M.done.length : 1.2;
+  const need = Math.ceil((75 - R.score) / Math.max(0.15, perEx)), weeks = need / four, eta = Date.now() + weeks * 7 * DAY;
+  const ok = eta < exam.getTime();
+  return { four, daysLeft, ok, eta, txt: `À ton rythme actuel (${four.toFixed(1).replace(".", ",")} exercice${four >= 2 ? "s" : ""} par semaine), tu atteindrais le niveau « prêt » pour ${R.b.name} vers le <b>${new Date(eta).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</b>, ${ok ? "avant les écrits" : "<b>après</b> les écrits : il faut accélérer"}.` };
+}
+
+/* Exercices à revoir : ressenti difficile, ou fait il y a longtemps avec un ressenti moyen */
+function toReview(M) {
+  const last = {}; M.log.forEach(([t, id, d]) => { if (d > 0) last[id] = t; });
+  return M.done.map(e => {
+    const c = M.conf[e.id] || 0, age = last[e.id] ? (Date.now() - last[e.id]) / DAY : 30;
+    const pri = c === 3 ? 3 + age / 7 : c === 2 && age > 14 ? 1 + age / 30 : age > 45 ? age / 60 : 0;
+    return { e, c, age, pri };
+  }).filter(x => x.pri > 0).sort((a, b) => b.pri - a.pri).slice(0, 5);
+}
+/* Suggestions : la matière la plus faible, le concours visé, un classique */
+function nextSteps(M, R) {
+  const out = [];
+  const weak = M.cover.filter(c => c.total).sort((a, b) => a.n / a.need - b.n / b.need)[0];
+  if (weak) { const e = EXERCISES.find(x => weak.subj.includes(x.subj) && !doneN(x.id)); if (e) out.push({ why: `Ta matière la moins travaillée : ${weak.m}`, e }); }
+  const part = M.annF.find(e => ANN()[e.chap].bank === R.b.name && !doneN(e.id)) || M.annF.find(e => !doneN(e.id));
+  if (part) out.push({ why: `Un sujet de concours (${ANN()[part.chap].bank} ${ANN()[part.chap].annee})`, e: part });
+  const cl = EXERCISES.find(x => x.classique && !doneN(x.id) && !out.some(o => o.e === x));
+  if (cl) out.push({ why: "Un grand classique", e: cl });
+  return out;
+}
+
+/* ---------- Page ---------- */
+function dashPage() {
+  ttFlush();
+  const M = model(), P = M.pref;
+  const R = M.ready.find(r => r.b.name === P.bank) || M.ready[0];
+  const others = M.ready.filter(r => r !== R).sort((a, b) => b.score - a.score);
+  const proj = projection(M, R), rev = toReview(M), nxt = nextSteps(M, R);
+  const week = M.log.filter(([t]) => t > Date.now() - 7 * DAY).reduce((s, [, , d]) => s + d, 0);
+  const week7 = Object.entries(M.days).filter(([k]) => k >= dayKey(Date.now() - 6 * DAY)).reduce((s, [, v]) => s + v, 0);
+  let streak = 0; for (let i = 0; ; i++) { const k = dayKey(Date.now() - i * DAY); if ((M.perDay[k] || 0) > 0 || (M.days[k] || 0) >= 300) streak++; else if (i > 0) break; if (i > 400) break; }
+  const annDone = M.annF.filter(e => doneN(e.id)).length;
+  const totalTime = Object.values(M.days).reduce((a, b) => a + b, 0);
+  const rated = M.done.filter(e => M.conf[e.id]), confCount = [1, 2, 3].map(v => rated.filter(e => M.conf[e.id] === v).length);
+  const empty = !M.done.length && !totalTime;
+
+  const kpi = (lab, val, sub, tip) => `<div class="kpi"${tipAttr(tip)}><span class="kl">${lab}</span><span class="kv">${val}</span><span class="ks">${sub}</span></div>`;
+  const bankOpts = BANKS.map(b => `<option${b.name === P.bank ? " selected" : ""}>${esc(b.name)}</option>`).join("");
+
+  return phead({ crumb: [["Tableau de bord"]], title: "Ton tableau de bord", meta: `<span class="tag y">Filière ${M.F}</span><span class="tag">Objectif : ${esc(R.b.name)}</span><span class="tag">J − ${Math.max(0, proj.daysLeft)} avant les écrits</span>` }) + `<div class="wrap dash">
+  <div class="dctl" role="group" aria-label="Réglages">
+    <div class="dfield"><span class="dlab" id="dl-fil">Filière</span><div class="filters" role="group" aria-labelledby="dl-fil">${Object.keys(FIL).map(k => `<button type="button" class="chip" data-dfil="${k}" aria-pressed="${k === P.fil}">${FIL[k]}</button>`).join("")}</div></div>
+    <label class="dfield"><span class="dlab">Concours visé</span><select data-dpref="bank">${bankOpts}</select></label>
+    <label class="dfield"><span class="dlab">Date des écrits</span><input type="date" data-dpref="exam" value="${P.exam}"></label>
+    <label class="dfield"><span class="dlab">Objectif par semaine</span><input type="number" min="1" max="99" data-dpref="goal" value="${P.goal}"></label>
+  </div>
+  ${empty ? `<div class="dempty"><h2>Ton tableau de bord se remplit en travaillant</h2><p>À la fin de chaque exercice, clique sur « Marquer comme fait » puis indique ton ressenti (facile, moyen, difficile). Le temps passé sur les corrigés est compté automatiquement. Tout reste sur ton appareil.</p><a class="btn btn-yellow" href="#exercices">Choisir un premier exercice ${I.arrow}</a></div>` : ""}
+
+  <section class="dhero">
+    <div class="dready">
+      <div class="dring">${ring(R.score, 168)}<div class="dringv"><b>${R.score}</b><span>%</span></div></div>
+      <div class="drtxt">
+        <span class="dkick">Préparation · ${esc(R.b.name)} · ${M.F}</span>
+        ${badge(R.score)}
+        <p>${proj.txt}</p>
+        ${meter("Programme", R.P, "Part des exercices travaillés dans les matières de ce concours (objectif : la moitié de chaque matière).")}
+        ${meter("Annales", R.A, R.own ? `Parties de sujets ${R.b.name} faites en ${M.F}.` : `Pas encore de sujet ${R.b.name} en ${M.F} : on compte les annales de toutes les banques.`)}
+        ${meter("Maîtrise", R.M, "Moyenne de ton ressenti sur les exercices faits (facile 100 %, moyen 60 %, difficile 25 %).")}
+      </div>
+    </div>
+    <div class="kpis">
+      ${kpi("Exercices faits", M.done.length, `dont ${week} cette semaine`, "Exercices marqués comme faits, toutes matières.")}
+      ${kpi("Sujets de concours", `${annDone}<small>/${M.annF.length}</small>`, `parties faites en ${M.F}`, "Parties d'annales de ta filière marquées comme faites.")}
+      ${kpi("Temps de travail", fmtH(week7), `7 derniers jours · ${fmtH(totalTime)} en tout`, "Temps passé sur les pages d'exercice, onglet visible, 45 min maximum par visite.")}
+      ${kpi("Série", `${streak} j`, streak ? "jours d'affilée" : "travaille aujourd'hui pour la lancer", "Jours consécutifs avec au moins un exercice fait ou 5 minutes de travail.")}
+    </div>
+  </section>
+
+  <section class="dcard dwide"><div class="dhd"><h2>Ton activité</h2><span class="dsub">6 derniers mois · exercices faits et temps de travail</span></div>${heatmap(M)}</section>
+
+  <div class="dgrid">
+    <section class="dcard"><div class="dhd"><h2>Exercices par semaine</h2><span class="dsub">la ligne pointillée est ton objectif</span></div>${weekBars(M)}</section>
+    <section class="dcard"><div class="dhd"><h2>Couverture par matière</h2><span class="dsub">exercices faits sur exercices disponibles</span></div>
+      <div class="cov">${M.cover.filter(c => c.total).map(c => `<a class="covrow" href="${c.href}"${tipAttr(`${c.m} : ${c.n} faits sur ${c.total}. Objectif « programme » : ${c.need}.`)}><span class="covl">${c.m}</span><span class="covbar"><span style="width:${Math.max(c.n ? 2 : 0, Math.round(c.p * 100))}%"></span><i style="left:calc(${Math.round(c.need / c.total * 100)}% - 1px)"></i></span><span class="covv">${c.n}<small>/${c.total}</small></span></a>`).join("")}</div>
+      <p class="dnote">Le trait vertical marque la moitié des exercices : l'objectif retenu pour le score « Programme ».</p>
+    </section>
+  </div>
+
+  <section class="dcard dwide"><div class="dhd"><h2>Tous les concours en ${M.F}</h2><span class="dsub">même travail, niveaux attendus différents</span></div>
+    <div class="dbanks">${[R, ...others].map(r => `<button type="button" class="dbank${r === R ? " on" : ""}" data-dbank="${esc(r.b.name)}" aria-pressed="${r === R}"><span class="dbr">${ring(r.score, 64)}<b>${r.score}</b></span><span class="dbn">${esc(r.b.name)}</span>${badge(r.score)}<span class="dbs">${r.own ? plural(r.nParts, "partie") + " de sujets" : "pas encore de sujet"}</span></button>`).join("")}</div>
+  </section>
+
+  <div class="dgrid">
+    <section class="dcard"><div class="dhd"><h2>À revoir</h2><span class="dsub">ressenti difficile ou exercice ancien</span></div>
+      ${rev.length ? `<ul class="dlist">${rev.map(x => `<li><a href="#e-${x.e.id}"><span class="dlt">${esc(x.e.title)}</span><span class="dlm">${["", "facile", "moyen", "difficile"][x.c] || "sans ressenti"} · fait il y a ${Math.round(x.age)} j</span></a></li>`).join("")}</ul>` : `<p class="dnote">Rien à revoir pour l'instant. Les exercices notés « difficile » apparaîtront ici, puis ceux qui datent de plus de deux semaines.</p>`}
+    </section>
+    <section class="dcard"><div class="dhd"><h2>Prochaines étapes</h2><span class="dsub">choisies pour toi</span></div>
+      ${nxt.length ? `<ul class="dlist">${nxt.map(x => `<li><a href="#e-${x.e.id}"><span class="dlm">${esc(x.why)}</span><span class="dlt">${esc(x.e.title)}</span></a></li>`).join("")}</ul>` : `<p class="dnote">Tout est fait. Impressionnant.</p>`}
+    </section>
+  </div>
+
+  <div class="dgrid">
+    <section class="dcard"><div class="dhd"><h2>Ton ressenti</h2><span class="dsub">${rated.length} exercice${rated.length > 1 ? "s" : ""} évalué${rated.length > 1 ? "s" : ""}</span></div>
+      ${rated.length ? `<div class="feel">${[["Facile", 0, "f1"], ["Moyen", 1, "f2"], ["Difficile", 2, "f3"]].map(([l, i, c]) => `<div class="feelrow"${tipAttr(`${l} : ${confCount[i]} exercice${confCount[i] > 1 ? "s" : ""}`)}><span class="covl">${l}</span><span class="covbar ${c}"><span style="width:${Math.round(100 * confCount[i] / rated.length)}%"></span></span><span class="covv">${confCount[i]}</span></div>`).join("")}</div><p class="dnote">${confCount[2] > confCount[0] ? "Beaucoup d'exercices difficiles : refais-les quelques jours plus tard, sans regarder le corrigé." : "Bon équilibre. Quand un exercice devient facile, passe à un sujet de concours."}</p>` : `<p class="dnote">Après « Marquer comme fait », choisis facile, moyen ou difficile : c'est ce qui alimente la maîtrise et la liste « À revoir ».</p>`}
+    </section>
+    <section class="dcard"><div class="dhd"><h2>Tes données</h2><span class="dsub">stockées sur cet appareil uniquement</span></div>
+      <p class="dnote">Pour passer de l'ordinateur au téléphone, exporte ta progression puis importe le fichier sur l'autre appareil.</p>
+      <div class="drow"><button type="button" class="btn btn-ghost btn-sm" data-dexport>Exporter ma progression</button><label class="btn btn-ghost btn-sm dimport">Importer un fichier<input type="file" accept="application/json" data-dimport hidden></label><button type="button" class="linkbtn" data-dreset>Tout effacer</button></div>
+      <p class="dmsg" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <details class="dcard dwide dhow"><summary><h2>Comment le score est calculé</h2></summary>
+    <p>Le score de préparation combine trois mesures, puis le compare au niveau attendu par chaque banque :</p>
+    <ul><li><b>Programme (50 %)</b> : dans chaque matière présente aux épreuves de la banque, la part des exercices faits, l'objectif étant la moitié des exercices disponibles.</li><li><b>Annales (30 %)</b> : la part des parties de sujets de cette banque, dans ta filière, que tu as faites.</li><li><b>Maîtrise (20 %)</b> : la moyenne de ton ressenti (facile 100 %, moyen 60 %, difficile 25 %, non renseigné 60 %).</li></ul>
+    <p>Niveau attendu : X-ENS 90 %, Centrale-Supélec et Mines-Ponts 80 %, CNC 65 %, CCINP 62 %, e3a-Polytech 55 %. Au-dessus de 75 %, tu es « prêt » ; entre 45 et 75 %, « en bonne voie ». C'est un indicateur de travail, pas une prédiction de résultat.</p>
+  </details>
+  <div class="dtip" role="tooltip" hidden></div>
+</div>`;
+}
+
+function wireDash() {
+  const host = $(".dash", app); if (!host) return;
+  const re = () => { const y = scrollY; route(true); scrollTo(0, y); };
+  $$("[data-dfil]", host).forEach(b => b.addEventListener("click", () => { setPref("fil", b.dataset.dfil); re(); }));
+  $$("[data-dbank]", host).forEach(b => b.addEventListener("click", () => { setPref("bank", b.dataset.dbank); re(); }));
+  $$("[data-dpref]", host).forEach(i => i.addEventListener("change", () => { let v = i.value; if (i.type === "number") v = Math.max(1, Math.min(99, +v || 10)); setPref(i.dataset.dpref, v); re(); }));
+  const msg = $(".dmsg", host);
+  const KEYS = ["lemme-done", "lemme-log", "lemme-conf", "lemme-time", "lemme-days", "lemme-dash"];
+  $("[data-dexport]", host).addEventListener("click", () => {
+    const data = { app: "lemme", v: 1, date: new Date().toISOString() }; KEYS.forEach(k => data[k] = DS.get(k, null));
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" })); a.download = `lemme-progression-${dayKey()}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    msg.textContent = "Fichier exporté.";
+  });
+  $("[data-dimport]", host).addEventListener("change", ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    f.text().then(t => { const d = JSON.parse(t); if (d.app !== "lemme") throw 0; KEYS.forEach(k => { if (d[k] != null) DS.set(k, d[k]); }); location.reload(); })
+      .catch(() => { msg.textContent = "Ce fichier n'est pas une sauvegarde Lemme. Choisis le fichier .json exporté depuis ce tableau de bord."; });
+  });
+  $("[data-dreset]", host).addEventListener("click", ev => {
+    const b = ev.currentTarget;
+    if (b.dataset.armed) { KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} }); location.reload(); return; }
+    b.dataset.armed = "1"; b.textContent = "Effacer toute ma progression ? Clique encore pour confirmer"; setTimeout(() => { if (b.isConnected) { delete b.dataset.armed; b.textContent = "Tout effacer"; } }, 5000);
+  });
+  /* infobulles (souris et clavier) */
+  const tip = $(".dtip", host);
+  const show = (el, x, y) => { tip.textContent = el.dataset.tip; tip.hidden = false; const r = tip.getBoundingClientRect(); tip.style.left = Math.min(innerWidth - r.width - 8, Math.max(8, x - r.width / 2)) + "px"; tip.style.top = Math.max(8, y - r.height - 12) + "px"; };
+  $$("[data-tip]", host).forEach(el => {
+    el.addEventListener("pointermove", e => show(el, e.clientX, e.clientY));
+    el.addEventListener("pointerleave", () => tip.hidden = true);
+    el.addEventListener("focus", () => { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.top); });
+    el.addEventListener("blur", () => tip.hidden = true);
+  });
+}
+
 /* ---------- Routeur ---------- */
 let lastRoute = "";
 function route(keepScroll) {
   const h = location.hash.slice(1) || "accueil";
   if (h !== lastRoute) { if (!/^c-/.test(h) || lastRoute.replace(/-\d+$/, "") !== h.replace(/-\d+$/, "")) chapTab = null; if (!/^s-/.test(h)) subjTab = "chapitres"; enonceMode = "interactif"; }
   lastRoute = h;
+  if (typeof trackRoute === "function") trackRoute(h);
   player = null; closeRappel(true); closeBig(true); closeTip();
   let html, m, ex = null;
   if (h === "accueil") html = home();
@@ -1381,6 +1685,7 @@ function route(keepScroll) {
   else if (h === "kholles") html = khollesPage();
   else if (h === "concours") html = concoursPage();
   else if (h === "oral") html = oralPage();
+  else if (h === "tableau") html = dashPage();
   else html = notFound();
   const zone = h === "commando" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
   if (zone) document.documentElement.dataset.zone = "commando"; else delete document.documentElement.dataset.zone;
@@ -1391,6 +1696,7 @@ function route(keepScroll) {
   closeMenus(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
   document.title = h === "accueil" ? "Lemme · Prépa scientifique" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
   wire(ex);
+  if (h === "tableau") wireDash();
   typeset(app);
   if (!keepScroll) window.scrollTo(0, 0);
   head.classList.toggle("scrolled", scrollY > 8);
