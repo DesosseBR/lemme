@@ -75,7 +75,7 @@
 
 <script>
 window.MathJax = {
-  tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]], processEscapes: true },
+  tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]], processEscapes: true, macros: { chg: ["\\textcolor[RGB]{194,65,12}{#1}", 1], op: ["\\underset{\\substack{#1}}{=}", 1] } },
   svg: { fontCache: "global" },
   options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code", "input", "canvas"] },
   startup: { typeset: false, ready: () => { MathJax.startup.defaultReady(); MathJax.startup.promise.then(() => window.__lemmeTypeset && window.__lemmeTypeset()); } }
