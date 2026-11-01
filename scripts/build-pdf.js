@@ -9,7 +9,7 @@ const { execFile, execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "lemme-ryq6.vercel.app";
-const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp", "kholles-mpsi-2", "annales", "logique", "recurrence", "ensembles", "applications", "images", "relations", "annales-e3a25", "annales-cnc25-1", "annales-cnc25-2", "annales-ccinp25-1", "annales-ccinp25-2", "annales-mines23-1", "annales-mines22-p2", "annales-mines24-si", "annales-mines18-ch"];
+const ORDER = ["core", "notions", "maths", "physique", "chimie", "si", "info", "anglais", "commando", "oraux", "oraux-analyse", "oraux-algebre-proba", "kholles-mpsi", "kholles-mp", "kholles-mpsi-2", "annales", "logique", "recurrence", "ensembles", "applications", "images", "relations", "annales-e3a25", "annales-cnc25-1", "annales-cnc25-2", "annales-ccinp25-1", "annales-ccinp25-2", "annales-mines23-1", "annales-mines22-p2", "annales-mines24-si", "annales-mines18-ch", "annales-mines24-ic", "annales-mines24-infomp", "annales-mines24-mpi1", "annales-mines24-mpi2", "annales-mines24-anglais"];
 const args = process.argv.slice(2);
 const FORCE = args.includes("--force");
 const ONLY = args.find(a => !a.startsWith("--"));
@@ -19,7 +19,7 @@ const sandbox = { window: {} };
 vm.createContext(sandbox);
 for (const f of ORDER) vm.runInContext(fs.readFileSync(path.join(ROOT, "content", f + ".js"), "utf8"), sandbox, { filename: f + ".js" });
 const L = sandbox.window.LEMME;
-const YEARS = { mpsi: "MPSI", mp: "MP" };
+const YEARS = { mpsi: "Sup", mp: "Spé" };
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- HTML + LaTeX vers LaTeX ---------- */
@@ -59,6 +59,7 @@ function toTex(html) {
     return keep(`\n\\begin{center}\\begin{tabular}{${"|c".repeat(n)}|}\\hline\n${rows.map(r => r.join(" & ") + " \\\\ \\hline").join("\n")}\n\\end{tabular}\\end{center}\n`);
   });
   s = s.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/g, (_, c) => keep("\n\\begin{lstlisting}\n" + decode(c) + "\n\\end{lstlisting}\n"));
+  s = s.replace(/\\\$/g, () => keep("\\$"));
   s = s.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => keep("\n\\[" + decode(m) + "\\]\n"));
   s = s.replace(/\$([^$]+?)\$/g, (_, m) => keep("$" + decode(m) + "$"));
   s = s.replace(/<code>([\s\S]*?)<\/code>/g, (_, c) => keep("\\texttt{" + escText(c) + "}"));
