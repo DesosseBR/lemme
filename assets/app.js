@@ -412,6 +412,16 @@ const fils = c => String(c.filiere || "").split(/\s*,\s*/);
 const filOf = c => fils(c).includes(FIL[curFil]) ? curFil : (Object.keys(FIL).find(k => fils(c).includes(FIL[k])) || "mp");
 const sujetsOf = (bank, f) => ANN().map((c, i) => ({ c, i })).filter(x => x.c.bank === bank && (!f || fils(x.c).includes(FIL[f])));
 const qrange = e => { const q = e.steps.map(st => st.q).filter(Boolean); return q.length ? `Q${Math.min(...q)} à Q${Math.max(...q)}` : ""; };
+const MATS = ["Mathématiques", "Physique", "Chimie", "Sciences industrielles", "Informatique", "Langues"];
+const matOf = c => MATS.find(m => norm(c.epreuve).startsWith(norm(m).slice(0, 6))) || "Autres";
+function byYearMat(list) {
+  const years = [...new Set(list.map(x => x.c.annee))].sort((a, b) => b - a);
+  return years.map(y => {
+    const ly = list.filter(x => x.c.annee === y);
+    const mats = [...MATS, "Autres"].filter(m => ly.some(x => matOf(x.c) === m));
+    return `<section class="yblock"><h2 class="ytitle">${y}</h2>${mats.map(m => `<div class="mblock"><h3 class="mtitle">${m}</h3><div class="tiles ann vault stagger">${ly.filter(x => matOf(x.c) === m).map(({ c, i }) => tile(`#c-annales-mp-${i}`, esc(c.epreuve), esc(c.titre), esc(c.filiere))).join("")}</div></div>`).join("")}</section>`;
+  }).join("");
+}
 function banquePage(slug, f) {
   const b = BANKS.find(x => bslug(x.name) === slug); if (!b) return notFound();
   if (f) curFil = f;
@@ -419,7 +429,7 @@ function banquePage(slug, f) {
   return phead({ crumb: f ? [["Concours", "#concours"], [FIL[f], "#concours-" + f], [b.name]] : [["Concours", "#concours"], [b.name]], title: `<span class="ttl-mark">${bankMark(b.name, true)}${esc(b.name)}</span>`, meta: `<span class="tag y">Écrits</span>${BANK_PHOTO_CAP[b.name] ? `<span class="tag">${esc(BANK_PHOTO_CAP[b.name])}</span>` : ""}`, wiki: BANK_PHOTO[b.name], photo: BANK_PHOTO[b.name] ? null : "hero" }) + `<div class="wrap layout full"><div>
     <p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>
     ${f ? "" : `<div class="filters" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a class="chip" href="#banque-${slug}-${k}">${FIL[k]}</a>`).join("")}</div>`}
-    ${list.length ? `<div class="tiles ann vault stagger">${list.map(({ c, i }) => tile(`#c-annales-mp-${i}`, `${c.annee} · ${esc(c.epreuve)}`, esc(c.titre), esc(c.filiere))).join("")}</div>` : empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "")}
+    ${list.length ? byYearMat(list) : empty("Bientôt", f ? ` Pas encore de sujet ${b.name} corrigé en ${FIL[f]}.` : "")}
   </div></div>`;
 }
 function sujetPage(i) {

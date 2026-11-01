@@ -886,3 +886,8 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .tiles.vault .tile.off{opacity:.45;pointer-events:none}
 .tiles.vault .tile.is-done{border-color:#2F6B4F;background:#0F1F1B}
 .excard mjx-container,.tile mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
+
+.yblock{margin:0 0 34px;padding:22px 22px 6px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.ytitle{font-family:var(--f-display);font-size:26px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.mblock{margin:0 0 20px}
+.mtitle{font-family:var(--f-display);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 10px}
