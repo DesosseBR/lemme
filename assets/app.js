@@ -405,6 +405,7 @@ function concoursPage(f) {
   const fcards = `<div class="tiles vault fil stagger">${Object.keys(FIL).map(k => { const n = ANN().filter(c => fils(c).includes(FIL[k])).length; return tile(`#concours-${k}`, "Filière", FIL[k], n ? plural(n, "sujet") : "Bientôt"); }).join("")}</div>`;
   if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les concours", photo: "hero" }) + `<div class="wrap layout full">
     <article class="prose">
+    <a class="tfcta" href="#trouver"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Chercher un sujet</b> par mots-clés, filière, matière, concours, année ou difficulté</span></a>
     <h2>Choisis ta filière</h2>
     <p>Les sujets sont rangés par filière : tu ne vois que les épreuves que tu passeras. Une épreuve commune (langues, informatique commune) apparaît dans chaque filière concernée.</p>
     ${fcards}`
@@ -1658,6 +1659,98 @@ function wireDash() {
   });
 }
 
+/* ---------- Trouver un sujet ou un exercice (recherche + filtres) ---------- */
+const TF = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-trouver")) || {}; } catch (e) { return {}; } })();
+const tfSave = () => { try { sessionStorage.setItem("lemme-trouver", JSON.stringify(TF)); } catch (e) {} };
+const TFD = { mode: "sujets", q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null, sort: "recent" };
+for (const k in TFD) if (!(k in TF)) TF[k] = Array.isArray(TFD[k]) ? [] : TFD[k];
+const strip = s => String(s || "").replace(/<[^>]+>/g, " ").replace(/\$[^$]*\$/g, " ");
+let SUJ = null, EXS = null;
+function tfIndex() {
+  if (SUJ) return;
+  SUJ = ANN().map((c, i) => {
+    const parts = EXERCISES.filter(e => e.subj === "annales" && e.chap === i);
+    const lv = parts.length ? Math.round(parts.reduce((a, e) => a + (e.level || 3), 0) / parts.length) : 3;
+    return { c, i, parts, lv, mat: matOf(c), fils: fils(c), txt: norm([c.t, c.n, c.titre, c.intro, c.epreuve, c.bank, c.annee, ...parts.map(e => e.title + " " + strip(e.enonce).slice(0, 400))].join(" ")) };
+  });
+  EXS = EXERCISES.filter(e => e.subj !== "annales").map(e => ({ e, mat: matOfEx(e) || "Mathématiques", txt: norm(e.title + " " + strip(e.enonce).slice(0, 600) + " " + ((sid(e.subj) || {}).name || "")) }));
+}
+const tog = (arr, v) => { const k = arr.indexOf(v); if (k < 0) arr.push(v); else arr.splice(k, 1); };
+const qmatch = (txt, q) => norm(q).split(/\s+/).filter(Boolean).every(w => txt.includes(w));
+
+function trouverPage() {
+  return phead({ crumb: [["Trouver"]], title: "Trouver un sujet ou un exercice", photo: "hero" }) + `<div class="wrap tf">
+  <div class="tfbar">
+    <div class="tfmode" role="tablist" aria-label="Que cherches-tu ?">
+      <button type="button" role="tab" data-tmode="sujets" aria-selected="${TF.mode === "sujets"}">Sujets de concours</button>
+      <button type="button" role="tab" data-tmode="exos" aria-selected="${TF.mode === "exos"}">Exercices par chapitre</button>
+    </div>
+    <label class="tfsearch"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="sr">Mots-clés</span><input type="search" data-tq value="${esc(TF.q)}" placeholder="Mots-clés : Tchebychev, Viterbi, diagonalisation, pendule…" autocomplete="off"></label>
+  </div>
+  <div class="tfbody">
+    <aside class="tfside" aria-label="Filtres"></aside>
+    <section class="tfres" aria-live="polite"></section>
+  </div>
+</div>`;
+}
+
+function tfFilters() {
+  const grp = (title, key, opts, extra = "") => `<div class="tfg"><div class="tfgh"><span>${title}</span>${TF[key].length ? `<button type="button" class="linkbtn" data-tclear="${key}">effacer</button>` : ""}</div><div class="tfchips">${opts.map(([v, lab, n]) => `<button type="button" class="tfchip" data-tf="${key}" data-v="${esc(String(v))}" aria-pressed="${TF[key].includes(v)}">${lab}${n != null ? `<small>${n}</small>` : ""}</button>`).join("")}</div>${extra}</div>`;
+  const starsG = `<div class="tfg"><div class="tfgh"><span>Difficulté</span>${TF.stars.length ? `<button type="button" class="linkbtn" data-tclear="stars">effacer</button>` : ""}</div><div class="tfstars">${[1, 2, 3, 4, 5].map(k => `<button type="button" data-tf="stars" data-v="${k}" aria-pressed="${TF.stars.includes(k)}" aria-label="${k} étoile${k > 1 ? "s" : ""}"><span>${"★".repeat(k)}</span></button>`).join("")}</div><p class="tfhint">Plusieurs choix possibles.</p></div>`;
+  if (TF.mode === "sujets") {
+    const years = [...new Set(SUJ.map(s => s.c.annee))].sort((a, b) => b - a);
+    return grp("Filière", "fil", Object.values(FIL).map(f => [f, f, SUJ.filter(s => s.fils.includes(f)).length]))
+      + grp("Matière", "mat", [...MATS, "Autres"].filter(m => SUJ.some(s => s.mat === m)).map(m => [m, m, SUJ.filter(s => s.mat === m).length]))
+      + starsG
+      + grp("Concours", "bank", BANKS.filter(b => SUJ.some(s => s.c.bank === b.name)).map(b => [b.name, b.name, SUJ.filter(s => s.c.bank === b.name).length]))
+      + grp("Année", "an", years.map(y => [y, String(y), null]));
+  }
+  const mats = DMATS.filter(d => EXS.some(x => x.mat === d.m));
+  const one = TF.mat.length === 1 ? DMATS.find(d => d.m === TF.mat[0]) : null;
+  const subj = one && sid(one.subj[0]);
+  let chapG = "";
+  if (subj && !subj.hidden) {
+    const ys = TF.yr.length === 1 ? TF.yr : ["mpsi", "mp"];
+    chapG = `<div class="tfg"><div class="tfgh"><span>Chapitre</span>${TF.chap ? `<button type="button" class="linkbtn" data-tclear="chap">effacer</button>` : ""}</div><div class="tfchaps">${ys.map(y => `<div class="tfcy"><span class="tfcyl">${YEARS[y]}</span>${subj.years[y].map((c, i) => { const n = EXS.filter(x => x.e.subj === subj.id && x.e.year === y && x.e.chap === i).length; return n ? `<button type="button" class="tfchap" data-tchap="${subj.id}-${y}-${i}" aria-pressed="${TF.chap === subj.id + "-" + y + "-" + i}">${esc(c.t)}<small>${n}</small></button>` : ""; }).join("")}</div>`).join("")}</div></div>`;
+  }
+  return grp("Matière", "mat", mats.map(d => [d.m, d.m, EXS.filter(x => x.mat === d.m).length]))
+    + grp("Année", "yr", [["mpsi", "Sup"], ["mp", "Spé"]].map(([v, l]) => [v, l, EXS.filter(x => x.e.year === v).length]))
+    + starsG + chapG;
+}
+
+function tfResults() {
+  if (TF.mode === "sujets") {
+    let L = SUJ.filter(s => (!TF.fil.length || TF.fil.some(f => s.fils.includes(f))) && (!TF.mat.length || TF.mat.includes(s.mat)) && (!TF.bank.length || TF.bank.includes(s.c.bank)) && (!TF.an.length || TF.an.includes(s.c.annee)) && (!TF.stars.length || TF.stars.includes(s.lv)) && (!TF.q || qmatch(s.txt, TF.q)));
+    L = L.sort(TF.sort === "facile" ? (a, b) => a.lv - b.lv : TF.sort === "dur" ? (a, b) => b.lv - a.lv : (a, b) => b.c.annee - a.c.annee);
+    const card = s => { const d = s.parts.filter(e => doneN(e.id)).length; return `<a class="sjc" href="#c-annales-mp-${s.i}"><span class="sjh">${bankMark(s.c.bank)}<span class="sjm"><b>${esc(s.c.bank)} ${s.c.annee}</b><span>${esc(s.c.epreuve)} · ${esc(s.c.duree)}</span></span>${lvl(s.lv)}</span><span class="sjt">${esc(s.c.titre)}</span><span class="sjn">${esc(s.c.n)}</span><span class="sjf"><span>${s.fils.map(f => `<i>${f}</i>`).join("")}</span><span>${plural(s.parts.length, "partie")}${d ? ` · <b>${d} faite${d > 1 ? "s" : ""}</b>` : ""}</span></span></a>`; };
+    return tfHead(L.length, "sujet") + (L.length ? `<div class="sjgrid">${L.map(card).join("")}</div>` : tfEmpty());
+  }
+  let L = EXS.filter(x => (!TF.mat.length || TF.mat.includes(x.mat)) && (!TF.yr.length || TF.yr.includes(x.e.year)) && (!TF.chap || `${x.e.subj}-${x.e.year}-${x.e.chap}` === TF.chap) && (!TF.stars.length || TF.stars.includes(x.e.level || 3)) && (!TF.q || qmatch(x.txt, TF.q)));
+  L = L.sort(TF.sort === "facile" ? (a, b) => (a.e.level || 3) - (b.e.level || 3) : TF.sort === "dur" ? (a, b) => (b.e.level || 3) - (a.e.level || 3) : () => 0);
+  const shown = L.slice(0, 60);
+  return tfHead(L.length, "exercice") + (L.length ? `<div class="exgrid">${shown.map(x => exCard(x.e)).join("")}</div>${L.length > 60 ? `<p class="tfhint">Les 60 premiers sont affichés : affine avec un mot-clé ou un filtre.</p>` : ""}` : tfEmpty());
+}
+const tfHead = (n, w) => `<div class="tfhead"><p><b>${n}</b> ${w}${n > 1 ? "s" : ""}</p><label class="tfsort">Trier <select data-tsort><option value="recent"${TF.sort === "recent" ? " selected" : ""}>${TF.mode === "sujets" ? "plus récents" : "ordre du cours"}</option><option value="facile"${TF.sort === "facile" ? " selected" : ""}>plus faciles d'abord</option><option value="dur"${TF.sort === "dur" ? " selected" : ""}>plus difficiles d'abord</option></select></label></div>`;
+const tfEmpty = () => `<div class="tfempty"><p>Aucun résultat avec ces critères.</p><button type="button" class="btn btn-ghost btn-sm" data-treset>Effacer tous les filtres</button></div>`;
+
+function wireTrouver() {
+  const host = $(".tf", app); if (!host) return;
+  tfIndex();
+  const side = $(".tfside", host), res = $(".tfres", host);
+  const paint = () => {
+    side.innerHTML = tfFilters(); res.innerHTML = tfResults(); tfSave();
+    $$("[data-tf]", host).forEach(b => b.addEventListener("click", () => { const k = b.dataset.tf, v = k === "an" || k === "stars" ? +b.dataset.v : b.dataset.v; tog(TF[k], v); if (k === "mat" || k === "yr") TF.chap = null; paint(); }));
+    $$("[data-tclear]", host).forEach(b => b.addEventListener("click", () => { const k = b.dataset.tclear; TF[k] = k === "chap" ? null : []; paint(); }));
+    $$("[data-tchap]", host).forEach(b => b.addEventListener("click", () => { TF.chap = TF.chap === b.dataset.tchap ? null : b.dataset.tchap; paint(); }));
+    $$("[data-treset]", host).forEach(b => b.addEventListener("click", () => { Object.assign(TF, { q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null }); $("[data-tq]", host).value = ""; paint(); }));
+    const so = $("[data-tsort]", host); if (so) so.addEventListener("change", () => { TF.sort = so.value; paint(); });
+    typeset(res);
+  };
+  $$("[data-tmode]", host).forEach(b => b.addEventListener("click", () => { TF.mode = b.dataset.tmode; TF.mat = []; TF.chap = null; $$("[data-tmode]", host).forEach(x => x.setAttribute("aria-selected", x === b)); paint(); }));
+  let t; $("[data-tq]", host).addEventListener("input", ev => { clearTimeout(t); t = setTimeout(() => { TF.q = ev.target.value.trim(); res.innerHTML = tfResults(); tfSave(); const so = $("[data-tsort]", host); if (so) so.addEventListener("change", () => { TF.sort = so.value; paint(); }); $$("[data-treset]", host).forEach(b => b.addEventListener("click", () => { Object.assign(TF, { q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null }); $("[data-tq]", host).value = ""; paint(); })); typeset(res); }, 160); });
+  paint();
+}
+
 /* ---------- Routeur ---------- */
 let lastRoute = "";
 function route(keepScroll) {
@@ -1686,6 +1779,7 @@ function route(keepScroll) {
   else if (h === "concours") html = concoursPage();
   else if (h === "oral") html = oralPage();
   else if (h === "tableau") html = dashPage();
+  else if (h === "trouver") html = trouverPage();
   else html = notFound();
   const zone = h === "commando" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
   if (zone) document.documentElement.dataset.zone = "commando"; else delete document.documentElement.dataset.zone;
@@ -1697,6 +1791,7 @@ function route(keepScroll) {
   document.title = h === "accueil" ? "Lemme · Prépa scientifique" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
   wire(ex);
   if (h === "tableau") wireDash();
+  if (h === "trouver") wireTrouver();
   typeset(app);
   if (!keepScroll) window.scrollTo(0, 0);
   head.classList.toggle("scrolled", scrollY > 8);
