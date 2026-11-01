@@ -18,7 +18,8 @@ LEMME.subject({
       Object.assign(C("Groupe symétrique", "Conjugaison, éléments d'ordre 2, automorphismes intérieurs et extérieurs, le cas exceptionnel de S6"), { p: "Algèbre" }),
       Object.assign(C("Polynômes à plusieurs indéterminées", "Action du groupe symétrique, polynômes alternés, Vandermonde, résultant, intersection de courbes"), { p: "Algèbre" }),
       Object.assign(C("Corps finis", "Frobenius, restes chinois, factorisation des polynômes, algorithme de Berlekamp"), { p: "Algèbre" }),
-      Object.assign(C("Séries de Fourier", "Noyau de Dirichlet, espaces de Banach, théorème de Baire, Banach-Steinhaus, divergence"), { p: "Analyse" })
+      Object.assign(C("Séries de Fourier", "Noyau de Dirichlet, espaces de Banach, théorème de Baire, Banach-Steinhaus, divergence"), { p: "Analyse" }),
+      Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya"), { p: "Algèbre" })
     ]
   }
 });
