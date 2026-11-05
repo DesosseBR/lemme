@@ -803,14 +803,6 @@ mjx-container[display="true"]::-webkit-scrollbar{display:none}
 .tile .tdone{display:inline-flex;align-items:center;gap:4px;color:var(--green);font-weight:700}
 .tile .tdone svg{width:13px;height:13px}
 .tile.is-done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--surface))}
-/* Khôlles : synthwave */
-.tiles.synth .tile{background:linear-gradient(160deg,#1B1036 0%,#140B2A 60%,#0E0820 100%);border-color:#3A1F66;color:#F3EDFF}
-.tiles.synth .tile::after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,#FF3EA5,#7B5CFF);opacity:.55;transition:opacity var(--t-fast)}
-.tiles.synth .tile:hover{border-color:#FF3EA5;box-shadow:0 10px 28px -14px rgba(255,62,165,.6)}
-.tiles.synth .tile:hover::after{opacity:1}
-.tiles.synth .tnum{color:#35E0F5}
-.tiles.synth .tfoot{color:#C9B8F0}
-.tiles.synth .tdone{color:#5CF2B0}
 /* Oraux */
 .ccb{font-style:normal;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;background:var(--cc);color:#fff;line-height:1.2}
 /* Annales */
@@ -1300,3 +1292,66 @@ img.fi.ld{opacity:1}
 .step{animation:none}
 ::view-transition-group(root){animation-duration:180ms}
 html.seen .hero h1 .mark::after{animation:none}
+
+/* Résumé de cours lu dans la page (le PDF reste téléchargeable) */
+.resume{max-width:760px;border-radius:var(--r-card)}
+.resume .rs-prog{margin:0 0 24px;font-size:15px;color:var(--muted);line-height:1.5}
+.resume .rs-prog b{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:4px}
+.resume h2{font-family:var(--f-display);font-weight:600;font-size:22px;letter-spacing:-.01em;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.resume .prose{font-family:var(--f-read);font-size:17px;line-height:1.7}
+.resume .prose ul{margin:0;padding-left:1.1em}
+.resume .prose li{margin:10px 0}
+.resume .prose li::marker{color:var(--gold-ink)}
+.resume .rs-dl{margin-top:24px}
+.resume .rs-dl svg{width:16px;height:16px}
+/* Tableau de bord : état de départ, sans grille de zéros */
+.db-start{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(20px,3vw,32px);margin-bottom:16px}
+.db-start h2{margin:0 0 8px;font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.015em}
+.db-start p{margin:0 0 20px;color:var(--muted);max-width:56ch;line-height:1.6}
+.db-start select{font:inherit;font-weight:600;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--muted);padding:0 2px;cursor:pointer}
+.db-start .btn{white-space:normal;text-align:left;line-height:1.3}
+.db-start-n{text-align:right}
+.db-start-n b{display:block;font-size:48px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.db-start-n span{font-size:14px;color:var(--muted)}
+@media (max-width:640px){.db-start{grid-template-columns:1fr;gap:20px}.db-start-n{text-align:left}}
+.soon-line{margin:12px 0 0;font-size:14px;color:var(--muted);line-height:1.6}
+/* Page d'un sujet : le corrigé d'abord, le sujet original à déplier */
+.sj-intro{font-family:var(--f-read);font-size:17px;line-height:1.65;color:var(--muted);margin:0 0 32px;max-width:46em}
+.sj-h{margin:0 0 8px;font-weight:600;letter-spacing:-.015em}
+.sj-pdf{margin-top:40px;border:1px solid var(--line);border-radius:var(--r-card);background:var(--surface)}
+.sj-pdf summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;padding:16px 20px;font-weight:600}
+.sj-pdf summary::-webkit-details-marker{display:none}
+.sj-pdf summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-right:4px;transition:transform var(--t-fast) var(--ease)}
+.sj-pdf[open] summary::before{transform:rotate(45deg)}
+.sj-pdf summary small{font-weight:400;font-size:13px;color:var(--muted)}
+.sj-pdf[open]{padding-bottom:16px}
+.sj-pdf[open] > [data-pdf]{margin:0 16px 16px}
+.sj-pdf > .btn{margin:0 16px}
+.sj-pdf > .btn svg{width:16px;height:16px}
+
+/* En-têtes de page : clairs et fins. Le bandeau bleu reste pour l'accueil et Commando */
+:root:not([data-zone="commando"]) .phead{background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line)}
+:root:not([data-zone="commando"]) .phead .photo,:root:not([data-zone="commando"]) .phead.has-photo::before{display:none}
+:root:not([data-zone="commando"]) .phead .wrap,:root:not([data-zone="commando"]) .phead.tall .wrap{padding-block:28px 28px}
+:root:not([data-zone="commando"]) .phead:has(.tabs) .wrap{padding-bottom:0}
+:root:not([data-zone="commando"]) .phead h1{font-size:clamp(28px,3.4vw,42px);line-height:1.1;letter-spacing:-.02em;max-width:28ch}
+:root:not([data-zone="commando"]) .crumbs{color:var(--muted);margin-bottom:12px}
+:root:not([data-zone="commando"]) .crumbs a:hover{color:var(--ink)}
+:root:not([data-zone="commando"]) .phead .meta{margin-top:14px}
+:root:not([data-zone="commando"]) .phead .tag{background:var(--bg-2);color:var(--ink);font-weight:500}
+:root:not([data-zone="commando"]) .phead .tag.y{background:color-mix(in srgb,var(--yellow) 45%,var(--surface))}
+:root:not([data-zone="commando"]) .tabs{margin-top:20px;gap:8px}
+:root:not([data-zone="commando"]) .tabs a,:root:not([data-zone="commando"]) .tabs button{padding:12px 4px;margin-right:16px;border-radius:0;color:var(--muted);background:transparent}
+:root:not([data-zone="commando"]) .tabs a:hover,:root:not([data-zone="commando"]) .tabs button:hover{color:var(--ink)}
+:root:not([data-zone="commando"]) .tabs [aria-selected="true"],:root:not([data-zone="commando"]) .tabs [aria-current="page"]{background:transparent;color:var(--ink);box-shadow:inset 0 -2px 0 var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-zone="commando"]) .tabs [aria-selected="true"],:root:not([data-zone="commando"]) .tabs [aria-current="page"]{box-shadow:inset 0 -2px 0 var(--yellow)}}
+:root:not([data-zone="commando"]) .tabs [data-cc]{margin:0 0 10px;padding:8px 14px;border-radius:8px;color:var(--ink);background:color-mix(in srgb,var(--cc) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--cc) 35%,var(--line))}
+:root:not([data-zone="commando"]) .tabs [data-cc]:hover{background:color-mix(in srgb,var(--cc) 22%,var(--surface))}
+:root:not([data-zone="commando"]) .tabs [data-cc][aria-selected="true"]{background:var(--cc);color:#fff;border-color:var(--cc);box-shadow:none}
+
+/* Typographie : l'empattement est réservé à la lecture (énoncés, corrigés, résumés) */
+.hero p,.showcase p,.band li a span,.card p,.steps-list span,.start p,.foot .tagline,.cmd-rules span,.cmd-band p,.oral-band p,.lead,.sj-intro{font-family:var(--f-display)}
+.hero p{font-size:clamp(17px,1.4vw,19px)}
+.foot .tagline{font-size:15px;line-height:1.6}
+.lead{font-size:16px}
+@media (max-width:560px){.resume{padding:20px 16px}.resume .prose{font-size:16px}.resume .prose ul{padding-left:1em}}

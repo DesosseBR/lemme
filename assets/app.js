@@ -283,8 +283,8 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tn">${n ? plural(n, "exercice") : ""}</span></a>`; }).join("")}</div>`;
-  return phead({ crumb: [["Matières"], [s.name]], title: s.name, meta: `<span class="tag y">${YEARS[year]}</span>`, tabs, photo: id, tall: true })
+    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tn">${n ? plural(n, "exercice") : (c.r || r ? "Résumé" : "En préparation")}</span></a>`; }).join("")}</div>`;
+  return phead({ crumb: [["Matières"], [s.name]], title: s.name, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
 
@@ -304,19 +304,21 @@ function chapterPage(id, y, i) {
   } else {
     if (PDFS.has(cs)) tabs.push(["cours", "Cours"]);
     tabs.push(["resume", "Résumé"]);
-    tabs.push(["exercices", "Exercices", exs.length]);
+    if (exs.length) tabs.push(["exercices", "Exercices", exs.length]);
     if (id === "xens") tabs.push(["plus", "Aller plus loin", new Set(plus.map(e => e.plus)).size]);
     if (!chapTab || !tabs.find(t => t[0] === chapTab)) chapTab = PDFS.has(cs) ? "cours" : (PDFS.has(rs) ? "resume" : (exs.length ? "exercices" : plus.length ? "plus" : "resume"));
   }
   let body;
   if (oral) { const ce = exs.filter(e => e.concours === chapTab); body = ce.length ? `<div class="exgrid stagger">${ce.map(exCard).join("")}</div>` : empty("Exercices en préparation", ` Les exercices ${CONC[chapTab] || ""} de ce chapitre arrivent bientôt.`); }
   else if (chapTab === "cours") body = `<div data-pdf="${cs}" data-title="Cours · ${esc(c.t)}"></div>`;
-  else if (chapTab === "resume") body = (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
+  else if (chapTab === "resume") body = c.r
+    ? `<article class="panelbox resume"><p class="rs-prog"><b>Au programme</b>${esc(c.n)}</p><h2>L'essentiel</h2><div class="prose">${c.r}</div>${PDFS.has(rs) ? `<a class="btn btn-ghost btn-sm rs-dl" href="pdf/${rs}.pdf" download>${I.dl}Télécharger en PDF</a>` : ""}</article>`
+    : (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
   else if (chapTab === "plus") body = plusList(plus);
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
-  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">${esc(xpos(s, i).name)} · ${xpos(s, i).j + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : tabsHtml(tabs, chapTab) })
+  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">${esc(xpos(s, i).name)} · ${xpos(s, i).j + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : (tabs.length > 1 ? tabsHtml(tabs, chapTab) : "") })
     + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : id === "kholles" ? s.name + " · " + YEARS[y] : s.hidden ? s.name : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
 }
 
@@ -381,7 +383,7 @@ let exFilter = "all";
 function exercisesPage(onlyClassics) {
   const list = EXERCISES.filter(e => e.year === year && !sid(e.subj).hidden && (exFilter === "all" || e.subj === exFilter) && (!onlyClassics || e.classique));
   const title = onlyClassics ? "Classiques" : "Exercices corrigés";
-  return phead({ crumb: [[title]], title, meta: `<span class="tag y">${YEARS[year]}</span>` })
+  return phead({ crumb: [[title]], title })
   + `<div class="wrap layout full"><div>
     <div class="filters" role="group" aria-label="Filtrer par matière"><button type="button" class="chip" data-f="all" aria-pressed="${exFilter === "all"}">Toutes</button>${VISIBLE.map(s => `<button type="button" class="chip" data-f="${s.id}" aria-pressed="${exFilter === s.id}">${s.name}</button>`).join("")}</div>
     ${list.length ? exList(list) : empty("Rien pour l'instant", ` Essaie une autre matière ou passe en ${year === "mpsi" ? "Spé" : "Sup"}.`)}
@@ -416,9 +418,9 @@ function dsPage() {
 
 function khollesPage() {
   const s = sid("kholles"), list = (s && s.years[year]) || [];
-  return phead({ crumb: [["Khôlles"]], title: "Khôlles", meta: `<span class="tag y">${YEARS[year]}</span>`, photo: "oral" }) + `<div class="wrap layout full"><div>
+  return phead({ crumb: [["Khôlles"]], title: "Khôlles", photo: "oral" }) + `<div class="wrap layout full"><div>
     <p class="lead">Les exercices classiques posés en khôlle, rangés par chapitre et corrigés pas à pas.</p>
-    ${list.length ? `<div class="tiles synth stagger">${list.map((c, i) => { const n = exOf("kholles", year, i).length, d = exOf("kholles", year, i).filter(e => doneN(e.id)).length; return tile(`#c-kholles-${year}-${i}`, pad(i + 1), esc(c.t), n ? `${d ? `<span class="tdone">${d}/${n} faits</span>` : `${n} exo${n > 1 ? "s" : ""}`}` : "Bientôt"); }).join("")}</div>` : empty("Bientôt", "")}
+    ${list.length ? `<div class="tiles stagger">${list.map((c, i) => { const n = exOf("kholles", year, i).length, d = exOf("kholles", year, i).filter(e => doneN(e.id)).length; return tile(`#c-kholles-${year}-${i}`, pad(i + 1), esc(c.t), n ? `${d ? `<span class="tdone">${d}/${n} faits</span>` : `${n} exo${n > 1 ? "s" : ""}`}` : "Bientôt"); }).join("")}</div>` : empty("Bientôt", "")}
   </div></div>`;
 }
 
@@ -508,12 +510,11 @@ function sujetPage(i) {
   const c = ANN()[i]; if (!c) return notFound();
   const parts = exOf("annales", "mp", i);
   return phead({ crumb: bqCrumbs(c).concat([[c.epreuve]]), title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
-    <h2 style="margin:0 0 14px">Le sujet</h2>
-    <p style="font-family:var(--f-read);font-size:17px;color:var(--muted);margin:0 0 18px;max-width:46em">${c.intro}</p>
-    ${c.pdf ? `<div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}"></div>` : `<p style="font-family:var(--f-read);font-size:16px;color:var(--muted);margin:0">L'énoncé de chaque partie est reproduit à côté de son corrigé.</p>`}
-    <h2 style="margin:40px 0 8px">Le corrigé, question par question</h2>
+    <p class="sj-intro">${c.intro}</p>
+    <h2 class="sj-h">Le corrigé, partie par partie</h2>
     <p class="lead">Une page par partie, avec l'énoncé à côté du corrigé.</p>
     <div class="tiles ann vault stagger">${parts.map(e => tile(`#e-${e.id}`, (/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + esc(e.part.replace(/\s*\(.*\)/, "")), ttl(e), doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : "", doneN(e.id) ? "is-done" : "")).join("")}</div>
+    ${c.pdf ? `<details class="sj-pdf"><summary><span>Voir le sujet original</span><small>PDF · ${esc(c.bank)} ${c.annee}</small></summary><div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}" data-lazy="1"></div><a class="btn btn-ghost btn-sm" href="pdf/${c.pdf}.pdf" download>${I.dl}Télécharger le sujet</a></details>` : ""}
   </div></div>`;
 }
 
@@ -565,7 +566,7 @@ function commandoPage() {
   </div></section>
   <section class="sec"><div class="wrap">
     ${xparts(s).map((g, gi) => `<div class="sec-title"${gi ? ' style="margin-top:40px"' : ""}><h2>Chapitre ${gi + 1} · ${esc(g.name)}</h2></div>
-    <div class="tiles vault stagger">${g.items.map(({ c, i }, j) => { const n = exOf("xens", "mp", i).filter(e => !e.plus).length, pl = new Set(exOf("xens", "mp", i).filter(e => e.plus).map(e => e.plus)).size, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); const foot = [r ? "Résumé" : "", n ? `${n} exos` : "", pl ? plural(pl, "sujet") : ""].filter(Boolean).join(" · "); return foot ? tile(`#c-xens-mp-${i}`, `${gi + 1}.${j + 1}`, esc(c.t), foot) : `<span class="tile off"><span class="tnum">${gi + 1}.${j + 1}</span><span class="tt">${esc(c.t)}</span><span class="tfoot">En préparation</span></span>`; }).join("")}</div>`).join("")}
+    <div class="tiles vault stagger">${g.items.map(({ c, i }, j) => { const n = exOf("xens", "mp", i).filter(e => !e.plus).length, pl = new Set(exOf("xens", "mp", i).filter(e => e.plus).map(e => e.plus)).size, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); const foot = [r ? "Résumé" : "", n ? `${n} exos` : "", pl ? plural(pl, "sujet") : ""].filter(Boolean).join(" · "); return foot ? tile(`#c-xens-mp-${i}`, `${gi + 1}.${j + 1}`, esc(c.t), foot) : ""; }).join("")}</div>${(() => { const off = g.items.filter(({ i }) => !exOf("xens", "mp", i).length && !PDFS.has(`resume-xens-mp-${pad(i + 1)}`)).map(({ c }) => esc(c.t)); return off.length ? `<p class="soon-line">En préparation : ${off.join(", ")}</p>` : ""; })()}`).join("")}
   </div></section>
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>La suite du programme</h2></div>
@@ -1579,6 +1580,7 @@ function dashPage() {
   const stat = (v, l) => `<div class="dbs-i"><b>${v}</b><span>${l}</span></div>`;
 
   return phead({ crumb: [["Tableau de bord"]], title: "Tableau de bord" }) + `<div class="wrap db">
+${M.done.length ? `
   <section class="db-sum">
     <div class="db-main">
       <label class="db-target">Préparation pour <select data-dpref="bank" aria-label="Concours visé">${bankOpts}</select> <span>en ${M.F}</span></label>
@@ -1608,10 +1610,19 @@ function dashPage() {
     </section>
   </div>
 
+` : `
+  <section class="db-start">
+    <div>
+      <h2>Ton suivi démarre au premier exercice</h2>
+      <p>À la fin d'un exercice, clique sur « Marquer comme fait ». Ce tableau calcule alors ta progression vers <select data-dpref="bank" aria-label="Concours visé">${bankOpts}</select> en ${M.F}. Tout reste sur ton appareil.</p>
+      ${todo[0] ? `<a class="btn btn-navy" href="#e-${todo[0].e.id}">Commencer par « ${esc(todo[0].e.title)} » ${I.arrow}</a>` : ""}
+    </div>
+    <div class="db-start-n"><b>${Math.max(0, proj.daysLeft)}</b><span>jours avant les écrits</span></div>
+  </section>
+`}
   <section class="db-card">
     <h2>À faire ensuite</h2>
     ${todo.length ? `<ol class="db-todo">${todo.map(x => `<li><a href="#e-${x.e.id}"><span class="db-tt">${esc(x.e.title)}</span><span class="db-tw">${esc(x.why)}</span>${I.arrow}</a></li>`).join("")}</ol>` : `<p class="db-note">Tout est fait. Impressionnant.</p>`}
-    ${!M.done.length ? `<p class="db-note">À la fin d'un exercice, clique sur « Marquer comme fait » : ce tableau se met à jour tout seul. Tout reste sur ton appareil.</p>` : ""}
   </section>
 
   <details class="db-card db-more">
@@ -1640,9 +1651,11 @@ function wireDash() {
   if (rm || dashSeen) host.classList.add("in");
   else {
     requestAnimationFrame(() => requestAnimationFrame(() => host.classList.add("in")));
-    const to = +cnt.dataset.count, t0 = performance.now(), D = 900;
-    const step = t => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); cnt.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(step); };
-    cnt.textContent = "0"; requestAnimationFrame(step);
+    if (cnt) {
+      const to = +cnt.dataset.count, t0 = performance.now(), D = 900;
+      const step = t => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); cnt.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(step); };
+      cnt.textContent = "0"; requestAnimationFrame(step);
+    }
   }
   dashSeen = true;
   const msg = $(".dmsg", host);
@@ -1845,6 +1858,7 @@ function wire(ex) {
   }));
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
   $$("[data-pdf]:not([data-lazy])", app).forEach(mountPdf);
+  $$(".sj-pdf", app).forEach(d => d.addEventListener("toggle", () => { const lz = d.open && $("[data-lazy]", d); if (lz) { lz.removeAttribute("data-lazy"); mountPdf(lz); } }));
   if (ex) {
     const seg = $$(".seg button", app);
     seg.forEach(b => b.addEventListener("click", () => {
