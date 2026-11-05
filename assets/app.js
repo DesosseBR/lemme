@@ -1755,7 +1755,13 @@ function wireTrouver() {
 /* ---------- Routeur ---------- */
 let lastRoute = "", dashSeen = false;
 const tabMem = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-tabs") || "{}"); } catch (_) { return {}; } })();
+let lastTs = null, booted = false;
 function route(keepScroll) {
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (keepScroll || !booted || rm || !document.startViewTransition) { booted = true; return render(keepScroll); }
+  document.startViewTransition(() => { render(keepScroll); return Promise.race([lastTs || Promise.resolve(), new Promise(r => setTimeout(r, 260))]); });
+}
+function render(keepScroll) {
   const h = location.hash.slice(1) || "accueil";
   const fromEx = h !== lastRoute && /^e-/.test(lastRoute) ? lastRoute.slice(2) : null;
   if (h !== lastRoute) {
@@ -1795,14 +1801,13 @@ function route(keepScroll) {
   $$("[data-sec]").forEach(x => x.classList.toggle("on", x.dataset.sec === sec));
   $$(".panel a").forEach(a => { if (a.getAttribute("href") === "#" + h) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   head.classList.remove("scrolled");
-  app.classList.remove("enter"); void app.offsetWidth;
-  app.innerHTML = html; app.classList.add("enter");
+  app.innerHTML = html;
   closeMenus(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
   document.title = h === "accueil" ? "Lemme · Prépa scientifique" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
   wire(ex);
   if (h === "tableau") wireDash();
   if (h === "trouver") wireTrouver();
-  typeset(app);
+  lastTs = typeset(app);
   const back = fromEx && !keepScroll && app.querySelector(`.excard[href="#e-${fromEx}"]`);
   if (back) {
     back.classList.add("was");

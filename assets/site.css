@@ -1290,3 +1290,11 @@ img.fi.ld{opacity:1}
 .enonce ol > li.qon{background:color-mix(in srgb,var(--yellow) 16%,var(--surface));border-left:0}
 .enonce ol > li.qon::marker{color:var(--ink)}
 .drawer .here{border-left:0;border-radius:8px;background:color-mix(in srgb,var(--yellow) 16%,var(--surface))}
+
+/* Changement de page : fondu enchaîné entre l'ancienne et la nouvelle page, sans passage par le vide */
+.enter > *,.stagger > *{animation:none}
+::view-transition-old(root),::view-transition-new(root){animation-duration:180ms;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+.site-head{view-transition-name:head}
+::view-transition-old(head){display:none}
+::view-transition-new(head){animation:none}
+.hero p,.hero .ctas{animation:none}
