@@ -119,11 +119,22 @@ const lvl = n => `<span class="lvl" role="img" aria-label="Difficulté ${n} sur 
 
 /* ---------- MathJax ---------- */
 let mjQueue = Promise.resolve();
+let mjBusy = 0;
+/* Rendu synchrone quand c'est possible : le navigateur ne peint jamais le code TeX brut, donc pas de flash */
 function typeset(el) {
   if (!el || !window.MathJax || !MathJax.typesetPromise) return;
-  mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).then(() => fitMath(el)).catch(() => {});
+  if (!mjBusy && MathJax.typeset) {
+    try { MathJax.typeset([el]); fitMath(el); return Promise.resolve(); } catch (err) { /* extension à charger : on passe en asynchrone */ }
+  }
+  mjBusy++;
+  mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).then(() => fitMath(el)).catch(() => {}).finally(() => { mjBusy--; });
   return mjQueue;
 }
+/* Fondu enchaîné entre l'ancien et le nouvel affichage (View Transitions), sinon changement immédiat */
+const smooth = fn => {
+  if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return fn();
+  document.startViewTransition(() => { fn(); });
+};
 /* Formules trop larges : on réduit la taille au lieu d'afficher une barre de défilement */
 function fitMath(root) {
   (root || document).querySelectorAll('mjx-container[display="true"]').forEach(c => {
@@ -151,9 +162,9 @@ function paintYear() {
 function setYear(y) { year = y; try { localStorage.setItem("lemme-year", y); } catch (e) {} paintYear(); }
 $$(".yearswitch button").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.year === year) return;
-  setYear(b.dataset.year);
   const m = location.hash.match(/^#c-([a-z]+)-(mpsi|mp)-\d+$/);
-  if (m) location.hash = "s-" + m[1]; else route(true);
+  if (m) { setYear(b.dataset.year); location.hash = "s-" + m[1]; }
+  else smooth(() => { setYear(b.dataset.year); render(true); });
 }));
 window.addEventListener("resize", paintYear);
 
@@ -777,7 +788,8 @@ function mountPlayer(e, host) {
   const all = [...new Set(e.steps.flatMap(s => s.rappels || []))];
   const state = { i: -1 };
   function intro() { show(0, 0, true); }
-  function show(i, dir, quiet) {
+  function show(i, dir, quiet) { if (quiet) return showNow(i, dir, quiet); smooth(() => showNow(i, dir, quiet)); }
+  function showNow(i, dir, quiet) {
     state.i = Math.max(0, Math.min(n, i));
     const last = state.i === n;
     const st = e.steps[state.i];
@@ -1619,7 +1631,7 @@ function dashPage() {
 
 function wireDash() {
   const host = $(".db", app); if (!host) return;
-  const re = () => { const y = scrollY; route(true); scrollTo(0, y); host.classList.add("still"); };
+  const re = () => { const y = scrollY; render(true); scrollTo(0, y); host.classList.add("still"); };
   $$("[data-dfil]", host).forEach(b => b.addEventListener("click", () => { setPref("fil", b.dataset.dfil); re(); }));
   $$("[data-dpref]", host).forEach(i => i.addEventListener("change", () => { let v = i.value; if (i.type === "number") v = Math.max(1, Math.min(99, +v || 10)); setPref(i.dataset.dpref, v); re(); }));
   /* animation d'entrée : barres et compteur */
@@ -1758,7 +1770,7 @@ const tabMem = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-ta
 let lastTs = null, booted = false;
 function route(keepScroll) {
   const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (keepScroll || !booted || rm || !document.startViewTransition) { booted = true; return render(keepScroll); }
+  if (!booted || rm || !document.startViewTransition) { booted = true; return render(keepScroll); }
   document.startViewTransition(() => { render(keepScroll); return Promise.race([lastTs || Promise.resolve(), new Promise(r => setTimeout(r, 260))]); });
 }
 function render(keepScroll) {
@@ -1802,6 +1814,7 @@ function render(keepScroll) {
   $$(".panel a").forEach(a => { if (a.getAttribute("href") === "#" + h) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   head.classList.remove("scrolled");
   app.innerHTML = html;
+  $$("img.fi", app).forEach(im => { if (im.complete && im.naturalWidth) im.classList.add("ld"); });
   closeMenus(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
   document.title = h === "accueil" ? "Lemme · Prépa scientifique" : (ex ? ex.title : (($("h1", app) || {}).textContent || "Lemme")) + " · Lemme";
   wire(ex);
@@ -1816,6 +1829,7 @@ function render(keepScroll) {
     setTimeout(() => back.classList.add("fade"), 2600);
   } else if (!keepScroll) window.scrollTo(0, 0);
   head.classList.toggle("scrolled", scrollY > 8);
+  if (!document.documentElement.classList.contains("seen")) setTimeout(() => document.documentElement.classList.add("seen"), 1500);
 }
 function wire(ex) {
   $$(".tabs [data-tab]", app).forEach(b => b.addEventListener("click", () => {

@@ -1280,8 +1280,6 @@ img.fi.ld{opacity:1}
 
 /* Détails */
 .scard .bar{display:none}
-.sbox{border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:6px;box-shadow:none}
-@media (prefers-color-scheme: dark){.sbox{box-shadow:none;border-left-color:var(--yellow)}}
 .seg button[aria-pressed="true"]{box-shadow:0 1px 2px rgba(10,26,64,.1)}
 .navlist a[aria-current="page"]{font-weight:600;box-shadow:none;border:1px solid var(--line)}
 
@@ -1298,3 +1296,7 @@ img.fi.ld{opacity:1}
 ::view-transition-old(head){display:none}
 ::view-transition-new(head){animation:none}
 .hero p,.hero .ctas{animation:none}
+/* Étapes du corrigé : le fondu enchaîné remplace l'apparition depuis le transparent */
+.step{animation:none}
+::view-transition-group(root){animation-duration:180ms}
+html.seen .hero h1 .mark::after{animation:none}
