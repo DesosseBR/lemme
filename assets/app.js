@@ -228,7 +228,7 @@ function home() {
   const st = demo.steps[1];
   return `
   <section class="hero"><div class="photo">${img("hero", "100vw", true)}</div><div class="wrap">
-    <h1><span class="line"><span>Toute ta prépa,</span></span><span class="line"><span><span class="mark">corrigée</span></span></span><span class="line"><span>pas à pas.</span></span></h1>
+    <h1><span class="line"><span>Toute ta prépa,</span></span><span class="line"><span><span class="mark">corrigée</span></span></span><span class="line"><span>pas à pas</span></span></h1>
     <p>Cours, résumés et corrigés interactifs pour la prépa scientifique, de la Sup à la Spé.</p>
     <div class="ctas"><a class="btn btn-yellow" href="#s-maths">Explorer les matières ${I.arrow}</a><a class="btn btn-glass" href="#e-ex-recurrence">Essayer un corrigé</a></div>
   </div></section>
@@ -240,7 +240,7 @@ function home() {
 
   <section class="sec"><div class="wrap showcase">
     <div>
-      <h2>Un corrigé qu'on suit, pas qu'on survole.</h2>
+      <h2>Un corrigé qu'on suit, pas qu'on survole</h2>
       <p>Chaque correction avance étape par étape, et le rappel de cours utilisé est à un clic.</p>
       <div class="keys"><kbd>←</kbd><kbd>→</kbd><span>pour avancer ou revenir</span></div>
       <a class="btn btn-navy" href="#e-${demo.id}">Ouvrir cet exercice ${I.arrow}</a>
@@ -563,7 +563,7 @@ function commandoPage() {
 }
 
 function notFound() {
-  return phead({ crumb: [["Page introuvable"]], title: "Cette page n'existe pas." }) + `<div class="wrap layout full"><div><a class="btn btn-yellow" href="#accueil">Retour à l'accueil</a></div></div>`;
+  return phead({ crumb: [["Page introuvable"]], title: "Cette page n'existe pas" }) + `<div class="wrap layout full"><div><a class="btn btn-yellow" href="#accueil">Retour à l'accueil</a></div></div>`;
 }
 
 /* ---------- Rappels de cours ---------- */

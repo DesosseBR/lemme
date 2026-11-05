@@ -1218,3 +1218,69 @@ img.fi.ld{opacity:1}
 .figrow>.fig{flex:1 1 260px;margin:0;min-width:0}
 .figrow>.fig svg{max-width:100%;height:auto}
 .side-en .decode{grid-template-columns:1fr}
+
+/* ---------- Passe de finition (unslop) ----------
+   Direction : des corrigés exacts et patients pour élèves de prépa. Monde : copie double, encre bleue, surligneur jaune.
+   Le surligneur reste la seule signature. Titres en 600, pas de majuscules espacées, rayons selon la taille, pas d'effets en boucle. */
+:root{--r-ctl:8px;--r-card:14px;--r-panel:16px;--ease:cubic-bezier(.22,1,.36,1);--ease-out:cubic-bezier(.22,1,.36,1);--t-mid:220ms;--t-slow:420ms}
+
+/* Type : hiérarchie par la taille, pas par la graisse */
+.hero h1{font-weight:600;letter-spacing:-.03em;line-height:1.02}
+.sec-title h2,.showcase h2,.band h2,.phead h1,.cmd-band h2,.oral-band h2{font-weight:600;letter-spacing:-.025em;line-height:1.05}
+.scard h3,.prose h2,.step h3,.drawer h3,.exhead h1{font-weight:600;letter-spacing:-.02em}
+.panelbox > h2,.redac-head h4,.more h2,.bilan h4,.drawer .here h4,.cmd-rules b,.big-bar span{font-weight:600;letter-spacing:0}
+.logo b{font-weight:600;letter-spacing:-.02em}
+.logo-mark::before{font-weight:700}
+.kv,.dringv b{font-weight:600}.kv small{font-weight:500}
+.chapters .num,.qlist li::before,.enonce ol > li::marker,.dbr b,.bmark,.navlink .xens{font-weight:600}
+.jt td.hi,.redac .rt b,.big-col .rt b{font-weight:600}
+.btn,.navbtn,.yearswitch button,.seg button,.tfmode button,.labo-btn,.tabs a,.tabs button,.sec-title a,.card-link .card-go,.player .hint summary,.donestate,.rbadge,.stp b{font-weight:600}
+.excard b,.chapters h3,.chapters .soonrow h3,.band li a{font-weight:600}
+.excard .kind,.step .count,.rappels .lab,.decode h4,.side h3,.drawer .kicker,.drawer .here-lab,.jt th,.pdfv .ttl,.dicho .idx{font-weight:500}
+.band li a{letter-spacing:0}
+.excard b,.chapters h3,.card h3,.prose h3.rq{letter-spacing:-.005em}
+
+/* Plus de petites capitales espacées : casse de phrase */
+.cmd-band .k,.oral-band .k,.sbox .lab,.drawer .here h4,.drawer .here-lab,.drawer .notion-body h5,.pane-h,.mtitle,.plab,.dlab,.dready .dkick,.kl,.tfgh span,.plk{text-transform:none;letter-spacing:0;font-weight:500}
+.pane-h{font-size:14px!important}
+.cmd-rules div:first-child b{letter-spacing:0}
+.tile .tnum{letter-spacing:0}
+
+/* Rayons : selon la taille, pas des pilules partout */
+.btn,.navbtn,.navlink,.iconbtn,.labo-btn,.search input,.donestate{border-radius:var(--r-ctl)}
+.yearswitch,.seg,.tfmode{border-radius:10px}
+.yearswitch .pill,.yearswitch button,.seg button,.tfmode button{border-radius:7px}
+.chip,.rchip,.tag,.rbadge,.lab .spins button,.roadmap li{border-radius:6px}
+.chapters .ccs i{border-radius:4px}
+.stp{border-radius:10px}.stp button{border-radius:6px}
+.excard,.card,.panelbox,.tile,.sjc{border-radius:var(--r-card)}
+.scard{border-radius:var(--r-card)}
+.panel,.results{border-radius:12px}
+.tip{border-radius:10px}
+.chip{transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast)}
+
+/* En-tête opaque, sans flou */
+.site-head{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* Mouvement : une entrée courte, pas de zoom ni de soulèvement au survol */
+.hero .photo img,.phead .photo img{animation:none}
+.hero h1 .line > span{animation:none}
+.hero p,.hero .ctas{animation:rise var(--t-slow) var(--ease-out) both}
+.hero .ctas{animation-delay:60ms}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.enter > *{animation-delay:calc(min(var(--i,0),5) * 50ms)}
+.stagger > *:nth-child(2){animation-delay:40ms}.stagger > *:nth-child(3){animation-delay:80ms}.stagger > *:nth-child(4){animation-delay:120ms}.stagger > *:nth-child(5){animation-delay:160ms}.stagger > *:nth-child(n+6){animation-delay:200ms}
+@keyframes stepin{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+@keyframes stepback{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.scard:hover img{transform:none}
+.excard:hover,.tile:hover,.card-link:hover,.sjc:hover,.cmd-band:hover,.oral-band:hover,a.pnav:hover,.dbank:hover{transform:none;box-shadow:none}
+.excard:hover,.tile:hover,.sjc:hover{border-color:var(--ink)}
+.excard{transition:border-color var(--t-fast) var(--ease)}
+
+/* Détails */
+.scard .bar{display:none}
+.sbox{border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:6px;box-shadow:none}
+@media (prefers-color-scheme: dark){.sbox{box-shadow:none;border-left-color:var(--yellow)}}
+.seg button[aria-pressed="true"]{box-shadow:0 1px 2px rgba(10,26,64,.1)}
+.navlist a[aria-current="page"]{font-weight:600;box-shadow:none;border:1px solid var(--line)}
