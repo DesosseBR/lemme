@@ -22,7 +22,9 @@ LEMME.subject({
       Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya"), { p: "Algèbre" }),
       Object.assign(C("Fonctions de plusieurs variables", "Différentielle, courbes tracées sur une courbe du plan, extremums sous contrainte, trajectoires de billard"), { p: "Analyse" }),
       Object.assign(C("Intégration", "Fractions rationnelles en cosinus et sinus, règles de Bioche, changements de variable"), { p: "Analyse" }),
-      Object.assign(C("Représentations des groupes finis", "Sous-groupes finis de GLn, théorème de Burnside, caractères, sous-groupes distingués, table de S4"), { p: "Algèbre" })
+      Object.assign(C("Représentations des groupes finis", "Sous-groupes finis de GLn, théorème de Burnside, caractères, sous-groupes distingués, table de S4"), { p: "Algèbre" }),
+      Object.assign(C("Probabilités", "Fonctions caractéristiques, moments, lois normale et de Cauchy"), { p: "Analyse" }),
+      Object.assign(C("Géométrie", "Coniques, coordonnées barycentriques, homographies, birapport, cercles-droites, groupe circulaire"), { p: "Algèbre" })
     ]
   }
 });
