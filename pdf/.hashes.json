@@ -1162,7 +1162,7 @@
  "enonce-o-red-32": "a3e3c2b73be9d80fd559",
  "corrige-o-red-32": "a3e3c2b79062b27b7191",
  "enonce-o-red-33": "a3e3c2b7b56ace9a2d95",
- "corrige-o-red-33": "8fc232fdf0d2d9d6d594",
+ "corrige-o-red-33": "a3e3c2b77027251496a4",
  "enonce-o-red-34": "a3e3c2b7d2c73140066b",
  "enonce-o-red-35": "a3e3c2b709e86e734c56",
  "corrige-o-red-35": "a3e3c2b7707004a575cf",
@@ -1775,5 +1775,10 @@
  "enonce-sig-11": "a3e3c2b780f4decbadae",
  "enonce-sig-12": "a3e3c2b76b54f2be607f",
  "corrige-sig-11": "a3e3c2b738b650bddca6",
- "corrige-sig-12": "a3e3c2b7b0d06fe6a715"
+ "corrige-sig-12": "a3e3c2b7b0d06fe6a715",
+ "enonce-xens24-ma-1": "a3e3c2b7c4fcf44b84e2",
+ "corrige-o-red-55": "a3e3c2b7c71e7e3b608b",
+ "corrige-xens24-ma-1": "a3e3c2b7eb0ed7b26db8",
+ "corrige-gab-5": "a3e3c2b7af48f0d15cc4",
+ "corrige-frob-4": "a3e3c2b7cf374cbe9c07"
 }
