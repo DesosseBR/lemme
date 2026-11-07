@@ -19,7 +19,10 @@ LEMME.subject({
       Object.assign(C("Polynômes à plusieurs indéterminées", "Action du groupe symétrique, polynômes alternés, Vandermonde, résultant, intersection de courbes"), { p: "Algèbre" }),
       Object.assign(C("Corps finis", "Frobenius, restes chinois, factorisation des polynômes, algorithme de Berlekamp"), { p: "Algèbre" }),
       Object.assign(C("Séries de Fourier", "Noyau de Dirichlet, espaces de Banach, théorème de Baire, Banach-Steinhaus, divergence"), { p: "Analyse" }),
-      Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya"), { p: "Algèbre" })
+      Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya"), { p: "Algèbre" }),
+      Object.assign(C("Fonctions de plusieurs variables", "Différentielle, courbes tracées sur une courbe du plan, extremums sous contrainte, trajectoires de billard"), { p: "Analyse" }),
+      Object.assign(C("Intégration", "Fractions rationnelles en cosinus et sinus, règles de Bioche, changements de variable"), { p: "Analyse" }),
+      Object.assign(C("Représentations des groupes finis", "Sous-groupes finis de GLn, théorème de Burnside, caractères, sous-groupes distingués, table de S4"), { p: "Algèbre" })
     ]
   }
 });

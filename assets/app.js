@@ -130,10 +130,12 @@ function typeset(el) {
   mjQueue = mjQueue.then(() => MathJax.typesetPromise([el])).then(() => fitMath(el)).catch(() => {}).finally(() => { mjBusy--; });
   return mjQueue;
 }
+/* Une transition interrompue par une autre n'est pas une erreur : on ignore ses promesses rejetées */
+const quietVT = t => { if (t) [t.ready, t.finished, t.updateCallbackDone].forEach(p => p && p.catch(() => {})); return t; };
 /* Fondu enchaîné entre l'ancien et le nouvel affichage (View Transitions), sinon changement immédiat */
 const smooth = fn => {
   if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return fn();
-  document.startViewTransition(() => { fn(); });
+  quietVT(document.startViewTransition(() => { fn(); }));
 };
 /* Formules trop larges : on réduit la taille au lieu d'afficher une barre de défilement */
 function fitMath(root) {
@@ -550,7 +552,7 @@ function xparts(s) {
 function xpos(s, i) { const P = xparts(s); for (let g = 0; g < P.length; g++) { const j = P[g].items.findIndex(x => x.i === i); if (j >= 0) return { g, j, name: P[g].name }; } return { g: 0, j: i, name: s.part }; }
 function commandoPage() {
   const s = sid("xens"), list = s.years.mp;
-  const next = ["Fonctions d'une variable réelle", "Intégration", "Suites et séries", "Fonctions de plusieurs variables", "Équations différentielles"];
+  const next = ["Fonctions d'une variable réelle", "Suites et séries", "Équations différentielles"];
   return `
   <section class="hero"><div class="photo">${img("commando", "100vw", true)}</div><div class="wrap">
     <h1><span class="line"><span>Formation</span></span><span class="line"><span><span class="mark">commando</span></span></span><span class="line"><span>X-ENS.</span></span></h1>
@@ -1784,7 +1786,7 @@ let lastTs = null, booted = false;
 function route(keepScroll) {
   const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!booted || rm || !document.startViewTransition) { booted = true; return render(keepScroll); }
-  document.startViewTransition(() => { render(keepScroll); return Promise.race([lastTs || Promise.resolve(), new Promise(r => setTimeout(r, 260))]); });
+  quietVT(document.startViewTransition(() => { render(keepScroll); return Promise.race([lastTs || Promise.resolve(), new Promise(r => setTimeout(r, 260))]); }));
 }
 function render(keepScroll) {
   const h = location.hash.slice(1) || "accueil";
