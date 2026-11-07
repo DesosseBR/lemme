@@ -183,8 +183,8 @@ const run = j => new Promise(res => {
 });
 (async () => {
   console.log(`${jobs.length} documents, ${todo.length} à compiler.`);
-  const failed = []; let k = 0;
-  const workers = Array.from({ length: 4 }, async () => { while (k < todo.length) { const r = await run(todo[k++]); if (!r.ok) failed.push(r); else process.stdout.write("."); } });
+  const failed = []; let k = 0, saved = 0;
+  const workers = Array.from({ length: Math.max(4, require("os").cpus().length) }, async () => { while (k < todo.length) { const r = await run(todo[k++]); if (!r.ok) failed.push(r); else { process.stdout.write("."); if (++saved % 20 === 0) fs.writeFileSync(hashFile, JSON.stringify(hashes, null, 1)); } } });
   await Promise.all(workers);
   fs.writeFileSync(hashFile, JSON.stringify(hashes, null, 1));
   const all = fs.readdirSync(OUT).filter(f => f.endsWith(".pdf")).map(f => f.replace(/\.pdf$/, "")).sort();
