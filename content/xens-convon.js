@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "cv-pol": { t: "Décomposition polaire", b: R`<p>Toute $A\in\mathcal M_n(\mathbb R)$ s'écrit $A = OS$ avec $O\in O_n(\mathbb R)$ et $S\in\mathcal S_n^+(\mathbb R)$. Et $|||A||| = \lambda_{\max}(S)$ (car $\|Ax\| = \|Sx\|$).</p>` },
+  "cv-pol": { t: "Décomposition polaire", b: R`<div class="sbox">$$\forall A\in\mathcal M_n(\mathbb R),\ \exists O\in O_n(\mathbb R),\ \exists S\in\mathcal S_n^+(\mathbb R),\ A = OS.$$</div>$$\|Ax\| = \|Sx\|\ \Longrightarrow\ |||A||| = \lambda_{\max}(S).$$` },
   "cv-spec": { t: "Théorème spectral", b: R`$$Se_i = \lambda_ie_i,\ (e_i)\text{ orthonormée};\qquad\operatorname{Tr}M = \sum_i\langle Me_i,e_i\rangle.$$` },
   "cv-cs": { t: "Cauchy-Schwarz et égalité", b: R`$$|\langle u,v\rangle|\leqslant\|u\|\|v\|;\qquad\|u+v\| = \|u\|+\|v\|\iff u,v\text{ positivement liés}.$$` }
 });

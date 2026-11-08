@@ -8,7 +8,7 @@ LEMME.rappels({
   "m25b-gcd": { t: "PGCD de polynômes scindés", b: R`<p><b>Hypothèse</b> : $f$ scindé sur $\mathbb R$.</p>$$\text{diviseurs irréductibles de }f = \{X-\alpha,\ f(\alpha) = 0\}.$$<div class="sbox">$$f\wedge g\neq1\iff\exists\alpha\in\mathbb R,\ f(\alpha) = g(\alpha) = 0.$$</div>` },
   "m25b-rolle": { t: "Théorème de Rolle", b: R`$$f\in\mathcal D([a,b]),\ f(a) = f(b)\ \Longrightarrow\ \exists c\in\,]a,b[,\ f'(c) = 0.$$$$P\in\mathbb R_n[X]\text{ à }n\text{ racines réelles distinctes}\ \Longrightarrow\ P'\text{ scindé à racines simples}.$$` },
   "m25b-spectral": { t: "Théorème spectral", b: R`$$M\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \mathbb R^n = \overset{\perp}{\bigoplus_{\lambda}}E_\lambda(M),\qquad\dim E_\lambda(M) = m_\lambda.$$` },
-  "m25b-grass": { t: "Formule de Grassmann", b: R`<p>Pour deux sous-espaces $F,G$ de $\mathbb R^n$ :</p><div class="sbox">$$\dim(F\cap G) = \dim F+\dim G-\dim(F+G)\geqslant\dim F+\dim G-n.$$</div>` },
+  "m25b-grass": { t: "Formule de Grassmann", b: R`<div class="sbox">$$\dim(F\cap G) = \dim F+\dim G-\dim(F+G)\geqslant\dim F+\dim G-n\quad(F,G\subset\mathbb R^n).$$</div>` },
   "m25b-taylor": { t: "Développement limité d'une fonction vectorielle", b: R`<p><b>Hypothèse</b> : $F : I\to\mathcal M_n(\mathbb R)$ dérivable en $a$ (coefficient par coefficient).</p><div class="sbox">$$F(r)\underset{r\to a}{=}F(a)+(r-a)F'(a)+o(r-a).$$</div><p><b>Règles</b> (ordre des facteurs respecté) :</p>$$(AB)' = A'B+AB',\qquad(A^\top)' = (A')^\top.$$` },
   "m25b-poly": { t: "Égalité de polynômes", b: R`$$P(x) = Q(x)\text{ pour une infinité de }x\ \Longrightarrow\ P = Q.$$` }
 });

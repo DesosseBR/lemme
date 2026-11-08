@@ -140,7 +140,7 @@ LEMME.exercises([
 
 LEMME.rappels({
   "k-tiroirs": { t: "Principe des tiroirs", b: R`<div class="sbox">$$|E|>|F|\ \Longrightarrow\ \forall f : E\to F,\ \exists x\neq y,\ f(x) = f(y).$$</div><p><b>Exemple</b> : $n+1$ objets dans $n$ tiroirs $\Rightarrow$ un tiroir en contient $\geqslant2$.</p>` },
-  "k-image-rec": { t: "Image directe, image réciproque", b: R`<div class="sbox">$$f(A) = \{f(x),\ x\in A\},\qquad f^{-1}(B) = \{x\in E,\ f(x)\in B\}.$$</div><p>$f^{-1}(B)$ a un sens même si $f$ n'est pas bijective. $x\in f^{-1}(B)\iff f(x)\in B$.</p>` },
+  "k-image-rec": { t: "Image directe, image réciproque", b: R`<div class="sbox">$$f(A) = \{f(x),\ x\in A\},\qquad f^{-1}(B) = \{x\in E : f(x)\in B\}.$$</div>$$x\in f^{-1}(B)\iff f(x)\in B\qquad(f\ \text{non nécessairement bijective}).$$` },
   "k-ensembles": { t: "Opérations sur les parties", b: R`<div class="sbox">$$X\cup Y = \emptyset\iff X = Y = \emptyset,\qquad A\cap X = \emptyset\iff X\subset\overline A.$$</div><p>Lois de De Morgan : $\overline{X\cup Y} = \overline X\cap\overline Y$, $\overline{X\cap Y} = \overline X\cup\overline Y$.</p>` }
 });
 
@@ -287,7 +287,7 @@ LEMME.exercises([
 LEMME.rappels({
   "k-max-N": { t: "Parties de ℕ", b: R`$$\varnothing\neq A\subset\mathbb N\ \Longrightarrow\ \min A\text{ existe};\qquad A\text{ majorée}\ \Longrightarrow\ \max A\text{ existe}.$$` },
   "k-recurrence-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(0)\\&\forall n,\ \big(P(0)\wedge\dots\wedge P(n-1)\big)\Rightarrow P(n)\end{aligned}\right.\quad\Longrightarrow\quad\forall n,\ P(n).$$` },
-  "k-tan-diff": { t: "Tangente d'une différence", b: R`<div class="sbox">$$\tan(a-b) = \frac{\tan a-\tan b}{1+\tan a\tan b},$$</div><p>valable quand $a$, $b$ et $a-b$ sont hors de $\frac\pi2+\pi\mathbb Z$. Et $\tan\frac\pi6 = \frac1{\sqrt3}$.</p>` }
+  "k-tan-diff": { t: "Tangente d'une différence", b: R`<div class="sbox">$$\tan(a-b) = \frac{\tan a-\tan b}{1+\tan a\tan b}\qquad\Big(a,b,a-b\notin\frac\pi2+\pi\mathbb Z\Big).$$</div>$$\tan\frac\pi6 = \frac1{\sqrt3},\qquad\tan\frac\pi4 = 1,\qquad\tan\frac\pi3 = \sqrt3.$$` }
 });
 
 (() => {

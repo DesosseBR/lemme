@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "hi-proj": { t: "Projection orthogonale", b: R`$$p(x)\in F,\quad x-p(x)\perp F,\qquad\|x-p(x)\| = \min_{y\in F}\|x-y\|.$$` },
   "hi-spec": { t: "Normes et valeurs propres", b: R`$$A\in\mathcal S_n(\mathbb R)\ :\ |||A|||_2 = \rho(A);\qquad A\in\mathcal S_n^{++}\ :\ |||A^{-1}|||_2 = \frac1{\lambda_1},\quad\det A = \prod\lambda_i.$$` },
-  "hi-stir": { t: "Somme et intégrale", b: R`<p>$\ln(k!) = k\ln k-k+O(\ln k)$, et $\sum_{k=1}^{n}(k\ln k-k) = \frac{n^2}2\ln n-\frac34n^2+O(n\ln n)$ (comparaison série-intégrale avec $\int x\ln x\,dx = \frac{x^2}2\ln x-\frac{x^2}4$).</p>` }
+  "hi-stir": { t: "Somme et intégrale", b: R`<div class="sbox">$$\ln(k!) = k\ln k-k+O(\ln k),\qquad\sum_{k=1}^{n}(k\ln k-k) = \frac{n^2}2\ln n-\frac34n^2+O(n\ln n).$$</div>$$\int x\ln x\,dx = \frac{x^2}2\ln x-\frac{x^2}4.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $E = \mathcal C([0,1],\mathbb R)$ avec $\langle f,g\rangle = \int_0^1fg$. La <b>matrice de Gram</b> d'une famille $(e_1,\dots,e_n)$ est $G = (\langle e_i,e_j\rangle)_{i,j}$. La <b>matrice de Hilbert</b> est $H_n = \big(\frac1{i+j-1}\big)_{1\leqslant i,j\leqslant n}$, Gram de $(1,X,\dots,X^{n-1})$. Le <b>conditionnement</b> d'une matrice inversible est $\kappa(A) = |||A|||_2\,|||A^{-1}|||_2$ ; il majore le facteur d'amplification des erreurs relatives dans la résolution de $Ax = b$.</p>`;

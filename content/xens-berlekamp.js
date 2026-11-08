@@ -7,7 +7,7 @@ const P = { subj: "xens", year: "mp", chap: 8, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "brk-binome": { t: "Formule du binôme", b: R`<p>Dans un anneau commutatif : $(a+b)^m = \sum_{k=0}^m\binom mk a^kb^{m-k}$, et $k\binom mk = m\binom{m-1}{k-1}$ pour $1\leqslant k\leqslant m$.</p>` },
+  "brk-binome": { t: "Formule du binôme", b: R`<div class="sbox">$$(a+b)^m = \sum_{k=0}^m\binom mk a^kb^{m-k}\quad(ab = ba),\qquad k\binom mk = m\binom{m-1}{k-1}.$$</div>` },
   "brk-corpsfini": { t: "Corps finis", b: R`$$|\mathbb F_q| = q = p^n,\qquad p\cdot1 = 0,\qquad|\mathbb F_q^*| = q-1.$$` },
   "brk-lagrange": { t: "Théorème de Lagrange (conséquence)", b: R`$$|G| = N\ \Longrightarrow\ \forall x\in G,\ x^N = e.$$` },
   "brk-racines": { t: "Racines et factorisation", b: R`$$\begin{gathered}\deg P = m\Rightarrow\le m\text{ racines},\\[4pt]P\text{ unitaire},\ \deg P = m,\ \alpha_1,\dots,\alpha_m\text{ racines distinctes}\Rightarrow P = \prod_{i = 1}^m(X-\alpha_i).\end{gathered}$$` },

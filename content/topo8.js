@@ -6,7 +6,7 @@ const { GRAPH } = window.__LA;
 LEMME.rappels({
   "nrm-abs": { t: "Séries absolument convergentes", b: R`$$\dim E\lt\infty,\ \sum\|u_k\|\lt\infty\ \Longrightarrow\ \sum u_k\text{ CV},\quad\Big\|\sum u_k\Big\|\leqslant\sum\|u_k\|.$$` },
   "nrm-lignes": { t: "La norme « max des sommes en ligne »", b: R`$$\|A\| = \max_i\sum_j|a_{ij}| = \sup_{\|X\|_\infty = 1}\|AX\|_\infty,\qquad\|AB\|\leqslant\|A\|\,\|B\|,\qquad\|A^k\|\leqslant\|A\|^k.$$` },
-  "nrm-cauchy": { t: "Suites de Cauchy", b: R`$$(f_p)\text{ de Cauchy}\iff\forall\varepsilon>0,\ \exists N_0,\ \forall n\geqslant N_0,\ \forall p,\ N(f_{n+p}-f_n)\leqslant\varepsilon.$$<p>CV $\Rightarrow$ Cauchy ; réciproque vraie en dimension finie.</p>` }
+  "nrm-cauchy": { t: "Suites de Cauchy", b: R`<div class="sbox">$$(f_p)\ \text{de Cauchy}\iff\forall\varepsilon>0,\ \exists N_0,\ \forall n\geqslant N_0,\ \forall p,\ N(f_{n+p}-f_n)\leqslant\varepsilon.$$</div>$$\text{convergente}\ \Longrightarrow\ \text{de Cauchy},\qquad\dim E\lt\infty:\ \text{de Cauchy}\ \Longrightarrow\ \text{convergente}.$$` }
 });
 const figTente = GRAPH({ w: 440, h: 220, x: [-0.05, 1.05], y: [-0.15, 1.2], xt: [0.25, 0.5, 1], xtl: ["1/(2n)", "1/n", "1"], yt: [1], xl: "t",
   curves: [{ f: t => t < 0 ? NaN : t <= 0.25 ? t / 0.25 : t <= 0.5 ? (0.5 - t) / 0.25 : 0, c: "b", n: 400, lab: [0.3, 0.92, "gₙ", "start"] }] },

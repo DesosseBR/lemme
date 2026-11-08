@@ -72,7 +72,7 @@ LEMME.rappels({
   "ph-coulomb": { t: "Potentiel et énergie électrostatiques", b: R`$$V = \frac q{4\pi\varepsilon_0r},\qquad E_{\text{int}} = \frac12\sum_iq_iV_i,\qquad E = qV_{\text{ext}}.$$` },
   "ph-laplace": { t: "Équation de Laplace", b: R`$$\operatorname{div}\vec E = 0,\ \vec E = -\overrightarrow{\operatorname{grad}}V\ \Longrightarrow\ \Delta V = 0,\qquad\Delta V = \frac1r\frac\partial{\partial r}\Big(r\frac{\partial V}{\partial r}\Big)+\frac1{r^2}\frac{\partial^2V}{\partial\theta^2}.$$` },
   "ph-hooke": { t: "Loi de Hooke et ressort équivalent", b: R`$$\frac{\delta\ell}{\ell_0} = \frac1E\frac F{S_0}\iff F = k\,\delta\ell,\quad k = \frac{ES_0}{\ell_0};\qquad N\text{ en parallèle : }k_{\text{éq}} = Nk.$$` },
-  "ph-polaire": { t: "Accélération en coordonnées polaires", b: R`<p>Pour un mouvement circulaire de rayon $\ell$ : $\vec a = -\ell\dot\theta^2\vec e_r+\ell\ddot\theta\,\vec e_\theta$.</p>` },
+  "ph-polaire": { t: "Accélération en coordonnées polaires", b: R`<div class="sbox">$$\vec a = (\ddot r-r\dot\theta^2)\,\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec e_\theta.$$</div><p>Mouvement circulaire ($r = \ell$) :</p>$$\vec a = -\ell\dot\theta^2\,\vec e_r+\ell\ddot\theta\,\vec e_\theta.$$` },
   "ph-alembert": { t: "Équation de d'Alembert", b: R`$$\frac{\partial^2z}{\partial t^2}-c^2\frac{\partial^2z}{\partial x^2} = 0\iff z = f(x-ct)+g(x+ct).$$$$\text{Corde fixée en }0,\ell\ :\quad k_n = \frac{n\pi}\ell,\qquad f_n = \frac{nc}{2\ell}.$$` }
 });
 

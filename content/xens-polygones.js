@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "pg-wan": { t: "Théorème de Wantzel (admis)", b: R`$$z\text{ constructible}\iff\exists\,\mathbb Q = L_0\subset\dots\subset L_r,\ [L_{i+1}:L_i] = 2,\ z\in L_r\ \Longrightarrow\ [\mathbb Q(z):\mathbb Q] = 2^k.$$` },
   "pg-cyc": { t: "Polynômes cyclotomiques (admis)", b: R`$$\Phi_m\text{ irréductible},\quad\deg\Phi_m = \varphi(m),\quad\Phi_m = \pi_{e^{2i\pi/m}};\qquad\Phi_p = 1+X+\dots+X^{p-1}.$$` },
-  "pg-tel": { t: "Base télescopique", b: R`<p>Si $L\subset M\subset N$ sont des corps (extensions finies), $[N:L] = [N:M][M:L]$.</p>` }
+  "pg-tel": { t: "Base télescopique", b: R`<div class="sbox">$$L\subset M\subset N\ \text{corps},\ [N:L]\lt\infty\ \Longrightarrow\ [N:L] = [N:M]\,[M:L].$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Un nombre complexe est <b>constructible</b> s'il s'obtient à partir de $0$ et $1$ par une suite finie d'intersections de droites et de cercles construits à partir de points déjà obtenus (règle et compas). Le polygone régulier à $m$ côtés est constructible si et seulement si $\omega_m = e^{2i\pi/m}$ l'est. Pour une extension de corps $L\subset M$, $[M:L]$ est la dimension de $M$ comme $L$-espace vectoriel.</p>`;

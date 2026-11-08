@@ -56,7 +56,7 @@ LEMME.rappels({
   "k-pe": { t: "Caractériser une partie entière", b: R`<div class="sbox">$$\lfloor y\rfloor = m\iff m\in\mathbb Z\ \wedge\ m\leqslant y\lt m+1.$$</div>$$N\in\mathbb Z,\ N\leqslant y\ \Longrightarrow\ N\leqslant\lfloor y\rfloor.$$<ul><li>$3\leqslant\pi\lt4\Rightarrow\lfloor\pi\rfloor = 3$ ;</li><li>$\lfloor-0{,}5\rfloor = -1$.</li></ul>` },
   "k-dense": { t: "Partie dense", b: R`<div class="sbox">$$\begin{aligned}A\text{ dense dans }I&\iff \forall x\in I,\ \forall\varepsilon>0,\ \exists a\in A,\ |x-a|\leqslant\varepsilon\\&\iff \forall x\in I,\ \exists(a_n)\in A^{\mathbb N},\ a_n\to x.\end{aligned}$$</div><p>$\mathbb Q$ dense dans $\mathbb R$ ; $\mathbb Z$ non : $\forall k\in\mathbb Z$, $|k-\frac12|\geqslant\frac12$.</p>` },
   "k-grille": { t: "Les multiples d'un petit nombre", b: R`<p>$0\lt\delta\leqslant\varepsilon$, $x\in\mathbb R$, $k = \lfloor x/\delta\rfloor$ :</p><div class="sbox">$$k\delta\leqslant x\lt(k+1)\delta\ \Longrightarrow\ 0\leqslant x-k\delta\lt\delta\leqslant\varepsilon.$$</div>$$\forall x\in\mathbb R,\ \exists k\in\mathbb Z,\quad|x-k\delta|\lt\varepsilon.$$` },
-  "k-lip-sin": { t: "Sinus et cosinus sont 1-lipschitziennes", b: R`<p>Par l'inégalité des accroissements finis ($|\sin'| = |\cos|\leqslant1$) :</p><div class="sbox">$$\forall a,b\in\mathbb R,\quad|\sin a-\sin b|\leqslant|a-b|,\qquad|\cos a-\cos b|\leqslant|a-b|.$$</div>` },
+  "k-lip-sin": { t: "Sinus et cosinus sont 1-lipschitziennes", b: R`$$|\sin'| = |\cos|\leqslant1,\qquad|\cos'| = |\sin|\leqslant1.$$<div class="sbox">$$\forall a,b\in\mathbb R,\quad|\sin a-\sin b|\leqslant|a-b|,\qquad|\cos a-\cos b|\leqslant|a-b|.$$</div>` },
   "k-sous-groupe": { t: "Sous-groupe", b: R`<div class="sbox">$$G\leqslant(\mathbb R,+)\iff0\in G\ \wedge\ \forall x,y\in G,\ x-y\in G.$$</div>$$\Longrightarrow\ x+y\in G,\quad kx\in G\ (k\in\mathbb Z).$$<ul><li><b>Exemples</b> : $\mathbb Z$, $3\mathbb Z$, $\mathbb Q$, $\mathbb Z+\sqrt2\,\mathbb Z$ ;</li><li><b>Contre-exemple</b> : $\mathbb N$, car $-1\notin\mathbb N$.</li></ul>` },
   "k-borne-inf": { t: "Borne inférieure", b: R`$$X\subset\mathbb R,\ X\neq\emptyset,\ X\text{ minorée}\ \Longrightarrow\ \inf X\text{ existe}.$$<div class="sbox">$$a = \inf X\iff\left\{\begin{aligned}&\forall x\in X,\ a\leqslant x,\\&\forall\varepsilon>0,\ \exists x\in X,\ x\lt a+\varepsilon.\end{aligned}\right.$$</div>$$\inf\,]0,1] = 0\notin\,]0,1].$$` },
   "k-limite-suite": { t: "Définition d'une limite", b: R`<div class="sbox">$$u_n\to\ell\iff\forall\varepsilon>0,\ \exists N,\ \forall n\geqslant N,\ |u_n-\ell|< \varepsilon.$$</div><div class="sbox">$$u_n\to+\infty\iff\forall A,\ \exists N,\ \forall n\geqslant N,\ u_n\geqslant A.$$</div>` }
@@ -211,7 +211,7 @@ LEMME.rappels({
   "k-poly-racines-unite": { t: "Factorisation de Xⁿ − 1", b: R`<p>$\omega = e^{2i\pi/n}$ :</p><div class="sbox">$$X^n-1 = \prod_{k=0}^{n-1}(X-\omega^k),\qquad1+X+\dots+X^{n-1} = \prod_{k=1}^{n-1}(X-\omega^k).$$</div>` },
   "k-module": { t: "Module d'un complexe", b: R`<div class="sbox">$$|z|^2 = z\bar z,\qquad|z+w|^2 = |z|^2+|w|^2+2\operatorname{Re}(z\bar w).$$</div><p>Pour $|z| = 1$ : $\bar z = \dfrac1z$.</p>` },
   "k-rolle": { t: "Théorème de Rolle", b: R`<div class="sbox">$$f\in\mathcal C^0([a,b])\cap\mathcal D(]a,b[),\ f(a) = f(b)\ \Longrightarrow\ \exists c\in\,]a,b[,\ f'(c) = 0.$$</div><p><b>Contre-exemple</b> (non dérivable) :</p>$$f(x) = |x|\text{ sur }[-1,1],\qquad f'(x) = \pm1\neq0.$$` },
-  "k-multiplicite": { t: "Racine multiple et dérivée", b: R`<p>$x_0$ est racine de multiplicité $m\geqslant1$ de $P$ si et seulement si $P(x_0) = P'(x_0) = \dots = P^{(m-1)}(x_0) = 0$ et $P^{(m)}(x_0)\neq0$.</p><div class="sbox">$$x_0\ \text{racine d'ordre}\ m\ \text{de}\ P\ \Longrightarrow\ x_0\ \text{racine d'ordre}\ m-1\ \text{de}\ P'.$$</div>` },
+  "k-multiplicite": { t: "Racine multiple et dérivée", b: R`<div class="sbox">$$x_0\ \text{racine d'ordre}\ m\iff P(x_0) = \dots = P^{(m-1)}(x_0) = 0\ \wedge\ P^{(m)}(x_0)\neq0.$$</div>$$x_0\ \text{d'ordre}\ m\ \text{pour}\ P\ \Longrightarrow\ x_0\ \text{d'ordre}\ m-1\ \text{pour}\ P'.$$` },
   "k-scinde": { t: "Polynôme scindé", b: R`<div class="sbox">$$P\text{ scindé sur }\mathbb R\iff P = c\prod_{i}(X-x_i)^{m_i},\ x_i\in\mathbb R\iff\sum_im_i = \deg P.$$</div><ul><li>$X^3-X = X(X-1)(X+1)$ : scindé ;</li><li>$X^2+1$ : non scindé sur $\mathbb R$.</li></ul>` }
 });
 
@@ -318,7 +318,7 @@ LEMME.exercises([
 LEMME.rappels({
   "k-base-echelonnee": { t: "Famille échelonnée en degré", b: R`<div class="sbox">$$\deg P_k = k\ (0\leqslant k\leqslant n)\ \Longrightarrow\ (P_0,\dots,P_n)\ \text{base de}\ \mathbb K_n[X].$$</div>$$\text{libre (plus haut degré)},\qquad n+1 = \dim\mathbb K_n[X].$$` },
   "k-binom-def": { t: "Coefficient binomial", b: R`<div class="sbox">$$\binom kn = \frac{k(k-1)\cdots(k-n+1)}{n!} = \frac{k!}{n!\,(k-n)!}\in\mathbb N\quad(0\leqslant n\leqslant k).$$</div>$$\binom kn = \big|\{A\subset[\![1,k]\!] : |A| = n\}\big|,\qquad n>k\Rightarrow\binom kn = 0,$$$$\binom{k}{n}+\binom{k}{n+1} = \binom{k+1}{n+1}.$$` },
-  "k-leibniz": { t: "Formule de Leibniz", b: R`<div class="sbox">$$(fg)^{(n)} = \sum_{k=0}^n\binom nk f^{(k)}g^{(n-k)}.$$</div><p>Utile pour dériver $n$ fois un produit comme $(X-1)^n(X+1)^n$.</p>` },
+  "k-leibniz": { t: "Formule de Leibniz", b: R`<div class="sbox">$$(fg)^{(n)} = \sum_{k=0}^n\binom nk f^{(k)}g^{(n-k)}.$$</div><h5>Exemple</h5>$$\big((X-1)^n(X+1)^n\big)^{(n)} = \sum_{k=0}^n\binom nk\frac{n!}{(n-k)!}(X-1)^{n-k}\frac{n!}{k!}(X+1)^k.$$` },
   "k-ipp": { t: "Intégration par parties", b: R`<p>Pour $u,v$ de classe $\mathcal C^1$ sur $[a,b]$ :</p><div class="sbox">$$\int_a^bu'v = \big[uv\big]_a^b-\int_a^buv'.$$</div>` },
   "k-signe-integrale": { t: "Intégrale d'une fonction de signe constant", b: R`<div class="sbox">$$h\in\mathcal C^0([a,b]),\ h\geqslant0,\ h\neq0\ \Longrightarrow\ \int_a^bh>0.$$</div><p><b>Équivalent</b> :</p>$$h\in\mathcal C^0,\ h\geqslant0,\ \int_a^bh = 0\ \Longrightarrow\ h = 0.$$` },
   "k-cos-somme": { t: "Somme de deux cosinus", b: R`<div class="sbox">$$\cos(a+b)+\cos(a-b) = 2\cos a\cos b.$$</div><p>On l'obtient en ajoutant $\cos(a\pm b) = \cos a\cos b\mp\sin a\sin b$.</p>` },
@@ -413,11 +413,11 @@ LEMME.exercises([
 
 /* ---------- MPSI · 4. Polynômes (2) ---------- */
 LEMME.rappels({
-  "k-pythagore": { t: "Théorème de Pythagore", b: R`<div class="sbox">$$x\perp y\ \Longrightarrow\ \|x+y\|^2 = \|x\|^2+\|y\|^2.$$</div><p>Conséquence : si $x\perp y$, alors $\|x+y\|\geqslant\|x\|$, avec égalité si et seulement si $y = 0$.</p>` },
-  "k-ps-def": { t: "Montrer qu'on a un produit scalaire", b: R`$$\langle\cdot,\cdot\rangle\text{ produit scalaire}\iff\left\{\begin{aligned}&\text{bilinéaire},\\&\langle P,Q\rangle = \langle Q,P\rangle,\\&\langle P,P\rangle\geqslant0,\\&\langle P,P\rangle = 0\Rightarrow P = 0.\end{aligned}\right.$$<p>Défini (intégrale) : $g$ continue $\geqslant0$, $\int g = 0\Rightarrow g = 0$, puis infinité de racines $\Rightarrow P = 0$.</p>` },
+  "k-pythagore": { t: "Théorème de Pythagore", b: R`<div class="sbox">$$x\perp y\ \Longrightarrow\ \|x+y\|^2 = \|x\|^2+\|y\|^2.$$</div>$$x\perp y\ \Longrightarrow\ \|x+y\|\geqslant\|x\|,\qquad\text{égalité}\iff y = 0.$$` },
+  "k-ps-def": { t: "Montrer qu'on a un produit scalaire", b: R`$$\langle\cdot,\cdot\rangle\ \text{produit scalaire}\iff\left\{\begin{aligned}&\text{bilinéaire},\\&\langle P,Q\rangle = \langle Q,P\rangle,\\&\langle P,P\rangle\geqslant0,\\&\langle P,P\rangle = 0\Rightarrow P = 0.\end{aligned}\right.$$<p><b>Caractère défini</b> pour $\langle P,Q\rangle = \int_a^bPQ\,w$ :</p>$$\int_a^bP^2w = 0\ \Rightarrow\ P^2w = 0\ \text{sur}\ [a,b]\ \Rightarrow\ P\ \text{a une infinité de racines}\ \Rightarrow\ P = 0.$$` },
   "k-convexe-comb": { t: "Combinaison convexe", b: R`<div class="sbox">$$\mu_k\geqslant0,\ \ \sum_k\mu_k = 1\ \Longrightarrow\ \sum_k\mu_k\alpha_k\in\operatorname{Conv}(\alpha_1,\dots,\alpha_n).$$</div><p>$\operatorname{Conv}$ : plus petit convexe contenant les $\alpha_k$.</p>` },
   "k-derivee-log": { t: "Dérivée logarithmique d'un polynôme scindé", b: R`<p>$P = c\prod_{k=1}^n(X-\alpha_k)$ (multiplicités comprises) :</p>$$P' = c\sum_{k=1}^n\prod_{j\neq k}(X-\alpha_j).$$<div class="sbox">$$\frac{P'}{P} = \sum_{k=1}^n\frac1{X-\alpha_k}.$$</div>` },
-  "k-relations-coef": { t: "Relations coefficients-racines", b: R`<p>Si $P = X^n+a_{n-1}X^{n-1}+\dots+a_0$ a pour racines $z_1,\dots,z_n$ (avec multiplicité) :</p><div class="sbox">$$z_1+\dots+z_n = -a_{n-1},\qquad z_1z_2\cdots z_n = (-1)^na_0.$$</div>` }
+  "k-relations-coef": { t: "Relations coefficients-racines", b: R`<p>$P = X^n+a_{n-1}X^{n-1}+\dots+a_0 = \prod_{i=1}^n(X-z_i)$ :</p><div class="sbox">$$\sum_{i=1}^nz_i = -a_{n-1},\qquad\prod_{i=1}^nz_i = (-1)^na_0.$$</div>` }
 });
 
 (() => {
@@ -508,9 +508,9 @@ LEMME.rappels({
   "k-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\neg B\Rightarrow\neg A).$$</div><p><b>Exemple</b> :</p>$$\Big(\sum u_n\ \text{converge}\Rightarrow u_n\to0\Big)\iff\Big(u_n\not\to0\Rightarrow\sum u_n\ \text{diverge}\Big).$$` },
   "k-binome-conj": { t: "Binôme et nombres conjugués", b: R`<p>$a,d\in\mathbb N$ ; $\sqrt d\mapsto-\sqrt d$ change le signe des puissances impaires :</p><div class="sbox">$$(a+\sqrt d)^n+(a-\sqrt d)^n = 2\sum_{k\ \text{pair}}\binom nk a^{n-k}d^{k/2}\in2\mathbb Z.$$</div>` },
   "k-sin-periode": { t: "Sinus et multiples de 2π", b: R`<div class="sbox">$$\sin(x+2m\pi) = \sin x,\qquad\sin(-x) = -\sin x\qquad(m\in\mathbb Z).$$</div>` },
-  "k-equiv-sin": { t: "Équivalent du sinus en 0", b: R`<div class="sbox">$$\sin x\underset{x\to0}{\sim}x,\qquad|\sin x|\leqslant|x|.$$</div><p>Pour une suite : si $\varepsilon_n\to0$, alors $\sin\varepsilon_n\sim\varepsilon_n$.</p>` },
+  "k-equiv-sin": { t: "Équivalent du sinus en 0", b: R`<div class="sbox">$$\sin x\underset{x\to0}{\sim}x,\qquad\forall x,\ |\sin x|\leqslant|x|.$$</div>$$\varepsilon_n\to0\ \Longrightarrow\ \sin\varepsilon_n\sim\varepsilon_n.$$` },
   "k-cauchy-series": { t: "Reste d'une série convergente", b: R`$$\sum u_k\text{ converge}\ \Longrightarrow\ R_n = \sum_{k>n}u_k\xrightarrow[n\to\infty]{}0.$$<p><b>Termes positifs</b> :</p><div class="sbox">$$\forall m>n,\quad0\leqslant\sum_{k=n+1}^{m}u_k\leqslant R_n.$$</div>` },
-  "k-wallis-ipp": { t: "Récurrence des intégrales de Wallis", b: R`<p>En écrivant $\sin^n = \sin^{n-1}\cdot\sin$ et en intégrant par parties :</p><div class="sbox">$$W_n = \frac{n-1}{n}W_{n-2},\qquad W_0 = \frac\pi2,\quad W_1 = 1.$$</div>` },
+  "k-wallis-ipp": { t: "Récurrence des intégrales de Wallis", b: R`$$W_n = \int_0^{\pi/2}\sin^nt\,dt,\qquad\sin^n = \sin^{n-1}\cdot\sin\ \xrightarrow{\ \text{IPP}\ }$$<div class="sbox">$$W_n = \frac{n-1}{n}W_{n-2},\qquad W_0 = \frac\pi2,\quad W_1 = 1.$$</div>` },
   "k-serie-telesc": { t: "Suite et série des différences", b: R`<div class="sbox">$$a_n = a_0+\sum_{k=0}^{n-1}(a_{k+1}-a_k)\quad\Longrightarrow\quad(a_n)\ \text{converge}\iff\sum(a_{n+1}-a_n)\ \text{converge}.$$</div>` }
 });
 
@@ -649,10 +649,10 @@ LEMME.exercises([
 /* ---------- MPSI · 7. Espaces vectoriels · 8. Matrices ---------- */
 LEMME.rappels({
   "k-nilp-strict": { t: "Un nilpotent fait baisser la dimension", b: R`<p>$u$ nilpotent, $F\neq\{0\}$, $u(F)\subset F$ :</p>$$\ker u\cap F\neq\{0\},\qquad\dim u(F) = \dim F-\dim(\ker u\cap F).$$<div class="sbox">$$\dim u(F)\lt\dim F.$$</div>` },
-  "k-commute-stable": { t: "Endomorphismes qui commutent", b: R`<p>Si $u\circ v = v\circ u$, alors $\operatorname{Im}v$ et $\ker v$ sont stables par $u$ :</p><div class="sbox">$$u(v(x)) = v(u(x))\in\operatorname{Im}v,\qquad v(x) = 0\Rightarrow v(u(x)) = u(v(x)) = 0.$$</div>` },
+  "k-commute-stable": { t: "Endomorphismes qui commutent", b: R`<div class="sbox">$$u\circ v = v\circ u\ \Longrightarrow\ u(\operatorname{Im}v)\subset\operatorname{Im}v,\quad u(\ker v)\subset\ker v.$$</div>$$u(v(x)) = v(u(x)),\qquad v(x) = 0\Rightarrow v(u(x)) = u(0) = 0.$$` },
   "k-rang-restreint": { t: "Théorème du rang sur un sous-espace", b: R`<div class="sbox">$$f\in\mathcal L(E),\ F\subset E\ :\quad\dim F = \dim f(F)+\dim(F\cap\ker f).$$</div><p>(Théorème du rang appliqué à $f_{|F} : F\to E$.)</p>` },
   "k-famille-cyclique": { t: "Famille (a, f(a), …) d'un nilpotent", b: R`$$f^{p-1}(a)\neq0,\ f^p(a) = 0\ \Longrightarrow\ \big(a,f(a),\dots,f^{p-1}(a)\big)\text{ libre}.$$<p>Appliquer $f^{p-1}$ à $\sum\lambda_kf^k(a) = 0$ : $\lambda_0 = 0$ ; puis $f^{p-2}$…</p>` },
-  "k-mat-endo": { t: "Matrice d'un endomorphisme", b: R`<p>La colonne $j$ de $\operatorname{Mat}_{\mathcal B}(f)$ contient les coordonnées de $f(e_j)$ dans $\mathcal B$. Et :</p><div class="sbox">$$\operatorname{Mat}(f\circ g) = \operatorname{Mat}(f)\operatorname{Mat}(g),\qquad\operatorname{Mat}(f^{-1}) = \operatorname{Mat}(f)^{-1}.$$</div>` },
+  "k-mat-endo": { t: "Matrice d'un endomorphisme", b: R`<div class="sbox">$$\operatorname{Mat}_{\mathcal B}(f) = \big(\text{coord}_{\mathcal B}(f(e_1))\,|\cdots|\,\text{coord}_{\mathcal B}(f(e_n))\big).$$</div>$$\operatorname{Mat}(f\circ g) = \operatorname{Mat}(f)\operatorname{Mat}(g),\qquad\operatorname{Mat}(f^{-1}) = \operatorname{Mat}(f)^{-1}.$$` },
   "k-ker-inv": { t: "Inversibilité et noyau", b: R`<div class="sbox">$$A\in\mathcal M_n(\mathbb K)\ \text{inversible}\iff\ker A = \{0\}\iff\big(AX = 0\Rightarrow X = 0\big).$$</div>` }
 });
 

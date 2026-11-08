@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "kr-coef": { t: "Relations coefficients-racines", b: R`$$\prod_{i = 1}^n(X-z_i) = X^n+\sum_{k = 1}^n(-1)^k\sigma_kX^{n-k},\qquad\sigma_k = \sum_{|I| = k}\prod_{i\in I}z_i.$$` },
   "kr-comp": { t: "Matrice compagnon", b: R`$$\chi_{C_P} = P;\qquad C_P\sim T,\ \operatorname{diag}T = (z_i)\ \Longrightarrow\ \chi_{C_P^k} = \prod_i(X-z_i^k).$$` },
-  "kr-cyc": { t: "Polynômes cyclotomiques", b: R`<p>$X^N-1 = \prod_{d\mid N}\Phi_d$, où les $\Phi_d\in\mathbb Z[X]$ sont unitaires et irréductibles sur $\mathbb Q$.</p>` }
+  "kr-cyc": { t: "Polynômes cyclotomiques", b: R`<div class="sbox">$$X^N-1 = \prod_{d\mid N}\Phi_d,\qquad\Phi_d = \prod_{\substack{1\leqslant k\leqslant d\\k\wedge d = 1}}\big(X-e^{2ik\pi/d}\big)\in\mathbb Z[X].$$</div>$$\Phi_d\ \text{unitaire},\ \text{irréductible sur}\ \mathbb Q,\qquad\deg\Phi_d = \varphi(d).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\overline{\mathbb D} = \{z\in\mathbb C : |z|\leqslant1\}$. Pour $n\geqslant1$, $\Omega_n$ est l'ensemble des polynômes <b>unitaires</b> de $\mathbb Z[X]$, de degré $n$, dont toutes les racines complexes sont dans $\overline{\mathbb D}$. On veut montrer le <b>théorème de Kronecker</b> : si $P\in\Omega_n$ et $P(0)\neq0$, toutes les racines de $P$ sont des racines de l'unité.</p>`;

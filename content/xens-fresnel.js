@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "fr-dom": { t: "Dérivation sous l'intégrale", b: R`$$|\partial_xg(x,t)|\leqslant h(t),\ h\text{ intégrable}\ \Longrightarrow\ \frac d{dx}\int g(x,t)\,dt = \int\partial_xg(x,t)\,dt.$$` },
-  "fr-gam": { t: "Fonction Gamma", b: R`<p>$\Gamma(\alpha) = \int_0^{+\infty}e^{-t}t^{\alpha-1}dt$ pour $\alpha>0$ ; $\Gamma(\frac12) = \sqrt\pi$ (par $t = x^2$ et l'intégrale de Gauss).</p>` },
+  "fr-gam": { t: "Fonction Gamma", b: R`<div class="sbox">$$\Gamma(\alpha) = \int_0^{+\infty}e^{-t}t^{\alpha-1}\,dt\ (\alpha>0),\qquad\Gamma\Big(\frac12\Big) = \sqrt\pi.$$</div>$$t = x^2:\quad\Gamma\Big(\frac12\Big) = 2\int_0^{+\infty}e^{-x^2}dx.$$` },
   "fr-ipp": { t: "Intégrale semi-convergente", b: R`<p>$-1\leqslant\beta\lt0$ :</p>$$\begin{aligned}\int_1^{+\infty}u^\beta e^{iu}\,du &= \Big[-iu^\beta e^{iu}\Big]_1^{+\infty}+i\beta\int_1^{+\infty}u^{\beta-1}e^{iu}\,du,\end{aligned}$$<p>la dernière intégrale étant absolument convergente.</p>` }
 });
 

@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "li-exp": { t: "Décroissance de e^{tA}", b: R`$$\forall\lambda\in\operatorname{Sp}A,\ \operatorname{Re}\lambda\lt0\ \Longrightarrow\ \exists K,a>0,\ \forall t\geqslant0,\ |||e^{tA}|||\leqslant Ke^{-at}.$$` },
   "li-sort": { t: "Théorème de sortie de tout compact", b: R`$$y\text{ maximale sur }[0,d[,\ d\lt+\infty\ \Longrightarrow\ \|y(t)\|\xrightarrow[t\to d]{}+\infty;\qquad y\text{ bornée}\Rightarrow d = +\infty.$$` },
-  "li-gron": { t: "Lemme de type Grönwall", b: R`<p>Si $\varphi$ est dérivable et $\varphi'\leqslant-\beta\varphi$ sur $[0,T]$, alors $(e^{\beta t}\varphi)'\leqslant0$ et $\varphi(t)\leqslant\varphi(0)e^{-\beta t}$.</p>` }
+  "li-gron": { t: "Lemme de type Grönwall", b: R`<div class="sbox">$$\varphi'\leqslant-\beta\varphi\ \text{sur}\ [0,T]\ \Longrightarrow\ \big(e^{\beta t}\varphi\big)'\leqslant0\ \Longrightarrow\ \varphi(t)\leqslant\varphi(0)e^{-\beta t}.$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $f : \mathbb R^n\to\mathbb R^n$ est de classe $\mathcal C^1$, $f(0) = 0$, et $A = Df(0)$ a toutes ses valeurs propres de partie réelle strictement négative. On considère $y' = f(y)$, $y(0) = y_0$, et sa solution maximale. $\mathbb R^n$ est euclidien. On veut montrer le <b>théorème de Liapounov</b> : il existe $\rho>0$ tel que si $\|y_0\|\lt\rho$, la solution est définie sur $[0,+\infty[$ et $\|y(t)\|\leqslant Ce^{-\gamma t}\|y_0\|$ ($C,\gamma>0$).</p>`;

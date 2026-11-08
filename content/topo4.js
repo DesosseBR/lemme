@@ -4,7 +4,7 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-sousmult": { t: "Norme sous-multiplicative (norme d'algèbre)", b: R`$$\|AB\|\leqslant\|A\|\,\|B\|\ \Longrightarrow\ \|A^k\|\leqslant\|A\|^k,\qquad\forall\lambda\in\operatorname{Sp}A,\ |\lambda|\leqslant\|A\|.$$<p>Toute norme subordonnée $\|A\| = \sup_{N(X) = 1}N(AX)$ est sous-multiplicative.</p>` },
+  "nrm-sousmult": { t: "Norme sous-multiplicative (norme d'algèbre)", b: R`<div class="sbox">$$\|AB\|\leqslant\|A\|\,\|B\|\ \Longrightarrow\ \|A^k\|\leqslant\|A\|^k,\qquad\forall\lambda\in\operatorname{Sp}A,\ |\lambda|\leqslant\|A\|.$$</div>$$\|A\| = \sup_{N(X) = 1}N(AX)\ \Longrightarrow\ \|\cdot\|\ \text{sous-multiplicative}.$$` },
   "nrm-compact": { t: "Bornes atteintes", b: R`$$\begin{gathered}f : K\to\mathbb R\text{ continue},\ K\text{ compact}\neq\varnothing\Rightarrow\min,\max\text{ atteints},\\[4pt]\dim E\lt\infty\ :\ \text{compact}\iff\text{fermé borné}.\end{gathered}$$` },
   "nrm-sep": { t: "Séparation par les racines", b: R`$$\deg P\leqslant n,\ \operatorname{Card}\{\text{racines}\}\geqslant n+1\ \Longrightarrow\ P = 0.$$` }
 });

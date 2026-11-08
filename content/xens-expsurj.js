@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "es-inv": { t: "Inversion locale", b: R`$$Df(a)\text{ isomorphisme}\ \Longrightarrow\ \exists V\ni a,\ f(V)\text{ ouvert},\ f : V\to f(V)\ \mathcal C^1\text{-difféomorphisme}.$$` },
   "es-ouf": { t: "Sous-groupes ouverts", b: R`$$H\leqslant G\text{ ouvert}\ \Longrightarrow\ G\setminus H = \bigcup_{g\notin H}gH\text{ ouvert}\Rightarrow H\text{ fermé};\qquad G\text{ connexe}\Rightarrow H = G.$$` },
-  "es-ch": { t: "Inverse polynomial", b: R`<p>Si $M\in GL_n(\mathbb C)$, Cayley-Hamilton donne $\chi_M(M) = 0$ avec $\chi_M(0) = \pm\det M\neq0$, d'où $M^{-1}\in\mathbb C[M]$.</p>` }
+  "es-ch": { t: "Inverse polynomial", b: R`$$\chi_M(M) = 0,\qquad\chi_M = X^n+\dots+a_0,\qquad a_0 = \chi_M(0) = (-1)^n\det M\neq0.$$<div class="sbox">$$M^{-1} = -\frac1{a_0}\big(M^{n-1}+\dots+a_1I_n\big)\in\mathbb C[M].$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour $C\in\mathcal M_n(\mathbb C)$, on note $\mathbb C[C] = \{P(C) : P\in\mathbb C[X]\}$ et $\mathbb C[C]^* = \mathbb C[C]\cap GL_n(\mathbb C)$. On admet que $\exp(A+B) = \exp A\exp B$ si $AB = BA$, et que $\exp$ est de classe $\mathcal C^1$ avec $D\exp(0) = \mathrm{id}$. On veut montrer que $\exp : \mathcal M_n(\mathbb C)\to GL_n(\mathbb C)$ est <b>surjective</b>.</p>`;

@@ -11,7 +11,7 @@ LEMME.rappels({
   "fr-cyc": { t: "Générateurs d'un groupe cyclique", b: R`$$\begin{gathered}|G| = m\text{ cyclique}\ :\ \varphi(m)\text{ générateurs},\\[4pt]\forall d\mid m,\ \varphi(d)\text{ éléments d'ordre }d,\\[4pt]\varphi(ab) = \varphi(a)\varphi(b)\ (a\wedge b = 1).\end{gathered}$$` },
   "fr-classe": { t: "Classes de conjugaison", b: R`$$|C(y)| = [G:Z_G(y)] = \frac{|G|}{|Z_G(y)|},\qquad Z_G(y) = \{x : xy = yx\}.$$` },
   "fr-sylow": { t: "Théorèmes de Sylow", b: R`$$|G| = p^am,\ p\nmid m\ :\quad\exists P,\ |P| = p^a;\quad\text{tous conjugués};\quad n_p\mid m,\quad n_p\equiv1\pmod p.$$` },
-  "fr-a5": { t: "Sous-groupes de A5", b: R`$$H\leqslant\mathfrak A_5\ \Longrightarrow\ |H|\in\{1,2,3,4,5,6,10,12,60\}.$$<p>Ordre $10$ : diédral, unique sous-groupe d'ordre $5$, distingué.</p>` }
+  "fr-a5": { t: "Sous-groupes de A5", b: R`<div class="sbox">$$H\leqslant\mathfrak A_5\ \Longrightarrow\ |H|\in\{1,2,3,4,5,6,10,12,60\}.$$</div>$$|H| = 10\ \Longrightarrow\ H\simeq D_5,\qquad\exists!K\leqslant H,\ |K| = 5,\qquad K\lhd H.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Objectif.</b> Démontrer le <b>théorème de Frobenius</b> : <i>si $G$ est un groupe fini d'ordre $N$, alors pour tout diviseur $n$ de $N$, le nombre d'éléments $x\in G$ tels que $x^n = 1$ est un multiple de $n$.</i></p><p class="pl-pre"><b>Notations.</b> $1$ est le neutre de $G$ ; pour $y\in G$, $\Gamma_y = \langle y\rangle$ est le sous-groupe engendré par $y$, et $Z_G(y) = \{x\in G : xy = yx\}$ le commutant de $y$. Pour $m\mid N$, on note $E_m = \{x\in G : x^m = 1\}$. Pour un entier $A\geqslant1$, $\Omega(A)$ désigne le nombre de facteurs premiers de $A$ comptés avec multiplicité ($\Omega(12) = 3$).</p>`;

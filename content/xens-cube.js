@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 10, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "cu-os": { t: "Orbite et stabilisateur", b: R`<p>Si $G$ agit sur $E$ : $|G| = |\operatorname{Orb}(x)|\cdot|\operatorname{Stab}(x)|$, et $\operatorname{Stab}(g\cdot x) = g\operatorname{Stab}(x)g^{-1}$ a le même cardinal que $\operatorname{Stab}(x)$.</p>` },
+  "cu-os": { t: "Orbite et stabilisateur", b: R`<div class="sbox">$$|G| = |\operatorname{Orb}(x)|\cdot|\operatorname{Stab}(x)|,\qquad\operatorname{Stab}(g\cdot x) = g\operatorname{Stab}(x)g^{-1}.$$</div>$$|\operatorname{Stab}(g\cdot x)| = |\operatorname{Stab}(x)|.$$` },
   "cu-phi": { t: "Indicatrice d'Euler", b: R`$$\begin{gathered}\varphi(d) = \operatorname{Card}\{k\in[\![1,d]\!] : k\wedge d = 1\},\\[4pt]\operatorname{Card}\{k\in[\![1,n]\!] : k\wedge n = \tfrac nd\} = \varphi(d),\\[4pt]\sum_{d\mid n}\varphi(d) = n.\end{gathered}$$` },
   "cu-cyc": { t: "Rotation de ℤ/nℤ", b: R`$$x\mapsto x+k\text{ sur }\mathbb Z/n\mathbb Z\ :\quad\operatorname{pgcd}(k,n)\text{ cycles de longueur }\frac n{\operatorname{pgcd}(k,n)}.$$` }
 });

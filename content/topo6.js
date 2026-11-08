@@ -4,9 +4,9 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-equiv": { t: "Comparer deux normes", b: R`$$N_2\text{ dominée par }N_1\iff\exists C,\ N_2\leqslant CN_1;\qquad\frac{N_2(x_n)}{N_1(x_n)}\to+\infty\ \Longrightarrow\ N_2\text{ non dominée}.$$<p>Dimension finie : toutes les normes sont équivalentes.</p>` },
+  "nrm-equiv": { t: "Comparer deux normes", b: R`<div class="sbox">$$N_2\ \text{dominée par}\ N_1\iff\exists C,\ N_2\leqslant CN_1.$$</div>$$\frac{N_2(x_n)}{N_1(x_n)}\to+\infty\ \Longrightarrow\ N_2\ \text{non dominée},\qquad\dim E\lt\infty\ \Longrightarrow\ \text{normes équivalentes}.$$` },
   "nrm-suites": { t: "Normes et convergence", b: R`$$N_2\leqslant CN_1,\ x_n\xrightarrow{N_1}\ell\ \Longrightarrow\ x_n\xrightarrow{N_2}\ell;\qquad\text{CV}\Rightarrow\text{bornée};\qquad N(x_n)\to+\infty\Rightarrow\text{DV}.$$` },
-  "nrm-edo": { t: "Résoudre y′ + ay = g", b: R`<p>Avec $f(0) = 0$ : $(fe^{at})' = (f'+af)e^{at}$, donc $f(x) = e^{-ax}\int_0^x\big(f'(t)+af(t)\big)e^{at}\,dt$. Pour $y''+y = g$ avec $y(0) = y'(0) = 0$ : $y(x) = \int_0^x\sin(x-t)\,g(t)\,dt$.</p>` }
+  "nrm-edo": { t: "Résoudre y′ + ay = g", b: R`<p>$f(0) = 0$ :</p><div class="sbox">$$(fe^{at})' = (f'+af)e^{at}\ \Longrightarrow\ f(x) = e^{-ax}\int_0^x\big(f'(t)+af(t)\big)e^{at}\,dt.$$</div>$$y''+y = g,\ y(0) = y'(0) = 0\ \Longrightarrow\ y(x) = \int_0^x\sin(x-t)\,g(t)\,dt.$$` }
 });
 const poly = (X, Y, pts, cls, st = "") => `<polygon points="${pts.map(([x, y]) => f1(X(x)) + "," + f1(Y(y))).join(" ")}" class="${cls}" style="${st}"/>`;
 const ell = a => Array.from({ length: 160 }, (_, k) => { const t = k * Math.PI / 80, r = 1 / Math.sqrt(1 + a * Math.sin(2 * t)); return [r * Math.cos(t), r * Math.sin(t)]; });

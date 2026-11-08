@@ -6,7 +6,7 @@ const { GRAPH } = window.__LA;
 LEMME.rappels({
   "eu-riesz": { t: "Représentation des formes linéaires", b: R`$$E\text{ euclidien},\ \varphi\in E^*\ \Longrightarrow\ \exists!\,a\in E,\ \forall x,\ \varphi(x) = (a|x);\qquad\varphi\neq0\Rightarrow a\perp\ker\varphi.$$` },
   "eu-colonnes": { t: "Produit scalaire sur les colonnes", b: R`$$\langle X,Y\rangle = {}^tXY,\qquad\langle AX,Y\rangle = \langle X,{}^tAY\rangle,\qquad\ker{}^tA = (\operatorname{Im}A)^\perp,\quad\operatorname{Im}{}^tA = (\ker A)^\perp.$$` },
-  "eu-lagrange": { t: "Interpolation de Lagrange", b: R`<p>Pour $x_0,\dots,x_n$ distincts, $L_k = \prod_{j\neq k}\frac{X-x_j}{x_k-x_j}$ vérifie $L_k(x_j) = \delta_{jk}$, et tout $P\in\mathbb R_n[X]$ s'écrit $P = \sum_{k=0}^nP(x_k)L_k$.</p>` },
+  "eu-lagrange": { t: "Interpolation de Lagrange", b: R`<p>$x_0,\dots,x_n$ distincts :</p><div class="sbox">$$L_k = \prod_{j\neq k}\frac{X-x_j}{x_k-x_j},\qquad L_k(x_j) = \delta_{jk},\qquad\forall P\in\mathbb R_n[X],\ P = \sum_{k=0}^nP(x_k)L_k.$$</div>` },
   "eu-leibniz": { t: "Formule de Leibniz", b: R`<p>$(fg)^{(n)} = \sum_{k=0}^n\binom nkf^{(k)}g^{(n-k)}$. Cas utile : $(xg)^{(n)} = xg^{(n)}+ng^{(n-1)}$.</p>` }
 });
 const figLeg = GRAPH({ w: 460, h: 250, x: [-1, 1], y: [-1.1, 1.1], xt: [-1, -0.5, 0.5, 1], xtl: ["−1", "−0,5", "0,5", "1"], yt: [-1, -0.5, 0.5, 1], ytl: ["−1", "−0,5", "0,5", "1"], xl: "x",

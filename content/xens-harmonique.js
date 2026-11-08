@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 1, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "hm-som": { t: "Sommation des équivalents (restes)", b: R`<p>Si $u_n\sim v_n$ avec $v_n\geqslant0$ et $\sum v_n$ convergente, alors $\sum u_n$ converge et $\sum_{k>n}u_k\sim\sum_{k>n}v_k$.</p>` },
+  "hm-som": { t: "Sommation des équivalents (restes)", b: R`<div class="sbox">$$u_n\sim v_n,\ v_n\geqslant0,\ \sum v_n\ \text{CV}\ \Longrightarrow\ \sum u_n\ \text{CV},\quad\sum_{k>n}u_k\sim\sum_{k>n}v_k.$$</div>` },
   "hm-si": { t: "Comparaison série-intégrale", b: R`$$\varphi\searrow\geqslant0\ :\quad\int_k^{k+1}\varphi\leqslant\varphi(k)\leqslant\int_{k-1}^k\varphi.$$` },
   "hm-adj": { t: "Suites adjacentes", b: R`$$(u_n)\searrow,\ (v_n)\nearrow,\ u_n-v_n\to0\ \Longrightarrow\ u_n,v_n\to\ell,\quad v_n\leqslant\ell\leqslant u_n.$$` }
 });

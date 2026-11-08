@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "zn-crt": { t: "Théorème chinois", b: R`$$n = \prod p_i^{a_i}\ :\quad\mathbb Z/n\mathbb Z\simeq\prod_i\mathbb Z/p_i^{a_i}\mathbb Z,\qquad(\mathbb Z/n\mathbb Z)^\times\simeq\prod_i(\mathbb Z/p_i^{a_i}\mathbb Z)^\times.$$` },
-  "zn-cyc": { t: "𝔽_p^× est cyclique", b: R`<p>Pour $p$ premier, $(\mathbb Z/p\mathbb Z)^\times$ est cyclique d'ordre $p-1$.</p>` },
+  "zn-cyc": { t: "𝔽_p^× est cyclique", b: R`<div class="sbox">$$p\ \text{premier}\ \Longrightarrow\ (\mathbb Z/p\mathbb Z)^\times\simeq\mathbb Z/(p-1)\mathbb Z.$$</div>$$\exists g,\quad(\mathbb Z/p\mathbb Z)^\times = \{\bar g^k,\ 0\leqslant k\leqslant p-2\}.$$` },
   "zn-ord": { t: "Ordres dans un groupe abélien", b: R`$$xy = yx,\ a\wedge b = 1\Rightarrow\operatorname{ord}(xy) = ab;\qquad\operatorname{ord}x = m,\ d\mid m\Rightarrow\operatorname{ord}x^{m/d} = d.$$` }
 });
 

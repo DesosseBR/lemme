@@ -7,7 +7,7 @@ const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "c24a-ipp": { t: "Intégration par parties", b: R`$$\int_0^Au'v = \big[uv\big]_0^A-\int_0^Auv',\quad\text{puis }A\to+\infty.$$` },
-  "c24a-gauss": { t: "Intégrale gaussienne généralisée", b: R`<p>$\int_0^{+\infty}e^{-x^2/2}dx = \sqrt{\pi/2}$, donc $\int_{-\infty}^{+\infty}e^{-x^2/2}dx = \sqrt{2\pi}$ et, par changement de variable, $\int_{-\infty}^{+\infty}e^{-tx^2/2}dx = \sqrt{2\pi/t}$.</p>` },
+  "c24a-gauss": { t: "Intégrale gaussienne généralisée", b: R`<div class="sbox">$$\int_{-\infty}^{+\infty}e^{-x^2/2}dx = \sqrt{2\pi},\qquad\int_{-\infty}^{+\infty}e^{-tx^2/2}dx = \sqrt{\frac{2\pi}t}\quad(t>0).$$</div>` },
   "c24a-densite": { t: "Densité, espérance, variance", b: R`$$E(X) = \int xf(x)\,dx\ \Big(\text{si }\int|x|f\lt\infty\Big),\qquad E(X^2) = \int x^2f(x)\,dx,\qquad V(X) = E(X^2)-E(X)^2,\qquad F(x) = \int_{-\infty}^xf.$$` },
   "c24a-param": { t: "Intégrales à paramètre", b: R`<p>Pour $|x|\leqslant a$ :</p>$$\partial_x^kf\ \text{continue},\qquad|\partial_x^kf(x,u)|\leqslant\varphi_a(u),\ \varphi_a\ \text{intégrable},$$<div class="sbox">$$\Longrightarrow\quad\Big(\int f(x,u)\,du\Big)^{(k)} = \int\partial_x^kf(x,u)\,du.$$</div>` },
   "c24a-tat": { t: "Intégration terme à terme", b: R`$$\sum_k\int|u_k|\lt+\infty\ \Longrightarrow\ \int\sum u_k = \sum\int u_k.$$` }

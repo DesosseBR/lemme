@@ -2,7 +2,7 @@
 /* ===== Khôlles MP ===== */
 /* ---------- MP · 0. Polynômes et approximation · 1. Séries de fonctions · 2. Intégration ---------- */
 LEMME.rappels({
-  "k-cauchy-unif": { t: "Critère de Cauchy uniforme", b: R`<p>$(f_n)$ converge uniformément sur $I$ si et seulement si</p><div class="sbox">$$\forall\varepsilon>0,\ \exists N,\ \forall n,m\geqslant N,\quad\sup_I|f_n-f_m|\leqslant\varepsilon.$$</div><p>Le sens direct est immédiat : $|f_n-f_m|\leqslant|f_n-f|+|f-f_m|$.</p>` },
+  "k-cauchy-unif": { t: "Critère de Cauchy uniforme", b: R`<div class="sbox">$$f_n\xrightarrow{\text{CVU}}\text{ sur }I\iff\forall\varepsilon>0,\ \exists N,\ \forall n,m\geqslant N,\ \sup_I|f_n-f_m|\leqslant\varepsilon.$$</div>$$(\Rightarrow)\quad|f_n-f_m|\leqslant|f_n-f|+|f-f_m|.$$` },
   "k-poly-borne": { t: "Polynôme borné sur un ensemble non borné", b: R`$$\deg P\geqslant1\ \Longrightarrow\ |P(x)|\xrightarrow[|x|\to+\infty]{}+\infty.$$<div class="sbox">$$P\ \text{borné sur}\ A\subset\mathbb R\ \text{non borné}\ \Longrightarrow\ P\ \text{constant}.$$</div>` },
   "k-bt": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance :</p><div class="sbox">$$\forall\alpha>0,\qquad P\big(|X-E(X)|\geqslant\alpha\big)\leqslant\frac{V(X)}{\alpha^2}.$$</div>` },
   "k-abel": { t: "Transformation d'Abel", b: R`<p><b>Notations</b> : $A_k = a_0+\dots+a_k$, $A_{-1} = 0$, donc $a_k = A_k-A_{k-1}$.</p><div class="sbox">$$\sum_{k=0}^na_kb_k = A_nb_n+\sum_{k=0}^{n-1}A_k(b_k-b_{k+1}).$$</div><p>Analogue discret de l'intégration par parties.</p>` },
@@ -271,9 +271,9 @@ LEMME.exercises([
 
 /* ---------- MP · 5. Anneaux et arithmétique (1) ---------- */
 LEMME.rappels({
-  "k-pgcd-sym": { t: "PGCD et soustraction", b: R`<div class="sbox">$$\operatorname{pgcd}(a,m) = \operatorname{pgcd}(m-a,m).$$</div><p>Tout diviseur commun de $a$ et $m$ divise $m-a$, et inversement.</p>` },
+  "k-pgcd-sym": { t: "PGCD et soustraction", b: R`<div class="sbox">$$\operatorname{pgcd}(a,m) = \operatorname{pgcd}(m-a,m).$$</div>$$d\mid a\ \wedge\ d\mid m\iff d\mid m-a\ \wedge\ d\mid m.$$` },
   "k-crt": { t: "Lemme chinois", b: R`<p><b>Hypothèse</b> : $m\wedge n = 1$.</p><div class="sbox">$$\mathbb Z/mn\mathbb Z\xrightarrow{\ \sim\ }\mathbb Z/m\mathbb Z\times\mathbb Z/n\mathbb Z,\qquad\bar x\mapsto(\bar x,\bar x).$$</div><p><b>Construction</b> ($um+vn = 1$) :</p>$$x = a\,vn+b\,um\ \Longrightarrow\ \left\{\begin{aligned}x&\equiv a\ [m]\\x&\equiv b\ [n]\end{aligned}\right.,\qquad\text{solutions : }x+mn\mathbb Z.$$` },
-  "k-inversible-zn": { t: "Inversibles de ℤ/nℤ", b: R`<div class="sbox">$$\bar a\ \text{inversible dans}\ \mathbb Z/n\mathbb Z\iff a\wedge n = 1.$$</div><p>$\mathbb Z/n\mathbb Z$ est un corps si et seulement si $n$ est premier.</p>` },
+  "k-inversible-zn": { t: "Inversibles de ℤ/nℤ", b: R`<div class="sbox">$$\bar a\in(\mathbb Z/n\mathbb Z)^\times\iff a\wedge n = 1.$$</div>$$\mathbb Z/n\mathbb Z\ \text{corps}\iff n\ \text{premier}.$$` },
   "k-irred-modp": { t: "Réduction modulo p", b: R`<p><b>Réduction</b> : $\mathbb Z[X]\to\mathbb F_p[X]$, $Q\mapsto\bar Q$, morphisme d'anneaux :</p>$$\overline{QR} = \bar Q\,\bar R.$$<p>$\mathbb F_p[X]$ factoriel (décomposition en irréductibles unique), d'où :</p><div class="sbox">$$\bar Q\bar R = cX^n\ \Longrightarrow\ \bar Q = \alpha X^q,\ \bar R = \beta X^r.$$</div>` }
 });
 
@@ -1146,7 +1146,7 @@ LEMME.exercises([
 /* ---------- MP · 9. Euclidiens (2) · 10. Calcul différentiel ---------- */
 LEMME.rappels({
   "k-gs-mat": { t: "Gram-Schmidt en matrices", b: R`<p>$(C_j)$ base, $(D_j)$ son orthonormalisée de Gram-Schmidt :</p><div class="sbox">$$C_j = \sum_{i\leqslant j}(D_i|C_j)\,D_i,\qquad(D_j|C_j)>0.$$</div>$$C = QR,\qquad Q = (D_1|\cdots|D_n)\in O_n(\mathbb R),\qquad R = \big((D_i|C_j)\big)\ \text{triangulaire},\ r_{jj}>0.$$` },
-  "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`$$M\in O_n(\mathbb R)\cap T_n^+\ \Longrightarrow\ M = \operatorname{diag}(\pm1),\qquad m_{ii}>0\ \Longrightarrow\ M = I_n.$$<p>Car $M^{-1} = M^\top$ est à la fois triangulaire inférieure et supérieure.</p>` },
+  "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`<div class="sbox">$$M\in O_n(\mathbb R)\cap\mathcal T_n^+\ \Longrightarrow\ M = \operatorname{diag}(\pm1),\qquad\forall i,\ m_{ii}>0\ \Longrightarrow\ M = I_n.$$</div>$$M^{-1} = M^\top\in\mathcal T_n^+\cap\mathcal T_n^-\ \Longrightarrow\ M\ \text{diagonale}.$$` },
   "k-det-deriv": { t: "Dérivée de det(Iₙ + tM)", b: R`<div class="sbox">$$\det(I_n+tM) = 1+t\operatorname{tr}(M)+O(t^2)\qquad(t\to0).$$</div><p>Dans $\sum_\sigma\varepsilon(\sigma)\prod_i(I_n+tM)_{\sigma(i),i}$, seul $\sigma = \mathrm{id}$ donne des termes de degré $\leqslant1$ en $t$.</p>` }
 });
 

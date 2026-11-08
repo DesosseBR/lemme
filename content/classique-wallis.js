@@ -6,7 +6,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "wal-ipp": { t: "Intégration par parties", b: R`<p>Si $u,v$ sont de classe $\mathcal C^1$ sur $[a,b]$ : $\int_a^bu'v = [uv]_a^b-\int_a^buv'$.</p>` },
-  "wal-cv": { t: "Changement de variable", b: R`<p>Si $\varphi$ est de classe $\mathcal C^1$ sur $[\alpha,\beta]$ et $f$ continue sur $\varphi([\alpha,\beta])$ : $\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\varphi'(t)\,dt$.</p>` },
+  "wal-cv": { t: "Changement de variable", b: R`<p>$\varphi\in\mathcal C^1([\alpha,\beta])$, $f$ continue sur $\varphi([\alpha,\beta])$ :</p><div class="sbox">$$\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt.$$</div>` },
   "wal-pos": { t: "Positivité de l'intégrale", b: R`$$f\leqslant g\Rightarrow\int_a^bf\leqslant\int_a^bg;\qquad f\in\mathcal C,\ f\geqslant0,\ f\neq0\Rightarrow\int_a^bf>0.$$` },
   "wal-gend": { t: "Théorème des gendarmes", b: R`<p>Si $a_n\leqslant u_n\leqslant b_n$ et $a_n,b_n\to\ell$, alors $u_n\to\ell$.</p>` },
   "wal-eq": { t: "Équivalents", b: R`$$u_n\sim v_n\iff\frac{u_n}{v_n}\to1;\qquad u_n\sim v_n,\ u'_n\sim v'_n\Rightarrow u_nu'_n\sim v_nv'_n,\ \frac{u_n}{u'_n}\sim\frac{v_n}{v'_n},\ u_n^\alpha\sim v_n^\alpha.$$<p>Pas de somme d'équivalents.</p>` }

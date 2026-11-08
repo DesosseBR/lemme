@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "rf-tcm": { t: "Convergence monotone", b: R`$$0\leqslant g_n\nearrow g\ \Longrightarrow\ \int g_n\,d\mu\nearrow\int g\,d\mu.$$` },
-  "rf-fatou": { t: "Lemme de Fatou", b: R`<p>Pour des fonctions mesurables positives $h_m$ : $\int\liminf_mh_m\,d\mu\leqslant\liminf_m\int h_m\,d\mu$.</p>` },
-  "rf-mink": { t: "Minkowski", b: R`<p>Pour $1\leqslant p\leqslant\infty$ : $\|f+g\|_p\leqslant\|f\|_p+\|g\|_p$. Et $\|f\|_\infty = \inf\{M : |f|\leqslant M\ \mu\text{-p.p.}\}$, avec $|f|\leqslant\|f\|_\infty$ presque partout.</p>` }
+  "rf-fatou": { t: "Lemme de Fatou", b: R`<p>$h_m\geqslant0$ mesurables :</p><div class="sbox">$$\int\liminf_mh_m\,d\mu\leqslant\liminf_m\int h_m\,d\mu.$$</div>` },
+  "rf-mink": { t: "Minkowski", b: R`<div class="sbox">$$1\leqslant p\leqslant\infty\ :\qquad\|f+g\|_p\leqslant\|f\|_p+\|g\|_p.$$</div>$$\|f\|_\infty = \inf\{M : |f|\leqslant M\ \mu\text{-p.p.}\},\qquad|f|\leqslant\|f\|_\infty\ \mu\text{-p.p.}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $(X,\mathcal A,\mu)$ est un espace mesuré, $p\in[1,+\infty]$, et $L^p = L^p(X,\mu)$ l'espace des (classes de) fonctions mesurables $f : X\to\mathbb C$ avec $\|f\|_p\lt+\infty$. Soit $(f_n)$ une suite de Cauchy de $L^p$. On veut montrer qu'elle converge dans $L^p$ (<b>théorème de Riesz-Fischer</b>).</p>`;

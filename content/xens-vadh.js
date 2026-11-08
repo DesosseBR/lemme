@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 3, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "va-adh": { t: "Valeur d'adhérence", b: R`$$a\text{ valeur d'adhérence}\iff\exists\varphi,\ x_{\varphi(n)}\to a\iff\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\ d(x_n,a)\lt\varepsilon.$$<p>Compact : au moins une valeur d'adhérence ; une seule $\Rightarrow$ convergence.</p>` },
+  "va-adh": { t: "Valeur d'adhérence", b: R`<div class="sbox">$$\begin{aligned}a\ \text{valeur d'adhérence}&\iff\exists\varphi\nearrow,\ x_{\varphi(n)}\to a\\&\iff\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\ d(x_n,a)\lt\varepsilon.\end{aligned}$$</div>$$K\ \text{compact}:\quad\text{au moins une valeur d'adhérence},\qquad\text{une seule}\Rightarrow\text{convergence}.$$` },
   "va-conn": { t: "Connexité", b: R`$$\begin{gathered}\Gamma\text{ connexe}\iff\nexists A,B\text{ fermés de }\Gamma\text{ non vides},\ \Gamma = A\sqcup B,\\[4pt]\text{connexes de }\mathbb R = \text{intervalles}.\end{gathered}$$` },
   "va-dist": { t: "Distance à une partie", b: R`$$d(x,A) = \inf_{a\in A}d(x,a),\qquad|d(x,A)-d(y,A)|\leqslant d(x,y),\qquad d(x,A) = 0\iff x\in\overline A.$$` }
 });

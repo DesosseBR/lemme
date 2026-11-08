@@ -70,9 +70,9 @@ LEMME.rappels({
   "an-binome": { t: "Binôme de Newton et symétrie", b: R`<div class="sbox">$$\sum_{k=0}^{m}\binom mk = (1+1)^m = 2^m,\qquad\binom mk = \binom m{m-k}.$$</div>$$\forall k\in[\![0,m]\!],\quad\binom mk\in\mathbb N^*,\qquad\max_{0\leqslant k\leqslant2n}\binom{2n}k = \binom{2n}n.$$` },
   "an-euclide": { t: "Lemme d'Euclide", b: R`$$p\text{ premier},\ p\mid ab\ \Longrightarrow\ p\mid a\text{ ou }p\mid b.$$$$p_1,\dots,p_m\text{ premiers distincts},\ \forall i,\ p_i\mid N\ \Longrightarrow\ p_1\cdots p_m\mid N.$$` },
   "an-rec-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(1)\\&\forall n,\ \big(P(1)\wedge\dots\wedge P(n)\big)\Rightarrow P(n+1)\end{aligned}\right.\quad\Longrightarrow\quad\forall n\geqslant1,\ P(n).$$<p>Utile si $P(n+1)$ découle d'un rang comme $\frac n2$.</p>` },
-  "an-pe": { t: "Partie entière", b: R`<div class="sbox">$$\lfloor x\rfloor\in\mathbb Z,\qquad x-1< \lfloor x\rfloor\leqslant x.$$</div><p>Pour $m\in\mathbb N^*$ et $n\in\mathbb N$, le nombre de multiples de $m$ dans $\{1,\dots,n\}$ vaut $\left\lfloor\frac nm\right\rfloor$.</p>` },
+  "an-pe": { t: "Partie entière", b: R`<div class="sbox">$$\lfloor x\rfloor\in\mathbb Z,\qquad x-1\lt\lfloor x\rfloor\leqslant x.$$</div>$$m\in\mathbb N^*,\ n\in\mathbb N:\quad\#\{k\in[\![1,n]\!] : m\mid k\} = \Big\lfloor\frac nm\Big\rfloor.$$` },
   "an-valuation": { t: "Valuation p-adique", b: R`$$n = \prod_{p\ \text{premier}}p^{v_p(n)}.$$<div class="sbox">$$v_p(ab) = v_p(a)+v_p(b),\qquad p^k\mid n\iff k\leqslant v_p(n).$$</div>` },
-  "an-etude-fonction": { t: "Étude de fonction", b: R`$$h = f-g,\qquad\min h>0\ \Longrightarrow\ f>g.$$<p>Étudier le signe de $h'$, en déduire le minimum de $h$.</p>` },
+  "an-etude-fonction": { t: "Étude de fonction", b: R`<div class="sbox">$$h = f-g,\qquad\min_Ih>0\ \Longrightarrow\ \forall x\in I,\ f(x)>g(x).$$</div><p>Signe de $h'$ $\Rightarrow$ variations de $h$ $\Rightarrow$ $\min h$.</p>` },
   "an-sous-groupes": { t: "Sous-groupes (idéaux) de ℤ", b: R`$$H\text{ sous-groupe de }(\mathbb Z,+)\ \Longrightarrow\ \exists!\,d\in\mathbb N,\ H = d\mathbb Z.$$` },
   "an-equiv": { t: "Équivalents", b: R`<p><b>Définition</b> ($v_n>0$) :</p>$$u_n\sim v_n\iff\frac{u_n}{v_n}\xrightarrow[n\to+\infty]{}1.$$<p><b>Conséquence</b> :</p><div class="sbox">$$\forall\varepsilon>0,\ \exists N,\ \forall n\geqslant N,\quad(1-\varepsilon)v_n\leqslant u_n\leqslant(1+\varepsilon)v_n.$$</div>` },
   "an-geo": { t: "Série géométrique", b: R`<p>Pour $|q|< 1$ :</p><div class="sbox">$$\sum_{k=0}^{+\infty}q^k = \frac1{1-q},\qquad\sum_{k=m}^{+\infty}q^k = \frac{q^m}{1-q}.$$</div>` },
@@ -421,7 +421,7 @@ LEMME.rappels({
   "m2-colonnes": { t: "Lire une matrice par colonnes", b: R`$$C_j(M) = Me_j;\qquad\big(\forall j,\ Me_j = M'e_j\big)\Rightarrow M = M';\qquad M = \operatorname{Mat}\varphi\Rightarrow M^k = \operatorname{Mat}\varphi^k.$$` },
   "m2-semblables": { t: "Matrices semblables", b: R`$$P^{-1}MP = D\ \Longrightarrow\ P^{-1}M^kP = D^k,\quad P^{-1}M^{-1}P = D^{-1},\quad\operatorname{tr}(M^k) = \sum\lambda_i^k.$$` },
   "m2-blocs": { t: "Produit par blocs", b: R`$$(AB)_{(i,j)} = \sum_kA_{(i,k)}B_{(k,j)}\qquad(\text{blocs compatibles, ordre respecté}).$$` },
-  "m2-transfert": { t: "Formule de transfert", b: R`<p>Pour $X$ à valeurs dans un ensemble fini : $E\big(f(X)\big) = \sum_{x}f(x)\,P(X = x)$.</p>` },
+  "m2-transfert": { t: "Formule de transfert", b: R`<div class="sbox">$$X(\Omega)\ \text{fini}\ :\qquad E\big(f(X)\big) = \sum_{x\in X(\Omega)}f(x)\,P(X = x).$$</div>` },
   "m2-gauss": { t: "Intégrale de Gauss", b: R`<div class="sbox">$$\int_{-\infty}^{+\infty}e^{-x^2/2}\,dx = \sqrt{2\pi},\qquad\int_{-\infty}^{+\infty}e^{-\frac{\gamma t^2}2}\,dt = \sqrt{\frac{2\pi}\gamma}\ \ (\gamma>0).$$</div><p>On complète le carré : $ut-\frac{t^2}{2a} = -\frac{(t-au)^2}{2a}+\frac{au^2}2$.</p>` },
   "m2-tcd": { t: "Convergence dominée", b: R`$$\left\{\begin{aligned}&F_n\to F\text{ simplement sur }I\\&|F_n|\leqslant g,\ g\text{ intégrable}\end{aligned}\right.\quad\Longrightarrow\quad\int_IF_n\to\int_IF.$$` },
   "m2-taylor": { t: "Formule de Taylor-Young", b: R`<p>Si $G$ est de classe $\mathcal C^2$ au voisinage de $a$ :</p><div class="sbox">$$G(a+x) = G(a)+G'(a)x+\frac{G''(a)}2x^2+o(x^2).$$</div>` },
@@ -772,11 +772,11 @@ LEMME.rappels({
   "x-diag-poly": { t: "Critère de diagonalisation par polynôme", b: R`$$f\text{ diagonalisable}\iff\exists P\text{ scindé à racines simples},\ P(f) = 0.$$$$f^N = \mathrm{id},\quad X^N-1 = \prod_{j = 0}^{N-1}(X-\zeta^j)\ \Longrightarrow\ f\text{ diagonalisable (sur }\mathbb C).$$` },
   "x-stable": { t: "Sous-espace stable et polynôme d'endomorphisme", b: R`$$f(W)\subset W\ \Longrightarrow\ \forall P,\ P(f)(W)\subset W,\qquad\forall w\in W,\ P(f_W)(w) = P(f)(w).$$` },
   "x-semblable": { t: "Matrices semblables et puissances", b: R`$$M' = PMP^{-1}\ \Longrightarrow\ M'^k = PM^kP^{-1},\quad\ker M'^k = P(\ker M^k),\quad\dim\ker M'^k = \dim\ker M^k.$$` },
-  "x-rang": { t: "Théorème du rang", b: R`<p>Pour $f : E\to F$ linéaire, $E$ de dimension finie :</p><div class="sbox">$$\dim E = \dim\ker f+\operatorname{rg}f.$$</div>` },
+  "x-rang": { t: "Théorème du rang", b: R`<div class="sbox">$$f\in\mathcal L(E,F),\ \dim E\lt\infty\ \Longrightarrow\ \dim E = \dim\ker f+\operatorname{rg}f.$$</div>` },
   "x-ideal": { t: "Idéaux de ℂ[X]", b: R`$$I\text{ idéal de }\mathbb C[X],\ I\neq\{0\}\ \Longrightarrow\ \exists!\,\pi\text{ unitaire},\ I = \pi\,\mathbb C[X].$$$$D\text{ unitaire},\ D\mid X^n\iff D = X^r,\ 0\leqslant r\leqslant n.$$` },
   "x-noyaux": { t: "Lemme des noyaux", b: R`$$P\wedge Q = 1\ \Longrightarrow\ \ker(PQ)(f) = \ker P(f)\oplus\ker Q(f).$$$$\chi_f = PQ,\ P\wedge Q = 1\ \overset{\text{C.-H.}}\Longrightarrow\ E = \ker P(f)\oplus\ker Q(f).$$` },
   "x-proj": { t: "Projecteurs", b: R`<p>$p$ est un projecteur si $p\circ p = p$. Alors $E = \operatorname{Im}p\oplus\ker p$, et $\operatorname{Im}p = \{x : p(x) = x\}$.</p>` },
-  "x-commute": { t: "Endomorphismes qui commutent", b: R`<p>Si $f\circ g = g\circ f$, alors $\ker f$ et $\operatorname{Im}f$ sont stables par $g$ : si $f(x) = 0$, alors $f(g(x)) = g(f(x)) = 0$.</p>` },
+  "x-commute": { t: "Endomorphismes qui commutent", b: R`<div class="sbox">$$f\circ g = g\circ f\ \Longrightarrow\ g(\ker f)\subset\ker f,\quad g(\operatorname{Im}f)\subset\operatorname{Im}f.$$</div>$$f(x) = 0\ \Longrightarrow\ f(g(x)) = g(f(x)) = 0,\qquad g(f(y)) = f(g(y)).$$` },
   "x-passage": { t: "Changement de base", b: R`<p><b>Notations</b> : $A = \operatorname{Mat}_{e,f}(\alpha)$, $P_e = \operatorname{Pass}(e,e')$, $P_f = \operatorname{Pass}(f,f')$.</p><div class="sbox">$$\operatorname{Mat}_{e',f'}(\alpha) = A' = P_f^{-1}\,A\,P_e.$$</div>` }
 });
 
@@ -1103,9 +1103,9 @@ LEMME.rappels({
   "g-lin-ligne": { t: "Linéarité par rapport à une ligne", b: R`$$L_1 = L'+L''\ \Longrightarrow\ \det\begin{pmatrix}L_1\\L_2\\\vdots\end{pmatrix} = \det\begin{pmatrix}L'\\L_2\\\vdots\end{pmatrix}+\det\begin{pmatrix}L''\\L_2\\\vdots\end{pmatrix}.$$` },
   "g-dev": { t: "Développement suivant une ligne", b: R`<div class="sbox">$$\det B = \sum_{j=1}^n(-1)^{i+j}b_{i,j}\,\Delta_{i,j}\qquad(\text{ligne }i),$$</div><p>$\Delta_{i,j}$ : déterminant extrait, sans ligne $i$ ni colonne $j$.</p>$$b_{i,j} = 0\ \text{pour }j\neq j_0\ \Longrightarrow\ \det B = (-1)^{i+j_0}b_{i,j_0}\Delta_{i,j_0}.$$` },
   "g-bloc-tri": { t: "Déterminant triangulaire par blocs", b: R`<div class="sbox">$$\det\begin{pmatrix}A&C\\0&D\end{pmatrix} = \det\begin{pmatrix}A&0\\C'&D\end{pmatrix} = \det A\cdot\det D\quad(A,D\ \text{carrées}).$$</div>` },
-  "g-indep": { t: "Indépendance", b: R`$$Y_1,\dots,Y_m\text{ indépendantes}\ \Longrightarrow\ P\Big(\bigcap_k(Y_k\in B_k)\Big) = \prod_kP(Y_k\in B_k).$$<p>Coalitions : fonctions de paquets disjoints $\Rightarrow$ indépendantes.</p>` },
+  "g-indep": { t: "Indépendance", b: R`<div class="sbox">$$Y_1,\dots,Y_m\ \text{indépendantes}\ \Longrightarrow\ P\Big(\bigcap_k(Y_k\in B_k)\Big) = \prod_kP(Y_k\in B_k).$$</div><p><b>Coalitions</b> : $I\cap J = \emptyset$ :</p>$$f\big((Y_i)_{i\in I}\big)\perp\!\!\!\perp g\big((Y_j)_{j\in J}\big).$$` },
   "g-binom": { t: "Loi binomiale", b: R`<div class="sbox">$$Y = \sum_{i=1}^NX_i,\ X_i\sim\mathcal B(p)\ \text{indépendantes}\ \Longrightarrow\ Y\sim\mathcal B(N,p).$$</div>$$P(Y = k) = \binom Nkp^k(1-p)^{N-k},\qquad E(Y) = Np,\qquad V(Y) = Np(1-p).$$` },
-  "g-tcheb": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance, pour tout $\varepsilon>0$ :</p><div class="sbox">$$P\big(|X-E(X)|\geqslant\varepsilon\big)\leqslant\frac{V(X)}{\varepsilon^2}.$$</div>` },
+  "g-tcheb": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<div class="sbox">$$V(X)\lt\infty,\ \varepsilon>0\ \Longrightarrow\ P\big(|X-E(X)|\geqslant\varepsilon\big)\leqslant\frac{V(X)}{\varepsilon^2}.$$</div>` },
   "g-huygens": { t: "Formule de König-Huygens", b: R`<div class="sbox">$$V(X) = E(X^2)-E(X)^2.$$</div>` },
   "g-indic": { t: "Indicatrices", b: R`$$\mathbf 1_A\mathbf 1_B = \mathbf 1_{A\cap B},\qquad E(\mathbf 1_A) = P(A),\qquad X\sim\mathcal B(p)\Rightarrow X = \mathbf 1_{(X = 1)}.$$` }
 });

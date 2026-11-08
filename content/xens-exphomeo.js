@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "eh-exp": { t: "Propriétés de l'exponentielle", b: R`<p>$\exp(PMP^{-1}) = P\exp(M)P^{-1}$ ; $\exp(\operatorname{diag}(a_i)) = \operatorname{diag}(e^{a_i})$ ; $\exp(M)$ commute avec $M$ ; $\exp(M)^{-1} = \exp(-M)$ ; $\,{}^t\exp(M) = \exp({}^tM)$ ; $\exp$ est continue sur $\mathcal M_n(\mathbb R)$.</p>` },
+  "eh-exp": { t: "Propriétés de l'exponentielle", b: R`<div class="sbox">$$\exp(PMP^{-1}) = P\exp(M)P^{-1},\qquad\exp(\operatorname{diag}(a_i)) = \operatorname{diag}(e^{a_i}).$$</div>$$M\exp(M) = \exp(M)M,\qquad\exp(M)^{-1} = \exp(-M),\qquad\exp(M)^\top = \exp(M^\top),$$$$\exp\in\mathcal C^0(\mathcal M_n(\mathbb R)).$$` },
   "eh-rho": { t: "Norme d'une matrice symétrique", b: R`$$S\in\mathcal S_n(\mathbb R)\ :\quad|||S|||_2 = \rho(S) = \max_i|\lambda_i|,\qquad\|Sx\|^2 = \sum\lambda_i^2x_i^2.$$` },
   "eh-adh": { t: "Suite bornée à valeur d'adhérence unique", b: R`$$\dim E\lt\infty,\ (x_n)\text{ bornée},\ \text{une seule valeur d'adhérence }a\ \Longrightarrow\ x_n\to a.$$` }
 });

@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "dob-grass": { t: "Formule de Grassmann", b: R`$$\dim(F\cap G) = \dim F+\dim G-\dim(F+G).$$` },
-  "dob-cnt": { t: "Compter dans 𝔽_qⁿ", b: R`$$|\mathbb F_q^n| = q^n,\qquad\operatorname{Card}\{\text{droites vectorielles}\} = \frac{q^n-1}{q-1}.$$<p>Plans de $\mathbb F_q^3$ : noyaux des formes non nulles (à proportionnalité près).</p>` },
+  "dob-cnt": { t: "Compter dans 𝔽_qⁿ", b: R`$$|\mathbb F_q^n| = q^n,\qquad\#\{\text{droites vectorielles}\} = \frac{q^n-1}{q-1},$$<div class="sbox">$$\{\text{plans de}\ \mathbb F_q^3\} = \{\ker\varphi,\ \varphi\in(\mathbb F_q^3)^*\setminus\{0\}\}/\mathbb F_q^*,\qquad\#\{\text{plans}\} = q^2+q+1.$$</div>` },
   "dob-dc": { t: "Double comptage", b: R`$$\operatorname{Card}\{(x,A) : x\in A\} = \sum_{A\in\Delta}|A| = \sum_{x\in P}\operatorname{Card}\{A : x\in A\}.$$` }
 });
 

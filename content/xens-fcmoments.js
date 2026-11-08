@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "fcm-dom": { t: "Continuité et dérivation sous l'intégrale", b: R`<p><b>Continuité</b> :</p><div class="sbox">$$t\mapsto g(t,x)\ \text{continue},\ |g(t,x)|\leqslant h(x),\ h\ \text{intégrable}\ \Longrightarrow\ t\mapsto\int g(t,x)\,dx\ \text{continue}.$$</div><p><b>Dérivation</b> :</p>$$|\partial_tg(t,x)|\leqslant h_1(x),\ h_1\ \text{intégrable}\ \Longrightarrow\ \frac d{dt}\int g(t,x)\,dx = \int\partial_tg(t,x)\,dx.$$` },
   "fcm-cos": { t: "Encadrement de 1 − cos", b: R`<div class="sbox">$$\forall u\in\mathbb R,\quad0\leqslant1-\cos u\leqslant\frac{u^2}2,\qquad\Big|1-\cos u-\frac{u^2}2\Big|\leqslant\frac{u^4}{24}.$$</div><p>(Taylor-Lagrange à l'ordre $4$, $|\cos^{(4)}|\leqslant1$.)</p>` },
-  "fcm-ty": { t: "Taylor-Young", b: R`<p>Si $\psi$ est deux fois dérivable en $0$ : $\psi(t) = \psi(0)+t\psi'(0)+\frac{t^2}2\psi''(0)+o(t^2)$. Donc $\dfrac{\psi(t)+\psi(-t)-2\psi(0)}{t^2}\xrightarrow[t\to0]{}\psi''(0)$.</p>` },
+  "fcm-ty": { t: "Taylor-Young", b: R`<div class="sbox">$$\psi(t)\underset{t\to0}{=}\psi(0)+t\psi'(0)+\frac{t^2}2\psi''(0)+o(t^2).$$</div>$$\frac{\psi(t)+\psi(-t)-2\psi(0)}{t^2}\xrightarrow[t\to0]{}\psi''(0).$$` },
   "fcm-bert": { t: "Séries de Bertrand", b: R`$$\int_2^x\frac{dt}{t\ln t} = \ln\ln x-\ln\ln2\to+\infty\ \Longrightarrow\ \sum\frac1{k\ln k}\ \text{diverge}.$$$$\frac1{k^2\ln k}\leqslant\frac1{k^2}\ (k\geqslant3)\ \Longrightarrow\ \sum\frac1{k^2\ln k}\ \text{converge}.$$` }
 });
 

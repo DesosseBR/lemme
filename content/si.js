@@ -32,9 +32,9 @@ LEMME.subject({
 
 
 LEMME.rappels({
-  "premier-ordre-si": { t: "Système du premier ordre", b: R`$H(p) = \dfrac{K}{1+\tau p}$. Réponse à un échelon $E_0$ : $s(t) = KE_0\big(1-e^{-t/\tau}\big)$, avec $t_{5\%} = 3\tau$.` },
-  "ftbf": { t: "Boucle fermée à retour unitaire", b: R`$\text{FTBF}(p) = \dfrac{H(p)}{1+H(p)}$.` },
-  "erreur-statique": { t: "Erreur statique", b: R`$\varepsilon_s = \lim_{t\to+\infty}\big(e(t)-s(t)\big)$ pour une entrée en échelon.` }
+  "premier-ordre-si": { t: "Système du premier ordre", b: R`<div class="sbox">$$H(p) = \frac{K}{1+\tau p},\qquad e = E_0\mathbf 1_{t\geqslant0}\ \Longrightarrow\ s(t) = KE_0\big(1-e^{-t/\tau}\big),\qquad t_{5\%} = 3\tau.$$</div>` },
+  "ftbf": { t: "Boucle fermée à retour unitaire", b: R`<div class="sbox">$$\text{FTBF}(p) = \frac{H(p)}{1+H(p)}\quad(\text{retour unitaire}).$$</div>` },
+  "erreur-statique": { t: "Erreur statique", b: R`<div class="sbox">$$\varepsilon_s = \lim_{t\to+\infty}\big(e(t)-s(t)\big) = \lim_{p\to0}p\,\varepsilon(p)\quad(\text{entrée échelon}).$$</div>` }
 });
 
 LEMME.exercises([
