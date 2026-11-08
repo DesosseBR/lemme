@@ -28,7 +28,7 @@ LEMME.subject({
       Object.assign(C("Algèbre linéaire et matrices", "Décomposition polaire, décomposition de Bruhat, décomposition de Dunford effective, enveloppe convexe de Oₙ(ℝ), équation de Sylvester"), { p: "Algèbre" }),
       Object.assign(C("Arithmétique", "Carrés de 𝔽_p, entiers de Gauss, théorème des deux carrés"), { p: "Algèbre" }),
       Object.assign(C("Équations aux dérivées partielles et distributions", "Équation de la chaleur, séries de Fourier, distributions tempérées, transformée de Fourier"), { p: "Analyse" }),
-      Object.assign(C("Analyse fonctionnelle et équations différentielles", "Espaces de Hilbert, Lax-Milgram, séries entières lacunaires, stabilité de Liapounov, solutions périodiques, lemme de Morse"), { p: "Analyse" })
+      Object.assign(C("Analyse fonctionnelle et équations différentielles", "Espaces de Hilbert, Lax-Milgram, séries entières lacunaires, stabilité de Liapounov, solutions périodiques, lemme de Morse, minimisation dans un Hilbert"), { p: "Analyse" })
     ]
   }
 });
