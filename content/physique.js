@@ -62,13 +62,13 @@ LEMME.subject({
 
 
 LEMME.rappels({
-  "loi-mailles": { t: "Loi des mailles", b: R`Dans une maille, la somme algébrique des tensions est nulle. Pour un générateur $E$ en série avec $R$ et $C$ : $E = Ri + u_C$.` },
-  "condensateur": { t: "Le condensateur", b: R`$i = C\dfrac{du_C}{dt}$, et la tension $u_C$ aux bornes d'un condensateur est une fonction continue du temps.` },
+  "loi-mailles": { t: "Loi des mailles", b: R`$$\sum_{\text{maille}}\pm u_k = 0.\qquad\text{Circuit }E,R,C\text{ série : }\ E = Ri+u_C.$$` },
+  "condensateur": { t: "Le condensateur", b: R`$$i = C\frac{du_C}{dt},\qquad u_C\text{ continue en }t.$$` },
   "pfd": { t: "Principe fondamental de la dynamique", b: R`Dans un référentiel galiléen : $m\vec a = \sum\vec F$.` },
   "frottement-lineaire": { t: "Frottement fluide linéaire", b: R`À faible vitesse : $\vec F = -\alpha\vec v$, avec $\alpha>0$.` },
-  "young": { t: "Fentes d'Young", b: R`Pour $D\gg a$ et $D\gg|x|$ : $\delta = \dfrac{ax}{D}$. Franges brillantes pour $\delta = p\lambda$, interfrange $i = \dfrac{\lambda D}{a}$.` },
-  "tmc": { t: "Théorème du moment cinétique", b: R`Pour un point en rotation autour d'un axe fixe : $\dfrac{dL_\Delta}{dt} = \sum\mathcal M_\Delta$, avec ici $L_\Delta = m\ell^2\dot\theta$.` },
-  "energie-mecanique": { t: "Conservation de l'énergie mécanique", b: R`Si les seules forces qui travaillent sont conservatives, $E_m = E_c + E_p$ est constante. Une force perpendiculaire à la vitesse ne travaille pas.` },
+  "young": { t: "Fentes d'Young", b: R`$$D\gg a,\ D\gg|x|\ :\qquad\delta = \frac{ax}D,\qquad\delta = p\lambda\ (\text{frange brillante}),\qquad i = \frac{\lambda D}a.$$` },
+  "tmc": { t: "Théorème du moment cinétique", b: R`$$\frac{dL_\Delta}{dt} = \sum\mathcal M_\Delta,\qquad L_\Delta = m\ell^2\dot\theta.$$` },
+  "energie-mecanique": { t: "Conservation de l'énergie mécanique", b: R`$$\text{forces qui travaillent conservatives}\ \Longrightarrow\ E_m = E_c+E_p = \text{cste}.$$$$\vec F\perp\vec v\ \Longrightarrow\ \mathcal P(\vec F) = 0.$$` },
   "petits-angles": { t: "Approximation des petits angles", b: R`Pour $|\theta|\ll1$ rad : $\sin\theta\approx\theta$ et $\cos\theta\approx1-\frac{\theta^2}{2}$.` },
   "oscillateur-harmonique": { t: "Oscillateur harmonique", b: R`$\ddot\theta+\omega_0^2\theta = 0$ a pour solutions $\theta_0\cos(\omega_0t+\varphi)$, de période $T_0 = \dfrac{2\pi}{\omega_0}$.` }
 });
@@ -386,8 +386,8 @@ LEMME.rappels({
   "p-edo-hyp": { t: "Équation dont les solutions sont en ch et sh", b: R`<p>Équation caractéristique $s^2-\omega^2 = 0$, racines $\pm\omega$. Solutions :</p>$$r(t) = \alpha e^{\omega t}+\beta e^{-\omega t} = a\operatorname{ch}(\omega t)+b\operatorname{sh}(\omega t).$$<p>Avec $r(0) = r_0$ et $\dot r(0) = v_0$ : $a = r_0$ et $b = v_0/\omega$.</p>` },
   "p-ressort": { t: "Force de rappel d'un ressort", b: R`$$\vec F = -k(\ell-\ell_0)\,\vec u_{\mathrm{ext}},$$<p>où $\ell$ est la longueur du ressort, $\ell_0$ sa longueur à vide et $\vec u_{\mathrm{ext}}$ le vecteur unitaire dirigé du ressort <b>vers</b> l'objet. Étiré ($\ell>\ell_0$), il tire l'objet vers lui ; comprimé, il le repousse.</p>` },
   "p-osc-amorti": { t: "Oscillateur amorti : forme canonique", b: R`$$\ddot X+\frac{\omega_0}{Q}\dot X+\omega_0^2X = f(t).$$<p>$\omega_0$ : pulsation propre (sans amortissement). $Q$ : facteur de qualité, sans dimension ; plus il est grand, moins l'oscillateur est amorti. Régime libre pseudo-périodique si $Q>\frac12$.</p>` },
-  "p-rsf": { t: "Régime sinusoïdal forcé", b: R`<p>Pour une excitation en $\cos\omega t$, une fois le transitoire amorti, $X(t) = X_m\cos(\omega t+\varphi)$. On pose $\underline X = X_me^{j(\omega t+\varphi)}$ : dériver revient à multiplier par $j\omega$. Alors $X_m = |\underline X|$ et $\varphi = \arg\underline X$.</p>` },
-  "p-equilibre": { t: "Position d'équilibre et changement de variable", b: R`<p>Quand une équation contient des termes constants (poids, longueur à vide), on écrit l'équilibre puis on pose $X = h-h_e$ : les constantes disparaissent, il ne reste que les termes qui dépendent du mouvement.</p>` }
+  "p-rsf": { t: "Régime sinusoïdal forcé", b: R`<p>Excitation en $\cos\omega t$, régime établi :</p>$$X(t) = X_m\cos(\omega t+\varphi),\qquad\underline X = X_me^{j(\omega t+\varphi)},\qquad\frac d{dt}\leftrightarrow j\omega,$$$$X_m = |\underline X|,\qquad\varphi = \arg\underline X.$$` },
+  "p-equilibre": { t: "Position d'équilibre et changement de variable", b: R`<p>Termes constants (poids, longueur à vide) : écrire l'équilibre $h_e$, puis</p>$$X = h-h_e$$<p>élimine les constantes.</p>` }
 });
 
 LEMME.notions({

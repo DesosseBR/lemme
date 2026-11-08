@@ -88,24 +88,24 @@ LEMME.subject({
 
 
 LEMME.rappels({
-  "limite-monotone": { t: "Théorème de la limite monotone", b: R`Une suite réelle croissante et majorée converge. Une suite croissante non majorée tend vers $+\infty$.` },
+  "limite-monotone": { t: "Théorème de la limite monotone", b: R`$$\left\{\begin{aligned}&(u_n)\nearrow,\ \text{majorée}&&\Longrightarrow\ (u_n)\text{ converge},\\&(u_n)\nearrow,\ \text{non majorée}&&\Longrightarrow\ u_n\to+\infty.\end{aligned}\right.$$` },
   "dl-usuels": { t: "Développements limités usuels en 0", b: R`$$e^x = 1+x+\frac{x^2}{2}+o(x^2),\qquad \sin x = x-\frac{x^3}{6}+o(x^3),$$ $$\cos x = 1-\frac{x^2}{2}+o(x^2),\qquad \ln(1+x) = x-\frac{x^2}{2}+o(x^2).$$` },
-  "equivalents-somme": { t: "On ne somme pas des équivalents", b: R`$f\sim g$ et $h\sim k$ n'impliquent pas $f+h\sim g+k$. Pour une somme ou une différence, on passe aux développements limités.` },
+  "equivalents-somme": { t: "On ne somme pas des équivalents", b: R`$$f\sim g\ \text{ et }\ h\sim k\ \not\Longrightarrow\ f+h\sim g+k.$$<p>Somme, différence : passer aux développements limités.</p>` },
   "theoreme-rang": { t: "Théorème du rang", b: R`Si $E$ est de dimension finie et $f\in\mathcal L(E,F)$, alors $\dim E = \dim\ker f + \operatorname{rg} f$.` },
   "image-base": { t: "Image et base", b: R`Si $(e_1,\dots,e_n)$ est une base de $E$, alors $\operatorname{Im} f = \operatorname{Vect}\big(f(e_1),\dots,f(e_n)\big)$.` },
-  "valeurs-propres-distinctes": { t: "Valeurs propres distinctes", b: R`Une matrice de $\mathcal M_n(\mathbb K)$ qui possède $n$ valeurs propres distinctes est diagonalisable. La réciproque est fausse.` },
-  "puissance-diagonalisable": { t: "Puissance d'une matrice diagonalisable", b: R`Si $A = PDP^{-1}$, alors $A^n = PD^nP^{-1}$, et $D^n$ s'obtient en élevant chaque coefficient diagonal à la puissance $n$.` },
-  "spectral": { t: "Théorème spectral", b: R`Toute matrice symétrique réelle est diagonalisable dans une base orthonormée de vecteurs propres.` },
-  "dalembert-se": { t: "Règle de d'Alembert pour les séries entières", b: R`Si $a_n\neq0$ à partir d'un certain rang et $\left|\dfrac{a_{n+1}}{a_n}\right|\to\ell\in[0,+\infty]$, alors $R = \dfrac{1}{\ell}$ (avec $\frac10 = +\infty$ et $\frac1{+\infty}=0$).` },
-  "derivation-se": { t: "Dérivation d'une série entière", b: R`Sur $]-R,R[$, on dérive terme à terme sans changer le rayon : $\left(\sum a_nx^n\right)' = \sum na_nx^{n-1}$.` },
+  "valeurs-propres-distinctes": { t: "Valeurs propres distinctes", b: R`$$A\in\mathcal M_n(\mathbb K),\quad\operatorname{Card}\operatorname{Sp}(A) = n\ \Longrightarrow\ A\text{ diagonalisable}.$$<p>Réciproque fausse (ex. $A = I_n$).</p>` },
+  "puissance-diagonalisable": { t: "Puissance d'une matrice diagonalisable", b: R`$$A = PDP^{-1}\ \Longrightarrow\ A^n = PD^nP^{-1},\qquad D^n = \operatorname{diag}(\lambda_1^n,\dots,\lambda_p^n).$$` },
+  "spectral": { t: "Théorème spectral", b: R`$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists P\in O_n(\mathbb R),\ \exists D\text{ diagonale},\quad S = PDP^{\top}.$$` },
+  "dalembert-se": { t: "Règle de d'Alembert pour les séries entières", b: R`$$a_n\neq0,\quad\Big|\frac{a_{n+1}}{a_n}\Big|\to\ell\in[0,+\infty]\ \Longrightarrow\ R = \frac1\ell,$$<p>avec $\frac10 = +\infty$ et $\frac1{+\infty} = 0$.</p>` },
+  "derivation-se": { t: "Dérivation d'une série entière", b: R`$$\forall x\in\,]-R,R[,\quad\Big(\sum_{n\geqslant0}a_nx^n\Big)' = \sum_{n\geqslant1}na_nx^{n-1},$$<p>même rayon $R$.</p>` },
   "serie-geometrique": { t: "Série géométrique", b: R`Pour $|q|<1$ : $\displaystyle\sum_{n\ge0}q^n = \frac{1}{1-q}$.` },
   "loi-geometrique": { t: "Loi géométrique", b: R`$X\sim\mathcal G(p)$ : $P(X=k) = p(1-p)^{k-1}$ pour $k\ge1$. C'est le rang du premier succès.` },
   "fonction-generatrice": { t: "Fonction génératrice", b: R`$G_X(t) = E\big(t^X\big) = \sum_k P(X=k)\,t^k$. Si $G_X$ est dérivable en $1$, alors $E(X) = G_X'(1)$.` },
-  "continuite-point-fixe": { t: "Limite d'une suite récurrente", b: R`Si $u_{n+1} = f(u_n)$, si $(u_n)$ converge vers $\ell$ et si $f$ est continue en $\ell$, alors $\ell = f(\ell)$.` },
+  "continuite-point-fixe": { t: "Limite d'une suite récurrente", b: R`$$\left\{\begin{aligned}&u_{n+1} = f(u_n),\quad u_n\to\ell\\&f\text{ continue en }\ell\end{aligned}\right.\quad\Longrightarrow\quad f(\ell) = \ell.$$` },
   "quantite-conjuguee": { t: "Quantité conjuguée", b: R`Pour $a,b\ge0$ non tous deux nuls : $\sqrt a - \sqrt b = \dfrac{a-b}{\sqrt a + \sqrt b}$.` },
   "duplication-cos": { t: "Formule de duplication", b: R`$1+\cos\theta = 2\cos^2\dfrac{\theta}{2}$.` },
   "cayley-hamilton": { t: "Théorème de Cayley-Hamilton", b: R`Pour toute $A\in\mathcal M_n(\mathbb K)$ : $\chi_A(A) = 0$.` },
-  "scinde-C": { t: "Polynômes sur ℂ", b: R`Tout polynôme non constant de $\mathbb C[X]$ est scindé. $\chi_A$ est donc scindé et ses racines sont les valeurs propres de $A$.` }
+  "scinde-C": { t: "Polynômes sur ℂ", b: R`$$P\in\mathbb C[X],\ \deg P\geqslant1\ \Longrightarrow\ P = c\prod_{k = 1}^n(X-z_k).$$<p>En particulier $\chi_A$ est scindé sur $\mathbb C$ et ses racines sont les valeurs propres de $A$.</p>` }
 });
 
 LEMME.exercises([
@@ -313,17 +313,17 @@ LEMME.kholles([
 
 /* ---------- Chapitre « Limites et continuité » (MPSI, chap: 7) ---------- */
 LEMME.rappels({
-  "limite-monotone-fct": { t: "Limite monotone pour les fonctions", b: R`Si $f$ est croissante sur $[a,+\infty[$, alors $f$ admet une limite en $+\infty$ : c'est $\sup f$ si $f$ est majorée, et $+\infty$ sinon.` },
-  "passage-limite": { t: "Passage à la limite dans une inégalité", b: R`Si $f(t)\leqslant g(t)$ pour $t$ assez grand et si $f$ et $g$ ont des limites finies $\ell$ et $\ell'$, alors $\ell\leqslant\ell'$. Attention : une inégalité stricte $f< g$ ne donne que $\ell\leqslant\ell'$.` },
-  "absurde": { t: "Raisonnement par l'absurde", b: R`Pour montrer une propriété $P$, on suppose que $P$ est fausse et on en déduit une contradiction. Donc $P$ est vraie.` },
-  "croissances-comparees": { t: "Croissances comparées", b: R`Pour $\alpha,\beta,\gamma>0$ : $$\lim_{x\to+\infty}\frac{x^\beta}{e^{\gamma x}} = 0,\qquad \lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta} = 0.$$ L'exponentielle l'emporte sur les puissances, qui l'emportent sur le logarithme.` },
-  "formes-indeterminees": { t: "Formes indéterminées", b: R`Les opérations sur les limites ne permettent pas de conclure dans les cas $(+\infty)-(+\infty)$, $0\times\infty$, $\dfrac00$ et $\dfrac\infty\infty$. Il faut alors transformer l'expression : factoriser, utiliser la forme exponentielle, encadrer…` },
-  "operations-limites": { t: "Limites et opérations", b: R`Si $f\to\ell$ et $g\to\ell'$, alors $f+g\to\ell+\ell'$ et $fg\to\ell\ell'$. Avec des limites infinies : $(+\infty)\times\ell = +\infty$ si $\ell>0$, et $-\infty$ si $\ell<0$.` },
+  "limite-monotone-fct": { t: "Limite monotone pour les fonctions", b: R`$$f\nearrow\text{ sur }[a,+\infty[\ \Longrightarrow\ \lim_{+\infty}f = \left\{\begin{aligned}&\sup f&&\text{si }f\text{ majorée},\\&+\infty&&\text{sinon}.\end{aligned}\right.$$` },
+  "passage-limite": { t: "Passage à la limite dans une inégalité", b: R`$$\left\{\begin{aligned}&f\leqslant g\text{ au voisinage}\\&f\to\ell,\ g\to\ell'\end{aligned}\right.\quad\Longrightarrow\quad\ell\leqslant\ell'.$$<p>Attention : $f\lt g$ ne donne que $\ell\leqslant\ell'$.</p>` },
+  "absurde": { t: "Raisonnement par l'absurde", b: R`$$\neg P\ \Longrightarrow\ \text{contradiction}\qquad\text{donc}\qquad P.$$` },
+  "croissances-comparees": { t: "Croissances comparées", b: R`<p>Pour $\alpha,\beta,\gamma>0$ :</p>$$\lim_{x\to+\infty}\frac{x^\beta}{e^{\gamma x}} = 0,\qquad\lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta} = 0,\qquad\lim_{x\to0^+}x^\beta|\ln x|^\alpha = 0.$$<p>$\exp\ \gg\ $ puissances $\gg\ \ln$.</p>` },
+  "formes-indeterminees": { t: "Formes indéterminées", b: R`$$(+\infty)-(+\infty),\qquad0\times\infty,\qquad\frac00,\qquad\frac\infty\infty,\qquad1^\infty.$$<p>Lever l'indétermination : factoriser, forme exponentielle, encadrer, DL.</p>` },
+  "operations-limites": { t: "Limites et opérations", b: R`$$f\to\ell,\ g\to\ell'\ \Longrightarrow\ f+g\to\ell+\ell',\quad fg\to\ell\ell'.$$$$\ell>0 : (+\infty)\times\ell = +\infty,\qquad\ell\lt0 : (+\infty)\times\ell = -\infty.$$` },
   "racine-carre": { t: "Racine d'un carré", b: R`Pour tout réel $x$ : $\sqrt{x^2} = |x|$. Donc $\sqrt{x^2} = x$ si $x\geqslant0$, et $\sqrt{x^2} = -x$ si $x<0$.` },
-  "composition-limites": { t: "Limite d'une composée", b: R`Si $u(x)\to b$ quand $x\to a$, et si $g(X)\to\ell$ quand $X\to b$, alors $g\big(u(x)\big)\to\ell$ quand $x\to a$. Exemple : si $u(x)\to-\infty$, alors $e^{u(x)}\to0$.` },
-  "borne-zero": { t: "Borné fois tend vers zéro", b: R`Si $g$ est bornée au voisinage de $a$ et si $f\to0$ en $a$, alors $fg\to0$ en $a$. Justification : $|f g|\leqslant M|f|$.` },
-  "encadrement": { t: "Théorème d'encadrement", b: R`Si $g\leqslant f\leqslant h$ au voisinage de $a$ et si $g$ et $h$ tendent vers le même réel $\ell$, alors $f$ tend vers $\ell$.` },
-  "partie-entiere": { t: "Partie entière", b: R`$\lfloor x\rfloor$ est l'unique entier $n$ tel que $n\leqslant x< n+1$. On en déduit l'encadrement utile $x-1<\lfloor x\rfloor\leqslant x$.` },
+  "composition-limites": { t: "Limite d'une composée", b: R`$$\left\{\begin{aligned}&u(x)\xrightarrow[x\to a]{}b\\&g(X)\xrightarrow[X\to b]{}\ell\end{aligned}\right.\quad\Longrightarrow\quad g\big(u(x)\big)\xrightarrow[x\to a]{}\ell.$$<p>Ex. : $u\to-\infty\Rightarrow e^u\to0$.</p>` },
+  "borne-zero": { t: "Borné fois tend vers zéro", b: R`$$|g|\leqslant M,\ f\xrightarrow[a]{}0\ \Longrightarrow\ |fg|\leqslant M|f|\xrightarrow[a]{}0.$$` },
+  "encadrement": { t: "Théorème d'encadrement", b: R`$$\left\{\begin{aligned}&g\leqslant f\leqslant h\text{ au voisinage de }a\\&g\to\ell,\ h\to\ell\end{aligned}\right.\quad\Longrightarrow\quad f\xrightarrow[a]{}\ell.$$` },
+  "partie-entiere": { t: "Partie entière", b: R`$$\lfloor x\rfloor\in\mathbb Z,\qquad\lfloor x\rfloor\leqslant x\lt\lfloor x\rfloor+1,\qquad x-1\lt\lfloor x\rfloor\leqslant x.$$` },
   "minoration-infini": { t: "Limite infinie par minoration", b: R`Si $g\leqslant f$ au voisinage de $a$ et si $g\to+\infty$ en $a$, alors $f\to+\infty$ en $a$.` }
 });
 
@@ -530,27 +530,27 @@ LEMME.exercises([
 
 /* ---------- Limites et continuité : exercices d'apprentissage et d'entraînement (MPSI, chap: 7) ---------- */
 LEMME.rappels({
-  "taux-accroissement": { t: "Dérivée et taux d'accroissement", b: R`Si $f$ est dérivable en $a$ : $$\lim_{x\to a}\frac{f(x)-f(a)}{x-a} = f'(a).$$ Reconnaître un taux d'accroissement permet de calculer certaines limites de la forme $\frac00$.` },
-  "translation": { t: "Se ramener en 0", b: R`Pour étudier une limite en $a\neq0$, on pose $x = a+h$ : quand $x\to a$, on a $h\to0$. C'est une composition de limites.` },
-  "forme-exp": { t: "Puissance réelle", b: R`Pour $a>0$ et $b$ réel : $a^b = e^{b\ln a}$. Pour étudier une puissance où l'exposant varie, on passe toujours par cette forme.` },
-  "continuite-operations": { t: "Opérations sur les fonctions continues", b: R`Sommes, produits, quotients (dénominateur non nul) et composées de fonctions continues sont continues. Les fonctions usuelles sont continues sur leur domaine. $x\mapsto|x|$ est continue sur $\mathbb R$.` },
-  "continuite-droite-gauche": { t: "Continuité à gauche et à droite", b: R`En un point $a$ intérieur à $I$ : $f$ est continue en $a$ si et seulement si $\lim_{x\to a^-}f(x) = f(a)$ et $\lim_{x\to a^+}f(x) = f(a)$.` },
-  "tvi": { t: "Théorème des valeurs intermédiaires", b: R`Si $f$ est continue sur un intervalle $I$ et si $a,b\in I$, alors $f$ prend toutes les valeurs comprises entre $f(a)$ et $f(b)$. En particulier, si $f(a)$ et $f(b)$ sont de signes opposés, $f$ s'annule entre $a$ et $b$.` },
-  "image-intervalle": { t: "Image d'un intervalle", b: R`L'image d'un intervalle par une fonction continue est un intervalle.` },
-  "bornes-atteintes": { t: "Théorème des bornes atteintes", b: R`Une fonction continue sur un segment $[a,b]$ est bornée et atteint son minimum et son maximum. L'image d'un segment est un segment.` },
-  "injective-monotone": { t: "Continue et injective", b: R`Une fonction continue et injective sur un intervalle est strictement monotone.` },
-  "sequentielle": { t: "Caractérisation séquentielle", b: R`$f\to\ell$ en $a$ si et seulement si, pour toute suite $(x_n)$ d'éléments de $I$ qui tend vers $a$, $f(x_n)\to\ell$. Pour montrer qu'il n'y a pas de limite, il suffit de deux suites tendant vers $a$ dont les images ont des limites différentes.` },
-  "unicite-limite": { t: "Unicité de la limite", b: R`Une suite ou une fonction a au plus une limite. Si une même suite tend vers $\ell$ et vers $\ell'$, alors $\ell = \ell'$.` },
-  "densite": { t: "Densité de ℚ et des irrationnels", b: R`Tout réel est limite d'une suite de rationnels, par exemple $\frac{\lfloor nx\rfloor}{n}\to x$, et aussi limite d'une suite d'irrationnels, par exemple $\frac{\lfloor nx\rfloor}{n}+\frac{\sqrt2}{n}$.` },
-  "monotone-encadrement": { t: "Limites d'une fonction monotone en un point", b: R`Si $f$ est croissante sur un intervalle ouvert contenant $a$, elle a une limite à gauche et une limite à droite en $a$, et $$\lim_{x\to a^-}f(x)\leqslant f(a)\leqslant\lim_{x\to a^+}f(x).$$ Les inégalités s'inversent si $f$ est décroissante.` },
-  "def-limite": { t: "Définition quantifiée d'une limite infinie", b: R`$|f(x)|\to+\infty$ quand $x\to+\infty$ signifie : $\forall A\in\mathbb R,\ \exists M\in\mathbb R,\ \forall x\geqslant M,\ |f(x)|\geqslant A$. On peut remplacer les inégalités larges par des strictes.` },
+  "taux-accroissement": { t: "Dérivée et taux d'accroissement", b: R`$$f\text{ dérivable en }a\ \Longrightarrow\ \lim_{x\to a}\frac{f(x)-f(a)}{x-a} = f'(a).$$<p>Outil pour les formes $\frac00$.</p>` },
+  "translation": { t: "Se ramener en 0", b: R`$$\lim_{x\to a}f(x) = \lim_{h\to0}f(a+h)\qquad(x = a+h).$$` },
+  "forme-exp": { t: "Puissance réelle", b: R`$$a>0,\ b\in\mathbb R\ :\qquad a^b = e^{b\ln a}.$$<p>Toujours passer par cette forme quand l'exposant varie.</p>` },
+  "continuite-operations": { t: "Opérations sur les fonctions continues", b: R`<p>$f,g$ continues $\Longrightarrow$ continues :</p>$$f+g,\qquad fg,\qquad\frac fg\ (g\neq0),\qquad g\circ f.$$<p>Fonctions usuelles (dont $x\mapsto|x|$) continues sur leur domaine.</p>` },
+  "continuite-droite-gauche": { t: "Continuité à gauche et à droite", b: R`<p>Pour $a$ intérieur à $I$ :</p>$$f\text{ continue en }a\iff\lim_{x\to a^-}f(x) = f(a) = \lim_{x\to a^+}f(x).$$` },
+  "tvi": { t: "Théorème des valeurs intermédiaires", b: R`$$\left\{\begin{aligned}&f\in\mathcal C(I,\mathbb R),\ a,b\in I\\&y\text{ entre }f(a)\text{ et }f(b)\end{aligned}\right.\quad\Longrightarrow\quad\exists c\text{ entre }a\text{ et }b,\ f(c) = y.$$$$f(a)f(b)\leqslant0\ \Longrightarrow\ \exists c\in[a,b],\ f(c) = 0.$$` },
+  "image-intervalle": { t: "Image d'un intervalle", b: R`$$f\in\mathcal C(I,\mathbb R),\ I\text{ intervalle}\ \Longrightarrow\ f(I)\text{ intervalle}.$$` },
+  "bornes-atteintes": { t: "Théorème des bornes atteintes", b: R`$$f\in\mathcal C([a,b],\mathbb R)\ \Longrightarrow\ \exists c,d\in[a,b],\quad f([a,b]) = [f(c),f(d)].$$` },
+  "injective-monotone": { t: "Continue et injective", b: R`$$f\in\mathcal C(I,\mathbb R)\text{ injective}\ \Longrightarrow\ f\text{ strictement monotone}.$$` },
+  "sequentielle": { t: "Caractérisation séquentielle", b: R`$$f(x)\xrightarrow[x\to a]{}\ell\iff\forall(x_n)\in I^{\mathbb N},\ \big(x_n\to a\Rightarrow f(x_n)\to\ell\big).$$<p>Non-existence : $x_n\to a$, $y_n\to a$ avec $\lim f(x_n)\neq\lim f(y_n)$.</p>` },
+  "unicite-limite": { t: "Unicité de la limite", b: R`$$u_n\to\ell\ \text{ et }\ u_n\to\ell'\ \Longrightarrow\ \ell = \ell'.$$` },
+  "densite": { t: "Densité de ℚ et des irrationnels", b: R`$$\forall x\in\mathbb R,\qquad\underbrace{\frac{\lfloor nx\rfloor}n}_{\in\mathbb Q}\to x,\qquad\underbrace{\frac{\lfloor nx\rfloor}n+\frac{\sqrt2}n}_{\notin\mathbb Q}\to x.$$` },
+  "monotone-encadrement": { t: "Limites d'une fonction monotone en un point", b: R`$$f\nearrow\ \Longrightarrow\ \lim_{x\to a^-}f(x)\leqslant f(a)\leqslant\lim_{x\to a^+}f(x)$$<p>(limites qui existent ; inégalités inversées si $f\searrow$).</p>` },
+  "def-limite": { t: "Définition quantifiée d'une limite infinie", b: R`$$|f(x)|\xrightarrow[x\to+\infty]{}+\infty\iff\forall A\in\mathbb R,\ \exists M\in\mathbb R,\ \forall x\geqslant M,\ |f(x)|\geqslant A.$$` },
   "def-limite-finie": { t: "Définition quantifiée d'une limite finie en +∞", b: R`$f(x)\to\ell$ quand $x\to+\infty$ signifie : $\forall\varepsilon>0,\ \exists A,\ \forall x\geqslant A,\ |f(x)-\ell|\leqslant\varepsilon$.` },
   "telescopage": { t: "Somme télescopique", b: R`$\displaystyle\sum_{k=0}^{n-1}\big(u_{k+1}-u_k\big) = u_n-u_0$ : tous les termes intermédiaires se simplifient.` },
   "inegalite-triangulaire": { t: "Inégalité triangulaire", b: R`$|a+b|\leqslant|a|+|b|$, et plus généralement $\left|\sum a_k\right|\leqslant\sum|a_k|$.` },
-  "periodique": { t: "Fonction périodique", b: R`$f$ est $T$-périodique si $f(x+T) = f(x)$ pour tout $x$. Alors $f(x+nT) = f(x)$ pour tout entier $n\in\mathbb Z$, et $f$ prend sur $[0,T]$ toutes les valeurs qu'elle prend sur $\mathbb R$.` },
-  "rec-lineaire-2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`Pour $u_{n+2} = au_{n+1}+bu_n$, on résout $r^2 = ar+b$. Si cette équation a une racine double $r$, alors $u_n = (\lambda+\mu n)r^n$.` },
-  "bijection-continue": { t: "Bijection continue", b: R`Une fonction continue strictement monotone sur un intervalle $I$ réalise une bijection de $I$ sur l'intervalle $f(I)$.` },
-  "lipschitz": { t: "Fonction lipschitzienne", b: R`$f$ est $k$-lipschitzienne si $|f(x)-f(y)|\leqslant k|x-y|$ pour tous $x,y$. Une fonction lipschitzienne est continue.` }
+  "periodique": { t: "Fonction périodique", b: R`$$\forall x,\ f(x+T) = f(x)\ \Longrightarrow\ \forall n\in\mathbb Z,\ f(x+nT) = f(x),\qquad f(\mathbb R) = f([0,T]).$$` },
+  "rec-lineaire-2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`$$u_{n+2} = au_{n+1}+bu_n,\qquad r^2 = ar+b.$$$$\left\{\begin{aligned}&r_1\neq r_2&&:\ u_n = \lambda r_1^n+\mu r_2^n,\\&r\text{ double}&&:\ u_n = (\lambda+\mu n)r^n.\end{aligned}\right.$$` },
+  "bijection-continue": { t: "Bijection continue", b: R`$$f\in\mathcal C(I,\mathbb R)\text{ strictement monotone}\ \Longrightarrow\ f : I\to f(I)\text{ bijective},\ f(I)\text{ intervalle}.$$` },
+  "lipschitz": { t: "Fonction lipschitzienne", b: R`$$\forall x,y,\quad|f(x)-f(y)|\leqslant k|x-y|\ \Longrightarrow\ f\text{ continue}.$$` }
 });
 
 LEMME.exercises([

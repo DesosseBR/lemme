@@ -39,7 +39,7 @@ LEMME.subject({
 
 LEMME.rappels({
   "ordre1": { t: "Loi de vitesse d'ordre 1", b: R`Pour $A\to$ produits avec $v = k[A]$ : $[A](t) = [A]_0\,e^{-kt}$.` },
-  "demi-vie": { t: "Temps de demi-réaction", b: R`Pour un ordre 1 : $t_{1/2} = \dfrac{\ln2}{k}$, indépendant de la concentration initiale.` }
+  "demi-vie": { t: "Temps de demi-réaction", b: R`$$\text{ordre }1\ :\qquad t_{1/2} = \frac{\ln2}k\quad(\text{indépendant de }[A]_0).$$` }
 });
 
 LEMME.exercises([

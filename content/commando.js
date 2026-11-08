@@ -34,24 +34,24 @@ LEMME.subject({
 });
 
 LEMME.rappels({
-  "t-norme": { t: "Norme", b: R`Une norme sur un $\mathbb K$-espace vectoriel $E$ est une application $x\mapsto\|x\|$ à valeurs dans $\mathbb R_+$ telle que : $\|x\| = 0\iff x = 0$ ; $\|\lambda x\| = |\lambda|\,\|x\|$ ; $\|x+y\|\leqslant\|x\|+\|y\|$. Elle définit la distance $d(x,y) = \|x-y\|$.` },
-  "t-distance": { t: "Distance", b: R`Une distance sur $E$ vérifie : $d(x,y) = 0\iff x = y$ ; $d(x,y) = d(y,x)$ ; $d(x,z)\leqslant d(x,y)+d(y,z)$ (inégalité triangulaire).` },
+  "t-norme": { t: "Norme", b: R`$$\|\cdot\| : E\to\mathbb R_+,\quad\left\{\begin{aligned}&\|x\| = 0\iff x = 0,\\&\|\lambda x\| = |\lambda|\,\|x\|,\\&\|x+y\|\leqslant\|x\|+\|y\|.\end{aligned}\right.\qquad d(x,y) = \|x-y\|.$$` },
+  "t-distance": { t: "Distance", b: R`$$d : E^2\to\mathbb R_+,\quad\left\{\begin{aligned}&d(x,y) = 0\iff x = y,\\&d(x,y) = d(y,x),\\&d(x,z)\leqslant d(x,y)+d(y,z).\end{aligned}\right.$$` },
   "t-tri-inverse": { t: "Inégalité triangulaire renversée", b: R`Pour tous $x,y,z$ : $|d(x,z)-d(y,z)|\leqslant d(x,y)$. En particulier $d(a,y)\geqslant d(a,x)-d(x,y)$.` },
-  "t-distance-discrete": { t: "Distance discrète", b: R`Sur un ensemble $E$ quelconque, $d(x,y) = 0$ si $x = y$ et $d(x,y) = 1$ sinon définit une distance. Pour elle, $B(x,1) = \{x\}$ et $B_f(x,1) = E$.` },
+  "t-distance-discrete": { t: "Distance discrète", b: R`$$d(x,y) = \left\{\begin{aligned}&0&&\text{si }x = y\\&1&&\text{sinon}\end{aligned}\right.\qquad B(x,1) = \{x\},\qquad B_f(x,1) = E.$$` },
   "t-boules": { t: "Boules", b: R`$B(a,r) = \{x\in E : d(a,x)< r\}$ est la boule ouverte, $B_f(a,r) = \{x\in E : d(a,x)\leqslant r\}$ la boule fermée.` },
-  "t-ouvert": { t: "Ouvert et fermé", b: R`$\Omega$ est ouvert si pour tout $x\in\Omega$, il existe $\rho>0$ avec $B(x,\rho)\subset\Omega$. $F$ est fermé si son complémentaire $E\setminus F$ est ouvert.` },
-  "t-adherence": { t: "Adhérence", b: R`$\overline A$ est le plus petit fermé contenant $A$ : si $F$ est fermé et $A\subset F$, alors $\overline A\subset F$. On a les équivalences $$x\in\overline A\iff\forall\varepsilon>0,\ B(x,\varepsilon)\cap A\neq\varnothing\iff d(x,A) = 0.$$ Si $F$ est fermé, $\overline F = F$.` },
-  "t-voisinage": { t: "Voisinage", b: R`$V$ est un voisinage de $x$ s'il contient un ouvert contenant $x$, par exemple une boule $B(x,\rho)$. Un ouvert qui contient $x$ est un voisinage de $x$. L'intérieur $\mathring V$ d'un voisinage de $x$ est un ouvert qui contient $x$.` },
-  "t-inf": { t: "Borne inférieure", b: R`$\inf X$ est le plus grand minorant de $X$. Donc $\inf X\leqslant y$ pour tout $y\in X$, et si $m\leqslant y$ pour tout $y\in X$, alors $m\leqslant\inf X$.` },
+  "t-ouvert": { t: "Ouvert et fermé", b: R`$$\Omega\text{ ouvert}\iff\forall x\in\Omega,\ \exists\rho>0,\ B(x,\rho)\subset\Omega.$$$$F\text{ fermé}\iff E\setminus F\text{ ouvert}.$$` },
+  "t-adherence": { t: "Adhérence", b: R`$$x\in\overline A\iff\forall\varepsilon>0,\ B(x,\varepsilon)\cap A\neq\varnothing\iff d(x,A) = 0.$$$$F\text{ fermé},\ A\subset F\ \Longrightarrow\ \overline A\subset F;\qquad F\text{ fermé}\iff\overline F = F.$$` },
+  "t-voisinage": { t: "Voisinage", b: R`$$V\in\mathcal V(x)\iff\exists\rho>0,\ B(x,\rho)\subset V.$$$$\Omega\text{ ouvert},\ x\in\Omega\ \Longrightarrow\ \Omega\in\mathcal V(x);\qquad V\in\mathcal V(x)\ \Longrightarrow\ x\in\mathring V.$$` },
+  "t-inf": { t: "Borne inférieure", b: R`$$m = \inf X\iff\left\{\begin{aligned}&\forall y\in X,\ m\leqslant y,\\&\forall m',\ \big(\forall y\in X,\ m'\leqslant y\big)\Rightarrow m'\leqslant m.\end{aligned}\right.$$` },
   "t-dist-partie": { t: "Distance à une partie", b: R`Pour $A$ non vide : $d(x,A) = \inf_{y\in A}d(x,y)$. On a $d(x,A) = 0\iff x\in\overline A$. Si $F$ est fermé : $d(x,F) = 0\iff x\in F$.` },
-  "t-lipschitz": { t: "Lipschitzienne, uniformément continue, continue", b: R`$f$ est $k$-lipschitzienne si $d'(f(x),f(y))\leqslant k\,d(x,y)$. Alors elle est uniformément continue : $\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y,\ d(x,y)<\alpha\implies d'(f(x),f(y))<\varepsilon$ (prendre $\alpha = \varepsilon/k$). Uniformément continue entraîne continue.` },
-  "t-uc": { t: "Continuité uniforme", b: R`$f$ est uniformément continue si $\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y,\ d(x,y)<\alpha\implies d'(f(x),f(y))<\varepsilon$. Le $\alpha$ est le même pour tous les points : c'est toute la différence avec la continuité.` },
-  "t-continuite-ouverts": { t: "Continuité et ouverts", b: R`$f : E\to E'$ est continue si et seulement si l'image réciproque de tout ouvert de $E'$ est un ouvert de $E$, ou encore si et seulement si l'image réciproque de tout fermé est un fermé.` },
-  "t-operations": { t: "Opérations sur les fonctions continues", b: R`Si $f,g : E\to\mathbb R$ sont continues, alors $f+g$, $fg$ et $f/g$ (là où $g$ ne s'annule pas) sont continues.` },
-  "t-topo-induite": { t: "Topologie induite", b: R`Pour $V\subset E$ muni de la distance restreinte : les ouverts de $V$ sont les $\Omega\cap V$ et les fermés de $V$ sont les $G\cap V$, avec $\Omega$ ouvert et $G$ fermé de $E$.` },
+  "t-lipschitz": { t: "Lipschitzienne, uniformément continue, continue", b: R`$$d'\big(f(x),f(y)\big)\leqslant k\,d(x,y)\ \Longrightarrow\ f\text{ uniformément continue}\ \Longrightarrow\ f\text{ continue}.$$<p>Pour la continuité uniforme, prendre $\alpha = \frac\varepsilon k$.</p>` },
+  "t-uc": { t: "Continuité uniforme", b: R`$$f\text{ u.c.}\iff\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y,\quad d(x,y)\lt\alpha\Rightarrow d'\big(f(x),f(y)\big)\lt\varepsilon.$$<p>$\alpha$ ne dépend pas du point.</p>` },
+  "t-continuite-ouverts": { t: "Continuité et ouverts", b: R`$$f\text{ continue}\iff\forall\Omega'\text{ ouvert de }E',\ f^{-1}(\Omega')\text{ ouvert}\iff\forall F'\text{ fermé},\ f^{-1}(F')\text{ fermé}.$$` },
+  "t-operations": { t: "Opérations sur les fonctions continues", b: R`$$f,g : E\to\mathbb R\text{ continues}\ \Longrightarrow\ f+g,\quad fg,\quad\frac fg\ (g\neq0)\ \text{ continues}.$$` },
+  "t-topo-induite": { t: "Topologie induite", b: R`$$U\text{ ouvert de }V\iff\exists\Omega\text{ ouvert de }E,\ U = \Omega\cap V;\qquad G'\text{ fermé de }V\iff\exists G\text{ fermé},\ G' = G\cap V.$$` },
   "t-isole": { t: "Point isolé", b: R`$a\in A$ est isolé dans $A$ s'il existe $r>0$ tel que $B(a,r)\cap A = \{a\}$. Dans $\mathbb R$ : $]a-r,a+r[\,\cap A = \{a\}$.` },
-  "t-densite-q": { t: "Densité de ℚ", b: R`Tout intervalle ouvert non vide $]u,v[$ de $\mathbb R$ contient au moins un rationnel.` },
-  "t-denombrable": { t: "Ensembles dénombrables", b: R`$\mathbb Q$ est dénombrable. S'il existe une injection de $A$ dans un ensemble au plus dénombrable, alors $A$ est au plus dénombrable (fini ou dénombrable).` },
+  "t-densite-q": { t: "Densité de ℚ", b: R`$$\forall u\lt v,\quad\,]u,v[\,\cap\,\mathbb Q\neq\varnothing.$$` },
+  "t-denombrable": { t: "Ensembles dénombrables", b: R`$$\mathbb Q\text{ dénombrable};\qquad\exists\,\iota : A\hookrightarrow B,\ B\text{ au plus dénombrable}\ \Longrightarrow\ A\text{ au plus dénombrable}.$$` },
   "t-adh-ouvert": { t: "Ouvert et adhérence", b: R`Si $\Omega$ est ouvert et $B\subset E$ : $\Omega\cap\overline B\subset\overline{\Omega\cap B}$.` }
 });
 

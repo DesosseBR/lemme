@@ -60,7 +60,7 @@ const LEMME = window.LEMME = {
 
 /* Rappels de cours partagés entre plusieurs matières */
 LEMME.rappels({
-  "recurrence": { t: "Raisonnement par récurrence", b: R`Si $P(n_0)$ est vraie et si, pour tout $n\ge n_0$, $P(n)\Rightarrow P(n+1)$, alors $P(n)$ est vraie pour tout $n\ge n_0$.` },
-  "edo1": { t: "Équation différentielle linéaire d'ordre 1", b: R`Les solutions de $y' + \dfrac{y}{\tau} = \dfrac{A}{\tau}$ sont $y(t) = A + \lambda\,e^{-t/\tau}$. La constante $\lambda$ se fixe avec la condition initiale.` },
+  "recurrence": { t: "Raisonnement par récurrence", b: R`$$\left\{\begin{aligned}&P(n_0)\\&\forall n\geqslant n_0,\ P(n)\Rightarrow P(n+1)\end{aligned}\right.\quad\Longrightarrow\quad\forall n\geqslant n_0,\ P(n).$$` },
+  "edo1": { t: "Équation différentielle linéaire d'ordre 1", b: R`$$y'+\frac y\tau = \frac A\tau\iff\exists\lambda\in\mathbb R,\ \forall t,\quad y(t) = A+\lambda\,e^{-t/\tau}.$$<p>$\lambda$ : fixé par la condition initiale.</p>` },
   "premier-ordre-reperes": { t: "Repères d'une réponse du premier ordre", b: R`Une réponse $A\big(1-e^{-t/\tau}\big)$ atteint $63\,\%$ de $A$ en $\tau$, $95\,\%$ en $3\tau$ et $99\,\%$ en $\tau\ln 100 \approx 4{,}6\,\tau$.` }
 });
