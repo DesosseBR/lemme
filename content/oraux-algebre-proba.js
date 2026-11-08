@@ -415,7 +415,7 @@ LEMME.exercises([
 {
   id: "o-an-63", subj: "oraux", year: "mp", chap: 3, concours: "ccinp", level: 3, time: "20 min",
   title: "Endomorphismes normaux",
-  enonce: R`<p>Soit $E$ un espace euclidien de produit scalaire $(\,|\,)$ et de norme $\|\ \|$. Pour $u\in\mathcal L(E)$, on note $u^\ast$ son adjoint.</p><ol><li>Un endomorphisme $u$ tel que $(u(x)|x) = 0$ pour tout $x$ est-il forcément nul ?</li><li>Soit $u\in\mathcal L(E)$. Montrer l'équivalence de : (i) $u\circ u^\ast = u^\ast\circ u$ ; (ii) $(u(x)|u(y)) = (u^\ast(x)|u^\ast(y))$ pour tous $x,y$ ; (iii) $\|u(x)\| = \|u^\ast(x)\|$ pour tout $x$.</li></ol>`,
+  enonce: R`<p>Soit $E$ un espace euclidien de produit scalaire $(\,|\,)$ et de norme $\|\ \|$. Pour $u\in\mathcal L(E)$, on note $u^\ast$ son adjoint.</p><ol><li>Un endomorphisme $u$ tel que $(u(x)|x) = 0$ pour tout $x$ est-il forcément nul ?</li><li>Soit $u\in\mathcal L(E)$. Montrer l'équivalence de :<br>(i) $u\circ u^\ast = u^\ast\circ u$ ;<br>(ii) $(u(x)|u(y)) = (u^\ast(x)|u^\ast(y))$ pour tous $x,y$ ;<br>(iii) $\|u(x)\| = \|u^\ast(x)\|$ pour tout $x$.</li></ol>`,
   decode: { donnees: [R`$(u(x)|y) = (x|u^\ast(y))$.`], but: R`Un contre-exemple, puis une caractérisation des endomorphismes normaux.`, cles: {
     rot: R`La rotation d'angle $\frac\pi2$ dans $\mathbb R^2$ : $u(x_1,x_2) = (-x_2,x_1)$. Chaque vecteur est envoyé sur un vecteur orthogonal.` } },
   steps: [

@@ -12,7 +12,7 @@ LEMME.rappels({
 LEMME.exercises([
 { id: "pre-01", ...P, level: 3, time: "50 min",
   title: "Les polynômes de Legendre",
-  enonce: R`<p>On munit $E = \mathbb R[X]$ du produit scalaire $(P|Q) = \int_{-1}^1P(t)Q(t)\,dt$. Pour $n\in\mathbb N$, on pose $L_n = \big((X^2-1)^n\big)^{(n)}$ (dérivée $n$-ième).</p><ol><li>a) Montrer que $(L_n)_{n\in\mathbb N}$ est une base orthogonale de $E$. b) Calculer $\|L_n\|$.</li><li>Déterminer l'orthonormalisée de Schmidt de la base canonique $(X^n)_{n\in\mathbb N}$.</li><li>Calculer la distance de $X^3$ à $\mathbb R_1[X]$.</li></ol>`,
+  enonce: R`<p>On munit $E = \mathbb R[X]$ du produit scalaire $(P|Q) = \int_{-1}^1P(t)Q(t)\,dt$. Pour $n\in\mathbb N$, on pose $L_n = \big((X^2-1)^n\big)^{(n)}$ (dérivée $n$-ième).</p><ol><li>a) Montrer que $(L_n)_{n\in\mathbb N}$ est une base orthogonale de $E$.<br>b) Calculer $\|L_n\|$.</li><li>Déterminer l'orthonormalisée de Schmidt de la base canonique $(X^n)_{n\in\mathbb N}$.</li><li>Calculer la distance de $X^3$ à $\mathbb R_1[X]$.</li></ol>`,
   decode: { donnees: [R`$\ell_n = (X^2-1)^n = (X-1)^n(X+1)^n$ a $\pm1$ pour racines d'ordre $n$.`], but: R`$n$ intégrations par parties font passer les $n$ dérivées sur l'autre polynôme.`, cles: {} },
   steps: [
     { t: "1a) Degré de Lₙ", h: R`<p>$\ell_n$ est de degré $2n$, de coefficient dominant $1$.</p>`, b: R`<p>Notons $\ell_n = (X^2-1)^n = X^{2n}+\dots$. Dériver $n$ fois $X^{2n}$ donne $\frac{(2n)!}{n!}X^n$, et les autres termes ont un degré plus petit. Donc</p>$$L_n = \frac{(2n)!}{n!}X^n+(\text{termes de degré}< n),$$$$\deg L_n = n.$$<p>Exemples : $L_0 = 1$, $L_1 = (X^2-1)' = 2X$, $L_2 = (X^4-2X^2+1)'' = 12X^2-4$.</p><p>Une famille de polynômes de degrés $0,1,2,\dots$ est une base de $\mathbb R[X]$ (échelonnée en degré).</p>` },
@@ -26,7 +26,7 @@ LEMME.exercises([
 },
 { id: "pre-02", ...P, level: 3, time: "50 min",
   title: "Une base orthogonale pour le poids exponentiel",
-  enonce: R`<p>Sur $E = \mathbb R[X]$, on pose $\varphi(P,Q) = \int_0^{+\infty}P(t)Q(t)e^{-t}\,dt$, et pour $n\in\mathbb N$, $h_n = e^X\big(X^ne^{-X}\big)^{(n)}$.</p><ol><li>Montrer que $\varphi$ est un produit scalaire sur $E$.</li><li>a) Préciser les coefficients de $h_n$ ; montrer que $(h_n)$ est une base de $E$. b) Montrer qu'elle est orthogonale. c) Calculer $\|h_n\|$ et en déduire une base orthonormée.</li></ol>`,
+  enonce: R`<p>Sur $E = \mathbb R[X]$, on pose $\varphi(P,Q) = \int_0^{+\infty}P(t)Q(t)e^{-t}\,dt$, et pour $n\in\mathbb N$, $h_n = e^X\big(X^ne^{-X}\big)^{(n)}$.</p><ol><li>Montrer que $\varphi$ est un produit scalaire sur $E$.</li><li>a) Préciser les coefficients de $h_n$ ; montrer que $(h_n)$ est une base de $E$.<br>b) Montrer qu'elle est orthogonale.<br>c) Calculer $\|h_n\|$ et en déduire une base orthonormée.</li></ol>`,
   decode: { donnees: [R`$h_n(t)e^{-t} = \big(t^ne^{-t}\big)^{(n)}$.`], but: R`Formule de Leibniz, puis $n$ intégrations par parties sur $[0,+\infty[$.`, cles: {} },
   steps: [
     { t: "1) Un produit scalaire", h: R`<p>Convergence, puis les quatre propriétés.</p>`, b: R`<p><b>Convergence</b> : $t\mapsto P(t)Q(t)e^{-t}$ est continue sur $[0,+\infty[$ et $t^2P(t)Q(t)e^{-t}\to0$ en $+\infty$ (croissances comparées), donc elle est $o(1/t^2)$ : intégrable.</p><p><b>Bilinéaire, symétrique</b> : linéarité de l'intégrale, $PQ = QP$. <b>Positive</b> : $\varphi(P,P) = \int_0^{+\infty}P^2e^{-t}\geqslant0$. <b>Définie</b> : si $\varphi(P,P) = 0$, la fonction continue positive $P^2e^{-t}$ est nulle sur $[0,+\infty[$, donc $P$ a une infinité de racines : $P = 0$.</p>`, rappels: ["pre-ps", "pre-intnulle"] },
@@ -39,7 +39,7 @@ LEMME.exercises([
 },
 { id: "pre-03", ...P, level: 2, time: "35 min",
   title: "Les polynômes de Tchebychev sont orthogonaux",
-  enonce: R`<p>Sur $E = \mathbb R[X]$, on pose $\varphi(P,Q) = \int_{-1}^1\frac{P(t)Q(t)}{\sqrt{1-t^2}}\,dt$. On note $T_n$ l'unique polynôme tel que $T_n(\cos\theta) = \cos(n\theta)$ pour tout $\theta$.</p><ol><li>Montrer que $\varphi$ est un produit scalaire sur $E$.</li><li>a) Montrer que $(T_n)$ est une base orthogonale de $(E,\varphi)$. b) Calculer $\|T_n\|$.</li></ol>`,
+  enonce: R`<p>Sur $E = \mathbb R[X]$, on pose $\varphi(P,Q) = \int_{-1}^1\frac{P(t)Q(t)}{\sqrt{1-t^2}}\,dt$. On note $T_n$ l'unique polynôme tel que $T_n(\cos\theta) = \cos(n\theta)$ pour tout $\theta$.</p><ol><li>Montrer que $\varphi$ est un produit scalaire sur $E$.</li><li>a) Montrer que $(T_n)$ est une base orthogonale de $(E,\varphi)$.<br>b) Calculer $\|T_n\|$.</li></ol>`,
   decode: { donnees: [R`Le changement de variable $t = \cos\theta$ transforme $\frac{dt}{\sqrt{1-t^2}}$ en $d\theta$ (au signe près).`], but: R`Se ramener à $\int_0^\pi\cos(n\theta)\cos(m\theta)\,d\theta$.`, cles: {} },
   steps: [
     { t: "1) Un produit scalaire", h: R`<p>Intégrabilité en $\pm1$.</p>`, b: R`<p>$PQ$ est bornée sur $[-1,1]$, et $\frac1{\sqrt{1-t^2}} = \frac1{\sqrt{(1-t)(1+t)}}\sim\frac1{\sqrt2\sqrt{1-t}}$ en $1$ (intégrable, exposant $\frac12< 1$), de même en $-1$. Donc l'intégrale converge.</p><p>Bilinéaire, symétrique : clair. Positive : intégrande $\geqslant0$. Définie : si $\varphi(P,P) = 0$, la fonction continue positive $\frac{P^2}{\sqrt{1-t^2}}$ est nulle sur $]-1,1[$, donc $P$ a une infinité de racines et $P = 0$.</p>`, rappels: ["pre-ps", "pre-intnulle"] },

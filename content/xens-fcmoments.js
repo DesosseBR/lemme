@@ -28,7 +28,7 @@ LEMME.exercises([
 <li>Montrer que $\varphi$ est définie et continue sur $\mathbb R$, que $|\varphi(t)|\leqslant1 = \varphi(0)$ et que $\varphi(-t) = \overline{\varphi(t)}$.</li>
 <li>Montrer que si $X$ admet un moment d'ordre $n$, elle admet un moment d'ordre $k$ pour tout $k\leqslant n$.</li>
 <li>On suppose que $X$ admet un moment d'ordre $n$. Montrer que $\varphi$ est de classe $\mathcal C^n$ et que $$\varphi^{(k)}(t) = i^k\int x^ke^{itx}f(x)\,dx\qquad(0\leqslant k\leqslant n).$$ En déduire $\mathbb E[X^k] = (-i)^k\varphi^{(k)}(0)$.</li>
-<li>Exemples. a) $X$ uniforme sur $[-1,1]$ ($f = \frac12$ sur $[-1,1]$). Calculer $\varphi$ et retrouver $\mathbb E[X^2]$ par la question 3.<br>b) $X$ de loi exponentielle de paramètre $1$ ($f(x) = e^{-x}$ sur $[0,+\infty[$). Calculer $\varphi$, puis tous les moments.</li></ol>`,
+<li>Exemples.<br>a) $X$ uniforme sur $[-1,1]$ ($f = \frac12$ sur $[-1,1]$). Calculer $\varphi$ et retrouver $\mathbb E[X^2]$ par la question 3.<br>b) $X$ de loi exponentielle de paramètre $1$ ($f(x) = e^{-x}$ sur $[0,+\infty[$). Calculer $\varphi$, puis tous les moments.</li></ol>`,
   decode: { donnees: [R`$|e^{itx}| = 1$ et $\big|\frac{d^k}{dt^k}e^{itx}\big| = |x|^k$.`], but: R`Dériver sous l'intégrale en dominant par $|x|^kf(x)$.`, cles: {} },
   steps: [
     Q(1, "Définition et premières propriétés", R`<p>Domination par $f$, indépendante de $t$.</p>`, R`<p>$|e^{itx}f(x)| = f(x)$, intégrable : $\varphi(t)$ existe et $|\varphi(t)|\leqslant\int f = 1 = \varphi(0)$. Pour $x$ fixé, $t\mapsto e^{itx}f(x)$ est continue, et la domination par $f$ (indépendante de $t$) donne la continuité de $\varphi$. Enfin $\overline{e^{itx}} = e^{-itx}$ et $f$ est réelle, donc $\varphi(-t) = \overline{\varphi(t)}$.</p>`, ["fcm-dom"]),

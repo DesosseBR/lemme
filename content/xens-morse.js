@@ -78,7 +78,7 @@ LEMME.exercises([
   title: "Exemples et conséquences",
   enonce: PRE + R`<p><b>Partie III.</b></p><ol start="8">
 <li>Pour $f(x,y) = x^2+x^4-y^2$ et $f(x,y) = x^2+y^2+y^3$, vérifier les hypothèses et donner explicitement un changement de coordonnées de Morse.</li>
-<li>Déduire du lemme de Morse : (a) un point critique non dégénéré est isolé parmi les points critiques ; (b) si $(p,q) = (n,0)$, $0$ est un minimum local strict ; si $p\geqslant1$ et $q\geqslant1$, ce n'est pas un extremum local.</li>
+<li>Déduire du lemme de Morse :<br>(a) un point critique non dégénéré est isolé parmi les points critiques ;<br>(b) si $(p,q) = (n,0)$, $0$ est un minimum local strict ; si $p\geqslant1$ et $q\geqslant1$, ce n'est pas un extremum local.</li>
 <li>Soit $f(x,y) = x^2-y^3$. Montrer que $0$ est un point critique dégénéré, et qu'il n'existe aucun $\mathcal C^2$-difféomorphisme local $g$ avec $g(0) = 0$ et $f\circ g^{-1}(z) = \pm z_1^2\pm z_2^2$.</li></ol>`,
   decode: { donnees: [R`Lemme de Morse (Partie II).`], but: R`Le voir sur des exemples, en tirer les conséquences, et voir que la non-dégénérescence est nécessaire.`, cles: {} },
   steps: [

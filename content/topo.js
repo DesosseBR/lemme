@@ -72,7 +72,7 @@ LEMME.exercises([
 },
 { id: "topo-02", ...P, level: 2, time: "30 min",
   title: "Adhérence et intérieur d'un produit",
-  enonce: R`<p>Soit $E,F$ deux espaces vectoriels normés, $A\subset E$, $B\subset F$. On munit $E\times F$ de la norme $N(x,y) = \max(\|x\|_E,\|y\|_F)$. Montrer :</p><p>a) $\overline{A\times B} = \overline A\times\overline B$ ; b) $(A\times B)^\circ = \mathring A\times\mathring B$.</p>`,
+  enonce: R`<p>Soit $E,F$ deux espaces vectoriels normés, $A\subset E$, $B\subset F$. On munit $E\times F$ de la norme $N(x,y) = \max(\|x\|_E,\|y\|_F)$. Montrer :</p><p>a) $\overline{A\times B} = \overline A\times\overline B$ ;<br>b) $(A\times B)^\circ = \mathring A\times\mathring B$.</p>`,
   decode: { donnees: [R`Une suite $(x_n,y_n)$ converge dans $E\times F$ si et seulement si $(x_n)$ et $(y_n)$ convergent.`], but: R`a) par les suites ; b) par les boules : $B_N((x,y),r) = B(x,r)\times B(y,r)$.`, cles: {} },
   steps: [
     { t: "a) Adhérence par les suites", h: R`<p>Convergence composante par composante.</p>`, b: R`<p>Avec la norme $N$, $N\big((x_n,y_n)-(x,y)\big) = \max(\|x_n-x\|,\|y_n-y\|)$ tend vers $0$ si et seulement si les deux termes tendent vers $0$. Donc :</p>$$(x,y)\in\overline{A\times B}\iff\exists(x_n,y_n)\in A\times B,\ (x_n,y_n)\to(x,y)$$$$\iff\begin{cases}\exists(x_n)\in A^{\mathbb N},\ x_n\to x\\\exists(y_n)\in B^{\mathbb N},\ y_n\to y\end{cases}\iff\begin{cases}x\in\overline A\\y\in\overline B\end{cases}$$<div class="sbox">$$\overline{A\times B} = \overline A\times\overline B.$$</div>`, rappels: ["top-fermeseq"] },
@@ -83,7 +83,7 @@ LEMME.exercises([
 },
 { id: "topo-03", ...P, level: 2, time: "25 min",
   title: "Fonctions positives : fermé ; strictement positives : pas ouvert",
-  enonce: R`<p>Soit $E$ l'espace des fonctions continues bornées de $\mathbb R$ dans $\mathbb R$, muni de $\|\cdot\|_\infty$.</p><p>a) $F = \{f\in E : \forall x,\ f(x)\geqslant0\}$ est-il fermé dans $E$ ? b) $U = \{f\in E : \forall x,\ f(x)>0\}$ est-il ouvert dans $E$ ?</p>`,
+  enonce: R`<p>Soit $E$ l'espace des fonctions continues bornées de $\mathbb R$ dans $\mathbb R$, muni de $\|\cdot\|_\infty$.</p><p>a) $F = \{f\in E : \forall x,\ f(x)\geqslant0\}$ est-il fermé dans $E$ ?<br>b) $U = \{f\in E : \forall x,\ f(x)>0\}$ est-il ouvert dans $E$ ?</p>`,
   decode: { donnees: [R`$|f_n(x)-f(x)|\leqslant\|f_n-f\|_\infty$ pour tout $x$.`], but: R`a) caractérisation séquentielle ; b) trouver $f\in U$ dont aucune boule n'est incluse dans $U$.`, cles: {} },
   steps: [
     { t: "a) F est fermé", h: R`<p>Passer à la limite dans $f_n(x)\geqslant0$.</p>`, b: R`<p>Soit $(f_n)$ une suite de $F$ qui converge vers $f\in E$. Pour tout $x$ : $|f_n(x)-f(x)|\leqslant\|f_n-f\|_\infty\to0$, donc $f_n(x)\to f(x)$. Comme $f_n(x)\geqslant0$ pour tout $n$, le passage à la limite dans l'inégalité donne $f(x)\geqslant0$. Donc $f\in F$.</p><div class="sbox"><p style="margin:0">$F$ est fermé dans $E$.</p></div>`, rappels: ["top-fermeseq"] },
@@ -105,7 +105,7 @@ LEMME.exercises([
 },
 { id: "topo-05", ...P, level: 2, time: "15 min",
   title: "Translaté et somme d'une partie avec un ouvert",
-  enonce: R`<p>Soit $E$ un espace normé et $\Omega$ un ouvert de $E$.</p><p>a) Montrer que pour tout $a\in E$, $a+\Omega = \{a+x : x\in\Omega\}$ est ouvert. b) En déduire que pour toute partie $A$, $A+\Omega = \{a+x : a\in A,\ x\in\Omega\}$ est ouvert.</p>`,
+  enonce: R`<p>Soit $E$ un espace normé et $\Omega$ un ouvert de $E$.</p><p>a) Montrer que pour tout $a\in E$, $a+\Omega = \{a+x : x\in\Omega\}$ est ouvert.<br>b) En déduire que pour toute partie $A$, $A+\Omega = \{a+x : a\in A,\ x\in\Omega\}$ est ouvert.</p>`,
   decode: { donnees: [R`La translation $\tau_{-a} : y\mapsto y-a$ est continue.`], but: R`$a+\Omega = \tau_{-a}^{-1}(\Omega)$, puis réunion.`, cles: {} },
   steps: [
     { t: "a) Image réciproque par une translation", h: R`<p>$y\in a+\Omega\iff y-a\in\Omega$.</p>`, b: R`<p>Pour $y\in E$ : $y\in a+\Omega\iff y-a\in\Omega\iff\tau_{-a}(y)\in\Omega$. Donc $a+\Omega = \tau_{-a}^{-1}(\Omega)$, image réciproque d'un ouvert par l'application continue (1-lipschitzienne) $\tau_{-a}$ : c'est un ouvert.</p><p>Directement avec les boules : si $B(x,r)\subset\Omega$, alors $B(a+x,r) = a+B(x,r)\subset a+\Omega$.</p>`, rappels: ["top-ouvert"] },
@@ -191,7 +191,7 @@ LEMME.exercises([
 },
 { id: "topo-13", ...P, level: 3, time: "25 min",
   title: "Deux normes qui ont la même boule unité sont égales",
-  enonce: R`<p>Soit $E$ un $\mathbb K$-espace vectoriel, $N_1,N_2$ deux normes, $B_i = \{x : N_i(x)< 1\}$ et $B'_i = \{x : N_i(x)\leqslant1\}$. Montrer :</p><p>a) $B'_1 = B'_2\iff N_1 = N_2$ ; b) $B_1 = B_2\iff N_1 = N_2$.</p>`,
+  enonce: R`<p>Soit $E$ un $\mathbb K$-espace vectoriel, $N_1,N_2$ deux normes, $B_i = \{x : N_i(x)< 1\}$ et $B'_i = \{x : N_i(x)\leqslant1\}$. Montrer :</p><p>a) $B'_1 = B'_2\iff N_1 = N_2$ ;<br>b) $B_1 = B_2\iff N_1 = N_2$.</p>`,
   decode: { donnees: [R`Homogénéité : $N\big(\frac x{N_1(x)}\big) = \frac{N(x)}{N_1(x)}$.`], but: R`Normaliser $x$ pour le mettre sur la sphère unité de $N_1$.`, cles: {} },
   steps: [
     { t: "a) Boules fermées", h: R`<p>$y = \frac1{N_1(x)}x$ vérifie $N_1(y) = 1$.</p>`, b: R`<p>Si $N_1 = N_2$, les boules sont égales. Réciproquement, supposons $B'_1 = B'_2$. Soit $x\neq0$ et $y = \frac x{N_1(x)}$ :</p>$$N_1(y) = \frac{N_1(x)}{N_1(x)} = 1\ \Rightarrow\ y\in B'_1$$$$= B'_2\ \Rightarrow\ N_2(y) = \frac{N_2(x)}{N_1(x)}\leqslant1\ \Rightarrow\ N_2(x)\leqslant N_1(x).$$<p>Les rôles étant symétriques, $N_1(x)\leqslant N_2(x)$. Pour $x = 0$, l'égalité est claire. Donc $N_1 = N_2$.</p>` },
@@ -213,7 +213,7 @@ LEMME.exercises([
 },
 { id: "topo-15", ...P, level: 3, time: "35 min",
   title: "Adhérence d'une boule ouverte, intérieur d'une boule fermée",
-  enonce: R`<p>Soit $(E,\|\cdot\|)$ un espace normé, $a\in E$, $r>0$. Montrer :</p><p>a) $\overline{B(a,r)} = B'(a,r)$ ; b) $\big(B'(a,r)\big)^\circ = B(a,r)$.</p>`,
+  enonce: R`<p>Soit $(E,\|\cdot\|)$ un espace normé, $a\in E$, $r>0$. Montrer :</p><p>a) $\overline{B(a,r)} = B'(a,r)$ ;<br>b) $\big(B'(a,r)\big)^\circ = B(a,r)$.</p>`,
   decode: { donnees: [R`La boule fermée est fermée, la boule ouverte est ouverte.`], but: R`Approcher un point de la sphère par des points du segment $[a,x]$ (dedans) et de son prolongement (dehors).`, cles: {} },
   steps: [
     { t: "a) Première inclusion", h: R`<p>$B'(a,r)$ est un fermé contenant $B(a,r)$.</p>`, b: R`<p>$B(a,r)\subset B'(a,r)$ et $B'(a,r)$ est fermée, donc $\overline{B(a,r)}\subset B'(a,r)$ (l'adhérence est le plus petit fermé contenant la partie).</p>` },
@@ -236,7 +236,7 @@ LEMME.exercises([
 },
 { id: "topo-17", ...P, level: 3, time: "45 min",
   title: "Distance de 0 à deux parties : atteinte ou non",
-  enonce: R`<p>Soit $E = \mathcal C([0,1],\mathbb R)$ muni de $\|\cdot\|_\infty$.</p><p>a) $A = \{f\in E : f(0) = 1\text{ et }\int_0^1f = 0\}$. 1) Montrer que $A$ est fermée. 2) Calculer $d(0,A)$. Est-elle atteinte ?</p><p>b) Mêmes questions pour $B = \{f\in E : f(0) = 0\text{ et }\int_0^1f = 1\}$.</p>`,
+  enonce: R`<p>Soit $E = \mathcal C([0,1],\mathbb R)$ muni de $\|\cdot\|_\infty$.</p><p>a) $A = \{f\in E : f(0) = 1\text{ et }\int_0^1f = 0\}$.<br>1) Montrer que $A$ est fermée.<br>2) Calculer $d(0,A)$. Est-elle atteinte ?</p><p>b) Mêmes questions pour $B = \{f\in E : f(0) = 0\text{ et }\int_0^1f = 1\}$.</p>`,
   decode: { donnees: [R`$f\mapsto f(0)$ et $f\mapsto\int_0^1f$ sont continues pour $\|\cdot\|_\infty$.`], but: R`Minorer $\|f\|_\infty$, puis chercher une fonction (ou une suite) qui réalise la borne.`, cles: {} },
   steps: [
     { t: "a1) A est fermée", h: R`<p>$|f_n(0)-f(0)|$ et $\left|\int f_n-\int f\right|$ sont $\leqslant\|f_n-f\|_\infty$.</p>`, b: R`<p>Si $f_n\in A$ et $f_n\to f$ : $|f_n(0)-f(0)|\leqslant\|f_n-f\|_\infty\to0$, donc $f(0) = \lim f_n(0) = 1$ ; et $\left|\int f_n-\int f\right|\leqslant\int|f_n-f|\leqslant\|f_n-f\|_\infty\to0$, donc $\int f = 0$. Ainsi $f\in A$.</p>`, rappels: ["top-fermeseq"] },
@@ -250,7 +250,7 @@ LEMME.exercises([
 },
 { id: "topo-18", ...P, level: 3, time: "35 min",
   title: "Trois normes deux à deux non équivalentes sur C²([0, 1])",
-  enonce: R`<p>Sur $E = \mathcal C^2([0,1],\mathbb R)$, on pose $N_\infty(f) = \sup|f|$, $N'_\infty(f) = |f(0)|+\sup|f'|$, $N''_\infty(f) = |f(0)|+|f'(0)|+\sup|f''|$.</p><p>a) Montrer que ce sont des normes. b) Les comparer pour la relation d'équivalence des normes.</p>`,
+  enonce: R`<p>Sur $E = \mathcal C^2([0,1],\mathbb R)$, on pose $N_\infty(f) = \sup|f|$, $N'_\infty(f) = |f(0)|+\sup|f'|$, $N''_\infty(f) = |f(0)|+|f'(0)|+\sup|f''|$.</p><p>a) Montrer que ce sont des normes.<br>b) Les comparer pour la relation d'équivalence des normes.</p>`,
   decode: { donnees: [R`Inégalité des accroissements finis.`], but: R`$N_\infty\leqslant N'_\infty\leqslant N''_\infty$, et une suite $f_n(x) = \sin(n\pi x)$ pour la non-équivalence.`, cles: {} },
   steps: [
     { t: "a) N″ est une norme", h: R`<p>Séparation : $f'' = 0$, $f(0) = f'(0) = 0$.</p>`, b: R`<p>Les quantités existent ($f,f',f''$ continues sur le segment). Homogénéité et inégalité triangulaire : termes à termes. <b>Séparation</b> : si $N''_\infty(f) = 0$, alors $f(0) = f'(0) = 0$ et $f'' = 0$, donc $f(x) = ax+b$ avec $b = f(0) = 0$, $a = f'(0) = 0$ : $f = 0$. Même chose (plus simple) pour $N'_\infty$ et $N_\infty$.</p>` },

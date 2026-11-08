@@ -653,7 +653,7 @@ LEMME.exercises([
 <li>Montrer que, pour tout $t\in\mathbb R$, $\displaystyle\sum_{x\in\Lambda_n}\prod_{i=1}^ne^{(t+h)x_i} = \big(2\operatorname{ch}(t+h)\big)^n$.</li></ol>
 <p>On pose <span data-k="Gh">$G_h : x\mapsto\dfrac{(x-h)^2}{2\beta}-\ln(2\operatorname{ch}x)$</span>.</p>
 <ol start="30"><li>Montrer que $Z_n(h) = \sqrt{\dfrac n{2e^\beta\pi\beta}}\displaystyle\int_{-\infty}^{+\infty}e^{-nG_h(x)}dx$.</li>
-<li>En distinguant $\beta\leqslant1$ et $\beta>1$, montrer que $G_h$ admet un minimum sur $\mathbb R_+$ atteint en un unique point $u_h$. Montrer de plus : (a) si $\beta\leqslant1$ et $h = 0$, $u_h = 0$ ; (b) si $\beta>1$, $u_h>0$ ; (c) pour tout $\beta>0$ : (i) $G_h'(u_h) = 0$ ; (ii) $h = \beta G_0'(u_h)$ ; (iii) $G_h''(u_h)>0$ lorsque $h>0$.</li></ol>
+<li>En distinguant $\beta\leqslant1$ et $\beta>1$, montrer que $G_h$ admet un minimum sur $\mathbb R_+$ atteint en un unique point $u_h$. Montrer de plus :<br>(a) si $\beta\leqslant1$ et $h = 0$, $u_h = 0$ ;<br>(b) si $\beta>1$, $u_h>0$ ;<br>(c) pour tout $\beta>0$ :<br>&emsp;(i) $G_h'(u_h) = 0$ ;<br>&emsp;(ii) $h = \beta G_0'(u_h)$ ;<br>&emsp;(iii) $G_h''(u_h)>0$ lorsque $h>0$.</li></ol>
 <p data-def="hpos">On suppose désormais $h>0$.</p>
 <ol start="32"><li>Justifier que $G_h$ atteint son minimum sur $\mathbb R$ en un unique point, qui est $u_h$.</li>
 <li>On note $\widehat G_h : x\mapsto G_h(x+u_h)-\min G_h$. Montrer que $$\psi_n(h) = -G_h(u_h)-\frac1{2n}\ln\big(2e^\beta\pi\beta\big)+\frac1n\ln\Big(\int_{-\infty}^{+\infty}e^{-n\widehat G_h(\frac t{\sqrt n})}dt\Big).$$</li>

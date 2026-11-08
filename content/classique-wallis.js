@@ -24,7 +24,7 @@ const ENONCE = PRE + R`<p><b>Partie I. Premières propriétés</b></p><ol start=
 <li>Calculer $W_3,\dots,W_7$. Écrire une fonction Python qui renvoie la liste $[W_0,\dots,W_n]$ en n'utilisant que la relation de récurrence.</li>
 <li>Montrer que pour tout $p\in\mathbb N$ : $W_{2p} = \frac{(2p)!}{2^{2p}(p!)^2}\cdot\frac\pi2$ et $W_{2p+1} = \frac{2^{2p}(p!)^2}{(2p+1)!}$.</li>
 <li>Montrer que la suite $\big((n+1)W_nW_{n+1}\big)_n$ est constante, égale à $\frac\pi2$.</li>
-<li>Exprimer à l'aide des $W_n$ : (a) $\int_0^1\frac{x^n}{\sqrt{1-x^2}}dx$ ; (b) $\int_0^1(1-x^2)^n\,dx$ ; (c) $I_n = \int_0^1x^n\sqrt{1-x^2}\,dx$ ; (d) $\int_0^{\pi/2}\sin^4t\cos^2t\,dt$.</li></ol>
+<li>Exprimer à l'aide des $W_n$ :<br>(a) $\int_0^1\frac{x^n}{\sqrt{1-x^2}}dx$ ;<br>(b) $\int_0^1(1-x^2)^n\,dx$ ;<br>(c) $I_n = \int_0^1x^n\sqrt{1-x^2}\,dx$ ;<br>(d) $\int_0^{\pi/2}\sin^4t\cos^2t\,dt$.</li></ol>
 <p><b>Partie III. Comportement asymptotique</b></p><ol start="10">
 <li>Montrer que $\frac{W_{n+1}}{W_n}\to1$.</li>
 <li>Montrer que $\sqrt{\frac\pi{2(n+1)}}\leqslant W_n\leqslant\sqrt{\frac\pi{2n}}$ pour $n\geqslant1$, et en déduire $W_n\sim\sqrt{\frac\pi{2n}}$ et $nW_n^2\to\frac\pi2$.</li>

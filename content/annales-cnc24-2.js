@@ -13,9 +13,9 @@ LEMME.rappels({
 });
 
 const EX = R`<h4>Exercice</h4><p>Dans $\mathcal M_3(\mathbb R)$ : $$A = \frac12\begin{pmatrix}3&-1&1\\-2&2&2\\-1&-1&5\end{pmatrix},$$$$P = \begin{pmatrix}1&0&2\\2&1&-1\\1&1&1\end{pmatrix},\quad Q = \begin{pmatrix}2&2&-2\\-3&-1&5\\1&-1&1\end{pmatrix}.$$</p><ol start="1">
-<li>a) Vérifier que $PQ = 4I_3$. b) En déduire que $P$ est inversible et calculer $P^{-1}$.</li>
-<li>Soit $u = (1,2,1)^T$, $v = (0,1,1)^T$, $w = (2,-1,1)^T$. a) Montrer que $u$ est vecteur propre de $A$ pour une valeur propre $\alpha$ à préciser. b) Montrer que $v$ et $w$ sont vecteurs propres de $A$ pour une même valeur propre $\beta$ à préciser. c) Montrer qu'il existe $D$ diagonale avec $A = PDP^{-1}$.</li>
-<li>a) Montrer par récurrence que $A^n = PD^nP^{-1}$. b) Déterminer $D^n$. c) En déduire $A^n$ sous forme d'un tableau.</li></ol>`;
+<li>a) Vérifier que $PQ = 4I_3$.<br>b) En déduire que $P$ est inversible et calculer $P^{-1}$.</li>
+<li>Soit $u = (1,2,1)^T$, $v = (0,1,1)^T$, $w = (2,-1,1)^T$.<br>a) Montrer que $u$ est vecteur propre de $A$ pour une valeur propre $\alpha$ à préciser.<br>b) Montrer que $v$ et $w$ sont vecteurs propres de $A$ pour une même valeur propre $\beta$ à préciser.<br>c) Montrer qu'il existe $D$ diagonale avec $A = PDP^{-1}$.</li>
+<li>a) Montrer par récurrence que $A^n = PD^nP^{-1}$.<br>b) Déterminer $D^n$.<br>c) En déduire $A^n$ sous forme d'un tableau.</li></ol>`;
 
 const PRE = R`<p class="pl-pre"><b>Problème.</b> $\mathbb K = \mathbb R$ ou $\mathbb C$, $E$ un $\mathbb K$-espace de dimension $n\geqslant1$, $\mathcal L(E)$ ses endomorphismes, $f^0 = \mathrm{id}_E$, $f^{k+1} = f^k\circ f$, $\chi_f(X) = \det(X\mathrm{id}_E-f)$ et $\chi_f(f) = 0$. $f$ est nilpotent s'il existe $p\geqslant1$ avec $f^p = 0$ ; le plus petit tel $p$ est son indice de nilpotence.</p>`;
 
@@ -25,22 +25,22 @@ const E1 = PRE + R`<h4>Partie 1 : noyaux itérés</h4><p>Soit $f\in\mathcal L(E)
 <li>Justifier l'existence d'un plus petit entier $q$ tel que $\mathcal N_q = \mathcal N_{q+1}$.</li>
 <li>Montrer que $\mathcal I_q = \mathcal I_{q+1}$.</li>
 <li>Montrer que $\mathcal N_q\oplus\mathcal I_q = E$.</li>
-<li>Soit $\varphi_k$ la restriction de $f$ à $\mathcal I_k$. a) Montrer que $\dim\mathcal I_k-\dim\mathcal I_{k+1} = \dim(\ker f\cap\mathcal I_k)$. b) En déduire que $(\dim\mathcal N_{k+1}-\dim\mathcal N_k)_k$ est décroissante.</li></ol>
+<li>Soit $\varphi_k$ la restriction de $f$ à $\mathcal I_k$.<br>a) Montrer que $\dim\mathcal I_k-\dim\mathcal I_{k+1} = \dim(\ker f\cap\mathcal I_k)$.<br>b) En déduire que $(\dim\mathcal N_{k+1}-\dim\mathcal N_k)_k$ est décroissante.</li></ol>
 <h4>Partie 2 : nilpotents de rang n − 1</h4><p>Soit $U\in\mathcal M_n(\mathbb C)$ de rang $n-1$ et $u$ l'endomorphisme canoniquement associé ($E = \mathbb C^n$).</p><ol start="1">
-<li>Soit $r,s\in\mathbb N$ et $v$ la restriction de $u^s$ à $\operatorname{Im}(u^r)$. a) Vérifier que $\operatorname{Im}v = \operatorname{Im}u^{s+r}$. b) Montrer que $\ker v\subset\ker u^s$. c) Montrer que $\dim\ker u^{r+s}\leqslant\dim\ker u^r+\dim\ker u^s$. d) En déduire que $\dim\ker u^i\leqslant i$.</li>
-<li>On suppose $U^n = 0$. a) Montrer que $\dim\ker u^i = i$ pour $1\leqslant i\leqslant n$. b) Montrer que l'indice de nilpotence de $u$ est $n$. c) En déduire qu'il existe $e$ tel que $\mathcal B_e = (e,u(e),\dots,u^{n-1}(e))$ soit une base. d) Écrire la matrice de $u$ dans $\mathcal B_e$.</li>
+<li>Soit $r,s\in\mathbb N$ et $v$ la restriction de $u^s$ à $\operatorname{Im}(u^r)$.<br>a) Vérifier que $\operatorname{Im}v = \operatorname{Im}u^{s+r}$.<br>b) Montrer que $\ker v\subset\ker u^s$.<br>c) Montrer que $\dim\ker u^{r+s}\leqslant\dim\ker u^r+\dim\ker u^s$.<br>d) En déduire que $\dim\ker u^i\leqslant i$.</li>
+<li>On suppose $U^n = 0$.<br>a) Montrer que $\dim\ker u^i = i$ pour $1\leqslant i\leqslant n$.<br>b) Montrer que l'indice de nilpotence de $u$ est $n$.<br>c) En déduire qu'il existe $e$ tel que $\mathcal B_e = (e,u(e),\dots,u^{n-1}(e))$ soit une base.<br>d) Écrire la matrice de $u$ dans $\mathcal B_e$.</li>
 <li>Montrer que deux matrices nilpotentes de $\mathcal M_n(\mathbb C)$ de rang $n-1$ sont semblables.</li></ol>`;
 
 const E3 = PRE + R`<h4>Partie 3 : réduction d'un endomorphisme particulier</h4><p>$\mathbb K = \mathbb C$ et $f\in\mathcal L(E)$ est tel que $(\mathrm{id}_E,f,\dots,f^{n-1})$ est libre. $\chi_f = \prod_{k=1}^p(X-\lambda_k)^{m_k}$, $\lambda_k$ distincts, et $F_k = \ker\big((f-\lambda_k\mathrm{id}_E)^{m_k}\big)$.</p><ol start="1">
 <li>Montrer que $F_k$ est stable par $f$.</li>
 <li>Montrer que $E = F_1\oplus\dots\oplus F_p$.</li>
-<li>Soit $\varphi_k$ l'endomorphisme de $F_k$ défini par $\varphi_k(x) = f(x)-\lambda_kx$. a) Montrer que $\varphi_k$ est nilpotent. b) Déterminer $\dim F_k$. c) Montrer que l'indice de nilpotence de $\varphi_k$ est $m_k$.</li>
+<li>Soit $\varphi_k$ l'endomorphisme de $F_k$ défini par $\varphi_k(x) = f(x)-\lambda_kx$.<br>a) Montrer que $\varphi_k$ est nilpotent.<br>b) Déterminer $\dim F_k$.<br>c) Montrer que l'indice de nilpotence de $\varphi_k$ est $m_k$.</li>
 <li>Montrer qu'il existe une base de $E$ dans laquelle la matrice de $f$ est diagonale par blocs, chaque bloc $A_k\in\mathcal M_{m_k}(\mathbb C)$ ayant $\lambda_k$ sur la diagonale, des $1$ juste en dessous, et des $0$ ailleurs.</li></ol>
 <h4>Partie 4 : cycles</h4><p>$\mathbb K = \mathbb C$. $f$ est cyclique d'ordre $p\geqslant1$ s'il existe $x_0$ avec $f^p(x_0) = x_0$ et $(x_0,f(x_0),\dots,f^{p-1}(x_0))$ génératrice de $E$, à éléments deux à deux distincts (un $p$-cycle de $f$).</p><ol start="1">
-<li>Soit un $p$-cycle de $f$. a) Montrer que $f^p = \mathrm{id}_E$. b) Montrer que $F_{x_0} = \{k\geqslant1 : (x_0,\dots,f^{k-1}(x_0))\text{ libre}\}$ admet un maximum $\gamma$. c) i) Montrer que $f^k(x_0)\in\operatorname{Vect}(x_0,\dots,f^{\gamma-1}(x_0))$ pour $k\geqslant\gamma$. ii) Montrer que $\gamma = n$. iii) Déterminer le nombre de valeurs propres distinctes de $f$.</li>
-<li>Soit $\mathcal B_{x_0} = (x_0,\dots,f^{n-1}(x_0))$ un $n$-cycle. a) Justifier que c'est une base. b) Déterminer la matrice $G$ de $f$ dans cette base. c) Soit $\omega = e^{2i\pi/n}$ et $U_k = (\bar\omega^k,\bar\omega^{2k},\dots,\bar\omega^{nk})^T$. Pour $1\leqslant k\leqslant n$, vérifier que $U_k$ est vecteur propre de $G$ pour une valeur propre $\alpha_k$ à déterminer.</li>
-<li>Soit $M = (m_{k,l})$ avec $m_{k,l} = \bar\omega^{kl}$. a) Calculer $M\overline M$. b) En déduire que $M$ est inversible et calculer $M^{-1}$.</li>
-<li>Soit $(b_0,\dots,b_{n-1})\in\mathbb C^n$ et $H$ la matrice circulante de première colonne $(b_0,b_1,\dots,b_{n-1})^T$, chaque colonne se déduisant de la précédente par décalage circulaire vers le bas. a) Montrer que $H$ est diagonalisable. b) Déterminer ses valeurs propres et une base de vecteurs propres.</li></ol>
+<li>Soit un $p$-cycle de $f$.<br>a) Montrer que $f^p = \mathrm{id}_E$.<br>b) Montrer que $F_{x_0} = \{k\geqslant1 : (x_0,\dots,f^{k-1}(x_0))\text{ libre}\}$ admet un maximum $\gamma$.<br>c) i) Montrer que $f^k(x_0)\in\operatorname{Vect}(x_0,\dots,f^{\gamma-1}(x_0))$ pour $k\geqslant\gamma$. ii) Montrer que $\gamma = n$. iii) Déterminer le nombre de valeurs propres distinctes de $f$.</li>
+<li>Soit $\mathcal B_{x_0} = (x_0,\dots,f^{n-1}(x_0))$ un $n$-cycle.<br>a) Justifier que c'est une base.<br>b) Déterminer la matrice $G$ de $f$ dans cette base.<br>c) Soit $\omega = e^{2i\pi/n}$ et $U_k = (\bar\omega^k,\bar\omega^{2k},\dots,\bar\omega^{nk})^T$. Pour $1\leqslant k\leqslant n$, vérifier que $U_k$ est vecteur propre de $G$ pour une valeur propre $\alpha_k$ à déterminer.</li>
+<li>Soit $M = (m_{k,l})$ avec $m_{k,l} = \bar\omega^{kl}$.<br>a) Calculer $M\overline M$.<br>b) En déduire que $M$ est inversible et calculer $M^{-1}$.</li>
+<li>Soit $(b_0,\dots,b_{n-1})\in\mathbb C^n$ et $H$ la matrice circulante de première colonne $(b_0,b_1,\dots,b_{n-1})^T$, chaque colonne se déduisant de la précédente par décalage circulaire vers le bas.<br>a) Montrer que $H$ est diagonalisable.<br>b) Déterminer ses valeurs propres et une base de vecteurs propres.</li></ol>
 <h4>Partie 5 : dimension maximale d'un espace de matrices nilpotentes</h4><p>$\mathcal T$ est l'espace des matrices triangulaires supérieures à diagonale nulle de $\mathcal M_n(\mathbb R)$, $\mathcal S_n(\mathbb R)$ celui des matrices symétriques, $\mathcal N$ l'ensemble des matrices nilpotentes.</p><ol start="1">
 <li>Déterminer $\dim\mathcal T$.</li>
 <li>Montrer que toute matrice nilpotente est semblable à une matrice de $\mathcal T$.</li>

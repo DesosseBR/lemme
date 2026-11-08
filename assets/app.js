@@ -586,32 +586,157 @@ function rchip(id, ex) {
   const r = RAPPELS[id]; if (!r) return "";
   return `<button type="button" class="rchip" data-r="${id}"${ex && ex.id ? ` data-ex="${ex.id}"` : ""}>${esc(r.t)}</button>`;
 }
-let drawerReturn = null;
+/* Volets empilés : ouvrir une notion depuis un volet garde le premier derrière ; fermer le second fait retomber sur le premier. */
+const drawerStack = [];
+function mountDrawer(dr) {
+  const top = drawerStack[drawerStack.length - 1];
+  let scrim;
+  if (top) {
+    scrim = top.scrim;
+    top.dr.removeAttribute("id"); top.dr.classList.remove("back"); top.dr.classList.add("under"); top.dr.inert = true; top.dr.setAttribute("aria-hidden", "true");
+    $$("[id]", top.dr).forEach(x => { x.dataset.oid = x.id; x.removeAttribute("id"); });
+    if (drawerStack.length >= 6) drawerStack.shift().dr.remove();
+  } else {
+    scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
+    scrim.addEventListener("click", () => popDrawer());
+    document.body.append(scrim);
+  }
+  dr.id = "drawer";
+  drawerStack.push({ dr, scrim, ret: document.activeElement });
+  document.body.append(dr);
+  $(".close", dr).addEventListener("click", () => popDrawer());
+  $(".close", dr).focus();
+}
+function popDrawer() {
+  const top = drawerStack.pop(); if (!top) return;
+  top.dr.remove();
+  const prev = drawerStack[drawerStack.length - 1];
+  if (prev) {
+    prev.dr.classList.replace("under", "back"); prev.dr.inert = false; prev.dr.removeAttribute("aria-hidden"); prev.dr.id = "drawer";
+    $$("[data-oid]", prev.dr).forEach(x => { x.id = x.dataset.oid; delete x.dataset.oid; });
+  } else top.scrim.remove();
+  if (top.ret && top.ret.isConnected && top.ret.focus) top.ret.focus();
+}
+function closeRappel(silent) {
+  const first = drawerStack[0];
+  while (drawerStack.length) drawerStack.pop().dr.remove();
+  const s = $("#scrim"); if (s) s.remove();
+  if (!silent && first && first.ret && first.ret.isConnected && first.ret.focus) first.ret.focus();
+}
+/* Dans le volet, on encadre l'énoncé précis qui sert ici (un rappel peut dire plusieurs choses). */
+const TOK_SKIP = new Set("left right big Big bigg Bigg quad qquad text mathrm mathbf mathbb mathcal operatorname frac dfrac tfrac displaystyle begin end aligned cases pmatrix bmatrix limits nolimits cdot cdots dots ldots lt gt le ge leqslant geqslant leq geq iff Rightarrow Longrightarrow Leftrightarrow Longleftrightarrow to mapsto in notin forall exists wedge vee neq overline underline widehat hat vec tilde boxed qquad xrightarrow longrightarrow sim alpha beta gamma delta epsilon varepsilon zeta eta theta vartheta lambda mu nu xi pi rho sigma tau varphi phi psi omega Omega Lambda Gamma Delta Sigma Phi Psi ell infty prime neg setminus emptyset quad mathfrak N R C K".split(" "));
+const STOP = new Set("dans avec pour sont tout tous toute toutes alors donc cette leur leurs être fait même comme entre aussi ainsi deux trois quand chaque elle elles ceci cela soit sous vers mais plus moins très bien cas fois tel telle tels telles ici puis étape montre montrer donne déduit déduire donc avoir sinon encore".split(" "));
+const SYN = { noyau: "ker", noyaux: "ker", image: "Im", images: "Im", rang: "rg", dimens: "dim", trace: "tr", determ: "det", inclus: "subset", contie: "subset", somme: "sum", integr: "int", limite: "lim", union: "cup", inters: "cap", transp: "top", expone: "exp", propre: "Sp", spectr: "Sp", orthog: "perp", conjug: "overline", polyno: "X" };
+function toks(s) {
+  const out = new Set(); s = String(s || "");
+  s.replace(/\\(?:operatorname|mathrm)\{([^}]*)\}/g, (m, x) => { out.add(x.trim()); return " "; })
+   .replace(/\\(mathcal|mathbb)\{?\s*([A-Za-z])\}?/g, (m, k, x) => { out.add(k.slice(-2) + x); return " "; })
+   .replace(/\\([a-zA-Z]+)/g, (m, x) => { if (!TOK_SKIP.has(x)) out.add(x === "subseteq" ? "subset" : x); return " "; })
+   .replace(/<[^>]+>/g, " ")
+   .replace(/[\p{L}]{4,}/gu, w => { const st = w.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").slice(0, 6); if (!STOP.has(w.toLowerCase())) { out.add("w:" + st); if (SYN[st]) out.add(SYN[st]); } return " "; });
+  return out;
+}
+function texOf(el) {
+  if (!el) return "";
+  const map = new Map();
+  try { for (const it of MathJax.startup.document.math) map.set(it.typesetRoot, it.math); } catch (e) {}
+  let s = "";
+  const rec = n => {
+    if (n.nodeType === 3) { s += n.data; return; }
+    if (n.nodeType !== 1) return;
+    if (n.tagName === "MJX-CONTAINER") { s += " " + (map.get(n) || "") + " "; return; }
+    if (n.matches("button, .here, .here-quote")) return;
+    for (const c of n.childNodes) rec(c);
+  };
+  rec(el); return s;
+}
+function topQquad(f) {
+  const out = []; let d = 0, a = 0;
+  for (let i = 0; i < f.length; i++) {
+    const c = f[i];
+    if (c === "\\") {
+      const r = f.slice(i);
+      if (/^\\(?:left|begin)(?![a-zA-Z])/.test(r)) d++;
+      else if (/^\\(?:right|end)(?![a-zA-Z])/.test(r)) d = Math.max(0, d - 1);
+      else if (!d && /^\\qquad(?![a-zA-Z])/.test(r)) { out.push(f.slice(a, i)); a = i + 6; i += 5; continue; }
+      const m = r.match(/^\\[a-zA-Z]+|^\\./); i += m ? m[0].length - 1 : 0; continue;
+    }
+    if (c === "{") d++; else if (c === "}") d = Math.max(0, d - 1);
+  }
+  out.push(f.slice(a)); return out.map(x => x.trim()).filter(Boolean);
+}
+function markUsed(dr, ctx, own) {
+  const body = dr && $(".body", dr); if (!body || !ctx) return;
+  const C = toks(ctx); if (!C.size) return;
+  const O = toks(own || "");
+  /* les formules centrées deviennent des blocs repérables */
+  const tw = document.createTreeWalker(body, NodeFilter.SHOW_TEXT); const tn = [];
+  while (tw.nextNode()) if (tw.currentNode.data.includes("$$")) tn.push(tw.currentNode);
+  for (const t of tn) {
+    const parts = t.data.split(/(\$\$[\s\S]*?\$\$)/); if (parts.length < 2) continue;
+    const fr = document.createDocumentFragment();
+    parts.forEach(x => { if (!x) return; if (/^\$\$[\s\S]*\$\$$/.test(x)) { const sp = document.createElement("span"); sp.className = "fm"; sp.textContent = x; fr.appendChild(sp); } else fr.appendChild(document.createTextNode(x)); });
+    t.replaceWith(fr);
+  }
+  /* les exemples et mises en garde ne sont pas « ce qui sert » */
+  let skipSec = false;
+  for (const el of [...body.children]) { if (el.tagName === "H5") skipSec = /exemple|attention|contre/i.test(el.textContent); else if (skipSec) el.dataset.nouse = "1"; }
+  const cands = [];
+  $$(".sbox", body).forEach(el => cands.push({ el, t: el.textContent }));
+  $$(".fm", body).forEach(el => {
+    if (el.closest(".sbox, li")) return;
+    const ps = topQquad(el.textContent.slice(2, -2));
+    if (ps.length > 1 && !/:\s*\\(?:q?quad|[ ,;])/.test(ps[0])) ps.forEach((t, k) => cands.push({ el, t, k, ps })); else cands.push({ el, t: el.textContent });
+  });
+  $$("li", body).forEach(el => { if (!$("li", el) && !el.closest(".sbox")) cands.push({ el, t: el.textContent }); });
+  $$("p", body).forEach(el => { if (!$(".fm", el) && !el.closest(".sbox, li") && el.textContent.trim().length > 12) cands.push({ el, t: el.textContent }); });
+  for (let i = cands.length - 1; i >= 0; i--) if (cands[i].el.closest("[data-nouse]") || /:\s*$/.test(cands[i].el.tagName === "P" ? cands[i].t : "")) cands.splice(i, 1);
+  if (cands.length < 2) return;
+  cands.forEach(c => c.T = toks(c.t));
+  const df = new Map(); cands.forEach(c => c.T.forEach(t => df.set(t, (df.get(t) || 0) + 1)));
+  const n = cands.length;
+  cands.forEach(c => { c.s = 0; c.sp = 0; c.T.forEach(t => { if (!C.has(t)) return; const own = O.has(t); c.s += Math.log((n + 1) / df.get(t)) * (own ? .4 : t.startsWith("w:") ? 1 : 1.4); if (!own && df.get(t) === 1) c.sp++; }); });
+  const order = [...cands].sort((x, y) => y.s - x.s);
+  const best = order[0], second = order.find(c => c.el !== best.el || c.k !== best.k);
+  if (best.s < 2 || !best.sp) return;
+  const tie = second && second.s * 1.3 > best.s;
+  if (tie && !(best.ps && second.el === best.el)) return;
+  let target = best.el;
+  if (best.ps && !tie) {
+    const fr = document.createDocumentFragment(); let hit = null;
+    best.ps.forEach((t, k) => { const sp = document.createElement("span"); sp.className = "fm"; sp.textContent = `$$${t}$$`; fr.appendChild(sp); if (k === best.k) hit = sp; });
+    best.el.replaceWith(fr); target = hit;
+  }
+  target.classList.add("used");
+}
+function revealUsed(dr) {
+  const u = dr && $(".used", dr); if (!u) return;
+  const r = u.getBoundingClientRect(), d = dr.getBoundingClientRect();
+  if (r.bottom > d.bottom - 24 || r.top < d.top) dr.scrollTo({ top: dr.scrollTop + r.top - d.top - 120, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+}
 function openRappel(id, exId, src) {
   const r = RAPPELS[id]; if (!r) return;
   const ex = exId && EXERCISES.find(x => x.id === exId);
   const here = ex && ex.ctx && ex.ctx[id];
   const links = stepLinks(ex, st => (st.rappels || []).includes(id), "Utilisé dans le corrigé");
-  closeRappel(true);
-  drawerReturn = document.activeElement;
-  const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
-  const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  const dr = document.createElement("aside"); dr.className = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
   dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body course">${annotate(r.b, ex || null, null, true)}</div>${here || links ? `<div class="here"><h4>Dans cet exercice</h4>${here ? `<div class="body course">${annotate(here, ex, null, true)}</div>` : ""}<div class="hq-slot"></div>${links}</div>` : ""}`;
-  const stp = src && !src.closest("#drawer") && src.closest(".step");
+  const stp = src && !src.closest(".drawer") && src.closest(".step");
   const res = stp && ($$(".prose .sbox", stp)[0] || $(".prose > p", stp) || $(".prose", stp));
   const slot = $(".hq-slot", dr);
   if (slot) { if (res) { const w = document.createElement("div"); w.innerHTML = `<p class="here-lab">À cette étape</p>`; const q = document.createElement("div"); q.className = "here-quote"; const c = res.cloneNode(true); c.querySelectorAll("button, figure").forEach(x => x.remove()); q.appendChild(c); w.appendChild(q); slot.replaceWith(w); } else slot.remove(); }
+  /* ce qui sert vraiment : le lien écrit dans l'exercice, sinon les étapes qui citent ce rappel */
+  let ctx = here || "";
+  if (ex && ex.steps) {
+    const sts = ex.steps.filter(st => (st.rappels || []).includes(id));
+    const cur = stp && player && ex.steps[player.i !== undefined ? player.i : -1];
+    ctx += " " + (cur && sts.includes(cur) ? cur.b : sts.map(st => st.b).join(" "));
+  }
+  if (!ctx.trim() && src && src.closest(".drawer")) ctx = texOf(src.closest("li, p, .sbox, .fm") || src.parentElement);
+  markUsed(dr, ctx, r.t);
   wireHere(dr);
-  document.body.append(scrim, dr);
-  scrim.addEventListener("click", () => closeRappel());
-  $(".close", dr).addEventListener("click", () => closeRappel());
-  $(".close", dr).focus();
-  typeset(dr);
-}
-function closeRappel(silent) {
-  const d = $("#drawer"), s = $("#scrim");
-  if (d) d.remove(); if (s) s.remove();
-  if (!silent && drawerReturn && drawerReturn.focus) drawerReturn.focus();
+  mountDrawer(dr);
+  const p = typeset(dr); (p || Promise.resolve()).then(() => revealUsed(dr));
 }
 document.addEventListener("click", e => {
   const b = e.target.closest(".rchip"); if (!b) return;
@@ -620,19 +745,33 @@ document.addEventListener("click", e => {
 
 /* ---------- Notions de cours soulignées en bleu ---------- */
 const NOTIONS = window.LEMME.NOTIONS || {};
-const NOTION_LIST = Object.entries(NOTIONS).sort((a, b) => (b[1].p.includes(" ") ? 1 : 0) - (a[1].p.includes(" ") ? 1 : 0)).map(([id, n]) => { try { return { id, re: new RegExp("(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])", "iu") }; } catch (e) { return null; } }).filter(Boolean);
+const NOTION_LIST = Object.entries(NOTIONS).sort((a, b) => (b[1].p.includes(" ") ? 1 : 0) - (a[1].p.includes(" ") ? 1 : 0)).map(([id, n]) => { try { const src = "(?<![\\p{L}\\p{N}-])(?:" + n.p + ")(?![\\p{L}\\p{N}-])"; return { id, re: new RegExp(src, "iu"), g: new RegExp(src, "giu") }; } catch (e) { return null; } }).filter(Boolean);
+/* Le surligneur couvre l'expression entière : « théorème du rang », « caractérisation séquentielle des fermés », « dimension finie ».
+   À chaque endroit, la correspondance la plus longue l'emporte, et un groupe de mots déjà pris n'est jamais redécoupé par une notion plus courte. */
+const NOTION_PREFIX = /(?:^|[\s(«])((?:(?:le|la|les|du|un|une|au|par|d['’]après)\s+)?(?:théorèmes?|lemmes?|formules?|inégalités?|critères?|règles?|caractérisations?|propriétés?|principes?)(?:\s+[\p{L}-]+)?\s+(?:du|de\s+la|des|de\s+l['’]|d['’]|de)\s*)$/iu;
+const NOTION_ARTICLE = /^(?:le|la|les|du|un|une|au|par|d['’]après)\s+/i;
 function annotateText(txt, used, skip) {
-  let pieces = [{ t: txt }];
+  const cand = [];
   for (const n of NOTION_LIST) {
-    if (used.has(n.id) || skip.has(n.id)) continue;
-    for (let i = 0; i < pieces.length; i++) {
-      const pc = pieces[i]; if (pc.w) continue;
-      const m = n.re.exec(pc.t); if (!m) continue;
-      pieces.splice(i, 1, { t: pc.t.slice(0, m.index) }, { t: m[0], w: n.id }, { t: pc.t.slice(m.index + m[0].length) });
-      used.add(n.id); break;
-    }
+    if (skip.has(n.id)) continue;
+    const re = n.g; re.lastIndex = 0; let m;
+    while ((m = re.exec(txt))) { if (!m[0]) { re.lastIndex++; continue; } cand.push({ a: m.index, b: m.index + m[0].length, id: n.id }); }
   }
-  return pieces.map(pc => pc.w ? `<span class="nt" data-n="${pc.w}" tabindex="0" role="button">${pc.t}</span>` : pc.t).join("");
+  if (!cand.length) return txt;
+  cand.sort((x, y) => (y.b - y.a) - (x.b - x.a) || x.a - y.a);
+  const taken = [];
+  for (const c of cand) if (!taken.some(t => c.a < t.b && t.a < c.b)) taken.push(c);
+  taken.sort((x, y) => x.a - y.a);
+  let out = "", pos = 0;
+  for (const c of taken) {
+    if (used.has(c.id)) continue;
+    let a = c.a;
+    const pm = txt.slice(pos, a).match(NOTION_PREFIX);
+    if (pm) a -= pm[1].replace(NOTION_ARTICLE, "").length;
+    out += txt.slice(pos, a) + `<span class="nt" data-n="${c.id}" tabindex="0" role="button">${txt.slice(a, c.b)}</span>`;
+    pos = c.b; used.add(c.id);
+  }
+  return out + txt.slice(pos);
 }
 /* Aère la rédaction : dans un paragraphe ou un item, chaque phrase va sur sa propre ligne (hors formules et balises imbriquées). */
 const ABBR = /(?:^|[\s(])(?:cf|p|ex|etc|resp|éq|i\.e|e\.g|c\.-à-d|Th|Prop|Déf|n°|vol|chap)\.$/i;
@@ -804,7 +943,7 @@ function stmtList(h) {
   }).replace(/<\/ul><ul class="st">/g, "");
   return n >= 2 ? out : h;
 }
-window.__lemmeAerate = aerate;
+window.__lemmeAerate = aerate; window.__lemmeTexOf = el => texOf(el);
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
 function annotate(html, ex, used, strong) {
   html = aerate(html, strong);
@@ -839,7 +978,7 @@ function stepLinks(ex, pred, label) {
   return `<div class="here-steps"><h4>${label}</h4>${ks.map(k => { const st = ex.steps[k]; const pos = ex.qnav ? qpos(ex, k) : null; return `<button type="button" class="here-go" data-go-step="${k}">${st.q ? `Q${st.q}` : `Étape ${k + 1}`}${pos && pos[1] > 1 ? ` · étape ${pos[0]}` : ""} — ${stt(st.t)}</button>`; }).join("")}</div>`;
 }
 function excerpt(src) {
-  if (!src || src.closest("#drawer")) return null;
+  if (!src || src.closest(".drawer")) return null;
   const blk = src.closest("li, p, td, .sbox, .decode > div") ; if (!blk) return null;
   const c = blk.cloneNode(true);
   c.querySelectorAll("button, .labo-btn, figure").forEach(x => x.remove());
@@ -853,16 +992,21 @@ function wireHere(dr) {
 }
 function openNotion(id, src) {
   const n = NOTIONS[id]; if (!n) return;
-  closeRappel(true); closeTip();
-  drawerReturn = document.activeElement;
-  const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
-  const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body course">${aerate(n.b, true)}</div>`;
-  document.body.append(scrim, dr);
-  scrim.addEventListener("click", () => closeRappel());
-  $(".close", dr).addEventListener("click", () => closeRappel());
-  $(".close", dr).focus();
-  typeset(dr);
+  closeTip();
+  const ex = curEx();
+  const dr = document.createElement("aside"); dr.className = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body course">${annotate(n.b, ex, new Set([id]), true)}</div>`;
+  /* contexte : la phrase où le mot est souligné, et la formule qui la suit */
+  if (src && src.closest) {
+    const blk = src.closest("li, p, td, .sbox, .fm") || src.parentElement;
+    let ctx = texOf(blk);
+    let nx = blk && blk.nextElementSibling;
+    if (nx && !/^(H\d|DETAILS)$/.test(nx.tagName)) ctx += " " + texOf(nx);
+    const sn = src.closest(".sn"); if (sn) ctx = texOf(sn) + " " + texOf(sn.nextElementSibling) + " " + ctx;
+    markUsed(dr, ctx, n.t + " " + src.textContent);
+  }
+  mountDrawer(dr);
+  const p = typeset(dr); (p || Promise.resolve()).then(() => revealUsed(dr));
 }
 document.addEventListener("click", e => { const n = e.target.closest("[data-n]"); if (n) { e.stopPropagation(); openNotion(n.dataset.n, n); } });
 document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-n]")) { e.preventDefault(); openNotion(e.target.dataset.n); } });
@@ -1015,6 +1159,7 @@ function mountPlayer(e, host) {
     if (top < 72 || top > innerHeight * .6) host.closest(".panelbox").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   }
   player = {
+    get i() { return state.i; },
     go(k) { show(k, k >= state.i ? 1 : -1); },
     key(k) {
       if (k === "ArrowRight" && state.i < n) show(state.i + 1, 1);
@@ -1024,7 +1169,7 @@ function mountPlayer(e, host) {
   intro();
 }
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) closeRappel(); else if ($("#bigread")) closeBig(); return; }
+  if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) popDrawer(); else if ($("#bigread")) closeBig(); return; }
   if (!player || $("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey) return;
   const t = e.target; if (t && (t.matches("input,textarea,select") || t.isContentEditable)) return;
   if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); player.key(e.key); }

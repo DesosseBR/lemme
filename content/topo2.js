@@ -81,7 +81,7 @@ LEMME.exercises([
 },
 { id: "topo-27", ...P, level: 2, time: "20 min",
   title: "Un sous-espace dont l'orthogonal n'est pas un supplémentaire",
-  enonce: R`<p>On munit $E = \mathcal C([0,1],\mathbb R)$ de $\langle f,g\rangle = \int_0^1fg$ et on considère $F = \{f\in E : f(0) = 0\}$. Montrer : a) $F^\perp = \{0\}$ ; b) $F\oplus F^\perp\neq E$.</p>`,
+  enonce: R`<p>On munit $E = \mathcal C([0,1],\mathbb R)$ de $\langle f,g\rangle = \int_0^1fg$ et on considère $F = \{f\in E : f(0) = 0\}$. Montrer :<br>a) $F^\perp = \{0\}$ ;<br>b) $F\oplus F^\perp\neq E$.</p>`,
   decode: { donnees: [R`Pour $g\in E$, la fonction $x\mapsto xg(x)$ est dans $F$.`], but: R`Tester $g\in F^\perp$ contre $xg(x)$.`, cles: {} },
   steps: [
     { t: "a) L'orthogonal est nul", h: R`<p>$\langle xg,g\rangle = \int xg^2 = 0$.</p>`, b: R`<p>Soit $g\in F^\perp$. La fonction $f(x) = xg(x)$ est continue et $f(0) = 0$, donc $f\in F$ et</p>$$0 = \langle f,g\rangle = \int_0^1xg(x)^2\,dx.$$<p>$x\mapsto xg(x)^2$ est continue, positive, d'intégrale nulle : elle est nulle sur $[0,1]$, donc $g = 0$ sur $]0,1]$, puis $g(0) = 0$ par continuité.</p><div class="sbox">$$F^\perp = \{0\}.$$</div>`, rappels: ["pre-intnulle"] },
@@ -92,7 +92,7 @@ LEMME.exercises([
 },
 { id: "topo-28", ...P, level: 3, time: "45 min",
   title: "Une norme sur ℝ² et le dessin de sa boule unité",
-  enonce: R`<p>On pose $N(x,y) = \sup_{t\in\mathbb R}\dfrac{|x+ty|}{1+t+t^2}$.</p><p>a) Montrer que $N$ est une norme sur $\mathbb R^2$. b) Représenter $B'_N(0,1) = \{(x,y) : N(x,y)\leqslant1\}$. c) Calculer l'aire de cette boule.</p>`,
+  enonce: R`<p>On pose $N(x,y) = \sup_{t\in\mathbb R}\dfrac{|x+ty|}{1+t+t^2}$.</p><p>a) Montrer que $N$ est une norme sur $\mathbb R^2$.<br>b) Représenter $B'_N(0,1) = \{(x,y) : N(x,y)\leqslant1\}$.<br>c) Calculer l'aire de cette boule.</p>`,
   decode: { donnees: [R`$1+t+t^2\geqslant\frac34>0$ pour tout $t$.`], but: R`b) $N\leqslant1$ revient à deux trinômes positifs pour tout $t$ : discriminants $\leqslant0$.`, cles: {} },
   steps: [
     { t: "a) N est bien défini", h: R`<p>Majorer pour $|t|\leqslant1$ et pour $|t|\geqslant1$.</p>`, b: R`<p>$1+t+t^2 = \left(t+\frac12\right)^2+\frac34\geqslant\frac34$.</p><ul><li>Si $|t|\leqslant1$ : $\frac{|x+ty|}{1+t+t^2}\leqslant\frac43(|x|+|y|)$.</li><li>Si $|t|\geqslant1$ : $t^2+1\geqslant2|t|$, donc $1+t+t^2\geqslant2|t|-|t| = |t|$, et $\frac{|x+ty|}{1+t+t^2}\leqslant\frac{|x|+|t||y|}{|t|}\leqslant|x|+|y|$.</li></ul><p>La fonction est bornée par $\frac43(|x|+|y|)$ : la borne supérieure $N(x,y)$ existe.</p>` },
@@ -162,7 +162,7 @@ LEMME.exercises([
 },
 { id: "topo-34", ...P, level: 3, time: "40 min",
   title: "Quatre caractérisations de la continuité",
-  enonce: R`<p>Soit $E,F$ deux espaces normés et $f : E\to F$. Montrer l'équivalence de :</p><p>(i) $f$ est continue ; (ii) $\forall A\subset E$, $f(\overline A)\subset\overline{f(A)}$ ; (iii) $\forall B\subset F$, $\overline{f^{-1}(B)}\subset f^{-1}(\overline B)$ ; (iv) $\forall B\subset F$, $f^{-1}(\mathring B)\subset\big(f^{-1}(B)\big)^\circ$.</p>`,
+  enonce: R`<p>Soit $E,F$ deux espaces normés et $f : E\to F$. Montrer l'équivalence de :</p><p>(i) $f$ est continue ;<br>(ii) $\forall A\subset E$, $f(\overline A)\subset\overline{f(A)}$ ;<br>(iii) $\forall B\subset F$, $\overline{f^{-1}(B)}\subset f^{-1}(\overline B)$ ;<br>(iv) $\forall B\subset F$, $f^{-1}(\mathring B)\subset\big(f^{-1}(B)\big)^\circ$.</p>`,
   decode: { donnees: [R`Caractérisation séquentielle ; passage au complémentaire.`], but: R`(i)$\Rightarrow$(ii)$\Rightarrow$(iii)$\Rightarrow$(iv)$\Rightarrow$(i).`, cles: {} },
   steps: [
     { t: "(i) ⟹ (ii)", h: R`<p>Suites.</p>`, b: R`<p>Soit $y = f(x)$ avec $x\in\overline A$, et $a_n\to x$, $a_n\in A$. Par continuité, $f(a_n)\to f(x)$, et $f(a_n)\in f(A)$ : $y\in\overline{f(A)}$.</p>` },
@@ -175,7 +175,7 @@ LEMME.exercises([
 },
 { id: "topo-35", ...P, level: 2, time: "25 min",
   title: "L'opérateur u ↦ (uₙ/n) sur les suites bornées",
-  enonce: R`<p>Soit $\ell^\infty$ l'espace des suites réelles bornées $(u_n)_{n\geqslant1}$, muni de $\|\cdot\|_\infty$, et $T(u) = \left(\frac{u_n}n\right)_{n\geqslant1}$.</p><p>a) Montrer que $T\in\mathcal L_c(\ell^\infty)$ et calculer $|||T|||$. b) Déterminer $\ker T$ et $\operatorname{Im}T$. $T$ est-il injectif ? surjectif ?</p>`,
+  enonce: R`<p>Soit $\ell^\infty$ l'espace des suites réelles bornées $(u_n)_{n\geqslant1}$, muni de $\|\cdot\|_\infty$, et $T(u) = \left(\frac{u_n}n\right)_{n\geqslant1}$.</p><p>a) Montrer que $T\in\mathcal L_c(\ell^\infty)$ et calculer $|||T|||$.<br>b) Déterminer $\ker T$ et $\operatorname{Im}T$. $T$ est-il injectif ? surjectif ?</p>`,
   decode: { donnees: [R`$\left|\frac{u_n}n\right|\leqslant|u_n|$.`], but: R`$|||T||| = 1$ ; l'image est formée des suites $v$ avec $nv_n$ borné.`, cles: {} },
   steps: [
     { t: "a) Continuité et norme", h: R`<p>La suite constante $1$.</p>`, b: R`<p>$T$ est linéaire, et $\left|\frac{u_n}n\right|\leqslant|u_n|\leqslant\|u\|_\infty$ : $T(u)\in\ell^\infty$ et $\|T(u)\|_\infty\leqslant\|u\|_\infty$, donc $|||T|||\leqslant1$. Pour $u = (1,1,\dots)$ : $T(u) = (1,\frac12,\frac13,\dots)$, de norme $1 = \|u\|_\infty$.</p><div class="sbox">$$|||T||| = 1.$$</div>`, rappels: ["top-lc"] },
@@ -218,7 +218,7 @@ LEMME.exercises([
 },
 { id: "topo-39", ...P, level: 3, time: "35 min",
   title: "Applications propres de ℝ dans ℝ",
-  enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ continue. Montrer l'équivalence de :</p><p>(i) l'image réciproque par $f$ de tout compact est compacte ; (ii) $\lim_{-\infty}|f| = \lim_{+\infty}|f| = +\infty$ ; (iii) $f$ tend vers $\pm\infty$ en $-\infty$, et vers $\pm\infty$ en $+\infty$.</p>`,
+  enonce: R`<p>Soit $f : \mathbb R\to\mathbb R$ continue. Montrer l'équivalence de :</p><p>(i) l'image réciproque par $f$ de tout compact est compacte ;<br>(ii) $\lim_{-\infty}|f| = \lim_{+\infty}|f| = +\infty$ ;<br>(iii) $f$ tend vers $\pm\infty$ en $-\infty$, et vers $\pm\infty$ en $+\infty$.</p>`,
   decode: { donnees: [R`Compacts de $\mathbb R$ = fermés bornés.`], but: R`(i)$\Rightarrow$(ii)$\Rightarrow$(iii)$\Rightarrow$(i).`, cles: {} },
   steps: [
     { t: "(i) ⟹ (ii)", h: R`<p>$f^{-1}([-A,A])$ est borné.</p>`, b: R`<p>Soit $A>0$. $f^{-1}([-A,A])$ est compact, donc contenu dans un $[-B,B]$. Si $|x|>B$, alors $x\notin f^{-1}([-A,A])$, donc $|f(x)|>A$. C'est exactement $|f|\to+\infty$ en $\pm\infty$.</p>` },
@@ -284,7 +284,7 @@ LEMME.exercises([
 },
 { id: "topo-45", ...P, level: 3, time: "25 min",
   title: "Intersection de deux ouverts denses",
-  enonce: R`<p>Soit $E$ un espace normé. a) Montrer que si $U,V$ sont deux ouverts denses ($\overline U = \overline V = E$), alors $U\cap V$ est dense. b) En déduire que si $F,G$ sont deux fermés d'intérieur vide, alors $F\cup G$ est d'intérieur vide.</p>`,
+  enonce: R`<p>Soit $E$ un espace normé.<br>a) Montrer que si $U,V$ sont deux ouverts denses ($\overline U = \overline V = E$), alors $U\cap V$ est dense.<br>b) En déduire que si $F,G$ sont deux fermés d'intérieur vide, alors $F\cup G$ est d'intérieur vide.</p>`,
   decode: { donnees: [R`Dense $\iff$ tout ouvert non vide la rencontre.`], but: R`b) par passage au complémentaire.`, cles: {} },
   steps: [
     { t: "a) Densité de U ∩ V", h: R`<p>$\Omega\cap U$ est un ouvert non vide.</p>`, b: R`<p>Soit $x\in E$ et $\Omega$ un voisinage ouvert de $x$. $U$ dense : $\Omega\cap U\neq\varnothing$, et c'est un ouvert (intersection de deux ouverts). $V$ dense : $(\Omega\cap U)\cap V\neq\varnothing$. Donc tout voisinage de $x$ rencontre $U\cap V$ : $x\in\overline{U\cap V}$.</p>` },
@@ -295,7 +295,7 @@ LEMME.exercises([
 },
 { id: "topo-46", ...P, level: 3, time: "40 min",
   title: "La norme ‖fφ‖∞ paramétrée par une fonction",
-  enonce: R`<p>Soit $E = \mathcal C([0,1],\mathbb R)$ et, pour $\varphi\in E$, $N_\varphi(f) = \|f\varphi\|_\infty$.</p><p>a) Montrer que $N_\varphi$ est une norme si et seulement si $\big(\varphi^{-1}(\{0\})\big)^\circ = \varnothing$. b) Montrer que $N_\varphi$ et $\|\cdot\|_\infty$ sont équivalentes si et seulement si $\varphi^{-1}(\{0\}) = \varnothing$.</p>`,
+  enonce: R`<p>Soit $E = \mathcal C([0,1],\mathbb R)$ et, pour $\varphi\in E$, $N_\varphi(f) = \|f\varphi\|_\infty$.</p><p>a) Montrer que $N_\varphi$ est une norme si et seulement si $\big(\varphi^{-1}(\{0\})\big)^\circ = \varnothing$.<br>b) Montrer que $N_\varphi$ et $\|\cdot\|_\infty$ sont équivalentes si et seulement si $\varphi^{-1}(\{0\}) = \varnothing$.</p>`,
   decode: { donnees: [R`Homogénéité et inégalité triangulaire sont toujours vraies.`], but: R`Seule la séparation pose problème ; pour b), une fonction « chapeau » près d'un zéro de $\varphi$.`, cles: {} },
   steps: [
     { t: "a) Si l'intérieur des zéros est vide", h: R`<p>$f\varphi = 0$ et $f(x_0)\neq0$.</p>`, b: R`<p>$N_\varphi$ est homogène et vérifie l'inégalité triangulaire. Supposons $(\varphi^{-1}(0))^\circ = \varnothing$ et $N_\varphi(f) = 0$, donc $f\varphi = 0$. Si $f(x_0)\neq0$, par continuité $f\neq0$ sur un intervalle $I$ non réduit à un point, et $\varphi = 0$ sur $I$ : $I\subset\varphi^{-1}(0)$, qui aurait un intérieur non vide. Contradiction : $f = 0$.</p>` },
@@ -308,7 +308,7 @@ LEMME.exercises([
 },
 { id: "topo-47", ...P, level: 3, time: "30 min",
   title: "Pas d'endomorphismes continus avec uv − vu = Id",
-  enonce: R`<p>Soit $E\neq\{0\}$ un espace normé et $e = \mathrm{Id}_E$. On suppose qu'il existe $u,v\in\mathcal L_c(E)$ avec $u\circ v-v\circ u = e$.</p><p>a) Montrer : $\forall n\in\mathbb N$, $u\circ v^{n+1}-v^{n+1}\circ u = (n+1)v^n$. b) En déduire : $(n+1)|||v^n|||\leqslant2|||u|||\,|||v|||\,|||v^n|||$. c) Conclure.</p>`,
+  enonce: R`<p>Soit $E\neq\{0\}$ un espace normé et $e = \mathrm{Id}_E$. On suppose qu'il existe $u,v\in\mathcal L_c(E)$ avec $u\circ v-v\circ u = e$.</p><p>a) Montrer : $\forall n\in\mathbb N$, $u\circ v^{n+1}-v^{n+1}\circ u = (n+1)v^n$.<br>b) En déduire : $(n+1)|||v^n|||\leqslant2|||u|||\,|||v|||\,|||v^n|||$.<br>c) Conclure.</p>`,
   decode: { donnees: [R`Norme subordonnée sous-multiplicative.`], but: R`Montrer qu'aucun $v^n$ n'est nul et obtenir une contradiction pour $n$ grand.`, cles: {} },
   steps: [
     { t: "a) La récurrence", h: R`<p>$uv^{n+2} = (uv^{n+1})v$.</p>`, b: R`<p>$n = 0$ : c'est l'hypothèse. Si $uv^{n+1}-v^{n+1}u = (n+1)v^n$ :</p>$$uv^{n+2}-v^{n+2}u = (uv^{n+1}-v^{n+1}u)v+v^{n+1}(uv-vu)$$$$= (n+1)v^{n+1}+v^{n+1} = (n+2)v^{n+1}.$$` },
@@ -342,7 +342,7 @@ LEMME.exercises([
 },
 { id: "topo-50", ...P, level: 2, time: "35 min",
   title: "Le théorème du point fixe de Banach",
-  enonce: R`<p>Soit $(E,\|\cdot\|)$ un espace normé, $F\subset E$ complète et $f : F\to F$ contractante : il existe $k\in[0,1[$ avec $\|f(x)-f(y)\|\leqslant k\|x-y\|$.</p><p>a) Montrer l'unicité d'un éventuel point fixe. b) Pour $a\in F$, on pose $u_0 = a$, $u_{n+1} = f(u_n)$. Montrer que $(u_n)$ converge vers un point fixe. c) Conclure.</p>`,
+  enonce: R`<p>Soit $(E,\|\cdot\|)$ un espace normé, $F\subset E$ complète et $f : F\to F$ contractante : il existe $k\in[0,1[$ avec $\|f(x)-f(y)\|\leqslant k\|x-y\|$.</p><p>a) Montrer l'unicité d'un éventuel point fixe.<br>b) Pour $a\in F$, on pose $u_0 = a$, $u_{n+1} = f(u_n)$. Montrer que $(u_n)$ converge vers un point fixe.<br>c) Conclure.</p>`,
   decode: { donnees: [R`$\|u_{n+1}-u_n\|\leqslant k^n\|u_1-u_0\|$.`], but: R`Suite de Cauchy par sommation géométrique.`, cles: {} },
   steps: [
     { t: "a) Unicité", h: R`<p>$(1-k)\|x-y\|\leqslant0$.</p>`, b: R`<p>Si $f(x) = x$ et $f(y) = y$ : $\|x-y\| = \|f(x)-f(y)\|\leqslant k\|x-y\|$, donc $(1-k)\|x-y\|\leqslant0$ avec $1-k>0$ : $x = y$.</p>` },
@@ -366,7 +366,7 @@ LEMME.exercises([
 },
 { id: "topo-52", ...P, level: 4, time: "45 min",
   title: "Projection orthogonale sur un sous-espace complet",
-  enonce: R`<p>Soit $E$ un espace préhilbertien réel et $F$ un sous-espace vectoriel complet de $E$.</p><p>a) Montrer que pour tout $x\in E$, il existe un unique $z\in F$ tel que $x-z\in F^\perp$. On note $p_F(x) = z$.</p><p>b) Montrer : 1) $p_F\in\mathcal L_c(E)$ ; 2) $p_F\circ p_F = p_F$ ; 3) $\langle p_F(x),y\rangle = \langle x,p_F(y)\rangle$ pour tous $x,y$.</p>`,
+  enonce: R`<p>Soit $E$ un espace préhilbertien réel et $F$ un sous-espace vectoriel complet de $E$.</p><p>a) Montrer que pour tout $x\in E$, il existe un unique $z\in F$ tel que $x-z\in F^\perp$. On note $p_F(x) = z$.</p><p>b) Montrer :<br>1) $p_F\in\mathcal L_c(E)$ ;<br>2) $p_F\circ p_F = p_F$ ;<br>3) $\langle p_F(x),y\rangle = \langle x,p_F(y)\rangle$ pour tous $x,y$.</p>`,
   decode: { donnees: [R`Identité du parallélogramme.`], but: R`Une suite minimisante de $\|x-u\|$ est de Cauchy ; sa limite est le projeté.`, cles: {} },
   steps: [
     { t: "a) Unicité", h: R`<p>$z_1-z_2\in F\cap F^\perp$.</p>`, b: R`<p>Si $x-z_1$ et $x-z_2$ sont dans $F^\perp$, alors $z_1-z_2 = (x-z_2)-(x-z_1)\in F^\perp$, et $z_1-z_2\in F$ : $\|z_1-z_2\|^2 = \langle z_1-z_2,z_1-z_2\rangle = 0$.</p>` },

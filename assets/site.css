@@ -1388,3 +1388,16 @@ html.seen .hero h1 .mark::after{animation:none}
 .drawer .body.course li::marker{color:var(--muted)}
 .drawer .body.course .sn+.sn{margin-top:12px}
 .drawer .body.course mjx-container[display="true"]{margin:.7em 0!important}
+/* Volets empilés : le précédent reste visible derrière, décalé vers la gauche */
+.drawer{transition:transform var(--t-mid) var(--ease-out),filter var(--t-mid) var(--ease-out)}
+.drawer.under,.drawer.back{animation:none}
+.drawer.under{transform:translateX(-44px);filter:brightness(.94);overflow:hidden;pointer-events:none}
+@media (max-width:720px){.drawer.under{transform:none;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+/* L'énoncé précis utilisé dans l'exercice, encadré dans le volet */
+.drawer .body .fm{display:block}
+.drawer .body .used{position:relative;display:block;margin:22px -12px 14px;padding:6px 12px;border:2px solid var(--gold-ink);border-radius:10px;scroll-margin:96px}
+.drawer .body .sbox.used{margin:26px 0 18px;border-color:var(--gold-ink);border-width:2px}
+.drawer .body li.used{margin-left:0;padding-left:12px}
+.drawer .body .used::before{content:"Utilisé ici";position:absolute;top:-11px;left:10px;padding:1px 8px;background:var(--surface);color:var(--gold-ink);font:800 11.5px/1.5 var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.drawer .body .sbox.used{overflow:visible}
