@@ -715,7 +715,22 @@ function listify(html) {
     return `$$\\begin{aligned}${fs.map((x, i) => alignAmp(x) + (i < fs.length - 1 ? "\\\\[6pt]" : "")).join("")}\\end{aligned}$$`;
   });
 }
+/* Rappels : « pour tout $x$, il existe $r$ tel que $P$ » devient une formule quantifiée en display. */
+const QM = String.raw`(?<!\$)\$([^$<]+)\$(?!\$)`, QP = String.raw`(?:\s*([.,;]))?`;
+const QA = new RegExp(String.raw`(?:pour tout|quel que soit|quels que soient)\s+` + QM + String.raw`\s*,?\s*(?:il existe|on peut trouver)\s+` + QM + String.raw`\s*,?\s*(?:tel(?:le)?s? que|avec|vérifiant|:)?\s*` + QM + QP, "gi");
+const QB = new RegExp(String.raw`(s['’]il existe|il existe)\s+` + QM + String.raw`\s*,?\s*(?:tel(?:le)?s? que|avec|vérifiant)\s+` + QM + QP, "gi");
+const QC = new RegExp(String.raw`(?:pour tout|quel que soit|quels que soient)\s+` + QM + String.raw`\s*,\s*` + QM + QP, "gi");
+const qp = q => q ? (q === ";" ? "\\;;" : q) : "";
+function quantify(h) {
+  h = h.replace(QA, (m, a, b, c, q) => `$$\\forall ${a},\\ \\exists ${b},\\quad ${c}${qp(q)}$$`);
+  h = h.replace(QB, (m, w, b, c, q) => `${/^s/i.test(w) ? "si " : ""}$$\\exists ${b},\\quad ${c}${qp(q)}$$`);
+  h = h.replace(QC, (m, a, c, q) => (c.match(REL) || []).length || /\\(?:subset|in|notin|neq)(?![a-zA-Z])/.test(c) ? `$$\\forall ${a},\\quad ${c}${qp(q)}$$` : m);
+  h = h.replace(new RegExp(QM + String.raw`\s+(?:pour tout|pour tous|quel que soit)\s+` + QM + QP, "gi"), (m, c, a, q) => (c.match(REL) || []).length || /\\(?:subset|in|notin|neq)(?![a-zA-Z])/.test(c) ? `$$\\forall ${a},\\quad ${c}${qp(q)}$$` : m);
+  return h;
+}
 function aerateInner(inner, tag, strong) {
+  inner = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/).map(t => t && t[0] !== "$" && t[0] !== "<" ? t.replace(/ ([:;!?»])/g, "\u00a0$1").replace(/« /g, "«\u00a0") : t).join("");
+  if (strong && !/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) inner = quantify(inner);
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
   const bare = inner.replace(/\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>/g, "").replace(/[\s.,;:]/g, "");
   if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner, tag, strong));
@@ -728,7 +743,7 @@ function aerateInner(inner, tag, strong) {
       if (/^<br\b/i.test(t)) { pos += t.length; continue; }
       if (/^<\//.test(t)) depth = Math.max(0, depth - 1); else if (!/\/>$/.test(t)) depth++;
     } else if (t[0] === "$") {
-      if (t[1] !== "$" && !depth && /[.!?]\s*\$$/.test(t)) { const nx = parts[k + 1] || ""; if (nx && startsSentence(nx)) cuts.push(pos + t.length); }
+      if (!depth && (t[1] !== "$" ? /[.!?]\s*\$$/ : /[.!?]\s*\$\$$/).test(t)) { const nx = parts[k + 1] || ""; if (nx && startsSentence(nx)) cuts.push(pos + t.length); }
     } else if (!depth) {
       const re = strong ? /(?:[.!?]\)?|\s;)(\s+)/g : /[.!?]\)?(\s+)/g; let m;
       while ((m = re.exec(t))) {
@@ -754,14 +769,17 @@ function enumList(html) {
   return html.replace(/<p>([\s\S]*?)<\/p>/g, (m, inner) => {
     const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$)/);
     const marks = []; let pos = 0;
-    for (const t of parts) { if (t && t[0] !== "$") { const re = /\((i|ii|iii|iv|v|vi)\)\s*/g; let x; while ((x = re.exec(t))) marks.push([pos + x.index, pos + x.index + x[0].length]); } pos += t.length; }
+    for (const t of parts) { if (t && t[0] !== "$") { const re = /\((i|ii|iii|iv|v|vi|[1-9])\)\s*/g; let x; while ((x = re.exec(t))) marks.push([pos + x.index, pos + x.index + x[0].length]); } pos += t.length; }
     if (marks.length < 2) return m;
-    const head = inner.slice(0, marks[0][0]).trim();
+    const head = inner.slice(0, marks[0][0]).trim(); let tail = "";
+    if (/^\(\d/.test(inner.slice(marks[0][0])) && !/:\s*$/.test(head.replace(/<[^>]+>/g, ""))) return m;
     const items = marks.map((mk, j) => inner.slice(mk[1], j + 1 < marks.length ? marks[j + 1][0] : inner.length).trim());
-    let tail = "";
-    const last = items[items.length - 1], cut = last.search(/,?\s+(?:alors|donc)\b/);
-    if (cut > 0) { tail = last.slice(cut).replace(/^,?\s+/, ""); tail = tail[0].toUpperCase() + tail.slice(1); items[items.length - 1] = last.slice(0, cut); }
-    const clean = it => it.replace(/\s*(?:,|;)?\s*(?:et)?\s*$/, "").replace(/,\s*$/, "");
+    let last = items[items.length - 1];
+    const sc = last.search(/[.!?]\s+(?=[A-ZÀ-ÖØ-Ý])/);
+    if (sc > 0 && !/\$/.test(last.slice(sc, sc + 2))) { tail = last.slice(sc + 1).trim(); last = items[items.length - 1] = last.slice(0, sc); }
+    const cut = last.search(/,?\s+(?:alors|donc)\b/);
+    if (cut > 0) { const t2 = last.slice(cut).replace(/^,?\s+/, ""); tail = t2[0].toUpperCase() + t2.slice(1) + (tail ? " " + tail : ""); items[items.length - 1] = last.slice(0, cut); }
+    const clean = it => it.replace(/[.;]\s*$/, "").replace(/\s*(?:,|;)?(?:\s+et)?\s*$/, "").replace(/,\s*$/, "");
     const hd = head && !/[:.]\s*$/.test(head) ? head + "\u00a0:" : head;
     return `${hd ? `<p>${hd}</p>` : ""}<ul>${items.map(it => `<li>${clean(it)} ;</li>`).join("").replace(/ ;<\/li>$/, ".</li>")}</ul>${tail ? `<p>${tail}</p>` : ""}`;
   });
@@ -771,7 +789,20 @@ function aerate(html, strong) {
   /* une balise <span> écrite au milieu d'une formule empêche MathJax de la lire : on la retire */
   html = html.replace(/\$\$[\s\S]*?\$\$|\$[^$]+?\$/g, m => m.includes("<span") || m.includes("</span") ? m.replace(/<\/?span[^>]*>/g, "") : m);
   if (strong) html = enumList(html);
-  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag, strong); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
+  const res = html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag, strong); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
+  return strong ? stmtList(res) : res;
+}
+/* Rappels : les énoncés successifs (paragraphes, phrases) deviennent une liste à puces. */
+function stmtList(h) {
+  const txt = x => x.replace(/<[^>]+>/g, "").trim();
+  let n = 0;
+  const out = h.replace(/<p>([\s\S]*?)<\/p>/g, (m, inner, off, str) => {
+    if (/^\s*<(?:div|ul|ol|figure|table)\b/.test(str.slice(off + m.length)) || /:\s*$/.test(txt(inner)) || /\\;?:\$\$\s*$/.test(inner.trim())) return m;
+    const segs = inner.includes('<span class="sn">') ? [...inner.matchAll(/<span class="sn">([\s\S]*?)<\/span>(?=<span class="sn">|$)/g)].map(x => x[1]) : [inner];
+    n += segs.length;
+    return `<ul class="st">${segs.map(x => `<li${/^\s*\$\$/.test(x) ? ' class="lm"' : ""}>${x}</li>`).join("")}</ul>`;
+  }).replace(/<\/ul><ul class="st">/g, "");
+  return n >= 2 ? out : h;
 }
 window.__lemmeAerate = aerate;
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
