@@ -633,8 +633,48 @@ function annotateText(txt, used, skip) {
   }
   return pieces.map(pc => pc.w ? `<span class="nt" data-n="${pc.w}" tabindex="0" role="button">${pc.t}</span>` : pc.t).join("");
 }
+/* Aère la rédaction : dans un paragraphe ou un item, chaque phrase va sur sa propre ligne (hors formules et balises imbriquées). */
+const ABBR = /(?:^|[\s(])(?:cf|p|ex|etc|resp|éq|i\.e|e\.g|c\.-à-d|Th|Prop|Déf|n°|vol|chap)\.$/i;
+function aerateInner(inner) {
+  if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
+  const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
+  const cuts = []; let depth = 0, pos = 0;
+  const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
+  for (let k = 0; k < parts.length; k++) {
+    const t = parts[k]; if (!t) continue;
+    if (t[0] === "<") {
+      if (/^<br\b/i.test(t)) { pos += t.length; continue; }
+      if (/^<\//.test(t)) depth = Math.max(0, depth - 1); else if (!/\/>$/.test(t)) depth++;
+    } else if (t[0] === "$") {
+      if (t[1] !== "$" && !depth && /[.!?]\s*\$$/.test(t)) { const nx = parts[k + 1] || ""; if (nx && startsSentence(nx)) cuts.push(pos + t.length); }
+    } else if (!depth) {
+      const re = /[.!?]\)?(\s+)/g; let m;
+      while ((m = re.exec(t))) {
+        const end = m.index + m[0].length, before = t.slice(0, m.index + 1);
+        if (/\.\.$/.test(before) || ABBR.test(before)) continue;
+        const after = t.slice(m.index + m[0].length - m[1].length);
+        const nx = end < t.length ? after : after + (parts[k + 1] || "");
+        if (startsSentence(nx) && (end < t.length || parts[k + 1])) cuts.push(pos + end);
+      }
+    }
+    pos += t.length;
+  }
+  if (!cuts.length) return glue(inner);
+  const segs = []; let a = 0;
+  for (const c of cuts) { const s = inner.slice(a, c).trim(); if (s) segs.push(s); a = c; }
+  const last = inner.slice(a).trim(); if (last) segs.push(last);
+  return segs.length < 2 ? glue(inner) : segs.map(s => `<span class="sn">${glue(s)}</span>`).join("");
+}
+/* Une formule et la ponctuation qui la suit restent sur la même ligne. */
+const glue = h => h.replace(/(\$\$[\s\S]*?\$\$)|\$([^$]+?)\$([.,;:!?)]+)/g, (m, d, f, q) => d ? d : `<span class="nw">$${f}$${q}</span>`);
+function aerate(html) {
+  if (!html || html.indexOf("<") < 0) return html ? aerateInner(html) : html;
+  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : `<${tag}${attr}>${aerateInner(inner)}</${tag}>`);
+}
+window.__lemmeAerate = aerate;
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
 function annotate(html, ex, used) {
+  html = aerate(html);
   if (!html || !NOTION_LIST.length) return html || "";
   used = used || new Set();
   const skip = new Set((ex && ex.noNotions) || []);
@@ -684,7 +724,7 @@ function openNotion(id, src) {
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body">${n.b}</div>`;
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body">${aerate(n.b)}</div>`;
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());
@@ -763,7 +803,7 @@ function bindSrc(root) {
 /* Rédaction complète d'un corrigé, et sa vue en grand */
 function redaction(e) {
   if (e.qnav) return e.steps.map((st, k) => `${k === 0 || e.steps[k - 1].q !== st.q ? `<h3 class="rq">Question ${st.q}</h3>` : ""}<p class="rt"><b>Étape ${qpos(e, k)[0]} · ${stt(st.t)}</b></p>${annotate(st.b, e)}`).join("");
-  return e.steps.map((st, k) => `<p class="rt"><b>${k + 1}. ${stt(st.t)}</b></p>${annotate(st.b, e)}`).join("");
+  return e.steps.map((st, k) => `<p class="rt"><b>${/^\d+[a-z]?\)/.test(st.t) ? "" : k + 1 + ". "}${stt(st.t)}</b></p>${annotate(st.b, e)}`).join("");
 }
 function qpos(e, k) { const q = e.steps[k].q, same = e.steps.map((st, j) => [st, j]).filter(x => x[0].q === q); return [same.findIndex(x => x[1] === k) + 1, same.length]; }
 let bigReturn = null;

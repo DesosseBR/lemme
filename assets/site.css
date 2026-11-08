@@ -270,9 +270,13 @@ kbd{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 
 
 /* Prose */
 .prose{font-family:var(--f-read);font-size:18px;line-height:1.75;min-width:0}
-.prose p{margin:0 0 16px;max-width:66ch}
+.prose p{margin:0 0 20px;max-width:66ch}
 .prose ul,.prose ol{margin:0 0 16px;padding-left:1.3em;max-width:66ch}
-.prose li{margin-bottom:8px}
+.prose li{margin-bottom:14px}
+.sn{display:block}
+.nw{white-space:nowrap}
+.sn+.sn{margin-top:10px}
+.prose mjx-container[display="true"]{margin:18px 0!important}
 .prose h2{font-family:var(--f-display);font-weight:800;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.035em;line-height:1.1;margin:56px 0 18px}
 .prose h2:first-child{margin-top:0}
 .prose code{font-family:var(--f-mono);font-size:.84em;background:var(--bg-2);padding:2px 6px;border-radius:6px}
