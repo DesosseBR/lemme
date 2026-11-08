@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
-<script>try{var t=localStorage.getItem("lemme-theme");if(t&&t!=="auto")document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem("lemme-theme");if(t&&t!=="auto")document.documentElement.dataset.theme=t;var z=localStorage.getItem("lemme-size");if(z&&z!=="n")document.documentElement.dataset.size=z}catch(e){}</script>
 </head>
 <body>
 
@@ -33,6 +33,7 @@
         <div class="panel" id="dd-train" hidden>
           <a href="#exercices"><b>Exercices corrigés</b></a>
           <a href="#classiques"><b>Classiques</b></a>
+          <a href="#a-revoir"><b>À revoir</b></a>
           <a href="#kholles"><b>Khôlles</b></a>
           <hr>
           <a href="#dm"><b>Devoirs maison</b></a>
@@ -66,15 +67,7 @@
 
 <main id="app"></main>
 
-<footer class="site">
-  <div class="wrap foot">
-    <div><a class="logo" href="#accueil"><span class="logo-mark" aria-hidden="true"></span><b>Lemme</b></a><p class="tagline">Cours, résumés et corrigés pas à pas pour la prépa scientifique, de la Sup à la Spé.</p></div>
-    <div><h4>Cours</h4><ul id="foot-subj"></ul></div>
-    <div><h4>Exercices</h4><ul><li><a href="#exercices">Exercices corrigés</a></li><li><a href="#classiques">Classiques</a></li><li><a href="#dm">Devoirs maison</a></li><li><a href="#ds">Devoirs surveillés</a></li><li><a href="#kholles">Khôlles</a></li></ul></div>
-    <div><h4>Concours</h4><ul><li><a href="#concours">Écrits</a></li><li><a href="#oral">Oraux</a></li><li><a href="#trouver">Chercher un sujet</a></li><li><a href="#tableau">Tableau de bord</a></li><li><a href="#commando">Commando X-ENS</a></li></ul></div>
-  </div>
-  <div class="foot-bottom"><div class="wrap"><span>© 2026 Lemme · Projet indépendant, sans lien avec les concours cités.</span><span id="credits"></span></div></div>
-</footer>
+<footer class="site site-min"><div class="wrap"><a class="logo" href="#accueil"><span class="logo-mark" aria-hidden="true"></span><b>Lemme</b></a><nav aria-label="Pied de page"><a href="#s-maths">Cours</a><a href="#exercices">Exercices</a><a href="#concours">Concours</a><a href="#tableau">Tableau de bord</a></nav></div></footer>
 
 <script>
 window.MathJax = {

@@ -178,8 +178,8 @@ window.addEventListener("resize", paintYear);
 
 /* ---------- Menus ---------- */
 $("#dd-mat").innerHTML = VISIBLE.map(s => `<a href="#s-${s.id}"><b>${s.name}</b></a>`).join("");
-$("#foot-subj").innerHTML = VISIBLE.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join("");
-$("#credits").textContent = "Photos : Unsplash · " + [...new Set(Object.values(PHOTOS).map(p => p[1]))].join(", ");
+{ const _x = $("#foot-subj"); if (_x) _x.innerHTML = VISIBLE.map(s => `<li><a href="#s-${s.id}">${s.name}</a></li>`).join(""); }
+{ const _x = $("#credits"); if (_x) _x.textContent = "Photos : Unsplash · " + [...new Set(Object.values(PHOTOS).map(p => p[1]))].join(", "); }
 const ddBtns = $$(".dd > .navbtn");
 function closeMenus(except) { ddBtns.forEach(b => { if (b !== except) { b.setAttribute("aria-expanded", "false"); $("#" + b.getAttribute("aria-controls")).hidden = true; } }); }
 ddBtns.forEach(b => b.addEventListener("click", e => {
@@ -193,16 +193,34 @@ burger.addEventListener("click", () => { const o = nav.classList.toggle("open");
 const head = $(".site-head");
 window.addEventListener("scroll", () => head.classList.toggle("scrolled", scrollY > 8), { passive: true });
 
+/* ---------- Chronomètre d'épreuve ---------- */
+const chronoEl = document.createElement("button"); chronoEl.type = "button"; chronoEl.className = "chrono"; chronoEl.hidden = true; chronoEl.title = "Arrêter le chrono"; document.body.appendChild(chronoEl);
+chronoEl.addEventListener("click", () => { DS.set("lemme-chrono", null); chronoTick(); });
+function chronoTick() {
+  const c = DS.get("lemme-chrono", null);
+  if (!c) { chronoEl.hidden = true; return; }
+  const r = Math.max(0, c.end - Date.now()), h = Math.floor(r / 36e5), m = Math.floor(r / 6e4) % 60, sec = Math.floor(r / 1e3) % 60;
+  chronoEl.hidden = false; chronoEl.classList.toggle("over", !r);
+  chronoEl.innerHTML = `<b>${h}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}</b><span>${esc(c.t)}</span>`;
+}
+setInterval(chronoTick, 1000);
+const hintsOn = () => { try { return localStorage.getItem("lemme-hints") !== "0"; } catch (_) { return true; } };
 /* ---------- Apparence ---------- */
-const THEMES = [["auto", "Automatique", "linear-gradient(135deg,#F5F7FC 50%,#0A1230 50%)"], ["clair", "Clair", "#F5F7FC"], ["sombre", "Sombre", "#12151c"], ["papier", "Papier", "#F6F1E7"], ["synthwave", "Synthwave", "linear-gradient(135deg,#ff4fd8,#5b2bd6 55%,#1a1033)"], ["verre", "Verre", "linear-gradient(135deg,#c9d6ff,#fbd3e9)"]];
+const THEMES = [["auto", "Automatique", "linear-gradient(135deg,#F5F7FC 50%,#0A1230 50%)"], ["clair", "Clair", "#F5F7FC"], ["sombre", "Sombre", "#12151c"], ["papier", "Papier", "#F6F1E7"], ["synthwave", "Synthwave", "linear-gradient(135deg,#ff4fd8,#5b2bd6 55%,#1a1033)"], ["verre", "Verre", "linear-gradient(135deg,#c9d6ff,#fbd3e9)"], ["ardoise", "Tableau noir", "#22302a"]];
 {
   const tb = $("#theme-toggle"), tp = $("#themepop");
   const cur = () => { try { return localStorage.getItem("lemme-theme") || "auto"; } catch (_) { return "auto"; } };
-  const paintT = () => { tp.innerHTML = `<p>Apparence</p>` + THEMES.map(([k, l, sw]) => `<button type="button" data-theme-k="${k}" aria-pressed="${cur() === k}"><i style="background:${sw}"></i>${l}</button>`).join(""); };
+  const gs = (k, d) => { try { return localStorage.getItem(k) || d; } catch (_) { return d; } };
+  const paintT = () => { tp.innerHTML = `<p>Apparence</p>` + THEMES.map(([k, l, sw]) => `<button type="button" data-theme-k="${k}" aria-pressed="${cur() === k}"><i style="background:${sw}"></i>${l}</button>`).join("")
+    + `<p>Taille du texte</p><div class="tsize">${[["p", "A−"], ["n", "A"], ["g", "A+"]].map(([k, l]) => `<button type="button" data-size-k="${k}" aria-pressed="${gs("lemme-size", "n") === k}">${l}</button>`).join("")}</div>`
+    + `<p>Corrigé</p><button type="button" data-hints aria-pressed="${hintsOn()}"><i class="sw ${hintsOn() ? "on" : ""}"></i>Indice avant le corrigé</button>`; };
   paintT();
   tb.addEventListener("click", ev => { ev.stopPropagation(); const o = tp.hidden; tp.hidden = !o; tb.setAttribute("aria-expanded", String(o)); });
   tp.addEventListener("click", ev => {
-    ev.stopPropagation(); const b = ev.target.closest("[data-theme-k]"); if (!b) return;
+    ev.stopPropagation();
+    const sz = ev.target.closest("[data-size-k]"); if (sz) { const k = sz.dataset.sizeK; try { localStorage.setItem("lemme-size", k); } catch (_) {} if (k === "n") delete document.documentElement.dataset.size; else document.documentElement.dataset.size = k; paintT(); return; }
+    if (ev.target.closest("[data-hints]")) { try { localStorage.setItem("lemme-hints", hintsOn() ? "0" : "1"); } catch (_) {} paintT(); return; }
+    const b = ev.target.closest("[data-theme-k]"); if (!b) return;
     const k = b.dataset.themeK; try { localStorage.setItem("lemme-theme", k); } catch (_) {}
     if (k === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = k;
     paintT();
@@ -271,8 +289,11 @@ function phead({ crumb, title, meta = "", tabs = "", photo, tall, wiki }) {
 }
 function exCard(e) {
   const n = doneN(e.id);
-  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}>${rib(e.level)}<b class="ttl">${ttl(e)}</b><span class="cf">${lvl(e.level)}${n ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`;
+  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}>${rib(e.level)}<b class="ttl">${ttl(e)}</b><span class="cf">${FAV.has(e.id) ? `<span class="fv" title="À revoir">${IBM}</span>` : ""}${n ? `<span class="dn">${ICHECK}Fait</span>` : ""}${lvl(e.level)}</span></a>`;
 }
+const FAV = (() => { try { return new Set(JSON.parse(localStorage.getItem("lemme-fav") || "[]")); } catch (_) { return new Set(); } })();
+const favSave = () => { try { localStorage.setItem("lemme-fav", JSON.stringify([...FAV])); } catch (_) {} };
+const IBM = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h8v12l-4-3-4 3z" fill="currentColor"/></svg>`;
 let diff = (() => { try { return localStorage.getItem("lemme-diff") || ""; } catch (_) { return ""; } })();
 const byDiff = list => diff ? list.filter(e => dOf(e.level) === diff) : list;
 function diffBar(list) {
@@ -294,6 +315,8 @@ function plusList(list) {
 }
 function tabsHtml(list, cur) { if (!list.length) return ""; return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 /* Précédent / suivant : deux grands boutons, aussi au clavier (← →) */
+/* les rappels de cours utilisés dans les exercices d'un chapitre, sans doublon */
+const chapRappels = list => [...new Set(list.flatMap(e => (e.steps || []).flatMap(st => st.rappels || [])))].filter(k => RAPPELS[k]);
 function pagerHtml(prev, next) {
   if (!prev && !next) return "";
   const one = (x, dir) => x ? `<a class="pager-btn ${dir}" href="${x[0]}" data-key="${dir === "prev" ? "ArrowLeft" : "ArrowRight"}"><span class="pk">${dir === "prev" ? `${I.left} Précédent` : `Suivant ${I.arrow}`}</span><span class="pt">${stt(x[1])}</span></a>` : `<span class="pager-btn off" aria-hidden="true"></span>`;
@@ -303,44 +326,29 @@ function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}<
 
 /* ---------- Pages ---------- */
 function home() {
-  const demo = EXERCISES.find(e => e.id === "ex-rc");
-  const st = demo.steps[1];
-  return `
-  <section class="hero"><div class="photo">${img("hero", "100vw", true)}</div><div class="wrap">
-    <h1><span class="line"><span>Toute ta prépa,</span></span><span class="line"><span><span class="mark">corrigée</span></span></span><span class="line"><span>pas à pas</span></span></h1>
-    <p>Cours, résumés et corrigés interactifs pour la prépa scientifique, de la Sup à la Spé.</p>
-    <div class="ctas"><a class="btn btn-yellow" href="#s-maths">Explorer les matières ${I.arrow}</a><a class="btn btn-glass" href="#e-ex-recurrence">Essayer un corrigé</a></div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="sec-title"><h2>Les matières</h2><a href="#exercices">Tous les exercices ${I.arrow}</a></div>
-    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3></span></a>`).join("")}</div>
-  </div></section>
-
-  <section class="sec"><div class="wrap showcase">
-    <div>
-      <h2>Un corrigé qu'on suit, pas qu'on survole</h2>
-      <p>Chaque correction avance étape par étape, et le rappel de cours utilisé est à un clic.</p>
-      <div class="keys"><kbd>←</kbd><kbd>→</kbd><span>pour avancer ou revenir</span></div>
-      <a class="btn btn-navy" href="#e-${demo.id}">Ouvrir cet exercice ${I.arrow}</a>
-    </div>
-    <div class="panelbox player" aria-label="Aperçu d'un corrigé">
-      <div class="prog" aria-hidden="true">${demo.steps.map((_, k) => `<button tabindex="-1" class="${k <= 1 ? "done" : ""}"></button>`).join("")}<button tabindex="-1"></button></div>
-      <div class="step"><span class="count">Étape 2 sur ${demo.steps.length}</span><h3>${stt(st.t)}</h3><div class="prose">${st.b}</div>
-      <div class="rappels"><span class="lab">Rappels utilisés</span>${(st.rappels || []).map(r => rchip(r)).join("")}</div></div>
-    </div>
-  </div></section>
-
-  <section class="sec"><div class="wrap"><div class="band">
-    <div class="list"><h2>S'entraîner</h2><ul>
-      <li><a href="#classiques">Classiques${I.arrow}</a></li>
-      <li><a href="#dm">Devoirs maison${I.arrow}</a></li>
-      <li><a href="#kholles">Khôlles${I.arrow}</a></li>
-      <li><a href="#concours">Concours${I.arrow}</a></li>
-      <li><a href="#oral">Oraux${I.arrow}</a></li>
-    </ul></div>
-    <div class="photo">${img("oral", "(max-width:860px) 100vw, 50vw")}</div>
-  </div></div></section>`;
+  const last = DS.get("lemme-last", null), le = last && EXERCISES.find(x => x.id === last.id);
+  const st = le && le.steps[Math.min(last.i, le.steps.length - 1)];
+  const where = le ? (last.i >= le.steps.length ? "Bilan" : st && st.q != null ? `Question ${st.q}` : `Étape ${last.i + 1} sur ${le.steps.length}`) : "";
+  /* question du jour : un rappel de cours différent chaque jour */
+  const keys = Object.keys(RAPPELS).filter(k => RAPPELS[k].b && RAPPELS[k].b.length < 900).sort();
+  const day = Math.floor(Date.now() / 864e5), qk = keys.length ? keys[(day * 7919) % keys.length] : null, qr = qk && RAPPELS[qk];
+  return `<section class="home"><div class="wrap">
+    <h1>Toute ta prépa, corrigée</h1>
+    <div class="search home-search"><svg class="lens" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="hq" type="search" placeholder="Cherche un chapitre, un exercice…" autocomplete="off" aria-label="Rechercher"><div class="results" id="hres" hidden></div></div>
+    ${le ? `<a class="resume" href="#e-${le.id}" data-resume="${le.id}"><span class="rk">Continuer</span><b>${ttl(le)}</b><span class="rw">${where}</span><span class="bar"><i style="width:${Math.round(100 * Math.min(last.i, le.steps.length) / le.steps.length)}%"></i></span></a>` : ""}
+    ${qr ? `<details class="qdj"><summary><span class="rk">Question du jour</span><b>${esc(qr.t)} : que dit ce résultat ?</b><span class="rw">Clique pour voir la réponse</span></summary><div class="body course">${aerate(qr.b, true)}</div></details>` : ""}
+    <nav class="home-subj" aria-label="Matières">${VISIBLE.map(x => `<a href="#s-${x.id}">${x.name}</a>`).join("")}</nav>
+  </div></section>`;
+}
+function wireHome() {
+  const i = $("#hq"), r = $("#hres"); if (!i) return;
+  i.addEventListener("input", () => {
+    const v = i.value.trim(); if (!v) { r.hidden = true; return; }
+    const hits = qsearch(headIndex(), v, x => x.it).list.slice(0, 8);
+    r.innerHTML = hits.length ? hits.map(h => `<a href="${h.href}"><span>${esc(h.label)}</span><small>${h.meta}</small></a>`).join("") : `<p>Rien trouvé.</p>`;
+    r.hidden = false;
+  });
+  $$("[data-resume]", app).forEach(a => a.addEventListener("click", () => { try { sessionStorage.setItem("lemme-resume", a.dataset.resume); } catch (_) {} }));
 }
 
 let subjTab = "chapitres";
@@ -351,7 +359,7 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`) || PDFS.has(`cours-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile${n || c.r || r ? "" : " soon"}" href="#c-${id}-${year}-${i}"><span class="tt">${esc(c.t)}</span>${I.arrow}</a>`; }).join("")}</div>`;
+    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`) || PDFS.has(`cours-${id}-${year}-${pad(i + 1)}`); const dn = n ? exOf(id, year, i).filter(e => doneN(e.id)).length : 0; return `<a class="chaptile${n || c.r || r ? "" : " soon"}" href="#c-${id}-${year}-${i}"><span class="tt">${esc(c.t)}</span>${n ? `<span class="cbar" title="${dn} sur ${n} faits"><i style="width:${Math.round(100 * dn / n)}%"></i></span>` : ""}</a>`; }).join("")}</div>`;
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
@@ -374,6 +382,7 @@ function chapterPage(id, y, i) {
     tabs.push(["resume", "Résumé"]);
     if (exs.length) tabs.push(["exercices", "Exercices", exs.length]);
     if (id === "xens") tabs.push(["plus", "Aller plus loin", new Set(plus.map(e => e.plus)).size]);
+    if (chapRappels(all).length > 1) tabs.push(["formulaire", "Formulaire"], ["cartes", "Cartes"]);
     if (!chapTab || !tabs.find(t => t[0] === chapTab)) chapTab = PDFS.has(cs) ? "cours" : (PDFS.has(rs) ? "resume" : (exs.length ? "exercices" : plus.length ? "plus" : "resume"));
   }
   let body;
@@ -383,11 +392,13 @@ function chapterPage(id, y, i) {
     ? `<article class="panelbox resume"><p class="rs-prog"><b>Au programme</b>${esc(c.n)}</p><h2>L'essentiel</h2><div class="prose">${c.r}</div>${PDFS.has(rs) ? `<a class="btn btn-ghost btn-sm rs-dl" href="pdf/${rs}.pdf" download>${I.dl}Télécharger en PDF</a>` : ""}</article>`
     : (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
   else if (chapTab === "plus") body = plusList(plus);
+  else if (chapTab === "formulaire") body = `<div class="formulaire"><div class="fm-top"><button type="button" class="btn btn-ghost btn-sm" data-print>Imprimer</button></div>${chapRappels(all).map(k => `<section><h3>${esc(RAPPELS[k].t)}</h3><div class="body course">${aerate(RAPPELS[k].b, true)}</div></section>`).join("")}</div>`;
+  else if (chapTab === "cartes") { const ks = chapRappels(all); body = `<div class="flash" data-n="${ks.length}">${ks.map((k, j) => `<button type="button" class="fcard" data-j="${j}"${j ? " hidden" : ""} aria-label="Retourner la carte"><span class="ff">${esc(RAPPELS[k].t)}<small>Clique pour voir la réponse</small></span><span class="fb body course">${aerate(RAPPELS[k].b, true)}</span></button>`).join("")}<div class="fnav"><button type="button" class="btn btn-ghost" data-fl="-1">${I.left} Précédente</button><span class="fpos">1 / ${ks.length}</span><button type="button" class="btn btn-ghost" data-fl="1">Suivante ${I.arrow}</button></div></div>`; }
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
   const pager = pagerHtml(prev && [`#c-${id}-${y}-${i - 1}`, prev.t], next && [`#c-${id}-${y}-${i + 1}`, next.t]);
-  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : (tabs.length > 1 ? tabsHtml(tabs, chapTab) : "") })
-    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><nav class="sticky chapnav" aria-label="Chapitres"><p class="cn-h">Chapitres</p><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}>${esc(x.t)}</a></li>`).join("")}</ul></nav></aside></div>`;
+  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: `<details class="chsw"><summary>Changer de chapitre</summary><ul>${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}"${j === i ? ' aria-current="page"' : ""}>${esc(x.t)}</a></li>`).join("")}</ul></details>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : (tabs.length > 1 ? tabsHtml(tabs, chapTab) : "") })
+    + `<div class="wrap layout full"><div>${body}${pager}</div></div>`;
 }
 
 function doneHtml(e) {
@@ -419,7 +430,7 @@ function exercisePage(eid) {
   const cr = ann ? [...bqCrumbs(c), [c.epreuve]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]].concat(e.plus ? [["Aller plus loin"], [e.part]] : []) : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
   const kind = ann ? qrange(e) : e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice");
   const meta = [`<span class="k"${e.concours ? ` data-cc="${e.concours}"` : ""}>${kind}</span>`, ann ? "" : (s.hidden ? s.name : s.name + " · " + YEARS[e.year]), e.time || "", ann ? "" : lvl(e.level)].filter(Boolean).join(`<span class="dot" aria-hidden="true">·</span>`);
-  const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}</div></div></div></section>`;
+  const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}<div class="exacts"><button type="button" class="btn btn-ghost btn-sm" data-fav aria-pressed="${FAV.has(e.id)}">${IBM}<span>${FAV.has(e.id) ? "À revoir" : "Garder pour plus tard"}</span></button>${ann ? `<button type="button" class="btn btn-ghost btn-sm" data-chrono>Chrono ${esc(c.duree || "4 h")}</button>` : ""}<button type="button" class="btn btn-ghost btn-sm" data-printex>Imprimer</button></div></div></div></div></section>`;
   const enHead = `<h2 id="h-en" class="pane-h">Énoncé ${hasPdf ? `<span class="seg" role="group" aria-label="Affichage de l'énoncé"><button type="button" data-mode="interactif" aria-pressed="${enonceMode === "interactif"}">Interactif</button><button type="button" data-mode="pdf" aria-pressed="${enonceMode === "pdf"}">PDF</button></span>` : ""}</h2>`;
   const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
       <div class="prose enonce">${annotate(e.enonce, e)}</div>
@@ -1145,12 +1156,20 @@ function mountPlayer(e, host) {
   const n = e.steps.length;
   const all = [...new Set(e.steps.flatMap(s => s.rappels || []))];
   const state = { i: -1 };
-  function intro() { show(0, 0, true); }
+  function intro() {
+    let k = 0;
+    try { if (sessionStorage.getItem("lemme-resume") === e.id) { sessionStorage.removeItem("lemme-resume"); const l = DS.get("lemme-last", null); if (l && l.id === e.id) k = Math.min(l.i, n); } } catch (_) {}
+    show(k, 0, true);
+  }
+  const seen = new Set();
   function show(i, dir, quiet) { if (quiet) return showNow(i, dir, quiet); smooth(() => showNow(i, dir, quiet)); }
   function showNow(i, dir, quiet) {
     state.i = Math.max(0, Math.min(n, i));
     const last = state.i === n;
     const st = e.steps[state.i];
+    DS.set("lemme-last", { id: e.id, i: state.i });
+    /* indices d'abord : le corrigé de l'étape reste caché tant qu'on ne l'a pas demandé */
+    const veil = !last && st.h && hintsOn() && !seen.has(state.i);
     const qs = e.qnav ? [...new Set(e.steps.map(x => x.q))] : [];
     const curQ = last ? null : st.q;
     const qi = qs.indexOf(curQ);
@@ -1160,13 +1179,15 @@ function mountPlayer(e, host) {
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div><div class="folds">${e.piege ? `<details class="fold f-trap"><summary>Le piège</summary><div>${annotate(e.piege, e)}</div></details>` : ""}${e.methode ? `<details class="fold f-meth"><summary>La méthode</summary><div>${annotate(e.methode, e)}</div></details>` : ""}${all.length ? `<details class="fold"><summary>Tous les rappels utilisés (${all.length})</summary><div class="rappels">${all.map(r => rchip(r, e)).join("")}</div></details>` : ""}</div>`
-            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : ""}`}
+            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3>${st.h && hintsOn() ? `<details class="hint"${veil ? " open" : ""}><summary><span class="hint-ico">?</span>Indice</summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}${veil ? `<button type="button" class="btn btn-ghost reveal" data-reveal>Voir le corrigé</button><div class="prose veiled" hidden>${annotate(st.b, e)}</div>` : `<div class="prose">${annotate(st.b, e)}</div>`}${(st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : ""}`}
         </div>
       </div>
       <div class="nav">
         <button class="btn btn-ghost" type="button" data-step="-1" ${state.i === 0 ? "disabled style=\"opacity:.4;cursor:default\"" : ""}>${I.left} Précédent</button>
+        <span class="keys-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> naviguer · <kbd>F</kbd> concentration · <kbd>/</kbd> chercher</span>
         ${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}
       </div>`;
+    const rv = $("[data-reveal]", host); if (rv) rv.addEventListener("click", () => { seen.add(state.i); rv.remove(); const v = $(".veiled", host); v.hidden = false; const h = $(".hint", host); if (h) h.open = false; typeset(v); });
     $$("[data-q]", host).forEach(b => b.addEventListener("click", () => { const k = e.steps.findIndex(x => String(x.q) === b.dataset.q); show(k, k >= state.i ? 1 : -1); }));
     $$("[data-go]", host).forEach(b => b.addEventListener("click", () => show(+b.dataset.go, +b.dataset.go >= state.i ? 1 : -1)));
     const big = $("[data-big]", host); if (big) big.addEventListener("click", () => openBig(e));
@@ -1192,6 +1213,8 @@ function mountPlayer(e, host) {
     get i() { return state.i; },
     go(k) { show(k, k >= state.i ? 1 : -1); },
     key(k) {
+      const rv = $("[data-reveal]", host);
+      if (k === "ArrowRight" && rv) { rv.click(); return; }
       if (k === "ArrowRight" && state.i < n) show(state.i + 1, 1);
       if (k === "ArrowLeft" && state.i > 0) show(state.i - 1, -1);
     }
@@ -1200,8 +1223,14 @@ function mountPlayer(e, host) {
 }
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) popDrawer(); else if ($("#bigread")) closeBig(); return; }
-  if ($("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-  const t = e.target; if (t && (t.matches("input,textarea,select") || t.isContentEditable)) return;
+  const t = e.target, typing = t && (t.matches("input,textarea,select") || t.isContentEditable);
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openSearch(); return; }
+  if ($("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || typing) return;
+  if (e.key === "/") { e.preventDefault(); openSearch(); return; }
+  if (e.key === "f" || e.key === "F") { document.documentElement.classList.toggle("focus"); return; }
+  const fl = $(".flash", app);
+  if (fl && (e.key === "ArrowRight" || e.key === "ArrowLeft")) { e.preventDefault(); flashGo(fl, e.key === "ArrowRight" ? 1 : -1); return; }
+  if (fl && (e.key === " " || e.key === "Enter") && !t.closest("button")) { e.preventDefault(); const c = $(".fcard:not([hidden])", fl); if (c) c.classList.toggle("flip"); return; }
   if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
   /* on voit la touche : le bouton correspondant s'enfonce avant de changer de page */
   if (player) {
@@ -1213,6 +1242,13 @@ document.addEventListener("keydown", e => {
   if (pb) { e.preventDefault(); press(pb); setTimeout(() => { location.hash = pb.getAttribute("href"); }, 140); }
 });
 
+function openSearch() { if ($("#hq")) { $("#hq").focus(); return; } sbar.hidden = false; stog.setAttribute("aria-expanded", "true"); q.focus(); q.select(); }
+function flashGo(fl, d) {
+  const cs = $$(".fcard", fl), k = cs.findIndex(c => !c.hidden), j = Math.max(0, Math.min(cs.length - 1, k + d));
+  const b = $(`[data-fl="${d}"]`, fl); if (b) press(b);
+  cs.forEach((c, x) => { c.hidden = x !== j; c.classList.remove("flip"); });
+  $(".fpos", fl).textContent = `${j + 1} / ${cs.length}`;
+}
 function press(b) { b.classList.remove("kp"); void b.offsetWidth; b.classList.add("kp"); setTimeout(() => b.classList.remove("kp"), 260); }
 /* ---------- Lecteur PDF ---------- */
 let pdfjsReady = null;
@@ -1927,6 +1963,12 @@ function nextSteps(M, R) {
 }
 
 /* ---------- Page ---------- */
+function heatHtml() {
+  const days = DS.get("lemme-days", {}), out = [], now = new Date(); now.setHours(12, 0, 0, 0);
+  const start = new Date(now); start.setDate(start.getDate() - 62);
+  for (let k = 0; k < 63; k++) { const d = new Date(start); d.setDate(start.getDate() + k); if (d > now) break; const v = days[dayKey(d.getTime())] || 0; out.push(`<i class="h${v > 3600 ? 4 : v > 1800 ? 3 : v > 600 ? 2 : v > 0 ? 1 : 0}" title="${d.toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} · ${Math.round(v / 60)} min"></i>`); }
+  return `<section class="heat"><h2>Tes jours de travail</h2><div class="hgrid">${out.join("")}</div></section>`;
+}
 function dashPage() {
   ttFlush();
   const M = model(), P = M.pref;
@@ -1946,7 +1988,7 @@ function dashPage() {
   const bankOpts = BANKS.map(b => `<option${b.name === P.bank ? " selected" : ""}>${esc(b.name)}</option>`).join("");
   const stat = (v, l) => `<div class="dbs-i"><b>${v}</b><span>${l}</span></div>`;
 
-  return phead({ crumb: [["Tableau de bord"]], title: "Tableau de bord" }) + `<div class="wrap db">
+  return phead({ crumb: [["Tableau de bord"]], title: "Tableau de bord" }) + `<div class="wrap db">${heatHtml()}
 ${M.done.length ? `
   <section class="db-sum">
     <div class="db-main">
@@ -2183,6 +2225,7 @@ function render(keepScroll) {
   else if (h === "dm") html = dmPage();
   else if (h === "ds") html = dsPage();
   else if (h === "kholles") html = khollesPage();
+  else if (h === "a-revoir") { const L = EXERCISES.filter(e => FAV.has(e.id)); html = phead({ crumb: [["À revoir"]], title: "À revoir" }) + `<div class="wrap layout full"><div>${L.length ? `<div class="exgrid">${L.map(exCard).join("")}</div>` : empty("Rien pour l'instant", " Sur un exercice, clique sur « Garder pour plus tard ».")}</div></div>`; }
   else if (h === "concours") html = concoursPage();
   else if (h === "oral") html = oralPage();
   else if (h === "tableau") html = dashPage();
@@ -2202,6 +2245,7 @@ function render(keepScroll) {
   wire(ex);
   if (h === "tableau") wireDash();
   if (h === "trouver") wireTrouver();
+  if (h === "accueil") wireHome();
   lastTs = typeset(app);
   const back = fromEx && !keepScroll && app.querySelector(`.excard[href="#e-${fromEx}"]`);
   if (back) {
@@ -2224,6 +2268,8 @@ function wire(ex) {
     try { localStorage.setItem("lemme-diff", diff); } catch (_) {}
     route(true);
   }));
+  $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
+  $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
   $$("[data-pdf]:not([data-lazy])", app).forEach(mountPdf);
   $$(".sj-pdf", app).forEach(d => d.addEventListener("toggle", () => { const lz = d.open && $("[data-lazy]", d); if (lz) { lz.removeAttribute("data-lazy"); mountPdf(lz); } }));
@@ -2239,6 +2285,9 @@ function wire(ex) {
     [].concat(ex.viz || []).forEach((v, k) => mountViz($("#viz" + (k ? k : "")), v));
     mountPlayer(ex, $("#player"));
     bindDone(ex, $(".exhead .donebox", app));
+    const fb = $("[data-fav]", app); if (fb) fb.addEventListener("click", () => { if (FAV.has(ex.id)) FAV.delete(ex.id); else FAV.add(ex.id); favSave(); fb.setAttribute("aria-pressed", FAV.has(ex.id)); $("span", fb).textContent = FAV.has(ex.id) ? "À revoir" : "Garder pour plus tard"; });
+    const pb = $("[data-printex]", app); if (pb) pb.addEventListener("click", () => { openBig(ex); setTimeout(() => (lastTs || Promise.resolve()).then(() => setTimeout(print, 300)), 400); });
+    const cb = $("[data-chrono]", app); if (cb) cb.addEventListener("click", () => { const c = ANN()[ex.chap] || {}, d = String(c.duree || "4 h"), h = +(d.match(/(\d+)\s*h/) || [0, 0])[1], m = +(d.match(/(\d+)\s*min/) || [0, 0])[1]; DS.set("lemme-chrono", { id: ex.id, t: ex.title, end: Date.now() + ((h * 60 + m) || 240) * 6e4 }); chronoTick(); });
   }
 }
 
