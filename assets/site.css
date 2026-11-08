@@ -1359,3 +1359,23 @@ html.seen .hero h1 .mark::after{animation:none}
 .foot .tagline{font-size:15px;line-height:1.6}
 .lead{font-size:16px}
 @media (max-width:560px){.resume{padding:20px 16px}.resume .prose{font-size:16px}.resume .prose ul{padding-left:1em}}
+
+/* Blocs dépliants : décodage de l'énoncé, piège, méthode, rappels */
+.decode{display:flex;flex-direction:column;gap:10px}
+.fold{border:1px solid var(--line);border-radius:14px;background:var(--bg);font-size:16px;line-height:1.6}
+.fold > summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--muted);border-radius:14px}
+.fold > summary::-webkit-details-marker{display:none}
+.fold > summary::after{content:"+";font-size:19px;line-height:1;color:var(--muted);transition:transform var(--t-fast,.15s)}
+.fold[open] > summary::after{content:"−"}
+.fold > summary:hover{color:var(--ink)}
+.fold > summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.fold > div,.fold > ul{padding:2px 18px 16px}
+.fold > ul{margin:0;padding-left:34px}
+.fold .rappels{margin:0;padding-top:4px;border-top:0}
+.folds{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.f-trap{background:var(--yellow-soft)}
+.f-trap > summary{color:var(--ink)}
+.f-meth{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.f-meth > summary,.f-meth > summary::after{color:var(--yellow)}
+.fold-sm{margin-top:20px}
+.fold-sm > summary{padding:9px 14px;font-size:13px}

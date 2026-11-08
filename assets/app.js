@@ -358,8 +358,8 @@ function exercisePage(eid) {
   const enBody = `<div id="en-int" ${enonceMode === "pdf" && hasPdf ? "hidden" : ""}>
       <div class="prose enonce">${annotate(e.enonce, e)}</div>
       ${(d.donnees || []).length || d.but ? `<div class="decode">
-        ${(d.donnees || []).length ? `<div><h4>Ce que l'énoncé te donne</h4><ul>${d.donnees.map(x => `<li>${x}</li>`).join("")}</ul></div>` : ""}
-        ${d.but ? `<div><h4>Ce qu'on te demande</h4>${d.but}</div>` : ""}
+        ${(d.donnees || []).length ? `<details class="fold"><summary>Ce que l'énoncé te donne</summary><ul>${d.donnees.map(x => `<li>${x}</li>`).join("")}</ul></details>` : ""}
+        ${d.but ? `<details class="fold"><summary>Ce qu'on te demande</summary><div>${d.but}</div></details>` : ""}
       </div>` : ""}
     </div>
     ${hasPdf ? `<div id="en-pdf" ${enonceMode === "pdf" ? "" : "hidden"}><div data-pdf="enonce-${e.id}" data-title="${esc(e.title)}" data-lazy="1"></div></div>` : ""}`;
@@ -697,9 +697,10 @@ function listify(html) {
     return `$$\\begin{aligned}${fs.map((x, i) => alignAmp(x) + (i < fs.length - 1 ? "\\\\[6pt]" : "")).join("")}\\end{aligned}$$`;
   });
 }
-function aerateInner(inner) {
+function aerateInner(inner, tag) {
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
-  inner = listify(promote(inner));
+  const bare = inner.replace(/\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>/g, "").replace(/[\s.,;:]/g, "");
+  if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner));
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   const cuts = []; let depth = 0, pos = 0;
   const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
@@ -732,7 +733,7 @@ function aerateInner(inner) {
 const glue = h => h.replace(/(\$\$[\s\S]*?\$\$)|\$([^$]+?)\$([.,;:!?)]+)/g, (m, d, f, q) => d ? d : `<span class="nw">$${f}$${q}</span>`);
 function aerate(html) {
   if (!html || html.indexOf("<") < 0) return html ? aerateInner(html) : html;
-  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : `<${tag}${attr}>${aerateInner(inner)}</${tag}>`);
+  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : `<${tag}${attr}>${aerateInner(inner, tag)}</${tag}>`);
 }
 window.__lemmeAerate = aerate;
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
@@ -888,6 +889,14 @@ function closeBig(silent) {
 }
 
 /* ---------- Corrigé pas à pas ---------- */
+/* Numéro de la question traitée par une étape : champ q, sinon titre « 2) … », « 1a) … », « Q3 … », sinon celui de l'étape précédente. */
+function stepQ(e, i) {
+  for (let k = i; k >= 0; k--) {
+    const st = e.steps[k]; if (st.q) return +st.q || 0;
+    const m = String(st.t || "").match(/^\s*(?:Q|Question\s*)?(\d+)\s*[a-z]?\s*[).·:]/i); if (m) return +m[1];
+  }
+  return 0;
+}
 let player = null;
 function mountPlayer(e, host) {
   const n = e.steps.length;
@@ -907,8 +916,8 @@ function mountPlayer(e, host) {
       <div class="stage" aria-live="polite">
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
-            ? `<span class="count">Bilan</span><h3>Ce qu'il faut retenir</h3><div class="bilan"><div class="trap"><h4>Le piège</h4>${annotate(e.piege, e)}</div><div class="meth"><h4>La méthode</h4>${annotate(e.methode, e)}</div></div>${all.length ? `<div class="rappels"><span class="lab">Tous les rappels utilisés</span>${all.map(r => rchip(r, e)).join("")}</div>` : ""}<div class="donebox donebilan">${doneHtml(e)}</div><div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div>`
-            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<div class="rappels"><span class="lab">Rappels utilisés</span>${st.rappels.map(r => rchip(r, e)).join("")}</div>` : ""}`}
+            ? `<span class="count">Bilan</span><div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div><div class="folds">${e.piege ? `<details class="fold f-trap"><summary>Le piège</summary><div>${annotate(e.piege, e)}</div></details>` : ""}${e.methode ? `<details class="fold f-meth"><summary>La méthode</summary><div>${annotate(e.methode, e)}</div></details>` : ""}${all.length ? `<details class="fold"><summary>Tous les rappels utilisés (${all.length})</summary><div class="rappels">${all.map(r => rchip(r, e)).join("")}</div></details>` : ""}</div>`
+            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3><div class="prose">${annotate(st.b, e)}</div>${(st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : ""}`}
         </div>
       </div>
       <div class="nav">
@@ -922,10 +931,10 @@ function mountPlayer(e, host) {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
     }));
-    closeTip(); bindKeys(host, e); bindSrc(host); if (last) bindDone(e, $(".donebilan", host));
-    if (e.side) {
-      const q = last ? 0 : (st.q || 0);
-      const lis = $$(".side-en .enonce > ol > li");
+    closeTip(); bindKeys(host, e); bindSrc(host); 
+    {
+      const q = last ? 0 : stepQ(e, state.i);
+      const lis = $$(".side-en .enonce ol > li").filter(li => !li.parentElement.closest("li"));
       const num = li => { const ol = li.parentElement; return (ol.hasAttribute("start") ? +ol.getAttribute("start") : 1) + [...ol.children].indexOf(li); };
       lis.forEach(li => li.classList.toggle("qon", num(li) === q));
       const on = lis.find(li => num(li) === q), box = $(".side-en");
