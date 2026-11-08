@@ -11,7 +11,7 @@ const app = $("#app");
 const sid = id => SUBJECTS.find(s => s.id === id);
 const VISIBLE = SUBJECTS.filter(s => !s.hidden);
 const CONC = window.LEMME.CONCOURS || {};
-const homeOf = s => s.home || "#commando";
+const homeOf = s => s.home || (s.id === "xens" ? "#xens-chapitres" : "#commando");
 const parentOf = s => s.id === "oraux" ? ["Oraux", "#oral"] : s.id === "kholles" ? ["Khôlles", "#kholles"] : ["Concours", "#concours"];
 let lastConc = null;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -114,8 +114,12 @@ const wsrc = (f, w) => `https://commons.wikimedia.org/wiki/Special:FilePath/${en
 const wimg = (f, eager) => `<img src="${wsrc(f, 1600)}" srcset="${wsrc(f, 800)} 800w, ${wsrc(f, 1600)} 1600w" sizes="100vw" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`;
 const wcredit = f => `<a class="wcredit" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}" target="_blank" rel="noopener">Photo : Wikimedia Commons, licence libre (auteur et licence)</a>`;
 const ICHECK = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const tile = (href, num, title, foot, cls) => `<a class="tile${cls ? " " + cls : ""}" href="${href}"><span class="tnum">${num}</span><span class="tt">${title}</span>${foot ? `<span class="tfoot">${foot}</span>` : ""}</a>`;
-const lvl = n => `<span class="lvl" role="img" aria-label="Difficulté ${n} sur 5">${[1, 2, 3, 4, 5].map(k => `<i class="${k <= n ? "on" : ""}" aria-hidden="true">★</i>`).join("")}</span>`;
+const tile = (href, num, title, foot, cls) => `<a class="tile${cls ? " " + cls : ""}" href="${href}">${num ? `<span class="tnum">${num}</span>` : ""}<span class="tt">${title}</span>${foot ? `<span class="tfoot">${foot}</span>` : ""}</a>`;
+/* Difficulté sur 3 étoiles, par demi-étoiles : 1 → 1, 2 → 1,5, 3 → 2, 4 → 2,5, 5 → 3 */
+const lv3 = n => Math.max(1, Math.min(3, ((n || 3) + 1) / 2));
+const lvl = n => { const v = lv3(n); return `<span class="lvl" style="--v:${v}" role="img" aria-label="Difficulté ${String(v).replace(".", ",")} sur 3"></span>`; };
+const DIFFS = [["", "Tout"], ["f", "Facile"], ["m", "Moyen"], ["d", "Difficile"]];
+const dOf = n => (n || 3) <= 2 ? "f" : (n || 3) === 3 ? "m" : "d";
 
 /* ---------- MathJax ---------- */
 let mjQueue = Promise.resolve();
@@ -191,13 +195,50 @@ window.addEventListener("scroll", () => head.classList.toggle("scrolled", scroll
 const sbar = $("#searchbar"), stog = $("#search-toggle"), q = $("#q"), results = $("#results");
 stog.addEventListener("click", () => { const o = sbar.hidden; sbar.hidden = !o; stog.setAttribute("aria-expanded", String(o)); if (o) q.focus(); });
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-const INDEX = [];
-SUBJECTS.forEach(s => ["mpsi", "mp"].forEach(y => s.years[y].forEach((c, i) => INDEX.push({ href: `#c-${s.id}-${y}-${i}`, label: c.t, meta: `${s.name} · ${YEARS[y]}`, n: norm(c.t + " " + c.n + " " + s.name) }))));
-EXERCISES.forEach(e => INDEX.push({ href: `#e-${e.id}`, label: e.title, meta: `${e.kind === "probleme" ? "Problème" : "Exercice"} · ${sid(e.subj).name} ${YEARS[e.year]}`, n: norm(e.title + " " + sid(e.subj).name) }));
+/* Moteur de recherche : sans accents ni majuscules, début de mot suffit (« diag » trouve « diagonalisation »),
+   une faute de frappe est tolérée, et le titre compte plus que le texte. */
+const STOPQ = new Set("le la les de des du un une et en au aux pour par sur dans avec qui que est sont ou on se ce cette ces son sa ses d l".split(" "));
+const qwords = s => norm(String(s || "")).split(/[^a-z0-9]+/).filter(w => w.length > 1 && !STOPQ.has(w));
+const plainOf = h => String(h || "").replace(/<[^>]+>/g, " ").replace(/\\[a-zA-Z]+/g, " ");
+function mkItem(title, body) { const tw = qwords(title), all = [...new Set(tw.concat(qwords(body)))]; return { tset: new Set(tw), toks: all, set: new Set(all) }; }
+function near(a, b) {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0, j = 0, d = 0;
+  while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++d > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } }
+  return d + (a.length - i) + (b.length - j) <= 1;
+}
+function wscore(it, w) {
+  if (it.tset.has(w)) return 1.6;
+  if (it.set.has(w)) return 1.2;
+  if (it.toks.some(t => t.startsWith(w))) return 1;
+  if (w.length >= 5 && it.toks.some(t => t.length >= 5 && w.startsWith(t.slice(0, Math.max(5, t.length - 2))))) return .9;
+  if (w.length >= 5 && it.toks.some(t => near(t, w))) return .8;
+  return 0;
+}
+/* score : -1 si un mot manque, sinon la somme (plus c'est haut, mieux c'est) ; part = proportion des mots trouvés */
+function qscore(it, query) {
+  const ws = qwords(query); if (!ws.length) return { all: true, sc: 0, part: 1 };
+  let sc = 0, got = 0; for (const w of ws) { const v = wscore(it, w); if (v) { got++; sc += v; } }
+  return { all: got === ws.length, sc, part: got / ws.length };
+}
+function qsearch(items, query, key) {
+  const r = items.map(x => ({ x, s: qscore(key(x), query) }));
+  const exact = r.filter(o => o.s.all).sort((a, b) => b.s.sc - a.s.sc);
+  if (exact.length) return { list: exact.map(o => o.x), near: false };
+  return { list: r.filter(o => o.s.part >= .5).sort((a, b) => b.s.part - a.s.part || b.s.sc - a.s.sc).map(o => o.x), near: true };
+}
+let INDEX = null;
+function headIndex() {
+  if (INDEX) return INDEX;
+  INDEX = [];
+  SUBJECTS.forEach(s => ["mpsi", "mp"].forEach(y => (s.years[y] || []).forEach((c, i) => INDEX.push({ href: `#c-${s.id}-${y}-${i}`, label: c.t, meta: `${s.name} · ${YEARS[y]}`, it: mkItem(c.t, (c.n || "") + " " + s.name) }))));
+  EXERCISES.forEach(e => INDEX.push({ href: `#e-${e.id}`, label: e.title, meta: `${sid(e.subj).name} · ${YEARS[e.year]}`, it: mkItem(e.title, sid(e.subj).name + " " + (e.steps || []).map(st => st.t).join(" ") + " " + plainOf(e.enonce).slice(0, 1500)) }));
+  return INDEX;
+}
 q.addEventListener("input", () => {
-  const v = norm(q.value.trim());
+  const v = q.value.trim();
   if (!v) { results.hidden = true; return; }
-  const hits = INDEX.filter(x => v.split(/\s+/).every(w => x.n.includes(w))).slice(0, 12);
+  const hits = qsearch(headIndex(), v, x => x.it).list.slice(0, 12);
   results.innerHTML = hits.length ? hits.map(h => `<a href="${h.href}"><span>${esc(h.label)}</span><small>${h.meta}</small></a>`).join("") : `<p>Aucun résultat pour « ${esc(q.value)} ».</p>`;
   results.hidden = false;
 });
@@ -210,30 +251,35 @@ function phead({ crumb, title, meta = "", tabs = "", photo, tall, wiki }) {
   return `<section class="phead${photo || wiki ? " has-photo" : ""}${tall ? " tall" : ""}">${wiki ? `<div class="photo">${wimg(wiki, true)}</div>${wcredit(wiki)}` : photo ? `<div class="photo">${img(photo, "100vw", true)}</div>` : ""}<div class="wrap">${crumbs(crumb)}<h1>${title}</h1>${meta ? `<div class="meta">${meta}</div>` : ""}${tabs}</div></section>`;
 }
 function exCard(e) {
-  const n = doneN(e.id), pb = e.kind === "probleme";
-  const kind = e.subj === "kholles" ? "Khôlle" : e.concours ? (CC_SHORT[e.concours] || CONC[e.concours]) : e.subj === "annales" ? "Sujet de concours" : (pb ? "Problème" : "Exercice");
-  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}><span class="top"><span class="kind">${kind}</span>${lvl(e.level)}</span><b class="ttl">${ttl(e)}</b><span class="foot"><span>${e.time || ""}</span>${n ? `<span class="dn">${ICHECK}Fait${n > 1 ? " " + n + " fois" : ""}</span>` : ""}</span></a>`;
+  const n = doneN(e.id);
+  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}><b class="ttl">${ttl(e)}</b><span class="cf">${lvl(e.level)}${n ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`;
 }
-let stars = (() => { try { return new Set(JSON.parse(localStorage.getItem("lemme-stars") || "[]")); } catch (_) { return new Set(); } })();
-const byStars = list => stars.size ? list.filter(e => stars.has(e.level || 1)) : list;
-function starBar(list) {
-  const cnt = [1, 2, 3, 4, 5].map(k => list.filter(e => (e.level || 1) === k).length);
-  return `<div class="starbar" role="group" aria-label="Filtrer par difficulté"><span class="sbl">Difficulté</span><button type="button" class="sbtn" data-star="0" aria-pressed="${!stars.size}">Toutes<span class="n">${list.length}</span></button>${cnt.map((n, k) => `<button type="button" class="sbtn" data-star="${k + 1}" aria-pressed="${stars.has(k + 1)}"${n ? "" : " disabled"}><span class="st" aria-label="${k + 1} étoile${k ? "s" : ""}">${"★".repeat(k + 1)}</span><span class="n">${n}</span></button>`).join("")}</div>`;
+let diff = (() => { try { return localStorage.getItem("lemme-diff") || ""; } catch (_) { return ""; } })();
+const byDiff = list => diff ? list.filter(e => dOf(e.level) === diff) : list;
+function diffBar(list) {
+  return `<div class="diffbar" role="group" aria-label="Difficulté">${DIFFS.map(([k, lab]) => { const n = k ? list.filter(e => dOf(e.level) === k).length : list.length; return `<button type="button" data-diff="${k}" aria-pressed="${diff === k}"${n ? "" : " disabled"}>${lab}</button>`; }).join("")}</div>`;
 }
 function exList(list, emptyHtml) {
-  const f = byStars(list);
-  return starBar(list) + (f.length ? `<div class="exgrid stagger">${f.map(exCard).join("")}</div>` : empty("Aucun exercice à ce niveau", " Choisis une autre difficulté."));
+  const f = byDiff(list);
+  return diffBar(list) + (f.length ? `<div class="exgrid stagger">${f.map(exCard).join("")}</div>` : empty("Rien à ce niveau", ""));
 }
 function plusList(list) {
-  if (!list.length) return empty("Bientôt", " Les sujets « Aller plus loin » de ce chapitre sont en préparation.");
+  if (!list.length) return empty("Bientôt", "");
   const ids = [...new Set(list.map(e => e.plus))];
-  return `<p class="pl-intro">Des sujets complets, rédigés comme un problème de concours : chaque partie s'appuie sur les précédentes, et tout est corrigé question par question.</p>` + ids.map(k => {
-    const parts = list.filter(e => e.plus === k), f = parts[0], nd = parts.filter(e => doneN(e.id)).length;
-    if (parts.length === 1) { const nq = new Set(f.steps.map(st => st.q)).size; return `<section class="plsujet"><div class="plh"><span class="plk">Sujet</span><h2>${esc(f.title)}</h2>${f.sujetDesc ? `<p>${f.sujetDesc}</p>` : ""}<span class="plm">${nq} questions${f.time ? " · " + f.time : ""}${nd ? ` · ${ICHECK}Fait` : ""}</span></div><ol class="plparts"><li><a class="excard${nd ? " done" : ""}" href="#e-${f.id}"><span class="plp">Sujet complet</span><span class="plt">Énoncé et corrigé question par question</span><span class="plq">Q1 à Q${nq}</span>${I.arrow}</a></li></ol></section>`; }
-    return `<section class="plsujet"><div class="plh"><span class="plk">Sujet</span><h2>${esc(f.sujet || f.title)}</h2>${f.sujetDesc ? `<p>${f.sujetDesc}</p>` : ""}<span class="plm">${plural(parts.length, "partie")} · ${parts.reduce((a, e) => a + new Set(e.steps.map(st => st.q)).size, 0)} questions${nd ? ` · ${nd} faite${nd > 1 ? "s" : ""}` : ""}</span></div><ol class="plparts">${parts.map(e => `<li><a class="excard${doneN(e.id) ? " done" : ""}" href="#e-${e.id}"><span class="plp">${esc(e.part)}</span><span class="plt">${ttl(e)}</span><span class="plq">${qrange(e)}${doneN(e.id) ? ` · ${ICHECK}Fait` : ""}</span>${I.arrow}</a></li>`).join("")}</ol></section>`;
-  }).join("");
+  return `<div class="plist">` + ids.map(k => {
+    const parts = list.filter(e => e.plus === k), f = parts[0];
+    const nq = parts.reduce((a, e) => a + new Set(e.steps.map(st => st.q)).size, 0);
+    if (parts.length === 1) return `<a class="prow${doneN(f.id) ? " done" : ""}" href="#e-${f.id}"><span class="prt">${esc(f.title)}</span><span class="prm">${nq} questions${f.time ? " · " + f.time : ""}</span>${doneN(f.id) ? `<span class="dn">${ICHECK}</span>` : ""}${I.arrow}</a>`;
+    return `<div class="pgroup"><div class="prow head"><span class="prt">${esc(f.sujet || f.title)}</span><span class="prm">${nq} questions</span></div>${parts.map(e => `<a class="prow sub${doneN(e.id) ? " done" : ""}" href="#e-${e.id}"><span class="prt">${esc(e.part)} · ${ttl(e)}</span><span class="prm">${qrange(e)}</span>${doneN(e.id) ? `<span class="dn">${ICHECK}</span>` : ""}${I.arrow}</a>`).join("")}</div>`;
+  }).join("") + `</div>`;
 }
 function tabsHtml(list, cur) { if (!list.length) return ""; return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
+/* Précédent / suivant : deux grands boutons, aussi au clavier (← →) */
+function pagerHtml(prev, next) {
+  if (!prev && !next) return "";
+  const one = (x, dir) => x ? `<a class="pager-btn ${dir}" href="${x[0]}" data-key="${dir === "prev" ? "ArrowLeft" : "ArrowRight"}"><span class="pk">${dir === "prev" ? `${I.left} Précédent` : `Suivant ${I.arrow}`}</span><span class="pt">${stt(x[1])}</span></a>` : `<span class="pager-btn off" aria-hidden="true"></span>`;
+  return `<nav class="pager" aria-label="Chapitre précédent ou suivant">${one(prev, "prev")}${one(next, "next")}</nav>`;
+}
 function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}</div>`; }
 
 /* ---------- Pages ---------- */
@@ -249,7 +295,7 @@ function home() {
 
   <section class="sec"><div class="wrap">
     <div class="sec-title"><h2>Les matières</h2><a href="#exercices">Tous les exercices ${I.arrow}</a></div>
-    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3><span class="bar"></span><small>${s.years.mpsi.length} chapitres en Sup · ${s.years.mp.length} en Spé</small></span></a>`).join("")}</div>
+    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3></span></a>`).join("")}</div>
   </div></section>
 
   <section class="sec"><div class="wrap showcase">
@@ -268,11 +314,11 @@ function home() {
 
   <section class="sec"><div class="wrap"><div class="band">
     <div class="list"><h2>S'entraîner</h2><ul>
-      <li><a href="#classiques">Classiques <span>Les exercices et problèmes incontournables</span>${I.arrow}</a></li>
-      <li><a href="#dm">Devoirs maison <span>Sujets complets en PDF</span>${I.arrow}</a></li>
-      <li><a href="#kholles">Khôlles <span>Les exercices classiques, par chapitre</span>${I.arrow}</a></li>
-      <li><a href="#concours">Concours <span>Banques et calendrier</span>${I.arrow}</a></li>
-      <li><a href="#oral">Oraux <span>Ce qu'on attend de toi</span>${I.arrow}</a></li>
+      <li><a href="#classiques">Classiques${I.arrow}</a></li>
+      <li><a href="#dm">Devoirs maison${I.arrow}</a></li>
+      <li><a href="#kholles">Khôlles${I.arrow}</a></li>
+      <li><a href="#concours">Concours${I.arrow}</a></li>
+      <li><a href="#oral">Oraux${I.arrow}</a></li>
     </ul></div>
     <div class="photo">${img("oral", "(max-width:860px) 100vw, 50vw")}</div>
   </div></div></section>`;
@@ -286,7 +332,7 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile" href="#c-${id}-${year}-${i}"><span class="tnum">${pad(i + 1)}</span><span class="tt">${esc(c.t)}</span><span class="tn">${n ? plural(n, "exercice") : (c.r || r ? "Résumé" : "En préparation")}</span></a>`; }).join("")}</div>`;
+    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`) || PDFS.has(`cours-${id}-${year}-${pad(i + 1)}`); return `<a class="chaptile${n || c.r || r ? "" : " soon"}" href="#c-${id}-${year}-${i}"><span class="tt">${esc(c.t)}</span>${I.arrow}</a>`; }).join("")}</div>`;
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
@@ -320,9 +366,9 @@ function chapterPage(id, y, i) {
   else if (chapTab === "plus") body = plusList(plus);
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
   const prev = list[i - 1], next = list[i + 1];
-  const pager = `<div style="display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap">${prev ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i - 1}">${I.left} ${esc(prev.t)}</a>` : "<span></span>"}${next ? `<a class="btn btn-ghost" href="#c-${id}-${y}-${i + 1}">${esc(next.t)} ${I.arrow}</a>` : ""}</div>`;
-  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), meta: oral ? `<span class="tag y">Chapitre ${i + 1}</span><span class="tag">${s.name}</span><span class="tag">${plural((c.cc || []).length, "concours").replace("concourss", "concours")}</span>` : id === "kholles" ? `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>` : s.hidden ? `<span class="tag y">${esc(xpos(s, i).name)} · ${xpos(s, i).j + 1}</span><span class="tag">${s.name}</span><span class="tag">Niveau ★★★★★</span>` : `<span class="tag y">Chapitre ${pad(i + 1)}</span><span class="tag">${s.name} · ${YEARS[y]}</span>`, tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : (tabs.length > 1 ? tabsHtml(tabs, chapTab) : "") })
-    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><div class="sticky"><h3>${oral ? s.name : id === "kholles" ? s.name + " · " + YEARS[y] : s.hidden ? s.name : s.name + " · " + YEARS[y]}</h3><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}><span class="n">${pad(j + 1)}</span>${esc(x.t)}</a></li>`).join("")}</ul></div></aside></div>`;
+  const pager = pagerHtml(prev && [`#c-${id}-${y}-${i - 1}`, prev.t], next && [`#c-${id}-${y}-${i + 1}`, next.t]);
+  return phead({ crumb: id === "kholles" ? [["Khôlles", "#kholles"]] : s.hidden ? [parentOf(s), [s.name, homeOf(s)]] : [[s.name, `#s-${id}`], [YEARS[y]]], title: esc(c.t), tabs: oral ? tabsHtml(tabs, chapTab).replace(/data-tab="(\w+)"/g, 'data-tab="$1" data-cc="$1"') : (tabs.length > 1 ? tabsHtml(tabs, chapTab) : "") })
+    + `<div class="wrap layout"><div>${body}${pager}</div><aside class="side"><nav class="sticky chapnav" aria-label="Chapitres"><p class="cn-h">Chapitres</p><ul class="navlist">${list.map((x, j) => `<li><a href="#c-${id}-${y}-${j}" ${j === i ? 'aria-current="page"' : ""}>${esc(x.t)}</a></li>`).join("")}</ul></nav></aside></div>`;
 }
 
 function doneHtml(e) {
@@ -422,38 +468,21 @@ function dsPage() {
 function khollesPage() {
   const s = sid("kholles"), list = (s && s.years[year]) || [];
   return phead({ crumb: [["Khôlles"]], title: "Khôlles", photo: "oral" }) + `<div class="wrap layout full"><div>
-    <p class="lead">Les exercices classiques posés en khôlle, rangés par chapitre et corrigés pas à pas.</p>
-    ${list.length ? `<div class="tiles stagger">${list.map((c, i) => { const n = exOf("kholles", year, i).length, d = exOf("kholles", year, i).filter(e => doneN(e.id)).length; return tile(`#c-kholles-${year}-${i}`, pad(i + 1), esc(c.t), n ? `${d ? `<span class="tdone">${d}/${n} faits</span>` : `${n} exo${n > 1 ? "s" : ""}`}` : "Bientôt"); }).join("")}</div>` : empty("Bientôt", "")}
+    ${list.length ? `<div class="chaptiles stagger">${list.map((c, i) => `<a class="chaptile${exOf("kholles", year, i).length ? "" : " soon"}" href="#c-kholles-${year}-${i}"><span class="tt">${esc(c.t)}</span>${I.arrow}</a>`).join("")}</div>` : empty("Bientôt", "")}
   </div></div>`;
 }
 
-const CONC_TAIL = `<h2>L'année de Spé</h2>
-    <ul class="steps-list">
-      <li><b>Décembre · janvier</b><span>Inscriptions sur le site du SCEI.</span></li>
-      <li><b>Avril · mai</b><span>Les écrits, sur plusieurs semaines.</span></li>
-      <li><b>Juin · juillet</b><span>Les oraux et le TIPE, pour les admissibles.</span></li>
-    </ul>
-    <p>Les dates exactes changent chaque année : vérifie-les sur <a href="https://www.scei-concours.fr" target="_blank" rel="noopener">scei-concours.fr</a>.</p>
-    <h2>Réviser</h2>
-    <ul><li>Dès janvier, un sujet complet en temps limité toutes les deux semaines.</li><li>Un carnet d'erreurs : chaque faute de DS, avec la bonne méthode.</li><li>Les dernières semaines, les annales des concours que tu vises.</li></ul>
-  </article></div>`;
 function concoursPage(f) {
   if (f) curFil = f;
-  const nOf = k => ANN().filter(c => fils(c).includes(FIL[k])).length;
-  if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les écrits" }) + `<div class="wrap layout full">
-    <article class="prose">
-    <h2>Choisis ta filière</h2>
-    <p>Tu ne vois ensuite que les épreuves que tu passeras.</p>
-    <div class="filpick">${Object.keys(FIL).map(k => { const n = nOf(k); return `<a class="filcard" href="#concours-${k}"><b>${FIL[k]}</b><span>${n ? plural(n, "sujet corrigé").replace("sujet corrigés", "sujets corrigés") : "Bientôt"}</span></a>`; }).join("")}</div>
-    <a class="tfcta" href="#trouver"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Chercher un sujet</b> par mots-clés, banque, année ou difficulté</span></a>`
-    + CONC_TAIL;
+  if (!f) return phead({ crumb: [["Concours"]], title: "Préparer les écrits" }) + `<div class="wrap layout full"><div>
+    <h2 class="pick-h">Choisis ta filière</h2>
+    <div class="filpick">${Object.keys(FIL).map(k => `<a class="filcard" href="#concours-${k}"><b>${FIL[k]}</b>${I.arrow}</a>`).join("")}</div>
+  </div></div>`;
   const seg = `<div class="filseg" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a href="#concours-${k}"${k === f ? ' aria-current="page"' : ""}>${FIL[k]}</a>`).join("")}</div>`;
-  return phead({ crumb: [["Concours", "#concours"], [FIL[f]]], title: `Écrits · ${FIL[f]}` }) + `<div class="wrap layout full">
-    <article class="prose">
+  return phead({ crumb: [["Concours", "#concours"], [FIL[f]]], title: `Écrits · ${FIL[f]}` }) + `<div class="wrap layout full"><div>
     ${seg}
-    <h2>Les banques</h2>
-    <div class="banklist">${BANKS.map(b => { const n = sujetsOf(b.name, f).length; const inner = `<span class="bkn">${b.name}</span><span class="bkd">${b.desc}</span><span class="bkc">${n ? plural(n, "sujet") : "Bientôt"}</span>`; return n ? `<a class="bkrow" href="#banque-${bslug(b.name)}-${f}">${inner}${I.arrow}</a>` : `<div class="bkrow off">${inner}<span></span></div>`; }).join("")}</div>
-    ` + CONC_TAIL;
+    <div class="banklist">${BANKS.map(b => { const n = sujetsOf(b.name, f).length; return n ? `<a class="bkrow" href="#banque-${bslug(b.name)}-${f}"><span class="bkn">${b.name}</span>${I.arrow}</a>` : `<div class="bkrow off"><span class="bkn">${b.name}</span><span class="bks">Bientôt</span></div>`; }).join("")}</div>
+  </div></div>`;
 }
 
 const bslug = n => norm(n).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -504,7 +533,6 @@ function banquePage(slug, f, mi, year) {
     }
   }
   return ph + `<div class="wrap layout full"><div>
-    ${m ? "" : `<p class="lead">${b.desc} Chaque sujet est donné tel qu'il a été posé, avec un corrigé question par question.</p>`}
     ${f ? "" : `<div class="filters" role="group" aria-label="Filière">${Object.keys(FIL).map(k => `<a class="chip" href="#banque-${slug}-${k}">${FIL[k]}</a>`).join("")}</div>`}
     ${body}
   </div></div>`;
@@ -515,33 +543,27 @@ function sujetPage(i) {
   return phead({ crumb: bqCrumbs(c).concat([[c.epreuve]]), title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
     <p class="sj-intro">${c.intro}</p>
     <h2 class="sj-h">Le corrigé, partie par partie</h2>
-    <p class="lead">Une page par partie, avec l'énoncé à côté du corrigé.</p>
     <div class="tiles ann vault stagger">${parts.map(e => tile(`#e-${e.id}`, (/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + esc(e.part.replace(/\s*\(.*\)/, "")), ttl(e), doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : "", doneN(e.id) ? "is-done" : "")).join("")}</div>
     ${c.pdf ? `<details class="sj-pdf"><summary><span>Voir le sujet original</span><small>PDF · ${esc(c.bank)} ${c.annee}</small></summary><div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}" data-lazy="1"></div><a class="btn btn-ghost btn-sm" href="pdf/${c.pdf}.pdf" download>${I.dl}Télécharger le sujet</a></details>` : ""}
   </div></div>`;
 }
 
 function oralPage() {
-  const om = sid("oraux"), nEx = EXERCISES.filter(e => e.subj === "oraux").length;
-  return phead({ crumb: [["Oraux"]], title: "Réussir les oraux", photo: "oral" }) + `<div class="wrap layout full">
-    <article class="prose">
-    <div class="cards">
-      <a class="card card-link" href="#oraux-maths"><h3>Mathématiques</h3><p>Un ou deux exercices au tableau, avec des indications si tu bloques.</p><span class="card-go">${om.years.mp.length} chapitres · ${plural(nEx, "exercice")} corrigés ${I.arrow}</span></a>
-      <div class="card"><h3>Physique</h3><p>Souvent un problème ouvert : modéliser, estimer, discuter.</p></div>
-      <div class="card"><h3>Avec Python</h3><p>Certaines épreuves demandent de programmer en direct.</p></div>
-      <div class="card"><h3>TIPE</h3><p>Présenter ton travail, puis répondre au jury sur ta démarche.</p></div>
+  return phead({ crumb: [["Oraux"]], title: "Réussir les oraux", photo: "oral" }) + `<div class="wrap layout full"><div>
+    <div class="filpick oral-pick">
+      <a class="filcard" href="#oraux-maths"><b>Mathématiques</b>${I.arrow}</a>
+      <div class="filcard off"><b>Physique</b><span>Bientôt</span></div>
+      <div class="filcard off"><b>Python</b><span>Bientôt</span></div>
+      <div class="filcard off"><b>TIPE</b><span>Bientôt</span></div>
     </div>
-    <h2>Ce qui fait la différence</h2>
-    <ul><li>Réfléchir à voix haute, même quand tu hésites.</li><li>Tester une idée sur un cas simple.</li><li>Écouter : une indication est une aide, pas un piège.</li><li>Pour CCINP, travailler la banque officielle d'exercices d'oral.</li></ul>
-  </article></div>`;
+  </div></div>`;
 }
 
 function orauxMathsPage() {
   const s = sid("oraux"), list = s.years.mp;
-  return phead({ crumb: [["Oraux", "#oral"], ["Mathématiques"]], title: "Oraux de mathématiques", meta: `<span class="tag y">${list.length} chapitres</span>`, photo: "oral" })
+  return phead({ crumb: [["Oraux", "#oral"], ["Mathématiques"]], title: "Oraux de mathématiques", photo: "oral" })
   + `<div class="wrap layout full"><div>
-    <p class="lead">Des exercices tombés à l'oral, rangés par chapitre puis par concours.</p>
-    <div class="tiles oral vault stagger">${list.map((c, i) => { const ks = (c.cc || []).filter(k => EXERCISES.some(e => e.subj === "oraux" && e.chap === i && e.concours === k)); return tile(`#c-oraux-mp-${i}`, pad(i + 1), esc(c.t), ks.map(k => `<i class="ccb" data-cc="${k}">${esc(CC_SHORT[k] || CONC[k])}</i>`).join("")); }).join("")}</div>
+    <div class="chaptiles stagger">${list.map((c, i) => `<a class="chaptile${EXERCISES.some(e => e.subj === "oraux" && e.chap === i) ? "" : " soon"}" href="#c-oraux-mp-${i}"><span class="tt">${esc(c.t)}</span>${I.arrow}</a>`).join("")}</div>
   </div></div>`;
 }
 
@@ -552,29 +574,19 @@ function xparts(s) {
 }
 function xpos(s, i) { const P = xparts(s); for (let g = 0; g < P.length; g++) { const j = P[g].items.findIndex(x => x.i === i); if (j >= 0) return { g, j, name: P[g].name }; } return { g: 0, j: i, name: s.part }; }
 function commandoPage() {
-  const s = sid("xens"), list = s.years.mp;
-  const next = ["Fonctions d'une variable réelle", "Suites et séries", "Équations différentielles"];
   return `
-  <section class="hero"><div class="photo">${img("commando", "100vw", true)}</div><div class="wrap">
-    <h1><span class="line"><span>Formation</span></span><span class="line"><span><span class="mark">commando</span></span></span><span class="line"><span>X-ENS.</span></span></h1>
-    <p>Les exercices les plus durs du programme, corrigés sans sauter une seule étape.</p>
-    <div class="ctas"><a class="btn btn-yellow" href="#c-xens-mp-0">Commencer l'entraînement ${I.arrow}</a><a class="btn btn-glass" href="#banque-x-ens">Les sujets X-ENS corrigés</a></div>
-  </div></section>
-  <section class="sec"><div class="wrap">
-    <div class="cmd-rules stagger">
-      <div><b>★★★★★</b><span>Tous les exercices sont au niveau des concours X-ENS.</span></div>
-      <div><b>Aucune étape sautée</b><span>Chaque ligne du corrigé est justifiée, avec le rappel de cours utilisé.</span></div>
-      <div><b>Le cours d'abord</b><span>Chaque sous-chapitre commence par un résumé et ses formules à connaître.</span></div>
-    </div>
-  </div></section>
-  <section class="sec"><div class="wrap">
-    ${xparts(s).map((g, gi) => `<div class="sec-title"${gi ? ' style="margin-top:40px"' : ""}><h2>Chapitre ${gi + 1} · ${esc(g.name)}</h2></div>
-    <div class="tiles vault stagger">${g.items.map(({ c, i }, j) => { const n = exOf("xens", "mp", i).filter(e => !e.plus).length, pl = new Set(exOf("xens", "mp", i).filter(e => e.plus).map(e => e.plus)).size, r = PDFS.has(`resume-xens-mp-${pad(i + 1)}`); const foot = [r ? "Résumé" : "", n ? `${n} exos` : "", pl ? plural(pl, "sujet") : ""].filter(Boolean).join(" · "); return foot ? tile(`#c-xens-mp-${i}`, `${gi + 1}.${j + 1}`, esc(c.t), foot) : ""; }).join("")}</div>${(() => { const off = g.items.filter(({ i }) => !exOf("xens", "mp", i).length && !PDFS.has(`resume-xens-mp-${pad(i + 1)}`)).map(({ c }) => esc(c.t)); return off.length ? `<p class="soon-line">En préparation : ${off.join(", ")}</p>` : ""; })()}`).join("")}
-  </div></section>
-  <section class="sec"><div class="wrap">
-    <div class="sec-title"><h2>La suite du programme</h2></div>
-    <ul class="roadmap">${next.map((t, k) => `<li>Chapitre ${k + 1 + xparts(s).length} · ${t}</li>`).join("")}</ul>
+  <section class="hero hero-cmd"><div class="photo">${img("commando", "100vw", true)}</div><div class="wrap">
+    <h1><span class="line"><span>Formation</span></span><span class="line"><span><span class="mark">commando</span></span></span><span class="line"><span>X-ENS</span></span></h1>
+    <p>Les exercices les plus durs du programme, corrigés sans sauter une étape.</p>
+    <div class="ctas"><a class="btn btn-yellow" href="#xens-chapitres">Commencer l'entraînement ${I.arrow}</a><a class="btn btn-glass" href="#banque-x-ens">Les sujets X-ENS</a></div>
   </div></section>`;
+}
+/* Les chapitres du commando, dans l'ordre : un chapitre, puis ses parties */
+function commandoChaps() {
+  const s = sid("xens");
+  return phead({ crumb: [["Commando X-ENS", "#commando"], ["Chapitres"]], title: "L'entraînement" }) + `<div class="wrap layout full"><div class="xchaps">
+    ${xparts(s).map((g, gi) => `<section class="xch"><h2>${esc(g.name)}</h2><div class="chaptiles">${g.items.map(({ c, i }) => { const ready = exOf("xens", "mp", i).length || PDFS.has(`resume-xens-mp-${pad(i + 1)}`); return `<a class="chaptile${ready ? "" : " soon"}" href="#c-xens-mp-${i}"><span class="tt">${esc(c.t)}</span>${I.arrow}</a>`; }).join("")}</div></section>`).join("")}
+  </div></div>`;
 }
 
 function notFound() {
@@ -1170,11 +1182,20 @@ function mountPlayer(e, host) {
 }
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") { closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) popDrawer(); else if ($("#bigread")) closeBig(); return; }
-  if (!player || $("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey) return;
+  if ($("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
   const t = e.target; if (t && (t.matches("input,textarea,select") || t.isContentEditable)) return;
-  if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); player.key(e.key); }
+  if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+  /* on voit la touche : le bouton correspondant s'enfonce avant de changer de page */
+  if (player) {
+    e.preventDefault();
+    const b = $(`#player [data-step="${e.key === "ArrowRight" ? 1 : -1}"]:not([disabled])`); if (b) press(b);
+    const pl = player; setTimeout(() => { if (player === pl) pl.key(e.key); }, b ? 110 : 0); return;
+  }
+  const pb = $(`.pager [data-key="${e.key}"]`, app);
+  if (pb) { e.preventDefault(); press(pb); setTimeout(() => { location.hash = pb.getAttribute("href"); }, 140); }
 });
 
+function press(b) { b.classList.remove("kp"); void b.offsetWidth; b.classList.add("kp"); setTimeout(() => b.classList.remove("kp"), 260); }
 /* ---------- Lecteur PDF ---------- */
 let pdfjsReady = null;
 function loadScript(u) { return new Promise((ok, ko) => { const s = document.createElement("script"); s.src = u; s.onload = ok; s.onerror = ko; document.head.appendChild(s); }); }
@@ -2016,8 +2037,8 @@ function wireDash() {
 /* ---------- Trouver un sujet ou un exercice (recherche + filtres) ---------- */
 const TF = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-trouver")) || {}; } catch (e) { return {}; } })();
 const tfSave = () => { try { sessionStorage.setItem("lemme-trouver", JSON.stringify(TF)); } catch (e) {} };
-const TFD = { mode: "sujets", q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null, sort: "recent" };
-for (const k in TFD) if (!(k in TF)) TF[k] = Array.isArray(TFD[k]) ? [] : TFD[k];
+const TFD = { mode: "sujets", q: "", fil: "", mat: "", bank: "", an: "", diff: "", yr: "", chap: "", sort: "recent" };
+for (const k in TFD) if (!(k in TF) || Array.isArray(TF[k]) || TF[k] == null) TF[k] = TFD[k];
 const strip = s => String(s || "").replace(/<[^>]+>/g, " ").replace(/\$[^$]*\$/g, " ");
 let SUJ = null, EXS = null;
 function tfIndex() {
@@ -2025,83 +2046,82 @@ function tfIndex() {
   SUJ = ANN().map((c, i) => {
     const parts = EXERCISES.filter(e => e.subj === "annales" && e.chap === i);
     const lv = parts.length ? Math.round(parts.reduce((a, e) => a + (e.level || 3), 0) / parts.length) : 3;
-    return { c, i, parts, lv, mat: matOf(c), fils: fils(c), txt: norm([c.t, c.n, c.titre, c.intro, c.epreuve, c.bank, c.annee, ...parts.map(e => e.title + " " + strip(e.enonce).slice(0, 400))].join(" ")) };
+    return { c, i, parts, lv, mat: matOf(c), fils: fils(c), it: mkItem(c.titre + " " + c.bank + " " + c.annee, [c.t, c.n, plainOf(c.intro), c.epreuve, c.filiere, ...parts.map(e => e.title + " " + (e.part || "") + " " + e.steps.map(st => st.t).join(" ") + " " + plainOf(e.enonce))].join(" ")) };
   });
-  EXS = EXERCISES.filter(e => e.subj !== "annales").map(e => ({ e, mat: matOfEx(e) || "Mathématiques", txt: norm(e.title + " " + strip(e.enonce).slice(0, 600) + " " + ((sid(e.subj) || {}).name || "")) }));
+  EXS = EXERCISES.filter(e => e.subj !== "annales").map(e => { const sj = sid(e.subj) || {}, ch = ((sj.years || {})[e.year] || [])[e.chap] || {}; return { e, mat: matOfEx(e) || "Mathématiques", it: mkItem(e.title, [sj.name, ch.t, ch.n, e.steps.map(st => st.t).join(" "), plainOf(e.enonce), [...new Set(e.steps.flatMap(st => st.rappels || []))].map(r => (RAPPELS[r] || {}).t || "").join(" ")].join(" ")) }; });
 }
-const tog = (arr, v) => { const k = arr.indexOf(v); if (k < 0) arr.push(v); else arr.splice(k, 1); };
-const qmatch = (txt, q) => norm(q).split(/\s+/).filter(Boolean).every(w => txt.includes(w));
 
 function trouverPage() {
-  return phead({ crumb: [["Trouver"]], title: "Trouver un sujet ou un exercice", photo: "hero" }) + `<div class="wrap tf">
-  <div class="tfbar">
-    <div class="tfmode" role="tablist" aria-label="Que cherches-tu ?">
-      <button type="button" role="tab" data-tmode="sujets" aria-selected="${TF.mode === "sujets"}">Sujets de concours</button>
-      <button type="button" role="tab" data-tmode="exos" aria-selected="${TF.mode === "exos"}">Exercices par chapitre</button>
-    </div>
-    <label class="tfsearch"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="sr">Mots-clés</span><input type="search" data-tq value="${esc(TF.q)}" placeholder="Mots-clés : Tchebychev, Viterbi, diagonalisation, pendule…" autocomplete="off"></label>
+  return phead({ crumb: [["Trouver"]], title: "Trouver un sujet ou un exercice" }) + `<div class="wrap tf">
+  <div class="tfmode" role="tablist" aria-label="Que cherches-tu ?">
+    <button type="button" role="tab" data-tmode="sujets" aria-selected="${TF.mode === "sujets"}">Sujets de concours</button>
+    <button type="button" role="tab" data-tmode="exos" aria-selected="${TF.mode === "exos"}">Exercices</button>
   </div>
-  <div class="tfbody">
-    <aside class="tfside" aria-label="Filtres"></aside>
-    <section class="tfres" aria-live="polite"></section>
-  </div>
+  <label class="tfsearch"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="sr-only">Mots-clés</span><input type="search" data-tq value="${esc(TF.q)}" placeholder="Un mot-clé : diagonalisation, Kepler…" autocomplete="off"></label>
+  <div class="tffilters"></div>
+  <section class="tfres" aria-live="polite"></section>
 </div>`;
 }
 
 function tfFilters() {
-  const grp = (title, key, opts, extra = "") => `<div class="tfg"><div class="tfgh"><span>${title}</span>${TF[key].length ? `<button type="button" class="linkbtn" data-tclear="${key}">effacer</button>` : ""}</div><div class="tfchips">${opts.map(([v, lab, n]) => `<button type="button" class="tfchip" data-tf="${key}" data-v="${esc(String(v))}" aria-pressed="${TF[key].includes(v)}">${lab}${n != null ? `<small>${n}</small>` : ""}</button>`).join("")}</div>${extra}</div>`;
-  const starsG = `<div class="tfg"><div class="tfgh"><span>Difficulté</span>${TF.stars.length ? `<button type="button" class="linkbtn" data-tclear="stars">effacer</button>` : ""}</div><div class="tfstars">${[1, 2, 3, 4, 5].map(k => `<button type="button" data-tf="stars" data-v="${k}" aria-pressed="${TF.stars.includes(k)}" aria-label="${k} étoile${k > 1 ? "s" : ""}"><span>${"★".repeat(k)}</span></button>`).join("")}</div><p class="tfhint">Plusieurs choix possibles.</p></div>`;
+  const sel = (key, label, opts) => `<label class="tfsel${TF[key] ? " on" : ""}"><span class="sr-only">${label}</span><select data-tsel="${key}"><option value="">${label}</option>${opts.map(([v, l]) => `<option value="${esc(String(v))}"${String(TF[key]) === String(v) ? " selected" : ""}>${esc(l)}</option>`).join("")}</select></label>`;
+  const dsel = sel("diff", "Difficulté", DIFFS.slice(1));
+  let out;
   if (TF.mode === "sujets") {
     const years = [...new Set(SUJ.map(s => s.c.annee))].sort((a, b) => b - a);
-    return grp("Filière", "fil", Object.values(FIL).map(f => [f, f, SUJ.filter(s => s.fils.includes(f)).length]))
-      + grp("Matière", "mat", [...MATS, "Autres"].filter(m => SUJ.some(s => s.mat === m)).map(m => [m, m, SUJ.filter(s => s.mat === m).length]))
-      + starsG
-      + grp("Concours", "bank", BANKS.filter(b => SUJ.some(s => s.c.bank === b.name)).map(b => [b.name, b.name, SUJ.filter(s => s.c.bank === b.name).length]))
-      + grp("Année", "an", years.map(y => [y, String(y), null]));
+    out = sel("fil", "Filière", Object.values(FIL).map(f => [f, f]))
+      + sel("mat", "Matière", [...MATS, "Autres"].filter(m => SUJ.some(s => s.mat === m)).map(m => [m, m]))
+      + sel("bank", "Concours", BANKS.filter(b => SUJ.some(s => s.c.bank === b.name)).map(b => [b.name, b.name]))
+      + sel("an", "Année", years.map(y => [y, String(y)])) + dsel;
+  } else {
+    const mats = DMATS.filter(d => EXS.some(x => x.mat === d.m));
+    const one = TF.mat ? DMATS.find(d => d.m === TF.mat) : null, subj = one && sid(one.subj[0]);
+    let chs = [];
+    if (subj && !subj.hidden) (TF.yr ? [TF.yr] : ["mpsi", "mp"]).forEach(y => subj.years[y].forEach((c, i) => { if (EXS.some(x => x.e.subj === subj.id && x.e.year === y && x.e.chap === i)) chs.push([`${subj.id}-${y}-${i}`, (TF.yr ? "" : YEARS[y] + " · ") + c.t]); }));
+    out = sel("mat", "Matière", mats.map(d => [d.m, d.m])) + sel("yr", "Année", [["mpsi", "Sup"], ["mp", "Spé"]]) + (chs.length ? sel("chap", "Chapitre", chs) : "") + dsel;
   }
-  const mats = DMATS.filter(d => EXS.some(x => x.mat === d.m));
-  const one = TF.mat.length === 1 ? DMATS.find(d => d.m === TF.mat[0]) : null;
-  const subj = one && sid(one.subj[0]);
-  let chapG = "";
-  if (subj && !subj.hidden) {
-    const ys = TF.yr.length === 1 ? TF.yr : ["mpsi", "mp"];
-    chapG = `<div class="tfg"><div class="tfgh"><span>Chapitre</span>${TF.chap ? `<button type="button" class="linkbtn" data-tclear="chap">effacer</button>` : ""}</div><div class="tfchaps">${ys.map(y => `<div class="tfcy"><span class="tfcyl">${YEARS[y]}</span>${subj.years[y].map((c, i) => { const n = EXS.filter(x => x.e.subj === subj.id && x.e.year === y && x.e.chap === i).length; return n ? `<button type="button" class="tfchap" data-tchap="${subj.id}-${y}-${i}" aria-pressed="${TF.chap === subj.id + "-" + y + "-" + i}">${esc(c.t)}<small>${n}</small></button>` : ""; }).join("")}</div>`).join("")}</div></div>`;
-  }
-  return grp("Matière", "mat", mats.map(d => [d.m, d.m, EXS.filter(x => x.mat === d.m).length]))
-    + grp("Année", "yr", [["mpsi", "Sup"], ["mp", "Spé"]].map(([v, l]) => [v, l, EXS.filter(x => x.e.year === v).length]))
-    + starsG + chapG;
+  const any = ["fil", "mat", "bank", "an", "diff", "yr", "chap"].some(k => TF[k]);
+  return out + (any ? `<button type="button" class="tfclear" data-treset>Effacer</button>` : "");
 }
 
 function tfResults() {
+  const q = TF.q;
+  let L, near = false;
   if (TF.mode === "sujets") {
-    let L = SUJ.filter(s => (!TF.fil.length || TF.fil.some(f => s.fils.includes(f))) && (!TF.mat.length || TF.mat.includes(s.mat)) && (!TF.bank.length || TF.bank.includes(s.c.bank)) && (!TF.an.length || TF.an.includes(s.c.annee)) && (!TF.stars.length || TF.stars.includes(s.lv)) && (!TF.q || qmatch(s.txt, TF.q)));
-    L = L.sort(TF.sort === "facile" ? (a, b) => a.lv - b.lv : TF.sort === "dur" ? (a, b) => b.lv - a.lv : (a, b) => b.c.annee - a.c.annee);
-    const card = s => { const d = s.parts.filter(e => doneN(e.id)).length; return `<a class="sjc" href="#c-annales-mp-${s.i}"><span class="sjh">${bankMark(s.c.bank)}<span class="sjm"><b>${esc(s.c.bank)} ${s.c.annee}</b><span>${esc(s.c.epreuve)} · ${esc(s.c.duree)}</span></span>${lvl(s.lv)}</span><span class="sjt">${esc(s.c.titre)}</span><span class="sjn">${esc(s.c.n)}</span><span class="sjf"><span>${s.fils.map(f => `<i>${f}</i>`).join("")}</span><span>${plural(s.parts.length, "partie")}${d ? ` · <b>${d} faite${d > 1 ? "s" : ""}</b>` : ""}</span></span></a>`; };
-    return tfHead(L.length, "sujet") + (L.length ? `<div class="sjgrid">${L.map(card).join("")}</div>` : tfEmpty());
+    L = SUJ.filter(s => (!TF.fil || s.fils.includes(TF.fil)) && (!TF.mat || s.mat === TF.mat) && (!TF.bank || s.c.bank === TF.bank) && (!TF.an || String(s.c.annee) === String(TF.an)) && (!TF.diff || dOf(s.lv) === TF.diff));
+    if (q) ({ list: L, near } = qsearch(L, q, x => x.it));
+    if (!q || TF.sort !== "recent") L = L.sort(TF.sort === "facile" ? (a, b) => a.lv - b.lv : TF.sort === "dur" ? (a, b) => b.lv - a.lv : (a, b) => b.c.annee - a.c.annee);
+    const card = s => { const d = s.parts.filter(e => doneN(e.id)).length; return `<a class="sjc${d ? " done" : ""}" href="#c-annales-mp-${s.i}"><span class="sjm">${esc(s.c.bank)} ${s.c.annee} · ${esc(s.c.epreuve)}</span><b class="sjt">${esc(s.c.titre)}</b><span class="cf">${lvl(s.lv)}${d ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`; };
+    return tfHead(L.length, "sujet", near) + (L.length ? `<div class="sjgrid">${L.map(card).join("")}</div>` : tfEmpty());
   }
-  let L = EXS.filter(x => (!TF.mat.length || TF.mat.includes(x.mat)) && (!TF.yr.length || TF.yr.includes(x.e.year)) && (!TF.chap || `${x.e.subj}-${x.e.year}-${x.e.chap}` === TF.chap) && (!TF.stars.length || TF.stars.includes(x.e.level || 3)) && (!TF.q || qmatch(x.txt, TF.q)));
-  L = L.sort(TF.sort === "facile" ? (a, b) => (a.e.level || 3) - (b.e.level || 3) : TF.sort === "dur" ? (a, b) => (b.e.level || 3) - (a.e.level || 3) : () => 0);
+  L = EXS.filter(x => (!TF.mat || x.mat === TF.mat) && (!TF.yr || x.e.year === TF.yr) && (!TF.chap || `${x.e.subj}-${x.e.year}-${x.e.chap}` === TF.chap) && (!TF.diff || dOf(x.e.level) === TF.diff));
+  if (q) ({ list: L, near } = qsearch(L, q, x => x.it));
+  if (TF.sort !== "recent") L = L.sort(TF.sort === "facile" ? (a, b) => (a.e.level || 3) - (b.e.level || 3) : (a, b) => (b.e.level || 3) - (a.e.level || 3));
   const shown = L.slice(0, 60);
-  return tfHead(L.length, "exercice") + (L.length ? `<div class="exgrid">${shown.map(x => exCard(x.e)).join("")}</div>${L.length > 60 ? `<p class="tfhint">Les 60 premiers sont affichés : affine avec un mot-clé ou un filtre.</p>` : ""}` : tfEmpty());
+  return tfHead(L.length, "exercice", near) + (L.length ? `<div class="exgrid">${shown.map(x => exCard(x.e)).join("")}</div>${L.length > 60 ? `<p class="tfhint">Les 60 premiers. Ajoute un mot-clé pour affiner.</p>` : ""}` : tfEmpty());
 }
-const tfHead = (n, w) => `<div class="tfhead"><p><b>${n}</b> ${w}${n > 1 ? "s" : ""}</p><label class="tfsort">Trier <select data-tsort><option value="recent"${TF.sort === "recent" ? " selected" : ""}>${TF.mode === "sujets" ? "plus récents" : "ordre du cours"}</option><option value="facile"${TF.sort === "facile" ? " selected" : ""}>plus faciles d'abord</option><option value="dur"${TF.sort === "dur" ? " selected" : ""}>plus difficiles d'abord</option></select></label></div>`;
-const tfEmpty = () => `<div class="tfempty"><p>Aucun résultat avec ces critères.</p><button type="button" class="btn btn-ghost btn-sm" data-treset>Effacer tous les filtres</button></div>`;
+const tfHead = (n, w, near) => `<div class="tfhead"><p>${near && n ? "Résultats proches" : `${n} ${w}${n > 1 ? "s" : ""}`}</p><label class="tfsort"><span class="sr-only">Trier</span><select data-tsort><option value="recent"${TF.sort === "recent" ? " selected" : ""}>${TF.q ? "Pertinence" : TF.mode === "sujets" ? "Plus récents" : "Ordre du cours"}</option><option value="facile"${TF.sort === "facile" ? " selected" : ""}>Plus faciles</option><option value="dur"${TF.sort === "dur" ? " selected" : ""}>Plus difficiles</option></select></label></div>`;
+const tfEmpty = () => `<div class="tfempty"><p>Rien trouvé.</p><button type="button" class="btn btn-ghost btn-sm" data-treset>Tout effacer</button></div>`;
 
 function wireTrouver() {
   const host = $(".tf", app); if (!host) return;
   tfIndex();
-  const side = $(".tfside", host), res = $(".tfres", host);
-  const paint = () => {
-    side.innerHTML = tfFilters(); res.innerHTML = tfResults(); tfSave();
-    $$("[data-tf]", host).forEach(b => b.addEventListener("click", () => { const k = b.dataset.tf, v = k === "an" || k === "stars" ? +b.dataset.v : b.dataset.v; tog(TF[k], v); if (k === "mat" || k === "yr") TF.chap = null; paint(); }));
-    $$("[data-tclear]", host).forEach(b => b.addEventListener("click", () => { const k = b.dataset.tclear; TF[k] = k === "chap" ? null : []; paint(); }));
-    $$("[data-tchap]", host).forEach(b => b.addEventListener("click", () => { TF.chap = TF.chap === b.dataset.tchap ? null : b.dataset.tchap; paint(); }));
-    $$("[data-treset]", host).forEach(b => b.addEventListener("click", () => { Object.assign(TF, { q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null }); $("[data-tq]", host).value = ""; paint(); }));
-    const so = $("[data-tsort]", host); if (so) so.addEventListener("change", () => { TF.sort = so.value; paint(); });
+  const fl = $(".tffilters", host), res = $(".tfres", host);
+  const reset = () => { Object.assign(TF, { q: "", fil: "", mat: "", bank: "", an: "", diff: "", yr: "", chap: "" }); $("[data-tq]", host).value = ""; paint(); };
+  const paintRes = () => {
+    res.innerHTML = tfResults(); tfSave();
+    const so = $("[data-tsort]", res); if (so) so.addEventListener("change", () => { TF.sort = so.value; paintRes(); });
+    $$("[data-treset]", res).forEach(b => b.addEventListener("click", reset));
     typeset(res);
   };
-  $$("[data-tmode]", host).forEach(b => b.addEventListener("click", () => { TF.mode = b.dataset.tmode; TF.mat = []; TF.chap = null; $$("[data-tmode]", host).forEach(x => x.setAttribute("aria-selected", x === b)); paint(); }));
-  let t; $("[data-tq]", host).addEventListener("input", ev => { clearTimeout(t); t = setTimeout(() => { TF.q = ev.target.value.trim(); res.innerHTML = tfResults(); tfSave(); const so = $("[data-tsort]", host); if (so) so.addEventListener("change", () => { TF.sort = so.value; paint(); }); $$("[data-treset]", host).forEach(b => b.addEventListener("click", () => { Object.assign(TF, { q: "", fil: [], mat: [], bank: [], an: [], stars: [], yr: [], chap: null }); $("[data-tq]", host).value = ""; paint(); })); typeset(res); }, 160); });
+  const paint = () => {
+    fl.innerHTML = tfFilters();
+    $$("[data-tsel]", fl).forEach(se => se.addEventListener("change", () => { const k = se.dataset.tsel; TF[k] = se.value; if (k === "mat" || k === "yr") TF.chap = ""; paint(); }));
+    $$("[data-treset]", fl).forEach(b => b.addEventListener("click", reset));
+    paintRes();
+  };
+  $$("[data-tmode]", host).forEach(b => b.addEventListener("click", () => { TF.mode = b.dataset.tmode; TF.mat = ""; TF.chap = ""; $$("[data-tmode]", host).forEach(x => x.setAttribute("aria-selected", x === b)); paint(); }));
+  let t; $("[data-tq]", host).addEventListener("input", ev => { clearTimeout(t); t = setTimeout(() => { TF.q = ev.target.value.trim(); paintRes(); }, 140); });
   paint();
 }
 
@@ -2128,6 +2148,7 @@ function render(keepScroll) {
   let html, m, ex = null;
   if (h === "accueil") html = home();
   else if (h === "commando" || h === "s-xens") html = commandoPage();
+  else if (h === "xens-chapitres") html = commandoChaps();
   else if (h === "oraux-maths" || h === "s-oraux") html = orauxMathsPage();
   else if ((m = h.match(/^s-([a-z]+)$/))) html = subjectPage(m[1]);
   else if ((m = h.match(/^bq\/([a-z0-9-]+)\/(mp|mpi|pc|psi|tous)(?:\/(\d+))?(?:\/(\d{4}))?$/))) html = banquePage(m[1], m[2] === "tous" ? null : m[2], m[3] == null ? null : +m[3], m[4] ? +m[4] : null);
@@ -2147,10 +2168,10 @@ function render(keepScroll) {
   else if (h === "tableau") html = dashPage();
   else if (h === "trouver") html = trouverPage();
   else html = notFound();
-  const zone = h === "commando" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
+  const zone = h === "commando" || h === "xens-chapitres" || /^(s|c)-xens/.test(h) || (ex && ex.subj === "xens");
   if (zone) document.documentElement.dataset.zone = "commando"; else delete document.documentElement.dataset.zone;
   const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = zone ? "#05070C" : "#0F2557";
-  const sec = /^(s|c)-/.test(h) && !/^c-annales/.test(h) && !/^(s|c)-(xens|oraux|kholles)/.test(h) ? "cours" : /^(exercices|classiques|kholles|dm|ds|c-kholles)/.test(h) ? "exos" : /^(concours|oral|trouver|bq\/|banque|c-annales|commando|s-xens|c-xens|oraux|s-oraux|c-oraux)/.test(h) ? "conc" : h === "tableau" ? "tab" : "";
+  const sec = /^(s|c)-/.test(h) && !/^c-annales/.test(h) && !/^(s|c)-(xens|oraux|kholles)/.test(h) ? "cours" : /^(exercices|classiques|kholles|dm|ds|c-kholles)/.test(h) ? "exos" : /^(concours|oral|trouver|bq\/|banque|c-annales|commando|xens-chapitres|s-xens|c-xens|oraux|s-oraux|c-oraux)/.test(h) ? "conc" : h === "tableau" ? "tab" : "";
   $$("[data-sec]").forEach(x => x.classList.toggle("on", x.dataset.sec === sec));
   $$(".panel a").forEach(a => { if (a.getAttribute("href") === "#" + h) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   head.classList.remove("scrolled");
@@ -2178,10 +2199,9 @@ function wire(ex) {
     route(true);
   }));
   $$(".filters [data-f]", app).forEach(b => b.addEventListener("click", () => { exFilter = b.dataset.f; route(true); }));
-  $$(".starbar [data-star]", app).forEach(b => b.addEventListener("click", () => {
-    const k = +b.dataset.star;
-    if (!k) stars.clear(); else if (stars.has(k)) stars.delete(k); else stars.add(k);
-    try { localStorage.setItem("lemme-stars", JSON.stringify([...stars])); } catch (_) {}
+  $$(".diffbar [data-diff]", app).forEach(b => b.addEventListener("click", () => {
+    diff = b.dataset.diff;
+    try { localStorage.setItem("lemme-diff", diff); } catch (_) {}
     route(true);
   }));
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
