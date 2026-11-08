@@ -646,11 +646,12 @@ function heavy(f) {
   return (big && len > 8) || (fr && len > 10) || (rel >= 2 && len > 9) || len > 34;
 }
 function promote(inner) {
-  const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/); let depth = 0, out = "";
+  const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/); let depth = 0, par = 0, out = "";
   for (let k = 0; k < parts.length; k++) {
     let t = parts[k]; if (!t) continue;
     if (t[0] === "<") { if (!/^<br\b/i.test(t)) { if (/^<\//.test(t)) depth = Math.max(0, depth - 1); else if (!/\/>$/.test(t)) depth++; } out += t; continue; }
-    if (t[0] === "$" && t[1] !== "$" && !depth && heavy(t.slice(1, -1))) {
+    if (t[0] !== "$") { par = Math.max(0, par + (t.match(/\(/g) || []).length - (t.match(/\)/g) || []).length); out += t; continue; }
+    if (t[1] !== "$" && !depth && !par && heavy(t.slice(1, -1))) {
       let f = t.slice(1, -1).trim(); const nx = parts[k + 1] || ""; const m = nx.match(/^\s*([.,;:])/);
       if (m) { f += m[1] === ":" ? "\\;:" : m[1]; parts[k + 1] = nx.slice(m[0].length); }
       out += `$$${f}$$`; continue;
@@ -659,9 +660,46 @@ function promote(inner) {
   }
   return out;
 }
+/* Listes de résultats : « $$W_3 = …,$$ $$W_4 = …$$ » ou « $$W_3 = …, W_4 = …$$ » deviennent un bloc aligné, une égalité par ligne. */
+const RELTOK = /^(?:=|<|>|\\(?:leqslant|geqslant|leq|geq|lt|gt|sim|approx|equiv|iff|Rightarrow|Longrightarrow|to|xrightarrow)(?![a-zA-Z]))/;
+function topSplit(f) {
+  const out = []; let d = 0, a = 0;
+  for (let i = 0; i < f.length; i++) {
+    const c = f[i];
+    if (c === "\\") { if (/^\\(left|big|Big|bigg|Bigg)l?[([{|.]/.test(f.slice(i))) d++; else if (/^\\(right|big|Big|bigg|Bigg)r?[)\]}|.]/.test(f.slice(i))) d = Math.max(0, d - 1); i++; continue; }
+    if ("({[".includes(c)) d++; else if (")}]".includes(c)) d = Math.max(0, d - 1);
+    else if (c === "," && !d && f[i - 1] !== "\\") { out.push(f.slice(a, i)); a = i + 1; }
+  }
+  out.push(f.slice(a)); return out.map(x => x.trim()).filter(Boolean);
+}
+function alignAmp(f) {
+  let d = 0;
+  for (let i = 0; i < f.length; i++) {
+    const c = f[i];
+    if ("({[".includes(c)) d++; else if (")}]".includes(c)) d--;
+    else if (!d && RELTOK.test(f.slice(i)) && !(c === "\\" && /^\\(?:left|right)/.test(f.slice(i)))) return f.slice(0, i) + "&" + f.slice(i);
+    if (c === "\\") { const m = f.slice(i).match(/^\\[a-zA-Z]+/); if (m) i += m[0].length - 1; else i++; }
+  }
+  return "&" + f;
+}
+const plain = f => !/&|\\\\|\\begin|\\end/.test(f);
+function listify(html) {
+  html = html.replace(/\$\$([^$]+?)\$\$/g, (m, f) => {
+    if (!plain(f)) return m;
+    const end = (f.match(/[.,;]\s*$/) || [""])[0], body = end ? f.slice(0, -end.length) : f;
+    const ps = topSplit(body);
+    if (ps.length < 2 || !ps.every(x => /=|\\(?:sim|leqslant|geqslant|approx)(?![a-zA-Z])/.test(x)) || body.replace(/\\[a-zA-Z]+|[{}\s]/g, "").length < 30) return m;
+    return `$$\\begin{aligned}${ps.map((x, i) => alignAmp(x) + (i < ps.length - 1 ? ",\\\\[6pt]" : end.trim())).join("")}\\end{aligned}$$`;
+  });
+  return html.replace(/\$\$[^$]+?\$\$(?:\s*,?\s*\$\$[^$]+?\$\$)+/g, m => {
+    const fs = [...m.matchAll(/\$\$([^$]+?)\$\$/g)].map(x => x[1].trim());
+    if (!fs.every(plain)) return m;
+    return `$$\\begin{aligned}${fs.map((x, i) => alignAmp(x) + (i < fs.length - 1 ? "\\\\[6pt]" : "")).join("")}\\end{aligned}$$`;
+  });
+}
 function aerateInner(inner) {
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
-  inner = promote(inner);
+  inner = listify(promote(inner));
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   const cuts = []; let depth = 0, pos = 0;
   const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
