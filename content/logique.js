@@ -5,9 +5,9 @@ const C0 = { subj: "maths", year: "mpsi", chap: 0 };
 
 LEMME.rappels({
   "lg-ou-et": { t: "« et », « ou »", b: R`$$A\wedge B\ :\ \text{les deux};\qquad A\vee B\ :\ \text{au moins un (ou inclusif)}.$$$$x\in A\cap B\iff x\in A\wedge x\in B,\qquad x\in A\cup B\iff x\in A\vee x\in B.$$` },
-  "lg-implication": { t: "L'implication", b: R`<p>« $A\Rightarrow B$ » est <b>fausse dans un seul cas</b> : $A$ vraie et $B$ fausse. Elle est vraie dès que $A$ est fausse.</p><div class="sbox">$$(A\Rightarrow B)\iff(\text{non}A\ \text{ou}\ B).$$</div>` },
+  "lg-implication": { t: "L'implication", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\neg A\ \vee\ B).$$</div>$$\begin{array}{cc|c}A&B&A\Rightarrow B\\\hline V&V&V\\V&F&F\\F&V&V\\F&F&V\end{array}$$` },
   "lg-negation": { t: "Nier une phrase quantifiée", b: R`$$\begin{aligned}\neg(\forall x,\ A(x))&\iff\exists x,\ \neg A(x)\\\neg(\exists x,\ A(x))&\iff\forall x,\ \neg A(x)\\\neg(A\wedge B)&\iff\neg A\vee\neg B\\\neg(A\vee B)&\iff\neg A\wedge\neg B\\\neg(A\Rightarrow B)&\iff A\wedge\neg B\end{aligned}$$` },
-  "lg-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\text{non}B\Rightarrow\text{non}A).$$</div><p>Pour montrer $A\Rightarrow B$, on peut supposer $B$ fausse et montrer que $A$ est fausse.</p>` },
+  "lg-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\neg B\Rightarrow\neg A).$$</div>` },
   "lg-disjonction": { t: "Disjonction de cas", b: R`$$C_1\vee\dots\vee C_k\text{ toujours vrai},\quad\forall i,\ C_i\Rightarrow P\qquad\Longrightarrow\qquad P.$$` },
   "lg-parite": { t: "Pair, impair", b: R`$$n\text{ pair}\iff\exists p\in\mathbb Z,\ n = 2p;\qquad n\text{ impair}\iff\exists p\in\mathbb Z,\ n = 2p+1.$$` }
 });

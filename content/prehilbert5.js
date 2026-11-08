@@ -4,8 +4,8 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 const { GRAPH } = window.__LA;
 LEMME.rappels({
-  "eu-riesz": { t: "Représentation des formes linéaires", b: R`<p>Dans un espace <b>euclidien</b> $E$, pour toute forme linéaire $\varphi$, il existe un unique $a\in E$ tel que $\varphi(x) = (a|x)$ pour tout $x$. (L'application $a\mapsto(a|\cdot)$ est linéaire injective de $E$ dans $E^*$, de même dimension.) Si $\varphi\neq0$, $a$ est un vecteur normal à l'hyperplan $\ker\varphi$. En dimension infinie, ce résultat peut tomber en défaut.</p>` },
-  "eu-colonnes": { t: "Produit scalaire sur les colonnes", b: R`<p>Sur $\mathcal M_{n,1}(\mathbb R)$ : $\langle X,Y\rangle = {}^tXY$, $\|X\|^2 = {}^tXX$. Pour $A\in\mathcal M_n(\mathbb R)$ : $\langle AX,Y\rangle = \langle X,{}^tAY\rangle$. Ainsi $\,{}^tA$ est l'adjoint de $X\mapsto AX$ : $\ker{}^tA = (\mathrm{Im}\,A)^\perp$, $\mathrm{Im}\,{}^tA = (\ker A)^\perp$.</p>` },
+  "eu-riesz": { t: "Représentation des formes linéaires", b: R`$$E\text{ euclidien},\ \varphi\in E^*\ \Longrightarrow\ \exists!\,a\in E,\ \forall x,\ \varphi(x) = (a|x);\qquad\varphi\neq0\Rightarrow a\perp\ker\varphi.$$` },
+  "eu-colonnes": { t: "Produit scalaire sur les colonnes", b: R`$$\langle X,Y\rangle = {}^tXY,\qquad\langle AX,Y\rangle = \langle X,{}^tAY\rangle,\qquad\ker{}^tA = (\operatorname{Im}A)^\perp,\quad\operatorname{Im}{}^tA = (\ker A)^\perp.$$` },
   "eu-lagrange": { t: "Interpolation de Lagrange", b: R`<p>Pour $x_0,\dots,x_n$ distincts, $L_k = \prod_{j\neq k}\frac{X-x_j}{x_k-x_j}$ vérifie $L_k(x_j) = \delta_{jk}$, et tout $P\in\mathbb R_n[X]$ s'écrit $P = \sum_{k=0}^nP(x_k)L_k$.</p>` },
   "eu-leibniz": { t: "Formule de Leibniz", b: R`<p>$(fg)^{(n)} = \sum_{k=0}^n\binom nkf^{(k)}g^{(n-k)}$. Cas utile : $(xg)^{(n)} = xg^{(n)}+ng^{(n-1)}$.</p>` }
 });

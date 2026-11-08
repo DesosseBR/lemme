@@ -7,9 +7,9 @@ const P = { subj: "xens", year: "mp", chap: 15, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "con-bary": { t: "Coordonnées barycentriques", b: R`<p>Si $A,B,C$ ne sont pas alignés, tout point $M$ du plan s'écrit de façon unique $M = xA+yB+zC$ avec $x+y+z = 1$. $A = (1,0,0)$, $B = (0,1,0)$, $C = (0,0,1)$ ; $M\in(BC)\iff x = 0$. Trois points sont alignés si et seulement si le déterminant de leurs coordonnées barycentriques est nul.</p>` },
-  "con-sys": { t: "Système linéaire homogène", b: R`<p>Un système de $m$ équations linéaires homogènes à $n$ inconnues a un espace de solutions de dimension $n-\operatorname{rg}\geqslant n-m$. Si $m\lt n$, il a une solution non nulle.</p>` },
-  "con-poly": { t: "Polynôme homogène nul sur un plan", b: R`<p>Si $q$ est homogène de degré $2$ et $q(\lambda v) = \lambda^2q(v)$ : une forme quadratique nulle sur le plan affine $x+y+z = 1$ est nulle sur tout vecteur de somme non nulle, donc partout (densité et continuité).</p>` }
+  "con-bary": { t: "Coordonnées barycentriques", b: R`<p>$A,B,C$ non alignés :</p><div class="sbox">$$\forall M,\ \exists!(x,y,z),\ x+y+z = 1,\quad M = xA+yB+zC.$$</div>$$A = (1,0,0),\ B = (0,1,0),\ C = (0,0,1),\qquad M\in(BC)\iff x = 0.$$$$M_1,M_2,M_3\ \text{alignés}\iff\det\begin{pmatrix}x_1&x_2&x_3\\y_1&y_2&y_3\\z_1&z_2&z_3\end{pmatrix} = 0.$$` },
+  "con-sys": { t: "Système linéaire homogène", b: R`<p>$AX = 0$, $A\in\mathcal M_{m,n}(\mathbb K)$ :</p><div class="sbox">$$\dim\ker A = n-\operatorname{rg}A\geqslant n-m,\qquad m\lt n\ \Longrightarrow\ \ker A\neq\{0\}.$$</div>` },
+  "con-poly": { t: "Polynôme homogène nul sur un plan", b: R`<p>$q$ homogène de degré $2$ : $q(\lambda v) = \lambda^2q(v)$.</p><div class="sbox">$$\begin{aligned}q = 0\ \text{sur}\ \{x+y+z = 1\}\&\Longrightarrow \ q = 0\ \text{sur}\ \{x+y+z\neq0\}\\\&\Longrightarrow \ q = 0\ \text{(densité, continuité)}.\end{aligned}$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On travaille dans le plan affine réel. Une <b>conique</b> (au sens large) est un ensemble de la forme $\{M = (u,v) : F(u,v) = 0\}$, où $F$ est un polynôme non nul de degré au plus $2$ en les coordonnées cartésiennes. (Elle peut être <b>dégénérée</b> : une droite, deux droites, un point, l'ensemble vide.) Si $A,B,C$ ne sont pas alignés, on note $(x,y,z)$, avec $x+y+z = 1$, les coordonnées barycentriques dans le repère $(A,B,C)$.</p>`;

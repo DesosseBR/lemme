@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "ga-vdm": { t: "Vandermonde", b: R`<p>$\det\begin{pmatrix}1&x_0&\cdots&x_0^d\\\vdots&&&\vdots\\1&x_d&\cdots&x_d^d\end{pmatrix} = \prod_{0\leqslant i\lt j\leqslant d}(x_j-x_i)$.</p>` },
-  "ga-aff": { t: "Indépendance affine", b: R`$$p_0,\dots,p_d\text{ aff. indépendants}\iff\det\begin{pmatrix}1&p_0\\\vdots&\vdots\\1&p_d\end{pmatrix}\neq0;\qquad\text{hyperplan}\ :\ \det\begin{pmatrix}1&x\\1&p_1\\\vdots&\vdots\\1&p_d\end{pmatrix} = 0.$$` },
+  "ga-aff": { t: "Indépendance affine", b: R`$$\begin{gathered}p_0,\dots,p_d\text{ aff. indépendants}\iff\det\begin{pmatrix}1&p_0\\\vdots&\vdots\\1&p_d\end{pmatrix}\neq0,\\[4pt]\text{hyperplan}\ :\ \det\begin{pmatrix}1&x\\1&p_1\\\vdots&\vdots\\1&p_d\end{pmatrix} = 0.\end{gathered}$$` },
   "ga-sign": { t: "Signe d'un polynôme", b: R`$$P\in\mathbb R[X]\text{ à racines simples}\ :\quad\operatorname{sgn}P\text{ change en chaque racine, constant entre deux}.$$` }
 });
 

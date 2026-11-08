@@ -3,9 +3,9 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-cvd": { t: "Théorème de convergence dominée", b: R`<p>Soit $(f_n)$ une suite de fonctions continues par morceaux sur un intervalle $I$ telle que :</p><ul><li>$(f_n)$ converge simplement sur $I$ vers une fonction $f$ continue par morceaux ;</li><li>il existe $\varphi$ intégrable sur $I$, <b>indépendante de $n$</b>, avec $|f_n|\leqslant\varphi$ pour tout $n$ (hypothèse de domination).</li></ul><p>Alors les $f_n$ et $f$ sont intégrables sur $I$ et $\displaystyle\int_If_n\xrightarrow[n\to+\infty]{}\int_If$.</p>` },
-  "ip-ref": { t: "Fonctions intégrables de référence", b: R`<ul><li>$\int_1^{+\infty}\frac{dt}{t^\alpha}$ converge ssi $\alpha>1$ ; $\int_0^1\frac{dt}{t^\alpha}$ converge ssi $\alpha\lt1$.</li><li>$t\mapsto e^{-at}$ ($a>0$) est intégrable sur $[0,+\infty[$.</li><li>$\frac1{1+t^2}$ est intégrable sur $\mathbb R$, d'intégrale $\pi$.</li><li>Une fonction $O\big(\frac1{t^2}\big)$ en $+\infty$ est intégrable au voisinage de $+\infty$.</li></ul>` },
-  "ip-decoupe": { t: "Découper pour dominer", b: R`<p>Quand aucune fonction ne domine sur tout l'intervalle, on coupe : par exemple $\int_0^{+\infty} = \int_0^1+\int_1^{+\infty}$, et on traite chaque morceau séparément (domination différente, ou simple majoration directe).</p>` },
+  "ip-cvd": { t: "Théorème de convergence dominée", b: R`$$\left\{\begin{aligned}&f_n\to f\text{ simplement sur }I\\&\forall n,\ |f_n|\leqslant\varphi,\ \varphi\text{ intégrable (indépendante de }n)\end{aligned}\right.\quad\Longrightarrow\quad\int_If_n\xrightarrow[n\to+\infty]{}\int_If.$$<p>($f_n$, $f$ continues par morceaux.)</p>` },
+  "ip-ref": { t: "Fonctions intégrables de référence", b: R`$$\int_1^{+\infty}\frac{dt}{t^\alpha}\text{ CV}\iff\alpha>1,\qquad\int_0^1\frac{dt}{t^\alpha}\text{ CV}\iff\alpha\lt1.$$$$\int_0^{+\infty}e^{-at}\,dt = \frac1a\ (a>0),\qquad\int_{\mathbb R}\frac{dt}{1+t^2} = \pi,\qquad f = O\Big(\frac1{t^2}\Big)\Rightarrow f\text{ intégrable en }+\infty.$$` },
+  "ip-decoupe": { t: "Découper pour dominer", b: R`$$\int_0^{+\infty} = \int_0^1+\int_1^{+\infty}\quad(\text{domination différente sur chaque morceau}).$$` },
   "ip-stirling": { t: "Formule de Stirling", b: R`<p>$n!\underset{n\to+\infty}{\sim}\sqrt{2\pi n}\,\Big(\dfrac ne\Big)^n$.</p>` }
 });
 LEMME.exercises([

@@ -6,7 +6,7 @@ const P = { subj: "annales", year: "mp", chap: 21, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q: parseInt(q, 10), t: "Q" + q + ". " + t, h, b, rappels });
 
 LEMME.rappels({
-  "xa24-det": { t: "Déterminant et permutations", b: R`<div class="sbox">$$\det(m_{i,j}) = \sum_{\sigma\in\mathfrak S_n}\varepsilon(\sigma)\prod_{i=1}^nm_{\sigma(i),i}.$$</div><p>Le déterminant d'une matrice diagonalisable est le produit de ses valeurs propres (avec multiplicité).</p>` },
+  "xa24-det": { t: "Déterminant et permutations", b: R`<div class="sbox">$$\det(m_{i,j}) = \sum_{\sigma\in\mathfrak S_n}\varepsilon(\sigma)\prod_{i=1}^nm_{\sigma(i),i}.$$</div><p><b>Cas diagonalisable</b> :</p>$$M\sim\operatorname{diag}(\lambda_1,\dots,\lambda_n)\ \Longrightarrow\ \det M = \prod_{i=1}^n\lambda_i.$$` },
   "xa24-markov": { t: "Inégalité de Markov / Bienaymé-Tchebychev", b: R`<p>Si $Y\geqslant0$ et $a>0$, $P(Y\geqslant a)\leqslant\frac{E(Y)}a$. Appliquée à $Y = (X-m)^2$ : $P(|X-m|\geqslant\varepsilon)\leqslant\frac{E((X-m)^2)}{\varepsilon^2}$.</p>` },
   "xa24-harm": { t: "Série harmonique", b: R`<p>$H_n = \sum_{k=1}^n\frac1k = \ln n+\gamma+O\big(\frac1n\big)$ (admis par l'énoncé) et $\sum_{k=1}^n\frac1{k^2} = \frac{\pi^2}6+O\big(\frac1n\big)$ (reste $\sum_{k>n}\frac1{k^2}\leqslant\frac1n$).</p>` },
   "xa24-binom": { t: "Coefficients binomiaux", b: R`$$\binom{2m+1}m = \binom{2m+1}{m+1},\qquad\sum_k\binom{2m+1}k = 2^{2m+1},\qquad p\text{ premier}:\ p\mid a!\iff p\leqslant a.$$` },

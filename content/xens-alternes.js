@@ -7,7 +7,7 @@ const P = { subj: "xens", year: "mp", chap: 7, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "alt-fact": { t: "Polynômes à plusieurs indéterminées", b: R`<p>$\mathbb K[X_1,\dots,X_n]$ intègre et factoriel :</p>$$P_i\text{ irréductibles non associés},\ P_i\mid P\Rightarrow\prod P_i\mid P;\qquad A\mid BC,\ A\wedge B = 1\Rightarrow A\mid C;\qquad\deg(PQ) = \deg P+\deg Q.$$` },
+  "alt-fact": { t: "Polynômes à plusieurs indéterminées", b: R`<p>$\mathbb K[X_1,\dots,X_n]$ intègre et factoriel :</p>$$\begin{gathered}P_i\text{ irréductibles non associés},\ P_i\mid P\Rightarrow\prod P_i\mid P,\\[4pt]A\mid BC,\ A\wedge B = 1\Rightarrow A\mid C,\\[4pt]\deg(PQ) = \deg P+\deg Q.\end{gathered}$$` },
   "alt-sign": { t: "Signature", b: R`$$\varepsilon(\sigma) = (-1)^{N(\sigma)},\quad N(\sigma) = \operatorname{Card}\{(i,j) : i\lt j,\ \sigma(i)>\sigma(j)\};\qquad\varepsilon(\sigma\sigma') = \varepsilon(\sigma)\varepsilon(\sigma'),\quad\varepsilon(\tau) = -1.$$` },
   "alt-conj": { t: "Conjugaison des transpositions", b: R`$$\sigma\,(a\ b)\,\sigma^{-1} = (\sigma(a)\ \sigma(b))\quad\Longrightarrow\quad\text{transpositions toutes conjuguées}.$$` },
   "alt-div": { t: "Division par un polynôme unitaire", b: R`$$B\in\mathbb A[T]\text{ unitaire}\ \Longrightarrow\ \forall A,\ \exists Q,R,\ A = BQ+R,\ \deg R\lt\deg B.$$` },

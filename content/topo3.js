@@ -4,10 +4,10 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-def": { t: "Définition d'une norme", b: R`<p>$N : E\to\mathbb R_+$ est une norme si, pour tous $x,y\in E$ et $\lambda\in\mathbb K$ : (1) <b>séparation</b> $N(x) = 0\Rightarrow x = 0$ ; (2) <b>homogénéité</b> $N(\lambda x) = |\lambda|N(x)$ ; (3) <b>inégalité triangulaire</b> $N(x+y)\leqslant N(x)+N(y)$. Penser aussi à vérifier que $N$ est bien <b>définie</b> (sup fini, série ou intégrale convergente) et à valeurs positives.</p>` },
-  "nrm-tri2": { t: "Seconde inégalité triangulaire", b: R`<p>Pour toute norme : $\big|N(x)-N(y)\big|\leqslant N(x-y)$. Conséquence : $N$ est $1$-lipschitzienne, donc continue, pour la distance qu'elle définit.</p>` },
-  "nrm-cs": { t: "Cauchy-Schwarz dans 𝕂ⁿ", b: R`<p>Pour des réels positifs $a_i,b_i$ : $\sum a_ib_i\leqslant\big(\sum a_i^2\big)^{1/2}\big(\sum b_i^2\big)^{1/2}$. Avec $a_i = |x_i|$, $b_i = |y_i|$ (complexes) : $\big|\sum x_iy_i\big|\leqslant\|x\|_2\|y\|_2$. Version intégrale : $\int|fg|\leqslant\big(\int|f|^2\big)^{1/2}\big(\int|g|^2\big)^{1/2}$.</p>` },
-  "nrm-cmp": { t: "Comparaison de séries et d'intégrales positives", b: R`<p>Si $0\leqslant u_n\leqslant v_n$ et $\sum v_n$ converge, alors $\sum u_n$ converge et $\sum u_n\leqslant\sum v_n$. Même chose pour les intégrales de fonctions continues positives sur un intervalle : $0\leqslant f\leqslant g$ et $g$ intégrable $\Rightarrow f$ intégrable.</p>` }
+  "nrm-def": { t: "Définition d'une norme", b: R`$$N : E\to\mathbb R_+\text{ norme}\iff\left\{\begin{aligned}&N(x) = 0\Rightarrow x = 0\\&N(\lambda x) = |\lambda|N(x)\\&N(x+y)\leqslant N(x)+N(y)\end{aligned}\right.$$<p><b>Avant tout</b> : $N(x)\in\mathbb R_+$ bien défini (sup fini, série ou intégrale convergente).</p>` },
+  "nrm-tri2": { t: "Seconde inégalité triangulaire", b: R`$$\big|N(x)-N(y)\big|\leqslant N(x-y)\ \Longrightarrow\ N\ 1\text{-lipschitzienne}.$$` },
+  "nrm-cs": { t: "Cauchy-Schwarz dans 𝕂ⁿ", b: R`$$\sum a_ib_i\leqslant\Big(\sum a_i^2\Big)^{1/2}\Big(\sum b_i^2\Big)^{1/2};\qquad\Big|\sum x_iy_i\Big|\leqslant\|x\|_2\|y\|_2;\qquad\int|fg|\leqslant\|f\|_2\|g\|_2.$$` },
+  "nrm-cmp": { t: "Comparaison de séries et d'intégrales positives", b: R`$$0\leqslant u_n\leqslant v_n,\ \sum v_n\text{ CV}\Rightarrow\sum u_n\leqslant\sum v_n;\qquad0\leqslant f\leqslant g,\ g\text{ intégrable}\Rightarrow f\text{ intégrable}.$$` }
 });
 const poly = (X, Y, pts, cls, st = "") => `<polygon points="${pts.map(([x, y]) => f1(X(x)) + "," + f1(Y(y))).join(" ")}" class="${cls}" style="${st}"/>`;
 const figBoules = GRAPH({ w: 380, h: 320, x: [-1.7, 1.7], y: [-1.35, 1.35], xt: [-1, 1], xtl: ["−1", "1"], yt: [-1, 1], ytl: ["−1", "1"], xl: "x₁", yl: "x₂",

@@ -105,7 +105,7 @@ LEMME.rappels({
   "quantite-conjuguee": { t: "Quantité conjuguée", b: R`Pour $a,b\ge0$ non tous deux nuls : $\sqrt a - \sqrt b = \dfrac{a-b}{\sqrt a + \sqrt b}$.` },
   "duplication-cos": { t: "Formule de duplication", b: R`$1+\cos\theta = 2\cos^2\dfrac{\theta}{2}$.` },
   "cayley-hamilton": { t: "Théorème de Cayley-Hamilton", b: R`Pour toute $A\in\mathcal M_n(\mathbb K)$ : $\chi_A(A) = 0$.` },
-  "scinde-C": { t: "Polynômes sur ℂ", b: R`$$P\in\mathbb C[X],\ \deg P\geqslant1\ \Longrightarrow\ P = c\prod_{k = 1}^n(X-z_k).$$<p>En particulier $\chi_A$ est scindé sur $\mathbb C$ et ses racines sont les valeurs propres de $A$.</p>` }
+  "scinde-C": { t: "Polynômes sur ℂ", b: R`<div class="sbox">$$P\in\mathbb C[X],\ \deg P = n\geqslant1\ \Longrightarrow\ P = c\prod_{k = 1}^n(X-z_k).$$</div>$$\chi_A = \prod_{k=1}^n(X-\lambda_k),\qquad\operatorname{Sp}_{\mathbb C}(A) = \{\lambda_1,\dots,\lambda_n\}.$$` }
 });
 
 LEMME.exercises([
@@ -533,7 +533,7 @@ LEMME.rappels({
   "taux-accroissement": { t: "Dérivée et taux d'accroissement", b: R`$$f\text{ dérivable en }a\ \Longrightarrow\ \lim_{x\to a}\frac{f(x)-f(a)}{x-a} = f'(a).$$<p>Outil pour les formes $\frac00$.</p>` },
   "translation": { t: "Se ramener en 0", b: R`$$\lim_{x\to a}f(x) = \lim_{h\to0}f(a+h)\qquad(x = a+h).$$` },
   "forme-exp": { t: "Puissance réelle", b: R`$$a>0,\ b\in\mathbb R\ :\qquad a^b = e^{b\ln a}.$$<p>Toujours passer par cette forme quand l'exposant varie.</p>` },
-  "continuite-operations": { t: "Opérations sur les fonctions continues", b: R`<p>$f,g$ continues $\Longrightarrow$ continues :</p>$$f+g,\qquad fg,\qquad\frac fg\ (g\neq0),\qquad g\circ f.$$<p>Fonctions usuelles (dont $x\mapsto|x|$) continues sur leur domaine.</p>` },
+  "continuite-operations": { t: "Opérations sur les fonctions continues", b: R`<div class="sbox">$$f,g\ \text{continues}\ \Longrightarrow\ f+g,\ \ fg,\ \ \frac fg\ (g\neq0),\ \ g\circ f\ \text{continues}.$$</div><p>Fonctions usuelles (dont $|\cdot|$) : continues sur leur domaine.</p>` },
   "continuite-droite-gauche": { t: "Continuité à gauche et à droite", b: R`<p>Pour $a$ intérieur à $I$ :</p>$$f\text{ continue en }a\iff\lim_{x\to a^-}f(x) = f(a) = \lim_{x\to a^+}f(x).$$` },
   "tvi": { t: "Théorème des valeurs intermédiaires", b: R`$$\left\{\begin{aligned}&f\in\mathcal C(I,\mathbb R),\ a,b\in I\\&y\text{ entre }f(a)\text{ et }f(b)\end{aligned}\right.\quad\Longrightarrow\quad\exists c\text{ entre }a\text{ et }b,\ f(c) = y.$$$$f(a)f(b)\leqslant0\ \Longrightarrow\ \exists c\in[a,b],\ f(c) = 0.$$` },
   "image-intervalle": { t: "Image d'un intervalle", b: R`$$f\in\mathcal C(I,\mathbb R),\ I\text{ intervalle}\ \Longrightarrow\ f(I)\text{ intervalle}.$$` },

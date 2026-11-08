@@ -4,9 +4,9 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-dist": { t: "Distance à une partie", b: R`<p>Pour $A$ non vide : $d(x,A) = \inf_{a\in A}\|x-a\|$.</p><ul><li>Pour la <b>majorer</b> : exhiber un $a\in A$ et calculer $\|x-a\|$.</li><li>Pour la <b>minorer</b> par $m$ : montrer que $\|x-a\|\geqslant m$ pour <b>tout</b> $a\in A$.</li></ul>` },
-  "nrm-sup": { t: "Borne supérieure", b: R`<p>Toute partie de $\mathbb R$ non vide et majorée admet une borne supérieure, qui est son plus petit majorant :</p><ul><li>si tous les éléments sont $\leqslant M$, alors $\sup\leqslant M$ ;</li><li>si $A\subset B$, alors $\sup A\leqslant\sup B$.</li></ul>` },
-  "nrm-cheb": { t: "Polynômes de Tchebychev", b: R`<p>$T_0 = 1$, $T_1 = X$, $T_{n+1} = 2XT_n-T_{n-1}$. Pour tout $\theta$ : $T_n(\cos\theta) = \cos(n\theta)$. Pour $n\geqslant1$, $T_n$ est de degré $n$ et de coefficient dominant $2^{n-1}$.</p>` }
+  "nrm-dist": { t: "Distance à une partie", b: R`$$\begin{gathered}d(x,A) = \inf_{a\in A}\|x-a\|,\\[4pt]d(x,A)\leqslant\|x-a_0\|\ (a_0\in A),\\[4pt]\big(\forall a\in A,\ \|x-a\|\geqslant m\big)\Rightarrow d(x,A)\geqslant m.\end{gathered}$$` },
+  "nrm-sup": { t: "Borne supérieure", b: R`$$\begin{gathered}\varnothing\neq A\subset\mathbb R\text{ majorée}\Rightarrow\sup A\text{ existe},\\[4pt]\big(\forall a\in A,\ a\leqslant M\big)\Rightarrow\sup A\leqslant M,\\[4pt]A\subset B\Rightarrow\sup A\leqslant\sup B.\end{gathered}$$` },
+  "nrm-cheb": { t: "Polynômes de Tchebychev", b: R`$$T_0 = 1,\quad T_1 = X,\quad T_{n+1} = 2XT_n-T_{n-1};\qquad T_n(\cos\theta) = \cos(n\theta);\qquad T_n = 2^{n-1}X^n+\cdots\ (n\geqslant1).$$` }
 });
 const cheb = (n, x) => Math.cos(n * Math.acos(Math.max(-1, Math.min(1, x))));
 const figCheb = GRAPH({ w: 460, h: 250, x: [-1, 1], y: [-0.2, 0.2], xt: [-1, -0.5, 0.5, 1], xtl: ["−1", "−0,5", "0,5", "1"], yt: [-0.125, 0.125], ytl: ["−1/8", "1/8"], xl: "x",

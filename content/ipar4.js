@@ -3,9 +3,9 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-itt": { t: "Intégration terme à terme", b: R`<p>Soit $\sum f_n$ une série de fonctions continues par morceaux et intégrables sur un intervalle $I$, qui converge simplement sur $I$ vers une fonction $S$ continue par morceaux. Si la série $\sum\int_I|f_n|$ converge, alors $S$ est intégrable sur $I$ et</p>$$\int_IS = \sum_{n = 0}^{+\infty}\int_If_n.$$` },
-  "ip-ittpos": { t: "Intégration terme à terme : cas positif", b: R`<p>Si les $f_n$ sont <b>positives</b>, continues par morceaux, et si $\sum f_n$ converge simplement vers $S$ continue par morceaux, alors l'égalité</p>$$\int_IS = \sum_{n = 0}^{+\infty}\int_If_n$$<p>a lieu dans $[0,+\infty]$, sans autre hypothèse. En particulier : $S$ est intégrable si, et seulement si, $\sum\int_If_n$ converge.</p>` },
-  "ip-tlnk": { t: "Intégrales de la forme ∫₀¹ tⁿ (ln t)ᵖ dt", b: R`<p>Par $p$ intégrations par parties (ou $t = e^{-u}$) :</p>$$\int_0^1t^n(\ln t)^p\,dt = \frac{(-1)^pp!}{(n+1)^{p+1}}.$$<p>Cas utiles : $\int_0^1t^n\ln t\,dt = -\frac1{(n+1)^2}$ et $\int_0^1t^n(\ln t)^2dt = \frac2{(n+1)^3}$.</p>` },
+  "ip-itt": { t: "Intégration terme à terme", b: R`<p><b>Hypothèses</b> :</p><ul><li>$f_n$ continues par morceaux et intégrables sur $I$ ;</li><li>$\sum f_n\to S$ simplement sur $I$, $S$ continue par morceaux ;</li><li>$\displaystyle\sum_n\int_I|f_n|\lt+\infty$.</li></ul><p><b>Conclusion</b> : $S$ intégrable sur $I$ et</p><div class="sbox">$$\int_I\sum_{n = 0}^{+\infty}f_n = \sum_{n = 0}^{+\infty}\int_If_n.$$</div>` },
+  "ip-ittpos": { t: "Intégration terme à terme : cas positif", b: R`<p><b>Hypothèses</b> : $f_n\geqslant0$ continues par morceaux, $\sum f_n\to S$ simplement, $S$ continue par morceaux.</p><div class="sbox">$$\int_IS = \sum_{n = 0}^{+\infty}\int_If_n\quad\text{dans }[0,+\infty].$$</div><p><b>Conséquence</b> :</p>$$S\text{ intégrable sur }I\iff\sum_n\int_If_n\lt+\infty.$$` },
+  "ip-tlnk": { t: "Intégrales de la forme ∫₀¹ tⁿ (ln t)ᵖ dt", b: R`<div class="sbox">$$\int_0^1t^n(\ln t)^p\,dt = \frac{(-1)^pp!}{(n+1)^{p+1}}.$$</div>$$\int_0^1t^n\ln t\,dt = -\frac1{(n+1)^2},\qquad\int_0^1t^n(\ln t)^2dt = \frac2{(n+1)^3}.$$<p>($p$ intégrations par parties, ou $t = e^{-u}$.)</p>` },
   "ip-tpe": { t: "Intégrales de la forme ∫₀^∞ tᵖ e^{−λt} dt", b: R`<p>Pour $\lambda>0$ et $p\in\mathbb N$ :</p>$$\int_0^{+\infty}t^pe^{-\lambda t}\,dt = \frac{p!}{\lambda^{p+1}}.$$<p>Plus généralement, $\int_0^{+\infty}t^{x-1}e^{-\lambda t}\,dt = \frac{\Gamma(x)}{\lambda^x}$.</p>` }
 });
 LEMME.exercises([

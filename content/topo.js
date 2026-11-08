@@ -50,10 +50,10 @@ const figFn = GRAPH({ w: 420, h: 230, x: [-0.08, 1.12], y: [0, 1.3], xt: [0.5, 0
 
 LEMME.rappels({
   "top-fermeseq": { t: "Caractérisation séquentielle des fermés", b: R`$$F\text{ fermé}\iff\forall(x_n)\in F^{\mathbb N},\ \big(x_n\to\ell\in E\Rightarrow\ell\in F\big).$$$$x\in\overline A\iff\exists(a_n)\in A^{\mathbb N},\ a_n\to x.$$` },
-  "top-ouvert": { t: "Ouvert, intérieur", b: R`$$U\text{ ouvert}\iff\forall x\in U,\ \exists r>0,\ B(x,r)\subset U;\qquad x\in\mathring A\iff\exists r>0,\ B(x,r)\subset A.$$$$\bigcup_iU_i\text{ ouvert};\qquad f\text{ continue}\ \Longrightarrow\ f^{-1}(\text{ouvert})\text{ ouvert},\ f^{-1}(\text{fermé})\text{ fermé}.$$` },
+  "top-ouvert": { t: "Ouvert, intérieur", b: R`$$\begin{gathered}U\text{ ouvert}\iff\forall x\in U,\ \exists r>0,\ B(x,r)\subset U,\\[4pt]x\in\mathring A\iff\exists r>0,\ B(x,r)\subset A.\end{gathered}$$$$\begin{gathered}\bigcup_iU_i\text{ ouvert},\\[4pt]f\text{ continue}\ \Longrightarrow\ f^{-1}(\text{ouvert})\text{ ouvert},\ f^{-1}(\text{fermé})\text{ fermé}.\end{gathered}$$` },
   "top-equiv": { t: "Normes équivalentes", b: R`$$N_1\sim N_2\iff\exists\alpha,\beta>0,\ \alpha N_1\leqslant N_2\leqslant\beta N_1;\qquad\frac{N_2(f_n)}{N_1(f_n)}\to+\infty\ \Longrightarrow\ N_1\not\sim N_2.$$` },
   "top-lc": { t: "Applications linéaires continues", b: R`$$u\text{ continue}\iff\exists C,\ \forall x,\ \|u(x)\|\leqslant C\|x\|;\qquad|||u||| = \sup_{x\neq0}\frac{\|u(x)\|}{\|x\|}.$$` },
-  "top-compact": { t: "Compacité", b: R`$$K\text{ compact}\iff\forall(x_n)\in K^{\mathbb N},\ \exists\varphi,\ x_{\varphi(n)}\to\ell\in K.$$$$f\text{ continue}\Rightarrow f(K)\text{ compact};\qquad K\times K'\text{ compact};\qquad\dim E\lt\infty\ :\ \text{compact}\iff\text{fermé borné}.$$` },
+  "top-compact": { t: "Compacité", b: R`$$K\text{ compact}\iff\forall(x_n)\in K^{\mathbb N},\ \exists\varphi,\ x_{\varphi(n)}\to\ell\in K.$$$$\begin{gathered}f\text{ continue}\Rightarrow f(K)\text{ compact},\\[4pt]K\times K'\text{ compact},\\[4pt]\dim E\lt\infty\ :\ \text{compact}\iff\text{fermé borné}.\end{gathered}$$` },
   "top-cauchy": { t: "Suites de Cauchy, complétude", b: R`$$(u_n)\text{ de Cauchy}\iff\forall\varepsilon>0,\ \exists N,\ \forall p,q\geqslant N,\ d(u_p,u_q)\leqslant\varepsilon;\qquad\text{CV}\Rightarrow\text{Cauchy}.$$` },
   "top-trirev": { t: "Inégalité triangulaire", b: R`$$\|x+y\|\leqslant\|x\|+\|y\|,\qquad\big|\|x\|-\|y\|\big|\leqslant\|x-y\|.$$` }
 });

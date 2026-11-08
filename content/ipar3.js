@@ -3,8 +3,8 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-ippeq": { t: "Équivalent par intégration par parties", b: R`<p>Pour $\int_0^1f(x)x^n\,dx$ avec $f$ de classe $\mathcal C^1$ : une intégration par parties fait sortir le terme de bord $\frac{f(1)}{n+1}$, et le reste est un $O\big(\frac1{n^2}\big)$. Quand $f$ est seulement continue, on remplace l'intégration par parties par le changement de variable $t = x^{n+1}$ et la convergence dominée.</p>` },
-  "ip-telesc": { t: "Lien suite-série", b: R`<p>La suite $(u_n)$ converge si, et seulement si, la série $\sum(u_{n+1}-u_n)$ converge. En particulier, si $u_{n+1}-u_n = O\big(\frac1{n^2}\big)$, la suite $(u_n)$ converge.</p>` }
+  "ip-ippeq": { t: "Équivalent par intégration par parties", b: R`<p><b>Cas $f\in\mathcal C^1([0,1])$</b> : par parties,</p><div class="sbox">$$\int_0^1f(x)x^n\,dx = \frac{f(1)}{n+1}-\frac1{n+1}\int_0^1f'(x)x^{n+1}\,dx = \frac{f(1)}{n+1}+O\Big(\frac1{n^2}\Big).$$</div><p><b>Cas $f$ continue</b> : $t = x^{n+1}$, puis convergence dominée :</p>$$(n+1)\int_0^1f(x)x^n\,dx = \int_0^1f\big(t^{1/(n+1)}\big)\,dt\xrightarrow[n\to+\infty]{}f(1).$$` },
+  "ip-telesc": { t: "Lien suite-série", b: R`<div class="sbox">$$(u_n)\ \text{converge}\iff\sum(u_{n+1}-u_n)\ \text{converge}.$$</div>$$u_{n+1}-u_n = O\Big(\frac1{n^2}\Big)\ \Longrightarrow\ (u_n)\ \text{converge}.$$` }
 });
 LEMME.exercises([
 { id: "ipar-28", ...P, level: 2, time: "15 min",

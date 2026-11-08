@@ -7,10 +7,10 @@ const P = { subj: "xens", year: "mp", chap: 12, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "bio-rac": { t: "Polynôme ayant une infinité de racines", b: R`<p>Un polynôme non nul de degré $d$ a au plus $d$ racines. Donc deux fractions rationnelles qui coïncident en une infinité de points sont égales.</p>` },
+  "bio-rac": { t: "Polynôme ayant une infinité de racines", b: R`$$P\neq0,\ \deg P = d\ \Longrightarrow\ |\{x : P(x) = 0\}|\leqslant d.$$<div class="sbox">$$F,G\in\mathbb K(X),\ \big|\{x : F(x) = G(x)\}\big| = +\infty\ \Longrightarrow\ F = G.$$</div>` },
   "bio-cv": { t: "Changement de variable", b: R`<p>Si $\phi : [\alpha,\beta]\to\mathbb R$ est $\mathcal C^1$ et $g$ continue sur $\phi([\alpha,\beta])$ :</p>$$\int_\alpha^\beta g\big(\phi(x)\big)\phi'(x)\,dx$$$$= \int_{\phi(\alpha)}^{\phi(\beta)}g(t)\,dt.$$` },
   "bio-trig": { t: "Formules de trigonométrie", b: R`<p>$\cos^2+\sin^2 = 1$, $1+\tan^2x = \dfrac1{\cos^2x}$, $\cos(\pi-x) = -\cos x$, $\sin(\pi-x) = \sin x$, $\cos(\pi+x) = -\cos x$, $\sin(\pi+x) = -\sin x$. Avec $t = \tan\frac x2$ :</p>$$\cos x = \frac{1-t^2}{1+t^2},\qquad\sin x = \frac{2t}{1+t^2},\qquad dx = \frac{2\,dt}{1+t^2}.$$` },
-  "bio-pair": { t: "Polynôme pair", b: R`<p>Si $A(-X) = A(X)$, tous les coefficients d'indice impair de $A$ sont nuls (identification), donc $A(X) = A_1(X^2)$ pour un polynôme $A_1$.</p>` }
+  "bio-pair": { t: "Polynôme pair", b: R`<div class="sbox">$$A(-X) = A(X)\ \Longrightarrow\ \forall k,\ a_{2k+1} = 0\ \Longrightarrow\ \exists A_1,\ A(X) = A_1(X^2).$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations.</b> $\mathbb R(X)$ et $\mathbb R(X,Y)$ désignent les fractions rationnelles réelles à une et deux indéterminées. Pour $R\in\mathbb R(X,Y)$, on note $f_R(x) = R(\cos x,\sin x)$, définie en dehors d'un ensemble $Z_R$ de réels où le dénominateur s'annule ; on suppose toujours que ce dénominateur n'est pas identiquement nul en $(\cos x,\sin x)$, de sorte que $Z_R$ est d'intérieur vide. Dans tout le sujet, une égalité entre fonctions de $x$ est entendue là où les deux membres sont définis.</p>`;

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 4, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "nr-bw": { t: "Compacts de (ℝⁿ, ‖·‖∞)", b: R`<p>Dans $(\mathbb R^n,\|\cdot\|_\infty)$, les fermés bornés sont compacts (Bolzano-Weierstrass coordonnée par coordonnée).</p>` },
-  "nr-cont": { t: "Compacité et continuité", b: R`<p>L'image d'un compact par une application continue est compacte ; une fonction continue à valeurs réelles sur un compact non vide atteint ses bornes. Une application linéaire $f$ entre espaces normés est continue dès que $\|f(x)\|\leqslant C\|x\|$.</p>` },
-  "nr-bl": { t: "Borel-Lebesgue", b: R`<p>Dans un espace métrique compact, de tout recouvrement par des ouverts on peut extraire un sous-recouvrement fini.</p>` }
+  "nr-bw": { t: "Compacts de (ℝⁿ, ‖·‖∞)", b: R`$$K\subset(\mathbb R^n,\|\cdot\|_\infty)\text{ fermé borné}\ \Longrightarrow\ K\text{ compact}.$$` },
+  "nr-cont": { t: "Compacité et continuité", b: R`$$\begin{gathered}f\text{ continue}\Rightarrow f(K)\text{ compact},\\[4pt]f : K\to\mathbb R\text{ continue}\Rightarrow\min,\max\text{ atteints},\\[4pt]\|f(x)\|\leqslant C\|x\|\Rightarrow f\text{ continue}.\end{gathered}$$` },
+  "nr-bl": { t: "Borel-Lebesgue", b: R`$$K\text{ compact},\ K\subset\bigcup_{i\in I}U_i\ \Longrightarrow\ \exists J\subset I\text{ fini},\ K\subset\bigcup_{i\in J}U_i.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $E$ est un $\mathbb R$-espace vectoriel. Deux normes $N,N'$ sur $E$ sont équivalentes s'il existe $\alpha,\beta>0$ avec $\alpha N'\leqslant N\leqslant\beta N'$. Si $E$ est de dimension finie $n$ et $\mathcal B = (e_1,\dots,e_n)$ une base, on note $N_\infty(x) = \max_i|x_i|$ ($x_i$ coordonnées de $x$ dans $\mathcal B$).</p>`;

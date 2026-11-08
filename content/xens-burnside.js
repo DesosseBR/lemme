@@ -7,11 +7,11 @@ const P = { subj: "xens", year: "mp", chap: 13, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "burn-trig": { t: "Trigonalisation sur ℂ", b: R`<p>Tout $u\in\mathcal L(\mathbb C^n)$ est trigonalisable. Si $\lambda_1,\dots,\lambda_n$ sont ses valeurs propres avec multiplicité, alors $\operatorname{tr}(u^p) = \sum_i\lambda_i^p$ pour tout $p\geqslant1$.</p>` },
+  "burn-trig": { t: "Trigonalisation sur ℂ", b: R`<div class="sbox">$$u\in\mathcal L(\mathbb C^n)\ \text{trigonalisable},\qquad\forall p\geqslant1,\ \operatorname{tr}(u^p) = \sum_{i=1}^n\lambda_i^p.$$</div><p>($\lambda_i$ valeurs propres comptées avec multiplicité.)</p>` },
   "burn-cayley": { t: "Théorème de Cayley-Hamilton", b: R`<p>$\chi_u(u) = 0$. En particulier, si $\chi_u = X^n$, alors $u^n = 0$.</p>` },
-  "burn-diag": { t: "Polynôme annulateur scindé à racines simples", b: R`<p>Si $u$ est annulé par un polynôme scindé à racines simples, alors $u$ est diagonalisable et ses valeurs propres sont parmi les racines de ce polynôme. $X^N-1 = \prod_{k=0}^{N-1}(X-e^{2ik\pi/N})$ en est un.</p>` },
-  "burn-trace": { t: "Trace et produit", b: R`<p>$\operatorname{tr}(AB) = \operatorname{tr}(BA)$, et $(A,B)\mapsto\operatorname{tr}(AB)$ est bilinéaire. Une forme linéaire nulle sur une famille génératrice est nulle.</p>` },
-  "burn-tri": { t: "Cas d'égalité de l'inégalité triangulaire dans ℂ", b: R`<p>$|z_1+\dots+z_n|\leqslant|z_1|+\dots+|z_n|$, avec égalité si et seulement si tous les $z_k$ non nuls ont le même argument.</p>` }
+  "burn-diag": { t: "Polynôme annulateur scindé à racines simples", b: R`<div class="sbox">$$P(u) = 0,\ P\ \text{scindé à racines simples}\ \Longrightarrow\ u\ \text{diagonalisable},\ \operatorname{Sp}(u)\subset P^{-1}(0).$$</div><p><b>Exemple</b> :</p>$$X^N-1 = \prod_{k=0}^{N-1}\big(X-e^{2ik\pi/N}\big).$$` },
+  "burn-trace": { t: "Trace et produit", b: R`<div class="sbox">$$\operatorname{tr}(AB) = \operatorname{tr}(BA).$$</div>$$(A,B)\mapsto\operatorname{tr}(AB)\ \text{bilinéaire},\qquad\varphi\ \text{linéaire},\ \varphi_{|\text{famille génératrice}} = 0\ \Rightarrow\ \varphi = 0.$$` },
+  "burn-tri": { t: "Cas d'égalité de l'inégalité triangulaire dans ℂ", b: R`<div class="sbox">$$\Big|\sum_{k=1}^nz_k\Big|\leqslant\sum_{k=1}^n|z_k|,\qquad\text{égalité}\iff\exists\theta,\ \forall k,\ z_k\in\mathbb R_+e^{i\theta}.$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations.</b> $n\geqslant1$. Pour $N\geqslant1$, $\mathbb U_N$ est l'ensemble des racines $N$-ièmes de l'unité. Un groupe $G$ est <b>d'exposant fini</b> s'il existe $N\geqslant1$ tel que $g^N = e$ pour tout $g\in G$.</p>`;

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "oh-proj": { t: "Projection sur un convexe fermé", b: R`$$C\text{ convexe fermé}\neq\varnothing\ :\quad\exists!\,p_C(x)\in C,\ \|x-p_C(x)\| = d(x,C);\qquad\forall y\in C,\ \langle x-p_C(x),y-p_C(x)\rangle\leqslant0.$$` },
+  "oh-proj": { t: "Projection sur un convexe fermé", b: R`$$\begin{gathered}C\text{ convexe fermé}\neq\varnothing\ :\quad\exists!\,p_C(x)\in C,\ \|x-p_C(x)\| = d(x,C),\\[4pt]\forall y\in C,\ \langle x-p_C(x),y-p_C(x)\rangle\leqslant0.\end{gathered}$$` },
   "oh-riesz": { t: "Riesz", b: R`$$\ell\in H'\ \Longrightarrow\ \exists!\,a\in H,\ \forall u,\ \ell(u) = \langle u,a\rangle.$$` },
-  "oh-orth": { t: "Supplémentaire orthogonal", b: R`<p>Pour tout sous-espace $F$ d'un Hilbert $H$ : $H = \overline F\oplus F^\perp$, et $F^\perp = \overline F^\perp$.</p>` },
+  "oh-orth": { t: "Supplémentaire orthogonal", b: R`<div class="sbox">$$F\ \text{sous-espace de}\ H\ \text{Hilbert}\ \Longrightarrow\ H = \overline F\oplus F^\perp,\qquad F^\perp = \overline F^{\,\perp}.$$</div>` },
   "oh-coer": { t: "Coercivité", b: R`$$J\text{ coercive}\iff J(x)\xrightarrow[\|x\|\to+\infty]{}+\infty\iff\forall A,\ \exists\rho,\ \|x\|\geqslant\rho\Rightarrow J(x)\geqslant A.$$` }
 });
 

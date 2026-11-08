@@ -8,7 +8,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "fr-ordre": { t: "Ordre d'un produit d'éléments qui commutent", b: R`$$yz = zy,\ \operatorname{ord}y = a,\ \operatorname{ord}z = b,\ a\wedge b = 1\ \Longrightarrow\ \operatorname{ord}(yz) = ab;\qquad\langle y\rangle\cap\langle z\rangle = \{1\}\Rightarrow\operatorname{ord}(yz) = \operatorname{ppcm}(a,b).$$` },
-  "fr-cyc": { t: "Générateurs d'un groupe cyclique", b: R`$$|G| = m\text{ cyclique}\ :\ \varphi(m)\text{ générateurs},\quad\forall d\mid m,\ \varphi(d)\text{ éléments d'ordre }d;\qquad\varphi(ab) = \varphi(a)\varphi(b)\ (a\wedge b = 1).$$` },
+  "fr-cyc": { t: "Générateurs d'un groupe cyclique", b: R`$$\begin{gathered}|G| = m\text{ cyclique}\ :\ \varphi(m)\text{ générateurs},\\[4pt]\forall d\mid m,\ \varphi(d)\text{ éléments d'ordre }d,\\[4pt]\varphi(ab) = \varphi(a)\varphi(b)\ (a\wedge b = 1).\end{gathered}$$` },
   "fr-classe": { t: "Classes de conjugaison", b: R`$$|C(y)| = [G:Z_G(y)] = \frac{|G|}{|Z_G(y)|},\qquad Z_G(y) = \{x : xy = yx\}.$$` },
   "fr-sylow": { t: "Théorèmes de Sylow", b: R`$$|G| = p^am,\ p\nmid m\ :\quad\exists P,\ |P| = p^a;\quad\text{tous conjugués};\quad n_p\mid m,\quad n_p\equiv1\pmod p.$$` },
   "fr-a5": { t: "Sous-groupes de A5", b: R`$$H\leqslant\mathfrak A_5\ \Longrightarrow\ |H|\in\{1,2,3,4,5,6,10,12,60\}.$$<p>Ordre $10$ : diédral, unique sous-groupe d'ordre $5$, distingué.</p>` }

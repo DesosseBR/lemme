@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "lm-proj": { t: "Projection sur un sous-espace fermé (admis)", b: R`$$F\text{ fermé dans }H\text{ hilbertien}\ \Longrightarrow\ H = F\oplus F^\perp;\qquad F\neq H\Rightarrow F^\perp\neq\{0\}.$$` },
   "lm-pic": { t: "Théorème de Picard", b: R`$$f : E\to E\ k\text{-lip.},\ k\lt1,\ E\text{ complet}\ \Longrightarrow\ \exists!\,x^*,\ f(x^*) = x^*,\quad x_{n+1} = f(x_n)\to x^*.$$` },
-  "lm-cont": { t: "Continuité des formes", b: R`$$a\text{ continue}\iff\exists M,\ |a(u,v)|\leqslant M\|u\|\|v\|;\qquad a\text{ coercive}\iff\exists\mu>0,\ a(u,u)\geqslant\mu\|u\|^2.$$` }
+  "lm-cont": { t: "Continuité des formes", b: R`$$\begin{gathered}a\text{ continue}\iff\exists M,\ |a(u,v)|\leqslant M\|u\|\|v\|,\\[4pt]a\text{ coercive}\iff\exists\mu>0,\ a(u,u)\geqslant\mu\|u\|^2.\end{gathered}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $H$ est un espace de Hilbert réel (préhilbertien complet), de produit scalaire $\langle\cdot,\cdot\rangle$. $a : H\times H\to\mathbb R$ est une forme bilinéaire <b>continue</b> ($|a(u,v)|\leqslant M\|u\|\|v\|$) et <b>coercive</b> ($a(u,u)\geqslant\mu\|u\|^2$, $\mu>0$), non nécessairement symétrique ; $\varphi$ est une forme linéaire continue. On veut montrer le <b>théorème de Lax-Milgram</b> : il existe un unique $u\in H$ tel que $a(u,v) = \varphi(v)$ pour tout $v\in H$.</p>`;

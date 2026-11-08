@@ -48,8 +48,8 @@ LEMME.rappels({
   "t-uc": { t: "Continuité uniforme", b: R`$$f\text{ u.c.}\iff\forall\varepsilon>0,\ \exists\alpha>0,\ \forall x,y,\quad d(x,y)\lt\alpha\Rightarrow d'\big(f(x),f(y)\big)\lt\varepsilon.$$<p>$\alpha$ ne dépend pas du point.</p>` },
   "t-continuite-ouverts": { t: "Continuité et ouverts", b: R`$$f\text{ continue}\iff\forall\Omega'\text{ ouvert de }E',\ f^{-1}(\Omega')\text{ ouvert}\iff\forall F'\text{ fermé},\ f^{-1}(F')\text{ fermé}.$$` },
   "t-operations": { t: "Opérations sur les fonctions continues", b: R`$$f,g : E\to\mathbb R\text{ continues}\ \Longrightarrow\ f+g,\quad fg,\quad\frac fg\ (g\neq0)\ \text{ continues}.$$` },
-  "t-topo-induite": { t: "Topologie induite", b: R`$$U\text{ ouvert de }V\iff\exists\Omega\text{ ouvert de }E,\ U = \Omega\cap V;\qquad G'\text{ fermé de }V\iff\exists G\text{ fermé},\ G' = G\cap V.$$` },
-  "t-isole": { t: "Point isolé", b: R`$a\in A$ est isolé dans $A$ s'il existe $r>0$ tel que $B(a,r)\cap A = \{a\}$. Dans $\mathbb R$ : $]a-r,a+r[\,\cap A = \{a\}$.` },
+  "t-topo-induite": { t: "Topologie induite", b: R`$$\begin{gathered}U\text{ ouvert de }V\iff\exists\Omega\text{ ouvert de }E,\ U = \Omega\cap V,\\[4pt]G'\text{ fermé de }V\iff\exists G\text{ fermé},\ G' = G\cap V.\end{gathered}$$` },
+  "t-isole": { t: "Point isolé", b: R`<div class="sbox">$$a\text{ isolé dans }A\iff\exists r>0,\ B(a,r)\cap A = \{a\}.$$</div><p><b>Dans $\mathbb R$</b> :</p>$$\exists r>0,\ ]a-r,a+r[\,\cap A = \{a\}.$$` },
   "t-densite-q": { t: "Densité de ℚ", b: R`$$\forall u\lt v,\quad\,]u,v[\,\cap\,\mathbb Q\neq\varnothing.$$` },
   "t-denombrable": { t: "Ensembles dénombrables", b: R`$$\mathbb Q\text{ dénombrable};\qquad\exists\,\iota : A\hookrightarrow B,\ B\text{ au plus dénombrable}\ \Longrightarrow\ A\text{ au plus dénombrable}.$$` },
   "t-adh-ouvert": { t: "Ouvert et adhérence", b: R`Si $\Omega$ est ouvert et $B\subset E$ : $\Omega\cap\overline B\subset\overline{\Omega\cap B}$.` }

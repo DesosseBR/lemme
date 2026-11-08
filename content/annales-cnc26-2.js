@@ -5,10 +5,10 @@ const P = { subj: "annales", year: "mp", chap: 24, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "c26b-diag": { t: "Critères de diagonalisabilité", b: R`$$u\text{ diagonalisable}\iff\exists P\text{ scindé à racines simples},\ P(u) = 0\iff\chi_u\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda.$$` },
-  "c26b-commute": { t: "Endomorphismes qui commutent", b: R`$$uv = vu\ \Longrightarrow\ v\big(E_\lambda(u)\big)\subset E_\lambda(u),\quad v(\ker u)\subset\ker u,\quad v(\operatorname{Im}u)\subset\operatorname{Im}u.$$$$u\text{ diagonalisable},\ u(F)\subset F\ \Longrightarrow\ u_{|F}\text{ diagonalisable}.$$` },
+  "c26b-diag": { t: "Critères de diagonalisabilité", b: R`$$\begin{aligned}u\text{ diagonalisable}&\iff \exists P\text{ scindé à racines simples},\ P(u) = 0\\&\iff \chi_u\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda.\end{aligned}$$` },
+  "c26b-commute": { t: "Endomorphismes qui commutent", b: R`$$\begin{gathered}uv = vu\ \Longrightarrow\ v\big(E_\lambda(u)\big)\subset E_\lambda(u),\\[4pt]v(\ker u)\subset\ker u,\\[4pt]v(\operatorname{Im}u)\subset\operatorname{Im}u.\end{gathered}$$$$u\text{ diagonalisable},\ u(F)\subset F\ \Longrightarrow\ u_{|F}\text{ diagonalisable}.$$` },
   "c26b-ch": { t: "Cayley-Hamilton", b: R`$$\chi_A(A) = 0;\qquad\mathbb K = \mathbb C\ :\ \chi_A = \prod_i(X-\lambda_i),\quad\operatorname{Sp}_{\mathbb C}A = \chi_A^{-1}(0).$$` },
-  "c26b-adj": { t: "Adjoint", b: R`$$\forall M,N,\ \langle\Phi(M)|N\rangle = \langle M|\Phi^*(N)\rangle;\qquad\Phi\text{ autoadjoint}\iff\Phi^* = \Phi;\qquad\Phi\text{ orthogonal}\iff\forall M,\ \|\Phi(M)\| = \|M\|.$$` },
+  "c26b-adj": { t: "Adjoint", b: R`$$\begin{gathered}\forall M,N,\ \langle\Phi(M)|N\rangle = \langle M|\Phi^*(N)\rangle,\\[4pt]\Phi\text{ autoadjoint}\iff\Phi^* = \Phi,\\[4pt]\Phi\text{ orthogonal}\iff\forall M,\ \|\Phi(M)\| = \|M\|.\end{gathered}$$` },
   "c26b-trace": { t: "Propriétés de la trace", b: R`<p>$\operatorname{tr}(AB) = \operatorname{tr}(BA)$, $\operatorname{tr}(A^T) = \operatorname{tr}(A)$, et $\operatorname{tr}(M^TN) = \sum_{i,j}m_{i,j}n_{i,j}$.</p>` }
 });
 

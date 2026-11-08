@@ -4,11 +4,11 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 1 };
 
 LEMME.rappels({
-  "red-vp": { t: "Valeur propre, vecteur propre", b: R`<p>$\lambda\in\mathbb K$ est valeur propre de $u\in\mathcal L(E)$ s'il existe $x\neq0_E$ avec $u(x) = \lambda x$ ; un tel $x$ est un vecteur propre. Le sous-espace propre est $E_\lambda(u) = \ker(u-\lambda\,\mathrm{Id}_E)$.</p><div class="sbox">$$\lambda\in\operatorname{Sp}(u)\iff\ker(u-\lambda\,\mathrm{Id}_E)\neq\{0_E\}.$$</div>` },
+  "red-vp": { t: "Valeur propre, vecteur propre", b: R`<div class="sbox">$$\lambda\in\operatorname{Sp}(u)\iff\exists x\neq0_E,\ u(x) = \lambda x\iff\ker(u-\lambda\,\mathrm{Id}_E)\neq\{0_E\}.$$</div>$$E_\lambda(u) = \ker(u-\lambda\,\mathrm{Id}_E),\qquad x\in E_\lambda(u)\setminus\{0\}\ :\ \text{vecteur propre}.$$` },
   "red-libre": { t: "Vecteurs propres de valeurs propres distinctes", b: R`$$\lambda_1,\dots,\lambda_p\text{ distinctes},\ x_i\in E_{\lambda_i}\setminus\{0\}\ \Longrightarrow\ (x_1,\dots,x_p)\text{ libre};\qquad\sum_iE_{\lambda_i} = \bigoplus_iE_{\lambda_i}.$$` },
   "red-chi": { t: "Polynôme caractéristique", b: R`$$\chi_A(X) = \det(XI_n-A),\qquad\lambda\in\operatorname{Sp}A\iff\chi_A(\lambda) = 0.$$$$n = 2\ :\ \chi_A = X^2-\operatorname{tr}(A)X+\det A;\qquad\sum\lambda_i = \operatorname{tr}A,\quad\prod\lambda_i = \det A.$$` },
   "red-diag": { t: "Critères de diagonalisabilité", b: R`$$\begin{aligned}&\operatorname{Card}\operatorname{Sp}A = n\ \Longrightarrow\ \text{diagonalisable}\\&\text{diagonalisable}\iff\sum_\lambda\dim E_\lambda = n\iff\chi\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda\\&1\leqslant\dim E_\lambda\leqslant m_\lambda\end{aligned}$$` },
-  "red-trigo": { t: "Trigonalisabilité", b: R`$$A\text{ trigonalisable sur }\mathbb K\iff\chi_A\text{ scindé sur }\mathbb K;\qquad P^{-1}AP = T\ \Longrightarrow\ \operatorname{diag}(T) = (\lambda_1,\dots,\lambda_n).$$` },
+  "red-trigo": { t: "Trigonalisabilité", b: R`$$\begin{gathered}A\text{ trigonalisable sur }\mathbb K\iff\chi_A\text{ scindé sur }\mathbb K,\\[4pt]P^{-1}AP = T\ \Longrightarrow\ \operatorname{diag}(T) = (\lambda_1,\dots,\lambda_n).\end{gathered}$$` },
   "red-rang": { t: "Dimension d'un sous-espace propre par le rang", b: R`<div class="sbox">$$\dim E_\lambda(A) = \dim\ker(A-\lambda I_n) = n-\operatorname{rg}(A-\lambda I_n)\quad\text{(théorème du rang)}.$$</div>` },
   "red-stable": { t: "Sous-espace stable", b: R`$$F\text{ stable par }u\iff u(F)\subset F;\qquad uv = vu\ \Longrightarrow\ \ker u,\ \operatorname{Im}u,\ E_\lambda(u)\text{ stables par }v.$$` },
   "red-semblable": { t: "Matrices semblables", b: R`$$B = P^{-1}AP\ \Longrightarrow\ \operatorname{rg},\ \operatorname{tr},\ \det,\ \chi\text{ égaux};\qquad A = PDP^{-1}\Rightarrow A^k = PD^kP^{-1}.$$` }
@@ -206,10 +206,10 @@ LEMME.exercises([
 ]);
 LEMME.rappels({
   "red-droite": { t: "Droites stables", b: R`$$\operatorname{Vect}(x)\ (x\neq0)\text{ stable par }u\iff\exists\lambda,\ u(x) = \lambda x.$$` },
-  "red-induit": { t: "Endomorphisme induit", b: R`$$v(F)\subset F\ \Longrightarrow\ v_F\in\mathcal L(F);\qquad\text{vecteur propre de }v_F\Rightarrow\text{vecteur propre de }v;\qquad\mathbb K = \mathbb C,\ F\neq\{0\}\Rightarrow\operatorname{Sp}v_F\neq\varnothing.$$` },
+  "red-induit": { t: "Endomorphisme induit", b: R`$$\begin{gathered}v(F)\subset F\ \Longrightarrow\ v_F\in\mathcal L(F),\\[4pt]\text{vecteur propre de }v_F\Rightarrow\text{vecteur propre de }v,\\[4pt]\mathbb K = \mathbb C,\ F\neq\{0\}\Rightarrow\operatorname{Sp}v_F\neq\varnothing.\end{gathered}$$` },
   "red-nb-vp": { t: "Nombre de valeurs propres", b: R`$$\operatorname{Card}\operatorname{Sp}u\leqslant n;\qquad0\in\operatorname{Sp}u\iff\ker u\neq\{0\}\iff\det u = 0.$$` },
   "red-tvi": { t: "Théorème des valeurs intermédiaires", b: R`$$f\in\mathcal C(I),\ f(a)\lt0\lt f(b)\ \Longrightarrow\ \exists c\text{ entre }a\text{ et }b,\ f(c) = 0.$$` },
-  "red-rec2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`$$u_{n+2} = au_{n+1}+bu_n,\quad r^2 = ar+b,\quad r = e^{\pm i\theta}\ \Longrightarrow\ u_n = \alpha\cos(n\theta)+\beta\sin(n\theta),\ \alpha,\beta\in\mathbb R.$$` },
+  "red-rec2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`$$\begin{gathered}u_{n+2} = au_{n+1}+bu_n,\\[4pt]r^2 = ar+b,\\[4pt]r = e^{\pm i\theta}\ \Longrightarrow\ u_n = \alpha\cos(n\theta)+\beta\sin(n\theta),\ \alpha,\beta\in\mathbb R.\end{gathered}$$` },
   "red-ed1": { t: "Équation $xy' = \\alpha y$", b: R`$$x>0\ :\quad y' = \frac\alpha xy\iff y = Cx^\alpha,\ C\in\mathbb R.$$` }
 });
 

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 3, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "jo-ind": { t: "Indice d'un lacet", b: R`<p>Pour $\gamma : [0,L]\to\mathbb C$ de classe $\mathcal C^1$ fermé, d'image $\Gamma$, et $z\notin\Gamma$ : $\mathrm{Ind}_\gamma(z) = \frac1{2i\pi}\int_0^L\frac{\gamma'(t)}{\gamma(t)-z}dt$. C'est un entier, constant sur chaque composante connexe de $\mathbb C\setminus\Gamma$, nul sur la composante non bornée.</p>` },
-  "jo-uc": { t: "Continuité uniforme des fonctions périodiques", b: R`<p>Une fonction continue $L$-périodique sur $\mathbb R$ est uniformément continue (Heine sur $[0,2L]$).</p>` },
-  "jo-taf": { t: "Inégalité des accroissements finis", b: R`<p>Si $h$ est de classe $\mathcal C^1$ sur un intervalle $I$ à valeurs dans $\mathbb C$ et $|h'|\leqslant c$ sur $I$, alors $|h(t)-h(s)|\leqslant c|t-s|$ pour $s,t\in I$ ; si $|h'|\lt c$, l'inégalité est stricte pour $t\neq s$.</p>` }
+  "jo-ind": { t: "Indice d'un lacet", b: R`$$\begin{gathered}\operatorname{Ind}_\gamma(z) = \frac1{2i\pi}\int_0^L\frac{\gamma'(t)}{\gamma(t)-z}\,dt\in\mathbb Z,\\[4pt]\text{constant sur chaque composante, nul sur la non bornée}.\end{gathered}$$` },
+  "jo-uc": { t: "Continuité uniforme des fonctions périodiques", b: R`$$f\in\mathcal C(\mathbb R),\ L\text{-périodique}\ \Longrightarrow\ f\text{ uniformément continue}.$$` },
+  "jo-taf": { t: "Inégalité des accroissements finis", b: R`$$|h'|\leqslant c\Rightarrow|h(t)-h(s)|\leqslant c|t-s|;\qquad|h'|\lt c,\ s\neq t\Rightarrow|h(t)-h(s)|\lt c|t-s|.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\gamma : \mathbb R\to\mathbb C$ est de classe $\mathcal C^1$, $L$-périodique, injective sur $[0,L[$, avec $|\gamma'(t)| = 1$ pour tout $t$, $\gamma(0) = 0$ et $\gamma'(0) = 1$. On note $\Gamma = \gamma(\mathbb R)$ et, pour $\delta>0$, $\gamma^\pm_\delta(t) = \gamma(t)\pm i\delta\gamma'(t)$ (courbes parallèles, décalées le long de la normale). On veut montrer le <b>théorème de Jordan</b> : $\mathbb C\setminus\Gamma$ a exactement deux composantes connexes, l'une bornée, l'autre non.</p>`;

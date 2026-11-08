@@ -3,8 +3,8 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-varint": { t: "Intervalle qui dépend de n", b: R`<p>Pour $\int_0^{a_n}g_n$ avec $a_n\to+\infty$, on pose $f_n = g_n$ sur $[0,a_n]$ et $f_n = 0$ au-delà : alors $\int_0^{a_n}g_n = \int_0^{+\infty}f_n$, et on applique la convergence dominée sur l'intervalle fixe $[0,+\infty[$. La domination doit être vérifiée <b>sur tout l'intervalle</b> (elle est automatique là où $f_n = 0$).</p>` },
-  "ip-ln": { t: "Inégalité ln(1 + u) ≤ u", b: R`<p>Pour tout $u>-1$ : $\ln(1+u)\leqslant u$ (concavité du logarithme). Conséquences : $\big(1+\frac xn\big)^n\leqslant e^x$ et $\big(1-\frac{x^2}n\big)^n\leqslant e^{-x^2}$ quand la base est positive.</p>` }
+  "ip-varint": { t: "Intervalle qui dépend de n", b: R`$$f_n = g_n\mathbf 1_{[0,a_n]}\ \Longrightarrow\ \int_0^{a_n}g_n = \int_0^{+\infty}f_n;\qquad|f_n|\leqslant\varphi\text{ sur }[0,+\infty[.$$` },
+  "ip-ln": { t: "Inégalité ln(1 + u) ≤ u", b: R`$$\forall u>-1,\ \ln(1+u)\leqslant u\ \Longrightarrow\ \Big(1+\frac xn\Big)^n\leqslant e^x,\qquad\Big(1-\frac{x^2}n\Big)^n\leqslant e^{-x^2}.$$` }
 });
 LEMME.exercises([
 { id: "ipar-18", ...P, level: 1, time: "10 min",

@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "ka-eg": { t: "Cas d'égalité de l'inégalité triangulaire", b: R`$$\|u+v\| = \|u\|+\|v\|\iff\exists\lambda\geqslant0,\ u = \lambda v\text{ ou }v = \lambda u.$$` },
-  "ka-comp": { t: "Compacité", b: R`$$f\in\mathcal C(K,\mathbb R)\Rightarrow\min,\max\text{ atteints};\qquad f(K)\text{ compact};\qquad K\subset\mathbb R^N\text{ compact}\Rightarrow\operatorname{Conv}(K)\text{ compact}.$$` },
+  "ka-comp": { t: "Compacité", b: R`$$\begin{gathered}f\in\mathcal C(K,\mathbb R)\Rightarrow\min,\max\text{ atteints},\\[4pt]f(K)\text{ compact},\\[4pt]K\subset\mathbb R^N\text{ compact}\Rightarrow\operatorname{Conv}(K)\text{ compact}.\end{gathered}$$` },
   "ka-rac": { t: "Racine carrée", b: R`<p>Toute $S\in\mathcal S_n^{++}(\mathbb R)$ s'écrit $S = R^2$ avec $R\in\mathcal S_n^{++}(\mathbb R)$.</p>` }
 });
 

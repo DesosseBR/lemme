@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "mo-tfi": { t: "Fonctions implicites", b: R`$$h(x_0,y_0) = 0,\ \partial_yh(x_0,y_0)\text{ inversible}\ \Longrightarrow\ \exists V,W,\ \exists\varphi\in\mathcal C^r(V),\quad\big((x,y)\in W,\ h(x,y) = 0\big)\iff\big(x\in V,\ y = \varphi(x)\big).$$` },
+  "mo-tfi": { t: "Fonctions implicites", b: R`$$\begin{gathered}h(x_0,y_0) = 0,\ \partial_yh(x_0,y_0)\text{ inversible}\ \Longrightarrow\ \exists V,W,\ \exists\varphi\in\mathcal C^r(V),\\[4pt]\big((x,y)\in W,\ h(x,y) = 0\big)\iff\big(x\in V,\ y = \varphi(x)\big).\end{gathered}$$` },
   "mo-inv": { t: "Inversion locale", b: R`$$D\psi(0)\text{ inversible}\ \Longrightarrow\ \exists Z\ni0,\ Z'\ni\psi(0),\quad\psi : Z\to Z'\ \mathcal C^r\text{-difféomorphisme}.$$` },
   "mo-syl": { t: "Loi d'inertie de Sylvester", b: R`$$S\in\mathcal S_n(\mathbb R)\cap GL_n\ \Longrightarrow\ \exists P\in GL_n,\ \exists!(p,q),\ p+q = n,\quad S = {}^tP\begin{pmatrix}I_p&0\\0&-I_q\end{pmatrix}P.$$` },
   "mo-param": { t: "Intégrales à paramètre", b: R`$$g,\ \partial_x^kg\in\mathcal C([0,1]\times B),\ k\leqslant r\ \Longrightarrow\ x\mapsto\int_0^1g(t,x)\,dt\in\mathcal C^r(B).$$` }

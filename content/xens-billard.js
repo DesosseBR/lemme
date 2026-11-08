@@ -7,10 +7,10 @@ const P = { subj: "xens", year: "mp", chap: 11, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "bil-diff": { t: "Différentielle", b: R`<p>$f : U\to\mathbb R$ ($U$ ouvert de $\mathbb R^m$) est différentiable en $x$ s'il existe une forme linéaire $D_xf$ avec</p>$$f(x+h) = f(x)+D_xf(h)+o(\|h\|).$$<p>Si $f$ est $\mathcal C^1$ et $\gamma$ une courbe $\mathcal C^1$ à valeurs dans $U$ : $(f\circ\gamma)'(t) = D_{\gamma(t)}f\big(\gamma'(t)\big)$.</p>` },
-  "bil-comp": { t: "Composée et racine carrée", b: R`<p>Si $g$ est $\mathcal C^1$ et strictement positive, $\sqrt g$ est $\mathcal C^1$ et $D(\sqrt g) = \dfrac{Dg}{2\sqrt g}$ (dérivation d'une composée, $\sqrt{\ }$ étant $\mathcal C^1$ sur $]0,+\infty[$).</p>` },
-  "bil-ext": { t: "Extremum d'une fonction d'une variable", b: R`<p>Si $\varphi : ]-\varepsilon,\varepsilon[\to\mathbb R$ est dérivable et admet un extremum local en $0$, intérieur à l'intervalle, alors $\varphi'(0) = 0$.</p>` },
-  "bil-compact": { t: "Fonction continue sur un compact", b: R`<p>Une fonction continue sur un compact non vide est bornée et atteint ses bornes. Un produit fini de compacts est compact, une partie fermée d'un compact est compacte.</p>` },
+  "bil-diff": { t: "Différentielle", b: R`<p>$f : U\to\mathbb R$, $U$ ouvert de $\mathbb R^m$ :</p><div class="sbox">$$\begin{aligned}f\ \text{différentiable en}\ x&\iff\exists D_xf\in\mathcal L(\mathbb R^m,\mathbb R),\\&\phantom{\iff}\ \ f(x+h) = f(x)+D_xf(h)+o(\|h\|).\end{aligned}$$</div><p><b>Règle de la chaîne</b> ($f,\gamma$ de classe $\mathcal C^1$) :</p>$$(f\circ\gamma)'(t) = D_{\gamma(t)}f\big(\gamma'(t)\big).$$` },
+  "bil-comp": { t: "Composée et racine carrée", b: R`<div class="sbox">$$g\in\mathcal C^1,\ g>0\ \Longrightarrow\ \sqrt g\in\mathcal C^1,\qquad D\big(\sqrt g\big) = \frac{Dg}{2\sqrt g}.$$</div>` },
+  "bil-ext": { t: "Extremum d'une fonction d'une variable", b: R`<div class="sbox">$$\varphi\in\mathcal D(]-\varepsilon,\varepsilon[),\ \varphi\ \text{extremum local en}\ 0\ \Longrightarrow\ \varphi'(0) = 0.$$</div>` },
+  "bil-compact": { t: "Fonction continue sur un compact", b: R`<div class="sbox">$$f\in\mathcal C^0(K,\mathbb R),\ K\text{ compact}\neq\emptyset\ \Longrightarrow\ \exists a,b\in K,\ f(a) = \min_Kf,\ f(b) = \max_Kf.$$</div>$$K_1\times\dots\times K_p\ \text{compact},\qquad F\subset K\ \text{fermé}\ \Rightarrow\ F\ \text{compact}.$$` },
   "bil-tri": { t: "Cas d'égalité de l'inégalité triangulaire", b: R`<p>Dans $\mathbb R^2$ euclidien : $\|x-z\|\leqslant\|x-y\|+\|y-z\|$, avec égalité si et seulement si $y\in[x,z]$.</p>` }
 });
 

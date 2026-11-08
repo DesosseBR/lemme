@@ -4,8 +4,8 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-equiv": { t: "Comparer deux normes", b: R`<p>$N_2$ est <b>dominée</b> par $N_1$ s'il existe $C>0$ avec $N_2\leqslant C\,N_1$. Les normes sont <b>équivalentes</b> si chacune domine l'autre.</p><ul><li>Pour <b>prouver</b> $N_2\leqslant CN_1$ : une inégalité valable pour tout vecteur.</li><li>Pour <b>réfuter</b> : une suite $(x_n)$ avec $\dfrac{N_2(x_n)}{N_1(x_n)}\to+\infty$.</li></ul><p>En dimension finie, toutes les normes sont équivalentes.</p>` },
-  "nrm-suites": { t: "Normes et convergence", b: R`<p>Si $N_2\leqslant CN_1$, toute suite qui converge pour $N_1$ converge (vers la même limite) pour $N_2$. Une suite convergente est bornée ; une suite de normes tendant vers $+\infty$ diverge.</p>` },
+  "nrm-equiv": { t: "Comparer deux normes", b: R`$$N_2\text{ dominée par }N_1\iff\exists C,\ N_2\leqslant CN_1;\qquad\frac{N_2(x_n)}{N_1(x_n)}\to+\infty\ \Longrightarrow\ N_2\text{ non dominée}.$$<p>Dimension finie : toutes les normes sont équivalentes.</p>` },
+  "nrm-suites": { t: "Normes et convergence", b: R`$$N_2\leqslant CN_1,\ x_n\xrightarrow{N_1}\ell\ \Longrightarrow\ x_n\xrightarrow{N_2}\ell;\qquad\text{CV}\Rightarrow\text{bornée};\qquad N(x_n)\to+\infty\Rightarrow\text{DV}.$$` },
   "nrm-edo": { t: "Résoudre y′ + ay = g", b: R`<p>Avec $f(0) = 0$ : $(fe^{at})' = (f'+af)e^{at}$, donc $f(x) = e^{-ax}\int_0^x\big(f'(t)+af(t)\big)e^{at}\,dt$. Pour $y''+y = g$ avec $y(0) = y'(0) = 0$ : $y(x) = \int_0^x\sin(x-t)\,g(t)\,dt$.</p>` }
 });
 const poly = (X, Y, pts, cls, st = "") => `<polygon points="${pts.map(([x, y]) => f1(X(x)) + "," + f1(Y(y))).join(" ")}" class="${cls}" style="${st}"/>`;

@@ -3,8 +3,8 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-sp": { t: "Intégrer terme à terme par les sommes partielles", b: R`<p>Quand $\sum\int|f_n|$ diverge (série alternée typiquement), on applique la convergence dominée à la suite des <b>sommes partielles</b> $S_n = \sum_{k = 0}^nf_k$ :</p><ul><li>$S_n\to S$ simplement ;</li><li>$|S_n|\leqslant\varphi$ intégrable (souvent grâce à la somme géométrique explicite, ou au critère spécial des séries alternées).</li></ul><p>Alors $\int S_n = \sum_{k = 0}^n\int f_k\to\int S$ : la série $\sum\int f_k$ converge et a pour somme $\int S$.</p>` },
-  "ip-csa": { t: "Critère spécial et sommes partielles", b: R`<p>Si $(u_n)$ décroît vers $0$, les sommes partielles de $\sum(-1)^nu_n$ sont toutes comprises entre $0$ et $u_0$. C'est une domination toute faite pour la méthode des sommes partielles.</p>` }
+  "ip-sp": { t: "Intégrer terme à terme par les sommes partielles", b: R`<p><b>Quand</b> $\sum\int|f_n| = +\infty$ : convergence dominée sur $S_n = \sum_{k = 0}^nf_k$.</p><ul><li>$S_n\to S$ simplement ;</li><li>$|S_n|\leqslant\varphi$, $\varphi$ intégrable.</li></ul><div class="sbox">$$\sum_{k = 0}^n\int_If_k = \int_IS_n\xrightarrow[n\to+\infty]{}\int_IS.$$</div><p>Domination usuelle : somme géométrique explicite, ou critère spécial.</p>` },
+  "ip-csa": { t: "Critère spécial et sommes partielles", b: R`<p><b>Hypothèse</b> : $(u_n)$ décroissante, $u_n\to0$.</p><div class="sbox">$$\forall N,\quad0\leqslant\sum_{n = 0}^N(-1)^nu_n\leqslant u_0.$$</div><p>D'où une domination des sommes partielles.</p>` }
 });
 LEMME.exercises([
 { id: "ipar-73", ...P, level: 2, time: "20 min",

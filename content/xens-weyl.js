@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 9, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "wy-fejer": { t: "Fejér (Weierstrass trigonométrique)", b: R`<p>Toute fonction continue $1$-périodique $f : \mathbb R\to\mathbb C$ est limite uniforme de polynômes trigonométriques $T(x) = \sum_{|k|\leqslant d}c_ke^{2i\pi kx}$ (par exemple les moyennes de Fejér de sa série de Fourier).</p>` },
-  "wy-esc": { t: "Fonctions en escalier", b: R`<p>Une fonction continue sur $[0,1]$ est limite uniforme de fonctions en escalier (continuité uniforme).</p>` }
+  "wy-fejer": { t: "Fejér (Weierstrass trigonométrique)", b: R`$$f\in\mathcal C(\mathbb R,\mathbb C),\ 1\text{-périodique}\ \Longrightarrow\ \forall\varepsilon>0,\ \exists T = \sum_{|k|\leqslant d}c_ke^{2i\pi kx},\quad\|f-T\|_\infty\leqslant\varepsilon.$$` },
+  "wy-esc": { t: "Fonctions en escalier", b: R`$$f\in\mathcal C([0,1])\ \Longrightarrow\ \forall\varepsilon>0,\ \exists\varphi\text{ en escalier},\ \|f-\varphi\|_\infty\leqslant\varepsilon.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Soit $u = (u_n)_{n\geqslant1}$ une suite réelle. On note $\{x\} = x-\lfloor x\rfloor$ et, pour $[a,b]\subset[0,1[$, $X_N(a,b) = \frac1N\#\{n\leqslant N : \{u_n\}\in[a,b]\}$. La suite est <b>équirépartie modulo 1</b> si $X_N(a,b)\to b-a$ pour tout $[a,b]\subset[0,1[$. On veut montrer l'équivalence de :</p><p>(i) $u$ est équirépartie modulo $1$ ;<br>(ii) pour toute $f : \mathbb R\to\mathbb C$ continue $1$-périodique, $\frac1N\sum_{n=1}^Nf(u_n)\to\int_0^1f$ ;<br>(iii) (<b>critère de Weyl</b>) pour tout $k\in\mathbb Z^*$, $\frac1N\sum_{n=1}^Ne^{2i\pi ku_n}\to0$.</p>`;

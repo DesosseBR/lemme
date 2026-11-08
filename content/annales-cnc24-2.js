@@ -6,9 +6,9 @@ const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "c24b-rang": { t: "Théorème du rang", b: R`$$\dim E\lt\infty\ :\quad\dim E = \dim\ker u+\operatorname{rg}u;\qquad F\subset G,\ \dim F = \dim G\lt\infty\Rightarrow F = G.$$` },
-  "c24b-noyaux": { t: "Lemme des noyaux", b: R`$$P_i\wedge P_j = 1\ (i\neq j)\ \Longrightarrow\ \ker(P_1\cdots P_r)(f) = \bigoplus_i\ker P_i(f);\qquad E = \bigoplus_k\ker(f-\lambda_k\mathrm{id})^{m_k}.$$` },
-  "c24b-cyclique": { t: "Base cyclique d'un nilpotent", b: R`$$u^p = 0,\ u^{p-1}(e)\neq0\ \Longrightarrow\ \big(e,u(e),\dots,u^{p-1}(e)\big)\text{ libre}.$$<p>Si $a_j$ est le premier coefficient non nul, appliquer $u^{p-1-j}$ donne $a_ju^{p-1}(e) = 0$.</p>` },
-  "c24b-diag": { t: "Diagonalisabilité", b: R`$$f\text{ diag.}\iff\exists P\text{ SRS},\ P(f) = 0;\qquad f\text{ diag.}\Rightarrow Q(f)\text{ diag. (même base)};\qquad\chi_f\text{ à }n\text{ racines distinctes}\Rightarrow f\text{ diag.}$$` },
+  "c24b-noyaux": { t: "Lemme des noyaux", b: R`$$\begin{gathered}P_i\wedge P_j = 1\ (i\neq j)\ \Longrightarrow\ \ker(P_1\cdots P_r)(f) = \bigoplus_i\ker P_i(f),\\[4pt]E = \bigoplus_k\ker(f-\lambda_k\mathrm{id})^{m_k}.\end{gathered}$$` },
+  "c24b-cyclique": { t: "Base cyclique d'un nilpotent", b: R`<div class="sbox">$$u^p = 0,\ u^{p-1}(e)\neq0\ \Longrightarrow\ \big(e,u(e),\dots,u^{p-1}(e)\big)\text{ libre}.$$</div><p><b>Preuve</b> : $\sum_ja_ju^j(e) = 0$, $a_{j_0}$ premier coefficient non nul ; appliquer $u^{p-1-j_0}$ :</p>$$a_{j_0}u^{p-1}(e) = 0\ \Longrightarrow\ a_{j_0} = 0.$$` },
+  "c24b-diag": { t: "Diagonalisabilité", b: R`$$\begin{gathered}f\text{ diag.}\iff\exists P\text{ SRS},\ P(f) = 0,\\[4pt]f\text{ diag.}\Rightarrow Q(f)\text{ diag. (même base)},\\[4pt]\chi_f\text{ à }n\text{ racines distinctes}\Rightarrow f\text{ diag.}\end{gathered}$$` },
   "c24b-grass": { t: "Formule de Grassmann", b: R`<p>$\dim(F\cap G) = \dim F+\dim G-\dim(F+G)\geqslant\dim F+\dim G-\dim E$.</p>` }
 });
 

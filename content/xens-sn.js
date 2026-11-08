@@ -9,10 +9,10 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "sn-cycles": { t: "Décomposition en cycles", b: R`$$\sigma = c_1\circ\dots\circ c_r\ (\text{supports disjoints, unique à l'ordre près}),\qquad\operatorname{ord}\sigma = \operatorname{ppcm}(\ell_1,\dots,\ell_r).$$` },
   "sn-conj": { t: "Conjugaison dans S_n", b: R`$$\sigma\,(a_1\ \cdots\ a_k)\,\sigma^{-1} = (\sigma(a_1)\ \cdots\ \sigma(a_k));\qquad\sigma\sim\sigma'\iff\text{même type}.$$` },
-  "sn-gen": { t: "Parties génératrices de S_n", b: R`$$\mathfrak S_n = \big\langle(1\ i),\ 2\leqslant i\leqslant n\big\rangle = \big\langle(i\ i+1),\ 1\leqslant i\lt n\big\rangle.$$<p>Deux morphismes égaux sur une partie génératrice sont égaux.</p>` },
-  "sn-transp": { t: "Deux transpositions", b: R`$$(a\ b)(c\ d) = (c\ d)(a\ b)\iff\{a,b\}\cap\{c,d\} = \varnothing\ (\text{ou égalité});\qquad(a\ b)(a\ c) = (a\ c\ b),\ \text{d'ordre }3.$$` },
+  "sn-gen": { t: "Parties génératrices de S_n", b: R`<div class="sbox">$$\mathfrak S_n = \big\langle(1\ i),\ 2\leqslant i\leqslant n\big\rangle = \big\langle(i\ i+1),\ 1\leqslant i\lt n\big\rangle.$$</div>$$\varphi,\psi\ \text{morphismes},\ \varphi_{|S} = \psi_{|S},\ \langle S\rangle = G\ \Longrightarrow\ \varphi = \psi.$$` },
+  "sn-transp": { t: "Deux transpositions", b: R`$$\begin{gathered}(a\ b)(c\ d) = (c\ d)(a\ b)\iff\{a,b\}\cap\{c,d\} = \varnothing\ (\text{ou égalité}),\\[4pt](a\ b)(a\ c) = (a\ c\ b),\ \text{d'ordre }3.\end{gathered}$$` },
   "sn-distingues": { t: "Sous-groupes distingués de S_6 (admis)", b: R`$$n\geqslant5,\ H\triangleleft\mathfrak S_n\ \Longrightarrow\ H\in\{\{\mathrm{Id}\},\ \mathfrak A_n,\ \mathfrak S_n\}.$$` },
-  "sn-pres": { t: "Présentation de Coxeter (admise)", b: R`<p>Notons $e_i = (i\ i+1)$. Si $t_1,\dots,t_{n-1}$ sont des éléments d'un groupe $H$ vérifiant $$t_i^2 = 1,\qquad(t_it_{i+1})^3 = 1,\qquad(t_it_j)^2 = 1\ \text{ si }|i-j|\geqslant2,$$ alors il existe un unique morphisme $\mathfrak S_n\to H$ envoyant $e_i$ sur $t_i$.</p>` },
+  "sn-pres": { t: "Présentation de Coxeter (admise)", b: R`<p>$e_i = (i\ i+1)$, $t_1,\dots,t_{n-1}\in H$ :</p><div class="sbox">$$\left.\begin{aligned}&t_i^2 = 1,\\&(t_it_{i+1})^3 = 1,\\&(t_it_j)^2 = 1\ (|i-j|\geqslant2)\end{aligned}\right\}\ \Longrightarrow\ \exists!\varphi : \mathfrak S_n\to H\ \text{morphisme},\ \varphi(e_i) = t_i.$$</div>` },
   "sn-quot": { t: "Premier théorème d'isomorphisme", b: R`$$f : G\to H\text{ morphisme}\ \Longrightarrow\ \ker f\triangleleft G,\qquad G/\ker f\simeq f(G).$$` }
 });
 

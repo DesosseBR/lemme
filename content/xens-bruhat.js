@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "bru-op": { t: "Opérations et matrices élémentaires", b: R`$$E_{i,j}E_{k,l} = \delta_{jk}E_{i,l};\qquad(I+\lambda E_{i,j})M : L_i\leftarrow L_i+\lambda L_j;\qquad M(I+\lambda E_{i,j}) : C_j\leftarrow C_j+\lambda C_i.$$` },
+  "bru-op": { t: "Opérations et matrices élémentaires", b: R`$$\begin{gathered}E_{i,j}E_{k,l} = \delta_{jk}E_{i,l},\\[4pt](I+\lambda E_{i,j})M : L_i\leftarrow L_i+\lambda L_j,\\[4pt]M(I+\lambda E_{i,j}) : C_j\leftarrow C_j+\lambda C_i.\end{gathered}$$` },
   "bru-perm": { t: "Matrices de permutation", b: R`$$P_\sigma e_j = e_{\sigma(j)},\qquad P_\sigma P_\tau = P_{\sigma\tau},\qquad C_j(MP_\sigma) = C_{\sigma(j)}(M).$$` },
   "bru-orb": { t: "Action transitive", b: R`$$G\text{ transitif sur }E,\ H = \operatorname{Stab}(x_0)\ \Longrightarrow\ gH\mapsto g\cdot x_0\text{ bijection }G/H\to E.$$` }
 });

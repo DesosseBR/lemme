@@ -3,10 +3,10 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 LEMME.rappels({
-  "eu-weier": { t: "Théorème de Weierstrass", b: R`<p>Toute fonction continue sur un segment $[a,b]$ est limite uniforme d'une suite de fonctions polynomiales : $\forall\varepsilon>0,\ \exists P\in\mathbb R[X],\ \|f-P\|_{\infty,[a,b]}\leqslant\varepsilon$.</p>` },
-  "eu-cont": { t: "Continuité du produit scalaire", b: R`<p>Par Cauchy-Schwarz, $|(x|y)-(x'|y)|\leqslant\|x-x'\|\,\|y\|$ : pour $y$ fixé, $x\mapsto(x|y)$ est une forme linéaire continue (et même $1$-lipschitzienne si $\|y\|\leqslant1$). Le produit scalaire est continu sur $E\times E$.</p>` },
-  "eu-bon": { t: "Calculs en base orthonormée", b: R`<p>Si $(e_1,\dots,e_n)$ est une base orthonormée de $E$ : $x = \sum(e_k|x)e_k$, $(x|y) = \sum(e_k|x)(e_k|y) = {}^tXY$, $\|x\|^2 = \sum(e_k|x)^2$. La matrice $M$ d'un endomorphisme $u$ a pour coefficients $m_{ij} = (e_i|u(e_j))$.</p>` },
-  "eu-adj": { t: "Adjoint d'un endomorphisme", b: R`<p>En dimension finie, pour tout $u\in\mathcal L(E)$ il existe un unique $u^*$ tel que $(u(x)|y) = (x|u^*(y))$ pour tous $x,y$ ; en base orthonormée, $\mathrm{Mat}(u^*) = {}^t\mathrm{Mat}(u)$. On a $\ker u^* = (\mathrm{Im}\,u)^\perp$ et $\mathrm{Im}\,u^* = (\ker u)^\perp$.</p>` }
+  "eu-weier": { t: "Théorème de Weierstrass", b: R`$$f\in\mathcal C([a,b])\ \Longrightarrow\ \forall\varepsilon>0,\ \exists P\in\mathbb R[X],\ \|f-P\|_{\infty,[a,b]}\leqslant\varepsilon.$$` },
+  "eu-cont": { t: "Continuité du produit scalaire", b: R`$$|(x|y)-(x'|y)|\leqslant\|x-x'\|\,\|y\|\ \Longrightarrow\ x\mapsto(x|y)\text{ continue};\qquad(\cdot|\cdot)\text{ continu sur }E\times E.$$` },
+  "eu-bon": { t: "Calculs en base orthonormée", b: R`$$x = \sum_k(e_k|x)e_k,\qquad(x|y) = \sum_k(e_k|x)(e_k|y) = {}^tXY,\qquad\|x\|^2 = \sum_k(e_k|x)^2,\qquad m_{ij} = (e_i|u(e_j)).$$` },
+  "eu-adj": { t: "Adjoint d'un endomorphisme", b: R`$$(u(x)|y) = (x|u^*(y));\qquad\operatorname{Mat}(u^*) = {}^t\operatorname{Mat}(u);\qquad\ker u^* = (\operatorname{Im}u)^\perp,\quad\operatorname{Im}u^* = (\ker u)^\perp.$$` }
 });
 LEMME.exercises([
 { id: "pre-19", ...P, level: 1, time: "10 min",

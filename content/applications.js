@@ -6,7 +6,7 @@ const C1 = { subj: "maths", year: "mpsi", chap: 1 };
 LEMME.rappels({
   "ap-inj": { t: "Injective, surjective, bijective", b: R`$$\begin{aligned}f\text{ injective}&\iff\forall x,x'\in E,\ f(x) = f(x')\Rightarrow x = x'\\f\text{ surjective}&\iff\forall y\in F,\ \exists x\in E,\ y = f(x)\\f\text{ bijective}&\iff\forall y\in F,\ \exists!\,x\in E,\ y = f(x)\end{aligned}$$` },
   "ap-reciproque": { t: "Bijection réciproque", b: R`$$g\circ f = \mathrm{Id}_E,\ f\circ g = \mathrm{Id}_F\ \Longrightarrow\ f\text{ bijective},\ f^{-1} = g;\qquad f\circ f = \mathrm{Id}_E\Rightarrow f^{-1} = f.$$` },
-  "ap-composee": { t: "Composées", b: R`$$g\circ f\text{ injective}\Rightarrow f\text{ injective};\qquad g\circ f\text{ surjective}\Rightarrow g\text{ surjective};\qquad f,g\text{ bijectives}\Rightarrow g\circ f\text{ bijective}.$$` }
+  "ap-composee": { t: "Composées", b: R`$$\begin{gathered}g\circ f\text{ injective}\Rightarrow f\text{ injective},\\[4pt]g\circ f\text{ surjective}\Rightarrow g\text{ surjective},\\[4pt]f,g\text{ bijectives}\Rightarrow g\circ f\text{ bijective}.\end{gathered}$$` }
 });
 
 LEMME.exercises([

@@ -4,9 +4,9 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 const { GRAPH, S, f1 } = window.__LA;
 LEMME.rappels({
-  "nrm-sousmult": { t: "Norme sous-multiplicative (norme d'algèbre)", b: R`<p>Une norme $\|\cdot\|$ sur $\mathcal M_n(\mathbb K)$ est sous-multiplicative si $\|AB\|\leqslant\|A\|\,\|B\|$ pour toutes $A,B$. Toute norme subordonnée $\|A\| = \sup_{N(X) = 1}N(AX)$ l'est. Conséquence : $\|A^k\|\leqslant\|A\|^k$, et $|\lambda|\leqslant\|A\|$ pour toute valeur propre $\lambda$.</p>` },
-  "nrm-compact": { t: "Bornes atteintes", b: R`<p>Une fonction continue à valeurs réelles sur un compact non vide est bornée et atteint ses bornes. En dimension finie, les compacts sont les fermés bornés (par exemple une sphère, $O_n(\mathbb R)$, un segment).</p>` },
-  "nrm-sep": { t: "Séparation par les racines", b: R`<p>Un polynôme de degré $\leqslant n$ qui a au moins $n+1$ racines distinctes est nul ; un polynôme qui a une infinité de racines est nul.</p>` }
+  "nrm-sousmult": { t: "Norme sous-multiplicative (norme d'algèbre)", b: R`$$\|AB\|\leqslant\|A\|\,\|B\|\ \Longrightarrow\ \|A^k\|\leqslant\|A\|^k,\qquad\forall\lambda\in\operatorname{Sp}A,\ |\lambda|\leqslant\|A\|.$$<p>Toute norme subordonnée $\|A\| = \sup_{N(X) = 1}N(AX)$ est sous-multiplicative.</p>` },
+  "nrm-compact": { t: "Bornes atteintes", b: R`$$\begin{gathered}f : K\to\mathbb R\text{ continue},\ K\text{ compact}\neq\varnothing\Rightarrow\min,\max\text{ atteints},\\[4pt]\dim E\lt\infty\ :\ \text{compact}\iff\text{fermé borné}.\end{gathered}$$` },
+  "nrm-sep": { t: "Séparation par les racines", b: R`$$\deg P\leqslant n,\ \operatorname{Card}\{\text{racines}\}\geqslant n+1\ \Longrightarrow\ P = 0.$$` }
 });
 const poly = (X, Y, pts, cls, st = "") => `<polygon points="${pts.map(([x, y]) => f1(X(x)) + "," + f1(Y(y))).join(" ")}" class="${cls}" style="${st}"/>`;
 const sq = r => [[r, r], [-r, r], [-r, -r], [r, -r]];

@@ -3,7 +3,7 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 6 };
 LEMME.rappels({
-  "ip-nonitt": { t: "Prouver qu'une série d'intégrales diverge", b: R`<p>Si $f_n\geqslant0$ et $\sum f_n = S$ avec $S$ <b>non intégrable</b>, l'intégration terme à terme positive donne $\sum\int f_n = \int S = +\infty$ : la série $\sum\int f_n$ diverge. C'est la contraposée utile du théorème.</p>` }
+  "ip-nonitt": { t: "Prouver qu'une série d'intégrales diverge", b: R`<p><b>Contraposée utile</b> :</p><div class="sbox">$$f_n\geqslant0,\quad\sum f_n = S,\quad\int_IS = +\infty\ \Longrightarrow\ \sum_n\int_If_n = +\infty.$$</div>` }
 });
 LEMME.exercises([
 { id: "ipar-66", ...P, level: 2, time: "20 min",

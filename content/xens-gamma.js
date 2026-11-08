@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 14, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "gm-holo": { t: "Holomorphie sous l'intégrale", b: R`<p>Soit $U$ un ouvert de $\mathbb C$ et $h : U\times]0,\infty[\to\mathbb C$ avec : $h(\cdot,x)$ holomorphe pour tout $x$, $h(z,\cdot)$ mesurable, et $|h(z,x)|\leqslant k(x)$ pour $z\in U$, $k$ intégrable. Alors $z\mapsto\int h(z,x)\,dx$ est holomorphe sur $U$, et on peut dériver sous l'intégrale.</p>` },
-  "gm-zi": { t: "Prolongement analytique", b: R`<p>Deux fonctions holomorphes sur un ouvert connexe $U$ qui coïncident sur une partie ayant un point d'accumulation dans $U$ (par exemple un segment) sont égales sur $U$.</p>` },
-  "gm-cf": { t: "Fonction caractéristique", b: R`<p>$\varphi_X(t) = \mathbb E[e^{itX}]$ caractérise la loi de $X$. Si $X,Y$ sont indépendantes, $\varphi_{X+Y} = \varphi_X\varphi_Y$. Si $X$ a un moment d'ordre $n$, $\mathbb E[X^n] = i^{-n}\varphi_X^{(n)}(0)$.</p>` }
+  "gm-holo": { t: "Holomorphie sous l'intégrale", b: R`$$h(\cdot,x)\text{ holomorphe},\ |h(z,x)|\leqslant k(x),\ k\in L^1\ \Longrightarrow\ z\mapsto\int h(z,x)\,dx\text{ holomorphe}.$$` },
+  "gm-zi": { t: "Prolongement analytique", b: R`$$f,g\text{ holomorphes sur }U\text{ connexe},\ f = g\text{ sur }A,\ A'\cap U\neq\varnothing\ \Longrightarrow\ f = g\text{ sur }U.$$` },
+  "gm-cf": { t: "Fonction caractéristique", b: R`$$\varphi_X(t) = \mathbb E[e^{itX}];\qquad X\perp\!\!\!\perp Y\Rightarrow\varphi_{X+Y} = \varphi_X\varphi_Y;\qquad\mathbb E[X^n] = i^{-n}\varphi_X^{(n)}(0).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour $a>0$, $\Gamma(a) = \int_0^{+\infty}x^{a-1}e^{-x}dx$. Pour $a,\lambda>0$, la loi $\Gamma(a,\lambda)$ a pour densité $\gamma_{a,\lambda}(x) = \frac{\lambda^a}{\Gamma(a)}x^{a-1}e^{-\lambda x}$ sur $]0,+\infty[$. On note $D_\lambda = \{z\in\mathbb C : \mathrm{Re}\,z\lt\lambda\}$ et, pour $z\in D_\lambda$, $\big(\frac\lambda{\lambda-z}\big)^a = \exp\big(-a\,\mathrm{Log}(1-\frac z\lambda)\big)$, où $\mathrm{Log}$ est la détermination principale du logarithme (définie et holomorphe sur $\{\mathrm{Re}\,w>0\}$).</p>`;

@@ -3,11 +3,11 @@
 /* ---------- MP · 0. Polynômes et approximation · 1. Séries de fonctions · 2. Intégration ---------- */
 LEMME.rappels({
   "k-cauchy-unif": { t: "Critère de Cauchy uniforme", b: R`<p>$(f_n)$ converge uniformément sur $I$ si et seulement si</p><div class="sbox">$$\forall\varepsilon>0,\ \exists N,\ \forall n,m\geqslant N,\quad\sup_I|f_n-f_m|\leqslant\varepsilon.$$</div><p>Le sens direct est immédiat : $|f_n-f_m|\leqslant|f_n-f|+|f-f_m|$.</p>` },
-  "k-poly-borne": { t: "Polynôme borné sur un ensemble non borné", b: R`<p>Un polynôme non constant tend vers $\pm\infty$ en $\pm\infty$. Donc :</p><div class="sbox">$$P\ \text{borné sur une partie non bornée de}\ \mathbb R\ \Longrightarrow\ P\ \text{constant}.$$</div>` },
+  "k-poly-borne": { t: "Polynôme borné sur un ensemble non borné", b: R`$$\deg P\geqslant1\ \Longrightarrow\ |P(x)|\xrightarrow[|x|\to+\infty]{}+\infty.$$<div class="sbox">$$P\ \text{borné sur}\ A\subset\mathbb R\ \text{non borné}\ \Longrightarrow\ P\ \text{constant}.$$</div>` },
   "k-bt": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance :</p><div class="sbox">$$\forall\alpha>0,\qquad P\big(|X-E(X)|\geqslant\alpha\big)\leqslant\frac{V(X)}{\alpha^2}.$$</div>` },
-  "k-abel": { t: "Transformation d'Abel", b: R`<p>Avec $A_k = a_0+\dots+a_k$ (et $A_{-1} = 0$), on écrit $a_k = A_k-A_{k-1}$ et on regroupe :</p><div class="sbox">$$\sum_{k=0}^na_kb_k = A_nb_n+\sum_{k=0}^{n-1}A_k(b_k-b_{k+1}).$$</div><p>C'est une « intégration par parties discrète ».</p>` },
-  "k-param-cont": { t: "Continuité d'une intégrale à paramètre", b: R`<p>Si $x\mapsto f(x,t)$ est continue, $t\mapsto f(x,t)$ continue par morceaux, et s'il existe $g$ intégrable avec</p><div class="sbox">$$|f(x,t)|\leqslant g(t)\quad\text{pour tout}\ x\in[a,b]\ \text{et tout}\ t,$$</div><p>alors $x\mapsto\int f(x,t)\,dt$ est continue sur $[a,b]$. On domine sur des segments, puis on conclut sur tout l'intervalle.</p>` },
-  "k-param-der": { t: "Dérivation sous l'intégrale", b: R`<p>Si de plus $\frac{\partial f}{\partial x}$ existe, est continue en $x$, continue par morceaux en $t$, et dominée par une $h$ intégrable (sur chaque segment $[a,b]$), alors</p><div class="sbox">$$\frac{d}{dx}\int f(x,t)\,dt = \int\frac{\partial f}{\partial x}(x,t)\,dt.$$</div>` }
+  "k-abel": { t: "Transformation d'Abel", b: R`<p><b>Notations</b> : $A_k = a_0+\dots+a_k$, $A_{-1} = 0$, donc $a_k = A_k-A_{k-1}$.</p><div class="sbox">$$\sum_{k=0}^na_kb_k = A_nb_n+\sum_{k=0}^{n-1}A_k(b_k-b_{k+1}).$$</div><p>Analogue discret de l'intégration par parties.</p>` },
+  "k-param-cont": { t: "Continuité d'une intégrale à paramètre", b: R`<ul><li>$x\mapsto f(x,t)$ continue ;</li><li>$t\mapsto f(x,t)$ continue par morceaux ;</li><li>$\forall[a,b]$, $\exists g$ intégrable :</li></ul><div class="sbox">$$\forall x\in[a,b],\ \forall t,\quad|f(x,t)|\leqslant g(t)\ \Longrightarrow\ x\mapsto\int f(x,t)\,dt\ \text{continue}.$$</div><p>Domination sur tout segment $\Rightarrow$ continuité sur tout l'intervalle.</p>` },
+  "k-param-der": { t: "Dérivation sous l'intégrale", b: R`<ul><li>$\frac{\partial f}{\partial x}$ continue en $x$, continue par morceaux en $t$ ;</li><li>$\forall[a,b]$ : $\Big|\dfrac{\partial f}{\partial x}(x,t)\Big|\leqslant h(t)$, $h$ intégrable.</li></ul><div class="sbox">$$\frac{d}{dx}\int f(x,t)\,dt = \int\frac{\partial f}{\partial x}(x,t)\,dt.$$</div>` }
 });
 
 (() => {
@@ -113,12 +113,12 @@ LEMME.exercises([
 
 /* ---------- MP · 3. Déterminants · 4. Groupes (1) ---------- */
 LEMME.rappels({
-  "k-ordre": { t: "Ordre d'un élément", b: R`<p>L'ordre de $x$ est le plus petit $m\geqslant1$ tel que $x^m = e$. Alors :</p><div class="sbox">$$x^k = e\iff m\mid k,\qquad\operatorname{ordre}\big(x^d\big) = \frac md\ \ (d\mid m).$$</div><p>Dans un groupe fini, l'ordre divise le cardinal (Lagrange).</p>` },
-  "k-lagrange-gr": { t: "Théorème de Lagrange", b: R`<div class="sbox">$$H\ \text{sous-groupe de}\ G\ \text{fini}\ \Longrightarrow\ |H|\ \text{divise}\ |G|.$$</div><p>Car $G$ est réunion disjointe des classes $xH$, qui ont toutes $|H|$ éléments.</p>` },
-  "k-cyclique": { t: "Groupe cyclique", b: R`<p>$G$ fini est cyclique s'il est engendré par un seul élément, ce qui équivaut à :</p><div class="sbox">$$\exists x\in G,\quad\operatorname{ordre}(x) = |G|.$$</div><p><b>Exemple :</b> $(\mathbb Z/n\mathbb Z,+)$, $\mathbb U_n$. <b>Contre-exemple :</b> $(\mathbb Z/2\mathbb Z)^2$, dont tous les éléments sont d'ordre $\leqslant2$.</p>` },
-  "k-nilp-triang": { t: "Matrice nilpotente et déterminant", b: R`<p>Sur un corps quelconque, une matrice nilpotente $N$ est semblable à une matrice triangulaire supérieure stricte (base adaptée à la suite $\ker N\subset\ker N^2\subset\dots$). Donc, si $c$ est un scalaire :</p><div class="sbox">$$\det(cI_n+N) = c^n.$$</div>` },
+  "k-ordre": { t: "Ordre d'un élément", b: R`<p><b>Définition</b> :</p>$$\operatorname{ordre}(x) = m = \min\{k\geqslant1 : x^k = e\}.$$<div class="sbox">$$x^k = e\iff m\mid k,\qquad d\mid m\ \Rightarrow\ \operatorname{ordre}\big(x^d\big) = \frac md.$$</div><p><b>Groupe fini</b> :</p>$$\operatorname{ordre}(x)\mid|G|.$$` },
+  "k-lagrange-gr": { t: "Théorème de Lagrange", b: R`<div class="sbox">$$H\leqslant G,\ |G|\lt\infty\ \Longrightarrow\ |H|\ \big|\ |G|.$$</div><p><b>Preuve</b> :</p>$$G = \bigsqcup_{xH\in G/H}xH,\qquad\forall x,\ |xH| = |H|.$$` },
+  "k-cyclique": { t: "Groupe cyclique", b: R`<div class="sbox">$$G\text{ cyclique}\iff\exists x\in G,\ G = \langle x\rangle\iff\exists x\in G,\ \operatorname{ordre}(x) = |G|.$$</div><ul><li><b>Exemples</b> : $(\mathbb Z/n\mathbb Z,+)$, $\mathbb U_n$.</li><li><b>Contre-exemple</b> : $(\mathbb Z/2\mathbb Z)^2$, car $\forall x$, $\operatorname{ordre}(x)\leqslant2\lt4$.</li></ul>` },
+  "k-nilp-triang": { t: "Matrice nilpotente et déterminant", b: R`<p><b>$N$ nilpotente</b> (corps quelconque), base adaptée à $\ker N\subset\ker N^2\subset\cdots$ :</p>$$N\sim\begin{pmatrix}0&&*\\&\ddots&\\0&&0\end{pmatrix}.$$<div class="sbox">$$\det(cI_n+N) = c^n,\qquad\chi_N = X^n.$$</div>` },
   "k-fermat": { t: "Petit théorème de Fermat", b: R`<div class="sbox">$$p\ \text{premier},\ a\in\mathbb Z\ \Longrightarrow\ a^p\equiv a\pmod p.$$</div>` },
-  "k-racines-corps": { t: "Racines dans un corps", b: R`<p>Dans un corps commutatif $K$, un polynôme non nul de degré $d$ a au plus $d$ racines.</p><div class="sbox">$$\#\{x\in K : x^d = 1\}\leqslant d.$$</div>` }
+  "k-racines-corps": { t: "Racines dans un corps", b: R`<p>$K$ corps commutatif, $P\in K[X]\setminus\{0\}$ :</p><div class="sbox">$$\big|\{x\in K : P(x) = 0\}\big|\leqslant\deg P.$$</div><p><b>Exemple</b> :</p>$$\#\{x\in K : x^d = 1\}\leqslant d.$$` }
 });
 
 (() => {
@@ -202,9 +202,9 @@ LEMME.exercises([
 
 /* ---------- MP · 4. Groupes (2) ---------- */
 LEMME.rappels({
-  "k-sous-groupe-gen": { t: "Sous-groupe : caractérisation", b: R`<p>$H\subset G$ est un sous-groupe si $e\in H$ et si $x,y\in H\Rightarrow xy^{-1}\in H$.</p><div class="sbox">$$e\in H,\qquad x,y\in H\ \Longrightarrow\ xy^{-1}\in H.$$</div><p>Une réunion croissante de sous-groupes est un sous-groupe.</p>` },
-  "k-quotient": { t: "Groupe quotient (abélien)", b: R`<p>Si $G$ est abélien et $H$ un sous-groupe, les classes $xH$ forment un groupe $G/H$ pour $(xH)(yH) = xyH$, de cardinal $\frac{|G|}{|H|}$. L'application $\pi : x\mapsto xH$ est un morphisme surjectif de noyau $H$ :</p><div class="sbox">$$\pi(x) = e_{G/H}\iff x\in H,\qquad|G/H| = \frac{|G|}{|H|}.$$</div><p>Chaque élément de $G/H$ a exactement $|H|$ antécédents.</p>` },
-  "k-morph-card": { t: "Morphisme et cardinal", b: R`<p>Si $\varphi : G\to G'$ est un morphisme de groupes finis, chaque élément de l'image a exactement $|\ker\varphi|$ antécédents :</p><div class="sbox">$$|G| = |\ker\varphi|\cdot|\operatorname{Im}\varphi|.$$</div>` }
+  "k-sous-groupe-gen": { t: "Sous-groupe : caractérisation", b: R`<div class="sbox">$$H\leqslant G\iff\Big(e\in H\ \text{et}\ \forall x,y\in H,\ xy^{-1}\in H\Big).$$</div>$$H_1\subset H_2\subset\cdots\ \text{sous-groupes}\ \Longrightarrow\ \bigcup_kH_k\leqslant G.$$` },
+  "k-quotient": { t: "Groupe quotient (abélien)", b: R`<p>$G$ abélien, $H\leqslant G$ :</p>$$G/H = \{xH\},\qquad(xH)(yH) = xyH.$$<p>$\pi : x\mapsto xH$ morphisme surjectif :</p><div class="sbox">$$\ker\pi = H,\qquad|G/H| = \frac{|G|}{|H|},\qquad\forall y,\ |\pi^{-1}(y)| = |H|.$$</div>` },
+  "k-morph-card": { t: "Morphisme et cardinal", b: R`<p>$\varphi : G\to G'$ morphisme, $G$ fini :</p>$$\forall y\in\operatorname{Im}\varphi,\quad|\varphi^{-1}(\{y\})| = |\ker\varphi|.$$<div class="sbox">$$|G| = |\ker\varphi|\cdot|\operatorname{Im}\varphi|.$$</div>` }
 });
 
 (() => {
@@ -272,9 +272,9 @@ LEMME.exercises([
 /* ---------- MP · 5. Anneaux et arithmétique (1) ---------- */
 LEMME.rappels({
   "k-pgcd-sym": { t: "PGCD et soustraction", b: R`<div class="sbox">$$\operatorname{pgcd}(a,m) = \operatorname{pgcd}(m-a,m).$$</div><p>Tout diviseur commun de $a$ et $m$ divise $m-a$, et inversement.</p>` },
-  "k-crt": { t: "Lemme chinois", b: R`<p>Si $m\wedge n = 1$, l'application suivante est un isomorphisme d'anneaux :</p><div class="sbox">$$\mathbb Z/mn\mathbb Z\to\mathbb Z/m\mathbb Z\times\mathbb Z/n\mathbb Z,\qquad\bar x\mapsto(\bar x,\bar x).$$</div><p>Concrètement : avec $um+vn = 1$, l'entier $x = a\,vn+b\,um$ vérifie $x\equiv a\ [m]$ et $x\equiv b\ [n]$, et les solutions sont les $x+kmn$.</p>` },
+  "k-crt": { t: "Lemme chinois", b: R`<p><b>Hypothèse</b> : $m\wedge n = 1$.</p><div class="sbox">$$\mathbb Z/mn\mathbb Z\xrightarrow{\ \sim\ }\mathbb Z/m\mathbb Z\times\mathbb Z/n\mathbb Z,\qquad\bar x\mapsto(\bar x,\bar x).$$</div><p><b>Construction</b> ($um+vn = 1$) :</p>$$x = a\,vn+b\,um\ \Longrightarrow\ \left\{\begin{aligned}x&\equiv a\ [m]\\x&\equiv b\ [n]\end{aligned}\right.,\qquad\text{solutions : }x+mn\mathbb Z.$$` },
   "k-inversible-zn": { t: "Inversibles de ℤ/nℤ", b: R`<div class="sbox">$$\bar a\ \text{inversible dans}\ \mathbb Z/n\mathbb Z\iff a\wedge n = 1.$$</div><p>$\mathbb Z/n\mathbb Z$ est un corps si et seulement si $n$ est premier.</p>` },
-  "k-irred-modp": { t: "Réduction modulo p", b: R`<p>L'application $\mathbb Z[X]\to\mathbb F_p[X]$ qui réduit chaque coefficient modulo $p$ est un morphisme d'anneaux : $\overline{QR} = \bar Q\,\bar R$. Dans $\mathbb F_p[X]$ (anneau de polynômes sur un corps), la décomposition en facteurs irréductibles est unique.</p><div class="sbox">$$\bar Q\bar R = cX^n\ \Longrightarrow\ \bar Q = \alpha X^q,\ \bar R = \beta X^r.$$</div>` }
+  "k-irred-modp": { t: "Réduction modulo p", b: R`<p><b>Réduction</b> : $\mathbb Z[X]\to\mathbb F_p[X]$, $Q\mapsto\bar Q$, morphisme d'anneaux :</p>$$\overline{QR} = \bar Q\,\bar R.$$<p>$\mathbb F_p[X]$ factoriel (décomposition en irréductibles unique), d'où :</p><div class="sbox">$$\bar Q\bar R = cX^n\ \Longrightarrow\ \bar Q = \alpha X^q,\ \bar R = \beta X^r.$$</div>` }
 });
 
 (() => {
@@ -375,9 +375,9 @@ LEMME.exercises([
 
 /* ---------- MP · 5. Anneaux et arithmétique (2) ---------- */
 LEMME.rappels({
-  "k-ideal": { t: "Idéal d'un anneau commutatif", b: R`<p>$I\subset A$ est un idéal si c'est un sous-groupe additif et si $a\in A$, $x\in I\Rightarrow ax\in I$.</p><div class="sbox">$$x,y\in I\Rightarrow x-y\in I,\qquad a\in A,\ x\in I\Rightarrow ax\in I.$$</div><p>Si $1\in I$ (ou un inversible), alors $I = A$. L'idéal engendré par $a,b$ est $aA+bA$.</p>` },
-  "k-premier": { t: "Idéal premier", b: R`<p>Un idéal $I\neq A$ est premier si</p><div class="sbox">$$xy\in I\ \Longrightarrow\ x\in I\ \text{ou}\ y\in I.$$</div><p>$\{0\}$ est premier si et seulement si $A$ est intègre. Dans $\mathbb Z$, les idéaux premiers non nuls sont les $p\mathbb Z$, $p$ premier.</p>` },
-  "k-noyau-ideal": { t: "Noyau d'un morphisme d'anneaux", b: R`<p>Si $\varphi : A\to B$ est un morphisme d'anneaux, $\ker\varphi$ est un idéal de $A$. Si $B$ est intègre, $\ker\varphi$ est premier :</p><div class="sbox">$$\varphi(xy) = \varphi(x)\varphi(y) = 0\ \Longrightarrow\ \varphi(x) = 0\ \text{ou}\ \varphi(y) = 0.$$</div>` },
+  "k-ideal": { t: "Idéal d'un anneau commutatif", b: R`<p><b>Définition</b> : $I\subset A$ idéal si</p><div class="sbox">$$\forall x,y\in I,\ x-y\in I,\qquad\forall a\in A,\ \forall x\in I,\ ax\in I.$$</div>$$I\cap A^\times\neq\emptyset\ \Longrightarrow\ I = A,\qquad(a,b) = aA+bA.$$` },
+  "k-premier": { t: "Idéal premier", b: R`<p><b>Définition</b> ($I\neq A$) :</p><div class="sbox">$$I\text{ premier}\iff\big(xy\in I\Rightarrow x\in I\ \text{ou}\ y\in I\big).$$</div>$$\{0\}\text{ premier}\iff A\text{ intègre},\qquad\text{premiers non nuls de }\mathbb Z = \{p\mathbb Z,\ p\text{ premier}\}.$$` },
+  "k-noyau-ideal": { t: "Noyau d'un morphisme d'anneaux", b: R`<p>$\varphi : A\to B$ morphisme d'anneaux :</p>$$\ker\varphi\text{ idéal de }A.$$<div class="sbox">$$B\text{ intègre}\ \Longrightarrow\ \big(\varphi(xy) = 0\Rightarrow\varphi(x) = 0\ \text{ou}\ \varphi(y) = 0\big)\ \Longrightarrow\ \ker\varphi\text{ premier}.$$</div>` },
   "k-degre-produit": { t: "Degré d'un produit", b: R`$$A\text{ intègre}\ \Longrightarrow\ \deg(PQ) = \deg P+\deg Q,\qquad A[X]^\times = A^\times.$$` }
 });
 
@@ -462,11 +462,11 @@ LEMME.exercises([
 
 /* ---------- MP · 6. Réduction (1) ---------- */
 LEMME.rappels({
-  "k-chi": { t: "Polynôme caractéristique", b: R`<div class="sbox">$$\chi_A(x) = \det(xI_n-A),\qquad\chi_A = X^n-\operatorname{tr}(A)X^{n-1}+\dots+(-1)^n\det A.$$</div><p>Deux matrices semblables ont le même polynôme caractéristique. Pour $n = 2$ : $\chi_A = X^2-\operatorname{tr}(A)X+\det A$.</p>` },
-  "k-semblables": { t: "Matrices semblables", b: R`<div class="sbox">$$A\sim B\iff\exists P\in GL_n,\quad B = P^{-1}AP.$$</div><p>Deux matrices diagonalisables sont semblables si et seulement si elles ont le même polynôme caractéristique.</p>` },
-  "k-poly-infini": { t: "Polynôme nul sur un ensemble infini", b: R`<p>Si un polynôme $Q(t)$ s'annule pour une infinité de valeurs de $t$, c'est le polynôme nul. En particulier :</p><div class="sbox">$$Q\neq0\ \Longrightarrow\ Q(t)\neq0\ \text{sauf pour un nombre fini de}\ t.$$</div>` },
-  "k-rang-corps": { t: "Le rang ne dépend pas du corps", b: R`<p>Pour $A\in\mathcal M_n(\mathbb R)$, le rang de $A$ vu dans $\mathcal M_n(\mathbb C)$ est le même : c'est la taille du plus grand mineur non nul, et les mineurs sont les mêmes nombres.</p><div class="sbox">$$\operatorname{rg}_{\mathbb R}A = \operatorname{rg}_{\mathbb C}A.$$</div>` },
-  "k-poly-min": { t: "Polynôme minimal", b: R`<p>$\pi_u$ est le polynôme unitaire de plus petit degré qui annule $u$. Tout polynôme annulateur est un multiple de $\pi_u$, et :</p><div class="sbox">$$P(u) = 0\iff\pi_u\mid P.$$</div><p>Les racines de $\pi_u$ sont exactement les valeurs propres de $u$.</p>` }
+  "k-chi": { t: "Polynôme caractéristique", b: R`<div class="sbox">$$\chi_A(x) = \det(xI_n-A) = X^n-\operatorname{tr}(A)X^{n-1}+\dots+(-1)^n\det A.$$</div>$$A\sim B\ \Longrightarrow\ \chi_A = \chi_B,\qquad n = 2:\ \chi_A = X^2-\operatorname{tr}(A)X+\det A.$$` },
+  "k-semblables": { t: "Matrices semblables", b: R`<div class="sbox">$$A\sim B\iff\exists P\in GL_n,\quad B = P^{-1}AP.$$</div><p><b>Cas diagonalisable</b> :</p>$$A,B\text{ diagonalisables}:\quad A\sim B\iff\chi_A = \chi_B.$$` },
+  "k-poly-infini": { t: "Polynôme nul sur un ensemble infini", b: R`<div class="sbox">$$\big|\{t : Q(t) = 0\}\big| = +\infty\ \Longrightarrow\ Q = 0.$$</div><p><b>Contraposée</b> :</p>$$Q\neq0\ \Longrightarrow\ \big|\{t : Q(t) = 0\}\big|\leqslant\deg Q.$$` },
+  "k-rang-corps": { t: "Le rang ne dépend pas du corps", b: R`<div class="sbox">$$A\in\mathcal M_n(\mathbb R)\ \Longrightarrow\ \operatorname{rg}_{\mathbb R}A = \operatorname{rg}_{\mathbb C}A.$$</div>$$\operatorname{rg}A = \max\{r : \exists\text{ mineur }r\times r\text{ non nul}\}\quad(\text{mêmes mineurs}).$$` },
+  "k-poly-min": { t: "Polynôme minimal", b: R`<p><b>Définition</b> : $\pi_u$ unitaire de degré minimal, $\pi_u(u) = 0$.</p><div class="sbox">$$P(u) = 0\iff\pi_u\mid P.$$</div>$$\{\text{racines de }\pi_u\} = \operatorname{Sp}(u).$$` }
 });
 
 (() => {
@@ -565,10 +565,10 @@ LEMME.exercises([
 
 /* ---------- MP · 6. Réduction (2) ---------- */
 LEMME.rappels({
-  "k-vp-dim-finie": { t: "Nombre de valeurs propres", b: R`<p>En dimension finie $N$, un endomorphisme a au plus $N$ valeurs propres distinctes (des vecteurs propres associés à des valeurs propres distinctes sont libres).</p><div class="sbox">$$\#\operatorname{sp}(\varphi)\leqslant\dim F.$$</div>` },
-  "k-stable-induit": { t: "Sous-espace stable et endomorphisme induit", b: R`<p>Si $F$ est stable par $u$ et $u$ diagonalisable, alors $u_{|F}$ est diagonalisable (il est annulé par le même polynôme scindé à racines simples).</p><div class="sbox">$$u\ \text{diagonalisable},\ u(F)\subset F\ \Longrightarrow\ u_{|F}\ \text{diagonalisable}.$$</div>` },
-  "k-compact-dimfinie": { t: "Compacts en dimension finie", b: R`<p>Dans un espace vectoriel normé de dimension finie :</p><div class="sbox">$$K\ \text{compact}\iff K\ \text{fermé et borné}.$$</div><p>Un ensemble défini par des égalités et inégalités larges entre fonctions continues est fermé.</p>` },
-  "k-compagnon": { t: "Matrice compagnon", b: R`<p>Pour $Q = X^n+a_{n-1}X^{n-1}+\dots+a_0$, la matrice compagnon $C_Q$ (des $1$ sous la diagonale, $-a_0,\dots,-a_{n-1}$ en dernière colonne) vérifie</p><div class="sbox">$$\chi_{C_Q} = Q.$$</div><p>C'est la matrice de $f$ dans une base $(x,f(x),\dots,f^{n-1}(x))$ quand $f^n(x) = -\sum a_kf^k(x)$.</p>` }
+  "k-vp-dim-finie": { t: "Nombre de valeurs propres", b: R`<p><b>Liberté</b> :</p>$$\lambda_1,\dots,\lambda_p\text{ distinctes},\ x_i\in E_{\lambda_i}\setminus\{0\}\ \Longrightarrow\ (x_1,\dots,x_p)\text{ libre}.$$<div class="sbox">$$\#\operatorname{sp}(\varphi)\leqslant\dim F.$$</div>` },
+  "k-stable-induit": { t: "Sous-espace stable et endomorphisme induit", b: R`<div class="sbox">$$u\ \text{diagonalisable},\ u(F)\subset F\ \Longrightarrow\ u_{|F}\ \text{diagonalisable}.$$</div><p><b>Preuve</b> : $P$ scindé à racines simples,</p>$$P(u) = 0\ \Longrightarrow\ P(u_{|F}) = 0.$$` },
+  "k-compact-dimfinie": { t: "Compacts en dimension finie", b: R`<p><b>Dimension finie</b> :</p><div class="sbox">$$K\ \text{compact}\iff K\ \text{fermé et borné}.$$</div><p><b>Fermés usuels</b> ($f_i,g_j$ continues) :</p>$$\{x : f_1(x) = 0,\ \dots,\ g_1(x)\leqslant0,\ \dots\}\ \text{est fermé}.$$` },
+  "k-compagnon": { t: "Matrice compagnon", b: R`<p>$Q = X^n+a_{n-1}X^{n-1}+\dots+a_0$ :</p>$$C_Q = \begin{pmatrix}0&&&-a_0\\1&\ddots&&\vdots\\&\ddots&0&-a_{n-2}\\&&1&-a_{n-1}\end{pmatrix}.$$<div class="sbox">$$\chi_{C_Q} = Q.$$</div>$$f^n(x) = -\sum_{k = 0}^{n-1}a_kf^k(x)\ \Longrightarrow\ \operatorname{Mat}_{(x,f(x),\dots,f^{n-1}(x))}(f) = C_Q.$$` }
 });
 
 (() => {
@@ -668,8 +668,8 @@ LEMME.exercises([
 
 /* ---------- MP · 6. Réduction (3) ---------- */
 LEMME.rappels({
-  "k-edl1-sol": { t: "Équation y′ = a(x) y", b: R`<p>Sur un intervalle où $a$ est continue, les solutions sont</p><div class="sbox">$$y(x) = C\,e^{A(x)},\qquad A' = a.$$</div><p>Pour $xy' = \mu y$ sur $]0,+\infty[$ : $y = Cx^\mu$.</p>` },
-  "k-libre-fonctions": { t: "Montrer qu'une famille de fonctions est libre", b: R`$$\sum_kc_kf_k = 0\ \Longrightarrow\ \forall k,\ c_k = 0\ ?$$<p>Évaluer en des points choisis, diviser par une fonction qui ne s'annule pas, ou faire apparaître un polynôme à une infinité de racines.</p>` }
+  "k-edl1-sol": { t: "Équation y′ = a(x) y", b: R`<p><b>Cadre</b> : $a$ continue sur l'intervalle $I$, $A' = a$.</p><div class="sbox">$$y' = a(x)y\iff y(x) = C\,e^{A(x)},\quad C\in\mathbb K.$$</div><p><b>Exemple</b> sur $]0,+\infty[$ :</p>$$xy' = \mu y\iff y = Cx^\mu.$$` },
+  "k-libre-fonctions": { t: "Montrer qu'une famille de fonctions est libre", b: R`<p><b>But</b> :</p>$$\sum_kc_kf_k = 0\ \Longrightarrow\ \forall k,\ c_k = 0.$$<p><b>Outils</b> :</p><ul><li>évaluer en des points $x_j$ bien choisis ;</li><li>diviser par une $f_{k_0}$ qui ne s'annule pas, puis $x\to\pm\infty$ ;</li><li>polynôme ayant une infinité de racines $\Rightarrow$ nul.</li></ul>` }
 });
 
 (() => {
@@ -750,10 +750,10 @@ LEMME.exercises([
 
 /* ---------- MP · 6. Réduction (4) ---------- */
 LEMME.rappels({
-  "k-comatrice": { t: "Inverse par la comatrice", b: R`<div class="sbox">$$A^{-1} = \frac1{\det A}\operatorname{Com}(A)^\top.$$</div><p>Les coefficients de $\operatorname{Com}(A)$ sont des déterminants extraits : entiers si $A$ est à coefficients entiers.</p>` },
+  "k-comatrice": { t: "Inverse par la comatrice", b: R`<div class="sbox">$$A\operatorname{Com}(A)^\top = \operatorname{Com}(A)^\top A = \det(A)\,I_n,\qquad A^{-1} = \frac1{\det A}\operatorname{Com}(A)^\top.$$</div>$$A\in\mathcal M_n(\mathbb Z)\ \Longrightarrow\ \operatorname{Com}(A)\in\mathcal M_n(\mathbb Z).$$` },
   "k-puiss-cv": { t: "Puissances d'une matrice diagonalisable", b: R`<p>Si $A = P\operatorname{diag}(\mu_1,\dots,\mu_n)P^{-1}$ avec tous les $|\mu_k|< 1$ :</p><div class="sbox">$$A^k = P\operatorname{diag}(\mu_1^k,\dots,\mu_n^k)P^{-1}\xrightarrow[k\to\infty]{}0.$$</div>` },
-  "k-edl2-cc": { t: "Équation y″ + ω²y = 0 et variantes", b: R`<div class="sbox">$$y'' = -\omega^2y\iff y = a\cos\omega x+b\sin\omega x,\qquad y'' = \omega^2y\iff y = a\operatorname{ch}\omega x+b\operatorname{sh}\omega x.$$</div>` },
-  "k-rec-lin2-c": { t: "Suites récurrentes linéaires d'ordre 2 (indices dans ℤ)", b: R`<p>Les suites $(u_n)_{n\in\mathbb Z}$ telles que $u_{n+1}-2\lambda u_n+u_{n-1} = 0$ forment un espace de dimension $2$ (on choisit $u_0$, $u_1$). Si $r^2-2\lambda r+1$ a deux racines distinctes $r,\frac1r$ :</p><div class="sbox">$$u_n = \alpha r^n+\beta r^{-n}\quad(n\in\mathbb Z).$$</div><p>Racine double $r = \pm1$ : $u_n = (\alpha+\beta n)r^n$.</p>` }
+  "k-edl2-cc": { t: "Équation y″ + ω²y = 0 et variantes", b: R`<div class="sbox">$$\begin{gathered}y'' = -\omega^2y\iff y = a\cos\omega x+b\sin\omega x,\\[4pt]y'' = \omega^2y\iff y = a\operatorname{ch}\omega x+b\operatorname{sh}\omega x.\end{gathered}$$</div>` },
+  "k-rec-lin2-c": { t: "Suites récurrentes linéaires d'ordre 2 (indices dans ℤ)", b: R`<p>$\{(u_n)_{n\in\mathbb Z} : u_{n+1}-2\lambda u_n+u_{n-1} = 0\}$ : espace de dimension $2$ ($u_0,u_1$ libres).</p><p><b>Racines distinctes</b> $r,\frac1r$ de $X^2-2\lambda X+1$ :</p><div class="sbox">$$u_n = \alpha r^n+\beta r^{-n}\quad(n\in\mathbb Z).$$</div><p><b>Racine double</b> $r = \pm1$ :</p>$$u_n = (\alpha+\beta n)r^n.$$` }
 });
 
 (() => {
@@ -820,11 +820,11 @@ LEMME.exercises([
 
 /* ---------- MP · 7. Topologie des EVN (1) ---------- */
 LEMME.rappels({
-  "k-ferme-seq": { t: "Fermé : caractérisation séquentielle", b: R`<div class="sbox">$$F\ \text{fermé}\iff\big(x_n\in F,\ x_n\to x\ \Rightarrow\ x\in F\big).$$</div><p>L'image réciproque d'un fermé par une application continue est fermée ; l'image réciproque d'un ouvert est ouverte.</p>` },
-  "k-compact-seq": { t: "Compacité (Bolzano-Weierstrass)", b: R`<p>$K$ est compact si toute suite de $K$ a une sous-suite qui converge dans $K$. En dimension finie, compact $\iff$ fermé borné.</p><div class="sbox">$$(x_n)\in K^{\mathbb N}\ \Longrightarrow\ \exists\varphi,\ x_{\varphi(n)}\to\ell\in K.$$</div>` },
-  "k-trigo-mat": { t: "Trigonalisation sur ℂ", b: R`<p>Toute matrice de $\mathcal M_n(\mathbb C)$ est semblable à une matrice triangulaire supérieure, dont la diagonale porte les valeurs propres :</p><div class="sbox">$$A = PTP^{-1},\qquad T\ \text{triangulaire},\qquad\operatorname{diag}(T) = (\lambda_1,\dots,\lambda_n).$$</div>` },
-  "k-cpa": { t: "Connexité par arcs", b: R`<p>$A$ est connexe par arcs si deux points de $A$ sont toujours reliés par un chemin continu à valeurs dans $A$. L'image d'un connexe par arcs par une application continue est connexe par arcs ; dans $\mathbb R$, ce sont les intervalles.</p><div class="sbox">$$A\ \text{c.p.a.},\ f\ \text{continue}\ \Longrightarrow\ f(A)\ \text{c.p.a.}$$</div>` },
-  "k-valeur-adh": { t: "Valeur d'adhérence", b: R`<p>$\ell$ est valeur d'adhérence de $(u_n)$ si une sous-suite converge vers $\ell$, ce qui équivaut à :</p><div class="sbox">$$\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\quad|u_n-\ell|< \varepsilon.$$</div><p>(La suite revient près de $\ell$ une infinité de fois.)</p>` }
+  "k-ferme-seq": { t: "Fermé : caractérisation séquentielle", b: R`<div class="sbox">$$F\ \text{fermé}\iff\big(\forall(x_n)\in F^{\mathbb N},\ x_n\to x\ \Rightarrow\ x\in F\big).$$</div><p><b>Images réciproques</b> ($f$ continue) :</p>$$F\text{ fermé}\Rightarrow f^{-1}(F)\text{ fermé},\qquad U\text{ ouvert}\Rightarrow f^{-1}(U)\text{ ouvert}.$$` },
+  "k-compact-seq": { t: "Compacité (Bolzano-Weierstrass)", b: R`<p><b>Définition</b> :</p><div class="sbox">$$K\text{ compact}\iff\forall(x_n)\in K^{\mathbb N},\ \exists\varphi\nearrow,\ x_{\varphi(n)}\to\ell\in K.$$</div><p><b>Dimension finie</b> :</p>$$K\text{ compact}\iff K\text{ fermé borné}.$$` },
+  "k-trigo-mat": { t: "Trigonalisation sur ℂ", b: R`<div class="sbox">$$\forall A\in\mathcal M_n(\mathbb C),\ \exists P\in GL_n(\mathbb C),\quad A = PTP^{-1},\quad T = \begin{pmatrix}\lambda_1&&*\\&\ddots&\\0&&\lambda_n\end{pmatrix}.$$</div>$$\chi_A = \prod_{i=1}^n(X-\lambda_i).$$` },
+  "k-cpa": { t: "Connexité par arcs", b: R`<p><b>Définition</b> :</p>$$A\text{ c.p.a.}\iff\forall a,b\in A,\ \exists\gamma\in\mathcal C^0([0,1],A),\ \gamma(0) = a,\ \gamma(1) = b.$$<div class="sbox">$$A\ \text{c.p.a.},\ f\ \text{continue}\ \Longrightarrow\ f(A)\ \text{c.p.a.}$$</div><p><b>Dans $\mathbb R$</b> : c.p.a. $\iff$ intervalle.</p>` },
+  "k-valeur-adh": { t: "Valeur d'adhérence", b: R`<div class="sbox">$$\begin{aligned}\ell\text{ valeur d'adhérence}&\iff \exists\varphi\nearrow,\ u_{\varphi(n)}\to\ell\\&\iff \forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\ |u_n-\ell|\lt\varepsilon.\end{aligned}$$</div>` }
 });
 
 (() => {
@@ -924,8 +924,8 @@ LEMME.exercises([
 
 /* ---------- MP · 7. Topologie des EVN (2) · 8. Convexité ---------- */
 LEMME.rappels({
-  "k-lin-cont": { t: "Continuité d'une application linéaire", b: R`<p>Pour $f$ linéaire entre espaces normés, il y a équivalence :</p><div class="sbox">$$f\ \text{continue}\iff f\ \text{continue en}\ 0\iff\exists C,\ \forall x,\ \|f(x)\|\leqslant C\|x\|.$$</div><p>En dimension finie (au départ), toute application linéaire est continue.</p>` },
-  "k-riesz": { t: "Compacité et dimension", b: R`$$\dim E\lt\infty\ \Longrightarrow\ B_f(0,1)\text{ compacte};\qquad\dim E = \infty\ \Longrightarrow\ B_f(0,1)\text{ non compacte (Riesz)}.$$` },
+  "k-lin-cont": { t: "Continuité d'une application linéaire", b: R`<p><b>$f$ linéaire entre espaces normés</b> :</p><div class="sbox">$$f\ \text{continue}\iff f\ \text{continue en}\ 0\iff\exists C,\ \forall x,\ \|f(x)\|\leqslant C\|x\|.$$</div>$$\dim E\lt\infty\ \Longrightarrow\ \mathcal L(E,F) = \mathcal L_c(E,F).$$` },
+  "k-riesz": { t: "Compacité et dimension", b: R`$$\begin{gathered}\dim E\lt\infty\ \Longrightarrow\ B_f(0,1)\text{ compacte},\\[4pt]\dim E = \infty\ \Longrightarrow\ B_f(0,1)\text{ non compacte (Riesz)}.\end{gathered}$$` },
   "k-concave-ln": { t: "Concavité du logarithme", b: R`<p>$\ln$ est concave sur $]0,+\infty[$ ($\ln'' = -\frac1{x^2}< 0$) :</p><div class="sbox">$$\alpha\ln u+\beta\ln v\leqslant\ln(\alpha u+\beta v)\qquad(\alpha,\beta\geqslant0,\ \alpha+\beta = 1).$$</div>` }
 });
 
@@ -1041,10 +1041,10 @@ LEMME.exercises([
 
 /* ---------- MP · 9. Endomorphismes des espaces euclidiens (1) ---------- */
 LEMME.rappels({
-  "k-spectral-mat": { t: "Théorème spectral (forme matricielle)", b: R`<div class="sbox">$$A\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ A = P\,\operatorname{diag}(\lambda_1,\dots,\lambda_n)\,P^\top,\quad P\in O_n(\mathbb R).$$</div><p>Les colonnes de $P$ forment une base orthonormée de vecteurs propres.</p>` },
+  "k-spectral-mat": { t: "Théorème spectral (forme matricielle)", b: R`<div class="sbox">$$A\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists P\in O_n(\mathbb R),\ A = P\,\operatorname{diag}(\lambda_1,\dots,\lambda_n)\,P^\top.$$</div>$$P = (C_1|\cdots|C_n),\qquad AC_j = \lambda_jC_j,\qquad(C_i|C_j) = \delta_{ij}.$$` },
   "k-trace-cyc": { t: "Trace d'un produit", b: R`<div class="sbox">$$\operatorname{tr}(AB) = \operatorname{tr}(BA),\qquad\operatorname{tr}(XX^\top M) = X^\top MX.$$</div>` },
   "k-quad-diag": { t: "Forme quadratique dans une base propre", b: R`<p>Si $A = PDP^\top$ et $Y = P^\top X$ :</p><div class="sbox">$$X^\top AX = Y^\top DY = \sum_i\lambda_iy_i^2,\qquad\|Y\| = \|X\|.$$</div>` },
-  "k-interp-poly": { t: "Un polynôme qui prend des valeurs données", b: R`<p>Par interpolation de Lagrange, il existe un polynôme $Q$ avec $Q(\lambda_i) = \mu_i$ pour des $\lambda_i$ distincts. Si $A = P\operatorname{diag}(\lambda_i)P^{-1}$ :</p><div class="sbox">$$Q(A) = P\operatorname{diag}(\mu_i)P^{-1}.$$</div>` }
+  "k-interp-poly": { t: "Un polynôme qui prend des valeurs données", b: R`<p><b>Lagrange</b> : $\lambda_i$ distincts $\Rightarrow\exists Q$, $\forall i$, $Q(\lambda_i) = \mu_i$.</p><div class="sbox">$$A = P\operatorname{diag}(\lambda_i)P^{-1}\ \Longrightarrow\ Q(A) = P\operatorname{diag}(\mu_i)P^{-1}.$$</div>` }
 });
 
 (() => {
@@ -1145,9 +1145,9 @@ LEMME.exercises([
 
 /* ---------- MP · 9. Euclidiens (2) · 10. Calcul différentiel ---------- */
 LEMME.rappels({
-  "k-gs-mat": { t: "Gram-Schmidt en matrices", b: R`<p>Si $(C_1,\dots,C_n)$ est une base et $(D_1,\dots,D_n)$ son orthonormalisée de Gram-Schmidt, alors $C_j\in\operatorname{Vect}(D_1,\dots,D_j)$ et $(D_j|C_j)>0$ :</p><div class="sbox">$$C_j = \sum_{i\leqslant j}(D_i|C_j)\,D_i,\qquad r_{jj} = (D_j|C_j)>0.$$</div>` },
+  "k-gs-mat": { t: "Gram-Schmidt en matrices", b: R`<p>$(C_j)$ base, $(D_j)$ son orthonormalisée de Gram-Schmidt :</p><div class="sbox">$$C_j = \sum_{i\leqslant j}(D_i|C_j)\,D_i,\qquad(D_j|C_j)>0.$$</div>$$C = QR,\qquad Q = (D_1|\cdots|D_n)\in O_n(\mathbb R),\qquad R = \big((D_i|C_j)\big)\ \text{triangulaire},\ r_{jj}>0.$$` },
   "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`$$M\in O_n(\mathbb R)\cap T_n^+\ \Longrightarrow\ M = \operatorname{diag}(\pm1),\qquad m_{ii}>0\ \Longrightarrow\ M = I_n.$$<p>Car $M^{-1} = M^\top$ est à la fois triangulaire inférieure et supérieure.</p>` },
-  "k-det-deriv": { t: "Dérivée de det(Iₙ + tM)", b: R`<p>$\det(I_n+tM)$ est un polynôme en $t$ :</p><div class="sbox">$$\det(I_n+tM) = 1+t\operatorname{tr}(M)+O(t^2).$$</div><p>(Dans le développement en somme sur les permutations, seule l'identité donne des termes de degré $\leqslant1$.)</p>` }
+  "k-det-deriv": { t: "Dérivée de det(Iₙ + tM)", b: R`<div class="sbox">$$\det(I_n+tM) = 1+t\operatorname{tr}(M)+O(t^2)\qquad(t\to0).$$</div><p>Dans $\sum_\sigma\varepsilon(\sigma)\prod_i(I_n+tM)_{\sigma(i),i}$, seul $\sigma = \mathrm{id}$ donne des termes de degré $\leqslant1$ en $t$.</p>` }
 });
 
 (() => {

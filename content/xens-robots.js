@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "rb-lambert": { t: "Fonction W de Lambert", b: R`<p>$x\mapsto xe^x$ est une bijection croissante de $[-1,+\infty[$ sur $[-\frac1e,+\infty[$ ; sa réciproque est la fonction $W$ de Lambert, continue, avec $W(0) = 0$ et $W(y)>0$ pour $y>0$. Ainsi, pour $y>0$, $we^w = y\iff w = W(y)$ (avec $w>-1$).</p>` },
-  "rb-cl": { t: "Cauchy-Lipschitz et sortie de compacts", b: R`<p>Pour $Y' = F(t,Y)$ avec $F$ de classe $\mathcal C^1$ sur un ouvert $\Omega$ de $\mathbb R\times\mathbb R^n$, il existe une unique solution maximale. Si elle est définie sur $[0,t_0[$ avec $t_0\lt\infty$, alors $(t,Y(t))$ sort de tout compact de $\Omega$ quand $t\to t_0$.</p>` }
+  "rb-lambert": { t: "Fonction W de Lambert", b: R`$$x\mapsto xe^x\ :\ [-1,+\infty[\ \to\ \Big[-\frac1e,+\infty\Big[\ \text{bijective},\qquad W = (x\mapsto xe^x)^{-1}.$$<div class="sbox">$$y>0\ :\quad we^w = y\iff w = W(y).$$</div>` },
+  "rb-cl": { t: "Cauchy-Lipschitz et sortie de compacts", b: R`$$\begin{gathered}F\in\mathcal C^1(\Omega)\ \Longrightarrow\ \exists!\text{ solution maximale},\\[4pt]t_0\lt\infty\ \Longrightarrow\ (t,Y(t))\text{ sort de tout compact de }\Omega.\end{gathered}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Le robot $A$ est en $A(t) = (t,0)$. Le robot $S$, en $S(t) = (x(t),y(t))$, part de $(x_0,y_0)\neq(0,0)$ et se déplace à vitesse $1$ en direction de $A$ :</p>$$S'(t) = \frac{A(t)-S(t)}{d(t)},\qquad d(t) = \|A(t)-S(t)\| = \sqrt{(t-x)^2+y^2}.$$<p>On note $d_0 = d(0)$ et $K = d_0-x_0\geqslant0$. On veut montrer que $d(t)\to\frac K2$.</p>`;

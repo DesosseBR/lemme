@@ -4,7 +4,7 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 9, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "m23-dimfinie": { t: "Linéaire en dimension finie", b: R`<p>En dimension finie :</p>$$u\text{ linéaire}\Rightarrow\exists K,\ \|u(x)\|\leqslant K\|x\|;\qquad\exists m,M>0,\ mN_1\leqslant N_2\leqslant MN_1;\qquad S(0,1)\text{ compacte}.$$` },
+  "m23-dimfinie": { t: "Linéaire en dimension finie", b: R`<p>En dimension finie :</p>$$\begin{gathered}u\text{ linéaire}\Rightarrow\exists K,\ \|u(x)\|\leqslant K\|x\|,\\[4pt]\exists m,M>0,\ mN_1\leqslant N_2\leqslant MN_1,\\[4pt]S(0,1)\text{ compacte}.\end{gathered}$$` },
   "m23-noyaux": { t: "Lemme des noyaux et Cayley-Hamilton", b: R`$$\chi_a(a) = 0;\qquad P = P_1\cdots P_r,\ P_i\wedge P_j = 1\ (i\neq j)\ \Longrightarrow\ \ker P(a) = \bigoplus_i\ker P_i(a).$$` },
   "m23-exp": { t: "Exponentielle d'endomorphisme", b: R`$$e^{ta} = \sum_{k\geqslant0}\frac{t^k}{k!}a^k;\qquad ab = ba\Rightarrow e^{a+b} = e^ae^b;\qquad\frac d{dt}e^{ta}x = ae^{ta}x = e^{ta}ax.$$$$y' = a(y),\ y(0) = x_0\iff y(t) = e^{ta}(x_0).$$` }
 });

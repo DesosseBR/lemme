@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 12, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "gr-res": { t: "Théorème des résidus", b: R`<p>Si $f$ est holomorphe sur un voisinage d'un parallélogramme plein $D$ (ou de tout contour simple) privé d'un nombre fini de pôles intérieurs $z_1,\dots,z_m$, et $\gamma$ son bord parcouru dans le sens direct, alors $\int_\gamma f = 2i\pi\sum_k\mathrm{Res}_{z_k}(f)$.</p>` },
-  "gr-pole": { t: "Résidu d'un pôle simple", b: R`<p>Si $f = \frac hg$ avec $h,g$ holomorphes près de $z_0$, $g(z_0) = 0$ et $g'(z_0)\neq0$, alors $z_0$ est un pôle d'ordre au plus $1$ et $\mathrm{Res}_{z_0}(f) = \frac{h(z_0)}{g'(z_0)}$.</p>` },
+  "gr-res": { t: "Théorème des résidus", b: R`$$\int_\gamma f = 2i\pi\sum_{k = 1}^m\operatorname{Res}_{z_k}(f).$$` },
+  "gr-pole": { t: "Résidu d'un pôle simple", b: R`$$f = \frac hg,\ g(z_0) = 0,\ g'(z_0)\neq0\ \Longrightarrow\ \operatorname{Res}_{z_0}(f) = \frac{h(z_0)}{g'(z_0)}.$$` },
   "gr-exp": { t: "Zéros de l'exponentielle complexe", b: R`<p>$e^w = e^{w'}\iff w-w'\in2i\pi\mathbb Z$. En particulier $e^w = -1\iff w\in i\pi+2i\pi\mathbb Z$. Et $|e^w| = e^{\mathrm{Re}\,w}$.</p>` }
 });
 

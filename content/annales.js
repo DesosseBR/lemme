@@ -67,19 +67,19 @@ LEMME.subject({
 });
 
 LEMME.rappels({
-  "an-binome": { t: "Binôme de Newton et symétrie", b: R`<div class="sbox">$$\sum_{k=0}^{m}\binom mk = (1+1)^m = 2^m,\qquad\binom mk = \binom m{m-k}.$$</div><p>Tous les termes sont des entiers $\geqslant1$. Le coefficient central $\binom{2n}n$ est le plus grand de la ligne $2n$.</p>` },
+  "an-binome": { t: "Binôme de Newton et symétrie", b: R`<div class="sbox">$$\sum_{k=0}^{m}\binom mk = (1+1)^m = 2^m,\qquad\binom mk = \binom m{m-k}.$$</div>$$\forall k\in[\![0,m]\!],\quad\binom mk\in\mathbb N^*,\qquad\max_{0\leqslant k\leqslant2n}\binom{2n}k = \binom{2n}n.$$` },
   "an-euclide": { t: "Lemme d'Euclide", b: R`$$p\text{ premier},\ p\mid ab\ \Longrightarrow\ p\mid a\text{ ou }p\mid b.$$$$p_1,\dots,p_m\text{ premiers distincts},\ \forall i,\ p_i\mid N\ \Longrightarrow\ p_1\cdots p_m\mid N.$$` },
   "an-rec-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(1)\\&\forall n,\ \big(P(1)\wedge\dots\wedge P(n)\big)\Rightarrow P(n+1)\end{aligned}\right.\quad\Longrightarrow\quad\forall n\geqslant1,\ P(n).$$<p>Utile si $P(n+1)$ découle d'un rang comme $\frac n2$.</p>` },
   "an-pe": { t: "Partie entière", b: R`<div class="sbox">$$\lfloor x\rfloor\in\mathbb Z,\qquad x-1< \lfloor x\rfloor\leqslant x.$$</div><p>Pour $m\in\mathbb N^*$ et $n\in\mathbb N$, le nombre de multiples de $m$ dans $\{1,\dots,n\}$ vaut $\left\lfloor\frac nm\right\rfloor$.</p>` },
-  "an-valuation": { t: "Valuation p-adique", b: R`<p>$v_p(n)$ est l'exposant de $p$ dans la décomposition de $n$ en facteurs premiers : $n = \prod_{p}p^{v_p(n)}$.</p><div class="sbox">$$v_p(ab) = v_p(a)+v_p(b),\qquad p^k\mid n\iff k\leqslant v_p(n).$$</div>` },
+  "an-valuation": { t: "Valuation p-adique", b: R`$$n = \prod_{p\ \text{premier}}p^{v_p(n)}.$$<div class="sbox">$$v_p(ab) = v_p(a)+v_p(b),\qquad p^k\mid n\iff k\leqslant v_p(n).$$</div>` },
   "an-etude-fonction": { t: "Étude de fonction", b: R`$$h = f-g,\qquad\min h>0\ \Longrightarrow\ f>g.$$<p>Étudier le signe de $h'$, en déduire le minimum de $h$.</p>` },
   "an-sous-groupes": { t: "Sous-groupes (idéaux) de ℤ", b: R`$$H\text{ sous-groupe de }(\mathbb Z,+)\ \Longrightarrow\ \exists!\,d\in\mathbb N,\ H = d\mathbb Z.$$` },
-  "an-equiv": { t: "Équivalents", b: R`<p>$u_n\sim v_n$ (avec $v_n>0$) signifie $\frac{u_n}{v_n}\to1$. Donc, pour tout $\varepsilon>0$, à partir d'un certain rang :</p><div class="sbox">$$(1-\varepsilon)v_n\leqslant u_n\leqslant(1+\varepsilon)v_n.$$</div>` },
+  "an-equiv": { t: "Équivalents", b: R`<p><b>Définition</b> ($v_n>0$) :</p>$$u_n\sim v_n\iff\frac{u_n}{v_n}\xrightarrow[n\to+\infty]{}1.$$<p><b>Conséquence</b> :</p><div class="sbox">$$\forall\varepsilon>0,\ \exists N,\ \forall n\geqslant N,\quad(1-\varepsilon)v_n\leqslant u_n\leqslant(1+\varepsilon)v_n.$$</div>` },
   "an-geo": { t: "Série géométrique", b: R`<p>Pour $|q|< 1$ :</p><div class="sbox">$$\sum_{k=0}^{+\infty}q^k = \frac1{1-q},\qquad\sum_{k=m}^{+\infty}q^k = \frac{q^m}{1-q}.$$</div>` },
   "an-comparaison": { t: "Comparaison de séries positives", b: R`$$0\leqslant u_n\leqslant v_n,\ \sum v_n\text{ CV}\ \Longrightarrow\ \sum u_n\text{ CV};\qquad\sum\frac1{n^a}\text{ CV}\iff a>1.$$` },
   "an-integrable": { t: "Intégrabilité", b: R`$$f\in\mathcal C([a,b])\ \Longrightarrow\ f\text{ intégrable};\qquad0\leqslant f\leqslant g,\ g\text{ intégrable}\ \Longrightarrow\ f\text{ intégrable}.$$` },
   "an-terme-a-terme": { t: "Intégration terme à terme", b: R`<p><b>Segment</b> :</p>$$\sum g_k\text{ CVU sur }[a,b]\ \Longrightarrow\ \int_a^b\sum g_k = \sum\int_a^bg_k.$$<p><b>Intervalle quelconque</b>, $g_k\geqslant0$ continues, somme continue :</p>$$\int_I\sum g_k = \sum\int_Ig_k\quad\text{dans }[0,+\infty].$$` },
-  "an-telesc": { t: "Télescopage", b: R`<div class="sbox">$$\sum_{k=0}^{N}(a_k-a_{k+1}) = a_0-a_{N+1}.$$</div><p>Avec des sommes décalées, on réindexe pour voir quels termes se compensent.</p>` },
+  "an-telesc": { t: "Télescopage", b: R`<div class="sbox">$$\sum_{k=0}^{N}(a_k-a_{k+1}) = a_0-a_{N+1}.$$</div><p><b>Sommes décalées</b> : réindexer, par exemple</p>$$\sum_{k=0}^Na_{k+1} = \sum_{k=1}^{N+1}a_k.$$` },
   "an-derivee-n": { t: "Dérivée k-ième d'une puissance", b: R`<div class="sbox">$$\big(x^m\big)^{(k)} = \frac{m!}{(m-k)!}x^{m-k}\ \ (k\leqslant m),\qquad\big(x^m\big)^{(k)} = 0\ \ (k>m).$$</div>` },
   "an-ipp": { t: "Intégration par parties", b: R`<div class="sbox">$$\int_0^1u'v = \big[uv\big]_0^1-\int_0^1uv'.$$</div><p>Si $u$ s'annule en $0$ et en $1$, le crochet disparaît.</p>` },
   "an-amgm": { t: "Inégalité arithmético-géométrique", b: R`<p>Pour $x,y\geqslant0$ : $(\sqrt x-\sqrt y)^2\geqslant0$ donne</p><div class="sbox">$$x+y\geqslant2\sqrt{xy}.$$</div>` },
@@ -413,7 +413,7 @@ LEMME.exercises([
 })();
 LEMME.rappels({
   "m2-spectral": { t: "Théorème spectral", b: R`$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists P\in O_n(\mathbb R),\ \exists D\text{ diagonale réelle},\quad S = PDP^{\mathsf T}.$$` },
-  "m2-ps": { t: "Produit scalaire et forme quadratique", b: R`$$\langle Sx,x\rangle = x^{\mathsf T}Sx = \sum_{i,j}S(i,j)\,x_ix_j;\qquad(v_i)\text{ orthonormée},\ x = \sum\alpha_iv_i\ \Longrightarrow\ \|x\|^2 = \sum\alpha_i^2.$$` },
+  "m2-ps": { t: "Produit scalaire et forme quadratique", b: R`$$\begin{gathered}\langle Sx,x\rangle = x^{\mathsf T}Sx = \sum_{i,j}S(i,j)\,x_ix_j,\\[4pt](v_i)\text{ orthonormée},\ x = \sum\alpha_iv_i\ \Longrightarrow\ \|x\|^2 = \sum\alpha_i^2.\end{gathered}$$` },
   "m2-orth": { t: "Matrice orthogonale", b: R`$$Q^{\mathsf T}Q = I_n\iff\text{colonnes orthonormées}\ \Longrightarrow\ \|Qx\| = \|x\|,\quad\operatorname{Sp}_{\mathbb R}(Q)\subset\{-1,1\}.$$` },
   "m2-annul": { t: "Polynôme annulateur", b: R`$$P(M) = 0,\ Mv = \lambda v,\ v\neq0\ \Longrightarrow\ 0 = P(M)v = P(\lambda)v\ \Longrightarrow\ P(\lambda) = 0.$$` },
   "m2-euler": { t: "Formules d'Euler et somme géométrique", b: R`<div class="sbox">$$\cos\theta = \operatorname{Re}(e^{i\theta}),\qquad\sum_{k=0}^{N-1}q^k = \frac{q^N-1}{q-1}\ (q\neq1),\qquad e^{ia}-e^{-ia} = 2i\sin a.$$</div>` },
@@ -777,7 +777,7 @@ LEMME.rappels({
   "x-noyaux": { t: "Lemme des noyaux", b: R`$$P\wedge Q = 1\ \Longrightarrow\ \ker(PQ)(f) = \ker P(f)\oplus\ker Q(f).$$$$\chi_f = PQ,\ P\wedge Q = 1\ \overset{\text{C.-H.}}\Longrightarrow\ E = \ker P(f)\oplus\ker Q(f).$$` },
   "x-proj": { t: "Projecteurs", b: R`<p>$p$ est un projecteur si $p\circ p = p$. Alors $E = \operatorname{Im}p\oplus\ker p$, et $\operatorname{Im}p = \{x : p(x) = x\}$.</p>` },
   "x-commute": { t: "Endomorphismes qui commutent", b: R`<p>Si $f\circ g = g\circ f$, alors $\ker f$ et $\operatorname{Im}f$ sont stables par $g$ : si $f(x) = 0$, alors $f(g(x)) = g(f(x)) = 0$.</p>` },
-  "x-passage": { t: "Changement de base", b: R`<p>Si $A$ est la matrice de $\alpha$ dans les bases $(e,f)$, et $P_e = \operatorname{Pass}(e,e')$, $P_f = \operatorname{Pass}(f,f')$, alors la matrice de $\alpha$ dans $(e',f')$ est</p><div class="sbox">$$A' = P_f^{-1}\,A\,P_e.$$</div>` }
+  "x-passage": { t: "Changement de base", b: R`<p><b>Notations</b> : $A = \operatorname{Mat}_{e,f}(\alpha)$, $P_e = \operatorname{Pass}(e,e')$, $P_f = \operatorname{Pass}(f,f')$.</p><div class="sbox">$$\operatorname{Mat}_{e',f'}(\alpha) = A' = P_f^{-1}\,A\,P_e.$$</div>` }
 });
 
 LEMME.exercises([
@@ -1099,12 +1099,12 @@ LEMME.exercises([
 }
 ]);
 LEMME.rappels({
-  "g-leibniz": { t: "Déterminant par les permutations", b: R`<div class="sbox">$$\det(B) = \sum_{\sigma\in\mathcal S_n}\varepsilon(\sigma)\prod_{i=1}^nb_{\sigma(i),i}.$$</div><p>Une transposition a pour signature $-1$. Une permutation qui n'est pas l'identité déplace au moins deux éléments : elle a au plus $n-2$ points fixes.</p>` },
+  "g-leibniz": { t: "Déterminant par les permutations", b: R`<div class="sbox">$$\det(B) = \sum_{\sigma\in\mathcal S_n}\varepsilon(\sigma)\prod_{i=1}^nb_{\sigma(i),i}.$$</div>$$\varepsilon(\tau) = -1\ \text{pour une transposition }\tau,\qquad\sigma\neq\mathrm{id}\ \Longrightarrow\ \big|\{i : \sigma(i) = i\}\big|\leqslant n-2.$$` },
   "g-lin-ligne": { t: "Linéarité par rapport à une ligne", b: R`$$L_1 = L'+L''\ \Longrightarrow\ \det\begin{pmatrix}L_1\\L_2\\\vdots\end{pmatrix} = \det\begin{pmatrix}L'\\L_2\\\vdots\end{pmatrix}+\det\begin{pmatrix}L''\\L_2\\\vdots\end{pmatrix}.$$` },
-  "g-dev": { t: "Développement suivant une ligne", b: R`<div class="sbox">$$\det B = \sum_{j=1}^n(-1)^{i+j}b_{i,j}\,\Delta_{i,j},$$</div><p>où $\Delta_{i,j}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$. Si la ligne $i$ n'a qu'un coefficient non nul, il ne reste qu'un terme.</p>` },
+  "g-dev": { t: "Développement suivant une ligne", b: R`<div class="sbox">$$\det B = \sum_{j=1}^n(-1)^{i+j}b_{i,j}\,\Delta_{i,j}\qquad(\text{ligne }i),$$</div><p>$\Delta_{i,j}$ : déterminant extrait, sans ligne $i$ ni colonne $j$.</p>$$b_{i,j} = 0\ \text{pour }j\neq j_0\ \Longrightarrow\ \det B = (-1)^{i+j_0}b_{i,j_0}\Delta_{i,j_0}.$$` },
   "g-bloc-tri": { t: "Déterminant triangulaire par blocs", b: R`<div class="sbox">$$\det\begin{pmatrix}A&C\\0&D\end{pmatrix} = \det\begin{pmatrix}A&0\\C'&D\end{pmatrix} = \det A\cdot\det D\quad(A,D\ \text{carrées}).$$</div>` },
   "g-indep": { t: "Indépendance", b: R`$$Y_1,\dots,Y_m\text{ indépendantes}\ \Longrightarrow\ P\Big(\bigcap_k(Y_k\in B_k)\Big) = \prod_kP(Y_k\in B_k).$$<p>Coalitions : fonctions de paquets disjoints $\Rightarrow$ indépendantes.</p>` },
-  "g-binom": { t: "Loi binomiale", b: R`<p>Une somme de $N$ variables de Bernoulli indépendantes de paramètre $p$ suit la loi $\mathcal B(N,p)$ :</p><div class="sbox">$$P(Y = k) = \binom Nkp^k(1-p)^{N-k},\qquad E(Y) = Np,\qquad V(Y) = Np(1-p).$$</div>` },
+  "g-binom": { t: "Loi binomiale", b: R`<div class="sbox">$$Y = \sum_{i=1}^NX_i,\ X_i\sim\mathcal B(p)\ \text{indépendantes}\ \Longrightarrow\ Y\sim\mathcal B(N,p).$$</div>$$P(Y = k) = \binom Nkp^k(1-p)^{N-k},\qquad E(Y) = Np,\qquad V(Y) = Np(1-p).$$` },
   "g-tcheb": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance, pour tout $\varepsilon>0$ :</p><div class="sbox">$$P\big(|X-E(X)|\geqslant\varepsilon\big)\leqslant\frac{V(X)}{\varepsilon^2}.$$</div>` },
   "g-huygens": { t: "Formule de König-Huygens", b: R`<div class="sbox">$$V(X) = E(X^2)-E(X)^2.$$</div>` },
   "g-indic": { t: "Indicatrices", b: R`$$\mathbf 1_A\mathbf 1_B = \mathbf 1_{A\cap B},\qquad E(\mathbf 1_A) = P(A),\qquad X\sim\mathcal B(p)\Rightarrow X = \mathbf 1_{(X = 1)}.$$` }

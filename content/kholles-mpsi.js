@@ -53,12 +53,12 @@ window.__LA.NL = NL;
 })();
 
 LEMME.rappels({
-  "k-pe": { t: "Caractériser une partie entière", b: R`<p>Pour montrer que $\lfloor y\rfloor = m$, il suffit de montrer deux choses : $m$ est un <b>entier</b>, et</p><div class="sbox">$$m\leqslant y< m+1.$$</div><p>Et si $N$ est un entier avec $N\leqslant y$, alors $N\leqslant\lfloor y\rfloor$ (la partie entière est le plus grand entier inférieur ou égal à $y$).</p><p><b>Exemple :</b> $\lfloor\pi\rfloor = 3$ car $3\leqslant\pi< 4$. <b>Attention :</b> $\lfloor-0{,}5\rfloor = -1$, pas $0$.</p>` },
-  "k-dense": { t: "Partie dense", b: R`<div class="sbox">$$A\text{ dense dans }I\iff\forall x\in I,\ \forall\varepsilon>0,\ \exists a\in A,\ |x-a|\leqslant\varepsilon\iff\forall x\in I,\ \exists(a_n)\in A^{\mathbb N},\ a_n\to x.$$</div><p>$\mathbb Q$ dense dans $\mathbb R$ ; $\mathbb Z$ non : $\forall k\in\mathbb Z$, $|k-\frac12|\geqslant\frac12$.</p>` },
-  "k-grille": { t: "Les multiples d'un petit nombre", b: R`<p>Si $0< \delta\leqslant\varepsilon$, les multiples $k\delta$ ($k\in\mathbb Z$) forment une grille de pas $\delta$. Pour tout réel $x$, avec $k = \lfloor x/\delta\rfloor$ :</p><div class="sbox">$$k\delta\leqslant x< (k+1)\delta,\qquad\text{donc}\qquad0\leqslant x-k\delta< \delta\leqslant\varepsilon.$$</div><p>Tout réel est donc à moins de $\varepsilon$ d'un multiple de $\delta$.</p>` },
+  "k-pe": { t: "Caractériser une partie entière", b: R`<div class="sbox">$$\lfloor y\rfloor = m\iff m\in\mathbb Z\ \wedge\ m\leqslant y\lt m+1.$$</div>$$N\in\mathbb Z,\ N\leqslant y\ \Longrightarrow\ N\leqslant\lfloor y\rfloor.$$<ul><li>$3\leqslant\pi\lt4\Rightarrow\lfloor\pi\rfloor = 3$ ;</li><li>$\lfloor-0{,}5\rfloor = -1$.</li></ul>` },
+  "k-dense": { t: "Partie dense", b: R`<div class="sbox">$$\begin{aligned}A\text{ dense dans }I&\iff \forall x\in I,\ \forall\varepsilon>0,\ \exists a\in A,\ |x-a|\leqslant\varepsilon\\&\iff \forall x\in I,\ \exists(a_n)\in A^{\mathbb N},\ a_n\to x.\end{aligned}$$</div><p>$\mathbb Q$ dense dans $\mathbb R$ ; $\mathbb Z$ non : $\forall k\in\mathbb Z$, $|k-\frac12|\geqslant\frac12$.</p>` },
+  "k-grille": { t: "Les multiples d'un petit nombre", b: R`<p>$0\lt\delta\leqslant\varepsilon$, $x\in\mathbb R$, $k = \lfloor x/\delta\rfloor$ :</p><div class="sbox">$$k\delta\leqslant x\lt(k+1)\delta\ \Longrightarrow\ 0\leqslant x-k\delta\lt\delta\leqslant\varepsilon.$$</div>$$\forall x\in\mathbb R,\ \exists k\in\mathbb Z,\quad|x-k\delta|\lt\varepsilon.$$` },
   "k-lip-sin": { t: "Sinus et cosinus sont 1-lipschitziennes", b: R`<p>Par l'inégalité des accroissements finis ($|\sin'| = |\cos|\leqslant1$) :</p><div class="sbox">$$\forall a,b\in\mathbb R,\quad|\sin a-\sin b|\leqslant|a-b|,\qquad|\cos a-\cos b|\leqslant|a-b|.$$</div>` },
-  "k-sous-groupe": { t: "Sous-groupe", b: R`<p>$G\subset\mathbb R$ est un sous-groupe de $(\mathbb R,+)$ si $0\in G$ et si, pour tous $x,y\in G$, $x-y\in G$.</p><div class="sbox">$$x,y\in G\ \Longrightarrow\ x-y\in G,\quad x+y\in G,\quad kx\in G\ (k\in\mathbb Z).$$</div><p><b>Exemples :</b> $\mathbb Z$, $3\mathbb Z$, $\mathbb Q$, $\mathbb Z+\sqrt2\,\mathbb Z$. <b>Contre-exemple :</b> $\mathbb N$ (il manque $-1$).</p>` },
-  "k-borne-inf": { t: "Borne inférieure", b: R`<p>Toute partie non vide et minorée de $\mathbb R$ admet une borne inférieure $a$, caractérisée par :</p><div class="sbox">$$\forall x\in X,\ a\leqslant x\qquad\text{et}\qquad\forall\varepsilon>0,\ \exists x\in X,\ x< a+\varepsilon.$$</div><p>Elle n'est pas forcément atteinte : $\inf\,]0,1] = 0\notin\,]0,1]$.</p>` },
+  "k-sous-groupe": { t: "Sous-groupe", b: R`<div class="sbox">$$G\leqslant(\mathbb R,+)\iff0\in G\ \wedge\ \forall x,y\in G,\ x-y\in G.$$</div>$$\Longrightarrow\ x+y\in G,\quad kx\in G\ (k\in\mathbb Z).$$<ul><li><b>Exemples</b> : $\mathbb Z$, $3\mathbb Z$, $\mathbb Q$, $\mathbb Z+\sqrt2\,\mathbb Z$ ;</li><li><b>Contre-exemple</b> : $\mathbb N$, car $-1\notin\mathbb N$.</li></ul>` },
+  "k-borne-inf": { t: "Borne inférieure", b: R`$$X\subset\mathbb R,\ X\neq\emptyset,\ X\text{ minorée}\ \Longrightarrow\ \inf X\text{ existe}.$$<div class="sbox">$$a = \inf X\iff\left\{\begin{aligned}&\forall x\in X,\ a\leqslant x,\\&\forall\varepsilon>0,\ \exists x\in X,\ x\lt a+\varepsilon.\end{aligned}\right.$$</div>$$\inf\,]0,1] = 0\notin\,]0,1].$$` },
   "k-limite-suite": { t: "Définition d'une limite", b: R`<div class="sbox">$$u_n\to\ell\iff\forall\varepsilon>0,\ \exists N,\ \forall n\geqslant N,\ |u_n-\ell|< \varepsilon.$$</div><div class="sbox">$$u_n\to+\infty\iff\forall A,\ \exists N,\ \forall n\geqslant N,\ u_n\geqslant A.$$</div>` }
 });
 
@@ -206,13 +206,13 @@ LEMME.exercises([
 
 /* ---------- MPSI · 2. Complexes · 3. Rolle ---------- */
 LEMME.rappels({
-  "k-somme-geo": { t: "Somme géométrique", b: R`<p>Pour $q\neq1$ (réel ou complexe) :</p><div class="sbox">$$\sum_{k=0}^{n-1}q^k = \frac{1-q^n}{1-q},\qquad\sum_{k=1}^{n}q^k = q\,\frac{1-q^n}{1-q}.$$</div><p>Pour $q = 1$, la somme vaut le nombre de termes.</p>` },
-  "k-moitie": { t: "Technique de l'angle moitié", b: R`<p>On factorise par l'exponentielle de l'angle moyen :</p><div class="sbox">$$1-e^{i\theta} = e^{i\theta/2}\big(e^{-i\theta/2}-e^{i\theta/2}\big) = -2i\sin\frac\theta2\,e^{i\theta/2}.$$</div><p>Donc $|1-e^{i\theta}| = 2\left|\sin\frac\theta2\right|$. De même $1+e^{i\theta} = 2\cos\frac\theta2\,e^{i\theta/2}$.</p>` },
-  "k-poly-racines-unite": { t: "Factorisation de Xⁿ − 1", b: R`<p>Avec $\omega = e^{2i\pi/n}$, les racines de $X^n-1$ sont $1,\omega,\dots,\omega^{n-1}$, toutes simples :</p><div class="sbox">$$X^n-1 = \prod_{k=0}^{n-1}(X-\omega^k),\qquad1+X+\dots+X^{n-1} = \prod_{k=1}^{n-1}(X-\omega^k).$$</div>` },
+  "k-somme-geo": { t: "Somme géométrique", b: R`<div class="sbox">$$q\neq1:\qquad\sum_{k=0}^{n-1}q^k = \frac{1-q^n}{1-q},\qquad\sum_{k=1}^{n}q^k = q\,\frac{1-q^n}{1-q}.$$</div>$$q = 1:\qquad\sum_{k=0}^{n-1}q^k = n.$$` },
+  "k-moitie": { t: "Technique de l'angle moitié", b: R`<div class="sbox">$$1-e^{i\theta} = -2i\sin\frac\theta2\,e^{i\theta/2},\qquad1+e^{i\theta} = 2\cos\frac\theta2\,e^{i\theta/2}.$$</div>$$|1-e^{i\theta}| = 2\Big|\sin\frac\theta2\Big|,\qquad e^{ia}+e^{ib} = 2\cos\frac{a-b}2\,e^{i(a+b)/2}.$$` },
+  "k-poly-racines-unite": { t: "Factorisation de Xⁿ − 1", b: R`<p>$\omega = e^{2i\pi/n}$ :</p><div class="sbox">$$X^n-1 = \prod_{k=0}^{n-1}(X-\omega^k),\qquad1+X+\dots+X^{n-1} = \prod_{k=1}^{n-1}(X-\omega^k).$$</div>` },
   "k-module": { t: "Module d'un complexe", b: R`<div class="sbox">$$|z|^2 = z\bar z,\qquad|z+w|^2 = |z|^2+|w|^2+2\operatorname{Re}(z\bar w).$$</div><p>Pour $|z| = 1$ : $\bar z = \dfrac1z$.</p>` },
-  "k-rolle": { t: "Théorème de Rolle", b: R`<p>Si $f$ est continue sur $[a,b]$, dérivable sur $]a,b[$, et $f(a) = f(b)$ :</p><div class="sbox">$$\exists c\in\,]a,b[,\quad f'(c) = 0.$$</div><p><b>Contre-exemple</b> si $f$ n'est pas dérivable : $f(x) = |x|$ sur $[-1,1]$, sa dérivée n'est jamais nulle.</p>` },
+  "k-rolle": { t: "Théorème de Rolle", b: R`<div class="sbox">$$f\in\mathcal C^0([a,b])\cap\mathcal D(]a,b[),\ f(a) = f(b)\ \Longrightarrow\ \exists c\in\,]a,b[,\ f'(c) = 0.$$</div><p><b>Contre-exemple</b> (non dérivable) :</p>$$f(x) = |x|\text{ sur }[-1,1],\qquad f'(x) = \pm1\neq0.$$` },
   "k-multiplicite": { t: "Racine multiple et dérivée", b: R`<p>$x_0$ est racine de multiplicité $m\geqslant1$ de $P$ si et seulement si $P(x_0) = P'(x_0) = \dots = P^{(m-1)}(x_0) = 0$ et $P^{(m)}(x_0)\neq0$.</p><div class="sbox">$$x_0\ \text{racine d'ordre}\ m\ \text{de}\ P\ \Longrightarrow\ x_0\ \text{racine d'ordre}\ m-1\ \text{de}\ P'.$$</div>` },
-  "k-scinde": { t: "Polynôme scindé", b: R`<p>$P$ de degré $n$ est scindé sur $\mathbb R$ s'il s'écrit $P = c\prod_{i}(X-x_i)^{m_i}$ avec les $x_i$ réels, ce qui équivaut à :</p><div class="sbox">$$\text{somme des multiplicités des racines réelles} = \deg P.$$</div><p><b>Exemple :</b> $X^3-X$ est scindé. <b>Contre-exemple :</b> $X^2+1$ ne l'est pas sur $\mathbb R$.</p>` }
+  "k-scinde": { t: "Polynôme scindé", b: R`<div class="sbox">$$P\text{ scindé sur }\mathbb R\iff P = c\prod_{i}(X-x_i)^{m_i},\ x_i\in\mathbb R\iff\sum_im_i = \deg P.$$</div><ul><li>$X^3-X = X(X-1)(X+1)$ : scindé ;</li><li>$X^2+1$ : non scindé sur $\mathbb R$.</li></ul>` }
 });
 
 (() => {
@@ -316,14 +316,14 @@ LEMME.exercises([
 
 /* ---------- MPSI · 4. Polynômes (1) ---------- */
 LEMME.rappels({
-  "k-base-echelonnee": { t: "Famille échelonnée en degré", b: R`<p>Si $\deg P_k = k$ pour $k = 0,\dots,n$, alors $(P_0,\dots,P_n)$ est une base de $\mathbb K_n[X]$.</p><div class="sbox">$$\deg P_k = k\ (0\leqslant k\leqslant n)\ \Longrightarrow\ (P_0,\dots,P_n)\ \text{base de}\ \mathbb K_n[X].$$</div><p>Elle est libre (le terme de plus haut degré ne peut pas se compenser) et compte $n+1 = \dim\mathbb K_n[X]$ vecteurs.</p>` },
-  "k-binom-def": { t: "Coefficient binomial", b: R`<div class="sbox">$$\binom kn = \frac{k(k-1)\cdots(k-n+1)}{n!} = \frac{k!}{n!\,(k-n)!}\quad(0\leqslant n\leqslant k),$$</div><p>et c'est un <b>entier</b> : le nombre de parties à $n$ éléments d'un ensemble à $k$ éléments. Pour $n>k$, il vaut $0$. Relation de Pascal : $\binom{k}{n}+\binom{k}{n+1} = \binom{k+1}{n+1}$.</p>` },
+  "k-base-echelonnee": { t: "Famille échelonnée en degré", b: R`<div class="sbox">$$\deg P_k = k\ (0\leqslant k\leqslant n)\ \Longrightarrow\ (P_0,\dots,P_n)\ \text{base de}\ \mathbb K_n[X].$$</div>$$\text{libre (plus haut degré)},\qquad n+1 = \dim\mathbb K_n[X].$$` },
+  "k-binom-def": { t: "Coefficient binomial", b: R`<div class="sbox">$$\binom kn = \frac{k(k-1)\cdots(k-n+1)}{n!} = \frac{k!}{n!\,(k-n)!}\in\mathbb N\quad(0\leqslant n\leqslant k).$$</div>$$\binom kn = \big|\{A\subset[\![1,k]\!] : |A| = n\}\big|,\qquad n>k\Rightarrow\binom kn = 0,$$$$\binom{k}{n}+\binom{k}{n+1} = \binom{k+1}{n+1}.$$` },
   "k-leibniz": { t: "Formule de Leibniz", b: R`<div class="sbox">$$(fg)^{(n)} = \sum_{k=0}^n\binom nk f^{(k)}g^{(n-k)}.$$</div><p>Utile pour dériver $n$ fois un produit comme $(X-1)^n(X+1)^n$.</p>` },
   "k-ipp": { t: "Intégration par parties", b: R`<p>Pour $u,v$ de classe $\mathcal C^1$ sur $[a,b]$ :</p><div class="sbox">$$\int_a^bu'v = \big[uv\big]_a^b-\int_a^buv'.$$</div>` },
-  "k-signe-integrale": { t: "Intégrale d'une fonction de signe constant", b: R`<p>Si $h$ est continue sur $[a,b]$ ($a< b$), de signe constant et non identiquement nulle, alors</p><div class="sbox">$$\int_a^bh\neq0.$$</div><p>Car une fonction continue positive d'intégrale nulle est nulle.</p>` },
+  "k-signe-integrale": { t: "Intégrale d'une fonction de signe constant", b: R`<div class="sbox">$$h\in\mathcal C^0([a,b]),\ h\geqslant0,\ h\neq0\ \Longrightarrow\ \int_a^bh>0.$$</div><p><b>Équivalent</b> :</p>$$h\in\mathcal C^0,\ h\geqslant0,\ \int_a^bh = 0\ \Longrightarrow\ h = 0.$$` },
   "k-cos-somme": { t: "Somme de deux cosinus", b: R`<div class="sbox">$$\cos(a+b)+\cos(a-b) = 2\cos a\cos b.$$</div><p>On l'obtient en ajoutant $\cos(a\pm b) = \cos a\cos b\mp\sin a\sin b$.</p>` },
-  "k-poly-egaux": { t: "Polynômes égaux sur un ensemble infini", b: R`<p>Un polynôme non nul de degré $\leqslant n$ a au plus $n$ racines. Donc :</p><div class="sbox">$$P(x) = Q(x)\ \text{pour une infinité de}\ x\ \Longrightarrow\ P = Q.$$</div><p><b>Exemple :</b> si $P(\cos\theta) = Q(\cos\theta)$ pour tout $\theta$, alors $P = Q$ sur $[-1,1]$, qui est infini.</p>` },
-  "k-tvi": { t: "Théorème des valeurs intermédiaires", b: R`<p>Si $f$ est continue sur $[a,b]$ et si $f(a)$ et $f(b)$ sont de signes stricts opposés :</p><div class="sbox">$$\exists c\in\,]a,b[,\quad f(c) = 0.$$</div>` }
+  "k-poly-egaux": { t: "Polynômes égaux sur un ensemble infini", b: R`$$P\neq0,\ \deg P\leqslant n\ \Longrightarrow\ |\{x : P(x) = 0\}|\leqslant n.$$<div class="sbox">$$\big|\{x : P(x) = Q(x)\}\big| = +\infty\ \Longrightarrow\ P = Q.$$</div><p><b>Exemple</b> :</p>$$\forall\theta,\ P(\cos\theta) = Q(\cos\theta)\ \Longrightarrow\ P = Q\text{ sur }[-1,1]\ \Longrightarrow\ P = Q.$$` },
+  "k-tvi": { t: "Théorème des valeurs intermédiaires", b: R`<div class="sbox">$$f\in\mathcal C^0([a,b]),\ f(a)f(b)\lt0\ \Longrightarrow\ \exists c\in\,]a,b[,\ f(c) = 0.$$</div>` }
 });
 
 (() => {
@@ -415,8 +415,8 @@ LEMME.exercises([
 LEMME.rappels({
   "k-pythagore": { t: "Théorème de Pythagore", b: R`<div class="sbox">$$x\perp y\ \Longrightarrow\ \|x+y\|^2 = \|x\|^2+\|y\|^2.$$</div><p>Conséquence : si $x\perp y$, alors $\|x+y\|\geqslant\|x\|$, avec égalité si et seulement si $y = 0$.</p>` },
   "k-ps-def": { t: "Montrer qu'on a un produit scalaire", b: R`$$\langle\cdot,\cdot\rangle\text{ produit scalaire}\iff\left\{\begin{aligned}&\text{bilinéaire},\\&\langle P,Q\rangle = \langle Q,P\rangle,\\&\langle P,P\rangle\geqslant0,\\&\langle P,P\rangle = 0\Rightarrow P = 0.\end{aligned}\right.$$<p>Défini (intégrale) : $g$ continue $\geqslant0$, $\int g = 0\Rightarrow g = 0$, puis infinité de racines $\Rightarrow P = 0$.</p>` },
-  "k-convexe-comb": { t: "Combinaison convexe", b: R`<p>Le point $z = \sum_k\mu_k\alpha_k$ avec $\mu_k\geqslant0$ et $\sum_k\mu_k = 1$ est une moyenne pondérée des $\alpha_k$ : il est dans leur enveloppe convexe (le plus petit polygone convexe qui contient tous les $\alpha_k$).</p><div class="sbox">$$\mu_k\geqslant0,\ \ \sum\mu_k = 1\ \Longrightarrow\ \sum\mu_k\alpha_k\in\operatorname{Conv}(\alpha_1,\dots,\alpha_n).$$</div>` },
-  "k-derivee-log": { t: "Dérivée logarithmique d'un polynôme scindé", b: R`<p>Si $P = c\prod_{k=1}^n(X-\alpha_k)$ (racines comptées avec multiplicité) :</p><div class="sbox">$$\frac{P'}{P} = \sum_{k=1}^n\frac1{X-\alpha_k}.$$</div><p>On dérive le produit : $P' = c\sum_k\prod_{j\neq k}(X-\alpha_j)$, puis on divise par $P$.</p>` },
+  "k-convexe-comb": { t: "Combinaison convexe", b: R`<div class="sbox">$$\mu_k\geqslant0,\ \ \sum_k\mu_k = 1\ \Longrightarrow\ \sum_k\mu_k\alpha_k\in\operatorname{Conv}(\alpha_1,\dots,\alpha_n).$$</div><p>$\operatorname{Conv}$ : plus petit convexe contenant les $\alpha_k$.</p>` },
+  "k-derivee-log": { t: "Dérivée logarithmique d'un polynôme scindé", b: R`<p>$P = c\prod_{k=1}^n(X-\alpha_k)$ (multiplicités comprises) :</p>$$P' = c\sum_{k=1}^n\prod_{j\neq k}(X-\alpha_j).$$<div class="sbox">$$\frac{P'}{P} = \sum_{k=1}^n\frac1{X-\alpha_k}.$$</div>` },
   "k-relations-coef": { t: "Relations coefficients-racines", b: R`<p>Si $P = X^n+a_{n-1}X^{n-1}+\dots+a_0$ a pour racines $z_1,\dots,z_n$ (avec multiplicité) :</p><div class="sbox">$$z_1+\dots+z_n = -a_{n-1},\qquad z_1z_2\cdots z_n = (-1)^na_0.$$</div>` }
 });
 
@@ -505,13 +505,13 @@ LEMME.exercises([
 
 /* ---------- MPSI · 5. Séries · 6. Asymptotique (1) ---------- */
 LEMME.rappels({
-  "k-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\text{non}\,B\Rightarrow\text{non}\,A).$$</div><p><b>Exemple :</b> « si $\sum u_n$ converge, alors $u_n\to0$ » donne « si $u_n\not\to0$, alors $\sum u_n$ diverge ».</p>` },
-  "k-binome-conj": { t: "Binôme et nombres conjugués", b: R`<p>Par la formule du binôme, les puissances impaires de $\sqrt d$ changent de signe quand on remplace $\sqrt d$ par $-\sqrt d$ :</p><div class="sbox">$$(a+\sqrt d)^n+(a-\sqrt d)^n = 2\sum_{k\ \text{pair}}\binom nk a^{n-k}d^{k/2}\in2\mathbb Z\quad(a,d\in\mathbb N).$$</div>` },
+  "k-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\neg B\Rightarrow\neg A).$$</div><p><b>Exemple</b> :</p>$$\Big(\sum u_n\ \text{converge}\Rightarrow u_n\to0\Big)\iff\Big(u_n\not\to0\Rightarrow\sum u_n\ \text{diverge}\Big).$$` },
+  "k-binome-conj": { t: "Binôme et nombres conjugués", b: R`<p>$a,d\in\mathbb N$ ; $\sqrt d\mapsto-\sqrt d$ change le signe des puissances impaires :</p><div class="sbox">$$(a+\sqrt d)^n+(a-\sqrt d)^n = 2\sum_{k\ \text{pair}}\binom nk a^{n-k}d^{k/2}\in2\mathbb Z.$$</div>` },
   "k-sin-periode": { t: "Sinus et multiples de 2π", b: R`<div class="sbox">$$\sin(x+2m\pi) = \sin x,\qquad\sin(-x) = -\sin x\qquad(m\in\mathbb Z).$$</div>` },
   "k-equiv-sin": { t: "Équivalent du sinus en 0", b: R`<div class="sbox">$$\sin x\underset{x\to0}{\sim}x,\qquad|\sin x|\leqslant|x|.$$</div><p>Pour une suite : si $\varepsilon_n\to0$, alors $\sin\varepsilon_n\sim\varepsilon_n$.</p>` },
-  "k-cauchy-series": { t: "Reste d'une série convergente", b: R`<p>Si $\sum u_k$ converge, son reste $R_n = \sum_{k>n}u_k$ tend vers $0$. Pour une série à termes positifs, toute somme de termes d'indices $> n$ est majorée par $R_n$ :</p><div class="sbox">$$\sum_{k=n+1}^{m}u_k\leqslant R_n\xrightarrow[n\to\infty]{}0.$$</div>` },
+  "k-cauchy-series": { t: "Reste d'une série convergente", b: R`$$\sum u_k\text{ converge}\ \Longrightarrow\ R_n = \sum_{k>n}u_k\xrightarrow[n\to\infty]{}0.$$<p><b>Termes positifs</b> :</p><div class="sbox">$$\forall m>n,\quad0\leqslant\sum_{k=n+1}^{m}u_k\leqslant R_n.$$</div>` },
   "k-wallis-ipp": { t: "Récurrence des intégrales de Wallis", b: R`<p>En écrivant $\sin^n = \sin^{n-1}\cdot\sin$ et en intégrant par parties :</p><div class="sbox">$$W_n = \frac{n-1}{n}W_{n-2},\qquad W_0 = \frac\pi2,\quad W_1 = 1.$$</div>` },
-  "k-serie-telesc": { t: "Suite et série des différences", b: R`<p>Une suite $(a_n)$ converge si et seulement si la série $\sum(a_{n+1}-a_n)$ converge, car</p><div class="sbox">$$a_n = a_0+\sum_{k=0}^{n-1}(a_{k+1}-a_k).$$</div>` }
+  "k-serie-telesc": { t: "Suite et série des différences", b: R`<div class="sbox">$$a_n = a_0+\sum_{k=0}^{n-1}(a_{k+1}-a_k)\quad\Longrightarrow\quad(a_n)\ \text{converge}\iff\sum(a_{n+1}-a_n)\ \text{converge}.$$</div>` }
 });
 
 (() => {
@@ -580,10 +580,10 @@ LEMME.exercises([
 
 /* ---------- MPSI · 6. Asymptotique (2) ---------- */
 LEMME.rappels({
-  "k-somme-equiv": { t: "Sommation des équivalents (restes)", b: R`<p>Si $a_n\sim b_n$, avec $b_n\geqslant0$ et $\sum b_n$ convergente, alors $\sum a_n$ converge et les restes sont équivalents :</p><div class="sbox">$$\sum_{k\geqslant n}a_k\sim\sum_{k\geqslant n}b_k.$$</div><p>Même chose avec des $o$ : si $a_n = o(b_n)$, les restes vérifient $\sum_{k\geqslant n}a_k = o\big(\sum_{k\geqslant n}b_k\big)$.</p>` },
-  "k-reste-riemann": { t: "Reste d'une série de Riemann", b: R`<p>Pour $p>1$, par comparaison série-intégrale ($t\mapsto t^{-p}$ décroît) :</p><div class="sbox">$$\sum_{k\geqslant n}\frac1{k^p}\sim\frac{1}{(p-1)\,n^{p-1}}.$$</div><p>Car $\int_n^{+\infty}\frac{dt}{t^p}\leqslant\sum_{k\geqslant n}\frac1{k^p}\leqslant\frac1{n^p}+\int_n^{+\infty}\frac{dt}{t^p}$ et $\int_n^{+\infty}\frac{dt}{t^p} = \frac1{(p-1)n^{p-1}}$.</p>` },
-  "k-cesaro": { t: "Lemme de Cesàro", b: R`<p>Si $a_n\to\ell$, la moyenne des premiers termes tend aussi vers $\ell$ :</p><div class="sbox">$$\frac{a_0+a_1+\dots+a_{n-1}}{n}\xrightarrow[n\to\infty]{}\ell.$$</div><p>Forme télescopique : si $x_{n+1}-x_n\to\ell$, alors $\frac{x_n}n\to\ell$, donc $x_n\sim\ell n$ si $\ell\neq0$.</p>` },
-  "k-rec-monotone": { t: "Suite récurrente uₙ₊₁ = f(uₙ)", b: R`<p>Si $f(x)\leqslant x$ sur un intervalle $I$ stable par $f$, la suite est décroissante. Si elle est minorée, elle converge, et sa limite $\ell$ vérifie $f(\ell) = \ell$ quand $f$ est continue.</p><div class="sbox">$$u_{n+1} = f(u_n),\ u_n\to\ell,\ f\ \text{continue en}\ \ell\ \Longrightarrow\ f(\ell) = \ell.$$</div>` }
+  "k-somme-equiv": { t: "Sommation des équivalents (restes)", b: R`<p>$b_n\geqslant0$, $\sum b_n$ convergente :</p><div class="sbox">$$a_n\sim b_n\ \Longrightarrow\ \sum_{k\geqslant n}a_k\sim\sum_{k\geqslant n}b_k,\qquad a_n = o(b_n)\ \Longrightarrow\ \sum_{k\geqslant n}a_k = o\Big(\sum_{k\geqslant n}b_k\Big).$$</div>` },
+  "k-reste-riemann": { t: "Reste d'une série de Riemann", b: R`<p>$p>1$, $t\mapsto t^{-p}$ décroissante :</p>$$\int_n^{+\infty}\frac{dt}{t^p}\leqslant\sum_{k\geqslant n}\frac1{k^p}\leqslant\frac1{n^p}+\int_n^{+\infty}\frac{dt}{t^p},\qquad\int_n^{+\infty}\frac{dt}{t^p} = \frac1{(p-1)n^{p-1}}.$$<div class="sbox">$$\sum_{k\geqslant n}\frac1{k^p}\sim\frac{1}{(p-1)\,n^{p-1}}.$$</div>` },
+  "k-cesaro": { t: "Lemme de Cesàro", b: R`<div class="sbox">$$a_n\to\ell\ \Longrightarrow\ \frac{a_0+a_1+\dots+a_{n-1}}{n}\xrightarrow[n\to\infty]{}\ell.$$</div><p><b>Forme télescopique</b> :</p>$$x_{n+1}-x_n\to\ell\ \Longrightarrow\ \frac{x_n}n\to\ell,\qquad\ell\neq0\Rightarrow x_n\sim\ell n.$$` },
+  "k-rec-monotone": { t: "Suite récurrente uₙ₊₁ = f(uₙ)", b: R`$$f(I)\subset I,\ \forall x\in I,\ f(x)\leqslant x\ \Longrightarrow\ (u_n)\searrow.$$<div class="sbox">$$u_{n+1} = f(u_n),\ u_n\to\ell,\ f\ \text{continue en}\ \ell\ \Longrightarrow\ f(\ell) = \ell.$$</div>` }
 });
 
 (() => {
@@ -648,12 +648,12 @@ LEMME.exercises([
 
 /* ---------- MPSI · 7. Espaces vectoriels · 8. Matrices ---------- */
 LEMME.rappels({
-  "k-nilp-strict": { t: "Un nilpotent fait baisser la dimension", b: R`<p>Si $u$ est nilpotent et $F\neq\{0\}$ est stable par $u$, alors $u_{|F}$ est nilpotent, donc non injectif :</p><div class="sbox">$$\dim u(F)< \dim F.$$</div><p>Par le théorème du rang appliqué à $u_{|F}$ : $\dim u(F) = \dim F-\dim(\ker u\cap F)$ et $\ker u\cap F\neq\{0\}$.</p>` },
+  "k-nilp-strict": { t: "Un nilpotent fait baisser la dimension", b: R`<p>$u$ nilpotent, $F\neq\{0\}$, $u(F)\subset F$ :</p>$$\ker u\cap F\neq\{0\},\qquad\dim u(F) = \dim F-\dim(\ker u\cap F).$$<div class="sbox">$$\dim u(F)\lt\dim F.$$</div>` },
   "k-commute-stable": { t: "Endomorphismes qui commutent", b: R`<p>Si $u\circ v = v\circ u$, alors $\operatorname{Im}v$ et $\ker v$ sont stables par $u$ :</p><div class="sbox">$$u(v(x)) = v(u(x))\in\operatorname{Im}v,\qquad v(x) = 0\Rightarrow v(u(x)) = u(v(x)) = 0.$$</div>` },
-  "k-rang-restreint": { t: "Théorème du rang sur un sous-espace", b: R`<p>Pour $f\in\mathcal L(E)$ et $F$ un sous-espace, en appliquant le théorème du rang à $f_{|F} : F\to E$ :</p><div class="sbox">$$\dim F = \dim f(F)+\dim(F\cap\ker f).$$</div>` },
+  "k-rang-restreint": { t: "Théorème du rang sur un sous-espace", b: R`<div class="sbox">$$f\in\mathcal L(E),\ F\subset E\ :\quad\dim F = \dim f(F)+\dim(F\cap\ker f).$$</div><p>(Théorème du rang appliqué à $f_{|F} : F\to E$.)</p>` },
   "k-famille-cyclique": { t: "Famille (a, f(a), …) d'un nilpotent", b: R`$$f^{p-1}(a)\neq0,\ f^p(a) = 0\ \Longrightarrow\ \big(a,f(a),\dots,f^{p-1}(a)\big)\text{ libre}.$$<p>Appliquer $f^{p-1}$ à $\sum\lambda_kf^k(a) = 0$ : $\lambda_0 = 0$ ; puis $f^{p-2}$…</p>` },
   "k-mat-endo": { t: "Matrice d'un endomorphisme", b: R`<p>La colonne $j$ de $\operatorname{Mat}_{\mathcal B}(f)$ contient les coordonnées de $f(e_j)$ dans $\mathcal B$. Et :</p><div class="sbox">$$\operatorname{Mat}(f\circ g) = \operatorname{Mat}(f)\operatorname{Mat}(g),\qquad\operatorname{Mat}(f^{-1}) = \operatorname{Mat}(f)^{-1}.$$</div>` },
-  "k-ker-inv": { t: "Inversibilité et noyau", b: R`<div class="sbox">$$A\in\mathcal M_n(\mathbb K)\ \text{inversible}\iff\big(AX = 0\Rightarrow X = 0\big).$$</div><p>Pour montrer qu'une matrice carrée est inversible, il suffit de montrer que son noyau est réduit à $0$.</p>` }
+  "k-ker-inv": { t: "Inversibilité et noyau", b: R`<div class="sbox">$$A\in\mathcal M_n(\mathbb K)\ \text{inversible}\iff\ker A = \{0\}\iff\big(AX = 0\Rightarrow X = 0\big).$$</div>` }
 });
 
 (() => {
@@ -737,10 +737,10 @@ LEMME.exercises([
 
 /* ---------- MPSI · 9. Déterminants (1) ---------- */
 LEMME.rappels({
-  "k-det-entier": { t: "Déterminant et parité", b: R`<p>Le déterminant est une somme de produits de coefficients, avec des signes $\pm$ :</p><div class="sbox">$$\det A = \sum_{\sigma\in S_n}\varepsilon(\sigma)\prod_{i}a_{\sigma(i)i}.$$</div><p>Si deux matrices à coefficients entiers ont des coefficients de même parité, leurs déterminants ont la même parité. En particulier, un déterminant entier impair est non nul.</p>` },
-  "k-rang-mineur": { t: "Rang et sous-matrice", b: R`<p>Si $A$ possède une sous-matrice carrée de taille $r$ inversible (obtenue en supprimant des lignes et des colonnes), alors</p><div class="sbox">$$\operatorname{rg}A\geqslant r.$$</div>` },
-  "k-dev-ligne": { t: "Développement selon une ligne ou une colonne", b: R`<div class="sbox">$$\det A = \sum_{j=1}^n(-1)^{i+j}a_{ij}\Delta_{ij},$$</div><p>où $\Delta_{ij}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$. On choisit une ligne ou une colonne avec beaucoup de zéros.</p>` },
-  "k-det-multilin": { t: "Le déterminant est linéaire par colonne", b: R`<p>Si on écrit la colonne $j$ comme somme $C_j = C'_j+C''_j$, le déterminant se coupe en deux :</p><div class="sbox">$$\det(\dots,C'_j+C''_j,\dots) = \det(\dots,C'_j,\dots)+\det(\dots,C''_j,\dots).$$</div><p>Et un déterminant avec deux colonnes égales (ou proportionnelles) est nul.</p>` },
+  "k-det-entier": { t: "Déterminant et parité", b: R`<div class="sbox">$$\det A = \sum_{\sigma\in S_n}\varepsilon(\sigma)\prod_{i}a_{\sigma(i)i}.$$</div>$$A,B\in\mathcal M_n(\mathbb Z),\ A\equiv B\ [2]\ \Longrightarrow\ \det A\equiv\det B\ [2].$$$$\det A\text{ impair}\ \Longrightarrow\ \det A\neq0.$$` },
+  "k-rang-mineur": { t: "Rang et sous-matrice", b: R`<div class="sbox">$$\exists\text{ sous-matrice }r\times r\text{ inversible}\ \Longrightarrow\ \operatorname{rg}A\geqslant r.$$</div>$$\operatorname{rg}A = \max\{r : \exists\text{ mineur d'ordre }r\neq0\}.$$` },
+  "k-dev-ligne": { t: "Développement selon une ligne ou une colonne", b: R`<div class="sbox">$$\det A = \sum_{j=1}^n(-1)^{i+j}a_{ij}\Delta_{ij}\quad(\text{ligne }i),\qquad\det A = \sum_{i=1}^n(-1)^{i+j}a_{ij}\Delta_{ij}\quad(\text{colonne }j).$$</div><p>$\Delta_{ij}$ : déterminant sans ligne $i$ ni colonne $j$. Choisir la ligne ou colonne la plus creuse.</p>` },
+  "k-det-multilin": { t: "Le déterminant est linéaire par colonne", b: R`<div class="sbox">$$\det(\dots,C'_j+\lambda C''_j,\dots) = \det(\dots,C'_j,\dots)+\lambda\det(\dots,C''_j,\dots).$$</div>$$C_i = C_j\ (i\neq j)\ \Longrightarrow\ \det = 0.$$` },
   "k-det-triang": { t: "Déterminant triangulaire", b: R`<div class="sbox">$$\det\begin{pmatrix}t_{11}&&\ast\\&\ddots&\\0&&t_{nn}\end{pmatrix} = t_{11}t_{22}\cdots t_{nn}.$$</div>` }
 });
 
@@ -807,8 +807,8 @@ LEMME.exercises([
 
 /* ---------- MPSI · 9. Déterminants (2) ---------- */
 LEMME.rappels({
-  "k-det-operations": { t: "Opérations sur les lignes et colonnes", b: R`<ul><li>$C_j\leftarrow C_j+\lambda C_k$ ($k\neq j$) ne change pas le déterminant.</li><li>Factoriser un nombre $\lambda$ dans une ligne ou une colonne : $\det$ est multiplié par $\lambda$.</li><li>Échanger deux lignes change le signe.</li></ul><div class="sbox">$$\det(\dots,C_j+\lambda C_k,\dots) = \det(\dots,C_j,\dots).$$</div>` },
-  "k-gram": { t: "Matrice de Gram", b: R`<p>Pour $v_1,\dots,v_m$ dans un espace préhilbertien, $G(v_1,\dots,v_m) = \big((v_i|v_j)\big)_{i,j}$.</p><div class="sbox">$$(v_1,\dots,v_m)\ \text{liée}\iff\det G(v_1,\dots,v_m) = 0,\qquad\text{libre}\iff\det G>0.$$</div><p>Si $V$ est la matrice des coordonnées des $v_j$ dans une base orthonormée (cas $m$ = dimension), $G = V^\top V$ et $\det G = (\det V)^2$.</p>` }
+  "k-det-operations": { t: "Opérations sur les lignes et colonnes", b: R`$$\det(\dots,C_j+\lambda C_k,\dots) = \det(\dots,C_j,\dots)\quad(k\neq j),$$$$\det(\dots,\lambda C_j,\dots) = \lambda\det(\dots,C_j,\dots),$$$$\det(\dots,C_k,\dots,C_j,\dots) = -\det(\dots,C_j,\dots,C_k,\dots).$$<p>Idem sur les lignes.</p>` },
+  "k-gram": { t: "Matrice de Gram", b: R`$$G(v_1,\dots,v_m) = \big((v_i|v_j)\big)_{1\leqslant i,j\leqslant m}.$$<div class="sbox">$$(v_i)\ \text{liée}\iff\det G = 0,\qquad(v_i)\ \text{libre}\iff\det G>0.$$</div><p>$m = \dim E$, $V$ = coordonnées dans une b.o.n. :</p>$$G = V^\top V,\qquad\det G = (\det V)^2.$$` }
 });
 
 (() => {
@@ -874,12 +874,12 @@ LEMME.exercises([
 
 /* ---------- MPSI · 6. Continuité · 10. Préhilbertiens et euclidiens ---------- */
 LEMME.rappels({
-  "k-heine": { t: "Théorème de Heine", b: R`<p>Une fonction continue sur un <b>segment</b> $[a,b]$ y est uniformément continue :</p><div class="sbox">$$\forall\varepsilon>0,\ \exists\delta>0,\ \forall x,y\in[a,b],\ |x-y|< \delta\Rightarrow|f(x)-f(y)|< \varepsilon.$$</div><p>Le même $\delta$ marche partout sur le segment. <b>Contre-exemple</b> sur un intervalle non borné : $x\mapsto x^2$ sur $\mathbb R$.</p>` },
-  "k-uc-def": { t: "Continuité uniforme", b: R`<div class="sbox">$$\forall\varepsilon>0,\ \exists\delta>0,\ \forall x,y\in I,\quad|x-y|< \delta\Rightarrow|f(x)-f(y)|< \varepsilon.$$</div><p>Pour la <b>nier</b>, il suffit de trouver deux suites $(x_n)$, $(y_n)$ avec $x_n-y_n\to0$ mais $|f(x_n)-f(y_n)|\geqslant c>0$.</p>` },
-  "k-parallelogramme": { t: "Identité du parallélogramme", b: R`<div class="sbox">$$\|x+y\|^2+\|x-y\|^2 = 2\big(\|x\|^2+\|y\|^2\big).$$</div><p>On l'obtient en développant les deux carrés : les doubles produits $\pm2(x|y)$ se compensent.</p>` },
-  "k-projection-carac": { t: "Caractériser le projeté orthogonal", b: R`<p>$p$ est le projeté orthogonal de $x$ sur $F = \operatorname{Vect}(f_1,\dots,f_q)$ si et seulement si</p><div class="sbox">$$p\in F\qquad\text{et}\qquad(x-p\,|\,f_i) = 0\ \text{pour}\ i = 1,\dots,q.$$</div><p>Et $\displaystyle\min_{y\in F}\|x-y\| = \|x-p\|$, atteint seulement en $y = p$.</p>` },
-  "k-bon-proj": { t: "Projection et base orthonormée", b: R`<p>Si $(\varepsilon_1,\dots,\varepsilon_q)$ est une base orthonormée de $F$ :</p><div class="sbox">$$p_F(x) = \sum_{k=1}^q(\varepsilon_k|x)\,\varepsilon_k,\qquad\operatorname{Mat}(p_F) = \sum_{k=1}^qE_kE_k^\top,$$</div><p>où $E_k$ est la colonne des coordonnées de $\varepsilon_k$ dans une base orthonormée de $E$.</p>` },
-  "k-gram-schmidt": { t: "Procédé de Gram-Schmidt", b: R`<p>À partir d'une famille libre $(f_1,f_2,\dots)$ : $\varepsilon_1 = \frac{f_1}{\|f_1\|}$, puis on retire à $f_2$ sa composante sur $\varepsilon_1$ et on normalise :</p><div class="sbox">$$g_2 = f_2-(\varepsilon_1|f_2)\varepsilon_1,\qquad\varepsilon_2 = \frac{g_2}{\|g_2\|}.$$</div>` }
+  "k-heine": { t: "Théorème de Heine", b: R`<div class="sbox">$$f\in\mathcal C^0([a,b])\ \Longrightarrow\ \forall\varepsilon>0,\ \exists\delta>0,\ \forall x,y\in[a,b],\ |x-y|\lt\delta\Rightarrow|f(x)-f(y)|\lt\varepsilon.$$</div><p><b>Contre-exemple</b> hors segment :</p>$$f(x) = x^2\text{ sur }\mathbb R :\quad f\Big(n+\frac1n\Big)-f(n)\geqslant2.$$` },
+  "k-uc-def": { t: "Continuité uniforme", b: R`<div class="sbox">$$f\ \text{u.c.}\iff\forall\varepsilon>0,\ \exists\delta>0,\ \forall x,y\in I,\ |x-y|\lt\delta\Rightarrow|f(x)-f(y)|\lt\varepsilon.$$</div><p><b>Négation</b> :</p>$$\exists(x_n),(y_n),\ x_n-y_n\to0,\ |f(x_n)-f(y_n)|\geqslant c>0.$$` },
+  "k-parallelogramme": { t: "Identité du parallélogramme", b: R`<div class="sbox">$$\|x+y\|^2+\|x-y\|^2 = 2\big(\|x\|^2+\|y\|^2\big).$$</div>$$\|x\pm y\|^2 = \|x\|^2\pm2(x|y)+\|y\|^2.$$` },
+  "k-projection-carac": { t: "Caractériser le projeté orthogonal", b: R`<p>$F = \operatorname{Vect}(f_1,\dots,f_q)$ :</p><div class="sbox">$$p = p_F(x)\iff p\in F\ \wedge\ \forall i,\ (x-p\,|\,f_i) = 0.$$</div>$$\min_{y\in F}\|x-y\| = \|x-p\|,\qquad\|x-y\| = \|x-p\|,\ y\in F\iff y = p.$$` },
+  "k-bon-proj": { t: "Projection et base orthonormée", b: R`<p>$(\varepsilon_1,\dots,\varepsilon_q)$ b.o.n. de $F$, $E_k$ coordonnées de $\varepsilon_k$ dans une b.o.n. de $E$ :</p><div class="sbox">$$p_F(x) = \sum_{k=1}^q(\varepsilon_k|x)\,\varepsilon_k,\qquad\operatorname{Mat}(p_F) = \sum_{k=1}^qE_kE_k^\top.$$</div>` },
+  "k-gram-schmidt": { t: "Procédé de Gram-Schmidt", b: R`<p>$(f_1,f_2,\dots)$ libre :</p><div class="sbox">$$\varepsilon_1 = \frac{f_1}{\|f_1\|},\qquad g_k = f_k-\sum_{j\lt k}(\varepsilon_j|f_k)\varepsilon_j,\qquad\varepsilon_k = \frac{g_k}{\|g_k\|}.$$</div>$$\operatorname{Vect}(\varepsilon_1,\dots,\varepsilon_k) = \operatorname{Vect}(f_1,\dots,f_k).$$` }
 });
 
 (() => {
@@ -980,10 +980,10 @@ LEMME.exercises([
 
 /* ---------- MPSI · 11. Probabilités ---------- */
 LEMME.rappels({
-  "k-esp-cond": { t: "Espérance et système complet", b: R`<p>Si $(A_l)$ est un système complet d'événements de probabilités non nulles :</p><div class="sbox">$$E(X) = \sum_lE(X\mid A_l)\,P(A_l).$$</div><p>C'est la formule des probabilités totales appliquée à l'espérance.</p>` },
+  "k-esp-cond": { t: "Espérance et système complet", b: R`<p>$(A_l)$ système complet, $P(A_l)>0$ :</p><div class="sbox">$$E(X) = \sum_lE(X\mid A_l)\,P(A_l).$$</div>` },
   "k-binom-abs": { t: "Deux identités binomiales", b: R`<div class="sbox">$$k\binom nk = n\binom{n-1}{k-1},\qquad(n-k)\binom nk = n\binom{n-1}{k}.$$</div><p>Elles viennent de $\binom nk = \frac{n!}{k!(n-k)!}$.</p>` },
   "k-stirling": { t: "Formule de Stirling", b: R`<div class="sbox">$$n!\sim\left(\frac ne\right)^n\sqrt{2\pi n},\qquad\binom{2n}n\sim\frac{4^n}{\sqrt{\pi n}}.$$</div>` },
-  "k-sce": { t: "Système complet d'événements", b: R`<p>$(A_1,\dots,A_m)$ est un système complet si les $A_i$ sont deux à deux incompatibles et de réunion $\Omega$ :</p><div class="sbox">$$A_i\cap A_j = \emptyset\ (i\neq j),\qquad\bigcup_iA_i = \Omega,\qquad\sum_iP(A_i) = 1.$$</div>` }
+  "k-sce": { t: "Système complet d'événements", b: R`<div class="sbox">$$(A_i)\text{ s.c.e.}\iff\left\{\begin{aligned}&A_i\cap A_j = \emptyset\ (i\neq j),\\&\textstyle\bigcup_iA_i = \Omega.\end{aligned}\right.\qquad\Longrightarrow\ \sum_iP(A_i) = 1.$$</div>` }
 });
 
 (() => {

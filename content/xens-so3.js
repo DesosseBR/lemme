@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "s3-ret": { t: "Retournements", b: R`$$r_D = 2p_D-\mathrm{id},\qquad SO_3(\mathbb R) = \langle\text{retournements}\rangle,\qquad\operatorname{Rot}_{\theta} = r_{D_2}\circ r_{D_1},\ \widehat{(D_1,D_2)} = \frac\theta2.$$` },
-  "s3-conn": { t: "Connexité et continuité", b: R`$$f\text{ continue},\ A\text{ connexe}\Rightarrow f(A)\text{ connexe};\qquad S^3\text{ c.p.a.};\qquad f : A\to\{-1,1\}\text{ continue}\Rightarrow f\text{ constante}.$$` },
-  "s3-on": { t: "Endomorphismes orthogonaux", b: R`$$\forall x,\ \|u(x)\| = \|x\|\ \Longrightarrow\ u\in O(E),\ \det u = \pm1;\qquad s\in O(E),\ s^2 = \mathrm{id}\Rightarrow s\text{ symétrie orthogonale}.$$` }
+  "s3-conn": { t: "Connexité et continuité", b: R`$$\begin{gathered}f\text{ continue},\ A\text{ connexe}\Rightarrow f(A)\text{ connexe},\\[4pt]S^3\text{ c.p.a.},\\[4pt]f : A\to\{-1,1\}\text{ continue}\Rightarrow f\text{ constante}.\end{gathered}$$` },
+  "s3-on": { t: "Endomorphismes orthogonaux", b: R`$$\begin{gathered}\forall x,\ \|u(x)\| = \|x\|\ \Longrightarrow\ u\in O(E),\ \det u = \pm1,\\[4pt]s\in O(E),\ s^2 = \mathrm{id}\Rightarrow s\text{ symétrie orthogonale}.\end{gathered}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathbb H$ est le $\mathbb R$-espace vectoriel de base $(1,i,j,k)$, muni de la multiplication bilinéaire telle que $1$ est neutre et $i^2 = j^2 = k^2 = ijk = -1$ (d'où $ij = k = -ji$, $jk = i = -kj$, $ki = j = -ik$). On admet que $\mathbb H$ est une $\mathbb R$-algèbre associative. Pour $q = a+bi+cj+dk$, on pose $\bar q = a-bi-cj-dk$, $N(q) = a^2+b^2+c^2+d^2$, $\mathrm{Re}\,q = a$, et $\mathrm{Im}\,\mathbb H = \{q : \mathrm{Re}\,q = 0\} = \mathrm{Vect}(i,j,k)$, identifié à $\mathbb R^3$ euclidien. On note $Sp(1) = \{q : N(q) = 1\}$.</p>`;

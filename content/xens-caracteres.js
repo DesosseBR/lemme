@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "car-ind": { t: "Fonction indicatrice", b: R`<p>Pour $E\subset\Omega$ fini, $\mathbf 1_E(x) = 1$ si $x\in E$, $0$ sinon. On a $\mathbf 1_{A\cap B} = \mathbf 1_A\mathbf 1_B$, $\mathbf 1_{\Omega\setminus A} = 1-\mathbf 1_A$ et $|E| = \sum_{x\in\Omega}\mathbf 1_E(x)$.</p>` },
   "car-geo": { t: "Somme des racines de l'unité", b: R`<p>Si $\xi^g = 1$ et $\xi\neq1$ : $\sum_{k=0}^{g-1}\xi^k = \frac{\xi^g-1}{\xi-1} = 0$. Pour $\omega = e^{2i\pi/p}$ : $\sum_{k=0}^{p-1}\omega^{ak} = p$ si $p\mid a$, $0$ sinon.</p>` },
-  "car-racines": { t: "Racines d'un polynôme sur un corps", b: R`$$P\text{ unitaire},\ \deg P = m,\ x_1,\dots,x_m\text{ racines distinctes}\Rightarrow P = \prod_i(X-x_i);\qquad D\mid P,\ D\text{ unitaire}\Rightarrow D = \prod_{i\in I}(X-x_i).$$` },
+  "car-racines": { t: "Racines d'un polynôme sur un corps", b: R`$$\begin{gathered}P\text{ unitaire},\ \deg P = m,\ x_1,\dots,x_m\text{ racines distinctes}\Rightarrow P = \prod_i(X-x_i),\\[4pt]D\mid P,\ D\text{ unitaire}\Rightarrow D = \prod_{i\in I}(X-x_i).\end{gathered}$$` },
   "car-gcd": { t: "Ordre et pgcd", b: R`<p>Dans un groupe : $x^a = 1$ et $x^b = 1$ $\iff$ $x^{\operatorname{pgcd}(a,b)} = 1$ (relation de Bézout).</p>` },
   "car-mult": { t: "Changement de variable multiplicatif", b: R`<p>Pour $c\in\mathbb F_p^*$, $x\mapsto cx$ est une bijection de $\mathbb F_p$ et de $\mathbb F_p^*$ : $\sum_xf(cx) = \sum_xf(x)$.</p>` }
 });

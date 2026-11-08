@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "p2-lag": { t: "Lagrange, orbite-stabilisateur", b: R`$$H\leqslant G\Rightarrow|H|\ \big|\ |G|;\qquad|\operatorname{Orb}(x)| = [G:\operatorname{Stab}(x)] = \frac{|G|}{|\operatorname{Stab}(x)|}.$$` },
-  "p2-cyc": { t: "Groupes cycliques", b: R`$$\exists g,\ \operatorname{ord}g = |G| = n\Rightarrow G\simeq\mathbb Z/n\mathbb Z;\qquad|G| = p\text{ premier}\Rightarrow G\text{ cyclique};\qquad m\wedge n = 1\Rightarrow\mathbb Z/m\times\mathbb Z/n\simeq\mathbb Z/mn.$$` },
+  "p2-cyc": { t: "Groupes cycliques", b: R`$$\begin{gathered}\exists g,\ \operatorname{ord}g = |G| = n\Rightarrow G\simeq\mathbb Z/n\mathbb Z,\\[4pt]|G| = p\text{ premier}\Rightarrow G\text{ cyclique},\\[4pt]m\wedge n = 1\Rightarrow\mathbb Z/m\times\mathbb Z/n\simeq\mathbb Z/mn.\end{gathered}$$` },
   "p2-sylow": { t: "Théorèmes de Sylow (admis)", b: R`$$|G| = p^am,\ p\nmid m\ :\quad n_p\mid m,\quad n_p\equiv1\pmod p;\qquad P\triangleleft G\iff n_p = 1.$$` }
 });
 

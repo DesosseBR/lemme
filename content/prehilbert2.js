@@ -3,13 +3,13 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 LEMME.rappels({
-  "eu-cs": { t: "Inégalité de Cauchy-Schwarz", b: R`<p>Pour un produit scalaire : $|(x|y)|\leqslant\|x\|\,\|y\|$, avec égalité si et seulement si $x$ et $y$ sont colinéaires. Pour les intégrales : $\big(\int_a^bfg\big)^2\leqslant\int_a^bf^2\int_a^bg^2$.</p>` },
-  "eu-ps": { t: "Montrer qu'on a un produit scalaire", b: R`<p>Vérifier, dans cet ordre : (1) l'application est bien définie (convergence des intégrales ou des séries) ; (2) symétrie ; (3) linéarité en une variable (la bilinéarité suit par symétrie) ; (4) positivité $\varphi(x,x)\geqslant0$ ; (5) caractère défini : $\varphi(x,x) = 0\Rightarrow x = 0$, souvent par « fonction continue positive d'intégrale nulle ».</p>` },
-  "eu-orth": { t: "Orthogonal d'une partie", b: R`<p>Pour $A\subset E$, $A^\perp = \{x : \forall a\in A,\ (x|a) = 0\}$ est un sous-espace vectoriel. On a $F\cap F^\perp = \{0\}$ et $F\subset(F^\perp)^\perp$. Si $E$ est de dimension finie : $E = F\oplus F^\perp$, $\dim F^\perp = \dim E-\dim F$ et $(F^\perp)^\perp = F$.</p>` },
-  "eu-tr": { t: "Le produit scalaire canonique sur les matrices", b: R`<p>Sur $\mathcal M_n(\mathbb R)$, $(A|B) = \mathrm{tr}({}^tAB) = \sum_{i,j}a_{ij}b_{ij}$ est un produit scalaire (c'est le produit scalaire canonique de $\mathbb R^{n^2}$). On a $\mathrm{tr}(AB) = \mathrm{tr}(BA)$ et $\mathrm{tr}({}^tA) = \mathrm{tr}(A)$.</p>` },
-  "eu-intnulle": { t: "Intégrale nulle", b: R`<p>Une fonction continue, positive, d'intégrale nulle sur un intervalle $[a,b]$ ($a\lt b$) est identiquement nulle. Un polynôme qui s'annule en une infinité de points est nul.</p>` },
-  "eu-schmidt": { t: "Procédé de Gram-Schmidt", b: R`<p>À partir d'une famille libre $(f_0,f_1,\dots)$ : $u_k = f_k-\sum_{j\lt k}(e_j|f_k)e_j$ puis $e_k = \frac{u_k}{\|u_k\|}$. On obtient une famille orthonormée avec $\mathrm{Vect}(e_0,\dots,e_k) = \mathrm{Vect}(f_0,\dots,f_k)$.</p>` },
-  "eu-dist": { t: "Distance à un sous-espace de dimension finie", b: R`<p>Si $F$ est de dimension finie, $d(x,F) = \|x-p_F(x)\|$ où $p_F(x)$ est le projeté orthogonal, caractérisé par $p_F(x)\in F$ et $x-p_F(x)\perp F$. Si $(e_1,\dots,e_p)$ est une base orthonormée de $F$ : $p_F(x) = \sum(e_k|x)e_k$ et $d(x,F)^2 = \|x\|^2-\sum_k(e_k|x)^2$.</p>` }
+  "eu-cs": { t: "Inégalité de Cauchy-Schwarz", b: R`$$|(x|y)|\leqslant\|x\|\,\|y\|\ (\text{égalité}\iff x,y\text{ colinéaires});\qquad\Big(\int_a^bfg\Big)^2\leqslant\int_a^bf^2\int_a^bg^2.$$` },
+  "eu-ps": { t: "Montrer qu'on a un produit scalaire", b: R`$$\varphi\text{ produit scalaire}\iff\left\{\begin{aligned}&\varphi\text{ bien définie}\\&\varphi(x,y) = \varphi(y,x)\\&\varphi(\lambda x+x',y) = \lambda\varphi(x,y)+\varphi(x',y)\\&\varphi(x,x)\geqslant0\\&\varphi(x,x) = 0\Rightarrow x = 0\end{aligned}\right.$$` },
+  "eu-orth": { t: "Orthogonal d'une partie", b: R`$$A^\perp = \{x : \forall a\in A,\ (x|a) = 0\};\qquad F\cap F^\perp = \{0\};\qquad\dim E\lt\infty\Rightarrow E = F\oplus F^\perp,\ (F^\perp)^\perp = F.$$` },
+  "eu-tr": { t: "Le produit scalaire canonique sur les matrices", b: R`$$(A|B) = \operatorname{tr}({}^tAB) = \sum_{i,j}a_{ij}b_{ij};\qquad\operatorname{tr}(AB) = \operatorname{tr}(BA),\quad\operatorname{tr}({}^tA) = \operatorname{tr}A.$$` },
+  "eu-intnulle": { t: "Intégrale nulle", b: R`$$f\in\mathcal C([a,b]),\ f\geqslant0,\ \int_a^bf = 0\Rightarrow f = 0;\qquad\operatorname{Card}\{\text{racines}\} = \infty\Rightarrow P = 0.$$` },
+  "eu-schmidt": { t: "Procédé de Gram-Schmidt", b: R`$$u_k = f_k-\sum_{j\lt k}(e_j|f_k)e_j,\qquad e_k = \frac{u_k}{\|u_k\|},\qquad\operatorname{Vect}(e_0,\dots,e_k) = \operatorname{Vect}(f_0,\dots,f_k).$$` },
+  "eu-dist": { t: "Distance à un sous-espace de dimension finie", b: R`$$p_F(x)\in F,\ x-p_F(x)\perp F;\qquad p_F(x) = \sum_k(e_k|x)e_k,\qquad d(x,F)^2 = \|x\|^2-\sum_k(e_k|x)^2.$$` }
 });
 LEMME.exercises([
 { id: "pre-10", ...P, level: 2, time: "20 min",

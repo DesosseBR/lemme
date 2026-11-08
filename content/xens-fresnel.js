@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "fr-dom": { t: "Dérivation sous l'intégrale", b: R`$$|\partial_xg(x,t)|\leqslant h(t),\ h\text{ intégrable}\ \Longrightarrow\ \frac d{dx}\int g(x,t)\,dt = \int\partial_xg(x,t)\,dt.$$` },
   "fr-gam": { t: "Fonction Gamma", b: R`<p>$\Gamma(\alpha) = \int_0^{+\infty}e^{-t}t^{\alpha-1}dt$ pour $\alpha>0$ ; $\Gamma(\frac12) = \sqrt\pi$ (par $t = x^2$ et l'intégrale de Gauss).</p>` },
-  "fr-ipp": { t: "Intégrale semi-convergente", b: R`$$-1\leqslant\beta\lt0\ :\quad\int_1^{+\infty}u^\beta e^{iu}du = \Big[-iu^\beta e^{iu}\Big]_1^{+\infty}+i\beta\int_1^{+\infty}u^{\beta-1}e^{iu}du\quad(\text{absolument CV}).$$` }
+  "fr-ipp": { t: "Intégrale semi-convergente", b: R`<p>$-1\leqslant\beta\lt0$ :</p>$$\begin{aligned}\int_1^{+\infty}u^\beta e^{iu}\,du &= \Big[-iu^\beta e^{iu}\Big]_1^{+\infty}+i\beta\int_1^{+\infty}u^{\beta-1}e^{iu}\,du,\end{aligned}$$<p>la dernière intégrale étant absolument convergente.</p>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On veut calculer $\displaystyle\Phi = \int_0^{+\infty}e^{ix^2}dx = \int_0^{+\infty}\cos(x^2)\,dx+i\int_0^{+\infty}\sin(x^2)\,dx$. Pour $\alpha\in\,]0,1[$, on pose $J(\alpha) = \int_0^{+\infty}t^{\alpha-1}e^{it}\,dt$ et, pour $x\geqslant0$, $\varphi(x) = \int_0^{+\infty}e^{-t}e^{ixt}t^{\alpha-1}\,dt$.</p>`;

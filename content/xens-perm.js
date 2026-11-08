@@ -10,7 +10,7 @@ LEMME.rappels({
   "pz-ordre": { t: "Ordre d'une permutation", b: R`$$\operatorname{ord}\sigma = \operatorname{ppcm}(\text{longueurs des cycles}),\qquad\varepsilon(k\text{-cycle}) = (-1)^{k-1}.$$` },
   "pz-cyc": { t: "Puissance d'un cycle", b: R`$$c\ L\text{-cycle},\ \delta = \operatorname{pgcd}(m,L)\ \Longrightarrow\ c^m = \text{produit de }\delta\text{ cycles disjoints de longueur }\frac L\delta.$$` },
   "pz-cyclique": { t: "Sous-groupes d'un groupe cyclique", b: R`$$|G| = N\text{ cyclique}\ :\quad\forall a\mid N,\ \exists!\,H_a\leqslant G,\ |H_a| = a;\qquad H_a\cap H_b = H_{\operatorname{pgcd}(a,b)}.$$` },
-  "pz-orbite": { t: "Orbite et stabilisateur", b: R`<p>Si un groupe fini $G$ agit sur $E$, alors pour $x\in E$ : $|G\cdot x|\times|\operatorname{Stab}(x)| = |G|$.</p>` },
+  "pz-orbite": { t: "Orbite et stabilisateur", b: R`<div class="sbox">$$G\ \text{fini agissant sur}\ E,\ x\in E\ :\quad|G\cdot x|\times|\operatorname{Stab}(x)| = |G|.$$</div>` },
   "pz-unites": { t: "Inversibles de Z/nZ", b: R`$$\bar x\in(\mathbb Z/n\mathbb Z)^\times\iff x\wedge n = 1;\qquad|(\mathbb Z/n\mathbb Z)^\times| = \varphi(n),\quad\varphi(p^\alpha) = p^{\alpha-1}(p-1).$$` }
 });
 

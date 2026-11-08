@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "cpt-indep": { t: "Indépendance et espérance", b: R`$$X\perp\!\!\!\perp Y\ \Longrightarrow\ \mathbb E[XY] = \mathbb E[X]\,\mathbb E[Y].$$<p>Coalitions : fonctions de familles disjointes $\Rightarrow$ indépendantes.</p>` },
-  "cpt-bt": { t: "Bienaymé-Tchebychev", b: R`$$\forall\alpha>0,\quad\mathbb P\big(|X-\mathbb E[X]|\geqslant\alpha\big)\leqslant\frac{\operatorname{Var}(X)}{\alpha^2};\qquad X_i\text{ indépendantes}\Rightarrow\operatorname{Var}\Big(\sum X_i\Big) = \sum\operatorname{Var}(X_i).$$` },
+  "cpt-bt": { t: "Bienaymé-Tchebychev", b: R`$$\begin{gathered}\forall\alpha>0,\quad \mathbb P\big(|X-\mathbb E[X]|\geqslant\alpha\big)\leqslant\frac{\operatorname{Var}(X)}{\alpha^2},\\[4pt]X_i\text{ indépendantes}\Rightarrow\operatorname{Var}\Big(\sum X_i\Big) = \sum\operatorname{Var}(X_i).\end{gathered}$$` },
   "cpt-lim": { t: "Limite supérieure d'événements", b: R`$$\limsup A_n = \bigcap_{n\geqslant0}\bigcup_{k\geqslant n}A_k\ (\text{une infinité des }A_k),\qquad\overline{\limsup A_n} = \bigcup_n\bigcap_{k\geqslant n}\overline{A_k}.$$` }
 });
 

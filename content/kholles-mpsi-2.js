@@ -2,9 +2,9 @@
    Exercices reformulés et corrigés pas à pas. Sujet caché « kholles », année MPSI. */
 LEMME.rappels({
   "k-inj": { t: "Injection, surjection, bijection", b: R`$$\begin{aligned}f\text{ injective}&\iff\forall x,x',\ f(x) = f(x')\Rightarrow x = x',\\f\text{ surjective}&\iff\forall y\in F,\ \exists x\in E,\ f(x) = y,\\f\text{ bijective}&\iff\forall y\in F,\ \exists!\,x\in E,\ f(x) = y.\end{aligned}$$<p>Méthode : résoudre $y = f(x)$ d'inconnue $x$.</p>` },
-  "k-compo": { t: "Composée d'applications", b: R`<div class="sbox">$$f,g\ \text{injectives}\Rightarrow g\circ f\ \text{injective},\qquad f,g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective}.$$</div><p>Et dans l'autre sens : $g\circ f$ injective $\Rightarrow f$ injective ; $g\circ f$ surjective $\Rightarrow g$ surjective.</p>` },
-  "k-relation": { t: "Relations binaires", b: R`<p>Une relation $\mathcal R$ sur $E$ peut être :</p><ul><li>réflexive : $x\,\mathcal R\,x$ ;</li><li>symétrique : $x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x$ ;</li><li>antisymétrique : $x\,\mathcal R\,y$ et $y\,\mathcal R\,x\Rightarrow x = y$ ;</li><li>transitive : $x\,\mathcal R\,y$ et $y\,\mathcal R\,z\Rightarrow x\,\mathcal R\,z$.</li></ul><div class="sbox">$$\text{ordre} = \text{réflexive + antisymétrique + transitive},\qquad\text{équivalence} = \text{réflexive + symétrique + transitive}.$$</div><p>Un ordre est <b>total</b> si deux éléments sont toujours comparables.</p>` },
-  "k-sup-ordre": { t: "Maximum et borne supérieure", b: R`<p>Dans un ensemble ordonné, le <b>maximum</b> de $A$ est un élément de $A$ qui majore $A$. La <b>borne supérieure</b> de $A$ est le plus petit des majorants de $A$ (s'il existe) ; elle n'est pas forcément dans $A$.</p><div class="sbox">$$\max A\ \text{existe}\ \Longrightarrow\ \sup A = \max A.$$</div>` },
+  "k-compo": { t: "Composée d'applications", b: R`<div class="sbox">$$f,g\ \text{injectives}\Rightarrow g\circ f\ \text{injective},\qquad f,g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective}.$$</div>$$g\circ f\ \text{injective}\Rightarrow f\ \text{injective},\qquad g\circ f\ \text{surjective}\Rightarrow g\ \text{surjective}.$$` },
+  "k-relation": { t: "Relations binaires", b: R`<ul><li><b>réflexive</b> : $\forall x,\ x\,\mathcal R\,x$ ;</li><li><b>symétrique</b> : $x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x$ ;</li><li><b>antisymétrique</b> : $(x\,\mathcal R\,y\wedge y\,\mathcal R\,x)\Rightarrow x = y$ ;</li><li><b>transitive</b> : $(x\,\mathcal R\,y\wedge y\,\mathcal R\,z)\Rightarrow x\,\mathcal R\,z$.</li></ul><div class="sbox">$$\text{ordre} = \text{R}+\text{AS}+\text{T},\qquad\text{équivalence} = \text{R}+\text{S}+\text{T}.$$</div>$$\text{ordre total}\iff\forall x,y,\ x\,\mathcal R\,y\ \vee\ y\,\mathcal R\,x.$$` },
+  "k-sup-ordre": { t: "Maximum et borne supérieure", b: R`$$M = \max A\iff M\in A\ \wedge\ \forall a\in A,\ a\leqslant M.$$$$S = \sup A\iff S = \min\{\text{majorants de }A\}\quad(S\notin A\text{ possible}).$$<div class="sbox">$$\max A\ \text{existe}\ \Longrightarrow\ \sup A = \max A.$$</div>` },
   "k-strict-mono": { t: "Monotonie stricte et injectivité", b: R`$$f\text{ strictement monotone}\ \Longrightarrow\ f\text{ injective};\qquad+\ f\in\mathcal C(I)\ \Longrightarrow\ f : I\to f(I)\text{ bijective}.$$` }
 });
 
@@ -139,7 +139,7 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-tiroirs": { t: "Principe des tiroirs", b: R`<p>Si on range $n+1$ objets dans $n$ tiroirs, un tiroir contient au moins deux objets.</p><div class="sbox">$$\operatorname{card}E>\operatorname{card}F\ \Longrightarrow\ \text{aucune application}\ E\to F\ \text{n'est injective}.$$</div>` },
+  "k-tiroirs": { t: "Principe des tiroirs", b: R`<div class="sbox">$$|E|>|F|\ \Longrightarrow\ \forall f : E\to F,\ \exists x\neq y,\ f(x) = f(y).$$</div><p><b>Exemple</b> : $n+1$ objets dans $n$ tiroirs $\Rightarrow$ un tiroir en contient $\geqslant2$.</p>` },
   "k-image-rec": { t: "Image directe, image réciproque", b: R`<div class="sbox">$$f(A) = \{f(x),\ x\in A\},\qquad f^{-1}(B) = \{x\in E,\ f(x)\in B\}.$$</div><p>$f^{-1}(B)$ a un sens même si $f$ n'est pas bijective. $x\in f^{-1}(B)\iff f(x)\in B$.</p>` },
   "k-ensembles": { t: "Opérations sur les parties", b: R`<div class="sbox">$$X\cup Y = \emptyset\iff X = Y = \emptyset,\qquad A\cap X = \emptyset\iff X\subset\overline A.$$</div><p>Lois de De Morgan : $\overline{X\cup Y} = \overline X\cap\overline Y$, $\overline{X\cap Y} = \overline X\cup\overline Y$.</p>` }
 });
@@ -417,9 +417,9 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-telesc": { t: "Somme télescopique", b: R`<div class="sbox">$$\sum_{k=1}^n(a_{k+1}-a_k) = a_{n+1}-a_1.$$</div><p>Les termes intermédiaires se simplifient deux à deux. <b>Réflexe :</b> chercher à écrire le terme général comme une différence.</p>` },
+  "k-telesc": { t: "Somme télescopique", b: R`<div class="sbox">$$\sum_{k=1}^n(a_{k+1}-a_k) = a_{n+1}-a_1.$$</div><p><b>Réflexe</b> : écrire $u_k = a_{k+1}-a_k$.</p>` },
   "k-amgm": { t: "Inégalité arithmético-géométrique (deux termes)", b: R`<div class="sbox">$$u,v\geqslant0\ \Longrightarrow\ u+v\geqslant2\sqrt{uv},\qquad y>0\ \Longrightarrow\ y+\frac1y\geqslant2.$$</div><p>Car $(\sqrt u-\sqrt v)^2\geqslant0$. Égalité si et seulement si $u = v$.</p>` },
-  "k-prod-fact": { t: "Produits et factorielles", b: R`<div class="sbox">$$\prod_{k=1}^n(2k) = 2^nn!,\qquad\prod_{k=1}^n(2k-1) = \frac{(2n)!}{2^nn!}.$$</div><p>On complète le produit des impairs avec les pairs pour faire apparaître $(2n)!$.</p>` },
+  "k-prod-fact": { t: "Produits et factorielles", b: R`<div class="sbox">$$\prod_{k=1}^n(2k) = 2^nn!,\qquad\prod_{k=1}^n(2k-1) = \frac{(2n)!}{2^nn!}.$$</div>$$(2n)! = \prod_{k=1}^n(2k)\cdot\prod_{k=1}^n(2k-1).$$` },
   "k-serie-geo-somme": { t: "Somme d'une série géométrique", b: R`<div class="sbox">$$|q|< 1\ \Longrightarrow\ \sum_{k=0}^{+\infty}q^k = \frac1{1-q}.$$</div>` }
 });
 
@@ -545,7 +545,7 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-somme-double": { t: "Intervertir deux sommes", b: R`<div class="sbox">$$\sum_{i=0}^n\sum_{j=i}^na_{i,j} = \sum_{j=0}^n\sum_{i=0}^ja_{i,j}.$$</div><p>On somme sur les couples $0\leqslant i\leqslant j\leqslant n$, ligne par ligne ou colonne par colonne.</p>` },
+  "k-somme-double": { t: "Intervertir deux sommes", b: R`<div class="sbox">$$\sum_{i=0}^n\sum_{j=i}^na_{i,j} = \sum_{0\leqslant i\leqslant j\leqslant n}a_{i,j} = \sum_{j=0}^n\sum_{i=0}^ja_{i,j}.$$</div>` },
   "k-binome-somme": { t: "Sommes de coefficients binomiaux", b: R`<div class="sbox">$$\sum_{k=0}^n\binom nk = 2^n,\qquad\sum_{k=0}^n\binom nkx^k = (1+x)^n,\qquad\sum_{k=0}^n(-1)^k\binom nk = 0\ (n\geqslant1).$$</div>` },
   "k-cs-somme": { t: "Inégalité de Cauchy-Schwarz (sommes)", b: R`<div class="sbox">$$\Big(\sum_{k=1}^na_kb_k\Big)^2\leqslant\Big(\sum a_k^2\Big)\Big(\sum b_k^2\Big).$$</div>` },
   "k-abel-somme": { t: "Sommation par parties (Abel)", b: R`<p>Avec $S_k = x_1+\dots+x_k$ et $S_0 = 0$ :</p><div class="sbox">$$\sum_{k=1}^nkx_k = \sum_{k=1}^nk(S_k-S_{k-1}) = nS_n-\sum_{k=1}^{n-1}S_k.$$</div>` },
@@ -723,8 +723,8 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-acos-bsin": { t: "Écrire a cos x + b sin x", b: R`<p>Si $(a,b)\neq(0,0)$, avec $R = \sqrt{a^2+b^2}$ et $\varphi$ tel que $a = R\cos\varphi$, $b = R\sin\varphi$ :</p><div class="sbox">$$a\cos x+b\sin x = R\cos(x-\varphi) = \operatorname{Re}\big((a-ib)e^{ix}\big).$$</div><p>Ses zéros forment une suite de pas $\pi$.</p>` },
-  "k-racine-carree-c": { t: "Racines carrées d'un complexe", b: R`<p>Pour résoudre $(a+ib)^2 = u+iv$ :</p><div class="sbox">$$a^2-b^2 = u,\qquad a^2+b^2 = |u+iv|,\qquad2ab = v.$$</div><p>Les deux premières donnent $a^2$ et $b^2$, la troisième le signe relatif de $a$ et $b$.</p>` },
+  "k-acos-bsin": { t: "Écrire a cos x + b sin x", b: R`<p>$(a,b)\neq(0,0)$, $R = \sqrt{a^2+b^2}$, $a = R\cos\varphi$, $b = R\sin\varphi$ :</p><div class="sbox">$$a\cos x+b\sin x = R\cos(x-\varphi) = \operatorname{Re}\big((a-ib)e^{ix}\big).$$</div><p><b>Zéros</b> :</p>$$x\in\varphi+\frac\pi2+\pi\mathbb Z.$$` },
+  "k-racine-carree-c": { t: "Racines carrées d'un complexe", b: R`$$(a+ib)^2 = u+iv\iff\left\{\begin{aligned}a^2-b^2&= u,\\a^2+b^2&= |u+iv|,\\2ab&= v.\end{aligned}\right.$$<p>Lignes $1$ et $2$ : $a^2$, $b^2$. Ligne $3$ : signe de $ab$.</p>` },
   "k-forme-trigo": { t: "Forme trigonométrique", b: R`<div class="sbox">$$z = re^{i\theta},\qquad|z_1z_2| = |z_1||z_2|,\qquad\arg(z_1z_2)\equiv\arg z_1+\arg z_2\pmod{2\pi}.$$</div>` },
   "k-arctan-param": { t: "Paramétrer par l'arc tangente", b: R`<p>Pour $x\in\mathbb R$, $t = \arctan x\in\,]-\frac\pi2,\frac\pi2[$ et $x = \tan t$ :</p><div class="sbox">$$\frac{1+ix}{1-ix} = \frac{\cos t+i\sin t}{\cos t-i\sin t} = e^{2it}.$$</div>` }
 });
@@ -833,8 +833,8 @@ LEMME.exercises([
 LEMME.rappels({
   "k-alignes": { t: "Alignement et angle droit en complexes", b: R`<p>Pour $A,B,C$ d'affixes $a,b,c$ avec $A\neq B$ :</p><div class="sbox">$$A,B,C\ \text{alignés}\iff\frac{c-a}{b-a}\in\mathbb R,\qquad(AB)\perp(AC)\iff\frac{c-a}{b-a}\in i\mathbb R.$$</div>` },
   "k-reel-conj": { t: "Réel, imaginaire pur et conjugué", b: R`<div class="sbox">$$w\in\mathbb R\iff\bar w = w,\qquad w\in i\mathbb R\iff\bar w = -w.$$</div><p>Et $\frac uv\in\mathbb R\iff u\bar v\in\mathbb R$ (on multiplie par $|v|^2>0$).</p>` },
-  "k-second-degre-c": { t: "Équation du second degré dans ℂ", b: R`<p>$az^2+bz+c = 0$ ($a\neq0$) : avec $\Delta = b^2-4ac$ et $\delta^2 = \Delta$,</p><div class="sbox">$$z = \frac{-b\pm\delta}{2a}.$$</div><p>Une racine double si $\Delta = 0$, deux racines distinctes sinon.</p>` },
-  "k-conique": { t: "Hyperbole équilatère", b: R`$$\frac{Y^2}{a^2}-\frac{X^2}{a^2} = 1\ :\quad\text{sommets }(0,\pm a),\quad\text{foyers }(0,\pm a\sqrt2),\quad e = \sqrt2,\quad\text{asymptotes }Y = \pm X.$$` }
+  "k-second-degre-c": { t: "Équation du second degré dans ℂ", b: R`<p>$az^2+bz+c = 0$, $a\neq0$, $\Delta = b^2-4ac$, $\delta^2 = \Delta$ :</p><div class="sbox">$$z = \frac{-b\pm\delta}{2a},\qquad\Delta = 0\iff\text{racine double }-\frac b{2a}.$$</div>` },
+  "k-conique": { t: "Hyperbole équilatère", b: R`$$\begin{gathered}\frac{Y^2}{a^2}-\frac{X^2}{a^2} = 1\ :\quad\text{sommets }(0,\pm a),\\[4pt]\text{foyers }(0,\pm a\sqrt2),\\[4pt]e = \sqrt2,\\[4pt]\text{asymptotes }Y = \pm X.\end{gathered}$$` }
 });
 
 (() => {
@@ -946,7 +946,7 @@ LEMME.exercises([
 LEMME.rappels({
   "k-j": { t: "Le nombre j", b: R`<div class="sbox">$$j = e^{2i\pi/3},\qquad j^3 = 1,\qquad1+j+j^2 = 0,\qquad\bar j = j^2,\qquad e^{i\pi/3} = -j^2.$$</div>` },
   "k-somme-racines": { t: "Somme des racines de l'unité", b: R`<p>Pour $\omega = e^{2i\pi/n}$ ($n\geqslant2$) :</p><div class="sbox">$$1+\omega+\omega^2+\dots+\omega^{n-1} = 0.$$</div>` },
-  "k-viete2": { t: "Somme et produit de deux nombres", b: R`<p>Deux nombres de somme $s$ et de produit $p$ sont les racines de</p><div class="sbox">$$X^2-sX+p = 0.$$</div>` },
+  "k-viete2": { t: "Somme et produit de deux nombres", b: R`<div class="sbox">$$\left\{\begin{aligned}x+y&= s\\xy&= p\end{aligned}\right.\iff x,y\ \text{racines de}\ X^2-sX+p.$$</div>` },
   "k-egal-tri": { t: "Égalité dans l'inégalité triangulaire", b: R`<div class="sbox">$$|z+z'| = |z|+|z'|\iff\bar zz'\in\mathbb R_+\iff z,z'\ \text{sur une même demi-droite issue de}\ O.$$</div><p>Car $|z+z'|^2 = |z|^2+|z'|^2+2\operatorname{Re}(\bar zz')$ et $\operatorname{Re}(\bar zz')\leqslant|\bar zz'|$.</p>` }
 });
 
@@ -1045,7 +1045,7 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-moivre": { t: "Formule de Moivre et linéarisation inverse", b: R`<div class="sbox">$$(\cos x+i\sin x)^n = \cos(nx)+i\sin(nx).$$</div><p>En développant par le binôme et en prenant parties réelle et imaginaire, on exprime $\cos(nx)$ et $\sin(nx)$ en fonction de $\cos x$ et $\sin x$. Exemple : $\sin3x = 3\sin x-4\sin^3x$.</p>` },
+  "k-moivre": { t: "Formule de Moivre et linéarisation inverse", b: R`<div class="sbox">$$(\cos x+i\sin x)^n = \cos(nx)+i\sin(nx).$$</div><p><b>Binôme, puis $\operatorname{Re}$ et $\operatorname{Im}$</b> :</p>$$\cos(nx) = \operatorname{Re}\sum_{k}\binom nk i^k\cos^{n-k}x\sin^kx,\qquad\sin3x = 3\sin x-4\sin^3x.$$` },
   "k-prod-sin": { t: "Produit de deux sinus", b: R`<div class="sbox">$$2\sin a\sin b = \cos(a-b)-\cos(a+b).$$</div>` },
   "k-somme-geo-racines": { t: "Somme des puissances d'une racine de l'unité", b: R`<p>Pour $\omega = e^{2i\pi/n}$ et $r\in\mathbb Z$ :</p><div class="sbox">$$\sum_{k=0}^{n-1}\omega^{rk} = \begin{cases}n&\text{si}\ n\mid r\\0&\text{sinon.}\end{cases}$$</div>` }
 });

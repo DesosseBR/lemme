@@ -9,7 +9,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "pg-circ": { t: "Matrices circulantes", b: R`$$Je_k = e_{k-1},\quad F_j = (\omega^{jk})_{0\leqslant k\lt n},\quad JF_j = \omega^jF_j\ \Longrightarrow\ P(J) = \operatorname{diag}\big(P(\omega^j)\big)\text{ dans }(F_j).$$` },
-  "pg-prod": { t: "Produits infinis", b: R`$$\sum|z_k|\lt\infty,\ 1+z_k\neq0\Rightarrow\prod_{k = 0}^p(1+z_k)\to L\neq0;\qquad0\leqslant x_k\lt1,\ \sum x_k = \infty\Rightarrow\prod(1-x_k)\to0.$$` }
+  "pg-prod": { t: "Produits infinis", b: R`$$\begin{gathered}\sum|z_k|\lt\infty,\ 1+z_k\neq0\Rightarrow\prod_{k = 0}^p(1+z_k)\to L\neq0,\\[4pt]0\leqslant x_k\lt1,\ \sum x_k = \infty\Rightarrow\prod(1-x_k)\to0.\end{gathered}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Un polygone à $n\geqslant3$ sommets est un vecteur $Z = (z_1,\dots,z_n)\in\mathbb C^n$ (affixes des sommets). On définit $Z^{(0)} = Z$ et $Z^{(k+1)} = AZ^{(k)}$, où $Z^{(k+1)}$ est le polygone des milieux : $z^{(k+1)}_i = \frac{z^{(k)}_i+z^{(k)}_{i+1}}2$ (indices modulo $n$). On note $g = \frac1n\sum z_i$ l'isobarycentre et $\omega = e^{2i\pi/n}$.</p>`;

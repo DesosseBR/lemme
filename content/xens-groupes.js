@@ -11,7 +11,7 @@ LEMME.rappels({
   "gab-lagrange": { t: "Théorème de Lagrange", b: R`$$H\leqslant G,\ |G|\lt\infty\ \Longrightarrow\ |H|\ \big|\ |G|,\qquad[G:H] = \frac{|G|}{|H|}.$$` },
   "gab-diveucl": { t: "Division euclidienne", b: R`$$k\in\mathbb Z,\ n\geqslant1\ \Longrightarrow\ \exists!(q,\rho)\in\mathbb Z^2,\ k = qn+\rho,\ 0\leqslant\rho\lt n.$$` },
   "gab-gauss": { t: "Lemme de Gauss", b: R`$$a\mid bc,\ a\wedge b = 1\ \Longrightarrow\ a\mid c;\qquad a\mid c,\ b\mid c,\ a\wedge b = 1\ \Longrightarrow\ ab\mid c.$$` },
-  "gab-ppcm": { t: "Le ppcm et les valuations", b: R`<p>Le ppcm $m$ d'une famille finie d'entiers $\geqslant1$ est le plus petit entier $\geqslant1$ multiple de tous ; il divise tout multiple commun. Pour tout nombre premier $p$, sa valuation est le maximum des valuations :</p>$$v_p(m) = \max_i v_p(a_i).$$` },
+  "gab-ppcm": { t: "Le ppcm et les valuations", b: R`<div class="sbox">$$m = \operatorname{ppcm}(a_1,\dots,a_r)\iff\big(\forall i,\ a_i\mid m\big)\wedge\big(\forall c,\ (\forall i,\ a_i\mid c)\Rightarrow m\mid c\big).$$</div>$$\forall p\ \text{premier},\quad v_p(m) = \max_i v_p(a_i).$$` },
   "gab-morph": { t: "Morphismes de groupes", b: R`$$f(e) = e',\quad f(x^k) = f(x)^k,\quad f(x^{-1}) = f(x)^{-1};\qquad f\text{ injectif}\iff\ker f = \{e\}.$$<p>Un isomorphisme conserve l'ordre des éléments.</p>` },
   "gab-card": { t: "Injection entre ensembles finis de même cardinal", b: R`$$|E| = |F|\lt\infty,\ f : E\to F\text{ injective}\ \Longrightarrow\ f\text{ bijective}.$$` },
   "gab-quot": { t: "Groupe quotient d'un groupe abélien", b: R`$$\bar g\,\bar g' = \overline{gg'},\qquad\bar g = \bar e\iff g\in H,\qquad|G/H| = \frac{|G|}{|H|}.$$` },

@@ -3,8 +3,8 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 2 };
 LEMME.rappels({
-  "nrm-dimfinie": { t: "Dimension finie : normes équivalentes", b: R`<p>Sur un espace de <b>dimension finie</b>, toutes les normes sont équivalentes. Conséquences :</p><ul><li>la convergence d'une suite ne dépend pas de la norme ;</li><li>elle équivaut à la convergence de chaque coordonnée dans une base ;</li><li>toute application linéaire (ou polynomiale en les coordonnées) est continue.</li></ul>` },
-  "nrm-lim": { t: "Passage à la limite dans les opérations", b: R`<p>Dans $\mathcal M_n(\mathbb K)$ : si $A_k\to A$ et $B_k\to B$, alors $A_k+B_k\to A+B$, $\lambda A_k\to\lambda A$, $A_kB_k\to AB$, et les fonctions polynomiales des coefficients (trace, déterminant, mineurs) passent à la limite. Si une égalité ou une inégalité large est vraie pour tout $k$, elle reste vraie à la limite.</p>` }
+  "nrm-dimfinie": { t: "Dimension finie : normes équivalentes", b: R`<p>$\dim E\lt\infty$ :</p>$$\begin{gathered}\forall N_1,N_2,\ \exists\alpha,\beta>0,\ \alpha N_1\leqslant N_2\leqslant\beta N_1,\\[4pt]x_n\to x\iff\forall i,\ x_{n,i}\to x_i,\\[4pt]u\text{ linéaire}\Rightarrow u\text{ continue}.\end{gathered}$$` },
+  "nrm-lim": { t: "Passage à la limite dans les opérations", b: R`$$\begin{gathered}A_k\to A,\ B_k\to B\ \Longrightarrow\ A_k+B_k\to A+B,\\[4pt]A_kB_k\to AB,\\[4pt]\det A_k\to\det A,\\[4pt]\operatorname{tr}A_k\to\operatorname{tr}A.\end{gathered}$$<p>Égalités et inégalités larges passent à la limite.</p>` }
 });
 LEMME.exercises([
 { id: "topo-113", ...P, level: 1, time: "10 min",

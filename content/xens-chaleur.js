@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "ch-pars": { t: "Parseval (admis)", b: R`$$\frac1{2\pi}\int_0^{2\pi}|f|^2 = \sum_{n\in\mathbb Z}|c_n(f)|^2;\qquad c_n(f)\to0;\qquad c_n(f) = c_n(g),\ f,g\text{ continues}\Rightarrow f = g.$$` },
   "ch-dir": { t: "Dirichlet (admis)", b: R`$$f\in\mathcal C^1,\ 2\pi\text{-périodique}\ \Longrightarrow\ f(x) = \sum_{n\in\mathbb Z}c_n(f)e^{inx}\ (\text{CVN}).$$` },
-  "ch-dom": { t: "Dérivation sous l'intégrale et séries", b: R`$$\partial_tg\in\mathcal C(I\times[0,2\pi])\ \Longrightarrow\ \frac d{dt}\int_0^{2\pi}g(t,x)\,dx = \int_0^{2\pi}\partial_tg(t,x)\,dx;\qquad\sum f_n'\text{ CVN}\Rightarrow\Big(\sum f_n\Big)' = \sum f_n'.$$` }
+  "ch-dom": { t: "Dérivation sous l'intégrale et séries", b: R`$$\begin{gathered}\partial_tg\in\mathcal C(I\times[0,2\pi])\ \Longrightarrow\ \frac d{dt}\int_0^{2\pi}g(t,x)\,dx = \int_0^{2\pi}\partial_tg(t,x)\,dx,\\[4pt]\sum f_n'\text{ CVN}\Rightarrow\Big(\sum f_n\Big)' = \sum f_n'.\end{gathered}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour $f : \mathbb R\to\mathbb C$, $2\pi$-périodique et de carré intégrable sur $[0,2\pi]$, on note $c_n(f) = \frac1{2\pi}\int_0^{2\pi}f(x)e^{-inx}\,dx$ ($n\in\mathbb Z$) et $\|f\|_2^2 = \frac1{2\pi}\int_0^{2\pi}|f|^2$. Soit $u_0$ une telle fonction, de coefficients $d_n = c_n(u_0)$. On cherche $u : \,]0,+\infty[\times\mathbb R\to\mathbb C$ telle que : (a) $u(t,\cdot)$ est $2\pi$-périodique ; (b) $\partial_tu$ et $\partial_x^2u$ existent et sont continues ; (c) $\partial_tu = \partial_x^2u$ (<b>équation de la chaleur</b>) ; (d) $\|u(t,\cdot)-u_0\|_2\to0$ quand $t\to0^+$.</p>`;

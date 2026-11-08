@@ -4,8 +4,8 @@ const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 const { GRAPH } = window.__LA;
 LEMME.rappels({
-  "eu-projo": { t: "Projection orthogonale", b: R`<p>Une projection $p$ ($p\circ p = p$) vérifie $E = \mathrm{Im}\,p\oplus\ker p$. Elle est dite <b>orthogonale</b> si $\ker p\perp\mathrm{Im}\,p$, c'est-à-dire $\ker p = (\mathrm{Im}\,p)^\perp$. Pour $x = y+z$ avec $y\in\mathrm{Im}\,p$, $z\in\ker p$ : $p(x) = y$. En base orthonormée, la matrice d'une projection orthogonale est symétrique.</p>` },
-  "eu-normal": { t: "Équations normales", b: R`<p>Pour $F = \mathrm{Vect}(f_1,\dots,f_p)$ et $p_F(x) = \sum\lambda_jf_j$, la condition $x-p_F(x)\perp F$ s'écrit $(p_F(x)|f_i) = (x|f_i)$ pour $i = 1,\dots,p$ : un système linéaire de matrice de Gram $\big((f_i|f_j)\big)$. Puis $d(x,F)^2 = \|x-p_F(x)\|^2 = (x-p_F(x)|x) = \|x\|^2-(p_F(x)|x)$.</p>` }
+  "eu-projo": { t: "Projection orthogonale", b: R`$$p^2 = p,\ \ker p = (\operatorname{Im}p)^\perp\ \Longrightarrow\ p\text{ projection orthogonale},\quad\operatorname{Mat}_{\text{b.o.n.}}(p)\in\mathcal S_n(\mathbb R).$$` },
+  "eu-normal": { t: "Équations normales", b: R`$$p_F(x) = \sum_j\lambda_jf_j\ :\quad\forall i,\ \sum_j\lambda_j(f_j|f_i) = (x|f_i);\qquad d(x,F)^2 = \|x\|^2-(p_F(x)|x).$$` }
 });
 const figLn = GRAPH({ w: 460, h: 250, x: [0, 1], y: [-3, 1], xt: [0.25, 0.5, 0.75, 1], xtl: ["0,25", "0,5", "0,75", "1"], yt: [-2, -1, 0, 1], xl: "t",
   curves: [

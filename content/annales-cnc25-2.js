@@ -4,7 +4,7 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 6, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "c2-trace": { t: "Propriétés de la trace", b: R`$$\operatorname{Tr}\text{ linéaire},\quad\operatorname{Tr}(MN) = \operatorname{Tr}(NM),\quad\operatorname{Tr}(P^{-1}MP) = \operatorname{Tr}M,\quad\chi_M\text{ scindé}\Rightarrow\operatorname{Tr}M = \sum\lambda_i.$$` },
+  "c2-trace": { t: "Propriétés de la trace", b: R`$$\begin{gathered}\operatorname{Tr}\text{ linéaire},\\[4pt]\operatorname{Tr}(MN) = \operatorname{Tr}(NM),\\[4pt]\operatorname{Tr}(P^{-1}MP) = \operatorname{Tr}M,\\[4pt]\chi_M\text{ scindé}\Rightarrow\operatorname{Tr}M = \sum\lambda_i.\end{gathered}$$` },
   "c2-spectral": { t: "Théorème spectral", b: R`$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ S = PDP^\top,\quad P^\top P = I_n,\quad D\text{ diagonale réelle}.$$<p>Colonnes de $P$ : base orthonormée de vecteurs propres.</p>` },
   "c2-proj": { t: "Projecteur", b: R`$$p\circ p = p\ \Longrightarrow\ E = \operatorname{Im}p\oplus\ker p,\quad p = \text{projecteur sur }\operatorname{Im}p\parallel\ker p.$$` },
   "c2-eij": { t: "Matrices élémentaires", b: R`$$E_{i,j}E_{k,l} = \delta_{j,k}E_{i,l},\qquad M = \sum_{i,j}m_{i,j}E_{i,j}.$$` }

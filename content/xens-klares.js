@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "kl-dun": { t: "Décomposition de Dunford", b: R`<p>Si $\chi_u$ est scindé, $u = d+n$ avec $d$ diagonalisable, $n$ nilpotent, $dn = nd$, et $d,n$ polynômes en $u$. Sur chaque sous-espace caractéristique $N_\lambda = \ker(u-\lambda)^{m_\lambda}$, $d = \lambda\,\mathrm{id}$.</p>` },
-  "kl-jor": { t: "Réduction des nilpotents", b: R`<p>Un endomorphisme nilpotent admet une base dans laquelle sa matrice est $\mathrm{diag}(J_{k_1},\dots,J_{k_r})$, où $J_k$ est le bloc de Jordan nilpotent de taille $k$ ($1$ sur la surdiagonale).</p>` },
-  "kl-codiag": { t: "Endomorphismes qui commutent", b: R`<p>Deux endomorphismes diagonalisables qui commutent sont simultanément diagonalisables ; leur somme et leur différence sont diagonalisables. Un endomorphisme annulé par un polynôme scindé à racines simples est diagonalisable.</p>` }
+  "kl-dun": { t: "Décomposition de Dunford", b: R`$$u = d+n,\ d\text{ diag.},\ n\text{ nilp.},\ dn = nd,\ d,n\in K[u];\qquad d_{|N_\lambda} = \lambda\,\mathrm{id},\quad N_\lambda = \ker(u-\lambda)^{m_\lambda}.$$` },
+  "kl-jor": { t: "Réduction des nilpotents", b: R`$$u\text{ nilpotent}\ \Longrightarrow\ \operatorname{Mat}(u) = \operatorname{diag}(J_{k_1},\dots,J_{k_r}),\qquad J_k = \begin{pmatrix}0&1&&\\&\ddots&\ddots&\\&&\ddots&1\\&&&0\end{pmatrix}.$$` },
+  "kl-codiag": { t: "Endomorphismes qui commutent", b: R`$$u,v\text{ diag.},\ uv = vu\ \Longrightarrow\ u,v\text{ codiagonalisables},\ u\pm v\text{ diag.}$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $E$ est un $K$-espace vectoriel de dimension finie, $u\in\mathcal L(E)$ <b>trigonalisable</b>. On note $\mathrm{ad}_u : \mathcal L(E)\to\mathcal L(E)$, $v\mapsto uv-vu$ (crochet $[u,v]$), et $\mathcal C(u) = \ker\mathrm{ad}_u$ le commutant de $u$. On veut montrer le <b>critère de Klarès</b> : $u$ est diagonalisable si et seulement si $\ker\mathrm{ad}_u = \ker\mathrm{ad}_u^2$.</p>`;

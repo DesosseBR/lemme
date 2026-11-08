@@ -9,10 +9,10 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "fnc-gauss": { t: "Intégrale de Gauss", b: R`<div class="sbox">$$\int_{\mathbb R}e^{-x^2/2}\,dx = \sqrt{2\pi}.$$</div>` },
-  "fnc-dom": { t: "Dérivation sous l'intégrale", b: R`<p>Si $\partial_tg(t,x)$ existe, est continue en $t$, et si $|\partial_tg(t,x)|\leqslant h(x)$ avec $h$ intégrable indépendante de $t$, alors $t\mapsto\int g(t,x)\,dx$ est $\mathcal C^1$ et sa dérivée est $\int\partial_tg(t,x)\,dx$.</p>` },
-  "fnc-ipp": { t: "Intégration par parties sur ℝ", b: R`<p>Si $u,v$ sont $\mathcal C^1$ et si $uv$ a des limites aux deux bornes : $\int_{\mathbb R}u'v = \big[uv\big]_{-\infty}^{+\infty}-\int_{\mathbb R}uv'$, dès que deux des trois termes existent.</p>` },
+  "fnc-dom": { t: "Dérivation sous l'intégrale", b: R`<div class="sbox">$$\left.\begin{aligned}&\partial_tg\ \text{continue en}\ t\\&|\partial_tg(t,x)|\leqslant h(x),\ h\ \text{intégrable}\end{aligned}\right\}\Longrightarrow\ \frac d{dt}\int g(t,x)\,dx = \int\partial_tg(t,x)\,dx.$$</div>` },
+  "fnc-ipp": { t: "Intégration par parties sur ℝ", b: R`<div class="sbox">$$\int_{\mathbb R}u'v = \big[uv\big]_{-\infty}^{+\infty}-\int_{\mathbb R}uv',$$</div><p>$u,v\in\mathcal C^1$, valable dès que deux des trois termes existent.</p>` },
   "fnc-edl": { t: "Équation y' = a(t)y", b: R`<p>Les solutions de $y' = a(t)y$ sur $\mathbb R$ ($a$ continue) sont $y(t) = y(0)\exp\big(\int_0^ta\big)$.</p>` },
-  "fnc-res": { t: "Théorème des résidus (admis)", b: R`<p>Si $g$ est holomorphe sur un ouvert contenant un contour fermé simple $\Gamma$ parcouru dans le sens direct et son intérieur, sauf en un pôle simple $z_0$ intérieur, alors $\oint_\Gamma g = 2i\pi\operatorname{Res}_{z_0}g$, avec $\operatorname{Res}_{z_0}g = \lim_{z\to z_0}(z-z_0)g(z)$.</p>` }
+  "fnc-res": { t: "Théorème des résidus (admis)", b: R`<p>$g$ holomorphe sur un voisinage de $\Gamma$ et de son intérieur, sauf un pôle simple $z_0$ intérieur ; $\Gamma$ simple, sens direct :</p><div class="sbox">$$\oint_\Gamma g = 2i\pi\operatorname{Res}_{z_0}g,\qquad\operatorname{Res}_{z_0}g = \lim_{z\to z_0}(z-z_0)g(z).$$</div>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour une variable aléatoire $X$ de densité $f$, $\varphi_X(t) = \mathbb E[e^{itX}] = \int_{\mathbb R}e^{itx}f(x)\,dx$. La loi normale $\mathcal N(\mu,\sigma^2)$ ($\sigma>0$) a pour densité $\frac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}$, la loi de Cauchy $\mathcal C(a,b)$ ($b>0$) a pour densité $\frac1\pi\frac b{(x-a)^2+b^2}$. On admet que deux variables de même fonction caractéristique ont même loi, et que si $X,Y$ sont indépendantes, $\varphi_{X+Y} = \varphi_X\varphi_Y$.</p>`;

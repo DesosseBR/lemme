@@ -3,7 +3,7 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 LEMME.rappels({
-  "pre-ps": { t: "Produit scalaire", b: R`$$(\cdot|\cdot)\text{ produit scalaire}\iff\text{bilinéaire, symétrique},\ (x|x)\geqslant0,\ (x|x) = 0\Rightarrow x = 0;\qquad\|x\| = \sqrt{(x|x)}.$$` },
+  "pre-ps": { t: "Produit scalaire", b: R`$$\begin{gathered}(\cdot|\cdot)\text{ produit scalaire}\iff\text{bilinéaire, symétrique},\ (x|x)\geqslant0,\ (x|x) = 0\Rightarrow x = 0,\\[4pt]\|x\| = \sqrt{(x|x)}.\end{gathered}$$` },
   "pre-intnulle": { t: "Intégrale nulle d'une fonction continue positive", b: R`$$g\in\mathcal C(I),\ g\geqslant0,\ \int_Ig = 0\ \Longrightarrow\ g = 0;\qquad P = 0\text{ sur un intervalle non trivial}\Rightarrow P = 0.$$` },
   "pre-schmidt": { t: "Orthonormalisation de Schmidt", b: R`$$\forall n,\ \operatorname{Vect}(e_0,\dots,e_n) = \operatorname{Vect}(f_0,\dots,f_n),\quad(e_n|f_n)>0;$$$$g_n = f_n-\sum_{k\lt n}(e_k|f_n)e_k,\qquad e_n = \frac{g_n}{\|g_n\|}.$$` },
   "pre-proj": { t: "Projection orthogonale et distance", b: R`$$p_F(x) = \sum_{k = 1}^p(e_k|x)e_k,\qquad x-p_F(x)\perp F,\qquad d(x,F)^2 = \|x\|^2-\sum_{k = 1}^p(e_k|x)^2.$$` },

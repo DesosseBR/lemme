@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 8, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "cz-crt": { t: "Théorème chinois pour les polynômes", b: R`<p>Si $P = P_1\cdots P_r$ avec les $P_i$ premiers entre eux deux à deux, $Q\bmod P\mapsto(Q\bmod P_i)_i$ est un isomorphisme d'anneaux $\mathbb F_q[X]/(P)\to\prod_i\mathbb F_q[X]/(P_i)$, qui induit une bijection entre les groupes d'inversibles.</p>` },
-  "cz-corps": { t: "Corps de rupture", b: R`<p>Si $P_i$ est irréductible de degré $d$, $\mathbb F_q[X]/(P_i)$ est un corps à $q^d$ éléments. Son groupe multiplicatif est d'ordre $q^d-1$.</p>` },
-  "cz-ddf": { t: "Les polynômes X^(qⁿ) − X", b: R`<p>$X^{q^n}-X$ est le produit des polynômes irréductibles unitaires de $\mathbb F_q[X]$ de degré divisant $n$. Donc $P\wedge(X^{q^n}-X)$ est le produit des facteurs irréductibles distincts de $P$ de degré divisant $n$.</p>` }
+  "cz-crt": { t: "Théorème chinois pour les polynômes", b: R`$$P = \prod P_i,\ P_i\wedge P_j = 1\ \Longrightarrow\ \mathbb F_q[X]/(P)\simeq\prod_i\mathbb F_q[X]/(P_i).$$` },
+  "cz-corps": { t: "Corps de rupture", b: R`$$\begin{gathered}P_i\text{ irréductible},\ \deg P_i = d\ \Longrightarrow\ |\mathbb F_q[X]/(P_i)| = q^d,\\[4pt]\text{groupe multiplicatif d'ordre }q^d-1.\end{gathered}$$` },
+  "cz-ddf": { t: "Les polynômes X^(qⁿ) − X", b: R`$$X^{q^n}-X = \prod_{\substack{P\text{ irr. unitaire}\\\deg P\mid n}}P;\qquad P\wedge(X^{q^n}-X) = \prod_{\substack{P_i\mid P\\\deg P_i\mid n}}P_i.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $q$ est une puissance d'un premier impair. $P\in\mathbb F_q[X]$ est unitaire de degré $n = rd$, produit de $r\geqslant2$ irréductibles unitaires distincts $P_1,\dots,P_r$, tous de degré $d$. Un <b>pas</b> de l'algorithme : tirer $Q$ uniformément parmi les polynômes de degré $\lt n$ ; si $Q\wedge P\neq1$, renvoyer $Q\wedge P$ ; sinon renvoyer $\big(Q^{\frac{q^d-1}2}-1\big)\wedge P$ (calculé modulo $P$). On veut montrer qu'il renvoie un <b>facteur non trivial</b> de $P$ avec probabilité au moins $\frac12$.</p>`;
