@@ -14,20 +14,41 @@ const LEMME = window.LEMME = {
     { name: "CNC", desc: "Concours National Commun (Maroc) : l'écrit commun aux grandes écoles d'ingénieurs marocaines." }
   ],
   subject(s) { this.SUBJECTS.push(s); },
-  exercises(list) { this.EXERCISES.push(...this.mergeParts(list)); },
+  exercises(list) {
+    const rest = [], touched = new Set();
+    for (const e of list) { if (e.subj === "annales" && e.part && !e.plus) { const k = "ann-" + e.chap; (this.__ann[k] = this.__ann[k] || []).push(e); touched.add(k); } else rest.push(e); }
+    this.EXERCISES.push(...this.mergeParts(rest));
+    for (const k of touched) {
+      const ps = this.__ann[k], m = ps.length > 1 ? this.mergeGroup(ps) : ps[0];
+      m.__ann = k;
+      const i = this.EXERCISES.findIndex(x => x.__ann === k);
+      if (i >= 0) this.EXERCISES[i] = m; else this.EXERCISES.push(m);
+    }
+  },
+  __ann: {},
   /* Un sujet « Aller plus loin » découpé en parties devient un seul exercice : énoncé complet, questions numérotées, corrigé d'un seul tenant. */
   ALIAS: {},
   mergeParts(list) {
     const groups = new Map(), out = [];
     for (const e of list) {
-      if (!e.plus || !e.part) { out.push(e); continue; }
-      if (!groups.has(e.plus)) { groups.set(e.plus, []); out.push({ __g: e.plus }); }
-      groups.get(e.plus).push(e);
+      /* Les sujets de concours aussi : toutes les parties d'un sujet forment un seul sujet complet. */
+      const key = e.plus || null;
+      if (!key || !e.part) { out.push(e); continue; }
+      if (!groups.has(key)) { groups.set(key, []); out.push({ __g: key }); }
+      groups.get(key).push(e);
     }
-    return out.map(x => {
-      if (!x.__g) return x;
-      const ps = groups.get(x.__g), f = ps[0];
-      if (ps.length === 1) return f;
+    return out.map(x => { if (!x.__g) return x; const ps = groups.get(x.__g); return ps.length === 1 ? ps[0] : this.mergeGroup(ps); });
+  },
+  mergeGroup(ps) {
+    {
+      let f = ps[0];
+      const ann = f.subj === "annales";
+      if (ann) {
+        /* numéros de questions qui repartent de 1 dans une partie : on les préfixe par le numéro de partie */
+        let restart = false;
+        for (let i = 1; i < ps.length; i++) { const a = Math.max(...ps[i - 1].steps.map(s => parseFloat(s.q) || 0)), b = Math.min(...ps[i].steps.map(s => parseFloat(s.q) || 0)); if (b <= a) restart = true; }
+        if (restart) { ps = ps.map((e, k) => Object.assign({}, e, { steps: e.steps.map(s => s.q == null ? s : Object.assign({}, s, { q: `${k + 1}.${s.q}` })) })); f = ps[0]; }
+      }
       const pre = (f.enonce.match(/^\s*<p class="pl-pre">[\s\S]*?<\/p>/) || [""])[0];
       const body = ps.map(e => {
         let h = e.enonce.replace(/^\s*<p class="pl-pre">[\s\S]*?<\/p>/, "");
@@ -42,15 +63,17 @@ const LEMME = window.LEMME = {
       const dd = ps.flatMap(e => (e.decode && e.decode.donnees) || []);
       const joinP = k => ps.filter(e => e[k]).map(e => ps.length > 1 ? `<p><b>${e.part}.</b> ${String(e[k]).replace(/^<p>/, "").replace(/<\/p>$/, "")}</p>` : e[k]).join("");
       for (const e of ps.slice(1)) this.ALIAS[e.id] = f.id;
+      const sj = ann ? ((this.SUBJECTS.find(s => s.id === "annales") || { years: { mp: [] } }).years.mp[f.chap] || {}) : {};
       const m = Object.assign({}, f, {
-        title: f.sujet || f.title, part: undefined, time: mins >= 60 ? `${Math.floor(mins / 60)} h${mins % 60 ? " " + String(mins % 60).padStart(2, "0") : ""}` : `${mins} min`,
+        title: sj.titre || f.sujet || f.title, tt: undefined, part: undefined, time: mins >= 60 ? `${Math.floor(mins / 60)} h${mins % 60 ? " " + String(mins % 60).padStart(2, "0") : ""}` : `${mins} min`,
         enonce: pre + body, steps: ps.flatMap(e => e.steps || []),
         decode: { donnees: [...new Set(dd)], but: f.sujetDesc || (f.decode && f.decode.but) || "", cles: Object.assign({}, ...ps.map(e => (e.decode && e.decode.cles) || {})) },
         piege: joinP("piege"), methode: joinP("methode"), merged: ps.length
       });
+      if (ann) { if (sj.duree) m.time = sj.duree; m.level = Math.round(ps.reduce((a, e) => a + (e.level || 3), 0) / ps.length); m.kind = "probleme"; m.qnav = true; m.side = ps.some(e => e.side) || undefined; }
       const viz = ps.flatMap(e => [].concat(e.viz || [])); if (viz.length) m.viz = viz;
       return m;
-    });
+    }
   },
   dm(list) { this.DM.push(...list); },
   kholles(list) { this.KHOLLES.push(...list); },

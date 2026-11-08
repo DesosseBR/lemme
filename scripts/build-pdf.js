@@ -19,6 +19,7 @@ const sandbox = { window: {} };
 vm.createContext(sandbox);
 for (const f of ORDER) vm.runInContext(fs.readFileSync(path.join(ROOT, "content", f + ".js"), "utf8"), sandbox, { filename: f + ".js" });
 const L = sandbox.window.LEMME;
+{ const A = (L.SUBJECTS.find(x => x.id === "annales") || { years: { mp: [] } }).years.mp; L.EXERCISES.forEach(e => { if (e.__ann && A[e.chap]) { e.title = A[e.chap].titre; e.tt = undefined; if (A[e.chap].duree) e.time = A[e.chap].duree; } }); }
 const YEARS = { mpsi: "Sup", mp: "Spé" };
 const pad = n => String(n).padStart(2, "0");
 
@@ -135,7 +136,7 @@ for (const e of L.EXERCISES) {
     body: `\\lemmesection{Énoncé}\n${toTex(e.enonce)}\n`
       + ((d.donnees && d.donnees.length) || d.but ? `\\begin{ldef}[Décoder l'énoncé]\n${d.donnees && d.donnees.length ? `\\textbf{Ce que l'énoncé te donne.}\n\\begin{itemize}\n${d.donnees.map(x => "\\item " + toTex(x)).join("\n")}\n\\end{itemize}\n` : ""}${d.but ? `\\textbf{Ce qu'on te demande.} ${toTex(d.but)}\n` : ""}\\end{ldef}\n` : "")
       + `\\lemmesection{Corrigé}\n`
-      + e.steps.map((st, k) => `${e.qnav && (k === 0 || e.steps[k - 1].q !== st.q) ? `\\par\\needspace{6\\baselineskip}\\vspace{1em}{\\sffamily\\bfseries\\large Question ${st.q}\\par}\\vspace{0.2em}` : ""}\\par\\needspace{4\\baselineskip}\\vspace{0.5em}{\\sffamily\\bfseries\\color{navy}${e.qnav ? `Étape ${e.steps.filter((x, j) => j <= k && x.q === st.q).length}` : k + 1}.~${escText(st.t)}\\par}\\vspace{0.2em}\n${toTex(st.b)}\n`).join("\n")
+      + e.steps.map((st, k) => `${e.qnav && (k === 0 || e.steps[k - 1].q !== st.q) ? `\\par\\needspace{6\\baselineskip}\\vspace{1em}{\\sffamily\\bfseries\\large Question ${st.q}\\par}\\vspace{0.2em}` : ""}${e.qnav ? "\\par\\vspace{0.3em}" : `\\par\\needspace{4\\baselineskip}\\vspace{0.5em}{\\sffamily\\bfseries\\color{navy}${escText(st.t)}\\par}\\vspace{0.2em}`}\n${toTex(st.b)}\n`).join("\n")
       + `\\begin{lthm}[Le piège]\n${toTex(e.piege)}\n\\end{lthm}\n\\begin{lnote}[La méthode]\n${toTex(e.methode)}\n\\end{lnote}\n`
       + (used.length ? `\\lemmesection{Rappels de cours utilisés}\n\\begin{itemize}\n${used.map(r => `\\item \\textbf{${escText(L.RAPPELS[r].t)}.} ${toTex(L.RAPPELS[r].b)}`).join("\n")}\n\\end{itemize}\n` : "")
   }) });

@@ -1569,3 +1569,17 @@ a.prow:active{transform:scale(.99)}
 :root[data-zone] .chapnav .navlist a[aria-current="page"],.chapnav .navlist a[aria-current="page"]{border:0;border-left:2px solid var(--gold-ink);border-radius:0;background:none;box-shadow:none;color:var(--ink)}
 :root[data-zone="commando"] .chapnav .navlist a[aria-current="page"]{border-left-color:var(--yellow)}
 @media (max-width:560px){.excard,.sjc{min-height:0}}
+/* Ruban de difficulté (hors commando) */
+.excard,.sjc{position:relative;padding-left:58px}
+.rib{position:absolute;top:-1px;left:18px;width:24px;height:62px;background:var(--rb);clip-path:polygon(0 0,100% 0,100% 100%,50% 84%,0 100%)}
+.rib::after{content:"";position:absolute;top:7px;left:5px;width:14px;height:42px;background:linear-gradient(180deg,#14161c calc(var(--v) / 3 * 100%),rgba(20,22,28,.2) 0);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.4l1.75 3.6 3.95.55-2.87 2.77.7 3.93L7 10.38l-3.53 1.87.7-3.93L1.3 5.55l3.95-.55z'/%3E%3C/svg%3E") 0 0/14px 14px repeat-y;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.4l1.75 3.6 3.95.55-2.87 2.77.7 3.93L7 10.38l-3.53 1.87.7-3.93L1.3 5.55l3.95-.55z'/%3E%3C/svg%3E") 0 0/14px 14px repeat-y}
+.rib.r-f{--rb:#9FD8B2}.rib.r-m{--rb:#FFD04D}.rib.r-d{--rb:#F4927C}
+.excard .cf .lvl,.sjc .cf .lvl{display:none}
+.excard .cf:not(:has(.dn)),.sjc .cf:not(:has(.dn)){display:none}
+/* Commando : on garde les étoiles jaunes, sans ruban */
+:root[data-zone="commando"] .rib{display:none}
+:root[data-zone="commando"] .excard,:root[data-zone="commando"] .sjc{padding-left:20px}
+:root[data-zone="commando"] .excard .cf,:root[data-zone="commando"] .excard .cf .lvl{display:flex}
+:root[data-zone="commando"] .excard .cf .lvl{display:inline-block}
+.excard{min-height:96px}
+.sj-go{display:flex;align-items:center;gap:14px;margin-top:28px}

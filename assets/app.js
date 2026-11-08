@@ -120,6 +120,8 @@ const lv3 = n => Math.max(1, Math.min(3, ((n || 3) + 1) / 2));
 const lvl = n => { const v = lv3(n); return `<span class="lvl" style="--v:${v}" role="img" aria-label="Difficulté ${String(v).replace(".", ",")} sur 3"></span>`; };
 const DIFFS = [["", "Tout"], ["f", "Facile"], ["m", "Moyen"], ["d", "Difficile"]];
 const dOf = n => (n || 3) <= 2 ? "f" : (n || 3) === 3 ? "m" : "d";
+/* Le ruban : il descend du haut de la carte, porte les étoiles en noir, et sa couleur dit le niveau */
+const rib = n => `<span class="rib r-${dOf(n)}" style="--v:${lv3(n)}" aria-hidden="true"></span>`;
 
 /* ---------- MathJax ---------- */
 let mjQueue = Promise.resolve();
@@ -252,7 +254,7 @@ function phead({ crumb, title, meta = "", tabs = "", photo, tall, wiki }) {
 }
 function exCard(e) {
   const n = doneN(e.id);
-  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}><b class="ttl">${ttl(e)}</b><span class="cf">${lvl(e.level)}${n ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`;
+  return `<a class="excard${n ? " done" : ""}" href="#e-${e.id}"${e.concours ? ` data-cc="${e.concours}"` : ""}>${rib(e.level)}<b class="ttl">${ttl(e)}</b><span class="cf">${lvl(e.level)}${n ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`;
 }
 let diff = (() => { try { return localStorage.getItem("lemme-diff") || ""; } catch (_) { return ""; } })();
 const byDiff = list => diff ? list.filter(e => dOf(e.level) === diff) : list;
@@ -397,7 +399,7 @@ function exercisePage(eid) {
   const others = EXERCISES.filter(x => x.subj === e.subj && x.id !== e.id && x.year === e.year && x.chap === e.chap).slice(0, 3);
   if (e.concours) lastConc = e.concours;
   const ann = e.subj === "annales";
-  const cr = ann ? [...bqCrumbs(c), [c.epreuve, `#c-annales-mp-${e.chap}`], [(/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + e.part]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]].concat(e.plus ? [["Aller plus loin"], [e.part]] : []) : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
+  const cr = ann ? [...bqCrumbs(c), [c.epreuve]] : e.subj === "kholles" ? [["Khôlles", "#kholles"], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]] : s.hidden ? [[s.name, homeOf(s)], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]].concat(e.plus ? [["Aller plus loin"], [e.part]] : []) : [[s.name, `#s-${s.id}`], [c.t, `#c-${s.id}-${e.year}-${e.chap}`]];
   const kind = ann ? qrange(e) : e.subj === "kholles" ? "Khôlle" : e.concours ? "Oral " + CONC[e.concours] : (pb ? "Problème" : "Exercice");
   const meta = [`<span class="k"${e.concours ? ` data-cc="${e.concours}"` : ""}>${kind}</span>`, ann ? "" : (s.hidden ? s.name : s.name + " · " + YEARS[e.year]), e.time || "", ann ? "" : lvl(e.level)].filter(Boolean).join(`<span class="dot" aria-hidden="true">·</span>`);
   const head = `<section class="exhead"><div class="wrap wrap-wide">${crumbs(cr)}<div class="exh-row"><div class="exh-t"><h1 class="ttl">${ttl(e)}</h1><div class="exmeta">${meta}</div></div><div class="donebox">${doneHtml(e)}</div></div></div></section>`;
@@ -542,8 +544,7 @@ function sujetPage(i) {
   const parts = exOf("annales", "mp", i);
   return phead({ crumb: bqCrumbs(c).concat([[c.epreuve]]), title: esc(c.titre), meta: `<span class="tag y">${esc(c.bank)} ${c.annee}</span><span class="tag">${esc(c.epreuve)} · ${esc(c.filiere)}</span><span class="tag">${esc(c.duree)}</span>` }) + `<div class="wrap layout full"><div>
     <p class="sj-intro">${c.intro}</p>
-    <h2 class="sj-h">Le corrigé, partie par partie</h2>
-    <div class="tiles ann vault stagger">${parts.map(e => tile(`#e-${e.id}`, (/^(Exercice|Partie|Problème)/.test(e.part) ? "" : "Partie ") + esc(e.part.replace(/\s*\(.*\)/, "")), ttl(e), doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : "", doneN(e.id) ? "is-done" : "")).join("")}</div>
+    <div class="sj-go">${parts.map(e => `<a class="btn btn-yellow" href="#e-${e.id}">Ouvrir le sujet et son corrigé ${I.arrow}</a>${doneN(e.id) ? `<span class="tdone">${ICHECK}Fait</span>` : ""}`).join("")}</div>
     ${c.pdf ? `<details class="sj-pdf"><summary><span>Voir le sujet original</span><small>PDF · ${esc(c.bank)} ${c.annee}</small></summary><div data-pdf="${c.pdf}" data-title="${esc(c.bank)} ${c.annee} · ${esc(c.epreuve)} ${esc(c.filiere)}" data-lazy="1"></div><a class="btn btn-ghost btn-sm" href="pdf/${c.pdf}.pdf" download>${I.dl}Télécharger le sujet</a></details>` : ""}
   </div></div>`;
 }
@@ -2091,7 +2092,7 @@ function tfResults() {
     L = SUJ.filter(s => (!TF.fil || s.fils.includes(TF.fil)) && (!TF.mat || s.mat === TF.mat) && (!TF.bank || s.c.bank === TF.bank) && (!TF.an || String(s.c.annee) === String(TF.an)) && (!TF.diff || dOf(s.lv) === TF.diff));
     if (q) ({ list: L, near } = qsearch(L, q, x => x.it));
     if (!q || TF.sort !== "recent") L = L.sort(TF.sort === "facile" ? (a, b) => a.lv - b.lv : TF.sort === "dur" ? (a, b) => b.lv - a.lv : (a, b) => b.c.annee - a.c.annee);
-    const card = s => { const d = s.parts.filter(e => doneN(e.id)).length; return `<a class="sjc${d ? " done" : ""}" href="#c-annales-mp-${s.i}"><span class="sjm">${esc(s.c.bank)} ${s.c.annee} · ${esc(s.c.epreuve)}</span><b class="sjt">${esc(s.c.titre)}</b><span class="cf">${lvl(s.lv)}${d ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`; };
+    const card = s => { const d = s.parts.filter(e => doneN(e.id)).length; return `<a class="sjc${d ? " done" : ""}" href="#c-annales-mp-${s.i}">${rib(s.lv)}<span class="sjm">${esc(s.c.bank)} ${s.c.annee} · ${esc(s.c.epreuve)}</span><b class="sjt">${esc(s.c.titre)}</b><span class="cf">${lvl(s.lv)}${d ? `<span class="dn">${ICHECK}Fait</span>` : ""}</span></a>`; };
     return tfHead(L.length, "sujet", near) + (L.length ? `<div class="sjgrid">${L.map(card).join("")}</div>` : tfEmpty());
   }
   L = EXS.filter(x => (!TF.mat || x.mat === TF.mat) && (!TF.yr || x.e.year === TF.yr) && (!TF.chap || `${x.e.subj}-${x.e.year}-${x.e.chap}` === TF.chap) && (!TF.diff || dOf(x.e.level) === TF.diff));
@@ -2125,6 +2126,8 @@ function wireTrouver() {
   paint();
 }
 
+/* Sujets de concours réunis : titre et durée du sujet complet */
+EXERCISES.forEach(e => { if (e.__ann) { const c = ANN()[e.chap]; if (c) { e.title = c.titre; e.tt = undefined; if (c.duree) e.time = c.duree; } } });
 /* ---------- Routeur ---------- */
 let lastRoute = "", dashSeen = false;
 const tabMem = (() => { try { return JSON.parse(sessionStorage.getItem("lemme-tabs") || "{}"); } catch (_) { return {}; } })();
