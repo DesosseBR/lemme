@@ -49,13 +49,13 @@ const figFn = GRAPH({ w: 420, h: 230, x: [-0.08, 1.12], y: [0, 1.3], xt: [0.5, 0
   R`$f_n$ vaut $1$ sur $\left[0,\frac12\right]$, descend en ligne droite jusqu'à $0$ sur $\left[\frac12,\frac12+\frac1n\right]$, puis vaut $0$. Quand $n$ grandit, la pente devient verticale : la « limite » serait la fonction en escalier, qui n'est pas continue.`, "Les fonctions f₄ et f₁₂");
 
 LEMME.rappels({
-  "top-fermeseq": { t: "Caractérisation séquentielle des fermés", b: R`<p>$F$ est fermé si et seulement si toute suite d'éléments de $F$ qui converge dans $E$ a sa limite dans $F$. Et $x\in\overline A$ si et seulement si $x$ est limite d'une suite d'éléments de $A$.</p>` },
-  "top-ouvert": { t: "Ouvert, intérieur", b: R`<p>$U$ est ouvert si pour tout $x\in U$ il existe $r>0$ avec $B(x,r)\subset U$. $x\in\mathring A$ s'il existe $r>0$ avec $B(x,r)\subset A$. Une réunion quelconque d'ouverts est ouverte ; l'image réciproque d'un ouvert (d'un fermé) par une application continue est ouverte (fermée).</p>` },
-  "top-equiv": { t: "Normes équivalentes", b: R`<p>$N_1$ et $N_2$ sont équivalentes s'il existe $\alpha,\beta>0$ avec $\alpha N_1\leqslant N_2\leqslant\beta N_1$. Pour montrer qu'elles ne le sont pas : trouver une suite $(f_n)$ avec $\frac{N_2(f_n)}{N_1(f_n)}\to+\infty$ (ou $\to0$).</p>` },
-  "top-lc": { t: "Applications linéaires continues", b: R`<p>$u$ linéaire est continue si et seulement s'il existe $C$ avec $\|u(x)\|\leqslant C\|x\|$ pour tout $x$. La norme subordonnée $|||u||| = \sup_{x\neq0}\frac{\|u(x)\|}{\|x\|}$ est la plus petite constante $C$ possible.</p>` },
-  "top-compact": { t: "Compacité", b: R`<p>$K$ est compact si toute suite de $K$ a une sous-suite qui converge dans $K$ (Bolzano-Weierstrass). L'image d'un compact par une application continue est compacte ; un produit de compacts est compact. En dimension finie, les compacts sont exactement les fermés bornés.</p>` },
-  "top-cauchy": { t: "Suites de Cauchy, complétude", b: R`<p>$(u_n)$ est de Cauchy si $\forall\varepsilon>0,\ \exists N,\ \forall p,q\geqslant N,\ d(u_p,u_q)\leqslant\varepsilon$. Toute suite convergente est de Cauchy. Un espace est complet si toute suite de Cauchy converge.</p>` },
-  "top-trirev": { t: "Inégalité triangulaire", b: R`<p>$\|x+y\|\leqslant\|x\|+\|y\|$, et sa forme renversée $\big|\|x\|-\|y\|\big|\leqslant\|x-y\|$ (donc la norme est 1-lipschitzienne, donc continue).</p>` }
+  "top-fermeseq": { t: "Caractérisation séquentielle des fermés", b: R`$$F\text{ fermé}\iff\forall(x_n)\in F^{\mathbb N},\ \big(x_n\to\ell\in E\Rightarrow\ell\in F\big).$$$$x\in\overline A\iff\exists(a_n)\in A^{\mathbb N},\ a_n\to x.$$` },
+  "top-ouvert": { t: "Ouvert, intérieur", b: R`$$U\text{ ouvert}\iff\forall x\in U,\ \exists r>0,\ B(x,r)\subset U;\qquad x\in\mathring A\iff\exists r>0,\ B(x,r)\subset A.$$$$\bigcup_iU_i\text{ ouvert};\qquad f\text{ continue}\ \Longrightarrow\ f^{-1}(\text{ouvert})\text{ ouvert},\ f^{-1}(\text{fermé})\text{ fermé}.$$` },
+  "top-equiv": { t: "Normes équivalentes", b: R`$$N_1\sim N_2\iff\exists\alpha,\beta>0,\ \alpha N_1\leqslant N_2\leqslant\beta N_1;\qquad\frac{N_2(f_n)}{N_1(f_n)}\to+\infty\ \Longrightarrow\ N_1\not\sim N_2.$$` },
+  "top-lc": { t: "Applications linéaires continues", b: R`$$u\text{ continue}\iff\exists C,\ \forall x,\ \|u(x)\|\leqslant C\|x\|;\qquad|||u||| = \sup_{x\neq0}\frac{\|u(x)\|}{\|x\|}.$$` },
+  "top-compact": { t: "Compacité", b: R`$$K\text{ compact}\iff\forall(x_n)\in K^{\mathbb N},\ \exists\varphi,\ x_{\varphi(n)}\to\ell\in K.$$$$f\text{ continue}\Rightarrow f(K)\text{ compact};\qquad K\times K'\text{ compact};\qquad\dim E\lt\infty\ :\ \text{compact}\iff\text{fermé borné}.$$` },
+  "top-cauchy": { t: "Suites de Cauchy, complétude", b: R`$$(u_n)\text{ de Cauchy}\iff\forall\varepsilon>0,\ \exists N,\ \forall p,q\geqslant N,\ d(u_p,u_q)\leqslant\varepsilon;\qquad\text{CV}\Rightarrow\text{Cauchy}.$$` },
+  "top-trirev": { t: "Inégalité triangulaire", b: R`$$\|x+y\|\leqslant\|x\|+\|y\|,\qquad\big|\|x\|-\|y\|\big|\leqslant\|x-y\|.$$` }
 });
 
 LEMME.exercises([

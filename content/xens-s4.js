@@ -8,8 +8,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "s4-conj": { t: "Conjuguer un cycle", b: R`<p>Pour $\sigma\in\mathfrak S_n$ et un cycle $(a_1\,\dots\,a_k)$ :</p>$$\sigma\,(a_1\,a_2\,\dots\,a_k)\,\sigma^{-1}$$$$= \big(\sigma(a_1)\,\sigma(a_2)\,\dots\,\sigma(a_k)\big).$$` },
-  "s4-gen": { t: "Les transpositions engendrent Sₙ", b: R`<p>Toute permutation est un produit de transpositions. La signature $\varepsilon$ est l'unique morphisme $\mathfrak S_n\to\{\pm1\}$ qui vaut $-1$ sur les transpositions.</p>` },
-  "s4-iso": { t: "Isométrie et produits scalaires", b: R`<p>Une application linéaire $u$ de $\mathbb R^3$ est une isométrie si et seulement si $\langle u(x),u(y)\rangle = \langle x,y\rangle$ pour $x,y$ dans une base.</p>` },
+  "s4-gen": { t: "Les transpositions engendrent Sₙ", b: R`$$\mathfrak S_n = \langle\text{transpositions}\rangle;\qquad\varepsilon\text{ unique morphisme }\mathfrak S_n\to\{\pm1\},\ \varepsilon(\tau) = -1.$$` },
+  "s4-iso": { t: "Isométrie et produits scalaires", b: R`$$u\in O(\mathbb R^3)\iff\forall x,y\in\mathcal B,\ \langle u(x),u(y)\rangle = \langle x,y\rangle.$$` },
   "s4-orth": { t: "Produit scalaire des caractères", b: R`<p>$\langle\chi,\mu\rangle = \frac1{|G|}\sum_{g\in G}\chi(g)\overline{\mu(g)} = \frac1{|G|}\sum_{\text{classes }C}|C|\,\chi(C)\overline{\mu(C)}$.</p>` }
 });
 

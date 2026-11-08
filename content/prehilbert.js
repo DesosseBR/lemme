@@ -3,11 +3,11 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 7 };
 LEMME.rappels({
-  "pre-ps": { t: "Produit scalaire", b: R`<p>Un produit scalaire sur un $\mathbb R$-espace $E$ est une application $(x,y)\mapsto(x|y)$ <b>bilinéaire</b>, <b>symétrique</b>, <b>positive</b> ($(x|x)\geqslant0$) et <b>définie</b> ($(x|x) = 0\Rightarrow x = 0$). Norme associée : $\|x\| = \sqrt{(x|x)}$.</p>` },
-  "pre-intnulle": { t: "Intégrale nulle d'une fonction continue positive", b: R`<p>Si $g$ est continue, positive sur un intervalle $I$ et $\int_Ig = 0$, alors $g = 0$ sur $I$. Un polynôme nul sur un intervalle non trivial (infinité de points) est le polynôme nul.</p>` },
-  "pre-schmidt": { t: "Orthonormalisation de Schmidt", b: R`<p>Pour une famille libre $(f_0,f_1,\dots)$, il existe une <b>unique</b> famille orthonormée $(e_0,e_1,\dots)$ telle que, pour tout $n$, $\operatorname{Vect}(e_0,\dots,e_n) = \operatorname{Vect}(f_0,\dots,f_n)$ et $(e_n|f_n)>0$. On l'obtient par $g_n = f_n-\sum_{k< n}(e_k|f_n)e_k$, $e_n = g_n/\|g_n\|$.</p>` },
-  "pre-proj": { t: "Projection orthogonale et distance", b: R`<p>Si $F$ est de dimension finie, de base orthonormée $(e_1,\dots,e_p)$ : $p_F(x) = \sum(e_k|x)e_k$, $x-p_F(x)\perp F$, et $d(x,F)^2 = \|x-p_F(x)\|^2 = \|x\|^2-\sum_k(e_k|x)^2$ (Pythagore).</p>` },
-  "pre-ippgen": { t: "Intégration par parties sur un intervalle quelconque", b: R`<p>Si $u,v$ sont $\mathcal C^1$ sur $]a,b[$ et si $uv$ a des limites finies aux bornes, alors $\int_a^bu'v$ et $\int_a^buv'$ sont de même nature et $\int_a^bu'v = \big[uv\big]_a^b-\int_a^buv'$.</p>` }
+  "pre-ps": { t: "Produit scalaire", b: R`$$(\cdot|\cdot)\text{ produit scalaire}\iff\text{bilinéaire, symétrique},\ (x|x)\geqslant0,\ (x|x) = 0\Rightarrow x = 0;\qquad\|x\| = \sqrt{(x|x)}.$$` },
+  "pre-intnulle": { t: "Intégrale nulle d'une fonction continue positive", b: R`$$g\in\mathcal C(I),\ g\geqslant0,\ \int_Ig = 0\ \Longrightarrow\ g = 0;\qquad P = 0\text{ sur un intervalle non trivial}\Rightarrow P = 0.$$` },
+  "pre-schmidt": { t: "Orthonormalisation de Schmidt", b: R`$$\forall n,\ \operatorname{Vect}(e_0,\dots,e_n) = \operatorname{Vect}(f_0,\dots,f_n),\quad(e_n|f_n)>0;$$$$g_n = f_n-\sum_{k\lt n}(e_k|f_n)e_k,\qquad e_n = \frac{g_n}{\|g_n\|}.$$` },
+  "pre-proj": { t: "Projection orthogonale et distance", b: R`$$p_F(x) = \sum_{k = 1}^p(e_k|x)e_k,\qquad x-p_F(x)\perp F,\qquad d(x,F)^2 = \|x\|^2-\sum_{k = 1}^p(e_k|x)^2.$$` },
+  "pre-ippgen": { t: "Intégration par parties sur un intervalle quelconque", b: R`$$uv\text{ a des limites finies en }a,b\ \Longrightarrow\ \int_a^bu'v = \big[uv\big]_a^b-\int_a^buv'\quad(\text{même nature}).$$` }
 });
 LEMME.exercises([
 { id: "pre-01", ...P, level: 3, time: "50 min",

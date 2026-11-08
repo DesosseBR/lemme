@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "po-burn": { t: "Formule de Burnside", b: R`<p>Si un groupe fini $G$ agit sur un ensemble fini $E$, le nombre d'orbites est</p>$$\frac1{|G|}\sum_{\sigma\in G}\operatorname{Fix}(\sigma),\qquad\operatorname{Fix}(\sigma) = |\{x\in E : \sigma\cdot x = x\}|.$$<p>Preuve : compter de deux façons les couples $(\sigma,x)$ avec $\sigma\cdot x = x$, et utiliser $|G\cdot x|\,|G_x| = |G|$.</p>` },
   "po-os": { t: "Orbite et stabilisateur", b: R`<p>$|G\cdot x|\times|G_x| = |G|$, et si $y = \sigma\cdot x$, alors $G_y = \sigma G_x\sigma^{-1}$.</p>` },
-  "po-cyc": { t: "Puissances d'un cycle", b: R`<p>Si $c$ est un $n$-cycle et $k\geqslant1$, $c^k$ est produit de $\delta = \operatorname{pgcd}(k,n)$ cycles disjoints de longueur $n/\delta$. Dans le groupe cyclique $\langle c\rangle$, il y a $\varphi(d)$ éléments d'ordre $d$ pour chaque $d\mid n$.</p>` },
-  "po-conj": { t: "Conjugaison dans le groupe symétrique", b: R`<p>$\tau(a_1\ \dots\ a_k)\tau^{-1} = (\tau(a_1)\ \dots\ \tau(a_k))$. Deux permutations sont conjuguées dans $\mathfrak S_n$ si et seulement si elles ont le même nombre de cycles de chaque longueur.</p>` }
+  "po-cyc": { t: "Puissances d'un cycle", b: R`$$c\ n\text{-cycle},\ \delta = \operatorname{pgcd}(k,n)\Rightarrow c^k = \delta\text{ cycles de longueur }\frac n\delta;\qquad\forall d\mid n,\ \varphi(d)\text{ éléments d'ordre }d\text{ dans }\langle c\rangle.$$` },
+  "po-conj": { t: "Conjugaison dans le groupe symétrique", b: R`$$\tau(a_1\ \dots\ a_k)\tau^{-1} = (\tau(a_1)\ \dots\ \tau(a_k));\qquad\sigma\sim\sigma'\iff\text{même type}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations.</b> Pour une permutation $\sigma$ d'un ensemble fini $E$ de cardinal $n$, on note $c_1(\sigma)$ son nombre de points fixes et, pour $i\geqslant2$, $c_i(\sigma)$ son nombre de cycles de longueur $i$ ; on a $\sum_i i\,c_i(\sigma) = n$. Une « $\sigma$-orbite » est une orbite du groupe $\langle\sigma\rangle$ : un point fixe ou le support d'un cycle. $\varphi$ est l'indicatrice d'Euler.</p>`;

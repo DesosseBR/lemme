@@ -32,11 +32,11 @@ const figConiques = (() => {
 })();
 
 LEMME.rappels({
-  "bez-fact": { t: "Polynômes à deux indéterminées", b: R`<p>$\mathbb K[X]$ et $\mathbb K[X,Y] = \mathbb K[X][Y]$ sont factoriels. Le <b>degré total</b> d'un monôme $X^iY^j$ est $i+j$ ; celui d'un polynôme est le maximum sur ses monômes. Si $P = \sum_ka_k(X)Y^k$ est de degré total $d$, alors $\deg a_k+k\leqslant d$.</p>` },
-  "bez-res": { t: "Résultant et facteur commun (admis)", b: R`<p>Soit $\mathbb A$ factoriel et $P,Q\in\mathbb A[Y]$ de degrés $p,q\geqslant1$ en $Y$ (coefficients dominants non nuls). Alors $\operatorname{Res}(P,Q) = 0$ si et seulement si $P$ et $Q$ ont un facteur commun de degré $\geqslant1$ en $Y$.</p>` },
-  "bez-det": { t: "Déterminant", b: R`<p>$\det M = \sum_{\sigma\in\mathfrak S_N}\varepsilon(\sigma)\prod_{j=1}^NM_{\sigma(j),j}$. Ajouter à une ligne une combinaison des autres ne change pas le déterminant. Développement selon une ligne : $\det M = \sum_jM_{1,j}C_{1,j}$ (cofacteurs).</p>` },
-  "bez-racines": { t: "Nombre de racines", b: R`<p>Un polynôme non nul de $\mathbb K[X]$ de degré $m$ a au plus $m$ racines dans $\mathbb K$.</p>` },
-  "bez-subst": { t: "Changement de variable linéaire", b: R`<p>Pour $u\in\mathbb K$, $\theta : F(X,Y)\mapsto F(X-uY,Y)$ est un automorphisme de l'anneau $\mathbb K[X,Y]$, de réciproque $F(X,Y)\mapsto F(X+uY,Y)$. Il conserve le degré total (au plus, dans les deux sens, donc exactement).</p>` }
+  "bez-fact": { t: "Polynômes à deux indéterminées", b: R`$$\deg(X^iY^j) = i+j;\qquad P = \sum_ka_k(X)Y^k,\ \deg P = d\ \Longrightarrow\ \deg a_k+k\leqslant d.$$` },
+  "bez-res": { t: "Résultant et facteur commun (admis)", b: R`$$\operatorname{Res}(P,Q) = 0\iff P,Q\text{ ont un facteur commun de degré}\geqslant1\text{ en }Y.$$` },
+  "bez-det": { t: "Déterminant", b: R`$$\det M = \sum_{\sigma\in\mathfrak S_N}\varepsilon(\sigma)\prod_{j = 1}^NM_{\sigma(j),j} = \sum_jM_{1,j}C_{1,j}.$$<p>$L_i\leftarrow L_i+\sum_{k\neq i}\lambda_kL_k$ ne change pas $\det$.</p>` },
+  "bez-racines": { t: "Nombre de racines", b: R`$$P\neq0,\ \deg P = m\ \Longrightarrow\ \operatorname{Card}\{\text{racines}\}\leqslant m.$$` },
+  "bez-subst": { t: "Changement de variable linéaire", b: R`$$\theta : F(X,Y)\mapsto F(X-uY,Y),\qquad\theta^{-1} : F(X,Y)\mapsto F(X+uY,Y),\qquad\deg\theta(F) = \deg F.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations pour tout le sujet.</b> $\mathbb K$ est un corps <b>infini</b> (par exemple $\mathbb R$ ou $\mathbb C$). Pour $F\in\mathbb K[X,Y]$, $V(F) = \{(x,y)\in\mathbb K^2 : F(x,y) = 0\}$. Soit $\mathbb A$ un anneau commutatif intègre et $P = \sum_{k=0}^pa_kY^k$, $Q = \sum_{k=0}^qb_kY^k$ dans $\mathbb A[Y]$, avec $p,q\geqslant1$ et $a_pb_q\neq0$. La <b>matrice de Sylvester</b> $\operatorname{Syl}(P,Q)\in\mathcal M_{p+q}(\mathbb A)$ a pour colonnes les coefficients de $P,YP,\dots,Y^{q-1}P,Q,YQ,\dots,Y^{p-1}Q$ dans la base $1,Y,\dots,Y^{p+q-1}$ : $$\operatorname{Syl}_{i,j} = \begin{cases}a_{i-j}&\text{si }1\leqslant j\leqslant q\\b_{i-j+q}&\text{si }q\lt j\leqslant p+q\end{cases}$$ (avec $a_k = b_k = 0$ si $k$ est hors de $[0,p]$, resp. $[0,q]$). Le <b>résultant</b> est $\operatorname{Res}(P,Q) = \det\operatorname{Syl}(P,Q)$.</p>`;

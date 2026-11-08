@@ -5,10 +5,10 @@ const P = { subj: "annales", year: "mp", chap: 26, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "c24b-rang": { t: "Théorème du rang", b: R`<p>Pour $u\in\mathcal L(E,F)$ avec $E$ de dimension finie : $\dim E = \dim\ker u+\operatorname{rg}u$. Si $F\subset G$ et $\dim F = \dim G<\infty$, alors $F = G$.</p>` },
-  "c24b-noyaux": { t: "Lemme des noyaux", b: R`<p>Si $P = P_1\cdots P_r$ avec les $P_i$ premiers entre eux deux à deux, $\ker P(f) = \bigoplus_i\ker P_i(f)$. Avec Cayley-Hamilton : $E = \bigoplus_k\ker(f-\lambda_k\mathrm{id})^{m_k}$.</p>` },
-  "c24b-cyclique": { t: "Base cyclique d'un nilpotent", b: R`<p>Si $u$ est nilpotent d'indice $p$ et $u^{p-1}(e)\neq0$, la famille $(e,u(e),\dots,u^{p-1}(e))$ est libre : si $\sum a_ku^k(e) = 0$ avec $a_j$ le premier coefficient non nul, appliquer $u^{p-1-j}$ donne $a_ju^{p-1}(e) = 0$.</p>` },
-  "c24b-diag": { t: "Diagonalisabilité", b: R`<p>Un endomorphisme est diagonalisable ssi il annule un polynôme scindé à racines simples. Un polynôme en un endomorphisme diagonalisable est diagonalisable dans la même base. Si $\chi_f$ a $n$ racines distinctes, $f$ est diagonalisable.</p>` },
+  "c24b-rang": { t: "Théorème du rang", b: R`$$\dim E\lt\infty\ :\quad\dim E = \dim\ker u+\operatorname{rg}u;\qquad F\subset G,\ \dim F = \dim G\lt\infty\Rightarrow F = G.$$` },
+  "c24b-noyaux": { t: "Lemme des noyaux", b: R`$$P_i\wedge P_j = 1\ (i\neq j)\ \Longrightarrow\ \ker(P_1\cdots P_r)(f) = \bigoplus_i\ker P_i(f);\qquad E = \bigoplus_k\ker(f-\lambda_k\mathrm{id})^{m_k}.$$` },
+  "c24b-cyclique": { t: "Base cyclique d'un nilpotent", b: R`$$u^p = 0,\ u^{p-1}(e)\neq0\ \Longrightarrow\ \big(e,u(e),\dots,u^{p-1}(e)\big)\text{ libre}.$$<p>Si $a_j$ est le premier coefficient non nul, appliquer $u^{p-1-j}$ donne $a_ju^{p-1}(e) = 0$.</p>` },
+  "c24b-diag": { t: "Diagonalisabilité", b: R`$$f\text{ diag.}\iff\exists P\text{ SRS},\ P(f) = 0;\qquad f\text{ diag.}\Rightarrow Q(f)\text{ diag. (même base)};\qquad\chi_f\text{ à }n\text{ racines distinctes}\Rightarrow f\text{ diag.}$$` },
   "c24b-grass": { t: "Formule de Grassmann", b: R`<p>$\dim(F\cap G) = \dim F+\dim G-\dim(F+G)\geqslant\dim F+\dim G-\dim E$.</p>` }
 });
 

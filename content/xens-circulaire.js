@@ -7,9 +7,9 @@ const P = { subj: "xens", year: "mp", chap: 15, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "circ-pui": { t: "Puissance d'un point", b: R`<p>Soit $\mathcal C$ un cercle de centre $O$ et de rayon $\rho$, et $J$ un point. Pour toute droite passant par $J$ et coupant $\mathcal C$ en $M,M'$ : $\overline{JM}\cdot\overline{JM'} = JO^2-\rho^2$. Si la droite est tangente en $T$ : $JT^2 = JO^2-\rho^2$.</p>` },
-  "circ-thales": { t: "Rapport sur une droite", b: R`<p>Si $u\mapsto\alpha u+\beta$ ($\alpha\neq0$) paramètre une droite, le birapport de quatre de ses points ne dépend que des paramètres : $[a,b,c,d] = \frac{(u_a-u_c)(u_b-u_d)}{(u_a-u_d)(u_b-u_c)}$.</p>` },
-  "circ-r": { t: "Automorphismes de ℝ", b: R`<p>Un automorphisme de corps de $\mathbb R$ est l'identité : il envoie les carrés sur les carrés, donc les positifs sur les positifs, donc il est croissant ; il fixe $\mathbb Q$ ; croissant et égal à l'identité sur $\mathbb Q$ dense, il est l'identité.</p>` }
+  "circ-pui": { t: "Puissance d'un point", b: R`$$\overline{JM}\cdot\overline{JM'} = JO^2-\rho^2;\qquad\text{tangente en }T\ :\ JT^2 = JO^2-\rho^2.$$` },
+  "circ-thales": { t: "Rapport sur une droite", b: R`$$[a,b,c,d] = \frac{(u_a-u_c)(u_b-u_d)}{(u_a-u_d)(u_b-u_c)}.$$` },
+  "circ-r": { t: "Automorphismes de ℝ", b: R`$$\sigma\in\operatorname{Aut}(\mathbb R)\ :\ \sigma(x^2) = \sigma(x)^2\Rightarrow\sigma\nearrow,\quad\sigma_{|\mathbb Q} = \mathrm{id}\ \Longrightarrow\ \sigma = \mathrm{id}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\widehat{\mathbb C} = \mathbb C\cup\{\infty\}$. Pour $ad-bc\neq0$, l'<b>homographie</b> $h(z) = \frac{az+b}{cz+d}$ est prolongée à $\widehat{\mathbb C}$ par $h(-d/c) = \infty$ et $h(\infty) = a/c$ si $c\neq0$, et par $h(\infty) = \infty$ si $c = 0$. On admet que les homographies forment un groupe pour la composition. On prolonge la conjugaison par $\bar\infty = \infty$. Le <b>groupe circulaire</b> est le groupe engendré par les homographies et la conjugaison.</p><p class="pl-pre">Pour $a,b,c,d\in\widehat{\mathbb C}$ distincts, le <b>birapport</b> est $[a,b,c,d] = \dfrac{(a-c)(b-d)}{(a-d)(b-c)}$, prolongé par passage à la limite si l'un des points est $\infty$. On dit que $(a,b,c,d)$ est <b>harmonique</b> si $[a,b,c,d] = -1$. Un <b>cercle-droite</b> est un cercle de $\mathbb C$, ou une droite de $\mathbb C$ à laquelle on ajoute le point $\infty$.</p>`;

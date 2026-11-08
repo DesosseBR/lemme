@@ -7,13 +7,13 @@ const P = { subj: "xens", year: "mp", chap: 6, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "sn-cycles": { t: "Décomposition en cycles", b: R`<p>Toute permutation se décompose en produit de cycles à supports disjoints (qui commutent), de façon unique à l'ordre près. Son ordre est le ppcm des longueurs des cycles.</p>` },
-  "sn-conj": { t: "Conjugaison dans S_n", b: R`<p>$\sigma\,(a_1\ a_2\ \cdots\ a_k)\,\sigma^{-1} = (\sigma(a_1)\ \sigma(a_2)\ \cdots\ \sigma(a_k))$. Deux permutations sont conjuguées si et seulement si elles ont le même nombre de cycles de chaque longueur (même « type »).</p>` },
-  "sn-gen": { t: "Parties génératrices de S_n", b: R`<p>$\mathfrak S_n$ est engendré par les transpositions $(1\ i)$, $2\leqslant i\leqslant n$, et aussi par les $(i\ i+1)$, $1\leqslant i\leqslant n-1$. Deux morphismes qui coïncident sur une partie génératrice sont égaux.</p>` },
-  "sn-transp": { t: "Deux transpositions", b: R`<p>Deux transpositions distinctes $(a\ b)$ et $(c\ d)$ commutent si et seulement si leurs supports sont disjoints. Si leurs supports ont un point commun, $(a\ b)(a\ c) = (a\ c\ b)$ est d'ordre $3$.</p>` },
-  "sn-distingues": { t: "Sous-groupes distingués de S_6 (admis)", b: R`<p>Pour $n\geqslant5$, les seuls sous-groupes distingués de $\mathfrak S_n$ sont $\{\mathrm{Id}\}$, $\mathfrak A_n$ et $\mathfrak S_n$.</p>` },
+  "sn-cycles": { t: "Décomposition en cycles", b: R`$$\sigma = c_1\circ\dots\circ c_r\ (\text{supports disjoints, unique à l'ordre près}),\qquad\operatorname{ord}\sigma = \operatorname{ppcm}(\ell_1,\dots,\ell_r).$$` },
+  "sn-conj": { t: "Conjugaison dans S_n", b: R`$$\sigma\,(a_1\ \cdots\ a_k)\,\sigma^{-1} = (\sigma(a_1)\ \cdots\ \sigma(a_k));\qquad\sigma\sim\sigma'\iff\text{même type}.$$` },
+  "sn-gen": { t: "Parties génératrices de S_n", b: R`$$\mathfrak S_n = \big\langle(1\ i),\ 2\leqslant i\leqslant n\big\rangle = \big\langle(i\ i+1),\ 1\leqslant i\lt n\big\rangle.$$<p>Deux morphismes égaux sur une partie génératrice sont égaux.</p>` },
+  "sn-transp": { t: "Deux transpositions", b: R`$$(a\ b)(c\ d) = (c\ d)(a\ b)\iff\{a,b\}\cap\{c,d\} = \varnothing\ (\text{ou égalité});\qquad(a\ b)(a\ c) = (a\ c\ b),\ \text{d'ordre }3.$$` },
+  "sn-distingues": { t: "Sous-groupes distingués de S_6 (admis)", b: R`$$n\geqslant5,\ H\triangleleft\mathfrak S_n\ \Longrightarrow\ H\in\{\{\mathrm{Id}\},\ \mathfrak A_n,\ \mathfrak S_n\}.$$` },
   "sn-pres": { t: "Présentation de Coxeter (admise)", b: R`<p>Notons $e_i = (i\ i+1)$. Si $t_1,\dots,t_{n-1}$ sont des éléments d'un groupe $H$ vérifiant $$t_i^2 = 1,\qquad(t_it_{i+1})^3 = 1,\qquad(t_it_j)^2 = 1\ \text{ si }|i-j|\geqslant2,$$ alors il existe un unique morphisme $\mathfrak S_n\to H$ envoyant $e_i$ sur $t_i$.</p>` },
-  "sn-quot": { t: "Premier théorème d'isomorphisme", b: R`<p>Si $f : G\to H$ est un morphisme de groupes, $\ker f$ est distingué et $G/\ker f\simeq f(G)$.</p>` }
+  "sn-quot": { t: "Premier théorème d'isomorphisme", b: R`$$f : G\to H\text{ morphisme}\ \Longrightarrow\ \ker f\triangleleft G,\qquad G/\ker f\simeq f(G).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations pour tout le sujet.</b> Pour un groupe $G$, $\operatorname{Aut}(G)$ est le groupe des automorphismes de $G$, $Z(G)$ son centre, et pour $a\in G$, $c_a : x\mapsto axa^{-1}$. Les $c_a$ sont les automorphismes <b>intérieurs</b> ; on note $\operatorname{Int}(G)$ leur ensemble. Les autres automorphismes sont dits <b>extérieurs</b>. Dans $\mathfrak S_n$ ($n\geqslant3$), on note $T_k$ l'ensemble des produits de $k$ transpositions à supports deux à deux disjoints ($1\leqslant k\leqslant n/2$). Les produits $\sigma\tau$ se lisent de droite à gauche : on applique $\tau$ d'abord.</p>`;

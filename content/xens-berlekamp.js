@@ -8,12 +8,12 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "brk-binome": { t: "Formule du binôme", b: R`<p>Dans un anneau commutatif : $(a+b)^m = \sum_{k=0}^m\binom mk a^kb^{m-k}$, et $k\binom mk = m\binom{m-1}{k-1}$ pour $1\leqslant k\leqslant m$.</p>` },
-  "brk-corpsfini": { t: "Corps finis", b: R`<p>$\mathbb F_q$ désigne un corps fini à $q$ éléments ; on admet que $q = p^n$ avec $p$ premier, et que $p\cdot1 = 0$ dans $\mathbb F_q$ (caractéristique $p$). Le groupe $\mathbb F_q^*$ a $q-1$ éléments.</p>` },
-  "brk-lagrange": { t: "Théorème de Lagrange (conséquence)", b: R`<p>Dans un groupe fini $G$ de cardinal $N$, tout élément $x$ vérifie $x^N = e$.</p>` },
-  "brk-racines": { t: "Racines et factorisation", b: R`<p>Sur un corps, un polynôme non nul de degré $m$ a au plus $m$ racines, et si $\alpha_1,\dots,\alpha_m$ sont $m$ racines distinctes d'un polynôme unitaire de degré $m$, ce polynôme vaut $\prod(X-\alpha_i)$.</p>` },
-  "brk-quotient": { t: "L'anneau K[X]/(P)", b: R`<p>Pour $P$ de degré $d\geqslant1$, $\mathbb K[X]/(P)$ est l'ensemble des restes modulo $P$ : c'est un anneau et un $\mathbb K$-espace vectoriel de dimension $d$, de base $\bar1,\bar X,\dots,\overline{X^{d-1}}$. Si $P$ est <b>irréductible</b>, c'est un <b>corps</b>.</p>` },
-  "brk-gauss": { t: "Polynômes premiers entre eux", b: R`<p>Dans $\mathbb K[X]$ : si $A\mid C$, $B\mid C$ et $\operatorname{pgcd}(A,B) = 1$, alors $AB\mid C$. Deux irréductibles unitaires distincts sont premiers entre eux.</p>` },
-  "brk-noyau": { t: "Noyau et dimension", b: R`<p>Une application linéaire injective entre espaces de même dimension finie est un isomorphisme. Un isomorphisme envoie un sous-espace sur un sous-espace de même dimension.</p>` }
+  "brk-corpsfini": { t: "Corps finis", b: R`$$|\mathbb F_q| = q = p^n,\qquad p\cdot1 = 0,\qquad|\mathbb F_q^*| = q-1.$$` },
+  "brk-lagrange": { t: "Théorème de Lagrange (conséquence)", b: R`$$|G| = N\ \Longrightarrow\ \forall x\in G,\ x^N = e.$$` },
+  "brk-racines": { t: "Racines et factorisation", b: R`$$\deg P = m\Rightarrow\le m\text{ racines};\qquad P\text{ unitaire},\ \deg P = m,\ \alpha_1,\dots,\alpha_m\text{ racines distinctes}\Rightarrow P = \prod_{i = 1}^m(X-\alpha_i).$$` },
+  "brk-quotient": { t: "L'anneau K[X]/(P)", b: R`$$\deg P = d\ :\quad\mathbb K[X]/(P) = \operatorname{Vect}(\bar1,\bar X,\dots,\overline{X^{d-1}}),\quad\dim = d;\qquad P\text{ irréductible}\iff\mathbb K[X]/(P)\text{ corps}.$$` },
+  "brk-gauss": { t: "Polynômes premiers entre eux", b: R`$$A\mid C,\ B\mid C,\ A\wedge B = 1\ \Longrightarrow\ AB\mid C.$$` },
+  "brk-noyau": { t: "Noyau et dimension", b: R`$$\dim E = \dim F\lt\infty,\ u\text{ injective}\ \Longrightarrow\ u\text{ isomorphisme};\qquad\dim u(G) = \dim G.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations pour tout le sujet.</b> $p$ est un nombre premier, $q = p^n$ ($n\geqslant1$) et $\mathbb F_q$ un corps à $q$ éléments, de caractéristique $p$. Pour $A,B\in\mathbb F_q[X]$, $\operatorname{pgcd}(A,B)$ désigne le pgcd unitaire. Un polynôme est <b>sans facteur carré</b> s'il n'est divisible par le carré d'aucun polynôme non constant.</p>`;

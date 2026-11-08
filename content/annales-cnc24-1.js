@@ -6,11 +6,11 @@ const P = { subj: "annales", year: "mp", chap: 25, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "c24a-ipp": { t: "Intégration par parties", b: R`<p>Sur un segment : $\int_0^Au'v = [uv]_0^A-\int_0^Auv'$. Pour une intégrale impropre, on intègre sur $[0,A]$ puis on fait $A\to+\infty$.</p>` },
+  "c24a-ipp": { t: "Intégration par parties", b: R`$$\int_0^Au'v = \big[uv\big]_0^A-\int_0^Auv',\quad\text{puis }A\to+\infty.$$` },
   "c24a-gauss": { t: "Intégrale gaussienne généralisée", b: R`<p>$\int_0^{+\infty}e^{-x^2/2}dx = \sqrt{\pi/2}$, donc $\int_{-\infty}^{+\infty}e^{-x^2/2}dx = \sqrt{2\pi}$ et, par changement de variable, $\int_{-\infty}^{+\infty}e^{-tx^2/2}dx = \sqrt{2\pi/t}$.</p>` },
-  "c24a-densite": { t: "Densité, espérance, variance", b: R`<p>Si $X$ a pour densité $f$ : $X$ a une espérance si $\int|x|f(x)dx<\infty$, et $E(X) = \int xf(x)dx$ ; $E(X^2) = \int x^2f(x)dx$ (transfert) et $V(X) = E(X^2)-E(X)^2$. La fonction de répartition est $F(x) = \int_{-\infty}^xf$.</p>` },
-  "c24a-param": { t: "Intégrales à paramètre", b: R`<p>Si $\partial_x^kf(x,u)$ est continue et dominée par une fonction intégrable de $u$ sur chaque segment $[-a,a]$ de $x$, on peut dériver $k$ fois sous l'intégrale.</p>` },
-  "c24a-tat": { t: "Intégration terme à terme", b: R`<p>Si les $u_k$ sont continues par morceaux, intégrables, si $\sum u_k$ converge simplement et si $\sum_k\int|u_k|<+\infty$, alors $\int\sum u_k = \sum\int u_k$.</p>` }
+  "c24a-densite": { t: "Densité, espérance, variance", b: R`$$E(X) = \int xf(x)\,dx\ \Big(\text{si }\int|x|f\lt\infty\Big),\qquad E(X^2) = \int x^2f(x)\,dx,\qquad V(X) = E(X^2)-E(X)^2,\qquad F(x) = \int_{-\infty}^xf.$$` },
+  "c24a-param": { t: "Intégrales à paramètre", b: R`$$\partial_x^kf\text{ continue},\ |\partial_x^kf(x,u)|\leqslant\varphi_a(u)\text{ intégrable pour }|x|\leqslant a\ \Longrightarrow\ \Big(\int f(x,u)\,du\Big)^{(k)} = \int\partial_x^kf(x,u)\,du.$$` },
+  "c24a-tat": { t: "Intégration terme à terme", b: R`$$\sum_k\int|u_k|\lt+\infty\ \Longrightarrow\ \int\sum u_k = \sum\int u_k.$$` }
 });
 
 const EX = R`<h4>Exercice</h4><p>On pose $I_0 = \int_0^{+\infty}e^{-3x}dx$ et, pour $n\geqslant1$, $I_n = \int_0^{+\infty}x^ne^{-3x}dx$.</p><ol start="1">

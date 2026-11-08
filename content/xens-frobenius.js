@@ -7,11 +7,11 @@ const P = { subj: "xens", year: "mp", chap: 10, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "fr-ordre": { t: "Ordre d'un produit d'éléments qui commutent", b: R`<p>Si $yz = zy$, $y$ d'ordre $a$, $z$ d'ordre $b$ et $\operatorname{pgcd}(a,b) = 1$, alors $yz$ est d'ordre $ab$. Plus généralement, si $\langle y\rangle\cap\langle z\rangle = \{1\}$, l'ordre de $yz$ est $\operatorname{ppcm}(a,b)$.</p>` },
-  "fr-cyc": { t: "Générateurs d'un groupe cyclique", b: R`<p>Un groupe cyclique d'ordre $m$ a exactement $\varphi(m)$ générateurs, et, pour tout $d\mid m$, exactement $\varphi(d)$ éléments d'ordre $d$. $\varphi$ est multiplicative : $\varphi(ab) = \varphi(a)\varphi(b)$ si $\operatorname{pgcd}(a,b) = 1$, et $\varphi(p^{\beta}) = p^{\beta-1}(p-1)$.</p>` },
-  "fr-classe": { t: "Classes de conjugaison", b: R`<p>Le groupe $G$ agit sur lui-même par conjugaison. L'orbite de $y$ est sa classe de conjugaison $C$, son stabilisateur est le commutant $Z_G(y) = \{x : xy = yx\}$. Donc $|C| = [G:Z_G(y)] = \frac{|G|}{|Z_G(y)|}$.</p>` },
-  "fr-sylow": { t: "Théorèmes de Sylow", b: R`<p>Si $|G| = p^am$ avec $p\nmid m$ : les sous-groupes d'ordre $p^a$ (les $p$-Sylow) existent, sont tous conjugués, et leur nombre divise $m$ et vaut $1$ modulo $p$.</p>` },
-  "fr-a5": { t: "Sous-groupes de A5", b: R`<p>$\mathfrak A_5$ (d'ordre $60$) a des sous-groupes d'ordres $1,2,3,4,5,6,10,12,60$ uniquement ; en particulier aucun sous-groupe d'ordre $15$, $20$ ou $30$. Un sous-groupe d'ordre $10$ est diédral : il a un unique sous-groupe d'ordre $5$, qui y est distingué.</p>` }
+  "fr-ordre": { t: "Ordre d'un produit d'éléments qui commutent", b: R`$$yz = zy,\ \operatorname{ord}y = a,\ \operatorname{ord}z = b,\ a\wedge b = 1\ \Longrightarrow\ \operatorname{ord}(yz) = ab;\qquad\langle y\rangle\cap\langle z\rangle = \{1\}\Rightarrow\operatorname{ord}(yz) = \operatorname{ppcm}(a,b).$$` },
+  "fr-cyc": { t: "Générateurs d'un groupe cyclique", b: R`$$|G| = m\text{ cyclique}\ :\ \varphi(m)\text{ générateurs},\quad\forall d\mid m,\ \varphi(d)\text{ éléments d'ordre }d;\qquad\varphi(ab) = \varphi(a)\varphi(b)\ (a\wedge b = 1).$$` },
+  "fr-classe": { t: "Classes de conjugaison", b: R`$$|C(y)| = [G:Z_G(y)] = \frac{|G|}{|Z_G(y)|},\qquad Z_G(y) = \{x : xy = yx\}.$$` },
+  "fr-sylow": { t: "Théorèmes de Sylow", b: R`$$|G| = p^am,\ p\nmid m\ :\quad\exists P,\ |P| = p^a;\quad\text{tous conjugués};\quad n_p\mid m,\quad n_p\equiv1\pmod p.$$` },
+  "fr-a5": { t: "Sous-groupes de A5", b: R`$$H\leqslant\mathfrak A_5\ \Longrightarrow\ |H|\in\{1,2,3,4,5,6,10,12,60\}.$$<p>Ordre $10$ : diédral, unique sous-groupe d'ordre $5$, distingué.</p>` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Objectif.</b> Démontrer le <b>théorème de Frobenius</b> : <i>si $G$ est un groupe fini d'ordre $N$, alors pour tout diviseur $n$ de $N$, le nombre d'éléments $x\in G$ tels que $x^n = 1$ est un multiple de $n$.</i></p><p class="pl-pre"><b>Notations.</b> $1$ est le neutre de $G$ ; pour $y\in G$, $\Gamma_y = \langle y\rangle$ est le sous-groupe engendré par $y$, et $Z_G(y) = \{x\in G : xy = yx\}$ le commutant de $y$. Pour $m\mid N$, on note $E_m = \{x\in G : x^m = 1\}$. Pour un entier $A\geqslant1$, $\Omega(A)$ désigne le nombre de facteurs premiers de $A$ comptés avec multiplicité ($\Omega(12) = 3$).</p>`;

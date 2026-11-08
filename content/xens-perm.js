@@ -7,11 +7,11 @@ const P = { subj: "xens", year: "mp", chap: 6, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pz-ordre": { t: "Ordre d'une permutation", b: R`<p>L'ordre d'une permutation est le ppcm des longueurs des cycles de sa décomposition en cycles à supports disjoints. Un $k$-cycle a pour signature $(-1)^{k-1}$.</p>` },
-  "pz-cyc": { t: "Puissance d'un cycle", b: R`<p>Si $c$ est un cycle de longueur $L$ et $m\geqslant1$, alors $c^m$ est un produit de $\operatorname{pgcd}(m,L)$ cycles disjoints de longueur $\frac L{\operatorname{pgcd}(m,L)}$, de même support que $c$.</p>` },
-  "pz-cyclique": { t: "Sous-groupes d'un groupe cyclique", b: R`<p>Un groupe cyclique d'ordre $N$ possède, pour chaque diviseur $a$ de $N$, un unique sous-groupe d'ordre $a$, et ce sont tous ses sous-groupes. Si $H$ et $K$ sont les sous-groupes d'ordres $a$ et $b$, alors $H\cap K$ est le sous-groupe d'ordre $\operatorname{pgcd}(a,b)$.</p>` },
+  "pz-ordre": { t: "Ordre d'une permutation", b: R`$$\operatorname{ord}\sigma = \operatorname{ppcm}(\text{longueurs des cycles}),\qquad\varepsilon(k\text{-cycle}) = (-1)^{k-1}.$$` },
+  "pz-cyc": { t: "Puissance d'un cycle", b: R`$$c\ L\text{-cycle},\ \delta = \operatorname{pgcd}(m,L)\ \Longrightarrow\ c^m = \text{produit de }\delta\text{ cycles disjoints de longueur }\frac L\delta.$$` },
+  "pz-cyclique": { t: "Sous-groupes d'un groupe cyclique", b: R`$$|G| = N\text{ cyclique}\ :\quad\forall a\mid N,\ \exists!\,H_a\leqslant G,\ |H_a| = a;\qquad H_a\cap H_b = H_{\operatorname{pgcd}(a,b)}.$$` },
   "pz-orbite": { t: "Orbite et stabilisateur", b: R`<p>Si un groupe fini $G$ agit sur $E$, alors pour $x\in E$ : $|G\cdot x|\times|\operatorname{Stab}(x)| = |G|$.</p>` },
-  "pz-unites": { t: "Inversibles de Z/nZ", b: R`<p>$\bar x$ est inversible dans $\mathbb Z/n\mathbb Z$ si et seulement si $\operatorname{pgcd}(x,n) = 1$. Leur nombre est $\varphi(n)$ ; pour $p$ premier, $\varphi(p^\alpha) = p^\alpha-p^{\alpha-1} = p^{\alpha-1}(p-1)$.</p>` }
+  "pz-unites": { t: "Inversibles de Z/nZ", b: R`$$\bar x\in(\mathbb Z/n\mathbb Z)^\times\iff x\wedge n = 1;\qquad|(\mathbb Z/n\mathbb Z)^\times| = \varphi(n),\quad\varphi(p^\alpha) = p^{\alpha-1}(p-1).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations.</b> $\mathfrak S_n$ est le groupe symétrique, $\mathrm{Id}$ son neutre. Pour une permutation, on appelle « cycles » ceux de sa décomposition en cycles à supports disjoints.</p>`;

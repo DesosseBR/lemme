@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 14, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "cpt-indep": { t: "Indépendance et espérance", b: R`<p>Si $X$ et $Y$ sont indépendantes et intégrables, $\mathbb E[XY] = \mathbb E[X]\,\mathbb E[Y]$. Des fonctions de familles disjointes de variables indépendantes sont indépendantes (lemme des coalitions).</p>` },
+  "cpt-indep": { t: "Indépendance et espérance", b: R`$$X\perp\!\!\!\perp Y\ \Longrightarrow\ \mathbb E[XY] = \mathbb E[X]\,\mathbb E[Y].$$<p>Coalitions : fonctions de familles disjointes $\Rightarrow$ indépendantes.</p>` },
   "cpt-bt": { t: "Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance : $\mathbb P\big(|X-\mathbb E[X]|\geqslant\alpha\big)\leqslant\dfrac{\operatorname{Var}(X)}{\alpha^2}$ pour tout $\alpha>0$. Pour $X_1,\dots,X_k$ indépendantes, $\operatorname{Var}(X_1+\dots+X_k) = \sum\operatorname{Var}(X_i)$.</p>` },
   "cpt-lim": { t: "Limite supérieure d'événements", b: R`<p>$\limsup A_n = \bigcap_{n\geqslant0}\bigcup_{k\geqslant n}A_k$ est l'événement « une infinité des $A_k$ sont réalisés ». Son complémentaire est « à partir d'un certain rang, aucun $A_k$ n'est réalisé ».</p>` }
 });

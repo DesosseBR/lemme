@@ -6,9 +6,9 @@ const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "c26b-diag": { t: "Critères de diagonalisabilité", b: R`$$u\text{ diagonalisable}\iff\exists P\text{ scindé à racines simples},\ P(u) = 0\iff\chi_u\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda.$$` },
-  "c26b-commute": { t: "Endomorphismes qui commutent", b: R`<p>Si $uv = vu$, tout sous-espace propre (et tout noyau, toute image) de $u$ est stable par $v$. L'endomorphisme induit par un endomorphisme diagonalisable sur un sous-espace stable est diagonalisable (il annule le même polynôme scindé à racines simples).</p>` },
-  "c26b-ch": { t: "Cayley-Hamilton", b: R`<p>Pour $A\in\mathcal M_n(\mathbb K)$, $\chi_A(A) = 0$. Sur $\mathbb C$, $\chi_A = \prod(X-\lambda_i)$ et $\operatorname{Sp}_{\mathbb C}(A)$ est l'ensemble des racines de $\chi_A$.</p>` },
-  "c26b-adj": { t: "Adjoint", b: R`<p>Dans un espace euclidien, l'adjoint $\Phi^*$ de $\Phi$ est l'unique endomorphisme tel que $\langle\Phi(M)|N\rangle = \langle M|\Phi^*(N)\rangle$ pour tous $M,N$. $\Phi$ est autoadjoint si $\Phi^* = \Phi$, orthogonal si $\|\Phi(M)\| = \|M\|$ pour tout $M$.</p>` },
+  "c26b-commute": { t: "Endomorphismes qui commutent", b: R`$$uv = vu\ \Longrightarrow\ v\big(E_\lambda(u)\big)\subset E_\lambda(u),\quad v(\ker u)\subset\ker u,\quad v(\operatorname{Im}u)\subset\operatorname{Im}u.$$$$u\text{ diagonalisable},\ u(F)\subset F\ \Longrightarrow\ u_{|F}\text{ diagonalisable}.$$` },
+  "c26b-ch": { t: "Cayley-Hamilton", b: R`$$\chi_A(A) = 0;\qquad\mathbb K = \mathbb C\ :\ \chi_A = \prod_i(X-\lambda_i),\quad\operatorname{Sp}_{\mathbb C}A = \chi_A^{-1}(0).$$` },
+  "c26b-adj": { t: "Adjoint", b: R`$$\forall M,N,\ \langle\Phi(M)|N\rangle = \langle M|\Phi^*(N)\rangle;\qquad\Phi\text{ autoadjoint}\iff\Phi^* = \Phi;\qquad\Phi\text{ orthogonal}\iff\forall M,\ \|\Phi(M)\| = \|M\|.$$` },
   "c26b-trace": { t: "Propriétés de la trace", b: R`<p>$\operatorname{tr}(AB) = \operatorname{tr}(BA)$, $\operatorname{tr}(A^T) = \operatorname{tr}(A)$, et $\operatorname{tr}(M^TN) = \sum_{i,j}m_{i,j}n_{i,j}$.</p>` }
 });
 

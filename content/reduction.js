@@ -5,13 +5,13 @@ const P = { subj: "maths", year: "mp", chap: 1 };
 
 LEMME.rappels({
   "red-vp": { t: "Valeur propre, vecteur propre", b: R`<p>$\lambda\in\mathbb K$ est valeur propre de $u\in\mathcal L(E)$ s'il existe $x\neq0_E$ avec $u(x) = \lambda x$ ; un tel $x$ est un vecteur propre. Le sous-espace propre est $E_\lambda(u) = \ker(u-\lambda\,\mathrm{Id}_E)$.</p><div class="sbox">$$\lambda\in\operatorname{Sp}(u)\iff\ker(u-\lambda\,\mathrm{Id}_E)\neq\{0_E\}.$$</div>` },
-  "red-libre": { t: "Vecteurs propres de valeurs propres distinctes", b: R`<p>Une famille de vecteurs propres associés à des valeurs propres <b>deux à deux distinctes</b> est libre. Plus généralement, les sous-espaces propres sont en somme directe.</p>` },
-  "red-chi": { t: "Polynôme caractéristique", b: R`<p>$\chi_A(X) = \det(XI_n-A)$. Ses racines dans $\mathbb K$ sont exactement les valeurs propres de $A$. En taille $2$ : $\chi_A = X^2-\operatorname{tr}(A)X+\det A$. Toujours : la somme des valeurs propres (avec multiplicité, dans $\mathbb C$) vaut $\operatorname{tr}A$, leur produit vaut $\det A$.</p>` },
-  "red-diag": { t: "Critères de diagonalisabilité", b: R`<ul><li>$n$ valeurs propres distinctes en dimension $n$ : diagonalisable.</li><li>Diagonalisable $\iff\sum_\lambda\dim E_\lambda = n$.</li><li>Diagonalisable $\iff\chi$ scindé et $\dim E_\lambda = m_\lambda$ (multiplicité) pour chaque $\lambda$.</li><li>$\chi$ non scindé sur $\mathbb K$ : non diagonalisable sur $\mathbb K$.</li><li>Toujours $1\leqslant\dim E_\lambda\leqslant m_\lambda$ ; une valeur propre simple a un sous-espace propre de dimension $1$.</li></ul>` },
-  "red-trigo": { t: "Trigonalisabilité", b: R`<p>$A$ est trigonalisable sur $\mathbb K$ si et seulement si $\chi_A$ est scindé sur $\mathbb K$. Sur $\mathbb C$, toute matrice est trigonalisable. Les coefficients diagonaux d'une matrice triangulaire semblable à $A$ sont les valeurs propres, répétées selon leur multiplicité.</p>` },
+  "red-libre": { t: "Vecteurs propres de valeurs propres distinctes", b: R`$$\lambda_1,\dots,\lambda_p\text{ distinctes},\ x_i\in E_{\lambda_i}\setminus\{0\}\ \Longrightarrow\ (x_1,\dots,x_p)\text{ libre};\qquad\sum_iE_{\lambda_i} = \bigoplus_iE_{\lambda_i}.$$` },
+  "red-chi": { t: "Polynôme caractéristique", b: R`$$\chi_A(X) = \det(XI_n-A),\qquad\lambda\in\operatorname{Sp}A\iff\chi_A(\lambda) = 0.$$$$n = 2\ :\ \chi_A = X^2-\operatorname{tr}(A)X+\det A;\qquad\sum\lambda_i = \operatorname{tr}A,\quad\prod\lambda_i = \det A.$$` },
+  "red-diag": { t: "Critères de diagonalisabilité", b: R`$$\begin{aligned}&\operatorname{Card}\operatorname{Sp}A = n\ \Longrightarrow\ \text{diagonalisable}\\&\text{diagonalisable}\iff\sum_\lambda\dim E_\lambda = n\iff\chi\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda\\&1\leqslant\dim E_\lambda\leqslant m_\lambda\end{aligned}$$` },
+  "red-trigo": { t: "Trigonalisabilité", b: R`$$A\text{ trigonalisable sur }\mathbb K\iff\chi_A\text{ scindé sur }\mathbb K;\qquad P^{-1}AP = T\ \Longrightarrow\ \operatorname{diag}(T) = (\lambda_1,\dots,\lambda_n).$$` },
   "red-rang": { t: "Dimension d'un sous-espace propre par le rang", b: R`<div class="sbox">$$\dim E_\lambda(A) = \dim\ker(A-\lambda I_n) = n-\operatorname{rg}(A-\lambda I_n)\quad\text{(théorème du rang)}.$$</div>` },
-  "red-stable": { t: "Sous-espace stable", b: R`<p>$F$ est stable par $u$ si $u(F)\subset F$, c'est-à-dire $u(x)\in F$ pour tout $x\in F$. Si $u$ et $v$ commutent, $\ker u$, $\operatorname{Im}u$ et les sous-espaces propres de $u$ sont stables par $v$.</p>` },
-  "red-semblable": { t: "Matrices semblables", b: R`<p>$B = P^{-1}AP$ : même rang, même trace, même déterminant, même polynôme caractéristique. Si $A = PDP^{-1}$, alors $A^k = PD^kP^{-1}$.</p>` }
+  "red-stable": { t: "Sous-espace stable", b: R`$$F\text{ stable par }u\iff u(F)\subset F;\qquad uv = vu\ \Longrightarrow\ \ker u,\ \operatorname{Im}u,\ E_\lambda(u)\text{ stables par }v.$$` },
+  "red-semblable": { t: "Matrices semblables", b: R`$$B = P^{-1}AP\ \Longrightarrow\ \operatorname{rg},\ \operatorname{tr},\ \det,\ \chi\text{ égaux};\qquad A = PDP^{-1}\Rightarrow A^k = PD^kP^{-1}.$$` }
 });
 
 /* petits raccourcis LaTeX */
@@ -205,12 +205,12 @@ LEMME.exercises([
 }
 ]);
 LEMME.rappels({
-  "red-droite": { t: "Droites stables", b: R`<p>Une droite $D = \operatorname{Vect}(x)$ ($x\neq0$) est stable par $u$ si et seulement si $x$ est un vecteur propre de $u$ : $u(x)\in D$ signifie $u(x) = \lambda x$ pour un scalaire $\lambda$.</p>` },
-  "red-induit": { t: "Endomorphisme induit", b: R`<p>Si $F$ est stable par $v$, la restriction $v_F : F\to F$, $x\mapsto v(x)$, est un endomorphisme de $F$. Un vecteur propre de $v_F$ est un vecteur propre de $v$. Sur $\mathbb C$, en dimension finie non nulle, tout endomorphisme a au moins une valeur propre.</p>` },
-  "red-nb-vp": { t: "Nombre de valeurs propres", b: R`<p>En dimension finie $n$, un endomorphisme a au plus $n$ valeurs propres (ce sont des racines de $\chi$, polynôme de degré $n$). Et $0$ est valeur propre $\iff u$ n'est pas injectif $\iff\det u = 0$.</p>` },
-  "red-tvi": { t: "Théorème des valeurs intermédiaires", b: R`<p>Une fonction continue sur un intervalle, qui prend une valeur $< 0$ et une valeur $>0$, s'annule entre les deux.</p>` },
-  "red-rec2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`<p>Pour $u_{n+2} = au_{n+1}+bu_n$, on résout $r^2 = ar+b$. Deux racines complexes conjuguées $e^{\pm i\theta}$ ($\theta\in\,]0,\pi[$) : $u_n = \alpha\cos(n\theta)+\beta\sin(n\theta)$, avec $\alpha,\beta$ réels fixés par deux valeurs.</p>` },
-  "red-ed1": { t: "Équation $xy' = \\alpha y$", b: R`<p>Sur $]0,+\infty[$, l'équation linéaire $y' = \frac\alpha xy$ a pour solutions $y = Ce^{\alpha\ln x} = Cx^\alpha$, $C\in\mathbb R$ (une primitive de $\frac\alpha x$ est $\alpha\ln x$).</p>` }
+  "red-droite": { t: "Droites stables", b: R`$$\operatorname{Vect}(x)\ (x\neq0)\text{ stable par }u\iff\exists\lambda,\ u(x) = \lambda x.$$` },
+  "red-induit": { t: "Endomorphisme induit", b: R`$$v(F)\subset F\ \Longrightarrow\ v_F\in\mathcal L(F);\qquad\text{vecteur propre de }v_F\Rightarrow\text{vecteur propre de }v;\qquad\mathbb K = \mathbb C,\ F\neq\{0\}\Rightarrow\operatorname{Sp}v_F\neq\varnothing.$$` },
+  "red-nb-vp": { t: "Nombre de valeurs propres", b: R`$$\operatorname{Card}\operatorname{Sp}u\leqslant n;\qquad0\in\operatorname{Sp}u\iff\ker u\neq\{0\}\iff\det u = 0.$$` },
+  "red-tvi": { t: "Théorème des valeurs intermédiaires", b: R`$$f\in\mathcal C(I),\ f(a)\lt0\lt f(b)\ \Longrightarrow\ \exists c\text{ entre }a\text{ et }b,\ f(c) = 0.$$` },
+  "red-rec2": { t: "Suites récurrentes linéaires d'ordre 2", b: R`$$u_{n+2} = au_{n+1}+bu_n,\quad r^2 = ar+b,\quad r = e^{\pm i\theta}\ \Longrightarrow\ u_n = \alpha\cos(n\theta)+\beta\sin(n\theta),\ \alpha,\beta\in\mathbb R.$$` },
+  "red-ed1": { t: "Équation $xy' = \\alpha y$", b: R`$$x>0\ :\quad y' = \frac\alpha xy\iff y = Cx^\alpha,\ C\in\mathbb R.$$` }
 });
 
 LEMME.exercises([
@@ -434,11 +434,11 @@ LEMME.exercises([
 ]);
 
 LEMME.rappels({
-  "red-blocs": { t: "Calculs par blocs", b: R`<p><b>Produit</b> : si les tailles sont compatibles, $\begin{pmatrix}A&B\\C&D\end{pmatrix}\begin{pmatrix}A'&B'\\C'&D'\end{pmatrix} = \begin{pmatrix}AA'+BC'&AB'+BD'\\CA'+DC'&CB'+DD'\end{pmatrix}$ (comme pour des matrices $2\times2$, en respectant l'ordre des produits).</p><p><b>Déterminant</b> : une matrice triangulaire par blocs (blocs carrés sur la diagonale, zéros d'un côté) a pour déterminant le produit des déterminants des blocs diagonaux : $\det\begin{pmatrix}A&B\\0&D\end{pmatrix} = \det A\times\det D$.</p>` },
-  "red-vdm": { t: "Déterminant de Vandermonde", b: R`<p>$\begin{vmatrix}1&a_1&a_1^2&\cdots&a_1^{n-1}\\\vdots&&&&\vdots\\1&a_n&a_n^2&\cdots&a_n^{n-1}\end{vmatrix} = \prod_{1\leqslant i< j\leqslant n}(a_j-a_i)$. Il est non nul si et seulement si les $a_i$ sont deux à deux distincts.</p>` },
-  "red-nilp": { t: "Endomorphismes nilpotents", b: R`<p>$u$ est nilpotent s'il existe $p$ avec $u^p = 0$. En dimension $n$ : l'indice de nilpotence est $\leqslant n$ (donc $u^n = 0$) ; $0$ est la seule valeur propre ; $u$ est semblable à une matrice triangulaire supérieure <b>stricte</b> (zéros sur la diagonale) ; en particulier $\operatorname{tr}u = 0$ et $u$ n'est pas injectif.</p>` },
-  "red-sommedir": { t: "Sous-espaces propres en somme directe", b: R`<p>Les sous-espaces propres associés à des valeurs propres deux à deux distinctes sont en somme directe. $u$ est diagonalisable si et seulement si cette somme vaut $E$.</p>` },
-  "red-poly-egal": { t: "Égalité de polynômes", b: R`<p>Si deux polynômes de $\mathbb K[X]$ ($\mathbb K = \mathbb R$ ou $\mathbb C$) prennent la même valeur en une infinité de points, ils sont égaux. Dans $\mathbb K[X]$, on peut simplifier par un polynôme non nul : $QR = QS$ et $Q\neq0$ donnent $R = S$.</p>` }
+  "red-blocs": { t: "Calculs par blocs", b: R`$$\begin{pmatrix}A&B\\C&D\end{pmatrix}\begin{pmatrix}A'&B'\\C'&D'\end{pmatrix} = \begin{pmatrix}AA'+BC'&AB'+BD'\\CA'+DC'&CB'+DD'\end{pmatrix}$$$$\det\begin{pmatrix}A&B\\0&D\end{pmatrix} = \det A\times\det D\qquad(A,D\text{ carrées}).$$` },
+  "red-vdm": { t: "Déterminant de Vandermonde", b: R`$$\begin{vmatrix}1&a_1&\cdots&a_1^{n-1}\\\vdots&&&\vdots\\1&a_n&\cdots&a_n^{n-1}\end{vmatrix} = \prod_{1\leqslant i\lt j\leqslant n}(a_j-a_i)\neq0\iff a_i\text{ deux à deux distincts}.$$` },
+  "red-nilp": { t: "Endomorphismes nilpotents", b: R`$$u^p = 0\ \Longrightarrow\ u^n = 0,\quad\operatorname{Sp}u = \{0\},\quad u\sim\begin{pmatrix}0&&\ast\\&\ddots&\\0&&0\end{pmatrix},\quad\operatorname{tr}u = 0.$$` },
+  "red-sommedir": { t: "Sous-espaces propres en somme directe", b: R`$$\sum_\lambda E_\lambda = \bigoplus_\lambda E_\lambda;\qquad u\text{ diagonalisable}\iff\bigoplus_\lambda E_\lambda = E.$$` },
+  "red-poly-egal": { t: "Égalité de polynômes", b: R`$$P(x) = Q(x)\text{ pour une infinité de }x\Rightarrow P = Q;\qquad QR = QS,\ Q\neq0\Rightarrow R = S.$$` }
 });
 
 LEMME.exercises([

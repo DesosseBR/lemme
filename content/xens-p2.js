@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 10, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "p2-lag": { t: "Lagrange, orbite-stabilisateur", b: R`<p>L'ordre d'un sous-groupe divise l'ordre du groupe. Si $G$ agit sur $E$ : $|\operatorname{Orb}(x)| = [G:\operatorname{Stab}(x)] = \frac{|G|}{|\operatorname{Stab}(x)|}$, et les orbites forment une partition de $E$.</p>` },
-  "p2-cyc": { t: "Groupes cycliques", b: R`<p>Un groupe d'ordre $n$ qui possède un élément d'ordre $n$ est cyclique, isomorphe à $\mathbb Z/n\mathbb Z$. Un groupe d'ordre premier est cyclique. Si $\gcd(m,n) = 1$ : $\mathbb Z/m\mathbb Z\times\mathbb Z/n\mathbb Z\simeq\mathbb Z/mn\mathbb Z$ (lemme chinois).</p>` },
-  "p2-sylow": { t: "Théorèmes de Sylow (admis)", b: R`<p>Si $|G| = p^am$ avec $p\nmid m$, $G$ a des sous-groupes d'ordre $p^a$ (les $p$-Sylow), ils sont conjugués, et leur nombre $n_p$ vérifie $n_p\mid m$ et $n_p\equiv1\pmod p$. Un $p$-Sylow est distingué si et seulement si $n_p = 1$.</p>` }
+  "p2-lag": { t: "Lagrange, orbite-stabilisateur", b: R`$$H\leqslant G\Rightarrow|H|\ \big|\ |G|;\qquad|\operatorname{Orb}(x)| = [G:\operatorname{Stab}(x)] = \frac{|G|}{|\operatorname{Stab}(x)|}.$$` },
+  "p2-cyc": { t: "Groupes cycliques", b: R`$$\exists g,\ \operatorname{ord}g = |G| = n\Rightarrow G\simeq\mathbb Z/n\mathbb Z;\qquad|G| = p\text{ premier}\Rightarrow G\text{ cyclique};\qquad m\wedge n = 1\Rightarrow\mathbb Z/m\times\mathbb Z/n\simeq\mathbb Z/mn.$$` },
+  "p2-sylow": { t: "Théorèmes de Sylow (admis)", b: R`$$|G| = p^am,\ p\nmid m\ :\quad n_p\mid m,\quad n_p\equiv1\pmod p;\qquad P\triangleleft G\iff n_p = 1.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $p$ désigne un nombre premier. Pour un groupe $G$ (noté multiplicativement, de neutre $e$), le <b>centre</b> est $Z(G) = \{z\in G : \forall g\in G,\ zg = gz\}$. Un <b>$p$-groupe</b> est un groupe fini d'ordre $p^a$, $a\geqslant1$. Le groupe $G$ agit sur lui-même par conjugaison : $g\cdot x = gxg^{-1}$ ; on note $\operatorname{Cl}(x)$ l'orbite de $x$ (sa classe de conjugaison) et $C(x) = \{g : gx = xg\}$ son stabilisateur (le centralisateur de $x$).</p>`;

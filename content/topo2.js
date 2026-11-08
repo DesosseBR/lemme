@@ -40,7 +40,7 @@ const figProj = FIG(360, 220, `<path d="M20 170 L120 120 L340 120 L240 170 Z" cl
   R`$p_F(x)$ est le point de $F$ le plus proche de $x$, et $x-p_F(x)$ est orthogonal à $F$. Pythagore donne $\|x\|^2 = \|x-p_F(x)\|^2+\|p_F(x)\|^2$.`, "Projection orthogonale");
 
 LEMME.rappels({
-  "top-connexe": { t: "Connexité par arcs", b: R`<p>$A$ est connexe par arcs si deux points quelconques de $A$ sont reliés par un chemin continu $\gamma : [0,1]\to A$. Un convexe (et plus généralement une partie étoilée) est connexe par arcs ; l'image d'un connexe par arcs par une application continue est connexe par arcs ; dans $\mathbb R$, les connexes par arcs sont les intervalles.</p>` },
+  "top-connexe": { t: "Connexité par arcs", b: R`$$A\text{ c.p.a.}\iff\forall a,b\in A,\ \exists\gamma\in\mathcal C([0,1],A),\ \gamma(0) = a,\ \gamma(1) = b.$$$$\text{convexe}\Rightarrow\text{c.p.a.};\qquad f\text{ continue}\Rightarrow f(A)\text{ c.p.a.};\qquad\text{c.p.a. de }\mathbb R = \text{intervalles}.$$` },
   "top-dist": { t: "Distance à une partie", b: R`<p>$d(x,A) = \inf_{a\in A}\|x-a\|$. L'application $x\mapsto d(x,A)$ est 1-lipschitzienne, et $d(x,A) = 0\iff x\in\overline A$.</p>` },
   "top-sousmult": { t: "Norme subordonnée sous-multiplicative", b: R`<p>Pour $f,g\in\mathcal L_c(E)$ : $|||g\circ f|||\leqslant|||g|||\,|||f|||$, et $\|f(x)\|\leqslant|||f|||\,\|x\|$.</p>` }
 });

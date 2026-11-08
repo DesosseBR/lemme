@@ -3,12 +3,12 @@
 const R = String.raw;
 const P = { subj: "maths", year: "mp", chap: 1 };
 LEMME.rappels({
-  "rdb-annul": { t: "Polynôme annulateur", b: R`<p>Si $P(u) = 0$, toute valeur propre de $u$ est racine de $P$ (si $u(x) = \lambda x$, alors $P(u)(x) = P(\lambda)x$). Et $u$ est diagonalisable si et seulement s'il annule un polynôme <b>scindé à racines simples</b>.</p>` },
-  "rdb-cayley": { t: "Théorème de Cayley-Hamilton", b: R`<p>Pour tout $A\in\mathcal M_n(\mathbb K)$, $\chi_A(A) = 0$ : le polynôme caractéristique annule la matrice.</p>` },
-  "rdb-noyaux": { t: "Lemme des noyaux", b: R`<p>Si $P = P_1\cdots P_k$ avec les $P_i$ deux à deux premiers entre eux, alors $\ker P(u) = \ker P_1(u)\oplus\dots\oplus\ker P_k(u)$. Avec $P = \chi_u$ (Cayley-Hamilton), on obtient $E = \bigoplus\ker(u-\lambda_i\mathrm{Id})^{\alpha_i}$.</p>` },
-  "rdb-bezout": { t: "Bézout pour les polynômes", b: R`<p>$P$ et $Q$ sont premiers entre eux (pas de racine complexe commune) si et seulement s'il existe $U,V$ avec $UP+VQ = 1$.</p>` },
-  "rdb-tr-vp": { t: "Trace, déterminant et valeurs propres", b: R`<p>Sur $\mathbb C$, si $\lambda_1,\dots,\lambda_n$ sont les valeurs propres de $A$ comptées avec multiplicité : $\operatorname{tr}A = \sum\lambda_i$, $\det A = \prod\lambda_i$, et les valeurs propres de $A^k$ sont les $\lambda_i^k$.</p>` },
-  "rdb-binome": { t: "Binôme de Newton pour des matrices", b: R`<p>Si $AB = BA$, alors $(A+B)^n = \sum_{k=0}^n\binom nkA^kB^{n-k}$. L'hypothèse de commutation est indispensable.</p>` }
+  "rdb-annul": { t: "Polynôme annulateur", b: R`$$P(u) = 0,\ u(x) = \lambda x\ \Longrightarrow\ P(\lambda)x = 0\ \Longrightarrow\ P(\lambda) = 0;\qquad u\text{ diag.}\iff\exists P\text{ SRS},\ P(u) = 0.$$` },
+  "rdb-cayley": { t: "Théorème de Cayley-Hamilton", b: R`$$\forall A\in\mathcal M_n(\mathbb K),\quad\chi_A(A) = 0.$$` },
+  "rdb-noyaux": { t: "Lemme des noyaux", b: R`$$P = P_1\cdots P_k,\ P_i\wedge P_j = 1\ \Longrightarrow\ \ker P(u) = \bigoplus_i\ker P_i(u);\qquad E = \bigoplus_i\ker(u-\lambda_i\mathrm{Id})^{\alpha_i}.$$` },
+  "rdb-bezout": { t: "Bézout pour les polynômes", b: R`$$P\wedge Q = 1\iff\exists U,V,\ UP+VQ = 1\iff P,Q\text{ sans racine complexe commune}.$$` },
+  "rdb-tr-vp": { t: "Trace, déterminant et valeurs propres", b: R`$$\operatorname{tr}A = \sum_i\lambda_i,\qquad\det A = \prod_i\lambda_i,\qquad\operatorname{Sp}(A^k) = (\lambda_i^k)_i.$$` },
+  "rdb-binome": { t: "Binôme de Newton pour des matrices", b: R`$$AB = BA\ \Longrightarrow\ (A+B)^n = \sum_{k = 0}^n\binom nkA^kB^{n-k}.$$` }
 });
 LEMME.exercises([
 { id: "rdb-01", ...P, level: 2, time: "45 min",

@@ -21,11 +21,11 @@ ${pt((Math.sqrt(3) - 1) / 2, 0, "pt", "", 0, 0).replace('class="pt"', 'class="pt
 })();
 
 LEMME.rappels({
-  "ho-fix": { t: "Points fixes d'une homographie", b: R`<p>Une homographie $f\neq\mathrm{id}$ de la sphère $\mathcal S$ a au plus deux points fixes : $f(z) = z$ s'écrit $cz^2+(d-a)z-b = 0$ dans $\mathbb C$ (plus éventuellement $\infty$ si $c = 0$). Une homographie qui fixe trois points est l'identité.</p>` },
-  "ho-cste": { t: "Fonction rationnelle sans zéro ni pôle", b: R`<p>Une fraction rationnelle $R\in\mathbb C(Z)$ qui n'a ni zéro ni pôle dans $\mathcal S = \mathbb C\cup\{\infty\}$ est constante (sinon son numérateur ou son dénominateur aurait une racine, ou son degré se verrait en $\infty$).</p>` },
-  "ho-luroth": { t: "Degré d'une extension C(Z)/C(R) (admis)", b: R`<p>Si $R = A/B\in\mathbb C(Z)$ (fraction irréductible) n'est pas constante, de degré $d = \max(\deg A,\deg B)$, alors $\mathbb C(Z)$ est une extension de degré $d$ de $\mathbb C(R)$ : $Z$ est racine du polynôme $A(T)-R\,B(T)$, irréductible sur $\mathbb C(R)$.</p>` },
-  "ho-artin": { t: "Théorème d'Artin (admis)", b: R`<p>Si $H$ est un groupe fini d'automorphismes d'un corps $\mathbb L$, et $\mathbb K = \{u\in\mathbb L : \forall\sigma\in H,\ \sigma(u) = u\}$, alors $[\mathbb L:\mathbb K] = |H|$. De plus, pour toute extension finie, $|\operatorname{Aut}(\mathbb L/\mathbb K)|\leqslant[\mathbb L:\mathbb K]$.</p>` },
-  "ho-a4": { t: "Le groupe alterné A4", b: R`<p>$\mathfrak A_4$ a $12$ éléments : l'identité, $8$ trois-cycles et $3$ doubles transpositions. Les doubles transpositions forment avec l'identité un sous-groupe distingué $V_4\simeq(\mathbb Z/2)^2$. $\mathfrak A_4$ n'a pas de sous-groupe d'ordre $6$.</p>` }
+  "ho-fix": { t: "Points fixes d'une homographie", b: R`$$f(z) = \frac{az+b}{cz+d} = z\iff cz^2+(d-a)z-b = 0;\qquad f\neq\mathrm{id}\Rightarrow\le2\text{ points fixes}.$$` },
+  "ho-cste": { t: "Fonction rationnelle sans zéro ni pôle", b: R`$$R\in\mathbb C(Z)\text{ sans zéro ni pôle dans }\mathbb C\cup\{\infty\}\ \Longrightarrow\ R\text{ constante}.$$` },
+  "ho-luroth": { t: "Degré d'une extension C(Z)/C(R) (admis)", b: R`$$R = \frac AB,\ d = \max(\deg A,\deg B)\geqslant1\ \Longrightarrow\ [\mathbb C(Z):\mathbb C(R)] = d,\qquad A(T)-RB(T)\text{ irréductible}.$$` },
+  "ho-artin": { t: "Théorème d'Artin (admis)", b: R`$$\mathbb K = \mathbb L^H\ \Longrightarrow\ [\mathbb L:\mathbb K] = |H|;\qquad|\operatorname{Aut}(\mathbb L/\mathbb K)|\leqslant[\mathbb L:\mathbb K].$$` },
+  "ho-a4": { t: "Le groupe alterné A4", b: R`$$|\mathfrak A_4| = 12 = 1+8+3,\qquad V_4 = \{\mathrm{Id},(12)(34),(13)(24),(14)(23)\}\triangleleft\mathfrak A_4,\qquad\nexists H\leqslant\mathfrak A_4,\ |H| = 6.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations.</b> $\mathcal S = \mathbb C\cup\{\infty\}$ est la sphère de Riemann. $\Gamma$ est le groupe (pour la composition) des homographies $f = \frac{aZ+b}{cZ+d}$, $ad-bc\neq0$, qui agissent sur $\mathcal S$ de la façon usuelle ($f(\infty) = a/c$ ou $\infty$, $f(-d/c) = \infty$). Pour $M = \begin{pmatrix}a&b\\c&d\end{pmatrix}\in\mathrm{GL}_2(\mathbb C)$, on note $q(M) = \frac{aZ+b}{cZ+d}$. On pose $\rho = e^{2i\pi/3}$.</p>`;

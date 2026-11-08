@@ -20,14 +20,14 @@ const figI = GRAPH({ w: 520, h: 250, x: [0, 30], y: [0, 4], xt: [5, 10, 15, 20, 
   R`Les constantes de Lebesgue $I_n$ (points bleus, calculées numériquement) et la minoration $\frac4{\pi^2}\ln(n+1)$ (pointillés rouges). $I_n$ tend vers $+\infty$, mais très lentement : $I_{30}\approx${String(LN[30].toFixed(2)).replace(".", "{,}")}$.`, "Constantes de Lebesgue");
 
 LEMME.rappels({
-  "four-coef": { t: "Coefficients de Fourier", b: R`<p>Pour $f$ continue $2\pi$-périodique : $c_p(f) = \dfrac1{2\pi}\displaystyle\int_{-\pi}^{\pi}f(t)e^{-ipt}\,dt$, et $S_n(f)(x) = \displaystyle\sum_{p=-n}^nc_p(f)e^{ipx}$. Si $f$ est de classe $\mathcal C^1$, $S_n(f)$ converge uniformément vers $f$ (théorème de Dirichlet, admis).</p>` },
+  "four-coef": { t: "Coefficients de Fourier", b: R`$$c_p(f) = \frac1{2\pi}\int_{-\pi}^\pi f(t)e^{-ipt}\,dt,\qquad S_n(f)(x) = \sum_{p = -n}^nc_p(f)e^{ipx};\qquad f\in\mathcal C^1\Rightarrow S_n(f)\xrightarrow{\text{CVU}}f.$$` },
   "four-geo": { t: "Somme géométrique", b: R`<p>Pour $z\neq1$ : $\displaystyle\sum_{p=0}^{m}z^p = \frac{z^{m+1}-1}{z-1}$.</p>` },
   "four-arc": { t: "Méthode de l'angle moitié", b: R`<p>$e^{ia}-1 = e^{ia/2}\big(e^{ia/2}-e^{-ia/2}\big) = 2i\,e^{ia/2}\sin(a/2)$.</p>` },
-  "four-sin": { t: "Inégalités sur le sinus", b: R`<p>Pour $x\geqslant0$ : $\sin x\leqslant x$. Pour $x\in[0,\pi]$ : $\sin x\geqslant0$. Et $\displaystyle\int_0^\pi|\sin u|\,du = 2$, ainsi que sur chaque intervalle $[(k-1)\pi,k\pi]$.</p>` },
+  "four-sin": { t: "Inégalités sur le sinus", b: R`$$x\geqslant0\Rightarrow\sin x\leqslant x;\qquad x\in[0,\pi]\Rightarrow\sin x\geqslant0;\qquad\int_{(k-1)\pi}^{k\pi}|\sin u|\,du = 2.$$` },
   "four-harm": { t: "Série harmonique", b: R`<p>$\displaystyle\sum_{k=1}^n\frac1k\geqslant\int_1^{n+1}\frac{dt}t = \ln(n+1)\xrightarrow[n\to\infty]{}+\infty$ (comparaison série-intégrale : $\frac1k\geqslant\int_k^{k+1}\frac{dt}t$).</p>` },
-  "four-baire": { t: "Théorème de Baire (admis)", b: R`<p>Dans un espace métrique <b>complet</b>, une intersection dénombrable d'ouverts denses est dense. De façon équivalente : si $E = \bigcup_kF_k$ avec des $F_k$ fermés, l'un des $F_k$ est d'intérieur non vide.</p>` },
-  "four-normop": { t: "Norme d'opérateur", b: R`<p>Pour $u$ linéaire continue de $E$ dans $F$ : $|||u||| = \sup_{\|x\|\leqslant1}\|u(x)\|$, et $\|u(x)\|\leqslant|||u|||\,\|x\|$. Si $\|u(x)\|\leqslant M\|x\|$ pour tout $x$, alors $u$ est continue et $|||u|||\leqslant M$.</p>` },
-  "four-cvu": { t: "Limite uniforme de fonctions continues", b: R`<p>Une limite uniforme de fonctions continues est continue.</p>` }
+  "four-baire": { t: "Théorème de Baire (admis)", b: R`$$E\text{ complet},\ \Omega_k\text{ ouverts denses}\Rightarrow\bigcap_k\Omega_k\text{ dense};\qquad E = \bigcup_kF_k,\ F_k\text{ fermés}\Rightarrow\exists k,\ \mathring F_k\neq\varnothing.$$` },
+  "four-normop": { t: "Norme d'opérateur", b: R`$$|||u||| = \sup_{\|x\|\leqslant1}\|u(x)\|,\qquad\|u(x)\|\leqslant|||u|||\,\|x\|;\qquad\big(\forall x,\ \|u(x)\|\leqslant M\|x\|\big)\Rightarrow|||u|||\leqslant M.$$` },
+  "four-cvu": { t: "Limite uniforme de fonctions continues", b: R`$$f_n\in\mathcal C,\ f_n\xrightarrow{\text{CVU}}f\ \Longrightarrow\ f\in\mathcal C.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Notations pour tout le sujet.</b> $\mathcal C$ désigne l'espace des fonctions continues et $2\pi$-périodiques de $\mathbb R$ dans $\mathbb C$, muni de $\|f\|_\infty = \sup_{\mathbb R}|f|$. Pour $f\in\mathcal C$ et $p\in\mathbb Z$, $c_p(f) = \dfrac1{2\pi}\displaystyle\int_{-\pi}^{\pi}f(t)e^{-ipt}\,dt$, et $S_n(f) = \displaystyle\sum_{p=-n}^{n}c_p(f)e_p$ où $e_p(x) = e^{ipx}$. On pose $$D_n(t) = \sum_{p=-n}^ne^{ipt},\qquad I_n = \frac1{2\pi}\int_{-\pi}^{\pi}|D_n(t)|\,dt,$$$$\ell_n(f) = S_n(f)(0).$$</p>`;
