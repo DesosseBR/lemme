@@ -741,6 +741,8 @@ function aerateInner(inner, tag) {
 const glue = h => h.replace(/(\$\$[\s\S]*?\$\$)|\$([^$]+?)\$([.,;:!?)]+)/g, (m, d, f, q) => d ? d : `<span class="nw">$${f}$${q}</span>`);
 function aerate(html) {
   if (!html || html.indexOf("<") < 0) return html ? aerateInner(html) : html;
+  /* une balise <span> écrite au milieu d'une formule empêche MathJax de la lire : on la retire */
+  html = html.replace(/\$\$[\s\S]*?\$\$|\$[^$]+?\$/g, m => m.includes("<span") || m.includes("</span") ? m.replace(/<\/?span[^>]*>/g, "") : m);
   return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
 }
 window.__lemmeAerate = aerate;
