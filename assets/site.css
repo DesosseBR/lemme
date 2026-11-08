@@ -1583,3 +1583,10 @@ a.prow:active{transform:scale(.99)}
 :root[data-zone="commando"] .excard .cf .lvl{display:inline-block}
 .excard{min-height:96px}
 .sj-go{display:flex;align-items:center;gap:14px;margin-top:28px}
+/* Pas de boutons Q1, Q2… : les flèches et la question surlignée suffisent */
+.player .qnav{display:none}
+/* Ruban : petit, noir, étoiles jaunes */
+.excard,.sjc{padding-left:46px}
+.rib{left:16px;width:18px;height:44px;background:#14161c;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
+.rib::after{top:5px;left:4px;width:10px;height:30px;background:linear-gradient(180deg,#F5C842 calc(var(--v) / 3 * 100%),rgba(255,255,255,.22) 0);-webkit-mask-size:10px 10px;mask-size:10px 10px}
+@media (prefers-color-scheme: dark){.rib{background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}}
