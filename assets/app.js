@@ -635,8 +635,33 @@ function annotateText(txt, used, skip) {
 }
 /* Aère la rédaction : dans un paragraphe ou un item, chaque phrase va sur sa propre ligne (hors formules et balises imbriquées). */
 const ABBR = /(?:^|[\s(])(?:cf|p|ex|etc|resp|éq|i\.e|e\.g|c\.-à-d|Th|Prop|Déf|n°|vol|chap)\.$/i;
+/* Une formule « lourde » (opérateur intégral, somme, chaîne d'égalités, ou longue) écrite en ligne passe en formule centrée : le texte et les calculs ne se mélangent plus. */
+const REL = /[=<>]|\\(?:leqslant|geqslant|leq|geq|le|ge|lt|gt|sim|approx|equiv|xrightarrow|longrightarrow|to|iff|Longleftrightarrow|Rightarrow|Longrightarrow)(?![a-zA-Z])/g;
+function heavy(f) {
+  const rel = (f.replace(/\\(?:mathrm|operatorname|text)\{[^}]*\}/g, "").match(REL) || []).length;
+  if (!rel) return false;
+  const big = /\\(?:int|iint|sum|prod|lim|limsup|liminf|bigcup|bigcap)(?![a-zA-Z])/.test(f);
+  const len = f.replace(/\\[a-zA-Z]+|[{}\s]/g, "").length;
+  const fr = /\\(?:frac|dfrac|tfrac|sqrt|binom|dbinom)(?![a-zA-Z])|\^\{[^}]{3,}\}/.test(f);
+  return (big && len > 8) || (fr && len > 10) || (rel >= 2 && len > 9) || len > 34;
+}
+function promote(inner) {
+  const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/); let depth = 0, out = "";
+  for (let k = 0; k < parts.length; k++) {
+    let t = parts[k]; if (!t) continue;
+    if (t[0] === "<") { if (!/^<br\b/i.test(t)) { if (/^<\//.test(t)) depth = Math.max(0, depth - 1); else if (!/\/>$/.test(t)) depth++; } out += t; continue; }
+    if (t[0] === "$" && t[1] !== "$" && !depth && heavy(t.slice(1, -1))) {
+      let f = t.slice(1, -1).trim(); const nx = parts[k + 1] || ""; const m = nx.match(/^\s*([.,;:])/);
+      if (m) { f += m[1] === ":" ? "\\;:" : m[1]; parts[k + 1] = nx.slice(m[0].length); }
+      out += `$$${f}$$`; continue;
+    }
+    out += t;
+  }
+  return out;
+}
 function aerateInner(inner) {
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
+  inner = promote(inner);
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   const cuts = []; let depth = 0, pos = 0;
   const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
