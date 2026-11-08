@@ -23,11 +23,11 @@ const YEARS = { mpsi: "Sup", mp: "Spé" };
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- HTML + LaTeX vers LaTeX ---------- */
-const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": " " };
-const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp);/g, m => ENT[m]);
+const ENT = { "&lt;": "<", "&gt;": ">", "&amp;": "&", "&quot;": '"', "&nbsp;": " ", "&emsp;": "\u2003" };
+const decode = s => s.replace(/&(lt|gt|amp|quot|nbsp|emsp);/g, m => ENT[m]);
 const UNI = { "ℤ": "$\\mathbb{Z}$", "ℝ": "$\\mathbb{R}$", "ℂ": "$\\mathbb{C}$", "ℕ": "$\\mathbb{N}$", "ℚ": "$\\mathbb{Q}$", "★": "",
   "∘": "$\\circ$", "⌊": "$\\lfloor$", "⌋": "$\\rfloor$", "⊂": "$\\subset$", "⇒": "$\\Rightarrow$", "→": "$\\to$", "∞": "$\\infty$", "√": "$\\surd$",
-  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "", "◎": "", "∑": "$\\sum$", "ᵀ": "$^{\\top}$", "₀": "$_0$", "₁": "$_1$", "₂": "$_2$", "ₙ": "$_n$", "⁻": "$^{-}$", "ω": "$\\omega$", "θ": "$\\theta$", "λ": "$\\lambda$", "≈": "$\\approx$", "ₛ": "$_s$", "×": "$\\times$" };
+  "⁺": "$^{+}$", "²": "$^{2}$", "ˣ": "$^{x}$", "ℓ": "$\\ell$", "α": "$\\alpha$", "−": "$-$", "≤": "$\\leqslant$", "≥": "$\\geqslant$", "π": "$\\pi$", "∩": "$\\cap$", "∪": "$\\cup$", "∈": "$\\in$", "∅": "$\\varnothing$", "⚔": "", "◎": "", "∑": "$\\sum$", "ᵀ": "$^{\\top}$", "₀": "$_0$", "₁": "$_1$", "₂": "$_2$", "ₙ": "$_n$", "⁻": "$^{-}$", "ω": "$\\omega$", "θ": "$\\theta$", "λ": "$\\lambda$", "≈": "$\\approx$", "ₛ": "$_s$", "×": "$\\times$", "\u2003": "\\quad{}" };
 const UNI_RE = new RegExp("[" + Object.keys(UNI).join("") + "]", "g");
 function escText(s) {
   return decode(s)
