@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "fft-geo": { t: "Somme géométrique des racines de l'unité", b: R`<p>Si $w$ est une racine primitive $n$-ième de l'unité et $k\in\mathbb Z$ : $\sum_{j=0}^{n-1}w^{jk} = n$ si $n\mid k$, et $0$ sinon (car $w^k\neq1$ et $\frac{(w^k)^n-1}{w^k-1} = 0$).</p>` },
-  "fft-vdm": { t: "Déterminant de Vandermonde", b: R`<p>$\det\big(x_i^{\,j}\big)_{0\leqslant i,j\lt n} = \prod_{i\lt j}(x_j-x_i)$, non nul si les $x_i$ sont distincts. Évaluer un polynôme de degré $\lt n$ en $n$ points distincts est donc une bijection (interpolation de Lagrange).</p>` },
+  "fft-geo": { t: "Somme géométrique des racines de l'unité", b: R`$$w\text{ primitive }n\text{-ième}\ :\quad\sum_{j = 0}^{n-1}w^{jk} = \left\{\begin{aligned}&n&&\text{si }n\mid k\\&0&&\text{sinon}\end{aligned}\right.$$` },
+  "fft-vdm": { t: "Déterminant de Vandermonde", b: R`$$\det\big(x_i^{\,j}\big)_{0\leqslant i,j\lt n} = \prod_{i\lt j}(x_j-x_i)\neq0\ (x_i\text{ distincts});\qquad P\mapsto\big(P(x_i)\big)_i\text{ bijective sur }\mathbb K_{n-1}[X].$$` },
   "fft-rec": { t: "Récurrences « diviser pour régner »", b: R`<p>Si $C(m) = 2C(m-1)+a2^m$, alors $T(m) = \frac{C(m)}{2^m}$ vérifie $T(m) = T(m-1)+a$, donc $C(m) = 2^m(C(0)+am)$.</p>` }
 });
 

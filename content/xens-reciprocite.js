@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "rq-euler": { t: "Critère d'Euler", b: R`<p>Pour $p$ premier impair et $a\in\mathbb F_p^*$ : $a^{\frac{p-1}2} = \big(\frac ap\big)$ dans $\mathbb F_p$, où $\big(\frac ap\big) = 1$ si $a$ est un carré de $\mathbb F_p^*$, $-1$ sinon. Le symbole de Legendre est multiplicatif, et $\mathbb F_p^*$ contient $\frac{p-1}2$ carrés.</p>` },
-  "rq-orb": { t: "Orbites et points fixes", b: R`<p>Si un groupe $G$ d'ordre $p$ premier agit sur un ensemble fini $B$, chaque orbite a $1$ ou $p$ éléments (elle a $\frac{|G|}{|\mathrm{Stab}|}$ éléments), donc $|B|\equiv|B^G|\pmod p$, où $B^G$ est l'ensemble des points fixes.</p>` },
-  "rq-class": { t: "Formes quadratiques sur 𝔽_q", b: R`<p>(Admis.) Sur $\mathbb F_q$ ($q$ impair), deux formes quadratiques non dégénérées de même dimension sont équivalentes si et seulement si leurs discriminants (déterminants des matrices) ont le même caractère quadratique, c'est-à-dire diffèrent d'un facteur carré. Des formes équivalentes ont le même nombre de solutions de $Q(x) = 1$.</p>` }
+  "rq-euler": { t: "Critère d'Euler", b: R`$$a^{\frac{p-1}2} = \Big(\frac ap\Big),\qquad\Big(\frac{ab}p\Big) = \Big(\frac ap\Big)\Big(\frac bp\Big),\qquad\operatorname{Card}(\mathbb F_p^*)^2 = \frac{p-1}2.$$` },
+  "rq-orb": { t: "Orbites et points fixes", b: R`$$|G| = p\text{ premier}\ :\quad|\operatorname{Orb}(x)|\in\{1,p\}\ \Longrightarrow\ |B|\equiv|B^G|\pmod p.$$` },
+  "rq-class": { t: "Formes quadratiques sur 𝔽_q", b: R`$$Q\simeq Q'\iff\operatorname{disc}Q\cdot(\operatorname{disc}Q')^{-1}\in(\mathbb F_q^*)^2\qquad(\text{même dimension, }q\text{ impair}).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $p$ et $q$ sont deux nombres premiers impairs distincts. On note $\big(\frac ap\big)$ le symbole de Legendre. On veut démontrer la <b>loi de réciprocité quadratique</b> :</p>$$\Big(\frac pq\Big)\Big(\frac qp\Big) = (-1)^{\frac{p-1}2\cdot\frac{q-1}2}.$$<p>On pose $B = \{(x_0,\dots,x_{p-1})\in\mathbb F_q^{\,p} : x_0^2+\dots+x_{p-1}^2 = 1\}$ et $d = \frac{p-1}2$.</p>`;

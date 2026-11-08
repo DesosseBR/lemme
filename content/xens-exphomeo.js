@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "eh-exp": { t: "Propriétés de l'exponentielle", b: R`<p>$\exp(PMP^{-1}) = P\exp(M)P^{-1}$ ; $\exp(\operatorname{diag}(a_i)) = \operatorname{diag}(e^{a_i})$ ; $\exp(M)$ commute avec $M$ ; $\exp(M)^{-1} = \exp(-M)$ ; $\,{}^t\exp(M) = \exp({}^tM)$ ; $\exp$ est continue sur $\mathcal M_n(\mathbb R)$.</p>` },
-  "eh-rho": { t: "Norme d'une matrice symétrique", b: R`<p>Pour $S\in\mathcal S_n(\mathbb R)$, $|||S|||_2 = \rho(S) = \max_i|\lambda_i|$ (rayon spectral) : en base orthonormée propre, $\|Sx\|^2 = \sum\lambda_i^2x_i^2$. Ainsi une suite de $\mathcal S_n(\mathbb R)$ est bornée si et seulement si ses rayons spectraux le sont.</p>` },
-  "eh-adh": { t: "Suite bornée à valeur d'adhérence unique", b: R`<p>En dimension finie, une suite bornée qui n'a qu'une seule valeur d'adhérence converge vers elle (Bolzano-Weierstrass, par l'absurde).</p>` }
+  "eh-rho": { t: "Norme d'une matrice symétrique", b: R`$$S\in\mathcal S_n(\mathbb R)\ :\quad|||S|||_2 = \rho(S) = \max_i|\lambda_i|,\qquad\|Sx\|^2 = \sum\lambda_i^2x_i^2.$$` },
+  "eh-adh": { t: "Suite bornée à valeur d'adhérence unique", b: R`$$\dim E\lt\infty,\ (x_n)\text{ bornée},\ \text{une seule valeur d'adhérence }a\ \Longrightarrow\ x_n\to a.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\exp(M) = \sum_{k\geqslant0}\frac{M^k}{k!}$ pour $M\in\mathcal M_n(\mathbb R)$. $\mathcal S_n(\mathbb R)$ est l'espace des matrices symétriques réelles, $\mathcal S_n^{++}(\mathbb R)$ l'ensemble des symétriques définies positives (valeurs propres $>0$). On admet le théorème spectral : toute $S\in\mathcal S_n(\mathbb R)$ s'écrit $S = PD\,{}^tP$, $P\in O_n(\mathbb R)$, $D$ diagonale réelle.</p>`;

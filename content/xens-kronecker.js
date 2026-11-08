@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "kr-coef": { t: "Relations coefficients-racines", b: R`<p>Si $P = X^n+a_{n-1}X^{n-1}+\dots+a_0 = \prod_{i = 1}^n(X-z_i)$, alors $a_{n-k} = (-1)^k\sigma_k$ avec $\sigma_k = \sum_{|I| = k}\prod_{i\in I}z_i$ (fonctions symétriques élémentaires).</p>` },
-  "kr-comp": { t: "Matrice compagnon", b: R`<p>Pour $P$ unitaire de degré $n$, la matrice compagnon $C_P$ a pour polynôme caractéristique $P$. Si $C_P$ est trigonalisable de diagonale $z_1,\dots,z_n$, alors $C_P^k$ est trigonalisable de diagonale $z_1^k,\dots,z_n^k$, donc $\chi_{C_P^k} = \prod(X-z_i^k)$.</p>` },
+  "kr-coef": { t: "Relations coefficients-racines", b: R`$$\prod_{i = 1}^n(X-z_i) = X^n+\sum_{k = 1}^n(-1)^k\sigma_kX^{n-k},\qquad\sigma_k = \sum_{|I| = k}\prod_{i\in I}z_i.$$` },
+  "kr-comp": { t: "Matrice compagnon", b: R`$$\chi_{C_P} = P;\qquad C_P\sim T,\ \operatorname{diag}T = (z_i)\ \Longrightarrow\ \chi_{C_P^k} = \prod_i(X-z_i^k).$$` },
   "kr-cyc": { t: "Polynômes cyclotomiques", b: R`<p>$X^N-1 = \prod_{d\mid N}\Phi_d$, où les $\Phi_d\in\mathbb Z[X]$ sont unitaires et irréductibles sur $\mathbb Q$.</p>` }
 });
 

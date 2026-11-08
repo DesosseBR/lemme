@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "cv-pol": { t: "Décomposition polaire", b: R`<p>Toute $A\in\mathcal M_n(\mathbb R)$ s'écrit $A = OS$ avec $O\in O_n(\mathbb R)$ et $S\in\mathcal S_n^+(\mathbb R)$. Et $|||A||| = \lambda_{\max}(S)$ (car $\|Ax\| = \|Sx\|$).</p>` },
-  "cv-spec": { t: "Théorème spectral", b: R`<p>Si $S\in\mathcal S_n(\mathbb R)$, il existe une base orthonormée $(e_i)$ de vecteurs propres, $Se_i = \lambda_ie_i$, et $\operatorname{Tr}(M) = \sum_i\langle Me_i,e_i\rangle$ pour toute $M$ (trace dans une base orthonormée).</p>` },
-  "cv-cs": { t: "Cauchy-Schwarz et égalité", b: R`<p>$|\langle u,v\rangle|\leqslant\|u\|\|v\|$. Dans un espace euclidien, $\|u+v\| = \|u\|+\|v\|$ si et seulement si $u$ et $v$ sont positivement liés.</p>` }
+  "cv-spec": { t: "Théorème spectral", b: R`$$Se_i = \lambda_ie_i,\ (e_i)\text{ orthonormée};\qquad\operatorname{Tr}M = \sum_i\langle Me_i,e_i\rangle.$$` },
+  "cv-cs": { t: "Cauchy-Schwarz et égalité", b: R`$$|\langle u,v\rangle|\leqslant\|u\|\|v\|;\qquad\|u+v\| = \|u\|+\|v\|\iff u,v\text{ positivement liés}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathbb R^n$ est euclidien, et pour $A\in\mathcal M_n(\mathbb R)$, $|||A||| = \sup_{\|x\| = 1}\|Ax\|$. On note $\mathcal B = \{A : |||A|||\leqslant1\}$ et $\operatorname{Conv}(X)$ l'enveloppe convexe de $X$, ensemble des combinaisons convexes finies $\sum\lambda_ix_i$ ($\lambda_i\geqslant0$, $\sum\lambda_i = 1$, $x_i\in X$). $\mathcal M_n(\mathbb R)$ est muni du produit scalaire $\langle A,B\rangle = \operatorname{Tr}({}^tAB) = \sum_{i,j}a_{ij}b_{ij}$, de dimension $N = n^2$. Un point $x$ d'un convexe $C$ est <b>extrémal</b> si $x = ty+(1-t)z$ avec $y,z\in C$, $t\in\,]0,1[$ impose $y = z = x$.</p>`;

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "zn-crt": { t: "Théorème chinois", b: R`<p>Si $n = p_1^{a_1}\cdots p_s^{a_s}$, l'application $x\mapsto(x\bmod p_i^{a_i})_i$ est un isomorphisme d'anneaux $\mathbb Z/n\mathbb Z\to\prod_i\mathbb Z/p_i^{a_i}\mathbb Z$, qui induit un isomorphisme de groupes $(\mathbb Z/n\mathbb Z)^\times\simeq\prod_i(\mathbb Z/p_i^{a_i}\mathbb Z)^\times$.</p>` },
+  "zn-crt": { t: "Théorème chinois", b: R`$$n = \prod p_i^{a_i}\ :\quad\mathbb Z/n\mathbb Z\simeq\prod_i\mathbb Z/p_i^{a_i}\mathbb Z,\qquad(\mathbb Z/n\mathbb Z)^\times\simeq\prod_i(\mathbb Z/p_i^{a_i}\mathbb Z)^\times.$$` },
   "zn-cyc": { t: "𝔽_p^× est cyclique", b: R`<p>Pour $p$ premier, $(\mathbb Z/p\mathbb Z)^\times$ est cyclique d'ordre $p-1$.</p>` },
-  "zn-ord": { t: "Ordres dans un groupe abélien", b: R`<p>Si $x$ et $y$ commutent et ont des ordres $a$ et $b$ premiers entre eux, $xy$ est d'ordre $ab$. Si $x$ est d'ordre $m$ et $d\mid m$, $x^{m/d}$ est d'ordre $d$.</p>` }
+  "zn-ord": { t: "Ordres dans un groupe abélien", b: R`$$xy = yx,\ a\wedge b = 1\Rightarrow\operatorname{ord}(xy) = ab;\qquad\operatorname{ord}x = m,\ d\mid m\Rightarrow\operatorname{ord}x^{m/d} = d.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $n\geqslant2$ est un entier, de décomposition $n = p_1^{a_1}\cdots p_s^{a_s}$ ($p_i$ premiers distincts, $a_i\geqslant1$). On note $\varphi$ l'indicatrice d'Euler et $(\mathbb Z/n\mathbb Z)^\times$ le groupe des inversibles.</p>`;

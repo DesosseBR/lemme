@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 3, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "va-adh": { t: "Valeur d'adhérence", b: R`<p>$a$ est valeur d'adhérence de $(x_n)$ si une suite extraite converge vers $a$, ou de façon équivalente si $\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\ d(x_n,a)\lt\varepsilon$. Dans un compact, toute suite a au moins une valeur d'adhérence, et une suite qui en a une seule converge.</p>` },
-  "va-conn": { t: "Connexité", b: R`<p>$\Gamma$ est connexe s'il n'existe pas de partition $\Gamma = A\sqcup B$ en deux fermés de $\Gamma$ non vides. Les connexes de $\mathbb R$ sont les intervalles.</p>` },
-  "va-dist": { t: "Distance à une partie", b: R`<p>$d(x,A) = \inf_{a\in A}d(x,a)$ est $1$-lipschitzienne en $x$, et $d(x,A) = 0\iff x\in\overline A$. Si $A$ est compact, l'inf est atteint.</p>` }
+  "va-adh": { t: "Valeur d'adhérence", b: R`$$a\text{ valeur d'adhérence}\iff\exists\varphi,\ x_{\varphi(n)}\to a\iff\forall\varepsilon>0,\ \forall N,\ \exists n\geqslant N,\ d(x_n,a)\lt\varepsilon.$$<p>Compact : au moins une valeur d'adhérence ; une seule $\Rightarrow$ convergence.</p>` },
+  "va-conn": { t: "Connexité", b: R`$$\Gamma\text{ connexe}\iff\nexists A,B\text{ fermés de }\Gamma\text{ non vides},\ \Gamma = A\sqcup B;\qquad\text{connexes de }\mathbb R = \text{intervalles}.$$` },
+  "va-dist": { t: "Distance à une partie", b: R`$$d(x,A) = \inf_{a\in A}d(x,a),\qquad|d(x,A)-d(y,A)|\leqslant d(x,y),\qquad d(x,A) = 0\iff x\in\overline A.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $(X,d)$ est un espace métrique, $(x_n)_{n\in\mathbb N}$ une suite de $X$, et $\Gamma$ l'ensemble de ses valeurs d'adhérence. Pour deux parties non vides, $d(A,B) = \inf\{d(a,b) : a\in A,\ b\in B\}$.</p>`;

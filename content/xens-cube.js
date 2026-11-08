@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "cu-os": { t: "Orbite et stabilisateur", b: R`<p>Si $G$ agit sur $E$ : $|G| = |\operatorname{Orb}(x)|\cdot|\operatorname{Stab}(x)|$, et $\operatorname{Stab}(g\cdot x) = g\operatorname{Stab}(x)g^{-1}$ a le même cardinal que $\operatorname{Stab}(x)$.</p>` },
-  "cu-phi": { t: "Indicatrice d'Euler", b: R`<p>$\varphi(d)$ est le nombre d'entiers de $[\![1,d]\!]$ premiers avec $d$. Pour $1\leqslant k\leqslant n$, $\gcd(k,n) = \frac nd$ si et seulement si $k = \frac nd\,j$ avec $j\in[\![1,d]\!]$ premier avec $d$ ; il y a donc $\varphi(d)$ tels $k$. En particulier $\sum_{d\mid n}\varphi(d) = n$.</p>` },
-  "cu-cyc": { t: "Rotation de ℤ/nℤ", b: R`<p>La permutation $x\mapsto x+k$ de $\mathbb Z/n\mathbb Z$ a $\gcd(k,n)$ cycles, tous de longueur $\frac n{\gcd(k,n)}$ (l'ordre de $\bar k$).</p>` }
+  "cu-phi": { t: "Indicatrice d'Euler", b: R`$$\varphi(d) = \operatorname{Card}\{k\in[\![1,d]\!] : k\wedge d = 1\};\qquad\operatorname{Card}\{k\in[\![1,n]\!] : k\wedge n = \tfrac nd\} = \varphi(d);\qquad\sum_{d\mid n}\varphi(d) = n.$$` },
+  "cu-cyc": { t: "Rotation de ℤ/nℤ", b: R`$$x\mapsto x+k\text{ sur }\mathbb Z/n\mathbb Z\ :\quad\operatorname{pgcd}(k,n)\text{ cycles de longueur }\frac n{\operatorname{pgcd}(k,n)}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathcal C = [-1,1]^3$ est un cube de centre $O$. On admet qu'une isométrie de l'espace qui envoie $\mathcal C$ sur lui-même fixe $O$, est donc linéaire (une matrice orthogonale), et permute les $8$ sommets, les $12$ arêtes et les $6$ faces. On note $G$ le groupe des <b>rotations</b> du cube (isométries de déterminant $1$ qui conservent $\mathcal C$). Une <b>coloration</b> des faces avec $c$ couleurs est une application $v : \{\text{faces}\}\to[\![1,c]\!]$ ; $G$ agit par $(g\cdot v)(F) = v(g^{-1}(F))$, et deux colorations sont <b>équivalentes</b> si elles sont dans la même orbite. Pour $g\in G$, $\operatorname{Fix}(g)$ est l'ensemble des colorations fixées par $g$.</p>`;

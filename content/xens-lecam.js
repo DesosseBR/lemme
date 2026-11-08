@@ -10,7 +10,7 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 LEMME.rappels({
   "lc-poi": { t: "Somme de Poisson indépendantes", b: R`<p>Si $X\sim\mathcal P(\lambda)$ et $Y\sim\mathcal P(\mu)$ sont indépendantes, $X+Y\sim\mathcal P(\lambda+\mu)$ : $\mathbb P(X+Y = k) = \sum_j e^{-\lambda}\frac{\lambda^j}{j!}e^{-\mu}\frac{\mu^{k-j}}{(k-j)!} = e^{-(\lambda+\mu)}\frac{(\lambda+\mu)^k}{k!}$ (binôme).</p>` },
   "lc-ineg": { t: "Deux inégalités", b: R`<p>Pour $p\geqslant0$ : $1-p\leqslant e^{-p}$, et $e^{-p}\geqslant1-p$ donne $1-e^{-p}\leqslant p$.</p>` },
-  "lc-unif": { t: "Simulation par une uniforme", b: R`<p>Si $U\sim\mathcal U([0,1])$ et $0 = c_0\lt c_1\lt\dots$ avec $c_k-c_{k-1} = q_{k-1}$ et $\sum q_k = 1$, alors $X = k$ sur $\{c_k\lt U\leqslant c_{k+1}\}$ définit une variable de loi $(q_k)$.</p>` }
+  "lc-unif": { t: "Simulation par une uniforme", b: R`$$U\sim\mathcal U([0,1]),\quad c_{k+1}-c_k = q_k,\quad X = k\text{ sur }\{c_k\lt U\leqslant c_{k+1}\}\ \Longrightarrow\ P(X = k) = q_k.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour deux lois $\mu,\nu$ sur $\mathbb N$, la <b>distance en variation totale</b> est $d(\mu,\nu) = \sup_{A\subset\mathbb N}|\mu(A)-\nu(A)|$. On note $\mathcal B(p)$ la loi de Bernoulli, $\mathcal B(n,p)$ la loi binomiale, $\mathcal P(\lambda)$ la loi de Poisson ($\mathbb P(Y = k) = e^{-\lambda}\frac{\lambda^k}{k!}$). Un <b>couplage</b> de $\mu$ et $\nu$ est un couple $(X,Y)$ de variables définies sur un même espace, avec $X\sim\mu$ et $Y\sim\nu$.</p>`;

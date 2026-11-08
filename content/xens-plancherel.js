@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 18, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pl-fub": { t: "Fubini", b: R`<p>Si $h$ est mesurable sur $\mathbb R^2$ et $\iint|h|\lt+\infty$ (ce qui se vérifie par Fubini-Tonelli sur $|h|$), alors $\int\big(\int h(x,y)\,dx\big)dy = \int\big(\int h(x,y)\,dy\big)dx$.</p>` },
-  "pl-inv": { t: "Inversion de Fourier (admise ici)", b: R`<p>Si $f\in L^1$ et $\mathcal Ff\in L^1$, alors $f(x) = \frac1{2\pi}\int\mathcal Ff(\xi)e^{ix\xi}\,d\xi$ (presque partout, partout si $f$ est continue).</p>` },
-  "pl-prol": { t: "Prolongement des applications uniformément continues", b: R`<p>Si $A$ est dense dans un espace métrique $E$, $F$ complet, et $f : A\to F$ uniformément continue, alors $f$ a un unique prolongement continu à $E$. Une application linéaire continue entre espaces normés est uniformément continue (elle est lipschitzienne).</p>` }
+  "pl-fub": { t: "Fubini", b: R`$$\iint|h|\lt+\infty\ \Longrightarrow\ \int\Big(\int h(x,y)\,dx\Big)dy = \int\Big(\int h(x,y)\,dy\Big)dx.$$` },
+  "pl-inv": { t: "Inversion de Fourier (admise ici)", b: R`$$f,\mathcal Ff\in L^1\ \Longrightarrow\ f(x) = \frac1{2\pi}\int\mathcal Ff(\xi)e^{ix\xi}\,d\xi.$$` },
+  "pl-prol": { t: "Prolongement des applications uniformément continues", b: R`$$\overline A = E,\ F\text{ complet},\ f : A\to F\text{ u.c.}\ \Longrightarrow\ \exists!\,\tilde f\in\mathcal C(E,F),\ \tilde f_{|A} = f.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathcal S(\mathbb R)$ est l'espace de Schwartz (fonctions $\mathcal C^\infty$ telles que $x^af^{(b)}$ soit bornée pour tous $a,b\in\mathbb N$). Pour $f\in L^1(\mathbb R)$, $\mathcal Ff(\xi) = \int_{\mathbb R}f(x)e^{-ix\xi}\,dx$. On note $\|f\|_2 = \big(\int|f|^2\big)^{1/2}$. On admet : $\mathcal S(\mathbb R)$ est dense dans $L^2(\mathbb R)$, et $L^2(\mathbb R)$ est complet.</p>`;

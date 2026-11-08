@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pg-wan": { t: "Théorème de Wantzel (admis)", b: R`<p>$z\in\mathbb C$ est constructible si et seulement s'il existe une tour $\mathbb Q = L_0\subset L_1\subset\dots\subset L_r$ avec $[L_{i+1}:L_i] = 2$ et $z\in L_r$. En particulier, $z$ est algébrique et son degré sur $\mathbb Q$ est une puissance de $2$.</p>` },
-  "pg-cyc": { t: "Polynômes cyclotomiques (admis)", b: R`<p>$\Phi_m$ est irréductible sur $\mathbb Q$, de degré $\varphi(m)$, et c'est le polynôme minimal de $e^{2i\pi/m}$. $\varphi(p^a) = p^{a-1}(p-1)$. Pour $p$ premier, $\Phi_p = 1+X+\dots+X^{p-1}$.</p>` },
+  "pg-wan": { t: "Théorème de Wantzel (admis)", b: R`$$z\text{ constructible}\iff\exists\,\mathbb Q = L_0\subset\dots\subset L_r,\ [L_{i+1}:L_i] = 2,\ z\in L_r\ \Longrightarrow\ [\mathbb Q(z):\mathbb Q] = 2^k.$$` },
+  "pg-cyc": { t: "Polynômes cyclotomiques (admis)", b: R`$$\Phi_m\text{ irréductible},\quad\deg\Phi_m = \varphi(m),\quad\Phi_m = \pi_{e^{2i\pi/m}};\qquad\Phi_p = 1+X+\dots+X^{p-1}.$$` },
   "pg-tel": { t: "Base télescopique", b: R`<p>Si $L\subset M\subset N$ sont des corps (extensions finies), $[N:L] = [N:M][M:L]$.</p>` }
 });
 

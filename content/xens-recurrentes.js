@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "srl-noy": { t: "Lemme des noyaux", b: R`<p>Si $P = P_1\cdots P_k$ avec les $P_i$ deux à deux premiers entre eux, et $f$ un endomorphisme (même en dimension infinie), alors $\ker P(f) = \bigoplus_i\ker P_i(f)$.</p>` },
-  "srl-rang": { t: "Rang d'une matrice extraite", b: R`<p>Le rang d'une matrice extraite est au plus celui de la matrice. Une suite décroissante de sous-espaces de dimension finie est stationnaire.</p>` },
+  "srl-noy": { t: "Lemme des noyaux", b: R`$$P = P_1\cdots P_k,\ P_i\wedge P_j = 1\ \Longrightarrow\ \ker P(f) = \bigoplus_i\ker P_i(f)\quad(\text{même en dim. infinie}).$$` },
+  "srl-rang": { t: "Rang d'une matrice extraite", b: R`$$\operatorname{rg}(\text{extraite})\leqslant\operatorname{rg}(M);\qquad F_0\supset F_1\supset\cdots,\ \dim F_0\lt\infty\Rightarrow\text{stationnaire}.$$` },
   "srl-expo": { t: "Exponentiation rapide", b: R`<p>$M^{2k} = (M^k)^2$ et $M^{2k+1} = M\,(M^k)^2$ : $M^N$ se calcule en au plus $2\log_2N$ produits.</p>` }
 });
 

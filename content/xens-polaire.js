@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pol-spec": { t: "Théorème spectral", b: R`<p>Si $S\in\mathcal S_n(\mathbb R)$, il existe $P\in O_n(\mathbb R)$ et $D$ diagonale réelle avec $S = PDP^{-1} = PD\,{}^tP$. $S\in\mathcal S_n^+(\mathbb R)$ ($\langle Sx,x\rangle\geqslant0$) si et seulement si ses valeurs propres sont $\geqslant0$ ; $S\in\mathcal S_n^{++}(\mathbb R)$ si et seulement si elles sont $>0$.</p>` },
-  "pol-lag": { t: "Interpolation de Lagrange", b: R`<p>Pour des réels $x_1,\dots,x_m$ distincts et des valeurs $y_1,\dots,y_m$, il existe un polynôme $L$ avec $L(x_i) = y_i$. Si $M = PDP^{-1}$ avec $D = \operatorname{diag}(d_i)$, alors $L(M) = P\operatorname{diag}(L(d_i))P^{-1}$.</p>` },
-  "pol-comp": { t: "Compacité de Oₙ(ℝ)", b: R`<p>$O_n(\mathbb R) = \{M : {}^tMM = I_n\}$ est fermé (image réciproque de $\{I_n\}$ par une application continue) et borné (colonnes unitaires), donc compact. Toute suite de $O_n(\mathbb R)$ a une suite extraite convergente dans $O_n(\mathbb R)$.</p>` }
+  "pol-spec": { t: "Théorème spectral", b: R`$$S = PD\,{}^tP,\ P\in O_n(\mathbb R);\qquad S\in\mathcal S_n^+\iff\operatorname{Sp}S\subset\mathbb R_+;\qquad S\in\mathcal S_n^{++}\iff\operatorname{Sp}S\subset\mathbb R_+^*.$$` },
+  "pol-lag": { t: "Interpolation de Lagrange", b: R`$$x_i\text{ distincts}\Rightarrow\exists L,\ L(x_i) = y_i;\qquad M = PDP^{-1}\Rightarrow L(M) = P\operatorname{diag}\big(L(d_i)\big)P^{-1}.$$` },
+  "pol-comp": { t: "Compacité de Oₙ(ℝ)", b: R`$$O_n(\mathbb R) = \{M : {}^tMM = I_n\}\text{ fermé borné}\ \Longrightarrow\ \text{compact}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathbb R^n$ est muni de son produit scalaire canonique et de la norme $\|\cdot\|$ associée. $\mathcal S_n^+(\mathbb R)$ (resp. $\mathcal S_n^{++}(\mathbb R)$) désigne l'ensemble des matrices symétriques positives (resp. définies positives). Pour un nombre complexe $z\neq0$, l'écriture polaire est $z = e^{i\theta}\rho$ avec $|e^{i\theta}| = 1$ et $\rho>0$ ; on cherche l'analogue matriciel $A = OS$, $O$ orthogonale et $S$ symétrique positive.</p>`;

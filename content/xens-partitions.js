@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pa-geo": { t: "Séries géométriques et dérivées", b: R`<p>Pour $z\neq0$ : $\frac1{z-X} = \sum_{n\geqslant0}\frac{X^n}{z^{n+1}}$ (série formelle, ou série entière de rayon $|z|$). En dérivant $k-1$ fois : $\frac1{(z-X)^k} = \sum_{n\geqslant0}\binom{n+k-1}{k-1}\frac{X^n}{z^{n+k}}$.</p>` },
-  "pa-des": { t: "Décomposition en éléments simples", b: R`<p>Une fraction $F = \frac1Q$ avec $\deg Q\geqslant1$ s'écrit de façon unique $F = \sum_{w}\sum_{j = 1}^{m_w}\frac{c_{w,j}}{(w-X)^j}$, la somme portant sur les racines $w$ de $Q$, de multiplicités $m_w$, avec $c_{w,m_w}\neq0$.</p>` },
+  "pa-geo": { t: "Séries géométriques et dérivées", b: R`$$\frac1{z-X} = \sum_{n\geqslant0}\frac{X^n}{z^{n+1}},\qquad\frac1{(z-X)^k} = \sum_{n\geqslant0}\binom{n+k-1}{k-1}\frac{X^n}{z^{n+k}}.$$` },
+  "pa-des": { t: "Décomposition en éléments simples", b: R`$$\frac1Q = \sum_{w\in Q^{-1}(0)}\sum_{j = 1}^{m_w}\frac{c_{w,j}}{(w-X)^j},\qquad c_{w,m_w}\neq0.$$` },
   "pa-bez": { t: "Bézout", b: R`<p>Si $\gcd(a_1,\dots,a_s) = 1$, il existe $b_1,\dots,b_s\in\mathbb Z$ avec $a_1b_1+\dots+a_sb_s = 1$.</p>` }
 });
 

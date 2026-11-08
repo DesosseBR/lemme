@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 12, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "rf-tcm": { t: "Convergence monotone", b: R`<p>Si $(g_n)$ est une suite croissante de fonctions mesurables positives, de limite $g$, alors $\int g_n\,d\mu\to\int g\,d\mu$ (dans $[0,+\infty]$).</p>` },
+  "rf-tcm": { t: "Convergence monotone", b: R`$$0\leqslant g_n\nearrow g\ \Longrightarrow\ \int g_n\,d\mu\nearrow\int g\,d\mu.$$` },
   "rf-fatou": { t: "Lemme de Fatou", b: R`<p>Pour des fonctions mesurables positives $h_m$ : $\int\liminf_mh_m\,d\mu\leqslant\liminf_m\int h_m\,d\mu$.</p>` },
   "rf-mink": { t: "Minkowski", b: R`<p>Pour $1\leqslant p\leqslant\infty$ : $\|f+g\|_p\leqslant\|f\|_p+\|g\|_p$. Et $\|f\|_\infty = \inf\{M : |f|\leqslant M\ \mu\text{-p.p.}\}$, avec $|f|\leqslant\|f\|_\infty$ presque partout.</p>` }
 });

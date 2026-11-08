@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pg-circ": { t: "Matrices circulantes", b: R`<p>Soit $J$ la matrice de permutation circulaire ($Je_k = e_{k-1}$, indices modulo $n$) et $\omega = e^{2i\pi/n}$. Pour $j\in[\![0,n-1]\!]$, le vecteur $F_j = (1,\omega^j,\omega^{2j},\dots,\omega^{(n-1)j})$ vérifie $JF_j = \omega^jF_j$. Les $F_j$ forment une base de $\mathbb C^n$ (Vandermonde) : tout polynôme en $J$ est diagonalisable dans cette base.</p>` },
-  "pg-prod": { t: "Produits infinis", b: R`<p>Si $\sum|z_k|\lt\infty$ et $1+z_k\neq0$ pour tout $k$, le produit $\prod_{k=0}^p(1+z_k)$ converge vers une limite non nulle (passer au logarithme pour $k$ grand). Si $0\leqslant x_k\lt1$ et $\sum x_k = \infty$, alors $\prod(1-x_k)\to0$.</p>` }
+  "pg-circ": { t: "Matrices circulantes", b: R`$$Je_k = e_{k-1},\quad F_j = (\omega^{jk})_{0\leqslant k\lt n},\quad JF_j = \omega^jF_j\ \Longrightarrow\ P(J) = \operatorname{diag}\big(P(\omega^j)\big)\text{ dans }(F_j).$$` },
+  "pg-prod": { t: "Produits infinis", b: R`$$\sum|z_k|\lt\infty,\ 1+z_k\neq0\Rightarrow\prod_{k = 0}^p(1+z_k)\to L\neq0;\qquad0\leqslant x_k\lt1,\ \sum x_k = \infty\Rightarrow\prod(1-x_k)\to0.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Un polygone à $n\geqslant3$ sommets est un vecteur $Z = (z_1,\dots,z_n)\in\mathbb C^n$ (affixes des sommets). On définit $Z^{(0)} = Z$ et $Z^{(k+1)} = AZ^{(k)}$, où $Z^{(k+1)}$ est le polygone des milieux : $z^{(k+1)}_i = \frac{z^{(k)}_i+z^{(k)}_{i+1}}2$ (indices modulo $n$). On note $g = \frac1n\sum z_i$ l'isobarycentre et $\omega = e^{2i\pi/n}$.</p>`;

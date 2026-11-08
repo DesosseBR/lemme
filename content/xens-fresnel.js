@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 12, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "fr-dom": { t: "Dérivation sous l'intégrale", b: R`<p>Si $x\mapsto g(x,t)$ est $\mathcal C^1$, $g(x,\cdot)$ intégrable, et $|\partial_xg(x,t)|\leqslant h(t)$ avec $h$ intégrable indépendante de $x$, alors $x\mapsto\int g(x,t)\,dt$ est $\mathcal C^1$ de dérivée $\int\partial_xg$.</p>` },
+  "fr-dom": { t: "Dérivation sous l'intégrale", b: R`$$|\partial_xg(x,t)|\leqslant h(t),\ h\text{ intégrable}\ \Longrightarrow\ \frac d{dx}\int g(x,t)\,dt = \int\partial_xg(x,t)\,dt.$$` },
   "fr-gam": { t: "Fonction Gamma", b: R`<p>$\Gamma(\alpha) = \int_0^{+\infty}e^{-t}t^{\alpha-1}dt$ pour $\alpha>0$ ; $\Gamma(\frac12) = \sqrt\pi$ (par $t = x^2$ et l'intégrale de Gauss).</p>` },
-  "fr-ipp": { t: "Intégrale semi-convergente", b: R`<p>Une intégrale $\int_1^{+\infty}u^{\beta}e^{iu}du$ avec $-1\leqslant\beta\lt0$ n'est pas absolument convergente, mais converge : une intégration par parties la ramène à $\int_1^{+\infty}u^{\beta-1}e^{iu}du$, absolument convergente.</p>` }
+  "fr-ipp": { t: "Intégrale semi-convergente", b: R`$$-1\leqslant\beta\lt0\ :\quad\int_1^{+\infty}u^\beta e^{iu}du = \Big[-iu^\beta e^{iu}\Big]_1^{+\infty}+i\beta\int_1^{+\infty}u^{\beta-1}e^{iu}du\quad(\text{absolument CV}).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On veut calculer $\displaystyle\Phi = \int_0^{+\infty}e^{ix^2}dx = \int_0^{+\infty}\cos(x^2)\,dx+i\int_0^{+\infty}\sin(x^2)\,dx$. Pour $\alpha\in\,]0,1[$, on pose $J(\alpha) = \int_0^{+\infty}t^{\alpha-1}e^{it}\,dt$ et, pour $x\geqslant0$, $\varphi(x) = \int_0^{+\infty}e^{-t}e^{ixt}t^{\alpha-1}\,dt$.</p>`;

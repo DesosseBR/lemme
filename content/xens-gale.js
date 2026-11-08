@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "ga-vdm": { t: "Vandermonde", b: R`<p>$\det\begin{pmatrix}1&x_0&\cdots&x_0^d\\\vdots&&&\vdots\\1&x_d&\cdots&x_d^d\end{pmatrix} = \prod_{0\leqslant i\lt j\leqslant d}(x_j-x_i)$.</p>` },
-  "ga-aff": { t: "Indépendance affine", b: R`<p>$p_0,\dots,p_d\in\mathbb R^d$ sont affinement indépendants si et seulement si $\det\begin{pmatrix}1&p_0\\\vdots&\vdots\\1&p_d\end{pmatrix}\neq0$ (points écrits en ligne). Alors ils engendrent un hyperplan affine dès qu'on en prend $d$, d'équation $\det\begin{pmatrix}1&x\\1&p_1\\\vdots&\vdots\\1&p_d\end{pmatrix} = 0$.</p>` },
-  "ga-sign": { t: "Signe d'un polynôme", b: R`<p>Un polynôme réel à racines simples change de signe en chacune de ses racines, et garde un signe constant entre deux racines consécutives.</p>` }
+  "ga-aff": { t: "Indépendance affine", b: R`$$p_0,\dots,p_d\text{ aff. indépendants}\iff\det\begin{pmatrix}1&p_0\\\vdots&\vdots\\1&p_d\end{pmatrix}\neq0;\qquad\text{hyperplan}\ :\ \det\begin{pmatrix}1&x\\1&p_1\\\vdots&\vdots\\1&p_d\end{pmatrix} = 0.$$` },
+  "ga-sign": { t: "Signe d'un polynôme", b: R`$$P\in\mathbb R[X]\text{ à racines simples}\ :\quad\operatorname{sgn}P\text{ change en chaque racine, constant entre deux}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Un <b>polytope</b> est l'enveloppe convexe d'un ensemble fini $V$ de points de $\mathbb R^d$. Une partie $F\subset V$ est une <b>face</b> s'il existe un hyperplan affine $H$ contenant $F$ tel que $V\setminus F$ soit strictement d'un même côté de $H$ ; une <b>facette</b> est une face de dimension $d-1$ (si le polytope est de dimension $d$). La <b>courbe des moments</b> est $\varphi(t) = (t,t^2,\dots,t^d)$. Pour $t_1\lt\dots\lt t_n$ ($n\geqslant d+1$), le <b>polytope cyclique</b> est $C(d,n) = \operatorname{Conv}\{\varphi(t_1),\dots,\varphi(t_n)\}$. On identifie une partie $S\subset[\![1,n]\!]$ à $\{\varphi(t_i) : i\in S\}$. $S$ vérifie la <b>condition de Gale</b> si pour tous $i\lt j$ hors de $S$, le nombre d'éléments de $S$ strictement entre $i$ et $j$ est pair.</p>`;

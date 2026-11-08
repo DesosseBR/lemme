@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 15, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "is-refl": { t: "Réflexions", b: R`<p>La réflexion d'hyperplan $H = a^\perp$ ($\|a\| = 1$) est $s(x) = x-2\langle x,a\rangle a$ : elle fixe $H$, envoie $a$ sur $-a$, est une isométrie involutive de déterminant $-1$. Si $\|x\| = \|y\|$ et $x\neq y$, la réflexion d'hyperplan $(x-y)^\perp$ échange $x$ et $y$.</p>` },
-  "is-gras": { t: "Intersection d'hyperplans", b: R`<p>Par Grassmann, $p$ hyperplans de $E$ ont une intersection de dimension $\geqslant\dim E-p$, avec égalité si et seulement si les formes linéaires qui les définissent sont indépendantes.</p>` },
+  "is-refl": { t: "Réflexions", b: R`$$s(x) = x-2\langle x,a\rangle a,\quad s_{|a^\perp} = \mathrm{id},\quad s(a) = -a,\quad s^2 = \mathrm{id},\quad\det s = -1.$$$$\|x\| = \|y\|,\ x\neq y\ \Longrightarrow\ s_{(x-y)^\perp}(x) = y.$$` },
+  "is-gras": { t: "Intersection d'hyperplans", b: R`$$\dim\bigcap_{i = 1}^pH_i\geqslant\dim E-p,\qquad\text{égalité}\iff(\varphi_1,\dots,\varphi_p)\text{ libre}.$$` },
   "is-rang": { t: "Théorème du rang", b: R`<p>$\dim\ker(u-\operatorname{Id})+\operatorname{rg}(u-\operatorname{Id}) = \dim E$.</p>` }
 });
 

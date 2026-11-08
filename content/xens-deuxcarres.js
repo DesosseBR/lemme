@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "dc-fp": { t: "Le corps 𝔽_p", b: R`<p>$\mathbb F_p = \mathbb Z/p\mathbb Z$ est un corps ; $\mathbb F_p^*$ a $p-1$ éléments et $x^{p-1} = 1$ pour $x\neq0$ (Fermat). Un polynôme de degré $d$ a au plus $d$ racines dans $\mathbb F_p$.</p>` },
-  "dc-eucl": { t: "Anneau euclidien", b: R`<p>Un anneau intègre muni d'une division euclidienne est principal. Dans un anneau principal, un élément irréductible est premier : s'il divise $ab$, il divise $a$ ou $b$ (lemme d'Euclide).</p>` },
-  "dc-inv": { t: "Involutions et parité", b: R`<p>Si $\varphi$ est une involution ($\varphi\circ\varphi = \operatorname{id}$) d'un ensemble fini $E$, les éléments non fixes vont par paires $\{x,\varphi(x)\}$ : $|E|$ et le nombre de points fixes de $\varphi$ ont la même parité.</p>` }
+  "dc-fp": { t: "Le corps 𝔽_p", b: R`$$\mathbb F_p = \mathbb Z/p\mathbb Z\text{ corps},\qquad\forall x\neq0,\ x^{p-1} = 1;\qquad\deg P = d\Rightarrow\le d\text{ racines}.$$` },
+  "dc-eucl": { t: "Anneau euclidien", b: R`$$\text{euclidien}\Rightarrow\text{principal};\qquad p\text{ irréductible},\ p\mid ab\ \Longrightarrow\ p\mid a\text{ ou }p\mid b.$$` },
+  "dc-inv": { t: "Involutions et parité", b: R`$$\varphi\circ\varphi = \mathrm{id},\ E\text{ fini}\ \Longrightarrow\ |E|\equiv\operatorname{Card}\operatorname{Fix}(\varphi)\pmod2.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\Sigma = \{a^2+b^2 : a,b\in\mathbb Z\}$. L'anneau des <b>entiers de Gauss</b> est $\mathbb Z[i] = \{a+ib : a,b\in\mathbb Z\}\subset\mathbb C$, muni de la <b>norme</b> $N(z) = z\bar z = a^2+b^2$. Ainsi $n\in\Sigma\iff\exists z\in\mathbb Z[i],\ N(z) = n$. Pour $p$ premier, $v_p(n)$ est l'exposant de $p$ dans la décomposition de $n\geqslant1$.</p>`;

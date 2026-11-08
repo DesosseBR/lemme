@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 15, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "dob-grass": { t: "Formule de Grassmann", b: R`<p>Pour deux sous-espaces $F,G$ d'un espace de dimension finie : $\dim(F\cap G) = \dim F+\dim G-\dim(F+G)$.</p>` },
-  "dob-cnt": { t: "Compter dans 𝔽_qⁿ", b: R`<p>$\mathbb F_q^n$ a $q^n$ éléments ; une droite vectorielle a $q-1$ vecteurs non nuls, et deux droites distinctes ne partagent que $0$. Le nombre de droites vectorielles de $\mathbb F_q^n$ est donc $\frac{q^n-1}{q-1}$. Les plans de $\mathbb F_q^3$ sont les noyaux des formes linéaires non nulles, deux formes proportionnelles ayant le même noyau.</p>` },
-  "dob-dc": { t: "Double comptage", b: R`<p>Pour une relation d'incidence entre deux ensembles finis $P$ et $\Delta$, le nombre de couples $(x,A)$ avec $x\in A$ vaut $\sum_{A\in\Delta}|A| = \sum_{x\in P}|\{A : x\in A\}|$.</p>` }
+  "dob-grass": { t: "Formule de Grassmann", b: R`$$\dim(F\cap G) = \dim F+\dim G-\dim(F+G).$$` },
+  "dob-cnt": { t: "Compter dans 𝔽_qⁿ", b: R`$$|\mathbb F_q^n| = q^n,\qquad\operatorname{Card}\{\text{droites vectorielles}\} = \frac{q^n-1}{q-1}.$$<p>Plans de $\mathbb F_q^3$ : noyaux des formes non nulles (à proportionnalité près).</p>` },
+  "dob-dc": { t: "Double comptage", b: R`$$\operatorname{Card}\{(x,A) : x\in A\} = \sum_{A\in\Delta}|A| = \sum_{x\in P}\operatorname{Card}\{A : x\in A\}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Un <b>plan projectif</b> est la donnée d'un ensemble fini $P$ de <b>points</b> et d'un ensemble $\Delta$ de parties de $P$, les <b>droites</b>, tels que : (i) par deux points distincts passe une et une seule droite ; (ii) deux droites distinctes ont exactement un point commun ; (iii) toute droite a au moins $3$ points ; (iv) il y a au moins $2$ droites. Pour deux points $x\neq y$, on note $(xy)$ la droite qui les contient. Dans Dobble, les cartes jouent le rôle des droites et les symboles celui des points (ou l'inverse) : deux cartes ont toujours exactement un symbole commun.</p>`;

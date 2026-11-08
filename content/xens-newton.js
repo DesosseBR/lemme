@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 1, kind: "probleme", qnav: true, sid
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "nw-tl": { t: "Taylor-Lagrange", b: R`<p>Si $f$ est de classe $\mathcal C^2$ sur un intervalle $I$ et $|f''|\leqslant M$ sur $I$, alors pour $x,a\in I$ : $|f(x)-f(a)-f'(a)(x-a)|\leqslant\frac M2(x-a)^2$.</p>` },
-  "nw-pf": { t: "Point fixe attractif", b: R`<p>Si $g$ est de classe $\mathcal C^1$ près d'un point fixe $r$ avec $|g'(r)|\lt1$, il existe $\eta>0$ et $k\lt1$ tels que $|g'|\leqslant k$ sur $J = [r-\eta,r+\eta]$. Alors $g(J)\subset J$ et, pour $x_0\in J$, $|x_{n+1}-r| = |g(x_n)-g(r)|\leqslant k|x_n-r|$ : convergence linéaire vers $r$.</p>` },
-  "nw-vit": { t: "Vitesses de convergence", b: R`<p>$(x_n)$ converge <b>linéairement</b> vers $r$ s'il existe $k\in[0,1[$ avec $|x_{n+1}-r|\leqslant k|x_n-r|$, et <b>quadratiquement</b> s'il existe $C$ avec $|x_{n+1}-r|\leqslant C|x_n-r|^2$. Dans le second cas, si $C|x_0-r|\lt1$, alors $C|x_n-r|\leqslant(C|x_0-r|)^{2^n}$.</p>` }
+  "nw-tl": { t: "Taylor-Lagrange", b: R`$$|f''|\leqslant M\ \Longrightarrow\ |f(x)-f(a)-f'(a)(x-a)|\leqslant\frac M2(x-a)^2.$$` },
+  "nw-pf": { t: "Point fixe attractif", b: R`$$g(r) = r,\ |g'(r)|\lt1\ \Longrightarrow\ \exists\eta,\ \exists k\lt1,\ |g'|\leqslant k\text{ sur }J = [r-\eta,r+\eta],$$$$x_0\in J\ \Longrightarrow\ |x_{n+1}-r|\leqslant k|x_n-r|\leqslant k^{n+1}|x_0-r|.$$` },
+  "nw-vit": { t: "Vitesses de convergence", b: R`$$\text{linéaire : }|x_{n+1}-r|\leqslant k|x_n-r|\ (k\lt1);\qquad\text{quadratique : }|x_{n+1}-r|\leqslant C|x_n-r|^2\Rightarrow C|x_n-r|\leqslant(C|x_0-r|)^{2^n}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $f : [a,b]\to\mathbb R$ est de classe $\mathcal C^2$ et s'annule en un point $r\in]a,b[$. La <b>méthode de Newton</b> consiste à itérer $x_{n+1} = N(x_n)$, où $N(x) = x-\frac{f(x)}{f'(x)}$ est l'abscisse du point où la tangente au graphe de $f$ en $x$ coupe l'axe des abscisses.</p>`;

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "ss-noy": { t: "Lemme des noyaux", b: R`<p>Si $P = P_1\cdots P_r$ avec les $P_i$ premiers entre eux deux à deux, alors $\ker P(f) = \bigoplus_i\ker P_i(f)$, et les projecteurs associés sont des polynômes en $f$.</p>` },
-  "ss-corps": { t: "K[f] quand μ_f est irréductible", b: R`<p>$K[f]\simeq K[X]/(\mu_f)$. Si $\mu_f$ est irréductible, c'est un corps : tout $P(f)\neq0$ est inversible, d'inverse un polynôme en $f$.</p>` },
-  "ss-mono": { t: "Sous-espace monogène", b: R`<p>Pour $x\in E$, $E_x = \{P(f)(x) : P\in K[X]\} = \mathrm{Vect}(f^k(x),\ k\in\mathbb N)$ est le plus petit sous-espace stable par $f$ contenant $x$.</p>` }
+  "ss-noy": { t: "Lemme des noyaux", b: R`$$P = \prod P_i,\ P_i\wedge P_j = 1\ \Longrightarrow\ \ker P(f) = \bigoplus_i\ker P_i(f),\quad\text{projecteurs}\in K[f].$$` },
+  "ss-corps": { t: "K[f] quand μ_f est irréductible", b: R`$$K[f]\simeq K[X]/(\mu_f);\qquad\mu_f\text{ irréductible}\ \Longrightarrow\ K[f]\text{ corps}.$$` },
+  "ss-mono": { t: "Sous-espace monogène", b: R`$$E_x = \{P(f)(x) : P\in K[X]\} = \operatorname{Vect}\big(f^k(x),\ k\in\mathbb N\big).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $E$ est un $K$-espace vectoriel de dimension finie $n\geqslant1$, $f\in\mathcal L(E)$, de polynôme minimal $\mu_f$. On dit que $f$ est <b>semi-simple</b> si tout sous-espace $F$ stable par $f$ admet un supplémentaire $G$ stable par $f$. On veut montrer : $f$ est semi-simple si et seulement si $\mu_f$ est <b>sans facteur carré</b> (produit d'irréductibles distincts).</p>`;

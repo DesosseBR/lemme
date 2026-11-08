@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "cpt-indep": { t: "Indépendance et espérance", b: R`$$X\perp\!\!\!\perp Y\ \Longrightarrow\ \mathbb E[XY] = \mathbb E[X]\,\mathbb E[Y].$$<p>Coalitions : fonctions de familles disjointes $\Rightarrow$ indépendantes.</p>` },
-  "cpt-bt": { t: "Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance : $\mathbb P\big(|X-\mathbb E[X]|\geqslant\alpha\big)\leqslant\dfrac{\operatorname{Var}(X)}{\alpha^2}$ pour tout $\alpha>0$. Pour $X_1,\dots,X_k$ indépendantes, $\operatorname{Var}(X_1+\dots+X_k) = \sum\operatorname{Var}(X_i)$.</p>` },
-  "cpt-lim": { t: "Limite supérieure d'événements", b: R`<p>$\limsup A_n = \bigcap_{n\geqslant0}\bigcup_{k\geqslant n}A_k$ est l'événement « une infinité des $A_k$ sont réalisés ». Son complémentaire est « à partir d'un certain rang, aucun $A_k$ n'est réalisé ».</p>` }
+  "cpt-bt": { t: "Bienaymé-Tchebychev", b: R`$$\forall\alpha>0,\quad\mathbb P\big(|X-\mathbb E[X]|\geqslant\alpha\big)\leqslant\frac{\operatorname{Var}(X)}{\alpha^2};\qquad X_i\text{ indépendantes}\Rightarrow\operatorname{Var}\Big(\sum X_i\Big) = \sum\operatorname{Var}(X_i).$$` },
+  "cpt-lim": { t: "Limite supérieure d'événements", b: R`$$\limsup A_n = \bigcap_{n\geqslant0}\bigcup_{k\geqslant n}A_k\ (\text{une infinité des }A_k),\qquad\overline{\limsup A_n} = \bigcup_n\bigcap_{k\geqslant n}\overline{A_k}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On veut compter des événements (des requêtes reçues par un serveur, par exemple) sans stocker le nombre exact $n$, qui demande $\lfloor\log_2n\rfloor+1$ bits. Soit $(u_{i,j})_{i\geqslant0,\,j\geqslant1}$ une famille de variables aléatoires <b>indépendantes</b>, avec $u_{i,j}$ de loi de Bernoulli de paramètre $2^{-i}$. On pose $S_0 = 0$ et, pour $n\geqslant0$, $$S_{n+1} = S_n+u_{S_n,\,n+1}.$$ Autrement dit, à la $(n+1)$-ième requête, le compteur passe de $S_n$ à $S_n+1$ avec probabilité $2^{-S_n}$. On pose $Y_n = 2^{S_n}-1$. Pour $\varepsilon,\delta\in\,]0,1[$, un <b>$(\varepsilon,\delta)$-estimateur</b> de $\mu>0$ est une variable $Z$ telle que $\mathbb P(|Z-\mu|\geqslant\varepsilon\mu)\leqslant\delta$.</p>`;

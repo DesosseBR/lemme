@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "hm-som": { t: "Sommation des équivalents (restes)", b: R`<p>Si $u_n\sim v_n$ avec $v_n\geqslant0$ et $\sum v_n$ convergente, alors $\sum u_n$ converge et $\sum_{k>n}u_k\sim\sum_{k>n}v_k$.</p>` },
-  "hm-si": { t: "Comparaison série-intégrale", b: R`<p>Si $\varphi$ est continue décroissante positive sur $[1,+\infty[$, alors pour $k\geqslant2$ : $\int_k^{k+1}\varphi\leqslant\varphi(k)\leqslant\int_{k-1}^k\varphi$.</p>` },
-  "hm-adj": { t: "Suites adjacentes", b: R`<p>Si $(u_n)$ décroît, $(v_n)$ croît et $u_n-v_n\to0$, elles convergent vers une même limite $\ell$, avec $v_n\leqslant\ell\leqslant u_n$.</p>` }
+  "hm-si": { t: "Comparaison série-intégrale", b: R`$$\varphi\searrow\geqslant0\ :\quad\int_k^{k+1}\varphi\leqslant\varphi(k)\leqslant\int_{k-1}^k\varphi.$$` },
+  "hm-adj": { t: "Suites adjacentes", b: R`$$(u_n)\searrow,\ (v_n)\nearrow,\ u_n-v_n\to0\ \Longrightarrow\ u_n,v_n\to\ell,\quad v_n\leqslant\ell\leqslant u_n.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On note $H_n = \sum_{k=1}^n\frac1k$ pour $n\geqslant1$. On veut établir</p>$$H_n = \ln n+\gamma+\frac1{2n}-\frac1{12n^2}+o\Big(\frac1{n^2}\Big),$$<p>où $\gamma$ est la constante d'Euler.</p>`;

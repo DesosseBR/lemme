@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pe-cl": { t: "Cauchy-Lipschitz global", b: R`<p>Si $F : \mathbb R\times\mathbb R^n\to\mathbb R^n$ est continue et lipschitzienne en $y$ ($\|F(t,y)-F(t,y')\|\leqslant L\|y-y'\|$), alors pour tout $(t_0,x_0)$ il existe une <b>unique</b> solution de $y' = F(t,y)$, $y(t_0) = x_0$, et elle est définie sur $\mathbb R$ tout entier. Deux solutions qui coïncident en un point sont égales partout.</p>` },
-  "pe-flot": { t: "Continuité du flot", b: R`<p>Sous les mêmes hypothèses, on note $\Psi(t_0,x_0,t)$ la valeur en $t$ de la solution valant $x_0$ en $t_0$. L'application $\Psi$ est continue sur $\mathbb R\times\mathbb R^n\times\mathbb R$ (preuve par le lemme de Grönwall : $\|\Psi(t_0,x_0,t)-\Psi(t_0,x_1,t)\|\leqslant e^{L|t-t_0|}\|x_0-x_1\|$).</p>` },
-  "pe-mono": { t: "Suites monotones bornées", b: R`<p>Une suite réelle monotone et bornée converge. C'est ici que la dimension $1$ intervient : l'ordre de $\mathbb R$.</p>` }
+  "pe-cl": { t: "Cauchy-Lipschitz global", b: R`$$\|F(t,y)-F(t,y')\|\leqslant L\|y-y'\|\ \Longrightarrow\ \exists!\,y\text{ définie sur }\mathbb R,\ y' = F(t,y),\ y(t_0) = x_0.$$` },
+  "pe-flot": { t: "Continuité du flot", b: R`$$\|\Psi(t_0,x_0,t)-\Psi(t_0,x_1,t)\|\leqslant e^{L|t-t_0|}\|x_0-x_1\|\quad(\text{Grönwall}),\qquad\Psi\text{ continue}.$$` },
+  "pe-mono": { t: "Suites monotones bornées", b: R`$$(u_n)\text{ monotone bornée dans }\mathbb R\ \Longrightarrow\ (u_n)\text{ converge}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $F : \mathbb R^2\to\mathbb R$ est de classe $\mathcal C^1$, lipschitzienne en la seconde variable, et $T$-périodique en la première : $F(t+T,y) = F(t,y)$ pour tous $(t,y)$ ($T>0$). On étudie l'équation scalaire $(E) : y' = F(t,y)$. Par Cauchy-Lipschitz global, toutes ses solutions maximales sont définies sur $\mathbb R$ ; on note $\Psi$ son flot. On veut montrer : <b>si $(E)$ admet une solution bornée, elle admet une solution $T$-périodique</b>.</p>`;

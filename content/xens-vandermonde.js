@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "vd-dev": { t: "Développement d'un déterminant", b: R`<p>Le développement selon une ligne exprime le déterminant comme combinaison linéaire des coefficients de cette ligne, avec pour coefficients les cofacteurs (qui ne dépendent pas de cette ligne). Un déterminant à deux lignes égales est nul.</p>` },
-  "vd-mult": { t: "Déterminant d'un produit", b: R`<p>$\det(BC) = \det B\det C$, et le déterminant d'une matrice triangulaire est le produit de ses coefficients diagonaux.</p>` }
+  "vd-dev": { t: "Développement d'un déterminant", b: R`$$\det M = \sum_jm_{i,j}C_{i,j}\quad(\text{ligne }i);\qquad L_i = L_k\ (i\neq k)\Rightarrow\det M = 0.$$` },
+  "vd-mult": { t: "Déterminant d'un produit", b: R`$$\det(BC) = \det B\det C,\qquad\det T = \prod_it_{ii}\ (T\text{ triangulaire}).$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $K$ est un corps. Pour $a_1,\dots,a_n\in K$, on note $V(a_1,\dots,a_n)$ la matrice de coefficients $a_j^{i-1}$ ($1\leqslant i,j\leqslant n$), et $W(a_1,\dots,a_n) = \det V(a_1,\dots,a_n)$. On veut montrer que</p>$$W(a_1,\dots,a_n) = \prod_{1\leqslant i\lt j\leqslant n}(a_j-a_i).$$`;

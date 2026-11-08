@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "la-hol": { t: "Holomorphe = analytique (admis)", b: R`<p>Une fonction holomorphe sur un ouvert est développable en série entière en tout point, et sur tout disque ouvert inclus dans l'ouvert. Une composée de fonctions holomorphes est holomorphe. Deux fonctions holomorphes égales sur un ouvert non vide d'un ouvert connexe y sont égales partout.</p>` },
+  "la-hol": { t: "Holomorphe = analytique (admis)", b: R`$$f\text{ holomorphe sur }U\ \Longrightarrow\ f\text{ DSE sur tout disque }D\subset U;\qquad f = g\text{ sur }V\neq\varnothing,\ U\text{ connexe}\Rightarrow f = g\text{ sur }U.$$` },
   "la-dist": { t: "Distance entre compact et fermé", b: R`<p>Si $K$ est compact, $F$ fermé et $K\cap F = \emptyset$, alors $d(K,F)>0$.</p>` },
-  "la-ray": { t: "Rayon de convergence", b: R`<p>Si $\sum c_mw^m$ converge absolument pour un $w_0$ avec $|w_0|>R$, le rayon est $>R$. Une série entière à coefficients positifs de rayon $1$ a une somme qui tend vers sa somme (finie ou $+\infty$) quand $r\to1^-$.</p>` }
+  "la-ray": { t: "Rayon de convergence", b: R`$$\sum|c_m||w_0|^m\lt\infty,\ |w_0|>R'\Rightarrow R>R';\qquad c_m\geqslant0,\ R = 1\Rightarrow\sum c_mr^m\xrightarrow[r\to1^-]{}\sum c_m\in[0,+\infty].$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $\mathbb D = \{|z|\lt1\}$, $\overline{\mathbb D}$ le disque fermé. Soit $f(z) = \sum_{n\geqslant0}a_nz^{p_n}$ une série entière de rayon de convergence $1$, où $(p_n)$ est une suite strictement croissante d'entiers <b>lacunaire</b> : il existe $c>1$ avec $p_{n+1}\geqslant cp_n$ pour tout $n$. Un point $z_0$ avec $|z_0| = 1$ est <b>régulier</b> s'il existe un ouvert $\Omega\supset\mathbb D\cup\{z_0\}$ et $g$ holomorphe sur $\Omega$ avec $g = f$ sur $\mathbb D$ ; sinon il est <b>singulier</b>. On veut montrer le <b>théorème d'Hadamard</b> : tous les points du cercle unité sont singuliers.</p>`;

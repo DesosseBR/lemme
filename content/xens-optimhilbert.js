@@ -8,10 +8,10 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "oh-proj": { t: "Projection sur un convexe fermé", b: R`<p>Si $C$ est un convexe fermé non vide d'un Hilbert $H$ et $x\in H$, il existe un unique $p_C(x)\in C$ tel que $\|x-p_C(x)\| = d(x,C)$, caractérisé par : $\langle x-p_C(x),\,y-p_C(x)\rangle\leqslant0$ pour tout $y\in C$.</p>` },
-  "oh-riesz": { t: "Riesz", b: R`<p>Toute forme linéaire continue $\ell$ sur un Hilbert $H$ s'écrit $\ell(u) = \langle u,a\rangle$ pour un unique $a\in H$.</p>` },
+  "oh-proj": { t: "Projection sur un convexe fermé", b: R`$$C\text{ convexe fermé}\neq\varnothing\ :\quad\exists!\,p_C(x)\in C,\ \|x-p_C(x)\| = d(x,C);\qquad\forall y\in C,\ \langle x-p_C(x),y-p_C(x)\rangle\leqslant0.$$` },
+  "oh-riesz": { t: "Riesz", b: R`$$\ell\in H'\ \Longrightarrow\ \exists!\,a\in H,\ \forall u,\ \ell(u) = \langle u,a\rangle.$$` },
   "oh-orth": { t: "Supplémentaire orthogonal", b: R`<p>Pour tout sous-espace $F$ d'un Hilbert $H$ : $H = \overline F\oplus F^\perp$, et $F^\perp = \overline F^\perp$.</p>` },
-  "oh-coer": { t: "Coercivité", b: R`<p>$J : X\to\mathbb R$ est coercive si $J(x)\to+\infty$ quand $\|x\|\to+\infty$ : pour tout $A$, il existe $\rho$ avec $\|x\|\geqslant\rho\Rightarrow J(x)\geqslant A$.</p>` }
+  "oh-coer": { t: "Coercivité", b: R`$$J\text{ coercive}\iff J(x)\xrightarrow[\|x\|\to+\infty]{}+\infty\iff\forall A,\ \exists\rho,\ \|x\|\geqslant\rho\Rightarrow J(x)\geqslant A.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $H$ est un espace de Hilbert réel, et $J : H\to\mathbb R$. On cherche des conditions pour que $\inf_HJ$ soit fini et <b>atteint</b>. On note $\ell^2$ l'espace des suites réelles $x = (x_k)_{k\geqslant1}$ de carré sommable, de produit scalaire $\langle x,y\rangle = \sum x_ky_k$, et $(e_k)$ sa base canonique.</p>`;

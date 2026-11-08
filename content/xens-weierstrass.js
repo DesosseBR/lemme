@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 12, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "wz-heine": { t: "Continuité uniforme", b: R`<p>Une fonction continue sur $\mathbb R$ et nulle hors d'un segment est uniformément continue et bornée (Heine sur un segment plus grand).</p>` },
+  "wz-heine": { t: "Continuité uniforme", b: R`$$f\in\mathcal C(\mathbb R),\ f = 0\text{ hors de }[a,b]\ \Longrightarrow\ f\text{ bornée, uniformément continue}.$$` },
   "wz-bern": { t: "Inégalité de Bernoulli", b: R`<p>Pour $u\in[0,1]$ et $n\in\mathbb N$ : $(1-u)^n\geqslant1-nu$ (récurrence, ou convexité de $u\mapsto(1-u)^n$).</p>` }
 });
 

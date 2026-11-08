@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "dun-dun": { t: "Décomposition de Dunford", b: R`<p>Si $\chi_A$ est scindé, il existe un unique couple $(D,N)$ avec $A = D+N$, $D$ diagonalisable, $N$ nilpotente, $DN = ND$. De plus $D,N\in\mathbb K[A]$. Une matrice à la fois diagonalisable et nilpotente est nulle ; deux matrices diagonalisables qui commutent sont codiagonalisables ; une somme de nilpotentes qui commutent est nilpotente.</p>` },
-  "dun-diag": { t: "Polynôme annulateur scindé simple", b: R`<p>Une matrice est diagonalisable si et seulement si elle annule un polynôme scindé à racines simples. $P$ est à racines simples si et seulement si $P\wedge P' = 1$.</p>` },
-  "dun-bez": { t: "Bézout dans 𝕂[X]", b: R`<p>Si $P\wedge Q = 1$, il existe $U,V\in\mathbb K[X]$ avec $UP+VQ = 1$, calculables par l'algorithme d'Euclide étendu.</p>` }
+  "dun-dun": { t: "Décomposition de Dunford", b: R`$$\chi_A\text{ scindé}\ \Longrightarrow\ \exists!(D,N),\ A = D+N,\ D\text{ diag.},\ N\text{ nilp.},\ DN = ND;\qquad D,N\in\mathbb K[A].$$<p>Diagonalisable et nilpotente $\Rightarrow$ nulle.</p>` },
+  "dun-diag": { t: "Polynôme annulateur scindé simple", b: R`$$A\text{ diag.}\iff\exists P\text{ SRS},\ P(A) = 0;\qquad P\text{ à racines simples}\iff P\wedge P' = 1.$$` },
+  "dun-bez": { t: "Bézout dans 𝕂[X]", b: R`$$P\wedge Q = 1\iff\exists U,V\in\mathbb K[X],\ UP+VQ = 1.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $A\in\mathcal M_n(\mathbb C)$, de polynôme caractéristique $\chi_A = \prod_{i=1}^r(X-\lambda_i)^{n_i}$ avec $\lambda_1,\dots,\lambda_r$ distincts. On note $A = D+N$ sa décomposition de Dunford ($D$ diagonalisable, $N$ nilpotente, $DN = ND$, $D,N\in\mathbb C[A]$), $\mathbb C[A]$ l'algèbre des polynômes en $A$ (commutative), et $$P = \prod_{i=1}^r(X-\lambda_i),\qquad r_0 = \max_in_i.$$ L'objectif est de calculer $D$ <b>sans connaître les $\lambda_i$</b>.</p>`;

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 10, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "inv-ed": { t: "Équation différentielle formelle", b: R`<p>Dans $\mathbb Q[[X]]$, si $F' = AF$ avec $A = \sum a_nX^n$, alors $F = F(0)\exp(I(A))$ où $I(A) = \sum\frac{a_n}{n+1}X^{n+1}$ est la primitive sans terme constant. (On peut aussi raisonner avec des séries entières de rayon infini.)</p>` },
+  "inv-ed": { t: "Équation différentielle formelle", b: R`$$F' = AF\ \Longrightarrow\ F = F(0)\exp\big(I(A)\big),\qquad I\Big(\sum a_nX^n\Big) = \sum\frac{a_n}{n+1}X^{n+1}.$$` },
   "inv-cauchy": { t: "Produit de Cauchy", b: R`<p>$\Big(\sum a_nX^n\Big)\Big(\sum b_nX^n\Big) = \sum_n\Big(\sum_{k = 0}^na_kb_{n-k}\Big)X^n$. En particulier $e^Xe^{X^2/2} = \sum_n\Big(\sum_{2k+j = n}\frac1{j!\,k!\,2^k}\Big)X^n$.</p>` },
-  "inv-bij": { t: "Dénombrement par partition", b: R`<p>Si un ensemble fini est partitionné en parties $A_1,\dots,A_m$, son cardinal est $\sum|A_i|$ ; une bijection explicite entre deux ensembles prouve qu'ils ont même cardinal.</p>` }
+  "inv-bij": { t: "Dénombrement par partition", b: R`$$E = \bigsqcup_{i = 1}^mA_i\Rightarrow|E| = \sum_i|A_i|;\qquad f : A\to B\text{ bijective}\Rightarrow|A| = |B|.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Une <b>involution</b> de $[\![1,n]\!]$ est une permutation $\sigma$ avec $\sigma^2 = \operatorname{Id}$ ; elle est faite de points fixes et de transpositions à supports disjoints. On note $I_n$ leur nombre, avec $I_0 = 1$. On note $F = \sum_{n\geqslant0}\frac{I_n}{n!}X^n$ la <b>série génératrice exponentielle</b>.</p>`;

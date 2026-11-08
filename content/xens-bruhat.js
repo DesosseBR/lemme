@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "bru-op": { t: "Opérations et matrices élémentaires", b: R`<p>$E_{i,j}$ est la matrice élémentaire, $E_{i,j}E_{k,l} = \delta_{jk}E_{i,l}$. Multiplier <b>à gauche</b> par $I+\lambda E_{i,j}$ fait $L_i\leftarrow L_i+\lambda L_j$ ; <b>à droite</b>, $C_j\leftarrow C_j+\lambda C_i$. Multiplier à droite par $\operatorname{diag}(1,\dots,\alpha,\dots,1)$ ($\alpha$ en position $j$) multiplie la colonne $j$ par $\alpha$.</p>` },
-  "bru-perm": { t: "Matrices de permutation", b: R`<p>Pour $\sigma\in\mathfrak S_n$, $P_\sigma$ est la matrice telle que $P_\sigma e_j = e_{\sigma(j)}$ : son seul coefficient non nul dans la colonne $j$ est un $1$ en ligne $\sigma(j)$. $P_\sigma P_\tau = P_{\sigma\tau}$, et la colonne $j$ de $MP_\sigma$ est la colonne $\sigma(j)$ de $M$.</p>` },
-  "bru-orb": { t: "Action transitive", b: R`<p>Si $G$ agit transitivement sur $E$ et $x_0\in E$, alors $gH\mapsto g\cdot x_0$ est une bijection de $G/H$ sur $E$, où $H = \operatorname{Stab}(x_0)$.</p>` }
+  "bru-op": { t: "Opérations et matrices élémentaires", b: R`$$E_{i,j}E_{k,l} = \delta_{jk}E_{i,l};\qquad(I+\lambda E_{i,j})M : L_i\leftarrow L_i+\lambda L_j;\qquad M(I+\lambda E_{i,j}) : C_j\leftarrow C_j+\lambda C_i.$$` },
+  "bru-perm": { t: "Matrices de permutation", b: R`$$P_\sigma e_j = e_{\sigma(j)},\qquad P_\sigma P_\tau = P_{\sigma\tau},\qquad C_j(MP_\sigma) = C_{\sigma(j)}(M).$$` },
+  "bru-orb": { t: "Action transitive", b: R`$$G\text{ transitif sur }E,\ H = \operatorname{Stab}(x_0)\ \Longrightarrow\ gH\mapsto g\cdot x_0\text{ bijection }G/H\to E.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $K$ est un corps, $n\geqslant1$, et $T_s$ désigne le groupe des matrices triangulaires supérieures inversibles de $\mathcal M_n(K)$. Pour $i\lt j$ et $\lambda\in K$, la <b>transvection</b> $T_{i,j}(\lambda) = I_n+\lambda E_{i,j}$ et, pour $\alpha\neq0$, la <b>dilatation</b> $D_i(\alpha) = I_n+(\alpha-1)E_{i,i}$ sont dans $T_s$. Pour $\sigma\in\mathfrak S_n$, $P_\sigma$ est la matrice de permutation telle que $P_\sigma e_j = e_{\sigma(j)}$. Un <b>drapeau</b> de $K^n$ est une suite $\{0\} = F_0\subsetneq F_1\subsetneq\dots\subsetneq F_n = K^n$ de sous-espaces ($\dim F_i = i$) ; on note $\mathcal D$ leur ensemble et $\delta$ le drapeau canonique, $F_i = \operatorname{Vect}(e_1,\dots,e_i)$.</p>`;

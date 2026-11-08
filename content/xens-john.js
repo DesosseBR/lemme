@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "jo-red": { t: "Réduction simultanée", b: R`<p>Si $R\in\mathcal S_n^{++}(\mathbb R)$ et $S\in\mathcal S_n(\mathbb R)$, il existe $P\in GL_n(\mathbb R)$ et $\Delta$ diagonale avec $R = {}^tPP$ et $S = {}^tP\Delta P$ (diagonaliser $S$ dans une base orthonormée pour le produit scalaire défini par $R$).</p>` },
+  "jo-red": { t: "Réduction simultanée", b: R`$$R\in\mathcal S_n^{++},\ S\in\mathcal S_n\ \Longrightarrow\ \exists P\in GL_n(\mathbb R),\ \exists\Delta\text{ diagonale},\quad R = {}^tPP,\quad S = {}^tP\Delta P.$$` },
   "jo-jac": { t: "Changement de variables linéaire", b: R`<p>Si $A\in GL_n(\mathbb R)$, $\operatorname{Vol}(A(E)) = |\det A|\operatorname{Vol}(E)$.</p>` },
-  "jo-agm": { t: "Inégalité arithmético-géométrique pondérée", b: R`<p>Pour $x,y>0$ et $t\in\,]0,1[$ : $x^ty^{1-t}\leqslant tx+(1-t)y$ (concavité de $\ln$), avec égalité si et seulement si $x = y$.</p>` }
+  "jo-agm": { t: "Inégalité arithmético-géométrique pondérée", b: R`$$x,y>0,\ t\in\,]0,1[\ :\quad x^ty^{1-t}\leqslant tx+(1-t)y,\qquad\text{égalité}\iff x = y.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> Pour $S\in\mathcal S_n^{++}(\mathbb R)$, on note $q_S(x) = {}^txSx$ et $\xi_S = \{x\in\mathbb R^n : q_S(x)\leqslant1\}$ l'<b>ellipsoïde</b> (centré en $0$) associé. On pose $\mu(S) = (\det S)^{-1/2}$. $B$ est la boule unité euclidienne fermée. On veut montrer : <b>pour tout compact $K$ d'intérieur non vide, il existe un unique ellipsoïde centré en $0$ de volume minimal contenant $K$.</b></p>`;

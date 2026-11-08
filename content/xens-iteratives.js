@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "it-trig": { t: "Trigonalisation", b: R`<p>Toute $A\in\mathcal M_n(\mathbb C)$ est trigonalisable : $A = PTP^{-1}$, $T$ triangulaire supérieure, et les $T_{i,i}$ sont les valeurs propres de $A$. Donc $\rho(A) = \max_i|T_{i,i}|$.</p>` },
-  "it-sub": { t: "Norme subordonnée", b: R`<p>Pour une norme $\|\cdot\|$ sur $\mathbb C^n$, $|||B||| = \sup_{\|x\|\leqslant1}\|Bx\|$. Elle vérifie $\|Bx\|\leqslant|||B|||\,\|x\|$ et $|||BC|||\leqslant|||B|||\,|||C|||$, donc $|||B^k|||\leqslant|||B|||^k$. Pour toute valeur propre $\lambda$ de $B$, $|\lambda|\leqslant|||B|||$, donc $\rho(B)\leqslant|||B|||$.</p>` },
-  "it-det": { t: "Déterminant et valeurs propres", b: R`<p>$\det B = \prod\lambda_i$ (valeurs propres complexes avec multiplicité), donc $|\det B|\leqslant\rho(B)^n$.</p>` }
+  "it-trig": { t: "Trigonalisation", b: R`$$A = PTP^{-1},\ T\text{ triangulaire},\ T_{i,i} = \lambda_i\ \Longrightarrow\ \rho(A) = \max_i|T_{i,i}|.$$` },
+  "it-sub": { t: "Norme subordonnée", b: R`$$|||B||| = \sup_{\|x\|\leqslant1}\|Bx\|,\qquad|||BC|||\leqslant|||B|||\,|||C|||,\qquad|||B^k|||\leqslant|||B|||^k,\qquad\rho(B)\leqslant|||B|||.$$` },
+  "it-det": { t: "Déterminant et valeurs propres", b: R`$$\det B = \prod_i\lambda_i\ \Longrightarrow\ |\det B|\leqslant\rho(B)^n.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $A\in GL_n(\mathbb R)$, $b\in\mathbb R^n$, et $x^* = A^{-1}b$. On écrit $A = M-N$ avec $M\in GL_n(\mathbb R)$ « facile à inverser », et on définit, pour $x_0\in\mathbb R^n$, $x_{k+1} = M^{-1}(Nx_k+b)$. On note $\rho(B)$ le rayon spectral (plus grand module des valeurs propres complexes). On écrit aussi $A = L+D+U$ (parties strictement inférieure, diagonale, strictement supérieure).</p>`;

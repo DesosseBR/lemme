@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "hi-proj": { t: "Projection orthogonale", b: R`<p>Si $F$ est un sous-espace de dimension finie d'un espace préhilbertien $E$, la projection orthogonale $p(x)$ est l'unique $y\in F$ avec $x-y\perp F$, et $\|x-p(x)\| = \min_{y\in F}\|x-y\|$.</p>` },
-  "hi-spec": { t: "Normes et valeurs propres", b: R`<p>Pour $A\in\mathcal S_n(\mathbb R)$, $|||A|||_2 = \rho(A)$ ; si $A$ est définie positive de valeurs propres $0\lt\lambda_1\leqslant\dots\leqslant\lambda_n$, alors $|||A^{-1}|||_2 = \frac1{\lambda_1}$ et $\det A = \prod\lambda_i$.</p>` },
+  "hi-proj": { t: "Projection orthogonale", b: R`$$p(x)\in F,\quad x-p(x)\perp F,\qquad\|x-p(x)\| = \min_{y\in F}\|x-y\|.$$` },
+  "hi-spec": { t: "Normes et valeurs propres", b: R`$$A\in\mathcal S_n(\mathbb R)\ :\ |||A|||_2 = \rho(A);\qquad A\in\mathcal S_n^{++}\ :\ |||A^{-1}|||_2 = \frac1{\lambda_1},\quad\det A = \prod\lambda_i.$$` },
   "hi-stir": { t: "Somme et intégrale", b: R`<p>$\ln(k!) = k\ln k-k+O(\ln k)$, et $\sum_{k=1}^{n}(k\ln k-k) = \frac{n^2}2\ln n-\frac34n^2+O(n\ln n)$ (comparaison série-intégrale avec $\int x\ln x\,dx = \frac{x^2}2\ln x-\frac{x^2}4$).</p>` }
 });
 

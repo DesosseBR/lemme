@@ -9,8 +9,8 @@ const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
   "syl-exp": { t: "Exponentielle de matrice", b: R`<p>$e^{M} = \sum_k\frac{M^k}{k!}$. Si $MM' = M'M$, $e^{M+M'} = e^Me^{M'}$. $t\mapsto e^{tM}$ est dérivable de dérivée $Me^{tM} = e^{tM}M$. Si $N^m = 0$, $e^{tN} = \sum_{k\lt m}\frac{t^k}{k!}N^k$.</p>` },
-  "syl-dun": { t: "Dunford", b: R`<p>$A = D+N$, $D$ diagonalisable de mêmes valeurs propres que $A$, $N$ nilpotente, $DN = ND$. Donc $e^{tA} = e^{tD}e^{tN}$ et $e^{tD} = Q\operatorname{diag}(e^{t\lambda_i})Q^{-1}$.</p>` },
-  "syl-bez": { t: "Cayley-Hamilton et Bézout", b: R`<p>$\chi_A(A) = 0$. Deux polynômes sans racine commune dans $\mathbb C$ sont premiers entre eux : $pf+qg = 1$ pour certains $p,q\in\mathbb C[X]$.</p>` }
+  "syl-dun": { t: "Dunford", b: R`$$A = D+N,\ DN = ND\ \Longrightarrow\ e^{tA} = e^{tD}e^{tN},\qquad e^{tD} = Q\operatorname{diag}(e^{t\lambda_i})Q^{-1}.$$` },
+  "syl-bez": { t: "Cayley-Hamilton et Bézout", b: R`$$\chi_A(A) = 0;\qquad f,g\text{ sans racine commune}\ \Longrightarrow\ \exists p,q,\ pf+qg = 1.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $A,B,C\in\mathcal M_n(\mathbb C)$. L'<b>équation de Sylvester</b> d'inconnue $X\in\mathcal M_n(\mathbb C)$ est $AX+XB = C$. On note $\mathcal S : X\mapsto AX+XB$, endomorphisme de $\mathcal M_n(\mathbb C)$, et $\|\cdot\|$ une norme d'algèbre sur $\mathcal M_n(\mathbb C)$ ($\|MM'\|\leqslant\|M\|\|M'\|$). Une matrice est dite <b>stable</b> si toutes ses valeurs propres sont de partie réelle strictement négative.</p>`;

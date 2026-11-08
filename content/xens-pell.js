@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "pe-sgr": { t: "Sous-groupes de (ℝ, +)", b: R`<p>Un sous-groupe $G\neq\{0\}$ de $(\mathbb R,+)$ est soit de la forme $\alpha\mathbb Z$ ($\alpha>0$), soit dense dans $\mathbb R$. Plus précisément, avec $\alpha = \inf(G\cap\mathbb R_+^*)$ : si $\alpha>0$, $\alpha\in G$ et $G = \alpha\mathbb Z$ ; si $\alpha = 0$, $G$ est dense.</p>` },
-  "pe-irr": { t: "Irrationalité de √d", b: R`<p>Si $d\in\mathbb N$ n'est pas un carré parfait, $\sqrt d\notin\mathbb Q$. Donc si $x+y\sqrt d = x'+y'\sqrt d$ avec $x,y,x',y'\in\mathbb Z$ (ou $\mathbb Q$), alors $x = x'$ et $y = y'$.</p>` },
-  "pe-tiroir": { t: "Principe des tiroirs", b: R`<p>Si l'on range $N+1$ objets dans $N$ tiroirs, un tiroir contient au moins deux objets. Si l'on range une infinité d'objets dans un nombre fini de tiroirs, un tiroir en contient une infinité.</p>` }
+  "pe-sgr": { t: "Sous-groupes de (ℝ, +)", b: R`$$G\leqslant(\mathbb R,+),\ G\neq\{0\},\ \alpha = \inf(G\cap\mathbb R_+^*)\ :\quad\alpha>0\Rightarrow G = \alpha\mathbb Z;\qquad\alpha = 0\Rightarrow\overline G = \mathbb R.$$` },
+  "pe-irr": { t: "Irrationalité de √d", b: R`$$d\text{ non carré}\Rightarrow\sqrt d\notin\mathbb Q;\qquad x+y\sqrt d = x'+y'\sqrt d\ (x,y,x',y'\in\mathbb Q)\Rightarrow x = x',\ y = y'.$$` },
+  "pe-tiroir": { t: "Principe des tiroirs", b: R`$$N+1\text{ objets},\ N\text{ tiroirs}\Rightarrow\exists\text{ tiroir}\geqslant2\text{ objets};\qquad\infty\text{ objets},\ N\text{ tiroirs}\Rightarrow\exists\text{ tiroir infini}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $d\geqslant1$ est un entier. On étudie l'équation de Pell-Fermat $x^2-dy^2 = 1$, d'inconnues $(x,y)\in\mathbb Z^2$. On note $\mathcal H = \{(x,y)\in\mathbb R^2 : x^2-dy^2 = 1\}$, $\mathcal H_{\mathbb Z} = \mathcal H\cap\mathbb Z^2$, et $\theta(x,y) = x+y\sqrt d$. Les solutions $(\pm1,0)$ sont dites triviales.</p>`;

@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 19, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "li-exp": { t: "Décroissance de e^{tA}", b: R`<p>Si toutes les valeurs propres de $A$ sont de partie réelle $\lt0$, il existe $K,a>0$ avec $|||e^{tA}|||\leqslant Ke^{-at}$ pour $t\geqslant0$ (Dunford : exponentielles fois polynômes).</p>` },
-  "li-sort": { t: "Théorème de sortie de tout compact", b: R`<p>Si $f$ est $\mathcal C^1$ et $y$ une solution maximale de $y' = f(y)$ définie sur $[0,d[$ avec $d\lt+\infty$, alors $y$ sort de tout compact : $\|y(t)\|\to+\infty$. Une solution maximale bornée sur $[0,d[$ est donc définie sur $[0,+\infty[$.</p>` },
+  "li-exp": { t: "Décroissance de e^{tA}", b: R`$$\forall\lambda\in\operatorname{Sp}A,\ \operatorname{Re}\lambda\lt0\ \Longrightarrow\ \exists K,a>0,\ \forall t\geqslant0,\ |||e^{tA}|||\leqslant Ke^{-at}.$$` },
+  "li-sort": { t: "Théorème de sortie de tout compact", b: R`$$y\text{ maximale sur }[0,d[,\ d\lt+\infty\ \Longrightarrow\ \|y(t)\|\xrightarrow[t\to d]{}+\infty;\qquad y\text{ bornée}\Rightarrow d = +\infty.$$` },
   "li-gron": { t: "Lemme de type Grönwall", b: R`<p>Si $\varphi$ est dérivable et $\varphi'\leqslant-\beta\varphi$ sur $[0,T]$, alors $(e^{\beta t}\varphi)'\leqslant0$ et $\varphi(t)\leqslant\varphi(0)e^{-\beta t}$.</p>` }
 });
 

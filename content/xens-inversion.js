@@ -8,7 +8,7 @@ const P = { subj: "xens", year: "mp", chap: 18, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "iv-dom": { t: "Convergence dominée", b: R`<p>Si $h_\varepsilon(x)\to h(x)$ pour presque tout $x$ quand $\varepsilon\to0$ et $|h_\varepsilon|\leqslant g$ intégrable indépendante de $\varepsilon$, alors $\int h_\varepsilon\to\int h$.</p>` },
+  "iv-dom": { t: "Convergence dominée", b: R`$$h_\varepsilon\xrightarrow[\varepsilon\to0]{}h\text{ p.p.},\ |h_\varepsilon|\leqslant g\in L^1\ \Longrightarrow\ \int h_\varepsilon\to\int h.$$` },
   "iv-fub": { t: "Fubini et formule d'échange", b: R`<p>Pour $f,g\in L^1(\mathbb R)$ : $\int f\,\mathcal Fg = \int\mathcal Ff\,g$ (Fubini, $|f(x)g(\xi)|$ intégrable sur $\mathbb R^2$).</p>` },
   "iv-gauss": { t: "Intégrale de Gauss", b: R`<p>$\int_{\mathbb R}e^{-x^2}dx = \sqrt\pi$, donc $\int_{\mathbb R}e^{-\varepsilon x^2}dx = \sqrt{\pi/\varepsilon}$.</p>` }
 });

@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 17, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "zo-leg": { t: "Symbole de Legendre", b: R`<p>Pour $p$ premier impair et $a\in\mathbb F_p^*$, $\big(\frac ap\big) = 1$ si $a$ est un carré, $-1$ sinon. Critère d'Euler : $\big(\frac ap\big) = a^{\frac{p-1}2}$ dans $\mathbb F_p$ ; c'est un morphisme $\mathbb F_p^*\to\{\pm1\}$, et il y a $\frac{p-1}2$ carrés dans $\mathbb F_p^*$.</p>` },
-  "zo-cyc": { t: "Signature et cycles", b: R`<p>La signature est un morphisme $\mathfrak S(E)\to\{\pm1\}$. Si une permutation se décompose en cycles de longueurs $\ell_1,\dots,\ell_r$ (points fixes compris), sa signature est $\prod(-1)^{\ell_i-1}$ : chaque cycle de longueur paire compte $-1$.</p>` },
-  "zo-gen": { t: "Générateurs de GL(E) (admis)", b: R`<p>$GL(E)$ est engendré par les transvections (endomorphismes $u\neq\operatorname{Id}$ fixant un hyperplan $H$ point par point, de déterminant $1$) et les dilatations. Le groupe $\mathbb F_q^*$ est cyclique.</p>` }
+  "zo-leg": { t: "Symbole de Legendre", b: R`$$\Big(\frac ap\Big) = a^{\frac{p-1}2}\in\{\pm1\},\qquad\Big(\frac{ab}p\Big) = \Big(\frac ap\Big)\Big(\frac bp\Big),\qquad\operatorname{Card}(\mathbb F_p^*)^2 = \frac{p-1}2.$$` },
+  "zo-cyc": { t: "Signature et cycles", b: R`$$\varepsilon(\sigma) = \prod_i(-1)^{\ell_i-1}.$$` },
+  "zo-gen": { t: "Générateurs de GL(E) (admis)", b: R`$$GL(E) = \langle\text{transvections, dilatations}\rangle;\qquad\mathbb F_q^*\text{ cyclique}.$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $p$ est un nombre premier impair, $\mathbb F_p = \mathbb Z/p\mathbb Z$, $V$ un $\mathbb F_p$-espace vectoriel de dimension $n\geqslant1$, donc $|V| = p^n$. Tout $u\in GL(V)$ est une permutation de l'ensemble $V$, de signature $\varepsilon(u)$. Une <b>dilatation</b> de base l'hyperplan $H$, de direction une droite $G$ supplémentaire, de rapport $\lambda\in K^*\setminus\{1\}$, est l'endomorphisme $x+y\mapsto x+\lambda y$ ($x\in H$, $y\in G$). On veut montrer le <b>théorème de Frobenius-Zolotarev</b> : $\varepsilon(u) = \Big(\dfrac{\det u}p\Big)$.</p>`;

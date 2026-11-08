@@ -8,9 +8,9 @@ const P = { subj: "xens", year: "mp", chap: 14, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "mc-lfgn": { t: "Loi forte des grands nombres", b: R`<p>Si $(Y_i)_{i\geqslant1}$ sont des variables réelles indépendantes, de même loi, avec $\mathbb E|Y_1|\lt+\infty$, alors $\frac1n\sum_{i=1}^nY_i\to\mathbb E[Y_1]$ presque sûrement.</p>` },
-  "mc-markov": { t: "Inégalité de Markov", b: R`<p>Si $Z\geqslant0$ et $a>0$ : $\mathbb P(Z\geqslant a)\leqslant\frac{\mathbb E[Z]}a$. Avec $Z = (Y-\mathbb E Y)^2$, on obtient Bienaymé-Tchebychev : $\mathbb P(|Y-\mathbb EY|\geqslant a)\leqslant\frac{\mathbb V(Y)}{a^2}$.</p>` },
-  "mc-transfert": { t: "Transfert, indépendance", b: R`<p>Si $X$ est uniforme sur $I = [0,1]^d$ et $g$ intégrable sur $I$, alors $\mathbb E[g(X)] = \int_Ig$. Si $Y_1,\dots,Y_n$ sont indépendantes, $\mathbb E\big[\prod h(Y_i)\big] = \prod\mathbb E[h(Y_i)]$ (pour $h\geqslant0$ mesurable).</p>` }
+  "mc-lfgn": { t: "Loi forte des grands nombres", b: R`$$(Y_i)\text{ i.i.d.},\ \mathbb E|Y_1|\lt\infty\ \Longrightarrow\ \frac1n\sum_{i = 1}^nY_i\xrightarrow{\text{p.s.}}\mathbb E[Y_1].$$` },
+  "mc-markov": { t: "Inégalité de Markov", b: R`$$Z\geqslant0,\ a>0\ :\ \mathbb P(Z\geqslant a)\leqslant\frac{\mathbb E[Z]}a;\qquad\mathbb P(|Y-\mathbb EY|\geqslant a)\leqslant\frac{\mathbb V(Y)}{a^2}.$$` },
+  "mc-transfert": { t: "Transfert, indépendance", b: R`$$X\sim\mathcal U([0,1]^d)\ :\ \mathbb E[g(X)] = \int_{[0,1]^d}g;\qquad Y_i\text{ indép.}\Rightarrow\mathbb E\Big[\prod h(Y_i)\Big] = \prod\mathbb E[h(Y_i)].$$` }
 });
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $I = [0,1]^d$ muni de la mesure de Lebesgue, $f : I\to\mathbb R$ mesurable avec $|f|\leqslant A$ presque partout et $\int_If^2\leqslant B$ ($A,B>0$). On note $m = \int_If$. Soit $(X_i)_{i\geqslant1}$ une suite de variables indépendantes uniformes sur $I$, et</p>$$e_n = \frac1n\sum_{i=1}^nf(X_i)-m.$$`;

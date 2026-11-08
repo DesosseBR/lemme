@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "ka-eg": { t: "Cas d'égalité de l'inégalité triangulaire", b: R`<p>Dans un espace euclidien, $\|u+v\| = \|u\|+\|v\|$ si et seulement si $u$ et $v$ sont positivement liés ($u = \lambda v$ ou $v = \lambda u$ avec $\lambda\geqslant0$).</p>` },
-  "ka-comp": { t: "Compacité", b: R`<p>Une fonction continue sur un compact atteint ses bornes. L'image d'un compact par une application continue est compacte. L'enveloppe convexe d'un compact de $\mathbb R^N$ est compacte (Carathéodory).</p>` },
+  "ka-eg": { t: "Cas d'égalité de l'inégalité triangulaire", b: R`$$\|u+v\| = \|u\|+\|v\|\iff\exists\lambda\geqslant0,\ u = \lambda v\text{ ou }v = \lambda u.$$` },
+  "ka-comp": { t: "Compacité", b: R`$$f\in\mathcal C(K,\mathbb R)\Rightarrow\min,\max\text{ atteints};\qquad f(K)\text{ compact};\qquad K\subset\mathbb R^N\text{ compact}\Rightarrow\operatorname{Conv}(K)\text{ compact}.$$` },
   "ka-rac": { t: "Racine carrée", b: R`<p>Toute $S\in\mathcal S_n^{++}(\mathbb R)$ s'écrit $S = R^2$ avec $R\in\mathcal S_n^{++}(\mathbb R)$.</p>` }
 });
 

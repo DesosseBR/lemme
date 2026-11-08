@@ -8,8 +8,8 @@ const P = { subj: "xens", year: "mp", chap: 16, kind: "probleme", qnav: true, si
 const Q = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "es-inv": { t: "Inversion locale", b: R`<p>Si $f : U\to F$ ($U$ ouvert d'un espace de Banach $E$) est $\mathcal C^1$ et $Df(a)$ est un isomorphisme, il existe un voisinage ouvert $V$ de $a$ tel que $f(V)$ soit ouvert et $f : V\to f(V)$ soit un $\mathcal C^1$-difféomorphisme.</p>` },
-  "es-ouf": { t: "Sous-groupes ouverts", b: R`<p>Dans un groupe topologique $G$, un sous-groupe ouvert $H$ est aussi fermé : son complémentaire est la réunion des classes $gH$, $g\notin H$, qui sont ouvertes. Si $G$ est connexe, $H = G$.</p>` },
+  "es-inv": { t: "Inversion locale", b: R`$$Df(a)\text{ isomorphisme}\ \Longrightarrow\ \exists V\ni a,\ f(V)\text{ ouvert},\ f : V\to f(V)\ \mathcal C^1\text{-difféomorphisme}.$$` },
+  "es-ouf": { t: "Sous-groupes ouverts", b: R`$$H\leqslant G\text{ ouvert}\ \Longrightarrow\ G\setminus H = \bigcup_{g\notin H}gH\text{ ouvert}\Rightarrow H\text{ fermé};\qquad G\text{ connexe}\Rightarrow H = G.$$` },
   "es-ch": { t: "Inverse polynomial", b: R`<p>Si $M\in GL_n(\mathbb C)$, Cayley-Hamilton donne $\chi_M(M) = 0$ avec $\chi_M(0) = \pm\det M\neq0$, d'où $M^{-1}\in\mathbb C[M]$.</p>` }
 });
 
