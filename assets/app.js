@@ -193,6 +193,23 @@ burger.addEventListener("click", () => { const o = nav.classList.toggle("open");
 const head = $(".site-head");
 window.addEventListener("scroll", () => head.classList.toggle("scrolled", scrollY > 8), { passive: true });
 
+/* ---------- Apparence ---------- */
+const THEMES = [["auto", "Automatique", "linear-gradient(135deg,#F5F7FC 50%,#0A1230 50%)"], ["clair", "Clair", "#F5F7FC"], ["sombre", "Sombre", "#12151c"], ["papier", "Papier", "#F6F1E7"], ["synthwave", "Synthwave", "linear-gradient(135deg,#ff4fd8,#5b2bd6 55%,#1a1033)"], ["verre", "Verre", "linear-gradient(135deg,#c9d6ff,#fbd3e9)"]];
+{
+  const tb = $("#theme-toggle"), tp = $("#themepop");
+  const cur = () => { try { return localStorage.getItem("lemme-theme") || "auto"; } catch (_) { return "auto"; } };
+  const paintT = () => { tp.innerHTML = `<p>Apparence</p>` + THEMES.map(([k, l, sw]) => `<button type="button" data-theme-k="${k}" aria-pressed="${cur() === k}"><i style="background:${sw}"></i>${l}</button>`).join(""); };
+  paintT();
+  tb.addEventListener("click", ev => { ev.stopPropagation(); const o = tp.hidden; tp.hidden = !o; tb.setAttribute("aria-expanded", String(o)); });
+  tp.addEventListener("click", ev => {
+    ev.stopPropagation(); const b = ev.target.closest("[data-theme-k]"); if (!b) return;
+    const k = b.dataset.themeK; try { localStorage.setItem("lemme-theme", k); } catch (_) {}
+    if (k === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = k;
+    paintT();
+  });
+  document.addEventListener("click", () => { tp.hidden = true; tb.setAttribute("aria-expanded", "false"); });
+}
+
 /* ---------- Recherche ---------- */
 const sbar = $("#searchbar"), stog = $("#search-toggle"), q = $("#q"), results = $("#results");
 stog.addEventListener("click", () => { const o = sbar.hidden; sbar.hidden = !o; stog.setAttribute("aria-expanded", String(o)); if (o) q.focus(); });

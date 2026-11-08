@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("lemme-theme");if(t&&t!=="auto")document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 
@@ -51,6 +52,7 @@
       <a class="navlink" data-sec="tab" href="#tableau">Tableau de bord</a>
     </nav>
     <button class="iconbtn" type="button" id="search-toggle" aria-label="Rechercher" aria-expanded="false" aria-controls="searchbar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <div class="themebox"><button class="iconbtn" type="button" id="theme-toggle" aria-label="Apparence" aria-expanded="false" aria-controls="themepop"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.9 1.2-1.8-.5-1-.1-2.2 1.1-2.2H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10Z" stroke="currentColor" stroke-width="1.8"/><circle cx="7.5" cy="11" r="1.3" fill="currentColor"/><circle cx="10.5" cy="7.5" r="1.3" fill="currentColor"/><circle cx="15" cy="7.8" r="1.3" fill="currentColor"/></svg></button><div class="themepop" id="themepop" hidden><p>Apparence</p></div></div>
     <button class="iconbtn burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainnav"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="searchbar" id="searchbar" hidden>
