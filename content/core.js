@@ -32,7 +32,7 @@ const LEMME = window.LEMME = {
       const body = ps.map(e => {
         let h = e.enonce.replace(/^\s*<p class="pl-pre">[\s\S]*?<\/p>/, "");
         const lab = String(e.part).replace(/\.$/, "");
-        const head = `<p class="pl-part"><b>${lab}. ${e.title}</b></p>`;
+        const head = `<p class="pl-part"><b>${lab}. ${String(e.title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</b></p>`;
         if (h.includes(`<p><b>${lab}.</b></p>`)) h = h.replace(`<p><b>${lab}.</b></p>`, head);
         else if (h.includes(`<p><b>${lab}.</b>`)) h = h.replace(new RegExp(`<p><b>${lab}\\.</b>\\s*`), head + "<p>");
         else h = head + h;
