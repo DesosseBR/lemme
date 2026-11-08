@@ -638,14 +638,21 @@ const ABBR = /(?:^|[\s(])(?:cf|p|ex|etc|resp|éq|i\.e|e\.g|c\.-à-d|Th|Prop|Déf
 /* Une formule « lourde » (opérateur intégral, somme, chaîne d'égalités, ou longue) écrite en ligne passe en formule centrée : le texte et les calculs ne se mélangent plus. */
 const REL = /[=<>]|\\(?:leqslant|geqslant|leq|geq|le|ge|lt|gt|sim|approx|equiv|xrightarrow|longrightarrow|to|iff|Longleftrightarrow|Rightarrow|Longrightarrow)(?![a-zA-Z])/g;
 function heavy(f) {
-  const rel = (f.replace(/\\(?:mathrm|operatorname|text)\{[^}]*\}/g, "").match(REL) || []).length;
-  if (!rel) return false;
-  const big = /\\(?:int|iint|sum|prod|lim|limsup|liminf|bigcup|bigcap)(?![a-zA-Z])/.test(f);
-  const len = f.replace(/\\[a-zA-Z]+|[{}\s]/g, "").length;
+  const g = f.replace(/\\(?:mathrm|operatorname|text|mathbb|mathcal)\{[^}]*\}/g, "x");
+  const rel = (g.match(REL) || []).length;
+  const big = /\\(?:int|iint|sum|prod|lim|limsup|liminf|bigcup|bigcap|max|min|sup|inf)(?![a-zA-Z])/.test(f);
+  const L = h => h.replace(/\\(?:left|right|big|Big|bigg|Bigg)[lr]?/g, "").replace(/\\[,;!: ]|\\q?quad/g, "").replace(/\\[a-zA-Z]+/g, "x").replace(/[{}\s_^]/g, "").length;
+  const len = L(g);
+  const mat = /\\begin\{(?:p|b|v|V)?matrix\}|\\begin\{cases\}/.test(f);
+  if (!rel) return (big && len > 16) || (mat && len > 8);
+  if (mat) return true;
   const fr = /\\(?:frac|dfrac|tfrac|sqrt|binom|dbinom)(?![a-zA-Z])|\^\{[^}]{3,}\}/.test(f);
-  return (big && len > 8) || (fr && len > 10) || (rel >= 2 && len > 9) || len > 34;
+  if ((big && len > 10) || (fr && len > 12) || (rel >= 2 && len > 14) || len > 30) return true;
+  /* une seule relation entre deux membres consistants */
+  const m = g.match(REL); const k = g.indexOf(m[0]);
+  return L(g.slice(0, k)) >= 8 && L(g.slice(k + m[0].length)) >= 8;
 }
-function promote(inner) {
+function promote(inner, tag) {
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/); let depth = 0, par = 0, out = "";
   for (let k = 0; k < parts.length; k++) {
     let t = parts[k]; if (!t) continue;
@@ -700,7 +707,7 @@ function listify(html) {
 function aerateInner(inner, tag) {
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
   const bare = inner.replace(/\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>/g, "").replace(/[\s.,;:]/g, "");
-  if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner));
+  if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner, tag));
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   const cuts = []; let depth = 0, pos = 0;
   const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
@@ -733,7 +740,7 @@ function aerateInner(inner, tag) {
 const glue = h => h.replace(/(\$\$[\s\S]*?\$\$)|\$([^$]+?)\$([.,;:!?)]+)/g, (m, d, f, q) => d ? d : `<span class="nw">$${f}$${q}</span>`);
 function aerate(html) {
   if (!html || html.indexOf("<") < 0) return html ? aerateInner(html) : html;
-  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : `<${tag}${attr}>${aerateInner(inner, tag)}</${tag}>`);
+  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
 }
 window.__lemmeAerate = aerate;
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */

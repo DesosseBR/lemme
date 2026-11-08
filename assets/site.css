@@ -1379,3 +1379,4 @@ html.seen .hero h1 .mark::after{animation:none}
 .f-meth > summary,.f-meth > summary::after{color:var(--yellow)}
 .fold-sm{margin-top:20px}
 .fold-sm > summary{padding:9px 14px;font-size:13px}
+.prose li.lm mjx-container[display="true"],li.lm mjx-container[display="true"]{text-align:left!important;margin:2px 0 8px!important}
