@@ -533,6 +533,7 @@ footer.site{background:var(--navy-deep);color:var(--on-navy)}
 .enonce ol{padding-left:1.4em}
 .enonce ol > li{padding:8px 12px;margin:4px 0 4px -12px;border-radius:12px;border-left:3px solid transparent;transition:background var(--t-mid) var(--ease),border-color var(--t-mid) var(--ease)}
 .enonce ol > li::marker{font-family:var(--f-display);font-weight:800}
+.enonce ol ol{list-style-type:lower-alpha}
 .enonce ol > li.qon{background:var(--yellow-soft);border-left-color:var(--yellow)}
 
 /* Figures */
