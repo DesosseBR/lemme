@@ -12,19 +12,22 @@ LEMME.subject({
       C("Généralités", "Normes, distances, boules, ouverts, fermés, voisinages, adhérence, intérieur, frontière, points isolés, topologie induite, continuité, homéomorphismes, continuité uniforme, produits, limites"),
       C("Suites dans un espace métrique", "Suites convergentes, valeurs d'adhérence, caractérisation séquentielle, suites de Cauchy, espaces complets"),
       C("Espaces compacts", "Bolzano-Weierstrass, parties compactes, image continue d'un compact, théorème de Heine"),
-      C("Espaces connexes", "Connexité, connexité par arcs, image continue d'un connexe"),
+      C("Espaces connexes", "Connexité, connexité par arcs, image continue d'un connexe, connexité des valeurs d'adhérence"),
       C("Espaces vectoriels normés", "Applications linéaires continues, normes équivalentes en dimension finie, compacité en dimension finie"),
       Object.assign(C("Groupes abéliens finis", "Ordre et exposant, caractères, décomposition en facteurs invariants, unicité, dénombrement, dual"), { p: "Algèbre" }),
       Object.assign(C("Groupe symétrique", "Conjugaison, éléments d'ordre 2, automorphismes intérieurs et extérieurs, le cas exceptionnel de S6"), { p: "Algèbre" }),
       Object.assign(C("Polynômes à plusieurs indéterminées", "Action du groupe symétrique, polynômes alternés, Vandermonde, résultant, intersection de courbes"), { p: "Algèbre" }),
       Object.assign(C("Corps finis", "Frobenius, restes chinois, factorisation des polynômes, algorithme de Berlekamp"), { p: "Algèbre" }),
       Object.assign(C("Séries de Fourier", "Noyau de Dirichlet, espaces de Banach, théorème de Baire, Banach-Steinhaus, divergence"), { p: "Analyse" }),
-      Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya"), { p: "Algèbre" }),
+      Object.assign(C("Actions de groupes et groupes finis", "Orbites, stabilisateurs, formule de Burnside, théorème de Frobenius, homographies et groupe tétraédral, théorème de Pólya, groupes d'ordre p², colorations du cube"), { p: "Algèbre" }),
       Object.assign(C("Fonctions de plusieurs variables", "Différentielle, courbes tracées sur une courbe du plan, extremums sous contrainte, trajectoires de billard"), { p: "Analyse" }),
       Object.assign(C("Intégration", "Fractions rationnelles en cosinus et sinus, règles de Bioche, changements de variable"), { p: "Analyse" }),
       Object.assign(C("Représentations des groupes finis", "Sous-groupes finis de GLn, théorème de Burnside, caractères, sous-groupes distingués, table de S4"), { p: "Algèbre" }),
-      Object.assign(C("Probabilités", "Fonctions caractéristiques, moments, lois normale et de Cauchy"), { p: "Analyse" }),
-      Object.assign(C("Géométrie", "Coniques, coordonnées barycentriques, homographies, birapport, cercles-droites, groupe circulaire"), { p: "Algèbre" })
+      Object.assign(C("Probabilités", "Fonctions caractéristiques, moments, lois normale et de Cauchy, compteur probabiliste, Borel-Cantelli"), { p: "Analyse" }),
+      Object.assign(C("Géométrie", "Coniques, coordonnées barycentriques, homographies, birapport, cercles-droites, groupe circulaire, plans projectifs finis, Dobble"), { p: "Algèbre" }),
+      Object.assign(C("Algèbre linéaire et matrices", "Décomposition polaire, décomposition de Bruhat, décomposition de Dunford effective, enveloppe convexe de Oₙ(ℝ), équation de Sylvester"), { p: "Algèbre" }),
+      Object.assign(C("Arithmétique", "Carrés de 𝔽_p, entiers de Gauss, théorème des deux carrés"), { p: "Algèbre" }),
+      Object.assign(C("Équations aux dérivées partielles et distributions", "Équation de la chaleur, séries de Fourier, distributions tempérées, transformée de Fourier"), { p: "Analyse" })
     ]
   }
 });
