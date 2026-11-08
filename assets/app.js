@@ -229,6 +229,7 @@ function plusList(list) {
   const ids = [...new Set(list.map(e => e.plus))];
   return `<p class="pl-intro">Des sujets complets, rédigés comme un problème de concours : chaque partie s'appuie sur les précédentes, et tout est corrigé question par question.</p>` + ids.map(k => {
     const parts = list.filter(e => e.plus === k), f = parts[0], nd = parts.filter(e => doneN(e.id)).length;
+    if (parts.length === 1) { const nq = new Set(f.steps.map(st => st.q)).size; return `<section class="plsujet"><div class="plh"><span class="plk">Sujet</span><h2>${esc(f.title)}</h2>${f.sujetDesc ? `<p>${f.sujetDesc}</p>` : ""}<span class="plm">${nq} questions${f.time ? " · " + f.time : ""}${nd ? ` · ${ICHECK}Fait` : ""}</span></div><ol class="plparts"><li><a class="excard${nd ? " done" : ""}" href="#e-${f.id}"><span class="plp">Sujet complet</span><span class="plt">Énoncé et corrigé question par question</span><span class="plq">Q1 à Q${nq}</span>${I.arrow}</a></li></ol></section>`; }
     return `<section class="plsujet"><div class="plh"><span class="plk">Sujet</span><h2>${esc(f.sujet || f.title)}</h2>${f.sujetDesc ? `<p>${f.sujetDesc}</p>` : ""}<span class="plm">${plural(parts.length, "partie")} · ${parts.reduce((a, e) => a + new Set(e.steps.map(st => st.q)).size, 0)} questions${nd ? ` · ${nd} faite${nd > 1 ? "s" : ""}` : ""}</span></div><ol class="plparts">${parts.map(e => `<li><a class="excard${doneN(e.id) ? " done" : ""}" href="#e-${e.id}"><span class="plp">${esc(e.part)}</span><span class="plt">${ttl(e)}</span><span class="plq">${qrange(e)}${doneN(e.id) ? ` · ${ICHECK}Fait` : ""}</span>${I.arrow}</a></li>`).join("")}</ol></section>`;
   }).join("");
 }
@@ -1929,7 +1930,7 @@ function render(keepScroll) {
   else if ((m = h.match(/^concours-(mp|mpi|pc|psi)$/))) html = concoursPage(m[1]);
   else if ((m = h.match(/^c-annales-mp-(\d+)$/))) html = sujetPage(+m[1]);
   else if ((m = h.match(/^c-([a-z]+)-(mpsi|mp)-(\d+)$/))) html = chapterPage(m[1], m[2], +m[3]);
-  else if ((m = h.match(/^e-([a-z0-9-]+)$/))) { ex = EXERCISES.find(x => x.id === m[1]); html = exercisePage(m[1]); }
+  else if ((m = h.match(/^e-([a-z0-9-]+)$/))) { const al = (window.LEMME.ALIAS || {})[m[1]]; if (al) { location.replace("#e-" + al); return; } ex = EXERCISES.find(x => x.id === m[1]); html = exercisePage(m[1]); }
   else if (h === "exercices") html = exercisesPage(false);
   else if (h === "classiques") html = exercisesPage(true);
   else if (h === "dm") html = dmPage();
