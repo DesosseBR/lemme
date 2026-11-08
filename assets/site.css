@@ -1382,3 +1382,9 @@ html.seen .hero h1 .mark::after{animation:none}
 .fold-sm > summary{padding:9px 14px;font-size:13px}
 .prose li.lm mjx-container[display="true"],li.lm mjx-container[display="true"]{text-align:left!important;margin:2px 0 8px!important}
 .enonce .pl-part{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:1.05em}
+.drawer .body.course p{margin:0 0 14px}
+.drawer .body.course ul,.drawer .body.course ol{padding-left:1.2em;margin:0 0 14px}
+.drawer .body.course li{margin:0 0 14px;padding-left:4px}
+.drawer .body.course li::marker{color:var(--muted)}
+.drawer .body.course .sn+.sn{margin-top:12px}
+.drawer .body.course mjx-container[display="true"]{margin:.7em 0!important}

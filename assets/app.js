@@ -596,7 +596,7 @@ function openRappel(id, exId, src) {
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body">${annotate(r.b, ex || null)}</div>${here || links ? `<div class="here"><h4>Dans cet exercice</h4>${here ? `<div class="body">${annotate(here, ex)}</div>` : ""}<div class="hq-slot"></div>${links}</div>` : ""}`;
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer le rappel">${I.close}</button><span class="kicker">Rappel de cours</span><h3 id="dr-t">${esc(r.t)}</h3><div class="body course">${annotate(r.b, ex || null, null, true)}</div>${here || links ? `<div class="here"><h4>Dans cet exercice</h4>${here ? `<div class="body course">${annotate(here, ex, null, true)}</div>` : ""}<div class="hq-slot"></div>${links}</div>` : ""}`;
   const stp = src && !src.closest("#drawer") && src.closest(".step");
   const res = stp && ($$(".prose .sbox", stp)[0] || $(".prose > p", stp) || $(".prose", stp));
   const slot = $(".hq-slot", dr);
@@ -653,17 +653,27 @@ function heavy(f) {
   const m = g.match(REL); const k = g.indexOf(m[0]);
   return L(g.slice(0, k)) >= 8 && L(g.slice(k + m[0].length)) >= 8;
 }
-function promote(inner, tag) {
+/* Dans les rappels et notions de cours, toute intégrale, somme, limite ou fraction consistante passe en display. */
+function heavyCourse(f) {
+  const n = f.replace(/\\(?:left|right|big|Big|bigg|Bigg)[lr]?/g, "").replace(/\\[,;!: ]|\\q?quad/g, "").replace(/\\[a-zA-Z]+/g, "x").replace(/[{}\s_^]/g, "").length;
+  const rel = (f.match(REL) || []).length;
+  if (!rel) return n > 26;
+  if (/\\(?:int|iint|sum|prod|lim|bigcup|bigcap)(?![a-zA-Z])/.test(f)) return n > 6;
+  if (/\\(?:frac|dfrac)(?![a-zA-Z])/.test(f)) return n > 8;
+  return n > 22;
+}
+function promote(inner, tag, strong) {
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/); let depth = 0, par = 0, out = "";
   for (let k = 0; k < parts.length; k++) {
     let t = parts[k]; if (!t) continue;
     if (t[0] === "<") { if (!/^<br\b/i.test(t)) { if (/^<\//.test(t)) depth = Math.max(0, depth - 1); else if (!/\/>$/.test(t)) depth++; } out += t; continue; }
     if (t[0] !== "$") { par = Math.max(0, par + (t.match(/\(/g) || []).length - (t.match(/\)/g) || []).length); out += t; continue; }
-    if (t[1] !== "$" && !depth && !par && heavy(t.slice(1, -1))) {
+    if (t[1] !== "$" && !depth && (!par || strong) && (heavy(t.slice(1, -1)) || (strong && heavyCourse(t.slice(1, -1))))) {
       let f = t.slice(1, -1).trim(); const nx = parts[k + 1] || ""; const m = nx.match(/^\s*([.,;:])/);
       if (m) { f += m[1] === ":" ? "\\;:" : m[1]; parts[k + 1] = nx.slice(m[0].length); }
       out += `$$${f}$$`; continue;
     }
+    if (strong && t[1] !== "$" && !depth && /\\(?:int|iint|sum|prod|frac|lim)(?![a-zA-Z])/.test(t) && !/\\displaystyle/.test(t)) { out += `$\\displaystyle ${t.slice(1, -1)}$`; continue; }
     out += t;
   }
   return out;
@@ -705,10 +715,10 @@ function listify(html) {
     return `$$\\begin{aligned}${fs.map((x, i) => alignAmp(x) + (i < fs.length - 1 ? "\\\\[6pt]" : "")).join("")}\\end{aligned}$$`;
   });
 }
-function aerateInner(inner, tag) {
+function aerateInner(inner, tag, strong) {
   if (/<(p|div|ol|ul|li|figure|table|pre|h\d)\b/i.test(inner)) return inner;
   const bare = inner.replace(/\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>/g, "").replace(/[\s.,;:]/g, "");
-  if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner, tag));
+  if (!(tag === "li" && bare.length < 4)) inner = listify(promote(inner, tag, strong));
   const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$|<[^>]+>)/);
   const cuts = []; let depth = 0, pos = 0;
   const startsSentence = rest => /^\s+(?=[A-ZÀ-ÖØ-Ý«(\[$<]|\d+\)|$)/.test(rest);
@@ -720,13 +730,13 @@ function aerateInner(inner, tag) {
     } else if (t[0] === "$") {
       if (t[1] !== "$" && !depth && /[.!?]\s*\$$/.test(t)) { const nx = parts[k + 1] || ""; if (nx && startsSentence(nx)) cuts.push(pos + t.length); }
     } else if (!depth) {
-      const re = /[.!?]\)?(\s+)/g; let m;
+      const re = strong ? /(?:[.!?]\)?|\s;)(\s+)/g : /[.!?]\)?(\s+)/g; let m;
       while ((m = re.exec(t))) {
         const end = m.index + m[0].length, before = t.slice(0, m.index + 1);
         if (/\.\.$/.test(before) || ABBR.test(before)) continue;
         const after = t.slice(m.index + m[0].length - m[1].length);
         const nx = end < t.length ? after : after + (parts[k + 1] || "");
-        if (startsSentence(nx) && (end < t.length || parts[k + 1])) cuts.push(pos + end);
+        if ((startsSentence(nx) || (strong && /;\s+$/.test(m[0]))) && (end < t.length || parts[k + 1])) cuts.push(pos + end);
       }
     }
     pos += t.length;
@@ -739,16 +749,34 @@ function aerateInner(inner, tag) {
 }
 /* Une formule et la ponctuation qui la suit restent sur la même ligne. */
 const glue = h => h.replace(/(\$\$[\s\S]*?\$\$)|\$([^$]+?)\$([.,;:!?)]+)/g, (m, d, f, q) => d ? d : `<span class="nw">$${f}$${q}</span>`);
-function aerate(html) {
-  if (!html || html.indexOf("<") < 0) return html ? aerateInner(html) : html;
+/* « Si (i) …, (ii) …, (iii) …, alors … » devient une liste à puces. */
+function enumList(html) {
+  return html.replace(/<p>([\s\S]*?)<\/p>/g, (m, inner) => {
+    const parts = inner.split(/(\$\$[\s\S]*?\$\$|\$[^$]*?\$)/);
+    const marks = []; let pos = 0;
+    for (const t of parts) { if (t && t[0] !== "$") { const re = /\((i|ii|iii|iv|v|vi)\)\s*/g; let x; while ((x = re.exec(t))) marks.push([pos + x.index, pos + x.index + x[0].length]); } pos += t.length; }
+    if (marks.length < 2) return m;
+    const head = inner.slice(0, marks[0][0]).trim();
+    const items = marks.map((mk, j) => inner.slice(mk[1], j + 1 < marks.length ? marks[j + 1][0] : inner.length).trim());
+    let tail = "";
+    const last = items[items.length - 1], cut = last.search(/,?\s+(?:alors|donc)\b/);
+    if (cut > 0) { tail = last.slice(cut).replace(/^,?\s+/, ""); tail = tail[0].toUpperCase() + tail.slice(1); items[items.length - 1] = last.slice(0, cut); }
+    const clean = it => it.replace(/\s*(?:,|;)?\s*(?:et)?\s*$/, "").replace(/,\s*$/, "");
+    const hd = head && !/[:.]\s*$/.test(head) ? head + "\u00a0:" : head;
+    return `${hd ? `<p>${hd}</p>` : ""}<ul>${items.map(it => `<li>${clean(it)} ;</li>`).join("").replace(/ ;<\/li>$/, ".</li>")}</ul>${tail ? `<p>${tail}</p>` : ""}`;
+  });
+}
+function aerate(html, strong) {
+  if (!html || html.indexOf("<") < 0) return html ? (strong ? aerate(`<p>${html}</p>`, true) : aerateInner(html)) : html;
   /* une balise <span> écrite au milieu d'une formule empêche MathJax de la lire : on la retire */
   html = html.replace(/\$\$[\s\S]*?\$\$|\$[^$]+?\$/g, m => m.includes("<span") || m.includes("</span") ? m.replace(/<\/?span[^>]*>/g, "") : m);
-  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
+  if (strong) html = enumList(html);
+  return html.replace(/<(p|li)((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g, (m, tag, attr, inner) => /class="(?:rt|here-lab)"/.test(attr) ? m : (() => { const r = aerateInner(inner, tag, strong); return tag === "li" && !attr && /^\s*(?:<span class="sn">)?\s*\$\$/.test(r) ? `<li class="lm">${r}</li>` : `<${tag}${attr}>${r}</${tag}>`; })());
 }
 window.__lemmeAerate = aerate;
 /* Souligne la première apparition de chaque notion dans un bloc HTML, hors formules, code et mots déjà expliqués. */
-function annotate(html, ex, used) {
-  html = aerate(html);
+function annotate(html, ex, used, strong) {
+  html = aerate(html, strong);
   if (!html || !NOTION_LIST.length) return html || "";
   used = used || new Set();
   const skip = new Set((ex && ex.noNotions) || []);
@@ -798,7 +826,7 @@ function openNotion(id, src) {
   drawerReturn = document.activeElement;
   const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
   const dr = document.createElement("aside"); dr.className = "drawer"; dr.id = "drawer"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body">${aerate(n.b)}</div>`;
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer la notion">${I.close}</button><span class="kicker nt-kicker">Notion de cours</span><h3 id="dr-t">${esc(n.t)}</h3><div class="body notion-body course">${aerate(n.b, true)}</div>`;
   document.body.append(scrim, dr);
   scrim.addEventListener("click", () => closeRappel());
   $(".close", dr).addEventListener("click", () => closeRappel());
