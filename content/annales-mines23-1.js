@@ -4,9 +4,9 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 9, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "m23-dimfinie": { t: "Linéaire en dimension finie", b: R`<p>En dimension finie, toute application linéaire $u$ est continue, et il existe $K$ avec $\|u(x)\|\leqslant K\|x\|$. La sphère unité est compacte (fermée bornée), et toutes les normes sont équivalentes : pour deux normes $N_1,N_2$, il existe $m,M>0$ avec $mN_1\leqslant N_2\leqslant MN_1$.</p>` },
-  "m23-noyaux": { t: "Lemme des noyaux et Cayley-Hamilton", b: R`<p><b>Cayley-Hamilton</b> : $\chi_a(a) = 0$. <b>Lemme des noyaux</b> : si $P = P_1\cdots P_r$ avec les $P_i$ premiers entre eux deux à deux, alors $\ker P(a) = \bigoplus_i\ker P_i(a)$.</p>` },
-  "m23-exp": { t: "Exponentielle d'endomorphisme", b: R`<p>$e^{ta} = \sum_{k\geqslant0}\frac{t^k}{k!}a^k$. Si $a$ et $b$ commutent, $e^{a+b} = e^ae^b$. La solution de $y' = a(y)$, $y(0) = x_0$ est $y(t) = e^{ta}(x_0)$, et $\frac d{dt}e^{ta}x = ae^{ta}x = e^{ta}ax$.</p>` }
+  "m23-dimfinie": { t: "Linéaire en dimension finie", b: R`<p>En dimension finie :</p>$$u\text{ linéaire}\Rightarrow\exists K,\ \|u(x)\|\leqslant K\|x\|;\qquad\exists m,M>0,\ mN_1\leqslant N_2\leqslant MN_1;\qquad S(0,1)\text{ compacte}.$$` },
+  "m23-noyaux": { t: "Lemme des noyaux et Cayley-Hamilton", b: R`$$\chi_a(a) = 0;\qquad P = P_1\cdots P_r,\ P_i\wedge P_j = 1\ (i\neq j)\ \Longrightarrow\ \ker P(a) = \bigoplus_i\ker P_i(a).$$` },
+  "m23-exp": { t: "Exponentielle d'endomorphisme", b: R`$$e^{ta} = \sum_{k\geqslant0}\frac{t^k}{k!}a^k;\qquad ab = ba\Rightarrow e^{a+b} = e^ae^b;\qquad\frac d{dt}e^{ta}x = ae^{ta}x = e^{ta}ax.$$$$y' = a(y),\ y(0) = x_0\iff y(t) = e^{ta}(x_0).$$` }
 });
 
 const EA = R`<p>On note $\langle\cdot|\cdot\rangle$ le produit scalaire usuel de $\mathbb K^n$ ($\mathbb K = \mathbb R$ ou $\mathbb C$) et $\|\cdot\|$ la norme associée. Soit $E$ un sous-espace de $\mathbb K^n$ et $u\in\mathcal L(E)$.</p>

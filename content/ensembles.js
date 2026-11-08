@@ -4,11 +4,11 @@ const R = String.raw;
 const C1 = { subj: "maths", year: "mpsi", chap: 1 };
 
 LEMME.rappels({
-  "en-inclusion": { t: "Appartenance et inclusion", b: R`<p>$x\in A$ : $x$ est un <b>élément</b> de $A$. $B\subset A$ : $B$ est une <b>partie</b> de $A$, c'est-à-dire que tout élément de $B$ est un élément de $A$.</p><p>$\{x\}\subset A\iff x\in A$. L'ensemble vide est inclus dans tout ensemble.</p>` },
+  "en-inclusion": { t: "Appartenance et inclusion", b: R`$$B\subset A\iff\forall x,\ (x\in B\Rightarrow x\in A);\qquad\{x\}\subset A\iff x\in A;\qquad\varnothing\subset A.$$` },
   "en-double": { t: "Égalité par double inclusion", b: R`<div class="sbox">$$A = B\iff A\subset B\ \text{et}\ B\subset A.$$</div><p>Pour montrer $A\subset B$ : on prend $x\in A$ quelconque et on montre $x\in B$.</p>` },
-  "en-operations": { t: "Opérations sur les parties", b: R`<ul><li>$x\in A\cap B\iff x\in A$ et $x\in B$ ;</li><li>$x\in A\cup B\iff x\in A$ ou $x\in B$ ;</li><li>$x\in A\setminus B\iff x\in A$ et $x\notin B$ ;</li><li>$x\in\overline A$ (complémentaire dans $E$) $\iff x\in E$ et $x\notin A$ ;</li><li>$A\setminus B = A\cap\overline B$, et $\overline{\overline A} = A$.</li></ul>` },
-  "en-delta": { t: "Différence symétrique", b: R`<p>$A\,\Delta\,B = (A\setminus B)\cup(B\setminus A)$ : les éléments qui sont dans <b>exactement un</b> des deux ensembles.</p>` },
-  "en-indic": { t: "Fonction indicatrice", b: R`<p>$\mathbf 1_A(x) = 1$ si $x\in A$, $0$ sinon. Deux parties sont égales si et seulement si leurs indicatrices sont égales.</p>` }
+  "en-operations": { t: "Opérations sur les parties", b: R`$$\begin{aligned}x\in A\cap B&\iff x\in A\wedge x\in B\\x\in A\cup B&\iff x\in A\vee x\in B\\x\in A\setminus B&\iff x\in A\wedge x\notin B\\x\in\overline A&\iff x\in E\wedge x\notin A\end{aligned}\qquad A\setminus B = A\cap\overline B,\quad\overline{\overline A} = A.$$` },
+  "en-delta": { t: "Différence symétrique", b: R`$$A\,\Delta\,B = (A\setminus B)\cup(B\setminus A) = (A\cup B)\setminus(A\cap B).$$` },
+  "en-indic": { t: "Fonction indicatrice", b: R`$$\mathbf 1_A(x) = \left\{\begin{aligned}&1&&x\in A\\&0&&x\notin A\end{aligned}\right.\qquad A = B\iff\mathbf 1_A = \mathbf 1_B.$$` }
 });
 
 LEMME.exercises([

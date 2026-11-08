@@ -4,8 +4,8 @@ const R = String.raw;
 const C0 = { subj: "maths", year: "mpsi", chap: 0 };
 
 LEMME.rappels({
-  "rc-double": { t: "Récurrence double", b: R`<p>Si $P(0)$ et $P(1)$ sont vraies, et si pour tout $n$, $\big(P(n)\ \text{et}\ P(n+1)\big)\Rightarrow P(n+2)$, alors $P(n)$ est vraie pour tout $n$.</p>` },
-  "rc-forte": { t: "Récurrence forte", b: R`<p>Si $P(n_0)$ est vraie, et si pour tout $n>n_0$, $\big(P(k)$ vraie pour tout $k$ avec $n_0\leqslant k< n\big)\Rightarrow P(n)$, alors $P(n)$ est vraie pour tout $n\geqslant n_0$.</p>` }
+  "rc-double": { t: "Récurrence double", b: R`$$\left\{\begin{aligned}&P(0),\ P(1)\\&\forall n,\ P(n)\wedge P(n+1)\Rightarrow P(n+2)\end{aligned}\right.\quad\Longrightarrow\quad\forall n,\ P(n).$$` },
+  "rc-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(n_0)\\&\forall n>n_0,\ \big(\forall k\in[\![n_0,n-1]\!],\ P(k)\big)\Rightarrow P(n)\end{aligned}\right.\quad\Longrightarrow\quad\forall n\geqslant n_0,\ P(n).$$` }
 });
 
 LEMME.exercises([

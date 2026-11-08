@@ -4,9 +4,9 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 8, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "c25-diag": { t: "Diagonalisabilité et polynôme minimal", b: R`<p>Une matrice est diagonalisable si et seulement si son polynôme minimal est scindé à racines simples. Si $P(A) = 0$, le polynôme minimal divise $P$.</p>` },
+  "c25-diag": { t: "Diagonalisabilité et polynôme minimal", b: R`$$A\text{ diagonalisable}\iff\pi_A\text{ scindé à racines simples};\qquad P(A) = 0\Rightarrow\pi_A\mid P.$$` },
   "c25-rang": { t: "Théorème du rang", b: R`<p>Pour $u\in\mathcal L(\mathbb R^n)$ : $\dim\ker u+\operatorname{rg}u = n$.</p>` },
-  "c25-indep": { t: "Variables indépendantes", b: R`<p>Si $X_1,\dots,X_n$ sont indépendantes : $P(X_1\in A_1,\dots,X_n\in A_n) = \prod_iP(X_i\in A_i)$. Une somme de $n$ variables de Bernoulli $\mathcal B(p)$ indépendantes suit la loi binomiale $\mathcal B(n,p)$.</p>` }
+  "c25-indep": { t: "Variables indépendantes", b: R`$$P(X_1\in A_1,\dots,X_n\in A_n) = \prod_iP(X_i\in A_i);\qquad X_i\sim\mathcal B(p)\text{ indép.}\Rightarrow\sum_{i = 1}^nX_i\sim\mathcal B(n,p).$$` }
 });
 
 const EX1 = R`<p>Les graphes sont orientés, de sommets numérotés à partir de $0$, et représentés par un dictionnaire d'adjacence. Exemple : <span data-def="d">$d = \{0:[1,3],\ 1:[2],\ 2:[4,5],\ 3:[4],\ 4:[1],\ 5:[\,],\ 6:[2]\}$</span>.</p>

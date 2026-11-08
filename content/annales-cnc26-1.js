@@ -6,12 +6,12 @@ const P = { subj: "annales", year: "mp", chap: 23, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "c26a-se": { t: "Dérivation terme à terme d'une série entière", b: R`<p>Une série entière $\sum a_kx^k$ de rayon $R>0$ est de classe $\mathcal C^\infty$ sur $]-R,R[$, et on dérive terme à terme sans changer le rayon : $\big(\sum a_kx^k\big)' = \sum ka_kx^{k-1}$.</p>` },
-  "c26a-indep": { t: "Lemme des coalitions", b: R`<p>Si $X_1,\dots,X_n$ sont indépendantes, toute fonction de $(X_1,\dots,X_{k-1})$ est indépendante de $X_k$. Par exemple $S_{k-1} = X_1+\dots+X_{k-1}$ est indépendante de $X_k$.</p>` },
-  "c26a-cvd": { t: "Convergence dominée", b: R`<p>Si $h_x(u)\to h(u)$ pour tout $u$ quand $x\to+\infty$, et si $|h_x(u)|\leqslant\varphi(u)$ avec $\varphi$ intégrable indépendante de $x$, alors $\int h_x\to\int h$. (On l'applique à une suite $x_k\to+\infty$ quelconque.)</p>` },
-  "c26a-param": { t: "Intégrales à paramètre", b: R`<p><b>Continuité</b> : si $x\mapsto f(x,t)$ est continue et $|f(x,t)|\leqslant\varphi(t)$ intégrable (indépendante de $x$), alors $x\mapsto\int f(x,t)\,dt$ est continue. <b>Dérivation</b> : si de plus $\partial_xf$ existe, est continue en $x$ et $|\partial_xf(x,t)|\leqslant\psi(t)$ intégrable sur chaque $[a,b]$, alors on dérive sous l'intégrale.</p>` },
-  "c26a-tat": { t: "Intégration terme à terme", b: R`<p>Si les $u_n$ sont continues par morceaux et intégrables sur $I$, si $\sum u_n$ converge simplement et si $\sum_n\int_I|u_n|<+\infty$, alors $\int_I\sum_nu_n = \sum_n\int_Iu_n$.</p>` },
-  "c26a-riem": { t: "Intégrales de référence", b: R`<p>$\int_0^1\frac{dt}{t^a}$ converge ssi $a<1$ ; $\int_1^{+\infty}\frac{dt}{t^a}$ converge ssi $a>1$. Si $f\geqslant0$ et $f(t) = o(1/t^2)$ en $+\infty$, $f$ est intégrable au voisinage de $+\infty$. Si $f\sim g$ avec $g\geqslant0$, $f$ et $g$ sont de même nature.</p>` }
+  "c26a-se": { t: "Dérivation terme à terme d'une série entière", b: R`$$R>0\ \Longrightarrow\ \Big(\sum a_kx^k\Big)' = \sum ka_kx^{k-1}\text{ sur }]-R,R[\ (\text{même rayon}).$$` },
+  "c26a-indep": { t: "Lemme des coalitions", b: R`$$X_1,\dots,X_n\text{ indépendantes}\ \Longrightarrow\ f(X_1,\dots,X_{k-1})\perp\!\!\!\perp X_k;\qquad S_{k-1}\perp\!\!\!\perp X_k.$$` },
+  "c26a-cvd": { t: "Convergence dominée", b: R`$$\left\{\begin{aligned}&h_x(u)\xrightarrow[x\to+\infty]{}h(u)\\&|h_x(u)|\leqslant\varphi(u),\ \varphi\text{ intégrable}\end{aligned}\right.\quad\Longrightarrow\quad\int h_x\xrightarrow[x\to+\infty]{}\int h.$$` },
+  "c26a-param": { t: "Intégrales à paramètre", b: R`$$|f(x,t)|\leqslant\varphi(t)\ \Longrightarrow\ x\mapsto\int f(x,t)\,dt\text{ continue};\qquad|\partial_xf|\leqslant\psi\ \Longrightarrow\ \Big(\int f\Big)' = \int\partial_xf.$$` },
+  "c26a-tat": { t: "Intégration terme à terme", b: R`$$\sum_n\int_I|u_n|\lt+\infty\ \Longrightarrow\ \int_I\sum_nu_n = \sum_n\int_Iu_n.$$` },
+  "c26a-riem": { t: "Intégrales de référence", b: R`$$\int_0^1\frac{dt}{t^a}\text{ CV}\iff a\lt1,\qquad\int_1^{+\infty}\frac{dt}{t^a}\text{ CV}\iff a>1.$$$$f\geqslant0,\ f = o\Big(\frac1{t^2}\Big)\Rightarrow f\text{ intégrable en }+\infty;\qquad f\sim g\geqslant0\Rightarrow\text{même nature}.$$` }
 });
 
 const EX = R`<h4>Exercice : la loi binomiale négative</h4><p>Soit $(X_i)_{i\in\mathbb N}$ une suite de variables aléatoires indépendantes de même loi de Bernoulli de paramètre $p\in]0,1[$ (la $i$-ème expérience est un succès si et seulement si $X_i = 1$). Pour $n\geqslant1$, $S_n = \sum_{i=1}^nX_i$, et $q = 1-p$.</p><ol style="list-style:none;padding-left:0">

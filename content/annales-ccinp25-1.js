@@ -4,10 +4,10 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 7, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "cp-cpa": { t: "Connexité par arcs et continuité", b: R`<p>L'image d'une partie connexe par arcs par une application continue est connexe par arcs. Un intervalle de $\mathbb R$ est connexe par arcs.</p>` },
-  "cp-hess": { t: "Point critique et matrice hessienne", b: R`<p>Si $f$ est $\mathcal C^2$ et $\nabla f(a) = 0$ : si la hessienne $H$ en $a$ a ses valeurs propres $>0$ (pour une matrice $2\times2$ : $\det H>0$ et $\operatorname{tr}H>0$), alors $f$ a un minimum local strict en $a$.</p>` },
-  "cp-proj": { t: "Projection orthogonale", b: R`<p>Le projeté orthogonal $b$ de $a$ sur $F$ est l'unique $b\in F$ tel que $a-b\perp F$. Et $\|a-b\| = d(a,F) = \min_{w\in F}\|a-w\|$.</p>` },
-  "cp-sp": { t: "Séries à termes positifs", b: R`<p>Une série à termes positifs converge si et seulement si ses sommes partielles sont majorées. Comparaison : si $0\leqslant u_n\leqslant v_n$ et $\sum v_n$ converge, alors $\sum u_n$ converge.</p>` }
+  "cp-cpa": { t: "Connexité par arcs et continuité", b: R`$$A\text{ connexe par arcs},\ f\text{ continue}\ \Longrightarrow\ f(A)\text{ connexe par arcs}.$$` },
+  "cp-hess": { t: "Point critique et matrice hessienne", b: R`$$\nabla f(a) = 0,\ \operatorname{Sp}H_f(a)\subset\,]0,+\infty[\ \Longrightarrow\ a\text{ minimum local strict}.$$$$n = 2\ :\quad\det H>0,\ \operatorname{tr}H>0.$$` },
+  "cp-proj": { t: "Projection orthogonale", b: R`$$b = p_F(a)\iff b\in F,\ a-b\perp F;\qquad\|a-b\| = d(a,F) = \min_{w\in F}\|a-w\|.$$` },
+  "cp-sp": { t: "Séries à termes positifs", b: R`$$u_n\geqslant0\ :\quad\sum u_n\text{ CV}\iff(S_n)\text{ majorée};\qquad0\leqslant u_n\leqslant v_n,\ \sum v_n\text{ CV}\Rightarrow\sum u_n\text{ CV}.$$` }
 });
 
 const EX = R`<p><b>Exercice I.</b></p><ol start="1"><li>Soit $f : ]-1,1[\to\mathbb R^2$ de classe $\mathcal C^1$. Justifier que $f'(]-1,1[)$ est une partie connexe par arcs de $\mathbb R^2$.</li><li>Soit <span data-def="f">$f(t) = (0,0)$ si $t\in\,]-1,0]$ et $f(t) = \big(t^2\sin\frac1t,\ t^2\cos\frac1t\big)$ si $t\in\,]0,1[$</span>, et $\|(x,y)\|_2 = \sqrt{x^2+y^2}$. a) Démontrer que $f$ est dérivable en $0$, puis sur $]-1,1[$, et préciser $f'(t)$. b) Démontrer que $\|f'(t)\|_2\geqslant1$ pour $t\in\,]0,1[$, et en déduire que $f'(]-1,1[)$ n'est pas connexe par arcs.</li></ol>

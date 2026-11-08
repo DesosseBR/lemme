@@ -4,7 +4,7 @@ const R = String.raw;
 const C1 = { subj: "maths", year: "mpsi", chap: 1 };
 
 LEMME.rappels({
-  "im-def": { t: "Image directe, image réciproque", b: R`<p>Pour $f : E\to F$, $A\subset E$, $B\subset F$ :</p><ul><li>$f(A) = \{f(a) : a\in A\}$, donc $y\in f(A)\iff\exists a\in A,\ y = f(a)$ ;</li><li>$f^{-1}(B) = \{x\in E : f(x)\in B\}$, donc $x\in f^{-1}(B)\iff f(x)\in B$.</li></ul><p>$f^{-1}(B)$ a un sens même si $f$ n'est pas bijective.</p>` }
+  "im-def": { t: "Image directe, image réciproque", b: R`$$y\in f(A)\iff\exists a\in A,\ y = f(a);\qquad x\in f^{-1}(B)\iff f(x)\in B.$$<p>$f^{-1}(B)$ a un sens même si $f$ n'est pas bijective.</p>` }
 });
 
 LEMME.exercises([

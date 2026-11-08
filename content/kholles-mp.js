@@ -378,7 +378,7 @@ LEMME.rappels({
   "k-ideal": { t: "Idéal d'un anneau commutatif", b: R`<p>$I\subset A$ est un idéal si c'est un sous-groupe additif et si $a\in A$, $x\in I\Rightarrow ax\in I$.</p><div class="sbox">$$x,y\in I\Rightarrow x-y\in I,\qquad a\in A,\ x\in I\Rightarrow ax\in I.$$</div><p>Si $1\in I$ (ou un inversible), alors $I = A$. L'idéal engendré par $a,b$ est $aA+bA$.</p>` },
   "k-premier": { t: "Idéal premier", b: R`<p>Un idéal $I\neq A$ est premier si</p><div class="sbox">$$xy\in I\ \Longrightarrow\ x\in I\ \text{ou}\ y\in I.$$</div><p>$\{0\}$ est premier si et seulement si $A$ est intègre. Dans $\mathbb Z$, les idéaux premiers non nuls sont les $p\mathbb Z$, $p$ premier.</p>` },
   "k-noyau-ideal": { t: "Noyau d'un morphisme d'anneaux", b: R`<p>Si $\varphi : A\to B$ est un morphisme d'anneaux, $\ker\varphi$ est un idéal de $A$. Si $B$ est intègre, $\ker\varphi$ est premier :</p><div class="sbox">$$\varphi(xy) = \varphi(x)\varphi(y) = 0\ \Longrightarrow\ \varphi(x) = 0\ \text{ou}\ \varphi(y) = 0.$$</div>` },
-  "k-degre-produit": { t: "Degré d'un produit", b: R`<p>Si $A$ est intègre, $\deg(PQ) = \deg P+\deg Q$ dans $A[X]$. En particulier, les inversibles de $A[X]$ sont les constantes inversibles de $A$.</p>` }
+  "k-degre-produit": { t: "Degré d'un produit", b: R`$$A\text{ intègre}\ \Longrightarrow\ \deg(PQ) = \deg P+\deg Q,\qquad A[X]^\times = A^\times.$$` }
 });
 
 (() => {
@@ -669,7 +669,7 @@ LEMME.exercises([
 /* ---------- MP · 6. Réduction (3) ---------- */
 LEMME.rappels({
   "k-edl1-sol": { t: "Équation y′ = a(x) y", b: R`<p>Sur un intervalle où $a$ est continue, les solutions sont</p><div class="sbox">$$y(x) = C\,e^{A(x)},\qquad A' = a.$$</div><p>Pour $xy' = \mu y$ sur $]0,+\infty[$ : $y = Cx^\mu$.</p>` },
-  "k-libre-fonctions": { t: "Montrer qu'une famille de fonctions est libre", b: R`<p>On suppose $\sum c_kf_k = 0$ et on cherche à isoler les coefficients : évaluer en des points bien choisis, diviser par une fonction qui ne s'annule pas, ou se ramener à un polynôme qui a une infinité de racines.</p>` }
+  "k-libre-fonctions": { t: "Montrer qu'une famille de fonctions est libre", b: R`$$\sum_kc_kf_k = 0\ \Longrightarrow\ \forall k,\ c_k = 0\ ?$$<p>Évaluer en des points choisis, diviser par une fonction qui ne s'annule pas, ou faire apparaître un polynôme à une infinité de racines.</p>` }
 });
 
 (() => {
@@ -925,7 +925,7 @@ LEMME.exercises([
 /* ---------- MP · 7. Topologie des EVN (2) · 8. Convexité ---------- */
 LEMME.rappels({
   "k-lin-cont": { t: "Continuité d'une application linéaire", b: R`<p>Pour $f$ linéaire entre espaces normés, il y a équivalence :</p><div class="sbox">$$f\ \text{continue}\iff f\ \text{continue en}\ 0\iff\exists C,\ \forall x,\ \|f(x)\|\leqslant C\|x\|.$$</div><p>En dimension finie (au départ), toute application linéaire est continue.</p>` },
-  "k-riesz": { t: "Compacité et dimension", b: R`<p>Dans un espace normé de dimension finie, la boule unité fermée est compacte. En dimension infinie, elle ne l'est jamais (théorème de Riesz, hors programme mais instructif).</p>` },
+  "k-riesz": { t: "Compacité et dimension", b: R`$$\dim E\lt\infty\ \Longrightarrow\ B_f(0,1)\text{ compacte};\qquad\dim E = \infty\ \Longrightarrow\ B_f(0,1)\text{ non compacte (Riesz)}.$$` },
   "k-concave-ln": { t: "Concavité du logarithme", b: R`<p>$\ln$ est concave sur $]0,+\infty[$ ($\ln'' = -\frac1{x^2}< 0$) :</p><div class="sbox">$$\alpha\ln u+\beta\ln v\leqslant\ln(\alpha u+\beta v)\qquad(\alpha,\beta\geqslant0,\ \alpha+\beta = 1).$$</div>` }
 });
 
@@ -1146,7 +1146,7 @@ LEMME.exercises([
 /* ---------- MP · 9. Euclidiens (2) · 10. Calcul différentiel ---------- */
 LEMME.rappels({
   "k-gs-mat": { t: "Gram-Schmidt en matrices", b: R`<p>Si $(C_1,\dots,C_n)$ est une base et $(D_1,\dots,D_n)$ son orthonormalisée de Gram-Schmidt, alors $C_j\in\operatorname{Vect}(D_1,\dots,D_j)$ et $(D_j|C_j)>0$ :</p><div class="sbox">$$C_j = \sum_{i\leqslant j}(D_i|C_j)\,D_i,\qquad r_{jj} = (D_j|C_j)>0.$$</div>` },
-  "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`<p>Une matrice à la fois orthogonale et triangulaire supérieure est diagonale, à coefficients $\pm1$ (son inverse $M^\top$ est triangulaire inférieure et supérieure). Avec des coefficients diagonaux $>0$, c'est $I_n$.</p>` },
+  "k-triang-orth": { t: "Triangulaire et orthogonale", b: R`$$M\in O_n(\mathbb R)\cap T_n^+\ \Longrightarrow\ M = \operatorname{diag}(\pm1),\qquad m_{ii}>0\ \Longrightarrow\ M = I_n.$$<p>Car $M^{-1} = M^\top$ est à la fois triangulaire inférieure et supérieure.</p>` },
   "k-det-deriv": { t: "Dérivée de det(Iₙ + tM)", b: R`<p>$\det(I_n+tM)$ est un polynôme en $t$ :</p><div class="sbox">$$\det(I_n+tM) = 1+t\operatorname{tr}(M)+O(t^2).$$</div><p>(Dans le développement en somme sur les permutations, seule l'identité donne des termes de degré $\leqslant1$.)</p>` }
 });
 

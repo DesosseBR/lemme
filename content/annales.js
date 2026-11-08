@@ -68,23 +68,23 @@ LEMME.subject({
 
 LEMME.rappels({
   "an-binome": { t: "Binôme de Newton et symétrie", b: R`<div class="sbox">$$\sum_{k=0}^{m}\binom mk = (1+1)^m = 2^m,\qquad\binom mk = \binom m{m-k}.$$</div><p>Tous les termes sont des entiers $\geqslant1$. Le coefficient central $\binom{2n}n$ est le plus grand de la ligne $2n$.</p>` },
-  "an-euclide": { t: "Lemme d'Euclide", b: R`<p>Si un nombre premier $p$ divise un produit $ab$, alors $p$ divise $a$ ou $p$ divise $b$.</p><p>Conséquence : si des nombres premiers <b>distincts</b> $p_1,\dots,p_m$ divisent tous $N$, alors leur produit $p_1\cdots p_m$ divise $N$ (ils sont premiers entre eux deux à deux).</p>` },
-  "an-rec-forte": { t: "Récurrence forte", b: R`<p>Si $P(1)$ est vraie et si, pour tout $n$, « $P(1),\dots,P(n)$ vraies » entraîne « $P(n+1)$ vraie », alors $P(n)$ est vraie pour tout $n\geqslant1$.</p><p>Utile quand $P(n+1)$ se déduit d'un rang bien plus petit, comme $P\big(\frac{n}2\big)$.</p>` },
+  "an-euclide": { t: "Lemme d'Euclide", b: R`$$p\text{ premier},\ p\mid ab\ \Longrightarrow\ p\mid a\text{ ou }p\mid b.$$$$p_1,\dots,p_m\text{ premiers distincts},\ \forall i,\ p_i\mid N\ \Longrightarrow\ p_1\cdots p_m\mid N.$$` },
+  "an-rec-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(1)\\&\forall n,\ \big(P(1)\wedge\dots\wedge P(n)\big)\Rightarrow P(n+1)\end{aligned}\right.\quad\Longrightarrow\quad\forall n\geqslant1,\ P(n).$$<p>Utile si $P(n+1)$ découle d'un rang comme $\frac n2$.</p>` },
   "an-pe": { t: "Partie entière", b: R`<div class="sbox">$$\lfloor x\rfloor\in\mathbb Z,\qquad x-1< \lfloor x\rfloor\leqslant x.$$</div><p>Pour $m\in\mathbb N^*$ et $n\in\mathbb N$, le nombre de multiples de $m$ dans $\{1,\dots,n\}$ vaut $\left\lfloor\frac nm\right\rfloor$.</p>` },
   "an-valuation": { t: "Valuation p-adique", b: R`<p>$v_p(n)$ est l'exposant de $p$ dans la décomposition de $n$ en facteurs premiers : $n = \prod_{p}p^{v_p(n)}$.</p><div class="sbox">$$v_p(ab) = v_p(a)+v_p(b),\qquad p^k\mid n\iff k\leqslant v_p(n).$$</div>` },
-  "an-etude-fonction": { t: "Étude de fonction", b: R`<p>Pour comparer deux fonctions, on étudie leur différence $h$ : on calcule $h'$, on en déduit les variations de $h$, puis son minimum. Si ce minimum est $>0$, on a $h>0$ partout.</p>` },
-  "an-sous-groupes": { t: "Sous-groupes (idéaux) de ℤ", b: R`<p>Tout sous-groupe de $(\mathbb Z,+)$ est de la forme $d\mathbb Z$ pour un unique $d\in\mathbb N$. Une intersection de sous-groupes est un sous-groupe.</p>` },
+  "an-etude-fonction": { t: "Étude de fonction", b: R`$$h = f-g,\qquad\min h>0\ \Longrightarrow\ f>g.$$<p>Étudier le signe de $h'$, en déduire le minimum de $h$.</p>` },
+  "an-sous-groupes": { t: "Sous-groupes (idéaux) de ℤ", b: R`$$H\text{ sous-groupe de }(\mathbb Z,+)\ \Longrightarrow\ \exists!\,d\in\mathbb N,\ H = d\mathbb Z.$$` },
   "an-equiv": { t: "Équivalents", b: R`<p>$u_n\sim v_n$ (avec $v_n>0$) signifie $\frac{u_n}{v_n}\to1$. Donc, pour tout $\varepsilon>0$, à partir d'un certain rang :</p><div class="sbox">$$(1-\varepsilon)v_n\leqslant u_n\leqslant(1+\varepsilon)v_n.$$</div>` },
   "an-geo": { t: "Série géométrique", b: R`<p>Pour $|q|< 1$ :</p><div class="sbox">$$\sum_{k=0}^{+\infty}q^k = \frac1{1-q},\qquad\sum_{k=m}^{+\infty}q^k = \frac{q^m}{1-q}.$$</div>` },
-  "an-comparaison": { t: "Comparaison de séries positives", b: R`<p>Si $0\leqslant u_n\leqslant v_n$ et si $\sum v_n$ converge, alors $\sum u_n$ converge. Séries de Riemann : $\sum\frac1{n^a}$ converge si et seulement si $a>1$.</p>` },
-  "an-integrable": { t: "Intégrabilité", b: R`<p>Une fonction continue sur un <b>segment</b> y est intégrable. Sur un intervalle quelconque, si $0\leqslant f\leqslant g$ et $g$ est intégrable, alors $f$ est intégrable.</p>` },
-  "an-terme-a-terme": { t: "Intégration terme à terme", b: R`<p><b>Sur un segment</b>, si $\sum g_k$ converge uniformément (par exemple normalement), on peut intervertir $\int$ et $\sum$.</p><p><b>Sur un intervalle quelconque</b>, si les $g_k$ sont continues, positives, intégrables, et si $\sum g_k$ converge simplement vers une fonction continue : $\displaystyle\int\sum g_k = \sum\int g_k$ (dans $[0,+\infty]$).</p>` },
+  "an-comparaison": { t: "Comparaison de séries positives", b: R`$$0\leqslant u_n\leqslant v_n,\ \sum v_n\text{ CV}\ \Longrightarrow\ \sum u_n\text{ CV};\qquad\sum\frac1{n^a}\text{ CV}\iff a>1.$$` },
+  "an-integrable": { t: "Intégrabilité", b: R`$$f\in\mathcal C([a,b])\ \Longrightarrow\ f\text{ intégrable};\qquad0\leqslant f\leqslant g,\ g\text{ intégrable}\ \Longrightarrow\ f\text{ intégrable}.$$` },
+  "an-terme-a-terme": { t: "Intégration terme à terme", b: R`<p><b>Segment</b> :</p>$$\sum g_k\text{ CVU sur }[a,b]\ \Longrightarrow\ \int_a^b\sum g_k = \sum\int_a^bg_k.$$<p><b>Intervalle quelconque</b>, $g_k\geqslant0$ continues, somme continue :</p>$$\int_I\sum g_k = \sum\int_Ig_k\quad\text{dans }[0,+\infty].$$` },
   "an-telesc": { t: "Télescopage", b: R`<div class="sbox">$$\sum_{k=0}^{N}(a_k-a_{k+1}) = a_0-a_{N+1}.$$</div><p>Avec des sommes décalées, on réindexe pour voir quels termes se compensent.</p>` },
   "an-derivee-n": { t: "Dérivée k-ième d'une puissance", b: R`<div class="sbox">$$\big(x^m\big)^{(k)} = \frac{m!}{(m-k)!}x^{m-k}\ \ (k\leqslant m),\qquad\big(x^m\big)^{(k)} = 0\ \ (k>m).$$</div>` },
   "an-ipp": { t: "Intégration par parties", b: R`<div class="sbox">$$\int_0^1u'v = \big[uv\big]_0^1-\int_0^1uv'.$$</div><p>Si $u$ s'annule en $0$ et en $1$, le crochet disparaît.</p>` },
   "an-amgm": { t: "Inégalité arithmético-géométrique", b: R`<p>Pour $x,y\geqslant0$ : $(\sqrt x-\sqrt y)^2\geqslant0$ donne</p><div class="sbox">$$x+y\geqslant2\sqrt{xy}.$$</div>` },
-  "an-int-pos": { t: "Intégrale d'une fonction positive", b: R`<p>Si $f$ est continue, positive, et non identiquement nulle sur $[a,b]$ ($a< b$), alors $\int_a^bf>0$.</p>` },
-  "an-entier": { t: "Un entier non nul vaut au moins 1", b: R`<p>Si $m\in\mathbb Z$ et $m\neq0$, alors $|m|\geqslant1$. Une suite d'entiers qui tend vers $0$ est nulle à partir d'un certain rang.</p>` }
+  "an-int-pos": { t: "Intégrale d'une fonction positive", b: R`$$f\in\mathcal C([a,b]),\ f\geqslant0,\ f\neq0,\ a\lt b\ \Longrightarrow\ \int_a^bf>0.$$` },
+  "an-entier": { t: "Un entier non nul vaut au moins 1", b: R`$$m\in\mathbb Z\setminus\{0\}\ \Longrightarrow\ |m|\geqslant1;\qquad(m_n)\in\mathbb Z^{\mathbb N},\ m_n\to0\ \Longrightarrow\ m_n = 0\text{ à partir d'un rang}.$$` }
 });
 (() => {
 const { GRAPH } = window.__LA;
@@ -412,21 +412,21 @@ LEMME.exercises([
 ]);
 })();
 LEMME.rappels({
-  "m2-spectral": { t: "Théorème spectral", b: R`<p>Toute matrice <b>symétrique réelle</b> $S$ est diagonalisable dans une base <b>orthonormée</b> : il existe $P$ orthogonale ($P^{\mathsf T}P = I_n$) et $D$ diagonale réelle avec $S = PDP^{\mathsf T}$.</p>` },
-  "m2-ps": { t: "Produit scalaire et forme quadratique", b: R`<p>Pour $x\in\mathbb R^n$ : $\langle Sx,x\rangle = x^{\mathsf T}Sx = \sum_{i,j}S(i,j)\,x_ix_j$.</p><p>Si $(v_1,\dots,v_n)$ est orthonormée et $x = \sum\alpha_iv_i$, alors $\|x\|^2 = \sum\alpha_i^2$ (Pythagore).</p>` },
-  "m2-orth": { t: "Matrice orthogonale", b: R`<p>$Q$ est orthogonale si $Q^{\mathsf T}Q = I_n$, c'est-à-dire si ses colonnes forment une famille orthonormée. Elle conserve la norme : $\|Qx\| = \|x\|$. Ses valeurs propres réelles valent donc $\pm1$.</p>` },
-  "m2-annul": { t: "Polynôme annulateur", b: R`<p>Si $P(M) = 0$, toute valeur propre $\lambda$ de $M$ vérifie $P(\lambda) = 0$ : si $Mv = \lambda v$, alors $0 = P(M)v = P(\lambda)v$ avec $v\neq0$.</p>` },
+  "m2-spectral": { t: "Théorème spectral", b: R`$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists P\in O_n(\mathbb R),\ \exists D\text{ diagonale réelle},\quad S = PDP^{\mathsf T}.$$` },
+  "m2-ps": { t: "Produit scalaire et forme quadratique", b: R`$$\langle Sx,x\rangle = x^{\mathsf T}Sx = \sum_{i,j}S(i,j)\,x_ix_j;\qquad(v_i)\text{ orthonormée},\ x = \sum\alpha_iv_i\ \Longrightarrow\ \|x\|^2 = \sum\alpha_i^2.$$` },
+  "m2-orth": { t: "Matrice orthogonale", b: R`$$Q^{\mathsf T}Q = I_n\iff\text{colonnes orthonormées}\ \Longrightarrow\ \|Qx\| = \|x\|,\quad\operatorname{Sp}_{\mathbb R}(Q)\subset\{-1,1\}.$$` },
+  "m2-annul": { t: "Polynôme annulateur", b: R`$$P(M) = 0,\ Mv = \lambda v,\ v\neq0\ \Longrightarrow\ 0 = P(M)v = P(\lambda)v\ \Longrightarrow\ P(\lambda) = 0.$$` },
   "m2-euler": { t: "Formules d'Euler et somme géométrique", b: R`<div class="sbox">$$\cos\theta = \operatorname{Re}(e^{i\theta}),\qquad\sum_{k=0}^{N-1}q^k = \frac{q^N-1}{q-1}\ (q\neq1),\qquad e^{ia}-e^{-ia} = 2i\sin a.$$</div>` },
   "m2-prod-sin": { t: "Produit de deux sinus", b: R`<div class="sbox">$$\sin a\sin b = \tfrac12\big(\cos(a-b)-\cos(a+b)\big),\qquad\sin^2a = \tfrac12\big(1-\cos(2a)\big).$$</div>` },
-  "m2-colonnes": { t: "Lire une matrice par colonnes", b: R`<p>La $j$-ème colonne de $M$ est $Me_j$, l'image du $j$-ème vecteur de la base canonique. Deux matrices sont égales si elles envoient chaque $e_j$ sur le même vecteur. Et $M^k$ est la matrice de $\varphi^k$ si $M$ est celle de $\varphi$.</p>` },
-  "m2-semblables": { t: "Matrices semblables", b: R`<p>Si $P^{-1}MP = D$ est diagonale, alors $P^{-1}M^kP = D^k$, $P^{-1}M^{-1}P = D^{-1}$, et $\operatorname{tr}(M^k) = \operatorname{tr}(D^k) = \sum\lambda_i^k$. Deux matrices semblables ont même spectre (avec multiplicités).</p>` },
-  "m2-blocs": { t: "Produit par blocs", b: R`<p>Si les découpages sont compatibles, on multiplie des matrices par blocs comme des matrices de nombres : le bloc $(i,j)$ du produit est $\sum_k(\text{bloc}\ (i,k))(\text{bloc}\ (k,j))$, en respectant l'ordre des facteurs.</p>` },
+  "m2-colonnes": { t: "Lire une matrice par colonnes", b: R`$$C_j(M) = Me_j;\qquad\big(\forall j,\ Me_j = M'e_j\big)\Rightarrow M = M';\qquad M = \operatorname{Mat}\varphi\Rightarrow M^k = \operatorname{Mat}\varphi^k.$$` },
+  "m2-semblables": { t: "Matrices semblables", b: R`$$P^{-1}MP = D\ \Longrightarrow\ P^{-1}M^kP = D^k,\quad P^{-1}M^{-1}P = D^{-1},\quad\operatorname{tr}(M^k) = \sum\lambda_i^k.$$` },
+  "m2-blocs": { t: "Produit par blocs", b: R`$$(AB)_{(i,j)} = \sum_kA_{(i,k)}B_{(k,j)}\qquad(\text{blocs compatibles, ordre respecté}).$$` },
   "m2-transfert": { t: "Formule de transfert", b: R`<p>Pour $X$ à valeurs dans un ensemble fini : $E\big(f(X)\big) = \sum_{x}f(x)\,P(X = x)$.</p>` },
   "m2-gauss": { t: "Intégrale de Gauss", b: R`<div class="sbox">$$\int_{-\infty}^{+\infty}e^{-x^2/2}\,dx = \sqrt{2\pi},\qquad\int_{-\infty}^{+\infty}e^{-\frac{\gamma t^2}2}\,dt = \sqrt{\frac{2\pi}\gamma}\ \ (\gamma>0).$$</div><p>On complète le carré : $ut-\frac{t^2}{2a} = -\frac{(t-au)^2}{2a}+\frac{au^2}2$.</p>` },
-  "m2-tcd": { t: "Convergence dominée", b: R`<p>Si $F_n\to F$ simplement sur $I$, si les $F_n$ et $F$ sont continues par morceaux, et si $|F_n|\leqslant g$ avec $g$ intégrable sur $I$ (indépendante de $n$), alors $\int_IF_n\to\int_IF$.</p>` },
+  "m2-tcd": { t: "Convergence dominée", b: R`$$\left\{\begin{aligned}&F_n\to F\text{ simplement sur }I\\&|F_n|\leqslant g,\ g\text{ intégrable}\end{aligned}\right.\quad\Longrightarrow\quad\int_IF_n\to\int_IF.$$` },
   "m2-taylor": { t: "Formule de Taylor-Young", b: R`<p>Si $G$ est de classe $\mathcal C^2$ au voisinage de $a$ :</p><div class="sbox">$$G(a+x) = G(a)+G'(a)x+\frac{G''(a)}2x^2+o(x^2).$$</div>` },
-  "m2-bijection": { t: "Théorème de la bijection", b: R`<p>Une fonction continue strictement croissante sur un intervalle $I$ réalise une bijection de $I$ sur l'intervalle image ; sa réciproque est continue. Si de plus $g$ est dérivable et $g'(a)\neq0$, la réciproque est dérivable en $g(a)$.</p>` },
-  "m2-lipschitz": { t: "Fonction lipschitzienne", b: R`<p>$f$ est $K$-lipschitzienne si $|f(u)-f(v)|\leqslant K|u-v|$ pour tous $u,v$. Une composée d'une fonction $K$-lipschitzienne et d'une $L$-lipschitzienne est $KL$-lipschitzienne.</p>` }
+  "m2-bijection": { t: "Théorème de la bijection", b: R`$$g\in\mathcal C(I)\text{ strictement croissante}\ \Longrightarrow\ g : I\to g(I)\text{ bijective},\ g^{-1}\text{ continue}.$$$$g'(a)\neq0\ \Longrightarrow\ (g^{-1})'\big(g(a)\big) = \frac1{g'(a)}.$$` },
+  "m2-lipschitz": { t: "Fonction lipschitzienne", b: R`$$|f(u)-f(v)|\leqslant K|u-v|;\qquad f\ K\text{-lip.},\ g\ L\text{-lip.}\ \Longrightarrow\ g\circ f\ KL\text{-lip.}$$` }
 });
 
 (() => {
@@ -769,12 +769,12 @@ LEMME.exercises([
 ]);
 })();
 LEMME.rappels({
-  "x-diag-poly": { t: "Critère de diagonalisation par polynôme", b: R`<p>Un endomorphisme $f$ (en dimension finie, sur $\mathbb C$) est diagonalisable si et seulement s'il existe un polynôme <b>scindé à racines simples</b> $P$ tel que $P(f) = 0$.</p><p>Exemple : $X^N-1 = \prod_{j=0}^{N-1}(X-\zeta^j)$ est scindé à racines simples, donc toute $f$ avec $f^N = \mathrm{id}$ est diagonalisable.</p>` },
-  "x-stable": { t: "Sous-espace stable et polynôme d'endomorphisme", b: R`<p>Si $W$ est stable par $f$, il est stable par toutes les puissances $f^k$, donc par tout $P(f)$. Et l'endomorphisme induit vérifie $P(f_W) = P(f)_{|W}$ : pour $w\in W$, $P(f_W)(w) = P(f)(w)$.</p>` },
-  "x-semblable": { t: "Matrices semblables et puissances", b: R`<p>Si $M' = PMP^{-1}$, alors $M'^k = PM^kP^{-1}$ pour tout $k$ (les $P^{-1}P$ du milieu se simplifient). Donc $\ker M'^k = P(\ker M^k)$ et $\dim\ker M'^k = \dim\ker M^k$.</p>` },
+  "x-diag-poly": { t: "Critère de diagonalisation par polynôme", b: R`$$f\text{ diagonalisable}\iff\exists P\text{ scindé à racines simples},\ P(f) = 0.$$$$f^N = \mathrm{id},\quad X^N-1 = \prod_{j = 0}^{N-1}(X-\zeta^j)\ \Longrightarrow\ f\text{ diagonalisable (sur }\mathbb C).$$` },
+  "x-stable": { t: "Sous-espace stable et polynôme d'endomorphisme", b: R`$$f(W)\subset W\ \Longrightarrow\ \forall P,\ P(f)(W)\subset W,\qquad\forall w\in W,\ P(f_W)(w) = P(f)(w).$$` },
+  "x-semblable": { t: "Matrices semblables et puissances", b: R`$$M' = PMP^{-1}\ \Longrightarrow\ M'^k = PM^kP^{-1},\quad\ker M'^k = P(\ker M^k),\quad\dim\ker M'^k = \dim\ker M^k.$$` },
   "x-rang": { t: "Théorème du rang", b: R`<p>Pour $f : E\to F$ linéaire, $E$ de dimension finie :</p><div class="sbox">$$\dim E = \dim\ker f+\operatorname{rg}f.$$</div>` },
-  "x-ideal": { t: "Idéaux de ℂ[X]", b: R`<p>Tout idéal $I$ de $\mathbb C[X]$ est principal : $I = \pi\,\mathbb C[X]$ pour un unique $\pi$ unitaire (ou $I = \{0\}$). Les diviseurs unitaires de $X^n$ sont les $X^r$, $0\leqslant r\leqslant n$.</p>` },
-  "x-noyaux": { t: "Lemme des noyaux", b: R`<p>Si $P$ et $Q$ sont premiers entre eux, $\ker(PQ)(f) = \ker P(f)\oplus\ker Q(f)$. Avec Cayley-Hamilton ($\chi_f(f) = 0$) : si $\chi_f = PQ$ avec $P\wedge Q = 1$, alors $E = \ker P(f)\oplus\ker Q(f)$.</p>` },
+  "x-ideal": { t: "Idéaux de ℂ[X]", b: R`$$I\text{ idéal de }\mathbb C[X],\ I\neq\{0\}\ \Longrightarrow\ \exists!\,\pi\text{ unitaire},\ I = \pi\,\mathbb C[X].$$$$D\text{ unitaire},\ D\mid X^n\iff D = X^r,\ 0\leqslant r\leqslant n.$$` },
+  "x-noyaux": { t: "Lemme des noyaux", b: R`$$P\wedge Q = 1\ \Longrightarrow\ \ker(PQ)(f) = \ker P(f)\oplus\ker Q(f).$$$$\chi_f = PQ,\ P\wedge Q = 1\ \overset{\text{C.-H.}}\Longrightarrow\ E = \ker P(f)\oplus\ker Q(f).$$` },
   "x-proj": { t: "Projecteurs", b: R`<p>$p$ est un projecteur si $p\circ p = p$. Alors $E = \operatorname{Im}p\oplus\ker p$, et $\operatorname{Im}p = \{x : p(x) = x\}$.</p>` },
   "x-commute": { t: "Endomorphismes qui commutent", b: R`<p>Si $f\circ g = g\circ f$, alors $\ker f$ et $\operatorname{Im}f$ sont stables par $g$ : si $f(x) = 0$, alors $f(g(x)) = g(f(x)) = 0$.</p>` },
   "x-passage": { t: "Changement de base", b: R`<p>Si $A$ est la matrice de $\alpha$ dans les bases $(e,f)$, et $P_e = \operatorname{Pass}(e,e')$, $P_f = \operatorname{Pass}(f,f')$, alors la matrice de $\alpha$ dans $(e',f')$ est</p><div class="sbox">$$A' = P_f^{-1}\,A\,P_e.$$</div>` }
@@ -1100,14 +1100,14 @@ LEMME.exercises([
 ]);
 LEMME.rappels({
   "g-leibniz": { t: "Déterminant par les permutations", b: R`<div class="sbox">$$\det(B) = \sum_{\sigma\in\mathcal S_n}\varepsilon(\sigma)\prod_{i=1}^nb_{\sigma(i),i}.$$</div><p>Une transposition a pour signature $-1$. Une permutation qui n'est pas l'identité déplace au moins deux éléments : elle a au plus $n-2$ points fixes.</p>` },
-  "g-lin-ligne": { t: "Linéarité par rapport à une ligne", b: R`<p>Si la ligne $1$ d'une matrice s'écrit $L = L'+L''$, alors $\det(\dots) = \det(\text{avec }L')+\det(\text{avec }L'')$, les autres lignes restant identiques.</p>` },
+  "g-lin-ligne": { t: "Linéarité par rapport à une ligne", b: R`$$L_1 = L'+L''\ \Longrightarrow\ \det\begin{pmatrix}L_1\\L_2\\\vdots\end{pmatrix} = \det\begin{pmatrix}L'\\L_2\\\vdots\end{pmatrix}+\det\begin{pmatrix}L''\\L_2\\\vdots\end{pmatrix}.$$` },
   "g-dev": { t: "Développement suivant une ligne", b: R`<div class="sbox">$$\det B = \sum_{j=1}^n(-1)^{i+j}b_{i,j}\,\Delta_{i,j},$$</div><p>où $\Delta_{i,j}$ est le déterminant obtenu en supprimant la ligne $i$ et la colonne $j$. Si la ligne $i$ n'a qu'un coefficient non nul, il ne reste qu'un terme.</p>` },
   "g-bloc-tri": { t: "Déterminant triangulaire par blocs", b: R`<div class="sbox">$$\det\begin{pmatrix}A&C\\0&D\end{pmatrix} = \det\begin{pmatrix}A&0\\C'&D\end{pmatrix} = \det A\cdot\det D\quad(A,D\ \text{carrées}).$$</div>` },
-  "g-indep": { t: "Indépendance", b: R`<p>Si $Y_1,\dots,Y_m$ sont indépendantes : $P\big(\bigcap_k(Y_k\in B_k)\big) = \prod_kP(Y_k\in B_k)$. Des fonctions de paquets disjoints de variables indépendantes sont indépendantes (lemme des coalitions).</p>` },
+  "g-indep": { t: "Indépendance", b: R`$$Y_1,\dots,Y_m\text{ indépendantes}\ \Longrightarrow\ P\Big(\bigcap_k(Y_k\in B_k)\Big) = \prod_kP(Y_k\in B_k).$$<p>Coalitions : fonctions de paquets disjoints $\Rightarrow$ indépendantes.</p>` },
   "g-binom": { t: "Loi binomiale", b: R`<p>Une somme de $N$ variables de Bernoulli indépendantes de paramètre $p$ suit la loi $\mathcal B(N,p)$ :</p><div class="sbox">$$P(Y = k) = \binom Nkp^k(1-p)^{N-k},\qquad E(Y) = Np,\qquad V(Y) = Np(1-p).$$</div>` },
   "g-tcheb": { t: "Inégalité de Bienaymé-Tchebychev", b: R`<p>Si $X$ admet une variance, pour tout $\varepsilon>0$ :</p><div class="sbox">$$P\big(|X-E(X)|\geqslant\varepsilon\big)\leqslant\frac{V(X)}{\varepsilon^2}.$$</div>` },
   "g-huygens": { t: "Formule de König-Huygens", b: R`<div class="sbox">$$V(X) = E(X^2)-E(X)^2.$$</div>` },
-  "g-indic": { t: "Indicatrices", b: R`<p>$\mathbf 1_A\mathbf 1_B = \mathbf 1_{A\cap B}$ et $E(\mathbf 1_A) = P(A)$. Une variable de Bernoulli est l'indicatrice de l'événement où elle vaut $1$.</p>` }
+  "g-indic": { t: "Indicatrices", b: R`$$\mathbf 1_A\mathbf 1_B = \mathbf 1_{A\cap B},\qquad E(\mathbf 1_A) = P(A),\qquad X\sim\mathcal B(p)\Rightarrow X = \mathbf 1_{(X = 1)}.$$` }
 });
 
 /* Dessin de graphes pour les énoncés et corrigés */

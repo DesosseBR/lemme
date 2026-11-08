@@ -5,13 +5,13 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 4, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "e3a-lagrange": { t: "Extrema liés (multiplicateur de Lagrange)", b: R`<p>Soit $f,g$ de classe $\mathcal C^1$ sur un ouvert de $\mathbb R^n$ et $H = \{g = 0\}$. Si $f_{|H}$ a un extremum local en $a$ et si $\nabla g(a)\neq0$, alors $\nabla f(a)$ est colinéaire à $\nabla g(a)$ : il existe $\lambda\in\mathbb R$ avec $\nabla f(a) = \lambda\nabla g(a)$.</p><p>C'est une condition <b>nécessaire</b> : elle donne des candidats, qu'il faut ensuite étudier.</p>` },
+  "e3a-lagrange": { t: "Extrema liés (multiplicateur de Lagrange)", b: R`$$\left\{\begin{aligned}&f,g\in\mathcal C^1,\ H = \{g = 0\}\\&f_{|H}\text{ extremum local en }a,\ \nabla g(a)\neq0\end{aligned}\right.\quad\Longrightarrow\quad\exists\lambda\in\mathbb R,\ \nabla f(a) = \lambda\nabla g(a).$$<p>Condition <b>nécessaire</b> : donne des candidats.</p>` },
   "e3a-distance": { t: "Distance à un hyperplan", b: R`<p>Dans un espace euclidien, si $F = \{X : \langle X,N\rangle = 0\}$ avec $N\neq0$, alors $F^\perp = \operatorname{Vect}(N)$ et</p><div class="sbox">$$d(Y,F) = \|p_{F^\perp}(Y)\| = \frac{|\langle Y,N\rangle|}{\|N\|}.$$</div><p>Le minimum de $\|Y-V\|$ pour $V\in F$ est atteint en un seul point : $V = p_F(Y)$.</p>` },
   "e3a-geo": { t: "Somme géométrique", b: R`<p>Pour $q\neq1$ : $\displaystyle\sum_{r=0}^{n-1}q^r = \frac{1-q^n}{1-q}$. Pour $q = 1$, la somme vaut $n$.</p>` },
-  "e3a-annul": { t: "Polynôme annulateur scindé à racines simples", b: R`<p>Si une matrice $A$ annule un polynôme scindé à racines simples, alors $A$ est diagonalisable, et ses valeurs propres sont parmi les racines de ce polynôme.</p>` },
-  "e3a-trace": { t: "Trace et valeurs propres", b: R`<p>Si $A$ est diagonalisable de valeurs propres $\lambda_1,\dots,\lambda_n$ (répétées selon leur multiplicité), alors $\operatorname{tr}A = \lambda_1+\dots+\lambda_n$ et $\operatorname{tr}(A^2) = \lambda_1^2+\dots+\lambda_n^2$.</p>` },
-  "e3a-se": { t: "Séries entières", b: R`<p>La somme d'une série entière de rayon $R$ est de classe $\mathcal C^\infty$ sur $]-R,R[$, et on la dérive terme à terme. Si $R = +\infty$, c'est vrai sur $\mathbb R$ tout entier.</p>` },
-  "e3a-iaf": { t: "Inégalité des accroissements finis", b: R`<p>Si $f$ est dérivable sur un intervalle $I$ et $|f'|\leqslant M$ sur $I$, alors $|f(x)-f(y)|\leqslant M|x-y|$ pour tous $x,y\in I$.</p>` }
+  "e3a-annul": { t: "Polynôme annulateur scindé à racines simples", b: R`$$P(A) = 0,\ P\text{ scindé à racines simples}\ \Longrightarrow\ A\text{ diagonalisable},\quad\operatorname{Sp}A\subset P^{-1}(0).$$` },
+  "e3a-trace": { t: "Trace et valeurs propres", b: R`$$A\text{ diagonalisable},\ \operatorname{Sp}A = (\lambda_1,\dots,\lambda_n)\ \Longrightarrow\ \operatorname{tr}A = \sum\lambda_i,\quad\operatorname{tr}(A^2) = \sum\lambda_i^2.$$` },
+  "e3a-se": { t: "Séries entières", b: R`$$S(x) = \sum a_nx^n,\ \text{rayon }R\ \Longrightarrow\ S\in\mathcal C^\infty(]-R,R[),\quad S^{(k)} = \sum\big(a_nx^n\big)^{(k)}.$$` },
+  "e3a-iaf": { t: "Inégalité des accroissements finis", b: R`$$\forall t\in I,\ |f'(t)|\leqslant M\ \Longrightarrow\ \forall x,y\in I,\ |f(x)-f(y)|\leqslant M|x-y|.$$` }
 });
 
 const ENONCE1 = R`<p>Soit $f$ la fonction définie sur $\mathbb R^4$ (muni de son produit scalaire canonique) par $f(X) = x^2+y^2+z^2+t^2$ pour $X = (x,y,z,t)$. On cherche les extrema éventuels de $f$ sous la contrainte $H = \{X\in\mathbb R^4 : x+y = 2\}$, et les points où ils sont atteints.</p>

@@ -4,9 +4,9 @@ const R = String.raw;
 const C1 = { subj: "maths", year: "mpsi", chap: 1 };
 
 LEMME.rappels({
-  "ap-inj": { t: "Injective, surjective, bijective", b: R`<ul><li>$f : E\to F$ est <b>injective</b> si $\forall x,x'\in E,\ f(x) = f(x')\Rightarrow x = x'$ (tout élément de $F$ a <b>au plus</b> un antécédent).</li><li><b>Surjective</b> si $\forall y\in F,\ \exists x\in E,\ y = f(x)$ (tout élément a <b>au moins</b> un antécédent).</li><li><b>Bijective</b> si elle est injective et surjective (tout élément a <b>exactement</b> un antécédent).</li></ul>` },
-  "ap-reciproque": { t: "Bijection réciproque", b: R`<p>S'il existe $g : F\to E$ avec $g\circ f = \mathrm{Id}_E$ et $f\circ g = \mathrm{Id}_F$, alors $f$ est bijective et $f^{-1} = g$. En particulier, si $f\circ f = \mathrm{Id}_E$, $f$ est bijective et $f^{-1} = f$.</p>` },
-  "ap-composee": { t: "Composées", b: R`<ul><li>$g\circ f$ injective $\Rightarrow f$ injective ;</li><li>$g\circ f$ surjective $\Rightarrow g$ surjective ;</li><li>une composée de bijections est une bijection.</li></ul>` }
+  "ap-inj": { t: "Injective, surjective, bijective", b: R`$$\begin{aligned}f\text{ injective}&\iff\forall x,x'\in E,\ f(x) = f(x')\Rightarrow x = x'\\f\text{ surjective}&\iff\forall y\in F,\ \exists x\in E,\ y = f(x)\\f\text{ bijective}&\iff\forall y\in F,\ \exists!\,x\in E,\ y = f(x)\end{aligned}$$` },
+  "ap-reciproque": { t: "Bijection réciproque", b: R`$$g\circ f = \mathrm{Id}_E,\ f\circ g = \mathrm{Id}_F\ \Longrightarrow\ f\text{ bijective},\ f^{-1} = g;\qquad f\circ f = \mathrm{Id}_E\Rightarrow f^{-1} = f.$$` },
+  "ap-composee": { t: "Composées", b: R`$$g\circ f\text{ injective}\Rightarrow f\text{ injective};\qquad g\circ f\text{ surjective}\Rightarrow g\text{ surjective};\qquad f,g\text{ bijectives}\Rightarrow g\circ f\text{ bijective}.$$` }
 });
 
 LEMME.exercises([

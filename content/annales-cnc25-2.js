@@ -4,10 +4,10 @@ const R = String.raw;
 const P = { subj: "annales", year: "mp", chap: 6, kind: "probleme", qnav: true, side: true };
 
 LEMME.rappels({
-  "c2-trace": { t: "Propriétés de la trace", b: R`<ul><li>$\operatorname{Tr}$ est linéaire ;</li><li>$\operatorname{Tr}(MN) = \operatorname{Tr}(NM)$ ;</li><li>deux matrices semblables ont la même trace ;</li><li>$\operatorname{Tr}(M)$ est la somme des valeurs propres (comptées avec multiplicité) quand $\chi_M$ est scindé.</li></ul>` },
-  "c2-spectral": { t: "Théorème spectral", b: R`<p>Toute matrice symétrique réelle $S$ s'écrit $S = PDP^\top$ avec $P$ orthogonale ($P^\top P = I_n$) et $D$ diagonale réelle. Les colonnes de $P$ forment une base orthonormée de vecteurs propres.</p>` },
-  "c2-proj": { t: "Projecteur", b: R`<p>Un endomorphisme $p$ avec $p\circ p = p$ est le projecteur sur $\operatorname{Im}p$ parallèlement à $\ker p$, et $E = \operatorname{Im}p\oplus\ker p$.</p>` },
-  "c2-eij": { t: "Matrices élémentaires", b: R`<p>$E_{i,j}$ a un seul coefficient non nul, un $1$ en position $(i,j)$. Règle de calcul : $E_{i,j}E_{k,l} = \delta_{j,k}E_{i,l}$ (le produit est nul si les indices « intérieurs » diffèrent). Toute matrice s'écrit $M = \sum_{i,j}m_{i,j}E_{i,j}$.</p>` }
+  "c2-trace": { t: "Propriétés de la trace", b: R`$$\operatorname{Tr}\text{ linéaire},\quad\operatorname{Tr}(MN) = \operatorname{Tr}(NM),\quad\operatorname{Tr}(P^{-1}MP) = \operatorname{Tr}M,\quad\chi_M\text{ scindé}\Rightarrow\operatorname{Tr}M = \sum\lambda_i.$$` },
+  "c2-spectral": { t: "Théorème spectral", b: R`$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ S = PDP^\top,\quad P^\top P = I_n,\quad D\text{ diagonale réelle}.$$<p>Colonnes de $P$ : base orthonormée de vecteurs propres.</p>` },
+  "c2-proj": { t: "Projecteur", b: R`$$p\circ p = p\ \Longrightarrow\ E = \operatorname{Im}p\oplus\ker p,\quad p = \text{projecteur sur }\operatorname{Im}p\parallel\ker p.$$` },
+  "c2-eij": { t: "Matrices élémentaires", b: R`$$E_{i,j}E_{k,l} = \delta_{j,k}E_{i,l},\qquad M = \sum_{i,j}m_{i,j}E_{i,j}.$$` }
 });
 
 const EX = R`<p>On considère $A = \begin{pmatrix}1&-1&1\\-1&1&1\\-1&-1&3\end{pmatrix}$ et $I_3$.</p>

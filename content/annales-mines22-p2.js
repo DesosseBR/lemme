@@ -68,12 +68,12 @@ const F_MODES = fig(420, 210, "Modes propres d'une corde fixée",
   "Ondes stationnaires : $n-1$ nœuds intérieurs, fréquences $f_n = \\frac{nc}{2\\ell}$.");
 
 LEMME.rappels({
-  "ph-cond": { t: "Condensateur plan", b: R`<p>Entre deux plans portant $\pm\sigma$, le champ est uniforme, $E = \frac{\sigma}{\varepsilon_0}$, dirigé de la plaque $+$ vers la plaque $-$. La tension vaut $U = Ed$.</p>` },
-  "ph-coulomb": { t: "Potentiel et énergie électrostatiques", b: R`<p>Potentiel créé par une charge ponctuelle $q$ à la distance $r$ : $V = \frac q{4\pi\varepsilon_0r}$. Énergie d'interaction d'un système de charges : $E = \frac12\sum_iq_iV_i$, où $V_i$ est le potentiel créé en $i$ par les autres charges. Énergie d'une charge dans un potentiel extérieur : $qV_{\text{ext}}$.</p>` },
-  "ph-laplace": { t: "Équation de Laplace", b: R`<p>Sans charge, $\operatorname{div}\vec E = 0$ (Maxwell-Gauss) et $\vec E = -\overrightarrow{\operatorname{grad}}V$, donc $\Delta V = 0$. En polaires (sans dépendance en $z$) : $\Delta V = \frac1r\frac{\partial}{\partial r}\Big(r\frac{\partial V}{\partial r}\Big)+\frac1{r^2}\frac{\partial^2V}{\partial\theta^2}$.</p>` },
-  "ph-hooke": { t: "Loi de Hooke et ressort équivalent", b: R`<p>$\frac{\delta\ell}{\ell_0} = \frac1E\frac F{S_0}$, soit $F = \frac{ES_0}{\ell_0}\delta\ell$ : un fil élastique est un ressort de raideur $k = \frac{ES_0}{\ell_0}$. $N$ ressorts en parallèle : $k_{\text{éq}} = Nk$.</p>` },
+  "ph-cond": { t: "Condensateur plan", b: R`$$E = \frac\sigma{\varepsilon_0}\ (\text{de }+\text{ vers }-),\qquad U = Ed.$$` },
+  "ph-coulomb": { t: "Potentiel et énergie électrostatiques", b: R`$$V = \frac q{4\pi\varepsilon_0r},\qquad E_{\text{int}} = \frac12\sum_iq_iV_i,\qquad E = qV_{\text{ext}}.$$` },
+  "ph-laplace": { t: "Équation de Laplace", b: R`$$\operatorname{div}\vec E = 0,\ \vec E = -\overrightarrow{\operatorname{grad}}V\ \Longrightarrow\ \Delta V = 0,\qquad\Delta V = \frac1r\frac\partial{\partial r}\Big(r\frac{\partial V}{\partial r}\Big)+\frac1{r^2}\frac{\partial^2V}{\partial\theta^2}.$$` },
+  "ph-hooke": { t: "Loi de Hooke et ressort équivalent", b: R`$$\frac{\delta\ell}{\ell_0} = \frac1E\frac F{S_0}\iff F = k\,\delta\ell,\quad k = \frac{ES_0}{\ell_0};\qquad N\text{ en parallèle : }k_{\text{éq}} = Nk.$$` },
   "ph-polaire": { t: "Accélération en coordonnées polaires", b: R`<p>Pour un mouvement circulaire de rayon $\ell$ : $\vec a = -\ell\dot\theta^2\vec e_r+\ell\ddot\theta\,\vec e_\theta$.</p>` },
-  "ph-alembert": { t: "Équation de d'Alembert", b: R`<p>$\frac{\partial^2z}{\partial t^2}-c^2\frac{\partial^2z}{\partial x^2} = 0$. Solutions : $f(x-ct)+g(x+ct)$ (ondes progressives). Pour une corde fixée en $0$ et $\ell$ : ondes stationnaires, $k_n = \frac{n\pi}\ell$, $f_n = \frac{nc}{2\ell}$.</p>` }
+  "ph-alembert": { t: "Équation de d'Alembert", b: R`$$\frac{\partial^2z}{\partial t^2}-c^2\frac{\partial^2z}{\partial x^2} = 0\iff z = f(x-ct)+g(x+ct).$$$$\text{Corde fixée en }0,\ell\ :\quad k_n = \frac{n\pi}\ell,\qquad f_n = \frac{nc}{2\ell}.$$` }
 });
 
 const E1 = R`<p>Formulaire : $\varepsilon_0\simeq\frac1{36\pi}\times10^{-9}\ \mathrm{F\cdot m^{-1}}$, $g = 10\ \mathrm{m\cdot s^{-2}}$, $\rho_e = 1{,}0\times10^3\ \mathrm{kg\cdot m^{-3}}$. Applications numériques avec un chiffre significatif.</p>

@@ -5,7 +5,7 @@ const P = { subj: "annales", year: "mp", chap: 24, kind: "probleme", qnav: true,
 const S = (q, t, h, b, rappels) => ({ q, t, h, b, rappels });
 
 LEMME.rappels({
-  "c26b-diag": { t: "Critères de diagonalisabilité", b: R`<p>Un endomorphisme est diagonalisable si et seulement s'il annule un polynôme scindé à racines simples, si et seulement si son polynôme caractéristique est scindé et la dimension de chaque sous-espace propre égale la multiplicité de la valeur propre.</p>` },
+  "c26b-diag": { t: "Critères de diagonalisabilité", b: R`$$u\text{ diagonalisable}\iff\exists P\text{ scindé à racines simples},\ P(u) = 0\iff\chi_u\text{ scindé et }\forall\lambda,\ \dim E_\lambda = m_\lambda.$$` },
   "c26b-commute": { t: "Endomorphismes qui commutent", b: R`<p>Si $uv = vu$, tout sous-espace propre (et tout noyau, toute image) de $u$ est stable par $v$. L'endomorphisme induit par un endomorphisme diagonalisable sur un sous-espace stable est diagonalisable (il annule le même polynôme scindé à racines simples).</p>` },
   "c26b-ch": { t: "Cayley-Hamilton", b: R`<p>Pour $A\in\mathcal M_n(\mathbb K)$, $\chi_A(A) = 0$. Sur $\mathbb C$, $\chi_A = \prod(X-\lambda_i)$ et $\operatorname{Sp}_{\mathbb C}(A)$ est l'ensemble des racines de $\chi_A$.</p>` },
   "c26b-adj": { t: "Adjoint", b: R`<p>Dans un espace euclidien, l'adjoint $\Phi^*$ de $\Phi$ est l'unique endomorphisme tel que $\langle\Phi(M)|N\rangle = \langle M|\Phi^*(N)\rangle$ pour tous $M,N$. $\Phi$ est autoadjoint si $\Phi^* = \Phi$, orthogonal si $\|\Phi(M)\| = \|M\|$ pour tout $M$.</p>` },

@@ -4,8 +4,8 @@ const R = String.raw;
 const C1 = { subj: "maths", year: "mpsi", chap: 1 };
 
 LEMME.rappels({
-  "rel-eq": { t: "Relation d'équivalence", b: R`<p>$\mathcal R$ est une relation d'équivalence si elle est</p><ul><li><b>réflexive</b> : $x\,\mathcal R\,x$ ;</li><li><b>symétrique</b> : $x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x$ ;</li><li><b>transitive</b> : $(x\,\mathcal R\,y\ \text{et}\ y\,\mathcal R\,z)\Rightarrow x\,\mathcal R\,z$.</li></ul><p>La <b>classe</b> de $x$ est $\mathrm{Cl}(x) = \{y : y\,\mathcal R\,x\}$. Les classes forment une partition de l'ensemble.</p>` },
-  "rel-ordre": { t: "Relation d'ordre", b: R`<p>$\preccurlyeq$ est une relation d'ordre si elle est <b>réflexive</b>, <b>antisymétrique</b> ($x\preccurlyeq y$ et $y\preccurlyeq x\Rightarrow x = y$) et <b>transitive</b>. L'ordre est <b>total</b> si deux éléments sont toujours comparables : $x\preccurlyeq y$ ou $y\preccurlyeq x$.</p>` }
+  "rel-eq": { t: "Relation d'équivalence", b: R`$$\mathcal R\text{ d'équivalence}\iff\left\{\begin{aligned}&x\mathcal Rx\\&x\mathcal Ry\Rightarrow y\mathcal Rx\\&x\mathcal Ry\wedge y\mathcal Rz\Rightarrow x\mathcal Rz\end{aligned}\right.\qquad\mathrm{Cl}(x) = \{y : y\mathcal Rx\}.$$<p>Les classes forment une partition.</p>` },
+  "rel-ordre": { t: "Relation d'ordre", b: R`$$\preccurlyeq\text{ d'ordre}\iff\left\{\begin{aligned}&x\preccurlyeq x\\&x\preccurlyeq y\wedge y\preccurlyeq x\Rightarrow x = y\\&x\preccurlyeq y\wedge y\preccurlyeq z\Rightarrow x\preccurlyeq z\end{aligned}\right.\qquad\text{total}\iff\forall x,y,\ x\preccurlyeq y\vee y\preccurlyeq x.$$` }
 });
 
 LEMME.exercises([

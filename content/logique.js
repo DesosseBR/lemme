@@ -4,12 +4,12 @@ const R = String.raw;
 const C0 = { subj: "maths", year: "mpsi", chap: 0 };
 
 LEMME.rappels({
-  "lg-ou-et": { t: "« et », « ou »", b: R`<p>« $A$ et $B$ » est vrai quand <b>les deux</b> sont vrais. « $A$ ou $B$ » est vrai quand <b>au moins un</b> des deux est vrai (le « ou » mathématique est inclusif).</p><p>En termes d'ensembles : « et » correspond à l'intersection $\cap$, « ou » à la réunion $\cup$.</p>` },
+  "lg-ou-et": { t: "« et », « ou »", b: R`$$A\wedge B\ :\ \text{les deux};\qquad A\vee B\ :\ \text{au moins un (ou inclusif)}.$$$$x\in A\cap B\iff x\in A\wedge x\in B,\qquad x\in A\cup B\iff x\in A\vee x\in B.$$` },
   "lg-implication": { t: "L'implication", b: R`<p>« $A\Rightarrow B$ » est <b>fausse dans un seul cas</b> : $A$ vraie et $B$ fausse. Elle est vraie dès que $A$ est fausse.</p><div class="sbox">$$(A\Rightarrow B)\iff(\text{non}A\ \text{ou}\ B).$$</div>` },
-  "lg-negation": { t: "Nier une phrase quantifiée", b: R`<ul><li>$\text{non}(\forall x,\ A(x))\iff\exists x,\ \text{non}A(x)$ ;</li><li>$\text{non}(\exists x,\ A(x))\iff\forall x,\ \text{non}A(x)$ ;</li><li>$\text{non}(A\ \text{et}\ B)\iff\text{non}A\ \text{ou}\ \text{non}B$ ; $\text{non}(A\ \text{ou}\ B)\iff\text{non}A\ \text{et}\ \text{non}B$ ;</li><li>$\text{non}(A\Rightarrow B)\iff A\ \text{et}\ \text{non}B$.</li></ul><p>On change chaque $\forall$ en $\exists$ (et inversement), dans le même ordre, et on nie la phrase finale.</p>` },
+  "lg-negation": { t: "Nier une phrase quantifiée", b: R`$$\begin{aligned}\neg(\forall x,\ A(x))&\iff\exists x,\ \neg A(x)\\\neg(\exists x,\ A(x))&\iff\forall x,\ \neg A(x)\\\neg(A\wedge B)&\iff\neg A\vee\neg B\\\neg(A\vee B)&\iff\neg A\wedge\neg B\\\neg(A\Rightarrow B)&\iff A\wedge\neg B\end{aligned}$$` },
   "lg-contraposee": { t: "Contraposée", b: R`<div class="sbox">$$(A\Rightarrow B)\iff(\text{non}B\Rightarrow\text{non}A).$$</div><p>Pour montrer $A\Rightarrow B$, on peut supposer $B$ fausse et montrer que $A$ est fausse.</p>` },
-  "lg-disjonction": { t: "Disjonction de cas", b: R`<p>Si les cas $C_1,\dots,C_k$ couvrent toutes les possibilités (par exemple « $n$ pair » et « $n$ impair »), il suffit de démontrer le résultat dans chaque cas.</p>` },
-  "lg-parite": { t: "Pair, impair", b: R`<p>$n\in\mathbb Z$ est pair s'il existe $p\in\mathbb Z$ avec $n = 2p$, impair s'il existe $p\in\mathbb Z$ avec $n = 2p+1$. Tout entier est pair ou impair (division euclidienne par $2$, reste $0$ ou $1$).</p>` }
+  "lg-disjonction": { t: "Disjonction de cas", b: R`$$C_1\vee\dots\vee C_k\text{ toujours vrai},\quad\forall i,\ C_i\Rightarrow P\qquad\Longrightarrow\qquad P.$$` },
+  "lg-parite": { t: "Pair, impair", b: R`$$n\text{ pair}\iff\exists p\in\mathbb Z,\ n = 2p;\qquad n\text{ impair}\iff\exists p\in\mathbb Z,\ n = 2p+1.$$` }
 });
 
 LEMME.exercises([

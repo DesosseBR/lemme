@@ -1,11 +1,11 @@
 /* Khôlles MPSI (deuxième recueil) : ensembles, applications, relations ; calculs ; réels ; complexes.
    Exercices reformulés et corrigés pas à pas. Sujet caché « kholles », année MPSI. */
 LEMME.rappels({
-  "k-inj": { t: "Injection, surjection, bijection", b: R`<ul><li>$f$ <b>injective</b> : $f(x) = f(x')\Rightarrow x = x'$ (deux éléments distincts ont des images distinctes).</li><li>$f$ <b>surjective</b> : tout $y$ de l'ensemble d'arrivée a au moins un antécédent.</li><li>$f$ <b>bijective</b> : tout $y$ a exactement un antécédent.</li></ul><div class="sbox">$$f\ \text{bijective}\iff\forall y\in F,\ \exists!\,x\in E,\ f(x) = y.$$</div><p><b>Méthode :</b> pour étudier $f$, on résout l'équation $y = f(x)$ d'inconnue $x$ : le nombre de solutions dit tout.</p>` },
+  "k-inj": { t: "Injection, surjection, bijection", b: R`$$\begin{aligned}f\text{ injective}&\iff\forall x,x',\ f(x) = f(x')\Rightarrow x = x',\\f\text{ surjective}&\iff\forall y\in F,\ \exists x\in E,\ f(x) = y,\\f\text{ bijective}&\iff\forall y\in F,\ \exists!\,x\in E,\ f(x) = y.\end{aligned}$$<p>Méthode : résoudre $y = f(x)$ d'inconnue $x$.</p>` },
   "k-compo": { t: "Composée d'applications", b: R`<div class="sbox">$$f,g\ \text{injectives}\Rightarrow g\circ f\ \text{injective},\qquad f,g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective}.$$</div><p>Et dans l'autre sens : $g\circ f$ injective $\Rightarrow f$ injective ; $g\circ f$ surjective $\Rightarrow g$ surjective.</p>` },
   "k-relation": { t: "Relations binaires", b: R`<p>Une relation $\mathcal R$ sur $E$ peut être :</p><ul><li>réflexive : $x\,\mathcal R\,x$ ;</li><li>symétrique : $x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x$ ;</li><li>antisymétrique : $x\,\mathcal R\,y$ et $y\,\mathcal R\,x\Rightarrow x = y$ ;</li><li>transitive : $x\,\mathcal R\,y$ et $y\,\mathcal R\,z\Rightarrow x\,\mathcal R\,z$.</li></ul><div class="sbox">$$\text{ordre} = \text{réflexive + antisymétrique + transitive},\qquad\text{équivalence} = \text{réflexive + symétrique + transitive}.$$</div><p>Un ordre est <b>total</b> si deux éléments sont toujours comparables.</p>` },
   "k-sup-ordre": { t: "Maximum et borne supérieure", b: R`<p>Dans un ensemble ordonné, le <b>maximum</b> de $A$ est un élément de $A$ qui majore $A$. La <b>borne supérieure</b> de $A$ est le plus petit des majorants de $A$ (s'il existe) ; elle n'est pas forcément dans $A$.</p><div class="sbox">$$\max A\ \text{existe}\ \Longrightarrow\ \sup A = \max A.$$</div>` },
-  "k-strict-mono": { t: "Monotonie stricte et injectivité", b: R`<p>Une fonction strictement monotone sur une partie de $\mathbb R$ est injective. Si de plus elle est continue sur un intervalle $I$, elle réalise une bijection de $I$ sur l'intervalle $f(I)$.</p>` }
+  "k-strict-mono": { t: "Monotonie stricte et injectivité", b: R`$$f\text{ strictement monotone}\ \Longrightarrow\ f\text{ injective};\qquad+\ f\in\mathcal C(I)\ \Longrightarrow\ f : I\to f(I)\text{ bijective}.$$` }
 });
 
 (() => {
@@ -285,8 +285,8 @@ LEMME.exercises([
 })();
 
 LEMME.rappels({
-  "k-max-N": { t: "Parties de ℕ", b: R`<p>Toute partie non vide de $\mathbb N$ a un plus petit élément. Toute partie non vide et <b>majorée</b> (en particulier finie) de $\mathbb N$ a un plus grand élément.</p>` },
-  "k-recurrence-forte": { t: "Récurrence forte", b: R`<p>Si $P(0)$ est vraie et si, pour tout $n$, « $P(0),\dots,P(n-1)$ vraies » entraîne $P(n)$, alors $P(n)$ est vraie pour tout $n$.</p>` },
+  "k-max-N": { t: "Parties de ℕ", b: R`$$\varnothing\neq A\subset\mathbb N\ \Longrightarrow\ \min A\text{ existe};\qquad A\text{ majorée}\ \Longrightarrow\ \max A\text{ existe}.$$` },
+  "k-recurrence-forte": { t: "Récurrence forte", b: R`$$\left\{\begin{aligned}&P(0)\\&\forall n,\ \big(P(0)\wedge\dots\wedge P(n-1)\big)\Rightarrow P(n)\end{aligned}\right.\quad\Longrightarrow\quad\forall n,\ P(n).$$` },
   "k-tan-diff": { t: "Tangente d'une différence", b: R`<div class="sbox">$$\tan(a-b) = \frac{\tan a-\tan b}{1+\tan a\tan b},$$</div><p>valable quand $a$, $b$ et $a-b$ sont hors de $\frac\pi2+\pi\mathbb Z$. Et $\tan\frac\pi6 = \frac1{\sqrt3}$.</p>` }
 });
 
@@ -549,7 +549,7 @@ LEMME.rappels({
   "k-binome-somme": { t: "Sommes de coefficients binomiaux", b: R`<div class="sbox">$$\sum_{k=0}^n\binom nk = 2^n,\qquad\sum_{k=0}^n\binom nkx^k = (1+x)^n,\qquad\sum_{k=0}^n(-1)^k\binom nk = 0\ (n\geqslant1).$$</div>` },
   "k-cs-somme": { t: "Inégalité de Cauchy-Schwarz (sommes)", b: R`<div class="sbox">$$\Big(\sum_{k=1}^na_kb_k\Big)^2\leqslant\Big(\sum a_k^2\Big)\Big(\sum b_k^2\Big).$$</div>` },
   "k-abel-somme": { t: "Sommation par parties (Abel)", b: R`<p>Avec $S_k = x_1+\dots+x_k$ et $S_0 = 0$ :</p><div class="sbox">$$\sum_{k=1}^nkx_k = \sum_{k=1}^nk(S_k-S_{k-1}) = nS_n-\sum_{k=1}^{n-1}S_k.$$</div>` },
-  "k-irrationnel": { t: "Rationnels et irrationnels", b: R`<p>$\mathbb Q$ est stable par somme, produit, et quotient (par un non nul). Donc si $x\notin\mathbb Q$ et $r\in\mathbb Q$ : $x+r\notin\mathbb Q$, et $rx\notin\mathbb Q$ si $r\neq0$.</p><p>$\sqrt2$, $\sqrt3$, $\sqrt6$, $\sqrt[3]2$ sont irrationnels.</p>` }
+  "k-irrationnel": { t: "Rationnels et irrationnels", b: R`$$x\notin\mathbb Q,\ r\in\mathbb Q\ \Longrightarrow\ x+r\notin\mathbb Q,\qquad r\neq0\Rightarrow rx\notin\mathbb Q.$$$$\sqrt2,\ \sqrt3,\ \sqrt6,\ \sqrt[3]2\notin\mathbb Q.$$` }
 });
 
 (() => {
@@ -834,7 +834,7 @@ LEMME.rappels({
   "k-alignes": { t: "Alignement et angle droit en complexes", b: R`<p>Pour $A,B,C$ d'affixes $a,b,c$ avec $A\neq B$ :</p><div class="sbox">$$A,B,C\ \text{alignés}\iff\frac{c-a}{b-a}\in\mathbb R,\qquad(AB)\perp(AC)\iff\frac{c-a}{b-a}\in i\mathbb R.$$</div>` },
   "k-reel-conj": { t: "Réel, imaginaire pur et conjugué", b: R`<div class="sbox">$$w\in\mathbb R\iff\bar w = w,\qquad w\in i\mathbb R\iff\bar w = -w.$$</div><p>Et $\frac uv\in\mathbb R\iff u\bar v\in\mathbb R$ (on multiplie par $|v|^2>0$).</p>` },
   "k-second-degre-c": { t: "Équation du second degré dans ℂ", b: R`<p>$az^2+bz+c = 0$ ($a\neq0$) : avec $\Delta = b^2-4ac$ et $\delta^2 = \Delta$,</p><div class="sbox">$$z = \frac{-b\pm\delta}{2a}.$$</div><p>Une racine double si $\Delta = 0$, deux racines distinctes sinon.</p>` },
-  "k-conique": { t: "Hyperbole équilatère", b: R`<p>$\frac{Y^2}{a^2}-\frac{X^2}{a^2} = 1$ : hyperbole équilatère d'axe focal vertical, de sommets $(0,\pm a)$, de foyers $(0,\pm a\sqrt2)$, d'excentricité $\sqrt2$, d'asymptotes $Y = \pm X$.</p>` }
+  "k-conique": { t: "Hyperbole équilatère", b: R`$$\frac{Y^2}{a^2}-\frac{X^2}{a^2} = 1\ :\quad\text{sommets }(0,\pm a),\quad\text{foyers }(0,\pm a\sqrt2),\quad e = \sqrt2,\quad\text{asymptotes }Y = \pm X.$$` }
 });
 
 (() => {
