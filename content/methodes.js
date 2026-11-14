@@ -726,7 +726,14 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 <div class="sbox">$$\chi_A = \det(XI_n - A) = X^n - \operatorname{tr}(A)\,X^{n-1} + \cdots + (-1)^n\det A.$$</div>
 <p class="ml">Taille 2 : la formule à connaître</p>
 <div class="sbox">$$\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A.$$</div>
-$$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}:\quad\chi_A = X^2 - 2X - 3 = (X - \cB3)(X + \cB1),\qquad\operatorname{Sp}(A) = \{\cB{-1},\cB3\}.$$
+<p class="ml">Exemple</p>
+$$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}.$$
+<p><b>Avec la formule.</b></p>
+$$\left\{\begin{aligned}\operatorname{tr}A &= 1 + 1 = \cO2\\\det A &= 1\times1 - 2\times2 = \cO{-3}\end{aligned}\right.\qquad\Longrightarrow\qquad\chi_A = X^2 - \cO2X + (\cO{-3}) = X^2 - 2X - 3.$$
+$$\Delta = (-2)^2 - 4\times(-3) = 4 + 12 = 16 = 4^2,\qquad\lambda = \frac{2\pm4}{2}\ \Longrightarrow\ \lambda = \cB3\ \text{ou}\ \lambda = \cB{-1}.$$
+<p><b>Ou directement avec le déterminant</b> (et on évite le discriminant) :</p>
+$$\chi_A = \begin{vmatrix}X-1&-2\\-2&X-1\end{vmatrix} = (X-1)^2 - (-2)(-2) = (X-1)^2 - 2^2 = (X - 1 - 2)(X - 1 + 2) = (X - \cB3)(X + \cB1).$$
+$$\operatorname{Sp}(A) = \{\cB{-1},\cB3\}.$$
 <p class="ml">Les cas immédiats</p>
 <ul>
 <li>$A$ triangulaire : $\chi_A = \prod_i(X - a_{i,i})$, les valeurs propres sont sur la diagonale.</li>
@@ -744,19 +751,27 @@ $$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}:\quad\chi_A = X^2 - 2X - 3 = (X - \cB
 </ol>
 <p class="ml">Exemple 1 : lignes de même somme</p>
 $$A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\qquad(\text{chaque ligne a pour somme}\ \cB4).$$
-<p><b>Étape 1.</b> On écrit $XI_3 - A$ et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$ :</p>
+<p><b>Étape 1.</b> On écrit $XI_3 - A$ (on met $X - a_{i,i}$ sur la diagonale et $-a_{i,j}$ ailleurs) et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$. Sur chaque ligne, la nouvelle première case vaut :</p>
+$$(X - 2) + (-1) + (-1) = \cB{X - 4}.$$
 $$\chi_A = \begin{vmatrix}X-2&-1&-1\\-1&X-2&-1\\-1&-1&X-2\end{vmatrix} = \begin{vmatrix}\cB{X-4}&-1&-1\\\cB{X-4}&X-2&-1\\\cB{X-4}&-1&X-2\end{vmatrix} = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\1&X-2&-1\\1&-1&X-2\end{vmatrix}.$$
-<p><b>Étape 2.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ : la matrice devient triangulaire.</p>
-$$\chi_A = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\0&\cR{X-1}&0\\0&0&\cR{X-1}\end{vmatrix} = \cB{(X-4)}\,\cR{(X-1)^2}.$$
+<p><b>Étape 2.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ :</p>
+$$\left\{\begin{aligned}L_2 - L_1 &= \big(1 - 1,\ (X-2) - (-1),\ -1 - (-1)\big) = (0,\ \cR{X - 1},\ 0)\\L_3 - L_1 &= \big(1 - 1,\ -1 - (-1),\ (X-2) - (-1)\big) = (0,\ 0,\ \cR{X - 1})\end{aligned}\right.$$
+<p>La matrice est triangulaire : son déterminant est le produit de la diagonale.</p>
+$$\chi_A = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\0&\cR{X-1}&0\\0&0&\cR{X-1}\end{vmatrix} = \cB{(X-4)}\times1\times\cR{(X-1)}\times\cR{(X-1)} = \cB{(X-4)}\,\cR{(X-1)^2}.$$
 <p>Sans aucune factorisation de degré 3 : $\operatorname{Sp}(A) = \{\cB4, \cR1\}$, avec $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
 <p class="ml">Exemple 2 : deux lignes presque égales</p>
+$$B = \begin{pmatrix}3&1&-1\\1&3&-1\\0&0&2\end{pmatrix}:\qquad\text{les deux premières lignes de}\ XI_3 - B\ \text{se ressemblent}.$$
+<p>On calcule la nouvelle première ligne :</p>
+$$L_1 - L_2 = \big((X-3) - (-1),\ -1 - (X-3),\ 1 - 1\big) = \big(\cB{X - 2},\ \cB{-(X - 2)},\ 0\big).$$
 $$\chi_B = \begin{vmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{vmatrix}\underset{\cO{L_1\leftarrow L_1 - L_2}}{=}\begin{vmatrix}\cB{X-2}&\cB{-(X-2)}&0\\-1&X-3&1\\0&0&X-2\end{vmatrix} = \cB{(X-2)}\begin{vmatrix}1&-1&0\\-1&X-3&1\\0&0&X-2\end{vmatrix}.$$
 <p>On développe selon la dernière ligne (un seul coefficient non nul) :</p>
-$$\chi_B = \cB{(X-2)}\cdot(X-2)\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = (X-2)^2(X - 4).$$
+$$\chi_B = \cB{(X-2)}\times(X-2)\times(-1)^{3+3}\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix}.$$
+$$\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = 1\times(X-3) - (-1)\times(-1) = X - 3 - 1 = X - 4.$$
+$$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.\ \checkmark$$
 <p class="ml">Vérifier son $\chi_A$ en 10 secondes</p>
 <ul>
 <li>Le coefficient de $X^{n-1}$ doit être $-\operatorname{tr}A$ : ici $-(4 + 1 + 1) = -6 = -\operatorname{tr}A$.</li>
-<li>$\chi_A(0) = (-1)^n\det A$.</li>
+<li>$\chi_A(0) = (-1)^n\det A$ : ici $\chi_A(0) = (0-4)(0-1)^2 = -4$ et $\det A = 4$, donc $(-1)^3\times4 = -4$. $\checkmark$</li>
 </ul>
 
 <h2 id="r-sanschi">5. Trouver des valeurs propres sans calculer $\chi_A$</h2>
@@ -769,7 +784,9 @@ $$\chi_B = \cB{(X-2)}\cdot(X-2)\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = (X-2)^
 <div><b>Il reste une valeur à trouver</b><span>Utiliser $\operatorname{tr}A = \sum m_\lambda\lambda$.</span></div>
 </div>
 <p class="ml">Exemple</p>
-$$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}:\ \operatorname{rg}A = 1\ \Longrightarrow\ 0\ \text{double au moins},\ \text{l'autre} = \operatorname{tr}A = 3,\qquad\chi_A = X^2(X - 3).$$
+$$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
+$$\left\{\begin{aligned}&\text{les 3 lignes sont égales}\ \Longrightarrow\ \operatorname{rg}A = 1\\&\dim\cG{E_0} = \dim\operatorname{Ker}A = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2\\&\operatorname{tr}A = 1 + 1 + 1 = 3 = 0 + 0 + \lambda\ \Longrightarrow\ \lambda = \cB3\end{aligned}\right.\qquad\Longrightarrow\qquad\chi_A = X^2(X - \cB3).$$
+<p>Contrôle : chaque ligne a pour somme $3$, donc $A(1,1,1) = 3(1,1,1)$, ce qui confirme $\cB3\in\operatorname{Sp}(A)$.</p>
 
 <h2 id="r-esp">6. Calculer un sous-espace propre</h2>
 <p class="ml">Méthode</p>
@@ -779,9 +796,16 @@ $$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}:\ \operatorname{rg}A = 1\ 
 <li>Écrire $\cG{E_\lambda}$ comme un $\operatorname{Vect}$ et vérifier la dimension : $\dim\cG{E_\lambda} = n - \operatorname{rg}(A - \cB\lambda I_n)$.</li>
 </ol>
 <p class="ml">Exemple : la matrice de l'exemple 1, avec $\cB\lambda = 1$</p>
-$$A - \cB1\,I_3 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}:\ \text{rang}\ 1,\ \text{une seule équation}\ x + y + z = 0.$$
-$$\cG{E_1} = \{(x,y,z) : z = -x - y\} = \operatorname{Vect}\Big(\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}},\ \cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\Big),\qquad\dim\cG{E_1} = 2.$$
-<p>Et pour $\cB\lambda = 4$, chaque ligne a pour somme $4$ : $\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)}$.</p>
+<p>On cherche $X = (x, y, z)$ tel que $(A - \cB1\,I_3)X = 0$ :</p>
+$$A - \cB1\,I_3 = \begin{pmatrix}2-1&1&1\\1&2-1&1\\1&1&2-1\end{pmatrix} = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}x + y + z &= 0\\x + y + z &= 0\\x + y + z &= 0\end{aligned}\right.$$
+$$\underset{\cO{L_2\leftarrow L_2 - L_1,\ L_3\leftarrow L_3 - L_1}}{\Longleftrightarrow}\qquad x + y + z = 0\qquad\Longleftrightarrow\qquad z = -x - y.$$
+<p>Les inconnues libres sont $x$ et $y$. On remplace $z$ dans $X$ et on sépare selon $x$ et $y$ :</p>
+$$X = \begin{pmatrix}x\\y\\-x-y\end{pmatrix} = x\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}} + y\cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\qquad\Longrightarrow\qquad\cG{E_1} = \operatorname{Vect}\Big(\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}},\ \cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\Big),\qquad\dim\cG{E_1} = 2.$$
+<p class="ml">Et pour $\cB\lambda = 4$</p>
+$$A - \cB4\,I_3 = \begin{pmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-2x + y + z &= 0\quad(L_1)\\x - 2y + z &= 0\quad(L_2)\\x + y - 2z &= 0\quad(L_3)\end{aligned}\right.$$
+$$\left\{\begin{aligned}\cO{L_1 - L_2}&:\ -3x + 3y = 0\ \Longrightarrow\ y = x\\\cO{L_2 - L_3}&:\ -3y + 3z = 0\ \Longrightarrow\ z = y\end{aligned}\right.\qquad\Longrightarrow\qquad X = \begin{pmatrix}x\\x\\x\end{pmatrix} = x\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}}.$$
+$$\cG{E_4} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}},\qquad\dim\cG{E_4} = 1.$$
+<p>On contrôle avec $L_1$ : $-2x + x + x = 0$. $\checkmark$</p>
 <p class="ml piege">Piège</p>
 <p>Si tu trouves $\cG{E_\lambda} = \{0\}$, ton $\lambda$ n'est pas une valeur propre : erreur dans $\chi_A$ ou dans le pivot.</p>
 
@@ -813,13 +837,20 @@ $$\cG{E_1} = \{(x,y,z) : z = -x - y\} = \operatorname{Vect}\Big(\cR{\begin{pmatr
 <li>Vérifier $AP = PD$ (plus rapide que $P^{-1}AP = D$, et on n'a pas besoin de $P^{-1}$).</li>
 </ol>
 <p class="ml">Exemple complet : $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$</p>
-<p><b>1–2.</b> $\chi_A = (X - \cB4)(X - \cB1)^2$ (§4), donc $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
-<p><b>3.</b> $\dim\cG{E_1} = 3 - \operatorname{rg}(A - I_3) = 3 - 1 = 2 = \cO{m_1}$ : $A$ est diagonalisable.</p>
-<p><b>4.</b> $\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)}$, $\cG{E_1} = \operatorname{Vect}\big(\cR{(1,0,-1)}, \cR{(0,1,-1)}\big)$.</p>
+<p><b>1–2.</b> Calcul détaillé au §4 (on fait $C_1\leftarrow C_1 + C_2 + C_3$, puis $L_2\leftarrow L_2 - L_1$, $L_3\leftarrow L_3 - L_1$) :</p>
+$$\chi_A = (X - \cB4)(X - \cB1)^2,\qquad\cO{m_4 = 1},\qquad\cO{m_1 = 2}.$$
+<p><b>3.</b> Seule $\cB1$ est multiple, c'est la seule à vérifier :</p>
+$$A - I_3 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\ \text{(3 lignes égales)}\ \Longrightarrow\ \operatorname{rg}(A - I_3) = 1\ \Longrightarrow\ \dim\cG{E_1} = 3 - 1 = 2 = \cO{m_1}.$$
+<p>Donc $A$ est diagonalisable.</p>
+<p><b>4.</b> Les systèmes sont résolus en entier au §6 :</p>
+$$\cG{E_4}:\ \left\{\begin{aligned}-2x + y + z &= 0\\x - 2y + z &= 0\\x + y - 2z &= 0\end{aligned}\right.\ \Longleftrightarrow\ x = y = z,\qquad\cG{E_1}:\ x + y + z = 0\ \Longleftrightarrow\ z = -x - y.$$
+$$\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)},\qquad\cG{E_1} = \operatorname{Vect}\big(\cR{(1,0,-1)},\ \cR{(0,1,-1)}\big).$$
 <p><b>5.</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
 <div class="labm"><table><tr><td></td><td class="kB">$\lambda = 4$</td><td class="kB">$\lambda = 1$</td><td class="kB">$\lambda = 1$</td></tr><tr><td></td><td class="c1">1</td><td class="c2">1</td><td class="c3">0</td></tr><tr><td></td><td class="c1">1</td><td class="c2">0</td><td class="c3">1</td></tr><tr><td></td><td class="c1">1</td><td class="c2">−1</td><td class="c3">−1</td></tr></table><span class="lab-cap">$P$ : chaque colonne est un vecteur propre</span></div>
 $$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-1}.$$
-<p><b>6.</b> Vérification de la première colonne : $A\cR{(1,1,1)} = (4,4,4) = \cB4\cR{(1,1,1)}$.</p>
+<p><b>6.</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
+$$\left\{\begin{aligned}A\cR{(1,1,1)} &= (2+1+1,\ 1+2+1,\ 1+1+2) = (4,4,4) = \cB4\cR{(1,1,1)}\\A\cR{(1,0,-1)} &= (2+0-1,\ 1+0-1,\ 1+0-2) = (1,0,-1) = \cB1\cR{(1,0,-1)}\\A\cR{(0,1,-1)} &= (0+1-1,\ 0+2-1,\ 0+1-2) = (0,1,-1) = \cB1\cR{(0,1,-1)}\end{aligned}\right.$$
+$$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.\ \checkmark$$
 <div data-mlab="diag"></div>
 
 <h2 id="r-trig">9. Trigonaliser</h2>
@@ -833,9 +864,20 @@ $$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-
 <li>Résoudre $(A - \lambda I_2)\cG{e_2} = \cR{e_1}$.</li>
 <li>Alors $A\cG{e_2} = \cR{e_1} + \lambda\cG{e_2}$, d'où $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</li>
 </ol>
-$$A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}:\ \chi_A = X^2 - 4X + 4 = (X - \cB2)^2,\quad A - 2I_2 = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}\ \text{de rang}\ 1:\ \text{pas diagonalisable}.$$
-$$\cR{e_1} = \begin{pmatrix}1\\1\end{pmatrix},\qquad(A - 2I_2)\cG{e_2} = \cR{e_1}\iff-x + y = 1:\ \cG{e_2} = \begin{pmatrix}0\\1\end{pmatrix}.$$
-$$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix}\cB2&1\\0&\cB2\end{pmatrix},\qquad\text{vérification}:\ A\cG{e_2} = \begin{pmatrix}1\\3\end{pmatrix} = \cR{e_1} + 2\cG{e_2}.$$
+<p class="ml">Exemple</p>
+$$A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}.$$
+<p><b>1. $\chi_A$.</b></p>
+$$\operatorname{tr}A = 1 + 3 = 4,\qquad\det A = 1\times3 - 1\times(-1) = 4,\qquad\chi_A = X^2 - 4X + 4 = (X - \cB2)^2.$$
+<p><b>2. Le sous-espace propre.</b> On résout $(A - 2I_2)X = 0$ avec $X = (x, y)$ :</p>
+$$A - 2I_2 = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 0\\-x + y &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = x.$$
+$$\cG{E_2} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\end{pmatrix}},\qquad\dim\cG{E_2} = 1\lt2 = \cO{m_2}\ \Longrightarrow\ \text{pas diagonalisable}.$$
+<p><b>3. Le premier vecteur</b> : $\cR{e_1} = (1,1)$, et on contrôle $A\cR{e_1} = (1 + 1,\ -1 + 3) = (2,2) = 2\cR{e_1}$.</p>
+<p><b>4. Le deuxième vecteur</b> : on résout $(A - 2I_2)\cG{e_2} = \cR{e_1}$ avec $\cG{e_2} = (x, y)$ :</p>
+$$\begin{pmatrix}-1&1\\-1&1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 1\\-x + y &= 1\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = 1 + x.$$
+<p>N'importe quelle solution convient : avec $x = 0$, on prend $\cG{e_2} = (0, 1)$.</p>
+<p><b>5. Vérification et conclusion.</b></p>
+$$A\cG{e_2} = \begin{pmatrix}1\times0 + 1\times1\\-1\times0 + 3\times1\end{pmatrix} = \begin{pmatrix}1\\3\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix} + 2\begin{pmatrix}0\\1\end{pmatrix} = \cR{e_1} + \cB2\cG{e_2}.$$
+$$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix}\cB2&1\\0&\cB2\end{pmatrix},\qquad A = PTP^{-1}.$$
 <p class="ml">Taille 3 : les cas possibles</p>
 <table class="mtab">
 <tr><th>$\chi_A$</th><th>Dimensions</th><th>Ce qu'on fait</th><th>Forme de $T$</th></tr>
@@ -844,10 +886,21 @@ $$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix
 <tr><td>$(X-\lambda)^3$</td><td>$\dim E_\lambda = 1$</td><td>$e_1\in E_\lambda$, $(A - \lambda I)e_2 = e_1$, $(A - \lambda I)e_3 = e_2$</td><td>$\begin{pmatrix}\lambda&1&0\\0&\lambda&1\\0&0&\lambda\end{pmatrix}$</td></tr>
 </table>
 <p class="ml">Exemple : $\chi_A = (X - 1)^3$, $\dim E_1 = 2$</p>
-$$A = \begin{pmatrix}0&1&1\\-1&2&1\\0&0&1\end{pmatrix},\qquad A - I_3 = \begin{pmatrix}-1&1&1\\-1&1&1\\0&0&0\end{pmatrix}\ \text{de rang}\ 1\ \Longrightarrow\ \dim\cG{E_1} = 2\lt3.$$
-<p>$\cG{E_1}$ : $-x + y + z = 0$, base $\cR{e_1 = (1,1,0)}$, $\cR{e_2 = (1,0,1)}$. Pour $e_3$, on remarque que $(A - I_3)(x,y,z) = (-x + y + z)\cR{(1,1,0)}$ : il suffit que $-x + y + z\neq0$.</p>
-$$\cG{e_3} = (0,1,0):\quad(A - I_3)\cG{e_3} = \cR{e_1},\ \text{soit}\ A\cG{e_3} = \cR{e_1} + \cG{e_3}.$$
-$$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad\det P = -1\neq0.$$
+$$A = \begin{pmatrix}0&1&1\\-1&2&1\\0&0&1\end{pmatrix}.$$
+<p><b>1. $\chi_A$.</b> La dernière ligne de $XI_3 - A$ n'a qu'un coefficient non nul : on développe selon elle.</p>
+$$\chi_A = \begin{vmatrix}X&-1&-1\\1&X-2&-1\\0&0&X-1\end{vmatrix} = (X-1)\times(-1)^{3+3}\begin{vmatrix}X&-1\\1&X-2\end{vmatrix}.$$
+$$\begin{vmatrix}X&-1\\1&X-2\end{vmatrix} = X(X-2) - (-1)\times1 = X^2 - 2X + 1 = (X-1)^2\qquad\Longrightarrow\qquad\chi_A = (X - \cB1)^3.$$
+<p><b>2. Le sous-espace propre.</b> On résout $(A - I_3)X = 0$ :</p>
+$$A - I_3 = \begin{pmatrix}-1&1&1\\-1&1&1\\0&0&0\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y + z &= 0\\-x + y + z &= 0\\0 &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad x = y + z.$$
+$$X = \begin{pmatrix}y+z\\y\\z\end{pmatrix} = y\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}} + z\cR{\begin{pmatrix}1\\0\\1\end{pmatrix}},\qquad\cG{E_1} = \operatorname{Vect}(\cR{e_1}, \cR{e_2}),\qquad\dim\cG{E_1} = 2\lt3 = \cO{m_1}.$$
+<p>Donc $A$ n'est pas diagonalisable : on trigonalise (cas 2 du tableau).</p>
+<p><b>3. Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
+$$(A - I_3)\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}-x + y + z\\-x + y + z\\0\end{pmatrix} = (-x + y + z)\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}}.$$
+<p>Il suffit que $-x + y + z\neq0$ pour sortir de $\cG{E_1}$. Avec $\cG{e_3} = (0,1,0)$ : $-0 + 1 + 0 = 1$, donc $(A - I_3)\cG{e_3} = \cR{e_1}$.</p>
+$$A\cG{e_3} = \begin{pmatrix}0\times0 + 1\times1 + 1\times0\\-1\times0 + 2\times1 + 1\times0\\0\end{pmatrix} = \begin{pmatrix}1\\2\\0\end{pmatrix} = \begin{pmatrix}1\\1\\0\end{pmatrix} + \begin{pmatrix}0\\1\\0\end{pmatrix} = \cR{e_1} + \cB1\cG{e_3}.\ \checkmark$$
+<p><b>4. $P$ est inversible</b> (développement selon la première ligne) :</p>
+$$\det P = \begin{vmatrix}1&1&0\\1&0&1\\0&1&0\end{vmatrix} = 1\times\begin{vmatrix}0&1\\1&0\end{vmatrix} - 1\times\begin{vmatrix}1&1\\0&0\end{vmatrix} = 1\times(0 - 1) - 1\times(0 - 0) = -1\neq0.$$
+$$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PTP^{-1}.$$
 <p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
 
 <h2 id="r-annul">10. Polynômes annulateurs</h2>
@@ -905,58 +958,35 @@ $$\chi_A = X^2 - 4X + 4\ \Longrightarrow\ A^2 - 4A + 4I_2 = 0\ \Longrightarrow\ 
 <div data-mlab="quizred"></div>
 
 <h2 id="r-arbre">L'arbre de la réduction</h2>
-<p>Clique sur une question pour ouvrir ses réponses. Chaque feuille renvoie à la bonne partie.</p>
-<div class="dtree">
-<details open><summary class="q0">J'ai une matrice $A$ (ou un endomorphisme $u$) à étudier</summary>
-<ul>
-<li><details open><summary class="q1">L'énoncé donne-t-il une information spéciale ?</summary>
-<ul>
-<li><details><summary class="y">Oui : une relation $P(A) = 0$</summary><ul>
-<li><a href="#r-annul">$\operatorname{Sp}(A)\subset$ racines de $P$</a></li>
-<li><details><summary class="q2">$P$ scindé à racines simples ?</summary><ul><li class="ok"><a href="#r-crit">oui : diagonalisable</a></li><li><a href="#r-annul">non : chercher $\pi_A$, ou calculer $\chi_A$</a></li></ul></details></li>
-</ul></details></li>
-<li><details><summary class="y">Oui : $A$ symétrique réelle</summary><ul><li class="ok"><a href="#r-crit">diagonalisable en base orthonormée</a></li></ul></details></li>
-<li><details><summary class="y">Oui : les valeurs propres</summary><ul>
-<li><a href="#r-enonce">trace, déterminant, inversibilité immédiats</a></li>
-<li><details><summary class="q2">$n$ valeurs propres distinctes ?</summary><ul><li class="ok"><a href="#r-crit">oui : diagonalisable, chaque $E_\lambda$ est une droite</a></li><li><a href="#r-esp">non : calculer $\dim E_\lambda$ des multiples</a></li></ul></details></li>
-</ul></details></li>
-<li><details><summary class="y">Oui : $A$ nilpotente</summary><ul><li class="no"><a href="#r-crit">$\operatorname{Sp} = \{0\}$ : diagonalisable seulement si $A = 0$</a></li><li><a href="#r-trig">sinon : trigonaliser</a></li></ul></details></li>
-<li><details><summary class="y">Oui : $\operatorname{rg}A = 1$</summary><ul><li><a href="#r-sanschi">$\chi_A = X^{n-1}(X - \operatorname{tr}A)$</a></li><li class="ok"><a href="#r-enonce">diagonalisable $\iff\operatorname{tr}A\neq0$</a></li></ul></details></li>
-<li><details open><summary class="n">Non : on calcule</summary><ul>
-<li><details open><summary class="q2">Étape 1 : trouver $\chi_A$</summary><ul>
-<li><a href="#r-chi">taille 2 : $X^2 - \operatorname{tr}(A)X + \det A$</a></li>
-<li><a href="#r-chi">triangulaire : la diagonale</a></li>
-<li><a href="#r-zeros">lignes de même somme : $C_1\leftarrow C_1 + \cdots + C_n$</a></li>
-<li><a href="#r-zeros">lignes presque égales : $L_i\leftarrow L_i - L_j$</a></li>
-<li><a href="#r-sanschi">deviner une valeur propre, finir avec la trace</a></li>
-</ul></details></li>
-<li><details open><summary class="q2">Étape 2 : $\chi_A$ est-il scindé ?</summary><ul>
-<li><details><summary class="n">Non (sur $\mathbb R$)</summary><ul><li class="no"><a href="#r-crit">ni diagonalisable ni trigonalisable sur $\mathbb R$</a></li><li><a href="#r-trig">travailler sur $\mathbb C$</a></li></ul></details></li>
-<li><details open><summary class="y">Oui</summary><ul>
-<li><details open><summary class="q2">Étape 3 : racines simples ?</summary><ul>
-<li class="ok"><a href="#r-diag">oui : diagonalisable, une droite propre par valeur propre</a></li>
-<li><details open><summary class="n">Non : il y a des valeurs propres multiples</summary><ul>
-<li><details open><summary class="q2">Étape 4 : $\dim E_\lambda = m_\lambda$ pour chaque $\lambda$ multiple ?</summary><ul>
-<li class="ok"><a href="#r-diag">oui : diagonalisable, $P$ = vecteurs propres en colonnes</a></li>
-<li><details><summary class="n">non</summary><ul>
-<li class="no"><a href="#r-crit">pas diagonalisable</a></li>
-<li class="ok"><a href="#r-trig">trigonaliser : vecteurs propres, puis $(A - \lambda I)e = e_{\text{précédent}}$</a></li>
-</ul></details></li>
-</ul></details></li>
-</ul></details></li>
-</ul></details></li>
-</ul></details></li>
-</ul></details></li>
-<li><details><summary class="q2">Et après ? À quoi va servir la réduction</summary><ul>
-<li><a href="#r-appli">$A^n = PD^nP^{-1}$</a></li>
-<li><a href="#r-appli">suites $X_{n+1} = AX_n$</a></li>
-<li><a href="#r-appli">systèmes $X' = AX$</a></li>
-<li><a href="#r-annul">inverse par Cayley-Hamilton</a></li>
-</ul></details></li>
-</ul>
-</details></li>
-</ul>
-</details>
+<p>Le logigramme se lit de haut en bas. Un losange pose une question, un rectangle donne la conclusion. Clique un rectangle pour aller à la partie.</p>
+<div class="lg">
+<div class="lg-r"><div class="lg-c1"><div class="lg-start">J'ai une matrice $A$ (ou un endomorphisme $u$) à étudier</div></div></div>
+<div class="lg-v"></div>
+<div class="lg-r"><div class="lg-c1"><div class="lg-d"><span>L'énoncé donne-t-il une information spéciale ?</span></div></div><div class="lg-h"><span>oui</span></div><div class="lg-c3"><div class="lg-box lg-list">
+<a href="#r-annul"><b>$P(A) = 0$</b> : $\operatorname{Sp}(A)\subset\{\text{racines de}\ P\}$ ; $P$ scindé à racines simples $\Rightarrow$ <em class="ok">diagonalisable</em></a>
+<a href="#r-crit"><b>$A$ symétrique réelle</b> : <em class="ok">diagonalisable en base orthonormée</em></a>
+<a href="#r-enonce"><b>Les valeurs propres</b> : trace, déterminant, inversibilité ; $n$ valeurs propres distinctes $\Rightarrow$ <em class="ok">diagonalisable</em></a>
+<a href="#r-crit"><b>$A$ nilpotente</b> : $\operatorname{Sp}(A) = \{0\}$ ; <em class="no">diagonalisable seulement si $A = 0$</em>, sinon trigonaliser</a>
+<a href="#r-sanschi"><b>$\operatorname{rg}A = 1$</b> : $\chi_A = X^{n-1}(X - \operatorname{tr}A)$ ; <em class="ok">diagonalisable</em> $\iff\operatorname{tr}A\neq0$</a>
+</div></div></div>
+<div class="lg-v"><span>non</span></div>
+<div class="lg-r"><div class="lg-c1"><div class="lg-p">Calculer $\chi_A = \det(XI_n - A)$</div></div><div class="lg-h lg-dash"><span>comment ?</span></div><div class="lg-c3"><div class="lg-box lg-list">
+<a href="#r-chi">taille 2 : $X^2 - \operatorname{tr}(A)X + \det A$</a>
+<a href="#r-chi">triangulaire : produit des $(X - a_{i,i})$</a>
+<a href="#r-zeros">lignes de même somme : $C_1\leftarrow C_1 + \cdots + C_n$</a>
+<a href="#r-zeros">lignes presque égales : $L_i\leftarrow L_i - L_j$</a>
+<a href="#r-sanschi">deviner une valeur propre, finir avec la trace</a>
+</div></div></div>
+<div class="lg-v"></div>
+<div class="lg-r"><div class="lg-c1"><div class="lg-d"><span>$\chi_A$ est-il scindé ?</span></div></div><div class="lg-h"><span>non</span></div><div class="lg-c3"><a class="lg-box no" href="#r-crit">Ni diagonalisable ni trigonalisable sur $\mathbb R$ : travailler sur $\mathbb C$</a></div></div>
+<div class="lg-v"><span>oui</span></div>
+<div class="lg-r"><div class="lg-c1"><div class="lg-d"><span>Racines simples ?<br><small>$n$ valeurs propres distinctes</small></span></div></div><div class="lg-h"><span>oui</span></div><div class="lg-c3"><a class="lg-box ok" href="#r-diag">Diagonalisable, chaque $E_\lambda$ est une droite</a></div></div>
+<div class="lg-v"><span>non</span></div>
+<div class="lg-r"><div class="lg-c1"><div class="lg-d"><span>$\dim E_\lambda = m_\lambda$ pour chaque $\lambda$ multiple ?</span></div></div><div class="lg-h"><span>oui</span></div><div class="lg-c3"><a class="lg-box ok" href="#r-diag">Diagonalisable : $P$ = vecteurs propres en colonnes, $D$ = valeurs propres</a></div></div>
+<div class="lg-v"><span>non</span></div>
+<div class="lg-r"><div class="lg-c1"><a class="lg-box tr" href="#r-trig">Pas diagonalisable : trigonaliser.<br>Vecteurs propres, puis $(A - \lambda I_n)e_{k+1} = e_k$</a></div></div>
+<div class="lg-v"></div>
+<div class="lg-r"><div class="lg-c1"><a class="lg-start" href="#r-appli">Et après : $A^n = PD^nP^{-1}$, suites $X_{k+1} = AX_k$, systèmes $X' = AX$, inverse par Cayley-Hamilton</a></div></div>
 </div>
 `
 };

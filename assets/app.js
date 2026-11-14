@@ -1492,31 +1492,106 @@ const randUni = n => { let P = Array.from({ length: n }, (_, i) => Array.from({ 
 const inv2 = P => { const d = det2(P); return [[P[1][1] / d, -P[0][1] / d], [-P[1][0] / d, P[0][0] / d]]; };
 /* inverse exacte d'une matrice unimodulaire (det ±1), par la comatrice */
 const invUni = P => { const n = P.length, d = detN(P); return Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => ((i + j) % 2 ? -1 : 1) * detN(minor(P, j, i)) / d)); };
+/* aides pour les calculs détaillés de la réduction */
+const lin = (cs, vs) => { let s = ""; cs.forEach((c, i) => { if (!c.n) return; const neg = c.n < 0, a = Fr(Math.abs(c.n), c.d), co = a.n === 1 && a.d === 1 ? "" : ftex(a); s += s ? (neg ? " - " : " + ") : (neg ? "-" : ""); s += co + vs[i]; }); return s || "0"; };
+const polyTex = cs => { const n = cs.length - 1; let s = ""; cs.forEach((c, i) => { if (!c) return; const d = n - i, a = Math.abs(c), mon = d === 0 ? "" : d === 1 ? "X" : `X^{${d}}`, co = a === 1 && d ? "" : String(a); s += s ? (c < 0 ? " - " : " + ") : (c < 0 ? "-" : ""); s += co + mon; }); return s || "0"; };
+const sysTex = (rows, vs) => rows.length === 1 ? `${lin(rows[0], vs)} = 0` : `\\left\\{\\begin{aligned}${rows.map(r => `${lin(r, vs)} &= 0`).join("\\\\")}\\end{aligned}\\right.`;
+const lcmN = (a, b) => a / gcd(a, b) * b;
+/* noyau de M (entiers) par le pivot de Gauss, en gardant la trace des opérations */
+function kerSteps(M) {
+  const R = M.map(r => r.map(v => Fr(v))), ops = [], piv = [], n = R[0].length; let r = 0;
+  for (let c = 0; c < n && r < R.length; c++) {
+    let i = r; while (i < R.length && !R[i][c].n) i++;
+    if (i === R.length) continue;
+    if (i !== r) { [R[i], R[r]] = [R[r], R[i]]; ops.push(`L_{${r + 1}}\\leftrightarrow L_{${i + 1}}`); }
+    for (let k = 0; k < R.length; k++) {
+      if (k === r || !R[k][c].n) continue;
+      const f = fdiv(R[k][c], R[r][c]);
+      R[k] = R[k].map((v, j) => fadd(v, fmul(Fr(-f.n, f.d), R[r][j])));
+      const a = Fr(Math.abs(f.n), f.d), co = a.n === 1 && a.d === 1 ? "" : ftex(a);
+      ops.push(`L_{${k + 1}}\\leftarrow L_{${k + 1}} ${f.n > 0 ? "-" : "+"} ${co}L_{${r + 1}}`);
+    }
+    piv.push([r, c]); r++;
+  }
+  const pc = piv.map(p => p[1]), free = [...Array(n).keys()].filter(j => !pc.includes(j));
+  const expr = piv.map(([ri, c]) => ({ c, co: free.map(f => fdiv(Fr(-R[ri][f].n, R[ri][f].d), R[ri][c])) }));
+  const basis = free.map(f => { const v = Array(n).fill(0).map(() => Fr(0)); v[f] = Fr(1); expr.forEach(e => { v[e.c] = e.co[free.indexOf(f)]; }); const L = v.reduce((s, x) => lcmN(s, x.d), 1); return v.map(x => x.n * L / x.d); });
+  return { R: R.filter(row => row.some(v => v.n)), ops, free, expr, basis };
+}
+/* Arbre « accolades de manuel » : on réécrit l'ancien .tree (chaînes question / oui / non) */
+const BRACE = '<svg class="brc" viewBox="0 0 16 100" preserveAspectRatio="none" aria-hidden="true"><path d="M14 1C6 1 8 10 8 25S8 45 2 50C8 55 8 60 8 75S6 99 14 99" fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>';
+function braceTree(el) {
+  const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
+  const chain = tb => { const out = []; let cur = null, fin = null; [...tb.children].forEach(c => { if (c.classList.contains("tq")) { cur = { q: c.innerHTML }; out.push(cur); } else if (c.classList.contains("tend")) fin = c; else if (c.classList.contains("tl") && cur) cur.yes = c; else if (c.classList.contains("tno") && cur) cur.no = c.innerHTML; }); return { out, fin }; };
+  const leaf = (a, cls) => `<a class="bl ${cls}" href="${a.getAttribute("href")}">${a.innerHTML.replace(/^oui\s*:\s*/, "")}</a>`;
+  const rec = (out, i, fin) => i === out.length ? leaf(fin, "end") : `<div class="bn"><div class="bq">${out[i].q}</div><div class="bb">${BRACE}<div class="bk"><div class="br"><i>oui</i>${leaf(out[i].yes, "ok")}</div><div class="br"><i>${out[i].no || "non"}</i><div class="bsub">${rec(out, i + 1, fin)}</div></div></div></div></div>`;
+  const html = brs.map(tb => { const col = [...tb.classList].find(c => /^t[BRGOV]$/.test(c)) || "", { out, fin } = chain(tb); return `<div class="bbr ${col}"><div class="bt">${tb.querySelector(".tt").innerHTML}</div>${rec(out, 0, fin)}</div>`; }).join("");
+  const n = document.createElement("div"); n.className = "btree";
+  n.innerHTML = `<div class="bq broot">${root ? root.innerHTML : ""}</div><div class="bb">${BRACE}<div class="bk">${html}</div></div>`;
+  el.replaceWith(n);
+}
 function mlDiag(host) {
-  let A, P, D, k;
+  let A, D, k, data;
+  const V = ["x", "y", "z"];
   const gen = () => {
     for (;;) {
-      P = randUni(3); if (Math.abs(detN(P)) !== 1 || P.flat().some(v => Math.abs(v) > 4)) continue;
-      const opts = [[1, 2, 3], [2, 2, -1], [0, 1, 1], [3, -1, -1], [1, -2, 4], [2, 2, 5]], dd = opts[rnd(0, opts.length - 1)];
+      const P = randUni(3); if (Math.abs(detN(P)) !== 1 || P.flat().some(v => Math.abs(v) > 3)) continue;
+      const opts = [[1, 2, 3], [2, 2, -1], [0, 1, 1], [3, -1, -1], [1, -2, 4], [2, 2, 5], [1, 1, 3], [-1, 2, 2]], dd = opts[rnd(0, opts.length - 1)];
       D = dd; A = mmul(mmul(P, D.map((v, i) => [0, 1, 2].map(j => i === j ? v : 0))), invUni(P)).map(r => r.map(v => Math.round(v)));
-      if (A.flat().every(v => Math.abs(v) <= 9)) break;
+      if (A.flat().every(v => Math.abs(v) <= 9) && A.flat().filter(v => v === 0).length < 5) break;
     }
     k = 0;
   };
   const draw = () => {
-    const vals = [...new Set(D)], m = v => D.filter(x => x === v).length, col = j => P.map(r => r[j]);
-    const CL = ["cB", "cR", "cG"], cOf = v => CL[vals.indexOf(v)];
-    const chi = vals.map(v => `\\${cOf(v)}{(X ${v < 0 ? "+" : "-"} ${Math.abs(v)})${m(v) > 1 ? `^{${m(v)}}` : ""}}`).join("");
+    const vals = [...new Set(D)].sort((a, b) => Math.abs(a) - Math.abs(b) || a - b), m = v => D.filter(x => x === v).length;
+    const CL = ["cB", "cR", "cG"], cOf = v => CL[vals.indexOf(v)], cv = (v, t) => `\\${cOf(v)}{${t}}`;
+    const a = A, tr = a[0][0] + a[1][1] + a[2][2];
+    const m12 = a[0][0] * a[1][1] - a[0][1] * a[1][0], m13 = a[0][0] * a[2][2] - a[0][2] * a[2][0], m23 = a[1][1] * a[2][2] - a[1][2] * a[2][1], s2 = m12 + m13 + m23;
+    const c11 = m23, c12 = a[1][0] * a[2][2] - a[1][2] * a[2][0], c13 = a[1][0] * a[2][1] - a[1][1] * a[2][0], det = a[0][0] * c11 - a[0][1] * c12 + a[0][2] * c13;
+    const l1 = vals[0], b = l1 - tr, c = s2 + l1 * b, dl = b * b - 4 * c, sq = Math.round(Math.sqrt(dl));
+    const v2 = (-b - sq) / 2, v3 = (-b + sq) / 2;
+    const chi = vals.map(v => cv(v, `(X ${v < 0 ? "+" : "-"} ${Math.abs(v)})${m(v) > 1 ? `^{${m(v)}}` : ""}`)).join("");
+    const mi = (p, q, r, s) => `\\begin{vmatrix}${p}&${q}\\\\${r}&${s}\\end{vmatrix}`;
+    const prod = (p, q, r, s) => `${par(p)}\\times${par(q)} - ${par(r)}\\times${par(s)}`;
+    const kers = vals.map(v => ({ v, M: A.map((r, i) => r.map((x, j) => x - (i === j ? v : 0))) })).map(o => ({ ...o, K: kerSteps(o.M) }));
+    const cols = []; kers.forEach(o => o.K.basis.forEach(bv => cols.push({ v: o.v, bv })));
+    const P = [0, 1, 2].map(i => cols.map(cl => cl.bv[i])), Dl = cols.map(cl => cl.v);
+    const AP = mmul(A, P), PD = P.map(r => r.map((x, j) => x * Dl[j]));
+    const espace = o => {
+      const { v, M, K } = o, fv = K.free.map(f => V[f]);
+      const sol = K.expr.map(e => `${V[e.c]} = ${lin(e.co, fv)}`).join(",\\qquad ");
+      const X = [0, 1, 2].map(j => K.free.includes(j) ? V[j] : lin(K.expr.find(e => e.c === j).co, fv));
+      return `<p class="mlstep">$\\lambda = ${cv(v, v)}$ : on résout $(A - ${par(v)}I_3)X = 0$ avec $X = (x, y, z)$.</p>
+$$A - ${par(v)}I_3 = ${texM(M)}\\qquad\\Longleftrightarrow\\qquad ${sysTex(M.map(r => r.map(x => Fr(x))), V)}$$
+<p class="mlnote">Pivot de Gauss : $${K.ops.length ? K.ops.join(",\\ \\ ") : "rien à faire"}$.</p>
+$$\\Longleftrightarrow\\ ${sysTex(K.R, V)}\\qquad\\Longleftrightarrow\\qquad ${sol}.$$
+<p class="mlnote">Inconnue${fv.length > 1 ? "s" : ""} libre${fv.length > 1 ? "s" : ""} : $${fv.join(", ")}$. On remplace dans $X$ :</p>
+$$X = \\begin{pmatrix}${X.join("\\\\")}\\end{pmatrix}\\ \\Longrightarrow\\ ${cv(v, `E_{${v}}`)} = \\operatorname{Vect}\\Big(${K.basis.map(bv => `\\cR{${texM(bv.map(x => [x]))}}`).join(",\\ ")}\\Big),\\qquad\\dim ${cv(v, `E_{${v}}`)} = ${K.basis.length} = \\cO{m_{${v}}}.$$`;
+    };
     const steps = [
       `$$A = ${texM(A)}$$`,
-      `<p class="mlstep">1. Le polynôme caractéristique (fais des zéros avant de développer) :</p>$$\\chi_A = ${chi}$$<p class="mlnote">Vérification : la somme des valeurs propres comptées avec multiplicité vaut $\\operatorname{tr}A = ${A[0][0] + A[1][1] + A[2][2]}$.</p>`,
-      `<p class="mlstep">2. Le spectre et les multiplicités :</p>$$\\operatorname{Sp}(A) = \\{${vals.map(v => `\\${cOf(v)}{${v}}`).join(",\\ ")}\\},\\qquad ${vals.map(v => `m_{${v}} = ${m(v)}`).join(",\\quad ")}$$`,
-      `<p class="mlstep">3. Les sous-espaces propres, en résolvant $(A - \\lambda I_3)X = 0$ :</p>` + vals.map(v => { const cols = [0, 1, 2].filter(j => D[j] === v); const Al = A.map((r, i) => r.map((x, j) => x - (i === j ? v : 0))); return `$$A - ${par(v)}I_3 = ${texM(Al)}\\ \\Longrightarrow\\ E_{${v}} = \\operatorname{Vect}\\Big(${cols.map(j => `\\${cOf(v)}{${texM(col(j).map(x => [x]))}}`).join(",\\ ")}\\Big),\\ \\dim = ${cols.length} = m_{${v}}$$`; }).join(""),
-      `<p class="mlstep">4. Les vecteurs propres en colonnes, les valeurs propres dans le même ordre :</p>$$P = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => `\\${cOf(D[j])}{${P[i][j]}}`).join("&")).join("\\\\")}\\end{pmatrix},\\qquad D = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => i === j ? `\\${cOf(D[j])}{${D[j]}}` : "0").join("&")).join("\\\\")}\\end{pmatrix}$$`,
-      `<p class="mlstep">5. On vérifie $AP = PD$ sans calculer $P^{-1}$ :</p>$$AP = ${texM(mmul(A, P))} = PD$$<p class="mlres">Donc $A = PDP^{-1}$ : $A$ est diagonalisable.</p>`
+      `<p class="mlstep">1. Le polynôme caractéristique. En taille 3, la formule qui marche toujours :</p><div class="sbox">$$\\chi_A = X^3 - \\operatorname{tr}(A)\\,X^2 + s_2\\,X - \\det A,\\qquad s_2 = \\text{somme des 3 mineurs principaux}.$$</div>
+$$\\operatorname{tr}A = ${par(a[0][0])} + ${par(a[1][1])} + ${par(a[2][2])} = ${tr}$$
+$$s_2 = ${mi(a[0][0], a[0][1], a[1][0], a[1][1])} + ${mi(a[0][0], a[0][2], a[2][0], a[2][2])} + ${mi(a[1][1], a[1][2], a[2][1], a[2][2])} = ${par(m12)} + ${par(m13)} + ${par(m23)} = ${s2}$$
+<p class="mlnote">Chaque mineur : $${mi(a[0][0], a[0][1], a[1][0], a[1][1])} = ${prod(a[0][0], a[1][1], a[0][1], a[1][0])} = ${m12}$, et de même pour les deux autres.</p>
+<p class="mlnote">Le déterminant, en développant selon la première ligne :</p>
+$$\\det A = ${par(a[0][0])}${mi(a[1][1], a[1][2], a[2][1], a[2][2])} - ${par(a[0][1])}${mi(a[1][0], a[1][2], a[2][0], a[2][2])} + ${par(a[0][2])}${mi(a[1][0], a[1][1], a[2][0], a[2][1])}$$
+$$= ${par(a[0][0])}\\times${par(c11)} - ${par(a[0][1])}\\times${par(c12)} + ${par(a[0][2])}\\times${par(c13)} = ${det}$$
+$$\\chi_A = ${polyTex([1, -tr, s2, -det])}$$`,
+      `<p class="mlstep">2. Factoriser : on cherche une racine évidente parmi $0, \\pm1, \\pm2, \\dots$ (des diviseurs de $\\det A$).</p>
+$$\\chi_A(${l1}) = ${par(l1)}^3 - ${par(tr)}\\times${par(l1)}^2 + ${par(s2)}\\times${par(l1)} - ${par(det)} = 0\\quad\\Longrightarrow\\quad${cv(l1, `(X ${l1 < 0 ? "+" : "-"} ${Math.abs(l1)})`)}\\ \\text{divise}\\ \\chi_A.$$
+<p class="mlnote">Division (Horner) : $\\chi_A = (X - ${par(l1)})(X^2 + bX + c)$ avec $b = ${par(l1)} - ${par(tr)} = ${b}$ et $c = ${par(s2)} + ${par(l1)}\\times${par(b)} = ${c}$.</p>
+$$X^2 ${b < 0 ? "-" : "+"} ${Math.abs(b)}X ${c < 0 ? "-" : "+"} ${Math.abs(c)}:\\qquad\\Delta = ${par(b)}^2 - 4\\times${par(c)} = ${dl}${dl ? `\\ \\Longrightarrow\\ \\lambda = \\frac{${-b}\\pm${sq}}{2},\\ \\text{soit}\\ ${v2}\\ \\text{et}\\ ${v3}` : `\\ \\Longrightarrow\\ \\text{racine double}\\ ${v2}`}.$$
+$$\\chi_A = ${chi}$$
+<p class="mlnote">Vérification : $${D.map(par).join(" + ")} = ${tr} = \\operatorname{tr}A$, et $${D.map(par).join("\\times")} = ${det} = \\det A$.</p>`,
+      `<p class="mlstep">3. Le spectre et les multiplicités :</p>$$\\operatorname{Sp}(A) = \\{${vals.map(v => cv(v, v)).join(",\\ ")}\\},\\qquad ${vals.map(v => `\\cO{m_{${v}} = ${m(v)}}`).join(",\\quad ")}$$`,
+      ...kers.map(o => `<p class="mlstep">4. Le sous-espace propre de $${cv(o.v, o.v)}$</p>` + espace(o)),
+      `<p class="mlstep">5. Les vecteurs propres en colonnes, les valeurs propres dans le même ordre :</p>$$P = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => cv(Dl[j], P[i][j])).join("&")).join("\\\\")}\\end{pmatrix},\\qquad D = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => i === j ? cv(Dl[j], Dl[j]) : "0").join("&")).join("\\\\")}\\end{pmatrix}$$`,
+      `<p class="mlstep">6. On vérifie $AP = PD$ sans calculer $P^{-1}$ :</p>$$AP = ${texM(A)}${texM(P)} = ${texM(AP)}$$$$PD = ${texM(P)}${texM(Dl.map((v, i) => Dl.map((_, j) => i === j ? v : 0)))} = ${texM(PD)}$$<p class="mlres">${JSON.stringify(AP) === JSON.stringify(PD) ? "Les deux sont égaux" : "Erreur"}, donc $A = PDP^{-1}$ : $A$ est diagonalisable.</p>`
     ];
-    host.innerHTML = `<p class="mlt">Diagonaliser pas à pas</p>${steps.slice(0, k + 1).join("")}<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${steps.length}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < steps.length - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button></div>`;
-    $$("[data-g]", host).forEach(b => b.addEventListener("click", () => { k += +b.dataset.g; draw(); }));
+    host.innerHTML = `<p class="mlt">Diagonaliser pas à pas</p>${steps.slice(0, k + 1).join("")}<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${steps.length}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < steps.length - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tout afficher</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button></div>`;
+    $$("[data-g]", host).forEach(bt => bt.addEventListener("click", () => { k += +bt.dataset.g; draw(); }));
+    $("[data-all]", host).addEventListener("click", () => { k = steps.length - 1; draw(); });
     $("[data-new]", host).addEventListener("click", () => { gen(); draw(); });
     typeset(host);
   };
@@ -1535,7 +1610,7 @@ function mlExRed(host) {
   };
   const draw = () => {
     const { A } = ex;
-    host.innerHTML = `<p class="mlq">$A = ${texM(A)}$. Donne ses valeurs propres (avec multiplicité) et dis si elle est diagonalisable.</p><div class="mlin" style="grid-template-columns:repeat(2,80px)"><input data-v="0" aria-label="Valeur propre 1" inputmode="numeric"><input data-v="1" aria-label="Valeur propre 2" inputmode="numeric"></div><div class="mlseg"><button type="button" data-d="1">Diagonalisable</button><button type="button" data-d="0">Pas diagonalisable</button></div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Une autre</button></div><p class="mlres"></p><div class="mlsol" hidden><p>$$\\chi_A = X^2 - ${par(ex.tr)}X + ${par(ex.det)} = (X - ${par(ex.a)})(X - ${par(ex.b)})$$</p><p>${ex.a !== ex.b ? "Deux valeurs propres distinctes : diagonalisable." : ex.scal ? `Une seule valeur propre et $A = ${ex.a}I_2$ : diagonale, donc diagonalisable.` : `Une seule valeur propre $${ex.a}$ et $A\\neq${ex.a}I_2$ : pas diagonalisable. On peut la trigonaliser.`}</p></div>`;
+    host.innerHTML = `<p class="mlq">$A = ${texM(A)}$. Donne ses valeurs propres (avec multiplicité) et dis si elle est diagonalisable.</p><div class="mlin" style="grid-template-columns:repeat(2,80px)"><input data-v="0" aria-label="Valeur propre 1" inputmode="numeric"><input data-v="1" aria-label="Valeur propre 2" inputmode="numeric"></div><div class="mlseg"><button type="button" data-d="1">Diagonalisable</button><button type="button" data-d="0">Pas diagonalisable</button></div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Une autre</button></div><p class="mlres"></p><div class="mlsol" hidden><p>$$\\operatorname{tr}A = ${par(A[0][0])} + ${par(A[1][1])} = ${ex.tr},\\qquad\\det A = ${par(A[0][0])}\\times${par(A[1][1])} - ${par(A[0][1])}\\times${par(A[1][0])} = ${ex.det}$$</p><p>$$\\chi_A = X^2 - \\operatorname{tr}(A)X + \\det A = ${polyTex([1, -ex.tr, ex.det])},\\qquad\\Delta = ${par(ex.tr)}^2 - 4\\times${par(ex.det)} = ${ex.tr * ex.tr - 4 * ex.det}$$</p><p>$$\\chi_A = (X - ${par(ex.a)})(X - ${par(ex.b)})$$</p>${ex.a === ex.b ? `<p>$$A - ${par(ex.a)}I_2 = ${texM(A.map((r, i) => r.map((x, j) => x - (i === j ? ex.a : 0))))}$$</p>` : ""}<p>${ex.a !== ex.b ? "Deux valeurs propres distinctes : diagonalisable." : ex.scal ? `Une seule valeur propre et $A = ${ex.a}I_2$ : diagonale, donc diagonalisable.` : `Une seule valeur propre $${ex.a}$ et $A\\neq${ex.a}I_2$ : pas diagonalisable. On peut la trigonaliser.`}</p></div>`;
     let pick = null;
     $$("[data-d]", host).forEach(b => b.addEventListener("click", () => { pick = b.dataset.d === "1"; $$("[data-d]", host).forEach(x => x.setAttribute("aria-pressed", x === b)); }));
     $("[data-check]", host).addEventListener("click", () => {
@@ -2697,8 +2772,9 @@ function wire(ex) {
     route(true);
   }));
   fixLabm(app);
+  $$(".tree", app).forEach(braceTree);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a, .tree a, .dtree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
+  $$(".msum a, .btree a, .lg a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
