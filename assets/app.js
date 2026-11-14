@@ -1316,16 +1316,28 @@ function mlGauss(host) {
   };
   steps = build([[1, 2, 0], [0, 1, 1], [1, 0, 2]]) || gen(); k = 0; draw();
 }
-/* 3. Puissances : A = λI + N, curseur sur n */
+/* 3. Puissances : A = λI + N, curseur sur n, binôme écrit en entier */
 function mlPuiss(host) {
-  const N = [[0, 1, 0], [0, 0, 1], [0, 0, 0]];
+  const N = [[0, 1, 0], [0, 0, 1], [0, 0, 0]], N2 = [[0, 0, 1], [0, 0, 0], [0, 0, 0]], I3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
   let lam = 2, n = 3;
-  const bin = (a, b) => b < 0 || b > a ? 0 : b === 0 ? 1 : Array.from({ length: b }, (_, i) => (a - i) / (i + 1)).reduce((x, y) => x * y, 1);
+  const bin = (a, b) => b < 0 || b > a ? 0 : Math.round(Array.from({ length: b }, (_, i) => (a - i) / (i + 1)).reduce((x, y) => x * y, 1));
   const draw = () => {
-    const I3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
-    let P = I3, A = I3.map((r, i) => r.map((v, j) => lam * v + N[i][j]));
+    let P = I3; const A = I3.map((r, i) => r.map((v, j) => lam * v + N[i][j]));
     for (let t = 0; t < n; t++) P = mmul(P, A);
-    host.innerHTML = `<p class="mlt">Puissances par le binôme : $A = ${lam}I_3 + N$</p><div class="mlrow"><label>$\\lambda = ${lam}$ <input type="range" min="-3" max="3" value="${lam}" data-l></label><label>$n = ${n}$ <input type="range" min="0" max="12" value="${n}" data-n></label></div><p class="mlcalc">$$A^{${n}} = ${lam}^{${n}}I_3 + \\binom{${n}}{1}${lam}^{${n - 1}}N + \\binom{${n}}{2}${lam}^{${n - 2}}N^2 = ${texM(P)}$$</p><p class="mlnote">${n < 2 ? "Pour $n\\lt 2$, les termes en $N^2$ n'apparaissent pas." : "Les termes en $N^3, N^4,\\dots$ sont nuls : $N^3 = 0$."} Coefficients : $${bin(n, 0)}\\cdot${lam}^{${n}}$, $${bin(n, 1)}\\cdot${lam}^{${n - 1}}$, $${bin(n, 2)}\\cdot${lam}^{${n - 2}}$.</p>`;
+    const pw = (b, e) => e === 0 ? "1" : `${par(b)}^{${e}}`;
+    const terms = [];
+    for (let k = 0; k <= Math.min(n, 4); k++) {
+      const t = `\\binom{${n}}{${k}}\\cB{(${lam}I_3)^{${n - k}}}\\cR{N^{${k}}}`;
+      terms.push(k >= 3 ? `\\cancel{${t}}` : t);
+    }
+    if (n > 4) terms.push("\\cdots");
+    const c = [0, 1, 2].map(k => k <= n ? bin(n, k) * Math.pow(lam, n - k) : 0);
+    const val = [0, 1, 2].filter(k => k <= n).map(k => `\\underbrace{${bin(n, k)}\\times${pw(lam, n - k)}}_{=\\,${c[k]}}${["I_3", "\\cR N", "\\cG{N^2}"][k]}`).join(" + ");
+    const mats = [0, 1, 2].filter(k => k <= n).map(k => `${c[k]}${texM([I3, N, N2][k])}`).join(" + ");
+    host.innerHTML = `<p class="mlt">Le binôme pas à pas : $A = ${lam}I_3 + N$</p><div class="mlrow"><label>$\\lambda = ${lam}$ <input type="range" min="-3" max="3" value="${lam}" data-l></label><label>$n = ${n}$ <input type="range" min="0" max="10" value="${n}" data-n></label></div>
+      <p class="mlstep">1. La formule écrite en entier ${n >= 3 ? "(les termes barrés contiennent $N^3 = 0$)" : ""} :</p><p class="mlcalc">$$A^{${n}} = ${terms.join(" + ")}$$</p>
+      <p class="mlstep">2. On calcule les coefficients $\\binom{${n}}{k}\\times${par(lam)}^{${n}-k}$ :</p><p class="mlcalc">$$A^{${n}} = ${val}$$</p>
+      <p class="mlstep">3. On additionne les matrices :</p><p class="mlcalc">$$A^{${n}} = ${mats} = ${texM(P)}$$</p>`;
     $("[data-l]", host).addEventListener("input", e => { lam = +e.target.value; draw(); });
     $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); });
     typeset(host);
@@ -2609,7 +2621,7 @@ function wire(ex) {
   }));
   fixLabm(app);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a", app).forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
+  $$(".msum a, .tree a", app).forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
