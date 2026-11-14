@@ -381,7 +381,7 @@ function chapterPage(id, y, i) {
   } else {
     if (PDFS.has(cs)) tabs.push(["cours", "Cours"]);
     tabs.push(["resume", "Résumé"]);
-    if (METH[c.t]) tabs.push(["methode", "Méthode"]);
+    if (id === "maths" && METH[c.t]) tabs.push(["methode", "Méthode"]);
     if (exs.length) tabs.push(["exercices", "Exercices", exs.length]);
     if (id === "xens") tabs.push(["plus", "Aller plus loin", new Set(plus.map(e => e.plus)).size]);
     if (chapRappels(all).length > 1) tabs.push(["formulaire", "Formulaire"], ["cartes", "Cartes"]);
@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1392,6 +1392,18 @@ const QDET = [
     ["Une matrice antisymétrique de taille $3$ a un déterminant nul.", true, "Vrai : $\\det A = \\det({}^tA) = \\det(-A) = (-1)^3\\det A$."],
     ["$\\operatorname{Card}\\mathfrak S_4 = 16$.", false, "Faux : $\\operatorname{Card}\\mathfrak S_4 = 4! = 24$."]
   ];
+const QRED = [
+    ["Si $P(A) = 0$, alors $\\operatorname{Sp}(A)$ est l'ensemble des racines de $P$.", false, "Faux : seulement $\\operatorname{Sp}(A)\\subset$ racines de $P$. Exemple : $I_n$ annule $X^2 - 1$ mais $-1\\notin\\operatorname{Sp}(I_n)$."],
+    ["Une matrice qui a $n$ valeurs propres distinctes est diagonalisable.", true, "Vrai : chaque sous-espace propre est une droite et leur somme est de dimension $n$."],
+    ["Une matrice diagonalisable a $n$ valeurs propres distinctes.", false, "Faux : $I_n$ est diagonale avec une seule valeur propre."],
+    ["$\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ est diagonalisable.", false, "Faux : $\\operatorname{Sp} = \\{1\\}$ et elle n'est pas égale à $I_2$."],
+    ["Toute matrice de $\\mathcal M_n(\\mathbb C)$ est trigonalisable.", true, "Vrai : $\\chi_A$ est scindé sur $\\mathbb C$."],
+    ["Une matrice symétrique réelle est diagonalisable.", true, "Vrai : théorème spectral, et même dans une base orthonormée."],
+    ["$\\chi_A = \\det(A - XI_n)$.", false, "Faux : le programme pose $\\chi_A = \\det(XI_n - A)$, unitaire."],
+    ["Si $\\operatorname{rg}A = 1$ et $\\operatorname{tr}A\\neq0$, $A$ est diagonalisable.", true, "Vrai : $\\dim E_0 = n - 1$ et $E_{\\operatorname{tr}A}$ est une droite."],
+    ["$A$ et ${}^tA$ ont les mêmes vecteurs propres.", false, "Faux : même spectre, mais pas les mêmes vecteurs propres en général."],
+    ["Une matrice nilpotente non nulle n'est pas diagonalisable.", true, "Vrai : son seul spectre est $\\{0\\}$, elle serait semblable à $0$."]
+  ];
 function mlQuiz(host, Q) {
   let k = 0, score = 0, done = false;
   const draw = () => {
@@ -1473,6 +1485,71 @@ function mlChg(host) {
     typeset(host);
   };
   draw();
+}
+
+/* ---------- Labos : réduction ---------- */
+const randUni = n => { let P = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => +(i === j))); for (let t = 0; t < 5; t++) { const i = rnd(0, n - 1), j = rnd(0, n - 1), k = [-1, 1, 2][rnd(0, 2)]; if (i !== j) P = P.map((r, a) => a === i ? r.map((v, b) => v + k * P[j][b]) : r); } return P; };
+const inv2 = P => { const d = det2(P); return [[P[1][1] / d, -P[0][1] / d], [-P[1][0] / d, P[0][0] / d]]; };
+/* inverse exacte d'une matrice unimodulaire (det ±1), par la comatrice */
+const invUni = P => { const n = P.length, d = detN(P); return Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => ((i + j) % 2 ? -1 : 1) * detN(minor(P, j, i)) / d)); };
+function mlDiag(host) {
+  let A, P, D, k;
+  const gen = () => {
+    for (;;) {
+      P = randUni(3); if (Math.abs(detN(P)) !== 1 || P.flat().some(v => Math.abs(v) > 4)) continue;
+      const opts = [[1, 2, 3], [2, 2, -1], [0, 1, 1], [3, -1, -1], [1, -2, 4], [2, 2, 5]], dd = opts[rnd(0, opts.length - 1)];
+      D = dd; A = mmul(mmul(P, D.map((v, i) => [0, 1, 2].map(j => i === j ? v : 0))), invUni(P)).map(r => r.map(v => Math.round(v)));
+      if (A.flat().every(v => Math.abs(v) <= 9)) break;
+    }
+    k = 0;
+  };
+  const draw = () => {
+    const vals = [...new Set(D)], m = v => D.filter(x => x === v).length, col = j => P.map(r => r[j]);
+    const CL = ["cB", "cR", "cG"], cOf = v => CL[vals.indexOf(v)];
+    const chi = vals.map(v => `\\${cOf(v)}{(X ${v < 0 ? "+" : "-"} ${Math.abs(v)})${m(v) > 1 ? `^{${m(v)}}` : ""}}`).join("");
+    const steps = [
+      `$$A = ${texM(A)}$$`,
+      `<p class="mlstep">1. Le polynôme caractéristique (fais des zéros avant de développer) :</p>$$\\chi_A = ${chi}$$<p class="mlnote">Vérification : la somme des valeurs propres comptées avec multiplicité vaut $\\operatorname{tr}A = ${A[0][0] + A[1][1] + A[2][2]}$.</p>`,
+      `<p class="mlstep">2. Le spectre et les multiplicités :</p>$$\\operatorname{Sp}(A) = \\{${vals.map(v => `\\${cOf(v)}{${v}}`).join(",\\ ")}\\},\\qquad ${vals.map(v => `m_{${v}} = ${m(v)}`).join(",\\quad ")}$$`,
+      `<p class="mlstep">3. Les sous-espaces propres, en résolvant $(A - \\lambda I_3)X = 0$ :</p>` + vals.map(v => { const cols = [0, 1, 2].filter(j => D[j] === v); const Al = A.map((r, i) => r.map((x, j) => x - (i === j ? v : 0))); return `$$A - ${par(v)}I_3 = ${texM(Al)}\\ \\Longrightarrow\\ E_{${v}} = \\operatorname{Vect}\\Big(${cols.map(j => `\\${cOf(v)}{${texM(col(j).map(x => [x]))}}`).join(",\\ ")}\\Big),\\ \\dim = ${cols.length} = m_{${v}}$$`; }).join(""),
+      `<p class="mlstep">4. Les vecteurs propres en colonnes, les valeurs propres dans le même ordre :</p>$$P = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => `\\${cOf(D[j])}{${P[i][j]}}`).join("&")).join("\\\\")}\\end{pmatrix},\\qquad D = \\begin{pmatrix}${[0, 1, 2].map(i => [0, 1, 2].map(j => i === j ? `\\${cOf(D[j])}{${D[j]}}` : "0").join("&")).join("\\\\")}\\end{pmatrix}$$`,
+      `<p class="mlstep">5. On vérifie $AP = PD$ sans calculer $P^{-1}$ :</p>$$AP = ${texM(mmul(A, P))} = PD$$<p class="mlres">Donc $A = PDP^{-1}$ : $A$ est diagonalisable.</p>`
+    ];
+    host.innerHTML = `<p class="mlt">Diagonaliser pas à pas</p>${steps.slice(0, k + 1).join("")}<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${steps.length}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < steps.length - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button></div>`;
+    $$("[data-g]", host).forEach(b => b.addEventListener("click", () => { k += +b.dataset.g; draw(); }));
+    $("[data-new]", host).addEventListener("click", () => { gen(); draw(); });
+    typeset(host);
+  };
+  gen(); draw();
+}
+function mlExRed(host) {
+  let ex;
+  const gen = () => {
+    const P = randUni(2), kind = rnd(0, 2);
+    let a, b, M;
+    if (kind < 2) { a = rnd(-3, 4); b = kind ? a : rnd(-3, 4); if (kind === 0 && a === b) b = a + 1; M = [[a, 0], [0, b]]; }
+    else { a = rnd(-2, 3); b = a; M = [[a, 1], [0, a]]; }
+    const A = mmul(mmul(P, M), invUni(P)).map(r => r.map(v => Math.round(v)));
+    const diag = kind !== 2;
+    return { A, a, b, diag, tr: A[0][0] + A[1][1], det: det2(A), scal: kind === 1 };
+  };
+  const draw = () => {
+    const { A } = ex;
+    host.innerHTML = `<p class="mlq">$A = ${texM(A)}$. Donne ses valeurs propres (avec multiplicité) et dis si elle est diagonalisable.</p><div class="mlin" style="grid-template-columns:repeat(2,80px)"><input data-v="0" aria-label="Valeur propre 1" inputmode="numeric"><input data-v="1" aria-label="Valeur propre 2" inputmode="numeric"></div><div class="mlseg"><button type="button" data-d="1">Diagonalisable</button><button type="button" data-d="0">Pas diagonalisable</button></div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Une autre</button></div><p class="mlres"></p><div class="mlsol" hidden><p>$$\\chi_A = X^2 - ${par(ex.tr)}X + ${par(ex.det)} = (X - ${par(ex.a)})(X - ${par(ex.b)})$$</p><p>${ex.a !== ex.b ? "Deux valeurs propres distinctes : diagonalisable." : ex.scal ? `Une seule valeur propre et $A = ${ex.a}I_2$ : diagonale, donc diagonalisable.` : `Une seule valeur propre $${ex.a}$ et $A\\neq${ex.a}I_2$ : pas diagonalisable. On peut la trigonaliser.`}</p></div>`;
+    let pick = null;
+    $$("[data-d]", host).forEach(b => b.addEventListener("click", () => { pick = b.dataset.d === "1"; $$("[data-d]", host).forEach(x => x.setAttribute("aria-pressed", x === b)); }));
+    $("[data-check]", host).addEventListener("click", () => {
+      const v = $$("[data-v]", host).map(i => Number(i.value)).sort((x, y) => x - y), want = [ex.a, ex.b].sort((x, y) => x - y);
+      const okv = v.every((x, i) => x === want[i]) && $$("[data-v]", host).every(i => i.value.trim() !== ""), okd = pick === ex.diag;
+      $$("[data-v]", host).forEach(i => { i.classList.toggle("ok", okv); i.classList.toggle("ko", !okv); });
+      $(".mlres", host).textContent = okv && okd ? "Tout est juste." : !okv ? "Les valeurs propres ne sont pas bonnes : calcule $\\chi_A = X^2 - \\operatorname{tr}(A)X + \\det A$." : pick === null ? "Choisis diagonalisable ou non." : "Regarde la dimension du sous-espace propre.";
+      typeset($(".mlres", host));
+    });
+    $("[data-sol]", host).addEventListener("click", () => { const s = $(".mlsol", host); s.hidden = false; typeset(s); });
+    $("[data-new]", host).addEventListener("click", () => { ex = gen(); draw(); });
+    typeset(host);
+  };
+  ex = gen(); draw();
 }
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */
@@ -2621,7 +2698,7 @@ function wire(ex) {
   }));
   fixLabm(app);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a, .tree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
+  $$(".msum a, .tree a, .dtree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));

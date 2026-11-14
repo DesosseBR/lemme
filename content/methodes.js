@@ -694,5 +694,269 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 </div>
 </div>
 
+`,
+"Réduction des endomorphismes": R`
+<nav class="msum"><a href="#r-not">Notations</a><a href="#r-elts">Éléments propres</a><a href="#r-chi">Polynôme caractéristique</a><a href="#r-zeros">Faire des zéros</a><a href="#r-sanschi">Sans $\chi_A$</a><a href="#r-esp">Sous-espaces propres</a><a href="#r-crit">Critères</a><a href="#r-diag">Diagonaliser</a><a href="#r-trig">Trigonaliser</a><a href="#r-annul">Polynômes annulateurs</a><a href="#r-enonce">Ce que l'énoncé te donne</a><a href="#r-appli">Applications</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-arbre">L'arbre</a></nav>
+
+<h2 id="r-not">1. Les notations du programme</h2>
+<p class="mcode"><span class="kB">bleu</span> : valeurs propres &nbsp;·&nbsp; <span class="kR">rouge</span> : vecteurs propres &nbsp;·&nbsp; <span class="kG">vert</span> : sous-espaces propres &nbsp;·&nbsp; <span class="kO">orange</span> : multiplicités</p>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
+<tr><td>Spectre</td><td>$\operatorname{Sp}(u)$, $\operatorname{Sp}(A)$</td><td>ensemble des <span class="kB">valeurs propres</span></td></tr>
+<tr><td>Sous-espace propre</td><td>$\cG{E_\lambda(u)} = \operatorname{Ker}(u - \lambda\,\mathrm{id}_E)$</td><td>les <span class="kR">vecteurs propres</span> et $0$</td></tr>
+<tr><td>Polynôme caractéristique</td><td>$\chi_A = \det(XI_n - A)$</td><td>unitaire, de degré $n$</td></tr>
+<tr><td>Multiplicité</td><td>$\cO{m_\lambda}$</td><td>multiplicité de $\lambda$ comme racine de $\chi_A$</td></tr>
+<tr><td>Polynôme minimal</td><td>$\pi_u$, $\pi_A$</td><td>polynôme unitaire annulateur de plus petit degré</td></tr>
+</table>
+<p class="ml piege">Piège</p>
+<p>Le programme définit $\chi_A = \det(XI_n - A)$, et non $\det(A - XI_n)$ : les deux diffèrent de $(-1)^n$. Avec la bonne définition, $\chi_A$ est <b>unitaire</b>.</p>
+
+<h2 id="r-elts">2. Éléments propres</h2>
+<div class="sbox">$$\cB\lambda\in\operatorname{Sp}(A)\iff\exists\cR X\neq0,\ A\cR X = \cB\lambda\cR X\iff\operatorname{Ker}(A - \cB\lambda I_n)\neq\{0\}\iff\det(\cB\lambda I_n - A) = 0\iff\chi_A(\cB\lambda) = 0.$$</div>
+<ul>
+<li>Un <span class="kR">vecteur propre</span> est <b>non nul</b>. $0$ est dans $\cG{E_\lambda}$, mais ce n'est pas un vecteur propre.</li>
+<li>Un vecteur propre a <b>une seule</b> valeur propre. Une valeur propre a une infinité de vecteurs propres : tout $k\cR X$, $k\neq0$.</li>
+<li>$\cB\lambda\in\operatorname{Sp}(A)\iff A - \cB\lambda I_n$ n'est pas inversible. En particulier : $0\in\operatorname{Sp}(A)\iff A$ n'est pas inversible.</li>
+</ul>
+<div class="sbox">$$\text{Des vecteurs propres associés à des valeurs propres distinctes forment une famille libre, et}\ \sum_\lambda\cG{E_\lambda}\ \text{est directe}.$$</div>
+<p class="ml">Lien avec la trace et le déterminant (quand $\chi_A$ est scindé)</p>
+<div class="sbox">$$\chi_A = \prod_{\lambda}(X - \cB\lambda)^{\cO{m_\lambda}},\qquad\operatorname{tr}A = \sum_\lambda\cO{m_\lambda}\cB\lambda,\qquad\det A = \prod_\lambda\cB\lambda^{\cO{m_\lambda}}.$$</div>
+
+<h2 id="r-chi">3. Le polynôme caractéristique</h2>
+<div class="sbox">$$\chi_A = \det(XI_n - A) = X^n - \operatorname{tr}(A)\,X^{n-1} + \cdots + (-1)^n\det A.$$</div>
+<p class="ml">Taille 2 : la formule à connaître</p>
+<div class="sbox">$$\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A.$$</div>
+$$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}:\quad\chi_A = X^2 - 2X - 3 = (X - \cB3)(X + \cB1),\qquad\operatorname{Sp}(A) = \{\cB{-1},\cB3\}.$$
+<p class="ml">Les cas immédiats</p>
+<ul>
+<li>$A$ triangulaire : $\chi_A = \prod_i(X - a_{i,i})$, les valeurs propres sont sur la diagonale.</li>
+<li>$A$ triangulaire par blocs $\begin{pmatrix}B&C\\0&D\end{pmatrix}$ : $\chi_A = \chi_B\,\chi_D$.</li>
+<li>Taille 3 : développer, mais <b>jamais tout de suite</b>. D'abord faire des zéros (§4).</li>
+</ul>
+
+<h2 id="r-zeros">4. Faire apparaître des zéros (la méthode qui change tout)</h2>
+<p>Développer $\det(XI_3 - A)$ tel quel donne un polynôme de degré 3 qu'il faut ensuite factoriser, et c'est là qu'on se trompe. On fait plutôt des opérations sur les lignes ou les colonnes pour <b>sortir un facteur</b> $(X - \lambda)$ avant de développer.</p>
+<p class="ml">Les trois astuces</p>
+<ol>
+<li><b>Toutes les lignes ont la même somme $s$</b> : $C_1\leftarrow C_1 + C_2 + \cdots + C_n$. La première colonne devient $X - s$ partout, on factorise $(X - \cB s)$.</li>
+<li><b>Deux lignes presque égales</b> : $L_1\leftarrow L_1 - L_2$ fait apparaître $X - \lambda$ et $-(X - \lambda)$, on factorise.</li>
+<li><b>Une ligne ou une colonne avec un seul coefficient non nul</b> : développer directement selon elle.</li>
+</ol>
+<p class="ml">Exemple 1 : lignes de même somme</p>
+$$A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\qquad(\text{chaque ligne a pour somme}\ \cB4).$$
+<p><b>Étape 1.</b> On écrit $XI_3 - A$ et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$ :</p>
+$$\chi_A = \begin{vmatrix}X-2&-1&-1\\-1&X-2&-1\\-1&-1&X-2\end{vmatrix} = \begin{vmatrix}\cB{X-4}&-1&-1\\\cB{X-4}&X-2&-1\\\cB{X-4}&-1&X-2\end{vmatrix} = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\1&X-2&-1\\1&-1&X-2\end{vmatrix}.$$
+<p><b>Étape 2.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ : la matrice devient triangulaire.</p>
+$$\chi_A = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\0&\cR{X-1}&0\\0&0&\cR{X-1}\end{vmatrix} = \cB{(X-4)}\,\cR{(X-1)^2}.$$
+<p>Sans aucune factorisation de degré 3 : $\operatorname{Sp}(A) = \{\cB4, \cR1\}$, avec $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
+<p class="ml">Exemple 2 : deux lignes presque égales</p>
+$$\chi_B = \begin{vmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{vmatrix}\underset{\cO{L_1\leftarrow L_1 - L_2}}{=}\begin{vmatrix}\cB{X-2}&\cB{-(X-2)}&0\\-1&X-3&1\\0&0&X-2\end{vmatrix} = \cB{(X-2)}\begin{vmatrix}1&-1&0\\-1&X-3&1\\0&0&X-2\end{vmatrix}.$$
+<p>On développe selon la dernière ligne (un seul coefficient non nul) :</p>
+$$\chi_B = \cB{(X-2)}\cdot(X-2)\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = (X-2)^2(X - 4).$$
+<p class="ml">Vérifier son $\chi_A$ en 10 secondes</p>
+<ul>
+<li>Le coefficient de $X^{n-1}$ doit être $-\operatorname{tr}A$ : ici $-(4 + 1 + 1) = -6 = -\operatorname{tr}A$.</li>
+<li>$\chi_A(0) = (-1)^n\det A$.</li>
+</ul>
+
+<h2 id="r-sanschi">5. Trouver des valeurs propres sans calculer $\chi_A$</h2>
+<div class="mrefl">
+<div><b>Lignes de même somme $s$</b><span>$A\begin{pmatrix}1\\\vdots\\1\end{pmatrix} = s\begin{pmatrix}1\\\vdots\\1\end{pmatrix}$ : $\cB s\in\operatorname{Sp}(A)$.</span></div>
+<div><b>$\operatorname{rg}A = 1$</b><span>$0$ de multiplicité $\geqslant n-1$, et l'autre valeur propre est $\operatorname{tr}A$.</span></div>
+<div><b>$\operatorname{rg}(A - \lambda I_n) = r\lt n$</b><span>$\cB\lambda\in\operatorname{Sp}(A)$ et $\dim\cG{E_\lambda} = n - r$.</span></div>
+<div><b>$P(A) = 0$</b><span>$\operatorname{Sp}(A)\subset\{\text{racines de}\ P\}$.</span></div>
+<div><b>$A$ triangulaire</b><span>La diagonale.</span></div>
+<div><b>Il reste une valeur à trouver</b><span>Utiliser $\operatorname{tr}A = \sum m_\lambda\lambda$.</span></div>
+</div>
+<p class="ml">Exemple</p>
+$$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}:\ \operatorname{rg}A = 1\ \Longrightarrow\ 0\ \text{double au moins},\ \text{l'autre} = \operatorname{tr}A = 3,\qquad\chi_A = X^2(X - 3).$$
+
+<h2 id="r-esp">6. Calculer un sous-espace propre</h2>
+<p class="ml">Méthode</p>
+<ol>
+<li>Écrire $A - \cB\lambda I_n$.</li>
+<li>Résoudre $(A - \cB\lambda I_n)\cR X = 0$ par le pivot de Gauss.</li>
+<li>Écrire $\cG{E_\lambda}$ comme un $\operatorname{Vect}$ et vérifier la dimension : $\dim\cG{E_\lambda} = n - \operatorname{rg}(A - \cB\lambda I_n)$.</li>
+</ol>
+<p class="ml">Exemple : la matrice de l'exemple 1, avec $\cB\lambda = 1$</p>
+$$A - \cB1\,I_3 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}:\ \text{rang}\ 1,\ \text{une seule équation}\ x + y + z = 0.$$
+$$\cG{E_1} = \{(x,y,z) : z = -x - y\} = \operatorname{Vect}\Big(\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}},\ \cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\Big),\qquad\dim\cG{E_1} = 2.$$
+<p>Et pour $\cB\lambda = 4$, chaque ligne a pour somme $4$ : $\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)}$.</p>
+<p class="ml piege">Piège</p>
+<p>Si tu trouves $\cG{E_\lambda} = \{0\}$, ton $\lambda$ n'est pas une valeur propre : erreur dans $\chi_A$ ou dans le pivot.</p>
+
+<h2 id="r-crit">7. Les critères de diagonalisabilité</h2>
+<div class="sbox">$$1\leqslant\dim\cG{E_\lambda}\leqslant\cO{m_\lambda}\qquad\text{pour tout}\ \lambda\in\operatorname{Sp}(A).$$</div>
+<div class="sbox">$$A\ \text{diagonalisable}\iff\chi_A\ \text{scindé et}\ \forall\lambda,\ \dim\cG{E_\lambda} = \cO{m_\lambda}\iff\sum_\lambda\dim\cG{E_\lambda} = n\iff\pi_A\ \text{scindé à racines simples}.$$</div>
+<p class="ml">Les conditions suffisantes (on conclut tout de suite)</p>
+<ul>
+<li>$\chi_A$ scindé à racines <b>simples</b> ($n$ valeurs propres distinctes) $\Longrightarrow$ diagonalisable, et chaque $\cG{E_\lambda}$ est une droite.</li>
+<li>Un polynôme annulateur scindé à racines simples $\Longrightarrow$ diagonalisable.</li>
+<li>$A$ symétrique réelle $\Longrightarrow$ diagonalisable dans une base orthonormée (théorème spectral).</li>
+</ul>
+<p class="ml">Les conditions pour dire non</p>
+<ul>
+<li>$\chi_A$ non scindé sur $\mathbb R$ : pas diagonalisable sur $\mathbb R$ (essayer sur $\mathbb C$).</li>
+<li>$\operatorname{Sp}(A) = \{\lambda\}$ et $A\neq\lambda I_n$ : <b>pas diagonalisable</b>, sinon $A = P(\lambda I_n)P^{-1} = \lambda I_n$.</li>
+<li>$A$ nilpotente et $A\neq0$ : pas diagonalisable (cas $\lambda = 0$ du point précédent).</li>
+<li>Un $\lambda$ avec $\dim\cG{E_\lambda}\lt\cO{m_\lambda}$.</li>
+</ul>
+<p><b>Astuce</b> : seules les valeurs propres <b>multiples</b> sont à vérifier. Si $\cO{m_\lambda} = 1$, alors $\dim\cG{E_\lambda} = 1$ automatiquement.</p>
+
+<h2 id="r-diag">8. Diagonaliser : la méthode complète</h2>
+<ol>
+<li>Calculer $\chi_A$ en faisant des zéros, et le factoriser.</li>
+<li>Lister $\operatorname{Sp}(A)$ avec les multiplicités $\cO{m_\lambda}$.</li>
+<li>Pour chaque $\cB\lambda$ <b>multiple</b>, calculer $\dim\cG{E_\lambda}$ et conclure.</li>
+<li>Donner une base de chaque $\cG{E_\lambda}$.</li>
+<li>Construire $P$ : les <span class="kR">vecteurs propres en colonnes</span>, et $D$ : les <span class="kB">valeurs propres</span> <b>dans le même ordre</b>.</li>
+<li>Vérifier $AP = PD$ (plus rapide que $P^{-1}AP = D$, et on n'a pas besoin de $P^{-1}$).</li>
+</ol>
+<p class="ml">Exemple complet : $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$</p>
+<p><b>1–2.</b> $\chi_A = (X - \cB4)(X - \cB1)^2$ (§4), donc $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
+<p><b>3.</b> $\dim\cG{E_1} = 3 - \operatorname{rg}(A - I_3) = 3 - 1 = 2 = \cO{m_1}$ : $A$ est diagonalisable.</p>
+<p><b>4.</b> $\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)}$, $\cG{E_1} = \operatorname{Vect}\big(\cR{(1,0,-1)}, \cR{(0,1,-1)}\big)$.</p>
+<p><b>5.</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
+<div class="labm"><table><tr><td></td><td class="kB">$\lambda = 4$</td><td class="kB">$\lambda = 1$</td><td class="kB">$\lambda = 1$</td></tr><tr><td></td><td class="c1">1</td><td class="c2">1</td><td class="c3">0</td></tr><tr><td></td><td class="c1">1</td><td class="c2">0</td><td class="c3">1</td></tr><tr><td></td><td class="c1">1</td><td class="c2">−1</td><td class="c3">−1</td></tr></table><span class="lab-cap">$P$ : chaque colonne est un vecteur propre</span></div>
+$$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-1}.$$
+<p><b>6.</b> Vérification de la première colonne : $A\cR{(1,1,1)} = (4,4,4) = \cB4\cR{(1,1,1)}$.</p>
+<div data-mlab="diag"></div>
+
+<h2 id="r-trig">9. Trigonaliser</h2>
+<div class="sbox">$$A\ \text{trigonalisable}\iff\chi_A\ \text{scindé}.\qquad\text{Sur}\ \mathbb C,\ \text{toute matrice est trigonalisable}.$$</div>
+<p>On cherche $P$ inversible et $T$ triangulaire supérieure avec $A = PTP^{-1}$. La diagonale de $T$ contient les valeurs propres, répétées selon leur multiplicité.</p>
+<p class="ml">L'idée</p>
+<p>On garde le plus possible de <span class="kR">vecteurs propres</span>, puis on complète avec des vecteurs bien choisis : leur image n'est plus un multiple d'eux-mêmes, mais ce multiple <b>plus</b> une combinaison des vecteurs précédents.</p>
+<p class="ml">Taille 2 : $\chi_A = (X - \lambda)^2$, $\dim\cG{E_\lambda} = 1$</p>
+<ol>
+<li>Prendre $\cR{e_1}$ un vecteur propre.</li>
+<li>Résoudre $(A - \lambda I_2)\cG{e_2} = \cR{e_1}$.</li>
+<li>Alors $A\cG{e_2} = \cR{e_1} + \lambda\cG{e_2}$, d'où $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</li>
+</ol>
+$$A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}:\ \chi_A = X^2 - 4X + 4 = (X - \cB2)^2,\quad A - 2I_2 = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}\ \text{de rang}\ 1:\ \text{pas diagonalisable}.$$
+$$\cR{e_1} = \begin{pmatrix}1\\1\end{pmatrix},\qquad(A - 2I_2)\cG{e_2} = \cR{e_1}\iff-x + y = 1:\ \cG{e_2} = \begin{pmatrix}0\\1\end{pmatrix}.$$
+$$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix}\cB2&1\\0&\cB2\end{pmatrix},\qquad\text{vérification}:\ A\cG{e_2} = \begin{pmatrix}1\\3\end{pmatrix} = \cR{e_1} + 2\cG{e_2}.$$
+<p class="ml">Taille 3 : les cas possibles</p>
+<table class="mtab">
+<tr><th>$\chi_A$</th><th>Dimensions</th><th>Ce qu'on fait</th><th>Forme de $T$</th></tr>
+<tr><td>$(X-\lambda)(X-\mu)^2$</td><td>$\dim E_\mu = 1$</td><td>$e_1\in E_\lambda$, $e_2\in E_\mu$, $(A - \mu I)e_3 = e_2$</td><td>$\begin{pmatrix}\lambda&0&0\\0&\mu&1\\0&0&\mu\end{pmatrix}$</td></tr>
+<tr><td>$(X-\lambda)^3$</td><td>$\dim E_\lambda = 2$</td><td>$e_1, e_2\in E_\lambda$, $e_3$ avec $(A - \lambda I)e_3\in E_\lambda$ non nul</td><td>$\begin{pmatrix}\lambda&0&a\\0&\lambda&b\\0&0&\lambda\end{pmatrix}$</td></tr>
+<tr><td>$(X-\lambda)^3$</td><td>$\dim E_\lambda = 1$</td><td>$e_1\in E_\lambda$, $(A - \lambda I)e_2 = e_1$, $(A - \lambda I)e_3 = e_2$</td><td>$\begin{pmatrix}\lambda&1&0\\0&\lambda&1\\0&0&\lambda\end{pmatrix}$</td></tr>
+</table>
+<p class="ml">Exemple : $\chi_A = (X - 1)^3$, $\dim E_1 = 2$</p>
+$$A = \begin{pmatrix}0&1&1\\-1&2&1\\0&0&1\end{pmatrix},\qquad A - I_3 = \begin{pmatrix}-1&1&1\\-1&1&1\\0&0&0\end{pmatrix}\ \text{de rang}\ 1\ \Longrightarrow\ \dim\cG{E_1} = 2\lt3.$$
+<p>$\cG{E_1}$ : $-x + y + z = 0$, base $\cR{e_1 = (1,1,0)}$, $\cR{e_2 = (1,0,1)}$. Pour $e_3$, on remarque que $(A - I_3)(x,y,z) = (-x + y + z)\cR{(1,1,0)}$ : il suffit que $-x + y + z\neq0$.</p>
+$$\cG{e_3} = (0,1,0):\quad(A - I_3)\cG{e_3} = \cR{e_1},\ \text{soit}\ A\cG{e_3} = \cR{e_1} + \cG{e_3}.$$
+$$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad\det P = -1\neq0.$$
+<p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
+
+<h2 id="r-annul">10. Polynômes annulateurs</h2>
+<div class="sbox">$$\chi_A(A) = 0\quad\text{(Cayley-Hamilton)},\qquad\pi_A\ \text{divise tout polynôme annulateur, en particulier}\ \chi_A.$$</div>
+<ul>
+<li>Les racines de $\pi_A$ sont exactement les valeurs propres.</li>
+<li>$P(A) = 0\ \Longrightarrow\ \operatorname{Sp}(A)\subset\{\text{racines de}\ P\}$ : inclusion seulement.</li>
+<li>Lemme des noyaux : $P\wedge Q = 1\ \Longrightarrow\ \operatorname{Ker}(PQ)(u) = \operatorname{Ker}P(u)\oplus\operatorname{Ker}Q(u)$.</li>
+</ul>
+<p class="ml">Exemple : inverser avec Cayley-Hamilton</p>
+$$\chi_A = X^2 - 4X + 4\ \Longrightarrow\ A^2 - 4A + 4I_2 = 0\ \Longrightarrow\ A\cdot\tfrac14(4I_2 - A) = I_2\ \Longrightarrow\ A^{-1} = I_2 - \tfrac14A.$$
+
+<h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>Les valeurs propres $\lambda_1,\dots,\lambda_n$</b><span>$\operatorname{tr}A = \sum\lambda_i$, $\det A = \prod\lambda_i$ ; $A$ inversible $\iff0\notin\operatorname{Sp}(A)$ ; $\chi_A = \prod(X - \lambda_i)$. Si elles sont distinctes : diagonalisable.</span></div>
+<div><b>Un vecteur $X$ « propre »</b><span>Calculer $AX$ : on lit $\lambda$ avec $AX = \lambda X$.</span></div>
+<div><b>$\lambda$ valeur propre de $A$</b><span>$\lambda^k$ est valeur propre de $A^k$, $P(\lambda)$ de $P(A)$, $\frac1\lambda$ de $A^{-1}$, avec les mêmes vecteurs propres.</span></div>
+<div><b>$P(A) = 0$, $P$ scindé à racines simples</b><span>Diagonalisable, et $\operatorname{Sp}(A)\subset$ racines de $P$.</span></div>
+<div><b>$A^2 = A$ (projecteur)</b><span>$\operatorname{Sp}\subset\{0,1\}$, diagonalisable, $\operatorname{rg}A = \operatorname{tr}A$.</span></div>
+<div><b>$A^2 = I_n$ (symétrie)</b><span>$\operatorname{Sp}\subset\{-1,1\}$, diagonalisable.</span></div>
+<div><b>$A$ nilpotente</b><span>$\operatorname{Sp}(A) = \{0\}$, $\chi_A = X^n$, $\operatorname{tr}A = 0$ ; diagonalisable $\iff A = 0$.</span></div>
+<div><b>$A$ symétrique réelle</b><span>Diagonalisable en base orthonormée : $A = PDP^{\top}$ avec $P$ orthogonale.</span></div>
+<div><b>$\operatorname{rg}A = 1$</b><span>$\chi_A = X^{n-1}(X - \operatorname{tr}A)$ ; diagonalisable $\iff\operatorname{tr}A\neq0$.</span></div>
+<div><b>$\operatorname{Sp}(A) = \{\lambda\}$ seul</b><span>Diagonalisable $\iff A = \lambda I_n$.</span></div>
+<div><b>$AB = BA$</b><span>Les $E_\lambda(A)$ sont stables par $B$ ; si $A$ a $n$ valeurs propres distinctes, $B$ est diagonalisable dans la même base.</span></div>
+<div><b>$u$ diagonalisable, $F$ stable par $u$</b><span>L'endomorphisme induit $u_F$ est diagonalisable.</span></div>
+<div><b>$A$ et $\,{}^tA$</b><span>Même $\chi$, même spectre, mêmes dimensions de sous-espaces propres.</span></div>
+<div><b>$A$ semblable à $B$</b><span>Même $\chi$, trace, déterminant, rang ; diagonalisables en même temps.</span></div>
+</div>
+
+<h2 id="r-appli">12. À quoi ça sert</h2>
+<ul>
+<li><b>Puissances</b> : $A = PDP^{-1}\Rightarrow A^n = PD^nP^{-1}$.</li>
+<li><b>Suites couplées</b> : $X_{n+1} = AX_n\Rightarrow X_n = A^nX_0$. Avec $Y_n = P^{-1}X_n$, on a $Y_{n+1} = DY_n$ : les suites se découplent.</li>
+<li><b>Systèmes différentiels</b> : $X' = AX$. Avec $Y = P^{-1}X$, on a $Y' = DY$, donc $y_i(t) = c_ie^{\lambda_it}$.</li>
+<li><b>Racine carrée</b> : si $\operatorname{Sp}(A)\subset\mathbb R_+$ et $A$ diagonalisable, $B = P\sqrt DP^{-1}$ vérifie $B^2 = A$.</li>
+<li><b>Commutant</b> : si $A$ a $n$ valeurs propres distinctes, les matrices qui commutent avec $A$ sont les $PD'P^{-1}$, $D'$ diagonale.</li>
+</ul>
+
+<h2 id="r-erreurs">Les erreurs qui coûtent des points</h2>
+<ol class="merr">
+<li>Prendre $\det(A - XI_n)$ et l'appeler $\chi_A$ en taille impaire : le signe est faux.</li>
+<li>Développer $\chi_A$ en taille 3 sans faire de zéros, puis ne pas savoir factoriser.</li>
+<li>Oublier qu'un vecteur propre est non nul.</li>
+<li>Conclure « diagonalisable » sans vérifier $\dim E_\lambda = m_\lambda$ pour les valeurs propres multiples.</li>
+<li>Ranger dans $P$ les vecteurs propres dans un autre ordre que les valeurs propres dans $D$.</li>
+<li>Écrire $\operatorname{Sp}(A) = $ racines de $P$ quand $P(A) = 0$ : ce n'est qu'une inclusion.</li>
+<li>Dire « non diagonalisable sur $\mathbb R$ donc non diagonalisable » sans regarder $\mathbb C$.</li>
+<li>Calculer $P^{-1}$ alors que l'énoncé ne le demande pas.</li>
+</ol>
+
+<h2 id="r-entrainement">S'entraîner</h2>
+<div data-mlab="exred"></div>
+<h2>Vrai ou faux ?</h2>
+<div data-mlab="quizred"></div>
+
+<h2 id="r-arbre">L'arbre de la réduction</h2>
+<p>Clique sur une question pour ouvrir ses réponses. Chaque feuille renvoie à la bonne partie.</p>
+<div class="dtree">
+<details open><summary class="q0">J'ai une matrice $A$ (ou un endomorphisme $u$) à étudier</summary>
+<ul>
+<li><details open><summary class="q1">L'énoncé donne-t-il une information spéciale ?</summary>
+<ul>
+<li><details><summary class="y">Oui : une relation $P(A) = 0$</summary><ul>
+<li><a href="#r-annul">$\operatorname{Sp}(A)\subset$ racines de $P$</a></li>
+<li><details><summary class="q2">$P$ scindé à racines simples ?</summary><ul><li class="ok"><a href="#r-crit">oui : diagonalisable</a></li><li><a href="#r-annul">non : chercher $\pi_A$, ou calculer $\chi_A$</a></li></ul></details></li>
+</ul></details></li>
+<li><details><summary class="y">Oui : $A$ symétrique réelle</summary><ul><li class="ok"><a href="#r-crit">diagonalisable en base orthonormée</a></li></ul></details></li>
+<li><details><summary class="y">Oui : les valeurs propres</summary><ul>
+<li><a href="#r-enonce">trace, déterminant, inversibilité immédiats</a></li>
+<li><details><summary class="q2">$n$ valeurs propres distinctes ?</summary><ul><li class="ok"><a href="#r-crit">oui : diagonalisable, chaque $E_\lambda$ est une droite</a></li><li><a href="#r-esp">non : calculer $\dim E_\lambda$ des multiples</a></li></ul></details></li>
+</ul></details></li>
+<li><details><summary class="y">Oui : $A$ nilpotente</summary><ul><li class="no"><a href="#r-crit">$\operatorname{Sp} = \{0\}$ : diagonalisable seulement si $A = 0$</a></li><li><a href="#r-trig">sinon : trigonaliser</a></li></ul></details></li>
+<li><details><summary class="y">Oui : $\operatorname{rg}A = 1$</summary><ul><li><a href="#r-sanschi">$\chi_A = X^{n-1}(X - \operatorname{tr}A)$</a></li><li class="ok"><a href="#r-enonce">diagonalisable $\iff\operatorname{tr}A\neq0$</a></li></ul></details></li>
+<li><details open><summary class="n">Non : on calcule</summary><ul>
+<li><details open><summary class="q2">Étape 1 : trouver $\chi_A$</summary><ul>
+<li><a href="#r-chi">taille 2 : $X^2 - \operatorname{tr}(A)X + \det A$</a></li>
+<li><a href="#r-chi">triangulaire : la diagonale</a></li>
+<li><a href="#r-zeros">lignes de même somme : $C_1\leftarrow C_1 + \cdots + C_n$</a></li>
+<li><a href="#r-zeros">lignes presque égales : $L_i\leftarrow L_i - L_j$</a></li>
+<li><a href="#r-sanschi">deviner une valeur propre, finir avec la trace</a></li>
+</ul></details></li>
+<li><details open><summary class="q2">Étape 2 : $\chi_A$ est-il scindé ?</summary><ul>
+<li><details><summary class="n">Non (sur $\mathbb R$)</summary><ul><li class="no"><a href="#r-crit">ni diagonalisable ni trigonalisable sur $\mathbb R$</a></li><li><a href="#r-trig">travailler sur $\mathbb C$</a></li></ul></details></li>
+<li><details open><summary class="y">Oui</summary><ul>
+<li><details open><summary class="q2">Étape 3 : racines simples ?</summary><ul>
+<li class="ok"><a href="#r-diag">oui : diagonalisable, une droite propre par valeur propre</a></li>
+<li><details open><summary class="n">Non : il y a des valeurs propres multiples</summary><ul>
+<li><details open><summary class="q2">Étape 4 : $\dim E_\lambda = m_\lambda$ pour chaque $\lambda$ multiple ?</summary><ul>
+<li class="ok"><a href="#r-diag">oui : diagonalisable, $P$ = vecteurs propres en colonnes</a></li>
+<li><details><summary class="n">non</summary><ul>
+<li class="no"><a href="#r-crit">pas diagonalisable</a></li>
+<li class="ok"><a href="#r-trig">trigonaliser : vecteurs propres, puis $(A - \lambda I)e = e_{\text{précédent}}$</a></li>
+</ul></details></li>
+</ul></details></li>
+</ul></details></li>
+</ul></details></li>
+</ul></details></li>
+</ul></details></li>
+<li><details><summary class="q2">Et après ? À quoi va servir la réduction</summary><ul>
+<li><a href="#r-appli">$A^n = PD^nP^{-1}$</a></li>
+<li><a href="#r-appli">suites $X_{n+1} = AX_n$</a></li>
+<li><a href="#r-appli">systèmes $X' = AX$</a></li>
+<li><a href="#r-annul">inverse par Cayley-Hamilton</a></li>
+</ul></details></li>
+</ul>
+</details></li>
+</ul>
+</details>
+</div>
 `
 };

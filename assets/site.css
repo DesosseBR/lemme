@@ -1901,3 +1901,28 @@ footer.site.site-min .wrap{padding-block:20px}
 .tl{margin-left:14px}
 @media (max-width:900px){.tbranches{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px}.tbranches::before,.tb::before{display:none}}
 @media (max-width:520px){.tbranches{grid-template-columns:1fr}}
+/* ===== Arbre dépliable (réduction) ===== */
+.mrefl.wide{grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr))}
+.dtree{margin:24px 0;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--surface);font-family:var(--f-display)}
+.dtree ul{list-style:none;margin:0;padding:0 0 0 26px;position:relative}
+.dtree ul::before{content:"";position:absolute;left:10px;top:0;bottom:14px;border-left:2px solid var(--line)}
+.dtree li{position:relative;margin:8px 0}
+.dtree li::before{content:"";position:absolute;left:-16px;top:17px;width:14px;border-top:2px solid var(--line)}
+.dtree summary{display:inline-flex;align-items:center;gap:8px;list-style:none;cursor:pointer;padding:7px 12px;border-radius:10px;border:1.5px solid var(--line);font:600 14.5px/1.35 var(--f-display);background:var(--bg)}
+.dtree summary::-webkit-details-marker{display:none}
+.dtree summary::before{content:"+";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--surface);font:700 13px/1 var(--f-mono);flex-shrink:0}
+.dtree details[open] > summary::before{content:"−"}
+.dtree summary.q0{font-size:16px;border-color:var(--ink)}
+.dtree summary.q1,.dtree summary.q2{border-color:#2B5BD7;color:#2B5BD7;background:rgba(43,91,215,.06)}
+.dtree summary.q1::before,.dtree summary.q2::before{background:#2B5BD7}
+.dtree summary.y{border-color:#1F8A5B;color:#1F8A5B;background:rgba(31,138,91,.07)}
+.dtree summary.y::before{background:#1F8A5B}
+.dtree summary.n{border-color:#D4503B;color:#D4503B;background:rgba(212,80,59,.07)}
+.dtree summary.n::before{background:#D4503B}
+.dtree li > a{display:inline-block;padding:6px 12px;border-radius:9px;background:var(--bg-2);color:var(--ink);font:500 14px/1.4 var(--f-display);text-decoration:none}
+.dtree li > a:hover{text-decoration:underline;text-underline-offset:3px}
+.dtree li.ok > a{background:rgba(31,138,91,.14)}
+.dtree li.ok > a::before{content:"✓ ";color:#1F8A5B;font-weight:700}
+.dtree li.no > a{background:rgba(212,80,59,.12)}
+.dtree li.no > a::before{content:"✗ ";color:#D4503B;font-weight:700}
+@media (max-width:560px){.dtree ul{padding-left:18px}.dtree summary{font-size:13.5px}}
