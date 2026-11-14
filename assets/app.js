@@ -1527,6 +1527,29 @@ function backTo(a) {
   b.hidden = false;
   b.onclick = () => { b.hidden = true; if (document.body.contains(a)) { a.scrollIntoView({ behavior: "smooth", block: "center" }); a.classList.remove("tb-flash"); void a.offsetWidth; a.classList.add("tb-flash"); } };
 }
+/* Division euclidienne posée « en potence » (A et B : coefficients du plus haut degré au plus bas, B unitaire de préférence) */
+function potenceHtml(A, B) {
+  const n = A.length - 1, m = B.length - 1, cols = n + 1, Q = [], rows = [];
+  const term = (c, d, first) => { if (c === null || c === undefined) return ""; if (!c) return ""; const a = Math.abs(c), mon = d === 0 ? "" : d === 1 ? "X" : `X^{${d}}`, co = a === 1 && d ? "" : (Number.isInteger(a) ? a : ftex(Fr(Math.round(a * 1e6), 1e6))); return `$${c < 0 ? "-" : first ? "" : "+"}${co}${mon}$`; };
+  const rowCells = (v, cls) => { let first = true; return v.map((c, k) => { const t = term(c, n - k, first); if (t) first = false; return `<td class="${cls}">${t}</td>`; }).join(""); };
+  let cur = A.slice(), steps = [];
+  rows.push(rowCells(cur, ""));
+  for (let i = 0; i <= n - m; i++) {
+    const c = cur[i] / B[0]; Q.push(c);
+    if (!c) continue;
+    const sub = Array(cols).fill(null); B.forEach((b, j) => { sub[i + j] = -c * b; });
+    rows.push(rowCells(sub, "ps"));
+    cur = cur.map((x, k) => sub[k] !== null ? x + sub[k] : x);
+    const shown = cur.map((x, k) => k <= i ? null : x);
+    rows.push(rowCells(shown, "pr").replace(/<td class="pr"><\/td>/g, '<td class="pr"></td>'));
+    steps.push([c, n - i - m]);
+  }
+  const ptxt = v => { let f = true; return v.map((c, k) => { const t = term(c, v.length - 1 - k, f); if (t) f = false; return t.replace(/\$/g, ""); }).join(" ") || "0"; };
+  const last = cur.slice(n - m + 1);
+  const html = `<table class="pot"><tbody>${rows.map((r, i) => `<tr${i % 2 === 1 ? ' class="sub"' : ""}>${r}<td class="pb${i === 0 ? " pdiv" : i === 1 ? " pq" : ""}">${i === 0 ? `$${ptxt(B)}$` : i === 1 ? `$\\cR{${ptxt(Q)}}$` : ""}</td></tr>`).join("")}</tbody></table>`;
+  return { html, Q, R: last, ptxt };
+}
+function renderPotence(el) { const A = el.dataset.a.split(",").map(Number), B = el.dataset.b.split(",").map(Number); el.innerHTML = potenceHtml(A, B).html; }
 function braceTree(el) {
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
   const chain = tb => { const out = []; let cur = null, fin = null; [...tb.children].forEach(c => { if (c.classList.contains("tq")) { cur = { q: c.innerHTML }; out.push(cur); } else if (c.classList.contains("tend")) fin = c; else if (c.classList.contains("tl") && cur) cur.yes = c; else if (c.classList.contains("tno") && cur) cur.no = c.innerHTML; }); return { out, fin }; };
@@ -2176,8 +2199,8 @@ function mlDivEucl(host) {
       cur = cur.map((v, j) => v - subFull[j]);
     }
     rows += `<tr><td>$${ptex(cur.slice(3))}$</td><td colspan="2">degré $\\lt2$ : on s'arrête</td></tr>`;
-    st.push(`<p class="mlstep">1. On divise à chaque fois le terme de plus haut degré par $X^2$, puis on soustrait :</p><table class="mtab"><tr><th>Reste courant</th><th>Terme du quotient</th><th>On soustrait</th></tr>${rows}</table>`);
-    st.push(`<p class="mlres">$$${ptex(A)} = \\left(${ptex(B)}\\right)\\left(\\cR{${ptex(Q)}}\\right) + ${ptex(R)}$$</p><p class="mlnote">Contrôle en $X = 1$ : $A(1) = ${A.reduce((s, v) => s + v, 0)}$ et $B(1)Q(1) + R(1) = ${B.reduce((s, v) => s + v, 0)}\\times${par(Q.reduce((s, v) => s + v, 0))} + ${par(R[0] + R[1])} = ${B.reduce((s, v) => s + v, 0) * Q.reduce((s, v) => s + v, 0) + R[0] + R[1]}$ $\\checkmark$</p>`);
+    st.push(`<p class="mlstep">1. On pose la division : on divise le premier terme par $X^2$, on écrit le résultat au quotient, on multiplie $B$ par ce terme et on soustrait (en rouge), puis on recommence avec le reste :</p><div class="potw">${potenceHtml(A, B).html}</div>`);
+    st.push(`<p class="mlres">$$${ptex(A)} = \\left(${ptex(B)}\\right)\\left(\\cR{${ptex(Q)}}\\right)${ptex(R)[0] === "-" ? " " : " + "}${ptex(R)}$$</p><p class="mlnote">Contrôle en $X = 1$ : $A(1) = ${A.reduce((s, v) => s + v, 0)}$ et $B(1)Q(1) + R(1) = ${B.reduce((s, v) => s + v, 0)}\\times${par(Q.reduce((s, v) => s + v, 0))} + ${par(R[0] + R[1])} = ${B.reduce((s, v) => s + v, 0) * Q.reduce((s, v) => s + v, 0) + R[0] + R[1]}$ $\\checkmark$</p>`);
     return st;
   };
   stepLab(host, "Division euclidienne pas à pas", gen, build);
@@ -3372,6 +3395,7 @@ function wire(ex) {
     route(true);
   }));
   fixLabm(app);
+  $$(".potence", app).forEach(renderPotence);
   $$(".tree", app).forEach(braceTree);
   $$("[data-mlab]", app).forEach(mountMlab);
   $$(".msum a, .btree a, .lg a, .htree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); if (a.closest(".btree, .lg, .htree")) backTo(a); } }));

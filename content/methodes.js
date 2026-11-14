@@ -3005,14 +3005,15 @@ $$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(
 <h2 id="q-div">3. La division euclidienne</h2>
 <div class="sbox">$$B\neq0:\quad\exists!\,(Q, R),\quad A = BQ + R\quad\text{et}\quad\deg R\lt\deg B.$$</div>
 <p class="ml">Exemple : $A = X^4 + 2X^3 - X + 1$ par $B = X^2 + X + 1$</p>
-<p>À chaque étape, on divise le terme de plus haut degré du reste par $X^2$, et on soustrait :</p>
-<table class="mtab">
-<tr><th>Reste courant</th><th>Terme du quotient</th><th>On soustrait</th></tr>
-<tr><td>$X^4 + 2X^3 + 0X^2 - X + 1$</td><td>$\cR{X^2}$</td><td>$X^2B = X^4 + X^3 + X^2$</td></tr>
-<tr><td>$X^3 - X^2 - X + 1$</td><td>$\cR{X}$</td><td>$XB = X^3 + X^2 + X$</td></tr>
-<tr><td>$-2X^2 - 2X + 1$</td><td>$\cR{-2}$</td><td>$-2B = -2X^2 - 2X - 2$</td></tr>
-<tr><td>$3$</td><td colspan="2">degré $0\lt2$ : on s'arrête</td></tr>
-</table>
+<p>On pose la division comme pour les entiers : le dividende $A$ à gauche, le diviseur $B$ en haut à droite, le quotient en dessous. Les lignes en rouge sont celles qu'on soustrait.</p>
+<div class="potence potw" data-a="1,2,0,-1,1" data-b="1,1,1"></div>
+<ol>
+<li>$\cO{X^4\div X^2 = X^2}$ : on écrit $X^2$ au quotient, on calcule $X^2B = X^4 + X^3 + X^2$ et on le soustrait. Il reste $X^3 - X^2 - X + 1$.</li>
+<li>$\cO{X^3\div X^2 = X}$ : on écrit $+X$ au quotient, on soustrait $XB = X^3 + X^2 + X$. Il reste $-2X^2 - 2X + 1$.</li>
+<li>$\cO{-2X^2\div X^2 = -2}$ : on écrit $-2$ au quotient, on soustrait $-2B = -2X^2 - 2X - 2$. Il reste $3$.</li>
+<li>Le reste $3$ est de degré $0\lt2 = \deg B$ : on s'arrête.</li>
+</ol>
+<p><b>Astuce</b> : on laisse une place pour chaque puissance (ici, aucun terme en $X^2$ dans $A$), pour que les colonnes restent alignées.</p>
 $$\cG{X^4 + 2X^3 - X + 1 = (X^2 + X + 1)(X^2 + X - 2) + 3}.$$
 <p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3$. $\checkmark$</p>
 <div data-mlab="diveucl"></div>
