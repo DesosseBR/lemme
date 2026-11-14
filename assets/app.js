@@ -2182,7 +2182,7 @@ function mlDivEucl(host) {
   };
   stepLab(host, "Division euclidienne pas à pas", gen, build);
 }
-const desSum = ts => ts.filter(([f]) => f.n).map(([f, den], i) => { const a = Math.abs(f.n), num = f.d === 1 ? a : a, dd = f.d === 1 ? den : `${f.d}${den}`; return `${f.n < 0 ? (i ? " - " : "-") : (i ? " + " : "")}\\frac{${num}}{${dd}}`; }).join("") || "0";
+const desSum = ts => ts.filter(([f]) => f.n).map(([f, den], i) => { const a = Math.abs(f.n), num = f.d === 1 ? a : a, dd = f.d === 1 ? den : `${f.d}${/^X [+-]/.test(den) ? `(${den})` : den}`; return `${f.n < 0 ? (i ? " - " : "-") : (i ? " + " : "")}\\frac{${num}}{${dd}}`; }).join("") || "0";
 function mlDes(host) {
   const gen = () => {
     const dbl = rnd(0, 1); let a, b, c;
