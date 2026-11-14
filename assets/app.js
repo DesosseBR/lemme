@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2036,6 +2036,128 @@ const QSER = [
   ["$\\sum(u_{n+1} - u_n)$ converge si et seulement si $(u_n)$ converge.", true, "Vrai : $S_N = u_{N+1} - u_0$."],
   ["$\\sum_{k=1}^n\\frac1k\\sim\\ln n$.", true, "Vrai : par comparaison série-intégrale, $\\ln(n + 1)\\leqslant H_n\\leqslant1 + \\ln n$."],
   ["Si $\\sum u_n$ et $\\sum v_n$ divergent, alors $\\sum(u_n + v_n)$ diverge.", false, "Faux : $u_n = 1$ et $v_n = -1$."]
+];
+
+/* ---------- Labos : DL, intégrales à paramètre, suites de fonctions ---------- */
+/* tracé générique : plusieurs courbes sur [x0, x1] */
+function plotSvg(curves, x0, x1, y0, y1, extra = "") {
+  const W = 520, H = 260, X = x => 40 + (x - x0) / (x1 - x0) * (W - 60), Y = y => H - 25 - (Math.max(y0 - 1, Math.min(y1 + 1, y)) - y0) / (y1 - y0) * (H - 45);
+  const path = f => { let d = "", up = false; for (let i = 0; i <= 240; i++) { const x = x0 + (x1 - x0) * i / 240, y = f(x); if (!isFinite(y)) { up = false; continue; } d += `${up ? "L" : "M"}${X(x).toFixed(1)},${Y(y).toFixed(1)}`; up = true; } return d; };
+  return `<svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Courbes"><defs><clipPath id="pc"><rect x="40" y="12" width="${W - 60}" height="${H - 37}"/></clipPath></defs>${y0 <= 0 && y1 >= 0 ? `<line x1="40" y1="${Y(0)}" x2="${W - 20}" y2="${Y(0)}" class="ax"/>` : ""}${x0 <= 0 && x1 >= 0 ? `<line x1="${X(0)}" y1="${H - 25}" x2="${X(0)}" y2="12" class="ax"/>` : ""}<g clip-path="url(#pc)">${curves.map(c => `<path d="${path(c.f)}" fill="none" stroke="${c.c}" stroke-width="${c.w || 2}"${c.d ? ` stroke-dasharray="${c.d}"` : ""}/>`).join("")}${extra ? extra(X, Y) : ""}</g><text x="${W - 22}" y="${H - 8}" class="tx" text-anchor="end">${x1}</text><text x="40" y="${H - 8}" class="tx">${x0}</text></svg>`;
+}
+/* Polynômes de Taylor */
+function mlTaylor(host) {
+  const F = [
+    { t: "e^x", f: Math.exp, c: k => 1 / fact(k), r: [-3, 3, -1, 8] },
+    { t: "\\cos x", f: Math.cos, c: k => k % 2 ? 0 : (-1) ** (k / 2) / fact(k), r: [-6, 6, -2, 2] },
+    { t: "\\sin x", f: Math.sin, c: k => k % 2 ? (-1) ** ((k - 1) / 2) / fact(k) : 0, r: [-6, 6, -2, 2] },
+    { t: "\\ln(1 + x)", f: x => x > -1 ? Math.log(1 + x) : NaN, c: k => k ? (-1) ** (k - 1) / k : 0, r: [-0.95, 2, -3, 1.5] },
+    { t: "\\frac1{1 - x}", f: x => 1 / (1 - x), c: () => 1, r: [-2, 0.95, -1, 6] }
+  ];
+  let fi = 0, n = 2;
+  const draw = () => {
+    const g = F[fi], P = x => { let s = 0; for (let k = 0; k <= n; k++) s += g.c(k) * x ** k; return s; };
+    const terms = []; for (let k = 0; k <= n; k++) { const c = g.c(k); if (!c) continue; const fr = Math.abs(c) < 1 ? (() => { const d = Math.round(1 / Math.abs(c)); return Math.abs(1 / d - Math.abs(c)) < 1e-9 ? Fr(Math.sign(c), d) : null; })() : Fr(Math.round(c)); terms.push([fr || Fr(Math.round(c * 1e6), 1e6), k === 0 ? "" : k === 1 ? "x" : `x^{${k}}`]); }
+    host.innerHTML = `<p class="mlt">Le DL s'approche de la fonction près de $0$</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">ordre $n = ${n}$ <input type="range" min="0" max="12" value="${n}" data-n aria-label="Ordre du DL"></label></div>${plotSvg([{ f: g.f, c: "#2B5BD7", w: 2.5 }, { f: P, c: "#D4503B", d: "6 4" }], g.r[0], g.r[1], g.r[2], g.r[3])}<p class="mlcalc">$$${g.t} = \\textcolor[RGB]{212,80,59}{${fsum(terms)}} + o(x^{${n}})$$</p><p class="mlnote">En bleu la fonction, en rouge pointillé la partie régulière. Plus l'ordre augmente, plus elles collent longtemps, mais seulement <b>près de $0$</b>.</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const fact = k => { let r = 1; for (let i = 2; i <= k; i++) r *= i; return r; };
+/* Banque de limites par DL, corrigées pas à pas */
+const DLEX = [
+  ["\\lim_{x\\to0}\\frac{\\ln(1 + x) - x}{x^2}", ["Le dénominateur est $x^2$ : on développe le numérateur à l'ordre $2$.", "$\\ln(1 + x) - x = x - \\frac{x^2}2 + o(x^2) - x = -\\frac{x^2}2 + o(x^2)$.", "Donc le quotient vaut $-\\frac12 + o(1)$ : la limite est $-\\frac12$."]],
+  ["\\lim_{x\\to0}\\frac{x - \\sin x}{x - \\tan x}", ["En haut : $x - \\sin x = \\frac{x^3}6 + o(x^3)$.", "En bas : $x - \\tan x = -\\frac{x^3}3 + o(x^3)$.", "Quotient : $\\frac{x^3/6}{-x^3/3} = -\\frac12$. La limite est $-\\frac12$."]],
+  ["\\lim_{x\\to0}\\frac{e^x - \\cos x - x}{x^2}", ["Ordre $2$ : $e^x = 1 + x + \\frac{x^2}2 + o(x^2)$ et $\\cos x = 1 - \\frac{x^2}2 + o(x^2)$.", "$e^x - \\cos x - x = \\frac{x^2}2 + \\frac{x^2}2 + o(x^2) = x^2 + o(x^2)$.", "La limite est $1$."]],
+  ["\\lim_{x\\to0}(\\cos x)^{1/x^2}", ["Forme $1^\\infty$ : on écrit $e^{\\frac{\\ln(\\cos x)}{x^2}}$.", "$\\ln(\\cos x) = \\ln\\big(1 - \\frac{x^2}2 + o(x^2)\\big) = -\\frac{x^2}2 + o(x^2)$.", "L'exposant tend vers $-\\frac12$ : la limite est $e^{-1/2} = \\frac1{\\sqrt e}$."]],
+  ["\\lim_{x\\to+\\infty}x^2\\Big(e^{1/x} - 1 - \\frac1x\\Big)", ["On pose $h = \\frac1x\\to0$ : l'expression vaut $\\frac{e^h - 1 - h}{h^2}$.", "$e^h - 1 - h = \\frac{h^2}2 + o(h^2)$.", "La limite est $\\frac12$."]],
+  ["\\lim_{x\\to0}\\frac{\\sqrt{1 + x} - \\sqrt{1 - x}}{x}", ["Ordre $1$ : $\\sqrt{1 + x} = 1 + \\frac x2 + o(x)$ et $\\sqrt{1 - x} = 1 - \\frac x2 + o(x)$.", "Différence : $x + o(x)$.", "La limite est $1$."]],
+  ["\\lim_{x\\to0}\\Big(\\frac1x - \\frac1{\\ln(1 + x)}\\Big)", ["Même dénominateur : $\\frac{\\ln(1 + x) - x}{x\\ln(1 + x)}$, et le dénominateur est $\\sim x^2$.", "Numérateur à l'ordre $2$ : $-\\frac{x^2}2 + o(x^2)$.", "La limite est $-\\frac12$."]],
+  ["\\lim_{n\\to+\\infty}n\\Big(\\Big(1 + \\frac1n\\Big)^{1/3} - 1\\Big)", ["$(1 + u)^{1/3} - 1\\sim\\frac u3$ avec $u = \\frac1n\\to0$.", "Donc l'expression $\\sim n\\cdot\\frac1{3n} = \\frac13$.", "Un équivalent suffit ici (produit). La limite est $\\frac13$."]]
+];
+function mlDlEx(host) {
+  let i = rnd(0, DLEX.length - 1), k = -1;
+  const draw = () => {
+    const [q, st] = DLEX[i];
+    host.innerHTML = `<p class="mlt">Limites par DL : cherche, puis dévoile étape par étape</p><p class="mlq">$$${q}$$</p>${st.slice(0, k + 1).map((s, j) => `<p class="mlstep">${j + 1}. ${s}</p>`).join("")}<div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-g${k < st.length - 1 ? "" : " disabled"}>${k < 0 ? "Indice" : "Étape suivante"} ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-new>Une autre</button></div>`;
+    $("[data-g]", host).addEventListener("click", () => { k++; draw(); });
+    $("[data-new]", host).addEventListener("click", () => { let j = i; while (j === i) j = rnd(0, DLEX.length - 1); i = j; k = -1; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+const QDL = [
+  ["Si $f\\sim g$ et $h\\sim k$, alors $f + h\\sim g + k$.", false, "Faux : on n'additionne pas les équivalents. $x + x^2\\sim x$ et $-x\\sim-x$, mais la somme vaut $x^2$."],
+  ["$\\cos x = 1 - \\frac{x^2}2 + o(x^3)$ en $0$.", true, "Vrai : le terme en $x^3$ est nul (parité), on gagne un ordre."],
+  ["$\\ln(1 + x)\\sim x$ en $0$, donc $\\ln(1 + x) - x\\sim0$.", false, "Faux : on ne soustrait pas des équivalents, et rien n'est équivalent à $0$. Il faut le DL : $-\\frac{x^2}2$."],
+  ["Si $f\\sim g$ en $+\\infty$, alors $e^f\\sim e^g$.", false, "Faux : $x + 1\\sim x$ mais $e^{x+1} = e\\cdot e^x$."],
+  ["$\\tan x = x + \\frac{x^3}3 + o(x^3)$.", true, "Vrai : par $\\frac{\\sin}{\\cos}$ ou en primitivant $1 + \\tan^2$."],
+  ["$(\\ln x)^{10} = o(\\sqrt x)$ en $+\\infty$.", true, "Vrai : croissances comparées."],
+  ["Pour composer $g(u(x))$ par DL en $0$, il faut $u(x)\\to0$.", true, "Vrai : les DL usuels sont en $0$. Pour $e^{\\cos x}$, écrire $e\\cdot e^{\\cos x - 1}$."],
+  ["Si $f(x) = 2 + 3x + x^3 + o(x^3)$, alors la courbe traverse sa tangente en $0$.", true, "Vrai : le premier terme après la tangente est $x^3$, de signe variable : point d'inflexion."],
+  ["Une fonction qui a un $DL_2(0)$ est deux fois dérivable en $0$.", false, "Faux : $DL_1$ donne la dérivabilité, mais pas plus. Contre-exemple : $x^3\\sin\\frac1x$."],
+  ["$\\sqrt{x^2 + x}\\underset{+\\infty}= x + \\frac12 + o(1)$.", true, "Vrai : $x\\sqrt{1 + \\frac1x} = x\\big(1 + \\frac1{2x} + o(\\frac1x)\\big)$."]
+];
+/* Domination : f(x, t) pour plusieurs x, et φ au-dessus */
+function mlDomin(host) {
+  const F = [
+    { t: "\\frac{e^{-xt}}{1 + t^2}", f: (x, t) => Math.exp(-x * t) / (1 + t * t), phi: t => 1 / (1 + t * t), pt: "\\frac1{1 + t^2}", xr: [0, 3], tr: [0, 6], yr: [0, 1.1] },
+    { t: "e^{-t^2}\\cos(xt)", f: (x, t) => Math.exp(-t * t) * Math.cos(x * t), phi: t => Math.exp(-t * t), pt: "e^{-t^2}", xr: [0, 8], tr: [0, 3], yr: [-1, 1.1] },
+    { t: "\\Big(1 - \\frac tx\\Big)^x\\mathbf 1_{[0, x]}", f: (x, t) => t <= x ? (1 - t / x) ** x : 0, phi: t => Math.exp(-t), pt: "e^{-t}", xr: [1, 30], tr: [0, 6], yr: [0, 1.1] }
+  ];
+  let fi = 0, x = 1;
+  const draw = () => {
+    const g = F[fi];
+    host.innerHTML = `<p class="mlt">La domination : $\\varphi$ reste au-dessus pour tous les paramètres</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">paramètre $= ${x.toFixed(1).replace(".", "{,}")}$ <input type="range" min="${g.xr[0]}" max="${g.xr[1]}" step="0.1" value="${x}" data-x aria-label="Paramètre"></label></div>${plotSvg([{ f: t => g.phi(t), c: "#C27C00", w: 2.5 }, { f: t => -g.phi(t), c: "#C27C00", w: 1.5, d: "4 4" }, { f: t => g.f(x, t), c: "#2B5BD7", w: 2 }], g.tr[0], g.tr[1], g.yr[0], g.yr[1])}<p class="mlnote">En bleu $t\\mapsto f(x, t)$, en orange $\\pm\\varphi(t) = \\pm${g.pt}$ : elle ne dépend pas du paramètre, et elle est intégrable.</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; x = F[fi].xr[0] || 1; draw(); }));
+    $("[data-x]", host).addEventListener("input", e => { x = +e.target.value; draw(); $("[data-x]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QIPAR = [
+  ["$\\int_0^1\\frac{dt}{\\sqrt t}$ converge.", true, "Vrai : $\\alpha = \\frac12\\lt1$ en $0$."],
+  ["$\\int_1^{+\\infty}\\frac{dt}t$ converge.", false, "Faux : $\\alpha = 1$, divergence (c'est $\\ln$)."],
+  ["Une intégrale convergente est toujours celle d'une fonction intégrable.", false, "Faux : $\\int_1^{+\\infty}\\frac{\\sin t}t\\,dt$ converge, mais $\\frac{\\sin t}t$ n'est pas intégrable."],
+  ["Pour la convergence dominée, $\\varphi$ peut dépendre de $n$.", false, "Faux : $\\varphi$ doit être la même pour tous les $n$."],
+  ["Pour dériver sous l'intégrale, on domine $\\frac{\\partial f}{\\partial x}$.", true, "Vrai : c'est la dérivée partielle qu'il faut dominer (et $f$ doit être intégrable)."],
+  ["$\\Gamma(n + 1) = n!$.", true, "Vrai : $\\Gamma(x + 1) = x\\Gamma(x)$ et $\\Gamma(1) = 1$."],
+  ["Pour la continuité de $\\Gamma$ sur $]0, +\\infty[$, on domine sur chaque $[a, b]$.", true, "Vrai : une domination sur tout $]0, +\\infty[$ est impossible, la continuité est locale."],
+  ["$f_n = n\\mathbf 1_{]0, 1/n]}$ vérifie $\\int_0^1f_n\\to\\int_0^1\\lim f_n$.", false, "Faux : $\\int f_n = 1$ et la limite simple est nulle. Il n'y a pas de domination."],
+  ["Pour intégrer une série terme à terme sur $]0, +\\infty[$, il suffit que $\\sum f_n$ converge simplement.", false, "Faux : il faut aussi que $\\sum\\int|f_n|$ converge."],
+  ["$\\int_0^{+\\infty}e^{-t^2}\\,dt = \\frac{\\sqrt\\pi}2$.", true, "Vrai : c'est l'intégrale de Gauss."]
+];
+/* Suites de fonctions : tracé de f_n et du sup de l'écart */
+function mlFn(host) {
+  const F = [
+    { t: "x^n\\ \\text{sur}\\ [0, 1]", f: (n, x) => x ** n, lim: x => x < 1 ? 0 : 1, r: [0, 1, 0, 1.05], sup: n => 1, st: "1\\ (\\text{près de}\\ 1)", cu: false },
+    { t: "nxe^{-nx}", f: (n, x) => n * x * Math.exp(-n * x), lim: () => 0, r: [0, 3, 0, 0.45], sup: n => 1 / Math.E, st: "f_n(\\tfrac1n) = \\tfrac1e", cu: false },
+    { t: "\\frac{\\sin(nx)}n", f: (n, x) => Math.sin(n * x) / n, lim: () => 0, r: [0, 6.3, -1.05, 1.05], sup: n => 1 / n, st: "\\tfrac1n", cu: true },
+    { t: "\\frac{x}{1 + nx^2}", f: (n, x) => x / (1 + n * x * x), lim: () => 0, r: [0, 3, 0, 0.55], sup: n => 1 / (2 * Math.sqrt(n)), st: "f_n(\\tfrac1{\\sqrt n}) = \\tfrac1{2\\sqrt n}", cu: true }
+  ];
+  let fi = 0, n = 3;
+  const draw = () => {
+    const g = F[fi], s = g.sup(n);
+    host.innerHTML = `<p class="mlt">Convergence simple ou uniforme ? Fais varier $n$</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">$n = ${n}$ <input type="range" min="1" max="60" value="${n}" data-n aria-label="Valeur de n"></label></div>${plotSvg([1, 2, 4].filter(m => m < n).map(m => ({ f: x => g.f(m, x), c: "#9AA6C9", w: 1 })).concat([{ f: x => g.lim(x), c: "#2B5BD7", w: 2.5 }, { f: x => g.f(n, x), c: "#D4503B", w: 2 }]), g.r[0], g.r[1], g.r[2], g.r[3])}<p class="mlcalc">$\\|f_n - f\\|_\\infty = ${g.st}\\approx${s.toFixed(4).replace(".", "{,}")}$ : ${g.cu ? "tend vers $0$, la convergence est <b>uniforme</b>." : "ne tend pas vers $0$, la convergence est seulement <b>simple</b>."}</p><p class="mlnote">En bleu la limite simple $f$, en rouge $f_n$, en gris quelques $f_m$ précédentes.</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QSF = [
+  ["La convergence simple de fonctions continues donne une limite continue.", false, "Faux : $x^n$ sur $[0, 1]$ a une limite discontinue en $1$."],
+  ["La convergence normale entraîne la convergence uniforme.", true, "Vrai : $\\|R_n\\|_\\infty\\leqslant\\sum_{k > n}\\|f_k\\|_\\infty\\to0$."],
+  ["$(x^n)$ converge uniformément sur $[0, \\frac12]$.", true, "Vrai : $\\sup_{[0, 1/2]}x^n = \\frac1{2^n}\\to0$."],
+  ["Si $f_n\\to f$ uniformément et les $f_n$ sont $\\mathcal C^1$, alors $f$ est $\\mathcal C^1$.", false, "Faux : il faut la CU des dérivées. $\\frac{\\sin(nx)}n\\to0$ mais $\\cos(nx)$ diverge."],
+  ["$\\sum\\frac{(-1)^n}{n + x}$ converge normalement sur $[0, +\\infty[$.", false, "Faux : $\\|f_n\\|_\\infty = \\frac1n$. Mais elle converge uniformément (séries alternées)."],
+  ["Pour montrer que la somme est continue, la CU sur chaque segment suffit.", true, "Vrai : la continuité est locale."],
+  ["Si $\\sum f_n$ converge uniformément, alors $\\|f_n\\|_\\infty\\to0$.", true, "Vrai : $f_n = R_{n-1} - R_n$."],
+  ["$\\zeta(x) = \\sum\\frac1{n^x}$ converge normalement sur $]1, +\\infty[$.", false, "Faux : $\\sup_{x > 1}\\frac1{n^x} = \\frac1n$. Elle converge normalement sur chaque $[a, +\\infty[$, $a > 1$."],
+  ["Sur un segment, la CU permet d'échanger limite et intégrale.", true, "Vrai : $\\big|\\int(f_n - f)\\big|\\leqslant(b - a)\\|f_n - f\\|_\\infty$."],
+  ["Une fonction continue sur $[a, b]$ est limite uniforme de polynômes.", true, "Vrai : théorème de Weierstrass."]
 ];
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */

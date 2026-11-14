@@ -2367,5 +2367,612 @@ $$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\sum_{n=1}^{+\infty}n\Big(\frac12\Bi
 <a class="tl tend" href="#s-abs">$|\sum u_n|\leqslant\sum|u_n|$</a></div>
 </div>
 </div>
+`,
+"Analyse asymptotique": R`
+<nav class="msum"><a href="#l-not">Notations</a><a href="#l-equiv">Équivalents</a><a href="#l-croiss">Croissances comparées</a><a href="#l-dl">Développements limités</a><a href="#l-usuels">DL usuels</a><a href="#l-ops">Opérations</a><a href="#l-ordre">Choisir l'ordre</a><a href="#l-lim">Limites</a><a href="#l-geo">Tangente, asymptote</a><a href="#l-suites">Suites</a><a href="#l-enonce">Ce que l'énoncé te donne</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : le terme principal (celui qui compte). <span class="kR">rouge</span> : ce qu'on jette, les termes au-delà de l'ordre et les $o(\cdot)$. <span class="kO">orange</span> : la substitution qu'on fait ($u = \dots$, $x = a + h$). <span class="kV">violet</span> : les coefficients des DL usuels. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="l-not">1. Les notations du programme</h2>
+<p>Au voisinage de $a$ (réel ou $\pm\infty$), avec $g$ qui ne s'annule pas près de $a$ (sauf peut-être en $a$) :</p>
+<table class="mtab">
+<tr><th>Notation</th><th>Se lit</th><th>Définition pratique</th></tr>
+<tr><td>$f = o(g)$</td><td>$f$ est négligeable devant $g$</td><td>$\dfrac fg\to0$</td></tr>
+<tr><td>$f = O(g)$</td><td>$f$ est dominée par $g$</td><td>$\dfrac fg$ est bornée</td></tr>
+<tr><td>$f\sim g$</td><td>$f$ est équivalente à $g$</td><td>$\dfrac fg\to1$, ou $f = g + o(g)$</td></tr>
+</table>
+<ul>
+<li>$o(1)$ veut dire « tend vers $0$ », et $O(1)$ « bornée ».</li>
+<li>$x^3 = o(x^2)$ en $0$, mais $x^2 = o(x^3)$ en $+\infty$ : <b>on précise toujours le point</b>.</li>
+<li>Règles : $o(g) + o(g) = o(g)$, $\lambda\,o(g) = o(g)$, $f\cdot o(g) = o(fg)$, $o(o(g)) = o(g)$. Mais $o(g) - o(g) = o(g)$, pas $0$.</li>
+</ul>
+
+<h2 id="l-equiv">2. Les équivalents</h2>
+<p class="ml">Équivalents usuels en $0$ (avec $u(x)\to0$, on remplace $x$ par $u$)</p>
+<div class="mrefl">
+<div><b>$\sin u\sim u$</b><span>$\tan u\sim u$, $\arcsin u\sim u$, $\arctan u\sim u$, $\operatorname{sh}u\sim u$.</span></div>
+<div><b>$e^u - 1\sim u$</b><span>$\ln(1 + u)\sim u$.</span></div>
+<div><b>$1 - \cos u\sim\frac{u^2}2$</b><span>$\operatorname{ch}u - 1\sim\frac{u^2}2$.</span></div>
+<div><b>$(1 + u)^\alpha - 1\sim\alpha u$</b><span>En particulier $\sqrt{1 + u} - 1\sim\frac u2$.</span></div>
+<div><b>Un polynôme en $0$</b><span>son terme de plus <b>bas</b> degré.</span></div>
+<div><b>Un polynôme en $\pm\infty$</b><span>son terme de plus <b>haut</b> degré.</span></div>
+</div>
+<p class="ml">Ce qui marche, ce qui ne marche pas</p>
+<table class="mtab">
+<tr><th>Opération</th><th>Avec des équivalents</th></tr>
+<tr><td>Produit, quotient, puissance fixe</td><td>oui : $f_1\sim g_1$, $f_2\sim g_2\Rightarrow f_1f_2\sim g_1g_2$</td></tr>
+<tr><td>Somme</td><td><b>non</b> : $x + x^2\sim x$ et $-x\sim-x$, mais la somme $x^2\not\sim0$</td></tr>
+<tr><td>Composition à gauche par $\exp$, $\ln$</td><td><b>non</b> : $x + 1\sim x$ en $+\infty$, mais $e^{x+1}\not\sim e^x$</td></tr>
+<tr><td>Limite</td><td>oui : deux fonctions équivalentes ont la même limite</td></tr>
+</table>
+<p class="ml">Exemple 1 : un quotient</p>
+$$\frac{\sin(3x)\,(e^{2x} - 1)}{x\,\ln(1 + x)}\underset{0}{\sim}\frac{3x\cdot2x}{x\cdot x} = 6\qquad\Longrightarrow\qquad\cG{\text{la limite en}\ 0\ \text{vaut}\ 6}.$$
+<p class="ml">Exemple 2 : une somme, on factorise par le terme dominant</p>
+$$f(x) = x^3 + 2x - \sqrt x\ \text{en}\ +\infty:\qquad f(x) = \cB{x^3}\Big(1 + \frac2{x^2} - \frac1{x^{5/2}}\Big),\quad\text{et la parenthèse}\to1,\ \text{donc}\ \cG{f(x)\sim x^3}.$$
+<p class="ml">Exemple 3 : un $\ln$ (on ne compose pas, on factorise)</p>
+$$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \cR{\ln\Big(1 + \frac1x\Big)} = 2\ln x + o(1)\underset{+\infty}{\sim}\cG{2\ln x}.$$
+
+<h2 id="l-croiss">3. Les croissances comparées</h2>
+<div class="sbox">$$\alpha, \beta, \gamma > 0:\qquad(\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty,\qquad x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0.$$</div>
+<div class="sbox">$$\text{Suites}:\quad(\ln n)^\gamma\ll n^\alpha\ll a^n\ (a > 1)\ll n!\ll n^n.$$</div>
+<p class="ml">Exemple</p>
+$$\frac{n^{10} + 2^n}{3^n - n!}\underset{+\infty}{\sim}\frac{\cB{2^n}}{\cB{-n!}} = -\frac{2^n}{n!}\to\cG0.$$
+
+<h2 id="l-dl">4. Les développements limités</h2>
+<div class="sbox">$$f\ \text{admet un}\ DL_n(a)\iff f(x) = \underbrace{c_0 + c_1(x - a) + \cdots + c_n(x - a)^n}_{\text{partie régulière}} + o\big((x - a)^n\big).$$</div>
+<ul>
+<li><b>Unicité</b> : la partie régulière est unique. On peut donc identifier des coefficients.</li>
+<li><b>Troncature</b> : un $DL_n$ donne tous les $DL_p$ pour $p\leqslant n$.</li>
+<li><b>Taylor-Young</b> : si $f$ est de classe $\mathcal C^n$, alors $c_k = \frac{f^{(k)}(a)}{k!}$.</li>
+<li><b>Parité</b> : $f$ paire n'a que des puissances paires dans son $DL(0)$, $f$ impaire que des puissances impaires.</li>
+<li>$f$ a un $DL_0(a)$ $\iff$ elle est continue (ou prolongeable) en $a$ ; un $DL_1(a)$ $\iff$ dérivable en $a$. Pas plus.</li>
+</ul>
+<p class="ml">Équivalent à partir d'un DL</p>
+<p>Le premier terme <b>non nul</b> de la partie régulière donne l'équivalent : $\cos x - 1 = -\frac{x^2}2 + o(x^2)$, donc $\cos x - 1\sim-\frac{x^2}2$.</p>
+
+<h2 id="l-usuels">5. Les DL usuels en $0$</h2>
+<table class="mtab">
+<tr><th>Fonction</th><th>Développement limité</th></tr>
+<tr><td>$e^x$</td><td>$1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} + o(x^n)$</td></tr>
+<tr><td>$\cos x$</td><td>$1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots + (-1)^p\frac{x^{2p}}{(2p)!} + o(x^{2p+1})$</td></tr>
+<tr><td>$\sin x$</td><td>$x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots + (-1)^p\frac{x^{2p+1}}{(2p + 1)!} + o(x^{2p+2})$</td></tr>
+<tr><td>$\operatorname{ch}x$, $\operatorname{sh}x$</td><td>mêmes que $\cos$, $\sin$, <b>sans les signes</b> $-$</td></tr>
+<tr><td>$\frac1{1 - x}$</td><td>$1 + x + x^2 + \cdots + x^n + o(x^n)$</td></tr>
+<tr><td>$\frac1{1 + x}$</td><td>$1 - x + x^2 - \cdots + (-1)^nx^n + o(x^n)$</td></tr>
+<tr><td>$\ln(1 + x)$</td><td>$x - \frac{x^2}2 + \frac{x^3}3 - \cdots + (-1)^{n-1}\frac{x^n}n + o(x^n)$</td></tr>
+<tr><td>$(1 + x)^\alpha$</td><td>$1 + \alpha x + \frac{\alpha(\alpha - 1)}{2!}x^2 + \cdots + \frac{\alpha(\alpha - 1)\cdots(\alpha - n + 1)}{n!}x^n + o(x^n)$</td></tr>
+<tr><td>$\sqrt{1 + x}$</td><td>$1 + \frac x2 - \frac{x^2}8 + \frac{x^3}{16} + o(x^3)$</td></tr>
+<tr><td>$\arctan x$</td><td>$x - \frac{x^3}3 + \frac{x^5}5 - \cdots + (-1)^p\frac{x^{2p+1}}{2p + 1} + o(x^{2p+2})$</td></tr>
+<tr><td>$\tan x$</td><td>$x + \frac{x^3}3 + \frac{2x^5}{15} + o(x^6)$</td></tr>
+</table>
+<p><b>Astuce</b> : pour $\cos$ et $\sin$, le reste gagne un ordre gratuitement grâce à la parité ($\cos x = 1 - \frac{x^2}2 + o(x^3)$).</p>
+<div data-mlab="taylor"></div>
+
+<h2 id="l-ops">6. Les opérations sur les DL</h2>
+<p class="ml">Somme et produit : on tronque au fur et à mesure</p>
+<p>Exemple : $DL_3(0)$ de $e^x\sin x$. On écrit les deux DL à l'ordre $3$ et on ne garde, dans le produit, que les termes de degré $\leqslant3$ :</p>
+$$e^x\sin x = \Big(1 + x + \frac{x^2}2 + \frac{x^3}6\Big)\Big(x - \frac{x^3}6\Big) + o(x^3).$$
+<table class="mtab">
+<tr><th>Degré</th><th>Produits qui donnent ce degré</th><th>Total</th></tr>
+<tr><td>$x$</td><td>$1\times x$</td><td>$x$</td></tr>
+<tr><td>$x^2$</td><td>$x\times x$</td><td>$x^2$</td></tr>
+<tr><td>$x^3$</td><td>$\frac{x^2}2\times x$ et $1\times\big(-\frac{x^3}6\big)$</td><td>$\frac12 - \frac16 = \frac13$, soit $\frac{x^3}3$</td></tr>
+</table>
+$$\cG{e^x\sin x = x + x^2 + \frac{x^3}3 + o(x^3)}.$$
+<p class="ml">Composition : la fonction intérieure doit tendre vers $0$</p>
+<p>Exemple : $DL_3(0)$ de $e^{\sin x}$. On pose $\cO{u = \sin x = x - \frac{x^3}6 + o(x^3)}$, qui tend vers $0$, et $e^u = 1 + u + \frac{u^2}2 + \frac{u^3}6 + o(u^3)$. On calcule les puissances de $u$ <b>à l'ordre 3</b> :</p>
+$$u^2 = x^2 + \cR{o(x^3)},\qquad u^3 = x^3 + \cR{o(x^3)}.$$
+$$e^{\sin x} = 1 + \Big(x - \frac{x^3}6\Big) + \frac{x^2}2 + \frac{x^3}6 + o(x^3) = \cG{1 + x + \frac{x^2}2 + o(x^3)}.$$
+<p class="ml">Composition avec $\ln$ : on fait apparaître $\ln(1 + u)$</p>
+<p>$DL_4(0)$ de $\ln(\cos x)$. On écrit $\cos x = 1 + \cO u$ avec $\cO{u = -\frac{x^2}2 + \frac{x^4}{24} + o(x^4)}\to0$ :</p>
+$$u^2 = \frac{x^4}4 + o(x^4),\qquad u^3 = o(x^4)\ (\text{il commence en}\ x^6).$$
+$$\ln(\cos x) = u - \frac{u^2}2 + o(u^2) = -\frac{x^2}2 + \frac{x^4}{24} - \frac{x^4}8 + o(x^4) = \cG{-\frac{x^2}2 - \frac{x^4}{12} + o(x^4)}.$$
+<p class="ml">Quotient : $\frac1{1 - u}$</p>
+<p>$DL_3(0)$ de $\tan x = \frac{\sin x}{\cos x}$. On écrit $\cos x = 1 - \cO v$ avec $\cO{v = \frac{x^2}2 + o(x^3)}$ :</p>
+$$\frac1{\cos x} = \frac1{1 - v} = 1 + v + \cR{v^2 + \cdots} = 1 + \frac{x^2}2 + o(x^3)\qquad(v^2\ \text{commence en}\ x^4).$$
+$$\tan x = \Big(x - \frac{x^3}6\Big)\Big(1 + \frac{x^2}2\Big) + o(x^3) = x + \frac{x^3}2 - \frac{x^3}6 + o(x^3) = \cG{x + \frac{x^3}3 + o(x^3)}.$$
+<p class="ml">Primitiver un DL</p>
+<p>Si $f'$ a un $DL_n(0)$, on intègre terme à terme et on ajoute $f(0)$ : on obtient un $DL_{n+1}(0)$ de $f$.</p>
+$$\arctan'(x) = \frac1{1 + x^2} = 1 - x^2 + x^4 + o(x^4)\ \Longrightarrow\ \arctan x = \underbrace{\arctan0}_{= 0} + x - \frac{x^3}3 + \frac{x^5}5 + o(x^5).$$
+<p class="ml piege">Piège</p>
+<p>On ne dérive pas un DL en général. On a le droit si on sait déjà que $f'$ admet un DL.</p>
+<p class="ml">En un point $a\neq0$ : on se ramène en $0$</p>
+<p>On pose $\cO{x = a + h}$ avec $h\to0$. Exemple : $DL_2(2)$ de $\ln x$ :</p>
+$$\ln(2 + h) = \ln\Big(2\Big(1 + \frac h2\Big)\Big) = \ln2 + \ln\Big(1 + \frac h2\Big) = \ln2 + \frac h2 - \frac{h^2}8 + o(h^2).$$
+$$\cG{\ln x = \ln2 + \frac{x - 2}2 - \frac{(x - 2)^2}8 + o\big((x - 2)^2\big)}.$$
+<p class="ml">En $+\infty$ : on pose $\cO{x = \frac1h}$, ou on factorise pour faire apparaître $\frac1x\to0$</p>
+$$\sqrt{x^2 + x + 1} = x\sqrt{1 + \cO{\frac1x + \frac1{x^2}}}\quad(x > 0)\qquad\text{(calcul complet au §9)}.$$
+
+<h2 id="l-ordre">7. À quel ordre développer ?</h2>
+<ul>
+<li>Pour une limite d'un quotient : développer le dénominateur jusqu'à son <b>premier terme non nul</b> (son équivalent), puis le numérateur au <b>même ordre</b>.</li>
+<li>Si on divise par $x^k$, il faut un $DL_{n+k}$ pour obtenir un $DL_n$ du quotient.</li>
+<li>Dans un produit $f\cdot g$ où $g$ commence en $x^p$, il suffit de développer $f$ à l'ordre $n - p$.</li>
+<li>Si à la fin tout s'annule, on n'est pas allé assez loin : on recommence à l'ordre suivant.</li>
+</ul>
+<p class="ml">Exemple : $\frac{\sin x - x}{x^3}$</p>
+<p>Le dénominateur est déjà $x^3$ : on développe $\sin$ à l'ordre $3$. À l'ordre $1$, on aurait $\sin x - x = o(x)$, qui ne dit rien.</p>
+$$\frac{\sin x - x}{x^3} = \frac{x - \frac{x^3}6 + o(x^3) - x}{x^3} = -\frac16 + o(1)\ \longrightarrow\ \cG{-\frac16}.$$
+
+<h2 id="l-lim">8. Calculer une limite</h2>
+<ol>
+<li>Essayer d'abord les <b>équivalents</b> (produit, quotient).</li>
+<li>S'il y a une somme ou une différence qui se compense : <b>DL</b> de chaque morceau, au bon ordre.</li>
+<li>Pour $u^v$ : écrire $e^{v\ln u}$.</li>
+</ol>
+<p class="ml">Exemple 1 : $\lim_{x\to0}\frac{e^x - 1 - x}{x^2}$</p>
+$$e^x - 1 - x = \cR{1 + x} + \cB{\frac{x^2}2} + o(x^2)\cR{{} - 1 - x} = \frac{x^2}2 + o(x^2)\qquad\Longrightarrow\qquad\frac{e^x - 1 - x}{x^2}\to\cG{\frac12}.$$
+<p class="ml">Exemple 2 : $\lim_{x\to0}\Big(\frac1{\sin^2x} - \frac1{x^2}\Big)$</p>
+<p><b>Étape 1 : même dénominateur.</b></p>
+$$\frac1{\sin^2x} - \frac1{x^2} = \frac{x^2 - \sin^2x}{x^2\sin^2x}.$$
+<p><b>Étape 2 : le dénominateur.</b> $x^2\sin^2x\sim x^2\cdot x^2 = x^4$ : il faut le numérateur à l'ordre $4$.</p>
+<p><b>Étape 3 : le numérateur.</b></p>
+$$\sin^2x = \Big(x - \frac{x^3}6 + o(x^3)\Big)^2 = x^2 - 2\cdot x\cdot\frac{x^3}6 + o(x^4) = x^2 - \frac{x^4}3 + o(x^4),\qquad x^2 - \sin^2x = \frac{x^4}3 + o(x^4).$$
+<p><b>Étape 4.</b></p>
+$$\frac{x^2 - \sin^2x}{x^2\sin^2x}\sim\frac{x^4/3}{x^4} = \frac13\qquad\Longrightarrow\qquad\text{la limite vaut}\ \cG{\frac13}.$$
+<p class="ml">Exemple 3 : une forme $1^\infty$</p>
+$$\Big(1 + \frac ax\Big)^x = e^{x\ln(1 + a/x)} = e^{x\left(\frac ax + o\left(\frac1x\right)\right)} = e^{a + o(1)}\xrightarrow[x\to+\infty]{}\cG{e^a}.$$
+<p class="ml">Exemple 4 : un équivalent par DL</p>
+$$\operatorname{ch}x - \cos x = \Big(1 + \frac{x^2}2\Big) - \Big(1 - \frac{x^2}2\Big) + o(x^2) = x^2 + o(x^2)\qquad\Longrightarrow\qquad\cG{\operatorname{ch}x - \cos x\underset0\sim x^2}.$$
+
+<h2 id="l-geo">9. Tangente, extremum, asymptote</h2>
+<p class="ml">Tangente et position</p>
+<p>Si $f(x) = \cB{c_0 + c_1(x - a)} + c_p(x - a)^p + o\big((x - a)^p\big)$ avec $c_p\neq0$ le premier terme non nul après :</p>
+<ul>
+<li>la tangente en $a$ est $y = c_0 + c_1(x - a)$ ;</li>
+<li>la position de la courbe est donnée par le <b>signe</b> de $c_p(x - a)^p$ près de $a$. Si $p$ est impair, la courbe traverse sa tangente : c'est un point d'inflexion.</li>
+</ul>
+$$f(x) = \sqrt{1 + 2x}:\quad(1 + u)^{1/2} = 1 + \frac u2 - \frac{u^2}8 + o(u^2),\ \cO{u = 2x}:\quad f(x) = \cB{1 + x} - \frac{x^2}2 + o(x^2).$$
+<p>Tangente $y = 1 + x$, et $-\frac{x^2}2\lt0$ : la courbe est <b>sous</b> sa tangente près de $0$.</p>
+<p class="ml">Extremum</p>
+<p>Si $f'(a) = 0$ et $f(x) = f(a) + c_2(x - a)^2 + o\big((x - a)^2\big)$ avec $c_2 > 0$ : minimum local. Avec $c_2\lt0$ : maximum local.</p>
+<p class="ml">Asymptote en $+\infty$ : $f(x) = \sqrt{x^2 + x + 1}$</p>
+<p><b>Étape 1.</b> On factorise pour faire apparaître $\cO{u = \frac1x + \frac1{x^2}}\to0$ (et $x > 0$) :</p>
+$$f(x) = x\sqrt{1 + u},\qquad\sqrt{1 + u} = 1 + \frac u2 - \frac{u^2}8 + o(u^2),\qquad u^2 = \frac1{x^2} + o\Big(\frac1{x^2}\Big).$$
+<p><b>Étape 2.</b></p>
+$$\sqrt{1 + u} = 1 + \frac1{2x} + \frac1{2x^2} - \frac1{8x^2} + o\Big(\frac1{x^2}\Big) = 1 + \frac1{2x} + \frac3{8x^2} + o\Big(\frac1{x^2}\Big).$$
+<p><b>Étape 3.</b> On multiplie par $x$ :</p>
+$$f(x) = \cB{x + \frac12} + \frac3{8x} + o\Big(\frac1x\Big).$$
+<p><b>Conclusion</b> : la droite $\cG{y = x + \frac12}$ est asymptote en $+\infty$, et $\frac3{8x} > 0$ : la courbe est <b>au-dessus</b>.</p>
+
+<h2 id="l-suites">10. Développement asymptotique d'une suite</h2>
+<p class="ml">Exemple : $u_n = \big(1 + \frac1n\big)^n$, à deux termes</p>
+$$\ln u_n = n\ln\Big(1 + \frac1n\Big) = n\Big(\frac1n - \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\Big) = 1 - \frac1{2n} + o\Big(\frac1n\Big).$$
+$$u_n = e\cdot e^{-\frac1{2n} + o(\frac1n)} = e\Big(1 - \frac1{2n} + o\Big(\frac1n\Big)\Big) = \cG{e - \frac e{2n} + o\Big(\frac1n\Big)}.$$
+<p>On en déduit $e - u_n\sim\frac e{2n}$ : la convergence vers $e$ est lente.</p>
+<p class="ml">Les grandes étapes, en général</p>
+<ol>
+<li>Trouver la limite (ou un équivalent) de $u_n$.</li>
+<li>Poser $u_n = \ell + v_n$ avec $v_n\to0$, réinjecter dans la relation qui définit $u_n$.</li>
+<li>Recommencer pour obtenir le terme suivant.</li>
+</ol>
+
+<h2 id="l-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>Un quotient ou un produit</b><span>Équivalents usuels, sans DL.</span></div>
+<div><b>Une différence qui se compense ($e^x - 1 - x$)</b><span>DL, jusqu'au premier terme qui survit.</span></div>
+<div><b>$u(x)^{v(x)}$</b><span>$e^{v\ln u}$, puis DL ou équivalent de l'exposant.</span></div>
+<div><b>« DL en $a\neq0$ »</b><span>$x = a + h$, puis DL en $h\to0$.</span></div>
+<div><b>« Comportement en $+\infty$ »</b><span>Factoriser par le terme dominant pour faire apparaître $\frac1x$.</span></div>
+<div><b>« Asymptote, position »</b><span>$f(x) = ax + b + \frac cx + o(\frac1x)$ : $y = ax + b$, signe de $\frac cx$.</span></div>
+<div><b>« Tangente, position »</b><span>$DL_2$ (ou plus) : tangente, puis signe du premier terme suivant.</span></div>
+<div><b>« $f$ est-elle prolongeable, dérivable en $0$ ? »</b><span>$DL_0$ : prolongement ; $DL_1$ : dérivabilité, $f'(0) = c_1$.</span></div>
+<div><b>« Nature de $\sum u_n$ »</b><span>Équivalent de $u_n$ par DL, puis Riemann.</span></div>
+<div><b>$f'$ connue (fraction, racine)</b><span>Primitiver le DL de $f'$ (comme pour $\arctan$, $\arcsin$).</span></div>
+<div><b>$f$ paire ou impaire</b><span>DL avec seulement des puissances paires ou impaires.</span></div>
+<div><b>Croissances comparées</b><span>$\ln\ll$ puissances $\ll$ exponentielles $\ll$ factorielle.</span></div>
+</div>
+
+<h2 id="l-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Additionner des équivalents : $\sin x - x\sim x - x = 0$ est faux et n'a pas de sens.</p>
+<p><b>2.</b> Composer un équivalent par $\exp$ : $f\sim g\not\Rightarrow e^f\sim e^g$.</p>
+<p><b>3.</b> Dire $f\sim0$ : seule la fonction nulle près de $a$ est équivalente à $0$.</p>
+<p><b>4.</b> Composer des DL alors que la fonction intérieure ne tend pas vers $0$ ($e^{\cos x}$ : écrire $e\cdot e^{\cos x - 1}$).</p>
+<p><b>5.</b> Garder des termes au-delà de l'ordre, ou oublier le $o(\cdot)$.</p>
+<p><b>6.</b> Développer à un ordre trop faible : tout s'annule et il ne reste qu'un $o$.</p>
+<p><b>7.</b> Écrire $o(x^2) - o(x^2) = 0$.</p>
+<p><b>8.</b> Oublier les factorielles : $e^x = 1 + x + x^2 + \cdots$ est faux.</p>
+<p><b>9.</b> Ne pas préciser en quel point on travaille.</p>
+<p><b>10.</b> Dériver un DL sans savoir que $f'$ en admet un.</p>
+</div>
+
+<h2 id="l-entrainement">S'entraîner</h2>
+<div data-mlab="dlex"></div>
+<div data-mlab="quizdl"></div>
+
+<h2 id="l-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Une limite</div>
+<div class="tq">Produit ou quotient ?</div><a class="tl" href="#l-equiv">oui : équivalents usuels</a><div class="tno">non</div>
+<div class="tq">Forme $u^v$ ?</div><a class="tl" href="#l-lim">oui : $e^{v\ln u}$</a><div class="tno">non</div>
+<div class="tq">Puissances, $\ln$, $\exp$ en $\infty$ ?</div><a class="tl" href="#l-croiss">oui : croissances comparées</a><div class="tno">non</div>
+<a class="tl tend" href="#l-lim">différence qui se compense : DL</a></div>
+<div class="tb tR"><div class="tt">Un DL</div>
+<div class="tq">Fonction usuelle ?</div><a class="tl" href="#l-usuels">oui : le tableau</a><div class="tno">non</div>
+<div class="tq">En $a\neq0$ ou en $\infty$ ?</div><a class="tl" href="#l-ops">oui : $x = a + h$, ou $\frac1x$</a><div class="tno">non</div>
+<div class="tq">Une composée $g(u(x))$ ?</div><a class="tl" href="#l-ops">oui : $u\to0$, puissances de $u$</a><div class="tno">non</div>
+<div class="tq">Un quotient ?</div><a class="tl" href="#l-ops">oui : $\frac1{1 - u}$</a><div class="tno">non</div>
+<a class="tl tend" href="#l-ops">produit tronqué, ou primitive</a></div>
+<div class="tb tG"><div class="tt">Un équivalent</div>
+<div class="tq">Somme ?</div><a class="tl" href="#l-equiv">oui : factoriser le dominant</a><div class="tno">non</div>
+<div class="tq">Différence qui se compense ?</div><a class="tl" href="#l-lim">oui : premier terme non nul du DL</a><div class="tno">non</div>
+<a class="tl tend" href="#l-equiv">produit, quotient d'équivalents</a></div>
+<div class="tb tO"><div class="tt">Étudier une courbe</div>
+<div class="tq">En un point ?</div><a class="tl" href="#l-geo">oui : $DL_2$, tangente, position</a><div class="tno">non</div>
+<a class="tl tend" href="#l-geo">en $\infty$ : $ax + b + \frac cx$, asymptote</a></div>
+<div class="tb tV"><div class="tt">Une suite</div>
+<div class="tq">Vitesse de convergence ?</div><a class="tl" href="#l-suites">oui : développement asymptotique</a><div class="tno">non</div>
+<a class="tl tend" href="#l-croiss">comparer : croissances comparées</a></div>
+</div>
+</div>
+`,
+"Intégration sur un intervalle quelconque": R`
+<nav class="msum"><a href="#p-not">Notations</a><a href="#p-ref">Intégrales de référence</a><a href="#p-integ">Montrer l'intégrabilité</a><a href="#p-calc">Calculer</a><a href="#p-cvd">Convergence dominée</a><a href="#p-tat">Terme à terme</a><a href="#p-plan">Le plan pour un paramètre</a><a href="#p-cont">Continuité</a><a href="#p-lim">Limite</a><a href="#p-der">Dérivation</a><a href="#p-gamma">La fonction $\Gamma$</a><a href="#p-enonce">Ce que l'énoncé te donne</a><a href="#p-erreurs">Erreurs</a><a href="#p-entrainement">S'entraîner</a><a href="#p-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction intégrée $f(x, t)$. <span class="kO">orange</span> : la fonction qui domine, $\varphi(t)$, indépendante de $x$. <span class="kR">rouge</span> : les points à problème (bornes infinies, singularités). <span class="kV">violet</span> : les fonctions de référence. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="p-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Définition</th><th>À retenir</th></tr>
+<tr><td>Intégrale convergente</td><td>$\int_a^{+\infty}f$ converge si $\int_a^xf$ a une limite finie quand $x\to+\infty$</td><td>Même chose en une borne ouverte.</td></tr>
+<tr><td>Fonction intégrable</td><td>$f$ intégrable sur $I$ si $\int_I|f|$ converge</td><td>Intégrable $\Rightarrow$ convergente. Pas l'inverse.</td></tr>
+<tr><td>Ensemble</td><td>$L^1(I, \mathbb K)$, ou $\mathcal L^1$</td><td>Espace vectoriel.</td></tr>
+<tr><td>Intégrale à paramètre</td><td>$g(x) = \int_If(x, t)\,dt$, $x\in A$, $t\in I$</td><td>On étudie $g$ comme une fonction de $x$.</td></tr>
+</table>
+
+<h2 id="p-ref">2. Les intégrales de référence</h2>
+<div class="sbox">$$\int_1^{+\infty}\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha > 1,\qquad\int_0^1\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha\lt1,\qquad\int_0^{+\infty}e^{-\lambda t}\,dt\ \text{CV}\iff\lambda > 0,\qquad\int_0^1\ln t\,dt = -1.$$</div>
+<p>Moyen mnémotechnique : en $+\infty$, il faut décroître <b>vite</b> ($\alpha > 1$) ; en $0$, il ne faut pas exploser trop vite ($\alpha\lt1$). Pour $\alpha = 1$, ça diverge des deux côtés.</p>
+<p>Même chose en un point $a$ : $\int_a^b\frac{dt}{(t - a)^\alpha}$ converge si et seulement si $\alpha\lt1$.</p>
+
+<h2 id="p-integ">3. Montrer qu'une fonction est intégrable</h2>
+<ol>
+<li>Vérifier que $f$ est continue (par morceaux) sur l'intervalle <b>ouvert</b>.</li>
+<li>Repérer les <span class="kR">points à problème</span> : bornes infinies et points où $f$ n'est pas définie. Les traiter <b>un par un</b>, en coupant l'intervalle.</li>
+<li>En chaque point : prolongement par continuité (faux problème), ou comparaison à une référence avec $|f|$ ($\leqslant$, $O$, $o$, $\sim$).</li>
+<li>Règle pratique en $+\infty$ : si $t^\alpha|f(t)|\to0$ avec $\alpha > 1$, alors $f$ est intégrable en $+\infty$.</li>
+</ol>
+<p class="ml">Exemple 1 : $f(t) = \frac{\sin t}t$ sur $\left]0, 1\right]$</p>
+<p>$f(t)\to1$ quand $t\to0$ : $f$ se prolonge par continuité, c'est un <b>faux problème</b>. Intégrable sur $\left]0, 1\right]$.</p>
+<p class="ml">Exemple 2 : $f(t) = \frac{\ln t}{\sqrt t}e^{-t}$ sur $\left]0, +\infty\right[$</p>
+<p>$f$ est continue sur $\left]0, +\infty\right[$. Deux points à problème : $\cR0$ et $\cR{+\infty}$.</p>
+<p><b>En $0$</b> : on cherche $\alpha\lt1$ avec $t^\alpha|f(t)|\to0$. Avec $\alpha = \frac34$ :</p>
+$$t^{3/4}|f(t)| = t^{1/4}|\ln t|\,e^{-t}\xrightarrow[t\to0]{}0\ (\text{croissances comparées})\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^{3/4}}}\Big),\ \frac34\lt1:\ \text{intégrable en}\ 0.$$
+<p><b>En $+\infty$</b> :</p>
+$$t^2|f(t)| = t^{3/2}\ln t\,e^{-t}\xrightarrow[t\to+\infty]{}0\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^2}}\Big):\ \text{intégrable en}\ +\infty.$$
+<p>Donc $\cG{f\ \text{est intégrable sur}\ \left]0, +\infty\right[}$.</p>
+<p class="ml">Exemple 3 : convergente mais pas intégrable</p>
+<p>$\int_1^{+\infty}\frac{\sin t}t\,dt$ converge (IPP : $\big[-\frac{\cos t}t\big] - \int\frac{\cos t}{t^2}$, et le second terme est intégrable), mais $\frac{|\sin t|}t\geqslant\frac{\sin^2t}t = \frac1{2t} - \frac{\cos2t}{2t}$ n'est pas intégrable. Les théorèmes de ce chapitre demandent l'<b>intégrabilité</b>.</p>
+
+<h2 id="p-calc">4. Calculer une intégrale sur un intervalle</h2>
+<p>On calcule sur un segment $[a, x]$, puis on fait tendre $x$ vers la borne. On peut aussi faire une IPP ou un changement de variable directement, à condition que <b>les crochets aient une limite finie</b>.</p>
+<p class="ml">Exemple : $\int_0^{+\infty}t\,e^{-t}\,dt$</p>
+$$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}\xrightarrow[x\to+\infty]{}\cG1.$$
+<p class="ml">Changement de variable</p>
+<p>Il doit être une bijection $\mathcal C^1$ strictement monotone. Il conserve alors la nature et la valeur : $\int_0^{+\infty}e^{-\sqrt t}\,dt\ \underset{\cO{t = u^2}}{=}\ \int_0^{+\infty}2u\,e^{-u}\,du = 2$.</p>
+
+<h2 id="p-cvd">5. Le théorème de convergence dominée</h2>
+<div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux sur}\ I\\&f_n\to f\ \text{simplement, avec}\ f\ \text{continue par morceaux}\\&|f_n(t)|\leqslant\cO{\varphi(t)}\ \text{pour tout}\ n,\ \text{avec}\ \cO\varphi\ \textbf{intégrable}\end{aligned}\right\}\ \Longrightarrow\ \int_If_n\xrightarrow[n\to+\infty]{}\int_If.$$</div>
+<p>La clé est la <b>domination</b> : une fonction $\cO\varphi$ qui ne dépend pas de $n$.</p>
+<p class="ml">Exemple 1 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
+<p><b>Limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite simple vaut $0$ sauf en un point : elle est continue par morceaux.</p>
+<p><b>Domination.</b> $|\sin^nt|\leqslant\cO1$, intégrable sur le segment $\big[0, \frac\pi2\big]$.</p>
+<p><b>Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
+<p class="ml">Exemple 2 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
+<p><b>Mise en forme.</b> La borne dépend de $n$ : on écrit $f_n(t) = \big(1 - \frac tn\big)^n\mathbf 1_{[0, n]}(t)$ sur $I = [0, +\infty[$.</p>
+<p><b>Limite simple.</b> Pour $t$ fixé et $n > t$ :</p>
+$$f_n(t) = e^{n\ln(1 - t/n)} = e^{n(-\frac tn + o(\frac1n))}\to\cB{e^{-t}}.$$
+<p><b>Domination.</b> On utilise $\ln(1 - u)\leqslant-u$ pour $u\in[0, 1[$ :</p>
+$$0\leqslant f_n(t) = e^{n\ln(1 - t/n)}\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},\ \text{intégrable sur}\ [0, +\infty[.$$
+<p><b>Conclusion.</b> $\int_0^n\big(1 - \frac tn\big)^n\,dt\to\int_0^{+\infty}e^{-t}\,dt = \cG1$.</p>
+<p class="ml piege">Piège</p>
+<p>Sans domination, c'est faux. $f_n(t) = n\,\mathbf 1_{]0, 1/n]}(t)$ tend simplement vers $0$, mais $\int_0^1f_n = 1$ pour tout $n$. Il n'existe pas de $\varphi$ intégrable au-dessus de toutes les $f_n$.</p>
+
+<h2 id="p-tat">6. Intégrer une série terme à terme</h2>
+<div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux et intégrables sur}\ I\\&\sum f_n\ \text{converge simplement vers}\ S\ \text{continue par morceaux}\\&\sum_n\int_I|f_n|\ \textbf{converge}\end{aligned}\right\}\ \Longrightarrow\ S\ \text{intégrable et}\ \int_I\sum_{n=0}^{+\infty}f_n = \sum_{n=0}^{+\infty}\int_If_n.$$</div>
+<p><b>Méthode pratique</b> : on fait d'abord le calcul formel en échangeant $\int$ et $\sum$, puis on vérifie les hypothèses.</p>
+<p class="ml">Exemple : $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$</p>
+<p><b>Étape 1 : développer.</b> Pour $t\in\left]0, 1\right[$, $\frac1{1 - t} = \sum_{n\geqslant0}t^n$, donc $\frac{-\ln t}{1 - t} = \sum_{n\geqslant0}f_n(t)$ avec $f_n(t) = -t^n\ln t\geqslant0$.</p>
+<p><b>Étape 2 : intégrer un terme</b> (IPP sur $[\varepsilon, 1]$, puis $\varepsilon\to0$) :</p>
+$$\int_0^1-t^n\ln t\,dt = \Big[-\frac{t^{n+1}}{n + 1}\ln t\Big]_0^1 + \int_0^1\frac{t^{n+1}}{n + 1}\cdot\frac1t\,dt = 0 + \frac1{n + 1}\int_0^1t^n\,dt = \frac1{(n + 1)^2}.$$
+<p><b>Étape 3 : l'hypothèse.</b> $f_n\geqslant0$, donc $\sum\int|f_n| = \sum\frac1{(n + 1)^2}$ converge (Riemann).</p>
+<p><b>Conclusion.</b></p>
+$$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG{\frac{\pi^2}6}.$$
+
+<h2 id="p-plan">7. Le plan pour une intégrale à paramètre</h2>
+<p>Pour $g(x) = \int_I\cB{f(x, t)}\,dt$, on vérifie toujours dans cet ordre :</p>
+<ol>
+<li><b>Régularité en $x$</b> : pour tout $t\in I$, $x\mapsto f(x, t)$ est continue (ou $\mathcal C^1$, ou a une limite).</li>
+<li><b>Régularité en $t$</b> : pour tout $x$, $t\mapsto f(x, t)$ (et $\frac{\partial f}{\partial x}$) est continue par morceaux sur $I$.</li>
+<li><b>Domination</b> : $|f(x, t)|\leqslant\cO{\varphi(t)}$ pour tout $x$, avec $\cO\varphi$ intégrable et <b>indépendante de $x$</b>.</li>
+<li>Si la domination n'est possible que sur des segments $[a, b]\subset A$, on la fait sur chaque segment : la continuité et la dérivabilité sont des propriétés locales.</li>
+</ol>
+
+<h2 id="p-cont">8. Continuité</h2>
+<div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{continue sur}\ A\ \text{pour tout}\ t\\&t\mapsto f(x, t)\ \text{continue par morceaux sur}\ I\ \text{pour tout}\ x\\&|f(x, t)|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\ \text{est continue sur}\ A.$$</div>
+<p class="ml">Exemple : $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$ sur $[0, +\infty[$</p>
+<p><b>1.</b> Pour $t$ fixé, $x\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue. <b>2.</b> Pour $x$ fixé, $t\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue sur $[0, +\infty[$.</p>
+<p><b>3.</b> Pour $x\geqslant0$ et $t\geqslant0$, $e^{-xt}\leqslant1$, donc :</p>
+$$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégrable sur}\ [0, +\infty[\ (\text{d'intégrale}\ \tfrac\pi2).$$
+<p>Donc $\cG{g\ \text{est continue sur}\ [0, +\infty[}$, et $g(0) = \frac\pi2$.</p>
+
+<h2 id="p-lim">9. Limite en une borne</h2>
+<div class="sbox">$$f(x, t)\xrightarrow[x\to a]{}\ell(t)\ \text{pour tout}\ t,\quad|f(x, t)|\leqslant\cO{\varphi(t)}\ \text{intégrable}\ \Longrightarrow\ \lim_{x\to a}\int_If(x, t)\,dt = \int_I\ell(t)\,dt.$$</div>
+<p class="ml">Exemple : la même $g$ en $+\infty$</p>
+<p>Pour $t > 0$, $\frac{e^{-xt}}{1 + t^2}\to0$ quand $x\to+\infty$ (en $t = 0$, ça vaut $1$, un seul point). Avec la même domination $\frac1{1 + t^2}$ :</p>
+$$\lim_{x\to+\infty}g(x) = \int_0^{+\infty}0\,dt = \cG0.$$
+<p>Variante : on peut aussi passer par des suites $x_n\to+\infty$ et la convergence dominée.</p>
+
+<h2 id="p-der">10. Dérivation</h2>
+<div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{de classe}\ \mathcal C^1\ \text{sur}\ J\\&t\mapsto f(x, t)\ \text{intégrable},\ t\mapsto\tfrac{\partial f}{\partial x}(x, t)\ \text{continue par morceaux}\\&\Big|\tfrac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\in\mathcal C^1(J),\quad g'(x) = \int_I\frac{\partial f}{\partial x}(x, t)\,dt.$$</div>
+<p>C'est la formule de Leibniz : on dérive sous le signe intégrale. Pour $\mathcal C^k$, on domine chaque dérivée partielle jusqu'à l'ordre $k$.</p>
+<p class="ml">Exemple : $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$</p>
+<p><b>Étape 1 : les hypothèses.</b> Avec $f(x, t) = e^{-t^2}\cos(xt)$ :</p>
+$$\frac{\partial f}{\partial x}(x, t) = -t\,e^{-t^2}\sin(xt),\qquad\Big|\frac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{t\,e^{-t^2}},$$
+<p>qui est intégrable sur $[0, +\infty[$ (sa primitive est $-\frac12e^{-t^2}$). Et $|f(x, t)|\leqslant e^{-t^2}$, intégrable. Donc $F$ est de classe $\mathcal C^1$ sur $\mathbb R$.</p>
+<p><b>Étape 2 : la dérivée</b>, avec une IPP ($u = \sin(xt)$, $v' = -t\,e^{-t^2}$, $v = \frac12e^{-t^2}$) :</p>
+$$F'(x) = \int_0^{+\infty}-t\,e^{-t^2}\sin(xt)\,dt = \underbrace{\Big[\frac12e^{-t^2}\sin(xt)\Big]_0^{+\infty}}_{= 0} - \frac x2\int_0^{+\infty}e^{-t^2}\cos(xt)\,dt = -\frac x2F(x).$$
+<p><b>Étape 3 : l'équation différentielle.</b> $F' + \frac x2F = 0$, donc $F(x) = F(0)\,e^{-x^2/4}$, et avec l'intégrale de Gauss $F(0) = \int_0^{+\infty}e^{-t^2}\,dt = \frac{\sqrt\pi}2$ :</p>
+$$\cG{F(x) = \frac{\sqrt\pi}2\,e^{-x^2/4}}.$$
+
+<h2 id="p-gamma">11. L'exemple central : la fonction $\Gamma$</h2>
+$$\Gamma(x) = \int_0^{+\infty}t^{x-1}e^{-t}\,dt.$$
+<p class="ml">Domaine de définition</p>
+<p>La fonction $t\mapsto t^{x-1}e^{-t}$ est continue et positive sur $\left]0, +\infty\right[$.</p>
+<ul>
+<li><b>En $0$</b> : $t^{x-1}e^{-t}\sim\frac1{t^{1-x}}$, intégrable si et seulement si $1 - x\lt1$, soit $x > 0$.</li>
+<li><b>En $+\infty$</b> : $t^2\cdot t^{x-1}e^{-t} = t^{x+1}e^{-t}\to0$, donc c'est $o\big(\frac1{t^2}\big)$, intégrable pour tout $x$.</li>
+</ul>
+<p>$\Gamma$ est définie sur $\cG{\left]0, +\infty\right[}$.</p>
+<p class="ml">Continuité : domination sur un segment $[a, b]\subset\left]0, +\infty\right[$</p>
+<p>Pour $x\in[a, b]$ : si $t\leqslant1$, $t^{x-1}\leqslant t^{a-1}$ ; si $t\geqslant1$, $t^{x-1}\leqslant t^{b-1}$. Donc :</p>
+$$|t^{x-1}e^{-t}|\leqslant\cO{\varphi(t) = (t^{a-1} + t^{b-1})\,e^{-t}},$$
+<p>intégrable sur $\left]0, +\infty\right[$ par l'étude du domaine ($a, b > 0$). $\Gamma$ est continue sur chaque $[a, b]$, donc sur $\left]0, +\infty\right[$. Même méthode pour $\mathcal C^\infty$, avec $|\ln t|^k$ en plus dans $\varphi$.</p>
+<p class="ml">La relation fonctionnelle</p>
+<p>IPP sur $[\varepsilon, A]$, puis $\varepsilon\to0$ et $A\to+\infty$ :</p>
+$$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\big]_0^{+\infty}}_{= 0\ (x > 0)} + x\int_0^{+\infty}t^{x-1}e^{-t}\,dt = x\,\Gamma(x).$$
+<p>Avec $\Gamma(1) = \int_0^{+\infty}e^{-t}\,dt = 1$, une récurrence donne $\cG{\Gamma(n + 1) = n!}$.</p>
+<div data-mlab="domin"></div>
+
+<h2 id="p-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $f$ est intégrable sur $I$ »</b><span>Points à problème un par un, comparaison à $\frac1{t^\alpha}$, règle $t^\alpha|f|\to0$.</span></div>
+<div><b>« Domaine de définition de $g(x) = \int\dots$ »</b><span>Pour chaque $x$ fixé, étudier l'intégrabilité en $t$.</span></div>
+<div><b>« Limite de $\int_If_n$ »</b><span>Convergence dominée : limite simple, puis domination par $\varphi$.</span></div>
+<div><b>« $\int\sum = \sum\int$ »</b><span>Terme à terme : vérifier $\sum\int|f_n|$ convergente.</span></div>
+<div><b>« $g$ est continue »</b><span>Plan du §7, domination (sur des segments si besoin).</span></div>
+<div><b>« $g$ est $\mathcal C^1$, calculer $g'$ »</b><span>Dominer $\frac{\partial f}{\partial x}$, puis dériver sous l'intégrale.</span></div>
+<div><b>« Trouver une équation différentielle vérifiée par $g$ »</b><span>Dériver sous l'intégrale, puis IPP pour faire réapparaître $g$.</span></div>
+<div><b>« Limite de $g$ en $+\infty$ »</b><span>Limite simple de $f(x, t)$ et domination, ou encadrement direct.</span></div>
+<div><b>« Équivalent de $g$ en $0$ »</b><span>Changement de variable $t = u/x$ pour sortir le $x$.</span></div>
+<div><b>$\Gamma$, $\int e^{-t^2}$</b><span>$\Gamma(x + 1) = x\Gamma(x)$, $\Gamma(n + 1) = n!$, $\int_0^{+\infty}e^{-t^2} = \frac{\sqrt\pi}2$.</span></div>
+<div><b>Une borne qui dépend de $n$ ($\int_0^n$)</b><span>Écrire avec une indicatrice $\mathbf 1_{[0, n]}$.</span></div>
+<div><b>Domination impossible sur tout $A$</b><span>La faire sur chaque segment $[a, b]\subset A$.</span></div>
+</div>
+
+<h2 id="p-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Une domination $\varphi$ qui dépend de $x$ ou de $n$.</p>
+<p><b>2.</b> Dominer $f$ au lieu de $\frac{\partial f}{\partial x}$ pour la dérivation.</p>
+<p><b>3.</b> Traiter $0$ et $+\infty$ ensemble : on coupe l'intervalle.</p>
+<p><b>4.</b> Confondre convergente et intégrable.</p>
+<p><b>5.</b> Utiliser un équivalent pour l'intégrabilité sans regarder $|f|$ ou le signe.</p>
+<p><b>6.</b> Oublier la vérification « continue par morceaux en $t$ ».</p>
+<p><b>7.</b> Une IPP sur un intervalle ouvert sans vérifier que le crochet a une limite finie.</p>
+<p><b>8.</b> Intégrer terme à terme sans vérifier $\sum\int|f_n|\lt+\infty$.</p>
+<p><b>9.</b> Pour $\int_0^1\frac{dt}{t^\alpha}$, se tromper de sens : il faut $\alpha\lt1$.</p>
+<p><b>10.</b> Dans $\Gamma$, dominer sur $\left]0, +\infty\right[$ entier : impossible, on prend $[a, b]$.</p>
+</div>
+
+<h2 id="p-entrainement">S'entraîner</h2>
+<div data-mlab="quizipar"></div>
+
+<h2 id="p-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Intégrabilité de $f$</div>
+<div class="tq">Faux problème (prolongeable) ?</div><a class="tl" href="#p-integ">oui : rien à faire en ce point</a><div class="tno">non</div>
+<div class="tq">Équivalent simple de $|f|$ ?</div><a class="tl" href="#p-ref">oui : comparer à $\frac1{t^\alpha}$</a><div class="tno">non</div>
+<a class="tl tend" href="#p-integ">$t^\alpha|f(t)|\to0$</a></div>
+<div class="tb tR"><div class="tt">Limite de $\int f_n$</div>
+<div class="tq">Une suite de fonctions ?</div><a class="tl" href="#p-cvd">oui : convergence dominée</a><div class="tno">une série</div>
+<div class="tq">$\sum\int|f_n|$ converge ?</div><a class="tl" href="#p-tat">oui : terme à terme</a><div class="tno">non</div>
+<a class="tl tend" href="#p-cvd">sommes partielles + convergence dominée</a></div>
+<div class="tb tG"><div class="tt">Étudier $g(x) = \int f(x, t)\,dt$</div>
+<div class="tq">Continuité ?</div><a class="tl" href="#p-cont">oui : dominer $|f|$</a><div class="tno">non</div>
+<div class="tq">Dérivabilité ?</div><a class="tl" href="#p-der">oui : dominer $|\partial_xf|$</a><div class="tno">non</div>
+<div class="tq">Limite en une borne ?</div><a class="tl" href="#p-lim">oui : limite simple + domination</a><div class="tno">non</div>
+<a class="tl tend" href="#p-integ">domaine : intégrabilité à $x$ fixé</a></div>
+<div class="tb tO"><div class="tt">Domination difficile</div>
+<div class="tq">Valable sur des segments ?</div><a class="tl" href="#p-gamma">oui : $[a, b]$ (comme $\Gamma$)</a><div class="tno">non</div>
+<a class="tl tend" href="#p-cvd">indicatrice, $\ln(1 - u)\leqslant-u$, $e^{-xt}\leqslant1$</a></div>
+<div class="tb tV"><div class="tt">Calculer $g(x)$</div>
+<div class="tq">$g'$ fait réapparaître $g$ ?</div><a class="tl" href="#p-der">oui : équation différentielle</a><div class="tno">non</div>
+<a class="tl tend" href="#p-tat">développer en série, terme à terme</a></div>
+</div>
+</div>
+`,
+"Suites et séries de fonctions": R`
+<nav class="msum"><a href="#f-not">Notations</a><a href="#f-cs">Convergence simple</a><a href="#f-cu">Convergence uniforme</a><a href="#f-neg">Prouver qu'il n'y a pas CU</a><a href="#f-reg">Ce que la CU conserve</a><a href="#f-series">Séries de fonctions</a><a href="#f-cn">Convergence normale</a><a href="#f-alt">CU sans CN</a><a href="#f-sreg">Régularité de la somme</a><a href="#f-zeta">L'exemple de $\zeta$</a><a href="#f-weier">Approximation</a><a href="#f-enonce">Ce que l'énoncé te donne</a><a href="#f-erreurs">Erreurs</a><a href="#f-entrainement">S'entraîner</a><a href="#f-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la limite simple $f$ (ou la somme $S$). <span class="kR">rouge</span> : l'écart $|f_n - f|$ et son maximum. <span class="kO">orange</span> : le majorant $\alpha_n$, indépendant de $x$. <span class="kV">violet</span> : le point où l'écart est maximal. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="f-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Mode</th><th>Définition</th><th>En pratique</th></tr>
+<tr><td>Convergence simple (CS)</td><td>$\forall x\in X$, $f_n(x)\to f(x)$</td><td>$x$ fixé, limite d'une suite de nombres.</td></tr>
+<tr><td>Convergence uniforme (CU)</td><td>$\|f_n - f\|_\infty = \sup_{x\in X}|f_n(x) - f(x)|\to0$</td><td>Le même $N$ marche pour tous les $x$.</td></tr>
+<tr><td>Série : CS</td><td>$\sum f_n(x)$ converge pour tout $x$</td><td>Somme $S(x) = \sum_{n=0}^{+\infty}f_n(x)$.</td></tr>
+<tr><td>Série : CU</td><td>$(S_n)$ CU, ou $\|R_n\|_\infty\to0$</td><td>Le reste tend uniformément vers $0$.</td></tr>
+<tr><td>Série : convergence normale (CN)</td><td>$\sum\|f_n\|_\infty$ converge</td><td>La plus facile à vérifier.</td></tr>
+</table>
+<div class="sbox">$$\textbf{Suites}:\ \text{CU}\Rightarrow\text{CS}.\qquad\textbf{Séries}:\ \text{CN}\Rightarrow\text{CU}\Rightarrow\text{CS},\qquad\text{CN}\Rightarrow\text{convergence absolue}\Rightarrow\text{CS}.$$</div>
+<p>Aucune réciproque n'est vraie en général.</p>
+
+<h2 id="f-cs">2. Trouver la limite simple</h2>
+<p>On fixe $x$, et on cherche la limite de la suite numérique $(f_n(x))_n$. Souvent, il faut <b>distinguer des cas</b> selon $x$.</p>
+<p class="ml">Exemple : $f_n(x) = x^n$ sur $[0, 1]$</p>
+$$\left\{\begin{aligned}0\leqslant x\lt1&:\ x^n\to0\\x = 1&:\ 1^n = 1\end{aligned}\right.\qquad\Longrightarrow\qquad\cB{f(x) = \left\{\begin{aligned}&0\ \text{si}\ x\in[0, 1[\\&1\ \text{si}\ x = 1\end{aligned}\right.}$$
+<p>Les $f_n$ sont continues, mais $f$ ne l'est pas : la convergence simple ne conserve pas la continuité.</p>
+
+<h2 id="f-cu">3. Montrer la convergence uniforme</h2>
+<p class="ml">Méthode 1 : majorer l'écart par une suite qui ne dépend pas de $x$</p>
+<div class="sbox">$$|f_n(x) - f(x)|\leqslant\cO{\alpha_n}\ \text{pour tout}\ x\in X,\ \text{avec}\ \cO{\alpha_n}\to0\ \Longrightarrow\ \text{CU sur}\ X.$$</div>
+<p>Exemple : $f_n(x) = \frac{\sin(nx)}n$ sur $\mathbb R$. Ici $f = 0$ et $|f_n(x)|\leqslant\cO{\frac1n}\to0$ : $\cG{\text{CU sur}\ \mathbb R}$.</p>
+<p class="ml">Méthode 2 : calculer $\|f_n - f\|_\infty$ avec une étude de fonction</p>
+<p>Exemple : $f_n(x) = n\,x\,e^{-nx}$ sur $[0, +\infty[$.</p>
+<p><b>Étape 1 : limite simple.</b> Pour $x > 0$, $n\,x\,e^{-nx}\to0$ (croissances comparées). Pour $x = 0$, $f_n(0) = 0$. Donc $\cB{f = 0}$.</p>
+<p><b>Étape 2 : étudier $f_n$.</b></p>
+$$f_n'(x) = n\,e^{-nx} - n^2x\,e^{-nx} = n\,e^{-nx}(1 - nx),\qquad f_n'(x) = 0\iff x = \cV{\frac1n}.$$
+<p>$f_n$ croît sur $\big[0, \frac1n\big]$ et décroît ensuite, donc le maximum est atteint en $\cV{\frac1n}$ :</p>
+$$\cR{\|f_n - 0\|_\infty} = f_n\Big(\frac1n\Big) = n\cdot\frac1n\cdot e^{-1} = \cR{\frac1e}\not\to0\ \Longrightarrow\ \cG{\text{pas de CU sur}\ [0, +\infty[}.$$
+<p><b>Étape 3 : sur $[a, +\infty[$ avec $a > 0$.</b> Dès que $\frac1n\leqslant a$, $f_n$ est décroissante sur $[a, +\infty[$ :</p>
+$$\sup_{x\geqslant a}|f_n(x)| = f_n(a) = n\,a\,e^{-na}\to0\ \Longrightarrow\ \cG{\text{CU sur}\ [a, +\infty[}.$$
+<p>C'est le cas typique : <b>pas de CU sur tout l'intervalle, mais CU sur chaque intervalle qui évite le point gênant</b>.</p>
+<div data-mlab="fn"></div>
+
+<h2 id="f-neg">4. Prouver qu'il n'y a pas convergence uniforme</h2>
+<ul>
+<li><b>Par la continuité</b> : les $f_n$ sont continues et la limite simple ne l'est pas. C'est le cas de $x^n$ sur $[0, 1]$.</li>
+<li><b>Par une suite de points</b> : trouver $x_n\in X$ avec $|f_n(x_n) - f(x_n)|\not\to0$. Souvent, $x_n$ est le point du maximum.</li>
+<li><b>Par une limite au bord</b> : $\sup_{x\in X}|f_n(x) - f(x)|\geqslant\lim_{x\to b}|f_n(x) - f(x)|$.</li>
+</ul>
+<p class="ml">Exemple : $x^n$ sur $[0, 1[$</p>
+<p>Ici $f = 0$, continue : l'argument de continuité ne marche pas. On prend $\cV{x_n = 1 - \frac1n}\in[0, 1[$ :</p>
+$$f_n(x_n) = \Big(1 - \frac1n\Big)^n = e^{n\ln(1 - 1/n)}\to e^{-1}\neq0\ \Longrightarrow\ \|f_n\|_\infty\geqslant f_n(x_n)\not\to0:\ \cG{\text{pas de CU}}.$$
+<p>Par contre, sur $[0, a]$ avec $a\lt1$ : $\sup_{[0, a]}x^n = a^n\to0$, donc CU.</p>
+
+<h2 id="f-reg">5. Ce que la convergence uniforme conserve</h2>
+<div class="sbox">$$\textbf{Continuité}:\ f_n\ \text{continues et CU vers}\ f\ \text{sur}\ X\ (\text{ou sur tout segment de}\ X)\ \Longrightarrow\ f\ \text{continue}.$$</div>
+<div class="sbox">$$\textbf{Double limite}:\ f_n(x)\xrightarrow[x\to a]{}\ell_n\ \text{et CU}\ \Longrightarrow\ (\ell_n)\ \text{converge et}\ \lim_{n}\lim_{x\to a}f_n(x) = \lim_{x\to a}\lim_nf_n(x).$$</div>
+<div class="sbox">$$\textbf{Intégration sur un segment}:\ f_n\ \text{continues, CU sur}\ [a, b]\ \Longrightarrow\ \int_a^bf_n\to\int_a^bf.$$</div>
+<div class="sbox">$$\textbf{Dérivation}:\ f_n\ \mathcal C^1,\ (f_n)\ \text{CS vers}\ f,\ (f_n')\ \textbf{CU}\ \text{vers}\ g\ \Longrightarrow\ f\ \text{est}\ \mathcal C^1\ \text{et}\ f' = g.$$</div>
+<p class="ml">Contre-exemple pour l'intégrale</p>
+<p>$f_n(x) = n^2x\,e^{-nx}$ sur $[0, 1]$ tend simplement vers $0$. Avec $\cO{u = nx}$ :</p>
+$$\int_0^1n^2x\,e^{-nx}\,dx = \int_0^nu\,e^{-u}\,du = 1 - (n + 1)e^{-n}\to1\neq\int_0^10 = 0.$$
+<p>Il n'y a pas CU : $\|f_n\|_\infty = f_n\big(\frac1n\big) = \frac ne\to+\infty$.</p>
+<p class="ml piege">Piège</p>
+<p>Pour la dérivation, c'est la CU des <b>dérivées</b> $f_n'$ qu'il faut, pas celle des $f_n$. $f_n(x) = \frac{\sin(nx)}n$ converge uniformément vers $0$, mais $f_n'(x) = \cos(nx)$ ne converge même pas simplement.</p>
+
+<h2 id="f-series">6. Les séries de fonctions</h2>
+<ul>
+<li><b>CS</b> : pour chaque $x$, on étudie la série numérique $\sum f_n(x)$ (chapitre Séries).</li>
+<li><b>CU</b> : $\sum f_n$ CS et $\sup_x|R_n(x)|\to0$, avec $R_n(x) = \sum_{k=n+1}^{+\infty}f_k(x)$.</li>
+<li>Condition nécessaire : si $\sum f_n$ CU, alors $f_n\to0$ <b>uniformément</b>.</li>
+</ul>
+
+<h2 id="f-cn">7. La convergence normale</h2>
+<div class="sbox">$$|f_n(x)|\leqslant\cO{\alpha_n}\ \text{pour tout}\ x\in X,\ \text{et}\ \sum\cO{\alpha_n}\ \text{converge}\ \Longrightarrow\ \sum f_n\ \text{converge normalement, donc uniformément, sur}\ X.$$</div>
+<p>On cherche le plus petit majorant possible : $\alpha_n = \|f_n\|_\infty$ (étude de fonction si besoin).</p>
+<p class="ml">Exemple 1 : $\sum\frac{x^n}{n^2}$ sur $[-1, 1]$</p>
+$$\Big|\frac{x^n}{n^2}\Big|\leqslant\cO{\frac1{n^2}}\ \text{pour}\ |x|\leqslant1,\qquad\sum\frac1{n^2}\ \text{converge}\ \Longrightarrow\ \cG{\text{CN sur}\ [-1, 1]}.$$
+<p class="ml">Exemple 2 : $\sum e^{-nx}$ sur $\left]0, +\infty\right[$, puis sur $[a, +\infty[$</p>
+<p><b>Sur $\left]0, +\infty\right[$</b> : $\|f_n\|_\infty = \sup_{x > 0}e^{-nx} = 1$, et $\sum1$ diverge : pas de CN. Il n'y a même pas CU : $f_n\to0$ uniformément est faux, puisque $\|f_n\|_\infty = 1$.</p>
+<p><b>Sur $[a, +\infty[$</b> ($a > 0$) : $\sup_{x\geqslant a}e^{-nx} = e^{-na} = (e^{-a})^n$, série géométrique de raison $e^{-a}\lt1$ : $\cG{\text{CN sur}\ [a, +\infty[}$.</p>
+<p class="ml">Exemple 3 : avec une étude de fonction</p>
+<p>$f_n(x) = \frac{x}{n(1 + nx^2)}$ sur $[0, +\infty[$. On étudie $h(x) = \frac x{1 + nx^2}$ :</p>
+$$h'(x) = \frac{1 - nx^2}{(1 + nx^2)^2} = 0\iff x = \cV{\frac1{\sqrt n}},\qquad h\Big(\frac1{\sqrt n}\Big) = \frac{1/\sqrt n}{2} = \frac1{2\sqrt n}.$$
+$$\|f_n\|_\infty = \frac1n\cdot\frac1{2\sqrt n} = \cO{\frac1{2n^{3/2}}},\quad\text{Riemann}\ \frac32 > 1\ \Longrightarrow\ \cG{\text{CN sur}\ [0, +\infty[}.$$
+
+<h2 id="f-alt">8. Convergence uniforme sans convergence normale</h2>
+<p>Quand la CN échoue, on revient à la définition : on <b>majore le reste</b> uniformément. L'outil le plus fréquent est le critère des séries alternées, avec $|R_n(x)|\leqslant|f_{n+1}(x)|$.</p>
+<p class="ml">Exemple : $\sum\frac{(-1)^n}{n + x}$ sur $[0, +\infty[$ ($n\geqslant1$)</p>
+<p><b>Pas de CN</b> : $\big\|\frac{(-1)^n}{n + x}\big\|_\infty = \frac1n$, et $\sum\frac1n$ diverge.</p>
+<p><b>CS</b> : pour $x$ fixé, $\frac1{n + x}$ décroît vers $0$ : critère spécial.</p>
+<p><b>CU</b> : la majoration du reste donne, pour tout $x\geqslant0$ :</p>
+$$|R_n(x)|\leqslant\frac1{n + 1 + x}\leqslant\cO{\frac1{n + 1}}\ \Longrightarrow\ \|R_n\|_\infty\leqslant\frac1{n + 1}\to0:\ \cG{\text{CU sur}\ [0, +\infty[}.$$
+
+<h2 id="f-sreg">9. La régularité de la somme</h2>
+<div class="sbox">$$\textbf{Continuité}:\ f_n\ \text{continues},\ \sum f_n\ \text{CU sur}\ X\ (\text{ou sur tout segment})\ \Longrightarrow\ S = \sum_{n=0}^{+\infty}f_n\ \text{continue}.$$</div>
+<div class="sbox">$$\textbf{Dérivation terme à terme}:\ f_n\ \mathcal C^1,\ \sum f_n\ \text{CS},\ \sum f_n'\ \textbf{CU}\ \Longrightarrow\ S\ \text{est}\ \mathcal C^1\ \text{et}\ S' = \sum_{n=0}^{+\infty}f_n'.$$</div>
+<div class="sbox">$$\textbf{Intégration sur un segment}:\ \sum f_n\ \text{CU sur}\ [a, b]\ \Longrightarrow\ \int_a^b\sum_{n=0}^{+\infty}f_n = \sum_{n=0}^{+\infty}\int_a^bf_n.$$</div>
+<div class="sbox">$$\textbf{Limite terme à terme}:\ f_n(x)\xrightarrow[x\to a]{}\ell_n,\ \sum f_n\ \text{CU}\ \Longrightarrow\ \sum\ell_n\ \text{converge et}\ \lim_{x\to a}S(x) = \sum_{n=0}^{+\infty}\ell_n.$$</div>
+<p>Sur un intervalle non borné, l'intégration terme à terme relève du chapitre <a href="#c-maths-mp-6">Intégration sur un intervalle quelconque</a> (hypothèse $\sum\int|f_n|\lt+\infty$).</p>
+
+<h2 id="f-zeta">10. L'exemple central : $\zeta(x) = \sum_{n\geqslant1}\frac1{n^x}$</h2>
+<p><b>Domaine.</b> Série de Riemann : $\zeta$ est définie sur $\left]1, +\infty\right[$.</p>
+<p><b>Continuité.</b> Sur $[a, +\infty[$ avec $a > 1$ :</p>
+$$\Big|\frac1{n^x}\Big| = e^{-x\ln n}\leqslant\cO{\frac1{n^a}},\quad\sum\frac1{n^a}\ \text{CV}\ \Longrightarrow\ \text{CN sur}\ [a, +\infty[.$$
+<p>Tout $x > 1$ est dans un tel $[a, +\infty[$ : $\cG{\zeta\ \text{est continue sur}\ \left]1, +\infty\right[}$.</p>
+<p><b>Dérivabilité.</b> $f_n(x) = e^{-x\ln n}$, donc $f_n'(x) = -\frac{\ln n}{n^x}$. Sur $[a, +\infty[$ :</p>
+$$|f_n'(x)|\leqslant\cO{\frac{\ln n}{n^a}},\qquad n^{\frac{1 + a}2}\cdot\frac{\ln n}{n^a} = \frac{\ln n}{n^{\frac{a - 1}2}}\to0,\ \text{avec}\ \frac{1 + a}2 > 1.$$
+<p>Donc $\sum f_n'$ converge normalement sur $[a, +\infty[$, et $\cG{\zeta\ \text{est}\ \mathcal C^1}$ avec $\zeta'(x) = -\sum_{n\geqslant1}\frac{\ln n}{n^x}\lt0$ : $\zeta$ est strictement décroissante.</p>
+<p><b>Limite en $+\infty$.</b> CN sur $[2, +\infty[$, et chaque terme a une limite : $\frac1{1^x} = 1$, et $\frac1{n^x}\to0$ pour $n\geqslant2$. Par le théorème de la limite terme à terme :</p>
+$$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
+<p><b>En $1^+$</b> : comparaison série-intégrale, $\zeta(x)\geqslant\int_1^{+\infty}\frac{dt}{t^x} = \frac1{x - 1}\to+\infty$.</p>
+
+<h2 id="f-weier">11. Le théorème d'approximation de Weierstrass</h2>
+<div class="sbox">$$f\ \text{continue sur le segment}\ [a, b]\ \Longrightarrow\ \text{il existe des polynômes}\ P_n\ \text{avec}\ \|f - P_n\|_\infty\to0.$$</div>
+<p>Utilisation typique : si $\int_a^bf(t)\,t^k\,dt = 0$ pour tout $k$, alors $f = 0$. On approche $f$ par $P_n$, on obtient $\int f^2 = \lim\int fP_n = 0$, et $f^2$ est continue et positive.</p>
+<p>Version pour les fonctions continues par morceaux : elles sont limites uniformes de fonctions en escalier.</p>
+
+<h2 id="f-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Étudier la convergence de $(f_n)$ »</b><span>CS ($x$ fixé, cas selon $x$), puis CU ($\sup|f_n - f|$).</span></div>
+<div><b>$f_n$ continues, limite discontinue</b><span>Pas de CU, sans calcul.</span></div>
+<div><b>$f_n(x) = n^\alpha x\,e^{-nx}$, $\frac{nx}{1 + n^2x^2}$…</b><span>Étude de fonction : le maximum est en $x = \frac1n$ ou $\frac1{\sqrt n}$.</span></div>
+<div><b>Pas de CU sur $X$ entier</b><span>Chercher la CU sur $[a, +\infty[$ ou sur $[0, a]$ : souvent suffisant pour la continuité.</span></div>
+<div><b>« Montrer que $S$ est continue »</b><span>CN (ou CU) sur tout segment, ou sur tout $[a, +\infty[$.</span></div>
+<div><b>« Montrer que $S$ est $\mathcal C^1$ »</b><span>CS de $\sum f_n$ et CU (souvent CN) de $\sum f_n'$.</span></div>
+<div><b>Série alternée de fonctions</b><span>Pas de CN en général ; CU par $|R_n(x)|\leqslant|f_{n+1}(x)|$.</span></div>
+<div><b>« Limite de $S$ en $+\infty$ »</b><span>Limite terme à terme, avec CU au voisinage de $+\infty$.</span></div>
+<div><b>« Équivalent de $S$ en un bord »</b><span>Comparaison série-intégrale à $x$ fixé.</span></div>
+<div><b>« $\int\sum = \sum\int$ sur un segment »</b><span>CU sur le segment suffit.</span></div>
+<div><b>« Montrer que $\sum f_n$ ne converge pas uniformément »</b><span>$\|f_n\|_\infty\not\to0$, ou le reste en un point bien choisi.</span></div>
+<div><b>$\int fP = 0$ pour tout polynôme $P$</b><span>Weierstrass, puis $\int f^2 = 0$.</span></div>
+</div>
+
+<h2 id="f-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Un majorant $\alpha_n$ qui dépend encore de $x$.</p>
+<p><b>2.</b> Conclure à la CU à partir de la CS.</p>
+<p><b>3.</b> Pour la dérivation, vérifier la CU des $f_n$ au lieu de celle des $f_n'$.</p>
+<p><b>4.</b> Chercher la CN d'une série alternée et conclure qu'il n'y a pas CU.</p>
+<p><b>5.</b> Calculer $\sup|f_n|$ sans étude de fonction, « au feeling ».</p>
+<p><b>6.</b> Oublier les cas particuliers de $x$ dans la limite simple ($x = 0$, $x = 1$).</p>
+<p><b>7.</b> Vouloir la CU sur $\left]0, +\infty\right[$ alors qu'elle n'a lieu que sur $[a, +\infty[$.</p>
+<p><b>8.</b> Intervertir $\int$ et $\lim$ sur un intervalle non borné avec la seule CU.</p>
+<p><b>9.</b> Croire que la CS conserve la continuité.</p>
+<p><b>10.</b> Oublier que la CN demande des fonctions <b>bornées</b>.</p>
+</div>
+
+<h2 id="f-entrainement">S'entraîner</h2>
+<div data-mlab="quizsf"></div>
+
+<h2 id="f-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">CU d'une suite $(f_n)$</div>
+<div class="tq">Limite simple discontinue ?</div><a class="tl" href="#f-neg">oui : pas de CU</a><div class="tno">non</div>
+<div class="tq">Majorant $\alpha_n\to0$ évident ?</div><a class="tl" href="#f-cu">oui : CU</a><div class="tno">non</div>
+<a class="tl tend" href="#f-cu">étude de $f_n - f$ : calculer le sup</a></div>
+<div class="tb tR"><div class="tt">CU d'une série $\sum f_n$</div>
+<div class="tq">$\sum\|f_n\|_\infty$ converge ?</div><a class="tl" href="#f-cn">oui : CN, donc CU</a><div class="tno">non</div>
+<div class="tq">Série alternée ?</div><a class="tl" href="#f-alt">oui : $|R_n|\leqslant|f_{n+1}|$</a><div class="tno">non</div>
+<div class="tq">$\|f_n\|_\infty\not\to0$ ?</div><a class="tl" href="#f-cn">oui : pas de CU</a><div class="tno">non</div>
+<a class="tl tend" href="#f-cn">se restreindre à $[a, +\infty[$</a></div>
+<div class="tb tG"><div class="tt">Régularité de la limite</div>
+<div class="tq">Continuité ?</div><a class="tl" href="#f-reg">oui : CU sur les segments</a><div class="tno">non</div>
+<div class="tq">Dérivabilité ?</div><a class="tl" href="#f-sreg">oui : CU des dérivées</a><div class="tno">non</div>
+<a class="tl tend" href="#f-reg">intégrale : CU sur un segment</a></div>
+<div class="tb tO"><div class="tt">Limite de $S$ en un bord</div>
+<div class="tq">CU au voisinage ?</div><a class="tl" href="#f-zeta">oui : limite terme à terme</a><div class="tno">non</div>
+<a class="tl tend" href="#f-zeta">minorer, série-intégrale</a></div>
+<div class="tb tV"><div class="tt">Approcher $f$</div>
+<div class="tq">$f$ continue sur un segment ?</div><a class="tl" href="#f-weier">oui : polynômes (Weierstrass)</a><div class="tno">non</div>
+<a class="tl tend" href="#f-weier">continue par morceaux : escalier</a></div>
+</div>
+</div>
 `
 };
