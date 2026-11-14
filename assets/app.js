@@ -394,7 +394,7 @@ function chapterPage(id, y, i) {
     ? `<article class="panelbox resume"><p class="rs-prog"><b>Au programme</b>${esc(c.n)}</p><h2>L'essentiel</h2><div class="prose">${c.r}</div>${PDFS.has(rs) ? `<a class="btn btn-ghost btn-sm rs-dl" href="pdf/${rs}.pdf" download>${I.dl}Télécharger en PDF</a>` : ""}</article>`
     : (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
   else if (chapTab === "plus") body = plusList(plus);
-  else if (chapTab === "methode") { const mm = METH[c.t], nv = (mm.match(/<nav class="msum">[\s\S]*?<\/nav>/) || [""])[0]; body = `<article class="panelbox methode"><div class="prose">${nv}${annotate(mm.replace(nv, ""), null)}</div></article>`; }
+  else if (chapTab === "methode") { EXT = c.t; const mm = METH[c.t], nv = (mm.match(/<nav class="msum">[\s\S]*?<\/nav>/) || [""])[0]; body = `<article class="panelbox methode"><div class="prose">${nv}${annotate(mm.replace(nv, ""), null)}</div></article>`; }
   else if (chapTab === "formulaire") body = `<div class="formulaire"><div class="fm-top"><button type="button" class="btn btn-ghost btn-sm" data-print>Imprimer</button></div>${chapRappels(all).map(k => `<section><h3>${esc(RAPPELS[k].t)}</h3><div class="body course">${aerate(RAPPELS[k].b, true)}</div></section>`).join("")}</div>`;
   else if (chapTab === "cartes") { const ks = chapRappels(all); body = `<div class="flash" data-n="${ks.length}">${ks.map((k, j) => `<button type="button" class="fcard" data-j="${j}"${j ? " hidden" : ""} aria-label="Retourner la carte"><span class="ff">${esc(RAPPELS[k].t)}<small>Clique pour voir la réponse</small></span><span class="fb body course">${aerate(RAPPELS[k].b, true)}</span></button>`).join("")}<div class="fnav"><button type="button" class="btn btn-ghost" data-fl="-1">${I.left} Précédente</button><span class="fpos">1 / ${ks.length}</span><button type="button" class="btn btn-ghost" data-fl="1">Suivante ${I.arrow}</button></div></div>`; }
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
@@ -1550,6 +1550,33 @@ function potenceHtml(A, B) {
   return { html, Q, R: last, ptxt };
 }
 function renderPotence(el) { const A = el.dataset.a.split(",").map(Number), B = el.dataset.b.split(",").map(Number); el.innerHTML = potenceHtml(A, B).html; }
+/* Exemples des fiches Méthode : « Exemple » souligné, encadré Méthode ombré, étapes dans des cercles */
+let EXT = null;
+function exBlocks(app) {
+  const M = ((window.LEMME || {}).EXMETH || {})[EXT] || []; let idx = 0;
+  const STOP = "h2, p.ml, [data-mlab], .tree, .btree, .lg, .htree, .mrefl, .merr, .exb";
+  $$(".methode .prose > p.ml", app).forEach(p => {
+    if (!/^Exemple/.test(p.textContent.trim())) return;
+    const meth = M[idx++], m = p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*(Exemple(?:[\s\u00a0]+\d+|[\s\u00a0]+complet|[\s\u00a0]+d'usage)?)[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
+    const lab = m ? m[1] : "Exemple", tit = m ? m[2].trim() : "";
+    const box = document.createElement("div"); box.className = "exb";
+    box.innerHTML = `<div class="exh"><div class="exl"><span class="exu">${lab}</span>${tit ? `<span class="ext">${tit}</span>` : ""}</div>${meth ? `<div class="exm"><b>Méthode</b><div>${meth}</div></div>` : ""}</div><div class="exc"></div>`;
+    const body = box.querySelector(".exc");
+    let n = p.nextSibling;
+    while (n && !(n.nodeType === 1 && n.matches(STOP))) { const nx = n.nextSibling; body.appendChild(n); n = nx; }
+    p.replaceWith(box);
+    $$(":scope > p", body).forEach(q => {
+      const f = q.firstElementChild;
+      if (f && f.tagName === "SPAN" && f.firstElementChild && f.firstElementChild.tagName === "B" && /^\s*<span/.test(q.innerHTML)) {
+        const r0 = f.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*<b>[\s\u00a0]*(?:Étape[\s\u00a0]*)?(\d+(?:[\s\u00a0]*[–-][\s\u00a0]*\d+)?)[\s\u00a0]*(?:[.:][\s\u00a0]*)?([\s\S]*?)<\/b>[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
+        if (r0) { f.innerHTML = r0[3]; q.classList.add("exs"); const num = document.createElement("span"); num.className = "exn"; num.textContent = r0[1].replace(/\s/g, ""); const wrap = document.createElement("span"); wrap.className = "exbody"; if (r0[2].trim()) { const bb = document.createElement("b"); bb.innerHTML = r0[2].trim().replace(/[.:]$/, "") + ". "; wrap.appendChild(bb); } while (q.firstChild) wrap.appendChild(q.firstChild); q.append(num, wrap); return; }
+      }
+      const r = q.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*<b>[\s\u00a0]*(?:Étape[\s\u00a0]*)?(\d+(?:[\s\u00a0]*[–-][\s\u00a0]*\d+)?)[\s\u00a0]*(?:[.:][\s\u00a0]*)?([\s\S]*?)<\/b>[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
+      if (!r) return;
+      q.classList.add("exs"); q.innerHTML = `<span class="exn">${r[1].replace(/\s/g, "")}</span><span class="exbody">${r[2].trim() ? `<b>${r[2].trim().replace(/[.:]$/, "")}.</b> ` : ""}${r[3]}</span>`;
+    });
+  });
+}
 function braceTree(el) {
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
   const chain = tb => { const out = []; let cur = null, fin = null; [...tb.children].forEach(c => { if (c.classList.contains("tq")) { cur = { q: c.innerHTML }; out.push(cur); } else if (c.classList.contains("tend")) fin = c; else if (c.classList.contains("tl") && cur) cur.yes = c; else if (c.classList.contains("tno") && cur) cur.no = c.innerHTML; }); return { out, fin }; };
@@ -3394,6 +3421,7 @@ function wire(ex) {
     try { localStorage.setItem("lemme-diff", diff); } catch (_) {}
     route(true);
   }));
+  if (EXT && $(".methode", app)) exBlocks(app);
   fixLabm(app);
   $$(".potence", app).forEach(renderPotence);
   $$(".tree", app).forEach(braceTree);
