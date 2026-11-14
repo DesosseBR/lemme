@@ -2621,7 +2621,7 @@ function wire(ex) {
   }));
   fixLabm(app);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a, .tree a", app).forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
+  $$(".msum a, .tree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
