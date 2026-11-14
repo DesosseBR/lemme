@@ -1821,3 +1821,8 @@ footer.site.site-min .wrap{padding-block:20px}
 .dvs{font:600 15px var(--f-mono)}
 .dvv{font-size:13px;color:var(--muted)}
 .mlab .btn.sel{border-color:var(--ink);background:var(--bg-2)}
+.sarx{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:10px;margin:12px 0}
+.sarx > div{padding:6px 12px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:center}
+.sarx p{margin:0;font-size:15px}
+.dvt{border-color:color-mix(in srgb,var(--tc) 45%,var(--line))}
+.dvt td.pv{color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,transparent)}

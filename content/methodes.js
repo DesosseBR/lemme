@@ -215,7 +215,9 @@ $$AB - BA = I_n\ \Longrightarrow\ 0 = \operatorname{tr}(AB) - \operatorname{tr}(
 <li>Pour $n\geqslant3$, $\mathfrak S_n$ n'est pas commutatif.</li>
 </ul>
 <p class="ml">Notation en deux lignes</p>
-$$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad\sigma(1) = 3,\ \sigma(2) = 5,\ \sigma(3) = 1,\ \sigma(4) = 2,\ \sigma(5) = 4.$$
+<p>On lit <b>colonne par colonne</b> : en haut le nombre de départ, en bas son image.</p>
+$$\sigma = \left(\begin{array}{ccccc}\cB1&\cR2&\cG3&\cV4&\cO5\\\cB\downarrow&\cR\downarrow&\cG\downarrow&\cV\downarrow&\cO\downarrow\\\cB3&\cR5&\cG1&\cV2&\cO4\end{array}\right)$$
+$$\cB{\sigma(1) = 3},\qquad\cR{\sigma(2) = 5},\qquad\cG{\sigma(3) = 1},\qquad\cV{\sigma(4) = 2},\qquad\cO{\sigma(5) = 4}.$$
 <p class="ml piege">Piège</p>
 <p>$\sigma\tau\neq\tau\sigma$ en général : calcule toujours de droite à gauche, $\sigma\tau(k) = \sigma(\tau(k))$.</p>
 
@@ -231,7 +233,20 @@ $$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad\sigma(1) = 3,\
 <li>Recommencer avec le plus petit élément restant.</li>
 <li>On n'écrit pas les points fixes.</li>
 </ol>
-$$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad1\to3\to1,\qquad2\to5\to4\to2\qquad\Longrightarrow\qquad\sigma = (1\ 3)(2\ 5\ 4).$$
+<p>Même $\sigma$, on colorie maintenant par cycle :</p>
+$$\sigma = \left(\begin{array}{ccccc}\cB1&\cR2&\cB3&\cR4&\cR5\\\cB3&\cR5&\cB1&\cR2&\cR4\end{array}\right)$$
+<ol>
+<li>On part de $\cB1$ : $\sigma(1) = 3$, puis $\sigma(3) = 1$, on est revenu au départ.</li>
+</ol>
+$$\cB{1\ \xrightarrow{\ \sigma\ }\ 3\ \xrightarrow{\ \sigma\ }\ 1}\qquad\Longrightarrow\qquad\text{premier cycle}\ \cB{(1\ 3)}.$$
+<ol start="2">
+<li>Le plus petit nombre pas encore vu est $\cR2$ : $\sigma(2) = 5$, $\sigma(5) = 4$, $\sigma(4) = 2$.</li>
+</ol>
+$$\cR{2\ \xrightarrow{\ \sigma\ }\ 5\ \xrightarrow{\ \sigma\ }\ 4\ \xrightarrow{\ \sigma\ }\ 2}\qquad\Longrightarrow\qquad\text{deuxième cycle}\ \cR{(2\ 5\ 4)}.$$
+<ol start="3">
+<li>Tous les nombres sont vus : c'est fini.</li>
+</ol>
+<div class="sbox">$$\sigma = \cB{(1\ 3)}\,\cR{(2\ 5\ 4)}.$$</div>
 <p class="ml">Transpositions</p>
 <div class="sbox">$$(a_1\ a_2\ \cdots\ a_p) = (a_1\ a_2)(a_2\ a_3)\cdots(a_{p-1}\ a_p)\qquad\text{(}p - 1\ \text{transpositions)}.$$</div>
 <p>Toute permutation est un produit de transpositions : $\mathfrak S_n$ est <b>engendré</b> par les transpositions.</p>
@@ -246,7 +261,7 @@ $$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad1\to3\to1,\qqua
 <li>Décomposer $\sigma$ en cycles disjoints de longueurs $p_1,\dots,p_r$.</li>
 <li>$\varepsilon(\sigma) = (-1)^{(p_1 - 1) + \cdots + (p_r - 1)}$.</li>
 </ol>
-$$\sigma = (1\ 3)(2\ 5\ 4):\quad\varepsilon(\sigma) = (-1)^{1}(-1)^{2} = -1.$$
+$$\sigma = \cB{(1\ 3)}\,\cR{(2\ 5\ 4)}:\qquad\varepsilon(\sigma) = \cB{(-1)^{2-1}}\times\cR{(-1)^{3-1}} = \cB{(-1)}\times\cR{1} = -1.$$
 <p>$\varepsilon = 1$ : permutation <b>paire</b>. $\varepsilon = -1$ : <b>impaire</b>. Les paires forment $\mathfrak A_n$, avec $\operatorname{Card}\mathfrak A_n = \frac{n!}2$ pour $n\geqslant2$.</p>
 <p class="ml piege">Piège</p>
 <p>Un cycle de longueur $3$ est <b>pair</b> : la signature dépend de la longueur moins un, pas de la longueur.</p>
@@ -284,7 +299,16 @@ $$\begin{vmatrix}2&7&-1\\0&-3&5\\0&0&4\end{vmatrix} = 2\times(-3)\times4 = -24,\
 </ol>
 <div data-mlab="sarrus"></div>
 <p class="ml">Exemple</p>
-$$\begin{vmatrix}1&2&3\\0&4&5\\1&0&6\end{vmatrix} = (1\cdot4\cdot6 + 2\cdot5\cdot1 + 3\cdot0\cdot0) - (3\cdot4\cdot1 + 1\cdot5\cdot0 + 2\cdot0\cdot6) = 34 - 12 = 22.$$
+<p>Chaque produit a sa couleur : la case de la matrice et le facteur du calcul ont la même. Les trois premiers suivent un trait <b>descendant</b> ($+$), les trois suivants un trait <b>montant</b> ($-$).</p>
+<div class="sarx">
+<div>$$\begin{vmatrix}\cB1&2&3\\0&\cB4&5\\1&0&\cB6\end{vmatrix}$$<p>$+\ \cB{1\times4\times6} = \cB{24}$</p></div>
+<div>$$\begin{vmatrix}1&\cG2&3\\0&4&\cG5\\\cG1&0&6\end{vmatrix}$$<p>$+\ \cG{2\times5\times1} = \cG{10}$</p></div>
+<div>$$\begin{vmatrix}1&2&\cV3\\\cV0&4&5\\1&\cV0&6\end{vmatrix}$$<p>$+\ \cV{3\times0\times0} = \cV{0}$</p></div>
+<div>$$\begin{vmatrix}1&2&\cR3\\0&\cR4&5\\\cR1&0&6\end{vmatrix}$$<p>$-\ \cR{3\times4\times1} = -\cR{12}$</p></div>
+<div>$$\begin{vmatrix}\cO1&2&3\\0&4&\cO5\\1&\cO0&6\end{vmatrix}$$<p>$-\ \cO{1\times5\times0} = -\cO{0}$</p></div>
+<div>$$\begin{vmatrix}1&\cP2&3\\\cP0&4&5\\1&0&\cP6\end{vmatrix}$$<p>$-\ \cP{2\times0\times6} = -\cP{0}$</p></div>
+</div>
+$$\det A = (\cB{24} + \cG{10} + \cV{0}) - (\cR{12} + \cO{0} + \cP{0}) = 34 - 12 = 22.$$
 <p class="ml piege">Piège</p>
 <ul>
 <li>Sarrus ne marche <b>qu'en taille 3</b>. En taille 4, il y a 24 produits, pas 8.</li>
@@ -318,7 +342,15 @@ $$\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix},\qquad\begin{pmatrix}+&-&+&-\\
 <p>Développer selon la ligne ou la colonne qui contient <b>le plus de zéros</b> : chaque zéro supprime un déterminant à calculer.</p>
 <div data-mlab="dev"></div>
 <p class="ml">Exemple</p>
-$$\begin{vmatrix}1&4&5\\2&0&3\\0&1&2\end{vmatrix} = 1\begin{vmatrix}0&3\\1&2\end{vmatrix} - 4\begin{vmatrix}2&3\\0&2\end{vmatrix} + 5\begin{vmatrix}2&0\\0&1\end{vmatrix} = -3 - 16 + 10 = -9.$$
+<p>On développe selon la <b>ligne 1</b>. Ses trois coefficients ont chacun une couleur, et leurs signes viennent du damier $\begin{pmatrix}\cB+&\cR-&\cG+\end{pmatrix}$.</p>
+$$A = \begin{pmatrix}\cB1&\cR4&\cG5\\2&0&3\\0&1&2\end{pmatrix}$$
+<p>Pour chaque coefficient, on <b>barre sa ligne et sa colonne</b> (en gris) : ce qui reste est son mineur.</p>
+<div class="sarx">
+<div>$$\begin{pmatrix}\cB1&\cX4&\cX5\\\cX2&0&3\\\cX0&1&2\end{pmatrix}\ \leadsto\ \cB{\begin{vmatrix}0&3\\1&2\end{vmatrix}}$$<p>$\cB{+1}\times\cB{(0\times2 - 3\times1)} = \cB{-3}$</p></div>
+<div>$$\begin{pmatrix}\cX1&\cR4&\cX5\\2&\cX0&3\\0&\cX1&2\end{pmatrix}\ \leadsto\ \cR{\begin{vmatrix}2&3\\0&2\end{vmatrix}}$$<p>$\cR{-4}\times\cR{(2\times2 - 3\times0)} = \cR{-16}$</p></div>
+<div>$$\begin{pmatrix}\cX1&\cX4&\cG5\\2&0&\cX3\\0&1&\cX2\end{pmatrix}\ \leadsto\ \cG{\begin{vmatrix}2&0\\0&1\end{vmatrix}}$$<p>$\cG{+5}\times\cG{(2\times1 - 0\times0)} = \cG{10}$</p></div>
+</div>
+$$\det A = \cB{1\begin{vmatrix}0&3\\1&2\end{vmatrix}} - \cR{4\begin{vmatrix}2&3\\0&2\end{vmatrix}} + \cG{5\begin{vmatrix}2&0\\0&1\end{vmatrix}} = \cB{-3}\cR{-16}\cG{+10} = -9.$$
 
 <h2 id="d-form">10. Les formules</h2>
 <div class="sbox">$$\left\{\begin{aligned}&\det(AB) = \det A\,\det B,\qquad\det(A^n) = (\det A)^n\\&\det(\lambda A) = \lambda^n\det A\quad(A\in\mathcal M_n)\\&\det({}^tA) = \det A\\&A\ \text{inversible}\iff\det A\neq0,\qquad\det(A^{-1}) = \frac1{\det A}\end{aligned}\right.$$</div>
@@ -360,8 +392,21 @@ $$AX = B,\ \det A\neq0\ \Longrightarrow\ x_k = \frac{\det A_k}{\det A},\qquad A_
 <p class="ml">Déterminant d'une famille et d'un endomorphisme</p>
 $$(v_1,\dots,v_n)\ \text{base de}\ E\iff\det_{\mathcal B}(v_1,\dots,v_n)\neq0,\qquad\det u = \det\operatorname{Mat}_{\mathcal B}(u)\ \text{(indépendant de}\ \mathcal B\text{)}.$$
 <p class="ml">Déterminant tridiagonal : récurrence</p>
-$$D_n = \begin{vmatrix}2&1&&0\\1&2&\ddots&\\&\ddots&\ddots&1\\0&&1&2\end{vmatrix}\ \Longrightarrow\ D_n = 2D_{n-1} - D_{n-2},\quad D_1 = 2,\ D_2 = 3\ \Longrightarrow\ D_n = n + 1.$$
-<p>On développe selon la première colonne, deux fois : c'est la méthode pour toutes les matrices « en bande ».</p>
+<p>$D_n$ est le déterminant de taille $n$ avec des $2$ sur la diagonale et des $1$ juste au-dessus et juste en dessous. Exemple pour $n = 4$ :</p>
+$$D_4 = \begin{vmatrix}\cB2&1&0&0\\\cR1&2&1&0\\0&1&2&1\\0&0&1&2\end{vmatrix}.$$
+<p><b>Étape 1.</b> On développe selon la <b>colonne 1</b> : seuls $\cB2$ (signe $+$) et $\cR1$ (signe $-$) ne sont pas nuls.</p>
+$$D_4 = \cB{2}\begin{vmatrix}2&1&0\\1&2&1\\0&1&2\end{vmatrix} - \cR{1}\begin{vmatrix}\cG1&0&0\\1&2&1\\0&1&2\end{vmatrix}.$$
+<ul>
+<li>Le premier mineur est exactement $\cB{D_3}$.</li>
+<li>Le second commence par la ligne $(\cG1, 0, 0)$.</li>
+</ul>
+<p><b>Étape 2.</b> On développe ce second déterminant selon sa <b>ligne 1</b> : il ne reste que $\cG1$ (signe $+$).</p>
+$$\begin{vmatrix}\cG1&0&0\\1&2&1\\0&1&2\end{vmatrix} = \cG1\times\begin{vmatrix}2&1\\1&2\end{vmatrix} = \cG{D_2}.$$
+<p><b>Étape 3.</b> On assemble. Le même calcul marche pour tout $n\geqslant3$ :</p>
+<div class="sbox">$$D_n = \cB2D_{n-1} - \cR1\cdot\cG{D_{n-2}}.$$</div>
+<p><b>Étape 4.</b> On résout la récurrence, avec $D_1 = 2$ et $D_2 = \begin{vmatrix}2&1\\1&2\end{vmatrix} = 3$ :</p>
+$$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarrow\qquad D_n = D_1 + (n - 1) = n + 1.$$
+<p>Vérification : $D_4 = 5$. C'est la méthode pour toutes les matrices « en bande ».</p>
 
 <h2 id="d-reflexes">Si tu vois… alors pense à…</h2>
 <div class="mrefl">

@@ -1409,7 +1409,7 @@ function mlPerm(host) {
   const n = 6; let p = [3, 5, 1, 2, 4, 6], sel = null;
   const cycles = () => { const seen = new Set(), out = []; for (let i = 1; i <= n; i++) { if (seen.has(i)) continue; const c = []; let k = i; while (!seen.has(k)) { seen.add(k); c.push(k); k = p[k - 1]; } if (c.length > 1) out.push(c); } return out; };
   const inv = () => { let x = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (p[i] > p[j]) x++; return x; };
-  const COL = ["#2b5bd7", "#d4503b", "#1f8a5b", "#b07a00", "#7a4cc2"];
+  const COL = ["#2B5BD7", "#D4503B", "#1F8A5B", "#C27C00", "#7A4CC2"];
   const draw = () => {
     const cs = cycles(), N = inv(), eps = N % 2 ? -1 : 1;
     const colOf = k => { const i = cs.findIndex(c => c.includes(k)); return i < 0 ? "var(--muted)" : COL[i % COL.length]; };
@@ -1421,6 +1421,8 @@ function mlPerm(host) {
       <div class="permrow"><table class="mx ptab"><tr>${p.map((_, i) => `<td>${i + 1}</td>`).join("")}</tr><tr>${p.map((v, i) => `<td class="pv${sel === i ? " on" : ""}" data-i="${i}" style="color:${colOf(i + 1)}">${v}</td>`).join("")}</tr></table>
       <svg viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="Graphe de la permutation"><defs>${defs}</defs>${arrows}${nodes}</svg></div>
       <p class="mlcalc">$\\sigma = ${cs.length ? cs.map(c => `(${c.join("\\ ")})`).join("") : "\\mathrm{id}"}$ &nbsp;·&nbsp; $${N}$ inversions &nbsp;·&nbsp; $\\varepsilon(\\sigma) = (-1)^{${N}} = ${eps}$${cs.length ? ` &nbsp;·&nbsp; par les cycles : $(-1)^{${cs.map(c => c.length - 1).join(" + ")}} = ${eps}$` : ""}</p>
+      <p class="mlcalc">${cs.length ? cs.map((c, i) => `$\\textcolor[RGB]{${[1, 3, 5].map(x => parseInt(COL[i % COL.length].slice(x, x + 2), 16)).join(",")}}{${c.concat(c[0]).join("\\to")}}$`).join(" &nbsp; ") : "Tous les nombres sont fixes."}</p>
+      <p class="mlnote">Inversions (paires $i\\lt j$ avec $\\sigma(i)\\gt\\sigma(j)$) : ${(() => { const L = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (p[i] > p[j]) L.push(`$(${i + 1},${j + 1})$`); return L.length ? L.join(", ") : "aucune"; })()}</p>
       <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Au hasard</button><button type="button" class="btn btn-ghost btn-sm" data-id>Identité</button></div>`;
     $$(".pv", host).forEach(td => td.addEventListener("click", () => { const i = +td.dataset.i; if (sel === null) sel = i; else { [p[sel], p[i]] = [p[i], p[sel]]; sel = null; } draw(); }));
     $("[data-new]", host).addEventListener("click", () => { for (let i = n - 1; i > 0; i--) { const j = rnd(0, i); [p[i], p[j]] = [p[j], p[i]]; } sel = null; draw(); });
@@ -1435,7 +1437,7 @@ function mlSarrus(host) {
   const L = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
   /* chaque produit : 3 cases (ligne, colonne), signe */
   const P = [[[0, 0], [1, 1], [2, 2], 1], [[0, 1], [1, 2], [2, 0], 1], [[0, 2], [1, 0], [2, 1], 1], [[0, 2], [1, 1], [2, 0], -1], [[0, 0], [1, 2], [2, 1], -1], [[0, 1], [1, 0], [2, 2], -1]];
-  const POS = ["#2b5bd7", "#1f8a5b", "#7a4cc2"], NEG = ["#d4503b", "#b07a00", "#c2416b"];
+  const POS = ["#2B5BD7", "#1F8A5B", "#7A4CC2"], NEG = ["#D4503B", "#C27C00", "#C2416B"], MC = ["cB", "cG", "cV", "cR", "cO", "cP"];
   const draw = () => {
     const W = 56, H = 46, cols = mode === 2 ? 5 : 3, x0 = 30, y0 = 26;
     const cx = c => x0 + c * W + W / 2, cy = r => y0 + r * H + H / 2;
@@ -1458,7 +1460,7 @@ function mlSarrus(host) {
       <div class="mlseg"><button type="button" data-m="2" aria-pressed="${mode === 2}">Colonnes recopiées</button><button type="button" data-m="1" aria-pressed="${mode === 1}">Triangles</button></div>
       <svg class="sarrus" viewBox="0 0 ${Wt} ${y0 * 2 + 3 * H}" width="${Wt}" height="${y0 * 2 + 3 * H}" role="img" aria-label="Schéma de Sarrus">${lines}${cells.join("")}${br(x0 + 4)}${br(x0 + 3 * W - 4)}${mode === 2 ? `<line x1="${x0 + 3 * W + 2}" y1="${y0}" x2="${x0 + 3 * W + 2}" y2="${y0 + 3 * H}" stroke="var(--line)" stroke-dasharray="4 4"/>` : ""}</svg>
       <div class="sterms">${P.map((pr, k) => `<button type="button" data-t="${k}" class="${pr[3] > 0 ? "plus" : "moins"}${hi === k ? " on" : ""}" style="--c:${pr[3] > 0 ? POS[k % 3] : NEG[k % 3]}">${pr[3] > 0 ? "+" : "−"} $${pr.slice(0, 3).map(([r, c]) => L[r * 3 + c]).join("")}$</button>`).join("")}</div>
-      <p class="mlcalc">${hi === null ? `$\\det = (${sp}) - (${sm}) = ${sp - sm}$` : `$${P[hi][3] > 0 ? "+" : "-"}\\ ${term(hi)} = ${P[hi][3] > 0 ? "" : "-"}${par(val(hi))}$`}</p>
+      <p class="mlcalc">${hi === null ? `$$\\det = (${[0, 1, 2].map(k => `\\${MC[k]}{${term(k)}}`).join(" + ")}) - (${[3, 4, 5].map(k => `\\${MC[k]}{${term(k)}}`).join(" + ")})$$$$= (${[0, 1, 2].map(k => `\\${MC[k]}{${par(val(k))}}`).join(" + ")}) - (${[3, 4, 5].map(k => `\\${MC[k]}{${par(val(k))}}`).join(" + ")}) = ${sp} - ${par(sm)} = ${sp - sm}$$` : `$${P[hi][3] > 0 ? "+" : "-"}\\ \\${MC[hi]}{${term(hi)}} = ${P[hi][3] > 0 ? "" : "-"}${par(val(hi))}$`}</p>
       <p class="mlnote">Les traits bleus et verts (descendants) comptent avec $+$, les rouges et orange (montants) avec $-$.</p>
       <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tous les traits</button></div>`;
     const set = k => { hi = k; draw(); };
@@ -1466,6 +1468,7 @@ function mlSarrus(host) {
     $$("[data-t]", host).forEach(b => b.addEventListener("click", () => set(+b.dataset.t)));
     $$("[data-m]", host).forEach(b => b.addEventListener("click", () => { mode = +b.dataset.m; hi = null; draw(); }));
     $("[data-new]", host).addEventListener("click", () => { M = randM(3, -2, 5); hi = null; draw(); });
+    $$(".sarrus text", host).forEach(() => {});
     $("[data-all]", host).addEventListener("click", () => set(null));
     typeset(host);
   };
@@ -1479,12 +1482,14 @@ function mlDev(host) {
     const best = [...Array(n).keys()].map(k => [k, Math.max(z(k), 0)]);
     const terms = [...Array(n).keys()].map(t => { const i = by === "r" ? idx : t, j = by === "r" ? t : idx; return { i, j, a: M[i][j], s: (i + j) % 2 ? -1 : 1, m: minor(M, i, j) }; });
     const tot = terms.reduce((s, t) => s + t.s * t.a * detN(t.m), 0);
-    const mini = t => `<div class="dvt${t.a === 0 ? " zero" : ""}"><span class="dvs">${t.s > 0 ? "+" : "−"} ${par(t.a)} ×</span><table class="mx">${M.map((r, i) => `<tr>${r.map((v, j) => `<td class="${i === t.i || j === t.j ? "x" : ""}${i === t.i && j === t.j ? " pv" : ""}">${v}</td>`).join("")}</tr>`).join("")}</table><span class="dvv">mineur $${detN(t.m)}$</span></div>`;
+    const DC = ["cB", "cR", "cG", "cV"], HX = ["#2B5BD7", "#D4503B", "#1F8A5B", "#7A4CC2"];
+    terms.forEach((t, k) => { t.c = DC[k]; t.h = HX[k]; });
+    const mini = t => `<div class="dvt${t.a === 0 ? " zero" : ""}" style="--tc:${t.h}"><span class="dvs" style="color:${t.h}">${t.s > 0 ? "+" : "−"} ${par(t.a)} ×</span><table class="mx">${M.map((r, i) => `<tr>${r.map((v, j) => `<td class="${i === t.i || j === t.j ? "x" : ""}${i === t.i && j === t.j ? " pv" : ""}">${v}</td>`).join("")}</tr>`).join("")}</table><span class="dvv">mineur $${detN(t.m)}$</span></div>`;
     host.innerHTML = `<p class="mlt">Développer : choisis une ligne ou une colonne</p>
       <div class="mlnav">${[...Array(n).keys()].map(k => `<button type="button" class="btn btn-ghost btn-sm${by === "r" && idx === k ? " sel" : ""}" data-r="${k}">Ligne ${k + 1}${z(k) ? ` · ${z(k)} zéro${z(k) > 1 ? "s" : ""}` : ""}</button>`).join("")}</div>
       <div class="mlnav">${[...Array(n).keys()].map(k => { const zz = M.map(r => r[k]).filter(v => v === 0).length; return `<button type="button" class="btn btn-ghost btn-sm${by === "c" && idx === k ? " sel" : ""}" data-c="${k}">Colonne ${k + 1}${zz ? ` · ${zz} zéro${zz > 1 ? "s" : ""}` : ""}</button>`; }).join("")}</div>
       <div class="dvrow">${terms.map(mini).join("")}</div>
-      <p class="mlcalc">$\\det A = ${terms.map(t => `${t.s > 0 ? "+" : "-"}${par(t.a)}\\times${par(detN(t.m))}`).join(" ").replace(/^\+/, "")} = ${tot}$</p>
+      <p class="mlcalc">$$\\det A = ${terms.map(t => `${t.s > 0 ? "+" : "-"}\\${t.c}{${par(t.a)}\\begin{vmatrix}${t.m.map(r => r.join("&")).join("\\\\")}\\end{vmatrix}}`).join(" ").replace(/^\+/, "")}$$$$= ${terms.map(t => `${t.s > 0 ? "+" : "-"}\\${t.c}{${par(t.a)}\\times${par(detN(t.m))}}`).join(" ").replace(/^\+/, "")} = ${tot}$$</p>
       <p class="mlnote">Les cases grisées sont barrées : il reste le mineur. Un coefficient nul supprime tout un terme.</p>
       <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button><button type="button" class="btn btn-ghost btn-sm" data-four>Une 4×4</button></div>`;
     $$("[data-r]", host).forEach(b => b.addEventListener("click", () => { by = "r"; idx = +b.dataset.r; draw(); }));
