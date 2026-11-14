@@ -12,7 +12,9 @@ LEMME.METHODES = {
 <li>Matrice ligne : $n = 1$. Matrice colonne : $p = 1$.</li>
 </ul>
 <p class="ml">Exemple</p>
-$$A = \begin{pmatrix}2&5&4\\7&-6&0\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R),\qquad a_{1,3} = 4,\quad a_{2,1} = 7,\quad a_{2,2} = -6.$$
+<p>On repère un coefficient par <b>sa ligne puis sa colonne</b>. Chaque coefficient coloré est relié à son nom :</p>
+$$A = \begin{pmatrix}2&5&\cB4\\\cR7&\cG{-6}&0\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R)$$
+$$\cB{a_{1,3} = 4}\ \ (\text{ligne}\ 1,\ \text{colonne}\ 3),\qquad\cR{a_{2,1} = 7}\ \ (\text{ligne}\ 2,\ \text{colonne}\ 1),\qquad\cG{a_{2,2} = -6}\ \ (\text{ligne}\ 2,\ \text{colonne}\ 2).$$
 <p class="ml">Matrices à connaître</p>
 $$0_{n,p} = \begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix},\qquad I_n = \begin{pmatrix}1&&0\\&\ddots&\\0&&1\end{pmatrix},\qquad D = \begin{pmatrix}d_1&&0\\&\ddots&\\0&&d_n\end{pmatrix}.$$
 <ul>
@@ -26,7 +28,10 @@ $$0_{n,p} = \begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix},\
 <p class="ml">Méthode</p>
 $$A + B = (a_{i,j} + b_{i,j}),\qquad \lambda A = (\lambda a_{i,j}),\qquad A + 0 = A.$$
 <p class="ml">Exemple</p>
-$$\begin{pmatrix}1&2&0\\3&-1&4\end{pmatrix}+\begin{pmatrix}5&0&2\\1&1&-4\end{pmatrix} = \begin{pmatrix}6&2&2\\4&0&0\end{pmatrix},\qquad -2\begin{pmatrix}1&3\\0&-1\end{pmatrix} = \begin{pmatrix}-2&-6\\0&2\end{pmatrix}.$$
+<p>Case par case : chaque couleur additionne les deux coefficients <b>à la même place</b>.</p>
+$$\begin{pmatrix}\cB1&\cR2&\cG0\\\cV3&\cO{-1}&\cP4\end{pmatrix}+\begin{pmatrix}\cB5&\cR0&\cG2\\\cV1&\cO1&\cP{-4}\end{pmatrix} = \begin{pmatrix}\cB{1+5}&\cR{2+0}&\cG{0+2}\\\cV{3+1}&\cO{-1+1}&\cP{4-4}\end{pmatrix} = \begin{pmatrix}\cB6&\cR2&\cG2\\\cV4&\cO0&\cP0\end{pmatrix}$$
+<p>Le scalaire multiplie <b>chaque</b> coefficient :</p>
+$$\cR{-2}\begin{pmatrix}1&3\\0&-1\end{pmatrix} = \begin{pmatrix}\cR{-2}\times1&\cR{-2}\times3\\\cR{-2}\times0&\cR{-2}\times(-1)\end{pmatrix} = \begin{pmatrix}-2&-6\\0&2\end{pmatrix}$$
 <p class="ml piege">Piège</p>
 <ul>
 <li>$A + 3$ n'a <b>aucun sens</b> : on écrit $A + 3I_n$.</li>
@@ -41,7 +46,9 @@ $$\begin{pmatrix}1&2&0\\3&-1&4\end{pmatrix}+\begin{pmatrix}5&0&2\\1&1&-4\end{pma
 <p>Moyen de retenir : $(i,j)$ se découpe en $(i,k)(k,j)$, comme une relation de Chasles.</p>
 <p class="ml">Disposition en croix</p>
 <p>On écrit $B$ <b>au-dessus</b> du résultat et $A$ <b>à gauche</b> : chaque case se calcule avec la ligne à sa gauche et la colonne au-dessus.</p>
-$$\begin{array}{cc}&\begin{pmatrix}1&5\\7&8\end{pmatrix}\\\begin{pmatrix}3&1\\2&4\end{pmatrix}&\begin{pmatrix}3\cdot1+1\cdot7&3\cdot5+1\cdot8\\2\cdot1+4\cdot7&2\cdot5+4\cdot8\end{pmatrix} = \begin{pmatrix}10&23\\30&42\end{pmatrix}\end{array}$$
+<p><span class="kB">Ligne 1</span> et <span class="kR">ligne 2</span> de $A$, <span class="kG">colonne 1</span> et <span class="kV">colonne 2</span> de $B$ : chaque case du résultat mélange la couleur de sa ligne et celle de sa colonne.</p>
+$$\begin{array}{cc}&\begin{pmatrix}\cG1&\cV5\\\cG7&\cV8\end{pmatrix}\\[6pt]\begin{pmatrix}\cB3&\cB1\\\cR2&\cR4\end{pmatrix}&\begin{pmatrix}\cB3\cdot\cG1+\cB1\cdot\cG7&\cB3\cdot\cV5+\cB1\cdot\cV8\\[4pt]\cR2\cdot\cG1+\cR4\cdot\cG7&\cR2\cdot\cV5+\cR4\cdot\cV8\end{pmatrix} = \begin{pmatrix}10&23\\30&42\end{pmatrix}\end{array}$$
+<p>Exemple : la case en haut à droite utilise la <span class="kB">ligne 1</span> et la <span class="kV">colonne 2</span> : $\cB3\cdot\cV5 + \cB1\cdot\cV8 = 23$.</p>
 <div data-mlab="prod"></div>
 <p class="ml">À savoir</p>
 $$AI_p = A,\qquad I_nA = A,\qquad A\in\mathcal M_n\ \Longrightarrow\ AI_n = I_nA = A.$$
@@ -62,7 +69,8 @@ $$\begin{pmatrix}1&1\\1&1\end{pmatrix}\begin{pmatrix}1&-1\\-1&1\end{pmatrix} = \
 <li>Mais $AB + AC\neq(B + C)A$ en général.</li>
 </ul>
 <p class="ml piege">Piège : le $I_n$ oublié</p>
-$$3A^6 - 6A^3 + 7A = A\,(3A^5 - 6A^2 + 7I_n)\qquad\text{et non}\qquad A\,(3A^5 - 6A^2 + 7).$$
+$$3A^6 - 6A^3 + 7\cB A = \cB A\,(3A^5 - 6A^2 + 7\cG{I_n})\qquad\text{et non}\qquad\cB A\,(3A^5 - 6A^2 + \cR7).$$
+<p>Le $\cR7$ seul serait un nombre ajouté à une matrice : il faut $\cG{7I_n}$.</p>
 <div class="sbox">$$\cdots + kA = A\,(\cdots + kI_n):\ \text{un nombre seul devient}\ kI_n.$$</div>
 
 <h2 id="m-puiss">5. Puissances</h2>
@@ -86,8 +94,13 @@ $$A^0 = I_n,\qquad A^1 = A,\qquad A^{k+1} = A\,A^k = A^k\,A.$$
 <li>Appliquer la formule : seuls les termes $k\lt p$ restent.</li>
 </ol>
 <p class="ml">Exemple</p>
-$$A = \begin{pmatrix}2&1&0\\0&2&1\\0&0&2\end{pmatrix} = 2I_3 + N,\qquad N = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},\qquad N^2 = \begin{pmatrix}0&0&1\\0&0&0\\0&0&0\end{pmatrix},\qquad N^3 = 0.$$
-$$A^n = 2^nI_3 + n\,2^{n-1}N + \binom n2\,2^{n-2}N^2 = \begin{pmatrix}2^n&n2^{n-1}&\binom n22^{n-2}\\0&2^n&n2^{n-1}\\0&0&2^n\end{pmatrix}\qquad(n\geqslant2).$$
+<p><b>1.</b> On sépare la diagonale (en <span class="kB">bleu</span>) du reste (en <span class="kR">rouge</span>) :</p>
+$$A = \begin{pmatrix}\cB2&\cR1&0\\0&\cB2&\cR1\\0&0&\cB2\end{pmatrix} = \cB{2I_3} + \cR N,\qquad\cR N = \begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix}.$$
+<p><b>2.</b> $\cB{2I_3}$ et $\cR N$ commutent, car $I_3$ commute avec tout.</p>
+<p><b>3.</b> On calcule les puissances de $\cR N$ : les $1$ montent d'un cran à chaque fois, puis disparaissent.</p>
+$$\cR N = \begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix},\qquad\cG{N^2} = \begin{pmatrix}0&0&\cG1\\0&0&0\\0&0&0\end{pmatrix},\qquad N^3 = 0.$$
+<p><b>4.</b> Binôme : seuls les termes $k = 0, 1, 2$ restent.</p>
+$$A^n = \binom n0\cB{2^n}I_3 + \binom n1\cB{2^{n-1}}\cR N + \binom n2\cB{2^{n-2}}\cG{N^2} = \begin{pmatrix}\cB{2^n}&\cR{n2^{n-1}}&\cG{\binom n22^{n-2}}\\0&\cB{2^n}&\cR{n2^{n-1}}\\0&0&\cB{2^n}\end{pmatrix}\qquad(n\geqslant2).$$
 <div data-mlab="puiss"></div>
 <p class="ml piege">Piège</p>
 <ul>
@@ -104,14 +117,16 @@ $$N^p = 0\ \Longrightarrow\ \forall k\geqslant p,\ N^k = N^pN^{k-p} = 0.$$
 <h2 id="m-transp">7. Transposée</h2>
 <div class="sbox">$$({}^tA)_{i,j} = a_{j,i},\qquad A\in\mathcal M_{n,p}\ \Longrightarrow\ {}^tA\in\mathcal M_{p,n}.$$</div>
 <p>La ligne $i$ de $A$ devient la colonne $i$ de $\,{}^tA$.</p>
-$$\,{}^t\!\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix} = \begin{pmatrix}1&4\\2&5\\3&6\end{pmatrix}.$$
+$$\,{}^t\!\begin{pmatrix}\cB1&\cB2&\cB3\\\cR4&\cR5&\cR6\end{pmatrix} = \begin{pmatrix}\cB1&\cR4\\\cB2&\cR5\\\cB3&\cR6\end{pmatrix}$$
+<p>La <span class="kB">ligne 1</span> devient la <span class="kB">colonne 1</span>, la <span class="kR">ligne 2</span> devient la <span class="kR">colonne 2</span>.</p>
 <p class="ml">Règles</p>
 <div class="sbox">$$\,{}^t({}^tA) = A,\qquad {}^t(\lambda A + B) = \lambda\,{}^tA + {}^tB,\qquad {}^t(AB) = {}^tB\,{}^tA.$$</div>
 <p class="ml piege">Piège</p>
 <p>$\,{}^t(AB) = {}^tA\,{}^tB$ est faux : vérifie les tailles, $\,{}^tA\,{}^tB$ n'existe même pas en général.</p>
 <p class="ml">Symétrique, antisymétrique (matrices carrées)</p>
 $$\mathcal S_n:\ {}^tA = A,\qquad\mathcal A_n:\ {}^tA = -A\ \Longrightarrow\ a_{i,i} = 0.$$
-$$\begin{pmatrix}1&2&3\\2&0&5\\3&5&4\end{pmatrix}\in\mathcal S_3,\qquad\begin{pmatrix}0&2&-1\\-2&0&3\\1&-3&0\end{pmatrix}\in\mathcal A_3.$$
+<p>Les coefficients de même couleur sont symétriques par rapport à la diagonale :</p>
+$$\begin{pmatrix}1&\cB2&\cR3\\\cB2&0&\cG5\\\cR3&\cG5&4\end{pmatrix}\in\mathcal S_3\ \ (\text{égaux}),\qquad\begin{pmatrix}0&\cB2&\cR{-1}\\\cB{-2}&0&\cG3\\\cR1&\cG{-3}&0\end{pmatrix}\in\mathcal A_3\ \ (\text{opposés, diagonale nulle}).$$
 
 <h2 id="m-inv">8. Matrice inverse</h2>
 <div class="sbox">$$A\in GL_n(\mathbb K)\iff\exists B\in\mathcal M_n(\mathbb K),\ AB = BA = I_n,\qquad B = A^{-1}\ \text{est unique}.$$</div>
@@ -128,9 +143,12 @@ $$\begin{pmatrix}1&2&3\\2&0&5\\3&5&4\end{pmatrix}\in\mathcal S_3,\qquad\begin{pm
 <li><b>Sinon</b> : pivot de Gauss sur $(A\,|\,I_n)$.</li>
 </ol>
 <p class="ml">Méthode 1 : taille 2</p>
-<div class="sbox">$$ad - bc\neq0\ \Longrightarrow\ \begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1} = \frac1{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}.$$</div>
+<div class="sbox">$$ad - bc\neq0\ \Longrightarrow\ \begin{pmatrix}\cB a&\cR b\\\cR c&\cB d\end{pmatrix}^{-1} = \frac1{ad - bc}\begin{pmatrix}\cB d&\cR{-b}\\\cR{-c}&\cB a\end{pmatrix}.$$</div>
+<p><b>Astuce</b> : on <span class="kB">échange</span> les deux coefficients de la diagonale, on <span class="kR">change le signe</span> des deux autres, puis on divise par le déterminant.</p>
+$$\begin{pmatrix}\cB2&\cR1\\\cR5&\cB3\end{pmatrix}^{-1} = \frac1{2\times3 - 1\times5}\begin{pmatrix}\cB3&\cR{-1}\\\cR{-5}&\cB2\end{pmatrix} = \begin{pmatrix}3&-1\\-5&2\end{pmatrix}.$$
 <p class="ml">Méthode 2 : polynôme annulateur</p>
-$$3A^5 - 6A^3 + 7A = I_n\iff A\,(3A^4 - 6A^2 + 7I_n) = I_n\ \Longrightarrow\ A^{-1} = 3A^4 - 6A^2 + 7I_n.$$
+$$3A^5 - 6A^3 + 7A = I_n\iff\cB A\,\cG{(3A^4 - 6A^2 + 7I_n)} = I_n\ \Longrightarrow\ A^{-1} = \cG{3A^4 - 6A^2 + 7I_n}.$$
+<p>On factorise par $\cB A$ : ce qui reste dans la parenthèse <span class="kG">verte</span> est l'inverse.</p>
 $$A^2 - 3A + 2I_n = 0\iff A\cdot\tfrac12(3I_n - A) = I_n\ \Longrightarrow\ A^{-1} = \tfrac12(3I_n - A).$$
 <p class="ml">Méthode 3 : pivot de Gauss sur $(A\,|\,I_n)$</p>
 <ol>
@@ -149,7 +167,8 @@ $$A^2 - 3A + 2I_n = 0\iff A\cdot\tfrac12(3I_n - A) = I_n\ \Longrightarrow\ A^{-1
 
 <h2 id="m-sys">9. Systèmes linéaires</h2>
 <p class="ml">Réflexe : écrire $AX = B$</p>
-$$\left\{\begin{aligned}2x + 3y - z&= 1\\x\phantom{{}+3y} + 4z&= -6\\-x + y + z&= 0\end{aligned}\right.\iff\underbrace{\begin{pmatrix}2&3&-1\\1&0&4\\-1&1&1\end{pmatrix}}_{A}\underbrace{\begin{pmatrix}x\\y\\z\end{pmatrix}}_{X} = \underbrace{\begin{pmatrix}1\\-6\\0\end{pmatrix}}_{B}.$$
+<p>Chaque inconnue a sa couleur : ses coefficients vont dans <b>sa colonne</b> de $A$. Les constantes vont dans $B$.</p>
+$$\left\{\begin{aligned}\cB2x + \cR3y - \cG1z&= \cO1\\\cB1x + \cR0y + \cG4z&= \cO{-6}\\\cB{-1}x + \cR1y + \cG1z&= \cO0\end{aligned}\right.\iff\underbrace{\begin{pmatrix}\cB2&\cR3&\cG{-1}\\\cB1&\cR0&\cG4\\\cB{-1}&\cR1&\cG1\end{pmatrix}}_{A}\underbrace{\begin{pmatrix}\cB x\\\cR y\\\cG z\end{pmatrix}}_{X} = \underbrace{\begin{pmatrix}\cO1\\\cO{-6}\\\cO0\end{pmatrix}}_{B}.$$
 <p class="ml">Méthode : bien poser le système</p>
 <ol>
 <li>Inconnues <b>à gauche</b>, constantes <b>à droite</b>.</li>
@@ -166,7 +185,8 @@ $$L_i\leftarrow L_i + \lambda L_j\iff A\mapsto(I_n + \lambda E_{i,j})A,\qquad L_
 
 <h2 id="m-trace">10. Trace</h2>
 <div class="sbox">$$A\in\mathcal M_n(\mathbb K):\quad\operatorname{tr}A = \sum_{i=1}^na_{i,i}.$$</div>
-$$\operatorname{tr}\begin{pmatrix}3&1&0\\2&-1&4\\5&0&-8\end{pmatrix} = 3 + (-1) + (-8) = -6,\qquad\operatorname{tr}I_n = n.$$
+$$\operatorname{tr}\begin{pmatrix}\cB3&1&0\\2&\cB{-1}&4\\5&0&\cB{-8}\end{pmatrix} = \cB3 + \cB{(-1)} + \cB{(-8)} = -6,\qquad\operatorname{tr}I_n = n.$$
+<p>On ne garde que la <span class="kB">diagonale</span>.</p>
 <div class="sbox">$$\operatorname{tr}(A + B) = \operatorname{tr}A + \operatorname{tr}B,\quad\operatorname{tr}(\lambda A) = \lambda\operatorname{tr}A,\quad\operatorname{tr}({}^tA) = \operatorname{tr}A,\quad\operatorname{tr}(AB) = \operatorname{tr}(BA).$$</div>
 <p class="ml">Exemple d'usage</p>
 $$AB - BA = I_n\ \Longrightarrow\ 0 = \operatorname{tr}(AB) - \operatorname{tr}(BA) = \operatorname{tr}I_n = n:\ \text{impossible}.$$

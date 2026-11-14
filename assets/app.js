@@ -1398,6 +1398,16 @@ function mlQuiz(host, Q) {
   draw();
 }
 
+/* Un tableau étiqueté (.labm) devient une vraie matrice entre parenthèses, avec les étiquettes au-dessus et à gauche */
+function fixLabm(root) {
+  $$(".labm table:not(.mx)", root).forEach(t => {
+    const rows = [...t.rows], head = [...rows[0].cells].slice(1).filter(c => c.innerHTML.trim()), body = rows.slice(1);
+    const left = body.map(r => r.cells[0]), nums = body.map(r => [...r.cells].slice(1).filter(c => !c.classList.contains("lr")));
+    const w = document.createElement("div"); w.className = "lm2"; w.style.setProperty("--nc", nums[0].length);
+    w.innerHTML = `<div class="lm-top"><span></span>${head.map(c => `<span class="${c.className}" ${c.dataset.c ? `data-c="${c.dataset.c}"` : ""} style="${c.getAttribute("style") || ""}">${c.innerHTML}</span>`).join("")}</div><div class="lm-body"><div class="lm-left">${left.map(c => `<span class="${c.className}">${c.innerHTML}</span>`).join("")}</div><table class="mx lm-mx">${nums.map(r => `<tr>${r.map(c => `<td class="${c.className}"${c.dataset.c ? ` data-c="${c.dataset.c}"` : ""}>${c.innerHTML}</td>`).join("")}</tr>`).join("")}</table></div>`;
+    t.replaceWith(w);
+  });
+}
 /* ---------- Labos : applications linéaires ---------- */
 const CC = ["cB", "cR", "cG", "cV"], CH = ["#2B5BD7", "#D4503B", "#1F8A5B", "#7A4CC2"];
 /* Les colonnes de A sont les images ; AX est une combinaison des colonnes */
@@ -1411,6 +1421,7 @@ function mlColf(host) {
       <div class="mlrow">${[0, 1, 2].map(j => `<label style="color:${CH[j]}">$a_${j + 1} = ${x[j]}$ <input type="range" min="-3" max="3" value="${x[j]}" data-x="${j}"></label>`).join("")}</div>
       <p class="mlcalc">$$f(x) = ${[0, 1, 2].map(j => `\\${CC[j]}{${par(x[j])}}\\begin{pmatrix}\\${CC[j]}{${A[0][j]}}\\\\\\${CC[j]}{${A[1][j]}}\\end{pmatrix}`).join(" + ")} = \\begin{pmatrix}${Y[0]}\\\\${Y[1]}\\end{pmatrix}$$</p>
       <p class="mlnote">Astuce : $AX$ est la combinaison des colonnes de $A$ avec les coordonnées de $x$. C'est la linéarité écrite en matrices.</p>`;
+    fixLabm(host);
     $$("[data-c]", host).forEach(t => t.addEventListener("click", () => { col = +t.dataset.c; draw(); }));
     $$("[data-x]", host).forEach(r => r.addEventListener("input", () => { x[+r.dataset.x] = +r.value; draw(); }));
     typeset(host);
@@ -2596,6 +2607,7 @@ function wire(ex) {
     try { localStorage.setItem("lemme-diff", diff); } catch (_) {}
     route(true);
   }));
+  fixLabm(app);
   $$("[data-mlab]", app).forEach(mountMlab);
   $$(".msum a", app).forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
