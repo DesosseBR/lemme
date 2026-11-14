@@ -1107,10 +1107,15 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix}}.$$
 <li>Diviser par le coefficient de la dérivée la plus haute, <b>sur un intervalle où il ne s'annule pas</b>.</li>
 </ol>
 <p class="ml">Exemple</p>
+<p><b>Étape 1 : Rappel.</b> La forme normalisée d'ordre 1 est $y' + a(t)\,y = b(t)$ : coefficient $1$ devant $y'$.</p>
 $$7t^3y - 5y' = 0.$$
-<p><b>Étape 1–2.</b> On range : $-5y' + 7t^3y = 0$.</p>
-<p><b>Étape 3.</b> On divise par $-5$ (jamais nul) :</p>
-$$y' - \frac75t^3\,y = 0,\qquad\text{donc}\qquad a(t) = -\frac75t^3.$$
+<p><b>Étape 2 : On range</b> ($y'$ d'abord, puis $y$) :</p>
+$$-5y' + 7t^3y = 0.$$
+<p><b>Étape 3 : On divise par le coefficient de $y'$</b>, ici $-5$, qui ne s'annule jamais :</p>
+$$y' - \frac75t^3\,y = 0.$$
+<p><b>Étape 4 : On lit $a(t)$.</b></p>
+$$\cG{a(t) = -\frac75t^3}.$$
+
 <p class="ml piege">Piège</p>
 <p>Si le coefficient de $y'$ est $t$, $1 + t$, $\sin t$… il s'annule : on résout sur chaque intervalle où il ne s'annule pas, puis on <a href="#e-raccord">raccorde</a>.</p>
 
@@ -1131,10 +1136,20 @@ $$y' - \frac75t^3\,y = 0,\qquad\text{donc}\qquad a(t) = -\frac75t^3.$$
 <p>On multiplie par $e^{A(t)}$, qui ne s'annule pas, et on reconnaît une dérivée de produit :</p>
 $$y' + a\,y = 0\iff y'e^{A} + a\,e^{A}y = 0\iff\big(y\,e^{A}\big)' = 0\iff y\,e^{A} = \cG\lambda\iff y = \cG\lambda\,e^{-A}.$$
 <p class="ml">Exemple 1 : $a$ constant</p>
-$$y' + 3y = 0:\qquad a(t) = 3,\qquad A(t) = 3t,\qquad\cB{y_H(t) = \cG\lambda\,e^{-3t}}.$$
+<p><b>Étape 1 : Rappel.</b> $y' + a(t)y = 0\iff y = \lambda e^{-A(t)}$, avec $A$ une primitive de $a$.</p>
+<p><b>Étape 2 : On lit $a$.</b> $y' + 3y = 0$ : $a(t) = 3$.</p>
+<p><b>Étape 3 : Une primitive.</b> $A(t) = 3t$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cB{y_H(t) = \cG\lambda\,e^{-3t}},\qquad\cG\lambda\in\mathbb R.$$
+
 <p class="ml">Exemple 2 : $a$ variable (l'équation du §2)</p>
-$$a(t) = -\frac75t^3\ \Longrightarrow\ A(t) = -\frac75\cdot\frac{t^4}{4} = -\frac{7}{20}t^4\ \Longrightarrow\ \cB{y_H(t) = \cG\lambda\,e^{\frac{7}{20}t^4}}.$$
-<p>Contrôle : $y_H' = \cG\lambda\cdot\frac{7}{20}\cdot4t^3e^{\frac7{20}t^4} = \frac75t^3\,y_H$, donc $y_H' - \frac75t^3y_H = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $y' + a(t)y = 0\iff y = \lambda e^{-A(t)}$.</p>
+<p><b>Étape 2 : On lit $a$</b> (équation du §2) : $a(t) = -\frac75t^3$.</p>
+<p><b>Étape 3 : Une primitive.</b> $\int t^3 = \frac{t^4}4$, donc :</p>
+$$A(t) = -\frac75\cdot\frac{t^4}4 = -\frac7{20}t^4,\qquad-A(t) = \frac7{20}t^4.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cB{y_H(t) = \cG\lambda\,e^{\frac7{20}t^4}}.$$
+<p>Contrôle : $y_H' = \lambda\cdot\frac7{20}\cdot4t^3e^{\frac7{20}t^4} = \frac75t^3\,y_H$.</p>
 
 <h2 id="e-yp1">5. Ordre 1 : trouver une solution particulière</h2>
 <p class="ml">On regarde le second membre</p>
@@ -1149,27 +1164,49 @@ $$a(t) = -\frac75t^3\ \Longrightarrow\ A(t) = -\frac75\cdot\frac{t^4}{4} = -\fra
 <tr><td>rien de tout ça</td><td><a href="#e-varc">variation de la constante</a></td></tr>
 </table>
 <p class="ml">Exemple 1 : un polynôme</p>
+<p><b>Étape 1 : Rappel.</b> Si le second membre est un polynôme de degré $d$ et $a\neq0$ constant, on cherche $y_p$ polynôme de degré $d$, puis $y = y_H + y_p$.</p>
 $$y' + 3y = \cO{4t - 7}.$$
-<p><b>Forme.</b> Le second membre est de degré 1 : on cherche $\cR{y_p(t) = \alpha t + \beta}$, donc $y_p'(t) = \alpha$.</p>
-<p><b>On remplace dans l'équation.</b></p>
+<p><b>Étape 2 : L'homogène.</b> $a = 3$ : $\cB{y_H = \lambda e^{-3t}}$.</p>
+<p><b>Étape 3 : La forme de $y_p$.</b> Degré $1$ : $\cR{y_p = \alpha t + \beta}$, donc $y_p' = \alpha$.</p>
+<p><b>Étape 4 : On remplace</b> et on range par puissances de $t$ :</p>
 $$y_p' + 3y_p = \alpha + 3(\alpha t + \beta) = 3\alpha\,t + (\alpha + 3\beta).$$
-<p><b>On identifie</b> avec $\cO{4t - 7}$ :</p>
+<p><b>Étape 5 : On identifie</b> avec $4t - 7$ :</p>
 $$\left\{\begin{aligned}3\alpha &= 4\\\alpha + 3\beta &= -7\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac43\\3\beta &= -7 - \tfrac43 = -\tfrac{25}3\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac43\\\beta &= -\tfrac{25}9\end{aligned}\right.$$
-$$\cR{y_p(t) = \frac43t - \frac{25}9},\qquad y(t) = \cG\lambda\,e^{-3t} + \frac43t - \frac{25}9.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cR{y_p = \frac43t - \frac{25}9},\qquad\cG{y(t) = \lambda e^{-3t} + \frac43t - \frac{25}9}.$$
+
 <p class="ml">Exemple 2 : une exponentielle en résonance</p>
+<p><b>Étape 1 : Rappel.</b> Second membre $ke^{mt}$ : on cherche $Ce^{mt}$, sauf si $m = -a$ (résonance) où l'on cherche $Ct\,e^{mt}$.</p>
 $$(E):\ y' + y = \cO{e^{-t}}.$$
-<p>Ici $a = 1$ et $m = -1 = -a$ : $e^{-t}$ est déjà solution de $(H)$. On cherche donc $\cR{y_p(t) = C\,t\,e^{-t}}$.</p>
-$$y_p'(t) = C\,e^{-t} + C\,t\cdot(-e^{-t}) = C\,e^{-t} - C\,t\,e^{-t}.$$
-$$y_p' + y_p = C\,e^{-t} - \cancel{C\,t\,e^{-t}} + \cancel{C\,t\,e^{-t}} = C\,e^{-t} = \cO{e^{-t}}\iff C = 1.$$
-$$\cR{y_p(t) = t\,e^{-t}},\qquad y(t) = \cG\lambda\,e^{-t} + t\,e^{-t} = (\cG\lambda + t)\,e^{-t}.$$
+<p><b>Étape 2 : L'homogène.</b> $a = 1$ : $\cB{y_H = \lambda e^{-t}}$.</p>
+<p><b>Étape 3 : Résonance ?</b> $m = -1 = -a$ : oui, $e^{-t}$ est déjà solution de $(H)$. On cherche $\cR{y_p = Ct\,e^{-t}}$.</p>
+<p><b>Étape 4 : La dérivée</b> (produit $t\times e^{-t}$) :</p>
+$$y_p' = Ce^{-t} - Ct\,e^{-t}.$$
+<p><b>Étape 5 : On remplace.</b> Les termes en $t$ s'annulent :</p>
+$$y_p' + y_p = Ce^{-t} - \cancel{Ct\,e^{-t}} + \cancel{Ct\,e^{-t}} = Ce^{-t} = e^{-t}\iff C = 1.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cR{y_p = t\,e^{-t}},\qquad\cG{y(t) = (\lambda + t)\,e^{-t}}.$$
+
 <p class="ml">Exemple 3 : l'énoncé donne la solution</p>
-<p>« Montrer que $u(t) = t\,e^{-t}$ est solution de $(E)$. » On ne pose <b>pas</b> $u' + u = e^{-t}$ : on le calcule.</p>
-$$u'(t) = e^{-t} - t\,e^{-t},\qquad u'(t) + u(t) = e^{-t} - t\,e^{-t} + t\,e^{-t} = e^{-t}.$$
+<p><b>Étape 1 : Rappel.</b> « $u$ est solution » veut dire : $u' + u = e^{-t}$ pour tout $t$. On ne part pas de cette égalité, on la <b>calcule</b>.</p>
+<p><b>Étape 2 : On dérive $u(t) = t\,e^{-t}$.</b></p>
+$$u'(t) = e^{-t} - t\,e^{-t}.$$
+<p><b>Étape 3 : On calcule $u' + u$.</b></p>
+$$u'(t) + u(t) = e^{-t} - t\,e^{-t} + t\,e^{-t} = e^{-t}.$$
+<p><b>Étape 4 : Conclusion.</b> On retrouve le second membre : $\cG{u\ \text{est solution de}\ (E)}$.</p>
+
 <p class="ml">Exemple 4 : un cosinus</p>
+<p><b>Étape 1 : Rappel.</b> $\cos t = \operatorname{Re}(e^{it})$ : on résout avec $e^{it}$, puis on prend la partie réelle.</p>
 $$y' + y = \cO{2\cos t}.$$
-<p>On résout $z' + z = 2e^{it}$, puis $\cR{y_p} = \operatorname{Re}(z_p)$. Comme $i\neq-1$, on cherche $z_p = C\,e^{it}$ :</p>
-$$z_p' + z_p = (i + 1)C\,e^{it} = 2e^{it}\iff C = \frac{2}{1 + i} = \frac{2(1 - i)}{(1 + i)(1 - i)} = \frac{2(1 - i)}{2} = 1 - i.$$
-$$z_p = (1 - i)(\cos t + i\sin t) = (\cos t + \sin t) + i(\sin t - \cos t)\ \Longrightarrow\ \cR{y_p(t) = \cos t + \sin t}.$$
+<p><b>Étape 2 : L'équation complexe.</b> $z' + z = 2e^{it}$. Comme $i\neq-1$, pas de résonance : $z_p = Ce^{it}$, $z_p' = iCe^{it}$.</p>
+<p><b>Étape 3 : On remplace.</b></p>
+$$z_p' + z_p = (i + 1)Ce^{it} = 2e^{it}\iff C = \frac2{1 + i}.$$
+<p><b>Étape 4 : On simplifie $C$</b> avec le conjugué :</p>
+$$C = \frac{2(1 - i)}{(1 + i)(1 - i)} = \frac{2(1 - i)}2 = 1 - i.$$
+<p><b>Étape 5 : On développe $z_p$.</b></p>
+$$z_p = (1 - i)(\cos t + i\sin t) = (\cos t + \sin t) + i(\sin t - \cos t).$$
+<p><b>Étape 6 : La partie réelle.</b></p>
+$$\cR{y_p = \cos t + \sin t},\qquad\cG{y(t) = \lambda e^{-t} + \cos t + \sin t}.$$
 <p>Contrôle : $y_p' + y_p = (-\sin t + \cos t) + (\cos t + \sin t) = 2\cos t$.</p>
 
 <h2 id="e-varc">6. La variation de la constante (ordre 1)</h2>
@@ -1184,19 +1221,28 @@ $$z_p = (1 - i)(\cos t + i\sin t) = (\cos t + \sin t) + i(\sin t - \cos t)\ \Lon
 $$y_p = \lambda e^{-A}\ \Longrightarrow\ y_p' = \lambda'e^{-A} - \lambda\,a\,e^{-A}\ \Longrightarrow\ y_p' + a\,y_p = \lambda'e^{-A} - \cancel{\lambda a e^{-A}} + \cancel{a\lambda e^{-A}} = \lambda'e^{-A}.$$
 <div class="sbox">$$y_p' + a\,y_p = \cO b\iff\lambda'(t) = \cO{b(t)}\,e^{A(t)}.$$</div>
 <p class="ml">Exemple 1</p>
-$$y' - \frac1t\,y = \cO{t^2}\quad\text{sur}\ I = \left]0, +\infty\right[.$$
-<p><b>1.</b> $a(t) = -\frac1t$, $A(t) = -\ln t$, donc $e^{-A(t)} = e^{\ln t} = t$ et $\cB{y_H(t) = \cG\lambda\,t}$.</p>
-<p><b>2–3.</b> On pose $y_p = \lambda(t)\,t$ : $y_p' = \lambda'(t)\,t + \lambda(t)$.</p>
-$$y_p' - \frac1ty_p = \lambda'(t)\,t + \cancel{\lambda(t)} - \cancel{\lambda(t)} = \lambda'(t)\,t = t^2\iff\lambda'(t) = t.$$
-<p><b>4.</b> $\lambda(t) = \frac{t^2}2$, d'où $\cR{y_p(t) = \frac{t^3}2}$ et $y(t) = \cG\lambda\,t + \frac{t^3}{2}$.</p>
+<p><b>Étape 1 : Rappel.</b> Variation de la constante : $y_p = \lambda(t)e^{-A(t)}$, et il reste $\lambda'(t) = b(t)e^{A(t)}$.</p>
+$$y' - \frac1t\,y = \cO{t^2}\quad\text{sur}\ \left]0, +\infty\right[.$$
+<p><b>Étape 2 : L'homogène.</b> $a(t) = -\frac1t$, $A(t) = -\ln t$, $e^{-A(t)} = e^{\ln t} = t$ :</p>
+$$\cB{y_H(t) = \lambda\,t}.$$
+<p><b>Étape 3 : On pose $y_p = \lambda(t)\,t$</b>, donc $y_p' = \lambda'(t)\,t + \lambda(t)$.</p>
+<p><b>Étape 4 : On remplace.</b> Les $\lambda(t)$ s'annulent :</p>
+$$\lambda'(t)\,t + \cancel{\lambda(t)} - \cancel{\lambda(t)} = t^2\iff\lambda'(t) = t.$$
+<p><b>Étape 5 : Une primitive.</b> $\lambda(t) = \frac{t^2}2$, donc $\cR{y_p = \frac{t^3}2}$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{y(t) = \lambda\,t + \frac{t^3}2}.$$
 <p>Contrôle : $y_p' - \frac1ty_p = \frac{3t^2}2 - \frac{t^2}2 = t^2$.</p>
+
 <p class="ml">Exemple 2 : le second membre n'est pas « classique »</p>
-$$y' + y = \cO{\frac{1}{1 + e^t}}\quad\text{sur}\ \mathbb R.$$
-<p><b>1.</b> $\cB{y_H(t) = \cG\lambda\,e^{-t}}$.</p>
-<p><b>2–3.</b> $y_p = \lambda(t)\,e^{-t}$, donc $\lambda'(t) = \cO b(t)\,e^{A(t)} = \dfrac{e^t}{1 + e^t}$.</p>
-<p><b>4.</b> On reconnaît $\frac{u'}{u}$ avec $u = 1 + e^t > 0$ : $\lambda(t) = \ln(1 + e^t)$.</p>
-$$\cR{y_p(t) = e^{-t}\ln(1 + e^t)},\qquad y(t) = \big(\cG\lambda + \ln(1 + e^t)\big)\,e^{-t}.$$
-<p>Contrôle : $y_p' = -e^{-t}\ln(1 + e^t) + e^{-t}\dfrac{e^t}{1 + e^t}$, donc $y_p' + y_p = \dfrac{1}{1 + e^t}$.</p>
+<p><b>Étape 1 : Rappel.</b> Variation de la constante : $\lambda'(t) = b(t)\,e^{A(t)}$.</p>
+$$y' + y = \cO{\frac1{1 + e^t}}\quad\text{sur}\ \mathbb R.$$
+<p><b>Étape 2 : L'homogène.</b> $a = 1$, $A(t) = t$ : $\cB{y_H = \lambda e^{-t}}$.</p>
+<p><b>Étape 3 : La formule.</b></p>
+$$\lambda'(t) = \frac1{1 + e^t}\cdot e^t = \frac{e^t}{1 + e^t}.$$
+<p><b>Étape 4 : Une primitive.</b> On reconnaît $\frac{u'}u$ avec $u = 1 + e^t > 0$ :</p>
+$$\lambda(t) = \ln(1 + e^t).$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cR{y_p = e^{-t}\ln(1 + e^t)},\qquad\cG{y(t) = \big(\lambda + \ln(1 + e^t)\big)e^{-t}}.$$
 
 <h2 id="e-raccord">7. Le raccordement (coefficient de $y'$ qui s'annule)</h2>
 <ol>
@@ -1205,12 +1251,17 @@ $$\cR{y_p(t) = e^{-t}\ln(1 + e^t)},\qquad y(t) = \big(\cG\lambda + \ln(1 + e^t)\
 <li>Conclure : la dimension de l'ensemble des solutions sur $\mathbb R$ peut être $0$, $1$ ou $2$.</li>
 </ol>
 <p class="ml">Exemple : $t\,y' - 2y = 0$ sur $\mathbb R$</p>
-<p><b>1. Sur $\left]0, +\infty\right[$</b> : on divise par $t$, $y' - \frac2t\,y = 0$, $a(t) = -\frac2t$, $A(t) = -2\ln t$ :</p>
+<p><b>Étape 1 : Rappel.</b> Si le coefficient de $y'$ s'annule, on résout sur chaque intervalle, puis on impose en ce point : continuité, dérivabilité, et l'équation.</p>
+<p><b>Étape 2 : Sur $\left]0, +\infty\right[$.</b> On divise par $t$ : $y' - \frac2ty = 0$, $A(t) = -2\ln t$ :</p>
 $$y(t) = \cG{\lambda_1}\,e^{2\ln t} = \cG{\lambda_1}\,t^2.$$
-<p><b>Sur $\left]-\infty, 0\right[$</b> : $A(t) = -2\ln|t|$, donc $y(t) = \cG{\lambda_2}\,e^{2\ln|t|} = \cG{\lambda_2}\,t^2$.</p>
-<p><b>2. En $0$.</b> L'équation en $t = 0$ donne $0\cdot y'(0) - 2y(0) = 0$, donc $y(0) = 0$.</p>
-$$\left\{\begin{aligned}\text{continuité}&:\ \lim_{t\to0^+}\cG{\lambda_1}t^2 = 0 = \lim_{t\to0^-}\cG{\lambda_2}t^2 = y(0)\\\text{dérivabilité}&:\ \frac{y(t) - y(0)}{t - 0} = \left\{\begin{aligned}&\cG{\lambda_1}t\ (t > 0)\\&\cG{\lambda_2}t\ (t\lt0)\end{aligned}\right.\ \xrightarrow[t\to0]{}\ 0\end{aligned}\right.$$
-<p><b>3.</b> Les solutions sur $\mathbb R$ sont toutes les fonctions $t\mapsto\cG{\lambda_1}t^2$ pour $t\geqslant0$ et $\cG{\lambda_2}t^2$ pour $t\lt0$, avec $\cG{\lambda_1}, \cG{\lambda_2}$ <b>indépendants</b> : un espace de dimension $2$, alors que l'ordre est 1.</p>
+<p><b>Étape 3 : Sur $\left]-\infty, 0\right[$.</b> $A(t) = -2\ln|t|$ :</p>
+$$y(t) = \cG{\lambda_2}\,t^2.$$
+<p><b>Étape 4 : L'équation en $0$.</b> $0\cdot y'(0) - 2y(0) = 0$, donc $y(0) = 0$.</p>
+<p><b>Étape 5 : La continuité en $0$.</b></p>
+$$\lim_{t\to0^+}\lambda_1t^2 = 0 = \lim_{t\to0^-}\lambda_2t^2 = y(0).$$
+<p><b>Étape 6 : La dérivabilité en $0$.</b> Le taux d'accroissement vaut $\lambda_1t$ à droite et $\lambda_2t$ à gauche : les deux tendent vers $0$.</p>
+<p><b>Étape 7 : Conclusion.</b> Toute fonction $t\mapsto\lambda_1t^2$ ($t\geqslant0$), $\lambda_2t^2$ ($t\lt0$) convient, avec $\lambda_1, \lambda_2$ indépendants : $\cG{\text{un espace de dimension}\ 2}$.</p>
+
 <p class="ml">Contre-exemple : $t\,y' + y = 0$</p>
 <p>Sur chaque demi-droite, $y = \frac{\cG\lambda}{t}$. Cette fonction n'a une limite finie en $0$ que si $\cG\lambda = 0$ : la seule solution sur $\mathbb R$ est la fonction nulle.</p>
 
@@ -1225,14 +1276,36 @@ $$\left\{\begin{aligned}\text{continuité}&:\ \lim_{t\to0^+}\cG{\lambda_1}t^2 = 
 </table>
 <p>Sur $\mathbb C$, si $\Delta\neq0$ : $\cB{y_H} = \cG\lambda\,e^{\cV{r_1}t} + \cG\mu\,e^{\cV{r_2}t}$ avec $\cG\lambda, \cG\mu\in\mathbb C$, même quand les racines sont complexes.</p>
 <p class="ml">Exemple 1 : $\Delta > 0$</p>
-$$y'' - 10y' + 21y = 0:\qquad r^2 - 10r + 21 = 0,\qquad\Delta = (-10)^2 - 4\times21 = 100 - 84 = 16 = 4^2.$$
-$$r = \frac{10\pm4}{2}\ \Longrightarrow\ \cV{r_1 = 3},\quad\cV{r_2 = 7},\qquad\cB{y_H(t) = \cG\lambda\,e^{3t} + \cG\mu\,e^{7t}}.$$
+<p><b>Étape 1 : Rappel.</b> $y'' + ay' + by = 0$ : équation caractéristique $r^2 + ar + b = 0$. Si $\Delta > 0$, $y = \lambda e^{r_1t} + \mu e^{r_2t}$.</p>
+$$y'' - 10y' + 21y = 0.$$
+<p><b>Étape 2 : L'équation caractéristique.</b></p>
+$$r^2 - 10r + 21 = 0.$$
+<p><b>Étape 3 : Le discriminant.</b></p>
+$$\Delta = (-10)^2 - 4\times21 = 100 - 84 = 16 = 4^2 > 0.$$
+<p><b>Étape 4 : Les racines.</b></p>
+$$r = \frac{10\pm4}2\ \Longrightarrow\ \cV{r_1 = 3},\quad\cV{r_2 = 7}.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cB{y_H(t) = \cG\lambda\,e^{3t} + \cG\mu\,e^{7t}}.$$
+
 <p class="ml">Exemple 2 : $\Delta = 0$</p>
-$$y'' - 10y' + 25y = 0:\qquad\Delta = 100 - 100 = 0,\qquad\cV{r_0} = \frac{10}{2} = \cV5,\qquad\cB{y_H(t) = (\cG\lambda + \cG\mu\,t)\,e^{5t}}.$$
-<p>On reconnaît aussi $r^2 - 10r + 25 = (r - 5)^2$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $\Delta = 0$, racine double $r_0$ : $y = (\lambda + \mu t)e^{r_0t}$.</p>
+$$y'' - 10y' + 25y = 0.$$
+<p><b>Étape 2 : Équation caractéristique et discriminant.</b></p>
+$$r^2 - 10r + 25 = 0,\qquad\Delta = 100 - 100 = 0.$$
+<p><b>Étape 3 : La racine double.</b> $\cV{r_0} = \frac{10}2 = \cV5$ (on reconnaît aussi $(r - 5)^2$).</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cB{y_H(t) = (\cG\lambda + \cG\mu\,t)\,e^{5t}}.$$
+
 <p class="ml">Exemple 3 : $\Delta\lt0$</p>
-$$y'' - 6y' + 73y = 0:\qquad\Delta = 36 - 292 = -256 = (16i)^2.$$
-$$r = \frac{6\pm16i}{2} = \cV{3\pm8i}\ \Longrightarrow\ \cV{\alpha = 3},\ \cV{\beta = 8},\qquad\cB{y_H(t) = e^{3t}\big(\cG\lambda\cos(8t) + \cG\mu\sin(8t)\big)}.$$
+<p><b>Étape 1 : Rappel.</b> Si $\Delta\lt0$, racines $\alpha\pm i\beta$ : $y = e^{\alpha t}\big(\lambda\cos(\beta t) + \mu\sin(\beta t)\big)$.</p>
+$$y'' - 6y' + 73y = 0.$$
+<p><b>Étape 2 : Équation caractéristique et discriminant.</b></p>
+$$r^2 - 6r + 73 = 0,\qquad\Delta = 36 - 292 = -256 = (16i)^2.$$
+<p><b>Étape 3 : Les racines.</b></p>
+$$r = \frac{6\pm16i}2 = \cV{3\pm8i}\ \Longrightarrow\ \cV{\alpha = 3},\ \cV{\beta = 8}.$$
+<p><b>Étape 4 : Conclusion.</b> $\alpha$ dans l'exponentielle, $\beta$ dans $\cos$ et $\sin$ :</p>
+$$\cB{y_H(t) = e^{3t}\big(\cG\lambda\cos(8t) + \cG\mu\sin(8t)\big)}.$$
+
 <p class="ml piege">Piège</p>
 <p>La partie réelle $\cV\alpha$ va dans l'exponentielle, la partie imaginaire $\cV\beta$ dans le cosinus et le sinus. Pour $y'' + \omega^2y = 0$ : $r = \pm i\omega$, donc $\cB{y_H} = \cG\lambda\cos(\omega t) + \cG\mu\sin(\omega t)$.</p>
 
@@ -1244,41 +1317,63 @@ $$r = \frac{6\pm16i}{2} = \cV{3\pm8i}\ \Longrightarrow\ \cV{\alpha = 3},\ \cV{\b
 <li>Une somme : on traite chaque morceau séparément (<a href="#e-superpo">superposition</a>).</li>
 </ul>
 <p class="ml">Exemple 1 : un polynôme (le calcul complet)</p>
+<p><b>Étape 1 : Rappel.</b> Second membre $P(t)e^{mt}$ : $y_p = t^sQ(t)e^{mt}$ avec $\deg Q = \deg P$ et $s$ la multiplicité de $m$ comme racine.</p>
 $$y'' - 5y' + 6y = \cO{t^2 - 3t + 2}.$$
-<p><b>Racines.</b> $r^2 - 5r + 6 = (r - 2)(r - 3)$ : $\cV2$ et $\cV3$. Ici $m = 0$ n'est pas racine, donc $s = 0$ et $Q$ de degré 2 :</p>
+<p><b>Étape 2 : Les racines.</b> $r^2 - 5r + 6 = (r - 2)(r - 3)$ : $\cV2$ et $\cV3$.</p>
+<p><b>Étape 3 : La forme de $y_p$.</b> Ici $m = 0$, qui n'est pas racine ($s = 0$), et $\deg P = 2$ :</p>
 $$\cR{y_p = \alpha t^2 + \beta t + \gamma},\qquad y_p' = 2\alpha t + \beta,\qquad y_p'' = 2\alpha.$$
-<p><b>On remplace</b> et on range par puissances de $t$ :</p>
-$$y_p'' - 5y_p' + 6y_p = 2\alpha - 5(2\alpha t + \beta) + 6(\alpha t^2 + \beta t + \gamma) = 6\alpha\,t^2 + (-10\alpha + 6\beta)\,t + (2\alpha - 5\beta + 6\gamma).$$
-<p><b>On identifie</b> avec $t^2 - 3t + 2$ et on résout de haut en bas :</p>
+<p><b>Étape 4 : On remplace</b> et on range par puissances de $t$ :</p>
+$$2\alpha - 5(2\alpha t + \beta) + 6(\alpha t^2 + \beta t + \gamma) = 6\alpha\,t^2 + (-10\alpha + 6\beta)\,t + (2\alpha - 5\beta + 6\gamma).$$
+<p><b>Étape 5 : On identifie</b> avec $t^2 - 3t + 2$, de haut en bas :</p>
 $$\left\{\begin{aligned}6\alpha &= 1\\-10\alpha + 6\beta &= -3\\2\alpha - 5\beta + 6\gamma &= 2\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac16\\6\beta &= -3 + \tfrac{10}6 = -\tfrac43\\6\gamma &= 2 - \tfrac13 - \tfrac{10}9 = \tfrac59\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac16\\\beta &= -\tfrac29\\\gamma &= \tfrac5{54}\end{aligned}\right.$$
-$$\cR{y_p(t) = \frac16t^2 - \frac29t + \frac5{54}},\qquad y(t) = \cG\lambda\,e^{2t} + \cG\mu\,e^{3t} + \frac16t^2 - \frac29t + \frac5{54}.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{y(t) = \lambda e^{2t} + \mu e^{3t} + \frac16t^2 - \frac29t + \frac5{54}}.$$
+
 <p class="ml">Exemple 2 : une exponentielle en résonance</p>
+<p><b>Étape 1 : Rappel.</b> $m$ racine simple de l'équation caractéristique : $y_p = Ct\,e^{mt}$.</p>
 $$y'' - 3y' + 2y = \cO{e^t}.$$
-<p><b>Racines.</b> $r^2 - 3r + 2 = (r - 1)(r - 2)$ : $\cV1$ et $\cV2$. Ici $m = 1$ est racine <b>simple</b> : $s = 1$.</p>
-$$\cR{y_p = C\,t\,e^t},\qquad y_p' = C(1 + t)\,e^t,\qquad y_p'' = C(2 + t)\,e^t.$$
-$$y_p'' - 3y_p' + 2y_p = C\big[(2 + t) - 3(1 + t) + 2t\big]e^t = C\big[2 - 3 + (1 - 3 + 2)\,t\big]e^t = -C\,e^t.$$
-$$-C\,e^t = \cO{e^t}\iff C = -1,\qquad\cR{y_p(t) = -t\,e^t}.$$
+<p><b>Étape 2 : Les racines.</b> $r^2 - 3r + 2 = (r - 1)(r - 2)$ : $\cV1$ et $\cV2$. Ici $m = 1$ est racine <b>simple</b>.</p>
+<p><b>Étape 3 : La forme et les dérivées.</b></p>
+$$\cR{y_p = Ct\,e^t},\qquad y_p' = C(1 + t)e^t,\qquad y_p'' = C(2 + t)e^t.$$
+<p><b>Étape 4 : On remplace.</b> Les termes en $t$ s'annulent :</p>
+$$C\big[(2 + t) - 3(1 + t) + 2t\big]e^t = C\big[-1 + 0\cdot t\big]e^t = -Ce^t.$$
+<p><b>Étape 5 : On identifie.</b> $-Ce^t = e^t\iff C = -1$ :</p>
+$$\cR{y_p = -t\,e^t},\qquad\cG{y(t) = \lambda e^t + \mu e^{2t} - t\,e^t}.$$
+
 <p class="ml">Exemple 3 : un cosinus sans résonance</p>
+<p><b>Étape 1 : Rappel.</b> $\cos t = \operatorname{Re}(e^{it})$ : on cherche $z_p = Ce^{it}$ si $i$ n'est pas racine, puis $y_p = \operatorname{Re}(z_p)$.</p>
 $$y'' + 3y' + 2y = \cO{10\cos t}.$$
-<p>On résout $z'' + 3z' + 2z = 10e^{it}$. Les racines sont $\cV{-1}$ et $\cV{-2}$, et $i$ n'en est pas une : $z_p = C\,e^{it}$, $z_p' = iC\,e^{it}$, $z_p'' = -C\,e^{it}$.</p>
-$$z_p'' + 3z_p' + 2z_p = (-1 + 3i + 2)\,C\,e^{it} = (1 + 3i)\,C\,e^{it} = 10e^{it}\iff C = \frac{10}{1 + 3i} = \frac{10(1 - 3i)}{1 + 9} = 1 - 3i.$$
-$$z_p = (1 - 3i)(\cos t + i\sin t) = (\cos t + 3\sin t) + i(\sin t - 3\cos t)\ \Longrightarrow\ \cR{y_p(t) = \operatorname{Re}(z_p) = \cos t + 3\sin t}.$$
-<p>Contrôle : $y_p' = -\sin t + 3\cos t$ et $y_p'' = -\cos t - 3\sin t$, donc :</p>
-$$y_p'' + 3y_p' + 2y_p = (-1 + 9 + 2)\cos t + (-3 - 3 + 6)\sin t = 10\cos t.$$
+<p><b>Étape 2 : Les racines.</b> $r^2 + 3r + 2 = (r + 1)(r + 2)$ : $\cV{-1}$ et $\cV{-2}$. $i$ n'est pas racine.</p>
+<p><b>Étape 3 : L'équation complexe.</b> $z_p = Ce^{it}$, $z_p' = iCe^{it}$, $z_p'' = -Ce^{it}$ :</p>
+$$(-1 + 3i + 2)\,Ce^{it} = (1 + 3i)\,Ce^{it} = 10e^{it}\iff C = \frac{10}{1 + 3i}.$$
+<p><b>Étape 4 : On simplifie $C$.</b></p>
+$$C = \frac{10(1 - 3i)}{1 + 9} = 1 - 3i.$$
+<p><b>Étape 5 : On développe et on prend la partie réelle.</b></p>
+$$z_p = (1 - 3i)(\cos t + i\sin t) = (\cos t + 3\sin t) + i(\sin t - 3\cos t)\ \Longrightarrow\ \cR{y_p = \cos t + 3\sin t}.$$
+<p>Contrôle : $y_p'' + 3y_p' + 2y_p = (-1 + 9 + 2)\cos t + (-3 - 3 + 6)\sin t = 10\cos t$.</p>
+
 <p class="ml">Exemple 4 : un cosinus en résonance</p>
+<p><b>Étape 1 : Rappel.</b> Si $i\omega$ est racine simple, on cherche $z_p = Ct\,e^{i\omega t}$, puis la partie réelle.</p>
 $$y'' + y = \cO{\cos t}.$$
-<p>Les racines sont $\cV{\pm i}$, et $i$ est racine <b>simple</b> : on cherche $z_p = C\,t\,e^{it}$ pour $z'' + z = e^{it}$.</p>
-$$z_p' = C(1 + it)\,e^{it},\qquad z_p'' = C\big(i + i(1 + it)\big)e^{it} = C(2i - t)\,e^{it}.$$
-$$z_p'' + z_p = C(2i - t + t)\,e^{it} = 2iC\,e^{it} = e^{it}\iff C = \frac1{2i} = -\frac i2.$$
-$$z_p = -\frac i2\,t(\cos t + i\sin t) = \frac t2\sin t - i\,\frac t2\cos t\ \Longrightarrow\ \cR{y_p(t) = \frac t2\sin t}.$$
+<p><b>Étape 2 : Les racines.</b> $r^2 + 1 = 0$ : $\cV{\pm i}$. $i$ est racine simple : résonance.</p>
+<p><b>Étape 3 : Les dérivées</b> de $z_p = Ct\,e^{it}$ :</p>
+$$z_p' = C(1 + it)\,e^{it},\qquad z_p'' = C(2i - t)\,e^{it}.$$
+<p><b>Étape 4 : On remplace.</b></p>
+$$z_p'' + z_p = C(2i - t + t)\,e^{it} = 2iCe^{it} = e^{it}\iff C = \frac1{2i} = -\frac i2.$$
+<p><b>Étape 5 : La partie réelle.</b></p>
+$$z_p = -\frac i2t(\cos t + i\sin t) = \frac t2\sin t - i\frac t2\cos t\ \Longrightarrow\ \cR{y_p = \frac t2\sin t}.$$
 
 <h2 id="e-superpo">10. Le principe de superposition</h2>
 <div class="sbox">$$\left.\begin{aligned}\cR{y_1}\ \text{solution avec}\ \cO{b_1}\\\cR{y_2}\ \text{solution avec}\ \cO{b_2}\end{aligned}\right\}\ \Longrightarrow\ \cR{y_1 + y_2}\ \text{solution avec}\ \cO{b_1 + b_2}.$$</div>
 <p class="ml">Exemple</p>
-$$y' + y = \cO{t} + \cO{e^{2t}}.$$
-<p><b>Morceau 1</b> : $y' + y = t$. On cherche $y_1 = \alpha t + \beta$ : $\alpha + \alpha t + \beta = t$, donc $\alpha = 1$ et $\alpha + \beta = 0$, soit $\cR{y_1 = t - 1}$.</p>
-<p><b>Morceau 2</b> : $y' + y = e^{2t}$. Comme $2\neq-1$, on cherche $y_2 = C\,e^{2t}$ : $2C + C = 1$, donc $\cR{y_2 = \frac13e^{2t}}$.</p>
-$$\cR{y_p(t) = t - 1 + \frac13e^{2t}},\qquad y(t) = \cG\lambda\,e^{-t} + t - 1 + \frac13e^{2t}.$$
+<p><b>Étape 1 : Rappel.</b> Si $y_1$ est solution avec $b_1$ et $y_2$ avec $b_2$, alors $y_1 + y_2$ est solution avec $b_1 + b_2$.</p>
+$$y' + y = \cO t + \cO{e^{2t}}.$$
+<p><b>Étape 2 : Morceau 1, $y' + y = t$.</b> On cherche $y_1 = \alpha t + \beta$ :</p>
+$$\alpha + \alpha t + \beta = t\iff\alpha = 1,\ \alpha + \beta = 0\iff\cR{y_1 = t - 1}.$$
+<p><b>Étape 3 : Morceau 2, $y' + y = e^{2t}$.</b> $2\neq-1$ : $y_2 = Ce^{2t}$ :</p>
+$$2C + C = 1\iff C = \frac13,\qquad\cR{y_2 = \frac13e^{2t}}.$$
+<p><b>Étape 4 : On additionne</b> et on ajoute l'homogène $\lambda e^{-t}$ :</p>
+$$\cG{y(t) = \lambda e^{-t} + t - 1 + \frac13e^{2t}}.$$
 
 <h2 id="e-cauchy">11. Les conditions initiales (problème de Cauchy)</h2>
 <p class="ml">Ordre 1 : une condition, une constante</p>
@@ -1329,14 +1424,20 @@ $$\cR{y_p(t) = \cos t\,\ln(\cos t) + t\sin t}.$$
 <li>$X = PY = \sum_i\cG{c_i}\,e^{\cV{\lambda_i}t}\,V_i$.</li>
 </ol>
 <p class="ml">Exemple : $A = \begin{pmatrix}1&2\\2&1\end{pmatrix}$, $X(0) = \begin{pmatrix}2\\0\end{pmatrix}$</p>
-<p><b>1.</b> $\chi_A = X^2 - 2X - 3 = (X - 3)(X + 1)$ : $\operatorname{Sp}(A) = \{\cV3, \cV{-1}\}$. On résout les deux systèmes :</p>
-$$A - 3I_2 = \begin{pmatrix}-2&2\\2&-2\end{pmatrix}\iff\left\{\begin{aligned}-2x + 2y &= 0\\2x - 2y &= 0\end{aligned}\right.\iff y = x:\ V_1 = \begin{pmatrix}1\\1\end{pmatrix}.$$
-$$A + I_2 = \begin{pmatrix}2&2\\2&2\end{pmatrix}\iff\left\{\begin{aligned}2x + 2y &= 0\\2x + 2y &= 0\end{aligned}\right.\iff y = -x:\ V_2 = \begin{pmatrix}1\\-1\end{pmatrix}.$$
-<p><b>2–3.</b></p>
+<p><b>Étape 1 : Rappel.</b> Si $A$ est diagonalisable de valeurs propres $\lambda_i$ et vecteurs propres $V_i$ : $X(t) = \sum c_ie^{\lambda_it}V_i$.</p>
+<p><b>Étape 2 : Les valeurs propres.</b> $\chi_A = X^2 - 2X - 3 = (X - 3)(X + 1)$ : $\cV3$ et $\cV{-1}$.</p>
+<p><b>Étape 3 : Le vecteur propre pour $3$.</b></p>
+$$A - 3I_2 = \begin{pmatrix}-2&2\\2&-2\end{pmatrix}\iff\left\{\begin{aligned}-2x + 2y &= 0\\2x - 2y &= 0\end{aligned}\right.\iff y = x:\quad V_1 = \begin{pmatrix}1\\1\end{pmatrix}.$$
+<p><b>Étape 4 : Le vecteur propre pour $-1$.</b></p>
+$$A + I_2 = \begin{pmatrix}2&2\\2&2\end{pmatrix}\iff2x + 2y = 0\iff y = -x:\quad V_2 = \begin{pmatrix}1\\-1\end{pmatrix}.$$
+<p><b>Étape 5 : La solution générale.</b></p>
 $$X(t) = \cG{c_1}\,e^{3t}\begin{pmatrix}1\\1\end{pmatrix} + \cG{c_2}\,e^{-t}\begin{pmatrix}1\\-1\end{pmatrix}.$$
-<p><b>Condition initiale.</b></p>
-$$X(0) = \begin{pmatrix}\cG{c_1} + \cG{c_2}\\\cG{c_1} - \cG{c_2}\end{pmatrix} = \begin{pmatrix}2\\0\end{pmatrix}\iff\left\{\begin{aligned}\cG{c_1} + \cG{c_2} &= 2\\\cG{c_1} - \cG{c_2} &= 0\end{aligned}\right.\iff\cG{c_1} = \cG{c_2} = 1,\qquad X(t) = \begin{pmatrix}e^{3t} + e^{-t}\\e^{3t} - e^{-t}\end{pmatrix}.$$
-<p>Contrôle : $x' = 3e^{3t} - e^{-t}$ et $x + 2y = e^{3t} + e^{-t} + 2e^{3t} - 2e^{-t} = 3e^{3t} - e^{-t}$.</p>
+<p><b>Étape 6 : La condition initiale.</b></p>
+$$X(0) = \begin{pmatrix}c_1 + c_2\\c_1 - c_2\end{pmatrix} = \begin{pmatrix}2\\0\end{pmatrix}\iff\left\{\begin{aligned}c_1 + c_2 &= 2\\c_1 - c_2 &= 0\end{aligned}\right.\iff c_1 = c_2 = 1.$$
+<p><b>Étape 7 : Conclusion.</b></p>
+$$\cG{X(t) = \begin{pmatrix}e^{3t} + e^{-t}\\e^{3t} - e^{-t}\end{pmatrix}}.$$
+<p>Contrôle : $x' = 3e^{3t} - e^{-t}$ et $x + 2y = 3e^{3t} - e^{-t}$.</p>
+
 <p class="ml">$A$ triangulaire (non diagonalisable) : on résout de bas en haut</p>
 $$\left\{\begin{aligned}x' &= 2x + y\\y' &= 2y\end{aligned}\right.\qquad\Longrightarrow\qquad y = \cG{c_2}\,e^{2t},\qquad x' - 2x = \cG{c_2}\,e^{2t}.$$
 <p>Ordre 1 en résonance ($m = 2 = -a$) : $x_p = C\,t\,e^{2t}$, $x_p' - 2x_p = C\,e^{2t}$, donc $C = \cG{c_2}$ et $x = (\cG{c_1} + \cG{c_2}\,t)\,e^{2t}$.</p>
@@ -1443,7 +1544,12 @@ $$y' = 1 + y^2\iff\frac{y'}{1 + y^2} = 1\iff\big(\arctan y\big)' = 1\iff\arctan 
 <li>Somme sur un ensemble : $\sum_{k\in I}x_k$, et $\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j}$ pour une somme double.</li>
 </ul>
 <p class="ml">Exemple : compter les termes</p>
-$$\sum_{\cB{k = 3}}^{\cB{10}}1 = \underbrace{1 + 1 + \cdots + 1}_{\cB{10 - 3 + 1 = 8}\ \text{termes}} = \cG8,\qquad\sum_{\cB{k = 0}}^{\cB n}5 = 5(\cB{n + 1}) = \cG{5n + 5}.$$
+<p><b>Étape 1 : Rappel.</b> De $k = p$ à $k = n$, il y a $n - p + 1$ termes.</p>
+<p><b>Étape 2 : Première somme.</b> De $\cB3$ à $\cB{10}$ : $10 - 3 + 1 = 8$ termes, tous égaux à $1$ :</p>
+$$\sum_{k=3}^{10}1 = \underbrace{1 + 1 + \cdots + 1}_{8\ \text{termes}} = \cG8.$$
+<p><b>Étape 3 : Deuxième somme.</b> De $\cB0$ à $\cB n$ : $n - 0 + 1 = n + 1$ termes, tous égaux à $5$ :</p>
+$$\sum_{k=0}^n5 = 5(n + 1) = \cG{5n + 5}.$$
+
 <p class="ml piege">Piège</p>
 <p>$\sum_{k=1}^n\lambda = n\lambda$, mais $\sum_{k=0}^n\lambda = (n + 1)\lambda$ : le terme $k = 0$ compte.</p>
 
@@ -1455,8 +1561,15 @@ $$\sum_{\cB{k = 3}}^{\cB{10}}1 = \underbrace{1 + 1 + \cdots + 1}_{\cB{10 - 3 + 1
 <li>Termes pairs et impairs : $\sum_{k=0}^{2n}x_k = \sum_{p=0}^nx_{2p} + \sum_{p=0}^{n-1}x_{2p+1}$.</li>
 </ul>
 <p class="ml">Exemple</p>
-$$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2 = 3\cdot\frac{n(n + 1)}{2} + 2n = \frac{3n^2 + 3n + 4n}{2} = \cG{\frac{n(3n + 7)}{2}}.$$
-<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5$.</p>
+<p><b>Étape 1 : Rappel.</b> Linéarité : $\sum(\lambda x_k + \mu y_k) = \lambda\sum x_k + \mu\sum y_k$, et $\sum_{k=1}^nk = \frac{n(n + 1)}2$.</p>
+<p><b>Étape 2 : On coupe la somme.</b></p>
+$$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2.$$
+<p><b>Étape 3 : Chaque morceau.</b> $\sum_{k=1}^nk = \frac{n(n + 1)}2$ et $\sum_{k=1}^n2 = 2n$ ($n$ termes) :</p>
+$$= 3\cdot\frac{n(n + 1)}2 + 2n.$$
+<p><b>Étape 4 : Même dénominateur.</b></p>
+$$= \frac{3n^2 + 3n + 4n}2 = \cG{\frac{n(3n + 7)}2}.$$
+<p>Contrôle avec $n = 1$ : $3 + 2 = 5$ et $\frac{1\times10}2 = 5$.</p>
+
 <p class="ml piege">Piège</p>
 <p>$\sum x_ky_k\neq\big(\sum x_k\big)\big(\sum y_k\big)$ et $\sum\frac1{x_k}\neq\frac1{\sum x_k}$. La somme ne passe pas dans un produit ni dans un quotient.</p>
 
@@ -1469,11 +1582,21 @@ $$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2 = 3\cdot\frac{n(n + 1)}{
 <tr><td>$\cO{j = n - k}$ (retournement)</td><td>$k = 0\mapsto j = n$, $k = n\mapsto j = 0$</td><td>$\sum_{k=0}^nx_{n-k} = \sum_{j=0}^nx_j$</td></tr>
 </table>
 <p class="ml">Exemple 1 : un décalage</p>
-$$S = \sum_{\cB{k = 0}}^{\cB{n-1}}(k + 1)^2.\qquad\cO{j = k + 1}:\quad k = 0\mapsto j = \cB1,\quad k = n - 1\mapsto j = \cB n.$$
-$$S = \sum_{\cB{j = 1}}^{\cB n}j^2 = \cG{\frac{n(n + 1)(2n + 1)}{6}}.$$
+<p><b>Étape 1 : Rappel.</b> Changer d'indice, c'est changer trois choses : le terme général, la borne du bas et la borne du haut.</p>
+$$S = \sum_{k=0}^{n-1}(k + 1)^2.$$
+<p><b>Étape 2 : On pose $\cO{j = k + 1}$.</b> Le terme devient $j^2$.</p>
+<p><b>Étape 3 : Les bornes.</b> $k = 0\mapsto j = \cB1$ et $k = n - 1\mapsto j = \cB n$.</p>
+<p><b>Étape 4 : On réécrit et on conclut</b> avec la somme usuelle :</p>
+$$S = \sum_{j=1}^nj^2 = \cG{\frac{n(n + 1)(2n + 1)}6}.$$
+
 <p class="ml">Exemple 2 : un retournement</p>
-$$T = \sum_{\cB{k = 0}}^{\cB n}(n - k)\,2^{n-k}.\qquad\cO{j = n - k}:\quad k = 0\mapsto j = \cB n,\quad k = n\mapsto j = \cB0.$$
-$$T = \sum_{\cB{j = 0}}^{\cB n}j\,2^j\qquad(\text{on a remis les bornes dans l'ordre croissant}).$$
+<p><b>Étape 1 : Rappel.</b> Avec $j = n - k$, on a $k = n - j$ : <b>tous</b> les $k$ sont remplacés, et les bornes sont échangées.</p>
+$$T = \sum_{k=0}^n(n - k)\,2^{n-k}.$$
+<p><b>Étape 2 : On pose $\cO{j = n - k}$.</b> Le terme $(n - k)2^{n-k}$ devient $j\,2^j$.</p>
+<p><b>Étape 3 : Les bornes.</b> $k = 0\mapsto j = \cB n$ et $k = n\mapsto j = \cB0$.</p>
+<p><b>Étape 4 : On remet dans l'ordre croissant</b> (l'ordre des termes ne change pas une somme) :</p>
+$$\cG{T = \sum_{j=0}^nj\,2^j}.$$
+
 <p class="ml piege">Piège</p>
 <p>Dans le terme général, <b>tous</b> les $k$ doivent être remplacés : avec $j = n - k$, $k = n - j$ et $x_k = x_{n-j}$.</p>
 
@@ -1488,22 +1611,37 @@ $$\sum_{k=1}^n\big((k + 1)^3 - k^3\big) = (n + 1)^3 - 1 = 3\sum_{k=1}^nk^2 + 3\c
 $$3\sum_{k=1}^nk^2 = (n + 1)^3 - 1 - n - \frac{3n(n + 1)}2 = (n + 1)\Big[(n + 1)^2 - 1 - \frac{3n}2\Big] = (n + 1)\cdot\frac{2n^2 + n}{2} = \frac{n(n + 1)(2n + 1)}2.$$
 <p>On divise par $3$ : $\cG{\sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}6}$.</p>
 <p class="ml">Exemple : $\sum_{k=1}^nk(k + 1)$</p>
-<p>On développe puis on utilise la linéarité :</p>
+<p><b>Étape 1 : Rappel.</b> $\sum_{k=1}^nk = \frac{n(n + 1)}2$ et $\sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}6$.</p>
+<p><b>Étape 2 : On développe le terme.</b> $k(k + 1) = k^2 + k$.</p>
+<p><b>Étape 3 : Linéarité.</b></p>
 $$\sum_{k=1}^nk(k + 1) = \sum_{k=1}^nk^2 + \sum_{k=1}^nk = \frac{n(n + 1)(2n + 1)}6 + \frac{n(n + 1)}2.$$
-<p>On factorise par $\cO{\frac{n(n + 1)}6}$ avant de développer (moins de calculs) :</p>
+<p><b>Étape 4 : On factorise par $\cO{\frac{n(n + 1)}6}$</b> avant de développer ($\frac{n(n+1)}2 = \frac{n(n+1)}6\times3$) :</p>
 $$= \cO{\frac{n(n + 1)}6}\big[(2n + 1) + 3\big] = \frac{n(n + 1)(2n + 4)}6 = \cG{\frac{n(n + 1)(n + 2)}3}.$$
-<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8$.</p>
+<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$ et $\frac{2\times3\times4}3 = 8$.</p>
 
 <h2 id="a-geo">5. La somme géométrique</h2>
 <div class="sbox">$$\sum_{k=0}^nq^k = \left\{\begin{aligned}&\frac{1 - q^{n+1}}{1 - q}&&\text{si}\ q\neq1\\&n + 1&&\text{si}\ q = 1\end{aligned}\right.\qquad\text{En général}:\ \text{premier terme}\times\frac{1 - q^{\text{nombre de termes}}}{1 - q}.$$</div>
 <p class="ml">Pourquoi (à savoir refaire)</p>
 $$(1 - q)\sum_{k=0}^nq^k = \sum_{k=0}^nq^k - \sum_{k=0}^nq^{k+1} = (1 + \cR{q + \cdots + q^n}) - (\cR{q + \cdots + q^n} + q^{n+1}) = 1 - q^{n+1}.$$
 <p class="ml">Exemple 1 : la somme ne commence pas à 0</p>
-$$\sum_{k=\cB2}^{\cB n}3^k:\qquad\text{premier terme}\ 3^2 = 9,\qquad\text{nombre de termes}\ \cB{n - 1},\qquad q = 3\neq1.$$
-$$\sum_{k=2}^n3^k = 9\cdot\frac{1 - 3^{n-1}}{1 - 3} = \frac92\big(3^{n-1} - 1\big) = \cG{\frac{3^{n+1} - 9}{2}}.$$
-<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9$.</p>
+<p><b>Étape 1 : Rappel.</b> Somme géométrique de raison $q\neq1$ : premier terme $\times\dfrac{1 - q^{\text{nombre de termes}}}{1 - q}$.</p>
+$$\sum_{k=2}^n3^k.$$
+<p><b>Étape 2 : Les ingrédients.</b> Raison $q = 3\neq1$. Premier terme $3^2 = 9$. Nombre de termes : $n - 2 + 1 = n - 1$.</p>
+<p><b>Étape 3 : La formule.</b></p>
+$$\sum_{k=2}^n3^k = 9\cdot\frac{1 - 3^{n-1}}{1 - 3} = 9\cdot\frac{3^{n-1} - 1}{2}.$$
+<p><b>Étape 4 : On simplifie</b> avec $9\times3^{n-1} = 3^{n+1}$ :</p>
+$$= \cG{\frac{3^{n+1} - 9}2}.$$
+<p>Contrôle avec $n = 2$ : $3^2 = 9$ et $\frac{27 - 9}2 = 9$.</p>
+
 <p class="ml">Exemple 2 : la raison est cachée</p>
-$$\sum_{k=0}^n\frac{2^k}{5^{k+1}} = \frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \frac15\cdot\frac{1 - (2/5)^{n+1}}{1 - 2/5} = \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1 - \Big(\frac25\Big)^{n+1}\Big)}.$$
+<p><b>Étape 1 : Rappel.</b> $\sum_{k=0}^nq^k = \frac{1 - q^{n+1}}{1 - q}$ pour $q\neq1$.</p>
+$$\sum_{k=0}^n\frac{2^k}{5^{k+1}}.$$
+<p><b>Étape 2 : Faire apparaître $q^k$.</b> $5^{k+1} = 5\times5^k$, donc $\frac{2^k}{5^{k+1}} = \frac15\Big(\frac25\Big)^k$.</p>
+<p><b>Étape 3 : On sort la constante</b> et on applique la formule avec $q = \frac25\neq1$ :</p>
+$$\frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \frac15\cdot\frac{1 - (2/5)^{n+1}}{1 - 2/5}.$$
+<p><b>Étape 4 : On simplifie</b> $\frac{1}{1 - 2/5} = \frac53$ :</p>
+$$= \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1 - \Big(\frac25\Big)^{n+1}\Big)}.$$
+
 <p class="ml piege">Piège</p>
 <p>Toujours vérifier $q\neq1$. Avec un paramètre ($q = x$, $q = e^{i\theta}$), on traite le cas $q = 1$ à part.</p>
 
@@ -1511,19 +1649,43 @@ $$\sum_{k=0}^n\frac{2^k}{5^{k+1}} = \frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \fr
 <div class="sbox">$$\sum_{k=p}^n(x_{k+1} - x_k) = x_{n+1} - x_p,\qquad\prod_{k=p}^n\frac{x_{k+1}}{x_k} = \frac{x_{n+1}}{x_p}\quad(x_k\neq0).$$</div>
 <p>On repère une différence de deux termes <b>consécutifs</b> de la même suite. On écrit les termes, ils s'annulent deux à deux, il reste le dernier et le premier.</p>
 <p class="ml">Exemple 1 : $\sum_{k=1}^n\frac1{k(k + 1)}$</p>
-<p><b>Étape 1 : décomposer.</b> On cherche $a, b$ avec $\frac1{k(k + 1)} = \frac ak + \frac b{k + 1}$ :</p>
-$$\frac ak + \frac b{k + 1} = \frac{a(k + 1) + bk}{k(k + 1)} = \frac{(a + b)k + a}{k(k + 1)}\qquad\Longrightarrow\qquad\left\{\begin{aligned}a + b &= 0\\a &= 1\end{aligned}\right.\iff\left\{\begin{aligned}a &= 1\\b &= -1\end{aligned}\right.$$
-<p><b>Étape 2 : écrire les termes.</b></p>
-$$\sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = \Big(1 - \cR{\frac12}\Big) + \Big(\cR{\frac12} - \cR{\frac13}\Big) + \cdots + \Big(\cR{\frac1n} - \frac1{n + 1}\Big) = \cG{1 - \frac1{n + 1} = \frac{n}{n + 1}}.$$
+<p><b>Étape 1 : Rappel.</b> Télescopage : $\sum_{k=p}^n(x_k - x_{k+1}) = x_p - x_{n+1}$.</p>
+<p><b>Étape 2 : Décomposer.</b> On cherche $a, b$ avec $\frac1{k(k + 1)} = \frac ak + \frac b{k + 1}$ :</p>
+$$\frac ak + \frac b{k + 1} = \frac{a(k + 1) + bk}{k(k + 1)} = \frac{(a + b)k + a}{k(k + 1)}.$$
+<p><b>Étape 3 : Identifier.</b></p>
+$$\left\{\begin{aligned}a + b &= 0\\a &= 1\end{aligned}\right.\iff a = 1,\ b = -1:\qquad\frac1{k(k + 1)} = \frac1k - \frac1{k + 1}.$$
+<p><b>Étape 4 : Écrire les termes.</b> Ils s'annulent deux à deux :</p>
+$$\sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = \Big(1 - \cR{\frac12}\Big) + \Big(\cR{\frac12} - \cR{\frac13}\Big) + \cdots + \Big(\cR{\frac1n} - \frac1{n + 1}\Big).$$
+<p><b>Étape 5 : Il reste le premier et le dernier.</b></p>
+$$\cG{\sum_{k=1}^n\frac1{k(k + 1)} = 1 - \frac1{n + 1} = \frac n{n + 1}}.$$
+
 <p class="ml">Exemple 2 : un écart de 2</p>
-$$\frac1{k(k + 2)} = \frac12\Big(\frac1k - \frac1{k + 2}\Big):\quad\sum_{k=1}^n\frac1{k(k + 2)} = \frac12\Big(1 + \frac12 - \frac1{n + 1} - \frac1{n + 2}\Big).$$
-<p>Ici il reste <b>deux</b> termes au début ($k = 1, 2$) et deux à la fin : les $\frac1j$ pour $3\leqslant j\leqslant n$ apparaissent une fois avec $+$ et une fois avec $-$.</p>
+<p><b>Étape 1 : Rappel.</b> Télescopage avec un écart de $2$ : $\sum_{k=1}^n(x_k - x_{k+2}) = x_1 + x_2 - x_{n+1} - x_{n+2}$.</p>
+<p><b>Étape 2 : Décomposer.</b> Comme à l'exemple 1 :</p>
+$$\frac1{k(k + 2)} = \frac12\Big(\frac1k - \frac1{k + 2}\Big).$$
+<p><b>Étape 3 : Ce qui s'annule.</b> Chaque $\frac1j$ avec $3\leqslant j\leqslant n$ apparaît une fois avec $+$ et une fois avec $-$.</p>
+<p><b>Étape 4 : Ce qui reste.</b> Les deux premiers $+$ ($k = 1, 2$) et les deux derniers $-$ ($k = n - 1, n$) :</p>
+$$\cG{\sum_{k=1}^n\frac1{k(k + 2)} = \frac12\Big(1 + \frac12 - \frac1{n + 1} - \frac1{n + 2}\Big)}.$$
+
 <p class="ml">Exemple 3 : un produit télescopique</p>
-$$\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \prod_{k=2}^n\frac{(k - 1)(k + 1)}{k\cdot k} = \Big(\prod_{k=2}^n\frac{k - 1}{k}\Big)\Big(\prod_{k=2}^n\frac{k + 1}{k}\Big).$$
-$$\prod_{k=2}^n\frac{k - 1}{k} = \frac12\cdot\frac{\cR2}{\cR3}\cdots\frac{\cR{n - 1}}n = \frac1n,\qquad\prod_{k=2}^n\frac{k + 1}k = \frac{\cR3}2\cdot\frac{\cR4}{\cR3}\cdots\frac{n + 1}{\cR n} = \frac{n + 1}2.$$
-$$\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \frac1n\cdot\frac{n + 1}2 = \cG{\frac{n + 1}{2n}}.$$
+<p><b>Étape 1 : Rappel.</b> Produit télescopique : $\prod_{k=p}^n\frac{x_{k+1}}{x_k} = \frac{x_{n+1}}{x_p}$.</p>
+<p><b>Étape 2 : Factoriser le terme.</b></p>
+$$1 - \frac1{k^2} = \frac{k^2 - 1}{k^2} = \frac{(k - 1)(k + 1)}{k\cdot k}.$$
+<p><b>Étape 3 : Séparer en deux produits.</b></p>
+$$\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \Big(\prod_{k=2}^n\frac{k - 1}k\Big)\Big(\prod_{k=2}^n\frac{k + 1}k\Big).$$
+<p><b>Étape 4 : Premier produit.</b></p>
+$$\frac12\cdot\frac{\cR2}{\cR3}\cdots\frac{\cR{n - 1}}n = \frac1n.$$
+<p><b>Étape 5 : Second produit.</b></p>
+$$\frac{\cR3}2\cdot\frac{\cR4}{\cR3}\cdots\frac{n + 1}{\cR n} = \frac{n + 1}2.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \frac1n\cdot\frac{n + 1}2 = \frac{n + 1}{2n}}.$$
+
 <p class="ml">Exemple 4 : avec un logarithme</p>
-$$\sum_{k=1}^n\ln\Big(1 + \frac1k\Big) = \sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1 = \cG{\ln(n + 1)}.$$
+<p><b>Étape 1 : Rappel.</b> $\ln\frac ab = \ln a - \ln b$, et $\sum(x_{k+1} - x_k) = x_{n+1} - x_1$.</p>
+<p><b>Étape 2 : Transformer le terme.</b> $\ln\Big(1 + \frac1k\Big) = \ln\frac{k + 1}k = \ln(k + 1) - \ln k$.</p>
+<p><b>Étape 3 : Télescoper.</b></p>
+$$\sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1.$$
+<p><b>Étape 4 : Conclusion.</b> $\ln1 = 0$ : $\cG{\sum_{k=1}^n\ln\big(1 + \frac1k\big) = \ln(n + 1)}$.</p>
 
 <h2 id="a-prod">7. Les produits</h2>
 <div class="sbox">$$\prod_{k=p}^n\lambda = \lambda^{n-p+1},\qquad\prod_{k=p}^n(\lambda x_k) = \lambda^{n-p+1}\prod_{k=p}^nx_k,\qquad\ln\Big(\prod x_k\Big) = \sum\ln x_k\ (x_k > 0),\qquad e^{\sum x_k} = \prod e^{x_k}.$$</div>
@@ -1532,11 +1694,27 @@ $$\sum_{k=1}^n\ln\Big(1 + \frac1k\Big) = \sum_{k=1}^n\big(\ln(k + 1) - \ln k\big
 <li>Le $\lambda$ sort avec la <b>puissance</b> $n - p + 1$, pas multiplié une fois.</li>
 </ul>
 <p class="ml">Exemple 1 : les nombres pairs</p>
-$$\prod_{k=1}^n(2k) = \cO{2^n}\prod_{k=1}^nk = \cG{2^n\,n!}.$$
+<p><b>Étape 1 : Rappel.</b> $\prod_{k=1}^n(\lambda x_k) = \lambda^n\prod_{k=1}^nx_k$ (le $\lambda$ sort $n$ fois), et $\prod_{k=1}^nk = n!$.</p>
+<p><b>Étape 2 : On sort le $2$</b> de chacun des $n$ facteurs :</p>
+$$\prod_{k=1}^n(2k) = \cO{2^n}\prod_{k=1}^nk.$$
+<p><b>Étape 3 : Conclusion.</b></p>
+$$\cG{\prod_{k=1}^n(2k) = 2^n\,n!}.$$
+
 <p class="ml">Exemple 2 : les nombres impairs, on complète avec les pairs</p>
-$$\prod_{k=1}^n(2k - 1) = 1\times3\times\cdots\times(2n - 1) = \frac{1\times\cO2\times3\times\cO4\times\cdots\times(2n - 1)\times\cO{2n}}{\cO2\times\cO4\times\cdots\times\cO{2n}} = \frac{(2n)!}{2^n\,n!}.$$
+<p><b>Étape 1 : Rappel.</b> $(2n)! = 1\times2\times3\times\cdots\times(2n)$ contient les pairs et les impairs, et $\prod_{k=1}^n(2k) = 2^nn!$.</p>
+<p><b>Étape 2 : On complète</b> le produit des impairs en multipliant et divisant par les pairs :</p>
+$$\prod_{k=1}^n(2k - 1) = \frac{1\times\cO2\times3\times\cO4\times\cdots\times(2n - 1)\times\cO{2n}}{\cO2\times\cO4\times\cdots\times\cO{2n}}.$$
+<p><b>Étape 3 : Le numérateur</b> est $(2n)!$, le dénominateur est le produit des pairs, $2^nn!$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\prod_{k=1}^n(2k - 1) = \frac{(2n)!}{2^n\,n!}}.$$
+
 <p class="ml">Exemple 3 : une somme dans l'exponentielle</p>
-$$\prod_{k=1}^ne^{k/n} = e^{\frac1n\sum_{k=1}^nk} = e^{\frac1n\cdot\frac{n(n + 1)}2} = \cG{e^{\frac{n + 1}2}}.$$
+<p><b>Étape 1 : Rappel.</b> $\prod e^{x_k} = e^{\sum x_k}$, et $\sum_{k=1}^nk = \frac{n(n + 1)}2$.</p>
+<p><b>Étape 2 : On passe à l'exponentielle d'une somme.</b></p>
+$$\prod_{k=1}^ne^{k/n} = e^{\sum_{k=1}^n\frac kn} = e^{\frac1n\sum_{k=1}^nk}.$$
+<p><b>Étape 3 : La somme.</b></p>
+$$\frac1n\cdot\frac{n(n + 1)}2 = \frac{n + 1}2.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{\prod_{k=1}^ne^{k/n} = e^{\frac{n + 1}2}}$.</p>
 
 <h2 id="a-binom">8. Factorielles et coefficients binomiaux</h2>
 <div class="sbox">$$n! = \prod_{k=1}^nk,\quad0! = 1,\qquad\cV{\binom nk} = \left\{\begin{aligned}&\frac{n!}{k!\,(n - k)!}&&\text{si}\ 0\leqslant k\leqslant n\\&0&&\text{sinon}\end{aligned}\right.$$</div>
@@ -1574,10 +1752,17 @@ $$\binom{10}3 = \frac{10\times9\times8}{3\times2\times1} = \frac{720}6 = \cG{120
 <div class="sbox">$$(a + b)^n = \sum_{k=0}^n\cV{\binom nk}a^kb^{n-k}\qquad(a, b\in\mathbb C,\ n\in\mathbb N).$$</div>
 <p>$n + 1$ termes. Les puissances de $a$ montent de $0$ à $n$, celles de $b$ descendent de $n$ à $0$, et leur somme vaut toujours $n$. Pour des matrices, il faut $AB = BA$.</p>
 <p class="ml">Exemple 1 : $(x + 1)^5$</p>
-<p>La ligne $n = 5$ du triangle donne les coefficients : $\cV1, \cV5, \cV{10}, \cV{10}, \cV5, \cV1$.</p>
-$$(x + 1)^5 = \cV1\,x^5 + \cV5\,x^4 + \cV{10}\,x^3 + \cV{10}\,x^2 + \cV5\,x + \cV1.$$
+<p><b>Étape 1 : Rappel.</b> $(a + b)^n = \sum_{k=0}^n\binom nka^kb^{n-k}$, et les $\binom nk$ se lisent sur la ligne $n$ du triangle de Pascal.</p>
+<p><b>Étape 2 : La ligne $n = 5$.</b> $\cV1, \cV5, \cV{10}, \cV{10}, \cV5, \cV1$.</p>
+<p><b>Étape 3 : Les puissances.</b> Avec $a = x$ et $b = 1$, les puissances de $x$ descendent de $5$ à $0$, celles de $1$ valent toujours $1$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{(x + 1)^5 = x^5 + 5x^4 + 10x^3 + 10x^2 + 5x + 1}.$$
+<p>Contrôle avec $x = 1$ : $2^5 = 32 = 1 + 5 + 10 + 10 + 5 + 1$.</p>
+
 <p class="ml">Exemple 2 : $(2x - 3)^4$, avec un signe</p>
-<p>On pose $a = 2x$ et $b = -3$, et on fait un tableau terme par terme :</p>
+<p><b>Étape 1 : Rappel.</b> $(a + b)^n = \sum_{k=0}^n\binom nka^kb^{n-k}$.</p>
+<p><b>Étape 2 : On identifie $a$ et $b$</b>, en gardant le signe : $a = 2x$, $b = -3$, $n = 4$. Ligne $4$ du triangle : $1, 4, 6, 4, 1$.</p>
+<p><b>Étape 3 : Le tableau terme par terme.</b></p>
 <table class="mtab">
 <tr><th>$k$</th><th>$\cV{\binom4k}$</th><th>$(2x)^k$</th><th>$(-3)^{4-k}$</th><th>Terme</th></tr>
 <tr><td>$0$</td><td>$\cV1$</td><td>$1$</td><td>$81$</td><td>$81$</td></tr>
@@ -1586,13 +1771,27 @@ $$(x + 1)^5 = \cV1\,x^5 + \cV5\,x^4 + \cV{10}\,x^3 + \cV{10}\,x^2 + \cV5\,x + \c
 <tr><td>$3$</td><td>$\cV4$</td><td>$8x^3$</td><td>$-3$</td><td>$-96x^3$</td></tr>
 <tr><td>$4$</td><td>$\cV1$</td><td>$16x^4$</td><td>$1$</td><td>$16x^4$</td></tr>
 </table>
-$$(2x - 3)^4 = \cG{16x^4 - 96x^3 + 216x^2 - 216x + 81}.$$
-<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1$.</p>
+<p><b>Étape 4 : On additionne</b>, par puissances décroissantes :</p>
+$$\cG{(2x - 3)^4 = 16x^4 - 96x^3 + 216x^2 - 216x + 81}.$$
+<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$ et $16 - 96 + 216 - 216 + 81 = 1$.</p>
+
 <p class="ml">Exemple 3 : les sommes de coefficients</p>
-$$a = b = 1:\ \sum_{k=0}^n\binom nk = (1 + 1)^n = \cG{2^n},\qquad a = -1,\ b = 1:\ \sum_{k=0}^n(-1)^k\binom nk = (1 - 1)^n = \cG0\ (n\geqslant1).$$
+<p><b>Étape 1 : Rappel.</b> $(a + b)^n = \sum_{k=0}^n\binom nka^kb^{n-k}$ : on choisit $a$ et $b$ pour retrouver la somme voulue.</p>
+<p><b>Étape 2 : $a = b = 1$.</b> Toutes les puissances valent $1$ :</p>
+$$\sum_{k=0}^n\binom nk = (1 + 1)^n = \cG{2^n}.$$
+<p><b>Étape 3 : $a = -1$, $b = 1$.</b> Il reste $(-1)^k$ :</p>
+$$\sum_{k=0}^n(-1)^k\binom nk = (-1 + 1)^n = \cG0\quad(n\geqslant1).$$
+
 <p class="ml">Exemple 4 : $\sum_{k=0}^nk\binom nk$ avec la formule du capitaine</p>
-<p>Le terme $k = 0$ est nul. Pour $k\geqslant1$, $k\binom nk = n\binom{n - 1}{k - 1}$, puis on décale avec $\cO{j = k - 1}$ :</p>
-$$\sum_{k=1}^nk\binom nk = n\sum_{k=1}^n\binom{n - 1}{k - 1} = n\sum_{j=0}^{n-1}\binom{n - 1}{j} = n\cdot2^{n-1}.$$
+<p><b>Étape 1 : Rappel.</b> Formule du capitaine : $k\binom nk = n\binom{n - 1}{k - 1}$ pour $k\geqslant1$, et $\sum_{j=0}^{m}\binom mj = 2^m$.</p>
+<p><b>Étape 2 : Le terme $k = 0$</b> vaut $0\times\binom n0 = 0$ : on commence à $k = 1$.</p>
+<p><b>Étape 3 : La formule du capitaine.</b></p>
+$$\sum_{k=1}^nk\binom nk = n\sum_{k=1}^n\binom{n - 1}{k - 1}.$$
+<p><b>Étape 4 : On décale avec $\cO{j = k - 1}$</b> : $k = 1\mapsto j = 0$, $k = n\mapsto j = n - 1$.</p>
+$$= n\sum_{j=0}^{n-1}\binom{n - 1}j.$$
+<p><b>Étape 5 : Conclusion</b> par l'étape 2 de l'exemple 3 avec $n - 1$ :</p>
+$$\cG{\sum_{k=0}^nk\binom nk = n\,2^{n-1}}.$$
+
 <div data-mlab="binome"></div>
 
 <h2 id="a-bern">10. Factoriser $a^n - b^n$</h2>
@@ -1603,7 +1802,11 @@ $$(a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k} = \sum_{k=0}^{n-1}a^{k+1}b^{n-1-k} - \sum_
 $$a^2 - b^2 = (a - b)(a + b),\qquad a^3 - b^3 = (a - b)(a^2 + ab + b^2),\qquad x^n - 1 = (x - 1)(1 + x + \cdots + x^{n-1}).$$
 <p>Pour $n$ impair, on remplace $b$ par $-b$ : $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$.</p>
 <p class="ml">Exemple : $x^5 - 32$</p>
-$$x^5 - 2^5 = (x - 2)\big(x^4 + 2x^3 + 4x^2 + 8x + 16\big).$$
+<p><b>Étape 1 : Rappel.</b> $a^n - b^n = (a - b)\big(a^{n-1} + a^{n-2}b + \cdots + ab^{n-2} + b^{n-1}\big)$.</p>
+<p><b>Étape 2 : Écrire $32$ comme une puissance $5$-ième.</b> $32 = 2^5$, donc $a = x$, $b = 2$, $n = 5$.</p>
+<p><b>Étape 3 : Les termes de la parenthèse.</b> Les puissances de $x$ descendent de $4$ à $0$, celles de $2$ montent de $0$ à $4$ : $x^4$, $2x^3$, $4x^2$, $8x$, $16$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{x^5 - 32 = (x - 2)(x^4 + 2x^3 + 4x^2 + 8x + 16)}.$$
 
 <h2 id="a-doubles">11. Les sommes doubles</h2>
 <p class="ml">Sur un rectangle : on intervertit librement</p>
@@ -1612,9 +1815,14 @@ $$x^5 - 2^5 = (x - 2)\big(x^4 + 2x^3 + 4x^2 + 8x + 16\big).$$
 <div class="sbox">$$\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j} = \sum_{j=1}^n\sum_{\cB{i = 1}}^{\cB j}a_{i,j} = \sum_{i=1}^n\sum_{\cB{j = i}}^{\cB n}a_{i,j}.$$</div>
 <p>Méthode : on fixe la variable de l'extérieur, puis on lit dans la condition $1\leqslant i\leqslant j\leqslant n$ les bornes de celle de l'intérieur.</p>
 <p class="ml">Exemple : $S = \sum_{1\leqslant i\leqslant j\leqslant n}i$</p>
-<p>On somme d'abord sur $i$ (à $j$ fixé, $i$ va de $\cB1$ à $\cB j$) :</p>
-$$S = \sum_{j=1}^n\Big(\sum_{i=1}^ji\Big) = \sum_{j=1}^n\frac{j(j + 1)}2 = \frac12\sum_{j=1}^nj(j + 1) = \frac12\cdot\frac{n(n + 1)(n + 2)}3 = \cG{\frac{n(n + 1)(n + 2)}6}$$
-<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4$.</p>
+<p><b>Étape 1 : Rappel.</b> Sur un triangle : $\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j} = \sum_{j=1}^n\sum_{i=1}^ja_{i,j}$.</p>
+<p><b>Étape 2 : Les bornes.</b> On fixe $j$ ; la condition $1\leqslant i\leqslant j$ donne $i$ de $\cB1$ à $\cB j$.</p>
+<p><b>Étape 3 : La somme intérieure.</b></p>
+$$\sum_{i=1}^ji = \frac{j(j + 1)}2.$$
+<p><b>Étape 4 : La somme extérieure</b>, avec $\sum_{j=1}^nj(j + 1) = \frac{n(n + 1)(n + 2)}3$ (§4) :</p>
+$$S = \frac12\sum_{j=1}^nj(j + 1) = \frac12\cdot\frac{n(n + 1)(n + 2)}3 = \cG{\frac{n(n + 1)(n + 2)}6}.$$
+<p>Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$, et $\frac{2\times3\times4}6 = 4$.</p>
+
 <p class="ml">Le carré d'une somme</p>
 $$\Big(\sum_{i=1}^nx_i\Big)^2 = \sum_{i=1}^nx_i^2 + 2\sum_{1\leqslant i\lt j\leqslant n}x_ix_j.$$
 <p class="ml piege">Piège</p>
@@ -1627,8 +1835,12 @@ $$\Big(\sum_{i=1}^nx_i\Big)^2 = \sum_{i=1}^nx_i^2 + 2\sum_{1\leqslant i\lt j\leq
 <li>Inégalité triangulaire : $\big|\sum x_k\big|\leqslant\sum|x_k|$.</li>
 </ul>
 <p class="ml">Exemple : encadrer $\sum_{k=1}^n\frac1{n + k}$</p>
-<p>Pour $1\leqslant k\leqslant n$, on a $n + 1\leqslant n + k\leqslant2n$, donc $\frac1{2n}\leqslant\frac1{n + k}\leqslant\frac1{n + 1}$. On somme les $n$ termes :</p>
-$$\frac n{2n} = \frac12\leqslant\sum_{k=1}^n\frac1{n + k}\leqslant\frac n{n + 1}\lt1.$$
+<p><b>Étape 1 : Rappel.</b> Si $a\leqslant x_k\leqslant b$ pour chacun des $n$ termes, alors $na\leqslant\sum x_k\leqslant nb$.</p>
+<p><b>Étape 2 : Encadrer le dénominateur.</b> Pour $1\leqslant k\leqslant n$ : $n + 1\leqslant n + k\leqslant2n$.</p>
+<p><b>Étape 3 : Encadrer le terme</b> (la fonction inverse est décroissante) :</p>
+$$\frac1{2n}\leqslant\frac1{n + k}\leqslant\frac1{n + 1}.$$
+<p><b>Étape 4 : Sommer les $n$ encadrements.</b></p>
+$$\cG{\frac12 = \frac n{2n}\leqslant\sum_{k=1}^n\frac1{n + k}\leqslant\frac n{n + 1}\lt1}.$$
 
 <h2 id="a-enonce">13. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
@@ -1721,10 +1933,23 @@ $$\frac n{2n} = \frac12\leqslant\sum_{k=1}^n\frac1{n + k}\leqslant\frac n{n + 1}
 </ul>
 <div class="sbox">$$\frac1{a + ib} = \frac{a - ib}{(a + ib)(a - ib)} = \frac{a - ib}{a^2 + b^2}.$$</div>
 <p class="ml">Exemple 1 : un produit</p>
-$$(2 + 3i)(1 - 4i) = 2 - 8i + 3i - 12\cO{i^2} = 2 - 5i + 12 = \cG{14 - 5i}.$$
+<p><b>Étape 1 : Rappel.</b> On développe comme avec des réels, puis $i^2 = -1$.</p>
+<p><b>Étape 2 : On développe</b> les quatre produits :</p>
+$$(2 + 3i)(1 - 4i) = 2\times1 + 2\times(-4i) + 3i\times1 + 3i\times(-4i) = 2 - 8i + 3i - 12\cO{i^2}.$$
+<p><b>Étape 3 : On remplace $i^2$ par $-1$</b> et on regroupe :</p>
+$$= 2 - 5i + 12 = \cG{14 - 5i}.$$
+
 <p class="ml">Exemple 2 : un quotient</p>
-$$\frac{2 + 3i}{1 - 2i} = \frac{(2 + 3i)\cO{(1 + 2i)}}{(1 - 2i)\cO{(1 + 2i)}} = \frac{2 + 4i + 3i + 6i^2}{1^2 + 2^2} = \frac{-4 + 7i}{5} = \cG{-\frac45 + \frac75i}.$$
-<p>Partie réelle $\cB{-\frac45}$, partie imaginaire $\cR{\frac75}$ (sans le $i$).</p>
+<p><b>Étape 1 : Rappel.</b> Pour diviser, on multiplie en haut et en bas par le conjugué du dénominateur : $(a + ib)(a - ib) = a^2 + b^2$.</p>
+<p><b>Étape 2 : Le conjugué du dénominateur.</b> $\overline{1 - 2i} = 1 + 2i$.</p>
+<p><b>Étape 3 : On multiplie.</b></p>
+$$\frac{2 + 3i}{1 - 2i} = \frac{(2 + 3i)\cO{(1 + 2i)}}{(1 - 2i)\cO{(1 + 2i)}}.$$
+<p><b>Étape 4 : Le numérateur.</b></p>
+$$(2 + 3i)(1 + 2i) = 2 + 4i + 3i + 6i^2 = -4 + 7i.$$
+<p><b>Étape 5 : Le dénominateur.</b> $1^2 + 2^2 = 5$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\frac{2 + 3i}{1 - 2i} = -\frac45 + \frac75i},\qquad\operatorname{Re} = \cB{-\frac45},\quad\operatorname{Im} = \cR{\frac75}.$$
+
 <p class="ml piege">Piège</p>
 <p>$\operatorname{Im}(3 - 2i) = -2$, pas $-2i$. Et on ne compare pas des complexes avec $\leqslant$.</p>
 
@@ -1732,8 +1957,14 @@ $$\frac{2 + 3i}{1 - 2i} = \frac{(2 + 3i)\cO{(1 + 2i)}}{(1 - 2i)\cO{(1 + 2i)}} = 
 <div class="sbox">$$\overline{z + z'} = \overline z + \overline{z'},\quad\overline{zz'} = \overline z\,\overline{z'},\quad\overline{\Big(\frac z{z'}\Big)} = \frac{\overline z}{\overline{z'}},\quad\operatorname{Re}z = \frac{z + \overline z}2,\quad\operatorname{Im}z = \frac{z - \overline z}{2i}.$$</div>
 <div class="sbox">$$z\in\mathbb R\iff\overline z = z,\qquad z\in i\mathbb R\iff\overline z = -z.$$</div>
 <p class="ml">Exemple : montrer qu'un nombre est réel sans le calculer</p>
-<p>Soit $z\in\mathbb U$, $z\neq-1$. Montrer que $w = \frac{1 - z}{1 + z}$ est imaginaire pur. On utilise $\overline z = \frac1z$ :</p>
-$$\overline w = \frac{1 - \overline z}{1 + \overline z} = \frac{1 - \frac1z}{1 + \frac1z}\ \underset{\cO{\times\frac zz}}{=}\ \frac{z - 1}{z + 1} = -\frac{1 - z}{1 + z} = -w\qquad\Longrightarrow\qquad\cG{w\in i\mathbb R}.$$
+<p><b>Étape 1 : Rappel.</b> $w\in i\mathbb R\iff\overline w = -w$. Et $z\in\mathbb U\iff\overline z = \frac1z$.</p>
+<p><b>Étape 2 : On conjugue $w$.</b> Le conjugué passe sur chaque morceau :</p>
+$$\overline w = \frac{1 - \overline z}{1 + \overline z} = \frac{1 - \frac1z}{1 + \frac1z}.$$
+<p><b>Étape 3 : On multiplie en haut et en bas par $\cO z$.</b></p>
+$$\overline w = \frac{z - 1}{z + 1}.$$
+<p><b>Étape 4 : On compare à $w$.</b></p>
+$$\frac{z - 1}{z + 1} = -\frac{1 - z}{1 + z} = -w.$$
+<p><b>Étape 5 : Conclusion.</b> $\overline w = -w$ : $\cG{w\ \text{est imaginaire pur}}$.</p>
 
 <h2 id="z-mod">4. Le module</h2>
 <div class="sbox">$$|zz'| = |z|\,|z'|,\quad\Big|\frac z{z'}\Big| = \frac{|z|}{|z'|},\quad|z^n| = |z|^n,\quad\big||z| - |z'|\big|\leqslant|z + z'|\leqslant|z| + |z'|.$$</div>
@@ -1743,9 +1974,18 @@ $$\overline w = \frac{1 - \overline z}{1 + \overline z} = \frac{1 - \frac1z}{1 +
 <li>Avec des sommes : $\big|\sum z_k\big|\leqslant\sum|z_k|$.</li>
 </ul>
 <p class="ml">Exemple : le module d'une puissance, sans développer</p>
-$$|1 + i| = \sqrt{1^2 + 1^2} = \sqrt2\qquad\Longrightarrow\qquad|(1 + i)^8| = (\sqrt2)^8 = \cG{16}.$$
+<p><b>Étape 1 : Rappel.</b> $|z^n| = |z|^n$ et $|a + ib| = \sqrt{a^2 + b^2}$.</p>
+<p><b>Étape 2 : Le module de $1 + i$.</b></p>
+$$|1 + i| = \sqrt{1^2 + 1^2} = \sqrt2.$$
+<p><b>Étape 3 : La puissance.</b></p>
+$$|(1 + i)^8| = (\sqrt2)^8 = 2^4 = \cG{16}.$$
+
 <p class="ml">Exemple : le module d'un quotient</p>
-$$\Big|\frac{3 + 4i}{1 - i}\Big| = \frac{|3 + 4i|}{|1 - i|} = \frac{\sqrt{9 + 16}}{\sqrt{1 + 1}} = \frac5{\sqrt2} = \cG{\frac{5\sqrt2}2}.$$
+<p><b>Étape 1 : Rappel.</b> $\Big|\frac z{z'}\Big| = \frac{|z|}{|z'|}$.</p>
+<p><b>Étape 2 : Les deux modules.</b></p>
+$$|3 + 4i| = \sqrt{9 + 16} = 5,\qquad|1 - i| = \sqrt{1 + 1} = \sqrt2.$$
+<p><b>Étape 3 : Le quotient</b>, en rendant le dénominateur rationnel :</p>
+$$\Big|\frac{3 + 4i}{1 - i}\Big| = \frac5{\sqrt2} = \cG{\frac{5\sqrt2}2}.$$
 
 <h2 id="z-u">5. Le cercle $\mathbb U$, Euler et Moivre</h2>
 <div class="sbox">$$e^{i\theta} = \cos\theta + i\sin\theta,\qquad e^{i\theta}e^{i\theta'} = e^{i(\theta + \theta')},\qquad\overline{e^{i\theta}} = e^{-i\theta} = \frac1{e^{i\theta}}.$$</div>
@@ -1769,15 +2009,37 @@ $$\Big|\frac{3 + 4i}{1 - i}\Big| = \frac{|3 + 4i|}{|1 - i|} = \frac{\sqrt{9 + 16
 <tr><td>$\sin\theta$</td><td>$0$</td><td>$\frac12$</td><td>$\frac{\sqrt2}2$</td><td>$\frac{\sqrt3}2$</td><td>$1$</td><td>$\frac{\sqrt3}2$</td><td>$\frac{\sqrt2}2$</td><td>$\frac12$</td><td>$0$</td></tr>
 </table>
 <p class="ml">Exemple 1 : $z = 1 + i\sqrt3$</p>
-$$\cB r = \sqrt{1^2 + (\sqrt3)^2} = \sqrt{1 + 3} = \cB2,\qquad z = \cB2\Big(\frac12 + i\frac{\sqrt3}2\Big).$$
-$$\cos\cR\theta = \frac12,\ \sin\cR\theta = \frac{\sqrt3}2 > 0\ \Longrightarrow\ \cR{\theta = \frac\pi3},\qquad\cG{z = 2e^{i\pi/3}}.$$
+<p><b>Étape 1 : Rappel.</b> $z = r(\cos\theta + i\sin\theta) = re^{i\theta}$ avec $r = |z|$.</p>
+<p><b>Étape 2 : Le module.</b></p>
+$$\cB r = \sqrt{1^2 + (\sqrt3)^2} = \sqrt{1 + 3} = \cB2.$$
+<p><b>Étape 3 : On factorise par $r$.</b></p>
+$$z = \cB2\Big(\frac12 + i\frac{\sqrt3}2\Big).$$
+<p><b>Étape 4 : On reconnaît l'angle.</b> $\cos\theta = \frac12$ et $\sin\theta = \frac{\sqrt3}2 > 0$ : $\cR{\theta = \frac\pi3}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{z = 2e^{i\pi/3}}$.</p>
+
 <p class="ml">Exemple 2 : $z = -1 + i$</p>
-$$\cB r = \sqrt{(-1)^2 + 1^2} = \cB{\sqrt2},\qquad z = \cB{\sqrt2}\Big(-\frac1{\sqrt2} + i\frac1{\sqrt2}\Big) = \sqrt2\Big(-\frac{\sqrt2}2 + i\frac{\sqrt2}2\Big).$$
-$$\cos\cR\theta = -\frac{\sqrt2}2,\ \sin\cR\theta = \frac{\sqrt2}2 > 0\ \Longrightarrow\ \cR{\theta = \frac{3\pi}4},\qquad\cG{z = \sqrt2\,e^{3i\pi/4}}.$$
+<p><b>Étape 1 : Rappel.</b> $z = re^{i\theta}$ avec $r = |z|$, $\cos\theta = \frac ar$, $\sin\theta = \frac br$.</p>
+<p><b>Étape 2 : Le module.</b></p>
+$$\cB r = \sqrt{(-1)^2 + 1^2} = \cB{\sqrt2}.$$
+<p><b>Étape 3 : On factorise.</b></p>
+$$z = \sqrt2\Big(-\frac1{\sqrt2} + i\frac1{\sqrt2}\Big) = \sqrt2\Big(-\frac{\sqrt2}2 + i\frac{\sqrt2}2\Big).$$
+<p><b>Étape 4 : L'angle.</b> $\cos\theta = -\frac{\sqrt2}2$ et $\sin\theta = \frac{\sqrt2}2 > 0$ (demi-plan du haut) : $\cR{\theta = \frac{3\pi}4}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{z = \sqrt2\,e^{3i\pi/4}}$.</p>
+
 <p class="ml">Exemple 3 : $z = \sqrt3 - i$</p>
-$$\cB r = \sqrt{3 + 1} = \cB2,\qquad\cos\cR\theta = \frac{\sqrt3}2,\ \sin\cR\theta = -\frac12\lt0\ \Longrightarrow\ \cR{\theta = -\frac\pi6},\qquad\cG{z = 2e^{-i\pi/6}}.$$
+<p><b>Étape 1 : Rappel.</b> Le signe de $\sin\theta$ donne le demi-plan : négatif, l'angle est dans $\left]-\pi, 0\right[$.</p>
+<p><b>Étape 2 : Le module.</b> $\cB r = \sqrt{3 + 1} = \cB2$.</p>
+<p><b>Étape 3 : On factorise.</b> $z = 2\Big(\frac{\sqrt3}2 - \frac12i\Big)$.</p>
+<p><b>Étape 4 : L'angle.</b> $\cos\theta = \frac{\sqrt3}2$, $\sin\theta = -\frac12\lt0$ : $\cR{\theta = -\frac\pi6}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{z = 2e^{-i\pi/6}}$.</p>
+
 <p class="ml">Exemple 4 : une puissance, grâce à la forme exponentielle</p>
-$$(1 + i\sqrt3)^{6} = \big(2e^{i\pi/3}\big)^6 = 2^6e^{6i\pi/3} = 64\,e^{2i\pi} = \cG{64}.$$
+<p><b>Étape 1 : Rappel.</b> $(re^{i\theta})^n = r^ne^{in\theta}$, et $e^{2ik\pi} = 1$.</p>
+<p><b>Étape 2 : Forme exponentielle.</b> Exemple 1 : $1 + i\sqrt3 = 2e^{i\pi/3}$.</p>
+<p><b>Étape 3 : La puissance.</b></p>
+$$(1 + i\sqrt3)^6 = 2^6e^{6i\pi/3} = 64\,e^{2i\pi}.$$
+<p><b>Étape 4 : Conclusion.</b> $e^{2i\pi} = 1$ : $\cG{(1 + i\sqrt3)^6 = 64}$.</p>
+
 <p class="ml">Les règles sur l'argument ($z, z'\neq0$)</p>
 $$\arg(zz')\equiv\arg z + \arg z',\qquad\arg\Big(\frac z{z'}\Big)\equiv\arg z - \arg z',\qquad\arg(z^n)\equiv n\arg z,\qquad\arg\overline z\equiv-\arg z\quad[2\pi].$$
 <p class="ml piege">Piège</p>
@@ -1789,17 +2051,26 @@ $$\arg(zz')\equiv\arg z + \arg z',\qquad\arg\Big(\frac z{z'}\Big)\equiv\arg z - 
 <div class="sbox">$$e^{ip} + e^{iq} = e^{i\frac{p + q}2}\Big(e^{i\frac{p - q}2} + e^{-i\frac{p - q}2}\Big) = 2\cos\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2},\qquad e^{ip} - e^{iq} = 2i\sin\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2}.$$</div>
 <p>Cas fréquents : $1 + e^{i\theta} = 2\cos\frac\theta2\,e^{i\theta/2}$ et $1 - e^{i\theta} = -2i\sin\frac\theta2\,e^{i\theta/2}$.</p>
 <p class="ml">Exemple 1 : module et argument de $1 + e^{i\theta}$, $\theta\in\left]-\pi, \pi\right[$</p>
-$$1 + e^{i\theta} = \cO{e^{i\theta/2}}\big(e^{-i\theta/2} + e^{i\theta/2}\big) = 2\cos\Big(\frac\theta2\Big)\,e^{i\theta/2}.$$
-<p>Comme $\frac\theta2\in\left]-\frac\pi2, \frac\pi2\right[$, $\cos\frac\theta2 > 0$ : c'est bien une forme exponentielle.</p>
+<p><b>Étape 1 : Rappel.</b> Angle moitié : $1 + e^{i\theta} = e^{i\theta/2}\big(e^{-i\theta/2} + e^{i\theta/2}\big)$ et $e^{ix} + e^{-ix} = 2\cos x$.</p>
+<p><b>Étape 2 : On factorise par $\cO{e^{i\theta/2}}$.</b></p>
+$$1 + e^{i\theta} = e^{i\theta/2}\big(e^{-i\theta/2} + e^{i\theta/2}\big).$$
+<p><b>Étape 3 : Euler.</b></p>
+$$1 + e^{i\theta} = 2\cos\Big(\frac\theta2\Big)\,e^{i\theta/2}.$$
+<p><b>Étape 4 : Le signe du cosinus.</b> $\theta\in\left]-\pi, \pi\right[$, donc $\frac\theta2\in\left]-\frac\pi2, \frac\pi2\right[$ et $\cos\frac\theta2 > 0$ : c'est une vraie forme exponentielle.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{|1 + e^{i\theta}| = 2\cos\frac\theta2},\qquad\cG{\arg(1 + e^{i\theta})\equiv\frac\theta2\ [2\pi]}.$$
-<p>Si $\theta\in\left]\pi, 3\pi\right[$, alors $\cos\frac\theta2\lt0$ : le module est $-2\cos\frac\theta2$ et l'argument $\frac\theta2 + \pi$.</p>
+<p>Remarque : si $\theta\in\left]\pi, 3\pi\right[$, le cosinus est négatif : le module vaut $-2\cos\frac\theta2$ et l'argument $\frac\theta2 + \pi$.</p>
+
 <p class="ml">Exemple 2 : $\sum_{k=0}^n\cos(k\theta)$, avec $\theta\not\equiv0\ [2\pi]$</p>
-<p><b>Étape 1.</b> C'est la partie réelle d'une somme géométrique de raison $e^{i\theta}\neq1$ :</p>
+<p><b>Étape 1 : Rappel.</b> $\cos(k\theta) = \operatorname{Re}(e^{ik\theta})$, somme géométrique $\sum_{k=0}^nq^k = \frac{1 - q^{n+1}}{1 - q}$, et $1 - e^{ix} = -2i\sin\frac x2\,e^{ix/2}$.</p>
+<p><b>Étape 2 : Somme géométrique</b> de raison $e^{i\theta}\neq1$ :</p>
 $$\sum_{k=0}^n\cos(k\theta) = \operatorname{Re}\Big(\sum_{k=0}^n(e^{i\theta})^k\Big) = \operatorname{Re}\Big(\frac{1 - e^{i(n+1)\theta}}{1 - e^{i\theta}}\Big).$$
-<p><b>Étape 2.</b> Angle moitié en haut et en bas :</p>
-$$\frac{1 - e^{i(n+1)\theta}}{1 - e^{i\theta}} = \frac{\cancel{-2i}\,\sin\frac{(n+1)\theta}2\,e^{i\frac{(n+1)\theta}2}}{\cancel{-2i}\,\sin\frac\theta2\,e^{i\frac\theta2}} = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\,e^{i\frac{n\theta}2}.$$
-<p><b>Étape 3.</b> On prend la partie réelle :</p>
-$$\cG{\sum_{k=0}^n\cos(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\cos\Big(\frac{n\theta}2\Big)},\qquad\text{et avec}\ \operatorname{Im}:\ \sum_{k=0}^n\sin(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\sin\Big(\frac{n\theta}2\Big).$$
+<p><b>Étape 3 : Angle moitié en haut et en bas.</b></p>
+$$\frac{1 - e^{i(n+1)\theta}}{1 - e^{i\theta}} = \frac{\cancel{-2i}\,\sin\frac{(n+1)\theta}2\,e^{i\frac{(n+1)\theta}2}}{\cancel{-2i}\,\sin\frac\theta2\,e^{i\frac\theta2}}.$$
+<p><b>Étape 4 : On simplifie les exponentielles.</b> $\frac{(n + 1)\theta}2 - \frac\theta2 = \frac{n\theta}2$ :</p>
+$$= \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\,e^{i\frac{n\theta}2}.$$
+<p><b>Étape 5 : La partie réelle.</b></p>
+$$\cG{\sum_{k=0}^n\cos(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\cos\Big(\frac{n\theta}2\Big)}.$$
 
 <h2 id="z-trigo">8. Retrouver les formules de trigonométrie</h2>
 <p class="ml">Formules d'addition</p>
@@ -1818,9 +2089,15 @@ $$\cos a\cos b = \frac12\big(\cos(a + b) + \cos(a - b)\big),\qquad\sin a\sin b =
 <li>Garder la partie réelle (ou imaginaire), et remplacer $\sin^2\theta$ par $1 - \cos^2\theta$.</li>
 </ol>
 <p class="ml">Exemple : $\cos(3\theta)$ et $\sin(3\theta)$</p>
-<p>On note $c = \cos\theta$ et $s = \sin\theta$. Ligne $n = 3$ du triangle : $1, 3, 3, 1$.</p>
-$$(c + is)^3 = c^3 + 3c^2(is) + 3c(is)^2 + (is)^3 = c^3 + 3ic^2s - 3cs^2 - is^3 = \cB{(c^3 - 3cs^2)} + i\cR{(3c^2s - s^3)}.$$
-$$\cos(3\theta) = c^3 - 3c(1 - c^2) = \cG{4\cos^3\theta - 3\cos\theta},\qquad\sin(3\theta) = 3(1 - s^2)s - s^3 = \cG{3\sin\theta - 4\sin^3\theta}.$$
+<p><b>Étape 1 : Rappel.</b> Moivre : $\cos(3\theta) + i\sin(3\theta) = (\cos\theta + i\sin\theta)^3$. On note $c = \cos\theta$, $s = \sin\theta$.</p>
+<p><b>Étape 2 : Binôme</b>, ligne $1, 3, 3, 1$ :</p>
+$$(c + is)^3 = c^3 + 3c^2(is) + 3c(is)^2 + (is)^3.$$
+<p><b>Étape 3 : Les puissances de $i$.</b> $i^2 = -1$, $i^3 = -i$ :</p>
+$$= c^3 + 3ic^2s - 3cs^2 - is^3 = \cB{(c^3 - 3cs^2)} + i\cR{(3c^2s - s^3)}.$$
+<p><b>Étape 4 : $\cos(3\theta)$</b>, partie réelle, avec $s^2 = 1 - c^2$ :</p>
+$$\cos(3\theta) = c^3 - 3c(1 - c^2) = \cG{4\cos^3\theta - 3\cos\theta}.$$
+<p><b>Étape 5 : $\sin(3\theta)$</b>, partie imaginaire, avec $c^2 = 1 - s^2$ :</p>
+$$\sin(3\theta) = 3(1 - s^2)s - s^3 = \cG{3\sin\theta - 4\sin^3\theta}.$$
 
 <h2 id="z-lin">10. Linéariser</h2>
 <p>Linéariser $\cos^n x\sin^m x$, c'est l'écrire comme une somme de $\cos(kx)$ et de $\sin(kx)$, sans puissance. C'est indispensable pour en trouver une primitive.</p>
@@ -1832,23 +2109,49 @@ $$\cos(3\theta) = c^3 - 3c(1 - c^2) = \cG{4\cos^3\theta - 3\cos\theta},\qquad\si
 </ol>
 <p><b>Contrôle de parité</b> : si la fonction est paire, il ne reste que des cosinus ; si elle est impaire, que des sinus.</p>
 <p class="ml">Exemple 1 : $\cos^3x$</p>
-$$\cos^3x = \Big(\frac{e^{ix} + e^{-ix}}2\Big)^3 = \frac18\Big(e^{3ix} + 3e^{2ix}e^{-ix} + 3e^{ix}e^{-2ix} + e^{-3ix}\Big) = \frac18\Big(e^{3ix} + 3e^{ix} + 3e^{-ix} + e^{-3ix}\Big).$$
-<p>On regroupe les exponentielles opposées :</p>
-$$\cos^3x = \frac18\Big(\cB{\big(e^{3ix} + e^{-3ix}\big)} + 3\cR{\big(e^{ix} + e^{-ix}\big)}\Big) = \frac18\big(\cB{2\cos3x} + 3\cdot\cR{2\cos x}\big) = \cG{\frac14\cos3x + \frac34\cos x}.$$
+<p><b>Étape 1 : Rappel.</b> Euler : $\cos x = \frac{e^{ix} + e^{-ix}}2$, et $e^{ikx} + e^{-ikx} = 2\cos(kx)$.</p>
+<p><b>Étape 2 : On remplace.</b></p>
+$$\cos^3x = \Big(\frac{e^{ix} + e^{-ix}}2\Big)^3 = \frac18\big(e^{ix} + e^{-ix}\big)^3.$$
+<p><b>Étape 3 : Binôme</b> (ligne $1, 3, 3, 1$), en ajoutant les exposants :</p>
+$$\big(e^{ix} + e^{-ix}\big)^3 = e^{3ix} + 3e^{2ix}e^{-ix} + 3e^{ix}e^{-2ix} + e^{-3ix} = e^{3ix} + 3e^{ix} + 3e^{-ix} + e^{-3ix}.$$
+<p><b>Étape 4 : On regroupe</b> les exponentielles opposées :</p>
+$$= \cB{\big(e^{3ix} + e^{-3ix}\big)} + 3\cR{\big(e^{ix} + e^{-ix}\big)} = \cB{2\cos3x} + 3\cdot\cR{2\cos x}.$$
+<p><b>Étape 5 : On divise par $8$.</b></p>
+$$\cG{\cos^3x = \frac14\cos3x + \frac34\cos x}.$$
 <p>Application : $\int\cos^3x\,dx = \frac1{12}\sin3x + \frac34\sin x + C$.</p>
+
 <p class="ml">Exemple 2 : $\sin^3x$</p>
-<p>On note que $(2i)^3 = 8i^3 = -8i$.</p>
-$$\sin^3x = \frac{\big(e^{ix} - e^{-ix}\big)^3}{(2i)^3} = \frac{e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}}{-8i}.$$
-<p>On regroupe, avec $\cO{-3}$ en facteur pour garder $e^{ix}$ en premier :</p>
-$$\sin^3x = \frac{\cB{\big(e^{3ix} - e^{-3ix}\big)}\cO{-3}\cR{\big(e^{ix} - e^{-ix}\big)}}{-8i} = \frac{\cB{2i\sin3x} - 3\cdot\cR{2i\sin x}}{-8i} = \cG{\frac34\sin x - \frac14\sin3x}.$$
+<p><b>Étape 1 : Rappel.</b> $\sin x = \frac{e^{ix} - e^{-ix}}{2i}$, et $e^{ikx} - e^{-ikx} = 2i\sin(kx)$.</p>
+<p><b>Étape 2 : On remplace</b>, avec $(2i)^3 = 8i^3 = -8i$ :</p>
+$$\sin^3x = \frac{\big(e^{ix} - e^{-ix}\big)^3}{-8i}.$$
+<p><b>Étape 3 : Binôme</b> avec des signes alternés :</p>
+$$\big(e^{ix} - e^{-ix}\big)^3 = e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}.$$
+<p><b>Étape 4 : On regroupe</b>, en mettant $\cO{-3}$ en facteur pour garder $e^{ix}$ en premier :</p>
+$$= \cB{\big(e^{3ix} - e^{-3ix}\big)}\cO{-3}\cR{\big(e^{ix} - e^{-ix}\big)} = \cB{2i\sin3x} - 3\cdot\cR{2i\sin x}.$$
+<p><b>Étape 5 : On divise par $-8i$.</b></p>
+$$\cG{\sin^3x = \frac34\sin x - \frac14\sin3x}.$$
+
 <p class="ml">Exemple 3 : $\cos^2x\sin^2x$, un produit</p>
-<p>On développe complètement avant de regrouper :</p>
-$$\cos^2x\sin^2x = \frac{(e^{ix} + e^{-ix})^2(e^{ix} - e^{-ix})^2}{4\cdot(2i)^2} = \frac{\big((e^{ix} + e^{-ix})(e^{ix} - e^{-ix})\big)^2}{-16} = \frac{\big(e^{2ix} - e^{-2ix}\big)^2}{-16}.$$
-$$= \frac{e^{4ix} - 2 + e^{-4ix}}{-16} = \frac{2\cos4x - 2}{-16} = \cG{\frac18 - \frac18\cos4x}.$$
-<p>Plus rapide : $\cos x\sin x = \frac12\sin2x$, donc $\cos^2x\sin^2x = \frac14\sin^22x = \frac14\cdot\frac{1 - \cos4x}2$. On retrouve le même résultat.</p>
+<p><b>Étape 1 : Rappel.</b> Pour un produit, on développe <b>complètement</b> les exponentielles avant de regrouper.</p>
+<p><b>Étape 2 : On remplace</b>, avec $2^2\cdot(2i)^2 = 4\times(-4) = -16$ :</p>
+$$\cos^2x\sin^2x = \frac{(e^{ix} + e^{-ix})^2(e^{ix} - e^{-ix})^2}{-16} = \frac{\big((e^{ix} + e^{-ix})(e^{ix} - e^{-ix})\big)^2}{-16}.$$
+<p><b>Étape 3 : Le produit intérieur</b>, identité $(a + b)(a - b) = a^2 - b^2$ :</p>
+$$(e^{ix} + e^{-ix})(e^{ix} - e^{-ix}) = e^{2ix} - e^{-2ix}.$$
+<p><b>Étape 4 : Le carré.</b></p>
+$$\big(e^{2ix} - e^{-2ix}\big)^2 = e^{4ix} - 2 + e^{-4ix} = 2\cos4x - 2.$$
+<p><b>Étape 5 : On divise par $-16$.</b></p>
+$$\cG{\cos^2x\sin^2x = \frac18 - \frac18\cos4x}.$$
+<p>Remarque : plus rapide avec $\cos x\sin x = \frac12\sin2x$, donc $\frac14\sin^22x = \frac14\cdot\frac{1 - \cos4x}2$.</p>
+
 <p class="ml">Exemple 4 : $\cos^3x\sin^3x$</p>
-$$\cos^3x\sin^3x = (\cos x\sin x)^3 = \frac18\sin^3(2x) = \frac18\Big(\frac34\sin2x - \frac14\sin6x\Big) = \cG{\frac3{32}\sin2x - \frac1{32}\sin6x}.$$
-<p>On a réutilisé l'exemple 2 avec $2x$ à la place de $x$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cos x\sin x = \frac12\sin2x$, et (exemple 2) $\sin^3u = \frac34\sin u - \frac14\sin3u$.</p>
+<p><b>Étape 2 : On regroupe en un seul cube.</b></p>
+$$\cos^3x\sin^3x = (\cos x\sin x)^3 = \Big(\frac12\sin2x\Big)^3 = \frac18\sin^3(2x).$$
+<p><b>Étape 3 : On applique l'exemple 2 avec $u = 2x$.</b></p>
+$$\frac18\Big(\frac34\sin2x - \frac14\sin6x\Big).$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\cos^3x\sin^3x = \frac3{32}\sin2x - \frac1{32}\sin6x}.$$
+
 <p class="ml">Les formules à connaître par cœur</p>
 $$\cos^2x = \frac{1 + \cos2x}2,\qquad\sin^2x = \frac{1 - \cos2x}2,\qquad\cos x\sin x = \frac12\sin2x.$$
 <div data-mlab="lin"></div>
@@ -1861,29 +2164,46 @@ $$\cos^2x = \frac{1 + \cos2x}2,\qquad\sin^2x = \frac{1 - \cos2x}2,\qquad\cos x\s
 <p>On cherche $\delta = x + iy$ avec $\delta^2 = \Delta = a + ib$. On a $\delta^2 = (x^2 - y^2) + 2ixy$, et $|\delta|^2 = |\Delta|$ donne une troisième équation :</p>
 <div class="sbox">$$\left\{\begin{aligned}x^2 - y^2 &= a\quad(\text{parties réelles})\\x^2 + y^2 &= |\Delta|\quad(\text{modules})\\2xy &= b\quad(\text{parties imaginaires, pour le signe})\end{aligned}\right.$$</div>
 <p class="ml">Exemple : les racines carrées de $\Delta = 3 + 4i$</p>
-$$|\Delta| = \sqrt{3^2 + 4^2} = 5.\qquad\left\{\begin{aligned}x^2 - y^2 &= 3\\x^2 + y^2 &= 5\\2xy &= 4\end{aligned}\right.$$
-<p>On ajoute puis on soustrait les deux premières lignes :</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $\delta = x + iy$ avec $\delta^2 = \Delta$ : parties réelles, modules ($|\delta|^2 = |\Delta|$), et parties imaginaires pour le signe.</p>
+<p><b>Étape 2 : Le module de $\Delta$.</b> $|3 + 4i| = \sqrt{9 + 16} = 5$.</p>
+<p><b>Étape 3 : Le système.</b></p>
+$$\left\{\begin{aligned}x^2 - y^2 &= 3\\x^2 + y^2 &= 5\\2xy &= 4\end{aligned}\right.$$
+<p><b>Étape 4 : On ajoute, puis on soustrait</b> les deux premières lignes :</p>
 $$2x^2 = 8\ \Longrightarrow\ x^2 = 4,\qquad2y^2 = 2\ \Longrightarrow\ y^2 = 1.$$
-<p>Donc $x = \pm2$ et $y = \pm1$. La troisième ligne donne $xy = 2 > 0$ : $x$ et $y$ ont le <b>même signe</b>.</p>
-$$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.\qquad\text{Contrôle}:\ (2 + i)^2 = 4 + 4i + i^2 = 3 + 4i.$$
+<p><b>Étape 5 : Le signe.</b> $x = \pm2$, $y = \pm1$, et $xy = 2 > 0$ : même signe.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.$$
+<p>Contrôle : $(2 + i)^2 = 4 + 4i + i^2 = 3 + 4i$.</p>
+
 <div data-mlab="rac2"></div>
 
 <h2 id="z-eq2">12. Les équations du second degré</h2>
 <div class="sbox">$$az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta:\qquad z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big).$$</div>
 <div class="sbox">$$\text{Somme et produit}:\ z_1 + z_2 = -\frac ba,\qquad z_1z_2 = \frac ca.$$</div>
 <p class="ml">Exemple 1 : coefficients réels, $\Delta\lt0$</p>
-$$z^2 - 2z + 5 = 0:\quad\Delta = 4 - 20 = -16 = (4i)^2,\quad z = \frac{2\pm4i}2 = \cV{1\pm2i}.$$
+<p><b>Étape 1 : Rappel.</b> $az^2 + bz + c = 0$ : $\Delta = b^2 - 4ac$, puis $z = \frac{-b\pm\delta}{2a}$ avec $\delta^2 = \Delta$.</p>
+$$z^2 - 2z + 5 = 0.$$
+<p><b>Étape 2 : Le discriminant.</b> $\Delta = 4 - 20 = -16$.</p>
+<p><b>Étape 3 : Une racine carrée.</b> $-16 = (4i)^2$, donc $\delta = 4i$.</p>
+<p><b>Étape 4 : Les racines.</b></p>
+$$z = \frac{2\pm4i}2 = \cV{1\pm2i}.$$
+
 <p class="ml">Exemple 2 : coefficients complexes</p>
+<p><b>Étape 1 : Rappel.</b> $\Delta = b^2 - 4ac$, $\delta^2 = \Delta$, $z = \frac{-b\pm\delta}{2a}$. Contrôle : $z_1 + z_2 = -\frac ba$ et $z_1z_2 = \frac ca$.</p>
 $$z^2 - 3z + 3 + i = 0.$$
-<p><b>1. Le discriminant.</b></p>
+<p><b>Étape 2 : Le discriminant.</b></p>
 $$\Delta = (-3)^2 - 4(3 + i) = 9 - 12 - 4i = -3 - 4i.$$
-<p><b>2. Une racine carrée de $\Delta$</b> (méthode 2, avec $|\Delta| = \sqrt{9 + 16} = 5$) :</p>
+<p><b>Étape 3 : Une racine carrée de $\Delta$.</b> $|\Delta| = \sqrt{9 + 16} = 5$ :</p>
 $$\left\{\begin{aligned}x^2 - y^2 &= -3\\x^2 + y^2 &= 5\\2xy &= -4\end{aligned}\right.\ \Longrightarrow\ x^2 = 1,\ y^2 = 4,\ xy\lt0\ \Longrightarrow\ \delta = 1 - 2i.$$
-<p><b>3. Les racines.</b></p>
+<p><b>Étape 4 : Les racines.</b></p>
 $$z_1 = \frac{3 + (1 - 2i)}2 = \frac{4 - 2i}2 = \cV{2 - i},\qquad z_2 = \frac{3 - (1 - 2i)}2 = \frac{2 + 2i}2 = \cV{1 + i}.$$
-<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca$.</p>
+<p><b>Étape 5 : Contrôle.</b> $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca$.</p>
+
 <p class="ml">Exemple 3 : avec la somme et le produit</p>
-<p>Trouver deux complexes de somme $s$ et de produit $p$ revient à résoudre $z^2 - sz + p = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $z_1, z_2$ sont les racines de $z^2 - (z_1 + z_2)z + z_1z_2$.</p>
+<p><b>Étape 2 : On forme l'équation.</b> Somme $s$ et produit $p$ donnés : $z^2 - sz + p = 0$.</p>
+<p><b>Étape 3 : On la résout</b> avec $\Delta = s^2 - 4p$, comme dans les exemples précédents.</p>
+<p>Exemple : somme $2$ et produit $5$ donnent $z^2 - 2z + 5 = 0$, donc $\cG{1 + 2i}$ et $\cG{1 - 2i}$.</p>
 
 <h2 id="z-racn">13. Les racines $n$-ièmes</h2>
 <p class="ml">Les racines $n$-ièmes de l'unité</p>
@@ -1896,12 +2216,14 @@ $$j = e^{\frac{2i\pi}3} = -\frac12 + i\frac{\sqrt3}2,\qquad j^3 = 1,\qquad1 + j 
 <div class="sbox">$$z^n = a\iff z = \cB{r^{1/n}}\,e^{i\frac{\cR\theta + 2k\pi}n},\quad k\in[\![0, n - 1]\!].$$</div>
 <p>On pose $z = \rho e^{i\varphi}$ et on identifie modules et arguments : $\rho^n = r$ et $n\varphi\equiv\theta\ [2\pi]$.</p>
 <p class="ml">Exemple : $z^3 = 8i$</p>
-<p><b>1.</b> $8i = 8e^{i\pi/2}$. On pose $z = \rho e^{i\varphi}$, donc $z^3 = \rho^3e^{3i\varphi}$.</p>
+<p><b>Étape 1 : Rappel.</b> On pose $z = \rho e^{i\varphi}$, puis on identifie modules et arguments : $\rho^n = r$, $n\varphi = \theta + 2k\pi$.</p>
+<p><b>Étape 2 : Forme exponentielle de $8i$.</b> $8i = 8e^{i\pi/2}$.</p>
+<p><b>Étape 3 : On identifie.</b> $z^3 = \rho^3e^{3i\varphi}$ :</p>
 $$\left\{\begin{aligned}\rho^3 &= 8\\3\varphi &= \frac\pi2 + 2k\pi\end{aligned}\right.\iff\left\{\begin{aligned}\rho &= 2\\\varphi &= \frac\pi6 + \frac{2k\pi}3,\quad k\in\{0, 1, 2\}\end{aligned}\right.$$
-<p><b>2.</b> Les trois racines :</p>
+<p><b>Étape 4 : Les trois racines.</b></p>
 $$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \cV{\sqrt3 + i}\\k = 1&:\ 2e^{5i\pi/6} = 2\Big(-\frac{\sqrt3}2 + \frac i2\Big) = \cV{-\sqrt3 + i}\\k = 2&:\ 2e^{3i\pi/2} = \cV{-2i}\end{aligned}$$
-<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0$.</p>
-<p><b>Astuce</b> : si $z_0$ est une racine, les autres sont $z_0\,\omega$ avec $\omega\in\mathbb U_n$.</p>
+<p><b>Étape 5 : Contrôle.</b> La somme vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$ (triangle équilatéral centré en $0$).</p>
+
 <div data-mlab="racn"></div>
 
 <h2 id="z-geo">14. Un peu de géométrie</h2>
@@ -1914,7 +2236,12 @@ $$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \
 <li>$ABC$ équilatéral direct $\iff\frac{c - a}{b - a} = e^{i\pi/3}$.</li>
 </ul>
 <p class="ml">Exemple</p>
-<p>Avec $a = 1$, $b = 2 + i$, $c = 2i$ : $\dfrac{c - a}{b - a} = \dfrac{-1 + 2i}{1 + i} = \dfrac{(-1 + 2i)(1 - i)}{2} = \dfrac{1 + 3i}2$. Ce nombre n'est ni réel ni imaginaire pur : les points ne sont ni alignés, ni en angle droit en $A$.</p>
+<p><b>Étape 1 : Rappel.</b> $A, B, C$ alignés $\iff\frac{c - a}{b - a}\in\mathbb R$, et $(AB)\perp(AC)\iff\frac{c - a}{b - a}\in i\mathbb R$.</p>
+<p><b>Étape 2 : Le quotient.</b> Avec $a = 1$, $b = 2 + i$, $c = 2i$ :</p>
+$$\frac{c - a}{b - a} = \frac{-1 + 2i}{1 + i}.$$
+<p><b>Étape 3 : On multiplie par le conjugué.</b></p>
+$$\frac{(-1 + 2i)(1 - i)}{(1 + i)(1 - i)} = \frac{-1 + i + 2i - 2i^2}2 = \frac{1 + 3i}2.$$
+<p><b>Étape 4 : Conclusion.</b> Ni réel, ni imaginaire pur : $\cG{\text{ni alignés, ni angle droit en}\ A}$.</p>
 
 <h2 id="z-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
