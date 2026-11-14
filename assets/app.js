@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1912,6 +1912,130 @@ const QCPX = [
   ["$\\arg(z + z') = \\arg z + \\arg z'$.", false, "Faux : c'est vrai pour le produit $zz'$, pas pour la somme."],
   ["Si $z\\in\\mathbb U$, alors $\\overline z = \\frac1z$.", true, "Vrai : $z\\overline z = |z|^2 = 1$."],
   ["$1 + e^{i\\theta} = 2\\cos\\frac\\theta2\\,e^{i\\theta/2}$, donc $|1 + e^{i\\theta}| = 2\\cos\\frac\\theta2$ pour tout $\\theta$.", false, "Faux : seulement si $\\cos\\frac\\theta2\\geqslant0$. Sinon le module est $-2\\cos\\frac\\theta2$."]
+];
+
+/* ---------- Labos des Méthodes « Intégration » et « Séries numériques » ---------- */
+/* Sommes de Riemann : rectangles, curseur n */
+function mlRiemann(host) {
+  const F = [
+    { t: "x^2", f: x => x * x, I: 1 / 3, It: "\\frac13" },
+    { t: "\\frac1{1 + x^2}", f: x => 1 / (1 + x * x), I: Math.PI / 4, It: "\\frac\\pi4" },
+    { t: "\\sqrt x", f: x => Math.sqrt(x), I: 2 / 3, It: "\\frac23" },
+    { t: "e^x", f: x => Math.exp(x), I: Math.E - 1, It: "e - 1" }
+  ];
+  let fi = 1, n = 6, side = "d";
+  const W = 520, H = 260, X = x => 40 + x * (W - 60), Y = (y, M) => H - 30 - y / M * (H - 50);
+  const draw = () => {
+    const { f, t, I, It } = F[fi], M = Math.max(f(0), f(1)) * 1.08;
+    let S = 0, rects = "";
+    for (let k = 0; k < n; k++) { const x = side === "d" ? (k + 1) / n : k / n, h = f(x); S += h / n; rects += `<rect x="${X(k / n).toFixed(1)}" y="${Y(h, M).toFixed(1)}" width="${(X((k + 1) / n) - X(k / n)).toFixed(1)}" height="${(Y(0, M) - Y(h, M)).toFixed(1)}" class="rr"/>`; }
+    let path = ""; for (let i = 0; i <= 100; i++) { const x = i / 100; path += `${i ? "L" : "M"}${X(x).toFixed(1)},${Y(f(x), M).toFixed(1)}`; }
+    host.innerHTML = `<p class="mlt">Sommes de Riemann : fais varier $n$</p><div class="rmctl"><div class="mlseg">${F.map((g, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${g.t}$</button>`).join("")}</div><div class="mlseg"><button type="button" data-s="g" aria-pressed="${side === "g"}">rectangles à gauche</button><button type="button" data-s="d" aria-pressed="${side === "d"}">à droite</button></div><label class="rmn">$n = ${n}$ <input type="range" min="1" max="60" value="${n}" data-n aria-label="Nombre de rectangles"></label></div>
+<svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Rectangles sous la courbe">${rects}<line x1="${X(0)}" y1="${Y(0, M)}" x2="${X(1)}" y2="${Y(0, M)}" class="ax"/><line x1="${X(0)}" y1="${Y(0, M)}" x2="${X(0)}" y2="16" class="ax"/><path d="${path}" class="cu"/><text x="${X(1) - 4}" y="${Y(0, M) + 18}" class="tx">1</text><text x="${X(0) - 4}" y="${Y(0, M) + 18}" class="tx">0</text></svg>
+<p class="mlcalc">$$S_{${n}} = \\frac1{${n}}\\sum_{k=${side === "d" ? 1 : 0}}^{${side === "d" ? n : n - 1}}f\\Big(\\frac k{${n}}\\Big) \\approx ${S.toFixed(5).replace(".", "{,}")},\\qquad\\int_0^1${t}\\,dx = ${It}\\approx${I.toFixed(5).replace(".", "{,}")},\\qquad\\text{écart}\\approx${Math.abs(S - I).toFixed(5).replace(".", "{,}")}$$</p><p class="mlnote">Multiplie $n$ par $2$ : l'écart est à peu près divisé par $2$, il est en $\\frac1n$.</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    $$("[data-s]", host).forEach(b => b.addEventListener("click", () => { side = b.dataset.s; draw(); }));
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+/* IPP pas à pas */
+function mlIpp(host) {
+  const gen = () => { if (rnd(0, 1)) { let p = 0; while (!p) p = rnd(-3, 3); const as = [1, 2, -1, 3]; return { kind: 0, p, q: rnd(-3, 3), a: as[rnd(0, 3)] }; } return { kind: 1, k: rnd(0, 3) }; };
+  const build = e => {
+    if (e.kind === 0) {
+      const { p, q, a } = e, P = fsum([[p, "x"], [q, ""]]), ea = exT(a).replace(/t/g, "x"), e1 = a === 1 ? "e" : `e^{${a}}`;
+      const ce = fadd(Fr(p + q, a), Fr(-p, a * a)), c0 = fadd(Fr(-q, a), Fr(p, a * a));
+      return [`$$I = \\int_0^1(${P})\\,${ea}\\,dx$$`,
+        `<p class="mlstep">1. On dérive le polynôme, on intègre l'exponentielle :</p>$$\\left\\{\\begin{aligned}\\cB{u(x)} &= \\cB{${P}} & \\cB{u'(x)} &= \\cB{${p}}\\\\\\cR{v'(x)} &= \\cR{${ea}} & \\cR{v(x)} &= \\cR{${fsum([[Fr(1, a), ea]])}}\\end{aligned}\\right.$$`,
+        `<p class="mlstep">2. La formule :</p>$$I = \\Big[\\cB{(${P})}\\,\\cR{${fsum([[Fr(1, a), ea]])}}\\Big]_0^1 - \\int_0^1\\cB{${p}}\\cdot\\cR{${fsum([[Fr(1, a), ea]])}}\\,dx$$`,
+        `<p class="mlstep">3. Le crochet, puis l'intégrale restante :</p>$$\\Big[\\dots\\Big]_0^1 = ${fsum([[Fr(p + q, a), e1]])} - \\left(${ftex(Fr(q, a))}\\right),\\qquad\\int_0^1${fsum([[Fr(p, a), ea]])}\\,dx = ${ftx(Fr(p, a * a))}\\big(${e1} - 1\\big)$$`,
+        `<p class="mlres">$$I = ${fsum([[ce, e1], [c0, ""]])}$$</p>`];
+    }
+    const { k } = e, xk = k === 0 ? "1" : k === 1 ? "x" : `x^{${k}}`, xk1 = k === 0 ? "x" : `x^{${k + 1}}`, ek = k === 0 ? "e" : `e^{${k + 1}}`;
+    return [`$$I = \\int_1^e${k ? xk : ""}\\ln x\\,dx$$`,
+      `<p class="mlstep">1. On dérive le $\\ln$${k ? `, on intègre $${xk}$` : `, on intègre le « 1 » caché`} :</p>$$\\left\\{\\begin{aligned}\\cB u &= \\cB{\\ln x} & \\cB{u'} &= \\cB{\\tfrac1x}\\\\\\cR{v'} &= \\cR{${xk}} & \\cR v &= \\cR{${k ? `\\tfrac{${xk1}}{${k + 1}}` : "x"}}\\end{aligned}\\right.$$`,
+      `<p class="mlstep">2. La formule ($\\ln e = 1$, $\\ln1 = 0$) :</p>$$I = \\Big[${k ? `\\frac{${xk1}}{${k + 1}}` : "x"}\\ln x\\Big]_1^e - \\int_1^e\\frac1x\\cdot ${k ? `\\frac{${xk1}}{${k + 1}}` : "x"}\\,dx = ${k ? `\\frac{${ek}}{${k + 1}}` : "e"} - ${k ? `\\frac1{${k + 1}}` : ""}\\int_1^e${xk}\\,dx$$`,
+      `<p class="mlstep">3. L'intégrale restante :</p>$$\\int_1^e${xk}\\,dx = \\Big[${k ? `\\frac{${xk1}}{${k + 1}}` : "x"}\\Big]_1^e = ${k ? `\\frac{${ek} - 1}{${k + 1}}` : "e - 1"}$$`,
+      `<p class="mlres">$$I = ${k ? `\\frac{${ek}}{${k + 1}} - \\frac{${ek} - 1}{${(k + 1) ** 2}} = \\frac{${k === 1 ? "" : k}${ek} + 1}{${(k + 1) ** 2}}` : "e - (e - 1) = 1"}$$</p>`];
+  };
+  stepLab(host, "Intégration par parties pas à pas", gen, build);
+}
+const QINT = [
+  ["Si $f$ est continue, positive et $\\int_a^bf = 0$, alors $f = 0$ sur $[a, b]$.", true, "Vrai : c'est le théorème de positivité stricte, la continuité est indispensable."],
+  ["$\\frac{d}{dx}\\int_0^{x^2}e^{t^2}\\,dt = e^{x^4}$.", false, "Faux : il manque la dérivée de la borne, c'est $2x\\,e^{x^4}$."],
+  ["$\\int_{-1}^1x^3\\cos x\\,dx = 0$.", true, "Vrai : la fonction est impaire et l'intervalle symétrique."],
+  ["Dans $\\int_0^1x\\,e^x\\,dx$, on dérive $e^x$ et on intègre $x$.", false, "Faux : on dérive le polynôme (il disparaît), on intègre $e^x$."],
+  ["Avec $x = \\sin t$, $\\int_0^1\\sqrt{1 - x^2}\\,dx = \\int_0^1\\cos^2t\\,dt$.", false, "Faux : les bornes deviennent $0$ et $\\frac\\pi2$."],
+  ["$\\frac1n\\sum_{k=1}^n\\frac kn\\to\\frac12$.", true, "Vrai : somme de Riemann de $x\\mapsto x$ sur $[0, 1]$."],
+  ["Taylor-Young donne une inégalité valable sur tout $\\mathbb R$.", false, "Faux : Young est local. Pour une inégalité globale, c'est Taylor-Lagrange ou le reste intégral."],
+  ["Pour $\\int\\frac{\\cos x}{1 + \\sin^2x}\\,dx$, les règles de Bioche conseillent $t = \\sin x$.", true, "Vrai : l'élément $g(x)$ est invariant par $x\\mapsto\\pi - x$."],
+  ["$\\int\\frac{dx}{x^2 + 9} = \\frac13\\arctan\\frac x3 + C$.", true, "Vrai : $\\int\\frac{dx}{x^2 + a^2} = \\frac1a\\arctan\\frac xa$."],
+  ["Si $f\\leqslant g$, alors $\\int_1^0f\\leqslant\\int_1^0g$.", false, "Faux : les bornes sont dans le mauvais ordre, l'inégalité s'inverse."]
+];
+/* Nature d'une série : banque d'exemples corrigés */
+const NAT = [
+  ["\\frac{n + 1}{n^3 + 2}", true, "Termes positifs. $u_n\\sim\\frac n{n^3} = \\frac1{n^2}$, Riemann avec $\\alpha = 2 > 1$ : CV."],
+  ["\\frac{\\sqrt n}{n + 1}", false, "Termes positifs. $u_n\\sim\\frac{\\sqrt n}n = \\frac1{n^{1/2}}$, Riemann avec $\\alpha = \\frac12\\leqslant1$ : DV."],
+  ["\\Big(1 + \\frac1n\\Big)^n", false, "$u_n = e^{n\\ln(1 + 1/n)}\\to e\\neq0$ : divergence grossière."],
+  ["\\tan\\frac1{n^2}", true, "Termes positifs. $\\tan x\\sim x$ en $0$, donc $u_n\\sim\\frac1{n^2}$ : CV."],
+  ["\\frac{3^n}{n!}", true, "D'Alembert : $\\frac{u_{n+1}}{u_n} = \\frac{3}{n + 1}\\to0\\lt1$ : CV."],
+  ["\\frac{(-1)^n}{n^2 + 1}", true, "$|u_n|\\leqslant\\frac1{n^2}$ : convergence absolue, donc CV."],
+  ["\\frac{\\ln n}{n}", false, "Termes positifs et $u_n\\geqslant\\frac1n$ pour $n\\geqslant3$ (car $\\ln n\\geqslant1$) : DV par comparaison avec la série harmonique."],
+  ["n\\,e^{-n}", true, "$n^2u_n = n^3e^{-n}\\to0$, donc $u_n = o\\big(\\frac1{n^2}\\big)$ : CV."],
+  ["\\frac{(-1)^n}{\\sqrt n}", true, "$\\frac1{\\sqrt n}$ décroît vers $0$ : critère spécial des séries alternées, CV (mais pas absolument)."],
+  ["\\sqrt{n + 1} - \\sqrt n", false, "Télescopique : $S_N = \\sqrt{N + 1} - 1\\to+\\infty$. Ou bien $u_n = \\frac1{\\sqrt{n + 1} + \\sqrt n}\\sim\\frac1{2\\sqrt n}$ : DV."],
+  ["\\frac1{n^2}\\sin n", true, "$|u_n|\\leqslant\\frac1{n^2}$ : CV absolument."],
+  ["e^{1/n} - 1", false, "Termes positifs. $e^x - 1\\sim x$, donc $u_n\\sim\\frac1n$ : DV."],
+  ["\\frac{n!}{n^n}", true, "D'Alembert : $\\frac{u_{n+1}}{u_n} = \\big(1 + \\frac1n\\big)^{-n}\\to\\frac1e\\lt1$ : CV."],
+  ["\\frac1{n\\ln n}", false, "Série-intégrale : $\\int_2^N\\frac{dt}{t\\ln t} = \\ln\\ln N - \\ln\\ln2\\to+\\infty$ : DV."]
+];
+function mlNature(host) {
+  let i = rnd(0, NAT.length - 1), pick = null;
+  const draw = () => {
+    const [u, cv, sol] = NAT[i];
+    host.innerHTML = `<p class="mlt">Convergente ou divergente ?</p><p class="mlq">$$\\sum_{n}u_n,\\qquad u_n = ${u}$$</p><div class="mlseg"><button type="button" data-c="1">Converge</button><button type="button" data-c="0">Diverge</button></div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Une autre</button></div><p class="mlres"></p><div class="mlsol" hidden><p>${sol}</p></div>`;
+    $$("[data-c]", host).forEach(b => b.addEventListener("click", () => { pick = b.dataset.c === "1"; $$("[data-c]", host).forEach(x => x.setAttribute("aria-pressed", x === b)); }));
+    $("[data-check]", host).addEventListener("click", () => { const r = $(".mlres", host); r.textContent = pick === null ? "Choisis d'abord une réponse." : pick === cv ? "Juste." : "Non : regarde la correction."; });
+    $("[data-sol]", host).addEventListener("click", () => { const s = $(".mlsol", host); s.hidden = false; typeset(s); });
+    $("[data-new]", host).addEventListener("click", () => { let j = i; while (j === i) j = rnd(0, NAT.length - 1); i = j; pick = null; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+/* Sommes partielles tracées */
+function mlPartielles(host) {
+  const S = [
+    { t: "\\frac1n", u: n => 1 / n, c: "diverge (lentement, comme $\\ln n$)" },
+    { t: "\\frac1{n^2}", u: n => 1 / (n * n), c: "converge vers $\\frac{\\pi^2}6\\approx1{,}645$" },
+    { t: "\\frac{(-1)^{n+1}}n", u: n => (n % 2 ? 1 : -1) / n, c: "converge vers $\\ln2\\approx0{,}693$, en oscillant" },
+    { t: "\\frac1{2^n}", u: n => 2 ** -n, c: "converge vers $1$, très vite" },
+    { t: "\\frac1{\\sqrt n}", u: n => 1 / Math.sqrt(n), c: "diverge, comme $2\\sqrt n$" }
+  ];
+  let si = 0, N = 40;
+  const W = 520, H = 240;
+  const draw = () => {
+    const { u, t, c } = S[si]; let s = 0; const v = []; for (let n = 1; n <= N; n++) { s += u(n); v.push(s); }
+    const mn = Math.min(0, ...v), mx = Math.max(...v) * 1.05 || 1, X = n => 40 + (n - 1) / Math.max(N - 1, 1) * (W - 60), Y = y => H - 25 - (y - mn) / (mx - mn) * (H - 45);
+    host.innerHTML = `<p class="mlt">Les sommes partielles $S_N = \\sum_{n=1}^Nu_n$</p><div class="rmctl"><div class="mlseg">${S.map((g, i) => `<button type="button" data-s="${i}" aria-pressed="${i === si}">$${g.t}$</button>`).join("")}</div><label class="rmn">$N = ${N}$ <input type="range" min="5" max="400" value="${N}" data-n aria-label="Nombre de termes"></label></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Sommes partielles"><line x1="40" y1="${Y(0)}" x2="${W - 20}" y2="${Y(0)}" class="ax"/><line x1="40" y1="${H - 25}" x2="40" y2="12" class="ax"/><polyline points="${v.map((y, k) => `${X(k + 1).toFixed(1)},${Y(y).toFixed(1)}`).join(" ")}" class="cu"/>${N <= 60 ? v.map((y, k) => `<circle cx="${X(k + 1).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="2.2" class="pt"/>`).join("") : ""}</svg><p class="mlcalc">$S_{${N}}\\approx${s.toFixed(4).replace(".", "{,}")}$ : la série $\\sum${t}$ ${c}.</p>`;
+    $$("[data-s]", host).forEach(b => b.addEventListener("click", () => { si = +b.dataset.s; draw(); }));
+    $("[data-n]", host).addEventListener("input", e => { N = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QSER = [
+  ["Si $u_n\\to0$, alors $\\sum u_n$ converge.", false, "Faux : $\\sum\\frac1n$ diverge alors que $\\frac1n\\to0$."],
+  ["$\\sum\\frac1{n^{1{,}01}}$ converge.", true, "Vrai : Riemann avec $\\alpha = 1{,}01 > 1$."],
+  ["Si $u_n\\sim v_n$, alors $\\sum u_n$ et $\\sum v_n$ ont même nature, quels que soient les signes.", false, "Faux : il faut un signe constant. Contre-exemple : $u_n = \\frac{(-1)^n}{\\sqrt n}$ et $v_n = u_n + \\frac1n$."],
+  ["$\\sum_{n=1}^{+\\infty}\\frac1{2^n} = 1$.", true, "Vrai : $\\frac{1/2}{1 - 1/2} = 1$."],
+  ["Une série absolument convergente est convergente.", true, "Vrai, pour des réels comme pour des complexes."],
+  ["D'Alembert permet de conclure pour $\\sum\\frac1{n^2}$.", false, "Faux : le rapport tend vers $1$, on ne peut rien dire. On utilise Riemann."],
+  ["$\\sum\\frac{(-1)^n}n$ converge absolument.", false, "Faux : elle converge (critère spécial) mais $\\sum\\frac1n$ diverge."],
+  ["$\\sum(u_{n+1} - u_n)$ converge si et seulement si $(u_n)$ converge.", true, "Vrai : $S_N = u_{N+1} - u_0$."],
+  ["$\\sum_{k=1}^n\\frac1k\\sim\\ln n$.", true, "Vrai : par comparaison série-intégrale, $\\ln(n + 1)\\leqslant H_n\\leqslant1 + \\ln n$."],
+  ["Si $\\sum u_n$ et $\\sum v_n$ divergent, alors $\\sum(u_n + v_n)$ diverge.", false, "Faux : $u_n = 1$ et $v_n = -1$."]
 ];
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */

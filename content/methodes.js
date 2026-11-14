@@ -1889,5 +1889,483 @@ $$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \
 <a class="tl tend" href="#z-racn">polygone régulier : $\mathbb U_n$</a></div>
 </div>
 </div>
+`,
+"Intégration": R`
+<nav class="msum"><a href="#i-not">Notations</a><a href="#i-escalier">Escalier et CPM</a><a href="#i-prop">Propriétés</a><a href="#i-fond">Théorème fondamental</a><a href="#i-prim">Primitives</a><a href="#i-ipp">Intégration par parties</a><a href="#i-chgt">Changement de variable</a><a href="#i-bioche">Règles de Bioche</a><a href="#i-riemann">Sommes de Riemann</a><a href="#i-taylor">Taylor</a><a href="#i-cplx">Fonctions complexes</a><a href="#i-enonce">Ce que l'énoncé te donne</a><a href="#i-erreurs">Erreurs</a><a href="#i-entrainement">S'entraîner</a><a href="#i-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction qu'on dérive ($u$). <span class="kR">rouge</span> : la fonction qu'on intègre ($v'$). <span class="kO">orange</span> : le changement de variable et les nouvelles bornes. <span class="kV">violet</span> : les majorations. <span class="kG">vert</span> : le résultat.</p>
+<p>Ce qui n'est pas au programme de Sup est signalé par <span class="hp">hors programme</span>. Ces parties sont traitées quand même, car on les retrouve dans des sujets où l'énoncé guide le calcul.</p>
+
+<h2 id="i-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Segment</td><td>$[a, b]$, $a\lt b$</td><td>On intègre sur un segment : fermé et borné.</td></tr>
+<tr><td>Continues par morceaux</td><td>$\mathcal C_{pm}([a, b], \mathbb K)$</td><td>Un nombre fini de points de discontinuité, avec des limites finies à gauche et à droite.</td></tr>
+<tr><td>Intégrale</td><td>$\displaystyle\int_a^bf = \int_a^bf(t)\,dt$</td><td>$t$ est une variable muette.</td></tr>
+<tr><td>Bornes renversées</td><td>$\displaystyle\int_b^af = -\int_a^bf$</td><td>Et $\int_a^af = 0$.</td></tr>
+<tr><td>Crochet</td><td>$[F(t)]_a^b = F(b) - F(a)$</td><td>$F$ primitive de $f$.</td></tr>
+</table>
+
+<h2 id="i-escalier">2. Fonctions en escalier et continues par morceaux</h2>
+<ul>
+<li>Une <b>subdivision</b> de $[a, b]$ : $a = x_0\lt x_1\lt\cdots\lt x_n = b$. Son <b>pas</b> est $\max_k(x_{k+1} - x_k)$.</li>
+<li>$\varphi$ est <b>en escalier</b> s'il existe une subdivision telle que $\varphi$ soit constante, égale à $c_k$, sur chaque $]x_k, x_{k+1}[$. Alors $\displaystyle\int_a^b\varphi = \sum_{k=0}^{n-1}c_k(x_{k+1} - x_k)$ : la somme des aires des rectangles.</li>
+<li>Toute fonction continue par morceaux est approchée par des fonctions en escalier : pour tout $\varepsilon > 0$, il existe $\varphi, \psi$ en escalier avec $\varphi\leqslant f\leqslant\psi$ et $\psi - \varphi\leqslant\varepsilon$. C'est ce qui définit $\int f$.</li>
+</ul>
+<p class="ml">Exemple : la partie entière</p>
+$$\int_0^3\lfloor t\rfloor\,dt = 0\times(1 - 0) + 1\times(2 - 1) + 2\times(3 - 2) = \cG3.$$
+
+<h2 id="i-prop">3. Les propriétés de l'intégrale</h2>
+<div class="sbox">$$\int_a^b(\lambda f + \mu g) = \lambda\int_a^bf + \mu\int_a^bg,\qquad\int_a^bf = \int_a^cf + \int_c^bf,\qquad f\leqslant g\ \Longrightarrow\ \int_a^bf\leqslant\int_a^bg\quad(a\leqslant b).$$</div>
+<div class="sbox">$$\Big|\int_a^bf\Big|\leqslant\int_a^b|f|\leqslant(b - a)\sup_{[a, b]}|f|,\qquad\Big|\int_a^bfg\Big|\leqslant\sup_{[a, b]}|f|\int_a^b|g|.$$</div>
+<div class="sbox">$$f\ \textbf{continue},\ f\geqslant0\ \text{et}\ \int_a^bf = 0\ \Longrightarrow\ f = 0\ \text{sur}\ [a, b].$$</div>
+<p class="ml piege">Piège</p>
+<p>La croissance demande $a\leqslant b$, et le dernier résultat demande que $f$ soit <b>continue</b> : une fonction nulle sauf en un point a une intégrale nulle.</p>
+<p class="ml">Exemple : la limite de $I_n = \int_0^1\frac{x^n}{1 + x}\,dx$</p>
+<p><b>Étape 1 : encadrer la fonction.</b> Pour $x\in[0, 1]$, $1 + x\geqslant1$, donc :</p>
+$$0\leqslant\frac{x^n}{1 + x}\leqslant\cV{x^n}.$$
+<p><b>Étape 2 : intégrer l'encadrement</b> (les bornes sont dans l'ordre, $0\leqslant1$) :</p>
+$$0\leqslant I_n\leqslant\int_0^1\cV{x^n}\,dx = \Big[\frac{x^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}.$$
+<p><b>Étape 3 : conclure</b> par encadrement : $\cG{I_n\xrightarrow[n\to+\infty]{}0}$.</p>
+<p class="ml">Exemple : l'inégalité de Cauchy-Schwarz</p>
+$$\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big).$$
+<p>Preuve : $P(\lambda) = \int_a^b(f + \lambda g)^2\geqslant0$ pour tout $\lambda$. C'est un polynôme de degré 2 en $\lambda$, toujours positif, donc son discriminant est négatif ou nul.</p>
+
+<h2 id="i-fond">4. Le théorème fondamental</h2>
+<div class="sbox">$$f\ \text{continue sur}\ I,\ a\in I:\qquad F(x) = \int_a^xf(t)\,dt\ \text{est l'unique primitive de}\ f\ \text{qui s'annule en}\ a,\qquad F' = f.$$</div>
+<div class="sbox">$$\int_a^bf(t)\,dt = F(b) - F(a)\quad\text{pour toute primitive}\ F\ \text{de}\ f,\qquad\int_a^bf'(t)\,dt = f(b) - f(a)\quad(f\ \text{de classe}\ \mathcal C^1).$$</div>
+<p class="ml">Dériver une intégrale dont les bornes bougent</p>
+<p>On introduit une primitive $F$ de $f$, on écrit l'intégrale avec $F$, puis on dérive des fonctions composées :</p>
+$$G(x) = \int_{u(x)}^{v(x)}f(t)\,dt = F(v(x)) - F(u(x))\ \Longrightarrow\ G'(x) = f(v(x))\,v'(x) - f(u(x))\,u'(x).$$
+<p class="ml">Exemple : $G(x) = \int_x^{2x}e^{-t^2}\,dt$</p>
+<p>$t\mapsto e^{-t^2}$ est continue sur $\mathbb R$ : soit $F$ une primitive. Alors $G(x) = F(2x) - F(x)$ et :</p>
+$$G'(x) = \cO2\,F'(2x) - F'(x) = 2e^{-(2x)^2} - e^{-x^2} = \cG{2e^{-4x^2} - e^{-x^2}}.$$
+<p class="ml piege">Piège</p>
+<p>On ne dérive pas sous le signe intégrale : $\frac{d}{dx}\int_0^xf(t)\,dt = f(x)$, et non $\int_0^xf'(t)\,dt$. Si la variable $x$ est aussi dans la fonction ($\int_0^xx\,f(t)\,dt$), on la sort d'abord : $x\int_0^xf(t)\,dt$.</p>
+
+<h2 id="i-prim">5. Les primitives à reconnaître</h2>
+<table class="mtab">
+<tr><th>Forme</th><th>Primitive</th><th>Forme</th><th>Primitive</th></tr>
+<tr><td>$u'u^\alpha$, $\alpha\neq-1$</td><td>$\frac{u^{\alpha+1}}{\alpha + 1}$</td><td>$\frac{u'}u$</td><td>$\ln|u|$</td></tr>
+<tr><td>$u'e^u$</td><td>$e^u$</td><td>$\frac{u'}{\sqrt u}$</td><td>$2\sqrt u$</td></tr>
+<tr><td>$u'\cos u$</td><td>$\sin u$</td><td>$u'\sin u$</td><td>$-\cos u$</td></tr>
+<tr><td>$\frac1{1 + x^2}$</td><td>$\arctan x$</td><td>$\frac1{x^2 + a^2}$</td><td>$\frac1a\arctan\frac xa$</td></tr>
+<tr><td>$\frac1{\sqrt{1 - x^2}}$</td><td>$\arcsin x$</td><td>$1 + \tan^2x = \frac1{\cos^2x}$</td><td>$\tan x$</td></tr>
+</table>
+<p class="ml">Exemple 1 : reconnaître $u'u^\alpha$</p>
+$$\int_0^1x\sqrt{1 + x^2}\,dx = \frac12\int_0^1\cB{2x}(1 + x^2)^{1/2}\,dx = \frac12\Big[\frac{(1 + x^2)^{3/2}}{3/2}\Big]_0^1 = \frac13\big(2\sqrt2 - 1\big).$$
+<p class="ml">Exemple 2 : un trinôme sans racine réelle, on passe à la forme canonique</p>
+$$x^2 + 2x + 5 = (x + 1)^2 + 4 = (x + 1)^2 + 2^2.$$
+$$\int_{-1}^1\frac{dx}{x^2 + 2x + 5} = \int_{-1}^1\frac{dx}{(x + 1)^2 + 2^2} = \Big[\frac12\arctan\frac{x + 1}2\Big]_{-1}^1 = \frac12\big(\arctan1 - \arctan0\big) = \cG{\frac\pi8}.$$
+<p class="ml">Exemple 3 : un trinôme avec deux racines, on décompose</p>
+$$\frac1{x^2 - 1} = \frac1{(x - 1)(x + 1)} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big),\qquad\int_2^3\frac{dx}{x^2 - 1} = \frac12\Big[\ln\Big|\frac{x - 1}{x + 1}\Big|\Big]_2^3 = \frac12\Big(\ln\frac12 - \ln\frac13\Big) = \cG{\frac12\ln\frac32}.$$
+
+<h2 id="i-ipp">6. L'intégration par parties</h2>
+<div class="sbox">$$\int_a^b\cB{u(t)}\,\cR{v'(t)}\,dt = \Big[\cB u\,\cR v\Big]_a^b - \int_a^b\cB{u'(t)}\,\cR{v(t)}\,dt\qquad(u, v\ \text{de classe}\ \mathcal C^1\ \text{sur}\ [a, b]).$$</div>
+<p class="ml">Quoi dériver, quoi intégrer</p>
+<ul>
+<li><b>On dérive</b> ce qui se simplifie en dérivant : $\cB{\ln}$, $\cB{\arctan}$, $\cB{\arcsin}$, un $\cB{\text{polynôme}}$.</li>
+<li><b>On intègre</b> ce qui ne se complique pas : $\cR{e^{at}}$, $\cR{\cos}$, $\cR{\sin}$, $\cR{t^n}$ (quand il y a un $\ln$).</li>
+<li>Toujours écrire les quatre fonctions avant de calculer : $u, u', v', v$.</li>
+</ul>
+<p class="ml">Exemple 1 : $\int_0^1t\,e^t\,dt$</p>
+$$\left\{\begin{aligned}\cB{u(t)} &= \cB t & \cB{u'(t)} &= \cB1\\\cR{v'(t)} &= \cR{e^t} & \cR{v(t)} &= \cR{e^t}\end{aligned}\right.\qquad\int_0^1t\,e^t\,dt = \Big[\cB t\,\cR{e^t}\Big]_0^1 - \int_0^1\cB1\cdot\cR{e^t}\,dt = e - \big[e^t\big]_0^1 = e - (e - 1) = \cG1.$$
+<p class="ml">Exemple 2 : $\int_1^e\ln t\,dt$, avec un « 1 » caché</p>
+$$\left\{\begin{aligned}\cB{u(t)} &= \cB{\ln t} & \cB{u'(t)} &= \cB{\tfrac1t}\\\cR{v'(t)} &= \cR1 & \cR{v(t)} &= \cR t\end{aligned}\right.\qquad\int_1^e\ln t\,dt = \Big[\cR t\,\cB{\ln t}\Big]_1^e - \int_1^e\cB{\frac1t}\cdot\cR t\,dt = e - (e - 1) = \cG1.$$
+<p>Plus généralement, une primitive de $\ln$ est $t\ln t - t$.</p>
+<p class="ml">Exemple 3 : $\int_0^1\arctan t\,dt$</p>
+$$\left\{\begin{aligned}\cB u &= \cB{\arctan t} & \cB{u'} &= \cB{\tfrac1{1 + t^2}}\\\cR{v'} &= \cR1 & \cR v &= \cR t\end{aligned}\right.\qquad\int_0^1\arctan t\,dt = \big[t\arctan t\big]_0^1 - \int_0^1\frac{t}{1 + t^2}\,dt.$$
+$$= \frac\pi4 - \frac12\big[\ln(1 + t^2)\big]_0^1 = \cG{\frac\pi4 - \frac{\ln2}2}.$$
+<p class="ml">Exemple 4 : deux IPP qui reviennent au départ</p>
+<p>$I = \int_0^\pi e^t\cos t\,dt$. On dérive $\cos$ deux fois, en intégrant $e^t$ :</p>
+$$I = \big[e^t\cos t\big]_0^\pi + \int_0^\pi e^t\sin t\,dt = (-e^\pi - 1) + \Big(\big[e^t\sin t\big]_0^\pi - \int_0^\pi e^t\cos t\,dt\Big) = -e^\pi - 1 + 0 - I.$$
+$$2I = -e^\pi - 1\qquad\Longrightarrow\qquad\cG{I = -\frac{e^\pi + 1}2}.$$
+<p>On peut aussi passer en complexe (§11).</p>
+<p class="ml">Exemple 5 : une relation de récurrence (intégrales de Wallis)</p>
+<p>$W_n = \int_0^{\pi/2}\sin^nt\,dt$. On écrit $\sin^{n+2} = \sin^{n+1}\cdot\sin$ :</p>
+$$\left\{\begin{aligned}\cB u &= \cB{\sin^{n+1}t} & \cB{u'} &= \cB{(n + 1)\cos t\sin^nt}\\\cR{v'} &= \cR{\sin t} & \cR v &= \cR{-\cos t}\end{aligned}\right.$$
+$$W_{n+2} = \underbrace{\big[-\cos t\sin^{n+1}t\big]_0^{\pi/2}}_{= 0} + (n + 1)\int_0^{\pi/2}\cos^2t\,\sin^nt\,dt = (n + 1)\int_0^{\pi/2}(1 - \sin^2t)\sin^nt\,dt = (n + 1)(W_n - W_{n+2}).$$
+$$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 1}{n + 2}W_n}.$$
+<div data-mlab="ipp"></div>
+
+<h2 id="i-chgt">7. Le changement de variable</h2>
+<div class="sbox">$$\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt\qquad(\varphi\ \text{de classe}\ \mathcal C^1,\ f\ \text{continue}).$$</div>
+<p class="ml">La méthode en 4 étapes</p>
+<ol>
+<li>Poser $\cO{x = \varphi(t)}$ (ou $\cO{t = \psi(x)}$) et vérifier que c'est $\mathcal C^1$.</li>
+<li>Calculer $\cO{dx = \varphi'(t)\,dt}$.</li>
+<li>Changer les <b>bornes</b>.</li>
+<li>Remplacer <b>tous</b> les $x$ : il ne doit plus en rester un seul.</li>
+</ol>
+<p class="ml">Exemple 1 : $\int_0^1\sqrt{1 - x^2}\,dx$ avec $x = \sin t$</p>
+<p><b>1–2.</b> $\cO{x = \sin t}$, $t\in\big[0, \frac\pi2\big]$, $\mathcal C^1$. Donc $\cO{dx = \cos t\,dt}$.</p>
+<p><b>3.</b> $x = 0\iff t = \cO0$ et $x = 1\iff t = \cO{\frac\pi2}$.</p>
+<p><b>4.</b> Sur $\big[0, \frac\pi2\big]$, $\cos t\geqslant0$, donc $\sqrt{1 - \sin^2t} = |\cos t| = \cos t$ :</p>
+$$\int_0^1\sqrt{1 - x^2}\,dx = \int_{\cO0}^{\cO{\pi/2}}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \cG{\frac\pi4}.$$
+<p>C'est l'aire d'un quart de disque de rayon $1$. $\checkmark$</p>
+<p class="ml">Exemple 2 : $\int_0^1\frac{dx}{1 + e^x}$ avec $t = e^x$</p>
+<p><b>1–2.</b> $\cO{t = e^x}$, donc $x = \ln t$ et $\cO{dx = \frac{dt}t}$. <b>3.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
+$$\int_0^1\frac{dx}{1 + e^x} = \int_{\cO1}^{\cO e}\frac{1}{(1 + t)}\cdot\frac{dt}t = \int_1^e\Big(\frac1t - \frac1{1 + t}\Big)dt = \big[\ln t - \ln(1 + t)\big]_1^e = \cG{1 - \ln(1 + e) + \ln2}.$$
+<p>On a décomposé : $\frac1{t(1 + t)} = \frac1t - \frac1{1 + t}$.</p>
+<p class="ml">Exemple 3 : symétries (sans calcul)</p>
+<ul>
+<li>$f$ impaire : $\int_{-a}^af = 0$ (poser $x = -t$). $f$ paire : $\int_{-a}^af = 2\int_0^af$.</li>
+<li>$f$ périodique de période $T$ : $\int_a^{a+T}f = \int_0^Tf$.</li>
+<li>$\int_0^{\pi/2}f(\sin t)\,dt = \int_0^{\pi/2}f(\cos t)\,dt$ (poser $t = \frac\pi2 - u$).</li>
+</ul>
+
+<h2 id="i-bioche">8. Les règles de Bioche <span class="hp">hors programme</span></h2>
+<p>Pour une fraction en $\sin$ et $\cos$, elles disent quel changement de variable donne une fraction rationnelle. On regarde $g(x) = f(x)\,dx$, <b>avec le $dx$</b>, et on teste trois transformations :</p>
+<table class="mtab">
+<tr><th>Si $g$ est invariant par</th><th>on pose</th><th>car</th></tr>
+<tr><td>$x\mapsto-x$</td><td>$\cO{t = \cos x}$</td><td>$\cos(-x) = \cos x$</td></tr>
+<tr><td>$x\mapsto\pi - x$</td><td>$\cO{t = \sin x}$</td><td>$\sin(\pi - x) = \sin x$</td></tr>
+<tr><td>$x\mapsto\pi + x$</td><td>$\cO{t = \tan x}$</td><td>$\tan(\pi + x) = \tan x$</td></tr>
+<tr><td>aucune des trois</td><td>$\cO{t = \tan\frac x2}$</td><td>$\sin x = \frac{2t}{1 + t^2}$, $\cos x = \frac{1 - t^2}{1 + t^2}$, $dx = \frac{2\,dt}{1 + t^2}$</td></tr>
+</table>
+<p>Moyen mnémotechnique : on pose la fonction qui est elle-même invariante par la transformation.</p>
+<p class="ml">Exemple 1 : $\int\frac{dx}{\sin x}$</p>
+<p><b>Test.</b> $g(-x) = \frac{d(-x)}{\sin(-x)} = \frac{-dx}{-\sin x} = g(x)$ : on pose $\cO{t = \cos x}$, $dt = -\sin x\,dx$.</p>
+<p><b>On fait apparaître $\sin x\,dx$</b> en multipliant en haut et en bas par $\sin x$ :</p>
+$$\int\frac{dx}{\sin x} = \int\frac{\sin x\,dx}{\sin^2x} = \int\frac{\sin x\,dx}{1 - \cos^2x} = \int\frac{-dt}{1 - t^2} = -\frac12\int\Big(\frac1{1 - t} + \frac1{1 + t}\Big)dt.$$
+$$= -\frac12\ln\Big|\frac{1 + t}{1 - t}\Big| = \frac12\ln\Big(\frac{1 - \cos x}{1 + \cos x}\Big) = \cG{\ln\Big|\tan\frac x2\Big|}.$$
+<p class="ml">Exemple 2 : $\int_0^{\pi/2}\frac{\cos x}{1 + \sin^2x}\,dx$</p>
+<p><b>Test.</b> $g(\pi - x) = \frac{\cos(\pi - x)\,d(\pi - x)}{1 + \sin^2(\pi - x)} = \frac{(-\cos x)(-dx)}{1 + \sin^2x} = g(x)$ : on pose $\cO{t = \sin x}$, $dt = \cos x\,dx$, bornes $\cO0$ et $\cO1$.</p>
+$$\int_0^{\pi/2}\frac{\cos x\,dx}{1 + \sin^2x} = \int_{\cO0}^{\cO1}\frac{dt}{1 + t^2} = \big[\arctan t\big]_0^1 = \cG{\frac\pi4}.$$
+<p class="ml">Exemple 3 : $\int_0^{\pi/4}\frac{dx}{1 + \cos^2x}$</p>
+<p><b>Test.</b> $g(-x) = \frac{-dx}{1 + \cos^2x}\neq g$, mais $g(\pi + x) = \frac{dx}{1 + \cos^2x} = g(x)$ : on pose $\cO{t = \tan x}$.</p>
+$$dt = (1 + \tan^2x)\,dx = (1 + t^2)\,dx,\qquad\cos^2x = \frac1{1 + \tan^2x} = \frac1{1 + t^2},\qquad1 + \cos^2x = \frac{2 + t^2}{1 + t^2}.$$
+$$\int_0^{\pi/4}\frac{dx}{1 + \cos^2x} = \int_{\cO0}^{\cO1}\frac{1 + t^2}{2 + t^2}\cdot\frac{dt}{1 + t^2} = \int_0^1\frac{dt}{t^2 + (\sqrt2)^2} = \Big[\frac1{\sqrt2}\arctan\frac t{\sqrt2}\Big]_0^1 = \cG{\frac1{\sqrt2}\arctan\frac1{\sqrt2}}.$$
+<p class="ml">Exemple 4 : aucune règle, $t = \tan\frac x2$</p>
+<p>$\int_0^{\pi/2}\frac{dx}{2 + \cos x}$ : aucune des trois transformations ne laisse $g$ invariant. On pose $\cO{t = \tan\frac x2}$, bornes $\cO0$ et $\cO1$ :</p>
+$$2 + \cos x = 2 + \frac{1 - t^2}{1 + t^2} = \frac{2 + 2t^2 + 1 - t^2}{1 + t^2} = \frac{3 + t^2}{1 + t^2},\qquad dx = \frac{2\,dt}{1 + t^2}.$$
+$$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\frac{2\,dt}{1 + t^2} = \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\frac\pi6 = \cG{\frac\pi{3\sqrt3}}.$$
+
+<h2 id="i-riemann">9. Les sommes de Riemann</h2>
+<div class="sbox">$$f\in\mathcal C_{pm}([a, b]):\qquad\frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f.$$</div>
+<p class="ml">Reconnaître une somme de Riemann</p>
+<ol>
+<li>Sortir un facteur $\frac1n$.</li>
+<li>Écrire le reste <b>uniquement avec $\frac kn$</b> : c'est $f\big(\frac kn\big)$.</li>
+<li>Vérifier les bornes de $k$ ($0$ à $n - 1$, ou $1$ à $n$ : même limite).</li>
+</ol>
+<p class="ml">Exemple 1 : $S_n = \sum_{k=1}^n\frac n{n^2 + k^2}$</p>
+<p>On factorise le dénominateur par $n^2$ :</p>
+$$\frac n{n^2 + k^2} = \frac n{n^2\big(1 + (k/n)^2\big)} = \cO{\frac1n}\cdot\frac1{1 + (k/n)^2}\qquad\Longrightarrow\qquad S_n = \frac1n\sum_{k=1}^nf\Big(\frac kn\Big),\quad f(x) = \frac1{1 + x^2}.$$
+$$S_n\xrightarrow[n\to+\infty]{}\int_0^1\frac{dx}{1 + x^2} = \big[\arctan x\big]_0^1 = \cG{\frac\pi4}.$$
+<p class="ml">Exemple 2 : $T_n = \sum_{k=1}^n\frac1{n + k}$</p>
+$$\frac1{n + k} = \frac1n\cdot\frac1{1 + k/n}\qquad\Longrightarrow\qquad T_n\to\int_0^1\frac{dx}{1 + x} = \cG{\ln2}.$$
+<p class="ml">Exemple 3 : un produit, on passe au $\ln$</p>
+$$P_n = \Big(\prod_{k=1}^n\Big(1 + \frac kn\Big)\Big)^{1/n}:\qquad\ln P_n = \frac1n\sum_{k=1}^n\ln\Big(1 + \frac kn\Big)\to\int_0^1\ln(1 + x)\,dx = 2\ln2 - 1.$$
+<p>Donc $P_n\to e^{2\ln2 - 1} = \cG{\frac4e}$ (l'intégrale se calcule par parties, avec la primitive $(1 + x)\ln(1 + x) - x$).</p>
+<p><b>Vitesse</b> : si $f$ est lipschitzienne de constante $K$, l'erreur est majorée par $\frac{K(b - a)^2}{2n}$.</p>
+<p class="ml">La méthode des trapèzes <span class="hp">hors programme</span></p>
+$$T_n = \frac{b - a}n\Big[\frac{f(a) + f(b)}2 + \sum_{k=1}^{n-1}f(x_k)\Big],\qquad\Big|T_n - \int_a^bf\Big|\leqslant\frac{(b - a)^3}{12n^2}\sup|f''|\quad(f\ \text{de classe}\ \mathcal C^2).$$
+<p>Elle remplace les rectangles par des trapèzes : l'erreur est en $\frac1{n^2}$ au lieu de $\frac1n$.</p>
+<div data-mlab="riemann"></div>
+
+<h2 id="i-taylor">10. Les formules de Taylor</h2>
+<div class="sbox">$$\textbf{Reste intégral}\ (f\ \text{de classe}\ \mathcal C^{n+1}):\quad f(b) = \sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(b - a)^k + \int_a^b\frac{(b - t)^n}{n!}f^{(n+1)}(t)\,dt.$$</div>
+<div class="sbox">$$\textbf{Taylor-Lagrange}:\ \Big|f(b) - \sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(b - a)^k\Big|\leqslant\cV{\frac{|b - a|^{n+1}}{(n + 1)!}\sup|f^{(n+1)}|}.\qquad\textbf{Young}:\ f(x) = \sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(x - a)^k + o\big((x - a)^n\big).$$</div>
+<ul>
+<li><b>Reste intégral</b> : pour une égalité exacte, ou pour le <b>signe</b> du reste.</li>
+<li><b>Taylor-Lagrange</b> : pour une <b>majoration</b> valable partout (inégalité globale).</li>
+<li><b>Young</b> : pour une <b>limite</b> ou un équivalent (information seulement au voisinage de $a$).</li>
+</ul>
+<p class="ml">Exemple 1 : le signe du reste ($e^x\geqslant1 + x + \frac{x^2}2$ pour $x\geqslant0$)</p>
+<p>Reste intégral pour $\exp$ à l'ordre $2$ entre $0$ et $x$ :</p>
+$$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}{2}\,e^t\,dt.$$
+<p>Pour $0\leqslant t\leqslant x$, la fonction intégrée est positive et les bornes sont dans l'ordre : l'intégrale est positive, d'où $\cG{e^x\geqslant1 + x + \frac{x^2}2}$.</p>
+<p class="ml">Exemple 2 : une majoration ($|\sin x - x|\leqslant\frac{|x|^3}6$)</p>
+<p>Taylor-Lagrange pour $\sin$ entre $0$ et $x$, à l'ordre $2$. On a $\sin(0) = 0$, $\sin'(0) = 1$, $\sin''(0) = 0$, et $|\sin'''| = |{-\cos}|\leqslant\cV1$ :</p>
+$$\Big|\sin x - \Big(0 + x + 0\cdot\frac{x^2}2\Big)\Big|\leqslant\frac{|x|^3}{3!}\times\cV1 = \cG{\frac{|x|^3}6}.$$
+<p class="ml">Exemple 3 : $e = \sum_{k=0}^{+\infty}\frac1{k!}$</p>
+<p>Taylor-Lagrange pour $\exp$ entre $0$ et $1$ : toutes les dérivées valent $\exp$, et $\sup_{[0, 1]}e^t = e$.</p>
+$$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{1^{n+1}}{(n + 1)!}\cdot\cV e\xrightarrow[n\to+\infty]{}0\qquad\Longrightarrow\qquad\cG{\sum_{k=0}^n\frac1{k!}\to e}.$$
+
+<h2 id="i-cplx">11. Intégrer une fonction à valeurs complexes</h2>
+<div class="sbox">$$\int_a^bf = \int_a^b\operatorname{Re}f + i\int_a^b\operatorname{Im}f,\qquad\int_a^be^{\lambda t}\,dt = \Big[\frac{e^{\lambda t}}\lambda\Big]_a^b\quad(\lambda\in\mathbb C^*).$$</div>
+<p>Linéarité, Chasles, IPP, changement de variable et $\big|\int f\big|\leqslant\int|f|$ restent vrais. La positivité et la croissance n'ont pas de sens.</p>
+<p class="ml">Exemple : $\int_0^\pi e^t\cos t\,dt$ en une ligne</p>
+$$\int_0^\pi e^t\cos t\,dt = \operatorname{Re}\int_0^\pi e^{(1 + i)t}\,dt = \operatorname{Re}\Big[\frac{e^{(1 + i)t}}{1 + i}\Big]_0^\pi = \operatorname{Re}\Big(\frac{e^\pi e^{i\pi} - 1}{1 + i}\Big) = \operatorname{Re}\Big(\frac{-(e^\pi + 1)(1 - i)}{2}\Big) = \cG{-\frac{e^\pi + 1}2}.$$
+<p>On retrouve le résultat des deux IPP du §6.</p>
+
+<h2 id="i-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>$\int P(t)e^{at}$, $\int P(t)\cos t$, $\int t^n\ln t$</b><span>IPP : dériver le polynôme (ou le $\ln$).</span></div>
+<div><b>$\int\ln$, $\int\arctan$, $\int\arcsin$</b><span>IPP avec $v' = 1$.</span></div>
+<div><b>« Relation entre $I_n$ et $I_{n+1}$ »</b><span>IPP qui fait passer de $n$ à $n + 1$ (ou $n + 2$).</span></div>
+<div><b>« Limite de $I_n$ »</b><span>Encadrer la fonction intégrée, puis intégrer l'encadrement.</span></div>
+<div><b>$\sqrt{1 - x^2}$, $\sqrt{a^2 - x^2}$</b><span>Changement $x = \sin t$ (ou $a\sin t$).</span></div>
+<div><b>$e^x$ partout dans une fraction</b><span>Changement $t = e^x$, puis décomposer.</span></div>
+<div><b>Fraction en $\sin$, $\cos$</b><span>Règles de Bioche (hors programme, souvent guidées par l'énoncé).</span></div>
+<div><b>$\frac1{ax^2 + bx + c}$</b><span>Racines : décomposer. Pas de racine : forme canonique et $\arctan$.</span></div>
+<div><b>« Limite de $\sum_kf(k, n)$ »</b><span>Sortir $\frac1n$, faire apparaître $\frac kn$ : somme de Riemann.</span></div>
+<div><b>« Limite de $\prod_k\dots$ »</b><span>Passer au $\ln$, puis somme de Riemann.</span></div>
+<div><b>$\int_{u(x)}^{v(x)}f(t)\,dt$ à étudier</b><span>Introduire une primitive $F$, puis dériver.</span></div>
+<div><b>Une inégalité avec $e^x$, $\sin x$…</b><span>Taylor : reste intégral (signe) ou Lagrange (majoration).</span></div>
+<div><b>$\int e^{at}\cos(bt)$</b><span>Passer en complexe avec $e^{(a + ib)t}$.</span></div>
+<div><b>$f$ continue, $f\geqslant0$, $\int f = 0$</b><span>Alors $f = 0$.</span></div>
+</div>
+
+<h2 id="i-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier de changer les bornes dans un changement de variable.</p>
+<p><b>2.</b> Laisser des $x$ après le changement de variable, ou oublier le $dx = \varphi'(t)\,dt$.</p>
+<p><b>3.</b> $\sqrt{\cos^2t} = \cos t$ sans vérifier le signe.</p>
+<p><b>4.</b> Intégrer une inégalité avec des bornes dans le mauvais ordre.</p>
+<p><b>5.</b> Dans l'IPP, se tromper de signe devant la deuxième intégrale.</p>
+<p><b>6.</b> Dériver $\int_0^{x^2}f(t)\,dt$ en $f(x^2)$ : il manque le facteur $2x$.</p>
+<p><b>7.</b> Conclure $f = 0$ de $\int f = 0$ sans continuité ni positivité.</p>
+<p><b>8.</b> Dans une somme de Riemann, oublier le facteur $\frac1n$ ou se tromper d'intervalle.</p>
+<p><b>9.</b> Utiliser Taylor-Young pour une inégalité valable sur tout un intervalle.</p>
+<p><b>10.</b> $\int\frac{dx}{x^2 + 4} = \arctan\frac x2$ : il manque le facteur $\frac12$.</p>
+</div>
+
+<h2 id="i-entrainement">S'entraîner</h2>
+<div data-mlab="quizint"></div>
+
+<h2 id="i-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Calculer $\int_a^bf$</div>
+<div class="tq">Primitive usuelle ($u'u^\alpha$, $\frac{u'}u$…) ?</div><a class="tl" href="#i-prim">oui : $[F]_a^b$</a><div class="tno">non</div>
+<div class="tq">Produit polynôme × ($\exp$, $\cos$) ou $\ln$, $\arctan$ ?</div><a class="tl" href="#i-ipp">oui : intégration par parties</a><div class="tno">non</div>
+<div class="tq">$\sqrt{1 - x^2}$, $e^x$, une composée ?</div><a class="tl" href="#i-chgt">oui : changement de variable</a><div class="tno">non</div>
+<div class="tq">Fraction en $\sin$, $\cos$ ?</div><a class="tl" href="#i-bioche">oui : Bioche (hors programme)</a><div class="tno">non</div>
+<a class="tl tend" href="#i-cplx">$e^{at}\cos bt$ : passer en complexe</a></div>
+<div class="tb tR"><div class="tt">Étudier une suite $I_n$</div>
+<div class="tq">Limite demandée ?</div><a class="tl" href="#i-prop">oui : encadrer, puis intégrer</a><div class="tno">non</div>
+<div class="tq">Lien entre $I_n$ et $I_{n+1}$ ?</div><a class="tl" href="#i-ipp">oui : IPP (Wallis)</a><div class="tno">non</div>
+<a class="tl tend" href="#i-prop">monotonie : signe de $I_{n+1} - I_n$</a></div>
+<div class="tb tG"><div class="tt">Limite d'une somme</div>
+<div class="tq">Facteur $\frac1n$ et $\frac kn$ ?</div><a class="tl" href="#i-riemann">oui : somme de Riemann</a><div class="tno">non</div>
+<div class="tq">Un produit ?</div><a class="tl" href="#i-riemann">oui : passer au $\ln$</a><div class="tno">non</div>
+<a class="tl tend" href="#i-riemann">factoriser par $n$ pour faire apparaître $\frac kn$</a></div>
+<div class="tb tO"><div class="tt">Dériver une intégrale</div>
+<div class="tq">Bornes qui dépendent de $x$ ?</div><a class="tl" href="#i-fond">oui : $F(v(x)) - F(u(x))$</a><div class="tno">non</div>
+<a class="tl tend" href="#i-fond">$\frac{d}{dx}\int_a^xf = f(x)$</a></div>
+<div class="tb tV"><div class="tt">Une inégalité</div>
+<div class="tq">Égalité exacte ou signe du reste ?</div><a class="tl" href="#i-taylor">oui : reste intégral</a><div class="tno">non</div>
+<div class="tq">Majoration sur un intervalle ?</div><a class="tl" href="#i-taylor">oui : Taylor-Lagrange</a><div class="tno">non</div>
+<a class="tl tend" href="#i-prop">$|\int f|\leqslant\int|f|$, Cauchy-Schwarz</a></div>
+</div>
+</div>
+`,
+"Séries numériques": R`
+<nav class="msum"><a href="#s-not">Notations</a><a href="#s-gross">Divergence grossière</a><a href="#s-ref">Séries de référence</a><a href="#s-pos">Termes positifs</a><a href="#s-int">Série-intégrale</a><a href="#s-abs">Absolue convergence</a><a href="#s-alt">Séries alternées</a><a href="#s-dal">D'Alembert</a><a href="#s-somm">Sommation des comparaisons</a><a href="#s-calc">Calculer la somme</a><a href="#s-plan">Le plan d'attaque</a><a href="#s-enonce">Ce que l'énoncé te donne</a><a href="#s-erreurs">Erreurs</a><a href="#s-entrainement">S'entraîner</a><a href="#s-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : le terme général $u_n$. <span class="kO">orange</span> : la série de référence à laquelle on compare. <span class="kR">rouge</span> : les termes qui s'annulent. <span class="kG">vert</span> : la conclusion (CV ou DV). <span class="kV">violet</span> : la somme.</p>
+<p>Le programme de Sup s'arrête à la comparaison et à l'absolue convergence. Les parties marquées <span class="hp">programme de Spé</span> ou <span class="hp">hors programme</span> sont traitées quand même : on les rencontre dès la Sup dans les sujets guidés.</p>
+
+<h2 id="s-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Série de terme général $u_n$</td><td>$\sum u_n$ ou $\sum_{n\geqslant n_0}u_n$</td><td>C'est la suite des sommes partielles.</td></tr>
+<tr><td>Somme partielle</td><td>$S_n = \sum_{k=n_0}^nu_k$</td><td>Étudier la série, c'est étudier $(S_n)$.</td></tr>
+<tr><td>Somme (si CV)</td><td>$S = \sum_{n=n_0}^{+\infty}u_n = \lim S_n$</td><td>On ne l'écrit <b>qu'après</b> avoir prouvé la convergence.</td></tr>
+<tr><td>Reste (si CV)</td><td>$R_n = \sum_{k=n+1}^{+\infty}u_k = S - S_n$</td><td>$R_n\to0$.</td></tr>
+<tr><td>Nature</td><td>convergente (CV) ou divergente (DV)</td><td>Elle ne dépend pas des premiers termes.</td></tr>
+</table>
+<ul>
+<li>$\sum u_n$ et $\sum v_n$ convergent $\Rightarrow\sum(\lambda u_n + \mu v_n)$ converge.</li>
+<li>Convergente + divergente = divergente. Mais divergente + divergente peut converger.</li>
+</ul>
+
+<h2 id="s-gross">2. La divergence grossière</h2>
+<div class="sbox">$$\sum u_n\ \text{converge}\ \Longrightarrow\ u_n\xrightarrow[n\to+\infty]{}0.\qquad\text{Donc}:\ u_n\not\to0\ \Longrightarrow\ \sum u_n\ \cG{\text{diverge grossièrement}}.$$</div>
+<p class="ml piege">Piège</p>
+<p>La réciproque est fausse : $\frac1n\to0$ et pourtant $\sum\frac1n$ diverge. Le test $u_n\to0$ ne sert qu'à prouver une <b>divergence</b>.</p>
+<p class="ml">Exemple : la série harmonique diverge</p>
+<p><b>Étape 1.</b> Pour $k\geqslant1$, $\ln(1 + x)\leqslant x$ donne $\ln\big(1 + \frac1k\big)\leqslant\frac1k$, soit $\frac1k\geqslant\ln(k + 1) - \ln k$.</p>
+<p><b>Étape 2.</b> On somme de $k = 1$ à $n$, et ça télescope :</p>
+$$H_n = \sum_{k=1}^n\frac1k\geqslant\sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1 = \ln(n + 1)\xrightarrow[n\to+\infty]{}+\infty.$$
+<p><b>Étape 3.</b> $H_n\to+\infty$ : $\sum\frac1n$ $\cG{\text{diverge}}$ (sans diverger grossièrement).</p>
+<p class="ml">Exemple : $u_n = \cos\frac1n$</p>
+<p>$u_n\to\cos0 = 1\neq0$ : $\sum u_n$ $\cG{\text{diverge grossièrement}}$.</p>
+
+<h2 id="s-ref">3. Les séries de référence</h2>
+<div class="sbox">$$\textbf{Géométrique}:\ \sum q^n\ \text{CV}\iff|q|\lt1,\qquad\sum_{n=0}^{+\infty}q^n = \frac1{1 - q},\qquad\sum_{n=n_0}^{+\infty}q^n = \frac{q^{n_0}}{1 - q}.$$</div>
+<div class="sbox">$$\textbf{Riemann}:\ \sum_{n\geqslant1}\frac1{n^\alpha}\ \text{CV}\iff\alpha > 1.\qquad\textbf{Exponentielle}:\ \sum_{n=0}^{+\infty}\frac{x^n}{n!} = e^x\ \text{pour tout}\ x\in\mathbb R.$$</div>
+<div class="sbox">$$\textbf{Télescopique}:\ \sum(u_{n+1} - u_n)\ \text{CV}\iff(u_n)\ \text{converge, et alors}\ \sum_{n=0}^{+\infty}(u_{n+1} - u_n) = \lim u_n - u_0.$$</div>
+<p class="ml">Exemple 1 : une géométrique qui ne commence pas à 0</p>
+$$\sum_{n=2}^{+\infty}\frac1{3^n} = \frac{(1/3)^2}{1 - 1/3} = \frac{1/9}{2/3} = \cV{\frac16}.$$
+<p class="ml">Exemple 2 : une télescopique</p>
+$$u_n = \frac1{n(n - 1)} = \frac1{n - 1} - \frac1n\ (n\geqslant2):\quad S_N = \sum_{n=2}^N\Big(\frac1{n - 1} - \frac1n\Big) = 1 - \cR{\frac12} + \cR{\frac12} - \cdots - \frac1N = 1 - \frac1N\to\cV1.$$
+<p class="ml">Exemple 3 : une télescopique qui diverge</p>
+$$\sum_{n\geqslant1}\ln\Big(1 + \frac1n\Big) = \sum_{n\geqslant1}\big(\ln(n + 1) - \ln n\big):\quad S_N = \ln(N + 1)\to+\infty,\quad\cG{\text{DV}}.$$
+
+<h2 id="s-pos">4. Les séries à termes positifs : comparer</h2>
+<div class="sbox">$$u_n\geqslant0:\quad(S_n)\ \text{est croissante, donc}\ \sum u_n\ \text{CV}\iff(S_n)\ \text{est majorée}.$$</div>
+<p class="ml">Les quatre critères (pour $u_n, v_n\geqslant0$ à partir d'un rang)</p>
+<table class="mtab">
+<tr><th>Hypothèse</th><th>Si $\sum\cO{v_n}$ converge</th><th>Si $\sum\cB{u_n}$ diverge</th></tr>
+<tr><td>$u_n\leqslant v_n$</td><td>$\sum u_n$ converge</td><td>$\sum v_n$ diverge</td></tr>
+<tr><td>$u_n = O(v_n)$</td><td>$\sum u_n$ converge</td><td>$\sum v_n$ diverge</td></tr>
+<tr><td>$u_n = o(v_n)$</td><td>$\sum u_n$ converge</td><td>$\sum v_n$ diverge</td></tr>
+<tr><td>$u_n\sim v_n$</td><td colspan="2">$\sum u_n$ et $\sum v_n$ ont <b>la même nature</b></td></tr>
+</table>
+<p class="ml piege">Piège</p>
+<p>Ces critères demandent des termes <b>positifs</b> (au moins à partir d'un rang). Avec un équivalent, c'est le signe de $v_n$ qui le garantit.</p>
+<p class="ml">La méthode</p>
+<ol>
+<li>Vérifier que $u_n\geqslant0$ (à partir d'un rang).</li>
+<li>Trouver un <b>équivalent simple</b> de $u_n$ : terme dominant, développement limité.</li>
+<li>Comparer à une série de référence, le plus souvent Riemann.</li>
+</ol>
+<p class="ml">Exemple 1 : une fraction</p>
+$$\cB{u_n = \frac{n + 3}{n^3 + 1}}\geqslant0,\qquad u_n\sim\frac{n}{n^3} = \cO{\frac1{n^2}}:\quad\text{Riemann}\ \alpha = 2 > 1,\quad\cG{\text{CV}}.$$
+<p class="ml">Exemple 2 : un développement limité</p>
+$$\cB{u_n = 1 - \cos\frac1n}\geqslant0.\qquad\cos x = 1 - \frac{x^2}2 + o(x^2)\ \Longrightarrow\ u_n = \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\sim\cO{\frac1{2n^2}}:\quad\cG{\text{CV}}.$$
+<p class="ml">Exemple 3 : un équivalent qui donne la divergence</p>
+$$\cB{u_n = \sin\frac1n}\geqslant0\ (\text{car}\ \tfrac1n\in]0, \pi]),\qquad u_n\sim\cO{\frac1n}:\quad\text{Riemann}\ \alpha = 1,\quad\cG{\text{DV}}.$$
+<p class="ml">Exemple 4 : la règle « $n^\alpha u_n$ »</p>
+<p>Quand il n'y a pas d'équivalent simple, on montre que $n^\alpha u_n\to0$ avec $\alpha > 1$ : alors $u_n = o\big(\frac1{n^\alpha}\big)$ et la série converge.</p>
+$$\cB{u_n = \frac{\ln n}{n^2}}:\qquad n^{3/2}u_n = \frac{\ln n}{\sqrt n}\to0\ (\text{croissances comparées})\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^{3/2}}}\Big),\ \frac32 > 1:\ \cG{\text{CV}}.$$
+$$\cB{u_n = e^{-\sqrt n}}:\qquad n^2u_n = n^2e^{-\sqrt n} = m^4e^{-m}\ (m = \sqrt n\to+\infty)\to0\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^2}}\Big):\ \cG{\text{CV}}.$$
+<p>Pour montrer une divergence, on montre que $n\,u_n\to+\infty$ : alors $u_n\geqslant\frac1n$ à partir d'un rang.</p>
+
+<h2 id="s-int">5. La comparaison série-intégrale</h2>
+<p>$f$ continue, <b>positive et décroissante</b> sur $[n_0, +\infty[$. Pour $k\geqslant n_0 + 1$ :</p>
+<div class="sbox">$$\int_k^{k+1}f(t)\,dt\leqslant f(k)\leqslant\int_{k-1}^kf(t)\,dt.$$</div>
+<p>La première inégalité vient de $f(t)\leqslant f(k)$ pour $t\in[k, k + 1]$, et la seconde de $f(k)\leqslant f(t)$ pour $t\in[k - 1, k]$. Sur un dessin, ce sont des rectangles de largeur $1$ sous la courbe et au-dessus.</p>
+<p class="ml">Exemple 1 : un équivalent de $H_n = \sum_{k=1}^n\frac1k$</p>
+<p>Avec $f(t) = \frac1t$, on somme l'encadrement :</p>
+$$\sum_{k=1}^n\int_k^{k+1}\frac{dt}t\leqslant H_n\leqslant1 + \sum_{k=2}^n\int_{k-1}^k\frac{dt}t\iff\ln(n + 1)\leqslant H_n\leqslant1 + \ln n.$$
+<p>On divise par $\ln n$ : les deux bornes tendent vers $1$, donc $\cG{H_n\sim\ln n}$.</p>
+<p class="ml">Exemple 2 : $\sum\frac1{n\ln n}$ (série de Bertrand, <span class="hp">hors programme</span> comme résultat)</p>
+<p>$f(t) = \frac1{t\ln t}$ est positive et décroissante sur $[2, +\infty[$. Par le même encadrement :</p>
+$$\sum_{k=2}^n\frac1{k\ln k}\geqslant\int_2^{n+1}\frac{dt}{t\ln t} = \big[\ln(\ln t)\big]_2^{n+1} = \ln\ln(n + 1) - \ln\ln2\to+\infty:\quad\cG{\text{DV}}.$$
+<p>Résultat général (Bertrand) : $\sum\frac1{n^\alpha(\ln n)^\beta}$ converge si et seulement si $\alpha > 1$, ou $\alpha = 1$ et $\beta > 1$. À redémontrer avec série-intégrale.</p>
+
+<h2 id="s-abs">6. L'absolue convergence (termes de signe quelconque)</h2>
+<div class="sbox">$$\sum|u_n|\ \text{converge}\ \Longrightarrow\ \sum u_n\ \text{converge, et}\ \Big|\sum_{n=0}^{+\infty}u_n\Big|\leqslant\sum_{n=0}^{+\infty}|u_n|.$$</div>
+<p>Valable aussi pour des complexes. On étudie $\sum|u_n|$ avec les outils des termes positifs.</p>
+<p class="ml">Exemple 1</p>
+$$\cB{u_n = \frac{\sin n}{n^2}}:\qquad|u_n|\leqslant\cO{\frac1{n^2}},\ \text{Riemann}\ \alpha = 2\ \Longrightarrow\ \sum|u_n|\ \text{CV}\ \Longrightarrow\ \cG{\sum u_n\ \text{CV}}.$$
+<p class="ml">Exemple 2 : une série complexe</p>
+$$\cB{u_n = \frac{(1 + i)^n}{3^n}}:\qquad|u_n| = \Big(\frac{\sqrt2}3\Big)^n,\ \frac{\sqrt2}3\lt1\ \Longrightarrow\ \cG{\text{CV absolument}},\qquad\sum_{n=0}^{+\infty}u_n = \frac1{1 - \frac{1 + i}3} = \cV{\frac3{2 - i}}.$$
+<p class="ml piege">Piège</p>
+<p>La réciproque est fausse : $\sum\frac{(-1)^n}n$ converge (§7) mais $\sum\frac1n$ diverge. On dit qu'elle est <b>semi-convergente</b>.</p>
+
+<h2 id="s-alt">7. Les séries alternées <span class="hp">programme de Spé</span></h2>
+<div class="sbox">$$\textbf{Critère spécial}:\ (a_n)\ \text{décroissante et}\ a_n\to0\ \Longrightarrow\ \sum(-1)^na_n\ \text{converge},\quad|R_n|\leqslant a_{n+1},\quad R_n\ \text{a le signe de}\ (-1)^{n+1}.$$</div>
+<p class="ml">Exemple 1 : $\sum\frac{(-1)^n}n$</p>
+<p>$a_n = \frac1n$ est décroissante et tend vers $0$ : $\cG{\text{CV}}$. Mais $\sum\frac1n$ diverge : la convergence n'est pas absolue.</p>
+<p class="ml">Exemple 2 : le piège du développement limité</p>
+$$\cB{u_n = \ln\Big(1 + \frac{(-1)^n}{\sqrt n}\Big)}\quad(n\geqslant2).$$
+<p>$u_n$ n'est pas de signe constant et $|u_n|\sim\frac1{\sqrt n}$ : pas d'absolue convergence. On développe avec $\ln(1 + x) = x - \frac{x^2}2 + O(x^3)$ et $x = \frac{(-1)^n}{\sqrt n}$ :</p>
+$$u_n = \underbrace{\frac{(-1)^n}{\sqrt n}}_{\text{CV (critère spécial)}} - \underbrace{\frac1{2n}}_{\text{DV}} + \underbrace{O\Big(\frac1{n^{3/2}}\Big)}_{\text{CV absolument}}.$$
+<p>Somme de deux séries convergentes et d'une divergente : $\sum u_n$ $\cG{\text{diverge}}$, alors que $u_n\sim\frac{(-1)^n}{\sqrt n}$. Avec des termes de signe variable, <b>un équivalent ne suffit pas</b>.</p>
+
+<h2 id="s-dal">8. La règle de d'Alembert <span class="hp">programme de Spé</span></h2>
+<div class="sbox">$$u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell:\qquad\ell\lt1\Rightarrow\cG{\text{CV}},\qquad\ell > 1\Rightarrow\cG{\text{DV grossièrement}},\qquad\ell = 1\Rightarrow\text{on ne peut rien dire}.$$</div>
+<p>Elle est faite pour les <b>factorielles et les puissances $n$-ièmes</b>. Pour les fractions et les puissances de $n$, on trouve $\ell = 1$ : utiliser Riemann.</p>
+<p class="ml">Exemple 1 : $u_n = \frac{n^2}{2^n}$</p>
+$$\frac{u_{n+1}}{u_n} = \frac{(n + 1)^2}{2^{n+1}}\cdot\frac{2^n}{n^2} = \frac12\Big(\frac{n + 1}n\Big)^2\to\frac12\lt1:\quad\cG{\text{CV}}.$$
+<p class="ml">Exemple 2 : $u_n = \frac{n!}{n^n}$</p>
+$$\frac{u_{n+1}}{u_n} = \frac{(n + 1)!}{(n + 1)^{n+1}}\cdot\frac{n^n}{n!} = \frac{(n + 1)\,n^n}{(n + 1)^{n+1}} = \Big(\frac n{n + 1}\Big)^n = \Big(1 + \frac1n\Big)^{-n}.$$
+$$\Big(1 + \frac1n\Big)^{-n} = e^{-n\ln(1 + 1/n)} = e^{-n(\frac1n + o(\frac1n))} = e^{-1 + o(1)}\to\frac1e\lt1:\quad\cG{\text{CV}}.$$
+<p class="ml">La règle de Cauchy <span class="hp">hors programme</span></p>
+<p>Si $\sqrt[n]{u_n}\to\ell$ : $\ell\lt1$ donne CV, $\ell > 1$ donne DV, $\ell = 1$ ne permet pas de conclure. Utile quand tout est à la puissance $n$ :</p>
+$$u_n = \Big(\frac n{2n + 1}\Big)^n:\qquad\sqrt[n]{u_n} = \frac n{2n + 1}\to\frac12\lt1:\quad\cG{\text{CV}}.$$
+
+<h2 id="s-somm">9. Sommation des relations de comparaison <span class="hp">programme de Spé</span></h2>
+<p>Pour $v_n\geqslant0$ :</p>
+<div class="sbox">$$\sum v_n\ \text{DV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=0}^nu_k\sim\sum_{k=0}^nv_k,\qquad\sum v_n\ \text{CV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=n+1}^{+\infty}u_k\sim\sum_{k=n+1}^{+\infty}v_k.$$</div>
+<p>Même chose avec $o$ et $O$. Divergence : on compare les <b>sommes partielles</b> ; convergence : on compare les <b>restes</b>.</p>
+<p class="ml">Exemple : le reste de $\sum\frac1{k^2}$</p>
+<p>$\frac1{k^2}\sim\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k$, termes positifs, série convergente. On compare les restes, et celui de droite télescope :</p>
+$$R_n = \sum_{k=n+1}^{+\infty}\frac1{k^2}\sim\sum_{k=n+1}^{+\infty}\Big(\frac1{k - 1} - \frac1k\Big) = \frac1n:\qquad\cG{R_n\sim\frac1n}.$$
+
+<h2 id="s-calc">10. Calculer la somme</h2>
+<p>On ne connaît la somme que pour quelques familles : télescopique, géométrique, exponentielle (et leurs dérivées). On ramène $u_n$ à l'une d'elles.</p>
+<p class="ml">Exemple 1 : décomposer pour télescoper</p>
+$$\cB{u_n = \frac1{n(n + 1)(n + 2)}} = \frac12\Big(\frac1{n(n + 1)} - \frac1{(n + 1)(n + 2)}\Big).$$
+<p>On le vérifie en réduisant au même dénominateur : $\frac{(n + 2) - n}{n(n + 1)(n + 2)} = \frac2{n(n + 1)(n + 2)}$. C'est une télescopique avec $w_n = \frac1{n(n + 1)}\to0$ :</p>
+$$\sum_{n=1}^{+\infty}u_n = \frac12\big(w_1 - \lim w_n\big) = \frac12\cdot\frac1{1\times2} = \cV{\frac14}.$$
+<p class="ml">Exemple 2 : se ramener à l'exponentielle</p>
+$$\sum_{n=0}^{+\infty}\frac{n + 1}{n!} = \sum_{n=1}^{+\infty}\frac{n}{n!} + \sum_{n=0}^{+\infty}\frac1{n!} = \sum_{n=1}^{+\infty}\frac1{(n - 1)!} + e\ \underset{\cO{m = n - 1}}{=}\ \sum_{m=0}^{+\infty}\frac1{m!} + e = \cV{2e}.$$
+<p>On a utilisé $\frac n{n!} = \frac1{(n - 1)!}$ pour $n\geqslant1$ (le terme $n = 0$ est nul), puis un décalage d'indice.</p>
+<p class="ml">Exemple 3 : dériver la série géométrique</p>
+<p>Pour $|x|\lt1$, $\sum_{n=1}^{+\infty}nx^{n-1} = \frac1{(1 - x)^2}$ (on l'admet ici, c'est le cours de Spé sur les séries entières). Avec $x = \frac12$ :</p>
+$$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\sum_{n=1}^{+\infty}n\Big(\frac12\Big)^{n-1} = \frac12\cdot\frac1{(1/2)^2} = \cV2.$$
+
+<h2 id="s-plan">11. Le plan d'attaque, dans l'ordre</h2>
+<ol>
+<li><b>$u_n\to0$ ?</b> Sinon : divergence grossière, c'est fini.</li>
+<li><b>Une série de référence</b> déguisée : géométrique, télescopique, Riemann, exponentielle ?</li>
+<li><b>Signe constant</b> (à partir d'un rang) : un équivalent, puis Riemann. Sinon, $n^\alpha u_n\to0$.</li>
+<li><b>Factorielles, puissances $n$-ièmes</b> : d'Alembert.</li>
+<li><b>$f(n)$ avec $f$ décroissante</b> et une primitive connue : série-intégrale.</li>
+<li><b>Signe variable</b> : absolue convergence d'abord ; sinon critère spécial ou développement limité.</li>
+</ol>
+
+<h2 id="s-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Nature de $\sum u_n$ »</b><span>Suivre le plan du §11 dans l'ordre.</span></div>
+<div><b>« Montrer que la série converge et calculer sa somme »</b><span>Télescopage, géométrique ou exponentielle. Travailler sur $S_N$, puis $N\to+\infty$.</span></div>
+<div><b>Une fraction rationnelle en $n$</b><span>Équivalent : quotient des termes de plus haut degré, puis Riemann.</span></div>
+<div><b>$\sin$, $\cos$, $\ln$, $e$ de $\frac1n$</b><span>Développement limité pour trouver l'équivalent.</span></div>
+<div><b>$\ln n$, $e^{-\sqrt n}$ (pas d'équivalent simple)</b><span>Règle $n^\alpha u_n\to0$ avec $\alpha > 1$.</span></div>
+<div><b>$n!$, $a^n$, $n^n$</b><span>D'Alembert.</span></div>
+<div><b>$(-1)^n$</b><span>Absolue convergence, puis critère spécial, puis développement limité.</span></div>
+<div><b>« Équivalent de $\sum_{k=1}^n\dots$ »</b><span>Série-intégrale, ou sommation des équivalents.</span></div>
+<div><b>« Encadrer $\sum f(k)$ »</b><span>$f$ monotone : $\int_k^{k+1}f\leqslant f(k)\leqslant\int_{k-1}^kf$.</span></div>
+<div><b>« Montrer que $u_n - \ln n$ converge »</b><span>Étudier la série télescopique $\sum(u_{n+1} - u_n)$.</span></div>
+<div><b>Termes complexes</b><span>Étudier $\sum|u_n|$.</span></div>
+<div><b>« Majorer le reste »</b><span>Séries alternées : $|R_n|\leqslant a_{n+1}$. Positives : série-intégrale.</span></div>
+</div>
+
+<h2 id="s-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Conclure à la convergence parce que $u_n\to0$.</p>
+<p><b>2.</b> Écrire $\sum_{n=0}^{+\infty}u_n$ avant d'avoir prouvé la convergence.</p>
+<p><b>3.</b> Utiliser un équivalent avec des termes de signe variable.</p>
+<p><b>4.</b> Oublier de vérifier la positivité avant de comparer.</p>
+<p><b>5.</b> Appliquer d'Alembert à $\frac1{n^2}$ : on trouve $1$ et on ne peut rien conclure.</p>
+<p><b>6.</b> Confondre $\sum\frac1{n^\alpha}$ (Riemann, $\alpha > 1$) et $\sum q^n$ (géométrique, $|q|\lt1$).</p>
+<p><b>7.</b> Mal calculer la somme d'une géométrique qui ne commence pas à $n = 0$.</p>
+<p><b>8.</b> Dans un télescopage, oublier la limite du dernier terme.</p>
+<p><b>9.</b> Utiliser la série-intégrale sans vérifier que $f$ est décroissante.</p>
+<p><b>10.</b> Croire que divergente + divergente diverge toujours.</p>
+</div>
+
+<h2 id="s-entrainement">S'entraîner</h2>
+<div data-mlab="nature"></div>
+<div data-mlab="partielles"></div>
+<div data-mlab="quizser"></div>
+
+<h2 id="s-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Nature de $\sum u_n$</div>
+<div class="tq">$u_n\not\to0$ ?</div><a class="tl" href="#s-gross">oui : divergence grossière</a><div class="tno">non</div>
+<div class="tq">Signe constant ?</div><a class="tl" href="#s-pos">oui : équivalent, puis Riemann</a><div class="tno">non</div>
+<div class="tq">$\sum|u_n|$ converge ?</div><a class="tl" href="#s-abs">oui : CV absolument</a><div class="tno">non</div>
+<div class="tq">$(-1)^na_n$, $a_n\searrow0$ ?</div><a class="tl" href="#s-alt">oui : critère spécial (Spé)</a><div class="tno">non</div>
+<a class="tl tend" href="#s-alt">développement limité : CV + DV + CV abs</a></div>
+<div class="tb tR"><div class="tt">Pas d'équivalent simple</div>
+<div class="tq">$n!$, $a^n$, $n^n$ ?</div><a class="tl" href="#s-dal">oui : d'Alembert (Spé)</a><div class="tno">non</div>
+<div class="tq">$f(n)$, $f$ décroissante ?</div><a class="tl" href="#s-int">oui : série-intégrale</a><div class="tno">non</div>
+<a class="tl tend" href="#s-pos">$n^\alpha u_n\to0$ avec $\alpha > 1$</a></div>
+<div class="tb tG"><div class="tt">Calculer la somme</div>
+<div class="tq">Fraction en $n$ ?</div><a class="tl" href="#s-calc">oui : décomposer, télescoper</a><div class="tno">non</div>
+<div class="tq">$q^n$ ?</div><a class="tl" href="#s-ref">oui : $\frac{q^{n_0}}{1 - q}$</a><div class="tno">non</div>
+<a class="tl tend" href="#s-calc">$\frac{x^n}{n!}$ : exponentielle</a></div>
+<div class="tb tO"><div class="tt">Équivalent de $S_n$ ou $R_n$</div>
+<div class="tq">$u_n = f(n)$, $f$ monotone ?</div><a class="tl" href="#s-int">oui : encadrer par des intégrales</a><div class="tno">non</div>
+<a class="tl tend" href="#s-somm">sommer les équivalents (Spé)</a></div>
+<div class="tb tV"><div class="tt">Majorer une somme</div>
+<div class="tq">Série alternée ?</div><a class="tl" href="#s-alt">oui : $|R_n|\leqslant a_{n+1}$</a><div class="tno">non</div>
+<a class="tl tend" href="#s-abs">$|\sum u_n|\leqslant\sum|u_n|$</a></div>
+</div>
+</div>
 `
 };

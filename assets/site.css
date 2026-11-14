@@ -2013,3 +2013,15 @@ a.lg-box:hover,.lg-list a:hover{background:color-mix(in srgb,currentColor 6%,tra
 .racnw{display:flex;justify-content:center;margin:8px 0}
 .racn .ax{stroke:var(--muted);stroke-width:1}.racn .ci{fill:none;stroke:var(--muted);stroke-dasharray:3 3}.racn .po{fill:color-mix(in srgb,#2B5BD7 10%,transparent);stroke:#2B5BD7;stroke-width:1.5}
 @media (max-width:600px){.pasc button{min-width:28px;height:28px;font-size:12px}}
+/* Étiquette hors programme / Spé */
+.hp{display:inline-block;margin-left:8px;padding:1px 7px;border:1px solid #C2416B;border-radius:3px;color:#C2416B;font:600 11px var(--f-display);letter-spacing:.05em;text-transform:uppercase;vertical-align:middle}
+/* Labos Riemann et sommes partielles */
+.rmctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:8px 0}
+.rmn{display:flex;align-items:center;gap:8px;font-size:14px}
+.rmn input{width:180px;accent-color:#2B5BD7}
+.rmsvg{width:100%;max-width:560px;display:block;margin:6px auto}
+.rmsvg .rr{fill:color-mix(in srgb,#2B5BD7 16%,transparent);stroke:#2B5BD7;stroke-width:1}
+.rmsvg .cu{fill:none;stroke:#D4503B;stroke-width:2}
+.rmsvg .ax{stroke:var(--muted);stroke-width:1}
+.rmsvg .pt{fill:#D4503B}
+.rmsvg .tx{fill:var(--muted);font:12px var(--f-display)}
