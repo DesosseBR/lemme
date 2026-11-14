@@ -2047,3 +2047,9 @@ table.pot td.pdiv{border-bottom:2px solid var(--ink)}
 @media (max-width:600px){.methode .exh{gap:12px}.methode .exm{box-shadow:4px 4px 0 var(--ink)}}
 .methode .exc>.exs{display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:center;margin:14px 0}
 .methode .exc>.exsm .exbody{overflow-x:auto}
+/* Menu « Changer de chapitre » : ne plus être coupé par l'en-tête */
+.phead:has(.chsw){overflow:visible;z-index:40}
+.phead:has(.chsw[open]){z-index:60}
+/* Fiche Méthode : toute la largeur de la colonne, centrée */
+.methode{max-width:none;margin-left:auto;margin-right:auto}
+.phead .photo{overflow:hidden}

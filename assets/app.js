@@ -1872,7 +1872,7 @@ function mlSommes(host) {
     st.push(`<p class="mlstep">2. Les sommes usuelles (attention : $\\sum_{k=1}^n1 = n$) :</p>$$S_n = ${fsum([[al, "\\frac{n(n+1)(2n+1)}{6}"], [be, "\\frac{n(n+1)}{2}"], [ga, "n"]])}$$`);
     st.push(`<p class="mlstep">3. On développe et on regroupe :</p>$$${al ? `${ftx(Fr(al, 6))}(2n^3 + 3n^2 + n)` : ""}${be ? `${al && be > 0 ? " + " : ""}${ftx(Fr(be, 2))}(n^2 + n)` : ""}${ga ? (ga > 0 ? " + " : " ") + fsum([[ga, "n"]]) : ""}$$$$S_n = \\cG{${fsum([[c3, "n^3"], [c2, "n^2"], [c1, "n"]])}}$$`);
     const v1 = al + be + ga, f1 = fadd(fadd(c3, c2), c1);
-    st.push(`<p class="mlstep">4. Contrôle avec $n = 1$ :</p>$$S_1 = ${fsum([[al, ""], [be, ""], [ga, ""]]).replace(/^0$/, "0")} = ${v1},\\qquad ${ftx(c3)} ${c2.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c2.n), c2.d))} ${c1.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c1.n), c1.d))} = ${ftx(f1)}\\ \\checkmark$$`);
+    st.push(`<p class="mlstep">4. Contrôle avec $n = 1$ :</p>$$S_1 = ${fsum([[al, ""], [be, ""], [ga, ""]]).replace(/^0$/, "0")} = ${v1},\\qquad ${ftx(c3)} ${c2.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c2.n), c2.d))} ${c1.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c1.n), c1.d))} = ${ftx(f1)}$$`);
     return st;
   };
   stepLab(host, "Calculer une somme pas à pas", gen, build);
@@ -1958,7 +1958,7 @@ function mlRac2(host) {
     st.push(`<p class="mlstep">1. Le module de $\\Delta$ :</p>$$|\\Delta| = \\sqrt{${par(a)}^2 + ${par(b)}^2} = \\sqrt{${a * a + b * b}} = ${M}$$`);
     st.push(`<p class="mlstep">2. On cherche $\\delta = x + iy$ avec $\\delta^2 = \\Delta$ :</p>$$\\left\\{\\begin{aligned}x^2 - y^2 &= ${a}\\\\x^2 + y^2 &= ${M}\\\\2xy &= ${b}\\end{aligned}\\right.$$`);
     st.push(`<p class="mlstep">3. On ajoute, puis on soustrait les deux premières lignes :</p>$$2x^2 = ${a + M}\\ \\Longrightarrow\\ x^2 = ${x * x},\\qquad2y^2 = ${M - a}\\ \\Longrightarrow\\ y^2 = ${y * y}$$<p class="mlnote">Donc $x = \\pm${x}$ et $y = \\pm${Math.abs(y)}$. La troisième ligne donne $xy = ${x * y} ${x * y > 0 ? "> 0" : "\\lt0"}$ : $x$ et $y$ sont de ${x * y > 0 ? "même signe" : "signes contraires"}.</p>`);
-    st.push(`<p class="mlres">$$\\delta = \\cG{\\pm\\left(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i\\right)}$$</p><p class="mlnote">Contrôle : $(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i)^2 = ${x * x} ${b < 0 ? "-" : "+"} ${Math.abs(b)}i - ${y * y} = ${D}$ $\\checkmark$</p>`);
+    st.push(`<p class="mlres">$$\\delta = \\cG{\\pm\\left(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i\\right)}$$</p><p class="mlnote">Contrôle : $(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i)^2 = ${x * x} ${b < 0 ? "-" : "+"} ${Math.abs(b)}i - ${y * y} = ${D}$</p>`);
     return st;
   };
   stepLab(host, "Racine carrée d'un complexe pas à pas", gen, build);
@@ -2257,7 +2257,7 @@ function mlDivEucl(host) {
     }
     rows += `<tr><td>$${ptex(cur.slice(3))}$</td><td colspan="2">degré $\\lt2$ : on s'arrête</td></tr>`;
     st.push(`<p class="mlstep">1. On pose la division : on divise le premier terme par $X^2$, on écrit le résultat au quotient, on multiplie $B$ par ce terme et on soustrait (en rouge), puis on recommence avec le reste :</p><div class="potw">${potenceHtml(A, B).html}</div>`);
-    st.push(`<p class="mlres">$$${ptex(A)} = \\left(${ptex(B)}\\right)\\left(\\cR{${ptex(Q)}}\\right)${ptex(R)[0] === "-" ? " " : " + "}${ptex(R)}$$</p><p class="mlnote">Contrôle en $X = 1$ : $A(1) = ${A.reduce((s, v) => s + v, 0)}$ et $B(1)Q(1) + R(1) = ${B.reduce((s, v) => s + v, 0)}\\times${par(Q.reduce((s, v) => s + v, 0))} + ${par(R[0] + R[1])} = ${B.reduce((s, v) => s + v, 0) * Q.reduce((s, v) => s + v, 0) + R[0] + R[1]}$ $\\checkmark$</p>`);
+    st.push(`<p class="mlres">$$${ptex(A)} = \\left(${ptex(B)}\\right)\\left(\\cR{${ptex(Q)}}\\right)${ptex(R)[0] === "-" ? " " : " + "}${ptex(R)}$$</p><p class="mlnote">Contrôle en $X = 1$ : $A(1) = ${A.reduce((s, v) => s + v, 0)}$ et $B(1)Q(1) + R(1) = ${B.reduce((s, v) => s + v, 0)}\\times${par(Q.reduce((s, v) => s + v, 0))} + ${par(R[0] + R[1])} = ${B.reduce((s, v) => s + v, 0) * Q.reduce((s, v) => s + v, 0) + R[0] + R[1]}$</p>`);
     return st;
   };
   stepLab(host, "Division euclidienne pas à pas", gen, build);
@@ -2280,7 +2280,7 @@ function mlDes(host) {
       return [`$$F = \\frac{${num}}{\\cB{${fx(a)}${fx(b)}${fx(c)}}}$$`,
         `<p class="mlstep">1. Degré $${n1 ? 1 : 0}\\lt3$ : pas de partie entière. Trois pôles simples, donc la forme :</p>$$F = \\frac{\\cR\\alpha}{${fx1(a)}} + \\frac{\\cR\\beta}{${fx1(b)}} + \\frac{\\cR\\gamma}{${fx1(c)}}$$`,
         `<p class="mlstep">2. On cache chaque facteur et on évalue au pôle :</p>$$\\cR\\alpha = \\frac{${N(a)}}{(${a} - ${par(b)})(${a} - ${par(c)})} = ${ftex(ca)},\\qquad\\cR\\beta = \\frac{${N(b)}}{(${b} - ${par(a)})(${b} - ${par(c)})} = ${ftex(cb)},\\qquad\\cR\\gamma = \\frac{${N(c)}}{(${c} - ${par(a)})(${c} - ${par(b)})} = ${ftex(cc)}$$`,
-        `<p class="mlres">$$F = \\cG{${desSum([[ca, fx1(a)], [cb, fx1(b)], [cc, fx1(c)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$ $\\checkmark$</p>`];
+        `<p class="mlres">$$F = \\cG{${desSum([[ca, fx1(a)], [cb, fx1(b)], [cc, fx1(c)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$</p>`];
     }
     /* pôle double en a, simple en b : F = N/((X-a)^2 (X-b)) */
     const cb = Fr(N(b), (b - a) ** 2), c2 = Fr(N(a), a - b), c1 = Fr(-cb.n, cb.d);
@@ -2290,7 +2290,7 @@ function mlDes(host) {
       `<p class="mlstep">1. Pôle <b>double</b> en $${a}$ (deux termes) et pôle simple en $${b}$ :</p>$$F = \\frac{\\cR\\alpha}{${fx1(a)}} + \\frac{\\cR{\\alpha'}}{${fx(a, "^2")}} + \\frac{\\cR\\beta}{${fx1(b)}}$$`,
       `<p class="mlstep">2. Les coefficients qu'on obtient en cachant : $\\beta$, et $\\alpha'$ (la plus haute puissance) :</p>$$\\cR\\beta = \\frac{${N(b)}}{(${b} - ${par(a)})^2} = ${ftex(cb)},\\qquad\\cR{\\alpha'} = \\frac{${N(a)}}{${a} - ${par(b)}} = ${ftex(c2)}$$`,
       `<p class="mlstep">3. Pour $\\alpha$ : on multiplie par $X$ et $X\\to+\\infty$. À gauche $XF\\to0$ (degré $${n1 ? 2 : 1}$ en haut, $3$ en bas), à droite on trouve $\\alpha + \\beta$ :</p>$$0 = \\alpha + \\beta\\ \\Longrightarrow\\ \\cR{\\alpha = ${ftex(c1)}}$$`,
-      `<p class="mlres">$$F = \\cG{${desSum([[c1, fx1(a)], [c2, fx(a, "^2")], [cb, fx1(b)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$ $\\checkmark$</p>`];
+      `<p class="mlres">$$F = \\cG{${desSum([[c1, fx1(a)], [c2, fx(a, "^2")], [cb, fx1(b)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$</p>`];
   };
   stepLab(host, "Décomposition en éléments simples pas à pas", gen, build);
 }

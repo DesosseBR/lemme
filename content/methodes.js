@@ -767,11 +767,11 @@ $$\chi_B = \begin{vmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{vmatrix}\underset{\cO{
 <p>On développe selon la dernière ligne (un seul coefficient non nul) :</p>
 $$\chi_B = \cB{(X-2)}\times(X-2)\times(-1)^{3+3}\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix}.$$
 $$\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = 1\times(X-3) - (-1)\times(-1) = X - 3 - 1 = X - 4.$$
-$$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.\ \checkmark$$
+$$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.$$
 <p class="ml">Vérifier son $\chi_A$ en 10 secondes</p>
 <ul>
 <li>Le coefficient de $X^{n-1}$ doit être $-\operatorname{tr}A$ : ici $-(4 + 1 + 1) = -6 = -\operatorname{tr}A$.</li>
-<li>$\chi_A(0) = (-1)^n\det A$ : ici $\chi_A(0) = (0-4)(0-1)^2 = -4$ et $\det A = 4$, donc $(-1)^3\times4 = -4\ \checkmark$.</li>
+<li>$\chi_A(0) = (-1)^n\det A$ : ici $\chi_A(0) = (0-4)(0-1)^2 = -4$ et $\det A = 4$, donc $(-1)^3\times4 = -4$.</li>
 </ul>
 
 <h2 id="r-sanschi">5. Trouver des valeurs propres sans calculer $\chi_A$</h2>
@@ -805,7 +805,7 @@ $$X = \begin{pmatrix}x\\y\\-x-y\end{pmatrix} = x\cR{\begin{pmatrix}1\\0\\-1\end{
 $$A - \cB4\,I_3 = \begin{pmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-2x + y + z &= 0\quad(L_1)\\x - 2y + z &= 0\quad(L_2)\\x + y - 2z &= 0\quad(L_3)\end{aligned}\right.$$
 $$\left\{\begin{aligned}\cO{L_1 - L_2}&:\ -3x + 3y = 0\ \Longrightarrow\ y = x\\\cO{L_2 - L_3}&:\ -3y + 3z = 0\ \Longrightarrow\ z = y\end{aligned}\right.\qquad\Longrightarrow\qquad X = \begin{pmatrix}x\\x\\x\end{pmatrix} = x\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}}.$$
 $$\cG{E_4} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}},\qquad\dim\cG{E_4} = 1.$$
-<p>On contrôle avec $L_1$ : $-2x + x + x = 0\ \checkmark$.</p>
+<p>On contrôle avec $L_1$ : $-2x + x + x = 0$.</p>
 <p class="ml piege">Piège</p>
 <p>Si tu trouves $\cG{E_\lambda} = \{0\}$, ton $\lambda$ n'est pas une valeur propre : erreur dans $\chi_A$ ou dans le pivot.</p>
 
@@ -850,7 +850,7 @@ $$\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)},\qquad\cG{E_1} = \operatorname{Vect
 $$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-1}.$$
 <p><b>6.</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
 $$\left\{\begin{aligned}A\cR{(1,1,1)} &= (2+1+1,\ 1+2+1,\ 1+1+2) = (4,4,4) = \cB4\cR{(1,1,1)}\\A\cR{(1,0,-1)} &= (2+0-1,\ 1+0-1,\ 1+0-2) = (1,0,-1) = \cB1\cR{(1,0,-1)}\\A\cR{(0,1,-1)} &= (0+1-1,\ 0+2-1,\ 0+1-2) = (0,1,-1) = \cB1\cR{(0,1,-1)}\end{aligned}\right.$$
-$$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.\ \checkmark$$
+$$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.$$
 <div data-mlab="diag"></div>
 
 <h2 id="r-trig">9. Trigonaliser</h2>
@@ -897,7 +897,7 @@ $$X = \begin{pmatrix}y+z\\y\\z\end{pmatrix} = y\cR{\begin{pmatrix}1\\1\\0\end{pm
 <p><b>3. Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
 $$(A - I_3)\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}-x + y + z\\-x + y + z\\0\end{pmatrix} = (-x + y + z)\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}}.$$
 <p>Il suffit que $-x + y + z\neq0$ pour sortir de $\cG{E_1}$. Avec $\cG{e_3} = (0,1,0)$ : $-0 + 1 + 0 = 1$, donc $(A - I_3)\cG{e_3} = \cR{e_1}$.</p>
-$$A\cG{e_3} = \begin{pmatrix}0\times0 + 1\times1 + 1\times0\\-1\times0 + 2\times1 + 1\times0\\0\end{pmatrix} = \begin{pmatrix}1\\2\\0\end{pmatrix} = \begin{pmatrix}1\\1\\0\end{pmatrix} + \begin{pmatrix}0\\1\\0\end{pmatrix} = \cR{e_1} + \cB1\cG{e_3}.\ \checkmark$$
+$$A\cG{e_3} = \begin{pmatrix}0\times0 + 1\times1 + 1\times0\\-1\times0 + 2\times1 + 1\times0\\0\end{pmatrix} = \begin{pmatrix}1\\2\\0\end{pmatrix} = \begin{pmatrix}1\\1\\0\end{pmatrix} + \begin{pmatrix}0\\1\\0\end{pmatrix} = \cR{e_1} + \cB1\cG{e_3}.$$
 <p><b>4. $P$ est inversible</b> (développement selon la première ligne) :</p>
 $$\det P = \begin{vmatrix}1&1&0\\1&0&1\\0&1&0\end{vmatrix} = 1\times\begin{vmatrix}0&1\\1&0\end{vmatrix} - 1\times\begin{vmatrix}1&1\\0&0\end{vmatrix} = 1\times(0 - 1) - 1\times(0 - 0) = -1\neq0.$$
 $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PTP^{-1}.$$
@@ -1043,7 +1043,7 @@ $$y' + a\,y = 0\iff y'e^{A} + a\,e^{A}y = 0\iff\big(y\,e^{A}\big)' = 0\iff y\,e^
 $$y' + 3y = 0:\qquad a(t) = 3,\qquad A(t) = 3t,\qquad\cB{y_H(t) = \cG\lambda\,e^{-3t}}.$$
 <p class="ml">Exemple 2 : $a$ variable (l'équation du §2)</p>
 $$a(t) = -\frac75t^3\ \Longrightarrow\ A(t) = -\frac75\cdot\frac{t^4}{4} = -\frac{7}{20}t^4\ \Longrightarrow\ \cB{y_H(t) = \cG\lambda\,e^{\frac{7}{20}t^4}}.$$
-<p>Contrôle : $y_H' = \cG\lambda\cdot\frac{7}{20}\cdot4t^3e^{\frac7{20}t^4} = \frac75t^3\,y_H$, donc $y_H' - \frac75t^3y_H = 0\ \checkmark$.</p>
+<p>Contrôle : $y_H' = \cG\lambda\cdot\frac{7}{20}\cdot4t^3e^{\frac7{20}t^4} = \frac75t^3\,y_H$, donc $y_H' - \frac75t^3y_H = 0$.</p>
 
 <h2 id="e-yp1">5. Ordre 1 : trouver une solution particulière</h2>
 <p class="ml">On regarde le second membre</p>
@@ -1073,13 +1073,13 @@ $$y_p' + y_p = C\,e^{-t} - \cancel{C\,t\,e^{-t}} + \cancel{C\,t\,e^{-t}} = C\,e^
 $$\cR{y_p(t) = t\,e^{-t}},\qquad y(t) = \cG\lambda\,e^{-t} + t\,e^{-t} = (\cG\lambda + t)\,e^{-t}.$$
 <p class="ml">Exemple 3 : l'énoncé donne la solution</p>
 <p>« Montrer que $u(t) = t\,e^{-t}$ est solution de $(E)$. » On ne pose <b>pas</b> $u' + u = e^{-t}$ : on le calcule.</p>
-$$u'(t) = e^{-t} - t\,e^{-t},\qquad u'(t) + u(t) = e^{-t} - t\,e^{-t} + t\,e^{-t} = e^{-t}.\ \checkmark$$
+$$u'(t) = e^{-t} - t\,e^{-t},\qquad u'(t) + u(t) = e^{-t} - t\,e^{-t} + t\,e^{-t} = e^{-t}.$$
 <p class="ml">Exemple 4 : un cosinus</p>
 $$y' + y = \cO{2\cos t}.$$
 <p>On résout $z' + z = 2e^{it}$, puis $\cR{y_p} = \operatorname{Re}(z_p)$. Comme $i\neq-1$, on cherche $z_p = C\,e^{it}$ :</p>
 $$z_p' + z_p = (i + 1)C\,e^{it} = 2e^{it}\iff C = \frac{2}{1 + i} = \frac{2(1 - i)}{(1 + i)(1 - i)} = \frac{2(1 - i)}{2} = 1 - i.$$
 $$z_p = (1 - i)(\cos t + i\sin t) = (\cos t + \sin t) + i(\sin t - \cos t)\ \Longrightarrow\ \cR{y_p(t) = \cos t + \sin t}.$$
-<p>Contrôle : $y_p' + y_p = (-\sin t + \cos t) + (\cos t + \sin t) = 2\cos t\ \checkmark$.</p>
+<p>Contrôle : $y_p' + y_p = (-\sin t + \cos t) + (\cos t + \sin t) = 2\cos t$.</p>
 
 <h2 id="e-varc">6. La variation de la constante (ordre 1)</h2>
 <p>On l'utilise quand le second membre n'est dans aucune case du tableau. Elle marche toujours, mais il faut ensuite calculer une primitive.</p>
@@ -1098,14 +1098,14 @@ $$y' - \frac1t\,y = \cO{t^2}\quad\text{sur}\ I = \left]0, +\infty\right[.$$
 <p><b>2–3.</b> On pose $y_p = \lambda(t)\,t$ : $y_p' = \lambda'(t)\,t + \lambda(t)$.</p>
 $$y_p' - \frac1ty_p = \lambda'(t)\,t + \cancel{\lambda(t)} - \cancel{\lambda(t)} = \lambda'(t)\,t = t^2\iff\lambda'(t) = t.$$
 <p><b>4.</b> $\lambda(t) = \frac{t^2}2$, d'où $\cR{y_p(t) = \frac{t^3}2}$ et $y(t) = \cG\lambda\,t + \frac{t^3}{2}$.</p>
-<p>Contrôle : $y_p' - \frac1ty_p = \frac{3t^2}2 - \frac{t^2}2 = t^2\ \checkmark$.</p>
+<p>Contrôle : $y_p' - \frac1ty_p = \frac{3t^2}2 - \frac{t^2}2 = t^2$.</p>
 <p class="ml">Exemple 2 : le second membre n'est pas « classique »</p>
 $$y' + y = \cO{\frac{1}{1 + e^t}}\quad\text{sur}\ \mathbb R.$$
 <p><b>1.</b> $\cB{y_H(t) = \cG\lambda\,e^{-t}}$.</p>
 <p><b>2–3.</b> $y_p = \lambda(t)\,e^{-t}$, donc $\lambda'(t) = \cO b(t)\,e^{A(t)} = \dfrac{e^t}{1 + e^t}$.</p>
 <p><b>4.</b> On reconnaît $\frac{u'}{u}$ avec $u = 1 + e^t > 0$ : $\lambda(t) = \ln(1 + e^t)$.</p>
 $$\cR{y_p(t) = e^{-t}\ln(1 + e^t)},\qquad y(t) = \big(\cG\lambda + \ln(1 + e^t)\big)\,e^{-t}.$$
-<p>Contrôle : $y_p' = -e^{-t}\ln(1 + e^t) + e^{-t}\dfrac{e^t}{1 + e^t}$, donc $y_p' + y_p = \dfrac{1}{1 + e^t}\ \checkmark$.</p>
+<p>Contrôle : $y_p' = -e^{-t}\ln(1 + e^t) + e^{-t}\dfrac{e^t}{1 + e^t}$, donc $y_p' + y_p = \dfrac{1}{1 + e^t}$.</p>
 
 <h2 id="e-raccord">7. Le raccordement (coefficient de $y'$ qui s'annule)</h2>
 <ol>
@@ -1118,7 +1118,7 @@ $$\cR{y_p(t) = e^{-t}\ln(1 + e^t)},\qquad y(t) = \big(\cG\lambda + \ln(1 + e^t)\
 $$y(t) = \cG{\lambda_1}\,e^{2\ln t} = \cG{\lambda_1}\,t^2.$$
 <p><b>Sur $\left]-\infty, 0\right[$</b> : $A(t) = -2\ln|t|$, donc $y(t) = \cG{\lambda_2}\,e^{2\ln|t|} = \cG{\lambda_2}\,t^2$.</p>
 <p><b>2. En $0$.</b> L'équation en $t = 0$ donne $0\cdot y'(0) - 2y(0) = 0$, donc $y(0) = 0$.</p>
-$$\left\{\begin{aligned}\text{continuité}&:\ \lim_{t\to0^+}\cG{\lambda_1}t^2 = 0 = \lim_{t\to0^-}\cG{\lambda_2}t^2 = y(0)\ \checkmark\\\text{dérivabilité}&:\ \frac{y(t) - y(0)}{t - 0} = \left\{\begin{aligned}&\cG{\lambda_1}t\ (t > 0)\\&\cG{\lambda_2}t\ (t\lt0)\end{aligned}\right.\ \xrightarrow[t\to0]{}\ 0\ \checkmark\end{aligned}\right.$$
+$$\left\{\begin{aligned}\text{continuité}&:\ \lim_{t\to0^+}\cG{\lambda_1}t^2 = 0 = \lim_{t\to0^-}\cG{\lambda_2}t^2 = y(0)\\\text{dérivabilité}&:\ \frac{y(t) - y(0)}{t - 0} = \left\{\begin{aligned}&\cG{\lambda_1}t\ (t > 0)\\&\cG{\lambda_2}t\ (t\lt0)\end{aligned}\right.\ \xrightarrow[t\to0]{}\ 0\end{aligned}\right.$$
 <p><b>3.</b> Les solutions sur $\mathbb R$ sont toutes les fonctions $t\mapsto\cG{\lambda_1}t^2$ pour $t\geqslant0$ et $\cG{\lambda_2}t^2$ pour $t\lt0$, avec $\cG{\lambda_1}, \cG{\lambda_2}$ <b>indépendants</b> : un espace de dimension $2$, alors que l'ordre est 1.</p>
 <p class="ml">Contre-exemple : $t\,y' + y = 0$</p>
 <p>Sur chaque demi-droite, $y = \frac{\cG\lambda}{t}$. Cette fonction n'a une limite finie en $0$ que si $\cG\lambda = 0$ : la seule solution sur $\mathbb R$ est la fonction nulle.</p>
@@ -1173,7 +1173,7 @@ $$y'' + 3y' + 2y = \cO{10\cos t}.$$
 $$z_p'' + 3z_p' + 2z_p = (-1 + 3i + 2)\,C\,e^{it} = (1 + 3i)\,C\,e^{it} = 10e^{it}\iff C = \frac{10}{1 + 3i} = \frac{10(1 - 3i)}{1 + 9} = 1 - 3i.$$
 $$z_p = (1 - 3i)(\cos t + i\sin t) = (\cos t + 3\sin t) + i(\sin t - 3\cos t)\ \Longrightarrow\ \cR{y_p(t) = \operatorname{Re}(z_p) = \cos t + 3\sin t}.$$
 <p>Contrôle : $y_p' = -\sin t + 3\cos t$ et $y_p'' = -\cos t - 3\sin t$, donc :</p>
-$$y_p'' + 3y_p' + 2y_p = (-1 + 9 + 2)\cos t + (-3 - 3 + 6)\sin t = 10\cos t.\ \checkmark$$
+$$y_p'' + 3y_p' + 2y_p = (-1 + 9 + 2)\cos t + (-3 - 3 + 6)\sin t = 10\cos t.$$
 <p class="ml">Exemple 4 : un cosinus en résonance</p>
 $$y'' + y = \cO{\cos t}.$$
 <p>Les racines sont $\cV{\pm i}$, et $i$ est racine <b>simple</b> : on cherche $z_p = C\,t\,e^{it}$ pour $z'' + z = e^{it}$.</p>
@@ -1200,7 +1200,7 @@ $$y'' - 3y' + 2y = e^t,\qquad\cG{y(0) = 0},\qquad\cG{y'(0) = 0}.$$
 <p><b>3.</b> On écrit les conditions en $t = 0$ :</p>
 $$\left\{\begin{aligned}y(0) &= \cG\lambda + \cG\mu - 0 = 0\\y'(0) &= \cG\lambda + 2\cG\mu - 1 = 0\end{aligned}\right.\ \underset{\cO{L_2\leftarrow L_2 - L_1}}{\iff}\ \left\{\begin{aligned}\cG\lambda + \cG\mu &= 0\\\cG\mu &= 1\end{aligned}\right.\iff\left\{\begin{aligned}\cG\lambda &= -1\\\cG\mu &= 1\end{aligned}\right.$$
 $$y(t) = -e^t + e^{2t} - t\,e^t.$$
-<p>Contrôle : $y(0) = -1 + 1 - 0 = 0$ et $y'(0) = -1 + 2 - 1 = 0\ \checkmark$.</p>
+<p>Contrôle : $y(0) = -1 + 1 - 0 = 0$ et $y'(0) = -1 + 2 - 1 = 0$.</p>
 
 <h2 id="e-var">12. Ordre 2 à coefficients variables</h2>
 <p>$(H):\ y'' + a(t)\,y' + b(t)\,y = 0$. Plus de formule toute faite : $\mathcal S_H$ est de dimension $2$, il faut <b>trouver deux solutions indépendantes</b>.</p>
@@ -1245,7 +1245,7 @@ $$A + I_2 = \begin{pmatrix}2&2\\2&2\end{pmatrix}\iff\left\{\begin{aligned}2x + 2
 $$X(t) = \cG{c_1}\,e^{3t}\begin{pmatrix}1\\1\end{pmatrix} + \cG{c_2}\,e^{-t}\begin{pmatrix}1\\-1\end{pmatrix}.$$
 <p><b>Condition initiale.</b></p>
 $$X(0) = \begin{pmatrix}\cG{c_1} + \cG{c_2}\\\cG{c_1} - \cG{c_2}\end{pmatrix} = \begin{pmatrix}2\\0\end{pmatrix}\iff\left\{\begin{aligned}\cG{c_1} + \cG{c_2} &= 2\\\cG{c_1} - \cG{c_2} &= 0\end{aligned}\right.\iff\cG{c_1} = \cG{c_2} = 1,\qquad X(t) = \begin{pmatrix}e^{3t} + e^{-t}\\e^{3t} - e^{-t}\end{pmatrix}.$$
-<p>Contrôle : $x' = 3e^{3t} - e^{-t}$ et $x + 2y = e^{3t} + e^{-t} + 2e^{3t} - 2e^{-t} = 3e^{3t} - e^{-t}\ \checkmark$.</p>
+<p>Contrôle : $x' = 3e^{3t} - e^{-t}$ et $x + 2y = e^{3t} + e^{-t} + 2e^{3t} - 2e^{-t} = 3e^{3t} - e^{-t}$.</p>
 <p class="ml">$A$ triangulaire (non diagonalisable) : on résout de bas en haut</p>
 $$\left\{\begin{aligned}x' &= 2x + y\\y' &= 2y\end{aligned}\right.\qquad\Longrightarrow\qquad y = \cG{c_2}\,e^{2t},\qquad x' - 2x = \cG{c_2}\,e^{2t}.$$
 <p>Ordre 1 en résonance ($m = 2 = -a$) : $x_p = C\,t\,e^{2t}$, $x_p' - 2x_p = C\,e^{2t}$, donc $C = \cG{c_2}$ et $x = (\cG{c_1} + \cG{c_2}\,t)\,e^{2t}$.</p>
@@ -1365,7 +1365,7 @@ $$\sum_{\cB{k = 3}}^{\cB{10}}1 = \underbrace{1 + 1 + \cdots + 1}_{\cB{10 - 3 + 1
 </ul>
 <p class="ml">Exemple</p>
 $$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2 = 3\cdot\frac{n(n + 1)}{2} + 2n = \frac{3n^2 + 3n + 4n}{2} = \cG{\frac{n(3n + 7)}{2}}.$$
-<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5\ \checkmark$.</p>
+<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5$.</p>
 <p class="ml piege">Piège</p>
 <p>$\sum x_ky_k\neq\big(\sum x_k\big)\big(\sum y_k\big)$ et $\sum\frac1{x_k}\neq\frac1{\sum x_k}$. La somme ne passe pas dans un produit ni dans un quotient.</p>
 
@@ -1401,7 +1401,7 @@ $$3\sum_{k=1}^nk^2 = (n + 1)^3 - 1 - n - \frac{3n(n + 1)}2 = (n + 1)\Big[(n + 1)
 $$\sum_{k=1}^nk(k + 1) = \sum_{k=1}^nk^2 + \sum_{k=1}^nk = \frac{n(n + 1)(2n + 1)}6 + \frac{n(n + 1)}2.$$
 <p>On factorise par $\cO{\frac{n(n + 1)}6}$ avant de développer (moins de calculs) :</p>
 $$= \cO{\frac{n(n + 1)}6}\big[(2n + 1) + 3\big] = \frac{n(n + 1)(2n + 4)}6 = \cG{\frac{n(n + 1)(n + 2)}3}.$$
-<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8\ \checkmark$.</p>
+<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8$.</p>
 
 <h2 id="a-geo">5. La somme géométrique</h2>
 <div class="sbox">$$\sum_{k=0}^nq^k = \left\{\begin{aligned}&\frac{1 - q^{n+1}}{1 - q}&&\text{si}\ q\neq1\\&n + 1&&\text{si}\ q = 1\end{aligned}\right.\qquad\text{En général}:\ \text{premier terme}\times\frac{1 - q^{\text{nombre de termes}}}{1 - q}.$$</div>
@@ -1410,7 +1410,7 @@ $$(1 - q)\sum_{k=0}^nq^k = \sum_{k=0}^nq^k - \sum_{k=0}^nq^{k+1} = (1 + \cR{q + 
 <p class="ml">Exemple 1 : la somme ne commence pas à 0</p>
 $$\sum_{k=\cB2}^{\cB n}3^k:\qquad\text{premier terme}\ 3^2 = 9,\qquad\text{nombre de termes}\ \cB{n - 1},\qquad q = 3\neq1.$$
 $$\sum_{k=2}^n3^k = 9\cdot\frac{1 - 3^{n-1}}{1 - 3} = \frac92\big(3^{n-1} - 1\big) = \cG{\frac{3^{n+1} - 9}{2}}.$$
-<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9\ \checkmark$.</p>
+<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9$.</p>
 <p class="ml">Exemple 2 : la raison est cachée</p>
 $$\sum_{k=0}^n\frac{2^k}{5^{k+1}} = \frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \frac15\cdot\frac{1 - (2/5)^{n+1}}{1 - 2/5} = \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1 - \Big(\frac25\Big)^{n+1}\Big)}.$$
 <p class="ml piege">Piège</p>
@@ -1496,7 +1496,7 @@ $$(x + 1)^5 = \cV1\,x^5 + \cV5\,x^4 + \cV{10}\,x^3 + \cV{10}\,x^2 + \cV5\,x + \c
 <tr><td>$4$</td><td>$\cV1$</td><td>$16x^4$</td><td>$1$</td><td>$16x^4$</td></tr>
 </table>
 $$(2x - 3)^4 = \cG{16x^4 - 96x^3 + 216x^2 - 216x + 81}.$$
-<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1\ \checkmark$.</p>
+<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1$.</p>
 <p class="ml">Exemple 3 : les sommes de coefficients</p>
 $$a = b = 1:\ \sum_{k=0}^n\binom nk = (1 + 1)^n = \cG{2^n},\qquad a = -1,\ b = 1:\ \sum_{k=0}^n(-1)^k\binom nk = (1 - 1)^n = \cG0\ (n\geqslant1).$$
 <p class="ml">Exemple 4 : $\sum_{k=0}^nk\binom nk$ avec la formule du capitaine</p>
@@ -1523,7 +1523,7 @@ $$x^5 - 2^5 = (x - 2)\big(x^4 + 2x^3 + 4x^2 + 8x + 16\big).$$
 <p class="ml">Exemple : $S = \sum_{1\leqslant i\leqslant j\leqslant n}i$</p>
 <p>On somme d'abord sur $i$ (à $j$ fixé, $i$ va de $\cB1$ à $\cB j$) :</p>
 $$S = \sum_{j=1}^n\Big(\sum_{i=1}^ji\Big) = \sum_{j=1}^n\frac{j(j + 1)}2 = \frac12\sum_{j=1}^nj(j + 1) = \frac12\cdot\frac{n(n + 1)(n + 2)}3 = \cG{\frac{n(n + 1)(n + 2)}6}$$
-<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4\ \checkmark$.</p>
+<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4$.</p>
 <p class="ml">Le carré d'une somme</p>
 $$\Big(\sum_{i=1}^nx_i\Big)^2 = \sum_{i=1}^nx_i^2 + 2\sum_{1\leqslant i\lt j\leqslant n}x_ix_j.$$
 <p class="ml piege">Piège</p>
@@ -1774,7 +1774,7 @@ $$|\Delta| = \sqrt{3^2 + 4^2} = 5.\qquad\left\{\begin{aligned}x^2 - y^2 &= 3\\x^
 <p>On ajoute puis on soustrait les deux premières lignes :</p>
 $$2x^2 = 8\ \Longrightarrow\ x^2 = 4,\qquad2y^2 = 2\ \Longrightarrow\ y^2 = 1.$$
 <p>Donc $x = \pm2$ et $y = \pm1$. La troisième ligne donne $xy = 2 > 0$ : $x$ et $y$ ont le <b>même signe</b>.</p>
-$$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.\qquad\text{Contrôle}:\ (2 + i)^2 = 4 + 4i + i^2 = 3 + 4i.\ \checkmark$$
+$$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.\qquad\text{Contrôle}:\ (2 + i)^2 = 4 + 4i + i^2 = 3 + 4i.$$
 <div data-mlab="rac2"></div>
 
 <h2 id="z-eq2">12. Les équations du second degré</h2>
@@ -1790,7 +1790,7 @@ $$\Delta = (-3)^2 - 4(3 + i) = 9 - 12 - 4i = -3 - 4i.$$
 $$\left\{\begin{aligned}x^2 - y^2 &= -3\\x^2 + y^2 &= 5\\2xy &= -4\end{aligned}\right.\ \Longrightarrow\ x^2 = 1,\ y^2 = 4,\ xy\lt0\ \Longrightarrow\ \delta = 1 - 2i.$$
 <p><b>3. Les racines.</b></p>
 $$z_1 = \frac{3 + (1 - 2i)}2 = \frac{4 - 2i}2 = \cV{2 - i},\qquad z_2 = \frac{3 - (1 - 2i)}2 = \frac{2 + 2i}2 = \cV{1 + i}.$$
-<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca\ \checkmark$.</p>
+<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca$.</p>
 <p class="ml">Exemple 3 : avec la somme et le produit</p>
 <p>Trouver deux complexes de somme $s$ et de produit $p$ revient à résoudre $z^2 - sz + p = 0$.</p>
 
@@ -1809,7 +1809,7 @@ $$j = e^{\frac{2i\pi}3} = -\frac12 + i\frac{\sqrt3}2,\qquad j^3 = 1,\qquad1 + j 
 $$\left\{\begin{aligned}\rho^3 &= 8\\3\varphi &= \frac\pi2 + 2k\pi\end{aligned}\right.\iff\left\{\begin{aligned}\rho &= 2\\\varphi &= \frac\pi6 + \frac{2k\pi}3,\quad k\in\{0, 1, 2\}\end{aligned}\right.$$
 <p><b>2.</b> Les trois racines :</p>
 $$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \cV{\sqrt3 + i}\\k = 1&:\ 2e^{5i\pi/6} = 2\Big(-\frac{\sqrt3}2 + \frac i2\Big) = \cV{-\sqrt3 + i}\\k = 2&:\ 2e^{3i\pi/2} = \cV{-2i}\end{aligned}$$
-<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0\ \checkmark$.</p>
+<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0$.</p>
 <p><b>Astuce</b> : si $z_0$ est une racine, les autres sont $z_0\,\omega$ avec $\omega\in\mathbb U_n$.</p>
 <div data-mlab="racn"></div>
 
@@ -2003,7 +2003,7 @@ $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 
 <p><b>3.</b> $x = 0\iff t = \cO0$ et $x = 1\iff t = \cO{\frac\pi2}$.</p>
 <p><b>4.</b> Sur $\big[0, \frac\pi2\big]$, $\cos t\geqslant0$, donc $\sqrt{1 - \sin^2t} = |\cos t| = \cos t$ :</p>
 $$\int_0^1\sqrt{1 - x^2}\,dx = \int_{\cO0}^{\cO{\pi/2}}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \cG{\frac\pi4}.$$
-<p>C'est l'aire d'un quart de disque de rayon $1\ \checkmark$.</p>
+<p>C'est l'aire d'un quart de disque de rayon $1$.</p>
 <p class="ml">Exemple 2 : $\int_0^1\frac{dx}{1 + e^x}$ avec $t = e^x$</p>
 <p><b>1–2.</b> $\cO{t = e^x}$, donc $x = \ln t$ et $\cO{dx = \frac{dt}t}$. <b>3.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
 $$\int_0^1\frac{dx}{1 + e^x} = \int_{\cO1}^{\cO e}\frac{1}{(1 + t)}\cdot\frac{dt}t = \int_1^e\Big(\frac1t - \frac1{1 + t}\Big)dt = \big[\ln t - \ln(1 + t)\big]_1^e = \cG{1 - \ln(1 + e) + \ln2}.$$
@@ -3000,7 +3000,7 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 <p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
 $$P(1) = 0,\qquad P' = 3X^2 - 2,\ P'(1) = 1,\qquad P'' = 6X,\ P''(1) = 6,\qquad P''' = 6.$$
 $$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(X - 1)^2 + (X - 1)^3}.$$
-<p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)\ \checkmark$.</p>
+<p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)$.</p>
 
 <h2 id="q-div">3. La division euclidienne</h2>
 <div class="sbox">$$B\neq0:\quad\exists!\,(Q, R),\quad A = BQ + R\quad\text{et}\quad\deg R\lt\deg B.$$</div>
@@ -3015,7 +3015,7 @@ $$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(
 </ol>
 <p><b>Astuce</b> : on laisse une place pour chaque puissance (ici, aucun terme en $X^2$ dans $A$), pour que les colonnes restent alignées.</p>
 $$\cG{X^4 + 2X^3 - X + 1 = (X^2 + X + 1)(X^2 + X - 2) + 3}.$$
-<p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3\ \checkmark$.</p>
+<p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3$.</p>
 <div data-mlab="diveucl"></div>
 
 <h2 id="q-reste">4. Trouver un reste sans poser la division</h2>
@@ -3069,7 +3069,7 @@ $$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 + 4 = \cG4,\qquad\frac1{x_1
 <p class="ml">Exemple : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$</p>
 $$L_0 = \frac{(X - 1)(X - 2)}{(0 - 1)(0 - 2)} = \frac{(X - 1)(X - 2)}2,\qquad L_1 = \frac{X(X - 2)}{1\cdot(-1)} = -X(X - 2),\qquad L_2 = \frac{X(X - 1)}{2\cdot1}.$$
 $$P = 1\cdot\frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8X^2 - 10X + 2}2 - 3X^2 + 6X = \cG{X^2 + X + 1}.$$
-<p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7\ \checkmark$.</p>
+<p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$.</p>
 
 <h2 id="q-pgcd">9. PGCD, Bézout, Gauss</h2>
 <div class="sbox">$$\textbf{Bézout}:\ A\wedge B = 1\iff\exists\,U, V,\ AU + BV = 1.\qquad\textbf{Gauss}:\ A\mid BC\ \text{et}\ A\wedge B = 1\ \Longrightarrow\ A\mid C.$$</div>
@@ -3109,7 +3109,7 @@ $$\begin{aligned}X^4 - 1 &= X\cdot(X^3 - 1) + \cR{(X - 1)}\\X^3 - 1 &= (X - 1)(X
 <div class="sbox">$$\text{Pôle simple}\ a:\qquad c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}.$$</div>
 <p>Exemple : $F = \frac{X + 3}{(X - 1)(X + 2)(X - 3)} = \frac a{X - 1} + \frac b{X + 2} + \frac c{X - 3}$.</p>
 $$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \frac{-2 + 3}{(-2 - 1)(-2 - 3)} = \frac1{15},\qquad\cR c = \frac{3 + 3}{(3 - 1)(3 + 2)} = \frac35.$$
-<p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12\ \checkmark$.</p>
+<p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12$.</p>
 <p>La formule $\frac{P(a)}{Q'(a)}$ est la meilleure quand $Q$ n'est pas factorisé, comme $X^n - 1$ (voir les exercices F, G, I).</p>
 <p class="ml">Méthode 2 : pôle multiple, la plus haute puissance d'abord</p>
 <p>Pour un pôle $a$ d'ordre $m$, multiplier par $\cO{(X - a)^m}$ et évaluer en $a$ donne le coefficient de $\frac1{(X - a)^m}$ (le plus haut). Les autres s'obtiennent par :</p>
@@ -3121,7 +3121,7 @@ $$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \fr
 <p>Exemple : $F = \frac{X + 1}{(X + 2)(X - 1)^2} = \frac a{X + 2} + \frac b{X - 1} + \frac c{(X - 1)^2}$.</p>
 $$\cR a = \Big[\frac{X + 1}{(X - 1)^2}\Big]_{X = -2} = \frac{-1}{9},\qquad\cR c = \Big[\frac{X + 1}{X + 2}\Big]_{X = 1} = \frac23.$$
 <p>Pour $b$, on multiplie par $\cO X$ et on fait tendre $X$ vers $+\infty$ : $XF(X)\to0$ (degré $1$ en haut, $3$ en bas), et à droite on obtient $a + b + 0$.</p>
-$$0 = a + b\ \Longrightarrow\ \cR{b = \frac19}.\qquad\text{Contrôle en}\ X = 0:\ \frac1{2} = -\frac1{18} - \frac19 + \frac23 = \frac{-1 - 2 + 12}{18} = \frac12.\ \checkmark$$
+$$0 = a + b\ \Longrightarrow\ \cR{b = \frac19}.\qquad\text{Contrôle en}\ X = 0:\ \frac1{2} = -\frac1{18} - \frac19 + \frac23 = \frac{-1 - 2 + 12}{18} = \frac12.$$
 <p>C'est l'exercice B ci-dessous.</p>
 <p class="ml">Méthode 3 : la parité</p>
 <p>Si $F(-X) = F(X)$ ou $F(-X) = -F(X)$, on écrit la décomposition de $F(-X)$ et on identifie par unicité : cela relie les coefficients deux à deux.</p>
@@ -3138,7 +3138,7 @@ $$\frac{1}{X^2 - 1} = \frac a{X - 1} + \frac b{X + 1} = \frac{(a + b)X + (a - b)
 <p>Exemple : $F = \frac{X + 2}{X(X^2 + 1)} = \frac aX + \frac{\alpha X + \beta}{X^2 + 1}$.</p>
 $$\cR a = \Big[\frac{X + 2}{X^2 + 1}\Big]_{X = 0} = 2.\qquad\text{En}\ \cO{X = i}:\ \alpha i + \beta = \Big[\frac{X + 2}X\Big]_{X = i} = \frac{i + 2}i = 1 - 2i.$$
 $$\beta = 1,\ \alpha = -2\qquad\Longrightarrow\qquad\cG{F = \frac2X + \frac{-2X + 1}{X^2 + 1}}.$$
-<p>Contrôle en $X = 1$ : $\frac32 = 2 + \frac{-1}2\ \checkmark$.</p>
+<p>Contrôle en $X = 1$ : $\frac32 = 2 + \frac{-1}2$.</p>
 <p class="ml">Méthode B : passer par $\mathbb C$, puis regrouper les conjugués</p>
 <p>Si $\frac c{X - z}$ apparaît dans $\mathbb C$, alors $\frac{\overline c}{X - \overline z}$ aussi (fraction réelle), et :</p>
 <div class="sbox">$$\frac c{X - z} + \frac{\overline c}{X - \overline z} = \frac{2\operatorname{Re}(c)\,X - 2\operatorname{Re}(c\,\overline z)}{X^2 - 2\operatorname{Re}(z)\,X + |z|^2}.$$</div>
@@ -3162,7 +3162,7 @@ $$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightar
 <p><b>Dénominateur</b> : $X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}$.</p>
 <p><b>Pôles simples</b> :</p>
 $$\frac{7X - 6}{(X - 1)(X - 2)} = \frac a{X - 1} + \frac b{X - 2},\qquad\cR a = \frac{7 - 6}{1 - 2} = -1,\qquad\cR b = \frac{14 - 6}{2 - 1} = 8.$$
-$$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.\qquad\text{Contrôle en}\ 0:\ 0 = 3 + 1 - 4.\ \checkmark$$
+$$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.\qquad\text{Contrôle en}\ 0:\ 0 = 3 + 1 - 4.$$
 <p class="ml">Exercice 15 B : $\dfrac{X + 1}{(X + 2)(X - 1)^2}$</p>
 <p>Calculée au §11 (méthode 2) : $\cG{-\frac{1/9}{X + 2} + \frac{1/9}{X - 1} + \frac{2/3}{(X - 1)^2}}$.</p>
 <p class="ml">Exercice 15 C : $\dfrac{X^5 + 1}{(X^2 - X)^2}$</p>
@@ -3174,7 +3174,7 @@ $$(X + 2)(X^4 - 2X^3 + X^2) = X^5 - 3X^3 + 2X^2,\qquad X^5 + 1 = (X + 2)(X^4 - 2
 $$\cR b = \Big[\frac{X^5 + 1}{(X - 1)^2}\Big]_{X = 0} = 1,\qquad\cR d = \Big[\frac{X^5 + 1}{X^2}\Big]_{X = 1} = 2.$$
 <p><b>Coefficient $a$, par un DL en $0$</b> : $X^2F = \frac{X^5 + 1}{(X - 1)^2} = (1 + X^5)(1 - X)^{-2} = 1 + 2X + o(X)$. Le coefficient de $X$ donne $\cR{a = 2}$.</p>
 <p><b>Coefficient $c$, par un DL en $1$</b> : avec $\cO{X = 1 + h}$, $(X - 1)^2F = \frac{(1 + h)^5 + 1}{(1 + h)^2} = (2 + 5h)(1 - 2h) + o(h) = 2 + h + o(h)$. Donc $\cR{c = 1}$.</p>
-<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3\ \checkmark$.</p>
+<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3$.</p>
 $$\cG{\frac{X^5 + 1}{(X^2 - X)^2} = X + 2 + \frac2X + \frac1{X^2} + \frac1{X - 1} + \frac2{(X - 1)^2}}.$$
 <p class="ml">Exercice 15 D : $\dfrac{X^3 + 1}{X^3 - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
 <p><b>Partie entière</b> : $\frac{X^3 + 1}{X^3 - 1} = 1 + \frac2{X^3 - 1}$.</p>
@@ -3183,14 +3183,14 @@ $$\cG{\frac{X^5 + 1}{(X^2 - X)^2} = X + 2 + \frac2X + \frac1{X^2} + \frac1{X - 1
 $$\cG{1 + \frac23\Big(\frac1{X - 1} + \frac j{X - j} + \frac{j^2}{X - j^2}\Big)}.$$
 <p><b>Dans $\mathbb R(X)$</b> : on regroupe $j$ et $j^2 = \overline j$ ($j + \overline j = -1$, $j\overline j = 1$) :</p>
 $$\frac j{X - j} + \frac{\overline j}{X - \overline j} = \frac{(j + \overline j)X - 2j\overline j}{X^2 + X + 1} = \frac{-X - 2}{X^2 + X + 1}.$$
-$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac{2/3}{X - 1} - \frac23\cdot\frac{X + 2}{X^2 + X + 1}}.\qquad\text{Contrôle en}\ 0:\ -1 = 1 - \frac23 - \frac43.\ \checkmark$$
+$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac{2/3}{X - 1} - \frac23\cdot\frac{X + 2}{X^2 + X + 1}}.\qquad\text{Contrôle en}\ 0:\ -1 = 1 - \frac23 - \frac43.$$
 <p class="ml">Exercice 15 E : $\dfrac{X^4 + X + 1}{X(X^2 + 1)^3}$</p>
 <p><b>Forme</b> : $\frac aX + \frac{\alpha_1X + \beta_1}{X^2 + 1} + \frac{\alpha_2X + \beta_2}{(X^2 + 1)^2} + \frac{\alpha_3X + \beta_3}{(X^2 + 1)^3}$ (7 inconnues, degré 7).</p>
 <p><b>Pôle $0$</b> : $\cR a = \Big[\frac{X^4 + X + 1}{(X^2 + 1)^3}\Big]_0 = 1$. On retire ce terme :</p>
 $$F - \frac1X = \frac{X^4 + X + 1 - (X^2 + 1)^3}{X(X^2 + 1)^3} = \frac{-X^6 - 2X^4 - 3X^2 + X}{X(X^2 + 1)^3} = \frac{-X^5 - 2X^3 - 3X + 1}{(X^2 + 1)^3}.$$
 <p><b>Puissances de $Y = X^2 + 1$</b> : on remplace $X^2 = Y - 1$, donc $X^3 = X(Y - 1)$ et $X^5 = X(Y - 1)^2$ :</p>
 $$-X(Y^2 - 2Y + 1) - 2X(Y - 1) - 3X + 1 = -XY^2 + \cancel{2XY} - X - \cancel{2XY} + 2X - 3X + 1 = -XY^2 - 2X + 1.$$
-$$\cG{\frac{X^4 + X + 1}{X(X^2 + 1)^3} = \frac1X - \frac X{X^2 + 1} + \frac{1 - 2X}{(X^2 + 1)^3}}.\qquad\text{Contrôle en}\ 1:\ \frac38 = 1 - \frac12 - \frac18.\ \checkmark$$
+$$\cG{\frac{X^4 + X + 1}{X(X^2 + 1)^3} = \frac1X - \frac X{X^2 + 1} + \frac{1 - 2X}{(X^2 + 1)^3}}.\qquad\text{Contrôle en}\ 1:\ \frac38 = 1 - \frac12 - \frac18.$$
 <p class="ml">Exercice 15 F : $\dfrac{X^{n-1}}{X^n - 1}$ dans $\mathbb C(X)$</p>
 <p>Pôles simples : les $\cB{\omega_k = e^{2ik\pi/n}}$, $0\leqslant k\leqslant n - 1$. Avec $Q' = nX^{n-1}$ :</p>
 $$c_k = \frac{\omega_k^{n-1}}{n\,\omega_k^{n-1}} = \frac1n\qquad\Longrightarrow\qquad\cG{\frac{X^{n-1}}{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac1{X - \omega_k}}.$$
@@ -3204,7 +3204,7 @@ $$c_k = \frac1{(\omega_k - 1)\,n\,\omega_k^{n-1}} = \frac{\omega_k}{n(\omega_k -
 <p><b>Pôle double $1$</b> : $(X - 1)^2F = \frac1\Phi$. Le coefficient de $\frac1{(X - 1)^2}$ est $\frac1{\Phi(1)} = \frac1n$, et celui de $\frac1{X - 1}$ est la dérivée de $\frac1\Phi$ en $1$ :</p>
 $$\Big(\frac1\Phi\Big)'(1) = -\frac{\Phi'(1)}{\Phi(1)^2} = -\frac{1 + 2 + \cdots + (n - 1)}{n^2} = -\frac{n(n - 1)/2}{n^2} = -\frac{n - 1}{2n}.$$
 $$\cG{\frac1{(X - 1)(X^n - 1)} = \frac1{n(X - 1)^2} - \frac{n - 1}{2n(X - 1)} + \sum_{k=1}^{n-1}\frac{\omega_k}{n(\omega_k - 1)(X - \omega_k)}}.$$
-<p>Contrôle avec $n = 2$ : $\frac1{(X - 1)^2(X + 1)} = \frac{1/2}{(X - 1)^2} - \frac{1/4}{X - 1} + \frac{1/4}{X + 1}$, ce qu'on retrouve directement. $\checkmark$</p>
+<p>Contrôle avec $n = 2$ : $\frac1{(X - 1)^2(X + 1)} = \frac{1/2}{(X - 1)^2} - \frac{1/4}{X - 1} + \frac{1/4}{X + 1}$, ce qu'on retrouve directement.</p>
 <p class="ml">Exercice 15 I : $\dfrac1{X^{2n} - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
 <p><b>Dans $\mathbb C(X)$</b> : pôles $\cB{\omega_k = e^{ik\pi/n}}$, $0\leqslant k\leqslant2n - 1$, coefficients $\frac{\omega_k}{2n}$ (comme en G) :</p>
 $$\frac1{X^{2n} - 1} = \frac1{2n}\sum_{k=0}^{2n-1}\frac{\omega_k}{X - \omega_k}.$$
