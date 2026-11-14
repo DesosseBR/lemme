@@ -12,9 +12,12 @@ LEMME.METHODES = {
 <li>Matrice ligne : $n = 1$. Matrice colonne : $p = 1$.</li>
 </ul>
 <p class="ml">Exemple</p>
-<p>On repère un coefficient par <b>sa ligne puis sa colonne</b>. Chaque coefficient coloré est relié à son nom :</p>
-$$A = \begin{pmatrix}2&5&\cB4\\\cR7&\cG{-6}&0\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R)$$
-$$\cB{a_{1,3} = 4}\ \ (\text{ligne}\ 1,\ \text{colonne}\ 3),\qquad\cR{a_{2,1} = 7}\ \ (\text{ligne}\ 2,\ \text{colonne}\ 1),\qquad\cG{a_{2,2} = -6}\ \ (\text{ligne}\ 2,\ \text{colonne}\ 2).$$
+<p><b>Étape 1 : Rappel.</b> Dans $a_{i,j}$, le premier indice $i$ est la <b>ligne</b>, le second $j$ la <b>colonne</b>. Une matrice à $n$ lignes et $p$ colonnes est dans $\mathcal M_{n,p}(\mathbb K)$.</p>
+<p><b>Étape 2 : La taille.</b> On compte $2$ lignes et $3$ colonnes :</p>
+$$A = \begin{pmatrix}2&5&\cB4\\\cR7&\cG{-6}&0\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R).$$
+<p><b>Étape 3 : Lire un coefficient.</b> On descend jusqu'à la ligne, puis on avance jusqu'à la colonne :</p>
+$$\cB{a_{1,3} = 4}\ (\text{ligne}\ 1,\ \text{colonne}\ 3),\qquad\cR{a_{2,1} = 7}\ (\text{ligne}\ 2,\ \text{colonne}\ 1),\qquad\cG{a_{2,2} = -6}\ (\text{ligne}\ 2,\ \text{colonne}\ 2).$$
+
 <p class="ml">Matrices à connaître</p>
 $$0_{n,p} = \begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix},\qquad I_n = \begin{pmatrix}1&&0\\&\ddots&\\0&&1\end{pmatrix},\qquad D = \begin{pmatrix}d_1&&0\\&\ddots&\\0&&d_n\end{pmatrix}.$$
 <ul>
@@ -28,10 +31,13 @@ $$0_{n,p} = \begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix},\
 <p class="ml">Méthode</p>
 $$A + B = (a_{i,j} + b_{i,j}),\qquad \lambda A = (\lambda a_{i,j}),\qquad A + 0 = A.$$
 <p class="ml">Exemple</p>
-<p>Case par case : chaque couleur additionne les deux coefficients <b>à la même place</b>.</p>
-$$\begin{pmatrix}\cB1&\cR2&\cG0\\\cV3&\cO{-1}&\cP4\end{pmatrix}+\begin{pmatrix}\cB5&\cR0&\cG2\\\cV1&\cO1&\cP{-4}\end{pmatrix} = \begin{pmatrix}\cB{1+5}&\cR{2+0}&\cG{0+2}\\\cV{3+1}&\cO{-1+1}&\cP{4-4}\end{pmatrix} = \begin{pmatrix}\cB6&\cR2&\cG2\\\cV4&\cO0&\cP0\end{pmatrix}$$
-<p>Le scalaire multiplie <b>chaque</b> coefficient :</p>
-$$\cR{-2}\begin{pmatrix}1&3\\0&-1\end{pmatrix} = \begin{pmatrix}\cR{-2}\times1&\cR{-2}\times3\\\cR{-2}\times0&\cR{-2}\times(-1)\end{pmatrix} = \begin{pmatrix}-2&-6\\0&2\end{pmatrix}$$
+<p><b>Étape 1 : Rappel.</b> On additionne deux matrices <b>de même taille</b> case par case : $(A + B)_{i,j} = a_{i,j} + b_{i,j}$. Et $(\lambda A)_{i,j} = \lambda\,a_{i,j}$.</p>
+<p><b>Étape 2 : Vérifier les tailles.</b> Les deux matrices sont dans $\mathcal M_{2,3}$ : la somme existe.</p>
+<p><b>Étape 3 : Additionner case par case</b> (chaque couleur va avec la case à la même place) :</p>
+$$\begin{pmatrix}\cB1&\cR2&\cG0\\\cV3&\cO{-1}&\cP4\end{pmatrix}+\begin{pmatrix}\cB5&\cR0&\cG2\\\cV1&\cO1&\cP{-4}\end{pmatrix} = \begin{pmatrix}\cB{1+5}&\cR{2+0}&\cG{0+2}\\\cV{3+1}&\cO{-1+1}&\cP{4-4}\end{pmatrix} = \begin{pmatrix}\cB6&\cR2&\cG2\\\cV4&\cO0&\cP0\end{pmatrix}.$$
+<p><b>Étape 4 : Multiplier par un scalaire.</b> Le $-2$ multiplie <b>chaque</b> coefficient :</p>
+$$\cR{-2}\begin{pmatrix}1&3\\0&-1\end{pmatrix} = \begin{pmatrix}\cR{-2}\times1&\cR{-2}\times3\\\cR{-2}\times0&\cR{-2}\times(-1)\end{pmatrix} = \begin{pmatrix}-2&-6\\0&2\end{pmatrix}.$$
+
 <p class="ml piege">Piège</p>
 <ul>
 <li>$A + 3$ n'a <b>aucun sens</b> : on écrit $A + 3I_n$.</li>
@@ -201,7 +207,13 @@ $$\operatorname{tr}\begin{pmatrix}\cB3&1&0\\2&\cB{-1}&4\\5&0&\cB{-8}\end{pmatrix
 <p>On ne garde que la <span class="kB">diagonale</span>.</p>
 <div class="sbox">$$\operatorname{tr}(A + B) = \operatorname{tr}A + \operatorname{tr}B,\quad\operatorname{tr}(\lambda A) = \lambda\operatorname{tr}A,\quad\operatorname{tr}({}^tA) = \operatorname{tr}A,\quad\operatorname{tr}(AB) = \operatorname{tr}(BA).$$</div>
 <p class="ml">Exemple d'usage</p>
-$$AB - BA = I_n\ \Longrightarrow\ 0 = \operatorname{tr}(AB) - \operatorname{tr}(BA) = \operatorname{tr}I_n = n:\ \text{impossible}.$$
+<p><b>Étape 1 : Rappel.</b> Pour toutes matrices carrées $A, B$ de taille $n$ : $\operatorname{tr}(AB) = \operatorname{tr}(BA)$, et $\operatorname{tr}(I_n) = n$.</p>
+<p><b>Étape 2 : On suppose</b> qu'il existe $A, B$ avec $AB - BA = I_n$, et on prend la trace des deux côtés (la trace est linéaire) :</p>
+$$\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = \operatorname{tr}(I_n).$$
+<p><b>Étape 3 : On calcule chaque côté.</b> À gauche, $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ donne $0$. À droite, $n$ :</p>
+$$0 = n.$$
+<p><b>Étape 4 : Conclusion.</b> C'est impossible car $n\geqslant1$ : $\cG{AB - BA = I_n}$ n'a pas de solution.</p>
+
 <p class="ml piege">Piège</p>
 <p>$\operatorname{tr}(AB)\neq\operatorname{tr}A\cdot\operatorname{tr}B$ en général, et $\operatorname{tr}(ABC)\neq\operatorname{tr}(BAC)$ : seules les permutations circulaires sont permises.</p>
 
@@ -211,12 +223,13 @@ $$AB - BA = I_n\ \Longrightarrow\ 0 = \operatorname{tr}(AB) - \operatorname{tr}(
 <div class="sbox">$$\text{La colonne}\ j\ \text{de}\ \operatorname{Mat}_{\cB{\mathcal B},\cR{\mathcal C}}(f)\ \text{contient les coordonnées de}\ f(\cB{e_j})\ \text{dans la base}\ \cR{\mathcal C}.$$</div>
 <p><b>Astuce</b> : <i>on range les images en colonnes, écrites avec les vecteurs d'arrivée.</i> Les colonnes sont étiquetées par le départ, les lignes par l'arrivée.</p>
 <p class="ml">Exemple : $f : E\to F$, $\cB{\mathcal B = (e_1,e_2,e_3)}$ base de $E$, $\cR{\mathcal C = (e'_1,e'_2)}$ base de $F$</p>
+<p><b>Étape 1 : Rappel.</b> La colonne $j$ de $\operatorname{Mat}_{\mathcal B,\mathcal C}(f)$ contient les coordonnées de $f(e_j)$ dans la base d'arrivée $\mathcal C$.</p>
+<p><b>Étape 2 : Les images des vecteurs de $\mathcal B$</b>, écrites dans $\mathcal C$ :</p>
 $$f(\cB{e_1}) = 3\cR{e'_1} + 4\cR{e'_2},\qquad f(\cB{e_2}) = -8\cR{e'_1} + 5\cR{e'_2},\qquad f(\cB{e_3}) = 7\cR{e'_1} - 2\cR{e'_2}.$$
+<p><b>Étape 3 : On range chaque image en colonne</b>, les coordonnées sur $e'_1$ en haut et sur $e'_2$ en bas :</p>
 <div class="labm"><table><tr><td></td><td class="kB">$f(e_1)$</td><td class="kB">$f(e_2)$</td><td class="kB">$f(e_3)$</td><td></td></tr><tr><td class="kR">$e'_1$</td><td class="c1">3</td><td class="c2">−8</td><td class="c3">7</td><td rowspan="2" class="lr"></td></tr><tr><td class="kR">$e'_2$</td><td class="c1">4</td><td class="c2">5</td><td class="c3">−2</td></tr></table><span class="lab-cap">$A = \operatorname{Mat}_{\cB{\mathcal B},\cR{\mathcal C}}(f)\in\mathcal M_{\cR2,\cB3}(\mathbb K)$</span></div>
-<ul>
-<li>La première colonne est $f(\cB{e_1})$ : on lit $3\cR{e'_1} + 4\cR{e'_2}$ de haut en bas.</li>
-<li>Taille : <b>autant de lignes que $\dim\cR F$</b>, <b>autant de colonnes que $\dim\cB E$</b>.</li>
-</ul>
+<p><b>Étape 4 : Vérifier la taille.</b> Autant de lignes que $\dim\cR F = 2$, autant de colonnes que $\dim\cB E = 3$.</p>
+
 <div data-mlab="colf"></div>
 <p class="ml">Pourquoi la matrice suffit</p>
 $$x = a_1\cB{e_1} + a_2\cB{e_2} + a_3\cB{e_3}\ \Longrightarrow\ f(x) = a_1f(\cB{e_1}) + a_2f(\cB{e_2}) + a_3f(\cB{e_3})\quad\text{(linéarité)}.$$
@@ -232,9 +245,14 @@ $$x = \cB{2e_1 - e_2 + e_3}:\qquad\begin{pmatrix}3&-8&7\\4&5&-2\end{pmatrix}\beg
 <li>Ranger les coordonnées <b>en colonne</b>, dans l'ordre des vecteurs de départ.</li>
 </ol>
 <p class="ml">Exemple : $f(P) = 2P' - P$ sur $\mathbb K_3[X]$, base $\mathcal B = (1, X, X^2, X^3)$</p>
-$$f(\cB1) = -1,\qquad f(\cB X) = 2 - X,\qquad f(\cB{X^2}) = 4X - X^2,\qquad f(\cB{X^3}) = 6X^2 - X^3.$$
-<div class="labm"><table><tr><td></td><td class="kB">$f(1)$</td><td class="kB">$f(X)$</td><td class="kB">$f(X^2)$</td><td class="kB">$f(X^3)$</td></tr><tr><td class="kR">$1$</td><td class="c1">−1</td><td class="c2">2</td><td class="c3">0</td><td class="c4">0</td></tr><tr><td class="kR">$X$</td><td class="c1">0</td><td class="c2">−1</td><td class="c3">4</td><td class="c4">0</td></tr><tr><td class="kR">$X^2$</td><td class="c1">0</td><td class="c2">0</td><td class="c3">−1</td><td class="c4">6</td></tr><tr><td class="kR">$X^3$</td><td class="c1">0</td><td class="c2">0</td><td class="c3">0</td><td class="c4">−1</td></tr></table><span class="lab-cap">$\operatorname{Mat}_{\mathcal B}(f)$ : triangulaire, donc $\det = 1$ et $f$ bijective</span></div>
-<p><b>Astuce</b> : une application qui ne fait pas monter le degré donne une matrice <b>triangulaire supérieure</b> dans $(1, X, \dots, X^n)$.</p>
+<p><b>Étape 1 : Rappel.</b> La colonne $j$ de $\operatorname{Mat}_{\mathcal B}(f)$ contient les coordonnées de $f(e_j)$ dans $\mathcal B$.</p>
+<p><b>Étape 2 : Les images</b> par $f(P) = 2P' - P$ :</p>
+$$f(\cB1) = 2\cdot0 - 1 = -1,\qquad f(\cB X) = 2\cdot1 - X = 2 - X,\qquad f(\cB{X^2}) = 2\cdot2X - X^2 = 4X - X^2,\qquad f(\cB{X^3}) = 6X^2 - X^3.$$
+<p><b>Étape 3 : Les coordonnées</b> sur $(1, X, X^2, X^3)$, rangées en colonnes :</p>
+<div class="labm"><table><tr><td></td><td class="kB">$f(1)$</td><td class="kB">$f(X)$</td><td class="kB">$f(X^2)$</td><td class="kB">$f(X^3)$</td></tr><tr><td class="kR">$1$</td><td class="c1">−1</td><td class="c2">2</td><td class="c3">0</td><td class="c4">0</td></tr><tr><td class="kR">$X$</td><td class="c1">0</td><td class="c2">−1</td><td class="c3">4</td><td class="c4">0</td></tr><tr><td class="kR">$X^2$</td><td class="c1">0</td><td class="c2">0</td><td class="c3">−1</td><td class="c4">6</td></tr><tr><td class="kR">$X^3$</td><td class="c1">0</td><td class="c2">0</td><td class="c3">0</td><td class="c4">−1</td></tr></table><span class="lab-cap">$\operatorname{Mat}_{\mathcal B}(f)$</span></div>
+<p><b>Étape 4 : Ce qu'on en déduit.</b> La matrice est triangulaire, de diagonale $-1, -1, -1, -1$ : $\det = (-1)^4 = 1\neq0$, donc $\cG{f\ \text{est bijective}}$.</p>
+<p>Astuce : une application qui ne fait pas monter le degré donne une matrice triangulaire supérieure dans $(1, X, \dots, X^n)$.</p>
+
 <p class="ml piege">Piège</p>
 <ul>
 <li>Mettre les coordonnées <b>en ligne</b> : on obtient $\,{}^tA$, pas $A$.</li>
@@ -258,8 +276,12 @@ $$\cB E\ \xrightarrow{\ \ f\ \ }\ \cG F\ \xrightarrow{\ \ g\ \ }\ \cR G\qquad\Lo
 <div class="sbox">$$P_{\cO{\mathcal B}\to\cG{\mathcal B'}}:\ \text{la colonne}\ j\ \text{contient les coordonnées du}\ \textbf{nouveau}\ \text{vecteur}\ \cG{e'_j}\ \text{dans l'}\textbf{ancienne}\ \text{base}\ \cO{\mathcal B}.$$</div>
 <p><b>Astuce</b> : <i>les nouveaux en colonnes, écrits dans l'ancienne base</i>. C'est exactement la règle du §11 appliquée à l'identité.</p>
 <p class="ml">Exemple</p>
+<p><b>Étape 1 : Rappel.</b> La matrice de passage de $\mathcal B$ à $\mathcal B'$ a pour colonnes les <b>nouveaux</b> vecteurs, écrits dans l'<b>ancienne</b> base.</p>
+<p><b>Étape 2 : Les nouveaux vecteurs</b> dans l'ancienne base :</p>
 $$\cG{e'_1} = 7\cO{e_1} + \cO{e_2} - 4\cO{e_3},\qquad\cG{e'_2} = 8\cO{e_1} - 2\cO{e_2} + 9\cO{e_3},\qquad\cG{e'_3} = -3\cO{e_1} + 6\cO{e_2} + 5\cO{e_3}.$$
+<p><b>Étape 3 : On les range en colonnes.</b></p>
 <div class="labm og"><table><tr><td></td><td class="kG">$e'_1$</td><td class="kG">$e'_2$</td><td class="kG">$e'_3$</td></tr><tr><td class="kO">$e_1$</td><td class="c1">7</td><td class="c2">8</td><td class="c3">−3</td></tr><tr><td class="kO">$e_2$</td><td class="c1">1</td><td class="c2">−2</td><td class="c3">6</td></tr><tr><td class="kO">$e_3$</td><td class="c1">−4</td><td class="c2">9</td><td class="c3">5</td></tr></table><span class="lab-cap">$P = P_{\cO{\mathcal B}\to\cG{\mathcal B'}} = \operatorname{Mat}_{\cG{\mathcal B'},\cO{\mathcal B}}(\mathrm{id})$</span></div>
+
 <p class="ml">Ce qu'il faut savoir</p>
 <div class="sbox">$$\left\{\begin{aligned}&P_{\cO{\mathcal B}\to\cG{\mathcal B'}} = \operatorname{Mat}_{\cG{\mathcal B'},\cO{\mathcal B}}(\mathrm{id})\quad\text{(l'ordre des bases s'inverse dans la notation)}\\&P\ \text{est carrée et toujours inversible},\qquad P_{\cG{\mathcal B'}\to\cO{\mathcal B}} = P^{-1}\\&P_{\mathcal B\to\mathcal B'}\,P_{\mathcal B'\to\mathcal B''} = P_{\mathcal B\to\mathcal B''}\quad\text{(Chasles, dans le bon ordre)}\end{aligned}\right.$$</div>
 <p class="ml">Changer les coordonnées d'un vecteur</p>
@@ -331,9 +353,20 @@ $$A = PA'P^{-1}\ \Longrightarrow\ A^n = P\,A'^n\,P^{-1} = \frac12\begin{pmatrix}
 <div><b>Que des $1$</b><span>$\cR J = \begin{pmatrix}1&\cdots&1\\\vdots&&\vdots\\1&\cdots&1\end{pmatrix}$ : $\cR{J^2} = n\cR J$, donc $\cR{J^k} = n^{k-1}\cR J$ pour $k\geqslant1$.</span></div>
 </div>
 <p class="ml">Exemple avec la matrice « que des $1$ »</p>
-$$A = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix} = \cR J - \cB{I_3},\qquad\cR{J^2} = 3\cR J\ \Longrightarrow\ \cR{J^k} = 3^{k-1}\cR J\ (k\geqslant1).$$
-$$A^n = \sum_{k=0}^n\binom nk\cR{J^k}\cB{(-I_3)}^{n-k} = (-1)^nI_3 + \Big(\sum_{k=1}^n\binom nk3^{k-1}(-1)^{n-k}\Big)\cR J = (-1)^nI_3 + \frac{2^n - (-1)^n}3\,\cR J.$$
-<p>Astuce : $\sum_{k=1}^n\binom nk3^k(-1)^{n-k} = (3 - 1)^n - (-1)^n$ par le binôme <b>dans l'autre sens</b>, puis on divise par $3$.</p>
+<p><b>Étape 1 : Rappel.</b> Binôme de Newton pour deux matrices qui commutent : $(M + N)^n = \sum_{k=0}^n\binom nkM^kN^{n-k}$.</p>
+<p><b>Étape 2 : On écrit $A$ avec $J$</b>, la matrice remplie de $1$ :</p>
+$$A = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix} = \cR J - \cB{I_3}.$$
+<p><b>Étape 3 : Les hypothèses.</b> $\cR J$ et $\cB{-I_3}$ commutent ($I_3$ commute avec tout).</p>
+<p><b>Étape 4 : Les puissances de $J$.</b> Chaque case de $J^2$ vaut $1 + 1 + 1 = 3$ :</p>
+$$\cR{J^2} = 3\cR J\ \Longrightarrow\ \cR{J^k} = 3^{k-1}\cR J\quad(k\geqslant1).$$
+<p><b>Étape 5 : Le binôme.</b> On sépare le terme $k = 0$ (qui vaut $(-1)^nI_3$) des autres :</p>
+$$A^n = \sum_{k=0}^n\binom nk\cR{J^k}\cB{(-I_3)}^{n-k} = (-1)^nI_3 + \Big(\sum_{k=1}^n\binom nk3^{k-1}(-1)^{n-k}\Big)\cR J.$$
+<p><b>Étape 6 : La somme.</b> On reconnaît un binôme : $\sum_{k=0}^n\binom nk3^k(-1)^{n-k} = (3 - 1)^n = 2^n$. On enlève le terme $k = 0$, qui vaut $(-1)^n$, et on divise par $3$ :</p>
+$$\sum_{k=1}^n\binom nk3^{k-1}(-1)^{n-k} = \frac{2^n - (-1)^n}3.$$
+<p><b>Étape 7 : Conclusion.</b></p>
+$$\cG{A^n = (-1)^nI_3 + \frac{2^n - (-1)^n}3\,J}.$$
+<p>Contrôle avec $n = 1$ : $-I_3 + \frac{2 + 1}3J = J - I_3 = A$.</p>
+
 <p class="ml">Méthode C : $A^2$ a une forme simple, puis récurrence</p>
 $$A^2 = A\ \Rightarrow\ A^n = A\ (n\geqslant1),\qquad A^2 = kA\ \Rightarrow\ A^n = k^{n-1}A,\qquad A^p = 0\ \Rightarrow\ A^n = 0\ (n\geqslant p).$$
 <p>On calcule $A^2$, $A^3$, on devine la forme, puis on la prouve par récurrence avec $A^{n+1} = A\cdot A^n$.</p>
@@ -523,16 +556,23 @@ $$\begin{vmatrix}2&7&-1\\0&-3&5\\0&0&4\end{vmatrix} = 2\times(-3)\times4 = -24,\
 </ol>
 <div data-mlab="sarrus"></div>
 <p class="ml">Exemple</p>
-<p>Chaque produit a sa couleur : la case de la matrice et le facteur du calcul ont la même. Les trois premiers suivent un trait <b>descendant</b> ($+$), les trois suivants un trait <b>montant</b> ($-$).</p>
+<p><b>Étape 1 : Rappel.</b> Règle de Sarrus (taille 3 seulement) : les trois diagonales descendantes comptent avec $+$, les trois montantes avec $-$.</p>
+$$A = \begin{pmatrix}1&2&3\\0&4&5\\1&0&6\end{pmatrix}.$$
+<p><b>Étape 2 : Les trois produits descendants</b> ($+$). Chaque couleur montre les trois cases du produit :</p>
 <div class="sarx">
 <div>$$\begin{vmatrix}\cB1&2&3\\0&\cB4&5\\1&0&\cB6\end{vmatrix}$$<p>$+\ \cB{1\times4\times6} = \cB{24}$</p></div>
 <div>$$\begin{vmatrix}1&\cG2&3\\0&4&\cG5\\\cG1&0&6\end{vmatrix}$$<p>$+\ \cG{2\times5\times1} = \cG{10}$</p></div>
 <div>$$\begin{vmatrix}1&2&\cV3\\\cV0&4&5\\1&\cV0&6\end{vmatrix}$$<p>$+\ \cV{3\times0\times0} = \cV{0}$</p></div>
+</div>
+<p><b>Étape 3 : Les trois produits montants</b> ($-$) :</p>
+<div class="sarx">
 <div>$$\begin{vmatrix}1&2&\cR3\\0&\cR4&5\\\cR1&0&6\end{vmatrix}$$<p>$-\ \cR{3\times4\times1} = -\cR{12}$</p></div>
 <div>$$\begin{vmatrix}\cO1&2&3\\0&4&\cO5\\1&\cO0&6\end{vmatrix}$$<p>$-\ \cO{1\times5\times0} = -\cO{0}$</p></div>
 <div>$$\begin{vmatrix}1&\cP2&3\\\cP0&4&5\\1&0&\cP6\end{vmatrix}$$<p>$-\ \cP{2\times0\times6} = -\cP{0}$</p></div>
 </div>
-$$\det A = (\cB{24} + \cG{10} + \cV{0}) - (\cR{12} + \cO{0} + \cP{0}) = 34 - 12 = 22.$$
+<p><b>Étape 4 : On additionne.</b></p>
+$$\det A = (\cB{24} + \cG{10} + \cV{0}) - (\cR{12} + \cO{0} + \cP{0}) = 34 - 12 = \cG{22}.$$
+
 <p class="ml piege">Piège</p>
 <ul>
 <li>Sarrus ne marche <b>qu'en taille 3</b>. En taille 4, il y a 24 produits, pas 8.</li>
@@ -550,7 +590,16 @@ $$\det A = (\cB{24} + \cG{10} + \cV{0}) - (\cR{12} + \cO{0} + \cP{0}) = 34 - 12 
 <li>Développer selon la ligne ou la colonne pleine de zéros.</li>
 </ol>
 <p class="ml">Exemple : la somme des colonnes</p>
-$$\begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}\underset{C_1\leftarrow C_1 + C_2 + C_3}{=}(a + 2b)\begin{vmatrix}1&b&b\\1&a&b\\1&b&a\end{vmatrix}\underset{\substack{L_2\leftarrow L_2 - L_1\\L_3\leftarrow L_3 - L_1}}{=}(a + 2b)\begin{vmatrix}1&b&b\\0&a - b&0\\0&0&a - b\end{vmatrix} = (a + 2b)(a - b)^2.$$
+<p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant. On peut sortir un facteur commun d'une colonne. Une matrice triangulaire a pour déterminant le produit de sa diagonale.</p>
+<p><b>Étape 2 : $\cO{C_1\leftarrow C_1 + C_2 + C_3}$.</b> Chaque ligne a pour somme $a + 2b$ :</p>
+$$\begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix} = \begin{vmatrix}a + 2b&b&b\\a + 2b&a&b\\a + 2b&b&a\end{vmatrix}.$$
+<p><b>Étape 3 : On sort $(a + 2b)$ de la première colonne.</b></p>
+$$= (a + 2b)\begin{vmatrix}1&b&b\\1&a&b\\1&b&a\end{vmatrix}.$$
+<p><b>Étape 4 : $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$.</b> Ligne 2 : $(1 - 1, a - b, b - b) = (0, a - b, 0)$. Ligne 3 : $(0, 0, a - b)$.</p>
+$$= (a + 2b)\begin{vmatrix}1&b&b\\0&a - b&0\\0&0&a - b\end{vmatrix}.$$
+<p><b>Étape 5 : Triangulaire.</b> Produit de la diagonale :</p>
+$$\cG{\det = (a + 2b)(a - b)^2}.$$
+
 <p class="ml piege">Piège</p>
 <p>$L_i\leftarrow\lambda L_i + L_j$ multiplie le déterminant par $\lambda$ : on ne touche à la ligne modifiée qu'en lui ajoutant les autres.</p>
 
@@ -566,15 +615,17 @@ $$\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix},\qquad\begin{pmatrix}+&-&+&-\\
 <p>Développer selon la ligne ou la colonne qui contient <b>le plus de zéros</b> : chaque zéro supprime un déterminant à calculer.</p>
 <div data-mlab="dev"></div>
 <p class="ml">Exemple</p>
-<p>On développe selon la <b>ligne 1</b>. Ses trois coefficients ont chacun une couleur, et leurs signes viennent du damier $\begin{pmatrix}\cB+&\cR-&\cG+\end{pmatrix}$.</p>
-$$A = \begin{pmatrix}\cB1&\cR4&\cG5\\2&0&3\\0&1&2\end{pmatrix}$$
-<p>Pour chaque coefficient, on <b>barre sa ligne et sa colonne</b> (en gris) : ce qui reste est son mineur.</p>
+<p><b>Étape 1 : Rappel.</b> Développer selon la ligne $i$ : $\det A = \sum_j(-1)^{i+j}a_{i,j}\Delta_{i,j}$, où le mineur $\Delta_{i,j}$ est le déterminant obtenu en barrant la ligne $i$ et la colonne $j$. Les signes suivent le damier $\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix}$.</p>
+$$A = \begin{pmatrix}\cB1&\cR4&\cG5\\2&0&3\\0&1&2\end{pmatrix}.$$
+<p><b>Étape 2 : Choisir la ligne.</b> On développe selon la ligne 1 : signes $\cB+$, $\cR-$, $\cG+$.</p>
+<p><b>Étape 3 : Les trois mineurs.</b> Pour chaque coefficient, on barre sa ligne et sa colonne (en gris) :</p>
 <div class="sarx">
-<div>$$\begin{pmatrix}\cB1&\cX4&\cX5\\\cX2&0&3\\\cX0&1&2\end{pmatrix}\ \leadsto\ \cB{\begin{vmatrix}0&3\\1&2\end{vmatrix}}$$<p>$\cB{+1}\times\cB{(0\times2 - 3\times1)} = \cB{-3}$</p></div>
-<div>$$\begin{pmatrix}\cX1&\cR4&\cX5\\2&\cX0&3\\0&\cX1&2\end{pmatrix}\ \leadsto\ \cR{\begin{vmatrix}2&3\\0&2\end{vmatrix}}$$<p>$\cR{-4}\times\cR{(2\times2 - 3\times0)} = \cR{-16}$</p></div>
-<div>$$\begin{pmatrix}\cX1&\cX4&\cG5\\2&0&\cX3\\0&1&\cX2\end{pmatrix}\ \leadsto\ \cG{\begin{vmatrix}2&0\\0&1\end{vmatrix}}$$<p>$\cG{+5}\times\cG{(2\times1 - 0\times0)} = \cG{10}$</p></div>
+<div>$$\begin{pmatrix}\cB1&\cX4&\cX5\\\cX2&0&3\\\cX0&1&2\end{pmatrix}\ \leadsto\ \cB{\begin{vmatrix}0&3\\1&2\end{vmatrix} = 0\times2 - 3\times1 = -3}$$</div>
+<div>$$\begin{pmatrix}\cX1&\cR4&\cX5\\2&\cX0&3\\0&\cX1&2\end{pmatrix}\ \leadsto\ \cR{\begin{vmatrix}2&3\\0&2\end{vmatrix} = 2\times2 - 3\times0 = 4}$$</div>
+<div>$$\begin{pmatrix}\cX1&\cX4&\cG5\\2&0&\cX3\\0&1&\cX2\end{pmatrix}\ \leadsto\ \cG{\begin{vmatrix}2&0\\0&1\end{vmatrix} = 2\times1 - 0\times0 = 2}$$</div>
 </div>
-$$\det A = \cB{1\begin{vmatrix}0&3\\1&2\end{vmatrix}} - \cR{4\begin{vmatrix}2&3\\0&2\end{vmatrix}} + \cG{5\begin{vmatrix}2&0\\0&1\end{vmatrix}} = \cB{-3}\cR{-16}\cG{+10} = -9.$$
+<p><b>Étape 4 : Coefficient × signe × mineur.</b></p>
+$$\det A = \cB{+1\times(-3)}\ \cR{-\ 4\times4}\ \cG{+\ 5\times2} = -3 - 16 + 10 = \cG{-9}.$$
 
 <h2 id="d-form">10. Les formules</h2>
 <div class="sbox">$$\left\{\begin{aligned}&\det(AB) = \det A\,\det B,\qquad\det(A^n) = (\det A)^n\\&\det(\lambda A) = \lambda^n\det A\quad(A\in\mathcal M_n)\\&\det({}^tA) = \det A\\&A\ \text{inversible}\iff\det A\neq0,\qquad\det(A^{-1}) = \frac1{\det A}\end{aligned}\right.$$</div>
@@ -727,13 +778,19 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 <p class="ml">Taille 2 : la formule à connaître</p>
 <div class="sbox">$$\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A.$$</div>
 <p class="ml">Exemple</p>
+<p><b>Étape 1 : Rappel.</b> En taille 2 : $\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A$.</p>
 $$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}.$$
-<p><b>Avec la formule.</b></p>
-$$\left\{\begin{aligned}\operatorname{tr}A &= 1 + 1 = \cO2\\\det A &= 1\times1 - 2\times2 = \cO{-3}\end{aligned}\right.\qquad\Longrightarrow\qquad\chi_A = X^2 - \cO2X + (\cO{-3}) = X^2 - 2X - 3.$$
+<p><b>Étape 2 : La trace et le déterminant.</b></p>
+$$\operatorname{tr}A = 1 + 1 = \cO2,\qquad\det A = 1\times1 - 2\times2 = \cO{-3}.$$
+<p><b>Étape 3 : On remplace dans la formule.</b></p>
+$$\chi_A = X^2 - \cO2X + (\cO{-3}) = X^2 - 2X - 3.$$
+<p><b>Étape 4 : Les racines.</b></p>
 $$\Delta = (-2)^2 - 4\times(-3) = 4 + 12 = 16 = 4^2,\qquad\lambda = \frac{2\pm4}{2}\ \Longrightarrow\ \lambda = \cB3\ \text{ou}\ \lambda = \cB{-1}.$$
-<p><b>Ou directement avec le déterminant</b> (et on évite le discriminant) :</p>
+<p><b>Étape 5 : Autre façon, sans discriminant.</b> On calcule le déterminant et on reconnaît $a^2 - b^2$ :</p>
 $$\chi_A = \begin{vmatrix}X-1&-2\\-2&X-1\end{vmatrix} = (X-1)^2 - (-2)(-2) = (X-1)^2 - 2^2 = (X - 1 - 2)(X - 1 + 2) = (X - \cB3)(X + \cB1).$$
-$$\operatorname{Sp}(A) = \{\cB{-1},\cB3\}.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\operatorname{Sp}(A) = \{-1, 3\}}.$$
+
 <p class="ml">Les cas immédiats</p>
 <ul>
 <li>$A$ triangulaire : $\chi_A = \prod_i(X - a_{i,i})$, les valeurs propres sont sur la diagonale.</li>
@@ -750,24 +807,32 @@ $$\operatorname{Sp}(A) = \{\cB{-1},\cB3\}.$$
 <li><b>Une ligne ou une colonne avec un seul coefficient non nul</b> : développer directement selon elle.</li>
 </ol>
 <p class="ml">Exemple 1 : lignes de même somme</p>
+<p><b>1. Rappel.</b> $\chi_A = \det(XI_n - A)$. Ajouter à une colonne les autres colonnes ne change pas le déterminant. Une matrice triangulaire a pour déterminant le produit de sa diagonale.</p>
 $$A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\qquad(\text{chaque ligne a pour somme}\ \cB4).$$
-<p><b>Étape 1.</b> On écrit $XI_3 - A$ (on met $X - a_{i,i}$ sur la diagonale et $-a_{i,j}$ ailleurs) et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$. Sur chaque ligne, la nouvelle première case vaut :</p>
+<p><b>2.</b> On écrit $XI_3 - A$ (on met $X - a_{i,i}$ sur la diagonale et $-a_{i,j}$ ailleurs) et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$. Sur chaque ligne, la nouvelle première case vaut :</p>
 $$(X - 2) + (-1) + (-1) = \cB{X - 4}.$$
 $$\chi_A = \begin{vmatrix}X-2&-1&-1\\-1&X-2&-1\\-1&-1&X-2\end{vmatrix} = \begin{vmatrix}\cB{X-4}&-1&-1\\\cB{X-4}&X-2&-1\\\cB{X-4}&-1&X-2\end{vmatrix} = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\1&X-2&-1\\1&-1&X-2\end{vmatrix}.$$
-<p><b>Étape 2.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ :</p>
+<p><b>3.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ :</p>
 $$\left\{\begin{aligned}L_2 - L_1 &= \big(1 - 1,\ (X-2) - (-1),\ -1 - (-1)\big) = (0,\ \cR{X - 1},\ 0)\\L_3 - L_1 &= \big(1 - 1,\ -1 - (-1),\ (X-2) - (-1)\big) = (0,\ 0,\ \cR{X - 1})\end{aligned}\right.$$
 <p>La matrice est triangulaire : son déterminant est le produit de la diagonale.</p>
 $$\chi_A = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\0&\cR{X-1}&0\\0&0&\cR{X-1}\end{vmatrix} = \cB{(X-4)}\times1\times\cR{(X-1)}\times\cR{(X-1)} = \cB{(X-4)}\,\cR{(X-1)^2}.$$
 <p>Sans aucune factorisation de degré 3 : $\operatorname{Sp}(A) = \{\cB4, \cR1\}$, avec $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
+
 <p class="ml">Exemple 2 : deux lignes presque égales</p>
-$$B = \begin{pmatrix}3&1&-1\\1&3&-1\\0&0&2\end{pmatrix}:\qquad\text{les deux premières lignes de}\ XI_3 - B\ \text{se ressemblent}.$$
-<p>On calcule la nouvelle première ligne :</p>
+<p><b>Étape 1 : Rappel.</b> $\chi_B = \det(XI_3 - B)$, et $L_1\leftarrow L_1 - L_2$ ne change pas le déterminant.</p>
+$$B = \begin{pmatrix}3&1&-1\\1&3&-1\\0&0&2\end{pmatrix},\qquad XI_3 - B = \begin{pmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{pmatrix}.$$
+<p><b>Étape 2 : $\cO{L_1\leftarrow L_1 - L_2}$.</b> Les deux premières lignes se ressemblent :</p>
 $$L_1 - L_2 = \big((X-3) - (-1),\ -1 - (X-3),\ 1 - 1\big) = \big(\cB{X - 2},\ \cB{-(X - 2)},\ 0\big).$$
-$$\chi_B = \begin{vmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{vmatrix}\underset{\cO{L_1\leftarrow L_1 - L_2}}{=}\begin{vmatrix}\cB{X-2}&\cB{-(X-2)}&0\\-1&X-3&1\\0&0&X-2\end{vmatrix} = \cB{(X-2)}\begin{vmatrix}1&-1&0\\-1&X-3&1\\0&0&X-2\end{vmatrix}.$$
-<p>On développe selon la dernière ligne (un seul coefficient non nul) :</p>
+<p><b>Étape 3 : On sort $(X - 2)$ de la première ligne.</b></p>
+$$\chi_B = \begin{vmatrix}\cB{X-2}&\cB{-(X-2)}&0\\-1&X-3&1\\0&0&X-2\end{vmatrix} = \cB{(X-2)}\begin{vmatrix}1&-1&0\\-1&X-3&1\\0&0&X-2\end{vmatrix}.$$
+<p><b>Étape 4 : On développe selon la dernière ligne</b>, qui n'a qu'un coefficient non nul :</p>
 $$\chi_B = \cB{(X-2)}\times(X-2)\times(-1)^{3+3}\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix}.$$
-$$\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = 1\times(X-3) - (-1)\times(-1) = X - 3 - 1 = X - 4.$$
-$$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.$$
+<p><b>Étape 5 : Le déterminant de taille 2.</b></p>
+$$\begin{vmatrix}1&-1\\-1&X-3\end{vmatrix} = 1\times(X-3) - (-1)\times(-1) = X - 4.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\chi_B = (X-2)^2(X - 4)}.$$
+<p>Contrôle : $\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4$.</p>
+
 <p class="ml">Vérifier son $\chi_A$ en 10 secondes</p>
 <ul>
 <li>Le coefficient de $X^{n-1}$ doit être $-\operatorname{tr}A$ : ici $-(4 + 1 + 1) = -6 = -\operatorname{tr}A$.</li>
@@ -784,9 +849,16 @@ $$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.$
 <div><b>Il reste une valeur à trouver</b><span>Utiliser $\operatorname{tr}A = \sum m_\lambda\lambda$.</span></div>
 </div>
 <p class="ml">Exemple</p>
+<p><b>Étape 1 : Rappel.</b> $\dim E_0 = \dim\operatorname{Ker}A = n - \operatorname{rg}A$ (théorème du rang), $\dim E_\lambda\leqslant m_\lambda$, et $\operatorname{tr}A$ est la somme des valeurs propres comptées avec multiplicité.</p>
 $$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
-$$\left\{\begin{aligned}&\text{les 3 lignes sont égales}\ \Longrightarrow\ \operatorname{rg}A = 1\\&\dim\cG{E_0} = \dim\operatorname{Ker}A = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2\\&\operatorname{tr}A = 1 + 1 + 1 = 3 = 0 + 0 + \lambda\ \Longrightarrow\ \lambda = \cB3\end{aligned}\right.\qquad\Longrightarrow\qquad\chi_A = X^2(X - \cB3).$$
-<p>Contrôle : chaque ligne a pour somme $3$, donc $A(1,1,1) = 3(1,1,1)$, ce qui confirme $\cB3\in\operatorname{Sp}(A)$.</p>
+<p><b>Étape 2 : Le rang.</b> Les 3 lignes sont égales et non nulles : $\operatorname{rg}A = 1$.</p>
+<p><b>Étape 3 : La valeur propre $0$.</b></p>
+$$\dim\cG{E_0} = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2.$$
+<p><b>Étape 4 : La dernière valeur propre, avec la trace.</b></p>
+$$\operatorname{tr}A = 1 + 1 + 1 = 3 = 0 + 0 + \lambda\ \Longrightarrow\ \lambda = \cB3.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\chi_A = X^2(X - 3)}.$$
+<p>Contrôle : chaque ligne a pour somme $3$, donc $A(1,1,1) = 3(1,1,1)$.</p>
 
 <h2 id="r-esp">6. Calculer un sous-espace propre</h2>
 <p class="ml">Méthode</p>
@@ -796,11 +868,16 @@ $$\left\{\begin{aligned}&\text{les 3 lignes sont égales}\ \Longrightarrow\ \ope
 <li>Écrire $\cG{E_\lambda}$ comme un $\operatorname{Vect}$ et vérifier la dimension : $\dim\cG{E_\lambda} = n - \operatorname{rg}(A - \cB\lambda I_n)$.</li>
 </ol>
 <p class="ml">Exemple : la matrice de l'exemple 1, avec $\cB\lambda = 1$</p>
-<p>On cherche $X = (x, y, z)$ tel que $(A - \cB1\,I_3)X = 0$ :</p>
-$$A - \cB1\,I_3 = \begin{pmatrix}2-1&1&1\\1&2-1&1\\1&1&2-1\end{pmatrix} = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}x + y + z &= 0\\x + y + z &= 0\\x + y + z &= 0\end{aligned}\right.$$
-$$\underset{\cO{L_2\leftarrow L_2 - L_1,\ L_3\leftarrow L_3 - L_1}}{\Longleftrightarrow}\qquad x + y + z = 0\qquad\Longleftrightarrow\qquad z = -x - y.$$
-<p>Les inconnues libres sont $x$ et $y$. On remplace $z$ dans $X$ et on sépare selon $x$ et $y$ :</p>
-$$X = \begin{pmatrix}x\\y\\-x-y\end{pmatrix} = x\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}} + y\cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\qquad\Longrightarrow\qquad\cG{E_1} = \operatorname{Vect}\Big(\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}},\ \cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}\Big),\qquad\dim\cG{E_1} = 2.$$
+<p><b>Étape 1 : Rappel.</b> $E_\lambda = \operatorname{Ker}(A - \lambda I_n)$ : on résout le système $(A - \lambda I_n)X = 0$.</p>
+<p><b>Étape 2 : La matrice $A - \cB1\,I_3$.</b> On enlève $1$ sur la diagonale :</p>
+$$A - \cB1\,I_3 = \begin{pmatrix}2-1&1&1\\1&2-1&1\\1&1&2-1\end{pmatrix} = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
+<p><b>Étape 3 : Le système</b>, avec $X = (x, y, z)$ :</p>
+$$\left\{\begin{aligned}x + y + z &= 0\\x + y + z &= 0\\x + y + z &= 0\end{aligned}\right.\ \underset{\cO{L_2\leftarrow L_2 - L_1,\ L_3\leftarrow L_3 - L_1}}{\Longleftrightarrow}\ x + y + z = 0\ \Longleftrightarrow\ z = -x - y.$$
+<p><b>Étape 4 : Les inconnues libres</b> $x$ et $y$. On remplace $z$ et on sépare :</p>
+$$X = \begin{pmatrix}x\\y\\-x-y\end{pmatrix} = x\cR{\begin{pmatrix}1\\0\\-1\end{pmatrix}} + y\cR{\begin{pmatrix}0\\1\\-1\end{pmatrix}}.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{E_1 = \operatorname{Vect}\Big(\begin{pmatrix}1\\0\\-1\end{pmatrix},\ \begin{pmatrix}0\\1\\-1\end{pmatrix}\Big)},\qquad\dim E_1 = 2.$$
+
 <p class="ml">Et pour $\cB\lambda = 4$</p>
 $$A - \cB4\,I_3 = \begin{pmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-2x + y + z &= 0\quad(L_1)\\x - 2y + z &= 0\quad(L_2)\\x + y - 2z &= 0\quad(L_3)\end{aligned}\right.$$
 $$\left\{\begin{aligned}\cO{L_1 - L_2}&:\ -3x + 3y = 0\ \Longrightarrow\ y = x\\\cO{L_2 - L_3}&:\ -3y + 3z = 0\ \Longrightarrow\ z = y\end{aligned}\right.\qquad\Longrightarrow\qquad X = \begin{pmatrix}x\\x\\x\end{pmatrix} = x\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}}.$$
@@ -837,20 +914,22 @@ $$\cG{E_4} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}},\qquad\
 <li>Vérifier $AP = PD$ (plus rapide que $P^{-1}AP = D$, et on n'a pas besoin de $P^{-1}$).</li>
 </ol>
 <p class="ml">Exemple complet : $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$</p>
-<p><b>1–2.</b> Calcul détaillé au §4 (on fait $C_1\leftarrow C_1 + C_2 + C_3$, puis $L_2\leftarrow L_2 - L_1$, $L_3\leftarrow L_3 - L_1$) :</p>
+<p><b>1. Rappel.</b> $A$ est diagonalisable si et seulement si $\chi_A$ est scindé et $\dim E_\lambda = m_\lambda$ pour chaque valeur propre. Alors $A = PDP^{-1}$ avec les vecteurs propres en colonnes dans $P$.</p>
+<p><b>2–3.</b> Calcul détaillé au §4 (on fait $C_1\leftarrow C_1 + C_2 + C_3$, puis $L_2\leftarrow L_2 - L_1$, $L_3\leftarrow L_3 - L_1$) :</p>
 $$\chi_A = (X - \cB4)(X - \cB1)^2,\qquad\cO{m_4 = 1},\qquad\cO{m_1 = 2}.$$
-<p><b>3.</b> Seule $\cB1$ est multiple, c'est la seule à vérifier :</p>
+<p><b>4.</b> Seule $\cB1$ est multiple, c'est la seule à vérifier :</p>
 $$A - I_3 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\ \text{(3 lignes égales)}\ \Longrightarrow\ \operatorname{rg}(A - I_3) = 1\ \Longrightarrow\ \dim\cG{E_1} = 3 - 1 = 2 = \cO{m_1}.$$
 <p>Donc $A$ est diagonalisable.</p>
-<p><b>4.</b> Les systèmes sont résolus en entier au §6 :</p>
+<p><b>5.</b> Les systèmes sont résolus en entier au §6 :</p>
 $$\cG{E_4}:\ \left\{\begin{aligned}-2x + y + z &= 0\\x - 2y + z &= 0\\x + y - 2z &= 0\end{aligned}\right.\ \Longleftrightarrow\ x = y = z,\qquad\cG{E_1}:\ x + y + z = 0\ \Longleftrightarrow\ z = -x - y.$$
 $$\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)},\qquad\cG{E_1} = \operatorname{Vect}\big(\cR{(1,0,-1)},\ \cR{(0,1,-1)}\big).$$
-<p><b>5.</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
+<p><b>6.</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
 <div class="labm"><table><tr><td></td><td class="kB">$\lambda = 4$</td><td class="kB">$\lambda = 1$</td><td class="kB">$\lambda = 1$</td></tr><tr><td></td><td class="c1">1</td><td class="c2">1</td><td class="c3">0</td></tr><tr><td></td><td class="c1">1</td><td class="c2">0</td><td class="c3">1</td></tr><tr><td></td><td class="c1">1</td><td class="c2">−1</td><td class="c3">−1</td></tr></table><span class="lab-cap">$P$ : chaque colonne est un vecteur propre</span></div>
 $$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-1}.$$
-<p><b>6.</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
+<p><b>7.</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
 $$\left\{\begin{aligned}A\cR{(1,1,1)} &= (2+1+1,\ 1+2+1,\ 1+1+2) = (4,4,4) = \cB4\cR{(1,1,1)}\\A\cR{(1,0,-1)} &= (2+0-1,\ 1+0-1,\ 1+0-2) = (1,0,-1) = \cB1\cR{(1,0,-1)}\\A\cR{(0,1,-1)} &= (0+1-1,\ 0+2-1,\ 0+1-2) = (0,1,-1) = \cB1\cR{(0,1,-1)}\end{aligned}\right.$$
 $$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.$$
+
 <div data-mlab="diag"></div>
 
 <h2 id="r-trig">9. Trigonaliser</h2>
@@ -865,19 +944,21 @@ $$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.$$
 <li>Alors $A\cG{e_2} = \cR{e_1} + \lambda\cG{e_2}$, d'où $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</li>
 </ol>
 <p class="ml">Exemple</p>
+<p><b>1. Rappel.</b> Si $\chi_A = (X - \lambda)^2$ et $\dim E_\lambda = 1$ : on prend $e_1$ vecteur propre, puis $e_2$ tel que $(A - \lambda I_2)e_2 = e_1$. Alors $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</p>
 $$A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}.$$
-<p><b>1. $\chi_A$.</b></p>
+<p><b>2. $\chi_A$.</b></p>
 $$\operatorname{tr}A = 1 + 3 = 4,\qquad\det A = 1\times3 - 1\times(-1) = 4,\qquad\chi_A = X^2 - 4X + 4 = (X - \cB2)^2.$$
-<p><b>2. Le sous-espace propre.</b> On résout $(A - 2I_2)X = 0$ avec $X = (x, y)$ :</p>
+<p><b>3. Le sous-espace propre.</b> On résout $(A - 2I_2)X = 0$ avec $X = (x, y)$ :</p>
 $$A - 2I_2 = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 0\\-x + y &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = x.$$
 $$\cG{E_2} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\end{pmatrix}},\qquad\dim\cG{E_2} = 1\lt2 = \cO{m_2}\ \Longrightarrow\ \text{pas diagonalisable}.$$
-<p><b>3. Le premier vecteur</b> : $\cR{e_1} = (1,1)$, et on contrôle $A\cR{e_1} = (1 + 1,\ -1 + 3) = (2,2) = 2\cR{e_1}$.</p>
-<p><b>4. Le deuxième vecteur</b> : on résout $(A - 2I_2)\cG{e_2} = \cR{e_1}$ avec $\cG{e_2} = (x, y)$ :</p>
+<p><b>4. Le premier vecteur</b> : $\cR{e_1} = (1,1)$, et on contrôle $A\cR{e_1} = (1 + 1,\ -1 + 3) = (2,2) = 2\cR{e_1}$.</p>
+<p><b>5. Le deuxième vecteur</b> : on résout $(A - 2I_2)\cG{e_2} = \cR{e_1}$ avec $\cG{e_2} = (x, y)$ :</p>
 $$\begin{pmatrix}-1&1\\-1&1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 1\\-x + y &= 1\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = 1 + x.$$
 <p>N'importe quelle solution convient : avec $x = 0$, on prend $\cG{e_2} = (0, 1)$.</p>
-<p><b>5. Vérification et conclusion.</b></p>
+<p><b>6. Vérification et conclusion.</b></p>
 $$A\cG{e_2} = \begin{pmatrix}1\times0 + 1\times1\\-1\times0 + 3\times1\end{pmatrix} = \begin{pmatrix}1\\3\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix} + 2\begin{pmatrix}0\\1\end{pmatrix} = \cR{e_1} + \cB2\cG{e_2}.$$
 $$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix}\cB2&1\\0&\cB2\end{pmatrix},\qquad A = PTP^{-1}.$$
+
 <p class="ml">Taille 3 : les cas possibles</p>
 <table class="mtab">
 <tr><th>$\chi_A$</th><th>Dimensions</th><th>Ce qu'on fait</th><th>Forme de $T$</th></tr>
@@ -886,19 +967,20 @@ $$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix
 <tr><td>$(X-\lambda)^3$</td><td>$\dim E_\lambda = 1$</td><td>$e_1\in E_\lambda$, $(A - \lambda I)e_2 = e_1$, $(A - \lambda I)e_3 = e_2$</td><td>$\begin{pmatrix}\lambda&1&0\\0&\lambda&1\\0&0&\lambda\end{pmatrix}$</td></tr>
 </table>
 <p class="ml">Exemple : $\chi_A = (X - 1)^3$, $\dim E_1 = 2$</p>
+<p><b>1. Rappel.</b> $A$ est trigonalisable si $\chi_A$ est scindé. On garde une base de $E_\lambda$, puis on complète par un vecteur $e_3$ tel que $(A - \lambda I)e_3$ soit dans $E_\lambda$ et non nul.</p>
 $$A = \begin{pmatrix}0&1&1\\-1&2&1\\0&0&1\end{pmatrix}.$$
-<p><b>1. $\chi_A$.</b> La dernière ligne de $XI_3 - A$ n'a qu'un coefficient non nul : on développe selon elle.</p>
+<p><b>2. $\chi_A$.</b> La dernière ligne de $XI_3 - A$ n'a qu'un coefficient non nul : on développe selon elle.</p>
 $$\chi_A = \begin{vmatrix}X&-1&-1\\1&X-2&-1\\0&0&X-1\end{vmatrix} = (X-1)\times(-1)^{3+3}\begin{vmatrix}X&-1\\1&X-2\end{vmatrix}.$$
 $$\begin{vmatrix}X&-1\\1&X-2\end{vmatrix} = X(X-2) - (-1)\times1 = X^2 - 2X + 1 = (X-1)^2\qquad\Longrightarrow\qquad\chi_A = (X - \cB1)^3.$$
-<p><b>2. Le sous-espace propre.</b> On résout $(A - I_3)X = 0$ :</p>
+<p><b>3. Le sous-espace propre.</b> On résout $(A - I_3)X = 0$ :</p>
 $$A - I_3 = \begin{pmatrix}-1&1&1\\-1&1&1\\0&0&0\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y + z &= 0\\-x + y + z &= 0\\0 &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad x = y + z.$$
 $$X = \begin{pmatrix}y+z\\y\\z\end{pmatrix} = y\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}} + z\cR{\begin{pmatrix}1\\0\\1\end{pmatrix}},\qquad\cG{E_1} = \operatorname{Vect}(\cR{e_1}, \cR{e_2}),\qquad\dim\cG{E_1} = 2\lt3 = \cO{m_1}.$$
 <p>Donc $A$ n'est pas diagonalisable : on trigonalise (cas 2 du tableau).</p>
-<p><b>3. Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
+<p><b>4. Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
 $$(A - I_3)\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}-x + y + z\\-x + y + z\\0\end{pmatrix} = (-x + y + z)\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}}.$$
 <p>Il suffit que $-x + y + z\neq0$ pour sortir de $\cG{E_1}$. Avec $\cG{e_3} = (0,1,0)$ : $-0 + 1 + 0 = 1$, donc $(A - I_3)\cG{e_3} = \cR{e_1}$.</p>
 $$A\cG{e_3} = \begin{pmatrix}0\times0 + 1\times1 + 1\times0\\-1\times0 + 2\times1 + 1\times0\\0\end{pmatrix} = \begin{pmatrix}1\\2\\0\end{pmatrix} = \begin{pmatrix}1\\1\\0\end{pmatrix} + \begin{pmatrix}0\\1\\0\end{pmatrix} = \cR{e_1} + \cB1\cG{e_3}.$$
-<p><b>4. $P$ est inversible</b> (développement selon la première ligne) :</p>
+<p><b>5. $P$ est inversible</b> (développement selon la première ligne) :</p>
 $$\det P = \begin{vmatrix}1&1&0\\1&0&1\\0&1&0\end{vmatrix} = 1\times\begin{vmatrix}0&1\\1&0\end{vmatrix} - 1\times\begin{vmatrix}1&1\\0&0\end{vmatrix} = 1\times(0 - 1) - 1\times(0 - 0) = -1\neq0.$$
 $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PTP^{-1}.$$
 <p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
@@ -911,7 +993,16 @@ $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix}
 <li>Lemme des noyaux : $P\wedge Q = 1\ \Longrightarrow\ \operatorname{Ker}(PQ)(u) = \operatorname{Ker}P(u)\oplus\operatorname{Ker}Q(u)$.</li>
 </ul>
 <p class="ml">Exemple : inverser avec Cayley-Hamilton</p>
-$$\chi_A = X^2 - 4X + 4\ \Longrightarrow\ A^2 - 4A + 4I_2 = 0\ \Longrightarrow\ A\cdot\tfrac14(4I_2 - A) = I_2\ \Longrightarrow\ A^{-1} = I_2 - \tfrac14A.$$
+<p><b>Étape 1 : Rappel.</b> Cayley-Hamilton : $\chi_A(A) = 0$.</p>
+<p><b>Étape 2 : On l'applique.</b> Avec $\chi_A = X^2 - 4X + 4$ (§9, $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$) :</p>
+$$A^2 - 4A + 4I_2 = 0.$$
+<p><b>Étape 3 : On isole $I_2$.</b></p>
+$$4I_2 = 4A - A^2 = A(4I_2 - A).$$
+<p><b>Étape 4 : On divise par $4$.</b></p>
+$$A\cdot\frac14(4I_2 - A) = I_2.$$
+<p><b>Étape 5 : Conclusion.</b> $A$ est inversible et :</p>
+$$\cG{A^{-1} = I_2 - \frac14A = \frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix}}.$$
+<p>Contrôle : $\begin{pmatrix}1&1\\-1&3\end{pmatrix}\cdot\frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix} = \frac14\begin{pmatrix}4&0\\0&4\end{pmatrix} = I_2$.</p>
 
 <h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
@@ -2998,34 +3089,59 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 <div class="sbox">$$(X^k)^{(j)} = \frac{k!}{(k - j)!}X^{k-j}\ (j\leqslant k),\qquad(PQ)^{(n)} = \sum_{k=0}^n\binom nkP^{(k)}Q^{(n-k)}\quad\text{(Leibniz)}.$$</div>
 <div class="sbox">$$\textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k\qquad(\text{égalité exacte, pas de reste}).$$</div>
 <p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
-$$P(1) = 0,\qquad P' = 3X^2 - 2,\ P'(1) = 1,\qquad P'' = 6X,\ P''(1) = 6,\qquad P''' = 6.$$
-$$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(X - 1)^2 + (X - 1)^3}.$$
+<p><b>Étape 1 : Rappel de la formule.</b> Pour un polynôme, la formule de Taylor en $a$ est exacte :</p>
+$$P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k.$$
+<p><b>Étape 2 : Les dérivées.</b> On dérive $P = X^3 - 2X + 1$ jusqu'à ce que ce soit constant :</p>
+$$P' = 3X^2 - 2,\qquad P'' = 6X,\qquad P''' = 6,\qquad P^{(4)} = 0.$$
+<p><b>Étape 3 : Les valeurs en $a = 1$.</b></p>
+$$P(1) = 1 - 2 + 1 = 0,\qquad P'(1) = 3 - 2 = 1,\qquad P''(1) = 6,\qquad P'''(1) = 6.$$
+<p><b>Étape 4 : On remplace dans la formule.</b> On divise la dérivée d'ordre $k$ par $k!$, avec $0! = 1$, $1! = 1$, $2! = 2$ et $3! = 6$ :</p>
+$$P = \frac01 + \frac11(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(X - 1)^2 + (X - 1)^3}.$$
 <p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)$.</p>
 
 <h2 id="q-div">3. La division euclidienne</h2>
 <div class="sbox">$$B\neq0:\quad\exists!\,(Q, R),\quad A = BQ + R\quad\text{et}\quad\deg R\lt\deg B.$$</div>
 <p class="ml">Exemple : $A = X^4 + 2X^3 - X + 1$ par $B = X^2 + X + 1$</p>
-<p>On pose la division comme pour les entiers : le dividende $A$ à gauche, le diviseur $B$ en haut à droite, le quotient en dessous. Les lignes en rouge sont celles qu'on soustrait.</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $Q$ et $R$ avec $A = BQ + R$ et $\deg R\lt\deg B = 2$. On pose la division comme pour les entiers : $A$ à gauche, $B$ en haut à droite, le quotient en dessous. Les lignes rouges sont celles qu'on soustrait.</p>
 <div class="potence potw" data-a="1,2,0,-1,1" data-b="1,1,1"></div>
-<ol>
-<li>$\cO{X^4\div X^2 = X^2}$ : on écrit $X^2$ au quotient, on calcule $X^2B = X^4 + X^3 + X^2$ et on le soustrait. Il reste $X^3 - X^2 - X + 1$.</li>
-<li>$\cO{X^3\div X^2 = X}$ : on écrit $+X$ au quotient, on soustrait $XB = X^3 + X^2 + X$. Il reste $-2X^2 - 2X + 1$.</li>
-<li>$\cO{-2X^2\div X^2 = -2}$ : on écrit $-2$ au quotient, on soustrait $-2B = -2X^2 - 2X - 2$. Il reste $3$.</li>
-<li>Le reste $3$ est de degré $0\lt2 = \deg B$ : on s'arrête.</li>
-</ol>
-<p><b>Astuce</b> : on laisse une place pour chaque puissance (ici, aucun terme en $X^2$ dans $A$), pour que les colonnes restent alignées.</p>
+<p><b>Étape 2 : Premier terme du quotient.</b> $\cO{X^4\div X^2 = X^2}$. On écrit $X^2$ au quotient, on calcule $X^2B = X^4 + X^3 + X^2$ et on le soustrait :</p>
+$$(X^4 + 2X^3 + 0X^2 - X + 1) - (X^4 + X^3 + X^2) = X^3 - X^2 - X + 1.$$
+<p><b>Étape 3 : Deuxième terme.</b> $\cO{X^3\div X^2 = X}$. On écrit $+X$ au quotient et on soustrait $XB = X^3 + X^2 + X$ :</p>
+$$(X^3 - X^2 - X + 1) - (X^3 + X^2 + X) = -2X^2 - 2X + 1.$$
+<p><b>Étape 4 : Troisième terme.</b> $\cO{-2X^2\div X^2 = -2}$. On écrit $-2$ au quotient et on soustrait $-2B = -2X^2 - 2X - 2$ :</p>
+$$(-2X^2 - 2X + 1) - (-2X^2 - 2X - 2) = 3.$$
+<p><b>Étape 5 : On s'arrête.</b> Le reste $3$ est de degré $0\lt2$ :</p>
 $$\cG{X^4 + 2X^3 - X + 1 = (X^2 + X + 1)(X^2 + X - 2) + 3}.$$
+<p>Astuce : on laisse une place vide pour chaque puissance absente (ici $X^2$ dans $A$), pour que les colonnes restent alignées.</p>
 <p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3$.</p>
+
 <div data-mlab="diveucl"></div>
 
 <h2 id="q-reste">4. Trouver un reste sans poser la division</h2>
 <p>Le reste a un degré $\lt\deg B$ : on l'écrit avec des inconnues, puis on <b>évalue aux racines de $B$</b>.</p>
 <p class="ml">Exemple 1 : reste de $X^n$ par $(X - 1)(X - 2)$</p>
-<p>$X^n = (X - 1)(X - 2)Q + aX + b$. On évalue en $\cO{X = 1}$ et en $\cO{X = 2}$ :</p>
-$$\left\{\begin{aligned}a + b &= 1\\2a + b &= 2^n\end{aligned}\right.\iff\left\{\begin{aligned}a &= 2^n - 1\\b &= 2 - 2^n\end{aligned}\right.\qquad\cG{R = (2^n - 1)X + 2 - 2^n}.$$
+<p><b>Étape 1 : Rappel.</b> Le reste a un degré strictement plus petit que celui du diviseur. Ici $\deg\big((X - 1)(X - 2)\big) = 2$, donc $R = aX + b$ :</p>
+$$X^n = (X - 1)(X - 2)\,Q + aX + b.$$
+<p><b>Étape 2 : On évalue en $\cO{X = 1}$.</b> Le produit $(X - 1)(X - 2)Q$ s'annule :</p>
+$$1^n = a\cdot1 + b\qquad\Longrightarrow\qquad a + b = 1.$$
+<p><b>Étape 3 : On évalue en $\cO{X = 2}$.</b></p>
+$$2^n = 2a + b.$$
+<p><b>Étape 4 : On résout le système.</b> On soustrait la première équation à la seconde :</p>
+$$\left\{\begin{aligned}a + b &= 1\\2a + b &= 2^n\end{aligned}\right.\ \underset{\cO{L_2 - L_1}}{\iff}\ \left\{\begin{aligned}a &= 2^n - 1\\b &= 1 - a = 2 - 2^n\end{aligned}\right.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{R = (2^n - 1)X + 2 - 2^n}.$$
+<p>Contrôle avec $n = 2$ : $X^2 = (X - 1)(X - 2) + 3X - 2$, et la formule donne $3X - 2$.</p>
+
 <p class="ml">Exemple 2 : reste de $X^n$ par $(X - 1)^2$ (racine double)</p>
-<p>$X^n = (X - 1)^2Q + aX + b$. On évalue en $1$, puis on <b>dérive</b> et on évalue en $1$ (le terme $(X - 1)^2Q$ a une dérivée nulle en $1$) :</p>
-$$\left\{\begin{aligned}1 &= a + b\\n &= a\end{aligned}\right.\qquad\Longrightarrow\qquad\cG{R = nX + 1 - n}.$$
+<p><b>Étape 1 : Rappel.</b> Le diviseur $(X - 1)^2$ est de degré $2$, donc $R = aX + b$ :</p>
+$$X^n = (X - 1)^2Q + aX + b.$$
+<p><b>Étape 2 : On évalue en $\cO{X = 1}$.</b></p>
+$$1 = a + b.$$
+<p><b>Étape 3 : On dérive, puis on évalue en $\cO{X = 1}$.</b> La dérivée de $(X - 1)^2Q$ est $2(X - 1)Q + (X - 1)^2Q'$, qui s'annule encore en $1$ :</p>
+$$nX^{n-1} = 2(X - 1)Q + (X - 1)^2Q' + a\qquad\Longrightarrow\qquad n = a.$$
+<p><b>Étape 4 : On résout.</b> $a = n$ et $b = 1 - a = 1 - n$ :</p>
+$$\cG{R = nX + 1 - n}.$$
+<p>Contrôle avec $n = 2$ : $X^2 = (X - 1)^2 + 2X - 1$, et la formule donne $2X - 1$.</p>
 
 <h2 id="q-rac">5. Racines et multiplicité</h2>
 <div class="sbox">$$P(a) = 0\iff(X - a)\mid P.\qquad a\ \text{racine d'ordre}\ m\iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\ \text{et}\ P^{(m)}(a)\neq0.$$</div>
@@ -3035,8 +3151,17 @@ $$\left\{\begin{aligned}1 &= a + b\\n &= a\end{aligned}\right.\qquad\Longrightar
 <li>$P$ réel : si $z$ est racine, $\overline z$ aussi, avec la même multiplicité.</li>
 </ul>
 <p class="ml">Exemple : la multiplicité de $1$ dans $P = X^4 - 2X^3 + 2X - 1$</p>
-$$\begin{aligned}P(1) &= 1 - 2 + 2 - 1 = 0\\P' = 4X^3 - 6X^2 + 2,\quad P'(1) &= 4 - 6 + 2 = 0\\P'' = 12X^2 - 12X,\quad P''(1) &= 0\\P''' = 24X - 12,\quad P'''(1) &= 12\neq0\end{aligned}$$
-<p>$1$ est racine d'ordre $\cG3$ : $P = (X - 1)^3(X + 1)$ (le dernier facteur s'obtient avec le coefficient dominant et $P(0) = -1$).</p>
+<p><b>Étape 1 : Rappel.</b> $a$ est racine d'ordre $m$ si $P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0$ et $P^{(m)}(a)\neq0$.</p>
+<p><b>Étape 2 : $P(1)$.</b></p>
+$$P(1) = 1 - 2 + 2 - 1 = 0.$$
+<p><b>Étape 3 : $P'(1)$.</b></p>
+$$P' = 4X^3 - 6X^2 + 2,\qquad P'(1) = 4 - 6 + 2 = 0.$$
+<p><b>Étape 4 : $P''(1)$.</b></p>
+$$P'' = 12X^2 - 12X,\qquad P''(1) = 12 - 12 = 0.$$
+<p><b>Étape 5 : $P'''(1)$.</b></p>
+$$P''' = 24X - 12,\qquad P'''(1) = 12\neq0.$$
+<p><b>Étape 6 : Conclusion.</b> La première dérivée non nulle est la troisième : $1$ est racine d'ordre $\cG3$, donc $(X - 1)^3\mid P$. Le quotient est de degré $1$, unitaire : $P = (X - 1)^3(X + c)$. En $X = 0$ : $-1 = (-1)^3c$, donc $c = 1$ :</p>
+$$\cG{P = (X - 1)^3(X + 1)}.$$
 
 <h2 id="q-fact">6. Factoriser</h2>
 <div class="sbox">$$\textbf{D'Alembert-Gauss}:\ \text{tout polynôme non constant de}\ \mathbb C[X]\ \text{a une racine, donc est scindé}.$$</div>
@@ -3047,13 +3172,28 @@ $$\begin{aligned}P(1) &= 1 - 2 + 2 - 1 = 0\\P' = 4X^3 - 6X^2 + 2,\quad P'(1) &= 
 </ul>
 $$(X - z)(X - \overline z) = X^2 - 2\operatorname{Re}(z)\,X + |z|^2.$$
 <p class="ml">Exemple 1 : $X^4 + 1$</p>
-<p><b>Dans $\mathbb C$.</b> $z^4 = -1 = e^{i\pi}$ donne $z = e^{i\frac{\pi + 2k\pi}4}$ : $\cV{e^{\pm i\pi/4}}$ et $\cV{e^{\pm3i\pi/4}}$.</p>
-<p><b>Dans $\mathbb R$.</b> On regroupe les conjuguées, avec $|z| = 1$ :</p>
-$$\big(X - e^{i\pi/4}\big)\big(X - e^{-i\pi/4}\big) = X^2 - 2\cos\frac\pi4\,X + 1 = X^2 - \sqrt2X + 1,\qquad\big(X - e^{3i\pi/4}\big)\big(X - e^{-3i\pi/4}\big) = X^2 + \sqrt2X + 1.$$
+<p><b>Étape 1 : Rappel.</b> Dans $\mathbb R[X]$, on regroupe chaque racine complexe avec sa conjuguée :</p>
+$$(X - z)(X - \overline z) = X^2 - 2\operatorname{Re}(z)\,X + |z|^2.$$
+<p><b>Étape 2 : Les racines dans $\mathbb C$.</b> $z^4 = -1 = e^{i\pi}$. On pose $z = e^{i\varphi}$ : $4\varphi = \pi + 2k\pi$, donc $\varphi = \frac\pi4 + \frac{k\pi}2$, $k = 0, 1, 2, 3$ :</p>
+$$\cV{e^{i\pi/4}},\qquad\cV{e^{3i\pi/4}},\qquad\cV{e^{5i\pi/4} = e^{-3i\pi/4}},\qquad\cV{e^{7i\pi/4} = e^{-i\pi/4}}.$$
+<p><b>Étape 3 : Premier couple de conjuguées.</b> $\operatorname{Re}(e^{i\pi/4}) = \cos\frac\pi4 = \frac{\sqrt2}2$ et $|z| = 1$ :</p>
+$$\big(X - e^{i\pi/4}\big)\big(X - e^{-i\pi/4}\big) = X^2 - 2\cdot\frac{\sqrt2}2X + 1 = X^2 - \sqrt2X + 1.$$
+<p><b>Étape 4 : Second couple.</b> $\cos\frac{3\pi}4 = -\frac{\sqrt2}2$ :</p>
+$$\big(X - e^{3i\pi/4}\big)\big(X - e^{-3i\pi/4}\big) = X^2 + \sqrt2X + 1.$$
+<p><b>Étape 5 : Conclusion.</b> Ces deux trinômes ont $\Delta = 2 - 4\lt0$ : ils sont irréductibles.</p>
 $$\cG{X^4 + 1 = (X^2 - \sqrt2X + 1)(X^2 + \sqrt2X + 1)}.$$
 <p>Astuce plus rapide : $X^4 + 1 = (X^2 + 1)^2 - 2X^2 = (X^2 + 1 - \sqrt2X)(X^2 + 1 + \sqrt2X)$.</p>
+
 <p class="ml">Exemple 2 : $X^6 - 1$</p>
-<p>Les racines sont les $\cV{e^{ik\pi/3}}$, $k = 0, \dots, 5$ : $\pm1$, $e^{\pm i\pi/3}$, $e^{\pm2i\pi/3}$. On regroupe ($2\cos\frac\pi3 = 1$, $2\cos\frac{2\pi}3 = -1$) :</p>
+<p><b>Étape 1 : Rappel.</b> Les racines de $X^n - 1$ sont les $e^{2ik\pi/n}$, $0\leqslant k\leqslant n - 1$. On regroupe les conjuguées avec $(X - z)(X - \overline z) = X^2 - 2\operatorname{Re}(z)X + 1$ (car $|z| = 1$).</p>
+<p><b>Étape 2 : Les six racines.</b> Avec $n = 6$, $\frac{2k\pi}6 = \frac{k\pi}3$ :</p>
+$$\cV1,\qquad\cV{e^{\pm i\pi/3}},\qquad\cV{e^{\pm2i\pi/3}},\qquad\cV{e^{i\pi} = -1}.$$
+<p><b>Étape 3 : Les racines réelles</b> donnent $(X - 1)(X + 1)$.</p>
+<p><b>Étape 4 : Le couple $e^{\pm i\pi/3}$.</b> $2\cos\frac\pi3 = 1$ :</p>
+$$X^2 - X + 1.$$
+<p><b>Étape 5 : Le couple $e^{\pm2i\pi/3}$.</b> $2\cos\frac{2\pi}3 = -1$ :</p>
+$$X^2 + X + 1.$$
+<p><b>Étape 6 : Conclusion.</b></p>
 $$\cG{X^6 - 1 = (X - 1)(X + 1)(X^2 - X + 1)(X^2 + X + 1)}.$$
 
 <h2 id="q-viete">7. Relations coefficients-racines</h2>
@@ -3061,14 +3201,28 @@ $$\cG{X^6 - 1 = (X - 1)(X + 1)(X^2 - X + 1)(X^2 + X + 1)}.$$
 <div class="sbox">$$\sigma_1 = \sum_ix_i = -\frac{a_{n-1}}{a_n},\qquad\sigma_2 = \sum_{i\lt j}x_ix_j = \frac{a_{n-2}}{a_n},\qquad\dots,\qquad\sigma_n = \prod_ix_i = (-1)^n\frac{a_0}{a_n}.$$</div>
 <p>Degré 2 : $x_1 + x_2 = -\frac ba$ et $x_1x_2 = \frac ca$. Degré 3 : $\sigma_1 = -\frac ba$, $\sigma_2 = \frac ca$, $\sigma_3 = -\frac da$.</p>
 <p class="ml">Exemple : $x_1, x_2, x_3$ racines de $X^3 - 2X + 5$</p>
-$$\sigma_1 = 0,\qquad\sigma_2 = -2,\qquad\sigma_3 = -5.$$
-$$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 + 4 = \cG4,\qquad\frac1{x_1} + \frac1{x_2} + \frac1{x_3} = \frac{x_2x_3 + x_1x_3 + x_1x_2}{x_1x_2x_3} = \frac{\sigma_2}{\sigma_3} = \cG{\frac25}.$$
+<p><b>Étape 1 : Rappel.</b> Pour $X^3 + a_2X^2 + a_1X + a_0$ unitaire : $\sigma_1 = -a_2$, $\sigma_2 = a_1$, $\sigma_3 = -a_0$.</p>
+<p><b>Étape 2 : On lit les coefficients.</b> $X^3 + 0X^2 - 2X + 5$ :</p>
+$$\sigma_1 = x_1 + x_2 + x_3 = 0,\qquad\sigma_2 = x_1x_2 + x_1x_3 + x_2x_3 = -2,\qquad\sigma_3 = x_1x_2x_3 = -5.$$
+<p><b>Étape 3 : La somme des carrés.</b> On développe $\sigma_1^2 = (x_1 + x_2 + x_3)^2 = \sum x_i^2 + 2\sigma_2$, donc :</p>
+$$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 - 2\times(-2) = \cG4.$$
+<p><b>Étape 4 : La somme des inverses.</b> Même dénominateur $x_1x_2x_3$ :</p>
+$$\frac1{x_1} + \frac1{x_2} + \frac1{x_3} = \frac{x_2x_3 + x_1x_3 + x_1x_2}{x_1x_2x_3} = \frac{\sigma_2}{\sigma_3} = \frac{-2}{-5} = \cG{\frac25}.$$
 
 <h2 id="q-lag">8. L'interpolation de Lagrange</h2>
 <div class="sbox">$$x_0, \dots, x_n\ \text{distincts}:\quad L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\quad L_i(x_j) = \delta_{i,j},\qquad P = \sum_{i=0}^ny_iL_i\ \text{est l'unique}\ P\in\mathbb K_n[X]\ \text{avec}\ P(x_i) = y_i.$$</div>
 <p class="ml">Exemple : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$</p>
-$$L_0 = \frac{(X - 1)(X - 2)}{(0 - 1)(0 - 2)} = \frac{(X - 1)(X - 2)}2,\qquad L_1 = \frac{X(X - 2)}{1\cdot(-1)} = -X(X - 2),\qquad L_2 = \frac{X(X - 1)}{2\cdot1}.$$
-$$P = 1\cdot\frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8X^2 - 10X + 2}2 - 3X^2 + 6X = \cG{X^2 + X + 1}.$$
+<p><b>Étape 1 : Rappel.</b> Avec $x_0 = 0$, $x_1 = 1$, $x_2 = 2$ :</p>
+$$L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\qquad P = y_0L_0 + y_1L_1 + y_2L_2.$$
+<p><b>Étape 2 : $L_0$</b> (on enlève le facteur de $x_0$) :</p>
+$$L_0 = \frac{(X - 1)(X - 2)}{(0 - 1)(0 - 2)} = \frac{X^2 - 3X + 2}2.$$
+<p><b>Étape 3 : $L_1$.</b></p>
+$$L_1 = \frac{(X - 0)(X - 2)}{(1 - 0)(1 - 2)} = -(X^2 - 2X).$$
+<p><b>Étape 4 : $L_2$.</b></p>
+$$L_2 = \frac{(X - 0)(X - 1)}{(2 - 0)(2 - 1)} = \frac{X^2 - X}2.$$
+<p><b>Étape 5 : On assemble</b> avec $y_0 = 1$, $y_1 = 3$, $y_2 = 7$ :</p>
+$$P = \frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8X^2 - 10X + 2}2 - 3X^2 + 6X = 4X^2 - 5X + 1 - 3X^2 + 6X.$$
+$$\cG{P = X^2 + X + 1}.$$
 <p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$.</p>
 
 <h2 id="q-pgcd">9. PGCD, Bézout, Gauss</h2>
@@ -3079,8 +3233,15 @@ $$P = 1\cdot\frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8
 <li>$a_1, \dots, a_n$ distincts : si chaque $(X - a_i)$ divise $P$, alors $\prod(X - a_i)$ divise $P$.</li>
 </ul>
 <p class="ml">Exemple : PGCD de $X^4 - 1$ et $X^3 - 1$, avec une relation de Bézout</p>
-$$\begin{aligned}X^4 - 1 &= X\cdot(X^3 - 1) + \cR{(X - 1)}\\X^3 - 1 &= (X - 1)(X^2 + X + 1) + 0\end{aligned}\qquad\Longrightarrow\qquad\cG{(X^4 - 1)\wedge(X^3 - 1) = X - 1}.$$
-<p>On remonte la première ligne : $X - 1 = (X^4 - 1)\cdot1 + (X^3 - 1)\cdot(-X)$.</p>
+<p><b>Étape 1 : Rappel.</b> Algorithme d'Euclide : on divise, puis on remplace le couple $(A, B)$ par $(B, R)$. Le PGCD est le dernier reste non nul.</p>
+<p><b>Étape 2 : Première division.</b> $X^4 - 1$ par $X^3 - 1$ :</p>
+$$X^4 - 1 = X\cdot(X^3 - 1) + \cR{(X - 1)}.$$
+<p><b>Étape 3 : Deuxième division.</b> $X^3 - 1$ par le reste $X - 1$ :</p>
+$$X^3 - 1 = (X - 1)(X^2 + X + 1) + 0.$$
+<p><b>Étape 4 : Le PGCD.</b> Le dernier reste non nul est $X - 1$ (déjà unitaire) :</p>
+$$\cG{(X^4 - 1)\wedge(X^3 - 1) = X - 1}.$$
+<p><b>Étape 5 : Bézout.</b> On isole le reste dans l'étape 2 :</p>
+$$X - 1 = (X^4 - 1)\cdot\cG1 + (X^3 - 1)\cdot\cG{(-X)}.$$
 
 <h2 id="q-des">10. La décomposition en éléments simples</h2>
 <p>Elle découpe une fraction en somme de fractions simples. Elle sert à <b>primitiver</b>, à <b>télescoper</b> une somme et à calculer des dérivées $n$-ièmes.</p>
@@ -3158,74 +3319,166 @@ $$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightar
 
 <h2 id="q-exos">14. Exercices corrigés (feuille d'exercices 15 à 17)</h2>
 <p class="ml">Exercice 15 A : $\dfrac{X^3}{X^2 - 3X + 2}$</p>
-<p><b>Partie entière</b> ($3\geqslant2$) : $X^3 = (X^2 - 3X + 2)(X + 3) + 7X - 6$. Contrôle : $(X^2 - 3X + 2)(X + 3) = X^3 - 7X + 6$.</p>
-<p><b>Dénominateur</b> : $X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}$.</p>
-<p><b>Pôles simples</b> :</p>
-$$\frac{7X - 6}{(X - 1)(X - 2)} = \frac a{X - 1} + \frac b{X - 2},\qquad\cR a = \frac{7 - 6}{1 - 2} = -1,\qquad\cR b = \frac{14 - 6}{2 - 1} = 8.$$
-$$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.\qquad\text{Contrôle en}\ 0:\ 0 = 3 + 1 - 4.$$
+<p><b>Étape 1 : Rappel.</b> Si $\deg P\geqslant\deg Q$, on commence par la partie entière. Pour un pôle simple $a$ : $c = \big[(X - a)F\big]_{X = a}$.</p>
+<p><b>Étape 2 : Partie entière ($3\geqslant2$).</b> On divise $X^3$ par $X^2 - 3X + 2$ :</p>
+$$X^3 = (X^2 - 3X + 2)(X + 3) + 7X - 6.$$
+<p>Contrôle : $(X^2 - 3X + 2)(X + 3) = X^3 + 3X^2 - 3X^2 - 9X + 2X + 6 = X^3 - 7X + 6$.</p>
+<p><b>Étape 3 : Factoriser le dénominateur.</b> Racine évidente $1$, produit des racines $2$ :</p>
+$$X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}.$$
+<p><b>Étape 4 : La forme.</b></p>
+$$\frac{7X - 6}{(X - 1)(X - 2)} = \frac a{X - 1} + \frac b{X - 2}.$$
+<p><b>Étape 5 : Le coefficient $a$.</b> On cache $(X - 1)$ et on remplace $X$ par $1$ :</p>
+$$\cR a = \frac{7\times1 - 6}{1 - 2} = -1.$$
+<p><b>Étape 6 : Le coefficient $b$.</b> On cache $(X - 2)$ et on remplace $X$ par $2$ :</p>
+$$\cR b = \frac{7\times2 - 6}{2 - 1} = 8.$$
+<p><b>Étape 7 : Conclusion.</b></p>
+$$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.$$
+<p>Contrôle en $X = 0$ : à gauche $0$, à droite $3 + 1 - 4 = 0$.</p>
+
 <p class="ml">Exercice 15 B : $\dfrac{X + 1}{(X + 2)(X - 1)^2}$</p>
-<p>Calculée au §11 (méthode 2) : $\cG{-\frac{1/9}{X + 2} + \frac{1/9}{X - 1} + \frac{2/3}{(X - 1)^2}}$.</p>
+<p><b>Étape 1 : Rappel.</b> Pôle double : on obtient le coefficient de la plus haute puissance en cachant $(X - 1)^2$. L'autre se trouve avec $\lim_{X\to+\infty}XF(X)$.</p>
+<p><b>Étape 2 : La forme.</b> Degré $1\lt3$, pas de partie entière :</p>
+$$F = \frac a{X + 2} + \frac b{X - 1} + \frac c{(X - 1)^2}.$$
+<p><b>Étape 3 : Le coefficient $a$.</b> On cache $(X + 2)$, $X = -2$ :</p>
+$$\cR a = \frac{-2 + 1}{(-2 - 1)^2} = -\frac19.$$
+<p><b>Étape 4 : Le coefficient $c$.</b> On cache $(X - 1)^2$, $X = 1$ :</p>
+$$\cR c = \frac{1 + 1}{1 + 2} = \frac23.$$
+<p><b>Étape 5 : Le coefficient $b$.</b> On multiplie par $X$ et $X\to+\infty$. À gauche, $XF(X)\sim\frac{X^2}{X^3}\to0$ ; à droite, il reste $a + b$ :</p>
+$$0 = a + b\qquad\Longrightarrow\qquad\cR{b = \frac19}.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{F = -\frac{1/9}{X + 2} + \frac{1/9}{X - 1} + \frac{2/3}{(X - 1)^2}}.$$
+<p>Contrôle en $X = 0$ : $F(0) = \frac12$ et $-\frac1{18} - \frac19 + \frac23 = \frac{-1 - 2 + 12}{18} = \frac12$.</p>
+
 <p class="ml">Exercice 15 C : $\dfrac{X^5 + 1}{(X^2 - X)^2}$</p>
-<p><b>Dénominateur</b> : $(X^2 - X)^2 = \cB{X^2(X - 1)^2} = X^4 - 2X^3 + X^2$.</p>
-<p><b>Partie entière</b> ($5\geqslant4$) :</p>
+<p><b>Étape 1 : Rappel.</b> Partie entière si $\deg P\geqslant\deg Q$. Pour un pôle double $a$, le coefficient de $\frac1{(X - a)^2}$ s'obtient en cachant, celui de $\frac1{X - a}$ par un DL de $(X - a)^2F$ au voisinage de $a$.</p>
+<p><b>Étape 2 : Le dénominateur.</b></p>
+$$(X^2 - X)^2 = \big(X(X - 1)\big)^2 = \cB{X^2(X - 1)^2} = X^4 - 2X^3 + X^2.$$
+<p><b>Étape 3 : La partie entière ($5\geqslant4$).</b> Le quotient commence par $X$, puis $+2$ :</p>
 $$(X + 2)(X^4 - 2X^3 + X^2) = X^5 - 3X^3 + 2X^2,\qquad X^5 + 1 = (X + 2)(X^4 - 2X^3 + X^2) + 3X^3 - 2X^2 + 1.$$
-<p><b>Forme</b> : $F = X + 2 + \frac aX + \frac b{X^2} + \frac c{X - 1} + \frac d{(X - 1)^2}$.</p>
-<p><b>Plus hautes puissances</b> :</p>
-$$\cR b = \Big[\frac{X^5 + 1}{(X - 1)^2}\Big]_{X = 0} = 1,\qquad\cR d = \Big[\frac{X^5 + 1}{X^2}\Big]_{X = 1} = 2.$$
-<p><b>Coefficient $a$, par un DL en $0$</b> : $X^2F = \frac{X^5 + 1}{(X - 1)^2} = (1 + X^5)(1 - X)^{-2} = 1 + 2X + o(X)$. Le coefficient de $X$ donne $\cR{a = 2}$.</p>
-<p><b>Coefficient $c$, par un DL en $1$</b> : avec $\cO{X = 1 + h}$, $(X - 1)^2F = \frac{(1 + h)^5 + 1}{(1 + h)^2} = (2 + 5h)(1 - 2h) + o(h) = 2 + h + o(h)$. Donc $\cR{c = 1}$.</p>
-<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3$.</p>
+<p><b>Étape 4 : La forme.</b></p>
+$$F = X + 2 + \frac aX + \frac b{X^2} + \frac c{X - 1} + \frac d{(X - 1)^2}.$$
+<p><b>Étape 5 : Les plus hautes puissances.</b> On cache $X^2$ puis $(X - 1)^2$ :</p>
+$$\cR b = \Big[\frac{X^5 + 1}{(X - 1)^2}\Big]_{X = 0} = \frac11 = 1,\qquad\cR d = \Big[\frac{X^5 + 1}{X^2}\Big]_{X = 1} = \frac21 = 2.$$
+<p><b>Étape 6 : Le coefficient $a$, par un DL en $0$.</b> $X^2F = \frac{X^5 + 1}{(X - 1)^2} = b + aX + o(X)$. Avec $(1 - X)^{-2} = 1 + 2X + o(X)$ :</p>
+$$\frac{X^5 + 1}{(1 - X)^2} = (1 + X^5)(1 + 2X + o(X)) = 1 + 2X + o(X)\qquad\Longrightarrow\qquad\cR{a = 2}.$$
+<p><b>Étape 7 : Le coefficient $c$, par un DL en $1$.</b> On pose $\cO{X = 1 + h}$ : $(X - 1)^2F = \frac{X^5 + 1}{X^2} = d + ch + o(h)$.</p>
+$$(1 + h)^5 + 1 = 2 + 5h + o(h),\qquad\frac1{(1 + h)^2} = 1 - 2h + o(h),\qquad(2 + 5h)(1 - 2h) = 2 + h + o(h)\qquad\Longrightarrow\qquad\cR{c = 1}.$$
+<p><b>Étape 8 : Conclusion.</b></p>
 $$\cG{\frac{X^5 + 1}{(X^2 - X)^2} = X + 2 + \frac2X + \frac1{X^2} + \frac1{X - 1} + \frac2{(X - 1)^2}}.$$
+<p>Contrôle en $X = -1$ : à gauche $0$, à droite $1 - 2 + 1 - \frac12 + \frac12 = 0$.</p>
+
 <p class="ml">Exercice 15 D : $\dfrac{X^3 + 1}{X^3 - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
-<p><b>Partie entière</b> : $\frac{X^3 + 1}{X^3 - 1} = 1 + \frac2{X^3 - 1}$.</p>
-<p><b>Pôles</b> : $\cB{1, j, j^2}$, simples.</p>
-<p><b>Dans $\mathbb C(X)$</b>, avec $c = \frac{P(\omega)}{Q'(\omega)} = \frac2{3\omega^2} = \frac{2\omega}3$ (car $\omega^3 = 1$) :</p>
-$$\cG{1 + \frac23\Big(\frac1{X - 1} + \frac j{X - j} + \frac{j^2}{X - j^2}\Big)}.$$
-<p><b>Dans $\mathbb R(X)$</b> : on regroupe $j$ et $j^2 = \overline j$ ($j + \overline j = -1$, $j\overline j = 1$) :</p>
-$$\frac j{X - j} + \frac{\overline j}{X - \overline j} = \frac{(j + \overline j)X - 2j\overline j}{X^2 + X + 1} = \frac{-X - 2}{X^2 + X + 1}.$$
-$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac{2/3}{X - 1} - \frac23\cdot\frac{X + 2}{X^2 + X + 1}}.\qquad\text{Contrôle en}\ 0:\ -1 = 1 - \frac23 - \frac43.$$
+<p><b>Étape 1 : Rappel.</b> Pour un pôle simple $\omega$ de $\frac PQ$ : $c = \frac{P(\omega)}{Q'(\omega)}$. Dans $\mathbb R(X)$, on regroupe deux pôles conjugués.</p>
+<p><b>Étape 2 : Partie entière.</b> Même degré en haut et en bas :</p>
+$$\frac{X^3 + 1}{X^3 - 1} = \frac{(X^3 - 1) + 2}{X^3 - 1} = 1 + \frac2{X^3 - 1}.$$
+<p><b>Étape 3 : Les pôles.</b> $X^3 - 1 = (X - 1)(X - j)(X - j^2)$, trois pôles simples $\cB{1, j, j^2}$.</p>
+<p><b>Étape 4 : Les coefficients</b> de $\frac2{X^3 - 1}$, avec $Q' = 3X^2$ et $\omega^3 = 1$ (donc $\frac1{\omega^2} = \omega$) :</p>
+$$c_\omega = \frac2{3\omega^2} = \frac{2\omega}3:\qquad c_1 = \frac23,\qquad c_j = \frac{2j}3,\qquad c_{j^2} = \frac{2j^2}3.$$
+<p><b>Étape 5 : Dans $\mathbb C(X)$.</b></p>
+$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac23\Big(\frac1{X - 1} + \frac j{X - j} + \frac{j^2}{X - j^2}\Big)}.$$
+<p><b>Étape 6 : On regroupe $j$ et $j^2 = \overline j$.</b> Avec $j + \overline j = -1$ et $j\overline j = 1$ :</p>
+$$\frac j{X - j} + \frac{\overline j}{X - \overline j} = \frac{j(X - \overline j) + \overline j(X - j)}{(X - j)(X - \overline j)} = \frac{(j + \overline j)X - 2j\overline j}{X^2 + X + 1} = \frac{-X - 2}{X^2 + X + 1}.$$
+<p><b>Étape 7 : Dans $\mathbb R(X)$.</b></p>
+$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac{2/3}{X - 1} - \frac23\cdot\frac{X + 2}{X^2 + X + 1}}.$$
+<p>Contrôle en $X = 0$ : $-1 = 1 - \frac23 - \frac43$.</p>
+
 <p class="ml">Exercice 15 E : $\dfrac{X^4 + X + 1}{X(X^2 + 1)^3}$</p>
-<p><b>Forme</b> : $\frac aX + \frac{\alpha_1X + \beta_1}{X^2 + 1} + \frac{\alpha_2X + \beta_2}{(X^2 + 1)^2} + \frac{\alpha_3X + \beta_3}{(X^2 + 1)^3}$ (7 inconnues, degré 7).</p>
-<p><b>Pôle $0$</b> : $\cR a = \Big[\frac{X^4 + X + 1}{(X^2 + 1)^3}\Big]_0 = 1$. On retire ce terme :</p>
+<p><b>Étape 1 : Rappel.</b> $X^2 + 1$ est irréductible dans $\mathbb R$ ; à la puissance $3$, il apporte trois termes $\frac{\alpha_kX + \beta_k}{(X^2 + 1)^k}$.</p>
+<p><b>Étape 2 : La forme</b> (7 inconnues pour un dénominateur de degré 7) :</p>
+$$F = \frac aX + \frac{\alpha_1X + \beta_1}{X^2 + 1} + \frac{\alpha_2X + \beta_2}{(X^2 + 1)^2} + \frac{\alpha_3X + \beta_3}{(X^2 + 1)^3}.$$
+<p><b>Étape 3 : Le pôle $0$.</b> On cache $X$ et on remplace $X$ par $0$ :</p>
+$$\cR a = \frac{0 + 0 + 1}{(0 + 1)^3} = 1.$$
+<p><b>Étape 4 : On retire $\frac1X$.</b> Avec $(X^2 + 1)^3 = X^6 + 3X^4 + 3X^2 + 1$ :</p>
 $$F - \frac1X = \frac{X^4 + X + 1 - (X^2 + 1)^3}{X(X^2 + 1)^3} = \frac{-X^6 - 2X^4 - 3X^2 + X}{X(X^2 + 1)^3} = \frac{-X^5 - 2X^3 - 3X + 1}{(X^2 + 1)^3}.$$
-<p><b>Puissances de $Y = X^2 + 1$</b> : on remplace $X^2 = Y - 1$, donc $X^3 = X(Y - 1)$ et $X^5 = X(Y - 1)^2$ :</p>
+<p><b>Étape 5 : On écrit le numérateur en puissances de $Y = X^2 + 1$.</b> On remplace $X^2 = Y - 1$, donc $X^3 = X(Y - 1)$ et $X^5 = X(Y - 1)^2$ :</p>
 $$-X(Y^2 - 2Y + 1) - 2X(Y - 1) - 3X + 1 = -XY^2 + \cancel{2XY} - X - \cancel{2XY} + 2X - 3X + 1 = -XY^2 - 2X + 1.$$
-$$\cG{\frac{X^4 + X + 1}{X(X^2 + 1)^3} = \frac1X - \frac X{X^2 + 1} + \frac{1 - 2X}{(X^2 + 1)^3}}.\qquad\text{Contrôle en}\ 1:\ \frac38 = 1 - \frac12 - \frac18.$$
+<p><b>Étape 6 : On divise par $Y^3$.</b></p>
+$$\frac{-XY^2 - 2X + 1}{Y^3} = -\frac X{Y} + \frac{1 - 2X}{Y^3}.$$
+<p><b>Étape 7 : Conclusion.</b></p>
+$$\cG{\frac{X^4 + X + 1}{X(X^2 + 1)^3} = \frac1X - \frac X{X^2 + 1} + \frac{1 - 2X}{(X^2 + 1)^3}}.$$
+<p>Contrôle en $X = 1$ : $\frac38 = 1 - \frac12 - \frac18$.</p>
+
 <p class="ml">Exercice 15 F : $\dfrac{X^{n-1}}{X^n - 1}$ dans $\mathbb C(X)$</p>
-<p>Pôles simples : les $\cB{\omega_k = e^{2ik\pi/n}}$, $0\leqslant k\leqslant n - 1$. Avec $Q' = nX^{n-1}$ :</p>
-$$c_k = \frac{\omega_k^{n-1}}{n\,\omega_k^{n-1}} = \frac1n\qquad\Longrightarrow\qquad\cG{\frac{X^{n-1}}{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac1{X - \omega_k}}.$$
-<p>C'est aussi $\frac1n\cdot\frac{Q'}Q$ : la dérivée logarithmique.</p>
+<p><b>Étape 1 : Rappel.</b> Pôle simple $\omega$ de $\frac PQ$ : $c = \frac{P(\omega)}{Q'(\omega)}$.</p>
+<p><b>Étape 2 : Les pôles.</b> $X^n - 1$ a $n$ racines simples, les $\cB{\omega_k = e^{2ik\pi/n}}$, $0\leqslant k\leqslant n - 1$. Le degré du numérateur ($n - 1$) est plus petit : pas de partie entière.</p>
+<p><b>Étape 3 : Les coefficients.</b> $P = X^{n-1}$ et $Q' = nX^{n-1}$ :</p>
+$$c_k = \frac{\omega_k^{n-1}}{n\,\omega_k^{n-1}} = \frac1n.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\frac{X^{n-1}}{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac1{X - \omega_k}}.$$
+<p>Remarque : c'est $\frac1n\cdot\frac{Q'}Q$, la dérivée logarithmique de $Q$ divisée par $n$.</p>
+
 <p class="ml">Exercice 15 G : $\dfrac1{X^n - 1}$ dans $\mathbb C(X)$</p>
-$$c_k = \frac1{n\,\omega_k^{n-1}} = \frac{\omega_k}{n\,\omega_k^n} = \frac{\omega_k}n\qquad\Longrightarrow\qquad\cG{\frac1{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac{\omega_k}{X - \omega_k}}.$$
+<p><b>Étape 1 : Rappel.</b> Pôle simple : $c = \frac{P(\omega)}{Q'(\omega)}$.</p>
+<p><b>Étape 2 : Les pôles.</b> Les $\cB{\omega_k = e^{2ik\pi/n}}$, simples.</p>
+<p><b>Étape 3 : Les coefficients.</b> $P = 1$, $Q' = nX^{n-1}$, et on multiplie en haut et en bas par $\omega_k$ en utilisant $\omega_k^n = 1$ :</p>
+$$c_k = \frac1{n\,\omega_k^{n-1}} = \frac{\omega_k}{n\,\omega_k^n} = \frac{\omega_k}n.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\frac1{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac{\omega_k}{X - \omega_k}}.$$
+
 <p class="ml">Exercice 15 H : $\dfrac1{(X - 1)(X^n - 1)}$ dans $\mathbb C(X)$</p>
-<p>$1$ est racine de $X^n - 1$ : c'est un <b>pôle double</b>. On écrit $X^n - 1 = (X - 1)\Phi$ avec $\Phi = 1 + X + \cdots + X^{n-1}$, donc le dénominateur vaut $(X - 1)^2\Phi$.</p>
-<p><b>Pôles $\omega_k$, $k\neq0$, simples</b> :</p>
-$$c_k = \frac1{(\omega_k - 1)\,n\,\omega_k^{n-1}} = \frac{\omega_k}{n(\omega_k - 1)}.$$
-<p><b>Pôle double $1$</b> : $(X - 1)^2F = \frac1\Phi$. Le coefficient de $\frac1{(X - 1)^2}$ est $\frac1{\Phi(1)} = \frac1n$, et celui de $\frac1{X - 1}$ est la dérivée de $\frac1\Phi$ en $1$ :</p>
-$$\Big(\frac1\Phi\Big)'(1) = -\frac{\Phi'(1)}{\Phi(1)^2} = -\frac{1 + 2 + \cdots + (n - 1)}{n^2} = -\frac{n(n - 1)/2}{n^2} = -\frac{n - 1}{2n}.$$
+<p><b>Étape 1 : Rappel.</b> Pôle simple : $\frac{P(\omega)}{Q'(\omega)}$. Pôle double $a$ : on écrit $(X - a)^2F = g$, alors le coefficient de $\frac1{(X - a)^2}$ est $g(a)$ et celui de $\frac1{X - a}$ est $g'(a)$.</p>
+<p><b>Étape 2 : Repérer le pôle double.</b> $1$ est racine de $X^n - 1$, donc $1$ est racine double du dénominateur. On écrit $X^n - 1 = (X - 1)\Phi$, avec $\Phi = 1 + X + \cdots + X^{n-1}$ :</p>
+$$(X - 1)(X^n - 1) = (X - 1)^2\,\Phi.$$
+<p><b>Étape 3 : Les pôles simples</b> $\omega_k$, $1\leqslant k\leqslant n - 1$. On cache $(X - \omega_k)$ dans $X^n - 1$ grâce à la dérivée $n\omega_k^{n-1} = \frac n{\omega_k}$ :</p>
+$$c_k = \frac1{(\omega_k - 1)\cdot n\,\omega_k^{n-1}} = \frac{\omega_k}{n(\omega_k - 1)}.$$
+<p><b>Étape 4 : Le coefficient de $\frac1{(X - 1)^2}$.</b> $g = \frac1\Phi$ et $\Phi(1) = n$ :</p>
+$$g(1) = \frac1n.$$
+<p><b>Étape 5 : Le coefficient de $\frac1{X - 1}$.</b> $g' = -\frac{\Phi'}{\Phi^2}$ et $\Phi'(1) = 1 + 2 + \cdots + (n - 1) = \frac{n(n - 1)}2$ :</p>
+$$g'(1) = -\frac{n(n - 1)/2}{n^2} = -\frac{n - 1}{2n}.$$
+<p><b>Étape 6 : Conclusion.</b></p>
 $$\cG{\frac1{(X - 1)(X^n - 1)} = \frac1{n(X - 1)^2} - \frac{n - 1}{2n(X - 1)} + \sum_{k=1}^{n-1}\frac{\omega_k}{n(\omega_k - 1)(X - \omega_k)}}.$$
-<p>Contrôle avec $n = 2$ : $\frac1{(X - 1)^2(X + 1)} = \frac{1/2}{(X - 1)^2} - \frac{1/4}{X - 1} + \frac{1/4}{X + 1}$, ce qu'on retrouve directement.</p>
+<p>Contrôle avec $n = 2$ : $\frac1{(X - 1)^2(X + 1)} = \frac{1/2}{(X - 1)^2} - \frac{1/4}{X - 1} + \frac{1/4}{X + 1}$.</p>
+
 <p class="ml">Exercice 15 I : $\dfrac1{X^{2n} - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
-<p><b>Dans $\mathbb C(X)$</b> : pôles $\cB{\omega_k = e^{ik\pi/n}}$, $0\leqslant k\leqslant2n - 1$, coefficients $\frac{\omega_k}{2n}$ (comme en G) :</p>
-$$\frac1{X^{2n} - 1} = \frac1{2n}\sum_{k=0}^{2n-1}\frac{\omega_k}{X - \omega_k}.$$
-<p><b>Dans $\mathbb R(X)$</b> : les pôles réels sont $\omega_0 = 1$ et $\omega_n = -1$. Les autres vont par paires conjuguées $\omega_k$, $\omega_{2n-k} = \overline{\omega_k}$ pour $1\leqslant k\leqslant n - 1$. Avec la formule du §12 ($c = \frac{\omega}{2n}$, $c\,\overline\omega = \frac1{2n}$) :</p>
+<p><b>Étape 1 : Rappel.</b> Pôle simple : $\frac{P(\omega)}{Q'(\omega)}$. Deux pôles conjugués $\omega$, $\overline\omega$ de coefficients $c$, $\overline c$ se regroupent en :</p>
+$$\frac c{X - \omega} + \frac{\overline c}{X - \overline\omega} = \frac{2\operatorname{Re}(c)X - 2\operatorname{Re}(c\overline\omega)}{X^2 - 2\operatorname{Re}(\omega)X + |\omega|^2}.$$
+<p><b>Étape 2 : Les pôles.</b> $X^{2n} - 1$ a $2n$ racines simples $\cB{\omega_k = e^{ik\pi/n}}$, $0\leqslant k\leqslant2n - 1$.</p>
+<p><b>Étape 3 : Les coefficients</b> (comme en G, avec $2n$ à la place de $n$) :</p>
+$$c_k = \frac{\omega_k}{2n}.$$
+<p><b>Étape 4 : Dans $\mathbb C(X)$.</b></p>
+$$\cG{\frac1{X^{2n} - 1} = \frac1{2n}\sum_{k=0}^{2n-1}\frac{\omega_k}{X - \omega_k}}.$$
+<p><b>Étape 5 : Les pôles réels.</b> $\omega_0 = 1$ (coefficient $\frac1{2n}$) et $\omega_n = -1$ (coefficient $-\frac1{2n}$).</p>
+<p><b>Étape 6 : Les couples conjugués</b> $\omega_k$ et $\omega_{2n-k} = \overline{\omega_k}$, $1\leqslant k\leqslant n - 1$. Ici $2\operatorname{Re}(c) = \frac1n\cos\frac{k\pi}n$, $c\,\overline{\omega_k} = \frac{|\omega_k|^2}{2n} = \frac1{2n}$, et $|\omega_k| = 1$ :</p>
 $$\frac{\omega_k/2n}{X - \omega_k} + \frac{\overline{\omega_k}/2n}{X - \overline{\omega_k}} = \frac1n\cdot\frac{\cos\frac{k\pi}n\,X - 1}{X^2 - 2\cos\frac{k\pi}n\,X + 1}.$$
+<p><b>Étape 7 : Dans $\mathbb R(X)$.</b></p>
 $$\cG{\frac1{X^{2n} - 1} = \frac1{2n}\Big(\frac1{X - 1} - \frac1{X + 1}\Big) + \frac1n\sum_{k=1}^{n-1}\frac{\cos\frac{k\pi}n\,X - 1}{X^2 - 2\cos\frac{k\pi}n\,X + 1}}.$$
+<p>Contrôle avec $n = 1$ : $\frac1{X^2 - 1} = \frac12\Big(\frac1{X - 1} - \frac1{X + 1}\Big)$.</p>
+
 <p class="ml">Exercice 15 J : $\dfrac1{(X - 1)(X - 2)\cdots(X - n)}$</p>
-<p>Pôles simples $1, \dots, n$. Pour le pôle $k$, on cache $(X - k)$ et on évalue en $k$ :</p>
-$$c_k = \prod_{j\neq k}\frac1{k - j} = \frac1{\underbrace{(k - 1)(k - 2)\cdots1}_{(k-1)!}\cdot\underbrace{(-1)(-2)\cdots(k - n)}_{(-1)^{n-k}(n - k)!}} = \frac{(-1)^{n-k}}{(k - 1)!\,(n - k)!}.$$
-$$\cG{\frac1{\prod_{j=1}^n(X - j)} = \sum_{k=1}^n\frac{(-1)^{n-k}}{(k - 1)!\,(n - k)!}\cdot\frac1{X - k} = \frac1{(n - 1)!}\sum_{k=1}^n\frac{(-1)^{n-k}\binom{n - 1}{k - 1}}{X - k}}.$$
+<p><b>Étape 1 : Rappel.</b> Pôles simples : on cache le facteur et on évalue au pôle.</p>
+<p><b>Étape 2 : La forme.</b> Les pôles $1, 2, \dots, n$ sont simples :</p>
+$$\frac1{(X - 1)(X - 2)\cdots(X - n)} = \sum_{k=1}^n\frac{c_k}{X - k}.$$
+<p><b>Étape 3 : On cache $(X - k)$ et on remplace $X$ par $k$.</b></p>
+$$c_k = \prod_{j\neq k}\frac1{k - j} = \frac1{\underbrace{(k - 1)(k - 2)\cdots1}_{j\lt k}\times\underbrace{(-1)(-2)\cdots(k - n)}_{j > k}}.$$
+<p><b>Étape 4 : On compte.</b> Le premier produit vaut $(k - 1)!$. Le second a $n - k$ facteurs négatifs : il vaut $(-1)^{n-k}(n - k)!$.</p>
+$$c_k = \frac{(-1)^{n-k}}{(k - 1)!\,(n - k)!}.$$
+<p><b>Étape 5 : Conclusion</b>, en faisant apparaître $\binom{n - 1}{k - 1} = \frac{(n - 1)!}{(k - 1)!(n - k)!}$ :</p>
+$$\cG{\frac1{\prod_{j=1}^n(X - j)} = \frac1{(n - 1)!}\sum_{k=1}^n\frac{(-1)^{n-k}\binom{n - 1}{k - 1}}{X - k}}.$$
+
 <p class="ml">Exercice 16 : $P$ scindé sur $\mathbb R$, montrer $P'(x)^2 - P(x)P''(x)\geqslant0$</p>
-<p><b>Cas $P$ constant</b> : $0\geqslant0$. Sinon, $P = \lambda\prod_{i=1}^n(X - a_i)$ avec les $a_i$ réels.</p>
-<p><b>Si $P(x)\neq0$</b> : la dérivée logarithmique donne $\frac{P'}P(x) = \sum_i\frac1{x - a_i}$. On dérive :</p>
-$$\Big(\frac{P'}P\Big)' = \frac{P''P - P'^2}{P^2} = -\sum_{i=1}^n\frac1{(x - a_i)^2}\lt0\qquad\Longrightarrow\qquad P'(x)^2 - P(x)P''(x) = P(x)^2\sum_i\frac1{(x - a_i)^2} > 0.$$
-<p><b>Si $P(x) = 0$</b> : l'expression vaut $P'(x)^2\geqslant0$. $\cG{\text{Dans tous les cas, elle est}\geqslant0}$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $P = \lambda\prod_{i=1}^n(X - a_i)$, alors $\frac{P'}P = \sum_{i=1}^n\frac1{X - a_i}$ (dérivée logarithmique).</p>
+<p><b>Étape 2 : Le cas $P$ constant.</b> $P' = P'' = 0$, l'expression vaut $0\geqslant0$.</p>
+<p><b>Étape 3 : $P$ scindé.</b> $P = \lambda\prod_{i=1}^n(X - a_i)$ avec les $a_i$ réels (comptés avec multiplicité).</p>
+<p><b>Étape 4 : En un $x$ où $P(x)\neq0$.</b></p>
+$$\frac{P'(x)}{P(x)} = \sum_{i=1}^n\frac1{x - a_i}.$$
+<p><b>Étape 5 : On dérive cette égalité.</b> À gauche, la dérivée d'un quotient ; à droite, $\big(\frac1{x - a_i}\big)' = -\frac1{(x - a_i)^2}$ :</p>
+$$\frac{P''(x)P(x) - P'(x)^2}{P(x)^2} = -\sum_{i=1}^n\frac1{(x - a_i)^2}.$$
+<p><b>Étape 6 : On multiplie par $-P(x)^2$.</b></p>
+$$P'(x)^2 - P(x)P''(x) = P(x)^2\sum_{i=1}^n\frac1{(x - a_i)^2} > 0.$$
+<p><b>Étape 7 : En une racine $x = a_i$.</b> $P(x) = 0$, donc l'expression vaut $P'(x)^2\geqslant0$.</p>
+<p><b>Étape 8 : Conclusion.</b> $\cG{P'(x)^2 - P(x)P''(x)\geqslant0}$ pour tout réel $x$.</p>
+
 <p class="ml">Exercice 17 : $\sum_{k=1}^n\frac{x_k^j}{P'(x_k)}$ pour $0\leqslant j\leqslant n - 1$</p>
-<p><b>Étape 1 : la décomposition.</b> $\deg X^j\lt n = \deg P$, pôles simples $x_k$ : avec $c_k = \frac{x_k^j}{P'(x_k)}$,</p>
+<p><b>Étape 1 : Rappel.</b> Pour un pôle simple $x_k$ de $\frac AP$ : $c_k = \frac{A(x_k)}{P'(x_k)}$.</p>
+<p><b>Étape 2 : La décomposition.</b> $\deg X^j = j\lt n = \deg P$ et les $x_k$ sont distincts, donc simples :</p>
 $$\frac{X^j}{P} = \sum_{k=1}^n\frac{x_k^j}{P'(x_k)}\cdot\frac1{X - x_k}.$$
-<p><b>Étape 2 : multiplier par $\cO X$ et faire tendre $X$ vers $+\infty$.</b> À droite, chaque $\frac X{X - x_k}\to1$ : on obtient exactement la somme cherchée. À gauche, $P$ est unitaire de degré $n$ :</p>
-$$\frac{X^{j+1}}{P}\xrightarrow[X\to+\infty]{}\left\{\begin{aligned}&0&&\text{si}\ j + 1\lt n\\&1&&\text{si}\ j + 1 = n\end{aligned}\right.$$
-$$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ \text{pour}\ 0\leqslant j\leqslant n - 2,\qquad\sum_{k=1}^n\frac{x_k^{n-1}}{P'(x_k)} = 1}.$$
+<p><b>Étape 3 : On multiplie par $\cO X$.</b></p>
+$$\frac{X^{j+1}}{P} = \sum_{k=1}^n\frac{x_k^j}{P'(x_k)}\cdot\frac X{X - x_k}.$$
+<p><b>Étape 4 : On fait tendre $X$ vers $+\infty$ à droite.</b> Chaque $\frac X{X - x_k}\to1$ : on obtient la somme cherchée, $S_j = \sum_k\frac{x_k^j}{P'(x_k)}$.</p>
+<p><b>Étape 5 : À gauche.</b> $P$ est unitaire de degré $n$, donc $\frac{X^{j+1}}P\sim X^{j+1-n}$ :</p>
+$$\frac{X^{j+1}}{P}\xrightarrow[X\to+\infty]{}\left\{\begin{aligned}&0&&\text{si}\ j\leqslant n - 2\\&1&&\text{si}\ j = n - 1\end{aligned}\right.$$
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qquad\sum_{k=1}^n\frac{x_k^{n-1}}{P'(x_k)} = 1}.$$
 
 <h2 id="q-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
