@@ -1763,3 +1763,44 @@ html[data-theme="ardoise"]:not([data-zone]) :is(.navbtn.on,.navlink.on){color:va
 footer.site.site-min{background:transparent;color:var(--muted);margin-top:0}
 footer.site.site-min .wrap{padding-block:20px}
 .keys-hint kbd{display:inline-block;width:auto;height:auto;min-width:20px;line-height:1.5;padding:0 6px;margin:0 1px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;background:var(--surface);box-shadow:none;font:500 11.5px var(--f-mono);color:var(--ink);vertical-align:baseline}
+
+/* ===== Méthode ===== */
+.methode{max-width:860px}
+.methode h2{margin:48px 0 14px;padding-top:8px;font:600 24px var(--f-display);scroll-margin-top:90px}
+.methode h2:first-of-type{margin-top:8px}
+.methode .ml{margin:22px 0 6px;font:600 13px var(--f-display);color:var(--muted)}
+.methode .ml.piege{color:var(--red)}
+.msum{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.msum a{padding:6px 12px;border:1px solid var(--line);border-radius:8px;font:500 13.5px var(--f-display);color:var(--ink);text-decoration:none}
+.msum a:hover{border-color:var(--ink)}
+.mrefl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:8px}
+.mrefl div{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.mrefl b{font:600 15px var(--f-display)}
+.mrefl span{font-size:15px;color:var(--muted)}
+.merr li{margin:6px 0}
+.mlab{margin:22px 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--bg);font-family:var(--f-display)}
+.mlt{margin:0 0 14px;font:600 15px var(--f-display)}
+.mlcalc,.mlres,.mlnote{margin:12px 0;font-size:15px;min-height:1.4em}
+.mlnote{color:var(--muted);font-size:14px}
+.mlnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.mlpos{font:500 13px var(--f-display);color:var(--muted);font-variant-numeric:tabular-nums}
+.mx{border-collapse:separate;border-spacing:0;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:10px;padding:4px 6px;font:500 16px var(--f-mono)}
+.mx td{min-width:38px;height:34px;padding:2px 8px;text-align:center;border-radius:6px;transition:background var(--t-fast)}
+.mx td.on{background:var(--yellow-soft);color:var(--ink)}
+.mc td{cursor:pointer;color:var(--muted)}
+.mc td:hover{background:var(--bg-2)}
+.croix{display:grid;grid-template-columns:auto auto;gap:10px 14px;align-items:center;justify-content:start}
+.croix .mb{grid-column:2}.croix .ma{grid-column:1}.croix .mc{grid-column:2}
+.aug td.sep{border-left:1.5px solid var(--muted)}
+.aug tr.on td{background:var(--yellow-soft)}
+.mlrow{display:flex;flex-wrap:wrap;gap:20px}
+.mlrow label{display:flex;align-items:center;gap:10px;font-size:15px}
+.mlseg{display:inline-flex;gap:2px;padding:3px;margin-bottom:14px;border-radius:10px;background:var(--bg-2)}
+.mlseg button{height:34px;padding:0 14px;border:0;border-radius:8px;background:transparent;color:var(--muted);font:500 14px var(--f-display);cursor:pointer}
+.mlseg button[aria-pressed="true"]{background:var(--surface);color:var(--ink)}
+.mlq{font-size:16px;margin:0 0 12px}
+.mlin{display:grid;gap:6px;margin:6px 0}
+.mlin input{height:40px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:center;font:500 16px var(--f-mono)}
+.mlin input.ok,.mlab .btn.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--surface))}
+.mlin input.ko,.mlab .btn.ko{border-color:var(--red);background:color-mix(in srgb,var(--red) 10%,var(--surface))}
+.mlsol{margin-top:8px}

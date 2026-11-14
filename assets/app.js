@@ -315,6 +315,7 @@ function plusList(list) {
 }
 function tabsHtml(list, cur) { if (!list.length) return ""; return `<div class="tabs" role="tablist">${list.map(t => `<button type="button" role="tab" data-tab="${t[0]}" aria-selected="${t[0] === cur}">${t[1]}${t[2] !== undefined ? `<span class="n">${t[2]}</span>` : ""}</button>`).join("")}</div>`; }
 /* Précédent / suivant : deux grands boutons, aussi au clavier (← →) */
+const METH = window.LEMME.METHODES || {};
 /* les rappels de cours utilisés dans les exercices d'un chapitre, sans doublon */
 const chapRappels = list => [...new Set(list.flatMap(e => (e.steps || []).flatMap(st => st.rappels || [])))].filter(k => RAPPELS[k]);
 function pagerHtml(prev, next) {
@@ -380,6 +381,7 @@ function chapterPage(id, y, i) {
   } else {
     if (PDFS.has(cs)) tabs.push(["cours", "Cours"]);
     tabs.push(["resume", "Résumé"]);
+    if (METH[c.t]) tabs.push(["methode", "Méthode"]);
     if (exs.length) tabs.push(["exercices", "Exercices", exs.length]);
     if (id === "xens") tabs.push(["plus", "Aller plus loin", new Set(plus.map(e => e.plus)).size]);
     if (chapRappels(all).length > 1) tabs.push(["formulaire", "Formulaire"], ["cartes", "Cartes"]);
@@ -392,6 +394,7 @@ function chapterPage(id, y, i) {
     ? `<article class="panelbox resume"><p class="rs-prog"><b>Au programme</b>${esc(c.n)}</p><h2>L'essentiel</h2><div class="prose">${c.r}</div>${PDFS.has(rs) ? `<a class="btn btn-ghost btn-sm rs-dl" href="pdf/${rs}.pdf" download>${I.dl}Télécharger en PDF</a>` : ""}</article>`
     : (PDFS.has(rs) ? `<div data-pdf="${rs}" data-title="Résumé · ${esc(c.t)}"></div>` : empty("Résumé en préparation", "")) + `<p style="margin:20px 4px 0;color:var(--muted);font-size:14.5px"><b style="color:var(--ink)">Au programme :</b> ${esc(c.n)}.</p>`;
   else if (chapTab === "plus") body = plusList(plus);
+  else if (chapTab === "methode") { const mm = METH[c.t], nv = (mm.match(/<nav class="msum">[\s\S]*?<\/nav>/) || [""])[0]; body = `<article class="panelbox methode"><div class="prose">${nv}${annotate(mm.replace(nv, ""), null)}</div></article>`; }
   else if (chapTab === "formulaire") body = `<div class="formulaire"><div class="fm-top"><button type="button" class="btn btn-ghost btn-sm" data-print>Imprimer</button></div>${chapRappels(all).map(k => `<section><h3>${esc(RAPPELS[k].t)}</h3><div class="body course">${aerate(RAPPELS[k].b, true)}</div></section>`).join("")}</div>`;
   else if (chapTab === "cartes") { const ks = chapRappels(all); body = `<div class="flash" data-n="${ks.length}">${ks.map((k, j) => `<button type="button" class="fcard" data-j="${j}"${j ? " hidden" : ""} aria-label="Retourner la carte"><span class="ff">${esc(RAPPELS[k].t)}<small>Clique pour voir la réponse</small></span><span class="fb body course">${aerate(RAPPELS[k].b, true)}</span></button>`).join("")}<div class="fnav"><button type="button" class="btn btn-ghost" data-fl="-1">${I.left} Précédente</button><span class="fpos">1 / ${ks.length}</span><button type="button" class="btn btn-ghost" data-fl="1">Suivante ${I.arrow}</button></div></div>`; }
   else body = exs.length ? exList(exs) : empty("Exercices en préparation", "");
@@ -1250,6 +1253,139 @@ function flashGo(fl, d) {
   $(".fpos", fl).textContent = `${j + 1} / ${cs.length}`;
 }
 function press(b) { b.classList.remove("kp"); void b.offsetWidth; b.classList.add("kp"); setTimeout(() => b.classList.remove("kp"), 260); }
+/* ---------- Labos de la Méthode « Matrices » ---------- */
+/* fractions exactes */
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; };
+const Fr = (n, d = 1) => { if (d < 0) { n = -n; d = -d; } const g = gcd(n, d); return { n: n / g, d: d / g }; };
+const fadd = (a, b) => Fr(a.n * b.d + b.n * a.d, a.d * b.d), fmul = (a, b) => Fr(a.n * b.n, a.d * b.d), fdiv = (a, b) => Fr(a.n * b.d, a.d * b.n);
+const ftex = f => f.d === 1 ? String(f.n) : `${f.n < 0 ? "-" : ""}\\frac{${Math.abs(f.n)}}{${f.d}}`;
+const fstr = f => f.d === 1 ? String(f.n) : `${f.n}/${f.d}`;
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pm = (rows, cls = "") => `<table class="mx ${cls}">${rows.map((r, i) => `<tr>${r.map((v, j) => `<td data-i="${i}" data-j="${j}">${v}</td>`).join("")}</tr>`).join("")}</table>`;
+const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v * B[k][j], 0)));
+const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
+function mountMlab(host) {
+  const k = host.dataset.mlab; host.classList.add("mlab");
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: mlQuiz })[k](host);
+}
+/* 1. Produit en croix : on clique une case de AB */
+function mlProd(host) {
+  let A, B;
+  const draw = () => {
+    const C = mmul(A, B);
+    host.innerHTML = `<p class="mlt">Produit en croix : clique une case du résultat</p><div class="croix"><span></span>${pm(B, "mb")}${pm(A, "ma")}${pm(C.map(r => r.map(() => "?")), "mc")}</div><p class="mlcalc">Choisis une case de $AB$.</p><button type="button" class="btn btn-ghost btn-sm" data-new>Autres matrices</button>`;
+    $$(".mc td", host).forEach(td => td.addEventListener("click", () => {
+      const i = +td.dataset.i, j = +td.dataset.j;
+      $$("td", host).forEach(x => x.classList.remove("on"));
+      $$(`.ma td[data-i="${i}"]`, host).forEach(x => x.classList.add("on"));
+      $$(`.mb td[data-j="${j}"]`, host).forEach(x => x.classList.add("on"));
+      td.classList.add("on"); td.textContent = C[i][j];
+      $(".mlcalc", host).innerHTML = `$c_{${i + 1},${j + 1}} = ${A[i].map((v, k) => `(${v})\\times(${B[k][j]})`).join(" + ")} = ${C[i][j]}$`;
+      typeset($(".mlcalc", host));
+    }));
+    $("[data-new]", host).addEventListener("click", () => { gen(); draw(); });
+    typeset(host);
+  };
+  const gen = () => { const n = rnd(2, 3), p = rnd(2, 3), r = rnd(2, 3); A = Array.from({ length: n }, () => Array.from({ length: p }, () => rnd(-3, 5))); B = Array.from({ length: p }, () => Array.from({ length: r }, () => rnd(-3, 5))); };
+  A = [[3, 1], [2, 4]]; B = [[1, 5], [7, 8]]; draw();
+}
+/* 2. Pivot de Gauss pas à pas sur (A | I) */
+function mlGauss(host) {
+  let steps, k;
+  const build = A0 => {
+    const n = A0.length, M = A0.map((r, i) => r.map(v => Fr(v)).concat(A0.map((_, j) => Fr(i === j ? 1 : 0))));
+    const S = [{ M: M.map(r => r.slice()), op: "Départ : $(A\\,|\\,I_3)$" }];
+    for (let c = 0; c < n; c++) {
+      let p = c; while (p < n && M[p][c].n === 0) p++;
+      if (p === n) return null;
+      if (p !== c) { [M[p], M[c]] = [M[c], M[p]]; S.push({ M: M.map(r => r.slice()), op: `$L_${c + 1}\\leftrightarrow L_${p + 1}$`, row: c }); }
+      const pv = M[c][c];
+      if (!(pv.n === 1 && pv.d === 1)) { M[c] = M[c].map(v => fdiv(v, pv)); S.push({ M: M.map(r => r.slice()), op: `$L_${c + 1}\\leftarrow ${pv.n === -1 && pv.d === 1 ? "-" : `\\frac{1}{${ftex(pv)}}`}L_${c + 1}$`, row: c }); }
+      for (let r = 0; r < n; r++) if (r !== c && M[r][c].n !== 0) { const f = M[r][c]; M[r] = M[r].map((v, j) => fadd(v, fmul(Fr(-f.n, f.d), M[c][j]))); S.push({ M: M.map(x => x.slice()), op: `$L_${r + 1}\\leftarrow L_${r + 1} ${f.n > 0 ? "-" : "+"} ${f.n * (f.n > 0 ? 1 : -1) === f.d ? "" : ftex(Fr(Math.abs(f.n), f.d))}L_${c + 1}$`, row: r }); }
+    }
+    S.push({ M: M.map(r => r.slice()), op: "À gauche $I_3$ : à droite, $A^{-1}$.", end: true });
+    return S;
+  };
+  const gen = () => { for (;;) { const A = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => rnd(-2, 3))); const S = build(A); if (S && S.length <= 12 && S.flatMap(x => x.M.flat()).every(f => f.d <= 6)) return S; } };
+  const draw = () => {
+    const st = steps[k];
+    host.innerHTML = `<p class="mlt">Pivot de Gauss pas à pas</p><div class="gstep"><table class="mx aug">${st.M.map((r, i) => `<tr class="${i === st.row ? "on" : ""}">${r.map((v, j) => `<td class="${j === 3 ? "sep" : ""}">$${ftex(v)}$</td>`).join("")}</tr>`).join("")}</table></div><p class="mlcalc">${st.op}</p><div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${steps.length}</span><button type="button" class="btn btn-ghost btn-sm" data-g="1"${k < steps.length - 1 ? "" : " disabled"}>Après ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button></div>`;
+    $$("[data-g]", host).forEach(b => b.addEventListener("click", () => { k += +b.dataset.g; draw(); }));
+    $("[data-new]", host).addEventListener("click", () => { steps = gen(); k = 0; draw(); });
+    typeset(host);
+  };
+  steps = build([[1, 2, 0], [0, 1, 1], [1, 0, 2]]) || gen(); k = 0; draw();
+}
+/* 3. Puissances : A = λI + N, curseur sur n */
+function mlPuiss(host) {
+  const N = [[0, 1, 0], [0, 0, 1], [0, 0, 0]];
+  let lam = 2, n = 3;
+  const bin = (a, b) => b < 0 || b > a ? 0 : b === 0 ? 1 : Array.from({ length: b }, (_, i) => (a - i) / (i + 1)).reduce((x, y) => x * y, 1);
+  const draw = () => {
+    const I3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    let P = I3, A = I3.map((r, i) => r.map((v, j) => lam * v + N[i][j]));
+    for (let t = 0; t < n; t++) P = mmul(P, A);
+    host.innerHTML = `<p class="mlt">Puissances par le binôme : $A = ${lam}I_3 + N$</p><div class="mlrow"><label>$\\lambda = ${lam}$ <input type="range" min="-3" max="3" value="${lam}" data-l></label><label>$n = ${n}$ <input type="range" min="0" max="12" value="${n}" data-n></label></div><p class="mlcalc">$$A^{${n}} = ${lam}^{${n}}I_3 + \\binom{${n}}{1}${lam}^{${n - 1}}N + \\binom{${n}}{2}${lam}^{${n - 2}}N^2 = ${texM(P)}$$</p><p class="mlnote">${n < 2 ? "Pour $n\\lt 2$, les termes en $N^2$ n'apparaissent pas." : "Les termes en $N^3, N^4,\\dots$ sont nuls : $N^3 = 0$."} Coefficients : $${bin(n, 0)}\\cdot${lam}^{${n}}$, $${bin(n, 1)}\\cdot${lam}^{${n - 1}}$, $${bin(n, 2)}\\cdot${lam}^{${n - 2}}$.</p>`;
+    $("[data-l]", host).addEventListener("input", e => { lam = +e.target.value; draw(); });
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+/* 4. Exercices générés au hasard, avec vérification */
+function mlExos(host) {
+  const KINDS = ["Produit", "Inverse 2×2", "Système 2×2"];
+  let kind = 0, ex;
+  const parse = s => { s = String(s).trim().replace(",", "."); if (/^-?\d+\s*\/\s*-?\d+$/.test(s)) { const [a, b] = s.split("/").map(Number); return b ? a / b : NaN; } return s === "" ? NaN : Number(s); };
+  const gen = () => {
+    if (kind === 0) { const A = [[rnd(-3, 4), rnd(-3, 4)], [rnd(-3, 4), rnd(-3, 4)]], B = [[rnd(-3, 4), rnd(-3, 4)], [rnd(-3, 4), rnd(-3, 4)]]; return { q: `Calcule $AB$ avec $A = ${texM(A)}$ et $B = ${texM(B)}$.`, ans: mmul(A, B).flat(), shape: [2, 2], sol: `$$AB = ${texM(mmul(A, B))}$$` }; }
+    if (kind === 1) { for (;;) { const a = rnd(-3, 4), b = rnd(-3, 4), c = rnd(-3, 4), d = rnd(-3, 4), D = a * d - b * c; if (!D) continue; const inv = [d, -b, -c, a].map(v => Fr(v, D)); return { q: `Calcule l'inverse de $A = ${texM([[a, b], [c, d]])}$. Fractions acceptées : 1/3.`, ans: inv.map(f => f.n / f.d), shape: [2, 2], sol: `$$\\det A = ${a}\\cdot${d} - (${b})(${c}) = ${D}\\ne0,\\qquad A^{-1} = \\frac1{${D}}${texM([[d, -b], [-c, a]])} = ${texM([[ftex(inv[0]), ftex(inv[1])], [ftex(inv[2]), ftex(inv[3])]])}$$` }; } }
+    for (;;) { const a = rnd(-3, 4), b = rnd(-3, 4), c = rnd(-3, 4), d = rnd(-3, 4), D = a * d - b * c; if (!D) continue; const x = rnd(-4, 4), y = rnd(-4, 4); const e1 = a * x + b * y, e2 = c * x + d * y; return { q: `Résous $\\left\\{\\begin{aligned}${a}x + (${b})y&= ${e1}\\\\${c}x + (${d})y&= ${e2}\\end{aligned}\\right.$ : donne $x$ puis $y$.`, ans: [x, y], shape: [2, 1], sol: `$$\\det A = ${D}\\neq0:\\ \\text{une seule solution},\\qquad x = ${x},\\quad y = ${y}.$$` }; }
+  };
+  const draw = () => {
+    host.innerHTML = `<div class="mlseg">${KINDS.map((t, i) => `<button type="button" data-k="${i}" aria-pressed="${i === kind}">${t}</button>`).join("")}</div><p class="mlq">${ex.q}</p><div class="mlin" style="grid-template-columns:repeat(${ex.shape[1]},80px)">${ex.ans.map((_, i) => `<input inputmode="decimal" aria-label="Case ${i + 1}" data-a="${i}">`).join("")}</div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Voir la correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Un autre</button></div><p class="mlres"></p><div class="mlsol" hidden>${ex.sol}</div>`;
+    $$("[data-k]", host).forEach(b => b.addEventListener("click", () => { kind = +b.dataset.k; ex = gen(); draw(); }));
+    $("[data-check]", host).addEventListener("click", () => {
+      let ok = 0; $$("[data-a]", host).forEach(i => { const v = parse(i.value), good = Math.abs(v - ex.ans[+i.dataset.a]) < 1e-9; i.classList.toggle("ok", good); i.classList.toggle("ko", !good); ok += good; });
+      $(".mlres", host).textContent = ok === ex.ans.length ? "Tout est juste." : `${ok} sur ${ex.ans.length} juste${ok > 1 ? "s" : ""}. Les cases en rouge sont à revoir.`;
+    });
+    $("[data-sol]", host).addEventListener("click", () => { const s = $(".mlsol", host); s.hidden = false; typeset(s); });
+    $("[data-new]", host).addEventListener("click", () => { ex = gen(); draw(); });
+    typeset(host);
+  };
+  ex = gen(); draw();
+}
+/* 5. Vrai ou faux : les pièges */
+function mlQuiz(host) {
+  const Q = [
+    ["Si $AB = 0$, alors $A = 0$ ou $B = 0$.", false, "Faux : $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix} = 0$."],
+    ["$(A + B)^2 = A^2 + 2AB + B^2$ pour toutes matrices carrées.", false, "Faux : $(A + B)^2 = A^2 + AB + BA + B^2$, égal seulement si $AB = BA$."],
+    ["${}^t(AB) = {}^tB\\,{}^tA$.", true, "Vrai : l'ordre s'inverse, comme pour l'inverse."],
+    ["$\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$.", true, "Vrai, même si $AB\\neq BA$."],
+    ["Si $AB = I_n$ avec $A, B$ carrées, alors $BA = I_n$.", true, "Vrai pour des matrices carrées : $B = A^{-1}$."],
+    ["$3A^2 + 2A = A(3A + 2)$.", false, "Faux : $A(3A + 2I_n)$, on n'ajoute pas un nombre à une matrice."],
+    ["Une matrice triangulaire à diagonale nulle est nilpotente.", true, "Vrai : $N^n = 0$ pour une telle matrice de taille $n$."],
+    ["Si $AX = B$ a deux solutions, $A$ est inversible.", false, "Faux : si $A$ était inversible, la solution serait unique, $X = A^{-1}B$."],
+    ["$(AB)^{-1} = A^{-1}B^{-1}$.", false, "Faux : $(AB)^{-1} = B^{-1}A^{-1}$."],
+    ["Une matrice antisymétrique a des zéros sur la diagonale.", true, "Vrai : $a_{i,i} = -a_{i,i}$ donc $a_{i,i} = 0$."]
+  ];
+  let k = 0, score = 0, done = false;
+  const draw = () => {
+    if (k >= Q.length) { host.innerHTML = `<p class="mlq">Score : <b>${score} / ${Q.length}</b></p><button type="button" class="btn btn-ghost btn-sm" data-re>Recommencer</button>`; $("[data-re]", host).addEventListener("click", () => { k = 0; score = 0; done = false; draw(); }); return; }
+    const [t, v, why] = Q[k];
+    host.innerHTML = `<p class="mlpos">${k + 1} / ${Q.length}</p><p class="mlq">${t}</p><div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-v="1">Vrai</button><button type="button" class="btn btn-ghost btn-sm" data-v="0">Faux</button></div><p class="mlres"></p>`;
+    $$("[data-v]", host).forEach(b => b.addEventListener("click", () => {
+      if (done) return; done = true;
+      const good = (b.dataset.v === "1") === v; score += good;
+      b.classList.add(good ? "ok" : "ko");
+      const r = $(".mlres", host); r.innerHTML = `${good ? "Bonne réponse." : "Raté."} ${why} <button type="button" class="btn btn-ghost btn-sm" data-next>Suivante</button>`; typeset(r);
+      $("[data-next]", r).addEventListener("click", () => { k++; done = false; draw(); });
+    }));
+    typeset(host);
+  };
+  draw();
+}
+
 /* ---------- Lecteur PDF ---------- */
 let pdfjsReady = null;
 function loadScript(u) { return new Promise((ok, ko) => { const s = document.createElement("script"); s.src = u; s.onload = ok; s.onerror = ko; document.head.appendChild(s); }); }
@@ -2268,6 +2404,8 @@ function wire(ex) {
     try { localStorage.setItem("lemme-diff", diff); } catch (_) {}
     route(true);
   }));
+  $$("[data-mlab]", app).forEach(mountMlab);
+  $$(".msum a", app).forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
