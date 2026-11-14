@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1393,6 +1393,60 @@ function mlQuiz(host, Q) {
       const r = $(".mlres", host); r.innerHTML = `${good ? "Bonne réponse." : "Raté."} ${why} <button type="button" class="btn btn-ghost btn-sm" data-next>Suivante</button>`; typeset(r);
       $("[data-next]", r).addEventListener("click", () => { k++; done = false; draw(); });
     }));
+    typeset(host);
+  };
+  draw();
+}
+
+/* ---------- Labos : applications linéaires ---------- */
+const CC = ["cB", "cR", "cG", "cV"], CH = ["#2B5BD7", "#D4503B", "#1F8A5B", "#7A4CC2"];
+/* Les colonnes de A sont les images ; AX est une combinaison des colonnes */
+function mlColf(host) {
+  const A = [[3, -8, 7], [4, 5, -2]]; let x = [2, -1, 1], col = null;
+  const draw = () => {
+    const Y = A.map(r => r.reduce((s, v, j) => s + v * x[j], 0));
+    host.innerHTML = `<p class="mlt">Clique une colonne, puis bouge les coordonnées de $x$</p>
+      <div class="labm"><table><tr><td></td>${[0, 1, 2].map(j => `<td class="kB colh${col === j ? " on" : ""}" data-c="${j}" style="--k:${CH[j]}">$f(e_${j + 1})$</td>`).join("")}</tr>${A.map((r, i) => `<tr><td class="kR">$e'_${i + 1}$</td>${r.map((v, j) => `<td class="c${j + 1}${col === j ? " on" : ""}" data-c="${j}">${v}</td>`).join("")}</tr>`).join("")}</table></div>
+      <p class="mlcalc">${col === null ? "Clique une colonne : c'est l'image d'un vecteur de départ." : `$f(\\cB{e_${col + 1}}) = ${A[0][col]}\\cR{e'_1} ${A[1][col] < 0 ? "-" : "+"} ${Math.abs(A[1][col])}\\cR{e'_2}$ : on lit la colonne $${col + 1}$ de haut en bas.`}</p>
+      <div class="mlrow">${[0, 1, 2].map(j => `<label style="color:${CH[j]}">$a_${j + 1} = ${x[j]}$ <input type="range" min="-3" max="3" value="${x[j]}" data-x="${j}"></label>`).join("")}</div>
+      <p class="mlcalc">$$f(x) = ${[0, 1, 2].map(j => `\\${CC[j]}{${par(x[j])}}\\begin{pmatrix}\\${CC[j]}{${A[0][j]}}\\\\\\${CC[j]}{${A[1][j]}}\\end{pmatrix}`).join(" + ")} = \\begin{pmatrix}${Y[0]}\\\\${Y[1]}\\end{pmatrix}$$</p>
+      <p class="mlnote">Astuce : $AX$ est la combinaison des colonnes de $A$ avec les coordonnées de $x$. C'est la linéarité écrite en matrices.</p>`;
+    $$("[data-c]", host).forEach(t => t.addEventListener("click", () => { col = +t.dataset.c; draw(); }));
+    $$("[data-x]", host).forEach(r => r.addEventListener("input", () => { x[+r.dataset.x] = +r.value; draw(); }));
+    typeset(host);
+  };
+  draw();
+}
+/* Changement de base 2×2, avec le dessin des vecteurs */
+function mlChg(host) {
+  let A = [[3, 1], [1, 3]], E = [[1, 1], [1, -1]];
+  const fm = M => `\\begin{pmatrix}${M.map(r => r.map(ftex).join("&")).join("\\\\")}\\end{pmatrix}`;
+  const fmul2 = (X, Y) => X.map(r => Y[0].map((_, j) => r.reduce((s, v, k) => fadd(s, fmul(v, Y[k][j])), Fr(0))));
+  const draw = () => {
+    const P = [[E[0][0], E[1][0]], [E[0][1], E[1][1]]], d = det2(P);
+    let body;
+    if (!d) body = `<p class="mlres">Ces deux vecteurs sont colinéaires : ce n'est pas une base, $\\det P = 0$.</p>`;
+    else {
+      const Pf = P.map(r => r.map(v => Fr(v))), Af = A.map(r => r.map(v => Fr(v))), Pi = [[Fr(P[1][1], d), Fr(-P[0][1], d)], [Fr(-P[1][0], d), Fr(P[0][0], d)]];
+      const AP = fmul2(Af, Pf), Ap = fmul2(Pi, AP), diag = Ap[0][1].n === 0 && Ap[1][0].n === 0;
+      body = `<p class="mlcalc">$$\\cG P = \\begin{pmatrix}\\cG{${P[0][0]}}&\\cG{${P[0][1]}}\\\\\\cG{${P[1][0]}}&\\cG{${P[1][1]}}\\end{pmatrix},\\qquad\\cB{P^{-1}} = ${fm(Pi)}$$$$AP = ${fm(AP)}\\qquad\\cG{A'} = P^{-1}AP = ${fm(Ap)}$$</p><p class="mlres">${diag ? "La nouvelle matrice est diagonale : chaque nouveau vecteur est envoyé sur un multiple de lui-même (les flèches pointillées sont alignées)." : "Pas diagonale : les images (pointillés) ne sont pas alignées avec les nouveaux vecteurs."}</p>`;
+    }
+    const S = 22, O = 120, pt = (x, y) => [O + x * S, O - y * S];
+    const arrow = (v, c, dash) => { const [x, y] = pt(v[0], v[1]); return `<line x1="${O}" y1="${O}" x2="${x}" y2="${y}" stroke="${c}" stroke-width="2.5" ${dash ? 'stroke-dasharray="5 4"' : ""} marker-end="url(#mk${c.slice(1)})"/>`; };
+    const img = v => [A[0][0] * v[0] + A[0][1] * v[1], A[1][0] * v[0] + A[1][1] * v[1]];
+    const mk = ["#1F8A5B", "#2B5BD7"].map(c => `<marker id="mk${c.slice(1)}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join("");
+    const grid = Array.from({ length: 11 }, (_, i) => `<line x1="${O + (i - 5) * S}" y1="10" x2="${O + (i - 5) * S}" y2="230" stroke="var(--line)"/><line x1="10" y1="${O + (i - 5) * S}" x2="230" y2="${O + (i - 5) * S}" stroke="var(--line)"/>`).join("");
+    host.innerHTML = `<p class="mlt">Changement de base : choisis $A$ et les nouveaux vecteurs</p>
+      <div class="chgin"><div><span>$A$</span><div class="mlin" style="grid-template-columns:repeat(2,60px)">${A.flat().map((v, i) => `<input value="${v}" data-a="${i}" inputmode="numeric">`).join("")}</div></div>
+      <div><span style="color:#1F8A5B">$e'_1$, $e'_2$ (en colonnes)</span><div class="mlin" style="grid-template-columns:repeat(2,60px)">${[E[0][0], E[1][0], E[0][1], E[1][1]].map((v, i) => `<input value="${v}" data-e="${i}" inputmode="numeric">`).join("")}</div></div>
+      <svg viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Vecteurs de la nouvelle base et leurs images"><defs>${mk}</defs>${grid}${arrow(E[0], "#1F8A5B")}${arrow(E[1], "#1F8A5B")}${arrow(img(E[0]), "#2B5BD7", 1)}${arrow(img(E[1]), "#2B5BD7", 1)}</svg></div>
+      <p class="mlnote"><span style="color:#1F8A5B">vert</span> : $e'_1$, $e'_2$ · <span style="color:#2B5BD7">bleu pointillé</span> : leurs images $f(e'_1)$, $f(e'_2)$</p>
+      ${body}
+      <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-ex>Exemple qui se diagonalise</button><button type="button" class="btn btn-ghost btn-sm" data-rnd>Au hasard</button></div>`;
+    const read = () => { const a = $$("[data-a]", host).map(i => parseInt(i.value) || 0), e = $$("[data-e]", host).map(i => parseInt(i.value) || 0); A = [[a[0], a[1]], [a[2], a[3]]]; E = [[e[0], e[2]], [e[1], e[3]]]; draw(); };
+    $$("[data-a],[data-e]", host).forEach(i => i.addEventListener("change", read));
+    $("[data-ex]", host).addEventListener("click", () => { const ex = [[[[3, 1], [1, 3]], [[1, 1], [1, -1]]], [[[2, 1], [0, 3]], [[1, 0], [1, 1]]], [[[1, 2], [2, 1]], [[1, 1], [1, -1]]], [[[4, -2], [1, 1]], [[1, 1], [2, 1]]]]; const k = rnd(0, ex.length - 1); A = ex[k][0]; E = ex[k][1]; draw(); });
+    $("[data-rnd]", host).addEventListener("click", () => { A = randM(2, -2, 3); E = randM(2, -2, 2); draw(); });
     typeset(host);
   };
   draw();
