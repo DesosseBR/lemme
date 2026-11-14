@@ -771,7 +771,7 @@ $$\chi_B = (X-2)^2(X - 4),\qquad\operatorname{tr}B = 3 + 3 + 2 = 8 = 2 + 2 + 4.\
 <p class="ml">Vérifier son $\chi_A$ en 10 secondes</p>
 <ul>
 <li>Le coefficient de $X^{n-1}$ doit être $-\operatorname{tr}A$ : ici $-(4 + 1 + 1) = -6 = -\operatorname{tr}A$.</li>
-<li>$\chi_A(0) = (-1)^n\det A$ : ici $\chi_A(0) = (0-4)(0-1)^2 = -4$ et $\det A = 4$, donc $(-1)^3\times4 = -4$. $\checkmark$</li>
+<li>$\chi_A(0) = (-1)^n\det A$ : ici $\chi_A(0) = (0-4)(0-1)^2 = -4$ et $\det A = 4$, donc $(-1)^3\times4 = -4\ \checkmark$.</li>
 </ul>
 
 <h2 id="r-sanschi">5. Trouver des valeurs propres sans calculer $\chi_A$</h2>
@@ -805,7 +805,7 @@ $$X = \begin{pmatrix}x\\y\\-x-y\end{pmatrix} = x\cR{\begin{pmatrix}1\\0\\-1\end{
 $$A - \cB4\,I_3 = \begin{pmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-2x + y + z &= 0\quad(L_1)\\x - 2y + z &= 0\quad(L_2)\\x + y - 2z &= 0\quad(L_3)\end{aligned}\right.$$
 $$\left\{\begin{aligned}\cO{L_1 - L_2}&:\ -3x + 3y = 0\ \Longrightarrow\ y = x\\\cO{L_2 - L_3}&:\ -3y + 3z = 0\ \Longrightarrow\ z = y\end{aligned}\right.\qquad\Longrightarrow\qquad X = \begin{pmatrix}x\\x\\x\end{pmatrix} = x\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}}.$$
 $$\cG{E_4} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}},\qquad\dim\cG{E_4} = 1.$$
-<p>On contrôle avec $L_1$ : $-2x + x + x = 0$. $\checkmark$</p>
+<p>On contrôle avec $L_1$ : $-2x + x + x = 0\ \checkmark$.</p>
 <p class="ml piege">Piège</p>
 <p>Si tu trouves $\cG{E_\lambda} = \{0\}$, ton $\lambda$ n'est pas une valeur propre : erreur dans $\chi_A$ ou dans le pivot.</p>
 
@@ -988,5 +988,353 @@ $$\chi_A = X^2 - 4X + 4\ \Longrightarrow\ A^2 - 4A + 4I_2 = 0\ \Longrightarrow\ 
 <div class="lg-v"></div>
 <div class="lg-r"><div class="lg-c1"><a class="lg-start" href="#r-appli">Et après : $A^n = PD^nP^{-1}$, suites $X_{k+1} = AX_k$, systèmes $X' = AX$, inverse par Cayley-Hamilton</a></div></div>
 </div>
+`,
+"Équations différentielles linéaires": R`
+<nav class="msum"><a href="#e-not">Notations</a><a href="#e-forme">Mettre en forme</a><a href="#e-plan">Le plan</a><a href="#e-o1">Ordre 1 : homogène</a><a href="#e-yp1">Ordre 1 : particulière</a><a href="#e-varc">Variation de la constante</a><a href="#e-raccord">Raccordement</a><a href="#e-o2">Ordre 2 : homogène</a><a href="#e-yp2">Ordre 2 : particulière</a><a href="#e-superpo">Superposition</a><a href="#e-cauchy">Conditions initiales</a><a href="#e-var">Coefficients variables</a><a href="#e-sys">Systèmes $X' = AX$</a><a href="#e-nonlin">Non linéaires</a><a href="#e-enonce">Ce que l'énoncé te donne</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la solution de l'équation homogène $\cB{y_H}$. <span class="kR">rouge</span> : la solution particulière $\cR{y_p}$. <span class="kO">orange</span> : le second membre. <span class="kG">vert</span> : les constantes $\cG\lambda, \cG\mu$ et les conditions initiales. <span class="kV">violet</span> : les racines de l'équation caractéristique.</p>
+
+<h2 id="e-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Intervalle, corps</td><td>$I$ intervalle de $\mathbb R$, $\mathbb K = \mathbb R$ ou $\mathbb C$</td><td>On résout toujours <b>sur un intervalle</b>.</td></tr>
+<tr><td>Ordre 1</td><td>$(E):\ y' + a(t)\,y = \cO{b(t)}$</td><td>$a, b$ continues sur $I$.</td></tr>
+<tr><td>Équation homogène</td><td>$(H):\ y' + a(t)\,y = 0$</td><td>On remplace le second membre par $0$.</td></tr>
+<tr><td>Ordre 2</td><td>$(E):\ y'' + a(t)\,y' + b(t)\,y = \cO{c(t)}$</td><td>Coefficient de $y''$ égal à $1$.</td></tr>
+<tr><td>Système</td><td>$X' = A(t)\,X + B(t)$</td><td>$X(t)\in\mathcal M_{n,1}(\mathbb K)$.</td></tr>
+<tr><td>Ensemble des solutions</td><td>$\mathcal S_E = \cR{y_p} + \mathcal S_H$</td><td>$\dim\mathcal S_H = 1$ (ordre 1), $2$ (ordre 2), $n$ (système).</td></tr>
+<tr><td>Wronskien</td><td>$W(t) = \begin{vmatrix}\varphi_1(t)&\varphi_2(t)\\\varphi_1'(t)&\varphi_2'(t)\end{vmatrix}$</td><td>$(\varphi_1, \varphi_2)$ base de $\mathcal S_H\iff W(t_0)\neq0$.</td></tr>
+</table>
+<div class="sbox">$$\textbf{Cauchy-Lipschitz linéaire}:\ \text{pour tout}\ t_0\in I\ \text{et toute condition}\ \cG{y(t_0) = y_0}\ \big(\text{ordre 2 : et}\ \cG{y'(t_0) = y_1}\big),\ \text{il existe une unique solution sur}\ I.$$</div>
+<p><b>Conséquence utile</b> : une solution de $(H)$ qui s'annule en un point (ordre 1), ou qui vérifie $y(t_0) = y'(t_0) = 0$ (ordre 2), est la fonction nulle.</p>
+
+<h2 id="e-forme">2. Mettre l'équation sous la bonne forme</h2>
+<ol>
+<li>Passer <b>tout ce qui contient $y$</b> à gauche, le reste à droite.</li>
+<li>Ranger : $y''$, puis $y'$, puis $y$.</li>
+<li>Diviser par le coefficient de la dérivée la plus haute, <b>sur un intervalle où il ne s'annule pas</b>.</li>
+</ol>
+<p class="ml">Exemple</p>
+$$7t^3y - 5y' = 0.$$
+<p><b>Étape 1–2.</b> On range : $-5y' + 7t^3y = 0$.</p>
+<p><b>Étape 3.</b> On divise par $-5$ (jamais nul) :</p>
+$$y' - \frac75t^3\,y = 0,\qquad\text{donc}\qquad a(t) = -\frac75t^3.$$
+<p class="ml piege">Piège</p>
+<p>Si le coefficient de $y'$ est $t$, $1 + t$, $\sin t$… il s'annule : on résout sur chaque intervalle où il ne s'annule pas, puis on <a href="#e-raccord">raccorde</a>.</p>
+
+<h2 id="e-plan">3. Le plan de résolution (équations linéaires)</h2>
+<div class="sbox">$$y = \cB{y_H} + \cR{y_p}$$</div>
+<ol>
+<li>Résoudre l'équation homogène : $\cB{y_H}$, avec des constantes $\cG\lambda$ (et $\cG\mu$).</li>
+<li>Trouver <b>une</b> solution particulière $\cR{y_p}$ de l'équation complète.</li>
+<li>Écrire $y = \cB{y_H} + \cR{y_p}$.</li>
+<li>Seulement maintenant, utiliser les conditions initiales pour trouver $\cG\lambda, \cG\mu$.</li>
+</ol>
+<p class="ml piege">Piège</p>
+<p>Trouver les constantes à l'étape 1, avant d'ajouter $\cR{y_p}$, donne une solution fausse. Si le second membre est nul, $\cR{y_p} = 0$.</p>
+
+<h2 id="e-o1">4. Ordre 1 : l'équation homogène</h2>
+<div class="sbox">$$y' + a(t)\,y = 0\iff y(t) = \cG\lambda\,e^{-A(t)},\qquad A\ \text{une primitive de}\ a\ (\text{sans constante}),\qquad\cG\lambda\in\mathbb K.$$</div>
+<p class="ml">Pourquoi (à savoir refaire)</p>
+<p>On multiplie par $e^{A(t)}$, qui ne s'annule pas, et on reconnaît une dérivée de produit :</p>
+$$y' + a\,y = 0\iff y'e^{A} + a\,e^{A}y = 0\iff\big(y\,e^{A}\big)' = 0\iff y\,e^{A} = \cG\lambda\iff y = \cG\lambda\,e^{-A}.$$
+<p class="ml">Exemple 1 : $a$ constant</p>
+$$y' + 3y = 0:\qquad a(t) = 3,\qquad A(t) = 3t,\qquad\cB{y_H(t) = \cG\lambda\,e^{-3t}}.$$
+<p class="ml">Exemple 2 : $a$ variable (l'équation du §2)</p>
+$$a(t) = -\frac75t^3\ \Longrightarrow\ A(t) = -\frac75\cdot\frac{t^4}{4} = -\frac{7}{20}t^4\ \Longrightarrow\ \cB{y_H(t) = \cG\lambda\,e^{\frac{7}{20}t^4}}.$$
+<p>Contrôle : $y_H' = \cG\lambda\cdot\frac{7}{20}\cdot4t^3e^{\frac7{20}t^4} = \frac75t^3\,y_H$, donc $y_H' - \frac75t^3y_H = 0\ \checkmark$.</p>
+
+<h2 id="e-yp1">5. Ordre 1 : trouver une solution particulière</h2>
+<p class="ml">On regarde le second membre</p>
+<table class="mtab">
+<tr><th>Second membre $\cO{b(t)}$</th><th>On cherche $\cR{y_p}$ sous la forme</th></tr>
+<tr><td>une constante $m$, avec $a\neq0$ constant</td><td>la constante $\dfrac ma$</td></tr>
+<tr><td>un polynôme $P$ de degré $d$, $a\neq0$ constant</td><td>un polynôme de degré $d$</td></tr>
+<tr><td>$k\,e^{mt}$, avec $m\neq-a$</td><td>$C\,e^{mt}$</td></tr>
+<tr><td>$k\,e^{mt}$, avec $m = -a$ (résonance)</td><td>$C\,t\,e^{mt}$</td></tr>
+<tr><td>$\cos(\omega t)$ ou $\sin(\omega t)$</td><td>passer en complexe : $e^{i\omega t}$, puis partie réelle ou imaginaire</td></tr>
+<tr><td>une solution donnée par l'énoncé</td><td>la <b>vérifier</b> : calculer $y_p' + a\,y_p$</td></tr>
+<tr><td>rien de tout ça</td><td><a href="#e-varc">variation de la constante</a></td></tr>
+</table>
+<p class="ml">Exemple 1 : un polynôme</p>
+$$y' + 3y = \cO{4t - 7}.$$
+<p><b>Forme.</b> Le second membre est de degré 1 : on cherche $\cR{y_p(t) = \alpha t + \beta}$, donc $y_p'(t) = \alpha$.</p>
+<p><b>On remplace dans l'équation.</b></p>
+$$y_p' + 3y_p = \alpha + 3(\alpha t + \beta) = 3\alpha\,t + (\alpha + 3\beta).$$
+<p><b>On identifie</b> avec $\cO{4t - 7}$ :</p>
+$$\left\{\begin{aligned}3\alpha &= 4\\\alpha + 3\beta &= -7\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac43\\3\beta &= -7 - \tfrac43 = -\tfrac{25}3\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac43\\\beta &= -\tfrac{25}9\end{aligned}\right.$$
+$$\cR{y_p(t) = \frac43t - \frac{25}9},\qquad y(t) = \cG\lambda\,e^{-3t} + \frac43t - \frac{25}9.$$
+<p class="ml">Exemple 2 : une exponentielle en résonance</p>
+$$(E):\ y' + y = \cO{e^{-t}}.$$
+<p>Ici $a = 1$ et $m = -1 = -a$ : $e^{-t}$ est déjà solution de $(H)$. On cherche donc $\cR{y_p(t) = C\,t\,e^{-t}}$.</p>
+$$y_p'(t) = C\,e^{-t} + C\,t\cdot(-e^{-t}) = C\,e^{-t} - C\,t\,e^{-t}.$$
+$$y_p' + y_p = C\,e^{-t} - \cancel{C\,t\,e^{-t}} + \cancel{C\,t\,e^{-t}} = C\,e^{-t} = \cO{e^{-t}}\iff C = 1.$$
+$$\cR{y_p(t) = t\,e^{-t}},\qquad y(t) = \cG\lambda\,e^{-t} + t\,e^{-t} = (\cG\lambda + t)\,e^{-t}.$$
+<p class="ml">Exemple 3 : l'énoncé donne la solution</p>
+<p>« Montrer que $u(t) = t\,e^{-t}$ est solution de $(E)$. » On ne pose <b>pas</b> $u' + u = e^{-t}$ : on le calcule.</p>
+$$u'(t) = e^{-t} - t\,e^{-t},\qquad u'(t) + u(t) = e^{-t} - t\,e^{-t} + t\,e^{-t} = e^{-t}.\ \checkmark$$
+<p class="ml">Exemple 4 : un cosinus</p>
+$$y' + y = \cO{2\cos t}.$$
+<p>On résout $z' + z = 2e^{it}$, puis $\cR{y_p} = \operatorname{Re}(z_p)$. Comme $i\neq-1$, on cherche $z_p = C\,e^{it}$ :</p>
+$$z_p' + z_p = (i + 1)C\,e^{it} = 2e^{it}\iff C = \frac{2}{1 + i} = \frac{2(1 - i)}{(1 + i)(1 - i)} = \frac{2(1 - i)}{2} = 1 - i.$$
+$$z_p = (1 - i)(\cos t + i\sin t) = (\cos t + \sin t) + i(\sin t - \cos t)\ \Longrightarrow\ \cR{y_p(t) = \cos t + \sin t}.$$
+<p>Contrôle : $y_p' + y_p = (-\sin t + \cos t) + (\cos t + \sin t) = 2\cos t\ \checkmark$.</p>
+
+<h2 id="e-varc">6. La variation de la constante (ordre 1)</h2>
+<p>On l'utilise quand le second membre n'est dans aucune case du tableau. Elle marche toujours, mais il faut ensuite calculer une primitive.</p>
+<ol>
+<li>Résoudre $(H)$ : $\cB{y_H = \cG\lambda\,e^{-A(t)}}$.</li>
+<li>Chercher $\cR{y_p(t) = \cG{\lambda(t)}\,e^{-A(t)}}$ : la constante devient une fonction.</li>
+<li>Remplacer : les termes en $\lambda(t)$ <b>s'annulent toujours</b>, il reste $\lambda'(t)$.</li>
+<li>Prendre une primitive de $\lambda'$ (sans constante : on veut <b>une</b> solution).</li>
+</ol>
+<p class="ml">Pourquoi il ne reste que $\lambda'$</p>
+$$y_p = \lambda e^{-A}\ \Longrightarrow\ y_p' = \lambda'e^{-A} - \lambda\,a\,e^{-A}\ \Longrightarrow\ y_p' + a\,y_p = \lambda'e^{-A} - \cancel{\lambda a e^{-A}} + \cancel{a\lambda e^{-A}} = \lambda'e^{-A}.$$
+<div class="sbox">$$y_p' + a\,y_p = \cO b\iff\lambda'(t) = \cO{b(t)}\,e^{A(t)}.$$</div>
+<p class="ml">Exemple 1</p>
+$$y' - \frac1t\,y = \cO{t^2}\quad\text{sur}\ I = \left]0, +\infty\right[.$$
+<p><b>1.</b> $a(t) = -\frac1t$, $A(t) = -\ln t$, donc $e^{-A(t)} = e^{\ln t} = t$ et $\cB{y_H(t) = \cG\lambda\,t}$.</p>
+<p><b>2–3.</b> On pose $y_p = \lambda(t)\,t$ : $y_p' = \lambda'(t)\,t + \lambda(t)$.</p>
+$$y_p' - \frac1ty_p = \lambda'(t)\,t + \cancel{\lambda(t)} - \cancel{\lambda(t)} = \lambda'(t)\,t = t^2\iff\lambda'(t) = t.$$
+<p><b>4.</b> $\lambda(t) = \frac{t^2}2$, d'où $\cR{y_p(t) = \frac{t^3}2}$ et $y(t) = \cG\lambda\,t + \frac{t^3}{2}$.</p>
+<p>Contrôle : $y_p' - \frac1ty_p = \frac{3t^2}2 - \frac{t^2}2 = t^2\ \checkmark$.</p>
+<p class="ml">Exemple 2 : le second membre n'est pas « classique »</p>
+$$y' + y = \cO{\frac{1}{1 + e^t}}\quad\text{sur}\ \mathbb R.$$
+<p><b>1.</b> $\cB{y_H(t) = \cG\lambda\,e^{-t}}$.</p>
+<p><b>2–3.</b> $y_p = \lambda(t)\,e^{-t}$, donc $\lambda'(t) = \cO b(t)\,e^{A(t)} = \dfrac{e^t}{1 + e^t}$.</p>
+<p><b>4.</b> On reconnaît $\frac{u'}{u}$ avec $u = 1 + e^t > 0$ : $\lambda(t) = \ln(1 + e^t)$.</p>
+$$\cR{y_p(t) = e^{-t}\ln(1 + e^t)},\qquad y(t) = \big(\cG\lambda + \ln(1 + e^t)\big)\,e^{-t}.$$
+<p>Contrôle : $y_p' = -e^{-t}\ln(1 + e^t) + e^{-t}\dfrac{e^t}{1 + e^t}$, donc $y_p' + y_p = \dfrac{1}{1 + e^t}\ \checkmark$.</p>
+
+<h2 id="e-raccord">7. Le raccordement (coefficient de $y'$ qui s'annule)</h2>
+<ol>
+<li>Résoudre sur chaque intervalle où le coefficient de $y'$ ne s'annule pas : <b>une constante par intervalle</b>.</li>
+<li>Au point de jonction $t_0$, imposer : $y$ continue (limites à gauche et à droite égales), $y$ dérivable (taux d'accroissement), et l'équation vraie en $t_0$.</li>
+<li>Conclure : la dimension de l'ensemble des solutions sur $\mathbb R$ peut être $0$, $1$ ou $2$.</li>
+</ol>
+<p class="ml">Exemple : $t\,y' - 2y = 0$ sur $\mathbb R$</p>
+<p><b>1. Sur $\left]0, +\infty\right[$</b> : on divise par $t$, $y' - \frac2t\,y = 0$, $a(t) = -\frac2t$, $A(t) = -2\ln t$ :</p>
+$$y(t) = \cG{\lambda_1}\,e^{2\ln t} = \cG{\lambda_1}\,t^2.$$
+<p><b>Sur $\left]-\infty, 0\right[$</b> : $A(t) = -2\ln|t|$, donc $y(t) = \cG{\lambda_2}\,e^{2\ln|t|} = \cG{\lambda_2}\,t^2$.</p>
+<p><b>2. En $0$.</b> L'équation en $t = 0$ donne $0\cdot y'(0) - 2y(0) = 0$, donc $y(0) = 0$.</p>
+$$\left\{\begin{aligned}\text{continuité}&:\ \lim_{t\to0^+}\cG{\lambda_1}t^2 = 0 = \lim_{t\to0^-}\cG{\lambda_2}t^2 = y(0)\ \checkmark\\\text{dérivabilité}&:\ \frac{y(t) - y(0)}{t - 0} = \left\{\begin{aligned}&\cG{\lambda_1}t\ (t > 0)\\&\cG{\lambda_2}t\ (t\lt0)\end{aligned}\right.\ \xrightarrow[t\to0]{}\ 0\ \checkmark\end{aligned}\right.$$
+<p><b>3.</b> Les solutions sur $\mathbb R$ sont toutes les fonctions $t\mapsto\cG{\lambda_1}t^2$ pour $t\geqslant0$ et $\cG{\lambda_2}t^2$ pour $t\lt0$, avec $\cG{\lambda_1}, \cG{\lambda_2}$ <b>indépendants</b> : un espace de dimension $2$, alors que l'ordre est 1.</p>
+<p class="ml">Contre-exemple : $t\,y' + y = 0$</p>
+<p>Sur chaque demi-droite, $y = \frac{\cG\lambda}{t}$. Cette fonction n'a une limite finie en $0$ que si $\cG\lambda = 0$ : la seule solution sur $\mathbb R$ est la fonction nulle.</p>
+
+<h2 id="e-o2">8. Ordre 2 à coefficients constants : l'équation homogène</h2>
+<p>$(H):\ y'' + a\,y' + b\,y = 0$ avec $a, b$ <b>constants</b>. On remplace $y''$ par $r^2$, $y'$ par $r$, $y$ par $1$ :</p>
+<div class="sbox">$$\text{équation caractéristique}:\quad r^2 + a\,r + b = 0,\qquad\Delta = a^2 - 4b.$$</div>
+<table class="mtab">
+<tr><th>Cas</th><th>Racines</th><th>Solutions réelles $\cB{y_H}$</th></tr>
+<tr><td>$\Delta > 0$</td><td>$\cV{r_1}\neq\cV{r_2}$ réelles</td><td>$\cG\lambda\,e^{\cV{r_1}t} + \cG\mu\,e^{\cV{r_2}t}$</td></tr>
+<tr><td>$\Delta = 0$</td><td>$\cV{r_0}$ double</td><td>$(\cG\lambda + \cG\mu\,t)\,e^{\cV{r_0}t}$</td></tr>
+<tr><td>$\Delta\lt0$</td><td>$\cV{\alpha\pm i\beta}$</td><td>$e^{\cV\alpha t}\big(\cG\lambda\cos(\cV\beta t) + \cG\mu\sin(\cV\beta t)\big)$</td></tr>
+</table>
+<p>Sur $\mathbb C$, si $\Delta\neq0$ : $\cB{y_H} = \cG\lambda\,e^{\cV{r_1}t} + \cG\mu\,e^{\cV{r_2}t}$ avec $\cG\lambda, \cG\mu\in\mathbb C$, même quand les racines sont complexes.</p>
+<p class="ml">Exemple 1 : $\Delta > 0$</p>
+$$y'' - 10y' + 21y = 0:\qquad r^2 - 10r + 21 = 0,\qquad\Delta = (-10)^2 - 4\times21 = 100 - 84 = 16 = 4^2.$$
+$$r = \frac{10\pm4}{2}\ \Longrightarrow\ \cV{r_1 = 3},\quad\cV{r_2 = 7},\qquad\cB{y_H(t) = \cG\lambda\,e^{3t} + \cG\mu\,e^{7t}}.$$
+<p class="ml">Exemple 2 : $\Delta = 0$</p>
+$$y'' - 10y' + 25y = 0:\qquad\Delta = 100 - 100 = 0,\qquad\cV{r_0} = \frac{10}{2} = \cV5,\qquad\cB{y_H(t) = (\cG\lambda + \cG\mu\,t)\,e^{5t}}.$$
+<p>On reconnaît aussi $r^2 - 10r + 25 = (r - 5)^2$.</p>
+<p class="ml">Exemple 3 : $\Delta\lt0$</p>
+$$y'' - 6y' + 73y = 0:\qquad\Delta = 36 - 292 = -256 = (16i)^2.$$
+$$r = \frac{6\pm16i}{2} = \cV{3\pm8i}\ \Longrightarrow\ \cV{\alpha = 3},\ \cV{\beta = 8},\qquad\cB{y_H(t) = e^{3t}\big(\cG\lambda\cos(8t) + \cG\mu\sin(8t)\big)}.$$
+<p class="ml piege">Piège</p>
+<p>La partie réelle $\cV\alpha$ va dans l'exponentielle, la partie imaginaire $\cV\beta$ dans le cosinus et le sinus. Pour $y'' + \omega^2y = 0$ : $r = \pm i\omega$, donc $\cB{y_H} = \cG\lambda\cos(\omega t) + \cG\mu\sin(\omega t)$.</p>
+
+<h2 id="e-yp2">9. Ordre 2 : trouver une solution particulière</h2>
+<div class="sbox">$$\cO{c(t) = P(t)\,e^{mt}}\ \Longrightarrow\ \cR{y_p(t) = t^{s}\,Q(t)\,e^{mt}},\quad\deg Q = \deg P,\quad s = \left\{\begin{aligned}0&\ \text{si}\ m\ \text{n'est pas racine}\\1&\ \text{si}\ m\ \text{est racine simple}\\2&\ \text{si}\ m\ \text{est racine double}\end{aligned}\right.$$</div>
+<ul>
+<li>Un polynôme seul : c'est le cas $m = 0$ ($e^{0t} = 1$).</li>
+<li>$\cos(\omega t)$ ou $\sin(\omega t)$ : on résout avec $e^{i\omega t}$ (cas $m = i\omega$), puis on prend la partie réelle ou imaginaire.</li>
+<li>Une somme : on traite chaque morceau séparément (<a href="#e-superpo">superposition</a>).</li>
+</ul>
+<p class="ml">Exemple 1 : un polynôme (le calcul complet)</p>
+$$y'' - 5y' + 6y = \cO{t^2 - 3t + 2}.$$
+<p><b>Racines.</b> $r^2 - 5r + 6 = (r - 2)(r - 3)$ : $\cV2$ et $\cV3$. Ici $m = 0$ n'est pas racine, donc $s = 0$ et $Q$ de degré 2 :</p>
+$$\cR{y_p = \alpha t^2 + \beta t + \gamma},\qquad y_p' = 2\alpha t + \beta,\qquad y_p'' = 2\alpha.$$
+<p><b>On remplace</b> et on range par puissances de $t$ :</p>
+$$y_p'' - 5y_p' + 6y_p = 2\alpha - 5(2\alpha t + \beta) + 6(\alpha t^2 + \beta t + \gamma) = 6\alpha\,t^2 + (-10\alpha + 6\beta)\,t + (2\alpha - 5\beta + 6\gamma).$$
+<p><b>On identifie</b> avec $t^2 - 3t + 2$ et on résout de haut en bas :</p>
+$$\left\{\begin{aligned}6\alpha &= 1\\-10\alpha + 6\beta &= -3\\2\alpha - 5\beta + 6\gamma &= 2\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac16\\6\beta &= -3 + \tfrac{10}6 = -\tfrac43\\6\gamma &= 2 - \tfrac13 - \tfrac{10}9 = \tfrac59\end{aligned}\right.\iff\left\{\begin{aligned}\alpha &= \tfrac16\\\beta &= -\tfrac29\\\gamma &= \tfrac5{54}\end{aligned}\right.$$
+$$\cR{y_p(t) = \frac16t^2 - \frac29t + \frac5{54}},\qquad y(t) = \cG\lambda\,e^{2t} + \cG\mu\,e^{3t} + \frac16t^2 - \frac29t + \frac5{54}.$$
+<p class="ml">Exemple 2 : une exponentielle en résonance</p>
+$$y'' - 3y' + 2y = \cO{e^t}.$$
+<p><b>Racines.</b> $r^2 - 3r + 2 = (r - 1)(r - 2)$ : $\cV1$ et $\cV2$. Ici $m = 1$ est racine <b>simple</b> : $s = 1$.</p>
+$$\cR{y_p = C\,t\,e^t},\qquad y_p' = C(1 + t)\,e^t,\qquad y_p'' = C(2 + t)\,e^t.$$
+$$y_p'' - 3y_p' + 2y_p = C\big[(2 + t) - 3(1 + t) + 2t\big]e^t = C\big[2 - 3 + (1 - 3 + 2)\,t\big]e^t = -C\,e^t.$$
+$$-C\,e^t = \cO{e^t}\iff C = -1,\qquad\cR{y_p(t) = -t\,e^t}.$$
+<p class="ml">Exemple 3 : un cosinus sans résonance</p>
+$$y'' + 3y' + 2y = \cO{10\cos t}.$$
+<p>On résout $z'' + 3z' + 2z = 10e^{it}$. Les racines sont $\cV{-1}$ et $\cV{-2}$, et $i$ n'en est pas une : $z_p = C\,e^{it}$, $z_p' = iC\,e^{it}$, $z_p'' = -C\,e^{it}$.</p>
+$$z_p'' + 3z_p' + 2z_p = (-1 + 3i + 2)\,C\,e^{it} = (1 + 3i)\,C\,e^{it} = 10e^{it}\iff C = \frac{10}{1 + 3i} = \frac{10(1 - 3i)}{1 + 9} = 1 - 3i.$$
+$$z_p = (1 - 3i)(\cos t + i\sin t) = (\cos t + 3\sin t) + i(\sin t - 3\cos t)\ \Longrightarrow\ \cR{y_p(t) = \operatorname{Re}(z_p) = \cos t + 3\sin t}.$$
+<p>Contrôle : $y_p' = -\sin t + 3\cos t$ et $y_p'' = -\cos t - 3\sin t$, donc :</p>
+$$y_p'' + 3y_p' + 2y_p = (-1 + 9 + 2)\cos t + (-3 - 3 + 6)\sin t = 10\cos t.\ \checkmark$$
+<p class="ml">Exemple 4 : un cosinus en résonance</p>
+$$y'' + y = \cO{\cos t}.$$
+<p>Les racines sont $\cV{\pm i}$, et $i$ est racine <b>simple</b> : on cherche $z_p = C\,t\,e^{it}$ pour $z'' + z = e^{it}$.</p>
+$$z_p' = C(1 + it)\,e^{it},\qquad z_p'' = C\big(i + i(1 + it)\big)e^{it} = C(2i - t)\,e^{it}.$$
+$$z_p'' + z_p = C(2i - t + t)\,e^{it} = 2iC\,e^{it} = e^{it}\iff C = \frac1{2i} = -\frac i2.$$
+$$z_p = -\frac i2\,t(\cos t + i\sin t) = \frac t2\sin t - i\,\frac t2\cos t\ \Longrightarrow\ \cR{y_p(t) = \frac t2\sin t}.$$
+
+<h2 id="e-superpo">10. Le principe de superposition</h2>
+<div class="sbox">$$\left.\begin{aligned}\cR{y_1}\ \text{solution avec}\ \cO{b_1}\\\cR{y_2}\ \text{solution avec}\ \cO{b_2}\end{aligned}\right\}\ \Longrightarrow\ \cR{y_1 + y_2}\ \text{solution avec}\ \cO{b_1 + b_2}.$$</div>
+<p class="ml">Exemple</p>
+$$y' + y = \cO{t} + \cO{e^{2t}}.$$
+<p><b>Morceau 1</b> : $y' + y = t$. On cherche $y_1 = \alpha t + \beta$ : $\alpha + \alpha t + \beta = t$, donc $\alpha = 1$ et $\alpha + \beta = 0$, soit $\cR{y_1 = t - 1}$.</p>
+<p><b>Morceau 2</b> : $y' + y = e^{2t}$. Comme $2\neq-1$, on cherche $y_2 = C\,e^{2t}$ : $2C + C = 1$, donc $\cR{y_2 = \frac13e^{2t}}$.</p>
+$$\cR{y_p(t) = t - 1 + \frac13e^{2t}},\qquad y(t) = \cG\lambda\,e^{-t} + t - 1 + \frac13e^{2t}.$$
+
+<h2 id="e-cauchy">11. Les conditions initiales (problème de Cauchy)</h2>
+<p class="ml">Ordre 1 : une condition, une constante</p>
+<p>$(E):\ y' + y = e^{-t}$ avec $\cG{y(0) = 2}$. D'après le §5, $y(t) = (\cG\lambda + t)\,e^{-t}$. En $t = 0$ :</p>
+$$y(0) = (\cG\lambda + 0)\,e^0 = \cG\lambda = \cG2\qquad\Longrightarrow\qquad y(t) = (2 + t)\,e^{-t}.$$
+<p class="ml">Ordre 2 : deux conditions, un système</p>
+$$y'' - 3y' + 2y = e^t,\qquad\cG{y(0) = 0},\qquad\cG{y'(0) = 0}.$$
+<p><b>1.</b> D'après le §9 : $y(t) = \cG\lambda\,e^t + \cG\mu\,e^{2t} - t\,e^t$.</p>
+<p><b>2.</b> On dérive : $y'(t) = \cG\lambda\,e^t + 2\cG\mu\,e^{2t} - (1 + t)\,e^t$.</p>
+<p><b>3.</b> On écrit les conditions en $t = 0$ :</p>
+$$\left\{\begin{aligned}y(0) &= \cG\lambda + \cG\mu - 0 = 0\\y'(0) &= \cG\lambda + 2\cG\mu - 1 = 0\end{aligned}\right.\ \underset{\cO{L_2\leftarrow L_2 - L_1}}{\iff}\ \left\{\begin{aligned}\cG\lambda + \cG\mu &= 0\\\cG\mu &= 1\end{aligned}\right.\iff\left\{\begin{aligned}\cG\lambda &= -1\\\cG\mu &= 1\end{aligned}\right.$$
+$$y(t) = -e^t + e^{2t} - t\,e^t.$$
+<p>Contrôle : $y(0) = -1 + 1 - 0 = 0$ et $y'(0) = -1 + 2 - 1 = 0\ \checkmark$.</p>
+
+<h2 id="e-var">12. Ordre 2 à coefficients variables</h2>
+<p>$(H):\ y'' + a(t)\,y' + b(t)\,y = 0$. Plus de formule toute faite : $\mathcal S_H$ est de dimension $2$, il faut <b>trouver deux solutions indépendantes</b>.</p>
+<p class="ml">Le wronskien</p>
+<div class="sbox">$$W(t) = \varphi_1(t)\,\varphi_2'(t) - \varphi_1'(t)\,\varphi_2(t),\qquad(\varphi_1, \varphi_2)\ \text{base de}\ \mathcal S_H\iff W(t_0)\neq0\ \text{pour un}\ t_0\iff W\ \text{ne s'annule pas}.$$</div>
+<p>À savoir redémontrer : $W' = \varphi_1\varphi_2'' - \varphi_1''\varphi_2 = \varphi_1(-a\varphi_2' - b\varphi_2) - (-a\varphi_1' - b\varphi_1)\varphi_2 = -a\,W$, donc $W(t) = W(t_0)\,e^{-\int_{t_0}^ta}$.</p>
+<p class="ml">Méthode 1 : chercher une solution évidente</p>
+<p>Essayer $t^k$ (polynômes), $e^{rt}$, ou une série entière $\sum a_nt^n$.</p>
+$$(H):\ t^2y'' - 2t\,y' + 2y = 0\ \text{sur}\ \left]0, +\infty\right[.\qquad\text{Avec}\ y = t^k:\ t^2k(k - 1)t^{k-2} - 2t\,k\,t^{k-1} + 2t^k = (k^2 - 3k + 2)\,t^k.$$
+$$k^2 - 3k + 2 = (k - 1)(k - 2) = 0\iff k = 1\ \text{ou}\ k = 2:\qquad\varphi_1(t) = t,\qquad\varphi_2(t) = t^2.$$
+$$W(t) = \begin{vmatrix}t&t^2\\1&2t\end{vmatrix} = 2t^2 - t^2 = t^2\neq0\ \Longrightarrow\ \cB{y_H(t) = \cG\lambda\,t + \cG\mu\,t^2}.$$
+<p class="ml">Méthode 2 : on connaît une solution $\varphi_1$ qui ne s'annule pas, on pose $y = \varphi_1z$</p>
+<p>Même équation, avec $\varphi_1 = t$ seulement. On pose $y = t\,z$ : $y' = z + t\,z'$ et $y'' = 2z' + t\,z''$.</p>
+$$t^2(2z' + t\,z'') - 2t(z + t\,z') + 2t\,z = t^3z'' + \cancel{2t^2z'} - \cancel{2tz} - \cancel{2t^2z'} + \cancel{2tz} = t^3z''.$$
+<p>Donc $z'' = 0$, $z = \cG\lambda + \cG\mu\,t$ et $y = t\,z = \cG\lambda\,t + \cG\mu\,t^2$ : on retrouve le résultat. En général, on obtient une équation d'ordre 1 en $z'$.</p>
+<p class="ml">Méthode 3 : une série entière</p>
+<p>$(H):\ t\,y'' + 2y' + t\,y = 0$. On cherche $y = \sum_{n\geqslant0}a_nt^n$ et on écrit chaque terme avec $t^{n-1}$ :</p>
+$$t\,y'' = \sum_{n\geqslant2}n(n - 1)\,a_nt^{n-1},\qquad2y' = \sum_{n\geqslant1}2n\,a_nt^{n-1},\qquad t\,y = \sum_{n\geqslant0}a_nt^{n+1} = \sum_{n\geqslant2}a_{n-2}\,t^{n-1}.$$
+$$t\,y'' + 2y' + t\,y = 2a_1 + \sum_{n\geqslant2}\big(n(n + 1)\,a_n + a_{n-2}\big)\,t^{n-1} = 0.$$
+<p>Par unicité des coefficients : $a_1 = 0$ et $a_n = -\dfrac{a_{n-2}}{n(n + 1)}$. Les impairs sont nuls, et pour les pairs :</p>
+$$a_2 = -\frac{a_0}{3!},\quad a_4 = -\frac{a_2}{4\times5} = \frac{a_0}{5!},\quad\dots,\quad a_{2p} = \frac{(-1)^p}{(2p + 1)!}a_0\ \Longrightarrow\ y(t) = a_0\sum_{p\geqslant0}\frac{(-1)^pt^{2p}}{(2p + 1)!} = a_0\,\frac{\sin t}{t}.$$
+<p>Le rayon est $+\infty$ (règle de d'Alembert : $\left|\frac{a_{2p+2}}{a_{2p}}\right| = \frac1{(2p + 2)(2p + 3)}\to0$). On trouve ensuite une deuxième solution avec la méthode 2.</p>
+<p class="ml">Méthode 4 : la variation des constantes (second membre)</p>
+<p>$(\varphi_1, \varphi_2)$ base de $\mathcal S_H$. On cherche $y = \lambda(t)\varphi_1 + \mu(t)\varphi_2$ avec :</p>
+<div class="sbox">$$\left\{\begin{aligned}\lambda'\varphi_1 + \mu'\varphi_2 &= 0\\\lambda'\varphi_1' + \mu'\varphi_2' &= \cO{c(t)}\end{aligned}\right.\iff\lambda' = -\frac{\varphi_2\,\cO c}{W},\qquad\mu' = \frac{\varphi_1\,\cO c}{W}\quad(\text{Cramer}).$$</div>
+$$y'' + y = \cO{\frac1{\cos t}}\ \text{sur}\ \left]-\tfrac\pi2, \tfrac\pi2\right[:\qquad\varphi_1 = \cos,\quad\varphi_2 = \sin,\quad W = \cos^2t + \sin^2t = 1.$$
+$$\lambda'(t) = -\sin t\cdot\frac1{\cos t} = -\tan t\ \Longrightarrow\ \lambda(t) = \ln(\cos t),\qquad\mu'(t) = \cos t\cdot\frac1{\cos t} = 1\ \Longrightarrow\ \mu(t) = t.$$
+$$\cR{y_p(t) = \cos t\,\ln(\cos t) + t\sin t}.$$
+
+<h2 id="e-sys">13. Les systèmes $X' = AX$ ($A$ constante)</h2>
+<div class="sbox">$$X' = AX,\ X(0) = X_0\iff X(t) = e^{tA}X_0.\qquad A = PDP^{-1}\ \Longrightarrow\ \text{on pose}\ Y = P^{-1}X:\ Y' = DY.$$</div>
+<ol>
+<li><a href="#c-maths-mp-1">Diagonaliser</a> $A$ : valeurs propres $\cV{\lambda_i}$, vecteurs propres $V_i$.</li>
+<li>$Y' = DY$ se découple : $y_i' = \cV{\lambda_i}y_i$, donc $y_i = \cG{c_i}\,e^{\cV{\lambda_i}t}$.</li>
+<li>$X = PY = \sum_i\cG{c_i}\,e^{\cV{\lambda_i}t}\,V_i$.</li>
+</ol>
+<p class="ml">Exemple : $A = \begin{pmatrix}1&2\\2&1\end{pmatrix}$, $X(0) = \begin{pmatrix}2\\0\end{pmatrix}$</p>
+<p><b>1.</b> $\chi_A = X^2 - 2X - 3 = (X - 3)(X + 1)$ : $\operatorname{Sp}(A) = \{\cV3, \cV{-1}\}$. On résout les deux systèmes :</p>
+$$A - 3I_2 = \begin{pmatrix}-2&2\\2&-2\end{pmatrix}\iff\left\{\begin{aligned}-2x + 2y &= 0\\2x - 2y &= 0\end{aligned}\right.\iff y = x:\ V_1 = \begin{pmatrix}1\\1\end{pmatrix}.$$
+$$A + I_2 = \begin{pmatrix}2&2\\2&2\end{pmatrix}\iff\left\{\begin{aligned}2x + 2y &= 0\\2x + 2y &= 0\end{aligned}\right.\iff y = -x:\ V_2 = \begin{pmatrix}1\\-1\end{pmatrix}.$$
+<p><b>2–3.</b></p>
+$$X(t) = \cG{c_1}\,e^{3t}\begin{pmatrix}1\\1\end{pmatrix} + \cG{c_2}\,e^{-t}\begin{pmatrix}1\\-1\end{pmatrix}.$$
+<p><b>Condition initiale.</b></p>
+$$X(0) = \begin{pmatrix}\cG{c_1} + \cG{c_2}\\\cG{c_1} - \cG{c_2}\end{pmatrix} = \begin{pmatrix}2\\0\end{pmatrix}\iff\left\{\begin{aligned}\cG{c_1} + \cG{c_2} &= 2\\\cG{c_1} - \cG{c_2} &= 0\end{aligned}\right.\iff\cG{c_1} = \cG{c_2} = 1,\qquad X(t) = \begin{pmatrix}e^{3t} + e^{-t}\\e^{3t} - e^{-t}\end{pmatrix}.$$
+<p>Contrôle : $x' = 3e^{3t} - e^{-t}$ et $x + 2y = e^{3t} + e^{-t} + 2e^{3t} - 2e^{-t} = 3e^{3t} - e^{-t}\ \checkmark$.</p>
+<p class="ml">$A$ triangulaire (non diagonalisable) : on résout de bas en haut</p>
+$$\left\{\begin{aligned}x' &= 2x + y\\y' &= 2y\end{aligned}\right.\qquad\Longrightarrow\qquad y = \cG{c_2}\,e^{2t},\qquad x' - 2x = \cG{c_2}\,e^{2t}.$$
+<p>Ordre 1 en résonance ($m = 2 = -a$) : $x_p = C\,t\,e^{2t}$, $x_p' - 2x_p = C\,e^{2t}$, donc $C = \cG{c_2}$ et $x = (\cG{c_1} + \cG{c_2}\,t)\,e^{2t}$.</p>
+<p class="ml">Une équation d'ordre 2 est un système</p>
+$$y'' + a\,y' + b\,y = 0\iff X' = \begin{pmatrix}0&1\\-b&-a\end{pmatrix}X\quad\text{avec}\quad X = \begin{pmatrix}y\\y'\end{pmatrix}.$$
+
+<h2 id="e-nonlin">14. Les équations non linéaires</h2>
+<p class="ml">Changement de fonction inconnue</p>
+<p>Le terme gênant ($\sqrt y$, $y^2$, $\frac1y$…) indique souvent quoi poser. On cherche l'équation <b>linéaire</b> vérifiée par la nouvelle fonction, en raisonnant par équivalence.</p>
+$$(E):\ y' + 2y - (t + 1)\sqrt y = 0,\qquad y > 0\ \text{sur}\ I.\qquad\text{On pose}\ z = \sqrt y,\ \text{donc}\ y = z^2,\ y' = 2z\,z'.$$
+<p>On divise $(E)$ par $\sqrt y = z > 0$ :</p>
+$$\frac{2z\,z'}{z} + \frac{2z^2}{z} - (t + 1) = 0\iff2z' + 2z = t + 1\iff z' + z = \cO{\frac{t + 1}2}.$$
+<p><b>Homogène</b> : $\cB{z_H} = \cG\lambda\,e^{-t}$. <b>Particulière</b> : $z_p = \alpha t + \beta$ donne $\alpha + \alpha t + \beta = \frac t2 + \frac12$, donc $\alpha = \frac12$ et $\beta = 0$.</p>
+$$z(t) = \cG\lambda\,e^{-t} + \frac t2\qquad\Longrightarrow\qquad y(t) = \Big(\cG\lambda\,e^{-t} + \frac t2\Big)^2\quad\text{sur un intervalle où}\ z > 0.$$
+<p class="ml">Variables séparées</p>
+<p>Quand l'équation s'écrit $f(y)\,y' = g(t)$, on intègre de chaque côté. On met <b>une seule</b> constante, et on ne passe pas par homogène plus particulière.</p>
+$$y' = 1 + y^2\iff\frac{y'}{1 + y^2} = 1\iff\big(\arctan y\big)' = 1\iff\arctan y = t + \cG C\iff y(t) = \tan(t + \cG C),$$
+<p>sur un intervalle où $t + \cG C\in\left]-\frac\pi2, \frac\pi2\right[$.</p>
+
+<h2 id="e-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $u$ est solution »</b><span>Calculer $u'$ (et $u''$), remplacer, et retrouver le second membre. Ne jamais partir de l'égalité.</span></div>
+<div><b>Une solution particulière $u$ donnée</b><span>$y$ solution de $(E)\iff y - u$ solution de $(H)$, donc $\mathcal S_E = u + \mathcal S_H$.</span></div>
+<div><b>« LA solution telle que $y(t_0) = \dots$ »</b><span>Cauchy-Lipschitz : une seule. Constantes en dernier, après $y_H + y_p$.</span></div>
+<div><b>« Résoudre sur $\mathbb R$ », coefficient de $y'$ en $t$</b><span>Résoudre sur $\left]-\infty, 0\right[$ et $\left]0, +\infty\right[$, puis raccorder en $0$.</span></div>
+<div><b>Second membre en $\cos$, $\sin$</b><span>Passer en complexe avec $e^{i\omega t}$, puis $\operatorname{Re}$ ou $\operatorname{Im}$.</span></div>
+<div><b>Second membre somme</b><span>Superposition : une solution particulière par morceau.</span></div>
+<div><b>$m$ racine de l'équation caractéristique</b><span>Résonance : multiplier par $t$ (simple) ou $t^2$ (double).</span></div>
+<div><b>« On pose $z = \dots$ »</b><span>Exprimer $y, y'$ avec $z, z'$, obtenir une équation linéaire en $z$, la résoudre, revenir à $y$.</span></div>
+<div><b>« Chercher les solutions polynomiales »</b><span>Degré $d$ : regarder le terme de plus haut degré pour trouver $d$, puis identifier.</span></div>
+<div><b>« Solutions développables en série entière »</b><span>Remplacer $\sum a_nt^n$, réindexer, récurrence sur $a_n$, puis le rayon.</span></div>
+<div><b>Une solution $\varphi_1$ connue (ordre 2)</b><span>Poser $y = \varphi_1z$ : équation d'ordre 1 en $z'$.</span></div>
+<div><b>Deux solutions $\varphi_1, \varphi_2$</b><span>Base de $\mathcal S_H$ si $W(t_0)\neq0$. Second membre : variation des constantes.</span></div>
+<div><b>$X' = AX$, $A$ diagonalisable</b><span>$X = \sum c_i\,e^{\lambda_it}V_i$. Valeurs propres négatives : $X(t)\to0$.</span></div>
+<div><b>« Solutions bornées », « limite en $+\infty$ »</b><span>Écrire la solution générale, puis annuler les constantes devant les termes qui explosent.</span></div>
+</div>
+
+<h2 id="e-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Déterminer $\lambda$ avec $y(0)$ sur $y_H$ seule, avant d'ajouter $y_p$.</p>
+<p><b>2.</b> Oublier de diviser par le coefficient de $y'$ avant de lire $a(t)$.</p>
+<p><b>3.</b> $y = \lambda e^{A}$ au lieu de $\lambda e^{-A}$ pour $y' + ay = 0$.</p>
+<p><b>4.</b> Inverser $\alpha$ et $\beta$ : $e^{\beta t}\cos(\alpha t)$ au lieu de $e^{\alpha t}\cos(\beta t)$.</p>
+<p><b>5.</b> Chercher $C\,e^{mt}$ alors que $m$ est racine : on trouve $0 = e^{mt}$, il fallait multiplier par $t$.</p>
+<p><b>6.</b> Pour $\cos t$ au second membre, chercher $C\cos t$ seulement : il faut $\alpha\cos t + \beta\sin t$.</p>
+<p><b>7.</b> Diviser par $t$ sur $\mathbb R$ tout entier sans découper en intervalles.</p>
+<p><b>8.</b> Mettre une constante de chaque côté dans les variables séparées.</p>
+<p><b>9.</b> Une seule constante pour une équation d'ordre 2 : il en faut deux, donc deux conditions.</p>
+<p><b>10.</b> Écrire $u' + u = e^{-t}$ dès la première ligne quand on doit le <b>montrer</b>.</p>
+</div>
+
+<h2 id="e-entrainement">S'entraîner</h2>
+<div data-mlab="edo1"></div>
+<div data-mlab="edo2"></div>
+<div data-mlab="quizedo"></div>
+
+<h2 id="e-arbre">L'arbre des équations différentielles</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une équation différentielle</span><ul>
+<li><div class="hr"><em>linéaire, ordre 1</em><span class="hq">Coefficient de $y'$ qui s'annule sur $I$ ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#e-raccord">résoudre par morceaux, puis raccorder</a></div></li>
+<li><div class="hr"><em>non</em><span class="hq">Second membre ?</span><ul>
+<li><div class="hr"><em>nul</em><a class="hl ok" href="#e-o1">$y = \lambda e^{-A(t)}$</a></div></li>
+<li><div class="hr"><em>constante, polynôme, $e^{mt}$, $\cos$</em><a class="hl" href="#e-yp1">tableau, résonance si $m = -a$</a></div></li>
+<li><div class="hr"><em>autre</em><a class="hl" href="#e-varc">variation de la constante</a></div></li>
+</ul></div></li>
+</ul></div></li>
+<li><div class="hr"><em>linéaire, ordre 2</em><span class="hq">Coefficients constants ?</span><ul>
+<li><div class="hr"><em>oui</em><span class="hq">Signe de $\Delta$</span><ul>
+<li><div class="hr"><em>$\Delta > 0$</em><a class="hl ok" href="#e-o2">$\lambda e^{r_1t} + \mu e^{r_2t}$</a></div></li>
+<li><div class="hr"><em>$\Delta = 0$</em><a class="hl ok" href="#e-o2">$(\lambda + \mu t)e^{r_0t}$</a></div></li>
+<li><div class="hr"><em>$\Delta\lt0$</em><a class="hl ok" href="#e-o2">$e^{\alpha t}(\lambda\cos\beta t + \mu\sin\beta t)$</a></div></li>
+<li><div class="hr"><em>second membre</em><a class="hl" href="#e-yp2">$t^sQ(t)e^{mt}$, $s$ = multiplicité de $m$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>non</em><span class="hq">Une solution connue ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#e-var">poser $y = \varphi_1z$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#e-var">chercher $t^k$, $e^{rt}$, série entière</a></div></li>
+<li><div class="hr"><em>second membre</em><a class="hl" href="#e-var">variation des constantes, wronskien</a></div></li>
+</ul></div></li>
+</ul></div></li>
+<li><div class="hr"><em>système</em><span class="hq">$A$ diagonalisable ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#e-sys">$X = \sum c_ie^{\lambda_it}V_i$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#e-sys">trigonaliser, résoudre de bas en haut</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>non linéaire</em><span class="hq">Forme $f(y)\,y' = g(t)$ ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#e-nonlin">séparer les variables, une constante</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#e-nonlin">poser $z = \sqrt y$, $y^2$, $\frac1y$… pour linéariser</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>conditions données</em><a class="hl end" href="#e-cauchy">à la fin : $y_H + y_p$, puis les constantes</a></div></li>
+</ul></div></div>
 `
 };

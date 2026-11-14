@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1633,6 +1633,124 @@ function mlExRed(host) {
   };
   ex = gen(); draw();
 }
+
+/* ---------- Labos de la Méthode « Équations différentielles » ---------- */
+const fterm = (f, v, first) => { if (!f.n) return ""; const neg = f.n < 0, a = Fr(Math.abs(f.n), f.d), co = a.n === 1 && a.d === 1 && v ? "" : ftex(a); return (first ? (neg ? "-" : "") : (neg ? " - " : " + ")) + co + v; };
+const fsum = pairs => { let s = ""; for (const [f, v] of pairs) s += fterm(typeof f === "number" ? Fr(f) : f, v, !s); return s || "0"; };
+const exT = m => m === 0 ? "" : `e^{${m === 1 ? "" : m === -1 ? "-" : m}t}`;
+const ftx = f => ftex(typeof f === "number" ? Fr(f) : f);
+const fpar = f => { f = typeof f === "number" ? Fr(f) : f; return f.n < 0 ? `\\left(${ftex(f)}\\right)` : ftex(f); };
+const labNav = (host, k, n, go, re, all) => `<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${n}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < n - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tout afficher</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre équation</button></div>`;
+function stepLab(host, title, gen, build) {
+  let ex, k = 0;
+  const draw = () => {
+    const st = build(ex);
+    host.innerHTML = `<p class="mlt">${title}</p>${st.slice(0, k + 1).join("")}${labNav(host, k, st.length)}`;
+    $$("[data-g]", host).forEach(b => b.addEventListener("click", () => { k += +b.dataset.g; draw(); }));
+    $("[data-all]", host).addEventListener("click", () => { k = st.length - 1; draw(); });
+    $("[data-new]", host).addEventListener("click", () => { ex = gen(); k = 0; draw(); });
+    typeset(host);
+  };
+  ex = gen(); draw();
+}
+/* Ordre 1 : y' + a y = b(t), y(0) = y0 */
+function mlEdo1(host) {
+  const gen = () => {
+    let a = 0; while (!a) a = rnd(-3, 3);
+    const kind = rnd(0, 2), y0 = rnd(-3, 3);
+    if (kind === 0) { let p = 0; while (!p) p = rnd(-4, 4); return { a, kind, p, q: rnd(-5, 5), y0 }; }
+    let k = 0; while (!k) k = rnd(-3, 4);
+    if (kind === 1) { let m = -a; while (m === -a || m === 0) m = rnd(-2, 2); return { a, kind, k, m, y0 }; }
+    return { a, kind, k, m: -a, y0 };
+  };
+  const build = e => {
+    const { a, kind, y0 } = e, eqL = fsum([[1, "y'"], [a, "y"]]);
+    const b = kind === 0 ? fsum([[e.p, "t"], [e.q, ""]]) : fsum([[e.k, exT(e.m)]]);
+    const st = [`$$${eqL} = \\cO{${b}},\\qquad\\cG{y(0) = ${y0}}.$$`];
+    st.push(`<p class="mlstep">1. L'équation homogène $${eqL} = 0$ :</p>$$a(t) = ${a},\\qquad A(t) = ${fsum([[a, "t"]])},\\qquad\\cB{y_H(t) = \\cG\\lambda\\,${exT(-a)}}.$$`);
+    let yp, yp0, form, calc;
+    if (kind === 0) {
+      const al = Fr(e.p, a), be = fdiv(fadd(Fr(e.q), Fr(-al.n, al.d)), Fr(a));
+      yp = fsum([[al, "t"], [be, ""]]); yp0 = be;
+      form = `Le second membre est un polynôme de degré 1 et $a\\neq0$ : on cherche $\\cR{y_p = \\alpha t + \\beta}$, donc $y_p' = \\alpha$.`;
+      calc = `$$${fsum([[1, "y_p'"], [a, "y_p"]])} = \\alpha + ${fpar(a)}(\\alpha t + \\beta) = ${fsum([[a, "\\alpha\\,t"]])} + (${fsum([[1, "\\alpha"], [a, "\\beta"]])}).$$
+<p class="mlnote">On identifie avec $${b}$ :</p>$$\\left\\{\\begin{aligned}${fsum([[a, "\\alpha"]])} &= ${e.p}\\\\${fsum([[1, "\\alpha"], [a, "\\beta"]])} &= ${e.q}\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}\\alpha &= ${ftex(al)}\\\\\\beta &= \\frac{${e.q} - ${fpar(al)}}{${a}} = ${ftex(be)}\\end{aligned}\\right.$$`;
+    } else if (kind === 1) {
+      const C = Fr(e.k, e.m + a); yp = fsum([[C, exT(e.m)]]); yp0 = C;
+      form = `Second membre $${e.k === 1 ? "" : e.k === -1 ? "-" : e.k}${exT(e.m)}$ avec $m = ${e.m}\\neq-a = ${-a}$ : pas de résonance, on cherche $\\cR{y_p = C\\,${exT(e.m)}}$, donc $y_p' = ${fsum([[e.m, "C\\,"+exT(e.m)]])}$.`;
+      calc = `$$${fsum([[1, "y_p'"], [a, "y_p"]])} = (${e.m} ${a < 0 ? "-" : "+"} ${Math.abs(a)})\\,C\\,${exT(e.m)} = ${fsum([[e.m + a, "C\\,"+exT(e.m)]])} = ${e.k}\\,${exT(e.m)}\\iff C = ${ftex(C)}.$$`;
+    } else {
+      yp = fsum([[e.k, "t" + exT(e.m)]]); yp0 = Fr(0);
+      form = `Second membre en $${exT(e.m)}$ avec $m = ${e.m} = -a$ : <b>résonance</b>, $${exT(e.m)}$ est déjà solution de l'équation homogène. On cherche $\\cR{y_p = C\\,t\\,${exT(e.m)}}$.`;
+      const cx = n => `${n < 0 ? " - " : " + "}\\cancel{${Math.abs(n) === 1 ? "" : Math.abs(n)}C\\,t\\,${exT(e.m)}}`;
+      calc = `$$y_p' = C\\,${exT(e.m)}${fsum([[e.m, "C\\,t\\,"+exT(e.m)]]).replace(/^(?!-)/, " + ").replace(/^-/, " - ")},\\qquad ${fsum([[1, "y_p'"], [a, "y_p"]])} = C\\,${exT(e.m)}${cx(e.m)}${cx(a)} = C\\,${exT(e.m)}.$$$$C\\,${exT(e.m)} = ${e.k}\\,${exT(e.m)}\\iff C = ${e.k}.$$`;
+    }
+    st.push(`<p class="mlstep">2. La forme de la solution particulière :</p><p class="mlnote">${form}</p>`);
+    st.push(`<p class="mlstep">3. On remplace dans l'équation et on identifie :</p>${calc}$$\\cR{y_p(t) = ${yp}}$$`);
+    st.push(`<p class="mlstep">4. Toutes les solutions :</p>$$y(t) = \\cB{\\cG\\lambda\\,${exT(-a)}} + \\cR{${yp}}.$$`);
+    const lam = fadd(Fr(y0), Fr(-yp0.n, yp0.d));
+    st.push(`<p class="mlstep">5. La condition initiale, <b>maintenant</b> :</p>$$y(0) = \\cG\\lambda + ${fpar(yp0)} = ${y0}\\iff\\cG{\\lambda = ${ftex(lam)}}.$$<p class="mlres">$$y(t) = ${fsum([[lam, exT(-a)]])}${yp === "0" ? "" : (yp[0] === "-" ? " " : " + ") + yp}$$</p>`);
+    return st;
+  };
+  stepLab(host, "Ordre 1 pas à pas : $y' + ay = b(t)$", gen, build);
+}
+/* Ordre 2 homogène à coefficients constants, avec conditions initiales */
+function mlEdo2(host) {
+  const gen = () => {
+    const kind = rnd(0, 2), y0 = rnd(-3, 3), y1 = rnd(-3, 3);
+    if (kind === 0) { let r1 = 0, r2 = 0; while (r1 === r2) { r1 = rnd(-3, 3); r2 = rnd(-3, 3); } if (r1 > r2) [r1, r2] = [r2, r1]; return { kind, r1, r2, a: -(r1 + r2), b: r1 * r2, y0, y1 }; }
+    if (kind === 1) { const r = rnd(-2, 2); return { kind, r, a: -2 * r, b: r * r, y0, y1 }; }
+    const al = rnd(-2, 2), be = rnd(1, 3); return { kind, al, be, a: -2 * al, b: al * al + be * be, y0, y1 };
+  };
+  const build = e => {
+    const { a, b, y0, y1, kind } = e, D = a * a - 4 * b;
+    const st = [`$$${fsum([[1, "y''"], [a, "y'"], [b, "y"]])} = 0,\\qquad\\cG{y(0) = ${y0}},\\quad\\cG{y'(0) = ${y1}}.$$`];
+    st.push(`<p class="mlstep">1. L'équation caractéristique (on remplace $y''$ par $r^2$, $y'$ par $r$, $y$ par $1$) :</p>$$${fsum([[1, "r^2"], [a, "r"], [b, ""]])} = 0,\\qquad\\Delta = ${fpar(a)}^2 - 4\\times${fpar(b)} = ${D}.$$`);
+    let roots, yH, dy, sys, sol, fin;
+    const cs = t => t === 1 ? "\\cos t" : `\\cos(${t}t)`, sn = t => t === 1 ? "\\sin t" : `\\sin(${t}t)`;
+    if (kind === 0) {
+      const s = Math.round(Math.sqrt(D));
+      roots = `$$\\Delta = ${s}^2 > 0:\\qquad r = \\frac{${-a}\\pm${s}}{2}\\ \\Longrightarrow\\ \\cV{r_1 = ${e.r1}},\\quad\\cV{r_2 = ${e.r2}}.$$`;
+      yH = `\\cG\\lambda\\,${exT(e.r1) || "1"} + \\cG\\mu\\,${exT(e.r2) || "1"}`;
+      dy = `y'(t) = ${fsum([[e.r1, "\\lambda\\," + exT(e.r1)], [e.r2, "\\mu\\," + exT(e.r2)]])}`;
+      const mu = Fr(y1 - e.r1 * y0, e.r2 - e.r1), lam = fadd(Fr(y0), Fr(-mu.n, mu.d));
+      sys = `\\left\\{\\begin{aligned}\\cG\\lambda + \\cG\\mu &= ${y0}\\\\${fsum([[e.r1, "\\lambda"], [e.r2, "\\mu"]])} &= ${y1}\\end{aligned}\\right.\\ \\underset{\\cO{L_2\\leftarrow L_2 ${e.r1 < 0 ? "+" : "-"} ${Math.abs(e.r1) === 1 ? "" : Math.abs(e.r1)}L_1}}{\\iff}\\ \\left\\{\\begin{aligned}\\cG\\lambda + \\cG\\mu &= ${y0}\\\\${e.r2 - e.r1}\\cG\\mu &= ${y1 - e.r1 * y0}\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}\\cG\\mu &= ${ftex(mu)}\\\\\\cG\\lambda &= ${y0} - ${fpar(mu)} = ${ftex(lam)}\\end{aligned}\\right.`;
+      fin = fsum([[lam, exT(e.r1)], [mu, exT(e.r2)]]);
+    } else if (kind === 1) {
+      const r = e.r, mu = y1 - r * y0;
+      roots = `$$\\Delta = 0:\\qquad\\cV{r_0} = \\frac{${-a}}{2} = \\cV{${r}}\\quad\\text{racine double}.$$`;
+      yH = `(\\cG\\lambda + \\cG\\mu\\,t)\\,${exT(r)}`;
+      dy = r ? `y'(t) = \\big(\\mu + ${fpar(r)}(\\lambda + \\mu t)\\big)${exT(r)}` : `y'(t) = \\mu`;
+      sys = `\\left\\{\\begin{aligned}y(0) &= \\cG\\lambda = ${y0}\\\\y'(0) &= \\cG\\mu + ${fpar(r)}\\cG\\lambda = ${y1}\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}\\cG\\lambda &= ${y0}\\\\\\cG\\mu &= ${y1} - ${fpar(r)}\\times${fpar(y0)} = ${mu}\\end{aligned}\\right.`;
+      fin = `\\left(${fsum([[y0, ""], [mu, "t"]])}\\right)${exT(r)}`;
+    } else {
+      const { al, be } = e, s = 2 * be, mu = Fr(y1 - al * y0, be);
+      roots = `$$\\Delta = ${D} = (${s}i)^2\\lt0:\\qquad r = \\frac{${-a}\\pm${s}i}{2} = \\cV{${al ? al + " \\pm " : "\\pm "}${be === 1 ? "" : be}i}\\ \\Longrightarrow\\ \\cV{\\alpha = ${al}},\\ \\cV{\\beta = ${be}}.$$`;
+      yH = `${exT(al)}\\big(\\cG\\lambda\\,${cs(be)} + \\cG\\mu\\,${sn(be)}\\big)`;
+      dy = `y'(t) = ${exT(al)}\\big((${fsum([[al, "\\lambda"], [be, "\\mu"]])})${cs(be)} + (${fsum([[al, "\\mu"], [-be, "\\lambda"]])})${sn(be)}\\big)`;
+      sys = `\\left\\{\\begin{aligned}y(0) &= \\cG\\lambda = ${y0}\\\\y'(0) &= ${fsum([[al, "\\lambda"], [be, "\\mu"]])} = ${y1}\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}\\cG\\lambda &= ${y0}\\\\\\cG\\mu &= \\frac{${y1} - ${fpar(al)}\\times${fpar(y0)}}{${be}} = ${ftex(mu)}\\end{aligned}\\right.`;
+      fin = `${exT(al)}\\left(${fsum([[y0, cs(be)], [mu, sn(be)]])}\\right)`;
+    }
+    st.push(`<p class="mlstep">2. Les racines :</p>${roots}`);
+    st.push(`<p class="mlstep">3. La solution générale, puis sa dérivée :</p>$$\\cB{y(t) = ${yH}},\\qquad ${dy}.$$`);
+    st.push(`<p class="mlstep">4. Les conditions en $t = 0$ ($e^0 = 1$, $\\cos0 = 1$, $\\sin0 = 0$) :</p>$$${sys}$$`);
+    st.push(`<p class="mlres">$$y(t) = ${fin}$$</p>`);
+    return st;
+  };
+  stepLab(host, "Ordre 2 pas à pas : $y'' + ay' + by = 0$", gen, build);
+}
+const QEDO = [
+  ["Les solutions de $y' + 2y = 0$ sont $t\\mapsto\\lambda e^{2t}$.", false, "Faux : $A(t) = 2t$ et $y = \\lambda e^{-A(t)} = \\lambda e^{-2t}$."],
+  ["Pour $y' + y = e^{-t}$, on peut chercher une solution particulière $Ce^{-t}$.", false, "Faux : $e^{-t}$ est solution de l'équation homogène (résonance). On cherche $Cte^{-t}$, et on trouve $C = 1$."],
+  ["On détermine les constantes avec les conditions initiales avant d'ajouter $y_p$.", false, "Faux : on écrit d'abord $y = y_H + y_p$, puis on utilise les conditions."],
+  ["Les solutions réelles de $y'' + 4y = 0$ sont $\\lambda\\cos(2t) + \\mu\\sin(2t)$.", true, "Vrai : $r^2 + 4 = 0$ donne $r = \\pm2i$, donc $\\alpha = 0$ et $\\beta = 2$."],
+  ["Pour $y'' - 4y' + 4y = e^{2t}$, on cherche $y_p = Ct\\,e^{2t}$.", false, "Faux : $2$ est racine <b>double</b> de $r^2 - 4r + 4$, il faut $Ct^2e^{2t}$ (on trouve $C = \\frac12$)."],
+  ["L'ensemble des solutions de $ty' - 2y = 0$ sur $\\mathbb R$ est de dimension $1$.", false, "Faux : en raccordant en $0$, on obtient $\\lambda_1t^2$ à droite et $\\lambda_2t^2$ à gauche, indépendants : dimension $2$."],
+  ["Si $\\varphi_1, \\varphi_2$ sont solutions de $(H)$ et $W(0)\\neq0$, alors $(\\varphi_1, \\varphi_2)$ est une base de $\\mathcal S_H$.", true, "Vrai : $\\mathcal S_H$ est de dimension $2$ et le wronskien non nul en un point donne la liberté."],
+  ["Une solution de $y'' + a(t)y' + b(t)y = 0$ avec $y(0) = y'(0) = 0$ est nulle.", true, "Vrai : c'est l'unicité de Cauchy-Lipschitz, la fonction nulle convient."],
+  ["Pour $X' = AX$ avec $A$ diagonalisable de valeurs propres $-1$ et $-3$, toutes les solutions tendent vers $0$.", true, "Vrai : $X(t) = c_1e^{-t}V_1 + c_2e^{-3t}V_2\\to0$."],
+  ["Dans une équation à variables séparées, on met une constante de chaque côté.", false, "Faux : une seule constante suffit, les deux se regroupent."]
+];
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */
 const det2 = M => M[0][0] * M[1][1] - M[0][1] * M[1][0];
@@ -2781,7 +2899,7 @@ function wire(ex) {
   fixLabm(app);
   $$(".tree", app).forEach(braceTree);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a, .btree a, .lg a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); if (a.closest(".btree, .lg")) backTo(a); } }));
+  $$(".msum a, .btree a, .lg a, .htree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); if (a.closest(".btree, .lg, .htree")) backTo(a); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));

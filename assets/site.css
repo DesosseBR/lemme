@@ -1983,3 +1983,21 @@ a.lg-box:hover,.lg-list a:hover{background:color-mix(in srgb,currentColor 6%,tra
 @media (prefers-reduced-motion:reduce){#treeback,.tb-flash{animation:none}}
 @media (max-width:600px){#treeback{right:16px;bottom:16px}}
 .methode h2[id]{scroll-margin-top:84px}
+.kV{color:#7A4CC2}
+/* ---------- Arbre couché à traits coudés ---------- */
+.htree{margin:20px 0 36px;overflow-x:auto;font-size:14.5px;padding:4px 0}
+.htree .hr{display:flex;align-items:center}
+.htree ul{list-style:none;margin:0;padding:0 0 0 26px;position:relative}
+.htree ul:before{content:"";position:absolute;left:0;top:50%;width:26px;border-top:1px solid var(--muted)}
+.htree li{position:relative;padding:5px 0 5px 20px}
+.htree li:before{content:"";position:absolute;left:0;top:50%;width:16px;border-top:1px solid var(--muted)}
+.htree li:after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px solid var(--muted)}
+.htree li:first-child:after{top:50%}.htree li:last-child:after{bottom:50%}
+.htree li:only-child:after{display:none}
+.htree em{font-style:normal;font-size:11.5px;color:var(--muted);margin-right:8px;text-transform:uppercase;letter-spacing:.04em;max-width:130px;line-height:1.3}
+.htree .hq{font-weight:600;color:#2B5BD7;max-width:190px;line-height:1.35}
+.htree .hroot{color:var(--ink);font:600 16px var(--f-display);max-width:120px}
+.htree .hl{color:inherit;text-decoration:none;max-width:250px;line-height:1.35;border-bottom:1px solid transparent}
+.htree .hl:hover{border-bottom-color:currentColor}
+.htree .hl.ok{color:#1F8A5B}.htree .hl.end{color:#C27C00;font-weight:600}
+@media (max-width:760px){.htree .hr{display:block}.htree ul{padding-left:14px;margin-left:4px;border-left:1px solid var(--muted)}.htree ul:before,.htree li:after{display:none}.htree li{padding:5px 0 5px 14px}.htree li:before{top:16px;width:10px}.htree em{display:block;margin-bottom:2px}.htree .hq,.htree .hl,.htree .hroot{max-width:none;display:block}}
