@@ -1520,6 +1520,13 @@ function kerSteps(M) {
 }
 /* Arbre « accolades de manuel » : on réécrit l'ancien .tree (chaînes question / oui / non) */
 const BRACE = '<svg class="brc" viewBox="0 0 16 100" preserveAspectRatio="none" aria-hidden="true"><path d="M14 1C6 1 8 10 8 25S8 45 2 50C8 55 8 60 8 75S6 99 14 99" fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>';
+/* Bouton « revenir à l'arbre » : apparaît après un clic dans l'arbre, ramène à l'endroit cliqué */
+function backTo(a) {
+  let b = document.getElementById("treeback");
+  if (!b) { b = document.createElement("button"); b.id = "treeback"; b.type = "button"; b.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 4v15M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Revenir à l’arbre</span>'; document.body.appendChild(b); window.addEventListener("hashchange", () => b.hidden = true); }
+  b.hidden = false;
+  b.onclick = () => { b.hidden = true; if (document.body.contains(a)) { a.scrollIntoView({ behavior: "smooth", block: "center" }); a.classList.remove("tb-flash"); void a.offsetWidth; a.classList.add("tb-flash"); } };
+}
 function braceTree(el) {
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
   const chain = tb => { const out = []; let cur = null, fin = null; [...tb.children].forEach(c => { if (c.classList.contains("tq")) { cur = { q: c.innerHTML }; out.push(cur); } else if (c.classList.contains("tend")) fin = c; else if (c.classList.contains("tl") && cur) cur.yes = c; else if (c.classList.contains("tno") && cur) cur.no = c.innerHTML; }); return { out, fin }; };
@@ -2774,7 +2781,7 @@ function wire(ex) {
   fixLabm(app);
   $$(".tree", app).forEach(braceTree);
   $$("[data-mlab]", app).forEach(mountMlab);
-  $$(".msum a, .btree a, .lg a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); } }));
+  $$(".msum a, .btree a, .lg a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); if (a.closest(".btree, .lg")) backTo(a); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });
   $$(".filters [data-dm]", app).forEach(b => b.addEventListener("click", () => { dmSel = +b.dataset.dm; route(true); }));
