@@ -2332,7 +2332,10 @@ $$\frac{(-1 + 2i)(1 - i)}{(1 + i)(1 - i)} = \frac{-1 + i + 2i - 2i^2}2 = \frac{1
 <li>Toute fonction continue par morceaux est approchée par des fonctions en escalier : pour tout $\varepsilon > 0$, il existe $\varphi, \psi$ en escalier avec $\varphi\leqslant f\leqslant\psi$ et $\psi - \varphi\leqslant\varepsilon$. C'est ce qui définit $\int f$.</li>
 </ul>
 <p class="ml">Exemple : la partie entière</p>
-$$\int_0^3\lfloor t\rfloor\,dt = 0\times(1 - 0) + 1\times(2 - 1) + 2\times(3 - 2) = \cG3.$$
+<p><b>Étape 1 : Rappel.</b> Pour une fonction en escalier, $\int_a^b\varphi = \sum_kc_k(x_{k+1} - x_k)$ : la somme des aires des rectangles.</p>
+<p><b>Étape 2 : Les paliers.</b> Sur $[0, 1[$, $\lfloor t\rfloor = 0$ ; sur $[1, 2[$, il vaut $1$ ; sur $[2, 3[$, il vaut $2$.</p>
+<p><b>Étape 3 : Les aires.</b> Chaque palier a une largeur $1$ :</p>
+$$\int_0^3\lfloor t\rfloor\,dt = 0\times1 + 1\times1 + 2\times1 = \cG3.$$
 
 <h2 id="i-prop">3. Les propriétés de l'intégrale</h2>
 <div class="sbox">$$\int_a^b(\lambda f + \mu g) = \lambda\int_a^bf + \mu\int_a^bg,\qquad\int_a^bf = \int_a^cf + \int_c^bf,\qquad f\leqslant g\ \Longrightarrow\ \int_a^bf\leqslant\int_a^bg\quad(a\leqslant b).$$</div>
@@ -2341,14 +2344,21 @@ $$\int_0^3\lfloor t\rfloor\,dt = 0\times(1 - 0) + 1\times(2 - 1) + 2\times(3 - 2
 <p class="ml piege">Piège</p>
 <p>La croissance demande $a\leqslant b$, et le dernier résultat demande que $f$ soit <b>continue</b> : une fonction nulle sauf en un point a une intégrale nulle.</p>
 <p class="ml">Exemple : la limite de $I_n = \int_0^1\frac{x^n}{1 + x}\,dx$</p>
-<p><b>Étape 1 : encadrer la fonction.</b> Pour $x\in[0, 1]$, $1 + x\geqslant1$, donc :</p>
+<p><b>Étape 1 : Rappel.</b> Si $f\leqslant g$ sur $[a, b]$ avec $a\leqslant b$, alors $\int_a^bf\leqslant\int_a^bg$.</p>
+<p><b>Étape 2 : Encadrer la fonction.</b> Pour $x\in[0, 1]$, $1 + x\geqslant1$ et $x^n\geqslant0$ :</p>
 $$0\leqslant\frac{x^n}{1 + x}\leqslant\cV{x^n}.$$
-<p><b>Étape 2 : intégrer l'encadrement</b> (les bornes sont dans l'ordre, $0\leqslant1$) :</p>
-$$0\leqslant I_n\leqslant\int_0^1\cV{x^n}\,dx = \Big[\frac{x^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}.$$
-<p><b>Étape 3 : conclure</b> par encadrement : $\cG{I_n\xrightarrow[n\to+\infty]{}0}$.</p>
+<p><b>Étape 3 : Intégrer l'encadrement</b> ($0\leqslant1$) :</p>
+$$0\leqslant I_n\leqslant\int_0^1x^n\,dx = \Big[\frac{x^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}.$$
+<p><b>Étape 4 : Conclusion</b> par encadrement : $\frac1{n + 1}\to0$, donc $\cG{I_n\to0}$.</p>
+
 <p class="ml">Exemple : l'inégalité de Cauchy-Schwarz</p>
-$$\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big).$$
-<p>Preuve : $P(\lambda) = \int_a^b(f + \lambda g)^2\geqslant0$ pour tout $\lambda$. C'est un polynôme de degré 2 en $\lambda$, toujours positif, donc son discriminant est négatif ou nul.</p>
+<p><b>Étape 1 : Rappel.</b> Un trinôme $a\lambda^2 + b\lambda + c$ avec $a > 0$, positif pour tout $\lambda$, a un discriminant $\Delta\leqslant0$.</p>
+<p><b>Étape 2 : Le polynôme positif.</b> Pour tout réel $\lambda$, $(f + \lambda g)^2\geqslant0$, donc :</p>
+$$P(\lambda) = \int_a^b(f + \lambda g)^2 = \lambda^2\int_a^bg^2 + 2\lambda\int_a^bfg + \int_a^bf^2\geqslant0.$$
+<p><b>Étape 3 : Le discriminant</b> (si $\int g^2 > 0$) :</p>
+$$\Delta = 4\Big(\int_a^bfg\Big)^2 - 4\int_a^bf^2\int_a^bg^2\leqslant0.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big)}.$$
 
 <h2 id="i-fond">4. Le théorème fondamental</h2>
 <div class="sbox">$$f\ \text{continue sur}\ I,\ a\in I:\qquad F(x) = \int_a^xf(t)\,dt\ \text{est l'unique primitive de}\ f\ \text{qui s'annule en}\ a,\qquad F' = f.$$</div>
@@ -2357,8 +2367,13 @@ $$\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big).$$
 <p>On introduit une primitive $F$ de $f$, on écrit l'intégrale avec $F$, puis on dérive des fonctions composées :</p>
 $$G(x) = \int_{u(x)}^{v(x)}f(t)\,dt = F(v(x)) - F(u(x))\ \Longrightarrow\ G'(x) = f(v(x))\,v'(x) - f(u(x))\,u'(x).$$
 <p class="ml">Exemple : $G(x) = \int_x^{2x}e^{-t^2}\,dt$</p>
-<p>$t\mapsto e^{-t^2}$ est continue sur $\mathbb R$ : soit $F$ une primitive. Alors $G(x) = F(2x) - F(x)$ et :</p>
-$$G'(x) = \cO2\,F'(2x) - F'(x) = 2e^{-(2x)^2} - e^{-x^2} = \cG{2e^{-4x^2} - e^{-x^2}}.$$
+<p><b>Étape 1 : Rappel.</b> Si $F$ est une primitive de $f$ : $\int_{u(x)}^{v(x)}f = F(v(x)) - F(u(x))$, puis on dérive des composées.</p>
+<p><b>Étape 2 : Une primitive.</b> $t\mapsto e^{-t^2}$ est continue : elle a une primitive $F$, avec $F' = e^{-t^2}$.</p>
+<p><b>Étape 3 : Écrire $G$ avec $F$.</b></p>
+$$G(x) = F(2x) - F(x).$$
+<p><b>Étape 4 : Dériver.</b> La dérivée de $F(2x)$ est $2F'(2x)$ :</p>
+$$G'(x) = \cO2F'(2x) - F'(x) = 2e^{-(2x)^2} - e^{-x^2} = \cG{2e^{-4x^2} - e^{-x^2}}.$$
+
 <p class="ml piege">Piège</p>
 <p>On ne dérive pas sous le signe intégrale : $\frac{d}{dx}\int_0^xf(t)\,dt = f(x)$, et non $\int_0^xf'(t)\,dt$. Si la variable $x$ est aussi dans la fonction ($\int_0^xx\,f(t)\,dt$), on la sort d'abord : $x\int_0^xf(t)\,dt$.</p>
 
@@ -2372,12 +2387,32 @@ $$G'(x) = \cO2\,F'(2x) - F'(x) = 2e^{-(2x)^2} - e^{-x^2} = \cG{2e^{-4x^2} - e^{-
 <tr><td>$\frac1{\sqrt{1 - x^2}}$</td><td>$\arcsin x$</td><td>$1 + \tan^2x = \frac1{\cos^2x}$</td><td>$\tan x$</td></tr>
 </table>
 <p class="ml">Exemple 1 : reconnaître $u'u^\alpha$</p>
-$$\int_0^1x\sqrt{1 + x^2}\,dx = \frac12\int_0^1\cB{2x}(1 + x^2)^{1/2}\,dx = \frac12\Big[\frac{(1 + x^2)^{3/2}}{3/2}\Big]_0^1 = \frac13\big(2\sqrt2 - 1\big).$$
+<p><b>Étape 1 : Rappel.</b> Une primitive de $u'u^\alpha$ ($\alpha\neq-1$) est $\frac{u^{\alpha+1}}{\alpha + 1}$.</p>
+<p><b>Étape 2 : Repérer $u$.</b> $u = 1 + x^2$, $u' = 2x$, $\alpha = \frac12$. Il manque un facteur $2$ : on l'ajoute.</p>
+$$\int_0^1x\sqrt{1 + x^2}\,dx = \frac12\int_0^1\cB{2x}(1 + x^2)^{1/2}\,dx.$$
+<p><b>Étape 3 : La primitive.</b></p>
+$$= \frac12\Big[\frac{(1 + x^2)^{3/2}}{3/2}\Big]_0^1 = \frac13\Big[(1 + x^2)^{3/2}\Big]_0^1.$$
+<p><b>Étape 4 : Les bornes.</b> $(1 + 1)^{3/2} = 2\sqrt2$ et $1^{3/2} = 1$ :</p>
+$$= \cG{\frac13\big(2\sqrt2 - 1\big)}.$$
+
 <p class="ml">Exemple 2 : un trinôme sans racine réelle, on passe à la forme canonique</p>
-$$x^2 + 2x + 5 = (x + 1)^2 + 4 = (x + 1)^2 + 2^2.$$
-$$\int_{-1}^1\frac{dx}{x^2 + 2x + 5} = \int_{-1}^1\frac{dx}{(x + 1)^2 + 2^2} = \Big[\frac12\arctan\frac{x + 1}2\Big]_{-1}^1 = \frac12\big(\arctan1 - \arctan0\big) = \cG{\frac\pi8}.$$
+<p><b>Étape 1 : Rappel.</b> $\int\frac{dx}{(x - x_0)^2 + a^2} = \frac1a\arctan\frac{x - x_0}a$.</p>
+<p><b>Étape 2 : Pas de racine réelle.</b> $\Delta = 4 - 20\lt0$ : on passe à la forme canonique.</p>
+$$x^2 + 2x + 5 = (x + 1)^2 - 1 + 5 = (x + 1)^2 + 2^2.$$
+<p><b>Étape 3 : La primitive</b> avec $x_0 = -1$, $a = 2$ :</p>
+$$\int_{-1}^1\frac{dx}{(x + 1)^2 + 2^2} = \Big[\frac12\arctan\frac{x + 1}2\Big]_{-1}^1.$$
+<p><b>Étape 4 : Les bornes.</b></p>
+$$= \frac12\big(\arctan1 - \arctan0\big) = \frac12\cdot\frac\pi4 = \cG{\frac\pi8}.$$
+
 <p class="ml">Exemple 3 : un trinôme avec deux racines, on décompose</p>
-$$\frac1{x^2 - 1} = \frac1{(x - 1)(x + 1)} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big),\qquad\int_2^3\frac{dx}{x^2 - 1} = \frac12\Big[\ln\Big|\frac{x - 1}{x + 1}\Big|\Big]_2^3 = \frac12\Big(\ln\frac12 - \ln\frac13\Big) = \cG{\frac12\ln\frac32}.$$
+<p><b>Étape 1 : Rappel.</b> Avec deux racines, on décompose en éléments simples, puis $\int\frac{dx}{x - a} = \ln|x - a|$.</p>
+<p><b>Étape 2 : Factoriser.</b> $x^2 - 1 = (x - 1)(x + 1)$.</p>
+<p><b>Étape 3 : Décomposer</b> (cacher et évaluer) :</p>
+$$\frac1{(x - 1)(x + 1)} = \frac{1/2}{x - 1} - \frac{1/2}{x + 1}.$$
+<p><b>Étape 4 : Intégrer.</b></p>
+$$\int_2^3\frac{dx}{x^2 - 1} = \frac12\Big[\ln|x - 1| - \ln|x + 1|\Big]_2^3 = \frac12\Big[\ln\Big|\frac{x - 1}{x + 1}\Big|\Big]_2^3.$$
+<p><b>Étape 5 : Les bornes.</b></p>
+$$= \frac12\Big(\ln\frac12 - \ln\frac13\Big) = \cG{\frac12\ln\frac32}.$$
 
 <h2 id="i-ipp">6. L'intégration par parties</h2>
 <div class="sbox">$$\int_a^b\cB{u(t)}\,\cR{v'(t)}\,dt = \Big[\cB u\,\cR v\Big]_a^b - \int_a^b\cB{u'(t)}\,\cR{v(t)}\,dt\qquad(u, v\ \text{de classe}\ \mathcal C^1\ \text{sur}\ [a, b]).$$</div>
@@ -2388,23 +2423,56 @@ $$\frac1{x^2 - 1} = \frac1{(x - 1)(x + 1)} = \frac12\Big(\frac1{x - 1} - \frac1{
 <li>Toujours écrire les quatre fonctions avant de calculer : $u, u', v', v$.</li>
 </ul>
 <p class="ml">Exemple 1 : $\int_0^1t\,e^t\,dt$</p>
-$$\left\{\begin{aligned}\cB{u(t)} &= \cB t & \cB{u'(t)} &= \cB1\\\cR{v'(t)} &= \cR{e^t} & \cR{v(t)} &= \cR{e^t}\end{aligned}\right.\qquad\int_0^1t\,e^t\,dt = \Big[\cB t\,\cR{e^t}\Big]_0^1 - \int_0^1\cB1\cdot\cR{e^t}\,dt = e - \big[e^t\big]_0^1 = e - (e - 1) = \cG1.$$
+<p><b>Étape 1 : Rappel.</b> $\int_a^buv' = [uv]_a^b - \int_a^bu'v$. On dérive le polynôme, on intègre l'exponentielle.</p>
+<p><b>Étape 2 : Les quatre fonctions.</b></p>
+$$\left\{\begin{aligned}\cB{u(t)} &= \cB t & \cB{u'(t)} &= \cB1\\\cR{v'(t)} &= \cR{e^t} & \cR{v(t)} &= \cR{e^t}\end{aligned}\right.$$
+<p><b>Étape 3 : La formule.</b></p>
+$$\int_0^1t\,e^t\,dt = \Big[\cB t\,\cR{e^t}\Big]_0^1 - \int_0^1\cB1\cdot\cR{e^t}\,dt.$$
+<p><b>Étape 4 : Le crochet</b> : $1\cdot e - 0 = e$. <b>L'intégrale restante</b> : $[e^t]_0^1 = e - 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $e - (e - 1) = \cG1$.</p>
+
 <p class="ml">Exemple 2 : $\int_1^e\ln t\,dt$, avec un « 1 » caché</p>
-$$\left\{\begin{aligned}\cB{u(t)} &= \cB{\ln t} & \cB{u'(t)} &= \cB{\tfrac1t}\\\cR{v'(t)} &= \cR1 & \cR{v(t)} &= \cR t\end{aligned}\right.\qquad\int_1^e\ln t\,dt = \Big[\cR t\,\cB{\ln t}\Big]_1^e - \int_1^e\cB{\frac1t}\cdot\cR t\,dt = e - (e - 1) = \cG1.$$
-<p>Plus généralement, une primitive de $\ln$ est $t\ln t - t$.</p>
+<p><b>Étape 1 : Rappel.</b> $\int_a^buv' = [uv]_a^b - \int_a^bu'v$. Pour $\int\ln$, on écrit $\ln t = 1\times\ln t$.</p>
+<p><b>Étape 2 : Les quatre fonctions.</b></p>
+$$\left\{\begin{aligned}\cB{u(t)} &= \cB{\ln t} & \cB{u'(t)} &= \cB{\tfrac1t}\\\cR{v'(t)} &= \cR1 & \cR{v(t)} &= \cR t\end{aligned}\right.$$
+<p><b>Étape 3 : La formule.</b></p>
+$$\int_1^e\ln t\,dt = \Big[\cR t\,\cB{\ln t}\Big]_1^e - \int_1^e\cB{\frac1t}\cdot\cR t\,dt.$$
+<p><b>Étape 4 : Les calculs.</b> Crochet : $e\ln e - 1\ln1 = e$. Intégrale restante : $\int_1^e1\,dt = e - 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $e - (e - 1) = \cG1$. Une primitive de $\ln$ est $t\ln t - t$.</p>
+
 <p class="ml">Exemple 3 : $\int_0^1\arctan t\,dt$</p>
-$$\left\{\begin{aligned}\cB u &= \cB{\arctan t} & \cB{u'} &= \cB{\tfrac1{1 + t^2}}\\\cR{v'} &= \cR1 & \cR v &= \cR t\end{aligned}\right.\qquad\int_0^1\arctan t\,dt = \big[t\arctan t\big]_0^1 - \int_0^1\frac{t}{1 + t^2}\,dt.$$
-$$= \frac\pi4 - \frac12\big[\ln(1 + t^2)\big]_0^1 = \cG{\frac\pi4 - \frac{\ln2}2}.$$
+<p><b>Étape 1 : Rappel.</b> IPP avec $v' = 1$ : on dérive $\arctan$, qui devient une fraction.</p>
+<p><b>Étape 2 : Les quatre fonctions.</b></p>
+$$\left\{\begin{aligned}\cB u &= \cB{\arctan t} & \cB{u'} &= \cB{\tfrac1{1 + t^2}}\\\cR{v'} &= \cR1 & \cR v &= \cR t\end{aligned}\right.$$
+<p><b>Étape 3 : La formule.</b></p>
+$$\int_0^1\arctan t\,dt = \big[t\arctan t\big]_0^1 - \int_0^1\frac t{1 + t^2}\,dt.$$
+<p><b>Étape 4 : Le crochet.</b> $1\times\arctan1 - 0 = \frac\pi4$.</p>
+<p><b>Étape 5 : L'intégrale restante</b> : forme $\frac12\cdot\frac{u'}u$ avec $u = 1 + t^2$ :</p>
+$$\int_0^1\frac t{1 + t^2}\,dt = \frac12\big[\ln(1 + t^2)\big]_0^1 = \frac{\ln2}2.$$
+<p><b>Étape 6 : Conclusion.</b> $\cG{\int_0^1\arctan t\,dt = \frac\pi4 - \frac{\ln2}2}$.</p>
+
 <p class="ml">Exemple 4 : deux IPP qui reviennent au départ</p>
-<p>$I = \int_0^\pi e^t\cos t\,dt$. On dérive $\cos$ deux fois, en intégrant $e^t$ :</p>
-$$I = \big[e^t\cos t\big]_0^\pi + \int_0^\pi e^t\sin t\,dt = (-e^\pi - 1) + \Big(\big[e^t\sin t\big]_0^\pi - \int_0^\pi e^t\cos t\,dt\Big) = -e^\pi - 1 + 0 - I.$$
-$$2I = -e^\pi - 1\qquad\Longrightarrow\qquad\cG{I = -\frac{e^\pi + 1}2}.$$
-<p>On peut aussi passer en complexe (§11).</p>
+<p><b>Étape 1 : Rappel.</b> Avec $e^t$ et $\cos$, deux IPP dans le même sens font réapparaître l'intégrale de départ : on obtient une équation en $I$.</p>
+$$I = \int_0^\pi e^t\cos t\,dt.$$
+<p><b>Étape 2 : Première IPP</b> ($u = \cos t$, $v' = e^t$) :</p>
+$$I = \big[e^t\cos t\big]_0^\pi + \int_0^\pi e^t\sin t\,dt = (-e^\pi - 1) + \int_0^\pi e^t\sin t\,dt.$$
+<p><b>Étape 3 : Deuxième IPP</b> ($u = \sin t$, $v' = e^t$) :</p>
+$$\int_0^\pi e^t\sin t\,dt = \big[e^t\sin t\big]_0^\pi - \int_0^\pi e^t\cos t\,dt = 0 - I.$$
+<p><b>Étape 4 : L'équation.</b></p>
+$$I = -e^\pi - 1 - I\iff2I = -e^\pi - 1.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{I = -\frac{e^\pi + 1}2}$.</p>
+
 <p class="ml">Exemple 5 : une relation de récurrence (intégrales de Wallis)</p>
-<p>$W_n = \int_0^{\pi/2}\sin^nt\,dt$. On écrit $\sin^{n+2} = \sin^{n+1}\cdot\sin$ :</p>
+<p><b>Étape 1 : Rappel.</b> $W_n = \int_0^{\pi/2}\sin^nt\,dt$. On fait une IPP qui garde un $\sin t$ à intégrer, puis $\cos^2 = 1 - \sin^2$.</p>
+<p><b>Étape 2 : On écrit $\sin^{n+2} = \sin^{n+1}\cdot\sin$</b> :</p>
 $$\left\{\begin{aligned}\cB u &= \cB{\sin^{n+1}t} & \cB{u'} &= \cB{(n + 1)\cos t\sin^nt}\\\cR{v'} &= \cR{\sin t} & \cR v &= \cR{-\cos t}\end{aligned}\right.$$
-$$W_{n+2} = \underbrace{\big[-\cos t\sin^{n+1}t\big]_0^{\pi/2}}_{= 0} + (n + 1)\int_0^{\pi/2}\cos^2t\,\sin^nt\,dt = (n + 1)\int_0^{\pi/2}(1 - \sin^2t)\sin^nt\,dt = (n + 1)(W_n - W_{n+2}).$$
+<p><b>Étape 3 : L'IPP.</b> Le crochet est nul ($\cos\frac\pi2 = 0$ et $\sin0 = 0$) :</p>
+$$W_{n+2} = \big[-\cos t\sin^{n+1}t\big]_0^{\pi/2} + (n + 1)\int_0^{\pi/2}\cos^2t\,\sin^nt\,dt.$$
+<p><b>Étape 4 : $\cos^2 = 1 - \sin^2$.</b></p>
+$$W_{n+2} = (n + 1)\int_0^{\pi/2}(1 - \sin^2t)\sin^nt\,dt = (n + 1)(W_n - W_{n+2}).$$
+<p><b>Étape 5 : On isole $W_{n+2}$.</b></p>
 $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 1}{n + 2}W_n}.$$
+
 <div data-mlab="ipp"></div>
 
 <h2 id="i-chgt">7. Le changement de variable</h2>
@@ -2417,21 +2485,31 @@ $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 
 <li>Remplacer <b>tous</b> les $x$ : il ne doit plus en rester un seul.</li>
 </ol>
 <p class="ml">Exemple 1 : $\int_0^1\sqrt{1 - x^2}\,dx$ avec $x = \sin t$</p>
-<p><b>1–2.</b> $\cO{x = \sin t}$, $t\in\big[0, \frac\pi2\big]$, $\mathcal C^1$. Donc $\cO{dx = \cos t\,dt}$.</p>
-<p><b>3.</b> $x = 0\iff t = \cO0$ et $x = 1\iff t = \cO{\frac\pi2}$.</p>
-<p><b>4.</b> Sur $\big[0, \frac\pi2\big]$, $\cos t\geqslant0$, donc $\sqrt{1 - \sin^2t} = |\cos t| = \cos t$ :</p>
-$$\int_0^1\sqrt{1 - x^2}\,dx = \int_{\cO0}^{\cO{\pi/2}}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \cG{\frac\pi4}.$$
+<p><b>Étape 1 : Rappel.</b> Changement de variable : poser $x = \varphi(t)$, calculer $dx$, changer les bornes, remplacer tous les $x$.</p>
+<p><b>Étape 2 : On pose $\cO{x = \sin t}$</b>, $t\in\big[0, \frac\pi2\big]$ : $\cO{dx = \cos t\,dt}$.</p>
+<p><b>Étape 3 : Les bornes.</b> $x = 0\iff t = \cO0$ ; $x = 1\iff t = \cO{\frac\pi2}$.</p>
+<p><b>Étape 4 : La racine.</b> $\sqrt{1 - \sin^2t} = |\cos t| = \cos t$ car $\cos t\geqslant0$ sur $\big[0, \frac\pi2\big]$.</p>
+<p><b>Étape 5 : On remplace.</b></p>
+$$\int_0^1\sqrt{1 - x^2}\,dx = \int_0^{\pi/2}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\cos^2t\,dt.$$
+<p><b>Étape 6 : Linéariser et intégrer.</b> $\cos^2t = \frac{1 + \cos2t}2$ :</p>
+$$= \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \frac\pi4 + 0 = \cG{\frac\pi4}.$$
 <p>C'est l'aire d'un quart de disque de rayon $1$.</p>
+
 <p class="ml">Exemple 2 : $\int_0^1\frac{dx}{1 + e^x}$ avec $t = e^x$</p>
-<p><b>1–2.</b> $\cO{t = e^x}$, donc $x = \ln t$ et $\cO{dx = \frac{dt}t}$. <b>3.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
-$$\int_0^1\frac{dx}{1 + e^x} = \int_{\cO1}^{\cO e}\frac{1}{(1 + t)}\cdot\frac{dt}t = \int_1^e\Big(\frac1t - \frac1{1 + t}\Big)dt = \big[\ln t - \ln(1 + t)\big]_1^e = \cG{1 - \ln(1 + e) + \ln2}.$$
-<p>On a décomposé : $\frac1{t(1 + t)} = \frac1t - \frac1{1 + t}$.</p>
+<p><b>Étape 1 : Rappel.</b> Poser $t = \psi(x)$, exprimer $x$ et $dx$, changer les bornes, remplacer tous les $x$.</p>
+<p><b>Étape 2 : On pose $\cO{t = e^x}$</b> : $x = \ln t$ et $\cO{dx = \frac{dt}t}$.</p>
+<p><b>Étape 3 : Les bornes.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
+<p><b>Étape 4 : On remplace.</b></p>
+$$\int_0^1\frac{dx}{1 + e^x} = \int_1^e\frac1{1 + t}\cdot\frac{dt}t = \int_1^e\frac{dt}{t(1 + t)}.$$
+<p><b>Étape 5 : Décomposer.</b> $\frac1{t(1 + t)} = \frac1t - \frac1{1 + t}$.</p>
+<p><b>Étape 6 : Intégrer.</b></p>
+$$\big[\ln t - \ln(1 + t)\big]_1^e = (1 - \ln(1 + e)) - (0 - \ln2) = \cG{1 - \ln(1 + e) + \ln2}.$$
+
 <p class="ml">Exemple 3 : symétries (sans calcul)</p>
-<ul>
-<li>$f$ impaire : $\int_{-a}^af = 0$ (poser $x = -t$). $f$ paire : $\int_{-a}^af = 2\int_0^af$.</li>
-<li>$f$ périodique de période $T$ : $\int_a^{a+T}f = \int_0^Tf$.</li>
-<li>$\int_0^{\pi/2}f(\sin t)\,dt = \int_0^{\pi/2}f(\cos t)\,dt$ (poser $t = \frac\pi2 - u$).</li>
-</ul>
+<p><b>Étape 1 : Rappel.</b> Un changement de variable simple ($x = -t$, $x = t + T$, $t = \frac\pi2 - u$) montre ces égalités sans rien calculer.</p>
+<p><b>Étape 2 : Fonction impaire.</b> Avec $x = -t$ : $\int_{-a}^0f = -\int_0^af$, donc $\int_{-a}^af = 0$. Paire : $\int_{-a}^af = 2\int_0^af$.</p>
+<p><b>Étape 3 : Fonction $T$-périodique.</b> $\int_a^{a+T}f = \int_0^Tf$ pour tout $a$.</p>
+<p><b>Étape 4 : $\sin$ et $\cos$.</b> Avec $t = \frac\pi2 - u$ : $\int_0^{\pi/2}f(\sin t)\,dt = \int_0^{\pi/2}f(\cos u)\,du$.</p>
 
 <h2 id="i-bioche">8. Les règles de Bioche <span class="hp">hors programme</span></h2>
 <p>Pour une fraction en $\sin$ et $\cos$, elles disent quel changement de variable donne une fraction rationnelle. On regarde $g(x) = f(x)\,dx$, <b>avec le $dx$</b>, et on teste trois transformations :</p>
@@ -2444,21 +2522,42 @@ $$\int_0^1\frac{dx}{1 + e^x} = \int_{\cO1}^{\cO e}\frac{1}{(1 + t)}\cdot\frac{dt
 </table>
 <p>Moyen mnémotechnique : on pose la fonction qui est elle-même invariante par la transformation.</p>
 <p class="ml">Exemple 1 : $\int\frac{dx}{\sin x}$</p>
-<p><b>Test.</b> $g(-x) = \frac{d(-x)}{\sin(-x)} = \frac{-dx}{-\sin x} = g(x)$ : on pose $\cO{t = \cos x}$, $dt = -\sin x\,dx$.</p>
-<p><b>On fait apparaître $\sin x\,dx$</b> en multipliant en haut et en bas par $\sin x$ :</p>
-$$\int\frac{dx}{\sin x} = \int\frac{\sin x\,dx}{\sin^2x} = \int\frac{\sin x\,dx}{1 - \cos^2x} = \int\frac{-dt}{1 - t^2} = -\frac12\int\Big(\frac1{1 - t} + \frac1{1 + t}\Big)dt.$$
-$$= -\frac12\ln\Big|\frac{1 + t}{1 - t}\Big| = \frac12\ln\Big(\frac{1 - \cos x}{1 + \cos x}\Big) = \cG{\ln\Big|\tan\frac x2\Big|}.$$
+<p><b>Étape 1 : Rappel.</b> Bioche : si $g(x) = f(x)\,dx$ est invariant par $x\mapsto-x$, on pose $t = \cos x$.</p>
+<p><b>Étape 2 : Le test.</b> $g(-x) = \frac{d(-x)}{\sin(-x)} = \frac{-dx}{-\sin x} = g(x)$ : on pose $\cO{t = \cos x}$, $dt = -\sin x\,dx$.</p>
+<p><b>Étape 3 : Faire apparaître $\sin x\,dx$</b> (on multiplie en haut et en bas par $\sin x$) :</p>
+$$\int\frac{dx}{\sin x} = \int\frac{\sin x\,dx}{\sin^2x} = \int\frac{\sin x\,dx}{1 - \cos^2x} = \int\frac{-dt}{1 - t^2}.$$
+<p><b>Étape 4 : Décomposer.</b> $\frac1{1 - t^2} = \frac12\Big(\frac1{1 - t} + \frac1{1 + t}\Big)$ :</p>
+$$-\frac12\int\Big(\frac1{1 - t} + \frac1{1 + t}\Big)dt = -\frac12\ln\Big|\frac{1 + t}{1 - t}\Big|.$$
+<p><b>Étape 5 : On revient à $x$.</b></p>
+$$= \frac12\ln\Big(\frac{1 - \cos x}{1 + \cos x}\Big) = \cG{\ln\Big|\tan\frac x2\Big|}.$$
+
 <p class="ml">Exemple 2 : $\int_0^{\pi/2}\frac{\cos x}{1 + \sin^2x}\,dx$</p>
-<p><b>Test.</b> $g(\pi - x) = \frac{\cos(\pi - x)\,d(\pi - x)}{1 + \sin^2(\pi - x)} = \frac{(-\cos x)(-dx)}{1 + \sin^2x} = g(x)$ : on pose $\cO{t = \sin x}$, $dt = \cos x\,dx$, bornes $\cO0$ et $\cO1$.</p>
-$$\int_0^{\pi/2}\frac{\cos x\,dx}{1 + \sin^2x} = \int_{\cO0}^{\cO1}\frac{dt}{1 + t^2} = \big[\arctan t\big]_0^1 = \cG{\frac\pi4}.$$
+<p><b>Étape 1 : Rappel.</b> Bioche : invariant par $x\mapsto\pi - x$, on pose $t = \sin x$.</p>
+<p><b>Étape 2 : Le test.</b> $\cos(\pi - x) = -\cos x$ et $d(\pi - x) = -dx$ : les deux signes s'annulent, $g(\pi - x) = g(x)$.</p>
+<p><b>Étape 3 : On pose $\cO{t = \sin x}$</b> : $dt = \cos x\,dx$, bornes $\cO0$ et $\cO1$.</p>
+<p><b>Étape 4 : On remplace et on intègre.</b></p>
+$$\int_0^{\pi/2}\frac{\cos x\,dx}{1 + \sin^2x} = \int_0^1\frac{dt}{1 + t^2} = \big[\arctan t\big]_0^1 = \cG{\frac\pi4}.$$
+
 <p class="ml">Exemple 3 : $\int_0^{\pi/4}\frac{dx}{1 + \cos^2x}$</p>
-<p><b>Test.</b> $g(-x) = \frac{-dx}{1 + \cos^2x}\neq g$, mais $g(\pi + x) = \frac{dx}{1 + \cos^2x} = g(x)$ : on pose $\cO{t = \tan x}$.</p>
-$$dt = (1 + \tan^2x)\,dx = (1 + t^2)\,dx,\qquad\cos^2x = \frac1{1 + \tan^2x} = \frac1{1 + t^2},\qquad1 + \cos^2x = \frac{2 + t^2}{1 + t^2}.$$
-$$\int_0^{\pi/4}\frac{dx}{1 + \cos^2x} = \int_{\cO0}^{\cO1}\frac{1 + t^2}{2 + t^2}\cdot\frac{dt}{1 + t^2} = \int_0^1\frac{dt}{t^2 + (\sqrt2)^2} = \Big[\frac1{\sqrt2}\arctan\frac t{\sqrt2}\Big]_0^1 = \cG{\frac1{\sqrt2}\arctan\frac1{\sqrt2}}.$$
+<p><b>Étape 1 : Rappel.</b> Bioche : invariant par $x\mapsto\pi + x$, on pose $t = \tan x$, avec $dt = (1 + t^2)\,dx$ et $\cos^2x = \frac1{1 + t^2}$.</p>
+<p><b>Étape 2 : Le test.</b> $g(-x)\neq g(x)$ (le $dx$ change de signe), mais $\cos^2(\pi + x) = \cos^2x$ : $g(\pi + x) = g(x)$.</p>
+<p><b>Étape 3 : On pose $\cO{t = \tan x}$</b>, bornes $\cO0$ et $\cO1$.</p>
+$$1 + \cos^2x = 1 + \frac1{1 + t^2} = \frac{2 + t^2}{1 + t^2},\qquad dx = \frac{dt}{1 + t^2}.$$
+<p><b>Étape 4 : On remplace.</b></p>
+$$\int_0^{\pi/4}\frac{dx}{1 + \cos^2x} = \int_0^1\frac{1 + t^2}{2 + t^2}\cdot\frac{dt}{1 + t^2} = \int_0^1\frac{dt}{t^2 + (\sqrt2)^2}.$$
+<p><b>Étape 5 : La primitive en $\arctan$.</b></p>
+$$= \Big[\frac1{\sqrt2}\arctan\frac t{\sqrt2}\Big]_0^1 = \cG{\frac1{\sqrt2}\arctan\frac1{\sqrt2}}.$$
+
 <p class="ml">Exemple 4 : aucune règle, $t = \tan\frac x2$</p>
-<p>$\int_0^{\pi/2}\frac{dx}{2 + \cos x}$ : aucune des trois transformations ne laisse $g$ invariant. On pose $\cO{t = \tan\frac x2}$, bornes $\cO0$ et $\cO1$ :</p>
-$$2 + \cos x = 2 + \frac{1 - t^2}{1 + t^2} = \frac{2 + 2t^2 + 1 - t^2}{1 + t^2} = \frac{3 + t^2}{1 + t^2},\qquad dx = \frac{2\,dt}{1 + t^2}.$$
-$$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\frac{2\,dt}{1 + t^2} = \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\frac\pi6 = \cG{\frac\pi{3\sqrt3}}.$$
+<p><b>Étape 1 : Rappel.</b> Si aucune règle de Bioche ne marche : $t = \tan\frac x2$, $\cos x = \frac{1 - t^2}{1 + t^2}$, $dx = \frac{2\,dt}{1 + t^2}$.</p>
+<p><b>Étape 2 : Les tests échouent.</b> $x\mapsto-x$, $\pi - x$ et $\pi + x$ changent tous $2 + \cos x$ ou le $dx$.</p>
+<p><b>Étape 3 : On pose $\cO{t = \tan\frac x2}$</b> : bornes $\cO0$ et $\cO{\tan\frac\pi4 = 1}$.</p>
+<p><b>Étape 4 : Le dénominateur.</b></p>
+$$2 + \cos x = \frac{2(1 + t^2) + 1 - t^2}{1 + t^2} = \frac{3 + t^2}{1 + t^2}.$$
+<p><b>Étape 5 : On remplace.</b></p>
+$$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\frac{2\,dt}{1 + t^2} = \int_0^1\frac{2\,dt}{t^2 + (\sqrt3)^2}.$$
+<p><b>Étape 6 : La primitive.</b></p>
+$$= \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\frac\pi6 = \cG{\frac\pi{3\sqrt3}}.$$
 
 <h2 id="i-riemann">9. Les sommes de Riemann</h2>
 <div class="sbox">$$f\in\mathcal C_{pm}([a, b]):\qquad\frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f.$$</div>
@@ -2469,15 +2568,32 @@ $$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\fra
 <li>Vérifier les bornes de $k$ ($0$ à $n - 1$, ou $1$ à $n$ : même limite).</li>
 </ol>
 <p class="ml">Exemple 1 : $S_n = \sum_{k=1}^n\frac n{n^2 + k^2}$</p>
-<p>On factorise le dénominateur par $n^2$ :</p>
-$$\frac n{n^2 + k^2} = \frac n{n^2\big(1 + (k/n)^2\big)} = \cO{\frac1n}\cdot\frac1{1 + (k/n)^2}\qquad\Longrightarrow\qquad S_n = \frac1n\sum_{k=1}^nf\Big(\frac kn\Big),\quad f(x) = \frac1{1 + x^2}.$$
-$$S_n\xrightarrow[n\to+\infty]{}\int_0^1\frac{dx}{1 + x^2} = \big[\arctan x\big]_0^1 = \cG{\frac\pi4}.$$
+<p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ (somme de Riemann).</p>
+<p><b>Étape 2 : Factoriser le dénominateur par $n^2$.</b></p>
+$$\frac n{n^2 + k^2} = \frac n{n^2\big(1 + (k/n)^2\big)} = \cO{\frac1n}\cdot\frac1{1 + (k/n)^2}.$$
+<p><b>Étape 3 : Reconnaître $f$.</b> $S_n = \frac1n\sum_{k=1}^nf\big(\frac kn\big)$ avec $f(x) = \frac1{1 + x^2}$, continue sur $[0, 1]$.</p>
+<p><b>Étape 4 : La limite.</b></p>
+$$S_n\to\int_0^1\frac{dx}{1 + x^2} = \big[\arctan x\big]_0^1 = \cG{\frac\pi4}.$$
+
 <p class="ml">Exemple 2 : $T_n = \sum_{k=1}^n\frac1{n + k}$</p>
-$$\frac1{n + k} = \frac1n\cdot\frac1{1 + k/n}\qquad\Longrightarrow\qquad T_n\to\int_0^1\frac{dx}{1 + x} = \cG{\ln2}.$$
+<p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$.</p>
+<p><b>Étape 2 : Factoriser par $n$.</b></p>
+$$\frac1{n + k} = \frac1n\cdot\frac1{1 + k/n}.$$
+<p><b>Étape 3 : Reconnaître $f$.</b> $f(x) = \frac1{1 + x}$, continue sur $[0, 1]$.</p>
+<p><b>Étape 4 : La limite.</b></p>
+$$T_n\to\int_0^1\frac{dx}{1 + x} = \big[\ln(1 + x)\big]_0^1 = \cG{\ln2}.$$
+
 <p class="ml">Exemple 3 : un produit, on passe au $\ln$</p>
-$$P_n = \Big(\prod_{k=1}^n\Big(1 + \frac kn\Big)\Big)^{1/n}:\qquad\ln P_n = \frac1n\sum_{k=1}^n\ln\Big(1 + \frac kn\Big)\to\int_0^1\ln(1 + x)\,dx = 2\ln2 - 1.$$
-<p>Donc $P_n\to e^{2\ln2 - 1} = \cG{\frac4e}$ (l'intégrale se calcule par parties, avec la primitive $(1 + x)\ln(1 + x) - x$).</p>
-<p><b>Vitesse</b> : si $f$ est lipschitzienne de constante $K$, l'erreur est majorée par $\frac{K(b - a)^2}{2n}$.</p>
+<p><b>Étape 1 : Rappel.</b> Pour un produit, on passe au $\ln$ pour obtenir une somme : $\ln\prod = \sum\ln$.</p>
+<p><b>Étape 2 : Le logarithme.</b></p>
+$$\ln P_n = \frac1n\sum_{k=1}^n\ln\Big(1 + \frac kn\Big).$$
+<p><b>Étape 3 : Somme de Riemann</b> de $f(x) = \ln(1 + x)$ :</p>
+$$\ln P_n\to\int_0^1\ln(1 + x)\,dx.$$
+<p><b>Étape 4 : L'intégrale</b>, avec la primitive $(1 + x)\ln(1 + x) - x$ (IPP) :</p>
+$$\big[(1 + x)\ln(1 + x) - x\big]_0^1 = 2\ln2 - 1.$$
+<p><b>Étape 5 : On revient avec l'exponentielle.</b></p>
+$$P_n\to e^{2\ln2 - 1} = \cG{\frac4e}.$$
+
 <p class="ml">La méthode des trapèzes <span class="hp">hors programme</span></p>
 $$T_n = \frac{b - a}n\Big[\frac{f(a) + f(b)}2 + \sum_{k=1}^{n-1}f(x_k)\Big],\qquad\Big|T_n - \int_a^bf\Big|\leqslant\frac{(b - a)^3}{12n^2}\sup|f''|\quad(f\ \text{de classe}\ \mathcal C^2).$$
 <p>Elle remplace les rectangles par des trapèzes : l'erreur est en $\frac1{n^2}$ au lieu de $\frac1n$.</p>
@@ -2492,22 +2608,35 @@ $$T_n = \frac{b - a}n\Big[\frac{f(a) + f(b)}2 + \sum_{k=1}^{n-1}f(x_k)\Big],\qqu
 <li><b>Young</b> : pour une <b>limite</b> ou un équivalent (information seulement au voisinage de $a$).</li>
 </ul>
 <p class="ml">Exemple 1 : le signe du reste ($e^x\geqslant1 + x + \frac{x^2}2$ pour $x\geqslant0$)</p>
-<p>Reste intégral pour $\exp$ à l'ordre $2$ entre $0$ et $x$ :</p>
-$$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}{2}\,e^t\,dt.$$
-<p>Pour $0\leqslant t\leqslant x$, la fonction intégrée est positive et les bornes sont dans l'ordre : l'intégrale est positive, d'où $\cG{e^x\geqslant1 + x + \frac{x^2}2}$.</p>
+<p><b>Étape 1 : Rappel.</b> Reste intégral : $f(x) = \sum_{k=0}^n\frac{f^{(k)}(0)}{k!}x^k + \int_0^x\frac{(x - t)^n}{n!}f^{(n+1)}(t)\,dt$.</p>
+<p><b>Étape 2 : On applique à $\exp$, ordre $2$.</b> Toutes les dérivées valent $\exp$, et $e^0 = 1$ :</p>
+$$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}2\,e^t\,dt.$$
+<p><b>Étape 3 : Le signe du reste.</b> Pour $0\leqslant t\leqslant x$ : $(x - t)^2\geqslant0$ et $e^t > 0$, et les bornes sont dans l'ordre. L'intégrale est positive.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geqslant1 + x + \frac{x^2}2}$ pour $x\geqslant0$.</p>
+
 <p class="ml">Exemple 2 : une majoration ($|\sin x - x|\leqslant\frac{|x|^3}6$)</p>
-<p>Taylor-Lagrange pour $\sin$ entre $0$ et $x$, à l'ordre $2$. On a $\sin(0) = 0$, $\sin'(0) = 1$, $\sin''(0) = 0$, et $|\sin'''| = |{-\cos}|\leqslant\cV1$ :</p>
-$$\Big|\sin x - \Big(0 + x + 0\cdot\frac{x^2}2\Big)\Big|\leqslant\frac{|x|^3}{3!}\times\cV1 = \cG{\frac{|x|^3}6}.$$
+<p><b>Étape 1 : Rappel.</b> Taylor-Lagrange : $\big|f(x) - T_n(x)\big|\leqslant\frac{|x|^{n+1}}{(n + 1)!}\sup|f^{(n+1)}|$.</p>
+<p><b>Étape 2 : Le polynôme de Taylor de $\sin$ à l'ordre $2$.</b> $\sin0 = 0$, $\sin'0 = 1$, $\sin''0 = 0$ : $T_2(x) = x$.</p>
+<p><b>Étape 3 : La dérivée troisième.</b> $\sin''' = -\cos$, donc $|\sin'''|\leqslant\cV1$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{|\sin x - x|\leqslant\frac{|x|^3}{3!} = \frac{|x|^3}6}.$$
+
 <p class="ml">Exemple 3 : $e = \sum_{k=0}^{+\infty}\frac1{k!}$</p>
-<p>Taylor-Lagrange pour $\exp$ entre $0$ et $1$ : toutes les dérivées valent $\exp$, et $\sup_{[0, 1]}e^t = e$.</p>
-$$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{1^{n+1}}{(n + 1)!}\cdot\cV e\xrightarrow[n\to+\infty]{}0\qquad\Longrightarrow\qquad\cG{\sum_{k=0}^n\frac1{k!}\to e}.$$
+<p><b>Étape 1 : Rappel.</b> Taylor-Lagrange entre $0$ et $1$ : $\big|f(1) - \sum_{k=0}^n\frac{f^{(k)}(0)}{k!}\big|\leqslant\frac{1}{(n + 1)!}\sup_{[0, 1]}|f^{(n+1)}|$.</p>
+<p><b>Étape 2 : Avec $f = \exp$.</b> $f^{(k)}(0) = 1$ et $\sup_{[0, 1]}e^t = e$ :</p>
+$$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{\cV e}{(n + 1)!}.$$
+<p><b>Étape 3 : La limite.</b> $\frac e{(n + 1)!}\to0$, donc $\cG{\sum_{k=0}^n\frac1{k!}\to e}$.</p>
 
 <h2 id="i-cplx">11. Intégrer une fonction à valeurs complexes</h2>
 <div class="sbox">$$\int_a^bf = \int_a^b\operatorname{Re}f + i\int_a^b\operatorname{Im}f,\qquad\int_a^be^{\lambda t}\,dt = \Big[\frac{e^{\lambda t}}\lambda\Big]_a^b\quad(\lambda\in\mathbb C^*).$$</div>
 <p>Linéarité, Chasles, IPP, changement de variable et $\big|\int f\big|\leqslant\int|f|$ restent vrais. La positivité et la croissance n'ont pas de sens.</p>
 <p class="ml">Exemple : $\int_0^\pi e^t\cos t\,dt$ en une ligne</p>
-$$\int_0^\pi e^t\cos t\,dt = \operatorname{Re}\int_0^\pi e^{(1 + i)t}\,dt = \operatorname{Re}\Big[\frac{e^{(1 + i)t}}{1 + i}\Big]_0^\pi = \operatorname{Re}\Big(\frac{e^\pi e^{i\pi} - 1}{1 + i}\Big) = \operatorname{Re}\Big(\frac{-(e^\pi + 1)(1 - i)}{2}\Big) = \cG{-\frac{e^\pi + 1}2}.$$
-<p>On retrouve le résultat des deux IPP du §6.</p>
+<p><b>Étape 1 : Rappel.</b> $e^t\cos t = \operatorname{Re}\big(e^{(1 + i)t}\big)$, et $\int e^{\lambda t}\,dt = \frac{e^{\lambda t}}\lambda$ pour $\lambda\in\mathbb C^*$.</p>
+<p><b>Étape 2 : On passe en complexe.</b></p>
+$$\int_0^\pi e^t\cos t\,dt = \operatorname{Re}\int_0^\pi e^{(1 + i)t}\,dt = \operatorname{Re}\Big[\frac{e^{(1 + i)t}}{1 + i}\Big]_0^\pi.$$
+<p><b>Étape 3 : Les bornes.</b> $e^{(1 + i)\pi} = e^\pi e^{i\pi} = -e^\pi$ :</p>
+$$\frac{-e^\pi - 1}{1 + i} = \frac{-(e^\pi + 1)(1 - i)}2.$$
+<p><b>Étape 4 : La partie réelle.</b> $\cG{-\frac{e^\pi + 1}2}$, comme avec les deux IPP.</p>
 
 <h2 id="i-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
@@ -2599,23 +2728,40 @@ $$\int_0^\pi e^t\cos t\,dt = \operatorname{Re}\int_0^\pi e^{(1 + i)t}\,dt = \ope
 <p class="ml piege">Piège</p>
 <p>La réciproque est fausse : $\frac1n\to0$ et pourtant $\sum\frac1n$ diverge. Le test $u_n\to0$ ne sert qu'à prouver une <b>divergence</b>.</p>
 <p class="ml">Exemple : la série harmonique diverge</p>
-<p><b>Étape 1.</b> Pour $k\geqslant1$, $\ln(1 + x)\leqslant x$ donne $\ln\big(1 + \frac1k\big)\leqslant\frac1k$, soit $\frac1k\geqslant\ln(k + 1) - \ln k$.</p>
-<p><b>Étape 2.</b> On somme de $k = 1$ à $n$, et ça télescope :</p>
-$$H_n = \sum_{k=1}^n\frac1k\geqslant\sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1 = \ln(n + 1)\xrightarrow[n\to+\infty]{}+\infty.$$
-<p><b>Étape 3.</b> $H_n\to+\infty$ : $\sum\frac1n$ $\cG{\text{diverge}}$ (sans diverger grossièrement).</p>
+<p><b>Étape 1 : Rappel.</b> $\ln(1 + x)\leqslant x$ pour $x > -1$, et une somme télescopique se simplifie : $\sum_{k=1}^n(x_{k+1} - x_k) = x_{n+1} - x_1$.</p>
+<p><b>Étape 2 : Minorer le terme.</b> Avec $x = \frac1k$ :</p>
+$$\frac1k\geqslant\ln\Big(1 + \frac1k\Big) = \ln(k + 1) - \ln k.$$
+<p><b>Étape 3 : Sommer de $k = 1$ à $n$.</b> Ça télescope :</p>
+$$H_n = \sum_{k=1}^n\frac1k\geqslant\ln(n + 1) - \ln1 = \ln(n + 1).$$
+<p><b>Étape 4 : Conclusion.</b> $\ln(n + 1)\to+\infty$, donc $H_n\to+\infty$ : $\cG{\sum\frac1n\ \text{diverge}}$.</p>
+
 <p class="ml">Exemple : $u_n = \cos\frac1n$</p>
-<p>$u_n\to\cos0 = 1\neq0$ : $\sum u_n$ $\cG{\text{diverge grossièrement}}$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $u_n\not\to0$, la série diverge grossièrement.</p>
+<p><b>Étape 2 : La limite du terme.</b> $\frac1n\to0$ et $\cos$ est continue en $0$ : $\cos\frac1n\to\cos0 = 1$.</p>
+<p><b>Étape 3 : Conclusion.</b> $1\neq0$ : $\cG{\sum u_n\ \text{diverge grossièrement}}$.</p>
 
 <h2 id="s-ref">3. Les séries de référence</h2>
 <div class="sbox">$$\textbf{Géométrique}:\ \sum q^n\ \text{CV}\iff|q|\lt1,\qquad\sum_{n=0}^{+\infty}q^n = \frac1{1 - q},\qquad\sum_{n=n_0}^{+\infty}q^n = \frac{q^{n_0}}{1 - q}.$$</div>
 <div class="sbox">$$\textbf{Riemann}:\ \sum_{n\geqslant1}\frac1{n^\alpha}\ \text{CV}\iff\alpha > 1.\qquad\textbf{Exponentielle}:\ \sum_{n=0}^{+\infty}\frac{x^n}{n!} = e^x\ \text{pour tout}\ x\in\mathbb R.$$</div>
 <div class="sbox">$$\textbf{Télescopique}:\ \sum(u_{n+1} - u_n)\ \text{CV}\iff(u_n)\ \text{converge, et alors}\ \sum_{n=0}^{+\infty}(u_{n+1} - u_n) = \lim u_n - u_0.$$</div>
 <p class="ml">Exemple 1 : une géométrique qui ne commence pas à 0</p>
-$$\sum_{n=2}^{+\infty}\frac1{3^n} = \frac{(1/3)^2}{1 - 1/3} = \frac{1/9}{2/3} = \cV{\frac16}.$$
+<p><b>Étape 1 : Rappel.</b> Pour $|q|\lt1$ : $\sum_{n=n_0}^{+\infty}q^n = \frac{q^{n_0}}{1 - q}$ (premier terme sur $1 - q$).</p>
+<p><b>Étape 2 : Les ingrédients.</b> $q = \frac13$, $|q|\lt1$ : la série converge. Premier terme : $\big(\frac13\big)^2 = \frac19$.</p>
+<p><b>Étape 3 : La somme.</b></p>
+$$\sum_{n=2}^{+\infty}\frac1{3^n} = \frac{1/9}{1 - 1/3} = \frac{1/9}{2/3} = \cV{\frac16}.$$
+
 <p class="ml">Exemple 2 : une télescopique</p>
-$$u_n = \frac1{n(n - 1)} = \frac1{n - 1} - \frac1n\ (n\geqslant2):\quad S_N = \sum_{n=2}^N\Big(\frac1{n - 1} - \frac1n\Big) = 1 - \cR{\frac12} + \cR{\frac12} - \cdots - \frac1N = 1 - \frac1N\to\cV1.$$
+<p><b>Étape 1 : Rappel.</b> $\sum(x_{n-1} - x_n)$ converge si et seulement si $(x_n)$ converge, et la somme est $x_{n_0-1} - \lim x_n$.</p>
+<p><b>Étape 2 : Décomposer.</b> $\frac1{n(n - 1)} = \frac1{n - 1} - \frac1n$ pour $n\geqslant2$.</p>
+<p><b>Étape 3 : La somme partielle.</b></p>
+$$S_N = \sum_{n=2}^N\Big(\frac1{n - 1} - \frac1n\Big) = 1 - \cR{\frac12} + \cR{\frac12} - \cdots - \frac1N = 1 - \frac1N.$$
+<p><b>Étape 4 : La limite.</b> $S_N\to\cV1$ : la série converge et sa somme vaut $1$.</p>
+
 <p class="ml">Exemple 3 : une télescopique qui diverge</p>
-$$\sum_{n\geqslant1}\ln\Big(1 + \frac1n\Big) = \sum_{n\geqslant1}\big(\ln(n + 1) - \ln n\big):\quad S_N = \ln(N + 1)\to+\infty,\quad\cG{\text{DV}}.$$
+<p><b>Étape 1 : Rappel.</b> Une série télescopique a la nature de la suite qui télescope.</p>
+<p><b>Étape 2 : Transformer le terme.</b> $\ln\big(1 + \frac1n\big) = \ln(n + 1) - \ln n$.</p>
+<p><b>Étape 3 : La somme partielle.</b> $S_N = \ln(N + 1) - \ln1 = \ln(N + 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $S_N\to+\infty$ : $\cG{\text{DV}}$.</p>
 
 <h2 id="s-pos">4. Les séries à termes positifs : comparer</h2>
 <div class="sbox">$$u_n\geqslant0:\quad(S_n)\ \text{est croissante, donc}\ \sum u_n\ \text{CV}\iff(S_n)\ \text{est majorée}.$$</div>
@@ -2636,58 +2782,104 @@ $$\sum_{n\geqslant1}\ln\Big(1 + \frac1n\Big) = \sum_{n\geqslant1}\big(\ln(n + 1)
 <li>Comparer à une série de référence, le plus souvent Riemann.</li>
 </ol>
 <p class="ml">Exemple 1 : une fraction</p>
-$$\cB{u_n = \frac{n + 3}{n^3 + 1}}\geqslant0,\qquad u_n\sim\frac{n}{n^3} = \cO{\frac1{n^2}}:\quad\text{Riemann}\ \alpha = 2 > 1,\quad\cG{\text{CV}}.$$
+<p><b>Étape 1 : Rappel.</b> Termes positifs : $u_n\sim v_n$ donne la même nature. Riemann : $\sum\frac1{n^\alpha}$ CV $\iff\alpha > 1$.</p>
+<p><b>Étape 2 : Signe.</b> $\cB{u_n = \frac{n + 3}{n^3 + 1}}\geqslant0$.</p>
+<p><b>Étape 3 : Équivalent.</b> On garde les termes dominants en haut et en bas :</p>
+$$u_n\sim\frac n{n^3} = \cO{\frac1{n^2}}.$$
+<p><b>Étape 4 : Conclusion.</b> Riemann avec $\alpha = 2 > 1$ : $\cG{\text{CV}}$.</p>
+
 <p class="ml">Exemple 2 : un développement limité</p>
-$$\cB{u_n = 1 - \cos\frac1n}\geqslant0.\qquad\cos x = 1 - \frac{x^2}2 + o(x^2)\ \Longrightarrow\ u_n = \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\sim\cO{\frac1{2n^2}}:\quad\cG{\text{CV}}.$$
+<p><b>Étape 1 : Rappel.</b> $\cos x = 1 - \frac{x^2}2 + o(x^2)$ en $0$, puis comparaison à Riemann.</p>
+<p><b>Étape 2 : Signe.</b> $\cB{u_n = 1 - \cos\frac1n}\geqslant0$ car $\cos\leqslant1$.</p>
+<p><b>Étape 3 : DL avec $x = \frac1n\to0$.</b></p>
+$$u_n = 1 - \Big(1 - \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\Big) = \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\sim\cO{\frac1{2n^2}}.$$
+<p><b>Étape 4 : Conclusion.</b> Riemann $\alpha = 2$ : $\cG{\text{CV}}$.</p>
+
 <p class="ml">Exemple 3 : un équivalent qui donne la divergence</p>
-$$\cB{u_n = \sin\frac1n}\geqslant0\ (\text{car}\ \tfrac1n\in]0, \pi]),\qquad u_n\sim\cO{\frac1n}:\quad\text{Riemann}\ \alpha = 1,\quad\cG{\text{DV}}.$$
+<p><b>Étape 1 : Rappel.</b> $\sin x\sim x$ en $0$, et $\sum\frac1n$ diverge.</p>
+<p><b>Étape 2 : Signe.</b> $\frac1n\in\left]0, \pi\right]$, donc $\cB{u_n = \sin\frac1n}\geqslant0$.</p>
+<p><b>Étape 3 : Équivalent.</b> $u_n\sim\cO{\frac1n}$.</p>
+<p><b>Étape 4 : Conclusion.</b> Riemann $\alpha = 1$ : $\cG{\text{DV}}$.</p>
+
 <p class="ml">Exemple 4 : la règle « $n^\alpha u_n$ »</p>
-<p>Quand il n'y a pas d'équivalent simple, on montre que $n^\alpha u_n\to0$ avec $\alpha > 1$ : alors $u_n = o\big(\frac1{n^\alpha}\big)$ et la série converge.</p>
-$$\cB{u_n = \frac{\ln n}{n^2}}:\qquad n^{3/2}u_n = \frac{\ln n}{\sqrt n}\to0\ (\text{croissances comparées})\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^{3/2}}}\Big),\ \frac32 > 1:\ \cG{\text{CV}}.$$
-$$\cB{u_n = e^{-\sqrt n}}:\qquad n^2u_n = n^2e^{-\sqrt n} = m^4e^{-m}\ (m = \sqrt n\to+\infty)\to0\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^2}}\Big):\ \cG{\text{CV}}.$$
-<p>Pour montrer une divergence, on montre que $n\,u_n\to+\infty$ : alors $u_n\geqslant\frac1n$ à partir d'un rang.</p>
+<p><b>Étape 1 : Rappel.</b> Si $n^\alpha u_n\to0$ avec $\alpha > 1$, alors $u_n = o\big(\frac1{n^\alpha}\big)$ et $\sum u_n$ converge (termes positifs).</p>
+<p><b>Étape 2 : Premier exemple, $\cB{u_n = \frac{\ln n}{n^2}}$.</b> On choisit $\alpha = \frac32$, entre $1$ et $2$ :</p>
+$$n^{3/2}u_n = \frac{\ln n}{\sqrt n}\to0\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^{3/2}}}\Big):\ \cG{\text{CV}}.$$
+<p><b>Étape 3 : Second exemple, $\cB{u_n = e^{-\sqrt n}}$.</b> On choisit $\alpha = 2$ et on pose $m = \sqrt n$ :</p>
+$$n^2u_n = m^4e^{-m}\xrightarrow[m\to+\infty]{}0\ \Longrightarrow\ u_n = o\Big(\cO{\frac1{n^2}}\Big):\ \cG{\text{CV}}.$$
 
 <h2 id="s-int">5. La comparaison série-intégrale</h2>
 <p>$f$ continue, <b>positive et décroissante</b> sur $[n_0, +\infty[$. Pour $k\geqslant n_0 + 1$ :</p>
 <div class="sbox">$$\int_k^{k+1}f(t)\,dt\leqslant f(k)\leqslant\int_{k-1}^kf(t)\,dt.$$</div>
 <p>La première inégalité vient de $f(t)\leqslant f(k)$ pour $t\in[k, k + 1]$, et la seconde de $f(k)\leqslant f(t)$ pour $t\in[k - 1, k]$. Sur un dessin, ce sont des rectangles de largeur $1$ sous la courbe et au-dessus.</p>
 <p class="ml">Exemple 1 : un équivalent de $H_n = \sum_{k=1}^n\frac1k$</p>
-<p>Avec $f(t) = \frac1t$, on somme l'encadrement :</p>
-$$\sum_{k=1}^n\int_k^{k+1}\frac{dt}t\leqslant H_n\leqslant1 + \sum_{k=2}^n\int_{k-1}^k\frac{dt}t\iff\ln(n + 1)\leqslant H_n\leqslant1 + \ln n.$$
-<p>On divise par $\ln n$ : les deux bornes tendent vers $1$, donc $\cG{H_n\sim\ln n}$.</p>
+<p><b>Étape 1 : Rappel.</b> $f$ décroissante : $\int_k^{k+1}f\leqslant f(k)\leqslant\int_{k-1}^kf$.</p>
+<p><b>Étape 2 : Minorer $H_n$</b> avec $f(t) = \frac1t$ :</p>
+$$H_n\geqslant\sum_{k=1}^n\int_k^{k+1}\frac{dt}t = \int_1^{n+1}\frac{dt}t = \ln(n + 1).$$
+<p><b>Étape 3 : Majorer $H_n$</b> (on garde le terme $k = 1$ à part) :</p>
+$$H_n\leqslant1 + \sum_{k=2}^n\int_{k-1}^k\frac{dt}t = 1 + \ln n.$$
+<p><b>Étape 4 : Diviser par $\ln n$.</b></p>
+$$\frac{\ln(n + 1)}{\ln n}\leqslant\frac{H_n}{\ln n}\leqslant\frac1{\ln n} + 1,$$
+<p>et les deux bornes tendent vers $1$ : $\cG{H_n\sim\ln n}$.</p>
+
 <p class="ml">Exemple 2 : $\sum\frac1{n\ln n}$ (série de Bertrand, <span class="hp">hors programme</span> comme résultat)</p>
-<p>$f(t) = \frac1{t\ln t}$ est positive et décroissante sur $[2, +\infty[$. Par le même encadrement :</p>
-$$\sum_{k=2}^n\frac1{k\ln k}\geqslant\int_2^{n+1}\frac{dt}{t\ln t} = \big[\ln(\ln t)\big]_2^{n+1} = \ln\ln(n + 1) - \ln\ln2\to+\infty:\quad\cG{\text{DV}}.$$
-<p>Résultat général (Bertrand) : $\sum\frac1{n^\alpha(\ln n)^\beta}$ converge si et seulement si $\alpha > 1$, ou $\alpha = 1$ et $\beta > 1$. À redémontrer avec série-intégrale.</p>
+<p><b>Étape 1 : Rappel.</b> $f$ décroissante et positive : $f(k)\geqslant\int_k^{k+1}f$.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = \frac1{t\ln t}$ est positive et décroissante sur $[2, +\infty[$ (le dénominateur croît).</p>
+<p><b>Étape 3 : Minorer.</b> Une primitive est $\ln(\ln t)$ (forme $\frac{u'}u$ avec $u = \ln t$) :</p>
+$$\sum_{k=2}^n\frac1{k\ln k}\geqslant\int_2^{n+1}\frac{dt}{t\ln t} = \ln\ln(n + 1) - \ln\ln2.$$
+<p><b>Étape 4 : Conclusion.</b> Le minorant tend vers $+\infty$ : $\cG{\text{DV}}$.</p>
 
 <h2 id="s-abs">6. L'absolue convergence (termes de signe quelconque)</h2>
 <div class="sbox">$$\sum|u_n|\ \text{converge}\ \Longrightarrow\ \sum u_n\ \text{converge, et}\ \Big|\sum_{n=0}^{+\infty}u_n\Big|\leqslant\sum_{n=0}^{+\infty}|u_n|.$$</div>
 <p>Valable aussi pour des complexes. On étudie $\sum|u_n|$ avec les outils des termes positifs.</p>
 <p class="ml">Exemple 1</p>
-$$\cB{u_n = \frac{\sin n}{n^2}}:\qquad|u_n|\leqslant\cO{\frac1{n^2}},\ \text{Riemann}\ \alpha = 2\ \Longrightarrow\ \sum|u_n|\ \text{CV}\ \Longrightarrow\ \cG{\sum u_n\ \text{CV}}.$$
+<p><b>Étape 1 : Rappel.</b> $\sum|u_n|$ converge $\Rightarrow\sum u_n$ converge.</p>
+<p><b>Étape 2 : Majorer $|u_n|$.</b> $|\sin n|\leqslant1$ :</p>
+$$|u_n| = \frac{|\sin n|}{n^2}\leqslant\cO{\frac1{n^2}}.$$
+<p><b>Étape 3 : Conclusion.</b> Riemann $\alpha = 2$ : $\sum|u_n|$ converge, donc $\cG{\sum\frac{\sin n}{n^2}\ \text{CV}}$.</p>
+
 <p class="ml">Exemple 2 : une série complexe</p>
-$$\cB{u_n = \frac{(1 + i)^n}{3^n}}:\qquad|u_n| = \Big(\frac{\sqrt2}3\Big)^n,\ \frac{\sqrt2}3\lt1\ \Longrightarrow\ \cG{\text{CV absolument}},\qquad\sum_{n=0}^{+\infty}u_n = \frac1{1 - \frac{1 + i}3} = \cV{\frac3{2 - i}}.$$
+<p><b>Étape 1 : Rappel.</b> Série géométrique complexe : converge si $|q|\lt1$, de somme $\frac1{1 - q}$.</p>
+<p><b>Étape 2 : Le module de la raison.</b> $q = \frac{1 + i}3$, $|q| = \frac{\sqrt2}3\lt1$ : convergence absolue.</p>
+<p><b>Étape 3 : La somme.</b></p>
+$$\sum_{n=0}^{+\infty}\Big(\frac{1 + i}3\Big)^n = \frac1{1 - \frac{1 + i}3} = \frac3{3 - 1 - i} = \cV{\frac3{2 - i}}.$$
+
 <p class="ml piege">Piège</p>
 <p>La réciproque est fausse : $\sum\frac{(-1)^n}n$ converge (§7) mais $\sum\frac1n$ diverge. On dit qu'elle est <b>semi-convergente</b>.</p>
 
 <h2 id="s-alt">7. Les séries alternées <span class="hp">programme de Spé</span></h2>
 <div class="sbox">$$\textbf{Critère spécial}:\ (a_n)\ \text{décroissante et}\ a_n\to0\ \Longrightarrow\ \sum(-1)^na_n\ \text{converge},\quad|R_n|\leqslant a_{n+1},\quad R_n\ \text{a le signe de}\ (-1)^{n+1}.$$</div>
 <p class="ml">Exemple 1 : $\sum\frac{(-1)^n}n$</p>
-<p>$a_n = \frac1n$ est décroissante et tend vers $0$ : $\cG{\text{CV}}$. Mais $\sum\frac1n$ diverge : la convergence n'est pas absolue.</p>
+<p><b>Étape 1 : Rappel.</b> Critère spécial : $(a_n)$ décroissante de limite $0$ $\Rightarrow\sum(-1)^na_n$ converge.</p>
+<p><b>Étape 2 : Les hypothèses.</b> $a_n = \frac1n$ est positive, décroissante, de limite $0$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\sum\frac{(-1)^n}n\ \text{CV}}$.</p>
+<p><b>Étape 4 : Pas absolument.</b> $\sum\big|\frac{(-1)^n}n\big| = \sum\frac1n$ diverge : la série est semi-convergente.</p>
+
 <p class="ml">Exemple 2 : le piège du développement limité</p>
-$$\cB{u_n = \ln\Big(1 + \frac{(-1)^n}{\sqrt n}\Big)}\quad(n\geqslant2).$$
-<p>$u_n$ n'est pas de signe constant et $|u_n|\sim\frac1{\sqrt n}$ : pas d'absolue convergence. On développe avec $\ln(1 + x) = x - \frac{x^2}2 + O(x^3)$ et $x = \frac{(-1)^n}{\sqrt n}$ :</p>
-$$u_n = \underbrace{\frac{(-1)^n}{\sqrt n}}_{\text{CV (critère spécial)}} - \underbrace{\frac1{2n}}_{\text{DV}} + \underbrace{O\Big(\frac1{n^{3/2}}\Big)}_{\text{CV absolument}}.$$
-<p>Somme de deux séries convergentes et d'une divergente : $\sum u_n$ $\cG{\text{diverge}}$, alors que $u_n\sim\frac{(-1)^n}{\sqrt n}$. Avec des termes de signe variable, <b>un équivalent ne suffit pas</b>.</p>
+<p><b>Étape 1 : Rappel.</b> Avec un signe variable, un équivalent ne suffit pas : on fait un DL jusqu'à un reste absolument convergent.</p>
+<p><b>Étape 2 : Le DL</b> de $\ln(1 + x) = x - \frac{x^2}2 + O(x^3)$ avec $x = \frac{(-1)^n}{\sqrt n}\to0$ (et $x^2 = \frac1n$) :</p>
+$$u_n = \frac{(-1)^n}{\sqrt n} - \frac1{2n} + O\Big(\frac1{n^{3/2}}\Big).$$
+<p><b>Étape 3 : Chaque morceau.</b></p>
+<ul><li>$\sum\frac{(-1)^n}{\sqrt n}$ : CV (critère spécial).</li><li>$\sum\frac1{2n}$ : DV.</li><li>$\sum O\big(\frac1{n^{3/2}}\big)$ : CV absolument (Riemann $\frac32 > 1$).</li></ul>
+<p><b>Étape 4 : Conclusion.</b> CV $-$ DV $+$ CV $=$ DV : $\cG{\sum u_n\ \text{diverge}}$, alors que $u_n\sim\frac{(-1)^n}{\sqrt n}$.</p>
 
 <h2 id="s-dal">8. La règle de d'Alembert <span class="hp">programme de Spé</span></h2>
 <div class="sbox">$$u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell:\qquad\ell\lt1\Rightarrow\cG{\text{CV}},\qquad\ell > 1\Rightarrow\cG{\text{DV grossièrement}},\qquad\ell = 1\Rightarrow\text{on ne peut rien dire}.$$</div>
 <p>Elle est faite pour les <b>factorielles et les puissances $n$-ièmes</b>. Pour les fractions et les puissances de $n$, on trouve $\ell = 1$ : utiliser Riemann.</p>
 <p class="ml">Exemple 1 : $u_n = \frac{n^2}{2^n}$</p>
-$$\frac{u_{n+1}}{u_n} = \frac{(n + 1)^2}{2^{n+1}}\cdot\frac{2^n}{n^2} = \frac12\Big(\frac{n + 1}n\Big)^2\to\frac12\lt1:\quad\cG{\text{CV}}.$$
+<p><b>Étape 1 : Rappel.</b> D'Alembert : $\frac{u_{n+1}}{u_n}\to\ell\lt1\Rightarrow$ CV.</p>
+<p><b>Étape 2 : Le rapport.</b></p>
+$$\frac{u_{n+1}}{u_n} = \frac{(n + 1)^2}{2^{n+1}}\cdot\frac{2^n}{n^2} = \frac12\Big(\frac{n + 1}n\Big)^2.$$
+<p><b>Étape 3 : La limite.</b> $\frac{n + 1}n\to1$, donc le rapport tend vers $\frac12\lt1$ : $\cG{\text{CV}}$.</p>
+
 <p class="ml">Exemple 2 : $u_n = \frac{n!}{n^n}$</p>
+<p><b>Étape 1 : Rappel.</b> D'Alembert, et $(n + 1)! = (n + 1)\,n!$.</p>
+<p><b>Étape 2 : Le rapport.</b></p>
 $$\frac{u_{n+1}}{u_n} = \frac{(n + 1)!}{(n + 1)^{n+1}}\cdot\frac{n^n}{n!} = \frac{(n + 1)\,n^n}{(n + 1)^{n+1}} = \Big(\frac n{n + 1}\Big)^n = \Big(1 + \frac1n\Big)^{-n}.$$
-$$\Big(1 + \frac1n\Big)^{-n} = e^{-n\ln(1 + 1/n)} = e^{-n(\frac1n + o(\frac1n))} = e^{-1 + o(1)}\to\frac1e\lt1:\quad\cG{\text{CV}}.$$
+<p><b>Étape 3 : La limite</b>, avec $\ln(1 + x) = x + o(x)$ :</p>
+$$\Big(1 + \frac1n\Big)^{-n} = e^{-n\ln(1 + 1/n)} = e^{-1 + o(1)}\to\frac1e.$$
+<p><b>Étape 4 : Conclusion.</b> $\frac1e\lt1$ : $\cG{\text{CV}}$.</p>
+
 <p class="ml">La règle de Cauchy <span class="hp">hors programme</span></p>
 <p>Si $\sqrt[n]{u_n}\to\ell$ : $\ell\lt1$ donne CV, $\ell > 1$ donne DV, $\ell = 1$ ne permet pas de conclure. Utile quand tout est à la puissance $n$ :</p>
 $$u_n = \Big(\frac n{2n + 1}\Big)^n:\qquad\sqrt[n]{u_n} = \frac n{2n + 1}\to\frac12\lt1:\quad\cG{\text{CV}}.$$
@@ -2697,21 +2889,35 @@ $$u_n = \Big(\frac n{2n + 1}\Big)^n:\qquad\sqrt[n]{u_n} = \frac n{2n + 1}\to\fra
 <div class="sbox">$$\sum v_n\ \text{DV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=0}^nu_k\sim\sum_{k=0}^nv_k,\qquad\sum v_n\ \text{CV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=n+1}^{+\infty}u_k\sim\sum_{k=n+1}^{+\infty}v_k.$$</div>
 <p>Même chose avec $o$ et $O$. Divergence : on compare les <b>sommes partielles</b> ; convergence : on compare les <b>restes</b>.</p>
 <p class="ml">Exemple : le reste de $\sum\frac1{k^2}$</p>
-<p>$\frac1{k^2}\sim\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k$, termes positifs, série convergente. On compare les restes, et celui de droite télescope :</p>
-$$R_n = \sum_{k=n+1}^{+\infty}\frac1{k^2}\sim\sum_{k=n+1}^{+\infty}\Big(\frac1{k - 1} - \frac1k\Big) = \frac1n:\qquad\cG{R_n\sim\frac1n}.$$
+<p><b>Étape 1 : Rappel.</b> Termes positifs, série convergente : $u_n\sim v_n\Rightarrow\sum_{k > n}u_k\sim\sum_{k > n}v_k$.</p>
+<p><b>Étape 2 : Un équivalent télescopique.</b> $\frac1{k^2}\sim\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k$.</p>
+<p><b>Étape 3 : Le reste de la série télescopique.</b></p>
+$$\sum_{k=n+1}^{+\infty}\Big(\frac1{k - 1} - \frac1k\Big) = \frac1n.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{R_n = \sum_{k=n+1}^{+\infty}\frac1{k^2}\sim\frac1n}$.</p>
 
 <h2 id="s-calc">10. Calculer la somme</h2>
 <p>On ne connaît la somme que pour quelques familles : télescopique, géométrique, exponentielle (et leurs dérivées). On ramène $u_n$ à l'une d'elles.</p>
 <p class="ml">Exemple 1 : décomposer pour télescoper</p>
-$$\cB{u_n = \frac1{n(n + 1)(n + 2)}} = \frac12\Big(\frac1{n(n + 1)} - \frac1{(n + 1)(n + 2)}\Big).$$
-<p>On le vérifie en réduisant au même dénominateur : $\frac{(n + 2) - n}{n(n + 1)(n + 2)} = \frac2{n(n + 1)(n + 2)}$. C'est une télescopique avec $w_n = \frac1{n(n + 1)}\to0$ :</p>
-$$\sum_{n=1}^{+\infty}u_n = \frac12\big(w_1 - \lim w_n\big) = \frac12\cdot\frac1{1\times2} = \cV{\frac14}.$$
+<p><b>Étape 1 : Rappel.</b> On décompose pour obtenir une différence de termes consécutifs $w_n - w_{n+1}$, puis $\sum_{n\geqslant1}(w_n - w_{n+1}) = w_1 - \lim w_n$.</p>
+<p><b>Étape 2 : La décomposition.</b></p>
+$$\frac1{n(n + 1)(n + 2)} = \frac12\Big(\frac1{n(n + 1)} - \frac1{(n + 1)(n + 2)}\Big).$$
+<p><b>Étape 3 : Vérification.</b> Même dénominateur : $\frac{(n + 2) - n}{n(n + 1)(n + 2)} = \frac2{n(n + 1)(n + 2)}$.</p>
+<p><b>Étape 4 : Télescoper</b> avec $w_n = \frac1{n(n + 1)}\to0$ :</p>
+$$\sum_{n=1}^{+\infty}u_n = \frac12\big(w_1 - 0\big) = \frac12\cdot\frac1{1\times2} = \cV{\frac14}.$$
+
 <p class="ml">Exemple 2 : se ramener à l'exponentielle</p>
-$$\sum_{n=0}^{+\infty}\frac{n + 1}{n!} = \sum_{n=1}^{+\infty}\frac{n}{n!} + \sum_{n=0}^{+\infty}\frac1{n!} = \sum_{n=1}^{+\infty}\frac1{(n - 1)!} + e\ \underset{\cO{m = n - 1}}{=}\ \sum_{m=0}^{+\infty}\frac1{m!} + e = \cV{2e}.$$
-<p>On a utilisé $\frac n{n!} = \frac1{(n - 1)!}$ pour $n\geqslant1$ (le terme $n = 0$ est nul), puis un décalage d'indice.</p>
+<p><b>Étape 1 : Rappel.</b> $\sum_{n=0}^{+\infty}\frac1{n!} = e$, et $\frac n{n!} = \frac1{(n - 1)!}$ pour $n\geqslant1$.</p>
+<p><b>Étape 2 : On coupe la somme.</b></p>
+$$\sum_{n=0}^{+\infty}\frac{n + 1}{n!} = \sum_{n=0}^{+\infty}\frac n{n!} + \sum_{n=0}^{+\infty}\frac1{n!}.$$
+<p><b>Étape 3 : La première somme.</b> Le terme $n = 0$ est nul, puis $\frac n{n!} = \frac1{(n - 1)!}$ et $\cO{m = n - 1}$ :</p>
+$$\sum_{n=1}^{+\infty}\frac1{(n - 1)!} = \sum_{m=0}^{+\infty}\frac1{m!} = e.$$
+<p><b>Étape 4 : Conclusion.</b> $e + e = \cV{2e}$.</p>
+
 <p class="ml">Exemple 3 : dériver la série géométrique</p>
-<p>Pour $|x|\lt1$, $\sum_{n=1}^{+\infty}nx^{n-1} = \frac1{(1 - x)^2}$ (on l'admet ici, c'est le cours de Spé sur les séries entières). Avec $x = \frac12$ :</p>
-$$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\sum_{n=1}^{+\infty}n\Big(\frac12\Big)^{n-1} = \frac12\cdot\frac1{(1/2)^2} = \cV2.$$
+<p><b>Étape 1 : Rappel.</b> Pour $|x|\lt1$ : $\sum_{n=1}^{+\infty}nx^{n-1} = \frac1{(1 - x)^2}$ (dérivée de $\frac1{1 - x}$, admise ici, cours de Spé).</p>
+<p><b>Étape 2 : Faire apparaître $nx^{n-1}$.</b> $\frac n{2^n} = \frac12\cdot n\Big(\frac12\Big)^{n-1}$.</p>
+<p><b>Étape 3 : On applique avec $x = \frac12$.</b></p>
+$$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\cdot\frac1{(1 - 1/2)^2} = \frac12\cdot4 = \cV2.$$
 
 <h2 id="s-plan">11. Le plan d'attaque, dans l'ordre</h2>
 <ol>
@@ -2825,17 +3031,36 @@ $$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\sum_{n=1}^{+\infty}n\Big(\frac12\Bi
 <tr><td>Limite</td><td>oui : deux fonctions équivalentes ont la même limite</td></tr>
 </table>
 <p class="ml">Exemple 1 : un quotient</p>
-$$\frac{\sin(3x)\,(e^{2x} - 1)}{x\,\ln(1 + x)}\underset{0}{\sim}\frac{3x\cdot2x}{x\cdot x} = 6\qquad\Longrightarrow\qquad\cG{\text{la limite en}\ 0\ \text{vaut}\ 6}.$$
+<p><b>Étape 1 : Rappel.</b> Les équivalents passent aux produits et aux quotients. En $0$ : $\sin u\sim u$, $e^u - 1\sim u$, $\ln(1 + u)\sim u$.</p>
+<p><b>Étape 2 : Chaque facteur.</b></p>
+$$\sin(3x)\sim3x,\qquad e^{2x} - 1\sim2x,\qquad\ln(1 + x)\sim x.$$
+<p><b>Étape 3 : On remplace</b> dans le quotient :</p>
+$$\frac{\sin(3x)\,(e^{2x} - 1)}{x\,\ln(1 + x)}\sim\frac{3x\cdot2x}{x\cdot x} = 6.$$
+<p><b>Étape 4 : Conclusion.</b> Deux fonctions équivalentes ont la même limite : $\cG{\text{la limite vaut}\ 6}$.</p>
+
 <p class="ml">Exemple 2 : une somme, on factorise par le terme dominant</p>
-$$f(x) = x^3 + 2x - \sqrt x\ \text{en}\ +\infty:\qquad f(x) = \cB{x^3}\Big(1 + \frac2{x^2} - \frac1{x^{5/2}}\Big),\quad\text{et la parenthèse}\to1,\ \text{donc}\ \cG{f(x)\sim x^3}.$$
+<p><b>Étape 1 : Rappel.</b> On n'additionne pas des équivalents : on factorise par le terme dominant.</p>
+<p><b>Étape 2 : Le terme dominant en $+\infty$.</b> $x^3$ domine $2x$ et $\sqrt x$.</p>
+<p><b>Étape 3 : On factorise.</b></p>
+$$f(x) = \cB{x^3}\Big(1 + \frac2{x^2} - \frac1{x^{5/2}}\Big).$$
+<p><b>Étape 4 : La parenthèse tend vers $1$</b>, donc $\cG{f(x)\sim x^3}$.</p>
+
 <p class="ml">Exemple 3 : un $\ln$ (on ne compose pas, on factorise)</p>
-$$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \cR{\ln\Big(1 + \frac1x\Big)} = 2\ln x + o(1)\underset{+\infty}{\sim}\cG{2\ln x}.$$
+<p><b>Étape 1 : Rappel.</b> On ne compose pas un équivalent par $\ln$ : on factorise dans le $\ln$, puis $\ln(ab) = \ln a + \ln b$.</p>
+<p><b>Étape 2 : Factoriser.</b></p>
+$$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \ln\Big(1 + \frac1x\Big).$$
+<p><b>Étape 3 : Le second morceau</b> tend vers $\ln1 = 0$ : c'est $\cR{o(1)}$, négligeable devant $2\ln x\to+\infty$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\ln(x^2 + x)\sim2\ln x}$.</p>
 
 <h2 id="l-croiss">3. Les croissances comparées</h2>
 <div class="sbox">$$\alpha, \beta, \gamma > 0:\qquad(\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty,\qquad x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0.$$</div>
 <div class="sbox">$$\text{Suites}:\quad(\ln n)^\gamma\ll n^\alpha\ll a^n\ (a > 1)\ll n!\ll n^n.$$</div>
 <p class="ml">Exemple</p>
-$$\frac{n^{10} + 2^n}{3^n - n!}\underset{+\infty}{\sim}\frac{\cB{2^n}}{\cB{-n!}} = -\frac{2^n}{n!}\to\cG0.$$
+<p><b>Étape 1 : Rappel.</b> Croissances comparées : $n^\alpha\ll a^n\ll n!$.</p>
+<p><b>Étape 2 : Le numérateur.</b> $2^n$ domine $n^{10}$ : $n^{10} + 2^n\sim\cB{2^n}$.</p>
+<p><b>Étape 3 : Le dénominateur.</b> $n!$ domine $3^n$ : $3^n - n!\sim\cB{-n!}$.</p>
+<p><b>Étape 4 : Le quotient.</b></p>
+$$\frac{n^{10} + 2^n}{3^n - n!}\sim-\frac{2^n}{n!}\to\cG0.$$
 
 <h2 id="l-dl">4. Les développements limités</h2>
 <div class="sbox">$$f\ \text{admet un}\ DL_n(a)\iff f(x) = \underbrace{c_0 + c_1(x - a) + \cdots + c_n(x - a)^n}_{\text{partie régulière}} + o\big((x - a)^n\big).$$</div>
@@ -2910,8 +3135,12 @@ $$\sqrt{x^2 + x + 1} = x\sqrt{1 + \cO{\frac1x + \frac1{x^2}}}\quad(x > 0)\qquad\
 <li>Si à la fin tout s'annule, on n'est pas allé assez loin : on recommence à l'ordre suivant.</li>
 </ul>
 <p class="ml">Exemple : $\frac{\sin x - x}{x^3}$</p>
-<p>Le dénominateur est déjà $x^3$ : on développe $\sin$ à l'ordre $3$. À l'ordre $1$, on aurait $\sin x - x = o(x)$, qui ne dit rien.</p>
-$$\frac{\sin x - x}{x^3} = \frac{x - \frac{x^3}6 + o(x^3) - x}{x^3} = -\frac16 + o(1)\ \longrightarrow\ \cG{-\frac16}.$$
+<p><b>Étape 1 : Rappel.</b> $\sin x = x - \frac{x^3}6 + o(x^3)$. On développe au même ordre que la puissance du dénominateur.</p>
+<p><b>Étape 2 : L'ordre.</b> Le dénominateur est $x^3$ : ordre $3$. À l'ordre $1$, on n'aurait que $\sin x - x = o(x)$, inutile.</p>
+<p><b>Étape 3 : Le numérateur.</b></p>
+$$\sin x - x = x - \frac{x^3}6 + o(x^3) - x = -\frac{x^3}6 + o(x^3).$$
+<p><b>Étape 4 : On divise par $x^3$.</b></p>
+$$\frac{\sin x - x}{x^3} = -\frac16 + o(1)\ \longrightarrow\ \cG{-\frac16}.$$
 
 <h2 id="l-lim">8. Calculer une limite</h2>
 <ol>
@@ -2920,19 +3149,36 @@ $$\frac{\sin x - x}{x^3} = \frac{x - \frac{x^3}6 + o(x^3) - x}{x^3} = -\frac16 +
 <li>Pour $u^v$ : écrire $e^{v\ln u}$.</li>
 </ol>
 <p class="ml">Exemple 1 : $\lim_{x\to0}\frac{e^x - 1 - x}{x^2}$</p>
-$$e^x - 1 - x = \cR{1 + x} + \cB{\frac{x^2}2} + o(x^2)\cR{{} - 1 - x} = \frac{x^2}2 + o(x^2)\qquad\Longrightarrow\qquad\frac{e^x - 1 - x}{x^2}\to\cG{\frac12}.$$
+<p><b>Étape 1 : Rappel.</b> $e^x = 1 + x + \frac{x^2}2 + o(x^2)$.</p>
+<p><b>Étape 2 : L'ordre.</b> Dénominateur $x^2$ : ordre $2$.</p>
+<p><b>Étape 3 : Le numérateur.</b> Les termes $1$ et $x$ se compensent :</p>
+$$e^x - 1 - x = \cR{1 + x} + \cB{\frac{x^2}2} + o(x^2)\cR{{} - 1 - x} = \frac{x^2}2 + o(x^2).$$
+<p><b>Étape 4 : On divise par $x^2$.</b> $\frac{e^x - 1 - x}{x^2} = \frac12 + o(1)\to\cG{\frac12}$.</p>
+
 <p class="ml">Exemple 2 : $\lim_{x\to0}\Big(\frac1{\sin^2x} - \frac1{x^2}\Big)$</p>
-<p><b>Étape 1 : même dénominateur.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\sin x = x - \frac{x^3}6 + o(x^3)$. Pour un quotient : équivalent du dénominateur, puis numérateur au même ordre.</p>
+<p><b>Étape 2 : Même dénominateur.</b></p>
 $$\frac1{\sin^2x} - \frac1{x^2} = \frac{x^2 - \sin^2x}{x^2\sin^2x}.$$
-<p><b>Étape 2 : le dénominateur.</b> $x^2\sin^2x\sim x^2\cdot x^2 = x^4$ : il faut le numérateur à l'ordre $4$.</p>
-<p><b>Étape 3 : le numérateur.</b></p>
-$$\sin^2x = \Big(x - \frac{x^3}6 + o(x^3)\Big)^2 = x^2 - 2\cdot x\cdot\frac{x^3}6 + o(x^4) = x^2 - \frac{x^4}3 + o(x^4),\qquad x^2 - \sin^2x = \frac{x^4}3 + o(x^4).$$
-<p><b>Étape 4.</b></p>
-$$\frac{x^2 - \sin^2x}{x^2\sin^2x}\sim\frac{x^4/3}{x^4} = \frac13\qquad\Longrightarrow\qquad\text{la limite vaut}\ \cG{\frac13}.$$
+<p><b>Étape 3 : Le dénominateur.</b> $x^2\sin^2x\sim x^2\cdot x^2 = x^4$ : il faut le numérateur à l'ordre $4$.</p>
+<p><b>Étape 4 : $\sin^2x$ à l'ordre $4$.</b> On garde les termes de degré $\leqslant4$ :</p>
+$$\sin^2x = \Big(x - \frac{x^3}6\Big)^2 + o(x^4) = x^2 - 2\cdot x\cdot\frac{x^3}6 + o(x^4) = x^2 - \frac{x^4}3 + o(x^4).$$
+<p><b>Étape 5 : Le numérateur.</b> $x^2 - \sin^2x = \frac{x^4}3 + o(x^4)$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\frac{x^2 - \sin^2x}{x^2\sin^2x}\sim\frac{x^4/3}{x^4} = \frac13\qquad\Longrightarrow\qquad\cG{\text{la limite vaut}\ \frac13}.$$
+
 <p class="ml">Exemple 3 : une forme $1^\infty$</p>
-$$\Big(1 + \frac ax\Big)^x = e^{x\ln(1 + a/x)} = e^{x\left(\frac ax + o\left(\frac1x\right)\right)} = e^{a + o(1)}\xrightarrow[x\to+\infty]{}\cG{e^a}.$$
+<p><b>Étape 1 : Rappel.</b> Pour $u^v$ : $u^v = e^{v\ln u}$, puis $\ln(1 + h) = h + o(h)$.</p>
+<p><b>Étape 2 : On écrit avec l'exponentielle.</b></p>
+$$\Big(1 + \frac ax\Big)^x = e^{x\ln(1 + a/x)}.$$
+<p><b>Étape 3 : L'exposant</b>, avec $h = \frac ax\to0$ :</p>
+$$x\ln\Big(1 + \frac ax\Big) = x\Big(\frac ax + o\Big(\frac1x\Big)\Big) = a + o(1).$$
+<p><b>Étape 4 : Conclusion</b> ($\exp$ est continue) : $\cG{\Big(1 + \frac ax\Big)^x\to e^a}$.</p>
+
 <p class="ml">Exemple 4 : un équivalent par DL</p>
-$$\operatorname{ch}x - \cos x = \Big(1 + \frac{x^2}2\Big) - \Big(1 - \frac{x^2}2\Big) + o(x^2) = x^2 + o(x^2)\qquad\Longrightarrow\qquad\cG{\operatorname{ch}x - \cos x\underset0\sim x^2}.$$
+<p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = 1 + \frac{x^2}2 + o(x^2)$, $\cos x = 1 - \frac{x^2}2 + o(x^2)$. Le premier terme non nul du DL donne l'équivalent.</p>
+<p><b>Étape 2 : La différence.</b></p>
+$$\operatorname{ch}x - \cos x = \Big(1 + \frac{x^2}2\Big) - \Big(1 - \frac{x^2}2\Big) + o(x^2) = x^2 + o(x^2).$$
+<p><b>Étape 3 : Conclusion.</b> $\cG{\operatorname{ch}x - \cos x\sim x^2}$ en $0$.</p>
 
 <h2 id="l-geo">9. Tangente, extremum, asymptote</h2>
 <p class="ml">Tangente et position</p>
@@ -2956,9 +3202,14 @@ $$f(x) = \cB{x + \frac12} + \frac3{8x} + o\Big(\frac1x\Big).$$
 
 <h2 id="l-suites">10. Développement asymptotique d'une suite</h2>
 <p class="ml">Exemple : $u_n = \big(1 + \frac1n\big)^n$, à deux termes</p>
+<p><b>Étape 1 : Rappel.</b> $\ln(1 + h) = h - \frac{h^2}2 + o(h^2)$ et $e^h = 1 + h + o(h)$.</p>
+<p><b>Étape 2 : Le logarithme</b>, avec $h = \frac1n$ :</p>
 $$\ln u_n = n\ln\Big(1 + \frac1n\Big) = n\Big(\frac1n - \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\Big) = 1 - \frac1{2n} + o\Big(\frac1n\Big).$$
-$$u_n = e\cdot e^{-\frac1{2n} + o(\frac1n)} = e\Big(1 - \frac1{2n} + o\Big(\frac1n\Big)\Big) = \cG{e - \frac e{2n} + o\Big(\frac1n\Big)}.$$
-<p>On en déduit $e - u_n\sim\frac e{2n}$ : la convergence vers $e$ est lente.</p>
+<p><b>Étape 3 : On repasse à l'exponentielle.</b></p>
+$$u_n = e\cdot e^{-\frac1{2n} + o(\frac1n)} = e\Big(1 - \frac1{2n} + o\Big(\frac1n\Big)\Big).$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{u_n = e - \frac e{2n} + o\Big(\frac1n\Big)},\qquad\text{donc}\ e - u_n\sim\frac e{2n}.$$
+
 <p class="ml">Les grandes étapes, en général</p>
 <ol>
 <li>Trouver la limite (ou un équivalent) de $u_n$.</li>
@@ -3057,21 +3308,36 @@ $$u_n = e\cdot e^{-\frac1{2n} + o(\frac1n)} = e\Big(1 - \frac1{2n} + o\Big(\frac
 <li>Règle pratique en $+\infty$ : si $t^\alpha|f(t)|\to0$ avec $\alpha > 1$, alors $f$ est intégrable en $+\infty$.</li>
 </ol>
 <p class="ml">Exemple 1 : $f(t) = \frac{\sin t}t$ sur $\left]0, 1\right]$</p>
-<p>$f(t)\to1$ quand $t\to0$ : $f$ se prolonge par continuité, c'est un <b>faux problème</b>. Intégrable sur $\left]0, 1\right]$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $f$ a une limite finie en une borne ouverte, c'est un faux problème : $f$ se prolonge par continuité.</p>
+<p><b>Étape 2 : La limite en $0$.</b> $\sin t\sim t$, donc $\frac{\sin t}t\to1$.</p>
+<p><b>Étape 3 : Conclusion.</b> $f$ se prolonge par continuité sur $[0, 1]$ : $\cG{\text{intégrable sur}\ \left]0, 1\right]}$.</p>
+
 <p class="ml">Exemple 2 : $f(t) = \frac{\ln t}{\sqrt t}e^{-t}$ sur $\left]0, +\infty\right[$</p>
-<p>$f$ est continue sur $\left]0, +\infty\right[$. Deux points à problème : $\cR0$ et $\cR{+\infty}$.</p>
-<p><b>En $0$</b> : on cherche $\alpha\lt1$ avec $t^\alpha|f(t)|\to0$. Avec $\alpha = \frac34$ :</p>
-$$t^{3/4}|f(t)| = t^{1/4}|\ln t|\,e^{-t}\xrightarrow[t\to0]{}0\ (\text{croissances comparées})\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^{3/4}}}\Big),\ \frac34\lt1:\ \text{intégrable en}\ 0.$$
-<p><b>En $+\infty$</b> :</p>
-$$t^2|f(t)| = t^{3/2}\ln t\,e^{-t}\xrightarrow[t\to+\infty]{}0\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^2}}\Big):\ \text{intégrable en}\ +\infty.$$
-<p>Donc $\cG{f\ \text{est intégrable sur}\ \left]0, +\infty\right[}$.</p>
+<p><b>Étape 1 : Rappel.</b> On traite chaque point à problème séparément. En $0$ : si $t^\alpha|f|\to0$ avec $\alpha\lt1$, intégrable. En $+\infty$ : avec $\alpha > 1$.</p>
+<p><b>Étape 2 : Les points à problème.</b> $f$ est continue sur $\left]0, +\infty\right[$ : on regarde $\cR0$ et $\cR{+\infty}$.</p>
+<p><b>Étape 3 : En $0$</b>, avec $\alpha = \frac34\lt1$ :</p>
+$$t^{3/4}|f(t)| = t^{1/4}|\ln t|\,e^{-t}\to0\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^{3/4}}}\Big):\ \text{intégrable en}\ 0.$$
+<p><b>Étape 4 : En $+\infty$</b>, avec $\alpha = 2 > 1$ :</p>
+$$t^2|f(t)| = t^{3/2}\ln t\,e^{-t}\to0\ \Longrightarrow\ |f(t)| = o\Big(\cV{\frac1{t^2}}\Big):\ \text{intégrable en}\ +\infty.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est intégrable sur}\ \left]0, +\infty\right[}$.</p>
+
 <p class="ml">Exemple 3 : convergente mais pas intégrable</p>
-<p>$\int_1^{+\infty}\frac{\sin t}t\,dt$ converge (IPP : $\big[-\frac{\cos t}t\big] - \int\frac{\cos t}{t^2}$, et le second terme est intégrable), mais $\frac{|\sin t|}t\geqslant\frac{\sin^2t}t = \frac1{2t} - \frac{\cos2t}{2t}$ n'est pas intégrable. Les théorèmes de ce chapitre demandent l'<b>intégrabilité</b>.</p>
+<p><b>Étape 1 : Rappel.</b> Intégrable $\Rightarrow$ convergente, mais pas l'inverse.</p>
+<p><b>Étape 2 : La convergence</b>, par IPP sur $[1, x]$ :</p>
+$$\int_1^x\frac{\sin t}t\,dt = \Big[-\frac{\cos t}t\Big]_1^x - \int_1^x\frac{\cos t}{t^2}\,dt.$$
+<p>Le crochet a une limite et $\frac{|\cos t|}{t^2}\leqslant\frac1{t^2}$ est intégrable : l'intégrale converge.</p>
+<p><b>Étape 3 : La non-intégrabilité.</b> $|\sin t|\geqslant\sin^2t = \frac{1 - \cos2t}2$ :</p>
+$$\frac{|\sin t|}t\geqslant\frac1{2t} - \frac{\cos2t}{2t}.$$
+<p>Le premier morceau n'est pas intégrable en $+\infty$, le second a une intégrale convergente (même IPP) : $\cG{\frac{\sin t}t\ \text{n'est pas intégrable}}$.</p>
 
 <h2 id="p-calc">4. Calculer une intégrale sur un intervalle</h2>
 <p>On calcule sur un segment $[a, x]$, puis on fait tendre $x$ vers la borne. On peut aussi faire une IPP ou un changement de variable directement, à condition que <b>les crochets aient une limite finie</b>.</p>
 <p class="ml">Exemple : $\int_0^{+\infty}t\,e^{-t}\,dt$</p>
-$$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}\xrightarrow[x\to+\infty]{}\cG1.$$
+<p><b>Étape 1 : Rappel.</b> On calcule sur $[0, x]$, puis on fait tendre $x$ vers $+\infty$.</p>
+<p><b>Étape 2 : IPP sur $[0, x]$</b> ($u = t$, $v' = e^{-t}$, $v = -e^{-t}$) :</p>
+$$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}.$$
+<p><b>Étape 3 : La limite.</b> $x\,e^{-x}\to0$ et $e^{-x}\to0$ : $\cG{\int_0^{+\infty}t\,e^{-t}\,dt = 1}$.</p>
+
 <p class="ml">Changement de variable</p>
 <p>Il doit être une bijection $\mathcal C^1$ strictement monotone. Il conserve alors la nature et la valeur : $\int_0^{+\infty}e^{-\sqrt t}\,dt\ \underset{\cO{t = u^2}}{=}\ \int_0^{+\infty}2u\,e^{-u}\,du = 2$.</p>
 
@@ -3079,16 +3345,20 @@ $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux sur}\ I\\&f_n\to f\ \text{simplement, avec}\ f\ \text{continue par morceaux}\\&|f_n(t)|\leqslant\cO{\varphi(t)}\ \text{pour tout}\ n,\ \text{avec}\ \cO\varphi\ \textbf{intégrable}\end{aligned}\right\}\ \Longrightarrow\ \int_If_n\xrightarrow[n\to+\infty]{}\int_If.$$</div>
 <p>La clé est la <b>domination</b> : une fonction $\cO\varphi$ qui ne dépend pas de $n$.</p>
 <p class="ml">Exemple 1 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
-<p><b>Limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite simple vaut $0$ sauf en un point : elle est continue par morceaux.</p>
-<p><b>Domination.</b> $|\sin^nt|\leqslant\cO1$, intégrable sur le segment $\big[0, \frac\pi2\big]$.</p>
-<p><b>Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
+<p><b>Étape 1 : Rappel.</b> Convergence dominée : limite simple + domination $|f_n|\leqslant\varphi$ intégrable, indépendante de $n$.</p>
+<p><b>Étape 2 : La limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite vaut $0$ sauf en un point.</p>
+<p><b>Étape 3 : La domination.</b> $|\sin^nt|\leqslant\cO1$, intégrable sur le segment.</p>
+<p><b>Étape 4 : Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
+
 <p class="ml">Exemple 2 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
-<p><b>Mise en forme.</b> La borne dépend de $n$ : on écrit $f_n(t) = \big(1 - \frac tn\big)^n\mathbf 1_{[0, n]}(t)$ sur $I = [0, +\infty[$.</p>
-<p><b>Limite simple.</b> Pour $t$ fixé et $n > t$ :</p>
+<p><b>Étape 1 : Rappel.</b> Convergence dominée. Une borne qui dépend de $n$ se met dans une indicatrice.</p>
+<p><b>Étape 2 : La mise en forme.</b> $f_n(t) = \big(1 - \frac tn\big)^n\mathbf 1_{[0, n]}(t)$ sur $[0, +\infty[$.</p>
+<p><b>Étape 3 : La limite simple.</b> Pour $t$ fixé et $n > t$ :</p>
 $$f_n(t) = e^{n\ln(1 - t/n)} = e^{n(-\frac tn + o(\frac1n))}\to\cB{e^{-t}}.$$
-<p><b>Domination.</b> On utilise $\ln(1 - u)\leqslant-u$ pour $u\in[0, 1[$ :</p>
-$$0\leqslant f_n(t) = e^{n\ln(1 - t/n)}\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},\ \text{intégrable sur}\ [0, +\infty[.$$
-<p><b>Conclusion.</b> $\int_0^n\big(1 - \frac tn\big)^n\,dt\to\int_0^{+\infty}e^{-t}\,dt = \cG1$.</p>
+<p><b>Étape 4 : La domination.</b> $\ln(1 - u)\leqslant-u$ pour $u\in[0, 1[$ :</p>
+$$0\leqslant f_n(t)\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},\ \text{intégrable sur}\ [0, +\infty[.$$
+<p><b>Étape 5 : Conclusion.</b> $\int_0^n\big(1 - \frac tn\big)^n\,dt\to\int_0^{+\infty}e^{-t}\,dt = \cG1$.</p>
+
 <p class="ml piege">Piège</p>
 <p>Sans domination, c'est faux. $f_n(t) = n\,\mathbf 1_{]0, 1/n]}(t)$ tend simplement vers $0$, mais $\int_0^1f_n = 1$ pour tout $n$. Il n'existe pas de $\varphi$ intégrable au-dessus de toutes les $f_n$.</p>
 
@@ -3096,11 +3366,12 @@ $$0\leqslant f_n(t) = e^{n\ln(1 - t/n)}\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux et intégrables sur}\ I\\&\sum f_n\ \text{converge simplement vers}\ S\ \text{continue par morceaux}\\&\sum_n\int_I|f_n|\ \textbf{converge}\end{aligned}\right\}\ \Longrightarrow\ S\ \text{intégrable et}\ \int_I\sum_{n=0}^{+\infty}f_n = \sum_{n=0}^{+\infty}\int_If_n.$$</div>
 <p><b>Méthode pratique</b> : on fait d'abord le calcul formel en échangeant $\int$ et $\sum$, puis on vérifie les hypothèses.</p>
 <p class="ml">Exemple : $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$</p>
-<p><b>Étape 1 : développer.</b> Pour $t\in\left]0, 1\right[$, $\frac1{1 - t} = \sum_{n\geqslant0}t^n$, donc $\frac{-\ln t}{1 - t} = \sum_{n\geqslant0}f_n(t)$ avec $f_n(t) = -t^n\ln t\geqslant0$.</p>
-<p><b>Étape 2 : intégrer un terme</b> (IPP sur $[\varepsilon, 1]$, puis $\varepsilon\to0$) :</p>
-$$\int_0^1-t^n\ln t\,dt = \Big[-\frac{t^{n+1}}{n + 1}\ln t\Big]_0^1 + \int_0^1\frac{t^{n+1}}{n + 1}\cdot\frac1t\,dt = 0 + \frac1{n + 1}\int_0^1t^n\,dt = \frac1{(n + 1)^2}.$$
-<p><b>Étape 3 : l'hypothèse.</b> $f_n\geqslant0$, donc $\sum\int|f_n| = \sum\frac1{(n + 1)^2}$ converge (Riemann).</p>
-<p><b>Conclusion.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\int\sum f_n = \sum\int f_n$ si les $f_n$ sont intégrables et $\sum\int|f_n|$ converge.</p>
+<p><b>Étape 2 : Développer.</b> Pour $t\in\left]0, 1\right[$, $\frac1{1 - t} = \sum_{n\geqslant0}t^n$, donc $\frac{-\ln t}{1 - t} = \sum_{n\geqslant0}f_n(t)$ avec $f_n(t) = -t^n\ln t\geqslant0$.</p>
+<p><b>Étape 3 : Intégrer un terme</b> (IPP, $u = -\ln t$, $v' = t^n$) :</p>
+$$\int_0^1-t^n\ln t\,dt = \Big[-\frac{t^{n+1}}{n + 1}\ln t\Big]_0^1 + \frac1{n + 1}\int_0^1t^n\,dt = 0 + \frac1{(n + 1)^2}.$$
+<p><b>Étape 4 : L'hypothèse.</b> $f_n\geqslant0$, donc $\sum\int|f_n| = \sum\frac1{(n + 1)^2}$ converge (Riemann).</p>
+<p><b>Étape 5 : Conclusion.</b></p>
 $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG{\frac{\pi^2}6}.$$
 
 <h2 id="p-plan">7. Le plan pour une intégrale à paramètre</h2>
@@ -3115,28 +3386,35 @@ $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG
 <h2 id="p-cont">8. Continuité</h2>
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{continue sur}\ A\ \text{pour tout}\ t\\&t\mapsto f(x, t)\ \text{continue par morceaux sur}\ I\ \text{pour tout}\ x\\&|f(x, t)|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\ \text{est continue sur}\ A.$$</div>
 <p class="ml">Exemple : $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$ sur $[0, +\infty[$</p>
-<p><b>1.</b> Pour $t$ fixé, $x\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue. <b>2.</b> Pour $x$ fixé, $t\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue sur $[0, +\infty[$.</p>
-<p><b>3.</b> Pour $x\geqslant0$ et $t\geqslant0$, $e^{-xt}\leqslant1$, donc :</p>
-$$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégrable sur}\ [0, +\infty[\ (\text{d'intégrale}\ \tfrac\pi2).$$
-<p>Donc $\cG{g\ \text{est continue sur}\ [0, +\infty[}$, et $g(0) = \frac\pi2$.</p>
+<p><b>Étape 1 : Rappel.</b> Continuité sous l'intégrale : continuité en $x$, continuité par morceaux en $t$, et $|f(x, t)|\leqslant\varphi(t)$ intégrable, indépendante de $x$.</p>
+<p><b>Étape 2 : En $x$.</b> Pour $t$ fixé, $x\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue.</p>
+<p><b>Étape 3 : En $t$.</b> Pour $x$ fixé, $t\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue sur $[0, +\infty[$.</p>
+<p><b>Étape 4 : La domination.</b> Pour $x\geqslant0$ et $t\geqslant0$, $e^{-xt}\leqslant1$ :</p>
+$$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégrable sur}\ [0, +\infty[.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{g\ \text{est continue sur}\ [0, +\infty[}$, et $g(0) = \int_0^{+\infty}\frac{dt}{1 + t^2} = \frac\pi2$.</p>
 
 <h2 id="p-lim">9. Limite en une borne</h2>
 <div class="sbox">$$f(x, t)\xrightarrow[x\to a]{}\ell(t)\ \text{pour tout}\ t,\quad|f(x, t)|\leqslant\cO{\varphi(t)}\ \text{intégrable}\ \Longrightarrow\ \lim_{x\to a}\int_If(x, t)\,dt = \int_I\ell(t)\,dt.$$</div>
 <p class="ml">Exemple : la même $g$ en $+\infty$</p>
-<p>Pour $t > 0$, $\frac{e^{-xt}}{1 + t^2}\to0$ quand $x\to+\infty$ (en $t = 0$, ça vaut $1$, un seul point). Avec la même domination $\frac1{1 + t^2}$ :</p>
-$$\lim_{x\to+\infty}g(x) = \int_0^{+\infty}0\,dt = \cG0.$$
-<p>Variante : on peut aussi passer par des suites $x_n\to+\infty$ et la convergence dominée.</p>
+<p><b>Étape 1 : Rappel.</b> Limite sous l'intégrale : limite simple en $t$, et la même domination.</p>
+<p><b>Étape 2 : La limite simple.</b> Pour $t > 0$, $\frac{e^{-xt}}{1 + t^2}\to0$ quand $x\to+\infty$ (en $t = 0$ elle vaut $1$, un seul point).</p>
+<p><b>Étape 3 : La domination.</b> $\frac1{1 + t^2}$, comme pour la continuité.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}g(x) = \int_0^{+\infty}0\,dt = \cG0$.</p>
 
 <h2 id="p-der">10. Dérivation</h2>
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{de classe}\ \mathcal C^1\ \text{sur}\ J\\&t\mapsto f(x, t)\ \text{intégrable},\ t\mapsto\tfrac{\partial f}{\partial x}(x, t)\ \text{continue par morceaux}\\&\Big|\tfrac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\in\mathcal C^1(J),\quad g'(x) = \int_I\frac{\partial f}{\partial x}(x, t)\,dt.$$</div>
 <p>C'est la formule de Leibniz : on dérive sous le signe intégrale. Pour $\mathcal C^k$, on domine chaque dérivée partielle jusqu'à l'ordre $k$.</p>
 <p class="ml">Exemple : $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$</p>
-<p><b>Étape 1 : les hypothèses.</b> Avec $f(x, t) = e^{-t^2}\cos(xt)$ :</p>
-$$\frac{\partial f}{\partial x}(x, t) = -t\,e^{-t^2}\sin(xt),\qquad\Big|\frac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{t\,e^{-t^2}},$$
-<p>qui est intégrable sur $[0, +\infty[$ (sa primitive est $-\frac12e^{-t^2}$). Et $|f(x, t)|\leqslant e^{-t^2}$, intégrable. Donc $F$ est de classe $\mathcal C^1$ sur $\mathbb R$.</p>
-<p><b>Étape 2 : la dérivée</b>, avec une IPP ($u = \sin(xt)$, $v' = -t\,e^{-t^2}$, $v = \frac12e^{-t^2}$) :</p>
-$$F'(x) = \int_0^{+\infty}-t\,e^{-t^2}\sin(xt)\,dt = \underbrace{\Big[\frac12e^{-t^2}\sin(xt)\Big]_0^{+\infty}}_{= 0} - \frac x2\int_0^{+\infty}e^{-t^2}\cos(xt)\,dt = -\frac x2F(x).$$
-<p><b>Étape 3 : l'équation différentielle.</b> $F' + \frac x2F = 0$, donc $F(x) = F(0)\,e^{-x^2/4}$, et avec l'intégrale de Gauss $F(0) = \int_0^{+\infty}e^{-t^2}\,dt = \frac{\sqrt\pi}2$ :</p>
+<p><b>Étape 1 : Rappel.</b> Dérivation sous l'intégrale : dominer $\big|\frac{\partial f}{\partial x}\big|$ par $\varphi$ intégrable, puis $F'(x) = \int\frac{\partial f}{\partial x}$.</p>
+<p><b>Étape 2 : La dérivée partielle.</b> $f(x, t) = e^{-t^2}\cos(xt)$ :</p>
+$$\frac{\partial f}{\partial x}(x, t) = -t\,e^{-t^2}\sin(xt).$$
+<p><b>Étape 3 : La domination.</b></p>
+$$\Big|\frac{\partial f}{\partial x}\Big|\leqslant\cO{t\,e^{-t^2}},$$
+<p>intégrable sur $[0, +\infty[$ (primitive $-\frac12e^{-t^2}$). Et $|f|\leqslant e^{-t^2}$ est intégrable : $F$ est $\mathcal C^1$.</p>
+<p><b>Étape 4 : $F'$ par IPP</b> ($u = \sin(xt)$, $v' = -t\,e^{-t^2}$, $v = \frac12e^{-t^2}$) :</p>
+$$F'(x) = \underbrace{\Big[\frac12e^{-t^2}\sin(xt)\Big]_0^{+\infty}}_{= 0} - \frac x2\int_0^{+\infty}e^{-t^2}\cos(xt)\,dt = -\frac x2F(x).$$
+<p><b>Étape 5 : L'équation différentielle.</b> $F' + \frac x2F = 0$, donc $F(x) = F(0)\,e^{-x^2/4}$.</p>
+<p><b>Étape 6 : La constante.</b> $F(0) = \int_0^{+\infty}e^{-t^2}\,dt = \frac{\sqrt\pi}2$ (intégrale de Gauss) :</p>
 $$\cG{F(x) = \frac{\sqrt\pi}2\,e^{-x^2/4}}.$$
 
 <h2 id="p-gamma">11. L'exemple central : la fonction $\Gamma$</h2>
@@ -3239,8 +3517,12 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 <h2 id="f-cs">2. Trouver la limite simple</h2>
 <p>On fixe $x$, et on cherche la limite de la suite numérique $(f_n(x))_n$. Souvent, il faut <b>distinguer des cas</b> selon $x$.</p>
 <p class="ml">Exemple : $f_n(x) = x^n$ sur $[0, 1]$</p>
-$$\left\{\begin{aligned}0\leqslant x\lt1&:\ x^n\to0\\x = 1&:\ 1^n = 1\end{aligned}\right.\qquad\Longrightarrow\qquad\cB{f(x) = \left\{\begin{aligned}&0\ \text{si}\ x\in[0, 1[\\&1\ \text{si}\ x = 1\end{aligned}\right.}$$
-<p>Les $f_n$ sont continues, mais $f$ ne l'est pas : la convergence simple ne conserve pas la continuité.</p>
+<p><b>Étape 1 : Rappel.</b> Convergence simple : on fixe $x$ et on cherche la limite de la suite numérique $(f_n(x))$.</p>
+<p><b>Étape 2 : Cas $0\leqslant x\lt1$.</b> $x^n\to0$.</p>
+<p><b>Étape 3 : Cas $x = 1$.</b> $1^n = 1\to1$.</p>
+<p><b>Étape 4 : La limite simple.</b></p>
+$$\cB{f(x) = \left\{\begin{aligned}&0\ \text{si}\ x\in[0, 1[\\&1\ \text{si}\ x = 1\end{aligned}\right.}$$
+<p><b>Étape 5 : Ce qu'on remarque.</b> Les $f_n$ sont continues, mais $f$ ne l'est pas en $1$ : la convergence n'est donc pas uniforme.</p>
 
 <h2 id="f-cu">3. Montrer la convergence uniforme</h2>
 <p class="ml">Méthode 1 : majorer l'écart par une suite qui ne dépend pas de $x$</p>
@@ -3265,9 +3547,11 @@ $$\sup_{x\geqslant a}|f_n(x)| = f_n(a) = n\,a\,e^{-na}\to0\ \Longrightarrow\ \cG
 <li><b>Par une limite au bord</b> : $\sup_{x\in X}|f_n(x) - f(x)|\geqslant\lim_{x\to b}|f_n(x) - f(x)|$.</li>
 </ul>
 <p class="ml">Exemple : $x^n$ sur $[0, 1[$</p>
-<p>Ici $f = 0$, continue : l'argument de continuité ne marche pas. On prend $\cV{x_n = 1 - \frac1n}\in[0, 1[$ :</p>
-$$f_n(x_n) = \Big(1 - \frac1n\Big)^n = e^{n\ln(1 - 1/n)}\to e^{-1}\neq0\ \Longrightarrow\ \|f_n\|_\infty\geqslant f_n(x_n)\not\to0:\ \cG{\text{pas de CU}}.$$
-<p>Par contre, sur $[0, a]$ avec $a\lt1$ : $\sup_{[0, a]}x^n = a^n\to0$, donc CU.</p>
+<p><b>Étape 1 : Rappel.</b> S'il existe $x_n\in X$ avec $|f_n(x_n) - f(x_n)|\not\to0$, alors $\|f_n - f\|_\infty\not\to0$ : pas de convergence uniforme.</p>
+<p><b>Étape 2 : La limite simple</b> sur $[0, 1[$ : $f = 0$ (continue, l'argument de continuité ne marche pas).</p>
+<p><b>Étape 3 : Un point bien choisi.</b> $\cV{x_n = 1 - \frac1n}\in[0, 1[$ :</p>
+$$f_n(x_n) = \Big(1 - \frac1n\Big)^n = e^{n\ln(1 - 1/n)}\to e^{-1}\neq0.$$
+<p><b>Étape 4 : Conclusion.</b> $\|f_n\|_\infty\geqslant f_n(x_n)\not\to0$ : $\cG{\text{pas de CU sur}\ [0, 1[}$. Sur $[0, a]$ avec $a\lt1$, $\sup x^n = a^n\to0$ : CU.</p>
 
 <h2 id="f-reg">5. Ce que la convergence uniforme conserve</h2>
 <div class="sbox">$$\textbf{Continuité}:\ f_n\ \text{continues et CU vers}\ f\ \text{sur}\ X\ (\text{ou sur tout segment de}\ X)\ \Longrightarrow\ f\ \text{continue}.$$</div>
@@ -3292,22 +3576,37 @@ $$\int_0^1n^2x\,e^{-nx}\,dx = \int_0^nu\,e^{-u}\,du = 1 - (n + 1)e^{-n}\to1\neq\
 <div class="sbox">$$|f_n(x)|\leqslant\cO{\alpha_n}\ \text{pour tout}\ x\in X,\ \text{et}\ \sum\cO{\alpha_n}\ \text{converge}\ \Longrightarrow\ \sum f_n\ \text{converge normalement, donc uniformément, sur}\ X.$$</div>
 <p>On cherche le plus petit majorant possible : $\alpha_n = \|f_n\|_\infty$ (étude de fonction si besoin).</p>
 <p class="ml">Exemple 1 : $\sum\frac{x^n}{n^2}$ sur $[-1, 1]$</p>
-$$\Big|\frac{x^n}{n^2}\Big|\leqslant\cO{\frac1{n^2}}\ \text{pour}\ |x|\leqslant1,\qquad\sum\frac1{n^2}\ \text{converge}\ \Longrightarrow\ \cG{\text{CN sur}\ [-1, 1]}.$$
+<p><b>Étape 1 : Rappel.</b> Si $|f_n(x)|\leqslant\alpha_n$ pour tout $x$ et $\sum\alpha_n$ converge : convergence normale.</p>
+<p><b>Étape 2 : Majorer.</b> Pour $|x|\leqslant1$, $|x^n|\leqslant1$ :</p>
+$$\Big|\frac{x^n}{n^2}\Big|\leqslant\cO{\frac1{n^2}}.$$
+<p><b>Étape 3 : Conclusion.</b> $\sum\frac1{n^2}$ converge : $\cG{\text{CN sur}\ [-1, 1]}$, donc CU.</p>
+
 <p class="ml">Exemple 2 : $\sum e^{-nx}$ sur $\left]0, +\infty\right[$, puis sur $[a, +\infty[$</p>
-<p><b>Sur $\left]0, +\infty\right[$</b> : $\|f_n\|_\infty = \sup_{x > 0}e^{-nx} = 1$, et $\sum1$ diverge : pas de CN. Il n'y a même pas CU : $f_n\to0$ uniformément est faux, puisque $\|f_n\|_\infty = 1$.</p>
-<p><b>Sur $[a, +\infty[$</b> ($a > 0$) : $\sup_{x\geqslant a}e^{-nx} = e^{-na} = (e^{-a})^n$, série géométrique de raison $e^{-a}\lt1$ : $\cG{\text{CN sur}\ [a, +\infty[}$.</p>
+<p><b>Étape 1 : Rappel.</b> CN $\iff\sum\|f_n\|_\infty$ converge. Si $\|f_n\|_\infty\not\to0$, il n'y a même pas CU.</p>
+<p><b>Étape 2 : Sur $\left]0, +\infty\right[$.</b> $\sup_{x > 0}e^{-nx} = 1$ (quand $x\to0$) :</p>
+$$\|f_n\|_\infty = 1\not\to0\ \Longrightarrow\ \text{ni CN, ni CU}.$$
+<p><b>Étape 3 : Sur $[a, +\infty[$</b> ($a > 0$). $e^{-nx}$ décroît, donc le sup est en $a$ :</p>
+$$\|f_n\|_\infty = e^{-na} = (e^{-a})^n.$$
+<p><b>Étape 4 : Conclusion.</b> Géométrique de raison $e^{-a}\lt1$ : $\cG{\text{CN sur}\ [a, +\infty[}$.</p>
+
 <p class="ml">Exemple 3 : avec une étude de fonction</p>
-<p>$f_n(x) = \frac{x}{n(1 + nx^2)}$ sur $[0, +\infty[$. On étudie $h(x) = \frac x{1 + nx^2}$ :</p>
-$$h'(x) = \frac{1 - nx^2}{(1 + nx^2)^2} = 0\iff x = \cV{\frac1{\sqrt n}},\qquad h\Big(\frac1{\sqrt n}\Big) = \frac{1/\sqrt n}{2} = \frac1{2\sqrt n}.$$
-$$\|f_n\|_\infty = \frac1n\cdot\frac1{2\sqrt n} = \cO{\frac1{2n^{3/2}}},\quad\text{Riemann}\ \frac32 > 1\ \Longrightarrow\ \cG{\text{CN sur}\ [0, +\infty[}.$$
+<p><b>Étape 1 : Rappel.</b> Pour la CN, on calcule $\|f_n\|_\infty$ par une étude de fonction.</p>
+<p><b>Étape 2 : La fonction à étudier.</b> $f_n(x) = \frac1n\cdot h(x)$ avec $h(x) = \frac x{1 + nx^2}$ sur $[0, +\infty[$.</p>
+<p><b>Étape 3 : La dérivée.</b></p>
+$$h'(x) = \frac{(1 + nx^2) - x\cdot2nx}{(1 + nx^2)^2} = \frac{1 - nx^2}{(1 + nx^2)^2} = 0\iff x = \cV{\frac1{\sqrt n}}.$$
+<p><b>Étape 4 : Le maximum.</b> $h$ croît puis décroît :</p>
+$$h\Big(\frac1{\sqrt n}\Big) = \frac{1/\sqrt n}{1 + 1} = \frac1{2\sqrt n},\qquad\|f_n\|_\infty = \frac1n\cdot\frac1{2\sqrt n} = \cO{\frac1{2n^{3/2}}}.$$
+<p><b>Étape 5 : Conclusion.</b> Riemann $\frac32 > 1$ : $\cG{\text{CN sur}\ [0, +\infty[}$.</p>
 
 <h2 id="f-alt">8. Convergence uniforme sans convergence normale</h2>
 <p>Quand la CN échoue, on revient à la définition : on <b>majore le reste</b> uniformément. L'outil le plus fréquent est le critère des séries alternées, avec $|R_n(x)|\leqslant|f_{n+1}(x)|$.</p>
 <p class="ml">Exemple : $\sum\frac{(-1)^n}{n + x}$ sur $[0, +\infty[$ ($n\geqslant1$)</p>
-<p><b>Pas de CN</b> : $\big\|\frac{(-1)^n}{n + x}\big\|_\infty = \frac1n$, et $\sum\frac1n$ diverge.</p>
-<p><b>CS</b> : pour $x$ fixé, $\frac1{n + x}$ décroît vers $0$ : critère spécial.</p>
-<p><b>CU</b> : la majoration du reste donne, pour tout $x\geqslant0$ :</p>
-$$|R_n(x)|\leqslant\frac1{n + 1 + x}\leqslant\cO{\frac1{n + 1}}\ \Longrightarrow\ \|R_n\|_\infty\leqslant\frac1{n + 1}\to0:\ \cG{\text{CU sur}\ [0, +\infty[}.$$
+<p><b>Étape 1 : Rappel.</b> Série alternée : $|R_n(x)|\leqslant|f_{n+1}(x)|$. Si ce majorant tend vers $0$ uniformément, on a la CU.</p>
+<p><b>Étape 2 : Pas de CN.</b> $\big\|\frac{(-1)^n}{n + x}\big\|_\infty = \frac1n$ (en $x = 0$), et $\sum\frac1n$ diverge.</p>
+<p><b>Étape 3 : La CS.</b> Pour $x\geqslant0$ fixé, $\frac1{n + x}$ décroît vers $0$ : critère spécial.</p>
+<p><b>Étape 4 : Majorer le reste</b>, pour tout $x\geqslant0$ :</p>
+$$|R_n(x)|\leqslant\frac1{n + 1 + x}\leqslant\cO{\frac1{n + 1}}.$$
+<p><b>Étape 5 : Conclusion.</b> $\|R_n\|_\infty\leqslant\frac1{n + 1}\to0$ : $\cG{\text{CU sur}\ [0, +\infty[}$.</p>
 
 <h2 id="f-sreg">9. La régularité de la somme</h2>
 <div class="sbox">$$\textbf{Continuité}:\ f_n\ \text{continues},\ \sum f_n\ \text{CU sur}\ X\ (\text{ou sur tout segment})\ \Longrightarrow\ S = \sum_{n=0}^{+\infty}f_n\ \text{continue}.$$</div>

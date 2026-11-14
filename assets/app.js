@@ -1556,7 +1556,7 @@ function stepify(q, num, lead) {
   q.classList.add("exs");
   const n = document.createElement("span"); n.className = "exn"; n.textContent = num;
   const w = document.createElement("span"); w.className = "exbody";
-  if (lead) { const bb = document.createElement("b"); const ld = lead.replace(/[\s:]+$/, "").replace(/([^.])\.$/, "$1"); bb.innerHTML = ld.charAt(0).toUpperCase() + ld.slice(1) + (/\.\$?$/.test(ld) ? " " : ". "); w.appendChild(bb); }
+  if (lead) { const bb = document.createElement("b"); const ld = lead.replace(/[\s:]+$/, "").replace(/(?:\\?[.,]|\{,\})+\$$/, "$").replace(/\.((?:<\/[a-z]+>)*)$/, "$1"); bb.innerHTML = ld.charAt(0).toUpperCase() + ld.slice(1) + (/\.\$?$/.test(ld) ? " " : ". "); w.appendChild(bb); }
   while (q.firstChild) w.appendChild(q.firstChild);
   q.append(n, w);
 }
