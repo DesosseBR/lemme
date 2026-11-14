@@ -2001,3 +2001,15 @@ a.lg-box:hover,.lg-list a:hover{background:color-mix(in srgb,currentColor 6%,tra
 .htree .hl:hover{border-bottom-color:currentColor}
 .htree .hl.ok{color:#1F8A5B}.htree .hl.end{color:#C27C00;font-weight:600}
 @media (max-width:760px){.htree .hr{display:block}.htree ul{padding-left:14px;margin-left:4px;border-left:1px solid var(--muted)}.htree ul:before,.htree li:after{display:none}.htree li{padding:5px 0 5px 14px}.htree li:before{top:16px;width:10px}.htree em{display:block;margin-bottom:2px}.htree .hq,.htree .hl,.htree .hroot{max-width:none;display:block}}
+/* Labos : triangle de Pascal, racines n-ièmes */
+.pasc{display:flex;flex-direction:column;align-items:center;gap:4px;margin:10px 0}
+.pasc .pr{display:flex;gap:4px}
+.pasc button{min-width:40px;height:34px;border:1px solid var(--line);border-radius:4px;background:var(--surface);font:500 14px var(--f-mono);color:var(--ink);cursor:pointer}
+.pasc button:hover{border-color:var(--ink)}
+.pasc button.on{background:#1F8A5B;border-color:#1F8A5B;color:#fff}
+.pasc button.ua{background:#2B5BD7;border-color:#2B5BD7;color:#fff}
+.pasc button.ub{background:#D4503B;border-color:#D4503B;color:#fff}
+.mtab.pascal td{text-align:center}
+.racnw{display:flex;justify-content:center;margin:8px 0}
+.racn .ax{stroke:var(--muted);stroke-width:1}.racn .ci{fill:none;stroke:var(--muted);stroke-dasharray:3 3}.racn .po{fill:color-mix(in srgb,#2B5BD7 10%,transparent);stroke:#2B5BD7;stroke-width:1.5}
+@media (max-width:600px){.pasc button{min-width:28px;height:28px;font-size:12px}}

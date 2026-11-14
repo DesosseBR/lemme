@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1640,7 +1640,7 @@ const fsum = pairs => { let s = ""; for (const [f, v] of pairs) s += fterm(typeo
 const exT = m => m === 0 ? "" : `e^{${m === 1 ? "" : m === -1 ? "-" : m}t}`;
 const ftx = f => ftex(typeof f === "number" ? Fr(f) : f);
 const fpar = f => { f = typeof f === "number" ? Fr(f) : f; return f.n < 0 ? `\\left(${ftex(f)}\\right)` : ftex(f); };
-const labNav = (host, k, n, go, re, all) => `<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${n}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < n - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tout afficher</button><button type="button" class="btn btn-ghost btn-sm" data-new>Autre équation</button></div>`;
+const labNav = (host, k, n, go, re, all) => `<div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-g="-1"${k ? "" : " disabled"}>${I.left} Avant</button><span class="mlpos">${k + 1} / ${n}</span><button type="button" class="btn btn-yellow btn-sm" data-g="1"${k < n - 1 ? "" : " disabled"}>Étape suivante ${I.arrow}</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tout afficher</button><button type="button" class="btn btn-ghost btn-sm" data-new>Un autre</button></div>`;
 function stepLab(host, title, gen, build) {
   let ex, k = 0;
   const draw = () => {
@@ -1750,6 +1750,168 @@ const QEDO = [
   ["Une solution de $y'' + a(t)y' + b(t)y = 0$ avec $y(0) = y'(0) = 0$ est nulle.", true, "Vrai : c'est l'unicité de Cauchy-Lipschitz, la fonction nulle convient."],
   ["Pour $X' = AX$ avec $A$ diagonalisable de valeurs propres $-1$ et $-3$, toutes les solutions tendent vers $0$.", true, "Vrai : $X(t) = c_1e^{-t}V_1 + c_2e^{-3t}V_2\\to0$."],
   ["Dans une équation à variables séparées, on met une constante de chaque côté.", false, "Faux : une seule constante suffit, les deux se regroupent."]
+];
+
+/* ---------- Labos des Méthodes « Calcul algébrique » et « Nombres complexes » ---------- */
+const binom = (n, k) => { if (k < 0 || k > n) return 0; let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return Math.round(r); };
+/* Triangle de Pascal cliquable */
+function mlPascal(host) {
+  const N = 9;
+  const draw = (n, k) => {
+    const rows = [...Array(N + 1).keys()].map(i => `<div class="pr">${[...Array(i + 1).keys()].map(j => `<button type="button" data-n="${i}" data-k="${j}" class="${i === n && j === k ? "on" : i === n - 1 && j === k - 1 ? "ua" : i === n - 1 && j === k ? "ub" : ""}">${binom(i, j)}</button>`).join("")}</div>`).join("");
+    let msg = "Clique un nombre du triangle.";
+    if (n !== undefined) msg = k === 0 || k === n ? `$\\binom{${n}}{${k}} = 1$ : les bords valent toujours $1$.` : `$$\\cB{\\binom{${n - 1}}{${k - 1}}} + \\cR{\\binom{${n - 1}}{${k}}} = \\cB{${binom(n - 1, k - 1)}} + \\cR{${binom(n - 1, k)}} = \\cG{${binom(n, k)}} = \\binom{${n}}{${k}} = \\frac{${n}!}{${k}!\\,${n - k}!}$$`;
+    host.innerHTML = `<p class="mlt">Le triangle de Pascal : clique un nombre</p><div class="pasc">${rows}</div><div class="mlcalc">${msg}</div>`;
+    $$("[data-n]", host).forEach(b => b.addEventListener("click", () => draw(+b.dataset.n, +b.dataset.k)));
+    typeset(host);
+  };
+  draw();
+}
+/* Développer (px + q)^n terme par terme */
+function mlBinome(host) {
+  let p, q, n;
+  const gen = () => { n = rnd(2, 5); do { p = rnd(-3, 3); } while (!p); do { q = rnd(-4, 4); } while (!q); };
+  const mono = (c, d) => fsum([[c, d === 0 ? "" : d === 1 ? "x" : `x^{${d}}`]]);
+  const draw = () => {
+    const a = p === 1 ? "x" : p === -1 ? "-x" : `${p}x`, rowsT = [...Array(n + 1).keys()].map(k => { const c = binom(n, k) * p ** k * q ** (n - k); return { k, c, t: `<tr><td>$${k}$</td><td>$\\cV{${binom(n, k)}}$</td><td>$${k ? `(${a})^{${k}} = ${mono(p ** k, k)}` : "1"}$</td><td>$${par(q)}^{${n - k}} = ${q ** (n - k)}$</td><td>$${mono(c, k)}$</td></tr>` }; });
+    const poly = fsum([...rowsT].reverse().map(r => [r.c, r.k === 0 ? "" : r.k === 1 ? "x" : `x^{${r.k}}`]));
+    host.innerHTML = `<p class="mlt">Développer avec le binôme</p><p class="mlq">$$(${a} ${q < 0 ? "-" : "+"} ${Math.abs(q)})^{${n}} = \\sum_{k=0}^{${n}}\\cV{\\binom{${n}}{k}}(${a})^k(${q})^{${n}-k}$$</p><table class="mtab"><tr><th>$k$</th><th>$\\binom{${n}}{k}$</th><th>$(${a})^k$</th><th>$(${q})^{${n}-k}$</th><th>Terme</th></tr>${rowsT.map(r => r.t).join("")}</table><p class="mlres">$$(${a} ${q < 0 ? "-" : "+"} ${Math.abs(q)})^{${n}} = \\cG{${poly}}$$</p><p class="mlnote">Contrôle avec $x = 1$ : $(${p + q})^{${n}} = ${(p + q) ** n}$, et la somme des coefficients vaut $${rowsT.reduce((s, r) => s + r.c, 0)}$.</p><button type="button" class="btn btn-ghost btn-sm" data-new>Un autre</button>`;
+    $("[data-new]", host).addEventListener("click", () => { gen(); draw(); });
+    typeset(host);
+  };
+  gen(); draw();
+}
+/* Somme d'un polynôme de degré 2 en k */
+function mlSommes(host) {
+  const gen = () => { let al, be, ga; do { al = rnd(-3, 3); be = rnd(-4, 4); ga = rnd(-5, 5); } while (!al && !be); return { al, be, ga }; };
+  const build = e => {
+    const { al, be, ga } = e, term = fsum([[al, "k^2"], [be, "k"], [ga, ""]]);
+    const c3 = Fr(al, 3), c2 = fadd(Fr(al, 2), Fr(be, 2)), c1 = fadd(fadd(Fr(al, 6), Fr(be, 2)), Fr(ga));
+    const st = [`$$S_n = \\sum_{k=1}^n\\big(${term}\\big)$$`];
+    st.push(`<p class="mlstep">1. Linéarité : on coupe en sommes simples.</p>$$S_n = ${fsum([[al, "\\sum_{k=1}^nk^2"], [be, "\\sum_{k=1}^nk"], [ga, "\\sum_{k=1}^n1"]])}$$`);
+    st.push(`<p class="mlstep">2. Les sommes usuelles (attention : $\\sum_{k=1}^n1 = n$) :</p>$$S_n = ${fsum([[al, "\\frac{n(n+1)(2n+1)}{6}"], [be, "\\frac{n(n+1)}{2}"], [ga, "n"]])}$$`);
+    st.push(`<p class="mlstep">3. On développe et on regroupe :</p>$$${al ? `${ftx(Fr(al, 6))}(2n^3 + 3n^2 + n)` : ""}${be ? `${al && be > 0 ? " + " : ""}${ftx(Fr(be, 2))}(n^2 + n)` : ""}${ga ? (ga > 0 ? " + " : " ") + fsum([[ga, "n"]]) : ""}$$$$S_n = \\cG{${fsum([[c3, "n^3"], [c2, "n^2"], [c1, "n"]])}}$$`);
+    const v1 = al + be + ga, f1 = fadd(fadd(c3, c2), c1);
+    st.push(`<p class="mlstep">4. Contrôle avec $n = 1$ :</p>$$S_1 = ${fsum([[al, ""], [be, ""], [ga, ""]]).replace(/^0$/, "0")} = ${v1},\\qquad ${ftx(c3)} ${c2.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c2.n), c2.d))} ${c1.n < 0 ? "-" : "+"} ${ftex(Fr(Math.abs(c1.n), c1.d))} = ${ftx(f1)}\\ \\checkmark$$`);
+    return st;
+  };
+  stepLab(host, "Calculer une somme pas à pas", gen, build);
+}
+const QALG = [
+  ["$\\sum_{k=0}^n3 = 3n$.", false, "Faux : il y a $n + 1$ termes, donc $3(n + 1)$."],
+  ["$\\sum_{k=1}^n\\frac1{k(k + 1)} = 1 - \\frac1{n + 1}$.", true, "Vrai : $\\frac1{k(k + 1)} = \\frac1k - \\frac1{k + 1}$, et ça télescope."],
+  ["$\\prod_{k=1}^n(3x_k) = 3\\prod_{k=1}^nx_k$.", false, "Faux : le $3$ sort $n$ fois, c'est $3^n\\prod x_k$."],
+  ["$\\binom{10}{7} = \\binom{10}{3} = 120$.", true, "Vrai : symétrie, puis $\\frac{10\\times9\\times8}{6} = 120$."],
+  ["$\\sum_{k=0}^n\\binom nk = 2^n$.", true, "Vrai : binôme avec $a = b = 1$."],
+  ["$\\sum_{k=2}^n2^k = \\frac{1 - 2^{n+1}}{1 - 2}$.", false, "Faux : la somme commence à $k = 2$. C'est $4\\cdot\\frac{1 - 2^{n-1}}{1 - 2} = 2^{n+1} - 4$."],
+  ["$\\big(\\sum_{k=1}^nx_k\\big)^2 = \\sum_{k=1}^nx_k^2$.", false, "Faux : il manque $2\\sum_{i\\lt j}x_ix_j$."],
+  ["$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$.", true, "Vrai : c'est la formule de Bernoulli pour $n = 3$."],
+  ["Avec $j = n - k$, $\\sum_{k=0}^nx_{n-k} = \\sum_{j=0}^nx_j$.", true, "Vrai : $k = 0\\mapsto j = n$ et $k = n\\mapsto j = 0$, l'ordre des termes ne change pas la somme."],
+  ["$\\sum_{1\\leqslant i\\leqslant j\\leqslant n}1 = n^2$.", false, "Faux : c'est $\\sum_{j=1}^nj = \\frac{n(n + 1)}2$ (un triangle, pas un carré)."]
+];
+/* ---------- Complexes ---------- */
+/* surd : f·√m en LaTeX */
+const surd = (f, m) => { if (m === 1 || !f.n) return ftex(f); const neg = f.n < 0, a = Math.abs(f.n), co = a === 1 ? "" : a; return (neg ? "-" : "") + (f.d === 1 ? `${co}\\sqrt{${m}}` : `\\frac{${co}\\sqrt{${m}}}{${f.d}}`); };
+const piTex = f => { if (!f.n) return "0"; const neg = f.n < 0, a = Math.abs(f.n); return (neg ? "-" : "") + (f.d === 1 ? `${a === 1 ? "" : a}\\pi` : `\\frac{${a === 1 ? "" : a}\\pi}{${f.d}}`); };
+/* angles remarquables : t = k·π/12, cos = [f, m] */
+const TRIG = { 0: [[1, 1, 1], [0, 1, 1]], 2: [[1, 2, 3], [1, 2, 1]], 3: [[1, 2, 2], [1, 2, 2]], 4: [[1, 2, 1], [1, 2, 3]], 6: [[0, 1, 1], [1, 1, 1]] };
+const trigOf = k => { k = ((k % 24) + 24) % 24; let sc = 1, ss = 1, b = k; if (b > 12) { b = 24 - b; ss = -1; } if (b > 6) { b = 12 - b; sc = -1; } const [c, s] = TRIG[b]; return { c: [Fr(sc * c[0], c[1]), c[2]], s: [Fr(ss * s[0], s[1]), s[2]] }; };
+function mlExpForm(host) {
+  const gen = () => { const ks = [2, 3, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22]; return { r: rnd(1, 4), k: ks[rnd(0, ks.length - 1)] }; };
+  const build = e => {
+    const { r, k } = e, T = trigOf(k), a = [fmul(Fr(r), T.c[0]), T.c[1]], b = [fmul(Fr(r), T.s[0]), T.s[1]];
+    const at = surd(...a), bt = surd(...b), bAbs = surd(Fr(Math.abs(b[0].n), b[0].d), b[1]);
+    const z = b[0].n === 0 ? at : a[0].n === 0 ? `${b[0].n < 0 ? "-" : ""}${bAbs === "1" ? "" : bAbs}i` : `${at} ${b[0].n < 0 ? "-" : "+"} ${bAbs === "1" ? "" : bAbs}i`;
+    const sq = x => fmul(fmul(x[0], x[0]), Fr(x[1]));
+    let th = Fr(k > 12 ? k - 24 : k, 12);
+    const st = [`$$z = ${z}$$`];
+    st.push(`<p class="mlstep">1. Le module :</p>$$\\cB r = \\sqrt{a^2 + b^2} = \\sqrt{\\left(${at}\\right)^2 + \\left(${bt}\\right)^2} = \\sqrt{${ftex(sq(a))} + ${ftex(sq(b))}} = \\sqrt{${r * r}} = \\cB{${r}}$$`);
+    st.push(`<p class="mlstep">2. On factorise par $r$ :</p>$$z = \\cB{${r}}\\left(${surd(T.c[0], T.c[1])} ${T.s[0].n < 0 ? "-" : "+"} i\\,${surd(Fr(Math.abs(T.s[0].n), T.s[0].d), T.s[1])}\\right)$$`);
+    st.push(`<p class="mlstep">3. On reconnaît l'angle (le signe de $\\sin\\theta$ donne le demi-plan) :</p>$$\\cos\\cR\\theta = ${surd(...T.c)},\\qquad\\sin\\cR\\theta = ${surd(...T.s)}${T.s[0].n > 0 ? " > 0" : T.s[0].n < 0 ? "\\lt0" : ""}\\qquad\\Longrightarrow\\qquad\\cR{\\theta = ${piTex(th)}}$$`);
+    st.push(`<p class="mlres">$$z = \\cG{${r === 1 ? "" : r}e^{${th.n ? `${th.n < 0 ? "-" : ""}i${piTex(Fr(Math.abs(th.n), th.d))}` : "0"}}}$$</p>`);
+    return st;
+  };
+  stepLab(host, "Forme exponentielle pas à pas", gen, build);
+}
+/* Linéariser cos^n x sin^m x */
+function mlLin(host) {
+  const gen = () => { const opts = [[2, 0], [0, 2], [3, 0], [0, 3], [4, 0], [0, 4], [2, 1], [1, 2], [2, 2], [3, 1], [1, 3]]; const [n, m] = opts[rnd(0, opts.length - 1)]; return { n, m }; };
+  const expT = (c, k) => { const e = k === 0 ? "" : `e^{${k === 1 ? "" : k === -1 ? "-" : k}ix}`; return [c, e]; };
+  const build = e => {
+    const { n, m } = e, A = n + m;
+    const P = Array(2 * A + 1).fill(0); // index = k + A
+    const cA = [...Array(n + 1).keys()].map(j => [binom(n, j), n - 2 * j]);
+    const sA = [...Array(m + 1).keys()].map(j => [binom(m, j) * (-1) ** j, m - 2 * j]);
+    cA.forEach(([c1, k1]) => sA.forEach(([c2, k2]) => { P[k1 + k2 + A] += c1 * c2; }));
+    const f = `${n ? `\\cos^{${n}}x` : ""}${m ? `\\sin^{${m}}x` : ""}`.replace("^{1}", "");
+    const den = 2 ** n * 2 ** m, im = ((m % 4) + 4) % 4; // (2i)^m = 2^m i^m
+    const iTex = ["", "i", "-", "-i"][im];
+    const st = [`$$${f}$$`];
+    st.push(`<p class="mlstep">1. Euler :</p>$$${f} = ${n ? `\\left(\\frac{e^{ix} + e^{-ix}}{2}\\right)^{${n}}` : ""}${m ? `\\left(\\frac{e^{ix} - e^{-ix}}{2i}\\right)^{${m}}` : ""} = \\frac{${n ? `(e^{ix} + e^{-ix})^{${n}}` : ""}${m ? `(e^{ix} - e^{-ix})^{${m}}` : ""}}{${m ? `${2 ** n}\\cdot(2i)^{${m}}` : 2 ** n}}$$${m ? `<p class="mlnote">$(2i)^{${m}} = ${2 ** m}\\,i^{${m}} = ${m ? `${im === 2 || im === 3 ? "-" : ""}${2 ** m}${im % 2 ? "i" : ""}` : 1}$, donc le dénominateur vaut $${iTex === "-" ? "-" : iTex === "-i" ? "-" : ""}${den}${im % 2 ? "i" : ""}$.</p>` : ""}`);
+    const dev = arr => fsum(arr.map(([c, k]) => expT(c, k)));
+    st.push(`<p class="mlstep">2. Binôme de Newton :</p>${n ? `$$(e^{ix} + e^{-ix})^{${n}} = ${dev(cA)}$$` : ""}${m ? `$$(e^{ix} - e^{-ix})^{${m}} = ${dev(sA)}$$` : ""}`);
+    const terms = []; for (let k = A; k >= -A; k--) if (P[k + A]) terms.push([P[k + A], k]);
+    if (n && m) st.push(`<p class="mlstep">3. On développe le produit complètement (on ajoute les exposants) :</p>$$\\text{numérateur} = ${dev(terms)}$$`);
+    /* regroupement */
+    const even = m % 2 === 0, parts = [];
+    for (let k = A; k >= 1; k--) { const c = P[k + A]; if (c) parts.push([c, k]); }
+    const c0 = P[A];
+    const grp = parts.map(([c, k]) => `${c === 1 ? "" : c === -1 ? "-" : c}\\big(e^{${k === 1 ? "" : k}ix} ${even ? "+" : "-"} e^{-${k === 1 ? "" : k}ix}\\big)`).join(" + ").replace(/\+ -/g, "- ");
+    const eul = parts.map(([c, k]) => [Fr(2 * c), even ? `\\cos ${k === 1 ? "" : k}x` : `i\\sin ${k === 1 ? "" : k}x`]);
+    st.push(`<p class="mlstep">${n && m ? 4 : 3}. On regroupe $e^{ikx}$ avec $e^{-ikx}$, puis Euler dans l'autre sens :</p>$$\\text{numérateur} = ${grp}${c0 ? (c0 > 0 ? " + " : " - ") + Math.abs(c0) : ""} = ${fsum([...eul, [c0, ""]])}$$`);
+    /* division : num / (den · i^m). Pour m pair : i^m = ±1 ; m impair : num contient i, i/i = 1 */
+    const sg = (im === 2 || im === 3) ? -1 : 1;
+    const fin = parts.map(([c, k]) => [Fr(sg * 2 * c, den), even ? `\\cos ${k === 1 ? "" : k}x` : `\\sin ${k === 1 ? "" : k}x`]).reverse();
+    if (c0) fin.unshift([Fr(sg * c0, den), ""]);
+    st.push(`<p class="mlstep">${n && m ? 5 : 4}. On divise par le dénominateur :</p><p class="mlres">$$${f} = \\cG{${fsum(fin)}}$$</p><p class="mlnote">Contrôle de parité : la fonction est ${m % 2 ? "impaire, il ne reste que des sinus" : "paire, il ne reste que des cosinus"}.</p>`);
+    return st;
+  };
+  stepLab(host, "Linéariser pas à pas", gen, build);
+}
+/* Racines carrées en forme algébrique */
+function mlRac2(host) {
+  const gen = () => { let x, y; do { x = rnd(-4, 4); y = rnd(-4, 4); } while (!x || !y); if (x < 0) { x = -x; y = -y; } return { x, y }; };
+  const build = e => {
+    const { x, y } = e, a = x * x - y * y, b = 2 * x * y, M = x * x + y * y;
+    const D = `${a}${b < 0 ? " - " : " + "}${Math.abs(b)}i`;
+    const st = [`$$\\text{Racines carrées de}\\ \\Delta = ${D}$$`];
+    st.push(`<p class="mlstep">1. Le module de $\\Delta$ :</p>$$|\\Delta| = \\sqrt{${par(a)}^2 + ${par(b)}^2} = \\sqrt{${a * a + b * b}} = ${M}$$`);
+    st.push(`<p class="mlstep">2. On cherche $\\delta = x + iy$ avec $\\delta^2 = \\Delta$ :</p>$$\\left\\{\\begin{aligned}x^2 - y^2 &= ${a}\\\\x^2 + y^2 &= ${M}\\\\2xy &= ${b}\\end{aligned}\\right.$$`);
+    st.push(`<p class="mlstep">3. On ajoute, puis on soustrait les deux premières lignes :</p>$$2x^2 = ${a + M}\\ \\Longrightarrow\\ x^2 = ${x * x},\\qquad2y^2 = ${M - a}\\ \\Longrightarrow\\ y^2 = ${y * y}$$<p class="mlnote">Donc $x = \\pm${x}$ et $y = \\pm${Math.abs(y)}$. La troisième ligne donne $xy = ${x * y} ${x * y > 0 ? "> 0" : "\\lt0"}$ : $x$ et $y$ sont de ${x * y > 0 ? "même signe" : "signes contraires"}.</p>`);
+    st.push(`<p class="mlres">$$\\delta = \\cG{\\pm\\left(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i\\right)}$$</p><p class="mlnote">Contrôle : $(${x}${y < 0 ? " - " : " + "}${Math.abs(y) === 1 ? "" : Math.abs(y)}i)^2 = ${x * x} ${b < 0 ? "-" : "+"} ${Math.abs(b)}i - ${y * y} = ${D}$ $\\checkmark$</p>`);
+    return st;
+  };
+  stepLab(host, "Racine carrée d'un complexe pas à pas", gen, build);
+}
+/* Racines n-ièmes, avec le polygone */
+function mlRacn(host) {
+  const gen = () => { const n = rnd(2, 6), rho = rnd(1, 2), ths = [Fr(0), Fr(1, 2), Fr(1), Fr(-1, 2), Fr(1, 3), Fr(1, 4)]; return { n, rho, th: ths[rnd(0, ths.length - 1)] }; };
+  const build = e => {
+    const { n, rho, th } = e, R = rho ** n, CL = ["#2B5BD7", "#D4503B", "#1F8A5B", "#7A4CC2", "#C27C00", "#C2416B"];
+    const eT = (r, f) => f.n ? `${r === 1 ? "" : r}e^{${f.n < 0 ? "-" : ""}i${piTex(Fr(Math.abs(f.n), f.d))}}` : String(r);
+    const aT = eT(R, th);
+    const ang = k => fadd(fdiv(th, Fr(n)), Fr(2 * k, n));
+    const st = [`$$z^{${n}} = ${aT}$$`];
+    st.push(`<p class="mlstep">1. On pose $z = \\rho e^{i\\varphi}$, donc $z^{${n}} = \\rho^{${n}}e^{${n}i\\varphi}$, et on identifie :</p>$$\\left\\{\\begin{aligned}\\rho^{${n}} &= ${R}\\\\${n}\\varphi &= ${th.n ? piTex(th) + " + " : ""}2k\\pi\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}\\rho &= ${rho}\\\\\\varphi &= ${th.n ? piTex(fdiv(th, Fr(n))) + " + " : ""}\\frac{2k\\pi}{${n}},\\quad k\\in[\\![0, ${n - 1}]\\!]\\end{aligned}\\right.$$`);
+    st.push(`<p class="mlstep">2. Les ${n} racines :</p>$$${[...Array(n).keys()].map(k => `\\textcolor[RGB]{${CL[k].slice(1).match(/../g).map(h => parseInt(h, 16)).join(",")}}{z_{${k}} = ${eT(rho, ang(k))}}`).join(",\\quad ")}$$`);
+    const W = 220, c = W / 2, s = 80 / rho, pts = [...Array(n).keys()].map(k => { const a = Math.PI * (ang(k).n / ang(k).d); return [c + rho * s * Math.cos(a), c - rho * s * Math.sin(a)]; });
+    const svg = `<svg class="racn" viewBox="0 0 ${W} ${W}" width="${W}" height="${W}" role="img" aria-label="Les racines sur le cercle"><line x1="10" y1="${c}" x2="${W - 10}" y2="${c}" class="ax"/><line x1="${c}" y1="10" x2="${c}" y2="${W - 10}" class="ax"/><circle cx="${c}" cy="${c}" r="${rho * s}" class="ci"/>${n > 2 ? `<polygon points="${pts.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}" class="po"/>` : `<line x1="${pts[0][0]}" y1="${pts[0][1]}" x2="${pts[1][0]}" y2="${pts[1][1]}" class="po"/>`}${pts.map((p, k) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5" fill="${CL[k]}"/>`).join("")}</svg>`;
+    st.push(`<p class="mlstep">3. Elles forment un ${n === 2 ? "segment centré en $0$" : `polygone régulier à ${n} côtés`}, sur le cercle de rayon $${rho}$ :</p><div class="racnw">${svg}</div><p class="mlnote">Leur somme est nulle${n > 1 ? "" : ""} : $\\sum_k z_k = 0$.</p>`);
+    return st;
+  };
+  stepLab(host, "Racines $n$-ièmes pas à pas", gen, build);
+}
+const QCPX = [
+  ["$\\operatorname{Im}(3 - 2i) = -2i$.", false, "Faux : la partie imaginaire est un réel, $-2$."],
+  ["$|z + z'| = |z| + |z'|$ pour tous $z, z'$.", false, "Faux : seulement $\\leqslant$. Égalité si $z = \\lambda z'$ avec $\\lambda\\geqslant0$."],
+  ["$-2e^{i\\pi/4}$ est une forme exponentielle de module $-2$.", false, "Faux : un module est positif. $-2e^{i\\pi/4} = 2e^{5i\\pi/4}$."],
+  ["$1 + j + j^2 = 0$.", true, "Vrai : somme des racines cubiques de l'unité."],
+  ["$\\sqrt{-4} = 2i$.", false, "Faux : la notation $\\sqrt{\\ }$ est réservée aux réels positifs. On dit : les racines carrées de $-4$ sont $\\pm2i$."],
+  ["$\\cos^2x = \\frac{1 + \\cos2x}2$.", true, "Vrai : c'est la linéarisation la plus utilisée."],
+  ["$z^4 = 1$ a quatre solutions dans $\\mathbb C$.", true, "Vrai : $1, i, -1, -i$."],
+  ["$\\arg(z + z') = \\arg z + \\arg z'$.", false, "Faux : c'est vrai pour le produit $zz'$, pas pour la somme."],
+  ["Si $z\\in\\mathbb U$, alors $\\overline z = \\frac1z$.", true, "Vrai : $z\\overline z = |z|^2 = 1$."],
+  ["$1 + e^{i\\theta} = 2\\cos\\frac\\theta2\\,e^{i\\theta/2}$, donc $|1 + e^{i\\theta}| = 2\\cos\\frac\\theta2$ pour tout $\\theta$.", false, "Faux : seulement si $\\cos\\frac\\theta2\\geqslant0$. Sinon le module est $-2\\cos\\frac\\theta2$."]
 ];
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */

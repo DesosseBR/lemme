@@ -1336,5 +1336,558 @@ $$y' = 1 + y^2\iff\frac{y'}{1 + y^2} = 1\iff\big(\arctan y\big)' = 1\iff\arctan 
 </ul></div></li>
 <li><div class="hr"><em>conditions données</em><a class="hl end" href="#e-cauchy">à la fin : $y_H + y_p$, puis les constantes</a></div></li>
 </ul></div></div>
+`,
+"Calcul algébrique": R`
+<nav class="msum"><a href="#a-not">Notations</a><a href="#a-lin">Règles de calcul</a><a href="#a-chg">Changer d'indice</a><a href="#a-usu">Sommes usuelles</a><a href="#a-geo">Géométrique</a><a href="#a-tele">Télescopage</a><a href="#a-prod">Produits</a><a href="#a-binom">Coefficients binomiaux</a><a href="#a-newton">Binôme de Newton</a><a href="#a-bern">$a^n - b^n$</a><a href="#a-doubles">Sommes doubles</a><a href="#a-ineg">Inégalités</a><a href="#a-enonce">Ce que l'énoncé te donne</a><a href="#a-erreurs">Erreurs</a><a href="#a-entrainement">S'entraîner</a><a href="#a-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : l'indice et les bornes. <span class="kO">orange</span> : l'opération qu'on fait (changement d'indice, factorisation). <span class="kR">rouge</span> : les termes qui s'annulent. <span class="kV">violet</span> : les coefficients binomiaux. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="a-not">1. Les notations du programme</h2>
+<div class="sbox">$$\sum_{\cB{k = p}}^{\cB n}x_k = x_p + x_{p+1} + \cdots + x_n,\qquad\prod_{\cB{k = p}}^{\cB n}x_k = x_p\times x_{p+1}\times\cdots\times x_n\qquad(p\leqslant n).$$</div>
+<ul>
+<li><b>Nombre de termes</b> : de $\cB p$ à $\cB n$, il y a $\cB{n - p + 1}$ termes (et pas $n - p$).</li>
+<li><b>L'indice est muet</b> : $\sum_{k=1}^nk^2 = \sum_{j=1}^nj^2$. Il n'existe pas hors de la somme : on n'écrit jamais $k$ dans le résultat.</li>
+<li><b>Conventions</b> : si $p > n$, la somme est vide et vaut $0$, le produit est vide et vaut $1$.</li>
+<li>Somme sur un ensemble : $\sum_{k\in I}x_k$, et $\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j}$ pour une somme double.</li>
+</ul>
+<p class="ml">Exemple : compter les termes</p>
+$$\sum_{\cB{k = 3}}^{\cB{10}}1 = \underbrace{1 + 1 + \cdots + 1}_{\cB{10 - 3 + 1 = 8}\ \text{termes}} = \cG8,\qquad\sum_{\cB{k = 0}}^{\cB n}5 = 5(\cB{n + 1}) = \cG{5n + 5}.$$
+<p class="ml piege">Piège</p>
+<p>$\sum_{k=1}^n\lambda = n\lambda$, mais $\sum_{k=0}^n\lambda = (n + 1)\lambda$ : le terme $k = 0$ compte.</p>
+
+<h2 id="a-lin">2. Les règles de calcul</h2>
+<div class="sbox">$$\sum_{k=p}^n(\lambda x_k + \mu y_k) = \lambda\sum_{k=p}^nx_k + \mu\sum_{k=p}^ny_k\quad\text{(linéarité)},\qquad\sum_{k=p}^nx_k = \sum_{k=p}^mx_k + \sum_{k=m+1}^nx_k\quad\text{(Chasles)}.$$</div>
+<ul>
+<li>Ce qui ne dépend pas de $k$ sort de la somme : $\sum_{k=1}^nn\,k = n\sum_{k=1}^nk$.</li>
+<li>On peut isoler un terme : $\sum_{k=0}^nx_k = x_0 + \sum_{k=1}^nx_k$.</li>
+<li>Termes pairs et impairs : $\sum_{k=0}^{2n}x_k = \sum_{p=0}^nx_{2p} + \sum_{p=0}^{n-1}x_{2p+1}$.</li>
+</ul>
+<p class="ml">Exemple</p>
+$$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2 = 3\cdot\frac{n(n + 1)}{2} + 2n = \frac{3n^2 + 3n + 4n}{2} = \cG{\frac{n(3n + 7)}{2}}.$$
+<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5$. $\checkmark$</p>
+<p class="ml piege">Piège</p>
+<p>$\sum x_ky_k\neq\big(\sum x_k\big)\big(\sum y_k\big)$ et $\sum\frac1{x_k}\neq\frac1{\sum x_k}$. La somme ne passe pas dans un produit ni dans un quotient.</p>
+
+<h2 id="a-chg">3. Changer d'indice</h2>
+<p>On pose une nouvelle variable, et on change <b>trois choses</b> : le terme général, la borne du bas et la borne du haut.</p>
+<table class="mtab">
+<tr><th>Changement</th><th>Nouvelles bornes</th><th>Effet</th></tr>
+<tr><td>$\cO{j = k + 1}$ (décalage)</td><td>$k = p\mapsto j = p + 1$, $k = n\mapsto j = n + 1$</td><td>$\sum_{k=p}^nx_{k+1} = \sum_{j=p+1}^{n+1}x_j$</td></tr>
+<tr><td>$\cO{j = k - 1}$</td><td>$k = p\mapsto j = p - 1$, $k = n\mapsto j = n - 1$</td><td>$\sum_{k=p}^nx_{k-1} = \sum_{j=p-1}^{n-1}x_j$</td></tr>
+<tr><td>$\cO{j = n - k}$ (retournement)</td><td>$k = 0\mapsto j = n$, $k = n\mapsto j = 0$</td><td>$\sum_{k=0}^nx_{n-k} = \sum_{j=0}^nx_j$</td></tr>
+</table>
+<p class="ml">Exemple 1 : un décalage</p>
+$$S = \sum_{\cB{k = 0}}^{\cB{n-1}}(k + 1)^2.\qquad\cO{j = k + 1}:\quad k = 0\mapsto j = \cB1,\quad k = n - 1\mapsto j = \cB n.$$
+$$S = \sum_{\cB{j = 1}}^{\cB n}j^2 = \cG{\frac{n(n + 1)(2n + 1)}{6}}.$$
+<p class="ml">Exemple 2 : un retournement</p>
+$$T = \sum_{\cB{k = 0}}^{\cB n}(n - k)\,2^{n-k}.\qquad\cO{j = n - k}:\quad k = 0\mapsto j = \cB n,\quad k = n\mapsto j = \cB0.$$
+$$T = \sum_{\cB{j = 0}}^{\cB n}j\,2^j\qquad(\text{on a remis les bornes dans l'ordre croissant}).$$
+<p class="ml piege">Piège</p>
+<p>Dans le terme général, <b>tous</b> les $k$ doivent être remplacés : avec $j = n - k$, $k = n - j$ et $x_k = x_{n-j}$.</p>
+
+<h2 id="a-usu">4. Les sommes usuelles</h2>
+<div class="sbox">$$\sum_{k=1}^nk = \frac{n(n + 1)}{2},\qquad\sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}{6},\qquad\sum_{k=1}^nk^3 = \left(\frac{n(n + 1)}{2}\right)^2.$$</div>
+<p class="ml">La première, par retournement (Gauss)</p>
+<p>On écrit $S$ deux fois, la seconde à l'envers ($\cO{j = n + 1 - k}$), et on ajoute colonne par colonne :</p>
+$$\begin{aligned}S &= \cB1 + \cB2 + \cdots + \cB n\\S &= \cR n + \cR{(n - 1)} + \cdots + \cR1\\\hline2S &= (n + 1) + (n + 1) + \cdots + (n + 1) = n(n + 1)\end{aligned}\qquad\Longrightarrow\qquad\cG{S = \frac{n(n + 1)}{2}}.$$
+<p class="ml">La deuxième, par télescopage</p>
+<p>On développe $(k + 1)^3 - k^3 = 3k^2 + 3k + 1$ et on somme de $k = 1$ à $n$. À gauche, tout se simplifie (§6) :</p>
+$$\sum_{k=1}^n\big((k + 1)^3 - k^3\big) = (n + 1)^3 - 1 = 3\sum_{k=1}^nk^2 + 3\cdot\frac{n(n + 1)}2 + n.$$
+$$3\sum_{k=1}^nk^2 = (n + 1)^3 - 1 - n - \frac{3n(n + 1)}2 = (n + 1)\Big[(n + 1)^2 - 1 - \frac{3n}2\Big] = (n + 1)\cdot\frac{2n^2 + n}{2} = \frac{n(n + 1)(2n + 1)}2.$$
+<p>On divise par $3$ : $\cG{\sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}6}$.</p>
+<p class="ml">Exemple : $\sum_{k=1}^nk(k + 1)$</p>
+<p>On développe puis on utilise la linéarité :</p>
+$$\sum_{k=1}^nk(k + 1) = \sum_{k=1}^nk^2 + \sum_{k=1}^nk = \frac{n(n + 1)(2n + 1)}6 + \frac{n(n + 1)}2.$$
+<p>On factorise par $\cO{\frac{n(n + 1)}6}$ avant de développer (moins de calculs) :</p>
+$$= \cO{\frac{n(n + 1)}6}\big[(2n + 1) + 3\big] = \frac{n(n + 1)(2n + 4)}6 = \cG{\frac{n(n + 1)(n + 2)}3}.$$
+<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8$. $\checkmark$</p>
+
+<h2 id="a-geo">5. La somme géométrique</h2>
+<div class="sbox">$$\sum_{k=0}^nq^k = \left\{\begin{aligned}&\frac{1 - q^{n+1}}{1 - q}&&\text{si}\ q\neq1\\&n + 1&&\text{si}\ q = 1\end{aligned}\right.\qquad\text{En général}:\ \text{premier terme}\times\frac{1 - q^{\text{nombre de termes}}}{1 - q}.$$</div>
+<p class="ml">Pourquoi (à savoir refaire)</p>
+$$(1 - q)\sum_{k=0}^nq^k = \sum_{k=0}^nq^k - \sum_{k=0}^nq^{k+1} = (1 + \cR{q + \cdots + q^n}) - (\cR{q + \cdots + q^n} + q^{n+1}) = 1 - q^{n+1}.$$
+<p class="ml">Exemple 1 : la somme ne commence pas à 0</p>
+$$\sum_{k=\cB2}^{\cB n}3^k:\qquad\text{premier terme}\ 3^2 = 9,\qquad\text{nombre de termes}\ \cB{n - 1},\qquad q = 3\neq1.$$
+$$\sum_{k=2}^n3^k = 9\cdot\frac{1 - 3^{n-1}}{1 - 3} = \frac92\big(3^{n-1} - 1\big) = \cG{\frac{3^{n+1} - 9}{2}}.$$
+<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9$. $\checkmark$</p>
+<p class="ml">Exemple 2 : la raison est cachée</p>
+$$\sum_{k=0}^n\frac{2^k}{5^{k+1}} = \frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \frac15\cdot\frac{1 - (2/5)^{n+1}}{1 - 2/5} = \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1 - \Big(\frac25\Big)^{n+1}\Big)}.$$
+<p class="ml piege">Piège</p>
+<p>Toujours vérifier $q\neq1$. Avec un paramètre ($q = x$, $q = e^{i\theta}$), on traite le cas $q = 1$ à part.</p>
+
+<h2 id="a-tele">6. Le télescopage</h2>
+<div class="sbox">$$\sum_{k=p}^n(x_{k+1} - x_k) = x_{n+1} - x_p,\qquad\prod_{k=p}^n\frac{x_{k+1}}{x_k} = \frac{x_{n+1}}{x_p}\quad(x_k\neq0).$$</div>
+<p>On repère une différence de deux termes <b>consécutifs</b> de la même suite. On écrit les termes, ils s'annulent deux à deux, il reste le dernier et le premier.</p>
+<p class="ml">Exemple 1 : $\sum_{k=1}^n\frac1{k(k + 1)}$</p>
+<p><b>Étape 1 : décomposer.</b> On cherche $a, b$ avec $\frac1{k(k + 1)} = \frac ak + \frac b{k + 1}$ :</p>
+$$\frac ak + \frac b{k + 1} = \frac{a(k + 1) + bk}{k(k + 1)} = \frac{(a + b)k + a}{k(k + 1)}\qquad\Longrightarrow\qquad\left\{\begin{aligned}a + b &= 0\\a &= 1\end{aligned}\right.\iff\left\{\begin{aligned}a &= 1\\b &= -1\end{aligned}\right.$$
+<p><b>Étape 2 : écrire les termes.</b></p>
+$$\sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = \Big(1 - \cR{\frac12}\Big) + \Big(\cR{\frac12} - \cR{\frac13}\Big) + \cdots + \Big(\cR{\frac1n} - \frac1{n + 1}\Big) = \cG{1 - \frac1{n + 1} = \frac{n}{n + 1}}.$$
+<p class="ml">Exemple 2 : un écart de 2</p>
+$$\frac1{k(k + 2)} = \frac12\Big(\frac1k - \frac1{k + 2}\Big):\quad\sum_{k=1}^n\frac1{k(k + 2)} = \frac12\Big(1 + \frac12 - \frac1{n + 1} - \frac1{n + 2}\Big).$$
+<p>Ici il reste <b>deux</b> termes au début ($k = 1, 2$) et deux à la fin : les $\frac1j$ pour $3\leqslant j\leqslant n$ apparaissent une fois avec $+$ et une fois avec $-$.</p>
+<p class="ml">Exemple 3 : un produit télescopique</p>
+$$\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \prod_{k=2}^n\frac{(k - 1)(k + 1)}{k\cdot k} = \Big(\prod_{k=2}^n\frac{k - 1}{k}\Big)\Big(\prod_{k=2}^n\frac{k + 1}{k}\Big).$$
+$$\prod_{k=2}^n\frac{k - 1}{k} = \frac12\cdot\frac{\cR2}{\cR3}\cdots\frac{\cR{n - 1}}n = \frac1n,\qquad\prod_{k=2}^n\frac{k + 1}k = \frac{\cR3}2\cdot\frac{\cR4}{\cR3}\cdots\frac{n + 1}{\cR n} = \frac{n + 1}2.$$
+$$\prod_{k=2}^n\Big(1 - \frac1{k^2}\Big) = \frac1n\cdot\frac{n + 1}2 = \cG{\frac{n + 1}{2n}}.$$
+<p class="ml">Exemple 4 : avec un logarithme</p>
+$$\sum_{k=1}^n\ln\Big(1 + \frac1k\Big) = \sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1 = \cG{\ln(n + 1)}.$$
+
+<h2 id="a-prod">7. Les produits</h2>
+<div class="sbox">$$\prod_{k=p}^n\lambda = \lambda^{n-p+1},\qquad\prod_{k=p}^n(\lambda x_k) = \lambda^{n-p+1}\prod_{k=p}^nx_k,\qquad\ln\Big(\prod x_k\Big) = \sum\ln x_k\ (x_k > 0),\qquad e^{\sum x_k} = \prod e^{x_k}.$$</div>
+<ul>
+<li>$\prod_{k=1}^nk = n!$, et un produit est nul si et seulement si un de ses facteurs est nul.</li>
+<li>Le $\lambda$ sort avec la <b>puissance</b> $n - p + 1$, pas multiplié une fois.</li>
+</ul>
+<p class="ml">Exemple 1 : les nombres pairs</p>
+$$\prod_{k=1}^n(2k) = \cO{2^n}\prod_{k=1}^nk = \cG{2^n\,n!}.$$
+<p class="ml">Exemple 2 : les nombres impairs, on complète avec les pairs</p>
+$$\prod_{k=1}^n(2k - 1) = 1\times3\times\cdots\times(2n - 1) = \frac{1\times\cO2\times3\times\cO4\times\cdots\times(2n - 1)\times\cO{2n}}{\cO2\times\cO4\times\cdots\times\cO{2n}} = \frac{(2n)!}{2^n\,n!}.$$
+<p class="ml">Exemple 3 : une somme dans l'exponentielle</p>
+$$\prod_{k=1}^ne^{k/n} = e^{\frac1n\sum_{k=1}^nk} = e^{\frac1n\cdot\frac{n(n + 1)}2} = \cG{e^{\frac{n + 1}2}}.$$
+
+<h2 id="a-binom">8. Factorielles et coefficients binomiaux</h2>
+<div class="sbox">$$n! = \prod_{k=1}^nk,\quad0! = 1,\qquad\cV{\binom nk} = \left\{\begin{aligned}&\frac{n!}{k!\,(n - k)!}&&\text{si}\ 0\leqslant k\leqslant n\\&0&&\text{sinon}\end{aligned}\right.$$</div>
+<p>Notation du programme : $\binom nk$, qui se lit « $k$ parmi $n$ ». L'ancienne notation est $C_n^k$. C'est le nombre de façons de choisir $k$ éléments parmi $n$.</p>
+<p class="ml">Les formules</p>
+<div class="mrefl">
+<div><b>Valeurs</b><span>$\binom n0 = \binom nn = 1$, $\binom n1 = n$, $\binom n2 = \frac{n(n - 1)}2$.</span></div>
+<div><b>Symétrie</b><span>$\binom nk = \binom n{n - k}$.</span></div>
+<div><b>Pascal</b><span>$\binom nk + \binom n{k + 1} = \binom{n + 1}{k + 1}$.</span></div>
+<div><b>Sans factorielle</b><span>$\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ ($k$ facteurs en haut).</span></div>
+<div><b>Formule du capitaine</b><span>$k\binom nk = n\binom{n - 1}{k - 1}$.</span></div>
+</div>
+<p class="ml">Démontrer la formule de Pascal</p>
+<p>On met au même dénominateur $\cO{(k + 1)!\,(n - k)!}$ :</p>
+$$\binom nk + \binom n{k + 1} = \frac{n!}{k!\,(n - k)!} + \frac{n!}{(k + 1)!\,(n - k - 1)!} = \frac{n!\,\cO{(k + 1)}}{\cO{(k + 1)!\,(n - k)!}} + \frac{n!\,\cO{(n - k)}}{\cO{(k + 1)!\,(n - k)!}}.$$
+$$= \frac{n!\,(k + 1 + n - k)}{(k + 1)!\,(n - k)!} = \frac{(n + 1)!}{(k + 1)!\,(n - k)!} = \cG{\binom{n + 1}{k + 1}}.$$
+<p class="ml">Calculer vite : $\binom{10}3$</p>
+$$\binom{10}3 = \frac{10\times9\times8}{3\times2\times1} = \frac{720}6 = \cG{120}.$$
+<p>On écrit $k = 3$ facteurs en haut, en partant de $10$ et en descendant. Si $k > \frac n2$, on utilise d'abord la symétrie : $\binom{10}8 = \binom{10}2 = 45$.</p>
+<p class="ml">Le triangle de Pascal</p>
+<p>Chaque nombre est la somme des deux nombres au-dessus de lui (le labo ci-dessous le montre) :</p>
+<table class="mtab pascal">
+<tr><th>$n$</th><th>$k = 0$</th><th>$1$</th><th>$2$</th><th>$3$</th><th>$4$</th><th>$5$</th></tr>
+<tr><td>$0$</td><td>1</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>$1$</td><td>1</td><td>1</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>$2$</td><td>1</td><td>2</td><td>1</td><td></td><td></td><td></td></tr>
+<tr><td>$3$</td><td>1</td><td><span class="kB">3</span></td><td><span class="kB">3</span></td><td>1</td><td></td><td></td></tr>
+<tr><td>$4$</td><td>1</td><td>4</td><td><span class="kG">6</span></td><td>4</td><td>1</td><td></td></tr>
+<tr><td>$5$</td><td>1</td><td>5</td><td>10</td><td>10</td><td>5</td><td>1</td></tr>
+</table>
+<p>En couleur : $\binom31 + \binom32 = 3 + 3 = 6 = \binom42$.</p>
+<div data-mlab="pascal"></div>
+
+<h2 id="a-newton">9. La formule du binôme de Newton</h2>
+<div class="sbox">$$(a + b)^n = \sum_{k=0}^n\cV{\binom nk}a^kb^{n-k}\qquad(a, b\in\mathbb C,\ n\in\mathbb N).$$</div>
+<p>$n + 1$ termes. Les puissances de $a$ montent de $0$ à $n$, celles de $b$ descendent de $n$ à $0$, et leur somme vaut toujours $n$. Pour des matrices, il faut $AB = BA$.</p>
+<p class="ml">Exemple 1 : $(x + 1)^5$</p>
+<p>La ligne $n = 5$ du triangle donne les coefficients : $\cV1, \cV5, \cV{10}, \cV{10}, \cV5, \cV1$.</p>
+$$(x + 1)^5 = \cV1\,x^5 + \cV5\,x^4 + \cV{10}\,x^3 + \cV{10}\,x^2 + \cV5\,x + \cV1.$$
+<p class="ml">Exemple 2 : $(2x - 3)^4$, avec un signe</p>
+<p>On pose $a = 2x$ et $b = -3$, et on fait un tableau terme par terme :</p>
+<table class="mtab">
+<tr><th>$k$</th><th>$\cV{\binom4k}$</th><th>$(2x)^k$</th><th>$(-3)^{4-k}$</th><th>Terme</th></tr>
+<tr><td>$0$</td><td>$\cV1$</td><td>$1$</td><td>$81$</td><td>$81$</td></tr>
+<tr><td>$1$</td><td>$\cV4$</td><td>$2x$</td><td>$-27$</td><td>$-216x$</td></tr>
+<tr><td>$2$</td><td>$\cV6$</td><td>$4x^2$</td><td>$9$</td><td>$216x^2$</td></tr>
+<tr><td>$3$</td><td>$\cV4$</td><td>$8x^3$</td><td>$-3$</td><td>$-96x^3$</td></tr>
+<tr><td>$4$</td><td>$\cV1$</td><td>$16x^4$</td><td>$1$</td><td>$16x^4$</td></tr>
+</table>
+$$(2x - 3)^4 = \cG{16x^4 - 96x^3 + 216x^2 - 216x + 81}.$$
+<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1$. $\checkmark$</p>
+<p class="ml">Exemple 3 : les sommes de coefficients</p>
+$$a = b = 1:\ \sum_{k=0}^n\binom nk = (1 + 1)^n = \cG{2^n},\qquad a = -1,\ b = 1:\ \sum_{k=0}^n(-1)^k\binom nk = (1 - 1)^n = \cG0\ (n\geqslant1).$$
+<p class="ml">Exemple 4 : $\sum_{k=0}^nk\binom nk$ avec la formule du capitaine</p>
+<p>Le terme $k = 0$ est nul. Pour $k\geqslant1$, $k\binom nk = n\binom{n - 1}{k - 1}$, puis on décale avec $\cO{j = k - 1}$ :</p>
+$$\sum_{k=1}^nk\binom nk = n\sum_{k=1}^n\binom{n - 1}{k - 1} = n\sum_{j=0}^{n-1}\binom{n - 1}{j} = n\cdot2^{n-1}.$$
+<div data-mlab="binome"></div>
+
+<h2 id="a-bern">10. Factoriser $a^n - b^n$</h2>
+<div class="sbox">$$a^n - b^n = (a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k} = (a - b)\big(a^{n-1} + a^{n-2}b + \cdots + ab^{n-2} + b^{n-1}\big).$$</div>
+<p class="ml">Pourquoi : on développe et ça télescope</p>
+$$(a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k} = \sum_{k=0}^{n-1}a^{k+1}b^{n-1-k} - \sum_{k=0}^{n-1}a^kb^{n-k} = a^n - b^n.$$
+<p class="ml">Les cas à connaître</p>
+$$a^2 - b^2 = (a - b)(a + b),\qquad a^3 - b^3 = (a - b)(a^2 + ab + b^2),\qquad x^n - 1 = (x - 1)(1 + x + \cdots + x^{n-1}).$$
+<p>Pour $n$ impair, on remplace $b$ par $-b$ : $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$.</p>
+<p class="ml">Exemple : $x^5 - 32$</p>
+$$x^5 - 2^5 = (x - 2)\big(x^4 + 2x^3 + 4x^2 + 8x + 16\big).$$
+
+<h2 id="a-doubles">11. Les sommes doubles</h2>
+<p class="ml">Sur un rectangle : on intervertit librement</p>
+<div class="sbox">$$\sum_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant m}}a_{i,j} = \sum_{i=1}^n\Big(\sum_{j=1}^ma_{i,j}\Big) = \sum_{j=1}^m\Big(\sum_{i=1}^na_{i,j}\Big),\qquad\Big(\sum_{i=1}^nx_i\Big)\Big(\sum_{j=1}^my_j\Big) = \sum_{i,j}x_iy_j.$$</div>
+<p class="ml">Sur un triangle : on dessine pour changer l'ordre</p>
+<div class="sbox">$$\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j} = \sum_{j=1}^n\sum_{\cB{i = 1}}^{\cB j}a_{i,j} = \sum_{i=1}^n\sum_{\cB{j = i}}^{\cB n}a_{i,j}.$$</div>
+<p>Méthode : on fixe la variable de l'extérieur, puis on lit dans la condition $1\leqslant i\leqslant j\leqslant n$ les bornes de celle de l'intérieur.</p>
+<p class="ml">Exemple : $S = \sum_{1\leqslant i\leqslant j\leqslant n}i$</p>
+<p>On somme d'abord sur $i$ (à $j$ fixé, $i$ va de $\cB1$ à $\cB j$) :</p>
+$$S = \sum_{j=1}^n\Big(\sum_{i=1}^ji\Big) = \sum_{j=1}^n\frac{j(j + 1)}2 = \frac12\sum_{j=1}^nj(j + 1) = \frac12\cdot\frac{n(n + 1)(n + 2)}3 = \cG{\frac{n(n + 1)(n + 2)}6}$$
+<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4$. $\checkmark$</p>
+<p class="ml">Le carré d'une somme</p>
+$$\Big(\sum_{i=1}^nx_i\Big)^2 = \sum_{i=1}^nx_i^2 + 2\sum_{1\leqslant i\lt j\leqslant n}x_ix_j.$$
+<p class="ml piege">Piège</p>
+<p>$\big(\sum_ix_i\big)\big(\sum_iy_i\big)\neq\sum_ix_iy_i$. Contre-exemple avec $n = 2$ et tous les termes égaux à $1$ : à gauche $2\times2 = 4$, à droite $2$. Il faut deux indices <b>différents</b>.</p>
+
+<h2 id="a-ineg">12. Inégalités avec des sommes et des produits</h2>
+<ul>
+<li>Si $x_k\leqslant y_k$ pour tout $k$, alors $\sum x_k\leqslant\sum y_k$.</li>
+<li>Si $0\leqslant x_k\leqslant y_k$ pour tout $k$, alors $\prod x_k\leqslant\prod y_k$. Sans la positivité, c'est faux.</li>
+<li>Inégalité triangulaire : $\big|\sum x_k\big|\leqslant\sum|x_k|$.</li>
+</ul>
+<p class="ml">Exemple : encadrer $\sum_{k=1}^n\frac1{n + k}$</p>
+<p>Pour $1\leqslant k\leqslant n$, on a $n + 1\leqslant n + k\leqslant2n$, donc $\frac1{2n}\leqslant\frac1{n + k}\leqslant\frac1{n + 1}$. On somme les $n$ termes :</p>
+$$\frac n{2n} = \frac12\leqslant\sum_{k=1}^n\frac1{n + k}\leqslant\frac n{n + 1}\lt1.$$
+
+<h2 id="a-enonce">13. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>Un polynôme en $k$ de degré $\leqslant3$</b><span>Développer, linéarité, sommes usuelles. Factoriser avant de développer.</span></div>
+<div><b>$q^k$, $a^k$, $e^{ik\theta}$</b><span>Somme géométrique. Cas $q = 1$ à part.</span></div>
+<div><b>Une fraction $\frac1{k(k + 1)}$, $\frac1{k^2 - 1}$</b><span>Décomposer, puis télescopage.</span></div>
+<div><b>$\ln\frac{k + 1}k$, $\sqrt{k + 1} - \sqrt k$</b><span>Télescopage direct.</span></div>
+<div><b>« À l'aide d'un changement d'indice »</b><span>Écrire $j = \dots$, changer les deux bornes et tous les $k$.</span></div>
+<div><b>$\binom nk$ dans la somme</b><span>Binôme de Newton avec $a, b$ bien choisis, ou formule du capitaine.</span></div>
+<div><b>$\binom nk\,x^k$ avec $k$ en facteur</b><span>Dériver $(1 + x)^n$, ou $k\binom nk = n\binom{n - 1}{k - 1}$.</span></div>
+<div><b>$a^n - b^n$, $x^n - 1$</b><span>Factoriser par $a - b$ (formule de Bernoulli).</span></div>
+<div><b>$\sum_{i\leqslant j}$</b><span>Dessiner le triangle, sommer d'abord sur la variable la plus simple.</span></div>
+<div><b>Un produit $\prod$</b><span>Passer au $\ln$ si les termes sont positifs, ou télescopage de quotients.</span></div>
+<div><b>Termes pairs ou impairs</b><span>Séparer $k = 2p$ et $k = 2p + 1$, ou compléter le produit ($\prod(2k - 1)$).</span></div>
+<div><b>« Montrer pour tout $n$ »</b><span>Une récurrence marche toujours, mais un calcul direct est plus rapide.</span></div>
+</div>
+
+<h2 id="a-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Compter $n - p$ termes au lieu de $n - p + 1$.</p>
+<p><b>2.</b> $\sum_{k=0}^n\lambda = n\lambda$ : faux, c'est $(n + 1)\lambda$.</p>
+<p><b>3.</b> Changer l'indice sans changer les bornes.</p>
+<p><b>4.</b> Laisser un $k$ dans le résultat final.</p>
+<p><b>5.</b> Appliquer $\frac{1 - q^{n+1}}{1 - q}$ à une somme qui commence à $k = 1$ ou $k = 2$.</p>
+<p><b>6.</b> Oublier le cas $q = 1$.</p>
+<p><b>7.</b> $\prod(\lambda x_k) = \lambda\prod x_k$ : il manque la puissance.</p>
+<p><b>8.</b> $\big(\sum x_k\big)^2 = \sum x_k^2$ : il manque les doubles produits.</p>
+<p><b>9.</b> Dans le binôme, oublier les signes quand $b$ est négatif.</p>
+<p><b>10.</b> Mal compter ce qui reste dans un télescopage : écrire les deux premiers et les deux derniers termes.</p>
+</div>
+
+<h2 id="a-entrainement">S'entraîner</h2>
+<div data-mlab="sommes"></div>
+<div data-mlab="quizalg"></div>
+
+<h2 id="a-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Calculer une somme $\sum$</div>
+<div class="tq">Terme en $q^k$ ?</div><a class="tl" href="#a-geo">oui : somme géométrique</a><div class="tno">non</div>
+<div class="tq">Différence $x_{k+1} - x_k$ (ou fraction) ?</div><a class="tl" href="#a-tele">oui : télescopage</a><div class="tno">non</div>
+<div class="tq">$\binom nk$ dans le terme ?</div><a class="tl" href="#a-newton">oui : binôme de Newton</a><div class="tno">non</div>
+<div class="tq">Indice décalé ou retourné ?</div><a class="tl" href="#a-chg">oui : changer d'indice</a><div class="tno">non</div>
+<a class="tl tend" href="#a-usu">polynôme en $k$ : sommes usuelles</a></div>
+<div class="tb tR"><div class="tt">Calculer un produit $\prod$</div>
+<div class="tq">Facteur constant ?</div><a class="tl" href="#a-prod">oui : $\lambda^{n-p+1}$</a><div class="tno">non</div>
+<div class="tq">Quotient $\frac{x_{k+1}}{x_k}$ ?</div><a class="tl" href="#a-tele">oui : télescopage</a><div class="tno">non</div>
+<div class="tq">Termes positifs ?</div><a class="tl" href="#a-prod">oui : passer au $\ln$</a><div class="tno">non</div>
+<a class="tl tend" href="#a-prod">factorielles, compléter les termes</a></div>
+<div class="tb tG"><div class="tt">Développer $(a + b)^n$</div>
+<div class="tq">$n\leqslant5$ ?</div><a class="tl" href="#a-binom">oui : ligne du triangle de Pascal</a><div class="tno">non</div>
+<div class="tq">Un seul coefficient demandé ?</div><a class="tl" href="#a-newton">oui : terme $\binom nka^kb^{n-k}$</a><div class="tno">non</div>
+<a class="tl tend" href="#a-newton">$\sum_k\binom nka^kb^{n-k}$</a></div>
+<div class="tb tO"><div class="tt">Factoriser</div>
+<div class="tq">$a^n - b^n$ ?</div><a class="tl" href="#a-bern">oui : $(a - b)\sum a^kb^{n-1-k}$</a><div class="tno">non</div>
+<div class="tq">$a^n + b^n$, $n$ impair ?</div><a class="tl" href="#a-bern">oui : remplacer $b$ par $-b$</a><div class="tno">non</div>
+<a class="tl tend" href="#a-usu">factoriser avant de développer</a></div>
+<div class="tb tV"><div class="tt">Somme double</div>
+<div class="tq">Indices indépendants ?</div><a class="tl" href="#a-doubles">oui : intervertir, produit de sommes</a><div class="tno">non</div>
+<div class="tq">Condition $i\leqslant j$ ?</div><a class="tl" href="#a-doubles">oui : dessiner le triangle</a><div class="tno">non</div>
+<a class="tl tend" href="#a-doubles">$(\sum x_i)^2 = \sum x_i^2 + 2\sum_{i\lt j}x_ix_j$</a></div>
+</div>
+</div>
+`,
+"Nombres complexes": R`
+<nav class="msum"><a href="#z-not">Notations</a><a href="#z-alg">Forme algébrique</a><a href="#z-conj">Conjugué</a><a href="#z-mod">Module</a><a href="#z-u">Le cercle $\mathbb U$</a><a href="#z-exp">Forme exponentielle</a><a href="#z-moitie">Angle moitié</a><a href="#z-trigo">Trigonométrie</a><a href="#z-moivre">Moivre</a><a href="#z-lin">Linéariser</a><a href="#z-rac2">Racines carrées</a><a href="#z-eq2">Degré 2</a><a href="#z-racn">Racines $n$-ièmes</a><a href="#z-geo">Géométrie</a><a href="#z-enonce">Ce que l'énoncé te donne</a><a href="#z-erreurs">Erreurs</a><a href="#z-entrainement">S'entraîner</a><a href="#z-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la partie réelle, ou le module $r$. <span class="kR">rouge</span> : la partie imaginaire, ou l'argument $\theta$. <span class="kO">orange</span> : l'opération qu'on fait. <span class="kV">violet</span> : les racines. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="z-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Forme algébrique</td><td>$z = \cB a + i\cR b$, $a, b\in\mathbb R$</td><td>$\cB a = \operatorname{Re}(z)$, $\cR b = \operatorname{Im}(z)$, tous deux <b>réels</b>.</td></tr>
+<tr><td>Conjugué</td><td>$\overline z = a - ib$</td><td>Symétrique par rapport à l'axe réel.</td></tr>
+<tr><td>Module</td><td>$|z| = \sqrt{a^2 + b^2}$</td><td>$|z|^2 = z\,\overline z$.</td></tr>
+<tr><td>Argument</td><td>$\arg z\equiv\theta\ [2\pi]$, si $z\neq0$</td><td>Défini à $2\pi$ près.</td></tr>
+<tr><td>Forme exponentielle</td><td>$z = \cB re^{i\cR\theta}$, $r = |z| > 0$</td><td>$e^{i\theta} = \cos\theta + i\sin\theta$.</td></tr>
+<tr><td>Cercle unité</td><td>$\mathbb U = \{z\in\mathbb C : |z| = 1\}$</td><td>$z\in\mathbb U\iff\overline z = \frac1z\iff z = e^{i\theta}$.</td></tr>
+<tr><td>Racines $n$-ièmes de l'unité</td><td>$\mathbb U_n = \{e^{\frac{2ik\pi}n} : 0\leqslant k\leqslant n - 1\}$</td><td>$j = e^{\frac{2i\pi}3}$.</td></tr>
+</table>
+
+<h2 id="z-alg">2. Calculer en forme algébrique</h2>
+<ul>
+<li>On développe comme avec des réels, en remplaçant $i^2$ par $-1$.</li>
+<li>Puissances de $i$ : $i^2 = -1$, $i^3 = -i$, $i^4 = 1$, puis ça recommence.</li>
+<li><b>Diviser</b> : on multiplie en haut et en bas par le <b>conjugué du dénominateur</b>.</li>
+</ul>
+<div class="sbox">$$\frac1{a + ib} = \frac{a - ib}{(a + ib)(a - ib)} = \frac{a - ib}{a^2 + b^2}.$$</div>
+<p class="ml">Exemple 1 : un produit</p>
+$$(2 + 3i)(1 - 4i) = 2 - 8i + 3i - 12\cO{i^2} = 2 - 5i + 12 = \cG{14 - 5i}.$$
+<p class="ml">Exemple 2 : un quotient</p>
+$$\frac{2 + 3i}{1 - 2i} = \frac{(2 + 3i)\cO{(1 + 2i)}}{(1 - 2i)\cO{(1 + 2i)}} = \frac{2 + 4i + 3i + 6i^2}{1^2 + 2^2} = \frac{-4 + 7i}{5} = \cG{-\frac45 + \frac75i}.$$
+<p>Partie réelle $\cB{-\frac45}$, partie imaginaire $\cR{\frac75}$ (sans le $i$).</p>
+<p class="ml piege">Piège</p>
+<p>$\operatorname{Im}(3 - 2i) = -2$, pas $-2i$. Et on ne compare pas des complexes avec $\leqslant$.</p>
+
+<h2 id="z-conj">3. Le conjugué</h2>
+<div class="sbox">$$\overline{z + z'} = \overline z + \overline{z'},\quad\overline{zz'} = \overline z\,\overline{z'},\quad\overline{\Big(\frac z{z'}\Big)} = \frac{\overline z}{\overline{z'}},\quad\operatorname{Re}z = \frac{z + \overline z}2,\quad\operatorname{Im}z = \frac{z - \overline z}{2i}.$$</div>
+<div class="sbox">$$z\in\mathbb R\iff\overline z = z,\qquad z\in i\mathbb R\iff\overline z = -z.$$</div>
+<p class="ml">Exemple : montrer qu'un nombre est réel sans le calculer</p>
+<p>Soit $z\in\mathbb U$, $z\neq-1$. Montrer que $w = \frac{1 - z}{1 + z}$ est imaginaire pur. On utilise $\overline z = \frac1z$ :</p>
+$$\overline w = \frac{1 - \overline z}{1 + \overline z} = \frac{1 - \frac1z}{1 + \frac1z}\ \underset{\cO{\times\frac zz}}{=}\ \frac{z - 1}{z + 1} = -\frac{1 - z}{1 + z} = -w\qquad\Longrightarrow\qquad\cG{w\in i\mathbb R}.$$
+
+<h2 id="z-mod">4. Le module</h2>
+<div class="sbox">$$|zz'| = |z|\,|z'|,\quad\Big|\frac z{z'}\Big| = \frac{|z|}{|z'|},\quad|z^n| = |z|^n,\quad\big||z| - |z'|\big|\leqslant|z + z'|\leqslant|z| + |z'|.$$</div>
+<ul>
+<li>$|z| = 0\iff z = 0$, et $|z - z'|$ est la distance entre les points d'affixes $z$ et $z'$.</li>
+<li>Égalité dans l'inégalité triangulaire ($z'\neq0$) : $|z + z'| = |z| + |z'|\iff z = \lambda z'$ avec $\lambda\geqslant0$.</li>
+<li>Avec des sommes : $\big|\sum z_k\big|\leqslant\sum|z_k|$.</li>
+</ul>
+<p class="ml">Exemple : le module d'une puissance, sans développer</p>
+$$|1 + i| = \sqrt{1^2 + 1^2} = \sqrt2\qquad\Longrightarrow\qquad|(1 + i)^8| = (\sqrt2)^8 = \cG{16}.$$
+<p class="ml">Exemple : le module d'un quotient</p>
+$$\Big|\frac{3 + 4i}{1 - i}\Big| = \frac{|3 + 4i|}{|1 - i|} = \frac{\sqrt{9 + 16}}{\sqrt{1 + 1}} = \frac5{\sqrt2} = \cG{\frac{5\sqrt2}2}.$$
+
+<h2 id="z-u">5. Le cercle $\mathbb U$, Euler et Moivre</h2>
+<div class="sbox">$$e^{i\theta} = \cos\theta + i\sin\theta,\qquad e^{i\theta}e^{i\theta'} = e^{i(\theta + \theta')},\qquad\overline{e^{i\theta}} = e^{-i\theta} = \frac1{e^{i\theta}}.$$</div>
+<div class="sbox">$$\textbf{Euler}:\ \cos\theta = \frac{e^{i\theta} + e^{-i\theta}}2,\quad\sin\theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}.\qquad\textbf{Moivre}:\ (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta).$$</div>
+<ul>
+<li>$e^{i\theta} = 1\iff\theta\equiv0\ [2\pi]$. Valeurs : $e^{i\pi} = -1$, $e^{i\pi/2} = i$, $e^{2ik\pi} = 1$, $e^{ik\pi} = (-1)^k$.</li>
+<li>$\cos\theta = \operatorname{Re}(e^{i\theta})$, $\sin\theta = \operatorname{Im}(e^{i\theta})$.</li>
+<li>Exponentielle complexe : $e^{a + ib} = e^ae^{ib}$, donc $|e^z| = e^{\operatorname{Re}z}$ et $e^z\neq0$.</li>
+</ul>
+
+<h2 id="z-exp">6. Passer en forme exponentielle</h2>
+<ol>
+<li>Calculer $\cB r = |z| = \sqrt{a^2 + b^2}$.</li>
+<li>Factoriser par $\cB r$ : $z = \cB r\Big(\frac ar + i\frac br\Big)$.</li>
+<li>Reconnaître $\cos\cR\theta = \frac ar$ et $\sin\cR\theta = \frac br$ dans le tableau des valeurs remarquables. Le signe de $\sin\theta$ dit si on est en haut ou en bas.</li>
+<li>Conclure : $z = \cB re^{i\cR\theta}$.</li>
+</ol>
+<table class="mtab">
+<tr><th>$\theta$</th><th>$0$</th><th>$\frac\pi6$</th><th>$\frac\pi4$</th><th>$\frac\pi3$</th><th>$\frac\pi2$</th><th>$\frac{2\pi}3$</th><th>$\frac{3\pi}4$</th><th>$\frac{5\pi}6$</th><th>$\pi$</th></tr>
+<tr><td>$\cos\theta$</td><td>$1$</td><td>$\frac{\sqrt3}2$</td><td>$\frac{\sqrt2}2$</td><td>$\frac12$</td><td>$0$</td><td>$-\frac12$</td><td>$-\frac{\sqrt2}2$</td><td>$-\frac{\sqrt3}2$</td><td>$-1$</td></tr>
+<tr><td>$\sin\theta$</td><td>$0$</td><td>$\frac12$</td><td>$\frac{\sqrt2}2$</td><td>$\frac{\sqrt3}2$</td><td>$1$</td><td>$\frac{\sqrt3}2$</td><td>$\frac{\sqrt2}2$</td><td>$\frac12$</td><td>$0$</td></tr>
+</table>
+<p class="ml">Exemple 1 : $z = 1 + i\sqrt3$</p>
+$$\cB r = \sqrt{1^2 + (\sqrt3)^2} = \sqrt{1 + 3} = \cB2,\qquad z = \cB2\Big(\frac12 + i\frac{\sqrt3}2\Big).$$
+$$\cos\cR\theta = \frac12,\ \sin\cR\theta = \frac{\sqrt3}2 > 0\ \Longrightarrow\ \cR{\theta = \frac\pi3},\qquad\cG{z = 2e^{i\pi/3}}.$$
+<p class="ml">Exemple 2 : $z = -1 + i$</p>
+$$\cB r = \sqrt{(-1)^2 + 1^2} = \cB{\sqrt2},\qquad z = \cB{\sqrt2}\Big(-\frac1{\sqrt2} + i\frac1{\sqrt2}\Big) = \sqrt2\Big(-\frac{\sqrt2}2 + i\frac{\sqrt2}2\Big).$$
+$$\cos\cR\theta = -\frac{\sqrt2}2,\ \sin\cR\theta = \frac{\sqrt2}2 > 0\ \Longrightarrow\ \cR{\theta = \frac{3\pi}4},\qquad\cG{z = \sqrt2\,e^{3i\pi/4}}.$$
+<p class="ml">Exemple 3 : $z = \sqrt3 - i$</p>
+$$\cB r = \sqrt{3 + 1} = \cB2,\qquad\cos\cR\theta = \frac{\sqrt3}2,\ \sin\cR\theta = -\frac12\lt0\ \Longrightarrow\ \cR{\theta = -\frac\pi6},\qquad\cG{z = 2e^{-i\pi/6}}.$$
+<p class="ml">Exemple 4 : une puissance, grâce à la forme exponentielle</p>
+$$(1 + i\sqrt3)^{6} = \big(2e^{i\pi/3}\big)^6 = 2^6e^{6i\pi/3} = 64\,e^{2i\pi} = \cG{64}.$$
+<p class="ml">Les règles sur l'argument ($z, z'\neq0$)</p>
+$$\arg(zz')\equiv\arg z + \arg z',\qquad\arg\Big(\frac z{z'}\Big)\equiv\arg z - \arg z',\qquad\arg(z^n)\equiv n\arg z,\qquad\arg\overline z\equiv-\arg z\quad[2\pi].$$
+<p class="ml piege">Piège</p>
+<p>$-2e^{i\pi/5}$ n'est pas une forme exponentielle : le module doit être positif. On écrit $-1 = e^{i\pi}$, donc $-2e^{i\pi/5} = 2e^{i(\pi + \pi/5)} = 2e^{6i\pi/5}$.</p>
+<div data-mlab="expform"></div>
+
+<h2 id="z-moitie">7. La technique de l'angle moitié</h2>
+<p>Pour une somme ou une différence de deux exponentielles, on factorise par l'exponentielle de la <b>moyenne</b> des angles :</p>
+<div class="sbox">$$e^{ip} + e^{iq} = e^{i\frac{p + q}2}\Big(e^{i\frac{p - q}2} + e^{-i\frac{p - q}2}\Big) = 2\cos\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2},\qquad e^{ip} - e^{iq} = 2i\sin\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2}.$$</div>
+<p>Cas fréquents : $1 + e^{i\theta} = 2\cos\frac\theta2\,e^{i\theta/2}$ et $1 - e^{i\theta} = -2i\sin\frac\theta2\,e^{i\theta/2}$.</p>
+<p class="ml">Exemple 1 : module et argument de $1 + e^{i\theta}$, $\theta\in\left]-\pi, \pi\right[$</p>
+$$1 + e^{i\theta} = \cO{e^{i\theta/2}}\big(e^{-i\theta/2} + e^{i\theta/2}\big) = 2\cos\Big(\frac\theta2\Big)\,e^{i\theta/2}.$$
+<p>Comme $\frac\theta2\in\left]-\frac\pi2, \frac\pi2\right[$, $\cos\frac\theta2 > 0$ : c'est bien une forme exponentielle.</p>
+$$\cG{|1 + e^{i\theta}| = 2\cos\frac\theta2},\qquad\cG{\arg(1 + e^{i\theta})\equiv\frac\theta2\ [2\pi]}.$$
+<p>Si $\theta\in\left]\pi, 3\pi\right[$, alors $\cos\frac\theta2\lt0$ : le module est $-2\cos\frac\theta2$ et l'argument $\frac\theta2 + \pi$.</p>
+<p class="ml">Exemple 2 : $\sum_{k=0}^n\cos(k\theta)$, avec $\theta\not\equiv0\ [2\pi]$</p>
+<p><b>Étape 1.</b> C'est la partie réelle d'une somme géométrique de raison $e^{i\theta}\neq1$ :</p>
+$$\sum_{k=0}^n\cos(k\theta) = \operatorname{Re}\Big(\sum_{k=0}^n(e^{i\theta})^k\Big) = \operatorname{Re}\Big(\frac{1 - e^{i(n+1)\theta}}{1 - e^{i\theta}}\Big).$$
+<p><b>Étape 2.</b> Angle moitié en haut et en bas :</p>
+$$\frac{1 - e^{i(n+1)\theta}}{1 - e^{i\theta}} = \frac{\cancel{-2i}\,\sin\frac{(n+1)\theta}2\,e^{i\frac{(n+1)\theta}2}}{\cancel{-2i}\,\sin\frac\theta2\,e^{i\frac\theta2}} = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\,e^{i\frac{n\theta}2}.$$
+<p><b>Étape 3.</b> On prend la partie réelle :</p>
+$$\cG{\sum_{k=0}^n\cos(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\cos\Big(\frac{n\theta}2\Big)},\qquad\text{et avec}\ \operatorname{Im}:\ \sum_{k=0}^n\sin(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\sin\Big(\frac{n\theta}2\Big).$$
+
+<h2 id="z-trigo">8. Retrouver les formules de trigonométrie</h2>
+<p class="ml">Formules d'addition</p>
+<p>On développe $e^{i(a+b)} = e^{ia}e^{ib}$ et on identifie parties réelles et imaginaires :</p>
+$$\cos(a + b) + i\sin(a + b) = (\cos a + i\sin a)(\cos b + i\sin b) = \cB{(\cos a\cos b - \sin a\sin b)} + i\cR{(\sin a\cos b + \cos a\sin b)}.$$
+<p class="ml">Transformer une somme en produit</p>
+<div class="sbox">$$\cos p + \cos q = 2\cos\frac{p + q}2\cos\frac{p - q}2,\qquad\sin p + \sin q = 2\sin\frac{p + q}2\cos\frac{p - q}2,$$$$\cos p - \cos q = -2\sin\frac{p + q}2\sin\frac{p - q}2,\qquad\sin p - \sin q = 2\cos\frac{p + q}2\sin\frac{p - q}2.$$</div>
+<p>On les retrouve avec l'angle moitié : $\cos p + \cos q = \operatorname{Re}(e^{ip} + e^{iq}) = \operatorname{Re}\Big(2\cos\frac{p - q}2e^{i\frac{p + q}2}\Big)$.</p>
+<p class="ml">Transformer un produit en somme</p>
+$$\cos a\cos b = \frac12\big(\cos(a + b) + \cos(a - b)\big),\qquad\sin a\sin b = \frac12\big(\cos(a - b) - \cos(a + b)\big),\qquad\sin a\cos b = \frac12\big(\sin(a + b) + \sin(a - b)\big).$$
+
+<h2 id="z-moivre">9. Exprimer $\cos(n\theta)$ en fonction de $\cos\theta$ (Moivre)</h2>
+<ol>
+<li>Écrire $\cos(n\theta) = \operatorname{Re}\big((\cos\theta + i\sin\theta)^n\big)$.</li>
+<li>Développer avec le binôme de Newton, et calculer les puissances de $i$.</li>
+<li>Garder la partie réelle (ou imaginaire), et remplacer $\sin^2\theta$ par $1 - \cos^2\theta$.</li>
+</ol>
+<p class="ml">Exemple : $\cos(3\theta)$ et $\sin(3\theta)$</p>
+<p>On note $c = \cos\theta$ et $s = \sin\theta$. Ligne $n = 3$ du triangle : $1, 3, 3, 1$.</p>
+$$(c + is)^3 = c^3 + 3c^2(is) + 3c(is)^2 + (is)^3 = c^3 + 3ic^2s - 3cs^2 - is^3 = \cB{(c^3 - 3cs^2)} + i\cR{(3c^2s - s^3)}.$$
+$$\cos(3\theta) = c^3 - 3c(1 - c^2) = \cG{4\cos^3\theta - 3\cos\theta},\qquad\sin(3\theta) = 3(1 - s^2)s - s^3 = \cG{3\sin\theta - 4\sin^3\theta}.$$
+
+<h2 id="z-lin">10. Linéariser</h2>
+<p>Linéariser $\cos^n x\sin^m x$, c'est l'écrire comme une somme de $\cos(kx)$ et de $\sin(kx)$, sans puissance. C'est indispensable pour en trouver une primitive.</p>
+<ol>
+<li>Remplacer avec Euler : $\cos x = \frac{e^{ix} + e^{-ix}}2$ et $\sin x = \frac{e^{ix} - e^{-ix}}{2i}$.</li>
+<li>Développer avec le binôme de Newton. S'il y a un produit, développer complètement les exponentielles.</li>
+<li>Regrouper $e^{ikx}$ avec $e^{-ikx}$, en mettant toujours $e^{ikx}$ en premier.</li>
+<li>Réutiliser Euler dans l'autre sens : $e^{ikx} + e^{-ikx} = 2\cos(kx)$ et $e^{ikx} - e^{-ikx} = 2i\sin(kx)$.</li>
+</ol>
+<p><b>Contrôle de parité</b> : si la fonction est paire, il ne reste que des cosinus ; si elle est impaire, que des sinus.</p>
+<p class="ml">Exemple 1 : $\cos^3x$</p>
+$$\cos^3x = \Big(\frac{e^{ix} + e^{-ix}}2\Big)^3 = \frac18\Big(e^{3ix} + 3e^{2ix}e^{-ix} + 3e^{ix}e^{-2ix} + e^{-3ix}\Big) = \frac18\Big(e^{3ix} + 3e^{ix} + 3e^{-ix} + e^{-3ix}\Big).$$
+<p>On regroupe les exponentielles opposées :</p>
+$$\cos^3x = \frac18\Big(\cB{\big(e^{3ix} + e^{-3ix}\big)} + 3\cR{\big(e^{ix} + e^{-ix}\big)}\Big) = \frac18\big(\cB{2\cos3x} + 3\cdot\cR{2\cos x}\big) = \cG{\frac14\cos3x + \frac34\cos x}.$$
+<p>Application : $\int\cos^3x\,dx = \frac1{12}\sin3x + \frac34\sin x + C$.</p>
+<p class="ml">Exemple 2 : $\sin^3x$</p>
+<p>On note que $(2i)^3 = 8i^3 = -8i$.</p>
+$$\sin^3x = \frac{\big(e^{ix} - e^{-ix}\big)^3}{(2i)^3} = \frac{e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}}{-8i}.$$
+<p>On regroupe, avec $\cO{-3}$ en facteur pour garder $e^{ix}$ en premier :</p>
+$$\sin^3x = \frac{\cB{\big(e^{3ix} - e^{-3ix}\big)}\cO{-3}\cR{\big(e^{ix} - e^{-ix}\big)}}{-8i} = \frac{\cB{2i\sin3x} - 3\cdot\cR{2i\sin x}}{-8i} = \cG{\frac34\sin x - \frac14\sin3x}.$$
+<p class="ml">Exemple 3 : $\cos^2x\sin^2x$, un produit</p>
+<p>On développe complètement avant de regrouper :</p>
+$$\cos^2x\sin^2x = \frac{(e^{ix} + e^{-ix})^2(e^{ix} - e^{-ix})^2}{4\cdot(2i)^2} = \frac{\big((e^{ix} + e^{-ix})(e^{ix} - e^{-ix})\big)^2}{-16} = \frac{\big(e^{2ix} - e^{-2ix}\big)^2}{-16}.$$
+$$= \frac{e^{4ix} - 2 + e^{-4ix}}{-16} = \frac{2\cos4x - 2}{-16} = \cG{\frac18 - \frac18\cos4x}.$$
+<p>Plus rapide : $\cos x\sin x = \frac12\sin2x$, donc $\cos^2x\sin^2x = \frac14\sin^22x = \frac14\cdot\frac{1 - \cos4x}2$. On retrouve le même résultat.</p>
+<p class="ml">Exemple 4 : $\cos^3x\sin^3x$</p>
+$$\cos^3x\sin^3x = (\cos x\sin x)^3 = \frac18\sin^3(2x) = \frac18\Big(\frac34\sin2x - \frac14\sin6x\Big) = \cG{\frac3{32}\sin2x - \frac1{32}\sin6x}.$$
+<p>On a réutilisé l'exemple 2 avec $2x$ à la place de $x$.</p>
+<p class="ml">Les formules à connaître par cœur</p>
+$$\cos^2x = \frac{1 + \cos2x}2,\qquad\sin^2x = \frac{1 - \cos2x}2,\qquad\cos x\sin x = \frac12\sin2x.$$
+<div data-mlab="lin"></div>
+
+<h2 id="z-rac2">11. Les racines carrées d'un complexe</h2>
+<p>Un complexe $\Delta\neq0$ a exactement <b>deux</b> racines carrées, opposées : $\pm\delta$. La notation $\sqrt\Delta$ est <b>interdite</b> pour un complexe non réel positif.</p>
+<p class="ml">Méthode 1 : par la forme exponentielle</p>
+<p>Si $\Delta = re^{i\theta}$, les racines carrées sont $\pm\sqrt r\,e^{i\theta/2}$. Par exemple $\Delta = 4i = 4e^{i\pi/2}$ a pour racines $\pm2e^{i\pi/4} = \pm(\sqrt2 + i\sqrt2)$.</p>
+<p class="ml">Méthode 2 : par la forme algébrique (quand l'angle n'est pas remarquable)</p>
+<p>On cherche $\delta = x + iy$ avec $\delta^2 = \Delta = a + ib$. On a $\delta^2 = (x^2 - y^2) + 2ixy$, et $|\delta|^2 = |\Delta|$ donne une troisième équation :</p>
+<div class="sbox">$$\left\{\begin{aligned}x^2 - y^2 &= a\quad(\text{parties réelles})\\x^2 + y^2 &= |\Delta|\quad(\text{modules})\\2xy &= b\quad(\text{parties imaginaires, pour le signe})\end{aligned}\right.$$</div>
+<p class="ml">Exemple : les racines carrées de $\Delta = 3 + 4i$</p>
+$$|\Delta| = \sqrt{3^2 + 4^2} = 5.\qquad\left\{\begin{aligned}x^2 - y^2 &= 3\\x^2 + y^2 &= 5\\2xy &= 4\end{aligned}\right.$$
+<p>On ajoute puis on soustrait les deux premières lignes :</p>
+$$2x^2 = 8\ \Longrightarrow\ x^2 = 4,\qquad2y^2 = 2\ \Longrightarrow\ y^2 = 1.$$
+<p>Donc $x = \pm2$ et $y = \pm1$. La troisième ligne donne $xy = 2 > 0$ : $x$ et $y$ ont le <b>même signe</b>.</p>
+$$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.\qquad\text{Contrôle}:\ (2 + i)^2 = 4 + 4i + i^2 = 3 + 4i.\ \checkmark$$
+<div data-mlab="rac2"></div>
+
+<h2 id="z-eq2">12. Les équations du second degré</h2>
+<div class="sbox">$$az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta:\qquad z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big).$$</div>
+<div class="sbox">$$\text{Somme et produit}:\ z_1 + z_2 = -\frac ba,\qquad z_1z_2 = \frac ca.$$</div>
+<p class="ml">Exemple 1 : coefficients réels, $\Delta\lt0$</p>
+$$z^2 - 2z + 5 = 0:\quad\Delta = 4 - 20 = -16 = (4i)^2,\quad z = \frac{2\pm4i}2 = \cV{1\pm2i}.$$
+<p class="ml">Exemple 2 : coefficients complexes</p>
+$$z^2 - 3z + 3 + i = 0.$$
+<p><b>1. Le discriminant.</b></p>
+$$\Delta = (-3)^2 - 4(3 + i) = 9 - 12 - 4i = -3 - 4i.$$
+<p><b>2. Une racine carrée de $\Delta$</b> (méthode 2, avec $|\Delta| = \sqrt{9 + 16} = 5$) :</p>
+$$\left\{\begin{aligned}x^2 - y^2 &= -3\\x^2 + y^2 &= 5\\2xy &= -4\end{aligned}\right.\ \Longrightarrow\ x^2 = 1,\ y^2 = 4,\ xy\lt0\ \Longrightarrow\ \delta = 1 - 2i.$$
+<p><b>3. Les racines.</b></p>
+$$z_1 = \frac{3 + (1 - 2i)}2 = \frac{4 - 2i}2 = \cV{2 - i},\qquad z_2 = \frac{3 - (1 - 2i)}2 = \frac{2 + 2i}2 = \cV{1 + i}.$$
+<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca$. $\checkmark$</p>
+<p class="ml">Exemple 3 : avec la somme et le produit</p>
+<p>Trouver deux complexes de somme $s$ et de produit $p$ revient à résoudre $z^2 - sz + p = 0$.</p>
+
+<h2 id="z-racn">13. Les racines $n$-ièmes</h2>
+<p class="ml">Les racines $n$-ièmes de l'unité</p>
+<div class="sbox">$$z^n = 1\iff z\in\mathbb U_n = \Big\{\cV{e^{\frac{2ik\pi}n}} : k\in[\![0, n - 1]\!]\Big\},\qquad\sum_{k=0}^{n-1}e^{\frac{2ik\pi}n} = 0\ (n\geqslant2).$$</div>
+<p>Il y en a exactement $n$. Ce sont les sommets d'un polygone régulier inscrit dans le cercle unité, avec un sommet en $1$.</p>
+<p><b>Pourquoi la somme est nulle</b> : c'est une somme géométrique de raison $\omega = e^{2i\pi/n}\neq1$, et $\sum_{k=0}^{n-1}\omega^k = \frac{1 - \omega^n}{1 - \omega} = \frac{1 - 1}{1 - \omega} = 0$.</p>
+<p class="ml">Le cas $n = 3$ : $j$</p>
+$$j = e^{\frac{2i\pi}3} = -\frac12 + i\frac{\sqrt3}2,\qquad j^3 = 1,\qquad1 + j + j^2 = 0,\qquad\overline j = j^2 = \frac1j,\qquad\mathbb U_3 = \{1, j, j^2\}.$$
+<p class="ml">Les racines $n$-ièmes d'un complexe $a = \cB re^{i\cR\theta}\neq0$</p>
+<div class="sbox">$$z^n = a\iff z = \cB{r^{1/n}}\,e^{i\frac{\cR\theta + 2k\pi}n},\quad k\in[\![0, n - 1]\!].$$</div>
+<p>On pose $z = \rho e^{i\varphi}$ et on identifie modules et arguments : $\rho^n = r$ et $n\varphi\equiv\theta\ [2\pi]$.</p>
+<p class="ml">Exemple : $z^3 = 8i$</p>
+<p><b>1.</b> $8i = 8e^{i\pi/2}$. On pose $z = \rho e^{i\varphi}$, donc $z^3 = \rho^3e^{3i\varphi}$.</p>
+$$\left\{\begin{aligned}\rho^3 &= 8\\3\varphi &= \frac\pi2 + 2k\pi\end{aligned}\right.\iff\left\{\begin{aligned}\rho &= 2\\\varphi &= \frac\pi6 + \frac{2k\pi}3,\quad k\in\{0, 1, 2\}\end{aligned}\right.$$
+<p><b>2.</b> Les trois racines :</p>
+$$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \cV{\sqrt3 + i}\\k = 1&:\ 2e^{5i\pi/6} = 2\Big(-\frac{\sqrt3}2 + \frac i2\Big) = \cV{-\sqrt3 + i}\\k = 2&:\ 2e^{3i\pi/2} = \cV{-2i}\end{aligned}$$
+<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0$. $\checkmark$</p>
+<p><b>Astuce</b> : si $z_0$ est une racine, les autres sont $z_0\,\omega$ avec $\omega\in\mathbb U_n$.</p>
+<div data-mlab="racn"></div>
+
+<h2 id="z-geo">14. Un peu de géométrie</h2>
+<p>Pour des points $A, B, C$ d'affixes $a, b, c$, avec $A\neq B$ et $A\neq C$ :</p>
+<ul>
+<li>$AB = |b - a|$ ;</li>
+<li>l'angle orienté $(\overrightarrow{AB}, \overrightarrow{AC})\equiv\arg\frac{c - a}{b - a}\ [2\pi]$ ;</li>
+<li>$A, B, C$ alignés $\iff\frac{c - a}{b - a}\in\mathbb R$ ;</li>
+<li>$(AB)\perp(AC)\iff\frac{c - a}{b - a}\in i\mathbb R$ ;</li>
+<li>$ABC$ équilatéral direct $\iff\frac{c - a}{b - a} = e^{i\pi/3}$.</li>
+</ul>
+<p class="ml">Exemple</p>
+<p>Avec $a = 1$, $b = 2 + i$, $c = 2i$ : $\dfrac{c - a}{b - a} = \dfrac{-1 + 2i}{1 + i} = \dfrac{(-1 + 2i)(1 - i)}{2} = \dfrac{1 + 3i}2$. Ce nombre n'est ni réel ni imaginaire pur : les points ne sont ni alignés, ni en angle droit en $A$.</p>
+
+<h2 id="z-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>Un quotient de complexes</b><span>Multiplier par le conjugué du dénominateur.</span></div>
+<div><b>Une puissance $z^n$</b><span>Passer en forme exponentielle, puis $r^ne^{in\theta}$.</span></div>
+<div><b>$z\in\mathbb U$</b><span>$|z| = 1$, $\overline z = \frac1z$, $z = e^{i\theta}$.</span></div>
+<div><b>« Montrer que $w$ est réel / imaginaire pur »</b><span>Calculer $\overline w$ et comparer à $w$ ou à $-w$.</span></div>
+<div><b>$1\pm e^{i\theta}$, $e^{ip}\pm e^{iq}$</b><span>Angle moitié. Attention au signe du cosinus pour le module.</span></div>
+<div><b>$\sum\cos(k\theta)$, $\sum\sin(k\theta)$</b><span>Partie réelle ou imaginaire d'une somme géométrique, puis angle moitié.</span></div>
+<div><b>$\cos^nx$, $\sin^nx$, et « primitive »</b><span>Linéariser avec Euler et le binôme.</span></div>
+<div><b>$\cos(n\theta)$ « en fonction de $\cos\theta$ »</b><span>Moivre, binôme, partie réelle, $\sin^2 = 1 - \cos^2$.</span></div>
+<div><b>« Racines carrées de $a + ib$ »</b><span>Système à trois équations avec $|\Delta|$, ou forme exponentielle.</span></div>
+<div><b>$az^2 + bz + c = 0$ complexe</b><span>$\Delta$, puis une racine carrée $\delta$, jamais $\sqrt\Delta$. Contrôler avec somme et produit.</span></div>
+<div><b>$z^n = a$</b><span>Forme exponentielle de $a$, $n$ racines de même module, angles espacés de $\frac{2\pi}n$.</span></div>
+<div><b>$j$, $1 + j + j^2$</b><span>$j^3 = 1$, $1 + j + j^2 = 0$, $\overline j = j^2$.</span></div>
+<div><b>Alignement, orthogonalité</b><span>Étudier $\frac{c - a}{b - a}$ : réel ou imaginaire pur.</span></div>
+<div><b>Une inégalité sur des modules</b><span>Inégalité triangulaire, cas d'égalité $z = \lambda z'$ avec $\lambda\geqslant0$.</span></div>
+</div>
+
+<h2 id="z-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> $\operatorname{Im}(a + ib) = ib$ : faux, c'est $b$.</p>
+<p><b>2.</b> Écrire $\sqrt{-3 - 4i}$ ou $\sqrt{-4} = 2i$ : la racine carrée ne s'applique qu'aux réels positifs.</p>
+<p><b>3.</b> Prendre $\theta = \arctan\frac ba$ sans regarder le signe de $a$ : on se trompe de demi-plan.</p>
+<p><b>4.</b> Une « forme exponentielle » avec un module négatif.</p>
+<p><b>5.</b> $|z + z'| = |z| + |z'|$ en général : faux, c'est seulement une inégalité.</p>
+<p><b>6.</b> Oublier le $i$ au dénominateur de $\sin x = \frac{e^{ix} - e^{-ix}}{2i}$, ou le signe de $(2i)^3 = -8i$.</p>
+<p><b>7.</b> En linéarisant un produit, regrouper avant d'avoir développé les exponentielles.</p>
+<p><b>8.</b> Ne donner qu'une racine carrée, ou que $n - 1$ racines $n$-ièmes.</p>
+<p><b>9.</b> $\arg(z + z') = \arg z + \arg z'$ : faux, ça ne marche que pour le produit.</p>
+<p><b>10.</b> Dans l'angle moitié, oublier que $\cos\frac\theta2$ peut être négatif.</p>
+</div>
+
+<h2 id="z-entrainement">S'entraîner</h2>
+<div data-mlab="quizcpx"></div>
+
+<h2 id="z-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Mettre $z$ sous une forme</div>
+<div class="tq">Un quotient ?</div><a class="tl" href="#z-alg">oui : × conjugué du dénominateur</a><div class="tno">non</div>
+<div class="tq">Une puissance $z^n$ ?</div><a class="tl" href="#z-exp">oui : forme exponentielle</a><div class="tno">non</div>
+<div class="tq">$1\pm e^{i\theta}$, $e^{ip}\pm e^{iq}$ ?</div><a class="tl" href="#z-moitie">oui : angle moitié</a><div class="tno">non</div>
+<a class="tl tend" href="#z-exp">$r = |z|$, puis $\cos\theta$, $\sin\theta$</a></div>
+<div class="tb tR"><div class="tt">Trigonométrie</div>
+<div class="tq">$\cos^nx$, $\sin^mx$ ?</div><a class="tl" href="#z-lin">oui : linéariser (Euler, binôme)</a><div class="tno">non</div>
+<div class="tq">$\cos(n\theta)$ en puissances ?</div><a class="tl" href="#z-moivre">oui : Moivre</a><div class="tno">non</div>
+<div class="tq">$\sum\cos(k\theta)$ ?</div><a class="tl" href="#z-moitie">oui : géométrique + angle moitié</a><div class="tno">non</div>
+<a class="tl tend" href="#z-trigo">addition, somme ↔ produit</a></div>
+<div class="tb tG"><div class="tt">Résoudre une équation</div>
+<div class="tq">$z^2 = \Delta$ ?</div><a class="tl" href="#z-rac2">oui : système avec $|\Delta|$</a><div class="tno">non</div>
+<div class="tq">$az^2 + bz + c = 0$ ?</div><a class="tl" href="#z-eq2">oui : $\Delta$, $\delta$, $\frac{-b\pm\delta}{2a}$</a><div class="tno">non</div>
+<a class="tl tend" href="#z-racn">$z^n = a$ : $r^{1/n}e^{i\frac{\theta + 2k\pi}n}$</a></div>
+<div class="tb tO"><div class="tt">Montrer une propriété</div>
+<div class="tq">$w$ réel ou imaginaire pur ?</div><a class="tl" href="#z-conj">oui : comparer $\overline w$ et $\pm w$</a><div class="tno">non</div>
+<div class="tq">$z\in\mathbb U$ ?</div><a class="tl" href="#z-u">oui : $\overline z = \frac1z$</a><div class="tno">non</div>
+<a class="tl tend" href="#z-mod">inégalité : module, inégalité triangulaire</a></div>
+<div class="tb tV"><div class="tt">Géométrie</div>
+<div class="tq">Distance ?</div><a class="tl" href="#z-geo">oui : $|b - a|$</a><div class="tno">angle</div>
+<div class="tq">Alignés ou perpendiculaires ?</div><a class="tl" href="#z-geo">$\frac{c - a}{b - a}$ réel ou imaginaire pur</a><div class="tno">non</div>
+<a class="tl tend" href="#z-racn">polygone régulier : $\mathbb U_n$</a></div>
+</div>
+</div>
 `
 };
