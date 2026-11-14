@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: mlQuiz })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, exdet: mlExDet, quizdet: h => mlQuiz(h, QDET) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -1356,8 +1356,7 @@ function mlExos(host) {
   ex = gen(); draw();
 }
 /* 5. Vrai ou faux : les pièges */
-function mlQuiz(host) {
-  const Q = [
+const QMAT = [
     ["Si $AB = 0$, alors $A = 0$ ou $B = 0$.", false, "Faux : $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix} = 0$."],
     ["$(A + B)^2 = A^2 + 2AB + B^2$ pour toutes matrices carrées.", false, "Faux : $(A + B)^2 = A^2 + AB + BA + B^2$, égal seulement si $AB = BA$."],
     ["${}^t(AB) = {}^tB\\,{}^tA$.", true, "Vrai : l'ordre s'inverse, comme pour l'inverse."],
@@ -1369,6 +1368,19 @@ function mlQuiz(host) {
     ["$(AB)^{-1} = A^{-1}B^{-1}$.", false, "Faux : $(AB)^{-1} = B^{-1}A^{-1}$."],
     ["Une matrice antisymétrique a des zéros sur la diagonale.", true, "Vrai : $a_{i,i} = -a_{i,i}$ donc $a_{i,i} = 0$."]
   ];
+const QDET = [
+    ["$\\det(2A) = 2\\det A$ pour $A\\in\\mathcal M_3(\\mathbb R)$.", false, "Faux : $\\det(2A) = 2^3\\det A = 8\\det A$."],
+    ["$\\det(A + B) = \\det A + \\det B$.", false, "Faux en général : $\\det(I_2 + I_2) = 4\\neq2$."],
+    ["$\\det({}^tA) = \\det A$.", true, "Vrai : lignes et colonnes jouent le même rôle."],
+    ["Un cycle de longueur $3$ est une permutation impaire.", false, "Faux : $\\varepsilon = (-1)^{3-1} = 1$, il est pair."],
+    ["Échanger deux lignes change le signe du déterminant.", true, "Vrai : le déterminant est alterné."],
+    ["$L_2\\leftarrow L_2 - 3L_1$ ne change pas le déterminant.", true, "Vrai : on ajoute à une ligne un multiple d'une autre."],
+    ["La règle de Sarrus marche pour les matrices $4\\times4$.", false, "Faux : seulement en taille $3$ ; en taille $4$ il y a $24$ produits."],
+    ["Si deux colonnes sont égales, le déterminant est nul.", true, "Vrai : en les échangeant, $\\det A = -\\det A$."],
+    ["Une matrice antisymétrique de taille $3$ a un déterminant nul.", true, "Vrai : $\\det A = \\det({}^tA) = \\det(-A) = (-1)^3\\det A$."],
+    ["$\\operatorname{Card}\\mathfrak S_4 = 16$.", false, "Faux : $\\operatorname{Card}\\mathfrak S_4 = 4! = 24$."]
+  ];
+function mlQuiz(host, Q) {
   let k = 0, score = 0, done = false;
   const draw = () => {
     if (k >= Q.length) { host.innerHTML = `<p class="mlq">Score : <b>${score} / ${Q.length}</b></p><button type="button" class="btn btn-ghost btn-sm" data-re>Recommencer</button>`; $("[data-re]", host).addEventListener("click", () => { k = 0; score = 0; done = false; draw(); }); return; }
@@ -1384,6 +1396,127 @@ function mlQuiz(host) {
     typeset(host);
   };
   draw();
+}
+
+/* ---------- Labos de la Méthode « Déterminants » ---------- */
+const det2 = M => M[0][0] * M[1][1] - M[0][1] * M[1][0];
+const minor = (M, i, j) => M.filter((_, r) => r !== i).map(r => r.filter((_, c) => c !== j));
+const detN = M => M.length === 1 ? M[0][0] : M.length === 2 ? det2(M) : M[0].reduce((s, v, j) => s + (j % 2 ? -1 : 1) * v * detN(minor(M, 0, j)), 0);
+const randM = (n, a = -3, b = 5) => Array.from({ length: n }, () => Array.from({ length: n }, () => rnd(a, b)));
+const par = v => v < 0 ? `(${v})` : String(v);
+/* Permutations : les flèches, les cycles, la signature */
+function mlPerm(host) {
+  const n = 6; let p = [3, 5, 1, 2, 4, 6], sel = null;
+  const cycles = () => { const seen = new Set(), out = []; for (let i = 1; i <= n; i++) { if (seen.has(i)) continue; const c = []; let k = i; while (!seen.has(k)) { seen.add(k); c.push(k); k = p[k - 1]; } if (c.length > 1) out.push(c); } return out; };
+  const inv = () => { let x = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (p[i] > p[j]) x++; return x; };
+  const COL = ["#2b5bd7", "#d4503b", "#1f8a5b", "#b07a00", "#7a4cc2"];
+  const draw = () => {
+    const cs = cycles(), N = inv(), eps = N % 2 ? -1 : 1;
+    const colOf = k => { const i = cs.findIndex(c => c.includes(k)); return i < 0 ? "var(--muted)" : COL[i % COL.length]; };
+    const R = 70, cx = 110, cy = 95, pos = k => [cx + R * Math.cos(-Math.PI / 2 + 2 * Math.PI * (k - 1) / n), cy + R * Math.sin(-Math.PI / 2 + 2 * Math.PI * (k - 1) / n)];
+    const arrows = p.map((v, i) => { const k = i + 1; if (v === k) return ""; const [x1, y1] = pos(k), [x2, y2] = pos(v), dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L; const c = colOf(k); return `<line x1="${x1 + ux * 16}" y1="${y1 + uy * 16}" x2="${x2 - ux * 18}" y2="${y2 - uy * 18}" stroke="${c}" stroke-width="2" marker-end="url(#ah${cs.findIndex(cc => cc.includes(k))})"/>`; }).join("");
+    const nodes = Array.from({ length: n }, (_, i) => { const [x, y] = pos(i + 1); return `<circle cx="${x}" cy="${y}" r="14" fill="var(--surface)" stroke="${colOf(i + 1)}" stroke-width="2"/><text x="${x}" y="${y + 5}" text-anchor="middle" font-size="14" fill="var(--ink)">${i + 1}</text>`; }).join("");
+    const defs = COL.map((c, i) => `<marker id="ah${i}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join("");
+    host.innerHTML = `<p class="mlt">Permutation : clique deux nombres de la ligne du bas pour les échanger</p>
+      <div class="permrow"><table class="mx ptab"><tr>${p.map((_, i) => `<td>${i + 1}</td>`).join("")}</tr><tr>${p.map((v, i) => `<td class="pv${sel === i ? " on" : ""}" data-i="${i}" style="color:${colOf(i + 1)}">${v}</td>`).join("")}</tr></table>
+      <svg viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="Graphe de la permutation"><defs>${defs}</defs>${arrows}${nodes}</svg></div>
+      <p class="mlcalc">$\\sigma = ${cs.length ? cs.map(c => `(${c.join("\\ ")})`).join("") : "\\mathrm{id}"}$ &nbsp;·&nbsp; $${N}$ inversions &nbsp;·&nbsp; $\\varepsilon(\\sigma) = (-1)^{${N}} = ${eps}$${cs.length ? ` &nbsp;·&nbsp; par les cycles : $(-1)^{${cs.map(c => c.length - 1).join(" + ")}} = ${eps}$` : ""}</p>
+      <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Au hasard</button><button type="button" class="btn btn-ghost btn-sm" data-id>Identité</button></div>`;
+    $$(".pv", host).forEach(td => td.addEventListener("click", () => { const i = +td.dataset.i; if (sel === null) sel = i; else { [p[sel], p[i]] = [p[i], p[sel]]; sel = null; } draw(); }));
+    $("[data-new]", host).addEventListener("click", () => { for (let i = n - 1; i > 0; i--) { const j = rnd(0, i); [p[i], p[j]] = [p[j], p[i]]; } sel = null; draw(); });
+    $("[data-id]", host).addEventListener("click", () => { p = [1, 2, 3, 4, 5, 6]; sel = null; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+/* Sarrus : les traits qui donnent les six produits */
+function mlSarrus(host) {
+  let M = [[1, 2, 3], [0, 4, 5], [1, 0, 6]], mode = 2, hi = null;
+  const L = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+  /* chaque produit : 3 cases (ligne, colonne), signe */
+  const P = [[[0, 0], [1, 1], [2, 2], 1], [[0, 1], [1, 2], [2, 0], 1], [[0, 2], [1, 0], [2, 1], 1], [[0, 2], [1, 1], [2, 0], -1], [[0, 0], [1, 2], [2, 1], -1], [[0, 1], [1, 0], [2, 2], -1]];
+  const POS = ["#2b5bd7", "#1f8a5b", "#7a4cc2"], NEG = ["#d4503b", "#b07a00", "#c2416b"];
+  const draw = () => {
+    const W = 56, H = 46, cols = mode === 2 ? 5 : 3, x0 = 30, y0 = 26;
+    const cx = c => x0 + c * W + W / 2, cy = r => y0 + r * H + H / 2;
+    const cells = [];
+    for (let r = 0; r < 3; r++) for (let c = 0; c < cols; c++) cells.push(`<text x="${cx(c)}" y="${cy(r) + 6}" text-anchor="middle" font-size="18" fill="${c >= 3 ? "var(--muted)" : "var(--ink)"}" font-family="var(--f-mono)">${M[r][c % 3]}</text>`);
+    const lines = P.map((pr, k) => {
+      const col = pr[3] > 0 ? POS[k % 3] : NEG[k % 3], on = hi === null || hi === k, w = hi === k ? 5 : 3;
+      let pts;
+      if (mode === 2) { /* colonnes recopiées : vraies diagonales */ const start = pr[3] > 0 ? k : k - 3; pts = pr[3] > 0 ? [[0, start], [1, start + 1], [2, start + 2]] : [[0, start + 2], [1, start + 1], [2, start]]; }
+      else pts = pr.slice(0, 3);
+      const d = pts.map(([r, c], i) => `${i ? "L" : "M"}${cx(c)} ${cy(r)}`).join(" ");
+      return `<path d="${d}${mode === 1 ? " Z" : ""}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? .9 : .12}" data-k="${k}"/>`;
+    }).join("");
+    const br = x => `<line x1="${x}" y1="${y0 + 2}" x2="${x}" y2="${y0 + 3 * H - 2}" stroke="var(--ink)" stroke-width="2"/>`;
+    const Wt = x0 * 2 + cols * W;
+    const term = k => { const pr = P[k]; return pr.slice(0, 3).map(([r, c]) => par(M[r][c])).join("\\times"); };
+    const val = k => P[k].slice(0, 3).reduce((s, [r, c]) => s * M[r][c], 1) * 1;
+    const sp = [0, 1, 2].reduce((s, k) => s + val(k), 0), sm = [3, 4, 5].reduce((s, k) => s + val(k), 0);
+    host.innerHTML = `<p class="mlt">Règle de Sarrus : survole ou touche un trait</p>
+      <div class="mlseg"><button type="button" data-m="2" aria-pressed="${mode === 2}">Colonnes recopiées</button><button type="button" data-m="1" aria-pressed="${mode === 1}">Triangles</button></div>
+      <svg class="sarrus" viewBox="0 0 ${Wt} ${y0 * 2 + 3 * H}" width="${Wt}" height="${y0 * 2 + 3 * H}" role="img" aria-label="Schéma de Sarrus">${lines}${cells.join("")}${br(x0 + 4)}${br(x0 + 3 * W - 4)}${mode === 2 ? `<line x1="${x0 + 3 * W + 2}" y1="${y0}" x2="${x0 + 3 * W + 2}" y2="${y0 + 3 * H}" stroke="var(--line)" stroke-dasharray="4 4"/>` : ""}</svg>
+      <div class="sterms">${P.map((pr, k) => `<button type="button" data-t="${k}" class="${pr[3] > 0 ? "plus" : "moins"}${hi === k ? " on" : ""}" style="--c:${pr[3] > 0 ? POS[k % 3] : NEG[k % 3]}">${pr[3] > 0 ? "+" : "−"} $${pr.slice(0, 3).map(([r, c]) => L[r * 3 + c]).join("")}$</button>`).join("")}</div>
+      <p class="mlcalc">${hi === null ? `$\\det = (${sp}) - (${sm}) = ${sp - sm}$` : `$${P[hi][3] > 0 ? "+" : "-"}\\ ${term(hi)} = ${P[hi][3] > 0 ? "" : "-"}${par(val(hi))}$`}</p>
+      <p class="mlnote">Les traits bleus et verts (descendants) comptent avec $+$, les rouges et orange (montants) avec $-$.</p>
+      <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button><button type="button" class="btn btn-ghost btn-sm" data-all>Tous les traits</button></div>`;
+    const set = k => { hi = k; draw(); };
+    $$("[data-k]", host).forEach(l => { l.style.cursor = "pointer"; l.addEventListener("mouseenter", () => { if (hi !== +l.dataset.k) set(+l.dataset.k); }); l.addEventListener("click", () => set(+l.dataset.k)); });
+    $$("[data-t]", host).forEach(b => b.addEventListener("click", () => set(+b.dataset.t)));
+    $$("[data-m]", host).forEach(b => b.addEventListener("click", () => { mode = +b.dataset.m; hi = null; draw(); }));
+    $("[data-new]", host).addEventListener("click", () => { M = randM(3, -2, 5); hi = null; draw(); });
+    $("[data-all]", host).addEventListener("click", () => set(null));
+    typeset(host);
+  };
+  draw();
+}
+/* Développement : on barre la ligne et la colonne */
+function mlDev(host) {
+  let M = [[1, 4, 5], [2, 0, 3], [0, 1, 2]], by = "r", idx = 0;
+  const draw = () => {
+    const n = M.length, z = k => (by === "r" ? M[k] : M.map(r => r[k])).filter(v => v === 0).length;
+    const best = [...Array(n).keys()].map(k => [k, Math.max(z(k), 0)]);
+    const terms = [...Array(n).keys()].map(t => { const i = by === "r" ? idx : t, j = by === "r" ? t : idx; return { i, j, a: M[i][j], s: (i + j) % 2 ? -1 : 1, m: minor(M, i, j) }; });
+    const tot = terms.reduce((s, t) => s + t.s * t.a * detN(t.m), 0);
+    const mini = t => `<div class="dvt${t.a === 0 ? " zero" : ""}"><span class="dvs">${t.s > 0 ? "+" : "−"} ${par(t.a)} ×</span><table class="mx">${M.map((r, i) => `<tr>${r.map((v, j) => `<td class="${i === t.i || j === t.j ? "x" : ""}${i === t.i && j === t.j ? " pv" : ""}">${v}</td>`).join("")}</tr>`).join("")}</table><span class="dvv">mineur $${detN(t.m)}$</span></div>`;
+    host.innerHTML = `<p class="mlt">Développer : choisis une ligne ou une colonne</p>
+      <div class="mlnav">${[...Array(n).keys()].map(k => `<button type="button" class="btn btn-ghost btn-sm${by === "r" && idx === k ? " sel" : ""}" data-r="${k}">Ligne ${k + 1}${z(k) ? ` · ${z(k)} zéro${z(k) > 1 ? "s" : ""}` : ""}</button>`).join("")}</div>
+      <div class="mlnav">${[...Array(n).keys()].map(k => { const zz = M.map(r => r[k]).filter(v => v === 0).length; return `<button type="button" class="btn btn-ghost btn-sm${by === "c" && idx === k ? " sel" : ""}" data-c="${k}">Colonne ${k + 1}${zz ? ` · ${zz} zéro${zz > 1 ? "s" : ""}` : ""}</button>`; }).join("")}</div>
+      <div class="dvrow">${terms.map(mini).join("")}</div>
+      <p class="mlcalc">$\\det A = ${terms.map(t => `${t.s > 0 ? "+" : "-"}${par(t.a)}\\times${par(detN(t.m))}`).join(" ").replace(/^\+/, "")} = ${tot}$</p>
+      <p class="mlnote">Les cases grisées sont barrées : il reste le mineur. Un coefficient nul supprime tout un terme.</p>
+      <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-new>Autre matrice</button><button type="button" class="btn btn-ghost btn-sm" data-four>Une 4×4</button></div>`;
+    $$("[data-r]", host).forEach(b => b.addEventListener("click", () => { by = "r"; idx = +b.dataset.r; draw(); }));
+    $$("[data-c]", host).forEach(b => b.addEventListener("click", () => { by = "c"; idx = +b.dataset.c; draw(); }));
+    $("[data-new]", host).addEventListener("click", () => { M = randM(3, -2, 4); M[rnd(0, 2)][rnd(0, 2)] = 0; by = "r"; idx = 0; draw(); });
+    $("[data-four]", host).addEventListener("click", () => { M = randM(4, -2, 3); const c = rnd(0, 3); [0, 1, 2, 3].forEach(i => { if (i !== 1) M[i][c] = 0; }); by = "r"; idx = 0; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+/* Exercices au hasard : déterminants et signatures */
+function mlExDet(host) {
+  const KINDS = ["Taille 2", "Sarrus", "Développer", "Signature"];
+  let kind = 0, ex;
+  const gen = () => {
+    if (kind === 0) { const M = randM(2, -5, 7); return { q: `Calcule $\\begin{vmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{vmatrix}$.`, a: det2(M), sol: `$$${par(M[0][0])}\\times${par(M[1][1])} - ${par(M[0][1])}\\times${par(M[1][0])} = ${det2(M)}$$` }; }
+    if (kind === 1) { const M = randM(3, -2, 4), [[a, b, c], [d, e, f], [g, h, i]] = M; const sp = a * e * i + b * f * g + c * d * h, sm = c * e * g + a * f * h + b * d * i; return { q: `Calcule avec Sarrus $\\begin{vmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{vmatrix}$.`, a: sp - sm, sol: `$$(${a * e * i} + ${b * f * g} + ${c * d * h}) - (${c * e * g} + ${a * f * h} + ${b * d * i}) = ${sp} - ${sm} = ${sp - sm}$$` }; }
+    if (kind === 2) { const M = randM(4, -2, 3); const c = rnd(0, 3), r = rnd(0, 3); [0, 1, 2, 3].forEach(i => { if (i !== r) M[i][c] = 0; }); const s = (r + c) % 2 ? -1 : 1; return { q: `Calcule $\\begin{vmatrix}${M.map(x => x.join("&")).join("\\\\")}\\end{vmatrix}$ (développe selon la colonne pleine de zéros).`, a: detN(M), sol: `$$\\text{Colonne}\\ ${c + 1}:\\quad\\det = ${s > 0 ? "" : "-"}${par(M[r][c])}\\times\\begin{vmatrix}${minor(M, r, c).map(x => x.join("&")).join("\\\\")}\\end{vmatrix} = ${s > 0 ? "" : "-"}${par(M[r][c])}\\times${par(detN(minor(M, r, c)))} = ${detN(M)}$$` }; }
+    const p = [1, 2, 3, 4, 5, 6]; for (let i = 5; i > 0; i--) { const j = rnd(0, i); [p[i], p[j]] = [p[j], p[i]]; }
+    let N = 0; for (let i = 0; i < 6; i++) for (let j = i + 1; j < 6; j++) if (p[i] > p[j]) N++;
+    const seen = new Set(), cs = []; for (let i = 1; i <= 6; i++) { if (seen.has(i)) continue; const c = []; let k = i; while (!seen.has(k)) { seen.add(k); c.push(k); k = p[k - 1]; } if (c.length > 1) cs.push(c); }
+    return { q: `Donne la signature de $\\sigma = \\begin{pmatrix}1&2&3&4&5&6\\\\${p.join("&")}\\end{pmatrix}$ ($1$ ou $-1$).`, a: N % 2 ? -1 : 1, sol: `$$\\sigma = ${cs.length ? cs.map(c => `(${c.join("\\ ")})`).join("") : "\\mathrm{id}"},\\qquad\\varepsilon(\\sigma) = (-1)^{${cs.map(c => c.length - 1).join(" + ") || 0}} = ${N % 2 ? -1 : 1}$$` };
+  };
+  const draw = () => {
+    host.innerHTML = `<div class="mlseg">${KINDS.map((t, i) => `<button type="button" data-k="${i}" aria-pressed="${i === kind}">${t}</button>`).join("")}</div><p class="mlq">${ex.q}</p><div class="mlin" style="grid-template-columns:100px"><input inputmode="numeric" aria-label="Ta réponse" data-a></div><div class="mlnav"><button type="button" class="btn btn-yellow btn-sm" data-check>Vérifier</button><button type="button" class="btn btn-ghost btn-sm" data-sol>Voir la correction</button><button type="button" class="btn btn-ghost btn-sm" data-new>Un autre</button></div><p class="mlres"></p><div class="mlsol" hidden>${ex.sol}</div>`;
+    $$("[data-k]", host).forEach(b => b.addEventListener("click", () => { kind = +b.dataset.k; ex = gen(); draw(); }));
+    $("[data-check]", host).addEventListener("click", () => { const i = $("[data-a]", host), ok = Number(i.value.trim()) === ex.a && i.value.trim() !== ""; i.classList.toggle("ok", ok); i.classList.toggle("ko", !ok); $(".mlres", host).textContent = ok ? "Juste." : "Pas encore : vérifie les signes."; });
+    $("[data-sol]", host).addEventListener("click", () => { const s = $(".mlsol", host); s.hidden = false; typeset(s); });
+    $("[data-new]", host).addEventListener("click", () => { ex = gen(); draw(); });
+    typeset(host);
+  };
+  ex = gen(); draw();
 }
 
 /* ---------- Lecteur PDF ---------- */

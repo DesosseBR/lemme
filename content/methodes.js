@@ -203,5 +203,195 @@ $$AB - BA = I_n\ \Longrightarrow\ 0 = \operatorname{tr}(AB) - \operatorname{tr}(
 <div data-mlab="exos"></div>
 <h2>Vrai ou faux ?</h2>
 <div data-mlab="quiz"></div>
+`,
+"Groupe symétrique et déterminants": R`
+<nav class="msum"><a href="#d-sn">Permutations</a><a href="#d-cycles">Cycles</a><a href="#d-sign">Signature</a><a href="#d-def">Définition du déterminant</a><a href="#d-2">Taille 2</a><a href="#d-tri">Triangulaire</a><a href="#d-sarrus">Sarrus</a><a href="#d-ops">Opérations</a><a href="#d-dev">Développer</a><a href="#d-form">Formules</a><a href="#d-vdm">Vandermonde</a><a href="#d-plus">Pour aller plus loin</a><a href="#d-reflexes">Réflexes</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a></nav>
+
+<h2 id="d-sn">1. Le groupe symétrique</h2>
+<div class="sbox">$$\mathfrak S_n = \{\sigma : [\![1,n]\!]\to[\![1,n]\!]\ \text{bijective}\},\qquad\operatorname{Card}\mathfrak S_n = n!$$</div>
+<ul>
+<li>La loi est la composition $\circ$ : $\sigma\tau = \sigma\circ\tau$, on applique <b>$\tau$ d'abord</b>.</li>
+<li>Neutre : $\mathrm{id}$. Inverse : $\sigma^{-1}$, on lit le tableau de bas en haut.</li>
+<li>Pour $n\geqslant3$, $\mathfrak S_n$ n'est pas commutatif.</li>
+</ul>
+<p class="ml">Notation en deux lignes</p>
+$$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad\sigma(1) = 3,\ \sigma(2) = 5,\ \sigma(3) = 1,\ \sigma(4) = 2,\ \sigma(5) = 4.$$
+<p class="ml piege">Piège</p>
+<p>$\sigma\tau\neq\tau\sigma$ en général : calcule toujours de droite à gauche, $\sigma\tau(k) = \sigma(\tau(k))$.</p>
+
+<h2 id="d-cycles">2. Cycles et transpositions</h2>
+<div class="sbox">$$(a_1\ a_2\ \cdots\ a_p):\quad a_1\mapsto a_2\mapsto\cdots\mapsto a_p\mapsto a_1,\ \text{les autres fixes}.$$</div>
+<ul>
+<li>Un cycle de longueur $2$ est une <b>transposition</b> $(i\ j)$.</li>
+<li>Deux cycles à supports disjoints commutent.</li>
+</ul>
+<p class="ml">Méthode : décomposer en cycles disjoints</p>
+<ol>
+<li>Partir du plus petit élément non encore vu et suivre ses images jusqu'à revenir au départ.</li>
+<li>Recommencer avec le plus petit élément restant.</li>
+<li>On n'écrit pas les points fixes.</li>
+</ol>
+$$\sigma = \begin{pmatrix}1&2&3&4&5\\3&5&1&2&4\end{pmatrix}:\quad1\to3\to1,\qquad2\to5\to4\to2\qquad\Longrightarrow\qquad\sigma = (1\ 3)(2\ 5\ 4).$$
+<p class="ml">Transpositions</p>
+<div class="sbox">$$(a_1\ a_2\ \cdots\ a_p) = (a_1\ a_2)(a_2\ a_3)\cdots(a_{p-1}\ a_p)\qquad\text{(}p - 1\ \text{transpositions)}.$$</div>
+<p>Toute permutation est un produit de transpositions : $\mathfrak S_n$ est <b>engendré</b> par les transpositions.</p>
+<div data-mlab="perm"></div>
+
+<h2 id="d-sign">3. Signature</h2>
+<div class="sbox">$$\varepsilon(\sigma) = (-1)^{N(\sigma)},\qquad N(\sigma) = \operatorname{Card}\{(i,j) : i\lt j,\ \sigma(i)\gt\sigma(j)\}\ \text{(nombre d'inversions)}.$$</div>
+<p class="ml">À retenir</p>
+<div class="sbox">$$\varepsilon(\sigma\tau) = \varepsilon(\sigma)\,\varepsilon(\tau),\qquad\varepsilon(\text{transposition}) = -1,\qquad\varepsilon(\text{cycle de longueur}\ p) = (-1)^{p-1}.$$</div>
+<p class="ml">Réflexe : la méthode la plus rapide</p>
+<ol>
+<li>Décomposer $\sigma$ en cycles disjoints de longueurs $p_1,\dots,p_r$.</li>
+<li>$\varepsilon(\sigma) = (-1)^{(p_1 - 1) + \cdots + (p_r - 1)}$.</li>
+</ol>
+$$\sigma = (1\ 3)(2\ 5\ 4):\quad\varepsilon(\sigma) = (-1)^{1}(-1)^{2} = -1.$$
+<p>$\varepsilon = 1$ : permutation <b>paire</b>. $\varepsilon = -1$ : <b>impaire</b>. Les paires forment $\mathfrak A_n$, avec $\operatorname{Card}\mathfrak A_n = \frac{n!}2$ pour $n\geqslant2$.</p>
+<p class="ml piege">Piège</p>
+<p>Un cycle de longueur $3$ est <b>pair</b> : la signature dépend de la longueur moins un, pas de la longueur.</p>
+
+<h2 id="d-def">4. Définition du déterminant</h2>
+<div class="sbox">$$\det A = \sum_{\sigma\in\mathfrak S_n}\varepsilon(\sigma)\,a_{\sigma(1),1}\,a_{\sigma(2),2}\cdots a_{\sigma(n),n}.$$</div>
+<ul>
+<li>Un produit par permutation : on prend <b>un coefficient par ligne et par colonne</b>.</li>
+<li>$n!$ termes : $2$ pour $n = 2$, $6$ pour $n = 3$ (Sarrus), $24$ pour $n = 4$.</li>
+<li>Le signe de chaque produit est la signature de la permutation.</li>
+</ul>
+<p>C'est ce lien qui explique tout le reste : les formules de taille 2 et 3 sont cette somme écrite en entier.</p>
+<p class="ml">Notation</p>
+$$\det\begin{pmatrix}1&3\\7&4\end{pmatrix} = \begin{vmatrix}1&3\\7&4\end{vmatrix}\qquad\text{(barres verticales, pas de parenthèses)}.$$
+
+<h2 id="d-2">5. Taille 2</h2>
+<div class="sbox">$$\begin{vmatrix}a&b\\c&d\end{vmatrix} = ad - bc.$$</div>
+<p>Diagonale principale moins l'autre diagonale.</p>
+$$\begin{vmatrix}1&3\\7&4\end{vmatrix} = 1\times4 - 3\times7 = -17.$$
+<p>Ce sont les deux permutations de $\mathfrak S_2$ : $\mathrm{id}$ (signe $+$) et $(1\ 2)$ (signe $-$).</p>
+
+<h2 id="d-tri">6. Matrices diagonales et triangulaires</h2>
+<div class="sbox">$$A\ \text{triangulaire (ou diagonale)}\ \Longrightarrow\ \det A = \prod_{i=1}^na_{i,i}.$$</div>
+$$\begin{vmatrix}2&7&-1\\0&-3&5\\0&0&4\end{vmatrix} = 2\times(-3)\times4 = -24,\qquad\det I_n = 1.$$
+<p class="ml">Réflexe</p>
+<p>Avant tout calcul, regarde si la matrice est triangulaire ou si quelques opérations la rendent triangulaire.</p>
+
+<h2 id="d-sarrus">7. Taille 3 : la règle de Sarrus</h2>
+<div class="sbox">$$\begin{vmatrix}a&b&c\\d&e&f\\g&h&i\end{vmatrix} = aei + bfg + cdh - (ceg + afh + bdi).$$</div>
+<p class="ml">Méthode : suivre les traits</p>
+<ol>
+<li>Les <b>trois traits descendants</b> (vers la droite) donnent les produits <b>avec $+$</b>.</li>
+<li>Les <b>trois traits montants</b> (vers la gauche) donnent les produits <b>avec $-$</b>.</li>
+<li>On additionne chaque groupe, puis on soustrait, avec la parenthèse.</li>
+</ol>
+<div data-mlab="sarrus"></div>
+<p class="ml">Exemple</p>
+$$\begin{vmatrix}1&2&3\\0&4&5\\1&0&6\end{vmatrix} = (1\cdot4\cdot6 + 2\cdot5\cdot1 + 3\cdot0\cdot0) - (3\cdot4\cdot1 + 1\cdot5\cdot0 + 2\cdot0\cdot6) = 34 - 12 = 22.$$
+<p class="ml piege">Piège</p>
+<ul>
+<li>Sarrus ne marche <b>qu'en taille 3</b>. En taille 4, il y a 24 produits, pas 8.</li>
+<li>Oublier la parenthèse après le $-$ change trois signes d'un coup.</li>
+</ul>
+
+<h2 id="d-ops">8. Opérations sur les lignes et les colonnes</h2>
+<p>Le déterminant est <b>multilinéaire et alterné</b> par rapport aux colonnes (et aux lignes). En pratique :</p>
+<div class="sbox">$$\left\{\begin{aligned}&C_i\leftarrow C_i + \lambda C_j\ (j\neq i)&&\Longrightarrow\ \det\ \text{inchangé}\\&C_i\leftrightarrow C_j&&\Longrightarrow\ \det\ \text{change de signe}\\&C_i\leftarrow\lambda C_i&&\Longrightarrow\ \det\ \text{multiplié par}\ \lambda\end{aligned}\right.$$</div>
+<p>Pareil pour les lignes. Deux colonnes égales ou proportionnelles : $\det = 0$.</p>
+<p class="ml">Méthode : faire des zéros puis développer</p>
+<ol>
+<li>Choisir une ligne ou une colonne et faire apparaître des $0$ avec $L_i\leftarrow L_i - \lambda L_j$.</li>
+<li>Factoriser une ligne commune : $\det(\dots,\lambda C,\dots) = \lambda\det(\dots,C,\dots)$.</li>
+<li>Développer selon la ligne ou la colonne pleine de zéros.</li>
+</ol>
+<p class="ml">Exemple : la somme des colonnes</p>
+$$\begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}\underset{C_1\leftarrow C_1 + C_2 + C_3}{=}(a + 2b)\begin{vmatrix}1&b&b\\1&a&b\\1&b&a\end{vmatrix}\underset{\substack{L_2\leftarrow L_2 - L_1\\L_3\leftarrow L_3 - L_1}}{=}(a + 2b)\begin{vmatrix}1&b&b\\0&a - b&0\\0&0&a - b\end{vmatrix} = (a + 2b)(a - b)^2.$$
+<p class="ml piege">Piège</p>
+<p>$L_i\leftarrow\lambda L_i + L_j$ multiplie le déterminant par $\lambda$ : on ne touche à la ligne modifiée qu'en lui ajoutant les autres.</p>
+
+<h2 id="d-dev">9. Développer selon une ligne ou une colonne</h2>
+<p class="ml">Les signes</p>
+$$\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix},\qquad\begin{pmatrix}+&-&+&-\\-&+&-&+\\+&-&+&-\\-&+&-&+\end{pmatrix}\qquad\text{signe de la case}\ (i,j) = (-1)^{i+j}.$$
+<div class="sbox">$$\det A = \sum_{j=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(ligne}\ i\text{)},\qquad\det A = \sum_{i=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(colonne}\ j\text{)}.$$</div>
+<ul>
+<li>$A_{i,j}$ : la matrice $A$ sans sa ligne $i$ et sa colonne $j$.</li>
+<li>$\det A_{i,j}$ est le <b>mineur</b>, $(-1)^{i+j}\det A_{i,j}$ le <b>cofacteur</b>.</li>
+</ul>
+<p class="ml">Réflexe</p>
+<p>Développer selon la ligne ou la colonne qui contient <b>le plus de zéros</b> : chaque zéro supprime un déterminant à calculer.</p>
+<div data-mlab="dev"></div>
+<p class="ml">Exemple</p>
+$$\begin{vmatrix}1&4&5\\2&0&3\\0&1&2\end{vmatrix} = 1\begin{vmatrix}0&3\\1&2\end{vmatrix} - 4\begin{vmatrix}2&3\\0&2\end{vmatrix} + 5\begin{vmatrix}2&0\\0&1\end{vmatrix} = -3 - 16 + 10 = -9.$$
+
+<h2 id="d-form">10. Les formules</h2>
+<div class="sbox">$$\left\{\begin{aligned}&\det(AB) = \det A\,\det B,\qquad\det(A^n) = (\det A)^n\\&\det(\lambda A) = \lambda^n\det A\quad(A\in\mathcal M_n)\\&\det({}^tA) = \det A\\&A\ \text{inversible}\iff\det A\neq0,\qquad\det(A^{-1}) = \frac1{\det A}\end{aligned}\right.$$</div>
+<p class="ml">Pourquoi $\lambda^n$</p>
+$$\det(\lambda A) = \det\big((\lambda I_n)A\big) = \det(\lambda I_n)\det A = \lambda^n\det A.$$
+<p class="ml">Pourquoi $\frac1{\det A}$</p>
+$$AA^{-1} = I_n\ \Longrightarrow\ \det A\,\det(A^{-1}) = \det I_n = 1.$$
+<p class="ml piege">Piège</p>
+<ul>
+<li>$\det(A + B)\neq\det A + \det B$.</li>
+<li>$\det(\lambda A)\neq\lambda\det A$ dès que $n\geqslant2$.</li>
+</ul>
+
+<h2 id="d-vdm">11. Vandermonde</h2>
+<div class="sbox">$$V(\alpha_1,\dots,\alpha_n) = \begin{vmatrix}1&\alpha_1&\alpha_1^2&\cdots&\alpha_1^{n-1}\\1&\alpha_2&\alpha_2^2&\cdots&\alpha_2^{n-1}\\\vdots&\vdots&\vdots&&\vdots\\1&\alpha_n&\alpha_n^2&\cdots&\alpha_n^{n-1}\end{vmatrix} = \prod_{1\leqslant i\lt j\leqslant n}(\alpha_j - \alpha_i).$$</div>
+<ul>
+<li>$\binom n2$ facteurs, avec $i\lt j$ strictement.</li>
+<li>$V\neq0\iff$ les $\alpha_i$ sont deux à deux distincts.</li>
+</ul>
+$$V(\alpha_1,\alpha_2,\alpha_3) = (\alpha_2 - \alpha_1)(\alpha_3 - \alpha_1)(\alpha_3 - \alpha_2).$$
+<p class="ml">La démonstration à savoir refaire</p>
+<ol>
+<li>$C_k\leftarrow C_k - \alpha_1C_{k-1}$, en partant de la dernière colonne : la première ligne devient $(1,0,\dots,0)$.</li>
+<li>La ligne $i$ devient $\big(1,\ \alpha_i - \alpha_1,\ \alpha_i(\alpha_i - \alpha_1),\dots\big)$ : on factorise $(\alpha_i - \alpha_1)$ dans chaque ligne $i\geqslant2$.</li>
+<li>On développe selon la première ligne : il reste $V(\alpha_2,\dots,\alpha_n)$, puis récurrence.</li>
+</ol>
+$$V(\alpha_1,\dots,\alpha_n) = \prod_{i=2}^n(\alpha_i - \alpha_1)\cdot V(\alpha_2,\dots,\alpha_n).$$
+<p class="ml">Utilisation classique</p>
+<p>Un polynôme de degré $\leqslant n - 1$ qui s'annule en $n$ points distincts est nul : le système des coefficients a pour matrice une Vandermonde inversible.</p>
+
+<h2 id="d-plus">12. Pour aller plus loin</h2>
+<p class="ml">Déterminant par blocs</p>
+<div class="sbox">$$\det\begin{pmatrix}A&B\\0&D\end{pmatrix} = \det A\,\det D\qquad(A, D\ \text{carrées}).$$</div>
+<p class="ml">Comatrice</p>
+<div class="sbox">$$A\,{}^t\operatorname{Com}(A) = {}^t\operatorname{Com}(A)\,A = \det(A)\,I_n\ \Longrightarrow\ A^{-1} = \frac1{\det A}\,{}^t\operatorname{Com}(A).$$</div>
+<p>En taille 2, on retrouve $\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1} = \frac1{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.</p>
+<p class="ml">Formules de Cramer</p>
+$$AX = B,\ \det A\neq0\ \Longrightarrow\ x_k = \frac{\det A_k}{\det A},\qquad A_k = A\ \text{avec sa colonne}\ k\ \text{remplacée par}\ B.$$
+<p class="ml">Déterminant d'une famille et d'un endomorphisme</p>
+$$(v_1,\dots,v_n)\ \text{base de}\ E\iff\det_{\mathcal B}(v_1,\dots,v_n)\neq0,\qquad\det u = \det\operatorname{Mat}_{\mathcal B}(u)\ \text{(indépendant de}\ \mathcal B\text{)}.$$
+<p class="ml">Déterminant tridiagonal : récurrence</p>
+$$D_n = \begin{vmatrix}2&1&&0\\1&2&\ddots&\\&\ddots&\ddots&1\\0&&1&2\end{vmatrix}\ \Longrightarrow\ D_n = 2D_{n-1} - D_{n-2},\quad D_1 = 2,\ D_2 = 3\ \Longrightarrow\ D_n = n + 1.$$
+<p>On développe selon la première colonne, deux fois : c'est la méthode pour toutes les matrices « en bande ».</p>
+
+<h2 id="d-reflexes">Si tu vois… alors pense à…</h2>
+<div class="mrefl">
+<div><b>Taille 2</b><span>$ad - bc$.</span></div>
+<div><b>Taille 3 quelconque</b><span>Sarrus, ou une ligne pleine de zéros.</span></div>
+<div><b>Triangulaire</b><span>Produit de la diagonale.</span></div>
+<div><b>Lignes de même somme</b><span>$C_1\leftarrow C_1 + \cdots + C_n$, puis factoriser.</span></div>
+<div><b>Puissances $\alpha_i^k$</b><span>Vandermonde.</span></div>
+<div><b>Matrice en bande</b><span>Développer, puis récurrence sur $D_n$.</span></div>
+<div><b>« $A$ inversible ? »</b><span>$\det A\neq0$.</span></div>
+<div><b>$\det(\lambda A)$, $\det(A^{-1})$</b><span>$\lambda^n\det A$, $\frac1{\det A}$.</span></div>
+<div><b>Signature d'une permutation</b><span>Cycles disjoints, $(-1)^{\sum(p_k - 1)}$.</span></div>
+<div><b>$A$ antisymétrique, $n$ impair</b><span>$\det A = \det({}^tA) = (-1)^n\det A$, donc $0$.</span></div>
+</div>
+
+<h2 id="d-erreurs">Les 8 erreurs qui coûtent des points</h2>
+<ol class="merr">
+<li>Écrire $\det(\lambda A) = \lambda\det A$.</li>
+<li>Écrire $\det(A + B) = \det A + \det B$.</li>
+<li>Appliquer Sarrus à une matrice $4\times4$.</li>
+<li>Oublier la parenthèse après le $-$ de Sarrus.</li>
+<li>Se tromper dans les signes $(-1)^{i+j}$ du développement.</li>
+<li>Faire $L_i\leftarrow\lambda L_i + L_j$ sans multiplier le résultat par $\frac1\lambda$.</li>
+<li>Croire qu'un $3$-cycle est impair.</li>
+<li>Calculer $\sigma\tau$ en appliquant $\sigma$ d'abord.</li>
+</ol>
+
+<h2 id="d-entrainement">S'entraîner</h2>
+<div data-mlab="exdet"></div>
+<h2>Vrai ou faux ?</h2>
+<div data-mlab="quizdet"></div>
 `
 };

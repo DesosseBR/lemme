@@ -40,7 +40,7 @@ function escText(s) {
 }
 const FIGS = new Map();
 /* \operatorname casse dans aligned avec lemme.sty : on le remplace ; \lhd n'existe pas sans amssymb */
-const texFix = t => String(t).replace(/\\begin\{aligned\}[\s\S]*?\\end\{aligned\}/g, m => m.replace(/\\operatorname\{([^{}]*)\}/g, "\\mathop{\\mathrm{$1}}\\nolimits")).replace(/\\lhd(?![a-zA-Z])/g, "\\triangleleft").replace(/\\not\\xrightarrow(?:\[[^\]]*\])?\{([^{}]*)\}/g, "\\overset{$1}{\\not\\longrightarrow}");
+const texFix = t => String(t).replace(/\\begin\{aligned\}[\s\S]*?\\end\{aligned\}/g, m => m.replace(/\\operatorname\{([^{}]*)\}/g, "\\mathop{\\mathrm{$1}}\\nolimits{}").replace(/&\\(?=[a-zA-Z])/g, "&{}\\")).replace(/\\lhd(?![a-zA-Z])/g, "\\triangleleft").replace(/\\not\\xrightarrow/g, "\\xrightarrow[\\text{(non)}]");
 function toTex(html) { return texFix(toTex0(html)); }
 function toTex0(html) {
   if (!html) return "";
