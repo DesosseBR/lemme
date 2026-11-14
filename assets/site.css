@@ -2045,3 +2045,5 @@ table.pot td.pdiv{border-bottom:2px solid var(--ink)}
 .methode .exc>p.exs{display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;margin:14px 0}
 .methode .exn{display:flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 6px;border:1.6px solid var(--ink);border-radius:999px;font:600 13px var(--f-display);margin-top:1px}
 @media (max-width:600px){.methode .exh{gap:12px}.methode .exm{box-shadow:4px 4px 0 var(--ink)}}
+.methode .exc>.exs{display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:center;margin:14px 0}
+.methode .exc>.exsm .exbody{overflow-x:auto}

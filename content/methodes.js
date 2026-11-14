@@ -1365,7 +1365,7 @@ $$\sum_{\cB{k = 3}}^{\cB{10}}1 = \underbrace{1 + 1 + \cdots + 1}_{\cB{10 - 3 + 1
 </ul>
 <p class="ml">Exemple</p>
 $$\sum_{k=1}^n(3k + 2) = 3\sum_{k=1}^nk + \sum_{k=1}^n2 = 3\cdot\frac{n(n + 1)}{2} + 2n = \frac{3n^2 + 3n + 4n}{2} = \cG{\frac{n(3n + 7)}{2}}.$$
-<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5$. $\checkmark$</p>
+<p>Contrôle avec $n = 1$ : la somme vaut $3 + 2 = 5$, et $\frac{1\times10}{2} = 5\ \checkmark$.</p>
 <p class="ml piege">Piège</p>
 <p>$\sum x_ky_k\neq\big(\sum x_k\big)\big(\sum y_k\big)$ et $\sum\frac1{x_k}\neq\frac1{\sum x_k}$. La somme ne passe pas dans un produit ni dans un quotient.</p>
 
@@ -1401,7 +1401,7 @@ $$3\sum_{k=1}^nk^2 = (n + 1)^3 - 1 - n - \frac{3n(n + 1)}2 = (n + 1)\Big[(n + 1)
 $$\sum_{k=1}^nk(k + 1) = \sum_{k=1}^nk^2 + \sum_{k=1}^nk = \frac{n(n + 1)(2n + 1)}6 + \frac{n(n + 1)}2.$$
 <p>On factorise par $\cO{\frac{n(n + 1)}6}$ avant de développer (moins de calculs) :</p>
 $$= \cO{\frac{n(n + 1)}6}\big[(2n + 1) + 3\big] = \frac{n(n + 1)(2n + 4)}6 = \cG{\frac{n(n + 1)(n + 2)}3}.$$
-<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8$. $\checkmark$</p>
+<p>Contrôle avec $n = 2$ : $1\times2 + 2\times3 = 8$, et $\frac{2\times3\times4}{3} = 8\ \checkmark$.</p>
 
 <h2 id="a-geo">5. La somme géométrique</h2>
 <div class="sbox">$$\sum_{k=0}^nq^k = \left\{\begin{aligned}&\frac{1 - q^{n+1}}{1 - q}&&\text{si}\ q\neq1\\&n + 1&&\text{si}\ q = 1\end{aligned}\right.\qquad\text{En général}:\ \text{premier terme}\times\frac{1 - q^{\text{nombre de termes}}}{1 - q}.$$</div>
@@ -1410,7 +1410,7 @@ $$(1 - q)\sum_{k=0}^nq^k = \sum_{k=0}^nq^k - \sum_{k=0}^nq^{k+1} = (1 + \cR{q + 
 <p class="ml">Exemple 1 : la somme ne commence pas à 0</p>
 $$\sum_{k=\cB2}^{\cB n}3^k:\qquad\text{premier terme}\ 3^2 = 9,\qquad\text{nombre de termes}\ \cB{n - 1},\qquad q = 3\neq1.$$
 $$\sum_{k=2}^n3^k = 9\cdot\frac{1 - 3^{n-1}}{1 - 3} = \frac92\big(3^{n-1} - 1\big) = \cG{\frac{3^{n+1} - 9}{2}}.$$
-<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9$. $\checkmark$</p>
+<p>Contrôle avec $n = 2$ : $3^2 = 9$, et $\frac{27 - 9}2 = 9\ \checkmark$.</p>
 <p class="ml">Exemple 2 : la raison est cachée</p>
 $$\sum_{k=0}^n\frac{2^k}{5^{k+1}} = \frac15\sum_{k=0}^n\Big(\frac25\Big)^k = \frac15\cdot\frac{1 - (2/5)^{n+1}}{1 - 2/5} = \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1 - \Big(\frac25\Big)^{n+1}\Big)}.$$
 <p class="ml piege">Piège</p>
@@ -1496,7 +1496,7 @@ $$(x + 1)^5 = \cV1\,x^5 + \cV5\,x^4 + \cV{10}\,x^3 + \cV{10}\,x^2 + \cV5\,x + \c
 <tr><td>$4$</td><td>$\cV1$</td><td>$16x^4$</td><td>$1$</td><td>$16x^4$</td></tr>
 </table>
 $$(2x - 3)^4 = \cG{16x^4 - 96x^3 + 216x^2 - 216x + 81}.$$
-<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1$. $\checkmark$</p>
+<p>Contrôle avec $x = 1$ : $(2 - 3)^4 = 1$, et $16 - 96 + 216 - 216 + 81 = 1\ \checkmark$.</p>
 <p class="ml">Exemple 3 : les sommes de coefficients</p>
 $$a = b = 1:\ \sum_{k=0}^n\binom nk = (1 + 1)^n = \cG{2^n},\qquad a = -1,\ b = 1:\ \sum_{k=0}^n(-1)^k\binom nk = (1 - 1)^n = \cG0\ (n\geqslant1).$$
 <p class="ml">Exemple 4 : $\sum_{k=0}^nk\binom nk$ avec la formule du capitaine</p>
@@ -1523,7 +1523,7 @@ $$x^5 - 2^5 = (x - 2)\big(x^4 + 2x^3 + 4x^2 + 8x + 16\big).$$
 <p class="ml">Exemple : $S = \sum_{1\leqslant i\leqslant j\leqslant n}i$</p>
 <p>On somme d'abord sur $i$ (à $j$ fixé, $i$ va de $\cB1$ à $\cB j$) :</p>
 $$S = \sum_{j=1}^n\Big(\sum_{i=1}^ji\Big) = \sum_{j=1}^n\frac{j(j + 1)}2 = \frac12\sum_{j=1}^nj(j + 1) = \frac12\cdot\frac{n(n + 1)(n + 2)}3 = \cG{\frac{n(n + 1)(n + 2)}6}$$
-<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4$. $\checkmark$</p>
+<p>(la dernière somme a été calculée au §4). Contrôle avec $n = 2$ : les couples sont $(1,1), (1,2), (2,2)$, donc $S = 1 + 1 + 2 = 4$ et $\frac{2\times3\times4}6 = 4\ \checkmark$.</p>
 <p class="ml">Le carré d'une somme</p>
 $$\Big(\sum_{i=1}^nx_i\Big)^2 = \sum_{i=1}^nx_i^2 + 2\sum_{1\leqslant i\lt j\leqslant n}x_ix_j.$$
 <p class="ml piege">Piège</p>
@@ -1790,7 +1790,7 @@ $$\Delta = (-3)^2 - 4(3 + i) = 9 - 12 - 4i = -3 - 4i.$$
 $$\left\{\begin{aligned}x^2 - y^2 &= -3\\x^2 + y^2 &= 5\\2xy &= -4\end{aligned}\right.\ \Longrightarrow\ x^2 = 1,\ y^2 = 4,\ xy\lt0\ \Longrightarrow\ \delta = 1 - 2i.$$
 <p><b>3. Les racines.</b></p>
 $$z_1 = \frac{3 + (1 - 2i)}2 = \frac{4 - 2i}2 = \cV{2 - i},\qquad z_2 = \frac{3 - (1 - 2i)}2 = \frac{2 + 2i}2 = \cV{1 + i}.$$
-<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca$. $\checkmark$</p>
+<p><b>4. Contrôle</b> : $z_1 + z_2 = 3 = -\frac ba$ et $z_1z_2 = (2 - i)(1 + i) = 2 + 2i - i - i^2 = 3 + i = \frac ca\ \checkmark$.</p>
 <p class="ml">Exemple 3 : avec la somme et le produit</p>
 <p>Trouver deux complexes de somme $s$ et de produit $p$ revient à résoudre $z^2 - sz + p = 0$.</p>
 
@@ -1809,7 +1809,7 @@ $$j = e^{\frac{2i\pi}3} = -\frac12 + i\frac{\sqrt3}2,\qquad j^3 = 1,\qquad1 + j 
 $$\left\{\begin{aligned}\rho^3 &= 8\\3\varphi &= \frac\pi2 + 2k\pi\end{aligned}\right.\iff\left\{\begin{aligned}\rho &= 2\\\varphi &= \frac\pi6 + \frac{2k\pi}3,\quad k\in\{0, 1, 2\}\end{aligned}\right.$$
 <p><b>2.</b> Les trois racines :</p>
 $$\begin{aligned}k = 0&:\ 2e^{i\pi/6} = 2\Big(\frac{\sqrt3}2 + \frac i2\Big) = \cV{\sqrt3 + i}\\k = 1&:\ 2e^{5i\pi/6} = 2\Big(-\frac{\sqrt3}2 + \frac i2\Big) = \cV{-\sqrt3 + i}\\k = 2&:\ 2e^{3i\pi/2} = \cV{-2i}\end{aligned}$$
-<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0$. $\checkmark$</p>
+<p><b>Contrôle</b> : la somme des trois racines vaut $\sqrt3 + i - \sqrt3 + i - 2i = 0$, comme pour tout triangle équilatéral centré en $0\ \checkmark$.</p>
 <p><b>Astuce</b> : si $z_0$ est une racine, les autres sont $z_0\,\omega$ avec $\omega\in\mathbb U_n$.</p>
 <div data-mlab="racn"></div>
 
@@ -2003,7 +2003,7 @@ $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 
 <p><b>3.</b> $x = 0\iff t = \cO0$ et $x = 1\iff t = \cO{\frac\pi2}$.</p>
 <p><b>4.</b> Sur $\big[0, \frac\pi2\big]$, $\cos t\geqslant0$, donc $\sqrt{1 - \sin^2t} = |\cos t| = \cos t$ :</p>
 $$\int_0^1\sqrt{1 - x^2}\,dx = \int_{\cO0}^{\cO{\pi/2}}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \cG{\frac\pi4}.$$
-<p>C'est l'aire d'un quart de disque de rayon $1$. $\checkmark$</p>
+<p>C'est l'aire d'un quart de disque de rayon $1\ \checkmark$.</p>
 <p class="ml">Exemple 2 : $\int_0^1\frac{dx}{1 + e^x}$ avec $t = e^x$</p>
 <p><b>1–2.</b> $\cO{t = e^x}$, donc $x = \ln t$ et $\cO{dx = \frac{dt}t}$. <b>3.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
 $$\int_0^1\frac{dx}{1 + e^x} = \int_{\cO1}^{\cO e}\frac{1}{(1 + t)}\cdot\frac{dt}t = \int_1^e\Big(\frac1t - \frac1{1 + t}\Big)dt = \big[\ln t - \ln(1 + t)\big]_1^e = \cG{1 - \ln(1 + e) + \ln2}.$$
@@ -3000,7 +3000,7 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 <p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
 $$P(1) = 0,\qquad P' = 3X^2 - 2,\ P'(1) = 1,\qquad P'' = 6X,\ P''(1) = 6,\qquad P''' = 6.$$
 $$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(X - 1)^2 + (X - 1)^3}.$$
-<p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)$. $\checkmark$</p>
+<p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)\ \checkmark$.</p>
 
 <h2 id="q-div">3. La division euclidienne</h2>
 <div class="sbox">$$B\neq0:\quad\exists!\,(Q, R),\quad A = BQ + R\quad\text{et}\quad\deg R\lt\deg B.$$</div>
@@ -3015,7 +3015,7 @@ $$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(
 </ol>
 <p><b>Astuce</b> : on laisse une place pour chaque puissance (ici, aucun terme en $X^2$ dans $A$), pour que les colonnes restent alignées.</p>
 $$\cG{X^4 + 2X^3 - X + 1 = (X^2 + X + 1)(X^2 + X - 2) + 3}.$$
-<p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3$. $\checkmark$</p>
+<p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3\ \checkmark$.</p>
 <div data-mlab="diveucl"></div>
 
 <h2 id="q-reste">4. Trouver un reste sans poser la division</h2>
@@ -3069,7 +3069,7 @@ $$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 + 4 = \cG4,\qquad\frac1{x_1
 <p class="ml">Exemple : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$</p>
 $$L_0 = \frac{(X - 1)(X - 2)}{(0 - 1)(0 - 2)} = \frac{(X - 1)(X - 2)}2,\qquad L_1 = \frac{X(X - 2)}{1\cdot(-1)} = -X(X - 2),\qquad L_2 = \frac{X(X - 1)}{2\cdot1}.$$
 $$P = 1\cdot\frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8X^2 - 10X + 2}2 - 3X^2 + 6X = \cG{X^2 + X + 1}.$$
-<p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$. $\checkmark$</p>
+<p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7\ \checkmark$.</p>
 
 <h2 id="q-pgcd">9. PGCD, Bézout, Gauss</h2>
 <div class="sbox">$$\textbf{Bézout}:\ A\wedge B = 1\iff\exists\,U, V,\ AU + BV = 1.\qquad\textbf{Gauss}:\ A\mid BC\ \text{et}\ A\wedge B = 1\ \Longrightarrow\ A\mid C.$$</div>
@@ -3109,7 +3109,7 @@ $$\begin{aligned}X^4 - 1 &= X\cdot(X^3 - 1) + \cR{(X - 1)}\\X^3 - 1 &= (X - 1)(X
 <div class="sbox">$$\text{Pôle simple}\ a:\qquad c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}.$$</div>
 <p>Exemple : $F = \frac{X + 3}{(X - 1)(X + 2)(X - 3)} = \frac a{X - 1} + \frac b{X + 2} + \frac c{X - 3}$.</p>
 $$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \frac{-2 + 3}{(-2 - 1)(-2 - 3)} = \frac1{15},\qquad\cR c = \frac{3 + 3}{(3 - 1)(3 + 2)} = \frac35.$$
-<p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12$. $\checkmark$</p>
+<p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12\ \checkmark$.</p>
 <p>La formule $\frac{P(a)}{Q'(a)}$ est la meilleure quand $Q$ n'est pas factorisé, comme $X^n - 1$ (voir les exercices F, G, I).</p>
 <p class="ml">Méthode 2 : pôle multiple, la plus haute puissance d'abord</p>
 <p>Pour un pôle $a$ d'ordre $m$, multiplier par $\cO{(X - a)^m}$ et évaluer en $a$ donne le coefficient de $\frac1{(X - a)^m}$ (le plus haut). Les autres s'obtiennent par :</p>
@@ -3138,7 +3138,7 @@ $$\frac{1}{X^2 - 1} = \frac a{X - 1} + \frac b{X + 1} = \frac{(a + b)X + (a - b)
 <p>Exemple : $F = \frac{X + 2}{X(X^2 + 1)} = \frac aX + \frac{\alpha X + \beta}{X^2 + 1}$.</p>
 $$\cR a = \Big[\frac{X + 2}{X^2 + 1}\Big]_{X = 0} = 2.\qquad\text{En}\ \cO{X = i}:\ \alpha i + \beta = \Big[\frac{X + 2}X\Big]_{X = i} = \frac{i + 2}i = 1 - 2i.$$
 $$\beta = 1,\ \alpha = -2\qquad\Longrightarrow\qquad\cG{F = \frac2X + \frac{-2X + 1}{X^2 + 1}}.$$
-<p>Contrôle en $X = 1$ : $\frac32 = 2 + \frac{-1}2$. $\checkmark$</p>
+<p>Contrôle en $X = 1$ : $\frac32 = 2 + \frac{-1}2\ \checkmark$.</p>
 <p class="ml">Méthode B : passer par $\mathbb C$, puis regrouper les conjugués</p>
 <p>Si $\frac c{X - z}$ apparaît dans $\mathbb C$, alors $\frac{\overline c}{X - \overline z}$ aussi (fraction réelle), et :</p>
 <div class="sbox">$$\frac c{X - z} + \frac{\overline c}{X - \overline z} = \frac{2\operatorname{Re}(c)\,X - 2\operatorname{Re}(c\,\overline z)}{X^2 - 2\operatorname{Re}(z)\,X + |z|^2}.$$</div>
@@ -3159,23 +3159,26 @@ $$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightar
 <h2 id="q-exos">14. Exercices corrigés (feuille d'exercices 15 à 17)</h2>
 <p class="ml">Exercice 15 A : $\dfrac{X^3}{X^2 - 3X + 2}$</p>
 <p><b>Partie entière</b> ($3\geqslant2$) : $X^3 = (X^2 - 3X + 2)(X + 3) + 7X - 6$. Contrôle : $(X^2 - 3X + 2)(X + 3) = X^3 - 7X + 6$.</p>
-<p><b>Dénominateur</b> : $X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}$. <b>Pôles simples</b> :</p>
+<p><b>Dénominateur</b> : $X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}$.</p>
+<p><b>Pôles simples</b> :</p>
 $$\frac{7X - 6}{(X - 1)(X - 2)} = \frac a{X - 1} + \frac b{X - 2},\qquad\cR a = \frac{7 - 6}{1 - 2} = -1,\qquad\cR b = \frac{14 - 6}{2 - 1} = 8.$$
 $$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.\qquad\text{Contrôle en}\ 0:\ 0 = 3 + 1 - 4.\ \checkmark$$
 <p class="ml">Exercice 15 B : $\dfrac{X + 1}{(X + 2)(X - 1)^2}$</p>
 <p>Calculée au §11 (méthode 2) : $\cG{-\frac{1/9}{X + 2} + \frac{1/9}{X - 1} + \frac{2/3}{(X - 1)^2}}$.</p>
 <p class="ml">Exercice 15 C : $\dfrac{X^5 + 1}{(X^2 - X)^2}$</p>
-<p><b>Dénominateur</b> : $(X^2 - X)^2 = \cB{X^2(X - 1)^2} = X^4 - 2X^3 + X^2$. <b>Partie entière</b> ($5\geqslant4$) :</p>
+<p><b>Dénominateur</b> : $(X^2 - X)^2 = \cB{X^2(X - 1)^2} = X^4 - 2X^3 + X^2$.</p>
+<p><b>Partie entière</b> ($5\geqslant4$) :</p>
 $$(X + 2)(X^4 - 2X^3 + X^2) = X^5 - 3X^3 + 2X^2,\qquad X^5 + 1 = (X + 2)(X^4 - 2X^3 + X^2) + 3X^3 - 2X^2 + 1.$$
 <p><b>Forme</b> : $F = X + 2 + \frac aX + \frac b{X^2} + \frac c{X - 1} + \frac d{(X - 1)^2}$.</p>
 <p><b>Plus hautes puissances</b> :</p>
 $$\cR b = \Big[\frac{X^5 + 1}{(X - 1)^2}\Big]_{X = 0} = 1,\qquad\cR d = \Big[\frac{X^5 + 1}{X^2}\Big]_{X = 1} = 2.$$
 <p><b>Coefficient $a$, par un DL en $0$</b> : $X^2F = \frac{X^5 + 1}{(X - 1)^2} = (1 + X^5)(1 - X)^{-2} = 1 + 2X + o(X)$. Le coefficient de $X$ donne $\cR{a = 2}$.</p>
 <p><b>Coefficient $c$, par un DL en $1$</b> : avec $\cO{X = 1 + h}$, $(X - 1)^2F = \frac{(1 + h)^5 + 1}{(1 + h)^2} = (2 + 5h)(1 - 2h) + o(h) = 2 + h + o(h)$. Donc $\cR{c = 1}$.</p>
-<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3$. $\checkmark$</p>
+<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3\ \checkmark$.</p>
 $$\cG{\frac{X^5 + 1}{(X^2 - X)^2} = X + 2 + \frac2X + \frac1{X^2} + \frac1{X - 1} + \frac2{(X - 1)^2}}.$$
 <p class="ml">Exercice 15 D : $\dfrac{X^3 + 1}{X^3 - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
-<p><b>Partie entière</b> : $\frac{X^3 + 1}{X^3 - 1} = 1 + \frac2{X^3 - 1}$. <b>Pôles</b> : $\cB{1, j, j^2}$, simples.</p>
+<p><b>Partie entière</b> : $\frac{X^3 + 1}{X^3 - 1} = 1 + \frac2{X^3 - 1}$.</p>
+<p><b>Pôles</b> : $\cB{1, j, j^2}$, simples.</p>
 <p><b>Dans $\mathbb C(X)$</b>, avec $c = \frac{P(\omega)}{Q'(\omega)} = \frac2{3\omega^2} = \frac{2\omega}3$ (car $\omega^3 = 1$) :</p>
 $$\cG{1 + \frac23\Big(\frac1{X - 1} + \frac j{X - j} + \frac{j^2}{X - j^2}\Big)}.$$
 <p><b>Dans $\mathbb R(X)$</b> : on regroupe $j$ et $j^2 = \overline j$ ($j + \overline j = -1$, $j\overline j = 1$) :</p>

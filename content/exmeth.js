@@ -178,6 +178,20 @@ LEMME.EXMETH = {
   String.raw`Étude de fonction pour trouver $\|f_n\|_\infty$.`,
   String.raw`Pas de convergence normale : majorer le reste avec le critère des séries alternées.`
 ],
+"Polynômes (exercices)": [
+  String.raw`Partie entière d'abord, puis cacher et évaluer aux deux pôles simples.`,
+  String.raw`Plus hautes puissances en cachant, puis $\lim XF$ pour le dernier.`,
+  String.raw`Partie entière, plus hautes puissances, puis un DL en chaque pôle double.`,
+  String.raw`$\frac{P(\omega)}{Q'(\omega)}$ pour chaque racine cubique, puis regrouper $j$ et $\overline j$.`,
+  String.raw`Retirer $\frac1X$, puis écrire le numérateur en puissances de $X^2 + 1$.`,
+  String.raw`Pôles $e^{2ik\pi/n}$ simples : $\frac{P(\omega)}{Q'(\omega)}$.`,
+  String.raw`Même formule : $\frac1{n\omega^{n-1}} = \frac\omega n$.`,
+  String.raw`Pôle double en $1$ avec $\Phi = \frac{X^n - 1}{X - 1}$, pôles simples avec $\frac P{Q'}$.`,
+  String.raw`$\frac P{Q'}$ dans $\mathbb C$, puis regrouper les racines conjuguées.`,
+  String.raw`Cacher et évaluer en chaque $k$, compter les signes.`,
+  String.raw`Dérivée logarithmique $\frac{P'}P = \sum\frac1{X - a_i}$, puis la dériver.`,
+  String.raw`Décomposer $\frac{X^j}P$, multiplier par $X$, faire tendre $X$ vers $+\infty$.`
+],
 "Polynômes": [
   String.raw`Formule de Taylor : calculer $P^{(k)}(1)$.`,
   String.raw`Poser la division : premier terme, on multiplie, on soustrait.`,

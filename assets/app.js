@@ -1550,14 +1550,53 @@ function potenceHtml(A, B) {
   return { html, Q, R: last, ptxt };
 }
 function renderPotence(el) { const A = el.dataset.a.split(",").map(Number), B = el.dataset.b.split(",").map(Number); el.innerHTML = potenceHtml(A, B).html; }
+const STEP_RE = /^[\s ]*<b>[\s ]*(?:Étape[\s ]*)?(\d+(?:[\s ]*[–-][\s ]*\d+)?)[\s ]*(?:[.:][\s ]*)?([\s\S]*?)<\/b>[\s ]*(?::[\s ]*)?([\s\S]*)$/;
+const NOSTEP = /^[\s ]*(Contrôle|Astuce|Vérification|Remarque|Moyen mnémotechnique|C'est l'exercice|Plus rapide)/;
+function stepify(q, num, lead) {
+  q.classList.add("exs");
+  const n = document.createElement("span"); n.className = "exn"; n.textContent = num;
+  const w = document.createElement("span"); w.className = "exbody";
+  if (lead) { const bb = document.createElement("b"); const ld = lead.replace(/[\s.:]+$/, ""); bb.innerHTML = ld.charAt(0).toUpperCase() + ld.slice(1) + ". "; w.appendChild(bb); }
+  while (q.firstChild) w.appendChild(q.firstChild);
+  q.append(n, w);
+}
+function numberSteps(body) {
+  let k = 0;
+  const lead = q => { const h = (q.firstElementChild && q.firstElementChild.tagName === "SPAN" && /^\s*<span/.test(q.innerHTML) ? q.firstElementChild : q).innerHTML; return /^[\s\u00a0]*<b>/.test(h) && !NOSTEP.test(q.textContent); };
+  const structured = [...body.children].some(el => el.tagName === "OL" || (el.tagName === "P" && lead(el)));
+  [...body.children].forEach(el => {
+    if (el.tagName === "OL") {
+      const frag = document.createDocumentFragment();
+      [...el.children].forEach(li => { const q = document.createElement("p"); while (li.firstChild) q.appendChild(li.firstChild); stepify(q, String(++k)); frag.appendChild(q); });
+      el.replaceWith(frag); return;
+    }
+    if (el.tagName !== "P" || el.classList.contains("exs") || el.classList.contains("ml")) return;
+    if (NOSTEP.test(el.textContent)) return;
+    let host = el;
+    const f = el.firstElementChild;
+    if (f && f.tagName === "SPAN" && /^\s*<span/.test(el.innerHTML)) host = f;
+    const r = host.innerHTML.replace(/&nbsp;/g, " ").match(STEP_RE);
+    if (r) { host.innerHTML = r[3]; const last = +r[1].split(/[–-]/).pop(); k = Math.max(k, last); stepify(el, r[1].replace(/\s/g, ""), r[2].trim()); return; }
+    const b = host.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*<b>([\s\S]*?)<\/b>[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
+    if (b && !/^(Conclusion|Contrôle)/.test(b[1])) { host.innerHTML = b[2]; stepify(el, String(++k), b[1]); return; }
+    if (!structured) stepify(el, String(++k));
+  });
+  if (!body.querySelector(".exs")) {
+    let n = 0;
+    [...body.childNodes].forEach(nd => {
+      if (nd.nodeType === 3 && /\$\$/.test(nd.textContent)) { const q = document.createElement("div"); nd.replaceWith(q); q.appendChild(nd); stepify(q, String(++n)); q.classList.add("exsm"); }
+    });
+  }
+}
 /* Exemples des fiches Méthode : « Exemple » souligné, encadré Méthode ombré, étapes dans des cercles */
 let EXT = null;
 function exBlocks(app) {
-  const M = ((window.LEMME || {}).EXMETH || {})[EXT] || []; let idx = 0;
+  const EM = (window.LEMME || {}).EXMETH || {}, M = EM[EXT] || [], MX = EM[EXT + " (exercices)"] || []; let idx = 0, jdx = 0;
   const STOP = "h2, p.ml, [data-mlab], .tree, .btree, .lg, .htree, .mrefl, .merr, .exb";
   $$(".methode .prose > p.ml", app).forEach(p => {
-    if (!/^Exemple/.test(p.textContent.trim())) return;
-    const meth = M[idx++], m = p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*(Exemple(?:[\s\u00a0]+\d+|[\s\u00a0]+complet|[\s\u00a0]+d'usage)?)[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
+    const isEx = /^Exercice/.test(p.textContent.trim());
+    if (!isEx && !/^Exemple/.test(p.textContent.trim())) return;
+    const meth = isEx ? MX[jdx++] : M[idx++], m = isEx ? p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s ]*([^:]*?)[\s ]*:[\s ]*([\s\S]*)$/) : p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*(Exemple(?:[\s\u00a0]+\d+|[\s\u00a0]+complet|[\s\u00a0]+d'usage)?)[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
     const lab = m ? m[1] : "Exemple", tit = m ? m[2].trim() : "";
     const box = document.createElement("div"); box.className = "exb";
     box.innerHTML = `<div class="exh"><div class="exl"><span class="exu">${lab}</span>${tit ? `<span class="ext">${tit}</span>` : ""}</div>${meth ? `<div class="exm"><b>Méthode</b><div>${meth}</div></div>` : ""}</div><div class="exc"></div>`;
@@ -1565,16 +1604,7 @@ function exBlocks(app) {
     let n = p.nextSibling;
     while (n && !(n.nodeType === 1 && n.matches(STOP))) { const nx = n.nextSibling; body.appendChild(n); n = nx; }
     p.replaceWith(box);
-    $$(":scope > p", body).forEach(q => {
-      const f = q.firstElementChild;
-      if (f && f.tagName === "SPAN" && f.firstElementChild && f.firstElementChild.tagName === "B" && /^\s*<span/.test(q.innerHTML)) {
-        const r0 = f.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*<b>[\s\u00a0]*(?:Étape[\s\u00a0]*)?(\d+(?:[\s\u00a0]*[–-][\s\u00a0]*\d+)?)[\s\u00a0]*(?:[.:][\s\u00a0]*)?([\s\S]*?)<\/b>[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
-        if (r0) { f.innerHTML = r0[3]; q.classList.add("exs"); const num = document.createElement("span"); num.className = "exn"; num.textContent = r0[1].replace(/\s/g, ""); const wrap = document.createElement("span"); wrap.className = "exbody"; if (r0[2].trim()) { const bb = document.createElement("b"); bb.innerHTML = r0[2].trim().replace(/[.:]$/, "") + ". "; wrap.appendChild(bb); } while (q.firstChild) wrap.appendChild(q.firstChild); q.append(num, wrap); return; }
-      }
-      const r = q.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*<b>[\s\u00a0]*(?:Étape[\s\u00a0]*)?(\d+(?:[\s\u00a0]*[–-][\s\u00a0]*\d+)?)[\s\u00a0]*(?:[.:][\s\u00a0]*)?([\s\S]*?)<\/b>[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
-      if (!r) return;
-      q.classList.add("exs"); q.innerHTML = `<span class="exn">${r[1].replace(/\s/g, "")}</span><span class="exbody">${r[2].trim() ? `<b>${r[2].trim().replace(/[.:]$/, "")}.</b> ` : ""}${r[3]}</span>`;
-    });
+    numberSteps(body);
   });
 }
 function braceTree(el) {
