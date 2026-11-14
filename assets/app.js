@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2158,6 +2158,73 @@ const QSF = [
   ["$\\zeta(x) = \\sum\\frac1{n^x}$ converge normalement sur $]1, +\\infty[$.", false, "Faux : $\\sup_{x > 1}\\frac1{n^x} = \\frac1n$. Elle converge normalement sur chaque $[a, +\\infty[$, $a > 1$."],
   ["Sur un segment, la CU permet d'échanger limite et intégrale.", true, "Vrai : $\\big|\\int(f_n - f)\\big|\\leqslant(b - a)\\|f_n - f\\|_\\infty$."],
   ["Une fonction continue sur $[a, b]$ est limite uniforme de polynômes.", true, "Vrai : théorème de Weierstrass."]
+];
+
+/* ---------- Labos de la Méthode « Polynômes » ---------- */
+const ptex = (cs, v = "X") => { const n = cs.length - 1; return fsum(cs.map((c, i) => [c, n - i === 0 ? "" : n - i === 1 ? v : `${v}^{${n - i}}`])); };
+function mlDivEucl(host) {
+  const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };
+  const build = e => {
+    const { B, Q, R } = e, A = [0, 0, 0, 0, 0];
+    Q.forEach((qc, i) => B.forEach((bc, j) => { A[i + j] += qc * bc; })); A[3] += R[0]; A[4] += R[1];
+    const st = [`$$A = ${ptex(A)},\\qquad B = ${ptex(B)}$$`];
+    let cur = A.slice(), rows = "";
+    for (let i = 0; i < 3; i++) {
+      const t = cur[i], deg = 2 - i, tq = fsum([[t, deg ? (deg === 1 ? "X" : `X^{${deg}}`) : ""]]);
+      const sub = B.map(b => b * t), subFull = Array(5).fill(0); sub.forEach((v, j) => subFull[i + j] = v);
+      rows += `<tr><td>$${ptex(cur.slice(i))}$</td><td>$\\cR{${tq}}$</td><td>$${tq === "0" ? "0" : `${tq}\\times B = ${ptex(subFull.slice(i))}`}$</td></tr>`;
+      cur = cur.map((v, j) => v - subFull[j]);
+    }
+    rows += `<tr><td>$${ptex(cur.slice(3))}$</td><td colspan="2">degré $\\lt2$ : on s'arrête</td></tr>`;
+    st.push(`<p class="mlstep">1. On divise à chaque fois le terme de plus haut degré par $X^2$, puis on soustrait :</p><table class="mtab"><tr><th>Reste courant</th><th>Terme du quotient</th><th>On soustrait</th></tr>${rows}</table>`);
+    st.push(`<p class="mlres">$$${ptex(A)} = \\left(${ptex(B)}\\right)\\left(\\cR{${ptex(Q)}}\\right) + ${ptex(R)}$$</p><p class="mlnote">Contrôle en $X = 1$ : $A(1) = ${A.reduce((s, v) => s + v, 0)}$ et $B(1)Q(1) + R(1) = ${B.reduce((s, v) => s + v, 0)}\\times${par(Q.reduce((s, v) => s + v, 0))} + ${par(R[0] + R[1])} = ${B.reduce((s, v) => s + v, 0) * Q.reduce((s, v) => s + v, 0) + R[0] + R[1]}$ $\\checkmark$</p>`);
+    return st;
+  };
+  stepLab(host, "Division euclidienne pas à pas", gen, build);
+}
+const desSum = ts => ts.filter(([f]) => f.n).map(([f, den], i) => { const a = Math.abs(f.n), num = f.d === 1 ? a : a, dd = f.d === 1 ? den : `${f.d}${den}`; return `${f.n < 0 ? (i ? " - " : "-") : (i ? " + " : "")}\\frac{${num}}{${dd}}`; }).join("") || "0";
+function mlDes(host) {
+  const gen = () => {
+    const dbl = rnd(0, 1); let a, b, c;
+    do { a = rnd(-3, 3); b = rnd(-3, 3); c = rnd(-3, 3); } while (a === b || (!dbl && (c === a || c === b)));
+    let n1, n0; do { n1 = rnd(-2, 3); n0 = rnd(-4, 4); } while (n1 * a + n0 === 0 || n1 * b + n0 === 0 || (!dbl && n1 * c + n0 === 0));
+    return { dbl, a, b, c, n1, n0 };
+  };
+  const fx = (r, s) => `(X ${r < 0 ? "+" : "-"} ${Math.abs(r)})${s || ""}`.replace("(X - 0)", "X").replace("(X + 0)", "X"), fx1 = r => fx(r).replace(/^\((.*)\)$/, "$1");
+  const build = e => {
+    const { dbl, a, b, c, n1, n0 } = e, N = x => n1 * x + n0, num = fsum([[n1, "X"], [n0, ""]]);
+    if (!dbl) {
+      const ca = Fr(N(a), (a - b) * (a - c)), cb = Fr(N(b), (b - a) * (b - c)), cc = Fr(N(c), (c - a) * (c - b));
+      let x0 = 0; while ([a, b, c].includes(x0)) x0++;
+      const F0 = Fr(N(x0), (x0 - a) * (x0 - b) * (x0 - c)), S0 = fadd(fadd(fdiv(ca, Fr(x0 - a)), fdiv(cb, Fr(x0 - b))), fdiv(cc, Fr(x0 - c)));
+      return [`$$F = \\frac{${num}}{\\cB{${fx(a)}${fx(b)}${fx(c)}}}$$`,
+        `<p class="mlstep">1. Degré $${n1 ? 1 : 0}\\lt3$ : pas de partie entière. Trois pôles simples, donc la forme :</p>$$F = \\frac{\\cR\\alpha}{${fx1(a)}} + \\frac{\\cR\\beta}{${fx1(b)}} + \\frac{\\cR\\gamma}{${fx1(c)}}$$`,
+        `<p class="mlstep">2. On cache chaque facteur et on évalue au pôle :</p>$$\\cR\\alpha = \\frac{${N(a)}}{(${a} - ${par(b)})(${a} - ${par(c)})} = ${ftex(ca)},\\qquad\\cR\\beta = \\frac{${N(b)}}{(${b} - ${par(a)})(${b} - ${par(c)})} = ${ftex(cb)},\\qquad\\cR\\gamma = \\frac{${N(c)}}{(${c} - ${par(a)})(${c} - ${par(b)})} = ${ftex(cc)}$$`,
+        `<p class="mlres">$$F = \\cG{${desSum([[ca, fx1(a)], [cb, fx1(b)], [cc, fx1(c)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$ $\\checkmark$</p>`];
+    }
+    /* pôle double en a, simple en b : F = N/((X-a)^2 (X-b)) */
+    const cb = Fr(N(b), (b - a) ** 2), c2 = Fr(N(a), a - b), c1 = Fr(-cb.n, cb.d);
+    let x0 = 0; while ([a, b].includes(x0)) x0++;
+    const F0 = Fr(N(x0), (x0 - a) ** 2 * (x0 - b)), S0 = fadd(fadd(fdiv(c1, Fr(x0 - a)), fdiv(c2, Fr((x0 - a) ** 2))), fdiv(cb, Fr(x0 - b)));
+    return [`$$F = \\frac{${num}}{\\cB{${fx(a, "^2")}${fx(b)}}}$$`,
+      `<p class="mlstep">1. Pôle <b>double</b> en $${a}$ (deux termes) et pôle simple en $${b}$ :</p>$$F = \\frac{\\cR\\alpha}{${fx1(a)}} + \\frac{\\cR{\\alpha'}}{${fx(a, "^2")}} + \\frac{\\cR\\beta}{${fx1(b)}}$$`,
+      `<p class="mlstep">2. Les coefficients qu'on obtient en cachant : $\\beta$, et $\\alpha'$ (la plus haute puissance) :</p>$$\\cR\\beta = \\frac{${N(b)}}{(${b} - ${par(a)})^2} = ${ftex(cb)},\\qquad\\cR{\\alpha'} = \\frac{${N(a)}}{${a} - ${par(b)}} = ${ftex(c2)}$$`,
+      `<p class="mlstep">3. Pour $\\alpha$ : on multiplie par $X$ et $X\\to+\\infty$. À gauche $XF\\to0$ (degré $${n1 ? 2 : 1}$ en haut, $3$ en bas), à droite on trouve $\\alpha + \\beta$ :</p>$$0 = \\alpha + \\beta\\ \\Longrightarrow\\ \\cR{\\alpha = ${ftex(c1)}}$$`,
+      `<p class="mlres">$$F = \\cG{${desSum([[c1, fx1(a)], [c2, fx(a, "^2")], [cb, fx1(b)]])}}$$</p><p class="mlnote">Contrôle en $X = ${x0}$ : $F(${x0}) = ${ftex(F0)}$ et la décomposition donne $${ftex(S0)}$ $\\checkmark$</p>`];
+  };
+  stepLab(host, "Décomposition en éléments simples pas à pas", gen, build);
+}
+const QPOLY = [
+  ["$\\deg(P + Q) = \\max(\\deg P, \\deg Q)$.", false, "Faux : seulement $\\leqslant$. $(X^2 + 1) + (-X^2) = 1$."],
+  ["Si $P(a) = P'(a) = 0$, alors $(X - a)^2\\mid P$.", true, "Vrai : $a$ est racine d'ordre au moins $2$."],
+  ["$X^2 + 1$ est irréductible dans $\\mathbb R[X]$.", true, "Vrai : degré $2$ et $\\Delta = -4\\lt0$."],
+  ["Le pôle double $a$ de $F$ donne seulement un terme $\\frac c{(X - a)^2}$.", false, "Faux : il donne $\\frac{c_1}{X - a} + \\frac{c_2}{(X - a)^2}$."],
+  ["Pour un pôle simple, le coefficient vaut $\\frac{P(a)}{Q'(a)}$.", true, "Vrai, et c'est très utile quand $Q$ n'est pas factorisé ($X^n - 1$)."],
+  ["Dans $\\mathbb R(X)$, au-dessus de $X^2 + X + 1$, on met une constante.", false, "Faux : on met $\\alpha X + \\beta$."],
+  ["Un polynôme de degré $n$ qui a $n + 1$ racines est nul.", true, "Vrai : un polynôme non nul a au plus $n$ racines."],
+  ["La somme des racines de $2X^3 - 6X^2 + 1$ vaut $3$.", true, "Vrai : $\\sigma_1 = -\\frac{a_2}{a_3} = -\\frac{-6}{2} = 3$."],
+  ["$\\frac{X^3}{X^2 - 1}$ se décompose sans partie entière.", false, "Faux : $\\deg3\\geqslant2$, la partie entière est $X$."],
+  ["Si $P$ est scindé, $\\frac{P'}P = \\sum\\frac1{X - x_i}$.", true, "Vrai : c'est la dérivée logarithmique, racines comptées avec multiplicité."]
 ];
 
 /* ---------- Labos de la Méthode « Déterminants » ---------- */

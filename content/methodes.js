@@ -2974,5 +2974,316 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 <a class="tl tend" href="#f-weier">continue par morceaux : escalier</a></div>
 </div>
 </div>
+`,
+"Polynômes": R`
+<nav class="msum"><a href="#q-not">Notations</a><a href="#q-deriv">Dérivation, Taylor</a><a href="#q-div">Division euclidienne</a><a href="#q-reste">Trouver un reste</a><a href="#q-rac">Racines, multiplicité</a><a href="#q-fact">Factoriser</a><a href="#q-viete">Coefficients et racines</a><a href="#q-lag">Lagrange</a><a href="#q-pgcd">PGCD, Bézout</a><a href="#q-des">Éléments simples</a><a href="#q-coef">Calculer les coefficients</a><a href="#q-reel">Facteurs de degré 2</a><a href="#q-appli">Applications</a><a href="#q-exos">Exercices corrigés</a><a href="#q-enonce">Ce que l'énoncé te donne</a><a href="#q-erreurs">Erreurs</a><a href="#q-entrainement">S'entraîner</a><a href="#q-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les pôles et les facteurs du dénominateur. <span class="kV">violet</span> : les racines. <span class="kO">orange</span> : l'opération qu'on fait (multiplier, évaluer, poser $X = a + h$). <span class="kR">rouge</span> : les coefficients qu'on trouve. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="q-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Polynômes</td><td>$\mathbb K[X]$, $P = \sum_{k=0}^na_kX^k$</td><td>$\mathbb K = \mathbb R$ ou $\mathbb C$.</td></tr>
+<tr><td>Degré</td><td>$\deg P$, et $\deg0 = -\infty$</td><td>$\deg(PQ) = \deg P + \deg Q$, $\deg(P + Q)\leqslant\max$.</td></tr>
+<tr><td>Coefficient dominant</td><td>$a_n$ si $\deg P = n$</td><td>$P$ unitaire si $a_n = 1$.</td></tr>
+<tr><td>Polynômes de degré $\leqslant n$</td><td>$\mathbb K_n[X]$</td><td>Espace vectoriel de dimension $n + 1$.</td></tr>
+<tr><td>Divisibilité</td><td>$A\mid B$</td><td>$B = AC$ avec $C\in\mathbb K[X]$.</td></tr>
+<tr><td>Fractions rationnelles</td><td>$\mathbb K(X)$, $F = \frac PQ$</td><td>Forme irréductible : $P\wedge Q = 1$.</td></tr>
+</table>
+<p class="ml piege">Piège</p>
+<p>$\deg(P + Q)$ peut être <b>strictement</b> plus petit que $\max(\deg P, \deg Q)$ : $(X^2 + 1) + (-X^2) = 1$.</p>
+
+<h2 id="q-deriv">2. Dérivation et formule de Taylor</h2>
+<div class="sbox">$$(X^k)^{(j)} = \frac{k!}{(k - j)!}X^{k-j}\ (j\leqslant k),\qquad(PQ)^{(n)} = \sum_{k=0}^n\binom nkP^{(k)}Q^{(n-k)}\quad\text{(Leibniz)}.$$</div>
+<div class="sbox">$$\textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k\qquad(\text{égalité exacte, pas de reste}).$$</div>
+<p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
+$$P(1) = 0,\qquad P' = 3X^2 - 2,\ P'(1) = 1,\qquad P'' = 6X,\ P''(1) = 6,\qquad P''' = 6.$$
+$$P = 0 + 1\cdot(X - 1) + \frac62(X - 1)^2 + \frac66(X - 1)^3 = \cG{(X - 1) + 3(X - 1)^2 + (X - 1)^3}.$$
+<p>Contrôle en $X = 0$ : $-1 + 3 - 1 = 1 = P(0)$. $\checkmark$</p>
+
+<h2 id="q-div">3. La division euclidienne</h2>
+<div class="sbox">$$B\neq0:\quad\exists!\,(Q, R),\quad A = BQ + R\quad\text{et}\quad\deg R\lt\deg B.$$</div>
+<p class="ml">Exemple : $A = X^4 + 2X^3 - X + 1$ par $B = X^2 + X + 1$</p>
+<p>À chaque étape, on divise le terme de plus haut degré du reste par $X^2$, et on soustrait :</p>
+<table class="mtab">
+<tr><th>Reste courant</th><th>Terme du quotient</th><th>On soustrait</th></tr>
+<tr><td>$X^4 + 2X^3 + 0X^2 - X + 1$</td><td>$\cR{X^2}$</td><td>$X^2B = X^4 + X^3 + X^2$</td></tr>
+<tr><td>$X^3 - X^2 - X + 1$</td><td>$\cR{X}$</td><td>$XB = X^3 + X^2 + X$</td></tr>
+<tr><td>$-2X^2 - 2X + 1$</td><td>$\cR{-2}$</td><td>$-2B = -2X^2 - 2X - 2$</td></tr>
+<tr><td>$3$</td><td colspan="2">degré $0\lt2$ : on s'arrête</td></tr>
+</table>
+$$\cG{X^4 + 2X^3 - X + 1 = (X^2 + X + 1)(X^2 + X - 2) + 3}.$$
+<p>Contrôle en $X = 1$ : à gauche $1 + 2 - 1 + 1 = 3$, à droite $3\times0 + 3 = 3$. $\checkmark$</p>
+<div data-mlab="diveucl"></div>
+
+<h2 id="q-reste">4. Trouver un reste sans poser la division</h2>
+<p>Le reste a un degré $\lt\deg B$ : on l'écrit avec des inconnues, puis on <b>évalue aux racines de $B$</b>.</p>
+<p class="ml">Exemple 1 : reste de $X^n$ par $(X - 1)(X - 2)$</p>
+<p>$X^n = (X - 1)(X - 2)Q + aX + b$. On évalue en $\cO{X = 1}$ et en $\cO{X = 2}$ :</p>
+$$\left\{\begin{aligned}a + b &= 1\\2a + b &= 2^n\end{aligned}\right.\iff\left\{\begin{aligned}a &= 2^n - 1\\b &= 2 - 2^n\end{aligned}\right.\qquad\cG{R = (2^n - 1)X + 2 - 2^n}.$$
+<p class="ml">Exemple 2 : reste de $X^n$ par $(X - 1)^2$ (racine double)</p>
+<p>$X^n = (X - 1)^2Q + aX + b$. On évalue en $1$, puis on <b>dérive</b> et on évalue en $1$ (le terme $(X - 1)^2Q$ a une dérivée nulle en $1$) :</p>
+$$\left\{\begin{aligned}1 &= a + b\\n &= a\end{aligned}\right.\qquad\Longrightarrow\qquad\cG{R = nX + 1 - n}.$$
+
+<h2 id="q-rac">5. Racines et multiplicité</h2>
+<div class="sbox">$$P(a) = 0\iff(X - a)\mid P.\qquad a\ \text{racine d'ordre}\ m\iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\ \text{et}\ P^{(m)}(a)\neq0.$$</div>
+<ul>
+<li>Un polynôme non nul de degré $n$ a <b>au plus $n$ racines</b> (comptées avec multiplicité).</li>
+<li>Conséquence : un polynôme qui a une infinité de racines est nul. C'est ainsi qu'on prouve que deux polynômes sont égaux.</li>
+<li>$P$ réel : si $z$ est racine, $\overline z$ aussi, avec la même multiplicité.</li>
+</ul>
+<p class="ml">Exemple : la multiplicité de $1$ dans $P = X^4 - 2X^3 + 2X - 1$</p>
+$$\begin{aligned}P(1) &= 1 - 2 + 2 - 1 = 0\\P' = 4X^3 - 6X^2 + 2,\quad P'(1) &= 4 - 6 + 2 = 0\\P'' = 12X^2 - 12X,\quad P''(1) &= 0\\P''' = 24X - 12,\quad P'''(1) &= 12\neq0\end{aligned}$$
+<p>$1$ est racine d'ordre $\cG3$ : $P = (X - 1)^3(X + 1)$ (le dernier facteur s'obtient avec le coefficient dominant et $P(0) = -1$).</p>
+
+<h2 id="q-fact">6. Factoriser</h2>
+<div class="sbox">$$\textbf{D'Alembert-Gauss}:\ \text{tout polynôme non constant de}\ \mathbb C[X]\ \text{a une racine, donc est scindé}.$$</div>
+<ul>
+<li><b>Irréductibles de $\mathbb C[X]$</b> : les polynômes de degré $1$.</li>
+<li><b>Irréductibles de $\mathbb R[X]$</b> : les degrés $1$, et les degrés $2$ de discriminant $\Delta\lt0$.</li>
+<li>Pour factoriser dans $\mathbb R$ : factoriser dans $\mathbb C$, puis <b>regrouper chaque racine avec sa conjuguée</b> :</li>
+</ul>
+$$(X - z)(X - \overline z) = X^2 - 2\operatorname{Re}(z)\,X + |z|^2.$$
+<p class="ml">Exemple 1 : $X^4 + 1$</p>
+<p><b>Dans $\mathbb C$.</b> $z^4 = -1 = e^{i\pi}$ donne $z = e^{i\frac{\pi + 2k\pi}4}$ : $\cV{e^{\pm i\pi/4}}$ et $\cV{e^{\pm3i\pi/4}}$.</p>
+<p><b>Dans $\mathbb R$.</b> On regroupe les conjuguées, avec $|z| = 1$ :</p>
+$$\big(X - e^{i\pi/4}\big)\big(X - e^{-i\pi/4}\big) = X^2 - 2\cos\frac\pi4\,X + 1 = X^2 - \sqrt2X + 1,\qquad\big(X - e^{3i\pi/4}\big)\big(X - e^{-3i\pi/4}\big) = X^2 + \sqrt2X + 1.$$
+$$\cG{X^4 + 1 = (X^2 - \sqrt2X + 1)(X^2 + \sqrt2X + 1)}.$$
+<p>Astuce plus rapide : $X^4 + 1 = (X^2 + 1)^2 - 2X^2 = (X^2 + 1 - \sqrt2X)(X^2 + 1 + \sqrt2X)$.</p>
+<p class="ml">Exemple 2 : $X^6 - 1$</p>
+<p>Les racines sont les $\cV{e^{ik\pi/3}}$, $k = 0, \dots, 5$ : $\pm1$, $e^{\pm i\pi/3}$, $e^{\pm2i\pi/3}$. On regroupe ($2\cos\frac\pi3 = 1$, $2\cos\frac{2\pi}3 = -1$) :</p>
+$$\cG{X^6 - 1 = (X - 1)(X + 1)(X^2 - X + 1)(X^2 + X + 1)}.$$
+
+<h2 id="q-viete">7. Relations coefficients-racines</h2>
+<p>Si $P = a_nX^n + \cdots + a_0$ est scindé, de racines $x_1, \dots, x_n$ :</p>
+<div class="sbox">$$\sigma_1 = \sum_ix_i = -\frac{a_{n-1}}{a_n},\qquad\sigma_2 = \sum_{i\lt j}x_ix_j = \frac{a_{n-2}}{a_n},\qquad\dots,\qquad\sigma_n = \prod_ix_i = (-1)^n\frac{a_0}{a_n}.$$</div>
+<p>Degré 2 : $x_1 + x_2 = -\frac ba$ et $x_1x_2 = \frac ca$. Degré 3 : $\sigma_1 = -\frac ba$, $\sigma_2 = \frac ca$, $\sigma_3 = -\frac da$.</p>
+<p class="ml">Exemple : $x_1, x_2, x_3$ racines de $X^3 - 2X + 5$</p>
+$$\sigma_1 = 0,\qquad\sigma_2 = -2,\qquad\sigma_3 = -5.$$
+$$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 + 4 = \cG4,\qquad\frac1{x_1} + \frac1{x_2} + \frac1{x_3} = \frac{x_2x_3 + x_1x_3 + x_1x_2}{x_1x_2x_3} = \frac{\sigma_2}{\sigma_3} = \cG{\frac25}.$$
+
+<h2 id="q-lag">8. L'interpolation de Lagrange</h2>
+<div class="sbox">$$x_0, \dots, x_n\ \text{distincts}:\quad L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\quad L_i(x_j) = \delta_{i,j},\qquad P = \sum_{i=0}^ny_iL_i\ \text{est l'unique}\ P\in\mathbb K_n[X]\ \text{avec}\ P(x_i) = y_i.$$</div>
+<p class="ml">Exemple : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$</p>
+$$L_0 = \frac{(X - 1)(X - 2)}{(0 - 1)(0 - 2)} = \frac{(X - 1)(X - 2)}2,\qquad L_1 = \frac{X(X - 2)}{1\cdot(-1)} = -X(X - 2),\qquad L_2 = \frac{X(X - 1)}{2\cdot1}.$$
+$$P = 1\cdot\frac{X^2 - 3X + 2}2 - 3(X^2 - 2X) + 7\cdot\frac{X^2 - X}2 = \frac{8X^2 - 10X + 2}2 - 3X^2 + 6X = \cG{X^2 + X + 1}.$$
+<p>Contrôle : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$. $\checkmark$</p>
+
+<h2 id="q-pgcd">9. PGCD, Bézout, Gauss</h2>
+<div class="sbox">$$\textbf{Bézout}:\ A\wedge B = 1\iff\exists\,U, V,\ AU + BV = 1.\qquad\textbf{Gauss}:\ A\mid BC\ \text{et}\ A\wedge B = 1\ \Longrightarrow\ A\mid C.$$</div>
+<ul>
+<li>Le PGCD (unitaire) s'obtient par l'algorithme d'Euclide : c'est le dernier reste non nul.</li>
+<li>Dans $\mathbb C[X]$ : $A\wedge B = 1\iff A$ et $B$ n'ont <b>aucune racine commune</b>.</li>
+<li>$a_1, \dots, a_n$ distincts : si chaque $(X - a_i)$ divise $P$, alors $\prod(X - a_i)$ divise $P$.</li>
+</ul>
+<p class="ml">Exemple : PGCD de $X^4 - 1$ et $X^3 - 1$, avec une relation de Bézout</p>
+$$\begin{aligned}X^4 - 1 &= X\cdot(X^3 - 1) + \cR{(X - 1)}\\X^3 - 1 &= (X - 1)(X^2 + X + 1) + 0\end{aligned}\qquad\Longrightarrow\qquad\cG{(X^4 - 1)\wedge(X^3 - 1) = X - 1}.$$
+<p>On remonte la première ligne : $X - 1 = (X^4 - 1)\cdot1 + (X^3 - 1)\cdot(-X)$.</p>
+
+<h2 id="q-des">10. La décomposition en éléments simples</h2>
+<p>Elle découpe une fraction en somme de fractions simples. Elle sert à <b>primitiver</b>, à <b>télescoper</b> une somme et à calculer des dérivées $n$-ièmes.</p>
+<p class="ml">Les 4 étapes</p>
+<ol>
+<li><b>Forme irréductible</b> : simplifier $\frac PQ$ s'il y a une racine commune.</li>
+<li><b>Partie entière</b> : si $\deg P\geqslant\deg Q$, division euclidienne $P = QE + R$, et $\frac PQ = E + \frac RQ$ avec $\deg R\lt\deg Q$.</li>
+<li><b>Factoriser $Q$</b> en irréductibles, et écrire la <b>forme</b> de la décomposition.</li>
+<li><b>Calculer les coefficients</b> (§11), puis contrôler en une valeur.</li>
+</ol>
+<p class="ml">La forme de la décomposition</p>
+<table class="mtab">
+<tr><th>Facteur de $Q$</th><th>Il apporte</th></tr>
+<tr><td>$\cB{(X - a)}$, pôle simple</td><td>$\dfrac{\cR{c}}{X - a}$</td></tr>
+<tr><td>$\cB{(X - a)^m}$, pôle d'ordre $m$</td><td>$\dfrac{\cR{c_1}}{X - a} + \dfrac{\cR{c_2}}{(X - a)^2} + \cdots + \dfrac{\cR{c_m}}{(X - a)^m}$ : <b>toutes</b> les puissances</td></tr>
+<tr><td>$\cB{(X^2 + pX + q)}$, $\Delta\lt0$ (dans $\mathbb R$)</td><td>$\dfrac{\cR{\alpha X + \beta}}{X^2 + pX + q}$</td></tr>
+<tr><td>$\cB{(X^2 + pX + q)^m}$</td><td>$\sum_{k=1}^m\dfrac{\cR{\alpha_kX + \beta_k}}{(X^2 + pX + q)^k}$</td></tr>
+</table>
+<p>Exemple de forme : $\frac{3X + 1}{X^2(X + 1)(X^2 + 1)} = \frac aX + \frac b{X^2} + \frac c{X + 1} + \frac{dX + e}{X^2 + 1}$, avec $5$ inconnues pour un dénominateur de degré $5$.</p>
+<p class="ml piege">Piège</p>
+<p>Le nombre d'inconnues est toujours égal au degré du dénominateur. Si on en a moins, on a oublié une puissance.</p>
+
+<h2 id="q-coef">11. Calculer les coefficients</h2>
+<p class="ml">Méthode 1 : pôle simple, on multiplie et on évalue</p>
+<p>Pour trouver le coefficient de $\frac1{X - a}$ : multiplier toute l'égalité par $\cO{(X - a)}$, puis évaluer en $\cO{X = a}$. Tous les autres termes s'annulent. En pratique, on « cache » le facteur $(X - a)$ dans la fraction et on remplace $X$ par $a$.</p>
+<div class="sbox">$$\text{Pôle simple}\ a:\qquad c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}.$$</div>
+<p>Exemple : $F = \frac{X + 3}{(X - 1)(X + 2)(X - 3)} = \frac a{X - 1} + \frac b{X + 2} + \frac c{X - 3}$.</p>
+$$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \frac{-2 + 3}{(-2 - 1)(-2 - 3)} = \frac1{15},\qquad\cR c = \frac{3 + 3}{(3 - 1)(3 + 2)} = \frac35.$$
+<p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12$. $\checkmark$</p>
+<p>La formule $\frac{P(a)}{Q'(a)}$ est la meilleure quand $Q$ n'est pas factorisé, comme $X^n - 1$ (voir les exercices F, G, I).</p>
+<p class="ml">Méthode 2 : pôle multiple, la plus haute puissance d'abord</p>
+<p>Pour un pôle $a$ d'ordre $m$, multiplier par $\cO{(X - a)^m}$ et évaluer en $a$ donne le coefficient de $\frac1{(X - a)^m}$ (le plus haut). Les autres s'obtiennent par :</p>
+<ul>
+<li><b>la limite en $+\infty$ après multiplication par $X$</b> : $\lim XF(X)$ = somme des coefficients des $\frac1{X - a}$ (degré 1 en bas) ;</li>
+<li><b>une valeur particulière</b> de $X$ (souvent $X = 0$) ;</li>
+<li><b>un DL au voisinage du pôle</b> : poser $\cO{X = a + h}$, développer $(X - a)^mF$ en puissances de $h$, et lire tous les coefficients d'un coup.</li>
+</ul>
+<p>Exemple : $F = \frac{X + 1}{(X + 2)(X - 1)^2} = \frac a{X + 2} + \frac b{X - 1} + \frac c{(X - 1)^2}$.</p>
+$$\cR a = \Big[\frac{X + 1}{(X - 1)^2}\Big]_{X = -2} = \frac{-1}{9},\qquad\cR c = \Big[\frac{X + 1}{X + 2}\Big]_{X = 1} = \frac23.$$
+<p>Pour $b$, on multiplie par $\cO X$ et on fait tendre $X$ vers $+\infty$ : $XF(X)\to0$ (degré $1$ en haut, $3$ en bas), et à droite on obtient $a + b + 0$.</p>
+$$0 = a + b\ \Longrightarrow\ \cR{b = \frac19}.\qquad\text{Contrôle en}\ X = 0:\ \frac1{2} = -\frac1{18} - \frac19 + \frac23 = \frac{-1 - 2 + 12}{18} = \frac12.\ \checkmark$$
+<p>C'est l'exercice B ci-dessous.</p>
+<p class="ml">Méthode 3 : la parité</p>
+<p>Si $F(-X) = F(X)$ ou $F(-X) = -F(X)$, on écrit la décomposition de $F(-X)$ et on identifie par unicité : cela relie les coefficients deux à deux.</p>
+<p>Exemple : $F = \frac1{X^2(X^2 - 1)}$ est paire. $F = \frac aX + \frac b{X^2} + \frac c{X - 1} + \frac d{X + 1}$, et $F(-X) = -\frac aX + \frac b{X^2} - \frac c{X + 1} - \frac d{X - 1}$. Par unicité, $a = -a$, donc $a = 0$, et $d = -c$. Ensuite $b = \big[\frac1{X^2 - 1}\big]_0 = -1$ et $c = \big[\frac1{X^2(X + 1)}\big]_1 = \frac12$ :</p>
+$$\cG{F = -\frac1{X^2} + \frac{1/2}{X - 1} - \frac{1/2}{X + 1}}.$$
+<p class="ml">Méthode 4 : l'identification (en dernier recours)</p>
+<p>On remet tout au même dénominateur et on identifie les coefficients des numérateurs. C'est sûr mais long : un système de $n$ équations à $n$ inconnues.</p>
+$$\frac{1}{X^2 - 1} = \frac a{X - 1} + \frac b{X + 1} = \frac{(a + b)X + (a - b)}{X^2 - 1}\iff\left\{\begin{aligned}a + b &= 0\\a - b &= 1\end{aligned}\right.\iff a = \frac12,\ b = -\frac12.$$
+<div data-mlab="des"></div>
+
+<h2 id="q-reel">12. Les facteurs de degré 2 (dans $\mathbb R(X)$)</h2>
+<p class="ml">Méthode A : multiplier et évaluer en une racine complexe</p>
+<p>Pour $\frac{\alpha X + \beta}{X^2 + pX + q}$ avec un facteur simple : multiplier par $\cO{X^2 + pX + q}$ et évaluer en une racine complexe $z$. On obtient $\alpha z + \beta$, puis on sépare parties réelle et imaginaire.</p>
+<p>Exemple : $F = \frac{X + 2}{X(X^2 + 1)} = \frac aX + \frac{\alpha X + \beta}{X^2 + 1}$.</p>
+$$\cR a = \Big[\frac{X + 2}{X^2 + 1}\Big]_{X = 0} = 2.\qquad\text{En}\ \cO{X = i}:\ \alpha i + \beta = \Big[\frac{X + 2}X\Big]_{X = i} = \frac{i + 2}i = 1 - 2i.$$
+$$\beta = 1,\ \alpha = -2\qquad\Longrightarrow\qquad\cG{F = \frac2X + \frac{-2X + 1}{X^2 + 1}}.$$
+<p>Contrôle en $X = 1$ : $\frac32 = 2 + \frac{-1}2$. $\checkmark$</p>
+<p class="ml">Méthode B : passer par $\mathbb C$, puis regrouper les conjugués</p>
+<p>Si $\frac c{X - z}$ apparaît dans $\mathbb C$, alors $\frac{\overline c}{X - \overline z}$ aussi (fraction réelle), et :</p>
+<div class="sbox">$$\frac c{X - z} + \frac{\overline c}{X - \overline z} = \frac{2\operatorname{Re}(c)\,X - 2\operatorname{Re}(c\,\overline z)}{X^2 - 2\operatorname{Re}(z)\,X + |z|^2}.$$</div>
+<p class="ml">Méthode C : facteur de degré 2 élevé à une puissance</p>
+<p>On développe le numérateur en puissances de $Y = X^2 + pX + q$ (divisions euclidiennes successives par $Y$), comme dans l'exercice E.</p>
+
+<h2 id="q-appli">13. À quoi ça sert</h2>
+<p class="ml">Primitiver une fraction rationnelle</p>
+$$\int\frac{dx}{x^2 - 1} = \frac12\int\Big(\frac1{x - 1} - \frac1{x + 1}\Big)dx = \frac12\ln\Big|\frac{x - 1}{x + 1}\Big| + C.$$
+<p>Les morceaux s'intègrent avec $\ln|x - a|$, $-\frac1{(k - 1)(x - a)^{k-1}}$, et pour $\frac{\alpha x + \beta}{x^2 + px + q}$ : un $\ln$ (partie en $\frac{u'}u$) plus un $\arctan$ (forme canonique).</p>
+<p class="ml">Télescoper une somme</p>
+$$\sum_{k=1}^n\frac1{k(k + 1)} = \sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = 1 - \frac1{n + 1}.$$
+<p class="ml">La dérivée logarithmique</p>
+<div class="sbox">$$P = \lambda\prod_{i=1}^n(X - x_i)\ \Longrightarrow\ \frac{P'}P = \sum_{i=1}^n\frac1{X - x_i}\qquad(\text{racines comptées avec multiplicité}).$$</div>
+<p class="ml">Dérivée $n$-ième</p>
+$$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightarrow\ \Big(\frac1{x^2 - 1}\Big)^{(n)} = \frac{(-1)^nn!}2\Big(\frac1{(x - 1)^{n+1}} - \frac1{(x + 1)^{n+1}}\Big).$$
+
+<h2 id="q-exos">14. Exercices corrigés (feuille d'exercices 15 à 17)</h2>
+<p class="ml">Exercice 15 A : $\dfrac{X^3}{X^2 - 3X + 2}$</p>
+<p><b>Partie entière</b> ($3\geqslant2$) : $X^3 = (X^2 - 3X + 2)(X + 3) + 7X - 6$. Contrôle : $(X^2 - 3X + 2)(X + 3) = X^3 - 7X + 6$.</p>
+<p><b>Dénominateur</b> : $X^2 - 3X + 2 = \cB{(X - 1)(X - 2)}$. <b>Pôles simples</b> :</p>
+$$\frac{7X - 6}{(X - 1)(X - 2)} = \frac a{X - 1} + \frac b{X - 2},\qquad\cR a = \frac{7 - 6}{1 - 2} = -1,\qquad\cR b = \frac{14 - 6}{2 - 1} = 8.$$
+$$\cG{\frac{X^3}{X^2 - 3X + 2} = X + 3 - \frac1{X - 1} + \frac8{X - 2}}.\qquad\text{Contrôle en}\ 0:\ 0 = 3 + 1 - 4.\ \checkmark$$
+<p class="ml">Exercice 15 B : $\dfrac{X + 1}{(X + 2)(X - 1)^2}$</p>
+<p>Calculée au §11 (méthode 2) : $\cG{-\frac{1/9}{X + 2} + \frac{1/9}{X - 1} + \frac{2/3}{(X - 1)^2}}$.</p>
+<p class="ml">Exercice 15 C : $\dfrac{X^5 + 1}{(X^2 - X)^2}$</p>
+<p><b>Dénominateur</b> : $(X^2 - X)^2 = \cB{X^2(X - 1)^2} = X^4 - 2X^3 + X^2$. <b>Partie entière</b> ($5\geqslant4$) :</p>
+$$(X + 2)(X^4 - 2X^3 + X^2) = X^5 - 3X^3 + 2X^2,\qquad X^5 + 1 = (X + 2)(X^4 - 2X^3 + X^2) + 3X^3 - 2X^2 + 1.$$
+<p><b>Forme</b> : $F = X + 2 + \frac aX + \frac b{X^2} + \frac c{X - 1} + \frac d{(X - 1)^2}$.</p>
+<p><b>Plus hautes puissances</b> :</p>
+$$\cR b = \Big[\frac{X^5 + 1}{(X - 1)^2}\Big]_{X = 0} = 1,\qquad\cR d = \Big[\frac{X^5 + 1}{X^2}\Big]_{X = 1} = 2.$$
+<p><b>Coefficient $a$, par un DL en $0$</b> : $X^2F = \frac{X^5 + 1}{(X - 1)^2} = (1 + X^5)(1 - X)^{-2} = 1 + 2X + o(X)$. Le coefficient de $X$ donne $\cR{a = 2}$.</p>
+<p><b>Coefficient $c$, par un DL en $1$</b> : avec $\cO{X = 1 + h}$, $(X - 1)^2F = \frac{(1 + h)^5 + 1}{(1 + h)^2} = (2 + 5h)(1 - 2h) + o(h) = 2 + h + o(h)$. Donc $\cR{c = 1}$.</p>
+<p><b>Contrôle</b> : $XF - X(X + 2)\to a + c = 3$, et le reste vaut $\frac{3X^3 + \dots}{X^4}$, donc $X\cdot\frac{3X^3}{X^4}\to3$. $\checkmark$</p>
+$$\cG{\frac{X^5 + 1}{(X^2 - X)^2} = X + 2 + \frac2X + \frac1{X^2} + \frac1{X - 1} + \frac2{(X - 1)^2}}.$$
+<p class="ml">Exercice 15 D : $\dfrac{X^3 + 1}{X^3 - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
+<p><b>Partie entière</b> : $\frac{X^3 + 1}{X^3 - 1} = 1 + \frac2{X^3 - 1}$. <b>Pôles</b> : $\cB{1, j, j^2}$, simples.</p>
+<p><b>Dans $\mathbb C(X)$</b>, avec $c = \frac{P(\omega)}{Q'(\omega)} = \frac2{3\omega^2} = \frac{2\omega}3$ (car $\omega^3 = 1$) :</p>
+$$\cG{1 + \frac23\Big(\frac1{X - 1} + \frac j{X - j} + \frac{j^2}{X - j^2}\Big)}.$$
+<p><b>Dans $\mathbb R(X)$</b> : on regroupe $j$ et $j^2 = \overline j$ ($j + \overline j = -1$, $j\overline j = 1$) :</p>
+$$\frac j{X - j} + \frac{\overline j}{X - \overline j} = \frac{(j + \overline j)X - 2j\overline j}{X^2 + X + 1} = \frac{-X - 2}{X^2 + X + 1}.$$
+$$\cG{\frac{X^3 + 1}{X^3 - 1} = 1 + \frac{2/3}{X - 1} - \frac23\cdot\frac{X + 2}{X^2 + X + 1}}.\qquad\text{Contrôle en}\ 0:\ -1 = 1 - \frac23 - \frac43.\ \checkmark$$
+<p class="ml">Exercice 15 E : $\dfrac{X^4 + X + 1}{X(X^2 + 1)^3}$</p>
+<p><b>Forme</b> : $\frac aX + \frac{\alpha_1X + \beta_1}{X^2 + 1} + \frac{\alpha_2X + \beta_2}{(X^2 + 1)^2} + \frac{\alpha_3X + \beta_3}{(X^2 + 1)^3}$ (7 inconnues, degré 7).</p>
+<p><b>Pôle $0$</b> : $\cR a = \Big[\frac{X^4 + X + 1}{(X^2 + 1)^3}\Big]_0 = 1$. On retire ce terme :</p>
+$$F - \frac1X = \frac{X^4 + X + 1 - (X^2 + 1)^3}{X(X^2 + 1)^3} = \frac{-X^6 - 2X^4 - 3X^2 + X}{X(X^2 + 1)^3} = \frac{-X^5 - 2X^3 - 3X + 1}{(X^2 + 1)^3}.$$
+<p><b>Puissances de $Y = X^2 + 1$</b> : on remplace $X^2 = Y - 1$, donc $X^3 = X(Y - 1)$ et $X^5 = X(Y - 1)^2$ :</p>
+$$-X(Y^2 - 2Y + 1) - 2X(Y - 1) - 3X + 1 = -XY^2 + \cancel{2XY} - X - \cancel{2XY} + 2X - 3X + 1 = -XY^2 - 2X + 1.$$
+$$\cG{\frac{X^4 + X + 1}{X(X^2 + 1)^3} = \frac1X - \frac X{X^2 + 1} + \frac{1 - 2X}{(X^2 + 1)^3}}.\qquad\text{Contrôle en}\ 1:\ \frac38 = 1 - \frac12 - \frac18.\ \checkmark$$
+<p class="ml">Exercice 15 F : $\dfrac{X^{n-1}}{X^n - 1}$ dans $\mathbb C(X)$</p>
+<p>Pôles simples : les $\cB{\omega_k = e^{2ik\pi/n}}$, $0\leqslant k\leqslant n - 1$. Avec $Q' = nX^{n-1}$ :</p>
+$$c_k = \frac{\omega_k^{n-1}}{n\,\omega_k^{n-1}} = \frac1n\qquad\Longrightarrow\qquad\cG{\frac{X^{n-1}}{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac1{X - \omega_k}}.$$
+<p>C'est aussi $\frac1n\cdot\frac{Q'}Q$ : la dérivée logarithmique.</p>
+<p class="ml">Exercice 15 G : $\dfrac1{X^n - 1}$ dans $\mathbb C(X)$</p>
+$$c_k = \frac1{n\,\omega_k^{n-1}} = \frac{\omega_k}{n\,\omega_k^n} = \frac{\omega_k}n\qquad\Longrightarrow\qquad\cG{\frac1{X^n - 1} = \frac1n\sum_{k=0}^{n-1}\frac{\omega_k}{X - \omega_k}}.$$
+<p class="ml">Exercice 15 H : $\dfrac1{(X - 1)(X^n - 1)}$ dans $\mathbb C(X)$</p>
+<p>$1$ est racine de $X^n - 1$ : c'est un <b>pôle double</b>. On écrit $X^n - 1 = (X - 1)\Phi$ avec $\Phi = 1 + X + \cdots + X^{n-1}$, donc le dénominateur vaut $(X - 1)^2\Phi$.</p>
+<p><b>Pôles $\omega_k$, $k\neq0$, simples</b> :</p>
+$$c_k = \frac1{(\omega_k - 1)\,n\,\omega_k^{n-1}} = \frac{\omega_k}{n(\omega_k - 1)}.$$
+<p><b>Pôle double $1$</b> : $(X - 1)^2F = \frac1\Phi$. Le coefficient de $\frac1{(X - 1)^2}$ est $\frac1{\Phi(1)} = \frac1n$, et celui de $\frac1{X - 1}$ est la dérivée de $\frac1\Phi$ en $1$ :</p>
+$$\Big(\frac1\Phi\Big)'(1) = -\frac{\Phi'(1)}{\Phi(1)^2} = -\frac{1 + 2 + \cdots + (n - 1)}{n^2} = -\frac{n(n - 1)/2}{n^2} = -\frac{n - 1}{2n}.$$
+$$\cG{\frac1{(X - 1)(X^n - 1)} = \frac1{n(X - 1)^2} - \frac{n - 1}{2n(X - 1)} + \sum_{k=1}^{n-1}\frac{\omega_k}{n(\omega_k - 1)(X - \omega_k)}}.$$
+<p>Contrôle avec $n = 2$ : $\frac1{(X - 1)^2(X + 1)} = \frac{1/2}{(X - 1)^2} - \frac{1/4}{X - 1} + \frac{1/4}{X + 1}$, ce qu'on retrouve directement. $\checkmark$</p>
+<p class="ml">Exercice 15 I : $\dfrac1{X^{2n} - 1}$ dans $\mathbb C(X)$ et $\mathbb R(X)$</p>
+<p><b>Dans $\mathbb C(X)$</b> : pôles $\cB{\omega_k = e^{ik\pi/n}}$, $0\leqslant k\leqslant2n - 1$, coefficients $\frac{\omega_k}{2n}$ (comme en G) :</p>
+$$\frac1{X^{2n} - 1} = \frac1{2n}\sum_{k=0}^{2n-1}\frac{\omega_k}{X - \omega_k}.$$
+<p><b>Dans $\mathbb R(X)$</b> : les pôles réels sont $\omega_0 = 1$ et $\omega_n = -1$. Les autres vont par paires conjuguées $\omega_k$, $\omega_{2n-k} = \overline{\omega_k}$ pour $1\leqslant k\leqslant n - 1$. Avec la formule du §12 ($c = \frac{\omega}{2n}$, $c\,\overline\omega = \frac1{2n}$) :</p>
+$$\frac{\omega_k/2n}{X - \omega_k} + \frac{\overline{\omega_k}/2n}{X - \overline{\omega_k}} = \frac1n\cdot\frac{\cos\frac{k\pi}n\,X - 1}{X^2 - 2\cos\frac{k\pi}n\,X + 1}.$$
+$$\cG{\frac1{X^{2n} - 1} = \frac1{2n}\Big(\frac1{X - 1} - \frac1{X + 1}\Big) + \frac1n\sum_{k=1}^{n-1}\frac{\cos\frac{k\pi}n\,X - 1}{X^2 - 2\cos\frac{k\pi}n\,X + 1}}.$$
+<p class="ml">Exercice 15 J : $\dfrac1{(X - 1)(X - 2)\cdots(X - n)}$</p>
+<p>Pôles simples $1, \dots, n$. Pour le pôle $k$, on cache $(X - k)$ et on évalue en $k$ :</p>
+$$c_k = \prod_{j\neq k}\frac1{k - j} = \frac1{\underbrace{(k - 1)(k - 2)\cdots1}_{(k-1)!}\cdot\underbrace{(-1)(-2)\cdots(k - n)}_{(-1)^{n-k}(n - k)!}} = \frac{(-1)^{n-k}}{(k - 1)!\,(n - k)!}.$$
+$$\cG{\frac1{\prod_{j=1}^n(X - j)} = \sum_{k=1}^n\frac{(-1)^{n-k}}{(k - 1)!\,(n - k)!}\cdot\frac1{X - k} = \frac1{(n - 1)!}\sum_{k=1}^n\frac{(-1)^{n-k}\binom{n - 1}{k - 1}}{X - k}}.$$
+<p class="ml">Exercice 16 : $P$ scindé sur $\mathbb R$, montrer $P'(x)^2 - P(x)P''(x)\geqslant0$</p>
+<p><b>Cas $P$ constant</b> : $0\geqslant0$. Sinon, $P = \lambda\prod_{i=1}^n(X - a_i)$ avec les $a_i$ réels.</p>
+<p><b>Si $P(x)\neq0$</b> : la dérivée logarithmique donne $\frac{P'}P(x) = \sum_i\frac1{x - a_i}$. On dérive :</p>
+$$\Big(\frac{P'}P\Big)' = \frac{P''P - P'^2}{P^2} = -\sum_{i=1}^n\frac1{(x - a_i)^2}\lt0\qquad\Longrightarrow\qquad P'(x)^2 - P(x)P''(x) = P(x)^2\sum_i\frac1{(x - a_i)^2} > 0.$$
+<p><b>Si $P(x) = 0$</b> : l'expression vaut $P'(x)^2\geqslant0$. $\cG{\text{Dans tous les cas, elle est}\geqslant0}$.</p>
+<p class="ml">Exercice 17 : $\sum_{k=1}^n\frac{x_k^j}{P'(x_k)}$ pour $0\leqslant j\leqslant n - 1$</p>
+<p><b>Étape 1 : la décomposition.</b> $\deg X^j\lt n = \deg P$, pôles simples $x_k$ : avec $c_k = \frac{x_k^j}{P'(x_k)}$,</p>
+$$\frac{X^j}{P} = \sum_{k=1}^n\frac{x_k^j}{P'(x_k)}\cdot\frac1{X - x_k}.$$
+<p><b>Étape 2 : multiplier par $\cO X$ et faire tendre $X$ vers $+\infty$.</b> À droite, chaque $\frac X{X - x_k}\to1$ : on obtient exactement la somme cherchée. À gauche, $P$ est unitaire de degré $n$ :</p>
+$$\frac{X^{j+1}}{P}\xrightarrow[X\to+\infty]{}\left\{\begin{aligned}&0&&\text{si}\ j + 1\lt n\\&1&&\text{si}\ j + 1 = n\end{aligned}\right.$$
+$$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ \text{pour}\ 0\leqslant j\leqslant n - 2,\qquad\sum_{k=1}^n\frac{x_k^{n-1}}{P'(x_k)} = 1}.$$
+
+<h2 id="q-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Reste de $A$ par $B$ » avec $B$ factorisé</b><span>Écrire $R$ avec des inconnues, évaluer aux racines de $B$ (dériver si racine multiple).</span></div>
+<div><b>« Montrer que $(X - a)^m\mid P$ »</b><span>$P(a) = \cdots = P^{(m-1)}(a) = 0$.</span></div>
+<div><b>« Montrer que $P = Q$ »</b><span>$P - Q$ a une infinité de racines, ou plus de racines que son degré.</span></div>
+<div><b>Racines complexes et $P$ réel</b><span>Conjuguées deux à deux : regrouper pour factoriser dans $\mathbb R$.</span></div>
+<div><b>$\sum x_i^2$, $\sum\frac1{x_i}$ pour les racines</b><span>Relations coefficients-racines ($\sigma_1, \sigma_2, \dots$).</span></div>
+<div><b>« Polynôme qui prend des valeurs données »</b><span>Lagrange.</span></div>
+<div><b>« $A$ et $B$ premiers entre eux »</b><span>Pas de racine commune dans $\mathbb C$, ou Bézout.</span></div>
+<div><b>Une fraction à intégrer, une somme à calculer</b><span>Décomposition en éléments simples.</span></div>
+<div><b>$\deg P\geqslant\deg Q$</b><span>Partie entière d'abord (division euclidienne).</span></div>
+<div><b>Dénominateur $X^n - 1$, $X^{2n} - 1$</b><span>Pôles $e^{2ik\pi/n}$, coefficients $\frac{P(\omega)}{Q'(\omega)}$.</span></div>
+<div><b>$\frac{P'}P$ ou $P'^2 - PP''$</b><span>Dérivée logarithmique : $\sum\frac1{X - x_i}$.</span></div>
+<div><b>$\sum\frac{x_k^j}{P'(x_k)}$</b><span>Décomposer $\frac{X^j}P$, puis multiplier par $X$ et $X\to+\infty$.</span></div>
+<div><b>Fraction paire ou impaire</b><span>Comparer $F(-X)$ et $\pm F(X)$ par unicité.</span></div>
+<div><b>Facteur $X^2 + pX + q$, $\Delta\lt0$</b><span>Évaluer en une racine complexe, ou passer par $\mathbb C$.</span></div>
+</div>
+
+<h2 id="q-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier la partie entière quand $\deg P\geqslant\deg Q$.</p>
+<p><b>2.</b> Pour un pôle double, n'écrire que $\frac c{(X - a)^2}$ et oublier $\frac{c'}{X - a}$.</p>
+<p><b>3.</b> Mettre une constante au-dessus d'un facteur de degré $2$ au lieu de $\alpha X + \beta$.</p>
+<p><b>4.</b> Appliquer « cacher et évaluer » à un coefficient qui n'est pas le plus haut d'un pôle multiple.</p>
+<p><b>5.</b> Ne pas simplifier la fraction d'abord (racine commune en haut et en bas).</p>
+<p><b>6.</b> Factoriser $X^2 + 1$ dans $\mathbb R$.</p>
+<p><b>7.</b> Dans Viète, oublier les signes alternés : $\sigma_n = (-1)^n\frac{a_0}{a_n}$.</p>
+<p><b>8.</b> Croire que $\deg(P + Q) = \max(\deg P, \deg Q)$ toujours.</p>
+<p><b>9.</b> Pour la multiplicité, s'arrêter à $P'(a) = 0$ sans regarder $P''(a)$.</p>
+<p><b>10.</b> Ne jamais contrôler : une valeur de $X$ (souvent $0$ ou $1$) suffit pour détecter une erreur.</p>
+</div>
+
+<h2 id="q-entrainement">S'entraîner</h2>
+<div data-mlab="quizpoly"></div>
+
+<h2 id="q-arbre">L'arbre des méthodes</h2>
+<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
+<div class="tree">
+<div class="troot">Que veux-tu faire ?</div>
+<div class="tbranches">
+<div class="tb tB"><div class="tt">Décomposer $\frac PQ$</div>
+<div class="tq">$\deg P\geqslant\deg Q$ ?</div><a class="tl" href="#q-div">oui : partie entière d'abord</a><div class="tno">non</div>
+<div class="tq">Pôle simple ?</div><a class="tl" href="#q-coef">oui : cacher et évaluer, $\frac{P(a)}{Q'(a)}$</a><div class="tno">non</div>
+<div class="tq">Pôle multiple ?</div><a class="tl" href="#q-coef">oui : plus haute puissance, puis $\lim XF$ ou DL</a><div class="tno">non</div>
+<div class="tq">Facteur $X^2 + pX + q$ ?</div><a class="tl" href="#q-reel">oui : évaluer en une racine complexe</a><div class="tno">non</div>
+<a class="tl tend" href="#q-coef">identification (en dernier recours)</a></div>
+<div class="tb tR"><div class="tt">Factoriser $P$</div>
+<div class="tq">Racine évidente ?</div><a class="tl" href="#q-rac">oui : $(X - a)\mid P$, multiplicité</a><div class="tno">non</div>
+<div class="tq">$X^n\pm a$ ?</div><a class="tl" href="#q-fact">oui : racines $n$-ièmes</a><div class="tno">non</div>
+<a class="tl tend" href="#q-fact">dans $\mathbb R$ : regrouper les conjuguées</a></div>
+<div class="tb tG"><div class="tt">Trouver un reste</div>
+<div class="tq">Diviseur factorisé ?</div><a class="tl" href="#q-reste">oui : évaluer aux racines</a><div class="tno">non</div>
+<div class="tq">Racine multiple ?</div><a class="tl" href="#q-reste">oui : dériver puis évaluer</a><div class="tno">non</div>
+<a class="tl tend" href="#q-div">poser la division</a></div>
+<div class="tb tO"><div class="tt">Racines sans les calculer</div>
+<div class="tq">Somme, produit, $\sum x_i^2$ ?</div><a class="tl" href="#q-viete">oui : relations de Viète</a><div class="tno">non</div>
+<a class="tl tend" href="#q-appli">$\frac{P'}P = \sum\frac1{X - x_i}$</a></div>
+<div class="tb tV"><div class="tt">Construire un polynôme</div>
+<div class="tq">Valeurs imposées ?</div><a class="tl" href="#q-lag">oui : Lagrange</a><div class="tno">non</div>
+<a class="tl tend" href="#q-pgcd">PGCD, Bézout : Euclide</a></div>
+</div>
+</div>
 `
 };
