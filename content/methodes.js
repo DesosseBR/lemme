@@ -6310,5 +6310,533 @@ $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 <li><div class="hr"><em>$\langle u(x), y\rangle$ à déplacer</em><a class="hl" href="#e-adj">adjoint : matrice transposée</a></div></li>
 <li><div class="hr"><em>conserve la norme</em><a class="hl end" href="#e-iso">isométrie : $u^*u = \operatorname{id}$</a></div></li>
 </ul></div></div>
+`,
+"Topologie des espaces vectoriels normés": R`
+<nav class="msum"><a href="#t-not">Notations</a><a href="#t-norme">Normes</a><a href="#t-equiv">Normes équivalentes</a><a href="#t-suites">Suites</a><a href="#t-ouv">Ouverts, fermés</a><a href="#t-adh">Intérieur, adhérence, densité</a><a href="#t-lim">Limites, continuité</a><a href="#t-lin">Applications linéaires continues</a><a href="#t-comp">Compacts</a><a href="#t-dimf">Dimension finie</a><a href="#t-cpa">Connexité par arcs</a><a href="#t-enonce">L'énoncé</a><a href="#t-erreurs">Erreurs</a><a href="#t-entrainement">S'entraîner</a><a href="#t-exos">Exercices</a><a href="#t-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les vecteurs et les suites $\cB x$, $\cB{(x_n)}$. <span class="kR">rouge</span> : la partie étudiée $\cR A$ (ouverte, fermée, compacte…). <span class="kO">orange</span> : les constantes d'inégalité $\cO\alpha$, $\cO\beta$, $\cO C$. <span class="kV">violet</span> : la norme utilisée $\cV{N}$, $\cV{\|\cdot\|_\infty}$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="t-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
+<tr><td>Normes sur $\mathbb K^n$</td><td>$\|x\|_1$, $\|x\|_2$, $\|x\|_\infty$</td><td>$\sum|x_i|$, $\sqrt{\sum|x_i|^2}$, $\max|x_i|$.</td></tr>
+<tr><td>Normes sur $\mathcal C([a, b])$</td><td>$\|f\|_1$, $\|f\|_2$, $\|f\|_\infty$</td><td>$\int_a^b|f|$, $\sqrt{\int_a^b|f|^2}$, $\sup_{[a,b]}|f|$.</td></tr>
+<tr><td>Boules</td><td>$B(a, r)$, $B_f(a, r)$, $S(a, r)$</td><td>$\|x - a\| \lt r$, $\leq r$, $= r$.</td></tr>
+<tr><td>Distance à une partie</td><td>$d(x, A)$</td><td>$\inf_{a\in A}\|x - a\|$.</td></tr>
+<tr><td>Intérieur, adhérence</td><td>$\mathring A$, $\overline A$</td><td>Plus grand ouvert inclus, plus petit fermé contenant.</td></tr>
+<tr><td>Frontière</td><td>$\operatorname{Fr}(A)$</td><td>$\overline A\setminus\mathring A$.</td></tr>
+<tr><td>Applications linéaires continues</td><td>$\mathcal L_c(E, F)$, $|||u|||$</td><td>$|||u||| = \sup_{x\neq0}\frac{\|u(x)\|}{\|x\|}$.</td></tr>
+</table>
+
+<h2 id="t-norme">2. Normes</h2>
+<div class="sbox">$$N:E\to\mathbb R_+\ \text{est une norme si}:\quad\textbf{séparation}\ N(x) = 0\Rightarrow x = 0,\quad\textbf{homogénéité}\ N(\lambda x) = |\lambda|N(x),\quad\textbf{triangulaire}\ N(x + y)\leq N(x) + N(y).$$
+$$\big|\|x\| - \|y\|\big|\leq\|x - y\|.\qquad\text{Les boules sont convexes}.\qquad d(x, y) = \|x - y\|.$$</div>
+<p class="ml">Exemple 1 : montrer qu'on a une norme</p>
+<p>$N(x) = |x_1| + 2|x_2|$ sur $\mathbb R^2$.</p>
+<p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
+<p><b>Étape 2 : Positivité et séparation.</b> $N(x)\geq0$. Si $N(x) = 0$, une somme de deux termes positifs est nulle : $|x_1| = |x_2| = 0$, donc $x = 0$.</p>
+<p><b>Étape 3 : Homogénéité.</b> $N(\lambda x) = |\lambda x_1| + 2|\lambda x_2| = |\lambda|\,(|x_1| + 2|x_2|) = |\lambda|N(x)$.</p>
+<p><b>Étape 4 : Triangulaire</b>, avec $|a + b|\leq|a| + |b|$ sur chaque coordonnée :</p>
+$$N(x + y) = |x_1 + y_1| + 2|x_2 + y_2|\leq|x_1| + |y_1| + 2|x_2| + 2|y_2| = N(x) + N(y).$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{N\ \text{est une norme sur}\ \mathbb R^2}$.</p>
+
+<h2 id="t-equiv">3. Normes équivalentes</h2>
+<div class="sbox">$$N\ \text{et}\ N'\ \text{équivalentes}\iff\exists\cO\alpha, \cO\beta > 0,\ \forall x,\ \cO\alpha N(x)\leq N'(x)\leq\cO\beta N(x).$$
+$$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{Sur}\ \mathbb K^n:\ \|x\|_\infty\leq\|x\|_2\leq\|x\|_1\leq n\|x\|_\infty.$$</div>
+<p>Des normes équivalentes ont les <b>mêmes</b> suites convergentes, parties bornées, ouverts, fermés, compacts, fonctions continues.</p>
+<p class="ml">La méthode pour montrer que deux normes ne sont pas équivalentes</p>
+<p>Trouver une suite $(x_n)$ avec $\frac{N'(x_n)}{N(x_n)}\to+\infty$ (ou $\to0$). Cela n'arrive qu'en <b>dimension infinie</b>.</p>
+
+<p class="ml">Exemple 2 : les normes usuelles de $\mathbb K^n$</p>
+<p><b>Étape 1 : Rappel.</b> Il faut des constantes qui ne dépendent pas de $x$.</p>
+<p><b>Étape 2 : $\|x\|_\infty\leq\|x\|_2$.</b> Si $|x_k| = \max|x_i|$, alors $|x_k|^2\leq\sum|x_i|^2$.</p>
+<p><b>Étape 3 : $\|x\|_2\leq\|x\|_1$.</b> $\big(\sum|x_i|\big)^2 = \sum|x_i|^2 + (\text{termes croisés}\geq0)\geq\|x\|_2^2$.</p>
+<p><b>Étape 4 : $\|x\|_1\leq n\|x\|_\infty$.</b> Chacun des $n$ termes est $\leq\|x\|_\infty$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\|x\|_\infty\leq\|x\|_2\leq\|x\|_1\leq n\|x\|_\infty}$ : les trois sont équivalentes (constantes $\cO1$ et $\cO n$).</p>
+
+<p class="ml">Exemple 3 : deux normes non équivalentes</p>
+<p>Sur $\mathcal C([0, 1])$, comparer $\|f\|_1$ et $\|f\|_\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> Non équivalentes si le quotient n'est pas borné le long d'une suite.</p>
+<p><b>Étape 2 : Un sens.</b> $|f(t)|\leq\|f\|_\infty$, on intègre sur $[0, 1]$ : $\|f\|_1\leq\|f\|_\infty$.</p>
+<p><b>Étape 3 : La suite.</b> $f_n(t) = t^n$ : $\|f_n\|_\infty = 1$ et $\|f_n\|_1 = \frac1{n + 1}$.</p>
+<p><b>Étape 4 : Le quotient.</b> $\frac{\|f_n\|_\infty}{\|f_n\|_1} = n + 1\to+\infty$ : aucun $\cO\beta$ ne vérifie $\|f\|_\infty\leq\cO\beta\|f\|_1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\|\cdot\|_1\ \text{et}\ \|\cdot\|_\infty\ \text{ne sont pas équivalentes}}$, et $f_n\to0$ pour $\|\cdot\|_1$ mais pas pour $\|\cdot\|_\infty$.</p>
+
+<h2 id="t-suites">4. Suites dans un espace normé</h2>
+<div class="sbox">$$\cB{x_n}\to\ell\iff\|\cB{x_n} - \ell\|\to0.\qquad\textbf{En dimension finie}:\ \cB{x_n}\to\ell\iff\text{chaque coordonnée converge (dans n'importe quelle base)}.$$</div>
+<p>Valeur d'adhérence : limite d'une suite extraite. Une suite qui a deux valeurs d'adhérence diverge. En dimension finie, une suite bornée converge si et seulement si elle a une <b>seule</b> valeur d'adhérence.</p>
+<p class="ml">Exemple 4 : une suite de matrices</p>
+<p>$A = \begin{pmatrix}\frac12&1\\0&\frac12\end{pmatrix}$. Montrer que $A^n\to0$.</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie, on regarde chaque coefficient.</p>
+<p><b>Étape 2 : On écrit</b> $A = \frac12I + N$, $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, $IN = NI$. Binôme :</p>
+$$A^n = \Big(\frac12\Big)^nI + n\Big(\frac12\Big)^{n-1}N = \begin{pmatrix}2^{-n}&n\,2^{1-n}\\0&2^{-n}\end{pmatrix}.$$
+<p><b>Étape 3 : Les coefficients.</b> $2^{-n}\to0$ et $n\,2^{1-n}\to0$ (croissances comparées).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A^n\to0}$ (pour n'importe quelle norme de $\mathcal M_2$).</p>
+
+<h2 id="t-ouv">5. Ouverts, fermés</h2>
+<div class="sbox">$$\cR U\ \text{ouvert}\iff\forall a\in U,\ \exists r > 0,\ B(a, r)\subset U.\qquad\cR F\ \text{fermé}\iff E\setminus F\ \text{ouvert}.$$
+$$\textbf{Caractérisation séquentielle}:\ F\ \text{fermé}\iff\big(\forall(x_n)\in F^{\mathbb N},\ x_n\to\ell\Rightarrow\ell\in F\big).$$
+$$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text{fermé})\ \text{est fermé}.$$</div>
+<p class="ml">Les deux méthodes</p>
+<p><b>1. Image réciproque</b> (la plus rapide) : écrire $A = \{x,\ f(x)\in\dots\}$ avec $f$ continue. Inégalités larges, égalités $\to$ fermé ; inégalités strictes $\to$ ouvert. <b>2. Suites</b> : pour un fermé, prendre $x_n\in A$, $x_n\to\ell$, et montrer $\ell\in A$.</p>
+<p>Une intersection <b>quelconque</b> de fermés est fermée, une réunion <b>finie</b> aussi. Pour les ouverts, c'est l'inverse.</p>
+
+<p class="ml">Exemple 5 : par image réciproque</p>
+<p>$A = \{(x, y),\ x^2 + y^2\leq1,\ x\geq y\}$ et $U = \{(x, y),\ xy > 1\}$ dans $\mathbb R^2$.</p>
+<p><b>Étape 1 : Rappel.</b> $f$ continue : $f^{-1}(\text{fermé})$ fermé, $f^{-1}(\text{ouvert})$ ouvert.</p>
+<p><b>Étape 2 : $A$.</b> $f_1(x, y) = x^2 + y^2$ et $f_2(x, y) = x - y$ sont continues (polynomiales). $A = f_1^{-1}(]-\infty, 1])\cap f_2^{-1}([0, +\infty[)$ : intersection de deux fermés.</p>
+<p><b>Étape 3 : $U$.</b> $g(x, y) = xy$ est continue et $U = g^{-1}(]1, +\infty[)$, image réciproque d'un ouvert.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est fermé},\ U\ \text{est ouvert}}$.</p>
+
+<p class="ml">Exemple 6 : $GL_n(\mathbb R)$ est ouvert, $O(n)$ est compact</p>
+<p><b>Étape 1 : Rappel.</b> Image réciproque par une application continue. En dimension finie, compact $\iff$ fermé et borné.</p>
+<p><b>Étape 2 : $GL_n$.</b> $\det$ est continue (polynomiale en les coefficients) et $GL_n(\mathbb R) = \det^{-1}(\mathbb R^*)$, avec $\mathbb R^*$ ouvert.</p>
+<p><b>Étape 3 : $O(n)$ fermé.</b> $\varphi(A) = A^\top A$ est continue et $O(n) = \varphi^{-1}(\{I_n\})$, image réciproque d'un fermé.</p>
+<p><b>Étape 4 : $O(n)$ borné.</b> Pour la norme $\|A\|_2 = \sqrt{\operatorname{tr}(A^\top A)}$ : $\|A\|_2 = \sqrt{\operatorname{tr}I_n} = \sqrt n$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{GL_n(\mathbb R)\ \text{ouvert},\ O(n)\ \text{compact}}$.</p>
+
+<p class="ml">Exemple 7 : fermé ou pas, selon la norme</p>
+<p>$F = \{f\in\mathcal C([0, 1]),\ f(0) = 0\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle des fermés. En dimension infinie, le résultat dépend de la norme.</p>
+<p><b>Étape 2 : Pour $\|\cdot\|_\infty$.</b> Si $f_n\in F$ et $\|f_n - f\|_\infty\to0$, alors $|f(0)| = |f(0) - f_n(0)|\leq\|f - f_n\|_\infty\to0$, donc $f(0) = 0$ : $F$ est fermé.</p>
+<p><b>Étape 3 : Pour $\|\cdot\|_1$.</b> $f_n(t) = \min(nt, 1)$ est dans $F$, et $\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \frac1{2n}\to0$. La limite $1\notin F$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{fermé pour}\ \|\cdot\|_\infty,\ \text{pas fermé pour}\ \|\cdot\|_1}$ (il y est même dense).</p>
+
+<h2 id="t-adh">6. Intérieur, adhérence, frontière, densité</h2>
+<div class="sbox">$$a\in\overline A\iff\forall r > 0,\ B(a, r)\cap A\neq\varnothing\iff\exists(a_n)\in A^{\mathbb N},\ a_n\to a\iff d(a, A) = 0.$$
+$$a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A.\qquad A\ \textbf{dense}\iff\overline A = E\iff\text{tout}\ x\ \text{est limite d'une suite de}\ A.$$</div>
+<p class="ml">Exemple 8 : dans $\mathbb R$</p>
+<p>$A = [0, 1[\,\cup\{2\}$. Intérieur, adhérence, frontière ?</p>
+<p><b>Étape 1 : Rappel.</b> Adhérence : limites de suites de $A$. Intérieur : points avec une petite boule incluse.</p>
+<p><b>Étape 2 : L'adhérence.</b> $1 - \frac1n\to1$ donne $1\in\overline A$. $[0, 1]\cup\{2\}$ est fermé et contient $A$ : $\overline A = [0, 1]\cup\{2\}$.</p>
+<p><b>Étape 3 : L'intérieur.</b> $]0, 1[$ est ouvert et inclus dans $A$. En $0$ et en $2$, toute boule $]a - r, a + r[$ sort de $A$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathring A = \,]0, 1[,\ \overline A = [0, 1]\cup\{2\},\ \operatorname{Fr}A = \{0, 1, 2\}}$.</p>
+
+<p class="ml">Exemple 9 : $GL_n(\mathbb K)$ est dense dans $\mathcal M_n(\mathbb K)$</p>
+<p><b>Étape 1 : Rappel.</b> Dense $\iff$ toute matrice est limite d'une suite de matrices inversibles.</p>
+<p><b>Étape 2 : On perturbe.</b> Soit $A\in\mathcal M_n$. On pose $A_k = A - \frac1kI_n$.</p>
+<p><b>Étape 3 : Inversible pour $k$ grand.</b> $A_k$ n'est pas inversible $\iff\frac1k$ est valeur propre de $A$. $A$ a au plus $n$ valeurs propres, donc pour $k$ assez grand, $\frac1k$ n'en est pas une.</p>
+<p><b>Étape 4 : La limite.</b> $A_k\to A$ (seule la diagonale bouge, de $\frac1k\to0$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\overline{GL_n(\mathbb K)} = \mathcal M_n(\mathbb K)}$. Usage : prouver une formule pour $A$ inversible, puis passer à la limite par continuité (ex. : $\chi_{AB} = \chi_{BA}$).</p>
+
+<h2 id="t-lim">7. Limites, continuité</h2>
+<div class="sbox">$$f\ \text{continue en}\ a\iff\big(\forall(x_n),\ x_n\to a\Rightarrow f(x_n)\to f(a)\big).\qquad f\ \cO k\text{-lipschitzienne}:\ \|f(x) - f(y)\|\leq\cO k\|x - y\|\Rightarrow\text{continue}.$$
+$$\text{Sommes, produits, composées de fonctions continues sont continues. Les fonctions polynomiales en les coordonnées sont continues.}$$</div>
+<p><b>Uniformément continue</b> : $\forall\varepsilon,\ \exists\eta$ (indépendant de $x$), $\|x - y\|\leq\eta\Rightarrow\|f(x) - f(y)\|\leq\varepsilon$. Lipschitzienne $\Rightarrow$ uniformément continue $\Rightarrow$ continue.</p>
+<p class="ml">Exemple 10 : la distance à une partie est $1$-lipschitzienne</p>
+<p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$, et l'inf est le plus grand minorant.</p>
+<p><b>Étape 2 : Pour $a\in A$.</b> $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$.</p>
+<p><b>Étape 3 : On passe à l'inf en $a$.</b> $d(x, A) - \|x - y\|$ minore tous les $\|y - a\|$, donc $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
+<p><b>Étape 4 : On échange $x$ et $y$</b>, et on regroupe : $|d(x, A) - d(y, A)|\leq\|x - y\|$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{x\mapsto d(x, A)\ \text{est}\ 1\text{-lipschitzienne}}$ (donc continue). Même idée : $x\mapsto\|x\|$.</p>
+
+<h2 id="t-lin">8. Applications linéaires continues</h2>
+<div class="sbox">$$u\ \text{linéaire continue}\iff\exists\cO C\geq0,\ \forall x,\ \|u(x)\|\leq\cO C\|x\|.\qquad|||u||| = \sup_{\|x\| = 1}\|u(x)\|,\qquad\|u(x)\|\leq|||u|||\,\|x\|,\qquad|||u\circ v|||\leq|||u|||\,|||v|||.$$
+$$\textbf{En dimension finie (au départ), toute application linéaire est continue.}\quad\text{De même pour les applications multilinéaires (}\det\text{, produit matriciel).}$$</div>
+<p class="ml">La méthode</p>
+<p><b>Continuité</b> : majorer $\|u(x)\|$ par $C\|x\|$. <b>Norme subordonnée</b> : la majoration donne $|||u|||\leq C$ ; un $x_0\neq0$ avec égalité donne $|||u||| = C$. <b>Non-continuité</b> : une suite $x_n$ avec $\frac{\|u(x_n)\|}{\|x_n\|}\to+\infty$.</p>
+
+<p class="ml">Exemple 11 : une forme linéaire continue et sa norme</p>
+<p>$\varphi(f) = \int_0^1f(t)\,dt$ sur $(\mathcal C([0, 1]), \|\cdot\|_\infty)$.</p>
+<p><b>Étape 1 : Rappel.</b> $|\varphi(f)|\leq C\|f\|$ donne la continuité et $|||\varphi|||\leq C$ ; un cas d'égalité donne $|||\varphi||| = C$.</p>
+<p><b>Étape 2 : La majoration.</b> $|\varphi(f)|\leq\int_0^1|f|\leq\int_0^1\|f\|_\infty = \cO1\times\|f\|_\infty$.</p>
+<p><b>Étape 3 : Le cas d'égalité.</b> $f = 1$ : $\|f\|_\infty = 1$ et $\varphi(f) = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\varphi\ \text{est continue et}\ |||\varphi||| = 1}$.</p>
+
+<p class="ml">Exemple 12 : la dérivation n'est pas continue</p>
+<p>$D:P\mapsto P'$ sur $\mathbb R[X]$, avec $\|P\| = \max|a_k|$ (coefficients).</p>
+<p><b>Étape 1 : Rappel.</b> Si $\frac{\|D(P_n)\|}{\|P_n\|}\to+\infty$, aucune constante $C$ ne convient.</p>
+<p><b>Étape 2 : La suite.</b> $P_n = X^n$ : $\|P_n\| = 1$.</p>
+<p><b>Étape 3 : L'image.</b> $D(P_n) = nX^{n-1}$ : $\|D(P_n)\| = n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\frac{\|D(P_n)\|}{\|P_n\|} = n\to+\infty$ : $\cG{D\ \text{n'est pas continue}}$ (c'est possible car $\mathbb R[X]$ est de dimension infinie).</p>
+
+<h2 id="t-comp">9. Compacts</h2>
+<div class="sbox">$$\cR K\ \text{compact}\iff\text{toute suite de}\ K\ \text{a une sous-suite qui converge dans}\ K.$$
+$$\text{Compact}\Rightarrow\text{fermé et borné}.\qquad\text{Fermé inclus dans un compact}\Rightarrow\text{compact}.\qquad K_1\times K_2\ \text{compact}.$$
+$$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};\ \text{si}\ f\ \text{réelle},\ \textbf{elle est bornée et atteint ses bornes}.\qquad\textbf{Heine}:\ f\ \text{continue sur}\ K\Rightarrow\text{uniformément continue}.$$</div>
+<p class="ml">Exemple 13 : la distance à un fermé est atteinte</p>
+<p>$E$ de dimension finie, $F$ fermé non vide, $a\in E$. Montrer qu'il existe $b\in F$ avec $\|a - b\| = d(a, F)$.</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie, fermé borné = compact ; une fonction continue réelle sur un compact atteint son min.</p>
+<p><b>Étape 2 : On se ramène à une partie bornée.</b> Soit $x_0\in F$ et $R = \|a - x_0\|$. On pose $K = F\cap B_f(a, R)$ : non vide ($x_0\in K$), fermé, borné, donc compact.</p>
+<p><b>Étape 3 : Le min sur $K$.</b> $x\mapsto\|a - x\|$ est continue : elle atteint son min sur $K$ en un $b$.</p>
+<p><b>Étape 4 : C'est le min sur $F$.</b> Si $x\in F\setminus K$, $\|a - x\| > R\geq\|a - b\|$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{d(a, F) = \|a - b\|\ \text{avec}\ b\in F}$.</p>
+
+<h2 id="t-dimf">10. Ce que change la dimension finie</h2>
+<div class="sbox">$$\dim E \lt +\infty:\quad\text{normes équivalentes},\quad\textbf{compact}\iff\textbf{fermé et borné},\quad\text{Bolzano-Weierstrass},\quad\text{linéaire}\Rightarrow\text{continue},\quad\text{tout sev est fermé}.$$</div>
+<p>En dimension infinie, <b>aucun</b> de ces résultats n'est garanti : la boule unité fermée n'est jamais compacte, les normes peuvent ne pas être équivalentes, une application linéaire peut ne pas être continue.</p>
+
+<h2 id="t-cpa">11. Connexité par arcs</h2>
+<div class="sbox">$$A\ \text{connexe par arcs}:\ \forall a, b\in A,\ \exists\gamma:[0, 1]\to A\ \text{continue},\ \gamma(0) = a,\ \gamma(1) = b.$$
+$$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qquad\text{Dans}\ \mathbb R:\ \text{connexes par arcs} = \text{intervalles}.\qquad f\ \text{continue}:\ f(A)\ \text{connexe par arcs}.$$</div>
+<p>Conséquence : <b>TVI généralisé</b>. Une fonction continue réelle sur un connexe par arcs qui prend deux valeurs prend toutes les valeurs intermédiaires.</p>
+<p class="ml">Exemple 14 : $GL_n(\mathbb R)$ n'est pas connexe par arcs</p>
+<p><b>Étape 1 : Rappel.</b> L'image continue d'un connexe par arcs de $\mathbb R$ est un intervalle.</p>
+<p><b>Étape 2 : Par l'absurde.</b> Si $GL_n(\mathbb R)$ était connexe par arcs, $\det(GL_n(\mathbb R))$ serait un intervalle.</p>
+<p><b>Étape 3 : Les valeurs.</b> $\det I_n = 1$ et $\det\operatorname{diag}(-1, 1, \dots, 1) = -1$, donc l'intervalle contiendrait $0$.</p>
+<p><b>Étape 4 : Conclusion.</b> Or $\det A\neq0$ sur $GL_n$ : $\cG{GL_n(\mathbb R)\ \text{n'est pas connexe par arcs}}$.</p>
+
+<p class="ml">Bonus : suites de Cauchy, espaces complets <span class="hp">hors programme</span></p>
+<p>$(x_n)$ est de Cauchy si $\|x_p - x_q\|\to0$ quand $p, q\to+\infty$. Toute suite convergente est de Cauchy ; un espace où la réciproque est vraie est dit complet (Banach). Les espaces de dimension finie sont complets ; $(\mathcal C([0, 1]), \|\cdot\|_1)$ ne l'est pas.</p>
+
+<h2 id="t-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $N$ est une norme »</b><span>Séparation, homogénéité, triangulaire.</span></div>
+<div><b>« Les normes sont-elles équivalentes ? »</b><span>Dimension finie : oui. Sinon : une suite avec un quotient non borné.</span></div>
+<div><b>« $A$ est fermé » / « ouvert »</b><span>Image réciproque par une fonction continue, ou suites.</span></div>
+<div><b>« Déterminer $\overline A$ »</b><span>Limites de suites de $A$, puis un fermé qui contient $A$.</span></div>
+<div><b>« $A$ est dense »</b><span>Approcher tout $x$ par une suite de $A$ (perturbation $A - \frac1kI$…).</span></div>
+<div><b>« $u$ linéaire est continue »</b><span>$\|u(x)\|\leq C\|x\|$ ; en dimension finie, automatique.</span></div>
+<div><b>« Calculer $|||u|||$ »</b><span>Majoration, puis un vecteur qui réalise l'égalité (ou une suite).</span></div>
+<div><b>« Le min / max est atteint »</b><span>Fonction continue sur un compact (fermé borné en dimension finie).</span></div>
+<div><b>« $f$ est continue » avec $x, y$</b><span>Opérations, ou lipschitzienne, ou suites.</span></div>
+<div><b>« Pas connexe par arcs »</b><span>Une fonction continue qui ne prend pas une valeur intermédiaire.</span></div>
+<div><b>Une égalité à prouver sur $\mathcal M_n$</b><span>La prouver sur $GL_n$, puis densité et continuité.</span></div>
+</div>
+
+<h2 id="t-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Croire qu'une partie non ouverte est fermée ($[0, 1[$ n'est ni l'un ni l'autre).</p>
+<p><b>2.</b> Utiliser « fermé borné $\Rightarrow$ compact » en dimension infinie.</p>
+<p><b>3.</b> Oublier de préciser la norme quand la dimension est infinie.</p>
+<p><b>4.</b> Inégalité stricte $\Rightarrow$ fermé : c'est un ouvert.</p>
+<p><b>5.</b> Pour $|||u|||$, ne donner que la majoration sans montrer qu'elle est atteinte.</p>
+<p><b>6.</b> Écrire $f^{-1}(F)$ fermé sans avoir justifié que $f$ est continue.</p>
+<p><b>7.</b> Confondre « borné » et « compact » dans $\mathbb R^n$ : il faut aussi fermé.</p>
+</div>
+
+<h2 id="t-entrainement">S'entraîner</h2>
+<div data-mlab="boules"></div>
+<div data-mlab="quizevn"></div>
+
+<h2 id="t-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $\mathcal S_n(\mathbb R)$ est fermé</p>
+<p><b>Étape 1 : Rappel.</b> Image réciproque d'un fermé par une application continue ; en dimension finie, toute application linéaire est continue.</p>
+<p><b>Étape 2 : L'application.</b> $\varphi(M) = M - M^\top$ est linéaire sur $\mathcal M_n(\mathbb R)$ (dimension finie), donc continue.</p>
+<p><b>Étape 3 : L'image réciproque.</b> $\mathcal S_n = \varphi^{-1}(\{0\})$, et $\{0\}$ est fermé.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_n(\mathbb R)\ \text{est fermé}}$ (plus généralement, tout sev d'un espace de dimension finie).</p>
+
+<p class="ml">Exercice 2 : une fonction coercive atteint son minimum</p>
+<p>$f:\mathbb R^n\to\mathbb R$ continue avec $f(x)\to+\infty$ quand $\|x\|\to+\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> Continue sur un compact $\Rightarrow$ min atteint ; fermé borné = compact en dimension finie.</p>
+<p><b>Étape 2 : On borne.</b> Avec $A = f(0)$ : il existe $R$ tel que $\|x\| > R\Rightarrow f(x) > A$.</p>
+<p><b>Étape 3 : Sur la boule.</b> $B_f(0, R)$ est compacte : $f$ y atteint son min en $x_0$, et $f(x_0)\leq f(0) = A$.</p>
+<p><b>Étape 4 : Ailleurs.</b> Hors de la boule, $f(x) > A\geq f(x_0)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f(x_0) = \min_{\mathbb R^n}f}$.</p>
+
+<p class="ml">Exercice 3 : les matrices nilpotentes forment un fermé</p>
+<p><b>Étape 1 : Rappel.</b> $N$ nilpotente $\iff N^n = 0$ (Cayley-Hamilton). Image réciproque d'un fermé.</p>
+<p><b>Étape 2 : L'application.</b> $\psi(M) = M^n$ est continue (coefficients polynomiaux).</p>
+<p><b>Étape 3 : L'image réciproque.</b> L'ensemble des nilpotentes est $\psi^{-1}(\{0\})$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{c'est un fermé de}\ \mathcal M_n(\mathbb K)}$.</p>
+
+<h2 id="t-arbre">L'arbre de la topologie</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question dans un espace normé</span><ul>
+<li><div class="hr"><em>des normes</em><span class="hq">Laquelle ?</span><ul>
+<li><div class="hr"><em>est-ce une norme</em><a class="hl" href="#t-norme">séparation, homogénéité, triangulaire</a></div></li>
+<li><div class="hr"><em>dimension finie</em><a class="hl ok" href="#t-equiv">toutes équivalentes</a></div></li>
+<li><div class="hr"><em>dimension infinie</em><a class="hl" href="#t-equiv">suite $\frac{N'(x_n)}{N(x_n)}\to\infty$ ?</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une partie $A$</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>fermé, ouvert</em><a class="hl ok" href="#t-ouv">image réciproque, ou suites</a></div></li>
+<li><div class="hr"><em>$\overline A$, $\mathring A$</em><a class="hl" href="#t-adh">suites de $A$, boules incluses</a></div></li>
+<li><div class="hr"><em>dense</em><a class="hl" href="#t-adh">approcher tout point</a></div></li>
+<li><div class="hr"><em>compact</em><a class="hl" href="#t-comp">fermé borné (dimension finie)</a></div></li>
+<li><div class="hr"><em>connexe par arcs</em><a class="hl" href="#t-cpa">chemins, ou image par $f$ continue</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une fonction</em><span class="hq">Linéaire ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#t-lin">$\|u(x)\|\leq C\|x\|$, puis $|||u|||$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#t-lim">opérations, lipschitz, suites</a></div></li>
+<li><div class="hr"><em>un min, un max</em><a class="hl end" href="#t-comp">continue sur un compact</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une suite</em><a class="hl" href="#t-suites">coordonnées (dimension finie)</a></div></li>
+</ul></div></div>
+`,
+"Calcul différentiel": R`
+<nav class="msum"><a href="#c-not">Notations</a><a href="#c-lim">Limite en un point</a><a href="#c-part">Dérivées partielles</a><a href="#c-diff">Différentiabilité</a><a href="#c-exdiff">Différentielles usuelles</a><a href="#c-chain">Règle de la chaîne</a><a href="#c-grad">Gradient</a><a href="#c-edp">EDP</a><a href="#c-c2">$\mathcal C^2$, Schwarz</a><a href="#c-ext">Extrema</a><a href="#c-glob">Extrema globaux</a><a href="#c-contr">Sous contrainte</a><a href="#c-tang">Plan tangent</a><a href="#c-enonce">L'énoncé</a><a href="#c-erreurs">Erreurs</a><a href="#c-entrainement">S'entraîner</a><a href="#c-exos">Exercices</a><a href="#c-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction $\cB f$ et ses dérivées partielles. <span class="kR">rouge</span> : le point étudié $\cR a$ (souvent $(0, 0)$). <span class="kO">orange</span> : l'accroissement $\cO h$ et les majorations. <span class="kV">violet</span> : les nouvelles variables ($r$, $\theta$, $u$, $v$). <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="c-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
+<tr><td>Dérivée selon $v$</td><td>$D_vf(a)$</td><td>$\lim\limits_{t\to0}\frac{f(a + tv) - f(a)}t$</td></tr>
+<tr><td>Dérivées partielles</td><td>$\partial_if(a) = \frac{\partial f}{\partial x_i}(a)$</td><td>$D_{e_i}f(a)$</td></tr>
+<tr><td>Différentielle</td><td>$df(a)\in\mathcal L(E, F)$</td><td>$f(a + h) = f(a) + df(a)(h) + o(\|h\|)$</td></tr>
+<tr><td>Jacobienne</td><td>$J_f(a)$</td><td>$\big(\partial_jf_i(a)\big)_{i,j}$, matrice de $df(a)$</td></tr>
+<tr><td>Gradient</td><td>$\nabla f(a)$</td><td>$df(a)(h) = \langle\nabla f(a), h\rangle$</td></tr>
+<tr><td>Hessienne</td><td>$H_f(a)$</td><td>$\big(\partial_i\partial_jf(a)\big)_{i,j}$, symétrique si $\mathcal C^2$</td></tr>
+<tr><td>Monge</td><td>$r, s, t$</td><td>$\partial^2_{xx}f$, $\partial^2_{xy}f$, $\partial^2_{yy}f$ au point</td></tr>
+</table>
+
+<h2 id="c-lim">2. Limite et continuité en un point de $\mathbb R^2$</h2>
+<p class="ml">Les deux méthodes</p>
+<p><b>Pour montrer que $f\to\ell$</b> : majorer $|f(x, y) - \ell|$ par une quantité qui ne dépend que de $r = \sqrt{x^2 + y^2}$ et tend vers $0$. Outils : $|x|\leq r$, $|y|\leq r$, $|xy|\leq\frac{x^2 + y^2}2$, ou les coordonnées polaires $x = r\cos\theta$, $y = r\sin\theta$ avec une majoration <b>uniforme en $\theta$</b>.</p>
+<p><b>Pour montrer qu'il n'y a pas de limite</b> : deux chemins vers $\cR{(0, 0)}$ qui donnent deux limites différentes (droites $y = mx$, paraboles $y = x^2$…).</p>
+
+<p class="ml">Exemple 1 : une limite nulle</p>
+<p>$f(x, y) = \dfrac{x^2y}{x^2 + y^2}$, $f(0, 0) = 0$. Continue en $(0, 0)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Majorer $|f - \ell|$ par une fonction de $r$ seulement, qui tend vers $0$.</p>
+<p><b>Étape 2 : On majore</b> avec $x^2\leq x^2 + y^2$ :</p>
+$$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
+<p><b>Étape 3 : La limite.</b> $\cO r\to0$ quand $(x, y)\to(0, 0)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est continue en}\ (0, 0)}$.</p>
+
+<p class="ml">Exemple 2 : pas de limite, par les droites</p>
+<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$ sur $\mathbb R^2\setminus\{(0, 0)\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Deux chemins, deux limites différentes $\Rightarrow$ pas de limite.</p>
+<p><b>Étape 2 : Sur la droite $y = mx$</b> ($x\neq0$) : $f(x, mx) = \frac{mx^2}{x^2(1 + m^2)} = \frac m{1 + m^2}$.</p>
+<p><b>Étape 3 : Deux droites.</b> $m = 0$ donne $0$, $m = 1$ donne $\frac12$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{n'a pas de limite en}\ (0, 0)}$ (en polaires, $f = \cos\theta\sin\theta$ dépend de $\theta$).</p>
+
+<p class="ml">Exemple 3 : les droites ne suffisent pas</p>
+<p>$f(x, y) = \dfrac{x^2y}{x^4 + y^2}$.</p>
+<p><b>Étape 1 : Rappel.</b> Avoir la même limite sur toutes les droites ne prouve <b>pas</b> la continuité.</p>
+<p><b>Étape 2 : Sur $y = mx$.</b> $f(x, mx) = \frac{mx^3}{x^4 + m^2x^2} = \frac{mx}{x^2 + m^2}\to0$ (et $f(0, y) = 0$).</p>
+<p><b>Étape 3 : Sur la parabole $y = x^2$.</b> $f(x, x^2) = \frac{x^4}{2x^4} = \frac12$.</p>
+<p><b>Étape 4 : Conclusion.</b> $0\neq\frac12$ : $\cG{f\ \text{n'a pas de limite en}\ (0, 0)}$. Le chemin se choisit pour <b>équilibrer</b> les degrés ($x^4$ et $y^2$ du même ordre).</p>
+
+<h2 id="c-part">3. Dérivées partielles, dérivées directionnelles</h2>
+<div class="sbox">$$\frac{\partial f}{\partial x}(a, b) = \lim_{t\to0}\frac{f(a + t, b) - f(a, b)}t:\ \text{on dérive en}\ x,\ y\ \text{fixé}.$$</div>
+<p>Hors des points problématiques, on dérive avec les règles usuelles. <b>Au point problématique</b> (une formule différente en $(0, 0)$), on revient au taux d'accroissement.</p>
+<p class="ml piege">Piège</p>
+<p>L'existence des dérivées partielles (et même de toutes les dérivées directionnelles) ne donne <b>pas</b> la continuité : voir l'exemple 4.</p>
+
+<p class="ml">Exemple 4 : des dérivées partielles en un point problématique</p>
+<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> En $(0, 0)$, on utilise le taux d'accroissement.</p>
+<p><b>Étape 2 : Selon $x$.</b> $f(t, 0) = 0$, donc $\frac{f(t, 0) - f(0, 0)}t = 0\to0$ : $\frac{\partial f}{\partial x}(0, 0) = 0$.</p>
+<p><b>Étape 3 : Selon $y$.</b> De même $f(0, t) = 0$ : $\frac{\partial f}{\partial y}(0, 0) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{les dérivées partielles existent en}\ (0, 0)}$, et pourtant $f$ n'y est pas continue (exemple 2).</p>
+
+<h2 id="c-diff">4. Différentiabilité</h2>
+<div class="sbox">$$f\ \text{différentiable en}\ \cR a\iff\exists L\in\mathcal L(E, F),\ f(\cR a + \cO h) = f(\cR a) + L(\cO h) + o(\|\cO h\|).\qquad df(a) = L.$$
+$$\text{Différentiable}\Rightarrow\text{continue}\ \text{et}\ D_vf(a) = df(a)(v).\qquad df(a)(h) = \sum_i\frac{\partial f}{\partial x_i}(a)\,h_i.$$
+$$\textbf{Si les dérivées partielles existent et sont continues sur}\ U\ \textbf{ouvert, alors}\ f\ \textbf{est}\ \mathcal C^1,\ \textbf{donc différentiable}.$$</div>
+<p class="ml">La méthode en un point problématique</p>
+<p><b>1.</b> Continuité (sinon, pas différentiable). <b>2.</b> Dérivées partielles par taux d'accroissement : elles donnent le <b>seul candidat</b> $L(h) = \partial_xf\,h_1 + \partial_yf\,h_2$. <b>3.</b> Étudier $\frac{f(a + h) - f(a) - L(h)}{\|h\|}$ : différentiable si et seulement si ça tend vers $0$.</p>
+
+<p class="ml">Exemple 5 : différentiable en $(0, 0)$</p>
+<p>$f(x, y) = \dfrac{x^2y^2}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> Candidat $L$ par les dérivées partielles, puis $\frac{f(h) - f(0) - L(h)}{\|h\|}\to0$.</p>
+<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = f(0, t) = 0$, donc $\partial_xf(0, 0) = \partial_yf(0, 0) = 0$ : le candidat est $L = 0$.</p>
+<p><b>Étape 3 : On majore</b> avec $x^2y^2\leq\frac{(x^2 + y^2)^2}4$ (car $(x^2 - y^2)^2\geq0$) :</p>
+$$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\frac{r^4}{4r^3} = \cO{\frac r4}\to0.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est différentiable en}\ (0, 0)\ \text{et}\ df(0, 0) = 0}$.</p>
+
+<p class="ml">Exemple 6 : continue, des dérivées partielles, mais pas différentiable</p>
+<p>$f(x, y) = \dfrac{x^3 + y^3}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> Même méthode : candidat, puis quotient.</p>
+<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = t$, $f(0, t) = t$ : $\partial_xf(0, 0) = \partial_yf(0, 0) = 1$, candidat $L(x, y) = x + y$.</p>
+<p><b>Étape 3 : Le quotient en polaires.</b></p>
+$$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac{-xy(x + y)}{r^3} = -\cos\theta\sin\theta(\cos\theta + \sin\theta).$$
+<p><b>Étape 4 : Il dépend de $\theta$.</b> Sur $\theta = \frac\pi4$ il vaut $-\frac12\cdot\sqrt2\neq0$ : il ne tend pas vers $0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{n'est pas différentiable en}\ (0, 0)}$, bien que continue ($|f|\leq\frac{2r^3}{r^2} = 2r$) avec des dérivées partielles.</p>
+
+<h2 id="c-exdiff">5. Différentielles à connaître</h2>
+<div class="sbox">$$u\ \text{linéaire}:\ du(a) = u.\qquad B\ \text{bilinéaire}:\ dB(a, b)(h, k) = B(h, b) + B(a, k).\qquad d(\|x\|^2)(h) = 2\langle x, h\rangle.$$
+$$d(M\mapsto M^2)(M)(H) = MH + HM.\qquad d(\det)(I_n)(H) = \operatorname{tr}H.\qquad d(M\mapsto M^{-1})(M)(H) = -M^{-1}HM^{-1}.$$</div>
+<p class="ml">La méthode</p>
+<p>On développe $f(a + h)$, on sépare le terme <b>linéaire en $h$</b> et le reste, et on montre que le reste est un $o(\|h\|)$ (souvent un $O(\|h\|^2)$).</p>
+<p class="ml">Exemple 7 : $f(M) = M^2$</p>
+<p><b>Étape 1 : Rappel.</b> $f(M + H) = f(M) + L(H) + o(\|H\|)$ avec $L$ linéaire.</p>
+<p><b>Étape 2 : On développe</b> (sans commuter !) : $(M + H)^2 = M^2 + MH + HM + H^2$.</p>
+<p><b>Étape 3 : La partie linéaire.</b> $L(H) = MH + HM$ est linéaire en $H$.</p>
+<p><b>Étape 4 : Le reste.</b> Avec une norme sous-multiplicative, $\|H^2\|\leq\|H\|^2 = o(\|H\|)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{df(M)(H) = MH + HM}$ (et $2MH$ seulement si $M$ et $H$ commutent).</p>
+
+<p class="ml">Exemple 8 : $f(x) = \|x\|^2$ dans un espace euclidien</p>
+<p><b>Étape 1 : Rappel.</b> On isole la partie linéaire de $f(x + h) - f(x)$.</p>
+<p><b>Étape 2 : On développe.</b> $\|x + h\|^2 = \|x\|^2 + 2\langle x, h\rangle + \|h\|^2$.</p>
+<p><b>Étape 3 : Les morceaux.</b> $h\mapsto2\langle x, h\rangle$ est linéaire et $\|h\|^2 = o(\|h\|)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{df(x)(h) = 2\langle x, h\rangle,\quad\nabla f(x) = 2x}$.</p>
+
+<h2 id="c-chain">6. La règle de la chaîne</h2>
+<div class="sbox">$$d(g\circ f)(a) = dg(f(a))\circ df(a),\qquad J_{g\circ f}(a) = J_g(f(a))\,J_f(a).$$
+$$\text{Le long d'une courbe}:\ \frac d{dt}f\big(x(t), y(t)\big) = x'(t)\,\frac{\partial f}{\partial x} + y'(t)\,\frac{\partial f}{\partial y}.$$
+$$g(\cV u, \cV v) = f\big(x(u, v), y(u, v)\big):\quad\frac{\partial g}{\partial u} = \frac{\partial x}{\partial u}\frac{\partial f}{\partial x} + \frac{\partial y}{\partial u}\frac{\partial f}{\partial y}\quad(\text{dérivées de}\ f\ \text{prises en}\ (x(u, v), y(u, v))).$$</div>
+<p class="ml">Exemple 9 : les coordonnées polaires</p>
+<p>$g(\cV r, \cV\theta) = f(r\cos\theta, r\sin\theta)$, $f$ de classe $\mathcal C^1$. Exprimer $\partial_rg$ et $\partial_\theta g$.</p>
+<p><b>Étape 1 : Rappel.</b> $\partial_ug = \partial_ux\,\partial_xf + \partial_uy\,\partial_yf$.</p>
+<p><b>Étape 2 : Les dérivées de $x = r\cos\theta$, $y = r\sin\theta$.</b> $\partial_rx = \cos\theta$, $\partial_ry = \sin\theta$, $\partial_\theta x = -r\sin\theta$, $\partial_\theta y = r\cos\theta$.</p>
+<p><b>Étape 3 : On assemble.</b></p>
+$$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \sin\theta\,\frac{\partial f}{\partial y},\qquad\frac{\partial g}{\partial\theta} = -r\sin\theta\,\frac{\partial f}{\partial x} + r\cos\theta\,\frac{\partial f}{\partial y}.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{r\,\partial_rg = x\,\partial_xf + y\,\partial_yf\ \ \text{et}\ \ \partial_\theta g = x\,\partial_yf - y\,\partial_xf}$, à reconnaître dans les EDP.</p>
+
+<h2 id="c-grad">7. Le gradient</h2>
+<div class="sbox">$$df(a)(h) = \langle\nabla f(a), h\rangle,\qquad\nabla f(a) = \Big(\frac{\partial f}{\partial x_1}(a), \dots, \frac{\partial f}{\partial x_n}(a)\Big)\ \text{(en BON)}.$$</div>
+<p>$\nabla f(a)$ indique la direction où $f$ <b>croît le plus vite</b> ; il est <b>orthogonal</b> aux lignes de niveau $\{f = c\}$.</p>
+
+<h2 id="c-edp">8. Équations aux dérivées partielles</h2>
+<div class="sbox">$$\text{Sur un ouvert convexe (ou un produit d'intervalles)}:\quad\frac{\partial f}{\partial x} = 0\iff f(x, y) = C(y),\qquad\frac{\partial^2f}{\partial x\partial y} = 0\iff f(x, y) = A(x) + B(y).$$</div>
+<p class="ml">La méthode du changement de variables</p>
+<p><b>1.</b> Poser $f(x, y) = g(\cV u, \cV v)$ avec le changement donné (bijectif, $\mathcal C^1$ dans les deux sens). <b>2.</b> Calculer $\partial_xf$, $\partial_yf$ (et les dérivées secondes) en fonction de celles de $g$ par la règle de la chaîne. <b>3.</b> Remplacer : on obtient une EDP simple en $g$. <b>4.</b> La résoudre, puis revenir à $x, y$.</p>
+
+<p class="ml">Exemple 10 : un transport</p>
+<p>Résoudre $\frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} = 0$ sur $\mathbb R^2$ ($f$ de classe $\mathcal C^1$), avec $\cV u = x + y$, $\cV v = x - y$.</p>
+<p><b>Étape 1 : Rappel.</b> Règle de la chaîne, puis $\partial_ug = 0\iff g = C(v)$.</p>
+<p><b>Étape 2 : Le changement.</b> $(x, y)\mapsto(x + y, x - y)$ est une bijection linéaire de $\mathbb R^2$. On pose $f(x, y) = g(x + y, x - y)$.</p>
+<p><b>Étape 3 : Les dérivées.</b> $\partial_xf = \partial_ug + \partial_vg$ et $\partial_yf = \partial_ug - \partial_vg$.</p>
+<p><b>Étape 4 : On remplace.</b> $\partial_xf + \partial_yf = 2\,\partial_ug = 0$, donc $g(u, v) = C(v)$ avec $C$ de classe $\mathcal C^1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f(x, y) = C(x - y)}$, $C\in\mathcal C^1(\mathbb R)$. Contrôle : $\partial_xf + \partial_yf = C' - C' = 0$.</p>
+
+<p class="ml">Exemple 11 : l'équation des ondes</p>
+<p>Résoudre $\frac{\partial^2f}{\partial x^2} = \frac{\partial^2f}{\partial y^2}$ ($f$ de classe $\mathcal C^2$), avec $u = x + y$, $v = x - y$.</p>
+<p><b>Étape 1 : Rappel.</b> On dérive deux fois avec la règle de la chaîne, puis $\partial_u\partial_vg = 0\iff g = A(u) + B(v)$.</p>
+<p><b>Étape 2 : Les dérivées secondes.</b> En dérivant $\partial_xf = \partial_ug + \partial_vg$ et $\partial_yf = \partial_ug - \partial_vg$ (Schwarz pour $g$) :</p>
+$$\partial^2_{xx}f = \partial^2_{uu}g + 2\partial^2_{uv}g + \partial^2_{vv}g,\qquad\partial^2_{yy}f = \partial^2_{uu}g - 2\partial^2_{uv}g + \partial^2_{vv}g.$$
+<p><b>Étape 3 : On remplace.</b> $\partial^2_{xx}f - \partial^2_{yy}f = 4\,\partial^2_{uv}g = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $g = A(u) + B(v)$, donc $\cG{f(x, y) = A(x + y) + B(x - y)}$, $A, B\in\mathcal C^2(\mathbb R)$.</p>
+
+<p class="ml">Exemple 12 : en polaires</p>
+<p>Résoudre $x\frac{\partial f}{\partial y} - y\frac{\partial f}{\partial x} = 0$ sur $U = \mathbb R^2\setminus(\mathbb R_-\times\{0\})$.</p>
+<p><b>Étape 1 : Rappel.</b> Exemple 9 : $\partial_\theta g = x\,\partial_yf - y\,\partial_xf$.</p>
+<p><b>Étape 2 : Le changement.</b> $(r, \theta)\mapsto(r\cos\theta, r\sin\theta)$ est une bijection $\mathcal C^1$ de $]0, +\infty[\times]-\pi, \pi[$ sur $U$ ; on pose $g(r, \theta) = f(r\cos\theta, r\sin\theta)$.</p>
+<p><b>Étape 3 : L'équation devient</b> $\partial_\theta g = 0$ sur un produit d'intervalles, donc $g(r, \theta) = C(r)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f(x, y) = C\big(\sqrt{x^2 + y^2}\big)}$ : les solutions sont les fonctions radiales.</p>
+
+<h2 id="c-c2">9. Fonctions de classe $\mathcal C^2$</h2>
+<div class="sbox">$$\textbf{Schwarz}:\ f\ \text{de classe}\ \mathcal C^2\Rightarrow\frac{\partial^2f}{\partial x\partial y} = \frac{\partial^2f}{\partial y\partial x}.\qquad\textbf{Taylor-Young}:\ f(a + h) = f(a) + \langle\nabla f(a), h\rangle + \frac12h^\top H_f(a)h + o(\|h\|^2).$$</div>
+
+<h2 id="c-ext">10. Extrema locaux</h2>
+<div class="sbox">$$U\ \text{ouvert},\ f\ \text{différentiable},\ f\ \text{a un extremum local en}\ a\ \Longrightarrow\ \nabla f(a) = 0\ (a\ \textbf{point critique}).$$
+$$a\ \text{critique},\ f\ \mathcal C^2:\quad H_f(a)\in\mathcal S_n^{++}\Rightarrow\text{min local strict},\quad-H_f(a)\in\mathcal S_n^{++}\Rightarrow\text{max local strict},\quad\text{valeurs propres de signes opposés}\Rightarrow\text{col}.$$
+$$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt - s^2 > 0,\ r \lt 0:\ \text{max}\quad rt - s^2 \lt 0:\ \text{col}\quad rt - s^2 = 0:\ \text{on ne sait pas}.$$</div>
+<p class="ml piege">Piège</p>
+<p>Un point critique n'est pas forcément un extremum, et la condition $\nabla f(a) = 0$ ne vaut que sur un <b>ouvert</b> : au bord d'un domaine fermé, un extremum peut avoir un gradient non nul.</p>
+
+<p class="ml">Exemple 13 : $f(x, y) = x^3 + y^3 - 3xy$</p>
+<p><b>Étape 1 : Rappel.</b> Points critiques par $\nabla f = 0$, puis $rt - s^2$ en chacun.</p>
+<p><b>Étape 2 : Les points critiques.</b> $\partial_xf = 3x^2 - 3y = 0$ et $\partial_yf = 3y^2 - 3x = 0$, donc $y = x^2$ et $x^4 = x$ : $x = 0$ ou $x = 1$. Points $\cR{(0, 0)}$ et $\cR{(1, 1)}$.</p>
+<p><b>Étape 3 : Les dérivées secondes.</b> $r = 6x$, $s = -3$, $t = 6y$.</p>
+<p><b>Étape 4 : En $(0, 0)$.</b> $rt - s^2 = 0 - 9 \lt 0$ : point col.</p>
+<p><b>Étape 5 : En $(1, 1)$.</b> $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : minimum local, $f(1, 1) = -1$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\text{col en}\ (0, 0),\ \text{min local en}\ (1, 1)}$, pas global : $f(x, 0) = x^3\to-\infty$.</p>
+
+<h2 id="c-glob">11. Extrema globaux</h2>
+<p class="ml">Les deux méthodes</p>
+<p><b>1. Sur un compact</b> : $f$ continue atteint son min et son max. On compare les valeurs aux <b>points critiques intérieurs</b> et le min/max <b>sur le bord</b> (qu'on paramètre). <b>2. Sur un ouvert</b> : au point critique $a$, on étudie le signe de $f(a + h) - f(a)$ <b>exactement</b>, pour tout $h$.</p>
+
+<p class="ml">Exemple 14 : un minimum global sur $\mathbb R^2$</p>
+<p>$f(x, y) = x^2 + xy + y^2 - 3x$.</p>
+<p><b>Étape 1 : Rappel.</b> Point critique, puis signe de $f(a + h) - f(a)$ pour tout $h$.</p>
+<p><b>Étape 2 : Le point critique.</b> $2x + y - 3 = 0$ et $x + 2y = 0$ : $x = -2y$, $-3y = 3$, donc $\cR{a = (2, -1)}$, $f(a) = 4 - 2 + 1 - 6 = -3$.</p>
+<p><b>Étape 3 : L'écart exact.</b> En développant, les termes de degré $1$ en $(h, k)$ s'annulent (point critique) :</p>
+$$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \frac34k^2\geq0.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{\min_{\mathbb R^2}f = -3}$, atteint seulement en $(2, -1)$.</p>
+
+<p class="ml">Exemple 15 : sur un disque fermé</p>
+<p>Extrema de $f(x, y) = x^2 + y^2 - x$ sur $D = \{x^2 + y^2\leq1\}$.</p>
+<p><b>Étape 1 : Rappel.</b> $D$ compact, $f$ continue : min et max atteints. Candidats : points critiques intérieurs et bord.</p>
+<p><b>Étape 2 : L'intérieur.</b> $\nabla f = (2x - 1, 2y) = 0$ en $\big(\frac12, 0\big)$, intérieur à $D$ : $f = \frac14 - \frac12 = -\frac14$.</p>
+<p><b>Étape 3 : Le bord.</b> Sur $x^2 + y^2 = 1$ : $f = 1 - x$ avec $x\in[-1, 1]$. Max $2$ en $(-1, 0)$, min $0$ en $(1, 0)$.</p>
+<p><b>Étape 4 : On compare</b> $-\frac14$, $0$, $2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\min_Df = -\frac14\ \text{en}\ (\tfrac12, 0),\quad\max_Df = 2\ \text{en}\ (-1, 0)}$.</p>
+
+<h2 id="c-contr">12. Extrema sous contrainte</h2>
+<div class="sbox">$$X = \{g = 0\},\ f, g\ \mathcal C^1,\ \nabla g(a)\neq0:\quad f_{|X}\ \text{a un extremum en}\ a\ \Longrightarrow\ \exists\lambda\in\mathbb R,\ \nabla f(a) = \lambda\nabla g(a).$$</div>
+<p>On résout le système $\nabla f = \lambda\nabla g$, $g = 0$ ; si $X$ est compact, le max et le min sont parmi les solutions.</p>
+<p class="ml">Exemple 16 : max de $xy$ sur le cercle $x^2 + y^2 = 2$</p>
+<p><b>Étape 1 : Rappel.</b> $\nabla f(a) = \lambda\nabla g(a)$ aux extrema, si $\nabla g(a)\neq0$.</p>
+<p><b>Étape 2 : Existence.</b> Le cercle est compact et $f(x, y) = xy$ continue : min et max existent. $\nabla g = (2x, 2y)\neq0$ sur le cercle.</p>
+<p><b>Étape 3 : Le système.</b> $(y, x) = \lambda(2x, 2y)$ : $y = 2\lambda x$, $x = 2\lambda y$, donc $x = 4\lambda^2x$ et de même $y$. Comme $(x, y)\neq0$, $4\lambda^2 = 1$ et $y = \pm x$.</p>
+<p><b>Étape 4 : Les candidats.</b> $x^2 + x^2 = 2$ : $x = \pm1$. Points $(1, 1)$, $(-1, -1)$ (valeur $1$) et $(1, -1)$, $(-1, 1)$ (valeur $-1$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\max = 1,\ \min = -1}$ (on retrouve $|xy|\leq\frac{x^2 + y^2}2$).</p>
+
+<h2 id="c-tang">13. Vecteurs tangents, plan tangent</h2>
+<div class="sbox">$$\text{Surface}\ z = f(x, y):\quad z = f(a, b) + \partial_xf(a, b)(x - a) + \partial_yf(a, b)(y - b).$$
+$$\text{Surface}\ \{g = 0\},\ \nabla g(M_0)\neq0:\quad\text{plan tangent}\ \langle\nabla g(M_0), M - M_0\rangle = 0\ (\nabla g\ \text{normal}).$$</div>
+<p class="ml">Exemple 17 : plan tangent à une sphère</p>
+<p>Plan tangent à $x^2 + y^2 + z^2 = 3$ en $M_0 = (1, 1, 1)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\nabla g(M_0)$ est normal au plan tangent.</p>
+<p><b>Étape 2 : Le gradient.</b> $g(x, y, z) = x^2 + y^2 + z^2 - 3$, $\nabla g = (2x, 2y, 2z)$, donc $\nabla g(M_0) = (2, 2, 2)\neq0$.</p>
+<p><b>Étape 3 : L'équation.</b> $2(x - 1) + 2(y - 1) + 2(z - 1) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x + y + z = 3}$.</p>
+
+<h2 id="c-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $f$ continue en $(0, 0)$ ? »</b><span>Majorer par une fonction de $r$, ou deux chemins différents.</span></div>
+<div><b>« Dérivées partielles en $(0, 0)$ »</b><span>Taux d'accroissement $\frac{f(t, 0) - f(0, 0)}t$.</span></div>
+<div><b>« $f$ différentiable en $(0, 0)$ ? »</b><span>Candidat par les partielles, puis $\frac{f(h) - f(0) - L(h)}{\|h\|}\to0$ ?</span></div>
+<div><b>« $f$ de classe $\mathcal C^1$ »</b><span>Partielles continues ; en $(0, 0)$ : leur limite égale la valeur par taux.</span></div>
+<div><b>« Calculer $df(M)(H)$ » sur des matrices</b><span>Développer $f(M + H)$, garder le linéaire, montrer $o(\|H\|)$.</span></div>
+<div><b>« On pose $f(x, y) = g(u, v)$ »</b><span>Règle de la chaîne, EDP simple en $g$, revenir à $x, y$.</span></div>
+<div><b>« Extrema locaux »</b><span>$\nabla f = 0$, puis $rt - s^2$ (ou valeurs propres de la hessienne).</span></div>
+<div><b>« Extremum global »</b><span>Écart exact $f(a + h) - f(a)$, ou compact + bord.</span></div>
+<div><b>« Sur un compact »</b><span>Points critiques intérieurs et étude du bord paramétré.</span></div>
+<div><b>« Sous la contrainte $g = 0$ »</b><span>$\nabla f = \lambda\nabla g$.</span></div>
+<div><b>« Plan tangent »</b><span>$\nabla g$ normal, ou formule avec $\partial_xf$, $\partial_yf$.</span></div>
+<div><b>$f(tx, ty) = t^\alpha f(x, y)$</b><span>Dériver en $t = 1$ : Euler.</span></div>
+</div>
+
+<h2 id="c-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Conclure à une limite parce qu'elle est la même sur toutes les droites.</p>
+<p><b>2.</b> Une majoration en polaires qui dépend de $\theta$ sans être uniforme.</p>
+<p><b>3.</b> Croire que les dérivées partielles donnent la continuité ou la différentiabilité.</p>
+<p><b>4.</b> Dériver en $(0, 0)$ avec les formules valables ailleurs.</p>
+<p><b>5.</b> Écrire $d(M^2)(H) = 2MH$ : les matrices ne commutent pas.</p>
+<p><b>6.</b> Oublier où sont évaluées les dérivées de $f$ dans la règle de la chaîne.</p>
+<p><b>7.</b> Conclure « min » quand $rt - s^2 = 0$.</p>
+<p><b>8.</b> Chercher les extrema sur un fermé avec $\nabla f = 0$ seulement, sans le bord.</p>
+<p><b>9.</b> Dire qu'un min local est global sans argument.</p>
+</div>
+
+<h2 id="c-entrainement">S'entraîner</h2>
+<div data-mlab="polar"></div>
+<div data-mlab="crit"></div>
+<div data-mlab="quizcd"></div>
+
+<h2 id="c-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : la relation d'Euler</p>
+<p>$f$ différentiable sur $\mathbb R^2\setminus\{0\}$, homogène de degré $\alpha$ : $f(tx, ty) = t^\alpha f(x, y)$ pour $t > 0$. Montrer $x\,\partial_xf + y\,\partial_yf = \alpha f$.</p>
+<p><b>Étape 1 : Rappel.</b> Règle de la chaîne le long d'une courbe : $\frac d{dt}f(x(t), y(t)) = x'\partial_xf + y'\partial_yf$.</p>
+<p><b>Étape 2 : On dérive en $t$</b> les deux membres, à $(x, y)$ fixé :</p>
+$$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y).$$
+<p><b>Étape 3 : On prend $t = 1$.</b></p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x\,\partial_xf + y\,\partial_yf = \alpha f}$.</p>
+
+<p class="ml">Exercice 2 : Schwarz peut tomber en défaut</p>
+<p>$f(x, y) = \dfrac{xy(x^2 - y^2)}{x^2 + y^2}$, $f(0, 0) = 0$. Comparer $\partial_y(\partial_xf)(0, 0)$ et $\partial_x(\partial_yf)(0, 0)$.</p>
+<p><b>Étape 1 : Rappel.</b> Les dérivées en $(0, 0)$ se calculent par taux d'accroissement.</p>
+<p><b>Étape 2 : $\partial_xf(0, y)$ pour $y\neq0$.</b> $\frac{f(t, y) - f(0, y)}t = \frac{y(t^2 - y^2)}{t^2 + y^2}\to\frac{-y^3}{y^2} = -y$. Et $\partial_xf(0, 0) = 0$.</p>
+<p><b>Étape 3 : $\partial_yf(x, 0)$ pour $x\neq0$.</b> $\frac{f(x, t)}t = \frac{x(x^2 - t^2)}{x^2 + t^2}\to x$. Et $\partial_yf(0, 0) = 0$.</p>
+<p><b>Étape 4 : Les dérivées croisées.</b> $\partial_y(\partial_xf)(0, 0) = \lim\frac{-y - 0}y = -1$ et $\partial_x(\partial_yf)(0, 0) = \lim\frac{x - 0}x = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{-1\neq1}$ : $f$ n'est pas $\mathcal C^2$ en $(0, 0)$ (elle est pourtant $\mathcal C^1$).</p>
+
+<p class="ml">Exercice 3 : le gradient de $x\mapsto\langle Ax, x\rangle$</p>
+<p><b>Étape 1 : Rappel.</b> Développer $f(x + h)$ et isoler la partie linéaire.</p>
+<p><b>Étape 2 : On développe.</b> $\langle A(x + h), x + h\rangle = \langle Ax, x\rangle + \langle Ax, h\rangle + \langle Ah, x\rangle + \langle Ah, h\rangle$.</p>
+<p><b>Étape 3 : On transpose.</b> $\langle Ah, x\rangle = \langle h, A^\top x\rangle$, donc la partie linéaire est $\langle(A + A^\top)x, h\rangle$ ; et $|\langle Ah, h\rangle|\leq|||A|||\,\|h\|^2 = o(\|h\|)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\nabla f(x) = (A + A^\top)x}$, soit $2Ax$ si $A$ est symétrique.</p>
+
+<h2 id="c-arbre">L'arbre du calcul différentiel</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une fonction de plusieurs variables</span><ul>
+<li><div class="hr"><em>en un point problématique</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>la continuité</em><a class="hl" href="#c-lim">majorer par $r$, ou deux chemins</a></div></li>
+<li><div class="hr"><em>les partielles</em><a class="hl" href="#c-part">taux d'accroissement</a></div></li>
+<li><div class="hr"><em>la différentiabilité</em><a class="hl" href="#c-diff">candidat $L$, quotient $\to0$ ?</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une différentielle</em><span class="hq">Quel $f$ ?</span><ul>
+<li><div class="hr"><em>formule en $x, y$</em><a class="hl ok" href="#c-diff">$\mathcal C^1$ : $df = \sum\partial_if\,dx_i$</a></div></li>
+<li><div class="hr"><em>matrices, normes</em><a class="hl" href="#c-exdiff">développer $f(a + h)$</a></div></li>
+<li><div class="hr"><em>une composée</em><a class="hl" href="#c-chain">règle de la chaîne</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une EDP</em><span class="hq">Changement donné ?</span><ul>
+<li><div class="hr"><em>linéaire $u, v$</em><a class="hl" href="#c-edp">chaîne, puis $\partial_ug = 0$…</a></div></li>
+<li><div class="hr"><em>polaires</em><a class="hl" href="#c-edp">$\partial_\theta g$, $r\,\partial_rg$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des extrema</em><span class="hq">Sur quoi ?</span><ul>
+<li><div class="hr"><em>un ouvert, local</em><a class="hl ok" href="#c-ext">$\nabla f = 0$, puis $rt - s^2$</a></div></li>
+<li><div class="hr"><em>un ouvert, global</em><a class="hl" href="#c-glob">$f(a + h) - f(a)$ exact</a></div></li>
+<li><div class="hr"><em>un compact</em><a class="hl" href="#c-glob">intérieur + bord</a></div></li>
+<li><div class="hr"><em>une contrainte</em><a class="hl" href="#c-contr">$\nabla f = \lambda\nabla g$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>un plan tangent</em><a class="hl end" href="#c-tang">$\nabla g$ normal</a></div></li>
+</ul></div></div>
 `
 };

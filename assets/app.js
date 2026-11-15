@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2701,6 +2701,85 @@ const QEU = [
   ["$A^\\top A$ est symétrique positive pour toute $A\\in\\mathcal M_n(\\mathbb R)$.", true, "Vrai : $X^\\top A^\\top AX = \\|AX\\|^2\\geq0$."],
   ["Dans $O(2)$, une matrice de déterminant $-1$ est une rotation.", false, "Faux : c'est une réflexion."],
   ["Un projecteur est orthogonal si et seulement s'il est autoadjoint.", true, "Vrai : $p^* = p\\iff\\ker p\\perp\\operatorname{Im}p$."]
+];
+/* Topologie : boules unité de N_p */
+function mlBoules(host) {
+  let p = 3, inf = false;
+  const W = 300, c = W / 2, s = 110, P = q => { let d = ""; for (let i = 0; i <= 400; i++) { const t = 2 * Math.PI * i / 400, co = Math.cos(t), si = Math.sin(t); let x, y; if (q === Infinity) { const m = Math.max(Math.abs(co), Math.abs(si)); x = co / m; y = si / m; } else { x = Math.sign(co) * Math.abs(co) ** (2 / q); y = Math.sign(si) * Math.abs(si) ** (2 / q); } d += `${i ? "L" : "M"}${(c + s * x).toFixed(1)},${(c - s * y).toFixed(1)}`; } return d + "Z"; };
+  const draw = () => {
+    const q = inf ? Infinity : p;
+    host.innerHTML = `<p class="mlt">Les boules unité de $\\|\\cdot\\|_p$ dans $\\mathbb R^2$</p><div class="rmctl"><label class="rmn">$p = ${inf ? "\\infty" : p.toFixed(1).replace(".", "{,}")}$ <input type="range" min="1" max="8" step="0.1" value="${p}" data-p aria-label="p"></label><div class="mlseg"><button type="button" data-i aria-pressed="${inf}">$p = \\infty$</button></div></div><svg viewBox="0 0 ${W} ${W}" class="rmsvg" style="max-width:320px" role="img" aria-label="Boules unité"><line x1="10" y1="${c}" x2="${W - 10}" y2="${c}" class="ax"/><line x1="${c}" y1="10" x2="${c}" y2="${W - 10}" class="ax"/><path d="${P(1)}" fill="none" stroke="#C27C00" stroke-dasharray="4 3"/><path d="${P(2)}" fill="none" stroke="#1F8A5B" stroke-dasharray="4 3"/><path d="${P(Infinity)}" fill="none" stroke="#7A4CC2" stroke-dasharray="4 3"/><path d="${P(q)}" fill="rgba(43,91,215,.12)" stroke="#2B5BD7" stroke-width="2.5"/></svg><p class="mlnote">En pointillés : $\\textcolor[RGB]{194,124,0}{\\|\\cdot\\|_1}$ (losange), $\\textcolor[RGB]{31,138,91}{\\|\\cdot\\|_2}$ (disque), $\\textcolor[RGB]{122,76,194}{\\|\\cdot\\|_\\infty}$ (carré). Les boules sont emboîtées : $B_1\\subset B_p\\subset B_\\infty\\subset 2B_1$, c'est l'équivalence des normes vue sur un dessin. Toutes sont convexes.</p>`;
+    $("[data-p]", host).addEventListener("input", e => { p = +e.target.value; inf = false; draw(); $("[data-p]", host).focus(); });
+    $("[data-i]", host).addEventListener("click", () => { inf = !inf; draw(); });
+    typeset(host);
+  };
+  draw();
+}
+const QEVN = [
+  ["Sur $\\mathcal C([0, 1])$, $\\|\\cdot\\|_1$ et $\\|\\cdot\\|_\\infty$ sont équivalentes.", false, "Faux : $f_n = t^n$ donne un quotient $n + 1\\to\\infty$."],
+  ["Dans $\\mathbb R^n$, une partie fermée et bornée est compacte.", true, "Vrai : en dimension finie, compact $\\iff$ fermé borné."],
+  ["$\\{(x, y),\\ x^2 + y^2 \\lt 1\\}$ est fermé.", false, "Faux : inégalité stricte, c'est un ouvert (et pas un fermé)."],
+  ["Une partie qui n'est pas ouverte est fermée.", false, "Faux : $[0, 1[$ n'est ni ouverte ni fermée."],
+  ["Toute application linéaire de $\\mathbb R^n$ dans $\\mathbb R^p$ est continue.", true, "Vrai : départ de dimension finie."],
+  ["$GL_n(\\mathbb R)$ est dense dans $\\mathcal M_n(\\mathbb R)$.", true, "Vrai : $A - \\frac1kI_n\\to A$, inversible pour $k$ grand."],
+  ["Une fonction continue sur un fermé de $\\mathbb R^n$ atteint son maximum.", false, "Faux : il faut un compact. $x\\mapsto x$ sur $\\mathbb R$."],
+  ["$x\\mapsto d(x, A)$ est $1$-lipschitzienne.", true, "Vrai : $|d(x, A) - d(y, A)|\\leq\\|x - y\\|$."]
+];
+/* Calcul différentiel : limite en (0,0) vue en polaires */
+function mlPolar(host) {
+  const F = [
+    { t: "\\frac{xy}{x^2 + y^2}", f: (x, y) => x * y / (x * x + y * y), c: "La courbe ne s'écrase pas quand $r\\to0$ : $f = \\cos\\theta\\sin\\theta$ dépend de $\\theta$, <b>pas de limite</b>." },
+    { t: "\\frac{x^2y}{x^2 + y^2}", f: (x, y) => x * x * y / (x * x + y * y), c: "La courbe s'écrase sur $0$ uniformément : $|f|\\leq r$, <b>limite $0$</b>." },
+    { t: "\\frac{x^2y}{x^4 + y^2}", f: (x, y) => x * x * y / (x ** 4 + y * y), c: "Sur chaque droite, $f\\to0$, mais il reste un pic de hauteur $\\frac12$ de plus en plus étroit (le long de $y = x^2$) : <b>pas de limite</b>." },
+    { t: "\\frac{x^3 + y^3}{x^2 + y^2}", f: (x, y) => (x ** 3 + y ** 3) / (x * x + y * y), c: "$|f|\\leq2r$ : la courbe s'écrase, <b>limite $0$</b>." }
+  ];
+  let fi = 0, k = 10;
+  const draw = () => {
+    const g = F[fi], r = 10 ** (-k / 10), W = 520, H = 220, X = t => 40 + t / (2 * Math.PI) * (W - 60), Y = v => H / 2 - v * (H / 2 - 20);
+    let d = "", mx = 0; for (let i = 0; i <= 3000; i++) { const t = 2 * Math.PI * i / 3000, v = g.f(r * Math.cos(t), r * Math.sin(t)); mx = Math.max(mx, Math.abs(v)); d += `${i ? "L" : "M"}${X(t).toFixed(1)},${Y(Math.max(-1, Math.min(1, v))).toFixed(1)}`; }
+    host.innerHTML = `<p class="mlt">$\\theta\\mapsto f(r\\cos\\theta, r\\sin\\theta)$ quand $r\\to0$</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">$r = 10^{-${(k / 10).toFixed(1)}}$ <input type="range" min="0" max="30" value="${k}" data-r aria-label="rayon"></label></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Valeurs sur un cercle"><line x1="40" x2="${W - 20}" y1="${Y(0)}" y2="${Y(0)}" class="ax"/><path d="${d}" fill="none" stroke="#2B5BD7" stroke-width="2"/><text x="40" y="${H - 4}" class="tx">θ = 0</text><text x="${W - 20}" y="${H - 4}" class="tx" text-anchor="end">2π</text><text x="36" y="${Y(1) + 4}" class="tx" text-anchor="end">1</text><text x="36" y="${Y(-1) + 4}" class="tx" text-anchor="end">−1</text></svg><p class="mlcalc">$$\\max_\\theta|f(r\\cos\\theta, r\\sin\\theta)| \\approx ${mx.toFixed(4).replace(".", "{,}")}$$</p><p class="mlnote">${g.c} Fais diminuer $r$ avec le curseur.</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    $("[data-r]", host).addEventListener("input", e => { k = +e.target.value; draw(); $("[data-r]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+/* Calcul différentiel : points critiques et nature */
+function mlCrit(host) {
+  const gen = () => { if (rnd(0, 1)) { let a, b, c; do { a = rnd(-3, 3); b = rnd(-3, 3); c = rnd(-3, 3); } while (!a || !c || 4 * a * c - b * b === 0); return { k: 0, a, b, c, d: rnd(-4, 4), e: rnd(-4, 4) }; } return { k: 1, K: rnd(1, 3), eps: rnd(0, 1) ? 1 : -1, m: rnd(-3, 3) }; };
+  const nat = (r, s, t) => { const D = r * t - s * s; return D > 0 ? (r > 0 ? "minimum local" : "maximum local") : D < 0 ? "point col" : "on ne peut pas conclure"; };
+  const build = E => {
+    const st = [];
+    if (E.k === 0) {
+      const { a, b, c, d, e } = E, fx = fsum([[a, "x^2"], [b, "xy"], [c, "y^2"], [d, "x"], [e, "y"]]), D = 4 * a * c - b * b, x0 = Fr(-2 * c * d + b * e, D), y0 = Fr(-2 * a * e + b * d, D);
+      st.push(`$$f(x, y) = ${fx}$$`);
+      st.push(`<p class="mlstep">1. Rappel : points critiques par $\\nabla f = 0$, puis $r = \\partial^2_{xx}f$, $s = \\partial^2_{xy}f$, $t = \\partial^2_{yy}f$ et le signe de $rt - s^2$.</p>`);
+      st.push(`<p class="mlstep">2. Le gradient :</p>$$\\left\\{\\begin{aligned}\\partial_xf &= ${fsum([[2 * a, "x"], [b, "y"], [d, ""]])} = 0\\\\\\partial_yf &= ${fsum([[b, "x"], [2 * c, "y"], [e, ""]])} = 0\\end{aligned}\\right.$$`);
+      st.push(`<p class="mlstep">3. Un système linéaire de déterminant $${2 * a}\\times${fpar(2 * c)} - ${fpar(b)}^2 = ${D}\\neq0$ : un seul point critique $\\cR{a = \\big(${ftex(x0)}, ${ftex(y0)}\\big)}$.</p>`);
+      st.push(`<p class="mlstep">4. Les dérivées secondes (constantes) : $r = ${2 * a}$, $s = ${b}$, $t = ${2 * c}$, donc $rt - s^2 = ${D}$.</p>`);
+      st.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{\\text{en}\\ \\big(${ftex(x0)}, ${ftex(y0)}\\big)\\ :\\ \\text{${nat(2 * a, b, 2 * c)}}}$$<p class="mlnote">${D > 0 ? "Ici l'extremum est même global : $f(a + h) - f(a)$ est la forme quadratique $ah_1^2 + bh_1h_2 + ch_2^2$, de signe constant." : "Un col : $f(a + h) - f(a)$ prend les deux signes."}</p>`);
+    } else {
+      const { K, eps, m } = E, fx = `x^3 - ${3 * K * K}x ${eps > 0 ? "+" : "-"} (${fsum([[1, "y^2"], [2 * m, "y"]])})`;
+      st.push(`$$f(x, y) = ${fx}$$`);
+      st.push(`<p class="mlstep">1. Rappel : $\\nabla f = 0$, puis $rt - s^2$ en chaque point critique.</p>`);
+      st.push(`<p class="mlstep">2. Le gradient :</p>$$\\partial_xf = 3x^2 - ${3 * K * K} = 0\\iff x = \\pm${K},\\qquad\\partial_yf = ${eps > 0 ? "" : "-"}(2y ${m >= 0 ? "+" : "-"} ${Math.abs(2 * m)}) = 0\\iff y = ${-m}.$$`);
+      st.push(`<p class="mlstep">3. Deux points critiques : $\\cR{(${K}, ${-m})}$ et $\\cR{(${-K}, ${-m})}$.</p>`);
+      st.push(`<p class="mlstep">4. Les dérivées secondes : $r = 6x$, $s = 0$, $t = ${2 * eps}$, donc $rt - s^2 = ${12 * eps}x$.</p><p class="mlnote">En $(${K}, ${-m})$ : $r = ${6 * K}$, $rt - s^2 = ${12 * eps * K}$. En $(${-K}, ${-m})$ : $r = ${-6 * K}$, $rt - s^2 = ${-12 * eps * K}$.</p>`);
+      st.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{(${K}, ${-m}):\\ \\text{${nat(6 * K, 0, 2 * eps)}},\\qquad(${-K}, ${-m}):\\ \\text{${nat(-6 * K, 0, 2 * eps)}}}$$<p class="mlnote">Aucun n'est global : $f(x, ${-m})\\to\\pm\\infty$ quand $x\\to\\pm\\infty$.</p>`);
+    }
+    return st;
+  };
+  stepLab(host, "Points critiques et leur nature", gen, build);
+}
+const QCD = [
+  ["Si $f$ a des dérivées partielles en $(0, 0)$, elle y est continue.", false, "Faux : $\\frac{xy}{x^2 + y^2}$ a des partielles nulles en $(0, 0)$ et n'y est pas continue."],
+  ["Une fonction différentiable en $a$ est continue en $a$.", true, "Vrai : $f(a + h) - f(a) = df(a)(h) + o(\\|h\\|)\\to0$."],
+  ["Si $f\\to\\ell$ sur toutes les droites passant par $0$, alors $f\\to\\ell$ en $0$.", false, "Faux : $\\frac{x^2y}{x^4 + y^2}$, le long de $y = x^2$, vaut $\\frac12$."],
+  ["$d(M\\mapsto M^2)(M)(H) = 2MH$.", false, "Faux : c'est $MH + HM$."],
+  ["Si $\\nabla f(a) = 0$, alors $f$ a un extremum en $a$.", false, "Faux : $(0, 0)$ est un col de $x^2 - y^2$."],
+  ["Si $rt - s^2 > 0$ et $r > 0$ en un point critique, c'est un minimum local.", true, "Vrai : la hessienne est définie positive."],
+  ["Si $f$ est $\\mathcal C^2$, $\\partial_x\\partial_yf = \\partial_y\\partial_xf$.", true, "Vrai : théorème de Schwarz."],
+  ["Un extremum d'une fonction sur un disque fermé est toujours un point critique.", false, "Faux : il peut être sur le bord, avec $\\nabla f\\neq0$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

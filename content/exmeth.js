@@ -367,5 +367,50 @@ LEMME.EXMETH = {
   String.raw`$\|u(x)\| = |\lambda|\,\|x\|$.`,
   String.raw`Décomposer $y = p(y) + (y - p(y))$.`,
   String.raw`Cauchy-Schwarz dans $\mathbb R^{n^2}$, $\sum a_{ij}^2 = n$.`
+],
+"Topologie des espaces vectoriels normés": [
+  String.raw`Séparation, homogénéité, inégalité triangulaire coordonnée par coordonnée.`,
+  String.raw`Comparer coordonnée par coordonnée : constantes $1$ et $n$.`,
+  String.raw`Une suite $f_n = t^n$ au quotient non borné.`,
+  String.raw`Dimension finie : limite coefficient par coefficient.`,
+  String.raw`Image réciproque par des fonctions continues.`,
+  String.raw`$\det^{-1}(\mathbb R^*)$ ; $O(n)$ fermé et borné.`,
+  String.raw`Suites : passe pour $\|\cdot\|_\infty$, contre-exemple pour $\|\cdot\|_1$.`,
+  String.raw`Suites de $A$ pour l'adhérence, boules pour l'intérieur.`,
+  String.raw`$A - \frac1kI_n$ inversible pour $k$ grand, et $\to A$.`,
+  String.raw`Inégalité triangulaire, puis passer à l'inf.`,
+  String.raw`$|\varphi(f)|\leq\|f\|_\infty$, égalité pour $f = 1$.`,
+  String.raw`$X^n$ : quotient $n\to\infty$.`,
+  String.raw`Se ramener à un compact $F\cap B_f(a, R)$.`,
+  String.raw`$\det$ continue ne prend pas la valeur $0$.`
+],
+"Topologie des espaces vectoriels normés (exercices)": [
+  String.raw`$\varphi(M) = M - M^\top$ linéaire, $\varphi^{-1}(\{0\})$.`,
+  String.raw`Une boule compacte hors de laquelle $f > f(0)$.`,
+  String.raw`$M\mapsto M^n$ continue, image réciproque de $\{0\}$.`
+],
+"Calcul différentiel": [
+  String.raw`Majorer $|f|$ par $r$.`,
+  String.raw`Droites $y = mx$ : la limite dépend de $m$.`,
+  String.raw`Droites puis parabole $y = x^2$.`,
+  String.raw`Taux d'accroissement sur les axes.`,
+  String.raw`Candidat $L = 0$, puis $\frac{|f|}{r}\leq\frac r4$.`,
+  String.raw`Candidat par les partielles, le quotient dépend de $\theta$.`,
+  String.raw`Développer $(M + H)^2$ sans commuter.`,
+  String.raw`$\|x + h\|^2 = \|x\|^2 + 2\langle x, h\rangle + \|h\|^2$.`,
+  String.raw`Règle de la chaîne avec $x = r\cos\theta$, $y = r\sin\theta$.`,
+  String.raw`$u = x + y$, $v = x - y$ : $2\partial_ug = 0$.`,
+  String.raw`Dérivées secondes par la chaîne : $4\partial^2_{uv}g = 0$.`,
+  String.raw`Polaires : $\partial_\theta g = 0$.`,
+  String.raw`$\nabla f = 0$, puis $rt - s^2$ en chaque point.`,
+  String.raw`Point critique, puis $f(a + h) - f(a)$ exact.`,
+  String.raw`Point critique intérieur, puis le bord paramétré.`,
+  String.raw`$\nabla f = \lambda\nabla g$ sur un compact.`,
+  String.raw`$\nabla g(M_0)$ normal au plan tangent.`
+],
+"Calcul différentiel (exercices)": [
+  String.raw`Dériver $f(tx, ty) = t^\alpha f(x, y)$ en $t = 1$.`,
+  String.raw`Taux d'accroissement pour les partielles, puis pour les dérivées croisées.`,
+  String.raw`Développer, transposer : $(A + A^\top)x$.`
 ]
 };
