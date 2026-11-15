@@ -7071,6 +7071,658 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <li><div class="hr"><em>une EDL d'ordre 2</em><a class="hl end" href="#pe-ed2">équation caractéristique</a></div></li>
 </ul></div></div>
 `,
+"Limites et continuité": R`
+<nav class="msum"><a href="#lc-fi">Formes indéterminées</a><a href="#lc-cc">Croissances comparées</a><a href="#lc-equiv">Équivalents</a><a href="#lc-enc">Encadrement</a><a href="#lc-seq">Caractérisation séquentielle</a><a href="#lc-cont">Continuité, prolongement</a><a href="#lc-tvi">Valeurs intermédiaires</a><a href="#lc-bornes">Bornes atteintes</a><a href="#lc-unif">Uniforme continuité</a><a href="#lc-erreurs">Erreurs</a><a href="#lc-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : le terme qui domine. <span class="kO">orange</span> : ce qu'on factorise ou ce qu'on encadre. <span class="kV">violet</span> : les bornes de l'encadrement. <span class="kG">vert</span> : la limite trouvée.</p>
+
+<h2 id="lc-fi">1. Lever une forme indéterminée</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{les quatre formes :}\ \ \infty - \infty,\quad0\times\infty,\quad\frac\infty\infty,\quad\frac00$</li><li>$\displaystyle\text{polynôme ou fraction en}\ \pm\infty:\ \text{factoriser le terme de plus haut degré}$</li><li>$\displaystyle\text{racines}:\ \text{multiplier par la quantité conjuguée}$</li><li>$\displaystyle\frac00\ \text{en}\ a:\ \text{factoriser par}\ (x - a)\ \text{ou reconnaître un taux d'accroissement}$</li></ul></div>
+
+<p class="ml">Exemple 1 : une fraction en $+\infty$</p>
+<p>Soit $f(x) = \frac{3x^2 - x + 1}{2x^2 + 5}$. <b>Calculer $\lim_{x\to+\infty}f(x)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Numérateur et dénominateur tendent vers $+\infty$ : forme $\frac\infty\infty$. On factorise en haut et en bas le terme de plus haut degré, puis on simplifie : les autres termes deviennent des quotients qui tendent vers $0$.</p>
+<p><b>Étape 2 : On factorise.</b> $f(x) = \frac{\cO{x^2}\big(3 - \frac1x + \frac1{x^2}\big)}{\cO{x^2}\big(2 + \frac5{x^2}\big)} = \frac{3 - \frac1x + \frac1{x^2}}{2 + \frac5{x^2}}$.</p>
+<p><b>Étape 3 : Les petits termes.</b> $\frac1x\to0$, $\frac1{x^2}\to0$, $\frac5{x^2}\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}f(x) = \cG{\frac32}$.</p>
+
+<p class="ml">Exemple 2 : une différence de racines</p>
+<p><b>Calculer $\lim_{x\to+\infty}\big(\sqrt{x^2 + x} - x\big)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Forme $\infty - \infty$ avec une racine : on multiplie et on divise par la quantité conjuguée, pour utiliser $(a - b)(a + b) = a^2 - b^2$ et faire disparaître la racine du numérateur.</p>
+<p><b>Étape 2 : La conjuguée.</b> $\sqrt{x^2 + x} - x = \frac{(\sqrt{x^2 + x} - x)(\sqrt{x^2 + x} + x)}{\sqrt{x^2 + x} + x} = \frac{(x^2 + x) - x^2}{\sqrt{x^2 + x} + x} = \frac x{\sqrt{x^2 + x} + x}$.</p>
+<p><b>Étape 3 : On factorise par $x$</b> (avec $x > 0$, donc $\sqrt{x^2} = x$) : $\sqrt{x^2 + x} = x\sqrt{1 + \frac1x}$, d'où $\frac x{x\big(\sqrt{1 + \frac1x} + 1\big)} = \frac1{\sqrt{1 + \frac1x} + 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\sqrt{1 + \frac1x}\to1$, donc la limite vaut $\cG{\frac12}$.</p>
+
+<p class="ml">Exemple 3 : un $\frac00$ en un point</p>
+<p><b>Calculer $\lim_{x\to2}\frac{x^2 - 3x + 2}{x^2 - 4}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> En $x = 2$ le haut et le bas s'annulent : $2$ est racine des deux polynômes, donc les deux se factorisent par $(x - 2)$. On simplifie ce facteur, puis on remplace $x$ par $2$.</p>
+<p><b>Étape 2 : On factorise.</b> $x^2 - 3x + 2 = (x - 2)(x - 1)$ (contrôle : $x^2 - x - 2x + 2$) et $x^2 - 4 = (x - 2)(x + 2)$.</p>
+<p><b>Étape 3 : On simplifie.</b> Pour $x\neq2$ : $\frac{(x - 2)(x - 1)}{(x - 2)(x + 2)} = \frac{x - 1}{x + 2}$.</p>
+<p><b>Étape 4 : Conclusion.</b> La limite vaut $\frac{2 - 1}{2 + 2} = \cG{\frac14}$.</p>
+
+<h2 id="lc-cc">2. Les croissances comparées</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\lim_{x\to+\infty}\frac{e^x}{x^\alpha} = +\infty,\qquad\lim_{x\to+\infty}\frac{(\ln x)^\beta}{x^\alpha} = 0\qquad(\alpha, \beta > 0)$</li><li>$\displaystyle\lim_{x\to0^+}x^\alpha|\ln x|^\beta = 0,\qquad\lim_{x\to-\infty}|x|^\alpha e^x = 0$</li><li>$\displaystyle\text{à retenir : exponentielle} \gg \text{puissance} \gg \text{logarithme}$</li></ul></div>
+
+<p class="ml">Exemple 4 : exponentielle contre polynôme</p>
+<p><b>Calculer $\lim_{x\to+\infty}\big(x^3 - e^x\big)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Forme $\infty - \infty$. On factorise par le terme le plus fort, ici $\cB{e^x}$, puis on utilise $\frac{x^3}{e^x}\to0$.</p>
+<p><b>Étape 2 : On factorise.</b> $x^3 - e^x = \cB{e^x}\Big(\frac{x^3}{e^x} - 1\Big)$.</p>
+<p><b>Étape 3 : Les limites.</b> $\frac{x^3}{e^x}\to0$, donc la parenthèse tend vers $-1$ ; et $e^x\to+\infty$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}(x^3 - e^x) = \cG{-\infty}$.</p>
+
+<p class="ml">Exemple 5 : $x\ln x$ en $0$</p>
+<p><b>Calculer $\lim_{x\to0^+}x^x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Une puissance variable s'écrit avec l'exponentielle : $x^x = e^{x\ln x}$. On cherche la limite de l'exposant, puis on compose par $\exp$, qui est continue.</p>
+<p><b>Étape 2 : L'exposant.</b> Par croissances comparées, $x\ln x\to0$ quand $x\to0^+$.</p>
+<p><b>Étape 3 : On compose.</b> $\exp$ est continue en $0$ et $e^0 = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to0^+}x^x = \cG1$.</p>
+
+<h2 id="lc-equiv">3. Les équivalents usuels</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{en}\ 0:\quad\sin u\sim u,\quad\ln(1 + u)\sim u,\quad e^u - 1\sim u,\quad1 - \cos u\sim\frac{u^2}2$</li><li>$\displaystyle\text{en}\ 0:\quad(1 + u)^\alpha - 1\sim\alpha u,\quad\tan u\sim u$</li><li>$\displaystyle\text{on multiplie et on divise des équivalents,}\ \textbf{jamais on ne les additionne}$</li></ul></div>
+
+<p class="ml">Exemple 6 : un quotient en $0$</p>
+<p><b>Calculer $\lim_{x\to0}\frac{\sin(3x)}{\ln(1 + 2x)}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Forme $\frac00$. On remplace le haut et le bas par leurs équivalents usuels (avec $u = 3x$ puis $u = 2x$, qui tendent bien vers $0$), et on simplifie le quotient.</p>
+<p><b>Étape 2 : Les équivalents.</b> $\sin(3x)\sim3x$ et $\ln(1 + 2x)\sim2x$.</p>
+<p><b>Étape 3 : Le quotient.</b> $\frac{\sin(3x)}{\ln(1 + 2x)}\sim\frac{3x}{2x} = \frac32$.</p>
+<p><b>Étape 4 : Conclusion.</b> La limite vaut $\cG{\frac32}$.</p>
+
+<p class="ml">Exemple 7 : la limite de $\big(1 + \frac1x\big)^x$</p>
+<p><b>Calculer $\lim_{x\to+\infty}\Big(1 + \frac1x\Big)^x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Forme $1^\infty$ : on passe à l'exponentielle, $\big(1 + \frac1x\big)^x = e^{x\ln(1 + \frac1x)}$, et on cherche un équivalent de l'exposant avec $\ln(1 + u)\sim u$, $u = \frac1x\to0$.</p>
+<p><b>Étape 2 : L'exposant.</b> $x\ln\Big(1 + \frac1x\Big)\sim x\times\frac1x = 1$, donc l'exposant tend vers $1$.</p>
+<p><b>Étape 3 : On compose.</b> $\exp$ est continue en $1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}\big(1 + \frac1x\big)^x = \cG e$.</p>
+
+<h2 id="lc-enc">4. Le théorème d'encadrement</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\cV{g(x)}\leq f(x)\leq\cV{h(x)}\ \text{et}\ \lim g = \lim h = \ell\ \Longrightarrow\ \lim f = \ell$</li><li>$\displaystyle|f(x) - \ell|\leq\cV{\varepsilon(x)}\to0\ \Longrightarrow\ \lim f = \ell$</li><li>$\displaystyle f(x)\geq\cV{g(x)}\to+\infty\ \Longrightarrow\ \lim f = +\infty$</li></ul></div>
+
+<p class="ml">Exemple 8 : une fonction qui oscille</p>
+<p><b>Calculer $\lim_{x\to0}x^2\sin\frac1x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\sin\frac1x$ n'a pas de limite en $0$, mais elle est bornée par $1$. Une quantité bornée multipliée par une quantité qui tend vers $0$ tend vers $0$ : on le prouve par un encadrement de la valeur absolue.</p>
+<p><b>Étape 2 : On majore.</b> $\big|\cO{\sin\frac1x}\big|\leq1$, donc $\big|x^2\sin\frac1x\big|\leq\cV{x^2}$.</p>
+<p><b>Étape 3 : La borne tend vers $0$.</b> $x^2\to0$ quand $x\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> Par encadrement, $\lim_{x\to0}x^2\sin\frac1x = \cG0$.</p>
+
+<p class="ml">Exemple 9 : une partie entière</p>
+<p><b>Calculer $\lim_{x\to+\infty}\frac{\lfloor x\rfloor}x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> La partie entière vérifie $x - 1 \lt \lfloor x\rfloor\leq x$. On divise par $x > 0$ (le sens ne change pas) et on applique le théorème d'encadrement.</p>
+<p><b>Étape 2 : On encadre.</b> Pour $x > 0$ : $\cV{\frac{x - 1}x} \lt \frac{\lfloor x\rfloor}x\leq\cV1$, soit $1 - \frac1x \lt \frac{\lfloor x\rfloor}x\leq1$.</p>
+<p><b>Étape 3 : Les bornes.</b> $1 - \frac1x\to1$ et $1\to1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}\frac{\lfloor x\rfloor}x = \cG1$.</p>
+
+<h2 id="lc-seq">5. Montrer qu'une limite n'existe pas</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\lim_{x\to a}f(x) = \ell\ \Longrightarrow\ \text{pour toute suite}\ x_n\to a,\ f(x_n)\to\ell$</li><li>$\displaystyle\text{deux suites}\ x_n\to a,\ y_n\to a\ \text{avec}\ \lim f(x_n)\neq\lim f(y_n)\ \Longrightarrow\ \text{pas de limite}$</li></ul></div>
+
+<p class="ml">Exemple 10 : $\sin\frac1x$ en $0$</p>
+<p><b>Montrer que $x\mapsto\sin\frac1x$ n'a pas de limite en $0$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On choisit deux suites qui tendent vers $0$ et sur lesquelles la fonction prend deux valeurs constantes différentes. Si la limite existait, les deux suites d'images auraient la même limite.</p>
+<p><b>Étape 2 : Première suite.</b> $x_n = \frac1{2n\pi}\to0$ et $\sin\frac1{x_n} = \sin(2n\pi) = 0$.</p>
+<p><b>Étape 3 : Seconde suite.</b> $y_n = \frac1{\frac\pi2 + 2n\pi}\to0$ et $\sin\frac1{y_n} = \sin\big(\frac\pi2 + 2n\pi\big) = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $0\neq1$ : $\cG{\sin\frac1x\ \text{n'a pas de limite en}\ 0}$.</p>
+
+<h2 id="lc-cont">6. Continuité et prolongement</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue en}\ a\iff\lim_{x\to a}f(x) = f(a)$</li><li>$\displaystyle\text{en un point de recollement : limite à gauche} = \text{limite à droite} = f(a)$</li><li>$\displaystyle\text{prolongeable par continuité en}\ a\iff\lim_{x\to a}f(x)\ \text{existe et est finie}$</li></ul></div>
+
+<p class="ml">Exemple 11 : une fonction définie par morceaux</p>
+<p>Soit $a\in\mathbb R$ et $f(x) = \begin{cases}x^2 + a & \text{si}\ x\leq1\\ 3x - 1 & \text{si}\ x > 1\end{cases}$. <b>Pour quelle valeur de $a$ la fonction $f$ est-elle continue sur $\mathbb R$ ?</b></p>
+<p><b>Étape 1 : Rappel.</b> Sur $]-\infty, 1[$ et sur $]1, +\infty[$, $f$ est un polynôme, donc continue. Le seul point à vérifier est le recollement $x = 1$ : il faut que la limite à droite soit égale à $f(1)$.</p>
+<p><b>Étape 2 : À gauche.</b> $f(1) = 1 + a$ et $\lim_{x\to1^-}f(x) = 1 + a$.</p>
+<p><b>Étape 3 : À droite.</b> $\lim_{x\to1^+}(3x - 1) = 2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $1 + a = 2$ : $f$ est continue sur $\mathbb R$ si et seulement si $\cG{a = 1}$.</p>
+
+<p class="ml">Exemple 12 : un prolongement par continuité</p>
+<p>Soit $f(x) = \frac{e^x - 1}x$ sur $\mathbb R^*$. <b>Montrer que $f$ se prolonge par continuité en $0$ et donner la valeur du prolongement.</b></p>
+<p><b>Étape 1 : Rappel.</b> On calcule la limite en $0$ ; si elle est finie, on pose $f(0)$ égal à cette limite.</p>
+<p><b>Étape 2 : La limite.</b> $e^x - 1\sim x$ en $0$, donc $\frac{e^x - 1}x\to1$. (C'est aussi le taux d'accroissement de $\exp$ en $0$, qui tend vers $\exp'(0) = 1$.)</p>
+<p><b>Étape 3 : Conclusion.</b> La limite est finie : on pose $\cG{f(0) = 1}$, et $f$ devient continue sur $\mathbb R$.</p>
+
+<h2 id="lc-tvi">7. Le théorème des valeurs intermédiaires</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ [a, b],\ f(a)f(b)\leq0\ \Longrightarrow\ \exists c\in[a, b],\ f(c) = 0$</li><li>$\displaystyle\text{si en plus}\ f\ \text{est strictement monotone, ce}\ c\ \text{est unique}$</li><li>$\displaystyle\text{pour}\ f(x) = g(x):\ \text{appliquer le TVI à}\ h = f - g$</li></ul></div>
+
+<p class="ml">Exemple 13 : une équation sans formule</p>
+<p><b>Montrer que l'équation $x^3 + x - 1 = 0$ a une unique solution réelle, et qu'elle est dans $]0, 1[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On pose $f(x) = x^3 + x - 1$. Existence : $f$ continue et change de signe entre $0$ et $1$. Unicité : $f$ strictement croissante.</p>
+<p><b>Étape 2 : Les valeurs.</b> $f(0) = -1 \lt 0$ et $f(1) = 1 + 1 - 1 = 1 > 0$.</p>
+<p><b>Étape 3 : La monotonie.</b> $f'(x) = 3x^2 + 1 > 0$, donc $f$ est strictement croissante sur $\mathbb R$.</p>
+<p><b>Étape 4 : Conclusion.</b> Par le TVI, il existe $c\in]0, 1[$ avec $f(c) = 0$, et par stricte croissance $\cG{c\ \text{est l'unique solution réelle}}$.</p>
+
+<p class="ml">Exemple 14 : un point fixe</p>
+<p>Soit $f:[0, 1]\to[0, 1]$ continue. <b>Montrer qu'il existe $c\in[0, 1]$ tel que $f(c) = c$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On cherche un zéro de $h(x) = f(x) - x$, continue sur $[0, 1]$, et on regarde son signe aux deux bornes.</p>
+<p><b>Étape 2 : En $0$.</b> $h(0) = f(0) - 0 = f(0)\geq0$ car $f(0)\in[0, 1]$.</p>
+<p><b>Étape 3 : En $1$.</b> $h(1) = f(1) - 1\leq0$ car $f(1)\leq1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $h(0)h(1)\leq0$ : par le TVI, $\cG{\exists c\in[0, 1],\ f(c) = c}$.</p>
+
+<h2 id="lc-bornes">8. Le théorème des bornes atteintes</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur un segment}\ [a, b]\ \Longrightarrow\ f\ \text{est bornée et atteint son min et son max}$</li><li>$\displaystyle\text{image d'un segment par une fonction continue} = \text{un segment}\ [m, M]$</li></ul></div>
+
+<p class="ml">Exemple 15 : une borne inférieure strictement positive</p>
+<p>Soit $f:[a, b]\to\mathbb R$ continue avec $f(x) > 0$ pour tout $x$. <b>Montrer qu'il existe $m > 0$ tel que $f(x)\geq m$ pour tout $x\in[a, b]$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Sur un segment, une fonction continue atteint son minimum : il existe $x_0$ avec $f(x_0) = \min f$. Ce minimum est une valeur de $f$, donc il est strictement positif.</p>
+<p><b>Étape 2 : Le minimum.</b> Par le théorème des bornes atteintes, il existe $x_0\in[a, b]$ avec $f(x)\geq f(x_0)$ pour tout $x$.</p>
+<p><b>Étape 3 : Son signe.</b> $m = f(x_0) > 0$ par hypothèse.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\forall x\in[a, b],\ f(x)\geq m > 0}$. Sur $]0, 1]$ avec $f(x) = x$, c'est faux : le segment est indispensable.</p>
+
+<h2 id="lc-unif">9. L'uniforme continuité</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\forall\varepsilon > 0,\ \exists\delta > 0,\ \forall x, y,\ |x - y|\leq\delta\Rightarrow|f(x) - f(y)|\leq\varepsilon$</li><li>$\displaystyle k\text{-lipschitzienne}\ \Longrightarrow\ \text{uniformément continue (prendre}\ \delta = \tfrac\varepsilon k)$</li><li>$\displaystyle\textbf{Heine}:\ \text{continue sur un segment}\ \Longrightarrow\ \text{uniformément continue}$</li></ul></div>
+
+<p class="ml">Exemple 16 : une fonction lipschitzienne</p>
+<p><b>Montrer que $\sin$ est uniformément continue sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On montre que $\sin$ est $1$-lipschitzienne, avec l'inégalité des accroissements finis : $|\sin x - \sin y|\leq\sup|\sin'|\times|x - y|$.</p>
+<p><b>Étape 2 : La dérivée.</b> $|\sin'(t)| = |\cos t|\leq1$, donc $|\sin x - \sin y|\leq|x - y|$.</p>
+<p><b>Étape 3 : Le $\delta$.</b> Soit $\varepsilon > 0$ ; avec $\delta = \varepsilon$, $|x - y|\leq\delta\Rightarrow|\sin x - \sin y|\leq\varepsilon$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sin\ \text{est uniformément continue sur}\ \mathbb R}$.</p>
+
+<p class="ml">Exemple 17 : $x\mapsto x^2$ ne l'est pas sur $\mathbb R$</p>
+<p><b>Montrer que $f(x) = x^2$ n'est pas uniformément continue sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On nie la définition : il faut deux suites $x_n, y_n$ avec $x_n - y_n\to0$ mais $f(x_n) - f(y_n)$ qui ne tend pas vers $0$.</p>
+<p><b>Étape 2 : Les suites.</b> $x_n = n + \frac1n$, $y_n = n$ : $x_n - y_n = \frac1n\to0$.</p>
+<p><b>Étape 3 : Les images.</b> $x_n^2 - y_n^2 = n^2 + 2 + \frac1{n^2} - n^2 = 2 + \frac1{n^2}\geq2$.</p>
+<p><b>Étape 4 : Conclusion.</b> L'écart des images reste $\geq2$ : $\cG{x^2\ \text{n'est pas uniformément continue sur}\ \mathbb R}$.</p>
+
+<h2 id="lc-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Additionner des équivalents : $\sin x - x\sim x - x = 0$ est faux.</p>
+<p><b>2.</b> Écrire $1^\infty = 1$ : c'est une forme indéterminée, on passe par $e^{v\ln u}$.</p>
+<p><b>3.</b> Appliquer le TVI sans vérifier la continuité, ou sur autre chose qu'un intervalle.</p>
+<p><b>4.</b> Utiliser les bornes atteintes sur un intervalle ouvert ou non borné.</p>
+<p><b>5.</b> Dans un encadrement, oublier que diviser par un négatif change le sens.</p>
+</div>
+
+<h2 id="lc-arbre">L'arbre des limites et de la continuité</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que demande-t-on ?</span><ul>
+<li><div class="hr"><em>une limite</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>fraction, racines</em><a class="hl ok" href="#lc-fi">factoriser, conjuguée</a></div></li>
+<li><div class="hr"><em>exp, puissance, ln</em><a class="hl ok" href="#lc-cc">croissances comparées</a></div></li>
+<li><div class="hr"><em>$\frac00$ en $0$, $1^\infty$</em><a class="hl ok" href="#lc-equiv">équivalents</a></div></li>
+<li><div class="hr"><em>terme borné ou oscillant</em><a class="hl" href="#lc-enc">encadrement</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>pas de limite</em><a class="hl" href="#lc-seq">deux suites</a></div></li>
+<li><div class="hr"><em>continuité, prolongement</em><a class="hl" href="#lc-cont">limite = valeur</a></div></li>
+<li><div class="hr"><em>une solution existe</em><a class="hl ok" href="#lc-tvi">TVI</a></div></li>
+<li><div class="hr"><em>min, max, borne</em><a class="hl" href="#lc-bornes">bornes atteintes</a></div></li>
+<li><div class="hr"><em>uniforme continuité</em><a class="hl end" href="#lc-unif">lipschitz, Heine</a></div></li>
+</ul></div></div>
+`,
+"Dérivabilité": R`
+<nav class="msum"><a href="#dv-def">Taux d'accroissement</a><a href="#dv-calc">Calculer une dérivée</a><a href="#dv-rec">Recollement</a><a href="#dv-rolle">Rolle</a><a href="#dv-taf">Accroissements finis</a><a href="#dv-ineg">Inégalités</a><a href="#dv-limd">Limite de la dérivée</a><a href="#dv-leib">Dérivée n-ième</a><a href="#dv-conv">Convexité</a><a href="#dv-erreurs">Erreurs</a><a href="#dv-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction étudiée. <span class="kO">orange</span> : sa dérivée. <span class="kV">violet</span> : le point $c$ donné par Rolle ou les accroissements finis. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="dv-def">1. Dérivabilité par le taux d'accroissement</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{dérivable en}\ a\iff\frac{f(x) - f(a)}{x - a}\ \text{a une limite finie quand}\ x\to a$</li><li>$\displaystyle\text{cette limite est}\ f'(a)$</li><li>$\displaystyle\text{à utiliser quand les théorèmes généraux ne s'appliquent pas en}\ a\ (\text{racine en}\ 0,\ |x|,\ \text{recollement})$</li></ul></div>
+
+<p class="ml">Exemple 1 : la racine carrée en $0$</p>
+<p><b>La fonction $f(x) = \sqrt x$ est-elle dérivable en $0$ ?</b></p>
+<p><b>Étape 1 : Rappel.</b> $\sqrt{\ }$ n'est pas dérivable en $0$ par les théorèmes généraux (la formule $\frac1{2\sqrt x}$ n'a pas de sens en $0$). On revient à la définition : on étudie le taux d'accroissement en $0$.</p>
+<p><b>Étape 2 : Le taux.</b> Pour $x > 0$ : $\frac{f(x) - f(0)}{x - 0} = \frac{\sqrt x}x = \frac1{\sqrt x}$.</p>
+<p><b>Étape 3 : La limite.</b> $\frac1{\sqrt x}\to+\infty$ quand $x\to0^+$ : la limite n'est pas finie.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sqrt{\ }\ \text{n'est pas dérivable en}\ 0}$ ; sa courbe a une tangente verticale.</p>
+
+<p class="ml">Exemple 2 : $x|x|$ en $0$</p>
+<p><b>Montrer que $f(x) = x|x|$ est dérivable en $0$ et calculer $f'(0)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $|x|$ n'est pas dérivable en $0$, donc on ne peut pas utiliser la règle du produit : on étudie le taux d'accroissement.</p>
+<p><b>Étape 2 : Le taux.</b> Pour $x\neq0$ : $\frac{f(x) - f(0)}{x - 0} = \frac{x|x|}x = |x|$.</p>
+<p><b>Étape 3 : La limite.</b> $|x|\to0$ quand $x\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est dérivable en}\ 0\ \text{et}\ f'(0) = 0}$.</p>
+
+<h2 id="dv-calc">2. Calculer une dérivée</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle(uv)' = u'v + uv',\qquad\Big(\frac uv\Big)' = \frac{u'v - uv'}{v^2}$</li><li>$\displaystyle(g\circ u)' = u'\times(g'\circ u)$</li><li>$\displaystyle(u^\alpha)' = \alpha u'u^{\alpha-1},\quad(e^u)' = u'e^u,\quad(\ln u)' = \frac{u'}u$</li></ul></div>
+
+<p class="ml">Exemple 3 : une composée</p>
+<p><b>Calculer la dérivée de $f(x) = \ln\big(1 + \sqrt{1 + x^2}\big)$ sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On dérive de l'extérieur vers l'intérieur : $(\ln u)' = \frac{u'}u$ avec $\cB{u = 1 + \sqrt{1 + x^2}}$, puis $(\sqrt v)' = \frac{v'}{2\sqrt v}$ avec $v = 1 + x^2$.</p>
+<p><b>Étape 2 : La dérivée de $u$.</b> $\cO{u'} = \frac{2x}{2\sqrt{1 + x^2}} = \frac x{\sqrt{1 + x^2}}$.</p>
+<p><b>Étape 3 : On assemble.</b> $f'(x) = \frac{u'}u = \frac x{\sqrt{1 + x^2}\big(1 + \sqrt{1 + x^2}\big)}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f'(x) = \frac x{\sqrt{1 + x^2} + 1 + x^2}}$ (on a développé le dénominateur).</p>
+
+<p class="ml">Exemple 4 : une puissance variable</p>
+<p><b>Calculer la dérivée de $f(x) = x^x$ sur $]0, +\infty[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On ne dérive pas $x^x$ comme $x^n$ ni comme $a^x$ : on écrit $x^x = e^{x\ln x}$ et on dérive $e^u$.</p>
+<p><b>Étape 2 : L'exposant.</b> $u = x\ln x$, $u' = \ln x + x\times\frac1x = \ln x + 1$.</p>
+<p><b>Étape 3 : On assemble.</b> $f'(x) = u'e^u = (\ln x + 1)e^{x\ln x}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f'(x) = (1 + \ln x)x^x}$.</p>
+
+<h2 id="dv-rec">3. Dérivabilité en un point de recollement</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{d'abord la continuité au point}$</li><li>$\displaystyle\text{puis le taux d'accroissement à gauche et à droite : même limite finie}$</li><li>$\displaystyle\text{ou le théorème de la limite de la dérivée (section 7)}$</li></ul></div>
+
+<p class="ml">Exemple 5 : deux paramètres</p>
+<p>Soit $f(x) = \begin{cases}x^2 & \text{si}\ x\leq1\\ ax + b & \text{si}\ x > 1\end{cases}$. <b>Déterminer $a$ et $b$ pour que $f$ soit dérivable sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Ailleurs qu'en $1$, $f$ est polynomiale, donc dérivable. En $1$ il faut deux conditions : la continuité (les valeurs se recollent) et l'égalité des dérivées à gauche et à droite (les pentes se recollent).</p>
+<p><b>Étape 2 : Continuité.</b> $f(1) = 1$ et $\lim_{x\to1^+}(ax + b) = a + b$ : il faut $a + b = 1$.</p>
+<p><b>Étape 3 : Les pentes.</b> À gauche, le taux $\frac{x^2 - 1}{x - 1} = x + 1\to2$. À droite (avec $a + b = 1$), $\frac{ax + b - 1}{x - 1} = \frac{ax - a}{x - 1} = a$. Il faut $a = 2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{a = 2,\ b = -1}$ : la droite $y = 2x - 1$ est la tangente à la parabole en $1$.</p>
+
+<h2 id="dv-rolle">4. Le théorème de Rolle</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ [a, b],\ \text{dérivable sur}\ ]a, b[,\ f(a) = f(b)$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f'(\cV c) = 0$</li><li>$\displaystyle\text{usage typique : entre deux racines de}\ f,\ \text{il y a une racine de}\ f'$</li></ul></div>
+
+<p class="ml">Exemple 6 : les racines d'un polynôme et de sa dérivée</p>
+<p>Soit $P$ un polynôme réel de degré $n\geq2$ qui a $n$ racines réelles distinctes. <b>Montrer que $P'$ a $n - 1$ racines réelles distinctes.</b></p>
+<p><b>Étape 1 : Rappel.</b> On range les racines $x_1 \lt x_2 \lt \cdots \lt x_n$. Sur chaque segment $[x_i, x_{i+1}]$, $P$ prend deux fois la valeur $0$ : Rolle donne une racine de $P'$ entre les deux.</p>
+<p><b>Étape 2 : Rolle sur chaque segment.</b> $P$ est continue et dérivable, $P(x_i) = P(x_{i+1}) = 0$, donc il existe $\cV{c_i}\in]x_i, x_{i+1}[$ avec $P'(\cV{c_i}) = 0$, pour $i = 1, \dots, n - 1$.</p>
+<p><b>Étape 3 : Elles sont distinctes.</b> Les intervalles $]x_i, x_{i+1}[$ sont disjoints, donc $c_1 \lt c_2 \lt \cdots \lt c_{n-1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $P'$ est de degré $n - 1$ et a $n - 1$ racines réelles distinctes : $\cG{\text{ce sont toutes ses racines}}$.</p>
+
+<h2 id="dv-taf">5. L'égalité des accroissements finis</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ [a, b],\ \text{dérivable sur}\ ]a, b[$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f(b) - f(a) = f'(\cV c)(b - a)$</li></ul></div>
+
+<p class="ml">Exemple 7 : un encadrement de $\ln$</p>
+<p><b>Montrer que pour tout $x > 0$, $\frac1{x + 1} \lt \ln(x + 1) - \ln x \lt \frac1x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> La différence $\ln(x + 1) - \ln x$ est un accroissement de $\ln$ sur $[x, x + 1]$ (longueur $1$). Les accroissements finis l'écrivent $\ln'(c) = \frac1c$, puis on encadre $c$.</p>
+<p><b>Étape 2 : Les accroissements finis.</b> $\ln$ est continue et dérivable sur $[x, x + 1]$ : il existe $\cV c\in]x, x + 1[$ avec $\ln(x + 1) - \ln x = \frac1{\cV c}\times1$.</p>
+<p><b>Étape 3 : On encadre.</b> $x \lt c \lt x + 1$ et $t\mapsto\frac1t$ décroît, donc $\frac1{x + 1} \lt \frac1c \lt \frac1x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\frac1{x + 1} \lt \ln(x + 1) - \ln x \lt \frac1x}$.</p>
+
+<h2 id="dv-ineg">6. Prouver une inégalité</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{pour}\ f\leq g:\ \text{étudier}\ h = g - f,\ \text{son signe via}\ h'$</li><li>$\displaystyle\textbf{IAF}:\ |f'|\leq M\ \text{sur}\ I\ \Longrightarrow\ |f(x) - f(y)|\leq M|x - y|$</li></ul></div>
+
+<p class="ml">Exemple 8 : $\ln(1 + x)\leq x$</p>
+<p><b>Montrer que pour tout $x > -1$, $\ln(1 + x)\leq x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On étudie $h(x) = x - \ln(1 + x)$ : on calcule $h'$, on en déduit les variations et le minimum de $h$, et on vérifie que ce minimum est $\geq0$.</p>
+<p><b>Étape 2 : La dérivée.</b> $\cO{h'(x)} = 1 - \frac1{1 + x} = \frac{1 + x - 1}{1 + x} = \frac x{1 + x}$, du signe de $x$ (car $1 + x > 0$).</p>
+<p><b>Étape 3 : Les variations.</b> $h$ décroît sur $]-1, 0]$, croît sur $[0, +\infty[$ : son minimum est $h(0) = 0 - \ln1 = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $h\geq0$, donc $\cG{\ln(1 + x)\leq x}$ pour tout $x > -1$.</p>
+
+<p class="ml">Exemple 9 : une inégalité de type lipschitz</p>
+<p><b>Montrer que pour tous réels $x, y$, $|\arctan x - \arctan y|\leq|x - y|$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On majore $|\arctan'|$ sur $\mathbb R$, puis on applique l'inégalité des accroissements finis.</p>
+<p><b>Étape 2 : La dérivée.</b> $\arctan'(t) = \frac1{1 + t^2}$, et $1 + t^2\geq1$, donc $0 \lt \arctan'(t)\leq1$.</p>
+<p><b>Étape 3 : L'IAF.</b> Avec $M = 1$ : $|\arctan x - \arctan y|\leq1\times|x - y|$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\arctan\ \text{est}\ 1\text{-lipschitzienne}}$.</p>
+
+<h2 id="dv-limd">7. Le théorème de la limite de la dérivée</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ I,\ \text{dérivable sur}\ I\setminus\{a\},\ f'(x)\xrightarrow[x\to a]{}\ell\in\mathbb R$</li><li>$\displaystyle\Longrightarrow\ f\ \text{dérivable en}\ a,\ f'(a) = \ell,\ \text{et}\ f'\ \text{continue en}\ a$</li></ul></div>
+
+<p class="ml">Exemple 10 : un prolongement de classe $\mathcal C^1$</p>
+<p>Soit $f(x) = \frac{\sin x}x$ pour $x\neq0$ et $f(0) = 1$. <b>Montrer que $f$ est de classe $\mathcal C^1$ sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Hors de $0$, $f$ est $\mathcal C^1$ (quotient). En $0$ : on vérifie la continuité, puis on calcule la limite de $f'(x)$ quand $x\to0$ ; si elle est finie, le théorème donne $f'(0)$ et la continuité de $f'$.</p>
+<p><b>Étape 2 : Continuité en $0$.</b> $\frac{\sin x}x\to1 = f(0)$.</p>
+<p><b>Étape 3 : La dérivée.</b> Pour $x\neq0$ : $\cO{f'(x)} = \frac{x\cos x - \sin x}{x^2}$. Avec $\cos x = 1 - \frac{x^2}2 + o(x^2)$ et $\sin x = x - \frac{x^3}6 + o(x^3)$ : $x\cos x - \sin x = x - \frac{x^3}2 - x + \frac{x^3}6 + o(x^3) = -\frac{x^3}3 + o(x^3)$, donc $f'(x) = -\frac x3 + o(x)\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $f$ est dérivable en $0$ avec $f'(0) = 0$ et $f'$ est continue en $0$ : $\cG{f\ \text{est de classe}\ \mathcal C^1\ \text{sur}\ \mathbb R}$.</p>
+
+<h2 id="dv-leib">8. Dérivées $n$-ièmes et formule de Leibniz</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle(fg)^{(n)} = \sum_{k=0}^n\binom nkf^{(k)}g^{(n-k)}$</li><li>$\displaystyle\big(e^{ax}\big)^{(n)} = a^ne^{ax},\qquad\Big(\frac1{x}\Big)^{(n)} = \frac{(-1)^nn!}{x^{n+1}}$</li><li>$\displaystyle\text{si un facteur est un polynôme de degré}\ d,\ \text{seuls}\ d + 1\ \text{termes restent}$</li></ul></div>
+
+<p class="ml">Exemple 11 : un polynôme fois une exponentielle</p>
+<p><b>Calculer la dérivée $n$-ième de $f(x) = x^2e^x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Leibniz avec $u = x^2$ (dont les dérivées s'annulent à partir de l'ordre $3$) et $v = e^x$ (dont toutes les dérivées valent $e^x$). Il reste trois termes : $k = 0, 1, 2$.</p>
+<p><b>Étape 2 : Les dérivées de $u$.</b> $u = x^2$, $u' = 2x$, $u'' = 2$, $u^{(k)} = 0$ pour $k\geq3$.</p>
+<p><b>Étape 3 : Leibniz.</b> $f^{(n)} = \binom n0x^2e^x + \binom n1\,2x\,e^x + \binom n2\,2\,e^x = x^2e^x + 2nxe^x + n(n - 1)e^x$ (car $\binom n2\times2 = n(n - 1)$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f^{(n)}(x) = \big(x^2 + 2nx + n(n - 1)\big)e^x}$. Contrôle $n = 1$ : $(x^2 + 2x)e^x$, c'est bien $2xe^x + x^2e^x$.</p>
+
+<h2 id="dv-conv">9. La convexité</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{deux fois dérivable}:\ f\ \text{convexe sur}\ I\iff f''\geq0\ \text{sur}\ I$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe au-dessus de ses tangentes}:\ f(x)\geq f(a) + f'(a)(x - a)$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe sous ses cordes}$</li></ul></div>
+
+<p class="ml">Exemple 12 : une inégalité par la tangente</p>
+<p><b>Montrer que pour tout réel $x$, $e^x\geq1 + x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Une fonction convexe est au-dessus de chacune de ses tangentes. On vérifie que $\exp$ est convexe, puis on écrit sa tangente en $0$.</p>
+<p><b>Étape 2 : La convexité.</b> $\exp'' = \exp > 0$ sur $\mathbb R$ : $\exp$ est convexe.</p>
+<p><b>Étape 3 : La tangente en $0$.</b> $y = e^0 + e^0(x - 0) = 1 + x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geq1 + x\ \text{pour tout}\ x\in\mathbb R}$, avec égalité seulement en $0$.</p>
+
+<p class="ml">Exemple 13 : une inégalité par la corde</p>
+<p><b>Montrer que pour tout $x\in\big[0, \frac\pi2\big]$, $\sin x\geq\frac2\pi x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Une fonction concave (c'est-à-dire $-f$ convexe) est au-dessus de ses cordes. La corde de $\sin$ entre $0$ et $\frac\pi2$ relie $(0, 0)$ à $\big(\frac\pi2, 1\big)$ : c'est la droite $y = \frac2\pi x$.</p>
+<p><b>Étape 2 : La concavité.</b> $\sin'' = -\sin\leq0$ sur $\big[0, \frac\pi2\big]$ : $\sin$ est concave sur cet intervalle.</p>
+<p><b>Étape 3 : La corde.</b> Pente $\frac{1 - 0}{\frac\pi2 - 0} = \frac2\pi$, et elle passe par l'origine : $y = \frac2\pi x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sin x\geq\frac2\pi x\ \text{sur}\ \big[0, \tfrac\pi2\big]}$ (inégalité de Jordan).</p>
+
+<h2 id="dv-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Conclure qu'une fonction n'est pas dérivable en $a$ parce que la formule de $f'$ n'y a pas de sens : il faut le taux d'accroissement.</p>
+<p><b>2.</b> Oublier la continuité au point de recollement avant les pentes.</p>
+<p><b>3.</b> Appliquer Rolle sans $f(a) = f(b)$.</p>
+<p><b>4.</b> Dans les accroissements finis, traiter $c$ comme connu : on sait seulement qu'il est dans $]a, b[$.</p>
+<p><b>5.</b> Leibniz : oublier les coefficients binomiaux.</p>
+</div>
+
+<h2 id="dv-arbre">L'arbre de la dérivabilité</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que demande-t-on ?</span><ul>
+<li><div class="hr"><em>dérivable en un point délicat ?</em><span class="hq">Lequel ?</span><ul>
+<li><div class="hr"><em>racine, valeur absolue</em><a class="hl ok" href="#dv-def">taux d'accroissement</a></div></li>
+<li><div class="hr"><em>fonction par morceaux</em><a class="hl" href="#dv-rec">recollement</a></div></li>
+<li><div class="hr"><em>prolongement $\mathcal C^1$</em><a class="hl" href="#dv-limd">limite de la dérivée</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une dérivée</em><a class="hl ok" href="#dv-calc">règles de calcul</a></div></li>
+<li><div class="hr"><em>un $c$ avec $f'(c) = 0$</em><a class="hl" href="#dv-rolle">Rolle</a></div></li>
+<li><div class="hr"><em>encadrer un accroissement</em><a class="hl" href="#dv-taf">accroissements finis</a></div></li>
+<li><div class="hr"><em>une inégalité</em><a class="hl ok" href="#dv-ineg">étude de $g - f$, IAF</a></div></li>
+<li><div class="hr"><em>une dérivée $n$-ième</em><a class="hl" href="#dv-leib">Leibniz</a></div></li>
+<li><div class="hr"><em>tangente, corde</em><a class="hl end" href="#dv-conv">convexité</a></div></li>
+</ul></div></div>
+`,
+"Fractions rationnelles": R`
+<nav class="msum"><a href="#fr-ent">Partie entière</a><a href="#fr-p1">Pôles simples</a><a href="#fr-pm">Pôles multiples</a><a href="#fr-irr">Facteurs irréductibles</a><a href="#fr-pp">Formule $P'/P$</a><a href="#fr-som">Sommes télescopiques</a><a href="#fr-int">Primitives</a><a href="#fr-erreurs">Erreurs</a><a href="#fr-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : le pôle qu'on traite. <span class="kO">orange</span> : le facteur qu'on multiplie puis qu'on simplifie. <span class="kV">violet</span> : les coefficients inconnues $a$, $b$, $c$. <span class="kG">vert</span> : la décomposition finale.</p>
+
+<h2 id="fr-ent">1. La partie entière</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle F = \frac PQ:\ \text{si}\ \deg P\geq\deg Q,\ \text{division euclidienne}\ P = EQ + R$</li><li>$\displaystyle F = \cG E + \frac RQ\ \text{avec}\ \deg R \lt \deg Q$</li><li>$\displaystyle\text{si}\ \deg P \lt \deg Q,\ \text{la partie entière est nulle}$</li></ul></div>
+
+<p class="ml">Exemple 1 : une division euclidienne</p>
+<p>Soit $F = \frac{X^3 + 2X + 1}{X^2 - 1}$. <b>Déterminer la partie entière de $F$ et écrire $F = E + \frac R{X^2 - 1}$ avec $\deg R \lt 2$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\deg P = 3\geq\deg Q = 2$ : on fait la division euclidienne de $P$ par $Q$. Le quotient est la partie entière, le reste divisé par $Q$ est la partie qu'on décomposera ensuite.</p>
+<p><b>Étape 2 : Premier terme.</b> $X^3 = X\times X^2$ : on retire $X(X^2 - 1) = X^3 - X$, il reste $X^3 + 2X + 1 - (X^3 - X) = 3X + 1$.</p>
+<p><b>Étape 3 : On s'arrête.</b> $\deg(3X + 1) = 1 \lt 2$ : $X^3 + 2X + 1 = X(X^2 - 1) + (3X + 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F = X + \frac{3X + 1}{X^2 - 1}}$, partie entière $X$.</p>
+
+<h2 id="fr-p1">2. Les pôles simples</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle F = \frac P{(X - a_1)\cdots(X - a_n)}\ (\text{racines distinctes}) = \sum\frac{\cV{c_i}}{X - a_i}$</li><li>$\displaystyle\cV{c_i} = \Big[\cO{(X - a_i)}F\Big](a_i)\ \ \text{: multiplier par}\ X - a_i,\ \text{simplifier, évaluer en}\ a_i$</li><li>$\displaystyle\text{ou}\ \cV{c_i} = \frac{P(a_i)}{Q'(a_i)}$</li></ul></div>
+
+<p class="ml">Exemple 2 : trois pôles simples</p>
+<p>Soit $F = \frac{X^2 + 1}{X(X - 1)(X + 2)}$. <b>Décomposer $F$ en éléments simples sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\deg$ du haut $= 2 \lt 3$ : pas de partie entière. Les trois pôles $0$, $1$, $-2$ sont simples : $F = \frac{\cV a}X + \frac{\cV b}{X - 1} + \frac{\cV c}{X + 2}$, et chaque coefficient s'obtient en multipliant par le facteur du pôle puis en évaluant en ce pôle.</p>
+<p><b>Étape 2 : Le coefficient en $\cB0$.</b> $\cO XF = \frac{X^2 + 1}{(X - 1)(X + 2)}$, en $X = 0$ : $\cV a = \frac1{(-1)\times2} = -\frac12$.</p>
+<p><b>Étape 3 : Le coefficient en $\cB1$.</b> $\cO{(X - 1)}F = \frac{X^2 + 1}{X(X + 2)}$, en $X = 1$ : $\cV b = \frac2{1\times3} = \frac23$.</p>
+<p><b>Étape 4 : Le coefficient en $\cB{-2}$.</b> $\cO{(X + 2)}F = \frac{X^2 + 1}{X(X - 1)}$, en $X = -2$ : $\cV c = \frac5{(-2)(-3)} = \frac56$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F = -\frac1{2X} + \frac2{3(X - 1)} + \frac5{6(X + 2)}}$. Contrôle : $XF\to1$ en $+\infty$, et $-\frac12 + \frac23 + \frac56 = \frac{-3 + 4 + 5}6 = 1$.</p>
+
+<h2 id="fr-pm">3. Les pôles multiples</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{un pôle}\ a\ \text{d'ordre}\ m\ \text{donne}\ \frac{\cV{c_1}}{X - a} + \frac{\cV{c_2}}{(X - a)^2} + \cdots + \frac{\cV{c_m}}{(X - a)^m}$</li><li>$\displaystyle\cV{c_m} = \big[(X - a)^mF\big](a)\ \text{: le coefficient du plus haut ordre comme pour un pôle simple}$</li><li>$\displaystyle\text{les autres : limite de}\ xF(x)\ \text{en}\ +\infty,\ \text{ou évaluer en un point simple}$</li></ul></div>
+
+<p class="ml">Exemple 3 : un pôle double</p>
+<p>Soit $F = \frac{X + 3}{(X - 1)^2(X + 1)}$. <b>Décomposer $F$ en éléments simples sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Pôle double en $1$, pôle simple en $-1$ : $F = \frac{\cV a}{X - 1} + \frac{\cV b}{(X - 1)^2} + \frac{\cV c}{X + 1}$. On trouve $b$ et $c$ en multipliant et en évaluant ; le dernier coefficient $a$ se trouve avec la limite de $xF(x)$ en $+\infty$.</p>
+<p><b>Étape 2 : Le coefficient $\cV b$.</b> $\cO{(X - 1)^2}F = \frac{X + 3}{X + 1}$, en $1$ : $b = \frac42 = 2$.</p>
+<p><b>Étape 3 : Le coefficient $\cV c$.</b> $\cO{(X + 1)}F = \frac{X + 3}{(X - 1)^2}$, en $-1$ : $c = \frac2{4} = \frac12$.</p>
+<p><b>Étape 4 : Le coefficient $\cV a$.</b> $xF(x) = \frac{x(x + 3)}{(x - 1)^2(x + 1)}\to0$ en $+\infty$ (degré $2$ contre $3$). Dans la décomposition, $xF(x)\to a + 0 + c$. Donc $a + c = 0$ et $a = -\frac12$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F = -\frac1{2(X - 1)} + \frac2{(X - 1)^2} + \frac1{2(X + 1)}}$. Contrôle en $X = 0$ : $F(0) = \frac3{1\times1} = 3$ et $\frac12 + 2 + \frac12 = 3$.</p>
+
+<h2 id="fr-irr">4. Les facteurs irréductibles de degré 2</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{sur}\ \mathbb R,\ X^2 + pX + q\ (\Delta \lt 0)\ \text{donne}\ \frac{\cV aX + \cV b}{X^2 + pX + q}$</li><li>$\displaystyle\text{méthode : évaluer en une racine complexe, puis identifier parties réelle et imaginaire}$</li><li>$\displaystyle\text{ou : décomposer sur}\ \mathbb C\ \text{et regrouper les pôles conjugués}$</li></ul></div>
+
+<p class="ml">Exemple 4 : un facteur $X^2 + 1$</p>
+<p>Soit $F = \frac{1}{(X - 1)(X^2 + 1)}$. <b>Décomposer $F$ en éléments simples sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $X^2 + 1$ n'a pas de racine réelle : $F = \frac{\cV a}{X - 1} + \frac{\cV bX + \cV c}{X^2 + 1}$. On trouve $a$ comme pour un pôle simple, puis $b$ et $c$ en multipliant par $X^2 + 1$ et en évaluant en $i$.</p>
+<p><b>Étape 2 : Le coefficient $\cV a$.</b> $\cO{(X - 1)}F = \frac1{X^2 + 1}$, en $1$ : $a = \frac12$.</p>
+<p><b>Étape 3 : En $i$.</b> $\cO{(X^2 + 1)}F = \frac1{X - 1}$, en $X = i$ : $bi + c = \frac1{i - 1} = \frac{-1 - i}{(i - 1)(-i - 1)} = \frac{-1 - i}{2}$ (car $(i - 1)(-i - 1) = -i^2 - i + i + 1 = 2$).</p>
+<p><b>Étape 4 : On identifie.</b> Partie réelle : $c = -\frac12$. Partie imaginaire : $b = -\frac12$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F = \frac1{2(X - 1)} - \frac{X + 1}{2(X^2 + 1)}}$. Contrôle en $0$ : $F(0) = -1$ et $-\frac12 - \frac12 = -1$.</p>
+
+<h2 id="fr-pp">5. La formule $\frac{P'}P$</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P = \lambda\prod_{k=1}^n(X - x_k)\ \Longrightarrow\ \frac{P'}P = \sum_{k=1}^n\frac1{X - x_k}$</li><li>$\displaystyle\text{utile pour des sommes portant sur les racines d'un polynôme}$</li></ul></div>
+
+<p class="ml">Exemple 5 : une somme sur les racines de l'unité</p>
+<p>Soit $n\geq2$ et $\omega_0, \dots, \omega_{n-1}$ les racines $n$-ièmes de l'unité. <b>Calculer $S = \sum_{k=0}^{n-1}\frac1{2 - \omega_k}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Les $\omega_k$ sont les racines de $P = X^n - 1$, donc $\frac{P'}P = \sum_k\frac1{X - \omega_k}$. On évalue en $X = 2$.</p>
+<p><b>Étape 2 : La formule.</b> $P' = nX^{n-1}$, donc $\sum_k\frac1{X - \omega_k} = \frac{nX^{n-1}}{X^n - 1}$.</p>
+<p><b>Étape 3 : On évalue en $2$.</b> $S = \frac{n2^{n-1}}{2^n - 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{S = \frac{n\,2^{n-1}}{2^n - 1}}$. Contrôle $n = 2$ : racines $\pm1$, $\frac11 + \frac13 = \frac43 = \frac{2\times2}{3}$.</p>
+
+<h2 id="fr-som">6. Les sommes télescopiques</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{décomposer le terme général, puis écrire la somme : les termes s'annulent deux à deux}$</li><li>$\displaystyle\sum_{k=1}^n(a_k - a_{k+1}) = a_1 - a_{n+1}$</li></ul></div>
+
+<p class="ml">Exemple 6 : une somme de $\frac1{k(k + 1)}$</p>
+<p><b>Calculer $S_n = \sum_{k=1}^n\frac1{k(k + 1)}$ puis $\lim_{n\to+\infty}S_n$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On décompose $\frac1{X(X + 1)}$ en éléments simples ; le terme général devient une différence $a_k - a_{k+1}$, et la somme se télescope.</p>
+<p><b>Étape 2 : La décomposition.</b> Pôles simples $0$ et $-1$ : coefficient en $0$ : $\frac1{0 + 1} = 1$ ; en $-1$ : $\frac1{-1} = -1$. Donc $\frac1{k(k + 1)} = \frac1k - \frac1{k + 1}$.</p>
+<p><b>Étape 3 : Le télescopage.</b> $S_n = \Big(1 - \frac12\Big) + \Big(\frac12 - \frac13\Big) + \cdots + \Big(\frac1n - \frac1{n + 1}\Big) = 1 - \frac1{n + 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{S_n = \frac n{n + 1}\to1}$.</p>
+
+<h2 id="fr-int">7. Primitives des fractions rationnelles</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\frac1{x - a}\to\ln|x - a|,\qquad\frac1{(x - a)^m}\to\frac{-1}{(m - 1)(x - a)^{m-1}}\ (m\geq2)$</li><li>$\displaystyle\frac{ax + b}{x^2 + px + q}:\ \text{faire apparaître}\ \frac{2x + p}{x^2 + px + q}\ (\ln)\ \text{puis un}\ \arctan$</li></ul></div>
+
+<p class="ml">Exemple 7 : une intégrale avec un facteur irréductible</p>
+<p><b>Calculer $I = \int_0^1\frac{x + 3}{x^2 + 1}\,dx$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On coupe en deux : la partie $\frac x{x^2 + 1} = \frac12\times\frac{2x}{x^2 + 1}$ de la forme $\frac{u'}u$, et la partie $\frac3{x^2 + 1}$ qui donne un $\arctan$.</p>
+<p><b>Étape 2 : On coupe.</b> $\frac{x + 3}{x^2 + 1} = \frac12\times\frac{2x}{x^2 + 1} + \frac3{x^2 + 1}$.</p>
+<p><b>Étape 3 : Les primitives.</b> $\frac12\ln(x^2 + 1) + 3\arctan x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $I = \frac12\ln2 + 3\times\frac\pi4 - 0 = \cG{\frac{\ln2}2 + \frac{3\pi}4}$.</p>
+
+<h2 id="fr-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier la partie entière quand $\deg P\geq\deg Q$.</p>
+<p><b>2.</b> Pour un pôle double, oublier le terme $\frac a{X - a}$ et ne garder que $\frac b{(X - a)^2}$.</p>
+<p><b>3.</b> Mettre une constante seule au-dessus de $X^2 + 1$ sur $\mathbb R$ : il faut $aX + b$.</p>
+<p><b>4.</b> Ne pas contrôler : une évaluation en un point simple ($X = 0$) attrape la plupart des erreurs.</p>
+</div>
+
+<h2 id="fr-arbre">L'arbre de la décomposition</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">$\deg P\geq\deg Q$ ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#fr-ent">division euclidienne d'abord</a></div></li>
+<li><div class="hr"><em>non</em><span class="hq">Quels pôles ?</span><ul>
+<li><div class="hr"><em>simples</em><a class="hl ok" href="#fr-p1">multiplier, évaluer</a></div></li>
+<li><div class="hr"><em>multiples</em><a class="hl ok" href="#fr-pm">plus haut ordre, puis limite</a></div></li>
+<li><div class="hr"><em>$X^2 + pX + q$, $\Delta \lt 0$</em><a class="hl" href="#fr-irr">évaluer en une racine complexe</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>somme sur les racines</em><a class="hl" href="#fr-pp">$P'/P$</a></div></li>
+<li><div class="hr"><em>somme de fractions</em><a class="hl" href="#fr-som">télescopage</a></div></li>
+<li><div class="hr"><em>une intégrale</em><a class="hl end" href="#fr-int">$\ln$ et $\arctan$</a></div></li>
+</ul></div></div>
+`,
+"Fonctions de deux variables": R`
+<nav class="msum"><a href="#dx-cont">Continuité</a><a href="#dx-dp">Dérivées partielles</a><a href="#dx-c1">Classe C¹</a><a href="#dx-ch">Règle de la chaîne</a><a href="#dx-grad">Gradient</a><a href="#dx-crit">Points critiques</a><a href="#dx-ext">Extremums</a><a href="#dx-edp">EDP</a><a href="#dx-erreurs">Erreurs</a><a href="#dx-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la variable qu'on fait bouger, l'autre reste fixe. <span class="kO">orange</span> : les dérivées partielles. <span class="kV">violet</span> : les points critiques. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="dx-cont">1. Continuité en $(0, 0)$</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{pour montrer la continuité}:\ |f(x, y) - f(0, 0)|\leq\varepsilon(\|(x, y)\|)\to0$</li><li>$\displaystyle\text{outils}:\ |x|\leq\sqrt{x^2 + y^2},\ \ |xy|\leq\frac{x^2 + y^2}2,\ \ \text{polaires}\ x = r\cos\theta,\ y = r\sin\theta$</li><li>$\displaystyle\textbf{pour montrer la discontinuité}:\ \text{une droite}\ y = mx\ \text{sur laquelle la limite dépend de}\ m$</li></ul></div>
+
+<p class="ml">Exemple 1 : une fonction continue</p>
+<p>Soit $f(x, y) = \frac{x^2y}{x^2 + y^2}$ si $(x, y)\neq(0, 0)$ et $f(0, 0) = 0$. <b>Montrer que $f$ est continue en $(0, 0)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On majore $|f(x, y) - 0|$ par une quantité qui ne dépend que de la distance $r = \sqrt{x^2 + y^2}$ à l'origine et qui tend vers $0$. Ici $x^2\leq x^2 + y^2$ permet de simplifier la fraction.</p>
+<p><b>Étape 2 : On majore la fraction.</b> $\frac{x^2}{x^2 + y^2}\leq1$, donc $|f(x, y)| = \frac{x^2}{x^2 + y^2}|y|\leq|y|$.</p>
+<p><b>Étape 3 : La borne tend vers $0$.</b> $|y|\leq\sqrt{x^2 + y^2}\to0$ quand $(x, y)\to(0, 0)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est continue en}\ (0, 0)}$.</p>
+
+<p class="ml">Exemple 2 : une fonction discontinue</p>
+<p>Soit $g(x, y) = \frac{xy}{x^2 + y^2}$ si $(x, y)\neq(0, 0)$ et $g(0, 0) = 0$. <b>Montrer que $g$ n'est pas continue en $(0, 0)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On approche l'origine le long de la droite $y = mx$ : si la limite obtenue dépend de $m$, il n'y a pas de limite en $(0, 0)$.</p>
+<p><b>Étape 2 : Sur la droite $y = mx$.</b> Pour $x\neq0$ : $g(x, mx) = \frac{mx^2}{x^2 + m^2x^2} = \frac m{1 + m^2}$.</p>
+<p><b>Étape 3 : Deux droites.</b> Pour $m = 0$ la valeur est $0$, pour $m = 1$ elle vaut $\frac12$.</p>
+<p><b>Étape 4 : Conclusion.</b> Deux limites différentes : $\cG{g\ \text{n'est pas continue en}\ (0, 0)}$.</p>
+
+<h2 id="dx-dp">2. Calculer des dérivées partielles</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\frac{\partial f}{\partial x}:\ \text{on dérive en}\ \cB x,\ y\ \text{est une constante}$</li><li>$\displaystyle\text{en un point délicat}:\ \frac{\partial f}{\partial x}(0, 0) = \lim_{t\to0}\frac{f(t, 0) - f(0, 0)}t$</li></ul></div>
+
+<p class="ml">Exemple 3 : un calcul direct</p>
+<p>Soit $f(x, y) = x^2y^3 + e^{xy}$. <b>Calculer $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Pour $\frac{\partial f}{\partial x}$, $y$ est une constante : $x^2y^3$ se dérive comme $3x^2$ (avec $y^3$ en facteur), et $e^{xy}$ comme $e^{ax}$ avec $a = y$.</p>
+<p><b>Étape 2 : En $x$.</b> $\cO{\frac{\partial f}{\partial x}} = 2xy^3 + ye^{xy}$.</p>
+<p><b>Étape 3 : En $y$.</b> $\cO{\frac{\partial f}{\partial y}} = 3x^2y^2 + xe^{xy}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\partial_xf = 2xy^3 + ye^{xy},\quad\partial_yf = 3x^2y^2 + xe^{xy}}$.</p>
+
+<p class="ml">Exemple 4 : en l'origine</p>
+<p>Avec $g$ de l'exemple 2. <b>Montrer que $g$ admet des dérivées partielles en $(0, 0)$ et les calculer.</b></p>
+<p><b>Étape 1 : Rappel.</b> En $(0, 0)$, la formule n'est pas définie : on revient au taux d'accroissement le long de chaque axe.</p>
+<p><b>Étape 2 : Selon $x$.</b> $g(t, 0) = \frac{0}{t^2} = 0$, donc $\frac{g(t, 0) - g(0, 0)}t = 0\to0$ : $\partial_xg(0, 0) = 0$.</p>
+<p><b>Étape 3 : Selon $y$.</b> De même $g(0, t) = 0$, donc $\partial_yg(0, 0) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\partial_xg(0, 0) = \partial_yg(0, 0) = 0}$, alors que $g$ n'est pas continue en $(0, 0)$ : avoir des dérivées partielles ne suffit pas pour la continuité.</p>
+
+<h2 id="dx-c1">3. Montrer qu'une fonction est de classe $\mathcal C^1$</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\mathcal C^1\iff\partial_xf\ \text{et}\ \partial_yf\ \text{existent et sont continues}$</li><li>$\displaystyle\text{hors de l'origine : théorèmes généraux ; en l'origine : taux, puis continuité des dérivées}$</li></ul></div>
+
+<p class="ml">Exemple 5 : un prolongement $\mathcal C^1$</p>
+<p>Soit $f(x, y) = \frac{x^3}{x^2 + y^2}$ si $(x, y)\neq(0, 0)$ et $f(0, 0) = 0$. <b>Calculer $\partial_xf$ partout, puis dire si $\partial_xf$ est continue en $(0, 0)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Hors de l'origine : règle du quotient. En l'origine : taux d'accroissement. Puis on teste la continuité de $\partial_xf$ en $(0, 0)$ le long d'une droite.</p>
+<p><b>Étape 2 : Hors de l'origine.</b> $\partial_xf = \frac{3x^2(x^2 + y^2) - x^3\times2x}{(x^2 + y^2)^2} = \frac{x^4 + 3x^2y^2}{(x^2 + y^2)^2}$.</p>
+<p><b>Étape 3 : En l'origine.</b> $\frac{f(t, 0) - 0}t = \frac{t^3/t^2}t = 1$, donc $\partial_xf(0, 0) = 1$.</p>
+<p><b>Étape 4 : Le long de $x = 0$.</b> $\partial_xf(0, y) = \frac{0}{y^4} = 0\not\to1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\partial_xf\ \text{n'est pas continue en}\ (0, 0)}$ : $f$ n'est pas de classe $\mathcal C^1$ sur $\mathbb R^2$.</p>
+
+<h2 id="dx-ch">4. La règle de la chaîne</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle g(t) = f\big(x(t), y(t)\big):\quad g'(t) = x'(t)\,\partial_xf + y'(t)\,\partial_yf$</li><li>$\displaystyle g(u, v) = f\big(x(u, v), y(u, v)\big):\quad\partial_ug = \partial_ux\,\partial_xf + \partial_uy\,\partial_yf$</li></ul></div>
+
+<p class="ml">Exemple 6 : en coordonnées polaires</p>
+<p>Soit $f$ de classe $\mathcal C^1$ sur $\mathbb R^2$ et $g(r, \theta) = f(r\cos\theta, r\sin\theta)$. <b>Exprimer $\partial_rg$ et $\partial_\theta g$ en fonction de $\partial_xf$ et $\partial_yf$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $x = r\cos\theta$ et $y = r\sin\theta$ dépendent de $r$ et $\theta$. On dérive chacune, puis on applique la règle de la chaîne.</p>
+<p><b>Étape 2 : Les dérivées de $x$ et $y$.</b> $\partial_rx = \cos\theta$, $\partial_ry = \sin\theta$, $\partial_\theta x = -r\sin\theta$, $\partial_\theta y = r\cos\theta$.</p>
+<p><b>Étape 3 : La chaîne.</b> $\partial_rg = \cos\theta\,\partial_xf + \sin\theta\,\partial_yf$ et $\partial_\theta g = -r\sin\theta\,\partial_xf + r\cos\theta\,\partial_yf$, les dérivées de $f$ étant prises en $(r\cos\theta, r\sin\theta)$.</p>
+<p><b>Étape 4 : Conclusion.</b> En matrice : $\begin{pmatrix}\partial_rg\\ \partial_\theta g\end{pmatrix} = \cG{\begin{pmatrix}\cos\theta & \sin\theta\\ -r\sin\theta & r\cos\theta\end{pmatrix}\begin{pmatrix}\partial_xf\\ \partial_yf\end{pmatrix}}$.</p>
+
+<h2 id="dx-grad">5. Gradient et dérivée directionnelle</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\nabla f(a) = \begin{pmatrix}\partial_xf(a)\\ \partial_yf(a)\end{pmatrix}$</li><li>$\displaystyle\text{dérivée selon}\ h:\ D_hf(a) = \langle\nabla f(a), h\rangle$</li><li>$\displaystyle f(a + h) = f(a) + \langle\nabla f(a), h\rangle + o(\|h\|)$</li></ul></div>
+
+<p class="ml">Exemple 7 : une direction</p>
+<p>Soit $f(x, y) = x^2 + 3xy$ et $a = (1, 2)$. <b>Calculer $\nabla f(a)$ puis la dérivée de $f$ en $a$ selon $h = (1, -1)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On calcule les deux dérivées partielles en $a$, puis le produit scalaire avec $h$.</p>
+<p><b>Étape 2 : Les dérivées.</b> $\partial_xf = 2x + 3y = 2 + 6 = 8$ et $\partial_yf = 3x = 3$ en $(1, 2)$, donc $\nabla f(a) = \begin{pmatrix}8\\ 3\end{pmatrix}$.</p>
+<p><b>Étape 3 : Le produit scalaire.</b> $\langle\nabla f(a), h\rangle = 8\times1 + 3\times(-1) = 5$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{D_hf(a) = 5}$. Contrôle : $f(1 + t, 2 - t) = (1 + t)^2 + 3(1 + t)(2 - t) = 7 + 5t + \dots$, de dérivée $5$ en $0$.</p>
+
+<h2 id="dx-crit">6. Les points critiques</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{points critiques}:\ \partial_xf = 0\ \text{et}\ \partial_yf = 0$</li><li>$\displaystyle\text{un extremum local à l'intérieur de l'ouvert est un point critique}$</li></ul></div>
+
+<p class="ml">Exemple 8 : un système</p>
+<p>Soit $f(x, y) = x^3 + y^3 - 3xy$. <b>Déterminer les points critiques de $f$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On résout le système $\partial_xf = 0$, $\partial_yf = 0$, en exprimant une variable à l'aide de l'autre.</p>
+<p><b>Étape 2 : Le système.</b> $\partial_xf = 3x^2 - 3y = 0$ et $\partial_yf = 3y^2 - 3x = 0$, soit $y = x^2$ et $x = y^2$.</p>
+<p><b>Étape 3 : On substitue.</b> $x = (x^2)^2 = x^4$, donc $x(x^3 - 1) = 0$ : $x = 0$ ou $x = 1$, et $y = x^2$ donne $y = 0$ ou $y = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{deux points critiques :}\ \cV{(0, 0)}\ \text{et}\ \cV{(1, 1)}}$.</p>
+
+<h2 id="dx-ext">7. Nature d'un point critique</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{Spé, hessienne}:\ H = \begin{pmatrix}r & s\\ s & t\end{pmatrix},\ r = \partial^2_{xx}f,\ s = \partial^2_{xy}f,\ t = \partial^2_{yy}f$</li><li>$\displaystyle rt - s^2 > 0,\ r > 0:\ \text{minimum local};\quad rt - s^2 > 0,\ r \lt 0:\ \text{maximum local}$</li><li>$\displaystyle rt - s^2 \lt 0:\ \text{point col};\quad rt - s^2 = 0:\ \text{on ne peut pas conclure}$</li><li>$\displaystyle\textbf{Sup}:\ \text{étudier le signe de}\ f(a + h) - f(a)\ \text{directement}$</li></ul></div>
+
+<p class="ml">Exemple 9 : la suite de l'exemple 8</p>
+<p>Avec $f(x, y) = x^3 + y^3 - 3xy$. <b>Déterminer la nature des points critiques $(0, 0)$ et $(1, 1)$.</b> (Hessienne : programme de Spé.)</p>
+<p><b>Étape 1 : Rappel.</b> On calcule les dérivées secondes, la matrice hessienne en chaque point, puis le signe de $rt - s^2$ et de $r$.</p>
+<p><b>Étape 2 : Les dérivées secondes.</b> $r = 6x$, $s = -3$, $t = 6y$.</p>
+<p><b>Étape 3 : En $(1, 1)$.</b> $H = \begin{pmatrix}6 & -3\\ -3 & 6\end{pmatrix}$, $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : minimum local, $f(1, 1) = -1$.</p>
+<p><b>Étape 4 : En $(0, 0)$.</b> $H = \begin{pmatrix}0 & -3\\ -3 & 0\end{pmatrix}$, $rt - s^2 = 0 - 9 \lt 0$ : point col. Vérification : $f(x, x) = 2x^3 - 3x^2 \lt 0$ près de $0$, mais $f(x, 0) = x^3 > 0$ pour $x > 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(1, 1)\ \text{minimum local},\ (0, 0)\ \text{point col}}$. Pas de minimum global : $f(x, 0) = x^3\to-\infty$.</p>
+
+<h2 id="dx-edp">8. Résoudre une équation aux dérivées partielles</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\partial_xf = 0\ \text{sur}\ \mathbb R^2\iff f(x, y) = \varphi(y)$</li><li>$\displaystyle\text{changement de variables}\ (u, v)\ \text{qui transforme l'EDP en}\ \partial_ug = 0$</li></ul></div>
+
+<p class="ml">Exemple 10 : une EDP d'ordre 1</p>
+<p><b>Déterminer les fonctions $f$ de classe $\mathcal C^1$ sur $\mathbb R^2$ telles que $\partial_xf - \partial_yf = 0$,</b> en posant $u = x + y$, $v = x - y$ et $f(x, y) = g(u, v)$.</p>
+<p><b>Étape 1 : Rappel.</b> On exprime $\partial_xf$ et $\partial_yf$ avec $\partial_ug$ et $\partial_vg$ (règle de la chaîne), on remplace dans l'équation, et on obtient une équation simple en $g$.</p>
+<p><b>Étape 2 : La chaîne.</b> $\partial_xu = 1$, $\partial_xv = 1$ : $\partial_xf = \partial_ug + \partial_vg$. $\partial_yu = 1$, $\partial_yv = -1$ : $\partial_yf = \partial_ug - \partial_vg$.</p>
+<p><b>Étape 3 : On remplace.</b> $\partial_xf - \partial_yf = 2\partial_vg = 0$, donc $\partial_vg = 0$ et $g(u, v) = \varphi(u)$ avec $\varphi$ de classe $\mathcal C^1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f(x, y) = \varphi(x + y),\ \varphi\in\mathcal C^1(\mathbb R)}$. Contrôle : $\partial_xf = \varphi'(x + y) = \partial_yf$.</p>
+
+<h2 id="dx-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Conclure à la continuité en testant seulement les droites $y = mx$ : il faut une majoration qui marche dans toutes les directions.</p>
+<p><b>2.</b> Croire que l'existence des dérivées partielles implique la continuité.</p>
+<p><b>3.</b> Oublier qu'un extremum peut être au bord du domaine, où il n'y a pas de point critique.</p>
+<p><b>4.</b> Conclure quand $rt - s^2 = 0$ : la hessienne ne dit rien.</p>
+</div>
+
+<h2 id="dx-arbre">L'arbre des fonctions de deux variables</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que demande-t-on ?</span><ul>
+<li><div class="hr"><em>continuité en $(0, 0)$</em><span class="hq">Vraie ou fausse ?</span><ul>
+<li><div class="hr"><em>on pense oui</em><a class="hl ok" href="#dx-cont">majorer par $r$</a></div></li>
+<li><div class="hr"><em>on pense non</em><a class="hl" href="#dx-cont">droites $y = mx$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des dérivées partielles</em><a class="hl ok" href="#dx-dp">une variable fixe</a></div></li>
+<li><div class="hr"><em>classe $\mathcal C^1$</em><a class="hl" href="#dx-c1">dérivées continues</a></div></li>
+<li><div class="hr"><em>une composée</em><a class="hl" href="#dx-ch">règle de la chaîne</a></div></li>
+<li><div class="hr"><em>extremums</em><a class="hl ok" href="#dx-crit">points critiques, puis nature</a></div></li>
+<li><div class="hr"><em>une EDP</em><a class="hl end" href="#dx-edp">changement de variables</a></div></li>
+</ul></div></div>
+`,
+"Compléments d'algèbre": R`
+<nav class="msum"><a href="#ca-sg">Sous-groupes</a><a href="#ca-ord">Ordre d'un élément</a><a href="#ca-zn">Inversibles de ℤ/nℤ</a><a href="#ca-crt">Restes chinois</a><a href="#ca-ann">Anneaux, idéaux</a><a href="#ca-pe">Polynômes d'endomorphismes</a><a href="#ca-erreurs">Erreurs</a><a href="#ca-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : l'élément ou la classe étudiée. <span class="kO">orange</span> : la relation qu'on utilise (Bézout, Lagrange, polynôme annulateur). <span class="kV">violet</span> : les coefficients trouvés. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="ca-sg">1. Montrer qu'une partie est un sous-groupe</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle H\subset G\ \text{est un sous-groupe}\iff H\neq\varnothing\ \text{et}\ \forall x, y\in H,\ xy^{-1}\in H$</li><li>$\displaystyle\text{ou : noyau ou image d'un morphisme de groupes}$</li><li>$\displaystyle\text{les sous-groupes de}\ (\mathbb Z, +)\ \text{sont les}\ n\mathbb Z$</li></ul></div>
+
+<p class="ml">Exemple 1 : les racines de l'unité</p>
+<p>Soit $n\geq1$ et $\mathbb U_n = \{z\in\mathbb C,\ z^n = 1\}$. <b>Montrer que $\mathbb U_n$ est un sous-groupe de $(\mathbb C^*, \times)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On peut vérifier la caractérisation, mais le plus court est de reconnaître un noyau : $\mathbb U_n$ est le noyau du morphisme $\varphi:z\mapsto z^n$ de $(\mathbb C^*, \times)$ dans lui-même.</p>
+<p><b>Étape 2 : C'est un morphisme.</b> $\varphi(zw) = (zw)^n = z^nw^n = \varphi(z)\varphi(w)$.</p>
+<p><b>Étape 3 : Le noyau.</b> $\ker\varphi = \{z,\ z^n = 1\} = \mathbb U_n$.</p>
+<p><b>Étape 4 : Conclusion.</b> Un noyau de morphisme est un sous-groupe : $\cG{\mathbb U_n\ \text{est un sous-groupe de}\ \mathbb C^*}$.</p>
+
+<h2 id="ca-ord">2. L'ordre d'un élément</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{ordre de}\ x = \text{plus petit}\ k\geq1\ \text{tel que}\ x^k = e$</li><li>$\displaystyle x^m = e\iff\text{ordre}(x)\ \text{divise}\ m$</li><li>$\displaystyle\textbf{Lagrange}:\ \text{dans un groupe fini, l'ordre de}\ x\ \text{divise}\ |G|$</li><li>$\displaystyle\text{dans}\ \mathbb Z/n\mathbb Z:\ \text{ordre de}\ \bar k = \frac n{k\wedge n}$</li></ul></div>
+
+<p class="ml">Exemple 2 : un ordre dans $\mathbb Z/12\mathbb Z$</p>
+<p><b>Déterminer l'ordre de $\bar8$ dans le groupe $(\mathbb Z/12\mathbb Z, +)$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Dans un groupe additif, $x^k$ s'écrit $k\cdot x$. On cherche le plus petit $k\geq1$ avec $8k\equiv0\ [12]$ ; la formule donne $\frac{12}{8\wedge12}$.</p>
+<p><b>Étape 2 : Le pgcd.</b> $8\wedge12 = 4$.</p>
+<p><b>Étape 3 : La formule.</b> $\frac{12}4 = 3$. Contrôle : $1\cdot\bar8 = \bar8$, $2\cdot\bar8 = \overline{16} = \bar4$, $3\cdot\bar8 = \overline{24} = \bar0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\bar8\ \text{est d'ordre}\ 3}$.</p>
+
+<p class="ml">Exemple 3 : le petit théorème de Fermat par Lagrange</p>
+<p>Soit $p$ premier et $a$ un entier non divisible par $p$. <b>Montrer que $a^{p-1}\equiv1\ [p]$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On travaille dans le groupe $\big((\mathbb Z/p\mathbb Z)^*, \times\big)$, de cardinal $p - 1$. Par Lagrange, l'ordre de $\bar a$ divise $p - 1$, donc $\bar a^{p-1} = \bar1$.</p>
+<p><b>Étape 2 : Le groupe.</b> $p$ premier, donc $\mathbb Z/p\mathbb Z$ est un corps et $(\mathbb Z/p\mathbb Z)^*$ a $p - 1$ éléments. $p\nmid a$, donc $\bar a\neq\bar0$ est dedans.</p>
+<p><b>Étape 3 : Lagrange.</b> Soit $d$ l'ordre de $\bar a$ : $d\mid p - 1$, donc $\bar a^{p-1} = \big(\bar a^d\big)^{(p-1)/d} = \bar1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{a^{p-1}\equiv1\ [p]}$.</p>
+
+<h2 id="ca-zn">3. Les inversibles de $\mathbb Z/n\mathbb Z$</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\bar k\ \text{inversible dans}\ \mathbb Z/n\mathbb Z\iff k\wedge n = 1$</li><li>$\displaystyle\text{l'inverse se lit dans Bézout}:\ \cV uk + \cV vn = 1\ \Longrightarrow\ \bar k^{-1} = \bar{\cV u}$</li><li>$\displaystyle|(\mathbb Z/n\mathbb Z)^\times| = \varphi(n)$</li></ul></div>
+
+<p class="ml">Exemple 4 : un inverse modulo $26$</p>
+<p><b>Montrer que $\bar7$ est inversible dans $\mathbb Z/26\mathbb Z$ et calculer son inverse.</b></p>
+<p><b>Étape 1 : Rappel.</b> On fait l'algorithme d'Euclide entre $26$ et $7$ ; s'il finit sur $1$, on remonte les divisions pour écrire Bézout $7u + 26v = 1$, et $\bar u$ est l'inverse.</p>
+<p><b>Étape 2 : Euclide.</b> $26 = 3\times7 + 5$, $7 = 1\times5 + 2$, $5 = 2\times2 + 1$ : le pgcd vaut $1$.</p>
+<p><b>Étape 3 : On remonte.</b> $1 = 5 - 2\times2 = 5 - 2(7 - 5) = 3\times5 - 2\times7 = 3(26 - 3\times7) - 2\times7 = 3\times26 - 11\times7$.</p>
+<p><b>Étape 4 : L'inverse.</b> $\cV u = -11\equiv15\ [26]$. Contrôle : $7\times15 = 105 = 4\times26 + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\bar7^{-1} = \overline{15}\ \text{dans}\ \mathbb Z/26\mathbb Z}$.</p>
+
+<h2 id="ca-crt">4. Le théorème des restes chinois</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle m\wedge n = 1\ \Longrightarrow\ \mathbb Z/mn\mathbb Z\simeq\mathbb Z/m\mathbb Z\times\mathbb Z/n\mathbb Z$</li><li>$\displaystyle\text{système}\ x\equiv a\ [m],\ x\equiv b\ [n]:\ \text{une unique solution modulo}\ mn$</li><li>$\displaystyle\text{avec Bézout}\ um + vn = 1:\ x = \cV{a\,vn + b\,um}$</li></ul></div>
+
+<p class="ml">Exemple 5 : un système de congruences</p>
+<p><b>Résoudre dans $\mathbb Z$ le système $x\equiv2\ [3]$ et $x\equiv3\ [5]$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $3\wedge5 = 1$ : il y a une unique solution modulo $15$. On écrit Bézout $3u + 5v = 1$ ; alors $5v\equiv1\ [3]$ et $\equiv0\ [5]$, $3u\equiv0\ [3]$ et $\equiv1\ [5]$, et on combine.</p>
+<p><b>Étape 2 : Bézout.</b> $2\times3 - 1\times5 = 1$ : $u = 2$, $v = -1$, donc $3u = 6$ et $5v = -5$.</p>
+<p><b>Étape 3 : On combine.</b> $x_0 = 2\times(-5) + 3\times6 = -10 + 18 = 8$. Contrôle : $8 = 2\times3 + 2$ et $8 = 5 + 3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x\equiv8\ [15]}$, soit $x = 8 + 15k$, $k\in\mathbb Z$.</p>
+
+<h2 id="ca-ann">5. Anneaux et idéaux</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle I\ \text{idéal de}\ A:\ \text{sous-groupe additif, et}\ \forall a\in A,\ \forall x\in I,\ ax\in I$</li><li>$\displaystyle\text{les idéaux de}\ \mathbb Z\ \text{sont les}\ n\mathbb Z,\ \text{ceux de}\ \mathbb K[X]\ \text{les}\ P\,\mathbb K[X]$</li><li>$\displaystyle\text{le noyau d'un morphisme d'anneaux est un idéal}$</li></ul></div>
+
+<p class="ml">Exemple 6 : un idéal de polynômes</p>
+<p>Soit $I = \{P\in\mathbb R[X],\ P(1) = P(2) = 0\}$. <b>Montrer que $I$ est un idéal de $\mathbb R[X]$ et en donner un générateur unitaire.</b></p>
+<p><b>Étape 1 : Rappel.</b> $I$ est le noyau du morphisme d'anneaux $P\mapsto(P(1), P(2))$ de $\mathbb R[X]$ dans $\mathbb R^2$, donc un idéal. Tout idéal de $\mathbb R[X]$ est engendré par un polynôme : on cherche le polynôme unitaire de plus petit degré dans $I$.</p>
+<p><b>Étape 2 : Un morphisme.</b> $\psi(P) = (P(1), P(2))$ respecte la somme, le produit et $\psi(1) = (1, 1)$. Son noyau est $I$.</p>
+<p><b>Étape 3 : Le générateur.</b> $P(1) = P(2) = 0\iff(X - 1)\mid P$ et $(X - 2)\mid P\iff(X - 1)(X - 2)\mid P$, car $X - 1$ et $X - 2$ sont premiers entre eux.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{I = (X^2 - 3X + 2)\,\mathbb R[X]}$.</p>
+
+<h2 id="ca-pe">6. Polynômes d'endomorphismes</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P(u) = a_0\,\mathrm{id} + a_1u + \cdots + a_du^d,\qquad(PQ)(u) = P(u)\circ Q(u)$</li><li>$\displaystyle\text{les annulateurs de}\ u\ \text{forment un idéal, engendré par le polynôme minimal}\ \pi_u$</li><li>$\displaystyle\text{inverse}:\ \text{si}\ P(u) = 0\ \text{avec}\ P(0)\neq0,\ \text{on isole}\ \mathrm{id}$</li><li>$\displaystyle\text{puissances}:\ \text{division euclidienne}\ X^n = Q_nP + R_n,\ \text{donc}\ u^n = R_n(u)$</li></ul></div>
+
+<p class="ml">Exemple 7 : un inverse par un annulateur</p>
+<p>Soit $A = \begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix}$. <b>Montrer que $A^2 - 3A + 2I_2 = 0$, en déduire que $A$ est inversible et calculer $A^{-1}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On vérifie la relation par le calcul. Le coefficient constant $2$ est non nul : on isole $I_2$ et on factorise par $A$ pour lire l'inverse.</p>
+<p><b>Étape 2 : Le carré.</b> $A^2 = \begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix}\begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix} = \begin{pmatrix}1 & 1 + 2\\ 0 & 4\end{pmatrix} = \begin{pmatrix}1 & 3\\ 0 & 4\end{pmatrix}$.</p>
+<p><b>Étape 3 : La relation.</b> $A^2 - 3A + 2I_2 = \begin{pmatrix}1 - 3 + 2 & 3 - 3 + 0\\ 0 & 4 - 6 + 2\end{pmatrix} = \begin{pmatrix}0 & 0\\ 0 & 0\end{pmatrix}$.</p>
+<p><b>Étape 4 : On isole $I_2$.</b> $2I_2 = 3A - A^2 = A(3I_2 - A)$, donc $A\times\frac12(3I_2 - A) = I_2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A^{-1} = \frac12(3I_2 - A) = \frac12\begin{pmatrix}2 & -1\\ 0 & 1\end{pmatrix} = \begin{pmatrix}1 & -\frac12\\ 0 & \frac12\end{pmatrix}}$. Contrôle : $\begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix}\begin{pmatrix}1 & -\frac12\\ 0 & \frac12\end{pmatrix} = \begin{pmatrix}1 & -\frac12 + \frac12\\ 0 & 1\end{pmatrix} = I_2$.</p>
+
+<p class="ml">Exemple 8 : les puissances par division euclidienne</p>
+<p>Avec la même matrice $A$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $P = X^2 - 3X + 2 = (X - 1)(X - 2)$ annule $A$. On divise $X^n$ par $P$ : $X^n = Q_nP + a_nX + b_n$, donc $A^n = a_nA + b_nI_2$. On trouve $a_n, b_n$ en évaluant aux racines $1$ et $2$.</p>
+<p><b>Étape 2 : En $X = 1$.</b> $1^n = a_n + b_n$.</p>
+<p><b>Étape 3 : En $X = 2$.</b> $2^n = 2a_n + b_n$. En soustrayant : $a_n = 2^n - 1$, puis $b_n = 1 - a_n = 2 - 2^n$.</p>
+<p><b>Étape 4 : On assemble.</b> $A^n = (2^n - 1)\begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix} + (2 - 2^n)\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix} = \begin{pmatrix}2^n - 1 + 2 - 2^n & 2^n - 1\\ 0 & 2^{n+1} - 2 + 2 - 2^n\end{pmatrix}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A^n = \begin{pmatrix}1 & 2^n - 1\\ 0 & 2^n\end{pmatrix}}$. Contrôle $n = 2$ : $\begin{pmatrix}1 & 3\\ 0 & 4\end{pmatrix}$, c'est bien $A^2$.</p>
+
+<h2 id="ca-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier de vérifier qu'une partie est non vide avant la caractérisation des sous-groupes.</p>
+<p><b>2.</b> Confondre l'ordre d'un élément et le cardinal du groupe : Lagrange dit seulement que l'un divise l'autre.</p>
+<p><b>3.</b> Chercher un inverse modulo $n$ sans vérifier $k\wedge n = 1$.</p>
+<p><b>4.</b> Dans un polynôme d'endomorphisme, écrire $a_0$ au lieu de $a_0\,\mathrm{id}$ (ou $a_0I_n$).</p>
+</div>
+
+<h2 id="ca-arbre">L'arbre des compléments d'algèbre</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que demande-t-on ?</span><ul>
+<li><div class="hr"><em>un sous-groupe</em><a class="hl ok" href="#ca-sg">noyau d'un morphisme</a></div></li>
+<li><div class="hr"><em>un ordre, une puissance</em><a class="hl ok" href="#ca-ord">Lagrange, $\frac n{k\wedge n}$</a></div></li>
+<li><div class="hr"><em>un inverse modulo $n$</em><a class="hl" href="#ca-zn">Bézout</a></div></li>
+<li><div class="hr"><em>un système de congruences</em><a class="hl" href="#ca-crt">restes chinois</a></div></li>
+<li><div class="hr"><em>un idéal</em><a class="hl" href="#ca-ann">noyau, générateur</a></div></li>
+<li><div class="hr"><em>inverse, puissances d'une matrice</em><a class="hl end" href="#ca-pe">polynôme annulateur</a></div></li>
+</ul></div></div>
+`,
 "Dénombrement": R`
 <nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
 
