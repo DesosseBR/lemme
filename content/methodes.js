@@ -4242,7 +4242,7 @@ $$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{l'intégrale converge}}$.</p>
 
 <p class="ml">Exemple 10 : montrer une divergence</p>
-<p><b>Montrer que $\displaystyle\int_2^{+\infty}\frac{dt}{\ln t}$ et de $\displaystyle\int_0^1\frac{dt}{e^t - 1}$ divergent.</b></p>
+<p><b>Montrer que $\displaystyle\int_2^{+\infty}\frac{dt}{\ln t}$ et $\displaystyle\int_0^1\frac{dt}{e^t - 1}$ divergent.</b></p>
 <p><b>Étape 1 : Rappel.</b> $0\leq\cO g\leq\cB f$ et $\int\cO g$ DV $\Rightarrow\int\cB f$ DV. Et $\cB f\sim\cO g\geq0$ : même nature.</p>
 <p><b>Étape 2 : La première.</b> Pour $t\geq2$ : $0 \lt \ln t\leq t$, donc $\frac1{\ln t}\geq\cO{\frac1t}$, et $\int_2^{+\infty}\frac{dt}t$ diverge ($\cV\alpha = 1$).</p>
 <p><b>Étape 3 : La seconde.</b> Seul $\cR0$ pose problème. $e^t - 1\sim t$ en $0$, donc $\frac1{e^t - 1}\sim\cO{\frac1t} > 0$, et $\int_0^1\frac{dt}t$ diverge.</p>
