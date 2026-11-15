@@ -4592,6 +4592,7 @@ $$I_n = 2n\int_0^{+\infty}\Big(\frac1{(1 + t^2)^n} - \frac1{(1 + t^2)^{n+1}}\Big
 <h2 id="f-cs">2. Trouver la limite simple</h2>
 <p>On fixe $x$, et on cherche la limite de la suite numérique $(f_n(x))_n$. Souvent, il faut <b>distinguer des cas</b> selon $x$.</p>
 <p class="ml">Exemple : $f_n(x) = x^n$ sur $[0, 1]$</p>
+<p>Soit $f_n(x) = x^n$ sur $[0, 1]$. <b>Étudier la convergence simple de $(f_n)$ et déterminer sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Convergence simple : on fixe $x$ et on cherche la limite de la suite numérique $(f_n(x))$.</p>
 <p><b>Étape 2 : Cas $0\leqslant x\lt1$.</b> $x^n\to0$.</p>
 <p><b>Étape 3 : Cas $x = 1$.</b> $1^n = 1\to1$.</p>
@@ -4622,6 +4623,7 @@ $$\sup_{x\geqslant a}|f_n(x)| = f_n(a) = n\,a\,e^{-na}\to0\ \Longrightarrow\ \cG
 <li><b>Par une limite au bord</b> : $\sup_{x\in X}|f_n(x) - f(x)|\geqslant\lim_{x\to b}|f_n(x) - f(x)|$.</li>
 </ul>
 <p class="ml">Exemple : $x^n$ sur $[0, 1[$</p>
+<p>Soit $f_n(x) = x^n$ sur $[0, 1[$. <b>La suite $(f_n)$ converge-t-elle uniformément sur $[0, 1[$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> S'il existe $x_n\in X$ avec $|f_n(x_n) - f(x_n)|\not\to0$, alors $\|f_n - f\|_\infty\not\to0$ : pas de convergence uniforme.</p>
 <p><b>Étape 2 : La limite simple</b> sur $[0, 1[$ : $f = 0$ (continue, l'argument de continuité ne marche pas).</p>
 <p><b>Étape 3 : Un point bien choisi.</b> $\cV{x_n = 1 - \frac1n}\in[0, 1[$ :</p>
@@ -4651,12 +4653,14 @@ $$\int_0^1n^2x\,e^{-nx}\,dx = \int_0^nu\,e^{-u}\,du = 1 - (n + 1)e^{-n}\to1\neq\
 <div class="sbox">$$|f_n(x)|\leqslant\cO{\alpha_n}\ \text{pour tout}\ x\in X,\ \text{et}\ \sum\cO{\alpha_n}\ \text{converge}\ \Longrightarrow\ \sum f_n\ \text{converge normalement, donc uniformément, sur}\ X.$$</div>
 <p>On cherche le plus petit majorant possible : $\alpha_n = \|f_n\|_\infty$ (étude de fonction si besoin).</p>
 <p class="ml">Exemple 1 : $\sum\frac{x^n}{n^2}$ sur $[-1, 1]$</p>
+<p><b>Montrer que $\sum\frac{x^n}{n^2}$ converge normalement sur $[-1, 1]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $|f_n(x)|\leqslant\alpha_n$ pour tout $x$ et $\sum\alpha_n$ converge : convergence normale.</p>
 <p><b>Étape 2 : Majorer.</b> Pour $|x|\leqslant1$, $|x^n|\leqslant1$ :</p>
 $$\Big|\frac{x^n}{n^2}\Big|\leqslant\cO{\frac1{n^2}}.$$
 <p><b>Étape 3 : Conclusion.</b> $\sum\frac1{n^2}$ converge : $\cG{\text{CN sur}\ [-1, 1]}$, donc CU.</p>
 
 <p class="ml">Exemple 2 : $\sum e^{-nx}$ sur $\left]0, +\infty\right[$, puis sur $[a, +\infty[$</p>
+<p><b>Étudier la convergence normale de $\sum e^{-nx}$ sur $\left]0, +\infty\right[$, puis sur $[a, +\infty[$ avec $a > 0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> CN $\iff\sum\|f_n\|_\infty$ converge. Si $\|f_n\|_\infty\not\to0$, il n'y a même pas CU.</p>
 <p><b>Étape 2 : Sur $\left]0, +\infty\right[$.</b> $\sup_{x > 0}e^{-nx} = 1$ (quand $x\to0$) :</p>
 $$\|f_n\|_\infty = 1\not\to0\ \Longrightarrow\ \text{ni CN, ni CU}.$$
@@ -4665,6 +4669,7 @@ $$\|f_n\|_\infty = e^{-na} = (e^{-a})^n.$$
 <p><b>Étape 4 : Conclusion.</b> Géométrique de raison $e^{-a}\lt1$ : $\cG{\text{CN sur}\ [a, +\infty[}$.</p>
 
 <p class="ml">Exemple 3 : avec une étude de fonction</p>
+<p>Soit $f_n(x) = \frac x{n(1 + nx^2)}$ sur $[0, +\infty[$. <b>Étudier la convergence normale de $\sum f_n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pour la CN, on calcule $\|f_n\|_\infty$ par une étude de fonction.</p>
 <p><b>Étape 2 : La fonction à étudier.</b> $f_n(x) = \frac1n\cdot h(x)$ avec $h(x) = \frac x{1 + nx^2}$ sur $[0, +\infty[$.</p>
 <p><b>Étape 3 : La dérivée.</b></p>
@@ -4676,6 +4681,7 @@ $$h\Big(\frac1{\sqrt n}\Big) = \frac{1/\sqrt n}{1 + 1} = \frac1{2\sqrt n},\qquad
 <h2 id="f-alt">8. Convergence uniforme sans convergence normale</h2>
 <p>Quand la CN échoue, on revient à la définition : on <b>majore le reste</b> uniformément. L'outil le plus fréquent est le critère des séries alternées, avec $|R_n(x)|\leqslant|f_{n+1}(x)|$.</p>
 <p class="ml">Exemple : $\sum\frac{(-1)^n}{n + x}$ sur $[0, +\infty[$ ($n\geqslant1$)</p>
+<p><b>Montrer que $\sum_{n\geq1}\frac{(-1)^n}{n + x}$ converge uniformément sur $[0, +\infty[$ mais pas normalement.</b></p>
 <p><b>Étape 1 : Rappel.</b> Série alternée : $|R_n(x)|\leqslant|f_{n+1}(x)|$. Si ce majorant tend vers $0$ uniformément, on a la CU.</p>
 <p><b>Étape 2 : Pas de CN.</b> $\big\|\frac{(-1)^n}{n + x}\big\|_\infty = \frac1n$ (en $x = 0$), et $\sum\frac1n$ diverge.</p>
 <p><b>Étape 3 : La CS.</b> Pour $x\geqslant0$ fixé, $\frac1{n + x}$ décroît vers $0$ : critère spécial.</p>
@@ -8076,6 +8082,7 @@ $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!$</li><li>$\displaystyle \operatorname{Card}(S_n) = n!\qquad\text{Anagrammes}:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ (\text{lettre}\ i\ \text{répétée}\ k_i\ \text{fois})$</li></ul></div>
 <p>Pourquoi on divise : si on numérote les lettres répétées, on a $n!$ mots ; en effaçant les numéros, chaque mot a été compté $k_1!\cdots k_r!$ fois (les permutations des lettres identiques entre elles).</p>
 <p class="ml">Exemple 6 : anagrammes de BANANE</p>
+<p><b>Combien d'anagrammes le mot BANANE possède-t-il ?</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$ avec $k_i$ le nombre de répétitions de chaque lettre.</p>
 <p><b>Étape 2 : On compte les lettres.</b> $n = 6$ : B ($1$), A ($2$), N ($2$), E ($1$).</p>
 <p><b>Étape 3 : On divise par les doublons.</b></p>
@@ -8098,6 +8105,7 @@ $$\cO{\binom{28}3 = \frac{28\times27\times26}{3\times2\times1} = 28\times\frac{2
 <p><b>Étape 5 : Conclusion</b> (principe multiplicatif) : $6\times3276 = 6\times3000 + 6\times276 = 18\,000 + 1656$, soit $\cG{19\,656}$ mains avec exactement $2$ as.</p>
 
 <p class="ml">Exemple 8 : au moins un as</p>
+<p>On tire $5$ cartes dans un jeu de $32$ cartes. <b>Combien de mains contiennent au moins un as ?</b></p>
 <p><b>Étape 1 : Rappel.</b> « Au moins un » : on retire le complémentaire « aucun ».</p>
 <p><b>Étape 2 : Aucun as.</b> Les $5$ cartes parmi les $28$ autres :</p>
 $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\times2\times1}}:\quad\frac{25\times24}{5\times4\times3\times2} = \frac{600}{120} = 5,\ \text{donc}\ \binom{28}5 = 28\times27\times26\times5 = 756\times26\times5 = 19\,656\times5 = 98\,280.$$
@@ -8113,6 +8121,7 @@ $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\ti
 <h2 id="d-parties">10. Le nombre de parties</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}\big(\mathcal P(E)\big) = 2^{\operatorname{Card}(E)}$</li><li>$\displaystyle \sum_{p=0}^n\binom np = 2^n$</li></ul></div>
 <p class="ml">Exemple 10 : $\operatorname{Card}(\mathcal P(E)) = 2^n$ par une bijection</p>
+<p>Soit $E$ un ensemble à $n$ éléments. <b>Montrer que $\mathcal P(E)$ a $2^n$ éléments, avec une bijection.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une bijection conserve le cardinal, et $\operatorname{Card}(F^E) = \operatorname{Card}(F)^{\operatorname{Card}(E)}$.</p>
 <p><b>Étape 2 : La bijection.</b> À une partie $A$ de $E$, on associe sa fonction indicatrice $\mathbb 1_A:E\to\{0, 1\}$ ($1$ sur $A$, $0$ ailleurs). Réciproquement, $f:E\to\{0, 1\}$ donne $A = f^{-1}(\{1\})$.</p>
 <p><b>Étape 3 : On compte les applications.</b> $\operatorname{Card}\big(\{0, 1\}^E\big) = 2^n$.</p>
@@ -8122,12 +8131,14 @@ $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\ti
 <p>Pour montrer $a = b$ entre entiers : on trouve un ensemble qu'on compte d'une façon (on trouve $a$), puis d'une autre (on trouve $b$).</p>
 
 <p class="ml">Exemple 11 : $\sum_{k=0}^n\binom nk = 2^n$</p>
+<p><b>Montrer que $\sum_{k=0}^n\binom nk = 2^n$ par un dénombrement.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{Card}(\mathcal P(E)) = 2^n$, et une réunion disjointe se compte en additionnant.</p>
 <p><b>Étape 2 : On découpe $\mathcal P(E)$ selon la taille.</b> $\mathcal P(E) = \bigsqcup_{k=0}^n\mathcal P_k(E)$, où $\mathcal P_k(E)$ = parties à $k$ éléments. Les morceaux sont disjoints.</p>
 <p><b>Étape 3 : On compte.</b> $\operatorname{Card}(\mathcal P_k(E)) = \binom nk$, donc $\operatorname{Card}(\mathcal P(E)) = \sum_{k=0}^n\binom nk$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{k=0}^n\binom nk = 2^n}$ (on le retrouve aussi avec le binôme, $(1 + 1)^n$).</p>
 
 <p class="ml">Exemple 12 : $k\binom nk = n\binom{n - 1}{k - 1}$ (le comité et son président)</p>
+<p>Soient $1\leq k\leq n$. <b>Montrer que $k\binom nk = n\binom{n - 1}{k - 1}$ en comptant de deux façons.</b></p>
 <p><b>Étape 1 : Rappel.</b> Principe multiplicatif, appliqué dans deux ordres différents.</p>
 <p><b>Étape 2 : L'ensemble.</b> Dans un groupe de $n$ personnes, on compte les comités de $k$ personnes <b>avec un président</b> choisi dans le comité.</p>
 <p><b>Étape 3 : Comité d'abord.</b> Le comité : $\cO{\binom nk}$ choix. Le président parmi ses membres : $\cO k$ choix. Total $k\binom nk$.</p>
@@ -8201,6 +8212,7 @@ $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\ti
 <p><b>Étape 5 : Conclusion.</b> $\cG{2^n - 2}$ et $\cG{3^n - 3\times2^n + 3}$ surjections. Contrôle $n = 3$ : $3^3 = 27$, $3\times2^3 = 24$, $27 - 24 + 3 = 6 = 3!$ (une surjection de $3$ sur $3$ est une bijection).</p>
 
 <p class="ml">Exercice 2 : MISSISSIPPI</p>
+<p><b>Combien d'anagrammes le mot MISSISSIPPI possède-t-il ?</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$.</p>
 <p><b>Étape 2 : Les lettres.</b> $n = 11$ : M ($1$), I ($4$), S ($4$), P ($2$).</p>
 <p><b>Étape 3 : Le calcul.</b></p>
@@ -10520,7 +10532,7 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 <p><b>Étape 5 : Conclusion.</b> $\cG{e^N = \begin{pmatrix}1&1&\frac72\\0&1&3\\0&0&1\end{pmatrix}}$.</p>
 
 <p class="ml">Exemple 2 : une matrice diagonalisable</p>
-<p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. <b>Calculer $e^A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}\Rightarrow e^A = Pe^DP^{-1}$.</p>
 <p><b>Étape 2 : On diagonalise.</b> $\chi_A(X) = (X - 2)^2 - 1\times1 = X^2 - 4X + 3 = (X - 1)(X - 3)$ : valeurs propres $3$ et $1$. Pour $3$ : $A - 3I = \begin{pmatrix}-1&1\\1&-1\end{pmatrix}$, $-x + y = 0$, vecteur $(1, 1)$. Pour $1$ : $A - I = \begin{pmatrix}1&1\\1&1\end{pmatrix}$, $x + y = 0$, vecteur $(1, -1)$. Donc $\cV P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\det P = 1\times(-1) - 1\times1 = -2$, $\cV P^{-1} = \frac1{-2}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV D = \operatorname{diag}(3, 1)$ et $e^D = \operatorname{diag}(e^3, e^1)$.</p>
 <p><b>Étape 3 : On calcule.</b></p>
@@ -10529,7 +10541,7 @@ $$e^A = \frac12\begin{pmatrix}e^3\times1 + e\times1&e^3\times1 + e\times(-1)\\e^
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^A = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}}$. Contrôle : $\det e^A = e^4 = e^{\operatorname{tr}A}$.</p>
 
 <p class="ml">Exemple 3 : $\lambda I + N$</p>
-<p>$A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$. <b>Calculer $e^A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $AB = BA$, $e^{A + B} = e^Ae^B$.</p>
 <p><b>Étape 2 : On découpe.</b> $A = \begin{pmatrix}2&0\\0&2\end{pmatrix} + \begin{pmatrix}0&1\\0&0\end{pmatrix} = 2I + N$. $N^2 = \begin{pmatrix}0\times0 + 1\times0&0\times1 + 1\times0\\0&0\end{pmatrix} = 0$, et $2I$ commute avec tout : $(2I)N = 2N = N(2I)$.</p>
 <p><b>Étape 3 : On calcule.</b> $(2I)^k = 2^kI$, donc $e^{2I} = \sum\frac{2^k}{k!}I = e^2I$. Comme $N^2 = 0$, $e^N = I + N = \begin{pmatrix}1&1\\0&1\end{pmatrix}$. Donc $e^A = e^{2I}e^N = e^2\begin{pmatrix}1&1\\0&1\end{pmatrix}$.</p>
@@ -10544,6 +10556,7 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <p><b>Étape 4 : Conclusion.</b> $\cos\theta\,I + \sin\theta\,J = \begin{pmatrix}\cos\theta&0\\0&\cos\theta\end{pmatrix} + \begin{pmatrix}0&-\sin\theta\\\sin\theta&0\end{pmatrix}$, donc $\cG{e^{\theta J} = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}}$ : la rotation $R_\theta$.</p>
 
 <p class="ml">Exemple 5 : $\det(e^A) = e^{\operatorname{tr}A}$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb C)$. <b>Montrer que $\det(e^A) = e^{\operatorname{tr}A}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Toute $A\in\mathcal M_n(\mathbb C)$ est trigonalisable : $A = PTP^{-1}$.</p>
 <p><b>Étape 2 : On transporte.</b> $(PTP^{-1})^k = PT^kP^{-1}$ (les $P^{-1}P$ du milieu se simplifient), donc $e^A = Pe^TP^{-1}$ et $\det e^A = \det P\,\det e^T\,\frac1{\det P} = \det e^T$.</p>
 <p><b>Étape 3 : $e^T$ est triangulaire.</b> $T^k$ est triangulaire de diagonale $(\lambda_i^k)$, donc $e^T$ est triangulaire de diagonale $(e^{\lambda_i})$.</p>
@@ -10552,6 +10565,7 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <h2 id="f-neu">4. Série géométrique de matrices</h2>
 <div class="sbox">$$\|\cdot\|\ \text{sous-multiplicative},\ \|A\| \lt 1\ \Longrightarrow\ I - A\ \text{inversible et}\ (I - A)^{-1} = \sum_{k=0}^{+\infty}A^k.$$</div>
 <p class="ml">Exemple 6 : la démonstration</p>
+<p>Soit $\|\cdot\|$ une norme d'algèbre et $A$ avec $\|A\| \lt 1$. <b>Montrer que $I_n - A$ est inversible et que $(I_n - A)^{-1} = \sum_{k\geq0}A^k$.</b></p>
 <p><b>Étape 1 : Rappel.</b> ACV $\Rightarrow$ CV en dimension finie ; $\|A^k\|\leq\|A\|^k$.</p>
 <p><b>Étape 2 : Convergence.</b> $\sum\|A^k\|\leq\sum\|A\|^k \lt +\infty$ (géométrique de raison $ \lt 1$) : $S = \sum A^k$ existe.</p>
 <p><b>Étape 3 : Télescopage.</b> $(I - A)(I + A + \dots + A^N) = (I + A + \dots + A^N) - (A + A^2 + \dots + A^{N+1}) = I - A^{N+1}$ : tout se simplifie sauf le premier et le dernier.</p>
@@ -10568,6 +10582,7 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <p>Pour une famille indexée par $\mathbb N^2$, on groupe par <b>diagonales</b> $\cR{I_n = \{(p, q),\ p + q = n\}}$ (quand le terme dépend de $p + q$), ou par lignes $\{p\}\times\mathbb N$ (Fubini). On regarde d'abord les $|a_i|$.</p>
 
 <p class="ml">Exemple 7 : $\sum_{p, q\geq1}\frac1{(p + q)^\alpha}$</p>
+<p>Soit $\alpha\in\mathbb R$. <b>Déterminer pour quelles valeurs de $\alpha$ la famille $\big(\frac1{(p + q)^\alpha}\big)_{p, q\geq1}$ est sommable.</b></p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : sommation par paquets, valeur dans $[0, +\infty]$.</p>
 <p><b>Étape 2 : Les paquets.</b> $\cR{I_n = \{(p, q)\in(\mathbb N^*)^2,\ p + q = n\}}$ pour $n\geq2$ : il y a $n - 1$ couples ($p = 1, \dots, n - 1$).</p>
 <p><b>Étape 3 : La somme d'un paquet.</b> Dans $I_n$, chaque terme vaut $\frac1{n^\alpha}$ (car $p + q = n$), et il y en a $n - 1$ : $\sum_{(p, q)\in I_n}\frac1{(p + q)^\alpha} = (n - 1)\times\frac1{n^\alpha} = \frac{n - 1}{n^\alpha}$.</p>
@@ -10585,6 +10600,7 @@ $$I = \mathbb N:\quad(a_n)\ \text{sommable}\iff\sum a_n\ \text{absolument conver
 $$\text{Sommable}\iff\sum_p\Big(\sum_q|a_{p,q}|\Big) \lt +\infty.\qquad\text{Produit}:\ \sum_{p,q}x_py_q = \Big(\sum x_p\Big)\Big(\sum y_q\Big).$$</div>
 
 <p class="ml">Exemple 8 : $\sum_{n\geq2}(\zeta(n) - 1) = 1$</p>
+<p>Soit $\zeta(n) = \sum_{k\geq1}\frac1{k^n}$. <b>Montrer que $\sum_{n\geq2}(\zeta(n) - 1) = 1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes.</p>
 <p><b>Étape 2 : On écrit la double somme.</b> $\zeta(n) - 1 = \sum_{k\geq2}\frac1{k^n}$, donc la somme cherchée est $\sum_{n\geq2}\sum_{k\geq2}\frac1{k^n}$, termes positifs.</p>
 <p><b>Étape 3 : On intervertit</b> (Fubini positif). Pour $k\geq2$ fixé, $\sum_{n\geq2}\frac1{k^n}$ est géométrique de raison $\frac1k \lt 1$, de premier terme $\frac1{k^2}$ :</p>
@@ -10593,7 +10609,7 @@ $$\sum_{n\geq2}\Big(\frac1k\Big)^n = \frac{\text{premier terme}}{1 - \text{raiso
 <p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq2}(\zeta(n) - 1) = 1}$.</p>
 
 <p class="ml">Exemple 9 : intervertir sans sommabilité</p>
-<p>$a_{p,q} = 1$ si $q = p$, $-1$ si $q = p + 1$, $0$ sinon ($p, q\in\mathbb N$).</p>
+<p>$a_{p,q} = 1$ si $q = p$, $-1$ si $q = p + 1$, $0$ sinon ($p, q\in\mathbb N$). <b>Comparer $\sum_p\sum_qa_{p,q}$ et $\sum_q\sum_pa_{p,q}$, et expliquer pourquoi on ne peut pas intervertir.</b></p>
 <p><b>Étape 1 : Rappel.</b> Fubini exige la positivité ou la sommabilité.</p>
 <p><b>Étape 2 : Lignes d'abord.</b> Ligne $p$ fixée : seuls $a_{p,p} = 1$ et $a_{p,p+1} = -1$ sont non nuls, somme $1 + (-1) = 0$. Donc $\sum_p\sum_qa_{p,q} = \sum_p0 = 0$.</p>
 <p><b>Étape 3 : Colonnes d'abord.</b> Colonne $q$ fixée : $a_{p,q}\neq0$ seulement si $p = q$ (valeur $1$) ou $p = q - 1$ (valeur $-1$). Pour $q = 0$, seul $a_{0,0} = 1$ existe ($p = -1$ est exclu). Pour $q\geq1$ : $1 + (-1) = 0$. Donc $\sum_q\sum_pa_{p,q} = 1 + 0 + 0 + \dots = 1$.</p>
@@ -10602,13 +10618,14 @@ $$\sum_{n\geq2}\Big(\frac1k\Big)^n = \frac{\text{premier terme}}{1 - \text{raiso
 <h2 id="f-cauchy">9. Produit de Cauchy</h2>
 <div class="sbox">$$\sum a_n,\ \sum b_n\ \text{absolument convergentes},\ c_n = \sum_{k=0}^na_kb_{n-k}:\quad\sum c_n\ \text{ACV et}\ \sum_{n\geq0}c_n = \Big(\sum_{n\geq0}a_n\Big)\Big(\sum_{n\geq0}b_n\Big).$$</div>
 <p class="ml">Exemple 10 : $\frac1{(1 - x)^2} = \sum(n + 1)x^n$</p>
-<p>Pour $|x| \lt 1$.</p>
+<p>Pour $|x| \lt 1$. <b>Montrer que $\frac1{(1 - x)^2} = \sum_{n\geq0}(n + 1)x^n$ par un produit de Cauchy.</b></p>
 <p><b>Étape 1 : Rappel.</b> Produit de Cauchy de deux séries ACV.</p>
 <p><b>Étape 2 : Les séries.</b> $\sum x^n$ est ACV ($|x| \lt 1$), de somme $\frac1{1 - x}$.</p>
 <p><b>Étape 3 : Le terme du produit.</b> $c_n = \sum_{k=0}^na_kb_{n-k}$ avec $a_k = x^k$, $b_{n-k} = x^{n-k}$ : $x^kx^{n-k} = x^{k + n - k} = x^n$ ne dépend pas de $k$, et $k$ prend $n + 1$ valeurs ($0, \dots, n$) : $c_n = (n + 1)x^n$. Et $\sum c_n = \frac1{1 - x}\times\frac1{1 - x}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}}$.</p>
 
 <p class="ml">Exemple 11 : $e^ae^b = e^{a + b}$</p>
+<p>Soient $a, b\in\mathbb C$. <b>Montrer que $e^ae^b = e^{a + b}$ par un produit de Cauchy.</b></p>
 <p><b>Étape 1 : Rappel.</b> Produit de Cauchy, et la formule du binôme.</p>
 <p><b>Étape 2 : Les séries.</b> $\sum\frac{a^n}{n!}$ et $\sum\frac{b^n}{n!}$ sont ACV pour tous $a, b\in\mathbb C$.</p>
 <p><b>Étape 3 : Le terme du produit.</b></p>
@@ -10651,12 +10668,14 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^{tP} = I + (e^t - 1)P}$.</p>
 
 <p class="ml">Exercice 2 : $\sum_{p, q\geq1}\frac1{p^2 + q^2}$ diverge</p>
+<p><b>Montrer que la famille $\big(\frac1{p^2 + q^2}\big)_{p, q\geq1}$ n'est pas sommable.</b></p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : comparaison terme à terme, puis exemple 7.</p>
 <p><b>Étape 2 : La minoration.</b> $(p + q)^2 = p^2 + 2pq + q^2\geq p^2 + q^2$ car $2pq\geq0$. On inverse (tout est positif) : $\frac1{p^2 + q^2}\geq\frac1{(p + q)^2}$.</p>
 <p><b>Étape 3 : La référence.</b> Exemple 7 avec $\alpha = 2\leq2$ : $\sum\frac1{(p + q)^2} = +\infty$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{p, q\geq1}\frac1{p^2 + q^2} = +\infty}$.</p>
 
 <p class="ml">Exercice 3 : $\sum_{n\geq1}nx^n$</p>
+<p><b>Calculer $\sum_{n\geq1}nx^n$ pour $|x| \lt 1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Exemple 10 : $\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}$ pour $|x| \lt 1$.</p>
 <p><b>Étape 2 : On décale.</b> $\sum_{n\geq1}nx^n = x\sum_{n\geq1}nx^{n-1} = x\sum_{m\geq0}(m + 1)x^m$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\sum_{m\geq0}(m + 1)x^m = \frac1{(1 - x)^2}$, donc $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$. Exemple $x = \frac12$ : $1 - \frac12 = \frac12$, $(\frac12)^2 = \frac14$, $\sum\frac n{2^n} = \frac{1/2}{1/4} = \frac12\times4 = 2$.</p>
@@ -10712,7 +10731,7 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 <p><b>Étape 4 : Conclusion.</b> $\cG{f(t)\perp f'(t)}$ : sur un cercle, la vitesse est tangente (orthogonale au rayon).</p>
 
 <p class="ml">Exemple 2 : dériver $t\mapsto A(t)^{-1}$</p>
-<p>$A:I\to GL_n(\mathbb R)$ dérivable.</p>
+<p>$A:I\to GL_n(\mathbb R)$ dérivable. <b>Montrer que $t\mapsto A(t)^{-1}$ est dérivable et calculer sa dérivée.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(fg)' = f'g + fg'$ pour le produit matriciel (bilinéaire), sans commuter.</p>
 <p><b>Étape 2 : On dérive $A(t)A(t)^{-1} = I$.</b> $t\mapsto A(t)^{-1}$ est dérivable (coefficients = cofacteurs divisés par $\det$, fractions rationnelles des coefficients).</p>
 $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
@@ -10730,7 +10749,7 @@ $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf = \sum_i\Big(\int_a^bf_i\Big)e_i$</li><li>$\displaystyle \cV L\Big(\int f\Big) = \int\cV L(f)$</li><li>$\displaystyle \Big\|\int_a^bf\Big\|\leq\int_a^b\|f\|\ (a\leq b)$</li></ul>
 <ul class="sbl"><li>$\displaystyle \frac{b - a}n\sum_{k=1}^nf\Big(a + k\frac{b - a}n\Big)\xrightarrow[n\to\infty]{}\int_a^bf$</li><li>$\displaystyle f\ \text{continue}:\ \Big(\int_a^xf\Big)' = f(x)$</li></ul></div>
 <p class="ml">Exemple 4 : une somme de Riemann complexe</p>
-<p>Limite de $S_n = \frac1n\sum_{k=1}^ne^{ik/n}$.</p>
+<p><b>Calculer la limite de $S_n = \frac1n\sum_{k=1}^ne^{ik/n}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue sur $[0, 1]$, même à valeurs complexes.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, continue sur $[0, 1]$.</p>
 <p><b>Étape 3 : L'intégrale.</b> Une primitive de $e^{it}$ est $\frac{e^{it}}i$ : $\int_0^1e^{it}\,dt = \frac{e^{i} - e^{0}}i = \frac{e^i - 1}i$. Comme $\frac1i = -i$ et $e^i = \cos1 + i\sin1$ : $-i(\cos1 - 1 + i\sin1) = -i\cos1 + i - i^2\sin1 = \sin1 + i(1 - \cos1)$ (car $i^2 = -1$).</p>
@@ -10742,6 +10761,7 @@ $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
 <p>L'<b>égalité</b> des accroissements finis et le théorème de Rolle sont <b>faux</b> pour une fonction vectorielle (exemple 5). Seule l'inégalité reste.</p>
 
 <p class="ml">Exemple 5 : Rolle tombe en défaut</p>
+<p><b>Montrer que le théorème de Rolle est faux pour les fonctions à valeurs complexes, avec $f(t) = e^{it}$ sur $[0, 2\pi]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Rolle (réel) : $f(a) = f(b)\Rightarrow\exists c,\ f'(c) = 0$.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$ sur $[0, 2\pi]$ (à valeurs dans $\mathbb C\simeq\mathbb R^2$) : $f(0) = f(2\pi) = 1$.</p>
 <p><b>Étape 3 : La dérivée.</b> $f'(t) = ie^{it}$, de module $1$ : elle ne s'annule jamais.</p>
@@ -10751,6 +10771,7 @@ $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
 <div class="sbox">$$\textbf{Reste intégral}\ (f\ \mathcal C^{n+1}):\ f(b) = \sum_{k=0}^n\frac{(b - a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b - t)^n}{n!}f^{(n+1)}(t)\,dt.$$
 $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_{k=0}^n\frac{(b - a)^k}{k!}f^{(k)}(a)\Big\|\leq\cO M\frac{|b - a|^{n+1}}{(n + 1)!}.\qquad\textbf{Taylor-Young}:\ f(a + h) = \sum_{k\leq n}\frac{h^k}{k!}f^{(k)}(a) + o(h^n).$$</div>
 <p class="ml">Exemple 6 : $|e^{ix} - 1 - ix|\leq\frac{x^2}2$</p>
+<p><b>Montrer que pour tout réel $x$, $|e^{ix} - 1 - ix|\leq\frac{x^2}2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $1$ : $\|f(b) - f(a) - (b - a)f'(a)\|\leq M\frac{(b - a)^2}2$, avec $M\geq\|f''\|$.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, $f'(t) = ie^{it}$, $f''(t) = -e^{it}$, donc $|f''|\leq\cO1$.</p>
 <p><b>Étape 3 : On applique</b> à l'ordre $n = 1$ entre $a = 0$ et $b = x$ : $f(0) = e^0 = 1$, $f'(0) = ie^0 = i$, donc $f(0) + (x - 0)f'(0) = 1 + ix$, et le majorant vaut $M\frac{|x - 0|^2}{2!} = 1\times\frac{x^2}2$.</p>
@@ -10761,7 +10782,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <ul class="sbl"><li>$\displaystyle x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}$</li><li>$\displaystyle y'(t_0) = 0,\ x'(t_0)\neq0:\ \text{tangente horizontale}$</li></ul></div>
 
 <p class="ml">Exemple 7 : tangentes horizontales et verticales, point double</p>
-<p>$\gamma(t) = (t^2 - 1,\ t^3 - 3t)$.</p>
+<p>$\gamma(t) = (t^2 - 1,\ t^3 - 3t)$. <b>Déterminer les points à tangente horizontale, à tangente verticale, et le point double de cet arc.</b></p>
 <p><b>Étape 1 : Rappel.</b> Horizontale si $y' = 0\neq x'$, verticale si $x' = 0\neq y'$.</p>
 <p><b>Étape 2 : Les dérivées.</b> $x'(t) = 2t$, $y'(t) = 3t^2 - 3 = 3(t - 1)(t + 1)$. Elles ne s'annulent jamais ensemble : tous les points sont réguliers.</p>
 <p><b>Étape 3 : Horizontales.</b> $y' = 0$ pour $t = \pm1$, et alors $x' = \pm2\neq0$. $\gamma(1) = (1 - 1,\ 1 - 3) = (0, -2)$ et $\gamma(-1) = (1 - 1,\ -1 + 3) = (0, 2)$.</p>
@@ -10777,6 +10798,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <tr><td>$p$ pair</td><td>rebroussement de 2<sup>e</sup> espèce</td><td>rebroussement de 1<sup>re</sup> espèce</td></tr>
 </table>
 <p class="ml">Exemple 8 : $\gamma(t) = (t^2, t^3)$ en $0$</p>
+<p>Soit $\gamma(t) = (t^2, t^3)$. <b>Étudier l'allure de l'arc au point de paramètre $0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p$ = premier ordre de dérivée non nulle, $q$ = premier ordre non colinéaire.</p>
 <p><b>Étape 2 : Les dérivées en $0$.</b> $\gamma'(t) = (2t, 3t^2)$ donne $\gamma'(0) = (0, 0)$. $\gamma''(t) = (2, 6t)$ donne $\gamma''(0) = (2, 0)\neq(0, 0)$ : $p = 2$, tangente dirigée par $(2, 0)$, horizontale.</p>
 <p><b>Étape 3 : Ensuite.</b> $\gamma'''(t) = (0, 6)$, donc $\gamma'''(0) = (0, 6)$. Colinéaire à $(2, 0)$ ? $\det\begin{pmatrix}2&0\\0&6\end{pmatrix} = 2\times6 - 0\times0 = 12\neq0$ : non, donc $q = 3$.</p>
@@ -10821,6 +10843,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <p><b>Étape 4 : Conclusion.</b> $(\|X\|^2)' = 0$ : $\cG{\|X(t)\|\ \text{est constante}}$ (et $e^{tA}\in O(n)$).</p>
 
 <p class="ml">Exercice 2 : $|\cos x - 1 + \frac{x^2}2|\leq\frac{x^4}{24}$</p>
+<p><b>Montrer que pour tout réel $x$, $\big|\cos x - 1 + \frac{x^2}2\big|\leq\frac{x^4}{24}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $3$ : reste $\leq M\frac{|x|^4}{4!}$ avec $M\geq|f^{(4)}|$.</p>
 <p><b>Étape 2 : Les dérivées en $0$.</b> $\cos0 = 1$, $\cos'(0) = 0$, $\cos''(0) = -1$, $\cos'''(0) = 0$, et $|\cos^{(4)}| = |\cos|\leq1$.</p>
 <p><b>Étape 3 : Le polynôme.</b> $1 + 0\cdot x - \frac{x^2}2 + 0\cdot x^3 = 1 - \frac{x^2}2$.</p>
@@ -10869,7 +10892,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <div class="sbox"><ul class="sbl"><li>$\displaystyle P(\overline A) = 1 - P(A)$</li><li>$\displaystyle P(A\cup B) = P(A) + P(B) - P(A\cap B)$</li><li>$\displaystyle A\subset B\Rightarrow P(A)\leq P(B)$</li></ul>
 $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}\ \sum p_\omega = 1:\quad P(A) = \sum_{\omega\in A}p_\omega.$$</div>
 <p class="ml">Exemple 1 : « au moins un »</p>
-<p>Probabilité d'obtenir au moins un $6$ en $4$ lancers d'un dé équilibré.</p>
+<p><b>Calculer la probabilité d'obtenir au moins un $6$ en $4$ lancers d'un dé équilibré.</b></p>
 <p><b>Étape 1 : Rappel.</b> $P(\overline A) = 1 - P(A)$ : « au moins un » se calcule par le contraire « aucun ».</p>
 <p><b>Étape 2 : Le contraire.</b> « Aucun $6$ » : chaque lancer donne autre chose que $6$, probabilité $\cO{\frac56}$, et les lancers sont indépendants : $\big(\frac56\big)^4 = \frac{625}{1296}$.</p>
 <p><b>Étape 3 : Le calcul.</b> $\big(\frac56\big)^4 = \frac{5^4}{6^4} = \frac{625}{1296}$, et $1296 - 625 = 671$.</p>
@@ -10879,7 +10902,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <div class="sbox">$$P\ \text{uniforme sur}\ \Omega:\quad P(A) = \frac{\operatorname{Card}A}{\operatorname{Card}\Omega} = \frac{\text{cas favorables}}{\text{cas possibles}}.$$</div>
 <p>On choisit un $\Omega$ où les issues sont <b>vraiment</b> équiprobables (couples ordonnés pour deux dés, pas sommes), puis on utilise la fiche Dénombrement.</p>
 <p class="ml">Exemple 2 : deux dés</p>
-<p>Probabilité que la somme de deux dés équilibrés fasse $7$.</p>
+<p><b>Calculer la probabilité que la somme de deux dés équilibrés fasse $7$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $P(A) = \frac{\operatorname{Card}A}{\operatorname{Card}\Omega}$ sur un univers équiprobable.</p>
 <p><b>Étape 2 : L'univers.</b> $\Omega = [\![1, 6]\!]^2$, $36$ couples équiprobables (les sommes, elles, ne le sont pas).</p>
 <p><b>Étape 3 : Les cas favorables.</b> $(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)$ : $6$ couples.</p>
@@ -10931,14 +10954,14 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p>Indépendants $\neq$ incompatibles : deux événements incompatibles de probabilités non nulles ne sont <b>jamais</b> indépendants. Et deux à deux indépendants ne suffit pas pour mutuellement (exemple 8).</p>
 
 <p class="ml">Exemple 7 : vérifier une indépendance</p>
-<p>Un dé équilibré, $A$ = « pair », $B$ = « $\leq4$ ».</p>
+<p>Un dé équilibré, $A$ = « pair », $B$ = « $\leq4$ ». <b>Les événements $A$ et $B$ sont-ils indépendants ?</b></p>
 <p><b>Étape 1 : Rappel.</b> On compare $P(A\cap B)$ et $P(A)P(B)$.</p>
 <p><b>Étape 2 : Les probabilités.</b> $A = \{2, 4, 6\}$ : $P(A) = \frac36 = \frac12$. $B = \{1, 2, 3, 4\}$ : $P(B) = \frac46 = \frac23$. $A\cap B$ = pairs et $\leq4$ = $\{2, 4\}$ : $P(A\cap B) = \frac26 = \frac13$.</p>
 <p><b>Étape 3 : On compare.</b> $P(A)P(B) = \frac12\times\frac23 = \frac2{6} = \frac13 = P(A\cap B)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{et}\ B\ \text{sont indépendants}}$.</p>
 
 <p class="ml">Exemple 8 : deux à deux, mais pas mutuellement</p>
-<p>Deux pièces équilibrées. $A$ = « 1<sup>re</sup> pile », $B$ = « 2<sup>e</sup> pile », $C$ = « les deux pièces donnent le même résultat ».</p>
+<p>Deux pièces équilibrées. $A$ = « 1<sup>re</sup> pile », $B$ = « 2<sup>e</sup> pile », $C$ = « les deux pièces donnent le même résultat ». <b>Montrer que $A$, $B$, $C$ sont indépendants deux à deux mais pas mutuellement indépendants.</b></p>
 <p><b>Étape 1 : Rappel.</b> Mutuelle : aussi $P(A\cap B\cap C) = P(A)P(B)P(C)$.</p>
 <p><b>Étape 2 : Les probabilités.</b> $\Omega = \{PP, PF, FP, FF\}$, $4$ issues équiprobables. $A = \{PP, PF\}$, $B = \{PP, FP\}$, $C = \{PP, FF\}$ : chacun $\frac24 = \frac12$.</p>
 <p><b>Étape 3 : Deux à deux.</b> $A\cap B = \{PP\}$, $A\cap C = \{PP\}$, $B\cap C = \{PP\}$ : chacun $\frac14$, et $\frac12\times\frac12 = \frac14$ : égalité à chaque fois.</p>
@@ -10950,6 +10973,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p class="ml">La méthode du maximum</p>
 <p>Pour $M = \max(X_1, \dots, X_n)$ : on passe par $(M\leq k) = \bigcap(X_i\leq k)$, puis $P(M = k) = P(M\leq k) - P(M\leq k - 1)$. Pour un minimum : $(m > k) = \bigcap(X_i > k)$.</p>
 <p class="ml">Exemple 9 : la loi du maximum de deux dés</p>
+<p>On lance deux dés équilibrés, et $M$ est le plus grand des deux résultats. <b>Déterminer la loi de $M$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$, puis on fait la différence.</p>
 <p><b>Étape 2 : La fonction de répartition.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$. Un dé donne $\leq k$ pour $k$ faces sur $6$ : $P(X_i\leq k) = \frac k6$. Indépendance : $P(M\leq k) = \frac k6\times\frac k6 = \frac{k^2}{36}$.</p>
 <p><b>Étape 3 : La différence.</b> $k^2 - (k - 1)^2 = k^2 - (k^2 - 2k + 1) = 2k - 1$, donc $P(M = k) = \frac{k^2 - (k - 1)^2}{36} = \frac{2k - 1}{36}$, $k\in[\![1, 6]\!]$.</p>
@@ -10984,6 +11008,7 @@ $$X, Y\ \text{indépendantes}\iff\forall x, y,\ P(X = x, Y = y) = P(X = x)P(Y = 
 <p>Si $X$ <b>compte</b> quelque chose, on l'écrit $X = \sum_i\mathbb 1_{A_i}$ (une indicatrice par objet), et $E(X) = \sum P(A_i)$, <b>même sans indépendance</b>.</p>
 
 <p class="ml">Exemple 11 : l'espérance d'une binomiale par indicatrices</p>
+<p>Soit $X\sim\mathcal B(n, p)$. <b>Calculer $E(X)$ en écrivant $X$ comme une somme d'indicatrices.</b></p>
 <p><b>Étape 1 : Rappel.</b> $E(\mathbb 1_A) = P(A)$ et linéarité.</p>
 <p><b>Étape 2 : On découpe.</b> $X = X_1 + \dots + X_n$ où $X_i = 1$ si la $i$-ième épreuve est un succès, $X_i\sim\mathcal B(p)$.</p>
 <p><b>Étape 3 : La linéarité.</b> $E(X_i) = 1\times p + 0\times(1 - p) = p$, donc $E(X) = E(X_1) + \dots + E(X_n) = p + \dots + p = np$ ($n$ termes).</p>
@@ -11001,7 +11026,7 @@ $$X, Y\ \text{indépendantes}\iff\forall x, y,\ P(X = x, Y = y) = P(X = x)P(Y = 
 <ul class="sbl"><li>$\displaystyle \operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y)$</li><li>$\displaystyle V(X + Y) = V(X) + V(Y) + 2\operatorname{Cov}(X, Y)$</li></ul>
 $$X, Y\ \text{indépendantes}\Rightarrow\operatorname{Cov}(X, Y) = 0\ \text{et}\ V(X + Y) = V(X) + V(Y)\ \text{(réciproque fausse)}.$$</div>
 <p class="ml">Exemple 13 : la variance de la loi uniforme</p>
-<p>$X\sim\mathcal U([\![1, n]\!])$.</p>
+<p>$X\sim\mathcal U([\![1, n]\!])$. <b>Calculer $V(X)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $V(X) = E(X^2) - E(X)^2$, et le transfert pour $E(X^2)$.</p>
 <p><b>Étape 2 : $E(X)$.</b> Chaque valeur a probabilité $\frac1n$ : $E(X) = \sum_{k=1}^nk\times\frac1n = \frac1n\times\frac{n(n + 1)}2 = \frac{n + 1}2$.</p>
 <p><b>Étape 3 : $E(X^2)$.</b> Transfert : $E(X^2) = \sum_{k=1}^nk^2\times\frac1n = \frac1n\times\frac{n(n + 1)(2n + 1)}6 = \frac{(n + 1)(2n + 1)}6$.</p>
@@ -11367,7 +11392,7 @@ $$P(Y = k) = \sum_{n\geq k}e^{-\lambda}\frac{\lambda^n}{n!}\cdot\frac{n!}{k!\,(n
 <p>Avec $q = 1 - p$. <b>Absence de mémoire</b> : $X\sim\mathcal G(p)\Rightarrow P_{(X > n)}(X > n + k) = P(X > k)$, et c'est la seule loi à valeurs dans $\mathbb N^*$ qui la vérifie. <b>Approximation</b> : si $np_n\to\lambda$, $P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}$ pour $X_n\sim\mathcal B(n, p_n)$.</p>
 
 <p class="ml">Exemple 3 : $P(X > n)$ et absence de mémoire</p>
-<p>$X\sim\mathcal G(p)$.</p>
+<p>$X\sim\mathcal G(p)$. <b>Calculer $P(X > n)$ pour $n\in\mathbb N$, puis montrer que $P(X > n + k\mid X > n) = P(X > k)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(X > n)$ = « les $n$ premiers essais sont des échecs ».</p>
 <p><b>Étape 2 : La queue.</b> $X > n$ signifie : les $n$ premiers essais sont des échecs, chacun de probabilité $q$, indépendants : $P(X > n) = q\times\dots\times q = q^n$.</p>
 <p><b>Étape 3 : Le conditionnement.</b> $(X > n + k)\subset(X > n)$, donc :</p>
@@ -11375,6 +11400,7 @@ $$P_{(X > n)}(X > n + k) = \frac{P(X > n + k)}{P(X > n)} = \frac{q^{n+k}}{q^n} =
 <p><b>Étape 4 : Conclusion.</b> $q^k = P(X > k)$ (étape 2 avec $n = k$), donc $\cG{P_{(X > n)}(X > n + k) = P(X > k)}$ : avoir déjà attendu ne change rien.</p>
 
 <p class="ml">Exemple 4 : l'approximation par Poisson</p>
+<p>Soit $X_n\sim\mathcal B(n, p_n)$ avec $np_n\to\lambda > 0$. <b>Montrer que pour tout $k$ fixé, $P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ et $\big(1 + \frac an\big)^n\to e^a$ (plus généralement $(1 - p_n)^n\to e^{-\lambda}$ si $np_n\to\lambda$).</p>
 <p><b>Étape 2 : On écrit</b> à $k$ fixé, avec $\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ et $p_n^k = \frac{(np_n)^k}{n^k}$ :</p>
 $$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdot(1 - p_n)^{n-k}.$$
@@ -11386,12 +11412,14 @@ $$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdo
 $$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable, et}\ E(f(X)) = \sum_xf(x)P(X = x).$$
 <ul class="sbl"><li>$\displaystyle X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n)$</li><li>$\displaystyle |X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}$</li></ul></div>
 <p class="ml">Exemple 5 : l'espérance d'une géométrique, deux méthodes</p>
+<p>Soit $X\sim\mathcal G(p)$. <b>Calculer $E(X)$ de deux façons.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sum_{k\geq1}kx^{k-1} = \frac1{(1 - x)^2}$ pour $|x| \lt 1$ (dérivée de la série géométrique), et $E(X) = \sum_{n\geq1}P(X\geq n)$.</p>
 <p><b>Étape 2 : Par la définition.</b> $P(X = k) = q^{k-1}p$, donc $E(X) = \sum_{k\geq1}kq^{k-1}p = p\sum_{k\geq1}kq^{k-1}$, et $\sum_{k\geq1}kq^{k-1} = \cO{\frac1{(1 - q)^2}}$ (dérivée de $\frac1{1 - q}$). Avec $1 - q = p$ : $E(X) = p\times\frac1{p^2} = \frac1p$.</p>
 <p><b>Étape 3 : Par les queues.</b> $P(X\geq n) = P(X > n - 1) = q^{n-1}$, donc $E(X) = \sum_{n\geq1}q^{n-1} = 1 + q + q^2 + \dots = \cO{\frac1{1 - q}} = \frac1p$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1p}$ : pour un dé, $p = \frac16$ et $\frac1{1/6} = 6$ : il faut en moyenne $6$ lancers pour obtenir un $6$.</p>
 
 <p class="ml">Exemple 6 : $E\big(\frac1{X + 1}\big)$ pour $X\sim\mathcal P(\lambda)$</p>
+<p>Soit $X\sim\mathcal P(\lambda)$. <b>Calculer $E\big(\frac1{X + 1}\big)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Transfert : $E(f(X)) = \sum f(k)P(X = k)$ (termes positifs ici).</p>
 <p><b>Étape 2 : On écrit.</b> Transfert : $E\big(\frac1{X + 1}\big) = \sum_{k\geq0}\frac1{k + 1}e^{-\lambda}\frac{\lambda^k}{k!}$. Or $(k + 1)\times k! = (k + 1)!$ et $\lambda^k = \frac{\lambda^{k+1}}\lambda$ : $= \frac{e^{-\lambda}}\lambda\sum_{k\geq0}\frac{\lambda^{k+1}}{(k + 1)!}$.</p>
 <p><b>Étape 3 : On reconnaît.</b> On pose $j = k + 1$ : $\sum_{j\geq1}\frac{\lambda^j}{j!} = \sum_{j\geq0}\frac{\lambda^j}{j!} - \frac{\lambda^0}{0!} = \cO{e^\lambda - 1}$.</p>
@@ -11403,6 +11431,7 @@ $$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable,
 <p class="ml">L'astuce des moments factoriels</p>
 <p>Pour les lois avec des factorielles (Poisson, binomiale), on calcule $E(X(X - 1))$, plus simple que $E(X^2)$, puis $E(X^2) = E(X(X - 1)) + E(X)$.</p>
 <p class="ml">Exemple 7 : la variance d'une loi de Poisson</p>
+<p>Soit $X\sim\mathcal P(\lambda)$. <b>Calculer $V(X)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $V(X) = E(X(X - 1)) + E(X) - E(X)^2$.</p>
 <p><b>Étape 2 : $E(X(X - 1))$.</b> Transfert. Les termes $k = 0, 1$ sont nuls ($k(k - 1) = 0$), et $\frac{k(k - 1)}{k!} = \frac1{(k - 2)!}$, $\lambda^k = \lambda^2\lambda^{k-2}$ :</p>
 $$\sum_{k\geq2}k(k - 1)e^{-\lambda}\frac{\lambda^k}{k!} = \lambda^2e^{-\lambda}\sum_{k\geq2}\frac{\lambda^{k-2}}{(k - 2)!} = \lambda^2e^{-\lambda}\cO{e^\lambda} = \lambda^2.$$
@@ -11417,12 +11446,14 @@ $$X, Y\ \text{indépendantes}\Rightarrow G_{X+Y} = G_XG_Y.$$</div>
 <p>Pour trouver la loi d'une <b>somme de variables indépendantes</b> : multiplier les fonctions génératrices, puis <b>reconnaître</b> la fonction génératrice d'une loi connue.</p>
 
 <p class="ml">Exemple 8 : somme de deux Poisson indépendantes</p>
+<p>Soient $X\sim\mathcal P(\lambda)$ et $Y\sim\mathcal P(\mu)$ indépendantes. <b>Déterminer la loi de $X + Y$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $G_{X+Y} = G_XG_Y$ et $G$ caractérise la loi. Pour $\mathcal P(\lambda)$ : $G(t) = e^{\lambda(t - 1)}$.</p>
 <p><b>Étape 2 : $G$ d'une Poisson.</b> $G_X(t) = \sum_ne^{-\lambda}\frac{\lambda^n}{n!}t^n = e^{-\lambda}\sum_n\frac{(\lambda t)^n}{n!} = e^{-\lambda}\cO{e^{\lambda t}} = e^{\lambda t - \lambda} = e^{\lambda(t - 1)}$.</p>
 <p><b>Étape 3 : Le produit.</b> Indépendance : $G_{X+Y}(t) = G_X(t)G_Y(t) = e^{\lambda(t - 1)}e^{\mu(t - 1)} = e^{\lambda(t - 1) + \mu(t - 1)} = e^{(\lambda + \mu)(t - 1)}$.</p>
 <p><b>Étape 4 : Conclusion.</b> On reconnaît $\mathcal P(\lambda + \mu)$ : $\cG{X + Y\sim\mathcal P(\lambda + \mu)}$.</p>
 
 <p class="ml">Exemple 9 : espérance et variance d'une géométrique par $G$</p>
+<p>Soit $X\sim\mathcal G(p)$. <b>Calculer $E(X)$ et $V(X)$ avec la fonction génératrice.</b></p>
 <p><b>Étape 1 : Rappel.</b> $E = G'(1)$, $V = G''(1) + G'(1) - G'(1)^2$.</p>
 <p><b>Étape 2 : $G$.</b> $G(t) = \sum_{k\geq1}q^{k-1}pt^k = pt\sum_{k\geq1}(qt)^{k-1} = pt\times\frac1{1 - qt} = \frac{pt}{1 - qt}$ pour $|qt| \lt 1$, soit $|t| \lt \frac1q$.</p>
 <p><b>Étape 3 : Les dérivées.</b> On écrit $G(t) = \frac pq\Big(\frac1{1 - qt} - 1\Big)$ (vérification : $\frac1{1 - qt} - 1 = \frac{qt}{1 - qt}$). Avec $\big(\frac1{1 - qt}\big)' = \frac q{(1 - qt)^2}$ et $\big(\frac1{(1 - qt)^2}\big)' = \frac{2q}{(1 - qt)^3}$ :</p>
@@ -11444,6 +11475,7 @@ $$G'(t) = \frac pq\cdot\frac q{(1 - qt)^2} = \frac p{(1 - qt)^2},\qquad G''(t) =
 <div class="sbox">$$\textbf{Markov}:\ P(|X|\geq a)\leq\frac{E(|X|)}a.\qquad\textbf{Bienaymé-Tchebychev}:\ P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}.$$
 $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2},\ m = E(X_1),\ \sigma^2 = V(X_1):\quad P\Big(\Big|\frac{S_n}n - m\Big|\geq\varepsilon\Big)\leq\frac{\sigma^2}{n\varepsilon^2}\to0.$$</div>
 <p class="ml">Exemple 11 : la démonstration de la loi faible</p>
+<p>Soient $X_1, \dots, X_n$ indépendantes, de même loi, d'espérance $m$ et de variance $\sigma^2$, et $S_n = X_1 + \dots + X_n$. <b>Montrer que pour tout $\varepsilon > 0$, $P\big(\big|\frac{S_n}n - m\big|\geq\varepsilon\big)\to0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bienaymé-Tchebychev, et $V\big(\sum X_i\big) = \sum V(X_i)$ pour des variables indépendantes.</p>
 <p><b>Étape 2 : Espérance.</b> Linéarité : $E\big(\frac{S_n}n\big) = \frac1nE(X_1 + \dots + X_n) = \frac1n(m + \dots + m) = \frac1n\times nm = m$.</p>
 <p><b>Étape 3 : Variance.</b> $V(aY) = a^2V(Y)$ et, par indépendance, $V(S_n) = V(X_1) + \dots + V(X_n) = n\sigma^2$ : $V\big(\frac{S_n}n\big) = \frac1{n^2}\times n\sigma^2 = \frac{\sigma^2}n$.</p>
@@ -11460,6 +11492,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <tr><td>Normale $\mathcal N(m, \sigma^2)$</td><td>$\frac1{\sigma\sqrt{2\pi}}e^{-\frac{(t - m)^2}{2\sigma^2}}$</td><td>$m$</td><td>$\sigma^2$</td></tr>
 </table>
 <p class="ml">Exemple 12 : l'espérance d'une loi exponentielle</p>
+<p>Soit $X$ de loi exponentielle de paramètre $\lambda > 0$. <b>Calculer $E(X)$. (Hors programme : variables à densité.)</b></p>
 <p><b>Étape 1 : Rappel.</b> $E(X) = \int_0^{+\infty}t\lambda e^{-\lambda t}\,dt$, IPP sur un intervalle (fiche Intégration sur un intervalle).</p>
 <p><b>Étape 2 : IPP</b> avec $u = t$, $v = -e^{-\lambda t}$ : $\int_0^{+\infty}t\lambda e^{-\lambda t}\,dt = \big[-te^{-\lambda t}\big]_0^{+\infty} + \int_0^{+\infty}e^{-\lambda t}\,dt$.</p>
 <p><b>Étape 3 : Les morceaux.</b> Crochet : en $0$, $-0\times e^0 = 0$ ; en $+\infty$, $te^{-\lambda t}\to0$ (croissances comparées) : il vaut $0 - 0 = 0$. Et $\int_0^{+\infty}e^{-\lambda t}\,dt = \big[-\frac{e^{-\lambda t}}\lambda\big]_0^{+\infty} = 0 - \big(-\frac1\lambda\big) = \frac1\lambda$.</p>
@@ -11497,19 +11530,21 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 
 <h2 id="w-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : le minimum de deux géométriques</p>
-<p>$X\sim\mathcal G(p_1)$, $Y\sim\mathcal G(p_2)$ indépendantes, $M = \min(X, Y)$.</p>
+<p>$X\sim\mathcal G(p_1)$, $Y\sim\mathcal G(p_2)$ indépendantes, $M = \min(X, Y)$. <b>Déterminer la loi de $M$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(M > n) = (X > n)\cap(Y > n)$, et $P(X > n) = q^n$ caractérise $\mathcal G(1 - q)$.</p>
 <p><b>Étape 2 : La queue.</b> $(M > n) = (X > n)\cap(Y > n)$ (le min dépasse $n$ si les deux le dépassent). Indépendance et $P(X > n) = q_1^n$ : $P(M > n) = q_1^nq_2^n = (q_1q_2)^n$.</p>
 <p><b>Étape 3 : La loi.</b> $P(M = n) = P(M > n - 1) - P(M > n) = (q_1q_2)^{n-1} - (q_1q_2)^n = (q_1q_2)^{n-1}(1 - q_1q_2)$ (on factorise $(q_1q_2)^{n-1}$).</p>
 <p><b>Étape 4 : Conclusion.</b> C'est $P(M = n) = Q^{n-1}P$ avec $P = 1 - q_1q_2$ et $Q = q_1q_2 = 1 - P$ : $\cG{M\sim\mathcal G(1 - q_1q_2)}$.</p>
 
 <p class="ml">Exercice 2 : $E(X) = \sum_{n\geq1}P(X\geq n)$</p>
+<p>Soit $X$ à valeurs dans $\mathbb N$. <b>Montrer que $E(X) = \sum_{n\geq1}P(X\geq n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes (fiche Familles sommables).</p>
 <p><b>Étape 2 : On écrit</b> $P(X\geq n) = \sum_{k\geq n}P(X = k)$, donc $\sum_{n\geq1}P(X\geq n) = \sum_{n\geq1}\sum_{k\geq n}P(X = k)$.</p>
 <p><b>Étape 3 : On intervertit</b> (termes positifs). Le couple $(n, k)$ vérifie $1\leq n\leq k$ : pour $k$ fixé, $n$ va de $1$ à $k$, soit $k$ termes égaux à $P(X = k)$. On obtient $\sum_{k\geq1}kP(X = k)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq1}P(X\geq n) = E(X)}$, dans $[0, +\infty]$.</p>
 
 <p class="ml">Exercice 3 : une Poisson est paire avec quelle probabilité ?</p>
+<p>Soit $X\sim\mathcal P(\lambda)$. <b>Calculer la probabilité que $X$ soit pair.</b></p>
 <p><b>Étape 1 : Rappel.</b> $G_X(t) = \sum P(X = n)t^n$ ; en $t = -1$, les termes impairs changent de signe.</p>
 <p><b>Étape 2 : On combine.</b> $G_X(1) = \sum P(X = n)$ et $G_X(-1) = \sum(-1)^nP(X = n)$. En additionnant, $1 + (-1)^n$ vaut $2$ si $n$ pair, $0$ si $n$ impair : $\frac{G_X(1) + G_X(-1)}2 = \sum_{n\ \text{pair}}P(X = n) = P(X\ \text{pair})$.</p>
 <p><b>Étape 3 : On calcule.</b> $G_X(t) = e^{\lambda(t - 1)}$ : $G_X(1) = e^0 = 1$ et $G_X(-1) = e^{\lambda(-1 - 1)} = e^{-2\lambda}$.</p>
@@ -12419,7 +12454,7 @@ $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\q
 <p>Elle se démontre par récurrence sur $n$. Pour une fonction <b>concave</b>, l'inégalité se retourne.</p>
 
 <p class="ml">Exemple 1 : l'inégalité arithmético-géométrique</p>
-<p>Pour $x_1, \dots, x_n > 0$ : $\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n$.</p>
+<p>Soient $x_1, \dots, x_n > 0$. <b>Montrer que $\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Jensen pour une fonction concave : $f\big(\frac1n\sum x_i\big)\geq\frac1n\sum f(x_i)$.</p>
 <p><b>Étape 2 : La fonction.</b> $\ln' = \frac1x = x^{-1}$, $\ln'' = -x^{-2} = -\frac1{x^2}\leq0$ : $\ln$ est concave sur $]0, +\infty[$.</p>
 <p><b>Étape 3 : On applique</b> Jensen concave (poids $\frac1n$) : $\ln\Big(\frac{x_1 + \dots + x_n}n\Big)\geq\frac{\ln x_1 + \dots + \ln x_n}n = \frac1n\ln(x_1\cdots x_n) = \ln\big((x_1\cdots x_n)^{1/n}\big) = \ln\sqrt[n]{x_1\cdots x_n}$.</p>
@@ -12443,26 +12478,28 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p><b>Tangente</b> : une fonction convexe est au-dessus de ses tangentes (minorations). <b>Corde</b> : elle est en dessous de ses cordes sur $[a, b]$ (majorations). Pour une concave, c'est l'inverse.</p>
 
 <p class="ml">Exemple 3 : $e^x\geq1 + x$</p>
+<p><b>Montrer que pour tout réel $x$, $e^x\geq1 + x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Convexe $\Rightarrow$ au-dessus de ses tangentes.</p>
 <p><b>Étape 2 : Convexité.</b> $\exp'' = \exp > 0$ : $\exp$ est convexe sur $\mathbb R$.</p>
 <p><b>Étape 3 : La tangente en $0$.</b> $y = f(0) + f'(0)(x - 0)$ avec $f(0) = e^0 = 1$ et $f'(0) = e^0 = 1$ : $y = 1 + 1\times x = 1 + x$. Une convexe est au-dessus de ses tangentes.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geq1 + x}$ pour tout réel $x$ (égalité seulement en $0$).</p>
 
 <p class="ml">Exemple 4 : $\ln(1 + x)\leq x$</p>
+<p><b>Montrer que pour tout $x > -1$, $\ln(1 + x)\leq x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ en dessous de ses tangentes.</p>
 <p><b>Étape 2 : Concavité.</b> $f(x) = \ln(1 + x)$, $f'(x) = \frac1{1 + x} = (1 + x)^{-1}$, $f''(x) = -(1 + x)^{-2} = -\frac1{(1 + x)^2} \lt 0$ sur $]-1, +\infty[$.</p>
 <p><b>Étape 3 : La tangente en $0$.</b> $f(0) = \ln1 = 0$, $f'(0) = \frac1{1 + 0} = 1$ : $y = 0 + 1\times(x - 0) = x$. Une concave est sous ses tangentes.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\ln(1 + x)\leq x}$ pour tout $x > -1$.</p>
 
 <p class="ml">Exemple 5 : l'inégalité de Jordan $\sin x\geq\frac2\pi x$</p>
-<p>Pour $x\in[0, \frac\pi2]$.</p>
+<p><b>Montrer que pour tout $x\in[0, \frac\pi2]$, $\sin x\geq\frac2\pi x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ au-dessus de ses cordes.</p>
 <p><b>Étape 2 : Concavité.</b> $\sin'' = -\sin\leq0$ sur $[0, \frac\pi2]$.</p>
 <p><b>Étape 3 : La corde.</b> Elle relie $(0, \sin0) = (0, 0)$ et $\big(\frac\pi2, \sin\frac\pi2\big) = \big(\frac\pi2, 1\big)$ : pente $\frac{1 - 0}{\pi/2 - 0} = \frac2\pi$, donc $y = \frac2\pi x$.</p>
 <p><b>Étape 4 : Conclusion.</b> Une concave est au-dessus de ses cordes et sous ses tangentes ; tangente en $0$ : $y = \sin0 + \cos0\times x = x$. Donc $\cG{\frac2\pi x\leq\sin x\leq x}$ sur $[0, \frac\pi2]$.</p>
 
 <p class="ml">Exemple 6 : l'inégalité de Young</p>
-<p>$a, b > 0$, $p, q > 1$ avec $\frac1p + \frac1q = 1$ : $ab\leq\frac{a^p}p + \frac{b^q}q$.</p>
+<p>Soient $a, b > 0$, $p, q > 1$ avec $\frac1p + \frac1q = 1$. <b>Montrer que $ab\leq\frac{a^p}p + \frac{b^q}q$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\ln$ concave : $\ln(\lambda u + (1 - \lambda)v)\geq\lambda\ln u + (1 - \lambda)\ln v$.</p>
 <p><b>Étape 2 : Le choix.</b> $u = a^p$, $v = b^q$, $\lambda = \frac1p$, $1 - \lambda = \frac1q$.</p>
 <p><b>Étape 3 : On applique</b> la concavité de $\ln$ : $\ln(\lambda u + (1 - \lambda)v)\geq\lambda\ln u + (1 - \lambda)\ln v$, soit $\ln\Big(\frac{a^p}p + \frac{b^q}q\Big)\geq\frac1p\ln a^p + \frac1q\ln b^q = \frac1p\times p\ln a + \frac1q\times q\ln b = \ln a + \ln b = \ln(ab)$.</p>
@@ -12481,7 +12518,7 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <h2 id="x-ineg">6. Démontrer une inégalité : quelle méthode ?</h2>
 <p><b>1.</b> Une fonction connue, une tangente ou une corde : <b>convexité</b>. <b>2.</b> Une moyenne, des poids qui somment à $1$ : <b>Jensen</b>. <b>3.</b> Un produit et une somme : <b>arithmético-géométrique</b> ou <b>Young</b>. <b>4.</b> Sinon : étudier la fonction différence $g(x) = \text{droite} - \text{gauche}$.</p>
 <p class="ml">Exemple 7 : la moyenne de puissances</p>
-<p>Pour $a, b\geq0$ et $p\geq1$ : $\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2$.</p>
+<p>Soient $a, b\geq0$ et $p\geq1$. <b>Montrer que $\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Définition de la convexité avec $\lambda = \frac12$.</p>
 <p><b>Étape 2 : La fonction.</b> $(x^p)' = px^{p-1}$, $(x^p)'' = p(p - 1)x^{p-2}$. Pour $p\geq1$ : $p > 0$, $p - 1\geq0$, $x^{p-2}\geq0$ sur $\mathbb R_+^*$, donc $\geq0$ : $x\mapsto x^p$ est convexe.</p>
 <p><b>Étape 3 : Conclusion.</b> Convexité avec $\lambda = \frac12$ : $f\big(\frac12a + \frac12b\big)\leq\frac12f(a) + \frac12f(b)$, soit $\cG{\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2}$.</p>
@@ -12520,7 +12557,7 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p><b>Étape 5 : Conclusion.</b> $f(a) = f(b)$ pour tous $a, b$ : $\cG{f\ \text{est constante}}$.</p>
 
 <p class="ml">Exercice 2 : l'inégalité de Hölder (cas discret)</p>
-<p>$a_i, b_i\geq0$, $\frac1p + \frac1q = 1$ : $\sum a_ib_i\leq\big(\sum a_i^p\big)^{1/p}\big(\sum b_i^q\big)^{1/q}$.</p>
+<p>Soient $a_i, b_i\geq0$, $\frac1p + \frac1q = 1$. <b>Montrer que $\sum a_ib_i\leq\big(\sum a_i^p\big)^{1/p}\big(\sum b_i^q\big)^{1/q}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Young : $uv\leq\frac{u^p}p + \frac{v^q}q$ (exemple 6).</p>
 <p><b>Étape 2 : On normalise.</b> $A = \big(\sum a_i^p\big)^{1/p}$, $B = \big(\sum b_i^q\big)^{1/q}$ (supposés non nuls), $u_i = \frac{a_i}A$, $v_i = \frac{b_i}B$ : $\sum u_i^p = \frac{\sum a_i^p}{A^p} = \frac{A^p}{A^p} = 1$, et de même $\sum v_i^q = 1$.</p>
 <p><b>Étape 3 : Young terme à terme, puis on somme.</b> $u_iv_i\leq\frac{u_i^p}p + \frac{v_i^q}q$ pour chaque $i$ ; en sommant : $\sum u_iv_i\leq\frac1p\sum u_i^p + \frac1q\sum v_i^q = \frac1p\times1 + \frac1q\times1 = 1$.</p>
