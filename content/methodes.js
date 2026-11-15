@@ -5112,6 +5112,455 @@ $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 <li><div class="hr"><em>complexe</em><a class="hl" href="#s-cpx">$\operatorname{Re}$, $\operatorname{Im}$, ou $|z_n - \ell|\to0$</a></div></li>
 </ul></div></div>
 `,
+"Ensembles et applications": R`
+<nav class="msum"><a href="#ea-not">Notations</a><a href="#ea-quant">Quantifier, nier</a><a href="#ea-incl">Inclusion, égalité</a><a href="#ea-op">Opérations</a><a href="#ea-parties">Parties, produit</a><a href="#ea-ind">Indicatrices</a><a href="#ea-app">Applications</a><a href="#ea-img">Images</a><a href="#ea-inj">Injection</a><a href="#ea-surj">Surjection</a><a href="#ea-bij">Bijection</a><a href="#ea-comp">Composées</a><a href="#ea-restr">Restriction</a><a href="#ea-rel">Relations</a><a href="#ea-equiv">Équivalence</a><a href="#ea-ordre">Ordre</a><a href="#ea-maj">Majorants</a><a href="#ea-enonce">L'énoncé</a><a href="#ea-erreurs">Erreurs</a><a href="#ea-entrainement">S'entraîner</a><a href="#ea-exos">Exercices</a><a href="#ea-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les ensembles et parties $\cB A$, $\cB B$, $\cB E$. <span class="kO">orange</span> : l'élément quelconque qu'on fixe, « soit $\cO x$ ». <span class="kV">violet</span> : les images et les éléments de l'ensemble d'arrivée, $\cV y$, $\cV{f(x)}$. <span class="kR">rouge</span> : le contre-exemple, ce qui fait échouer une propriété. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="ea-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Se lit, se traduit</th></tr>
+<tr><td>Appartenance, inclusion</td><td>$x\in A$, $A\subset B$</td><td>$A\subset B\iff\forall x\in A,\ x\in B$.</td></tr>
+<tr><td>Ensemble vide, singleton, paire</td><td>$\varnothing$, $\{a\}$, $\{a, b\}$</td><td>$x\in\{a\}\iff x = a$ ; $\{a\}\subset A\iff a\in A$.</td></tr>
+<tr><td>Parties de $E$</td><td>$\mathcal P(E)$</td><td>$A\in\mathcal P(E)\iff A\subset E$.</td></tr>
+<tr><td>Intersection, réunion</td><td>$A\cap B$, $A\cup B$</td><td>« et », « ou » (inclusif).</td></tr>
+<tr><td>Complémentaire dans $E$</td><td>$\overline A$, $E\setminus A$, $A^c$</td><td>$x\in\overline A\iff x\in E$ et $x\notin A$.</td></tr>
+<tr><td>Différence</td><td>$A\setminus B$</td><td>$A\setminus B = A\cap\overline B$.</td></tr>
+<tr><td>Différence symétrique</td><td>$A\,\Delta\,B$ <span class="hp">hors programme</span></td><td>$(A\setminus B)\cup(B\setminus A)$ : « dans un seul des deux ».</td></tr>
+<tr><td>Produit cartésien</td><td>$E\times F$, $E^n$</td><td>Couples $(x, y)$, $n$-uplets $(x_1, \dots, x_n)$.</td></tr>
+<tr><td>Famille de parties</td><td>$\bigcap_{i\in I}A_i$, $\bigcup_{i\in I}A_i$</td><td>« pour tout $i$ », « il existe $i$ ».</td></tr>
+<tr><td>Applications de $E$ dans $F$</td><td>$F^E$, $\mathcal F(E, F)$</td><td>Chaque $x\in E$ a une seule image $f(x)\in F$.</td></tr>
+<tr><td>Identité, composée</td><td>$\operatorname{id}_E$, $g\circ f$</td><td>$(g\circ f)(x) = g(f(x))$ : on applique $f$ <b>d'abord</b>.</td></tr>
+<tr><td>Indicatrice</td><td>$\mathbb 1_A$</td><td>$1$ sur $A$, $0$ ailleurs.</td></tr>
+<tr><td>Image directe, réciproque</td><td>$f(A)$, $f^{-1}(B)$</td><td>$f^{-1}(B)$ existe <b>même si $f$ n'est pas bijective</b>.</td></tr>
+<tr><td>Restriction</td><td>$f_{|A}$</td><td>Même formule, départ réduit à $A$.</td></tr>
+<tr><td>Permutations de $E$</td><td>$S(E)$, $S_n$</td><td>Bijections de $E$ dans $E$.</td></tr>
+<tr><td>Congruence</td><td>$a\equiv b\ [n]$</td><td>$n\mid a - b$.</td></tr>
+<tr><td>Classe d'équivalence</td><td>$\overline a$, $\operatorname{cl}(a)$</td><td>$\{x\in E,\ x\,\mathcal R\,a\}$.</td></tr>
+</table>
+
+<h2 id="ea-quant">2. Quantifier et nier</h2>
+<div class="sbox">$$\operatorname{non}(\forall x,\ P(x))\iff\exists x,\ \operatorname{non}P(x).\qquad\operatorname{non}(\exists x,\ P(x))\iff\forall x,\ \operatorname{non}P(x).$$
+$$\operatorname{non}(P\Rightarrow Q)\iff P\ \text{et}\ \operatorname{non}Q.\qquad\operatorname{non}(P\ \text{et}\ Q)\iff\operatorname{non}P\ \text{ou}\ \operatorname{non}Q.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On lit la phrase de gauche à droite et on <b>échange</b> chaque $\forall$ et $\exists$. <b>2.</b> On garde les domaines ($\forall x > 0$ devient $\exists x > 0$, on ne nie pas « $x > 0$ »). <b>3.</b> On nie seulement la propriété finale. Une implication se nie en « $P$ et non $Q$ », jamais en une autre implication.</p>
+
+<p class="ml">Exemple 1 : nier une phrase à trois quantificateurs</p>
+<p>Nier $\exists a > 0,\ \exists b > 0,\ \forall n\in\mathbb N,\ na \lt b$.</p>
+<p><b>Étape 1 : Rappel.</b> On échange $\forall$ et $\exists$, on garde les domaines, on nie la fin : $\operatorname{non}(na \lt b)$ s'écrit $na\geq b$.</p>
+<p><b>Étape 2 : Les quantificateurs, un par un.</b> $\exists a > 0$ devient $\forall a > 0$ ; $\exists b > 0$ devient $\forall b > 0$ ; $\forall n\in\mathbb N$ devient $\exists n\in\mathbb N$.</p>
+<p><b>Étape 3 : La fin.</b> $na \lt b$ devient $na\geq b$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\forall a > 0,\ \forall b > 0,\ \exists n\in\mathbb N,\ na\geq b}.$$
+<p>C'est la propriété d'Archimède : la négation est <b>vraie</b>, donc la phrase de départ est fausse.</p>
+
+<p class="ml">Exemple 2 : écrire « $f$ s'annule » et « $f$ est nulle »</p>
+<p>Pour $f\in\mathbb R^{\mathbb R}$, traduire avec des quantificateurs, puis nier.</p>
+<p><b>Étape 1 : Rappel.</b> « s'annule » = <b>au moins un</b> zéro : $\exists$. « est nulle » = nulle <b>partout</b> : $\forall$.</p>
+<p><b>Étape 2 : Les traductions.</b> $f$ s'annule : $\exists x\in\mathbb R,\ f(x) = 0$. $f$ est nulle : $\forall x\in\mathbb R,\ f(x) = 0$.</p>
+<p><b>Étape 3 : Les négations.</b> $f$ ne s'annule pas : $\forall x\in\mathbb R,\ f(x)\neq0$. $f$ n'est pas nulle : $\exists x\in\mathbb R,\ f(x)\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{« pas nulle »}\neq\text{« ne s'annule pas »}}$ : $x\mapsto x$ n'est pas nulle (elle vaut $1$ en $1$) mais s'annule en $0$.</p>
+
+<h2 id="ea-incl">3. Inclusion et égalité d'ensembles</h2>
+<div class="sbox">$$\cB A\subset\cB B\iff\forall\cO x,\ (\cO x\in\cB A\Rightarrow\cO x\in\cB B).\qquad\cB A = \cB B\iff(\cB A\subset\cB B\ \text{et}\ \cB B\subset\cB A).$$
+$$\varnothing\subset A,\qquad A\subset A,\qquad(A\subset B\ \text{et}\ B\subset C)\Rightarrow A\subset C.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Pour $A\subset B$ : on écrit « <b>soit $\cO x\in\cB A$</b> », on traduit ce que ça veut dire, et on arrive à « donc $\cO x\in\cB B$ ». <b>2.</b> Pour $A = B$ : <b>double inclusion</b>, ou une chaîne d'équivalences $x\in A\iff\dots\iff x\in B$ (si chaque étape est vraiment une équivalence). <b>3.</b> Pour $A\not\subset B$ : un seul $\cR x$ dans $A$ et pas dans $B$.</p>
+
+<p class="ml">Exemple 3 : un ensemble défini par une inéquation</p>
+<p>Montrer que $\cB A = \{x\in\mathbb R,\ x^2 - 3x + 2\leq0\}$ est égal à $[1, 2]$.</p>
+<p><b>Étape 1 : Rappel.</b> Une chaîne d'équivalences prouve les deux inclusions d'un coup.</p>
+<p><b>Étape 2 : On factorise.</b> Les racines de $x^2 - 3x + 2$ : $\Delta = (-3)^2 - 4\times1\times2 = 9 - 8 = 1$, donc $x = \frac{3\pm1}2$, soit $1$ et $2$. Ainsi $x^2 - 3x + 2 = (x - 1)(x - 2)$ (contrôle : $x^2 - 2x - x + 2 = x^2 - 3x + 2$).</p>
+<p><b>Étape 3 : Le signe.</b> Un trinôme de coefficient dominant $1 > 0$ est négatif <b>entre</b> ses racines :</p>
+$$\cO x\in\cB A\iff(x - 1)(x - 2)\leq0\iff1\leq x\leq2\iff\cO x\in[1, 2].$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{A = [1, 2]}$.</p>
+
+<p class="ml">Exemple 4 : une inclusion entre ensembles d'entiers</p>
+<p>Montrer $\cB A = \{6k + 1,\ k\in\mathbb Z\}\subset\cB B = \{2m + 1,\ m\in\mathbb Z\}$, et que l'inclusion est stricte.</p>
+<p><b>Étape 1 : Rappel.</b> « Soit $x\in A$ », puis on fabrique l'entier $m$ demandé par $B$.</p>
+<p><b>Étape 2 : Soit $\cO x\in\cB A$.</b> Il existe $k\in\mathbb Z$ avec $x = 6k + 1$.</p>
+<p><b>Étape 3 : On fait apparaître $2m + 1$.</b> $6k + 1 = 2\times(3k) + 1$. On pose $m = 3k$, qui est un entier : $x = 2m + 1$, donc $\cO x\in\cB B$.</p>
+<p><b>Étape 4 : Stricte.</b> $\cR 3 = 2\times1 + 1\in B$. Est-il dans $A$ ? $6k + 1 = 3\iff6k = 2\iff k = \frac13\notin\mathbb Z$ : non.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A\subset B\ \text{et}\ A\neq B}$.</p>
+
+<h2 id="ea-op">4. Opérations sur les parties</h2>
+<div class="sbox">$$A\cap(B\cup C) = (A\cap B)\cup(A\cap C),\qquad A\cup(B\cap C) = (A\cup B)\cap(A\cup C).$$
+$$\textbf{De Morgan}:\ \overline{A\cap B} = \overline A\cup\overline B,\qquad\overline{A\cup B} = \overline A\cap\overline B,\qquad\overline{\overline A} = A.$$
+$$A\setminus B = A\cap\overline B,\qquad A\subset B\iff A\cap B = A\iff A\cup B = B\iff\overline B\subset\overline A.$$</div>
+<p>Pour une famille $(A_i)_{i\in I}$ : $\overline{\bigcup_iA_i} = \bigcap_i\overline{A_i}$ et $\overline{\bigcap_iA_i} = \bigcup_i\overline{A_i}$.</p>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On remplace chaque $\setminus$ par $\cap\,\overline{\phantom{A}}$. <b>2.</b> On applique De Morgan et la distributivité, comme un calcul. <b>3.</b> Si le calcul bloque : on revient aux éléments (« soit $x$ ») ou aux indicatrices (§6). <b>4.</b> Pour réfuter une égalité : un petit exemple dans $E = \{1, 2, 3\}$ suffit.</p>
+
+<p class="ml">Exemple 5 : $A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C)$</p>
+<p><b>Étape 1 : Rappel.</b> $X\setminus Y = X\cap\overline Y$, De Morgan, distributivité.</p>
+<p><b>Étape 2 : On enlève le $\setminus$.</b> $A\setminus(B\cap C) = A\cap\overline{B\cap C}$.</p>
+<p><b>Étape 3 : De Morgan.</b> $\overline{B\cap C} = \overline B\cup\overline C$, donc $A\setminus(B\cap C) = A\cap(\overline B\cup\overline C)$.</p>
+<p><b>Étape 4 : Distributivité</b> de $\cap$ sur $\cup$ :</p>
+$$A\cap(\overline B\cup\overline C) = (A\cap\overline B)\cup(A\cap\overline C) = (A\setminus B)\cup(A\setminus C).$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C)}$.</p>
+
+<p class="ml">Exemple 6 : on ne simplifie pas une intersection</p>
+<p>Trouver $A, B, C$ avec $A\cap B = A\cap C$ mais $B\neq C$.</p>
+<p><b>Étape 1 : Rappel.</b> Pour réfuter, un seul exemple concret suffit.</p>
+<p><b>Étape 2 : L'idée.</b> $B$ et $C$ peuvent différer <b>en dehors</b> de $A$.</p>
+<p><b>Étape 3 : L'exemple.</b> $E = \{1, 2, 3\}$, $\cB A = \{1\}$, $\cB B = \{1, 2\}$, $\cB C = \{1, 3\}$. Alors $A\cap B = \{1\}$ (seul $1$ est dans les deux) et $A\cap C = \{1\}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\cap B = A\cap C\ \text{mais}\ B\neq C}$ ($\cR2\in B$, $2\notin C$). Même idée pour la réunion : $A = \{1, 2, 3\}$, $B = \{1\}$, $C = \{2\}$ donnent $A\cup B = A\cup C = A$. En revanche, avoir <b>les deux</b> égalités $A\cap B = A\cap C$ et $A\cup B = A\cup C$ force $B = C$ (exercice 6).</p>
+
+<h2 id="ea-parties">5. Parties d'un ensemble, produit cartésien, partitions</h2>
+<div class="sbox">$$\mathcal P(E) = \{A,\ A\subset E\},\qquad\operatorname{Card}\mathcal P(E) = 2^{\operatorname{Card}E}.\qquad E\times F = \{(x, y),\ x\in E,\ y\in F\},\quad(x, y) = (a, b)\iff x = a\ \text{et}\ y = b.$$
+$$(A_i)_{i\in I}\ \text{partition de}\ E\iff A_i\neq\varnothing,\quad A_i\cap A_j = \varnothing\ (i\neq j),\quad\bigcup_{i\in I}A_i = E.$$</div>
+<p>Le programme demande aussi des parties <b>non vides</b> dans une partition (le résumé du cours l'omet, mais c'est la définition officielle). $A$ et $\overline A$ forment une partition de $E$ si $A\neq\varnothing$ et $A\neq E$.</p>
+
+<p class="ml">Exemple 7 : écrire $\mathcal P(\{a, b, c\})$</p>
+<p><b>Étape 1 : Rappel.</b> On range les parties par taille : $0$, $1$, $2$, puis $3$ éléments.</p>
+<p><b>Étape 2 : Les parties.</b> Taille $0$ : $\varnothing$. Taille $1$ : $\{a\}, \{b\}, \{c\}$. Taille $2$ : $\{a, b\}, \{a, c\}, \{b, c\}$. Taille $3$ : $\{a, b, c\}$.</p>
+<p><b>Étape 3 : On compte.</b> $1 + 3 + 3 + 1 = 8 = 2^3$ : chaque élément est dedans ou dehors, $2\times2\times2$ choix.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal P(\{a, b, c\})\ \text{a}\ 8\ \text{éléments}}$. Attention : $a\in\{a, b, c\}$ mais $\{a\}\in\mathcal P(\{a, b, c\})$ et $\varnothing\in\mathcal P(E)$ toujours.</p>
+
+<p class="ml">Exemple 8 : un produit cartésien n'est pas commutatif</p>
+<p>$E = \{1, 2\}$, $F = \{a, b, c\}$. Écrire $E\times F$ ; a-t-on $E\times F = F\times E$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Un couple est <b>ordonné</b> : la 1<sup>re</sup> place vient de $E$.</p>
+<p><b>Étape 2 : On liste</b> ligne par ligne (pour chaque $x\in E$, tous les $y\in F$) : $(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)$ : $2\times3 = 6$ couples.</p>
+<p><b>Étape 3 : Comparaison.</b> $(1, a)\in E\times F$, mais $(1, a)\notin F\times E$ : la 1<sup>re</sup> coordonnée d'un couple de $F\times E$ est une lettre.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E\times F\neq F\times E}$, même s'ils ont le même cardinal $6$.</p>
+
+<h2 id="ea-ind">6. Fonctions indicatrices</h2>
+<div class="sbox">$$\mathbb 1_A(x) = \left\{\begin{aligned}&1&&x\in A\\&0&&x\notin A\end{aligned}\right.\qquad A = B\iff\mathbb 1_A = \mathbb 1_B,\qquad A\subset B\iff\mathbb 1_A\leq\mathbb 1_B.$$
+$$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 - \mathbb 1_A,\quad\mathbb 1_{A\cup B} = \mathbb 1_A + \mathbb 1_B - \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_A^2 = \mathbb 1_A.$$</div>
+<p class="ml">La méthode</p>
+<p>Pour une égalité d'ensembles compliquée : on calcule les deux indicatrices <b>comme des polynômes</b> en $\mathbb 1_A, \mathbb 1_B, \dots$, en simplifiant avec $\mathbb 1_A^2 = \mathbb 1_A$. Si on trouve la même expression, les ensembles sont égaux.</p>
+
+<p class="ml">Exemple 9 : l'indicatrice d'une réunion</p>
+<p>Démontrer $\mathbb 1_{A\cup B} = \mathbb 1_A + \mathbb 1_B - \mathbb 1_A\mathbb 1_B$.</p>
+<p><b>Étape 1 : Rappel.</b> $\overline{A\cup B} = \overline A\cap\overline B$ (De Morgan), $\mathbb 1_{\overline X} = 1 - \mathbb 1_X$, $\mathbb 1_{X\cap Y} = \mathbb 1_X\mathbb 1_Y$.</p>
+<p><b>Étape 2 : Le complémentaire.</b> $\mathbb 1_{A\cup B} = 1 - \mathbb 1_{\overline{A\cup B}} = 1 - \mathbb 1_{\overline A\cap\overline B} = 1 - \mathbb 1_{\overline A}\mathbb 1_{\overline B}$.</p>
+<p><b>Étape 3 : On développe.</b> $\mathbb 1_{\overline A}\mathbb 1_{\overline B} = (1 - \mathbb 1_A)(1 - \mathbb 1_B) = 1 - \mathbb 1_B - \mathbb 1_A + \mathbb 1_A\mathbb 1_B$.</p>
+<p><b>Étape 4 : Conclusion.</b> $1 - (1 - \mathbb 1_A - \mathbb 1_B + \mathbb 1_A\mathbb 1_B) = \cG{\mathbb 1_A + \mathbb 1_B - \mathbb 1_A\mathbb 1_B}$. Si $A\cap B = \varnothing$, $\mathbb 1_A\mathbb 1_B = \mathbb 1_\varnothing = 0$ et il reste $\mathbb 1_A + \mathbb 1_B$.</p>
+
+<p class="ml">Exemple 10 : l'indicatrice de $A\,\Delta\,B$ <span class="hp">hors programme</span></p>
+<p><b>Étape 1 : Rappel.</b> $A\,\Delta\,B = (A\cup B)\setminus(A\cap B) = (A\cup B)\cap\overline{A\cap B}$.</p>
+<p><b>Étape 2 : Les deux morceaux.</b> $\mathbb 1_{A\cup B} = a + b - ab$ et $\mathbb 1_{\overline{A\cap B}} = 1 - ab$, en notant $a = \mathbb 1_A$, $b = \mathbb 1_B$.</p>
+<p><b>Étape 3 : Le produit.</b> $(a + b - ab)(1 - ab) = a + b - ab - a^2b - ab^2 + a^2b^2$. Avec $a^2 = a$ et $b^2 = b$ : $a^2b = ab$, $ab^2 = ab$, $a^2b^2 = ab$, donc $= a + b - ab - ab - ab + ab = a + b - 2ab$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{A\Delta B} = \mathbb 1_A + \mathbb 1_B - 2\,\mathbb 1_A\mathbb 1_B = (\mathbb 1_A - \mathbb 1_B)^2}$ (contrôle : $(a - b)^2 = a^2 - 2ab + b^2 = a - 2ab + b$).</p>
+
+<h2 id="ea-app">7. Applications, égalité, composée</h2>
+<div class="sbox">$$f = g\iff(\text{même départ, même arrivée, et}\ \forall x\in E,\ f(x) = g(x)).\qquad f\neq g\iff\exists\cR{x_0},\ f(x_0)\neq g(x_0).$$
+$$g\circ f:\ E\xrightarrow{\ f\ }F\xrightarrow{\ g\ }G,\quad(g\circ f)(x) = g(f(x)),\qquad f\circ\operatorname{id}_E = \operatorname{id}_F\circ f = f,\qquad h\circ(g\circ f) = (h\circ g)\circ f.$$</div>
+<p>En général $\cR{g\circ f\neq f\circ g}$ : la composition n'est pas commutative. Pour $f\in E^E$, $f^n = f\circ\dots\circ f$ ($n$ fois) et $f^0 = \operatorname{id}_E$.</p>
+
+<p class="ml">Exemple 11 : $g\circ f$ et $f\circ g$</p>
+<p>$f(x) = x^2$ et $g(x) = x + 1$ sur $\mathbb R$.</p>
+<p><b>Étape 1 : Rappel.</b> $(g\circ f)(x) = g(f(x))$ : on applique $f$ en premier.</p>
+<p><b>Étape 2 : $g\circ f$.</b> $f(x) = x^2$, puis $g(x^2) = x^2 + 1$.</p>
+<p><b>Étape 3 : $f\circ g$.</b> $g(x) = x + 1$, puis $f(x + 1) = (x + 1)^2 = x^2 + 2x + 1$.</p>
+<p><b>Étape 4 : Un point qui les sépare.</b> En $\cR{x_0 = 1}$ : $(g\circ f)(1) = 1 + 1 = 2$ et $(f\circ g)(1) = (1 + 1)^2 = 4$, et $2\neq4$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{g\circ f\neq f\circ g}$ (elles coïncident seulement là où $2x = 0$, en $x = 0$).</p>
+
+<h2 id="ea-img">8. Image directe, image réciproque</h2>
+<div class="sbox">$$f(\cB A) = \{f(x),\ x\in A\}:\quad\cV y\in f(A)\iff\exists\cO x\in A,\ \cV y = f(\cO x).\qquad f^{-1}(\cB B) = \{x\in E,\ f(x)\in B\}:\quad\cO x\in f^{-1}(B)\iff\cV{f(x)}\in\cB B.$$
+$$f^{-1}(B\cup B') = f^{-1}(B)\cup f^{-1}(B'),\quad f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B'),\quad f^{-1}(\overline B) = \overline{f^{-1}(B)}.$$
+$$f(A\cup A') = f(A)\cup f(A'),\qquad f(A\cap A')\cR\subset f(A)\cap f(A')\ \text{(seulement une inclusion)}.$$
+$$A\subset f^{-1}(f(A)),\qquad f(f^{-1}(B))\subset B.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> $f^{-1}(B)$ : on <b>résout</b> l'inéquation ou l'équation $f(x)\in B$. <b>2.</b> $f(A)$ : on étudie les <b>variations</b> de $f$ sur $A$ (pour une fonction réelle continue, l'image d'un intervalle est un intervalle). <b>3.</b> L'image réciproque se comporte bien avec toutes les opérations ; l'image directe <b>pas avec $\cap$</b>.</p>
+
+<p class="ml">Exemple 12 : images par $x\mapsto x^2$</p>
+<p>$f(x) = x^2$ sur $\mathbb R$. Calculer $f([-1, 2])$, $f^{-1}([1, 4])$ et $f^{-1}([-3, -1])$.</p>
+<p><b>Étape 1 : Rappel.</b> $f(A)$ : variations. $f^{-1}(B)$ : on résout $x^2\in B$.</p>
+<p><b>Étape 2 : $f([-1, 2])$.</b> Sur $[-1, 0]$, $f$ décroît de $f(-1) = 1$ à $f(0) = 0$ : image $[0, 1]$. Sur $[0, 2]$, $f$ croît de $0$ à $f(2) = 4$ : image $[0, 4]$. Réunion : $[0, 1]\cup[0, 4] = [0, 4]$.</p>
+<p><b>Étape 3 : $f^{-1}([1, 4])$.</b> $1\leq x^2\leq4\iff\sqrt1\leq|x|\leq\sqrt4\iff1\leq|x|\leq2$ (la racine est croissante et $\sqrt{x^2} = |x|$). Si $x\geq0$ : $1\leq x\leq2$. Si $x \lt 0$ : $1\leq-x\leq2$, soit $-2\leq x\leq-1$.</p>
+<p><b>Étape 4 : $f^{-1}([-3, -1])$.</b> $x^2\geq0 > -1$ pour tout $x$ : aucun $x$ ne vérifie $x^2\leq-1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f([-1, 2]) = [0, 4],\quad f^{-1}([1, 4]) = [-2, -1]\cup[1, 2],\quad f^{-1}([-3, -1]) = \varnothing}$. Ici $f^{-1}$ est une notation : $f$ n'est pas bijective.</p>
+
+<p class="ml">Exemple 13 : $f(A\cap A')$ peut être plus petit que $f(A)\cap f(A')$</p>
+<p><b>Étape 1 : Rappel.</b> $A\cap A'\subset A$ donne $f(A\cap A')\subset f(A)$, de même pour $A'$ : on a toujours $f(A\cap A')\subset f(A)\cap f(A')$.</p>
+<p><b>Étape 2 : Le contre-exemple.</b> $f(x) = x^2$, $\cB A = [-1, 0]$, $\cB{A'} = [0, 1]$.</p>
+<p><b>Étape 3 : À gauche.</b> $A\cap A' = \{0\}$ (le seul réel à la fois $\leq0$ et $\geq0$), donc $f(A\cap A') = \{0^2\} = \{0\}$.</p>
+<p><b>Étape 4 : À droite.</b> $f([-1, 0]) = [0, 1]$ ($f$ décroît de $1$ à $0$) et $f([0, 1]) = [0, 1]$ ($f$ croît de $0$ à $1$), donc $f(A)\cap f(A') = [0, 1]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\{0\}\subsetneq[0, 1]}$ : par exemple $\cR1 = f(-1) = f(1)$ est dans les deux images, mais vient de deux antécédents différents. C'est le défaut d'injectivité qui casse l'égalité (exercice 3).</p>
+
+<p class="ml">Exemple 14 : $f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B')$</p>
+<p><b>Étape 1 : Rappel.</b> $x\in f^{-1}(B)\iff f(x)\in B$, et on raisonne par équivalences.</p>
+<p><b>Étape 2 : Soit $\cO x\in E$.</b> $x\in f^{-1}(B\cap B')\iff f(x)\in B\cap B'\iff(f(x)\in B\ \text{et}\ f(x)\in B')$.</p>
+<p><b>Étape 3 : On retraduit.</b> $f(x)\in B\iff x\in f^{-1}(B)$ et $f(x)\in B'\iff x\in f^{-1}(B')$, donc : $\iff x\in f^{-1}(B)\cap f^{-1}(B')$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B')}$, sans aucune hypothèse sur $f$.</p>
+
+<h2 id="ea-inj">9. Injections</h2>
+<div class="sbox">$$f\ \text{injective}\iff\forall\cO x, \cO{x'}\in E,\ (f(x) = f(x')\Rightarrow x = x')\iff\forall x, x',\ (x\neq x'\Rightarrow f(x)\neq f(x')).$$
+$$f\ \text{non injective}\iff\exists\cR x, \cR{x'},\ x\neq x'\ \text{et}\ f(x) = f(x').$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On écrit « <b>soient $\cO x, \cO{x'}$ avec $f(x) = f(x')$</b> », et on calcule jusqu'à $x = x'$. <b>2.</b> Pour une fonction réelle : strictement monotone $\Rightarrow$ injective. <b>3.</b> Pour réfuter : <b>deux points distincts de même image</b>. <b>4.</b> Autrement dit : tout $y$ a <b>au plus un</b> antécédent.</p>
+
+<p class="ml">Exemple 15 : une application de $\mathbb R^2$ dans $\mathbb R^2$</p>
+<p>$f(x, y) = (x + y,\ x - y)$. Est-elle injective ?</p>
+<p><b>Étape 1 : Rappel.</b> On suppose $f(x, y) = f(x', y')$ et on montre $(x, y) = (x', y')$.</p>
+<p><b>Étape 2 : On traduit l'égalité des couples.</b> $(x + y, x - y) = (x' + y', x' - y')$ donne $x + y = x' + y'$ (1) et $x - y = x' - y'$ (2).</p>
+<p><b>Étape 3 : On additionne et on soustrait.</b> (1) + (2) : $2x = 2x'$, donc $x = x'$. (1) − (2) : $2y = 2y'$, donc $y = y'$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est injective}}$.</p>
+
+<p class="ml">Exemple 16 : réfuter l'injectivité</p>
+<p>$g(x) = x^2 - 2x$ sur $\mathbb R$ ; puis sur $[1, +\infty[$.</p>
+<p><b>Étape 1 : Rappel.</b> Deux points distincts de même image suffisent.</p>
+<p><b>Étape 2 : Sur $\mathbb R$.</b> $g(x) = x(x - 2)$ s'annule en $\cR0$ et en $\cR2$ : $g(0) = 0 - 0 = 0$ et $g(2) = 4 - 4 = 0$, avec $0\neq2$. Pas injective.</p>
+<p><b>Étape 3 : Sur $[1, +\infty[$.</b> $g'(x) = 2x - 2 = 2(x - 1) > 0$ pour $x > 1$ : $g$ est strictement croissante sur $[1, +\infty[$, donc injective.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{g\ \text{non injective sur}\ \mathbb R,\ \text{injective sur}\ [1, +\infty[}$ : l'injectivité dépend de l'ensemble de départ.</p>
+
+<h2 id="ea-surj">10. Surjections</h2>
+<div class="sbox">$$f:E\to F\ \text{surjective}\iff\forall\cV y\in F,\ \exists\cO x\in E,\ \cV y = f(\cO x)\iff f(E) = F.$$
+$$f\ \text{non surjective}\iff\exists\cR y\in F,\ \forall x\in E,\ f(x)\neq y.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On fixe « <b>soit $\cV y\in F$</b> » et on <b>résout</b> $f(x) = y$ d'inconnue $x$. <b>2.</b> On vérifie que la solution trouvée est <b>dans l'ensemble de départ</b>. <b>3.</b> Pour réfuter : un $\cR y$ sans antécédent. <b>4.</b> Autrement dit : tout $y$ a <b>au moins un</b> antécédent.</p>
+
+<p class="ml">Exemple 17 : une homographie</p>
+<p>$f:\mathbb R\setminus\{1\}\to\mathbb R\setminus\{2\}$, $f(x) = \frac{2x + 1}{x - 1}$. Montrer que $f$ est bien définie et surjective.</p>
+<p><b>Étape 1 : Rappel.</b> On résout $f(x) = y$ pour $y$ fixé, puis on contrôle le domaine.</p>
+<p><b>Étape 2 : Bien définie.</b> Si $\frac{2x + 1}{x - 1} = 2$, alors $2x + 1 = 2x - 2$, soit $1 = -2$ : impossible. Donc $f(x)\neq2$ et $f$ arrive bien dans $\mathbb R\setminus\{2\}$.</p>
+<p><b>Étape 3 : Soit $\cV y\neq2$. On résout.</b> On multiplie par $x - 1\neq0$ : $y(x - 1) = 2x + 1\iff yx - y = 2x + 1\iff yx - 2x = y + 1\iff x(y - 2) = y + 1\iff x = \frac{y + 1}{y - 2}$ (car $y - 2\neq0$).</p>
+<p><b>Étape 4 : $x$ est-il dans le départ ?</b> Si $\frac{y + 1}{y - 2} = 1$, alors $y + 1 = y - 2$, soit $1 = -2$ : impossible. Donc $x\neq1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est surjective}}$, et même bijective : la solution est unique, $f^{-1}(y) = \frac{y + 1}{y - 2}$. Contrôle : $f(2) = \frac{4 + 1}{2 - 1} = 5$ et $\frac{5 + 1}{5 - 2} = \frac63 = 2$.</p>
+
+<p class="ml">Exemple 18 : surjective ou non selon l'arrivée</p>
+<p>$f(x) = x^2$ de $\mathbb R$ dans $\mathbb R$, puis de $\mathbb R$ dans $\mathbb R_+$.</p>
+<p><b>Étape 1 : Rappel.</b> $f$ surjective $\iff f(E) = F$.</p>
+<p><b>Étape 2 : L'image.</b> $x^2\geq0$, et tout $y\geq0$ s'écrit $y = (\sqrt y)^2$ : $f(\mathbb R) = \mathbb R_+$.</p>
+<p><b>Étape 3 : Arrivée $\mathbb R$.</b> $\cR{-1}$ n'a pas d'antécédent ($x^2 = -1$ est impossible) : pas surjective.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{non surjective sur}\ \mathbb R,\ \text{surjective sur}\ \mathbb R_+}$ : la surjectivité dépend de l'ensemble d'arrivée.</p>
+
+<h2 id="ea-bij">11. Bijections et réciproque</h2>
+<div class="sbox">$$f\ \text{bijective}\iff\forall\cV y\in F,\ \exists!\,\cO x\in E,\ \cV y = f(\cO x)\iff\exists g:F\to E,\ g\circ f = \operatorname{id}_E\ \text{et}\ f\circ g = \operatorname{id}_F.$$
+$$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} = f,\quad(g\circ f)^{-1} = f^{-1}\circ g^{-1}.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On résout $f(x) = y$ : <b>une seule solution</b> dans le départ pour chaque $y$ donne la bijectivité <b>et</b> la formule de $f^{-1}$. <b>2.</b> Ou on devine $g$ et on vérifie $g\circ f = \operatorname{id}$ <b>et</b> $f\circ g = \operatorname{id}$ (les deux !). <b>3.</b> Si $f\circ f = \operatorname{id}_E$ (involution), $f$ est bijective et $f^{-1} = f$.</p>
+
+<p class="ml">Exemple 19 : la réciproque de $(x, y)\mapsto(x + y, x - y)$</p>
+<p><b>Étape 1 : Rappel.</b> On résout $f(x, y) = (a, b)$ d'inconnue $(x, y)$.</p>
+<p><b>Étape 2 : Le système.</b> $x + y = a$ et $x - y = b$. En additionnant : $2x = a + b$, $x = \frac{a + b}2$. En soustrayant : $2y = a - b$, $y = \frac{a - b}2$.</p>
+<p><b>Étape 3 : Une seule solution</b>, pour tout $(a, b)\in\mathbb R^2$ : $f$ est bijective.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f^{-1}(a, b) = \Big(\frac{a + b}2, \frac{a - b}2\Big)}$. Contrôle : $f(f^{-1}(a, b)) = \big(\frac{a + b + a - b}2, \frac{a + b - a + b}2\big) = \big(\frac{2a}2, \frac{2b}2\big) = (a, b)$.</p>
+
+<p class="ml">Exemple 20 : une involution de $\mathcal P(E)$</p>
+<p>$\varphi:\mathcal P(E)\to\mathcal P(E)$, $\varphi(A) = \overline A$.</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi\circ\varphi = \operatorname{id}$ donne bijective, de réciproque $\varphi$.</p>
+<p><b>Étape 2 : On compose.</b> $\varphi(\varphi(A)) = \overline{\overline A} = A$ pour toute partie $A$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\varphi\ \text{est bijective et}\ \varphi^{-1} = \varphi}$. Même chose pour $x\mapsto\frac1x$ sur $\mathbb R^*$ : $\frac1{1/x} = x$.</p>
+
+<h2 id="ea-comp">12. Composées et propriétés</h2>
+<div class="sbox">$$f, g\ \text{injectives}\Rightarrow g\circ f\ \text{injective};\quad f, g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective};\quad f, g\ \text{bijectives}\Rightarrow g\circ f\ \text{bijective}.$$
+$$g\circ f\ \text{injective}\Rightarrow\cB f\ \text{injective}\ (\text{la première}).\qquad g\circ f\ \text{surjective}\Rightarrow\cB g\ \text{surjective}\ (\text{la dernière}).$$</div>
+<p>Moyen mnémotechnique : l'injectivité se lit sur l'application qu'on applique en <b>premier</b> ($f$), la surjectivité sur celle qu'on applique en <b>dernier</b> ($g$).</p>
+
+<p class="ml">Exemple 21 : $g\circ f$ injective entraîne $f$ injective</p>
+<p><b>Étape 1 : Rappel.</b> On part de $f(x) = f(x')$ et on vise $x = x'$.</p>
+<p><b>Étape 2 : Soient $\cO x, \cO{x'}$ avec $f(x) = f(x')$.</b> On applique $g$ aux deux membres : $g(f(x)) = g(f(x'))$, c'est-à-dire $(g\circ f)(x) = (g\circ f)(x')$.</p>
+<p><b>Étape 3 : On utilise l'hypothèse.</b> $g\circ f$ est injective, donc $x = x'$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est injective}}$. Mais $g$ ne l'est pas forcément : $f:\{0\}\to\mathbb R$, $f(0) = 0$, et $g(x) = x^2$ ; $g\circ f$ est injective (départ à un élément), $g$ non ($g(\cR{-1}) = g(\cR1)$).</p>
+
+<p class="ml">Exemple 22 : $g\circ f$ surjective entraîne $g$ surjective</p>
+<p><b>Étape 1 : Rappel.</b> On fixe $z\in G$ et on lui cherche un antécédent par $g$.</p>
+<p><b>Étape 2 : Soit $\cV z\in G$.</b> $g\circ f$ est surjective : il existe $x\in E$ avec $g(f(x)) = z$.</p>
+<p><b>Étape 3 : L'antécédent.</b> On pose $y = f(x)\in F$ : alors $g(y) = z$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{g\ \text{est surjective}}$.</p>
+
+<h2 id="ea-restr">13. Restriction, prolongement</h2>
+<div class="sbox">$$f_{|A}:A\to F,\ x\mapsto f(x)\ (A\subset E).\qquad g:E'\to F\ \text{prolonge}\ f\ (E\subset E')\iff\forall x\in E,\ g(x) = f(x).$$</div>
+<p>Restreindre le départ peut rendre <b>injective</b> ; réduire l'arrivée à $f(E)$ rend <b>surjective</b>. C'est ainsi qu'on fabrique $\sqrt{\phantom x}$, $\arcsin$, $\arccos$, $\arctan$.</p>
+
+<p class="ml">Exemple 23 : fabriquer une bijection à partir de $\sin$</p>
+<p><b>Étape 1 : Rappel.</b> Restreindre le départ pour l'injectivité, ajuster l'arrivée pour la surjectivité.</p>
+<p><b>Étape 2 : Injectivité.</b> $\sin' = \cos > 0$ sur $\big]-\frac\pi2, \frac\pi2\big[$ : $\sin$ est strictement croissante sur $\big[-\frac\pi2, \frac\pi2\big]$, donc injective.</p>
+<p><b>Étape 3 : L'image.</b> $\sin$ est continue et croît de $\sin\big(-\frac\pi2\big) = -1$ à $\sin\frac\pi2 = 1$ : l'image est $[-1, 1]$ (valeurs intermédiaires).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sin_{|[-\pi/2, \pi/2]}:\big[-\tfrac\pi2, \tfrac\pi2\big]\to[-1, 1]\ \text{est bijective}}$, de réciproque $\arcsin$. Sur $\mathbb R$ entier, $\sin$ n'est pas injective : $\sin(\cR0) = \sin(\cR\pi) = 0$.</p>
+
+<h2 id="ea-rel">14. Relations binaires</h2>
+<div class="sbox">$$\textbf{réflexive}:\ \forall x,\ x\,\mathcal R\,x.\qquad\textbf{symétrique}:\ x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x.\qquad\textbf{antisymétrique}:\ (x\,\mathcal R\,y\ \text{et}\ y\,\mathcal R\,x)\Rightarrow x = y.\qquad\textbf{transitive}:\ (x\,\mathcal R\,y\ \text{et}\ y\,\mathcal R\,z)\Rightarrow x\,\mathcal R\,z.$$
+$$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitive}.\qquad\text{ordre} = \text{réflexive} + \text{antisymétrique} + \text{transitive}.$$</div>
+<p class="ml">La méthode</p>
+<p>On vérifie les trois propriétés <b>une par une</b>, chacune avec « soient $x, y, z$ » et la définition de $\mathcal R$ recopiée. Pour réfuter une propriété : un contre-exemple chiffré. « Antisymétrique » n'est <b>pas</b> le contraire de « symétrique » : l'égalité est les deux à la fois.</p>
+
+<p class="ml">Exemple 24 : la relation « même parité »</p>
+<p>Sur $\mathbb Z$ : $x\,\mathcal R\,y\iff x - y$ est pair.</p>
+<p><b>Étape 1 : Rappel.</b> Réflexive, symétrique, transitive.</p>
+<p><b>Étape 2 : Réflexive.</b> $x - x = 0 = 2\times0$ est pair.</p>
+<p><b>Étape 3 : Symétrique.</b> Si $x - y = 2k$, alors $y - x = -2k = 2\times(-k)$, pair.</p>
+<p><b>Étape 4 : Transitive.</b> Si $x - y = 2k$ et $y - z = 2k'$, on additionne : $x - z = (x - y) + (y - z) = 2k + 2k' = 2(k + k')$, pair.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal R\ \text{est une relation d'équivalence}}$ : c'est la congruence modulo $2$.</p>
+
+<p class="ml">Exemple 25 : la divisibilité sur $\mathbb N^*$</p>
+<p>$p\,\mathcal R\,q\iff p\mid q$ ($\exists k\in\mathbb N^*,\ q = kp$).</p>
+<p><b>Étape 1 : Rappel.</b> Réflexive, antisymétrique, transitive : ordre.</p>
+<p><b>Étape 2 : Réflexive.</b> $p = 1\times p$.</p>
+<p><b>Étape 3 : Antisymétrique.</b> Si $q = kp$ et $p = k'q$, alors $p = k'kp$, donc $k'k = 1$ (on divise par $p\neq0$). Deux entiers $\geq1$ de produit $1$ valent $1$ : $k = 1$ et $q = p$.</p>
+<p><b>Étape 4 : Transitive.</b> Si $q = kp$ et $r = k'q$, alors $r = k'kp$ avec $k'k\in\mathbb N^*$ : $p\mid r$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mid\ \text{est une relation d'ordre partiel sur}\ \mathbb N^*}$ : partiel car $\cR2\nmid3$ et $\cR3\nmid2$. Sur $\mathbb Z$, ce n'est plus un ordre : $2\mid-2$ et $-2\mid2$ avec $2\neq-2$.</p>
+
+<h2 id="ea-equiv">15. Relations d'équivalence, classes, partition</h2>
+<div class="sbox">$$\overline a = \{x\in E,\ x\,\mathcal R\,a\}.\qquad x\,\mathcal R\,a\iff x\in\overline a\iff\overline x = \overline a.\qquad\overline x\neq\overline a\iff\overline x\cap\overline a = \varnothing.$$
+$$\textbf{Les classes d'équivalence forment une partition de}\ E.\qquad a\equiv b\ [n]\iff n\mid a - b:\ \text{classes}\ \overline0, \overline1, \dots, \overline{n - 1}.$$</div>
+<p>L'ensemble des classes, noté $E/\mathcal R$, est l'ensemble quotient <span class="hp">hors programme</span> en MPSI (il sert en Spé pour $\mathbb Z/n\mathbb Z$).</p>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Pour décrire $\overline a$ : on <b>résout</b> $x\,\mathcal R\,a$ d'inconnue $x$. <b>2.</b> On choisit un <b>représentant</b> simple par classe. <b>3.</b> Relation du type $x\,\mathcal R\,y\iff f(x) = f(y)$ : c'est toujours une équivalence, et les classes sont les $f^{-1}(\{c\})$, $c\in f(E)$.</p>
+
+<p class="ml">Exemple 26 : $x\,\mathcal R\,y\iff\cos x = \cos y$</p>
+<p><b>Étape 1 : Rappel.</b> Relation « même image » : équivalence ; la classe de $a$ est $\{x,\ \cos x = \cos a\}$.</p>
+<p><b>Étape 2 : Équivalence.</b> $\cos x = \cos x$ ; si $\cos x = \cos y$ alors $\cos y = \cos x$ ; si $\cos x = \cos y$ et $\cos y = \cos z$ alors $\cos x = \cos z$ : ce sont les propriétés de l'égalité.</p>
+<p><b>Étape 3 : On résout</b> $\cos x = \cos a\iff x\equiv a\ [2\pi]$ ou $x\equiv-a\ [2\pi]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\overline a = \{a + 2k\pi,\ k\in\mathbb Z\}\cup\{-a + 2k\pi,\ k\in\mathbb Z\}}$. Exemple : $\overline0 = 2\pi\mathbb Z$ (car $a = -a = 0$), et chaque classe a un unique représentant dans $[0, \pi]$.</p>
+
+<p class="ml">Exemple 27 : $x\,\mathcal R\,y\iff x - y\in\mathbb Z$ sur $\mathbb R$</p>
+<p><b>Étape 1 : Rappel.</b> On vérifie l'équivalence, puis on résout $x\,\mathcal R\,a$.</p>
+<p><b>Étape 2 : Équivalence.</b> $x - x = 0\in\mathbb Z$ ; $y - x = -(x - y)\in\mathbb Z$ ; $x - z = (x - y) + (y - z)$ est une somme d'entiers.</p>
+<p><b>Étape 3 : La classe.</b> $x\,\mathcal R\,a\iff x - a = k\in\mathbb Z\iff x = a + k$ : $\overline a = a + \mathbb Z$.</p>
+<p><b>Étape 4 : Un représentant.</b> $a - \lfloor a\rfloor\in[0, 1[$ et $a - (a - \lfloor a\rfloor) = \lfloor a\rfloor\in\mathbb Z$ : chaque classe contient un unique élément de $[0, 1[$, la partie fractionnaire. Exemple : $\overline{2{,}7} = \overline{0{,}7}$ car $2{,}7 - 0{,}7 = 2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\overline a = a + \mathbb Z,\ \text{représentant}\ a - \lfloor a\rfloor\in[0, 1[}$.</p>
+
+<h2 id="ea-ordre">16. Relations d'ordre</h2>
+<div class="sbox">$$\text{Ordre total}:\ \forall x, y,\ x\preccurlyeq y\ \text{ou}\ y\preccurlyeq x.\ \text{Sinon : ordre partiel}.$$
+$$\text{Ordres usuels}:\ \leq\ \text{sur}\ \mathbb R\ \text{(total)},\quad\subset\ \text{sur}\ \mathcal P(E)\ \text{(partiel dès que}\ \operatorname{Card}E\geq2),\quad\mid\ \text{sur}\ \mathbb N\ \text{(partiel)}.$$</div>
+<p>Une relation d'ordre se note souvent $\preccurlyeq$ ou $\leq$ : ce symbole ne veut pas forcément dire l'ordre usuel des réels.</p>
+
+<p class="ml">Exemple 28 : l'ordre produit sur $\mathbb R^2$</p>
+<p>$(x, y)\preccurlyeq(x', y')\iff x\leq x'$ et $y\leq y'$.</p>
+<p><b>Étape 1 : Rappel.</b> Réflexive, antisymétrique, transitive, puis total ou partiel.</p>
+<p><b>Étape 2 : Réflexive.</b> $x\leq x$ et $y\leq y$.</p>
+<p><b>Étape 3 : Antisymétrique.</b> $x\leq x'$ et $x'\leq x$ donnent $x = x'$ ; de même $y = y'$ ; donc $(x, y) = (x', y')$.</p>
+<p><b>Étape 4 : Transitive.</b> $x\leq x'\leq x''$ et $y\leq y'\leq y''$ donnent $x\leq x''$ et $y\leq y''$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{relation d'ordre partiel}}$ : $\cR{(0, 1)}$ et $\cR{(1, 0)}$ ne sont pas comparables ($0\leq1$ mais $1 > 0$).</p>
+
+<h2 id="ea-maj">17. Majorants, plus grand et plus petit élément</h2>
+<div class="sbox">$$M\ \text{majorant de}\ A\iff\forall a\in A,\ a\preccurlyeq M.\qquad\max A = a\iff a\in A\ \text{et}\ a\ \text{majore}\ A\ \text{(unique s'il existe)}.$$
+$$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute partie non vide majorée a un max}.$$</div>
+<p>Le max doit <b>appartenir</b> à $A$. Dans un ordre partiel, un majorant doit être <b>comparable</b> à tous les éléments de $A$. La borne supérieure (plus petit majorant) est traitée dans la fiche « Nombres réels ».</p>
+
+<p class="ml">Exemple 29 : majorants pour la divisibilité</p>
+<p>Dans $(\mathbb N^*, \mid)$, $A = \{4, 6\}$ : majorants, plus grand élément ?</p>
+<p><b>Étape 1 : Rappel.</b> $M$ majore $A$ si $4\mid M$ et $6\mid M$.</p>
+<p><b>Étape 2 : Les majorants.</b> $4\mid M$ et $6\mid M\iff4\vee6\mid M$. $4 = 2^2$, $6 = 2\times3$, $4\vee6 = 2^2\times3 = 12$ : les majorants sont les multiples de $12$.</p>
+<p><b>Étape 3 : Le max.</b> Un max serait un majorant <b>dans</b> $A$ ; ni $4$ ni $6$ n'est multiple de $12$ : $\cR{\text{pas de max}}$ ($4\nmid6$ et $6\nmid4$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{majorants}: 12\mathbb N^*,\ \text{pas de plus grand élément}}$ ; $12$ est le plus petit majorant (la « borne sup » pour $\mid$ est le PPCM).</p>
+
+<p class="ml">Exemple 30 : deux fonctions non comparables</p>
+<p>Dans $\mathbb R^{\mathbb R}$ ordonné par $f\preccurlyeq g\iff\forall x,\ f(x)\leq g(x)$, $A = \{f, g\}$ avec $f(x) = x + 1$, $g(x) = x^2$. $A$ a-t-il un plus grand élément ?</p>
+<p><b>Étape 1 : Rappel.</b> Le max serait $f$ (si $g\preccurlyeq f$) ou $g$ (si $f\preccurlyeq g$).</p>
+<p><b>Étape 2 : $g\preccurlyeq f$ ?</b> En $\cR{x = 2}$ : $g(2) = 4$ et $f(2) = 3$, et $4 > 3$ : non.</p>
+<p><b>Étape 3 : $f\preccurlyeq g$ ?</b> En $\cR{x = 0}$ : $f(0) = 1$ et $g(0) = 0$, et $1 > 0$ : non.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{n'a pas de plus grand élément}}$. Le majorant le plus petit est $x\mapsto\max(x + 1, x^2)$, qui n'est pas dans $A$.</p>
+
+<h2 id="ea-enonce">18. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $A\subset B$ »</b><span>Soit $x\in A$ … donc $x\in B$.</span></div>
+<div><b>« Montrer que $A = B$ »</b><span>Double inclusion, ou équivalences, ou indicatrices.</span></div>
+<div><b>Une égalité avec $\setminus$, $\overline{\phantom A}$</b><span>$A\setminus B = A\cap\overline B$, puis De Morgan.</span></div>
+<div><b>« Nier »</b><span>Échanger $\forall$ et $\exists$, nier seulement la fin.</span></div>
+<div><b>« Calculer $f^{-1}(B)$ »</b><span>Résoudre $f(x)\in B$ ; ne demande pas que $f$ soit bijective.</span></div>
+<div><b>« Calculer $f(A)$ »</b><span>Variations de $f$ sur $A$.</span></div>
+<div><b>« $f$ injective »</b><span>$f(x) = f(x')\Rightarrow x = x'$, ou stricte monotonie.</span></div>
+<div><b>« $f$ surjective »</b><span>Soit $y$, résoudre $f(x) = y$, vérifier le domaine.</span></div>
+<div><b>« $f$ bijective, donner $f^{-1}$ »</b><span>Solution unique de $f(x) = y$, ou $g$ avec $g\circ f = \operatorname{id}$ et $f\circ g = \operatorname{id}$.</span></div>
+<div><b>$f\circ f = \operatorname{id}$</b><span>Bijective et $f^{-1} = f$.</span></div>
+<div><b>$g\circ f$ injective / surjective</b><span>$f$ injective / $g$ surjective.</span></div>
+<div><b>« Montrer que $\mathcal R$ est une équivalence »</b><span>Réflexive, symétrique, transitive ; puis résoudre $x\,\mathcal R\,a$ pour les classes.</span></div>
+<div><b>« Montrer que $\mathcal R$ est un ordre »</b><span>Réflexive, antisymétrique, transitive ; total ? un couple non comparable.</span></div>
+<div><b>$x\,\mathcal R\,y\iff f(x) = f(y)$</b><span>Toujours une équivalence ; classes $f^{-1}(\{c\})$.</span></div>
+<div><b>« Plus grand élément »</b><span>Un majorant qui appartient à $A$.</span></div>
+</div>
+
+<h2 id="ea-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Confondre $\in$ et $\subset$ : $a\in E$ mais $\{a\}\subset E$ et $\{a\}\in\mathcal P(E)$.</p>
+<p><b>2.</b> Nier $\forall x > 0,\ P$ en $\exists x\leq0,\ \operatorname{non}P$ : le domaine ne se nie pas.</p>
+<p><b>3.</b> Nier « $P\Rightarrow Q$ » en « $\operatorname{non}P\Rightarrow\operatorname{non}Q$ » ou en « $P\Rightarrow\operatorname{non}Q$ » : c'est « $P$ et $\operatorname{non}Q$ ».</p>
+<p><b>4.</b> Écrire $f^{-1}(B)$ et croire que $f$ est bijective.</p>
+<p><b>5.</b> Écrire $f(A\cap A') = f(A)\cap f(A')$ sans injectivité.</p>
+<p><b>6.</b> Montrer l'injectivité avec « $x = x'\Rightarrow f(x) = f(x')$ » : c'est vrai pour toute application, ça ne prouve rien.</p>
+<p><b>7.</b> Résoudre $f(x) = y$ sans vérifier que $x$ est dans l'ensemble de départ.</p>
+<p><b>8.</b> Vérifier seulement $g\circ f = \operatorname{id}_E$ pour conclure que $g = f^{-1}$ : il faut aussi $f\circ g = \operatorname{id}_F$.</p>
+<p><b>9.</b> Écrire $(g\circ f)^{-1} = g^{-1}\circ f^{-1}$ : l'ordre s'inverse.</p>
+<p><b>10.</b> Croire qu'une relation non symétrique est antisymétrique.</p>
+<p><b>11.</b> Donner un max qui n'appartient pas à l'ensemble.</p>
+</div>
+
+<h2 id="ea-entrainement">S'entraîner</h2>
+<div data-mlab="imgsq"></div>
+<div data-mlab="homog"></div>
+<div data-mlab="relprop"></div>
+<div data-mlab="quizens"></div>
+
+<h2 id="ea-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $f\circ f\circ f = f$</p>
+<p>$f:E\to E$ vérifie $f^3 = f$. Montrer : $f$ injective $\iff f$ surjective.</p>
+<p><b>Étape 1 : Rappel.</b> On utilise $f(f^2(x)) = f(x)$ et la définition de chaque propriété.</p>
+<p><b>Étape 2 : Injective $\Rightarrow$ surjective.</b> Pour $x\in E$ : $f(f^2(x)) = f^3(x) = f(x)$. Par injectivité, $f^2(x) = x$, c'est-à-dire $f(f(x)) = x$. Donc tout $\cV y\in E$ a pour antécédent $f(y)$ : $f$ est surjective.</p>
+<p><b>Étape 3 : Surjective $\Rightarrow$ injective.</b> Soient $x, x'$ avec $f(x) = f(x')$. Par surjectivité, $x = f(u)$ et $x' = f(u')$. Alors $f(x) = f(x')$ s'écrit $f^2(u) = f^2(u')$ ; on applique $f$ : $f^3(u) = f^3(u')$, soit $f(u) = f(u')$, c'est-à-dire $x = x'$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}}$, et alors $f^2 = \operatorname{id}_E$ (étape 2), donc $f^{-1} = f$.</p>
+
+<p class="ml">Exercice 2 : $g\circ f$ injective et $f$ surjective</p>
+<p>$f:E\to F$, $g:F\to G$. Montrer : ($g\circ f$ injective et $f$ surjective) $\Rightarrow g$ injective.</p>
+<p><b>Étape 1 : Rappel.</b> On part de $g(y) = g(y')$ et on remonte par $f$.</p>
+<p><b>Étape 2 : Soient $y, y'\in F$ avec $g(y) = g(y')$.</b> $f$ surjective : $y = f(x)$ et $y' = f(x')$.</p>
+<p><b>Étape 3 : On compose.</b> $g(f(x)) = g(f(x'))$, soit $(g\circ f)(x) = (g\circ f)(x')$, donc $x = x'$ ($g\circ f$ injective).</p>
+<p><b>Étape 4 : Conclusion.</b> $y = f(x) = f(x') = y'$ : $\cG{g\ \text{est injective}}$.</p>
+
+<p class="ml">Exercice 3 : injectivité et images</p>
+<p>Montrer : $f$ injective $\iff\forall A\in\mathcal P(E),\ f^{-1}(f(A)) = A$.</p>
+<p><b>Étape 1 : Rappel.</b> On a toujours $A\subset f^{-1}(f(A))$ : si $x\in A$, $f(x)\in f(A)$, donc $x\in f^{-1}(f(A))$.</p>
+<p><b>Étape 2 : $\Rightarrow$, l'autre inclusion.</b> Soit $x\in f^{-1}(f(A))$ : $f(x)\in f(A)$, donc $f(x) = f(a)$ avec $a\in A$. Par injectivité, $x = a\in A$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> Soient $x, x'$ avec $f(x) = f(x')$. On prend $A = \{x'\}$ : $f(A) = \{f(x')\}$ et $f(x) = f(x')\in f(A)$, donc $x\in f^{-1}(f(A)) = A = \{x'\}$, soit $x = x'$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{injective}\iff\forall A,\ f^{-1}(f(A)) = A}$. De même, $f$ surjective $\iff\forall B,\ f(f^{-1}(B)) = B$.</p>
+
+<p class="ml">Exercice 4 : la relation « même image » pour $x\mapsto x^3$</p>
+<p>$x\,\mathcal R\,y\iff f(x) = f(y)$ sur $E$. Classes pour $f(x) = x^3$ sur $\mathbb R$. Quand $\mathcal R$ est-elle un ordre ?</p>
+<p><b>Étape 1 : Rappel.</b> $\mathcal R$ est une équivalence (propriétés de l'égalité), de classes $\overline a = f^{-1}(\{f(a)\})$.</p>
+<p><b>Étape 2 : Les classes pour $x^3$.</b> $x^3 = a^3\iff x = a$, car $x\mapsto x^3$ est strictement croissante donc injective : $\overline a = \{a\}$.</p>
+<p><b>Étape 3 : Ordre ?</b> $\mathcal R$ est déjà réflexive et transitive ; elle est un ordre si et seulement si elle est antisymétrique : $(f(x) = f(y)\ \text{et}\ f(y) = f(x))\Rightarrow x = y$, c'est-à-dire $f(x) = f(y)\Rightarrow x = y$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal R\ \text{est un ordre}\iff f\ \text{est injective}}$, et c'est alors l'égalité. Pour $\cos$ (exemple 26), non : $\cos0 = \cos2\pi$.</p>
+
+<p class="ml">Exercice 5 : associativité de $\Delta$ <span class="hp">hors programme</span></p>
+<p>Montrer $(A\,\Delta\,B)\,\Delta\,C = A\,\Delta\,(B\,\Delta\,C)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\mathbb 1_{X\Delta Y} = x + y - 2xy$ (exemple 10), avec $x = \mathbb 1_X$, $y = \mathbb 1_Y$.</p>
+<p><b>Étape 2 : À gauche.</b> Avec $a, b, c$ les indicatrices et $d = a + b - 2ab$ : $\mathbb 1_{(A\Delta B)\Delta C} = d + c - 2dc = a + b - 2ab + c - 2ac - 2bc + 4abc$.</p>
+<p><b>Étape 3 : À droite.</b> Avec $e = b + c - 2bc$ : $a + e - 2ae = a + b + c - 2bc - 2ab - 2ac + 4abc$.</p>
+<p><b>Étape 4 : Conclusion.</b> Les deux expressions sont égales (mêmes termes), donc $\cG{(A\Delta B)\Delta C = A\Delta(B\Delta C)}$ : un point est dedans s'il est dans un nombre <b>impair</b> des trois ensembles.</p>
+
+<p class="ml">Exercice 6 : on simplifie avec les deux égalités</p>
+<p>Montrer : ($A\cup B = A\cup C$ et $A\cap B = A\cap C$) $\Rightarrow B = C$.</p>
+<p><b>Étape 1 : Rappel.</b> Par symétrie des rôles, il suffit de montrer $B\subset C$.</p>
+<p><b>Étape 2 : Soit $x\in B$.</b> Deux cas selon que $x\in A$ ou non.</p>
+<p><b>Étape 3 : Si $x\in A$.</b> $x\in A\cap B = A\cap C$, donc $x\in C$.</p>
+<p><b>Étape 4 : Si $x\notin A$.</b> $x\in A\cup B = A\cup C$, et $x\notin A$, donc $x\in C$.</p>
+<p><b>Étape 5 : Conclusion.</b> $B\subset C$, et de même $C\subset B$ : $\cG{B = C}$.</p>
+
+<h2 id="ea-arbre">L'arbre des ensembles et applications</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que faut-il montrer ?</span><ul>
+<li><div class="hr"><em>sur des ensembles</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>$A\subset B$</em><a class="hl ok" href="#ea-incl">soit $x\in A$ … donc $x\in B$</a></div></li>
+<li><div class="hr"><em>$A = B$, définis par conditions</em><a class="hl ok" href="#ea-incl">double inclusion ou équivalences</a></div></li>
+<li><div class="hr"><em>$A = B$, formules avec $\cap, \cup, \setminus$</em><a class="hl" href="#ea-op">De Morgan, distributivité</a></div></li>
+<li><div class="hr"><em>le calcul bloque</em><a class="hl" href="#ea-ind">comparer les indicatrices</a></div></li>
+<li><div class="hr"><em>une égalité fausse</em><a class="hl" href="#ea-op">exemple dans $\{1, 2, 3\}$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>sur une application</em><span class="hq">Quelle propriété ?</span><ul>
+<li><div class="hr"><em>injective</em><span class="hq">Vraie ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#ea-inj">$f(x) = f(x')\Rightarrow x = x'$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#ea-inj">$x\neq x'$, même image</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>surjective</em><span class="hq">Vraie ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#ea-surj">résoudre $f(x) = y$, contrôler le départ</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#ea-surj">un $y$ sans antécédent</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>bijective, $f^{-1}$</em><a class="hl ok" href="#ea-bij">solution unique, ou $g\circ f$ et $f\circ g = \operatorname{id}$</a></div></li>
+<li><div class="hr"><em>hypothèse sur $g\circ f$</em><a class="hl" href="#ea-comp">injectivité de $f$, surjectivité de $g$</a></div></li>
+<li><div class="hr"><em>$f(A)$, $f^{-1}(B)$</em><a class="hl" href="#ea-img">variations / résoudre $f(x)\in B$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>sur une relation</em><span class="hq">Laquelle ?</span><ul>
+<li><div class="hr"><em>équivalence</em><a class="hl ok" href="#ea-equiv">réfl., sym., trans., puis classes</a></div></li>
+<li><div class="hr"><em>ordre</em><a class="hl ok" href="#ea-ordre">réfl., antisym., trans., total ?</a></div></li>
+<li><div class="hr"><em>max, majorants</em><a class="hl" href="#ea-maj">majorant qui est dans $A$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une phrase à nier</em><a class="hl end" href="#ea-quant">échanger $\forall$ et $\exists$, nier la fin</a></div></li>
+</ul></div></div>
+`,
 "Dénombrement": R`
 <nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
 

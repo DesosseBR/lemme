@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD), rangfam: mlRangFam, kerim: mlKerIm, quizev: h => mlQuiz(h, QEV), quizal: h => mlQuiz(h, QAL), cordes: mlCordes, quizcvx: h => mlQuiz(h, QCVX) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD), rangfam: mlRangFam, kerim: mlKerIm, quizev: h => mlQuiz(h, QEV), quizal: h => mlQuiz(h, QAL), cordes: mlCordes, quizcvx: h => mlQuiz(h, QCVX), imgsq: mlImgSq, homog: mlHomog, relprop: mlRelProp, quizens: h => mlQuiz(h, QENS) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -3045,6 +3045,67 @@ const QCVX = [
   ["$\\sin$ est concave sur $\\mathbb R$.", false, "Faux : seulement sur $[0, \\pi]$ (modulo $2\\pi$)."],
   ["Une fonction convexe et majorée sur $\\mathbb R$ est constante.", true, "Vrai : lemme des pentes."],
   ["Si $f$ est convexe et $g$ convexe, $g\\circ f$ est convexe.", false, "Faux en général : il faut $g$ croissante."]
+];
+/* Ensembles et applications : images par x -> x^2 */
+const sqT = n => { const r = Math.round(Math.sqrt(n)); return r * r === n ? String(r) : `\\sqrt{${n}}`; };
+function mlImgSq(host) {
+  const gen = () => { let a = rnd(-4, 3), b = rnd(a + 1, 4), c = rnd(-3, 8), d = rnd(c + 1, 9); return { a, b, c, d }; };
+  const build = ({ a, b, c, d }) => {
+    const s = [`<p class="mlnote">$f(x) = x^2$ sur $\\mathbb R$. Calculer $f([${a}, ${b}])$ et $f^{-1}([${c}, ${d}])$.</p>`];
+    s.push(`<p class="mlstep">1. Rappel : $f(A)$ se lit sur les variations ($f$ décroît sur $\\mathbb R_-$, croît sur $\\mathbb R_+$) ; $f^{-1}(B)$ s'obtient en résolvant $x^2\\in B$.</p>`);
+    let im;
+    if (a >= 0) { s.push(`<p class="mlstep">2. $[${a}, ${b}]\\subset\\mathbb R_+$ : $f$ croît de $f(${a}) = ${a * a}$ à $f(${b}) = ${b * b}$.</p>`); im = `[${a * a}, ${b * b}]`; }
+    else if (b <= 0) { s.push(`<p class="mlstep">2. $[${a}, ${b}]\\subset\\mathbb R_-$ : $f$ décroît de $f(${a}) = ${a * a}$ à $f(${b}) = ${b * b}$.</p>`); im = `[${b * b}, ${a * a}]`; }
+    else { const M = Math.max(a * a, b * b); s.push(`<p class="mlstep">2. Sur $[${a}, 0]$, $f$ décroît de $f(${a}) = ${a * a}$ à $0$ ; sur $[0, ${b}]$, elle croît de $0$ à $f(${b}) = ${b * b}$. Réunion : $[0, ${a * a}]\\cup[0, ${b * b}] = [0, ${M}]$.</p>`); im = `[0, ${M}]`; }
+    let pre;
+    if (d < 0) { s.push(`<p class="mlstep">3. $x^2\\geq0 > ${d}$ pour tout $x$ : aucun réel ne vérifie $x^2\\leq${d}$.</p>`); pre = "\\varnothing"; }
+    else if (c <= 0) { s.push(`<p class="mlstep">3. ${c < 0 ? `$x^2\\geq${c}$ est toujours vrai ($x^2\\geq0 > ${c}$), il reste` : "$x^2\\geq0$ est toujours vrai, il reste"} $x^2\\leq${d}\\iff|x|\\leq${sqT(d)}$ (racine croissante, $\\sqrt{x^2} = |x|$).</p>`); pre = d === 0 ? "\\{0\\}" : `[-${sqT(d)}, ${sqT(d)}]`; }
+    else { s.push(`<p class="mlstep">3. $${c}\\leq x^2\\leq${d}\\iff${sqT(c)}\\leq|x|\\leq${sqT(d)}$ (racine croissante, $\\sqrt{x^2} = |x|$). Si $x\\geq0$ : $${sqT(c)}\\leq x\\leq${sqT(d)}$ ; si $x \\lt 0$ : $-${sqT(d)}\\leq x\\leq-${sqT(c)}$.</p>`); pre = `[-${sqT(d)}, -${sqT(c)}]\\cup[${sqT(c)}, ${sqT(d)}]`; }
+    s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{f([${a}, ${b}]) = ${im},\\qquad f^{-1}([${c}, ${d}]) = ${pre}}$$`);
+    return s;
+  };
+  stepLab(host, "Image directe et image réciproque par $x\\mapsto x^2$", gen, build);
+}
+/* Ensembles et applications : bijection homographique */
+function mlHomog(host) {
+  const gen = () => { let a = 0, d = 0, b = 0; while (!a) a = rnd(-3, 3); while (!d) d = rnd(-4, 4); do b = rnd(-5, 5); while (b === a * d); return { a, b, d }; };
+  const build = ({ a, b, d }) => {
+    const num = csum([ctp(a, "x"), ctp(b)]), den = csum(["x", ctp(d)]), ad = a * d;
+    const s = [`<p class="mlnote">$f:\\mathbb R\\setminus\\{${-d}\\}\\to\\mathbb R\\setminus\\{${a}\\}$, $f(x) = \\dfrac{${num}}{${den}}$. Montrer que $f$ est bijective et donner $f^{-1}$.</p>`];
+    s.push(`<p class="mlstep">1. Rappel : on résout $f(x) = y$ pour $y$ fixé ; une seule solution dans le départ donne la bijectivité et $f^{-1}$.</p>`);
+    s.push(`<p class="mlstep">2. Bien définie : si $f(x) = ${a}$, alors $${num} = ${a}(${den}) = ${csum([ctp(a, "x"), ctp(ad)])}$, donc $${b} = ${ad}$ : faux. Donc $f(x)\\neq${a}$.</p>`);
+    s.push(`<p class="mlstep">3. Soit $y\\neq${a}$. On multiplie par $${den}\\neq0$ :</p>$$y(${den}) = ${num}\\iff ${csum(["yx", ctp(d, "y")])} = ${num}\\iff ${csum(["yx", ctp(-a, "x")])} = ${csum([ctp(b), ctp(-d, "y")])}\\iff x\\,(${csum(["y", ctp(-a)])}) = ${csum([ctp(b), ctp(-d, "y")])}\\iff x = \\frac{${csum([ctp(b), ctp(-d, "y")])}}{${csum(["y", ctp(-a)])}}.$$`);
+    s.push(`<p class="mlstep">4. Dans le départ ? Si $x = ${-d}$ : $${csum([ctp(b), ctp(-d, "y")])} = ${-d}(${csum(["y", ctp(-a)])}) = ${csum([ctp(-d, "y"), ctp(ad)])}$, donc $${b} = ${ad}$ : faux. Donc $x\\neq${-d}$.</p>`);
+    const x0 = 1 - d, y0 = Fr(a * x0 + b, x0 + d), xb = fdiv(fadd(Fr(b), fmul(Fr(-d), y0)), fadd(y0, Fr(-a)));
+    s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{f\\ \\text{bijective},\\quad f^{-1}(y) = \\frac{${csum([ctp(b), ctp(-d, "y")])}}{${csum(["y", ctp(-a)])}}}$$<p class="mlnote">Contrôle : $f(${x0}) = \\frac{${a}\\times(${x0}) + (${b})}{${x0} + (${d})} = \\frac{${a * x0 + b}}{${x0 + d}} = ${ftex(y0)}$ et $f^{-1}(${ftex(y0)}) = \\frac{${b} - (${d})\\times(${ftex(y0)})}{${ftex(y0)} - (${a})} = ${ftex(xb)}$ : on retrouve $${x0}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Une bijection et sa réciproque", gen, build);
+}
+/* Ensembles et applications : propriétés d'une relation */
+const RELS = [
+  { e: "Sur $\\mathbb Z$ : $x\\,\\mathcal R\\,y\\iff 3\\mid x - y$.", r: "$3\\mid x - x = 0$ : oui.", s: "$y - x = -(x - y)$ : oui.", a: "Non : $0\\,\\mathcal R\\,3$ et $3\\,\\mathcal R\\,0$ mais $0\\neq3$.", t: "$x - z = (x - y) + (y - z)$, somme de multiples de $3$ : oui.", c: "relation d'équivalence (classes $\\overline0, \\overline1, \\overline2$)" },
+  { e: "Sur $\\mathbb R$ : $x\\,\\mathcal R\\,y\\iff x\\leq y$.", r: "$x\\leq x$ : oui.", s: "Non : $0\\leq1$ mais $1\\not\\leq0$.", a: "$x\\leq y$ et $y\\leq x$ donnent $x = y$ : oui.", t: "$x\\leq y\\leq z$ : oui.", c: "relation d'ordre total" },
+  { e: "Sur $\\mathbb R$ : $x\\,\\mathcal R\\,y\\iff x \\lt y$.", r: "Non : $0 \\lt 0$ est faux.", s: "Non : $0 \\lt 1$ mais $1\\not \\lt 0$.", a: "Oui (jamais $x \\lt y$ et $y \\lt x$ en même temps).", t: "$x \\lt y \\lt z$ : oui.", c: "ni équivalence ni ordre (pas réflexive)" },
+  { e: "Sur $\\mathbb R$ : $x\\,\\mathcal R\\,y\\iff|x| = |y|$.", r: "$|x| = |x|$ : oui.", s: "Oui, l'égalité est symétrique.", a: "Non : $1\\,\\mathcal R\\,(-1)$ et $(-1)\\,\\mathcal R\\,1$ mais $1\\neq-1$.", t: "Oui, l'égalité est transitive.", c: "relation d'équivalence (classes $\\{a, -a\\}$)" },
+  { e: "Sur $\\mathcal P(E)$ : $A\\,\\mathcal R\\,B\\iff A\\subset B$.", r: "$A\\subset A$ : oui.", s: "Non (si $E\\neq\\varnothing$) : $\\varnothing\\subset E$ mais $E\\not\\subset\\varnothing$.", a: "Double inclusion : oui.", t: "Oui : $A\\subset B\\subset C$.", c: "relation d'ordre partiel (si $\\operatorname{Card}E\\geq2$)" },
+  { e: "Sur $\\mathbb R$ : $x\\,\\mathcal R\\,y\\iff|x - y|\\leq1$.", r: "$|0|\\leq1$ : oui.", s: "$|y - x| = |x - y|$ : oui.", a: "Non : $0\\,\\mathcal R\\,1$ et $1\\,\\mathcal R\\,0$.", t: "Non : $0\\,\\mathcal R\\,1$, $1\\,\\mathcal R\\,2$ mais $|0 - 2| = 2 > 1$.", c: "ni équivalence ni ordre (pas transitive)" },
+  { e: "Sur $\\mathbb N^*$ : $p\\,\\mathcal R\\,q\\iff\\exists n\\in\\mathbb N^*,\\ q = p^n$.", r: "$p = p^1$ : oui.", s: "Non : $2\\,\\mathcal R\\,4$ ($4 = 2^2$) mais $4\\,\\mathcal R\\,2$ est faux.", a: "Si $q = p^n$ et $p = q^m$, $p = p^{nm}$ ; si $p\\geq2$, $nm = 1$, $n = 1$, $q = p$ ; si $p = 1$, $q = 1$ : oui.", t: "$r = q^m = p^{nm}$ : oui.", c: "relation d'ordre partiel ($2$ et $3$ non comparables)" }
+];
+function mlRelProp(host) {
+  const gen = () => rnd(0, RELS.length - 1);
+  const build = i => { const R = RELS[i]; return [`<p class="mlnote">${R.e} Quelles propriétés ?</p>`, `<p class="mlstep">1. Réflexive : ${R.r}</p>`, `<p class="mlstep">2. Symétrique : ${R.s}</p>`, `<p class="mlstep">3. Antisymétrique : ${R.a}</p>`, `<p class="mlstep">4. Transitive : ${R.t}</p>`, `<p class="mlstep">5. Conclusion : <span class="kG">${R.c}</span>.</p>`]; };
+  stepLab(host, "Reconnaître une relation", gen, build);
+}
+const QENS = [
+  ["$\\{a\\}\\in\\mathcal P(E)$ pour tout $a\\in E$.", true, "Vrai : $\\{a\\}\\subset E$, donc c'est une partie de $E$."],
+  ["La négation de « $\\forall x > 0,\\ f(x) > 0$ » est « $\\exists x\\leq0,\\ f(x)\\leq0$ ».", false, "Faux : on garde le domaine, « $\\exists x > 0,\\ f(x)\\leq0$ »."],
+  ["Pour toute application $f$, $f(A\\cap B) = f(A)\\cap f(B)$.", false, "Faux : seulement $\\subset$ ; $x\\mapsto x^2$, $A = \\{-1\\}$, $B = \\{1\\}$ donne $\\varnothing$ et $\\{1\\}$."],
+  ["Pour toute application $f$, $f^{-1}(A\\cap B) = f^{-1}(A)\\cap f^{-1}(B)$.", true, "Vrai : l'image réciproque respecte toutes les opérations."],
+  ["Si $g\\circ f$ est injective, alors $g$ est injective.", false, "Faux : c'est $f$ qui l'est. Contre-exemple : $f(0) = 0$ sur $\\{0\\}$, $g(x) = x^2$."],
+  ["Si $f\\circ f = \\operatorname{id}_E$, alors $f$ est bijective.", true, "Vrai : $f^{-1} = f$."],
+  ["Une relation non symétrique est antisymétrique.", false, "Faux : $|x - y|\\leq1$ sur $\\mathbb R$ n'est pas antisymétrique, et une relation peut n'être ni l'une ni l'autre."],
+  ["$(g\\circ f)^{-1} = f^{-1}\\circ g^{-1}$ pour $f, g$ bijectives.", true, "Vrai : on défait d'abord $g$, la dernière appliquée."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };
