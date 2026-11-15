@@ -497,6 +497,7 @@ $$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pma
 <h2 id="m-an2">18. Calculer $A^p$ : les exemples types</h2>
 
 <p class="ml">Exemple 7 : la matrice $J$ remplie de $1$</p>
+$$J = \begin{pmatrix}1&1&\cdots&1\\1&1&\cdots&1\\\vdots&\vdots&\ddots&\vdots\\1&1&\cdots&1\end{pmatrix}\in\mathcal M_n(\mathbb K),\qquad\text{par exemple}\quad J^2 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}^2 = \begin{pmatrix}3&3&3\\3&3&3\\3&3&3\end{pmatrix}\ (n = 3).$$
 <p><b>Étape 1 : Rappel.</b> On calcule $J^2$, on conjecture, on prouve par récurrence.</p>
 <p><b>Étape 2 : $J^2$.</b> Coefficient $(i, j)$ : $\sum_{k=1}^n1\times1 = n$. Donc $J^2 = nJ$.</p>
 <p><b>Étape 3 : Récurrence.</b> Si $J^p = n^{p-1}J$, alors $J^{p+1} = n^{p-1}J^2 = n^{p-1}\times nJ = n^pJ$.</p>
@@ -512,12 +513,14 @@ $$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pma
 
 <p class="ml">Exemple 9 : $(a - b)I_n + bJ$, et son inverse</p>
 <p>$A$ a des $a$ sur la diagonale et des $b$ ailleurs. Calculer $A^p$ et $A^{-1}$.</p>
+$$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{pmatrix} = (a - b)\begin{pmatrix}1&&&0\\&1&&\\&&\ddots&\\0&&&1\end{pmatrix} + b\begin{pmatrix}1&\cdots&1\\\vdots&&\vdots\\1&\cdots&1\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $A = (a - b)I_n + bJ$, binôme, $J^k = n^{k-1}J$.</p>
 <p><b>Étape 2 : Le binôme.</b> $A^p = (a - b)^pI_n + \sum_{k=1}^p\binom pk(a - b)^{p-k}b^kn^{k-1}J = (a - b)^pI_n + \frac1n\big[(a - b + nb)^p - (a - b)^p\big]J$ (on ajoute et retire le terme $k = 0$, puis binôme).</p>
 <p><b>Étape 3 : L'inverse.</b> On cherche $A^{-1} = \alpha I_n + \beta J$ : $AA^{-1} = (a - b)\alpha I_n + \big((a - b)\beta + b\alpha + nb\beta\big)J = I_n$, donc $\alpha = \frac1{a - b}$ et $\beta(a - b + nb) = -b\alpha$, $\beta = \frac{-b}{(a - b)(a + (n - 1)b)}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^p = (a - b)^pI_n + \frac{(a + (n - 1)b)^p - (a - b)^p}nJ}$, et $A$ inversible si $a\neq b$ et $a + (n - 1)b\neq0$, avec $A^{-1} = \frac1{a - b}I_n - \frac b{(a - b)(a + (n - 1)b)}J$.</p>
 
 <p class="ml">Exemple 10 : $A = I_n + aN$, $N$ la « sur-diagonale »</p>
+$$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,\quad N = \begin{pmatrix}0&1&0&0\\0&0&1&0\\0&0&0&1\\0&0&0&0\end{pmatrix},\quad N^2 = \begin{pmatrix}0&0&1&0\\0&0&0&1\\0&0&0&0\\0&0&0&0\end{pmatrix},\quad N^3 = \begin{pmatrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $N$ (des $1$ juste au-dessus de la diagonale) vérifie $N^n = 0$ ; $N^k$ a ses $1$ sur la $k$-ième sur-diagonale.</p>
 <p><b>Étape 2 : Le binôme.</b> $I_n$ et $N$ commutent : $A^p = \sum_{k=0}^{n-1}\binom pka^kN^k$ (les termes $k\geq n$ sont nuls).</p>
 <p><b>Étape 3 : On lit.</b> Le coefficient $(i, i + k)$ de $A^p$ vaut $\binom pka^k$ (et $\binom pk = 0$ si $k > p$).</p>
@@ -570,6 +573,7 @@ $$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pma
 
 <p class="ml">Exemple 15 : déterminant puis matrice extraite</p>
 <p>$A\in\mathcal M_4(\mathbb R)$ : $2$ sur la diagonale, $a$ ailleurs. Rang selon $a$.</p>
+$$A = \begin{pmatrix}2&a&a&a\\a&2&a&a\\a&a&2&a\\a&a&a&2\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $\det\neq0\iff$ rang $4$ ; sinon, chercher la plus grande sous-matrice inversible.</p>
 <p><b>Étape 2 : Le déterminant</b> (exemple 9, ou la fiche déterminants) : $\det A = (2 + 3a)(2 - a)^3$.</p>
 <p><b>Étape 3 : $a = 2$.</b> Tous les coefficients valent $2$ : rang $1$.</p>
@@ -995,6 +999,7 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 <p><b>Étape 4 : Conclusion.</b> $\cG{\Delta = -a_1\cdots a_n\sum_{i=1}^n\frac1{a_i} = -\sum_{i=1}^n\prod_{j\neq i}a_j}$. Le membre de droite est un polynôme : par continuité, la formule reste vraie si un $a_i$ est nul.</p>
 
 <p class="ml">Exemple : $a$ sur la diagonale, $b$ ailleurs</p>
+$$D_n(a, b) = \begin{vmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{vmatrix},\qquad\text{par exemple}\quad D_3 = \begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> Chaque ligne a la même somme : $C_1\leftarrow C_1 + \dots + C_n$.</p>
 <p><b>Étape 2 : La somme.</b> Chaque ligne contient un $a$ et $n - 1$ fois $b$ : somme $a + (n - 1)b$. On la sort de la colonne $1$, qui devient remplie de $1$.</p>
 <p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs. Triangulaire.</p>
@@ -1008,6 +1013,7 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 
 <p class="ml">Exemple : un déterminant tridiagonal par récurrence</p>
 <p>$D_n$ : $a + b$ sur la diagonale, $ab$ au-dessus, $1$ en dessous. ($a\neq b$.)</p>
+$$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots&\ddots&0\\\vdots&\ddots&\ddots&a + b&ab\\0&\cdots&0&1&a + b\end{vmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> Développer selon la 1<sup>re</sup> colonne donne une récurrence d'ordre $2$ ; puis $r^2 = (a + b)r - ab$.</p>
 <p><b>Étape 2 : Le développement.</b> Colonne $1$ : $(a + b)$ en ligne $1$ (mineur $D_{n-1}$) et $1$ en ligne $2$ (signe $-$). Ce second mineur a pour 1<sup>re</sup> ligne $(ab, 0, \dots, 0)$ : il vaut $ab\,D_{n-2}$. Donc $D_n = (a + b)D_{n-1} - abD_{n-2}$.</p>
 <p><b>Étape 3 : Les débuts.</b> $D_1 = a + b$, $D_2 = (a + b)^2 - ab\times1 = a^2 + ab + b^2$ ; on pose $D_0 = 1$ (alors $(a + b)^2 - ab = a^2 + ab + b^2$ ✓).</p>
@@ -1023,6 +1029,7 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 
 <p class="ml">Exemple : le caractère polynomial, racines évidentes</p>
 <p>$D_n(x)$ d'ordre $n + 1$ : diagonale $1, 1 - x, 2 - x, \dots, n - x$, et des $1$ partout ailleurs.</p>
+$$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\vdots\\\vdots&\vdots&\ddots&\ddots&1\\1&1&\cdots&1&n - x\end{vmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $\det = \sum_\sigma\varepsilon(\sigma)\prod m_{\sigma(i)i}$ : un polynôme en $x$. Deux lignes égales $\Rightarrow\det = 0$.</p>
 <p><b>Étape 2 : Le degré.</b> $x$ n'apparaît que sur la diagonale ($n$ fois) ; le terme en $x^n$ vient du produit diagonal, de coefficient $(-1)^n$.</p>
 <p><b>Étape 3 : Les racines.</b> Pour $x = k$ ($0\leq k\leq n - 1$), la ligne de diagonale $(k + 1) - x$ vaut $1$ en cette position : elle est égale à la 1<sup>re</sup> ligne (toute de $1$). Donc $D_n(k) = 0$.</p>
@@ -1422,6 +1429,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{-1, 2\}}$, $E_{-1} = \ker B$ de dimension $2$, $E_2$ de dimension $1$.</p>
 
 <p class="ml">Exemple 6 : la matrice compagnon</p>
+$$C = \begin{pmatrix}0&0&\cdots&0&-a_0\\1&0&\cdots&0&-a_1\\0&1&\ddots&\vdots&\vdots\\\vdots&\ddots&\ddots&0&-a_{n-2}\\0&\cdots&0&1&-a_{n-1}\end{pmatrix}.$$
 <p>$P = X^n + \sum_{i<n}a_iX^i$, $C$ sa matrice compagnon (des $1$ sous la diagonale, dernière colonne $-a_0, \dots, -a_{n-1}$). Éléments propres, et quand $C$ est-elle diagonalisable ?</p>
 <p><b>Étape 1 : Rappel.</b> $\chi_C = P$ (fiche Déterminants, développement selon la dernière colonne). $C$ et $\,{}^tC$ ont les mêmes valeurs propres.</p>
 <p><b>Étape 2 : $\,{}^tCX = \lambda X$.</b> Les lignes donnent $x_2 = \lambda x_1$, $x_3 = \lambda x_2$, …, $x_n = \lambda x_{n-1}$, et la dernière $-a_0x_1 - \dots - a_{n-1}x_n = \lambda x_n$.</p>
@@ -1445,6 +1453,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 
 <p class="ml">Exemple 9 : rang $1$, et $\operatorname{tr}(A^2)$</p>
 <p>$A\in\mathcal M_n(\mathbb R)$ : $1$ sur la première et la dernière ligne, sur la première et la dernière colonne, $0$ ailleurs ($n\geq3$).</p>
+$$A = \begin{pmatrix}1&1&\cdots&1&1\\1&0&\cdots&0&1\\\vdots&\vdots&&\vdots&\vdots\\1&0&\cdots&0&1\\1&1&\cdots&1&1\end{pmatrix},\qquad\text{par exemple}\quad\begin{pmatrix}1&1&1&1\\1&0&0&1\\1&0&0&1\\1&1&1&1\end{pmatrix}\ (n = 4).$$
 <p><b>Étape 1 : Rappel.</b> $\operatorname{rg}A = r$ donne $0$ d'ordre $\geq n - r$ ; puis $\lambda + \mu = \operatorname{tr}A$ et $\lambda^2 + \mu^2 = \operatorname{tr}(A^2)$.</p>
 <p><b>Étape 2 : Le rang.</b> Les colonnes $2, \dots, n - 1$ valent toutes $(1, 0, \dots, 0, 1)$, les colonnes $1$ et $n$ valent $(1, \dots, 1)$ : rang $2$. Donc $0$ est d'ordre $\geq n - 2$.</p>
 <p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 1 + 1 = 2$. $\operatorname{tr}(A^2) = \sum_{i,j}a_{ij}a_{ji} = \sum a_{ij}^2$ ($A$ symétrique) = nombre de $1$ = $4n - 4$. Donc $\lambda + \mu = 2$ et $\lambda^2 + \mu^2 = 4n - 4$.</p>
@@ -1453,6 +1462,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 
 <p class="ml">Exemple 10 : des vecteurs propres évidents</p>
 <p>$A_n(a, b)\in\mathcal M_{2n}$ : $a$ sur la diagonale, $b$ sur l'anti-diagonale, $0$ ailleurs ($b\neq0$).</p>
+$$A_n(a, b) = \begin{pmatrix}a&&&&&b\\&\ddots&&&\cdot^{\cdot^{\cdot}}&\\&&a&b&&\\&&b&a&&\\&\cdot^{\cdot^{\cdot}}&&&\ddots&\\b&&&&&a\end{pmatrix},\qquad\text{par exemple}\quad A_2(a, b) = \begin{pmatrix}a&0&0&b\\0&a&b&0\\0&b&a&0\\b&0&0&a\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> La symétrie $i\leftrightarrow2n + 1 - i$ suggère $e_i\pm e_{2n+1-i}$.</p>
 <p><b>Étape 2 : Les images.</b> $Ae_i = ae_i + be_{2n+1-i}$. Donc $A(e_i + e_{2n+1-i}) = (a + b)(e_i + e_{2n+1-i})$ et $A(e_i - e_{2n+1-i}) = (a - b)(e_i - e_{2n+1-i})$.</p>
 <p><b>Étape 3 : Le compte.</b> Pour $i = 1, \dots, n$ : $n$ vecteurs libres pour $a + b$, $n$ pour $a - b$, et les $2n$ ensemble forment une base.</p>
@@ -1466,6 +1476,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 
 <p class="ml">Exemple 12 : la permutation circulaire, puis les matrices circulantes</p>
 <p>$J_n$ : $1$ sur la sur-diagonale et en position $(n, 1)$, $0$ ailleurs.</p>
+$$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddots&0\\0&&&0&1\\1&0&\cdots&0&0\end{pmatrix},\qquad C(a_0, \dots, a_{n-1}) = \begin{pmatrix}a_0&a_1&\cdots&a_{n-1}\\a_{n-1}&a_0&\ddots&\vdots\\\vdots&\ddots&\ddots&a_1\\a_1&\cdots&a_{n-1}&a_0\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $J_nX = \lambda X$ à résoudre ; $C(a_0, \dots, a_{n-1}) = \sum a_kJ_n^k$ (matrice circulante).</p>
 <p><b>Étape 2 : On résout.</b> $J_nX = (x_2, x_3, \dots, x_n, x_1) = \lambda(x_1, \dots, x_n)$ : $x_k = \lambda^{k-1}x_1$ et $x_1 = \lambda^nx_1$, avec $x_1\neq0$ : $\lambda^n = 1$.</p>
 <p><b>Étape 3 : Diagonalisable.</b> Les $n$ racines $n$-ièmes $\omega^k$ ($\omega = e^{2i\pi/n}$) sont valeurs propres, de vecteurs $(1, \omega^k, \dots, \omega^{(n-1)k})$ : $n$ valeurs propres distinctes, $J_n = PDP^{-1}$ avec $D = \operatorname{diag}(1, \omega, \dots, \omega^{n-1})$.</p>
@@ -7704,6 +7715,7 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\circ q = q\circ p}$ (faux sans « orthogonaux » : $\begin{pmatrix}1&0\\0&0\end{pmatrix}$ et $\begin{pmatrix}0&0\\1&1\end{pmatrix}$).</p>
 
 <p class="ml">Exemple 29 : la matrice remplie de $\frac1n$</p>
+$$A = \frac1n\begin{pmatrix}1&1&\cdots&1\\1&1&\cdots&1\\\vdots&\vdots&\ddots&\vdots\\1&1&\cdots&1\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $A$ symétrique en base orthonormée $\Rightarrow$ projection orthogonale.</p>
 <p><b>Étape 2 : $A^2$.</b> $(A^2)_{ij} = \sum_{k=1}^n\frac1n\times\frac1n = n\times\frac1{n^2} = \frac1n$ : $A^2 = A$.</p>
 <p><b>Étape 3 : L'image.</b> Toutes les colonnes valent $\frac1n(1, \dots, 1)$ : $\operatorname{Im}A = \mathbb R(1, \dots, 1)$.</p>
