@@ -7772,7 +7772,7 @@ $$\textbf{Continuité croissante}:\ A_n\subset A_{n+1}\Rightarrow P\Big(\bigcup 
 <p><b>Étape 1 : Rappel.</b> Continuité décroissante : $P\big(\bigcap B_n\big) = \lim P(B_n)$ si $B_{n+1}\subset B_n$.</p>
 <p><b>Étape 2 : Les événements.</b> $B_n$ = « face aux $n$ premiers lancers ». $B_{n+1}\subset B_n$, et « jamais pile » $= \bigcap_nB_n$.</p>
 <p><b>Étape 3 : $P(B_n)$.</b> Lancers indépendants : $P(B_n) = \underbrace{\frac12\times\frac12\times\dots\times\frac12}_{n\ \text{fois}} = \big(\frac12\big)^n$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{P(\text{jamais pile}) = \lim\big(\frac12\big)^n = 0}$ : on obtient pile presque sûrement (mais « que des faces » n'est pas impossible).</p>
+<p><b>Étape 4 : Conclusion.</b> Les $B_n$ décroissent, donc (continuité décroissante) $P\big(\bigcap B_n\big) = \lim P(B_n) = \lim\big(\frac12\big)^n = 0$ (car $0 \lt \frac12 \lt 1$) : $\cG{P(\text{jamais pile}) = 0}$. On obtient pile presque sûrement (mais « que des faces » n'est pas impossible).</p>
 
 <h2 id="w-tot">3. Probabilités totales avec un système complet dénombrable</h2>
 <div class="sbox">$$\cR{(B_n)_{n\in\mathbb N}}\ \text{système complet}:\quad P(A) = \sum_{n=0}^{+\infty}P(\cR{B_n})\,P_{\cR{B_n}}(A).\qquad\text{En particulier}:\ P(Y = k) = \sum_nP(X = n)\,P_{(X = n)}(Y = k).$$</div>
@@ -7780,9 +7780,9 @@ $$\textbf{Continuité croissante}:\ A_n\subset A_{n+1}\Rightarrow P\Big(\bigcup 
 <p>$X\sim\mathcal P(\lambda)$ clients arrivent ; chacun achète avec probabilité $p$, indépendamment. Loi du nombre $Y$ d'acheteurs ?</p>
 <p><b>Étape 1 : Rappel.</b> Probabilités totales sur $\cR{(X = n)_{n\in\mathbb N}}$.</p>
 <p><b>Étape 2 : Sachant $X = n$.</b> $Y\sim\mathcal B(n, p)$ : $P_{(X = n)}(Y = k) = \binom nkp^k(1 - p)^{n-k}$ pour $n\geq k$, $0$ sinon.</p>
-<p><b>Étape 3 : La somme.</b></p>
+<p><b>Étape 3 : La somme.</b> Probabilités totales avec $(X = n)_{n\geq0}$ : $P(Y = k) = \sum_nP(X = n)P_{(X = n)}(Y = k)$. Les $n!$ se simplifient, on sort $\frac{p^k}{k!}$ et on écrit $\lambda^n = \lambda^k\lambda^{n-k}$ :</p>
 $$P(Y = k) = \sum_{n\geq k}e^{-\lambda}\frac{\lambda^n}{n!}\cdot\frac{n!}{k!\,(n - k)!}p^k(1 - p)^{n-k} = e^{-\lambda}\frac{(\lambda p)^k}{k!}\sum_{m\geq0}\cO{\frac{(\lambda(1 - p))^m}{m!}}\ \ (m = n - k).$$
-<p><b>Étape 4 : On reconnaît l'exponentielle.</b> $\sum_m\frac{(\lambda(1 - p))^m}{m!} = e^{\lambda(1 - p)}$, et $e^{-\lambda}e^{\lambda - \lambda p} = e^{-\lambda p}$.</p>
+<p><b>Étape 4 : On reconnaît l'exponentielle.</b> $\sum_m\frac{x^m}{m!} = e^x$ avec $x = \lambda(1 - p)$ : la somme vaut $e^{\lambda(1 - p)} = e^{\lambda - \lambda p}$. Puis $e^{-\lambda}e^{\lambda - \lambda p} = e^{-\lambda + \lambda - \lambda p} = e^{-\lambda p}$, d'où $P(Y = k) = e^{-\lambda p}\frac{(\lambda p)^k}{k!}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{Y\sim\mathcal P(\lambda p)}$.</p>
 
 <h2 id="w-lois">4. Lois géométrique et de Poisson</h2>
@@ -7797,16 +7797,16 @@ $$P(Y = k) = \sum_{n\geq k}e^{-\lambda}\frac{\lambda^n}{n!}\cdot\frac{n!}{k!\,(n
 <p class="ml">Exemple 3 : $P(X > n)$ et absence de mémoire</p>
 <p>$X\sim\mathcal G(p)$.</p>
 <p><b>Étape 1 : Rappel.</b> $(X > n)$ = « les $n$ premiers essais sont des échecs ».</p>
-<p><b>Étape 2 : La queue.</b> Essais indépendants : $P(X > n) = q^n$.</p>
+<p><b>Étape 2 : La queue.</b> $X > n$ signifie : les $n$ premiers essais sont des échecs, chacun de probabilité $q$, indépendants : $P(X > n) = q\times\dots\times q = q^n$.</p>
 <p><b>Étape 3 : Le conditionnement.</b> $(X > n + k)\subset(X > n)$, donc :</p>
 $$P_{(X > n)}(X > n + k) = \frac{P(X > n + k)}{P(X > n)} = \frac{q^{n+k}}{q^n} = q^k.$$
-<p><b>Étape 4 : Conclusion.</b> $\cG{P_{(X > n)}(X > n + k) = P(X > k)}$ : avoir déjà attendu ne change rien.</p>
+<p><b>Étape 4 : Conclusion.</b> $q^k = P(X > k)$ (étape 2 avec $n = k$), donc $\cG{P_{(X > n)}(X > n + k) = P(X > k)}$ : avoir déjà attendu ne change rien.</p>
 
 <p class="ml">Exemple 4 : l'approximation par Poisson</p>
 <p><b>Étape 1 : Rappel.</b> $\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ et $\big(1 + \frac an\big)^n\to e^a$ (plus généralement $(1 - p_n)^n\to e^{-\lambda}$ si $np_n\to\lambda$).</p>
-<p><b>Étape 2 : On écrit</b> à $k$ fixé :</p>
+<p><b>Étape 2 : On écrit</b> à $k$ fixé, avec $\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ et $p_n^k = \frac{(np_n)^k}{n^k}$ :</p>
 $$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdot(1 - p_n)^{n-k}.$$
-<p><b>Étape 3 : Les trois morceaux.</b> Le 1<sup>er</sup> tend vers $1$ ($k$ facteurs $\sim n$), le 2<sup>e</sup> vers $\frac{\lambda^k}{k!}$, le 3<sup>e</sup> vers $e^{-\lambda}$ (car $(1 - p_n)^{-k}\to1$).</p>
+<p><b>Étape 3 : Les trois morceaux.</b> 1<sup>er</sup> : $\frac nn\cdot\frac{n - 1}n\cdots\frac{n - k + 1}n$, $k$ facteurs qui tendent chacun vers $1$, donc $\to1$. 2<sup>e</sup> : $np_n\to\lambda$ donc $\to\frac{\lambda^k}{k!}$. 3<sup>e</sup> : $(1 - p_n)^n = e^{n\ln(1 - p_n)}$ et $n\ln(1 - p_n)\sim-np_n\to-\lambda$, donc $\to e^{-\lambda}$ ; et $(1 - p_n)^{-k}\to1^{-k} = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}}$ : pour $n$ grand et $p$ petit, $\mathcal B(n, p)\approx\mathcal P(np)$.</p>
 
 <h2 id="w-espe">5. Espérance</h2>
@@ -7815,15 +7815,15 @@ $$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable,
 $$X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n).\qquad|X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}.$$</div>
 <p class="ml">Exemple 5 : l'espérance d'une géométrique, deux méthodes</p>
 <p><b>Étape 1 : Rappel.</b> $\sum_{k\geq1}kx^{k-1} = \frac1{(1 - x)^2}$ pour $|x| \lt 1$ (dérivée de la série géométrique), et $E(X) = \sum_{n\geq1}P(X\geq n)$.</p>
-<p><b>Étape 2 : Par la définition.</b> $E(X) = \sum_{k\geq1}kq^{k-1}p = p\cdot\cO{\frac1{(1 - q)^2}} = \frac p{p^2}$.</p>
-<p><b>Étape 3 : Par les queues.</b> $P(X\geq n) = P(X > n - 1) = q^{n-1}$, donc $E(X) = \sum_{n\geq1}q^{n-1} = \cO{\frac1{1 - q}}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1p}$ : il faut en moyenne $6$ lancers pour obtenir un $6$.</p>
+<p><b>Étape 2 : Par la définition.</b> $P(X = k) = q^{k-1}p$, donc $E(X) = \sum_{k\geq1}kq^{k-1}p = p\sum_{k\geq1}kq^{k-1}$, et $\sum_{k\geq1}kq^{k-1} = \cO{\frac1{(1 - q)^2}}$ (dérivée de $\frac1{1 - q}$). Avec $1 - q = p$ : $E(X) = p\times\frac1{p^2} = \frac1p$.</p>
+<p><b>Étape 3 : Par les queues.</b> $P(X\geq n) = P(X > n - 1) = q^{n-1}$, donc $E(X) = \sum_{n\geq1}q^{n-1} = 1 + q + q^2 + \dots = \cO{\frac1{1 - q}} = \frac1p$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1p}$ : pour un dé, $p = \frac16$ et $\frac1{1/6} = 6$ : il faut en moyenne $6$ lancers pour obtenir un $6$.</p>
 
 <p class="ml">Exemple 6 : $E\big(\frac1{X + 1}\big)$ pour $X\sim\mathcal P(\lambda)$</p>
 <p><b>Étape 1 : Rappel.</b> Transfert : $E(f(X)) = \sum f(k)P(X = k)$ (termes positifs ici).</p>
-<p><b>Étape 2 : On écrit.</b> $E\big(\frac1{X + 1}\big) = \sum_{k\geq0}\frac1{k + 1}e^{-\lambda}\frac{\lambda^k}{k!} = \frac{e^{-\lambda}}\lambda\sum_{k\geq0}\frac{\lambda^{k+1}}{(k + 1)!}$.</p>
-<p><b>Étape 3 : On reconnaît.</b> $\sum_{j\geq1}\frac{\lambda^j}{j!} = \cO{e^\lambda - 1}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{E\big(\frac1{X + 1}\big) = \frac{1 - e^{-\lambda}}\lambda}$.</p>
+<p><b>Étape 2 : On écrit.</b> Transfert : $E\big(\frac1{X + 1}\big) = \sum_{k\geq0}\frac1{k + 1}e^{-\lambda}\frac{\lambda^k}{k!}$. Or $(k + 1)\times k! = (k + 1)!$ et $\lambda^k = \frac{\lambda^{k+1}}\lambda$ : $= \frac{e^{-\lambda}}\lambda\sum_{k\geq0}\frac{\lambda^{k+1}}{(k + 1)!}$.</p>
+<p><b>Étape 3 : On reconnaît.</b> On pose $j = k + 1$ : $\sum_{j\geq1}\frac{\lambda^j}{j!} = \sum_{j\geq0}\frac{\lambda^j}{j!} - \frac{\lambda^0}{0!} = \cO{e^\lambda - 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\frac{e^{-\lambda}}\lambda(e^\lambda - 1) = \frac{e^{-\lambda}e^\lambda - e^{-\lambda}}\lambda = \frac{1 - e^{-\lambda}}\lambda$ : $\cG{E\big(\frac1{X + 1}\big) = \frac{1 - e^{-\lambda}}\lambda}$.</p>
 
 <h2 id="w-var">6. Variance, covariance, Cauchy-Schwarz</h2>
 <div class="sbox">$$E(X^2)\ \text{finie}\Rightarrow E(X)\ \text{finie}.\qquad V(X) = E(X^2) - E(X)^2.\qquad|E(XY)|\leq\sqrt{E(X^2)}\sqrt{E(Y^2)}.$$
@@ -7832,9 +7832,9 @@ $$V\Big(\sum X_i\Big) = \sum V(X_i) + 2\sum_{i \lt j}\operatorname{Cov}(X_i, X_j
 <p>Pour les lois avec des factorielles (Poisson, binomiale), on calcule $E(X(X - 1))$, plus simple que $E(X^2)$, puis $E(X^2) = E(X(X - 1)) + E(X)$.</p>
 <p class="ml">Exemple 7 : la variance d'une loi de Poisson</p>
 <p><b>Étape 1 : Rappel.</b> $V(X) = E(X(X - 1)) + E(X) - E(X)^2$.</p>
-<p><b>Étape 2 : $E(X(X - 1))$.</b> Les termes $k = 0, 1$ sont nuls :</p>
+<p><b>Étape 2 : $E(X(X - 1))$.</b> Transfert. Les termes $k = 0, 1$ sont nuls ($k(k - 1) = 0$), et $\frac{k(k - 1)}{k!} = \frac1{(k - 2)!}$, $\lambda^k = \lambda^2\lambda^{k-2}$ :</p>
 $$\sum_{k\geq2}k(k - 1)e^{-\lambda}\frac{\lambda^k}{k!} = \lambda^2e^{-\lambda}\sum_{k\geq2}\frac{\lambda^{k-2}}{(k - 2)!} = \lambda^2e^{-\lambda}\cO{e^\lambda} = \lambda^2.$$
-<p><b>Étape 3 : On assemble.</b> $V(X) = \lambda^2 + \lambda - \lambda^2$.</p>
+<p><b>Étape 3 : On assemble.</b> $E(X) = \lambda$, donc $E(X^2) = E(X(X - 1)) + E(X) = \lambda^2 + \lambda$, et $V(X) = E(X^2) - E(X)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{V(X) = \lambda}$ (comme $E(X)$).</p>
 
 <h2 id="w-gen">7. Fonctions génératrices</h2>
@@ -7846,17 +7846,17 @@ $$X, Y\ \text{indépendantes}\Rightarrow G_{X+Y} = G_XG_Y.$$</div>
 
 <p class="ml">Exemple 8 : somme de deux Poisson indépendantes</p>
 <p><b>Étape 1 : Rappel.</b> $G_{X+Y} = G_XG_Y$ et $G$ caractérise la loi. Pour $\mathcal P(\lambda)$ : $G(t) = e^{\lambda(t - 1)}$.</p>
-<p><b>Étape 2 : $G$ d'une Poisson.</b> $\sum_ne^{-\lambda}\frac{\lambda^n}{n!}t^n = e^{-\lambda}\cO{e^{\lambda t}} = e^{\lambda(t - 1)}$.</p>
-<p><b>Étape 3 : Le produit.</b> $G_{X+Y}(t) = e^{\lambda(t - 1)}e^{\mu(t - 1)} = e^{(\lambda + \mu)(t - 1)}$.</p>
+<p><b>Étape 2 : $G$ d'une Poisson.</b> $G_X(t) = \sum_ne^{-\lambda}\frac{\lambda^n}{n!}t^n = e^{-\lambda}\sum_n\frac{(\lambda t)^n}{n!} = e^{-\lambda}\cO{e^{\lambda t}} = e^{\lambda t - \lambda} = e^{\lambda(t - 1)}$.</p>
+<p><b>Étape 3 : Le produit.</b> Indépendance : $G_{X+Y}(t) = G_X(t)G_Y(t) = e^{\lambda(t - 1)}e^{\mu(t - 1)} = e^{\lambda(t - 1) + \mu(t - 1)} = e^{(\lambda + \mu)(t - 1)}$.</p>
 <p><b>Étape 4 : Conclusion.</b> On reconnaît $\mathcal P(\lambda + \mu)$ : $\cG{X + Y\sim\mathcal P(\lambda + \mu)}$.</p>
 
 <p class="ml">Exemple 9 : espérance et variance d'une géométrique par $G$</p>
 <p><b>Étape 1 : Rappel.</b> $E = G'(1)$, $V = G''(1) + G'(1) - G'(1)^2$.</p>
-<p><b>Étape 2 : $G$.</b> $G(t) = \sum_{k\geq1}q^{k-1}pt^k = \frac{pt}{1 - qt}$ pour $|t| \lt \frac1q$.</p>
+<p><b>Étape 2 : $G$.</b> $G(t) = \sum_{k\geq1}q^{k-1}pt^k = pt\sum_{k\geq1}(qt)^{k-1} = pt\times\frac1{1 - qt} = \frac{pt}{1 - qt}$ pour $|qt| \lt 1$, soit $|t| \lt \frac1q$.</p>
 <p><b>Étape 3 : Les dérivées.</b> On écrit $G(t) = \frac pq\Big(\frac1{1 - qt} - 1\Big)$ (vérification : $\frac1{1 - qt} - 1 = \frac{qt}{1 - qt}$). Avec $\big(\frac1{1 - qt}\big)' = \frac q{(1 - qt)^2}$ et $\big(\frac1{(1 - qt)^2}\big)' = \frac{2q}{(1 - qt)^3}$ :</p>
-$$G'(t) = \frac pq\cdot\frac q{(1 - qt)^2} = \frac p{(1 - qt)^2},\qquad G''(t) = \frac{2pq}{(1 - qt)^3}.$$
+$$G'(t) = \frac pq\cdot\frac q{(1 - qt)^2} = \frac p{(1 - qt)^2},\qquad G''(t) = p\times(-2)(1 - qt)^{-3}\times(-q) = \frac{2pq}{(1 - qt)^3}.$$
 <p>En $t = 1$, avec $1 - q = p$ : $G'(1) = \frac p{p^2} = \frac1p$ et $G''(1) = \frac{2pq}{p^3} = \frac{2q}{p^2}$.</p>
-<p><b>Étape 4 : La variance.</b> $V = \frac{2q}{p^2} + \frac1p - \frac1{p^2} = \frac{2q + p - 1}{p^2}$, et $p - 1 = -q$, donc $V = \frac{2q - q}{p^2} = \frac q{p^2}$.</p>
+<p><b>Étape 4 : La variance.</b> $V = G''(1) + G'(1) - G'(1)^2 = \frac{2q}{p^2} + \frac1p - \frac1{p^2}$. Au dénominateur commun $p^2$ ($\frac1p = \frac p{p^2}$) : $V = \frac{2q + p - 1}{p^2}$, et $p - 1 = -q$, donc $V = \frac{2q - q}{p^2} = \frac q{p^2}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{E(X) = \frac1p,\ V(X) = \frac q{p^2}}$.</p>
 
 <h2 id="w-somme">8. Loi d'une somme de variables indépendantes</h2>
@@ -7865,17 +7865,17 @@ $$G'(t) = \frac pq\cdot\frac q{(1 - qt)^2} = \frac p{(1 - qt)^2},\qquad G''(t) =
 <p>$X, Y\sim\mathcal G(p)$ indépendantes. Loi de $S = X + Y$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Formule de convolution, en respectant les valeurs possibles ($\geq1$).</p>
 <p><b>Étape 2 : Les valeurs.</b> $S\geq2$. Pour $n\geq2$, $k$ va de $1$ à $n - 1$ (il faut $X\geq1$ et $Y = n - k\geq1$).</p>
-<p><b>Étape 3 : La somme.</b> $P(S = n) = \sum_{k=1}^{n-1}q^{k-1}p\cdot q^{n-k-1}p = \sum_{k=1}^{n-1}p^2q^{n-2}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{P(S = n) = (n - 1)p^2q^{n-2},\ n\geq2}$ : rang du 2<sup>e</sup> succès.</p>
+<p><b>Étape 3 : La somme.</b> $P(S = n) = \sum_{k=1}^{n-1}P(X = k)P(Y = n - k) = \sum_{k=1}^{n-1}q^{k-1}p\cdot q^{n-k-1}p$, et $q^{k-1}q^{n-k-1} = q^{(k - 1) + (n - k - 1)} = q^{n-2}$ : chaque terme vaut $p^2q^{n-2}$, indépendant de $k$.</p>
+<p><b>Étape 4 : Conclusion.</b> $k$ prend $n - 1$ valeurs : $\cG{P(S = n) = (n - 1)p^2q^{n-2},\ n\geq2}$ : rang du 2<sup>e</sup> succès.</p>
 
 <h2 id="w-lfgn">9. Inégalités, loi faible des grands nombres</h2>
 <div class="sbox">$$\textbf{Markov}:\ P(|X|\geq a)\leq\frac{E(|X|)}a.\qquad\textbf{Bienaymé-Tchebychev}:\ P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}.$$
 $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2},\ m = E(X_1),\ \sigma^2 = V(X_1):\quad P\Big(\Big|\frac{S_n}n - m\Big|\geq\varepsilon\Big)\leq\frac{\sigma^2}{n\varepsilon^2}\to0.$$</div>
 <p class="ml">Exemple 11 : la démonstration de la loi faible</p>
 <p><b>Étape 1 : Rappel.</b> Bienaymé-Tchebychev, et $V\big(\sum X_i\big) = \sum V(X_i)$ pour des variables indépendantes.</p>
-<p><b>Étape 2 : Espérance.</b> $E\big(\frac{S_n}n\big) = \frac1n\sum E(X_i) = m$.</p>
-<p><b>Étape 3 : Variance.</b> $V\big(\frac{S_n}n\big) = \frac1{n^2}\cdot n\sigma^2 = \frac{\sigma^2}n$.</p>
-<p><b>Étape 4 : On applique BT.</b> $P\big(\big|\frac{S_n}n - m\big|\geq\varepsilon\big)\leq\frac{\sigma^2}{n\varepsilon^2}$.</p>
+<p><b>Étape 2 : Espérance.</b> Linéarité : $E\big(\frac{S_n}n\big) = \frac1nE(X_1 + \dots + X_n) = \frac1n(m + \dots + m) = \frac1n\times nm = m$.</p>
+<p><b>Étape 3 : Variance.</b> $V(aY) = a^2V(Y)$ et, par indépendance, $V(S_n) = V(X_1) + \dots + V(X_n) = n\sigma^2$ : $V\big(\frac{S_n}n\big) = \frac1{n^2}\times n\sigma^2 = \frac{\sigma^2}n$.</p>
+<p><b>Étape 4 : On applique BT</b> ($P(|Y - E(Y)|\geq\varepsilon)\leq\frac{V(Y)}{\varepsilon^2}$) à $Y = \frac{S_n}n$ : $P\big(\big|\frac{S_n}n - m\big|\geq\varepsilon\big)\leq\frac{\sigma^2/n}{\varepsilon^2} = \frac{\sigma^2}{n\varepsilon^2}\to0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\frac{S_n}n\to m\ \text{en probabilité}}$ : la moyenne empirique se rapproche de l'espérance.</p>
 
 <h2 id="w-dens">10. Variables à densité <span class="hp">hors programme</span></h2>
@@ -7890,7 +7890,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p class="ml">Exemple 12 : l'espérance d'une loi exponentielle</p>
 <p><b>Étape 1 : Rappel.</b> $E(X) = \int_0^{+\infty}t\lambda e^{-\lambda t}\,dt$, IPP sur un intervalle (fiche Intégration sur un intervalle).</p>
 <p><b>Étape 2 : IPP</b> avec $u = t$, $v = -e^{-\lambda t}$ : $\int_0^{+\infty}t\lambda e^{-\lambda t}\,dt = \big[-te^{-\lambda t}\big]_0^{+\infty} + \int_0^{+\infty}e^{-\lambda t}\,dt$.</p>
-<p><b>Étape 3 : Les morceaux.</b> Le crochet est nul, et $\int_0^{+\infty}e^{-\lambda t}\,dt = \frac1\lambda$.</p>
+<p><b>Étape 3 : Les morceaux.</b> Crochet : en $0$, $-0\times e^0 = 0$ ; en $+\infty$, $te^{-\lambda t}\to0$ (croissances comparées) : il vaut $0 - 0 = 0$. Et $\int_0^{+\infty}e^{-\lambda t}\,dt = \big[-\frac{e^{-\lambda t}}\lambda\big]_0^{+\infty} = 0 - \big(-\frac1\lambda\big) = \frac1\lambda$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1\lambda}$ : c'est l'analogue continu de la loi géométrique (sans mémoire elle aussi).</p>
 
 <h2 id="w-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -7927,20 +7927,20 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p class="ml">Exercice 1 : le minimum de deux géométriques</p>
 <p>$X\sim\mathcal G(p_1)$, $Y\sim\mathcal G(p_2)$ indépendantes, $M = \min(X, Y)$.</p>
 <p><b>Étape 1 : Rappel.</b> $(M > n) = (X > n)\cap(Y > n)$, et $P(X > n) = q^n$ caractérise $\mathcal G(1 - q)$.</p>
-<p><b>Étape 2 : La queue.</b> Par indépendance : $P(M > n) = q_1^nq_2^n = (q_1q_2)^n$.</p>
-<p><b>Étape 3 : La loi.</b> $P(M = n) = P(M > n - 1) - P(M > n) = (q_1q_2)^{n-1}(1 - q_1q_2)$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{M\sim\mathcal G(1 - q_1q_2)}$.</p>
+<p><b>Étape 2 : La queue.</b> $(M > n) = (X > n)\cap(Y > n)$ (le min dépasse $n$ si les deux le dépassent). Indépendance et $P(X > n) = q_1^n$ : $P(M > n) = q_1^nq_2^n = (q_1q_2)^n$.</p>
+<p><b>Étape 3 : La loi.</b> $P(M = n) = P(M > n - 1) - P(M > n) = (q_1q_2)^{n-1} - (q_1q_2)^n = (q_1q_2)^{n-1}(1 - q_1q_2)$ (on factorise $(q_1q_2)^{n-1}$).</p>
+<p><b>Étape 4 : Conclusion.</b> C'est $P(M = n) = Q^{n-1}P$ avec $P = 1 - q_1q_2$ et $Q = q_1q_2 = 1 - P$ : $\cG{M\sim\mathcal G(1 - q_1q_2)}$.</p>
 
 <p class="ml">Exercice 2 : $E(X) = \sum_{n\geq1}P(X\geq n)$</p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes (fiche Familles sommables).</p>
 <p><b>Étape 2 : On écrit</b> $P(X\geq n) = \sum_{k\geq n}P(X = k)$, donc $\sum_{n\geq1}P(X\geq n) = \sum_{n\geq1}\sum_{k\geq n}P(X = k)$.</p>
-<p><b>Étape 3 : On intervertit.</b> Pour $k$ fixé, $n$ va de $1$ à $k$ : $k$ termes. On obtient $\sum_{k\geq1}kP(X = k)$.</p>
+<p><b>Étape 3 : On intervertit</b> (termes positifs). Le couple $(n, k)$ vérifie $1\leq n\leq k$ : pour $k$ fixé, $n$ va de $1$ à $k$, soit $k$ termes égaux à $P(X = k)$. On obtient $\sum_{k\geq1}kP(X = k)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq1}P(X\geq n) = E(X)}$, dans $[0, +\infty]$.</p>
 
 <p class="ml">Exercice 3 : une Poisson est paire avec quelle probabilité ?</p>
 <p><b>Étape 1 : Rappel.</b> $G_X(t) = \sum P(X = n)t^n$ ; en $t = -1$, les termes impairs changent de signe.</p>
-<p><b>Étape 2 : On combine.</b> $\frac{G_X(1) + G_X(-1)}2 = \sum_{n\ \text{pair}}P(X = n) = P(X\ \text{pair})$.</p>
-<p><b>Étape 3 : On calcule.</b> $G_X(1) = 1$ et $G_X(-1) = e^{-2\lambda}$.</p>
+<p><b>Étape 2 : On combine.</b> $G_X(1) = \sum P(X = n)$ et $G_X(-1) = \sum(-1)^nP(X = n)$. En additionnant, $1 + (-1)^n$ vaut $2$ si $n$ pair, $0$ si $n$ impair : $\frac{G_X(1) + G_X(-1)}2 = \sum_{n\ \text{pair}}P(X = n) = P(X\ \text{pair})$.</p>
+<p><b>Étape 3 : On calcule.</b> $G_X(t) = e^{\lambda(t - 1)}$ : $G_X(1) = e^0 = 1$ et $G_X(-1) = e^{\lambda(-1 - 1)} = e^{-2\lambda}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(X\ \text{pair}) = \frac{1 + e^{-2\lambda}}2}$, toujours $> \frac12$.</p>
 
 <h2 id="w-arbre">L'arbre des probabilités discrètes</h2>
