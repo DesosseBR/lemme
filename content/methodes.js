@@ -6711,6 +6711,366 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <li><div class="hr"><em>$f^{(n)}(0)$, parité</em><a class="hl end" href="#se-coef">$a_n = \frac{f^{(n)}(0)}{n!}$, unicité</a></div></li>
 </ul></div></div>
 `,
+"Logique et raisonnements": R`
+<nav class="msum"><a href="#lg-not">Notations</a><a href="#lg-neg">Nier</a><a href="#lg-impl">Implication</a><a href="#lg-contra">Contraposée</a><a href="#lg-abs">Absurde</a><a href="#lg-rec">Récurrence</a><a href="#lg-as">Analyse-synthèse</a><a href="#lg-cas">Disjonction de cas</a><a href="#lg-erreurs">Erreurs</a><a href="#lg-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les hypothèses. <span class="kO">orange</span> : l'objet qu'on fixe (« soit $\cO x$ »). <span class="kR">rouge</span> : ce qu'on suppose pour arriver à une contradiction. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="lg-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Symbole</th><th>Se lit</th><th>Pour le démontrer</th></tr>
+<tr><td>$\forall x\in E,\ P(x)$</td><td>pour tout $x$ de $E$</td><td>« Soit $x\in E$ », puis on montre $P(x)$.</td></tr>
+<tr><td>$\exists x\in E,\ P(x)$</td><td>il existe $x$ dans $E$</td><td>On donne un $x$ précis et on vérifie $P(x)$.</td></tr>
+<tr><td>$\exists!\,x$</td><td>il existe un unique $x$</td><td>Existence, puis unicité (deux solutions sont égales).</td></tr>
+<tr><td>$P\Rightarrow Q$</td><td>si $P$ alors $Q$</td><td>On suppose $P$, on montre $Q$.</td></tr>
+<tr><td>$P\iff Q$</td><td>$P$ équivaut à $Q$</td><td>Les deux implications.</td></tr>
+<tr><td>$\neg P$, $\operatorname{non}P$</td><td>non $P$</td><td>Montrer que $P$ est fausse.</td></tr>
+</table>
+
+<h2 id="lg-neg">2. Nier une phrase</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\operatorname{non}(\forall x,\ P(x))\iff\exists x,\ \operatorname{non}P(x)$</li><li>$\displaystyle\operatorname{non}(\exists x,\ P(x))\iff\forall x,\ \operatorname{non}P(x)$</li><li>$\displaystyle\operatorname{non}(P\ \text{et}\ Q)\iff(\operatorname{non}P)\ \text{ou}\ (\operatorname{non}Q)$</li><li>$\displaystyle\operatorname{non}(P\Rightarrow Q)\iff P\ \text{et}\ \operatorname{non}Q$</li></ul></div>
+
+<p class="ml">Exemple 1 : la négation de la continuité</p>
+<p>Soit $f:\mathbb R\to\mathbb R$ et $a\in\mathbb R$. La continuité de $f$ en $a$ s'écrit $\forall\varepsilon > 0,\ \exists\delta > 0,\ \forall x\in\mathbb R,\ (|x - a|\leq\delta\Rightarrow|f(x) - f(a)|\leq\varepsilon)$. <b>Écrire la négation de cette phrase</b>, c'est-à-dire « $f$ n'est pas continue en $a$ ».</p>
+<p><b>Étape 1 : Rappel.</b> On lit la phrase de gauche à droite : chaque $\forall$ devient $\exists$, chaque $\exists$ devient $\forall$, on garde les domaines ($\varepsilon > 0$, $\delta > 0$), et on nie seulement la fin. Une implication $P\Rightarrow Q$ se nie en « $P$ et non $Q$ ».</p>
+<p><b>Étape 2 : Les quantificateurs.</b> $\forall\varepsilon > 0$ devient $\exists\varepsilon > 0$ ; $\exists\delta > 0$ devient $\forall\delta > 0$ ; $\forall x$ devient $\exists x$.</p>
+<p><b>Étape 3 : La fin.</b> $|x - a|\leq\delta\Rightarrow|f(x) - f(a)|\leq\varepsilon$ devient $|x - a|\leq\delta$ et $|f(x) - f(a)| > \varepsilon$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - a|\leq\delta\ \text{et}\ |f(x) - f(a)| > \varepsilon}.$$
+
+<p class="ml">Exemple 2 : une suite non majorée</p>
+<p>Soit $(u_n)$ une suite réelle. <b>Écrire avec des quantificateurs « $(u_n)$ est majorée », puis sa négation</b>, et l'appliquer à $u_n = n$.</p>
+<p><b>Étape 1 : Rappel.</b> Majorée : un même $M$ marche pour tous les $n$, donc $\exists M$ avant $\forall n$.</p>
+<p><b>Étape 2 : La phrase.</b> $\exists M\in\mathbb R,\ \forall n\in\mathbb N,\ u_n\leq M$.</p>
+<p><b>Étape 3 : La négation.</b> $\forall M\in\mathbb R,\ \exists n\in\mathbb N,\ u_n > M$.</p>
+<p><b>Étape 4 : Pour $u_n = n$.</b> Soit $M\in\mathbb R$. On prend $n = \lfloor|M|\rfloor + 1$, un entier, et $n > |M|\geq M$. Donc $u_n = n > M$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(n)_{n\in\mathbb N}\ \text{n'est pas majorée}}$.</p>
+
+<h2 id="lg-impl">3. Montrer une implication, une équivalence</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P\Rightarrow Q:\ \text{on suppose}\ \cB P,\ \text{on montre}\ Q$</li><li>$\displaystyle P\iff Q:\ P\Rightarrow Q\ \text{puis}\ Q\Rightarrow P$</li><li>$\displaystyle A = B\ \text{(ensembles)}:\ A\subset B\ \text{et}\ B\subset A$</li></ul></div>
+
+<p class="ml">Exemple 3 : une implication directe</p>
+<p>Soient $a, b$ deux réels. <b>Montrer que si $a^2 + b^2 = 0$, alors $a = b = 0$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On suppose l'hypothèse $\cB{a^2 + b^2 = 0}$ et on en déduit la conclusion.</p>
+<p><b>Étape 2 : Les signes.</b> Un carré est positif : $a^2\geq0$ et $b^2\geq0$.</p>
+<p><b>Étape 3 : On isole $a^2$.</b> $a^2 = -b^2\leq0$, et $a^2\geq0$, donc $a^2 = 0$, puis $a = 0$. De même $b^2 = -a^2 = 0$, donc $b = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{a = b = 0}$.</p>
+
+<p class="ml">Exemple 4 : une équivalence</p>
+<p>Soit $n\in\mathbb Z$. <b>Montrer que $n$ est pair si et seulement si $n^2$ est pair.</b></p>
+<p><b>Étape 1 : Rappel.</b> Deux sens à démontrer séparément.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> Si $n = 2k$, alors $n^2 = 4k^2 = 2\times(2k^2)$ : pair.</p>
+<p><b>Étape 3 : $\Leftarrow$, par contraposée.</b> Si $n$ est impair, $n = 2k + 1$, alors $n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1$ : impair. Donc « $n$ impair $\Rightarrow n^2$ impair », ce qui équivaut à « $n^2$ pair $\Rightarrow n$ pair ».</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{n\ \text{pair}\iff n^2\ \text{pair}}$.</p>
+
+<h2 id="lg-contra">4. Raisonner par contraposée</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle(P\Rightarrow Q)\iff(\operatorname{non}Q\Rightarrow\operatorname{non}P)$</li><li>$\displaystyle\text{à utiliser quand « non}\ Q\text{ » est plus facile à manipuler que}\ P$</li></ul></div>
+
+<p class="ml">Exemple 5 : un produit d'entiers</p>
+<p>Soient $a, b$ deux entiers. <b>Montrer que si $ab$ est impair, alors $a$ et $b$ sont impairs.</b></p>
+<p><b>Étape 1 : Rappel.</b> On montre la contraposée : si $a$ ou $b$ est pair, alors $ab$ est pair.</p>
+<p><b>Étape 2 : Le cas $a$ pair.</b> $a = 2k$, donc $ab = 2(kb)$ : pair.</p>
+<p><b>Étape 3 : Le cas $b$ pair.</b> $b = 2k$, donc $ab = 2(ak)$ : pair.</p>
+<p><b>Étape 4 : Conclusion.</b> La contraposée est vraie, donc $\cG{ab\ \text{impair}\Rightarrow a\ \text{et}\ b\ \text{impairs}}$.</p>
+
+<p class="ml">Exemple 6 : une inégalité pour tout $\varepsilon$</p>
+<p>Soit $x$ un réel tel que $|x|\leq\varepsilon$ pour tout $\varepsilon > 0$. <b>Montrer que $x = 0$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Contraposée : si $x\neq0$, on trouve un $\varepsilon > 0$ avec $|x| > \varepsilon$.</p>
+<p><b>Étape 2 : Le bon $\varepsilon$.</b> Si $x\neq0$, on prend $\varepsilon = \frac{|x|}2 > 0$.</p>
+<p><b>Étape 3 : La comparaison.</b> $|x| = 2\varepsilon > \varepsilon$ : l'hypothèse est fausse pour cet $\varepsilon$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x = 0}$.</p>
+
+<h2 id="lg-abs">5. Raisonner par l'absurde</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{on suppose}\ \cR{\operatorname{non}P},\ \text{on arrive à une contradiction, donc}\ P\ \text{est vraie}$</li><li>$\displaystyle\text{à utiliser pour « n'existe pas », « est irrationnel », « est infini »}$</li></ul></div>
+
+<p class="ml">Exemple 7 : $\sqrt2$ est irrationnel</p>
+<p><b>Montrer que $\sqrt2\notin\mathbb Q$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On suppose $\cR{\sqrt2 = \frac pq}$ avec $p, q$ entiers, $q\neq0$, et la fraction irréductible.</p>
+<p><b>Étape 2 : On élève au carré.</b> $2 = \frac{p^2}{q^2}$, donc $p^2 = 2q^2$ : $p^2$ est pair, donc $p$ est pair (exemple 4), $p = 2k$.</p>
+<p><b>Étape 3 : On remplace.</b> $4k^2 = 2q^2$, donc $q^2 = 2k^2$ : $q^2$ est pair, donc $q$ est pair.</p>
+<p><b>Étape 4 : La contradiction.</b> $p$ et $q$ sont tous deux pairs : la fraction n'est pas irréductible.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\sqrt2\notin\mathbb Q}$.</p>
+
+<p class="ml">Exemple 8 : pas de plus grand entier pair</p>
+<p><b>Montrer qu'il n'existe pas de plus grand entier pair.</b></p>
+<p><b>Étape 1 : Rappel.</b> On suppose qu'il en existe un, $\cR N$, et on en fabrique un plus grand.</p>
+<p><b>Étape 2 : Un plus grand.</b> $N + 2$ est pair ($N = 2k$ donne $N + 2 = 2(k + 1)$) et $N + 2 > N$.</p>
+<p><b>Étape 3 : Conclusion.</b> Contradiction avec la définition de $N$ : $\cG{\text{il n'y a pas de plus grand entier pair}}$.</p>
+
+<h2 id="lg-rec">6. Raisonner par récurrence</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{simple}:\ P(n_0)\ \text{et}\ \big(P(n)\Rightarrow P(n + 1)\big)$</li><li>$\displaystyle\textbf{double}:\ P(n_0),\ P(n_0 + 1)\ \text{et}\ \big(P(n), P(n + 1)\Rightarrow P(n + 2)\big)$</li><li>$\displaystyle\textbf{forte}:\ P(n_0)\ \text{et}\ \big(P(n_0), \dots, P(n)\Rightarrow P(n + 1)\big)$</li></ul></div>
+
+<p class="ml">Exemple 9 : une somme</p>
+<p><b>Montrer que pour tout $n\geq1$, $1 + 2 + \dots + n = \frac{n(n + 1)}2$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Récurrence simple : initialisation, puis hérédité.</p>
+<p><b>Étape 2 : Initialisation.</b> $n = 1$ : à gauche $1$, à droite $\frac{1\times2}2 = 1$.</p>
+<p><b>Étape 3 : Hérédité.</b> On suppose la formule vraie au rang $n$. Alors $1 + \dots + n + (n + 1) = \frac{n(n + 1)}2 + (n + 1) = (n + 1)\Big(\frac n2 + 1\Big) = \frac{(n + 1)(n + 2)}2$ : c'est la formule au rang $n + 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{k=1}^nk = \frac{n(n + 1)}2}$ pour tout $n\geq1$.</p>
+
+<p class="ml">Exemple 10 : une récurrence double</p>
+<p>On pose $u_0 = 2$, $u_1 = 3$ et $u_{n+2} = 3u_{n+1} - 2u_n$. <b>Montrer que $u_n = 2^n + 1$ pour tout $n\in\mathbb N$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $u_{n+2}$ dépend de deux termes : récurrence double.</p>
+<p><b>Étape 2 : Initialisation.</b> $2^0 + 1 = 2 = u_0$ et $2^1 + 1 = 3 = u_1$.</p>
+<p><b>Étape 3 : Hérédité.</b> Si $u_n = 2^n + 1$ et $u_{n+1} = 2^{n+1} + 1$ : $u_{n+2} = 3(2^{n+1} + 1) - 2(2^n + 1) = 3\times2^{n+1} - 2^{n+1} + 3 - 2 = 2\times2^{n+1} + 1 = 2^{n+2} + 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u_n = 2^n + 1}$ pour tout $n$.</p>
+
+<p class="ml">Exemple 11 : une récurrence forte</p>
+<p><b>Montrer que tout entier $n\geq2$ a au moins un diviseur premier.</b></p>
+<p><b>Étape 1 : Rappel.</b> On utilise l'hypothèse pour un entier plus petit, pas forcément $n - 1$ : récurrence forte.</p>
+<p><b>Étape 2 : Initialisation.</b> $2$ est premier, il est son propre diviseur premier.</p>
+<p><b>Étape 3 : Hérédité.</b> On suppose le résultat pour $2, \dots, n$. Si $n + 1$ est premier, c'est fini. Sinon $n + 1 = ab$ avec $2\leq a\leq n$ : $a$ a un diviseur premier $p$, qui divise aussi $n + 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{tout}\ n\geq2\ \text{a un diviseur premier}}$.</p>
+
+<h2 id="lg-as">7. Raisonner par analyse-synthèse</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{analyse}:\ \text{on suppose qu'une solution existe et on trouve sa forme (unicité)}$</li><li>$\displaystyle\textbf{synthèse}:\ \text{on vérifie que la forme trouvée convient (existence)}$</li></ul></div>
+
+<p class="ml">Exemple 12 : paire plus impaire</p>
+<p><b>Montrer que toute fonction $f:\mathbb R\to\mathbb R$ s'écrit de façon unique comme somme d'une fonction paire et d'une fonction impaire.</b></p>
+<p><b>Étape 1 : Rappel.</b> Analyse pour trouver $p$ et $i$, synthèse pour vérifier.</p>
+<p><b>Étape 2 : Analyse.</b> Si $f = p + i$, alors $f(-x) = p(x) - i(x)$. On additionne avec $f(x) = p(x) + i(x)$ : $p(x) = \frac{f(x) + f(-x)}2$ ; on soustrait : $i(x) = \frac{f(x) - f(-x)}2$. Ces formules prouvent l'unicité.</p>
+<p><b>Étape 3 : Synthèse.</b> $p(-x) = \frac{f(-x) + f(x)}2 = p(x)$, $i(-x) = -i(x)$, et $p + i = \frac{2f(x)}2 = f(x)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f = p + i,\ p\ \text{paire},\ i\ \text{impaire, de façon unique}}$ (exemple : $e^x = \operatorname{ch}x + \operatorname{sh}x$).</p>
+
+<p class="ml">Exemple 13 : une équation fonctionnelle</p>
+<p><b>Déterminer toutes les fonctions $f:\mathbb R\to\mathbb R$ telles que $f(x) + 2f(-x) = x$ pour tout réel $x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Analyse : on remplace $x$ par $-x$ pour obtenir un système.</p>
+<p><b>Étape 2 : Analyse.</b> On a $f(x) + 2f(-x) = x$ (1) et, avec $-x$ : $f(-x) + 2f(x) = -x$ (2). (2)$\times2 - $(1) : $4f(x) - f(x) = -2x - x$, soit $3f(x) = -3x$, $f(x) = -x$.</p>
+<p><b>Étape 3 : Synthèse.</b> $f(x) = -x$ : $f(x) + 2f(-x) = -x + 2x = x$ ✓.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{la seule solution est}\ f(x) = -x}$.</p>
+
+<h2 id="lg-cas">8. Disjonction de cas</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{on découpe en cas qui couvrent tout : pair / impair, signe, position par rapport à un point}$</li><li>$\displaystyle\text{on démontre le résultat dans chaque cas}$</li></ul></div>
+
+<p class="ml">Exemple 14 : un produit de deux consécutifs</p>
+<p>Soit $n\in\mathbb Z$. <b>Montrer que $n(n + 1)$ est pair.</b></p>
+<p><b>Étape 1 : Rappel.</b> Deux cas : $n$ pair ou $n$ impair.</p>
+<p><b>Étape 2 : $n$ pair.</b> $n = 2k$, donc $n(n + 1) = 2k(n + 1)$ : pair.</p>
+<p><b>Étape 3 : $n$ impair.</b> $n + 1 = 2k$ est pair, donc $n(n + 1) = 2kn$ : pair.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{n(n + 1)\ \text{est toujours pair}}$.</p>
+
+<p class="ml">Exemple 15 : une inégalité avec des valeurs absolues</p>
+<p><b>Résoudre dans $\mathbb R$ l'inéquation $|x - 1|\leq2x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On enlève la valeur absolue en distinguant le signe de $x - 1$.</p>
+<p><b>Étape 2 : Cas $x\geq1$.</b> $|x - 1| = x - 1$ : $x - 1\leq2x\iff-1\leq x$, toujours vrai ici. Solutions : $[1, +\infty[$.</p>
+<p><b>Étape 3 : Cas $x \lt 1$.</b> $|x - 1| = 1 - x$ : $1 - x\leq2x\iff1\leq3x\iff x\geq\frac13$. Solutions : $\big[\frac13, 1\big[$.</p>
+<p><b>Étape 4 : Conclusion.</b> On réunit les deux cas : $\cG{\mathcal S = \big[\tfrac13, +\infty\big[}$.</p>
+
+<h2 id="lg-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Nier « $P\Rightarrow Q$ » en « $\operatorname{non}P\Rightarrow\operatorname{non}Q$ » : c'est « $P$ et non $Q$ ».</p>
+<p><b>2.</b> Confondre contraposée ($\operatorname{non}Q\Rightarrow\operatorname{non}P$) et réciproque ($Q\Rightarrow P$).</p>
+<p><b>3.</b> Échanger $\forall$ et $\exists$ dans une définition : $\exists M,\ \forall n$ n'est pas $\forall n,\ \exists M$.</p>
+<p><b>4.</b> Oublier l'initialisation d'une récurrence.</p>
+<p><b>5.</b> En analyse-synthèse, oublier la synthèse : on a seulement prouvé l'unicité.</p>
+<p><b>6.</b> Faire une disjonction de cas qui n'oublie aucun cas… en en oubliant un ($x = 0$ par exemple).</p>
+</div>
+
+<h2 id="lg-arbre">L'arbre des raisonnements</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que faut-il montrer ?</span><ul>
+<li><div class="hr"><em>une négation</em><a class="hl ok" href="#lg-neg">échanger $\forall$ et $\exists$</a></div></li>
+<li><div class="hr"><em>$P\Rightarrow Q$</em><span class="hq">Non $Q$ plus simple ?</span><ul>
+<li><div class="hr"><em>non</em><a class="hl ok" href="#lg-impl">supposer $P$</a></div></li>
+<li><div class="hr"><em>oui</em><a class="hl" href="#lg-contra">contraposée</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>« n'existe pas », irrationnel</em><a class="hl" href="#lg-abs">absurde</a></div></li>
+<li><div class="hr"><em>pour tout $n\in\mathbb N$</em><a class="hl ok" href="#lg-rec">récurrence</a></div></li>
+<li><div class="hr"><em>existence et unicité</em><a class="hl" href="#lg-as">analyse-synthèse</a></div></li>
+<li><div class="hr"><em>plusieurs situations</em><a class="hl end" href="#lg-cas">disjonction de cas</a></div></li>
+</ul></div></div>
+`,
+"Primitives et équations différentielles linéaires": R`
+<nav class="msum"><a href="#pe-usuel">Primitives usuelles</a><a href="#pe-forme">Reconnaître une forme</a><a href="#pe-ipp">IPP</a><a href="#pe-cv">Changement de variable</a><a href="#pe-frac">Fractions</a><a href="#pe-trigo">Trigonométrie</a><a href="#pe-ed1">EDL d'ordre 1</a><a href="#pe-ed2">EDL d'ordre 2</a><a href="#pe-erreurs">Erreurs</a><a href="#pe-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction $\cB u$ qu'on repère. <span class="kO">orange</span> : sa dérivée $\cO{u'}$. <span class="kV">violet</span> : les constantes d'intégration $\cV\lambda$, $\cV\mu$. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="pe-usuel">1. Les primitives usuelles</h2>
+<table class="mtab">
+<tr><th>Fonction</th><th>Une primitive</th><th>Sur</th></tr>
+<tr><td>$x^\alpha$ ($\alpha\neq-1$)</td><td>$\frac{x^{\alpha+1}}{\alpha + 1}$</td><td>$]0, +\infty[$ (ou $\mathbb R$ si $\alpha\in\mathbb N$)</td></tr>
+<tr><td>$\frac1x$</td><td>$\ln|x|$</td><td>$]-\infty, 0[$ ou $]0, +\infty[$</td></tr>
+<tr><td>$e^{ax}$ ($a\neq0$)</td><td>$\frac{e^{ax}}a$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\cos x$, $\sin x$</td><td>$\sin x$, $-\cos x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\frac1{1 + x^2}$</td><td>$\arctan x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\frac1{\sqrt{1 - x^2}}$</td><td>$\arcsin x$</td><td>$]-1, 1[$</td></tr>
+<tr><td>$\operatorname{ch}x$, $\operatorname{sh}x$</td><td>$\operatorname{sh}x$, $\operatorname{ch}x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$1 + \tan^2x = \frac1{\cos^2x}$</td><td>$\tan x$</td><td>$\big]-\frac\pi2, \frac\pi2\big[$</td></tr>
+</table>
+
+<h2 id="pe-forme">2. Reconnaître une dérivée composée</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\cO{u'}\cB u^\alpha\ \longrightarrow\ \frac{\cB u^{\alpha+1}}{\alpha + 1}\quad(\alpha\neq-1)$</li><li>$\displaystyle\frac{\cO{u'}}{\cB u}\ \longrightarrow\ \ln|\cB u|$</li><li>$\displaystyle\cO{u'}e^{\cB u}\ \longrightarrow\ e^{\cB u}$</li><li>$\displaystyle\frac{\cO{u'}}{1 + \cB u^2}\ \longrightarrow\ \arctan\cB u$</li></ul></div>
+
+<p class="ml">Exemple 1 : une puissance d'une fonction</p>
+<p><b>Calculer une primitive de $f(x) = x(x^2 + 1)^3$ sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On cherche la forme $u'u^\alpha$, dont une primitive est $\frac{u^{\alpha+1}}{\alpha + 1}$.</p>
+<p><b>Étape 2 : On repère $u$.</b> $\cB{u = x^2 + 1}$, $\cO{u' = 2x}$. Il manque un facteur $2$ : $f(x) = \frac12\times2x(x^2 + 1)^3 = \frac12u'u^3$.</p>
+<p><b>Étape 3 : On applique.</b> Une primitive de $u'u^3$ est $\frac{u^4}4$, donc une primitive de $f$ est $\frac12\times\frac{(x^2 + 1)^4}4$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = \frac{(x^2 + 1)^4}8}$. Contrôle : $F'(x) = \frac{4(x^2 + 1)^3\times2x}8 = x(x^2 + 1)^3$.</p>
+
+<p class="ml">Exemple 2 : un quotient $\frac{u'}u$</p>
+<p><b>Calculer une primitive de $f(x) = \tan x$ sur $\big]-\frac\pi2, \frac\pi2\big[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\frac{u'}u$ a pour primitive $\ln|u|$.</p>
+<p><b>Étape 2 : On repère $u$.</b> $\tan x = \frac{\sin x}{\cos x}$ ; avec $\cB{u = \cos x}$, $\cO{u' = -\sin x}$, donc $\tan x = -\frac{u'}u$.</p>
+<p><b>Étape 3 : On applique.</b> Une primitive est $-\ln|\cos x|$, et $\cos x > 0$ sur l'intervalle.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = -\ln(\cos x)}$. Contrôle : $F'(x) = -\frac{-\sin x}{\cos x} = \tan x$.</p>
+
+<p class="ml">Exemple 3 : un $\arctan$ caché</p>
+<p><b>Calculer $\int_0^1\frac{dx}{x^2 + 4}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On met le dénominateur sous la forme $a^2(1 + u^2)$ pour faire apparaître $\frac{u'}{1 + u^2}$.</p>
+<p><b>Étape 2 : On factorise.</b> $x^2 + 4 = 4\Big(1 + \frac{x^2}4\Big) = 4\Big(1 + \big(\frac x2\big)^2\Big)$. Avec $\cB{u = \frac x2}$, $\cO{u' = \frac12}$ : $\frac1{x^2 + 4} = \frac14\times\frac1{1 + u^2} = \frac12\times\frac{u'}{1 + u^2}$.</p>
+<p><b>Étape 3 : La primitive.</b> $\frac12\arctan\frac x2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\int_0^1\frac{dx}{x^2 + 4} = \frac12\Big(\arctan\frac12 - \arctan0\Big) = \cG{\frac12\arctan\frac12}$.</p>
+
+<h2 id="pe-ipp">3. L'intégration par parties</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\int_a^bu'v = \big[uv\big]_a^b - \int_a^buv'\qquad(u, v\ \text{de classe}\ \mathcal C^1)$</li><li>$\displaystyle\text{on dérive le facteur qui se simplifie : polynôme,}\ \ln,\ \arctan$</li></ul></div>
+
+<p class="ml">Exemple 4 : polynôme fois exponentielle</p>
+<p><b>Calculer $I = \int_0^1xe^x\,dx$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On dérive le polynôme $x$ (il devient $1$), on intègre $e^x$.</p>
+<p><b>Étape 2 : Le choix.</b> $v = x$, $v' = 1$ ; $u' = e^x$, $u = e^x$.</p>
+<p><b>Étape 3 : La formule.</b> $I = \big[xe^x\big]_0^1 - \int_0^1e^x\,dx = (1\times e - 0) - (e^1 - e^0) = e - e + 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{I = 1}$.</p>
+
+<p class="ml">Exemple 5 : une primitive de $\ln$</p>
+<p><b>Calculer une primitive de $\ln$ sur $]0, +\infty[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On écrit $\ln x = 1\times\ln x$ et on dérive $\ln$.</p>
+<p><b>Étape 2 : Le choix.</b> $u' = 1$, $u = x$ ; $v = \ln x$, $v' = \frac1x$.</p>
+<p><b>Étape 3 : La formule.</b> $\int_1^x\ln t\,dt = \big[t\ln t\big]_1^x - \int_1^xt\times\frac1t\,dt = x\ln x - 0 - (x - 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = x\ln x - x}$. Contrôle : $F'(x) = \ln x + x\times\frac1x - 1 = \ln x$.</p>
+
+<p class="ml">Exemple 6 : deux IPP et une équation</p>
+<p><b>Calculer $I = \int_0^\pi e^x\sin x\,dx$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Après deux IPP on retombe sur $I$ : on résout l'équation obtenue.</p>
+<p><b>Étape 2 : Première IPP</b> ($u' = e^x$, $v = \sin x$) : $I = \big[e^x\sin x\big]_0^\pi - \int_0^\pi e^x\cos x\,dx = 0 - J$ (car $\sin\pi = \sin0 = 0$).</p>
+<p><b>Étape 3 : Seconde IPP</b> ($u' = e^x$, $v = \cos x$) : $J = \big[e^x\cos x\big]_0^\pi + \int_0^\pi e^x\sin x\,dx = (e^\pi\times(-1) - 1) + I$.</p>
+<p><b>Étape 4 : On résout.</b> $I = -J = e^\pi + 1 - I$, donc $2I = e^\pi + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{I = \frac{e^\pi + 1}2}$.</p>
+
+<h2 id="pe-cv">4. Le changement de variable</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt\qquad(\varphi\ \text{de classe}\ \mathcal C^1)$</li><li>$\displaystyle\text{on change trois choses : la fonction, le}\ dx,\ \text{les bornes}$</li></ul></div>
+
+<p class="ml">Exemple 7 : $\int_0^1\sqrt{1 - x^2}\,dx$</p>
+<p><b>Calculer $I = \int_0^1\sqrt{1 - x^2}\,dx$ avec le changement de variable $x = \sin t$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On remplace $x$, $dx$ et les bornes.</p>
+<p><b>Étape 2 : Les trois remplacements.</b> $x = \sin t$, $dx = \cos t\,dt$ ; $x = 0$ pour $t = 0$, $x = 1$ pour $t = \frac\pi2$ ; $\sqrt{1 - \sin^2t} = \sqrt{\cos^2t} = \cos t$ (car $\cos t\geq0$ sur $\big[0, \frac\pi2\big]$).</p>
+<p><b>Étape 3 : L'intégrale.</b> $I = \int_0^{\pi/2}\cos^2t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \frac\pi4 + 0 - 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{I = \frac\pi4}$ : l'aire d'un quart de disque de rayon $1$.</p>
+
+<p class="ml">Exemple 8 : un changement $u = e^x$</p>
+<p><b>Calculer $I = \int_0^1\frac{dx}{1 + e^x}$ en posant $u = e^x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $x = \ln u$, $dx = \frac{du}u$, bornes $1$ et $e$.</p>
+<p><b>Étape 2 : On remplace.</b> $I = \int_1^e\frac1{1 + u}\times\frac{du}u = \int_1^e\frac{du}{u(1 + u)}$.</p>
+<p><b>Étape 3 : Éléments simples.</b> $\frac1{u(1 + u)} = \frac1u - \frac1{1 + u}$ (contrôle : $\frac{(1 + u) - u}{u(1 + u)}$). Primitive : $\ln u - \ln(1 + u)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $I = (1 - \ln(1 + e)) - (0 - \ln2) = \cG{1 + \ln2 - \ln(1 + e)}$.</p>
+
+<h2 id="pe-frac">5. Les fractions rationnelles</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\text{décomposer en éléments simples, puis}\ \int\frac{dx}{x - a} = \ln|x - a|$</li><li>$\displaystyle\frac1{x^2 + px + q}\ (\Delta \lt 0):\ \text{forme canonique, puis}\ \arctan$</li></ul></div>
+
+<p class="ml">Exemple 9 : deux pôles réels</p>
+<p><b>Calculer une primitive de $f(x) = \frac{1}{x^2 - 1}$ sur $]1, +\infty[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Décomposer en $\frac a{x - 1} + \frac b{x + 1}$.</p>
+<p><b>Étape 2 : Les coefficients.</b> $a = \frac1{1 + 1} = \frac12$ (on multiplie par $x - 1$ et on prend $x = 1$), $b = \frac1{-1 - 1} = -\frac12$.</p>
+<p><b>Étape 3 : La primitive.</b> $\frac12\ln(x - 1) - \frac12\ln(x + 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = \frac12\ln\frac{x - 1}{x + 1}}$.</p>
+
+<p class="ml">Exemple 10 : un trinôme sans racine</p>
+<p><b>Calculer une primitive de $f(x) = \frac1{x^2 + 2x + 5}$ sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Forme canonique, puis la forme $\frac{u'}{1 + u^2}$.</p>
+<p><b>Étape 2 : Forme canonique.</b> $x^2 + 2x + 5 = (x + 1)^2 + 4 = 4\Big(1 + \big(\frac{x + 1}2\big)^2\Big)$.</p>
+<p><b>Étape 3 : On reconnaît.</b> Avec $u = \frac{x + 1}2$, $u' = \frac12$ : $f = \frac14\times\frac1{1 + u^2} = \frac12\times\frac{u'}{1 + u^2}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = \frac12\arctan\frac{x + 1}2}$.</p>
+
+<h2 id="pe-trigo">6. Les fonctions trigonométriques</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{linéariser}:\ \cos^2x = \frac{1 + \cos2x}2,\ \ \sin^2x = \frac{1 - \cos2x}2$</li><li>$\displaystyle\textbf{puissance impaire}:\ \sin^3x = \sin x(1 - \cos^2x),\ \text{puis}\ u = \cos x$</li><li>$\displaystyle e^{ax}\cos(bx) = \operatorname{Re}\big(e^{(a + ib)x}\big)$</li></ul></div>
+
+<p class="ml">Exemple 11 : une puissance impaire</p>
+<p><b>Calculer une primitive de $\sin^3x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On garde un $\sin x$ (la dérivée de $-\cos x$) et on écrit le reste avec $\cos x$.</p>
+<p><b>Étape 2 : On écrit.</b> $\sin^3x = \sin x\,\sin^2x = \sin x(1 - \cos^2x) = \sin x - \sin x\cos^2x$.</p>
+<p><b>Étape 3 : Les morceaux.</b> $\sin x\to-\cos x$ ; $\sin x\cos^2x = -u'u^2$ avec $u = \cos x$, donc $\to-\frac{\cos^3x}3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = -\cos x + \frac{\cos^3x}3}$.</p>
+
+<p class="ml">Exemple 12 : par les complexes</p>
+<p><b>Calculer une primitive de $e^x\cos x$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $e^x\cos x = \operatorname{Re}\big(e^{(1 + i)x}\big)$, et une primitive de $e^{(1 + i)x}$ est $\frac{e^{(1 + i)x}}{1 + i}$.</p>
+<p><b>Étape 2 : On simplifie.</b> $\frac1{1 + i} = \frac{1 - i}{(1 + i)(1 - i)} = \frac{1 - i}2$.</p>
+<p><b>Étape 3 : La partie réelle.</b> $\frac{1 - i}2e^x(\cos x + i\sin x)$ a pour partie réelle $\frac{e^x}2(\cos x + \sin x)$ (car $(1 - i)(\cos x + i\sin x) = \cos x + \sin x + i(\sin x - \cos x)$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F(x) = \frac{e^x}2(\cos x + \sin x)}$.</p>
+
+<h2 id="pe-ed1">7. Équations différentielles linéaires d'ordre 1</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle y' + a(x)y = 0\iff y = \cV\lambda e^{-A(x)}\quad(A\ \text{primitive de}\ a)$</li><li>$\displaystyle\text{solution générale} = \text{solution particulière} + \text{solutions homogènes}$</li><li>$\displaystyle\text{solution particulière : à vue, ou variation de la constante}\ y = \lambda(x)e^{-A(x)}$</li></ul></div>
+
+<p class="ml">Exemple 13 : coefficients constants, second membre polynomial</p>
+<p><b>Résoudre $y' + 2y = 4x$ sur $\mathbb R$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Homogène, puis une solution particulière de même forme que le second membre.</p>
+<p><b>Étape 2 : Homogène.</b> $a = 2$, $A(x) = 2x$ : $y_H = \cV\lambda e^{-2x}$.</p>
+<p><b>Étape 3 : Particulière.</b> On cherche $y_p = \alpha x + \beta$ : $y_p' + 2y_p = \alpha + 2\alpha x + 2\beta = 4x$, donc $2\alpha = 4$, $\alpha = 2$, puis $\alpha + 2\beta = 0$, $\beta = -1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{y(x) = 2x - 1 + \lambda e^{-2x},\ \lambda\in\mathbb R}$.</p>
+
+<p class="ml">Exemple 14 : variation de la constante</p>
+<p><b>Résoudre $xy' - y = x^2$ sur $]0, +\infty[$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On normalise (coefficient $1$ devant $y'$), puis on cherche $y = \lambda(x)y_0(x)$.</p>
+<p><b>Étape 2 : Normaliser.</b> $y' - \frac1xy = x$.</p>
+<p><b>Étape 3 : Homogène.</b> $a(x) = -\frac1x$, $A(x) = -\ln x$, donc $y_H = \lambda e^{\ln x} = \lambda x$.</p>
+<p><b>Étape 4 : Variation.</b> $y = \lambda(x)x$, $y' = \lambda'x + \lambda$ : $\lambda'x + \lambda - \lambda = x$, donc $\lambda' = 1$, $\lambda(x) = x + \mu$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{y(x) = x^2 + \mu x,\ \mu\in\mathbb R}$. Contrôle : $x(2x + \mu) - (x^2 + \mu x) = x^2$.</p>
+
+<p class="ml">Exemple 15 : un problème de Cauchy</p>
+<p><b>Trouver la solution de $y' - y = e^x$ telle que $y(0) = 2$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Solution générale, puis la condition initiale fixe la constante.</p>
+<p><b>Étape 2 : Homogène.</b> $y_H = \lambda e^x$.</p>
+<p><b>Étape 3 : Particulière.</b> $e^x$ est solution homogène : on cherche $y_p = \alpha xe^x$. $y_p' = \alpha e^x + \alpha xe^x$, donc $y_p' - y_p = \alpha e^x = e^x$, $\alpha = 1$.</p>
+<p><b>Étape 4 : La constante.</b> $y = xe^x + \lambda e^x$ et $y(0) = 0 + \lambda = 2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{y(x) = (x + 2)e^x}$.</p>
+
+<h2 id="pe-ed2">8. Équations linéaires d'ordre 2 à coefficients constants</h2>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle y'' + ay' + by = 0:\ \text{équation caractéristique}\ r^2 + ar + b = 0$</li><li>$\displaystyle\Delta > 0:\ y = \lambda e^{r_1x} + \mu e^{r_2x}$</li><li>$\displaystyle\Delta = 0:\ y = (\lambda x + \mu)e^{r_0x}$</li><li>$\displaystyle\Delta \lt 0,\ r = \alpha\pm i\beta:\ y = e^{\alpha x}(\lambda\cos\beta x + \mu\sin\beta x)$</li></ul></div>
+
+<p class="ml">Exemple 16 : deux racines réelles</p>
+<p><b>Résoudre $y'' - 3y' + 2y = 0$.</b></p>
+<p><b>Étape 1 : Rappel.</b> On résout $r^2 - 3r + 2 = 0$.</p>
+<p><b>Étape 2 : Les racines.</b> $\Delta = 9 - 8 = 1$, $r = \frac{3\pm1}2$ : $r_1 = 1$, $r_2 = 2$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{y(x) = \lambda e^x + \mu e^{2x}}$.</p>
+
+<p class="ml">Exemple 17 : racines complexes et conditions initiales</p>
+<p><b>Trouver la solution de $y'' + 2y' + 5y = 0$ avec $y(0) = 1$ et $y'(0) = 1$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\Delta \lt 0$ : forme $e^{\alpha x}(\lambda\cos\beta x + \mu\sin\beta x)$.</p>
+<p><b>Étape 2 : Les racines.</b> $\Delta = 4 - 20 = -16 = (4i)^2$, $r = \frac{-2\pm4i}2 = -1\pm2i$ : $\alpha = -1$, $\beta = 2$.</p>
+<p><b>Étape 3 : Les constantes.</b> $y = e^{-x}(\lambda\cos2x + \mu\sin2x)$. $y(0) = \lambda = 1$. $y' = e^{-x}\big((-\lambda + 2\mu)\cos2x + (-\mu - 2\lambda)\sin2x\big)$, donc $y'(0) = -\lambda + 2\mu = 1$, $\mu = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{y(x) = e^{-x}(\cos2x + \sin2x)}$.</p>
+
+<p class="ml">Exemple 18 : un second membre exponentiel</p>
+<p><b>Résoudre $y'' - y = e^{2x}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Homogène, puis $y_p = Ce^{2x}$ si $2$ n'est pas racine caractéristique.</p>
+<p><b>Étape 2 : Homogène.</b> $r^2 - 1 = 0$, $r = \pm1$ : $y_H = \lambda e^x + \mu e^{-x}$.</p>
+<p><b>Étape 3 : Particulière.</b> $y_p = Ce^{2x}$ : $4Ce^{2x} - Ce^{2x} = 3Ce^{2x} = e^{2x}$, donc $C = \frac13$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{y(x) = \frac{e^{2x}}3 + \lambda e^x + \mu e^{-x}}$.</p>
+
+<h2 id="pe-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier la valeur absolue dans $\ln|u|$, ou l'intervalle de travail.</p>
+<p><b>2.</b> Dans un changement de variable, oublier de changer les bornes ou le $dx$.</p>
+<p><b>3.</b> Oublier de normaliser une EDL avant d'appliquer $y = \lambda e^{-A}$.</p>
+<p><b>4.</b> Chercher $y_p = Ce^{mx}$ alors que $m$ est racine caractéristique : il faut multiplier par $x$.</p>
+<p><b>5.</b> Utiliser la condition initiale sur $y_H$ au lieu de la solution générale complète.</p>
+</div>
+
+<h2 id="pe-arbre">L'arbre des primitives et des équations</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Que faut-il trouver ?</span><ul>
+<li><div class="hr"><em>une primitive</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>$u'u^\alpha$, $\frac{u'}u$, $u'e^u$</em><a class="hl ok" href="#pe-forme">reconnaître</a></div></li>
+<li><div class="hr"><em>produit polynôme × autre</em><a class="hl ok" href="#pe-ipp">IPP</a></div></li>
+<li><div class="hr"><em>racine, exponentielle</em><a class="hl" href="#pe-cv">changement de variable</a></div></li>
+<li><div class="hr"><em>fraction rationnelle</em><a class="hl" href="#pe-frac">éléments simples</a></div></li>
+<li><div class="hr"><em>trigonométrique</em><a class="hl" href="#pe-trigo">linéariser</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une EDL d'ordre 1</em><a class="hl ok" href="#pe-ed1">$\lambda e^{-A}$ + particulière</a></div></li>
+<li><div class="hr"><em>une EDL d'ordre 2</em><a class="hl end" href="#pe-ed2">équation caractéristique</a></div></li>
+</ul></div></div>
+`,
 "Dénombrement": R`
 <nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
 
