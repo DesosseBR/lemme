@@ -7381,7 +7381,7 @@ $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} 
 </ul></div></div>
 `,
 "Espaces préhilbertiens réels": R`
-<nav class="msum"><a href="#h-not">Notations</a><a href="#h-ps">Produit scalaire</a><a href="#h-cs">Cauchy-Schwarz</a><a href="#h-orth">Orthogonalité</a><a href="#h-bon">Bases orthonormées</a><a href="#h-gs">Gram-Schmidt</a><a href="#h-proj">Projection</a><a href="#h-dist">Distance</a><a href="#h-enonce">L'énoncé</a><a href="#h-erreurs">Erreurs</a><a href="#h-entrainement">S'entraîner</a><a href="#h-exos">Exercices</a><a href="#h-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#h-not">Notations</a><a href="#h-ps">Produit scalaire</a><a href="#h-cs">Cauchy-Schwarz</a><a href="#h-orth">Orthogonalité</a><a href="#h-bon">Bases orthonormées</a><a href="#h-gs">Gram-Schmidt</a><a href="#h-proj">Projection</a><a href="#h-dist">Distance</a><a href="#h-sfps">Produit scalaire ?</a><a href="#h-sfcs">Cauchy-Schwarz, polarisation</a><a href="#h-sforth">Orthogonal</a><a href="#h-sfbon">BON, $QR$</a><a href="#h-sfproj">Projections</a><a href="#h-sfmin">Minimum</a><a href="#h-enonce">L'énoncé</a><a href="#h-erreurs">Erreurs</a><a href="#h-entrainement">S'entraîner</a><a href="#h-exos">Exercices</a><a href="#h-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : le sous-espace $\cR F$ et son orthogonal. <span class="kO">orange</span> : les produits scalaires calculés $\cO{\langle x, e_i\rangle}$. <span class="kV">violet</span> : la base orthonormée $\cV{(e_1, \dots, e_n)}$. <span class="kG">vert</span> : la conclusion.</p>
@@ -7537,7 +7537,207 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 <p>Dénominateur commun $180$ : $\frac{36}{180} - \frac{45}{180} + \frac{10}{180} = \frac{36 - 45 + 10}{180} = \frac1{180}$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\inf = \frac1{180}}$, atteint pour $a = 1$, $b = -\frac16$.</p>
 
-<h2 id="h-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="h-sfps">9. Montrer qu'une application est un produit scalaire : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Cas général</td><td>La <b>définition</b> : bien définie (convergence d'une série, d'une intégrale…), symétrique, linéaire à gauche, positive, définie.</td></tr>
+<tr><td>Dimension finie, expression polynomiale en les coordonnées</td><td>La <b>matrice</b> $A = (\varphi(e_i, e_j))$ : $\varphi(x, y) = {}^tXAY$ ; symétrique $\iff A$ symétrique ; définie positive $\iff$ valeurs propres $> 0$ <span class="hp">programme de Spé</span>.</td></tr>
+<tr><td>« Défini » pour des polynômes</td><td>Un polynôme qui a une infinité de racines est nul.</td></tr>
+<tr><td>« Défini » pour des fonctions</td><td>Fonction continue, positive, d'intégrale nulle : nulle.</td></tr>
+</table>
+
+<p class="ml">Exemple 11 : une forme sur $\mathbb R^2$</p>
+<p>À quelle condition $\varphi((x, y), (x', y')) = axx' + bxy' + cyx' + dyy'$ est-elle un produit scalaire ?</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique, bilinéaire, $\varphi(u, u) > 0$ pour $u\neq0$.</p>
+<p><b>Étape 2 : Symétrie.</b> $\varphi(e_1, e_2) = b$ et $\varphi(e_2, e_1) = c$ : il faut $b = c$. Réciproquement, si $b = c$, échanger $(x, y)$ et $(x', y')$ ne change pas l'expression.</p>
+<p><b>Étape 3 : Bilinéaire.</b> Pour $(x', y')$ fixé, $(x, y)\mapsto(ax' + by')x + (bx' + dy')y$ est linéaire ; avec la symétrie, $\varphi$ est bilinéaire.</p>
+<p><b>Étape 4 : $\varphi(u, u) = ax^2 + 2bxy + dy^2$.</b> Avec $y = 0$ : $ax^2 > 0$ impose $a > 0$. Pour $y\neq0$, $t = \frac xy$ : $\varphi(u, u) = y^2(at^2 + 2bt + d)$, strictement positif pour tout $t$ ssi le trinôme n'a pas de racine réelle : $\Delta = 4b^2 - 4ad \lt 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{produit scalaire}\iff b = c,\ a > 0,\ ad - b^2 > 0}$. Exemple : $2xx' + xy' + yx' + yy'$ ($2\times1 - 1 = 1 > 0$) en est un.</p>
+
+<p class="ml">Exemple 12 : une série sur $\mathbb R[X]$</p>
+<p>Montrer que $\varphi(P, Q) = \sum_{n\geq0}P(n)Q(n)e^{-n}$ est un produit scalaire sur $\mathbb R[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> D'abord vérifier que la série converge.</p>
+<p><b>Étape 2 : Bien défini.</b> $PQ$ est un polynôme : $n^2P(n)Q(n)e^{-n}\to0$ (croissances comparées), donc $|P(n)Q(n)e^{-n}|\leq\frac1{n^2}$ à partir d'un rang ; la série converge absolument (Riemann).</p>
+<p><b>Étape 3 : Symétrique, bilinéaire.</b> $P(n)Q(n) = Q(n)P(n)$ ; la linéarité en $P$ vient de la linéarité de la somme d'une série convergente.</p>
+<p><b>Étape 4 : Positive, définie.</b> $\varphi(P, P) = \sum P(n)^2e^{-n}\geq0$. S'il est nul, tous les termes positifs sont nuls : $P(n) = 0$ pour tout $n\in\mathbb N$, une infinité de racines, donc $P = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{est un produit scalaire sur}\ \mathbb R[X]}$.</p>
+
+<p class="ml">Exemple 13 : par la matrice <span class="hp">programme de Spé</span></p>
+<p>$\varphi(x, y) = a\sum_ix_iy_i + b\sum_{i\neq j}x_iy_j$ sur $\mathbb R^n$ ($n\geq2$). Condition ?</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi(x, y) = {}^tXAY$ avec $A$ symétrique ; $\varphi$ produit scalaire $\iff$ toutes les valeurs propres de $A$ sont $> 0$.</p>
+<p><b>Étape 2 : La matrice.</b> $A$ a des $a$ sur la diagonale et des $b$ ailleurs : $A = (a - b)I_n + bJ$.</p>
+<p><b>Étape 3 : Les valeurs propres</b> (fiche Réduction) : $a - b$ (ordre $n - 1$) et $a + (n - 1)b$.</p>
+<p><b>Étape 4 : En base orthonormée de vecteurs propres.</b> $\varphi(x, x) = (a - b)(y_1^2 + \dots + y_{n-1}^2) + (a + (n - 1)b)y_n^2$ : strictement positif pour $y\neq0$ ssi les deux coefficients le sont.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{produit scalaire}\iff a - b > 0\ \text{et}\ a + (n - 1)b > 0}$ (pour $b = 0$ : $a > 0$).</p>
+
+<h2 id="h-sfcs">10. Utiliser un produit scalaire : Cauchy-Schwarz, polarisation, normes</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Une inégalité « somme de produits $\leq$ racines »</td><td>Cauchy-Schwarz, en précisant l'espace, le produit scalaire et les deux vecteurs.</td></tr>
+<tr><td>On connaît des normes, on veut des produits scalaires</td><td>Polarisation : $\langle x, y\rangle = \frac12(\|x + y\|^2 - \|x\|^2 - \|y\|^2)$.</td></tr>
+<tr><td>Une inégalité sur des normes</td><td>Développer les carrés, triangle, Pythagore, parallélogramme.</td></tr>
+<tr><td>Montrer $x = y$</td><td>$\|x - y\|^2 = 0$, ou $\langle x - y, z\rangle = 0$ pour tout $z$.</td></tr>
+</table>
+
+<p class="ml">Exemple 14 : Cauchy-Schwarz avec un produit scalaire pondéré</p>
+<p>$2x^2 + y^2 + 3z^2\leq1$. Montrer $(x + y + z)^2\leq\frac{11}6$.</p>
+<p><b>Étape 1 : Rappel.</b> $\langle u, v\rangle^2\leq\langle u, u\rangle\langle v, v\rangle$, pour <b>le</b> produit scalaire adapté.</p>
+<p><b>Étape 2 : Le produit scalaire.</b> $\varphi(u, v) = 2xx' + yy' + 3zz'$ (exemple 11 en dimension $3$, coefficients $> 0$).</p>
+<p><b>Étape 3 : Le bon $v$.</b> On veut $\varphi(u, v) = x + y + z$ : $2x' = 1$, $y' = 1$, $3z' = 1$, soit $v = \big(\frac12, 1, \frac13\big)$. Alors $\varphi(v, v) = 2\times\frac14 + 1 + 3\times\frac19 = \frac12 + 1 + \frac13 = \frac{11}6$.</p>
+<p><b>Étape 4 : Conclusion.</b> $(x + y + z)^2 = \varphi(u, v)^2\leq\varphi(u, u)\varphi(v, v)\leq1\times\frac{11}6$ : $\cG{(x + y + z)^2\leq\frac{11}6}$.</p>
+
+<p class="ml">Exemple 15 : $\operatorname{tr}A\leq\sqrt n\sqrt{\operatorname{tr}({}^tAA)}$ et $\|AB\|\leq\|A\|\,\|B\|$</p>
+<p>Sur $\mathcal M_n(\mathbb R)$, $\langle A, B\rangle = \operatorname{tr}({}^tAB) = \sum a_{ij}b_{ij}$.</p>
+<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz pour ce produit scalaire et dans $\mathbb R^n$.</p>
+<p><b>Étape 2 : La trace.</b> $\langle I_n, A\rangle = \operatorname{tr}A$ et $\|I_n\| = \sqrt{\operatorname{tr}I_n} = \sqrt n$ : $|\operatorname{tr}A|\leq\sqrt n\,\|A\|$, avec égalité ssi $A = \lambda I_n$ (et $\operatorname{tr}A\geq0$ pour l'inégalité sans valeur absolue).</p>
+<p><b>Étape 3 : Le produit.</b> $c_{ij} = \sum_ka_{ik}b_{kj}$, Cauchy-Schwarz dans $\mathbb R^n$ : $c_{ij}^2\leq\Big(\sum_ka_{ik}^2\Big)\Big(\sum_kb_{kj}^2\Big)$.</p>
+<p><b>Étape 4 : On somme</b> sur $i, j$ : $\|C\|^2\leq\sum_{i,k}a_{ik}^2\times\sum_{j,k}b_{kj}^2 = \|A\|^2\|B\|^2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{tr}A\leq\sqrt n\|A\|,\quad\|AB\|\leq\|A\|\,\|B\|}$.</p>
+
+<p class="ml">Exemple 16 : $u(0) = 0$ et $\|u(x) - u(y)\| = \|x - y\|$ entraîne $u$ linéaire</p>
+<p><b>Étape 1 : Rappel.</b> Polarisation, puis $\|v\|^2 = 0\Rightarrow v = 0$.</p>
+<p><b>Étape 2 : Les normes.</b> $y = 0$ : $\|u(x)\| = \|x\|$.</p>
+<p><b>Étape 3 : Les produits scalaires.</b> $\langle u(x), u(y)\rangle = -\frac12\big(\|u(x) - u(y)\|^2 - \|u(x)\|^2 - \|u(y)\|^2\big) = -\frac12\big(\|x - y\|^2 - \|x\|^2 - \|y\|^2\big) = \langle x, y\rangle$.</p>
+<p><b>Étape 4 : On développe</b> $\|u(\lambda x + y) - \lambda u(x) - u(y)\|^2$ : chaque produit scalaire $\langle u(a), u(b)\rangle$ se remplace par $\langle a, b\rangle$, et on obtient $\|(\lambda x + y) - \lambda x - y\|^2 = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $u(\lambda x + y) = \lambda u(x) + u(y)$ : $\cG{u\ \text{est linéaire}}$ (c'est une isométrie).</p>
+
+<p class="ml">Exemple 17 : un encadrement de normes</p>
+<p>Montrer $\big|\|x\|^2 - \|y\|^2\big|\leq\|x + y\|\,\|x - y\|\leq\|x\|^2 + \|y\|^2$.</p>
+<p><b>Étape 1 : Rappel.</b> On élève au carré : tout est positif.</p>
+<p><b>Étape 2 : Le carré du milieu.</b> $\|x + y\|^2\|x - y\|^2 = (\|x\|^2 + \|y\|^2 + 2\langle x, y\rangle)(\|x\|^2 + \|y\|^2 - 2\langle x, y\rangle) = (\|x\|^2 + \|y\|^2)^2 - 4\langle x, y\rangle^2$ ($(s + t)(s - t) = s^2 - t^2$).</p>
+<p><b>Étape 3 : À droite.</b> $-4\langle x, y\rangle^2\leq0$ : le carré est $\leq(\|x\|^2 + \|y\|^2)^2$, égalité ssi $x\perp y$.</p>
+<p><b>Étape 4 : À gauche.</b> $(\|x\|^2 + \|y\|^2)^2 = (\|x\|^2 - \|y\|^2)^2 + 4\|x\|^2\|y\|^2$, donc le carré vaut $(\|x\|^2 - \|y\|^2)^2 + 4(\|x\|^2\|y\|^2 - \langle x, y\rangle^2)\geq(\|x\|^2 - \|y\|^2)^2$ par Cauchy-Schwarz.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\big|\|x\|^2 - \|y\|^2\big|\leq\|x + y\|\,\|x - y\|\leq\|x\|^2 + \|y\|^2}$.</p>
+
+<p class="ml">Exemple 18 : $\langle f(x), y\rangle = \langle x, g(y)\rangle$ entraîne $f$ linéaire</p>
+<p><b>Étape 1 : Rappel.</b> $v = 0\iff\langle v, z\rangle = 0$ pour tout $z$.</p>
+<p><b>Étape 2 : On calcule.</b> Pour tout $z$ : $\langle f(\lambda x + x') - \lambda f(x) - f(x'), z\rangle = \langle\lambda x + x', g(z)\rangle - \lambda\langle x, g(z)\rangle - \langle x', g(z)\rangle = 0$ (bilinéarité).</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{f(\lambda x + x') = \lambda f(x) + f(x')}$ ; par symétrie $g$ est linéaire aussi.</p>
+
+<p class="ml">Exemple 19 : $\ker A = \ker{}^tAA$, puis $\operatorname{Im}{}^tA = \operatorname{Im}{}^tAA$</p>
+<p><b>Étape 1 : Rappel.</b> $\,{}^tXX = \|X\|^2$ dans $\mathbb R^n$ ; théorème du rang.</p>
+<p><b>Étape 2 : $\ker A\subset\ker{}^tAA$.</b> $AX = 0\Rightarrow{}^tAAX = 0$.</p>
+<p><b>Étape 3 : L'autre inclusion.</b> $\,{}^tAAX = 0\Rightarrow{}^tX{}^tAAX = 0$, soit $\,{}^t(AX)(AX) = \|AX\|^2 = 0$, donc $AX = 0$.</p>
+<p><b>Étape 4 : Les images.</b> $\operatorname{rg}{}^tAA = n - \dim\ker{}^tAA = n - \dim\ker A = \operatorname{rg}A = \operatorname{rg}{}^tA$, et $\operatorname{Im}{}^tAA\subset\operatorname{Im}{}^tA$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker A = \ker{}^tAA,\ \operatorname{Im}{}^tA = \operatorname{Im}{}^tAA}$ : une structure euclidienne cachée débloque l'exercice.</p>
+
+<h2 id="h-sforth">11. Trouver l'orthogonal d'un sous-espace</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Dimension infinie</td><td>La <b>définition</b> $A^\perp = \{x,\ \forall a\in A,\ \langle a, x\rangle = 0\}$ ; attention, $(F^\perp)^\perp$ peut être $\neq F$.</td></tr>
+<tr><td>Supplémentaire orthogonal</td><td>Une inclusion $G\subset F^\perp$ et $E = F + G$, ou les dimensions.</td></tr>
+<tr><td>$F = \operatorname{Vect}(e_1, \dots, e_p)$</td><td>$x\in F^\perp\iff\langle x, e_i\rangle = 0$ pour tout $i$ : un système d'équations.</td></tr>
+<tr><td>$F$ donné par des équations</td><td>Les vecteurs normaux engendrent $F^\perp$.</td></tr>
+</table>
+
+<p class="ml">Exemple 20 : un hyperplan d'orthogonal nul</p>
+<p>$E = \mathcal C([0, 1], \mathbb R)$, $\langle f, g\rangle = \int_0^1fg$, $H = \{f,\ f(0) = 0\}$. Déterminer $H^\perp$.</p>
+<p><b>Étape 1 : Rappel.</b> La définition ; on choisit un $f\in H$ adapté à $g$.</p>
+<p><b>Étape 2 : Soit $g\in H^\perp$.</b> $f(t) = tg(t)$ est continue et $f(0) = 0$ : $f\in H$, donc $\int_0^1tg(t)^2\,dt = 0$.</p>
+<p><b>Étape 3 : Fonction positive continue d'intégrale nulle.</b> $tg(t)^2 = 0$ sur $[0, 1]$, donc $g = 0$ sur $]0, 1]$, puis en $0$ par continuité.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{H^\perp = \{0\}}$, donc $(H^\perp)^\perp = E\neq H$ : en dimension infinie, $H\oplus H^\perp\neq E$.</p>
+
+<p class="ml">Exemple 21 : deux supplémentaires orthogonaux de $\mathcal C^2$</p>
+<p>$E = \mathcal C^2([0, 1])$, $\varphi(f, g) = \int_0^1(fg + f'g')$, $F = \{f(0) = f(1) = 0\}$, $G = \{g'' = g\}$.</p>
+<p><b>Étape 1 : Rappel.</b> $F\perp G$ et $E = F + G$.</p>
+<p><b>Étape 2 : Orthogonaux.</b> $g'' = g$ : $\varphi(f, g) = \int_0^1(fg'' + f'g') = \int_0^1(fg')' = f(1)g'(1) - f(0)g'(0) = 0$.</p>
+<p><b>Étape 3 : La somme.</b> $g = \lambda\operatorname{ch} + \mu\operatorname{sh}$ (solutions de $g'' = g$). On veut $h - g\in F$ : $g(0) = h(0)$ donne $\lambda = h(0)$ ; $g(1) = h(1)$ donne $\mu = \frac{h(1) - h(0)\operatorname{ch}1}{\operatorname{sh}1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $h = (h - g) + g$ : $\cG{E = F\overset\perp\oplus G}$.</p>
+
+<p class="ml">Exemple 22 : $\mathcal S_n\perp\mathcal A_n$ et $(\ker A)^\perp = \operatorname{Im}{}^tA$</p>
+<p><b>Étape 1 : Rappel.</b> Une inclusion et les dimensions.</p>
+<p><b>Étape 2 : $\mathcal S_n\perp\mathcal A_n$.</b> $\langle S, A\rangle = \operatorname{tr}({}^tSA) = \operatorname{tr}(SA)$ et aussi $= \operatorname{tr}({}^t(SA)) = \operatorname{tr}({}^tA\,{}^tS) = -\operatorname{tr}(AS) = -\operatorname{tr}(SA)$ : donc $0$. Avec $\mathcal M_n = \mathcal S_n\oplus\mathcal A_n$ : supplémentaires orthogonaux.</p>
+<p><b>Étape 3 : $\operatorname{Im}{}^tA\subset(\ker A)^\perp$.</b> $Y = {}^tAX$, $Z\in\ker A$ : $\langle Y, Z\rangle = {}^tX AZ = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\dim\operatorname{Im}{}^tA = \operatorname{rg}A = n - \dim\ker A = \dim(\ker A)^\perp$ : $\cG{(\ker A)^\perp = \operatorname{Im}{}^tA}$.</p>
+
+<p class="ml">Exemple 23 : l'orthogonal par une base</p>
+<p>$F = \{x + y + z + t = 0,\ x - y + z - t = 0\}\subset\mathbb R^4$.</p>
+<p><b>Étape 1 : Rappel.</b> $x\in F^\perp\iff x\perp$ chaque vecteur d'une base de $F$.</p>
+<p><b>Étape 2 : Une base de $F$.</b> Somme des équations : $2x + 2z = 0$, $z = -x$ ; différence : $2y + 2t = 0$, $t = -y$. $F = \operatorname{Vect}\big((1, 0, -1, 0), (0, 1, 0, -1)\big)$.</p>
+<p><b>Étape 3 : Les équations de $F^\perp$.</b> $u = (x, y, z, t)$ : $\langle u, e_1\rangle = x - z = 0$ et $\langle u, e_2\rangle = y - t = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F^\perp:\ x = z,\ y = t}$, soit $\operatorname{Vect}\big((1, 1, 1, 1), (1, -1, 1, -1)\big)$ : les vecteurs normaux des équations de $F$.</p>
+
+<h2 id="h-sfbon">12. Bases orthonormées, Gram-Schmidt, décomposition $QR$</h2>
+
+<p class="ml">Exemple 24 : $\|x\|^2 = \sum\langle e_i, x\rangle^2$ et $\|e_i\|\geq1$ donnent une base orthonormée</p>
+<p>$(e_1, \dots, e_n)$ avec $\|e_i\|\geq1$ et $\|x\|^2 = \sum\langle e_i, x\rangle^2$ pour tout $x$. Montrer que c'est une base orthonormée.</p>
+<p><b>Étape 1 : Rappel.</b> On applique l'hypothèse à $x = e_j$.</p>
+<p><b>Étape 2 : On applique.</b> $\|e_j\|^2 = \|e_j\|^4 + \sum_{i\neq j}\langle e_i, e_j\rangle^2$, soit $\sum_{i\neq j}\langle e_i, e_j\rangle^2 + \|e_j\|^2(\|e_j\|^2 - 1) = 0$.</p>
+<p><b>Étape 3 : Somme de termes positifs nulle.</b> Chaque terme est nul : $\langle e_i, e_j\rangle = 0$ et $\|e_j\| = 1$ (car $\|e_j\|\geq1 > 0$). La famille est orthonormée, donc libre.</p>
+<p><b>Étape 4 : Génératrice.</b> $F = \operatorname{Vect}(e_i)$ ; $d(x, F)^2 = \|x\|^2 - \sum\langle e_i, x\rangle^2 = 0$, donc $x\in F$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(e_i)\ \text{est une base orthonormée de}\ E}$ (même sans connaître $\dim E$).</p>
+
+<p class="ml">Exemple 25 : Gram-Schmidt sur $\mathbb R_3[X]$ avec $\int_{-1}^1PQ$</p>
+<p><b>Étape 1 : Rappel.</b> $e'_k = a_k - \sum_{i \lt k}\frac{\langle e'_i, a_k\rangle}{\|e'_i\|^2}e'_i$ ; on normalise à la fin (pas de racines dans les calculs).</p>
+<p><b>Étape 2 : $e'_0, e'_1$.</b> $e'_0 = 1$, $\|e'_0\|^2 = 2$. $\langle1, X\rangle = \int_{-1}^1t\,dt = 0$ (impaire), donc $e'_1 = X$, $\|e'_1\|^2 = \frac23$.</p>
+<p><b>Étape 3 : $e'_2$.</b> $\langle1, X^2\rangle = \frac23$, $\langle X, X^2\rangle = 0$ : $e'_2 = X^2 - \frac{2/3}2 = X^2 - \frac13$.</p>
+<p><b>Étape 4 : $e'_3$.</b> $\langle1, X^3\rangle = 0$, $\langle X, X^3\rangle = \frac25$, $\langle e'_2, X^3\rangle = 0$ : $e'_3 = X^3 - \frac{2/5}{2/3}X = X^3 - \frac35X$.</p>
+<p><b>Étape 5 : Les normes.</b> $\|e'_2\|^2 = \int(t^4 - \frac23t^2 + \frac19) = \frac25 - \frac49 + \frac29 = \frac8{45}$ ; $\|e'_3\|^2 = \frac27 - \frac65\times\frac25 + \frac9{25}\times\frac23 = \frac27 - \frac6{25} = \frac8{175}$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\frac{\sqrt2}2,\ \frac{\sqrt6}2X,\ \frac{3\sqrt{10}}4\Big(X^2 - \frac13\Big),\ \frac{5\sqrt{14}}4\Big(X^3 - \frac35X\Big)}$ (car $\sqrt{\frac{45}8} = \frac{3\sqrt{10}}4$ et $\sqrt{\frac{175}8} = \frac{5\sqrt{14}}4$).</p>
+
+<p class="ml">Exemple 26 : la décomposition $QR$ et l'inégalité de Hadamard</p>
+<p><b>Étape 1 : Rappel.</b> Gram-Schmidt appliqué aux colonnes $C_1, \dots, C_n$ de $A\in GL_n(\mathbb R)$ donne une base orthonormée $\mathcal B''$, et la matrice de passage de $\mathcal B''$ à $(C_j)$ est triangulaire supérieure à diagonale $> 0$.</p>
+<p><b>Étape 2 : Existence.</b> $A = P_{\mathcal B\to(C_j)} = P_{\mathcal B\to\mathcal B''}P_{\mathcal B''\to(C_j)} = QR$, $Q$ orthogonale (passage entre deux bases orthonormées).</p>
+<p><b>Étape 3 : Unicité.</b> $QR = Q'R'$ donne $Q'^{-1}Q = R'R^{-1}$, orthogonale et triangulaire supérieure à diagonale $> 0$ : son inverse est sa transposée, triangulaire inférieure ; elle est donc diagonale, de coefficients $\pm1$ et $> 0$ : $I_n$.</p>
+<p><b>Étape 4 : Hadamard.</b> $|\det A| = |\det Q|\det R = \prod r_{ii}$ et $r_{ii} = \langle C_i, e''_i\rangle\leq\|C_i\|$ (Cauchy-Schwarz).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{|\det A|\leq\|C_1\|\cdots\|C_n\|}$, avec égalité ssi les colonnes sont orthogonales (ou une est nulle).</p>
+
+<h2 id="h-sfproj">13. Projections orthogonales : reconnaître, calculer</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Montrer qu'un projecteur est orthogonal</td><td>$p^2 = p$, puis $\ker p\perp\operatorname{Im}p$ ; ou $\|p(x)\|\leq\|x\|$ ; ou $p$ symétrique (matrice symétrique en base orthonormée).</td></tr>
+<tr><td>Base orthogonale de $F$ connue</td><td>$p_F(x) = \sum\frac{\langle e_i, x\rangle}{\|e_i\|^2}e_i$.</td></tr>
+<tr><td>Calculer moins</td><td>$p_F + p_{F^\perp} = \operatorname{id}$ : projeter sur le plus petit des deux. Symétrie : $s_F = 2p_F - \operatorname{id}$.</td></tr>
+<tr><td>Pas de base orthogonale</td><td>Revenir à la définition : $p(x)\in F$ et $x - p(x)\perp F$ (système).</td></tr>
+</table>
+
+<p class="ml">Exemple 27 : $\langle x, p(x)\rangle\geq0$ caractérise les projecteurs orthogonaux</p>
+<p><b>Étape 1 : Rappel.</b> $p$ projecteur orthogonal $\iff\ker p\perp\operatorname{Im}p$.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> $\langle p(x), x\rangle = \langle p(x), x - p(x)\rangle + \|p(x)\|^2 = 0 + \|p(x)\|^2\geq0$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> $x\in\operatorname{Im}p$, $y\in\ker p$, $\lambda\in\mathbb R$ : $\langle x + \lambda y, p(x + \lambda y)\rangle = \langle x + \lambda y, x\rangle = \|x\|^2 + \lambda\langle x, y\rangle\geq0$ pour tout $\lambda$.</p>
+<p><b>Étape 4 : Conclusion.</b> Une fonction affine de $\lambda$ toujours positive a une pente nulle : $\langle x, y\rangle = 0$, $\cG{p\ \text{est orthogonal}}$.</p>
+
+<p class="ml">Exemple 28 : $p\circ q = q\circ p\iff p\circ q$ projecteur ($p, q$ orthogonaux)</p>
+<p><b>Étape 1 : Rappel.</b> Projecteur orthogonal $\iff$ projecteur qui diminue la norme $\iff$ projecteur symétrique.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> $(p\circ q)^2 = p\circ q\circ p\circ q = p\circ p\circ q\circ q = p\circ q$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> $\|p(q(x))\|\leq\|q(x)\|\leq\|x\|$ : $p\circ q$ est un projecteur orthogonal, donc symétrique : $\langle p\circ q(x), y\rangle = \langle x, p\circ q(y)\rangle$. Or $\langle x, p(q(y))\rangle = \langle q(p(x)), y\rangle$ ($p, q$ symétriques). Donc $\langle(p\circ q - q\circ p)(x), y\rangle = 0$ pour tout $y$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{p\circ q = q\circ p}$ (faux sans « orthogonaux » : $\begin{pmatrix}1&0\\0&0\end{pmatrix}$ et $\begin{pmatrix}0&0\\1&1\end{pmatrix}$).</p>
+
+<p class="ml">Exemple 29 : la matrice remplie de $\frac1n$</p>
+<p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $A$ symétrique en base orthonormée $\Rightarrow$ projection orthogonale.</p>
+<p><b>Étape 2 : $A^2$.</b> $(A^2)_{ij} = \sum_{k=1}^n\frac1n\times\frac1n = n\times\frac1{n^2} = \frac1n$ : $A^2 = A$.</p>
+<p><b>Étape 3 : L'image.</b> Toutes les colonnes valent $\frac1n(1, \dots, 1)$ : $\operatorname{Im}A = \mathbb R(1, \dots, 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la projection orthogonale sur la droite}\ \mathbb R(1, \dots, 1)}$.</p>
+
+<p class="ml">Exemple 30 : une symétrie orthogonale de $\mathbb R^4$</p>
+<p>$P:\ x + y + z + t = 0,\ x + 2y + 3z + 4t = 0$. Matrices de $p_P$ et $s_P$.</p>
+<p><b>Étape 1 : Rappel.</b> Base orthogonale de $P$ (Gram-Schmidt), formule de $p_P$, puis $s_P = 2p_P - I_4$.</p>
+<p><b>Étape 2 : Une base.</b> $z, t$ libres : soustraire les équations donne $y + 2z + 3t = 0$, $y = -2z - 3t$, puis $x = -y - z - t = z + 2t$. $a_1 = (1, -2, 1, 0)$ ($z = 1, t = 0$), $a_2 = (2, -3, 0, 1)$.</p>
+<p><b>Étape 3 : Orthogonaliser.</b> $\langle a_1, a_2\rangle = 2 + 6 + 0 + 0 = 8$, $\|a_1\|^2 = 1 + 4 + 1 = 6$ : $a_2 - \frac86a_1 = \big(\frac23, -\frac13, -\frac43, 1\big)$, qu'on multiplie par $3$ : $e_2 = (2, -1, -4, 3)$, $\|e_2\|^2 = 4 + 1 + 16 + 9 = 30$.</p>
+<p><b>Étape 4 : La formule.</b> $p(u) = \frac{\langle a_1, u\rangle}6a_1 + \frac{\langle e_2, u\rangle}{30}e_2$, soit la matrice $\frac16a_1{}^ta_1 + \frac1{30}e_2{}^te_2$. Coefficient $(1, 1)$ : $\frac16 + \frac4{30} = \frac{5 + 4}{30} = \frac3{10}$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4&3\end{pmatrix},\qquad M(s) = 2M(p) - I_4 = \frac15\begin{pmatrix}-2&-4&-1&2\\-4&2&-2&-1\\-1&-2&2&-4\\2&-1&-4&-2\end{pmatrix}}.$$
+<p>Contrôles : $M(p)$ est symétrique, $\operatorname{tr}M(p) = \frac{3 + 7 + 7 + 3}{10} = 2 = \dim P$.</p>
+
+<p class="ml">Exemple 31 : par la définition, sans base orthogonale</p>
+<p>Projeté orthogonal de $X^2$ sur $\mathbb R_1[X]$ pour $\langle P, Q\rangle = \int_0^1PQ$.</p>
+<p><b>Étape 1 : Rappel.</b> $P = aX + b$ et $X^2 - P\perp1$, $X^2 - P\perp X$.</p>
+<p><b>Étape 2 : Les équations.</b> $\int_0^1(t^2 - at - b)\,dt = \frac13 - \frac a2 - b = 0$ et $\int_0^1t(t^2 - at - b)\,dt = \frac14 - \frac a3 - \frac b2 = 0$.</p>
+<p><b>Étape 3 : On résout.</b> De la 1<sup>re</sup> : $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = \frac13 - \frac12 = -\frac16$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{p(X^2) = X - \frac16}$.</p>
+
+<h2 id="h-sfmin">14. Un problème de minimum</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Reconnaître la quantité comme $\|x - y\|^2$ pour un produit scalaire. <b>2.</b> Le minimum sur $y\in F$ est $d(x, F)^2$, atteint en $p_F(x)$. <b>3.</b> Calculer $p_F(x)$ par les équations d'orthogonalité, puis $d^2 = \langle x, x - p_F(x)\rangle$ (plus court que $\|x - p_F(x)\|^2$).</p>
+
+<p class="ml">Exemple 32 : $\inf_{a,b,c}\int_0^{+\infty}(t^3 - at^2 - bt - c)^2e^{-t}\,dt$</p>
+<p><b>Étape 1 : Rappel.</b> $\langle P, Q\rangle = \int_0^{+\infty}PQe^{-t}$ est un produit scalaire sur $\mathbb R[X]$, et $\int_0^{+\infty}t^ne^{-t}\,dt = n!$.</p>
+<p><b>Étape 2 : La distance.</b> La quantité vaut $\|X^3 - Q\|^2$ avec $Q = aX^2 + bX + c\in F = \mathbb R_2[X]$ : on cherche $d(X^3, F)^2$.</p>
+<p><b>Étape 3 : Le projeté.</b> $\langle X^3 - Q, X^k\rangle = 0$ pour $k = 0, 1, 2$ : $(k + 3)! - a(k + 2)! - b(k + 1)! - ck! = 0$. Soit $6 - 2a - b - c = 0$, $24 - 6a - 2b - c = 0$, $120 - 24a - 6b - 2c = 0$.</p>
+<p><b>Étape 4 : On résout.</b> Différence des deux premières : $18 - 4a - b = 0$. Troisième $- 2\times$ deuxième : $72 - 12a - 2b = 0$, soit $36 - 6a - b = 0$. Différence : $18 - 2a = 0$, $a = 9$, puis $b = 18 - 36 = -18$, $c = 6 - 18 + 18 = 6$.</p>
+<p><b>Étape 5 : Conclusion.</b> $d^2 = \langle X^3, X^3 - Q\rangle = 6! - 9\times5! + 18\times4! - 6\times3! = 720 - 1080 + 432 - 36$, donc $\cG{\inf = 36}$, atteint pour $(a, b, c) = (9, -18, 6)$.</p>
+
+<h2 id="h-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« Montrer que c'est un produit scalaire »</b><span>Symétrie, linéarité à gauche, positivité, définie (le point clé).</span></div>
 <div><b>« Montrer une inégalité » avec des sommes ou des intégrales de produits</b><span>Cauchy-Schwarz, en choisissant les deux vecteurs.</span></div>
