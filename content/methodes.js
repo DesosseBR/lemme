@@ -212,16 +212,16 @@ $$\textbf{Cramer}\ (n = p,\ A\ \text{inversible}):\ \text{une seule solution}.\q
 <p class="ml">Exemple : un système de Cramer</p>
 $$\left\{\begin{aligned}x + y + z &= 6\\x - y + 2z &= 5\\2x + y - z &= 1\end{aligned}\right.$$
 <p><b>Étape 1 : Rappel.</b> Pivot de Gauss, puis remontée.</p>
-<p><b>Étape 2 : On élimine $x$</b> avec $L_2\leftarrow L_2 - L_1$ et $L_3\leftarrow L_3 - 2L_1$ :</p>
+<p><b>Étape 2 : On élimine $x$.</b> $L_2\leftarrow L_2 - L_1$ : $(1 - 1)x + (-1 - 1)y + (2 - 1)z = 5 - 6$. $L_3\leftarrow L_3 - 2L_1$ : $(2 - 2)x + (1 - 2)y + (-1 - 2)z = 1 - 12$. On obtient :</p>
 $$\left\{\begin{aligned}x + y + z &= 6\\-2y + z &= -1\\-y - 3z &= -11\end{aligned}\right.$$
-<p><b>Étape 3 : On élimine $y$</b> avec $L_3\leftarrow2L_3 - L_2$ : $-6z - z = -22 + 1$, soit $-7z = -21$.</p>
-<p><b>Étape 4 : On remonte.</b> $z = 3$ ; puis $-2y + 3 = -1$, $y = 2$ ; puis $x = 6 - 2 - 3 = 1$.</p>
+<p><b>Étape 3 : On élimine $y$</b> avec $L_3\leftarrow2L_3 - L_2$ : à gauche $2(-y - 3z) - (-2y + z) = -2y - 6z + 2y - z = -7z$ ; à droite $2\times(-11) - (-1) = -22 + 1 = -21$. Donc $-7z = -21$.</p>
+<p><b>Étape 4 : On remonte.</b> $z = \frac{-21}{-7} = 3$. Puis $L_2$ : $-2y + 3 = -1\iff-2y = -4\iff y = 2$. Puis $L_1$ : $x = 6 - y - z = 6 - 2 - 3 = 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{(1, 2, 3)\}}$. Contrôle dans $L_2$ : $1 - 2 + 6 = 5$.</p>
 
 <p class="ml">Exemple : un système homogène</p>
 $$\left\{\begin{aligned}x + 2y - z &= 0\\2x + 4y + z &= 0\end{aligned}\right.$$
 <p><b>Étape 1 : Rappel.</b> $\mathcal S_H$ est un sev de dimension $p - \operatorname{rg}A$.</p>
-<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $3z = 0$, donc $z = 0$.</p>
+<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2)x + (4 - 4)y + (1 + 2)z = 0$, soit $3z = 0$, donc $z = 0$.</p>
 <p><b>Étape 3 : Le paramètre.</b> $L_1$ : $x = -2y$, avec $y$ libre.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_H = \operatorname{Vect}\big((-2, 1, 0)\big)}$ : une droite, $3 - 2 = 1$.</p>
 
@@ -234,8 +234,8 @@ $$\left\{\begin{aligned}x + y &= 1\\2x + 2y &= 3\end{aligned}\right.$$
 <p class="ml">Exemple : un système à paramètre</p>
 $$\left\{\begin{aligned}x + y + mz &= 1\\x + my + z &= 1\\mx + y + z &= 1\end{aligned}\right.\qquad m\in\mathbb R.$$
 <p><b>Étape 1 : Rappel.</b> Avec un paramètre, on cherche les valeurs qui rendent le pivot nul, et on les traite à part.</p>
-<p><b>Étape 2 : On additionne les trois lignes.</b> $(m + 2)(x + y + z) = 3$.</p>
-<p><b>Étape 3 : On soustrait deux lignes.</b> $L_1 - L_2$ : $(1 - m)(y - z) = 0$ et $L_2 - L_3$ : $(1 - m)(x - y) = 0$.</p>
+<p><b>Étape 2 : On additionne les trois lignes.</b> Chaque inconnue apparaît avec les coefficients $1$, $1$ et $m$ : $(m + 2)x + (m + 2)y + (m + 2)z = 3$, soit $(m + 2)(x + y + z) = 3$.</p>
+<p><b>Étape 3 : On soustrait deux lignes.</b> $L_1 - L_2$ : $(1 - m)y + (m - 1)z = 0$, soit $(1 - m)(y - z) = 0$. $L_2 - L_3$ : $(1 - m)x + (m - 1)y = 0$, soit $(1 - m)(x - y) = 0$.</p>
 <p><b>Étape 4 : Cas $m\neq1$, $m\neq-2$.</b> $x = y = z$ et $3(m + 2)x = 3$ : une seule solution $x = y = z = \frac1{m + 2}$.</p>
 <p><b>Étape 5 : Cas $m = 1$.</b> Les trois lignes sont $x + y + z = 1$ : un plan de solutions. <b>Cas $m = -2$</b> : la somme donne $0 = 3$, aucune solution.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{m\notin\{1, -2\}:\ \big(\tfrac1{m + 2}, \tfrac1{m + 2}, \tfrac1{m + 2}\big);\ m = 1:\ \text{un plan};\ m = -2:\ \varnothing}$.</p>
@@ -3525,7 +3525,7 @@ $$\textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:
 <p>Équivalent de $F(x) = \displaystyle\int_1^x\frac{dt}{\sqrt t + 1}$ quand $x\to+\infty$.</p>
 <p><b>Étape 1 : Rappel.</b> $f\sim g\geq0$ et $\int g$ diverge $\Rightarrow\int_a^xf\sim\int_a^xg$.</p>
 <p><b>Étape 2 : L'équivalent.</b> $\sqrt t + 1\sim\sqrt t$, donc $\frac1{\sqrt t + 1}\sim\cO{\frac1{\sqrt t}}\geq0$.</p>
-<p><b>Étape 3 : La référence diverge.</b> $\int_1^x\frac{dt}{\sqrt t} = 2\sqrt x - 2\to+\infty$ ($\cV\alpha = \frac12\leq1$).</p>
+<p><b>Étape 3 : La référence diverge.</b> Une primitive de $t^{-1/2}$ est $\frac{t^{1/2}}{1/2} = 2\sqrt t$, donc $\int_1^x\frac{dt}{\sqrt t} = \big[2\sqrt t\big]_1^x = 2\sqrt x - 2\to+\infty$ ($\cV\alpha = \frac12\leq1$).</p>
 <p><b>Étape 4 : Conclusion.</b> $F(x)\sim2\sqrt x - 2\sim\cG{2\sqrt x}$.</p>
 
 <p class="ml">Exemple 17 : un équivalent de reste</p>
@@ -5555,7 +5555,7 @@ $$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv 
 <p class="ml">Exemple 14 : une divisibilité pour tout $n$</p>
 <p>Montrer que $7\mid3^{2n+1} + 2^{n+2}$ pour tout $n\in\mathbb N$.</p>
 <p><b>Étape 1 : Rappel.</b> Les congruences passent aux produits et aux puissances.</p>
-<p><b>Étape 2 : On réduit $9$.</b> $3^{2n+1} = 3\times9^n$ et $9\equiv2\ [7]$, donc $3^{2n+1}\equiv3\times2^n\ [7]$.</p>
+<p><b>Étape 2 : On réduit $9$.</b> $3^{2n+1} = 3^{2n}\times3 = (3^2)^n\times3 = 3\times9^n$. Et $9 = 7 + 2\equiv2\ [7]$, donc $9^n\equiv2^n$ et $3^{2n+1}\equiv3\times2^n\ [7]$.</p>
 <p><b>Étape 3 : L'autre terme.</b> $2^{n+2} = 4\times2^n$.</p>
 <p><b>Étape 4 : On additionne.</b> $3^{2n+1} + 2^{n+2}\equiv3\times2^n + 4\times2^n = 7\times2^n\equiv0\ [7]$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{7\mid3^{2n+1} + 2^{n+2}}$.</p>
@@ -5587,7 +5587,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p class="ml">Exemple 17 : $2^{100}$ modulo $13$</p>
 <p><b>Étape 1 : Rappel.</b> $13$ est premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$.</p>
 <p><b>Étape 2 : On divise l'exposant.</b> $100 = 8\times12 + 4$.</p>
-<p><b>Étape 3 : On réduit.</b> $2^{100} = (2^{12})^8\times2^4\equiv16\equiv3\ [13]$.</p>
+<p><b>Étape 3 : On réduit.</b> $2^{100} = 2^{96}\times2^4 = (2^{12})^8\times2^4\equiv1^8\times16\ [13]$, et $16 = 13 + 3\equiv3\ [13]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{2^{100}\equiv3\ [13]}$.</p>
 
 <p class="ml">Exemple 18 : $42$ divise $n^7 - n$</p>
@@ -5852,7 +5852,7 @@ $$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatornam
 
 <p class="ml">Exemple 11 : résoudre $\operatorname{ch}x = 2$</p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = \frac{e^x + e^{-x}}2$. On pose $X = e^x > 0$.</p>
-<p><b>Étape 2 : En $X$.</b> $\frac{X + \frac1X}2 = 2\iff X^2 - 4X + 1 = 0$ (on multiplie par $2X > 0$).</p>
+<p><b>Étape 2 : En $X$.</b> $e^{-x} = \frac1X$, donc $\frac{X + \frac1X}2 = 2\iff X + \frac1X = 4\iff X^2 + 1 = 4X$ (on multiplie par $X > 0$) $\iff X^2 - 4X + 1 = 0$.</p>
 <p><b>Étape 3 : Les racines.</b> $\Delta = 16 - 4 = 12$, $X = \frac{4\pm2\sqrt3}2 = 2\pm\sqrt3$. Les deux sont $> 0$.</p>
 <p><b>Étape 4 : On revient à $x$.</b> $x = \ln(2 + \sqrt3)$ ou $x = \ln(2 - \sqrt3) = \ln\frac1{2 + \sqrt3} = -\ln(2 + \sqrt3)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{\pm\ln(2 + \sqrt3)\}}$ (symétrique : $\operatorname{ch}$ est paire).</p>
@@ -5993,7 +5993,7 @@ $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} 
 <p><b>Étape 1 : Rappel.</b> Les quatre points ; pour la positivité, on met $\varphi(x, x)$ sous <b>forme canonique</b>.</p>
 <p><b>Étape 2 : Symétrie et bilinéarité.</b> Échanger $x$ et $y$ donne la même expression ; chaque terme est linéaire en $x$.</p>
 <p><b>Étape 3 : La forme canonique.</b></p>
-$$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = (x_1 + x_2)^2 + x_2^2\geq0.$$
+$$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = \underbrace{x_1^2 + 2x_1x_2 + x_2^2}_{(x_1 + x_2)^2} + x_2^2 = (x_1 + x_2)^2 + x_2^2\geq0.$$
 <p><b>Étape 4 : Définie.</b> $\varphi(x, x) = 0\Rightarrow x_1 + x_2 = 0$ et $x_2 = 0$, donc $x = 0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{est un produit scalaire}}$. (Avec $x_2y_2$ au lieu de $2x_2y_2$, on aurait $(x_1 + x_2)^2$, nulle pour $x = (1, -1)$ : pas défini.)</p>
 
@@ -6218,7 +6218,7 @@ $$R_\theta R_\varphi = R_{\theta + \varphi}:\ SO(2)\ \text{est commutatif.}\qqua
 <p><b>Étape 1 : Rappel.</b> Dans $O(2)$ : $\det = 1$ rotation, $\det = -1$ réflexion.</p>
 <p><b>Étape 2 : Orthogonales.</b> Colonnes de norme $\frac{9 + 16}{25} = 1$, orthogonales ($-12 + 12 = 0$ et $12 - 12 = 0$).</p>
 <p><b>Étape 3 : $A$.</b> $\det A = \frac{9 + 16}{25} = 1$ : rotation d'angle $\cO\theta$ avec $\cos\theta = \frac35$, $\sin\theta = \frac45$, soit $\theta = \arctan\frac43$.</p>
-<p><b>Étape 4 : $B$.</b> $\det B = \frac{-9 - 16}{25} = -1$ : réflexion. Son axe est $\ker(B - I)$ : $-\frac25x + \frac45y = 0$, soit $x = 2y$, l'axe $\cR{\operatorname{Vect}(2, 1)}$.</p>
+<p><b>Étape 4 : $B$.</b> $\det B = \frac{3\times(-3) - 4\times4}{25} = \frac{-9 - 16}{25} = -1$ : réflexion. Son axe est $\ker(B - I)$, avec $B - I = \frac15\begin{pmatrix}3 - 5&4\\4&-3 - 5\end{pmatrix} = \frac15\begin{pmatrix}-2&4\\4&-8\end{pmatrix}$. La 1<sup>re</sup> ligne donne $-2x + 4y = 0$, soit $x = 2y$ (la 2<sup>e</sup> est $-2$ fois la 1<sup>re</sup>) : l'axe est $\cR{\operatorname{Vect}(2, 1)}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{A\ \text{rotation d'angle}\ \arctan\frac43,\ B\ \text{réflexion d'axe}\ \operatorname{Vect}(2, 1)}$.</p>
 
 <h2 id="e-o3">7. L'espace : les rotations de $SO(3)$</h2>
@@ -6417,7 +6417,7 @@ $$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{
 <p>Sur $\mathcal C([0, 1])$, comparer $\|f\|_1$ et $\|f\|_\infty$.</p>
 <p><b>Étape 1 : Rappel.</b> Non équivalentes si le quotient n'est pas borné le long d'une suite.</p>
 <p><b>Étape 2 : Un sens.</b> $|f(t)|\leq\|f\|_\infty$, on intègre sur $[0, 1]$ : $\|f\|_1\leq\|f\|_\infty$.</p>
-<p><b>Étape 3 : La suite.</b> $f_n(t) = t^n$ : $\|f_n\|_\infty = 1$ et $\|f_n\|_1 = \frac1{n + 1}$.</p>
+<p><b>Étape 3 : La suite.</b> $f_n(t) = t^n$ sur $[0, 1]$ : son max est atteint en $t = 1$, donc $\|f_n\|_\infty = 1^n = 1$. Et $\|f_n\|_1 = \int_0^1t^n\,dt = \Big[\frac{t^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}$.</p>
 <p><b>Étape 4 : Le quotient.</b> $\frac{\|f_n\|_\infty}{\|f_n\|_1} = n + 1\to+\infty$ : aucun $\cO\beta$ ne vérifie $\|f\|_\infty\leq\cO\beta\|f\|_1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\|\cdot\|_1\ \text{et}\ \|\cdot\|_\infty\ \text{ne sont pas équivalentes}}$, et $f_n\to0$ pour $\|\cdot\|_1$ mais pas pour $\|\cdot\|_\infty$.</p>
 
@@ -6458,7 +6458,9 @@ $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text
 <p>$F = \{f\in\mathcal C([0, 1]),\ f(0) = 0\}$.</p>
 <p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle des fermés. En dimension infinie, le résultat dépend de la norme.</p>
 <p><b>Étape 2 : Pour $\|\cdot\|_\infty$.</b> Si $f_n\in F$ et $\|f_n - f\|_\infty\to0$, alors $|f(0)| = |f(0) - f_n(0)|\leq\|f - f_n\|_\infty\to0$, donc $f(0) = 0$ : $F$ est fermé.</p>
-<p><b>Étape 3 : Pour $\|\cdot\|_1$.</b> $f_n(t) = \min(nt, 1)$ est dans $F$, et $\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \frac1{2n}\to0$. La limite $1\notin F$.</p>
+<p><b>Étape 3 : Pour $\|\cdot\|_1$.</b> $f_n(t) = \min(nt, 1)$ vaut $nt$ sur $[0, \frac1n]$ et $1$ ensuite : $f_n(0) = 0$, donc $f_n\in F$. L'écart avec la fonction $1$ n'est non nul que sur $[0, \frac1n]$ :</p>
+$$\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \Big[t - \frac{nt^2}2\Big]_0^{1/n} = \frac1n - \frac n2\cdot\frac1{n^2} = \frac1n - \frac1{2n} = \frac1{2n}\to0.$$
+<p>La limite $1$ vaut $1$ en $0$ : $1\notin F$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{fermé pour}\ \|\cdot\|_\infty,\ \text{pas fermé pour}\ \|\cdot\|_1}$ (il y est même dense).</p>
 
 <h2 id="t-adh">6. Intérieur, adhérence, frontière, densité</h2>
@@ -6769,7 +6771,7 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 
 <p class="ml">Exemple 13 : $f(x, y) = x^3 + y^3 - 3xy$</p>
 <p><b>Étape 1 : Rappel.</b> Points critiques par $\nabla f = 0$, puis $rt - s^2$ en chacun.</p>
-<p><b>Étape 2 : Les points critiques.</b> $\partial_xf = 3x^2 - 3y = 0$ et $\partial_yf = 3y^2 - 3x = 0$, donc $y = x^2$ et $x^4 = x$ : $x = 0$ ou $x = 1$. Points $\cR{(0, 0)}$ et $\cR{(1, 1)}$.</p>
+<p><b>Étape 2 : Les points critiques.</b> $\partial_xf = 3x^2 - 3y = 0$ donne $y = x^2$. On remplace dans $\partial_yf = 3y^2 - 3x = 0$ : $3x^4 - 3x = 0$, soit $3x(x^3 - 1) = 0$, donc $x = 0$ ou $x^3 = 1$, c'est-à-dire $x = 1$. Puis $y = x^2$ : points $\cR{(0, 0)}$ et $\cR{(1, 1)}$.</p>
 <p><b>Étape 3 : Les dérivées secondes.</b> $r = 6x$, $s = -3$, $t = 6y$.</p>
 <p><b>Étape 4 : En $(0, 0)$.</b> $rt - s^2 = 0 - 9 \lt 0$ : point col.</p>
 <p><b>Étape 5 : En $(1, 1)$.</b> $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : minimum local, $f(1, 1) = -1$.</p>
@@ -6932,9 +6934,10 @@ $$e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1},\qquad e^{\operatorname{di
 <p class="ml">Exemple 1 : une matrice nilpotente</p>
 <p>$N = \begin{pmatrix}0&1&2\\0&0&3\\0&0&0\end{pmatrix}$. Calculer $e^N$.</p>
 <p><b>Étape 1 : Rappel.</b> $e^N = \sum\frac{N^k}{k!}$, et la somme s'arrête si $N^p = 0$.</p>
-<p><b>Étape 2 : Les puissances.</b> $N^2 = \begin{pmatrix}0&0&3\\0&0&0\\0&0&0\end{pmatrix}$ et $N^3 = 0$.</p>
+<p><b>Étape 2 : Les puissances.</b> Le seul coefficient non nul de $N^2$ est en position $(1, 3)$ : ligne $1$ de $N$ fois colonne $3$ de $N$, $0\times2 + 1\times3 + 2\times0 = 3$. Donc $N^2 = \begin{pmatrix}0&0&3\\0&0&0\\0&0&0\end{pmatrix}$, puis $N^3 = N^2N = 0$ (la ligne $1$ de $N^2$ fois une colonne de $N$ : $3\times0 = 0$).</p>
 <p><b>Étape 3 : La somme finie.</b> $e^N = I + N + \frac12N^2$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{e^N = \begin{pmatrix}1&1&\frac72\\0&1&3\\0&0&1\end{pmatrix}}$.</p>
+<p><b>Étape 4 : On additionne case par case.</b> Case $(1, 3)$ : $0 + 2 + \frac12\times3 = \frac72$. Les autres cases viennent de $I + N$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{e^N = \begin{pmatrix}1&1&\frac72\\0&1&3\\0&0&1\end{pmatrix}}$.</p>
 
 <p class="ml">Exemple 2 : une matrice diagonalisable</p>
 <p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
@@ -7005,7 +7008,7 @@ $$\text{Sommable}\iff\sum_p\Big(\sum_q|a_{p,q}|\Big) \lt +\infty.\qquad\text{Pro
 <p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes.</p>
 <p><b>Étape 2 : On écrit la double somme.</b> $\zeta(n) - 1 = \sum_{k\geq2}\frac1{k^n}$, donc la somme cherchée est $\sum_{n\geq2}\sum_{k\geq2}\frac1{k^n}$, termes positifs.</p>
 <p><b>Étape 3 : On intervertit.</b> Pour $k\geq2$ fixé, géométrique de raison $\frac1k$ :</p>
-$$\sum_{n\geq2}\frac1{k^n} = \frac{1/k^2}{1 - 1/k} = \frac1{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
+$$\sum_{n\geq2}\Big(\frac1k\Big)^n = \frac{\text{premier terme}}{1 - \text{raison}} = \frac{1/k^2}{1 - 1/k} = \frac1{k^2}\times\frac k{k - 1} = \frac1{k(k - 1)} = \frac{k - (k - 1)}{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
 <p><b>Étape 4 : On télescope.</b> $\sum_{k\geq2}\big(\frac1{k - 1} - \frac1k\big) = 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq2}(\zeta(n) - 1) = 1}$.</p>
 
@@ -7181,9 +7184,9 @@ $$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'
 <p>$\gamma(t) = (t^2 - 1,\ t^3 - 3t)$.</p>
 <p><b>Étape 1 : Rappel.</b> Horizontale si $y' = 0\neq x'$, verticale si $x' = 0\neq y'$.</p>
 <p><b>Étape 2 : Les dérivées.</b> $x'(t) = 2t$, $y'(t) = 3t^2 - 3 = 3(t - 1)(t + 1)$. Elles ne s'annulent jamais ensemble : tous les points sont réguliers.</p>
-<p><b>Étape 3 : Horizontales.</b> $t = \pm1$ : points $\gamma(1) = (0, -2)$ et $\gamma(-1) = (0, 2)$.</p>
-<p><b>Étape 4 : Verticale.</b> $t = 0$ : point $(-1, 0)$.</p>
-<p><b>Étape 5 : Point double.</b> $x(t) = x(s)$ avec $s\neq t$ donne $s = -t$ ; puis $y(t) = y(-t)\iff t^3 - 3t = 0\iff t = \pm\sqrt3$. Point $\gamma(\pm\sqrt3) = (2, 0)$.</p>
+<p><b>Étape 3 : Horizontales.</b> $y' = 0$ pour $t = \pm1$, et alors $x' = \pm2\neq0$. $\gamma(1) = (1 - 1,\ 1 - 3) = (0, -2)$ et $\gamma(-1) = (1 - 1,\ -1 + 3) = (0, 2)$.</p>
+<p><b>Étape 4 : Verticale.</b> $x' = 0$ pour $t = 0$, et $y'(0) = -3\neq0$ : point $\gamma(0) = (0 - 1,\ 0) = (-1, 0)$.</p>
+<p><b>Étape 5 : Point double.</b> $x(t) = x(s)\iff t^2 = s^2$, donc $s = -t$ (car $s\neq t$). Puis $y(t) = y(-t)\iff t^3 - 3t = -t^3 + 3t\iff2t^3 - 6t = 0\iff2t(t^2 - 3) = 0$ ; $t = 0$ donnerait $s = t$, donc $t = \pm\sqrt3$. Point $\gamma(\sqrt3) = (3 - 1,\ 3\sqrt3 - 3\sqrt3) = (2, 0)$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\text{horizontales en}\ (0, \pm2),\ \text{verticale en}\ (-1, 0),\ \text{point double}\ (2, 0)}$.</p>
 
 <h2 id="v-sing">8. Points singuliers <span class="hp">hors programme</span></h2>
@@ -7431,8 +7434,8 @@ $$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 
 <p class="ml">Exemple 14 : combien de lancers ?</p>
 <p>On lance $n$ fois une pièce équilibrée, $F = \frac{S_n}n$ la fréquence de pile. Trouver $n$ pour que $P\big(|F - \frac12|\geq0{,}05\big)\leq0{,}05$.</p>
 <p><b>Étape 1 : Rappel.</b> $P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}$.</p>
-<p><b>Étape 2 : Espérance et variance.</b> $S_n\sim\mathcal B\big(n, \frac12\big)$ : $E(F) = \frac12$, $V(F) = \frac1{n^2}\cdot\frac n4 = \frac1{4n}$.</p>
-<p><b>Étape 3 : On applique</b> avec $\varepsilon = 0{,}05$ : $P\leq\frac{1/(4n)}{0{,}0025} = \frac{100}n$.</p>
+<p><b>Étape 2 : Espérance et variance.</b> $S_n\sim\mathcal B\big(n, \frac12\big)$ : $E(S_n) = \frac n2$, $V(S_n) = n\cdot\frac12\cdot\frac12 = \frac n4$. Donc $E(F) = \frac1nE(S_n) = \frac12$ et $V(F) = \frac1{n^2}V(S_n) = \frac1{n^2}\cdot\frac n4 = \frac1{4n}$.</p>
+<p><b>Étape 3 : On applique</b> avec $\varepsilon = 0{,}05$, $\varepsilon^2 = 0{,}0025$ : $P\leq\frac{1/(4n)}{0{,}0025} = \frac1{4n\times0{,}0025} = \frac1{0{,}01\,n} = \frac{100}n$.</p>
 <p><b>Étape 4 : On résout</b> $\frac{100}n\leq0{,}05\iff n\geq2000$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{n = 2000\ \text{lancers suffisent}}$ (la majoration est grossière, mais sûre).</p>
 
@@ -7481,7 +7484,8 @@ $$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 
 <p>On tire sans remise deux boules parmi trois numérotées $1, 2, 3$ ; $X$ = 1<sup>er</sup> numéro, $Y$ = 2<sup>e</sup>. Calculer $\operatorname{Cov}(X, Y)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y)$.</p>
 <p><b>Étape 2 : La loi conjointe.</b> Les $6$ couples $(i, j)$, $i\neq j$, sont équiprobables : $P(X = i, Y = j) = \frac16$. Les marginales sont uniformes sur $\{1, 2, 3\}$ : $E(X) = E(Y) = 2$.</p>
-<p><b>Étape 3 : $E(XY)$.</b> $\frac16\sum_{i\neq j}ij = \frac16\Big(\big(\sum i\big)^2 - \sum i^2\Big) = \frac16(36 - 14) = \frac{11}3$.</p>
+<p><b>Étape 3 : $E(XY)$.</b> $\big(\sum i\big)^2 = \sum_{i,j}ij$ contient aussi les termes $i = j$, qu'on retire : $\sum_{i\neq j}ij = \big(\sum i\big)^2 - \sum i^2$. Ici $\sum i = 1 + 2 + 3 = 6$, $\sum i^2 = 1 + 4 + 9 = 14$ :</p>
+$$E(XY) = \frac16\sum_{i\neq j}ij = \frac16(36 - 14) = \frac{22}6 = \frac{11}3.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Cov}(X, Y) = \frac{11}3 - 4 = -\frac13}$ : non nulle, donc $X$ et $Y$ ne sont pas indépendantes (logique : sans remise).</p>
 
 <p class="ml">Exercice 3 : tirages sans remise, l'espérance</p>
@@ -7537,9 +7541,11 @@ $$\text{Le neutre est unique}.\quad\text{L'inverse est unique (loi associative)}
 <p>Sur $\mathbb R$ : $x*y = x + y - xy$.</p>
 <p><b>Étape 1 : Rappel.</b> On vérifie associativité, commutativité, neutre, inversibles.</p>
 <p><b>Étape 2 : L'astuce.</b> $1 - x*y = 1 - x - y + xy = (1 - x)(1 - y)$.</p>
-<p><b>Étape 3 : Associativité, commutativité.</b> $1 - (x*y)*z = (1 - x)(1 - y)(1 - z)$, expression symétrique : la loi est associative et commutative.</p>
+<p><b>Étape 3 : Associativité, commutativité.</b> On applique l'astuce deux fois : $1 - (x*y)*z = (1 - x*y)(1 - z) = (1 - x)(1 - y)(1 - z)$. De même $1 - x*(y*z) = (1 - x)(1 - y*z) = (1 - x)(1 - y)(1 - z)$. Les deux sont égaux, donc $(x*y)*z = x*(y*z)$. Et $(1 - x)(1 - y) = (1 - y)(1 - x)$ donne $x*y = y*x$.</p>
 <p><b>Étape 4 : Neutre.</b> $x*0 = x + 0 - 0 = x$ : $\cO{e = 0}$.</p>
-<p><b>Étape 5 : Inversibles.</b> $x*y = 0\iff(1 - x)(1 - y) = 1\iff y = 1 - \frac1{1 - x} = \frac x{x - 1}$, possible si et seulement si $x\neq1$.</p>
+<p><b>Étape 5 : Inversibles.</b> On cherche $y$ avec $x*y = 0$, c'est-à-dire $1 - x*y = 1$ :</p>
+$$(1 - x)(1 - y) = 1\iff1 - y = \frac1{1 - x}\ (x\neq1)\iff y = 1 - \frac1{1 - x} = \frac{(1 - x) - 1}{1 - x} = \frac{-x}{1 - x} = \frac x{x - 1}.$$
+<p>Si $x = 1$, l'équation devient $0 = 1$ : pas d'inverse.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{*\ \text{associative, commutative, neutre}\ 0,\ x\ \text{inversible}\iff x\neq1,\ x' = \frac x{x - 1}}$.</p>
 
 <h2 id="g-grp">3. Groupes</h2>
@@ -7624,7 +7630,7 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p><b>Étape 1 : Rappel.</b> Contient $1$, stable par différence et par produit.</p>
 <p><b>Étape 2 : $1$.</b> $1 = 1 + 0\sqrt2$.</p>
 <p><b>Étape 3 : Différence.</b> $(a + b\sqrt2) - (c + d\sqrt2) = (a - c) + (b - d)\sqrt2$.</p>
-<p><b>Étape 4 : Produit.</b> $(a + b\sqrt2)(c + d\sqrt2) = (ac + 2bd) + (ad + bc)\sqrt2$, coefficients entiers.</p>
+<p><b>Étape 4 : Produit.</b> On développe : $(a + b\sqrt2)(c + d\sqrt2) = ac + ad\sqrt2 + bc\sqrt2 + bd\underbrace{\sqrt2\sqrt2}_{2} = (ac + 2bd) + (ad + bc)\sqrt2$, coefficients entiers.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Z[\sqrt2]\ \text{est un sous-anneau de}\ \mathbb R}$ (donc intègre).</p>
 
 <p class="ml">Exemple 11 : les inversibles de $\mathbb Z[i]$</p>
@@ -7641,7 +7647,8 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p><b>Étape 1 : Rappel.</b> Sous-anneau de $\mathbb R$ (comme l'exemple 10), puis inverses.</p>
 <p><b>Étape 2 : La quantité conjuguée.</b> $(a + b\sqrt2)(a - b\sqrt2) = a^2 - 2b^2$.</p>
 <p><b>Étape 3 : Elle n'est pas nulle.</b> Si $a^2 = 2b^2$ avec $(a, b)\neq(0, 0)$, alors $b\neq0$ et $\sqrt2 = \big|\frac ab\big|\in\mathbb Q$ : absurde.</p>
-<p><b>Étape 4 : L'inverse.</b> $\frac1{a + b\sqrt2} = \frac a{a^2 - 2b^2} - \frac b{a^2 - 2b^2}\sqrt2\in\mathbb Q(\sqrt2)$.</p>
+<p><b>Étape 4 : L'inverse.</b> On multiplie en haut et en bas par $a - b\sqrt2$ :</p>
+$$\frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{(a + b\sqrt2)(a - b\sqrt2)} = \frac{a - b\sqrt2}{a^2 - 2b^2} = \underbrace{\frac a{a^2 - 2b^2}}_{\in\mathbb Q} + \underbrace{\frac{-b}{a^2 - 2b^2}}_{\in\mathbb Q}\sqrt2\in\mathbb Q(\sqrt2).$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Q(\sqrt2)\ \text{est un corps}}$ (sous-corps de $\mathbb R$).</p>
 
 <p class="ml">Bonus : $\mathbb Z/n\mathbb Z$ et l'ordre d'un élément <span class="hp">programme de Spé</span></p>
@@ -7998,7 +8005,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p><b>Étape 1 : Rappel.</b> On résout $\lambda_1u_1 + \lambda_2u_2 + \lambda_3u_3 = 0$.</p>
 <p><b>Étape 2 : Le système.</b></p>
 $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\\lambda_2 + \lambda_3 &= 0\end{aligned}\right.$$
-<p><b>Étape 3 : On résout.</b> En additionnant : $2(\lambda_1 + \lambda_2 + \lambda_3) = 0$. Avec la 1<sup>re</sup> équation, $\lambda_3 = 0$, puis $\lambda_1 = \lambda_2 = 0$.</p>
+<p><b>Étape 3 : On résout.</b> On additionne les trois lignes : $2\lambda_1 + 2\lambda_2 + 2\lambda_3 = 0$, donc $\lambda_1 + \lambda_2 + \lambda_3 = 0$. On retire la 1<sup>re</sup> équation ($\lambda_1 + \lambda_2 = 0$) : $\lambda_3 = 0$. La 2<sup>e</sup> donne $\lambda_1 = -\lambda_3 = 0$, la 3<sup>e</sup> donne $\lambda_2 = -\lambda_3 = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(u_1, u_2, u_3)\ \text{est libre}}$.</p>
 
 <p class="ml">Exemple 5 : des fonctions</p>
@@ -8046,7 +8053,8 @@ $$\textbf{Base incomplète}:\ \text{toute famille libre se complète en une base
 <p><b>Étape 1 : Rappel.</b> Degrés échelonnés $\Rightarrow$ libre ; $3$ vecteurs libres en dimension $3$ $\Rightarrow$ base.</p>
 <p><b>Étape 2 : Base.</b> Degrés $0, 1, 2$ : libre (exemple 6). $\dim\mathbb R_2[X] = 3$ : c'est une base.</p>
 <p><b>Étape 3 : Les coordonnées.</b> On écrit $X = (X - 1) + 1$ et on développe :</p>
-$$X^2 = \big((X - 1) + 1\big)^2 = (X - 1)^2 + 2(X - 1) + 1.$$
+$$X^2 = \big(\underbrace{(X - 1)}_{a} + \underbrace{1}_{b}\big)^2 = a^2 + 2ab + b^2 = (X - 1)^2 + 2(X - 1) + 1.$$
+<p>Contrôle : $(X - 1)^2 + 2(X - 1) + 1 = X^2 - 2X + 1 + 2X - 2 + 1 = X^2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{X^2\ \text{a pour coordonnées}\ (1, 2, 1)\ \text{dans}\ \mathcal B}$ (c'est la formule de Taylor en $1$).</p>
 
 <h2 id="k-dimf">7. Sous-espaces en dimension finie</h2>
@@ -8063,7 +8071,7 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <p class="ml">Exemple 11 : un rang</p>
 <p>$\operatorname{rg}\big((1, 2, 1), (2, 1, 0), (3, 3, 1)\big)$.</p>
 <p><b>Étape 1 : Rappel.</b> On cherche une relation de dépendance, sinon on pivote.</p>
-<p><b>Étape 2 : Une relation.</b> $(1, 2, 1) + (2, 1, 0) = (3, 3, 1)$ : le 3<sup>e</sup> vecteur est combinaison des deux premiers.</p>
+<p><b>Étape 2 : Une relation.</b> $(1, 2, 1) + (2, 1, 0) = (1 + 2,\ 2 + 1,\ 1 + 0) = (3, 3, 1)$ : le 3<sup>e</sup> vecteur est combinaison des deux premiers.</p>
 <p><b>Étape 3 : Les deux premiers.</b> Ils ne sont pas colinéaires ($\frac21\neq\frac12$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg} = 2}$ : les trois vecteurs engendrent un plan, la famille est liée.</p>
 
@@ -8166,7 +8174,9 @@ $$f\ \text{injective}\iff\ker f = \{0\}.\qquad f\ \text{surjective}\iff\operator
 <p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\ker f$ : résoudre $f(x) = 0$. $\operatorname{Im}f = \operatorname{Vect}(f(e_1), f(e_2), f(e_3))$.</p>
 <p><b>Étape 2 : Le noyau.</b> $x - y = 0$, $y - z = 0$ (la 3<sup>e</sup> en découle) : $x = y = z$, donc $\cR{\ker f = \operatorname{Vect}(1, 1, 1)}$.</p>
-<p><b>Étape 3 : L'image.</b> $f(e_1) = (1, 0, -1)$, $f(e_2) = (-1, 1, 0)$, $f(e_3) = (0, -1, 1) = -f(e_1) - f(e_2)$. Donc $\operatorname{Im}f = \operatorname{Vect}\big((1, 0, -1), (-1, 1, 0)\big)$.</p>
+<p><b>Étape 3 : L'image.</b> On calcule les images de la base canonique :</p>
+$$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 1 - 0,\ 0 - 0) = (-1, 1, 0),\quad f(0, 0, 1) = (0, -1, 1).$$
+<p>Et $f(e_3) = (0, -1, 1) = -(1, 0, -1) - (-1, 1, 0)$ : il est combinaison des deux autres. Donc $\operatorname{Im}f = \operatorname{Vect}\big((1, 0, -1), (-1, 1, 0)\big)$.</p>
 <p><b>Étape 4 : Une équation.</b> Chaque vecteur image a ses coordonnées de somme nulle : $\cO{\operatorname{Im}f}\subset\{a + b + c = 0\}$, et les deux sont des plans.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb R(1, 1, 1),\ \operatorname{Im}f = \{a + b + c = 0\}}$. Contrôle : $1 + 2 = 3$ (théorème du rang, §6).</p>
 
@@ -8204,7 +8214,8 @@ $$s\ \text{symétrie}\iff s\circ s = \operatorname{id}.\ \text{Alors}\ E = \ker(
 <p class="ml">Exemple 7 : reconnaître un projecteur</p>
 <p>$M = \begin{pmatrix}1&1\\0&0\end{pmatrix}$, endomorphisme $p$ de $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> $p^2 = p$ ; puis $\operatorname{Im}p = \ker(p - \operatorname{id})$ et $\ker p$.</p>
-<p><b>Étape 2 : $M^2$.</b> $M^2 = \begin{pmatrix}1&1\\0&0\end{pmatrix} = M$ : c'est un projecteur.</p>
+<p><b>Étape 2 : $M^2$.</b> Ligne par colonne :</p>
+$$M^2 = \begin{pmatrix}1\times1 + 1\times0&1\times1 + 1\times0\\0\times1 + 0\times0&0\times1 + 0\times0\end{pmatrix} = \begin{pmatrix}1&1\\0&0\end{pmatrix} = M:\ \text{c'est un projecteur}.$$
 <p><b>Étape 3 : Image et noyau.</b> $\operatorname{Im}p = \operatorname{Vect}(1, 0)$ (colonnes) ; $\ker p$ : $x + y = 0$, soit $\operatorname{Vect}(1, -1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \mathbb R(1, 0)\ \text{parallèlement à}\ \mathbb R(1, -1)}$ (pas orthogonalement).</p>
 
@@ -8217,7 +8228,7 @@ $$\operatorname{rg}f\leq\min(\dim E, \dim F).\qquad\text{Composer par un isomorp
 <p class="ml">Exemple 8 : bijectivité par le noyau</p>
 <p>$f:\mathbb R_n[X]\to\mathbb R_n[X]$, $P\mapsto P - P'$.</p>
 <p><b>Étape 1 : Rappel.</b> Endomorphisme en dimension finie : injectif $\iff$ bijectif.</p>
-<p><b>Étape 2 : Le noyau.</b> Si $P = P'$ avec $P\neq0$ : $\deg P' \lt \deg P$, contradiction. Donc $\ker f = \{0\}$.</p>
+<p><b>Étape 2 : Le noyau.</b> $f(P) = 0\iff P = P'$. Si $P\neq0$ est de degré $d$, alors $P'$ est de degré $d - 1$ (ou nul si $d = 0$) : $P$ et $P'$ n'ont pas le même degré, ils ne peuvent pas être égaux. Donc $P = 0$ et $\ker f = \{0\}$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{est bijective}}$ : pour tout $Q$, l'équation $P - P' = Q$ a une unique solution polynomiale.</p>
 
 <p class="ml">Exemple 9 : quand $E = \ker f\oplus\operatorname{Im}f$</p>
@@ -8361,7 +8372,7 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p>Pour $x\in[0, \frac\pi2]$.</p>
 <p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ au-dessus de ses cordes.</p>
 <p><b>Étape 2 : Concavité.</b> $\sin'' = -\sin\leq0$ sur $[0, \frac\pi2]$.</p>
-<p><b>Étape 3 : La corde.</b> Elle relie $(0, 0)$ et $\big(\frac\pi2, 1\big)$ : $y = \frac2\pi x$.</p>
+<p><b>Étape 3 : La corde.</b> Elle relie $(0, \sin0) = (0, 0)$ et $\big(\frac\pi2, \sin\frac\pi2\big) = \big(\frac\pi2, 1\big)$ : pente $\frac{1 - 0}{\pi/2 - 0} = \frac2\pi$, donc $y = \frac2\pi x$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\frac2\pi x\leq\sin x\leq x}$ sur $[0, \frac\pi2]$ (la majoration par $x$ : tangente en $0$).</p>
 
 <p class="ml">Exemple 6 : l'inégalité de Young</p>
