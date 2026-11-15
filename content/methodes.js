@@ -6838,5 +6838,615 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 </ul></div></li>
 <li><div class="hr"><em>un plan tangent</em><a class="hl end" href="#c-tang">$\nabla g$ normal</a></div></li>
 </ul></div></div>
+`,
+"Séries et familles sommables": R`
+<nav class="msum"><a href="#f-not">Notations</a><a href="#f-serie">Séries dans un evn</a><a href="#f-exp">Exponentielle de matrice</a><a href="#f-neu">Série géométrique de matrices</a><a href="#f-pos">Familles positives</a><a href="#f-paq">Sommation par paquets</a><a href="#f-som">Familles sommables</a><a href="#f-double">Séries doubles, Fubini</a><a href="#f-cauchy">Produit de Cauchy</a><a href="#f-enonce">L'énoncé</a><a href="#f-erreurs">Erreurs</a><a href="#f-entrainement">S'entraîner</a><a href="#f-exos">Exercices</a><a href="#f-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les termes $\cB{u_n}$, $\cB{a_i}$. <span class="kR">rouge</span> : les paquets $\cR{I_n}$ de la partition. <span class="kO">orange</span> : les majorations et la valeur absolue $\cO{|a_i|}$. <span class="kV">violet</span> : les matrices ($\cV A$, $\cV P$, $\cV D$). <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="f-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Série dans un evn $E$</td><td>$\sum u_n$, $u_n\in E$</td><td>$E$ de dimension finie : on peut raisonner coordonnée par coordonnée.</td></tr>
+<tr><td>Absolument convergente</td><td>$\sum\|u_n\|$ converge</td><td>En dimension finie : ACV $\Rightarrow$ CV.</td></tr>
+<tr><td>Exponentielle</td><td>$\exp(A) = e^A = \sum\frac{A^k}{k!}$</td><td>Converge pour toute $A\in\mathcal M_n(\mathbb K)$.</td></tr>
+<tr><td>Famille positive</td><td>$\sum_{i\in I}a_i\in[0, +\infty]$</td><td>$\sup$ des sommes finies.</td></tr>
+<tr><td>Famille sommable</td><td>$(a_i)_{i\in I}\in\ell^1(I)$</td><td>$\sum_{i\in I}|a_i| \lt +\infty$.</td></tr>
+<tr><td>Produit de Cauchy</td><td>$c_n = \sum_{k=0}^na_kb_{n-k}$</td><td>$\sum c_n = \big(\sum a_n\big)\big(\sum b_n\big)$ si ACV.</td></tr>
+</table>
+
+<h2 id="f-serie">2. Séries dans un espace normé de dimension finie</h2>
+<div class="sbox">$$\sum\cB{u_n}\ \text{converge}\iff\text{chaque série coordonnée converge (dans une base)}.\qquad\sum\|\cB{u_n}\|\ \text{converge}\Rightarrow\sum\cB{u_n}\ \text{converge},\ \Big\|\sum\cB{u_n}\Big\|\leq\sum\|\cB{u_n}\|.$$</div>
+<p>Le terme général d'une série convergente tend vers $0$. Toutes les normes étant équivalentes, l'absolue convergence ne dépend pas de la norme choisie.</p>
+
+<h2 id="f-exp">3. L'exponentielle de matrice</h2>
+<div class="sbox">$$e^{\cV A} = \sum_{k=0}^{+\infty}\frac{\cV A^k}{k!}.\qquad\cV A\cV B = \cV B\cV A\Rightarrow e^{A + B} = e^Ae^B.\qquad e^A\ \text{inversible},\ (e^A)^{-1} = e^{-A}.$$
+$$e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1},\qquad e^{\operatorname{diag}(\lambda_i)} = \operatorname{diag}(e^{\lambda_i}),\qquad\det(e^A) = e^{\operatorname{tr}A}.$$</div>
+<p class="ml">Les méthodes de calcul</p>
+<p><b>1. Nilpotente</b> : la somme est finie. <b>2. Diagonalisable</b> : $A = PDP^{-1}$, donc $e^A = Pe^DP^{-1}$. <b>3. $A = \lambda I + N$</b> avec $N$ nilpotente : $\lambda I$ commute avec $N$, donc $e^A = e^\lambda e^N$. <b>4. Polynôme annulateur</b> ($A^2 = -I$, $A^2 = A$…) : on calcule les puissances et on reconnaît des séries connues.</p>
+<p class="ml piege">Piège</p>
+<p>$e^{A + B} = e^Ae^B$ est <b>faux</b> en général si $AB\neq BA$.</p>
+
+<p class="ml">Exemple 1 : une matrice nilpotente</p>
+<p>$N = \begin{pmatrix}0&1&2\\0&0&3\\0&0&0\end{pmatrix}$. Calculer $e^N$.</p>
+<p><b>Étape 1 : Rappel.</b> $e^N = \sum\frac{N^k}{k!}$, et la somme s'arrête si $N^p = 0$.</p>
+<p><b>Étape 2 : Les puissances.</b> $N^2 = \begin{pmatrix}0&0&3\\0&0&0\\0&0&0\end{pmatrix}$ et $N^3 = 0$.</p>
+<p><b>Étape 3 : La somme finie.</b> $e^N = I + N + \frac12N^2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^N = \begin{pmatrix}1&1&\frac72\\0&1&3\\0&0&1\end{pmatrix}}$.</p>
+
+<p class="ml">Exemple 2 : une matrice diagonalisable</p>
+<p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}\Rightarrow e^A = Pe^DP^{-1}$.</p>
+<p><b>Étape 2 : On diagonalise.</b> Valeurs propres $3$ (vecteur $(1, 1)$) et $1$ (vecteur $(1, -1)$) : $\cV P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV P^{-1} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV D = \operatorname{diag}(3, 1)$.</p>
+<p><b>Étape 3 : On calcule.</b></p>
+$$e^A = \cV P\begin{pmatrix}e^3&0\\0&e\end{pmatrix}\cV P^{-1} = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^A = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}}$. Contrôle : $\det e^A = e^4 = e^{\operatorname{tr}A}$.</p>
+
+<p class="ml">Exemple 3 : $\lambda I + N$</p>
+<p>$A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $AB = BA$, $e^{A + B} = e^Ae^B$.</p>
+<p><b>Étape 2 : On découpe.</b> $A = 2I + N$ avec $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, et $2I$ commute avec $N$.</p>
+<p><b>Étape 3 : On calcule.</b> $e^{2I} = e^2I$ et $e^N = I + N$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^A = e^2\begin{pmatrix}1&1\\0&1\end{pmatrix}}$.</p>
+
+<p class="ml">Exemple 4 : une rotation</p>
+<p>$J = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$. Calculer $e^{\theta J}$.</p>
+<p><b>Étape 1 : Rappel.</b> On utilise un polynôme annulateur pour calculer les puissances, puis on reconnaît $\cos$ et $\sin$.</p>
+<p><b>Étape 2 : Les puissances.</b> $J^2 = -I$, donc $J^{2k} = (-1)^kI$ et $J^{2k+1} = (-1)^kJ$.</p>
+<p><b>Étape 3 : On sépare pairs et impairs.</b></p>
+$$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\theta^{2k+1}}{(2k + 1)!}J = \cos\theta\,I + \sin\theta\,J.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^{\theta J} = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}}$ : la rotation $R_\theta$.</p>
+
+<p class="ml">Exemple 5 : $\det(e^A) = e^{\operatorname{tr}A}$</p>
+<p><b>Étape 1 : Rappel.</b> Toute $A\in\mathcal M_n(\mathbb C)$ est trigonalisable : $A = PTP^{-1}$.</p>
+<p><b>Étape 2 : On transporte.</b> $e^A = Pe^TP^{-1}$, donc $\det e^A = \det e^T$.</p>
+<p><b>Étape 3 : $e^T$ est triangulaire.</b> $T^k$ est triangulaire de diagonale $(\lambda_i^k)$, donc $e^T$ est triangulaire de diagonale $(e^{\lambda_i})$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\det e^A = \prod e^{\lambda_i} = e^{\sum\lambda_i} = \cG{e^{\operatorname{tr}A}}$. En particulier $e^A$ est toujours inversible.</p>
+
+<h2 id="f-neu">4. Série géométrique de matrices</h2>
+<div class="sbox">$$\|\cdot\|\ \text{sous-multiplicative},\ \|A\| \lt 1\ \Longrightarrow\ I - A\ \text{inversible et}\ (I - A)^{-1} = \sum_{k=0}^{+\infty}A^k.$$</div>
+<p class="ml">Exemple 6 : la démonstration</p>
+<p><b>Étape 1 : Rappel.</b> ACV $\Rightarrow$ CV en dimension finie ; $\|A^k\|\leq\|A\|^k$.</p>
+<p><b>Étape 2 : Convergence.</b> $\sum\|A^k\|\leq\sum\|A\|^k \lt +\infty$ (géométrique de raison $ \lt 1$) : $S = \sum A^k$ existe.</p>
+<p><b>Étape 3 : Télescopage.</b> $(I - A)\sum_{k=0}^NA^k = I - A^{N+1}$.</p>
+<p><b>Étape 4 : La limite.</b> $\|A^{N+1}\|\leq\|A\|^{N+1}\to0$, et le produit matriciel est continu : $(I - A)S = I$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(I - A)^{-1} = \sum_{k\geq0}A^k}$. Conséquence : $GL_n$ contient la boule $B(I, 1)$, il est ouvert.</p>
+
+<h2 id="f-pos">5. Familles de réels positifs</h2>
+<div class="sbox">$$\sum_{i\in I}a_i = \sup\Big\{\sum_{i\in J}a_i,\ J\subset I\ \text{fini}\Big\}\in[0, +\infty].\qquad I = \mathbb N:\ \text{c'est la somme de la série}.$$</div>
+<p>Pour une famille <b>positive</b>, tout est permis : on peut réordonner, regrouper, intervertir les sommes, et le résultat (fini ou $+\infty$) ne change pas.</p>
+
+<h2 id="f-paq">6. Sommation par paquets</h2>
+<div class="sbox">$$I = \bigsqcup_{n}\cR{I_n}\ \text{(partition)},\ a_i\geq0:\quad\sum_{i\in I}a_i = \sum_n\Big(\sum_{i\in\cR{I_n}}a_i\Big).$$</div>
+<p class="ml">La méthode</p>
+<p>Pour une famille indexée par $\mathbb N^2$, on groupe par <b>diagonales</b> $\cR{I_n = \{(p, q),\ p + q = n\}}$ (quand le terme dépend de $p + q$), ou par lignes $\{p\}\times\mathbb N$ (Fubini). On regarde d'abord les $|a_i|$.</p>
+
+<p class="ml">Exemple 7 : $\sum_{p, q\geq1}\frac1{(p + q)^\alpha}$</p>
+<p><b>Étape 1 : Rappel.</b> Famille positive : sommation par paquets, valeur dans $[0, +\infty]$.</p>
+<p><b>Étape 2 : Les paquets.</b> $\cR{I_n = \{(p, q)\in(\mathbb N^*)^2,\ p + q = n\}}$ pour $n\geq2$ : il y a $n - 1$ couples ($p = 1, \dots, n - 1$).</p>
+<p><b>Étape 3 : La somme d'un paquet.</b> $\sum_{(p, q)\in I_n}\frac1{(p + q)^\alpha} = \frac{n - 1}{n^\alpha}$.</p>
+<p><b>Étape 4 : La série des paquets.</b> $\frac{n - 1}{n^\alpha}\sim\frac1{n^{\alpha - 1}}$ : converge $\iff\alpha - 1 > 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{sommable}\iff\alpha > 2}$.</p>
+
+<h2 id="f-som">7. Familles sommables de nombres complexes</h2>
+<div class="sbox">$$(a_i)\ \text{sommable}\iff\sum_{i\in I}\cO{|a_i|} \lt +\infty.\qquad\text{Alors}:\ \text{linéarité},\ \Big|\sum a_i\Big|\leq\sum|a_i|,\ \text{sommation par paquets},\ \text{tout ordre donne la même somme}.$$
+$$I = \mathbb N:\quad(a_n)\ \text{sommable}\iff\sum a_n\ \text{absolument convergente}.$$</div>
+<p class="ml piege">Piège</p>
+<p>Pour une famille <b>non positive</b>, on vérifie d'abord la sommabilité avec $|a_i|$. Sans elle, regrouper ou intervertir peut changer le résultat (exemple 9).</p>
+
+<h2 id="f-double">8. Séries doubles, Fubini</h2>
+<div class="sbox">$$(a_{p,q})\ \text{positive ou sommable}:\quad\sum_{(p, q)\in\mathbb N^2}a_{p,q} = \sum_{p=0}^{+\infty}\sum_{q=0}^{+\infty}a_{p,q} = \sum_{q=0}^{+\infty}\sum_{p=0}^{+\infty}a_{p,q}.$$
+$$\text{Sommable}\iff\sum_p\Big(\sum_q|a_{p,q}|\Big) \lt +\infty.\qquad\text{Produit}:\ \sum_{p,q}x_py_q = \Big(\sum x_p\Big)\Big(\sum y_q\Big).$$</div>
+
+<p class="ml">Exemple 8 : $\sum_{n\geq2}(\zeta(n) - 1) = 1$</p>
+<p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes.</p>
+<p><b>Étape 2 : On écrit la double somme.</b> $\zeta(n) - 1 = \sum_{k\geq2}\frac1{k^n}$, donc la somme cherchée est $\sum_{n\geq2}\sum_{k\geq2}\frac1{k^n}$, termes positifs.</p>
+<p><b>Étape 3 : On intervertit.</b> Pour $k\geq2$ fixé, géométrique de raison $\frac1k$ :</p>
+$$\sum_{n\geq2}\frac1{k^n} = \frac{1/k^2}{1 - 1/k} = \frac1{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
+<p><b>Étape 4 : On télescope.</b> $\sum_{k\geq2}\big(\frac1{k - 1} - \frac1k\big) = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq2}(\zeta(n) - 1) = 1}$.</p>
+
+<p class="ml">Exemple 9 : intervertir sans sommabilité</p>
+<p>$a_{p,q} = 1$ si $q = p$, $-1$ si $q = p + 1$, $0$ sinon ($p, q\in\mathbb N$).</p>
+<p><b>Étape 1 : Rappel.</b> Fubini exige la positivité ou la sommabilité.</p>
+<p><b>Étape 2 : Lignes d'abord.</b> Pour $p$ fixé : $1 - 1 = 0$. Donc $\sum_p\sum_qa_{p,q} = 0$.</p>
+<p><b>Étape 3 : Colonnes d'abord.</b> Pour $q = 0$ : $a_{0,0} = 1$. Pour $q\geq1$ : $a_{q,q} + a_{q-1,q} = 1 - 1 = 0$. Donc $\sum_q\sum_pa_{p,q} = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{0\neq1}$ : la famille n'est pas sommable ($\sum|a_{p,q}| = +\infty$), et l'interversion est interdite.</p>
+
+<h2 id="f-cauchy">9. Produit de Cauchy</h2>
+<div class="sbox">$$\sum a_n,\ \sum b_n\ \text{absolument convergentes},\ c_n = \sum_{k=0}^na_kb_{n-k}:\quad\sum c_n\ \text{ACV et}\ \sum_{n\geq0}c_n = \Big(\sum_{n\geq0}a_n\Big)\Big(\sum_{n\geq0}b_n\Big).$$</div>
+<p class="ml">Exemple 10 : $\frac1{(1 - x)^2} = \sum(n + 1)x^n$</p>
+<p>Pour $|x| \lt 1$.</p>
+<p><b>Étape 1 : Rappel.</b> Produit de Cauchy de deux séries ACV.</p>
+<p><b>Étape 2 : Les séries.</b> $\sum x^n$ est ACV ($|x| \lt 1$), de somme $\frac1{1 - x}$.</p>
+<p><b>Étape 3 : Le terme du produit.</b> $c_n = \sum_{k=0}^nx^kx^{n-k} = (n + 1)x^n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}}$.</p>
+
+<p class="ml">Exemple 11 : $e^ae^b = e^{a + b}$</p>
+<p><b>Étape 1 : Rappel.</b> Produit de Cauchy, et la formule du binôme.</p>
+<p><b>Étape 2 : Les séries.</b> $\sum\frac{a^n}{n!}$ et $\sum\frac{b^n}{n!}$ sont ACV pour tous $a, b\in\mathbb C$.</p>
+<p><b>Étape 3 : Le terme du produit.</b></p>
+$$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0}^n\binom nka^kb^{n-k} = \frac{(a + b)^n}{n!}.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^ae^b = e^{a + b}}$. Pour des matrices, le binôme exige $AB = BA$ : d'où l'hypothèse du §3.</p>
+
+<h2 id="f-enonce">10. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Calculer $e^A$ »</b><span>Nilpotente, diagonalisable, $\lambda I + N$, ou polynôme annulateur.</span></div>
+<div><b>« $e^{A + B}$ »</b><span>Vérifier $AB = BA$ avant tout.</span></div>
+<div><b>« $\det e^A$ »</b><span>$e^{\operatorname{tr}A}$.</span></div>
+<div><b>$\|A\| \lt 1$</b><span>$(I - A)^{-1} = \sum A^k$.</span></div>
+<div><b>Une somme sur $\mathbb N^2$</b><span>Positive ? Fubini direct. Sinon : sommabilité avec $|a_{p,q}|$ d'abord.</span></div>
+<div><b>Un terme en $p + q$</b><span>Paquets par diagonales $p + q = n$.</span></div>
+<div><b>$\sum_n\sum_k$ à calculer</b><span>Intervertir (positivité), souvent une géométrique apparaît.</span></div>
+<div><b>Produit de deux séries</b><span>Produit de Cauchy, sous ACV.</span></div>
+<div><b>$\sum f(n)$ réordonnée</b><span>Sommable : la somme ne dépend pas de l'ordre.</span></div>
+</div>
+
+<h2 id="f-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Écrire $e^{A + B} = e^Ae^B$ sans commutation.</p>
+<p><b>2.</b> $e^A$ calculé coefficient par coefficient ($e^{a_{ij}}$) : faux sauf pour une diagonale.</p>
+<p><b>3.</b> Intervertir deux sommes sans positivité ni sommabilité.</p>
+<p><b>4.</b> Oublier de compter le nombre d'éléments d'un paquet.</p>
+<p><b>5.</b> Produit de Cauchy de séries seulement semi-convergentes.</p>
+<p><b>6.</b> Oublier $k = 0$ (le terme $I$) dans $e^A$ ou $\sum A^k$.</p>
+</div>
+
+<h2 id="f-entrainement">S'entraîner</h2>
+<div data-mlab="expmat"></div>
+<div data-mlab="quizfs"></div>
+
+<h2 id="f-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : exponentielle d'un projecteur</p>
+<p>$P^2 = P$. Calculer $e^{tP}$.</p>
+<p><b>Étape 1 : Rappel.</b> $e^{tP} = \sum\frac{t^kP^k}{k!}$ ; polynôme annulateur pour les puissances.</p>
+<p><b>Étape 2 : Les puissances.</b> $P^k = P$ pour $k\geq1$, $P^0 = I$.</p>
+<p><b>Étape 3 : La somme.</b> $e^{tP} = I + \Big(\sum_{k\geq1}\frac{t^k}{k!}\Big)P = I + (e^t - 1)P$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^{tP} = I + (e^t - 1)P}$.</p>
+
+<p class="ml">Exercice 2 : $\sum_{p, q\geq1}\frac1{p^2 + q^2}$ diverge</p>
+<p><b>Étape 1 : Rappel.</b> Famille positive : comparaison terme à terme, puis exemple 7.</p>
+<p><b>Étape 2 : La minoration.</b> $p^2 + q^2\leq(p + q)^2$, donc $\frac1{p^2 + q^2}\geq\frac1{(p + q)^2}$.</p>
+<p><b>Étape 3 : La référence.</b> Exemple 7 avec $\alpha = 2\leq2$ : $\sum\frac1{(p + q)^2} = +\infty$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{p, q\geq1}\frac1{p^2 + q^2} = +\infty}$.</p>
+
+<p class="ml">Exercice 3 : $\sum_{n\geq1}nx^n$</p>
+<p><b>Étape 1 : Rappel.</b> Exemple 10 : $\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}$ pour $|x| \lt 1$.</p>
+<p><b>Étape 2 : On décale.</b> $\sum_{n\geq1}nx^n = x\sum_{n\geq1}nx^{n-1} = x\sum_{m\geq0}(m + 1)x^m$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$. Exemple : $\sum\frac n{2^n} = \frac{1/2}{1/4} = 2$.</p>
+
+<h2 id="f-arbre">L'arbre des séries et familles sommables</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une somme infinie</span><ul>
+<li><div class="hr"><em>de matrices</em><span class="hq">Laquelle ?</span><ul>
+<li><div class="hr"><em>$e^A$, nilpotente</em><a class="hl ok" href="#f-exp">somme finie</a></div></li>
+<li><div class="hr"><em>$e^A$, diagonalisable</em><a class="hl ok" href="#f-exp">$Pe^DP^{-1}$</a></div></li>
+<li><div class="hr"><em>$e^A$, $\lambda I + N$</em><a class="hl" href="#f-exp">$e^\lambda e^N$ (commutent)</a></div></li>
+<li><div class="hr"><em>$\sum A^k$</em><a class="hl" href="#f-neu">$(I - A)^{-1}$ si $\|A\| \lt 1$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>indexée par $\mathbb N^2$, $I$</em><span class="hq">Termes positifs ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#f-paq">paquets, Fubini : tout est permis</a></div></li>
+<li><div class="hr"><em>non</em><span class="hq">$\sum|a_i| \lt \infty$ ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#f-som">sommable : paquets, Fubini</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl end" href="#f-double">interdit d'intervertir</a></div></li>
+</ul></div></li>
+</ul></div></li>
+<li><div class="hr"><em>produit de deux séries</em><a class="hl" href="#f-cauchy">produit de Cauchy (ACV)</a></div></li>
+<li><div class="hr"><em>de vecteurs</em><a class="hl" href="#f-serie">coordonnées, ou ACV</a></div></li>
+</ul></div></div>
+`,
+"Fonctions vectorielles et arcs paramétrés": R`
+<nav class="msum"><a href="#v-not">Notations</a><a href="#v-der">Dérivation</a><a href="#v-op">Opérations</a><a href="#v-int">Intégration</a><a href="#v-af">Accroissements finis</a><a href="#v-tay">Taylor</a><a href="#v-arc">Arcs paramétrés</a><a href="#v-sing">Points singuliers</a><a href="#v-etude">Étude d'un arc</a><a href="#v-enonce">L'énoncé</a><a href="#v-erreurs">Erreurs</a><a href="#v-entrainement">S'entraîner</a><a href="#v-exos">Exercices</a><a href="#v-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction $\cB f$ et ses coordonnées. <span class="kR">rouge</span> : le point étudié $\cR{t_0}$. <span class="kO">orange</span> : les majorations ($\cO M$, restes). <span class="kV">violet</span> : l'application (bi)linéaire $\cV L$, $\cV B$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="v-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Fonction vectorielle</td><td>$f:I\to E$, $E$ de dimension finie</td><td>$f = \sum f_ie_i$ dans une base : tout se fait coordonnée par coordonnée.</td></tr>
+<tr><td>Dérivée</td><td>$f'(t) = \lim\frac{f(t + h) - f(t)}h$</td><td>$f$ dérivable $\iff$ chaque $f_i$ l'est, $f' = \sum f_i'e_i$.</td></tr>
+<tr><td>Classes</td><td>$\mathcal C^k(I, E)$</td><td>Stable par combinaisons linéaires, produits bilinéaires, composées.</td></tr>
+<tr><td>Arc paramétré</td><td>$\gamma:I\to\mathbb R^2$, $t\mapsto(x(t), y(t))$</td><td>Point régulier : $\gamma'(t)\neq0$.</td></tr>
+</table>
+
+<h2 id="v-der">2. Dérivation</h2>
+<div class="sbox">$$f(t_0 + h) = f(t_0) + hf'(t_0) + o(h).\qquad f\ \text{dérivable}\iff\text{chaque coordonnée l'est}.\qquad f' = 0\ \text{sur un intervalle}\iff f\ \text{constante}.$$</div>
+
+<h2 id="v-op">3. Les opérations</h2>
+<div class="sbox">$$(\cV L\circ f)' = \cV L\circ f'\ (\cV L\ \text{linéaire}),\qquad\cV B(f, g)' = \cV B(f', g) + \cV B(f, g')\ (\cV B\ \text{bilinéaire}).$$
+$$\langle f, g\rangle' = \langle f', g\rangle + \langle f, g'\rangle,\qquad(\|f\|^2)' = 2\langle f, f'\rangle,\qquad(fg)' = f'g + fg'\ \text{(matrices, sans commuter)}.$$
+$$\det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n),\qquad(f\circ\varphi)' = \varphi'\cdot(f'\circ\varphi).$$</div>
+
+<p class="ml">Exemple 1 : norme constante</p>
+<p>$f:I\to E$ dérivable, $E$ euclidien, $\|f\|$ constante. Montrer $f(t)\perp f'(t)$.</p>
+<p><b>Étape 1 : Rappel.</b> $(\|f\|^2)' = 2\langle f, f'\rangle$.</p>
+<p><b>Étape 2 : On dérive la constante.</b> $\|f\|^2$ est constante, donc sa dérivée est nulle.</p>
+<p><b>Étape 3 : On remplace.</b> $2\langle f(t), f'(t)\rangle = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f(t)\perp f'(t)}$ : sur un cercle, la vitesse est tangente (orthogonale au rayon).</p>
+
+<p class="ml">Exemple 2 : dériver $t\mapsto A(t)^{-1}$</p>
+<p>$A:I\to GL_n(\mathbb R)$ dérivable.</p>
+<p><b>Étape 1 : Rappel.</b> $(fg)' = f'g + fg'$ pour le produit matriciel (bilinéaire), sans commuter.</p>
+<p><b>Étape 2 : On dérive $A(t)A(t)^{-1} = I$.</b> $t\mapsto A(t)^{-1}$ est dérivable (coefficients = cofacteurs divisés par $\det$, fractions rationnelles des coefficients).</p>
+$$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
+<p><b>Étape 3 : On isole</b> en multipliant à gauche par $A^{-1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\big(A^{-1}\big)' = -A^{-1}A'A^{-1}}$ (et pas $-\frac{A'}{A^2}$).</p>
+
+<p class="ml">Exemple 3 : dériver un déterminant</p>
+<p>$\varphi(t) = \det(I_n + tH)$. Calculer $\varphi'(0)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\det(c_1, \dots, c_n)' = \sum_i\det(c_1, \dots, c_i', \dots, c_n)$.</p>
+<p><b>Étape 2 : Les colonnes.</b> $c_i(t) = e_i + th_i$ ($h_i$ = colonne $i$ de $H$), donc $c_i' = h_i$ et $c_j(0) = e_j$.</p>
+<p><b>Étape 3 : En $t = 0$.</b> $\varphi'(0) = \sum_i\det(e_1, \dots, h_i, \dots, e_n)$, et ce déterminant vaut la $i$-ième coordonnée de $h_i$, soit $h_{ii}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\varphi'(0) = \sum_ih_{ii} = \operatorname{tr}H}$.</p>
+
+<h2 id="v-int">4. Intégration, sommes de Riemann</h2>
+<div class="sbox">$$\int_a^bf = \sum_i\Big(\int_a^bf_i\Big)e_i,\qquad\cV L\Big(\int f\Big) = \int\cV L(f),\qquad\Big\|\int_a^bf\Big\|\leq\int_a^b\|f\|\ (a\leq b).$$
+$$\frac{b - a}n\sum_{k=1}^nf\Big(a + k\frac{b - a}n\Big)\xrightarrow[n\to\infty]{}\int_a^bf.\qquad f\ \text{continue}:\ \Big(\int_a^xf\Big)' = f(x).$$</div>
+<p class="ml">Exemple 4 : une somme de Riemann complexe</p>
+<p>Limite de $S_n = \frac1n\sum_{k=1}^ne^{ik/n}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue sur $[0, 1]$, même à valeurs complexes.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, continue sur $[0, 1]$.</p>
+<p><b>Étape 3 : L'intégrale.</b> $\int_0^1e^{it}\,dt = \Big[\frac{e^{it}}i\Big]_0^1 = \frac{e^i - 1}i = -i(\cos1 - 1 + i\sin1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{S_n\to\sin1 + i(1 - \cos1)}$.</p>
+
+<h2 id="v-af">5. L'inégalité des accroissements finis</h2>
+<div class="sbox">$$f\ \mathcal C^1\ \text{sur}\ [a, b],\ \|f'\|\leq\cO M\ \Longrightarrow\ \|f(b) - f(a)\|\leq\cO M\,|b - a|.$$</div>
+<p class="ml piege">Piège</p>
+<p>L'<b>égalité</b> des accroissements finis et le théorème de Rolle sont <b>faux</b> pour une fonction vectorielle (exemple 5). Seule l'inégalité reste.</p>
+
+<p class="ml">Exemple 5 : Rolle tombe en défaut</p>
+<p><b>Étape 1 : Rappel.</b> Rolle (réel) : $f(a) = f(b)\Rightarrow\exists c,\ f'(c) = 0$.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$ sur $[0, 2\pi]$ (à valeurs dans $\mathbb C\simeq\mathbb R^2$) : $f(0) = f(2\pi) = 1$.</p>
+<p><b>Étape 3 : La dérivée.</b> $f'(t) = ie^{it}$, de module $1$ : elle ne s'annule jamais.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{Rolle est faux pour les fonctions vectorielles}}$. Mais l'inégalité donne $|e^{ia} - e^{ib}|\leq|a - b|$ (avec $M = 1$).</p>
+
+<h2 id="v-tay">6. Formules de Taylor</h2>
+<div class="sbox">$$\textbf{Reste intégral}\ (f\ \mathcal C^{n+1}):\ f(b) = \sum_{k=0}^n\frac{(b - a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b - t)^n}{n!}f^{(n+1)}(t)\,dt.$$
+$$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_{k=0}^n\frac{(b - a)^k}{k!}f^{(k)}(a)\Big\|\leq\cO M\frac{|b - a|^{n+1}}{(n + 1)!}.\qquad\textbf{Taylor-Young}:\ f(a + h) = \sum_{k\leq n}\frac{h^k}{k!}f^{(k)}(a) + o(h^n).$$</div>
+<p class="ml">Exemple 6 : $|e^{ix} - 1 - ix|\leq\frac{x^2}2$</p>
+<p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $1$ : $\|f(b) - f(a) - (b - a)f'(a)\|\leq M\frac{(b - a)^2}2$, avec $M\geq\|f''\|$.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, $f'(t) = ie^{it}$, $f''(t) = -e^{it}$, donc $|f''|\leq\cO1$.</p>
+<p><b>Étape 3 : On applique</b> entre $a = 0$ et $b = x$ : $f(0) = 1$, $f'(0) = i$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{|e^{ix} - 1 - ix|\leq\frac{x^2}2}$ pour tout réel $x$.</p>
+
+<h2 id="v-arc">7. Arcs paramétrés : tangente</h2>
+<div class="sbox">$$\gamma(t) = (x(t), y(t)).\qquad\cR{t_0}\ \textbf{régulier}\ (\gamma'(t_0)\neq0):\ \text{tangente dirigée par}\ \gamma'(t_0) = (x'(t_0), y'(t_0)).$$
+$$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'(t_0)\neq0:\ \text{tangente horizontale}.$$</div>
+
+<p class="ml">Exemple 7 : tangentes horizontales et verticales, point double</p>
+<p>$\gamma(t) = (t^2 - 1,\ t^3 - 3t)$.</p>
+<p><b>Étape 1 : Rappel.</b> Horizontale si $y' = 0\neq x'$, verticale si $x' = 0\neq y'$.</p>
+<p><b>Étape 2 : Les dérivées.</b> $x'(t) = 2t$, $y'(t) = 3t^2 - 3 = 3(t - 1)(t + 1)$. Elles ne s'annulent jamais ensemble : tous les points sont réguliers.</p>
+<p><b>Étape 3 : Horizontales.</b> $t = \pm1$ : points $\gamma(1) = (0, -2)$ et $\gamma(-1) = (0, 2)$.</p>
+<p><b>Étape 4 : Verticale.</b> $t = 0$ : point $(-1, 0)$.</p>
+<p><b>Étape 5 : Point double.</b> $x(t) = x(s)$ avec $s\neq t$ donne $s = -t$ ; puis $y(t) = y(-t)\iff t^3 - 3t = 0\iff t = \pm\sqrt3$. Point $\gamma(\pm\sqrt3) = (2, 0)$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\text{horizontales en}\ (0, \pm2),\ \text{verticale en}\ (-1, 0),\ \text{point double}\ (2, 0)}$.</p>
+
+<h2 id="v-sing">8. Points singuliers <span class="hp">hors programme</span></h2>
+<p>En $t_0$ singulier ($\gamma'(t_0) = 0$), on cherche le premier entier $\cV p$ avec $\gamma^{(p)}(t_0)\neq0$ (direction de la tangente), puis le premier $\cV q > p$ avec $\gamma^{(q)}(t_0)$ non colinéaire à $\gamma^{(p)}(t_0)$.</p>
+<table class="mtab">
+<tr><th></th><th>$q$ pair</th><th>$q$ impair</th></tr>
+<tr><td>$p$ impair</td><td>point ordinaire</td><td>point d'inflexion</td></tr>
+<tr><td>$p$ pair</td><td>rebroussement de 2<sup>e</sup> espèce</td><td>rebroussement de 1<sup>re</sup> espèce</td></tr>
+</table>
+<p class="ml">Exemple 8 : $\gamma(t) = (t^2, t^3)$ en $0$</p>
+<p><b>Étape 1 : Rappel.</b> $p$ = premier ordre de dérivée non nulle, $q$ = premier ordre non colinéaire.</p>
+<p><b>Étape 2 : Les dérivées en $0$.</b> $\gamma'(0) = (0, 0)$, $\gamma''(0) = (2, 0)$ : $p = 2$, tangente horizontale.</p>
+<p><b>Étape 3 : Ensuite.</b> $\gamma'''(0) = (0, 6)$, non colinéaire à $(2, 0)$ : $q = 3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $p$ pair, $q$ impair : $\cG{\text{point de rebroussement de 1}^{\text{re}}\ \text{espèce}}$ (la cuspide).</p>
+
+<h2 id="v-etude">9. Le plan d'étude d'un arc</h2>
+<p><b>1.</b> Domaine, <b>réduction</b> par périodicité et symétries ($t\mapsto-t$ donne une symétrie si $x$, $y$ sont paires ou impaires). <b>2.</b> Tableau de variations conjoint de $x$ et $y$. <b>3.</b> Points singuliers, tangentes horizontales et verticales. <b>4.</b> Branches infinies. <b>5.</b> Points doubles. <b>6.</b> Tracé.</p>
+<p class="ml">Bonus : la longueur d'un arc <span class="hp">hors programme</span></p>
+<p>$L = \int_a^b\|\gamma'(t)\|\,dt$. Exemple : le cercle $\gamma(t) = (R\cos t, R\sin t)$, $\|\gamma'\| = R$, $L = 2\pi R$.</p>
+
+<h2 id="v-enonce">10. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $\|f\|$ constante »</b><span>Dériver $\|f\|^2$ : $\langle f, f'\rangle = 0$.</span></div>
+<div><b>Dériver un produit, un déterminant</b><span>Formules bilinéaire, multilinéaire ; ne jamais commuter les matrices.</span></div>
+<div><b>« Montrer $\|f(b) - f(a)\|\leq\dots$ »</b><span>Inégalité des accroissements finis, avec un majorant de $\|f'\|$.</span></div>
+<div><b>« Majorer un reste »</b><span>Taylor-Lagrange avec un majorant de $\|f^{(n+1)}\|$.</span></div>
+<div><b>$\frac1n\sum f(\frac kn)$ à valeurs complexes</b><span>Somme de Riemann, intégrer coordonnée par coordonnée.</span></div>
+<div><b>« Tangente en $\gamma(t_0)$ »</b><span>$\gamma'(t_0)$ si régulier, sinon premier $\gamma^{(p)}(t_0)\neq0$.</span></div>
+<div><b>« Point double »</b><span>Résoudre $\gamma(t) = \gamma(s)$ avec $t\neq s$.</span></div>
+<div><b>« Rolle » pour une vectorielle</b><span>Faux : utiliser l'inégalité ou passer aux coordonnées.</span></div>
+</div>
+
+<h2 id="v-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Appliquer Rolle ou l'égalité des accroissements finis à une fonction vectorielle.</p>
+<p><b>2.</b> $(A^2)' = 2AA'$ : c'est $A'A + AA'$.</p>
+<p><b>3.</b> $(A^{-1})' = -\frac{A'}{A^2}$ : c'est $-A^{-1}A'A^{-1}$.</p>
+<p><b>4.</b> $\big\|\int f\big\| = \int\|f\|$ : seulement $\leq$.</p>
+<p><b>5.</b> Donner la tangente par $\gamma'(t_0)$ en un point singulier.</p>
+</div>
+
+<h2 id="v-entrainement">S'entraîner</h2>
+<div data-mlab="arcp"></div>
+<div data-mlab="quizfv"></div>
+
+<h2 id="v-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $X' = AX$ avec $A$ antisymétrique</p>
+<p>Montrer que $\|X(t)\|$ est constante.</p>
+<p><b>Étape 1 : Rappel.</b> $(\|X\|^2)' = 2\langle X, X'\rangle$, et $A^\top = -A$.</p>
+<p><b>Étape 2 : On dérive.</b> $(\|X\|^2)' = 2\langle X, AX\rangle = 2X^\top AX$.</p>
+<p><b>Étape 3 : Ce nombre est nul.</b> $X^\top AX$ est un réel, égal à son transposé $X^\top A^\top X = -X^\top AX$.</p>
+<p><b>Étape 4 : Conclusion.</b> $(\|X\|^2)' = 0$ : $\cG{\|X(t)\|\ \text{est constante}}$ (et $e^{tA}\in O(n)$).</p>
+
+<p class="ml">Exercice 2 : $|\cos x - 1 + \frac{x^2}2|\leq\frac{x^4}{24}$</p>
+<p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $3$ : reste $\leq M\frac{|x|^4}{4!}$ avec $M\geq|f^{(4)}|$.</p>
+<p><b>Étape 2 : Les dérivées en $0$.</b> $\cos0 = 1$, $\cos'(0) = 0$, $\cos''(0) = -1$, $\cos'''(0) = 0$, et $|\cos^{(4)}| = |\cos|\leq1$.</p>
+<p><b>Étape 3 : Le polynôme.</b> $1 + 0\cdot x - \frac{x^2}2 + 0\cdot x^3 = 1 - \frac{x^2}2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\big|\cos x - 1 + \frac{x^2}2\big|\leq\frac{x^4}{24}}$ pour tout réel $x$.</p>
+
+<h2 id="v-arbre">L'arbre des fonctions vectorielles</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une fonction $f:I\to E$</span><ul>
+<li><div class="hr"><em>dériver</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>coordonnées</em><a class="hl ok" href="#v-der">dériver chaque $f_i$</a></div></li>
+<li><div class="hr"><em>$\langle f, g\rangle$, $fg$, $\det$</em><a class="hl" href="#v-op">formules (multi)linéaires</a></div></li>
+<li><div class="hr"><em>$A^{-1}$</em><a class="hl" href="#v-op">dériver $AA^{-1} = I$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>majorer</em><span class="hq">Quoi ?</span><ul>
+<li><div class="hr"><em>$f(b) - f(a)$</em><a class="hl ok" href="#v-af">accroissements finis</a></div></li>
+<li><div class="hr"><em>un reste de Taylor</em><a class="hl" href="#v-tay">Taylor-Lagrange</a></div></li>
+<li><div class="hr"><em>$\int f$</em><a class="hl" href="#v-int">$\|\int f\|\leq\int\|f\|$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une somme $\frac1n\sum$</em><a class="hl" href="#v-int">somme de Riemann</a></div></li>
+<li><div class="hr"><em>un arc $\gamma$</em><span class="hq">$\gamma'(t_0)\neq0$ ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#v-arc">tangente dirigée par $\gamma'(t_0)$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#v-sing">$p$ et $q$, nature du point</a></div></li>
+<li><div class="hr"><em>tracer</em><a class="hl end" href="#v-etude">symétries, variations, points doubles</a></div></li>
+</ul></div></li>
+</ul></div></div>
+`,
+"Probabilités sur un univers fini": R`
+<nav class="msum"><a href="#q-not">Notations</a><a href="#q-esp">Espace probabilisé</a><a href="#q-unif">Équiprobabilité</a><a href="#q-cond">Conditionnement</a><a href="#q-tot">Probabilités totales</a><a href="#q-bayes">Bayes</a><a href="#q-ind">Indépendance</a><a href="#q-va">Variables aléatoires</a><a href="#q-lois">Lois usuelles</a><a href="#q-couple">Couples</a><a href="#q-espe">Espérance</a><a href="#q-var">Variance, covariance</a><a href="#q-ineg">Markov, Bienaymé-Tchebychev</a><a href="#q-enonce">L'énoncé</a><a href="#q-erreurs">Erreurs</a><a href="#q-entrainement">S'entraîner</a><a href="#q-exos">Exercices</a><a href="#q-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les événements $\cB A$, $\cB B$ et les variables $\cB X$, $\cB Y$. <span class="kR">rouge</span> : le système complet ou l'événement par lequel on conditionne. <span class="kO">orange</span> : les probabilités lues sur l'arbre ou dans l'énoncé. <span class="kV">violet</span> : les paramètres ($\cV n$, $\cV p$). <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="q-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Univers, événements</td><td>$\Omega$ fini, $A\in\mathcal P(\Omega)$</td><td>$\overline A$, $A\cup B$ (ou), $A\cap B$ (et).</td></tr>
+<tr><td>Probabilité</td><td>$P:\mathcal P(\Omega)\to[0, 1]$</td><td>$P(\Omega) = 1$, additive sur les disjoints.</td></tr>
+<tr><td>Conditionnelle</td><td>$P_B(A) = P(A\mid B)$</td><td>$\frac{P(A\cap B)}{P(B)}$, $P(B) > 0$.</td></tr>
+<tr><td>Variable aléatoire</td><td>$X:\Omega\to E$, $X(\Omega)$</td><td>$(X = x)$, $(X\leq x)$, $(X\in A)$ sont des événements.</td></tr>
+<tr><td>Lois</td><td>$\mathcal U$, $\mathcal B(p)$, $\mathcal B(n, p)$</td><td>$X\sim\mathcal B(n, p)$.</td></tr>
+<tr><td>Espérance, variance</td><td>$E(X)$, $V(X)$, $\sigma(X)$</td><td>$\sigma = \sqrt V$.</td></tr>
+<tr><td>Covariance</td><td>$\operatorname{Cov}(X, Y)$</td><td>$E(XY) - E(X)E(Y)$.</td></tr>
+</table>
+
+<h2 id="q-esp">2. Espace probabilisé fini</h2>
+<div class="sbox">$$P(\overline A) = 1 - P(A),\qquad P(A\cup B) = P(A) + P(B) - P(A\cap B),\qquad A\subset B\Rightarrow P(A)\leq P(B).$$
+$$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}\ \sum p_\omega = 1:\quad P(A) = \sum_{\omega\in A}p_\omega.$$</div>
+<p class="ml">Exemple 1 : « au moins un »</p>
+<p>Probabilité d'obtenir au moins un $6$ en $4$ lancers d'un dé équilibré.</p>
+<p><b>Étape 1 : Rappel.</b> $P(\overline A) = 1 - P(A)$ : « au moins un » se calcule par le contraire « aucun ».</p>
+<p><b>Étape 2 : Le contraire.</b> « Aucun $6$ » : chaque lancer donne autre chose que $6$, probabilité $\cO{\frac56}$, et les lancers sont indépendants : $\big(\frac56\big)^4 = \frac{625}{1296}$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{P = 1 - \frac{625}{1296} = \frac{671}{1296}\approx0{,}518}$.</p>
+
+<h2 id="q-unif">3. Équiprobabilité : on dénombre</h2>
+<div class="sbox">$$P\ \text{uniforme sur}\ \Omega:\quad P(A) = \frac{\operatorname{Card}A}{\operatorname{Card}\Omega} = \frac{\text{cas favorables}}{\text{cas possibles}}.$$</div>
+<p>On choisit un $\Omega$ où les issues sont <b>vraiment</b> équiprobables (couples ordonnés pour deux dés, pas sommes), puis on utilise la fiche Dénombrement.</p>
+<p class="ml">Exemple 2 : deux dés</p>
+<p>Probabilité que la somme de deux dés équilibrés fasse $7$.</p>
+<p><b>Étape 1 : Rappel.</b> $P(A) = \frac{\operatorname{Card}A}{\operatorname{Card}\Omega}$ sur un univers équiprobable.</p>
+<p><b>Étape 2 : L'univers.</b> $\Omega = [\![1, 6]\!]^2$, $36$ couples équiprobables (les sommes, elles, ne le sont pas).</p>
+<p><b>Étape 3 : Les cas favorables.</b> $(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)$ : $6$ couples.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P = \frac6{36} = \frac16}$.</p>
+
+<p class="ml">Exemple 3 : le problème des anniversaires</p>
+<p>$23$ personnes, $365$ jours équiprobables. Probabilité qu'au moins deux aient le même anniversaire ?</p>
+<p><b>Étape 1 : Rappel.</b> « Au moins deux » : contraire « tous différents ». Uniforme : on dénombre.</p>
+<p><b>Étape 2 : Cas possibles.</b> $\Omega$ = listes de $23$ jours : $365^{23}$.</p>
+<p><b>Étape 3 : Tous différents.</b> Listes d'éléments distincts : $365\times364\times\dots\times343$.</p>
+<p><b>Étape 4 : Le calcul.</b> $P(\text{tous différents}) = \prod_{k=0}^{22}\frac{365 - k}{365}\approx0{,}493$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{P\approx1 - 0{,}493 = 0{,}507}$ : plus d'une chance sur deux.</p>
+
+<h2 id="q-cond">4. Probabilités conditionnelles, probabilités composées</h2>
+<div class="sbox">$$P_{\cR B}(A) = \frac{P(A\cap\cR B)}{P(\cR B)}.\qquad\textbf{Composées}:\ P(A_1\cap\dots\cap A_n) = P(A_1)\,P_{A_1}(A_2)\,P_{A_1\cap A_2}(A_3)\cdots P_{A_1\cap\dots\cap A_{n-1}}(A_n).$$</div>
+<p>Sur un <b>arbre pondéré</b>, chaque branche porte une probabilité conditionnelle, et la probabilité d'un chemin est le <b>produit</b> des branches.</p>
+<p class="ml">Exemple 4 : tirages sans remise</p>
+<p>Une urne contient $3$ rouges et $2$ bleues. On tire $2$ boules sans remise. Probabilité de deux rouges ?</p>
+<p><b>Étape 1 : Rappel.</b> $P(R_1\cap R_2) = P(R_1)\,P_{R_1}(R_2)$.</p>
+<p><b>Étape 2 : Premier tirage.</b> $P(R_1) = \cO{\frac35}$.</p>
+<p><b>Étape 3 : Second tirage sachant $R_1$.</b> Il reste $2$ rouges sur $4$ : $P_{R_1}(R_2) = \cO{\frac24}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P = \frac35\times\frac12 = \frac3{10}}$. Contrôle par dénombrement : $\binom32/\binom52 = \frac3{10}$.</p>
+
+<h2 id="q-tot">5. La formule des probabilités totales</h2>
+<div class="sbox">$$\cR{(B_1, \dots, B_n)}\ \text{système complet}\ (\text{disjoints, de réunion}\ \Omega):\quad P(A) = \sum_{i=1}^nP(\cR{B_i})\,P_{\cR{B_i}}(A).$$</div>
+<p>On l'utilise quand l'expérience a deux temps et qu'on connaît les probabilités du second temps <b>sachant</b> le premier. Le plus simple : $(B, \overline B)$.</p>
+<p class="ml">Exemple 5 : deux urnes</p>
+<p>On choisit $U_1$ ($2$ rouges, $3$ bleues) avec probabilité $\frac13$, sinon $U_2$ ($4$ rouges, $1$ bleue), puis on tire une boule. $P(R)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Système complet $(\cR{U_1}, \cR{U_2})$ : $P(R) = P(U_1)P_{U_1}(R) + P(U_2)P_{U_2}(R)$.</p>
+<p><b>Étape 2 : Les branches.</b> $P(U_1) = \frac13$, $P_{U_1}(R) = \frac25$ ; $P(U_2) = \frac23$, $P_{U_2}(R) = \frac45$.</p>
+<p><b>Étape 3 : Le calcul.</b> $P(R) = \frac13\cdot\frac25 + \frac23\cdot\frac45 = \frac2{15} + \frac8{15}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(R) = \frac{10}{15} = \frac23}$.</p>
+
+<h2 id="q-bayes">6. La formule de Bayes</h2>
+<div class="sbox">$$P_{\cB A}(\cR{B_j}) = \frac{P(\cR{B_j})\,P_{\cR{B_j}}(\cB A)}{\sum_iP(\cR{B_i})\,P_{\cR{B_i}}(\cB A)}.$$</div>
+<p>Elle sert à <b>remonter le temps</b> : on connaît $P_{\text{cause}}(\text{effet})$ et on veut $P_{\text{effet}}(\text{cause})$.</p>
+<p class="ml">Exemple 6 : un test médical</p>
+<p>Une maladie touche $1\%$ de la population. Le test est positif chez $99\%$ des malades et chez $5\%$ des non-malades. Un patient est positif : probabilité qu'il soit malade ?</p>
+<p><b>Étape 1 : Rappel.</b> Bayes avec le système complet $(\cR M, \cR{\overline M})$.</p>
+<p><b>Étape 2 : Les données.</b> $P(M) = 0{,}01$, $P_M(+) = 0{,}99$, $P(\overline M) = 0{,}99$, $P_{\overline M}(+) = 0{,}05$.</p>
+<p><b>Étape 3 : Probabilités totales.</b> $P(+) = 0{,}01\times0{,}99 + 0{,}99\times0{,}05 = 0{,}0099 + 0{,}0495 = 0{,}0594$.</p>
+<p><b>Étape 4 : Bayes.</b> $P_+(M) = \frac{0{,}0099}{0{,}0594} = \frac16$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{P_+(M) = \frac16\approx17\%}$ : la plupart des positifs sont des faux positifs, car la maladie est rare.</p>
+
+<h2 id="q-ind">7. Indépendance</h2>
+<div class="sbox">$$A, B\ \text{indépendants}\iff P(A\cap B) = P(A)P(B)\ \ (\iff P_B(A) = P(A)\ \text{si}\ P(B) > 0).$$
+$$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\in J}P(A_i)\ \text{pour toute partie}\ J.\qquad A, B\ \text{indépendants}\Rightarrow A, \overline B\ \text{aussi}.$$</div>
+<p class="ml piege">Piège</p>
+<p>Indépendants $\neq$ incompatibles : deux événements incompatibles de probabilités non nulles ne sont <b>jamais</b> indépendants. Et deux à deux indépendants ne suffit pas pour mutuellement (exemple 8).</p>
+
+<p class="ml">Exemple 7 : vérifier une indépendance</p>
+<p>Un dé équilibré, $A$ = « pair », $B$ = « $\leq4$ ».</p>
+<p><b>Étape 1 : Rappel.</b> On compare $P(A\cap B)$ et $P(A)P(B)$.</p>
+<p><b>Étape 2 : Les probabilités.</b> $P(A) = \frac36 = \frac12$, $P(B) = \frac46 = \frac23$, $A\cap B = \{2, 4\}$, $P(A\cap B) = \frac13$.</p>
+<p><b>Étape 3 : On compare.</b> $P(A)P(B) = \frac12\cdot\frac23 = \frac13 = P(A\cap B)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{et}\ B\ \text{sont indépendants}}$.</p>
+
+<p class="ml">Exemple 8 : deux à deux, mais pas mutuellement</p>
+<p>Deux pièces équilibrées. $A$ = « 1<sup>re</sup> pile », $B$ = « 2<sup>e</sup> pile », $C$ = « les deux pièces donnent le même résultat ».</p>
+<p><b>Étape 1 : Rappel.</b> Mutuelle : aussi $P(A\cap B\cap C) = P(A)P(B)P(C)$.</p>
+<p><b>Étape 2 : Les probabilités.</b> $P(A) = P(B) = P(C) = \frac12$ (pour $C$ : $PP$ ou $FF$).</p>
+<p><b>Étape 3 : Deux à deux.</b> $A\cap B = \{PP\}$, $A\cap C = \{PP\}$, $B\cap C = \{PP\}$ : chacun $\frac14 = \frac12\cdot\frac12$.</p>
+<p><b>Étape 4 : Les trois.</b> $A\cap B\cap C = \{PP\}$, probabilité $\frac14\neq\frac18$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{indépendants deux à deux, pas mutuellement}}$.</p>
+
+<h2 id="q-va">8. Variables aléatoires, loi</h2>
+<div class="sbox">$$\text{Loi de}\ X:\ \text{les}\ P(X = x)\ \text{pour}\ x\in X(\Omega),\ \text{avec}\ \sum_xP(X = x) = 1.\qquad\text{Loi de}\ f(X):\ P(f(X) = y) = \sum_{x,\ f(x) = y}P(X = x).$$</div>
+<p class="ml">La méthode du maximum</p>
+<p>Pour $M = \max(X_1, \dots, X_n)$ : on passe par $(M\leq k) = \bigcap(X_i\leq k)$, puis $P(M = k) = P(M\leq k) - P(M\leq k - 1)$. Pour un minimum : $(m > k) = \bigcap(X_i > k)$.</p>
+<p class="ml">Exemple 9 : la loi du maximum de deux dés</p>
+<p><b>Étape 1 : Rappel.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$, puis on fait la différence.</p>
+<p><b>Étape 2 : La fonction de répartition.</b> Les dés sont indépendants : $P(M\leq k) = \frac k6\cdot\frac k6 = \frac{k^2}{36}$.</p>
+<p><b>Étape 3 : La différence.</b> $P(M = k) = \frac{k^2 - (k - 1)^2}{36} = \frac{2k - 1}{36}$, $k\in[\![1, 6]\!]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(M = k) = \frac{2k - 1}{36}}$. Contrôle : $\sum_{k=1}^6(2k - 1) = 36$.</p>
+
+<h2 id="q-lois">9. Les lois usuelles</h2>
+<table class="mtab">
+<tr><th>Loi</th><th>Modèle</th><th>$P(X = k)$</th><th>$E(X)$</th><th>$V(X)$</th></tr>
+<tr><td>Uniforme $\mathcal U([\![1, n]\!])$</td><td>tirer au hasard</td><td>$\frac1n$</td><td>$\frac{n + 1}2$</td><td>$\frac{n^2 - 1}{12}$</td></tr>
+<tr><td>Bernoulli $\mathcal B(p)$</td><td>succès / échec</td><td>$P(X = 1) = p$</td><td>$p$</td><td>$p(1 - p)$</td></tr>
+<tr><td>Binomiale $\mathcal B(\cV n, \cV p)$</td><td>nombre de succès en $n$ épreuves indépendantes</td><td>$\binom nkp^k(1 - p)^{n-k}$</td><td>$np$</td><td>$np(1 - p)$</td></tr>
+</table>
+<div class="sbox">$$X_1, \dots, X_n\ \text{indépendantes de loi}\ \mathcal B(p)\ \Longrightarrow\ X_1 + \dots + X_n\sim\mathcal B(n, p).$$</div>
+<p>La loi géométrique et la loi de Poisson apparaissent quand $\Omega$ est infini : elles sont au <span class="hp">programme de Spé</span>.</p>
+<p class="ml">Exemple 10 : une binomiale</p>
+<p>On lance $5$ fois un dé. Probabilité d'obtenir exactement deux $6$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Nombre de succès en $n$ épreuves indépendantes de même probabilité $p$ : $\mathcal B(n, p)$, $P(X = k) = \binom nkp^k(1 - p)^{n-k}$.</p>
+<p><b>Étape 2 : Les paramètres.</b> Succès = « faire $6$ », $\cV p = \frac16$, $\cV n = 5$, lancers indépendants : $X\sim\mathcal B\big(5, \frac16\big)$.</p>
+<p><b>Étape 3 : Le calcul.</b> $P(X = 2) = \binom52\big(\frac16\big)^2\big(\frac56\big)^3 = 10\times\frac1{36}\times\frac{125}{216}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(X = 2) = \frac{1250}{7776}\approx0{,}161}$.</p>
+
+<h2 id="q-couple">10. Couples de variables aléatoires</h2>
+<div class="sbox">$$\text{Loi conjointe}:\ P(X = x, Y = y).\qquad\text{Marginales}:\ P(X = x) = \sum_yP(X = x, Y = y).$$
+$$X, Y\ \text{indépendantes}\iff\forall x, y,\ P(X = x, Y = y) = P(X = x)P(Y = y)\ \Longrightarrow\ f(X), g(Y)\ \text{indépendantes}.$$</div>
+<p>Les marginales se lisent en sommant les <b>lignes</b> et les <b>colonnes</b> du tableau de la loi conjointe. La réciproque est fausse : les marginales ne donnent pas la loi conjointe.</p>
+
+<h2 id="q-espe">11. Espérance</h2>
+<div class="sbox">$$E(X) = \sum_{x\in X(\Omega)}x\,P(X = x).\qquad\textbf{Transfert}:\ E(f(X)) = \sum_xf(x)\,P(X = x).\qquad E(\mathbb 1_A) = P(A).$$
+$$\textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}.\qquad X\leq Y\Rightarrow E(X)\leq E(Y).\qquad X, Y\ \text{indépendantes}\Rightarrow E(XY) = E(X)E(Y).$$</div>
+<p class="ml">La méthode des indicatrices</p>
+<p>Si $X$ <b>compte</b> quelque chose, on l'écrit $X = \sum_i\mathbb 1_{A_i}$ (une indicatrice par objet), et $E(X) = \sum P(A_i)$, <b>même sans indépendance</b>.</p>
+
+<p class="ml">Exemple 11 : l'espérance d'une binomiale par indicatrices</p>
+<p><b>Étape 1 : Rappel.</b> $E(\mathbb 1_A) = P(A)$ et linéarité.</p>
+<p><b>Étape 2 : On découpe.</b> $X = X_1 + \dots + X_n$ où $X_i = 1$ si la $i$-ième épreuve est un succès, $X_i\sim\mathcal B(p)$.</p>
+<p><b>Étape 3 : La linéarité.</b> $E(X) = \sum E(X_i) = np$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = np}$, sans aucun calcul de somme avec des $\binom nk$.</p>
+
+<p class="ml">Exemple 12 : le nombre de points fixes d'une permutation au hasard</p>
+<p>$\sigma$ uniforme dans $S_n$, $X$ = nombre de $i$ avec $\sigma(i) = i$. Calculer $E(X)$.</p>
+<p><b>Étape 1 : Rappel.</b> Méthode des indicatrices.</p>
+<p><b>Étape 2 : On découpe.</b> $X = \sum_{i=1}^n\mathbb 1_{A_i}$ avec $A_i = (\sigma(i) = i)$.</p>
+<p><b>Étape 3 : Une probabilité.</b> Les permutations qui fixent $i$ sont $(n - 1)!$, donc $P(A_i) = \frac{(n - 1)!}{n!} = \frac1n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = n\times\frac1n = 1}$, pour tout $n$ (les $A_i$ ne sont pourtant pas indépendants).</p>
+
+<h2 id="q-var">12. Variance, covariance</h2>
+<div class="sbox">$$V(X) = E\big((X - E(X))^2\big) = E(X^2) - E(X)^2\ \ \textbf{(König-Huygens)}.\qquad V(aX + b) = a^2V(X).$$
+$$\operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y),\qquad V(X + Y) = V(X) + V(Y) + 2\operatorname{Cov}(X, Y).$$
+$$X, Y\ \text{indépendantes}\Rightarrow\operatorname{Cov}(X, Y) = 0\ \text{et}\ V(X + Y) = V(X) + V(Y)\ \text{(réciproque fausse)}.$$</div>
+<p class="ml">Exemple 13 : la variance de la loi uniforme</p>
+<p>$X\sim\mathcal U([\![1, n]\!])$.</p>
+<p><b>Étape 1 : Rappel.</b> $V(X) = E(X^2) - E(X)^2$, et le transfert pour $E(X^2)$.</p>
+<p><b>Étape 2 : $E(X)$.</b> $\frac1n\sum_{k=1}^nk = \frac{n + 1}2$.</p>
+<p><b>Étape 3 : $E(X^2)$.</b> $\frac1n\sum_{k=1}^nk^2 = \frac{(n + 1)(2n + 1)}6$.</p>
+<p><b>Étape 4 : La différence.</b></p>
+$$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 1) - 3(n + 1)\big)}{12} = \frac{(n + 1)(n - 1)}{12}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{V(X) = \frac{n^2 - 1}{12}}$ (dé : $\frac{35}{12}$).</p>
+
+<h2 id="q-ineg">13. Markov et Bienaymé-Tchebychev</h2>
+<div class="sbox">$$\textbf{Markov}:\ X\geq0,\ a > 0:\ P(X\geq a)\leq\frac{E(X)}a.\qquad\textbf{Bienaymé-Tchebychev}:\ P\big(|X - E(X)|\geq\varepsilon\big)\leq\frac{V(X)}{\varepsilon^2}.$$</div>
+<p class="ml">Exemple 14 : combien de lancers ?</p>
+<p>On lance $n$ fois une pièce équilibrée, $F = \frac{S_n}n$ la fréquence de pile. Trouver $n$ pour que $P\big(|F - \frac12|\geq0{,}05\big)\leq0{,}05$.</p>
+<p><b>Étape 1 : Rappel.</b> $P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}$.</p>
+<p><b>Étape 2 : Espérance et variance.</b> $S_n\sim\mathcal B\big(n, \frac12\big)$ : $E(F) = \frac12$, $V(F) = \frac1{n^2}\cdot\frac n4 = \frac1{4n}$.</p>
+<p><b>Étape 3 : On applique</b> avec $\varepsilon = 0{,}05$ : $P\leq\frac{1/(4n)}{0{,}0025} = \frac{100}n$.</p>
+<p><b>Étape 4 : On résout</b> $\frac{100}n\leq0{,}05\iff n\geq2000$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{n = 2000\ \text{lancers suffisent}}$ (la majoration est grossière, mais sûre).</p>
+
+<h2 id="q-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Au moins un »</b><span>Passer au contraire « aucun ».</span></div>
+<div><b>Issues équiprobables</b><span>Dénombrer favorables et possibles dans un $\Omega$ bien choisi.</span></div>
+<div><b>Expérience en plusieurs étapes</b><span>Arbre pondéré, probabilités composées.</span></div>
+<div><b>« On choisit d'abord… puis… »</b><span>Probabilités totales sur le système complet de la 1<sup>re</sup> étape.</span></div>
+<div><b>« Sachant le résultat, quelle cause ? »</b><span>Bayes.</span></div>
+<div><b>« Indépendants ? »</b><span>Comparer $P(A\cap B)$ et $P(A)P(B)$.</span></div>
+<div><b>« Nombre de succès en $n$ essais indépendants »</b><span>Loi binomiale.</span></div>
+<div><b>Un maximum, un minimum</b><span>Passer par $(M\leq k)$ ou $(m > k)$.</span></div>
+<div><b>$X$ compte des objets</b><span>Indicatrices et linéarité de l'espérance.</span></div>
+<div><b>$V(X + Y)$</b><span>Indépendantes : somme. Sinon : $+2\operatorname{Cov}$.</span></div>
+<div><b>« Majorer $P(|X - m|\geq\varepsilon)$ »</b><span>Bienaymé-Tchebychev.</span></div>
+</div>
+
+<h2 id="q-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Confondre $P_B(A)$ et $P_A(B)$.</p>
+<p><b>2.</b> Confondre incompatibles et indépendants.</p>
+<p><b>3.</b> Prendre les sommes de deux dés comme équiprobables.</p>
+<p><b>4.</b> Écrire $P(A\cap B) = P(A)P(B)$ sans indépendance.</p>
+<p><b>5.</b> $V(X + Y) = V(X) + V(Y)$ sans indépendance (ou covariance nulle).</p>
+<p><b>6.</b> $V(aX) = aV(X)$ : c'est $a^2V(X)$.</p>
+<p><b>7.</b> Utiliser la binomiale pour des tirages <b>sans remise</b>.</p>
+<p><b>8.</b> Oublier de vérifier que $\sum P(X = x) = 1$.</p>
+</div>
+
+<h2 id="q-entrainement">S'entraîner</h2>
+<div data-mlab="bayes"></div>
+<div data-mlab="binomp"></div>
+<div data-mlab="quizpr"></div>
+
+<h2 id="q-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : Monty Hall</p>
+<p>Trois portes, une voiture derrière l'une. Tu choisis la porte $1$. L'animateur, qui sait où est la voiture, ouvre une autre porte vide (au hasard s'il a le choix), disons la $3$. Faut-il changer pour la $2$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Bayes avec le système complet $(V_1, V_2, V_3)$ = « la voiture est derrière la porte $i$ ».</p>
+<p><b>Étape 2 : Les données.</b> $P(V_i) = \frac13$. Sachant $V_1$, l'animateur ouvre la $3$ avec probabilité $\frac12$ ; sachant $V_2$, il ouvre forcément la $3$ : $1$ ; sachant $V_3$, jamais : $0$.</p>
+<p><b>Étape 3 : Probabilités totales.</b> $P(O_3) = \frac13\cdot\frac12 + \frac13\cdot1 + 0 = \frac12$.</p>
+<p><b>Étape 4 : Bayes.</b> $P_{O_3}(V_2) = \frac{\frac13\cdot1}{\frac12} = \frac23$ et $P_{O_3}(V_1) = \frac{\frac16}{\frac12} = \frac13$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{changer fait gagner avec probabilité}\ \frac23}$.</p>
+
+<p class="ml">Exercice 2 : un couple non indépendant</p>
+<p>On tire sans remise deux boules parmi trois numérotées $1, 2, 3$ ; $X$ = 1<sup>er</sup> numéro, $Y$ = 2<sup>e</sup>. Calculer $\operatorname{Cov}(X, Y)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y)$.</p>
+<p><b>Étape 2 : La loi conjointe.</b> Les $6$ couples $(i, j)$, $i\neq j$, sont équiprobables : $P(X = i, Y = j) = \frac16$. Les marginales sont uniformes sur $\{1, 2, 3\}$ : $E(X) = E(Y) = 2$.</p>
+<p><b>Étape 3 : $E(XY)$.</b> $\frac16\sum_{i\neq j}ij = \frac16\Big(\big(\sum i\big)^2 - \sum i^2\Big) = \frac16(36 - 14) = \frac{11}3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Cov}(X, Y) = \frac{11}3 - 4 = -\frac13}$ : non nulle, donc $X$ et $Y$ ne sont pas indépendantes (logique : sans remise).</p>
+
+<p class="ml">Exercice 3 : tirages sans remise, l'espérance</p>
+<p>Une urne de $N$ boules dont $R$ rouges ; on tire $n$ boules sans remise. $X$ = nombre de rouges. $E(X)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Indicatrices et linéarité, sans indépendance.</p>
+<p><b>Étape 2 : On découpe.</b> $X = \sum_{k=1}^n\mathbb 1_{A_k}$ avec $A_k$ = « la $k$-ième boule est rouge ».</p>
+<p><b>Étape 3 : Par symétrie.</b> Chaque position a la même chance d'être une rouge : $P(A_k) = \frac RN$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = n\frac RN}$, comme avec remise (mais la loi, elle, n'est pas binomiale).</p>
+
+<h2 id="q-arbre">L'arbre des probabilités</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question de probabilité</span><ul>
+<li><div class="hr"><em>calculer $P(A)$</em><span class="hq">Comment est l'expérience ?</span><ul>
+<li><div class="hr"><em>issues équiprobables</em><a class="hl ok" href="#q-unif">favorables / possibles</a></div></li>
+<li><div class="hr"><em>« au moins un »</em><a class="hl ok" href="#q-esp">$1 - P(\text{aucun})$</a></div></li>
+<li><div class="hr"><em>en étapes</em><a class="hl" href="#q-cond">arbre, probabilités composées</a></div></li>
+<li><div class="hr"><em>plusieurs causes</em><a class="hl" href="#q-tot">probabilités totales</a></div></li>
+<li><div class="hr"><em>remonter à la cause</em><a class="hl" href="#q-bayes">Bayes</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>indépendance</em><a class="hl" href="#q-ind">$P(A\cap B) = P(A)P(B)$ ?</a></div></li>
+<li><div class="hr"><em>une variable $X$</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>sa loi, modèle connu</em><a class="hl ok" href="#q-lois">uniforme, Bernoulli, binomiale</a></div></li>
+<li><div class="hr"><em>loi d'un max, min</em><a class="hl" href="#q-va">$(M\leq k)$, $(m > k)$</a></div></li>
+<li><div class="hr"><em>$E(X)$, $X$ compte</em><a class="hl" href="#q-espe">indicatrices</a></div></li>
+<li><div class="hr"><em>$E(f(X))$</em><a class="hl" href="#q-espe">transfert</a></div></li>
+<li><div class="hr"><em>$V(X)$</em><a class="hl" href="#q-var">$E(X^2) - E(X)^2$</a></div></li>
+<li><div class="hr"><em>majorer un écart</em><a class="hl end" href="#q-ineg">Markov, Bienaymé-Tchebychev</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>un couple $(X, Y)$</em><a class="hl" href="#q-couple">loi conjointe, marginales, covariance</a></div></li>
+</ul></div></div>
 `
 };

@@ -412,5 +412,58 @@ LEMME.EXMETH = {
   String.raw`Dériver $f(tx, ty) = t^\alpha f(x, y)$ en $t = 1$.`,
   String.raw`Taux d'accroissement pour les partielles, puis pour les dérivées croisées.`,
   String.raw`Développer, transposer : $(A + A^\top)x$.`
+],
+"Séries et familles sommables": [
+  String.raw`Nilpotente : la somme s'arrête.`,
+  String.raw`$A = PDP^{-1}$, $e^A = Pe^DP^{-1}$.`,
+  String.raw`$A = \lambda I + N$, qui commutent.`,
+  String.raw`$J^2 = -I$ : séparer pairs et impairs.`,
+  String.raw`Trigonaliser : $e^T$ triangulaire de diagonale $e^{\lambda_i}$.`,
+  String.raw`Convergence absolue, puis télescopage $(I - A)\sum A^k$.`,
+  String.raw`Paquets par diagonales $p + q = n$.`,
+  String.raw`Positive : intervertir, géométrique, télescoper.`,
+  String.raw`Comparer les deux ordres : pas sommable.`,
+  String.raw`Produit de Cauchy de $\sum x^n$ par elle-même.`,
+  String.raw`Produit de Cauchy et binôme.`
+],
+"Séries et familles sommables (exercices)": [
+  String.raw`$P^k = P$ pour $k\geq1$.`,
+  String.raw`Minorer par $\frac1{(p + q)^2}$.`,
+  String.raw`Décaler l'exemple 10.`
+],
+"Fonctions vectorielles et arcs paramétrés": [
+  String.raw`Dériver $\|f\|^2$.`,
+  String.raw`Dériver $AA^{-1} = I$, sans commuter.`,
+  String.raw`Dérivée d'un déterminant colonne par colonne.`,
+  String.raw`Somme de Riemann, intégrer $e^{it}$.`,
+  String.raw`$e^{it}$ : $f(0) = f(2\pi)$, $f'$ jamais nulle.`,
+  String.raw`Taylor-Lagrange à l'ordre $1$, $|f''|\leq1$.`,
+  String.raw`$y' = 0$ ou $x' = 0$, puis $\gamma(t) = \gamma(s)$.`,
+  String.raw`Premières dérivées non nulles $p$ et $q$.`
+],
+"Fonctions vectorielles et arcs paramétrés (exercices)": [
+  String.raw`$(\|X\|^2)' = 2X^\top AX = 0$.`,
+  String.raw`Taylor-Lagrange à l'ordre $3$.`
+],
+"Probabilités sur un univers fini": [
+  String.raw`Passer au contraire « aucun ».`,
+  String.raw`Univers des couples équiprobables.`,
+  String.raw`Contraire « tous différents », dénombrer.`,
+  String.raw`Probabilités composées.`,
+  String.raw`Probabilités totales sur $(U_1, U_2)$.`,
+  String.raw`Probabilités totales, puis Bayes.`,
+  String.raw`Comparer $P(A\cap B)$ et $P(A)P(B)$.`,
+  String.raw`Deux à deux, puis les trois ensemble.`,
+  String.raw`$P(M\leq k)$, puis différence.`,
+  String.raw`Loi binomiale $\mathcal B(5, \frac16)$.`,
+  String.raw`Indicatrices et linéarité.`,
+  String.raw`Indicatrices des points fixes.`,
+  String.raw`König-Huygens avec le transfert.`,
+  String.raw`Bienaymé-Tchebychev sur la fréquence.`
+],
+"Probabilités sur un univers fini (exercices)": [
+  String.raw`Bayes sur la porte ouverte.`,
+  String.raw`Loi conjointe, $E(XY) - E(X)E(Y)$.`,
+  String.raw`Indicatrices, symétrie des positions.`
 ]
 };

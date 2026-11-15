@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2780,6 +2780,122 @@ const QCD = [
   ["Si $rt - s^2 > 0$ et $r > 0$ en un point critique, c'est un minimum local.", true, "Vrai : la hessienne est définie positive."],
   ["Si $f$ est $\\mathcal C^2$, $\\partial_x\\partial_yf = \\partial_y\\partial_xf$.", true, "Vrai : théorème de Schwarz."],
   ["Un extremum d'une fonction sur un disque fermé est toujours un point critique.", false, "Faux : il peut être sur le bord, avec $\\nabla f\\neq0$."]
+];
+/* Familles sommables : exponentielle de matrices 2x2 */
+function mlExpMat(host) {
+  const PS = [[[1, 1], [0, 1]], [[1, 0], [1, 1]], [[2, 1], [1, 1]], [[1, 1], [1, 2]], [[1, 2], [0, 1]], [[1, -1], [1, 0]]];
+  const gen = () => { const k = rnd(0, 2); if (k === 0) { const P = PS[rnd(0, PS.length - 1)]; let l1 = rnd(-2, 3), l2; do { l2 = rnd(-2, 3); } while (l2 === l1); return { k, P, l1, l2 }; } if (k === 1) { let a = 0; while (!a) a = rnd(-3, 3); return { k, l: rnd(-2, 3), a }; } return { k, t: rnd(1, 3) }; };
+  const fx = l => l === 0 ? "X" : `(X ${l > 0 ? "-" : "+"} ${Math.abs(l)})`, mx = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`, eb = l => l === 0 ? "" : l === 1 ? "e" : `e^{${l}}`;
+  const build = E => {
+    const s = [];
+    if (E.k === 0) {
+      const { P, l1, l2 } = E, d = P[0][0] * P[1][1] - P[0][1] * P[1][0], Q = [[P[1][1] * d, -P[0][1] * d], [-P[1][0] * d, P[0][0] * d]];
+      const A = [0, 1].map(i => [0, 1].map(j => P[i][0] * l1 * Q[0][j] + P[i][1] * l2 * Q[1][j]));
+      const R = [0, 1].map(i => [0, 1].map(j => csum([ctp(P[i][0] * Q[0][j], eb(l1)), ctp(P[i][1] * Q[1][j], eb(l2))])));
+      s.push(`$$A = ${mx(A)}$$`);
+      s.push(`<p class="mlstep">1. Rappel : $A = PDP^{-1}\\Rightarrow e^A = Pe^DP^{-1}$ et $e^{\\operatorname{diag}(\\lambda_i)} = \\operatorname{diag}(e^{\\lambda_i})$.</p>`);
+      s.push(`<p class="mlstep">2. Valeurs propres : $\\operatorname{tr}A = ${l1 + l2}$, $\\det A = ${l1 * l2}$, donc $\\chi_A = ${fsum([[1, "X^2"], [-(l1 + l2), "X"], [l1 * l2, ""]])} = ${fx(l1)}${fx(l2)}$ : $\\cV{\\lambda_1 = ${l1}}$, $\\cV{\\lambda_2 = ${l2}}$, distinctes.</p>`);
+      s.push(`<p class="mlstep">3. Vecteurs propres : $(${P[0][0]}, ${P[1][0]})$ pour $${l1}$ et $(${P[0][1]}, ${P[1][1]})$ pour $${l2}$ (contrôle : $AX = \\lambda X$). D'où :</p>$$\\cV P = ${mx(P)},\\qquad\\cV P^{-1} = ${mx(Q)}$$`);
+      s.push(`<p class="mlstep">4. On calcule $Pe^DP^{-1}$ :</p>$$e^A = ${mx(P)}\\begin{pmatrix}${eb(l1) || "1"}&0\\\\0&${eb(l2) || "1"}\\end{pmatrix}${mx(Q)}$$`);
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{e^A = ${mx(R)}}$$<p class="mlnote">Contrôle : $\\det e^A = e^{${l1 + l2}} = e^{\\operatorname{tr}A}$.</p>`);
+    } else if (E.k === 1) {
+      const { l, a } = E;
+      s.push(`$$A = ${mx([[l, a], [0, l]])}$$`);
+      s.push(`<p class="mlstep">1. Rappel : si $AB = BA$, $e^{A + B} = e^Ae^B$ ; si $N^2 = 0$, $e^N = I + N$.</p>`);
+      s.push(`<p class="mlstep">2. On découpe : $A = ${l}I + N$ avec $N = ${mx([[0, a], [0, 0]])}$, $N^2 = 0$, et $${l}I$ commute avec $N$.</p>`);
+      s.push(`<p class="mlstep">3. Les deux morceaux : $e^{${l}I} = ${eb(l) || "1"}\\,I$ et $e^N = I + N = ${mx([[1, a], [0, 1]])}$.</p>`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{e^A = ${eb(l) ? eb(l) : ""}${mx([[1, a], [0, 1]])}}$$`);
+    } else {
+      const { t } = E;
+      s.push(`$$A = ${mx([[0, -t], [t, 0]])} = ${t}J,\\qquad J = ${mx([[0, -1], [1, 0]])}$$`);
+      s.push(`<p class="mlstep">1. Rappel : un polynôme annulateur donne les puissances ; on reconnaît les séries de $\\cos$ et $\\sin$.</p>`);
+      s.push(`<p class="mlstep">2. $J^2 = -I$, donc $(${t}J)^{2k} = (-1)^k${t}^{2k}I$ et $(${t}J)^{2k+1} = (-1)^k${t}^{2k+1}J$.</p>`);
+      s.push(`<p class="mlstep">3. On sépare pairs et impairs :</p>$$e^A = \\sum_k\\frac{(-1)^k${t}^{2k}}{(2k)!}I + \\sum_k\\frac{(-1)^k${t}^{2k+1}}{(2k + 1)!}J = \\cos(${t})\\,I + \\sin(${t})\\,J$$`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{e^A = ${mx([[`\\cos ${t}`, `-\\sin ${t}`], [`\\sin ${t}`, `\\cos ${t}`]])}}$$<p class="mlnote">C'est la rotation d'angle $${t}$ radian${t > 1 ? "s" : ""}.</p>`);
+    }
+    return s;
+  };
+  stepLab(host, "Calculer une exponentielle de matrice", gen, build);
+}
+const QFS = [
+  ["$e^{A + B} = e^Ae^B$ pour toutes matrices $A, B$.", false, "Faux : il faut $AB = BA$."],
+  ["$e^A$ est toujours inversible.", true, "Vrai : $(e^A)^{-1} = e^{-A}$, et $\\det e^A = e^{\\operatorname{tr}A}\\neq0$."],
+  ["Pour une famille positive, on peut toujours intervertir les sommes.", true, "Vrai : le résultat est le même, éventuellement $+\\infty$."],
+  ["$\\sum_{p, q\\geq1}\\frac1{(p + q)^2}$ est finie.", false, "Faux : les paquets donnent $\\sum\\frac{n - 1}{n^2}$, qui diverge. Il faut $\\alpha > 2$."],
+  ["Le produit de Cauchy de deux séries convergentes converge toujours.", false, "Faux : il faut l'absolue convergence (contre-exemple : $\\frac{(-1)^n}{\\sqrt{n + 1}}$)."],
+  ["Si $\\|A\\| \\lt 1$ (norme sous-multiplicative), $I - A$ est inversible.", true, "Vrai : $(I - A)^{-1} = \\sum A^k$."]
+];
+/* Fonctions vectorielles : arcs paramétrés et vecteur vitesse */
+function mlArcP(host) {
+  const cm = x => x.toFixed(2).replace(".", "{,}");
+  const F = [
+    { t: "(t^2 - 1, t^3 - 3t)", f: t => [t * t - 1, t ** 3 - 3 * t], r: [-2.2, 2.2] },
+    { t: "(t^2, t^3)", f: t => [t * t, t ** 3], r: [-1.4, 1.4] },
+    { t: "(\\cos^3t, \\sin^3t)", f: t => [Math.cos(t) ** 3, Math.sin(t) ** 3], r: [0, 2 * Math.PI] },
+    { t: "(\\sin2t, \\sin3t)", f: t => [Math.sin(2 * t), Math.sin(3 * t)], r: [0, 2 * Math.PI] },
+    { t: "(t - \\sin t, 1 - \\cos t)", f: t => [t - Math.sin(t), 1 - Math.cos(t)], r: [0, 4 * Math.PI] }
+  ];
+  let fi = 0, u = 0.3;
+  const draw = () => {
+    const g = F[fi], [a, b] = g.r, T = a + (b - a) * u, pts = []; for (let i = 0; i <= 600; i++) pts.push(g.f(a + (b - a) * i / 600));
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]); let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys); const m = 0.15 * Math.max(x1 - x0, y1 - y0); x0 -= m; x1 += m; y0 -= m; y1 += m;
+    const W = 520, H = 300, sc = Math.min((W - 20) / (x1 - x0), (H - 20) / (y1 - y0)), X = x => 10 + (x - x0) * sc, Y = y => H - 10 - (y - y0) * sc;
+    const h = 1e-4, P = g.f(T), P2 = g.f(T + h), P1 = g.f(T - h), v = [(P2[0] - P1[0]) / (2 * h), (P2[1] - P1[1]) / (2 * h)], nv = Math.hypot(...v), sing = nv < 1e-3, k = 0.25 * (x1 - x0) / Math.max(nv, 1e-9);
+    const arrow = sing ? "" : `<line x1="${X(P[0])}" y1="${Y(P[1])}" x2="${X(P[0] + k * v[0])}" y2="${Y(P[1] + k * v[1])}" stroke="#D4503B" stroke-width="2.5"/><circle cx="${X(P[0] + k * v[0])}" cy="${Y(P[1] + k * v[1])}" r="3" fill="#D4503B"/>`;
+    host.innerHTML = `<p class="mlt">Un arc et son vecteur vitesse $\\gamma'(t)$</p><div class="rmctl"><div class="mlseg">${F.map((q, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${q.t}$</button>`).join("")}</div><label class="rmn">$t = ${T.toFixed(2).replace(".", "{,}")}$ <input type="range" min="0" max="1" step="0.002" value="${u}" data-t aria-label="t"></label></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Arc paramétré"><path d="${pts.map((p, i) => `${i ? "L" : "M"}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join("")}" fill="none" stroke="#2B5BD7" stroke-width="2"/>${arrow}<circle cx="${X(P[0])}" cy="${Y(P[1])}" r="5" fill="#1F8A5B"/></svg><p class="mlcalc">$$\\gamma(t)\\approx(${cm(P[0])}\\,;\\ ${cm(P[1])}),\\qquad\\gamma'(t)\\approx(${cm(v[0])}\\,;\\ ${cm(v[1])})$$</p><p class="mlnote">${sing ? "<b>Point singulier</b> : $\\gamma'(t) = 0$, la tangente se lit sur la première dérivée non nulle." : "Point régulier : la flèche rouge dirige la tangente. Cherche les valeurs de $t$ où elle disparaît."}</p>`;
+    $$("[data-f]", host).forEach(btn => btn.addEventListener("click", () => { fi = +btn.dataset.f; draw(); }));
+    $("[data-t]", host).addEventListener("input", e => { u = +e.target.value; draw(); $("[data-t]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QFV = [
+  ["Le théorème de Rolle est vrai pour les fonctions à valeurs dans $\\mathbb R^2$.", false, "Faux : $e^{it}$ sur $[0, 2\\pi]$."],
+  ["Si $\\|f\\|$ est constante, alors $\\langle f, f'\\rangle = 0$.", true, "Vrai : on dérive $\\|f\\|^2$."],
+  ["$(A(t)^2)' = 2A(t)A'(t)$.", false, "Faux : c'est $A'A + AA'$."],
+  ["$\\|f'\\|\\leq M$ sur $[a, b]$ donne $\\|f(b) - f(a)\\|\\leq M(b - a)$.", true, "Vrai : inégalité des accroissements finis."],
+  ["En un point singulier, la tangente est dirigée par $\\gamma'(t_0)$.", false, "Faux : $\\gamma'(t_0) = 0$ ; on prend le premier $\\gamma^{(p)}(t_0)\\neq0$."],
+  ["$\\big\\|\\int_a^bf\\big\\|\\leq\\int_a^b\\|f\\|$ pour $a\\leq b$.", true, "Vrai : inégalité triangulaire intégrale."]
+];
+/* Probabilités : Bayes pour un test */
+function mlBayes(host) {
+  const gen = () => ({ p: [0.001, 0.005, 0.01, 0.02, 0.05, 0.1][rnd(0, 5)], se: [0.9, 0.95, 0.99][rnd(0, 2)], fp: [0.01, 0.02, 0.05, 0.1][rnd(0, 3)] });
+  const fm = v => String(+v.toFixed(6)).replace(".", "{,}"), pc = v => String(+(v * 100).toFixed(2)).replace(".", "{,}");
+  const build = ({ p, se, fp }) => {
+    const a = p * se, b = (1 - p) * fp, tot = a + b, post = a / tot;
+    return [`<p class="mlnote">Une maladie touche $${pc(p)}\\,\\%$ de la population. Le test est positif chez $${pc(se)}\\,\\%$ des malades et chez $${pc(fp)}\\,\\%$ des non-malades. Un patient est positif : quelle est la probabilité qu'il soit malade ?</p>`,
+      `<p class="mlstep">1. Rappel : Bayes avec le système complet $(\\cR M, \\cR{\\overline M})$ : $P_+(M) = \\frac{P(M)P_M(+)}{P(M)P_M(+) + P(\\overline M)P_{\\overline M}(+)}$.</p>`,
+      `<p class="mlstep">2. Les données :</p>$$P(M) = ${fm(p)},\\quad P_M(+) = ${fm(se)},\\quad P(\\overline M) = ${fm(1 - p)},\\quad P_{\\overline M}(+) = ${fm(fp)}$$`,
+      `<p class="mlstep">3. Probabilités totales :</p>$$P(+) = ${fm(p)}\\times${fm(se)} + ${fm(1 - p)}\\times${fm(fp)} = ${fm(a)} + ${fm(b)} = ${fm(tot)}$$`,
+      `<p class="mlstep">4. Bayes :</p>$$P_+(M) = \\frac{${fm(a)}}{${fm(tot)}}\\approx${fm(+post.toFixed(4))}$$`,
+      `<p class="mlstep">5. Conclusion :</p>$$\\cG{P_+(M)\\approx${pc(post)}\\,\\%}$$<p class="mlnote">${post < 0.5 ? "Moins d'une chance sur deux : la maladie est rare, les faux positifs dominent." : "Le test est très informatif ici : la maladie est assez fréquente ou les faux positifs rares."}</p>`];
+  };
+  stepLab(host, "Formule de Bayes : un test de dépistage", gen, build);
+}
+/* Probabilités : la loi binomiale */
+function mlBinomP(host) {
+  let n = 10, p = 0.3;
+  const draw = () => {
+    const P = []; for (let k = 0; k <= n; k++) P.push(binom(n, k) * p ** k * (1 - p) ** (n - k));
+    const mxv = Math.max(...P), W = 520, H = 240, bw = (W - 60) / (n + 1), X = k => 40 + k * bw, Y = v => H - 25 - v / mxv * (H - 50), m = n * p, sd = Math.sqrt(n * p * (1 - p));
+    const bars = P.map((v, k) => `<rect x="${(X(k) + bw * 0.15).toFixed(1)}" y="${Y(v).toFixed(1)}" width="${(bw * 0.7).toFixed(1)}" height="${(H - 25 - Y(v)).toFixed(1)}" fill="#2B5BD7" opacity=".8"/>`).join("") + (n <= 20 ? P.map((v, k) => `<text x="${(X(k) + bw / 2).toFixed(1)}" y="${H - 10}" class="tx" text-anchor="middle">${k}</text>`).join("") : "");
+    const xm = X(m) + bw / 2;
+    host.innerHTML = `<p class="mlt">La loi binomiale $\\mathcal B(n, p)$</p><div class="rmctl"><label class="rmn">$n = ${n}$ <input type="range" min="1" max="40" value="${n}" data-n aria-label="n"></label><label class="rmn">$p = ${p.toFixed(2).replace(".", "{,}")}$ <input type="range" min="0.05" max="0.95" step="0.05" value="${p}" data-p aria-label="p"></label></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Diagramme de la loi binomiale"><rect x="${(xm - sd * bw).toFixed(1)}" y="20" width="${(2 * sd * bw).toFixed(1)}" height="${H - 45}" fill="rgba(194,124,0,.15)"/>${bars}<line x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="15" y2="${H - 25}" stroke="#D4503B" stroke-width="2"/></svg><p class="mlcalc">$$E(X) = np = ${(m).toFixed(2).replace(".", "{,}")},\\qquad V(X) = np(1 - p) = ${(sd * sd).toFixed(2).replace(".", "{,}")},\\qquad\\sigma\\approx${sd.toFixed(2).replace(".", "{,}")}$$</p><p class="mlnote">En rouge l'espérance, en orange la bande $[E - \\sigma, E + \\sigma]$. Le pic est près de $np$ ; la loi est symétrique pour $p = \\frac12$.</p>`;
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    $("[data-p]", host).addEventListener("input", e => { p = +e.target.value; draw(); $("[data-p]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QPR = [
+  ["Deux événements incompatibles de probabilités non nulles sont indépendants.", false, "Faux : $P(A\\cap B) = 0\\neq P(A)P(B)$."],
+  ["$P_B(A) = P_A(B)$ en général.", false, "Faux : c'est tout l'objet de la formule de Bayes."],
+  ["Si $X\\sim\\mathcal B(n, p)$, alors $E(X) = np$.", true, "Vrai : somme de $n$ Bernoulli de paramètre $p$."],
+  ["$V(X + Y) = V(X) + V(Y)$ pour toutes variables.", false, "Faux : il manque $2\\operatorname{Cov}(X, Y)$, nul si indépendantes."],
+  ["$E(X + Y) = E(X) + E(Y)$ même si $X$ et $Y$ ne sont pas indépendantes.", true, "Vrai : la linéarité ne demande rien."],
+  ["$V(2X) = 2V(X)$.", false, "Faux : $V(aX) = a^2V(X)$, donc $4V(X)$."],
+  ["Le nombre de rouges dans des tirages sans remise suit une loi binomiale.", false, "Faux : les tirages ne sont pas indépendants (loi hypergéométrique)."],
+  ["Deux à deux indépendants implique mutuellement indépendants.", false, "Faux : contre-exemple des deux pièces et « même résultat »."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };
