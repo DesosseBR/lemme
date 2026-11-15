@@ -1633,8 +1633,27 @@ function exBlocks(app) {
     numberSteps(body);
   });
   friseSections(app);
+  mtabCards(app);
 }
 /* Méthode : dans chaque type de question (h2), une frise « Méthode 1, 2, 3… », chacune suivie de son exercice */
+/* Tableaux de référence des fiches Méthode : une fiche par ligne, au lieu d'un tableau serré. */
+function mtabCards(app) {
+  $$(".methode .prose table.mtab", app).forEach(t => {
+    const trs = [...t.querySelectorAll("tr")]; if (trs.length < 2) return;
+    const hs = [...trs[0].children].map(c => c.innerHTML.trim()), ht = [...trs[0].children].map(c => c.textContent.trim());
+    if (hs.length < 2 || hs.length > 5 || !ht[0] || /^\$/.test(hs[0]) || new Set(ht).size !== ht.length || /^(Convexes|Répétitions)/.test(ht[0])) return;
+    const box = document.createElement("div"); box.className = "mcards";
+    trs.slice(1).forEach(tr => {
+      const cs = [...tr.children]; if (!cs.length) return;
+      const c = document.createElement("div"); c.className = "mcard";
+      c.innerHTML = `<div class="mcard-h">${cs[0].innerHTML}</div>` + cs.slice(1).map((x, i) => x.textContent.trim() ? `<div class="mcard-l"><span class="mcard-k">${hs[i + 1]}</span><div class="mcard-v">${x.innerHTML}</div></div>` : "").join("");
+      box.appendChild(c);
+    });
+    box.querySelectorAll(".mcard-k .nt").forEach(n => n.replaceWith(n.textContent));
+    t.replaceWith(box);
+  });
+}
+
 function friseSections(app) {
   const prose = $(".methode .prose", app); if (!prose || prose.dataset.frise) return; prose.dataset.frise = "1";
   const COLS = ["fB", "fO", "fV", "fG"];

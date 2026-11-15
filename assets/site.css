@@ -2088,3 +2088,13 @@ table.pot td.pdiv{border-bottom:2px solid var(--ink)}
 .dom{margin:0 0 38px}
 .domh{display:flex;align-items:baseline;gap:12px;margin:0 0 14px;font:600 22px var(--f-display);color:var(--ink)}
 .domh span{font:500 14px var(--f-display);color:var(--muted)}
+
+/* Fiches de référence (ex-tableaux) */
+.methode .mcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:22px 0 26px}
+.methode .mcard{padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.methode .mcard-h{font-weight:600;font-size:1.06em;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.methode .mcard-l+.mcard-l{margin-top:10px}
+.methode .mcard-k{display:block;font-size:.78rem;letter-spacing:.02em;color:var(--muted,#6b7280);margin-bottom:2px}
+.methode .mcard-v{line-height:1.6}
+.methode .prose ul>li+li{margin-top:10px}
+.methode .prose ul{margin:18px 0}
