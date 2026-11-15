@@ -876,8 +876,8 @@ $$\begin{vmatrix}2&7&-1\\0&-3&5\\0&0&4\end{vmatrix} = 2\times(-3)\times4 = -24,\
 </ol>
 <div data-mlab="sarrus"></div>
 <p class="ml">Exemple</p>
+<p><b>Calculer $\det\begin{pmatrix}1&2&3\\0&4&5\\1&0&6\end{pmatrix}$ avec la règle de Sarrus.</b></p>
 <p><b>Étape 1 : Rappel.</b> Règle de Sarrus (taille 3 seulement) : les trois diagonales descendantes comptent avec $+$, les trois montantes avec $-$.</p>
-$$A = \begin{pmatrix}1&2&3\\0&4&5\\1&0&6\end{pmatrix}.$$
 <p><b>Étape 2 : Les trois produits descendants</b> ($+$). Chaque couleur montre les trois cases du produit :</p>
 <div class="sarx">
 <div>$$\begin{vmatrix}\cB1&2&3\\0&\cB4&5\\1&0&\cB6\end{vmatrix}$$<p>$+\ \cB{1\times4\times6} = \cB{24}$</p></div>
@@ -910,6 +910,7 @@ $$\det A = (\cB{24} + \cG{10} + \cV{0}) - (\cR{12} + \cO{0} + \cP{0}) = 34 - 12 
 <li>Développer selon la ligne ou la colonne pleine de zéros.</li>
 </ol>
 <p class="ml">Exemple : la somme des colonnes</p>
+<p><b>Calculer $\begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}$ sous forme factorisée.</b></p>
 <p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant. On peut sortir un facteur commun d'une colonne. Une matrice triangulaire a pour déterminant le produit de sa diagonale.</p>
 <p><b>Étape 2 : $\cO{C_1\leftarrow C_1 + C_2 + C_3}$.</b> Chaque ligne a pour somme $a + 2b$ :</p>
 $$\begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix} = \begin{vmatrix}a + 2b&b&b\\a + 2b&a&b\\a + 2b&b&a\end{vmatrix}.$$
@@ -935,8 +936,8 @@ $$\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix},\qquad\begin{pmatrix}+&-&+&-\\
 <p>Développer selon la ligne ou la colonne qui contient <b>le plus de zéros</b> : chaque zéro supprime un déterminant à calculer.</p>
 <div data-mlab="dev"></div>
 <p class="ml">Exemple</p>
+<p><b>Calculer $\det\begin{pmatrix}1&4&5\\2&0&3\\0&1&2\end{pmatrix}$ en développant selon une ligne.</b></p>
 <p><b>Étape 1 : Rappel.</b> Développer selon la ligne $i$ : $\det A = \sum_j(-1)^{i+j}a_{i,j}\Delta_{i,j}$, où le mineur $\Delta_{i,j}$ est le déterminant obtenu en barrant la ligne $i$ et la colonne $j$. Les signes suivent le damier $\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix}$.</p>
-$$A = \begin{pmatrix}\cB1&\cR4&\cG5\\2&0&3\\0&1&2\end{pmatrix}.$$
 <p><b>Étape 2 : Choisir la ligne.</b> On développe selon la ligne 1 : signes $\cB+$, $\cR-$, $\cG+$.</p>
 <p><b>Étape 3 : Les trois mineurs.</b> Pour chaque coefficient, on barre sa ligne et sa colonne (en gris) :</p>
 <div class="sarx">
@@ -1018,7 +1019,7 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 </table>
 
 <p class="ml">Exemple : la flèche</p>
-<p>$\Delta = \begin{vmatrix}0&1&1&\cdots&1\\1&a_1&0&\cdots&0\\1&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\1&0&\cdots&0&a_n\end{vmatrix}$ avec tous les $a_i\neq0$.</p>
+<p>$\Delta = \begin{vmatrix}0&1&1&\cdots&1\\1&a_1&0&\cdots&0\\1&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\1&0&\cdots&0&a_n\end{vmatrix}$ avec tous les $a_i\neq0$. <b>Calculer $\Delta$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant.</p>
 <p><b>Étape 2 : L'opération.</b> $C_0\leftarrow C_0 - \sum_{i=1}^n\frac1{a_i}C_i$. Ligne $i\geq1$ : $1 - \frac1{a_i}\times a_i = 0$. Ligne $0$ : $0 - \sum_i\frac1{a_i}\times1 = -\sum_i\frac1{a_i}$.</p>
 <p><b>Étape 3 : Triangulaire.</b> Après l'opération, la 1<sup>re</sup> colonne n'a plus qu'un coefficient non nul, en haut :</p>
@@ -1027,6 +1028,7 @@ $$\Delta = \begin{vmatrix}-\sum_i\frac1{a_i}&1&1&\cdots&1\\0&a_1&0&\cdots&0\\0&0
 
 <p class="ml">Exemple : $a$ sur la diagonale, $b$ ailleurs</p>
 $$D_n(a, b) = \begin{vmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{vmatrix},\qquad\text{par exemple}\quad D_3 = \begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}.$$
+<p><b>Calculer $D_n(a, b)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Chaque ligne a la même somme : $C_1\leftarrow C_1 + \dots + C_n$.</p>
 <p><b>Étape 2 : La somme.</b> Chaque ligne contient un $a$ et $n - 1$ fois $b$ : somme $a + (n - 1)b$. On la sort de la colonne $1$, qui devient remplie de $1$.</p>
 <p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs :</p>
@@ -1034,6 +1036,7 @@ $$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\dd
 <p><b>Étape 4 : Conclusion.</b> $\cG{D_n(a, b) = (a + (n - 1)b)(a - b)^{n-1}}$. Contrôle $n = 2$ : $a^2 - b^2 = (a + b)(a - b)$ ✓.</p>
 
 <p class="ml">Exemple : la même par multilinéarité</p>
+<p><b>Retrouver $D_n(a, b)$ par la multilinéarité du déterminant.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\det$ est linéaire en chaque colonne et nul si deux colonnes sont égales.</p>
 <p><b>Étape 2 : Les colonnes.</b> Avec $V = (1, \dots, 1)$ : $C_j = (a - b)E_j + bV$.</p>
 <p><b>Étape 3 : On développe.</b> Les termes contenant $bV$ au moins deux fois sont nuls. Il reste $\det((a - b)E_1, \dots, (a - b)E_n) = (a - b)^n$ et les $n$ termes où $bV$ remplace la $j$-ième colonne : chacun vaut $(a - b)^{n-1}b$ (développer selon la ligne $j$).</p>
@@ -1042,6 +1045,7 @@ $$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\dd
 <p class="ml">Exemple : un déterminant tridiagonal par récurrence</p>
 <p>$D_n$ : $a + b$ sur la diagonale, $ab$ au-dessus, $1$ en dessous. ($a\neq b$.)</p>
 $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots&\ddots&0\\\vdots&\ddots&\ddots&a + b&ab\\0&\cdots&0&1&a + b\end{vmatrix}.$$
+<p><b>Calculer $D_n$ pour tout $n\geq1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Développer selon la 1<sup>re</sup> colonne donne une récurrence d'ordre $2$ ; puis $r^2 = (a + b)r - ab$.</p>
 <p><b>Étape 2 : Le développement.</b> Colonne $1$ : $(a + b)$ en ligne $1$ (mineur $D_{n-1}$) et $1$ en ligne $2$ (signe $-$). Ce second mineur a pour 1<sup>re</sup> ligne $(ab, 0, \dots, 0)$ : il vaut $ab\,D_{n-2}$. Donc $D_n = (a + b)D_{n-1} - abD_{n-2}$.</p>
 <p><b>Étape 3 : Les débuts.</b> $D_1 = a + b$, $D_2 = (a + b)^2 - ab\times1 = a^2 + ab + b^2$ ; on pose $D_0 = 1$ (alors $(a + b)^2 - ab = a^2 + ab + b^2$ ✓).</p>
@@ -1049,7 +1053,7 @@ $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots
 <p><b>Étape 5 : Conclusion.</b> $\cG{D_n = \frac{a^{n+1} - b^{n+1}}{a - b} = \sum_{k=0}^na^kb^{n-k}}$, et par continuité $D_n = (n + 1)a^n$ si $a = b$.</p>
 
 <p class="ml">Exemple : la matrice compagnon, par récurrence sur la dernière colonne</p>
-<p>$C(a_0, \dots, a_n) = \begin{vmatrix}a_0&-1&0&\cdots&0\\a_1&x&-1&&\vdots\\\vdots&&\ddots&\ddots&0\\a_{n-1}&0&&x&-1\\a_n&0&\cdots&0&x\end{vmatrix}$.</p>
+<p>$C(a_0, \dots, a_n) = \begin{vmatrix}a_0&-1&0&\cdots&0\\a_1&x&-1&&\vdots\\\vdots&&\ddots&\ddots&0\\a_{n-1}&0&&x&-1\\a_n&0&\cdots&0&x\end{vmatrix}$. <b>Calculer ce déterminant.</b></p>
 <p><b>Étape 1 : Rappel.</b> La dernière colonne n'a que deux termes non nuls : $-1$ et $x$.</p>
 <p><b>Étape 2 : Le développement.</b> Le $x$ (position $(n, n)$, signe $+$) donne $x\,C(a_0, \dots, a_{n-1})$. Le $-1$ (ligne de $a_{n-1}$, signe $-$) donne $(-1)\times(-1)\times\Delta' = \Delta'$, où $\Delta'$ est le mineur obtenu en barrant cette ligne et la dernière colonne. On développe $\Delta'$ selon sa dernière ligne $(a_n, 0, \dots, 0)$ : il reste $a_n$ fois un déterminant triangulaire de diagonale $-1, \dots, -1$, et les signes $(-1)^{n+1}\times(-1)^{n-1} = 1$ se compensent : $\Delta' = a_n$.</p>
 <p><b>Étape 3 : La récurrence.</b> $C(a_0, \dots, a_n) = x\,C(a_0, \dots, a_{n-1}) + a_n$, avec $C(a_0) = a_0$. Puis $C(a_0, a_1) = a_0x + a_1$ (contrôle : $a_0x - (-1)a_1$ ✓).</p>
@@ -1058,13 +1062,14 @@ $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots
 <p class="ml">Exemple : le caractère polynomial, racines évidentes</p>
 <p>$D_n(x)$ d'ordre $n + 1$ : diagonale $1, 1 - x, 2 - x, \dots, n - x$, et des $1$ partout ailleurs.</p>
 $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\vdots\\\vdots&\vdots&\ddots&\ddots&1\\1&1&\cdots&1&n - x\end{vmatrix}.$$
+<p><b>Montrer que $D_n(x)$ est un polynôme en $x$ et le factoriser.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\det = \sum_\sigma\varepsilon(\sigma)\prod m_{\sigma(i)i}$ : un polynôme en $x$. Deux lignes égales $\Rightarrow\det = 0$.</p>
 <p><b>Étape 2 : Le degré.</b> $x$ n'apparaît que sur la diagonale ($n$ fois) ; le terme en $x^n$ vient du produit diagonal, de coefficient $(-1)^n$.</p>
 <p><b>Étape 3 : Les racines.</b> Pour $x = k$ ($0\leq k\leq n - 1$), la ligne de diagonale $(k + 1) - x$ vaut $1$ en cette position : elle est égale à la 1<sup>re</sup> ligne (toute de $1$). Donc $D_n(k) = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $n$ racines distinctes, degré $n$, coefficient dominant $(-1)^n$ : $\cG{D_n(x) = (-1)^n\prod_{k=0}^{n-1}(x - k)}$.</p>
 
 <p class="ml">Exemple : un déterminant $4\times4$ factorisé</p>
-<p>$\Delta = \begin{vmatrix}a&b&c&d\\b&a&d&c\\c&d&a&b\\d&c&b&a\end{vmatrix}$.</p>
+<p>$\Delta = \begin{vmatrix}a&b&c&d\\b&a&d&c\\c&d&a&b\\d&c&b&a\end{vmatrix}$. <b>Calculer $\Delta$ sous forme factorisée.</b></p>
 <p><b>Étape 1 : Rappel.</b> Polynôme homogène de degré $4$ en $a, b, c, d$ ; une colonne qui se factorise donne un facteur.</p>
 <p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $a + b + c + d$ : facteur $(a + b + c + d)$.</p>
 <p><b>Étape 3 : Les autres facteurs.</b> $C_1\leftarrow C_1 + C_2 - C_3 - C_4$ donne la colonne $(a + b - c - d)(1, 1, -1, -1)$ : facteur $a + b - c - d$. De même $C_1 + C_3 - C_2 - C_4$ et $C_1 + C_4 - C_2 - C_3$ donnent $a - b + c - d$ et $a - b - c + d$.</p>
@@ -1080,12 +1085,14 @@ $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\
 <p><b>Étape 5 : Conclusion.</b> $\cG{D_n(x) = \frac{x^n}{n!}}$.</p>
 
 <p class="ml">Exemple : un déterminant par blocs $\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix}$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb K)$ et $a, b, c, d\in\mathbb K$. <b>Calculer $\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Ajouter à une colonne un multiple d'une autre ne change pas le déterminant ; une triangulaire par blocs a pour déterminant le produit des déterminants des blocs diagonaux.</p>
 <p><b>Étape 2 : L'opération</b> (pour $d\neq0$) : $C_i\leftarrow C_i - \frac cdC_{i+n}$, $1\leq i\leq n$. En bas : $cA - \frac cd\times dA = 0$. En haut : $aA - \frac cd\times bA = \frac{ad - bc}dA$.</p>
 <p><b>Étape 3 : Triangulaire par blocs.</b> $\det = \det\Big(\frac{ad - bc}dA\Big)\det(dA) = \Big(\frac{ad - bc}d\Big)^n\det A\times d^n\det A$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix} = (ad - bc)^n(\det A)^2}$, vrai aussi si $d = 0$ par continuité (polynôme en $d$).</p>
 
 <p class="ml">Exemple : $\det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\geq0$</p>
+<p>Soient $A, B\in\mathcal M_n(\mathbb R)$. <b>Montrer que $\det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\geq0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Opérations par blocs avec le coefficient complexe $i$, et $\det\overline M = \overline{\det M}$.</p>
 <p><b>Étape 2 : Colonnes.</b> $C_j\leftarrow C_j + iC_{j+n}$ : $\begin{vmatrix}A + iB&B\\-B + iA&A\end{vmatrix} = \begin{vmatrix}A + iB&B\\i(A + iB)&A\end{vmatrix}$ (car $i(A + iB) = iA - B$).</p>
 <p><b>Étape 3 : Lignes.</b> $L_{k+n}\leftarrow L_{k+n} - iL_k$ : en bas à gauche $i(A + iB) - i(A + iB) = 0$, en bas à droite $A - iB$.</p>
@@ -8595,6 +8602,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <div class="sbox">$$f\ \text{bijective, dérivable en}\ f^{-1}(y),\ f'(f^{-1}(y))\neq0\ \Longrightarrow\ (f^{-1})'(y) = \frac1{f'\big(f^{-1}(y)\big)}.$$</div>
 
 <p class="ml">Exemple 1 : retrouver $\arctan'$</p>
+<p><b>Retrouver la dérivée de $\arctan$ sur $\mathbb R$ à partir de celle de $\tan$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(f^{-1})'(y) = \frac1{f'(f^{-1}(y))}$. Ici $f = \tan$ sur $\cR{]-\frac\pi2, \frac\pi2[}$, $f' = 1 + \tan^2$.</p>
 <p><b>Étape 2 : On applique</b> en $y\in\mathbb R$, avec $\theta = \arctan y$ :</p>
 $$\arctan'(y) = \frac1{1 + \tan^2(\arctan y)}.$$
@@ -8617,6 +8625,7 @@ $$x\ln2 = (x - 1)\ln3.$$
 <p><b>Étape 4 : Conclusion.</b> $\ln3\neq\ln2$, on peut diviser : $\cG{x = \frac{\ln3}{\ln3 - \ln2} = \frac{\ln3}{\ln\frac32}}$ (car $\ln3 - \ln2 = \ln\frac32$). Valeur : $\approx\frac{1{,}099}{0{,}405}\approx2{,}71$.</p>
 
 <p class="ml">Exemple 3 : la fonction $x\mapsto x^x$</p>
+<p>Soit $f(x) = x^x$ sur $\left]0, +\infty\right[$. <b>Calculer $f'$, étudier les variations de $f$ et sa limite en $0^+$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x^x = e^{x\ln x}$ pour $x > 0$, et $x\ln x\to0$ en $0^+$.</p>
 <p><b>Étape 2 : La dérivée.</b> $(x\ln x)' = 1\times\ln x + x\times\frac1x = \ln x + 1$ (produit). Et $(e^u)' = u'e^u$, donc $f'(x) = (\ln x + 1)\,e^{x\ln x} = (\ln x + 1)\,x^x$.</p>
 <p><b>Étape 3 : Le signe.</b> $x^x = e^{x\ln x} > 0$, donc $f'$ a le signe de $\ln x + 1$. Et $\ln x + 1\geq0\iff\ln x\geq-1\iff x\geq e^{-1} = \frac1e$ ($\exp$ croissante) : $f$ décroît sur $]0, \frac1e]$, croît sur $[\frac1e, +\infty[$.</p>
@@ -8654,6 +8663,7 @@ $$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a 
 <p><b>1.</b> Poser $\theta = \arcsin x$ et écrire ce qu'on sait : $\sin\theta = x$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$. <b>2.</b> Utiliser $\cos^2 + \sin^2 = 1$. <b>3.</b> Choisir le <b>signe</b> grâce à l'intervalle de $\theta$.</p>
 
 <p class="ml">Exemple 5 : $\cos\big(\arcsin\frac13\big)$</p>
+<p><b>Calculer $\cos\big(\arcsin\frac13\big)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\theta = \arcsin x\iff\sin\theta = x$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$. Et $\cos^2\theta = 1 - \sin^2\theta$.</p>
 <p><b>Étape 2 : On pose</b> $\theta = \arcsin\frac13$ : $\sin\theta = \frac13$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
 <p><b>Étape 3 : Le carré.</b> $\cos^2\theta = 1 - \sin^2\theta = 1 - \big(\frac13\big)^2 = 1 - \frac19 = \frac99 - \frac19 = \frac89$.</p>
@@ -8679,6 +8689,7 @@ $$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\arccos\big(\cos\frac{5\pi}3\big) = \frac\pi3}$ et $\cG{\arcsin\big(\sin\frac{3\pi}4\big) = \frac\pi4}$.</p>
 
 <p class="ml">Exemple 7 : la courbe de $x\mapsto\arcsin(\sin x)$</p>
+<p><b>Tracer la courbe de $f:x\mapsto\arcsin(\sin x)$ sur $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\arcsin(\sin x) = x$ sur $[-\frac\pi2, \frac\pi2]$, et $\sin(\pi - x) = \sin x$.</p>
 <p><b>Étape 2 : Période et parité.</b> $f(x) = \arcsin(\sin x)$ est $2\pi$-périodique et impaire : on l'étudie sur $[-\frac\pi2, \frac{3\pi}2]$.</p>
 <p><b>Étape 3 : Sur $[-\frac\pi2, \frac\pi2]$.</b> $f(x) = x$.</p>
@@ -8691,6 +8702,7 @@ $$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a 
 <p><b>1.</b> Dériver sur un <b>intervalle</b> et trouver $f' = 0$. <b>2.</b> Conclure que $f$ est constante <b>sur chaque intervalle</b>. <b>3.</b> Calculer la constante en un point simple.</p>
 
 <p class="ml">Exemple 8 : $\arcsin x + \arccos x = \frac\pi2$</p>
+<p><b>Montrer que pour tout $x\in[-1, 1]$, $\arcsin x + \arccos x = \frac\pi2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ fonction constante.</p>
 <p><b>Étape 2 : La dérivée.</b> Sur $]-1, 1[$ : $\arcsin'(x) = \frac1{\sqrt{1 - x^2}}$ et $\arccos'(x) = -\frac1{\sqrt{1 - x^2}}$, donc $f'(x) = \frac1{\sqrt{1 - x^2}} - \frac1{\sqrt{1 - x^2}} = 0$.</p>
 <p><b>Étape 3 : La constante.</b> $f$ est constante sur l'intervalle $]-1, 1[$, égale à $f(0) = \arcsin0 + \arccos0 = 0 + \frac\pi2 = \frac\pi2$ ($\sin0 = 0$ et $\cos\frac\pi2 = 0$).</p>
@@ -8698,6 +8710,7 @@ $$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a 
 <p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin x + \arccos x = \frac\pi2}$ sur $[-1, 1]$.</p>
 
 <p class="ml">Exemple 9 : $\arctan x + \arctan\frac1x$</p>
+<p><b>Calculer $\arctan x + \arctan\frac1x$ pour $x\neq0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ constante <b>sur cet intervalle</b> ; $\mathbb R^*$ n'est pas un intervalle.</p>
 <p><b>Étape 2 : La dérivée.</b> Pour $x\neq0$, avec $\big(\frac1x\big)' = -\frac1{x^2}$ :</p>
 $$f'(x) = \frac1{1 + x^2} + \Big(-\frac1{x^2}\Big)\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 + x^2} - \frac1{x^2\big(1 + \frac1{x^2}\big)} = \frac1{1 + x^2} - \frac1{x^2 + 1} = 0.$$
@@ -8710,6 +8723,7 @@ $$f'(x) = \frac1{1 + x^2} + \Big(-\frac1{x^2}\Big)\cdot\frac1{1 + \frac1{x^2}} =
 <p><b>1.</b> On applique $\tan$ (ou $\sin$, $\cos$) aux deux membres : c'est une <b>implication</b>, pas une équivalence. <b>2.</b> On résout l'équation algébrique. <b>3.</b> On <b>vérifie</b> chaque candidat (signe, intervalle), car on a pu en ajouter.</p>
 
 <p class="ml">Exemple 10 : $\arctan x + \arctan2x = \frac\pi4$</p>
+<p><b>Résoudre dans $\mathbb R$ l'équation $\arctan x + \arctan2x = \frac\pi4$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et appliquer $\tan$ donne seulement une implication.</p>
 <p><b>Étape 2 : On applique $\tan$.</b> Avec $a = \arctan x$, $b = \arctan2x$ : $\tan a = x$, $\tan b = 2x$, donc si $x$ est solution :</p>
 $$\tan(a + b) = \frac{x + 2x}{1 - x\cdot2x} = \frac{3x}{1 - 2x^2} = \tan\frac\pi4 = 1\qquad(2x^2\neq1).$$
@@ -8725,6 +8739,7 @@ $$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatornam
 <p>Pour une équation ou une identité : tout réécrire avec $X = e^x$ ($> 0$), puis résoudre en $X$.</p>
 
 <p class="ml">Exemple 11 : résoudre $\operatorname{ch}x = 2$</p>
+<p><b>Résoudre dans $\mathbb R$ l'équation $\operatorname{ch}x = 2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = \frac{e^x + e^{-x}}2$. On pose $X = e^x > 0$.</p>
 <p><b>Étape 2 : En $X$.</b> $e^{-x} = \frac1X$, donc $\frac{X + \frac1X}2 = 2\iff X + \frac1X = 4\iff X^2 + 1 = 4X$ (on multiplie par $X > 0$) $\iff X^2 - 4X + 1 = 0$.</p>
 <p><b>Étape 3 : Les racines.</b> $\Delta = (-4)^2 - 4\times1\times1 = 16 - 4 = 12$, $\sqrt{12} = \sqrt{4\times3} = 2\sqrt3$, donc $X = \frac{4\pm2\sqrt3}2 = 2\pm\sqrt3$. Les deux sont $> 0$ ($\sqrt3\approx1{,}73 \lt 2$).</p>
@@ -8732,6 +8747,7 @@ $$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatornam
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{\pm\ln(2 + \sqrt3)\}}$ (symétrique : $\operatorname{ch}$ est paire).</p>
 
 <p class="ml">Exemple 12 : $\operatorname{ch}(a + b)$</p>
+<p><b>Montrer que $\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatorname{sh}a\operatorname{sh}b$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{ch}a = \frac{e^a + e^{-a}}2$, $\operatorname{sh}a = \frac{e^a - e^{-a}}2$.</p>
 <p><b>Étape 2 : On développe les produits.</b></p>
 $$4\operatorname{ch}a\operatorname{ch}b = e^{a+b} + e^{a-b} + e^{-a+b} + e^{-a-b},\qquad4\operatorname{sh}a\operatorname{sh}b = e^{a+b} - e^{a-b} - e^{-a+b} + e^{-a-b}.$$
@@ -8743,6 +8759,7 @@ $$4\operatorname{ch}a\operatorname{ch}b = e^{a+b} + e^{a-b} + e^{-a+b} + e^{-a-b
 <ul class="sbl"><li>$\displaystyle \operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}}$</li><li>$\displaystyle \operatorname{argch}'x = \frac1{\sqrt{x^2 - 1}}$</li><li>$\displaystyle \operatorname{argth}'x = \frac1{1 - x^2}$</li></ul></div>
 <p>Elles ne sont plus au programme : dans une copie, on redémontre la formule logarithmique (exemple 13) ou on écrit directement le $\ln$. Elles servent surtout pour les primitives : $\int\frac{dx}{\sqrt{x^2 + 1}} = \ln(x + \sqrt{x^2 + 1})$.</p>
 <p class="ml">Exemple 13 : retrouver $\operatorname{argsh}$</p>
+<p><b>Résoudre $\operatorname{sh}y = x$ d'inconnue $y$, et en déduire une expression de $\operatorname{argsh}x$ avec $\ln$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On résout $\operatorname{sh}y = x$ en posant $Y = e^y > 0$.</p>
 <p><b>Étape 2 : En $Y$.</b> $\operatorname{sh}y = \frac{e^y - e^{-y}}2 = \frac{Y - \frac1Y}2$. Donc $\frac{Y - \frac1Y}2 = x\iff Y - \frac1Y = 2x\iff Y^2 - 1 = 2xY$ (on multiplie par $Y > 0$) $\iff Y^2 - 2xY - 1 = 0$.</p>
 <p><b>Étape 3 : Les racines.</b> $\Delta = (-2x)^2 - 4\times1\times(-1) = 4x^2 + 4 = 4(x^2 + 1)$, $\sqrt\Delta = 2\sqrt{x^2 + 1}$, donc $Y = \frac{2x\pm2\sqrt{x^2 + 1}}2 = x\pm\sqrt{x^2 + 1}$. Comme $\sqrt{x^2 + 1} > \sqrt{x^2} = |x|$, $x - \sqrt{x^2 + 1} \lt 0$ : seule $x + \sqrt{x^2 + 1}$ est $> 0$.</p>
@@ -8784,6 +8801,7 @@ $$4\operatorname{ch}a\operatorname{ch}b = e^{a+b} + e^{a-b} + e^{-a+b} + e^{-a-b
 
 <h2 id="u-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $\arctan\frac12 + \arctan\frac13 = \frac\pi4$</p>
+<p><b>Montrer que $\arctan\frac12 + \arctan\frac13 = \frac\pi4$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et $\tan$ est injective sur $]-\frac\pi2, \frac\pi2[$.</p>
 <p><b>Étape 2 : Le $\tan$ de la somme.</b> Avec $a = \arctan\frac12$, $b = \arctan\frac13$ :</p>
 $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} = 1.$$
@@ -8791,12 +8809,14 @@ $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} 
 <p><b>Étape 4 : Conclusion.</b> Sur $]0, \frac\pi2[$, le seul angle de tangente $1$ est $\frac\pi4$ : $\cG{\arctan\frac12 + \arctan\frac13 = \frac\pi4}$.</p>
 
 <p class="ml">Exercice 2 : $\lim\limits_{x\to+\infty}\big(1 + \frac ax\big)^x$</p>
+<p>Soit $a\in\mathbb R$. <b>Calculer $\lim_{x\to+\infty}\big(1 + \frac ax\big)^x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $u^v = e^{v\ln u}$, et $\frac{\ln(1 + h)}h\to1$ quand $h\to0$.</p>
 <p><b>Étape 2 : L'exposant.</b> On pose $h = \frac ax\to0$ (si $a\neq0$), donc $x = \frac ah$ et $x\ln\big(1 + \frac ax\big) = \frac ah\ln(1 + h) = a\cdot\frac{\ln(1 + h)}h$.</p>
 <p><b>Étape 3 : Sa limite.</b> $a\cdot1 = a$.</p>
 <p><b>Étape 4 : Conclusion.</b> Par continuité de $\exp$ : $\cG{\big(1 + \frac ax\big)^x\to e^a}$ (et c'est $1$ si $a = 0$).</p>
 
 <p class="ml">Exercice 3 : $f(x) = \arcsin\frac{2x}{1 + x^2}$ pour $|x|\leq1$</p>
+<p>Soit $f(x) = \arcsin\frac{2x}{1 + x^2}$. <b>Simplifier $f(x)$ pour $|x|\leq1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sin(2\theta) = \frac{2\tan\theta}{1 + \tan^2\theta}$, et $\arcsin(\sin y) = y$ si $y\in[-\frac\pi2, \frac\pi2]$.</p>
 <p><b>Étape 2 : On pose</b> $\theta = \arctan x$. Pour $|x|\leq1$, $\theta\in[-\frac\pi4, \frac\pi4]$.</p>
 <p><b>Étape 3 : On reconnaît un sinus.</b> $\sin(2\theta) = 2\sin\theta\cos\theta = 2\frac{\sin\theta}{\cos\theta}\cos^2\theta = 2\tan\theta\cdot\frac1{1 + \tan^2\theta}$ (car $\cos^2\theta = \frac1{1 + \tan^2\theta}$). Avec $\tan\theta = x$ : $\sin(2\theta) = \frac{2x}{1 + x^2}$.</p>
@@ -10201,14 +10221,14 @@ $$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est continue en}\ (0, 0)}$.</p>
 
 <p class="ml">Exemple 2 : pas de limite, par les droites</p>
-<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$ sur $\mathbb R^2\setminus\{(0, 0)\}$.</p>
+<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$ sur $\mathbb R^2\setminus\{(0, 0)\}$. <b>Montrer que $f$ n'a pas de limite en $(0, 0)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Deux chemins, deux limites différentes $\Rightarrow$ pas de limite.</p>
 <p><b>Étape 2 : Sur la droite $y = mx$</b> ($x\neq0$) : on remplace $y$ par $mx$ : numérateur $x\cdot mx = mx^2$, dénominateur $x^2 + m^2x^2 = x^2(1 + m^2)$, donc $f(x, mx) = \frac{mx^2}{x^2(1 + m^2)} = \frac m{1 + m^2}$ (on simplifie par $x^2\neq0$).</p>
 <p><b>Étape 3 : Deux droites.</b> $m = 0$ : $\frac0{1 + 0} = 0$. $m = 1$ : $\frac1{1 + 1} = \frac12$. La valeur dépend de la droite.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{n'a pas de limite en}\ (0, 0)}$ (en polaires, $f = \cos\theta\sin\theta$ dépend de $\theta$).</p>
 
 <p class="ml">Exemple 3 : les droites ne suffisent pas</p>
-<p>$f(x, y) = \dfrac{x^2y}{x^4 + y^2}$.</p>
+<p>$f(x, y) = \dfrac{x^2y}{x^4 + y^2}$. <b>Montrer que $f$ a la même limite $0$ le long de toutes les droites passant par $(0, 0)$, mais n'est pas continue en $(0, 0)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Avoir la même limite sur toutes les droites ne prouve <b>pas</b> la continuité.</p>
 <p><b>Étape 2 : Sur $y = mx$</b> ($m\neq0$) : $f(x, mx) = \frac{x^2\cdot mx}{x^4 + m^2x^2} = \frac{mx^3}{x^2(x^2 + m^2)} = \frac{mx}{x^2 + m^2}\to\frac{0}{0 + m^2} = 0$. Sur l'axe $x = 0$ : $f(0, y) = \frac0{y^2} = 0$.</p>
 <p><b>Étape 3 : Sur la parabole $y = x^2$.</b> Numérateur $x^2\cdot x^2 = x^4$, dénominateur $x^4 + (x^2)^2 = 2x^4$, donc $f(x, x^2) = \frac{x^4}{2x^4} = \frac12$ pour tout $x\neq0$.</p>
@@ -10221,7 +10241,7 @@ $$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
 <p>L'existence des dérivées partielles (et même de toutes les dérivées directionnelles) ne donne <b>pas</b> la continuité : voir l'exemple 4.</p>
 
 <p class="ml">Exemple 4 : des dérivées partielles en un point problématique</p>
-<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$, $f(0, 0) = 0$. <b>Montrer que $f$ admet des dérivées partielles en $(0, 0)$ et les calculer.</b></p>
 <p><b>Étape 1 : Rappel.</b> En $(0, 0)$, on utilise le taux d'accroissement.</p>
 <p><b>Étape 2 : Selon $x$.</b> Sur l'axe : $f(t, 0) = \frac{t\times0}{t^2 + 0} = 0$, donc $\frac{f(t, 0) - f(0, 0)}t = \frac{0 - 0}t = 0\to0$ : $\frac{\partial f}{\partial x}(0, 0) = 0$.</p>
 <p><b>Étape 3 : Selon $y$.</b> De même $f(0, t) = 0$ : $\frac{\partial f}{\partial y}(0, 0) = 0$.</p>
@@ -10235,7 +10255,7 @@ $$\textbf{Si les dérivées partielles existent et sont continues sur}\ U\ \text
 <p><b>1.</b> Continuité (sinon, pas différentiable). <b>2.</b> Dérivées partielles par taux d'accroissement : elles donnent le <b>seul candidat</b> $L(h) = \partial_xf\,h_1 + \partial_yf\,h_2$. <b>3.</b> Étudier $\frac{f(a + h) - f(a) - L(h)}{\|h\|}$ : différentiable si et seulement si ça tend vers $0$.</p>
 
 <p class="ml">Exemple 5 : différentiable en $(0, 0)$</p>
-<p>$f(x, y) = \dfrac{x^2y^2}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p>$f(x, y) = \dfrac{x^2y^2}{x^2 + y^2}$, $f(0, 0) = 0$. <b>Montrer que $f$ est différentiable en $(0, 0)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Candidat $L$ par les dérivées partielles, puis $\frac{f(h) - f(0) - L(h)}{\|h\|}\to0$.</p>
 <p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = \frac{t^2\times0}{t^2} = 0$ et de même $f(0, t) = 0$, donc les taux $\frac{f(t, 0) - 0}t$ et $\frac{f(0, t) - 0}t$ sont nuls : $\partial_xf(0, 0) = \partial_yf(0, 0) = 0$, le candidat est $L(h) = 0\cdot h_1 + 0\cdot h_2 = 0$.</p>
 <p><b>Étape 3 : On majore.</b> $(x^2 - y^2)^2\geq0$ donne $x^4 + y^4\geq2x^2y^2$, donc $(x^2 + y^2)^2 = x^4 + 2x^2y^2 + y^4\geq4x^2y^2$, soit $x^2y^2\leq\frac{(x^2 + y^2)^2}4 = \frac{r^4}4$ :</p>
@@ -10243,7 +10263,7 @@ $$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\fra
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est différentiable en}\ (0, 0)\ \text{et}\ df(0, 0) = 0}$.</p>
 
 <p class="ml">Exemple 6 : continue, des dérivées partielles, mais pas différentiable</p>
-<p>$f(x, y) = \dfrac{x^3 + y^3}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
+<p>$f(x, y) = \dfrac{x^3 + y^3}{x^2 + y^2}$, $f(0, 0) = 0$. <b>Montrer que $f$ est continue et admet des dérivées partielles en $(0, 0)$, mais n'y est pas différentiable.</b></p>
 <p><b>Étape 1 : Rappel.</b> Même méthode : candidat, puis quotient.</p>
 <p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = \frac{t^3 + 0}{t^2 + 0} = t$, donc $\frac{f(t, 0) - 0}t = 1$ et $\partial_xf(0, 0) = 1$. De même $f(0, t) = t$ et $\partial_yf(0, 0) = 1$. Candidat : $L(x, y) = 1\cdot x + 1\cdot y = x + y$.</p>
 <p><b>Étape 3 : Le quotient en polaires.</b></p>
@@ -10258,6 +10278,7 @@ $$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac
 <p class="ml">La méthode</p>
 <p>On développe $f(a + h)$, on sépare le terme <b>linéaire en $h$</b> et le reste, et on montre que le reste est un $o(\|h\|)$ (souvent un $O(\|h\|^2)$).</p>
 <p class="ml">Exemple 7 : $f(M) = M^2$</p>
+<p>Soit $f:\mathcal M_n(\mathbb R)\to\mathcal M_n(\mathbb R)$, $f(M) = M^2$. <b>Montrer que $f$ est différentiable et calculer sa différentielle.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f(M + H) = f(M) + L(H) + o(\|H\|)$ avec $L$ linéaire.</p>
 <p><b>Étape 2 : On développe</b> (sans commuter !) : $(M + H)^2 = (M + H)(M + H) = M\cdot M + M\cdot H + H\cdot M + H\cdot H = M^2 + MH + HM + H^2$. On ne regroupe pas $MH + HM$ en $2MH$ : en général $MH\neq HM$.</p>
 <p><b>Étape 3 : La partie linéaire.</b> $L(H) = MH + HM$ est linéaire en $H$.</p>
@@ -10265,6 +10286,7 @@ $$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac
 <p><b>Étape 5 : Conclusion.</b> $\cG{df(M)(H) = MH + HM}$ (et $2MH$ seulement si $M$ et $H$ commutent).</p>
 
 <p class="ml">Exemple 8 : $f(x) = \|x\|^2$ dans un espace euclidien</p>
+<p>Soit $f(x) = \|x\|^2$ sur un espace euclidien $E$. <b>Montrer que $f$ est différentiable et calculer son gradient.</b></p>
 <p><b>Étape 1 : Rappel.</b> On isole la partie linéaire de $f(x + h) - f(x)$.</p>
 <p><b>Étape 2 : On développe.</b> $\|x + h\|^2 = \langle x + h, x + h\rangle = \langle x, x\rangle + \langle x, h\rangle + \langle h, x\rangle + \langle h, h\rangle = \|x\|^2 + 2\langle x, h\rangle + \|h\|^2$ (symétrie).</p>
 <p><b>Étape 3 : Les morceaux.</b> $h\mapsto2\langle x, h\rangle$ est linéaire, et $\frac{\|h\|^2}{\|h\|} = \|h\|\to0$, donc $\|h\|^2 = o(\|h\|)$.</p>
@@ -10325,6 +10347,7 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 <p>Un point critique n'est pas forcément un extremum, et la condition $\nabla f(a) = 0$ ne vaut que sur un <b>ouvert</b> : au bord d'un domaine fermé, un extremum peut avoir un gradient non nul.</p>
 
 <p class="ml">Exemple 13 : $f(x, y) = x^3 + y^3 - 3xy$</p>
+<p><b>Déterminer les points critiques de $f(x, y) = x^3 + y^3 - 3xy$ et leur nature.</b></p>
 <p><b>Étape 1 : Rappel.</b> Points critiques par $\nabla f = 0$, puis $rt - s^2$ en chacun.</p>
 <p><b>Étape 2 : Les points critiques.</b> $\partial_xf = 3x^2 - 3y = 0$ donne $y = x^2$. On remplace dans $\partial_yf = 3y^2 - 3x = 0$ : $3x^4 - 3x = 0$, soit $3x(x^3 - 1) = 0$, donc $x = 0$ ou $x^3 = 1$, c'est-à-dire $x = 1$. Puis $y = x^2$ : points $\cR{(0, 0)}$ et $\cR{(1, 1)}$.</p>
 <p><b>Étape 3 : Les dérivées secondes.</b> On dérive $\partial_xf = 3x^2 - 3y$ : en $x$, $r = 6x$ ; en $y$, $s = -3$. On dérive $\partial_yf = 3y^2 - 3x$ en $y$ : $t = 6y$.</p>
@@ -10337,7 +10360,7 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 <p><b>1. Sur un compact</b> : $f$ continue atteint son min et son max. On compare les valeurs aux <b>points critiques intérieurs</b> et le min/max <b>sur le bord</b> (qu'on paramètre). <b>2. Sur un ouvert</b> : au point critique $a$, on étudie le signe de $f(a + h) - f(a)$ <b>exactement</b>, pour tout $h$.</p>
 
 <p class="ml">Exemple 14 : un minimum global sur $\mathbb R^2$</p>
-<p>$f(x, y) = x^2 + xy + y^2 - 3x$.</p>
+<p>$f(x, y) = x^2 + xy + y^2 - 3x$. <b>Montrer que $f$ admet un minimum global sur $\mathbb R^2$ et le calculer.</b></p>
 <p><b>Étape 1 : Rappel.</b> Point critique, puis signe de $f(a + h) - f(a)$ pour tout $h$.</p>
 <p><b>Étape 2 : Le point critique.</b> $\partial_xf = 2x + y - 3$ et $\partial_yf = x + 2y$. La 2<sup>e</sup> équation donne $x = -2y$ ; dans la 1<sup>re</sup> : $-4y + y - 3 = 0$, soit $-3y = 3$, $y = -1$, puis $x = 2$ : $\cR{a = (2, -1)}$. Valeur : $f(2, -1) = 2^2 + 2\times(-1) + (-1)^2 - 3\times2 = 4 - 2 + 1 - 6 = -3$.</p>
 <p><b>Étape 3 : L'écart exact.</b> On développe chaque morceau :</p>
@@ -10347,7 +10370,7 @@ $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \fra
 <p><b>Étape 4 : Conclusion.</b> $\cG{\min_{\mathbb R^2}f = -3}$, atteint seulement en $(2, -1)$.</p>
 
 <p class="ml">Exemple 15 : sur un disque fermé</p>
-<p>Extrema de $f(x, y) = x^2 + y^2 - x$ sur $D = \{x^2 + y^2\leq1\}$.</p>
+<p><b>Déterminer les extrema de $f(x, y) = x^2 + y^2 - x$ sur le disque $D = \{x^2 + y^2\leq1\}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $D$ compact, $f$ continue : min et max atteints. Candidats : points critiques intérieurs et bord.</p>
 <p><b>Étape 2 : L'intérieur.</b> $\partial_xf = 2x - 1$ et $\partial_yf = 2y$ : $\nabla f = 0\iff x = \frac12,\ y = 0$. Ce point est intérieur ($\frac14 + 0 \lt 1$), et $f\big(\frac12, 0\big) = \frac14 + 0 - \frac12 = -\frac14$.</p>
 <p><b>Étape 3 : Le bord.</b> Sur $x^2 + y^2 = 1$, on remplace $x^2 + y^2$ par $1$ : $f = 1 - x$, avec $x\in[-1, 1]$. Cette fonction de $x$ décroît : max en $x = -1$, $1 - (-1) = 2$, au point $(-1, 0)$ ; min en $x = 1$, $1 - 1 = 0$, au point $(1, 0)$.</p>
@@ -10358,6 +10381,7 @@ $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \fra
 <div class="sbox">$$X = \{g = 0\},\ f, g\ \mathcal C^1,\ \nabla g(a)\neq0:\quad f_{|X}\ \text{a un extremum en}\ a\ \Longrightarrow\ \exists\lambda\in\mathbb R,\ \nabla f(a) = \lambda\nabla g(a).$$</div>
 <p>On résout le système $\nabla f = \lambda\nabla g$, $g = 0$ ; si $X$ est compact, le max et le min sont parmi les solutions.</p>
 <p class="ml">Exemple 16 : max de $xy$ sur le cercle $x^2 + y^2 = 2$</p>
+<p><b>Déterminer le maximum de $f(x, y) = xy$ sur le cercle $x^2 + y^2 = 2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\nabla f(a) = \lambda\nabla g(a)$ aux extrema, si $\nabla g(a)\neq0$.</p>
 <p><b>Étape 2 : Existence.</b> Le cercle est compact et $f(x, y) = xy$ continue : min et max existent. $\nabla g = (2x, 2y)\neq0$ sur le cercle.</p>
 <p><b>Étape 3 : Le système.</b> $\nabla f = (\partial_x(xy), \partial_y(xy)) = (y, x)$. L'équation $(y, x) = \lambda(2x, 2y)$ donne $y = 2\lambda x$ et $x = 2\lambda y$. On remplace $y$ dans la 2<sup>e</sup> : $x = 2\lambda\cdot2\lambda x = 4\lambda^2x$, et de même $y = 4\lambda^2y$. Comme $(x, y)\neq(0, 0)$ (on est sur le cercle), $4\lambda^2 = 1$, $\lambda = \pm\frac12$, et $y = 2\lambda x = \pm x$.</p>
@@ -10368,7 +10392,7 @@ $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \fra
 <div class="sbox">$$\text{Surface}\ z = f(x, y):\quad z = f(a, b) + \partial_xf(a, b)(x - a) + \partial_yf(a, b)(y - b).$$
 $$\text{Surface}\ \{g = 0\},\ \nabla g(M_0)\neq0:\quad\text{plan tangent}\ \langle\nabla g(M_0), M - M_0\rangle = 0\ (\nabla g\ \text{normal}).$$</div>
 <p class="ml">Exemple 17 : plan tangent à une sphère</p>
-<p>Plan tangent à $x^2 + y^2 + z^2 = 3$ en $M_0 = (1, 1, 1)$.</p>
+<p><b>Déterminer une équation du plan tangent à la sphère $x^2 + y^2 + z^2 = 3$ au point $M_0 = (1, 1, 1)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\nabla g(M_0)$ est normal au plan tangent.</p>
 <p><b>Étape 2 : Le gradient.</b> $g(x, y, z) = x^2 + y^2 + z^2 - 3$, $\nabla g = (2x, 2y, 2z)$, donc $\nabla g(M_0) = (2, 2, 2)\neq0$.</p>
 <p><b>Étape 3 : L'équation.</b> $\langle\nabla g(M_0), M - M_0\rangle = 0$ avec $M - M_0 = (x - 1, y - 1, z - 1)$ : $2(x - 1) + 2(y - 1) + 2(z - 1) = 0$. On divise par $2$ : $x + y + z - 3 = 0$.</p>
@@ -10426,6 +10450,7 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 <p><b>Étape 5 : Conclusion.</b> $\cG{-1\neq1}$ : $f$ n'est pas $\mathcal C^2$ en $(0, 0)$ (elle est pourtant $\mathcal C^1$).</p>
 
 <p class="ml">Exercice 3 : le gradient de $x\mapsto\langle Ax, x\rangle$</p>
+<p>Soit $A\in\mathcal S_n(\mathbb R)$ et $f(x) = \langle Ax, x\rangle$ sur $\mathbb R^n$. <b>Calculer le gradient de $f$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Développer $f(x + h)$ et isoler la partie linéaire.</p>
 <p><b>Étape 2 : On développe.</b> $\langle A(x + h), x + h\rangle = \langle Ax, x\rangle + \langle Ax, h\rangle + \langle Ah, x\rangle + \langle Ah, h\rangle$.</p>
 <p><b>Étape 3 : On transpose.</b> $\langle Ah, x\rangle = \langle h, A^\top x\rangle$, donc la partie linéaire est $\langle(A + A^\top)x, h\rangle$ ; et $|\langle Ah, h\rangle|\leq|||A|||\,\|h\|^2 = o(\|h\|)$.</p>
@@ -11093,7 +11118,7 @@ $$E(XY) = \frac16\sum_{i\neq j}ij = \frac16(36 - 14) = \frac{22}6 = \frac{11}3.$
 <div class="sbox">$$\textbf{Associative}:\ (x*y)*z = x*(y*z).\quad\textbf{Commutative}:\ x*y = y*x.\quad\textbf{Neutre}\ \cO e:\ x*e = e*x = x.\quad\textbf{Inversible}:\ \exists\cO{x'},\ x*x' = x'*x = e.$$
 $$\text{Le neutre est unique}.\quad\text{L'inverse est unique (loi associative)}.\quad(x*y)^{-1} = y^{-1}*x^{-1}\ \text{(ordre inversé)}.$$</div>
 <p class="ml">Exemple 1 : étudier une loi</p>
-<p>Sur $\mathbb R$ : $x*y = x + y - xy$.</p>
+<p>Sur $\mathbb R$ : $x*y = x + y - xy$. <b>Étudier cette loi : associativité, commutativité, élément neutre, éléments inversibles.</b></p>
 <p><b>Étape 1 : Rappel.</b> On vérifie associativité, commutativité, neutre, inversibles.</p>
 <p><b>Étape 2 : L'astuce.</b> $1 - x*y = 1 - x - y + xy = (1 - x)(1 - y)$.</p>
 <p><b>Étape 3 : Associativité, commutativité.</b> On applique l'astuce deux fois : $1 - (x*y)*z = (1 - x*y)(1 - z) = (1 - x)(1 - y)(1 - z)$. De même $1 - x*(y*z) = (1 - x)(1 - y*z) = (1 - x)(1 - y)(1 - z)$. Les deux sont égaux, donc $(x*y)*z = x*(y*z)$. Et $(1 - x)(1 - y) = (1 - y)(1 - x)$ donne $x*y = y*x$.</p>
@@ -11122,12 +11147,14 @@ $$\textbf{Sous-groupes de}\ (\mathbb Z, +):\ \text{exactement les}\ n\mathbb Z,\
 <p>Une <b>réunion</b> de sous-groupes n'est en général pas un sous-groupe : $2\mathbb Z\cup3\mathbb Z$ contient $2$ et $3$ mais pas $5$.</p>
 
 <p class="ml">Exemple 3 : $\mathbb U$ et $\mathbb U_n$</p>
+<p><b>Montrer que $\mathbb U$ et $\mathbb U_n$ sont des sous-groupes de $(\mathbb C^*, \times)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Sous-groupe : contient le neutre, stable par $xy^{-1}$.</p>
 <p><b>Étape 2 : $\mathbb U = \{z,\ |z| = 1\}\subset\mathbb C^*$.</b> $|1| = 1$, et si $|z| = |w| = 1$ : $|zw^{-1}| = \frac{|z|}{|w|} = 1$.</p>
 <p><b>Étape 3 : $\mathbb U_n = \{z,\ z^n = 1\}$.</b> $1^n = 1$, et si $z^n = w^n = 1$ : $(zw^{-1})^n = \frac{z^n}{w^n} = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb U\ \text{et}\ \mathbb U_n\ \text{sont des sous-groupes de}\ (\mathbb C^*, \times)}$, et $\mathbb U_n\subset\mathbb U$.</p>
 
 <p class="ml">Exemple 4 : les sous-groupes de $\mathbb Z$</p>
+<p><b>Montrer que les sous-groupes de $(\mathbb Z, +)$ sont exactement les $n\mathbb Z$, $n\in\mathbb N$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Division euclidienne $a = nq + r$, $0\leq r \lt n$.</p>
 <p><b>Étape 2 : Le candidat.</b> Soit $H\neq\{0\}$ un sous-groupe de $(\mathbb Z, +)$. Il contient un entier $> 0$ (si $a\in H$, $-a\in H$). Soit $n$ le plus petit élément $> 0$ de $H$.</p>
 <p><b>Étape 3 : $n\mathbb Z\subset H$.</b> $H$ est stable par somme et opposé : $kn\in H$ pour tout $k\in\mathbb Z$.</p>
@@ -11140,12 +11167,14 @@ $$\textbf{Sous-groupes de}\ (\mathbb Z, +):\ \text{exactement les}\ n\mathbb Z,\
 <p>Un morphisme bijectif est un <b>isomorphisme</b>, et sa réciproque est un morphisme. Pour montrer qu'une partie est un sous-groupe, il suffit souvent de la voir comme un <b>noyau</b> ou une <b>image</b>.</p>
 
 <p class="ml">Exemple 5 : $\exp$ est un isomorphisme</p>
+<p><b>Montrer que $\exp$ est un isomorphisme de $(\mathbb R, +)$ sur $(\mathbb R_+^*, \times)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Morphisme : $f(x + y) = f(x)f(y)$ ; bijectif : isomorphisme.</p>
 <p><b>Étape 2 : Morphisme.</b> $\cV f = \exp:(\mathbb R, +)\to(\mathbb R_+^*, \times)$ : $e^{x + y} = e^xe^y$.</p>
 <p><b>Étape 3 : Bijectif.</b> $\exp$ est une bijection de $\mathbb R$ sur $]0, +\infty[$, de réciproque $\ln$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(\mathbb R, +)\simeq(\mathbb R_+^*, \times)}$ ; et $\ln(xy) = \ln x + \ln y$ dit que $\ln$ est l'isomorphisme réciproque.</p>
 
 <p class="ml">Exemple 6 : $z\mapsto z^n$ sur $\mathbb C^*$</p>
+<p>Soit $n\geq1$ et $f:z\mapsto z^n$ sur $\mathbb C^*$. <b>Montrer que $f$ est un morphisme de groupes, déterminer son noyau et son image.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\ker f$ et $\operatorname{Im}f$ ; injectif $\iff\ker f = \{1\}$.</p>
 <p><b>Étape 2 : Morphisme.</b> $(zw)^n = z^nw^n$ ($\mathbb C^*$ est commutatif).</p>
 <p><b>Étape 3 : Le noyau.</b> $\ker f = \{z,\ z^n = 1\} = \mathbb U_n$, de cardinal $n$ : pas injectif pour $n\geq2$.</p>
@@ -11153,6 +11182,7 @@ $$\textbf{Sous-groupes de}\ (\mathbb Z, +):\ \text{exactement les}\ n\mathbb Z,\
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb U_n,\ \operatorname{Im}f = \mathbb C^*}$ (et on retrouve que $\mathbb U_n$ est un sous-groupe).</p>
 
 <p class="ml">Exemple 7 : $SL_n$ est un sous-groupe</p>
+<p><b>Montrer que $SL_n(\mathbb K) = \{A,\ \det A = 1\}$ est un sous-groupe de $GL_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un noyau de morphisme est un sous-groupe.</p>
 <p><b>Étape 2 : Le morphisme.</b> $\cV{\det}:(GL_n(\mathbb K), \times)\to(\mathbb K^*, \times)$, avec $\det(AB) = \det A\det B$.</p>
 <p><b>Étape 3 : Le noyau.</b> $\ker\det = \{A,\ \det A = 1\} = SL_n(\mathbb K)$.</p>
@@ -11166,13 +11196,14 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p>Dans $\mathcal M_n(\mathbb K)$ ou $\mathcal F(\mathbb R, \mathbb R)$, $ab = 0$ n'implique <b>pas</b> $a = 0$ ou $b = 0$. Et le binôme exige $ab = ba$.</p>
 
 <p class="ml">Exemple 8 : $1 - N$ est inversible si $N$ est nilpotent</p>
-<p>$A$ un anneau, $N^p = 0$.</p>
+<p>$A$ un anneau, $N^p = 0$. <b>Montrer que $1 - N$ est inversible et donner son inverse.</b></p>
 <p><b>Étape 1 : Rappel.</b> $1$ commute avec $N$ : $1 - N^p = (1 - N)\sum_{k=0}^{p-1}N^k$.</p>
 <p><b>Étape 2 : On applique.</b> $1$ et $N$ commutent : $(1 - N)(1 + N + \dots + N^{p-1}) = (1 + N + \dots + N^{p-1}) - (N + N^2 + \dots + N^p) = 1 - N^p$, et $N^p = 0$, donc ce produit vaut $1$.</p>
 <p><b>Étape 3 : Dans l'autre sens.</b> Le même calcul donne $(1 + N + \dots + N^{p-1})(1 - N) = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(1 - N)^{-1} = \sum_{k=0}^{p-1}N^k}$ (c'est la série géométrique, qui s'arrête).</p>
 
 <p class="ml">Exemple 9 : un anneau non intègre</p>
+<p><b>Montrer que l'anneau $\mathcal F(\mathbb R, \mathbb R)$ n'est pas intègre.</b></p>
 <p><b>Étape 1 : Rappel.</b> Intègre : $fg = 0\Rightarrow f = 0$ ou $g = 0$.</p>
 <p><b>Étape 2 : Deux fonctions.</b> Dans $\mathcal F(\mathbb R, \mathbb R)$ : $f = \mathbb 1_{]-\infty, 0]}$ et $g = \mathbb 1_{]0, +\infty[}$, toutes deux non nulles.</p>
 <p><b>Étape 3 : Le produit.</b> Si $x\leq0$ : $g(x) = 0$, donc $f(x)g(x) = 1\times0 = 0$. Si $x > 0$ : $f(x) = 0$, donc $0\times1 = 0$. Ainsi $fg = 0$.</p>
@@ -11181,7 +11212,7 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <h2 id="g-sa">7. Sous-anneaux, éléments inversibles</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \cR B\ \text{sous-anneau de}\ A\iff1_A\in\cR B,\ \ \forall x, y\in\cR B,\ x - y\in\cR B\ \text{et}\ xy\in\cR B$</li><li>$\displaystyle A^\times\ \text{est un groupe pour}\ \times$</li></ul></div>
 <p class="ml">Exemple 10 : $\mathbb Z[\sqrt2]$</p>
-<p>$\mathbb Z[\sqrt2] = \{a + b\sqrt2,\ a, b\in\mathbb Z\}$.</p>
+<p>$\mathbb Z[\sqrt2] = \{a + b\sqrt2,\ a, b\in\mathbb Z\}$. <b>Montrer que $\mathbb Z[\sqrt2]$ est un sous-anneau de $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Contient $1$, stable par différence et par produit.</p>
 <p><b>Étape 2 : $1$.</b> $1 = 1 + 0\sqrt2$.</p>
 <p><b>Étape 3 : Différence.</b> $(a + b\sqrt2) - (c + d\sqrt2) = (a - c) + (b - d)\sqrt2$.</p>
@@ -11189,6 +11220,7 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Z[\sqrt2]\ \text{est un sous-anneau de}\ \mathbb R}$ (donc intègre).</p>
 
 <p class="ml">Exemple 11 : les inversibles de $\mathbb Z[i]$</p>
+<p>Soit $\mathbb Z[i] = \{a + ib,\ a, b\in\mathbb Z\}$. <b>Déterminer les éléments inversibles de l'anneau $\mathbb Z[i]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On utilise une quantité <b>multiplicative</b> : $N(z) = |z|^2 = a^2 + b^2$ pour $z = a + ib$, avec $N(zw) = N(z)N(w)$.</p>
 <p><b>Étape 2 : Si $z$ est inversible</b> dans $\mathbb Z[i]$ : $zw = 1$, et $N(zw) = |zw|^2 = |z|^2|w|^2 = N(z)N(w)$, donc $N(z)N(w) = N(1) = 1$. Deux entiers $\geq0$ de produit $1$ valent $1$ : $N(z) = 1$.</p>
 <p><b>Étape 3 : On résout</b> $a^2 + b^2 = 1$ en entiers : si $|a|\geq1$ et $|b|\geq1$, $a^2 + b^2\geq2$ ; donc l'un est nul, et l'autre a un carré égal à $1$ : $(\pm1, 0)$ ou $(0, \pm1)$, soit $z\in\{1, -1, i, -i\}$.</p>
@@ -11198,7 +11230,7 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <h2 id="g-corps">8. Corps</h2>
 <div class="sbox">$$\mathbb K\ \text{corps}:\ \text{anneau commutatif},\ 1\neq0,\ \text{tout élément non nul est inversible}.\qquad\text{Un corps est intègre}.$$</div>
 <p class="ml">Exemple 12 : $\mathbb Q(\sqrt2)$ est un corps</p>
-<p>$\mathbb Q(\sqrt2) = \{a + b\sqrt2,\ a, b\in\mathbb Q\}$.</p>
+<p>$\mathbb Q(\sqrt2) = \{a + b\sqrt2,\ a, b\in\mathbb Q\}$. <b>Montrer que $\mathbb Q(\sqrt2)$ est un sous-corps de $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Sous-anneau de $\mathbb R$ (comme l'exemple 10), puis inverses.</p>
 <p><b>Étape 2 : La quantité conjuguée.</b> $(a + b\sqrt2)(a - b\sqrt2) = a^2 - 2b^2$.</p>
 <p><b>Étape 3 : Elle n'est pas nulle.</b> Si $a^2 = 2b^2$ avec $(a, b)\neq(0, 0)$, alors $b\neq0$ et $\sqrt2 = \big|\frac ab\big|\in\mathbb Q$ : absurde.</p>
@@ -11240,6 +11272,7 @@ $$\frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{(a + b\sqrt2)(a - b\sqrt2)} = \frac{a
 
 <h2 id="g-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $x^2 = e$ pour tout $x$, alors $G$ est abélien</p>
+<p>Soit $G$ un groupe tel que $x^2 = e$ pour tout $x\in G$. <b>Montrer que $G$ est abélien.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x^2 = e\iff x = x^{-1}$, et $(xy)^{-1} = y^{-1}x^{-1}$.</p>
 <p><b>Étape 2 : Tout élément est son propre inverse.</b> $x^{-1} = x$ pour tout $x$.</p>
 <p><b>Étape 3 : On l'applique à $xy$.</b> $xy = (xy)^{-1} = y^{-1}x^{-1} = yx$.</p>
@@ -11254,6 +11287,7 @@ $$\frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{(a + b\sqrt2)(a - b\sqrt2)} = \frac{a
 <p><b>Étape 5 : Conclusion.</b> $\cG{H\cup K\ \text{sous-groupe}\iff H\subset K\ \text{ou}\ K\subset H}$.</p>
 
 <p class="ml">Exercice 3 : les morphismes de $(\mathbb Q, +)$ dans $(\mathbb Z, +)$</p>
+<p><b>Déterminer tous les morphismes de groupes de $(\mathbb Q, +)$ dans $(\mathbb Z, +)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f(nx) = nf(x)$ pour un morphisme et $n\in\mathbb N$.</p>
 <p><b>Étape 2 : On divise.</b> Pour $x\in\mathbb Q$ et $n\geq1$ : $f(x) = f\big(n\cdot\frac xn\big) = nf\big(\frac xn\big)$.</p>
 <p><b>Étape 3 : Divisible par tout entier.</b> $f(x)\in\mathbb Z$ est donc divisible par tout $n\geq1$, en particulier par $|f(x)| + 1$.</p>
