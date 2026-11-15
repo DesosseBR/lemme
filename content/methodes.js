@@ -5673,15 +5673,15 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 
 <p class="ml">Exemple 45 : $u_{n+1} = \frac{u_n}2 + \frac2{v_n}$, $v_{n+1} = \frac1{2u_n} + 2v_n$</p>
 <p><b>Étape 1 : Rappel.</b> Étudier d'abord une combinaison : le produit $u_nv_n$.</p>
-<p><b>Étape 2 : $v_n\to+\infty$.</b> $v_{n+1}\geq2v_n$, donc $v_n\geq2^nv_0$.</p>
+<p><b>Étape 2 : $v_n\to+\infty$.</b> $v_{n+1} = \frac1{2u_n} + 2v_n\geq2v_n$ (le premier terme est $> 0$). Donc $v_1\geq2v_0$, $v_2\geq2v_1\geq4v_0$, et par récurrence $v_n\geq2^nv_0\to+\infty$.</p>
 <p><b>Étape 3 : Le produit.</b> $u_{n+1}v_{n+1} = \frac14 + u_nv_n + \frac1{u_nv_n} + 4 = \frac{17}4 + u_nv_n + \frac1{u_nv_n}$ : croissant ; s'il convergeait vers $\ell > 0$, on aurait $\ell = \frac{17}4 + \ell + \frac1\ell$, impossible. Donc $u_nv_n\to+\infty$.</p>
 <p><b>Étape 4 : $u$.</b> $u_{n+1} - u_n = \frac2{v_n} - \frac{u_n}2 = \frac{4 - u_nv_n}{2v_n} \lt 0$ à partir d'un rang : décroissante minorée par $0$, $\to\ell$ avec $\ell = \frac\ell2 + 0$, soit $\ell = 0$.</p>
 <p><b>Conclusion.</b> $\cG{u_n\to0,\ v_n\to+\infty}$.</p>
 
 <p class="ml">Exemple 46 : $u_{n+1} = \frac{u_n^2}{u_n + v_n}$, $v_{n+1} = \frac{v_n^2}{u_n + v_n}$, $0 \lt u_0 \lt v_0$</p>
 <p><b>Étape 1 : Rappel.</b> Chercher une quantité constante ou une relation simple.</p>
-<p><b>Étape 2 : La différence.</b> $u_{n+1} - v_{n+1} = \frac{u_n^2 - v_n^2}{u_n + v_n} = u_n - v_n$ : constante, égale à $u_0 - v_0$.</p>
-<p><b>Étape 3 : Le quotient.</b> $\frac{u_{n+1}}{v_{n+1}} = \Big(\frac{u_n}{v_n}\Big)^2$, donc $\frac{u_n}{v_n} = q^{2^n}$ avec $q = \frac{u_0}{v_0}\in]0, 1[$.</p>
+<p><b>Étape 2 : La différence.</b> $u_{n+1} - v_{n+1} = \frac{u_n^2}{u_n + v_n} - \frac{v_n^2}{u_n + v_n} = \frac{u_n^2 - v_n^2}{u_n + v_n} = \frac{(u_n - v_n)(u_n + v_n)}{u_n + v_n} = u_n - v_n$ : constante, égale à $u_0 - v_0$.</p>
+<p><b>Étape 3 : Le quotient.</b> $\frac{u_{n+1}}{v_{n+1}} = \frac{u_n^2/(u_n + v_n)}{v_n^2/(u_n + v_n)} = \frac{u_n^2}{v_n^2} = \Big(\frac{u_n}{v_n}\Big)^2$. Donc $\frac{u_1}{v_1} = q^2$, $\frac{u_2}{v_2} = (q^2)^2 = q^4$, et par récurrence $\frac{u_n}{v_n} = q^{2^n}$ avec $q = \frac{u_0}{v_0}\in]0, 1[$.</p>
 <p><b>Étape 4 : On résout.</b> $u_n = q^{2^n}v_n$ et $u_n - v_n = u_0 - v_0$ : $v_n = \frac{v_0 - u_0}{1 - q^{2^n}}\to v_0 - u_0$, puis $u_n = v_n + u_0 - v_0\to0$.</p>
 <p><b>Conclusion.</b> $\cG{u_n\to0,\quad v_n\to v_0 - u_0}$.</p>
 
@@ -5698,7 +5698,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Étape 1 : Rappel.</b> Deux extraites de limites différentes $\Rightarrow$ divergence.</p>
 <p><b>Étape 2 : Bien définie.</b> Si $u_n\in]0, 2[$ : $0 \lt 2 - u_n\leq2 + (-1)^{n+1}u_n\leq2 + u_n \lt 4$, donc $u_{n+1}\in]0, 2[$.</p>
 <p><b>Étape 3 : Les extraites.</b> $u_{2n+1} = \sqrt{2 - u_{2n}}$ et $u_{2n} = \sqrt{2 + u_{2n-1}}$. Si $u_n\to\ell$ : $\ell = \sqrt{2 + \ell}$ et $\ell = \sqrt{2 - \ell}$.</p>
-<p><b>Étape 4 : Contradiction.</b> La 1<sup>re</sup> donne $\ell^2 - \ell - 2 = 0$, $\ell = 2$ ; la 2<sup>e</sup> donne $\ell^2 + \ell - 2 = 0$, $\ell = 1$.</p>
+<p><b>Étape 4 : Contradiction.</b> La 1<sup>re</sup> : on élève au carré, $\ell^2 = 2 + \ell$, soit $\ell^2 - \ell - 2 = (\ell - 2)(\ell + 1) = 0$, et $\ell\geq0$ donne $\ell = 2$. La 2<sup>e</sup> : $\ell^2 = 2 - \ell$, soit $\ell^2 + \ell - 2 = (\ell - 1)(\ell + 2) = 0$, donc $\ell = 1$. Or $2\neq1$.</p>
 <p><b>Conclusion.</b> $\cG{(u_n)\ \text{diverge}}$.</p>
 
 <p class="ml">Exemple 49 : une suite d'entiers convergente est stationnaire</p>
@@ -7736,7 +7736,8 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 <p class="ml">Exemple 13 : par la matrice <span class="hp">programme de Spé</span></p>
 <p>$\varphi(x, y) = a\sum_ix_iy_i + b\sum_{i\neq j}x_iy_j$ sur $\mathbb R^n$ ($n\geq2$). Condition ?</p>
 <p><b>Étape 1 : Rappel.</b> $\varphi(x, y) = {}^tXAY$ avec $A$ symétrique ; $\varphi$ produit scalaire $\iff$ toutes les valeurs propres de $A$ sont $> 0$.</p>
-<p><b>Étape 2 : La matrice.</b> $A$ a des $a$ sur la diagonale et des $b$ ailleurs : $A = (a - b)I_n + bJ$.</p>
+<p><b>Étape 2 : La matrice.</b> $\varphi(e_i, e_i) = a$ et $\varphi(e_i, e_j) = b$ ($i\neq j$) :</p>
+$$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{pmatrix} = (a - b)I_n + bJ.$$
 <p><b>Étape 3 : Les valeurs propres</b> (fiche Réduction) : $a - b$ (ordre $n - 1$) et $a + (n - 1)b$.</p>
 <p><b>Étape 4 : En base orthonormée de vecteurs propres.</b> $\varphi(x, x) = (a - b)(y_1^2 + \dots + y_{n-1}^2) + (a + (n - 1)b)y_n^2$ : strictement positif pour $y\neq0$ ssi les deux coefficients le sont.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{produit scalaire}\iff a - b > 0\ \text{et}\ a + (n - 1)b > 0}$ (pour $b = 0$ : $a > 0$).</p>
@@ -7840,9 +7841,9 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 
 <p class="ml">Exemple 25 : Gram-Schmidt sur $\mathbb R_3[X]$ avec $\int_{-1}^1PQ$</p>
 <p><b>Étape 1 : Rappel.</b> $e'_k = a_k - \sum_{i \lt k}\frac{\langle e'_i, a_k\rangle}{\|e'_i\|^2}e'_i$ ; on normalise à la fin (pas de racines dans les calculs).</p>
-<p><b>Étape 2 : $e'_0, e'_1$.</b> $e'_0 = 1$, $\|e'_0\|^2 = 2$. $\langle1, X\rangle = \int_{-1}^1t\,dt = 0$ (impaire), donc $e'_1 = X$, $\|e'_1\|^2 = \frac23$.</p>
-<p><b>Étape 3 : $e'_2$.</b> $\langle1, X^2\rangle = \frac23$, $\langle X, X^2\rangle = 0$ : $e'_2 = X^2 - \frac{2/3}2 = X^2 - \frac13$.</p>
-<p><b>Étape 4 : $e'_3$.</b> $\langle1, X^3\rangle = 0$, $\langle X, X^3\rangle = \frac25$, $\langle e'_2, X^3\rangle = 0$ : $e'_3 = X^3 - \frac{2/5}{2/3}X = X^3 - \frac35X$.</p>
+<p><b>Étape 2 : $e'_0, e'_1$.</b> $e'_0 = 1$, $\|e'_0\|^2 = \int_{-1}^11\,dt = 1 - (-1) = 2$. $\langle1, X\rangle = \int_{-1}^1t\,dt = \Big[\frac{t^2}2\Big]_{-1}^1 = \frac12 - \frac12 = 0$, donc $e'_1 = X - 0 = X$, et $\|e'_1\|^2 = \int_{-1}^1t^2\,dt = \Big[\frac{t^3}3\Big]_{-1}^1 = \frac13 - \big(-\frac13\big) = \frac23$.</p>
+<p><b>Étape 3 : $e'_2$.</b> $\langle1, X^2\rangle = \int_{-1}^1t^2\,dt = \frac23$ et $\langle X, X^2\rangle = \int_{-1}^1t^3\,dt = \Big[\frac{t^4}4\Big]_{-1}^1 = \frac14 - \frac14 = 0$. Donc $e'_2 = X^2 - \frac{\langle e'_0, X^2\rangle}{\|e'_0\|^2}e'_0 - \frac{\langle e'_1, X^2\rangle}{\|e'_1\|^2}e'_1 = X^2 - \frac{2/3}2\times1 - 0 = X^2 - \frac13$.</p>
+<p><b>Étape 4 : $e'_3$.</b> $\langle1, X^3\rangle = \int_{-1}^1t^3\,dt = 0$ ; $\langle X, X^3\rangle = \int_{-1}^1t^4\,dt = \Big[\frac{t^5}5\Big]_{-1}^1 = \frac25$ ; $\langle e'_2, X^3\rangle = \int_{-1}^1\big(t^5 - \frac13t^3\big)\,dt = 0$ (fonction impaire). Donc $e'_3 = X^3 - \frac{2/5}{2/3}X = X^3 - \frac25\times\frac32X = X^3 - \frac35X$.</p>
 <p><b>Étape 5 : Les normes.</b> $\|e'_2\|^2 = \int(t^4 - \frac23t^2 + \frac19) = \frac25 - \frac49 + \frac29 = \frac8{45}$ ; $\|e'_3\|^2 = \frac27 - \frac65\times\frac25 + \frac9{25}\times\frac23 = \frac27 - \frac6{25} = \frac8{175}$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\frac{\sqrt2}2,\ \frac{\sqrt6}2X,\ \frac{3\sqrt{10}}4\Big(X^2 - \frac13\Big),\ \frac{5\sqrt{14}}4\Big(X^3 - \frac35X\Big)}$ (car $\sqrt{\frac{45}8} = \frac{3\sqrt{10}}4$ et $\sqrt{\frac{175}8} = \frac{5\sqrt{14}}4$).</p>
 
@@ -7894,7 +7895,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <p class="ml">Exemple 31 : par la définition, sans base orthogonale</p>
 <p>Projeté orthogonal de $X^2$ sur $\mathbb R_1[X]$ pour $\langle P, Q\rangle = \int_0^1PQ$.</p>
 <p><b>Étape 1 : Rappel.</b> $P = aX + b$ et $X^2 - P\perp1$, $X^2 - P\perp X$.</p>
-<p><b>Étape 2 : Les équations.</b> $\int_0^1(t^2 - at - b)\,dt = \frac13 - \frac a2 - b = 0$ et $\int_0^1t(t^2 - at - b)\,dt = \frac14 - \frac a3 - \frac b2 = 0$.</p>
+<p><b>Étape 2 : Les équations.</b> $\int_0^1(t^2 - at - b)\,dt = \Big[\frac{t^3}3 - \frac{at^2}2 - bt\Big]_0^1 = \frac13 - \frac a2 - b = 0$ et $\int_0^1(t^3 - at^2 - bt)\,dt = \Big[\frac{t^4}4 - \frac{at^3}3 - \frac{bt^2}2\Big]_0^1 = \frac14 - \frac a3 - \frac b2 = 0$.</p>
 <p><b>Étape 3 : On résout.</b> De la 1<sup>re</sup> : $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = \frac13 - \frac12 = -\frac16$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p(X^2) = X - \frac16}$.</p>
 
@@ -8208,7 +8209,9 @@ $$\cG{3\times\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix} + 1\times\frac12\begin{
 <p>$A = \frac13\begin{pmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> Colonnes orthonormées, $\det = 1$ : rotation ; axe = invariants ; $\operatorname{tr}A = 1 + 2\cos\theta$ ; signe par $\det(u, v, Av)$.</p>
 <p><b>Étape 2 : Orthogonale.</b> Colonnes de $3A$ : $C_1 = (2, -1, 2)$, $C_2 = (2, 2, -1)$, $C_3 = (-1, 2, 2)$. Normes : $4 + 1 + 4 = 9$ chacune. Produits : $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = -2 - 2 + 4 = 0$, $C_2\cdot C_3 = -2 + 4 - 2 = 0$.</p>
-<p><b>Étape 3 : Le déterminant</b> (Sarrus sur $3A$) : $2\times(4 + 2) - 2\times(-2 - 4) + (-1)\times(1 - 4) = 12 + 12 + 3 = 27$, donc $\det A = \frac{27}{27} = 1$ : rotation.</p>
+<p><b>Étape 3 : Le déterminant</b> de $3A$, développé selon la 1<sup>re</sup> ligne :</p>
+$$\begin{vmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{vmatrix} = 2\begin{vmatrix}2&2\\-1&2\end{vmatrix} - 2\begin{vmatrix}-1&2\\2&2\end{vmatrix} + (-1)\begin{vmatrix}-1&2\\2&-1\end{vmatrix} = 2(4 + 2) - 2(-2 - 4) - (1 - 4) = 12 + 12 + 3 = 27,$$
+<p>donc $\det A = \frac{27}{3^3} = 1$ : rotation.</p>
 <p><b>Étape 4 : L'axe.</b> $(3A - 3I)V = 0$ :</p>
 $$\begin{pmatrix}-1&2&-1\\-1&-1&2\\2&-1&-1\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}0\\0\\0\end{pmatrix}\iff x = y = z:\quad u = \frac1{\sqrt3}\begin{pmatrix}1\\1\\1\end{pmatrix}.$$
 <p><b>Étape 5 : L'angle.</b> $\operatorname{tr}A = \frac{2 + 2 + 2}3 = 2 = 1 + 2\cos\theta$, donc $\cos\theta = \frac12$. Avec $v = \frac1{\sqrt2}(1, -1, 0)\perp u$ : $Av = \frac1{3\sqrt2}(2 - 2, -1 - 2, 2 + 1) = \frac1{\sqrt2}(0, -1, 1)$ et $v\wedge Av = \frac12\big((-1)(1) - 0, 0 - 1, -1 - 0\big) = -\frac12(1, 1, 1) = -\frac{\sqrt3}2u$. Donc $\sin\theta = -\frac{\sqrt3}2$.</p>
@@ -8514,7 +8517,7 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 <p>$N_1(f) = |f(0)| + \int_0^1|f'|$, $N_2(f) = |f(1)| + \int_0^1|f'|$.</p>
 <p><b>Étape 1 : Rappel.</b> On relie $f(1)$ et $f(0)$ : $f(1) = f(0) + \int_0^1f'$.</p>
 <p><b>Étape 2 : $N_2\leq2N_1$.</b> $|f(1)|\leq|f(0)| + \int_0^1|f'| = N_1(f)$, donc $N_2(f) = |f(1)| + \int|f'|\leq N_1(f) + N_1(f)$.</p>
-<p><b>Étape 3 : $N_1\leq2N_2$.</b> De même avec $f(0) = f(1) - \int_0^1f'$.</p>
+<p><b>Étape 3 : $N_1\leq2N_2$.</b> De même $f(0) = f(1) - \int_0^1f'$, donc $|f(0)|\leq|f(1)| + \int_0^1|f'| = N_2(f)$, puis $N_1(f) = |f(0)| + \int_0^1|f'|\leq N_2(f) + N_2(f) = 2N_2(f)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\tfrac12N_2\leq N_1\leq2N_2}$ : équivalentes.</p>
 
 <p class="ml">Exemple 18 : deux normes non équivalentes</p>
@@ -8548,7 +8551,7 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 
 <p class="ml">Exemple 21 : $\lim\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$</p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie, convergence coefficient par coefficient ; on écrit la matrice comme une rotation fois un réel.</p>
-<p><b>Étape 2 : La forme polaire.</b> On pose $r_n = \sqrt{1 + \frac{a^2}{n^2}}$, $\cos\theta_n = \frac1{r_n}$, $\sin\theta_n = \frac{a/n}{r_n}$ :</p>
+<p><b>Étape 2 : La forme polaire.</b> On pose $r_n = \sqrt{1 + \frac{a^2}{n^2}}$, $\cos\theta_n = \frac1{r_n}$, $\sin\theta_n = \frac{a/n}{r_n}$ (c'est possible car $\cos^2\theta_n + \sin^2\theta_n = \frac{1 + a^2/n^2}{r_n^2} = 1$). On sort $r_n$ de chaque coefficient, et le produit de deux rotations est la rotation d'angle somme :</p>
 $$A_n = \begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix} = r_n\begin{pmatrix}\cos\theta_n&-\sin\theta_n\\\sin\theta_n&\cos\theta_n\end{pmatrix},\qquad A_n^n = r_n^n\begin{pmatrix}\cos(n\theta_n)&-\sin(n\theta_n)\\\sin(n\theta_n)&\cos(n\theta_n)\end{pmatrix}.$$
 <p><b>Étape 3 : L'angle.</b> $\cos\theta_n > 0$, donc $\theta_n = \arctan\frac an\sim\frac an$ et $n\theta_n\to a$.</p>
 <p><b>Étape 4 : Le module.</b> $r_n^n = e^{\frac n2\ln(1 + \frac{a^2}{n^2})}$ et $\frac n2\ln\big(1 + \frac{a^2}{n^2}\big)\sim\frac n2\times\frac{a^2}{n^2} = \frac{a^2}{2n}\to0$ : $r_n^n\to1$.</p>
@@ -8696,7 +8699,7 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <p class="ml">Exemple 40 : $P\mapsto P(0)$ continue, $P\mapsto P'$ non, pour $N(P) = \sum|a_k|$</p>
 <p><b>Étape 1 : Rappel.</b> Critère $\|u(x)\|\leq k\|x\|$.</p>
 <p><b>Étape 2 : $u(P) = P(0) = a_0$.</b> $|a_0|\leq\sum|a_k| = N(P)$ : continue ($k = 1$).</p>
-<p><b>Étape 3 : $v(P) = P'$.</b> $P_n = X^n$ : $N(P_n) = 1$ et $v(P_n) = nX^{n-1}$, $N(v(P_n)) = n\to+\infty$.</p>
+<p><b>Étape 3 : $v(P) = P'$.</b> $P_n = X^n$ : un seul coefficient non nul, égal à $1$, donc $N(P_n) = 1$. Et $v(P_n) = nX^{n-1}$, dont le seul coefficient vaut $n$ : $N(v(P_n)) = |n| = n\to+\infty$. Aucun $k$ ne vérifie $n\leq k\times1$ pour tout $n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{continue},\ v\ \text{non continue}}$.</p>
 
 <p class="ml">Exemple 41 : si $A^n\to P$, alors $P$ est un projecteur qui commute avec $A$</p>
