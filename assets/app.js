@@ -1636,21 +1636,52 @@ function exBlocks(app) {
   mtabCards(app);
 }
 /* Méthode : dans chaque type de question (h2), une frise « Méthode 1, 2, 3… », chacune suivie de son exercice */
-/* Tableaux de référence des fiches Méthode : une fiche par ligne, au lieu d'un tableau serré. */
+/* Blocs de référence des fiches Méthode (tableaux, listes « à retenir ») : cinq présentations,
+   choisies selon le contenu et alternées d'un bloc à l'autre pour éviter la répétition. */
 function mtabCards(app) {
-  $$(".methode .prose table.mtab", app).forEach(t => {
-    const trs = [...t.querySelectorAll("tr")]; if (trs.length < 2) return;
-    const hs = [...trs[0].children].map(c => c.innerHTML.trim()), ht = [...trs[0].children].map(c => c.textContent.trim());
-    if (hs.length < 2 || hs.length > 5 || !ht[0] || /^\$/.test(hs[0]) || new Set(ht).size !== ht.length || /^(Convexes|Répétitions)/.test(ht[0])) return;
-    const box = document.createElement("div"); box.className = "mcards";
-    trs.slice(1).forEach(tr => {
-      const cs = [...tr.children]; if (!cs.length) return;
-      const c = document.createElement("div"); c.className = "mcard";
-      c.innerHTML = `<div class="mcard-h">${cs[0].innerHTML}</div>` + cs.slice(1).map((x, i) => x.textContent.trim() ? `<div class="mcard-l"><span class="mcard-k">${hs[i + 1]}</span><div class="mcard-v">${x.innerHTML}</div></div>` : "").join("");
-      box.appendChild(c);
-    });
-    box.querySelectorAll(".mcard-k .nt").forEach(n => n.replaceWith(n.textContent));
-    t.replaceWith(box);
+  const blocks = [];
+  $$(".methode .prose table.mtab, .methode .prose .mrefl", app).forEach(el => {
+    let items = [];
+    if (el.tagName === "TABLE") {
+      const trs = [...el.querySelectorAll("tr")]; if (trs.length < 2) return;
+      const hs = [...trs[0].children].map(c => c.innerHTML.trim()), ht = [...trs[0].children].map(c => c.textContent.trim());
+      if (hs.length < 2 || hs.length > 5 || !ht[0] || /^\$/.test(hs[0]) || new Set(ht).size !== ht.length || /^(Convexes|Répétitions)/.test(ht[0])) return;
+      const lab = h => { const d = document.createElement("div"); d.innerHTML = h; d.querySelectorAll(".nt").forEach(n => n.replaceWith(n.textContent)); return d.innerHTML; };
+      trs.slice(1).forEach(tr => { const cs = [...tr.children]; if (!cs.length) return;
+        items.push({ k: cs[0].innerHTML, v: cs.slice(1).map((c, i) => ({ l: hs.length > 2 ? lab(hs[i + 1]) : "", h: c.innerHTML })).filter(x => x.h.trim()) }); });
+    } else {
+      [...el.children].forEach(d => { const b = d.querySelector(":scope > b"), sp = d.querySelector(":scope > span");
+        if (b) items.push({ k: b.innerHTML, v: sp ? [{ l: "", h: sp.innerHTML }] : [] }); });
+    }
+    if (items.length) blocks.push({ el, items });
+  });
+  const tlen = h => { const d = document.createElement("div"); d.innerHTML = h; return d.textContent.replace(/\\[a-zA-Z]+|[{}$^_]/g, "").length; };
+  const ORDER = [9, 7, 5, 3, 1];
+  const fits = (m, it) => m === 5 ? it.every(x => x.v.length === 1 && tlen(x.v[0].h) < 70 && tlen(x.k) < 40)
+    : m === 7 ? it.length >= 4 : true;
+  let prev = 0, off = 0;
+  for (const ch of (EXT || "")) off = (off * 31 + ch.charCodeAt(0)) % 997;
+  blocks.forEach((b, i) => {
+    let m = 1;
+    for (let j = 0; j < 5; j++) { const c = ORDER[(off + i + j) % 5]; if (c !== prev && fits(c, b.items)) { m = c; break; } }
+    prev = m;
+    const vals = x => x.v.map(f => `<div class="fm-v">${f.l ? `<span class="fm-l">${f.l}</span>` : ""}<div>${f.h}</div></div>`).join("");
+    const box = document.createElement("div"); box.className = "fm fm" + m;
+    if (m === 1) box.innerHTML = b.items.map(x => `<div class="fm-r"><div class="fm-k">${x.k}</div><div class="fm-c">${vals(x)}</div></div>`).join("");
+    else if (m === 3) box.innerHTML = b.items.map(x => `<div class="fm-r"><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("");
+    else if (m === 5) box.innerHTML = b.items.map(x => `<div class="fm-r"><span class="fm-k">${x.k}</span><span class="fm-d"></span><span class="fm-c">${x.v.length ? x.v[0].h : ""}</span></div>`).join("");
+    else if (m === 7) {
+      box.innerHTML = `<div class="fm-tabs" role="tablist">${b.items.map((x, j) => `<button type="button" role="tab" aria-selected="${j === 0}" data-j="${j}">${x.k}</button>`).join("")}</div><div class="fm-pane">${b.items.map((x, j) => `<div class="fm-p" data-j="${j}"${j ? " hidden" : ""}><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("")}</div>`;
+      box.addEventListener("click", e => { const t = e.target.closest("button[data-j]"); if (!t) return;
+        box.querySelectorAll("button[data-j]").forEach(x => x.setAttribute("aria-selected", x === t));
+        box.querySelectorAll(".fm-p").forEach(p => p.hidden = p.dataset.j !== t.dataset.j); });
+    } else {
+      let ttl = "", pm = b.el.previousElementSibling;
+      if (pm && pm.matches("p.ml")) { ttl = pm.innerHTML; pm.remove(); }
+      else { let h = b.el.previousElementSibling; while (h && h.tagName !== "H2") h = h.previousElementSibling; ttl = h ? h.innerHTML.replace(/^\s*\d+\.\s*/, "") : "À retenir"; }
+      box.innerHTML = `<div class="fm-t">${ttl}</div><div class="fm-g">${b.items.map(x => `<div class="fm-r${x.v.reduce((a, f) => a + tlen(f.h), 0) > 80 ? " wide" : ""}"><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("")}</div>`;
+    }
+    b.el.replaceWith(box);
   });
 }
 
