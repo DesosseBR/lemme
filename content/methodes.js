@@ -4821,7 +4821,7 @@ $$(u_n)\ \text{croissante},\ u_n\to\ell\ \Longrightarrow\ \forall n,\ u_n\leq\el
 <p class="ml">Exemple 25 : croissante et majorée</p>
 <p>Montrer que $u_n = \displaystyle\sum_{k=1}^n\frac1{k^2}$ converge.</p>
 <p><b>Étape 1 : Rappel.</b> Croissante et majorée $\Rightarrow$ convergente.</p>
-<p><b>Étape 2 : Croissante.</b> $u_{n+1} - u_n = \frac1{(n + 1)^2} > 0$.</p>
+<p><b>Étape 2 : Croissante.</b> $u_{n+1} = u_n + \frac1{(n + 1)^2}$ (un terme de plus dans la somme), donc $u_{n+1} - u_n = \frac1{(n + 1)^2} > 0$.</p>
 <p><b>Étape 3 : Une majoration télescopique.</b> Pour $k\geq2$ : $k^2\geq k(k - 1)$, donc</p>
 $$\frac1{k^2}\leq\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
 <p><b>Étape 4 : On somme de $k = 2$ à $n$</b>, les termes se télescopent :</p>
@@ -4832,10 +4832,10 @@ $$u_n = 1 + \sum_{k=2}^n\frac1{k^2}\leq1 + \Big(1 - \frac1n\Big) = 2 - \frac1n\l
 <p class="ml">Exemple 26 : deux suites adjacentes</p>
 <p>$u_n = \displaystyle\sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \dfrac1{n\cdot n!}$, $n\geq1$. Montrer qu'elles convergent vers la même limite.</p>
 <p><b>Étape 1 : Rappel.</b> $(u_n)\nearrow$, $(v_n)\searrow$, $v_n - u_n\to0$ $\Rightarrow$ même limite.</p>
-<p><b>Étape 2 : $(u_n)$ croissante.</b> $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
+<p><b>Étape 2 : $(u_n)$ croissante.</b> $u_{n+1} = u_n + \frac1{(n + 1)!}$, donc $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
 <p><b>Étape 3 : $(v_n)$ décroissante.</b> On met tout sur le dénominateur commun $n(n + 1)\,(n + 1)!$. Comme $n! = \frac{(n + 1)!}{n + 1}$, on a $n\cdot n! = \frac{n\,(n + 1)!}{n + 1}$, donc $\frac1{n\cdot n!} = \frac{n + 1}{n\,(n + 1)!} = \frac{(n + 1)^2}{n(n + 1)\,(n + 1)!}$. De même $\frac1{(n + 1)!} = \frac{n(n + 1)}{n(n + 1)(n + 1)!}$ et $\frac1{(n + 1)(n + 1)!} = \frac n{n(n + 1)(n + 1)!}$. Le numérateur vaut $n(n + 1) + n - (n + 1)^2 = n^2 + n + n - n^2 - 2n - 1 = -1$ :</p>
 $$v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\cdot n!} = \frac{n(n + 1) + n - (n + 1)^2}{n(n + 1)\,(n + 1)!} = \frac{-1}{n(n + 1)\,(n + 1)!} \lt 0.$$
-<p><b>Étape 4 : La différence.</b> $v_n - u_n = \frac1{n\cdot n!}\to0$.</p>
+<p><b>Étape 4 : La différence.</b> $v_n - u_n = \big(u_n + \frac1{n\cdot n!}\big) - u_n = \frac1{n\cdot n!}$, et $n\cdot n!\to+\infty$, donc $v_n - u_n\to0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{et}\ (v_n)\ \text{sont adjacentes}}$ : même limite $\ell$ (c'est $e$), et $u_n\leq\ell\leq v_n$, ce qui donne $e$ à $\frac1{n\cdot n!}$ près.</p>
 
 <h2 id="s-bw">16. Bolzano-Weierstrass, caractérisations séquentielles</h2>
@@ -4861,10 +4861,10 @@ $$v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\cdot n!}
 <p class="ml">Exemple 27 : arithmético-géométrique</p>
 <p>$u_0 = 5$, $u_{n+1} = 3u_n - 4$. Exprimer $u_n$.</p>
 <p><b>Étape 1 : Rappel.</b> $u_{n+1} = au_n + b$ : on cherche le point fixe $\cR\ell = a\cR\ell + b$, puis $v_n = u_n - \cR\ell$ est géométrique de raison $a$.</p>
-<p><b>Étape 2 : Le point fixe.</b> $\cR\ell = 3\cR\ell - 4\iff\cR{\ell = 2}$.</p>
+<p><b>Étape 2 : Le point fixe.</b> $\cR\ell = 3\cR\ell - 4\iff4 = 3\cR\ell - \cR\ell = 2\cR\ell\iff\cR{\ell = 2}$.</p>
 <p><b>Étape 3 : La suite auxiliaire.</b> On soustrait $2 = 3\times2 - 4$ à la relation :</p>
 $$u_{n+1} - 2 = 3u_n - 4 - (3\times2 - 4) = 3(u_n - 2),\quad\text{donc}\ v_{n+1} = 3v_n.$$
-<p><b>Étape 4 : Terme général de $v$.</b> $v_0 = u_0 - 2 = 3$, donc $v_n = 3\times3^n = 3^{n+1}$.</p>
+<p><b>Étape 4 : Terme général de $v$.</b> $v_{n+1} = 3v_n$ : géométrique de raison $3$. $v_0 = u_0 - 2 = 5 - 2 = 3$, donc $v_n = v_0\times3^n = 3\times3^n = 3^{n+1}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2 + 3^{n+1}}$, et $u_n\to+\infty$. Contrôle : $u_1 = 3\times5 - 4 = 11 = 2 + 9$.</p>
 
 <p class="ml">Exemple 28 : ordre 2, deux racines réelles</p>
@@ -4912,9 +4912,9 @@ $$\cG{u_n\to2}.$$
 <p class="ml">Exemple 32 : $u_{n+1} = u_n - u_n^2$, $u_0\in\,]0, 1[$</p>
 <p><b>Étape 1 : Rappel.</b> Signe de $g(x) = f(x) - x$ sur l'intervalle stable : $g\leq0$ donne $(u_n)$ décroissante.</p>
 <p><b>Étape 2 : Intervalle stable.</b> $f(x) = x - x^2 = x(1 - x)$. Pour $x\in[0, 1]$ : $x\geq0$ et $1 - x\geq0$, donc $f(x)\geq0$, et $f(x)\leq x\leq1$. Donc $[0, 1]$ est stable et $u_n\in[0, 1]$.</p>
-<p><b>Étape 3 : Monotonie.</b> $u_{n+1} - u_n = -u_n^2\leq0$ : $(u_n)$ est décroissante.</p>
+<p><b>Étape 3 : Monotonie.</b> $u_{n+1} - u_n = (u_n - u_n^2) - u_n = -u_n^2\leq0$ : $(u_n)$ est décroissante.</p>
 <p><b>Étape 4 : Convergence.</b> Décroissante et minorée par $0$ : elle converge vers $\cR\ell\in[0, 1]$.</p>
-<p><b>Étape 5 : Le point fixe.</b> $\cR\ell = \cR\ell - \cR\ell^2\iff\cR\ell^2 = 0$, donc $\cG{u_n\to0}$.</p>
+<p><b>Étape 5 : Le point fixe.</b> $\cR\ell = \cR\ell - \cR\ell^2\iff0 = -\cR\ell^2\iff\cR\ell^2 = 0\iff\cR\ell = 0$, donc $\cG{u_n\to0}$.</p>
 
 <h2 id="s-cpx">19. Suites complexes</h2>
 <div class="sbox">$$z_n\to\cR\ell\iff\operatorname{Re}(z_n)\to\operatorname{Re}(\cR\ell)\ \text{et}\ \operatorname{Im}(z_n)\to\operatorname{Im}(\cR\ell)\iff|z_n - \cR\ell|\to0.$$</div>
@@ -4922,8 +4922,8 @@ $$\cG{u_n\to2}.$$
 <p class="ml">Exemple 33 : une suite géométrique complexe</p>
 <p>Limite de $z_n = \Big(\dfrac{1 + i}2\Big)^n$.</p>
 <p><b>Étape 1 : Rappel.</b> $z_n\to0\iff|z_n|\to0$, et $|q^n| = |q|^n$.</p>
-<p><b>Étape 2 : Le module.</b> $\big|\frac{1 + i}2\big| = \frac{\sqrt2}2 \lt 1$.</p>
-<p><b>Étape 3 : On passe au module.</b> $|z_n| = \big(\frac{\sqrt2}2\big)^n\to0$ (géométrique réelle de raison dans $]-1, 1[$).</p>
+<p><b>Étape 2 : Le module.</b> $\big|\frac{1 + i}2\big| = \frac{|1 + i|}2 = \frac{\sqrt{1^2 + 1^2}}2 = \frac{\sqrt2}2\approx0{,}707 \lt 1$.</p>
+<p><b>Étape 3 : On passe au module.</b> $z_n = q^nz_0$, donc $|z_n| = |q|^n|z_0| = \big(\frac{\sqrt2}2\big)^n|z_0|\to0$ (géométrique réelle de raison dans $]-1, 1[$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{z_n\to0}$.</p>
 
 <h2 id="r-enonce">20. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -5041,15 +5041,15 @@ $$n\ln\Big(1 + \frac1n\Big) = \frac{\ln(1 + x)}x\longrightarrow1.$$
 $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 <p><b>Étape 3 : $(u_n)$ décroît.</b> $u_{n+1} - u_n = \frac1{n + 1} - \big(\ln(n + 1) - \ln n\big)\leq0$ par l'inégalité de gauche.</p>
 <p><b>Étape 4 : $(v_n)$ croît.</b> $v_{n+1} - v_n = \frac1{n + 1} - \big(\ln(n + 2) - \ln(n + 1)\big)\geq\frac1{n + 1} - \frac1{n + 1} = 0$ par l'inégalité de droite au rang $n + 1$.</p>
-<p><b>Étape 5 : La différence.</b> $u_n - v_n = \ln(n + 1) - \ln n = \ln\big(1 + \frac1n\big)\to0$.</p>
+<p><b>Étape 5 : La différence.</b> $u_n - v_n = \ln(n + 1) - \ln n = \ln\frac{n + 1}n = \ln\big(1 + \frac1n\big)\to\ln1 = 0$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\text{adjacentes}}$ : elles ont une limite commune $\gamma\approx0{,}577$, et $H_n = \ln n + \gamma + o(1)$.</p>
 
 <p class="ml">Exercice 7 : $u_{n+1} = \frac{u_n^2 + 2}3$, $u_0 = 0$</p>
 <p><b>Étape 1 : Rappel.</b> Intervalle stable, $f$ croissante et sens par $u_1 - u_0$, limite monotone, puis point fixe.</p>
-<p><b>Étape 2 : Les points fixes.</b> $\ell = \frac{\ell^2 + 2}3\iff\ell^2 - 3\ell + 2 = 0\iff\ell\in\{1, 2\}$.</p>
-<p><b>Étape 3 : Intervalle stable.</b> Pour $x\in[0, 1]$ : $x^2\in[0, 1]$, donc $f(x)\in\big[\frac23, 1\big]\subset[0, 1]$. Donc $u_n\in[0, 1]$.</p>
-<p><b>Étape 4 : Monotonie.</b> $f$ est croissante sur $[0, 1]$ et $u_1 = \frac23 > 0 = u_0$ : par récurrence, $(u_n)$ est croissante.</p>
-<p><b>Étape 5 : Conclusion.</b> Croissante, majorée par $1$ : elle converge vers un point fixe de $[0, 1]$, donc $\cG{u_n\to1}$.</p>
+<p><b>Étape 2 : Les points fixes.</b> $\ell = \frac{\ell^2 + 2}3\iff3\ell = \ell^2 + 2\iff\ell^2 - 3\ell + 2 = 0$. $\Delta = 9 - 8 = 1$, $\ell = \frac{3\pm1}2$, soit $\ell\in\{1, 2\}$.</p>
+<p><b>Étape 3 : Intervalle stable.</b> Pour $x\in[0, 1]$ : $x^2\in[0, 1]$, donc $x^2 + 2\in[2, 3]$ et $f(x) = \frac{x^2 + 2}3\in\big[\frac23, 1\big]\subset[0, 1]$. Donc $u_n\in[0, 1]$.</p>
+<p><b>Étape 4 : Monotonie.</b> $f'(x) = \frac{2x}3\geq0$ : $f$ est croissante sur $[0, 1]$. $u_1 = f(0) = \frac{0 + 2}3 = \frac23 > 0 = u_0$ : par récurrence, $(u_n)$ est croissante.</p>
+<p><b>Étape 5 : Conclusion.</b> Croissante, majorée par $1$ : elle converge vers un point fixe de $[0, 1]$ ; $2\notin[0, 1]$, donc $\cG{u_n\to1}$.</p>
 
 <h2 id="r-arbre">L'arbre des nombres réels</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
