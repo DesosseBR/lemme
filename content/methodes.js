@@ -2,7 +2,7 @@
    Blocs : Réflexe (quand on voit quoi), Méthode (étapes), Exemple, Piège. Les data-mlab sont les labos interactifs. */
 LEMME.METHODES = {
 "Matrices et systèmes linéaires": R`
-<nav class="msum"><a href="#m-taille">Taille</a><a href="#m-somme">Somme</a><a href="#m-produit">Produit</a><a href="#m-regles">Règles de calcul</a><a href="#m-puiss">Puissances</a><a href="#m-nilp">Nilpotentes</a><a href="#m-transp">Transposée</a><a href="#m-inv">Inverse</a><a href="#m-sys">Systèmes</a><a href="#m-gauss">Pivot de Gauss</a><a href="#m-trace">Trace</a><a href="#m-al">Applications linéaires</a><a href="#m-compo">Composer</a><a href="#m-passage">Passage</a><a href="#m-chgt">Changement de base</a><a href="#m-an">Calculer $A^n$</a><a href="#m-blocs">Blocs</a><a href="#m-arbre">L'arbre</a><a href="#m-reflexes">Réflexes</a><a href="#m-erreurs">Erreurs</a><a href="#m-entrainement">S'entraîner</a></nav>
+<nav class="msum"><a href="#m-taille">Taille</a><a href="#m-somme">Somme</a><a href="#m-produit">Produit</a><a href="#m-regles">Règles de calcul</a><a href="#m-puiss">Puissances</a><a href="#m-nilp">Nilpotentes</a><a href="#m-transp">Transposée</a><a href="#m-inv">Inverse</a><a href="#m-sys">Systèmes</a><a href="#m-gauss">Pivot de Gauss</a><a href="#m-trace">Trace</a><a href="#m-al">Applications linéaires</a><a href="#m-compo">Composer</a><a href="#m-passage">Passage</a><a href="#m-chgt">Changement de base</a><a href="#m-an">Calculer $A^n$</a><a href="#m-blocs">Blocs</a><a href="#m-inv2">Inversible ?</a><a href="#m-an2">$A^p$ : exemples</a><a href="#m-mat2">Matrice d'une AL</a><a href="#m-rang2">Rang</a><a href="#m-comm">Commutant</a><a href="#m-sim">Semblables</a><a href="#m-tr2">Trace</a><a href="#m-blocs2">Blocs : calculs</a><a href="#m-arbre">L'arbre</a><a href="#m-reflexes">Réflexes</a><a href="#m-erreurs">Erreurs</a><a href="#m-entrainement">S'entraîner</a></nav>
 
 <h2 id="m-taille">1. Taille et notations</h2>
 <div class="sbox">$$A = (a_{i,j})_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant p}}\in\mathcal M_{n,p}(\mathbb K)\iff A\ \text{a}\ n\ \text{lignes et}\ p\ \text{colonnes}.$$</div>
@@ -434,6 +434,257 @@ $$AE_{i,j}\ \text{a pour seule colonne non nulle la colonne}\ j,\ \text{égale �
 $$\operatorname{tr}({}^tAA) = \sum_{i,j}a_{i,j}^2\ \Longrightarrow\ \big(\operatorname{tr}({}^tAA) = 0\iff A = 0\big)\quad(A\ \text{réelle}).$$
 <p>Réflexe : quand un énoncé dit « pour toute matrice $M$ », on teste la relation sur toutes les $E_{i,j}$.</p>
 
+<h2 id="m-inv2">17. Montrer qu'une matrice est inversible, et trouver $A^{-1}$</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>On devine un inverse</td><td>Trouver $B$ avec $AB = I_n$ : en taille finie, cela suffit (pas besoin de $BA$).</td></tr>
+<tr><td>$A$ est la matrice d'un endomorphisme $u$</td><td>Montrer $\ker u = \{0\}$ ; $A^{-1}$ est la matrice de $u^{-1}$.</td></tr>
+<tr><td>On veut $A^{-1}$ explicitement</td><td>Résoudre $AX = Y$ : $X = A^{-1}Y$ se lit sur la solution.</td></tr>
+<tr><td>Seulement l'inversibilité</td><td>$AX = 0\Rightarrow X = 0$ ; ou un $X\neq0$ avec $AX = 0$ pour montrer que non.</td></tr>
+<tr><td>Grande matrice numérique</td><td>Gauss-Jordan sur $(A\mid I_n)\to(I_n\mid A^{-1})$.</td></tr>
+<tr><td>Un polynôme annulateur $\sum a_kX^k$ avec $a_0\neq0$</td><td>On isole $I_n$ : $A^{-1}$ est un polynôme en $A$.</td></tr>
+<tr><td>Taille $2$ ou $3$, ou matrice à paramètre</td><td>Le déterminant ; la comatrice $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</td></tr>
+<tr><td>$I_n + N$, $N$ nilpotente</td><td>Comme $\frac1{1 + x} = \sum(-x)^k$ : $(I_n + N)^{-1} = \sum_{k=0}^{p-1}(-N)^k$.</td></tr>
+<tr><td>Colonnes orthogonales de même norme</td><td>$\frac1cA$ orthogonale : $A^{-1} = \frac1{c^2}{}^tA$.</td></tr>
+</table>
+
+<p class="ml">Exemple 1 : $I_n - B$ avec $B$ nilpotente</p>
+<p>$B^p = 0$. Montrer que $I_n - B$ est inversible et donner son inverse.</p>
+<p><b>Étape 1 : Rappel.</b> On imite $\frac1{1 - x} = 1 + x + x^2 + \cdots$, et un seul produit égal à $I_n$ suffit.</p>
+<p><b>Étape 2 : Le produit.</b> $I_n$ et $B$ commutent : $(I_n - B)(I_n + B + \dots + B^{p-1}) = (I_n + B + \dots + B^{p-1}) - (B + B^2 + \dots + B^p) = I_n - B^p$.</p>
+<p><b>Étape 3 : On utilise $B^p = 0$.</b> Le produit vaut $I_n - 0 = I_n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(I_n - B)^{-1} = I_n + B + B^2 + \dots + B^{p-1}}$.</p>
+
+<p class="ml">Exemple 2 : par un polynôme annulateur</p>
+<p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. Trouver une relation entre $A^2$, $A$, $I_2$, puis $A^{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> En taille $2$ : $A^2 - (\operatorname{tr}A)A + (\det A)I_2 = 0$.</p>
+<p><b>Étape 2 : La relation.</b> $\operatorname{tr}A = 2 + 2 = 4$, $\det A = 2\times2 - 1\times1 = 3$, donc $A^2 - 4A + 3I_2 = 0$. Contrôle : $A^2 = \begin{pmatrix}4 + 1&2 + 2\\2 + 2&1 + 4\end{pmatrix} = \begin{pmatrix}5&4\\4&5\end{pmatrix}$ et $4A - 3I_2 = \begin{pmatrix}8 - 3&4\\4&8 - 3\end{pmatrix}$ : égales.</p>
+<p><b>Étape 3 : On isole $I_2$.</b> $3I_2 = 4A - A^2 = A(4I_2 - A)$, donc $A\times\frac13(4I_2 - A) = I_2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A^{-1} = \frac13(4I_2 - A) = \frac13\begin{pmatrix}2&-1\\-1&2\end{pmatrix}}$ ($4 - 2 = 2$, $0 - 1 = -1$).</p>
+
+<p class="ml">Exemple 3 : la comatrice en taille $3$</p>
+<p>$P = \begin{pmatrix}1&1&1\\-1&0&2\\0&-1&3\end{pmatrix}$. Calculer $P^{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> Cofacteur $(i, j)$ : $(-1)^{i+j}\times$ le déterminant obtenu en barrant la ligne $i$ et la colonne $j$. Puis $P^{-1} = \frac1{\det P}{}^t\operatorname{com}(P)$.</p>
+<p><b>Étape 2 : Ligne 1 des cofacteurs.</b> $+\begin{vmatrix}0&2\\-1&3\end{vmatrix} = 0\times3 - 2\times(-1) = 2$ ; $-\begin{vmatrix}-1&2\\0&3\end{vmatrix} = -(-3 - 0) = 3$ ; $+\begin{vmatrix}-1&0\\0&-1\end{vmatrix} = 1 - 0 = 1$.</p>
+<p><b>Étape 3 : Le déterminant</b> (développement selon la ligne 1) : $\det P = 1\times2 + 1\times3 + 1\times1 = 6$.</p>
+<p><b>Étape 4 : Lignes 2 et 3.</b> $-\begin{vmatrix}1&1\\-1&3\end{vmatrix} = -(3 + 1) = -4$, $+\begin{vmatrix}1&1\\0&3\end{vmatrix} = 3$, $-\begin{vmatrix}1&1\\0&-1\end{vmatrix} = -(-1) = 1$. Puis $+\begin{vmatrix}1&1\\0&2\end{vmatrix} = 2$, $-\begin{vmatrix}1&1\\-1&2\end{vmatrix} = -(2 + 1) = -3$, $+\begin{vmatrix}1&1\\-1&0\end{vmatrix} = 0 + 1 = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> On transpose et on divise par $6$ :</p>
+$$\operatorname{com}(P) = \begin{pmatrix}2&3&1\\-4&3&1\\2&-3&1\end{pmatrix},\qquad\cG{P^{-1} = \frac16\begin{pmatrix}2&-4&2\\3&3&-3\\1&1&1\end{pmatrix}}.$$
+<p>Contrôle, ligne 1 de $P$ fois colonne 1 de $6P^{-1}$ : $1\times2 + 1\times3 + 1\times1 = 6$.</p>
+
+<p class="ml">Exemple 4 : reconnaître une matrice orthogonale</p>
+<p>$A = \begin{pmatrix}2&2&1\\1&-2&2\\2&-1&-2\end{pmatrix}$. Calculer $A^{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> Si les colonnes sont orthogonales deux à deux et de norme $c$, alors $\,{}^tAA = c^2I_n$.</p>
+<p><b>Étape 2 : Les normes.</b> $C_1 = (2, 1, 2)$ : $4 + 1 + 4 = 9$. $C_2 = (2, -2, -1)$ : $4 + 4 + 1 = 9$. $C_3 = (1, 2, -2)$ : $1 + 4 + 4 = 9$. Toutes de norme $3$.</p>
+<p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = 2 + 2 - 4 = 0$, $C_2\cdot C_3 = 2 - 4 + 2 = 0$. Donc $\,{}^tAA = 9I_3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $A\times\frac19{}^tA = I_3$ : $\cG{A^{-1} = \frac19{}^tA}$, sans aucun calcul d'inverse.</p>
+
+<p class="ml">Exemple 5 : résoudre $AX = Y$ pour $a_{ij} = \min(i, j)$</p>
+<p><b>Étape 1 : Rappel.</b> On résout $AX = Y$ ; l'expression $X = BY$ donne $A^{-1} = B$.</p>
+<p><b>Étape 2 : Le système.</b> La ligne $i$ s'écrit $x_1 + 2x_2 + \dots + (i - 1)x_{i-1} + i(x_i + x_{i+1} + \dots + x_n) = y_i$. Les opérations $L_i\leftarrow L_i - L_{i-1}$ (de $i = n$ à $2$) donnent $x_i + x_{i+1} + \dots + x_n = y_i - y_{i-1}$ (avec $y_0 = 0$).</p>
+<p><b>Étape 3 : On recommence.</b> En soustrayant deux lignes consécutives : $x_i = (y_i - y_{i-1}) - (y_{i+1} - y_i) = -y_{i-1} + 2y_i - y_{i+1}$ pour $i \lt n$, et $x_n = y_n - y_{n-1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> On lit les coefficients :</p>
+$$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pmatrix}}.$$
+<p>Contrôle $n = 2$ : $\begin{pmatrix}1&1\\1&2\end{pmatrix}\begin{pmatrix}2&-1\\-1&1\end{pmatrix} = \begin{pmatrix}2 - 1&-1 + 1\\2 - 2&-1 + 2\end{pmatrix} = I_2$.</p>
+
+<p class="ml">Exemple 6 : inversible dans $\mathcal M_n(\mathbb Z)$</p>
+<p>Montrer : $A\in\mathcal M_n(\mathbb Z)$ a un inverse à coefficients entiers $\iff\det A = \pm1$.</p>
+<p><b>Étape 1 : Rappel.</b> $\det(AB) = \det A\det B$ ; le déterminant d'une matrice entière est un entier ; $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> $AB = I_n$ avec $B$ entière : $\det A\times\det B = 1$, deux entiers de produit $1$, donc $\det A = \pm1$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> Les cofacteurs sont des déterminants de matrices entières : entiers. Avec $\det A = \pm1$, $A^{-1} = \pm{}^t\operatorname{com}(A)$ est entière.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\in GL_n(\mathbb Z)\iff\det A = \pm1}$. Exemple : $\begin{pmatrix}2&1\\1&1\end{pmatrix}$, $\det = 2 - 1 = 1$, inverse $\begin{pmatrix}1&-1\\-1&2\end{pmatrix}$.</p>
+
+<h2 id="m-an2">18. Calculer $A^p$ : les exemples types</h2>
+
+<p class="ml">Exemple 7 : la matrice $J$ remplie de $1$</p>
+<p><b>Étape 1 : Rappel.</b> On calcule $J^2$, on conjecture, on prouve par récurrence.</p>
+<p><b>Étape 2 : $J^2$.</b> Coefficient $(i, j)$ : $\sum_{k=1}^n1\times1 = n$. Donc $J^2 = nJ$.</p>
+<p><b>Étape 3 : Récurrence.</b> Si $J^p = n^{p-1}J$, alors $J^{p+1} = n^{p-1}J^2 = n^{p-1}\times nJ = n^pJ$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{J^p = n^{p-1}J\ \ (p\geq1)}$.</p>
+
+<p class="ml">Exemple 8 : $A = I_3 + J$, par le binôme puis par un annulateur</p>
+<p>$A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$. Calculer $A^p$.</p>
+<p><b>Étape 1 : Rappel.</b> $I_3$ et $J$ commutent : binôme. Ici $J^k = 3^{k-1}J$.</p>
+<p><b>Étape 2 : Le binôme.</b> On sépare $k = 0$ : $A^p = I_3 + \sum_{k=1}^p\binom pk3^{k-1}J = I_3 + \frac13\Big(\sum_{k=0}^p\binom pk3^k - 1\Big)J$.</p>
+<p><b>Étape 3 : On reconnaît.</b> $\sum_{k=0}^p\binom pk3^k1^{p-k} = (3 + 1)^p = 4^p$, donc $A^p = I_3 + \frac{4^p - 1}3J$.</p>
+<p><b>Étape 4 : Contrôle par l'annulateur.</b> $A^2 = I_3 + 2J + J^2 = I_3 + 2J + 3J = I_3 + 5J$ et $5A - 4I_3 = 5I_3 + 5J - 4I_3 = I_3 + 5J$ : $A^2 = 5A - 4I_3$. La formule donne $A^2 = I_3 + \frac{16 - 1}3J = I_3 + 5J$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A^p = I_3 + \frac{4^p - 1}3J}$ : diagonale $\frac{4^p + 2}3$, hors diagonale $\frac{4^p - 1}3$.</p>
+
+<p class="ml">Exemple 9 : $(a - b)I_n + bJ$, et son inverse</p>
+<p>$A$ a des $a$ sur la diagonale et des $b$ ailleurs. Calculer $A^p$ et $A^{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> $A = (a - b)I_n + bJ$, binôme, $J^k = n^{k-1}J$.</p>
+<p><b>Étape 2 : Le binôme.</b> $A^p = (a - b)^pI_n + \sum_{k=1}^p\binom pk(a - b)^{p-k}b^kn^{k-1}J = (a - b)^pI_n + \frac1n\big[(a - b + nb)^p - (a - b)^p\big]J$ (on ajoute et retire le terme $k = 0$, puis binôme).</p>
+<p><b>Étape 3 : L'inverse.</b> On cherche $A^{-1} = \alpha I_n + \beta J$ : $AA^{-1} = (a - b)\alpha I_n + \big((a - b)\beta + b\alpha + nb\beta\big)J = I_n$, donc $\alpha = \frac1{a - b}$ et $\beta(a - b + nb) = -b\alpha$, $\beta = \frac{-b}{(a - b)(a + (n - 1)b)}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A^p = (a - b)^pI_n + \frac{(a + (n - 1)b)^p - (a - b)^p}nJ}$, et $A$ inversible si $a\neq b$ et $a + (n - 1)b\neq0$, avec $A^{-1} = \frac1{a - b}I_n - \frac b{(a - b)(a + (n - 1)b)}J$.</p>
+
+<p class="ml">Exemple 10 : $A = I_n + aN$, $N$ la « sur-diagonale »</p>
+<p><b>Étape 1 : Rappel.</b> $N$ (des $1$ juste au-dessus de la diagonale) vérifie $N^n = 0$ ; $N^k$ a ses $1$ sur la $k$-ième sur-diagonale.</p>
+<p><b>Étape 2 : Le binôme.</b> $I_n$ et $N$ commutent : $A^p = \sum_{k=0}^{n-1}\binom pka^kN^k$ (les termes $k\geq n$ sont nuls).</p>
+<p><b>Étape 3 : On lit.</b> Le coefficient $(i, i + k)$ de $A^p$ vaut $\binom pka^k$ (et $\binom pk = 0$ si $k > p$).</p>
+<p><b>Étape 4 : L'inverse.</b> $(I_n + aN)^{-1} = \sum_{k=0}^{n-1}(-aN)^k$ (exemple 1 avec $B = -aN$) : coefficient $(i, i + k)$ égal à $(-a)^k$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A^p = \Big(\tbinom{p}{j - i}a^{j-i}\Big)_{i\leq j},\quad A^{-1} = \big((-a)^{j-i}\big)_{i\leq j}}$ : c'est la formule de $A^p$ avec $p = -1$.</p>
+
+<h2 id="m-mat2">19. Trouver la matrice d'une application linéaire</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Les images des vecteurs de base se calculent</td><td>La définition : colonne $j$ = coordonnées de $u(e_j)$.</td></tr>
+<tr><td>On a une formule $y = u(x)$</td><td>L'expression analytique $Y = AX$ : on lit $A$.</td></tr>
+<tr><td>La matrice est simple dans une autre base</td><td>Changement de base $A = PA'P^{-1}$ (projecteurs, symétries, réduction).</td></tr>
+</table>
+
+<p class="ml">Exemple 11 : une projection oblique, par l'expression analytique</p>
+<p>Matrice dans la base canonique de la projection $p$ sur $P:\ x + y + z = 0$ parallèlement à $D:\ x = \frac y2 = \frac z3$.</p>
+<p><b>Étape 1 : Rappel.</b> $p(u)\in P$ et $u - p(u)\in D$.</p>
+<p><b>Étape 2 : $D$.</b> $x = \frac y2 = \frac z3 = t$ donne $(t, 2t, 3t)$ : $D = \operatorname{Vect}(1, 2, 3)$. $1 + 2 + 3 = 6\neq0$, donc $D\not\subset P$ et $\mathbb R^3 = P\oplus D$.</p>
+<p><b>Étape 3 : On écrit.</b> $u = (x, y, z)$, $p(u) = u - \lambda(1, 2, 3) = (x - \lambda, y - 2\lambda, z - 3\lambda)$. Dans $P$ : $(x + y + z) - 6\lambda = 0$, donc $\lambda = \frac{x + y + z}6$.</p>
+<p><b>Étape 4 : Les coordonnées.</b> $x' = x - \frac{x + y + z}6 = \frac{5x - y - z}6$, $y' = y - \frac{2(x + y + z)}6 = \frac{-2x + 4y - 2z}6$, $z' = z - \frac{3(x + y + z)}6 = \frac{-3x - 3y + 3z}6$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A = \frac16\begin{pmatrix}5&-1&-1\\-2&4&-2\\-3&-3&3\end{pmatrix}}$. Contrôle : $A(1, 2, 3) = \frac16(5 - 2 - 3, -2 + 8 - 6, -3 - 6 + 9) = 0$.</p>
+
+<p class="ml">Exemple 12 : la même, par changement de base</p>
+<p><b>Étape 1 : Rappel.</b> Dans une base adaptée à $P\oplus D$, la matrice est $\operatorname{diag}(1, 1, 0)$.</p>
+<p><b>Étape 2 : La base.</b> $e'_1 = (1, -1, 0)$ et $e'_2 = (1, 0, -1)$ dans $P$ ($1 - 1 + 0 = 0$, $1 + 0 - 1 = 0$), $e'_3 = (1, 2, 3)$ : $Q = \begin{pmatrix}1&1&1\\-1&0&2\\0&-1&3\end{pmatrix}$, la matrice de l'exemple 3.</p>
+<p><b>Étape 3 : Le produit.</b> $A = Q\operatorname{diag}(1, 1, 0)Q^{-1}$. $Q\operatorname{diag}(1, 1, 0)$ efface la 3<sup>e</sup> colonne de $Q$, puis on multiplie par $Q^{-1} = \frac16\begin{pmatrix}2&-4&2\\3&3&-3\\1&1&1\end{pmatrix}$ : ligne 1, $(1, 1, 0)$ donne $\frac16(2 + 3, -4 + 3, 2 - 3) = \frac16(5, -1, -1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> On retrouve $\cG{A = \frac16\begin{pmatrix}5&-1&-1\\-2&4&-2\\-3&-3&3\end{pmatrix}}$ ; méthode plus longue ici, mais elle marche pour tout endomorphisme simple dans une base connue.</p>
+
+<p class="ml">Exemple 13 : $M\mapsto AM$ dans la base $(E_{ij})$</p>
+<p><b>Étape 1 : Rappel.</b> $AE_{ij} = \sum_ka_{ki}E_{kj}$ : la colonne $i$ de $A$ placée en colonne $j$.</p>
+<p><b>Étape 2 : On ordonne.</b> Ordre $E_{11}, E_{21}, \dots, E_{n1}, E_{12}, \dots$ (colonne par colonne). Les $E_{\cdot j}$ de la colonne $j$ sont envoyés dans $\operatorname{Vect}(E_{1j}, \dots, E_{nj})$, avec la matrice $A$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\operatorname{Mat}(M\mapsto AM) = \operatorname{diag}(A, A, \dots, A)}$ ($n$ blocs) ; donc sa trace vaut $n\operatorname{tr}A$ et son déterminant $(\det A)^n$.</p>
+
+<h2 id="m-rang2">20. Calculer le rang d'une matrice</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Colonnes combinaisons de quelques vecteurs fixes</td><td>$\operatorname{rg}\leq$ nombre de vecteurs, puis une sous-matrice inversible.</td></tr>
+<tr><td>Cas général</td><td>Opérations élémentaires jusqu'à une forme échelonnée.</td></tr>
+<tr><td>$A$ matrice d'un endomorphisme lisible</td><td>Théorème du rang sur l'endomorphisme.</td></tr>
+<tr><td>Paramètre</td><td>Déterminant, puis matrices extraites quand il s'annule.</td></tr>
+<tr><td>Matrice par blocs</td><td>Multiplier par des matrices inversibles par blocs ; $A = PJ_rQ$.</td></tr>
+<tr><td>Rang $1$</td><td>$A = X\,{}^tY$ : toutes les colonnes proportionnelles ; $A^2 = (\operatorname{tr}A)A$.</td></tr>
+</table>
+
+<p class="ml">Exemple 14 : $a_{ij} = (i + j - 1)^2$</p>
+<p><b>Étape 1 : Rappel.</b> Si toutes les colonnes sont dans $\operatorname{Vect}(U, V, W)$, le rang est $\leq3$.</p>
+<p><b>Étape 2 : On développe.</b> $(i + j - 1)^2 = ((i - 1) + j)^2 = (i - 1)^2 + 2j(i - 1) + j^2$. Donc $C_j = U + 2jV + j^2W$ avec $U = ((i - 1)^2)_i$, $V = (i - 1)_i$, $W = (1)_i$.</p>
+<p><b>Étape 3 : Une sous-matrice.</b> Pour $n\geq3$, $\begin{vmatrix}1&4&9\\4&9&16\\9&16&25\end{vmatrix} = 1(225 - 256) - 4(100 - 144) + 9(64 - 81) = -31 + 176 - 153 = -8\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}A = 3\ (n\geq3)}$ ; $n = 1$ : rang $1$ ; $n = 2$ : $\det = 9 - 16 = -7$, rang $2$.</p>
+
+<p class="ml">Exemple 15 : déterminant puis matrice extraite</p>
+<p>$A\in\mathcal M_4(\mathbb R)$ : $2$ sur la diagonale, $a$ ailleurs. Rang selon $a$.</p>
+<p><b>Étape 1 : Rappel.</b> $\det\neq0\iff$ rang $4$ ; sinon, chercher la plus grande sous-matrice inversible.</p>
+<p><b>Étape 2 : Le déterminant</b> (exemple 9, ou la fiche déterminants) : $\det A = (2 + 3a)(2 - a)^3$.</p>
+<p><b>Étape 3 : $a = 2$.</b> Tous les coefficients valent $2$ : rang $1$.</p>
+<p><b>Étape 4 : $a = -\frac23$.</b> La sous-matrice $3\times3$ de même forme a pour déterminant $(2 + 2a)(2 - a)^2 = \frac23\times\frac{64}9 = \frac{128}{27}\neq0$ : rang $3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg}A = 4\ (a\notin\{2, -\tfrac23\}),\ 1\ (a = 2),\ 3\ (a = -\tfrac23)}$.</p>
+
+<p class="ml">Exemple 16 : le rang d'une matrice par blocs diagonale</p>
+<p>Montrer $\operatorname{rg}\begin{pmatrix}A&0\\0&B\end{pmatrix} = \operatorname{rg}A + \operatorname{rg}B$.</p>
+<p><b>Étape 1 : Rappel.</b> $A = PJ_rQ$ avec $P, Q$ inversibles ; multiplier par des inversibles ne change pas le rang.</p>
+<p><b>Étape 2 : On écrit.</b> $A = PJ_rQ$, $B = P'J_{r'}Q'$, donc $\begin{pmatrix}A&0\\0&B\end{pmatrix} = \begin{pmatrix}P&0\\0&P'\end{pmatrix}\begin{pmatrix}J_r&0\\0&J_{r'}\end{pmatrix}\begin{pmatrix}Q&0\\0&Q'\end{pmatrix}$ (produit par blocs).</p>
+<p><b>Étape 3 : Inversibles.</b> $\det\begin{pmatrix}P&0\\0&P'\end{pmatrix} = \det P\det P'\neq0$, de même pour $Q$.</p>
+<p><b>Étape 4 : Conclusion.</b> Le rang est celui de la matrice du milieu, qui a $r + r'$ coefficients $1$ sur la diagonale : $\cG{r + r'}$.</p>
+
+<h2 id="m-comm">21. Matrices qui commutent, équations matricielles</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Petite taille</td><td>$X = (x_{ij})$, on écrit $AX = XA$ coefficient par coefficient : système linéaire.</td></tr>
+<tr><td>« Pour toute matrice $M$ »</td><td>Appliquer à $M = E_{ij}$, avec $E_{ij}E_{kl} = \delta_{jk}E_{il}$.</td></tr>
+<tr><td>$A$ simple dans une autre base</td><td>$A = PDP^{-1}$, $X = PYP^{-1}$ : chercher $Y$ avec $DY = YD$.</td></tr>
+<tr><td>$X^p = A$</td><td>$X$ commute avec $X^p = A$ : on commence par $AX = XA$.</td></tr>
+<tr><td>Une égalité impossible ($AB - BA = I_n$)</td><td>La trace, le déterminant.</td></tr>
+</table>
+
+<p class="ml">Exemple 17 : le commutant d'un bloc de Jordan</p>
+<p>$A = \begin{pmatrix}1&1\\0&1\end{pmatrix}$. Trouver les $X$ avec $AX = XA$.</p>
+<p><b>Étape 1 : Rappel.</b> On identifie coefficient par coefficient.</p>
+<p><b>Étape 2 : Les produits.</b> $X = \begin{pmatrix}x&y\\z&t\end{pmatrix}$ : $AX = \begin{pmatrix}x + z&y + t\\z&t\end{pmatrix}$, $XA = \begin{pmatrix}x&x + y\\z&z + t\end{pmatrix}$.</p>
+<p><b>Étape 3 : On identifie.</b> $x + z = x$ donne $z = 0$ ; $y + t = x + y$ donne $t = x$ ; $t = z + t$ redonne $z = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{X = \begin{pmatrix}x&y\\0&x\end{pmatrix} = xI_2 + yN}$ : les polynômes en $A$.</p>
+
+<p class="ml">Exemple 18 : commuter avec une diagonale à coefficients distincts</p>
+<p><b>Étape 1 : Rappel.</b> $(AD)_{ij} = a_{ij}d_j$ et $(DA)_{ij} = d_ia_{ij}$.</p>
+<p><b>Étape 2 : On compare.</b> $AD = DA\iff\forall i, j,\ (d_i - d_j)a_{ij} = 0$.</p>
+<p><b>Étape 3 : Conclusion.</b> Pour $i\neq j$, $d_i\neq d_j$ donne $a_{ij} = 0$ : $\cG{A\ \text{est diagonale}}$.</p>
+
+<p class="ml">Exemple 19 : commuter avec toutes les matrices</p>
+<p><b>Étape 1 : Rappel.</b> Tester $M = E_{ij}$ : $AE_{ij} = \sum_ka_{ki}E_{kj}$ et $E_{ij}A = \sum_la_{jl}E_{il}$.</p>
+<p><b>Étape 2 : On compare</b> les coefficients de ces deux matrices dans la base $(E_{kl})$. Coefficient de $E_{ij}$ : $a_{ii}$ à gauche, $a_{jj}$ à droite, donc $a_{ii} = a_{jj}$. Coefficient de $E_{kj}$ avec $k\neq i$ : $a_{ki}$ à gauche, $0$ à droite, donc $a_{ki} = 0$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{A = \lambda I_n}$ : seules les matrices scalaires commutent avec tout.</p>
+
+<p class="ml">Exemple 20 : $X^2 = E_{13}$ dans $\mathcal M_3(\mathbb R)$</p>
+<p><b>Étape 1 : Rappel.</b> $X$ commute avec $X^2 = A$.</p>
+<p><b>Étape 2 : $AX = XA$.</b> $AX$ a pour seule ligne non nulle la ligne $1$, égale à la ligne $3$ de $X$ : $(g, h, i)$. $XA$ a pour seule colonne non nulle la colonne $3$, égale à la colonne $1$ de $X$ : $(a, d, g)$. Donc $g = h = 0$, $d = 0$, $i = a$.</p>
+<p><b>Étape 3 : On élève au carré.</b> $X = \begin{pmatrix}a&b&c\\0&e&f\\0&0&a\end{pmatrix}$ : $X^2 = \begin{pmatrix}a^2&ab + be&2ac + bf\\0&e^2&ef + fa\\0&0&a^2\end{pmatrix}$.</p>
+<p><b>Étape 4 : On identifie</b> avec $E_{13}$ : $a^2 = 0$ et $e^2 = 0$, donc $a = e = 0$ ; il reste $bf = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{X = \begin{pmatrix}0&b&c\\0&0&1/b\\0&0&0\end{pmatrix},\ b\neq0,\ c\in\mathbb R}$.</p>
+
+<h2 id="m-sim">22. Matrices semblables</h2>
+<div class="sbox">$$B = P^{-1}AP\Rightarrow\operatorname{tr}B = \operatorname{tr}A,\ \det B = \det A,\ \operatorname{rg}B = \operatorname{rg}A,\ \chi_B = \chi_A,\ \operatorname{rg}(B - \lambda I) = \operatorname{rg}(A - \lambda I).$$</div>
+<p class="ml">La méthode</p>
+<p><b>Pas semblables</b> : un invariant différent. <b>Semblables</b> : trouver une base dans laquelle l'endomorphisme associé à $A$ a pour matrice $B$ (on cherche les vecteurs $e'_1, e'_2, \dots$ un par un), ou passer par une troisième matrice.</p>
+
+<p class="ml">Exemple 21 : même polynôme caractéristique, pas semblables</p>
+<p>$A = \begin{pmatrix}1&1&1\\0&2&0\\0&0&2\end{pmatrix}$, $B = \begin{pmatrix}1&0&1\\0&2&1\\0&0&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> $A$ et $B$ semblables $\Rightarrow A - 2I$ et $B - 2I$ semblables, donc de même rang.</p>
+<p><b>Étape 2 : $\chi$.</b> Triangulaires : $\chi_A = \chi_B = (X - 1)(X - 2)^2$. Ça ne conclut pas.</p>
+<p><b>Étape 3 : Les rangs.</b> $A - 2I = \begin{pmatrix}-1&1&1\\0&0&0\\0&0&0\end{pmatrix}$ : rang $1$. $B - 2I = \begin{pmatrix}-1&0&1\\0&0&1\\0&0&0\end{pmatrix}$ : deux lignes non colinéaires, rang $2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{et}\ B\ \text{ne sont pas semblables}}$ ($A$ est diagonalisable, $B$ non).</p>
+
+<p class="ml">Exemple 22 : trouver la base qui rend semblable</p>
+<p>$A = \begin{pmatrix}4&1&-1\\-6&-1&2\\2&1&1\end{pmatrix}$, $B = \begin{pmatrix}1&1&0\\0&1&0\\0&0&2\end{pmatrix}$. Montrer qu'elles sont semblables.</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $e'_1, e'_2, e'_3$ avec $u(e'_1) = e'_1$, $u(e'_2) = e'_1 + e'_2$, $u(e'_3) = 2e'_3$ (les colonnes de $B$).</p>
+<p><b>Étape 2 : $e'_1$.</b> $(A - I)X = 0$ : $3x + y - z = 0$, $-6x - 2y + 2z = 0$ (même équation $\times(-2)$), $2x + y = 0$. Donc $y = -2x$, $z = 3x + y = x$ : $e'_1 = (1, -2, 1)$.</p>
+<p><b>Étape 3 : $e'_2$.</b> $(A - I)X = e'_1$ : $3x + y - z = 1$, $2x + y = 1$. Avec $x = 0$ : $y = 1$, $z = 0$. Contrôle ligne 2 : $0 - 2 + 0 = -2$ ✓. $e'_2 = (0, 1, 0)$.</p>
+<p><b>Étape 4 : $e'_3$.</b> $A - 2I = \begin{pmatrix}2&1&-1\\-6&-3&2\\2&1&-1\end{pmatrix}$ : $(A - 2I)X = 0$ donne $2x + y - z = 0$ (lignes 1 et 3) et $-6x - 3y + 2z = 0$. De la 1<sup>re</sup> : $z = 2x + y$ ; dans la 2<sup>e</sup> : $-6x - 3y + 4x + 2y = -2x - y = 0$, $y = -2x$, $z = 0$ : $e'_3 = (1, -2, 0)$.</p>
+<p><b>Étape 5 : Base ?</b> $\det(e'_1, e'_2, e'_3) = \begin{vmatrix}1&0&1\\-2&1&-2\\1&0&0\end{vmatrix}$, développé selon la ligne 3 : $1\times\begin{vmatrix}0&1\\1&-2\end{vmatrix} = 0 - 1 = -1\neq0$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{B = P^{-1}AP}$ avec $P = \begin{pmatrix}1&0&1\\-2&1&-2\\1&0&0\end{pmatrix}$.</p>
+
+<h2 id="m-tr2">23. Utiliser la trace</h2>
+<div class="sbox">$$\operatorname{tr}(\lambda A + B) = \lambda\operatorname{tr}A + \operatorname{tr}B,\qquad\operatorname{tr}(AB) = \operatorname{tr}(BA),\qquad\operatorname{tr}(P^{-1}AP) = \operatorname{tr}A,\qquad p\ \text{projecteur}\Rightarrow\operatorname{tr}p = \operatorname{rg}p.$$</div>
+
+<p class="ml">Exemple 23 : $AB - BA = A$ entraîne $A$ non inversible</p>
+<p><b>Étape 1 : Rappel.</b> Raisonner par l'absurde et prendre la trace.</p>
+<p><b>Étape 2 : On multiplie par $A^{-1}$</b> à gauche : $B - A^{-1}BA = I_n$.</p>
+<p><b>Étape 3 : La trace.</b> $\operatorname{tr}(A^{-1}BA) = \operatorname{tr}(BAA^{-1}) = \operatorname{tr}B$, donc à gauche $\operatorname{tr}B - \operatorname{tr}B = 0$, à droite $\operatorname{tr}I_n = n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $0 = n$ : absurde, $\cG{A\notin GL_n}$.</p>
+
+<p class="ml">Exemple 24 : résoudre $X + \operatorname{tr}(X)A = B$</p>
+<p><b>Étape 1 : Rappel.</b> On prend la trace pour trouver $\operatorname{tr}X$ (un nombre), puis on remplace.</p>
+<p><b>Étape 2 : La trace.</b> $\operatorname{tr}X + \operatorname{tr}X\operatorname{tr}A = \operatorname{tr}B$, soit $(1 + \operatorname{tr}A)\operatorname{tr}X = \operatorname{tr}B$.</p>
+<p><b>Étape 3 : Cas $\operatorname{tr}A\neq-1$.</b> $\operatorname{tr}X = \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}$ et $X = B - \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}A$. Réciproquement elle convient (sa trace vaut bien $\operatorname{tr}B - \frac{\operatorname{tr}B\operatorname{tr}A}{1 + \operatorname{tr}A} = \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}$).</p>
+<p><b>Étape 4 : Cas $\operatorname{tr}A = -1$.</b> Si $\operatorname{tr}B\neq0$ : $0 = \operatorname{tr}B$, aucune solution. Si $\operatorname{tr}B = 0$ : $X = B - \lambda A$ avec $\lambda = \operatorname{tr}X$ quelconque ; contrôle, $\operatorname{tr}(B - \lambda A) = 0 + \lambda = \lambda$ ✓.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{X = B - \tfrac{\operatorname{tr}B}{1 + \operatorname{tr}A}A}$ si $\operatorname{tr}A\neq-1$ ; sinon $\varnothing$ ou la droite $\{B - \lambda A\}$.</p>
+
+<p class="ml">Exemple 25 : la trace de la transposition</p>
+<p>$\varphi(M) = {}^tM$ sur $\mathcal M_n(\mathbb K)$. Calculer $\operatorname{tr}\varphi$.</p>
+<p><b>Étape 1 : Rappel.</b> $\mathcal M_n = S_n\oplus A_n$, $\dim S_n = \frac{n(n + 1)}2$, $\dim A_n = \frac{n(n - 1)}2$.</p>
+<p><b>Étape 2 : La matrice.</b> $\varphi = \operatorname{id}$ sur $S_n$ et $-\operatorname{id}$ sur $A_n$ : dans une base adaptée, $\operatorname{diag}(1, \dots, 1, -1, \dots, -1)$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\operatorname{tr}\varphi = \frac{n(n + 1)}2 - \frac{n(n - 1)}2 = \frac{n^2 + n - n^2 + n}2 = n}$, et $\varphi^2 = \operatorname{id}$ donne $\operatorname{rg}\varphi = n^2$.</p>
+
+<p class="ml">Exemple 26 : une somme de projecteurs</p>
+<p>$p_1, \dots, p_k$ projecteurs, $p = \sum p_i$. Montrer : $p$ projecteur $\Rightarrow p_i\circ p_j = 0$ ($i\neq j$).</p>
+<p><b>Étape 1 : Rappel.</b> Pour un projecteur, $\operatorname{tr} = \operatorname{rg}$.</p>
+<p><b>Étape 2 : Les rangs.</b> $\operatorname{rg}p = \operatorname{tr}p = \sum\operatorname{tr}p_i = \sum\operatorname{rg}p_i$. Or $\operatorname{Im}p\subset\sum\operatorname{Im}p_i$, donc $\operatorname{rg}p\leq\dim\sum\operatorname{Im}p_i\leq\sum\operatorname{rg}p_i$ : ce sont des égalités.</p>
+<p><b>Étape 3 : Somme directe.</b> $\dim\sum\operatorname{Im}p_i = \sum\dim\operatorname{Im}p_i$ : la somme est directe, et elle est égale à $\operatorname{Im}p$.</p>
+<p><b>Étape 4 : On conclut.</b> $p_j(x)\in\operatorname{Im}p$, donc $p(p_j(x)) = p_j(x)$, soit $\sum_ip_i(p_j(x)) = p_j(x)$, avec $p_i(p_j(x))\in\operatorname{Im}p_i$. Par unicité de la décomposition dans la somme directe, $p_i(p_j(x)) = 0$ pour $i\neq j$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p_i\circ p_j = 0\ (i\neq j)}$ (la réciproque est immédiate : $p^2 = \sum p_i^2 = p$).</p>
+
+<h2 id="m-blocs2">24. Calculer par blocs</h2>
+
+<p class="ml">Exemple 27 : l'inverse d'une matrice triangulaire par blocs</p>
+<p>$M = \begin{pmatrix}A&B\\0&D\end{pmatrix}$ avec $A, D$ inversibles. Trouver $M^{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $M^{-1} = \begin{pmatrix}X&Y\\Z&T\end{pmatrix}$ et on fait le produit par blocs.</p>
+<p><b>Étape 2 : Le système.</b> $\begin{pmatrix}A&B\\0&D\end{pmatrix}\begin{pmatrix}X&Y\\Z&T\end{pmatrix} = \begin{pmatrix}AX + BZ&AY + BT\\DZ&DT\end{pmatrix} = \begin{pmatrix}I&0\\0&I\end{pmatrix}$.</p>
+<p><b>Étape 3 : On résout de bas en haut.</b> $DZ = 0$ donne $Z = 0$ ; $DT = I$ donne $T = D^{-1}$ ; $AX = I$ donne $X = A^{-1}$ ; $AY = -BD^{-1}$ donne $Y = -A^{-1}BD^{-1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{M^{-1} = \begin{pmatrix}A^{-1}&-A^{-1}BD^{-1}\\0&D^{-1}\end{pmatrix}}$.</p>
+
+<p class="ml">Exemple 28 : le commutant par blocs</p>
+<p>$A = \begin{pmatrix}A_1&0\\0&A_4\end{pmatrix}\in\mathcal M_4(\mathbb R)$ avec $A_1 = 2I_2$ et $A_4 = \begin{pmatrix}0&-2\\-1&0\end{pmatrix}$. Quelles $M = \begin{pmatrix}M_1&M_2\\M_3&M_4\end{pmatrix}$ commutent avec $A$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Produit par blocs : $AM = \begin{pmatrix}A_1M_1&A_1M_2\\A_4M_3&A_4M_4\end{pmatrix}$, $MA = \begin{pmatrix}M_1A_1&M_2A_4\\M_3A_1&M_4A_4\end{pmatrix}$.</p>
+<p><b>Étape 2 : Bloc $1$.</b> $A_1 = 2I_2$ commute avec tout : $M_1$ quelconque.</p>
+<p><b>Étape 3 : Blocs $2$ et $3$.</b> $2M_2 = M_2A_4$, soit $M_2(A_4 - 2I) = 0$ ; $\det(A_4 - 2I) = \begin{vmatrix}-2&-2\\-1&-2\end{vmatrix} = 4 - 2 = 2\neq0$, donc $M_2 = 0$. De même $(A_4 - 2I)M_3 = 0$ donne $M_3 = 0$.</p>
+<p><b>Étape 4 : Bloc $4$.</b> $M_4 = \begin{pmatrix}x&y\\z&t\end{pmatrix}$ : $A_4M_4 = \begin{pmatrix}-2z&-2t\\-x&-y\end{pmatrix}$, $M_4A_4 = \begin{pmatrix}-y&-2x\\-t&-2z\end{pmatrix}$. Donc $y = 2z$, $t = x$ : $M_4 = \begin{pmatrix}x&2z\\z&x\end{pmatrix} = xI_2 - zA_4$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{M = \begin{pmatrix}M_1&0\\0&xI_2 - zA_4\end{pmatrix}}$, $M_1$ quelconque : $4 + 2 = 6$ paramètres, au lieu d'un système à $16$ inconnues.</p>
+
 <h2 id="m-reflexes">Si tu vois… alors pense à…</h2>
 <div class="mrefl">
 <div><b>$A^n$ à calculer</b><span>$A = \lambda I + N$, $N$ nilpotente, binôme.</span></div>
@@ -501,7 +752,7 @@ $$\operatorname{tr}({}^tAA) = \sum_{i,j}a_{i,j}^2\ \Longrightarrow\ \big(\operat
 
 `,
 "Groupe symétrique et déterminants": R`
-<nav class="msum"><a href="#d-sn">Permutations</a><a href="#d-cycles">Cycles</a><a href="#d-sign">Signature</a><a href="#d-def">Définition du déterminant</a><a href="#d-2">Taille 2</a><a href="#d-tri">Triangulaire</a><a href="#d-sarrus">Sarrus</a><a href="#d-ops">Opérations</a><a href="#d-dev">Développer</a><a href="#d-form">Formules</a><a href="#d-vdm">Vandermonde</a><a href="#d-plus">Pour aller plus loin</a><a href="#d-reflexes">Réflexes</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#d-sn">Permutations</a><a href="#d-cycles">Cycles</a><a href="#d-sign">Signature</a><a href="#d-def">Définition du déterminant</a><a href="#d-2">Taille 2</a><a href="#d-tri">Triangulaire</a><a href="#d-sarrus">Sarrus</a><a href="#d-ops">Opérations</a><a href="#d-dev">Développer</a><a href="#d-form">Formules</a><a href="#d-vdm">Vandermonde</a><a href="#d-plus">Pour aller plus loin</a><a href="#d-sf">Boîte à outils</a><a href="#d-reflexes">Réflexes</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-arbre">L'arbre</a></nav>
 
 <h2 id="d-sn">1. Le groupe symétrique</h2>
 <div class="sbox">$$\mathfrak S_n = \{\sigma : [\![1,n]\!]\to[\![1,n]\!]\ \text{bijective}\},\qquad\operatorname{Card}\mathfrak S_n = n!$$</div>
@@ -721,6 +972,96 @@ $$\begin{vmatrix}\cG1&0&0\\1&2&1\\0&1&2\end{vmatrix} = \cG1\times\begin{vmatrix}
 <p><b>Étape 4.</b> On résout la récurrence, avec $D_1 = 2$ et $D_2 = \begin{vmatrix}2&1\\1&2\end{vmatrix} = 3$ :</p>
 $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarrow\qquad D_n = D_1 + (n - 1) = n + 1.$$
 <p>Vérification : $D_4 = 5$. C'est la méthode pour toutes les matrices « en bande ».</p>
+
+<h2 id="d-sf">13. Calculer un déterminant : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Ce que tu vois</th><th>Méthode</th></tr>
+<tr><td>Une ligne ou colonne avec beaucoup de $0$</td><td><b>Développer</b> selon cette rangée.</td></tr>
+<tr><td>Même somme sur chaque ligne</td><td>$C_1\leftarrow C_1 + \dots + C_n$, sortir la somme, puis $L_i\leftarrow L_i - L_1$.</td></tr>
+<tr><td>Une « flèche », une matrice presque triangulaire</td><td>Une <b>combinaison de colonnes</b> qui annule la flèche.</td></tr>
+<tr><td>Le même vecteur dans toutes les colonnes</td><td><b>Multilinéarité</b> : les déterminants avec deux fois ce vecteur sont nuls.</td></tr>
+<tr><td>Tridiagonale, taille $n$ quelconque</td><td><b>Récurrence</b> d'ordre $2$ en développant, puis suite récurrente linéaire.</td></tr>
+<tr><td>Coefficients dépendant de $x$</td><td><b>Polynôme</b> en $x$ : degré, racines évidentes, coefficient dominant.</td></tr>
+<tr><td>$D(x)$ dérivable, colonnes dérivées simples</td><td><b>Dériver</b> colonne par colonne.</td></tr>
+<tr><td>Matrice par blocs</td><td>Opérations ou produits par blocs pour se ramener à une triangulaire par blocs.</td></tr>
+<tr><td>Un cas particulier gênant ($a_i = 0$…)</td><td><b>Continuité</b> du déterminant (polynôme en les coefficients).</td></tr>
+</table>
+
+<p class="ml">Exemple : la flèche</p>
+<p>$\Delta = \begin{vmatrix}0&1&1&\cdots&1\\1&a_1&0&\cdots&0\\1&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\1&0&\cdots&0&a_n\end{vmatrix}$ avec tous les $a_i\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant.</p>
+<p><b>Étape 2 : L'opération.</b> $C_0\leftarrow C_0 - \sum_{i=1}^n\frac1{a_i}C_i$. Ligne $i\geq1$ : $1 - \frac1{a_i}\times a_i = 0$. Ligne $0$ : $0 - \sum_i\frac1{a_i}\times1 = -\sum_i\frac1{a_i}$.</p>
+<p><b>Étape 3 : Triangulaire.</b> La matrice est triangulaire supérieure, de diagonale $-\sum\frac1{a_i}, a_1, \dots, a_n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\Delta = -a_1\cdots a_n\sum_{i=1}^n\frac1{a_i} = -\sum_{i=1}^n\prod_{j\neq i}a_j}$. Le membre de droite est un polynôme : par continuité, la formule reste vraie si un $a_i$ est nul.</p>
+
+<p class="ml">Exemple : $a$ sur la diagonale, $b$ ailleurs</p>
+<p><b>Étape 1 : Rappel.</b> Chaque ligne a la même somme : $C_1\leftarrow C_1 + \dots + C_n$.</p>
+<p><b>Étape 2 : La somme.</b> Chaque ligne contient un $a$ et $n - 1$ fois $b$ : somme $a + (n - 1)b$. On la sort de la colonne $1$, qui devient remplie de $1$.</p>
+<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs. Triangulaire.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{D_n(a, b) = (a + (n - 1)b)(a - b)^{n-1}}$. Contrôle $n = 2$ : $a^2 - b^2 = (a + b)(a - b)$ ✓.</p>
+
+<p class="ml">Exemple : la même par multilinéarité</p>
+<p><b>Étape 1 : Rappel.</b> $\det$ est linéaire en chaque colonne et nul si deux colonnes sont égales.</p>
+<p><b>Étape 2 : Les colonnes.</b> Avec $V = (1, \dots, 1)$ : $C_j = (a - b)E_j + bV$.</p>
+<p><b>Étape 3 : On développe.</b> Les termes contenant $bV$ au moins deux fois sont nuls. Il reste $\det((a - b)E_1, \dots, (a - b)E_n) = (a - b)^n$ et les $n$ termes où $bV$ remplace la $j$-ième colonne : chacun vaut $(a - b)^{n-1}b$ (développer selon la ligne $j$).</p>
+<p><b>Étape 4 : Conclusion.</b> $(a - b)^n + nb(a - b)^{n-1} = (a - b)^{n-1}(a - b + nb)$ : on retrouve $\cG{(a + (n - 1)b)(a - b)^{n-1}}$.</p>
+
+<p class="ml">Exemple : un déterminant tridiagonal par récurrence</p>
+<p>$D_n$ : $a + b$ sur la diagonale, $ab$ au-dessus, $1$ en dessous. ($a\neq b$.)</p>
+<p><b>Étape 1 : Rappel.</b> Développer selon la 1<sup>re</sup> colonne donne une récurrence d'ordre $2$ ; puis $r^2 = (a + b)r - ab$.</p>
+<p><b>Étape 2 : Le développement.</b> Colonne $1$ : $(a + b)$ en ligne $1$ (mineur $D_{n-1}$) et $1$ en ligne $2$ (signe $-$). Ce second mineur a pour 1<sup>re</sup> ligne $(ab, 0, \dots, 0)$ : il vaut $ab\,D_{n-2}$. Donc $D_n = (a + b)D_{n-1} - abD_{n-2}$.</p>
+<p><b>Étape 3 : Les débuts.</b> $D_1 = a + b$, $D_2 = (a + b)^2 - ab\times1 = a^2 + ab + b^2$ ; on pose $D_0 = 1$ (alors $(a + b)^2 - ab = a^2 + ab + b^2$ ✓).</p>
+<p><b>Étape 4 : La suite récurrente.</b> $r^2 - (a + b)r + ab = (r - a)(r - b)$ : racines $a, b$. $D_n = \lambda a^n + \mu b^n$ avec $\lambda + \mu = 1$ et $\lambda a + \mu b = a + b$, d'où $\lambda = \frac a{a - b}$, $\mu = \frac{-b}{a - b}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{D_n = \frac{a^{n+1} - b^{n+1}}{a - b} = \sum_{k=0}^na^kb^{n-k}}$, et par continuité $D_n = (n + 1)a^n$ si $a = b$.</p>
+
+<p class="ml">Exemple : la matrice compagnon, par récurrence sur la dernière colonne</p>
+<p>$C(a_0, \dots, a_n) = \begin{vmatrix}a_0&-1&0&\cdots&0\\a_1&x&-1&&\vdots\\\vdots&&\ddots&\ddots&0\\a_{n-1}&0&&x&-1\\a_n&0&\cdots&0&x\end{vmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> La dernière colonne n'a que deux termes non nuls : $-1$ et $x$.</p>
+<p><b>Étape 2 : Le développement.</b> Le $x$ (position $(n, n)$, signe $+$) donne $x\,C(a_0, \dots, a_{n-1})$. Le $-1$ (ligne de $a_{n-1}$, signe $-$) donne $(-1)\times(-1)\times\Delta' = \Delta'$, où $\Delta'$ est le mineur obtenu en barrant cette ligne et la dernière colonne. On développe $\Delta'$ selon sa dernière ligne $(a_n, 0, \dots, 0)$ : il reste $a_n$ fois un déterminant triangulaire de diagonale $-1, \dots, -1$, et les signes $(-1)^{n+1}\times(-1)^{n-1} = 1$ se compensent : $\Delta' = a_n$.</p>
+<p><b>Étape 3 : La récurrence.</b> $C(a_0, \dots, a_n) = x\,C(a_0, \dots, a_{n-1}) + a_n$, avec $C(a_0) = a_0$. Puis $C(a_0, a_1) = a_0x + a_1$ (contrôle : $a_0x - (-1)a_1$ ✓).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{C = a_0x^n + a_1x^{n-1} + \dots + a_{n-1}x + a_n}$ (Horner).</p>
+
+<p class="ml">Exemple : le caractère polynomial, racines évidentes</p>
+<p>$D_n(x)$ d'ordre $n + 1$ : diagonale $1, 1 - x, 2 - x, \dots, n - x$, et des $1$ partout ailleurs.</p>
+<p><b>Étape 1 : Rappel.</b> $\det = \sum_\sigma\varepsilon(\sigma)\prod m_{\sigma(i)i}$ : un polynôme en $x$. Deux lignes égales $\Rightarrow\det = 0$.</p>
+<p><b>Étape 2 : Le degré.</b> $x$ n'apparaît que sur la diagonale ($n$ fois) ; le terme en $x^n$ vient du produit diagonal, de coefficient $(-1)^n$.</p>
+<p><b>Étape 3 : Les racines.</b> Pour $x = k$ ($0\leq k\leq n - 1$), la ligne de diagonale $(k + 1) - x$ vaut $1$ en cette position : elle est égale à la 1<sup>re</sup> ligne (toute de $1$). Donc $D_n(k) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $n$ racines distinctes, degré $n$, coefficient dominant $(-1)^n$ : $\cG{D_n(x) = (-1)^n\prod_{k=0}^{n-1}(x - k)}$.</p>
+
+<p class="ml">Exemple : un déterminant $4\times4$ factorisé</p>
+<p>$\Delta = \begin{vmatrix}a&b&c&d\\b&a&d&c\\c&d&a&b\\d&c&b&a\end{vmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Polynôme homogène de degré $4$ en $a, b, c, d$ ; une colonne qui se factorise donne un facteur.</p>
+<p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $a + b + c + d$ : facteur $(a + b + c + d)$.</p>
+<p><b>Étape 3 : Les autres facteurs.</b> $C_1\leftarrow C_1 + C_2 - C_3 - C_4$ donne la colonne $(a + b - c - d)(1, 1, -1, -1)$ : facteur $a + b - c - d$. De même $C_1 + C_3 - C_2 - C_4$ et $C_1 + C_4 - C_2 - C_3$ donnent $a - b + c - d$ et $a - b - c + d$.</p>
+<p><b>Étape 4 : La constante.</b> Le produit des quatre facteurs a pour terme en $a^4$ le coefficient $1$, comme $\Delta$ (produit diagonal).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\Delta = (a + b + c + d)(a + b - c - d)(a - b + c - d)(a - b - c + d)}$.</p>
+
+<p class="ml">Exemple : dériver un déterminant</p>
+<p>$D_n(x) = \begin{vmatrix}x&1&&0\\\frac{x^2}{2!}&x&\ddots&\\\vdots&\ddots&\ddots&1\\\frac{x^n}{n!}&\cdots&\frac{x^2}{2!}&x\end{vmatrix}$. Calculer $D_n'$, puis $D_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $D' = \sum_j\det(C_1, \dots, C_j', \dots, C_n)$.</p>
+<p><b>Étape 2 : Les colonnes dérivées.</b> $\big(\frac{x^k}{k!}\big)' = \frac{x^{k-1}}{(k - 1)!}$ : la dérivée de $C_j$ est $C_{j+1}$ pour $j \lt n$ ; ces déterminants ont deux colonnes égales, ils sont nuls.</p>
+<p><b>Étape 3 : Le dernier.</b> $C_n' = (0, \dots, 0, 1)$ : en développant selon cette colonne, il reste $D_{n-1}(x)$. Donc $D_n' = D_{n-1}$.</p>
+<p><b>Étape 4 : On intègre.</b> En $x = 0$, la 1<sup>re</sup> colonne $\big(x, \frac{x^2}{2!}, \dots\big)$ est nulle, donc $D_n(0) = 0$. Avec $D_1 = x$ : $D_2' = D_1 = x$ et $D_2(0) = 0$ donnent $D_2 = \frac{x^2}2$ ; par récurrence, si $D_{n-1} = \frac{x^{n-1}}{(n - 1)!}$, alors $D_n = \frac{x^n}{n!}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{D_n(x) = \frac{x^n}{n!}}$.</p>
+
+<p class="ml">Exemple : un déterminant par blocs $\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix}$</p>
+<p><b>Étape 1 : Rappel.</b> Ajouter à une colonne un multiple d'une autre ne change pas le déterminant ; une triangulaire par blocs a pour déterminant le produit des déterminants des blocs diagonaux.</p>
+<p><b>Étape 2 : L'opération</b> (pour $d\neq0$) : $C_i\leftarrow C_i - \frac cdC_{i+n}$, $1\leq i\leq n$. En bas : $cA - \frac cd\times dA = 0$. En haut : $aA - \frac cd\times bA = \frac{ad - bc}dA$.</p>
+<p><b>Étape 3 : Triangulaire par blocs.</b> $\det = \det\Big(\frac{ad - bc}dA\Big)\det(dA) = \Big(\frac{ad - bc}d\Big)^n\det A\times d^n\det A$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix} = (ad - bc)^n(\det A)^2}$, vrai aussi si $d = 0$ par continuité (polynôme en $d$).</p>
+
+<p class="ml">Exemple : $\det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\geq0$</p>
+<p><b>Étape 1 : Rappel.</b> Opérations par blocs avec le coefficient complexe $i$, et $\det\overline M = \overline{\det M}$.</p>
+<p><b>Étape 2 : Colonnes.</b> $C_j\leftarrow C_j + iC_{j+n}$ : $\begin{vmatrix}A + iB&B\\-B + iA&A\end{vmatrix} = \begin{vmatrix}A + iB&B\\i(A + iB)&A\end{vmatrix}$ (car $i(A + iB) = iA - B$).</p>
+<p><b>Étape 3 : Lignes.</b> $L_{k+n}\leftarrow L_{k+n} - iL_k$ : en bas à gauche $i(A + iB) - i(A + iB) = 0$, en bas à droite $A - iB$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\det = \det(A + iB)\det(A - iB) = \det(A + iB)\overline{\det(A + iB)}$ ($A, B$ réelles), soit $\cG{|\det(A + iB)|^2\geq0}$.</p>
+
+<p class="ml">Exemple : $\chi_{AB} = \chi_{BA}$ par des produits par blocs</p>
+<p>$A\in\mathcal M_{n,p}$, $B\in\mathcal M_{p,n}$. Comparer $\chi_{AB}$ et $\chi_{BA}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\det(MN) = \det M\det N$ et le déterminant d'une triangulaire par blocs.</p>
+<p><b>Étape 2 : Premier produit.</b> $U = \begin{pmatrix}xI_n&A\\B&I_p\end{pmatrix}$ : $U\begin{pmatrix}I_n&0\\-B&I_p\end{pmatrix} = \begin{pmatrix}xI_n - AB&A\\0&I_p\end{pmatrix}$, donc $\det U = \det(xI_n - AB) = \chi_{AB}(x)$.</p>
+<p><b>Étape 3 : Second produit.</b> $U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - BA\end{pmatrix}$, donc $\det U\times x^p = x^n\chi_{BA}(x)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x^p\chi_{AB}(x) = x^n\chi_{BA}(x)}$ : $AB$ et $BA$ ont les mêmes valeurs propres non nulles, et $\chi_{AB} = \chi_{BA}$ si $n = p$.</p>
 
 <h2 id="d-reflexes">Si tu vois… alors pense à…</h2>
 <div class="mrefl">
