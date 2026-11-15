@@ -575,9 +575,11 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 <p>$A\in\mathcal M_4(\mathbb R)$ : $2$ sur la diagonale, $a$ ailleurs. Rang selon $a$.</p>
 $$A = \begin{pmatrix}2&a&a&a\\a&2&a&a\\a&a&2&a\\a&a&a&2\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $\det\neq0\iff$ rang $4$ ; sinon, chercher la plus grande sous-matrice inversible.</p>
-<p><b>Étape 2 : Le déterminant</b> (exemple 9, ou la fiche déterminants) : $\det A = (2 + 3a)(2 - a)^3$.</p>
+<p><b>Étape 2 : Le déterminant.</b> Chaque ligne a pour somme $2 + 3a$ : on fait $C_1\leftarrow C_1 + C_2 + C_3 + C_4$ et on sort $2 + 3a$, puis $L_i\leftarrow L_i - L_1$ ($i = 2, 3, 4$) :</p>
+$$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix} = (2 + 3a)\begin{vmatrix}1&a&a&a\\0&2 - a&0&0\\0&0&2 - a&0\\0&0&0&2 - a\end{vmatrix} = (2 + 3a)(2 - a)^3.$$
+<p>Il s'annule pour $a = 2$ ou $2 + 3a = 0$, soit $a = -\frac23$.</p>
 <p><b>Étape 3 : $a = 2$.</b> Tous les coefficients valent $2$ : rang $1$.</p>
-<p><b>Étape 4 : $a = -\frac23$.</b> La sous-matrice $3\times3$ de même forme a pour déterminant $(2 + 2a)(2 - a)^2 = \frac23\times\frac{64}9 = \frac{128}{27}\neq0$ : rang $3$.</p>
+<p><b>Étape 4 : $a = -\frac23$.</b> La sous-matrice $3\times3$ en haut à gauche $\begin{pmatrix}2&a&a\\a&2&a\\a&a&2\end{pmatrix}$ a, par le même calcul, pour déterminant $(2 + 2a)(2 - a)^2$. Avec $a = -\frac23$ : $2 + 2a = 2 - \frac43 = \frac23$ et $2 - a = 2 + \frac23 = \frac83$, donc $\frac23\times\frac{64}9 = \frac{128}{27}\neq0$ : rang $3$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg}A = 4\ (a\notin\{2, -\tfrac23\}),\ 1\ (a = 2),\ 3\ (a = -\tfrac23)}$.</p>
 
 <p class="ml">Exemple 16 : le rang d'une matrice par blocs diagonale</p>
@@ -636,7 +638,7 @@ $$A = \begin{pmatrix}2&a&a&a\\a&2&a&a\\a&a&2&a\\a&a&a&2\end{pmatrix}.$$
 <p class="ml">Exemple 22 : trouver la base qui rend semblable</p>
 <p>$A = \begin{pmatrix}4&1&-1\\-6&-1&2\\2&1&1\end{pmatrix}$, $B = \begin{pmatrix}1&1&0\\0&1&0\\0&0&2\end{pmatrix}$. Montrer qu'elles sont semblables.</p>
 <p><b>Étape 1 : Rappel.</b> On cherche $e'_1, e'_2, e'_3$ avec $u(e'_1) = e'_1$, $u(e'_2) = e'_1 + e'_2$, $u(e'_3) = 2e'_3$ (les colonnes de $B$).</p>
-<p><b>Étape 2 : $e'_1$.</b> $(A - I)X = 0$ : $3x + y - z = 0$, $-6x - 2y + 2z = 0$ (même équation $\times(-2)$), $2x + y = 0$. Donc $y = -2x$, $z = 3x + y = x$ : $e'_1 = (1, -2, 1)$.</p>
+<p><b>Étape 2 : $e'_1$.</b> On enlève $1$ sur la diagonale : $A - I_3 = \begin{pmatrix}4 - 1&1&-1\\-6&-1 - 1&2\\2&1&1 - 1\end{pmatrix} = \begin{pmatrix}3&1&-1\\-6&-2&2\\2&1&0\end{pmatrix}$. $(A - I)X = 0$ donne $3x + y - z = 0$, $-6x - 2y + 2z = 0$ (c'est la 1<sup>re</sup> multipliée par $-2$) et $2x + y = 0$. La 3<sup>e</sup> donne $y = -2x$, puis la 1<sup>re</sup> $z = 3x + y = 3x - 2x = x$. Avec $x = 1$ : $e'_1 = (1, -2, 1)$.</p>
 <p><b>Étape 3 : $e'_2$.</b> $(A - I)X = e'_1$ : $3x + y - z = 1$, $2x + y = 1$. Avec $x = 0$ : $y = 1$, $z = 0$. Contrôle ligne 2 : $0 - 2 + 0 = -2$ ✓. $e'_2 = (0, 1, 0)$.</p>
 <p><b>Étape 4 : $e'_3$.</b> $A - 2I = \begin{pmatrix}2&1&-1\\-6&-3&2\\2&1&-1\end{pmatrix}$ : $(A - 2I)X = 0$ donne $2x + y - z = 0$ (lignes 1 et 3) et $-6x - 3y + 2z = 0$. De la 1<sup>re</sup> : $z = 2x + y$ ; dans la 2<sup>e</sup> : $-6x - 3y + 4x + 2y = -2x - y = 0$, $y = -2x$, $z = 0$ : $e'_3 = (1, -2, 0)$.</p>
 <p><b>Étape 5 : Base ?</b> $\det(e'_1, e'_2, e'_3) = \begin{vmatrix}1&0&1\\-2&1&-2\\1&0&0\end{vmatrix}$, développé selon la ligne 3 : $1\times\begin{vmatrix}0&1\\1&-2\end{vmatrix} = 0 - 1 = -1\neq0$.</p>
@@ -995,14 +997,16 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 <p>$\Delta = \begin{vmatrix}0&1&1&\cdots&1\\1&a_1&0&\cdots&0\\1&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\1&0&\cdots&0&a_n\end{vmatrix}$ avec tous les $a_i\neq0$.</p>
 <p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant.</p>
 <p><b>Étape 2 : L'opération.</b> $C_0\leftarrow C_0 - \sum_{i=1}^n\frac1{a_i}C_i$. Ligne $i\geq1$ : $1 - \frac1{a_i}\times a_i = 0$. Ligne $0$ : $0 - \sum_i\frac1{a_i}\times1 = -\sum_i\frac1{a_i}$.</p>
-<p><b>Étape 3 : Triangulaire.</b> La matrice est triangulaire supérieure, de diagonale $-\sum\frac1{a_i}, a_1, \dots, a_n$.</p>
+<p><b>Étape 3 : Triangulaire.</b> Après l'opération, la 1<sup>re</sup> colonne n'a plus qu'un coefficient non nul, en haut :</p>
+$$\Delta = \begin{vmatrix}-\sum_i\frac1{a_i}&1&1&\cdots&1\\0&a_1&0&\cdots&0\\0&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\0&0&\cdots&0&a_n\end{vmatrix} = \Big(-\sum_i\frac1{a_i}\Big)\times a_1\times a_2\times\cdots\times a_n.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\Delta = -a_1\cdots a_n\sum_{i=1}^n\frac1{a_i} = -\sum_{i=1}^n\prod_{j\neq i}a_j}$. Le membre de droite est un polynôme : par continuité, la formule reste vraie si un $a_i$ est nul.</p>
 
 <p class="ml">Exemple : $a$ sur la diagonale, $b$ ailleurs</p>
 $$D_n(a, b) = \begin{vmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{vmatrix},\qquad\text{par exemple}\quad D_3 = \begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> Chaque ligne a la même somme : $C_1\leftarrow C_1 + \dots + C_n$.</p>
 <p><b>Étape 2 : La somme.</b> Chaque ligne contient un $a$ et $n - 1$ fois $b$ : somme $a + (n - 1)b$. On la sort de la colonne $1$, qui devient remplie de $1$.</p>
-<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs. Triangulaire.</p>
+<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs :</p>
+$$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\1&b&\cdots&a\end{vmatrix} = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\0&a - b&&0\\\vdots&&\ddots&\\0&0&&a - b\end{vmatrix}\quad\text{(triangulaire)}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{D_n(a, b) = (a + (n - 1)b)(a - b)^{n-1}}$. Contrôle $n = 2$ : $a^2 - b^2 = (a + b)(a - b)$ ✓.</p>
 
 <p class="ml">Exemple : la même par multilinéarité</p>
@@ -1017,7 +1021,7 @@ $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots
 <p><b>Étape 1 : Rappel.</b> Développer selon la 1<sup>re</sup> colonne donne une récurrence d'ordre $2$ ; puis $r^2 = (a + b)r - ab$.</p>
 <p><b>Étape 2 : Le développement.</b> Colonne $1$ : $(a + b)$ en ligne $1$ (mineur $D_{n-1}$) et $1$ en ligne $2$ (signe $-$). Ce second mineur a pour 1<sup>re</sup> ligne $(ab, 0, \dots, 0)$ : il vaut $ab\,D_{n-2}$. Donc $D_n = (a + b)D_{n-1} - abD_{n-2}$.</p>
 <p><b>Étape 3 : Les débuts.</b> $D_1 = a + b$, $D_2 = (a + b)^2 - ab\times1 = a^2 + ab + b^2$ ; on pose $D_0 = 1$ (alors $(a + b)^2 - ab = a^2 + ab + b^2$ ✓).</p>
-<p><b>Étape 4 : La suite récurrente.</b> $r^2 - (a + b)r + ab = (r - a)(r - b)$ : racines $a, b$. $D_n = \lambda a^n + \mu b^n$ avec $\lambda + \mu = 1$ et $\lambda a + \mu b = a + b$, d'où $\lambda = \frac a{a - b}$, $\mu = \frac{-b}{a - b}$.</p>
+<p><b>Étape 4 : La suite récurrente.</b> $r^2 - (a + b)r + ab = (r - a)(r - b)$ : racines $a, b$, donc $D_n = \lambda a^n + \mu b^n$. $n = 0$ : $\lambda + \mu = 1$. $n = 1$ : $\lambda a + \mu b = a + b$. On remplace $\mu = 1 - \lambda$ : $\lambda a + b - \lambda b = a + b$, soit $\lambda(a - b) = a$, $\lambda = \frac a{a - b}$, puis $\mu = 1 - \frac a{a - b} = \frac{-b}{a - b}$. Donc $D_n = \frac{a\cdot a^n - b\cdot b^n}{a - b}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{D_n = \frac{a^{n+1} - b^{n+1}}{a - b} = \sum_{k=0}^na^kb^{n-k}}$, et par continuité $D_n = (n + 1)a^n$ si $a = b$.</p>
 
 <p class="ml">Exemple : la matrice compagnon, par récurrence sur la dernière colonne</p>
@@ -1066,8 +1070,10 @@ $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\
 <p class="ml">Exemple : $\chi_{AB} = \chi_{BA}$ par des produits par blocs</p>
 <p>$A\in\mathcal M_{n,p}$, $B\in\mathcal M_{p,n}$. Comparer $\chi_{AB}$ et $\chi_{BA}$.</p>
 <p><b>Étape 1 : Rappel.</b> $\det(MN) = \det M\det N$ et le déterminant d'une triangulaire par blocs.</p>
-<p><b>Étape 2 : Premier produit.</b> $U = \begin{pmatrix}xI_n&A\\B&I_p\end{pmatrix}$ : $U\begin{pmatrix}I_n&0\\-B&I_p\end{pmatrix} = \begin{pmatrix}xI_n - AB&A\\0&I_p\end{pmatrix}$, donc $\det U = \det(xI_n - AB) = \chi_{AB}(x)$.</p>
-<p><b>Étape 3 : Second produit.</b> $U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - BA\end{pmatrix}$, donc $\det U\times x^p = x^n\chi_{BA}(x)$.</p>
+<p><b>Étape 2 : Premier produit.</b> $U = \begin{pmatrix}xI_n&A\\B&I_p\end{pmatrix}$. Bloc par bloc : $xI_n\cdot I_n + A\cdot(-B) = xI_n - AB$ ; $xI_n\cdot0 + A\cdot I_p = A$ ; $B\cdot I_n + I_p\cdot(-B) = 0$ ; $B\cdot0 + I_p\cdot I_p = I_p$ :</p>
+$$U\begin{pmatrix}I_n&0\\-B&I_p\end{pmatrix} = \begin{pmatrix}xI_n - AB&A\\0&I_p\end{pmatrix},\quad\text{donc}\quad\det U\times1 = \det(xI_n - AB)\times1 = \chi_{AB}(x).$$
+<p><b>Étape 3 : Second produit.</b> Bloc par bloc : $xI_n\cdot I_n + A\cdot0 = xI_n$ ; $xI_n\cdot(-A) + A\cdot xI_p = 0$ ; $B\cdot I_n + I_p\cdot0 = B$ ; $B\cdot(-A) + I_p\cdot xI_p = xI_p - BA$ :</p>
+$$U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - BA\end{pmatrix},\quad\text{donc}\quad\det U\times x^p = x^n\chi_{BA}(x).$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{x^p\chi_{AB}(x) = x^n\chi_{BA}(x)}$ : $AB$ et $BA$ ont les mêmes valeurs propres non nulles, et $\chi_{AB} = \chi_{BA}$ si $n = p$.</p>
 
 <h2 id="d-reflexes">Si tu vois… alors pense à…</h2>
@@ -1440,7 +1446,9 @@ $$C = \begin{pmatrix}0&0&\cdots&0&-a_0\\1&0&\cdots&0&-a_1\\0&1&\ddots&\vdots&\vd
 <p>$A = \begin{pmatrix}6&-6&5\\-4&-1&10\\7&-6&4\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> $\sum\lambda_i = \operatorname{tr}A$ et $\prod\lambda_i = \det A$ (avec multiplicités).</p>
 <p><b>Étape 2 : Une valeur propre.</b> Sommes des lignes : $6 - 6 + 5 = 5$, $-4 - 1 + 10 = 5$, $7 - 6 + 4 = 5$. Donc $A(1, 1, 1) = 5(1, 1, 1)$.</p>
-<p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 6 - 1 + 4 = 9$ et $\det A = -25$ : $5 + \lambda + \mu = 9$, $5\lambda\mu = -25$, soit $\lambda + \mu = 4$, $\lambda\mu = -5$ : racines de $t^2 - 4t - 5 = (t - 5)(t + 1)$.</p>
+<p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 6 + (-1) + 4 = 9$. Le déterminant, développé selon la 1<sup>re</sup> ligne :</p>
+$$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\7&4\end{vmatrix} + 5\begin{vmatrix}-4&-1\\7&-6\end{vmatrix} = 6(-4 + 60) + 6(-16 - 70) + 5(24 + 7) = 336 - 516 + 155 = -25.$$
+<p>Donc $5 + \lambda + \mu = 9$ et $5\lambda\mu = -25$, soit $\lambda + \mu = 4$ et $\lambda\mu = -5$ : $\lambda, \mu$ sont les racines de $t^2 - 4t - 5$. $\Delta = 16 + 20 = 36$, $t = \frac{4\pm6}2$, soit $5$ et $-1$.</p>
 <p><b>Étape 4 : Diagonalisable ?</b> $5$ est double ; $A - 5I = \begin{pmatrix}1&-6&5\\-4&-6&10\\7&-6&-1\end{pmatrix}$ a deux premières lignes non proportionnelles ($\frac{-4}1 = -4$ mais $\frac{-6}{-6} = 1$), donc $\operatorname{rg}\geq2$ ; et $5$ est valeur propre, donc $\operatorname{rg}\leq2$. Ainsi $\dim E_5 = 3 - 2 = 1 \lt 2$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{5\ (\text{double}), -1\},\ A\ \text{non diagonalisable}}$.</p>
 
@@ -1556,7 +1564,10 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p class="ml">Exemple 21 : trigonaliser une matrice $3\times3$</p>
 <p>$A = \begin{pmatrix}2&2&-3\\5&1&-5\\-3&4&0\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> On prend les vecteurs propres, puis on complète en cherchant $u(e_2) = e_2 + ae_1$, $u(e_3) = e_3 + be_1 + ce_2$.</p>
-<p><b>Étape 2 : $\chi_A$.</b> $\det(A - xI)$ vaut $1, 0, -1$ en $x = 0, 1, 2$ et $27$ en $-2$ : c'est $(1 - x)^3$. Seule valeur propre $1$, et $A\neq I_3$ : pas diagonalisable.</p>
+<p><b>Étape 2 : $\chi_A$.</b> Développement selon la 1<sup>re</sup> ligne :</p>
+$$\begin{vmatrix}2 - x&2&-3\\5&1 - x&-5\\-3&4&-x\end{vmatrix} = (2 - x)\big[(1 - x)(-x) + 20\big] - 2\big[-5x - 15\big] - 3\big[20 + 3(1 - x)\big]$$
+$$= (2 - x)(x^2 - x + 20) + 10x + 30 - 69 + 9x = -x^3 + 3x^2 - 22x + 40 + 19x - 39 = -x^3 + 3x^2 - 3x + 1 = (1 - x)^3.$$
+<p>Seule valeur propre $1$, et $A\neq I_3$ : pas diagonalisable.</p>
 <p><b>Étape 3 : $e_1$.</b> Les lignes ont pour somme $2 + 2 - 3 = 1$, $5 + 1 - 5 = 1$, $-3 + 4 + 0 = 1$ : $e_1 = (1, 1, 1)$, et $\operatorname{rg}(A - I) = 2$ donne $E_1 = \mathbb Re_1$.</p>
 <p><b>Étape 4 : $e_2$.</b> $(A - I)X = ae_1$ avec $a = 5$ : $x + 2y - 3z = 5$, $5x - 5z = 5$, $-3x + 4y - z = 5$. Avec $x = 0$ : $z = -1$, $y = 1$. $e_2 = (0, 1, -1)$ ; contrôle $Ae_2 = (2 + 3, 1 + 5, 4) = (5, 6, 4) = 5e_1 + e_2$ ✓.</p>
 <p><b>Étape 5 : $e_3$.</b> $(A - I)X = be_1 + ce_2$ avec $b = 0$, $c = 10$ : $X = (2, -1, 0)$ ; contrôle $Ae_3 = (4 - 2, 10 - 1, -6 - 4) = (2, 9, -10) = 10e_2 + e_3$ ✓.</p>
@@ -1611,7 +1622,9 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 1 : Rappel.</b> $X_{n+1} = AX_n$ avec la matrice compagnon ; $u_n$ est une combinaison de $\lambda^n$, $n\lambda^n$ selon les racines de $\chi_A$.</p>
 <p><b>Étape 2 : Le polynôme.</b> $\chi_A = X^4 - 2X^3 - 3X^2 + 4X + 4$. En $-1$ : $1 + 2 - 3 - 4 + 4 = 0$ ; en $2$ : $16 - 16 - 12 + 8 + 4 = 0$. On vérifie $(X + 1)^2(X - 2)^2 = (X^2 + 2X + 1)(X^2 - 4X + 4) = X^4 - 2X^3 - 3X^2 + 4X + 4$ ✓.</p>
 <p><b>Étape 3 : La forme.</b> Racines doubles : $u_n = (\alpha + \beta n)(-1)^n + (\gamma + \delta n)2^n$.</p>
-<p><b>Étape 4 : Les constantes.</b> $n = 0$ : $\alpha + \gamma = 1$. $n = 1$ : $-\alpha - \beta + 2\gamma + 2\delta = 0$. $n = 2$ : $\alpha + 2\beta + 4\gamma + 8\delta = 11$. $n = 3$ : $-\alpha - 3\beta + 8\gamma + 24\delta = 20$. Solution $\alpha = \beta = \delta = 1$, $\gamma = 0$ : contrôle $n = 1$ : $-1 - 1 + 0 + 2 = 0$ ✓ ; $n = 2$ : $1 + 2 + 0 + 8 = 11$ ✓ ; $n = 3$ : $-1 - 3 + 0 + 24 = 20$ ✓.</p>
+<p><b>Étape 4 : Les constantes.</b> On écrit $u_0, u_1, u_2, u_3$ :</p>
+$$\left\{\begin{aligned}\alpha + \gamma &= 1&&(1)\\-\alpha - \beta + 2\gamma + 2\delta &= 0&&(2)\\\alpha + 2\beta + 4\gamma + 8\delta &= 11&&(3)\\-\alpha - 3\beta + 8\gamma + 24\delta &= 20&&(4)\end{aligned}\right.$$
+<p>(2) + (3) : $\beta + 6\gamma + 10\delta = 11$ (5). (3) + (4) : $-\beta + 12\gamma + 32\delta = 31$ (6). (5) + (6) : $18\gamma + 42\delta = 42$, soit $3\gamma + 7\delta = 7$ (7). Avec $\alpha = 1 - \gamma$ dans (2) : $-\beta + 3\gamma + 2\delta = 1$ ; plus (5) : $9\gamma + 12\delta = 12$, soit $3\gamma + 4\delta = 4$ (8). (7) − (8) : $3\delta = 3$, $\delta = 1$, puis $\gamma = 0$, $\alpha = 1$, $\beta = 3\times0 + 2\times1 - 1 = 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n = (n + 1)(-1)^n + n\,2^n}$.</p>
 
 <h2 id="r-sfmat">16. Commutant, équations matricielles, inversibilité, trace</h2>
@@ -1625,7 +1638,8 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p class="ml">Exemple 28 : $M^3 = A$</p>
 <p>$A = \begin{pmatrix}-4&4&-4\\-4&4&4\\-8&8&0\end{pmatrix}$. Trouver les $M\in\mathcal M_3(\mathbb R)$ avec $M^3 = A$.</p>
 <p><b>Étape 1 : Rappel.</b> On diagonalise $A = PDP^{-1}$, $M' = P^{-1}MP$ vérifie $M'^3 = D$ ; $M'$ commute avec $D$, à coefficients diagonaux distincts, donc $M'$ est diagonale.</p>
-<p><b>Étape 2 : Diagonaliser.</b> $\chi_A = X^3 - 64X = X(X - 8)(X + 8)$ ; $P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix}$, $D = \operatorname{diag}(0, 8, -8)$. Contrôle : $A(1, 1, 0) = (0, 0, 0)$ ✓, $A(0, 1, 1) = (0, 8, 8)$ ✓, $A(1, 0, 1) = (-8, -4 + 4, -8)$… $= (-8, 0, -8)$ ✓.</p>
+<p><b>Étape 2 : Diagonaliser.</b> $\chi_A = X^3 - (\operatorname{tr}A)X^2 + sX - \det A$ avec $\operatorname{tr}A = -4 + 4 + 0 = 0$, $s$ = somme des mineurs diagonaux $= (-16 + 16) + (0 - 32) + (0 - 32) = -64$, et $\det A = 0$ (la 2<sup>e</sup> colonne est l'opposée de la 1<sup>re</sup>). Donc $\chi_A = X^3 - 64X = X(X - 8)(X + 8)$. Vecteurs propres : $A(1, 1, 0) = (-4 + 4, -4 + 4, -8 + 8) = (0, 0, 0)$, $A(0, 1, 1) = (4 - 4, 4 + 4, 8 + 0) = (0, 8, 8)$, $A(1, 0, 1) = (-4 - 4, -4 + 4, -8 + 0) = (-8, 0, -8)$ :</p>
+$$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}0&0&0\\0&8&0\\0&0&-8\end{pmatrix}.$$
 <p><b>Étape 3 : $M'$.</b> $M' = \operatorname{diag}(a, b, c)$ avec $a^3 = 0$, $b^3 = 8$, $c^3 = -8$, dans $\mathbb R$ : $a = 0$, $b = 2$, $c = -2$.</p>
 <p><b>Étape 4 : Conclusion.</b> Une seule solution réelle, $\cG{M = P\operatorname{diag}(0, 2, -2)P^{-1} = \frac14A}$ (contrôle : $A^3 = 64A$ par Cayley-Hamilton, donc $\big(\frac A4\big)^3 = A$). Dans $\mathcal M_3(\mathbb C)$ : $b\in\{2, 2j, 2j^2\}$, $c\in\{-2, -2j, -2j^2\}$, soit $9$ solutions.</p>
 
@@ -1664,7 +1678,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 4 : Conclusion.</b> $\cG{\{0\},\ \mathbb Re_1,\ \mathbb Re_3,\ \{y = 0\},\ \{z = 0\},\ \mathbb R^3}$ : $A$ n'est pas diagonalisable, donc il n'y en a que six.</p>
 
 <p class="ml">Exemple 34 : $\exp(A)$ par un annulateur</p>
-<p>$A = \begin{pmatrix}3&-3&2\\-1&5&-2\\-1&3&0\end{pmatrix}$, $\chi_A = (X - 2)^2(X - 4)$.</p>
+<p>$A = \begin{pmatrix}3&-3&2\\-1&5&-2\\-1&3&0\end{pmatrix}$. Ici $\operatorname{tr}A = 8$, la somme des mineurs diagonaux vaut $(15 - 3) + (0 + 2) + (0 + 6) = 20$ et $\det A = 3(0 + 6) + 3(0 - 2) + 2(-3 + 5) = 16$, donc $\chi_A = X^3 - 8X^2 + 20X - 16 = (X - 2)^2(X - 4)$ (contrôle : $(X^2 - 4X + 4)(X - 4) = X^3 - 8X^2 + 20X - 16$).</p>
 <p><b>Étape 1 : Rappel.</b> Si $\pi_A = (X - 2)(X - 4)$, $X^n = \pi_AQ + aX + b$ ; on écrit le reste dans la base $(X - 2, X - 4)$.</p>
 <p><b>Étape 2 : Diagonalisable.</b> $A - 2I_3 = \begin{pmatrix}1&-3&2\\-1&3&-2\\-1&3&-2\end{pmatrix}$ : rang $1$, $\dim E_2 = 2$ ; donc $\pi_A = (X - 2)(X - 4)$.</p>
 <p><b>Étape 3 : $A^n$.</b> Reste $R = \alpha(X - 2) + \beta(X - 4)$ : en $4$, $2\alpha = 4^n$ ; en $2$, $-2\beta = 2^n$. Donc $A^n = \frac12\big(4^n(A - 2I_3) - 2^n(A - 4I_3)\big)$.</p>
@@ -10379,20 +10393,24 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 <p><b>Étape 5 : Conclusion.</b> $\operatorname{rg}(f_1, \dots, f_6) = \operatorname{rg}(f_1, f_2, f_3, f_5)$, donc $\cG{\operatorname{rg} = 4}$.</p>
 
 <p class="ml">Exemple 21 : un pivot avec un paramètre</p>
-<p>Rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$ selon $m\in\mathbb R$.</p>
+<p>Rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$ selon $m\in\mathbb R$. On range les vecteurs en lignes :</p>
+$$\begin{pmatrix}1&2&1\\2&1&m\\1&m&1\end{pmatrix}\begin{matrix}\leftarrow u\\\leftarrow v\\\leftarrow w\end{matrix}$$
 <p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes ne changent pas le rang ; on garde un pivot constant.</p>
-<p><b>Étape 2 : Premier pivot.</b> Lignes $u, v, w$. $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2,\ 1 - 4,\ m - 2) = (0, -3, m - 2)$. $L_3\leftarrow L_3 - L_1$ : $(1 - 1,\ m - 2,\ 1 - 1) = (0, m - 2, 0)$.</p>
+<p><b>Étape 2 : Premier pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2\times1,\ 1 - 2\times2,\ m - 2\times1) = (0, -3, m - 2)$. $L_3\leftarrow L_3 - L_1$ : $(1 - 1,\ m - 2,\ 1 - 1) = (0, m - 2, 0)$.</p>
+$$\begin{pmatrix}1&2&1\\2&1&m\\1&m&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&-3&m - 2\\0&m - 2&0\end{pmatrix}$$
 <p><b>Étape 3 : Second pivot</b> $-3$ (constant). $L_3\leftarrow3L_3 + (m - 2)L_2$ : 2<sup>e</sup> case $3(m - 2) + (m - 2)(-3) = 0$, 3<sup>e</sup> case $3\times0 + (m - 2)(m - 2) = (m - 2)^2$.</p>
 $$\begin{pmatrix}1&2&1\\0&-3&m - 2\\0&0&(m - 2)^2\end{pmatrix}.$$
 <p><b>Étape 4 : Discussion.</b> Si $m\neq2$ : trois pivots non nuls, rang $3$. Si $m = 2$ : la dernière ligne est nulle, et $(1, 2, 1)$, $(0, -3, 0)$ ne sont pas colinéaires : rang $2$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 3\ \text{si}\ m\neq2,\quad\operatorname{rg} = 2\ \text{si}\ m = 2}$. Contrôle $m = 2$ : $w = (1, 2, 1) = u$.</p>
 
 <p class="ml">Exemple 22 : le déterminant</p>
-<p>Dans $\mathbb R^4$, rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$.</p>
+<p>Dans $\mathbb R^4$, rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$, c'est-à-dire de la matrice</p>
+$$M = \begin{pmatrix}m&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $4$ vecteurs en dimension $4$ : base $\iff\det\neq0$.</p>
 <p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $m + 1 + 1 + 1 = m + 3$ ; on sort $m + 3$ de la 1<sup>re</sup> colonne :</p>
 $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$$
-<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$</b> ($i = 2, 3, 4$) : ligne 2 $(0, m - 1, 0, 0)$, ligne 3 $(0, 0, m - 1, 0)$, ligne 4 $(0, 0, 0, m - 1)$. Triangulaire : $\det = (m + 3)\times1\times(m - 1)^3$.</p>
+<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$</b> ($i = 2, 3, 4$). Ligne 2 : $(1 - 1,\ m - 1,\ 1 - 1,\ 1 - 1) = (0, m - 1, 0, 0)$, et de même pour les lignes 3 et 4 :</p>
+$$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatrix}1&1&1&1\\0&m - 1&0&0\\0&0&m - 1&0\\0&0&0&m - 1\end{vmatrix} = 1\times(m - 1)\times(m - 1)\times(m - 1),\quad\text{donc}\quad\det M = (m + 3)(m - 1)^3.$$
 <p><b>Étape 4 : Les cas.</b> $m\notin\{1, -3\}$ : $\det\neq0$, rang $4$. $m = 1$ : $a = b = c = d = (1, 1, 1, 1)$, rang $1$. $m = -3$ : $\det = 0$, rang $\leq3$ ; le mineur $\begin{vmatrix}-3&1&1\\1&-3&1\\1&1&-3\end{vmatrix} = -3(9 - 1) - 1(-3 - 1) + 1(1 + 3) = -24 + 4 + 4 = -16\neq0$ : rang $3$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 4\ (m\notin\{1, -3\}),\quad1\ (m = 1),\quad3\ (m = -3)}$.</p>
 
@@ -10455,17 +10473,22 @@ $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$
 </table>
 
 <p class="ml">Exemple 28 : la dimension d'un Vect par le pivot</p>
-<p>$a = (1, 2, 3, 4)$, $b = (1, 1, 1, 3)$, $c = (2, 1, 1, 1)$, $d = (3, 1, 0, 3)$. $\dim\operatorname{Vect}(a, b, c, d)$ ?</p>
+<p>$a = (1, 2, 3, 4)$, $b = (1, 1, 1, 3)$, $c = (2, 1, 1, 1)$, $d = (3, 1, 0, 3)$. $\dim\operatorname{Vect}(a, b, c, d)$ ? On range les vecteurs en lignes :</p>
+$$\begin{pmatrix}1&2&3&4\\1&1&1&3\\2&1&1&1\\3&1&0&3\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes conservent le $\operatorname{Vect}$.</p>
-<p><b>Étape 2 : Premier pivot.</b> $L_2 - L_1 = (0, -1, -2, -1)$ ; $L_3 - 2L_1 = (2 - 2, 1 - 4, 1 - 6, 1 - 8) = (0, -3, -5, -7)$ ; $L_4 - 3L_1 = (3 - 3, 1 - 6, 0 - 9, 3 - 12) = (0, -5, -9, -9)$.</p>
+<p><b>Étape 2 : Premier pivot</b> $1$ (case en haut à gauche). $L_2 - L_1 = (1 - 1, 1 - 2, 1 - 3, 3 - 4) = (0, -1, -2, -1)$ ; $L_3 - 2L_1 = (2 - 2, 1 - 4, 1 - 6, 1 - 8) = (0, -3, -5, -7)$ ; $L_4 - 3L_1 = (3 - 3, 1 - 6, 0 - 9, 3 - 12) = (0, -5, -9, -9)$.</p>
+$$\longrightarrow\begin{pmatrix}1&2&3&4\\0&-1&-2&-1\\0&-3&-5&-7\\0&-5&-9&-9\end{pmatrix}$$
 <p><b>Étape 3 : Second pivot $-1$.</b> $L_3 - 3L_2 = (0, -3 + 3, -5 + 6, -7 + 3) = (0, 0, 1, -4)$ ; $L_4 - 5L_2 = (0, -5 + 5, -9 + 10, -9 + 5) = (0, 0, 1, -4)$.</p>
-<p><b>Étape 4 : Dernier pivot.</b> $L_4 - L_3 = (0, 0, 0, 0)$ : trois lignes non nulles échelonnées, rang $3$.</p>
+<p><b>Étape 4 : Dernier pivot.</b> $L_4 - L_3 = (0, 0, 1 - 1, -4 - (-4)) = (0, 0, 0, 0)$ : trois lignes non nulles échelonnées, rang $3$.</p>
+$$\longrightarrow\begin{pmatrix}1&2&3&4\\0&-1&-2&-1\\0&0&1&-4\\0&0&0&0\end{pmatrix}$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\dim\operatorname{Vect}(a, b, c, d) = 3}$, base $(a, b, c)$, et la ligne nulle donne $d = 2b + c - a$ (contrôle : $(2 + 2 - 1, 2 + 1 - 2, 2 + 1 - 3, 6 + 1 - 4) = (3, 1, 0, 3)$).</p>
 
 <p class="ml">Exemple 29 : un sous-espace de $\mathbb R^5$ défini par un système</p>
-<p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Dimension et base.</p>
+<p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Dimension et base. Matrice du système :</p>
+$$\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\2&1&-5&0&-4\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $\dim F = 5 - \operatorname{rg}$ ; base : inconnues principales en fonction des secondaires.</p>
-<p><b>Étape 2 : Le rang.</b> $L_3 - 2L_1 = (0, 1 - 4, -5 + 2, 0 - 6, -4 - 2) = (0, -3, -3, -6, -6)$, puis $+3L_2$ : $(0, 0, 0, 0, -6 - 6) = (0, 0, 0, 0, -12)$. Trois pivots : rang $3$, $\dim F = 5 - 3 = 2$.</p>
+<p><b>Étape 2 : Le rang.</b> $L_3 - 2L_1 = (2 - 2,\ 1 - 4,\ -5 + 2,\ 0 - 6,\ -4 - 2) = (0, -3, -3, -6, -6)$, puis $L_3 + 3L_2 = (0,\ -3 + 3,\ -3 + 3,\ -6 + 6,\ -6 - 6) = (0, 0, 0, 0, -12)$ :</p>
+$$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}:\ \text{trois pivots, rang}\ 3,\quad\dim F = 5 - 3 = 2.$$
 <p><b>Étape 3 : On résout.</b> $-12x_5 = 0$ : $x_5 = 0$. $L_2$ : $x_2 = -x_3 - 2x_4$. $L_1$ : $x_1 = -2x_2 + x_3 - 3x_4 = 2x_3 + 4x_4 + x_3 - 3x_4 = 3x_3 + x_4$.</p>
 <p><b>Étape 4 : On sépare les paramètres.</b> $(3x_3 + x_4,\ -x_3 - 2x_4,\ x_3,\ x_4,\ 0) = x_3(3, -1, 1, 0, 0) + x_4(1, -2, 0, 1, 0)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\dim F = 2,\ \text{base}\ \big((3, -1, 1, 0, 0), (1, -2, 0, 1, 0)\big)}$ (non colinéaires : 3<sup>e</sup> et 4<sup>e</sup> coordonnées).</p>
@@ -10525,8 +10548,8 @@ $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$
 <p class="ml">Exemple 35 : deux plans de $\mathbb R^4$</p>
 <p>$F$ : $x + y + z + t = 0$, $x - y + z - t = 0$ ; $G$ : $x + 2y + 3z + 4t = 0$, $x - 2y + 3z - 4t = 0$. Supplémentaires ?</p>
 <p><b>Étape 1 : Rappel.</b> $F\cap G = \{0\}$ et $\dim F + \dim G = 4$.</p>
-<p><b>Étape 2 : $F$.</b> Somme des équations : $2x + 2z = 0$, $x = -z$. Différence : $2y + 2t = 0$, $y = -t$. $F = \{(-z, -t, z, t)\}$, dimension $2$.</p>
-<p><b>Étape 3 : $G$.</b> Somme : $2x + 6z = 0$, $x = -3z$. Différence : $4y + 8t = 0$, $y = -2t$. Dimension $2$.</p>
+<p><b>Étape 2 : $F$.</b> Somme des équations : $(x + y + z + t) + (x - y + z - t) = 2x + 2z = 0$, donc $x = -z$. Différence : $(x + y + z + t) - (x - y + z - t) = 2y + 2t = 0$, donc $y = -t$. $F = \{(-z, -t, z, t)\} = \operatorname{Vect}\big((-1, 0, 1, 0), (0, -1, 0, 1)\big)$, dimension $2$.</p>
+<p><b>Étape 3 : $G$.</b> Somme : $(x + 2y + 3z + 4t) + (x - 2y + 3z - 4t) = 2x + 6z = 0$, donc $x = -3z$. Différence : $4y + 8t = 0$, donc $y = -2t$. $G = \operatorname{Vect}\big((-3, 0, 1, 0), (0, -2, 0, 1)\big)$, dimension $2$.</p>
 <p><b>Étape 4 : $F\cap G$.</b> $x = -z = -3z$ donne $2z = 0$, $z = 0$, $x = 0$. $y = -t = -2t$ donne $t = 0$, $y = 0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $F\cap G = \{0\}$ et $2 + 2 = 4$ : $\cG{\mathbb R^4 = F\oplus G}$.</p>
 
@@ -10840,7 +10863,8 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 1 : Rappel.</b> Théorème du rang et une inclusion évidente.</p>
 <p><b>Étape 2 : Endomorphisme.</b> $u(P)$ est de degré $\leq2\leq n$ ; linéarité : $u(\lambda P + Q) = X(\lambda P(1) + Q(1)) + X^2(\lambda P(0) + Q(0)) = \lambda u(P) + u(Q)$.</p>
 <p><b>Étape 3 : Le noyau.</b> $XP(1) + X^2P(0) = 0\iff P(1) = P(0) = 0$ (coefficients de $X$ et $X^2$) $\iff X(X - 1)\mid P\iff P = X(X - 1)Q$, $Q\in\mathbb K_{n-2}[X]$. Donc $\dim\ker u = \dim\mathbb K_{n-2}[X] = n - 1$.</p>
-<p><b>Étape 4 : Le rang.</b> $\operatorname{rg}u = (n + 1) - (n - 1) = 2$. Or $\operatorname{Im}u\subset\operatorname{Vect}(X, X^2)$, de dimension $2$.</p>
+<p><b>Étape 4 : Le rang.</b> $\operatorname{rg}u = \dim\mathbb K_n[X] - \dim\ker u = (n + 1) - (n - 1) = 2$. Or $\operatorname{Im}u\subset\operatorname{Vect}(X, X^2)$, de dimension $2$. Dans la base $(1, X, \dots, X^n)$ : $u(1) = X + X^2$ ($P(1) = P(0) = 1$), $u(X) = X$ ($P(1) = 1$, $P(0) = 0$), $u(X^k) = X$ pour $k\geq1$ :</p>
+$$\operatorname{Mat}(u) = \begin{pmatrix}0&0&0&\cdots&0\\1&1&1&\cdots&1\\1&0&0&\cdots&0\\0&0&0&\cdots&0\\\vdots&&&&\vdots\\0&0&0&\cdots&0\end{pmatrix}\quad(\text{deux lignes non nulles non proportionnelles : rang}\ 2).$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = X(X - 1)\mathbb K_{n-2}[X],\ \operatorname{Im}u = \operatorname{Vect}(X, X^2)}$.</p>
 
 <p class="ml">Exemple 20 : un noyau lu sur les colonnes</p>
@@ -10856,7 +10880,8 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 1 : Rappel.</b> On calcule les images d'une base bien choisie : ici $((X - a)^k)_{0\leq k\leq n}$.</p>
 <p><b>Étape 2 : $k = 0$.</b> $P = 1$ : $P' = 0$, $P'(a) = 0$, $P - P(a) = 1 - 1 = 0$, donc $u(1) = 0$.</p>
 <p><b>Étape 3 : $k = 1$.</b> $P = X - a$ : $P' = 1$, $P'(a) = 1$, $P - P(a) = X - a$, donc $u(P) = (X - a)\times2 - 2(X - a) = 0$.</p>
-<p><b>Étape 4 : $k\geq2$.</b> $P' = k(X - a)^{k-1}$, $P'(a) = 0$, $P(a) = 0$ : $u(P) = (X - a)\,k(X - a)^{k-1} - 2(X - a)^k = (k - 2)(X - a)^k$. Nul pour $k = 2$, non nul pour $k\geq3$.</p>
+<p><b>Étape 4 : $k\geq2$.</b> $P = (X - a)^k$ : $P' = k(X - a)^{k-1}$, $P'(a) = k\times0^{k-1} = 0$, $P(a) = 0$. Donc $u(P) = (X - a)\times k(X - a)^{k-1} - 2\big((X - a)^k - 0\big) = k(X - a)^k - 2(X - a)^k = (k - 2)(X - a)^k$. Nul pour $k = 2$, non nul pour $k\geq3$. Matrice de $u$ dans la base $\big(1, X - a, \dots, (X - a)^n\big)$ :</p>
+$$\operatorname{Mat}(u) = \begin{pmatrix}0&&&&&\\&0&&&&\\&&0&&&\\&&&1&&\\&&&&\ddots&\\&&&&&n - 2\end{pmatrix}\quad(\text{diagonale}\ 0, 0, 0, 1, 2, \dots, n - 2).$$
 <p><b>Étape 5 : Conclusion.</b> $\operatorname{Im}u = \operatorname{Vect}\big((X - a)^3, \dots, (X - a)^n\big)$, de dimension $n - 2$ ; donc $\dim\ker u = 3$, et $1, X - a, (X - a)^2$ sont dans le noyau : $\cG{\ker u = \mathbb K_2[X]}$.</p>
 
 <p class="ml">Exemple 22 : $f^2 = 0$ dans $\mathbb R^3$</p>
@@ -10889,7 +10914,8 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p>$p(x, y, z) = \big(\frac{x + y}2, \frac{x + y}2, z\big)$ sur $\mathbb R^3$.</p>
 <p><b>Étape 1 : Rappel.</b> $p\circ p = p$, puis image et noyau.</p>
 <p><b>Étape 2 : $p\circ p$.</b> On applique $p$ à $(a, a, z)$ avec $a = \frac{x + y}2$ : $\big(\frac{a + a}2, \frac{a + a}2, z\big) = (a, a, z)$. Donc $p\circ p = p$.</p>
-<p><b>Étape 3 : L'image.</b> $p(x, y, z) = (a, a, z)$ a ses deux premières coordonnées égales, et tout $(a, a, z)$ est sa propre image : $\operatorname{Im}p = \{x = y\}$, un plan.</p>
+<p><b>Étape 3 : L'image.</b> $p(x, y, z) = (a, a, z)$ a ses deux premières coordonnées égales, et tout $(a, a, z)$ est sa propre image : $\operatorname{Im}p = \{x = y\}$, un plan. Matrice dans la base canonique (colonnes $p(e_1) = (\frac12, \frac12, 0)$, $p(e_2) = (\frac12, \frac12, 0)$, $p(e_3) = (0, 0, 1)$) :</p>
+$$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\qquad P^2 = \begin{pmatrix}\frac14 + \frac14&\frac14 + \frac14&0\\\frac14 + \frac14&\frac14 + \frac14&0\\0&0&1\end{pmatrix} = P.$$
 <p><b>Étape 4 : Le noyau.</b> $\frac{x + y}2 = 0$ et $z = 0$ : $y = -x$, $\ker p = \operatorname{Vect}(1, -1, 0)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \{x = y\}\ \text{parallèlement à}\ \mathbb R(1, -1, 0)}$ (ici orthogonalement : $(1, -1, 0)$ est normal au plan $x - y = 0$).</p>
 
