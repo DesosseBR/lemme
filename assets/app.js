@@ -1608,23 +1608,22 @@ function exBlocks(app) {
   });
   friseSections(app);
 }
-/* Méthode : chaque section numérotée devient une étape de la frise (pastille colorée + rail) */
+/* Méthode : dans chaque type de question (h2), les exemples forment une frise « Méthode 1, 2, 3… » */
 function friseSections(app) {
   const prose = $(".methode .prose", app); if (!prose || prose.dataset.frise) return; prose.dataset.frise = "1";
-  const SKIP = /(erreurs|entrainement|arbre|reflexes|exos|enonce|not)$/;
-  const COLS = ["fB", "fO", "fV", "fG"]; let c = 0;
-  [...prose.querySelectorAll(":scope > h2")].forEach(h => {
-    const m = h.textContent.trim().match(/^(\d+(?:\s*bis)?)\.\s*/);
-    if (!m || SKIP.test(h.id || "")) return;
-    const item = document.createElement("section"); item.className = "fri " + COLS[c++ % 4];
-    const dot = document.createElement("span"); dot.className = "frd"; dot.textContent = m[1].replace(/\s+/g, " ");
-    h.before(item);
-    h.innerHTML = h.innerHTML.replace(/^\s*\d+(?:\s*bis)?\.\s*/, ""); h.prepend(dot);
-    let n = h; while (n && !(n !== h && n.nodeType === 1 && n.tagName === "H2")) { const nx = n.nextSibling; item.appendChild(n); n = nx; }
+  const COLS = ["fB", "fO", "fV", "fG"];
+  let sec = null, k = 0;
+  [...prose.children].forEach(el => {
+    if (el.tagName === "H2") { sec = el; k = 0; return; }
+    if (!el.classList.contains("exb") || !sec || /exos$/.test(sec.id || "")) return;
+    let fr = el.previousElementSibling;
+    if (!fr || !fr.classList.contains("frise")) { fr = document.createElement("div"); fr.className = "frise"; el.before(fr); }
+    const n = k++, it = document.createElement("div"); it.className = "fri " + COLS[n % 4];
+    const mb = el.querySelector(".exm > div"), lab = mb ? mb.innerHTML : "";
+    if (mb) el.querySelector(".exm").remove();
+    it.innerHTML = `<span class="frd">${n + 1}</span><div class="frh"><span class="frk">Méthode ${n + 1}</span>${lab ? `<span class="frt">${lab}</span>` : ""}</div>`;
+    fr.appendChild(it); it.appendChild(el);
   });
-  const items = [...prose.querySelectorAll(":scope > .fri")];
-  items.forEach(it => { let p = it.previousElementSibling; if (!p || !p.classList.contains("fri")) { const w = document.createElement("div"); w.className = "frise"; it.before(w); } });
-  [...prose.querySelectorAll(":scope > .frise")].forEach(w => { let n = w.nextElementSibling; while (n && n.classList.contains("fri")) { const nx = n.nextElementSibling; w.appendChild(n); n = nx; } });
 }
 function braceTree(el) {
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];

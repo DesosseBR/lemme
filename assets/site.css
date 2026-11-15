@@ -2054,19 +2054,17 @@ table.pot td.pdiv{border-bottom:2px solid var(--ink)}
 .methode{max-width:none;margin-left:auto;margin-right:auto}
 .phead .photo{overflow:hidden}
 
-/* Frise des méthodes : rail vertical, pastille numérotée de la couleur de la section */
-.methode .frise{position:relative;padding-left:52px;margin-top:8px}
-.methode .frise::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:2px;background:var(--line)}
-.methode .fri{position:relative;--fc:#2B5BD7}
+/* Frise des méthodes : dans chaque type de question, une pastille par méthode, son exemple accroché dessous */
+.methode .frise{position:relative;padding-left:52px;margin:20px 0 8px}
+.methode .frise::before{content:"";position:absolute;left:17px;top:18px;bottom:24px;width:2px;background:var(--line)}
+.methode .fri{position:relative;--fc:#2B5BD7;padding-bottom:10px}
 .methode .fri.fO{--fc:#C27C00}.methode .fri.fV{--fc:#7A4CC2}.methode .fri.fG{--fc:#1F8A5B}
-.methode .frise .fri > h2{position:relative}
-.methode .frd{position:absolute;left:-52px;top:50%;transform:translateY(-50%);min-width:36px;height:36px;padding:0 6px;border-radius:999px;background:var(--fc);color:#fff;display:flex;align-items:center;justify-content:center;font:700 15px var(--f-display);z-index:1;box-shadow:0 0 0 4px var(--bg)}
-.methode .frise .fri > h2{border-top:0;padding-top:0;margin:56px 0 18px;color:var(--fc)}
-.methode .frise .fri:first-child > h2{margin-top:6px}
-.methode .fri .exm{border-color:var(--fc);box-shadow:6px 6px 0 var(--fc)}
-.methode .fri .exm>b{color:var(--fc)}
+.methode .frd{position:absolute;left:-52px;top:0;width:36px;height:36px;border-radius:999px;background:var(--fc);color:#fff;display:flex;align-items:center;justify-content:center;font:700 16px var(--f-display);z-index:1;box-shadow:0 0 0 5px var(--bg)}
+.methode .frh{display:flex;flex-direction:column;gap:2px;padding-top:2px;margin-bottom:6px}
+.methode .frk{font:700 12.5px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--fc)}
+.methode .frt{font:600 17px var(--f-display);color:var(--ink);line-height:1.45}
+.methode .fri .exb{margin:10px 0 24px}
 .methode .fri .exu{border-bottom-color:var(--fc)}
 .methode .fri .exn{border-color:var(--fc);color:var(--fc)}
-.methode .fri .sbox{border-color:var(--fc)}
-@media (max-width:600px){.methode .frise{padding-left:40px}.methode .frise::before{left:13px}.methode .frd{left:-40px;min-width:28px;height:28px;font-size:13px}.methode .fri .exm{box-shadow:4px 4px 0 var(--fc)}}
+@media (max-width:600px){.methode .frise{padding-left:42px}.methode .frise::before{left:14px}.methode .frd{left:-42px;width:30px;height:30px;font-size:14px}}
 @media (prefers-color-scheme: dark){.methode .fri{--fc:#7FA4FF}.methode .fri.fO{--fc:#FFC266}.methode .fri.fV{--fc:#C9A2FF}.methode .fri.fG{--fc:#6FD3A3}.methode .frd{color:#0A1230}}
