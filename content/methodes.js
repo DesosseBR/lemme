@@ -1171,8 +1171,8 @@ $$U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - 
 <p class="ml">Taille 2 : la formule à connaître</p>
 <div class="sbox">$$\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A.$$</div>
 <p class="ml">Exemple</p>
+<p>Soit $A = \begin{pmatrix}1&2\\2&1\end{pmatrix}$. <b>Calculer le polynôme caractéristique $\chi_A$ et les valeurs propres de $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En taille 2 : $\chi_A = X^2 - \operatorname{tr}(A)\,X + \det A$.</p>
-$$A = \begin{pmatrix}1&2\\2&1\end{pmatrix}.$$
 <p><b>Étape 2 : La trace et le déterminant.</b></p>
 $$\operatorname{tr}A = 1 + 1 = \cO2,\qquad\det A = 1\times1 - 2\times2 = \cO{-3}.$$
 <p><b>Étape 3 : On remplace dans la formule.</b></p>
@@ -1200,20 +1200,20 @@ $$\cG{\operatorname{Sp}(A) = \{-1, 3\}}.$$
 <li><b>Une ligne ou une colonne avec un seul coefficient non nul</b> : développer directement selon elle.</li>
 </ol>
 <p class="ml">Exemple 1 : lignes de même somme</p>
-<p><b>1. Rappel.</b> $\chi_A = \det(XI_n - A)$. Ajouter à une colonne les autres colonnes ne change pas le déterminant. Une matrice triangulaire a pour déterminant le produit de sa diagonale.</p>
-$$A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\qquad(\text{chaque ligne a pour somme}\ \cB4).$$
-<p><b>2.</b> On écrit $XI_3 - A$ (on met $X - a_{i,i}$ sur la diagonale et $-a_{i,j}$ ailleurs) et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$. Sur chaque ligne, la nouvelle première case vaut :</p>
+<p>Soit $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$. <b>Calculer $\chi_A$ sous forme factorisée, sans développer un polynôme de degré $3$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $\chi_A = \det(XI_n - A)$. Ajouter à une colonne les autres colonnes ne change pas le déterminant. Une matrice triangulaire a pour déterminant le produit de sa diagonale.</p>
+<p><b>Étape 2 : On fait apparaître le facteur commun.</b> On écrit $XI_3 - A$ (on met $X - a_{i,i}$ sur la diagonale et $-a_{i,j}$ ailleurs) et on fait $\cO{C_1\leftarrow C_1 + C_2 + C_3}$. Sur chaque ligne, la nouvelle première case vaut :</p>
 $$(X - 2) + (-1) + (-1) = \cB{X - 4}.$$
 $$\chi_A = \begin{vmatrix}X-2&-1&-1\\-1&X-2&-1\\-1&-1&X-2\end{vmatrix} = \begin{vmatrix}\cB{X-4}&-1&-1\\\cB{X-4}&X-2&-1\\\cB{X-4}&-1&X-2\end{vmatrix} = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\1&X-2&-1\\1&-1&X-2\end{vmatrix}.$$
-<p><b>3.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ :</p>
+<p><b>Étape 3 : On triangule.</b> On fait $\cO{L_2\leftarrow L_2 - L_1}$ et $\cO{L_3\leftarrow L_3 - L_1}$ :</p>
 $$\left\{\begin{aligned}L_2 - L_1 &= \big(1 - 1,\ (X-2) - (-1),\ -1 - (-1)\big) = (0,\ \cR{X - 1},\ 0)\\L_3 - L_1 &= \big(1 - 1,\ -1 - (-1),\ (X-2) - (-1)\big) = (0,\ 0,\ \cR{X - 1})\end{aligned}\right.$$
 <p>La matrice est triangulaire : son déterminant est le produit de la diagonale.</p>
 $$\chi_A = \cB{(X-4)}\begin{vmatrix}1&-1&-1\\0&\cR{X-1}&0\\0&0&\cR{X-1}\end{vmatrix} = \cB{(X-4)}\times1\times\cR{(X-1)}\times\cR{(X-1)} = \cB{(X-4)}\,\cR{(X-1)^2}.$$
 <p>Sans aucune factorisation de degré 3 : $\operatorname{Sp}(A) = \{\cB4, \cR1\}$, avec $\cO{m_4 = 1}$ et $\cO{m_1 = 2}$.</p>
 
 <p class="ml">Exemple 2 : deux lignes presque égales</p>
+<p>Soit $B = \begin{pmatrix}3&1&-1\\1&3&-1\\0&0&2\end{pmatrix}$. <b>Calculer $\chi_B$ sous forme factorisée.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\chi_B = \det(XI_3 - B)$, et $L_1\leftarrow L_1 - L_2$ ne change pas le déterminant.</p>
-$$B = \begin{pmatrix}3&1&-1\\1&3&-1\\0&0&2\end{pmatrix},\qquad XI_3 - B = \begin{pmatrix}X-3&-1&1\\-1&X-3&1\\0&0&X-2\end{pmatrix}.$$
 <p><b>Étape 2 : $\cO{L_1\leftarrow L_1 - L_2}$.</b> Les deux premières lignes se ressemblent :</p>
 $$L_1 - L_2 = \big((X-3) - (-1),\ -1 - (X-3),\ 1 - 1\big) = \big(\cB{X - 2},\ \cB{-(X - 2)},\ 0\big).$$
 <p><b>Étape 3 : On sort $(X - 2)$ de la première ligne.</b></p>
@@ -1242,8 +1242,8 @@ $$\cG{\chi_B = (X-2)^2(X - 4)}.$$
 <div><b>Il reste une valeur à trouver</b><span>Utiliser $\operatorname{tr}A = \sum m_\lambda\lambda$.</span></div>
 </div>
 <p class="ml">Exemple</p>
+<p>Soit $A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}$. <b>Déterminer les valeurs propres de $A$ et leurs multiplicités, sans calculer $\chi_A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\dim E_0 = \dim\operatorname{Ker}A = n - \operatorname{rg}A$ (théorème du rang), $\dim E_\lambda\leqslant m_\lambda$, et $\operatorname{tr}A$ est la somme des valeurs propres comptées avec multiplicité.</p>
-$$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
 <p><b>Étape 2 : Le rang.</b> Les 3 lignes sont égales et non nulles : $\operatorname{rg}A = 1$.</p>
 <p><b>Étape 3 : La valeur propre $0$.</b></p>
 $$\dim\cG{E_0} = \dim\ker A = 3 - \operatorname{rg}A = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2.$$
@@ -1261,6 +1261,7 @@ $$\cG{\chi_A = X^2(X - 3)}.$$
 <li>Écrire $\cG{E_\lambda}$ comme un $\operatorname{Vect}$ et vérifier la dimension : $\dim\cG{E_\lambda} = n - \operatorname{rg}(A - \cB\lambda I_n)$.</li>
 </ol>
 <p class="ml">Exemple : la matrice de l'exemple 1, avec $\cB\lambda = 1$</p>
+<p>Avec $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$, <b>déterminer une base du sous-espace propre $E_1(A)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $E_\lambda = \operatorname{Ker}(A - \lambda I_n)$ : on résout le système $(A - \lambda I_n)X = 0$.</p>
 <p><b>Étape 2 : La matrice $A - \cB1\,I_3$.</b> On enlève $1$ sur la diagonale :</p>
 $$A - \cB1\,I_3 = \begin{pmatrix}2-1&1&1\\1&2-1&1\\1&1&2-1\end{pmatrix} = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
@@ -1386,6 +1387,7 @@ $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix}
 <li>Lemme des noyaux : $P\wedge Q = 1\ \Longrightarrow\ \operatorname{Ker}(PQ)(u) = \operatorname{Ker}P(u)\oplus\operatorname{Ker}Q(u)$.</li>
 </ul>
 <p class="ml">Exemple : inverser avec Cayley-Hamilton</p>
+<p>Soit $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$. <b>Montrer que $A$ est inversible et calculer $A^{-1}$ avec le théorème de Cayley-Hamilton.</b></p>
 <p><b>Étape 1 : Rappel.</b> Cayley-Hamilton : $\chi_A(A) = 0$.</p>
 <p><b>Étape 2 : On l'applique.</b> $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$ (§9) : $\operatorname{tr}A = 1 + 3 = 4$, $\det A = 1\times3 - 1\times(-1) = 3 + 1 = 4$, donc $\chi_A = X^2 - 4X + 4$ et :</p>
 $$A^2 - 4A + 4I_2 = 0.$$
@@ -1419,7 +1421,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 <p><b>Étape 5 : Conclusion.</b> $\cG{u\ \text{diagonalisable}\iff\operatorname{tr}A\neq0}$, avec $\operatorname{Sp}(u) = \{0, \operatorname{tr}A\}$, $E_0 = \mathbb KA$, $E_{\operatorname{tr}A} = \ker\operatorname{tr}$ ($1 + (n^2 - 1) = n^2$ ✓).</p>
 
 <p class="ml">Exemple 4 : un opérateur intégral, en dimension infinie</p>
-<p>$E = \mathcal C([0, 1], \mathbb R)$, $\varphi(f) = F$ avec $F(x) = \frac1x\int_0^xf$ ($x > 0$), $F(0) = f(0)$. Éléments propres.</p>
+<p>$E = \mathcal C([0, 1], \mathbb R)$, $\varphi(f) = F$ avec $F(x) = \frac1x\int_0^xf$ ($x > 0$), $F(0) = f(0)$. <b>Déterminer les valeurs propres et les vecteurs propres de $\varphi$.</b></p>
 <p><b>Étape 1 : Rappel.</b> La définition : $\varphi(f) = \lambda f$, $f\neq0$.</p>
 <p><b>Étape 2 : On dérive.</b> $\int_0^xf = \lambda xf(x)$ pour $x\in]0, 1]$. Si $\lambda = 0$, $\int_0^xf = 0$ et en dérivant $f = 0$ : $0$ n'est pas valeur propre. Si $\lambda\neq0$, $f(x) = \frac1{\lambda x}\int_0^xf$ est dérivable sur $]0, 1]$ et en dérivant $f(x) = \lambda f(x) + \lambda xf'(x)$.</p>
 <p><b>Étape 3 : L'équation différentielle.</b> $f'(x) = \frac{1 - \lambda}{\lambda x}f(x)$, donc $f(x) = Cx^{\frac{1 - \lambda}\lambda}$ (primitive de $\frac{1 - \lambda}{\lambda x}$ : $\frac{1 - \lambda}\lambda\ln x$).</p>
@@ -1427,7 +1429,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(\varphi) = ]0, 1],\quad E_\lambda = \operatorname{Vect}\big(x\mapsto x^{\frac{1 - \lambda}\lambda}\big)}$.</p>
 
 <p class="ml">Exemple 5 : $A^2 = A + 2I_3$</p>
-<p>$a\neq0$, $A = \begin{pmatrix}0&a&a^2\\\frac1a&0&a\\\frac1{a^2}&\frac1a&0\end{pmatrix}$. Valeurs propres.</p>
+<p>$a\neq0$, $A = \begin{pmatrix}0&a&a^2\\\frac1a&0&a\\\frac1{a^2}&\frac1a&0\end{pmatrix}$. <b>Montrer que $A^2 = A + 2I_3$ et en déduire les valeurs propres de $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Les valeurs propres sont parmi les racines d'un annulateur.</p>
 <p><b>Étape 2 : On écrit $A = B - I_3$.</b> $B$ a des $1$ sur la diagonale, ses lignes sont proportionnelles (ligne $1 = a^2\times$ ligne $3$, ligne $2 = a\times$ ligne $3$) : $\operatorname{rg}B = 1$, $\operatorname{tr}B = 3$, donc $B^2 = 3B$.</p>
 <p><b>Étape 3 : L'annulateur.</b> $A^2 = B^2 - 2B + I_3 = 3B - 2B + I_3 = B + I_3 = (A + I_3) + I_3 = A + 2I_3$. Donc $X^2 - X - 2 = (X + 1)(X - 2)$ annule $A$.</p>
@@ -1443,7 +1445,7 @@ $$C = \begin{pmatrix}0&0&\cdots&0&-a_0\\1&0&\cdots&0&-a_1\\0&1&\ddots&\vdots&\vd
 <p><b>Étape 4 : Conclusion.</b> Chaque sous-espace propre est une droite : $\cG{C\ \text{diagonalisable}\iff P\ \text{scindé à racines simples}}$, et alors $\,{}^tC = QDQ^{-1}$ avec $Q$ de Vandermonde.</p>
 
 <p class="ml">Exemple 7 : lignes de même somme, trace et déterminant</p>
-<p>$A = \begin{pmatrix}6&-6&5\\-4&-1&10\\7&-6&4\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}6&-6&5\\-4&-1&10\\7&-6&4\end{pmatrix}$. <b>Déterminer les valeurs propres de $A$ sans calculer $\chi_A$ en entier.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sum\lambda_i = \operatorname{tr}A$ et $\prod\lambda_i = \det A$ (avec multiplicités).</p>
 <p><b>Étape 2 : Une valeur propre.</b> Sommes des lignes : $6 - 6 + 5 = 5$, $-4 - 1 + 10 = 5$, $7 - 6 + 4 = 5$. Donc $A(1, 1, 1) = 5(1, 1, 1)$.</p>
 <p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 6 + (-1) + 4 = 9$. Le déterminant, développé selon la 1<sup>re</sup> ligne :</p>
@@ -1453,7 +1455,7 @@ $$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{5\ (\text{double}), -1\},\ A\ \text{non diagonalisable}}$.</p>
 
 <p class="ml">Exemple 8 : petit rang, puis la trace</p>
-<p>$A = \begin{pmatrix}6&-6&5\\14&-13&10\\7&-6&4\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}6&-6&5\\14&-13&10\\7&-6&4\end{pmatrix}$. <b>Déterminer les valeurs propres de $A$ et dire si $A$ est diagonalisable.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(A - \lambda I) = r\Rightarrow\lambda$ est d'ordre $\geq n - r$.</p>
 <p><b>Étape 2 : $A + I_3$.</b> $\begin{pmatrix}7&-6&5\\14&-12&10\\7&-6&5\end{pmatrix}$ : $L_2 = 2L_1$, $L_3 = L_1$, rang $1$. Donc $-1$ est d'ordre $\geq2$.</p>
 <p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = 6 - 13 + 4 = -3 = -1 - 1 + \lambda$, donc $\lambda = -1$ : $-1$ est triple.</p>
@@ -1462,6 +1464,7 @@ $$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\
 <p class="ml">Exemple 9 : rang $1$, et $\operatorname{tr}(A^2)$</p>
 <p>$A\in\mathcal M_n(\mathbb R)$ : $1$ sur la première et la dernière ligne, sur la première et la dernière colonne, $0$ ailleurs ($n\geq3$).</p>
 $$A = \begin{pmatrix}1&1&\cdots&1&1\\1&0&\cdots&0&1\\\vdots&\vdots&&\vdots&\vdots\\1&0&\cdots&0&1\\1&1&\cdots&1&1\end{pmatrix},\qquad\text{par exemple}\quad\begin{pmatrix}1&1&1&1\\1&0&0&1\\1&0&0&1\\1&1&1&1\end{pmatrix}\ (n = 4).$$
+<p><b>Déterminer les valeurs propres de $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{rg}A = r$ donne $0$ d'ordre $\geq n - r$ ; puis $\lambda + \mu = \operatorname{tr}A$ et $\lambda^2 + \mu^2 = \operatorname{tr}(A^2)$.</p>
 <p><b>Étape 2 : Le rang.</b> Les colonnes $2, \dots, n - 1$ valent toutes $(1, 0, \dots, 0, 1)$, les colonnes $1$ et $n$ valent $(1, \dots, 1)$ : rang $2$. Donc $0$ est d'ordre $\geq n - 2$.</p>
 <p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 1 + 1 = 2$. $\operatorname{tr}(A^2) = \sum_{i,j}a_{ij}a_{ji} = \sum a_{ij}^2$ ($A$ symétrique) = nombre de $1$ = $4n - 4$. Donc $\lambda + \mu = 2$ et $\lambda^2 + \mu^2 = 4n - 4$.</p>
@@ -1471,12 +1474,14 @@ $$A = \begin{pmatrix}1&1&\cdots&1&1\\1&0&\cdots&0&1\\\vdots&\vdots&&\vdots&\vdot
 <p class="ml">Exemple 10 : des vecteurs propres évidents</p>
 <p>$A_n(a, b)\in\mathcal M_{2n}$ : $a$ sur la diagonale, $b$ sur l'anti-diagonale, $0$ ailleurs ($b\neq0$).</p>
 $$A_n(a, b) = \begin{pmatrix}a&&&&&b\\&\ddots&&&\cdot^{\cdot^{\cdot}}&\\&&a&b&&\\&&b&a&&\\&\cdot^{\cdot^{\cdot}}&&&\ddots&\\b&&&&&a\end{pmatrix},\qquad\text{par exemple}\quad A_2(a, b) = \begin{pmatrix}a&0&0&b\\0&a&b&0\\0&b&a&0\\b&0&0&a\end{pmatrix}.$$
+<p><b>Déterminer les éléments propres de $A_n(a, b)$ et dire si elle est diagonalisable.</b></p>
 <p><b>Étape 1 : Rappel.</b> La symétrie $i\leftrightarrow2n + 1 - i$ suggère $e_i\pm e_{2n+1-i}$.</p>
 <p><b>Étape 2 : Les images.</b> $Ae_i = ae_i + be_{2n+1-i}$. Donc $A(e_i + e_{2n+1-i}) = (a + b)(e_i + e_{2n+1-i})$ et $A(e_i - e_{2n+1-i}) = (a - b)(e_i - e_{2n+1-i})$.</p>
 <p><b>Étape 3 : Le compte.</b> Pour $i = 1, \dots, n$ : $n$ vecteurs libres pour $a + b$, $n$ pour $a - b$, et les $2n$ ensemble forment une base.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{diagonalisable},\ \operatorname{Sp} = \{a + b, a - b\},\ \text{chacune d'ordre}\ n}$, et $\chi_A = \big((X - a)^2 - b^2\big)^n$ sans calcul de déterminant.</p>
 
 <p class="ml">Exemple 11 : $A = aI_n + bJ_n$</p>
+<p>Soient $a, b\in\mathbb R$, $b\neq0$, $J_n$ la matrice de taille $n$ remplie de $1$, et $A = aI_n + bJ_n$. <b>Déterminer les valeurs propres de $A$, dire si $A$ est diagonalisable et calculer $\det A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $AX = \lambda X\iff bJX = (\lambda - a)X$ : les éléments propres de $J$ suffisent.</p>
 <p><b>Étape 2 : $J$.</b> $J^2 = nJ$ annule $J$, $\operatorname{Sp}J\subset\{0, n\}$. $E_0(J)$ : $x_1 + \dots + x_n = 0$, hyperplan. $J(1, \dots, 1) = n(1, \dots, 1)$ : $E_n(J) = \operatorname{Vect}(1, \dots, 1)$.</p>
 <p><b>Étape 3 : On transporte.</b> $\lambda = a + b\times0 = a$ sur l'hyperplan, $\lambda = a + nb$ sur la droite.</p>
@@ -1485,6 +1490,7 @@ $$A_n(a, b) = \begin{pmatrix}a&&&&&b\\&\ddots&&&\cdot^{\cdot^{\cdot}}&\\&&a&b&&\
 <p class="ml">Exemple 12 : la permutation circulaire, puis les matrices circulantes</p>
 <p>$J_n$ : $1$ sur la sur-diagonale et en position $(n, 1)$, $0$ ailleurs.</p>
 $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddots&0\\0&&&0&1\\1&0&\cdots&0&0\end{pmatrix},\qquad C(a_0, \dots, a_{n-1}) = \begin{pmatrix}a_0&a_1&\cdots&a_{n-1}\\a_{n-1}&a_0&\ddots&\vdots\\\vdots&\ddots&\ddots&a_1\\a_1&\cdots&a_{n-1}&a_0\end{pmatrix}.$$
+<p><b>Déterminer les valeurs propres de $J_n$, montrer qu'elle est diagonalisable, puis en déduire celles d'une matrice circulante.</b></p>
 <p><b>Étape 1 : Rappel.</b> $J_nX = \lambda X$ à résoudre ; $C(a_0, \dots, a_{n-1}) = \sum a_kJ_n^k$ (matrice circulante).</p>
 <p><b>Étape 2 : On résout.</b> $J_nX = (x_2, x_3, \dots, x_n, x_1) = \lambda(x_1, \dots, x_n)$ : $x_k = \lambda^{k-1}x_1$ et $x_1 = \lambda^nx_1$, avec $x_1\neq0$ : $\lambda^n = 1$.</p>
 <p><b>Étape 3 : Diagonalisable.</b> Les $n$ racines $n$-ièmes $\omega^k$ ($\omega = e^{2i\pi/n}$) sont valeurs propres, de vecteurs $(1, \omega^k, \dots, \omega^{(n-1)k})$ : $n$ valeurs propres distinctes, $J_n = PDP^{-1}$ avec $D = \operatorname{diag}(1, \omega, \dots, \omega^{n-1})$.</p>
@@ -1511,7 +1517,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 </table>
 
 <p class="ml">Exemple 14 : par le rang</p>
-<p>$A = \begin{pmatrix}1&a&b&c\\0&1&d&e\\0&0&2&f\\0&0&0&2\end{pmatrix}$. Condition de diagonalisabilité.</p>
+<p>$A = \begin{pmatrix}1&a&b&c\\0&1&d&e\\0&0&2&f\\0&0&0&2\end{pmatrix}$. <b>À quelle condition sur $a, b, c, d, e, f$ la matrice $A$ est-elle diagonalisable ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Valeurs propres sur la diagonale : $1$ et $2$, doubles. Il faut $\dim E_1 = \dim E_2 = 2$, soit $\operatorname{rg}(A - I) = \operatorname{rg}(A - 2I) = 2$.</p>
 <p><b>Étape 2 : $A - I_4$.</b> $\begin{pmatrix}0&a&b&c\\0&0&d&e\\0&0&1&f\\0&0&0&1\end{pmatrix}$ : les colonnes $3$ et $4$ sont libres (le bloc $\begin{pmatrix}1&f\\0&1\end{pmatrix}$), et le rang vaut $2$ ssi la colonne $2$, $(a, 0, 0, 0)$, est nulle : $a = 0$.</p>
 <p><b>Étape 3 : $A - 2I_4$.</b> $\begin{pmatrix}-1&a&b&c\\0&-1&d&e\\0&0&0&f\\0&0&0&0\end{pmatrix}$ : les lignes $1$ et $2$ sont libres, rang $2$ ssi la ligne $3$ est nulle : $f = 0$.</p>
@@ -1541,6 +1547,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 4 : Conclusion.</b> $E = \bigoplus E_\lambda(v)$ : $\cG{\bigcup_\lambda\mathcal B_\lambda\ \text{est une base commune}}$.</p>
 
 <p class="ml">Exemple 18 : $u$ diagonalisable $\iff u^2$ diagonalisable et $\ker u = \ker u^2$ (sur $\mathbb C$)</p>
+<p>Soit $u$ un endomorphisme d'un $\mathbb C$-espace vectoriel de dimension finie. <b>Montrer que $u$ est diagonalisable si et seulement si $u^2$ est diagonalisable et $\ker u = \ker u^2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Lemme des noyaux : $\ker(u^2 - \mu^2\operatorname{id}) = \ker(u - \mu\operatorname{id})\oplus\ker(u + \mu\operatorname{id})$ si $\mu\neq0$.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> Dans une base où $u = \operatorname{diag}(\lambda_i)$, $u^2 = \operatorname{diag}(\lambda_i^2)$ est diagonale ; $\ker u\subset\ker u^2$ et ils ont la même dimension (nombre de $\lambda_i$ nuls) : égaux.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $E = \ker u^2\oplus\bigoplus_i\ker(u^2 - \mu_i\operatorname{id})$ ($\mu_i\neq0$ valeurs propres de $u^2$). On écrit $\mu_i = \lambda_i^2$ et on coupe chaque morceau par le lemme des noyaux ($X - \lambda_i$ et $X + \lambda_i$ premiers entre eux).</p>
@@ -1550,19 +1557,21 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <div class="sbox"><ul class="sbl"><li>$\displaystyle u\ \text{trigonalisable}\iff\chi_u\ \text{scindé}\iff\text{il existe un annulateur scindé}.\qquad\text{Sur}\ \mathbb C:\ \text{toujours}$</li><li>$\displaystyle \operatorname{tr}(A^k) = \sum\lambda_i^k$</li></ul></div>
 
 <p class="ml">Exemple 19 : nilpotent $\iff\operatorname{Sp} = \{0\}$</p>
+<p>Soit $u$ un endomorphisme d'un $\mathbb C$-espace vectoriel de dimension $n$. <b>Montrer que $u$ est nilpotent si et seulement si $\operatorname{Sp}(u) = \{0\}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Sur $\mathbb C$, $u$ est trigonalisable.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $u^p = 0$ : $X^p$ annule $u$, donc $\operatorname{Sp}u\subset\{0\}$ ; et $u$ n'est pas injectif ($u^p$ ne l'est pas), donc $0$ est valeur propre.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> Une base où $u$ est triangulaire supérieure stricte (diagonale $= 0$) : $u(e_k)\in\operatorname{Vect}(e_1, \dots, e_{k-1})$. Donc $u^k(e_k) = 0$, et $u^n = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{nilpotent}\iff\operatorname{Sp}u = \{0\}}$, et l'indice de nilpotence est $\leq n$.</p>
 
 <p class="ml">Exemple 20 : $\operatorname{tr}(u^k) = 0$ pour $1\leq k\leq n$ entraîne $u$ nilpotent</p>
+<p>Soit $u$ un endomorphisme d'un $\mathbb C$-espace vectoriel de dimension $n$ tel que $\operatorname{tr}(u^k) = 0$ pour $1\leq k\leq n$. <b>Montrer que $u$ est nilpotent.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{tr}(u^k) = \sum m_i\lambda_i^k$ ; un Vandermonde de $\lambda_i$ distincts est inversible.</p>
 <p><b>Étape 2 : L'absurde.</b> Soient $\lambda_1, \dots, \lambda_p$ les valeurs propres non nulles distinctes, de multiplicités $m_i\geq1$ : $\sum_{i=1}^pm_i\lambda_i^k = 0$ pour $k = 1, \dots, p$.</p>
 <p><b>Étape 3 : Le système.</b> Matrice $(\lambda_i^k)_{k,i}$, de déterminant $\lambda_1\cdots\lambda_p\,V(\lambda_1, \dots, \lambda_p)\neq0$ (on sort un $\lambda_i$ de chaque colonne). Seule solution : $m_i = 0$, absurde.</p>
 <p><b>Étape 4 : Conclusion.</b> Pas de valeur propre non nulle : $\cG{u\ \text{nilpotent}}$ (exemple 19).</p>
 
 <p class="ml">Exemple 21 : trigonaliser une matrice $3\times3$</p>
-<p>$A = \begin{pmatrix}2&2&-3\\5&1&-5\\-3&4&0\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}2&2&-3\\5&1&-5\\-3&4&0\end{pmatrix}$. <b>Trigonaliser $A$ : trouver $P$ inversible et $T$ triangulaire avec $A = PTP^{-1}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On prend les vecteurs propres, puis on complète en cherchant $u(e_2) = e_2 + ae_1$, $u(e_3) = e_3 + be_1 + ce_2$.</p>
 <p><b>Étape 2 : $\chi_A$.</b> Développement selon la 1<sup>re</sup> ligne :</p>
 $$\begin{vmatrix}2 - x&2&-3\\5&1 - x&-5\\-3&4&-x\end{vmatrix} = (2 - x)\big[(1 - x)(-x) + 20\big] - 2\big[-5x - 15\big] - 3\big[20 + 3(1 - x)\big]$$
@@ -1583,7 +1592,7 @@ $$= (2 - x)(x^2 - x + 20) + 10x + 30 - 69 + 9x = -x^3 + 3x^2 - 22x + 40 + 19x - 
 </table>
 
 <p class="ml">Exemple 22 : par la division euclidienne</p>
-<p>$A = \begin{pmatrix}1&3&0\\3&-2&-1\\0&-1&1\end{pmatrix}$, $\chi_A = (X - 1)(X - 3)(X + 4)$.</p>
+<p>$A = \begin{pmatrix}1&3&0\\3&-2&-1\\0&-1&1\end{pmatrix}$, $\chi_A = (X - 1)(X - 3)(X + 4)$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $X^n = Q\chi_A + a_nX^2 + b_nX + c_n$ ; en évaluant aux racines, puis $\chi_A(A) = 0$.</p>
 <p><b>Étape 2 : Le système.</b> En $1$ : $a_n + b_n + c_n = 1$. En $3$ : $9a_n + 3b_n + c_n = 3^n$. En $-4$ : $16a_n - 4b_n + c_n = (-4)^n$.</p>
 <p><b>Étape 3 : On résout.</b> Différences : $8a_n + 2b_n = 3^n - 1$ et $15a_n - 5b_n = (-4)^n - 1$. On élimine $b_n$ ($\times5$ et $\times2$) : $70a_n = 2(-4)^n + 5\times3^n - 7$. Puis $b_n = \frac{3^n - 1 - 8a_n}2 = \frac{15\times3^n - 8(-4)^n - 7}{70}$ et $c_n = 1 - a_n - b_n = \frac{6(-4)^n - 20\times3^n + 84}{70}$.</p>
@@ -1610,7 +1619,7 @@ $$= (2 - x)(x^2 - x + 20) + 10x + 30 - 69 + 9x = -x^3 + 3x^2 - 22x + 40 + 19x - 
 <p>On pose $X_n = (u_n, v_n, w_n)$ : le système devient $X_{n+1} = AX_n$, donc $X_n = A^nX_0$. Une suite $u_{n+p} = a_{p-1}u_{n+p-1} + \dots + a_0u_n$ s'écrit pareil avec la matrice compagnon.</p>
 
 <p class="ml">Exemple 25 : un système de trois suites</p>
-<p>$u_{n+1} = -u_n + v_n + w_n$, $v_{n+1} = u_n - v_n + w_n$, $w_{n+1} = u_n + v_n - w_n$, $(u_0, v_0, w_0) = (1, 0, 0)$.</p>
+<p>$u_{n+1} = -u_n + v_n + w_n$, $v_{n+1} = u_n - v_n + w_n$, $w_{n+1} = u_n + v_n - w_n$, $(u_0, v_0, w_0) = (1, 0, 0)$. <b>Exprimer $u_n$, $v_n$ et $w_n$ en fonction de $n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $X_n = A^nX_0$ avec $A = J - 2I_3$ ($J$ remplie de $1$).</p>
 <p><b>Étape 2 : Un annulateur.</b> $J^2 = 3J$ : $A^2 = J^2 - 4J + 4I_3 = -J + 4I_3 = -(A + 2I_3) + 4I_3 = -A + 2I_3$, donc $A^2 + A - 2I_3 = 0$, soit $(X - 1)(X + 2)$.</p>
 <p><b>Étape 3 : La division.</b> $X^n = Q(X - 1)(X + 2) + a_nX + b_n$ : en $1$, $a_n + b_n = 1$ ; en $-2$, $-2a_n + b_n = (-2)^n$. Donc $3a_n = 1 - (-2)^n$ : $a_n = \frac{1 - (-2)^n}3$, $b_n = \frac{2 + (-2)^n}3$.</p>
@@ -1618,7 +1627,7 @@ $$= (2 - x)(x^2 - x + 20) + 10x + 30 - 69 + 9x = -x^3 + 3x^2 - 22x + 40 + 19x - 
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n = b_n - a_n = \frac{1 + 2(-2)^n}3,\quad v_n = w_n = \frac{1 - (-2)^n}3}$. Contrôle $n = 1$ : $u_1 = \frac{1 - 4}3 = -1$, $v_1 = \frac{1 + 2}3 = 1$ ✓.</p>
 
 <p class="ml">Exemple 26 : une suite récurrente d'ordre $4$</p>
-<p>$u_0 = 1$, $u_1 = 0$, $u_2 = 11$, $u_3 = 20$ et $u_{n+4} = 2u_{n+3} + 3u_{n+2} - 4u_{n+1} - 4u_n$.</p>
+<p>$u_0 = 1$, $u_1 = 0$, $u_2 = 11$, $u_3 = 20$ et $u_{n+4} = 2u_{n+3} + 3u_{n+2} - 4u_{n+1} - 4u_n$. <b>Exprimer $u_n$ en fonction de $n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $X_{n+1} = AX_n$ avec la matrice compagnon ; $u_n$ est une combinaison de $\lambda^n$, $n\lambda^n$ selon les racines de $\chi_A$.</p>
 <p><b>Étape 2 : Le polynôme.</b> $\chi_A = X^4 - 2X^3 - 3X^2 + 4X + 4$. En $-1$ : $1 + 2 - 3 - 4 + 4 = 0$ ; en $2$ : $16 - 16 - 12 + 8 + 4 = 0$. On vérifie $(X + 1)^2(X - 2)^2 = (X^2 + 2X + 1)(X^2 - 4X + 4) = X^4 - 2X^3 - 3X^2 + 4X + 4$ ✓.</p>
 <p><b>Étape 3 : La forme.</b> Racines doubles : $u_n = (\alpha + \beta n)(-1)^n + (\gamma + \delta n)2^n$.</p>
@@ -1644,24 +1653,28 @@ $$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}
 <p><b>Étape 4 : Conclusion.</b> Une seule solution réelle, $\cG{M = P\operatorname{diag}(0, 2, -2)P^{-1} = \frac14A}$ (contrôle : $A^3 = 64A$ par Cayley-Hamilton, donc $\big(\frac A4\big)^3 = A$). Dans $\mathcal M_3(\mathbb C)$ : $b\in\{2, 2j, 2j^2\}$, $c\in\{-2, -2j, -2j^2\}$, soit $9$ solutions.</p>
 
 <p class="ml">Exemple 29 : $A^2 + A + I_n = 0$ dans $\mathcal M_n(\mathbb R)$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb R)$ telle que $A^2 + A + I_n = 0$. <b>Montrer que $n$ est pair et que $A$ est semblable à une matrice diagonale par blocs $\operatorname{diag}(J, \dots, J)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Annulateur $X^2 + X + 1 = (X - j)(X - j^2)$, scindé à racines simples sur $\mathbb C$.</p>
 <p><b>Étape 2 : $n$ est pair.</b> Les valeurs propres complexes sont dans $\{j, j^2\}$, non réelles. $\chi_A$ est réel de degré $n$ : si $n$ était impair, il aurait une racine réelle. Donc $n = 2p$, et $j$, $j^2$ ont la même multiplicité $p$ (racines conjuguées).</p>
 <p><b>Étape 3 : La forme réduite.</b> Avec $J = \begin{pmatrix}0&-1\\1&-1\end{pmatrix}$ : $\chi_J = X^2 + X + 1$, valeurs propres $j, j^2$. $A$ et $\operatorname{diag}(J, \dots, J)$ sont diagonalisables sur $\mathbb C$ avec les mêmes valeurs propres et multiplicités : semblables dans $\mathcal M_n(\mathbb C)$, donc dans $\mathcal M_n(\mathbb R)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{n\ \text{pair et}\ A\ \text{semblable à}\ \operatorname{diag}(J, \dots, J)}$ ; réciproquement ces matrices conviennent ($J^2 + J + I_2 = 0$).</p>
 
 <p class="ml">Exemple 30 : $P(A)$ inversible $\iff P\wedge\pi_A = 1$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb C)$ de polynôme minimal $\pi_A$ et $P\in\mathbb C[X]$. <b>Montrer que $P(A)$ est inversible si et seulement si $P\wedge\pi_A = 1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bézout, et $\pi_A$ (polynôme minimal) divise tout annulateur.</p>
 <p><b>Étape 2 : $\Leftarrow$.</b> $UP + V\pi_A = 1$ donne $U(A)P(A) + V(A)\pi_A(A) = I_n$, et $\pi_A(A) = 0$ : $U(A)P(A) = I_n$.</p>
 <p><b>Étape 3 : $\Rightarrow$ (contraposée).</b> $D = P\wedge\pi_A$ non constant : $\pi_A = DQ$ avec $\deg Q \lt \deg\pi_A$, donc $Q(A)\neq0$. Et $P = DR$, donc $P(A)Q(A) = R(A)D(A)Q(A) = R(A)\pi_A(A) = 0$ : $P(A)$ n'est pas inversible.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(A)\in GL_n\iff P\wedge\pi_A = 1}$, autrement dit $P$ ne s'annule sur aucune valeur propre de $A$ (dans $\mathbb C$).</p>
 
 <p class="ml">Exemple 31 : trace et déterminant de $M\mapsto a\,{}^tM + bM$</p>
+<p>Soient $a, b\in\mathbb R$ et $u:M\mapsto a\,{}^tM + bM$ sur $\mathcal M_n(\mathbb R)$. <b>Calculer la trace et le déterminant de $u$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{tr} = \sum\lambda_i$, $\det = \prod\lambda_i$ avec multiplicités.</p>
 <p><b>Étape 2 : Les sous-espaces.</b> $M\in S_n$ : $u(M) = aM + bM = (a + b)M$. $M\in A_n$ : $u(M) = -aM + bM = (b - a)M$. Et $\mathcal M_n = S_n\oplus A_n$.</p>
 <p><b>Étape 3 : Les dimensions.</b> $\dim S_n = \frac{n(n + 1)}2$, $\dim A_n = \frac{n(n - 1)}2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{tr}u = \frac{n(n + 1)}2(a + b) + \frac{n(n - 1)}2(b - a) = an + bn^2,\quad\det u = (a + b)^{\frac{n(n + 1)}2}(b - a)^{\frac{n(n - 1)}2}}$ (calcul : $\frac{n^2 + n - n^2 + n}2a + \frac{n^2 + n + n^2 - n}2b$).</p>
 
 <p class="ml">Exemple 32 : $12A^3 - 8A^2 + 7A - I_3 = 0$ entraîne $0 \lt \operatorname{tr}A \lt 2$</p>
+<p>Soit $A\in\mathcal M_3(\mathbb R)$ telle que $12A^3 - 8A^2 + 7A - I_3 = 0$. <b>Montrer que $0 \lt \operatorname{tr}A \lt 2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Valeurs propres parmi les racines de l'annulateur ; celles d'une matrice réelle non réelles vont par paires conjuguées.</p>
 <p><b>Étape 2 : Factoriser.</b> En $\frac16$ : $\frac{12}{216} - \frac8{36} + \frac76 - 1 = \frac1{18} - \frac4{18} + \frac{21}{18} - \frac{18}{18} = 0$. Donc $P = (6X - 1)(2X^2 - X + 1)$ (contrôle : $12X^3 - 6X^2 + 6X - 2X^2 + X - 1$ ✓). $2X^2 - X + 1$ : $\Delta = 1 - 8 \lt 0$, racines $\lambda, \overline\lambda$ avec $\lambda + \overline\lambda = \frac12$.</p>
 <p><b>Étape 3 : Les possibilités.</b> $\chi_A$ réel de degré $3$ : valeurs propres $\big(\frac16, \frac16, \frac16\big)$ ou $\big(\frac16, \lambda, \overline\lambda\big)$.</p>
@@ -1671,14 +1684,14 @@ $$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}
 <div class="sbox"><ul class="sbl"><li>$\displaystyle D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}$</li><li>$\displaystyle H:\ {}^tLX = 0\ \text{stable par}\ A\iff L\ \text{vecteur propre de}\ {}^tA$</li><li>$\displaystyle \exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}$</li></ul></div>
 
 <p class="ml">Exemple 33 : tous les sous-espaces stables d'une matrice $3\times3$</p>
-<p>$A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&-1\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&-1\end{pmatrix}$. <b>Déterminer tous les sous-espaces de $\mathbb R^3$ stables par $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dimensions $0$ et $3$ : évidents. Droites : vecteurs propres de $A$. Plans : $\{{}^tLX = 0\}$ avec $L$ vecteur propre de $\,{}^tA$.</p>
 <p><b>Étape 2 : Les droites.</b> $E_3$ : $(A - 3I)X = (y, 0, -4z) = 0$, donc $y = z = 0$ : $\mathbb Re_1$. $E_{-1}$ : $(4x + y, 4y, 0) = 0$ : $\mathbb Re_3$.</p>
 <p><b>Étape 3 : Les plans.</b> $\,{}^tA = \begin{pmatrix}3&0&0\\1&3&0\\0&0&-1\end{pmatrix}$. Pour $3$ : $(0, x, -4z) = 0$, $L = (0, 1, 0)$, plan $y = 0$. Pour $-1$ : $(4x, x + 4y, 0) = 0$, $L = (0, 0, 1)$, plan $z = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\{0\},\ \mathbb Re_1,\ \mathbb Re_3,\ \{y = 0\},\ \{z = 0\},\ \mathbb R^3}$ : $A$ n'est pas diagonalisable, donc il n'y en a que six.</p>
 
 <p class="ml">Exemple 34 : $\exp(A)$ par un annulateur</p>
-<p>$A = \begin{pmatrix}3&-3&2\\-1&5&-2\\-1&3&0\end{pmatrix}$. Ici $\operatorname{tr}A = 8$, la somme des mineurs diagonaux vaut $(15 - 3) + (0 + 2) + (0 + 6) = 20$ et $\det A = 3(0 + 6) + 3(0 - 2) + 2(-3 + 5) = 16$, donc $\chi_A = X^3 - 8X^2 + 20X - 16 = (X - 2)^2(X - 4)$ (contrôle : $(X^2 - 4X + 4)(X - 4) = X^3 - 8X^2 + 20X - 16$).</p>
+<p>$A = \begin{pmatrix}3&-3&2\\-1&5&-2\\-1&3&0\end{pmatrix}$. Ici $\operatorname{tr}A = 8$, la somme des mineurs diagonaux vaut $(15 - 3) + (0 + 2) + (0 + 6) = 20$ et $\det A = 3(0 + 6) + 3(0 - 2) + 2(-3 + 5) = 16$, donc $\chi_A = X^3 - 8X^2 + 20X - 16 = (X - 2)^2(X - 4)$ (contrôle : $(X^2 - 4X + 4)(X - 4) = X^3 - 8X^2 + 20X - 16$). <b>Calculer $\exp(A)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $\pi_A = (X - 2)(X - 4)$, $X^n = \pi_AQ + aX + b$ ; on écrit le reste dans la base $(X - 2, X - 4)$.</p>
 <p><b>Étape 2 : Diagonalisable.</b> $A - 2I_3 = \begin{pmatrix}1&-3&2\\-1&3&-2\\-1&3&-2\end{pmatrix}$ : rang $1$, $\dim E_2 = 2$ ; donc $\pi_A = (X - 2)(X - 4)$.</p>
 <p><b>Étape 3 : $A^n$.</b> Reste $R = \alpha(X - 2) + \beta(X - 4)$ : en $4$, $2\alpha = 4^n$ ; en $2$, $-2\beta = 2^n$. Donc $A^n = \frac12\big(4^n(A - 2I_3) - 2^n(A - 4I_3)\big)$.</p>
@@ -1687,11 +1700,13 @@ $$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}
 $$\cG{\exp(A) = \frac12\begin{pmatrix}e^4 + e^2&-3e^4 + 3e^2&2e^4 - 2e^2\\-e^4 + e^2&3e^4 - e^2&-2e^4 + 2e^2\\-e^4 + e^2&3e^4 - 3e^2&-2e^4 + 4e^2\end{pmatrix}}.$$
 
 <p class="ml">Exemple 35 : $\exp\big((a - b)I_n + bJ\big)$</p>
+<p>Soient $a, b\in\mathbb R$ et $A = (a - b)I_n + bJ$, où $J$ est remplie de $1$. <b>Calculer $\exp(A)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\exp(X + Y) = \exp X\exp Y$ si $XY = YX$, et $J^k = n^{k-1}J$.</p>
 <p><b>Étape 2 : $\exp(bJ)$.</b> $I_n + \sum_{k\geq1}\frac{b^kn^{k-1}}{k!}J = I_n + \frac1n\big(e^{nb} - 1\big)J$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\exp(A) = e^{a-b}\Big(I_n + \frac{e^{nb} - 1}nJ\Big)}$.</p>
 
 <p class="ml">Exemple 36 : $\det\exp(A) = e^{\operatorname{tr}A}$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb C)$. <b>Montrer que $\det\exp(A) = e^{\operatorname{tr}A}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Sur $\mathbb C$, $A = PTP^{-1}$ avec $T$ triangulaire de diagonale $\lambda_1, \dots, \lambda_n$.</p>
 <p><b>Étape 2 : $\exp(T)$.</b> $T^k$ est triangulaire de diagonale $\lambda_i^k$, donc $\exp(T)$ est triangulaire de diagonale $e^{\lambda_i}$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\det\exp A = \det\exp T = \prod e^{\lambda_i} = e^{\sum\lambda_i} = \cG{e^{\operatorname{tr}A}}$ : $\exp(A)$ est toujours inversible.</p>
