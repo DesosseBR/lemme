@@ -327,19 +327,44 @@ function empty(title, text) { return `<div class="empty"><b>${title}</b>${text}<
 
 /* ---------- Pages ---------- */
 function home() {
-  const last = DS.get("lemme-last", null), le = last && EXERCISES.find(x => x.id === last.id);
-  const st = le && le.steps[Math.min(last.i, le.steps.length - 1)];
-  const where = le ? (last.i >= le.steps.length ? "Bilan" : st && st.q != null ? `Question ${st.q}` : `Étape ${last.i + 1} sur ${le.steps.length}`) : "";
-  /* question du jour : un rappel de cours différent chaque jour */
-  const keys = Object.keys(RAPPELS).filter(k => RAPPELS[k].b && RAPPELS[k].b.length < 900).sort();
-  const day = Math.floor(Date.now() / 864e5), qk = keys.length ? keys[(day * 7919) % keys.length] : null, qr = qk && RAPPELS[qk];
-  return `<section class="home"><div class="wrap">
-    <h1>Toute ta prépa, corrigée</h1>
-    <div class="search home-search"><svg class="lens" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="hq" type="search" placeholder="Cherche un chapitre, un exercice…" autocomplete="off" aria-label="Rechercher"><div class="results" id="hres" hidden></div></div>
-    ${le ? `<a class="resume" href="#e-${le.id}" data-resume="${le.id}"><span class="rk">Continuer</span><b>${ttl(le)}</b><span class="rw">${where}</span><span class="bar"><i style="width:${Math.round(100 * Math.min(last.i, le.steps.length) / le.steps.length)}%"></i></span></a>` : ""}
-    ${qr ? `<details class="qdj"><summary><span class="rk">Question du jour</span><b>${esc(qr.t)} : que dit ce résultat ?</b><span class="rw">Clique pour voir la réponse</span></summary><div class="body course">${aerate(qr.b, true)}</div></details>` : ""}
-    <nav class="home-subj" aria-label="Matières">${VISIBLE.map(x => `<a href="#s-${x.id}">${x.name}</a>`).join("")}</nav>
-  </div></section>`;
+  const demo = EXERCISES.find(e => e.id === "ex-rc");
+  const st = demo.steps[1];
+  return `
+  <section class="hero"><div class="photo">${img("hero", "100vw", true)}</div><div class="wrap">
+    <h1><span class="line"><span>Toute ta prépa,</span></span><span class="line"><span><span class="mark">corrigée</span></span></span><span class="line"><span>pas à pas</span></span></h1>
+    <p>Cours, résumés et corrigés interactifs pour la prépa scientifique, de la Sup à la Spé.</p>
+    <div class="ctas"><a class="btn btn-yellow" href="#s-maths">Explorer les matières ${I.arrow}</a><a class="btn btn-glass" href="#e-ex-recurrence">Essayer un corrigé</a></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-title"><h2>Les matières</h2><a href="#exercices">Tous les exercices ${I.arrow}</a></div>
+    <div class="subjects stagger">${VISIBLE.map(s => `<a class="scard" href="#s-${s.id}">${img(s.id, "(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw")}<span class="in"><h3>${s.name}</h3></span></a>`).join("")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap showcase">
+    <div>
+      <h2>Un corrigé qu'on suit, pas qu'on survole</h2>
+      <p>Chaque correction avance étape par étape, et le rappel de cours utilisé est à un clic.</p>
+      <div class="keys"><kbd>←</kbd><kbd>→</kbd><span>pour avancer ou revenir</span></div>
+      <a class="btn btn-navy" href="#e-${demo.id}">Ouvrir cet exercice ${I.arrow}</a>
+    </div>
+    <div class="panelbox player" aria-label="Aperçu d'un corrigé">
+      <div class="prog" aria-hidden="true">${demo.steps.map((_, k) => `<button tabindex="-1" class="${k <= 1 ? "done" : ""}"></button>`).join("")}<button tabindex="-1"></button></div>
+      <div class="step"><span class="count">Étape 2 sur ${demo.steps.length}</span><h3>${stt(st.t)}</h3><div class="prose">${st.b}</div>
+      <div class="rappels"><span class="lab">Rappels utilisés</span>${(st.rappels || []).map(r => rchip(r)).join("")}</div></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap"><div class="band">
+    <div class="list"><h2>S'entraîner</h2><ul>
+      <li><a href="#classiques">Classiques${I.arrow}</a></li>
+      <li><a href="#dm">Devoirs maison${I.arrow}</a></li>
+      <li><a href="#kholles">Khôlles${I.arrow}</a></li>
+      <li><a href="#concours">Concours${I.arrow}</a></li>
+      <li><a href="#oral">Oraux${I.arrow}</a></li>
+    </ul></div>
+    <div class="photo">${img("oral", "(max-width:860px) 100vw, 50vw")}</div>
+  </div></div></section>`;
 }
 function wireHome() {
   const i = $("#hq"), r = $("#hres"); if (!i) return;
@@ -1702,13 +1727,15 @@ function friseSections(app) {
   });
 }
 function braceTree(el) {
+  /* L'arbre de décision, dessiné comme les autres arbres (htree) : racine, branches, questions, conclusions. */
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
   const chain = tb => { const out = []; let cur = null, fin = null; [...tb.children].forEach(c => { if (c.classList.contains("tq")) { cur = { q: c.innerHTML }; out.push(cur); } else if (c.classList.contains("tend")) fin = c; else if (c.classList.contains("tl") && cur) cur.yes = c; else if (c.classList.contains("tno") && cur) cur.no = c.innerHTML; }); return { out, fin }; };
-  const leaf = (a, cls) => `<a class="bl ${cls}" href="${a.getAttribute("href")}">${a.innerHTML.replace(/^oui\s*:\s*/, "")}</a>`;
-  const rec = (out, i, fin) => i === out.length ? leaf(fin, "end") : `<div class="bn"><div class="bq">${out[i].q}</div><div class="bb">${BRACE}<div class="bk"><div class="br"><i>oui</i>${leaf(out[i].yes, "ok")}</div><div class="br"><i>${out[i].no || "non"}</i><div class="bsub">${rec(out, i + 1, fin)}</div></div></div></div></div>`;
-  const html = brs.map(tb => { const col = [...tb.classList].find(c => /^t[BRGOV]$/.test(c)) || "", { out, fin } = chain(tb); return `<div class="bbr ${col}"><div class="bt">${tb.querySelector(".tt").innerHTML}</div>${rec(out, 0, fin)}</div>`; }).join("");
-  const n = document.createElement("div"); n.className = "btree";
-  n.innerHTML = `<div class="bq broot">${root ? root.innerHTML : ""}</div><div class="bb">${BRACE}<div class="bk">${html}</div></div>`;
+  const leaf = (a, cls) => `<a class="hl ${cls}" href="${a.getAttribute("href")}">${a.innerHTML.replace(/^oui\s*:\s*/, "")}</a>`;
+  const rec = (out, i, fin) => i === out.length ? (fin ? leaf(fin, "end") : "")
+    : `<span class="hq">${out[i].q}</span><ul><li><div class="hr"><em>oui</em>${out[i].yes ? leaf(out[i].yes, "ok") : ""}</div></li><li><div class="hr"><em>${out[i].no || "non"}</em>${rec(out, i + 1, fin)}</div></li></ul>`;
+  const html = brs.map(tb => { const { out, fin } = chain(tb); return `<li><div class="hr"><em>${tb.querySelector(".tt").innerHTML}</em>${rec(out, 0, fin)}</div></li>`; }).join("");
+  const n = document.createElement("div"); n.className = "htree";
+  n.innerHTML = `<div class="hr"><span class="hq hroot">${root ? root.innerHTML : ""}</span><ul>${html}</ul></div>`;
   el.replaceWith(n);
 }
 function mlDiag(host) {
@@ -4466,6 +4493,10 @@ function wire(ex) {
   $$(".potence", app).forEach(renderPotence);
   $$(".tree", app).forEach(braceTree);
   $$("[data-mlab]", app).forEach(mountMlab);
+  /* Un arbre plus large que la page est réduit pour tenir en entier, sans barre de défilement. */
+  $$(".htree", app).forEach(t => { const inner = t.firstElementChild; if (!inner || !window.ResizeObserver) return;
+    const fit = () => { t.style.zoom = ""; const w = inner.scrollWidth, c = t.clientWidth; if (w > c + 2) t.style.zoom = String(Math.max(.55, c / w)); };
+    new ResizeObserver(fit).observe(inner); fit(); });
   $$(".msum a, .btree a, .lg a, .htree a", app).forEach(a => a.addEventListener("click", ev => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: "smooth", block: "start" }); if (a.closest(".btree, .lg, .htree")) backTo(a); } }));
   $$("[data-print]", app).forEach(b => b.addEventListener("click", () => print()));
   $$(".flash", app).forEach(fl => { $$(".fcard", fl).forEach(c => c.addEventListener("click", () => c.classList.toggle("flip"))); $$("[data-fl]", fl).forEach(b => b.addEventListener("click", () => flashGo(fl, +b.dataset.fl))); });

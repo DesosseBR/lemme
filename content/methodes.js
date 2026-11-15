@@ -2,8 +2,6 @@
    Blocs : Réflexe (quand on voit quoi), Méthode (étapes), Exemple, Piège. Les data-mlab sont les labos interactifs. */
 LEMME.METHODES = {
 "Matrices et systèmes linéaires": R`
-<nav class="msum"><a href="#m-taille">Taille</a><a href="#m-somme">Somme</a><a href="#m-produit">Produit</a><a href="#m-regles">Règles de calcul</a><a href="#m-puiss">Puissances</a><a href="#m-nilp">Nilpotentes</a><a href="#m-transp">Transposée</a><a href="#m-inv">Inverse</a><a href="#m-sys">Systèmes</a><a href="#m-gauss">Pivot de Gauss</a><a href="#m-trace">Trace</a><a href="#m-al">Applications linéaires</a><a href="#m-compo">Composer</a><a href="#m-passage">Passage</a><a href="#m-chgt">Changement de base</a><a href="#m-an">Calculer $A^n$</a><a href="#m-blocs">Blocs</a><a href="#m-inv2">Inversible ?</a><a href="#m-an2">$A^p$ : exemples</a><a href="#m-mat2">Matrice d'une AL</a><a href="#m-rang2">Rang</a><a href="#m-comm">Commutant</a><a href="#m-sim">Semblables</a><a href="#m-tr2">Trace</a><a href="#m-blocs2">Blocs : calculs</a><a href="#m-arbre">L'arbre</a><a href="#m-reflexes">Réflexes</a><a href="#m-erreurs">Erreurs</a><a href="#m-entrainement">S'entraîner</a></nav>
-
 <h2 id="m-taille">1. Taille et notations</h2>
 <div class="sbox">$$A = (a_{i,j})_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant p}}\in\mathcal M_{n,p}(\mathbb K)\iff A\ \text{a}\ n\ \text{lignes et}\ p\ \text{colonnes}.$$</div>
 <ul>
@@ -745,8 +743,6 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 
 `,
 "Groupe symétrique et déterminants": R`
-<nav class="msum"><a href="#d-sn">Permutations</a><a href="#d-cycles">Cycles</a><a href="#d-sign">Signature</a><a href="#d-def">Définition du déterminant</a><a href="#d-2">Taille 2</a><a href="#d-tri">Triangulaire</a><a href="#d-sarrus">Sarrus</a><a href="#d-ops">Opérations</a><a href="#d-dev">Développer</a><a href="#d-form">Formules</a><a href="#d-vdm">Vandermonde</a><a href="#d-plus">Pour aller plus loin</a><a href="#d-sf">Boîte à outils</a><a href="#d-reflexes">Réflexes</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-arbre">L'arbre</a></nav>
-
 <h2 id="d-sn">1. Le groupe symétrique</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \mathfrak S_n = \{\sigma : [\![1,n]\!]\to[\![1,n]\!]\ \text{bijective}\}$</li><li>$\displaystyle \operatorname{Card}\mathfrak S_n = n!$</li></ul></div>
 <ul>
@@ -1121,8 +1117,6 @@ $$U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - 
 
 `,
 "Réduction des endomorphismes": R`
-<nav class="msum"><a href="#r-not">Notations</a><a href="#r-elts">Éléments propres</a><a href="#r-chi">Polynôme caractéristique</a><a href="#r-zeros">Faire des zéros</a><a href="#r-sanschi">Sans $\chi_A$</a><a href="#r-esp">Sous-espaces propres</a><a href="#r-crit">Critères</a><a href="#r-diag">Diagonaliser</a><a href="#r-trig">Trigonaliser</a><a href="#r-annul">Polynômes annulateurs</a><a href="#r-sfelts">Éléments propres : outils</a><a href="#r-sfdiag">Diagonalisable ?</a><a href="#r-sftrig">Trigonalisation</a><a href="#r-sfpuiss">$A^n$</a><a href="#r-sfsuites">Suites</a><a href="#r-sfmat">Commutant, équations</a><a href="#r-sfstab">Stables, exponentielle</a><a href="#r-enonce">Ce que l'énoncé te donne</a><a href="#r-appli">Applications</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-arbre">L'arbre</a></nav>
-
 <h2 id="r-not">1. Les notations du programme</h2>
 <p class="mcode"><span class="kB">bleu</span> : valeurs propres &nbsp;·&nbsp; <span class="kR">rouge</span> : vecteurs propres &nbsp;·&nbsp; <span class="kG">vert</span> : sous-espaces propres &nbsp;·&nbsp; <span class="kO">orange</span> : multiplicités</p>
 <table class="mtab">
@@ -1362,7 +1356,7 @@ $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix}
 <p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
 
 <h2 id="r-annul">10. Polynômes annulateurs</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \chi_A(A) = 0\quad\text{(Cayley-Hamilton)}$</li><li>$\displaystyle \pi_A\ \text{divise tout polynôme annulateur, en particulier}\ \chi_A$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \chi_A(A) = 0\quad\text{(Cayley-Hamilton)}$</li><li>$\pi_A$ divise tout polynôme annulateur, en particulier $\chi_A$</li></ul></div>
 <ul>
 <li>Les racines de $\pi_A$ sont exactement les valeurs propres.</li>
 <li>$P(A) = 0\ \Longrightarrow\ \operatorname{Sp}(A)\subset\{\text{racines de}\ P\}$ : inclusion seulement.</li>
@@ -1513,7 +1507,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 4 : Conclusion.</b> $E = \ker u\oplus\bigoplus_i\big(\ker(u - \lambda_i\operatorname{id})\oplus\ker(u + \lambda_i\operatorname{id})\big)$ : $\cG{u\ \text{diagonalisable}}$.</p>
 
 <h2 id="r-sftrig">13. Utiliser la trigonalisation, trigonaliser</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle u\ \text{trigonalisable}\iff\chi_u\ \text{scindé}\iff\text{il existe un annulateur scindé}.\qquad\text{Sur}\ \mathbb C:\ \text{toujours}$</li><li>$\displaystyle \operatorname{tr}(A^k) = \sum\lambda_i^k$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$u$ trigonalisable $\iff\chi_u$ scindé $\iff$ il existe un annulateur scindé. Sur $\mathbb C$ : toujours</li><li>$\displaystyle \operatorname{tr}(A^k) = \sum\lambda_i^k$</li></ul></div>
 
 <p class="ml">Exemple 19 : nilpotent $\iff\operatorname{Sp} = \{0\}$</p>
 <p>Soit $u$ un endomorphisme d'un $\mathbb C$-espace vectoriel de dimension $n$. <b>Montrer que $u$ est nilpotent si et seulement si $\operatorname{Sp}(u) = \{0\}$.</b></p>
@@ -1632,7 +1626,7 @@ $$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}
 <p><b>Étape 4 : Conclusion.</b> $\operatorname{tr}A = \frac36 = \frac12$ ou $\frac16 + \frac12 = \frac23$ : $\cG{0 \lt \operatorname{tr}A \lt 2}$.</p>
 
 <h2 id="r-sfstab">17. Sous-espaces stables, exponentielle</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}$</li><li>$\displaystyle H:\ {}^tLX = 0\ \text{stable par}\ A\iff L\ \text{vecteur propre de}\ {}^tA$</li><li>$\displaystyle \exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}$</li><li>$H:\ {}^tLX = 0$ stable par $A\iff L$ vecteur propre de $\,{}^tA$</li><li>$\displaystyle \exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}$</li></ul></div>
 
 <p class="ml">Exemple 33 : tous les sous-espaces stables d'une matrice $3\times3$</p>
 <p>$A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&-1\end{pmatrix}$. <b>Déterminer tous les sous-espaces de $\mathbb R^3$ stables par $A$.</b></p>
@@ -1739,11 +1733,6 @@ $$\cG{\exp(A) = \frac12\begin{pmatrix}e^4 + e^2&-3e^4 + 3e^2&2e^4 - 2e^2\\-e^4 +
 </div>
 `,
 "Équations différentielles linéaires": R`
-<nav class="msum"><a href="#e-not">Notations</a><a href="#e-forme">Mettre en forme</a><a href="#e-plan">Le plan</a><a href="#e-o1">Ordre 1 : homogène</a><a href="#e-yp1">Ordre 1 : particulière</a><a href="#e-varc">Variation de la constante</a><a href="#e-raccord">Raccordement</a><a href="#e-o2">Ordre 2 : homogène</a><a href="#e-yp2">Ordre 2 : particulière</a><a href="#e-superpo">Superposition</a><a href="#e-cauchy">Conditions initiales</a><a href="#e-var">Coefficients variables</a><a href="#e-sys">Systèmes $X' = AX$</a><a href="#e-nonlin">Non linéaires</a><a href="#e-enonce">Ce que l'énoncé te donne</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la solution de l'équation homogène $\cB{y_H}$. <span class="kR">rouge</span> : la solution particulière $\cR{y_p}$. <span class="kO">orange</span> : le second membre. <span class="kG">vert</span> : les constantes $\cG\lambda, \cG\mu$ et les conditions initiales. <span class="kV">violet</span> : les racines de l'équation caractéristique.</p>
-
 <h2 id="e-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -1789,7 +1778,7 @@ $$\cG{a(t) = -\frac75t^3}.$$
 <p>Trouver les constantes à l'étape 1, avant d'ajouter $\cR{y_p}$, donne une solution fausse. Si le second membre est nul, $\cR{y_p} = 0$.</p>
 
 <h2 id="e-o1">4. Ordre 1 : l'équation homogène</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle y' + a(t)\,y = 0\iff y(t) = \cG\lambda\,e^{-A(t)}$</li><li>$\displaystyle A\ \text{une primitive de}\ a\ (\text{sans constante})$</li><li>$\displaystyle \cG\lambda\in\mathbb K$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle y' + a(t)\,y = 0\iff y(t) = \cG\lambda\,e^{-A(t)}$</li><li>$A$ une primitive de $a\ ($ sans constante $)$</li><li>$\displaystyle \cG\lambda\in\mathbb K$</li></ul></div>
 <p class="ml">Pourquoi (à savoir refaire)</p>
 <p>On multiplie par $e^{A(t)}$, qui ne s'annule pas, et on reconnaît une dérivée de produit :</p>
 $$y' + a\,y = 0\iff y'e^{A} + a\,e^{A}y = 0\iff\big(y\,e^{A}\big)' = 0\iff y\,e^{A} = \cG\lambda\iff y = \cG\lambda\,e^{-A}.$$
@@ -2053,7 +2042,7 @@ $$y(t) = -e^t + e^{2t} - t\,e^t.$$
 <h2 id="e-var">12. Ordre 2 à coefficients variables</h2>
 <p>$(H):\ y'' + a(t)\,y' + b(t)\,y = 0$. Plus de formule toute faite : $\mathcal S_H$ est de dimension $2$, il faut <b>trouver deux solutions indépendantes</b>.</p>
 <p class="ml">Le wronskien</p>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle W(t) = \varphi_1(t)\,\varphi_2'(t) - \varphi_1'(t)\,\varphi_2(t)$</li><li>$\displaystyle (\varphi_1, \varphi_2)\ \text{base de}\ \mathcal S_H\iff W(t_0)\neq0\ \text{pour un}\ t_0\iff W\ \text{ne s'annule pas}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle W(t) = \varphi_1(t)\,\varphi_2'(t) - \varphi_1'(t)\,\varphi_2(t)$</li><li>$(\varphi_1, \varphi_2)$ base de $\mathcal S_H\iff W(t_0)\neq0$ pour un $t_0\iff W$ ne s'annule pas</li></ul></div>
 <p>À savoir redémontrer : $W' = \varphi_1\varphi_2'' - \varphi_1''\varphi_2 = \varphi_1(-a\varphi_2' - b\varphi_2) - (-a\varphi_1' - b\varphi_1)\varphi_2 = -a\,W$, donc $W(t) = W(t_0)\,e^{-\int_{t_0}^ta}$.</p>
 <p class="ml">Méthode 1 : chercher une solution évidente</p>
 <p>Essayer $t^k$ (polynômes), $e^{rt}$, ou une série entière $\sum a_nt^n$.</p>
@@ -2193,11 +2182,6 @@ $$y' = 1 + y^2\iff\frac{y'}{1 + y^2} = 1\iff\big(\arctan y\big)' = 1\iff\arctan 
 </ul></div></div>
 `,
 "Calcul algébrique": R`
-<nav class="msum"><a href="#a-not">Notations</a><a href="#a-lin">Règles de calcul</a><a href="#a-chg">Changer d'indice</a><a href="#a-usu">Sommes usuelles</a><a href="#a-geo">Géométrique</a><a href="#a-tele">Télescopage</a><a href="#a-prod">Produits</a><a href="#a-binom">Coefficients binomiaux</a><a href="#a-newton">Binôme de Newton</a><a href="#a-bern">$a^n - b^n$</a><a href="#a-doubles">Sommes doubles</a><a href="#a-ineg">Inégalités</a><a href="#a-enonce">Ce que l'énoncé te donne</a><a href="#a-erreurs">Erreurs</a><a href="#a-entrainement">S'entraîner</a><a href="#a-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : l'indice et les bornes. <span class="kO">orange</span> : l'opération qu'on fait (changement d'indice, factorisation). <span class="kR">rouge</span> : les termes qui s'annulent. <span class="kV">violet</span> : les coefficients binomiaux. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="a-not">1. Les notations du programme</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{\cB{k = p}}^{\cB n}x_k = x_p + x_{p+1} + \cdots + x_n$</li><li>$\displaystyle \prod_{\cB{k = p}}^{\cB n}x_k = x_p\times x_{p+1}\times\cdots\times x_n$</li><li>$\displaystyle (p\leqslant n)$</li></ul></div>
 <ul>
@@ -2588,11 +2572,6 @@ $$\cG{\frac12 = \frac n{2n}\leqslant\sum_{k=1}^n\frac1{n + k}\leqslant\frac n{n 
 </div>
 `,
 "Nombres complexes": R`
-<nav class="msum"><a href="#z-not">Notations</a><a href="#z-alg">Forme algébrique</a><a href="#z-conj">Conjugué</a><a href="#z-mod">Module</a><a href="#z-u">Le cercle $\mathbb U$</a><a href="#z-exp">Forme exponentielle</a><a href="#z-moitie">Angle moitié</a><a href="#z-trigo">Trigonométrie</a><a href="#z-moivre">Moivre</a><a href="#z-lin">Linéariser</a><a href="#z-rac2">Racines carrées</a><a href="#z-eq2">Degré 2</a><a href="#z-racn">Racines $n$-ièmes</a><a href="#z-geo">Géométrie</a><a href="#z-enonce">Ce que l'énoncé te donne</a><a href="#z-erreurs">Erreurs</a><a href="#z-entrainement">S'entraîner</a><a href="#z-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la partie réelle, ou le module $r$. <span class="kR">rouge</span> : la partie imaginaire, ou l'argument $\theta$. <span class="kO">orange</span> : l'opération qu'on fait. <span class="kV">violet</span> : les racines. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="z-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -2875,7 +2854,7 @@ $$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.$$
 <div data-mlab="rac2"></div>
 
 <h2 id="z-eq2">12. Les équations du second degré</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta:$</li><li>$\displaystyle z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta$ :</li><li>$\displaystyle z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big)$</li></ul></div>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Somme et produit}:\ z_1 + z_2 = -\frac ba$</li><li>$\displaystyle z_1z_2 = \frac ca$</li></ul></div>
 <p class="ml">Exemple 1 : coefficients réels, $\Delta\lt0$</p>
 <p><b>Résoudre dans $\mathbb C$ l'équation $z^2 - 2z + 5 = 0$.</b></p>
@@ -3009,12 +2988,7 @@ $$\frac{(-1 + 2i)(1 - i)}{(1 + i)(1 - i)} = \frac{-1 + i + 2i - 2i^2}2 = \frac{1
 </div>
 `,
 "Intégration": R`
-<nav class="msum"><a href="#i-not">Notations</a><a href="#i-escalier">Escalier et CPM</a><a href="#i-prop">Propriétés</a><a href="#i-fond">Théorème fondamental</a><a href="#i-prim">Primitives</a><a href="#i-ipp">Intégration par parties</a><a href="#i-chgt">Changement de variable</a><a href="#i-bioche">Règles de Bioche</a><a href="#i-riemann">Sommes de Riemann</a><a href="#i-taylor">Taylor</a><a href="#i-cplx">Fonctions complexes</a><a href="#i-enonce">Ce que l'énoncé te donne</a><a href="#i-erreurs">Erreurs</a><a href="#i-entrainement">S'entraîner</a><a href="#i-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction qu'on dérive ($u$). <span class="kR">rouge</span> : la fonction qu'on intègre ($v'$). <span class="kO">orange</span> : le changement de variable et les nouvelles bornes. <span class="kV">violet</span> : les majorations. <span class="kG">vert</span> : le résultat.</p>
 <p>Ce qui n'est pas au programme de Sup est signalé par <span class="hp">hors programme</span>. Ces parties sont traitées quand même, car on les retrouve dans des sujets où l'énoncé guide le calcul.</p>
-
 <h2 id="i-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -3064,7 +3038,7 @@ $$\Delta = 4\Big(\int_a^bfg\Big)^2 - 4\int_a^bf^2\int_a^bg^2\leqslant0.$$
 $$\cG{\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big)}.$$
 
 <h2 id="i-fond">4. Le théorème fondamental</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ I,\ a\in I:$</li><li>$\displaystyle F(x) = \int_a^xf(t)\,dt\ \text{est l'unique primitive de}\ f\ \text{qui s'annule en}\ a$</li><li>$\displaystyle F' = f$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ I,\ a\in I$ :</li><li>$F(x) = \int_a^xf(t)\,dt$ est l'unique primitive de $f$ qui s'annule en $a$</li><li>$\displaystyle F' = f$</li></ul></div>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf(t)\,dt = F(b) - F(a)\quad\text{pour toute primitive}\ F\ \text{de}\ f$</li><li>$\displaystyle \int_a^bf'(t)\,dt = f(b) - f(a)\quad(f\ \text{de classe}\ \mathcal C^1)$</li></ul></div>
 <p class="ml">Dériver une intégrale dont les bornes bougent</p>
 <p>On introduit une primitive $F$ de $f$, on écrit l'intégrale avec $F$, puis on dérive des fonctions composées :</p>
@@ -3278,7 +3252,7 @@ $$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\fra
 $$= \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\frac\pi6 = \cG{\frac\pi{3\sqrt3}}.$$
 
 <h2 id="i-riemann">9. Les sommes de Riemann</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\in\mathcal C_{pm}([a, b]):$</li><li>$\displaystyle \frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\in\mathcal C_{pm}([a, b])$ :</li><li>$\displaystyle \frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f$</li></ul></div>
 <p class="ml">Reconnaître une somme de Riemann</p>
 <ol>
 <li>Sortir un facteur $\frac1n$.</li>
@@ -3428,12 +3402,7 @@ $$\frac{-e^\pi - 1}{1 + i} = \frac{-(e^\pi + 1)(1 - i)}2.$$
 </div>
 `,
 "Séries numériques": R`
-<nav class="msum"><a href="#s-not">Notations</a><a href="#s-gross">Divergence grossière</a><a href="#s-ref">Séries de référence</a><a href="#s-pos">Termes positifs</a><a href="#s-int">Série-intégrale</a><a href="#s-abs">Absolue convergence</a><a href="#s-alt">Séries alternées</a><a href="#s-dal">D'Alembert</a><a href="#s-somm">Sommation des comparaisons</a><a href="#s-calc">Calculer la somme</a><a href="#s-plan">Le plan d'attaque</a><a href="#s-enonce">Ce que l'énoncé te donne</a><a href="#s-erreurs">Erreurs</a><a href="#s-entrainement">S'entraîner</a><a href="#s-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : le terme général $u_n$. <span class="kO">orange</span> : la série de référence à laquelle on compare. <span class="kR">rouge</span> : les termes qui s'annulent. <span class="kG">vert</span> : la conclusion (CV ou DV). <span class="kV">violet</span> : la somme.</p>
 <p>Le programme de Sup s'arrête à la comparaison et à l'absolue convergence. Les parties marquées <span class="hp">programme de Spé</span> ou <span class="hp">hors programme</span> sont traitées quand même : on les rencontre dès la Sup dans les sujets guidés.</p>
-
 <h2 id="s-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -3604,7 +3573,7 @@ $$u_n = \frac{(-1)^n}{\sqrt n} - \frac1{2n} + O\Big(\frac1{n^{3/2}}\Big).$$
 <p><b>Étape 4 : Conclusion.</b> CV $-$ DV $+$ CV $=$ DV : $\cG{\sum u_n\ \text{diverge}}$, alors que $u_n\sim\frac{(-1)^n}{\sqrt n}$.</p>
 
 <h2 id="s-dal">8. La règle de d'Alembert <span class="hp">programme de Spé</span></h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell:$</li><li>$\displaystyle \ell\lt1\Rightarrow\cG{\text{CV}}$</li><li>$\displaystyle \ell > 1\Rightarrow\cG{\text{DV grossièrement}}$</li><li>$\displaystyle \ell = 1\Rightarrow\text{on ne peut rien dire}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell$ :</li><li>$\displaystyle \ell\lt1\Rightarrow\cG{\text{CV}}$</li><li>$\displaystyle \ell > 1\Rightarrow\cG{\text{DV grossièrement}}$</li><li>$\displaystyle \ell = 1\Rightarrow\text{on ne peut rien dire}$</li></ul></div>
 <p>Elle est faite pour les <b>factorielles et les puissances $n$-ièmes</b>. Pour les fractions et les puissances de $n$, on trouve $\ell = 1$ : utiliser Riemann.</p>
 <p class="ml">Exemple 1 : $u_n = \frac{n^2}{2^n}$</p>
 <p><b>Étudier la nature de la série de terme général $u_n = \frac{n^2}{2^n}$ avec la règle de d'Alembert.</b></p>
@@ -3739,11 +3708,6 @@ $$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\cdot\frac1{(1 - 1/2)^2} = \frac12\c
 </div>
 `,
 "Analyse asymptotique": R`
-<nav class="msum"><a href="#l-not">Notations</a><a href="#l-equiv">Équivalents</a><a href="#l-croiss">Croissances comparées</a><a href="#l-dl">Développements limités</a><a href="#l-usuels">DL usuels</a><a href="#l-ops">Opérations</a><a href="#l-ordre">Choisir l'ordre</a><a href="#l-lim">Limites</a><a href="#l-geo">Tangente, asymptote</a><a href="#l-suites">Suites</a><a href="#l-enonce">Ce que l'énoncé te donne</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : le terme principal (celui qui compte). <span class="kR">rouge</span> : ce qu'on jette, les termes au-delà de l'ordre et les $o(\cdot)$. <span class="kO">orange</span> : la substitution qu'on fait ($u = \dots$, $x = a + h$). <span class="kV">violet</span> : les coefficients des DL usuels. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="l-not">1. Les notations du programme</h2>
 <p>Au voisinage de $a$ (réel ou $\pm\infty$), avec $g$ qui ne s'annule pas près de $a$ (sauf peut-être en $a$) :</p>
 <table class="mtab">
@@ -3802,7 +3766,7 @@ $$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \ln\Big(1 + \f
 <p><b>Étape 4 : Conclusion.</b> $\cG{\ln(x^2 + x)\sim2\ln x}$.</p>
 
 <h2 id="l-croiss">3. Les croissances comparées</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \alpha, \beta, \gamma > 0:$</li><li>$\displaystyle (\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty$</li><li>$\displaystyle x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \alpha, \beta, \gamma > 0$ :</li><li>$\displaystyle (\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty$</li><li>$\displaystyle x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0$</li></ul></div>
 <div class="sbox">$$\text{Suites}:\quad(\ln n)^\gamma\ll n^\alpha\ll a^n\ (a > 1)\ll n!\ll n^n.$$</div>
 <p class="ml">Exemple</p>
 <p><b>Déterminer la limite de $\frac{n^{10} + 2^n}{3^n - n!}$ quand $n\to+\infty$.</b></p>
@@ -4037,11 +4001,6 @@ $$\cG{u_n = e - \frac e{2n} + o\Big(\frac1n\Big)},\qquad\text{donc}\ e - u_n\sim
 </div>
 `,
 "Intégration sur un intervalle quelconque": R`
-<nav class="msum"><a href="#p-not">Notations</a><a href="#p-ref">Intégrales de référence</a><a href="#p-integ">Montrer l'intégrabilité</a><a href="#p-calc">Calculer</a><a href="#p-def">Définition</a><a href="#p-pos">Comparaison</a><a href="#p-abs">Absolue, complexe</a><a href="#p-ippcv">IPP, changement de variable</a><a href="#p-serint">Série-intégrale</a><a href="#p-relc">Relations de comparaison</a><a href="#p-l2">Carré intégrable</a><a href="#p-cvd">Convergence dominée</a><a href="#p-tat">Terme à terme</a><a href="#p-plan">Le plan pour un paramètre</a><a href="#p-cont">Continuité</a><a href="#p-lim">Limite</a><a href="#p-der">Dérivation</a><a href="#p-gamma">La fonction $\Gamma$</a><a href="#p-enonce">Ce que l'énoncé te donne</a><a href="#p-erreurs">Erreurs</a><a href="#p-entrainement">S'entraîner</a><a href="#p-arbre">L'arbre</a><a href="#p-exos">Exercices</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction intégrée $f(x, t)$. <span class="kO">orange</span> : la fonction qui domine, $\varphi(t)$, indépendante de $x$. <span class="kR">rouge</span> : les points à problème (bornes infinies, singularités). <span class="kV">violet</span> : les fonctions de référence. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="p-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Définition</th><th>À retenir</th></tr>
@@ -4102,11 +4061,9 @@ $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^
 <p>Il doit être une bijection $\mathcal C^1$ strictement monotone. Il conserve alors la nature et la valeur : $\int_0^{+\infty}e^{-\sqrt t}\,dt\ \underset{\cO{t = u^2}}{=}\ \int_0^{+\infty}2u\,e^{-u}\,du = 2$.</p>
 
 <h2 id="p-def">5. Intégrale convergente : la définition, les calculs de référence</h2>
-<p class="ml">Le code couleur de cette partie</p>
-<p><span class="kB">bleu</span> : la fonction étudiée $\cB f$. <span class="kO">orange</span> : la fonction de comparaison $\cO g$. <span class="kR">rouge</span> : les points à problème. <span class="kV">violet</span> : l'exposant $\cV\alpha$. <span class="kG">vert</span> : la conclusion.</p>
 <div class="sbox">$$f\ \text{continue par morceaux sur}\ [a, b[:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf(t)\,dt\ \text{a une limite finie quand}\ x\to b^-.$$
 $$\text{Sur}\ ]a, b[:\ \text{on coupe en un}\ c\in\,]a, b[\ \text{et on demande que}\ \int_a^cf\ \text{et}\ \int_c^bf\ \text{convergent}\ \text{(les deux !)}.$$
-<ul class="sbl"><li>$\displaystyle \text{Avec une primitive}\ F:$</li><li>$\displaystyle \int_a^bf = \lim_{b^-}F - \lim_{a^+}F = \big[F\big]_a^b,\quad\text{si les deux limites sont finies}$</li></ul></div>
+<ul class="sbl"><li>$\displaystyle \text{Avec une primitive}\ F$ :</li><li>$\int_a^bf = \lim_{b^-}F - \lim_{a^+}F = \big[F\big]_a^b,$ si les deux limites sont finies</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>$\int_{-x}^xt\,dt = 0\to0$, et pourtant $\int_{-\infty}^{+\infty}t\,dt$ <b>diverge</b> : les deux bornes doivent partir <b>indépendamment</b>.</p>
 <table class="mtab">
@@ -4146,7 +4103,7 @@ $$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x
 <h2 id="p-pos">6. Fonctions positives : les théorèmes de comparaison</h2>
 <div class="sbox">$$f\geq0:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf\ \text{est majorée}.$$
 <ul class="sbl"><li>$\displaystyle 0\leq\cB f\leq\cO g:\quad\int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV}\qquad\text{et}$</li><li>$\displaystyle \int\cB f\ \text{DV}\Rightarrow\int\cO g\ \text{DV}$</li></ul>
-<ul class="sbl"><li>$\displaystyle \cO g\geq0,\ \ \cB f = O(\cO g)\ \text{ou}\ \cB f = o(\cO g):\ \int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV (absolument)}$</li><li>$\displaystyle \cB f\sim\cO g,\ \text{signe constant}:\ \text{même nature}$</li></ul></div>
+<ul class="sbl"><li>$\displaystyle \cO g\geq0,\ \ \cB f = O(\cO g)\ \text{ou}\ \cB f = o(\cO g):\ \int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV (absolument)}$</li><li>$\cB f\sim\cO g$, signe constant : même nature</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Repérer les points à problème $\cR{a}$, $\cR{b}$. <b>2.</b> En chacun, chercher un équivalent simple de $\cB f$ (ou une majoration). <b>3.</b> Comparer à une intégrale de référence $\cO{\frac1{t^\alpha}}$, $\cO{e^{-\lambda t}}$. <b>4.</b> Conclure pour chaque point, puis pour l'intégrale entière.</p>
 <p class="ml piege">Piège</p>
@@ -4177,7 +4134,7 @@ $$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
 
 <h2 id="p-abs">7. Convergence absolue, fonctions à valeurs complexes</h2>
 <div class="sbox">$$\int_a^b|f|\ \text{converge}\ \Longrightarrow\ \int_a^bf\ \text{converge, et}\ \Big|\int_a^bf\Big|\leq\int_a^b|f|.$$
-<ul class="sbl"><li>$\displaystyle f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}f\ \text{et}\ \int\operatorname{Im}f\ \text{CV}$</li><li>$\displaystyle \int f = \int\operatorname{Re}f + i\int\operatorname{Im}f$</li></ul></div>
+<ul class="sbl"><li>$f$ à valeurs complexes $:\quad\int f$ CV $\iff\int\operatorname{Re}f$ et $\int\operatorname{Im}f$ CV</li><li>$\displaystyle \int f = \int\operatorname{Re}f + i\int\operatorname{Im}f$</li></ul></div>
 <p>Une intégrale <b>convergente mais pas absolument convergente</b> est dite semi-convergente : $\int_1^{+\infty}\frac{\sin t}t\,dt$ (exemple 3). Pour la nature, on fait alors une <b>IPP</b> qui gagne une puissance de $t$.</p>
 
 <p class="ml">Exemple 11 : $\int_0^{+\infty}e^{-t}\cos t\,dt$ en passant par $\mathbb C$</p>
@@ -4221,7 +4178,7 @@ $$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \frac\pi4}$.</p>
 
 <h2 id="p-serint">10. Comparaison série-intégrale</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue, positive, décroissante sur}\ [n_0, +\infty[:$</li><li>$\displaystyle \sum f(n)\ \text{et}\ \int_{n_0}^{+\infty}f\ \text{sont de même nature}$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$f$ continue, positive, décroissante sur $[n_0, +\infty[$ :</li><li>$\displaystyle \sum f(n)\ \text{et}\ \int_{n_0}^{+\infty}f\ \text{sont de même nature}$</li></ul>
 <ul class="sbl"><li>$\displaystyle \text{L'encadrement à refaire}:\quad\int_n^{n+1}f(t)\,dt\ \leq\ f(n)\ \leq\ \int_{n-1}^nf(t)\,dt$</li><li>$\displaystyle (n - 1\geq n_0)$</li></ul></div>
 <p>On le redémontre à chaque fois : sur $[n, n + 1]$, $f(n + 1)\leq f(t)\leq f(n)$, puis on intègre (longueur $1$). Ensuite on <b>somme</b> les encadrements.</p>
 
@@ -4245,7 +4202,7 @@ $$H_n\leq1 + \int_1^n\frac{dt}t = 1 + \ln n.$$
 
 <h2 id="p-relc">11. Intégrer une relation de comparaison <span class="hp">programme de Spé</span></h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle g\geq0.\ \textbf{Si}\ \int_a^{+\infty}g\ \textbf{converge (les restes)}:\quad f = o(g)\Rightarrow\int_x^{+\infty}f = o\Big(\int_x^{+\infty}g\Big)$</li><li>$\displaystyle f\sim g\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g$</li></ul>
-<ul class="sbl"><li>$\displaystyle \textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:\quad f = o(g)\Rightarrow\int_a^xf = o\Big(\int_a^xg\Big)$</li><li>$\displaystyle f\sim g\Rightarrow\int_a^xf\sim\int_a^xg$</li></ul></div>
+<ul class="sbl"><li><b>Si</b> $\int_a^{+\infty}g$ <b>diverge (les intégrales partielles)</b> $:\quad f = o(g)\Rightarrow\int_a^xf = o\Big(\int_a^xg\Big)$</li><li>$\displaystyle f\sim g\Rightarrow\int_a^xf\sim\int_a^xg$</li></ul></div>
 <p>Même chose avec $O$. C'est le parallèle exact des sommes partielles et des restes de séries.</p>
 
 <p class="ml">Exemple 16 : un équivalent d'intégrale partielle</p>
@@ -4492,11 +4449,6 @@ $$I_n = 2n\int_0^{+\infty}\Big(\frac1{(1 + t^2)^n} - \frac1{(1 + t^2)^{n+1}}\Big
 </ul></div></div>
 `,
 "Suites et séries de fonctions": R`
-<nav class="msum"><a href="#f-not">Notations</a><a href="#f-cs">Convergence simple</a><a href="#f-cu">Convergence uniforme</a><a href="#f-neg">Prouver qu'il n'y a pas CU</a><a href="#f-reg">Ce que la CU conserve</a><a href="#f-series">Séries de fonctions</a><a href="#f-cn">Convergence normale</a><a href="#f-alt">CU sans CN</a><a href="#f-sreg">Régularité de la somme</a><a href="#f-zeta">L'exemple de $\zeta$</a><a href="#f-weier">Approximation</a><a href="#f-enonce">Ce que l'énoncé te donne</a><a href="#f-erreurs">Erreurs</a><a href="#f-entrainement">S'entraîner</a><a href="#f-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la limite simple $f$ (ou la somme $S$). <span class="kR">rouge</span> : l'écart $|f_n - f|$ et son maximum. <span class="kO">orange</span> : le majorant $\alpha_n$, indépendant de $x$. <span class="kV">violet</span> : le point où l'écart est maximal. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="f-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Mode</th><th>Définition</th><th>En pratique</th></tr>
@@ -4694,11 +4646,6 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 </div>
 `,
 "Polynômes": R`
-<nav class="msum"><a href="#q-not">Notations</a><a href="#q-deriv">Dérivation, Taylor</a><a href="#q-div">Division euclidienne</a><a href="#q-reste">Trouver un reste</a><a href="#q-rac">Racines, multiplicité</a><a href="#q-fact">Factoriser</a><a href="#q-viete">Coefficients et racines</a><a href="#q-lag">Lagrange</a><a href="#q-pgcd">PGCD, Bézout</a><a href="#q-des">Éléments simples</a><a href="#q-coef">Calculer les coefficients</a><a href="#q-reel">Facteurs de degré 2</a><a href="#q-appli">Applications</a><a href="#q-exos">Exercices corrigés</a><a href="#q-enonce">Ce que l'énoncé te donne</a><a href="#q-erreurs">Erreurs</a><a href="#q-entrainement">S'entraîner</a><a href="#q-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les pôles et les facteurs du dénominateur. <span class="kV">violet</span> : les racines. <span class="kO">orange</span> : l'opération qu'on fait (multiplier, évaluer, poser $X = a + h$). <span class="kR">rouge</span> : les coefficients qu'on trouve. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="q-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -4714,7 +4661,7 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 
 <h2 id="q-deriv">2. Dérivation et formule de Taylor</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle (X^k)^{(j)} = \frac{k!}{(k - j)!}X^{k-j}\ (j\leqslant k)$</li><li>$\displaystyle (PQ)^{(n)} = \sum_{k=0}^n\binom nkP^{(k)}Q^{(n-k)}\quad\text{(Leibniz)}$</li></ul></div>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k$</li><li>$\displaystyle (\text{égalité exacte, pas de reste})$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k$</li><li>$($ égalité exacte, pas de reste $)$</li></ul></div>
 <p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
 <p>Soit $P = X^3 - 2X + 1$. <b>Écrire $P$ comme combinaison de puissances de $(X - 1)$ avec la formule de Taylor.</b></p>
 <p><b>Étape 1 : Rappel de la formule.</b> Pour un polynôme, la formule de Taylor en $a$ est exacte :</p>
@@ -4904,7 +4851,7 @@ $$X - 1 = (X^4 - 1)\cdot\cG1 + (X^3 - 1)\cdot\cG{(-X)}.$$
 <h2 id="q-coef">11. Calculer les coefficients</h2>
 <p class="ml">Méthode 1 : pôle simple, on multiplie et on évalue</p>
 <p>Pour trouver le coefficient de $\frac1{X - a}$ : multiplier toute l'égalité par $\cO{(X - a)}$, puis évaluer en $\cO{X = a}$. Tous les autres termes s'annulent. En pratique, on « cache » le facteur $(X - a)$ dans la fraction et on remplace $X$ par $a$.</p>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pôle simple}\ a:$</li><li>$\displaystyle c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pôle simple}\ a$ :</li><li>$\displaystyle c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}$</li></ul></div>
 <p>Exemple : $F = \frac{X + 3}{(X - 1)(X + 2)(X - 3)} = \frac a{X - 1} + \frac b{X + 2} + \frac c{X - 3}$.</p>
 $$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \frac{-2 + 3}{(-2 - 1)(-2 - 3)} = \frac1{15},\qquad\cR c = \frac{3 + 3}{(3 - 1)(3 + 2)} = \frac35.$$
 <p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12$.</p>
@@ -4950,7 +4897,7 @@ $$\int\frac{dx}{x^2 - 1} = \frac12\int\Big(\frac1{x - 1} - \frac1{x + 1}\Big)dx 
 <p class="ml">Télescoper une somme</p>
 $$\sum_{k=1}^n\frac1{k(k + 1)} = \sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = 1 - \frac1{n + 1}.$$
 <p class="ml">La dérivée logarithmique</p>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle P = \lambda\prod_{i=1}^n(X - x_i)\ \Longrightarrow\ \frac{P'}P = \sum_{i=1}^n\frac1{X - x_i}$</li><li>$\displaystyle (\text{racines comptées avec multiplicité})$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P = \lambda\prod_{i=1}^n(X - x_i)\ \Longrightarrow\ \frac{P'}P = \sum_{i=1}^n\frac1{X - x_i}$</li><li>$($ racines comptées avec multiplicité $)$</li></ul></div>
 <p class="ml">Dérivée $n$-ième</p>
 $$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightarrow\ \Big(\frac1{x^2 - 1}\Big)^{(n)} = \frac{(-1)^nn!}2\Big(\frac1{(x - 1)^{n+1}} - \frac1{(x + 1)^{n+1}}\Big).$$
 
@@ -5193,11 +5140,6 @@ $$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qqua
 </div>
 `,
 "Nombres réels et suites numériques": R`
-<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#s-vocab">Suites</a><a href="#s-lim">Limite</a><a href="#s-op">Formes indéterminées</a><a href="#s-comp">Comparaison</a><a href="#s-mono">Monotone, adjacentes</a><a href="#s-part">Récurrences linéaires</a><a href="#s-rec">$u_{n+1} = f(u_n)$</a><a href="#s-cpx">Complexes</a><a href="#s-sfexpl">Suites explicites</a><a href="#s-sfrec">$f(u_n)$ : méthode</a><a href="#s-sfdeux">Deux suites</a><a href="#s-sfabs">Divergence, extraites</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">Arbre des réels</a><a href="#s-arbre">Arbre des suites</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la partie $\cB A$ et ses éléments $\cB a$. <span class="kR">rouge</span> : les majorants, minorants et bornes $\cR M$, $\cR{\sup A}$, $\cR{\inf A}$. <span class="kO">orange</span> : la marge $\cO\varepsilon$. <span class="kV">violet</span> : les entiers ($\cV n$, $\cV p$, $\cV{\lfloor x\rfloor}$). <span class="kG">vert</span> : les conclusions.</p>
-
 <h2 id="r-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -5256,7 +5198,7 @@ $$\cG{\mathcal S = \{-3,\ 2\}}.$$
 
 <h2 id="r-tri">3. L'inégalité triangulaire</h2>
 <div class="sbox">$$\big||x| - |y|\big|\ \leq\ |x + y|\ \leq\ |x| + |y|$$
-<ul class="sbl"><li>$\displaystyle \text{Égalité à droite}\iff x\ \text{et}\ y\ \text{de même signe}\ (xy\geq0)$</li><li>$\displaystyle \Big|\sum_{k=1}^{\cV n}x_k\Big|\leq\sum_{k=1}^{\cV n}|x_k|$</li></ul></div>
+<ul class="sbl"><li>Égalité à droite $\iff x$ et $y$ de même signe $(xy\geq0)$</li><li>$\displaystyle \Big|\sum_{k=1}^{\cV n}x_k\Big|\leq\sum_{k=1}^{\cV n}|x_k|$</li></ul></div>
 <p class="ml">Pourquoi (à savoir refaire)</p>
 <p>Les deux membres sont positifs, on compare les carrés : $|x + y|^2 = x^2 + 2xy + y^2\leq x^2 + 2|xy| + y^2 = (|x| + |y|)^2$, car $xy\leq|xy|$. L'égalité a lieu si et seulement si $xy = |xy|$, c'est-à-dire $xy\geq0$.</p>
 
@@ -5329,7 +5271,7 @@ $$\cV k\leq\frac{\lfloor nx\rfloor}n \lt \cV k + 1.$$
 $$\cG{\Big\lfloor\frac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor}.$$
 
 <h2 id="r-dec">5. Les approximations décimales</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pour}\ \cV n\in\mathbb N:$</li><li>$\displaystyle d_n = \frac{\lfloor10^{\cV n}x\rfloor}{10^{\cV n}}\ \leq\ x\ \lt\ d_n + \frac1{10^{\cV n}} = \frac{\lfloor10^{\cV n}x\rfloor + 1}{10^{\cV n}}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pour}\ \cV n\in\mathbb N$ :</li><li>$\displaystyle d_n = \frac{\lfloor10^{\cV n}x\rfloor}{10^{\cV n}}\ \leq\ x\ \lt\ d_n + \frac1{10^{\cV n}} = \frac{\lfloor10^{\cV n}x\rfloor + 1}{10^{\cV n}}$</li></ul></div>
 <p>$d_n$ est l'approximation décimale <b>par défaut</b> à $10^{-n}$ près, $d_n + 10^{-n}$ celle <b>par excès</b>. Ce sont des décimaux, donc des rationnels, et $0\leq x - d_n \lt 10^{-n}$, donc $d_n\to x$ : <b>tout réel est limite d'une suite de rationnels</b>.</p>
 
 <p class="ml">Exemple 8 : $\sqrt2$ à $10^{-2}$ près</p>
@@ -5379,7 +5321,7 @@ $$n = 2k:\ \ \cB a = 1 + \frac1{2k}\in\Big]1,\ \frac32\Big],\qquad n = 2k + 1:\ 
 $$\cG{\sup A = \max A = \frac32,\qquad\inf A = -1\ \text{(pas de min)}}.$$
 
 <h2 id="r-seq">7. La caractérisation séquentielle</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Si}\ \cR M\ \text{majore}\ \cB A:$</li><li>$\displaystyle \cR M = \sup\cB A\iff\text{il existe une suite}\ (\cB{a_n})\ \text{d'éléments de}\ \cB A\ \text{telle que}\ \cB{a_n}\to\cR M$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Si}\ \cR M\ \text{majore}\ \cB A$ :</li><li>$\cR M = \sup\cB A\iff$ il existe une suite $(\cB{a_n})$ d'éléments de $\cB A$ telle que $\cB{a_n}\to\cR M$</li></ul></div>
 <p>C'est souvent plus rapide que $\varepsilon$ : on exhibe une suite. Dans l'exemple 9, $\cB{a_n} = 1 - \frac1n\to1$ suffit.</p>
 <p class="ml">Passer au sup</p>
 <p>Si $\forall\cB a\in\cB A,\ \cB a\leq\cR K$, alors $\sup A\leq\cR K$ (car $\sup$ est le <b>plus petit</b> majorant). Et $A\subset B$ donne $\sup A\leq\sup B$.</p>
@@ -5416,7 +5358,7 @@ $$\cG{\sup(A + B) = \sup A + \sup B}.$$
 <p>La réunion ne marche pas : $[0, 1]\cup[2, 3]$ contient $1$ et $2$, mais pas $\frac32$.</p>
 
 <h2 id="r-dens">9. La densité</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \mathbb Q\ \text{et}\ \mathbb R\setminus\mathbb Q\ \text{sont denses dans}\ \mathbb R:$</li><li>$\displaystyle \forall x \lt y,\ \ \exists r\in\mathbb Q\cap\,]x, y[\quad\text{et}\quad\exists s\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \mathbb Q\ \text{et}\ \mathbb R\setminus\mathbb Q\ \text{sont denses dans}\ \mathbb R$ :</li><li>$\displaystyle \forall x \lt y,\ \ \exists r\in\mathbb Q\cap\,]x, y[\quad\text{et}\quad\exists s\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[$</li></ul>
 $$\text{Version suites : tout réel est limite d'une suite de rationnels, et d'une suite d'irrationnels.}$$</div>
 <p class="ml">La construction (à savoir refaire)</p>
 <p><b>1.</b> On prend un entier $\cV n > \frac1{y - x}$ : les pas de longueur $\frac1n$ sont plus petits que l'intervalle. <b>2.</b> On pose $\cV p = \lfloor nx\rfloor + 1$. <b>3.</b> Alors $nx \lt \cV p\leq nx + 1 \lt ny$, donc $x \lt \frac{\cV p}{\cV n} \lt y$.</p>
@@ -5450,8 +5392,6 @@ $$x \lt r + \sqrt2 \lt y.$$
 <p>Un réel $x$ d'un intervalle $]a, b[$ y est « à l'aise » : avec $\cO\varepsilon = \min(x - a, b - x) > 0$, on a $]x - \cO\varepsilon, x + \cO\varepsilon[\subset]a, b[$. La notion d'ouvert et de fermé est traitée en Spé (topologie des espaces vectoriels normés).</p>
 
 <h2 id="s-vocab">11. Suites : bornée, monotone, stationnaire</h2>
-<p class="ml">Le code couleur des suites</p>
-<p><span class="kB">bleu</span> : la suite $\cB{(u_n)}$. <span class="kR">rouge</span> : la limite $\cR\ell$, ou un majorant. <span class="kO">orange</span> : la marge $\cO\varepsilon$ et la suite qui encadre. <span class="kV">violet</span> : les rangs $\cV N$, $\cV n$. <span class="kG">vert</span> : la conclusion.</p>
 <table class="mtab">
 <tr><th>Propriété</th><th>Définition</th><th>Comment le montrer</th></tr>
 <tr><td>majorée</td><td>$\exists M\in\mathbb R,\ \forall n,\ u_n\leq M$</td><td>Exhiber un $M$ qui ne dépend pas de $n$.</td></tr>
@@ -5526,7 +5466,7 @@ $$\frac5{n + 3}\leq\cO\varepsilon\iff n + 3\geq\frac5{\cO\varepsilon}\iff n\geq\
 <tr><td>$\ell\neq0$</td><td>$0$</td><td>$\ell$</td><td>$0$</td><td>$\pm\infty$ si $v_n$ de signe constant</td></tr>
 </table>
 <p>Les quatre formes indéterminées : $\infty - \infty$, $0\times\infty$, $\frac00$, $\frac\infty\infty$. Avec les puissances : $1^\infty$, $0^0$, $\infty^0$ (on passe par $e^{v_n\ln u_n}$).</p>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Croissances comparées}\ (\alpha, \beta > 0,\ q > 1):$</li><li>$\displaystyle (\ln n)^\alpha\ \ll\ n^\beta\ \ll\ q^n\ \ll\ n!\ \ll\ n^n$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Croissances comparées}\ (\alpha, \beta > 0,\ q > 1)$ :</li><li>$\displaystyle (\ln n)^\alpha\ \ll\ n^\beta\ \ll\ q^n\ \ll\ n!\ \ll\ n^n$</li></ul></div>
 <p class="ml">La méthode pour lever une forme indéterminée</p>
 <p><b>1.</b> Quotient de sommes : on factorise en haut et en bas par le <b>terme prépondérant</b>. <b>2.</b> Différence de racines : <b>quantité conjuguée</b>. <b>3.</b> Puissance $u_n^{v_n}$ : écrire $e^{v_n\ln u_n}$. <b>4.</b> Sinon : équivalents et DL (voir Analyse asymptotique).</p>
 
@@ -6042,11 +5982,6 @@ $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 </ul></div></div>
 `,
 "Ensembles et applications": R`
-<nav class="msum"><a href="#ea-not">Notations</a><a href="#ea-quant">Quantifier, nier</a><a href="#ea-incl">Inclusion, égalité</a><a href="#ea-op">Opérations</a><a href="#ea-parties">Parties, produit</a><a href="#ea-ind">Indicatrices</a><a href="#ea-app">Applications</a><a href="#ea-img">Images</a><a href="#ea-inj">Injection</a><a href="#ea-surj">Surjection</a><a href="#ea-bij">Bijection</a><a href="#ea-comp">Composées</a><a href="#ea-restr">Restriction</a><a href="#ea-rel">Relations</a><a href="#ea-equiv">Équivalence</a><a href="#ea-ordre">Ordre</a><a href="#ea-maj">Majorants</a><a href="#ea-enonce">L'énoncé</a><a href="#ea-erreurs">Erreurs</a><a href="#ea-entrainement">S'entraîner</a><a href="#ea-exos">Exercices</a><a href="#ea-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les ensembles et parties $\cB A$, $\cB B$, $\cB E$. <span class="kO">orange</span> : l'élément quelconque qu'on fixe, « soit $\cO x$ ». <span class="kV">violet</span> : les images et les éléments de l'ensemble d'arrivée, $\cV y$, $\cV{f(x)}$. <span class="kR">rouge</span> : le contre-exemple, ce qui fait échouer une propriété. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="ea-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Se lit, se traduit</th></tr>
@@ -6177,7 +6112,7 @@ $$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{A\Delta B} = \mathbb 1_A + \mathbb 1_B - 2\,\mathbb 1_A\mathbb 1_B = (\mathbb 1_A - \mathbb 1_B)^2}$ (contrôle : $(a - b)^2 = a^2 - 2ab + b^2 = a - 2ab + b$).</p>
 
 <h2 id="ea-app">7. Applications, égalité, composée</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f = g\iff(\text{même départ, même arrivée, et}\ \forall x\in E,\ f(x) = g(x))$</li><li>$\displaystyle f\neq g\iff\exists\cR{x_0},\ f(x_0)\neq g(x_0)$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$f = g\iff($ même départ, même arrivée, et $\forall x\in E,\ f(x) = g(x))$</li><li>$\displaystyle f\neq g\iff\exists\cR{x_0},\ f(x_0)\neq g(x_0)$</li></ul>
 <ul class="sbl"><li>$\displaystyle g\circ f:\ E\xrightarrow{\ f\ }F\xrightarrow{\ g\ }G,\quad(g\circ f)(x) = g(f(x))$</li><li>$\displaystyle f\circ\operatorname{id}_E = \operatorname{id}_F\circ f = f$</li><li>$\displaystyle h\circ(g\circ f) = (h\circ g)\circ f$</li></ul></div>
 <p>En général $\cR{g\circ f\neq f\circ g}$ : la composition n'est pas commutative. Pour $f\in E^E$, $f^n = f\circ\dots\circ f$ ($n$ fois) et $f^0 = \operatorname{id}_E$.</p>
 
@@ -6192,7 +6127,7 @@ $$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 
 <h2 id="ea-img">8. Image directe, image réciproque</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle f(\cB A) = \{f(x),\ x\in A\}:\quad\cV y\in f(A)\iff\exists\cO x\in A,\ \cV y = f(\cO x)$</li><li>$\displaystyle f^{-1}(\cB B) = \{x\in E,\ f(x)\in B\}:\quad\cO x\in f^{-1}(B)\iff\cV{f(x)}\in\cB B$</li></ul>
 $$f^{-1}(B\cup B') = f^{-1}(B)\cup f^{-1}(B'),\quad f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B'),\quad f^{-1}(\overline B) = \overline{f^{-1}(B)}.$$
-<ul class="sbl"><li>$\displaystyle f(A\cup A') = f(A)\cup f(A')$</li><li>$\displaystyle f(A\cap A')\cR\subset f(A)\cap f(A')\ \text{(seulement une inclusion)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle f(A\cup A') = f(A)\cup f(A')$</li><li>$f(A\cap A')\cR\subset f(A)\cap f(A')$ (seulement une inclusion)</li></ul>
 <ul class="sbl"><li>$\displaystyle A\subset f^{-1}(f(A))$</li><li>$\displaystyle f(f^{-1}(B))\subset B$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> $f^{-1}(B)$ : on <b>résout</b> l'inéquation ou l'équation $f(x)\in B$. <b>2.</b> $f(A)$ : on étudie les <b>variations</b> de $f$ sur $A$ (pour une fonction réelle continue, l'image d'un intervalle est un intervalle). <b>3.</b> L'image réciproque se comporte bien avec toutes les opérations ; l'image directe <b>pas avec $\cap$</b>.</p>
@@ -6282,7 +6217,7 @@ $$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} =
 
 <h2 id="ea-comp">12. Composées et propriétés</h2>
 <div class="sbox">$$f, g\ \text{injectives}\Rightarrow g\circ f\ \text{injective};\quad f, g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective};\quad f, g\ \text{bijectives}\Rightarrow g\circ f\ \text{bijective}.$$
-<ul class="sbl"><li>$\displaystyle g\circ f\ \text{injective}\Rightarrow\cB f\ \text{injective}\ (\text{la première})$</li><li>$\displaystyle g\circ f\ \text{surjective}\Rightarrow\cB g\ \text{surjective}\ (\text{la dernière})$</li></ul></div>
+<ul class="sbl"><li>$g\circ f$ injective $\Rightarrow\cB f$ injective $($ la première $)$</li><li>$g\circ f$ surjective $\Rightarrow\cB g$ surjective $($ la dernière $)$</li></ul></div>
 <p>Moyen mnémotechnique : l'injectivité se lit sur l'application qu'on applique en <b>premier</b> ($f$), la surjectivité sur celle qu'on applique en <b>dernier</b> ($g$).</p>
 
 <p class="ml">Exemple 21 : $g\circ f$ injective entraîne $f$ injective</p>
@@ -6334,7 +6269,7 @@ $$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitiv
 
 <h2 id="ea-equiv">15. Relations d'équivalence, classes, partition</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \overline a = \{x\in E,\ x\,\mathcal R\,a\}$</li><li>$\displaystyle x\,\mathcal R\,a\iff x\in\overline a\iff\overline x = \overline a$</li><li>$\displaystyle \overline x\neq\overline a\iff\overline x\cap\overline a = \varnothing$</li></ul>
-<ul class="sbl"><li>$\displaystyle \textbf{Les classes d'équivalence forment une partition de}\ E$</li><li>$\displaystyle a\equiv b\ [n]\iff n\mid a - b:\ \text{classes}\ \overline0, \overline1, \dots, \overline{n - 1}$</li></ul></div>
+<ul class="sbl"><li><b>Les classes d'équivalence forment une partition de</b> $E$</li><li>$\displaystyle a\equiv b\ [n]\iff n\mid a - b:\ \text{classes}\ \overline0, \overline1, \dots, \overline{n - 1}$</li></ul></div>
 <p>L'ensemble des classes, noté $E/\mathcal R$, est l'ensemble quotient <span class="hp">hors programme</span> en MPSI (il sert en Spé pour $\mathbb Z/n\mathbb Z$).</p>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Pour décrire $\overline a$ : on <b>résout</b> $x\,\mathcal R\,a$ d'inconnue $x$. <b>2.</b> On choisit un <b>représentant</b> simple par classe. <b>3.</b> Relation du type $x\,\mathcal R\,y\iff f(x) = f(y)$ : c'est toujours une équivalence, et les classes sont les $f^{-1}(\{c\})$, $c\in f(E)$.</p>
@@ -6368,7 +6303,7 @@ $$\text{Ordres usuels}:\ \leq\ \text{sur}\ \mathbb R\ \text{(total)},\quad\subse
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{relation d'ordre partiel}}$ : $\cR{(0, 1)}$ et $\cR{(1, 0)}$ ne sont pas comparables ($0\leq1$ mais $1 > 0$).</p>
 
 <h2 id="ea-maj">17. Majorants, plus grand et plus petit élément</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle M\ \text{majorant de}\ A\iff\forall a\in A,\ a\preccurlyeq M$</li><li>$\displaystyle \max A = a\iff a\in A\ \text{et}\ a\ \text{majore}\ A\ \text{(unique s'il existe)}$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle M\ \text{majorant de}\ A\iff\forall a\in A,\ a\preccurlyeq M$</li><li>$\max A = a\iff a\in A$ et $a$ majore $A$ (unique s'il existe)</li></ul>
 $$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute partie non vide majorée a un max}.$$</div>
 <p>Le max doit <b>appartenir</b> à $A$. Dans un ordre partiel, un majorant doit être <b>comparable</b> à tous les éléments de $A$. La borne supérieure (plus petit majorant) est traitée dans la fiche « Nombres réels ».</p>
 
@@ -6502,11 +6437,6 @@ $$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute 
 </ul></div></div>
 `,
 "Séries entières": R`
-<nav class="msum"><a href="#se-not">Notations</a><a href="#se-rayon">Rayon</a><a href="#se-dal">D'Alembert</a><a href="#se-comp">Comparaison</a><a href="#se-op">Somme, produit</a><a href="#se-cont">Continuité, bord</a><a href="#se-der">Dériver, intégrer</a><a href="#se-coef">Coefficients</a><a href="#se-usuels">DSE usuels</a><a href="#se-dse">Trouver un DSE</a><a href="#se-ed">Par une EDL</a><a href="#se-somme">Calculer une somme</a><a href="#se-enonce">L'énoncé</a><a href="#se-erreurs">Erreurs</a><a href="#se-entrainement">S'entraîner</a><a href="#se-exos">Exercices</a><a href="#se-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les coefficients $\cB{a_n}$. <span class="kO">orange</span> : le module testé $\cO{|z|}$ ou $\cO\rho$. <span class="kV">violet</span> : le rayon $\cV R$. <span class="kR">rouge</span> : ce qui diverge, le bord du disque, le piège. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="se-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Sens</th></tr>
@@ -6623,7 +6553,7 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = 1,\quad\sum_{n\geq1}H_nx^n = -\frac{\ln(1 - x)}{1 - x}}$ sur $]-1, 1[$.</p>
 
 <h2 id="se-cont">6. Continuité, et ce qui se passe au bord</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum a_nz^n\ \text{converge normalement sur tout disque fermé}\ \overline D(0, r),\ r \lt R$</li><li>$\displaystyle f\ \text{est continue sur}\ D(0, R)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\sum a_nz^n$ converge normalement sur tout disque fermé $\overline D(0, r),\ r \lt R$</li><li>$\displaystyle f\ \text{est continue sur}\ D(0, R)$</li></ul></div>
 <p>Au bord $\cR{|z| = R}$, tout peut arriver ; on étudie <b>à la main</b> : convergence normale si $\sum|a_n|R^n$ converge, critère des séries alternées (et sa majoration uniforme du reste) sinon. Le théorème radial d'Abel <span class="hp">hors programme</span> dit : si $\sum a_nR^n$ converge, $f(x)\to\sum a_nR^n$ quand $x\to R^-$.</p>
 
 <p class="ml">Exemple 12 : $\sum\frac{x^n}{n^2}$ est continue sur $[-1, 1]$</p>
@@ -6883,11 +6813,6 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 </ul></div></div>
 `,
 "Logique et raisonnements": R`
-<nav class="msum"><a href="#lg-not">Notations</a><a href="#lg-neg">Nier</a><a href="#lg-impl">Implication</a><a href="#lg-contra">Contraposée</a><a href="#lg-abs">Absurde</a><a href="#lg-rec">Récurrence</a><a href="#lg-as">Analyse-synthèse</a><a href="#lg-cas">Disjonction de cas</a><a href="#lg-erreurs">Erreurs</a><a href="#lg-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les hypothèses. <span class="kO">orange</span> : l'objet qu'on fixe (« soit $\cO x$ »). <span class="kR">rouge</span> : ce qu'on suppose pour arriver à une contradiction. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="lg-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Symbole</th><th>Se lit</th><th>Pour le démontrer</th></tr>
@@ -7052,11 +6977,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Primitives et équations différentielles linéaires": R`
-<nav class="msum"><a href="#pe-usuel">Primitives usuelles</a><a href="#pe-forme">Reconnaître une forme</a><a href="#pe-ipp">IPP</a><a href="#pe-cv">Changement de variable</a><a href="#pe-frac">Fractions</a><a href="#pe-trigo">Trigonométrie</a><a href="#pe-ed1">EDL d'ordre 1</a><a href="#pe-ed2">EDL d'ordre 2</a><a href="#pe-erreurs">Erreurs</a><a href="#pe-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction $\cB u$ qu'on repère. <span class="kO">orange</span> : sa dérivée $\cO{u'}$. <span class="kV">violet</span> : les constantes d'intégration $\cV\lambda$, $\cV\mu$. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="pe-usuel">1. Les primitives usuelles</h2>
 <table class="mtab">
 <tr><th>Fonction</th><th>Une primitive</th><th>Sur</th></tr>
@@ -7243,11 +7163,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Limites et continuité": R`
-<nav class="msum"><a href="#lc-fi">Formes indéterminées</a><a href="#lc-cc">Croissances comparées</a><a href="#lc-equiv">Équivalents</a><a href="#lc-enc">Encadrement</a><a href="#lc-seq">Caractérisation séquentielle</a><a href="#lc-cont">Continuité, prolongement</a><a href="#lc-tvi">Valeurs intermédiaires</a><a href="#lc-bornes">Bornes atteintes</a><a href="#lc-unif">Uniforme continuité</a><a href="#lc-erreurs">Erreurs</a><a href="#lc-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : le terme qui domine. <span class="kO">orange</span> : ce qu'on factorise ou ce qu'on encadre. <span class="kV">violet</span> : les bornes de l'encadrement. <span class="kG">vert</span> : la limite trouvée.</p>
-
 <h2 id="lc-fi">1. Lever une forme indéterminée</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle\text{les quatre formes :}\ \ \infty - \infty,\quad0\times\infty,\quad\frac\infty\infty,\quad\frac00$</li><li>$\displaystyle\text{polynôme ou fraction en}\ \pm\infty:\ \text{factoriser le terme de plus haut degré}$</li><li>$\displaystyle\text{racines}:\ \text{multiplier par la quantité conjuguée}$</li><li>$\displaystyle\frac00\ \text{en}\ a:\ \text{factoriser par}\ (x - a)\ \text{ou reconnaître un taux d'accroissement}$</li></ul></div>
 
@@ -7367,7 +7282,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $h(0)h(1)\leq0$ : par le TVI, $\cG{\exists c\in[0, 1],\ f(c) = c}$.</p>
 
 <h2 id="lc-bornes">8. Le théorème des bornes atteintes</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur un segment}\ [a, b]\ \Longrightarrow\ f\ \text{est bornée et atteint son min et son max}$</li><li>$\displaystyle\text{image d'un segment par une fonction continue} = \text{un segment}\ [m, M]$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ continue sur un segment $[a, b]\ \Longrightarrow\ f$ est bornée et atteint son min et son max</li><li>$\displaystyle\text{image d'un segment par une fonction continue} = \text{un segment}\ [m, M]$</li></ul></div>
 
 <p class="ml">Exemple 15 : une borne inférieure strictement positive</p>
 <p>Soit $f:[a, b]\to\mathbb R$ continue avec $f(x) > 0$ pour tout $x$. <b>Montrer qu'il existe $m > 0$ tel que $f(x)\geq m$ pour tout $x\in[a, b]$.</b></p>
@@ -7377,7 +7292,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\forall x\in[a, b],\ f(x)\geq m > 0}$. Sur $]0, 1]$ avec $f(x) = x$, c'est faux : le segment est indispensable.</p>
 
 <h2 id="lc-unif">9. L'uniforme continuité</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle\forall\varepsilon > 0,\ \exists\delta > 0,\ \forall x, y,\ |x - y|\leq\delta\Rightarrow|f(x) - f(y)|\leq\varepsilon$</li><li>$\displaystyle k\text{-lipschitzienne}\ \Longrightarrow\ \text{uniformément continue (prendre}\ \delta = \tfrac\varepsilon k)$</li><li>$\displaystyle\textbf{Heine}:\ \text{continue sur un segment}\ \Longrightarrow\ \text{uniformément continue}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\forall\varepsilon > 0,\ \exists\delta > 0,\ \forall x, y,\ |x - y|\leq\delta\Rightarrow|f(x) - f(y)|\leq\varepsilon$</li><li>$k$ -lipschitzienne $\Longrightarrow$ uniformément continue (prendre $\delta = \tfrac\varepsilon k)$</li><li>$\displaystyle\textbf{Heine}:\ \text{continue sur un segment}\ \Longrightarrow\ \text{uniformément continue}$</li></ul></div>
 
 <p class="ml">Exemple 16 : une fonction lipschitzienne</p>
 <p><b>Montrer que $\sin$ est uniformément continue sur $\mathbb R$.</b></p>
@@ -7419,13 +7334,8 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Dérivabilité": R`
-<nav class="msum"><a href="#dv-def">Taux d'accroissement</a><a href="#dv-calc">Calculer une dérivée</a><a href="#dv-rec">Recollement</a><a href="#dv-rolle">Rolle</a><a href="#dv-taf">Accroissements finis</a><a href="#dv-ineg">Inégalités</a><a href="#dv-limd">Limite de la dérivée</a><a href="#dv-leib">Dérivée n-ième</a><a href="#dv-conv">Convexité</a><a href="#dv-erreurs">Erreurs</a><a href="#dv-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction étudiée. <span class="kO">orange</span> : sa dérivée. <span class="kV">violet</span> : le point $c$ donné par Rolle ou les accroissements finis. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="dv-def">1. Dérivabilité par le taux d'accroissement</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{dérivable en}\ a\iff\frac{f(x) - f(a)}{x - a}\ \text{a une limite finie quand}\ x\to a$</li><li>$\displaystyle\text{cette limite est}\ f'(a)$</li><li>$\displaystyle\text{à utiliser quand les théorèmes généraux ne s'appliquent pas en}\ a\ (\text{racine en}\ 0,\ |x|,\ \text{recollement})$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ dérivable en $a\iff\frac{f(x) - f(a)}{x - a}$ a une limite finie quand $x\to a$</li><li>$\displaystyle\text{cette limite est}\ f'(a)$</li><li>$\displaystyle\text{à utiliser quand les théorèmes généraux ne s'appliquent pas en}\ a\ (\text{racine en}\ 0,\ |x|,\ \text{recollement})$</li></ul></div>
 
 <p class="ml">Exemple 1 : la racine carrée en $0$</p>
 <p><b>La fonction $f(x) = \sqrt x$ est-elle dérivable en $0$ ?</b></p>
@@ -7469,7 +7379,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{a = 2,\ b = -1}$ : la droite $y = 2x - 1$ est la tangente à la parabole en $1$.</p>
 
 <h2 id="dv-rolle">4. Le théorème de Rolle</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ [a, b],\ \text{dérivable sur}\ ]a, b[,\ f(a) = f(b)$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f'(\cV c) = 0$</li><li>$\displaystyle\text{usage typique : entre deux racines de}\ f,\ \text{il y a une racine de}\ f'$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ continue sur $[a, b],$ dérivable sur $]a, b[,\ f(a) = f(b)$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f'(\cV c) = 0$</li><li>$\displaystyle\text{usage typique : entre deux racines de}\ f,\ \text{il y a une racine de}\ f'$</li></ul></div>
 
 <p class="ml">Exemple 6 : les racines d'un polynôme et de sa dérivée</p>
 <p>Soit $P$ un polynôme réel de degré $n\geq2$ qui a $n$ racines réelles distinctes. <b>Montrer que $P'$ a $n - 1$ racines réelles distinctes.</b></p>
@@ -7479,7 +7389,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $P'$ est de degré $n - 1$ et a $n - 1$ racines réelles distinctes : $\cG{\text{ce sont toutes ses racines}}$.</p>
 
 <h2 id="dv-taf">5. L'égalité des accroissements finis</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ [a, b],\ \text{dérivable sur}\ ]a, b[$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f(b) - f(a) = f'(\cV c)(b - a)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ continue sur $[a, b],$ dérivable sur $]a, b[$</li><li>$\displaystyle\Longrightarrow\ \exists\cV c\in]a, b[,\ f(b) - f(a) = f'(\cV c)(b - a)$</li></ul></div>
 
 <p class="ml">Exemple 7 : un encadrement de $\ln$</p>
 <p><b>Montrer que pour tout $x > 0$, $\frac1{x + 1} \lt \ln(x + 1) - \ln x \lt \frac1x$.</b></p>
@@ -7506,7 +7416,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\arctan\ \text{est}\ 1\text{-lipschitzienne}}$.</p>
 
 <h2 id="dv-limd">7. Le théorème de la limite de la dérivée</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ I,\ \text{dérivable sur}\ I\setminus\{a\},\ f'(x)\xrightarrow[x\to a]{}\ell\in\mathbb R$</li><li>$\displaystyle\Longrightarrow\ f\ \text{dérivable en}\ a,\ f'(a) = \ell,\ \text{et}\ f'\ \text{continue en}\ a$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ continue sur $I,$ dérivable sur $I\setminus\{a\},\ f'(x)\xrightarrow[x\to a]{}\ell\in\mathbb R$</li><li>$\displaystyle\Longrightarrow\ f\ \text{dérivable en}\ a,\ f'(a) = \ell,\ \text{et}\ f'\ \text{continue en}\ a$</li></ul></div>
 
 <p class="ml">Exemple 10 : un prolongement de classe $\mathcal C^1$</p>
 <p>Soit $f(x) = \frac{\sin x}x$ pour $x\neq0$ et $f(0) = 1$. <b>Montrer que $f$ est de classe $\mathcal C^1$ sur $\mathbb R$.</b></p>
@@ -7526,7 +7436,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{f^{(n)}(x) = \big(x^2 + 2nx + n(n - 1)\big)e^x}$. Contrôle $n = 1$ : $(x^2 + 2x)e^x$, c'est bien $2xe^x + x^2e^x$.</p>
 
 <h2 id="dv-conv">9. La convexité</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{deux fois dérivable}:\ f\ \text{convexe sur}\ I\iff f''\geq0\ \text{sur}\ I$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe au-dessus de ses tangentes}:\ f(x)\geq f(a) + f'(a)(x - a)$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe sous ses cordes}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$f$ deux fois dérivable $:\ f$ convexe sur $I\iff f''\geq0$ sur $I$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe au-dessus de ses tangentes}:\ f(x)\geq f(a) + f'(a)(x - a)$</li><li>$\displaystyle\text{convexe}\ \Longrightarrow\ \text{courbe sous ses cordes}$</li></ul></div>
 
 <p class="ml">Exemple 12 : une inégalité par la tangente</p>
 <p><b>Montrer que pour tout réel $x$, $e^x\geq1 + x$.</b></p>
@@ -7568,11 +7478,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Fractions rationnelles": R`
-<nav class="msum"><a href="#fr-ent">Partie entière</a><a href="#fr-p1">Pôles simples</a><a href="#fr-pm">Pôles multiples</a><a href="#fr-irr">Facteurs irréductibles</a><a href="#fr-pp">Formule $P'/P$</a><a href="#fr-som">Sommes télescopiques</a><a href="#fr-int">Primitives</a><a href="#fr-erreurs">Erreurs</a><a href="#fr-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : le pôle qu'on traite. <span class="kO">orange</span> : le facteur qu'on multiplie puis qu'on simplifie. <span class="kV">violet</span> : les coefficients inconnues $a$, $b$, $c$. <span class="kG">vert</span> : la décomposition finale.</p>
-
 <h2 id="fr-ent">1. La partie entière</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle F = \frac PQ:\ \text{si}\ \deg P\geq\deg Q,\ \text{division euclidienne}\ P = EQ + R$</li><li>$\displaystyle F = \cG E + \frac RQ\ \text{avec}\ \deg R \lt \deg Q$</li><li>$\displaystyle\text{si}\ \deg P \lt \deg Q,\ \text{la partie entière est nulle}$</li></ul></div>
 
@@ -7669,11 +7574,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Fonctions de deux variables": R`
-<nav class="msum"><a href="#dx-cont">Continuité</a><a href="#dx-dp">Dérivées partielles</a><a href="#dx-c1">Classe C¹</a><a href="#dx-ch">Règle de la chaîne</a><a href="#dx-grad">Gradient</a><a href="#dx-crit">Points critiques</a><a href="#dx-ext">Extremums</a><a href="#dx-edp">EDP</a><a href="#dx-erreurs">Erreurs</a><a href="#dx-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la variable qu'on fait bouger, l'autre reste fixe. <span class="kO">orange</span> : les dérivées partielles. <span class="kV">violet</span> : les points critiques. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="dx-cont">1. Continuité en $(0, 0)$</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{pour montrer la continuité}:\ |f(x, y) - f(0, 0)|\leq\varepsilon(\|(x, y)\|)\to0$</li><li>$\displaystyle\text{outils}:\ |x|\leq\sqrt{x^2 + y^2},\ \ |xy|\leq\frac{x^2 + y^2}2,\ \ \text{polaires}\ x = r\cos\theta,\ y = r\sin\theta$</li><li>$\displaystyle\textbf{pour montrer la discontinuité}:\ \text{une droite}\ y = mx\ \text{sur laquelle la limite dépend de}\ m$</li></ul></div>
 
@@ -7750,7 +7650,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{deux points critiques :}\ \cV{(0, 0)}\ \text{et}\ \cV{(1, 1)}}$.</p>
 
 <h2 id="dx-ext">7. Nature d'un point critique</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{Spé, hessienne}:\ H = \begin{pmatrix}r & s\\ s & t\end{pmatrix},\ r = \partial^2_{xx}f,\ s = \partial^2_{xy}f,\ t = \partial^2_{yy}f$</li><li>$\displaystyle rt - s^2 > 0,\ r > 0:\ \text{minimum local};\quad rt - s^2 > 0,\ r \lt 0:\ \text{maximum local}$</li><li>$\displaystyle rt - s^2 \lt 0:\ \text{point col};\quad rt - s^2 = 0:\ \text{on ne peut pas conclure}$</li><li>$\displaystyle\textbf{Sup}:\ \text{étudier le signe de}\ f(a + h) - f(a)\ \text{directement}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle\textbf{Spé, hessienne}:\ H = \begin{pmatrix}r & s\\ s & t\end{pmatrix},\ r = \partial^2_{xx}f,\ s = \partial^2_{xy}f,\ t = \partial^2_{yy}f$</li><li>$rt - s^2 > 0,\ r > 0$ : minimum local $;\quad rt - s^2 > 0,\ r \lt 0:$ maximum local</li><li>$rt - s^2 \lt 0$ : point col $;\quad rt - s^2 = 0:$ on ne peut pas conclure</li><li>$\displaystyle\textbf{Sup}:\ \text{étudier le signe de}\ f(a + h) - f(a)\ \text{directement}$</li></ul></div>
 
 <p class="ml">Exemple 9 : la suite de l'exemple 8</p>
 <p>Avec $f(x, y) = x^3 + y^3 - 3xy$. <b>Déterminer la nature des points critiques $(0, 0)$ et $(1, 1)$.</b> (Hessienne : programme de Spé.)</p>
@@ -7793,11 +7693,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Compléments d'algèbre": R`
-<nav class="msum"><a href="#ca-sg">Sous-groupes</a><a href="#ca-ord">Ordre d'un élément</a><a href="#ca-zn">Inversibles de ℤ/nℤ</a><a href="#ca-crt">Restes chinois</a><a href="#ca-ann">Anneaux, idéaux</a><a href="#ca-pe">Polynômes d'endomorphismes</a><a href="#ca-erreurs">Erreurs</a><a href="#ca-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : l'élément ou la classe étudiée. <span class="kO">orange</span> : la relation qu'on utilise (Bézout, Lagrange, polynôme annulateur). <span class="kV">violet</span> : les coefficients trouvés. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="ca-sg">1. Montrer qu'une partie est un sous-groupe</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle H\subset G\ \text{est un sous-groupe}\iff H\neq\varnothing\ \text{et}\ \forall x, y\in H,\ xy^{-1}\in H$</li><li>$\displaystyle\text{ou : noyau ou image d'un morphisme de groupes}$</li><li>$\displaystyle\text{les sous-groupes de}\ (\mathbb Z, +)\ \text{sont les}\ n\mathbb Z$</li></ul></div>
 
@@ -7847,7 +7742,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 <p><b>Étape 4 : Conclusion.</b> $\cG{x\equiv8\ [15]}$, soit $x = 8 + 15k$, $k\in\mathbb Z$.</p>
 
 <h2 id="ca-ann">5. Anneaux et idéaux</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle I\ \text{idéal de}\ A:\ \text{sous-groupe additif, et}\ \forall a\in A,\ \forall x\in I,\ ax\in I$</li><li>$\displaystyle\text{les idéaux de}\ \mathbb Z\ \text{sont les}\ n\mathbb Z,\ \text{ceux de}\ \mathbb K[X]\ \text{les}\ P\,\mathbb K[X]$</li><li>$\displaystyle\text{le noyau d'un morphisme d'anneaux est un idéal}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$I$ idéal de $A$ : sous-groupe additif, et $\forall a\in A,\ \forall x\in I,\ ax\in I$</li><li>$\displaystyle\text{les idéaux de}\ \mathbb Z\ \text{sont les}\ n\mathbb Z,\ \text{ceux de}\ \mathbb K[X]\ \text{les}\ P\,\mathbb K[X]$</li><li>$\displaystyle\text{le noyau d'un morphisme d'anneaux est un idéal}$</li></ul></div>
 
 <p class="ml">Exemple 6 : un idéal de polynômes</p>
 <p>Soit $I = \{P\in\mathbb R[X],\ P(1) = P(2) = 0\}$. <b>Montrer que $I$ est un idéal de $\mathbb R[X]$ et en donner un générateur unitaire.</b></p>
@@ -7895,11 +7790,6 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 </ul></div></div>
 `,
 "Dénombrement": R`
-<nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : l'ensemble qu'on compte $\cB E$. <span class="kO">orange</span> : chaque étape de choix et son nombre de possibilités. <span class="kR">rouge</span> : ce qu'on retire (complémentaire, doublons). <span class="kV">violet</span> : les entiers $\cV n$, $\cV p$, $\cV k$. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="d-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Nombre</th></tr>
@@ -7917,7 +7807,7 @@ $$\cG{\exists\varepsilon > 0,\ \forall\delta > 0,\ \exists x\in\mathbb R,\ |x - 
 $$A\subset E\Rightarrow\operatorname{Card}(A)\leq\operatorname{Card}(E),\ \text{avec égalité}\iff A = E.$$</div>
 <p>C'est l'idée la plus puissante du chapitre : <b>pour compter un ensemble difficile, on le met en bijection avec un ensemble facile</b> (exemples 10 et exercice 4).</p>
 <p class="ml">Applications entre ensembles de même cardinal</p>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}(E) = \operatorname{Card}(F)\ \text{finis},\ f:E\to F:$</li><li>$\displaystyle f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}(E) = \operatorname{Card}(F)\ \text{finis},\ f:E\to F$ :</li><li>$f$ injective $\iff f$ surjective $\iff f$ bijective</li></ul></div>
 <p>Il suffit donc de vérifier <b>une seule</b> des deux propriétés.</p>
 
 <h2 id="d-union">3. Réunion, complémentaire, différence</h2>
@@ -7982,7 +7872,7 @@ $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 <p>Compter « on place un A ($5$ places), puis le reste librement ($26^4$) » donne $5\times26^4$ : les mots avec plusieurs A sont comptés <b>plusieurs fois</b>. Le complémentaire évite ce piège.</p>
 
 <h2 id="d-arr">7. Les arrangements (injections)</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Nombre d'injections de}\ E\ (\cV p\ \text{éléments})\ \text{dans}\ F\ (\cV n\ \text{éléments}):\quad n(n - 1)\cdots(n - p + 1) = \frac{n!}{(n - p)!}\ \ (p\leq n)$</li><li>$\displaystyle 0\ \text{si}\ p > n$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>Nombre d'injections de $E\ (\cV p$ éléments $)$ dans $F\ (\cV n$ éléments $):\quad n(n - 1)\cdots(n - p + 1) = \frac{n!}{(n - p)!}\ \ (p\leq n)$</li><li>$\displaystyle 0\ \text{si}\ p > n$</li></ul></div>
 <p class="ml">Exemple 5 : un podium</p>
 <p>$10$ coureurs. Combien de podiums (or, argent, bronze) possibles ?</p>
 <p><b>Étape 1 : Rappel.</b> Ordre important, pas de répétition : $\frac{n!}{(n - p)!} = n(n - 1)\cdots(n - p + 1)$.</p>
@@ -7990,7 +7880,7 @@ $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 <p><b>Étape 3 : Conclusion.</b> $\cG{10\times9\times8 = 720}$ podiums $= \frac{10!}{7!}$.</p>
 
 <h2 id="d-perm">8. Les permutations, les anagrammes</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!$</li><li>$\displaystyle \operatorname{Card}(S_n) = n!\qquad\text{Anagrammes}:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ (\text{lettre}\ i\ \text{répétée}\ k_i\ \text{fois})$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!$</li><li>$\operatorname{Card}(S_n) = n!$ Anagrammes $:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ ($ lettre $i$ répétée $k_i$ fois $)$</li></ul></div>
 <p>Pourquoi on divise : si on numérote les lettres répétées, on a $n!$ mots ; en effaçant les numéros, chaque mot a été compté $k_1!\cdots k_r!$ fois (les permutations des lettres identiques entre elles).</p>
 <p class="ml">Exemple 6 : anagrammes de BANANE</p>
 <p><b>Combien d'anagrammes le mot BANANE possède-t-il ?</b></p>
@@ -8175,11 +8065,6 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \
 </ul></div></div>
 `,
 "Arithmétique dans ℤ": R`
-<nav class="msum"><a href="#z-not">Notations</a><a href="#z-div">Divisibilité</a><a href="#z-eucl">Division euclidienne</a><a href="#z-pgcd">PGCD, Euclide</a><a href="#z-bez">Bézout</a><a href="#z-gauss">Gauss</a><a href="#z-dioph">$ax + by = c$</a><a href="#z-ppcm">PPCM</a><a href="#z-prem">Nombres premiers</a><a href="#z-cong">Congruences</a><a href="#z-inv">Inverse modulo $n$</a><a href="#z-fermat">Fermat</a><a href="#z-chin">Lemme chinois</a><a href="#z-enonce">L'énoncé</a><a href="#z-erreurs">Erreurs</a><a href="#z-entrainement">S'entraîner</a><a href="#z-exos">Exercices</a><a href="#z-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les entiers étudiés $\cB a$, $\cB b$. <span class="kR">rouge</span> : les diviseurs et le PGCD $\cR d$. <span class="kO">orange</span> : les coefficients de Bézout $\cO u$, $\cO v$. <span class="kV">violet</span> : les nombres premiers $\cV p$ et le module $\cV n$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="z-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
@@ -8226,7 +8111,7 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \
 
 <h2 id="z-pgcd">4. PGCD et algorithme d'Euclide</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \cB a = \cB bq + r\ \Longrightarrow\ \cB a\wedge\cB b = \cB b\wedge r$</li><li>$\displaystyle a\wedge0 = |a|$</li><li>$\displaystyle a\wedge b = |a|\wedge|b|$</li></ul>
-<ul class="sbl"><li>$\displaystyle \mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b):\ \text{les diviseurs communs sont les diviseurs du PGCD}$</li><li>$\displaystyle (ka)\wedge(kb) = |k|\,(a\wedge b)$</li></ul></div>
+<ul class="sbl"><li>$\mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b)$ : les diviseurs communs sont les diviseurs du PGCD</li><li>$\displaystyle (ka)\wedge(kb) = |k|\,(a\wedge b)$</li></ul></div>
 <p><b>Algorithme d'Euclide</b> : on remplace $(a, b)$ par $(b, r)$ jusqu'à un reste nul. Le PGCD est le <b>dernier reste non nul</b>.</p>
 
 <p class="ml">Exemple 4 : $1071\wedge462$</p>
@@ -8291,7 +8176,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 6 : Conclusion.</b> $\cG{\mathcal S = \{(-12 + 7k,\ 9 - 5k),\ k\in\mathbb Z\}}$. Contrôle $k = 2$ : $x = -12 + 14 = 2$, $y = 9 - 10 = -1$, et $15\times2 + 21\times(-1) = 30 - 21 = 9$.</p>
 
 <h2 id="z-ppcm">8. PPCM</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle a\vee b = \text{le plus petit multiple commun}\ \geq0$</li><li>$\displaystyle a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m$</li><li>$\displaystyle (a\wedge b)\times(a\vee b) = |ab|$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$a\vee b =$ le plus petit multiple commun $\geq0$</li><li>$\displaystyle a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m$</li><li>$\displaystyle (a\wedge b)\times(a\vee b) = |ab|$</li></ul></div>
 <p class="ml">Exemple 9 : $1071\vee462$</p>
 <p><b>Calculer $1071\vee462$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(a\wedge b)(a\vee b) = |ab|$.</p>
@@ -8300,7 +8185,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{1071\vee462 = 23\,562}$.</p>
 
 <h2 id="z-prem">9. Nombres premiers</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Tout}\ n\geq2\ \text{a un diviseur premier}$</li><li>$\displaystyle n\ \text{non premier}\Rightarrow n\ \text{a un diviseur premier}\ \cV p\leq\sqrt n$</li><li>$\displaystyle \mathcal P\ \text{est infini}$</li></ul>
+<div class="sbox"><ul class="sbl"><li>Tout $n\geq2$ a un diviseur premier</li><li>$n$ non premier $\Rightarrow n$ a un diviseur premier $\cV p\leq\sqrt n$</li><li>$\displaystyle \mathcal P\ \text{est infini}$</li></ul>
 <ul class="sbl"><li>$\displaystyle \textbf{Lemme d'Euclide}:\ \cV p\mid ab\Rightarrow\cV p\mid a\ \text{ou}\ \cV p\mid b$</li><li>$\displaystyle \cV p\nmid a\Rightarrow\cV p\wedge a = 1$</li></ul>
 <ul class="sbl"><li>$\displaystyle \textbf{Décomposition}:\ n = \prod_{p\in\mathcal P}p^{v_p(n)}\ \text{(unique)}$</li><li>$\displaystyle a\mid b\iff\forall p,\ v_p(a)\leq v_p(b)$</li></ul>
 <ul class="sbl"><li>$\displaystyle a\wedge b = \prod p^{\min(v_p(a), v_p(b))}$</li><li>$\displaystyle a\vee b = \prod p^{\max(v_p(a), v_p(b))}$</li></ul></div>
@@ -8502,11 +8387,6 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 </ul></div></div>
 `,
 "Fonctions usuelles": R`
-<nav class="msum"><a href="#u-not">Notations, dérivées</a><a href="#u-exp">Exp, ln, puissances</a><a href="#u-trig">Trigonométrie</a><a href="#u-arc">arcsin, arccos, arctan</a><a href="#u-comp">$\arcsin(\sin x)$…</a><a href="#u-id">Identités</a><a href="#u-eq">Équations</a><a href="#u-hyp">ch, sh, th</a><a href="#u-arg">argsh, argch, argth</a><a href="#u-etude">Étudier une fonction</a><a href="#u-enonce">L'énoncé</a><a href="#u-erreurs">Erreurs</a><a href="#u-entrainement">S'entraîner</a><a href="#u-exos">Exercices</a><a href="#u-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction étudiée et son argument. <span class="kR">rouge</span> : l'intervalle où vit l'angle ($[-\frac\pi2, \frac\pi2]$, $[0, \pi]$…). <span class="kO">orange</span> : le signe qu'on déduit de cet intervalle. <span class="kV">violet</span> : les entiers ($k$, $2k\pi$). <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="u-not">1. Le tableau à connaître par cœur</h2>
 <table class="mtab">
 <tr><th>Fonction</th><th>Définie sur</th><th>Dérivée</th><th>Dérivable sur</th></tr>
@@ -8770,11 +8650,6 @@ $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} 
 </ul></div></div>
 `,
 "Espaces préhilbertiens réels": R`
-<nav class="msum"><a href="#h-not">Notations</a><a href="#h-ps">Produit scalaire</a><a href="#h-cs">Cauchy-Schwarz</a><a href="#h-orth">Orthogonalité</a><a href="#h-bon">Bases orthonormées</a><a href="#h-gs">Gram-Schmidt</a><a href="#h-proj">Projection</a><a href="#h-dist">Distance</a><a href="#h-sfps">Produit scalaire ?</a><a href="#h-sfcs">Cauchy-Schwarz, polarisation</a><a href="#h-sforth">Orthogonal</a><a href="#h-sfbon">BON, $QR$</a><a href="#h-sfproj">Projections</a><a href="#h-sfmin">Minimum</a><a href="#h-enonce">L'énoncé</a><a href="#h-erreurs">Erreurs</a><a href="#h-entrainement">S'entraîner</a><a href="#h-exos">Exercices</a><a href="#h-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : le sous-espace $\cR F$ et son orthogonal. <span class="kO">orange</span> : les produits scalaires calculés $\cO{\langle x, e_i\rangle}$. <span class="kV">violet</span> : la base orthonormée $\cV{(e_1, \dots, e_n)}$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="h-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -8815,7 +8690,7 @@ $$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = \underbrace{x_1^2 + 2x_1x_2 + x_2^2
 <p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{est un produit scalaire}}$. (Avec $x_2y_2$ au lieu de $2x_2y_2$, on aurait $(x_1 + x_2)^2$, nulle pour $x = (1, -1)$ : pas défini.)</p>
 
 <h2 id="h-cs">3. Normes, Cauchy-Schwarz</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Cauchy-Schwarz}:\ |\langle x, y\rangle|\leq\|x\|\,\|y\|,\ \text{égalité}\iff x, y\ \text{colinéaires}$</li><li>$\displaystyle \|x + y\|\leq\|x\| + \|y\|$</li></ul>
+<div class="sbox"><ul class="sbl"><li><b>Cauchy-Schwarz</b> $:\ |\langle x, y\rangle|\leq\|x\|\,\|y\|,$ égalité $\iff x, y$ colinéaires</li><li>$\displaystyle \|x + y\|\leq\|x\| + \|y\|$</li></ul>
 <ul class="sbl"><li>$\displaystyle \|x + y\|^2 = \|x\|^2 + 2\langle x, y\rangle + \|y\|^2$</li><li>$\displaystyle \langle x, y\rangle = \frac14\big(\|x + y\|^2 - \|x - y\|^2\big)$</li><li>$\displaystyle \|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2$</li></ul></div>
 <p class="ml">La méthode Cauchy-Schwarz</p>
 <p>Pour majorer une somme ou une intégrale de produits : <b>choisir l'espace et les deux vecteurs</b> $x$, $y$ pour que $\langle x, y\rangle$ soit ce qu'on veut majorer. Le vecteur constant $(1, \dots, 1)$ ou la fonction $1$ sont souvent le bon choix.</p>
@@ -8838,7 +8713,7 @@ $$\Big(\sum_{k=1}^nx_k\Big)^2\leq\Big(\sum_{k=1}^nx_k^2\Big)\times n.$$
 
 <h2 id="h-orth">4. Orthogonalité, Pythagore</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle x\perp y\iff\|x + y\|^2 = \|x\|^2 + \|y\|^2\ \ (\textbf{Pythagore})$</li><li>$\displaystyle (e_1, \dots, e_p)\ \text{orthogonale}\Rightarrow\Big\|\sum e_i\Big\|^2 = \sum\|e_i\|^2$</li></ul>
-<ul class="sbl"><li>$\displaystyle \text{Une famille orthogonale de vecteurs non nuls est libre}$</li><li>$\displaystyle F\subset G\Rightarrow G^\perp\subset F^\perp$</li><li>$\displaystyle F\cap F^\perp = \{0\}$</li></ul></div>
+<ul class="sbl"><li>Une famille orthogonale de vecteurs non nuls est libre</li><li>$\displaystyle F\subset G\Rightarrow G^\perp\subset F^\perp$</li><li>$\displaystyle F\cap F^\perp = \{0\}$</li></ul></div>
 
 <p class="ml">Exemple 5 : les cosinus sont orthogonaux</p>
 <p>Dans $\mathcal C([0, 2\pi])$ avec $\langle f, g\rangle = \int_0^{2\pi}fg$, montrer que $c_p(t) = \cos(pt)$, $p\in\mathbb N$, sont deux à deux orthogonaux.</p>
@@ -8910,7 +8785,7 @@ $$p_P(x) = (1, 2, 3) - (2, 2, 2) = (1 - 2,\ 2 - 2,\ 3 - 2) = (-1, 0, 1).$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{p_P(x) = (-1, 0, 1)}$. La distance : $\|n\| = \sqrt3$ et $d(x, P) = \frac{|\langle x, n\rangle|}{\|n\|} = \frac6{\sqrt3} = \frac{6\sqrt3}{\sqrt3\sqrt3} = \frac{6\sqrt3}3 = 2\sqrt3$.</p>
 
 <h2 id="h-dist">8. Distance à un sous-espace : les problèmes de minimisation</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle d(x, F) = \|x - p_F(x)\|$</li><li>$\displaystyle d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2$</li><li>$\displaystyle p_F(x)\ \text{est l'unique point de}\ F\ \text{où le minimum est atteint}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle d(x, F) = \|x - p_F(x)\|$</li><li>$\displaystyle d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2$</li><li>$p_F(x)$ est l'unique point de $F$ où le minimum est atteint</li></ul></div>
 <p class="ml">La méthode</p>
 <p>Un « $\inf_{a, b}\int(\dots - a\dots - b\dots)^2$ » ou « $\min\sum(\dots)^2$ » est <b>une distance au carré</b>. <b>1.</b> Trouver l'espace, le produit scalaire, le vecteur $x$ et le sous-espace $F$. <b>2.</b> Calculer $p_F(x)$ avec les conditions d'orthogonalité. <b>3.</b> $d^2 = \langle x - p_F(x), x\rangle$ (car $x - p_F(x)\perp p_F(x)$).</p>
 
@@ -9177,11 +9052,6 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 </ul></div></div>
 `,
 "Espaces préhilbertiens et euclidiens": R`
-<nav class="msum"><a href="#e-rap">Rappels de Sup</a><a href="#e-hyp">Hyperplans</a><a href="#e-sym">Symétries, réflexions</a><a href="#e-iso">Isométries</a><a href="#e-on">$O(n)$</a><a href="#e-o2">$O(2)$</a><a href="#e-o3">$SO(3)$</a><a href="#e-adj">Adjoint</a><a href="#e-auto">Autoadjoints</a><a href="#e-spec">Théorème spectral</a><a href="#e-pos">Positifs</a><a href="#e-sfsym">Symétrique ?</a><a href="#e-sfusym">Utiliser la symétrie</a><a href="#e-sfiso">Isométrie ?</a><a href="#e-enonce">L'énoncé</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-exos">Exercices</a><a href="#e-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : l'axe, l'hyperplan ou le sous-espace invariant. <span class="kO">orange</span> : l'angle $\cO\theta$ et les valeurs propres. <span class="kV">violet</span> : la base orthonormée et la matrice de passage $\cV P$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="e-rap">1. Ce qui vient de Sup</h2>
 <p>Produit scalaire, Cauchy-Schwarz, bases orthonormées, Gram-Schmidt, projection orthogonale et distance sont traités en détail dans la fiche Sup « Espaces préhilbertiens réels ». À avoir en tête :</p>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle x = \sum\langle x, e_i\rangle e_i$</li><li>$\displaystyle p_F(x) = \sum_{i\leq p}\langle x, e_i\rangle e_i$</li><li>$\displaystyle d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2$</li><li>$\displaystyle y = p_F(x)\iff y\in F,\ x - y\in F^\perp$</li></ul></div>
@@ -9199,7 +9069,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 
 <h2 id="e-sym">3. Symétries orthogonales, réflexions</h2>
 <div class="sbox">$$s_F = 2p_F - \operatorname{id}:\ \text{symétrie par rapport à}\ F\ \text{parallèlement à}\ F^\perp.\qquad\textbf{Réflexion}\ (F = H = n^\perp):\ s(x) = x - 2\frac{\langle x, n\rangle}{\|n\|^2}n.$$
-<ul class="sbl"><li>$\displaystyle \text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top$</li><li>$\displaystyle (\text{symétrique et orthogonale})$</li></ul></div>
+<ul class="sbl"><li>$\displaystyle \text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top$</li><li>$($ symétrique et orthogonale $)$</li></ul></div>
 <p>Une symétrie $s$ ($s^2 = \operatorname{id}$) est <b>orthogonale</b> si et seulement si $s$ conserve la norme, si et seulement si sa matrice en BON est <b>symétrique</b>.</p>
 <p class="ml">Exemple 2 : matrice d'une réflexion</p>
 <p><b>Écrire la matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</b></p>
@@ -9216,7 +9086,7 @@ $$S = I_3 - \frac23J = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatr
 
 <h2 id="e-on">5. Matrices orthogonales</h2>
 <div class="sbox">$$A\in O(n)\iff A^\top A = I_n\iff A^{-1} = A^\top\iff\text{les colonnes forment une BON de}\ \mathbb R^n\iff\text{les lignes aussi}.$$
-<ul class="sbl"><li>$\displaystyle \text{La matrice de passage entre deux BON est orthogonale}$</li><li>$\displaystyle SO(n) = \{A\in O(n),\ \det A = 1\}$</li></ul></div>
+<ul class="sbl"><li>La matrice de passage entre deux BON est orthogonale</li><li>$\displaystyle SO(n) = \{A\in O(n),\ \det A = 1\}$</li></ul></div>
 <p class="ml">Exemple 3 : vérifier qu'une matrice est orthogonale</p>
 <p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$. <b>Montrer que $A$ est orthogonale, et calculer $\det A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A\in O(n)\iff$ les colonnes forment une BON : normes $1$ et produits scalaires $0$.</p>
@@ -9262,7 +9132,7 @@ $$u\in O(E)\iff u^*u = \operatorname{id}.$$</div>
 
 <h2 id="e-auto">9. Endomorphismes autoadjoints (symétriques)</h2>
 <div class="sbox">$$u\in\mathcal S(E)\iff\forall x, y,\ \langle u(x), y\rangle = \langle x, u(y)\rangle\iff\operatorname{Mat}_{\text{BON}}(u)\ \text{symétrique}.$$
-<ul class="sbl"><li>$\displaystyle p\ \text{projecteur}:\ p\ \text{orthogonal}\iff p\ \text{autoadjoint}$</li><li>$\displaystyle s\ \text{symétrie}:\ s\ \text{orthogonale}\iff s\ \text{autoadjointe}$</li></ul></div>
+<ul class="sbl"><li>$p$ projecteur $:\ p$ orthogonal $\iff p$ autoadjoint</li><li>$s$ symétrie $:\ s$ orthogonale $\iff s$ autoadjointe</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>« Matrice symétrique $\Rightarrow$ autoadjoint » n'est vrai que si la base est <b>orthonormée</b>.</p>
 
@@ -9518,11 +9388,6 @@ $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 </ul></div></div>
 `,
 "Topologie des espaces vectoriels normés": R`
-<nav class="msum"><a href="#t-not">Notations</a><a href="#t-norme">Normes</a><a href="#t-equiv">Normes équivalentes</a><a href="#t-suites">Suites</a><a href="#t-ouv">Ouverts, fermés</a><a href="#t-adh">Intérieur, adhérence, densité</a><a href="#t-lim">Limites, continuité</a><a href="#t-lin">Applications linéaires continues</a><a href="#t-comp">Compacts</a><a href="#t-dimf">Dimension finie</a><a href="#t-cpa">Connexité par arcs</a><a href="#t-sfnorme">Norme ? Comparer</a><a href="#t-sfsuites">Suites : méthodes</a><a href="#t-sfouv">Ouvert, fermé ?</a><a href="#t-sfcomp">Compacité</a><a href="#t-sfcpa">Arcs</a><a href="#t-sfcont">Continuité</a><a href="#t-sfmat">$\mathcal M_n(\mathbb K)$</a><a href="#t-enonce">L'énoncé</a><a href="#t-erreurs">Erreurs</a><a href="#t-entrainement">S'entraîner</a><a href="#t-exos">Exercices</a><a href="#t-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les vecteurs et les suites $\cB x$, $\cB{(x_n)}$. <span class="kR">rouge</span> : la partie étudiée $\cR A$ (ouverte, fermée, compacte…). <span class="kO">orange</span> : les constantes d'inégalité $\cO\alpha$, $\cO\beta$, $\cO C$. <span class="kV">violet</span> : la norme utilisée $\cV{N}$, $\cV{\|\cdot\|_\infty}$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="t-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
@@ -9615,7 +9480,7 @@ $$\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \Big[t - \frac{nt^2}2\Big]_0^{1/n} 
 
 <h2 id="t-adh">6. Intérieur, adhérence, frontière, densité</h2>
 <div class="sbox">$$a\in\overline A\iff\forall r > 0,\ B(a, r)\cap A\neq\varnothing\iff\exists(a_n)\in A^{\mathbb N},\ a_n\to a\iff d(a, A) = 0.$$
-<ul class="sbl"><li>$\displaystyle a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A$</li><li>$\displaystyle A\ \textbf{dense}\iff\overline A = E\iff\text{tout}\ x\ \text{est limite d'une suite de}\ A$</li></ul></div>
+<ul class="sbl"><li>$\displaystyle a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A$</li><li>$A$ <b>dense</b> $\iff\overline A = E\iff$ tout $x$ est limite d'une suite de $A$</li></ul></div>
 <p class="ml">Exemple 8 : dans $\mathbb R$</p>
 <p>$A = [0, 1[\,\cup\{2\}$. Intérieur, adhérence, frontière ?</p>
 <p><b>Étape 1 : Rappel.</b> Adhérence : limites de suites de $A$. Intérieur : points avec une petite boule incluse.</p>
@@ -9666,7 +9531,7 @@ $$\textbf{En dimension finie (au départ), toute application linéaire est conti
 
 <h2 id="t-comp">9. Compacts</h2>
 <div class="sbox">$$\cR K\ \text{compact}\iff\text{toute suite de}\ K\ \text{a une sous-suite qui converge dans}\ K.$$
-<ul class="sbl"><li>$\displaystyle \text{Compact}\Rightarrow\text{fermé et borné}.\qquad\text{Fermé inclus dans un compact}\Rightarrow\text{compact}$</li><li>$\displaystyle K_1\times K_2\ \text{compact}$</li></ul>
+<ul class="sbl"><li>Compact $\Rightarrow$ fermé et borné. Fermé inclus dans un compact $\Rightarrow$ compact</li><li>$\displaystyle K_1\times K_2\ \text{compact}$</li></ul>
 $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};\ \text{si}\ f\ \text{réelle},\ \textbf{elle est bornée et atteint ses bornes}.\qquad\textbf{Heine}:\ f\ \text{continue sur}\ K\Rightarrow\text{uniformément continue}.$$</div>
 <p class="ml">Exemple 13 : la distance à un fermé est atteinte</p>
 <p>$E$ de dimension finie, $F$ fermé non vide, $a\in E$. Montrer qu'il existe $b\in F$ avec $\|a - b\| = d(a, F)$.</p>
@@ -9682,7 +9547,7 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 
 <h2 id="t-cpa">11. Connexité par arcs</h2>
 <div class="sbox">$$A\ \text{connexe par arcs}:\ \forall a, b\in A,\ \exists\gamma:[0, 1]\to A\ \text{continue},\ \gamma(0) = a,\ \gamma(1) = b.$$
-<ul class="sbl"><li>$\displaystyle \text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qquad\text{Dans}\ \mathbb R:\ \text{connexes par arcs} = \text{intervalles}$</li><li>$\displaystyle f\ \text{continue}:\ f(A)\ \text{connexe par arcs}$</li></ul></div>
+<ul class="sbl"><li>Convexe $\Rightarrow$ étoilé $\Rightarrow$ connexe par arcs. Dans $\mathbb R$ : connexes par arcs $=$ intervalles</li><li>$\displaystyle f\ \text{continue}:\ f(A)\ \text{connexe par arcs}$</li></ul></div>
 <p>Conséquence : <b>TVI généralisé</b>. Une fonction continue réelle sur un connexe par arcs qui prend deux valeurs prend toutes les valeurs intermédiaires.</p>
 <p class="ml">Exemple 14 : $GL_n(\mathbb R)$ n'est pas connexe par arcs</p>
 <p><b>Montrer que $GL_n(\mathbb R)$ n'est pas connexe par arcs.</b></p>
@@ -10027,11 +9892,6 @@ $$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots
 </ul></div></div>
 `,
 "Calcul différentiel": R`
-<nav class="msum"><a href="#c-not">Notations</a><a href="#c-lim">Limite en un point</a><a href="#c-part">Dérivées partielles</a><a href="#c-diff">Différentiabilité</a><a href="#c-exdiff">Différentielles usuelles</a><a href="#c-chain">Règle de la chaîne</a><a href="#c-grad">Gradient</a><a href="#c-edp">EDP</a><a href="#c-c2">$\mathcal C^2$, Schwarz</a><a href="#c-ext">Extrema</a><a href="#c-glob">Extrema globaux</a><a href="#c-contr">Sous contrainte</a><a href="#c-tang">Plan tangent</a><a href="#c-enonce">L'énoncé</a><a href="#c-erreurs">Erreurs</a><a href="#c-entrainement">S'entraîner</a><a href="#c-exos">Exercices</a><a href="#c-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction $\cB f$ et ses dérivées partielles. <span class="kR">rouge</span> : le point étudié $\cR a$ (souvent $(0, 0)$). <span class="kO">orange</span> : l'accroissement $\cO h$ et les majorations. <span class="kV">violet</span> : les nouvelles variables ($r$, $\theta$, $u$, $v$). <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="c-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
@@ -10146,7 +10006,7 @@ $$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \s
 <p>$\nabla f(a)$ indique la direction où $f$ <b>croît le plus vite</b> ; il est <b>orthogonal</b> aux lignes de niveau $\{f = c\}$.</p>
 
 <h2 id="c-edp">8. Équations aux dérivées partielles</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Sur un ouvert convexe (ou un produit d'intervalles)}:\quad\frac{\partial f}{\partial x} = 0\iff f(x, y) = C(y)$</li><li>$\displaystyle \frac{\partial^2f}{\partial x\partial y} = 0\iff f(x, y) = A(x) + B(y)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>Sur un ouvert convexe (ou un produit d'intervalles) $:\quad\frac{\partial f}{\partial x} = 0\iff f(x, y) = C(y)$</li><li>$\displaystyle \frac{\partial^2f}{\partial x\partial y} = 0\iff f(x, y) = A(x) + B(y)$</li></ul></div>
 <p class="ml">La méthode du changement de variables</p>
 <p><b>1.</b> Poser $f(x, y) = g(\cV u, \cV v)$ avec le changement donné (bijectif, $\mathcal C^1$ dans les deux sens). <b>2.</b> Calculer $\partial_xf$, $\partial_yf$ (et les dérivées secondes) en fonction de celles de $g$ par la règle de la chaîne. <b>3.</b> Remplacer : on obtient une EDP simple en $g$. <b>4.</b> La résoudre, puis revenir à $x, y$.</p>
 
@@ -10320,11 +10180,6 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 </ul></div></div>
 `,
 "Séries et familles sommables": R`
-<nav class="msum"><a href="#f-not">Notations</a><a href="#f-serie">Séries dans un evn</a><a href="#f-exp">Exponentielle de matrice</a><a href="#f-neu">Série géométrique de matrices</a><a href="#f-pos">Familles positives</a><a href="#f-paq">Sommation par paquets</a><a href="#f-som">Familles sommables</a><a href="#f-double">Séries doubles, Fubini</a><a href="#f-cauchy">Produit de Cauchy</a><a href="#f-enonce">L'énoncé</a><a href="#f-erreurs">Erreurs</a><a href="#f-entrainement">S'entraîner</a><a href="#f-exos">Exercices</a><a href="#f-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les termes $\cB{u_n}$, $\cB{a_i}$. <span class="kR">rouge</span> : les paquets $\cR{I_n}$ de la partition. <span class="kO">orange</span> : les majorations et la valeur absolue $\cO{|a_i|}$. <span class="kV">violet</span> : les matrices ($\cV A$, $\cV P$, $\cV D$). <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="f-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -10337,7 +10192,7 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 </table>
 
 <h2 id="f-serie">2. Séries dans un espace normé de dimension finie</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum\cB{u_n}\ \text{converge}\iff\text{chaque série coordonnée converge (dans une base)}$</li><li>$\displaystyle \sum\|\cB{u_n}\|\ \text{converge}\Rightarrow\sum\cB{u_n}\ \text{converge},\ \Big\|\sum\cB{u_n}\Big\|\leq\sum\|\cB{u_n}\|$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\sum\cB{u_n}$ converge $\iff$ chaque série coordonnée converge (dans une base)</li><li>$\displaystyle \sum\|\cB{u_n}\|\ \text{converge}\Rightarrow\sum\cB{u_n}\ \text{converge},\ \Big\|\sum\cB{u_n}\Big\|\leq\sum\|\cB{u_n}\|$</li></ul></div>
 <p>Le terme général d'une série convergente tend vers $0$. Toutes les normes étant équivalentes, l'absolue convergence ne dépend pas de la norme choisie.</p>
 
 <h2 id="f-exp">3. L'exponentielle de matrice</h2>
@@ -10398,7 +10253,7 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <p><b>Étape 5 : Conclusion.</b> $\cG{(I - A)^{-1} = \sum_{k\geq0}A^k}$. Conséquence : $GL_n$ contient la boule $B(I, 1)$, il est ouvert.</p>
 
 <h2 id="f-pos">5. Familles de réels positifs</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{i\in I}a_i = \sup\Big\{\sum_{i\in J}a_i,\ J\subset I\ \text{fini}\Big\}\in[0, +\infty]$</li><li>$\displaystyle I = \mathbb N:\ \text{c'est la somme de la série}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{i\in I}a_i = \sup\Big\{\sum_{i\in J}a_i,\ J\subset I\ \text{fini}\Big\}\in[0, +\infty]$</li><li>$I = \mathbb N$ : c'est la somme de la série</li></ul></div>
 <p>Pour une famille <b>positive</b>, tout est permis : on peut réordonner, regrouper, intervertir les sommes, et le résultat (fini ou $+\infty$) ne change pas.</p>
 
 <h2 id="f-paq">6. Sommation par paquets</h2>
@@ -10526,11 +10381,6 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 </ul></div></div>
 `,
 "Fonctions vectorielles et arcs paramétrés": R`
-<nav class="msum"><a href="#v-not">Notations</a><a href="#v-der">Dérivation</a><a href="#v-op">Opérations</a><a href="#v-int">Intégration</a><a href="#v-af">Accroissements finis</a><a href="#v-tay">Taylor</a><a href="#v-arc">Arcs paramétrés</a><a href="#v-sing">Points singuliers</a><a href="#v-etude">Étude d'un arc</a><a href="#v-enonce">L'énoncé</a><a href="#v-erreurs">Erreurs</a><a href="#v-entrainement">S'entraîner</a><a href="#v-exos">Exercices</a><a href="#v-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction $\cB f$ et ses coordonnées. <span class="kR">rouge</span> : le point étudié $\cR{t_0}$. <span class="kO">orange</span> : les majorations ($\cO M$, restes). <span class="kV">violet</span> : l'application (bi)linéaire $\cV L$, $\cV B$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="v-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -10541,11 +10391,11 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 </table>
 
 <h2 id="v-der">2. Dérivation</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f(t_0 + h) = f(t_0) + hf'(t_0) + o(h)$</li><li>$\displaystyle f\ \text{dérivable}\iff\text{chaque coordonnée l'est}$</li><li>$\displaystyle f' = 0\ \text{sur un intervalle}\iff f\ \text{constante}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f(t_0 + h) = f(t_0) + hf'(t_0) + o(h)$</li><li>$f$ dérivable $\iff$ chaque coordonnée l'est</li><li>$f' = 0$ sur un intervalle $\iff f$ constante</li></ul></div>
 
 <h2 id="v-op">3. Les opérations</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle (\cV L\circ f)' = \cV L\circ f'\ (\cV L\ \text{linéaire})$</li><li>$\displaystyle \cV B(f, g)' = \cV B(f', g) + \cV B(f, g')\ (\cV B\ \text{bilinéaire})$</li></ul>
-<ul class="sbl"><li>$\displaystyle \langle f, g\rangle' = \langle f', g\rangle + \langle f, g'\rangle$</li><li>$\displaystyle (\|f\|^2)' = 2\langle f, f'\rangle$</li><li>$\displaystyle (fg)' = f'g + fg'\ \text{(matrices, sans commuter)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \langle f, g\rangle' = \langle f', g\rangle + \langle f, g'\rangle$</li><li>$\displaystyle (\|f\|^2)' = 2\langle f, f'\rangle$</li><li>$(fg)' = f'g + fg'$ (matrices, sans commuter)</li></ul>
 <ul class="sbl"><li>$\displaystyle \det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n)$</li><li>$\displaystyle (f\circ\varphi)' = \varphi'\cdot(f'\circ\varphi)$</li></ul></div>
 
 <p class="ml">Exemple 1 : norme constante</p>
@@ -10603,7 +10453,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <p><b>Étape 4 : Conclusion.</b> $\cG{|e^{ix} - 1 - ix|\leq\frac{x^2}2}$ pour tout réel $x$.</p>
 
 <h2 id="v-arc">7. Arcs paramétrés : tangente</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \gamma(t) = (x(t), y(t))$</li><li>$\displaystyle \cR{t_0}\ \textbf{régulier}\ (\gamma'(t_0)\neq0):\ \text{tangente dirigée par}\ \gamma'(t_0) = (x'(t_0), y'(t_0))$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \gamma(t) = (x(t), y(t))$</li><li>$\cR{t_0}$ <b>régulier</b> $(\gamma'(t_0)\neq0)$ : tangente dirigée par $\gamma'(t_0) = (x'(t_0), y'(t_0))$</li></ul>
 <ul class="sbl"><li>$\displaystyle x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}$</li><li>$\displaystyle y'(t_0) = 0,\ x'(t_0)\neq0:\ \text{tangente horizontale}$</li></ul></div>
 
 <p class="ml">Exemple 7 : tangentes horizontales et verticales, point double</p>
@@ -10696,11 +10546,6 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 </ul></div></div>
 `,
 "Probabilités sur un univers fini": R`
-<nav class="msum"><a href="#q-not">Notations</a><a href="#q-esp">Espace probabilisé</a><a href="#q-unif">Équiprobabilité</a><a href="#q-cond">Conditionnement</a><a href="#q-tot">Probabilités totales</a><a href="#q-bayes">Bayes</a><a href="#q-ind">Indépendance</a><a href="#q-va">Variables aléatoires</a><a href="#q-lois">Lois usuelles</a><a href="#q-couple">Couples</a><a href="#q-espe">Espérance</a><a href="#q-var">Variance, covariance</a><a href="#q-ineg">Markov, Bienaymé-Tchebychev</a><a href="#q-enonce">L'énoncé</a><a href="#q-erreurs">Erreurs</a><a href="#q-entrainement">S'entraîner</a><a href="#q-exos">Exercices</a><a href="#q-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les événements $\cB A$, $\cB B$ et les variables $\cB X$, $\cB Y$. <span class="kR">rouge</span> : le système complet ou l'événement par lequel on conditionne. <span class="kO">orange</span> : les probabilités lues sur l'arbre ou dans l'énoncé. <span class="kV">violet</span> : les paramètres ($\cV n$, $\cV p$). <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="q-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -10774,7 +10619,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 
 <h2 id="q-ind">7. Indépendance</h2>
 <div class="sbox">$$A, B\ \text{indépendants}\iff P(A\cap B) = P(A)P(B)\ \ (\iff P_B(A) = P(A)\ \text{si}\ P(B) > 0).$$
-<ul class="sbl"><li>$\displaystyle \text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\in J}P(A_i)\ \text{pour toute partie}\ J$</li><li>$\displaystyle A, B\ \text{indépendants}\Rightarrow A, \overline B\ \text{aussi}$</li></ul></div>
+<ul class="sbl"><li>Mutuellement indépendants $:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\in J}P(A_i)$ pour toute partie $J$</li><li>$\displaystyle A, B\ \text{indépendants}\Rightarrow A, \overline B\ \text{aussi}$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>Indépendants $\neq$ incompatibles : deux événements incompatibles de probabilités non nulles ne sont <b>jamais</b> indépendants. Et deux à deux indépendants ne suffit pas pour mutuellement (exemple 8).</p>
 
@@ -10828,7 +10673,7 @@ $$X, Y\ \text{indépendantes}\iff\forall x, y,\ P(X = x, Y = y) = P(X = x)P(Y = 
 
 <h2 id="q-espe">11. Espérance</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle E(X) = \sum_{x\in X(\Omega)}x\,P(X = x).\qquad\textbf{Transfert}:\ E(f(X)) = \sum_xf(x)\,P(X = x)$</li><li>$\displaystyle E(\mathbb 1_A) = P(A)$</li></ul>
-<ul class="sbl"><li>$\displaystyle \textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}$</li><li>$\displaystyle X\leq Y\Rightarrow E(X)\leq E(Y)$</li><li>$\displaystyle X, Y\ \text{indépendantes}\Rightarrow E(XY) = E(X)E(Y)$</li></ul></div>
+<ul class="sbl"><li><b>Linéarité</b> $:\ E(aX + bY) = aE(X) + bE(Y)$ (sans indépendance)</li><li>$\displaystyle X\leq Y\Rightarrow E(X)\leq E(Y)$</li><li>$\displaystyle X, Y\ \text{indépendantes}\Rightarrow E(XY) = E(X)E(Y)$</li></ul></div>
 <p class="ml">La méthode des indicatrices</p>
 <p>Si $X$ <b>compte</b> quelque chose, on l'écrit $X = \sum_i\mathbb 1_{A_i}$ (une indicatrice par objet), et $E(X) = \sum P(A_i)$, <b>même sans indépendance</b>.</p>
 
@@ -10948,11 +10793,6 @@ $$E(XY) = \frac16\sum_{i\neq j}ij = \frac16(36 - 14) = \frac{22}6 = \frac{11}3.$
 </ul></div></div>
 `,
 "Structures algébriques usuelles": R`
-<nav class="msum"><a href="#g-not">Notations</a><a href="#g-lci">Lois de composition</a><a href="#g-grp">Groupes</a><a href="#g-sg">Sous-groupes</a><a href="#g-morph">Morphismes de groupes</a><a href="#g-ann">Anneaux</a><a href="#g-sa">Sous-anneaux, inversibles</a><a href="#g-corps">Corps</a><a href="#g-enonce">L'énoncé</a><a href="#g-erreurs">Erreurs</a><a href="#g-entrainement">S'entraîner</a><a href="#g-exos">Exercices</a><a href="#g-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les éléments $\cB x$, $\cB y$. <span class="kR">rouge</span> : la partie étudiée $\cR H$ (sous-groupe, sous-anneau). <span class="kO">orange</span> : le neutre et les inverses. <span class="kV">violet</span> : le morphisme $\cV f$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="g-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>Exemples</th></tr>
@@ -11166,11 +11006,6 @@ $$\frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{(a + b\sqrt2)(a - b\sqrt2)} = \frac{a
 </ul></div></div>
 `,
 "Probabilités et variables aléatoires discrètes": R`
-<nav class="msum"><a href="#w-not">Notations</a><a href="#w-esp">Espaces probabilisés</a><a href="#w-tot">Probabilités totales</a><a href="#w-lois">Géométrique, Poisson</a><a href="#w-espe">Espérance</a><a href="#w-var">Variance, covariance</a><a href="#w-gen">Fonctions génératrices</a><a href="#w-somme">Sommes indépendantes</a><a href="#w-lfgn">Loi des grands nombres</a><a href="#w-dens">Lois à densité</a><a href="#w-enonce">L'énoncé</a><a href="#w-erreurs">Erreurs</a><a href="#w-entrainement">S'entraîner</a><a href="#w-exos">Exercices</a><a href="#w-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les variables $\cB X$, $\cB Y$ et les événements. <span class="kR">rouge</span> : le système complet par lequel on conditionne. <span class="kO">orange</span> : les séries qu'on reconnaît (géométrique, exponentielle). <span class="kV">violet</span> : les paramètres $\cV p$, $\cV\lambda$, $\cV n$. <span class="kG">vert</span> : le résultat.</p>
-
 <h2 id="w-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -11233,7 +11068,7 @@ $$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdo
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}}$ : pour $n$ grand et $p$ petit, $\mathcal B(n, p)\approx\mathcal P(np)$.</p>
 
 <h2 id="w-espe">5. Espérance</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle X\ \text{admet une espérance}\iff(x\,P(X = x))_{x\in X(\Omega)}\ \text{est sommable}$</li><li>$\displaystyle E(X) = \sum_xx\,P(X = x)$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$X$ admet une espérance $\iff(x\,P(X = x))_{x\in X(\Omega)}$ est sommable</li><li>$\displaystyle E(X) = \sum_xx\,P(X = x)$</li></ul>
 $$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable, et}\ E(f(X)) = \sum_xf(x)P(X = x).$$
 <ul class="sbl"><li>$\displaystyle X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n)$</li><li>$\displaystyle |X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}$</li></ul></div>
 <p class="ml">Exemple 5 : l'espérance d'une géométrique, deux méthodes</p>
@@ -11398,11 +11233,6 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 </ul></div></div>
 `,
 "Espaces vectoriels et dimension finie": R`
-<nav class="msum"><a href="#k-not">Notations</a><a href="#k-sev">Sous-espaces</a><a href="#k-vect">Vect, génératrices</a><a href="#k-libre">Familles libres</a><a href="#k-somme">Sommes, supplémentaires</a><a href="#k-base">Bases, dimension</a><a href="#k-dimf">Sev en dimension finie</a><a href="#k-rang">Rang d'une famille</a><a href="#k-sfev">Est-ce un ev ?</a><a href="#k-sflibre">Libre : outils</a><a href="#k-sfrang">Trouver le rang</a><a href="#k-sfbase">Est-ce une base ?</a><a href="#k-sfdim">Dimension</a><a href="#k-sfeg">Égalité de sev</a><a href="#k-sfsupp">Supplémentaires</a><a href="#k-enonce">L'énoncé</a><a href="#k-erreurs">Erreurs</a><a href="#k-entrainement">S'entraîner</a><a href="#k-exos">Exercices</a><a href="#k-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les vecteurs $\cB{u_1}, \dots, \cB{u_p}$. <span class="kR">rouge</span> : les sous-espaces $\cR F$, $\cR G$. <span class="kO">orange</span> : les coefficients $\cO{\lambda_i}$ des combinaisons. <span class="kV">violet</span> : les dimensions. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="k-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -11433,7 +11263,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est un sev},\ B\ \text{n'en est pas un}}$ (une contrainte avec second membre non nul n'en est jamais un).</p>
 
 <h2 id="k-vect">3. Vect, familles génératrices</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Vect}(\cB{u_1}, \dots, \cB{u_p}) = \Big\{\sum\cO{\lambda_i}\cB{u_i}\Big\}:\ \text{le plus petit sev contenant les}\ u_i$</li><li>$\displaystyle (u_i)\ \text{génératrice de}\ E\iff\operatorname{Vect}(u_i) = E$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\operatorname{Vect}(\cB{u_1}, \dots, \cB{u_p}) = \Big\{\sum\cO{\lambda_i}\cB{u_i}\Big\}$ : le plus petit sev contenant les $u_i$</li><li>$\displaystyle (u_i)\ \text{génératrice de}\ E\iff\operatorname{Vect}(u_i) = E$</li></ul></div>
 <p>On ne change pas $\operatorname{Vect}$ en ajoutant à un vecteur une combinaison des autres, en multipliant un vecteur par $\lambda\neq0$, ou en retirant un vecteur combinaison des autres.</p>
 <p class="ml">Exemple 3 : appartenir à un Vect</p>
 <p>$w = (1, 2, 3)\in\operatorname{Vect}\big((1, 1, 1), (0, 1, 2)\big)$ ?</p>
@@ -11472,7 +11302,7 @@ $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\
 <p><b>Étape 4 : Conclusion.</b> Contradiction : $\cG{(P_0, \dots, P_n)\ \text{est libre}}$, et c'est une base de $\mathbb K_n[X]$ (§6).</p>
 
 <h2 id="k-somme">5. Somme, somme directe, supplémentaires</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle F + G = \{x + y,\ x\in F,\ y\in G\}$</li><li>$\displaystyle F\oplus G\ \text{(directe)}\iff F\cap G = \{0\}\iff\text{décomposition unique}$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle F + G = \{x + y,\ x\in F,\ y\in G\}$</li><li>$F\oplus G$ (directe) $\iff F\cap G = \{0\}\iff$ décomposition unique</li></ul>
 $$F\ \text{et}\ G\ \text{supplémentaires}:\ E = F\oplus G\iff\forall x\in E,\ \exists!(x_F, x_G)\in F\times G,\ x = x_F + x_G.$$</div>
 <p class="ml">La méthode analyse-synthèse</p>
 <p><b>Analyse</b> : si $x = x_F + x_G$, on trouve des formules pour $x_F$, $x_G$ (donc unicité). <b>Synthèse</b> : on vérifie que ces formules marchent (donc existence).</p>
@@ -11853,11 +11683,6 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 </ul></div></div>
 `,
 "Applications linéaires": R`
-<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-constr">Construire</a><a href="#l-nkim">Noyau, image : outils</a><a href="#l-proj2">Projecteurs, annulateurs</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : les vecteurs $\cB x$ et leurs images. <span class="kR">rouge</span> : le noyau $\cR{\ker f}$. <span class="kO">orange</span> : l'image $\cO{\operatorname{Im}f}$. <span class="kV">violet</span> : les dimensions et le rang. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="l-not">1. Les notations du programme</h2>
 <table class="mtab">
 <tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
@@ -11905,7 +11730,7 @@ $$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 
 <p><b>Étape 4 : Conclusion.</b> $\cG{D\ \text{surjective, non injective}}$ : c'est possible car $\mathbb K[X]$ est de dimension infinie.</p>
 
 <h2 id="l-iso">4. Isomorphismes, image d'une base</h2>
-<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{est déterminée par les images}\ f(e_1), \dots, f(e_n)\ \text{d'une base}$</li><li>$\displaystyle f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F$</li></ul>
+<div class="sbox"><ul class="sbl"><li>$f$ est déterminée par les images $f(e_1), \dots, f(e_n)$ d'une base</li><li>$\displaystyle f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F$</li></ul>
 $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
 <p class="ml">Exemple 5 : l'interpolation de Lagrange</p>
 <p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$. <b>Montrer que $\varphi$ est un isomorphisme.</b></p>
@@ -12183,11 +12008,6 @@ $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\q
 </ul></div></div>
 `,
 "Fonctions convexes": R`
-<nav class="msum"><a href="#x-def">Définition</a><a href="#x-jensen">Jensen</a><a href="#x-pentes">Pentes</a><a href="#x-der">Avec les dérivées</a><a href="#x-usu">Fonctions usuelles</a><a href="#x-ineg">Inégalités classiques</a><a href="#x-enonce">L'énoncé</a><a href="#x-erreurs">Erreurs</a><a href="#x-entrainement">S'entraîner</a><a href="#x-exos">Exercices</a><a href="#x-arbre">L'arbre</a></nav>
-
-<p class="ml">Le code couleur de toute la fiche</p>
-<p><span class="kB">bleu</span> : la fonction $\cB f$ et sa courbe. <span class="kR">rouge</span> : les cordes. <span class="kO">orange</span> : les tangentes. <span class="kV">violet</span> : les poids $\cV{\lambda_i}$. <span class="kG">vert</span> : la conclusion.</p>
-
 <h2 id="x-def">1. Définition</h2>
 <div class="sbox">$$\cB f\ \text{convexe sur}\ I\iff\forall x, y\in I,\ \forall\cV\lambda\in[0, 1],\ f(\cV\lambda x + (1 - \cV\lambda)y)\leq\cV\lambda f(x) + (1 - \cV\lambda)f(y).$$</div>
 <p>Géométriquement : la courbe est <b>sous chaque corde</b>. $f$ est concave si $-f$ est convexe (courbe au-dessus des cordes). Une fonction affine est les deux.</p>
