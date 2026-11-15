@@ -396,7 +396,7 @@ function subjectPage(id) {
         if (id !== "maths") return `<div class="chaptiles stagger">${list.map(tile).join("")}</div>`;
         const G = ["Fondamentaux", "Algèbre", "Analyse", "Probabilités"], gr = {};
         list.forEach((c, i) => { const g = domOf(c.t); (gr[g] = gr[g] || []).push(tile(c, i)); });
-        return G.filter(g => gr[g]).map(g => `<section class="dom"><h2 class="domh">${g}<span>${gr[g].length} chapitre${gr[g].length > 1 ? "s" : ""}</span></h2><div class="chaptiles stagger">${gr[g].join("")}</div></section>`).join(""); })();
+        return G.filter(g => gr[g]).map(g => `<section class="dom cbox"><h2 class="cbt"><span>${g}</span><span>${gr[g].length} chapitre${gr[g].length > 1 ? "s" : ""}</span></h2><div class="chaptiles stagger">${gr[g].join("")}</div></section>`).join(""); })();
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
@@ -1678,7 +1678,7 @@ function mtabCards(app) {
       [...el.children].forEach(d => { const b = d.querySelector(":scope > b"), sp = d.querySelector(":scope > span");
         if (b) items.push({ k: b.innerHTML, v: sp ? [{ l: "", h: sp.innerHTML }] : [] }); });
     }
-    if (items.length) blocks.push({ el, items });
+    if (items.length) blocks.push({ el, items, nota: el.tagName === "TABLE" && /^(Notation|Symbole)/.test(el.querySelector("tr").children[1] ? el.querySelector("tr").children[1].textContent.trim() : "") || el.tagName === "TABLE" && /^(Notation|Symbole)/.test(el.querySelector("tr").children[0].textContent.trim()) });
   });
   const tlen = h => { const d = document.createElement("div"); d.innerHTML = h; return d.textContent.replace(/\\[a-zA-Z]+|[{}$^_]/g, "").length; };
   const ORDER = [9, 7, 5, 3, 1];
@@ -1688,10 +1688,11 @@ function mtabCards(app) {
   for (const ch of (EXT || "")) off = (off * 31 + ch.charCodeAt(0)) % 997;
   blocks.forEach((b, i) => {
     let m = 1;
-    for (let j = 0; j < 5; j++) { const c = ORDER[(off + i + j) % 5]; if (c !== prev && fits(c, b.items)) { m = c; break; } }
+    if (b.nota) { m = 9; } else for (let j = 0; j < 5; j++) { const c = ORDER[(off + i + j) % 5]; if (c !== prev && fits(c, b.items)) { m = c; break; } }
     prev = m;
     const vals = x => x.v.map(f => `<div class="fm-v">${f.l ? `<span class="fm-l">${f.l}</span>` : ""}<div>${f.h}</div></div>`).join("");
     const box = document.createElement("div"); box.className = "fm fm" + m;
+    if (b.nota) box.classList.add("fmc");
     if (m === 1) box.innerHTML = b.items.map(x => `<div class="fm-r"><div class="fm-k">${x.k}</div><div class="fm-c">${vals(x)}</div></div>`).join("");
     else if (m === 3) box.innerHTML = b.items.map(x => `<div class="fm-r"><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("");
     else if (m === 5) box.innerHTML = b.items.map(x => `<div class="fm-r"><span class="fm-k">${x.k}</span><span class="fm-d"></span><span class="fm-c">${x.v.length ? x.v[0].h : ""}</span></div>`).join("");
@@ -1704,7 +1705,7 @@ function mtabCards(app) {
       let ttl = "", pm = b.el.previousElementSibling;
       if (pm && pm.matches("p.ml")) { ttl = pm.innerHTML; pm.remove(); }
       else { let h = b.el.previousElementSibling; while (h && h.tagName !== "H2") h = h.previousElementSibling; ttl = h ? h.innerHTML.replace(/^\s*\d+\.\s*/, "") : "À retenir"; }
-      box.innerHTML = `<div class="fm-t">${ttl}</div><div class="fm-g">${b.items.map(x => `<div class="fm-r${x.v.reduce((a, f) => a + tlen(f.h), 0) > 80 ? " wide" : ""}"><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("")}</div>`;
+      box.innerHTML = b.nota ? `<div class="fm-t">${ttl}</div><div class="fm-g">${b.items.map(x => `<div class="fm-r"><div class="fm-k">${x.k}</div>${x.v.map((f, q) => `<div class="${q ? "fm-x" : "fm-s"}">${f.h}</div>`).join("")}</div>`).join("")}</div>` : `<div class="fm-t">${ttl}</div><div class="fm-g">${b.items.map(x => `<div class="fm-r${x.v.reduce((a, f) => a + tlen(f.h), 0) > 80 ? " wide" : ""}"><div class="fm-k">${x.k}</div>${vals(x)}</div>`).join("")}</div>`;
     }
     b.el.replaceWith(box);
   });
