@@ -4,6 +4,10 @@ LEMME.EXMETH = {
   String.raw`$a_{i,j}$ : d'abord la ligne $i$, puis la colonne $j$.`,
   String.raw`Même taille, puis on additionne case par case.`,
   String.raw`Séparer la diagonale du reste, vérifier qu'ils commutent, puis binôme de Newton.`,
+  String.raw`Pivot de Gauss, puis remontée.`,
+  String.raw`Pivot, une inconnue paramètre : $\dim = p - \operatorname{rg}$.`,
+  String.raw`Une ligne $0 = c$ : aucune solution.`,
+  String.raw`Additionner, soustraire, traiter les valeurs critiques à part.`,
   String.raw`Utiliser $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ pour obtenir une contradiction.`,
   String.raw`Image de chaque vecteur de la base de départ, écrite en colonne dans la base d'arrivée.`,
   String.raw`Calculer $f$ sur chaque vecteur de la base, puis ranger les coordonnées en colonnes.`,
@@ -503,5 +507,52 @@ LEMME.EXMETH = {
   String.raw`$P(M > n) = (q_1q_2)^n$.`,
   String.raw`Intervertir les sommes (positivité).`,
   String.raw`$\frac{G(1) + G(-1)}2$.`
+],
+"Espaces vectoriels et dimension finie": [
+  String.raw`Paramétrer, écrire comme Vect.`,
+  String.raw`$0$ dans l'ensemble ? stabilité.`,
+  String.raw`Résoudre $w = au + bv$.`,
+  String.raw`Système homogène $\sum\lambda_iu_i = 0$.`,
+  String.raw`Évaluer en $0$ et $\frac\pi2$.`,
+  String.raw`Plus grand degré présent.`,
+  String.raw`Analyse-synthèse : $\frac{f(x)\pm f(-x)}2$.`,
+  String.raw`Intersection nulle et dimensions.`,
+  String.raw`Degrés échelonnés, puis développer $((X - 1) + 1)^2$.`,
+  String.raw`Grassmann.`,
+  String.raw`Repérer une relation, vérifier la liberté du reste.`
+],
+"Espaces vectoriels et dimension finie (exercices)": [
+  String.raw`Évaluer en $0$, $\frac\pi2$, $\pi$.`,
+  String.raw`$P = (X - 1)Q$, degrés échelonnés.`
+],
+"Applications linéaires": [
+  String.raw`Vérifier $\varphi(\lambda P + Q)$.`,
+  String.raw`Contre-exemple $f(2u)\neq2f(u)$.`,
+  String.raw`Résoudre $f = 0$ ; Vect des $f(e_i)$.`,
+  String.raw`Noyau : constantes ; surjective par primitive.`,
+  String.raw`Même dimension : noyau nul.`,
+  String.raw`$x = x_P + \lambda(1, 0, 0)$, imposer $x_P\in P$.`,
+  String.raw`$M^2 = M$, puis colonnes et noyau.`,
+  String.raw`Noyau nul par les degrés.`,
+  String.raw`Théorème du rang + intersection.`,
+  String.raw`Forme linéaire non nulle.`,
+  String.raw`Isoler $\operatorname{id}$, factoriser par $f$.`
+],
+"Applications linéaires (exercices)": [
+  String.raw`Revenir aux définitions.`,
+  String.raw`$\operatorname{Im}g\subset\ker f$, théorème du rang.`
+],
+"Fonctions convexes": [
+  String.raw`$\ln$ concave, Jensen.`,
+  String.raw`$x^2$ convexe, Jensen.`,
+  String.raw`Tangente en $0$ d'une convexe.`,
+  String.raw`Tangente en $0$ d'une concave.`,
+  String.raw`Corde d'une concave.`,
+  String.raw`$\ln$ concave avec $\lambda = \frac1p$.`,
+  String.raw`$x^p$ convexe, $\lambda = \frac12$.`
+],
+"Fonctions convexes (exercices)": [
+  String.raw`Lemme des pentes.`,
+  String.raw`Normaliser, Young terme à terme.`
 ]
 };

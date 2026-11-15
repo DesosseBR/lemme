@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD), rangfam: mlRangFam, kerim: mlKerIm, quizev: h => mlQuiz(h, QEV), quizal: h => mlQuiz(h, QAL), cordes: mlCordes, quizcvx: h => mlQuiz(h, QCVX) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2358,7 +2358,7 @@ function mlAriGeo(host) {
     const om = fadd(Fr(1), Fr(-a.n, a.d)), l = fdiv(Fr(b), om), v0 = fadd(Fr(u0), Fr(-l.n, l.d)), s = [];
     s.push(`$$u_0 = ${u0},\\qquad u_{n+1} = ${fsum([[a, "u_n"], [b, ""]])}$$`);
     s.push(`<p class="mlstep">1. Rappel : on cherche le point fixe $\\ell = a\\ell + b$, puis $v_n = u_n - \\ell$ est géométrique de raison $a$.</p>`);
-    s.push(`<p class="mlstep">2. Le point fixe :</p>$$\\ell = ${fsum([[a, "\\ell"], [b, ""]])}\\iff${fsum([[om, "\\ell"]])} = ${b}\\iff\\cR{\\ell = ${ftex(l)}}$$`);
+    s.push(`<p class="mlstep">2. Le point fixe :</p>$$\\ell = ${fsum([[a, "\\ell"], [b, ""]])}\\iff ${fsum([[om, "\\ell"]])} = ${b}\\iff\\cR{\\ell = ${ftex(l)}}$$`);
     s.push(`<p class="mlstep">3. On soustrait $\\ell = ${fsum([[a, "\\ell"], [b, ""]])}$ à la relation : les $${b}$ disparaissent.</p>$$u_{n+1} - \\ell = ${fsum([[a, "(u_n - \\ell)"]])},\\qquad v_{n+1} = ${fsum([[a, "v_n"]])}$$`);
     s.push(`<p class="mlstep">4. $v_0 = u_0 - \\ell = ${u0} - ${fpar(l)} = ${ftex(v0)}$, donc :</p>$$v_n = ${csum([ctp(v0, apow(a))])}$$`);
     const lim = v0.n === 0 ? `la suite est constante, égale à $${ftex(l)}$` : Math.abs(a.n) < a.d ? `$|a| \\lt 1$, donc $${apow(a)}\\to0$ et $\\cG{u_n\\to${ftex(l)}}$` : a.n > 0 ? `$a > 1$ et $v_0 ${v0.n > 0 ? ">" : "\\lt"} 0$, donc $\\cG{u_n\\to${v0.n > 0 ? "+" : "-"}\\infty}$` : `$a \\lt -1$ : $v_n$ change de signe et $|v_n|\\to+\\infty$, $\\cG{(u_n)\\ \\text{n'a pas de limite}}$`;
@@ -2553,7 +2553,7 @@ function mlArcVal(host) {
     if (e.k === 0) {
       const { a, g, p, q } = e, r = ftex(Fr(p, q)), [A, T, I] = AR[a], G = AR[g][1];
       s.push(`$$\\text{Calculer}\\ ${G}\\Big(${A}\\Big(${r}\\Big)\\Big)$$`);
-      s.push(`<p class="mlstep">1. Rappel : $\\theta = ${A}\\,x\\iff${T}\\theta = x\\ \\text{et}\\ \\theta\\in${I}$.</p>`);
+      s.push(`<p class="mlstep">1. Rappel : $\\theta = ${A}\\,x\\iff ${T}\\theta = x\\ \\text{et}\\ \\theta\\in${I}$.</p>`);
       s.push(`<p class="mlstep">2. On pose $\\theta = ${A}\\big(${r}\\big)$ : $${T}\\theta = ${r}$ et $\\cR{\\theta\\in${I}}$.</p>`);
       let res, idt, sgn;
       if (a === "t") { const N = q * q + p * p, { s: sq, m } = sqf(N); idt = `$$\\cos^2\\theta = \\frac1{1 + \\tan^2\\theta} = \\frac1{1 + ${fpar(Fr(p * p, q * q))}} = \\frac{${q * q}}{${N}}$$`; sgn = `Sur $\\cR{]-\\frac\\pi2, \\frac\\pi2[}$, $\\cO{\\cos\\theta > 0}$ : $\\cos\\theta = \\frac{${q}}{\\sqrt{${N}}}$.`; res = g === "c" ? surd2(q, sq * m, m) : surd2(p, sq * m, m); if (g === "s") sgn += ` Puis $\\sin\\theta = \\tan\\theta\\cos\\theta = ${r}\\times\\frac{${q}}{\\sqrt{${N}}}$.`; }
@@ -2960,6 +2960,91 @@ const QPD = [
   ["Toute variable discrète admet une espérance.", false, "Faux : $P(X = n) = \\frac1{n(n + 1)}$ donne $\\sum nP(X = n) = +\\infty$."],
   ["La somme de deux Poisson indépendantes est une Poisson.", true, "Vrai : $\\mathcal P(\\lambda) + \\mathcal P(\\mu) = \\mathcal P(\\lambda + \\mu)$."],
   ["La loi géométrique est sans mémoire.", true, "Vrai : $P_{(X > n)}(X > n + k) = P(X > k)$."]
+];
+/* EV / AL : générateur de matrices 3x3 de rang donné */
+const genRank = () => { const r = [1, 2, 2, 2, 3][rnd(0, 4)], R = () => [rnd(-2, 2), rnd(-2, 2), rnd(-2, 2)], cr = (u, v) => [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]], nz = v => v.some(x => x);
+  let r1, r2, r3, a = 0, b = 0;
+  if (r === 3) { do { r1 = R(); r2 = R(); r3 = R(); } while (cr(r1, r2)[0] * r3[0] + cr(r1, r2)[1] * r3[1] + cr(r1, r2)[2] * r3[2] === 0); }
+  else if (r === 2) { do { r1 = R(); r2 = R(); } while (!nz(cr(r1, r2))); a = rnd(-1, 2); b = rnd(-1, 2); if (!a && !b) a = 1; r3 = r1.map((x, i) => a * x + b * r2[i]); }
+  else { do { r1 = R(); } while (!nz(r1)); a = rnd(-2, 2); b = rnd(-2, 2); r2 = r1.map(x => a * x); r3 = r1.map(x => b * x); }
+  return { r, M: [r1, r2, r3], a, b, cr };
+};
+const vt = v => `(${v.join(", ")})`, red = v => { const g = v.reduce((s, x) => gcdi(s, Math.abs(x)), 0) || 1; let w = v.map(x => x / g); if (w.find(x => x) < 0) w = w.map(x => -x); return w; };
+function mlRangFam(host) {
+  const build = ({ r, M, a, b, cr }) => {
+    const [u1, u2, u3] = M, s = [`$$u_1 = ${vt(u1)},\\quad u_2 = ${vt(u2)},\\quad u_3 = ${vt(u3)}$$`];
+    s.push(`<p class="mlstep">1. Rappel : $\\operatorname{rg} = \\dim\\operatorname{Vect}$. Libre $\\iff$ rang $= 3$. On cherche des relations de dépendance.</p>`);
+    if (r === 3) { const d = u1[0] * (u2[1] * u3[2] - u2[2] * u3[1]) - u1[1] * (u2[0] * u3[2] - u2[2] * u3[0]) + u1[2] * (u2[0] * u3[1] - u2[1] * u3[0]); s.push(`<p class="mlstep">2. Le déterminant des trois vecteurs (règle de Sarrus) vaut $${d}\\neq0$ : aucune relation.</p>`); s.push(`<p class="mlstep">3. Conclusion :</p>$$\\cG{\\operatorname{rg} = 3,\\ \\text{famille libre, base de}\\ \\mathbb R^3}$$`); }
+    else if (r === 2) { s.push(`<p class="mlstep">2. $u_1$ et $u_2$ ne sont pas colinéaires (produit vectoriel $${vt(cr(u1, u2))}\\neq0$).</p>`); s.push(`<p class="mlstep">3. Une relation : $u_3 = ${csum([ctp(a, "u_1"), ctp(b, "u_2")])}$ (vérifie coordonnée par coordonnée).</p>`); s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{\\operatorname{rg} = 2,\\ \\text{famille liée, elle engendre un plan}}$$`); }
+    else { s.push(`<p class="mlstep">2. Des relations : $u_2 = ${csum([ctp(a, "u_1")])}$ et $u_3 = ${csum([ctp(b, "u_1")])}$.</p>`); s.push(`<p class="mlstep">3. Conclusion :</p>$$\\cG{\\operatorname{rg} = 1,\\ \\text{tout est sur la droite}\\ \\mathbb R\\,${vt(u1)}}$$`); }
+    return s;
+  };
+  stepLab(host, "Rang d'une famille de trois vecteurs", genRank, build);
+}
+function mlKerIm(host) {
+  const build = ({ r, M, a, b, cr }) => {
+    const mx = `\\begin{pmatrix}${M.map(x => x.join("&")).join("\\\\")}\\end{pmatrix}`, s = [`$$A = ${mx},\\qquad f(X) = AX$$`];
+    s.push(`<p class="mlstep">1. Rappel : $\\ker f$ = solutions de $AX = 0$ ; $\\operatorname{Im}f$ = Vect des colonnes ; $3 = \\dim\\ker f + \\operatorname{rg}f$.</p>`);
+    const eq = row => fsum([[row[0], "x"], [row[1], "y"], [row[2], "z"]]);
+    if (r === 3) { s.push(`<p class="mlstep">2. Les lignes sont indépendantes ($\\det A\\neq0$) : le seul vecteur solution de $AX = 0$ est $0$.</p>`); s.push(`<p class="mlstep">3. Conclusion :</p>$$\\cG{\\ker f = \\{0\\},\\ \\operatorname{Im}f = \\mathbb R^3,\\ \\operatorname{rg}f = 3}$$`); }
+    else if (r === 2) { const u = red(cr(M[0], M[1])), n = red([a, b, -1]);
+      s.push(`<p class="mlstep">2. Une relation entre les lignes : $L_3 = ${csum([ctp(a, "L_1"), ctp(b, "L_2")])}$. Le système $AX = 0$ se réduit à :</p>$$\\left\\{\\begin{aligned}${eq(M[0])} &= 0\\\\${eq(M[1])} &= 0\\end{aligned}\\right.$$`);
+      s.push(`<p class="mlstep">3. Le noyau : une droite, dirigée par $\\cR{u = ${vt(u)}}$ (contrôle : $Au = 0$).</p>`);
+      s.push(`<p class="mlstep">4. L'image : $\\operatorname{rg}f = 3 - 1 = 2$, un plan. La relation $L_3 = ${csum([ctp(a, "L_1"), ctp(b, "L_2")])}$ donne son équation : $Y = (Y_1, Y_2, Y_3)\\in\\operatorname{Im}f\\iff ${csum([ctp(n[0], "Y_1"), ctp(n[1], "Y_2"), ctp(n[2], "Y_3")])} = 0$.</p>`);
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{\\ker f = \\mathbb R\\,${vt(u)},\\quad\\operatorname{Im}f:\\ ${csum([ctp(n[0], "Y_1"), ctp(n[1], "Y_2"), ctp(n[2], "Y_3")])} = 0}$$`); }
+    else { const c = red([1, a, b]);
+      s.push(`<p class="mlstep">2. Toutes les lignes sont proportionnelles à $L_1$ : $AX = 0\\iff ${eq(M[0])} = 0$, un plan.</p>`);
+      s.push(`<p class="mlstep">3. L'image : chaque colonne est proportionnelle à $${vt(c)}$, donc $\\operatorname{rg}f = 1 = 3 - 2$.</p>`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{\\ker f:\\ ${eq(M[0])} = 0,\\quad\\operatorname{Im}f = \\mathbb R\\,${vt(c)}}$$`); }
+    return s;
+  };
+  stepLab(host, "Noyau et image d'une matrice $3\\times3$", genRank, build);
+}
+const QEV = [
+  ["$\\{(x, y),\\ x + y = 1\\}$ est un sous-espace vectoriel de $\\mathbb R^2$.", false, "Faux : $(0, 0)$ n'y est pas."],
+  ["Trois vecteurs deux à deux non colinéaires forment une famille libre.", false, "Faux : $(1, 0), (0, 1), (1, 1)$."],
+  ["Dans $\\mathbb R^3$, trois vecteurs libres forment une base.", true, "Vrai : $3$ vecteurs libres en dimension $3$."],
+  ["$\\dim\\mathbb R_n[X] = n$.", false, "Faux : $n + 1$ (base $1, X, \\dots, X^n$)."],
+  ["Deux plans de $\\mathbb R^3$ ont toujours une droite en commun.", true, "Vrai : Grassmann donne $\\dim(P_1\\cap P_2)\\geq1$."],
+  ["La réunion de deux sous-espaces est un sous-espace.", false, "Faux, sauf si l'un contient l'autre."]
+];
+const QAL = [
+  ["Pour tout $f\\in\\mathcal L(E)$ en dimension finie, $E = \\ker f\\oplus\\operatorname{Im}f$.", false, "Faux : $f(x, y) = (y, 0)$ a $\\ker f = \\operatorname{Im}f$."],
+  ["Un endomorphisme injectif d'un espace de dimension finie est bijectif.", true, "Vrai : théorème du rang."],
+  ["$P\\mapsto P'$ est injective sur $\\mathbb K[X]$.", false, "Faux : les constantes sont dans le noyau."],
+  ["Si $p^2 = p$, alors $E = \\ker p\\oplus\\operatorname{Im}p$.", true, "Vrai : $x = (x - p(x)) + p(x)$."],
+  ["$f\\circ g = 0\\iff\\operatorname{Im}g\\subset\\ker f$.", true, "Vrai : $f(g(x)) = 0$ pour tout $x$."],
+  ["Un hyperplan de $\\mathbb R^4$ est de dimension $3$.", true, "Vrai : noyau d'une forme non nulle, $4 - 1$."]
+];
+/* Convexité : cordes et tangentes */
+function mlCordes(host) {
+  const F = [
+    { t: "e^x", f: Math.exp, d: Math.exp, r: [-2, 2], k: "convexe" },
+    { t: "x^2", f: x => x * x, d: x => 2 * x, r: [-2, 2], k: "convexe" },
+    { t: "\\ln x", f: Math.log, d: x => 1 / x, r: [0.2, 4], k: "concave" },
+    { t: "\\sin x", f: Math.sin, d: Math.cos, r: [0, Math.PI], k: "concave" },
+    { t: "x^3", f: x => x ** 3, d: x => 3 * x * x, r: [-1.5, 1.5], k: "ni l'un ni l'autre sur cet intervalle" }
+  ];
+  let fi = 0, ua = 0.2, ub = 0.85, lam = 0.5;
+  const draw = () => {
+    const g = F[fi], [r0, r1] = g.r, a = r0 + (r1 - r0) * ua, b = r0 + (r1 - r0) * ub, xl = lam * a + (1 - lam) * b, ys = []; for (let i = 0; i <= 200; i++) ys.push(g.f(r0 + (r1 - r0) * i / 200));
+    const y0 = Math.min(...ys), y1 = Math.max(...ys), pad = 0.15 * (y1 - y0);
+    const chord = (X, Y) => { const ga = g.f(a), gb = g.f(b), ta = x => g.f(a) + g.d(a) * (x - a); return `<line x1="${X(a)}" y1="${Y(ga)}" x2="${X(b)}" y2="${Y(gb)}" stroke="#D4503B" stroke-width="2"/><line x1="${X(r0)}" y1="${Y(ta(r0))}" x2="${X(r1)}" y2="${Y(ta(r1))}" stroke="#C27C00" stroke-dasharray="5 4"/><circle cx="${X(xl)}" cy="${Y(g.f(xl))}" r="4.5" fill="#2B5BD7"/><circle cx="${X(xl)}" cy="${Y(lam * ga + (1 - lam) * gb)}" r="4.5" fill="#D4503B"/>`; };
+    const lhs = g.f(xl), rhs = lam * g.f(a) + (1 - lam) * g.f(b), cm = v => v.toFixed(3).replace(".", "{,}");
+    host.innerHTML = `<p class="mlt">Corde au-dessus, tangente en dessous</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div></div><div class="rmctl"><label class="rmn">$a$ <input type="range" min="0" max="1" step="0.01" value="${ua}" data-a aria-label="a"></label><label class="rmn">$b$ <input type="range" min="0" max="1" step="0.01" value="${ub}" data-b aria-label="b"></label><label class="rmn">$\\lambda = ${lam.toFixed(2).replace(".", "{,}")}$ <input type="range" min="0" max="1" step="0.01" value="${lam}" data-l aria-label="lambda"></label></div>${plotSvg([{ f: g.f, c: "#2B5BD7", w: 2.5 }], r0, r1, y0 - pad, y1 + pad, chord)}<p class="mlcalc">$$f(\\lambda a + (1 - \\lambda)b) = ${cm(lhs)}\\quad${lhs <= rhs + 1e-12 ? "\\leq" : "\\gt"}\\quad\\lambda f(a) + (1 - \\lambda)f(b) = ${cm(rhs)}$$</p><p class="mlnote">En rouge la corde entre $a$ et $b$, en orange pointillé la tangente en $a$. $${g.t}$ est ${g.k}. Point bleu : la courbe ; point rouge : la corde, au même abscisse.</p>`;
+    $$("[data-f]", host).forEach(btn => btn.addEventListener("click", () => { fi = +btn.dataset.f; draw(); }));
+    [["a", v => ua = v], ["b", v => ub = v], ["l", v => lam = v]].forEach(([k, set]) => $(`[data-${k}]`, host).addEventListener("input", e => { set(+e.target.value); draw(); $(`[data-${k}]`, host).focus(); }));
+    typeset(host);
+  };
+  draw();
+}
+const QCVX = [
+  ["Une fonction convexe est au-dessus de ses cordes.", false, "Faux : en dessous de ses cordes, au-dessus de ses tangentes."],
+  ["$\\ln$ est concave sur $]0, +\\infty[$.", true, "Vrai : $\\ln'' = -\\frac1{x^2} \\lt 0$."],
+  ["$e^x\\geq1 + x$ pour tout réel $x$.", true, "Vrai : tangente en $0$ d'une fonction convexe."],
+  ["$\\sin$ est concave sur $\\mathbb R$.", false, "Faux : seulement sur $[0, \\pi]$ (modulo $2\\pi$)."],
+  ["Une fonction convexe et majorée sur $\\mathbb R$ est constante.", true, "Vrai : lemme des pentes."],
+  ["Si $f$ est convexe et $g$ convexe, $g\\circ f$ est convexe.", false, "Faux en général : il faut $g$ croissante."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

@@ -2,7 +2,7 @@
    Blocs : Réflexe (quand on voit quoi), Méthode (étapes), Exemple, Piège. Les data-mlab sont les labos interactifs. */
 LEMME.METHODES = {
 "Matrices et systèmes linéaires": R`
-<nav class="msum"><a href="#m-taille">Taille</a><a href="#m-somme">Somme</a><a href="#m-produit">Produit</a><a href="#m-regles">Règles de calcul</a><a href="#m-puiss">Puissances</a><a href="#m-nilp">Nilpotentes</a><a href="#m-transp">Transposée</a><a href="#m-inv">Inverse</a><a href="#m-sys">Systèmes</a><a href="#m-trace">Trace</a><a href="#m-al">Applications linéaires</a><a href="#m-compo">Composer</a><a href="#m-passage">Passage</a><a href="#m-chgt">Changement de base</a><a href="#m-an">Calculer $A^n$</a><a href="#m-blocs">Blocs</a><a href="#m-arbre">L'arbre</a><a href="#m-reflexes">Réflexes</a><a href="#m-erreurs">Erreurs</a><a href="#m-entrainement">S'entraîner</a></nav>
+<nav class="msum"><a href="#m-taille">Taille</a><a href="#m-somme">Somme</a><a href="#m-produit">Produit</a><a href="#m-regles">Règles de calcul</a><a href="#m-puiss">Puissances</a><a href="#m-nilp">Nilpotentes</a><a href="#m-transp">Transposée</a><a href="#m-inv">Inverse</a><a href="#m-sys">Systèmes</a><a href="#m-gauss">Pivot de Gauss</a><a href="#m-trace">Trace</a><a href="#m-al">Applications linéaires</a><a href="#m-compo">Composer</a><a href="#m-passage">Passage</a><a href="#m-chgt">Changement de base</a><a href="#m-an">Calculer $A^n$</a><a href="#m-blocs">Blocs</a><a href="#m-arbre">L'arbre</a><a href="#m-reflexes">Réflexes</a><a href="#m-erreurs">Erreurs</a><a href="#m-entrainement">S'entraîner</a></nav>
 
 <h2 id="m-taille">1. Taille et notations</h2>
 <div class="sbox">$$A = (a_{i,j})_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant p}}\in\mathcal M_{n,p}(\mathbb K)\iff A\ \text{a}\ n\ \text{lignes et}\ p\ \text{colonnes}.$$</div>
@@ -200,6 +200,45 @@ $$\left\{\begin{aligned}\cB2x + \cR3y - \cG1z&= \cO1\\\cB1x + \cR0y + \cG4z&= \c
 <p>Chaque opération sur les lignes revient à multiplier <b>à gauche</b> par une matrice inversible :</p>
 $$L_i\leftarrow L_i + \lambda L_j\iff A\mapsto(I_n + \lambda E_{i,j})A,\qquad L_i\leftrightarrow L_j\iff A\mapsto P_{i,j}A.$$
 <p>Le pivot de Gauss ne change donc pas l'ensemble des solutions.</p>
+
+<h2 id="m-gauss">9 bis. Résoudre un système : la méthode complète</h2>
+<div class="sbox">$$(S):\ AX = B,\ A\in\mathcal M_{n,p}.\qquad\text{Système homogène}\ (H):\ AX = 0.\qquad\text{Si}\ X_0\ \text{est une solution}:\ \mathcal S = X_0 + \mathcal S_H,\quad\dim\mathcal S_H = p - \operatorname{rg}A.$$
+$$\textbf{Cramer}\ (n = p,\ A\ \text{inversible}):\ \text{une seule solution}.\qquad\textbf{Compatible}\iff\operatorname{rg}A = \operatorname{rg}(A\mid B).$$</div>
+<p class="ml">Le pivot de Gauss en quatre temps</p>
+<p><b>1.</b> Choisir un pivot non nul (de préférence $1$) dans la première colonne, le mettre en ligne $1$. <b>2.</b> Éliminer l'inconnue dans les lignes suivantes : $L_i\leftarrow L_i - \frac{a_{i1}}{a_{11}}L_1$. <b>3.</b> Recommencer sur le sous-système, jusqu'à une forme <b>échelonnée</b>. <b>4.</b> Lire : une ligne « $0 = c$ » avec $c\neq0$ : pas de solution ; sinon on remonte, les inconnues non principales servent de <b>paramètres</b>.</p>
+<p class="ml piege">Piège</p>
+<p>Ne jamais faire deux opérations « en même temps » qui utilisent chacune la ligne modifiée par l'autre ($L_1\leftarrow L_1 - L_2$ et $L_2\leftarrow L_2 - L_1$) : on perd de l'information.</p>
+
+<p class="ml">Exemple : un système de Cramer</p>
+$$\left\{\begin{aligned}x + y + z &= 6\\x - y + 2z &= 5\\2x + y - z &= 1\end{aligned}\right.$$
+<p><b>Étape 1 : Rappel.</b> Pivot de Gauss, puis remontée.</p>
+<p><b>Étape 2 : On élimine $x$</b> avec $L_2\leftarrow L_2 - L_1$ et $L_3\leftarrow L_3 - 2L_1$ :</p>
+$$\left\{\begin{aligned}x + y + z &= 6\\-2y + z &= -1\\-y - 3z &= -11\end{aligned}\right.$$
+<p><b>Étape 3 : On élimine $y$</b> avec $L_3\leftarrow2L_3 - L_2$ : $-6z - z = -22 + 1$, soit $-7z = -21$.</p>
+<p><b>Étape 4 : On remonte.</b> $z = 3$ ; puis $-2y + 3 = -1$, $y = 2$ ; puis $x = 6 - 2 - 3 = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{(1, 2, 3)\}}$. Contrôle dans $L_2$ : $1 - 2 + 6 = 5$.</p>
+
+<p class="ml">Exemple : un système homogène</p>
+$$\left\{\begin{aligned}x + 2y - z &= 0\\2x + 4y + z &= 0\end{aligned}\right.$$
+<p><b>Étape 1 : Rappel.</b> $\mathcal S_H$ est un sev de dimension $p - \operatorname{rg}A$.</p>
+<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $3z = 0$, donc $z = 0$.</p>
+<p><b>Étape 3 : Le paramètre.</b> $L_1$ : $x = -2y$, avec $y$ libre.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_H = \operatorname{Vect}\big((-2, 1, 0)\big)}$ : une droite, $3 - 2 = 1$.</p>
+
+<p class="ml">Exemple : un système incompatible</p>
+$$\left\{\begin{aligned}x + y &= 1\\2x + 2y &= 3\end{aligned}\right.$$
+<p><b>Étape 1 : Rappel.</b> Une ligne « $0 = c$ » avec $c\neq0$ : aucune solution.</p>
+<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $0 = 1$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\mathcal S = \varnothing}$ ($\operatorname{rg}A = 1\neq\operatorname{rg}(A\mid B) = 2$).</p>
+
+<p class="ml">Exemple : un système à paramètre</p>
+$$\left\{\begin{aligned}x + y + mz &= 1\\x + my + z &= 1\\mx + y + z &= 1\end{aligned}\right.\qquad m\in\mathbb R.$$
+<p><b>Étape 1 : Rappel.</b> Avec un paramètre, on cherche les valeurs qui rendent le pivot nul, et on les traite à part.</p>
+<p><b>Étape 2 : On additionne les trois lignes.</b> $(m + 2)(x + y + z) = 3$.</p>
+<p><b>Étape 3 : On soustrait deux lignes.</b> $L_1 - L_2$ : $(1 - m)(y - z) = 0$ et $L_2 - L_3$ : $(1 - m)(x - y) = 0$.</p>
+<p><b>Étape 4 : Cas $m\neq1$, $m\neq-2$.</b> $x = y = z$ et $3(m + 2)x = 3$ : une seule solution $x = y = z = \frac1{m + 2}$.</p>
+<p><b>Étape 5 : Cas $m = 1$.</b> Les trois lignes sont $x + y + z = 1$ : un plan de solutions. <b>Cas $m = -2$</b> : la somme donne $0 = 3$, aucune solution.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{m\notin\{1, -2\}:\ \big(\tfrac1{m + 2}, \tfrac1{m + 2}, \tfrac1{m + 2}\big);\ m = 1:\ \text{un plan};\ m = -2:\ \varnothing}$.</p>
 
 <h2 id="m-trace">10. Trace</h2>
 <div class="sbox">$$A\in\mathcal M_n(\mathbb K):\quad\operatorname{tr}A = \sum_{i=1}^na_{i,i}.$$</div>
@@ -7873,6 +7912,511 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <li><div class="hr"><em>$p$ petit</em><a class="hl" href="#w-lois">approximation de Poisson</a></div></li>
 <li><div class="hr"><em>une moyenne</em><a class="hl end" href="#w-lfgn">loi faible, Tchebychev</a></div></li>
 </ul></div></li>
+</ul></div></div>
+`,
+"Espaces vectoriels et dimension finie": R`
+<nav class="msum"><a href="#k-not">Notations</a><a href="#k-sev">Sous-espaces</a><a href="#k-vect">Vect, génératrices</a><a href="#k-libre">Familles libres</a><a href="#k-somme">Sommes, supplémentaires</a><a href="#k-base">Bases, dimension</a><a href="#k-dimf">Sev en dimension finie</a><a href="#k-rang">Rang d'une famille</a><a href="#k-enonce">L'énoncé</a><a href="#k-erreurs">Erreurs</a><a href="#k-entrainement">S'entraîner</a><a href="#k-exos">Exercices</a><a href="#k-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les vecteurs $\cB{u_1}, \dots, \cB{u_p}$. <span class="kR">rouge</span> : les sous-espaces $\cR F$, $\cR G$. <span class="kO">orange</span> : les coefficients $\cO{\lambda_i}$ des combinaisons. <span class="kV">violet</span> : les dimensions. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="k-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Espaces de référence</td><td>$\mathbb K^n$, $\mathbb K[X]$, $\mathbb K_n[X]$, $\mathcal M_{n,p}(\mathbb K)$, $\mathcal F(X, \mathbb K)$, $\mathbb K^{\mathbb N}$</td><td>Dimensions : $n$, $\infty$, $n + 1$, $np$, $\infty$, $\infty$.</td></tr>
+<tr><td>Sous-espace engendré</td><td>$\operatorname{Vect}(u_1, \dots, u_p)$</td><td>Toutes les combinaisons $\sum\lambda_iu_i$.</td></tr>
+<tr><td>Somme, somme directe</td><td>$F + G$, $F\oplus G$</td><td>$F\oplus G$ : $F\cap G = \{0\}$.</td></tr>
+<tr><td>Dimension, rang</td><td>$\dim E$, $\operatorname{rg}(u_1, \dots, u_p)$</td><td>$\operatorname{rg} = \dim\operatorname{Vect}$.</td></tr>
+</table>
+
+<h2 id="k-sev">2. Sous-espaces vectoriels</h2>
+<div class="sbox">$$\cR F\ \text{sev de}\ E\iff\cR F\subset E,\quad0_E\in\cR F,\quad\forall x, y\in\cR F,\ \forall\cO\lambda\in\mathbb K,\ \cO\lambda x + y\in\cR F.$$</div>
+<p class="ml">Les trois méthodes, de la plus rapide à la plus longue</p>
+<p><b>1.</b> Écrire $F = \operatorname{Vect}(\dots)$ : c'est un sev. <b>2.</b> Écrire $F = \ker f$ avec $f$ linéaire. <b>3.</b> La caractérisation ci-dessus. Pour montrer que $F$ n'est <b>pas</b> un sev : $0\notin F$, ou deux vecteurs dont la somme sort.</p>
+
+<p class="ml">Exemple 1 : un plan de $\mathbb R^3$</p>
+<p>$F = \{(x, y, z),\ x + y - 2z = 0\}$. Sev ? Une base ?</p>
+<p><b>Étape 1 : Rappel.</b> Écrire $F$ comme un $\operatorname{Vect}$ : on exprime une inconnue en fonction des autres.</p>
+<p><b>Étape 2 : On paramètre.</b> $x = -y + 2z$, avec $y, z$ libres : $(x, y, z) = y(-1, 1, 0) + z(2, 0, 1)$.</p>
+<p><b>Étape 3 : On reconnaît.</b> $F = \operatorname{Vect}\big(\cB{(-1, 1, 0)}, \cB{(2, 0, 1)}\big)$ : c'est un sev.</p>
+<p><b>Étape 4 : Libre.</b> Les deux vecteurs ne sont pas colinéaires (regarder la 2<sup>e</sup> coordonnée).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F\ \text{est un plan de base}\ ((-1, 1, 0), (2, 0, 1))}$.</p>
+
+<p class="ml">Exemple 2 : sev ou pas ?</p>
+<p>Dans $\mathcal C(\mathbb R)$ : $A = \{f,\ f(0) = 0\}$ et $B = \{f,\ f(0) = 1\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Un sev contient $0$ et est stable par $\lambda f + g$.</p>
+<p><b>Étape 2 : $A$.</b> La fonction nulle vérifie $0(0) = 0$. Si $f(0) = g(0) = 0$ : $(\lambda f + g)(0) = 0$. Donc $A$ est un sev (c'est $\ker(f\mapsto f(0))$).</p>
+<p><b>Étape 3 : $B$.</b> La fonction nulle vaut $0\neq1$ en $0$ : $0\notin B$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est un sev},\ B\ \text{n'en est pas un}}$ (une contrainte avec second membre non nul n'en est jamais un).</p>
+
+<h2 id="k-vect">3. Vect, familles génératrices</h2>
+<div class="sbox">$$\operatorname{Vect}(\cB{u_1}, \dots, \cB{u_p}) = \Big\{\sum\cO{\lambda_i}\cB{u_i}\Big\}:\ \text{le plus petit sev contenant les}\ u_i.\qquad(u_i)\ \text{génératrice de}\ E\iff\operatorname{Vect}(u_i) = E.$$</div>
+<p>On ne change pas $\operatorname{Vect}$ en ajoutant à un vecteur une combinaison des autres, en multipliant un vecteur par $\lambda\neq0$, ou en retirant un vecteur combinaison des autres.</p>
+<p class="ml">Exemple 3 : appartenir à un Vect</p>
+<p>$w = (1, 2, 3)\in\operatorname{Vect}\big((1, 1, 1), (0, 1, 2)\big)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $w\in\operatorname{Vect}(u, v)\iff\exists a, b,\ w = au + bv$ : un système.</p>
+<p><b>Étape 2 : Le système.</b> $a(1, 1, 1) + b(0, 1, 2) = (a, a + b, a + 2b) = (1, 2, 3)$.</p>
+<p><b>Étape 3 : On résout.</b> $a = 1$, puis $b = 1$, et la 3<sup>e</sup> équation $1 + 2 = 3$ est vérifiée.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{w = u + v\in\operatorname{Vect}(u, v)}$.</p>
+
+<h2 id="k-libre">4. Familles libres</h2>
+<div class="sbox">$$(\cB{u_1}, \dots, \cB{u_p})\ \text{libre}\iff\Big(\sum\cO{\lambda_i}\cB{u_i} = 0\Rightarrow\forall i,\ \cO{\lambda_i} = 0\Big).$$</div>
+<p class="ml">Les méthodes</p>
+<p><b>Vecteurs de $\mathbb K^n$</b> : un système homogène (ou le rang). <b>Fonctions</b> : évaluer en des points bien choisis, dériver, ou regarder en $+\infty$. <b>Polynômes</b> : degrés échelonnés $\Rightarrow$ libre. <b>Famille orthogonale</b> de vecteurs non nuls $\Rightarrow$ libre.</p>
+<p class="ml piege">Piège</p>
+<p>Une famille de trois vecteurs <b>deux à deux non colinéaires</b> peut être liée : $(1, 0)$, $(0, 1)$, $(1, 1)$.</p>
+
+<p class="ml">Exemple 4 : trois vecteurs de $\mathbb R^3$</p>
+<p>$u_1 = (1, 1, 0)$, $u_2 = (1, 0, 1)$, $u_3 = (0, 1, 1)$.</p>
+<p><b>Étape 1 : Rappel.</b> On résout $\lambda_1u_1 + \lambda_2u_2 + \lambda_3u_3 = 0$.</p>
+<p><b>Étape 2 : Le système.</b></p>
+$$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\\lambda_2 + \lambda_3 &= 0\end{aligned}\right.$$
+<p><b>Étape 3 : On résout.</b> En additionnant : $2(\lambda_1 + \lambda_2 + \lambda_3) = 0$. Avec la 1<sup>re</sup> équation, $\lambda_3 = 0$, puis $\lambda_1 = \lambda_2 = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(u_1, u_2, u_3)\ \text{est libre}}$.</p>
+
+<p class="ml">Exemple 5 : des fonctions</p>
+<p>$(\cos, \sin)$ est-elle libre dans $\mathcal F(\mathbb R, \mathbb R)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Pour des fonctions, on évalue l'égalité en des points bien choisis.</p>
+<p><b>Étape 2 : L'hypothèse.</b> $a\cos x + b\sin x = 0$ pour <b>tout</b> réel $x$.</p>
+<p><b>Étape 3 : En $x = 0$.</b> $a = 0$. <b>En $x = \frac\pi2$</b> : $b = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(\cos, \sin)\ \text{est libre}}$.</p>
+
+<p class="ml">Exemple 6 : des polynômes de degrés échelonnés</p>
+<p><b>Étape 1 : Rappel.</b> Le degré d'une somme est le plus grand degré quand il n'y a qu'un seul terme de ce degré.</p>
+<p><b>Étape 2 : L'hypothèse.</b> $\deg P_k = k$ et $\sum_{k=0}^n\lambda_kP_k = 0$, avec des $\lambda_k$ non tous nuls.</p>
+<p><b>Étape 3 : Le plus grand indice.</b> Soit $m$ le plus grand $k$ avec $\lambda_k\neq0$. La somme est de degré exactement $m$, donc non nulle.</p>
+<p><b>Étape 4 : Conclusion.</b> Contradiction : $\cG{(P_0, \dots, P_n)\ \text{est libre}}$, et c'est une base de $\mathbb K_n[X]$ (§6).</p>
+
+<h2 id="k-somme">5. Somme, somme directe, supplémentaires</h2>
+<div class="sbox">$$F + G = \{x + y,\ x\in F,\ y\in G\}.\qquad F\oplus G\ \text{(directe)}\iff F\cap G = \{0\}\iff\text{décomposition unique}.$$
+$$F\ \text{et}\ G\ \text{supplémentaires}:\ E = F\oplus G\iff\forall x\in E,\ \exists!(x_F, x_G)\in F\times G,\ x = x_F + x_G.$$</div>
+<p class="ml">La méthode analyse-synthèse</p>
+<p><b>Analyse</b> : si $x = x_F + x_G$, on trouve des formules pour $x_F$, $x_G$ (donc unicité). <b>Synthèse</b> : on vérifie que ces formules marchent (donc existence).</p>
+
+<p class="ml">Exemple 7 : fonctions paires et impaires</p>
+<p>Montrer $\mathcal F(\mathbb R, \mathbb R) = \mathcal P\oplus\mathcal I$.</p>
+<p><b>Étape 1 : Rappel.</b> Analyse-synthèse.</p>
+<p><b>Étape 2 : Analyse.</b> Si $f = p + i$ ($p$ paire, $i$ impaire), alors $f(-x) = p(x) - i(x)$. En combinant avec $f(x) = p(x) + i(x)$ :</p>
+$$p(x) = \frac{f(x) + f(-x)}2,\qquad i(x) = \frac{f(x) - f(-x)}2.$$
+<p><b>Étape 3 : Unicité.</b> $p$ et $i$ sont déterminés par $f$.</p>
+<p><b>Étape 4 : Synthèse.</b> Ces $p$ et $i$ sont bien paire et impaire, et $p + i = f$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R) = \mathcal P\oplus\mathcal I}$ (exemple : $e^x = \operatorname{ch}x + \operatorname{sh}x$).</p>
+
+<p class="ml">Exemple 8 : un plan et une droite de $\mathbb R^3$</p>
+<p>$P:\ x + y + z = 0$ et $D = \operatorname{Vect}(1, 1, 1)$.</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie : $F\cap G = \{0\}$ et $\dim F + \dim G = \dim E$ suffisent (§7).</p>
+<p><b>Étape 2 : L'intersection.</b> $\lambda(1, 1, 1)\in P\iff3\lambda = 0\iff\lambda = 0$.</p>
+<p><b>Étape 3 : Les dimensions.</b> $\dim P + \dim D = 2 + 1 = 3 = \dim\mathbb R^3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R^3 = P\oplus D}$.</p>
+
+<h2 id="k-base">6. Bases, dimension</h2>
+<div class="sbox">$$\text{Base} = \text{libre et génératrice}\iff\text{tout}\ x\ \text{s'écrit de façon unique}\ \sum x_ie_i.$$
+$$\textbf{Base incomplète}:\ \text{toute famille libre se complète en une base}.\qquad\text{En dimension}\ n:\ \text{libre à}\ n\ \text{vecteurs}\iff\text{génératrice à}\ n\ \text{vecteurs}\iff\text{base}.$$</div>
+<p>Dans un espace de dimension $n$ : une famille libre a au plus $n$ vecteurs, une famille génératrice au moins $n$. $\dim\mathbb K_n[X] = n + 1$, $\dim\mathcal M_{n,p}(\mathbb K) = np$.</p>
+
+<p class="ml">Exemple 9 : une base de $\mathbb R_2[X]$ et des coordonnées</p>
+<p>Montrer que $\mathcal B = (1, X - 1, (X - 1)^2)$ est une base, et donner les coordonnées de $X^2$.</p>
+<p><b>Étape 1 : Rappel.</b> Degrés échelonnés $\Rightarrow$ libre ; $3$ vecteurs libres en dimension $3$ $\Rightarrow$ base.</p>
+<p><b>Étape 2 : Base.</b> Degrés $0, 1, 2$ : libre (exemple 6). $\dim\mathbb R_2[X] = 3$ : c'est une base.</p>
+<p><b>Étape 3 : Les coordonnées.</b> On écrit $X = (X - 1) + 1$ et on développe :</p>
+$$X^2 = \big((X - 1) + 1\big)^2 = (X - 1)^2 + 2(X - 1) + 1.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{X^2\ \text{a pour coordonnées}\ (1, 2, 1)\ \text{dans}\ \mathcal B}$ (c'est la formule de Taylor en $1$).</p>
+
+<h2 id="k-dimf">7. Sous-espaces en dimension finie</h2>
+<div class="sbox">$$F\subset E:\ \dim F\leq\dim E,\ \text{et}\ \dim F = \dim E\Rightarrow F = E.\qquad\textbf{Grassmann}:\ \dim(F + G) = \dim F + \dim G - \dim(F\cap G).$$
+$$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F + G = E\ \text{et}\ \dim F + \dim G = \dim E.$$</div>
+<p class="ml">Exemple 10 : deux plans de $\mathbb R^3$ se coupent</p>
+<p><b>Étape 1 : Rappel.</b> Grassmann.</p>
+<p><b>Étape 2 : On majore la somme.</b> $P_1 + P_2\subset\mathbb R^3$, donc $\dim(P_1 + P_2)\leq3$.</p>
+<p><b>Étape 3 : On applique.</b> $\dim(P_1\cap P_2) = 2 + 2 - \dim(P_1 + P_2)\geq4 - 3 = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P_1\cap P_2\ \text{contient au moins une droite}}$ (et c'est un plan si $P_1 = P_2$).</p>
+
+<h2 id="k-rang">8. Rang d'une famille</h2>
+<div class="sbox">$$\operatorname{rg}(u_1, \dots, u_p) = \dim\operatorname{Vect}(u_1, \dots, u_p)\leq p.\qquad\text{libre}\iff\operatorname{rg} = p.\qquad\text{Il se calcule par pivot de Gauss}.$$</div>
+<p class="ml">Exemple 11 : un rang</p>
+<p>$\operatorname{rg}\big((1, 2, 1), (2, 1, 0), (3, 3, 1)\big)$.</p>
+<p><b>Étape 1 : Rappel.</b> On cherche une relation de dépendance, sinon on pivote.</p>
+<p><b>Étape 2 : Une relation.</b> $(1, 2, 1) + (2, 1, 0) = (3, 3, 1)$ : le 3<sup>e</sup> vecteur est combinaison des deux premiers.</p>
+<p><b>Étape 3 : Les deux premiers.</b> Ils ne sont pas colinéaires ($\frac21\neq\frac12$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg} = 2}$ : les trois vecteurs engendrent un plan, la famille est liée.</p>
+
+<h2 id="k-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $F$ est un sev »</b><span>Vect, ou noyau d'une application linéaire, ou la caractérisation.</span></div>
+<div><b>Une équation avec second membre $\neq0$</b><span>Pas un sev : $0\notin F$.</span></div>
+<div><b>« Une base de $F$ » ($F$ par équations)</b><span>Paramétrer, écrire comme Vect, vérifier la liberté.</span></div>
+<div><b>« Famille libre » (vecteurs)</b><span>Système homogène, ou rang.</span></div>
+<div><b>« Famille libre » (fonctions)</b><span>Évaluer en des points, dériver, limites en $+\infty$.</span></div>
+<div><b>« $E = F\oplus G$ »</b><span>Analyse-synthèse ; en dimension finie, $F\cap G = \{0\}$ et dimensions.</span></div>
+<div><b>$n$ vecteurs dans un espace de dimension $n$</b><span>Libre suffit (ou génératrice suffit).</span></div>
+<div><b>« $\dim(F\cap G)$ »</b><span>Grassmann, ou résoudre le système des équations réunies.</span></div>
+<div><b>« Coordonnées dans une base »</b><span>Système, ou Taylor pour les polynômes.</span></div>
+</div>
+
+<h2 id="k-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Croire qu'une réunion de sev est un sev.</p>
+<p><b>2.</b> Montrer « libre » en ne vérifiant que les vecteurs deux à deux.</p>
+<p><b>3.</b> Oublier « pour tout $x$ » quand on teste la liberté de fonctions.</p>
+<p><b>4.</b> Conclure $E = F\oplus G$ avec $F\cap G = \{0\}$ seul, sans les dimensions.</p>
+<p><b>5.</b> $\dim\mathbb K_n[X] = n$ : c'est $n + 1$.</p>
+<p><b>6.</b> Confondre supplémentaire et complémentaire ($E\setminus F$ n'est jamais un sev).</p>
+</div>
+
+<h2 id="k-entrainement">S'entraîner</h2>
+<div data-mlab="rangfam"></div>
+<div data-mlab="quizev"></div>
+
+<h2 id="k-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $(1, \cos, \cos^2)$ est libre</p>
+<p><b>Étape 1 : Rappel.</b> Évaluer $a + b\cos x + c\cos^2x = 0$ en des points.</p>
+<p><b>Étape 2 : Trois valeurs.</b> $x = \frac\pi2$ : $a = 0$. $x = 0$ : $b + c = 0$. $x = \pi$ : $-b + c = 0$.</p>
+<p><b>Étape 3 : On résout.</b> $b = c$ et $b = -c$, donc $b = c = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(1, \cos, \cos^2)\ \text{est libre}}$.</p>
+
+<p class="ml">Exercice 2 : $H = \{P\in\mathbb K_n[X],\ P(1) = 0\}$</p>
+<p><b>Étape 1 : Rappel.</b> Un noyau est un sev ; on cherche une base adaptée.</p>
+<p><b>Étape 2 : C'est un sev.</b> $H = \ker(P\mapsto P(1))$.</p>
+<p><b>Étape 3 : Une base.</b> $P(1) = 0\iff(X - 1)\mid P\iff P = (X - 1)Q$ avec $\deg Q\leq n - 1$. Donc $H = \operatorname{Vect}\big((X - 1)X^k,\ 0\leq k\leq n - 1\big)$, famille de degrés échelonnés.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\dim H = n}$ : c'est un hyperplan de $\mathbb K_n[X]$.</p>
+
+<h2 id="k-arbre">L'arbre des espaces vectoriels</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question d'espaces vectoriels</span><ul>
+<li><div class="hr"><em>$F$ est-il un sev ?</em><span class="hq">Comment est donné $F$ ?</span><ul>
+<li><div class="hr"><em>par des vecteurs</em><a class="hl ok" href="#k-sev">c'est un Vect</a></div></li>
+<li><div class="hr"><em>par des équations</em><a class="hl" href="#k-sev">noyau, ou paramétrer</a></div></li>
+<li><div class="hr"><em>second membre $\neq0$</em><a class="hl end" href="#k-sev">non : $0\notin F$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une famille</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>libre</em><a class="hl" href="#k-libre">système, évaluations, degrés</a></div></li>
+<li><div class="hr"><em>génératrice</em><a class="hl" href="#k-vect">tout $x$ en combinaison</a></div></li>
+<li><div class="hr"><em>base</em><a class="hl ok" href="#k-base">libre + bon nombre de vecteurs</a></div></li>
+<li><div class="hr"><em>son rang</em><a class="hl" href="#k-rang">relation, ou pivot</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>deux sev $F$, $G$</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>$E = F\oplus G$</em><a class="hl" href="#k-somme">analyse-synthèse, ou dimensions</a></div></li>
+<li><div class="hr"><em>$\dim(F\cap G)$</em><a class="hl" href="#k-dimf">Grassmann</a></div></li>
+</ul></div></li>
+</ul></div></div>
+`,
+"Applications linéaires": R`
+<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les vecteurs $\cB x$ et leurs images. <span class="kR">rouge</span> : le noyau $\cR{\ker f}$. <span class="kO">orange</span> : l'image $\cO{\operatorname{Im}f}$. <span class="kV">violet</span> : les dimensions et le rang. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="l-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Applications linéaires</td><td>$\mathcal L(E, F)$, $\mathcal L(E)$</td><td>Endomorphismes : $E = F$.</td></tr>
+<tr><td>Automorphismes</td><td>$GL(E)$</td><td>Groupe pour $\circ$.</td></tr>
+<tr><td>Noyau, image</td><td>$\ker f$, $\operatorname{Im}f$</td><td>Sev de $E$ et de $F$.</td></tr>
+<tr><td>Rang</td><td>$\operatorname{rg}f = \dim\operatorname{Im}f$</td><td>Si $\operatorname{Im}f$ de dimension finie.</td></tr>
+<tr><td>Dual</td><td>$E^* = \mathcal L(E, \mathbb K)$</td><td>Formes linéaires.</td></tr>
+</table>
+
+<h2 id="l-lin">2. Montrer qu'une application est linéaire</h2>
+<div class="sbox">$$f\ \text{linéaire}\iff\forall x, y\in E,\ \forall\lambda\in\mathbb K,\ f(\lambda x + y) = \lambda f(x) + f(y).\qquad\text{Alors}\ f(0) = 0.$$</div>
+<p>Pour montrer qu'elle ne l'est <b>pas</b> : $f(0)\neq0$, ou un contre-exemple numérique.</p>
+<p class="ml">Exemple 1 : sur les polynômes</p>
+<p>$\varphi:\mathbb K[X]\to\mathbb K$, $\varphi(P) = P(1) + P'(0)$.</p>
+<p><b>Étape 1 : Rappel.</b> On vérifie $\varphi(\lambda P + Q) = \lambda\varphi(P) + \varphi(Q)$.</p>
+<p><b>Étape 2 : On calcule.</b> $(\lambda P + Q)(1) = \lambda P(1) + Q(1)$ et $(\lambda P + Q)' = \lambda P' + Q'$, donc :</p>
+$$\varphi(\lambda P + Q) = \lambda P(1) + Q(1) + \lambda P'(0) + Q'(0) = \lambda\varphi(P) + \varphi(Q).$$
+<p><b>Étape 3 : Conclusion.</b> $\cG{\varphi\ \text{est une forme linéaire}}$.</p>
+
+<p class="ml">Exemple 2 : pas linéaire</p>
+<p>$f(x, y) = (x + y, xy)$ de $\mathbb R^2$ dans $\mathbb R^2$.</p>
+<p><b>Étape 1 : Rappel.</b> Linéaire $\Rightarrow f(2u) = 2f(u)$.</p>
+<p><b>Étape 2 : Un test.</b> $f(1, 1) = (2, 1)$ et $f(2, 2) = (4, 4)\neq2(2, 1) = (4, 2)$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{n'est pas linéaire}}$ (le produit $xy$ est du degré $2$).</p>
+
+<h2 id="l-ker">3. Noyau et image</h2>
+<div class="sbox">$$\cR{\ker f} = \{x,\ f(x) = 0\},\qquad\cO{\operatorname{Im}f} = \{f(x),\ x\in E\} = \operatorname{Vect}\big(f(e_1), \dots, f(e_n)\big)\ \text{si}\ (e_i)\ \text{base de}\ E.$$
+$$f\ \text{injective}\iff\ker f = \{0\}.\qquad f\ \text{surjective}\iff\operatorname{Im}f = F.\qquad f(x) = f(y)\iff x - y\in\ker f.$$</div>
+<p class="ml">Exemple 3 : noyau et image dans $\mathbb R^3$</p>
+<p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\ker f$ : résoudre $f(x) = 0$. $\operatorname{Im}f = \operatorname{Vect}(f(e_1), f(e_2), f(e_3))$.</p>
+<p><b>Étape 2 : Le noyau.</b> $x - y = 0$, $y - z = 0$ (la 3<sup>e</sup> en découle) : $x = y = z$, donc $\cR{\ker f = \operatorname{Vect}(1, 1, 1)}$.</p>
+<p><b>Étape 3 : L'image.</b> $f(e_1) = (1, 0, -1)$, $f(e_2) = (-1, 1, 0)$, $f(e_3) = (0, -1, 1) = -f(e_1) - f(e_2)$. Donc $\operatorname{Im}f = \operatorname{Vect}\big((1, 0, -1), (-1, 1, 0)\big)$.</p>
+<p><b>Étape 4 : Une équation.</b> Chaque vecteur image a ses coordonnées de somme nulle : $\cO{\operatorname{Im}f}\subset\{a + b + c = 0\}$, et les deux sont des plans.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb R(1, 1, 1),\ \operatorname{Im}f = \{a + b + c = 0\}}$. Contrôle : $1 + 2 = 3$ (théorème du rang, §6).</p>
+
+<p class="ml">Exemple 4 : la dérivation</p>
+<p>$D:\mathbb K[X]\to\mathbb K[X]$, $P\mapsto P'$.</p>
+<p><b>Étape 1 : Rappel.</b> Injective $\iff\ker = \{0\}$ ; surjective $\iff\operatorname{Im} = $ tout l'espace.</p>
+<p><b>Étape 2 : Le noyau.</b> $P' = 0\iff P$ constant : $\ker D = \mathbb K_0[X]$, $D$ n'est pas injective.</p>
+<p><b>Étape 3 : L'image.</b> Tout $Q = \sum a_kX^k$ est la dérivée de $\sum\frac{a_k}{k + 1}X^{k+1}$ : $D$ est surjective.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{D\ \text{surjective, non injective}}$ : c'est possible car $\mathbb K[X]$ est de dimension infinie.</p>
+
+<h2 id="l-iso">4. Isomorphismes, image d'une base</h2>
+<div class="sbox">$$f\ \text{est déterminée par les images}\ f(e_1), \dots, f(e_n)\ \text{d'une base}.\qquad f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F.$$
+$$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
+<p class="ml">Exemple 5 : l'interpolation de Lagrange</p>
+<p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$.</p>
+<p><b>Étape 1 : Rappel.</b> Même dimension finie : injective suffit.</p>
+<p><b>Étape 2 : Les dimensions.</b> $\dim\mathbb R_2[X] = 3 = \dim\mathbb R^3$, et $\varphi$ est linéaire.</p>
+<p><b>Étape 3 : Le noyau.</b> $\varphi(P) = 0$ : $P$ de degré $\leq2$ a $3$ racines $0, 1, 2$, donc $P = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\varphi\ \text{est un isomorphisme}}$ : pour tous $a, b, c$, il existe un unique $P\in\mathbb R_2[X]$ avec $P(0) = a$, $P(1) = b$, $P(2) = c$.</p>
+
+<h2 id="l-proj">5. Projecteurs et symétries</h2>
+<div class="sbox">$$p\ \text{projecteur}\iff p\circ p = p.\ \text{Alors}\ E = \ker p\oplus\operatorname{Im}p,\ \operatorname{Im}p = \ker(p - \operatorname{id}),\ p\ \text{projette sur}\ \operatorname{Im}p\ \text{parallèlement à}\ \ker p.$$
+$$s\ \text{symétrie}\iff s\circ s = \operatorname{id}.\ \text{Alors}\ E = \ker(s - \operatorname{id})\oplus\ker(s + \operatorname{id}),\qquad s = 2p - \operatorname{id}.$$</div>
+<p class="ml">La méthode pour la projection sur $F$ parallèlement à $G$</p>
+<p>On décompose $x = x_F + x_G$ (on écrit $x_G$ avec un paramètre, et on impose $x - x_G\in F$). Alors $p(x) = x_F$ et $s(x) = x_F - x_G$.</p>
+
+<p class="ml">Exemple 6 : une projection oblique dans $\mathbb R^3$</p>
+<p>Projection sur $P:\ x + y + z = 0$ parallèlement à $D = \operatorname{Vect}(1, 0, 0)$.</p>
+<p><b>Étape 1 : Rappel.</b> $x = x_P + x_D$ avec $x_D = \lambda(1, 0, 0)$ et $x - x_D\in P$.</p>
+<p><b>Étape 2 : On impose.</b> Pour $x = (a, b, c)$ : $x - \lambda(1, 0, 0) = (a - \lambda, b, c)\in P\iff a - \lambda + b + c = 0\iff\lambda = a + b + c$.</p>
+<p><b>Étape 3 : Le projeté.</b> $p(a, b, c) = (a - \lambda, b, c) = (-b - c,\ b,\ c)$.</p>
+<p><b>Étape 4 : La symétrie.</b> $s = 2p - \operatorname{id}$ : $s(a, b, c) = (-a - 2b - 2c,\ b,\ c)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p(a, b, c) = (-b - c, b, c)}$. Contrôle : $p(1, 0, 0) = 0$ et $p(-1, 1, 0) = (-1, 1, 0)$.</p>
+
+<p class="ml">Exemple 7 : reconnaître un projecteur</p>
+<p>$M = \begin{pmatrix}1&1\\0&0\end{pmatrix}$, endomorphisme $p$ de $\mathbb R^2$.</p>
+<p><b>Étape 1 : Rappel.</b> $p^2 = p$ ; puis $\operatorname{Im}p = \ker(p - \operatorname{id})$ et $\ker p$.</p>
+<p><b>Étape 2 : $M^2$.</b> $M^2 = \begin{pmatrix}1&1\\0&0\end{pmatrix} = M$ : c'est un projecteur.</p>
+<p><b>Étape 3 : Image et noyau.</b> $\operatorname{Im}p = \operatorname{Vect}(1, 0)$ (colonnes) ; $\ker p$ : $x + y = 0$, soit $\operatorname{Vect}(1, -1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \mathbb R(1, 0)\ \text{parallèlement à}\ \mathbb R(1, -1)}$ (pas orthogonalement).</p>
+
+<h2 id="l-rang">6. Le théorème du rang</h2>
+<div class="sbox">$$\dim E\ \text{finie}:\quad\cV{\dim E = \dim\ker f + \operatorname{rg}f}.\qquad\operatorname{rg}(g\circ f)\leq\min(\operatorname{rg}f, \operatorname{rg}g).$$
+$$\operatorname{rg}f\leq\min(\dim E, \dim F).\qquad\text{Composer par un isomorphisme ne change pas le rang}.$$</div>
+<p class="ml piege">Piège</p>
+<p>Le théorème du rang dit une égalité de <b>dimensions</b>, pas que $E = \ker f\oplus\operatorname{Im}f$ : c'est faux pour $f(x, y) = (y, 0)$, où $\ker f = \operatorname{Im}f$.</p>
+
+<p class="ml">Exemple 8 : bijectivité par le noyau</p>
+<p>$f:\mathbb R_n[X]\to\mathbb R_n[X]$, $P\mapsto P - P'$.</p>
+<p><b>Étape 1 : Rappel.</b> Endomorphisme en dimension finie : injectif $\iff$ bijectif.</p>
+<p><b>Étape 2 : Le noyau.</b> Si $P = P'$ avec $P\neq0$ : $\deg P' \lt \deg P$, contradiction. Donc $\ker f = \{0\}$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{est bijective}}$ : pour tout $Q$, l'équation $P - P' = Q$ a une unique solution polynomiale.</p>
+
+<p class="ml">Exemple 9 : quand $E = \ker f\oplus\operatorname{Im}f$</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie : $F\cap G = \{0\}$ et $\dim F + \dim G = \dim E$ suffisent.</p>
+<p><b>Étape 2 : Les dimensions.</b> Le théorème du rang donne $\dim\ker f + \dim\operatorname{Im}f = \dim E$.</p>
+<p><b>Étape 3 : Il reste l'intersection.</b> Donc $E = \ker f\oplus\operatorname{Im}f\iff\ker f\cap\operatorname{Im}f = \{0\}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E = \ker f\oplus\operatorname{Im}f\iff\ker f\cap\operatorname{Im}f = \{0\}}$ (vrai pour un projecteur, faux pour un nilpotent non nul).</p>
+
+<h2 id="l-hyp">7. Formes linéaires et hyperplans</h2>
+<div class="sbox">$$H\ \text{hyperplan}\iff H = \ker\varphi,\ \varphi\in E^*\setminus\{0\}\iff\dim H = n - 1\ (\text{dimension finie}).$$
+$$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ \text{Deux équations d'un même}\ H\ \text{sont proportionnelles}.$$</div>
+<p class="ml">Exemple 10 : un hyperplan de polynômes</p>
+<p>$H = \{P\in\mathbb R_n[X],\ \int_0^1P(t)\,dt = 0\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle $\Rightarrow$ hyperplan.</p>
+<p><b>Étape 2 : La forme.</b> $\varphi(P) = \int_0^1P$ est linéaire (linéarité de l'intégrale).</p>
+<p><b>Étape 3 : Non nulle.</b> $\varphi(1) = 1\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{H = \ker\varphi\ \text{est un hyperplan, de dimension}\ n}$, et $\mathbb R_n[X] = H\oplus\mathbb R_0[X]$.</p>
+
+<h2 id="l-poly">8. Polynômes d'endomorphismes</h2>
+<div class="sbox">$$f^2 - 3f + 2\operatorname{id} = 0\ \Longrightarrow\ f\circ\frac{3\operatorname{id} - f}2 = \operatorname{id}:\ f\ \text{inversible et}\ f^{-1} = \frac{3\operatorname{id} - f}2.$$</div>
+<p class="ml">Exemple 11 : un inverse sans calcul</p>
+<p>$f\in\mathcal L(E)$ vérifie $f^2 - 3f + 2\operatorname{id} = 0$. Montrer que $f$ est inversible.</p>
+<p><b>Étape 1 : Rappel.</b> On isole $\operatorname{id}$ et on factorise par $f$.</p>
+<p><b>Étape 2 : On isole.</b> $2\operatorname{id} = 3f - f^2 = f\circ(3\operatorname{id} - f)$.</p>
+<p><b>Étape 3 : On divise par $2$.</b> $f\circ\frac{3\operatorname{id} - f}2 = \operatorname{id}$, et de même $\frac{3\operatorname{id} - f}2\circ f = \operatorname{id}$ ($f$ commute avec ses polynômes).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\in GL(E),\ f^{-1} = \frac12(3\operatorname{id} - f)}$. En plus, $E = \ker(f - \operatorname{id})\oplus\ker(f - 2\operatorname{id})$ (voir Réduction).</p>
+
+<h2 id="l-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $f$ est linéaire »</b><span>$f(\lambda x + y) = \lambda f(x) + f(y)$.</span></div>
+<div><b>« Déterminer $\ker f$ »</b><span>Résoudre $f(x) = 0$, donner une base.</span></div>
+<div><b>« Déterminer $\operatorname{Im}f$ »</b><span>$\operatorname{Vect}$ des images d'une base, retirer les liés.</span></div>
+<div><b>« $f$ injective »</b><span>$\ker f = \{0\}$.</span></div>
+<div><b>« $f$ bijective », même dimension</b><span>Injective suffit (théorème du rang).</span></div>
+<div><b>$p\circ p = p$</b><span>Projecteur sur $\operatorname{Im}p$ parallèlement à $\ker p$.</span></div>
+<div><b>« Projection sur $F$ parallèlement à $G$ »</b><span>Décomposer $x = x_F + x_G$.</span></div>
+<div><b>« $\dim\ker f$ »</b><span>Théorème du rang : $n - \operatorname{rg}f$.</span></div>
+<div><b>« $H$ est un hyperplan »</b><span>Noyau d'une forme linéaire non nulle.</span></div>
+<div><b>$P(f) = 0$ avec $P(0)\neq0$</b><span>$f$ inversible, $f^{-1}$ polynôme en $f$.</span></div>
+<div><b>$f\circ g = 0$</b><span>$\operatorname{Im}g\subset\ker f$.</span></div>
+</div>
+
+<h2 id="l-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Dire que $E = \ker f\oplus\operatorname{Im}f$ toujours.</p>
+<p><b>2.</b> Confondre $\ker f\subset E$ et $\operatorname{Im}f\subset F$.</p>
+<p><b>3.</b> Utiliser « injective $\iff$ surjective » en dimension infinie ou avec des dimensions différentes.</p>
+<p><b>4.</b> Donner $\operatorname{Im}f$ comme Vect de vecteurs liés et annoncer la mauvaise dimension.</p>
+<p><b>5.</b> Une projection « sur $F$ » sans dire parallèlement à quoi.</p>
+<p><b>6.</b> Oublier de vérifier la linéarité avant de parler de noyau.</p>
+</div>
+
+<h2 id="l-entrainement">S'entraîner</h2>
+<div data-mlab="kerim"></div>
+<div data-mlab="quizal"></div>
+
+<h2 id="l-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : noyaux et images itérés</p>
+<p>Montrer $\ker f\subset\ker f^2$ et $\operatorname{Im}f^2\subset\operatorname{Im}f$.</p>
+<p><b>Étape 1 : Rappel.</b> Définitions de $\ker$ et $\operatorname{Im}$.</p>
+<p><b>Étape 2 : Noyaux.</b> Si $f(x) = 0$, alors $f^2(x) = f(0) = 0$.</p>
+<p><b>Étape 3 : Images.</b> Si $y = f^2(x) = f(f(x))$, alors $y$ est l'image de $f(x)$ par $f$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\ker f\subset\ker f^2,\ \operatorname{Im}f^2\subset\operatorname{Im}f}$ ; en dimension finie, l'égalité de l'un équivaut à celle de l'autre (théorème du rang).</p>
+
+<p class="ml">Exercice 2 : $f\circ g = 0$</p>
+<p>$f, g\in\mathcal L(E)$, $\dim E = n$, $f\circ g = 0$. Montrer $\operatorname{rg}f + \operatorname{rg}g\leq n$.</p>
+<p><b>Étape 1 : Rappel.</b> $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$. Théorème du rang pour $f$.</p>
+<p><b>Étape 2 : L'inclusion.</b> $\operatorname{rg}g = \dim\operatorname{Im}g\leq\dim\ker f$.</p>
+<p><b>Étape 3 : Le rang de $f$.</b> $\dim\ker f = n - \operatorname{rg}f$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}f + \operatorname{rg}g\leq n}$.</p>
+
+<h2 id="l-arbre">L'arbre des applications linéaires</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une application $f$</span><ul>
+<li><div class="hr"><em>linéaire ?</em><a class="hl" href="#l-lin">$f(\lambda x + y)$, ou contre-exemple</a></div></li>
+<li><div class="hr"><em>noyau, image</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>$\ker f$</em><a class="hl ok" href="#l-ker">résoudre $f(x) = 0$</a></div></li>
+<li><div class="hr"><em>$\operatorname{Im}f$</em><a class="hl ok" href="#l-ker">Vect des $f(e_i)$</a></div></li>
+<li><div class="hr"><em>une dimension</em><a class="hl" href="#l-rang">théorème du rang</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>bijective ?</em><span class="hq">Même dimension finie ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#l-iso">$\ker f = \{0\}$ suffit</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#l-ker">injective et surjective séparément</a></div></li>
+<li><div class="hr"><em>$P(f) = 0$</em><a class="hl" href="#l-poly">isoler $\operatorname{id}$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$p^2 = p$, $s^2 = \operatorname{id}$</em><a class="hl" href="#l-proj">projecteur, symétrie : $\ker$, $\operatorname{Im}$</a></div></li>
+<li><div class="hr"><em>un hyperplan</em><a class="hl end" href="#l-hyp">noyau d'une forme non nulle</a></div></li>
+</ul></div></div>
+`,
+"Fonctions convexes": R`
+<nav class="msum"><a href="#x-def">Définition</a><a href="#x-jensen">Jensen</a><a href="#x-pentes">Pentes</a><a href="#x-der">Avec les dérivées</a><a href="#x-usu">Fonctions usuelles</a><a href="#x-ineg">Inégalités classiques</a><a href="#x-enonce">L'énoncé</a><a href="#x-erreurs">Erreurs</a><a href="#x-entrainement">S'entraîner</a><a href="#x-exos">Exercices</a><a href="#x-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction $\cB f$ et sa courbe. <span class="kR">rouge</span> : les cordes. <span class="kO">orange</span> : les tangentes. <span class="kV">violet</span> : les poids $\cV{\lambda_i}$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="x-def">1. Définition</h2>
+<div class="sbox">$$\cB f\ \text{convexe sur}\ I\iff\forall x, y\in I,\ \forall\cV\lambda\in[0, 1],\ f(\cV\lambda x + (1 - \cV\lambda)y)\leq\cV\lambda f(x) + (1 - \cV\lambda)f(y).$$</div>
+<p>Géométriquement : la courbe est <b>sous chaque corde</b>. $f$ est concave si $-f$ est convexe (courbe au-dessus des cordes). Une fonction affine est les deux.</p>
+
+<h2 id="x-jensen">2. L'inégalité de Jensen</h2>
+<div class="sbox">$$f\ \text{convexe},\ \cV{\lambda_i}\geq0,\ \sum\cV{\lambda_i} = 1:\quad f\Big(\sum_{i=1}^n\cV{\lambda_i}x_i\Big)\leq\sum_{i=1}^n\cV{\lambda_i}f(x_i).\qquad\text{Avec}\ \lambda_i = \frac1n:\ f\Big(\frac{x_1 + \dots + x_n}n\Big)\leq\frac{f(x_1) + \dots + f(x_n)}n.$$</div>
+<p>Elle se démontre par récurrence sur $n$. Pour une fonction <b>concave</b>, l'inégalité se retourne.</p>
+
+<p class="ml">Exemple 1 : l'inégalité arithmético-géométrique</p>
+<p>Pour $x_1, \dots, x_n > 0$ : $\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n$.</p>
+<p><b>Étape 1 : Rappel.</b> Jensen pour une fonction concave : $f\big(\frac1n\sum x_i\big)\geq\frac1n\sum f(x_i)$.</p>
+<p><b>Étape 2 : La fonction.</b> $\ln$ est concave sur $]0, +\infty[$ ($\ln'' = -\frac1{x^2}\leq0$).</p>
+<p><b>Étape 3 : On applique.</b> $\ln\Big(\frac{x_1 + \dots + x_n}n\Big)\geq\frac{\ln x_1 + \dots + \ln x_n}n = \ln\sqrt[n]{x_1\cdots x_n}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\exp$ est croissante : $\cG{\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n}$, avec égalité si tous les $x_i$ sont égaux.</p>
+
+<p class="ml">Exemple 2 : moyenne et carrés</p>
+<p>Montrer $\Big(\frac{x_1 + \dots + x_n}n\Big)^2\leq\frac{x_1^2 + \dots + x_n^2}n$.</p>
+<p><b>Étape 1 : Rappel.</b> Jensen avec poids $\frac1n$ pour une fonction convexe.</p>
+<p><b>Étape 2 : La fonction.</b> $x\mapsto x^2$ est convexe sur $\mathbb R$ (dérivée seconde $2\geq0$).</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\Big(\frac1n\sum x_i\Big)^2\leq\frac1n\sum x_i^2}$ (c'est aussi $V(X)\geq0$ pour une loi uniforme).</p>
+
+<h2 id="x-pentes">3. Le lemme des pentes</h2>
+<div class="sbox">$$f\ \text{convexe}\iff\text{pour tout}\ a\in I,\ x\mapsto\frac{f(x) - f(a)}{x - a}\ \text{est croissante sur}\ I\setminus\{a\}.$$
+$$x \lt y \lt z:\quad\frac{f(y) - f(x)}{y - x}\leq\frac{f(z) - f(x)}{z - x}\leq\frac{f(z) - f(y)}{z - y}.$$</div>
+<p>Conséquence : une fonction convexe sur un intervalle <b>ouvert</b> est dérivable à gauche et à droite en tout point, donc continue.</p>
+
+<h2 id="x-der">4. Avec les dérivées</h2>
+<div class="sbox">$$f\ \text{dérivable}:\ f\ \text{convexe}\iff f'\ \text{croissante}\iff\text{la courbe est au-dessus de ses}\ \cO{\text{tangentes}}:\ f(x)\geq f(a) + f'(a)(x - a).$$
+$$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
+<p class="ml">Les deux armes pour une inégalité</p>
+<p><b>Tangente</b> : une fonction convexe est au-dessus de ses tangentes (minorations). <b>Corde</b> : elle est en dessous de ses cordes sur $[a, b]$ (majorations). Pour une concave, c'est l'inverse.</p>
+
+<p class="ml">Exemple 3 : $e^x\geq1 + x$</p>
+<p><b>Étape 1 : Rappel.</b> Convexe $\Rightarrow$ au-dessus de ses tangentes.</p>
+<p><b>Étape 2 : Convexité.</b> $\exp'' = \exp > 0$ : $\exp$ est convexe sur $\mathbb R$.</p>
+<p><b>Étape 3 : La tangente en $0$.</b> $y = e^0 + e^0(x - 0) = 1 + x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geq1 + x}$ pour tout réel $x$ (égalité seulement en $0$).</p>
+
+<p class="ml">Exemple 4 : $\ln(1 + x)\leq x$</p>
+<p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ en dessous de ses tangentes.</p>
+<p><b>Étape 2 : Concavité.</b> $f(x) = \ln(1 + x)$, $f''(x) = -\frac1{(1 + x)^2} \lt 0$ sur $]-1, +\infty[$.</p>
+<p><b>Étape 3 : La tangente en $0$.</b> $f(0) = 0$, $f'(0) = 1$ : $y = x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\ln(1 + x)\leq x}$ pour tout $x > -1$.</p>
+
+<p class="ml">Exemple 5 : l'inégalité de Jordan $\sin x\geq\frac2\pi x$</p>
+<p>Pour $x\in[0, \frac\pi2]$.</p>
+<p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ au-dessus de ses cordes.</p>
+<p><b>Étape 2 : Concavité.</b> $\sin'' = -\sin\leq0$ sur $[0, \frac\pi2]$.</p>
+<p><b>Étape 3 : La corde.</b> Elle relie $(0, 0)$ et $\big(\frac\pi2, 1\big)$ : $y = \frac2\pi x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\frac2\pi x\leq\sin x\leq x}$ sur $[0, \frac\pi2]$ (la majoration par $x$ : tangente en $0$).</p>
+
+<p class="ml">Exemple 6 : l'inégalité de Young</p>
+<p>$a, b > 0$, $p, q > 1$ avec $\frac1p + \frac1q = 1$ : $ab\leq\frac{a^p}p + \frac{b^q}q$.</p>
+<p><b>Étape 1 : Rappel.</b> $\ln$ concave : $\ln(\lambda u + (1 - \lambda)v)\geq\lambda\ln u + (1 - \lambda)\ln v$.</p>
+<p><b>Étape 2 : Le choix.</b> $u = a^p$, $v = b^q$, $\lambda = \frac1p$, $1 - \lambda = \frac1q$.</p>
+<p><b>Étape 3 : On applique.</b> $\ln\Big(\frac{a^p}p + \frac{b^q}q\Big)\geq\frac1p\ln a^p + \frac1q\ln b^q = \ln a + \ln b = \ln(ab)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{ab\leq\frac{a^p}p + \frac{b^q}q}$ (avec $p = q = 2$ : $ab\leq\frac{a^2 + b^2}2$).</p>
+
+<h2 id="x-usu">5. Les fonctions usuelles</h2>
+<table class="mtab">
+<tr><th>Convexes</th><th>Concaves</th></tr>
+<tr><td>$\exp$ sur $\mathbb R$ ; $x^2$, $|x|$ sur $\mathbb R$</td><td>$\ln$ sur $]0, +\infty[$</td></tr>
+<tr><td>$x^\alpha$ sur $\mathbb R_+$ pour $\alpha\geq1$</td><td>$x^\alpha$ sur $\mathbb R_+$ pour $0\leq\alpha\leq1$ ($\sqrt x$)</td></tr>
+<tr><td>$\frac1x$ sur $]0, +\infty[$ ; $\operatorname{ch}$ sur $\mathbb R$</td><td>$\sin$ sur $[0, \pi]$, $\cos$ sur $[-\frac\pi2, \frac\pi2]$</td></tr>
+<tr><td>$x\ln x$ sur $]0, +\infty[$ ; $\tan$ sur $[0, \frac\pi2[$</td><td>$\arctan$ sur $\mathbb R_+$</td></tr>
+</table>
+<p>Une norme est convexe. Une somme de convexes est convexe, un sup de convexes aussi ; une composée $g\circ f$ est convexe si $f$ est convexe et $g$ convexe <b>croissante</b>.</p>
+
+<h2 id="x-ineg">6. Démontrer une inégalité : quelle méthode ?</h2>
+<p><b>1.</b> Une fonction connue, une tangente ou une corde : <b>convexité</b>. <b>2.</b> Une moyenne, des poids qui somment à $1$ : <b>Jensen</b>. <b>3.</b> Un produit et une somme : <b>arithmético-géométrique</b> ou <b>Young</b>. <b>4.</b> Sinon : étudier la fonction différence $g(x) = \text{droite} - \text{gauche}$.</p>
+<p class="ml">Exemple 7 : la moyenne de puissances</p>
+<p>Pour $a, b\geq0$ et $p\geq1$ : $\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2$.</p>
+<p><b>Étape 1 : Rappel.</b> Définition de la convexité avec $\lambda = \frac12$.</p>
+<p><b>Étape 2 : La fonction.</b> $x\mapsto x^p$ sur $\mathbb R_+$ : dérivée seconde $p(p - 1)x^{p-2}\geq0$ pour $p\geq1$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2}$.</p>
+
+<h2 id="x-enonce">7. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $f$ est convexe »</b><span>$f''\geq0$, ou $f'$ croissante, ou somme/sup de convexes.</span></div>
+<div><b>Une minoration par une droite</b><span>Tangente d'une convexe.</span></div>
+<div><b>Une majoration par une droite sur $[a, b]$</b><span>Corde d'une convexe.</span></div>
+<div><b>Moyennes, poids de somme $1$</b><span>Jensen.</span></div>
+<div><b>Produit $\leq$ somme</b><span>Concavité de $\ln$ : arithmético-géométrique, Young.</span></div>
+<div><b>$\sin x\geq\dots$ sur $[0, \frac\pi2]$</b><span>Concavité de $\sin$, corde.</span></div>
+<div><b>« Convexe et majorée sur $\mathbb R$ »</b><span>Constante (exercice 1).</span></div>
+</div>
+
+<h2 id="x-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Confondre le sens : convexe = <b>sous</b> les cordes, <b>au-dessus</b> des tangentes.</p>
+<p><b>2.</b> Jensen avec des poids qui ne somment pas à $1$, ou négatifs.</p>
+<p><b>3.</b> Oublier de préciser l'intervalle de convexité ($\sin$ n'est pas concave sur $\mathbb R$).</p>
+<p><b>4.</b> Composer $g\circ f$ sans vérifier que $g$ est croissante.</p>
+<p><b>5.</b> Appliquer $\ln$ concave à des nombres négatifs.</p>
+</div>
+
+<h2 id="x-entrainement">S'entraîner</h2>
+<div data-mlab="cordes"></div>
+<div data-mlab="quizcvx"></div>
+
+<h2 id="x-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : convexe et majorée sur $\mathbb R$</p>
+<p>$f$ convexe et majorée sur $\mathbb R$. Montrer que $f$ est constante.</p>
+<p><b>Étape 1 : Rappel.</b> Lemme des pentes : $x\mapsto\frac{f(x) - f(a)}{x - a}$ est croissante.</p>
+<p><b>Étape 2 : Par l'absurde.</b> Si $f(b) > f(a)$ avec $a \lt b$, la pente $s = \frac{f(b) - f(a)}{b - a} > 0$.</p>
+<p><b>Étape 3 : Pour $x > b$.</b> Par croissance des pentes, $\frac{f(x) - f(a)}{x - a}\geq s$, donc $f(x)\geq f(a) + s(x - a)\to+\infty$ : $f$ n'est pas majorée.</p>
+<p><b>Étape 4 : Le cas $f(b) \lt f(a)$.</b> Même raisonnement vers $-\infty$.</p>
+<p><b>Étape 5 : Conclusion.</b> $f(a) = f(b)$ pour tous $a, b$ : $\cG{f\ \text{est constante}}$.</p>
+
+<p class="ml">Exercice 2 : l'inégalité de Hölder (cas discret)</p>
+<p>$a_i, b_i\geq0$, $\frac1p + \frac1q = 1$ : $\sum a_ib_i\leq\big(\sum a_i^p\big)^{1/p}\big(\sum b_i^q\big)^{1/q}$.</p>
+<p><b>Étape 1 : Rappel.</b> Young : $uv\leq\frac{u^p}p + \frac{v^q}q$ (exemple 6).</p>
+<p><b>Étape 2 : On normalise.</b> $A = \big(\sum a_i^p\big)^{1/p}$, $B = \big(\sum b_i^q\big)^{1/q}$ (supposés non nuls), $u_i = \frac{a_i}A$, $v_i = \frac{b_i}B$ : $\sum u_i^p = \sum v_i^q = 1$.</p>
+<p><b>Étape 3 : Young terme à terme, puis on somme.</b> $\sum u_iv_i\leq\frac1p\sum u_i^p + \frac1q\sum v_i^q = \frac1p + \frac1q = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\sum\frac{a_ib_i}{AB}\leq1$ : $\cG{\sum a_ib_i\leq AB}$ (avec $p = q = 2$ : Cauchy-Schwarz).</p>
+
+<h2 id="x-arbre">L'arbre de la convexité</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question de convexité</span><ul>
+<li><div class="hr"><em>$f$ convexe ?</em><span class="hq">$f$ deux fois dérivable ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#x-der">$f''\geq0$</a></div></li>
+<li><div class="hr"><em>une fois</em><a class="hl" href="#x-der">$f'$ croissante</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#x-def">définition, somme, sup</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une inégalité</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>$f\geq$ droite</em><a class="hl ok" href="#x-der">tangente d'une convexe</a></div></li>
+<li><div class="hr"><em>$f\leq$ droite sur $[a, b]$</em><a class="hl" href="#x-der">corde d'une convexe</a></div></li>
+<li><div class="hr"><em>des moyennes</em><a class="hl" href="#x-jensen">Jensen</a></div></li>
+<li><div class="hr"><em>produit et somme</em><a class="hl" href="#x-der">$\ln$ concave : IAG, Young</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des pentes</em><a class="hl end" href="#x-pentes">lemme des trois pentes</a></div></li>
 </ul></div></div>
 `
 };
