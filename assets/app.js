@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2242,6 +2242,89 @@ const QSF = [
 
 /* ---------- Labos de la Méthode « Polynômes » ---------- */
 const ptex = (cs, v = "X") => { const n = cs.length - 1; return fsum(cs.map((c, i) => [c, n - i === 0 ? "" : n - i === 1 ? v : `${v}^{${n - i}}`])); };
+/* Nombres réels : |ax + b| ⋈ c */
+function mlAbsVal(host) {
+  const OPS = ["\\leq", "\\lt", "\\geq", "\\gt"];
+  const gen = () => { let a = 0; while (!a) a = rnd(-4, 4); return { a, b: rnd(-6, 6), c: rnd(1, 7), o: rnd(0, 3) }; };
+  const build = ({ a, b, c, o }) => {
+    const X = fsum([[a, "x"], [b, ""]]), op = OPS[o], inner = o < 2, st = o % 2 ? "\\lt" : "\\leq";
+    const L = Fr(-c - b, a), U = Fr(c - b, a), lo = a > 0 ? L : U, hi = a > 0 ? U : L;
+    const ax = fsum([[a, "x"]]), dv = a > 0 ? `On divise par $${a} > 0$, le sens ne change pas` : `On divise par $${a} \\lt 0$ : <b>on retourne</b> les inégalités`;
+    const s = [`$$|${X}|\\ ${op}\\ ${c}$$`];
+    s.push(`<p class="mlstep">1. Rappel, pour $a\\geq0$ :</p>$$${inner ? `|X|\\ ${st}\\ a\\iff-a\\ ${st}\\ X\\ ${st}\\ a` : `|X|\\ ${op}\\ a\\iff X\\ ${st === "\\lt" ? "\\lt" : "\\leq"}\\ -a\\ \\text{ou}\\ X\\ ${op}\\ a`}$$`);
+    if (inner) {
+      s.push(`<p class="mlstep">2. Avec $X = ${X}$ et $a = ${c}$ :</p>$$-${c}\\ ${st}\\ ${X}\\ ${st}\\ ${c}$$`);
+      s.push(`<p class="mlstep">3. On retranche $${fpar(b)}$ aux trois membres :</p>$$${-c - b}\\ ${st}\\ ${ax}\\ ${st}\\ ${c - b}$$`);
+      s.push(`<p class="mlstep">4. ${dv} :</p>$$${ftex(lo)}\\ ${st}\\ x\\ ${st}\\ ${ftex(hi)}$$`);
+      const br = o ? ["]", "["] : ["[", "]"];
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{\\mathcal S = \\left${br[0]}${ftex(lo)},\\ ${ftex(hi)}\\right${br[1]}}$$`);
+    } else {
+      const ost = o === 3 ? "\\lt" : "\\leq", og = o === 3 ? "\\gt" : "\\geq";
+      s.push(`<p class="mlstep">2. Avec $X = ${X}$ et $a = ${c}$ :</p>$$${X}\\ ${ost}\\ -${c}\\quad\\text{ou}\\quad${X}\\ ${og}\\ ${c}$$`);
+      s.push(`<p class="mlstep">3. On retranche $${fpar(b)}$ :</p>$$${ax}\\ ${ost}\\ ${-c - b}\\quad\\text{ou}\\quad${ax}\\ ${og}\\ ${c - b}$$`);
+      s.push(`<p class="mlstep">4. ${dv}${a < 0 ? " (les deux morceaux s'échangent)" : ""} :</p>$$x\\ ${ost}\\ ${ftex(lo)}\\quad\\text{ou}\\quad x\\ ${og}\\ ${ftex(hi)}$$`);
+      const [c1, c2] = o === 3 ? ["[", "]"] : ["]", "["];
+      s.push(`<p class="mlstep">5. Conclusion : une <b>réunion</b>.</p>$$\\cG{\\mathcal S = \\left]-\\infty,\\ ${ftex(lo)}\\right${c1}\\cup\\left${c2}${ftex(hi)},\\ +\\infty\\right[}$$`);
+    }
+    return s;
+  };
+  stepLab(host, "Résoudre une inéquation avec une valeur absolue", gen, build);
+}
+/* Nombres réels : ⌊ax + b⌋ = n */
+function mlEntX(host) {
+  const gen = () => { const A = [-3, -2, 2, 3, 4]; return { a: A[rnd(0, 4)], b: rnd(-4, 4), n: rnd(-4, 5) }; };
+  const build = ({ a, b, n }) => {
+    const X = fsum([[a, "x"], [b, ""]]), ax = fsum([[a, "x"]]);
+    const P = Fr(n - b, a), Q = Fr(n + 1 - b, a), s = [`$$\\left\\lfloor ${X}\\right\\rfloor = ${n}$$`];
+    s.push(`<p class="mlstep">1. Rappel :</p>$$\\lfloor X\\rfloor = \\cV n\\iff\\cV n\\leq X\\lt\\cV n + 1\\qquad(\\cV n\\in\\mathbb Z)$$`);
+    s.push(`<p class="mlstep">2. Avec $X = ${X}$ et $\\cV n = ${n}$ :</p>$$${n}\\leq ${X}\\lt ${n + 1}$$`);
+    s.push(`<p class="mlstep">3. On retranche $${fpar(b)}$ :</p>$$${n - b}\\leq ${ax}\\lt ${n + 1 - b}$$`);
+    if (a > 0) {
+      s.push(`<p class="mlstep">4. On divise par $${a} > 0$, le sens ne change pas :</p>$$${ftex(P)}\\leq x\\lt ${ftex(Q)}$$`);
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{\\mathcal S = \\left[${ftex(P)},\\ ${ftex(Q)}\\right[}$$<p class="mlnote">Contrôle : en $x = ${ftex(P)}$, on trouve $${X} = ${n}$ et $\\lfloor${n}\\rfloor = ${n}$.</p>`);
+    } else {
+      s.push(`<p class="mlstep">4. On divise par $${a} \\lt 0$ : <b>on retourne</b> les inégalités, et la stricte change de côté :</p>$$${ftex(Q)}\\lt x\\leq ${ftex(P)}$$`);
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{\\mathcal S = \\left]${ftex(Q)},\\ ${ftex(P)}\\right]}$$<p class="mlnote">Contrôle : en $x = ${ftex(P)}$, on trouve $${X} = ${n}$ et $\\lfloor${n}\\rfloor = ${n}$.</p>`);
+    }
+    return s;
+  };
+  stepLab(host, "Résoudre une équation avec une partie entière", gen, build);
+}
+/* Nombres réels : la caractérisation de la borne supérieure */
+function mlSupEps(host) {
+  const F = [
+    { t: "1 - \\frac1n", f: n => 1 - 1 / n, n0: 1, M: 1, Mt: "1", max: false },
+    { t: "\\frac{2n + 1}{n + 2}", f: n => (2 * n + 1) / (n + 2), n0: 0, M: 2, Mt: "2", max: false },
+    { t: "\\frac{n^2}{n^2 + 1}", f: n => n * n / (n * n + 1), n0: 0, M: 1, Mt: "1", max: false },
+    { t: "1 + \\frac{(-1)^n}n", f: n => 1 + (-1) ** n / n, n0: 1, M: 1.5, Mt: "\\frac32", max: true }
+  ], EPS = [0.5, 0.3, 0.2, 0.1, 0.05, 0.02, 0.01, 0.001];
+  let fi = 0, ei = 2;
+  const draw = () => {
+    const g = F[fi], e = EPS[ei], N1 = 30, xs = [];
+    for (let n = g.n0; n <= N1; n++) xs.push([n, g.f(n)]);
+    let N = g.n0; while (!(g.f(N) > g.M - e)) N++;
+    const lo = Math.min(...xs.map(p => p[1]), g.M - e) - 0.1, hi = g.M + 0.15, W = 520, H = 240;
+    const X = n => 40 + (n - g.n0) / (N1 - g.n0) * (W - 60), Y = y => H - 25 - (y - lo) / (hi - lo) * (H - 45);
+    const svg = `<svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Termes de la suite et bande de largeur epsilon"><rect x="40" y="${Y(g.M)}" width="${W - 60}" height="${Y(g.M - e) - Y(g.M)}" fill="rgba(194,124,0,.16)"/><line x1="40" x2="${W - 20}" y1="${Y(g.M)}" y2="${Y(g.M)}" stroke="#D4503B" stroke-width="2"/><line x1="40" x2="${W - 20}" y1="${Y(g.M - e)}" y2="${Y(g.M - e)}" stroke="#C27C00" stroke-dasharray="5 4"/>${xs.map(([n, y]) => `<circle cx="${X(n).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="${n === N ? 5.5 : 3.5}" fill="${y > g.M - e ? "#C27C00" : "#2B5BD7"}"${n === N ? ` stroke="#1F8A5B" stroke-width="2.5"` : ""}/>`).join("")}<text x="${W - 22}" y="${Y(g.M) - 6}" class="tx" text-anchor="end">M</text><text x="${W - 22}" y="${Y(g.M - e) + 14}" class="tx" text-anchor="end">M − ε</text><text x="40" y="${H - 8}" class="tx">n = ${g.n0}</text><text x="${W - 20}" y="${H - 8}" class="tx" text-anchor="end">n = ${N1}</text></svg>`;
+    host.innerHTML = `<p class="mlt">Aucun nombre plus petit que $M$ ne majore $A$</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">$\\varepsilon = ${e}$ <input type="range" min="0" max="${EPS.length - 1}" value="${ei}" data-e aria-label="Valeur de epsilon"></label></div>${svg}<p class="mlcalc">$$\\cB A = \\Big\\{${g.t}\\Big\\},\\qquad\\cR{\\sup A = ${g.Mt}}${g.max ? "\\ \\text{(atteint : max)}" : "\\ \\text{(non atteint)}"}$$</p><p class="mlnote">Dans la bande orange, les éléments dépassent $\\cR M - \\cO\\varepsilon$. Le premier est au rang $\\cV n = ${N}$ : $\\cB{a_{${N}}} \\approx ${g.f(N).toFixed(4)} > ${(g.M - e).toFixed(4)}$${N > N1 ? ", hors du dessin" : " (cerclé de vert)"}. ${g.max ? "Le max est atteint : le même rang convient pour tout $\\varepsilon$." : "Plus $\\varepsilon$ est petit, plus ce rang recule, mais il existe toujours."}</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    $("[data-e]", host).addEventListener("input", ev => { ei = +ev.target.value; draw(); $("[data-e]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QREEL = [
+  ["$\\lfloor-3{,}2\\rfloor = -3$.", false, "Faux : $\\lfloor-3{,}2\\rfloor = -4$, car $-4\\leq-3{,}2\\lt-3$."],
+  ["Pour tous réels $x, y$ : $\\lfloor x + y\\rfloor = \\lfloor x\\rfloor + \\lfloor y\\rfloor$.", false, "Faux : $x = y = 0{,}5$ donne $1\\neq0$. C'est vrai si $y$ est un entier."],
+  ["$|x - 3|\\leq2\\iff x\\in[1, 5]$.", true, "Vrai : $-2\\leq x - 3\\leq2\\iff1\\leq x\\leq5$."],
+  ["Toute partie non vide et majorée de $\\mathbb R$ a un maximum.", false, "Faux : elle a une <b>borne supérieure</b>, pas forcément un max. $[0, 1[$ n'a pas de max."],
+  ["$\\sup\\{1 - \\frac1n,\\ n\\geq1\\} = 1$.", true, "Vrai : $1$ majore, et $1 - \\frac1n\\to1$ (caractérisation séquentielle)."],
+  ["Si $a \\lt 2$ pour tout $a\\in A$, alors $\\sup A \\lt 2$.", false, "Faux : on obtient seulement $\\sup A\\leq2$. Exemple : $A = [0, 2[$, $\\sup A = 2$."],
+  ["$|x + y| = |x| + |y|$ si et seulement si $xy\\geq0$.", true, "Vrai : c'est le cas d'égalité de l'inégalité triangulaire."],
+  ["Entre deux réels distincts, il y a un rationnel et un irrationnel.", true, "Vrai : $\\mathbb Q$ et $\\mathbb R\\setminus\\mathbb Q$ sont denses dans $\\mathbb R$."],
+  ["$\\sqrt{x^2} = x$ pour tout réel $x$.", false, "Faux : $\\sqrt{x^2} = |x|$. Pour $x = -2$, $\\sqrt4 = 2\\neq-2$."],
+  ["$\\{x\\in\\mathbb Q,\\ x^2\\lt2\\}$ a une borne supérieure dans $\\mathbb Q$.", false, "Faux : dans $\\mathbb R$ c'est $\\sqrt2$, qui n'est pas rationnel."]
+];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };
   const build = e => {

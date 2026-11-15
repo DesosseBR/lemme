@@ -203,5 +203,28 @@ LEMME.EXMETH = {
   String.raw`Relations coefficients-racines.`,
   String.raw`Construire les $L_i$, puis $P = \sum y_iL_i$.`,
   String.raw`Algorithme d'Euclide, puis remonter les calculs.`
+],
+"Nombres réels et suites numériques": [
+  String.raw`$|X|\leq a\iff-a\leq X\leq a$, puis isoler $x$.`,
+  String.raw`Couper aux zéros de chaque $|\ |$, tableau de signes, une équation par morceau.`,
+  String.raw`Écrire $x = (x - y) + y$, inégalité triangulaire, puis échanger $x$ et $y$.`,
+  String.raw`Inégalité triangulaire terme par terme, puis majorer chaque facteur.`,
+  String.raw`$\lfloor X\rfloor = n\iff n\leq X \lt n + 1$, puis isoler $x$.`,
+  String.raw`Additionner les encadrements $\lfloor x\rfloor\leq x \lt \lfloor x\rfloor + 1$.`,
+  String.raw`Pour $\lfloor Y\rfloor = k$ : montrer $k\leq Y \lt k + 1$.`,
+  String.raw`$d_n = \frac{\lfloor10^nx\rfloor}{10^n}$ : encadrer $10^nx$ entre deux entiers consécutifs.`,
+  String.raw`Candidat, majorant, puis $\forall\varepsilon,\ \exists a > M - \varepsilon$.`,
+  String.raw`Séparer $n$ pair et $n$ impair, puis chercher max et inf.`,
+  String.raw`Majorant, puis une suite d'éléments de $A$ qui tend vers le candidat.`,
+  String.raw`Majorer $a + b$, puis $a_n + b_n\to\sup A + \sup B$.`,
+  String.raw`$x\leq z\leq y$ avec $x, y\in K\Rightarrow z\in K$.`,
+  String.raw`$n > \frac1{y - x}$, $p = \lfloor nx\rfloor + 1$, rationnel $\frac pn$.`,
+  String.raw`Rationnel entre $x - \sqrt2$ et $y - \sqrt2$, puis ajouter $\sqrt2$.`
+],
+"Nombres réels et suites numériques (exercices)": [
+  String.raw`Écrire $a_n = 2 - \frac3{n + 2}$, variations, puis min et sup.`,
+  String.raw`$2\leq x^2 \lt 3$, racine : $\sqrt2\leq|x| \lt \sqrt3$.`,
+  String.raw`$x = k + \theta$, sortir les entiers, découper $\theta\lt\frac12$ et $\theta\geq\frac12$.`,
+  String.raw`Passer au sup ($b$ fixé), puis à l'inf.`
 ]
 };

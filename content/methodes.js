@@ -4168,5 +4168,356 @@ $$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qqua
 <a class="tl tend" href="#q-pgcd">PGCD, Bézout : Euclide</a></div>
 </div>
 </div>
+`,
+"Nombres réels et suites numériques": R`
+<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la partie $\cB A$ et ses éléments $\cB a$. <span class="kR">rouge</span> : les majorants, minorants et bornes $\cR M$, $\cR{\sup A}$, $\cR{\inf A}$. <span class="kO">orange</span> : la marge $\cO\varepsilon$. <span class="kV">violet</span> : les entiers ($\cV n$, $\cV p$, $\cV{\lfloor x\rfloor}$). <span class="kG">vert</span> : les conclusions.</p>
+
+<h2 id="r-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Valeur absolue</td><td>$|x| = \max(x, -x)$</td><td>$|x| = x$ si $x\geq0$, $|x| = -x$ si $x\leq0$.</td></tr>
+<tr><td>Distance</td><td>$|x - y|$</td><td>La distance entre $x$ et $y$ sur la droite.</td></tr>
+<tr><td>Partie entière</td><td>$\cV{\lfloor x\rfloor}$</td><td>Le plus grand entier $\leq x$. Ancienne notation : $E(x)$ ou $[x]$.</td></tr>
+<tr><td>Partie fractionnaire</td><td>$x - \lfloor x\rfloor$</td><td>Toujours dans $[0, 1[$.</td></tr>
+<tr><td>Décimaux</td><td>$\mathbb D = \{\frac{\cV p}{10^{\cV n}},\ p\in\mathbb Z,\ n\in\mathbb N\}$</td><td>$\mathbb Z\subset\mathbb D\subset\mathbb Q\subset\mathbb R$.</td></tr>
+<tr><td>Bornes</td><td>$\cR{\sup A}$, $\cR{\inf A}$</td><td>Le plus petit majorant, le plus grand minorant.</td></tr>
+<tr><td>Extremums</td><td>$\max A$, $\min A$</td><td>Une borne qui <b>appartient</b> à $A$.</td></tr>
+<tr><td>Droite achevée</td><td>$\overline{\mathbb R} = \mathbb R\cup\{-\infty, +\infty\}$</td><td>$-\infty \lt x \lt +\infty$ pour tout réel $x$.</td></tr>
+</table>
+
+<h2 id="r-abs">2. Valeur absolue : les règles de calcul</h2>
+<div class="sbox">$$|x|\geq0,\qquad|x| = 0\iff x = 0,\qquad|xy| = |x|\,|y|,\qquad\Big|\frac xy\Big| = \frac{|x|}{|y|}\ (y\neq0),\qquad|x|^2 = x^2,\qquad\sqrt{x^2} = |x|.$$</div>
+<p>Pour $\cR a\geq0$ (la marge autorisée), on traduit une valeur absolue en encadrement :</p>
+<div class="sbox">$$|X|\leq\cR a\iff-\cR a\leq X\leq\cR a\qquad\qquad|X|\geq\cR a\iff\big(X\leq-\cR a\ \text{ou}\ X\geq\cR a\big)$$
+$$|x - c|\leq\cR r\iff x\in[c - \cR r,\ c + \cR r]\qquad\text{(boule de centre } c\text{, de rayon } r\text{)}$$</div>
+<p>Et aussi : $-|x|\leq x\leq|x|$, $|x| = |y|\iff x = \pm y$, $|x|\leq|y|\iff x^2\leq y^2$.</p>
+<p class="ml piege">Piège</p>
+<p>$|x|\geq a$ donne une <b>réunion</b> de deux morceaux, pas un encadrement. Et $\sqrt{x^2} = |x|$, pas $x$.</p>
+
+<p class="ml">Exemple 1 : une seule valeur absolue</p>
+<p>Résoudre $|2x - 1|\leq3$.</p>
+<p><b>Étape 1 : Rappel.</b> $|X|\leq\cR a\iff-\cR a\leq X\leq\cR a$, valable pour $\cR a\geq0$.</p>
+<p><b>Étape 2 : On l'applique</b> avec $X = 2x - 1$ et $\cR a = 3\geq0$ :</p>
+$$|2x - 1|\leq3\iff-3\leq2x - 1\leq3.$$
+<p><b>Étape 3 : On ajoute $1$</b> aux trois membres :</p>
+$$-3 + 1\leq2x\leq3 + 1\iff-2\leq2x\leq4.$$
+<p><b>Étape 4 : On divise par $2 > 0$</b> (le sens ne change pas) :</p>
+$$-1\leq x\leq2.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\mathcal S = [-1,\ 2]}.$$
+<p>Contrôle : le centre est $\frac12$, le rayon $\frac32$, et $|2x - 1|\leq3\iff|x - \frac12|\leq\frac32$.</p>
+
+<p class="ml">Exemple 2 : plusieurs valeurs absolues</p>
+<p>Résoudre $|x - 1| + |x + 2| = 5$.</p>
+<p><b>Étape 1 : Rappel.</b> $|X| = X$ si $X\geq0$, et $|X| = -X$ si $X\leq0$. Avec plusieurs valeurs absolues, on découpe $\mathbb R$ aux points où chacune change de signe.</p>
+<p><b>Étape 2 : Les points de coupure.</b> $x - 1 = 0$ pour $x = 1$, et $x + 2 = 0$ pour $x = -2$.</p>
+<table class="mtab">
+<tr><th>$x$</th><th>$x \lt -2$</th><th>$-2\leq x\leq1$</th><th>$x > 1$</th></tr>
+<tr><td>$|x - 1|$</td><td>$-x + 1$</td><td>$-x + 1$</td><td>$x - 1$</td></tr>
+<tr><td>$|x + 2|$</td><td>$-x - 2$</td><td>$x + 2$</td><td>$x + 2$</td></tr>
+<tr><td>somme</td><td>$-2x - 1$</td><td>$3$</td><td>$2x + 1$</td></tr>
+</table>
+<p><b>Étape 3 : Sur $]-\infty, -2[$.</b> $-2x - 1 = 5\iff x = -3$, et $-3 \lt -2$ : on garde $x = -3$.</p>
+<p><b>Étape 4 : Sur $[-2, 1]$.</b> L'équation devient $3 = 5$ : impossible, aucune solution.</p>
+<p><b>Étape 5 : Sur $]1, +\infty[$.</b> $2x + 1 = 5\iff x = 2$, et $2 > 1$ : on garde $x = 2$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\mathcal S = \{-3,\ 2\}}.$$
+<p>Vérification : $|-4| + |-1| = 5$ et $|1| + |4| = 5$.</p>
+
+<h2 id="r-tri">3. L'inégalité triangulaire</h2>
+<div class="sbox">$$\big||x| - |y|\big|\ \leq\ |x + y|\ \leq\ |x| + |y|$$
+$$\text{Égalité à droite}\iff x\ \text{et}\ y\ \text{de même signe}\ (xy\geq0).\qquad\Big|\sum_{k=1}^{\cV n}x_k\Big|\leq\sum_{k=1}^{\cV n}|x_k|.$$</div>
+<p class="ml">Pourquoi (à savoir refaire)</p>
+<p>Les deux membres sont positifs, on compare les carrés : $|x + y|^2 = x^2 + 2xy + y^2\leq x^2 + 2|xy| + y^2 = (|x| + |y|)^2$, car $xy\leq|xy|$. L'égalité a lieu si et seulement si $xy = |xy|$, c'est-à-dire $xy\geq0$.</p>
+
+<p class="ml">Exemple 3 : la seconde inégalité triangulaire</p>
+<p>Montrer que $\big||x| - |y|\big|\leq|x - y|$ pour tous réels $x, y$.</p>
+<p><b>Étape 1 : Rappel.</b> $|a + b|\leq|a| + |b|$, et $|X|\leq\cR a\iff-\cR a\leq X\leq\cR a$.</p>
+<p><b>Étape 2 : On écrit $x = (x - y) + y$</b> et on applique l'inégalité triangulaire :</p>
+$$|x| = |(x - y) + y|\leq|x - y| + |y|\quad\text{donc}\quad|x| - |y|\leq|x - y|.$$
+<p><b>Étape 3 : On échange les rôles</b> : $y = (y - x) + x$ donne $|y| - |x|\leq|y - x| = |x - y|$, donc :</p>
+$$-|x - y|\leq|x| - |y|.$$
+<p><b>Étape 4 : On regroupe</b> les deux inégalités :</p>
+$$-|x - y|\leq|x| - |y|\leq|x - y|.$$
+<p><b>Étape 5 : Conclusion</b> avec le rappel de l'étape 1, pour $\cR a = |x - y|$ :</p>
+$$\cG{\big||x| - |y|\big|\leq|x - y|}.$$
+
+<p class="ml">Exemple 4 : majorer une expression</p>
+<p>Montrer que $|x^2\sin x - 3\cos(2x)|\leq7$ pour tout $x\in[-2, 2]$.</p>
+<p><b>Étape 1 : Rappel.</b> $|a - b|\leq|a| + |b|$ (inégalité triangulaire avec $-b$), et $|ab| = |a|\,|b|$.</p>
+<p><b>Étape 2 : On sépare</b> les deux termes :</p>
+$$|x^2\sin x - 3\cos(2x)|\leq|x^2\sin x| + |3\cos(2x)| = x^2\,|\sin x| + 3\,|\cos(2x)|.$$
+<p><b>Étape 3 : On majore chaque morceau.</b> Sur $[-2, 2]$, $x^2\leq4$. Toujours, $|\sin x|\leq1$ et $|\cos(2x)|\leq1$.</p>
+$$x^2\,|\sin x|\leq4\times1 = 4,\qquad3\,|\cos(2x)|\leq3.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{|x^2\sin x - 3\cos(2x)|\leq4 + 3 = 7.}$$
+<p class="ml piege">Piège</p>
+<p>On ne majore jamais une différence $|a - b|$ par $|a| - |b|$ : le signe moins devient un plus.</p>
+
+<h2 id="r-ent">4. La partie entière</h2>
+<div class="sbox">$$\cV{\lfloor x\rfloor} = \cV n\iff\Big(\cV n\in\mathbb Z\ \ \text{et}\ \ \cV n\leq x \lt \cV n + 1\Big)$$
+$$x - 1 \lt \lfloor x\rfloor\leq x,\qquad\lfloor x + \cV m\rfloor = \lfloor x\rfloor + \cV m\ \ (\cV m\in\mathbb Z),\qquad x\leq y\Rightarrow\lfloor x\rfloor\leq\lfloor y\rfloor.$$</div>
+<p>Exemples : $\lfloor 2{,}7\rfloor = 2$, $\lfloor-2{,}5\rfloor = -3$ (et non $-2$), $\lfloor\pi\rfloor = 3$, $\lfloor-1\rfloor = -1$.</p>
+<p class="ml piege">Attention</p>
+<p>En général $\lfloor x + y\rfloor\neq\lfloor x\rfloor + \lfloor y\rfloor$ : $\lfloor0{,}5 + 0{,}5\rfloor = 1$ mais $\lfloor0{,}5\rfloor + \lfloor0{,}5\rfloor = 0$. De même, $x \lt y$ ne donne pas $\lfloor x\rfloor \lt \lfloor y\rfloor$ ($\lfloor0{,}2\rfloor = \lfloor0{,}7\rfloor$). L'égalité $\lfloor x + m\rfloor = \lfloor x\rfloor + m$ n'est vraie que pour $m$ <b>entier</b>.</p>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Une équation $\lfloor X\rfloor = n$ se traduit en encadrement $n\leq X \lt n + 1$. <b>2.</b> Pour une identité, on pose $x = \lfloor x\rfloor + \theta$ avec $\theta\in[0, 1[$ et on découpe selon $\theta$. <b>3.</b> Pour montrer $\lfloor y\rfloor = n$, on montre $n\in\mathbb Z$ et $n\leq y \lt n + 1$.</p>
+
+<p class="ml">Exemple 5 : une équation</p>
+<p>Résoudre $\lfloor2x - 1\rfloor = 3$.</p>
+<p><b>Étape 1 : Rappel.</b> $\lfloor X\rfloor = \cV n\iff\cV n\leq X \lt \cV n + 1$, pour $\cV n\in\mathbb Z$.</p>
+<p><b>Étape 2 : On l'applique</b> avec $X = 2x - 1$ et $\cV n = 3$ :</p>
+$$\lfloor2x - 1\rfloor = 3\iff3\leq2x - 1 \lt 4.$$
+<p><b>Étape 3 : On ajoute $1$</b> :</p>
+$$4\leq2x \lt 5.$$
+<p><b>Étape 4 : On divise par $2 > 0$</b> :</p>
+$$2\leq x \lt \frac52.$$
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\mathcal S = \Big[2,\ \frac52\Big[}.$$
+<p>Contrôle : $x = 2$ donne $\lfloor3\rfloor = 3$, et $x = 2{,}49$ donne $\lfloor3{,}98\rfloor = 3$.</p>
+
+<p class="ml">Exemple 6 : une inégalité sur une somme</p>
+<p>Montrer que $\lfloor x\rfloor + \lfloor y\rfloor\leq\lfloor x + y\rfloor\leq\lfloor x\rfloor + \lfloor y\rfloor + 1$.</p>
+<p><b>Étape 1 : Rappel.</b> $\lfloor x\rfloor\leq x \lt \lfloor x\rfloor + 1$, et $\lfloor X\rfloor = \cV n\iff\cV n\leq X \lt \cV n + 1$.</p>
+<p><b>Étape 2 : On écrit les deux encadrements</b> et on les additionne :</p>
+$$\lfloor x\rfloor\leq x \lt \lfloor x\rfloor + 1,\quad\lfloor y\rfloor\leq y \lt \lfloor y\rfloor + 1\quad\Longrightarrow\quad\cV p\leq x + y \lt \cV p + 2,\qquad\cV p = \lfloor x\rfloor + \lfloor y\rfloor\in\mathbb Z.$$
+<p><b>Étape 3 : Inégalité de gauche.</b> $\cV p$ est un entier $\leq x + y$, et $\lfloor x + y\rfloor$ est le <b>plus grand</b> entier $\leq x + y$, donc $\cV p\leq\lfloor x + y\rfloor$.</p>
+<p><b>Étape 4 : Inégalité de droite.</b> $\lfloor x + y\rfloor\leq x + y \lt \cV p + 2$. Un entier strictement plus petit que l'entier $\cV p + 2$ est $\leq\cV p + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\lfloor x\rfloor + \lfloor y\rfloor\leq\lfloor x + y\rfloor\leq\lfloor x\rfloor + \lfloor y\rfloor + 1}.$$
+
+<p class="ml">Exemple 7 : une identité classique</p>
+<p>Pour $n\in\mathbb N^*$ et $x\in\mathbb R$, montrer que $\Big\lfloor\dfrac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor$.</p>
+<p><b>Étape 1 : Rappel.</b> Pour montrer $\lfloor Y\rfloor = \cV k$, on montre $\cV k\in\mathbb Z$ et $\cV k\leq Y \lt \cV k + 1$.</p>
+<p><b>Étape 2 : On pose $\cV k = \lfloor x\rfloor$</b> et on part de sa définition, multipliée par $n > 0$ :</p>
+$$\cV k\leq x \lt \cV k + 1\quad\Longrightarrow\quad n\cV k\leq nx \lt n\cV k + n.$$
+<p><b>Étape 3 : On passe à la partie entière.</b> $n\cV k$ est un entier $\leq nx$, donc $n\cV k\leq\lfloor nx\rfloor$. Et $\lfloor nx\rfloor\leq nx \lt n\cV k + n$.</p>
+$$n\cV k\leq\lfloor nx\rfloor \lt n\cV k + n.$$
+<p><b>Étape 4 : On divise par $n > 0$</b> :</p>
+$$\cV k\leq\frac{\lfloor nx\rfloor}n \lt \cV k + 1.$$
+<p><b>Étape 5 : Conclusion</b> par le rappel, avec $Y = \frac{\lfloor nx\rfloor}n$ :</p>
+$$\cG{\Big\lfloor\frac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor}.$$
+
+<h2 id="r-dec">5. Les approximations décimales</h2>
+<div class="sbox">$$\text{Pour}\ \cV n\in\mathbb N:\qquad d_n = \frac{\lfloor10^{\cV n}x\rfloor}{10^{\cV n}}\ \leq\ x\ \lt\ d_n + \frac1{10^{\cV n}} = \frac{\lfloor10^{\cV n}x\rfloor + 1}{10^{\cV n}}.$$</div>
+<p>$d_n$ est l'approximation décimale <b>par défaut</b> à $10^{-n}$ près, $d_n + 10^{-n}$ celle <b>par excès</b>. Ce sont des décimaux, donc des rationnels, et $0\leq x - d_n \lt 10^{-n}$, donc $d_n\to x$ : <b>tout réel est limite d'une suite de rationnels</b>.</p>
+
+<p class="ml">Exemple 8 : $\sqrt2$ à $10^{-2}$ près</p>
+<p><b>Étape 1 : Rappel.</b> $d_2 = \frac{\lfloor10^2x\rfloor}{10^2}$, avec $x = \sqrt2$. Il faut donc $\lfloor100\sqrt2\rfloor$.</p>
+<p><b>Étape 2 : On écrit $100\sqrt2 = \sqrt{20000}$</b> et on cherche l'entier $\cV n$ tel que $\cV n\leq\sqrt{20000} \lt \cV n + 1$, c'est-à-dire $\cV n^2\leq20000 \lt (\cV n + 1)^2$ (tout est positif).</p>
+<p><b>Étape 3 : On calcule deux carrés.</b></p>
+$$141^2 = 19881\leq20000,\qquad142^2 = 20164 > 20000.$$
+<p><b>Étape 4 : On lit la partie entière.</b> $141\leq100\sqrt2 \lt 142$, donc $\lfloor100\sqrt2\rfloor = \cV{141}$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{1{,}41\leq\sqrt2 \lt 1{,}42}:\quad1{,}41\ \text{par défaut},\ 1{,}42\ \text{par excès}.$$
+
+<h2 id="r-sup">6. Borne supérieure, borne inférieure</h2>
+<p class="ml">Les définitions</p>
+<p>Soit $\cB A$ une partie de $\mathbb R$. $\cR M$ est un <b>majorant</b> de $\cB A$ si $\forall\cB a\in\cB A,\ \cB a\leq\cR M$. La <b>borne supérieure</b> $\cR{\sup A}$ est le plus petit des majorants. Si elle appartient à $\cB A$, c'est le <b>maximum</b> $\max A$.</p>
+<div class="sbox">$$\textbf{Propriété de la borne supérieure : toute partie de}\ \mathbb R\ \textbf{non vide et majorée admet une borne supérieure.}$$</div>
+<p>De même, toute partie non vide et minorée admet une borne inférieure. C'est ce qui distingue $\mathbb R$ de $\mathbb Q$ : $\{x\in\mathbb Q,\ x^2 \lt 2\}$ n'a pas de borne supérieure <b>dans $\mathbb Q$</b>.</p>
+<p class="ml">La caractérisation avec $\varepsilon$</p>
+<div class="sbox">$$\cR M = \sup\cB A\iff\begin{cases}\forall\cB a\in\cB A,\ \cB a\leq\cR M&(\cR M\ \text{est un majorant})\\\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cR M - \cO\varepsilon \lt \cB a&(\text{on ne peut pas descendre})\end{cases}$$
+$$\cR m = \inf\cB A\iff\begin{cases}\forall\cB a\in\cB A,\ \cR m\leq\cB a\\\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a \lt \cR m + \cO\varepsilon\end{cases}$$</div>
+<p class="ml">La méthode en trois temps</p>
+<p><b>1.</b> Deviner le candidat $\cR M$ (calculer quelques éléments, étudier les variations). <b>2.</b> Montrer que $\cR M$ majore $\cB A$. <b>3.</b> Montrer qu'aucun nombre plus petit ne majore : avec $\cO\varepsilon$, ou avec une suite d'éléments de $\cB A$ qui tend vers $\cR M$ (§7). Enfin, regarder si $\cR M\in\cB A$ pour savoir si c'est un max.</p>
+
+<p class="ml">Exemple 9 : $A = \{1 - \frac1n,\ n\in\mathbb N^*\}$</p>
+<p><b>Étape 1 : Rappel.</b> $\cR M = \sup\cB A\iff$ $\cR M$ majore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a > \cR M - \cO\varepsilon$.</p>
+<p><b>Étape 2 : Le candidat.</b> Les éléments sont $0, \frac12, \frac23, \frac34,\dots$ : ils croissent vers $1$. Candidat : $\cR M = 1$.</p>
+<p><b>Étape 3 : $1$ est un majorant.</b> Pour tout $n\geq1$, $\frac1n > 0$, donc $1 - \frac1n \lt 1$.</p>
+<p><b>Étape 4 : On ne peut pas descendre.</b> Soit $\cO\varepsilon > 0$. On cherche $n$ tel que $1 - \frac1n > 1 - \cO\varepsilon$, c'est-à-dire $\frac1n \lt \cO\varepsilon$, soit $n > \frac1{\cO\varepsilon}$. L'entier $\cV n = \lfloor\frac1{\cO\varepsilon}\rfloor + 1$ convient.</p>
+<p><b>Étape 5 : Pas de maximum.</b> Par l'étape 3, aucun élément n'est égal à $1$, donc $1\notin\cB A$.</p>
+<p><b>Étape 6 : La borne inférieure.</b> $n\mapsto1 - \frac1n$ croît, donc $1 - \frac1n\geq1 - 1 = 0$, valeur atteinte en $n = 1$.</p>
+<p><b>Étape 7 : Conclusion.</b></p>
+$$\cG{\sup A = 1\ \text{(pas de max)},\qquad\inf A = \min A = 0}.$$
+
+<p class="ml">Exemple 10 : $A = \{(-1)^n + \frac1n,\ n\in\mathbb N^*\}$</p>
+<p><b>Étape 1 : Rappel.</b> Si $\cR M\in\cB A$ et $\cR M$ majore $\cB A$, alors $\cR M = \max A = \sup A$. Pour l'inf, on utilise : $\cR m$ minore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a \lt \cR m + \cO\varepsilon$.</p>
+<p><b>Étape 2 : On sépare pairs et impairs.</b></p>
+$$n = 2k:\ \ \cB a = 1 + \frac1{2k}\in\Big]1,\ \frac32\Big],\qquad n = 2k + 1:\ \ \cB a = -1 + \frac1{2k + 1}\in\Big]-1,\ 0\Big].$$
+<p><b>Étape 3 : Le sup.</b> Le plus grand terme pair est en $k = 1$ : $\frac32$. Tous les termes impairs sont $\leq0 \lt \frac32$. Donc $\frac32$ majore $\cB A$, et $\frac32\in\cB A$ ($n = 2$).</p>
+<p><b>Étape 4 : L'inf.</b> Tous les éléments sont $> -1$, donc $-1$ minore $\cB A$. Soit $\cO\varepsilon > 0$ : on prend $n$ impair avec $\frac1n \lt \cO\varepsilon$, alors $\cB a = -1 + \frac1n \lt -1 + \cO\varepsilon$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\sup A = \max A = \frac32,\qquad\inf A = -1\ \text{(pas de min)}}.$$
+
+<h2 id="r-seq">7. La caractérisation séquentielle</h2>
+<div class="sbox">$$\text{Si}\ \cR M\ \text{majore}\ \cB A:\qquad\cR M = \sup\cB A\iff\text{il existe une suite}\ (\cB{a_n})\ \text{d'éléments de}\ \cB A\ \text{telle que}\ \cB{a_n}\to\cR M.$$</div>
+<p>C'est souvent plus rapide que $\varepsilon$ : on exhibe une suite. Dans l'exemple 9, $\cB{a_n} = 1 - \frac1n\to1$ suffit.</p>
+<p class="ml">Passer au sup</p>
+<p>Si $\forall\cB a\in\cB A,\ \cB a\leq\cR K$, alors $\sup A\leq\cR K$ (car $\sup$ est le <b>plus petit</b> majorant). Et $A\subset B$ donne $\sup A\leq\sup B$.</p>
+
+<p class="ml">Exemple 11 : $A = \{x\in\mathbb Q,\ x^2 \lt 2\}$</p>
+<p><b>Étape 1 : Rappel.</b> Si $\cR M$ majore $\cB A$ et si une suite d'éléments de $\cB A$ tend vers $\cR M$, alors $\cR M = \sup\cB A$.</p>
+<p><b>Étape 2 : $\sqrt2$ est un majorant.</b> Si $x\in\cB A$, $x^2 \lt 2$ donne $|x| \lt \sqrt2$ (la racine croît), donc $x \lt \sqrt2$.</p>
+<p><b>Étape 3 : Une suite d'éléments de $\cB A$.</b> On prend les approximations décimales par défaut $\cB{d_n} = \frac{\lfloor10^n\sqrt2\rfloor}{10^n}$ du §5 : ce sont des rationnels, et $0\leq\cB{d_n}\leq\sqrt2$.</p>
+<p><b>Étape 4 : Elles sont dans $\cB A$.</b> $\sqrt2$ est irrationnel et $\cB{d_n}$ rationnel, donc $\cB{d_n}\neq\sqrt2$ : $0\leq\cB{d_n} \lt \sqrt2$, donc $\cB{d_n}^2 \lt 2$.</p>
+<p><b>Étape 5 : Elles tendent vers $\sqrt2$.</b> $0\leq\sqrt2 - \cB{d_n} \lt 10^{-n}\to0$ (théorème d'encadrement).</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\sup A = \sqrt2},\ \text{et}\ \sqrt2\notin A\ \text{(irrationnel) : pas de maximum}.$$
+
+<p class="ml">Exemple 12 : $\sup(A + B) = \sup A + \sup B$</p>
+<p>$A, B$ non vides et majorées, $A + B = \{a + b,\ a\in A,\ b\in B\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, et « passer au sup » : un majorant de tous les éléments majore le sup.</p>
+<p><b>Étape 2 : $A + B$ a un sup.</b> Elle est non vide. Pour $a\in A$, $b\in B$ : $a\leq\sup A$ et $b\leq\sup B$, donc $a + b\leq\cR{\sup A + \sup B}$. Elle est majorée, donc $\sup(A + B)$ existe.</p>
+<p><b>Étape 3 : Une suite qui tend vers $\cR{\sup A + \sup B}$.</b> Par la caractérisation séquentielle, il existe $a_n\in A$ avec $a_n\to\sup A$ et $b_n\in B$ avec $b_n\to\sup B$. Alors $a_n + b_n\in A + B$ et :</p>
+$$a_n + b_n\longrightarrow\sup A + \sup B.$$
+<p><b>Étape 4 : Conclusion</b> (majorant de l'étape 2 et suite de l'étape 3) :</p>
+$$\cG{\sup(A + B) = \sup A + \sup B}.$$
+
+<h2 id="r-int">8. Les intervalles</h2>
+<div class="sbox">$$I\ \text{est un intervalle}\iff\forall x, y\in I,\ \forall z\in\mathbb R,\ \big(x\leq z\leq y\Rightarrow z\in I\big).$$</div>
+<p>Les intervalles de $\mathbb R$ sont exactement : $[a, b]$ (segment), $[a, b[$, $]a, b]$, $]a, b[$, $[a, +\infty[$, $]a, +\infty[$, $]-\infty, b]$, $]-\infty, b[$, $\mathbb R$ et $\varnothing$. Un singleton $\{a\} = [a, a]$ en est un.</p>
+<p class="ml">Exemple 13 : l'intersection de deux intervalles</p>
+<p>Montrer que si $I$ et $J$ sont des intervalles, $I\cap J$ en est un.</p>
+<p><b>Étape 1 : Rappel.</b> $K$ est un intervalle $\iff$ pour tous $x, y\in K$ et $x\leq z\leq y$, on a $z\in K$.</p>
+<p><b>Étape 2 : On fixe</b> $x, y\in I\cap J$ et $z$ avec $x\leq z\leq y$.</p>
+<p><b>Étape 3 : Dans $I$.</b> $x, y\in I$ et $I$ est un intervalle, donc $z\in I$.</p>
+<p><b>Étape 4 : Dans $J$.</b> De même $x, y\in J$, donc $z\in J$.</p>
+<p><b>Étape 5 : Conclusion.</b> $z\in I\cap J$, donc $\cG{I\cap J\ \text{est un intervalle}}$.</p>
+<p>La réunion ne marche pas : $[0, 1]\cup[2, 3]$ contient $1$ et $2$, mais pas $\frac32$.</p>
+
+<h2 id="r-dens">9. La densité</h2>
+<div class="sbox">$$\mathbb Q\ \text{et}\ \mathbb R\setminus\mathbb Q\ \text{sont denses dans}\ \mathbb R:\qquad\forall x \lt y,\ \ \exists r\in\mathbb Q\cap\,]x, y[\quad\text{et}\quad\exists s\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[.$$
+$$\text{Version suites : tout réel est limite d'une suite de rationnels, et d'une suite d'irrationnels.}$$</div>
+<p class="ml">La construction (à savoir refaire)</p>
+<p><b>1.</b> On prend un entier $\cV n > \frac1{y - x}$ : les pas de longueur $\frac1n$ sont plus petits que l'intervalle. <b>2.</b> On pose $\cV p = \lfloor nx\rfloor + 1$. <b>3.</b> Alors $nx \lt \cV p\leq nx + 1 \lt ny$, donc $x \lt \frac{\cV p}{\cV n} \lt y$.</p>
+
+<p class="ml">Exemple 14 : un rationnel entre $\sqrt2$ et $\sqrt2 + \frac1{100}$</p>
+<p><b>Étape 1 : Rappel.</b> Avec $\cV n > \frac1{y - x}$ et $\cV p = \lfloor nx\rfloor + 1$, le rationnel $\frac{\cV p}{\cV n}$ est dans $]x, y[$.</p>
+<p><b>Étape 2 : Le choix de $\cV n$.</b> $y - x = \frac1{100}$, donc $\frac1{y - x} = 100$. On prend $\cV n = 101$.</p>
+<p><b>Étape 3 : Le calcul de $\cV p$.</b> $101\sqrt2 = \sqrt{20402}$, et $142^2 = 20164\leq20402 \lt 20449 = 143^2$, donc $\lfloor101\sqrt2\rfloor = 142$ et $\cV p = 143$.</p>
+<p><b>Étape 4 : Vérification.</b> $\frac{143}{101}\approx1{,}41584$, $\sqrt2\approx1{,}41421$, $\sqrt2 + 0{,}01\approx1{,}42421$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\sqrt2 \lt \frac{143}{101} \lt \sqrt2 + \frac1{100}}.$$
+
+<p class="ml">Exemple 15 : la densité des irrationnels</p>
+<p>Soient $x \lt y$. Montrer qu'il existe un irrationnel dans $]x, y[$.</p>
+<p><b>Étape 1 : Rappel.</b> $\mathbb Q$ est dense : entre deux réels distincts, il y a un rationnel. Et si $r\in\mathbb Q$, $r + \sqrt2\notin\mathbb Q$.</p>
+<p><b>Étape 2 : On décale de $\sqrt2$.</b> $x - \sqrt2 \lt y - \sqrt2$, donc il existe $r\in\mathbb Q$ avec :</p>
+$$x - \sqrt2 \lt r \lt y - \sqrt2.$$
+<p><b>Étape 3 : On ajoute $\sqrt2$</b> :</p>
+$$x \lt r + \sqrt2 \lt y.$$
+<p><b>Étape 4 : $r + \sqrt2$ est irrationnel.</b> Sinon $\sqrt2 = (r + \sqrt2) - r$ serait une différence de rationnels, donc rationnel : absurde.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{r + \sqrt2\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[}$.</p>
+
+<h2 id="r-ach">10. La droite achevée $\overline{\mathbb R}$</h2>
+<p>On ajoute $-\infty$ et $+\infty$ à $\mathbb R$, avec $-\infty \lt x \lt +\infty$ pour tout réel $x$. Conventions utiles :</p>
+<div class="sbox">$$A\ \text{non vide, non majorée}:\ \sup A = +\infty.\qquad A\ \text{non vide, non minorée}:\ \inf A = -\infty.$$</div>
+<p>Dans $\overline{\mathbb R}$, toute partie non vide a une borne supérieure. Exemple : $\sup\mathbb N = +\infty$, $\inf\{\frac1n,\ n\in\mathbb N^*\} = 0$. Les formes $+\infty - \infty$ et $0\times\infty$ restent indéterminées.</p>
+<p class="ml">Bonus : l'intervalle ouvert est ouvert <span class="hp">hors programme</span></p>
+<p>Un réel $x$ d'un intervalle $]a, b[$ y est « à l'aise » : avec $\cO\varepsilon = \min(x - a, b - x) > 0$, on a $]x - \cO\varepsilon, x + \cO\varepsilon[\subset]a, b[$. La notion d'ouvert et de fermé est traitée en Spé (topologie des espaces vectoriels normés).</p>
+
+<h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Résoudre $|X|\leq a$ »</b><span>Encadrer $-a\leq X\leq a$. Si $a \lt 0$ : aucune solution.</span></div>
+<div><b>« Résoudre $|X|\geq a$ »</b><span>$X\leq-a$ ou $X\geq a$ : une réunion.</span></div>
+<div><b>Plusieurs valeurs absolues</b><span>Tableau de signes, une équation par morceau, garder les solutions du morceau.</span></div>
+<div><b>« Majorer $|f(x)|$ »</b><span>Inégalité triangulaire terme par terme, puis majorer chaque module.</span></div>
+<div><b>« $\lfloor X\rfloor = n$ »</b><span>Encadrement $n\leq X \lt n + 1$, puis isoler $x$.</span></div>
+<div><b>Identité avec $\lfloor\ \rfloor$</b><span>$x = \lfloor x\rfloor + \theta$, $\theta\in[0, 1[$, découper selon $\theta$.</span></div>
+<div><b>« Montrer $\lfloor Y\rfloor = k$ »</b><span>Montrer $k\in\mathbb Z$ et $k\leq Y \lt k + 1$.</span></div>
+<div><b>« Déterminer $\sup A$ »</b><span>Candidat, majorant, puis $\varepsilon$ ou une suite de $A$ qui tend vers le candidat.</span></div>
+<div><b>« $\sup A$ existe »</b><span>Partie non vide et majorée : propriété de la borne supérieure.</span></div>
+<div><b>« A-t-elle un max ? »</b><span>Le sup appartient-il à $A$ ?</span></div>
+<div><b>« Pour tout $a\in A$, $a\leq K$ »</b><span>Passer au sup : $\sup A\leq K$.</span></div>
+<div><b>« Trouver un rationnel entre $x$ et $y$ »</b><span>$n > \frac1{y - x}$, $p = \lfloor nx\rfloor + 1$.</span></div>
+<div><b>« Montrer que $I$ est un intervalle »</b><span>Pour $x\leq z\leq y$ avec $x, y\in I$, montrer $z\in I$.</span></div>
+</div>
+
+<h2 id="r-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Écrire $\sqrt{x^2} = x$ : c'est $|x|$.</p>
+<p><b>2.</b> Traduire $|X|\geq a$ par $-a\geq X\geq a$ : c'est « $X\leq-a$ <b>ou</b> $X\geq a$ ».</p>
+<p><b>3.</b> Majorer $|a - b|$ par $|a| - |b|$.</p>
+<p><b>4.</b> Écrire $\lfloor-2{,}5\rfloor = -2$ : c'est $-3$.</p>
+<p><b>5.</b> Écrire $\lfloor x + y\rfloor = \lfloor x\rfloor + \lfloor y\rfloor$, ou $\lfloor2x\rfloor = 2\lfloor x\rfloor$.</p>
+<p><b>6.</b> Diviser un encadrement par un nombre négatif sans retourner les inégalités.</p>
+<p><b>7.</b> Confondre $\sup$ et $\max$ : le sup n'est pas forcément dans $A$.</p>
+<p><b>8.</b> Montrer seulement que $M$ est un majorant, et oublier que c'est le <b>plus petit</b>.</p>
+<p><b>9.</b> Croire que $a \lt M$ pour tout $a$ donne $\sup A \lt M$ : on obtient seulement $\sup A\leq M$.</p>
+<p><b>10.</b> Parler de $\sup A$ sans avoir vérifié que $A$ est non vide et majorée.</p>
+</div>
+
+<h2 id="r-entrainement">S'entraîner</h2>
+<div data-mlab="absval"></div>
+<div data-mlab="entx"></div>
+<div data-mlab="supeps"></div>
+<div data-mlab="quizreel"></div>
+
+<h2 id="r-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : bornes de $A = \{\frac{2n + 1}{n + 2},\ n\in\mathbb N\}$</p>
+<p><b>Étape 1 : Rappel.</b> $\cR M = \sup\cB A\iff\cR M$ majore $\cB A$ et une suite d'éléments de $\cB A$ tend vers $\cR M$. Un minorant qui appartient à $\cB A$ est le min.</p>
+<p><b>Étape 2 : On simplifie</b> en faisant apparaître le dénominateur au numérateur :</p>
+$$\frac{2n + 1}{n + 2} = \frac{2(n + 2) - 3}{n + 2} = 2 - \frac3{n + 2}.$$
+<p><b>Étape 3 : Les variations.</b> $n\mapsto\frac3{n + 2}$ décroît, donc $\cB{a_n} = 2 - \frac3{n + 2}$ croît.</p>
+<p><b>Étape 4 : Le min.</b> Le plus petit élément est en $n = 0$ : $\cB{a_0} = 2 - \frac32 = \frac12$.</p>
+<p><b>Étape 5 : Le sup.</b> $\frac3{n + 2} > 0$ donne $\cB{a_n} \lt 2$ : $2$ est un majorant. Et $\cB{a_n}\to2$, donc $2 = \sup A$. Aucun $\cB{a_n}$ ne vaut $2$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\inf A = \min A = \frac12,\qquad\sup A = 2\ \text{(pas de max)}}.$$
+
+<p class="ml">Exercice 2 : résoudre $\lfloor x^2\rfloor = 2$</p>
+<p><b>Étape 1 : Rappel.</b> $\lfloor X\rfloor = \cV n\iff\cV n\leq X \lt \cV n + 1$.</p>
+<p><b>Étape 2 : On l'applique</b> avec $X = x^2$ et $\cV n = 2$ : $2\leq x^2 \lt 3$.</p>
+<p><b>Étape 3 : On passe à la racine</b> (croissante sur $\mathbb R_+$), avec $\sqrt{x^2} = |x|$ :</p>
+$$\sqrt2\leq|x| \lt \sqrt3.$$
+<p><b>Étape 4 : On enlève la valeur absolue.</b> $x\geq0$ donne $\sqrt2\leq x \lt \sqrt3$. $x \lt 0$ donne $\sqrt2\leq-x \lt \sqrt3$, soit $-\sqrt3 \lt x\leq-\sqrt2$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\mathcal S = \big]-\sqrt3,\ -\sqrt2\big]\cup\big[\sqrt2,\ \sqrt3\big[}.$$
+
+<p class="ml">Exercice 3 : $\lfloor x\rfloor + \lfloor x + \frac12\rfloor = \lfloor2x\rfloor$</p>
+<p><b>Étape 1 : Rappel.</b> $\lfloor y + \cV m\rfloor = \lfloor y\rfloor + \cV m$ pour $\cV m\in\mathbb Z$, et $\lfloor\theta\rfloor = 0$ pour $\theta\in[0, 1[$.</p>
+<p><b>Étape 2 : On pose</b> $\cV k = \lfloor x\rfloor$ et $\theta = x - \cV k\in[0, 1[$, donc $x = \cV k + \theta$.</p>
+<p><b>Étape 3 : On sort les entiers.</b></p>
+$$\lfloor x\rfloor + \Big\lfloor x + \frac12\Big\rfloor = 2\cV k + \Big\lfloor\theta + \frac12\Big\rfloor,\qquad\lfloor2x\rfloor = 2\cV k + \lfloor2\theta\rfloor.$$
+<p>Il reste à montrer $\lfloor\theta + \frac12\rfloor = \lfloor2\theta\rfloor$.</p>
+<p><b>Étape 4 : Cas $\theta\in[0, \frac12[$.</b> $\theta + \frac12\in[\frac12, 1[$ et $2\theta\in[0, 1[$ : les deux valent $0$.</p>
+<p><b>Étape 5 : Cas $\theta\in[\frac12, 1[$.</b> $\theta + \frac12\in[1, \frac32[$ et $2\theta\in[1, 2[$ : les deux valent $1$.</p>
+<p><b>Étape 6 : Conclusion.</b></p>
+$$\cG{\lfloor x\rfloor + \Big\lfloor x + \frac12\Big\rfloor = \lfloor2x\rfloor\ \ \text{pour tout}\ x\in\mathbb R}.$$
+
+<p class="ml">Exercice 4 : passer au sup et à l'inf</p>
+<p>$A, B$ non vides avec $a\leq b$ pour tous $a\in A$, $b\in B$. Montrer que $\sup A\leq\inf B$.</p>
+<p><b>Étape 1 : Rappel.</b> $\sup A$ est le <b>plus petit</b> majorant de $A$, $\inf B$ le <b>plus grand</b> minorant de $B$.</p>
+<p><b>Étape 2 : Les bornes existent.</b> $B\neq\varnothing$ : tout $b\in B$ majore $A$, donc $A$ (non vide) est majorée et $\sup A$ existe. De même, tout $a\in A$ minore $B$, donc $\inf B$ existe.</p>
+<p><b>Étape 3 : On fixe $b\in B$.</b> $b$ majore $A$, et $\sup A$ est le plus petit majorant : $\sup A\leq b$.</p>
+<p><b>Étape 4 : On fait varier $b$.</b> L'étape 3 vaut pour tout $b\in B$ : $\sup A$ minore $B$. Or $\inf B$ est le plus grand minorant : $\sup A\leq\inf B$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\sup A\leq\inf B}.$$
+
+<h2 id="r-arbre">L'arbre des nombres réels</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question sur les réels</span><ul>
+<li><div class="hr"><em>valeur absolue</em><span class="hq">Combien de $|\ |$ ?</span><ul>
+<li><div class="hr"><em>une, $|X|\leq a$</em><a class="hl ok" href="#r-abs">$-a\leq X\leq a$</a></div></li>
+<li><div class="hr"><em>une, $|X|\geq a$</em><a class="hl ok" href="#r-abs">$X\leq-a$ ou $X\geq a$</a></div></li>
+<li><div class="hr"><em>plusieurs</em><a class="hl" href="#r-abs">tableau de signes, un calcul par morceau</a></div></li>
+<li><div class="hr"><em>majorer</em><a class="hl" href="#r-tri">inégalité triangulaire terme par terme</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>partie entière</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>$\lfloor X\rfloor = n$</em><a class="hl ok" href="#r-ent">$n\leq X \lt n + 1$</a></div></li>
+<li><div class="hr"><em>montrer $\lfloor Y\rfloor = k$</em><a class="hl" href="#r-ent">$k\in\mathbb Z$ et $k\leq Y \lt k + 1$</a></div></li>
+<li><div class="hr"><em>identité</em><a class="hl" href="#r-ent">$x = \lfloor x\rfloor + \theta$, découper $\theta$</a></div></li>
+<li><div class="hr"><em>approcher $x$</em><a class="hl" href="#r-dec">$\frac{\lfloor10^nx\rfloor}{10^n}\leq x \lt \frac{\lfloor10^nx\rfloor + 1}{10^n}$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>borne sup, inf</em><span class="hq">$A$ non vide et majorée ?</span><ul>
+<li><div class="hr"><em>non majorée</em><a class="hl" href="#r-ach">$\sup A = +\infty$ dans $\overline{\mathbb R}$</a></div></li>
+<li><div class="hr"><em>oui</em><span class="hq">Candidat $M$ trouvé ?</span><ul>
+<li><div class="hr"><em>majorant</em><a class="hl" href="#r-sup">$\forall a\in A,\ a\leq M$</a></div></li>
+<li><div class="hr"><em>le plus petit</em><a class="hl" href="#r-sup">$\forall\varepsilon,\ \exists a > M - \varepsilon$</a></div></li>
+<li><div class="hr"><em>ou bien</em><a class="hl" href="#r-seq">une suite $a_n\in A$, $a_n\to M$</a></div></li>
+<li><div class="hr"><em>$M\in A$ ?</em><a class="hl end" href="#r-sup">oui : max ; non : pas de max</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>inégalité sur $\sup$</em><a class="hl" href="#r-seq">passer au sup : plus petit majorant</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>densité</em><span class="hq">On cherche dans $]x, y[$…</span><ul>
+<li><div class="hr"><em>un rationnel</em><a class="hl ok" href="#r-dens">$n > \frac1{y - x}$, $p = \lfloor nx\rfloor + 1$</a></div></li>
+<li><div class="hr"><em>un irrationnel</em><a class="hl ok" href="#r-dens">$r + \sqrt2$, $r\in\,]x - \sqrt2, y - \sqrt2[$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>intervalle</em><a class="hl" href="#r-int">$x, y\in I$, $x\leq z\leq y\Rightarrow z\in I$</a></div></li>
+</ul></div></div>
 `
 };
