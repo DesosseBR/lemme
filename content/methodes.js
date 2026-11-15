@@ -5343,6 +5343,7 @@ $$\cG{\Big\lfloor\frac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor}.$$
 <p>$d_n$ est l'approximation décimale <b>par défaut</b> à $10^{-n}$ près, $d_n + 10^{-n}$ celle <b>par excès</b>. Ce sont des décimaux, donc des rationnels, et $0\leq x - d_n \lt 10^{-n}$, donc $d_n\to x$ : <b>tout réel est limite d'une suite de rationnels</b>.</p>
 
 <p class="ml">Exemple 8 : $\sqrt2$ à $10^{-2}$ près</p>
+<p><b>Calculer la valeur approchée décimale par défaut de $\sqrt2$ à $10^{-2}$ près, sans calculatrice.</b></p>
 <p><b>Étape 1 : Rappel.</b> $d_2 = \frac{\lfloor10^2x\rfloor}{10^2}$, avec $x = \sqrt2$. Il faut donc $\lfloor100\sqrt2\rfloor$.</p>
 <p><b>Étape 2 : On écrit $100\sqrt2 = \sqrt{20000}$</b> et on cherche l'entier $\cV n$ tel que $\cV n\leq\sqrt{20000} \lt \cV n + 1$, c'est-à-dire $\cV n^2\leq20000 \lt (\cV n + 1)^2$ (tout est positif).</p>
 <p><b>Étape 3 : On calcule deux carrés.</b></p>
@@ -5365,6 +5366,7 @@ $$\cR m = \inf\cB A\iff\begin{cases}\forall\cB a\in\cB A,\ \cR m\leq\cB a\\\fora
 <p><b>1.</b> Deviner le candidat $\cR M$ (calculer quelques éléments, étudier les variations). <b>2.</b> Montrer que $\cR M$ majore $\cB A$. <b>3.</b> Montrer qu'aucun nombre plus petit ne majore : avec $\cO\varepsilon$, ou avec une suite d'éléments de $\cB A$ qui tend vers $\cR M$ (§7). Enfin, regarder si $\cR M\in\cB A$ pour savoir si c'est un max.</p>
 
 <p class="ml">Exemple 9 : $A = \{1 - \frac1n,\ n\in\mathbb N^*\}$</p>
+<p>Soit $A = \{1 - \frac1n,\ n\in\mathbb N^*\}$. <b>Déterminer, s'ils existent, la borne supérieure et la borne inférieure de $A$, et dire si ce sont un maximum ou un minimum.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\cR M = \sup\cB A\iff$ $\cR M$ majore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a > \cR M - \cO\varepsilon$.</p>
 <p><b>Étape 2 : Le candidat.</b> Les éléments sont $0, \frac12, \frac23, \frac34,\dots$ : ils croissent vers $1$. Candidat : $\cR M = 1$.</p>
 <p><b>Étape 3 : $1$ est un majorant.</b> Pour tout $n\geq1$, $\frac1n > 0$, donc $1 - \frac1n \lt 1$.</p>
@@ -5377,6 +5379,7 @@ $$1 - \frac1n > 1 - \cO\varepsilon\iff-\frac1n > -\cO\varepsilon\iff\frac1n \lt 
 $$\cG{\sup A = 1\ \text{(pas de max)},\qquad\inf A = \min A = 0}.$$
 
 <p class="ml">Exemple 10 : $A = \{(-1)^n + \frac1n,\ n\in\mathbb N^*\}$</p>
+<p>Soit $A = \{(-1)^n + \frac1n,\ n\in\mathbb N^*\}$. <b>Déterminer, s'ils existent, la borne supérieure et la borne inférieure de $A$, et dire si ce sont un maximum ou un minimum.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $\cR M\in\cB A$ et $\cR M$ majore $\cB A$, alors $\cR M = \max A = \sup A$. Pour l'inf, on utilise : $\cR m$ minore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a \lt \cR m + \cO\varepsilon$.</p>
 <p><b>Étape 2 : On calcule quelques termes</b> : $n = 1$ : $-1 + 1 = 0$ ; $n = 2$ : $1 + \frac12 = \frac32$ ; $n = 3$ : $-1 + \frac13 = -\frac23$ ; $n = 4$ : $1 + \frac14 = \frac54$. On sépare donc pairs et impairs.</p>
 $$n = 2k:\ \ \cB a = 1 + \frac1{2k}\in\Big]1,\ \frac32\Big],\qquad n = 2k + 1:\ \ \cB a = -1 + \frac1{2k + 1}\in\Big]-1,\ 0\Big].$$
@@ -5392,6 +5395,7 @@ $$\cG{\sup A = \max A = \frac32,\qquad\inf A = -1\ \text{(pas de min)}}.$$
 <p>Si $\forall\cB a\in\cB A,\ \cB a\leq\cR K$, alors $\sup A\leq\cR K$ (car $\sup$ est le <b>plus petit</b> majorant). Et $A\subset B$ donne $\sup A\leq\sup B$.</p>
 
 <p class="ml">Exemple 11 : $A = \{x\in\mathbb Q,\ x^2 \lt 2\}$</p>
+<p>Soit $A = \{x\in\mathbb Q,\ x^2 \lt 2\}$. <b>Montrer que $A$ a une borne supérieure dans $\mathbb R$, égale à $\sqrt2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $\cR M$ majore $\cB A$ et si une suite d'éléments de $\cB A$ tend vers $\cR M$, alors $\cR M = \sup\cB A$.</p>
 <p><b>Étape 2 : $\sqrt2$ est un majorant.</b> Si $x\in\cB A$, $x^2 \lt 2$ donne $|x| \lt \sqrt2$ (la racine croît), donc $x \lt \sqrt2$.</p>
 <p><b>Étape 3 : Une suite d'éléments de $\cB A$.</b> On prend les approximations décimales par défaut $\cB{d_n} = \frac{\lfloor10^n\sqrt2\rfloor}{10^n}$ du §5 : ce sont des rationnels, et $0\leq\cB{d_n}\leq\sqrt2$.</p>
@@ -5401,7 +5405,7 @@ $$\cG{\sup A = \max A = \frac32,\qquad\inf A = -1\ \text{(pas de min)}}.$$
 $$\cG{\sup A = \sqrt2},\ \text{et}\ \sqrt2\notin A\ \text{(irrationnel) : pas de maximum}.$$
 
 <p class="ml">Exemple 12 : $\sup(A + B) = \sup A + \sup B$</p>
-<p>$A, B$ non vides et majorées, $A + B = \{a + b,\ a\in A,\ b\in B\}$.</p>
+<p>$A, B$ non vides et majorées, $A + B = \{a + b,\ a\in A,\ b\in B\}$. <b>Montrer que $A + B$ a une borne supérieure et que $\sup(A + B) = \sup A + \sup B$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, et « passer au sup » : un majorant de tous les éléments majore le sup.</p>
 <p><b>Étape 2 : $A + B$ a un sup.</b> Elle est non vide. Pour $a\in A$, $b\in B$ : $a\leq\sup A$ et $b\leq\sup B$, donc $a + b\leq\cR{\sup A + \sup B}$. Elle est majorée, donc $\sup(A + B)$ existe.</p>
 <p><b>Étape 3 : Une suite qui tend vers $\cR{\sup A + \sup B}$.</b> Par la caractérisation séquentielle, il existe $a_n\in A$ avec $a_n\to\sup A$ et $b_n\in B$ avec $b_n\to\sup B$. Alors $a_n + b_n\in A + B$ et :</p>
@@ -5428,6 +5432,7 @@ $$\text{Version suites : tout réel est limite d'une suite de rationnels, et d'u
 <p><b>1.</b> On prend un entier $\cV n > \frac1{y - x}$ : les pas de longueur $\frac1n$ sont plus petits que l'intervalle. <b>2.</b> On pose $\cV p = \lfloor nx\rfloor + 1$. <b>3.</b> Alors $nx \lt \cV p\leq nx + 1 \lt ny$, donc $x \lt \frac{\cV p}{\cV n} \lt y$.</p>
 
 <p class="ml">Exemple 14 : un rationnel entre $\sqrt2$ et $\sqrt2 + \frac1{100}$</p>
+<p><b>Trouver un rationnel $\frac pn$ strictement compris entre $\sqrt2$ et $\sqrt2 + \frac1{100}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Avec $\cV n > \frac1{y - x}$ et $\cV p = \lfloor nx\rfloor + 1$, le rationnel $\frac{\cV p}{\cV n}$ est dans $]x, y[$.</p>
 <p><b>Étape 2 : Le choix de $\cV n$.</b> $y - x = \frac1{100}$, donc $\frac1{y - x} = 100$. On prend $\cV n = 101$.</p>
 <p><b>Étape 3 : Le calcul de $\cV p$.</b> On fait rentrer $101$ dans la racine :</p>
@@ -5641,7 +5646,7 @@ $$u_{n+1} - 2 = 3u_n - 4 - (3\times2 - 4) = 3(u_n - 2),\quad\text{donc}\ v_{n+1}
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2 + 3^{n+1}}$, et $u_n\to+\infty$. Contrôle : $u_1 = 3\times5 - 4 = 11 = 2 + 9$.</p>
 
 <p class="ml">Exemple 28 : ordre 2, deux racines réelles</p>
-<p>$u_0 = 0$, $u_1 = 3$, $u_{n+2} = u_{n+1} + 2u_n$.</p>
+<p>$u_0 = 0$, $u_1 = 3$, $u_{n+2} = u_{n+1} + 2u_n$. <b>Exprimer $u_n$ en fonction de $n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\Delta > 0$ : $u_n = A\,r_1^n + B\,r_2^n$, avec $r_1, r_2$ les racines de $r^2 = ar + b$.</p>
 <p><b>Étape 2 : Équation caractéristique.</b> $r^2 = r + 2\iff r^2 - r - 2 = 0$, $\Delta = 1 + 8 = 9$, $\cV{r_1 = 2}$, $\cV{r_2 = -1}$.</p>
 <p><b>Étape 3 : Forme générale.</b> $u_n = A\,2^n + B\,(-1)^n$.</p>
@@ -5651,14 +5656,14 @@ $$\left\{\begin{aligned}u_0 &= A\cdot2^0 + B\cdot(-1)^0 = A + B = 0\\u_1 &= A\cd
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2^n - (-1)^n}$. Contrôle : la relation donne $u_2 = u_1 + 2u_0 = 3 + 2\times0 = 3$, la formule donne $2^2 - (-1)^2 = 4 - 1 = 3$.</p>
 
 <p class="ml">Exemple 29 : ordre 2, racine double</p>
-<p>$u_0 = 1$, $u_1 = 4$, $u_{n+2} = 4u_{n+1} - 4u_n$.</p>
+<p>$u_0 = 1$, $u_1 = 4$, $u_{n+2} = 4u_{n+1} - 4u_n$. <b>Exprimer $u_n$ en fonction de $n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\Delta = 0$ : $u_n = (A + Bn)\,r_0^n$.</p>
 <p><b>Étape 2 : Équation caractéristique.</b> $r^2 - 4r + 4 = (r - 2)^2 = 0$ : $\cV{r_0 = 2}$ double.</p>
 <p><b>Étape 3 : Les conditions initiales.</b> $n = 0$ : $u_0 = (A + B\times0)\times2^0 = A = 1$. $n = 1$ : $u_1 = (A + B\times1)\times2^1 = 2(A + B) = 4$, donc $A + B = 2$ et $B = 2 - 1 = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u_n = (n + 1)\,2^n}$. Contrôle : la relation donne $u_2 = 4u_1 - 4u_0 = 4\times4 - 4\times1 = 12$, la formule $(2 + 1)\times2^2 = 3\times4 = 12$.</p>
 
 <p class="ml">Exemple 30 : ordre 2, racines complexes</p>
-<p>$u_0 = 1$, $u_1 = 2$, $u_{n+2} = 2u_{n+1} - 2u_n$.</p>
+<p>$u_0 = 1$, $u_1 = 2$, $u_{n+2} = 2u_{n+1} - 2u_n$. <b>Exprimer $u_n$ en fonction de $n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\Delta \lt 0$, racines $\rho e^{\pm i\theta}$ : $u_n = \rho^n\big(A\cos(n\theta) + B\sin(n\theta)\big)$.</p>
 <p><b>Étape 2 : Équation caractéristique.</b> $r^2 - 2r + 2 = 0$, $\Delta = 4 - 8 = -4 = (2i)^2$, $r = \frac{2\pm2i}2 = 1\pm i$.</p>
 <p><b>Étape 3 : Forme exponentielle.</b> $|1 + i| = \sqrt2$, $\arg(1 + i) = \frac\pi4$ : $\cV{\rho = \sqrt2}$, $\cV{\theta = \frac\pi4}$.</p>
@@ -5675,6 +5680,7 @@ $$\textbf{4. Conclure}:\ \text{limite monotone, puis}\ \cR\ell\ \text{est un poi
 <p>« $f$ croissante » ne donne <b>pas</b> « $(u_n)$ croissante » : le sens dépend de $u_1 - u_0$. Si $f$ est <b>décroissante</b>, $(u_n)$ n'est pas monotone : on étudie $(u_{2n})$ et $(u_{2n+1})$, récurrentes pour $f\circ f$ qui est croissante.</p>
 
 <p class="ml">Exemple 31 : $u_{n+1} = \sqrt{2 + u_n}$, $u_0 = 1$</p>
+<p>Soit $u_0 = 1$ et $u_{n+1} = \sqrt{2 + u_n}$. <b>Montrer que $(u_n)$ converge et déterminer sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Intervalle stable, $f$ croissante et sens par $u_1 - u_0$, limite monotone, puis $\ell = f(\ell)$.</p>
 <p><b>Étape 2 : Intervalle stable.</b> $f(x) = \sqrt{2 + x}$. Si $x\in[0, 2]$, $2 + x\in[2, 4]$, donc $f(x)\in[\sqrt2, 2]\subset[0, 2]$. Comme $u_0 = 1\in[0, 2]$, par récurrence $u_n\in[0, 2]$ pour tout $n$.</p>
 <p><b>Étape 3 : Monotonie.</b> $u_1 = \sqrt3 > 1 = u_0$. Si $u_n\leq u_{n+1}$, alors, $f$ étant croissante, $f(u_n)\leq f(u_{n+1})$, soit $u_{n+1}\leq u_{n+2}$. Par récurrence, $(u_n)$ est <b>croissante</b>.</p>
@@ -5683,6 +5689,7 @@ $$\textbf{4. Conclure}:\ \text{limite monotone, puis}\ \cR\ell\ \text{est un poi
 $$\cG{u_n\to2}.$$
 
 <p class="ml">Exemple 32 : $u_{n+1} = u_n - u_n^2$, $u_0\in\,]0, 1[$</p>
+<p>Soit $u_0\in\,]0, 1[$ et $u_{n+1} = u_n - u_n^2$. <b>Montrer que $(u_n)$ converge et déterminer sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Signe de $g(x) = f(x) - x$ sur l'intervalle stable : $g\leq0$ donne $(u_n)$ décroissante.</p>
 <p><b>Étape 2 : Intervalle stable.</b> $f(x) = x - x^2 = x(1 - x)$. Pour $x\in[0, 1]$ : $x\geq0$ et $1 - x\geq0$, donc $f(x)\geq0$, et $f(x)\leq x\leq1$. Donc $[0, 1]$ est stable et $u_n\in[0, 1]$.</p>
 <p><b>Étape 3 : Monotonie.</b> $u_{n+1} - u_n = (u_n - u_n^2) - u_n = -u_n^2\leq0$ : $(u_n)$ est décroissante.</p>
@@ -5693,7 +5700,7 @@ $$\cG{u_n\to2}.$$
 <div class="sbox">$$z_n\to\cR\ell\iff\operatorname{Re}(z_n)\to\operatorname{Re}(\cR\ell)\ \text{et}\ \operatorname{Im}(z_n)\to\operatorname{Im}(\cR\ell)\iff|z_n - \cR\ell|\to0.$$</div>
 <p>Une suite complexe est <b>bornée</b> si $|z_n|\leq C$, c'est-à-dire si ses parties réelle et imaginaire sont bornées. Tout ce qui n'utilise pas l'ordre reste vrai : opérations, suites extraites, Bolzano-Weierstrass. Il n'y a ni monotonie, ni encadrement, ni $\sup$ dans $\mathbb C$.</p>
 <p class="ml">Exemple 33 : une suite géométrique complexe</p>
-<p>Limite de $z_n = \Big(\dfrac{1 + i}2\Big)^n$.</p>
+<p>Limite de $z_n = \Big(\dfrac{1 + i}2\Big)^n$. <b>Déterminer la limite de $(z_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $z_n\to0\iff|z_n|\to0$, et $|q^n| = |q|^n$.</p>
 <p><b>Étape 2 : Le module.</b> $\big|\frac{1 + i}2\big| = \frac{|1 + i|}2 = \frac{\sqrt{1^2 + 1^2}}2 = \frac{\sqrt2}2\approx0{,}707 \lt 1$.</p>
 <p><b>Étape 3 : On passe au module.</b> $z_n = q^nz_0$, donc $|z_n| = |q|^n|z_0| = \big(\frac{\sqrt2}2\big)^n|z_0|\to0$ (géométrique réelle de raison dans $]-1, 1[$).</p>
@@ -5710,30 +5717,35 @@ $$\cG{u_n\to2}.$$
 </table>
 
 <p class="ml">Exemple 34 : $u_n = \big(2\sin\frac1n + \frac12\cos n\big)^n$</p>
+<p>Soit $u_n = \big(2\sin\frac1n + \frac12\cos n\big)^n$ pour $n\geq1$. <b>Déterminer la limite de $(u_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $|u_n|\leq q^n$ avec $0\leq q \lt 1$, alors $u_n\to0$.</p>
 <p><b>Étape 2 : On majore la base.</b> $\sin x\leq x$ pour $x\geq0$, donc $2\sin\frac1n\leq\frac2n$ ; et $\big|\frac12\cos n\big|\leq\frac12$. Donc $\big|2\sin\frac1n + \frac12\cos n\big|\leq\frac2n + \frac12$.</p>
 <p><b>Étape 3 : Pour $n\geq5$.</b> $\frac2n + \frac12\leq\frac25 + \frac12 = \frac{4 + 5}{10} = \frac9{10}$, donc $|u_n|\leq\big(\frac9{10}\big)^n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\big(\frac9{10}\big)^n\to0$ : $\cG{u_n\to0}$.</p>
 
 <p class="ml">Exemple 35 : sens de variation de $u_n = \sqrt n\sin\frac1n$</p>
+<p>Soit $u_n = \sqrt n\sin\frac1n$ pour $n\geq1$. <b>Étudier le sens de variation de $(u_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $u_n = f(n)$ avec $f(x) = \sqrt x\sin\frac1x$ : on étudie le signe de $f'$.</p>
 <p><b>Étape 2 : La dérivée.</b> $f'(x) = \frac1{2\sqrt x}\sin\frac1x + \sqrt x\cos\frac1x\times\Big(-\frac1{x^2}\Big) = \frac{\cos\frac1x}{2\sqrt x}\Big(\tan\frac1x - \frac2x\Big)$ (on a factorisé $\frac{\cos(1/x)}{2\sqrt x} > 0$ sur $[1, +\infty[$).</p>
 <p><b>Étape 3 : Le signe.</b> Avec $t = \frac1x\in]0, 1]$ : $\varphi(t) = \tan t - 2t$, $\varphi(0) = 0$, $\varphi'(t) = (1 + \tan^2t) - 2 = \tan^2t - 1$. Donc $\varphi$ décroît sur $\big[0, \frac\pi4\big]$ (où $\tan t\leq1$) puis croît sur $\big[\frac\pi4, 1\big]$. Elle part de $\varphi(0) = 0$ en décroissant, et à droite $\varphi(1) = \tan1 - 2\approx1{,}557 - 2 = -0{,}443 \lt 0$ : $\varphi \lt 0$ sur $]0, 1]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $f' \lt 0$ sur $[1, +\infty[$ : $\cG{(u_n)\ \text{est décroissante}}$ (et $u_n\sim\frac{\sqrt n}n\to0$).</p>
 
 <p class="ml">Exemple 36 : $u_n = \sum_{k=1}^n\frac1{\sqrt k} - 2\sqrt n$ converge</p>
+<p>Soit $u_n = \sum_{k=1}^n\frac1{\sqrt k} - 2\sqrt n$. <b>Montrer que $(u_n)$ converge.</b></p>
 <p><b>Étape 1 : Rappel.</b> Décroissante et minorée $\Rightarrow$ converge.</p>
 <p><b>Étape 2 : Décroissante.</b> $u_{n+1} - u_n = \frac1{\sqrt{n + 1}} - 2(\sqrt{n + 1} - \sqrt n) = \frac1{\sqrt{n + 1}} - \frac2{\sqrt{n + 1} + \sqrt n}$ (quantité conjuguée). Or $\sqrt{n + 1} + \sqrt n \lt 2\sqrt{n + 1}$, donc $\frac2{\sqrt{n + 1} + \sqrt n} > \frac1{\sqrt{n + 1}}$ : $u_{n+1} - u_n \lt 0$.</p>
 <p><b>Étape 3 : Minorée.</b> $\frac1{\sqrt k} = \frac2{2\sqrt k}\geq\frac2{\sqrt{k + 1} + \sqrt k} = 2(\sqrt{k + 1} - \sqrt k)$. En sommant (télescopage) : $\sum_{k=1}^n\frac1{\sqrt k}\geq2(\sqrt{n + 1} - 1)$, donc $u_n\geq2\sqrt{n + 1} - 2 - 2\sqrt n\geq-2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(u_n)\ \text{converge}}$.</p>
 
 <p class="ml">Exemple 37 : la limite supérieure $v_n = \sup_{p\geq n}u_p$</p>
+<p>Soit $(u_n)$ une suite réelle bornée et $v_n = \sup_{p\geq n}u_p$. <b>Montrer que $(v_n)$ converge.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A\subset B\Rightarrow\sup A\leq\sup B$.</p>
 <p><b>Étape 2 : Décroissante.</b> $A_n = \{u_p,\ p\geq n\}$, et $A_{n+1}\subset A_n$, donc $v_{n+1}\leq v_n$.</p>
 <p><b>Étape 3 : Minorée.</b> $v_n\geq u_n\geq\inf_ku_k$ ($(u_n)$ bornée).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(v_n)\ \text{converge}}$ ; sa limite est la plus grande valeur d'adhérence de $(u_n)$ (limite supérieure, <span class="hp">hors programme</span>).</p>
 
 <p class="ml">Exemple 38 : un encadrement, $u_n = \sum_{k=0}^n\binom nk^{-1}$</p>
+<p>Soit $u_n = \sum_{k=0}^n\binom nk^{-1}$. <b>Encadrer $u_n$ et en déduire sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Isoler les termes extrêmes, majorer ceux du milieu, gendarmes.</p>
 <p><b>Étape 2 : Les bords.</b> $k = 0$ et $k = n$ donnent $1 + 1 = 2$ ; $k = 1$ et $k = n - 1$ donnent $\frac1n + \frac1n = \frac2n$.</p>
 <p><b>Étape 3 : Le milieu</b> ($2\leq k\leq n - 2$, $n\geq4$) : $\binom nk\geq\binom n2 = \frac{n(n - 1)}2$, donc la somme des $n - 3$ termes est $\leq\frac{2(n - 3)}{n(n - 1)}$.</p>
@@ -5741,7 +5753,7 @@ $$\cG{u_n\to2}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{u_n\to2}$ ; en recommençant avec $\binom nk\geq\binom n3$ au milieu, $u_n - 2\sim\frac2n$.</p>
 
 <p class="ml">Exemple 39 : une somme de Riemann déguisée</p>
-<p>$u_n = \sum_{k=1}^n\frac1{\sqrt{(n + k - 1)(n + k)}}$.</p>
+<p>$u_n = \sum_{k=1}^n\frac1{\sqrt{(n + k - 1)(n + k)}}$. <b>Déterminer la limite de $(u_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue.</p>
 <p><b>Étape 2 : On fait apparaître $\frac1n$.</b> $\sqrt{(n + k - 1)(n + k)} = n\sqrt{\big(1 + \frac{k - 1}n\big)\big(1 + \frac kn\big)}$.</p>
 <p><b>Étape 3 : On encadre.</b> $\big(1 + \frac{k - 1}n\big)\leq\big(1 + \frac kn\big)$ donne $\frac1n\sum\frac1{1 + \frac kn}\leq u_n\leq\frac1n\sum\frac1{1 + \frac{k - 1}n}$ : deux sommes de Riemann de $f(x) = \frac1{1 + x}$ sur $[0, 1]$.</p>
@@ -5753,6 +5765,7 @@ $$\cG{u_n\to2}.$$
 <p><b>1.</b> Un intervalle $D$ <b>stable</b> par $f$ : la suite est bien définie et reste dans $D$. <b>2.</b> Les <b>limites possibles</b> : si $f$ est continue, $\ell = f(\ell)$ ; on étudie $g(x) = f(x) - x$. <b>3.</b> $f$ <b>croissante</b> sur $D$ : $(u_n)$ est monotone, du signe de $u_1 - u_0$ ; entre deux points fixes elle est bornée. <b>4.</b> $f$ <b>décroissante</b> : $f\circ f$ est croissante, $(u_{2n})$ et $(u_{2n+1})$ sont monotones de sens contraires. <b>5.</b> Un dessin (escalier si $f$ croît, escargot si $f$ décroît) guide la discussion.</p>
 
 <p class="ml">Exemple 40 : $u_{n+1} = \frac16(u_n^2 + 8)$, $u_0\geq0$</p>
+<p>Soit $u_0\geq0$ et $u_{n+1} = \frac16(u_n^2 + 8)$. <b>Étudier la convergence de $(u_n)$ selon la valeur de $u_0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f(x) = \frac{x^2 + 8}6$ est croissante sur $\mathbb R_+$, qui est stable.</p>
 <p><b>Étape 2 : Les points fixes.</b> $\frac{x^2 + 8}6 = x\iff x^2 - 6x + 8 = 0\iff(x - 2)(x - 4) = 0$ : $2$ et $4$. Signe : $f(x) - x = \frac{(x - 2)(x - 4)}6$, positif hors de $[2, 4]$.</p>
 <p><b>Étape 3 : $u_0\in[0, 2[$.</b> $f([0, 2]) = \big[\frac86, \frac{12}6\big] = \big[\frac43, 2\big]\subset[0, 2]$, et $f(u_0) > u_0$ : croissante, majorée par $2$, limite $\ell\in[0, 2]$ point fixe : $\ell = 2$.</p>
@@ -5761,6 +5774,7 @@ $$\cG{u_n\to2}.$$
 <p><b>Conclusion.</b> $\cG{u_n\to2\ (0\leq u_0 \lt 4),\ u_n = 4\ (u_0 = 4),\ u_n\to+\infty\ (u_0 > 4)}$.</p>
 
 <p class="ml">Exemple 41 : $u_{n+1} = \frac{10}{1 + u_n^2}$, $u_0\geq0$ ($f$ décroissante)</p>
+<p>Soit $u_0\geq0$ et $u_{n+1} = \frac{10}{1 + u_n^2}$. <b>Étudier la convergence de $(u_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Étudier $f\circ f(x) - x$, puis les deux suites extraites.</p>
 <p><b>Étape 2 : Le point fixe de $f$.</b> $\frac{10}{1 + x^2} = x\iff x^3 + x - 10 = 0\iff(x - 2)(x^2 + 2x + 5) = 0$ : seul $x = 2$ ($\Delta = 4 - 20 \lt 0$ pour le second facteur).</p>
 <p><b>Étape 3 : $f\circ f$.</b> $f(f(x)) = \frac{10}{1 + \frac{100}{(1 + x^2)^2}} = \frac{10(1 + x^2)^2}{x^4 + 2x^2 + 101}$, et le numérateur de $f\circ f(x) - x$ vaut</p>
@@ -5770,6 +5784,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Étape 5 : Conclusion.</b> $f\circ f$ est croissante. Pour $u_0\in]0, \alpha[$ : $(u_{2n})$ croît vers $\alpha$ et $(u_{2n+1})$ décroît vers $f(\alpha) = \beta$. Pour $u_0\in]\alpha, 2[$ : $(u_{2n})$ décroît vers $\alpha$ et $(u_{2n+1})$ croît vers $\beta$. Même chose de l'autre côté de $2$. Deux limites différentes : $\cG{(u_n)\ \text{diverge pour tout}\ u_0\neq2}$ ($u_0 = 2$ : constante ; $u_0\in\{\alpha, \beta\}$ : $2$-périodique).</p>
 
 <p class="ml">Exemple 42 : le point fixe d'une contraction, $u_{n+1} = \cos u_n$</p>
+<p>Soit $u_0\in\mathbb R$ et $u_{n+1} = \cos u_n$. <b>Montrer que $(u_n)$ converge vers l'unique solution de $\cos x = x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $|f(x) - f(y)|\leq k|x - y|$ avec $k \lt 1$ sur un intervalle stable : $|u_n - \ell|\leq k^n|u_0 - \ell|\to0$.</p>
 <p><b>Étape 2 : Stable.</b> $u_1 = \cos u_0\in[-1, 1]$, puis $u_2 = \cos u_1\in[\cos1, 1]\subset[0, 1]$, et $\cos([0, 1]) = [\cos1, 1]\subset[0, 1]$.</p>
 <p><b>Étape 3 : Le point fixe.</b> $g(x) = \cos x - x$ est continue, strictement décroissante, $g(0) = 1 > 0$, $g(1) = \cos1 - 1 \lt 0$ : un unique $\ell\in]0, 1[$ avec $\cos\ell = \ell$.</p>
@@ -5777,6 +5792,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Étape 5 : Conclusion.</b> $|u_n - \ell|\leq(\sin1)^{n-2}|u_2 - \ell|\to0$ : $\cG{u_n\to\ell\approx0{,}739}$, pour tout $u_0\in\mathbb R$.</p>
 
 <p class="ml">Exemple 43 : $u_{n+1} = \sin u_n$, un équivalent <span class="hp">programme de Spé</span></p>
+<p>Soit $u_0\in\big]0, \frac\pi2\big]$ et $u_{n+1} = \sin u_n$. <b>Montrer que $u_n\to0$, puis que $u_n\sim\sqrt{\frac3n}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On cherche $\alpha$ tel que $u_{n+1}^\alpha - u_n^\alpha$ ait une limite non nulle, puis Cesàro (ou les sommes partielles).</p>
 <p><b>Étape 2 : La limite.</b> $u_0\in]0, \frac\pi2]$ : $0 \lt \sin x \lt x$, donc $(u_n)$ décroît, minorée par $0$, vers $\ell = \sin\ell$, soit $\ell = 0$.</p>
 <p><b>Étape 3 : Le DL.</b> $u_{n+1}^{-2} = u_n^{-2}\Big(1 - \frac{u_n^2}6 + o(u_n^2)\Big)^{-2} = u_n^{-2}\Big(1 + \frac{u_n^2}3 + o(u_n^2)\Big)$, donc $u_{n+1}^{-2} - u_n^{-2}\to\frac13$.</p>
@@ -5786,12 +5802,14 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <h2 id="s-sfdeux">22. Deux suites à la fois</h2>
 
 <p class="ml">Exemple 44 : $u_n = \sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \frac1{n\cdot n!}$ sont adjacentes</p>
+<p>Soient $u_n = \sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \frac1{n\cdot n!}$ pour $n\geq1$. <b>Montrer que $(u_n)$ et $(v_n)$ sont adjacentes.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(u_n)$ croissante, $(v_n)$ décroissante, $v_n - u_n\to0$.</p>
 <p><b>Étape 2 : $u$ croît.</b> $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
 <p><b>Étape 3 : $v$ décroît.</b> $v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\,n!} = \frac1{n!}\Big(\frac1{n + 1} + \frac1{(n + 1)^2} - \frac1n\Big)$. Au dénominateur commun $n(n + 1)^2$ : $n(n + 1) + n - (n + 1)^2 = n^2 + 2n - n^2 - 2n - 1 = -1$. Donc $v_{n+1} - v_n = -\frac1{n(n + 1)^2n!} \lt 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $v_n - u_n = \frac1{n\,n!}\to0$ : $\cG{\text{adjacentes, de limite}\ e}$.</p>
 
 <p class="ml">Exemple 45 : $u_{n+1} = \frac{u_n}2 + \frac2{v_n}$, $v_{n+1} = \frac1{2u_n} + 2v_n$</p>
+<p>Soient $u_0, v_0 > 0$, $u_{n+1} = \frac{u_n}2 + \frac2{v_n}$ et $v_{n+1} = \frac1{2u_n} + 2v_n$. <b>Étudier les limites de $(v_n)$, de $(u_nv_n)$ et de $(u_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Étudier d'abord une combinaison : le produit $u_nv_n$.</p>
 <p><b>Étape 2 : $v_n\to+\infty$.</b> $v_{n+1} = \frac1{2u_n} + 2v_n\geq2v_n$ (le premier terme est $> 0$). Donc $v_1\geq2v_0$, $v_2\geq2v_1\geq4v_0$, et par récurrence $v_n\geq2^nv_0\to+\infty$.</p>
 <p><b>Étape 3 : Le produit.</b> $u_{n+1}v_{n+1} = \frac14 + u_nv_n + \frac1{u_nv_n} + 4 = \frac{17}4 + u_nv_n + \frac1{u_nv_n}$ : croissant ; s'il convergeait vers $\ell > 0$, on aurait $\ell = \frac{17}4 + \ell + \frac1\ell$, impossible. Donc $u_nv_n\to+\infty$.</p>
@@ -5799,6 +5817,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Conclusion.</b> $\cG{u_n\to0,\ v_n\to+\infty}$.</p>
 
 <p class="ml">Exemple 46 : $u_{n+1} = \frac{u_n^2}{u_n + v_n}$, $v_{n+1} = \frac{v_n^2}{u_n + v_n}$, $0 \lt u_0 \lt v_0$</p>
+<p>Soient $0 \lt u_0 \lt v_0$, $u_{n+1} = \frac{u_n^2}{u_n + v_n}$ et $v_{n+1} = \frac{v_n^2}{u_n + v_n}$. <b>Déterminer les limites de $(u_n)$ et $(v_n)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Chercher une quantité constante ou une relation simple.</p>
 <p><b>Étape 2 : La différence.</b> $u_{n+1} - v_{n+1} = \frac{u_n^2}{u_n + v_n} - \frac{v_n^2}{u_n + v_n} = \frac{u_n^2 - v_n^2}{u_n + v_n} = \frac{(u_n - v_n)(u_n + v_n)}{u_n + v_n} = u_n - v_n$ : constante, égale à $u_0 - v_0$.</p>
 <p><b>Étape 3 : Le quotient.</b> $\frac{u_{n+1}}{v_{n+1}} = \frac{u_n^2/(u_n + v_n)}{v_n^2/(u_n + v_n)} = \frac{u_n^2}{v_n^2} = \Big(\frac{u_n}{v_n}\Big)^2$. Donc $\frac{u_1}{v_1} = q^2$, $\frac{u_2}{v_2} = (q^2)^2 = q^4$, et par récurrence $\frac{u_n}{v_n} = q^{2^n}$ avec $q = \frac{u_0}{v_0}\in]0, 1[$.</p>
@@ -5808,6 +5827,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <h2 id="s-sfabs">23. Montrer qu'une suite diverge, utiliser des extraites</h2>
 
 <p class="ml">Exemple 47 : $\cos(n\alpha)$ et $\sin(n\alpha)$ divergent ($\alpha\notin\pi\mathbb Z$)</p>
+<p>Soit $\alpha\notin\pi\mathbb Z$. <b>Montrer que les suites $(\cos(n\alpha))$ et $(\sin(n\alpha))$ divergent.</b></p>
 <p><b>Étape 1 : Rappel.</b> La négation de « $u$ et $v$ divergent » est « l'une des deux converge ».</p>
 <p><b>Étape 2 : Si l'une converge, l'autre aussi.</b> $\sin(n\alpha) = \frac{\cos(n\alpha)\cos\alpha - \cos((n + 1)\alpha)}{\sin\alpha}$ (formule d'addition, $\sin\alpha\neq0$) : si $\cos(n\alpha)\to\ell$, $\sin(n\alpha)\to\frac{\ell\cos\alpha - \ell}{\sin\alpha}$.</p>
 <p><b>Étape 3 : Les deux convergent vers $\ell, \ell'$.</b> On passe à la limite dans les formules d'addition : $\ell = \ell\cos\alpha - \ell'\sin\alpha$ et $\ell' = \ell'\cos\alpha + \ell\sin\alpha$. Système homogène de déterminant $(\cos\alpha - 1)^2 + \sin^2\alpha = 2(1 - \cos\alpha)\neq0$ : $\ell = \ell' = 0$.</p>
@@ -5815,6 +5835,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Conclusion.</b> $\cG{(\cos n\alpha)\ \text{et}\ (\sin n\alpha)\ \text{divergent}}$.</p>
 
 <p class="ml">Exemple 48 : $u_{n+1} = \sqrt{2 + (-1)^{n+1}u_n}$, $u_0\in]0, 2[$</p>
+<p>Soit $u_0\in]0, 2[$ et $u_{n+1} = \sqrt{2 + (-1)^{n+1}u_n}$. <b>Montrer que $(u_n)$ est bien définie et qu'elle diverge.</b></p>
 <p><b>Étape 1 : Rappel.</b> Deux extraites de limites différentes $\Rightarrow$ divergence.</p>
 <p><b>Étape 2 : Bien définie.</b> Si $u_n\in]0, 2[$ : $0 \lt 2 - u_n\leq2 + (-1)^{n+1}u_n\leq2 + u_n \lt 4$, donc $u_{n+1}\in]0, 2[$.</p>
 <p><b>Étape 3 : Les extraites.</b> $u_{2n+1} = \sqrt{2 - u_{2n}}$ et $u_{2n} = \sqrt{2 + u_{2n-1}}$. Si $u_n\to\ell$ : $\ell = \sqrt{2 + \ell}$ et $\ell = \sqrt{2 - \ell}$.</p>
@@ -5822,11 +5843,13 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Conclusion.</b> $\cG{(u_n)\ \text{diverge}}$.</p>
 
 <p class="ml">Exemple 49 : une suite d'entiers convergente est stationnaire</p>
+<p><b>Montrer qu'une suite d'entiers qui converge est constante à partir d'un certain rang.</b></p>
 <p><b>Étape 1 : Rappel.</b> Définition avec $\varepsilon = \frac12$.</p>
 <p><b>Étape 2 : On applique.</b> Pour $n\geq n_0$, $u_n\in\big]\ell - \frac12, \ell + \frac12\big[$, intervalle de longueur $1$ ouvert : il contient au plus un entier.</p>
 <p><b>Conclusion.</b> $\cG{(u_n)\ \text{est constante à partir de}\ n_0}$.</p>
 
 <p class="ml">Exemple 50 : $u_{2n}\to\ell$ et $u_{2n+1}\to\ell$ entraînent $u_n\to\ell$</p>
+<p>Soit $(u_n)$ telle que $u_{2n}\to\ell$ et $u_{2n+1}\to\ell$. <b>Montrer que $u_n\to\ell$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Définition avec $\varepsilon$.</p>
 <p><b>Étape 2 : Les rangs.</b> $|u_{2n} - \ell| \lt \varepsilon$ pour $n\geq n_0$, $|u_{2n+1} - \ell| \lt \varepsilon$ pour $n\geq n_1$.</p>
 <p><b>Conclusion.</b> Pour $N = \max(2n_0, 2n_1 + 1)$ et $n\geq N$, $|u_n - \ell| \lt \varepsilon$ : $\cG{u_n\to\ell}$.</p>
@@ -5839,6 +5862,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 <p><b>Conclusion.</b> $\cG{v_n\to\ell}$ ; avec $a_n = 1$, c'est la moyenne de Cesàro.</p>
 
 <p class="ml">Exemple 52 : $\frac{p_n}{q_n}\to x\notin\mathbb Q$ entraîne $q_n\to+\infty$</p>
+<p>Soient $p_n\in\mathbb Z$, $q_n\in\mathbb N^*$ avec $\frac{p_n}{q_n}\to x$ et $x\notin\mathbb Q$. <b>Montrer que $q_n\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Absurde + Bolzano-Weierstrass + exemple 49.</p>
 <p><b>Étape 2 : Sinon.</b> Il existe $A$ et une extraite $(q_{\varphi(n)})$ bornée par $A$ ; une nouvelle extraite converge, donc est stationnaire (entiers) : $q_{\psi(n)} = q$.</p>
 <p><b>Étape 3 : Les numérateurs.</b> $p_{\psi(n)} = q\frac{p_{\psi(n)}}{q_{\psi(n)}}\to qx$, suite d'entiers convergente, donc stationnaire égale à $p$.</p>
@@ -5908,6 +5932,7 @@ $$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 
 
 <h2 id="r-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : bornes de $A = \{\frac{2n + 1}{n + 2},\ n\in\mathbb N\}$</p>
+<p>Soit $A = \{\frac{2n + 1}{n + 2},\ n\in\mathbb N\}$. <b>Déterminer, s'ils existent, la borne supérieure et la borne inférieure de $A$, et dire si ce sont un maximum ou un minimum.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\cR M = \sup\cB A\iff\cR M$ majore $\cB A$ et une suite d'éléments de $\cB A$ tend vers $\cR M$. Un minorant qui appartient à $\cB A$ est le min.</p>
 <p><b>Étape 2 : On simplifie</b> en faisant apparaître le dénominateur au numérateur :</p>
 $$\frac{2n + 1}{n + 2} = \frac{2(n + 2) - 3}{n + 2} = 2 - \frac3{n + 2}.$$
@@ -5918,6 +5943,7 @@ $$\frac{2n + 1}{n + 2} = \frac{2(n + 2) - 3}{n + 2} = 2 - \frac3{n + 2}.$$
 $$\cG{\inf A = \min A = \frac12,\qquad\sup A = 2\ \text{(pas de max)}}.$$
 
 <p class="ml">Exercice 2 : résoudre $\lfloor x^2\rfloor = 2$</p>
+<p><b>Résoudre dans $\mathbb R$ l'équation $\lfloor x^2\rfloor = 2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\lfloor X\rfloor = \cV n\iff\cV n\leq X \lt \cV n + 1$.</p>
 <p><b>Étape 2 : On l'applique</b> avec $X = x^2$ et $\cV n = 2$ : $2\leq x^2 \lt 3$.</p>
 <p><b>Étape 3 : On passe à la racine</b> (croissante sur $\mathbb R_+$), avec $\sqrt{x^2} = |x|$ :</p>
@@ -5927,6 +5953,7 @@ $$\sqrt2\leq|x| \lt \sqrt3.$$
 $$\cG{\mathcal S = \big]-\sqrt3,\ -\sqrt2\big]\cup\big[\sqrt2,\ \sqrt3\big[}.$$
 
 <p class="ml">Exercice 3 : $\lfloor x\rfloor + \lfloor x + \frac12\rfloor = \lfloor2x\rfloor$</p>
+<p><b>Montrer que pour tout réel $x$, $\lfloor x\rfloor + \lfloor x + \frac12\rfloor = \lfloor2x\rfloor$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\lfloor y + \cV m\rfloor = \lfloor y\rfloor + \cV m$ pour $\cV m\in\mathbb Z$, et $\lfloor\theta\rfloor = 0$ pour $\theta\in[0, 1[$.</p>
 <p><b>Étape 2 : On pose</b> $\cV k = \lfloor x\rfloor$ et $\theta = x - \cV k\in[0, 1[$, donc $x = \cV k + \theta$.</p>
 <p><b>Étape 3 : On sort les entiers.</b></p>
@@ -5947,6 +5974,7 @@ $$\cG{\lfloor x\rfloor + \Big\lfloor x + \frac12\Big\rfloor = \lfloor2x\rfloor\ 
 $$\cG{\sup A\leq\inf B}.$$
 
 <p class="ml">Exercice 5 : la limite de $\big(1 + \frac1n\big)^n$</p>
+<p><b>Déterminer la limite de $\big(1 + \frac1n\big)^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $u_n^{v_n} = e^{v_n\ln u_n}$, et $\lim\limits_{x\to0}\frac{\ln(1 + x)}x = 1$ (dérivée de $\ln$ en $1$).</p>
 <p><b>Étape 2 : On passe à l'exponentielle.</b> $\big(1 + \frac1n\big)^n = e^{n\ln(1 + \frac1n)}$. C'est une forme $1^\infty$.</p>
 <p><b>Étape 3 : L'exposant.</b> On pose $x = \frac1n\to0$ :</p>
@@ -5964,6 +5992,7 @@ $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 <p><b>Étape 6 : Conclusion.</b> $\cG{\text{adjacentes}}$ : elles ont une limite commune $\gamma\approx0{,}577$, et $H_n = \ln n + \gamma + o(1)$.</p>
 
 <p class="ml">Exercice 7 : $u_{n+1} = \frac{u_n^2 + 2}3$, $u_0 = 0$</p>
+<p>Soit $u_0 = 0$ et $u_{n+1} = \frac{u_n^2 + 2}3$. <b>Montrer que $(u_n)$ converge et déterminer sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Intervalle stable, $f$ croissante et sens par $u_1 - u_0$, limite monotone, puis point fixe.</p>
 <p><b>Étape 2 : Les points fixes.</b> $\ell = \frac{\ell^2 + 2}3\iff3\ell = \ell^2 + 2\iff\ell^2 - 3\ell + 2 = 0$. $\Delta = 9 - 8 = 1$, $\ell = \frac{3\pm1}2$, soit $\ell\in\{1, 2\}$.</p>
 <p><b>Étape 3 : Intervalle stable.</b> Pour $x\in[0, 1]$ : $x^2\in[0, 1]$, donc $x^2 + 2\in[2, 3]$ et $f(x) = \frac{x^2 + 2}3\in\big[\frac23, 1\big]\subset[0, 1]$. Donc $u_n\in[0, 1]$.</p>
@@ -9504,7 +9533,7 @@ $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 <div class="sbox">$$N:E\to\mathbb R_+\ \text{est une norme si}:\quad\textbf{séparation}\ N(x) = 0\Rightarrow x = 0,\quad\textbf{homogénéité}\ N(\lambda x) = |\lambda|N(x),\quad\textbf{triangulaire}\ N(x + y)\leq N(x) + N(y).$$
 <ul class="sbl"><li>$\displaystyle \big|\|x\| - \|y\|\big|\leq\|x - y\|.\qquad\text{Les boules sont convexes}$</li><li>$\displaystyle d(x, y) = \|x - y\|$</li></ul></div>
 <p class="ml">Exemple 1 : montrer qu'on a une norme</p>
-<p>$N(x) = |x_1| + 2|x_2|$ sur $\mathbb R^2$.</p>
+<p>$N(x) = |x_1| + 2|x_2|$ sur $\mathbb R^2$. <b>Montrer que $N$ est une norme sur $\mathbb R^2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
 <p><b>Étape 2 : Positivité et séparation.</b> $N(x)\geq0$. Si $N(x) = 0$, une somme de deux termes positifs est nulle : $|x_1| = |x_2| = 0$, donc $x = 0$.</p>
 <p><b>Étape 3 : Homogénéité.</b> $\lambda x = (\lambda x_1, \lambda x_2)$ et $|\lambda x_i| = |\lambda|\,|x_i|$, donc $N(\lambda x) = |\lambda|\,|x_1| + 2|\lambda|\,|x_2| = |\lambda|\,(|x_1| + 2|x_2|) = |\lambda|N(x)$ (on factorise $|\lambda|$).</p>
@@ -9520,6 +9549,7 @@ $$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{
 <p>Trouver une suite $(x_n)$ avec $\frac{N'(x_n)}{N(x_n)}\to+\infty$ (ou $\to0$). Cela n'arrive qu'en <b>dimension infinie</b>.</p>
 
 <p class="ml">Exemple 2 : les normes usuelles de $\mathbb K^n$</p>
+<p><b>Montrer que pour tout $x\in\mathbb K^n$ : $\|x\|_\infty\leq\|x\|_2\leq\|x\|_1\leq n\|x\|_\infty$. En déduire que ces trois normes sont équivalentes.</b></p>
 <p><b>Étape 1 : Rappel.</b> Il faut des constantes qui ne dépendent pas de $x$.</p>
 <p><b>Étape 2 : $\|x\|_\infty\leq\|x\|_2$.</b> Soit $k$ l'indice où $|x_k| = \max_i|x_i| = \|x\|_\infty$. La somme $\sum_i|x_i|^2$ contient le terme $|x_k|^2$ et d'autres termes $\geq0$, donc $\|x\|_\infty^2 = |x_k|^2\leq\sum|x_i|^2 = \|x\|_2^2$. On prend la racine (croissante).</p>
 <p><b>Étape 3 : $\|x\|_2\leq\|x\|_1$.</b> On développe le carré d'une somme : $\big(\sum|x_i|\big)^2 = \sum|x_i|^2 + 2\sum_{i \lt j}|x_i|\,|x_j|$. Les termes croisés sont $\geq0$, donc $\|x\|_1^2\geq\sum|x_i|^2 = \|x\|_2^2$, et on prend la racine.</p>
@@ -9554,13 +9584,14 @@ $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text
 <p>Une intersection <b>quelconque</b> de fermés est fermée, une réunion <b>finie</b> aussi. Pour les ouverts, c'est l'inverse.</p>
 
 <p class="ml">Exemple 5 : par image réciproque</p>
-<p>$A = \{(x, y),\ x^2 + y^2\leq1,\ x\geq y\}$ et $U = \{(x, y),\ xy > 1\}$ dans $\mathbb R^2$.</p>
+<p>$A = \{(x, y),\ x^2 + y^2\leq1,\ x\geq y\}$ et $U = \{(x, y),\ xy > 1\}$ dans $\mathbb R^2$. <b>Montrer que $A$ est fermé et que $U$ est ouvert.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f$ continue : $f^{-1}(\text{fermé})$ fermé, $f^{-1}(\text{ouvert})$ ouvert.</p>
 <p><b>Étape 2 : $A$.</b> $f_1(x, y) = x^2 + y^2$ et $f_2(x, y) = x - y$ sont continues (polynomiales). $x^2 + y^2\leq1\iff f_1(x, y)\in\,]-\infty, 1]$ et $x\geq y\iff f_2(x, y)\in[0, +\infty[$. Donc $A = f_1^{-1}(]-\infty, 1])\cap f_2^{-1}([0, +\infty[)$ : intersection de deux fermés (images réciproques d'intervalles fermés).</p>
 <p><b>Étape 3 : $U$.</b> $g(x, y) = xy$ est continue et $U = g^{-1}(]1, +\infty[)$, image réciproque d'un ouvert.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est fermé},\ U\ \text{est ouvert}}$.</p>
 
 <p class="ml">Exemple 6 : $GL_n(\mathbb R)$ est ouvert, $O(n)$ est compact</p>
+<p><b>Montrer que $GL_n(\mathbb R)$ est un ouvert de $\mathcal M_n(\mathbb R)$ et que $O(n)$ est compact.</b></p>
 <p><b>Étape 1 : Rappel.</b> Image réciproque par une application continue. En dimension finie, compact $\iff$ fermé et borné.</p>
 <p><b>Étape 2 : $GL_n$.</b> $\det$ est continue (polynomiale en les coefficients) et $GL_n(\mathbb R) = \det^{-1}(\mathbb R^*)$, avec $\mathbb R^*$ ouvert.</p>
 <p><b>Étape 3 : $O(n)$ fermé.</b> $\varphi(A) = A^\top A$ est continue et $O(n) = \varphi^{-1}(\{I_n\})$, image réciproque d'un fermé.</p>
@@ -9568,7 +9599,7 @@ $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text
 <p><b>Étape 5 : Conclusion.</b> $\cG{GL_n(\mathbb R)\ \text{ouvert},\ O(n)\ \text{compact}}$.</p>
 
 <p class="ml">Exemple 7 : fermé ou pas, selon la norme</p>
-<p>$F = \{f\in\mathcal C([0, 1]),\ f(0) = 0\}$.</p>
+<p>$F = \{f\in\mathcal C([0, 1]),\ f(0) = 0\}$. <b>Montrer que $F$ est fermé pour $\|\cdot\|_\infty$ mais pas pour $\|\cdot\|_1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle des fermés. En dimension infinie, le résultat dépend de la norme.</p>
 <p><b>Étape 2 : Pour $\|\cdot\|_\infty$.</b> Si $f_n\in F$ et $\|f_n - f\|_\infty\to0$, alors $|f(0)| = |f(0) - f_n(0)|\leq\|f - f_n\|_\infty\to0$, donc $f(0) = 0$ : $F$ est fermé.</p>
 <p><b>Étape 3 : Pour $\|\cdot\|_1$.</b> $f_n(t) = \min(nt, 1)$ vaut $nt$ sur $[0, \frac1n]$ et $1$ ensuite : $f_n(0) = 0$, donc $f_n\in F$. L'écart avec la fonction $1$ n'est non nul que sur $[0, \frac1n]$ :</p>
@@ -9587,6 +9618,7 @@ $$\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \Big[t - \frac{nt^2}2\Big]_0^{1/n} 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathring A = \,]0, 1[,\ \overline A = [0, 1]\cup\{2\},\ \operatorname{Fr}A = \{0, 1, 2\}}$.</p>
 
 <p class="ml">Exemple 9 : $GL_n(\mathbb K)$ est dense dans $\mathcal M_n(\mathbb K)$</p>
+<p><b>Montrer que $GL_n(\mathbb K)$ est dense dans $\mathcal M_n(\mathbb K)$ : toute matrice est limite d'une suite de matrices inversibles.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dense $\iff$ toute matrice est limite d'une suite de matrices inversibles.</p>
 <p><b>Étape 2 : On perturbe.</b> Soit $A\in\mathcal M_n$. On pose $A_k = A - \frac1kI_n$.</p>
 <p><b>Étape 3 : Inversible pour $k$ grand.</b> $A_k = A - \frac1kI_n$ n'est pas inversible $\iff\det\big(A - \frac1kI_n\big) = 0\iff\frac1k$ est valeur propre de $A$. $A$ a au plus $n$ valeurs propres ; si $\rho$ est le plus petit module non nul d'entre elles (ou $\rho = 1$ s'il n'y en a pas), alors pour $k > \frac1\rho$, $0 \lt \frac1k \lt \rho$ et $\frac1k$ n'en est pas une.</p>
@@ -9598,6 +9630,7 @@ $$\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \Big[t - \frac{nt^2}2\Big]_0^{1/n} 
 $$\text{Sommes, produits, composées de fonctions continues sont continues. Les fonctions polynomiales en les coordonnées sont continues.}$$</div>
 <p><b>Uniformément continue</b> : $\forall\varepsilon,\ \exists\eta$ (indépendant de $x$), $\|x - y\|\leq\eta\Rightarrow\|f(x) - f(y)\|\leq\varepsilon$. Lipschitzienne $\Rightarrow$ uniformément continue $\Rightarrow$ continue.</p>
 <p class="ml">Exemple 10 : la distance à une partie est $1$-lipschitzienne</p>
+<p>Soit $A$ une partie non vide d'un espace normé $E$. <b>Montrer que $x\mapsto d(x, A)$ est $1$-lipschitzienne sur $E$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$, et l'inf est le plus grand minorant.</p>
 <p><b>Étape 2 : Pour $a\in A$.</b> $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$.</p>
 <p><b>Étape 3 : On passe à l'inf en $a$.</b> On réécrit l'étape 2 : $d(x, A) - \|x - y\|\leq\|y - a\|$ pour <b>tout</b> $a\in A$. Le nombre $d(x, A) - \|x - y\|$ est donc un minorant de $\{\|y - a\|,\ a\in A\}$, et l'inf est le plus grand minorant : $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
@@ -9611,13 +9644,14 @@ $$\textbf{En dimension finie (au départ), toute application linéaire est conti
 <p><b>Continuité</b> : majorer $\|u(x)\|$ par $C\|x\|$. <b>Norme subordonnée</b> : la majoration donne $|||u|||\leq C$ ; un $x_0\neq0$ avec égalité donne $|||u||| = C$. <b>Non-continuité</b> : une suite $x_n$ avec $\frac{\|u(x_n)\|}{\|x_n\|}\to+\infty$.</p>
 
 <p class="ml">Exemple 11 : une forme linéaire continue et sa norme</p>
-<p>$\varphi(f) = \int_0^1f(t)\,dt$ sur $(\mathcal C([0, 1]), \|\cdot\|_\infty)$.</p>
+<p>$\varphi(f) = \int_0^1f(t)\,dt$ sur $(\mathcal C([0, 1]), \|\cdot\|_\infty)$. <b>Montrer que $\varphi$ est continue et calculer sa norme subordonnée $|||\varphi|||$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $|\varphi(f)|\leq C\|f\|$ donne la continuité et $|||\varphi|||\leq C$ ; un cas d'égalité donne $|||\varphi||| = C$.</p>
 <p><b>Étape 2 : La majoration.</b> Inégalité triangulaire intégrale, puis $|f(t)|\leq\|f\|_\infty$ pour tout $t$ : $|\varphi(f)| = \big|\int_0^1f\big|\leq\int_0^1|f|\leq\int_0^1\|f\|_\infty\,dt = \|f\|_\infty\times(1 - 0) = \cO1\times\|f\|_\infty$.</p>
 <p><b>Étape 3 : Le cas d'égalité.</b> Pour $f = 1$ (fonction constante) : $\|f\|_\infty = 1$ et $\varphi(f) = \int_0^11\,dt = 1$, donc $\frac{|\varphi(f)|}{\|f\|_\infty} = 1$ : la constante $1$ ne peut pas être améliorée.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\varphi\ \text{est continue et}\ |||\varphi||| = 1}$.</p>
 
 <p class="ml">Exemple 12 : la dérivation n'est pas continue</p>
+<p>Sur $\mathbb R[X]$, avec $\|P\| = \max_k|a_k|$ pour $P = \sum a_kX^k$, <b>montrer que la dérivation $D:P\mapsto P'$ n'est pas continue.</b></p>
 <p>$D:P\mapsto P'$ sur $\mathbb R[X]$, avec $\|P\| = \max|a_k|$ (coefficients).</p>
 <p><b>Étape 1 : Rappel.</b> Si $\frac{\|D(P_n)\|}{\|P_n\|}\to+\infty$, aucune constante $C$ ne convient.</p>
 <p><b>Étape 2 : La suite.</b> $P_n = X^n$ a un seul coefficient non nul, égal à $1$ : $\|P_n\| = \max|a_k| = 1$.</p>
@@ -9645,6 +9679,7 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 <ul class="sbl"><li>$\displaystyle \text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qquad\text{Dans}\ \mathbb R:\ \text{connexes par arcs} = \text{intervalles}$</li><li>$\displaystyle f\ \text{continue}:\ f(A)\ \text{connexe par arcs}$</li></ul></div>
 <p>Conséquence : <b>TVI généralisé</b>. Une fonction continue réelle sur un connexe par arcs qui prend deux valeurs prend toutes les valeurs intermédiaires.</p>
 <p class="ml">Exemple 14 : $GL_n(\mathbb R)$ n'est pas connexe par arcs</p>
+<p><b>Montrer que $GL_n(\mathbb R)$ n'est pas connexe par arcs.</b></p>
 <p><b>Étape 1 : Rappel.</b> L'image continue d'un connexe par arcs de $\mathbb R$ est un intervalle.</p>
 <p><b>Étape 2 : Par l'absurde.</b> Si $GL_n(\mathbb R)$ était connexe par arcs, $\det(GL_n(\mathbb R))$ serait un intervalle.</p>
 <p><b>Étape 3 : Les valeurs.</b> $\det I_n = 1\times\dots\times1 = 1$ et $\det\operatorname{diag}(-1, 1, \dots, 1) = (-1)\times1\times\dots\times1 = -1$ (produit de la diagonale). Un intervalle qui contient $-1$ et $1$ contient tout $[-1, 1]$, donc $0$.</p>
@@ -9663,6 +9698,7 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 </table>
 
 <p class="ml">Exemple 15 : $N(x, y) = \max(|x|, |y|, |x - y|)$ et sa boule unité</p>
+<p>Soit $N(x, y) = \max(|x|, |y|, |x - y|)$ sur $\mathbb R^2$. <b>Montrer que $N$ est une norme et dessiner sa boule unité fermée.</b></p>
 <p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
 <p><b>Étape 2 : Séparation et homogénéité.</b> $N(u) = 0$ force $|x| = |y| = 0$. $N(\lambda u) = \max(|\lambda x|, |\lambda y|, |\lambda x - \lambda y|) = |\lambda|\max(|x|, |y|, |x - y|) = |\lambda|N(u)$.</p>
 <p><b>Étape 3 : Triangle.</b> $|x + x'|\leq|x| + |x'|\leq N(u) + N(v)$, de même $|y + y'|$ et $|(x - y) + (x' - y')|\leq|x - y| + |x' - y'|\leq N(u) + N(v)$. Le max des trois est donc $\leq N(u) + N(v)$.</p>
@@ -9670,13 +9706,14 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 <p><b>Étape 5 : Conclusion.</b> $\cG{N\ \text{est une norme, de boule unité l'hexagone de sommets}\ (1, 0), (1, 1), (0, 1), (-1, 0), (-1, -1), (0, -1)}$.</p>
 
 <p class="ml">Exemple 16 : $N(P) = \sqrt{\sum_{k=0}^nP(a_k)^2}$ sur $\mathbb R_n[X]$</p>
+<p>Soient $a_0, \dots, a_n$ des réels distincts et $N(P) = \sqrt{\sum_{k=0}^nP(a_k)^2}$ sur $\mathbb R_n[X]$. <b>Montrer que $N$ est une norme euclidienne.</b></p>
 <p><b>Étape 1 : Rappel.</b> Racine d'une somme de carrés : norme d'un produit scalaire.</p>
 <p><b>Étape 2 : Le produit scalaire.</b> $\varphi(P, Q) = \sum_{k=0}^nP(a_k)Q(a_k)$ : symétrique, bilinéaire, $\varphi(P, P)\geq0$.</p>
 <p><b>Étape 3 : Défini.</b> $\varphi(P, P) = 0\Rightarrow P(a_k) = 0$ pour les $n + 1$ réels distincts $a_k$ ; $\deg P\leq n$, donc $P = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{N = \sqrt{\varphi(\cdot, \cdot)}\ \text{est une norme euclidienne}}$.</p>
 
 <p class="ml">Exemple 17 : deux normes équivalentes sur $\mathcal C^1([0, 1])$</p>
-<p>$N_1(f) = |f(0)| + \int_0^1|f'|$, $N_2(f) = |f(1)| + \int_0^1|f'|$.</p>
+<p>$N_1(f) = |f(0)| + \int_0^1|f'|$, $N_2(f) = |f(1)| + \int_0^1|f'|$. <b>Montrer que $N_1$ et $N_2$ sont deux normes équivalentes sur $\mathcal C^1([0, 1])$ : $N_2\leq2N_1$ et $N_1\leq2N_2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On relie $f(1)$ et $f(0)$ : $f(1) = f(0) + \int_0^1f'$.</p>
 <p><b>Étape 2 : $N_2\leq2N_1$.</b> $|f(1)|\leq|f(0)| + \int_0^1|f'| = N_1(f)$, donc $N_2(f) = |f(1)| + \int|f'|\leq N_1(f) + N_1(f)$.</p>
 <p><b>Étape 3 : $N_1\leq2N_2$.</b> De même $f(0) = f(1) - \int_0^1f'$, donc $|f(0)|\leq|f(1)| + \int_0^1|f'| = N_2(f)$, puis $N_1(f) = |f(0)| + \int_0^1|f'|\leq N_2(f) + N_2(f) = 2N_2(f)$.</p>
@@ -9700,18 +9737,21 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 </table>
 
 <p class="ml">Exemple 19 : une seule valeur d'adhérence dans un compact</p>
+<p>Soit $(u_n)$ une suite d'un compact $K$ qui a une seule valeur d'adhérence $\ell$. <b>Montrer que $(u_n)$ converge vers $\ell$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Non-convergence vers $\ell$ : $\exists\varepsilon > 0,\ \forall N,\ \exists n\geq N,\ \|u_n - \ell\| > \varepsilon$.</p>
 <p><b>Étape 2 : On construit une extraite.</b> On choisit $\varphi(0)$ avec $\|u_{\varphi(0)} - \ell\| > \varepsilon$, puis $\varphi(n + 1) > \varphi(n)$ de même : $\|u_{\varphi(n)} - \ell\| > \varepsilon$ pour tout $n$.</p>
 <p><b>Étape 3 : Bolzano-Weierstrass.</b> $(u_{\varphi(n)})$ est dans le compact $K$ : elle a une valeur d'adhérence $\ell'$, qui vérifie $\|\ell' - \ell\|\geq\varepsilon$, donc $\ell'\neq\ell$.</p>
 <p><b>Étape 4 : Conclusion.</b> Contradiction avec l'unicité : $\cG{(u_n)\ \text{converge vers}\ \ell}$.</p>
 
 <p class="ml">Exemple 20 : $f_n(t) = t^n$ selon la norme</p>
+<p>Soit $f_n(t) = t^n$ sur $[0, 1]$. <b>La suite $(f_n)$ tend-elle vers $0$ pour $\|\cdot\|_1$ ? pour $\|\cdot\|_\infty$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> $f_n\to0\iff\|f_n - 0\|\to0$.</p>
 <p><b>Étape 2 : Norme $\|\cdot\|_1$.</b> $\|f_n\|_1 = \int_0^1t^n\,dt = \Big[\frac{t^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}\to0$.</p>
 <p><b>Étape 3 : Norme $\|\cdot\|_\infty$.</b> $\|f_n\|_\infty = \sup_{[0, 1]}t^n = 1^n = 1\not\to0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f_n\to0\ \text{pour}\ \|\cdot\|_1,\ \text{pas pour}\ \|\cdot\|_\infty}$ : sur $\mathcal C([0, 1])$ (dimension infinie), ces normes ne sont pas équivalentes.</p>
 
 <p class="ml">Exemple 21 : $\lim\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$</p>
+<p>Soit $a\in\mathbb R$. <b>Calculer $\lim_{n\to+\infty}\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie, convergence coefficient par coefficient ; on écrit la matrice comme une rotation fois un réel.</p>
 <p><b>Étape 2 : La forme polaire.</b> On pose $r_n = \sqrt{1 + \frac{a^2}{n^2}}$, $\cos\theta_n = \frac1{r_n}$, $\sin\theta_n = \frac{a/n}{r_n}$ (c'est possible car $\cos^2\theta_n + \sin^2\theta_n = \frac{1 + a^2/n^2}{r_n^2} = 1$). On sort $r_n$ de chaque coefficient, et le produit de deux rotations est la rotation d'angle somme :</p>
 $$A_n = \begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix} = r_n\begin{pmatrix}\cos\theta_n&-\sin\theta_n\\\sin\theta_n&\cos\theta_n\end{pmatrix},\qquad A_n^n = r_n^n\begin{pmatrix}\cos(n\theta_n)&-\sin(n\theta_n)\\\sin(n\theta_n)&\cos(n\theta_n)\end{pmatrix}.$$
@@ -9721,6 +9761,7 @@ $$A_n = \begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix} = r_n\begin{pmatrix}
 $$\cG{\lim_{n\to+\infty}\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n = \begin{pmatrix}\cos a&-\sin a\\\sin a&\cos a\end{pmatrix}}\quad(\text{c'est}\ \exp\begin{pmatrix}0&-a\\a&0\end{pmatrix}).$$
 
 <p class="ml">Exemple 22 : les matrices diagonalisables sont denses dans $\mathcal M_n(\mathbb C)$</p>
+<p><b>Montrer que les matrices diagonalisables sont denses dans $\mathcal M_n(\mathbb C)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Trigonaliser, puis perturber la diagonale pour rendre les valeurs propres distinctes.</p>
 <p><b>Étape 2 : La perturbation.</b> $A = PTP^{-1}$ avec $T$ triangulaire de diagonale $\lambda_1, \dots, \lambda_p$. On pose</p>
 $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{pmatrix} = \begin{pmatrix}\lambda_1 + \frac1n&*&\cdots&*\\0&\lambda_2 + \frac2n&\ddots&\vdots\\\vdots&\ddots&\ddots&*\\0&\cdots&0&\lambda_p + \frac pn\end{pmatrix}.$$
@@ -9728,6 +9769,7 @@ $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{
 <p><b>Étape 4 : Conclusion.</b> $M\mapsto PMP^{-1}$ est linéaire en dimension finie, donc continue : $PT_nP^{-1}\to PTP^{-1} = A$. $\cG{\text{les diagonalisables sont denses dans}\ \mathcal M_n(\mathbb C)}$.</p>
 
 <p class="ml">Exemple 23 : c'est faux dans $\mathcal M_2(\mathbb R)$</p>
+<p><b>Montrer que les matrices diagonalisables ne sont pas denses dans $\mathcal M_2(\mathbb R)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Le discriminant $\Delta(M) = (a + d)^2 - 4(ad - bc)$ est continu (polynôme en les coefficients).</p>
 <p><b>Étape 2 : La matrice.</b> $A = \begin{pmatrix}0&1\\-1&0\end{pmatrix}$ : $\chi_A = X^2 + 1$, $\Delta(A) = 0 - 4 = -4 \lt 0$.</p>
 <p><b>Étape 3 : L'absurde.</b> Si $A_n\to A$ avec $A_n$ diagonalisable dans $\mathbb R$ à valeurs propres distinctes, $\Delta(A_n) > 0$, donc $\Delta(A) = \lim\Delta(A_n)\geq0$ : contradiction. (Si une valeur propre est double, $A_n$ est scalaire, $\Delta = 0$ : même contradiction.)</p>
@@ -9745,40 +9787,47 @@ $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{
 </table>
 
 <p class="ml">Exemple 24 : $\{x\in\mathbb R^n,\ x_i\neq x_j\ (i\neq j)\}$ est ouvert</p>
+<p><b>Montrer que $A = \{x\in\mathbb R^n,\ x_i\neq x_j\ \text{pour}\ i\neq j\}$ est un ouvert de $\mathbb R^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Trouver un rayon explicite pour la norme $\|\cdot\|_\infty$.</p>
 <p><b>Étape 2 : Le rayon.</b> $a\in A$, $r = \frac12\min_{i\neq j}|a_i - a_j| > 0$.</p>
 <p><b>Étape 3 : La boule.</b> $x\in B(a, r)$ : $|x_i - x_j|\geq|a_i - a_j| - |x_i - a_i| - |x_j - a_j| > 2r - r - r = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $B(a, r)\subset A$ : $\cG{A\ \text{est ouvert}}$.</p>
 
 <p class="ml">Exemple 25 : $A + B$ est ouvert si $A$ l'est</p>
+<p>Soient $A, B$ deux parties d'un espace normé, $A$ ouvert. <b>Montrer que $A + B = \{a + b\}$ est ouvert.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A + B = \bigcup_{b\in B}(A + \{b\})$, et une translation envoie une boule sur une boule.</p>
 <p><b>Étape 2 : Un translaté.</b> $y = x + b$, $x\in A$, $B(x, r)\subset A$ : $B(y, r) = B(x, r) + b\subset A + \{b\}$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{A + B\ \text{est ouvert}}$ (réunion d'ouverts).</p>
 
 <p class="ml">Exemple 26 : $GL_n(\mathbb K)$ est ouvert</p>
+<p><b>Montrer que $GL_n(\mathbb K)$ est un ouvert de $\mathcal M_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\det$ est continue (polynomiale en les coefficients), $\mathbb K^* = \mathbb K\setminus\{0\}$ est ouvert.</p>
 <p><b>Étape 2 : On écrit.</b> $GL_n(\mathbb K) = \det^{-1}(\mathbb K^*)$.</p>
 <p><b>Étape 3 : Concrètement.</b> $\det\begin{pmatrix}1 + \varepsilon_1&\varepsilon_2\\\varepsilon_3&1 + \varepsilon_4\end{pmatrix} = 1 + \varepsilon_1 + \varepsilon_4 + \varepsilon_1\varepsilon_4 - \varepsilon_2\varepsilon_3$ reste $\neq0$ si les $|\varepsilon_i|$ sont petits.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{GL_n(\mathbb K)\ \text{est un ouvert de}\ \mathcal M_n(\mathbb K)}$.</p>
 
 <p class="ml">Exemple 27 : une boule fermée est fermée</p>
+<p><b>Montrer qu'une boule fermée $\overline B(a, r)$ d'un espace normé est une partie fermée.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x\mapsto\|x - a\|$ est $1$-lipschitzienne, donc continue.</p>
 <p><b>Étape 2 : Image réciproque.</b> $\overline B(a, r) = \{x,\ \|x - a\|\leq r\}$ est l'image réciproque du fermé $[0, r]$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\overline B(a, r)\ \text{est fermée}}$.</p>
 
 <p class="ml">Exemple 28 : un sous-espace de dimension finie est fermé</p>
+<p><b>Montrer qu'un sous-espace vectoriel $F$ d'un espace normé de dimension finie est fermé.</b></p>
 <p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, et coordonnées dans une base adaptée $(e_1, \dots, e_n)$ ($F = \operatorname{Vect}(e_1, \dots, e_p)$).</p>
 <p><b>Étape 2 : Une suite.</b> $x_k\in F$, $x_k\to\ell$ : $x_k = \sum_{i\leq p}x_k^{(i)}e_i$, et chaque coordonnée converge vers celle de $\ell$.</p>
 <p><b>Étape 3 : Les coordonnées.</b> Pour $i > p$, $x_k^{(i)} = 0$ pour tout $k$, donc $\ell_i = 0$ : $\ell\in F$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{est fermé}}$ (dans un $E$ de dimension finie ; vrai aussi en général).</p>
 
 <p class="ml">Exemple 29 : un hyperplan est fermé ou dense</p>
+<p>Soit $H$ un hyperplan d'un espace normé $E$. <b>Montrer que $H$ est fermé ou dense dans $E$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $H = \ker\varphi$ ; si $H$ n'est pas fermé, une suite de $H$ converge hors de $H$.</p>
 <p><b>Étape 2 : Non fermé.</b> $x_n\in H$, $x_n\to a\notin H$. Tout $b\in E$ s'écrit $b = h + \lambda a$ ($E = H\oplus\mathbb Ka$).</p>
 <p><b>Étape 3 : Approcher $b$.</b> $h + \lambda x_n\in H$ et $h + \lambda x_n\to h + \lambda a = b$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{H\ \text{fermé ou dense}}$ ; en dimension finie, $\varphi$ continue donne $H = \varphi^{-1}(\{0\})$ fermé.</p>
 
 <p class="ml">Exemple 30 : $A^\perp$ est fermé</p>
+<p>Soit $A$ une partie d'un espace préhilbertien. <b>Montrer que $A^\perp$ est fermé.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\{a\}^\perp = \ker\varphi_a$ avec $\varphi_a(x) = \langle a, x\rangle$, $|\varphi_a(x)|\leq\|a\|\|x\|$ (Cauchy-Schwarz) : continue.</p>
 <p><b>Étape 2 : Conclusion.</b> $A^\perp = \bigcap_{a\in A}\{a\}^\perp$ : $\cG{\text{intersection de fermés, donc fermé}}$.</p>
 
@@ -9791,37 +9840,42 @@ $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{
 </table>
 
 <p class="ml">Exemple 31 : $O_n(\mathbb R)$ est compact</p>
+<p><b>Montrer que $O_n(\mathbb R)$ est une partie compacte de $\mathcal M_n(\mathbb R)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie : fermé et borné.</p>
 <p><b>Étape 2 : Fermé.</b> $M\mapsto{}^tMM$ est continue (coefficients polynomiaux) : $O_n = \{M,\ {}^tMM = I_n\}$ est l'image réciproque du fermé $\{I_n\}$.</p>
 <p><b>Étape 3 : Borné.</b> Les colonnes sont unitaires : $|m_{ij}|\leq1$, donc $\|M\|_\infty\leq1$. Exemple : $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{O_n(\mathbb R)\ \text{est compact}}$.</p>
 
 <p class="ml">Exemple 32 : la sphère unité de $(\mathcal C([0, 2\pi], \mathbb C), \|\cdot\|_\infty)$ n'est pas compacte</p>
+<p><b>Montrer que la sphère unité de $(\mathcal C([0, 2\pi], \mathbb C), \|\cdot\|_\infty)$ est fermée et bornée mais pas compacte.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une suite dont deux termes distincts sont toujours à distance $2$ n'a pas d'extraite convergente.</p>
 <p><b>Étape 2 : La suite.</b> $f_n(t) = e^{int}$, $\|f_n\|_\infty = 1$.</p>
 <p><b>Étape 3 : L'écart.</b> $e^{int} - e^{imt} = e^{i\frac{(n + m)t}2}\times2i\sin\big(\frac{(n - m)t}2\big)$, de module max $2$ (atteint en $t = \frac\pi{n - m}$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\|f_n - f_m\|_\infty = 2$ : $\cG{S(0, 1)\ \text{fermée bornée mais non compacte}}$ (dimension infinie).</p>
 
 <p class="ml">Exemple 33 : $A + B$ compact, et distance de deux compacts atteinte</p>
+<p>Soient $A, B$ deux compacts non vides d'un espace normé $E$. <b>Montrer que $A + B$ est compact et que $d(A, B)$ est atteinte.</b></p>
 <p><b>Étape 1 : Rappel.</b> Image d'un compact par une continue ; bornes atteintes.</p>
 <p><b>Étape 2 : $A + B$.</b> $f(x, y) = x + y$ est continue sur $E\times E$, et $A\times B$ est compact : $A + B = f(A\times B)$ est compact.</p>
 <p><b>Étape 3 : La distance.</b> $(a, b)\mapsto\|a - b\|$ est continue sur le compact $A\times B$ : elle atteint son minimum $d(A, B)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A + B\ \text{compact},\ \exists(a, b),\ d(A, B) = \|a - b\|}$.</p>
 
 <p class="ml">Exemple 34 : une isométrie d'un compact dans lui-même est surjective</p>
+<p>Soit $K$ un compact et $f:K\to K$ telle que $\|f(x) - f(y)\| = \|x - y\|$. <b>Montrer que $f$ est surjective.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass appliqué à la suite des itérés.</p>
 <p><b>Étape 2 : Les itérés.</b> $x\in K$, $u_0 = x$, $u_{n+1} = f(u_n)$. Une extraite converge, donc $\|u_{\varphi(n+1)} - u_{\varphi(n)}\|\to0$.</p>
 <p><b>Étape 3 : On recule.</b> $f$ conserve les distances : $\|u_{\varphi(n+1)} - u_{\varphi(n)}\| = \|u_{\varphi(n+1) - \varphi(n)} - u_0\|$. Donc des $u_k$ ($k\geq1$, dans $f(K)$) s'approchent de $x$.</p>
 <p><b>Étape 4 : Conclusion.</b> $x\in\overline{f(K)} = f(K)$ ($f(K)$ compact donc fermé) : $\cG{f(K) = K}$.</p>
 
 <p class="ml">Exemple 35 : un vecteur unitaire à distance $1$ d'un sous-espace (Riesz)</p>
+<p>Soit $F$ un sous-espace de dimension finie d'un espace normé $E$, $F\neq E$. <b>Montrer qu'il existe $z$ avec $\|z\| = 1$ et $d(z, F) = 1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une distance à un fermé de dimension finie est atteinte.</p>
 <p><b>Étape 2 : Le point le plus proche.</b> $y\notin F$, $d = d(y, F) > 0$ ($F$ fermé). Sur le compact $\overline B(y, d + 1)\cap F$, la distance est atteinte : $\|y - t\| = d$.</p>
 <p><b>Étape 3 : Le vecteur.</b> $z = \frac{y - t}{\|y - t\|}$, $\|z\| = 1$, et pour $f\in F$ : $\|z - f\| = \frac1d\|y - (t + df)\|\geq\frac dd = 1$ ($t + df\in F$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\|z\| = 1\ \text{et}\ d(z, F) = 1}$ (et $d(z, F)\leq\|z - 0\| = 1$).</p>
 
 <p class="ml">Exemple 36 : un point fixe pour une application contractante au sens large</p>
-<p>$\|f(x) - f(y)\| \lt \|x - y\|$ pour $x\neq y$ dans un compact $K$.</p>
+<p>$\|f(x) - f(y)\| \lt \|x - y\|$ pour $x\neq y$ dans un compact $K$. <b>Montrer que $f$ admet un unique point fixe dans $K$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\varphi(x) = \|x - f(x)\|$ est continue sur $K$ : elle atteint son minimum.</p>
 <p><b>Étape 2 : Le minimum.</b> $\varphi(y) = \min\varphi$. Si $f(y)\neq y$ : $\varphi(f(y)) = \|f(y) - f(f(y))\| \lt \|y - f(y)\| = \varphi(y)$, contradiction.</p>
 <p><b>Étape 3 : Unicité.</b> Deux points fixes $a\neq b$ : $\|a - b\| = \|f(a) - f(b)\| \lt \|a - b\|$, impossible.</p>
@@ -9830,6 +9884,7 @@ $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{
 <h2 id="t-sfcpa">17. Connexité par arcs</h2>
 
 <p class="ml">Exemple 37 : les diagonalisables et les nilpotentes sont connexes par arcs</p>
+<p><b>Montrer que l'ensemble des matrices diagonalisables et l'ensemble des matrices nilpotentes de $\mathcal M_n(\mathbb C)$ sont connexes par arcs.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une partie étoilée par rapport à un point est connexe par arcs.</p>
 <p><b>Étape 2 : Diagonalisables.</b> $M = PDP^{-1}$ : $tM + (1 - t)I_n = P\big(tD + (1 - t)I_n\big)P^{-1}$, avec</p>
 $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_n + 1 - t\end{pmatrix}\quad\text{diagonale} :$$
@@ -9838,12 +9893,14 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{les deux ensembles sont connexes par arcs}}$.</p>
 
 <p class="ml">Exemple 38 : $GL_n(\mathbb R)$ n'est pas connexe par arcs, $SO_2(\mathbb R)$ l'est</p>
+<p><b>Montrer que $GL_n(\mathbb R)$ n'est pas connexe par arcs, et que $SO_2(\mathbb R)$ l'est.</b></p>
 <p><b>Étape 1 : Rappel.</b> L'image d'un connexe par arcs par une continue est un intervalle (dans $\mathbb R$).</p>
 <p><b>Étape 2 : $GL_n$.</b> $\det(GL_n(\mathbb R)) = \mathbb R^*$ (par exemple $\det\operatorname{diag}(t, 1, \dots, 1) = t$), qui n'est pas un intervalle.</p>
 <p><b>Étape 3 : $SO_2$.</b> C'est l'image de $\mathbb R$ par $\theta\mapsto\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$, continue.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{GL_n(\mathbb R)\ \text{non connexe par arcs},\ SO_2(\mathbb R)\ \text{connexe par arcs}}$.</p>
 
 <p class="ml">Exemple 39 : une fonction continue injective sur un intervalle est strictement monotone</p>
+<p>Soit $f:I\to\mathbb R$ continue et injective sur un intervalle $I$. <b>Montrer que $f$ est strictement monotone.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\Delta = \{(x, y),\ x \lt y\}$ est convexe donc connexe par arcs.</p>
 <p><b>Étape 2 : L'application.</b> $F(x, y) = f(x) - f(y)$ est continue et ne s'annule pas sur $\Delta$ (injectivité).</p>
 <p><b>Étape 3 : Un intervalle sans $0$.</b> $F(\Delta)\subset\mathbb R^*$ est un intervalle, donc dans $\mathbb R_+^*$ ou dans $\mathbb R_-^*$.</p>
@@ -9859,12 +9916,14 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 </table>
 
 <p class="ml">Exemple 40 : $P\mapsto P(0)$ continue, $P\mapsto P'$ non, pour $N(P) = \sum|a_k|$</p>
+<p>Sur $\mathbb R[X]$ avec $N(P) = \sum|a_k|$, <b>montrer que $u:P\mapsto P(0)$ est continue et que $v:P\mapsto P'$ ne l'est pas.</b></p>
 <p><b>Étape 1 : Rappel.</b> Critère $\|u(x)\|\leq k\|x\|$.</p>
 <p><b>Étape 2 : $u(P) = P(0) = a_0$.</b> $|a_0|\leq\sum|a_k| = N(P)$ : continue ($k = 1$).</p>
 <p><b>Étape 3 : $v(P) = P'$.</b> $P_n = X^n$ : un seul coefficient non nul, égal à $1$, donc $N(P_n) = 1$. Et $v(P_n) = nX^{n-1}$, dont le seul coefficient vaut $n$ : $N(v(P_n)) = |n| = n\to+\infty$. Aucun $k$ ne vérifie $n\leq k\times1$ pour tout $n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{continue},\ v\ \text{non continue}}$.</p>
 
 <p class="ml">Exemple 41 : si $A^n\to P$, alors $P$ est un projecteur qui commute avec $A$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb K)$ telle que $A^n\to P$. <b>Montrer que $P$ est un projecteur qui commute avec $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie, $M\mapsto AM$, $M\mapsto MA$ et $(M, N)\mapsto MN$ sont continues.</p>
 <p><b>Étape 2 : Commutation.</b> $A^{n+1} = A\cdot A^n\to AP$ et $A^{n+1} = A^n\cdot A\to PA$ ; mais $(A^{n+1})$ est extraite de $(A^n)$, donc tend vers $P$ : $AP = PA = P$.</p>
 <p><b>Étape 3 : Projecteur.</b> $A^{2n} = A^n\cdot A^n\to P\cdot P$ et $A^{2n}\to P$ (extraite) : $P^2 = P$.</p>
@@ -9872,23 +9931,27 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <p><b>Conclusion.</b> $\cG{P^2 = P = AP = PA}$.</p>
 
 <p class="ml">Exemple 42 : $x\mapsto d(x, A)$ est $1$-lipschitzienne</p>
+<p>Soit $A$ une partie non vide de $E$. <b>Montrer que pour tous $x, y$ : $|d(x, A) - d(y, A)|\leq\|x - y\|$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$.</p>
 <p><b>Étape 2 : Triangle.</b> Pour $a\in A$ : $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$, donc $d(x, A) - \|x - y\|$ minore tous les $\|y - a\|$ : $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
 <p><b>Étape 3 : Conclusion.</b> En échangeant $x, y$ : $\cG{|d(x, A) - d(y, A)|\leq\|x - y\|}$.</p>
 
 <p class="ml">Exemple 43 : $f(x) = \lfloor x\rfloor + (x - \lfloor x\rfloor)^2$ est continue sur $\mathbb R$</p>
+<p>Soit $f(x) = \lfloor x\rfloor + (x - \lfloor x\rfloor)^2$. <b>Montrer que $f$ est continue sur $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Sur chaque $]n, n + 1[$, $f(x) = n + (x - n)^2$ est continue ; aux entiers, on compare les limites à gauche et à droite avec $f(n)$.</p>
 <p><b>Étape 2 : En $n$, à droite.</b> $\lfloor x\rfloor = n$ : $f(x) = n + (x - n)^2\to n + 0 = n$, et $f(n) = n + 0^2 = n$.</p>
 <p><b>Étape 3 : En $n$, à gauche.</b> $x\in]n - 1, n[$ : $\lfloor x\rfloor = n - 1$, $f(x) = (n - 1) + (x - (n - 1))^2\to(n - 1) + 1^2 = n$.</p>
 <p><b>Étape 4 : Conclusion.</b> Les deux limites valent $f(n)$ : $\cG{f\ \text{est continue sur}\ \mathbb R}$, alors que $\lfloor\cdot\rfloor$ ne l'est pas.</p>
 
 <p class="ml">Exemple 44 : $\mathbb 1_{\mathbb Q}$ est discontinue partout</p>
+<p><b>Montrer que l'indicatrice $\mathbb 1_{\mathbb Q}$ n'est continue en aucun point de $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, densité de $\mathbb Q$ et de $\mathbb R\setminus\mathbb Q$.</p>
 <p><b>Étape 2 : En $a\notin\mathbb Q$.</b> Une suite de rationnels $x_n\to a$ : $f(x_n) = 1\to1\neq0 = f(a)$.</p>
 <p><b>Étape 3 : En $a\in\mathbb Q$.</b> Une suite d'irrationnels : $f(x_n) = 0\neq1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{\mathbb Q}\ \text{n'est continue en aucun point}}$.</p>
 
 <p class="ml">Exemple 45 : uniformes continuités</p>
+<p><b>Étudier l'uniforme continuité de $f\mapsto\inf_{[0, 1]}f$, de $\sqrt{\phantom x}$ sur $\mathbb R_+$ et de $x\mapsto\sin(x^2)$ sur $\mathbb R$, puis d'une fonction continue sur $\mathbb R_+$ qui a une limite finie en $+\infty$.</b></p>
 <p><b>Étape 1 : $\varphi(f) = \inf_{[0, 1]}f$ est $1$-lipschitzienne pour $\|\cdot\|_\infty$.</b> $f(t)\leq g(t) + \|f - g\|_\infty$ pour tout $t$, donc $\varphi(f)\leq g(t) + \|f - g\|_\infty$, puis $\varphi(f)\leq\varphi(g) + \|f - g\|_\infty$, et par symétrie $|\varphi(f) - \varphi(g)|\leq\|f - g\|_\infty$.</p>
 <p><b>Étape 2 : $\sqrt{\phantom x}$ sur $\mathbb R_+$.</b> $|\sqrt x - \sqrt y|\leq\sqrt{|x - y|}$ (pour $y\leq x$ : $(\sqrt y + \sqrt{x - y})^2 = x + 2\sqrt{y(x - y)}\geq x$). Avec $\alpha = \varepsilon^2$ : $|x - y|\leq\alpha\Rightarrow|\sqrt x - \sqrt y|\leq\varepsilon$.</p>
 <p><b>Étape 3 : $\sin(x^2)$ ne l'est pas.</b> $x_n = \sqrt{2n\pi}$, $y_n = \sqrt{2n\pi + \frac\pi2}$ : $y_n - x_n = \frac{\pi/2}{y_n + x_n}\to0$ mais $|\sin(y_n^2) - \sin(x_n^2)| = 1 - 0 = 1$.</p>
@@ -9898,12 +9961,14 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <h2 id="t-sfmat">19. Topologie de $\mathcal M_n(\mathbb K)$</h2>
 
 <p class="ml">Exemple 46 : $|\lambda|\leq N(A)$ pour une norme d'algèbre</p>
+<p>Soit $N$ une norme d'algèbre sur $\mathcal M_n(\mathbb C)$ et $\lambda$ une valeur propre de $A$. <b>Montrer que $|\lambda|\leq N(A)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $N(AB)\leq N(A)N(B)$.</p>
 <p><b>Étape 2 : La matrice.</b> $AX = \lambda X$, $X\neq0$ ; $M = \begin{pmatrix}X&X&\cdots&X\end{pmatrix}$ ($n$ colonnes égales à $X$), donc $AM = \begin{pmatrix}AX&\cdots&AX\end{pmatrix} = \lambda M$.</p>
 <p><b>Étape 3 : On majore.</b> $|\lambda|N(M) = N(AM)\leq N(A)N(M)$ et $N(M)\neq0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\rho(A) = \max|\lambda|\leq N(A)}$.</p>
 
 <p class="ml">Exemple 47 : $GL_n(\mathbb K)$ est dense, puis $\chi_{AB} = \chi_{BA}$</p>
+<p><b>Montrer que $GL_n(\mathbb K)$ est dense dans $\mathcal M_n(\mathbb K)$, puis que $\chi_{AB} = \chi_{BA}$ pour toutes $A, B\in\mathcal M_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Densité + continuité : une égalité vraie sur une partie dense est vraie partout.</p>
 <p><b>Étape 2 : Densité.</b> $A_p = A - \frac1pI_n$ est inversible dès que $\frac1p$ n'est pas valeur propre (à partir d'un rang, car $\operatorname{Sp}A$ est fini), et $A_p\to A$.</p>
 <p><b>Étape 3 : $A$ inversible.</b> $BA = A^{-1}(AB)A$ : semblables, donc $\chi_{AB} = \chi_{BA}$.</p>
@@ -9911,6 +9976,7 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <p><b>Conclusion.</b> $\cG{\chi_{AB} = \chi_{BA}}$ pour toutes $A, B\in\mathcal M_n(\mathbb K)$.</p>
 
 <p class="ml">Exemple 48 : $AN = NA$, $N$ nilpotente $\Rightarrow\det(A + N) = \det A$</p>
+<p>Soient $A, N\in\mathcal M_n(\mathbb C)$ avec $AN = NA$ et $N$ nilpotente. <b>Montrer que $\det(A + N) = \det A$.</b></p>
 <p><b>Étape 1 : $A = I_n$.</b> $N$ nilpotente est semblable à une triangulaire stricte, donc $I_n + N$ à une triangulaire de diagonale $1$ :</p>
 $$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots&*\\0&\cdots&0&1\end{pmatrix},\qquad\det = 1.$$
 <p><b>Étape 2 : $A$ inversible.</b> $A + N = A(I_n + A^{-1}N)$, et $A^{-1}N$ est nilpotente ($A^{-1}$ commute avec $N$, $(A^{-1}N)^p = A^{-p}N^p = 0$) : $\det(A + N) = \det A\times1$.</p>
@@ -9949,13 +10015,14 @@ $$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots
 
 <h2 id="t-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $\mathcal S_n(\mathbb R)$ est fermé</p>
+<p><b>Montrer que l'ensemble $\mathcal S_n(\mathbb R)$ des matrices symétriques est fermé dans $\mathcal M_n(\mathbb R)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Image réciproque d'un fermé par une application continue ; en dimension finie, toute application linéaire est continue.</p>
 <p><b>Étape 2 : L'application.</b> $\varphi(M) = M - M^\top$ est linéaire sur $\mathcal M_n(\mathbb R)$ (dimension finie), donc continue.</p>
 <p><b>Étape 3 : L'image réciproque.</b> $\mathcal S_n = \varphi^{-1}(\{0\})$, et $\{0\}$ est fermé.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_n(\mathbb R)\ \text{est fermé}}$ (plus généralement, tout sev d'un espace de dimension finie).</p>
 
 <p class="ml">Exercice 2 : une fonction coercive atteint son minimum</p>
-<p>$f:\mathbb R^n\to\mathbb R$ continue avec $f(x)\to+\infty$ quand $\|x\|\to+\infty$.</p>
+<p>$f:\mathbb R^n\to\mathbb R$ continue avec $f(x)\to+\infty$ quand $\|x\|\to+\infty$. <b>Montrer que $f$ atteint son minimum sur $\mathbb R^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Continue sur un compact $\Rightarrow$ min atteint ; fermé borné = compact en dimension finie.</p>
 <p><b>Étape 2 : On borne.</b> On pose $A = f(0)$. Comme $f(x)\to+\infty$ quand $\|x\|\to+\infty$, la définition de la limite donne un $R$ tel que $\|x\| > R\Rightarrow f(x) > A$.</p>
 <p><b>Étape 3 : Sur la boule.</b> $B_f(0, R)$ est compacte : $f$ y atteint son min en $x_0$, et $f(x_0)\leq f(0) = A$.</p>
@@ -9963,6 +10030,7 @@ $$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots
 <p><b>Étape 5 : Conclusion.</b> $\cG{f(x_0) = \min_{\mathbb R^n}f}$.</p>
 
 <p class="ml">Exercice 3 : les matrices nilpotentes forment un fermé</p>
+<p><b>Montrer que l'ensemble des matrices nilpotentes est un fermé de $\mathcal M_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $N$ nilpotente $\iff N^n = 0$ (Cayley-Hamilton). Image réciproque d'un fermé.</p>
 <p><b>Étape 2 : L'application.</b> $\psi(M) = M^n$ est continue (coefficients polynomiaux).</p>
 <p><b>Étape 3 : L'image réciproque.</b> L'ensemble des nilpotentes est $\psi^{-1}(\{0\})$.</p>
