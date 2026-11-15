@@ -8158,7 +8158,7 @@ $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 </ul></div></div>
 `,
 "Topologie des espaces vectoriels normés": R`
-<nav class="msum"><a href="#t-not">Notations</a><a href="#t-norme">Normes</a><a href="#t-equiv">Normes équivalentes</a><a href="#t-suites">Suites</a><a href="#t-ouv">Ouverts, fermés</a><a href="#t-adh">Intérieur, adhérence, densité</a><a href="#t-lim">Limites, continuité</a><a href="#t-lin">Applications linéaires continues</a><a href="#t-comp">Compacts</a><a href="#t-dimf">Dimension finie</a><a href="#t-cpa">Connexité par arcs</a><a href="#t-enonce">L'énoncé</a><a href="#t-erreurs">Erreurs</a><a href="#t-entrainement">S'entraîner</a><a href="#t-exos">Exercices</a><a href="#t-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#t-not">Notations</a><a href="#t-norme">Normes</a><a href="#t-equiv">Normes équivalentes</a><a href="#t-suites">Suites</a><a href="#t-ouv">Ouverts, fermés</a><a href="#t-adh">Intérieur, adhérence, densité</a><a href="#t-lim">Limites, continuité</a><a href="#t-lin">Applications linéaires continues</a><a href="#t-comp">Compacts</a><a href="#t-dimf">Dimension finie</a><a href="#t-cpa">Connexité par arcs</a><a href="#t-sfnorme">Norme ? Comparer</a><a href="#t-sfsuites">Suites : méthodes</a><a href="#t-sfouv">Ouvert, fermé ?</a><a href="#t-sfcomp">Compacité</a><a href="#t-sfcpa">Arcs</a><a href="#t-sfcont">Continuité</a><a href="#t-sfmat">$\mathcal M_n(\mathbb K)$</a><a href="#t-enonce">L'énoncé</a><a href="#t-erreurs">Erreurs</a><a href="#t-entrainement">S'entraîner</a><a href="#t-exos">Exercices</a><a href="#t-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs et les suites $\cB x$, $\cB{(x_n)}$. <span class="kR">rouge</span> : la partie étudiée $\cR A$ (ouverte, fermée, compacte…). <span class="kO">orange</span> : les constantes d'inégalité $\cO\alpha$, $\cO\beta$, $\cO C$. <span class="kV">violet</span> : la norme utilisée $\cV{N}$, $\cV{\|\cdot\|_\infty}$. <span class="kG">vert</span> : la conclusion.</p>
@@ -8328,7 +8328,271 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 <p class="ml">Bonus : suites de Cauchy, espaces complets <span class="hp">hors programme</span></p>
 <p>$(x_n)$ est de Cauchy si $\|x_p - x_q\|\to0$ quand $p, q\to+\infty$. Toute suite convergente est de Cauchy ; un espace où la réciproque est vraie est dit complet (Banach). Les espaces de dimension finie sont complets ; $(\mathcal C([0, 1]), \|\cdot\|_1)$ ne l'est pas.</p>
 
-<h2 id="t-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="t-sfnorme">13. Montrer qu'une application est une norme, comparer deux normes</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Formule avec $\max$, $\sup$, valeurs absolues</td><td>La <b>définition</b> : séparation, homogénéité, inégalité triangulaire (une par une).</td></tr>
+<tr><td>Formule avec une racine d'une somme de carrés</td><td>C'est $\sqrt{\varphi(x, x)}$ : montrer que $\varphi$ est un <b>produit scalaire</b>, l'inégalité triangulaire est alors gratuite.</td></tr>
+<tr><td>Comparer $N_1$ et $N_2$</td><td>Chercher $\alpha, \beta > 0$ avec $N_1\leq\alpha N_2$ et $N_2\leq\beta N_1$.</td></tr>
+<tr><td>Montrer qu'elles ne sont pas équivalentes</td><td>Une <b>suite</b> $(x_n)$ avec $\frac{N_1(x_n)}{N_2(x_n)}\to+\infty$.</td></tr>
+</table>
+
+<p class="ml">Exemple 15 : $N(x, y) = \max(|x|, |y|, |x - y|)$ et sa boule unité</p>
+<p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
+<p><b>Étape 2 : Séparation et homogénéité.</b> $N(u) = 0$ force $|x| = |y| = 0$. $N(\lambda u) = \max(|\lambda x|, |\lambda y|, |\lambda x - \lambda y|) = |\lambda|\max(|x|, |y|, |x - y|) = |\lambda|N(u)$.</p>
+<p><b>Étape 3 : Triangle.</b> $|x + x'|\leq|x| + |x'|\leq N(u) + N(v)$, de même $|y + y'|$ et $|(x - y) + (x' - y')|\leq|x - y| + |x' - y'|\leq N(u) + N(v)$. Le max des trois est donc $\leq N(u) + N(v)$.</p>
+<p><b>Étape 4 : La boule.</b> $N(x, y)\leq1\iff-1\leq x\leq1,\ -1\leq y\leq1,\ -1\leq x - y\leq1$ : le carré $[-1, 1]^2$ coupé par les droites $y = x - 1$ et $y = x + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{N\ \text{est une norme, de boule unité l'hexagone de sommets}\ (1, 0), (1, 1), (0, 1), (-1, 0), (-1, -1), (0, -1)}$.</p>
+
+<p class="ml">Exemple 16 : $N(P) = \sqrt{\sum_{k=0}^nP(a_k)^2}$ sur $\mathbb R_n[X]$</p>
+<p><b>Étape 1 : Rappel.</b> Racine d'une somme de carrés : norme d'un produit scalaire.</p>
+<p><b>Étape 2 : Le produit scalaire.</b> $\varphi(P, Q) = \sum_{k=0}^nP(a_k)Q(a_k)$ : symétrique, bilinéaire, $\varphi(P, P)\geq0$.</p>
+<p><b>Étape 3 : Défini.</b> $\varphi(P, P) = 0\Rightarrow P(a_k) = 0$ pour les $n + 1$ réels distincts $a_k$ ; $\deg P\leq n$, donc $P = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{N = \sqrt{\varphi(\cdot, \cdot)}\ \text{est une norme euclidienne}}$.</p>
+
+<p class="ml">Exemple 17 : deux normes équivalentes sur $\mathcal C^1([0, 1])$</p>
+<p>$N_1(f) = |f(0)| + \int_0^1|f'|$, $N_2(f) = |f(1)| + \int_0^1|f'|$.</p>
+<p><b>Étape 1 : Rappel.</b> On relie $f(1)$ et $f(0)$ : $f(1) = f(0) + \int_0^1f'$.</p>
+<p><b>Étape 2 : $N_2\leq2N_1$.</b> $|f(1)|\leq|f(0)| + \int_0^1|f'| = N_1(f)$, donc $N_2(f) = |f(1)| + \int|f'|\leq N_1(f) + N_1(f)$.</p>
+<p><b>Étape 3 : $N_1\leq2N_2$.</b> De même avec $f(0) = f(1) - \int_0^1f'$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\tfrac12N_2\leq N_1\leq2N_2}$ : équivalentes.</p>
+
+<p class="ml">Exemple 18 : deux normes non équivalentes</p>
+<p>$E = \{f\in\mathcal C^2([0, 1]),\ f(0) = f(1) = 0\}$, $N(f) = \big(\int_0^1f''^2\big)^{1/2}$. Comparer avec $\|\cdot\|_\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> Une inégalité dans un sens, une suite pour l'autre.</p>
+<p><b>Étape 2 : $|f'(x) - f'(c)|\leq N(f)$.</b> $|f'(x) - f'(c)| = \big|\int_c^xf''\cdot1\big|\leq\big(\int_0^1f''^2\big)^{1/2}\big(\int_0^11\big)^{1/2} = N(f)$ (Cauchy-Schwarz).</p>
+<p><b>Étape 3 : Rolle.</b> $f(0) = f(1)$ donne $c$ avec $f'(c) = 0$, donc $|f'(x)|\leq N(f)$ ; puis les accroissements finis entre $0$ et $x$ : $|f(x)| = |f(x) - f(0)|\leq x\,N(f)\leq N(f)$. Donc $\|f\|_\infty\leq N(f)$ (et $N$ est bien séparante).</p>
+<p><b>Étape 4 : L'autre sens est faux.</b> $f_n(x) = \frac{\sin(n\pi x)}n$ : $\|f_n\|_\infty = \frac1n$, $f_n'' = -n\pi^2\sin(n\pi x)$, $N(f_n)^2 = n^2\pi^4\int_0^1\sin^2(n\pi x)\,dx = n^2\pi^4\times\frac12$. Donc $\frac{N(f_n)}{\|f_n\|_\infty} = \frac{n\pi^2/\sqrt2}{1/n} = \frac{n^2\pi^2}{\sqrt2}\to+\infty$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\|\cdot\|_\infty\leq N,\ \text{mais elles ne sont pas équivalentes}}$.</p>
+
+<h2 id="t-sfsuites">14. Étudier une suite dans un espace normé</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Résultat théorique</td><td>La définition avec $\varepsilon$, souvent par l'absurde (nier la convergence proprement).</td></tr>
+<tr><td>Calcul concret</td><td>$u_n\to\ell\iff\|u_n - \ell\|\to0$ : on se ramène à une suite réelle.</td></tr>
+<tr><td>Dimension finie</td><td>Les <b>suites coordonnées</b> (toutes les normes sont équivalentes).</td></tr>
+<tr><td>Image par une application continue</td><td>$u_n\to\ell$, $f$ continue en $\ell$ $\Rightarrow f(u_n)\to f(\ell)$.</td></tr>
+</table>
+
+<p class="ml">Exemple 19 : une seule valeur d'adhérence dans un compact</p>
+<p><b>Étape 1 : Rappel.</b> Non-convergence vers $\ell$ : $\exists\varepsilon > 0,\ \forall N,\ \exists n\geq N,\ \|u_n - \ell\| > \varepsilon$.</p>
+<p><b>Étape 2 : On construit une extraite.</b> On choisit $\varphi(0)$ avec $\|u_{\varphi(0)} - \ell\| > \varepsilon$, puis $\varphi(n + 1) > \varphi(n)$ de même : $\|u_{\varphi(n)} - \ell\| > \varepsilon$ pour tout $n$.</p>
+<p><b>Étape 3 : Bolzano-Weierstrass.</b> $(u_{\varphi(n)})$ est dans le compact $K$ : elle a une valeur d'adhérence $\ell'$, qui vérifie $\|\ell' - \ell\|\geq\varepsilon$, donc $\ell'\neq\ell$.</p>
+<p><b>Étape 4 : Conclusion.</b> Contradiction avec l'unicité : $\cG{(u_n)\ \text{converge vers}\ \ell}$.</p>
+
+<p class="ml">Exemple 20 : $f_n(t) = t^n$ selon la norme</p>
+<p><b>Étape 1 : Rappel.</b> $f_n\to0\iff\|f_n - 0\|\to0$.</p>
+<p><b>Étape 2 : Norme $\|\cdot\|_1$.</b> $\|f_n\|_1 = \int_0^1t^n\,dt = \Big[\frac{t^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}\to0$.</p>
+<p><b>Étape 3 : Norme $\|\cdot\|_\infty$.</b> $\|f_n\|_\infty = \sup_{[0, 1]}t^n = 1^n = 1\not\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f_n\to0\ \text{pour}\ \|\cdot\|_1,\ \text{pas pour}\ \|\cdot\|_\infty}$ : sur $\mathcal C([0, 1])$ (dimension infinie), ces normes ne sont pas équivalentes.</p>
+
+<p class="ml">Exemple 21 : $\lim\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie, convergence coefficient par coefficient ; on écrit la matrice comme une rotation fois un réel.</p>
+<p><b>Étape 2 : La forme polaire.</b> On pose $r_n = \sqrt{1 + \frac{a^2}{n^2}}$, $\cos\theta_n = \frac1{r_n}$, $\sin\theta_n = \frac{a/n}{r_n}$ :</p>
+$$A_n = \begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix} = r_n\begin{pmatrix}\cos\theta_n&-\sin\theta_n\\\sin\theta_n&\cos\theta_n\end{pmatrix},\qquad A_n^n = r_n^n\begin{pmatrix}\cos(n\theta_n)&-\sin(n\theta_n)\\\sin(n\theta_n)&\cos(n\theta_n)\end{pmatrix}.$$
+<p><b>Étape 3 : L'angle.</b> $\cos\theta_n > 0$, donc $\theta_n = \arctan\frac an\sim\frac an$ et $n\theta_n\to a$.</p>
+<p><b>Étape 4 : Le module.</b> $r_n^n = e^{\frac n2\ln(1 + \frac{a^2}{n^2})}$ et $\frac n2\ln\big(1 + \frac{a^2}{n^2}\big)\sim\frac n2\times\frac{a^2}{n^2} = \frac{a^2}{2n}\to0$ : $r_n^n\to1$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{\lim_{n\to+\infty}\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n = \begin{pmatrix}\cos a&-\sin a\\\sin a&\cos a\end{pmatrix}}\quad(\text{c'est}\ \exp\begin{pmatrix}0&-a\\a&0\end{pmatrix}).$$
+
+<p class="ml">Exemple 22 : les matrices diagonalisables sont denses dans $\mathcal M_n(\mathbb C)$</p>
+<p><b>Étape 1 : Rappel.</b> Trigonaliser, puis perturber la diagonale pour rendre les valeurs propres distinctes.</p>
+<p><b>Étape 2 : La perturbation.</b> $A = PTP^{-1}$ avec $T$ triangulaire de diagonale $\lambda_1, \dots, \lambda_p$. On pose</p>
+$$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{pmatrix} = \begin{pmatrix}\lambda_1 + \frac1n&*&\cdots&*\\0&\lambda_2 + \frac2n&\ddots&\vdots\\\vdots&\ddots&\ddots&*\\0&\cdots&0&\lambda_p + \frac pn\end{pmatrix}.$$
+<p><b>Étape 3 : Distinctes.</b> $\lambda_i + \frac in = \lambda_j + \frac jn$ ($i\neq j$) impose $n = \frac{i - j}{\lambda_j - \lambda_i}$ : une seule valeur de $n$ par couple, donc à partir d'un rang les $p$ coefficients diagonaux sont distincts, et $T_n$ est diagonalisable.</p>
+<p><b>Étape 4 : Conclusion.</b> $M\mapsto PMP^{-1}$ est linéaire en dimension finie, donc continue : $PT_nP^{-1}\to PTP^{-1} = A$. $\cG{\text{les diagonalisables sont denses dans}\ \mathcal M_n(\mathbb C)}$.</p>
+
+<p class="ml">Exemple 23 : c'est faux dans $\mathcal M_2(\mathbb R)$</p>
+<p><b>Étape 1 : Rappel.</b> Le discriminant $\Delta(M) = (a + d)^2 - 4(ad - bc)$ est continu (polynôme en les coefficients).</p>
+<p><b>Étape 2 : La matrice.</b> $A = \begin{pmatrix}0&1\\-1&0\end{pmatrix}$ : $\chi_A = X^2 + 1$, $\Delta(A) = 0 - 4 = -4 \lt 0$.</p>
+<p><b>Étape 3 : L'absurde.</b> Si $A_n\to A$ avec $A_n$ diagonalisable dans $\mathbb R$ à valeurs propres distinctes, $\Delta(A_n) > 0$, donc $\Delta(A) = \lim\Delta(A_n)\geq0$ : contradiction. (Si une valeur propre est double, $A_n$ est scalaire, $\Delta = 0$ : même contradiction.)</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{les diagonalisables ne sont pas denses dans}\ \mathcal M_2(\mathbb R)}$.</p>
+
+<h2 id="t-sfouv">15. Montrer qu'une partie est ouverte, fermée</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Ouvert : cas simple</td><td>Définition : pour $a\in A$, une boule $B(a, r)\subset A$, avec un $r$ explicite.</td></tr>
+<tr><td>Ouvert : partie définie par des inégalités strictes</td><td><b>Image réciproque</b> d'un ouvert par une application continue.</td></tr>
+<tr><td>Ouvert : réunion</td><td>Réunion quelconque d'ouverts.</td></tr>
+<tr><td>Fermé : partie définie par des inégalités larges, des égalités</td><td>Image réciproque d'un fermé par une continue.</td></tr>
+<tr><td>Fermé : en général</td><td><b>Caractérisation séquentielle</b> : toute suite convergente de $A$ a sa limite dans $A$.</td></tr>
+<tr><td>Fermé : intersection</td><td>Intersection quelconque de fermés.</td></tr>
+</table>
+
+<p class="ml">Exemple 24 : $\{x\in\mathbb R^n,\ x_i\neq x_j\ (i\neq j)\}$ est ouvert</p>
+<p><b>Étape 1 : Rappel.</b> Trouver un rayon explicite pour la norme $\|\cdot\|_\infty$.</p>
+<p><b>Étape 2 : Le rayon.</b> $a\in A$, $r = \frac12\min_{i\neq j}|a_i - a_j| > 0$.</p>
+<p><b>Étape 3 : La boule.</b> $x\in B(a, r)$ : $|x_i - x_j|\geq|a_i - a_j| - |x_i - a_i| - |x_j - a_j| > 2r - r - r = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $B(a, r)\subset A$ : $\cG{A\ \text{est ouvert}}$.</p>
+
+<p class="ml">Exemple 25 : $A + B$ est ouvert si $A$ l'est</p>
+<p><b>Étape 1 : Rappel.</b> $A + B = \bigcup_{b\in B}(A + \{b\})$, et une translation envoie une boule sur une boule.</p>
+<p><b>Étape 2 : Un translaté.</b> $y = x + b$, $x\in A$, $B(x, r)\subset A$ : $B(y, r) = B(x, r) + b\subset A + \{b\}$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{A + B\ \text{est ouvert}}$ (réunion d'ouverts).</p>
+
+<p class="ml">Exemple 26 : $GL_n(\mathbb K)$ est ouvert</p>
+<p><b>Étape 1 : Rappel.</b> $\det$ est continue (polynomiale en les coefficients), $\mathbb K^* = \mathbb K\setminus\{0\}$ est ouvert.</p>
+<p><b>Étape 2 : On écrit.</b> $GL_n(\mathbb K) = \det^{-1}(\mathbb K^*)$.</p>
+<p><b>Étape 3 : Concrètement.</b> $\det\begin{pmatrix}1 + \varepsilon_1&\varepsilon_2\\\varepsilon_3&1 + \varepsilon_4\end{pmatrix} = 1 + \varepsilon_1 + \varepsilon_4 + \varepsilon_1\varepsilon_4 - \varepsilon_2\varepsilon_3$ reste $\neq0$ si les $|\varepsilon_i|$ sont petits.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{GL_n(\mathbb K)\ \text{est un ouvert de}\ \mathcal M_n(\mathbb K)}$.</p>
+
+<p class="ml">Exemple 27 : une boule fermée est fermée</p>
+<p><b>Étape 1 : Rappel.</b> $x\mapsto\|x - a\|$ est $1$-lipschitzienne, donc continue.</p>
+<p><b>Étape 2 : Image réciproque.</b> $\overline B(a, r) = \{x,\ \|x - a\|\leq r\}$ est l'image réciproque du fermé $[0, r]$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\overline B(a, r)\ \text{est fermée}}$.</p>
+
+<p class="ml">Exemple 28 : un sous-espace de dimension finie est fermé</p>
+<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, et coordonnées dans une base adaptée $(e_1, \dots, e_n)$ ($F = \operatorname{Vect}(e_1, \dots, e_p)$).</p>
+<p><b>Étape 2 : Une suite.</b> $x_k\in F$, $x_k\to\ell$ : $x_k = \sum_{i\leq p}x_k^{(i)}e_i$, et chaque coordonnée converge vers celle de $\ell$.</p>
+<p><b>Étape 3 : Les coordonnées.</b> Pour $i > p$, $x_k^{(i)} = 0$ pour tout $k$, donc $\ell_i = 0$ : $\ell\in F$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{est fermé}}$ (dans un $E$ de dimension finie ; vrai aussi en général).</p>
+
+<p class="ml">Exemple 29 : un hyperplan est fermé ou dense</p>
+<p><b>Étape 1 : Rappel.</b> $H = \ker\varphi$ ; si $H$ n'est pas fermé, une suite de $H$ converge hors de $H$.</p>
+<p><b>Étape 2 : Non fermé.</b> $x_n\in H$, $x_n\to a\notin H$. Tout $b\in E$ s'écrit $b = h + \lambda a$ ($E = H\oplus\mathbb Ka$).</p>
+<p><b>Étape 3 : Approcher $b$.</b> $h + \lambda x_n\in H$ et $h + \lambda x_n\to h + \lambda a = b$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{H\ \text{fermé ou dense}}$ ; en dimension finie, $\varphi$ continue donne $H = \varphi^{-1}(\{0\})$ fermé.</p>
+
+<p class="ml">Exemple 30 : $A^\perp$ est fermé</p>
+<p><b>Étape 1 : Rappel.</b> $\{a\}^\perp = \ker\varphi_a$ avec $\varphi_a(x) = \langle a, x\rangle$, $|\varphi_a(x)|\leq\|a\|\|x\|$ (Cauchy-Schwarz) : continue.</p>
+<p><b>Étape 2 : Conclusion.</b> $A^\perp = \bigcap_{a\in A}\{a\}^\perp$ : $\cG{\text{intersection de fermés, donc fermé}}$.</p>
+
+<h2 id="t-sfcomp">16. Compacité</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Montrer compact</td><td>Suites extraites ; ou image d'un compact par une continue ; ou fermé dans un compact ; en dimension finie, <b>fermé borné</b>.</td></tr>
+<tr><td>Montrer non compact</td><td>Une suite sans extraite convergente (souvent : $\|x_n - x_m\|$ ne tend pas vers $0$).</td></tr>
+<tr><td>Utiliser</td><td>Bolzano-Weierstrass, bornes atteintes, Heine.</td></tr>
+</table>
+
+<p class="ml">Exemple 31 : $O_n(\mathbb R)$ est compact</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie : fermé et borné.</p>
+<p><b>Étape 2 : Fermé.</b> $M\mapsto{}^tMM$ est continue (coefficients polynomiaux) : $O_n = \{M,\ {}^tMM = I_n\}$ est l'image réciproque du fermé $\{I_n\}$.</p>
+<p><b>Étape 3 : Borné.</b> Les colonnes sont unitaires : $|m_{ij}|\leq1$, donc $\|M\|_\infty\leq1$. Exemple : $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{O_n(\mathbb R)\ \text{est compact}}$.</p>
+
+<p class="ml">Exemple 32 : la sphère unité de $(\mathcal C([0, 2\pi], \mathbb C), \|\cdot\|_\infty)$ n'est pas compacte</p>
+<p><b>Étape 1 : Rappel.</b> Une suite dont deux termes distincts sont toujours à distance $2$ n'a pas d'extraite convergente.</p>
+<p><b>Étape 2 : La suite.</b> $f_n(t) = e^{int}$, $\|f_n\|_\infty = 1$.</p>
+<p><b>Étape 3 : L'écart.</b> $e^{int} - e^{imt} = e^{i\frac{(n + m)t}2}\times2i\sin\big(\frac{(n - m)t}2\big)$, de module max $2$ (atteint en $t = \frac\pi{n - m}$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\|f_n - f_m\|_\infty = 2$ : $\cG{S(0, 1)\ \text{fermée bornée mais non compacte}}$ (dimension infinie).</p>
+
+<p class="ml">Exemple 33 : $A + B$ compact, et distance de deux compacts atteinte</p>
+<p><b>Étape 1 : Rappel.</b> Image d'un compact par une continue ; bornes atteintes.</p>
+<p><b>Étape 2 : $A + B$.</b> $f(x, y) = x + y$ est continue sur $E\times E$, et $A\times B$ est compact : $A + B = f(A\times B)$ est compact.</p>
+<p><b>Étape 3 : La distance.</b> $(a, b)\mapsto\|a - b\|$ est continue sur le compact $A\times B$ : elle atteint son minimum $d(A, B)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A + B\ \text{compact},\ \exists(a, b),\ d(A, B) = \|a - b\|}$.</p>
+
+<p class="ml">Exemple 34 : une isométrie d'un compact dans lui-même est surjective</p>
+<p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass appliqué à la suite des itérés.</p>
+<p><b>Étape 2 : Les itérés.</b> $x\in K$, $u_0 = x$, $u_{n+1} = f(u_n)$. Une extraite converge, donc $\|u_{\varphi(n+1)} - u_{\varphi(n)}\|\to0$.</p>
+<p><b>Étape 3 : On recule.</b> $f$ conserve les distances : $\|u_{\varphi(n+1)} - u_{\varphi(n)}\| = \|u_{\varphi(n+1) - \varphi(n)} - u_0\|$. Donc des $u_k$ ($k\geq1$, dans $f(K)$) s'approchent de $x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $x\in\overline{f(K)} = f(K)$ ($f(K)$ compact donc fermé) : $\cG{f(K) = K}$.</p>
+
+<p class="ml">Exemple 35 : un vecteur unitaire à distance $1$ d'un sous-espace (Riesz)</p>
+<p><b>Étape 1 : Rappel.</b> Une distance à un fermé de dimension finie est atteinte.</p>
+<p><b>Étape 2 : Le point le plus proche.</b> $y\notin F$, $d = d(y, F) > 0$ ($F$ fermé). Sur le compact $\overline B(y, d + 1)\cap F$, la distance est atteinte : $\|y - t\| = d$.</p>
+<p><b>Étape 3 : Le vecteur.</b> $z = \frac{y - t}{\|y - t\|}$, $\|z\| = 1$, et pour $f\in F$ : $\|z - f\| = \frac1d\|y - (t + df)\|\geq\frac dd = 1$ ($t + df\in F$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\|z\| = 1\ \text{et}\ d(z, F) = 1}$ (et $d(z, F)\leq\|z - 0\| = 1$).</p>
+
+<p class="ml">Exemple 36 : un point fixe pour une application contractante au sens large</p>
+<p>$\|f(x) - f(y)\| \lt \|x - y\|$ pour $x\neq y$ dans un compact $K$.</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi(x) = \|x - f(x)\|$ est continue sur $K$ : elle atteint son minimum.</p>
+<p><b>Étape 2 : Le minimum.</b> $\varphi(y) = \min\varphi$. Si $f(y)\neq y$ : $\varphi(f(y)) = \|f(y) - f(f(y))\| \lt \|y - f(y)\| = \varphi(y)$, contradiction.</p>
+<p><b>Étape 3 : Unicité.</b> Deux points fixes $a\neq b$ : $\|a - b\| = \|f(a) - f(b)\| \lt \|a - b\|$, impossible.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{a un unique point fixe}}$.</p>
+
+<h2 id="t-sfcpa">17. Connexité par arcs</h2>
+
+<p class="ml">Exemple 37 : les diagonalisables et les nilpotentes sont connexes par arcs</p>
+<p><b>Étape 1 : Rappel.</b> Une partie étoilée par rapport à un point est connexe par arcs.</p>
+<p><b>Étape 2 : Diagonalisables.</b> $M = PDP^{-1}$ : $tM + (1 - t)I_n = P\big(tD + (1 - t)I_n\big)P^{-1}$, avec</p>
+$$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_n + 1 - t\end{pmatrix}\quad\text{diagonale} :$$
+<p>le segment $[I_n, M]$ reste dans l'ensemble, étoilé par rapport à $I_n$.</p>
+<p><b>Étape 3 : Nilpotentes.</b> $N^p = 0\Rightarrow(tN)^p = t^pN^p = 0$ : étoilé par rapport à $0_n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{les deux ensembles sont connexes par arcs}}$.</p>
+
+<p class="ml">Exemple 38 : $GL_n(\mathbb R)$ n'est pas connexe par arcs, $SO_2(\mathbb R)$ l'est</p>
+<p><b>Étape 1 : Rappel.</b> L'image d'un connexe par arcs par une continue est un intervalle (dans $\mathbb R$).</p>
+<p><b>Étape 2 : $GL_n$.</b> $\det(GL_n(\mathbb R)) = \mathbb R^*$ (par exemple $\det\operatorname{diag}(t, 1, \dots, 1) = t$), qui n'est pas un intervalle.</p>
+<p><b>Étape 3 : $SO_2$.</b> C'est l'image de $\mathbb R$ par $\theta\mapsto\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$, continue.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{GL_n(\mathbb R)\ \text{non connexe par arcs},\ SO_2(\mathbb R)\ \text{connexe par arcs}}$.</p>
+
+<p class="ml">Exemple 39 : une fonction continue injective sur un intervalle est strictement monotone</p>
+<p><b>Étape 1 : Rappel.</b> $\Delta = \{(x, y),\ x \lt y\}$ est convexe donc connexe par arcs.</p>
+<p><b>Étape 2 : L'application.</b> $F(x, y) = f(x) - f(y)$ est continue et ne s'annule pas sur $\Delta$ (injectivité).</p>
+<p><b>Étape 3 : Un intervalle sans $0$.</b> $F(\Delta)\subset\mathbb R^*$ est un intervalle, donc dans $\mathbb R_+^*$ ou dans $\mathbb R_-^*$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{strictement monotone}}$.</p>
+
+<h2 id="t-sfcont">18. Continuité des applications linéaires et des autres</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Linéaire, dimension infinie</td><td>$\|u(x)\|\leq k\|x\|$ ; sinon une suite $(x_n)$ bornée avec $\|u(x_n)\|\to+\infty$.</td></tr>
+<tr><td>Linéaire, départ de dimension finie</td><td>Toujours continue.</td></tr>
+<tr><td>Non linéaire</td><td>Lipschitzienne ; théorèmes généraux ; $\varepsilon$ ; séquentielle pour la discontinuité.</td></tr>
+<tr><td>Uniforme continuité</td><td>Lipschitzienne ; définition ; absurde avec deux suites ; Heine (compact).</td></tr>
+</table>
+
+<p class="ml">Exemple 40 : $P\mapsto P(0)$ continue, $P\mapsto P'$ non, pour $N(P) = \sum|a_k|$</p>
+<p><b>Étape 1 : Rappel.</b> Critère $\|u(x)\|\leq k\|x\|$.</p>
+<p><b>Étape 2 : $u(P) = P(0) = a_0$.</b> $|a_0|\leq\sum|a_k| = N(P)$ : continue ($k = 1$).</p>
+<p><b>Étape 3 : $v(P) = P'$.</b> $P_n = X^n$ : $N(P_n) = 1$ et $v(P_n) = nX^{n-1}$, $N(v(P_n)) = n\to+\infty$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{continue},\ v\ \text{non continue}}$.</p>
+
+<p class="ml">Exemple 41 : si $A^n\to P$, alors $P$ est un projecteur qui commute avec $A$</p>
+<p><b>Étape 1 : Rappel.</b> En dimension finie, $M\mapsto AM$, $M\mapsto MA$ et $(M, N)\mapsto MN$ sont continues.</p>
+<p><b>Étape 2 : Commutation.</b> $A^{n+1} = A\cdot A^n\to AP$ et $A^{n+1} = A^n\cdot A\to PA$ ; mais $(A^{n+1})$ est extraite de $(A^n)$, donc tend vers $P$ : $AP = PA = P$.</p>
+<p><b>Étape 3 : Projecteur.</b> $A^{2n} = A^n\cdot A^n\to P\cdot P$ et $A^{2n}\to P$ (extraite) : $P^2 = P$.</p>
+<p><b>Étape 4 : Exemple.</b> $A = \begin{pmatrix}1&0\\0&\frac12\end{pmatrix}$ : $A^n = \begin{pmatrix}1&0\\0&\frac1{2^n}\end{pmatrix}\to\begin{pmatrix}1&0\\0&0\end{pmatrix}$, projecteur.</p>
+<p><b>Conclusion.</b> $\cG{P^2 = P = AP = PA}$.</p>
+
+<p class="ml">Exemple 42 : $x\mapsto d(x, A)$ est $1$-lipschitzienne</p>
+<p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$.</p>
+<p><b>Étape 2 : Triangle.</b> Pour $a\in A$ : $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$, donc $d(x, A) - \|x - y\|$ minore tous les $\|y - a\|$ : $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
+<p><b>Étape 3 : Conclusion.</b> En échangeant $x, y$ : $\cG{|d(x, A) - d(y, A)|\leq\|x - y\|}$.</p>
+
+<p class="ml">Exemple 43 : $f(x) = \lfloor x\rfloor + (x - \lfloor x\rfloor)^2$ est continue sur $\mathbb R$</p>
+<p><b>Étape 1 : Rappel.</b> Sur chaque $]n, n + 1[$, $f(x) = n + (x - n)^2$ est continue ; aux entiers, on compare les limites à gauche et à droite avec $f(n)$.</p>
+<p><b>Étape 2 : En $n$, à droite.</b> $\lfloor x\rfloor = n$ : $f(x) = n + (x - n)^2\to n + 0 = n$, et $f(n) = n + 0^2 = n$.</p>
+<p><b>Étape 3 : En $n$, à gauche.</b> $x\in]n - 1, n[$ : $\lfloor x\rfloor = n - 1$, $f(x) = (n - 1) + (x - (n - 1))^2\to(n - 1) + 1^2 = n$.</p>
+<p><b>Étape 4 : Conclusion.</b> Les deux limites valent $f(n)$ : $\cG{f\ \text{est continue sur}\ \mathbb R}$, alors que $\lfloor\cdot\rfloor$ ne l'est pas.</p>
+
+<p class="ml">Exemple 44 : $\mathbb 1_{\mathbb Q}$ est discontinue partout</p>
+<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, densité de $\mathbb Q$ et de $\mathbb R\setminus\mathbb Q$.</p>
+<p><b>Étape 2 : En $a\notin\mathbb Q$.</b> Une suite de rationnels $x_n\to a$ : $f(x_n) = 1\to1\neq0 = f(a)$.</p>
+<p><b>Étape 3 : En $a\in\mathbb Q$.</b> Une suite d'irrationnels : $f(x_n) = 0\neq1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{\mathbb Q}\ \text{n'est continue en aucun point}}$.</p>
+
+<p class="ml">Exemple 45 : uniformes continuités</p>
+<p><b>Étape 1 : $\varphi(f) = \inf_{[0, 1]}f$ est $1$-lipschitzienne pour $\|\cdot\|_\infty$.</b> $f(t)\leq g(t) + \|f - g\|_\infty$ pour tout $t$, donc $\varphi(f)\leq g(t) + \|f - g\|_\infty$, puis $\varphi(f)\leq\varphi(g) + \|f - g\|_\infty$, et par symétrie $|\varphi(f) - \varphi(g)|\leq\|f - g\|_\infty$.</p>
+<p><b>Étape 2 : $\sqrt{\phantom x}$ sur $\mathbb R_+$.</b> $|\sqrt x - \sqrt y|\leq\sqrt{|x - y|}$ (pour $y\leq x$ : $(\sqrt y + \sqrt{x - y})^2 = x + 2\sqrt{y(x - y)}\geq x$). Avec $\alpha = \varepsilon^2$ : $|x - y|\leq\alpha\Rightarrow|\sqrt x - \sqrt y|\leq\varepsilon$.</p>
+<p><b>Étape 3 : $\sin(x^2)$ ne l'est pas.</b> $x_n = \sqrt{2n\pi}$, $y_n = \sqrt{2n\pi + \frac\pi2}$ : $y_n - x_n = \frac{\pi/2}{y_n + x_n}\to0$ mais $|\sin(y_n^2) - \sin(x_n^2)| = 1 - 0 = 1$.</p>
+<p><b>Étape 4 : Heine.</b> $f$ continue sur $\mathbb R_+$ avec une limite $\ell$ en $+\infty$ : au-delà de $A$, $|f - \ell|\leq\frac\varepsilon4$ ; sur $[0, A + 1]$ compact, Heine. On recolle.</p>
+<p><b>Conclusion.</b> $\cG{\varphi,\ \sqrt{\phantom x}\ \text{et}\ f\ \text{uniformément continues};\ \sin(x^2)\ \text{non}}$.</p>
+
+<h2 id="t-sfmat">19. Topologie de $\mathcal M_n(\mathbb K)$</h2>
+
+<p class="ml">Exemple 46 : $|\lambda|\leq N(A)$ pour une norme d'algèbre</p>
+<p><b>Étape 1 : Rappel.</b> $N(AB)\leq N(A)N(B)$.</p>
+<p><b>Étape 2 : La matrice.</b> $AX = \lambda X$, $X\neq0$ ; $M = \begin{pmatrix}X&X&\cdots&X\end{pmatrix}$ ($n$ colonnes égales à $X$), donc $AM = \begin{pmatrix}AX&\cdots&AX\end{pmatrix} = \lambda M$.</p>
+<p><b>Étape 3 : On majore.</b> $|\lambda|N(M) = N(AM)\leq N(A)N(M)$ et $N(M)\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\rho(A) = \max|\lambda|\leq N(A)}$.</p>
+
+<p class="ml">Exemple 47 : $GL_n(\mathbb K)$ est dense, puis $\chi_{AB} = \chi_{BA}$</p>
+<p><b>Étape 1 : Rappel.</b> Densité + continuité : une égalité vraie sur une partie dense est vraie partout.</p>
+<p><b>Étape 2 : Densité.</b> $A_p = A - \frac1pI_n$ est inversible dès que $\frac1p$ n'est pas valeur propre (à partir d'un rang, car $\operatorname{Sp}A$ est fini), et $A_p\to A$.</p>
+<p><b>Étape 3 : $A$ inversible.</b> $BA = A^{-1}(AB)A$ : semblables, donc $\chi_{AB} = \chi_{BA}$.</p>
+<p><b>Étape 4 : Passage à la limite.</b> $A\mapsto\chi_{AB} - \chi_{BA}$ est continue (coefficients polynomiaux) et nulle sur $GL_n$ dense : nulle partout.</p>
+<p><b>Conclusion.</b> $\cG{\chi_{AB} = \chi_{BA}}$ pour toutes $A, B\in\mathcal M_n(\mathbb K)$.</p>
+
+<p class="ml">Exemple 48 : $AN = NA$, $N$ nilpotente $\Rightarrow\det(A + N) = \det A$</p>
+<p><b>Étape 1 : $A = I_n$.</b> $N$ nilpotente est semblable à une triangulaire stricte, donc $I_n + N$ à une triangulaire de diagonale $1$ :</p>
+$$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots&*\\0&\cdots&0&1\end{pmatrix},\qquad\det = 1.$$
+<p><b>Étape 2 : $A$ inversible.</b> $A + N = A(I_n + A^{-1}N)$, et $A^{-1}N$ est nilpotente ($A^{-1}$ commute avec $N$, $(A^{-1}N)^p = A^{-p}N^p = 0$) : $\det(A + N) = \det A\times1$.</p>
+<p><b>Étape 3 : Cas général.</b> $A_p = A - \frac1pI_n$ inversibles, commutent avec $N$, et $\det(A_p + N) = \det A_p$ ; on fait $p\to+\infty$ (continuité de $\det$).</p>
+<p><b>Conclusion.</b> $\cG{\det(A + N) = \det A}$.</p>
+
+<h2 id="t-enonce">20. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« Montrer que $N$ est une norme »</b><span>Séparation, homogénéité, triangulaire.</span></div>
 <div><b>« Les normes sont-elles équivalentes ? »</b><span>Dimension finie : oui. Sinon : une suite avec un quotient non borné.</span></div>
