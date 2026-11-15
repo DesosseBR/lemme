@@ -8181,7 +8181,7 @@ $$\varphi(\lambda P + Q) = \lambda P(1) + Q(1) + \lambda P'(0) + Q'(0) = \lambda
 <p class="ml">Exemple 2 : pas linéaire</p>
 <p>$f(x, y) = (x + y, xy)$ de $\mathbb R^2$ dans $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> Linéaire $\Rightarrow f(2u) = 2f(u)$.</p>
-<p><b>Étape 2 : Un test.</b> $f(1, 1) = (2, 1)$ et $f(2, 2) = (4, 4)\neq2(2, 1) = (4, 2)$.</p>
+<p><b>Étape 2 : Un test.</b> $f(1, 1) = (1 + 1,\ 1\times1) = (2, 1)$ et $f(2, 2) = (2 + 2,\ 2\times2) = (4, 4)$. Linéaire imposerait $f(2, 2) = 2f(1, 1) = (4, 2)$, or $(4, 4)\neq(4, 2)$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{n'est pas linéaire}}$ (le produit $xy$ est du degré $2$).</p>
 
 <h2 id="l-ker">3. Noyau et image</h2>
@@ -8190,18 +8190,18 @@ $$f\ \text{injective}\iff\ker f = \{0\}.\qquad f\ \text{surjective}\iff\operator
 <p class="ml">Exemple 3 : noyau et image dans $\mathbb R^3$</p>
 <p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\ker f$ : résoudre $f(x) = 0$. $\operatorname{Im}f = \operatorname{Vect}(f(e_1), f(e_2), f(e_3))$.</p>
-<p><b>Étape 2 : Le noyau.</b> $x - y = 0$, $y - z = 0$ (la 3<sup>e</sup> en découle) : $x = y = z$, donc $\cR{\ker f = \operatorname{Vect}(1, 1, 1)}$.</p>
+<p><b>Étape 2 : Le noyau.</b> $f(x, y, z) = 0$ : $x - y = 0$ et $y - z = 0$ (la 3<sup>e</sup>, $z - x = 0$, est l'opposée de leur somme). Donc $x = y$ et $y = z$, $(x, y, z) = (x, x, x) = x(1, 1, 1)$ : $\cR{\ker f = \operatorname{Vect}(1, 1, 1)}$.</p>
 <p><b>Étape 3 : L'image.</b> On calcule les images de la base canonique :</p>
 $$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 1 - 0,\ 0 - 0) = (-1, 1, 0),\quad f(0, 0, 1) = (0, -1, 1).$$
-<p>Et $f(e_3) = (0, -1, 1) = -(1, 0, -1) - (-1, 1, 0)$ : il est combinaison des deux autres. Donc $\operatorname{Im}f = \operatorname{Vect}\big((1, 0, -1), (-1, 1, 0)\big)$.</p>
-<p><b>Étape 4 : Une équation.</b> Chaque vecteur image a ses coordonnées de somme nulle : $\cO{\operatorname{Im}f}\subset\{a + b + c = 0\}$, et les deux sont des plans.</p>
+<p>Et $-(1, 0, -1) - (-1, 1, 0) = (-1 + 1,\ 0 - 1,\ 1 - 0) = (0, -1, 1) = f(e_3)$ : il est combinaison des deux autres. Donc $\operatorname{Im}f = \operatorname{Vect}\big((1, 0, -1), (-1, 1, 0)\big)$.</p>
+<p><b>Étape 4 : Une équation.</b> $(x - y) + (y - z) + (z - x) = 0$ : chaque vecteur image a ses coordonnées de somme nulle, donc $\cO{\operatorname{Im}f}\subset\{a + b + c = 0\}$. Les deux sont des plans (dimension $2$), donc égaux.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb R(1, 1, 1),\ \operatorname{Im}f = \{a + b + c = 0\}}$. Contrôle : $1 + 2 = 3$ (théorème du rang, §6).</p>
 
 <p class="ml">Exemple 4 : la dérivation</p>
 <p>$D:\mathbb K[X]\to\mathbb K[X]$, $P\mapsto P'$.</p>
 <p><b>Étape 1 : Rappel.</b> Injective $\iff\ker = \{0\}$ ; surjective $\iff\operatorname{Im} = $ tout l'espace.</p>
 <p><b>Étape 2 : Le noyau.</b> $P' = 0\iff P$ constant : $\ker D = \mathbb K_0[X]$, $D$ n'est pas injective.</p>
-<p><b>Étape 3 : L'image.</b> Tout $Q = \sum a_kX^k$ est la dérivée de $\sum\frac{a_k}{k + 1}X^{k+1}$ : $D$ est surjective.</p>
+<p><b>Étape 3 : L'image.</b> $\big(\frac{a_k}{k + 1}X^{k+1}\big)' = \frac{a_k}{k + 1}(k + 1)X^k = a_kX^k$, donc tout $Q = \sum a_kX^k$ est la dérivée de $\sum\frac{a_k}{k + 1}X^{k+1}$ : $D$ est surjective.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{D\ \text{surjective, non injective}}$ : c'est possible car $\mathbb K[X]$ est de dimension infinie.</p>
 
 <h2 id="l-iso">4. Isomorphismes, image d'une base</h2>
@@ -8211,7 +8211,7 @@ $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injec
 <p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$.</p>
 <p><b>Étape 1 : Rappel.</b> Même dimension finie : injective suffit.</p>
 <p><b>Étape 2 : Les dimensions.</b> $\dim\mathbb R_2[X] = 3 = \dim\mathbb R^3$, et $\varphi$ est linéaire.</p>
-<p><b>Étape 3 : Le noyau.</b> $\varphi(P) = 0$ : $P$ de degré $\leq2$ a $3$ racines $0, 1, 2$, donc $P = 0$.</p>
+<p><b>Étape 3 : Le noyau.</b> $\varphi(P) = (0, 0, 0)$ signifie $P(0) = P(1) = P(2) = 0$ : $P$, de degré $\leq2$, a $3$ racines, donc $P = 0$. $\ker\varphi = \{0\}$ : injective, donc bijective (même dimension).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\varphi\ \text{est un isomorphisme}}$ : pour tous $a, b, c$, il existe un unique $P\in\mathbb R_2[X]$ avec $P(0) = a$, $P(1) = b$, $P(2) = c$.</p>
 
 <h2 id="l-proj">5. Projecteurs et symétries</h2>
@@ -8224,16 +8224,16 @@ $$s\ \text{symétrie}\iff s\circ s = \operatorname{id}.\ \text{Alors}\ E = \ker(
 <p>Projection sur $P:\ x + y + z = 0$ parallèlement à $D = \operatorname{Vect}(1, 0, 0)$.</p>
 <p><b>Étape 1 : Rappel.</b> $x = x_P + x_D$ avec $x_D = \lambda(1, 0, 0)$ et $x - x_D\in P$.</p>
 <p><b>Étape 2 : On impose.</b> Pour $x = (a, b, c)$ : $x - \lambda(1, 0, 0) = (a - \lambda, b, c)\in P\iff a - \lambda + b + c = 0\iff\lambda = a + b + c$.</p>
-<p><b>Étape 3 : Le projeté.</b> $p(a, b, c) = (a - \lambda, b, c) = (-b - c,\ b,\ c)$.</p>
-<p><b>Étape 4 : La symétrie.</b> $s = 2p - \operatorname{id}$ : $s(a, b, c) = (-a - 2b - 2c,\ b,\ c)$.</p>
-<p><b>Étape 5 : Conclusion.</b> $\cG{p(a, b, c) = (-b - c, b, c)}$. Contrôle : $p(1, 0, 0) = 0$ et $p(-1, 1, 0) = (-1, 1, 0)$.</p>
+<p><b>Étape 3 : Le projeté.</b> $p(a, b, c) = (a - \lambda, b, c)$ avec $a - \lambda = a - (a + b + c) = -b - c$ : $p(a, b, c) = (-b - c,\ b,\ c)$.</p>
+<p><b>Étape 4 : La symétrie.</b> $s = 2p - \operatorname{id}$ : 1<sup>re</sup> coordonnée $2(-b - c) - a = -a - 2b - 2c$, 2<sup>e</sup> $2b - b = b$, 3<sup>e</sup> $2c - c = c$ : $s(a, b, c) = (-a - 2b - 2c,\ b,\ c)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p(a, b, c) = (-b - c, b, c)}$. Contrôle : $p(1, 0, 0) = (-0 - 0, 0, 0) = 0$ (vecteur de $D$) et $p(-1, 1, 0) = (-1 - 0, 1, 0) = (-1, 1, 0)$ (vecteur de $P$, inchangé).</p>
 
 <p class="ml">Exemple 7 : reconnaître un projecteur</p>
 <p>$M = \begin{pmatrix}1&1\\0&0\end{pmatrix}$, endomorphisme $p$ de $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> $p^2 = p$ ; puis $\operatorname{Im}p = \ker(p - \operatorname{id})$ et $\ker p$.</p>
 <p><b>Étape 2 : $M^2$.</b> Ligne par colonne :</p>
 $$M^2 = \begin{pmatrix}1\times1 + 1\times0&1\times1 + 1\times0\\0\times1 + 0\times0&0\times1 + 0\times0\end{pmatrix} = \begin{pmatrix}1&1\\0&0\end{pmatrix} = M:\ \text{c'est un projecteur}.$$
-<p><b>Étape 3 : Image et noyau.</b> $\operatorname{Im}p = \operatorname{Vect}(1, 0)$ (colonnes) ; $\ker p$ : $x + y = 0$, soit $\operatorname{Vect}(1, -1)$.</p>
+<p><b>Étape 3 : Image et noyau.</b> $M\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}x + y\\0\end{pmatrix} = (x + y)\begin{pmatrix}1\\0\end{pmatrix}$ : $\operatorname{Im}p = \operatorname{Vect}(1, 0)$. Noyau : $x + y = 0$, $y = -x$, $(x, -x) = x(1, -1)$ : $\ker p = \operatorname{Vect}(1, -1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \mathbb R(1, 0)\ \text{parallèlement à}\ \mathbb R(1, -1)}$ (pas orthogonalement).</p>
 
 <h2 id="l-rang">6. Le théorème du rang</h2>
@@ -8261,7 +8261,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p>$H = \{P\in\mathbb R_n[X],\ \int_0^1P(t)\,dt = 0\}$.</p>
 <p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle $\Rightarrow$ hyperplan.</p>
 <p><b>Étape 2 : La forme.</b> $\varphi(P) = \int_0^1P$ est linéaire (linéarité de l'intégrale).</p>
-<p><b>Étape 3 : Non nulle.</b> $\varphi(1) = 1\neq0$.</p>
+<p><b>Étape 3 : Non nulle.</b> $\varphi(1) = \int_0^11\,dt = 1 - 0 = 1\neq0$. Une forme linéaire non nulle a pour noyau un hyperplan : $\dim H = \dim\mathbb R_n[X] - 1 = (n + 1) - 1 = n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{H = \ker\varphi\ \text{est un hyperplan, de dimension}\ n}$, et $\mathbb R_n[X] = H\oplus\mathbb R_0[X]$.</p>
 
 <h2 id="l-poly">8. Polynômes d'endomorphismes</h2>
@@ -8269,7 +8269,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p class="ml">Exemple 11 : un inverse sans calcul</p>
 <p>$f\in\mathcal L(E)$ vérifie $f^2 - 3f + 2\operatorname{id} = 0$. Montrer que $f$ est inversible.</p>
 <p><b>Étape 1 : Rappel.</b> On isole $\operatorname{id}$ et on factorise par $f$.</p>
-<p><b>Étape 2 : On isole.</b> $2\operatorname{id} = 3f - f^2 = f\circ(3\operatorname{id} - f)$.</p>
+<p><b>Étape 2 : On isole.</b> $f^2 - 3f + 2\operatorname{id} = 0\iff2\operatorname{id} = 3f - f^2$, et on factorise par $f$ : $3f - f^2 = f\circ(3\operatorname{id}) - f\circ f = f\circ(3\operatorname{id} - f)$.</p>
 <p><b>Étape 3 : On divise par $2$.</b> $f\circ\frac{3\operatorname{id} - f}2 = \operatorname{id}$, et de même $\frac{3\operatorname{id} - f}2\circ f = \operatorname{id}$ ($f$ commute avec ses polynômes).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\in GL(E),\ f^{-1} = \frac12(3\operatorname{id} - f)}$. En plus, $E = \ker(f - \operatorname{id})\oplus\ker(f - 2\operatorname{id})$ (voir Réduction).</p>
 
@@ -8313,8 +8313,8 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p class="ml">Exercice 2 : $f\circ g = 0$</p>
 <p>$f, g\in\mathcal L(E)$, $\dim E = n$, $f\circ g = 0$. Montrer $\operatorname{rg}f + \operatorname{rg}g\leq n$.</p>
 <p><b>Étape 1 : Rappel.</b> $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$. Théorème du rang pour $f$.</p>
-<p><b>Étape 2 : L'inclusion.</b> $\operatorname{rg}g = \dim\operatorname{Im}g\leq\dim\ker f$.</p>
-<p><b>Étape 3 : Le rang de $f$.</b> $\dim\ker f = n - \operatorname{rg}f$.</p>
+<p><b>Étape 2 : L'inclusion.</b> Pour tout $x$, $f(g(x)) = 0$ : tout vecteur $g(x)$ de $\operatorname{Im}g$ est dans $\ker f$. Donc $\operatorname{Im}g\subset\ker f$ et $\operatorname{rg}g = \dim\operatorname{Im}g\leq\dim\ker f$.</p>
+<p><b>Étape 3 : Le rang de $f$.</b> Théorème du rang : $\dim\ker f + \operatorname{rg}f = n$, donc $\dim\ker f = n - \operatorname{rg}f$, et $\operatorname{rg}g\leq n - \operatorname{rg}f$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}f + \operatorname{rg}g\leq n}$.</p>
 
 <h2 id="l-arbre">L'arbre des applications linéaires</h2>
@@ -8352,14 +8352,14 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p class="ml">Exemple 1 : l'inégalité arithmético-géométrique</p>
 <p>Pour $x_1, \dots, x_n > 0$ : $\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n$.</p>
 <p><b>Étape 1 : Rappel.</b> Jensen pour une fonction concave : $f\big(\frac1n\sum x_i\big)\geq\frac1n\sum f(x_i)$.</p>
-<p><b>Étape 2 : La fonction.</b> $\ln$ est concave sur $]0, +\infty[$ ($\ln'' = -\frac1{x^2}\leq0$).</p>
-<p><b>Étape 3 : On applique.</b> $\ln\Big(\frac{x_1 + \dots + x_n}n\Big)\geq\frac{\ln x_1 + \dots + \ln x_n}n = \ln\sqrt[n]{x_1\cdots x_n}$.</p>
+<p><b>Étape 2 : La fonction.</b> $\ln' = \frac1x = x^{-1}$, $\ln'' = -x^{-2} = -\frac1{x^2}\leq0$ : $\ln$ est concave sur $]0, +\infty[$.</p>
+<p><b>Étape 3 : On applique</b> Jensen concave (poids $\frac1n$) : $\ln\Big(\frac{x_1 + \dots + x_n}n\Big)\geq\frac{\ln x_1 + \dots + \ln x_n}n = \frac1n\ln(x_1\cdots x_n) = \ln\big((x_1\cdots x_n)^{1/n}\big) = \ln\sqrt[n]{x_1\cdots x_n}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\exp$ est croissante : $\cG{\sqrt[n]{x_1\cdots x_n}\leq\frac{x_1 + \dots + x_n}n}$, avec égalité si tous les $x_i$ sont égaux.</p>
 
 <p class="ml">Exemple 2 : moyenne et carrés</p>
 <p>Montrer $\Big(\frac{x_1 + \dots + x_n}n\Big)^2\leq\frac{x_1^2 + \dots + x_n^2}n$.</p>
 <p><b>Étape 1 : Rappel.</b> Jensen avec poids $\frac1n$ pour une fonction convexe.</p>
-<p><b>Étape 2 : La fonction.</b> $x\mapsto x^2$ est convexe sur $\mathbb R$ (dérivée seconde $2\geq0$).</p>
+<p><b>Étape 2 : La fonction.</b> $(x^2)' = 2x$, $(x^2)'' = 2\geq0$ : $x\mapsto x^2$ est convexe sur $\mathbb R$. Jensen avec poids $\frac1n$ : $\varphi\big(\frac1n\sum x_i\big)\leq\frac1n\sum\varphi(x_i)$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\Big(\frac1n\sum x_i\Big)^2\leq\frac1n\sum x_i^2}$ (c'est aussi $V(X)\geq0$ pour une loi uniforme).</p>
 
 <h2 id="x-pentes">3. Le lemme des pentes</h2>
@@ -8376,13 +8376,13 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p class="ml">Exemple 3 : $e^x\geq1 + x$</p>
 <p><b>Étape 1 : Rappel.</b> Convexe $\Rightarrow$ au-dessus de ses tangentes.</p>
 <p><b>Étape 2 : Convexité.</b> $\exp'' = \exp > 0$ : $\exp$ est convexe sur $\mathbb R$.</p>
-<p><b>Étape 3 : La tangente en $0$.</b> $y = e^0 + e^0(x - 0) = 1 + x$.</p>
+<p><b>Étape 3 : La tangente en $0$.</b> $y = f(0) + f'(0)(x - 0)$ avec $f(0) = e^0 = 1$ et $f'(0) = e^0 = 1$ : $y = 1 + 1\times x = 1 + x$. Une convexe est au-dessus de ses tangentes.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geq1 + x}$ pour tout réel $x$ (égalité seulement en $0$).</p>
 
 <p class="ml">Exemple 4 : $\ln(1 + x)\leq x$</p>
 <p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ en dessous de ses tangentes.</p>
-<p><b>Étape 2 : Concavité.</b> $f(x) = \ln(1 + x)$, $f''(x) = -\frac1{(1 + x)^2} \lt 0$ sur $]-1, +\infty[$.</p>
-<p><b>Étape 3 : La tangente en $0$.</b> $f(0) = 0$, $f'(0) = 1$ : $y = x$.</p>
+<p><b>Étape 2 : Concavité.</b> $f(x) = \ln(1 + x)$, $f'(x) = \frac1{1 + x} = (1 + x)^{-1}$, $f''(x) = -(1 + x)^{-2} = -\frac1{(1 + x)^2} \lt 0$ sur $]-1, +\infty[$.</p>
+<p><b>Étape 3 : La tangente en $0$.</b> $f(0) = \ln1 = 0$, $f'(0) = \frac1{1 + 0} = 1$ : $y = 0 + 1\times(x - 0) = x$. Une concave est sous ses tangentes.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\ln(1 + x)\leq x}$ pour tout $x > -1$.</p>
 
 <p class="ml">Exemple 5 : l'inégalité de Jordan $\sin x\geq\frac2\pi x$</p>
@@ -8390,14 +8390,14 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p><b>Étape 1 : Rappel.</b> Concave $\Rightarrow$ au-dessus de ses cordes.</p>
 <p><b>Étape 2 : Concavité.</b> $\sin'' = -\sin\leq0$ sur $[0, \frac\pi2]$.</p>
 <p><b>Étape 3 : La corde.</b> Elle relie $(0, \sin0) = (0, 0)$ et $\big(\frac\pi2, \sin\frac\pi2\big) = \big(\frac\pi2, 1\big)$ : pente $\frac{1 - 0}{\pi/2 - 0} = \frac2\pi$, donc $y = \frac2\pi x$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\frac2\pi x\leq\sin x\leq x}$ sur $[0, \frac\pi2]$ (la majoration par $x$ : tangente en $0$).</p>
+<p><b>Étape 4 : Conclusion.</b> Une concave est au-dessus de ses cordes et sous ses tangentes ; tangente en $0$ : $y = \sin0 + \cos0\times x = x$. Donc $\cG{\frac2\pi x\leq\sin x\leq x}$ sur $[0, \frac\pi2]$.</p>
 
 <p class="ml">Exemple 6 : l'inégalité de Young</p>
 <p>$a, b > 0$, $p, q > 1$ avec $\frac1p + \frac1q = 1$ : $ab\leq\frac{a^p}p + \frac{b^q}q$.</p>
 <p><b>Étape 1 : Rappel.</b> $\ln$ concave : $\ln(\lambda u + (1 - \lambda)v)\geq\lambda\ln u + (1 - \lambda)\ln v$.</p>
 <p><b>Étape 2 : Le choix.</b> $u = a^p$, $v = b^q$, $\lambda = \frac1p$, $1 - \lambda = \frac1q$.</p>
-<p><b>Étape 3 : On applique.</b> $\ln\Big(\frac{a^p}p + \frac{b^q}q\Big)\geq\frac1p\ln a^p + \frac1q\ln b^q = \ln a + \ln b = \ln(ab)$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{ab\leq\frac{a^p}p + \frac{b^q}q}$ (avec $p = q = 2$ : $ab\leq\frac{a^2 + b^2}2$).</p>
+<p><b>Étape 3 : On applique</b> la concavité de $\ln$ : $\ln(\lambda u + (1 - \lambda)v)\geq\lambda\ln u + (1 - \lambda)\ln v$, soit $\ln\Big(\frac{a^p}p + \frac{b^q}q\Big)\geq\frac1p\ln a^p + \frac1q\ln b^q = \frac1p\times p\ln a + \frac1q\times q\ln b = \ln a + \ln b = \ln(ab)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\exp$ est croissante : $\cG{ab\leq\frac{a^p}p + \frac{b^q}q}$ (avec $p = q = 2$, $\frac12 + \frac12 = 1$ : $ab\leq\frac{a^2}2 + \frac{b^2}2 = \frac{a^2 + b^2}2$).</p>
 
 <h2 id="x-usu">5. Les fonctions usuelles</h2>
 <table class="mtab">
@@ -8414,8 +8414,8 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p class="ml">Exemple 7 : la moyenne de puissances</p>
 <p>Pour $a, b\geq0$ et $p\geq1$ : $\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2$.</p>
 <p><b>Étape 1 : Rappel.</b> Définition de la convexité avec $\lambda = \frac12$.</p>
-<p><b>Étape 2 : La fonction.</b> $x\mapsto x^p$ sur $\mathbb R_+$ : dérivée seconde $p(p - 1)x^{p-2}\geq0$ pour $p\geq1$.</p>
-<p><b>Étape 3 : Conclusion.</b> $\cG{\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2}$.</p>
+<p><b>Étape 2 : La fonction.</b> $(x^p)' = px^{p-1}$, $(x^p)'' = p(p - 1)x^{p-2}$. Pour $p\geq1$ : $p > 0$, $p - 1\geq0$, $x^{p-2}\geq0$ sur $\mathbb R_+^*$, donc $\geq0$ : $x\mapsto x^p$ est convexe.</p>
+<p><b>Étape 3 : Conclusion.</b> Convexité avec $\lambda = \frac12$ : $f\big(\frac12a + \frac12b\big)\leq\frac12f(a) + \frac12f(b)$, soit $\cG{\Big(\frac{a + b}2\Big)^p\leq\frac{a^p + b^p}2}$.</p>
 
 <h2 id="x-enonce">7. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
@@ -8446,16 +8446,16 @@ $$f\ \text{deux fois dérivable}:\ f\ \text{convexe}\iff f''\geq0.$$</div>
 <p>$f$ convexe et majorée sur $\mathbb R$. Montrer que $f$ est constante.</p>
 <p><b>Étape 1 : Rappel.</b> Lemme des pentes : $x\mapsto\frac{f(x) - f(a)}{x - a}$ est croissante.</p>
 <p><b>Étape 2 : Par l'absurde.</b> Si $f(b) > f(a)$ avec $a \lt b$, la pente $s = \frac{f(b) - f(a)}{b - a} > 0$.</p>
-<p><b>Étape 3 : Pour $x > b$.</b> Par croissance des pentes, $\frac{f(x) - f(a)}{x - a}\geq s$, donc $f(x)\geq f(a) + s(x - a)\to+\infty$ : $f$ n'est pas majorée.</p>
+<p><b>Étape 3 : Pour $x > b$.</b> Pentes croissantes ($a \lt b \lt x$) : $\frac{f(x) - f(a)}{x - a}\geq s$. On multiplie par $x - a > 0$ : $f(x) - f(a)\geq s(x - a)$, donc $f(x)\geq f(a) + s(x - a)\to+\infty$ quand $x\to+\infty$ (car $s > 0$) : $f$ n'est pas majorée.</p>
 <p><b>Étape 4 : Le cas $f(b) \lt f(a)$.</b> Même raisonnement vers $-\infty$.</p>
 <p><b>Étape 5 : Conclusion.</b> $f(a) = f(b)$ pour tous $a, b$ : $\cG{f\ \text{est constante}}$.</p>
 
 <p class="ml">Exercice 2 : l'inégalité de Hölder (cas discret)</p>
 <p>$a_i, b_i\geq0$, $\frac1p + \frac1q = 1$ : $\sum a_ib_i\leq\big(\sum a_i^p\big)^{1/p}\big(\sum b_i^q\big)^{1/q}$.</p>
 <p><b>Étape 1 : Rappel.</b> Young : $uv\leq\frac{u^p}p + \frac{v^q}q$ (exemple 6).</p>
-<p><b>Étape 2 : On normalise.</b> $A = \big(\sum a_i^p\big)^{1/p}$, $B = \big(\sum b_i^q\big)^{1/q}$ (supposés non nuls), $u_i = \frac{a_i}A$, $v_i = \frac{b_i}B$ : $\sum u_i^p = \sum v_i^q = 1$.</p>
-<p><b>Étape 3 : Young terme à terme, puis on somme.</b> $\sum u_iv_i\leq\frac1p\sum u_i^p + \frac1q\sum v_i^q = \frac1p + \frac1q = 1$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\sum\frac{a_ib_i}{AB}\leq1$ : $\cG{\sum a_ib_i\leq AB}$ (avec $p = q = 2$ : Cauchy-Schwarz).</p>
+<p><b>Étape 2 : On normalise.</b> $A = \big(\sum a_i^p\big)^{1/p}$, $B = \big(\sum b_i^q\big)^{1/q}$ (supposés non nuls), $u_i = \frac{a_i}A$, $v_i = \frac{b_i}B$ : $\sum u_i^p = \frac{\sum a_i^p}{A^p} = \frac{A^p}{A^p} = 1$, et de même $\sum v_i^q = 1$.</p>
+<p><b>Étape 3 : Young terme à terme, puis on somme.</b> $u_iv_i\leq\frac{u_i^p}p + \frac{v_i^q}q$ pour chaque $i$ ; en sommant : $\sum u_iv_i\leq\frac1p\sum u_i^p + \frac1q\sum v_i^q = \frac1p\times1 + \frac1q\times1 = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $u_iv_i = \frac{a_ib_i}{AB}$, donc $\frac1{AB}\sum a_ib_i\leq1$ ; on multiplie par $AB > 0$ : $\cG{\sum a_ib_i\leq AB}$ (avec $p = q = 2$ : Cauchy-Schwarz).</p>
 
 <h2 id="x-arbre">L'arbre de la convexité</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
