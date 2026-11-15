@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2536,6 +2536,171 @@ const QARITH = [
   ["De $2x\\equiv2\\ [6]$ on déduit $x\\equiv1\\ [6]$.", false, "Faux : $x = 4$ marche aussi. $2\\wedge6\\neq1$, on ne peut pas simplifier."],
   ["$(a\\wedge b)(a\\vee b) = |ab|$.", true, "Vrai : exposants $\\min + \\max = $ somme."],
   ["$1$ est un nombre premier.", false, "Faux : un premier est $\\geq2$."]
+];
+/* Outils : racines carrées simplifiées */
+const sqf = N => { let s = 1, m = N; for (let k = 2; k * k <= m; k++) while (m % (k * k) === 0) { m /= k * k; s *= k; } return { s, m }; };
+const surd2 = (a, b, m) => { if (b < 0) { a = -a; b = -b; } const g = gcdi(Math.abs(a) || 1, b); a /= g; b /= g; const sg = a < 0 ? "-" : ""; a = Math.abs(a); const num = m === 1 ? `${a}` : a === 1 ? `\\sqrt{${m}}` : `${a}\\sqrt{${m}}`; return b === 1 ? sg + num : `${sg}\\frac{${num}}{${b}}`; };
+const piTex2 = (m, d) => { if (!m) return "0"; const g = gcdi(Math.abs(m), d); m /= g; d /= g; const sg = m < 0 ? "-" : ""; m = Math.abs(m); const n = m === 1 ? "\\pi" : `${m}\\pi`; return d === 1 ? sg + n : `${sg}\\frac{${n}}{${d}}`; };
+/* Fonctions usuelles : valeurs avec arcsin, arccos, arctan */
+function mlArcVal(host) {
+  const AR = { s: ["\\arcsin", "\\sin", "\\Big[-\\frac\\pi2, \\frac\\pi2\\Big]"], c: ["\\arccos", "\\cos", "[0, \\pi]"], t: ["\\arctan", "\\tan", "\\Big]-\\frac\\pi2, \\frac\\pi2\\Big["] };
+  const gen = () => {
+    if (rnd(0, 1)) { const a = "sct"[rnd(0, 2)]; let g; do { g = "sct"[rnd(0, 2)]; } while (g === a); const q = rnd(2, 7); let p; do { p = rnd(a === "t" ? -6 : -q + 1, a === "t" ? 6 : q - 1); } while (!p || gcdi(Math.abs(p), q) !== 1); return { k: 0, a, g, p, q }; }
+    const a = "sct"[rnd(0, 2)]; let m; do { m = rnd(-11, 11); } while (a === "t" && ((m % 6) + 6) % 6 === 3); return { k: 1, a, m };
+  };
+  const build = e => {
+    const s = [];
+    if (e.k === 0) {
+      const { a, g, p, q } = e, r = ftex(Fr(p, q)), [A, T, I] = AR[a], G = AR[g][1];
+      s.push(`$$\\text{Calculer}\\ ${G}\\Big(${A}\\Big(${r}\\Big)\\Big)$$`);
+      s.push(`<p class="mlstep">1. Rappel : $\\theta = ${A}\\,x\\iff${T}\\theta = x\\ \\text{et}\\ \\theta\\in${I}$.</p>`);
+      s.push(`<p class="mlstep">2. On pose $\\theta = ${A}\\big(${r}\\big)$ : $${T}\\theta = ${r}$ et $\\cR{\\theta\\in${I}}$.</p>`);
+      let res, idt, sgn;
+      if (a === "t") { const N = q * q + p * p, { s: sq, m } = sqf(N); idt = `$$\\cos^2\\theta = \\frac1{1 + \\tan^2\\theta} = \\frac1{1 + ${fpar(Fr(p * p, q * q))}} = \\frac{${q * q}}{${N}}$$`; sgn = `Sur $\\cR{]-\\frac\\pi2, \\frac\\pi2[}$, $\\cO{\\cos\\theta > 0}$ : $\\cos\\theta = \\frac{${q}}{\\sqrt{${N}}}$.`; res = g === "c" ? surd2(q, sq * m, m) : surd2(p, sq * m, m); if (g === "s") sgn += ` Puis $\\sin\\theta = \\tan\\theta\\cos\\theta = ${r}\\times\\frac{${q}}{\\sqrt{${N}}}$.`; }
+      else { const N = q * q - p * p, { s: sq, m } = sqf(N), other = a === "s" ? "\\cos" : "\\sin"; idt = `$$${other}^2\\theta = 1 - ${T}^2\\theta = 1 - \\frac{${p * p}}{${q * q}} = \\frac{${N}}{${q * q}}$$`; sgn = `Sur $\\cR{${I}}$, $\\cO{${other}\\theta\\geq0}$ : $${other}\\theta = \\frac{\\sqrt{${N}}}{${q}}$.`;
+        if ((a === "s" && g === "c") || (a === "c" && g === "s")) res = surd2(sq, q, m);
+        else if (a === "s") { res = surd2(p, sq * m, m); sgn += ` Puis $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{${p}}{\\sqrt{${N}}}$.`; }
+        else { res = surd2(sq, p, m); sgn += ` Puis $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sqrt{${N}}}{${p}}$.`; } }
+      s.push(`<p class="mlstep">3. La relation entre $\\cos$ et $\\sin$ :</p>${idt}`);
+      s.push(`<p class="mlstep">4. Le signe : ${sgn}</p>`);
+      s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{${G}\\Big(${A}\\Big(${r}\\Big)\\Big) = ${res}}$$`);
+    } else {
+      const { a, m } = e, [A, T, I] = AR[a], x = piTex2(m, 6);
+      let t, why;
+      if (a === "s") { let m1 = ((m % 12) + 18) % 12 - 6; why = m1 !== m ? `$${T}$ est $2\\pi$-périodique : $${T}\\big(${x}\\big) = ${T}\\big(${piTex2(m1, 6)}\\big)$. ` : ""; t = m1; if (m1 > 3) { t = 6 - m1; why += `Puis $\\sin(\\pi - a) = \\sin a$ : on prend $\\pi - ${piTex2(m1, 6)} = ${piTex2(t, 6)}$.`; } else if (m1 < -3) { t = -6 - m1; why += `Puis $\\sin(-\\pi - a) = \\sin a$ : on prend $-\\pi - \\big(${piTex2(m1, 6)}\\big) = ${piTex2(t, 6)}$.`; } }
+      else if (a === "c") { let m1 = ((m % 12) + 18) % 12 - 6; why = m1 !== m ? `$\\cos$ est $2\\pi$-périodique : $\\cos\\big(${x}\\big) = \\cos\\big(${piTex2(m1, 6)}\\big)$. ` : ""; t = Math.abs(m1); if (m1 < 0) why += `Puis $\\cos(-a) = \\cos a$ : on prend $${piTex2(t, 6)}$.`; }
+      else { let m1 = ((m % 6) + 9) % 6 - 3; t = m1; why = `$\\tan$ est $\\pi$-périodique : $\\tan\\big(${x}\\big) = \\tan\\big(${piTex2(m1, 6)}\\big)$.`; }
+      s.push(`$$\\text{Calculer}\\ ${A}\\Big(${T}\\Big(${x}\\Big)\\Big)$$`);
+      s.push(`<p class="mlstep">1. Rappel : $${A}(${T}\\,a) = a$ <b>seulement si</b> $a\\in\\cR{${I}}$.</p>`);
+      const inI = a === "s" ? Math.abs(m) <= 3 : a === "c" ? m >= 0 && m <= 6 : Math.abs(m) < 3;
+      s.push(`<p class="mlstep">2. $${x}$ ${inI ? "est" : "n'est pas"} dans $\\cR{${I}}$.</p>`);
+      s.push(`<p class="mlstep">3. ${inI ? "Rien à transformer." : `On cherche l'angle de l'intervalle avec la même valeur. ${why}`}</p>`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{${A}\\Big(${T}\\Big(${x}\\Big)\\Big) = ${piTex2(t, 6)}}$$`);
+    }
+    return s;
+  };
+  stepLab(host, "Calculer avec arcsin, arccos, arctan", gen, build);
+}
+/* Fonctions usuelles : arcsin(sin x), arccos(cos x), arctan(tan x) */
+function mlArcFx(host) {
+  const F = [
+    { t: "\\arcsin(\\sin x)", f: x => Math.asin(Math.sin(x)), c: "Dents de scie entre $-\\frac\\pi2$ et $\\frac\\pi2$ : $x$ sur $[-\\frac\\pi2, \\frac\\pi2]$, $\\pi - x$ sur $[\\frac\\pi2, \\frac{3\\pi}2]$, puis période $2\\pi$." },
+    { t: "\\arccos(\\cos x)", f: x => Math.acos(Math.cos(x)), c: "Toit entre $0$ et $\\pi$ : $x$ sur $[0, \\pi]$, $-x$ sur $[-\\pi, 0]$ (parité), puis période $2\\pi$." },
+    { t: "\\arctan(\\tan x)", f: x => Math.abs(Math.cos(x)) < 0.03 ? NaN : Math.atan(Math.tan(x)), c: "$x - k\\pi$ sur $]-\\frac\\pi2 + k\\pi, \\frac\\pi2 + k\\pi[$ : des morceaux de la droite $y = x$, période $\\pi$, non définie en $\\frac\\pi2 + k\\pi$." }
+  ];
+  let fi = 0;
+  const draw = () => {
+    const g = F[fi];
+    host.innerHTML = `<p class="mlt">La fonction ne « défait » le sinus que sur un intervalle</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div></div>${plotSvg([{ f: x => x, c: "#8a8fa0", w: 1.2, d: "5 4" }, { f: g.f, c: "#2B5BD7", w: 2.5 }], -7, 7, -3.5, 3.5)}<p class="mlnote">En pointillé $y = x$ : la courbe ne coïncide avec la diagonale que sur l'intervalle de référence. ${g.c}</p>`;
+    $$("[data-f]", host).forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; draw(); }));
+    typeset(host);
+  };
+  draw();
+}
+const QFU = [
+  ["$\\arcsin(\\sin\\pi) = \\pi$.", false, "Faux : $\\sin\\pi = 0$ et $\\arcsin0 = 0$. $\\pi\\notin[-\\frac\\pi2, \\frac\\pi2]$."],
+  ["$\\cos(\\arcsin x) = \\sqrt{1 - x^2}$ pour $x\\in[-1, 1]$.", true, "Vrai : $\\arcsin x\\in[-\\frac\\pi2, \\frac\\pi2]$ où le cosinus est positif."],
+  ["$\\arcsin$ est dérivable sur $[-1, 1]$.", false, "Faux : seulement sur $]-1, 1[$, la dérivée $\\frac1{\\sqrt{1 - x^2}}$ explose aux bords."],
+  ["$\\arctan x + \\arctan\\frac1x = \\frac\\pi2$ pour tout $x\\neq0$.", false, "Faux : c'est $-\\frac\\pi2$ pour $x \\lt 0$."],
+  ["$\\operatorname{ch}^2x - \\operatorname{sh}^2x = 1$.", true, "Vrai : $(\\operatorname{ch} - \\operatorname{sh})(\\operatorname{ch} + \\operatorname{sh}) = e^{-x}e^x = 1$."],
+  ["$x^x\\to0$ quand $x\\to0^+$.", false, "Faux : $x^x = e^{x\\ln x}$ et $x\\ln x\\to0$, donc $x^x\\to1$."],
+  ["$\\arccos(-x) = -\\arccos x$.", false, "Faux : $\\arccos(-x) = \\pi - \\arccos x$. C'est $\\arcsin$ et $\\arctan$ qui sont impaires."],
+  ["$\\arctan'(x) = \\frac1{1 + x^2}$.", true, "Vrai, et c'est l'outil pour les primitives de $\\frac1{1 + x^2}$."]
+];
+/* Préhilbertiens : Gram-Schmidt dans R^3 */
+const vtex = v => `\\left(${v.map(ftex).join(", ")}\\right)`;
+const vint = v => { const L = v.reduce((l, f) => l * f.d / gcdi(l, f.d), 1); let w = v.map(f => f.n * (L / f.d)); const g = w.reduce((a, b) => gcdi(a, Math.abs(b)), 0) || 1; return w.map(x => x / g); };
+const cf = c => c.n === c.d ? "" : `${fpar(c)}\\,`;
+const dotF = (a, b) => a.reduce((s, x, i) => fadd(s, fmul(x, b[i])), Fr(0));
+function mlGram(host) {
+  const gen = () => { let v; do { v = [0, 1, 2].map(() => [0, 1, 2].map(() => rnd(-2, 2))); } while (v[0][0] * (v[1][1] * v[2][2] - v[1][2] * v[2][1]) - v[0][1] * (v[1][0] * v[2][2] - v[1][2] * v[2][0]) + v[0][2] * (v[1][0] * v[2][1] - v[1][1] * v[2][0]) === 0); return v; };
+  const build = v => {
+    const V = v.map(r => r.map(x => Fr(x))), s = [`$$v_1 = ${vtex(V[0])},\\quad v_2 = ${vtex(V[1])},\\quad v_3 = ${vtex(V[2])}$$`];
+    s.push(`<p class="mlstep">1. Rappel : on orthogonalise sans normaliser, $w_k = v_k - \\sum_{j \\lt k}\\frac{\\langle v_k, w_j\\rangle}{\\|w_j\\|^2}w_j$, on enlève les fractions, puis $e_k = \\frac{w_k}{\\|w_k\\|}$ à la fin.</p>`);
+    const W = [vint(V[0]).map(x => Fr(x))]; const N1 = dotF(W[0], W[0]);
+    s.push(`<p class="mlstep">2. $w_1 = ${vtex(W[0])}$, $\\|w_1\\|^2 = ${ftex(N1)}$.</p>`);
+    const c21 = fdiv(dotF(V[1], W[0]), N1), w2 = V[1].map((x, i) => fadd(x, fmul(Fr(-c21.n, c21.d), W[0][i]))), W2 = vint(w2).map(x => Fr(x)); W.push(W2); const N2 = dotF(W2, W2);
+    s.push(`<p class="mlstep">3. $\\langle v_2, w_1\\rangle = ${ftex(dotF(V[1], W[0]))}$, donc :</p>$$w_2 = v_2 - ${cf(c21)}w_1 = ${vtex(w2)}\\ \\longrightarrow\\ ${vtex(W2)},\\quad\\|w_2\\|^2 = ${ftex(N2)}$$`);
+    const c31 = fdiv(dotF(V[2], W[0]), N1), c32 = fdiv(dotF(V[2], W2), N2), w3 = V[2].map((x, i) => fadd(fadd(x, fmul(Fr(-c31.n, c31.d), W[0][i])), fmul(Fr(-c32.n, c32.d), W2[i]))), W3 = vint(w3).map(x => Fr(x)); const N3 = dotF(W3, W3);
+    s.push(`<p class="mlstep">4. $\\langle v_3, w_1\\rangle = ${ftex(dotF(V[2], W[0]))}$ et $\\langle v_3, w_2\\rangle = ${ftex(dotF(V[2], W2))}$ :</p>$$w_3 = v_3 - ${cf(c31)}w_1 - ${cf(c32)}w_2 = ${vtex(w3)}\\ \\longrightarrow\\ ${vtex(W3)},\\quad\\|w_3\\|^2 = ${ftex(N3)}$$`);
+    const nt = N => { const { s: q, m } = sqf(N.n); return m === 1 ? (q === 1 ? "" : `\\frac1{${q}}`) : `\\frac1{\\sqrt{${N.n}}}`; };
+    s.push(`<p class="mlstep">5. On normalise :</p>$$\\cG{e_1 = ${nt(N1)}${vtex(W[0])},\\quad e_2 = ${nt(N2)}${vtex(W2)},\\quad e_3 = ${nt(N3)}${vtex(W3)}}$$<p class="mlnote">Contrôle : $\\langle w_1, w_2\\rangle = ${ftex(dotF(W[0], W2))}$, $\\langle w_1, w_3\\rangle = ${ftex(dotF(W[0], W3))}$, $\\langle w_2, w_3\\rangle = ${ftex(dotF(W2, W3))}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Gram-Schmidt dans $\\mathbb R^3$", gen, build);
+}
+/* Préhilbertiens : projection sur un plan */
+function mlProjPl(host) {
+  const gen = () => { let n; do { n = [rnd(-2, 2), rnd(-2, 2), rnd(-2, 2)]; } while (!n.some(x => x)); let x; do { x = [rnd(-3, 3), rnd(-3, 3), rnd(-3, 3)]; } while (n[0] * x[0] + n[1] * x[1] + n[2] * x[2] === 0); return { n, x }; };
+  const build = ({ n, x }) => {
+    const k = n[0] * x[0] + n[1] * x[1] + n[2] * x[2], N = n[0] ** 2 + n[1] ** 2 + n[2] ** 2, c = Fr(k, N), p = x.map((xi, i) => fadd(Fr(xi), fmul(Fr(-c.n, c.d), Fr(n[i])))), eq = fsum([[n[0], "x"], [n[1], "y"], [n[2], "z"]]);
+    const { s: q, m } = sqf(N), d = surd2(Math.abs(k) * q, q * q * m, m);
+    return [`$$\\text{Projeter}\\ X = (${x.join(", ")})\\ \\text{sur le plan}\\ P:\\ ${eq} = 0$$`,
+      `<p class="mlstep">1. Rappel : $P = n^\\perp$, $p_P(X) = X - \\frac{\\langle X, n\\rangle}{\\|n\\|^2}n$ et $d(X, P) = \\frac{|\\langle X, n\\rangle|}{\\|n\\|}$.</p>`,
+      `<p class="mlstep">2. Le vecteur normal se lit sur l'équation : $\\cR{n = (${n.join(", ")})}$, $\\|n\\|^2 = ${N}$.</p>`,
+      `<p class="mlstep">3. Le produit scalaire : $\\cO{\\langle X, n\\rangle = ${k}}$, donc $\\frac{\\langle X, n\\rangle}{\\|n\\|^2} = ${ftex(c)}$.</p>`,
+      `<p class="mlstep">4. Le projeté :</p>$$p_P(X) = (${x.join(", ")}) - ${fpar(c)}\\,(${n.join(", ")}) = \\cG{${vtex(p)}}$$<p class="mlnote">Contrôle : $${fsum([[n[0], ""]])}\\times${fpar(p[0])} + ${fpar(n[1])}\\times${fpar(p[1])} + ${fpar(n[2])}\\times${fpar(p[2])} = ${ftex(dotF(p, n.map(z => Fr(z))))}$.</p>`,
+      `<p class="mlstep">5. La distance :</p>$$\\cG{d(X, P) = \\frac{|${k}|}{\\sqrt{${N}}} = ${d}}$$`];
+  };
+  stepLab(host, "Projeter sur un plan de $\\mathbb R^3$", gen, build);
+}
+const QPH = [
+  ["$\\varphi(x, y) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$ est un produit scalaire sur $\\mathbb R^2$.", false, "Faux : $\\varphi(x, x) = (x_1 + x_2)^2$ est nul pour $x = (1, -1)$ : pas défini."],
+  ["Une famille orthogonale de vecteurs non nuls est libre.", true, "Vrai : on prend le produit scalaire d'une combinaison nulle avec chaque $e_i$."],
+  ["Dans toute base, $\\langle x, y\\rangle = \\sum x_iy_i$.", false, "Faux : seulement dans une base orthonormée."],
+  ["$|\\langle x, y\\rangle| = \\|x\\|\\,\\|y\\|$ si et seulement si $x$ et $y$ sont colinéaires.", true, "Vrai : cas d'égalité de Cauchy-Schwarz."],
+  ["Le projeté de $x$ sur $F$ est le point de $F$ le plus proche de $x$.", true, "Vrai : $d(x, F) = \\|x - p_F(x)\\|$."],
+  ["Le projeté sur l'hyperplan $n^\\perp$ est $x - \\frac{\\langle x, n\\rangle}{\\|n\\|}n$.", false, "Faux : il faut $\\|n\\|^2$ au dénominateur."],
+  ["Si $F\\subset G$, alors $F^\\perp\\subset G^\\perp$.", false, "Faux : l'inclusion se retourne, $G^\\perp\\subset F^\\perp$."]
+];
+/* Euclidiens : diagonalisation en BON d'une matrice 2x2 */
+function mlSpec2(host) {
+  const gen = () => { const U = [[1, 1], [1, -1], [1, 2], [2, 1], [1, -2], [2, -1], [1, 3], [3, -1]]; const [p, q] = U[rnd(0, 7)]; let m = 0; while (!m) m = rnd(-2, 2); return { p, q, l1: rnd(-3, 5), m }; };
+  const build = ({ p, q, l1, m }) => {
+    const N = p * p + q * q, l2 = l1 - N * m, a = l1 - m * q * q, b = m * p * q, d = l1 - m * p * p, tr = a + d, det = a * d - b * b;
+    const nt = sqf(N).m === 1 ? `\\frac1{${sqf(N).s}}` : `\\frac1{\\sqrt{${N}}}`, mx = (A, B, C, D) => `\\begin{pmatrix}${A}&${B}\\\\${C}&${D}\\end{pmatrix}`;
+    return [`$$S = ${mx(a, b, b, d)}$$`,
+      `<p class="mlstep">1. Rappel : $S$ symétrique réelle, donc $S = PDP^\\top$ avec $P\\in O(2)$ ; les deux sous-espaces propres sont orthogonaux.</p>`,
+      `<p class="mlstep">2. Valeurs propres : $\\chi_S = X^2 - (\\operatorname{tr}S)X + \\det S = ${fsum([[1, "X^2"], [-tr, "X"], [det, ""]])}$.</p>$$\\Delta = ${tr}^2 - 4\\times${fpar(det)} = ${tr * tr - 4 * det},\\qquad\\cO{\\lambda_1 = ${l1}},\\quad\\cO{\\lambda_2 = ${l2}}$$`,
+      `<p class="mlstep">3. Vecteur propre pour $\\lambda_1 = ${l1}$ : la première ligne de $S - ${fpar(l1)}I$ donne $${fsum([[a - l1, "x"], [b, "y"]])} = 0$, d'où $u = (${p}, ${q})$. Pour $\\lambda_2$, on prend directement l'orthogonal $v = (${-q}, ${p})$ (contrôle : $Sv = ${l2}v$).</p>`,
+      `<p class="mlstep">4. On normalise : $\\|u\\|^2 = \\|v\\|^2 = ${N}$.</p>`,
+      `<p class="mlstep">5. Conclusion :</p>$$\\cG{S = \\cV PDP^\\top,\\quad\\cV P = ${nt}${mx(p, -q, q, p)},\\quad D = ${mx(l1, 0, 0, l2)}}$$`];
+  };
+  stepLab(host, "Diagonaliser une matrice symétrique en BON", gen, build);
+}
+/* Euclidiens : axe et angle d'une rotation de SO(3) */
+function mlRot3(host) {
+  const B = [[[2, -1, 2], [2, 2, -1], [-1, 2, 2], 3], [[0, -1, 0], [1, 0, 0], [0, 0, 1], 1], [[0, 0, 1], [1, 0, 0], [0, 1, 0], 1], [[-1, 2, 2], [2, -1, 2], [2, 2, -1], 3], [[1, 0, 0], [0, 0, -1], [0, 1, 0], 1], [[2, 2, -1], [-1, 2, 2], [2, -1, 2], 3], [[0, 1, 0], [0, 0, 1], [1, 0, 0], 1], [[0, 0, -1], [0, 1, 0], [1, 0, 0], 1]];
+  let last = -1;
+  const gen = () => { let i; do { i = rnd(0, B.length - 1); } while (i === last); last = i; return B[i]; };
+  const build = ([r1, r2, r3, den]) => {
+    const M = [r1, r2, r3], col = j => M.map(r => r[j]), dt = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2], cr = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+    const det3 = (a, b, c) => dt(a, cr(b, c)), D = det3(r1, r2, r3) / den ** 3, tr = Fr(r1[0] + r2[1] + r3[2], den), cs = fdiv(fadd(tr, Fr(-1)), Fr(2));
+    const R = M.map((r, i) => r.map((x, j) => x - (i === j ? den : 0))); let u = cr(R[0], R[1]); if (!u.some(x => x)) u = cr(R[0], R[2]); if (!u.some(x => x)) u = cr(R[1], R[2]);
+    const g = u.reduce((a, b) => gcdi(a, Math.abs(b)), 0); u = u.map(x => x / g); if (u.find(x => x) < 0) u = u.map(x => -x);
+    const E = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]; const x = E.find(e => cr(u, e).some(z => z)), Ax = M.map(r => dt(r, x)), sg = det3(u, x, Ax);
+    const ang = { "1": 0, "1/2": 1, "0": 2, "-1/2": 3, "-1": 4 }[cs.d === 1 ? `${cs.n}` : `${cs.n}/${cs.d}`], AN = ["0", "\\frac\\pi3", "\\frac\\pi2", "\\frac{2\\pi}3", "\\pi"];
+    const th = ang === undefined ? `\\arccos\\big(${ftex(cs)}\\big)` : AN[ang], thS = ang === 4 || ang === 0 ? th : sg > 0 ? th : `-${th}`;
+    const mt = `${den === 1 ? "" : `\\frac1{${den}}`}\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`, Nu = dt(u, u), ut = Nu === 1 ? `(${u.join(", ")})` : `\\frac1{\\sqrt{${Nu}}}(${u.join(", ")})`;
+    return [`$$A = ${mt}$$`,
+      `<p class="mlstep">1. Rappel : $A^\\top A = I$ et $\\det A = 1$ ; axe $= \\ker(A - I)$ ; $\\cos\\theta = \\frac{\\operatorname{tr}A - 1}2$ ; signe de $\\sin\\theta$ = signe de $\\det(u, x, Ax)$.</p>`,
+      `<p class="mlstep">2. Orthogonale : colonnes de norme ${den === 1 ? "$1$" : `$\\frac{${dt(col(0), col(0))}}{${den * den}} = 1$`}, produits scalaires $${dt(col(0), col(1))}$, $${dt(col(0), col(2))}$, $${dt(col(1), col(2))}$. Et $\\det A = ${D}$.</p>`,
+      `<p class="mlstep">3. L'axe : $\\ker(A - I)$ est dirigé par $\\cR{u = ${ut}}$ (produit vectoriel de deux lignes de $${den === 1 ? "" : den}A - ${den === 1 ? "" : den}I$, puis contrôle $Au = u$).</p>`,
+      `<p class="mlstep">4. Le cosinus : $\\operatorname{tr}A = ${ftex(tr)}$, donc $\\cos\\cO\\theta = \\frac{${ftex(tr)} - 1}2 = ${ftex(cs)}$.</p>`,
+      `<p class="mlstep">5. Le signe : avec $x = (${x.join(", ")})$, $${den === 1 ? "" : den}Ax = (${Ax.join(", ")})$ et $\\det(u, x, ${den === 1 ? "" : den}Ax) = ${sg}$${ang === 4 || ang === 0 ? " : l'angle est $\\pi$ ou $0$, le signe n'importe pas." : sg > 0 ? " $> 0$ : $\\sin\\theta > 0$." : " $\\lt 0$ : $\\sin\\theta \\lt 0$."}</p>`,
+      `<p class="mlstep">6. Conclusion :</p>$$\\cG{\\text{rotation d'axe}\\ \\mathbb R(${u.join(", ")})\\ \\text{(orienté par ce vecteur), d'angle}\\ ${thS}}$$`];
+  };
+  stepLab(host, "Axe et angle d'une rotation de $SO(3)$", gen, build);
+}
+const QEU = [
+  ["Une matrice orthogonale est symétrique.", false, "Faux : $R_{\\pi/2} = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ est orthogonale et pas symétrique."],
+  ["Une matrice symétrique réelle est diagonalisable dans une BON.", true, "Vrai : c'est le théorème spectral."],
+  ["Pour $A\\in O(n)$, $A^{-1} = A^\\top$.", true, "Vrai : $A^\\top A = I_n$."],
+  ["Les valeurs propres réelles d'une isométrie sont $\\pm1$.", true, "Vrai : $\\|u(x)\\| = |\\lambda|\\,\\|x\\| = \\|x\\|$."],
+  ["Si $\\operatorname{tr}A = 2$ pour $A\\in SO(3)$, l'angle est $\\frac\\pi3$.", false, "Faux : $\\cos\\theta = \\frac12$ donne $\\pm\\frac\\pi3$, il faut le signe de $\\sin\\theta$."],
+  ["$A^\\top A$ est symétrique positive pour toute $A\\in\\mathcal M_n(\\mathbb R)$.", true, "Vrai : $X^\\top A^\\top AX = \\|AX\\|^2\\geq0$."],
+  ["Dans $O(2)$, une matrice de déterminant $-1$ est une rotation.", false, "Faux : c'est une réflexion."],
+  ["Un projecteur est orthogonal si et seulement s'il est autoadjoint.", true, "Vrai : $p^* = p\\iff\\ker p\\perp\\operatorname{Im}p$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

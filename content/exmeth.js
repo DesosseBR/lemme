@@ -315,5 +315,57 @@ LEMME.EXMETH = {
   String.raw`$(2n + 1)^2 - 4(n^2 + n) = 1$.`,
   String.raw`$(p - 1)(p + 1)$ : $8$ et $3$, premiers entre eux.`,
   String.raw`$10\equiv1\ [9]$.`
+],
+"Fonctions usuelles": [
+  String.raw`$(f^{-1})' = \frac1{f'\circ f^{-1}}$, avec $f = \tan$.`,
+  String.raw`Prendre $\ln$ des deux côtés, isoler $x$.`,
+  String.raw`$x^x = e^{x\ln x}$, dérivée, signe, limites.`,
+  String.raw`$\cos a = \cos b\iff a = \pm b + 2k\pi$.`,
+  String.raw`Poser $\theta$, $\cos^2 = 1 - \sin^2$, signe par l'intervalle.`,
+  String.raw`Ramener l'angle dans l'intervalle : $-a$, $\pi - a$, $2k\pi$.`,
+  String.raw`Périodicité, parité, puis $x$ et $\pi - x$.`,
+  String.raw`Dérivée nulle sur $]-1, 1[$, valeur en $0$.`,
+  String.raw`Dérivée nulle sur chaque intervalle de $\mathbb R^*$.`,
+  String.raw`Appliquer $\tan$, résoudre, vérifier les candidats.`,
+  String.raw`$X = e^x > 0$, équation du second degré.`,
+  String.raw`Tout écrire avec $e^a$, $e^b$, développer.`,
+  String.raw`Résoudre $\operatorname{sh}y = x$ avec $Y = e^y$.`
+],
+"Fonctions usuelles (exercices)": [
+  String.raw`$\tan(a + b)$, puis l'intervalle de $a + b$.`,
+  String.raw`$e^{x\ln(1 + a/x)}$, puis $\frac{\ln(1 + h)}h\to1$.`,
+  String.raw`$\theta = \arctan x$, $\sin2\theta = \frac{2\tan\theta}{1 + \tan^2\theta}$.`
+],
+"Espaces préhilbertiens réels": [
+  String.raw`Quatre points ; « définie » par continuité et racines.`,
+  String.raw`Forme canonique de $\varphi(x, x)$.`,
+  String.raw`Cauchy-Schwarz avec $(1, \dots, 1)$.`,
+  String.raw`Cauchy-Schwarz avec $\sqrt f$ et $\frac1{\sqrt f}$.`,
+  String.raw`Linéariser $\cos a\cos b$, intégrer.`,
+  String.raw`Coordonnées $= \langle x, e_i\rangle$ en BON.`,
+  String.raw`Gram-Schmidt : soustraire les projections, normaliser.`,
+  String.raw`Gram-Schmidt avec $\int_{-1}^1t^k$.`,
+  String.raw`$p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$.`,
+  String.raw`$d^2$ : projeter $t^2$ sur $\operatorname{Vect}(1, t)$.`
+],
+"Espaces préhilbertiens réels (exercices)": [
+  String.raw`$n + 1$ racines pour un polynôme de degré $\leq n$.`,
+  String.raw`$\operatorname{tr}(SA) = -\operatorname{tr}(SA)$.`
+],
+"Espaces préhilbertiens et euclidiens": [
+  String.raw`$d = \frac{|\langle x, n\rangle|}{\|n\|}$, $n$ lu sur l'équation.`,
+  String.raw`$S = I - \frac2{n^\top n}nn^\top$.`,
+  String.raw`Colonnes : normes $1$, produits scalaires $0$ ; puis $\det$.`,
+  String.raw`$\det = 1$ rotation, $\det = -1$ réflexion d'axe $\ker(B - I)$.`,
+  String.raw`Axe $\ker(A - I)$, $\cos$ par la trace, signe par $\det(u, x, Ax)$.`,
+  String.raw`Valeurs propres, vecteurs propres orthogonaux, normaliser.`,
+  String.raw`Rang et trace, puis Gram-Schmidt dans $E_0$.`,
+  String.raw`$X^\top A^\top AX = \|AX\|^2$.`,
+  String.raw`BON de vecteurs propres : $\langle u(x), x\rangle = \sum\lambda_ix_i^2$.`
+],
+"Espaces préhilbertiens et euclidiens (exercices)": [
+  String.raw`$\|u(x)\| = |\lambda|\,\|x\|$.`,
+  String.raw`Décomposer $y = p(y) + (y - p(y))$.`,
+  String.raw`Cauchy-Schwarz dans $\mathbb R^{n^2}$, $\sum a_{ij}^2 = n$.`
 ]
 };

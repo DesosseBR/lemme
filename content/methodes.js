@@ -5639,5 +5639,676 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <li><div class="hr"><em>premier ?</em><a class="hl" href="#z-prem">tester $p\leq\sqrt n$</a></div></li>
 <li><div class="hr"><em>irrationalité</em><a class="hl end" href="#z-exos">$\frac pq$ irréductible, lemme d'Euclide</a></div></li>
 </ul></div></div>
+`,
+"Fonctions usuelles": R`
+<nav class="msum"><a href="#u-not">Notations, dérivées</a><a href="#u-exp">Exp, ln, puissances</a><a href="#u-trig">Trigonométrie</a><a href="#u-arc">arcsin, arccos, arctan</a><a href="#u-comp">$\arcsin(\sin x)$…</a><a href="#u-id">Identités</a><a href="#u-eq">Équations</a><a href="#u-hyp">ch, sh, th</a><a href="#u-arg">argsh, argch, argth</a><a href="#u-etude">Étudier une fonction</a><a href="#u-enonce">L'énoncé</a><a href="#u-erreurs">Erreurs</a><a href="#u-entrainement">S'entraîner</a><a href="#u-exos">Exercices</a><a href="#u-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : la fonction étudiée et son argument. <span class="kR">rouge</span> : l'intervalle où vit l'angle ($[-\frac\pi2, \frac\pi2]$, $[0, \pi]$…). <span class="kO">orange</span> : le signe qu'on déduit de cet intervalle. <span class="kV">violet</span> : les entiers ($k$, $2k\pi$). <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="u-not">1. Le tableau à connaître par cœur</h2>
+<table class="mtab">
+<tr><th>Fonction</th><th>Définie sur</th><th>Dérivée</th><th>Dérivable sur</th></tr>
+<tr><td>$\ln x$</td><td>$]0, +\infty[$</td><td>$\frac1x$</td><td>$]0, +\infty[$</td></tr>
+<tr><td>$e^x$</td><td>$\mathbb R$</td><td>$e^x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$x^\alpha = e^{\alpha\ln x}$</td><td>$]0, +\infty[$</td><td>$\alpha x^{\alpha - 1}$</td><td>$]0, +\infty[$</td></tr>
+<tr><td>$a^x = e^{x\ln a}$ ($a > 0$)</td><td>$\mathbb R$</td><td>$\ln(a)\,a^x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\tan x$</td><td>$x\neq\frac\pi2 + k\pi$</td><td>$1 + \tan^2x = \frac1{\cos^2x}$</td><td>idem</td></tr>
+<tr><td>$\arcsin x$</td><td>$[-1, 1]$</td><td>$\frac1{\sqrt{1 - x^2}}$</td><td>$]-1, 1[$ seulement</td></tr>
+<tr><td>$\arccos x$</td><td>$[-1, 1]$</td><td>$\frac{-1}{\sqrt{1 - x^2}}$</td><td>$]-1, 1[$ seulement</td></tr>
+<tr><td>$\arctan x$</td><td>$\mathbb R$</td><td>$\frac1{1 + x^2}$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\operatorname{ch}x$, $\operatorname{sh}x$</td><td>$\mathbb R$</td><td>$\operatorname{sh}x$, $\operatorname{ch}x$</td><td>$\mathbb R$</td></tr>
+<tr><td>$\operatorname{th}x$</td><td>$\mathbb R$</td><td>$1 - \operatorname{th}^2x = \frac1{\operatorname{ch}^2x}$</td><td>$\mathbb R$</td></tr>
+</table>
+<p class="ml">Dérivée d'une réciproque</p>
+<div class="sbox">$$f\ \text{bijective, dérivable en}\ f^{-1}(y),\ f'(f^{-1}(y))\neq0\ \Longrightarrow\ (f^{-1})'(y) = \frac1{f'\big(f^{-1}(y)\big)}.$$</div>
+
+<p class="ml">Exemple 1 : retrouver $\arctan'$</p>
+<p><b>Étape 1 : Rappel.</b> $(f^{-1})'(y) = \frac1{f'(f^{-1}(y))}$. Ici $f = \tan$ sur $\cR{]-\frac\pi2, \frac\pi2[}$, $f' = 1 + \tan^2$.</p>
+<p><b>Étape 2 : On applique</b> en $y\in\mathbb R$, avec $\theta = \arctan y$ :</p>
+$$\arctan'(y) = \frac1{1 + \tan^2(\arctan y)}.$$
+<p><b>Étape 3 : On simplifie.</b> $\tan(\arctan y) = y$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\arctan'(y) = \frac1{1 + y^2}}$. Même méthode : $\arcsin'(y) = \frac1{\cos(\arcsin y)} = \frac1{\sqrt{1 - y^2}}$ (§5).</p>
+
+<h2 id="u-exp">2. Exponentielle, logarithme, puissances</h2>
+<div class="sbox">$$\ln(ab) = \ln a + \ln b,\quad\ln\frac ab = \ln a - \ln b,\quad\ln(a^\alpha) = \alpha\ln a,\qquad a^b = e^{b\ln a}\ (a > 0),\quad(a^b)^c = a^{bc},\quad a^ba^c = a^{b+c}.$$
+$$\lim_{x\to0}\frac{\ln(1 + x)}x = 1,\qquad\lim_{x\to0}\frac{e^x - 1}x = 1,\qquad\ln(1 + x)\leq x,\qquad e^x\geq1 + x.$$
+$$\textbf{Croissances comparées}:\ \frac{(\ln x)^\alpha}{x^\beta}\xrightarrow[x\to+\infty]{}0,\quad\frac{x^\beta}{e^{\gamma x}}\xrightarrow[x\to+\infty]{}0,\quad x^\beta|\ln x|^\alpha\xrightarrow[x\to0^+]{}0\qquad(\alpha, \beta, \gamma > 0).$$</div>
+<p class="ml">La méthode pour $u(x)^{v(x)}$</p>
+<p>On écrit <b>toujours</b> $u^v = e^{v\ln u}$ (avec $u > 0$), on étudie l'exposant $v\ln u$, puis on repasse à l'exponentielle.</p>
+
+<p class="ml">Exemple 2 : une équation exponentielle</p>
+<p>Résoudre $2^x = 3^{x - 1}$.</p>
+<p><b>Étape 1 : Rappel.</b> $a^b = e^{b\ln a}$, et $\ln$ est injective sur $]0, +\infty[$.</p>
+<p><b>Étape 2 : On prend le logarithme</b> (les deux membres sont $> 0$) :</p>
+$$x\ln2 = (x - 1)\ln3.$$
+<p><b>Étape 3 : On isole $x$.</b> $x\ln3 - x\ln2 = \ln3$, soit $x(\ln3 - \ln2) = \ln3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\ln3\neq\ln2$, donc $\cG{x = \frac{\ln3}{\ln3 - \ln2} = \frac{\ln3}{\ln\frac32}}$.</p>
+
+<p class="ml">Exemple 3 : la fonction $x\mapsto x^x$</p>
+<p><b>Étape 1 : Rappel.</b> $x^x = e^{x\ln x}$ pour $x > 0$, et $x\ln x\to0$ en $0^+$.</p>
+<p><b>Étape 2 : La dérivée.</b> $(x\ln x)' = \ln x + 1$, donc $f'(x) = (\ln x + 1)\,x^x$.</p>
+<p><b>Étape 3 : Le signe.</b> $x^x > 0$, et $\ln x + 1\geq0\iff x\geq e^{-1}$ : $f$ décroît sur $]0, \frac1e]$, croît sur $[\frac1e, +\infty[$.</p>
+<p><b>Étape 4 : Les valeurs.</b> $f(\frac1e) = e^{-1/e}\approx0{,}69$ (minimum). En $0^+$ : $x\ln x\to0$ donc $f(x)\to e^0 = 1$. En $+\infty$ : $x\ln x\to+\infty$ donc $f\to+\infty$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\min_{]0, +\infty[}x^x = e^{-1/e}}$, atteint en $\frac1e$, et $f$ se prolonge par continuité en $0$ par $1$.</p>
+
+<h2 id="u-trig">3. Trigonométrie : les formules qui servent</h2>
+<div class="sbox">$$\cos(a\pm b) = \cos a\cos b\mp\sin a\sin b,\qquad\sin(a\pm b) = \sin a\cos b\pm\cos a\sin b,\qquad\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}.$$
+$$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a = \frac{1 + \cos2a}2.$$
+$$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\cV k\pi\ \text{ou}\ a = \pi - b + 2\cV k\pi,\qquad\tan a = \tan b\iff a = b + \cV k\pi.$$</div>
+
+<p class="ml">Exemple 4 : une équation trigonométrique</p>
+<p>Résoudre $\cos(2x) = \cos x$ sur $\mathbb R$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cos a = \cos b\iff a = b + 2k\pi$ ou $a = -b + 2k\pi$, $k\in\mathbb Z$.</p>
+<p><b>Étape 2 : Premier cas.</b> $2x = x + 2\cV k\pi\iff x = 2\cV k\pi$.</p>
+<p><b>Étape 3 : Second cas.</b> $2x = -x + 2\cV k\pi\iff3x = 2\cV k\pi\iff x = \frac{2\cV k\pi}3$.</p>
+<p><b>Étape 4 : On regroupe.</b> Les $2k\pi$ sont déjà des $\frac{2k'\pi}3$ (avec $k' = 3k$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \Big\{\frac{2k\pi}3,\ k\in\mathbb Z\Big\}}$.</p>
+
+<h2 id="u-arc">4. Les fonctions circulaires réciproques</h2>
+<table class="mtab">
+<tr><th></th><th>$\arcsin$</th><th>$\arccos$</th><th>$\arctan$</th></tr>
+<tr><td>Bijection réciproque de</td><td>$\sin:\cR{[-\frac\pi2, \frac\pi2]}\to[-1, 1]$</td><td>$\cos:\cR{[0, \pi]}\to[-1, 1]$</td><td>$\tan:\cR{]-\frac\pi2, \frac\pi2[}\to\mathbb R$</td></tr>
+<tr><td>Valeurs</td><td>$\arcsin x\in[-\frac\pi2, \frac\pi2]$</td><td>$\arccos x\in[0, \pi]$</td><td>$\arctan x\in\,]-\frac\pi2, \frac\pi2[$</td></tr>
+<tr><td>Sens, parité</td><td>croissante, impaire</td><td>décroissante, $\arccos(-x) = \pi - \arccos x$</td><td>croissante, impaire, $\to\pm\frac\pi2$</td></tr>
+</table>
+<div class="sbox">$$\theta = \arcsin x\iff\Big(\sin\theta = x\ \ \text{et}\ \ \theta\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]}\Big).\qquad\sin(\arcsin x) = x\ \text{pour}\ x\in[-1, 1].$$</div>
+<table class="mtab">
+<tr><th>$x$</th><td>$0$</td><td>$\frac12$</td><td>$\frac{\sqrt2}2$</td><td>$\frac{\sqrt3}2$</td><td>$1$</td></tr>
+<tr><th>$\arcsin x$</th><td>$0$</td><td>$\frac\pi6$</td><td>$\frac\pi4$</td><td>$\frac\pi3$</td><td>$\frac\pi2$</td></tr>
+<tr><th>$\arccos x$</th><td>$\frac\pi2$</td><td>$\frac\pi3$</td><td>$\frac\pi4$</td><td>$\frac\pi6$</td><td>$0$</td></tr>
+</table>
+<p>$\arctan1 = \frac\pi4$, $\arctan\sqrt3 = \frac\pi3$, $\arctan\frac1{\sqrt3} = \frac\pi6$.</p>
+<p class="ml">La méthode pour $\cos(\arcsin x)$, $\tan(\arccos x)$…</p>
+<p><b>1.</b> Poser $\theta = \arcsin x$ et écrire ce qu'on sait : $\sin\theta = x$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$. <b>2.</b> Utiliser $\cos^2 + \sin^2 = 1$. <b>3.</b> Choisir le <b>signe</b> grâce à l'intervalle de $\theta$.</p>
+
+<p class="ml">Exemple 5 : $\cos\big(\arcsin\frac13\big)$</p>
+<p><b>Étape 1 : Rappel.</b> $\theta = \arcsin x\iff\sin\theta = x$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$. Et $\cos^2\theta = 1 - \sin^2\theta$.</p>
+<p><b>Étape 2 : On pose</b> $\theta = \arcsin\frac13$ : $\sin\theta = \frac13$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
+<p><b>Étape 3 : Le carré.</b> $\cos^2\theta = 1 - \frac19 = \frac89$.</p>
+<p><b>Étape 4 : Le signe.</b> Sur $\cR{[-\frac\pi2, \frac\pi2]}$, $\cO{\cos\theta\geq0}$, donc $\cos\theta = +\sqrt{\frac89}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\cos\big(\arcsin\frac13\big) = \frac{2\sqrt2}3}$. En général : $\cos(\arcsin x) = \sqrt{1 - x^2}$.</p>
+<table class="mtab">
+<tr><th></th><th>$\theta = \arcsin x$</th><th>$\theta = \arccos x$</th><th>$\theta = \arctan x$</th></tr>
+<tr><td>$\sin\theta$</td><td>$x$</td><td>$\sqrt{1 - x^2}$</td><td>$\frac x{\sqrt{1 + x^2}}$</td></tr>
+<tr><td>$\cos\theta$</td><td>$\sqrt{1 - x^2}$</td><td>$x$</td><td>$\frac1{\sqrt{1 + x^2}}$</td></tr>
+<tr><td>$\tan\theta$</td><td>$\frac x{\sqrt{1 - x^2}}$</td><td>$\frac{\sqrt{1 - x^2}}x$</td><td>$x$</td></tr>
+</table>
+
+<h2 id="u-comp">5. $\arcsin(\sin x)$, $\arccos(\cos x)$, $\arctan(\tan x)$</h2>
+<div class="sbox">$$\arcsin(\sin x) = x\ \textbf{seulement si}\ x\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]},\qquad\arccos(\cos x) = x\ \textbf{seulement si}\ x\in\cR{[0, \pi]}.$$</div>
+<p class="ml">La méthode</p>
+<p>On cherche <b>l'angle $\theta$ de l'intervalle autorisé</b> qui a le même sinus (ou cosinus) que $x$, avec $\sin(\pi - x) = \sin x$, $\cos(-x) = \cos x$ et la périodicité $2\pi$.</p>
+
+<p class="ml">Exemple 6 : deux valeurs</p>
+<p>Calculer $\arccos\big(\cos\frac{5\pi}3\big)$ et $\arcsin\big(\sin\frac{3\pi}4\big)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\arccos(\cos x) = x$ si $x\in\cR{[0, \pi]}$, et $\arcsin(\sin x) = x$ si $x\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
+<p><b>Étape 2 : Le premier.</b> $\frac{5\pi}3\notin[0, \pi]$. Mais $\cos\frac{5\pi}3 = \cos\big(\frac{5\pi}3 - 2\pi\big) = \cos\big(-\frac\pi3\big) = \cos\frac\pi3$, et $\frac\pi3\in\cR{[0, \pi]}$.</p>
+<p><b>Étape 3 : Le second.</b> $\frac{3\pi}4\notin[-\frac\pi2, \frac\pi2]$. Mais $\sin\frac{3\pi}4 = \sin\big(\pi - \frac{3\pi}4\big) = \sin\frac\pi4$, et $\frac\pi4\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\arccos\big(\cos\frac{5\pi}3\big) = \frac\pi3}$ et $\cG{\arcsin\big(\sin\frac{3\pi}4\big) = \frac\pi4}$.</p>
+
+<p class="ml">Exemple 7 : la courbe de $x\mapsto\arcsin(\sin x)$</p>
+<p><b>Étape 1 : Rappel.</b> $\arcsin(\sin x) = x$ sur $[-\frac\pi2, \frac\pi2]$, et $\sin(\pi - x) = \sin x$.</p>
+<p><b>Étape 2 : Période et parité.</b> $f(x) = \arcsin(\sin x)$ est $2\pi$-périodique et impaire : on l'étudie sur $[-\frac\pi2, \frac{3\pi}2]$.</p>
+<p><b>Étape 3 : Sur $[-\frac\pi2, \frac\pi2]$.</b> $f(x) = x$.</p>
+<p><b>Étape 4 : Sur $[\frac\pi2, \frac{3\pi}2]$.</b> $\pi - x\in[-\frac\pi2, \frac\pi2]$ et $\sin x = \sin(\pi - x)$, donc $f(x) = \pi - x$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est une courbe en dents de scie}}$, de pente $+1$ puis $-1$, entre $-\frac\pi2$ et $\frac\pi2$ (voir le traceur plus bas).</p>
+
+<h2 id="u-id">6. Les identités classiques</h2>
+<div class="sbox">$$\arcsin x + \arccos x = \frac\pi2\ \ (x\in[-1, 1]),\qquad\arctan x + \arctan\frac1x = \begin{cases}\frac\pi2&x > 0\\-\frac\pi2&x \lt 0\end{cases}$$</div>
+<p class="ml">La méthode pour une identité $f(x) = $ constante</p>
+<p><b>1.</b> Dériver sur un <b>intervalle</b> et trouver $f' = 0$. <b>2.</b> Conclure que $f$ est constante <b>sur chaque intervalle</b>. <b>3.</b> Calculer la constante en un point simple.</p>
+
+<p class="ml">Exemple 8 : $\arcsin x + \arccos x = \frac\pi2$</p>
+<p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ fonction constante.</p>
+<p><b>Étape 2 : La dérivée.</b> Sur $]-1, 1[$ : $f'(x) = \frac1{\sqrt{1 - x^2}} - \frac1{\sqrt{1 - x^2}} = 0$.</p>
+<p><b>Étape 3 : La constante.</b> $f$ est constante sur $]-1, 1[$, et $f(0) = 0 + \frac\pi2$.</p>
+<p><b>Étape 4 : Les bords.</b> $f$ est continue sur $[-1, 1]$, donc l'égalité passe à $\pm1$ (ou : $f(1) = \frac\pi2 + 0$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin x + \arccos x = \frac\pi2}$ sur $[-1, 1]$.</p>
+
+<p class="ml">Exemple 9 : $\arctan x + \arctan\frac1x$</p>
+<p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ constante <b>sur cet intervalle</b> ; $\mathbb R^*$ n'est pas un intervalle.</p>
+<p><b>Étape 2 : La dérivée.</b> Pour $x\neq0$, avec $\big(\frac1x\big)' = -\frac1{x^2}$ :</p>
+$$f'(x) = \frac1{1 + x^2} - \frac1{x^2}\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 + x^2} - \frac1{x^2 + 1} = 0.$$
+<p><b>Étape 3 : Sur $]0, +\infty[$.</b> $f(1) = \frac\pi4 + \frac\pi4 = \frac\pi2$.</p>
+<p><b>Étape 4 : Sur $]-\infty, 0[$.</b> $f$ est impaire, donc $f = -\frac\pi2$ (ou $f(-1) = -\frac\pi2$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\arctan x + \arctan\frac1x = \operatorname{signe}(x)\,\frac\pi2}$.</p>
+
+<h2 id="u-eq">7. Équations avec des $\arctan$, $\arcsin$</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On applique $\tan$ (ou $\sin$, $\cos$) aux deux membres : c'est une <b>implication</b>, pas une équivalence. <b>2.</b> On résout l'équation algébrique. <b>3.</b> On <b>vérifie</b> chaque candidat (signe, intervalle), car on a pu en ajouter.</p>
+
+<p class="ml">Exemple 10 : $\arctan x + \arctan2x = \frac\pi4$</p>
+<p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et appliquer $\tan$ donne seulement une implication.</p>
+<p><b>Étape 2 : On applique $\tan$.</b> Si $x$ est solution, alors $\frac{x + 2x}{1 - 2x^2} = \tan\frac\pi4 = 1$ (avec $2x^2\neq1$).</p>
+<p><b>Étape 3 : L'équation.</b> $3x = 1 - 2x^2\iff2x^2 + 3x - 1 = 0$, $\Delta = 9 + 8 = 17$, $x = \frac{-3\pm\sqrt{17}}4$.</p>
+<p><b>Étape 4 : La vérification.</b> $f(x) = \arctan x + \arctan2x$ est impaire et croissante. Pour $x \lt 0$, $f(x) \lt 0 \lt \frac\pi4$ : on rejette $\frac{-3 - \sqrt{17}}4 \lt 0$. Pour $x_0 = \frac{-3 + \sqrt{17}}4 > 0$ : $f(x_0)\in\,]0, \pi[$ et $\tan f(x_0) = 1$, donc $f(x_0) = \frac\pi4$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \Big\{\frac{\sqrt{17} - 3}4\Big\}}$.</p>
+
+<h2 id="u-hyp">8. Fonctions hyperboliques</h2>
+<div class="sbox">$$\operatorname{ch}x = \frac{e^x + e^{-x}}2,\quad\operatorname{sh}x = \frac{e^x - e^{-x}}2,\quad\operatorname{th}x = \frac{\operatorname{sh}x}{\operatorname{ch}x},\qquad\operatorname{ch}x + \operatorname{sh}x = e^x,\qquad\operatorname{ch}^2x - \operatorname{sh}^2x = 1.$$
+$$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatorname{sh}a\operatorname{sh}b,\quad\operatorname{sh}(a + b) = \operatorname{sh}a\operatorname{ch}b + \operatorname{ch}a\operatorname{sh}b,\quad\operatorname{ch}2a = 2\operatorname{ch}^2a - 1.$$</div>
+<p>$\operatorname{ch}$ est paire, $\geq1$ ; $\operatorname{sh}$ et $\operatorname{th}$ sont impaires et croissantes ; $\operatorname{th}\to\pm1$. Les formules ressemblent à la trigo, avec un changement de signe devant les produits de deux $\operatorname{sh}$.</p>
+<p class="ml">La méthode</p>
+<p>Pour une équation ou une identité : tout réécrire avec $X = e^x$ ($> 0$), puis résoudre en $X$.</p>
+
+<p class="ml">Exemple 11 : résoudre $\operatorname{ch}x = 2$</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = \frac{e^x + e^{-x}}2$. On pose $X = e^x > 0$.</p>
+<p><b>Étape 2 : En $X$.</b> $\frac{X + \frac1X}2 = 2\iff X^2 - 4X + 1 = 0$ (on multiplie par $2X > 0$).</p>
+<p><b>Étape 3 : Les racines.</b> $\Delta = 16 - 4 = 12$, $X = \frac{4\pm2\sqrt3}2 = 2\pm\sqrt3$. Les deux sont $> 0$.</p>
+<p><b>Étape 4 : On revient à $x$.</b> $x = \ln(2 + \sqrt3)$ ou $x = \ln(2 - \sqrt3) = \ln\frac1{2 + \sqrt3} = -\ln(2 + \sqrt3)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{\pm\ln(2 + \sqrt3)\}}$ (symétrique : $\operatorname{ch}$ est paire).</p>
+
+<p class="ml">Exemple 12 : $\operatorname{ch}(a + b)$</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{ch}a = \frac{e^a + e^{-a}}2$, $\operatorname{sh}a = \frac{e^a - e^{-a}}2$.</p>
+<p><b>Étape 2 : On développe les produits.</b></p>
+$$4\operatorname{ch}a\operatorname{ch}b = e^{a+b} + e^{a-b} + e^{-a+b} + e^{-a-b},\qquad4\operatorname{sh}a\operatorname{sh}b = e^{a+b} - e^{a-b} - e^{-a+b} + e^{-a-b}.$$
+<p><b>Étape 3 : On additionne.</b> Les termes croisés disparaissent : $4(\operatorname{ch}a\operatorname{ch}b + \operatorname{sh}a\operatorname{sh}b) = 2e^{a+b} + 2e^{-(a+b)}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{ch}a\operatorname{ch}b + \operatorname{sh}a\operatorname{sh}b = \operatorname{ch}(a + b)}$.</p>
+
+<h2 id="u-arg">9. Les réciproques hyperboliques <span class="hp">hors programme</span></h2>
+<div class="sbox">$$\operatorname{argsh}x = \ln\big(x + \sqrt{x^2 + 1}\big)\ (\mathbb R),\quad\operatorname{argch}x = \ln\big(x + \sqrt{x^2 - 1}\big)\ ([1, +\infty[),\quad\operatorname{argth}x = \frac12\ln\frac{1 + x}{1 - x}\ (]-1, 1[).$$
+$$\operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}},\qquad\operatorname{argch}'x = \frac1{\sqrt{x^2 - 1}},\qquad\operatorname{argth}'x = \frac1{1 - x^2}.$$</div>
+<p>Elles ne sont plus au programme : dans une copie, on redémontre la formule logarithmique (exemple 13) ou on écrit directement le $\ln$. Elles servent surtout pour les primitives : $\int\frac{dx}{\sqrt{x^2 + 1}} = \ln(x + \sqrt{x^2 + 1})$.</p>
+<p class="ml">Exemple 13 : retrouver $\operatorname{argsh}$</p>
+<p><b>Étape 1 : Rappel.</b> On résout $\operatorname{sh}y = x$ en posant $Y = e^y > 0$.</p>
+<p><b>Étape 2 : En $Y$.</b> $\frac{Y - \frac1Y}2 = x\iff Y^2 - 2xY - 1 = 0$.</p>
+<p><b>Étape 3 : Les racines.</b> $Y = x\pm\sqrt{x^2 + 1}$. Comme $\sqrt{x^2 + 1} > |x|$, seule $x + \sqrt{x^2 + 1}$ est $> 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{y = \ln\big(x + \sqrt{x^2 + 1}\big)}$.</p>
+
+<h2 id="u-etude">10. Le plan d'étude d'une fonction</h2>
+<p><b>1. Domaine</b> : $\ln$ ($> 0$), racine ($\geq0$), dénominateur ($\neq0$), $\arcsin$, $\arccos$ ($[-1, 1]$). <b>2. Réduction</b> : parité, périodicité. <b>3. Dérivabilité</b> : attention aux bords de $\arcsin$, $\arccos$, $\sqrt{\ }$ (on passe par le taux d'accroissement ou le théorème de la limite de la dérivée). <b>4. Signe de $f'$</b>, tableau de variations. <b>5. Limites</b> aux bornes, asymptotes ($f(x) - (ax + b)\to0$). <b>6. Courbe</b>.</p>
+
+<h2 id="u-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>$u(x)^{v(x)}$</b><span>Écrire $e^{v\ln u}$.</span></div>
+<div><b>$\cos(\arcsin x)$, $\tan(\arccos x)$…</b><span>Poser $\theta$, $\cos^2 + \sin^2 = 1$, signe par l'intervalle de $\theta$.</span></div>
+<div><b>$\arcsin(\sin a)$, $\arccos(\cos a)$</b><span>Ramener $a$ dans l'intervalle autorisé avec $\pi - a$, $-a$, $2k\pi$.</span></div>
+<div><b>« Montrer que $f$ est constante »</b><span>$f' = 0$ sur chaque intervalle, puis une valeur.</span></div>
+<div><b>Équation en $\arctan$</b><span>Appliquer $\tan$, résoudre, <b>vérifier</b> les candidats.</span></div>
+<div><b>$\arctan a + \arctan b$</b><span>Formule de $\tan(a + b)$, puis savoir dans quel intervalle est la somme.</span></div>
+<div><b>Équation en $\operatorname{ch}$, $\operatorname{sh}$</b><span>$X = e^x > 0$, équation du second degré.</span></div>
+<div><b>« Dérivée de $f^{-1}$ »</b><span>$\frac1{f'(f^{-1}(y))}$, puis simplifier $f'\circ f^{-1}$.</span></div>
+<div><b>Primitive de $\frac1{1 + x^2}$, $\frac1{\sqrt{1 - x^2}}$</b><span>$\arctan$, $\arcsin$ ; et $\frac1{a^2 + x^2}$ : $\frac1a\arctan\frac xa$.</span></div>
+<div><b>« Étudier $f$ »</b><span>Le plan du §10, sans oublier les bords du domaine de dérivabilité.</span></div>
+</div>
+
+<h2 id="u-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Écrire $\arcsin(\sin x) = x$ pour tout $x$.</p>
+<p><b>2.</b> Oublier le signe : $\cos(\arcsin x) = \pm\sqrt{1 - x^2}$, alors que c'est $+$.</p>
+<p><b>3.</b> Dire $\arcsin$ dérivable sur $[-1, 1]$ : seulement sur $]-1, 1[$.</p>
+<p><b>4.</b> Appliquer $\tan$ à une équation et garder tous les candidats sans vérifier.</p>
+<p><b>5.</b> Conclure « $f' = 0$ donc $f$ constante » sur $\mathbb R^*$ : il y a deux constantes.</p>
+<p><b>6.</b> Confondre $\arcsin x$ et $\frac1{\sin x}$.</p>
+<p><b>7.</b> Écrire $\operatorname{ch}^2 + \operatorname{sh}^2 = 1$ : c'est $\operatorname{ch}^2 - \operatorname{sh}^2 = 1$.</p>
+<p><b>8.</b> Écrire $x^\alpha$ pour $x \lt 0$ et $\alpha$ non entier.</p>
+</div>
+
+<h2 id="u-entrainement">S'entraîner</h2>
+<div data-mlab="arcval"></div>
+<div data-mlab="arcfx"></div>
+<div data-mlab="quizfu"></div>
+
+<h2 id="u-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $\arctan\frac12 + \arctan\frac13 = \frac\pi4$</p>
+<p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et $\tan$ est injective sur $]-\frac\pi2, \frac\pi2[$.</p>
+<p><b>Étape 2 : Le $\tan$ de la somme.</b> Avec $a = \arctan\frac12$, $b = \arctan\frac13$ :</p>
+$$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} = 1.$$
+<p><b>Étape 3 : L'intervalle.</b> $\frac12, \frac13\in\,]0, 1[$, donc $a, b\in\,]0, \frac\pi4[$ et $a + b\in\,]0, \frac\pi2[$.</p>
+<p><b>Étape 4 : Conclusion.</b> Sur $]0, \frac\pi2[$, le seul angle de tangente $1$ est $\frac\pi4$ : $\cG{\arctan\frac12 + \arctan\frac13 = \frac\pi4}$.</p>
+
+<p class="ml">Exercice 2 : $\lim\limits_{x\to+\infty}\big(1 + \frac ax\big)^x$</p>
+<p><b>Étape 1 : Rappel.</b> $u^v = e^{v\ln u}$, et $\frac{\ln(1 + h)}h\to1$ quand $h\to0$.</p>
+<p><b>Étape 2 : L'exposant.</b> $x\ln\big(1 + \frac ax\big) = a\cdot\frac{\ln(1 + h)}h$ avec $h = \frac ax\to0$ (si $a\neq0$).</p>
+<p><b>Étape 3 : Sa limite.</b> $a\cdot1 = a$.</p>
+<p><b>Étape 4 : Conclusion.</b> Par continuité de $\exp$ : $\cG{\big(1 + \frac ax\big)^x\to e^a}$ (et c'est $1$ si $a = 0$).</p>
+
+<p class="ml">Exercice 3 : $f(x) = \arcsin\frac{2x}{1 + x^2}$ pour $|x|\leq1$</p>
+<p><b>Étape 1 : Rappel.</b> $\sin(2\theta) = \frac{2\tan\theta}{1 + \tan^2\theta}$, et $\arcsin(\sin y) = y$ si $y\in[-\frac\pi2, \frac\pi2]$.</p>
+<p><b>Étape 2 : On pose</b> $\theta = \arctan x$. Pour $|x|\leq1$, $\theta\in[-\frac\pi4, \frac\pi4]$.</p>
+<p><b>Étape 3 : On reconnaît un sinus.</b> $\frac{2x}{1 + x^2} = \frac{2\tan\theta}{1 + \tan^2\theta} = \sin(2\theta)$.</p>
+<p><b>Étape 4 : L'intervalle.</b> $2\theta\in[-\frac\pi2, \frac\pi2]$, donc $\arcsin(\sin2\theta) = 2\theta$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin\frac{2x}{1 + x^2} = 2\arctan x}$ sur $[-1, 1]$ (pour $x > 1$, on trouve $\pi - 2\arctan x$).</p>
+
+<h2 id="u-arbre">L'arbre des fonctions usuelles</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question sur une fonction usuelle</span><ul>
+<li><div class="hr"><em>puissance $u^v$</em><a class="hl ok" href="#u-exp">$e^{v\ln u}$, puis l'exposant</a></div></li>
+<li><div class="hr"><em>trigo d'un $\arcsin$, $\arccos$, $\arctan$</em><a class="hl" href="#u-arc">poser $\theta$, $\cos^2 + \sin^2 = 1$, signe</a></div></li>
+<li><div class="hr"><em>$\arcsin(\sin a)$…</em><span class="hq">$a$ dans l'intervalle ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#u-comp">c'est $a$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#u-comp">$\pi - a$, $-a$, $a - 2k\pi$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une identité</em><span class="hq">Quel type ?</span><ul>
+<li><div class="hr"><em>somme constante</em><a class="hl" href="#u-id">$f' = 0$ par intervalle, une valeur</a></div></li>
+<li><div class="hr"><em>avec des valeurs</em><a class="hl" href="#u-exos">$\tan(a + b)$, puis l'intervalle</a></div></li>
+<li><div class="hr"><em>hyperbolique</em><a class="hl" href="#u-hyp">tout en $e^x$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une équation</em><span class="hq">Avec quoi ?</span><ul>
+<li><div class="hr"><em>$\cos$, $\sin$, $\tan$</em><a class="hl" href="#u-trig">$a = \pm b + 2k\pi$…</a></div></li>
+<li><div class="hr"><em>$\arctan$, $\arcsin$</em><a class="hl" href="#u-eq">appliquer $\tan$, vérifier</a></div></li>
+<li><div class="hr"><em>$\operatorname{ch}$, $\operatorname{sh}$, exp</em><a class="hl" href="#u-hyp">$X = e^x > 0$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une dérivée</em><a class="hl" href="#u-not">tableau, ou $\frac1{f'\circ f^{-1}}$</a></div></li>
+<li><div class="hr"><em>étudier $f$</em><a class="hl end" href="#u-etude">domaine, parité, $f'$, limites</a></div></li>
+</ul></div></div>
+`,
+"Espaces préhilbertiens réels": R`
+<nav class="msum"><a href="#h-not">Notations</a><a href="#h-ps">Produit scalaire</a><a href="#h-cs">Cauchy-Schwarz</a><a href="#h-orth">Orthogonalité</a><a href="#h-bon">Bases orthonormées</a><a href="#h-gs">Gram-Schmidt</a><a href="#h-proj">Projection</a><a href="#h-dist">Distance</a><a href="#h-enonce">L'énoncé</a><a href="#h-erreurs">Erreurs</a><a href="#h-entrainement">S'entraîner</a><a href="#h-exos">Exercices</a><a href="#h-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : le sous-espace $\cR F$ et son orthogonal. <span class="kO">orange</span> : les produits scalaires calculés $\cO{\langle x, e_i\rangle}$. <span class="kV">violet</span> : la base orthonormée $\cV{(e_1, \dots, e_n)}$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="h-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Produit scalaire</td><td>$\langle x, y\rangle$, $(x\mid y)$, $x\cdot y$</td><td>Bilinéaire, symétrique, défini positif.</td></tr>
+<tr><td>Norme associée</td><td>$\|x\| = \sqrt{\langle x, x\rangle}$</td><td>$\|\lambda x\| = |\lambda|\,\|x\|$.</td></tr>
+<tr><td>Orthogonal</td><td>$x\perp y$, $A^\perp$</td><td>$A^\perp = \{x,\ \forall a\in A,\ \langle x, a\rangle = 0\}$ est un sev.</td></tr>
+<tr><td>Projeté orthogonal</td><td>$p_F(x)$</td><td>$F$ de dimension finie.</td></tr>
+<tr><td>Distance</td><td>$d(x, F) = \inf_{y\in F}\|x - y\|$</td><td>$= \|x - p_F(x)\|$.</td></tr>
+<tr><td>Euclidien</td><td>préhilbertien de dimension finie</td><td>Toujours une BON.</td></tr>
+</table>
+<table class="mtab">
+<tr><th>Espace</th><th>Produit scalaire usuel</th></tr>
+<tr><td>$\mathbb R^n$, $\mathcal M_{n,1}(\mathbb R)$</td><td>$\langle x, y\rangle = \sum_{i=1}^nx_iy_i = X^\top Y$</td></tr>
+<tr><td>$\mathcal M_n(\mathbb R)$</td><td>$\langle A, B\rangle = \operatorname{tr}(A^\top B) = \sum_{i,j}a_{ij}b_{ij}$</td></tr>
+<tr><td>$\mathcal C([a, b], \mathbb R)$</td><td>$\langle f, g\rangle = \int_a^bf(t)g(t)\,dt$</td></tr>
+<tr><td>$\mathcal C_{2\pi}(\mathbb R)$</td><td>$\langle f, g\rangle = \frac1{2\pi}\int_0^{2\pi}fg$</td></tr>
+</table>
+
+<h2 id="h-ps">2. Montrer qu'on a un produit scalaire</h2>
+<p class="ml">La méthode en quatre points</p>
+<p><b>1. Symétrie</b> : $\varphi(x, y) = \varphi(y, x)$. <b>2. Linéarité à gauche</b> : $\varphi(\lambda x + x', y) = \lambda\varphi(x, y) + \varphi(x', y)$ (la symétrie donne la droite). <b>3. Positivité</b> : $\varphi(x, x)\geq0$. <b>4. Définie</b> : $\varphi(x, x) = 0\Rightarrow x = 0$. C'est toujours le point 4 qui demande un argument.</p>
+
+<p class="ml">Exemple 1 : sur les polynômes</p>
+<p>Montrer que $\langle P, Q\rangle = \int_0^1P(t)Q(t)\,dt$ est un produit scalaire sur $\mathbb R[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique, linéaire à gauche, positive, définie.</p>
+<p><b>Étape 2 : Symétrie et linéarité.</b> $PQ = QP$, et l'intégrale est linéaire : $\int(\lambda P + P')Q = \lambda\int PQ + \int P'Q$.</p>
+<p><b>Étape 3 : Positivité.</b> $\langle P, P\rangle = \int_0^1P(t)^2\,dt\geq0$ (intégrale d'une fonction positive, bornes dans l'ordre).</p>
+<p><b>Étape 4 : Définie.</b> Si $\int_0^1P^2 = 0$, comme $t\mapsto P(t)^2$ est <b>continue et positive</b>, elle est nulle sur $[0, 1]$. $P$ a alors une infinité de racines, donc $P = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\langle\cdot, \cdot\rangle\ \text{est un produit scalaire sur}\ \mathbb R[X]}$.</p>
+
+<p class="ml">Exemple 2 : une forme sur $\mathbb R^2$</p>
+<p>$\varphi(x, y) = x_1y_1 + x_1y_2 + x_2y_1 + 2x_2y_2$ est-elle un produit scalaire ?</p>
+<p><b>Étape 1 : Rappel.</b> Les quatre points ; pour la positivité, on met $\varphi(x, x)$ sous <b>forme canonique</b>.</p>
+<p><b>Étape 2 : Symétrie et bilinéarité.</b> Échanger $x$ et $y$ donne la même expression ; chaque terme est linéaire en $x$.</p>
+<p><b>Étape 3 : La forme canonique.</b></p>
+$$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = (x_1 + x_2)^2 + x_2^2\geq0.$$
+<p><b>Étape 4 : Définie.</b> $\varphi(x, x) = 0\Rightarrow x_1 + x_2 = 0$ et $x_2 = 0$, donc $x = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{est un produit scalaire}}$. (Avec $x_2y_2$ au lieu de $2x_2y_2$, on aurait $(x_1 + x_2)^2$, nulle pour $x = (1, -1)$ : pas défini.)</p>
+
+<h2 id="h-cs">3. Normes, Cauchy-Schwarz</h2>
+<div class="sbox">$$\textbf{Cauchy-Schwarz}:\ |\langle x, y\rangle|\leq\|x\|\,\|y\|,\ \text{égalité}\iff x, y\ \text{colinéaires}.\qquad\|x + y\|\leq\|x\| + \|y\|.$$
+$$\|x + y\|^2 = \|x\|^2 + 2\langle x, y\rangle + \|y\|^2,\qquad\langle x, y\rangle = \frac14\big(\|x + y\|^2 - \|x - y\|^2\big),\qquad\|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2.$$</div>
+<p class="ml">La méthode Cauchy-Schwarz</p>
+<p>Pour majorer une somme ou une intégrale de produits : <b>choisir l'espace et les deux vecteurs</b> $x$, $y$ pour que $\langle x, y\rangle$ soit ce qu'on veut majorer. Le vecteur constant $(1, \dots, 1)$ ou la fonction $1$ sont souvent le bon choix.</p>
+
+<p class="ml">Exemple 3 : $\big(\sum x_k\big)^2\leq n\sum x_k^2$</p>
+<p><b>Étape 1 : Rappel.</b> $\langle x, y\rangle^2\leq\|x\|^2\|y\|^2$ dans $\mathbb R^n$.</p>
+<p><b>Étape 2 : Le choix.</b> $x = (x_1, \dots, x_n)$ et $y = (1, \dots, 1)$ : $\cO{\langle x, y\rangle = \sum x_k}$, $\|y\|^2 = n$.</p>
+<p><b>Étape 3 : On applique.</b> $\big(\sum_{k=1}^nx_k\big)^2\leq n\sum_{k=1}^nx_k^2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\big(\sum x_k\big)^2\leq n\sum x_k^2}$, avec égalité si et seulement si tous les $x_k$ sont égaux.</p>
+
+<p class="ml">Exemple 4 : $\int f\cdot\int\frac1f\geq(b - a)^2$</p>
+<p>$f$ continue et $> 0$ sur $[a, b]$.</p>
+<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathcal C([a, b])$ : $\big(\int gh\big)^2\leq\int g^2\int h^2$.</p>
+<p><b>Étape 2 : Le choix.</b> $g = \sqrt f$ et $h = \frac1{\sqrt f}$ (continues car $f > 0$) : $gh = 1$, $g^2 = f$, $h^2 = \frac1f$.</p>
+<p><b>Étape 3 : On applique.</b> $\big(\int_a^b1\big)^2\leq\int_a^bf\cdot\int_a^b\frac1f$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(b - a)^2\leq\int_a^bf\int_a^b\frac1f}$, égalité si $\sqrt f$ et $\frac1{\sqrt f}$ sont colinéaires, c'est-à-dire $f$ constante.</p>
+
+<h2 id="h-orth">4. Orthogonalité, Pythagore</h2>
+<div class="sbox">$$x\perp y\iff\|x + y\|^2 = \|x\|^2 + \|y\|^2\ \ (\textbf{Pythagore}).\qquad(e_1, \dots, e_p)\ \text{orthogonale}\Rightarrow\Big\|\sum e_i\Big\|^2 = \sum\|e_i\|^2.$$
+$$\text{Une famille orthogonale de vecteurs non nuls est libre}.\qquad F\subset G\Rightarrow G^\perp\subset F^\perp,\qquad F\cap F^\perp = \{0\}.$$</div>
+
+<p class="ml">Exemple 5 : les cosinus sont orthogonaux</p>
+<p>Dans $\mathcal C([0, 2\pi])$ avec $\langle f, g\rangle = \int_0^{2\pi}fg$, montrer que $c_p(t) = \cos(pt)$, $p\in\mathbb N$, sont deux à deux orthogonaux.</p>
+<p><b>Étape 1 : Rappel.</b> $\cos a\cos b = \frac12\big(\cos(a + b) + \cos(a - b)\big)$, et $\int_0^{2\pi}\cos(mt)\,dt = 0$ pour $m\neq0$ entier.</p>
+<p><b>Étape 2 : On linéarise</b> pour $p\neq q$ :</p>
+$$\langle c_p, c_q\rangle = \frac12\int_0^{2\pi}\cos((p + q)t)\,dt + \frac12\int_0^{2\pi}\cos((p - q)t)\,dt.$$
+<p><b>Étape 3 : Les intégrales.</b> $p + q\neq0$ et $p - q\neq0$ : chaque intégrale vaut $\Big[\frac{\sin(mt)}m\Big]_0^{2\pi} = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\langle c_p, c_q\rangle = 0}$ pour $p\neq q$ : la famille est orthogonale, donc libre (base des séries de Fourier).</p>
+
+<h2 id="h-bon">5. Bases orthonormées</h2>
+<div class="sbox">$$\cV{(e_1, \dots, e_n)}\ \text{BON}:\quad\cB x = \sum_{i=1}^n\cO{\langle x, e_i\rangle}\,\cV{e_i},\qquad\langle x, y\rangle = \sum x_iy_i,\qquad\|x\|^2 = \sum x_i^2.$$</div>
+<p>Dans une BON, <b>tout se calcule comme dans $\mathbb R^n$</b>. Une famille orthonormée a l'inégalité de Bessel : $\sum_{i=1}^p\langle x, e_i\rangle^2\leq\|x\|^2$.</p>
+<p class="ml piege">Piège</p>
+<p>$\langle x, y\rangle = \sum x_iy_i$ est <b>faux</b> si la base n'est pas orthonormée.</p>
+
+<p class="ml">Exemple 6 : coordonnées dans une BON</p>
+<p>Dans $\mathbb R^2$, $e_1 = \frac1{\sqrt2}(1, 1)$, $e_2 = \frac1{\sqrt2}(1, -1)$. Coordonnées de $x = (3, 1)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Dans une BON, la coordonnée sur $e_i$ est $\langle x, e_i\rangle$.</p>
+<p><b>Étape 2 : C'est une BON.</b> $\|e_1\|^2 = \frac12(1 + 1) = 1$, $\|e_2\|^2 = 1$, $\langle e_1, e_2\rangle = \frac12(1 - 1) = 0$.</p>
+<p><b>Étape 3 : Les produits scalaires.</b> $\cO{\langle x, e_1\rangle = \frac{3 + 1}{\sqrt2} = 2\sqrt2}$, $\cO{\langle x, e_2\rangle = \frac{3 - 1}{\sqrt2} = \sqrt2}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x = 2\sqrt2\,e_1 + \sqrt2\,e_2}$. Contrôle : $\|x\|^2 = 8 + 2 = 10 = 9 + 1$.</p>
+
+<h2 id="h-gs">6. Le procédé de Gram-Schmidt</h2>
+<div class="sbox">$$e_1 = \frac{v_1}{\|v_1\|},\qquad w_k = v_k - \sum_{j=1}^{k-1}\cO{\langle v_k, e_j\rangle}\,e_j,\qquad e_k = \frac{w_k}{\|w_k\|}.$$
+$$\operatorname{Vect}(e_1, \dots, e_k) = \operatorname{Vect}(v_1, \dots, v_k)\ \text{pour tout}\ k,\qquad\langle e_k, v_k\rangle > 0.$$</div>
+<p>Conseil de calcul : on peut orthogonaliser sans normaliser ($w_k = v_k - \sum\frac{\langle v_k, w_j\rangle}{\|w_j\|^2}w_j$), multiplier les $w_k$ par un nombre pour enlever les fractions, et normaliser <b>à la fin</b>.</p>
+
+<p class="ml">Exemple 7 : dans $\mathbb R^3$</p>
+<p>Orthonormaliser $v_1 = (1, 1, 0)$, $v_2 = (1, 0, 1)$, $v_3 = (0, 1, 1)$.</p>
+<p><b>Étape 1 : Rappel.</b> $e_1 = \frac{v_1}{\|v_1\|}$, $w_k = v_k - \sum_{j \lt k}\langle v_k, e_j\rangle e_j$, $e_k = \frac{w_k}{\|w_k\|}$.</p>
+<p><b>Étape 2 : $e_1$.</b> $\|v_1\| = \sqrt2$, $\cV{e_1 = \frac1{\sqrt2}(1, 1, 0)}$.</p>
+<p><b>Étape 3 : $e_2$.</b> $\cO{\langle v_2, e_1\rangle = \frac1{\sqrt2}}$, donc $w_2 = (1, 0, 1) - \frac12(1, 1, 0) = \big(\frac12, -\frac12, 1\big)$, $\|w_2\|^2 = \frac14 + \frac14 + 1 = \frac32$.</p>
+$$\cV{e_2 = \frac{w_2}{\sqrt{3/2}} = \frac1{\sqrt6}(1, -1, 2)}.$$
+<p><b>Étape 4 : $e_3$.</b> $\cO{\langle v_3, e_1\rangle = \frac1{\sqrt2}}$, $\cO{\langle v_3, e_2\rangle = \frac{0 - 1 + 2}{\sqrt6} = \frac1{\sqrt6}}$ :</p>
+$$w_3 = (0, 1, 1) - \frac12(1, 1, 0) - \frac16(1, -1, 2) = \Big(-\frac23, \frac23, \frac23\Big),\qquad\cV{e_3 = \frac1{\sqrt3}(-1, 1, 1)}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{(e_1, e_2, e_3)\ \text{est une BON}}$. Contrôle : $\langle e_1, e_3\rangle\propto-1 + 1 = 0$, $\langle e_2, e_3\rangle\propto-1 - 1 + 2 = 0$.</p>
+
+<p class="ml">Exemple 8 : sur les polynômes (Legendre)</p>
+<p>Orthonormaliser $(1, X, X^2)$ pour $\langle P, Q\rangle = \int_{-1}^1PQ$.</p>
+<p><b>Étape 1 : Rappel.</b> Gram-Schmidt, et $\int_{-1}^1t^k\,dt = \frac2{k + 1}$ si $k$ est pair, $0$ si $k$ est impair.</p>
+<p><b>Étape 2 : $e_0$.</b> $\|1\|^2 = 2$, $\cV{e_0 = \frac1{\sqrt2}}$.</p>
+<p><b>Étape 3 : $e_1$.</b> $\langle X, 1\rangle = \int t = 0$ : $X$ est déjà orthogonal. $\|X\|^2 = \frac23$, $\cV{e_1 = \sqrt{\frac32}\,X}$.</p>
+<p><b>Étape 4 : $e_2$.</b> $\langle X^2, X\rangle = 0$ et $\langle X^2, 1\rangle = \frac23$ : $w_2 = X^2 - \frac{2/3}2\cdot1 = X^2 - \frac13$. Et :</p>
+$$\|w_2\|^2 = \int_{-1}^1\Big(t^4 - \frac23t^2 + \frac19\Big)dt = \frac25 - \frac49 + \frac29 = \frac8{45}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{e_2 = \sqrt{\frac{45}8}\Big(X^2 - \frac13\Big)}$ : ce sont les polynômes de Legendre normalisés.</p>
+
+<h2 id="h-proj">7. Supplémentaire orthogonal, projection orthogonale</h2>
+<div class="sbox">$$\cR F\ \text{de dimension finie}:\ E = \cR F\oplus\cR{F^\perp},\qquad(F^\perp)^\perp = F\ (\text{si}\ E\ \text{euclidien}),\qquad\dim F^\perp = n - \dim F.$$
+$$p_F(x) = \sum_{i=1}^p\cO{\langle x, e_i\rangle}\,\cV{e_i}\ \ ((e_i)\ \text{BON de}\ F).\qquad\textbf{Caractérisation}:\ y = p_F(x)\iff y\in F\ \text{et}\ x - y\in F^\perp.$$
+$$\text{Droite}\ D = \operatorname{Vect}(u):\ p_D(x) = \frac{\langle x, u\rangle}{\|u\|^2}u.\qquad\text{Hyperplan}\ H = n^\perp:\ p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n.$$</div>
+<p class="ml">Deux méthodes pour calculer $p_F(x)$</p>
+<p><b>1.</b> Avec une BON de $F$ (Gram-Schmidt d'abord). <b>2.</b> Sans BON : écrire $p_F(x) = \sum\lambda_iv_i$ dans une base quelconque de $F$, et écrire $\langle x - p_F(x), v_j\rangle = 0$ pour tout $j$ : un <b>système</b> en $\lambda_i$.</p>
+
+<p class="ml">Exemple 9 : projeter sur un plan de $\mathbb R^3$</p>
+<p>Projeté de $x = (1, 2, 3)$ sur $P:\ x + y + z = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $H = n^\perp$ : $p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$.</p>
+<p><b>Étape 2 : Le vecteur normal.</b> $P = n^\perp$ avec $n = (1, 1, 1)$, $\|n\|^2 = 3$.</p>
+<p><b>Étape 3 : Le produit scalaire.</b> $\cO{\langle x, n\rangle = 1 + 2 + 3 = 6}$, donc $\frac{\langle x, n\rangle}{\|n\|^2} = 2$.</p>
+<p><b>Étape 4 : Le projeté.</b> $p_P(x) = (1, 2, 3) - 2(1, 1, 1) = (-1, 0, 1)$. Contrôle : $-1 + 0 + 1 = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p_P(x) = (-1, 0, 1)}$, et $d(x, P) = \frac{|\langle x, n\rangle|}{\|n\|} = \frac6{\sqrt3} = 2\sqrt3$.</p>
+
+<h2 id="h-dist">8. Distance à un sous-espace : les problèmes de minimisation</h2>
+<div class="sbox">$$d(x, F) = \|x - p_F(x)\|,\qquad d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2,\qquad p_F(x)\ \text{est l'unique point de}\ F\ \text{où le minimum est atteint}.$$</div>
+<p class="ml">La méthode</p>
+<p>Un « $\inf_{a, b}\int(\dots - a\dots - b\dots)^2$ » ou « $\min\sum(\dots)^2$ » est <b>une distance au carré</b>. <b>1.</b> Trouver l'espace, le produit scalaire, le vecteur $x$ et le sous-espace $F$. <b>2.</b> Calculer $p_F(x)$ avec les conditions d'orthogonalité. <b>3.</b> $d^2 = \langle x - p_F(x), x\rangle$ (car $x - p_F(x)\perp p_F(x)$).</p>
+
+<p class="ml">Exemple 10 : $\inf_{a, b}\int_0^1(t^2 - at - b)^2\,dt$</p>
+<p><b>Étape 1 : Rappel.</b> C'est $d(x, F)^2$ avec $x = t^2$, $F = \mathbb R_1[t] = \operatorname{Vect}(1, t)$, $\langle f, g\rangle = \int_0^1fg$. Le projeté $at + b$ vérifie $x - p\perp1$ et $x - p\perp t$.</p>
+<p><b>Étape 2 : Les intégrales utiles.</b> $\int_0^1t^k\,dt = \frac1{k + 1}$.</p>
+<p><b>Étape 3 : Les deux conditions.</b></p>
+$$\langle t^2 - at - b, 1\rangle = \frac13 - \frac a2 - b = 0,\qquad\langle t^2 - at - b, t\rangle = \frac14 - \frac a3 - \frac b2 = 0.$$
+<p><b>Étape 4 : On résout.</b> La 1<sup>re</sup> donne $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = -\frac16$.</p>
+<p><b>Étape 5 : La distance.</b> $d^2 = \langle t^2 - t + \frac16, t^2\rangle = \frac15 - \frac14 + \frac1{18} = \frac{36 - 45 + 10}{180} = \frac1{180}$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\inf = \frac1{180}}$, atteint pour $a = 1$, $b = -\frac16$.</p>
+
+<h2 id="h-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que c'est un produit scalaire »</b><span>Symétrie, linéarité à gauche, positivité, définie (le point clé).</span></div>
+<div><b>« Montrer une inégalité » avec des sommes ou des intégrales de produits</b><span>Cauchy-Schwarz, en choisissant les deux vecteurs.</span></div>
+<div><b>« Cas d'égalité »</b><span>Colinéarité des deux vecteurs de Cauchy-Schwarz.</span></div>
+<div><b>« Montrer que la famille est libre »</b><span>Orthogonale et sans vecteur nul.</span></div>
+<div><b>« Trouver une BON de $F$ »</b><span>Une base de $F$, puis Gram-Schmidt.</span></div>
+<div><b>Plan $ax + by + cz = 0$</b><span>Vecteur normal $n = (a, b, c)$, projection $x - \frac{\langle x, n\rangle}{\|n\|^2}n$.</span></div>
+<div><b>« Calculer $p_F(x)$ »</b><span>Avec une BON, ou système $\langle x - p, v_j\rangle = 0$.</span></div>
+<div><b>« $\inf\int(\dots)^2$ », « $\min\sum(\dots)^2$ »</b><span>C'est $d(x, F)^2$ : projeter.</span></div>
+<div><b>« Montrer $F^\perp = G$ »</b><span>$G\subset F^\perp$ et égalité des dimensions.</span></div>
+<div><b>$\mathcal S_n$ et $\mathcal A_n$</b><span>Supplémentaires orthogonaux pour $\operatorname{tr}(A^\top B)$.</span></div>
+</div>
+
+<h2 id="h-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier « définie » ou le justifier sans la continuité (intégrales).</p>
+<p><b>2.</b> Normaliser trop tôt dans Gram-Schmidt et se noyer dans les racines.</p>
+<p><b>3.</b> Utiliser $p_F(x) = \sum\langle x, v_i\rangle v_i$ avec une base qui n'est pas orthonormée.</p>
+<p><b>4.</b> Écrire $\|x + y\|^2 = \|x\|^2 + \|y\|^2$ sans orthogonalité.</p>
+<p><b>5.</b> Écrire $\big|\int fg\big|\leq\int|f|\int|g|$ : c'est $\sqrt{\int f^2}\sqrt{\int g^2}$.</p>
+<p><b>6.</b> Croire $E = F\oplus F^\perp$ quand $F$ est de dimension infinie.</p>
+<p><b>7.</b> Diviser par $\|n\|$ au lieu de $\|n\|^2$ dans la projection sur un hyperplan.</p>
+</div>
+
+<h2 id="h-entrainement">S'entraîner</h2>
+<div data-mlab="gram"></div>
+<div data-mlab="projpl"></div>
+<div data-mlab="quizph"></div>
+
+<h2 id="h-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : un produit scalaire par évaluations</p>
+<p>Montrer que $\langle P, Q\rangle = \sum_{k=0}^nP(k)Q(k)$ est un produit scalaire sur $\mathbb R_n[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique, linéaire à gauche, positif, défini. Un polynôme de degré $\leq n$ avec $n + 1$ racines est nul.</p>
+<p><b>Étape 2 : Les trois premiers points.</b> $P(k)Q(k) = Q(k)P(k)$ ; $(\lambda P + R)(k) = \lambda P(k) + R(k)$ ; $\langle P, P\rangle = \sum P(k)^2\geq0$.</p>
+<p><b>Étape 3 : Défini.</b> $\sum_{k=0}^nP(k)^2 = 0$ : une somme de carrés nulle, donc $P(0) = \dots = P(n) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $P\in\mathbb R_n[X]$ a $n + 1$ racines distinctes : $P = 0$. $\cG{\text{C'est un produit scalaire}}$ (sur $\mathbb R_{n+1}[X]$, ce ne serait plus vrai).</p>
+
+<p class="ml">Exercice 2 : $\mathcal S_n$ et $\mathcal A_n$ sont orthogonaux</p>
+<p><b>Étape 1 : Rappel.</b> $\langle A, B\rangle = \operatorname{tr}(A^\top B)$, $\operatorname{tr}(M^\top) = \operatorname{tr}(M)$, $\operatorname{tr}(MN) = \operatorname{tr}(NM)$.</p>
+<p><b>Étape 2 : Pour $S$ symétrique et $A$ antisymétrique</b> : $\langle S, A\rangle = \operatorname{tr}(S^\top A) = \operatorname{tr}(SA)$.</p>
+<p><b>Étape 3 : On transpose.</b> $\operatorname{tr}(SA) = \operatorname{tr}\big((SA)^\top\big) = \operatorname{tr}(A^\top S^\top) = \operatorname{tr}(-AS) = -\operatorname{tr}(SA)$.</p>
+<p><b>Étape 4 : Donc</b> $\operatorname{tr}(SA) = 0$ : $\mathcal S_n\perp\mathcal A_n$.</p>
+<p><b>Étape 5 : Conclusion.</b> Avec $M = \frac{M + M^\top}2 + \frac{M - M^\top}2$ : $\cG{\mathcal M_n = \mathcal S_n\overset\perp\oplus\mathcal A_n}$, et $p_{\mathcal S_n}(M) = \frac{M + M^\top}2$.</p>
+
+<h2 id="h-arbre">L'arbre des espaces préhilbertiens</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question dans un préhilbertien</span><ul>
+<li><div class="hr"><em>produit scalaire ?</em><a class="hl" href="#h-ps">4 points, « définie » en dernier</a></div></li>
+<li><div class="hr"><em>une inégalité</em><span class="hq">Un produit dedans ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#h-cs">Cauchy-Schwarz, choisir $x$ et $y$</a></div></li>
+<li><div class="hr"><em>une somme de vecteurs</em><a class="hl" href="#h-cs">inégalité triangulaire</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une base</em><span class="hq">Orthonormée ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#h-bon">coordonnées $\langle x, e_i\rangle$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#h-gs">Gram-Schmidt</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>projeter sur $F$</em><span class="hq">Quel $F$ ?</span><ul>
+<li><div class="hr"><em>droite</em><a class="hl ok" href="#h-proj">$\frac{\langle x, u\rangle}{\|u\|^2}u$</a></div></li>
+<li><div class="hr"><em>hyperplan</em><a class="hl ok" href="#h-proj">$x - \frac{\langle x, n\rangle}{\|n\|^2}n$</a></div></li>
+<li><div class="hr"><em>BON connue</em><a class="hl" href="#h-proj">$\sum\langle x, e_i\rangle e_i$</a></div></li>
+<li><div class="hr"><em>base quelconque</em><a class="hl" href="#h-proj">système $\langle x - p, v_j\rangle = 0$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>un minimum de carrés</em><a class="hl end" href="#h-dist">c'est $d(x, F)^2$</a></div></li>
+<li><div class="hr"><em>libre ?</em><a class="hl" href="#h-orth">orthogonale sans vecteur nul</a></div></li>
+</ul></div></div>
+`,
+"Espaces préhilbertiens et euclidiens": R`
+<nav class="msum"><a href="#e-rap">Rappels de Sup</a><a href="#e-hyp">Hyperplans</a><a href="#e-sym">Symétries, réflexions</a><a href="#e-iso">Isométries</a><a href="#e-on">$O(n)$</a><a href="#e-o2">$O(2)$</a><a href="#e-o3">$SO(3)$</a><a href="#e-adj">Adjoint</a><a href="#e-auto">Autoadjoints</a><a href="#e-spec">Théorème spectral</a><a href="#e-pos">Positifs</a><a href="#e-enonce">L'énoncé</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-exos">Exercices</a><a href="#e-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : l'axe, l'hyperplan ou le sous-espace invariant. <span class="kO">orange</span> : l'angle $\cO\theta$ et les valeurs propres. <span class="kV">violet</span> : la base orthonormée et la matrice de passage $\cV P$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="e-rap">1. Ce qui vient de Sup</h2>
+<p>Produit scalaire, Cauchy-Schwarz, bases orthonormées, Gram-Schmidt, projection orthogonale et distance sont traités en détail dans la fiche Sup « Espaces préhilbertiens réels ». À avoir en tête :</p>
+<div class="sbox">$$x = \sum\langle x, e_i\rangle e_i,\qquad p_F(x) = \sum_{i\leq p}\langle x, e_i\rangle e_i,\qquad d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2,\qquad y = p_F(x)\iff y\in F,\ x - y\in F^\perp.$$</div>
+<p>Dans une BON $\mathcal B$, si $X = \operatorname{Mat}_{\mathcal B}(x)$ et $Y = \operatorname{Mat}_{\mathcal B}(y)$, alors $\langle x, y\rangle = X^\top Y$.</p>
+
+<h2 id="e-hyp">2. Hyperplans, vecteur normal</h2>
+<div class="sbox">$$H = n^\perp = \{x,\ \langle x, n\rangle = 0\}.\qquad d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|},\qquad p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n.$$</div>
+<p>Dans $\mathbb R^n$, l'hyperplan $a_1x_1 + \dots + a_nx_n = 0$ a pour vecteur normal $\cR{n = (a_1, \dots, a_n)}$ : on le <b>lit</b> sur l'équation.</p>
+<p class="ml">Exemple 1 : distance à un hyperplan de $\mathbb R^4$</p>
+<p>Distance de $x = (1, 2, 0, 1)$ à $H:\ x_1 + x_2 - x_3 + x_4 = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|}$, $n$ lu sur l'équation.</p>
+<p><b>Étape 2 : Le vecteur normal.</b> $\cR{n = (1, 1, -1, 1)}$, $\|n\| = \sqrt4 = 2$.</p>
+<p><b>Étape 3 : Le produit scalaire.</b> $\langle x, n\rangle = 1 + 2 - 0 + 1 = 4$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{d(x, H) = \frac42 = 2}$, et $p_H(x) = x - \frac44n = (0, 1, 1, 0)$.</p>
+
+<h2 id="e-sym">3. Symétries orthogonales, réflexions</h2>
+<div class="sbox">$$s_F = 2p_F - \operatorname{id}:\ \text{symétrie par rapport à}\ F\ \text{parallèlement à}\ F^\perp.\qquad\textbf{Réflexion}\ (F = H = n^\perp):\ s(x) = x - 2\frac{\langle x, n\rangle}{\|n\|^2}n.$$
+$$\text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top\qquad(\text{symétrique et orthogonale}).$$</div>
+<p>Une symétrie $s$ ($s^2 = \operatorname{id}$) est <b>orthogonale</b> si et seulement si $s$ conserve la norme, si et seulement si sa matrice en BON est <b>symétrique</b>.</p>
+<p class="ml">Exemple 2 : matrice d'une réflexion</p>
+<p>Matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $S = I - \frac2{n^\top n}nn^\top$.</p>
+<p><b>Étape 2 : Le normal.</b> $\cR{n = (1, 1, 1)^\top}$, $n^\top n = 3$, et $nn^\top = J$ (la matrice remplie de $1$).</p>
+<p><b>Étape 3 : Le calcul.</b></p>
+$$S = I_3 - \frac23J = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatrix}.$$
+<p><b>Étape 4 : Contrôle.</b> $Sn = n - 2n = -n$ (le normal est retourné) et $S(1, -1, 0)^\top = (1, -1, 0)^\top$ (un vecteur du plan est fixe).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{S = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatrix}}$, symétrique, orthogonale, de déterminant $-1$.</p>
+
+<h2 id="e-iso">4. Isométries (automorphismes orthogonaux)</h2>
+<div class="sbox">$$u\in O(E)\iff\forall x,\ \|u(x)\| = \|x\|\iff\forall x, y,\ \langle u(x), u(y)\rangle = \langle x, y\rangle\iff u\ \text{envoie une BON sur une BON}\iff\operatorname{Mat}_{\text{BON}}(u)\in O(n).$$</div>
+<p>Si $F$ est stable par $u\in O(E)$, alors $F^\perp$ aussi. Les valeurs propres <b>réelles</b> de $u$ sont $\pm1$. $\det u = \pm1$ ; $SO(E)$ : les isométries de déterminant $1$ (rotations).</p>
+
+<h2 id="e-on">5. Matrices orthogonales</h2>
+<div class="sbox">$$A\in O(n)\iff A^\top A = I_n\iff A^{-1} = A^\top\iff\text{les colonnes forment une BON de}\ \mathbb R^n\iff\text{les lignes aussi}.$$
+$$\text{La matrice de passage entre deux BON est orthogonale}.\qquad SO(n) = \{A\in O(n),\ \det A = 1\}.$$</div>
+<p class="ml">Exemple 3 : vérifier qu'une matrice est orthogonale</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> $A\in O(n)\iff$ les colonnes forment une BON : normes $1$ et produits scalaires $0$.</p>
+<p><b>Étape 2 : Les normes</b> (au facteur $\frac19$ près) : $4 + 4 + 1 = 9$, $1 + 4 + 4 = 9$, $4 + 1 + 4 = 9$ : chaque colonne est de norme $1$.</p>
+<p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2\propto-2 + 4 - 2 = 0$, $C_1\cdot C_3\propto4 - 2 - 2 = 0$, $C_2\cdot C_3\propto-2 - 2 + 4 = 0$.</p>
+<p><b>Étape 4 : Le déterminant.</b> $\det(3A) = 2(4 + 2) + 1(4 - 1) + 2(4 + 2) = 27$, donc $\det A = \frac{27}{27} = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A\in SO(3)}$ : c'est une rotation (étudiée à l'exemple 5).</p>
+
+<h2 id="e-o2">6. Le plan : $O(2)$</h2>
+<div class="sbox">$$SO(2):\ R_\theta = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\ (\text{rotation d'angle}\ \theta),\qquad O(2)\setminus SO(2):\ \begin{pmatrix}\cos\theta&\sin\theta\\\sin\theta&-\cos\theta\end{pmatrix}\ (\text{réflexion}).$$
+$$R_\theta R_\varphi = R_{\theta + \varphi}:\ SO(2)\ \text{est commutatif.}\qquad\text{La réflexion a pour axe la droite d'angle}\ \frac\theta2.$$</div>
+<p class="ml">Exemple 4 : reconnaître</p>
+<p>Nature de $A = \frac15\begin{pmatrix}3&-4\\4&3\end{pmatrix}$ et $B = \frac15\begin{pmatrix}3&4\\4&-3\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Dans $O(2)$ : $\det = 1$ rotation, $\det = -1$ réflexion.</p>
+<p><b>Étape 2 : Orthogonales.</b> Colonnes de norme $\frac{9 + 16}{25} = 1$, orthogonales ($-12 + 12 = 0$ et $12 - 12 = 0$).</p>
+<p><b>Étape 3 : $A$.</b> $\det A = \frac{9 + 16}{25} = 1$ : rotation d'angle $\cO\theta$ avec $\cos\theta = \frac35$, $\sin\theta = \frac45$, soit $\theta = \arctan\frac43$.</p>
+<p><b>Étape 4 : $B$.</b> $\det B = \frac{-9 - 16}{25} = -1$ : réflexion. Son axe est $\ker(B - I)$ : $-\frac25x + \frac45y = 0$, soit $x = 2y$, l'axe $\cR{\operatorname{Vect}(2, 1)}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A\ \text{rotation d'angle}\ \arctan\frac43,\ B\ \text{réflexion d'axe}\ \operatorname{Vect}(2, 1)}$.</p>
+
+<h2 id="e-o3">7. L'espace : les rotations de $SO(3)$</h2>
+<div class="sbox">$$A\in SO(3):\ \text{il existe une BON directe}\ (u, v, w)\ \text{où}\ A\ \text{s'écrit}\ \begin{pmatrix}1&0&0\\0&\cos\theta&-\sin\theta\\0&\sin\theta&\cos\theta\end{pmatrix}:\ \text{rotation d'axe}\ \cR{\mathbb Ru}\ \text{et d'angle}\ \cO\theta.$$
+$$\operatorname{tr}A = 1 + 2\cos\theta,\qquad\text{signe de}\ \sin\theta = \text{signe de}\ \det(u, x, Ax)\ \ (x\notin\mathbb Ru).$$</div>
+<p class="ml">La méthode en cinq temps</p>
+<p><b>1.</b> $A^\top A = I$. <b>2.</b> $\det A = 1$ (sinon $-A$ est une rotation : $A$ est une « antirotation »). <b>3.</b> L'axe : résoudre $AX = X$, normaliser $\cR u$ (il <b>oriente</b> l'axe). <b>4.</b> $\cos\cO\theta = \frac{\operatorname{tr}A - 1}2$. <b>5.</b> Le signe de $\sin\theta$ : celui de $\det(u, x, Ax)$ pour un $x$ simple non colinéaire à $u$.</p>
+
+<p class="ml">Exemple 5 : axe et angle</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$ (exemple 3 : $A\in SO(3)$).</p>
+<p><b>Étape 1 : Rappel.</b> Axe $= \ker(A - I)$, $\cos\theta = \frac{\operatorname{tr}A - 1}2$, signe de $\sin\theta$ par $\det(u, x, Ax)$.</p>
+<p><b>Étape 2 : L'axe.</b> $(3A - 3I)X = 0$ :</p>
+$$\left\{\begin{aligned}-x - y + 2z &= 0\\2x - y - z &= 0\end{aligned}\right.\ \Longrightarrow\ x = 2z - y,\ \ 4z - 3y - z = 0\ \Longrightarrow\ y = z = x.$$
+<p>L'axe est dirigé par $\cR{u = \frac1{\sqrt3}(1, 1, 1)}$.</p>
+<p><b>Étape 3 : Le cosinus.</b> $\operatorname{tr}A = \frac{2 + 2 + 2}3 = 2$, donc $\cos\cO\theta = \frac{2 - 1}2 = \frac12$, $\theta = \pm\frac\pi3$.</p>
+<p><b>Étape 4 : Le signe.</b> On prend $x = (1, -1, 0)$ : $Ax = \frac13(3, 0, -3) = (1, 0, -1)$. Au facteur positif $\frac1{\sqrt3}$ près :</p>
+$$\det\begin{pmatrix}1&1&1\\1&-1&0\\1&0&-1\end{pmatrix} = 1\cdot(1 - 0) - 1\cdot(-1 - 0) + 1\cdot(0 + 1) = 3 > 0.$$
+<p><b>Étape 5 : Conclusion.</b> $\sin\theta > 0$ : $\cG{A\ \text{est la rotation d'axe}\ \mathbb R(1, 1, 1)\ \text{(orienté par ce vecteur) et d'angle}\ \frac\pi3}$.</p>
+
+<h2 id="e-adj">8. L'adjoint</h2>
+<div class="sbox">$$E\ \text{euclidien},\ u\in\mathcal L(E):\ \exists!\,u^*,\ \forall x, y,\ \langle u(x), y\rangle = \langle x, u^*(y)\rangle.\qquad\operatorname{Mat}_{\text{BON}}(u^*) = \operatorname{Mat}_{\text{BON}}(u)^\top.$$
+$$(u\circ v)^* = v^*\circ u^*,\quad(u^*)^* = u,\quad\ker u^* = (\operatorname{Im}u)^\perp,\quad\operatorname{Im}u^* = (\ker u)^\perp,\quad F\ \text{stable par}\ u\Rightarrow F^\perp\ \text{stable par}\ u^*.$$
+$$u\in O(E)\iff u^*u = \operatorname{id}.$$</div>
+
+<h2 id="e-auto">9. Endomorphismes autoadjoints (symétriques)</h2>
+<div class="sbox">$$u\in\mathcal S(E)\iff\forall x, y,\ \langle u(x), y\rangle = \langle x, u(y)\rangle\iff\operatorname{Mat}_{\text{BON}}(u)\ \text{symétrique}.$$
+$$p\ \text{projecteur}:\ p\ \text{orthogonal}\iff p\ \text{autoadjoint}.\qquad s\ \text{symétrie}:\ s\ \text{orthogonale}\iff s\ \text{autoadjointe}.$$</div>
+<p class="ml piege">Piège</p>
+<p>« Matrice symétrique $\Rightarrow$ autoadjoint » n'est vrai que si la base est <b>orthonormée</b>.</p>
+
+<h2 id="e-spec">10. Le théorème spectral</h2>
+<div class="sbox">$$u\in\mathcal S(E)\ \Longrightarrow\ E = \overset\perp{\bigoplus}E_\lambda(u):\ u\ \text{est diagonalisable dans une BON}.$$
+$$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists\cV P\in O(n),\ \exists D\ \text{diagonale réelle},\ S = \cV PD\cV P^\top.$$</div>
+<p>Les sous-espaces propres sont <b>automatiquement orthogonaux</b> entre eux. Il suffit donc de trouver une BON <b>dans chaque</b> sous-espace propre (Gram-Schmidt si sa dimension est $\geq2$).</p>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Valeurs propres (polynôme caractéristique, ou trace et rang). <b>2.</b> Base de chaque sous-espace propre. <b>3.</b> Orthonormaliser dans chaque sous-espace propre. <b>4.</b> $P$ = les vecteurs en colonnes, $P^{-1} = P^\top$.</p>
+
+<p class="ml">Exemple 6 : une matrice $2\times2$</p>
+<p>Diagonaliser $S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$ dans une BON.</p>
+<p><b>Étape 1 : Rappel.</b> $S$ symétrique réelle : $S = PDP^\top$ avec $P\in O(2)$.</p>
+<p><b>Étape 2 : Valeurs propres.</b> $\chi_S = (X - 2)^2 - 1 = (X - 1)(X - 3)$ : $\cO{\lambda = 1}$ et $\cO{\lambda = 3}$.</p>
+<p><b>Étape 3 : Vecteurs propres.</b> $\lambda = 3$ : $-x + y = 0$, vecteur $(1, 1)$. $\lambda = 1$ : $x + y = 0$, vecteur $(1, -1)$. Ils sont bien orthogonaux.</p>
+<p><b>Étape 4 : On normalise.</b> $\frac1{\sqrt2}(1, 1)$ et $\frac1{\sqrt2}(1, -1)$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{S = \cV P\begin{pmatrix}3&0\\0&1\end{pmatrix}\cV P^\top,\qquad\cV P = \frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}}.$$
+
+<p class="ml">Exemple 7 : une valeur propre double</p>
+<p>Diagonaliser $J = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}$ dans une BON.</p>
+<p><b>Étape 1 : Rappel.</b> Sous-espaces propres orthogonaux ; Gram-Schmidt dans chacun.</p>
+<p><b>Étape 2 : Valeurs propres sans calcul.</b> $\operatorname{rg}J = 1$, donc $\cO0$ est valeur propre d'ordre $2$ ; la trace $3$ donne la dernière : $\cO3$.</p>
+<p><b>Étape 3 : $E_3$.</b> $J(1, 1, 1)^\top = 3(1, 1, 1)^\top$ : $E_3 = \operatorname{Vect}(1, 1, 1)$, vecteur $\frac1{\sqrt3}(1, 1, 1)$.</p>
+<p><b>Étape 4 : $E_0$</b> est le plan $x + y + z = 0$, base $v_1 = (1, -1, 0)$, $v_2 = (1, 0, -1)$. Gram-Schmidt : $e_1 = \frac1{\sqrt2}(1, -1, 0)$, $w_2 = v_2 - \frac12v_1 = \big(\frac12, \frac12, -1\big)$, $e_2 = \frac1{\sqrt6}(1, 1, -2)$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&-\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&0&-\frac2{\sqrt6}\end{pmatrix},\quad D = \operatorname{diag}(3, 0, 0)}.$$
+
+<h2 id="e-pos">11. Autoadjoints positifs, quotient de Rayleigh</h2>
+<div class="sbox">$$u\in\mathcal S^+(E)\iff\forall x,\ \langle u(x), x\rangle\geq0\iff\operatorname{Sp}(u)\subset\mathbb R_+.\qquad u\in\mathcal S^{++}(E)\iff\forall x\neq0,\ \langle u(x), x\rangle > 0\iff\operatorname{Sp}(u)\subset\mathbb R_+^*.$$
+$$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\lambda_{\min}\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_{\max}\|x\|^2.$$</div>
+
+<p class="ml">Exemple 8 : $A^\top A$ est positive</p>
+<p>Pour $A\in\mathcal M_n(\mathbb R)$, montrer que $A^\top A\in\mathcal S_n^+$, et $\in\mathcal S_n^{++}\iff A$ inversible.</p>
+<p><b>Étape 1 : Rappel.</b> $S\in\mathcal S_n^+\iff S$ symétrique et $X^\top SX\geq0$ pour tout $X$.</p>
+<p><b>Étape 2 : Symétrique.</b> $(A^\top A)^\top = A^\top(A^\top)^\top = A^\top A$.</p>
+<p><b>Étape 3 : Positive.</b> $X^\top A^\top AX = (AX)^\top(AX) = \|AX\|^2\geq0$.</p>
+<p><b>Étape 4 : Définie positive.</b> $\|AX\|^2 = 0\iff AX = 0$. Donc $X^\top A^\top AX > 0$ pour tout $X\neq0\iff\ker A = \{0\}\iff A$ inversible.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A^\top A\in\mathcal S_n^+,\ \text{et}\ A^\top A\in\mathcal S_n^{++}\iff A\in GL_n(\mathbb R)}$.</p>
+
+<p class="ml">Exemple 9 : l'encadrement de Rayleigh</p>
+<p><b>Étape 1 : Rappel.</b> Théorème spectral : une BON $(e_i)$ de vecteurs propres, $u(e_i) = \lambda_ie_i$.</p>
+<p><b>Étape 2 : On décompose</b> $x = \sum x_ie_i$, donc $u(x) = \sum\lambda_ix_ie_i$.</p>
+<p><b>Étape 3 : Le produit scalaire</b> (BON) : $\langle u(x), x\rangle = \sum\lambda_ix_i^2$.</p>
+<p><b>Étape 4 : On encadre.</b> $\lambda_{\min}\sum x_i^2\leq\sum\lambda_ix_i^2\leq\lambda_{\max}\sum x_i^2$, et $\sum x_i^2 = \|x\|^2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\lambda_{\min}\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_{\max}\|x\|^2}$, avec égalité pour un vecteur propre associé.</p>
+<p class="ml">Bonus : racine carrée d'une matrice positive <span class="hp">hors programme</span></p>
+<p>Si $S = PDP^\top\in\mathcal S_n^+$, alors $R = P\sqrt DP^\top$ est dans $\mathcal S_n^+$ et vérifie $R^2 = S$ (et c'est la seule). Classique en exercice, à redémontrer.</p>
+
+<h2 id="e-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $A$ est orthogonale »</b><span>Colonnes de norme $1$, deux à deux orthogonales ; ou $A^\top A = I$.</span></div>
+<div><b>« Nature de $A\in O(3)$ »</b><span>$\det$, axe $\ker(A - I)$, $\cos\theta = \frac{\operatorname{tr}A - 1}2$, signe par $\det(u, x, Ax)$.</span></div>
+<div><b>« Matrice de la réflexion par rapport à $H$ »</b><span>$I - \frac2{n^\top n}nn^\top$.</span></div>
+<div><b>« Matrice de la projection sur $D = \mathbb Ru$ »</b><span>$\frac{uu^\top}{u^\top u}$.</span></div>
+<div><b>$S$ symétrique réelle</b><span>Théorème spectral : $S = PDP^\top$, valeurs propres réelles.</span></div>
+<div><b>« Diagonaliser en BON »</b><span>Vecteurs propres, Gram-Schmidt dans chaque sous-espace propre.</span></div>
+<div><b>$\langle u(x), y\rangle = \langle x, u(y)\rangle$</b><span>$u$ autoadjoint : matrice symétrique en BON.</span></div>
+<div><b>« $\langle u(x), x\rangle\geq0$ »</b><span>$u\in\mathcal S^+$, valeurs propres $\geq0$.</span></div>
+<div><b>« $\|u(x)\| = \|x\|$ »</b><span>Isométrie : $u^*u = \operatorname{id}$, valeurs propres réelles $\pm1$.</span></div>
+<div><b>« $F$ stable par $u$ »</b><span>$F^\perp$ stable par $u^*$ (donc par $u$ si $u$ autoadjoint ou orthogonal).</span></div>
+<div><b>« Max de $\langle u(x), x\rangle$ sur la sphère »</b><span>Rayleigh : c'est $\lambda_{\max}$.</span></div>
+</div>
+
+<h2 id="e-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Dire « matrice symétrique donc autoadjoint » dans une base non orthonormée.</p>
+<p><b>2.</b> Prendre $P^{-1}$ au lieu de $P^\top$, ou oublier de normaliser les colonnes de $P$.</p>
+<p><b>3.</b> Oublier Gram-Schmidt dans un sous-espace propre de dimension $\geq2$.</p>
+<p><b>4.</b> Donner l'angle d'une rotation de $SO(3)$ par la trace seule : il manque le signe.</p>
+<p><b>5.</b> Croire qu'une matrice orthogonale est symétrique (vrai seulement pour les symétries).</p>
+<p><b>6.</b> Confondre $\det = -1$ (réflexion dans le plan) et rotation.</p>
+<p><b>7.</b> Diviser par $\|n\|$ au lieu de $\|n\|^2$ dans $p_H$ ou dans une réflexion.</p>
+</div>
+
+<h2 id="e-entrainement">S'entraîner</h2>
+<div data-mlab="spec2"></div>
+<div data-mlab="rot3"></div>
+<div data-mlab="quizeu"></div>
+
+<h2 id="e-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : valeurs propres réelles d'une isométrie</p>
+<p><b>Étape 1 : Rappel.</b> $u\in O(E)\iff\|u(x)\| = \|x\|$ pour tout $x$.</p>
+<p><b>Étape 2 : Un vecteur propre.</b> Soit $\lambda\in\mathbb R$ valeur propre, $x\neq0$ avec $u(x) = \lambda x$.</p>
+<p><b>Étape 3 : Les normes.</b> $\|x\| = \|u(x)\| = |\lambda|\,\|x\|$, et $\|x\|\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{|\lambda| = 1,\ \text{donc}\ \lambda = \pm1}$.</p>
+
+<p class="ml">Exercice 2 : projecteur orthogonal $\iff$ autoadjoint</p>
+<p><b>Étape 1 : Rappel.</b> $p$ orthogonal $\iff\ker p\perp\operatorname{Im}p$. Pour un projecteur, $x = p(x) + (x - p(x))$ avec $p(x)\in\operatorname{Im}p$ et $x - p(x)\in\ker p$.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> Si $\ker p\perp\operatorname{Im}p$ : $\langle p(x), y\rangle = \langle p(x), p(y) + (y - p(y))\rangle = \langle p(x), p(y)\rangle$, et de même $\langle x, p(y)\rangle = \langle p(x), p(y)\rangle$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> Si $p^* = p$ : pour $x\in\ker p$ et $y = p(z)\in\operatorname{Im}p$, $\langle x, y\rangle = \langle x, p(z)\rangle = \langle p(x), z\rangle = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{orthogonal}\iff p^* = p}$.</p>
+
+<p class="ml">Exercice 3 : $\sum|a_{ij}|\leq n\sqrt n$ pour $A\in O(n)$</p>
+<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathbb R^{n^2}$, et $\operatorname{tr}(A^\top A) = \sum a_{ij}^2$.</p>
+<p><b>Étape 2 : La somme des carrés.</b> $A^\top A = I_n$, donc $\sum_{i,j}a_{ij}^2 = \operatorname{tr}(I_n) = n$.</p>
+<p><b>Étape 3 : Cauchy-Schwarz</b> avec les $n^2$ nombres $|a_{ij}|$ et $n^2$ fois $1$ :</p>
+$$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{i,j}|a_{ij}|\leq n\sqrt n}$.</p>
+
+<h2 id="e-arbre">L'arbre des espaces euclidiens</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Un endomorphisme ou une matrice</span><ul>
+<li><div class="hr"><em>$A^\top A = I$ ?</em><span class="hq">Dimension, déterminant</span><ul>
+<li><div class="hr"><em>$n = 2$, $\det = 1$</em><a class="hl ok" href="#e-o2">rotation $R_\theta$</a></div></li>
+<li><div class="hr"><em>$n = 2$, $\det = -1$</em><a class="hl ok" href="#e-o2">réflexion, axe $\ker(A - I)$</a></div></li>
+<li><div class="hr"><em>$n = 3$, $\det = 1$</em><a class="hl" href="#e-o3">axe, $\cos\theta$ par la trace, signe</a></div></li>
+<li><div class="hr"><em>$n = 3$, $\det = -1$</em><a class="hl" href="#e-o3">étudier la rotation $-A$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$S^\top = S$ ?</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>diagonaliser</em><a class="hl ok" href="#e-spec">$S = PDP^\top$, $P\in O(n)$</a></div></li>
+<li><div class="hr"><em>le signe de $X^\top SX$</em><a class="hl" href="#e-pos">valeurs propres $\geq0$ ?</a></div></li>
+<li><div class="hr"><em>encadrer $\langle u(x), x\rangle$</em><a class="hl" href="#e-pos">Rayleigh</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>projection, symétrie</em><span class="hq">Sur quoi ?</span><ul>
+<li><div class="hr"><em>hyperplan</em><a class="hl" href="#e-hyp">$x - \frac{\langle x, n\rangle}{\|n\|^2}n$</a></div></li>
+<li><div class="hr"><em>réflexion</em><a class="hl" href="#e-sym">$I - \frac2{n^\top n}nn^\top$</a></div></li>
+<li><div class="hr"><em>orthogonal ?</em><a class="hl" href="#e-auto">autoadjoint $\iff$ orthogonal</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$\langle u(x), y\rangle$ à déplacer</em><a class="hl" href="#e-adj">adjoint : matrice transposée</a></div></li>
+<li><div class="hr"><em>conserve la norme</em><a class="hl end" href="#e-iso">isométrie : $u^*u = \operatorname{id}$</a></div></li>
+</ul></div></div>
 `
 };
