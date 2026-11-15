@@ -6152,7 +6152,7 @@ $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 <p><b>1.</b> On lit la phrase de gauche à droite et on <b>échange</b> chaque $\forall$ et $\exists$. <b>2.</b> On garde les domaines ($\forall x > 0$ devient $\exists x > 0$, on ne nie pas « $x > 0$ »). <b>3.</b> On nie seulement la propriété finale. Une implication se nie en « $P$ et non $Q$ », jamais en une autre implication.</p>
 
 <p class="ml">Exemple 1 : nier une phrase à trois quantificateurs</p>
-<p>Nier $\exists a > 0,\ \exists b > 0,\ \forall n\in\mathbb N,\ na \lt b$.</p>
+<p><b>Écrire la négation de $\exists a > 0,\ \exists b > 0,\ \forall n\in\mathbb N,\ na \lt b$, puis dire laquelle des deux phrases est vraie.</b></p>
 <p><b>Étape 1 : Rappel.</b> On échange $\forall$ et $\exists$, on garde les domaines, on nie la fin : $\operatorname{non}(na \lt b)$ s'écrit $na\geq b$.</p>
 <p><b>Étape 2 : Les quantificateurs, un par un.</b> $\exists a > 0$ devient $\forall a > 0$ ; $\exists b > 0$ devient $\forall b > 0$ ; $\forall n\in\mathbb N$ devient $\exists n\in\mathbb N$.</p>
 <p><b>Étape 3 : La fin.</b> $na \lt b$ devient $na\geq b$.</p>
@@ -6161,7 +6161,7 @@ $$\cG{\forall a > 0,\ \forall b > 0,\ \exists n\in\mathbb N,\ na\geq b}.$$
 <p>C'est la propriété d'Archimède : la négation est <b>vraie</b>, donc la phrase de départ est fausse.</p>
 
 <p class="ml">Exemple 2 : écrire « $f$ s'annule » et « $f$ est nulle »</p>
-<p>Pour $f\in\mathbb R^{\mathbb R}$, traduire avec des quantificateurs, puis nier.</p>
+<p>Soit $f\in\mathbb R^{\mathbb R}$. <b>Écrire « $f$ s'annule » et « $f$ est la fonction nulle » avec des quantificateurs, puis écrire leurs négations.</b></p>
 <p><b>Étape 1 : Rappel.</b> « s'annule » = <b>au moins un</b> zéro : $\exists$. « est nulle » = nulle <b>partout</b> : $\forall$.</p>
 <p><b>Étape 2 : Les traductions.</b> $f$ s'annule : $\exists x\in\mathbb R,\ f(x) = 0$. $f$ est nulle : $\forall x\in\mathbb R,\ f(x) = 0$.</p>
 <p><b>Étape 3 : Les négations.</b> $f$ ne s'annule pas : $\forall x\in\mathbb R,\ f(x)\neq0$. $f$ n'est pas nulle : $\exists x\in\mathbb R,\ f(x)\neq0$.</p>
@@ -6198,6 +6198,7 @@ $$\cO x\in\cB A\iff(x - 1)(x - 2)\leq0\iff1\leq x\leq2\iff\cO x\in[1, 2].$$
 <p><b>1.</b> On remplace chaque $\setminus$ par $\cap\,\overline{\phantom{A}}$. <b>2.</b> On applique De Morgan et la distributivité, comme un calcul. <b>3.</b> Si le calcul bloque : on revient aux éléments (« soit $x$ ») ou aux indicatrices (§6). <b>4.</b> Pour réfuter une égalité : un petit exemple dans $E = \{1, 2, 3\}$ suffit.</p>
 
 <p class="ml">Exemple 5 : $A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C)$</p>
+<p>Soient $A, B, C$ trois parties d'un ensemble $E$. <b>Montrer que $A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $X\setminus Y = X\cap\overline Y$, De Morgan, distributivité.</p>
 <p><b>Étape 2 : On enlève le $\setminus$.</b> $A\setminus(B\cap C) = A\cap\overline{B\cap C}$.</p>
 <p><b>Étape 3 : De Morgan.</b> $\overline{B\cap C} = \overline B\cup\overline C$, donc $A\setminus(B\cap C) = A\cap(\overline B\cup\overline C)$.</p>
@@ -6218,6 +6219,7 @@ $$(A_i)_{i\in I}\ \text{partition de}\ E\iff A_i\neq\varnothing,\quad A_i\cap A_
 <p>Le programme demande aussi des parties <b>non vides</b> dans une partition (le résumé du cours l'omet, mais c'est la définition officielle). $A$ et $\overline A$ forment une partition de $E$ si $A\neq\varnothing$ et $A\neq E$.</p>
 
 <p class="ml">Exemple 7 : écrire $\mathcal P(\{a, b, c\})$</p>
+<p><b>Écrire la liste de toutes les parties de $\{a, b, c\}$, c'est-à-dire $\mathcal P(\{a, b, c\})$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On range les parties par taille : $0$, $1$, $2$, puis $3$ éléments.</p>
 <p><b>Étape 2 : Les parties.</b> Taille $0$ : $\varnothing$. Taille $1$ : $\{a\}, \{b\}, \{c\}$. Taille $2$ : $\{a, b\}, \{a, c\}, \{b, c\}$. Taille $3$ : $\{a, b, c\}$.</p>
 <p><b>Étape 3 : On compte.</b> $1 + 3 + 3 + 1 = 8 = 2^3$ : chaque élément est dedans ou dehors, $2\times2\times2$ choix.</p>
@@ -6244,6 +6246,7 @@ $$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 
 <p><b>Étape 4 : Conclusion.</b> $1 - (1 - \mathbb 1_A - \mathbb 1_B + \mathbb 1_A\mathbb 1_B) = \cG{\mathbb 1_A + \mathbb 1_B - \mathbb 1_A\mathbb 1_B}$. Si $A\cap B = \varnothing$, $\mathbb 1_A\mathbb 1_B = \mathbb 1_\varnothing = 0$ et il reste $\mathbb 1_A + \mathbb 1_B$.</p>
 
 <p class="ml">Exemple 10 : l'indicatrice de $A\,\Delta\,B$ <span class="hp">hors programme</span></p>
+<p>Soient $A, B$ deux parties de $E$. <b>Exprimer l'indicatrice de $A\,\Delta\,B$ en fonction de $\mathbb 1_A$ et $\mathbb 1_B$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A\,\Delta\,B = (A\cup B)\setminus(A\cap B) = (A\cup B)\cap\overline{A\cap B}$.</p>
 <p><b>Étape 2 : Les deux morceaux.</b> $\mathbb 1_{A\cup B} = a + b - ab$ et $\mathbb 1_{\overline{A\cap B}} = 1 - ab$, en notant $a = \mathbb 1_A$, $b = \mathbb 1_B$.</p>
 <p><b>Étape 3 : Le produit.</b> $(a + b - ab)(1 - ab) = a + b - ab - a^2b - ab^2 + a^2b^2$. Avec $a^2 = a$ et $b^2 = b$ : $a^2b = ab$, $ab^2 = ab$, $a^2b^2 = ab$, donc $= a + b - ab - ab - ab + ab = a + b - 2ab$.</p>
@@ -6255,7 +6258,7 @@ $$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 
 <p>En général $\cR{g\circ f\neq f\circ g}$ : la composition n'est pas commutative. Pour $f\in E^E$, $f^n = f\circ\dots\circ f$ ($n$ fois) et $f^0 = \operatorname{id}_E$.</p>
 
 <p class="ml">Exemple 11 : $g\circ f$ et $f\circ g$</p>
-<p>$f(x) = x^2$ et $g(x) = x + 1$ sur $\mathbb R$.</p>
+<p>$f(x) = x^2$ et $g(x) = x + 1$ sur $\mathbb R$. <b>Calculer $g\circ f$ et $f\circ g$, et les comparer.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(g\circ f)(x) = g(f(x))$ : on applique $f$ en premier.</p>
 <p><b>Étape 2 : $g\circ f$.</b> $f(x) = x^2$, puis $g(x^2) = x^2 + 1$.</p>
 <p><b>Étape 3 : $f\circ g$.</b> $g(x) = x + 1$, puis $f(x + 1) = (x + 1)^2 = x^2 + 2x + 1$.</p>
@@ -6279,6 +6282,7 @@ $$f^{-1}(B\cup B') = f^{-1}(B)\cup f^{-1}(B'),\quad f^{-1}(B\cap B') = f^{-1}(B)
 <p><b>Étape 5 : Conclusion.</b> $\cG{f([-1, 2]) = [0, 4],\quad f^{-1}([1, 4]) = [-2, -1]\cup[1, 2],\quad f^{-1}([-3, -1]) = \varnothing}$. Ici $f^{-1}$ est une notation : $f$ n'est pas bijective.</p>
 
 <p class="ml">Exemple 13 : $f(A\cap A')$ peut être plus petit que $f(A)\cap f(A')$</p>
+<p><b>Trouver une application $f$ et deux parties $A, A'$ telles que $f(A\cap A')\neq f(A)\cap f(A')$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A\cap A'\subset A$ donne $f(A\cap A')\subset f(A)$, de même pour $A'$ : on a toujours $f(A\cap A')\subset f(A)\cap f(A')$.</p>
 <p><b>Étape 2 : Le contre-exemple.</b> $f(x) = x^2$, $\cB A = [-1, 0]$, $\cB{A'} = [0, 1]$.</p>
 <p><b>Étape 3 : À gauche.</b> $A\cap A' = \{0\}$ (le seul réel à la fois $\leq0$ et $\geq0$), donc $f(A\cap A') = \{0^2\} = \{0\}$.</p>
@@ -6286,6 +6290,7 @@ $$f^{-1}(B\cup B') = f^{-1}(B)\cup f^{-1}(B'),\quad f^{-1}(B\cap B') = f^{-1}(B)
 <p><b>Étape 5 : Conclusion.</b> $\cG{\{0\}\subsetneq[0, 1]}$ : par exemple $\cR1 = f(-1) = f(1)$ est dans les deux images, mais vient de deux antécédents différents. C'est le défaut d'injectivité qui casse l'égalité (exercice 3).</p>
 
 <p class="ml">Exemple 14 : $f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B')$</p>
+<p>Soit $f:E\to F$ et $B, B'\subset F$. <b>Montrer que $f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B')$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x\in f^{-1}(B)\iff f(x)\in B$, et on raisonne par équivalences.</p>
 <p><b>Étape 2 : Soit $\cO x\in E$.</b> $x\in f^{-1}(B\cap B')\iff f(x)\in B\cap B'\iff(f(x)\in B\ \text{et}\ f(x)\in B')$.</p>
 <p><b>Étape 3 : On retraduit.</b> $f(x)\in B\iff x\in f^{-1}(B)$ et $f(x)\in B'\iff x\in f^{-1}(B')$, donc : $\iff x\in f^{-1}(B)\cap f^{-1}(B')$.</p>
@@ -6305,7 +6310,7 @@ $$f\ \text{non injective}\iff\exists\cR x, \cR{x'},\ x\neq x'\ \text{et}\ f(x) =
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est injective}}$.</p>
 
 <p class="ml">Exemple 16 : réfuter l'injectivité</p>
-<p>$g(x) = x^2 - 2x$ sur $\mathbb R$ ; puis sur $[1, +\infty[$.</p>
+<p>$g(x) = x^2 - 2x$ sur $\mathbb R$ ; puis sur $[1, +\infty[$. <b>Cette application est-elle injective sur $\mathbb R$ ? sur $[1, +\infty[$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Deux points distincts de même image suffisent.</p>
 <p><b>Étape 2 : Sur $\mathbb R$.</b> $g(x) = x(x - 2)$ s'annule en $\cR0$ et en $\cR2$ : $g(0) = 0 - 0 = 0$ et $g(2) = 4 - 4 = 0$, avec $0\neq2$. Pas injective.</p>
 <p><b>Étape 3 : Sur $[1, +\infty[$.</b> $g'(x) = 2x - 2 = 2(x - 1) > 0$ pour $x > 1$ : $g$ est strictement croissante sur $[1, +\infty[$, donc injective.</p>
@@ -6326,7 +6331,7 @@ $$f\ \text{non surjective}\iff\exists\cR y\in F,\ \forall x\in E,\ f(x)\neq y.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est surjective}}$, et même bijective : la solution est unique, $f^{-1}(y) = \frac{y + 1}{y - 2}$. Contrôle : $f(2) = \frac{4 + 1}{2 - 1} = 5$ et $\frac{5 + 1}{5 - 2} = \frac63 = 2$.</p>
 
 <p class="ml">Exemple 18 : surjective ou non selon l'arrivée</p>
-<p>$f(x) = x^2$ de $\mathbb R$ dans $\mathbb R$, puis de $\mathbb R$ dans $\mathbb R_+$.</p>
+<p>$f(x) = x^2$ de $\mathbb R$ dans $\mathbb R$, puis de $\mathbb R$ dans $\mathbb R_+$. <b>Cette application est-elle surjective dans chaque cas ?</b></p>
 <p><b>Étape 1 : Rappel.</b> $f$ surjective $\iff f(E) = F$.</p>
 <p><b>Étape 2 : L'image.</b> $x^2\geq0$, et tout $y\geq0$ s'écrit $y = (\sqrt y)^2$ : $f(\mathbb R) = \mathbb R_+$.</p>
 <p><b>Étape 3 : Arrivée $\mathbb R$.</b> $\cR{-1}$ n'a pas d'antécédent ($x^2 = -1$ est impossible) : pas surjective.</p>
@@ -6339,13 +6344,14 @@ $$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} =
 <p><b>1.</b> On résout $f(x) = y$ : <b>une seule solution</b> dans le départ pour chaque $y$ donne la bijectivité <b>et</b> la formule de $f^{-1}$. <b>2.</b> Ou on devine $g$ et on vérifie $g\circ f = \operatorname{id}$ <b>et</b> $f\circ g = \operatorname{id}$ (les deux !). <b>3.</b> Si $f\circ f = \operatorname{id}_E$ (involution), $f$ est bijective et $f^{-1} = f$.</p>
 
 <p class="ml">Exemple 19 : la réciproque de $(x, y)\mapsto(x + y, x - y)$</p>
+<p>Soit $f:\mathbb R^2\to\mathbb R^2$, $f(x, y) = (x + y, x - y)$. <b>Montrer que $f$ est bijective et déterminer $f^{-1}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On résout $f(x, y) = (a, b)$ d'inconnue $(x, y)$.</p>
 <p><b>Étape 2 : Le système.</b> $x + y = a$ et $x - y = b$. En additionnant : $2x = a + b$, $x = \frac{a + b}2$. En soustrayant : $2y = a - b$, $y = \frac{a - b}2$.</p>
 <p><b>Étape 3 : Une seule solution</b>, pour tout $(a, b)\in\mathbb R^2$ : $f$ est bijective.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f^{-1}(a, b) = \Big(\frac{a + b}2, \frac{a - b}2\Big)}$. Contrôle : $f(f^{-1}(a, b)) = \big(\frac{a + b + a - b}2, \frac{a + b - a + b}2\big) = \big(\frac{2a}2, \frac{2b}2\big) = (a, b)$.</p>
 
 <p class="ml">Exemple 20 : une involution de $\mathcal P(E)$</p>
-<p>$\varphi:\mathcal P(E)\to\mathcal P(E)$, $\varphi(A) = \overline A$.</p>
+<p>$\varphi:\mathcal P(E)\to\mathcal P(E)$, $\varphi(A) = \overline A$. <b>Montrer que $\varphi$ est bijective et déterminer sa réciproque.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\varphi\circ\varphi = \operatorname{id}$ donne bijective, de réciproque $\varphi$.</p>
 <p><b>Étape 2 : On compose.</b> $\varphi(\varphi(A)) = \overline{\overline A} = A$ pour toute partie $A$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\varphi\ \text{est bijective et}\ \varphi^{-1} = \varphi}$. Même chose pour $x\mapsto\frac1x$ sur $\mathbb R^*$ : $\frac1{1/x} = x$.</p>
@@ -6356,12 +6362,14 @@ $$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} =
 <p>Moyen mnémotechnique : l'injectivité se lit sur l'application qu'on applique en <b>premier</b> ($f$), la surjectivité sur celle qu'on applique en <b>dernier</b> ($g$).</p>
 
 <p class="ml">Exemple 21 : $g\circ f$ injective entraîne $f$ injective</p>
+<p>Soient $f:E\to F$ et $g:F\to G$ telles que $g\circ f$ soit injective. <b>Montrer que $f$ est injective.</b></p>
 <p><b>Étape 1 : Rappel.</b> On part de $f(x) = f(x')$ et on vise $x = x'$.</p>
 <p><b>Étape 2 : Soient $\cO x, \cO{x'}$ avec $f(x) = f(x')$.</b> On applique $g$ aux deux membres : $g(f(x)) = g(f(x'))$, c'est-à-dire $(g\circ f)(x) = (g\circ f)(x')$.</p>
 <p><b>Étape 3 : On utilise l'hypothèse.</b> $g\circ f$ est injective, donc $x = x'$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est injective}}$. Mais $g$ ne l'est pas forcément : $f:\{0\}\to\mathbb R$, $f(0) = 0$, et $g(x) = x^2$ ; $g\circ f$ est injective (départ à un élément), $g$ non ($g(\cR{-1}) = g(\cR1)$).</p>
 
 <p class="ml">Exemple 22 : $g\circ f$ surjective entraîne $g$ surjective</p>
+<p>Soient $f:E\to F$ et $g:F\to G$ telles que $g\circ f$ soit surjective. <b>Montrer que $g$ est surjective.</b></p>
 <p><b>Étape 1 : Rappel.</b> On fixe $z\in G$ et on lui cherche un antécédent par $g$.</p>
 <p><b>Étape 2 : Soit $\cV z\in G$.</b> $g\circ f$ est surjective : il existe $x\in E$ avec $g(f(x)) = z$.</p>
 <p><b>Étape 3 : L'antécédent.</b> On pose $y = f(x)\in F$ : alors $g(y) = z$.</p>
@@ -6372,6 +6380,7 @@ $$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} =
 <p>Restreindre le départ peut rendre <b>injective</b> ; réduire l'arrivée à $f(E)$ rend <b>surjective</b>. C'est ainsi qu'on fabrique $\sqrt{\phantom x}$, $\arcsin$, $\arccos$, $\arctan$.</p>
 
 <p class="ml">Exemple 23 : fabriquer une bijection à partir de $\sin$</p>
+<p><b>Construire une bijection à partir de $\sin$ : choisir un ensemble de départ et un ensemble d'arrivée pour que la restriction de $\sin$ soit bijective.</b></p>
 <p><b>Étape 1 : Rappel.</b> Restreindre le départ pour l'injectivité, ajuster l'arrivée pour la surjectivité.</p>
 <p><b>Étape 2 : Injectivité.</b> $\sin' = \cos > 0$ sur $\big]-\frac\pi2, \frac\pi2\big[$ : $\sin$ est strictement croissante sur $\big[-\frac\pi2, \frac\pi2\big]$, donc injective.</p>
 <p><b>Étape 3 : L'image.</b> $\sin$ est continue et croît de $\sin\big(-\frac\pi2\big) = -1$ à $\sin\frac\pi2 = 1$ : l'image est $[-1, 1]$ (valeurs intermédiaires).</p>
@@ -6384,7 +6393,7 @@ $$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitiv
 <p>On vérifie les trois propriétés <b>une par une</b>, chacune avec « soient $x, y, z$ » et la définition de $\mathcal R$ recopiée. Pour réfuter une propriété : un contre-exemple chiffré. « Antisymétrique » n'est <b>pas</b> le contraire de « symétrique » : l'égalité est les deux à la fois.</p>
 
 <p class="ml">Exemple 24 : la relation « même parité »</p>
-<p>Sur $\mathbb Z$ : $x\,\mathcal R\,y\iff x - y$ est pair.</p>
+<p>Sur $\mathbb Z$ : $x\,\mathcal R\,y\iff x - y$ est pair. <b>Montrer que $\mathcal R$ est une relation d'équivalence et déterminer ses classes.</b></p>
 <p><b>Étape 1 : Rappel.</b> Réflexive, symétrique, transitive.</p>
 <p><b>Étape 2 : Réflexive.</b> $x - x = 0 = 2\times0$ est pair.</p>
 <p><b>Étape 3 : Symétrique.</b> Si $x - y = 2k$, alors $y - x = -2k = 2\times(-k)$, pair.</p>
@@ -6392,7 +6401,7 @@ $$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitiv
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal R\ \text{est une relation d'équivalence}}$ : c'est la congruence modulo $2$.</p>
 
 <p class="ml">Exemple 25 : la divisibilité sur $\mathbb N^*$</p>
-<p>$p\,\mathcal R\,q\iff p\mid q$ ($\exists k\in\mathbb N^*,\ q = kp$).</p>
+<p>$p\,\mathcal R\,q\iff p\mid q$ ($\exists k\in\mathbb N^*,\ q = kp$). <b>Montrer que $\mathcal R$ est une relation d'ordre. Est-elle totale ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Réflexive, antisymétrique, transitive : ordre.</p>
 <p><b>Étape 2 : Réflexive.</b> $p = 1\times p$.</p>
 <p><b>Étape 3 : Antisymétrique.</b> Si $q = kp$ et $p = k'q$, alors $p = k'kp$, donc $k'k = 1$ (on divise par $p\neq0$). Deux entiers $\geq1$ de produit $1$ valent $1$ : $k = 1$ et $q = p$.</p>
@@ -6407,12 +6416,14 @@ $$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitiv
 <p><b>1.</b> Pour décrire $\overline a$ : on <b>résout</b> $x\,\mathcal R\,a$ d'inconnue $x$. <b>2.</b> On choisit un <b>représentant</b> simple par classe. <b>3.</b> Relation du type $x\,\mathcal R\,y\iff f(x) = f(y)$ : c'est toujours une équivalence, et les classes sont les $f^{-1}(\{c\})$, $c\in f(E)$.</p>
 
 <p class="ml">Exemple 26 : $x\,\mathcal R\,y\iff\cos x = \cos y$</p>
+<p>Sur $\mathbb R$, on pose $x\,\mathcal R\,y\iff\cos x = \cos y$. <b>Montrer que $\mathcal R$ est une relation d'équivalence et déterminer la classe d'un réel $a$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Relation « même image » : équivalence ; la classe de $a$ est $\{x,\ \cos x = \cos a\}$.</p>
 <p><b>Étape 2 : Équivalence.</b> $\cos x = \cos x$ ; si $\cos x = \cos y$ alors $\cos y = \cos x$ ; si $\cos x = \cos y$ et $\cos y = \cos z$ alors $\cos x = \cos z$ : ce sont les propriétés de l'égalité.</p>
 <p><b>Étape 3 : On résout</b> $\cos x = \cos a\iff x\equiv a\ [2\pi]$ ou $x\equiv-a\ [2\pi]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\overline a = \{a + 2k\pi,\ k\in\mathbb Z\}\cup\{-a + 2k\pi,\ k\in\mathbb Z\}}$. Exemple : $\overline0 = 2\pi\mathbb Z$ (car $a = -a = 0$), et chaque classe a un unique représentant dans $[0, \pi]$.</p>
 
 <p class="ml">Exemple 27 : $x\,\mathcal R\,y\iff x - y\in\mathbb Z$ sur $\mathbb R$</p>
+<p>Sur $\mathbb R$, on pose $x\,\mathcal R\,y\iff x - y\in\mathbb Z$. <b>Montrer que $\mathcal R$ est une relation d'équivalence et déterminer la classe d'un réel $a$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On vérifie l'équivalence, puis on résout $x\,\mathcal R\,a$.</p>
 <p><b>Étape 2 : Équivalence.</b> $x - x = 0\in\mathbb Z$ ; $y - x = -(x - y)\in\mathbb Z$ ; $x - z = (x - y) + (y - z)$ est une somme d'entiers.</p>
 <p><b>Étape 3 : La classe.</b> $x\,\mathcal R\,a\iff x - a = k\in\mathbb Z\iff x = a + k$ : $\overline a = a + \mathbb Z$.</p>
@@ -6425,7 +6436,7 @@ $$\text{Ordres usuels}:\ \leq\ \text{sur}\ \mathbb R\ \text{(total)},\quad\subse
 <p>Une relation d'ordre se note souvent $\preccurlyeq$ ou $\leq$ : ce symbole ne veut pas forcément dire l'ordre usuel des réels.</p>
 
 <p class="ml">Exemple 28 : l'ordre produit sur $\mathbb R^2$</p>
-<p>$(x, y)\preccurlyeq(x', y')\iff x\leq x'$ et $y\leq y'$.</p>
+<p>$(x, y)\preccurlyeq(x', y')\iff x\leq x'$ et $y\leq y'$. <b>Montrer que $\preccurlyeq$ est une relation d'ordre sur $\mathbb R^2$. Est-elle totale ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Réflexive, antisymétrique, transitive, puis total ou partiel.</p>
 <p><b>Étape 2 : Réflexive.</b> $x\leq x$ et $y\leq y$.</p>
 <p><b>Étape 3 : Antisymétrique.</b> $x\leq x'$ et $x'\leq x$ donnent $x = x'$ ; de même $y = y'$ ; donc $(x, y) = (x', y')$.</p>
@@ -8851,6 +8862,7 @@ $$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = \underbrace{x_1^2 + 2x_1x_2 + x_2^2
 <p>Pour majorer une somme ou une intégrale de produits : <b>choisir l'espace et les deux vecteurs</b> $x$, $y$ pour que $\langle x, y\rangle$ soit ce qu'on veut majorer. Le vecteur constant $(1, \dots, 1)$ ou la fonction $1$ sont souvent le bon choix.</p>
 
 <p class="ml">Exemple 3 : $\big(\sum x_k\big)^2\leq n\sum x_k^2$</p>
+<p>Soient $x_1, \dots, x_n$ des réels. <b>Montrer que $\big(\sum_{k=1}^nx_k\big)^2\leq n\sum_{k=1}^nx_k^2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\langle x, y\rangle^2\leq\|x\|^2\|y\|^2$ dans $\mathbb R^n$.</p>
 <p><b>Étape 2 : Le choix.</b> $x = (x_1, \dots, x_n)$ et $y = (1, \dots, 1)$. On calcule les deux morceaux de Cauchy-Schwarz :</p>
 $$\cO{\langle x, y\rangle} = x_1\times1 + x_2\times1 + \dots + x_n\times1 = \cO{\sum_{k=1}^nx_k},\qquad\|y\|^2 = \underbrace{1^2 + 1^2 + \dots + 1^2}_{n\ \text{termes}} = n,\qquad\|x\|^2 = \sum_{k=1}^nx_k^2.$$
@@ -8859,7 +8871,7 @@ $$\Big(\sum_{k=1}^nx_k\Big)^2\leq\Big(\sum_{k=1}^nx_k^2\Big)\times n.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\big(\sum x_k\big)^2\leq n\sum x_k^2}$, avec égalité si et seulement si tous les $x_k$ sont égaux.</p>
 
 <p class="ml">Exemple 4 : $\int f\cdot\int\frac1f\geq(b - a)^2$</p>
-<p>$f$ continue et $> 0$ sur $[a, b]$.</p>
+<p>$f$ continue et $> 0$ sur $[a, b]$. <b>Montrer que $\int_a^bf\times\int_a^b\frac1f\geq(b - a)^2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathcal C([a, b])$ : $\big(\int gh\big)^2\leq\int g^2\int h^2$.</p>
 <p><b>Étape 2 : Le choix.</b> $g = \sqrt f$ et $h = \frac1{\sqrt f}$ (continues car $f > 0$). On calcule ce qui apparaît dans Cauchy-Schwarz : $gh = \sqrt f\times\frac1{\sqrt f} = 1$, $g^2 = (\sqrt f)^2 = f$, $h^2 = \big(\frac1{\sqrt f}\big)^2 = \frac1f$.</p>
 <p><b>Étape 3 : On applique.</b> On remplace : $\big(\int_a^bgh\big)^2 = \big(\int_a^b1\,dt\big)^2 = (b - a)^2$, $\int g^2 = \int_a^bf$, $\int h^2 = \int_a^b\frac1f$, donc $(b - a)^2\leq\int_a^bf\cdot\int_a^b\frac1f$.</p>
@@ -8927,7 +8939,7 @@ $$\text{Droite}\ D = \operatorname{Vect}(u):\ p_D(x) = \frac{\langle x, u\rangle
 <p><b>1.</b> Avec une BON de $F$ (Gram-Schmidt d'abord). <b>2.</b> Sans BON : écrire $p_F(x) = \sum\lambda_iv_i$ dans une base quelconque de $F$, et écrire $\langle x - p_F(x), v_j\rangle = 0$ pour tout $j$ : un <b>système</b> en $\lambda_i$.</p>
 
 <p class="ml">Exemple 9 : projeter sur un plan de $\mathbb R^3$</p>
-<p>Projeté de $x = (1, 2, 3)$ sur $P:\ x + y + z = 0$.</p>
+<p><b>Calculer le projeté orthogonal de $x = (1, 2, 3)$ sur le plan $P:\ x + y + z = 0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $H = n^\perp$ : $p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$.</p>
 <p><b>Étape 2 : Le vecteur normal.</b> On lit les coefficients de l'équation $\mathbf1\cdot x + \mathbf1\cdot y + \mathbf1\cdot z = 0$ : avec $n = (1, 1, 1)$, on a $\langle(x, y, z), n\rangle = x\times1 + y\times1 + z\times1 = x + y + z$. L'équation de $P$ dit donc exactement $\langle(x, y, z), n\rangle = 0$, c'est-à-dire $P = n^\perp$. Et :</p>
 $$\|n\|^2 = 1^2 + 1^2 + 1^2 = 1 + 1 + 1 = 3.$$
@@ -8944,6 +8956,7 @@ $$p_P(x) = (1, 2, 3) - (2, 2, 2) = (1 - 2,\ 2 - 2,\ 3 - 2) = (-1, 0, 1).$$
 <p>Un « $\inf_{a, b}\int(\dots - a\dots - b\dots)^2$ » ou « $\min\sum(\dots)^2$ » est <b>une distance au carré</b>. <b>1.</b> Trouver l'espace, le produit scalaire, le vecteur $x$ et le sous-espace $F$. <b>2.</b> Calculer $p_F(x)$ avec les conditions d'orthogonalité. <b>3.</b> $d^2 = \langle x - p_F(x), x\rangle$ (car $x - p_F(x)\perp p_F(x)$).</p>
 
 <p class="ml">Exemple 10 : $\inf_{a, b}\int_0^1(t^2 - at - b)^2\,dt$</p>
+<p><b>Calculer $\inf_{(a, b)\in\mathbb R^2}\int_0^1(t^2 - at - b)^2\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> C'est $d(x, F)^2$ avec $x = t^2$, $F = \mathbb R_1[t] = \operatorname{Vect}(1, t)$, $\langle f, g\rangle = \int_0^1fg$. Le projeté $at + b$ vérifie $x - p\perp1$ et $x - p\perp t$.</p>
 <p><b>Étape 2 : Les intégrales utiles.</b> $\int_0^1t^k\,dt = \Big[\frac{t^{k+1}}{k + 1}\Big]_0^1 = \frac1{k + 1}$, donc $\int_0^11 = 1$, $\int_0^1t = \frac12$, $\int_0^1t^2 = \frac13$, $\int_0^1t^3 = \frac14$, $\int_0^1t^4 = \frac15$.</p>
 <p><b>Étape 3 : Les deux conditions.</b> Par linéarité, $\langle t^2 - at - b, 1\rangle = \langle t^2, 1\rangle - a\langle t, 1\rangle - b\langle1, 1\rangle = \int t^2 - a\int t - b\int1$, et de même avec $t$ (on intègre $t^3$, $t^2$, $t$) :</p>
@@ -9007,7 +9020,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 4 : Conclusion.</b> $(x + y + z)^2 = \varphi(u, v)^2\leq\varphi(u, u)\varphi(v, v)\leq1\times\frac{11}6$ : $\cG{(x + y + z)^2\leq\frac{11}6}$.</p>
 
 <p class="ml">Exemple 15 : $\operatorname{tr}A\leq\sqrt n\sqrt{\operatorname{tr}({}^tAA)}$ et $\|AB\|\leq\|A\|\,\|B\|$</p>
-<p>Sur $\mathcal M_n(\mathbb R)$, $\langle A, B\rangle = \operatorname{tr}({}^tAB) = \sum a_{ij}b_{ij}$.</p>
+<p>Sur $\mathcal M_n(\mathbb R)$, $\langle A, B\rangle = \operatorname{tr}({}^tAB) = \sum a_{ij}b_{ij}$. <b>Montrer que $\operatorname{tr}A\leq\sqrt n\sqrt{\operatorname{tr}({}^tAA)}$, et que $\|AB\|\leq\|A\|\,\|B\|$ pour la norme associée.</b></p>
 <p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz pour ce produit scalaire et dans $\mathbb R^n$.</p>
 <p><b>Étape 2 : La trace.</b> $\langle I_n, A\rangle = \operatorname{tr}A$ et $\|I_n\| = \sqrt{\operatorname{tr}I_n} = \sqrt n$ : $|\operatorname{tr}A|\leq\sqrt n\,\|A\|$, avec égalité ssi $A = \lambda I_n$ (et $\operatorname{tr}A\geq0$ pour l'inégalité sans valeur absolue).</p>
 <p><b>Étape 3 : Le produit.</b> $c_{ij} = \sum_ka_{ik}b_{kj}$, Cauchy-Schwarz dans $\mathbb R^n$ : $c_{ij}^2\leq\Big(\sum_ka_{ik}^2\Big)\Big(\sum_kb_{kj}^2\Big)$.</p>
@@ -9015,6 +9028,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{tr}A\leq\sqrt n\|A\|,\quad\|AB\|\leq\|A\|\,\|B\|}$.</p>
 
 <p class="ml">Exemple 16 : $u(0) = 0$ et $\|u(x) - u(y)\| = \|x - y\|$ entraîne $u$ linéaire</p>
+<p>Soit $u:E\to E$ telle que $u(0) = 0$ et $\|u(x) - u(y)\| = \|x - y\|$ pour tous $x, y$. <b>Montrer que $u$ est linéaire.</b></p>
 <p><b>Étape 1 : Rappel.</b> Polarisation, puis $\|v\|^2 = 0\Rightarrow v = 0$.</p>
 <p><b>Étape 2 : Les normes.</b> $y = 0$ : $\|u(x)\| = \|x\|$.</p>
 <p><b>Étape 3 : Les produits scalaires.</b> $\langle u(x), u(y)\rangle = -\frac12\big(\|u(x) - u(y)\|^2 - \|u(x)\|^2 - \|u(y)\|^2\big) = -\frac12\big(\|x - y\|^2 - \|x\|^2 - \|y\|^2\big) = \langle x, y\rangle$.</p>
@@ -9030,11 +9044,13 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 5 : Conclusion.</b> $\cG{\big|\|x\|^2 - \|y\|^2\big|\leq\|x + y\|\,\|x - y\|\leq\|x\|^2 + \|y\|^2}$.</p>
 
 <p class="ml">Exemple 18 : $\langle f(x), y\rangle = \langle x, g(y)\rangle$ entraîne $f$ linéaire</p>
+<p>Soient $f, g:E\to E$ telles que $\langle f(x), y\rangle = \langle x, g(y)\rangle$ pour tous $x, y$. <b>Montrer que $f$ est linéaire.</b></p>
 <p><b>Étape 1 : Rappel.</b> $v = 0\iff\langle v, z\rangle = 0$ pour tout $z$.</p>
 <p><b>Étape 2 : On calcule.</b> Pour tout $z$ : $\langle f(\lambda x + x') - \lambda f(x) - f(x'), z\rangle = \langle\lambda x + x', g(z)\rangle - \lambda\langle x, g(z)\rangle - \langle x', g(z)\rangle = 0$ (bilinéarité).</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f(\lambda x + x') = \lambda f(x) + f(x')}$ ; par symétrie $g$ est linéaire aussi.</p>
 
 <p class="ml">Exemple 19 : $\ker A = \ker{}^tAA$, puis $\operatorname{Im}{}^tA = \operatorname{Im}{}^tAA$</p>
+<p>Soit $A\in\mathcal M_{n,p}(\mathbb R)$. <b>Montrer que $\ker A = \ker({}^tAA)$, puis que $\operatorname{Im}{}^tA = \operatorname{Im}({}^tAA)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\,{}^tXX = \|X\|^2$ dans $\mathbb R^n$ ; théorème du rang.</p>
 <p><b>Étape 2 : $\ker A\subset\ker{}^tAA$.</b> $AX = 0\Rightarrow{}^tAAX = 0$.</p>
 <p><b>Étape 3 : L'autre inclusion.</b> $\,{}^tAAX = 0\Rightarrow{}^tX{}^tAAX = 0$, soit $\,{}^t(AX)(AX) = \|AX\|^2 = 0$, donc $AX = 0$.</p>
@@ -9058,20 +9074,21 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 4 : Conclusion.</b> $\cG{H^\perp = \{0\}}$, donc $(H^\perp)^\perp = E\neq H$ : en dimension infinie, $H\oplus H^\perp\neq E$.</p>
 
 <p class="ml">Exemple 21 : deux supplémentaires orthogonaux de $\mathcal C^2$</p>
-<p>$E = \mathcal C^2([0, 1])$, $\varphi(f, g) = \int_0^1(fg + f'g')$, $F = \{f(0) = f(1) = 0\}$, $G = \{g'' = g\}$.</p>
+<p>$E = \mathcal C^2([0, 1])$, $\varphi(f, g) = \int_0^1(fg + f'g')$, $F = \{f(0) = f(1) = 0\}$, $G = \{g'' = g\}$. <b>Montrer que $\varphi$ est un produit scalaire et que $F$ et $G$ sont supplémentaires orthogonaux.</b></p>
 <p><b>Étape 1 : Rappel.</b> $F\perp G$ et $E = F + G$.</p>
 <p><b>Étape 2 : Orthogonaux.</b> $g'' = g$ : $\varphi(f, g) = \int_0^1(fg'' + f'g') = \int_0^1(fg')' = f(1)g'(1) - f(0)g'(0) = 0$.</p>
 <p><b>Étape 3 : La somme.</b> $g = \lambda\operatorname{ch} + \mu\operatorname{sh}$ (solutions de $g'' = g$). On veut $h - g\in F$ : $g(0) = h(0)$ donne $\lambda = h(0)$ ; $g(1) = h(1)$ donne $\mu = \frac{h(1) - h(0)\operatorname{ch}1}{\operatorname{sh}1}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $h = (h - g) + g$ : $\cG{E = F\overset\perp\oplus G}$.</p>
 
 <p class="ml">Exemple 22 : $\mathcal S_n\perp\mathcal A_n$ et $(\ker A)^\perp = \operatorname{Im}{}^tA$</p>
+<p>Sur $\mathcal M_n(\mathbb R)$ muni de $\langle A, B\rangle = \operatorname{tr}({}^tAB)$, <b>montrer que $\mathcal S_n^\perp = \mathcal A_n$, puis que $(\ker A)^\perp = \operatorname{Im}{}^tA$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une inclusion et les dimensions.</p>
 <p><b>Étape 2 : $\mathcal S_n\perp\mathcal A_n$.</b> $\langle S, A\rangle = \operatorname{tr}({}^tSA) = \operatorname{tr}(SA)$ et aussi $= \operatorname{tr}({}^t(SA)) = \operatorname{tr}({}^tA\,{}^tS) = -\operatorname{tr}(AS) = -\operatorname{tr}(SA)$ : donc $0$. Avec $\mathcal M_n = \mathcal S_n\oplus\mathcal A_n$ : supplémentaires orthogonaux.</p>
 <p><b>Étape 3 : $\operatorname{Im}{}^tA\subset(\ker A)^\perp$.</b> $Y = {}^tAX$, $Z\in\ker A$ : $\langle Y, Z\rangle = {}^tX AZ = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\dim\operatorname{Im}{}^tA = \operatorname{rg}A = n - \dim\ker A = \dim(\ker A)^\perp$ : $\cG{(\ker A)^\perp = \operatorname{Im}{}^tA}$.</p>
 
 <p class="ml">Exemple 23 : l'orthogonal par une base</p>
-<p>$F = \{x + y + z + t = 0,\ x - y + z - t = 0\}\subset\mathbb R^4$.</p>
+<p>$F = \{x + y + z + t = 0,\ x - y + z - t = 0\}\subset\mathbb R^4$. <b>Déterminer $F^\perp$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x\in F^\perp\iff x\perp$ chaque vecteur d'une base de $F$.</p>
 <p><b>Étape 2 : Une base de $F$.</b> Somme des équations : $2x + 2z = 0$, $z = -x$ ; différence : $2y + 2t = 0$, $t = -y$. $F = \operatorname{Vect}\big((1, 0, -1, 0), (0, 1, 0, -1)\big)$.</p>
 <p><b>Étape 3 : Les équations de $F^\perp$.</b> $u = (x, y, z, t)$ : $\langle u, e_1\rangle = x - z = 0$ et $\langle u, e_2\rangle = y - t = 0$.</p>
@@ -9088,6 +9105,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 5 : Conclusion.</b> $\cG{(e_i)\ \text{est une base orthonormée de}\ E}$ (même sans connaître $\dim E$).</p>
 
 <p class="ml">Exemple 25 : Gram-Schmidt sur $\mathbb R_3[X]$ avec $\int_{-1}^1PQ$</p>
+<p>Sur $\mathbb R_3[X]$ muni de $\langle P, Q\rangle = \int_{-1}^1PQ$, <b>orthonormaliser la base $(1, X, X^2, X^3)$ par le procédé de Gram-Schmidt.</b></p>
 <p><b>Étape 1 : Rappel.</b> $e'_k = a_k - \sum_{i \lt k}\frac{\langle e'_i, a_k\rangle}{\|e'_i\|^2}e'_i$ ; on normalise à la fin (pas de racines dans les calculs).</p>
 <p><b>Étape 2 : $e'_0, e'_1$.</b> $e'_0 = 1$, $\|e'_0\|^2 = \int_{-1}^11\,dt = 1 - (-1) = 2$. $\langle1, X\rangle = \int_{-1}^1t\,dt = \Big[\frac{t^2}2\Big]_{-1}^1 = \frac12 - \frac12 = 0$, donc $e'_1 = X - 0 = X$, et $\|e'_1\|^2 = \int_{-1}^1t^2\,dt = \Big[\frac{t^3}3\Big]_{-1}^1 = \frac13 - \big(-\frac13\big) = \frac23$.</p>
 <p><b>Étape 3 : $e'_2$.</b> $\langle1, X^2\rangle = \int_{-1}^1t^2\,dt = \frac23$ et $\langle X, X^2\rangle = \int_{-1}^1t^3\,dt = \Big[\frac{t^4}4\Big]_{-1}^1 = \frac14 - \frac14 = 0$. Donc $e'_2 = X^2 - \frac{\langle e'_0, X^2\rangle}{\|e'_0\|^2}e'_0 - \frac{\langle e'_1, X^2\rangle}{\|e'_1\|^2}e'_1 = X^2 - \frac{2/3}2\times1 - 0 = X^2 - \frac13$.</p>
@@ -9096,6 +9114,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 6 : Conclusion.</b> $\cG{\frac{\sqrt2}2,\ \frac{\sqrt6}2X,\ \frac{3\sqrt{10}}4\Big(X^2 - \frac13\Big),\ \frac{5\sqrt{14}}4\Big(X^3 - \frac35X\Big)}$ (car $\sqrt{\frac{45}8} = \frac{3\sqrt{10}}4$ et $\sqrt{\frac{175}8} = \frac{5\sqrt{14}}4$).</p>
 
 <p class="ml">Exemple 26 : la décomposition $QR$ et l'inégalité de Hadamard</p>
+<p>Soit $A\in GL_n(\mathbb R)$. <b>Montrer que $A = QR$ avec $Q$ orthogonale et $R$ triangulaire supérieure, puis en déduire $|\det A|\leq\prod_j\|C_j\|$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Gram-Schmidt appliqué aux colonnes $C_1, \dots, C_n$ de $A\in GL_n(\mathbb R)$ donne une base orthonormée $\mathcal B''$, et la matrice de passage de $\mathcal B''$ à $(C_j)$ est triangulaire supérieure à diagonale $> 0$.</p>
 <p><b>Étape 2 : Existence.</b> $A = P_{\mathcal B\to(C_j)} = P_{\mathcal B\to\mathcal B''}P_{\mathcal B''\to(C_j)} = QR$, $Q$ orthogonale (passage entre deux bases orthonormées).</p>
 <p><b>Étape 3 : Unicité.</b> $QR = Q'R'$ donne $Q'^{-1}Q = R'R^{-1}$, orthogonale et triangulaire supérieure à diagonale $> 0$ : son inverse est sa transposée, triangulaire inférieure ; elle est donc diagonale, de coefficients $\pm1$ et $> 0$ : $I_n$.</p>
@@ -9112,12 +9131,14 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 </table>
 
 <p class="ml">Exemple 27 : $\langle x, p(x)\rangle\geq0$ caractérise les projecteurs orthogonaux</p>
+<p>Soit $p$ un projecteur d'un espace euclidien. <b>Montrer que $p$ est orthogonal si et seulement si $\langle x, p(x)\rangle\geq0$ pour tout $x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p$ projecteur orthogonal $\iff\ker p\perp\operatorname{Im}p$.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $\langle p(x), x\rangle = \langle p(x), x - p(x)\rangle + \|p(x)\|^2 = 0 + \|p(x)\|^2\geq0$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $x\in\operatorname{Im}p$, $y\in\ker p$, $\lambda\in\mathbb R$ : $\langle x + \lambda y, p(x + \lambda y)\rangle = \langle x + \lambda y, x\rangle = \|x\|^2 + \lambda\langle x, y\rangle\geq0$ pour tout $\lambda$.</p>
 <p><b>Étape 4 : Conclusion.</b> Une fonction affine de $\lambda$ toujours positive a une pente nulle : $\langle x, y\rangle = 0$, $\cG{p\ \text{est orthogonal}}$.</p>
 
 <p class="ml">Exemple 28 : $p\circ q = q\circ p\iff p\circ q$ projecteur ($p, q$ orthogonaux)</p>
+<p>Soient $p, q$ deux projecteurs orthogonaux. <b>Montrer que $p\circ q = q\circ p$ si et seulement si $p\circ q$ est un projecteur orthogonal.</b></p>
 <p><b>Étape 1 : Rappel.</b> Projecteur orthogonal $\iff$ projecteur qui diminue la norme $\iff$ projecteur symétrique.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $(p\circ q)^2 = p\circ q\circ p\circ q = p\circ p\circ q\circ q = p\circ q$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $\|p(q(x))\|\leq\|q(x)\|\leq\|x\|$ : $p\circ q$ est un projecteur orthogonal, donc symétrique : $\langle p\circ q(x), y\rangle = \langle x, p\circ q(y)\rangle$. Or $\langle x, p(q(y))\rangle = \langle q(p(x)), y\rangle$ ($p, q$ symétriques). Donc $\langle(p\circ q - q\circ p)(x), y\rangle = 0$ pour tout $y$.</p>
@@ -9125,13 +9146,14 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 
 <p class="ml">Exemple 29 : la matrice remplie de $\frac1n$</p>
 $$A = \frac1n\begin{pmatrix}1&1&\cdots&1\\1&1&\cdots&1\\\vdots&\vdots&\ddots&\vdots\\1&1&\cdots&1\end{pmatrix}.$$
+<p><b>Montrer que $A$ est la matrice d'une projection orthogonale de $\mathbb R^n$ et préciser sur quoi.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $A$ symétrique en base orthonormée $\Rightarrow$ projection orthogonale.</p>
 <p><b>Étape 2 : $A^2$.</b> $(A^2)_{ij} = \sum_{k=1}^n\frac1n\times\frac1n = n\times\frac1{n^2} = \frac1n$ : $A^2 = A$.</p>
 <p><b>Étape 3 : L'image.</b> Toutes les colonnes valent $\frac1n(1, \dots, 1)$ : $\operatorname{Im}A = \mathbb R(1, \dots, 1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la projection orthogonale sur la droite}\ \mathbb R(1, \dots, 1)}$.</p>
 
 <p class="ml">Exemple 30 : une symétrie orthogonale de $\mathbb R^4$</p>
-<p>$P:\ x + y + z + t = 0,\ x + 2y + 3z + 4t = 0$. Matrices de $p_P$ et $s_P$.</p>
+<p>$P:\ x + y + z + t = 0,\ x + 2y + 3z + 4t = 0$. <b>Écrire les matrices de la projection orthogonale $p_P$ et de la symétrie orthogonale $s_P$ par rapport à $P$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Base orthogonale de $P$ (Gram-Schmidt), formule de $p_P$, puis $s_P = 2p_P - I_4$.</p>
 <p><b>Étape 2 : Une base.</b> $z, t$ libres : soustraire les équations donne $y + 2z + 3t = 0$, $y = -2z - 3t$, puis $x = -y - z - t = z + 2t$. $a_1 = (1, -2, 1, 0)$ ($z = 1, t = 0$), $a_2 = (2, -3, 0, 1)$.</p>
 <p><b>Étape 3 : Orthogonaliser.</b> $\langle a_1, a_2\rangle = 2 + 6 + 0 + 0 = 8$, $\|a_1\|^2 = 1 + 4 + 1 = 6$ : $a_2 - \frac86a_1 = \big(\frac23, -\frac13, -\frac43, 1\big)$, qu'on multiplie par $3$ : $e_2 = (2, -1, -4, 3)$, $\|e_2\|^2 = 4 + 1 + 16 + 9 = 30$.</p>
@@ -9141,7 +9163,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <p>Contrôles : $M(p)$ est symétrique, $\operatorname{tr}M(p) = \frac{3 + 7 + 7 + 3}{10} = 2 = \dim P$.</p>
 
 <p class="ml">Exemple 31 : par la définition, sans base orthogonale</p>
-<p>Projeté orthogonal de $X^2$ sur $\mathbb R_1[X]$ pour $\langle P, Q\rangle = \int_0^1PQ$.</p>
+<p><b>Calculer le projeté orthogonal de $X^2$ sur $\mathbb R_1[X]$ pour $\langle P, Q\rangle = \int_0^1PQ$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $P = aX + b$ et $X^2 - P\perp1$, $X^2 - P\perp X$.</p>
 <p><b>Étape 2 : Les équations.</b> $\int_0^1(t^2 - at - b)\,dt = \Big[\frac{t^3}3 - \frac{at^2}2 - bt\Big]_0^1 = \frac13 - \frac a2 - b = 0$ et $\int_0^1(t^3 - at^2 - bt)\,dt = \Big[\frac{t^4}4 - \frac{at^3}3 - \frac{bt^2}2\Big]_0^1 = \frac14 - \frac a3 - \frac b2 = 0$.</p>
 <p><b>Étape 3 : On résout.</b> De la 1<sup>re</sup> : $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = \frac13 - \frac12 = -\frac16$.</p>
@@ -9152,6 +9174,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <p><b>1.</b> Reconnaître la quantité comme $\|x - y\|^2$ pour un produit scalaire. <b>2.</b> Le minimum sur $y\in F$ est $d(x, F)^2$, atteint en $p_F(x)$. <b>3.</b> Calculer $p_F(x)$ par les équations d'orthogonalité, puis $d^2 = \langle x, x - p_F(x)\rangle$ (plus court que $\|x - p_F(x)\|^2$).</p>
 
 <p class="ml">Exemple 32 : $\inf_{a,b,c}\int_0^{+\infty}(t^3 - at^2 - bt - c)^2e^{-t}\,dt$</p>
+<p><b>Calculer $\inf_{(a, b, c)\in\mathbb R^3}\int_0^{+\infty}(t^3 - at^2 - bt - c)^2e^{-t}\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\langle P, Q\rangle = \int_0^{+\infty}PQe^{-t}$ est un produit scalaire sur $\mathbb R[X]$, et $\int_0^{+\infty}t^ne^{-t}\,dt = n!$.</p>
 <p><b>Étape 2 : La distance.</b> La quantité vaut $\|X^3 - Q\|^2$ avec $Q = aX^2 + bX + c\in F = \mathbb R_2[X]$ : on cherche $d(X^3, F)^2$.</p>
 <p><b>Étape 3 : Le projeté.</b> $\langle X^3 - Q, X^k\rangle = 0$ pour $k = 0, 1, 2$ : $(k + 3)! - a(k + 2)! - b(k + 1)! - ck! = 0$. Soit $6 - 2a - b - c = 0$, $24 - 6a - 2b - c = 0$, $120 - 24a - 6b - 2c = 0$.</p>
@@ -9197,6 +9220,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <p><b>Étape 4 : Conclusion.</b> $P\in\mathbb R_n[X]$ a $n + 1$ racines distinctes : $P = 0$. $\cG{\text{C'est un produit scalaire}}$ (sur $\mathbb R_{n+1}[X]$, ce ne serait plus vrai).</p>
 
 <p class="ml">Exercice 2 : $\mathcal S_n$ et $\mathcal A_n$ sont orthogonaux</p>
+<p>Sur $\mathcal M_n(\mathbb R)$ muni de $\langle A, B\rangle = \operatorname{tr}(A^\top B)$, <b>montrer que $\mathcal S_n$ et $\mathcal A_n$ sont orthogonaux.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\langle A, B\rangle = \operatorname{tr}(A^\top B)$, $\operatorname{tr}(M^\top) = \operatorname{tr}(M)$, $\operatorname{tr}(MN) = \operatorname{tr}(NM)$.</p>
 <p><b>Étape 2 : Pour $S$ symétrique et $A$ antisymétrique</b> : $\langle S, A\rangle = \operatorname{tr}(S^\top A) = \operatorname{tr}(SA)$.</p>
 <p><b>Étape 3 : On transpose.</b> $\operatorname{tr}(SA) = \operatorname{tr}\big((SA)^\top\big) = \operatorname{tr}(A^\top S^\top) = \operatorname{tr}(-AS) = -\operatorname{tr}(SA)$.</p>
