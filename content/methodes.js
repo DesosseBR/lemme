@@ -3462,7 +3462,7 @@ $$f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}
 <p><b>Étape 2 : La convergence.</b> $|e^{-t}\cos t|\leq\cO{e^{-t}}$, intégrable sur $[0, +\infty[$ : convergence absolue.</p>
 <p><b>Étape 3 : On passe en complexe.</b> $e^{-t}\cos t = \operatorname{Re}\big(e^{(-1 + i)t}\big)$. Sur $[0, x]$ :</p>
 $$\int_0^xe^{(-1 + i)t}\,dt = \Big[\frac{e^{(-1 + i)t}}{-1 + i}\Big]_0^x = \frac{e^{(-1 + i)x} - 1}{-1 + i}.$$
-<p><b>Étape 4 : La limite.</b> $|e^{(-1 + i)x}| = e^{-x}\to0$, donc l'intégrale vaut $\frac{-1}{-1 + i} = \frac1{1 - i} = \frac{1 + i}2$.</p>
+<p><b>Étape 4 : La limite.</b> $|e^{(-1 + i)x}| = |e^{-x}|\,|e^{ix}| = e^{-x}\to0$, donc l'intégrale vaut $\frac{0 - 1}{-1 + i} = \frac1{1 - i}$. On multiplie par le conjugué : $\frac1{1 - i} = \frac{1 + i}{(1 - i)(1 + i)} = \frac{1 + i}{1 + 1} = \frac{1 + i}2$.</p>
 <p><b>Étape 5 : Conclusion.</b> On prend la partie réelle : $\cG{\int_0^{+\infty}e^{-t}\cos t\,dt = \frac12}$ (et $\int_0^{+\infty}e^{-t}\sin t\,dt = \frac12$ avec la partie imaginaire).</p>
 
 <h2 id="p-prop">8. Propriétés des intégrales convergentes</h2>
@@ -3490,6 +3490,7 @@ $$I_n = \big[-t^ne^{-t}\big]_0^{+\infty} + n\int_0^{+\infty}t^{n-1}e^{-t}\,dt.$$
 <p><b>Étape 1 : Rappel.</b> $\varphi$ bijective, $\mathcal C^1$, strictement monotone : même nature et même valeur.</p>
 <p><b>Étape 2 : Le changement.</b> $u = e^t$, soit $t = \ln u$ : $u\mapsto\ln u$ est une bijection $\mathcal C^1$ strictement croissante de $]1, +\infty[$ sur $]0, +\infty[$, et $dt = \frac{du}u$.</p>
 <p><b>Étape 3 : On remplace.</b></p>
+<p>Avec $e^t = u$, $e^{-t} = \frac1u$, $dt = \frac{du}u$, et $\big(u + \frac1u\big)\times u = u^2 + 1$ :</p>
 $$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\cdot\frac{du}u = \int_1^{+\infty}\frac{du}{u^2 + 1}.$$
 <p><b>Étape 4 : On calcule.</b> $\int_1^x\frac{du}{1 + u^2} = \arctan x - \frac\pi4\to\frac\pi2 - \frac\pi4$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \frac\pi4}$.</p>
@@ -4477,14 +4478,18 @@ $$\cG{\mathcal S = [-1,\ 2]}.$$
 <tr><th>$x$</th><th>$x \lt -2$</th><th>$-2\leq x\leq1$</th><th>$x > 1$</th></tr>
 <tr><td>$|x - 1|$</td><td>$-x + 1$</td><td>$-x + 1$</td><td>$x - 1$</td></tr>
 <tr><td>$|x + 2|$</td><td>$-x - 2$</td><td>$x + 2$</td><td>$x + 2$</td></tr>
-<tr><td>somme</td><td>$-2x - 1$</td><td>$3$</td><td>$2x + 1$</td></tr>
+<tr><td>somme</td><td>$(-x + 1) + (-x - 2) = -2x - 1$</td><td>$(-x + 1) + (x + 2) = 3$</td><td>$(x - 1) + (x + 2) = 2x + 1$</td></tr>
 </table>
-<p><b>Étape 3 : Sur $]-\infty, -2[$.</b> $-2x - 1 = 5\iff x = -3$, et $-3 \lt -2$ : on garde $x = -3$.</p>
+<p><b>Étape 3 : Sur $]-\infty, -2[$.</b> On résout :</p>
+$$-2x - 1 = 5\iff-2x = 5 + 1 = 6\iff x = \frac6{-2} = -3.$$
+<p>Et $-3 \lt -2$ : $-3$ est bien dans le morceau, on le garde.</p>
 <p><b>Étape 4 : Sur $[-2, 1]$.</b> L'équation devient $3 = 5$ : impossible, aucune solution.</p>
-<p><b>Étape 5 : Sur $]1, +\infty[$.</b> $2x + 1 = 5\iff x = 2$, et $2 > 1$ : on garde $x = 2$.</p>
+<p><b>Étape 5 : Sur $]1, +\infty[$.</b> On résout :</p>
+$$2x + 1 = 5\iff2x = 5 - 1 = 4\iff x = \frac42 = 2.$$
+<p>Et $2 > 1$ : on garde $x = 2$.</p>
 <p><b>Étape 6 : Conclusion.</b></p>
 $$\cG{\mathcal S = \{-3,\ 2\}}.$$
-<p>Vérification : $|-4| + |-1| = 5$ et $|1| + |4| = 5$.</p>
+<p>Vérification : pour $x = -3$, $|-3 - 1| + |-3 + 2| = |-4| + |-1| = 4 + 1 = 5$ ; pour $x = 2$, $|2 - 1| + |2 + 2| = 1 + 4 = 5$.</p>
 
 <h2 id="r-tri">3. L'inégalité triangulaire</h2>
 <div class="sbox">$$\big||x| - |y|\big|\ \leq\ |x + y|\ \leq\ |x| + |y|$$
@@ -4568,7 +4573,9 @@ $$\cG{\Big\lfloor\frac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor}.$$
 <p><b>Étape 1 : Rappel.</b> $d_2 = \frac{\lfloor10^2x\rfloor}{10^2}$, avec $x = \sqrt2$. Il faut donc $\lfloor100\sqrt2\rfloor$.</p>
 <p><b>Étape 2 : On écrit $100\sqrt2 = \sqrt{20000}$</b> et on cherche l'entier $\cV n$ tel que $\cV n\leq\sqrt{20000} \lt \cV n + 1$, c'est-à-dire $\cV n^2\leq20000 \lt (\cV n + 1)^2$ (tout est positif).</p>
 <p><b>Étape 3 : On calcule deux carrés.</b></p>
-$$141^2 = 19881\leq20000,\qquad142^2 = 20164 > 20000.$$
+<p>Le calcul, avec $(a + 1)^2 = a^2 + 2a + 1$ :</p>
+$$141^2 = (140 + 1)^2 = 140^2 + 2\times140 + 1 = 19600 + 280 + 1 = 19881\leq20000,$$
+$$142^2 = (141 + 1)^2 = 19881 + 2\times141 + 1 = 19881 + 282 + 1 = 20164 > 20000.$$
 <p><b>Étape 4 : On lit la partie entière.</b> $141\leq100\sqrt2 \lt 142$, donc $\lfloor100\sqrt2\rfloor = \cV{141}$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{1{,}41\leq\sqrt2 \lt 1{,}42}:\quad1{,}41\ \text{par défaut},\ 1{,}42\ \text{par excès}.$$
@@ -4588,7 +4595,9 @@ $$\cR m = \inf\cB A\iff\begin{cases}\forall\cB a\in\cB A,\ \cR m\leq\cB a\\\fora
 <p><b>Étape 1 : Rappel.</b> $\cR M = \sup\cB A\iff$ $\cR M$ majore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a > \cR M - \cO\varepsilon$.</p>
 <p><b>Étape 2 : Le candidat.</b> Les éléments sont $0, \frac12, \frac23, \frac34,\dots$ : ils croissent vers $1$. Candidat : $\cR M = 1$.</p>
 <p><b>Étape 3 : $1$ est un majorant.</b> Pour tout $n\geq1$, $\frac1n > 0$, donc $1 - \frac1n \lt 1$.</p>
-<p><b>Étape 4 : On ne peut pas descendre.</b> Soit $\cO\varepsilon > 0$. On cherche $n$ tel que $1 - \frac1n > 1 - \cO\varepsilon$, c'est-à-dire $\frac1n \lt \cO\varepsilon$, soit $n > \frac1{\cO\varepsilon}$. L'entier $\cV n = \lfloor\frac1{\cO\varepsilon}\rfloor + 1$ convient.</p>
+<p><b>Étape 4 : On ne peut pas descendre.</b> Soit $\cO\varepsilon > 0$. On cherche $n$ tel que $1 - \frac1n > 1 - \cO\varepsilon$. On transforme :</p>
+$$1 - \frac1n > 1 - \cO\varepsilon\iff-\frac1n > -\cO\varepsilon\iff\frac1n \lt \cO\varepsilon\iff n > \frac1{\cO\varepsilon}.$$
+<p>(On a retranché $1$, multiplié par $-1$ en retournant l'inégalité, puis inversé deux nombres positifs, ce qui retourne encore.) L'entier $\cV n = \lfloor\frac1{\cO\varepsilon}\rfloor + 1$ convient. Exemple : $\cO\varepsilon = 0{,}1$ donne $\cV n = 11$ et $1 - \frac1{11}\approx0{,}909 > 0{,}9$.</p>
 <p><b>Étape 5 : Pas de maximum.</b> Par l'étape 3, aucun élément n'est égal à $1$, donc $1\notin\cB A$.</p>
 <p><b>Étape 6 : La borne inférieure.</b> $n\mapsto1 - \frac1n$ croît, donc $1 - \frac1n\geq1 - 1 = 0$, valeur atteinte en $n = 1$.</p>
 <p><b>Étape 7 : Conclusion.</b></p>
@@ -4596,7 +4605,7 @@ $$\cG{\sup A = 1\ \text{(pas de max)},\qquad\inf A = \min A = 0}.$$
 
 <p class="ml">Exemple 10 : $A = \{(-1)^n + \frac1n,\ n\in\mathbb N^*\}$</p>
 <p><b>Étape 1 : Rappel.</b> Si $\cR M\in\cB A$ et $\cR M$ majore $\cB A$, alors $\cR M = \max A = \sup A$. Pour l'inf, on utilise : $\cR m$ minore $\cB A$ et $\forall\cO\varepsilon > 0,\ \exists\cB a\in\cB A,\ \cB a \lt \cR m + \cO\varepsilon$.</p>
-<p><b>Étape 2 : On sépare pairs et impairs.</b></p>
+<p><b>Étape 2 : On calcule quelques termes</b> : $n = 1$ : $-1 + 1 = 0$ ; $n = 2$ : $1 + \frac12 = \frac32$ ; $n = 3$ : $-1 + \frac13 = -\frac23$ ; $n = 4$ : $1 + \frac14 = \frac54$. On sépare donc pairs et impairs.</p>
 $$n = 2k:\ \ \cB a = 1 + \frac1{2k}\in\Big]1,\ \frac32\Big],\qquad n = 2k + 1:\ \ \cB a = -1 + \frac1{2k + 1}\in\Big]-1,\ 0\Big].$$
 <p><b>Étape 3 : Le sup.</b> Le plus grand terme pair est en $k = 1$ : $\frac32$. Tous les termes impairs sont $\leq0 \lt \frac32$. Donc $\frac32$ majore $\cB A$, et $\frac32\in\cB A$ ($n = 2$).</p>
 <p><b>Étape 4 : L'inf.</b> Tous les éléments sont $> -1$, donc $-1$ minore $\cB A$. Soit $\cO\varepsilon > 0$ : on prend $n$ impair avec $\frac1n \lt \cO\varepsilon$, alors $\cB a = -1 + \frac1n \lt -1 + \cO\varepsilon$.</p>
@@ -4648,7 +4657,9 @@ $$\text{Version suites : tout réel est limite d'une suite de rationnels, et d'u
 <p class="ml">Exemple 14 : un rationnel entre $\sqrt2$ et $\sqrt2 + \frac1{100}$</p>
 <p><b>Étape 1 : Rappel.</b> Avec $\cV n > \frac1{y - x}$ et $\cV p = \lfloor nx\rfloor + 1$, le rationnel $\frac{\cV p}{\cV n}$ est dans $]x, y[$.</p>
 <p><b>Étape 2 : Le choix de $\cV n$.</b> $y - x = \frac1{100}$, donc $\frac1{y - x} = 100$. On prend $\cV n = 101$.</p>
-<p><b>Étape 3 : Le calcul de $\cV p$.</b> $101\sqrt2 = \sqrt{20402}$, et $142^2 = 20164\leq20402 \lt 20449 = 143^2$, donc $\lfloor101\sqrt2\rfloor = 142$ et $\cV p = 143$.</p>
+<p><b>Étape 3 : Le calcul de $\cV p$.</b> On fait rentrer $101$ dans la racine :</p>
+$$101\sqrt2 = \sqrt{101^2\times2} = \sqrt{10201\times2} = \sqrt{20402}.$$
+<p>On encadre entre deux carrés : $142^2 = 20164\leq20402$ et $143^2 = 20164 + 2\times142 + 1 = 20449 > 20402$. Donc $142\leq101\sqrt2 \lt 143$, $\lfloor101\sqrt2\rfloor = 142$ et $\cV p = 142 + 1 = 143$.</p>
 <p><b>Étape 4 : Vérification.</b> $\frac{143}{101}\approx1{,}41584$, $\sqrt2\approx1{,}41421$, $\sqrt2 + 0{,}01\approx1{,}42421$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{\sqrt2 \lt \frac{143}{101} \lt \sqrt2 + \frac1{100}}.$$
@@ -4690,7 +4701,7 @@ $$x \lt r + \sqrt2 \lt y.$$
 <p><b>Étape 1 : Rappel.</b> Si $\cB{u_n} > 0$ : $\frac{\cB{u_{n+1}}}{\cB{u_n}}\leq1$ pour tout $n\geq\cV N$ $\iff$ $(\cB{u_n})$ décroissante à partir du rang $\cV N$.</p>
 <p><b>Étape 2 : Le signe.</b> Pour $n\geq1$, $n > 0$ et $2^n > 0$, donc $u_n > 0$.</p>
 <p><b>Étape 3 : Le quotient.</b></p>
-$$\frac{u_{n+1}}{u_n} = \frac{n + 1}{2^{n+1}}\times\frac{2^n}n = \frac{n + 1}{2n}.$$
+$$\frac{u_{n+1}}{u_n} = \frac{\frac{n + 1}{2^{n+1}}}{\frac n{2^n}} = \frac{n + 1}{2^{n+1}}\times\frac{2^n}n = \frac{n + 1}n\times\underbrace{\frac{2^n}{2^{n+1}}}_{=\frac12} = \frac{n + 1}{2n}.$$
 <p><b>Étape 4 : On compare à $1$.</b> $\frac{n + 1}{2n}\leq1\iff n + 1\leq2n\iff n\geq1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{est décroissante}}$ (dès $n = 1$, avec $u_1 = u_2 = \frac12$).</p>
 
@@ -4698,9 +4709,10 @@ $$\frac{u_{n+1}}{u_n} = \frac{n + 1}{2^{n+1}}\times\frac{2^n}n = \frac{n + 1}{2n
 <p>$u_n = \displaystyle\sum_{k=1}^n\frac1{n + k} = \frac1{n + 1} + \dots + \frac1{2n}$. Montrer que $(u_n)$ est croissante et que $\frac12\leq u_n\leq1$.</p>
 <p><b>Étape 1 : Rappel.</b> $(\cB{u_n})$ croissante $\iff\cB{u_{n+1}} - \cB{u_n}\geq0$ pour tout $n$.</p>
 <p><b>Étape 2 : On écrit les deux sommes</b> : $u_{n+1}$ va de $\frac1{n + 2}$ à $\frac1{2n + 2}$, $u_n$ de $\frac1{n + 1}$ à $\frac1{2n}$. Les termes $\frac1{n + 2},\dots,\frac1{2n}$ se simplifient :</p>
+$$u_{n+1} = \underbrace{\frac1{n + 2} + \dots + \frac1{2n}}_{\text{communs}} + \frac1{2n + 1} + \frac1{2n + 2},\qquad u_n = \frac1{n + 1} + \underbrace{\frac1{n + 2} + \dots + \frac1{2n}}_{\text{communs}},$$
 $$u_{n+1} - u_n = \frac1{2n + 1} + \frac1{2n + 2} - \frac1{n + 1}.$$
 <p><b>Étape 3 : On simplifie.</b> $\frac1{n + 1} = \frac2{2n + 2}$, donc :</p>
-$$u_{n+1} - u_n = \frac1{2n + 1} - \frac1{2n + 2} = \frac1{(2n + 1)(2n + 2)} > 0.$$
+$$u_{n+1} - u_n = \frac1{2n + 1} + \frac1{2n + 2} - \frac2{2n + 2} = \frac1{2n + 1} - \frac1{2n + 2} = \frac{(2n + 2) - (2n + 1)}{(2n + 1)(2n + 2)} = \frac1{(2n + 1)(2n + 2)} > 0.$$
 <p><b>Étape 4 : L'encadrement.</b> Pour $1\leq k\leq n$ : $n + 1\leq n + k\leq2n$, donc $\frac1{2n}\leq\frac1{n + k}\leq\frac1{n + 1}$. On somme ces $n$ inégalités :</p>
 $$\frac n{2n}\leq u_n\leq\frac n{n + 1}\quad\Longrightarrow\quad\frac12\leq u_n \lt 1.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{croissante, et}\ \frac12\leq u_n\leq1}$. Par le §15, elle converge (sa limite est $\ln2$, voir Intégration, sommes de Riemann).</p>
@@ -4722,7 +4734,7 @@ $$u_{2n}\to\cR\ell\ \text{et}\ u_{2n+1}\to\cR\ell\iff u_n\to\cR\ell.$$</div>
 <p>Montrer avec la définition que $u_n = \dfrac{2n + 1}{n + 3}\to2$.</p>
 <p><b>Étape 1 : Rappel.</b> $\cB{u_n}\to\cR\ell\iff\forall\cO\varepsilon > 0,\ \exists\cV N,\ \forall n\geq\cV N,\ |\cB{u_n} - \cR\ell|\leq\cO\varepsilon$.</p>
 <p><b>Étape 2 : On calcule l'écart</b> à $\cR\ell = 2$ :</p>
-$$u_n - 2 = \frac{2n + 1 - 2(n + 3)}{n + 3} = \frac{-5}{n + 3},\qquad|u_n - 2| = \frac5{n + 3}.$$
+$$u_n - 2 = \frac{2n + 1}{n + 3} - \frac{2(n + 3)}{n + 3} = \frac{2n + 1 - 2n - 6}{n + 3} = \frac{-5}{n + 3},\qquad|u_n - 2| = \frac5{n + 3}.$$
 <p><b>Étape 3 : On résout</b> $|u_n - 2|\leq\cO\varepsilon$ :</p>
 $$\frac5{n + 3}\leq\cO\varepsilon\iff n + 3\geq\frac5{\cO\varepsilon}\iff n\geq\frac5{\cO\varepsilon} - 3.$$
 <p><b>Étape 4 : On choisit le rang.</b> $\cV N = \lfloor\frac5{\cO\varepsilon}\rfloor + 1$ convient : pour $n\geq\cV N$, $n > \frac5{\cO\varepsilon} > \frac5{\cO\varepsilon} - 3$.</p>
@@ -4813,6 +4825,7 @@ $$(u_n)\ \text{croissante},\ u_n\to\ell\ \Longrightarrow\ \forall n,\ u_n\leq\el
 <p><b>Étape 3 : Une majoration télescopique.</b> Pour $k\geq2$ : $k^2\geq k(k - 1)$, donc</p>
 $$\frac1{k^2}\leq\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
 <p><b>Étape 4 : On somme de $k = 2$ à $n$</b>, les termes se télescopent :</p>
+$$\sum_{k=2}^n\Big(\frac1{k - 1} - \frac1k\Big) = \Big(1 - \frac12\Big) + \Big(\frac12 - \frac13\Big) + \dots + \Big(\frac1{n - 1} - \frac1n\Big) = 1 - \frac1n,$$
 $$u_n = 1 + \sum_{k=2}^n\frac1{k^2}\leq1 + \Big(1 - \frac1n\Big) = 2 - \frac1n\leq\cR2.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{converge}}$, vers une limite $\leq2$ (c'est $\frac{\pi^2}6$, voir Séries).</p>
 
@@ -4820,7 +4833,7 @@ $$u_n = 1 + \sum_{k=2}^n\frac1{k^2}\leq1 + \Big(1 - \frac1n\Big) = 2 - \frac1n\l
 <p>$u_n = \displaystyle\sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \dfrac1{n\cdot n!}$, $n\geq1$. Montrer qu'elles convergent vers la même limite.</p>
 <p><b>Étape 1 : Rappel.</b> $(u_n)\nearrow$, $(v_n)\searrow$, $v_n - u_n\to0$ $\Rightarrow$ même limite.</p>
 <p><b>Étape 2 : $(u_n)$ croissante.</b> $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
-<p><b>Étape 3 : $(v_n)$ décroissante.</b> On écrit tout sur $n(n + 1)\,(n + 1)!$, avec $n! = \frac{(n + 1)!}{n + 1}$ :</p>
+<p><b>Étape 3 : $(v_n)$ décroissante.</b> On met tout sur le dénominateur commun $n(n + 1)\,(n + 1)!$. Comme $n! = \frac{(n + 1)!}{n + 1}$, on a $n\cdot n! = \frac{n\,(n + 1)!}{n + 1}$, donc $\frac1{n\cdot n!} = \frac{n + 1}{n\,(n + 1)!} = \frac{(n + 1)^2}{n(n + 1)\,(n + 1)!}$. De même $\frac1{(n + 1)!} = \frac{n(n + 1)}{n(n + 1)(n + 1)!}$ et $\frac1{(n + 1)(n + 1)!} = \frac n{n(n + 1)(n + 1)!}$. Le numérateur vaut $n(n + 1) + n - (n + 1)^2 = n^2 + n + n - n^2 - 2n - 1 = -1$ :</p>
 $$v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\cdot n!} = \frac{n(n + 1) + n - (n + 1)^2}{n(n + 1)\,(n + 1)!} = \frac{-1}{n(n + 1)\,(n + 1)!} \lt 0.$$
 <p><b>Étape 4 : La différence.</b> $v_n - u_n = \frac1{n\cdot n!}\to0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{et}\ (v_n)\ \text{sont adjacentes}}$ : même limite $\ell$ (c'est $e$), et $u_n\leq\ell\leq v_n$, ce qui donne $e$ à $\frac1{n\cdot n!}$ près.</p>
@@ -4860,15 +4873,16 @@ $$u_{n+1} - 2 = 3u_n - 4 - (3\times2 - 4) = 3(u_n - 2),\quad\text{donc}\ v_{n+1}
 <p><b>Étape 2 : Équation caractéristique.</b> $r^2 = r + 2\iff r^2 - r - 2 = 0$, $\Delta = 1 + 8 = 9$, $\cV{r_1 = 2}$, $\cV{r_2 = -1}$.</p>
 <p><b>Étape 3 : Forme générale.</b> $u_n = A\,2^n + B\,(-1)^n$.</p>
 <p><b>Étape 4 : Les conditions initiales.</b></p>
-$$\left\{\begin{aligned}u_0 &= A + B = 0\\u_1 &= 2A - B = 3\end{aligned}\right.\iff\left\{\begin{aligned}A &= 1\\B &= -1\end{aligned}\right.\qquad(\text{on additionne : } 3A = 3).$$
-<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2^n - (-1)^n}$. Contrôle : $u_2 = 3 + 0 = 3 = 4 - 1$.</p>
+$$\left\{\begin{aligned}u_0 &= A\cdot2^0 + B\cdot(-1)^0 = A + B = 0\\u_1 &= A\cdot2^1 + B\cdot(-1)^1 = 2A - B = 3\end{aligned}\right.$$
+<p>On additionne les deux lignes : $(A + B) + (2A - B) = 0 + 3$, soit $3A = 3$, donc $A = 1$. Puis $B = -A = -1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2^n - (-1)^n}$. Contrôle : la relation donne $u_2 = u_1 + 2u_0 = 3 + 2\times0 = 3$, la formule donne $2^2 - (-1)^2 = 4 - 1 = 3$.</p>
 
 <p class="ml">Exemple 29 : ordre 2, racine double</p>
 <p>$u_0 = 1$, $u_1 = 4$, $u_{n+2} = 4u_{n+1} - 4u_n$.</p>
 <p><b>Étape 1 : Rappel.</b> $\Delta = 0$ : $u_n = (A + Bn)\,r_0^n$.</p>
 <p><b>Étape 2 : Équation caractéristique.</b> $r^2 - 4r + 4 = (r - 2)^2 = 0$ : $\cV{r_0 = 2}$ double.</p>
-<p><b>Étape 3 : Les conditions initiales.</b> $u_0 = A = 1$. $u_1 = (A + B)\times2 = 4$, donc $A + B = 2$ et $B = 1$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{u_n = (n + 1)\,2^n}$. Contrôle : $u_2 = 16 - 4 = 12 = 3\times4$.</p>
+<p><b>Étape 3 : Les conditions initiales.</b> $n = 0$ : $u_0 = (A + B\times0)\times2^0 = A = 1$. $n = 1$ : $u_1 = (A + B\times1)\times2^1 = 2(A + B) = 4$, donc $A + B = 2$ et $B = 2 - 1 = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u_n = (n + 1)\,2^n}$. Contrôle : la relation donne $u_2 = 4u_1 - 4u_0 = 4\times4 - 4\times1 = 12$, la formule $(2 + 1)\times2^2 = 3\times4 = 12$.</p>
 
 <p class="ml">Exemple 30 : ordre 2, racines complexes</p>
 <p>$u_0 = 1$, $u_1 = 2$, $u_{n+2} = 2u_{n+1} - 2u_n$.</p>
@@ -4892,7 +4906,7 @@ $$\textbf{4. Conclure}:\ \text{limite monotone, puis}\ \cR\ell\ \text{est un poi
 <p><b>Étape 2 : Intervalle stable.</b> $f(x) = \sqrt{2 + x}$. Si $x\in[0, 2]$, $2 + x\in[2, 4]$, donc $f(x)\in[\sqrt2, 2]\subset[0, 2]$. Comme $u_0 = 1\in[0, 2]$, par récurrence $u_n\in[0, 2]$ pour tout $n$.</p>
 <p><b>Étape 3 : Monotonie.</b> $u_1 = \sqrt3 > 1 = u_0$. Si $u_n\leq u_{n+1}$, alors, $f$ étant croissante, $f(u_n)\leq f(u_{n+1})$, soit $u_{n+1}\leq u_{n+2}$. Par récurrence, $(u_n)$ est <b>croissante</b>.</p>
 <p><b>Étape 4 : Convergence.</b> Croissante et majorée par $2$ : elle converge vers $\cR\ell\in[0, 2]$.</p>
-<p><b>Étape 5 : Le point fixe.</b> $f$ est continue, donc $\cR\ell = \sqrt{2 + \cR\ell}$, d'où $\cR\ell^2 - \cR\ell - 2 = 0$, soit $(\cR\ell - 2)(\cR\ell + 1) = 0$. Comme $\cR\ell\geq0$ :</p>
+<p><b>Étape 5 : Le point fixe.</b> On passe à la limite dans $u_{n+1} = \sqrt{2 + u_n}$ ($f$ est continue) : $\cR\ell = \sqrt{2 + \cR\ell}$. On élève au carré : $\cR\ell^2 = 2 + \cR\ell$, soit $\cR\ell^2 - \cR\ell - 2 = 0$. $\Delta = 1 + 8 = 9$, racines $\frac{1\pm3}2$, soit $2$ et $-1$ : $(\cR\ell - 2)(\cR\ell + 1) = 0$. Comme $\cR\ell\geq0$ :</p>
 $$\cG{u_n\to2}.$$
 
 <p class="ml">Exemple 32 : $u_{n+1} = u_n - u_n^2$, $u_0\in\,]0, 1[$</p>
@@ -5133,8 +5147,8 @@ $$\operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card
 <p class="ml">Exemple 1 : divisibles par $2$ ou par $3$</p>
 <p>Combien d'entiers de $[\![1, 100]\!]$ sont divisibles par $2$ ou par $3$ ?</p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B) - \operatorname{Card}(A\cap B)$. Et les multiples de $d$ dans $[\![1, n]\!]$ sont au nombre de $\lfloor\frac nd\rfloor$.</p>
-<p><b>Étape 2 : Les deux ensembles.</b> $A$ : multiples de $2$, $\operatorname{Card}(A) = \lfloor\frac{100}2\rfloor = 50$. $B$ : multiples de $3$, $\operatorname{Card}(B) = \lfloor\frac{100}3\rfloor = 33$.</p>
-<p><b>Étape 3 : L'intersection.</b> Divisible par $2$ et par $3$ $\iff$ divisible par $6$ ($2$ et $3$ premiers entre eux) : $\cR{\operatorname{Card}(A\cap B) = \lfloor\frac{100}6\rfloor = 16}$.</p>
+<p><b>Étape 2 : Les deux ensembles.</b> $A$ : multiples de $2$, $\frac{100}2 = 50$, donc $\operatorname{Card}(A) = 50$ ($2, 4, \dots, 100$). $B$ : multiples de $3$, $\frac{100}3 = 33{,}33\ldots$, donc $\operatorname{Card}(B) = \lfloor33{,}33\rfloor = 33$ ($3, 6, \dots, 99 = 3\times33$).</p>
+<p><b>Étape 3 : L'intersection.</b> Divisible par $2$ et par $3$ $\iff$ divisible par $6$ ($2$ et $3$ premiers entre eux) : $\frac{100}6 = 16{,}66\ldots$, donc $\cR{\operatorname{Card}(A\cap B) = 16}$ ($6\times16 = 96\leq100 \lt 102$).</p>
 <p><b>Étape 4 : Conclusion.</b></p>
 $$\cG{\operatorname{Card}(A\cup B) = 50 + 33 - 16 = 67}.$$
 
@@ -5146,7 +5160,8 @@ $$|A\cup B\cup C| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap
 <p><b>Étape 3 : Les doubles.</b> Par $6$ : $16$. Par $10$ : $10$. Par $15$ : $6$.</p>
 <p><b>Étape 4 : La triple.</b> Par $30$ : $3$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
-$$\cG{50 + 33 + 20 - 16 - 10 - 6 + 3 = 74}.$$
+<p>Simples : $50 + 33 + 20 = 103$. Doubles : $16 + 10 + 6 = 32$. Triple : $3$.</p>
+$$\cG{103 - 32 + 3 = 74}.$$
 
 <h2 id="d-prod">4. Produit cartésien, principe multiplicatif</h2>
 <div class="sbox">$$\operatorname{Card}(E\times F) = \operatorname{Card}(E)\times\operatorname{Card}(F),\qquad\operatorname{Card}(E^{\cV p}) = \operatorname{Card}(E)^{\cV p}.$$</div>
@@ -5158,7 +5173,7 @@ $$\cG{50 + 33 + 20 - 16 - 10 - 6 + 3 = 74}.$$
 <p>Une plaque comporte $2$ lettres puis $3$ chiffres. Combien de plaques ? Combien avec deux lettres différentes ?</p>
 <p><b>Étape 1 : Rappel.</b> Principe multiplicatif : on multiplie les nombres de choix de chaque étape.</p>
 <p><b>Étape 2 : Les étapes.</b> 1<sup>re</sup> lettre : $\cO{26}$. 2<sup>e</sup> lettre : $\cO{26}$. Chaque chiffre : $\cO{10}$.</p>
-<p><b>Étape 3 : Le total.</b> $26^2\times10^3 = 676\,000$.</p>
+<p><b>Étape 3 : Le total.</b> $26\times26 = 676$ pour les lettres, $10\times10\times10 = 1000$ pour les chiffres, donc $26^2\times10^3 = 676\times1000 = 676\,000$.</p>
 <p><b>Étape 4 : Lettres différentes.</b> La 2<sup>e</sup> lettre n'a plus que $\cO{25}$ choix : $26\times25\times10^3 = 650\,000$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{676\,000}$ plaques, dont $\cG{650\,000}$ avec deux lettres différentes.</p>
 
@@ -5179,7 +5194,8 @@ $$\cG{50 + 33 + 20 - 16 - 10 - 6 + 3 = 74}.$$
 <p><b>Étape 1 : Rappel.</b> $p$-listes d'un ensemble à $n$ éléments : $n^p$. Et $\operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card}(A)$.</p>
 <p><b>Étape 2 : Tous les mots.</b> $5$ positions, $26$ choix chacune : $26^5$.</p>
 <p><b>Étape 3 : Le complémentaire.</b> « Au moins un A » a pour contraire « aucun A » : $5$ lettres parmi $25$, soit $\cR{25^5}$ mots.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{26^5 - 25^5 = 11\,881\,376 - 9\,765\,625 = 2\,115\,751}$.</p>
+<p><b>Étape 4 : Les puissances.</b> $26^2 = 676$, $26^3 = 676\times26 = 17\,576$, $26^4 = 17\,576\times26 = 456\,976$, $26^5 = 456\,976\times26 = 11\,881\,376$. Et $25^2 = 625$, $25^3 = 15\,625$, $25^4 = 390\,625$, $25^5 = 9\,765\,625$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{26^5 - 25^5 = 11\,881\,376 - 9\,765\,625 = 2\,115\,751}$.</p>
 <p class="ml piege">Piège</p>
 <p>Compter « on place un A ($5$ places), puis le reste librement ($26^4$) » donne $5\times26^4$ : les mots avec plusieurs A sont comptés <b>plusieurs fois</b>. Le complémentaire évite ce piège.</p>
 
@@ -5198,7 +5214,7 @@ $$\cG{50 + 33 + 20 - 16 - 10 - 6 + 3 = 74}.$$
 <p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$ avec $k_i$ le nombre de répétitions de chaque lettre.</p>
 <p><b>Étape 2 : On compte les lettres.</b> $n = 6$ : B ($1$), A ($2$), N ($2$), E ($1$).</p>
 <p><b>Étape 3 : On divise par les doublons.</b></p>
-$$\frac{6!}{\cR{1!\,2!\,2!\,1!}} = \frac{720}4 = 180.$$
+$$\frac{6!}{\cR{1!\,2!\,2!\,1!}} = \frac{6\times5\times4\times3\times2\times1}{1\times2\times2\times1} = \frac{720}4 = 180.$$
 <p><b>Étape 4 : Autre méthode (combinaisons).</b> On place les A : $\binom62 = 15$. Puis les N parmi les $4$ places restantes : $\binom42 = 6$. Puis B et E : $2! = 2$. Total $15\times6\times2 = 180$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{180}$ anagrammes.</p>
 
@@ -5209,24 +5225,25 @@ $$\frac{6!}{\cR{1!\,2!\,2!\,1!}} = \frac{720}4 = 180.$$
 <p>On tire $5$ cartes dans un jeu de $32$ (dont $4$ as). Combien de mains ? Combien avec exactement $2$ as ?</p>
 <p><b>Étape 1 : Rappel.</b> Une main est une partie (pas d'ordre, pas de répétition) : $\binom np$. Plusieurs choix successifs : on multiplie.</p>
 <p><b>Étape 2 : Toutes les mains.</b></p>
-$$\binom{32}5 = \frac{32\times31\times30\times29\times28}{5\times4\times3\times2\times1} = 201\,376.$$
+$$\binom{32}5 = \frac{32\times31\times30\times29\times28}{5\times4\times3\times2\times1}.$$
+<p>On simplifie avant de multiplier : $\frac{30}{5\times3\times2} = 1$ et $\frac{32}4 = 8$, donc $\binom{32}5 = 8\times31\times29\times28$. Puis $8\times31 = 248$, $248\times29 = 7192$, $7192\times28 = 201\,376$.</p>
 <p><b>Étape 3 : Les $2$ as.</b> On choisit $2$ as parmi $4$ : $\cO{\binom42 = 6}$.</p>
 <p><b>Étape 4 : Les $3$ autres cartes</b> parmi les $28$ qui ne sont pas des as :</p>
-$$\cO{\binom{28}3 = \frac{28\times27\times26}6 = 3276}.$$
-<p><b>Étape 5 : Conclusion</b> (principe multiplicatif) : $\cG{6\times3276 = 19\,656}$ mains avec exactement $2$ as.</p>
+$$\cO{\binom{28}3 = \frac{28\times27\times26}{3\times2\times1} = 28\times\frac{27}3\times\frac{26}2 = 28\times9\times13 = 252\times13 = 3276}.$$
+<p><b>Étape 5 : Conclusion</b> (principe multiplicatif) : $6\times3276 = 6\times3000 + 6\times276 = 18\,000 + 1656$, soit $\cG{19\,656}$ mains avec exactement $2$ as.</p>
 
 <p class="ml">Exemple 8 : au moins un as</p>
 <p><b>Étape 1 : Rappel.</b> « Au moins un » : on retire le complémentaire « aucun ».</p>
 <p><b>Étape 2 : Aucun as.</b> Les $5$ cartes parmi les $28$ autres :</p>
-$$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{120} = 98\,280}.$$
-<p><b>Étape 3 : Conclusion.</b> $\cG{201\,376 - 98\,280 = 103\,096}$ mains avec au moins un as.</p>
+$$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\times2\times1}}:\quad\frac{25\times24}{5\times4\times3\times2} = \frac{600}{120} = 5,\ \text{donc}\ \binom{28}5 = 28\times27\times26\times5 = 756\times26\times5 = 19\,656\times5 = 98\,280.$$
+<p><b>Étape 3 : Conclusion.</b> $201\,376 - 98\,280 = 103\,096$ : $\cG{103\,096}$ mains avec au moins un as (un peu plus de la moitié des mains).</p>
 
 <p class="ml">Exemple 9 : des chemins dans une grille</p>
 <p>Combien de chemins vont de $(0, 0)$ à $(5, 3)$ avec des pas « droite » ou « haut » ?</p>
 <p><b>Étape 1 : Rappel.</b> $\binom np$ = nombre de façons de choisir $p$ positions parmi $n$.</p>
 <p><b>Étape 2 : On code le chemin.</b> Il faut $5$ pas D et $3$ pas H, soit $8$ pas. Un chemin = un mot de $8$ lettres avec $3$ H.</p>
 <p><b>Étape 3 : La bijection.</b> Le mot est déterminé par les <b>positions</b> des $3$ H parmi les $8$ : c'est une partie à $3$ éléments de $[\![1, 8]\!]$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\binom83 = \frac{8\times7\times6}6 = 56}$ chemins.</p>
+<p><b>Étape 4 : Conclusion.</b> $\binom83 = \frac{8\times7\times6}{3\times2\times1} = \frac{336}6 = 56$ : $\cG{56}$ chemins.</p>
 
 <h2 id="d-parties">10. Le nombre de parties</h2>
 <div class="sbox">$$\operatorname{Card}\big(\mathcal P(E)\big) = 2^{\operatorname{Card}(E)}\qquad\qquad\sum_{p=0}^n\binom np = 2^n.$$</div>
@@ -5476,7 +5493,7 @@ $$\text{Si}\ (x_0, y_0)\ \text{est solution}:\quad x = x_0 + k\frac bd,\quad y =
 <p class="ml">Exemple 8 : $15x + 21y = 9$</p>
 <p><b>Étape 1 : Rappel.</b> Solutions $\iff a\wedge b\mid c$. Puis Bézout et Gauss.</p>
 <p><b>Étape 2 : Le PGCD.</b> $15\wedge21 = 3$ et $3\mid9$ : il y a des solutions. On divise par $3$ : $5x + 7y = 3$.</p>
-<p><b>Étape 3 : Une solution de $5u + 7v = 1$.</b> $5\times(-4) + 7\times3 = -20 + 21 = 1$. On multiplie par $3$ : $5\times(-12) + 7\times9 = 3$, donc $(x_0, y_0) = (-12, 9)$.</p>
+<p><b>Étape 3 : Une solution de $5u + 7v = 1$.</b> Euclide remonté : $7 = 1\times5 + 2$ et $5 = 2\times2 + 1$, donc $1 = 5 - 2\times2 = 5 - 2(7 - 5) = 3\times5 - 2\times7$. Une autre solution, plus pratique ici : $5\times(-4) + 7\times3 = -20 + 21 = 1$ (on obtient la seconde depuis la première en ajoutant $7$ à $u$ et en retirant $5$ à $v$ : $3 - 7 = -4$, $-2 + 5 = 3$). On multiplie par $3$ : $5\times(-12) + 7\times9 = -60 + 63 = 3$, donc $(x_0, y_0) = (-12, 9)$.</p>
 <p><b>Étape 4 : On soustrait.</b> $5x + 7y = 3 = 5x_0 + 7y_0$ donne :</p>
 $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 5 : Gauss.</b> $7\mid5(x + 12)$ et $7\wedge5 = 1$, donc $7\mid x + 12$ : $x = -12 + 7k$. On remplace : $5\times7k = -7(y - 9)$, donc $y = 9 - 5k$.</p>
@@ -5487,7 +5504,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p class="ml">Exemple 9 : $1071\vee462$</p>
 <p><b>Étape 1 : Rappel.</b> $(a\wedge b)(a\vee b) = |ab|$.</p>
 <p><b>Étape 2 : On utilise l'exemple 4.</b> $1071\wedge462 = 21$.</p>
-<p><b>Étape 3 : Le calcul.</b> $1071\vee462 = \frac{1071\times462}{21} = 51\times462$ (car $1071 = 21\times51$).</p>
+<p><b>Étape 3 : Le calcul.</b> $1071 = 21\times51$ (car $21\times50 = 1050$ et $1050 + 21 = 1071$), donc $1071\vee462 = \frac{1071\times462}{21} = 51\times462 = 50\times462 + 462 = 23\,100 + 462$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{1071\vee462 = 23\,562}$.</p>
 
 <h2 id="z-prem">9. Nombres premiers</h2>
@@ -5499,15 +5516,16 @@ $$a\wedge b = \prod p^{\min(v_p(a), v_p(b))},\qquad a\vee b = \prod p^{\max(v_p(
 <p class="ml">Exemple 10 : $221$ est-il premier ?</p>
 <p><b>Étape 1 : Rappel.</b> Si $n$ n'est pas premier, il a un diviseur premier $\cV p\leq\sqrt n$.</p>
 <p><b>Étape 2 : La borne.</b> $14^2 = 196\leq221 \lt 225 = 15^2$ : on teste les premiers $\cV p\leq14$, soit $2, 3, 5, 7, 11, 13$.</p>
-<p><b>Étape 3 : Les tests.</b> $221$ est impair ; $2 + 2 + 1 = 5$ donc $3\nmid221$ ; ne finit pas par $0$ ou $5$ ; $221 = 7\times31 + 4$ ; $221 = 11\times20 + 1$ ; $221 = 13\times17$.</p>
+<p><b>Étape 3 : Les tests, un par un.</b></p>
+<ul><li>$2$ : $221$ est impair, non.</li><li>$3$ : $2 + 2 + 1 = 5$ n'est pas multiple de $3$, non.</li><li>$5$ : il ne finit pas par $0$ ou $5$, non.</li><li>$7$ : $7\times31 = 217$, reste $221 - 217 = 4$, non.</li><li>$11$ : $11\times20 = 220$, reste $1$, non.</li><li>$13$ : $13\times17 = 13\times10 + 13\times7 = 130 + 91 = 221$, oui.</li></ul>
 <p><b>Étape 4 : Conclusion.</b> $\cG{221 = 13\times17\ \text{n'est pas premier}}$.</p>
 
 <p class="ml">Exemple 11 : PGCD, PPCM et diviseurs par décomposition</p>
 <p>$a = 360$, $b = 84$.</p>
 <p><b>Étape 1 : Rappel.</b> $\wedge$ : exposants minimum. $\vee$ : exposants maximum.</p>
-<p><b>Étape 2 : Les décompositions.</b> $360 = 2^3\times3^2\times5$ et $84 = 2^2\times3\times7$.</p>
+<p><b>Étape 2 : Les décompositions</b>, en divisant par les premiers dans l'ordre : $360 = 2\times180 = 2\times2\times90 = 2\times2\times2\times45 = 2^3\times3\times15 = 2^3\times3^2\times5$. Et $84 = 2\times42 = 2\times2\times21 = 2^2\times3\times7$.</p>
 <p><b>Étape 3 : Le PGCD.</b> $2^{\min(3, 2)}\times3^{\min(2, 1)}\times5^0\times7^0 = 2^2\times3 = 12$.</p>
-<p><b>Étape 4 : Le PPCM.</b> $2^3\times3^2\times5\times7 = 2520$. Contrôle : $12\times2520 = 30\,240 = 360\times84$.</p>
+<p><b>Étape 4 : Le PPCM.</b> $2^{\max(3, 2)}\times3^{\max(2, 1)}\times5\times7 = 8\times9\times5\times7 = 72\times35 = 2520$. Contrôle : $12\times2520 = 30\,240$ et $360\times84 = 30\,240$.</p>
 <p><b>Étape 5 : Les diviseurs de $360$.</b> Un diviseur positif est $2^i3^j5^k$ avec $0\leq i\leq3$, $0\leq j\leq2$, $0\leq k\leq1$ : $4\times3\times2 = 24$ diviseurs.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{360\wedge84 = 12,\ 360\vee84 = 2520}$, et $360$ a $24$ diviseurs positifs.</p>
 
@@ -5728,7 +5746,7 @@ $$x\ln2 = (x - 1)\ln3.$$
 <p><b>Étape 1 : Rappel.</b> $x^x = e^{x\ln x}$ pour $x > 0$, et $x\ln x\to0$ en $0^+$.</p>
 <p><b>Étape 2 : La dérivée.</b> $(x\ln x)' = \ln x + 1$, donc $f'(x) = (\ln x + 1)\,x^x$.</p>
 <p><b>Étape 3 : Le signe.</b> $x^x > 0$, et $\ln x + 1\geq0\iff x\geq e^{-1}$ : $f$ décroît sur $]0, \frac1e]$, croît sur $[\frac1e, +\infty[$.</p>
-<p><b>Étape 4 : Les valeurs.</b> $f(\frac1e) = e^{-1/e}\approx0{,}69$ (minimum). En $0^+$ : $x\ln x\to0$ donc $f(x)\to e^0 = 1$. En $+\infty$ : $x\ln x\to+\infty$ donc $f\to+\infty$.</p>
+<p><b>Étape 4 : Les valeurs.</b> $f(\frac1e) = e^{\frac1e\ln\frac1e} = e^{\frac1e\times(-1)} = e^{-1/e}\approx0{,}69$ (minimum). En $0^+$ : $x\ln x\to0$ donc $f(x)\to e^0 = 1$. En $+\infty$ : $x\ln x\to+\infty$ donc $f\to+\infty$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\min_{]0, +\infty[}x^x = e^{-1/e}}$, atteint en $\frac1e$, et $f$ se prolonge par continuité en $0$ par $1$.</p>
 
 <h2 id="u-trig">3. Trigonométrie : les formules qui servent</h2>
@@ -5808,7 +5826,7 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <p class="ml">Exemple 9 : $\arctan x + \arctan\frac1x$</p>
 <p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ constante <b>sur cet intervalle</b> ; $\mathbb R^*$ n'est pas un intervalle.</p>
 <p><b>Étape 2 : La dérivée.</b> Pour $x\neq0$, avec $\big(\frac1x\big)' = -\frac1{x^2}$ :</p>
-$$f'(x) = \frac1{1 + x^2} - \frac1{x^2}\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 + x^2} - \frac1{x^2 + 1} = 0.$$
+$$f'(x) = \frac1{1 + x^2} + \Big(-\frac1{x^2}\Big)\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 + x^2} - \frac1{x^2\big(1 + \frac1{x^2}\big)} = \frac1{1 + x^2} - \frac1{x^2 + 1} = 0.$$
 <p><b>Étape 3 : Sur $]0, +\infty[$.</b> $f(1) = \frac\pi4 + \frac\pi4 = \frac\pi2$.</p>
 <p><b>Étape 4 : Sur $]-\infty, 0[$.</b> $f$ est impaire, donc $f = -\frac\pi2$ (ou $f(-1) = -\frac\pi2$).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\arctan x + \arctan\frac1x = \operatorname{signe}(x)\,\frac\pi2}$.</p>
@@ -5819,8 +5837,9 @@ $$f'(x) = \frac1{1 + x^2} - \frac1{x^2}\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 +
 
 <p class="ml">Exemple 10 : $\arctan x + \arctan2x = \frac\pi4$</p>
 <p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et appliquer $\tan$ donne seulement une implication.</p>
-<p><b>Étape 2 : On applique $\tan$.</b> Si $x$ est solution, alors $\frac{x + 2x}{1 - 2x^2} = \tan\frac\pi4 = 1$ (avec $2x^2\neq1$).</p>
-<p><b>Étape 3 : L'équation.</b> $3x = 1 - 2x^2\iff2x^2 + 3x - 1 = 0$, $\Delta = 9 + 8 = 17$, $x = \frac{-3\pm\sqrt{17}}4$.</p>
+<p><b>Étape 2 : On applique $\tan$.</b> Avec $a = \arctan x$, $b = \arctan2x$ : $\tan a = x$, $\tan b = 2x$, donc si $x$ est solution :</p>
+$$\tan(a + b) = \frac{x + 2x}{1 - x\cdot2x} = \frac{3x}{1 - 2x^2} = \tan\frac\pi4 = 1\qquad(2x^2\neq1).$$
+<p><b>Étape 3 : L'équation.</b> $3x = 1 - 2x^2\iff2x^2 + 3x - 1 = 0$. $\Delta = 3^2 - 4\times2\times(-1) = 9 + 8 = 17$, et $x = \frac{-3\pm\sqrt{17}}{2\times2} = \frac{-3\pm\sqrt{17}}4$.</p>
 <p><b>Étape 4 : La vérification.</b> $f(x) = \arctan x + \arctan2x$ est impaire et croissante. Pour $x \lt 0$, $f(x) \lt 0 \lt \frac\pi4$ : on rejette $\frac{-3 - \sqrt{17}}4 \lt 0$. Pour $x_0 = \frac{-3 + \sqrt{17}}4 > 0$ : $f(x_0)\in\,]0, \pi[$ et $\tan f(x_0) = 1$, donc $f(x_0) = \frac\pi4$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \Big\{\frac{\sqrt{17} - 3}4\Big\}}$.</p>
 
@@ -6042,8 +6061,8 @@ $$w_3 = (0, 1, 1) - \frac12(1, 1, 0) - \frac16(1, -1, 2) = \Big(-\frac23, \frac2
 <p><b>Étape 1 : Rappel.</b> Gram-Schmidt, et $\int_{-1}^1t^k\,dt = \frac2{k + 1}$ si $k$ est pair, $0$ si $k$ est impair.</p>
 <p><b>Étape 2 : $e_0$.</b> $\|1\|^2 = 2$, $\cV{e_0 = \frac1{\sqrt2}}$.</p>
 <p><b>Étape 3 : $e_1$.</b> $\langle X, 1\rangle = \int t = 0$ : $X$ est déjà orthogonal. $\|X\|^2 = \frac23$, $\cV{e_1 = \sqrt{\frac32}\,X}$.</p>
-<p><b>Étape 4 : $e_2$.</b> $\langle X^2, X\rangle = 0$ et $\langle X^2, 1\rangle = \frac23$ : $w_2 = X^2 - \frac{2/3}2\cdot1 = X^2 - \frac13$. Et :</p>
-$$\|w_2\|^2 = \int_{-1}^1\Big(t^4 - \frac23t^2 + \frac19\Big)dt = \frac25 - \frac49 + \frac29 = \frac8{45}.$$
+<p><b>Étape 4 : $e_2$.</b> $\langle X^2, X\rangle = \int_{-1}^1t^3\,dt = 0$ et $\langle X^2, 1\rangle = \int_{-1}^1t^2\,dt = \frac23$. On retire la projection sur $1$ : coefficient $\frac{\langle X^2, 1\rangle}{\|1\|^2} = \frac{2/3}2 = \frac13$, donc $w_2 = X^2 - \frac13$. On développe $(t^2 - \frac13)^2 = t^4 - \frac23t^2 + \frac19$ et on intègre terme à terme :</p>
+$$\|w_2\|^2 = \underbrace{\int_{-1}^1t^4}_{\frac25} - \frac23\underbrace{\int_{-1}^1t^2}_{\frac23} + \frac19\underbrace{\int_{-1}^11}_{2} = \frac25 - \frac49 + \frac29 = \frac25 - \frac29 = \frac{18 - 10}{45} = \frac8{45}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{e_2 = \sqrt{\frac{45}8}\Big(X^2 - \frac13\Big)}$ : ce sont les polynômes de Legendre normalisés.</p>
 
 <h2 id="h-proj">7. Supplémentaire orthogonal, projection orthogonale</h2>
@@ -6240,7 +6259,7 @@ $$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists\cV P\in O(n),\ \exists D
 <p class="ml">Exemple 6 : une matrice $2\times2$</p>
 <p>Diagonaliser $S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$ dans une BON.</p>
 <p><b>Étape 1 : Rappel.</b> $S$ symétrique réelle : $S = PDP^\top$ avec $P\in O(2)$.</p>
-<p><b>Étape 2 : Valeurs propres.</b> $\chi_S = (X - 2)^2 - 1 = (X - 1)(X - 3)$ : $\cO{\lambda = 1}$ et $\cO{\lambda = 3}$.</p>
+<p><b>Étape 2 : Valeurs propres.</b> $\chi_S = \det\begin{pmatrix}X - 2&-1\\-1&X - 2\end{pmatrix} = (X - 2)^2 - 1 = (X - 2 - 1)(X - 2 + 1) = (X - 3)(X - 1)$ : $\cO{\lambda = 1}$ et $\cO{\lambda = 3}$.</p>
 <p><b>Étape 3 : Vecteurs propres.</b> $\lambda = 3$ : $-x + y = 0$, vecteur $(1, 1)$. $\lambda = 1$ : $x + y = 0$, vecteur $(1, -1)$. Ils sont bien orthogonaux.</p>
 <p><b>Étape 4 : On normalise.</b> $\frac1{\sqrt2}(1, 1)$ et $\frac1{\sqrt2}(1, -1)$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
@@ -6408,7 +6427,7 @@ $$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{
 <p class="ml">Exemple 4 : une suite de matrices</p>
 <p>$A = \begin{pmatrix}\frac12&1\\0&\frac12\end{pmatrix}$. Montrer que $A^n\to0$.</p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie, on regarde chaque coefficient.</p>
-<p><b>Étape 2 : On écrit</b> $A = \frac12I + N$, $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, $IN = NI$. Binôme :</p>
+<p><b>Étape 2 : On écrit</b> $A = \frac12I + N$, $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, $IN = NI$. Binôme : $A^n = \sum_k\binom nk\big(\frac12\big)^{n-k}N^k$, et seuls $k = 0$ et $k = 1$ restent car $N^k = 0$ pour $k\geq2$ :</p>
 $$A^n = \Big(\frac12\Big)^nI + n\Big(\frac12\Big)^{n-1}N = \begin{pmatrix}2^{-n}&n\,2^{1-n}\\0&2^{-n}\end{pmatrix}.$$
 <p><b>Étape 3 : Les coefficients.</b> $2^{-n}\to0$ et $n\,2^{1-n}\to0$ (croissances comparées).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^n\to0}$ (pour n'importe quelle norme de $\mathcal M_2$).</p>
@@ -6662,7 +6681,7 @@ $$\textbf{Si les dérivées partielles existent et sont continues sur}\ U\ \text
 <p>$f(x, y) = \dfrac{x^2y^2}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> Candidat $L$ par les dérivées partielles, puis $\frac{f(h) - f(0) - L(h)}{\|h\|}\to0$.</p>
 <p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = f(0, t) = 0$, donc $\partial_xf(0, 0) = \partial_yf(0, 0) = 0$ : le candidat est $L = 0$.</p>
-<p><b>Étape 3 : On majore</b> avec $x^2y^2\leq\frac{(x^2 + y^2)^2}4$ (car $(x^2 - y^2)^2\geq0$) :</p>
+<p><b>Étape 3 : On majore.</b> $(x^2 - y^2)^2\geq0$ donne $x^4 + y^4\geq2x^2y^2$, donc $(x^2 + y^2)^2 = x^4 + 2x^2y^2 + y^4\geq4x^2y^2$, soit $x^2y^2\leq\frac{(x^2 + y^2)^2}4 = \frac{r^4}4$ :</p>
 $$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\frac{r^4}{4r^3} = \cO{\frac r4}\to0.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est différentiable en}\ (0, 0)\ \text{et}\ df(0, 0) = 0}$.</p>
 
@@ -6671,7 +6690,8 @@ $$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\fra
 <p><b>Étape 1 : Rappel.</b> Même méthode : candidat, puis quotient.</p>
 <p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = t$, $f(0, t) = t$ : $\partial_xf(0, 0) = \partial_yf(0, 0) = 1$, candidat $L(x, y) = x + y$.</p>
 <p><b>Étape 3 : Le quotient en polaires.</b></p>
-$$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac{-xy(x + y)}{r^3} = -\cos\theta\sin\theta(\cos\theta + \sin\theta).$$
+<p>On développe $(x + y)(x^2 + y^2) = x^3 + xy^2 + x^2y + y^3$, donc $x^3 + y^3 - (x + y)(x^2 + y^2) = -xy^2 - x^2y = -xy(x + y)$ :</p>
+$$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac{-xy(x + y)}{r^3} = \frac{-r^3\cos\theta\sin\theta(\cos\theta + \sin\theta)}{r^3} = -\cos\theta\sin\theta(\cos\theta + \sin\theta).$$
 <p><b>Étape 4 : Il dépend de $\theta$.</b> Sur $\theta = \frac\pi4$ il vaut $-\frac12\cdot\sqrt2\neq0$ : il ne tend pas vers $0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{n'est pas différentiable en}\ (0, 0)}$, bien que continue ($|f|\leq\frac{2r^3}{r^2} = 2r$) avec des dérivées partielles.</p>
 
@@ -6763,7 +6783,9 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 <p>$f(x, y) = x^2 + xy + y^2 - 3x$.</p>
 <p><b>Étape 1 : Rappel.</b> Point critique, puis signe de $f(a + h) - f(a)$ pour tout $h$.</p>
 <p><b>Étape 2 : Le point critique.</b> $2x + y - 3 = 0$ et $x + 2y = 0$ : $x = -2y$, $-3y = 3$, donc $\cR{a = (2, -1)}$, $f(a) = 4 - 2 + 1 - 6 = -3$.</p>
-<p><b>Étape 3 : L'écart exact.</b> En développant, les termes de degré $1$ en $(h, k)$ s'annulent (point critique) :</p>
+<p><b>Étape 3 : L'écart exact.</b> On développe chaque morceau :</p>
+$$(2 + h)^2 = 4 + 4h + h^2,\quad(2 + h)(-1 + k) = -2 + 2k - h + hk,\quad(-1 + k)^2 = 1 - 2k + k^2,\quad-3(2 + h) = -6 - 3h.$$
+<p>On additionne : constantes $4 - 2 + 1 - 6 = -3$ ; termes en $h$ : $4h - h - 3h = 0$ ; en $k$ : $2k - 2k = 0$ (c'est le point critique) ; il reste :</p>
 $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \frac34k^2\geq0.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\min_{\mathbb R^2}f = -3}$, atteint seulement en $(2, -1)$.</p>
 
@@ -6919,7 +6941,8 @@ $$e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1},\qquad e^{\operatorname{di
 <p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}\Rightarrow e^A = Pe^DP^{-1}$.</p>
 <p><b>Étape 2 : On diagonalise.</b> Valeurs propres $3$ (vecteur $(1, 1)$) et $1$ (vecteur $(1, -1)$) : $\cV P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV P^{-1} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV D = \operatorname{diag}(3, 1)$.</p>
 <p><b>Étape 3 : On calcule.</b></p>
-$$e^A = \cV P\begin{pmatrix}e^3&0\\0&e\end{pmatrix}\cV P^{-1} = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}.$$
+$$\cV P\begin{pmatrix}e^3&0\\0&e\end{pmatrix} = \begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}e^3&0\\0&e\end{pmatrix} = \begin{pmatrix}e^3&e\\e^3&-e\end{pmatrix},$$
+$$e^A = \begin{pmatrix}e^3&e\\e^3&-e\end{pmatrix}\cdot\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix} = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^A = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}}$. Contrôle : $\det e^A = e^4 = e^{\operatorname{tr}A}$.</p>
 
 <p class="ml">Exemple 3 : $\lambda I + N$</p>
@@ -7266,7 +7289,8 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p>Probabilité d'obtenir au moins un $6$ en $4$ lancers d'un dé équilibré.</p>
 <p><b>Étape 1 : Rappel.</b> $P(\overline A) = 1 - P(A)$ : « au moins un » se calcule par le contraire « aucun ».</p>
 <p><b>Étape 2 : Le contraire.</b> « Aucun $6$ » : chaque lancer donne autre chose que $6$, probabilité $\cO{\frac56}$, et les lancers sont indépendants : $\big(\frac56\big)^4 = \frac{625}{1296}$.</p>
-<p><b>Étape 3 : Conclusion.</b> $\cG{P = 1 - \frac{625}{1296} = \frac{671}{1296}\approx0{,}518}$.</p>
+<p><b>Étape 3 : Le calcul.</b> $\big(\frac56\big)^4 = \frac{5^4}{6^4} = \frac{625}{1296}$, et $1296 - 625 = 671$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P = 1 - \frac{625}{1296} = \frac{671}{1296}\approx0{,}518}$.</p>
 
 <h2 id="q-unif">3. Équiprobabilité : on dénombre</h2>
 <div class="sbox">$$P\ \text{uniforme sur}\ \Omega:\quad P(A) = \frac{\operatorname{Card}A}{\operatorname{Card}\Omega} = \frac{\text{cas favorables}}{\text{cas possibles}}.$$</div>
@@ -7314,7 +7338,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p><b>Étape 1 : Rappel.</b> Bayes avec le système complet $(\cR M, \cR{\overline M})$.</p>
 <p><b>Étape 2 : Les données.</b> $P(M) = 0{,}01$, $P_M(+) = 0{,}99$, $P(\overline M) = 0{,}99$, $P_{\overline M}(+) = 0{,}05$.</p>
 <p><b>Étape 3 : Probabilités totales.</b> $P(+) = 0{,}01\times0{,}99 + 0{,}99\times0{,}05 = 0{,}0099 + 0{,}0495 = 0{,}0594$.</p>
-<p><b>Étape 4 : Bayes.</b> $P_+(M) = \frac{0{,}0099}{0{,}0594} = \frac16$.</p>
+<p><b>Étape 4 : Bayes.</b> $P_+(M) = \frac{P(M)P_M(+)}{P(+)} = \frac{0{,}0099}{0{,}0594} = \frac{99}{594} = \frac{99}{6\times99} = \frac16$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{P_+(M) = \frac16\approx17\%}$ : la plupart des positifs sont des faux positifs, car la maladie est rare.</p>
 
 <h2 id="q-ind">7. Indépendance</h2>
@@ -7345,7 +7369,7 @@ $$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\
 <p class="ml">Exemple 9 : la loi du maximum de deux dés</p>
 <p><b>Étape 1 : Rappel.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$, puis on fait la différence.</p>
 <p><b>Étape 2 : La fonction de répartition.</b> Les dés sont indépendants : $P(M\leq k) = \frac k6\cdot\frac k6 = \frac{k^2}{36}$.</p>
-<p><b>Étape 3 : La différence.</b> $P(M = k) = \frac{k^2 - (k - 1)^2}{36} = \frac{2k - 1}{36}$, $k\in[\![1, 6]\!]$.</p>
+<p><b>Étape 3 : La différence.</b> $k^2 - (k - 1)^2 = k^2 - (k^2 - 2k + 1) = 2k - 1$, donc $P(M = k) = \frac{k^2 - (k - 1)^2}{36} = \frac{2k - 1}{36}$, $k\in[\![1, 6]\!]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(M = k) = \frac{2k - 1}{36}}$. Contrôle : $\sum_{k=1}^6(2k - 1) = 36$.</p>
 
 <h2 id="q-lois">9. Les lois usuelles</h2>
@@ -7361,7 +7385,8 @@ $$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\
 <p>On lance $5$ fois un dé. Probabilité d'obtenir exactement deux $6$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Nombre de succès en $n$ épreuves indépendantes de même probabilité $p$ : $\mathcal B(n, p)$, $P(X = k) = \binom nkp^k(1 - p)^{n-k}$.</p>
 <p><b>Étape 2 : Les paramètres.</b> Succès = « faire $6$ », $\cV p = \frac16$, $\cV n = 5$, lancers indépendants : $X\sim\mathcal B\big(5, \frac16\big)$.</p>
-<p><b>Étape 3 : Le calcul.</b> $P(X = 2) = \binom52\big(\frac16\big)^2\big(\frac56\big)^3 = 10\times\frac1{36}\times\frac{125}{216}$.</p>
+<p><b>Étape 3 : Le calcul.</b> $\binom52 = \frac{5\times4}2 = 10$, $\big(\frac16\big)^2 = \frac1{36}$, $\big(\frac56\big)^3 = \frac{125}{216}$, et $36\times216 = 7776$ :</p>
+$$P(X = 2) = 10\times\frac1{36}\times\frac{125}{216} = \frac{1250}{7776}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(X = 2) = \frac{1250}{7776}\approx0{,}161}$.</p>
 
 <h2 id="q-couple">10. Couples de variables aléatoires</h2>
@@ -7722,7 +7747,7 @@ $$\textbf{Continuité croissante}:\ A_n\subset A_{n+1}\Rightarrow P\Big(\bigcup 
 <p>On lance indéfiniment une pièce équilibrée. Probabilité de n'obtenir jamais pile ?</p>
 <p><b>Étape 1 : Rappel.</b> Continuité décroissante : $P\big(\bigcap B_n\big) = \lim P(B_n)$ si $B_{n+1}\subset B_n$.</p>
 <p><b>Étape 2 : Les événements.</b> $B_n$ = « face aux $n$ premiers lancers ». $B_{n+1}\subset B_n$, et « jamais pile » $= \bigcap_nB_n$.</p>
-<p><b>Étape 3 : $P(B_n)$.</b> Lancers indépendants : $P(B_n) = \big(\frac12\big)^n$.</p>
+<p><b>Étape 3 : $P(B_n)$.</b> Lancers indépendants : $P(B_n) = \underbrace{\frac12\times\frac12\times\dots\times\frac12}_{n\ \text{fois}} = \big(\frac12\big)^n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(\text{jamais pile}) = \lim\big(\frac12\big)^n = 0}$ : on obtient pile presque sûrement (mais « que des faces » n'est pas impossible).</p>
 
 <h2 id="w-tot">3. Probabilités totales avec un système complet dénombrable</h2>
@@ -7804,8 +7829,10 @@ $$X, Y\ \text{indépendantes}\Rightarrow G_{X+Y} = G_XG_Y.$$</div>
 <p class="ml">Exemple 9 : espérance et variance d'une géométrique par $G$</p>
 <p><b>Étape 1 : Rappel.</b> $E = G'(1)$, $V = G''(1) + G'(1) - G'(1)^2$.</p>
 <p><b>Étape 2 : $G$.</b> $G(t) = \sum_{k\geq1}q^{k-1}pt^k = \frac{pt}{1 - qt}$ pour $|t| \lt \frac1q$.</p>
-<p><b>Étape 3 : Les dérivées.</b> $G(t) = \frac pq\Big(\frac1{1 - qt} - 1\Big)$, donc $G'(t) = \frac p{(1 - qt)^2}$, $G''(t) = \frac{2pq}{(1 - qt)^3}$. En $1$ : $G'(1) = \frac1p$, $G''(1) = \frac{2q}{p^2}$.</p>
-<p><b>Étape 4 : La variance.</b> $V = \frac{2q}{p^2} + \frac1p - \frac1{p^2} = \frac{2q + p - 1}{p^2} = \frac q{p^2}$.</p>
+<p><b>Étape 3 : Les dérivées.</b> On écrit $G(t) = \frac pq\Big(\frac1{1 - qt} - 1\Big)$ (vérification : $\frac1{1 - qt} - 1 = \frac{qt}{1 - qt}$). Avec $\big(\frac1{1 - qt}\big)' = \frac q{(1 - qt)^2}$ et $\big(\frac1{(1 - qt)^2}\big)' = \frac{2q}{(1 - qt)^3}$ :</p>
+$$G'(t) = \frac pq\cdot\frac q{(1 - qt)^2} = \frac p{(1 - qt)^2},\qquad G''(t) = \frac{2pq}{(1 - qt)^3}.$$
+<p>En $t = 1$, avec $1 - q = p$ : $G'(1) = \frac p{p^2} = \frac1p$ et $G''(1) = \frac{2pq}{p^3} = \frac{2q}{p^2}$.</p>
+<p><b>Étape 4 : La variance.</b> $V = \frac{2q}{p^2} + \frac1p - \frac1{p^2} = \frac{2q + p - 1}{p^2}$, et $p - 1 = -q$, donc $V = \frac{2q - q}{p^2} = \frac q{p^2}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{E(X) = \frac1p,\ V(X) = \frac q{p^2}}$.</p>
 
 <h2 id="w-somme">8. Loi d'une somme de variables indépendantes</h2>
