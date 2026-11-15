@@ -103,22 +103,23 @@ $$A^0 = I_n,\qquad A^1 = A,\qquad A^{k+1} = A\,A^k = A^k\,A.$$
 </ol>
 <p class="ml">Exemple</p>
 <p>Soit $A = \begin{pmatrix}2&1&0\\0&2&1\\0&0&2\end{pmatrix}$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$ avec la formule du binôme.</b></p>
-<p><b>1.</b> On sépare la diagonale (en <span class="kB">bleu</span>) du reste (en <span class="kR">rouge</span>) :</p>
+<p><b>Étape 1 : Rappel.</b> On écrit $A = \lambda I + N$ avec $N$ nilpotente. $\lambda I$ commute avec tout, donc la formule du binôme s'applique : $(\lambda I + N)^n = \sum_k\binom nk\lambda^{n-k}N^k$, et la somme s'arrête dès que $N^k = 0$.</p>
+<p><b>Étape 2 :</b> On sépare la diagonale (en <span class="kB">bleu</span>) du reste (en <span class="kR">rouge</span>) :</p>
 $$A = \begin{pmatrix}\cB2&\cR1&0\\0&\cB2&\cR1\\0&0&\cB2\end{pmatrix} = \cB{2I_3} + \cR N,\qquad\cR N = \begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix}.$$
-<p><b>2.</b> $\cB{2I_3}$ et $\cR N$ commutent, car $I_3$ commute avec tout.</p>
-<p><b>3.</b> On calcule les puissances de $\cR N$ : les $1$ montent d'un cran à chaque fois, puis disparaissent.</p>
+<p><b>Étape 3 :</b> $\cB{2I_3}$ et $\cR N$ commutent, car $I_3$ commute avec tout.</p>
+<p><b>Étape 4 :</b> On calcule les puissances de $\cR N$ : les $1$ montent d'un cran à chaque fois, puis disparaissent.</p>
 $$\cR N = \begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix},\qquad\cG{N^2} = \begin{pmatrix}0&0&\cG1\\0&0&0\\0&0&0\end{pmatrix},\qquad N^3 = 0.$$
-<p><b>4.</b> On écrit la formule du binôme <b>en entier</b>, terme par terme, avec $\cB{2I_3}$ à la place de « $a$ » et $\cR N$ à la place de « $b$ » :</p>
+<p><b>Étape 5 :</b> On écrit la formule du binôme <b>en entier</b>, terme par terme, avec $\cB{2I_3}$ à la place de « $a$ » et $\cR N$ à la place de « $b$ » :</p>
 $$(\cB{2I_3} + \cR N)^n = \sum_{k=0}^n\binom nk\cB{(2I_3)}^{n-k}\cR N^k$$
 $$= \underbrace{\binom n0\cB{(2I_3)}^n\cR{N^0}}_{k = 0} + \underbrace{\binom n1\cB{(2I_3)}^{n-1}\cR{N^1}}_{k = 1} + \underbrace{\binom n2\cB{(2I_3)}^{n-2}\cR{N^2}}_{k = 2} + \underbrace{\cancel{\binom n3\cB{(2I_3)}^{n-3}\cR{N^3}}}_{N^3 = 0} + \cdots + \underbrace{\cancel{\cR{N^n}}}_{= 0}$$
-<p><b>5.</b> On simplifie chaque morceau :</p>
+<p><b>Étape 6 :</b> On simplifie chaque morceau :</p>
 <ul>
 <li>$\cB{(2I_3)}^{m} = 2^m\,I_3^m = \cB{2^mI_3}$, et $\cR{N^0} = I_3$ ;</li>
 <li>$\binom n0 = 1$, $\binom n1 = n$, $\binom n2 = \dfrac{n(n-1)}2$ ;</li>
 <li>tous les termes à partir de $k = 3$ contiennent $N^3 = 0$ : ils sont nuls.</li>
 </ul>
 $$A^n = \cB{2^n}\,I_3 + n\,\cB{2^{n-1}}\,\cR N + \frac{n(n-1)}2\,\cB{2^{n-2}}\,\cG{N^2}.$$
-<p><b>6.</b> On remplace par les matrices et on additionne case par case :</p>
+<p><b>Étape 7 :</b> On remplace par les matrices et on additionne case par case :</p>
 $$A^n = \cB{2^n}\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix} + n\cB{2^{n-1}}\begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix} + \frac{n(n-1)}2\cB{2^{n-2}}\begin{pmatrix}0&0&\cG1\\0&0&0\\0&0&0\end{pmatrix}$$
 $$A^n = \begin{pmatrix}\cB{2^n}&\cR{n2^{n-1}}&\cG{\frac{n(n-1)}2\,2^{n-2}}\\0&\cB{2^n}&\cR{n2^{n-1}}\\0&0&\cB{2^n}\end{pmatrix}\qquad(n\geqslant2).$$
 <p><b>Vérification</b> avec $n = 2$ : $\cB4$, $\cR{2\cdot2 = 4}$, $\cG{1\cdot1 = 1}$, et le calcul direct de $A^2$ donne bien $\begin{pmatrix}4&4&1\\0&4&4\\0&0&4\end{pmatrix}$.</p>
@@ -365,13 +366,14 @@ $$\operatorname{Mat}_{\mathcal B',\mathcal C'}(f) = Q^{-1}\operatorname{Mat}_{\m
 
 <p class="ml">Exemple complet : rendre une matrice diagonale</p>
 <p>$f$ a pour matrice $\cO{A = \begin{pmatrix}3&1\\1&3\end{pmatrix}}$ dans la base canonique. On prend la nouvelle base $\cG{e'_1 = (1,1)}$, $\cG{e'_2 = (1,-1)}$. <b>Calculer la matrice $A'$ de $f$ dans la nouvelle base, avec $A' = P^{-1}AP$.</b></p>
-<p><b>Étape 1 : $P$</b>, les nouveaux vecteurs en colonnes.</p>
+<p><b>Étape 1 : Rappel.</b> La matrice de passage $P$ a pour colonnes les nouveaux vecteurs écrits dans l'ancienne base. La matrice de $f$ dans la nouvelle base est $A' = P^{-1}AP$ : on calcule $P$, puis $P^{-1}$, puis le produit.</p>
+<p><b>Étape 2 : $P$</b>, les nouveaux vecteurs en colonnes.</p>
 $$P = \begin{pmatrix}\cG1&\cG1\\\cG1&\cG{-1}\end{pmatrix},\qquad\det P = -2\neq0.$$
-<p><b>Étape 2 : $P^{-1}$</b>, avec la formule de taille 2.</p>
+<p><b>Étape 3 : $P^{-1}$</b>, avec la formule de taille 2.</p>
 $$P^{-1} = \frac1{-2}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}.$$
-<p><b>Étape 3 : $AP$</b>, c'est-à-dire les images des nouveaux vecteurs.</p>
+<p><b>Étape 4 : $AP$</b>, c'est-à-dire les images des nouveaux vecteurs.</p>
 $$AP = \begin{pmatrix}3&1\\1&3\end{pmatrix}\begin{pmatrix}1&1\\1&-1\end{pmatrix} = \begin{pmatrix}4&2\\4&-2\end{pmatrix}:\qquad f(\cG{e'_1}) = \cG{4e'_1},\quad f(\cG{e'_2}) = \cG{2e'_2}.$$
-<p><b>Étape 4 : $A' = P^{-1}(AP)$</b>.</p>
+<p><b>Étape 5 : $A' = P^{-1}(AP)$</b>.</p>
 $$\cG{A'} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}4&2\\4&-2\end{pmatrix} = \begin{pmatrix}\cG4&0\\0&\cG2\end{pmatrix}.$$
 <p><b>Astuce</b> : à l'étape 3 on lit déjà la réponse. Si $f(\cG{e'_j}) = \lambda_j\cG{e'_j}$, la nouvelle matrice est diagonale, avec les $\lambda_j$ sur la diagonale.</p>
 <p><b>Bonus : les puissances.</b></p>
@@ -1339,19 +1341,20 @@ $$\cG{E_4} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\\1\end{pmatrix}},\qquad\
 <li>Vérifier $AP = PD$ (plus rapide que $P^{-1}AP = D$, et on n'a pas besoin de $P^{-1}$).</li>
 </ol>
 <p class="ml">Exemple complet : $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$</p>
-<p><b>1. Rappel.</b> $A$ est diagonalisable si et seulement si $\chi_A$ est scindé et $\dim E_\lambda = m_\lambda$ pour chaque valeur propre. Alors $A = PDP^{-1}$ avec les vecteurs propres en colonnes dans $P$.</p>
-<p><b>2–3.</b> Calcul détaillé au §4 (on fait $C_1\leftarrow C_1 + C_2 + C_3$, puis $L_2\leftarrow L_2 - L_1$, $L_3\leftarrow L_3 - L_1$) :</p>
+<p>Soit $A = \begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$. <b>Montrer que $A$ est diagonalisable et trouver $P$ inversible et $D$ diagonale avec $A = PDP^{-1}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> $A$ est diagonalisable si et seulement si $\chi_A$ est scindé et $\dim E_\lambda = m_\lambda$ pour chaque valeur propre. Alors $A = PDP^{-1}$ avec les vecteurs propres en colonnes dans $P$.</p>
+<p><b>Étape 2 : Le polynôme caractéristique.</b> Calcul détaillé au §4 (on fait $C_1\leftarrow C_1 + C_2 + C_3$, puis $L_2\leftarrow L_2 - L_1$, $L_3\leftarrow L_3 - L_1$) :</p>
 $$\chi_A = (X - \cB4)(X - \cB1)^2,\qquad\cO{m_4 = 1},\qquad\cO{m_1 = 2}.$$
-<p><b>4.</b> Seule $\cB1$ est multiple, c'est la seule à vérifier :</p>
+<p><b>Étape 4 :</b> Seule $\cB1$ est multiple, c'est la seule à vérifier :</p>
 $$A - I_3 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\ \text{(3 lignes égales)}\ \Longrightarrow\ \operatorname{rg}(A - I_3) = 1\ \Longrightarrow\ \dim\cG{E_1} = 3 - 1 = 2 = \cO{m_1}.$$
 <p>Donc $A$ est diagonalisable.</p>
-<p><b>5.</b> Les systèmes sont résolus en entier au §6 :</p>
+<p><b>Étape 5 :</b> Les systèmes sont résolus en entier au §6 :</p>
 $$\cG{E_4}:\ \left\{\begin{aligned}-2x + y + z &= 0\\x - 2y + z &= 0\\x + y - 2z &= 0\end{aligned}\right.\ \Longleftrightarrow\ x = y = z,\qquad\cG{E_1}:\ x + y + z = 0\ \Longleftrightarrow\ z = -x - y.$$
 $$\cG{E_4} = \operatorname{Vect}\cR{(1,1,1)},\qquad\cG{E_1} = \operatorname{Vect}\big(\cR{(1,0,-1)},\ \cR{(0,1,-1)}\big).$$
-<p><b>6.</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
+<p><b>Étape 6 :</b> On range les vecteurs propres en colonnes, et les valeurs propres dans le même ordre :</p>
 <div class="labm"><table><tr><td></td><td class="kB">$\lambda = 4$</td><td class="kB">$\lambda = 1$</td><td class="kB">$\lambda = 1$</td></tr><tr><td></td><td class="c1">1</td><td class="c2">1</td><td class="c3">0</td></tr><tr><td></td><td class="c1">1</td><td class="c2">0</td><td class="c3">1</td></tr><tr><td></td><td class="c1">1</td><td class="c2">−1</td><td class="c3">−1</td></tr></table><span class="lab-cap">$P$ : chaque colonne est un vecteur propre</span></div>
 $$D = \begin{pmatrix}\cB4&0&0\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PDP^{-1}.$$
-<p><b>7.</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
+<p><b>Étape 7 :</b> On vérifie chaque colonne, c'est-à-dire $AP = PD$ :</p>
 $$\left\{\begin{aligned}A\cR{(1,1,1)} &= (2+1+1,\ 1+2+1,\ 1+1+2) = (4,4,4) = \cB4\cR{(1,1,1)}\\A\cR{(1,0,-1)} &= (2+0-1,\ 1+0-1,\ 1+0-2) = (1,0,-1) = \cB1\cR{(1,0,-1)}\\A\cR{(0,1,-1)} &= (0+1-1,\ 0+2-1,\ 0+1-2) = (0,1,-1) = \cB1\cR{(0,1,-1)}\end{aligned}\right.$$
 $$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.$$
 
@@ -1369,18 +1372,18 @@ $$AP = \begin{pmatrix}4&1&0\\4&0&1\\4&-1&-1\end{pmatrix} = PD.$$
 <li>Alors $A\cG{e_2} = \cR{e_1} + \lambda\cG{e_2}$, d'où $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</li>
 </ol>
 <p class="ml">Exemple</p>
-<p><b>1. Rappel.</b> Si $\chi_A = (X - \lambda)^2$ et $\dim E_\lambda = 1$ : on prend $e_1$ vecteur propre, puis $e_2$ tel que $(A - \lambda I_2)e_2 = e_1$. Alors $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</p>
-$$A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}.$$
-<p><b>2. $\chi_A$.</b></p>
+<p>Soit $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$. <b>Montrer que $A$ n'est pas diagonalisable et la trigonaliser : trouver $P$ et $T$ triangulaire avec $A = PTP^{-1}$.</b></p>
+<p><b>Étape 1 : Rappel.</b> Si $\chi_A = (X - \lambda)^2$ et $\dim E_\lambda = 1$ : on prend $e_1$ vecteur propre, puis $e_2$ tel que $(A - \lambda I_2)e_2 = e_1$. Alors $T = \begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}$.</p>
+<p><b>Étape 2 : $\chi_A$.</b></p>
 $$\operatorname{tr}A = 1 + 3 = 4,\qquad\det A = 1\times3 - 1\times(-1) = 4,\qquad\chi_A = X^2 - 4X + 4 = (X - \cB2)^2.$$
-<p><b>3. Le sous-espace propre.</b> On résout $(A - 2I_2)X = 0$ avec $X = (x, y)$ :</p>
+<p><b>Étape 3 : Le sous-espace propre.</b> On résout $(A - 2I_2)X = 0$ avec $X = (x, y)$ :</p>
 $$A - 2I_2 = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 0\\-x + y &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = x.$$
 $$\cG{E_2} = \operatorname{Vect}\cR{\begin{pmatrix}1\\1\end{pmatrix}},\qquad\dim\cG{E_2} = 1\lt2 = \cO{m_2}\ \Longrightarrow\ \text{pas diagonalisable}.$$
-<p><b>4. Le premier vecteur</b> : $\cR{e_1} = (1,1)$, et on contrôle $A\cR{e_1} = (1 + 1,\ -1 + 3) = (2,2) = 2\cR{e_1}$.</p>
-<p><b>5. Le deuxième vecteur</b> : on résout $(A - 2I_2)\cG{e_2} = \cR{e_1}$ avec $\cG{e_2} = (x, y)$ :</p>
+<p><b>Étape 4 : Le premier vecteur</b> : $\cR{e_1} = (1,1)$, et on contrôle $A\cR{e_1} = (1 + 1,\ -1 + 3) = (2,2) = 2\cR{e_1}$.</p>
+<p><b>Étape 5 : Le deuxième vecteur</b> : on résout $(A - 2I_2)\cG{e_2} = \cR{e_1}$ avec $\cG{e_2} = (x, y)$ :</p>
 $$\begin{pmatrix}-1&1\\-1&1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y &= 1\\-x + y &= 1\end{aligned}\right.\qquad\Longleftrightarrow\qquad y = 1 + x.$$
 <p>N'importe quelle solution convient : avec $x = 0$, on prend $\cG{e_2} = (0, 1)$.</p>
-<p><b>6. Vérification et conclusion.</b></p>
+<p><b>Étape 6 : Vérification et conclusion.</b></p>
 $$A\cG{e_2} = \begin{pmatrix}1\times0 + 1\times1\\-1\times0 + 3\times1\end{pmatrix} = \begin{pmatrix}1\\3\end{pmatrix} = \begin{pmatrix}1\\1\end{pmatrix} + 2\begin{pmatrix}0\\1\end{pmatrix} = \cR{e_1} + \cB2\cG{e_2}.$$
 $$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix}\cB2&1\\0&\cB2\end{pmatrix},\qquad A = PTP^{-1}.$$
 
@@ -1392,20 +1395,20 @@ $$P = \begin{pmatrix}\cR1&\cG0\\\cR1&\cG1\end{pmatrix},\qquad T = \begin{pmatrix
 <tr><td>$(X-\lambda)^3$</td><td>$\dim E_\lambda = 1$</td><td>$e_1\in E_\lambda$, $(A - \lambda I)e_2 = e_1$, $(A - \lambda I)e_3 = e_2$</td><td>$\begin{pmatrix}\lambda&1&0\\0&\lambda&1\\0&0&\lambda\end{pmatrix}$</td></tr>
 </table>
 <p class="ml">Exemple : $\chi_A = (X - 1)^3$, $\dim E_1 = 2$</p>
-<p><b>1. Rappel.</b> $A$ est trigonalisable si $\chi_A$ est scindé. On garde une base de $E_\lambda$, puis on complète par un vecteur $e_3$ tel que $(A - \lambda I)e_3$ soit dans $E_\lambda$ et non nul.</p>
+<p><b>Étape 1 : Rappel.</b> $A$ est trigonalisable si $\chi_A$ est scindé. On garde une base de $E_\lambda$, puis on complète par un vecteur $e_3$ tel que $(A - \lambda I)e_3$ soit dans $E_\lambda$ et non nul.</p>
 $$A = \begin{pmatrix}0&1&1\\-1&2&1\\0&0&1\end{pmatrix}.$$
-<p><b>2. $\chi_A$.</b> La dernière ligne de $XI_3 - A$ n'a qu'un coefficient non nul : on développe selon elle.</p>
+<p><b>Étape 2 : $\chi_A$.</b> La dernière ligne de $XI_3 - A$ n'a qu'un coefficient non nul : on développe selon elle.</p>
 $$\chi_A = \begin{vmatrix}X&-1&-1\\1&X-2&-1\\0&0&X-1\end{vmatrix} = (X-1)\times(-1)^{3+3}\begin{vmatrix}X&-1\\1&X-2\end{vmatrix}.$$
 $$\begin{vmatrix}X&-1\\1&X-2\end{vmatrix} = X(X-2) - (-1)\times1 = X^2 - 2X + 1 = (X-1)^2\qquad\Longrightarrow\qquad\chi_A = (X - \cB1)^3.$$
-<p><b>3. Le sous-espace propre.</b> On résout $(A - I_3)X = 0$ :</p>
+<p><b>Étape 3 : Le sous-espace propre.</b> On résout $(A - I_3)X = 0$ :</p>
 $$A - I_3 = \begin{pmatrix}-1&1&1\\-1&1&1\\0&0&0\end{pmatrix}\qquad\Longleftrightarrow\qquad\left\{\begin{aligned}-x + y + z &= 0\\-x + y + z &= 0\\0 &= 0\end{aligned}\right.\qquad\Longleftrightarrow\qquad x = y + z.$$
 $$X = \begin{pmatrix}y+z\\y\\z\end{pmatrix} = y\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}} + z\cR{\begin{pmatrix}1\\0\\1\end{pmatrix}},\qquad\cG{E_1} = \operatorname{Vect}(\cR{e_1}, \cR{e_2}),\qquad\dim\cG{E_1} = 2\lt3 = \cO{m_1}.$$
 <p>Donc $A$ n'est pas diagonalisable : on trigonalise (cas 2 du tableau).</p>
-<p><b>4. Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
+<p><b>Étape 4 : Le troisième vecteur.</b> On calcule $(A - I_3)X$ pour un $X = (x,y,z)$ quelconque :</p>
 $$(A - I_3)\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}-x + y + z\\-x + y + z\\0\end{pmatrix} = (-x + y + z)\cR{\begin{pmatrix}1\\1\\0\end{pmatrix}}.$$
 <p>Il suffit que $-x + y + z\neq0$ pour sortir de $\cG{E_1}$. Avec $\cG{e_3} = (0,1,0)$ : $-0 + 1 + 0 = 1$, donc $(A - I_3)\cG{e_3} = \cR{e_1}$.</p>
 $$A\cG{e_3} = \begin{pmatrix}0\times0 + 1\times1 + 1\times0\\-1\times0 + 2\times1 + 1\times0\\0\end{pmatrix} = \begin{pmatrix}1\\2\\0\end{pmatrix} = \begin{pmatrix}1\\1\\0\end{pmatrix} + \begin{pmatrix}0\\1\\0\end{pmatrix} = \cR{e_1} + \cB1\cG{e_3}.$$
-<p><b>5. $P$ est inversible</b> (développement selon la première ligne) :</p>
+<p><b>Étape 5 : $P$ est inversible</b> (développement selon la première ligne) :</p>
 $$\det P = \begin{vmatrix}1&1&0\\1&0&1\\0&1&0\end{vmatrix} = 1\times\begin{vmatrix}0&1\\1&0\end{vmatrix} - 1\times\begin{vmatrix}1&1\\0&0\end{vmatrix} = 1\times(0 - 1) - 1\times(0 - 0) = -1\neq0.$$
 $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix},\qquad T = \begin{pmatrix}\cB1&0&1\\0&\cB1&0\\0&0&\cB1\end{pmatrix},\qquad A = PTP^{-1}.$$
 <p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
@@ -10094,10 +10097,11 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 
 <p class="ml">Exemple 45 : uniformes continuités</p>
 <p><b>Étudier l'uniforme continuité de $f\mapsto\inf_{[0, 1]}f$, de $\sqrt{\phantom x}$ sur $\mathbb R_+$ et de $x\mapsto\sin(x^2)$ sur $\mathbb R$, puis d'une fonction continue sur $\mathbb R_+$ qui a une limite finie en $+\infty$.</b></p>
-<p><b>Étape 1 : $\varphi(f) = \inf_{[0, 1]}f$ est $1$-lipschitzienne pour $\|\cdot\|_\infty$.</b> $f(t)\leq g(t) + \|f - g\|_\infty$ pour tout $t$, donc $\varphi(f)\leq g(t) + \|f - g\|_\infty$, puis $\varphi(f)\leq\varphi(g) + \|f - g\|_\infty$, et par symétrie $|\varphi(f) - \varphi(g)|\leq\|f - g\|_\infty$.</p>
-<p><b>Étape 2 : $\sqrt{\phantom x}$ sur $\mathbb R_+$.</b> $|\sqrt x - \sqrt y|\leq\sqrt{|x - y|}$ (pour $y\leq x$ : $(\sqrt y + \sqrt{x - y})^2 = x + 2\sqrt{y(x - y)}\geq x$). Avec $\alpha = \varepsilon^2$ : $|x - y|\leq\alpha\Rightarrow|\sqrt x - \sqrt y|\leq\varepsilon$.</p>
-<p><b>Étape 3 : $\sin(x^2)$ ne l'est pas.</b> $x_n = \sqrt{2n\pi}$, $y_n = \sqrt{2n\pi + \frac\pi2}$ : $y_n - x_n = \frac{\pi/2}{y_n + x_n}\to0$ mais $|\sin(y_n^2) - \sin(x_n^2)| = 1 - 0 = 1$.</p>
-<p><b>Étape 4 : Heine.</b> $f$ continue sur $\mathbb R_+$ avec une limite $\ell$ en $+\infty$ : au-delà de $A$, $|f - \ell|\leq\frac\varepsilon4$ ; sur $[0, A + 1]$ compact, Heine. On recolle.</p>
+<p><b>Étape 1 : Rappel.</b> Pour montrer l'uniforme continuité : une inégalité $|f(x) - f(y)|\leq\omega(|x - y|)$ avec $\omega(h)\to0$ (lipschitz, hölder) ou le théorème de Heine sur un segment. Pour la réfuter : deux suites $x_n, y_n$ avec $x_n - y_n\to0$ mais $|f(x_n) - f(y_n)|\not\to0$.</p>
+<p><b>Étape 2 : $\varphi(f) = \inf_{[0, 1]}f$ est $1$-lipschitzienne pour $\|\cdot\|_\infty$.</b> $f(t)\leq g(t) + \|f - g\|_\infty$ pour tout $t$, donc $\varphi(f)\leq g(t) + \|f - g\|_\infty$, puis $\varphi(f)\leq\varphi(g) + \|f - g\|_\infty$, et par symétrie $|\varphi(f) - \varphi(g)|\leq\|f - g\|_\infty$.</p>
+<p><b>Étape 3 : $\sqrt{\phantom x}$ sur $\mathbb R_+$.</b> $|\sqrt x - \sqrt y|\leq\sqrt{|x - y|}$ (pour $y\leq x$ : $(\sqrt y + \sqrt{x - y})^2 = x + 2\sqrt{y(x - y)}\geq x$). Avec $\alpha = \varepsilon^2$ : $|x - y|\leq\alpha\Rightarrow|\sqrt x - \sqrt y|\leq\varepsilon$.</p>
+<p><b>Étape 4 : $\sin(x^2)$ ne l'est pas.</b> $x_n = \sqrt{2n\pi}$, $y_n = \sqrt{2n\pi + \frac\pi2}$ : $y_n - x_n = \frac{\pi/2}{y_n + x_n}\to0$ mais $|\sin(y_n^2) - \sin(x_n^2)| = 1 - 0 = 1$.</p>
+<p><b>Étape 5 : Heine.</b> $f$ continue sur $\mathbb R_+$ avec une limite $\ell$ en $+\infty$ : au-delà de $A$, $|f - \ell|\leq\frac\varepsilon4$ ; sur $[0, A + 1]$ compact, Heine. On recolle.</p>
 <p><b>Conclusion.</b> $\cG{\varphi,\ \sqrt{\phantom x}\ \text{et}\ f\ \text{uniformément continues};\ \sin(x^2)\ \text{non}}$.</p>
 
 <h2 id="t-sfmat">19. Topologie de $\mathcal M_n(\mathbb K)$</h2>
@@ -10119,10 +10123,11 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 
 <p class="ml">Exemple 48 : $AN = NA$, $N$ nilpotente $\Rightarrow\det(A + N) = \det A$</p>
 <p>Soient $A, N\in\mathcal M_n(\mathbb C)$ avec $AN = NA$ et $N$ nilpotente. <b>Montrer que $\det(A + N) = \det A$.</b></p>
-<p><b>Étape 1 : $A = I_n$.</b> $N$ nilpotente est semblable à une triangulaire stricte, donc $I_n + N$ à une triangulaire de diagonale $1$ :</p>
+<p><b>Étape 1 : Rappel.</b> On traite d'abord le cas $A$ inversible : $A + N = A(I_n + A^{-1}N)$ avec $A^{-1}N$ nilpotente, et $I_n + T$ ($T$ nilpotente, donc triangulaire stricte dans une bonne base) a pour déterminant $1$. Puis on passe au cas général par densité de $GL_n$.</p>
+<p><b>Étape 2 : $A = I_n$.</b> $N$ nilpotente est semblable à une triangulaire stricte, donc $I_n + N$ à une triangulaire de diagonale $1$ :</p>
 $$I_n + T = \begin{pmatrix}1&*&\cdots&*\\0&1&\ddots&\vdots\\\vdots&\ddots&\ddots&*\\0&\cdots&0&1\end{pmatrix},\qquad\det = 1.$$
-<p><b>Étape 2 : $A$ inversible.</b> $A + N = A(I_n + A^{-1}N)$, et $A^{-1}N$ est nilpotente ($A^{-1}$ commute avec $N$, $(A^{-1}N)^p = A^{-p}N^p = 0$) : $\det(A + N) = \det A\times1$.</p>
-<p><b>Étape 3 : Cas général.</b> $A_p = A - \frac1pI_n$ inversibles, commutent avec $N$, et $\det(A_p + N) = \det A_p$ ; on fait $p\to+\infty$ (continuité de $\det$).</p>
+<p><b>Étape 3 : $A$ inversible.</b> $A + N = A(I_n + A^{-1}N)$, et $A^{-1}N$ est nilpotente ($A^{-1}$ commute avec $N$, $(A^{-1}N)^p = A^{-p}N^p = 0$) : $\det(A + N) = \det A\times1$.</p>
+<p><b>Étape 4 : Cas général.</b> $A_p = A - \frac1pI_n$ inversibles, commutent avec $N$, et $\det(A_p + N) = \det A_p$ ; on fait $p\to+\infty$ (continuité de $\det$).</p>
 <p><b>Conclusion.</b> $\cG{\det(A + N) = \det A}$.</p>
 
 <h2 id="t-enonce">20. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
