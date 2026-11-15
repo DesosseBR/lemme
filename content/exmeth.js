@@ -594,11 +594,38 @@ LEMME.EXMETH = {
   String.raw`Intersection nulle et dimensions.`,
   String.raw`Degrés échelonnés, puis développer $((X - 1) + 1)^2$.`,
   String.raw`Grassmann.`,
-  String.raw`Repérer une relation, vérifier la liberté du reste.`
+  String.raw`Repérer une relation, vérifier la liberté du reste.`,
+  String.raw`Inclus, $0$, stabilité : majorer avec l'inégalité triangulaire.`,
+  String.raw`Écrire $M = aI + bJ + cK$ : un Vect.`,
+  String.raw`Intersection des noyaux des formes $f\mapsto f^{(k)}(0)$.`,
+  String.raw`Coordonnées sur $(e_i)$, puis sommer les $n$ équations.`,
+  String.raw`Absurde, diviser par le terme dominant, $x\to+\infty$.`,
+  String.raw`Récurrence, dériver deux fois pour éliminer le dernier.`,
+  String.raw`Valuations distinctes, puis cardinal = dimension.`,
+  String.raw`Évaluer en $2\pi\mathbb Z$ puis en $\frac\pi2 + 2\pi\mathbb Z$.`,
+  String.raw`Sous-famille libre maximale, trigo pour les autres.`,
+  String.raw`Pivot constant, puis discuter selon $m$.`,
+  String.raw`$C_1\leftarrow C_1 + C_2 + C_3 + C_4$, puis triangulaire.`,
+  String.raw`Libre (degrés), génératrice (base de $\mathbb K_N[X]$).`,
+  String.raw`Résoudre le système : existence et unicité.`,
+  String.raw`Libre et $n + 1$ vecteurs en dimension $n + 1$.`,
+  String.raw`Isomorphisme d'évaluation, image réciproque de la base canonique.`,
+  String.raw`Multilinéarité du déterminant.`,
+  String.raw`Pivot sur les lignes : le rang.`,
+  String.raw`$\dim F = 5 - \operatorname{rg}$, paramétrer.`,
+  String.raw`Isomorphisme vers $\mathcal M_r\times\mathcal M_{n-r}$.`,
+  String.raw`$H + H' = E$, puis Grassmann.`,
+  String.raw`$G\subset F$ et $\dim G = \dim F$.`,
+  String.raw`Analyse : additionner $x$, $u(x)$, $u^2(x)$ ; synthèse.`,
+  String.raw`$f = (f - m) + m$ avec $m = \int_0^1f$.`,
+  String.raw`$F\cap G = \{0\}$ et $2 + 2 = 4$.`,
+  String.raw`Décomposition de $0$ unique, évaluer en $1, 2, 3, 0$.`
 ],
 "Espaces vectoriels et dimension finie (exercices)": [
   String.raw`Évaluer en $0$, $\frac\pi2$, $\pi$.`,
-  String.raw`$P = (X - 1)Q$, degrés échelonnés.`
+  String.raw`$P = (X - 1)Q$, degrés échelonnés.`,
+  String.raw`Une inclusion, l'autre par symétrie.`,
+  String.raw`Théorème du rang pour $\psi(x_1, \dots, x_p)$.`
 ],
 "Applications linéaires": [
   String.raw`Vérifier $\varphi(\lambda P + Q)$.`,
@@ -611,7 +638,12 @@ LEMME.EXMETH = {
   String.raw`Noyau nul par les degrés.`,
   String.raw`Théorème du rang + intersection.`,
   String.raw`Forme linéaire non nulle.`,
-  String.raw`Isoler $\operatorname{id}$, factoriser par $f$.`
+  String.raw`Isoler $\operatorname{id}$, factoriser par $f$.`,
+  String.raw`$T(f)\in E_0$ d'abord (continuité en $0$), puis linéarité.`,
+  String.raw`$v_{|S}$ isomorphisme sur $\operatorname{Im}v$, $u = v_1^{-1}\circ w$.`,
+  String.raw`Définir $v$ sur $\operatorname{Im}u$, vérifier le sens, prolonger.`,
+  String.raw`$v\mapsto v_{|S}$, isomorphisme vers $\mathcal L(S, \ker u)$.`,
+  String.raw`Base adaptée à $F$, image d'une base.`
 ],
 "Applications linéaires (exercices)": [
   String.raw`Revenir aux définitions.`,

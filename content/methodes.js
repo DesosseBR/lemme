@@ -8766,7 +8766,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 </ul></div></div>
 `,
 "Espaces vectoriels et dimension finie": R`
-<nav class="msum"><a href="#k-not">Notations</a><a href="#k-sev">Sous-espaces</a><a href="#k-vect">Vect, génératrices</a><a href="#k-libre">Familles libres</a><a href="#k-somme">Sommes, supplémentaires</a><a href="#k-base">Bases, dimension</a><a href="#k-dimf">Sev en dimension finie</a><a href="#k-rang">Rang d'une famille</a><a href="#k-enonce">L'énoncé</a><a href="#k-erreurs">Erreurs</a><a href="#k-entrainement">S'entraîner</a><a href="#k-exos">Exercices</a><a href="#k-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#k-not">Notations</a><a href="#k-sev">Sous-espaces</a><a href="#k-vect">Vect, génératrices</a><a href="#k-libre">Familles libres</a><a href="#k-somme">Sommes, supplémentaires</a><a href="#k-base">Bases, dimension</a><a href="#k-dimf">Sev en dimension finie</a><a href="#k-rang">Rang d'une famille</a><a href="#k-sfev">Est-ce un ev ?</a><a href="#k-sflibre">Libre : outils</a><a href="#k-sfrang">Trouver le rang</a><a href="#k-sfbase">Est-ce une base ?</a><a href="#k-sfdim">Dimension</a><a href="#k-sfeg">Égalité de sev</a><a href="#k-sfsupp">Supplémentaires</a><a href="#k-enonce">L'énoncé</a><a href="#k-erreurs">Erreurs</a><a href="#k-entrainement">S'entraîner</a><a href="#k-exos">Exercices</a><a href="#k-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs $\cB{u_1}, \dots, \cB{u_p}$. <span class="kR">rouge</span> : les sous-espaces $\cR F$, $\cR G$. <span class="kO">orange</span> : les coefficients $\cO{\lambda_i}$ des combinaisons. <span class="kV">violet</span> : les dimensions. <span class="kG">vert</span> : la conclusion.</p>
@@ -8892,7 +8892,271 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <p><b>Étape 3 : Les deux premiers.</b> Si $(2, 1, 0) = \lambda(1, 2, 1)$, la 1<sup>re</sup> coordonnée donne $\lambda = 2$ et la 2<sup>e</sup> $\lambda = \frac12$ : impossible, ils ne sont pas colinéaires.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg} = 2}$ : les trois vecteurs engendrent un plan, la famille est liée.</p>
 
-<h2 id="k-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="k-sfev">9. Montrer qu'un ensemble est un espace vectoriel : quelle méthode ?</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Lois nouvelles, inventées par l'énoncé</td><td>La <b>définition complète</b> : groupe abélien pour $+$, puis les quatre règles de la loi externe ($1\cdot x = x$, $\lambda(x + y) = \lambda x + \lambda y$, $(\lambda + \mu)x = \lambda x + \mu x$, $\lambda(\mu x) = (\lambda\mu)x$).</td></tr>
+<tr><td>Partie d'un espace connu</td><td><b>Sous-espace</b> : inclus, contient $0$, stable par $\lambda x + y$.</td></tr>
+<tr><td>Des combinaisons linéaires de vecteurs fixés</td><td>L'écrire comme un $\cB{\operatorname{Vect}(\dots)}$ : sev <b>et</b> famille génératrice d'un coup.</td></tr>
+<tr><td>Une condition « $u(x) = v(x)$ », « $= 0$ » avec $u$ linéaire</td><td>Un <b>noyau</b> : $\{x,\ u(x) = v(x)\} = \ker(u - v)$.</td></tr>
+<tr><td>Plusieurs conditions linéaires</td><td>Une <b>intersection</b> de noyaux, d'hyperplans.</td></tr>
+</table>
+<p>Ne jamais redémontrer qu'un noyau, une image, un $\operatorname{Vect}$ ou une intersection de sev est un sev : c'est le cours.</p>
+
+<p class="ml">Exemple 12 : les fonctions lipschitziennes</p>
+<p>$L = \{f:\mathbb R\to\mathbb R\ \text{lipschitzienne}\}$, où $f$ est $k$-lipschitzienne si $\forall x, y,\ |f(x) - f(y)|\leq k|x - y|$. Montrer que $L$ est un sev de $\mathcal F(\mathbb R, \mathbb R)$.</p>
+<p><b>Étape 1 : Rappel.</b> Inclus, contient $0$, stable par $\lambda f + g$.</p>
+<p><b>Étape 2 : Inclus, non vide.</b> $L\subset\mathcal F(\mathbb R, \mathbb R)$ par définition. La fonction nulle vérifie $|0 - 0| = 0\leq0\times|x - y|$ : elle est $0$-lipschitzienne.</p>
+<p><b>Étape 3 : Stabilité.</b> $f$ $k$-lipschitzienne, $g$ $k'$-lipschitzienne, $\lambda\in\mathbb R$. Par l'inégalité triangulaire :</p>
+$$|(\lambda f + g)(x) - (\lambda f + g)(y)| = |\lambda(f(x) - f(y)) + (g(x) - g(y))|\leq|\lambda|\,|f(x) - f(y)| + |g(x) - g(y)|\leq(|\lambda|k + k')\,|x - y|.$$
+<p><b>Étape 4 : Conclusion.</b> $\lambda f + g$ est $(|\lambda|k + k')$-lipschitzienne : $\cG{L\ \text{est un sev de}\ \mathcal F(\mathbb R, \mathbb R)}$.</p>
+
+<p class="ml">Exemple 13 : des matrices écrites comme un Vect</p>
+<p>$F = \Big\{M(a, b, c) = \begin{pmatrix}a&b&c\\0&a&b\\0&0&a\end{pmatrix},\ (a, b, c)\in\mathbb R^3\Big\}$. Sev de $\mathcal M_3(\mathbb R)$ ? Une base ?</p>
+<p><b>Étape 1 : Rappel.</b> Écrire chaque élément comme combinaison de matrices fixes.</p>
+<p><b>Étape 2 : On sépare $a$, $b$, $c$.</b> $M(a, b, c) = a\,\cB I + b\,\cB J + c\,\cB K$ avec</p>
+$$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},\quad K = \begin{pmatrix}0&0&1\\0&0&0\\0&0&0\end{pmatrix}.$$
+<p><b>Étape 3 : Sev.</b> Donc $F = \operatorname{Vect}(I, J, K)$, et $(I, J, K)$ est génératrice de $F$.</p>
+<p><b>Étape 4 : Libre.</b> $aI + bJ + cK = M(a, b, c) = 0$ : la case $(1, 1)$ donne $a = 0$, la case $(1, 2)$ donne $b = 0$, la case $(1, 3)$ donne $c = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F\ \text{est un sev de base}\ (I, J, K),\ \dim F = 3}$.</p>
+
+<p class="ml">Exemple 14 : une intersection de noyaux</p>
+<p>$F = \{f\in\mathcal C^\infty(\mathbb R, \mathbb R),\ \forall k\in[\![0, n]\!],\ f^{(k)}(0) = 0\}$. Montrer que $F$ est un sev.</p>
+<p><b>Étape 1 : Rappel.</b> Une intersection de noyaux d'applications linéaires est un sev.</p>
+<p><b>Étape 2 : Les formes linéaires.</b> $\varphi_k(f) = f^{(k)}(0)$. Linéaire : $(\lambda f + g)^{(k)}(0) = \lambda f^{(k)}(0) + g^{(k)}(0)$ (la dérivation et l'évaluation sont linéaires).</p>
+<p><b>Étape 3 : On reconnaît.</b> $f\in F\iff\varphi_0(f) = \dots = \varphi_n(f) = 0$, donc $F = \bigcap_{k=0}^n\ker\varphi_k$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{est un sev}}$ (intersection de sev). Même idée pour $\{x,\ u(x) = v(x)\} = \ker(u - v)$.</p>
+
+<h2 id="k-sflibre">10. Montrer qu'une famille est libre : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Vecteurs donnés par leurs coordonnées</td><td>La <b>définition</b> : $\sum\alpha_kv_k = 0$, système, et on montre $\alpha_k = 0$. Avec paramètre : discuter.</td></tr>
+<tr><td>Fonctions $e^{a_kx}$, $x^{a_k}$… (croissances différentes)</td><td><b>Absurde</b> + terme dominant quand $x\to+\infty$.</td></tr>
+<tr><td>Famille indexée par $n$ ($\sin(kx)$, …)</td><td><b>Récurrence</b> sur $n$, en dérivant pour éliminer le dernier.</td></tr>
+<tr><td>Polynômes</td><td><b>Degrés</b> distincts, ou <b>valuations</b> distinctes : libre directement.</td></tr>
+<tr><td>Vecteurs propres de valeurs propres distinctes</td><td>Libre directement (fiche Réduction).</td></tr>
+<tr><td>Sous-famille d'une famille libre</td><td>Libre directement.</td></tr>
+<tr><td>Fonctions</td><td>Évaluer la relation en <b>des points bien choisis</b>.</td></tr>
+</table>
+
+<p class="ml">Exemple 15 : $v_i = u + e_i$, une famille avec paramètres</p>
+<p>$(e_1, \dots, e_n)$ base de $E$, $u = \sum_{i=1}^n\lambda_ie_i$, $v_i = u + e_i$. À quelle condition $(v_1, \dots, v_n)$ est-elle libre ?</p>
+<p><b>Étape 1 : Rappel.</b> On écrit $\sum\alpha_kv_k = 0$ et on lit les coordonnées sur la base $(e_i)$.</p>
+<p><b>Étape 2 : On remplace.</b> $\sum_k\alpha_k(u + e_k) = \Big(\sum_k\alpha_k\Big)u + \sum_k\alpha_ke_k$. On note $\cO s = \sum_k\alpha_k$ : $\sum\alpha_kv_k = s\sum_i\lambda_ie_i + \sum_i\alpha_ie_i = \sum_i(s\lambda_i + \alpha_i)e_i$.</p>
+<p><b>Étape 3 : Les coordonnées.</b> $(e_i)$ est libre, donc $\sum\alpha_kv_k = 0\iff\forall i,\ s\lambda_i + \alpha_i = 0$ $(\ast)$.</p>
+<p><b>Étape 4 : On somme les $n$ équations.</b> $s\sum_i\lambda_i + \sum_i\alpha_i = 0$, soit $s\sum\lambda_i + s = 0$, donc $\cO s\,\Big(1 + \sum_i\lambda_i\Big) = 0$.</p>
+<p><b>Étape 5 : Cas $1 + \sum\lambda_i\neq0$.</b> Alors $s = 0$, et $(\ast)$ donne $\alpha_i = -s\lambda_i = 0$ pour tout $i$ : libre.</p>
+<p><b>Étape 6 : Cas $\sum\lambda_i = -1$.</b> On prend $\alpha_i = -\lambda_i$ : alors $s = -\sum\lambda_i = 1$ et $s\lambda_i + \alpha_i = \lambda_i - \lambda_i = 0$, donc $\sum\alpha_kv_k = 0$ avec des $\alpha_i$ non tous nuls (leur somme vaut $1$) : $\cR{\text{liée}}$.</p>
+<p><b>Étape 7 : Conclusion.</b> $\cG{(v_1, \dots, v_n)\ \text{libre}\iff\sum_{i=1}^n\lambda_i\neq-1}$ (et c'est alors une base : $n$ vecteurs en dimension $n$).</p>
+
+<p class="ml">Exemple 16 : les exponentielles, par l'absurde</p>
+<p>Montrer que $(x\mapsto e^{ax})_{a\in\mathbb R}$ est libre.</p>
+<p><b>Étape 1 : Rappel.</b> Une famille infinie est libre si toute sous-famille finie l'est. On suppose une relation non triviale, et on regarde le terme qui domine en $+\infty$.</p>
+<p><b>Étape 2 : L'hypothèse.</b> $a_1 \lt a_2 \lt \dots \lt a_n$ et $\sum_{i=1}^n\lambda_ie^{a_ix} = 0$ pour tout $x$, avec (quitte à retirer les termes nuls) $\cR{\lambda_n\neq0}$.</p>
+<p><b>Étape 3 : On divise par $e^{a_nx}$.</b> $\lambda_n + \sum_{i=1}^{n-1}\lambda_ie^{(a_i - a_n)x} = 0$ pour tout $x$.</p>
+<p><b>Étape 4 : On fait $x\to+\infty$.</b> $a_i - a_n \lt 0$ pour $i \lt n$, donc $e^{(a_i - a_n)x}\to0$ : il reste $\lambda_n = 0$, ce qui contredit $\lambda_n\neq0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(x\mapsto e^{ax})_{a\in\mathbb R}\ \text{est libre}}$ ($\mathcal F(\mathbb R, \mathbb R)$ est donc de dimension infinie).</p>
+
+<p class="ml">Exemple 17 : $(\sin(kx))_{1\leq k\leq n}$, par récurrence</p>
+<p><b>Étape 1 : Rappel.</b> Récurrence sur $n$ ; on dérive deux fois pour éliminer le dernier terme.</p>
+<p><b>Étape 2 : $n = 1$.</b> $\sin$ n'est pas la fonction nulle ($\sin\frac\pi2 = 1$) : la famille $(\sin)$ est libre.</p>
+<p><b>Étape 3 : Hérédité.</b> On suppose $(\sin x, \dots, \sin((n - 1)x))$ libre et $\sum_{k=1}^n\lambda_k\sin(kx) = 0$ (1). On dérive deux fois, $(\sin(kx))'' = -k^2\sin(kx)$ : $-\sum k^2\lambda_k\sin(kx) = 0$ (2).</p>
+<p><b>Étape 4 : On élimine $k = n$.</b> (2) $+ n^2\times$(1) : le terme $k = n$ donne $-n^2\lambda_n + n^2\lambda_n = 0$, il reste $\sum_{k=1}^{n-1}(n^2 - k^2)\lambda_k\sin(kx) = 0$.</p>
+<p><b>Étape 5 : On conclut.</b> Par hypothèse, $(n^2 - k^2)\lambda_k = 0$, et $n^2 - k^2\neq0$ ($k \lt n$) : $\lambda_k = 0$ pour $k \lt n$. Alors (1) devient $\lambda_n\sin(nx) = 0$, et en $x = \frac\pi{2n}$, $\sin\frac\pi2 = 1$ : $\lambda_n = 0$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{(\sin x, \sin2x, \dots, \sin nx)\ \text{est libre}}$ pour tout $n$.</p>
+
+<p class="ml">Exemple 18 : des polynômes de valuations distinctes</p>
+<p>Montrer que $\big(X^k(1 - X)^{n-k}\big)_{0\leq k\leq n}$ est une base de $\mathbb K_n[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> La valuation $v(P)$ est le plus petit $i$ tel que le coefficient de $X^i$ soit non nul. Valuations distinctes $\Rightarrow$ libre.</p>
+<p><b>Étape 2 : Les valuations.</b> $P_k = X^k(1 - X)^{n-k}$ : $(1 - X)^{n-k} = 1 - (n - k)X + \dots$ a un terme constant $1$, donc le plus bas terme de $P_k$ est $X^k\times1$ : $v(P_k) = k$, coefficient $1$.</p>
+<p><b>Étape 3 : Libre.</b> Si $\sum\lambda_kP_k = 0$ avec des $\lambda_k$ non tous nuls, soit $k_0$ le plus petit indice avec $\lambda_{k_0}\neq0$. Le coefficient de $X^{k_0}$ ne vient que de $P_{k_0}$ (les autres $P_k$, $k > k_0$, commencent plus haut) : il vaut $\lambda_{k_0}\times1 = 0$, contradiction.</p>
+<p><b>Étape 4 : Le cardinal.</b> $n + 1$ polynômes de degré $k + (n - k) = n$, libres, dans $\mathbb K_n[X]$ de dimension $n + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\big(X^k(1 - X)^{n-k}\big)_k\ \text{est une base de}\ \mathbb K_n[X]}$ (la base de Bernstein).</p>
+
+<p class="ml">Exemple 19 : évaluer en des points bien choisis</p>
+<p>$f_k(x) = x^k\cos x$, $g_k(x) = x^k\sin x$, $0\leq k\leq n$. Montrer que $(f_0, \dots, f_n, g_0, \dots, g_n)$ est libre.</p>
+<p><b>Étape 1 : Rappel.</b> On choisit des $x$ qui tuent $\sin$ ou $\cos$, puis : un polynôme qui a une infinité de racines est nul.</p>
+<p><b>Étape 2 : L'hypothèse.</b> $\Big(\sum_ka_kx^k\Big)\cos x + \Big(\sum_kb_kx^k\Big)\sin x = 0$ pour tout $x$.</p>
+<p><b>Étape 3 : En $x\in2\pi\mathbb Z$.</b> $\cos x = 1$, $\sin x = 0$ : $\sum a_kx^k = 0$ en une infinité de points, donc le polynôme $\sum a_kX^k$ est nul : tous les $a_k = 0$.</p>
+<p><b>Étape 4 : En $x\in\frac\pi2 + 2\pi\mathbb Z$.</b> $\cos x = 0$, $\sin x = 1$ : de même tous les $b_k = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{libre}}$ : l'espace des $x\mapsto P(x)\cos x + Q(x)\sin x$, $P, Q\in\mathbb R_n[X]$, est de dimension $2n + 2$.</p>
+
+<h2 id="k-sfrang">11. Trouver le rang d'une famille</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Fonctions, peu de vecteurs</td><td>Trouver une <b>sous-famille libre</b> de cardinal maximal, et écrire les autres comme combinaisons (formules de trigo…).</td></tr>
+<tr><td>Coordonnées, avec ou sans paramètre</td><td><b>Pivot de Gauss</b> sur la matrice (on ne change pas le rang). Choisir un pivot <b>constant</b> pour éviter les divisions par une expression en $m$.</td></tr>
+<tr><td>$n$ vecteurs en dimension $n$</td><td><b>Déterminant</b> : $\neq0\iff$ base. S'il est nul, chercher un mineur non nul.</td></tr>
+</table>
+
+<p class="ml">Exemple 20 : six fonctions trigonométriques</p>
+<p>Rang de $(f_1, \dots, f_6) = (\sin, \cos, \cos(2x), \sin(x + 1), \sin^2, \cos^2)$.</p>
+<p><b>Étape 1 : Rappel.</b> Une sous-famille libre, puis les autres comme combinaisons.</p>
+<p><b>Étape 2 : $(f_1, f_2, f_3, f_5)$ libre.</b> $\lambda_1\sin x + \lambda_2\cos x + \lambda_3\cos2x + \lambda_5\sin^2x = 0$. En $x = 0$ : $\lambda_2 + \lambda_3 = 0$. En $x = \pi$ : $-\lambda_2 + \lambda_3 = 0$. On additionne : $2\lambda_3 = 0$, donc $\lambda_3 = \lambda_2 = 0$. En $x = \frac\pi2$ : $\lambda_1 + \lambda_5 = 0$. En $x = -\frac\pi2$ : $-\lambda_1 + \lambda_5 = 0$. Donc $\lambda_1 = \lambda_5 = 0$.</p>
+<p><b>Étape 3 : $f_4$.</b> $\sin(x + 1) = \sin x\cos1 + \cos x\sin1$ : $f_4 = \cos1\,f_1 + \sin1\,f_2$.</p>
+<p><b>Étape 4 : $f_6$.</b> $\cos2x = \cos^2x - \sin^2x$, donc $\cos^2x = \cos2x + \sin^2x$ : $f_6 = f_3 + f_5$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\operatorname{rg}(f_1, \dots, f_6) = \operatorname{rg}(f_1, f_2, f_3, f_5)$, donc $\cG{\operatorname{rg} = 4}$.</p>
+
+<p class="ml">Exemple 21 : un pivot avec un paramètre</p>
+<p>Rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$ selon $m\in\mathbb R$.</p>
+<p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes ne changent pas le rang ; on garde un pivot constant.</p>
+<p><b>Étape 2 : Premier pivot.</b> Lignes $u, v, w$. $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2,\ 1 - 4,\ m - 2) = (0, -3, m - 2)$. $L_3\leftarrow L_3 - L_1$ : $(1 - 1,\ m - 2,\ 1 - 1) = (0, m - 2, 0)$.</p>
+<p><b>Étape 3 : Second pivot</b> $-3$ (constant). $L_3\leftarrow3L_3 + (m - 2)L_2$ : 2<sup>e</sup> case $3(m - 2) + (m - 2)(-3) = 0$, 3<sup>e</sup> case $3\times0 + (m - 2)(m - 2) = (m - 2)^2$.</p>
+$$\begin{pmatrix}1&2&1\\0&-3&m - 2\\0&0&(m - 2)^2\end{pmatrix}.$$
+<p><b>Étape 4 : Discussion.</b> Si $m\neq2$ : trois pivots non nuls, rang $3$. Si $m = 2$ : la dernière ligne est nulle, et $(1, 2, 1)$, $(0, -3, 0)$ ne sont pas colinéaires : rang $2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 3\ \text{si}\ m\neq2,\quad\operatorname{rg} = 2\ \text{si}\ m = 2}$. Contrôle $m = 2$ : $w = (1, 2, 1) = u$.</p>
+
+<p class="ml">Exemple 22 : le déterminant</p>
+<p>Dans $\mathbb R^4$, rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$.</p>
+<p><b>Étape 1 : Rappel.</b> $4$ vecteurs en dimension $4$ : base $\iff\det\neq0$.</p>
+<p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $m + 1 + 1 + 1 = m + 3$ ; on sort $m + 3$ de la 1<sup>re</sup> colonne :</p>
+$$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$$
+<p><b>Étape 3 : $L_i\leftarrow L_i - L_1$</b> ($i = 2, 3, 4$) : ligne 2 $(0, m - 1, 0, 0)$, ligne 3 $(0, 0, m - 1, 0)$, ligne 4 $(0, 0, 0, m - 1)$. Triangulaire : $\det = (m + 3)\times1\times(m - 1)^3$.</p>
+<p><b>Étape 4 : Les cas.</b> $m\notin\{1, -3\}$ : $\det\neq0$, rang $4$. $m = 1$ : $a = b = c = d = (1, 1, 1, 1)$, rang $1$. $m = -3$ : $\det = 0$, rang $\leq3$ ; le mineur $\begin{vmatrix}-3&1&1\\1&-3&1\\1&1&-3\end{vmatrix} = -3(9 - 1) - 1(-3 - 1) + 1(1 + 3) = -24 + 4 + 4 = -16\neq0$ : rang $3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 4\ (m\notin\{1, -3\}),\quad1\ (m = 1),\quad3\ (m = -3)}$.</p>
+
+<h2 id="k-sfbase">12. Montrer qu'une famille est une base</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Dimension inconnue ou infinie</td><td><b>Libre et génératrice</b>, séparément.</td></tr>
+<tr><td>On veut aussi les coordonnées</td><td><b>Existence et unicité</b> de la décomposition : on résout $x = \sum\alpha_ie_i$.</td></tr>
+<tr><td>On connaît $\dim E = n$ et on a $n$ vecteurs</td><td>Libre <b>ou</b> génératrice suffit (le plus souvent libre).</td></tr>
+<tr><td>Image d'une base connue</td><td>Par un <b>isomorphisme</b> : l'image d'une base est une base.</td></tr>
+<tr><td>$n$ vecteurs, petite dimension</td><td><b>Déterminant</b> dans une base connue $\neq0$.</td></tr>
+</table>
+
+<p class="ml">Exemple 23 : degrés échelonnés dans $\mathbb K[X]$ (dimension infinie)</p>
+<p>$(P_n)_{n\in\mathbb N}$ avec $\deg P_n = n$. Montrer que c'est une base de $\mathbb K[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> Dimension infinie : libre et génératrice.</p>
+<p><b>Étape 2 : Libre.</b> Polynômes non nuls de degrés distincts : toute sous-famille finie est libre.</p>
+<p><b>Étape 3 : Génératrice.</b> Soit $Q$ de degré $\leq N$. $(P_0, \dots, P_N)$ est libre, a $N + 1$ éléments, dans $\mathbb K_N[X]$ de dimension $N + 1$ : c'est une base de $\mathbb K_N[X]$, donc $Q = \sum_{i=0}^N\lambda_iP_i$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(P_n)_{n\in\mathbb N}\ \text{est une base de}\ \mathbb K[X]}$.</p>
+
+<p class="ml">Exemple 24 : existence, unicité et coordonnées</p>
+<p>$u = (1, 1, 0)$, $v = (1, 0, 1)$, $w = (0, 1, 1)$. Base de $\mathbb R^3$ ? Coordonnées de $(x, y, z)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> On résout $(x, y, z) = \alpha u + \beta v + \gamma w$ : une seule solution pour tout $(x, y, z)$ $\iff$ base.</p>
+<p><b>Étape 2 : Le système.</b> $\alpha u + \beta v + \gamma w = (\alpha + \beta,\ \alpha + \gamma,\ \beta + \gamma)$, donc $x = \alpha + \beta$ (1), $y = \alpha + \gamma$ (2), $z = \beta + \gamma$ (3).</p>
+<p><b>Étape 3 : On additionne.</b> (1) + (2) + (3) : $x + y + z = 2(\alpha + \beta + \gamma)$, donc $\alpha + \beta + \gamma = \frac{x + y + z}2$.</p>
+<p><b>Étape 4 : On retire chaque équation.</b> $\gamma = \frac{x + y + z}2 - (\alpha + \beta) = \frac{x + y + z}2 - x = \frac{-x + y + z}2$. De même $\beta = \frac{x + y + z}2 - y = \frac{x - y + z}2$ et $\alpha = \frac{x + y + z}2 - z = \frac{x + y - z}2$.</p>
+<p><b>Étape 5 : Conclusion.</b> Une unique solution : $\cG{(u, v, w)\ \text{base},\ (x, y, z) = \tfrac{x + y - z}2u + \tfrac{x - y + z}2v + \tfrac{-x + y + z}2w}$. Contrôle $(2, 0, 0)$ : $u + v - w = (1 + 1 - 0, 1 + 0 - 1, 0 + 1 - 1) = (2, 0, 0)$.</p>
+
+<p class="ml">Exemple 25 : le cardinal et la dimension</p>
+<p>Montrer que $\big(1, X, X(X - 1), \dots, X(X - 1)\cdots(X - n + 1)\big)$ est une base de $\mathbb R_n[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> En dimension $n + 1$, une famille libre de $n + 1$ vecteurs est une base.</p>
+<p><b>Étape 2 : Dans $\mathbb R_n[X]$.</b> $X(X - 1)\cdots(X - k + 1)$ a $k$ facteurs de degré $1$ : il est de degré $k\leq n$.</p>
+<p><b>Étape 3 : Libre.</b> Degrés $0, 1, \dots, n$ distincts, polynômes non nuls.</p>
+<p><b>Étape 4 : Le cardinal.</b> $n + 1$ polynômes, et $\dim\mathbb R_n[X] = n + 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{c'est une base de}\ \mathbb R_n[X]}$ (base utile pour sommer $\sum\frac{P(n)}{n!}x^n$).</p>
+
+<p class="ml">Exemple 26 : les polynômes de Lagrange, par un isomorphisme</p>
+<p>$a_0, \dots, a_n$ distincts, $L_i = \prod_{j\neq i}\frac{X - a_j}{a_i - a_j}$. Montrer que $(L_0, \dots, L_n)$ est une base de $\mathbb K_n[X]$.</p>
+<p><b>Étape 1 : Rappel.</b> Un isomorphisme envoie une base sur une base ; donc l'image réciproque d'une base par un isomorphisme est une base.</p>
+<p><b>Étape 2 : L'application.</b> $\varphi(P) = (P(a_0), \dots, P(a_n))$, de $\mathbb K_n[X]$ dans $\mathbb K^{n+1}$, est linéaire.</p>
+<p><b>Étape 3 : Injective.</b> $\varphi(P) = 0$ : $P$, de degré $\leq n$, a $n + 1$ racines, donc $P = 0$. Même dimension $n + 1$ : $\varphi$ est un isomorphisme.</p>
+<p><b>Étape 4 : Les images.</b> $L_i(a_i) = \prod_{j\neq i}\frac{a_i - a_j}{a_i - a_j} = 1$ et, pour $k\neq i$, $L_i(a_k) = 0$ (le facteur $j = k$ s'annule). Donc $\varphi(L_i) = (0, \dots, 1, \dots, 0) = \cB{\varepsilon_i}$, le $i$-ième vecteur de la base canonique.</p>
+<p><b>Étape 5 : Conclusion.</b> $(L_i) = \big(\varphi^{-1}(\varepsilon_i)\big)$ : $\cG{(L_0, \dots, L_n)\ \text{est une base de}\ \mathbb K_n[X]}$, et $P = \sum_iP(a_i)L_i$.</p>
+
+<p class="ml">Exemple 27 : $v_i = u + e_i$, par le déterminant</p>
+<p>Reprendre l'exemple 15 avec $\det_{\mathcal B}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\det$ est linéaire par rapport à chaque colonne, et nul dès que deux colonnes sont égales.</p>
+<p><b>Étape 2 : On développe chaque colonne</b> $u + e_i$ : on obtient $2^n$ déterminants ; ceux qui contiennent $u$ <b>deux fois</b> sont nuls. Il reste $\det(e_1, \dots, e_n) = 1$ et les $n$ termes $\det(e_1, \dots, \underbrace{u}_{i}, \dots, e_n)$.</p>
+<p><b>Étape 3 : Un terme.</b> $\det(e_1, \dots, u, \dots, e_n)$ est la matrice identité dont la $i$-ième colonne est remplacée par $(\lambda_1, \dots, \lambda_n)$ : en développant selon la $i$-ième ligne, il vaut $\lambda_i$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\det_{\mathcal B}(v_1, \dots, v_n) = 1 + \sum\lambda_i$ : $\cG{\text{base}\iff1 + \sum\lambda_i\neq0}$, comme à l'exemple 15, en trois lignes.</p>
+
+<h2 id="k-sfdim">13. Trouver la dimension d'un sous-espace</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>$F = \operatorname{Vect}(\dots)$</td><td>Le rang de la famille (pivot) : $\dim F = \operatorname{rg}$, et on garde une sous-famille libre maximale comme base.</td></tr>
+<tr><td>$F$ défini par des équations</td><td>$\dim F = \dim E - \operatorname{rg}(\text{système})$ ; base : exprimer les inconnues principales avec les secondaires.</td></tr>
+<tr><td>$F$ « ressemble » à un espace connu</td><td>Un <b>isomorphisme</b> vers cet espace.</td></tr>
+<tr><td>Somme ou intersection</td><td><b>Grassmann</b> : $\dim(F + G) = \dim F + \dim G - \dim(F\cap G)$.</td></tr>
+<tr><td>$F = \ker u$</td><td><b>Théorème du rang</b> (fiche Applications linéaires).</td></tr>
+</table>
+
+<p class="ml">Exemple 28 : la dimension d'un Vect par le pivot</p>
+<p>$a = (1, 2, 3, 4)$, $b = (1, 1, 1, 3)$, $c = (2, 1, 1, 1)$, $d = (3, 1, 0, 3)$. $\dim\operatorname{Vect}(a, b, c, d)$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes conservent le $\operatorname{Vect}$.</p>
+<p><b>Étape 2 : Premier pivot.</b> $L_2 - L_1 = (0, -1, -2, -1)$ ; $L_3 - 2L_1 = (2 - 2, 1 - 4, 1 - 6, 1 - 8) = (0, -3, -5, -7)$ ; $L_4 - 3L_1 = (3 - 3, 1 - 6, 0 - 9, 3 - 12) = (0, -5, -9, -9)$.</p>
+<p><b>Étape 3 : Second pivot $-1$.</b> $L_3 - 3L_2 = (0, -3 + 3, -5 + 6, -7 + 3) = (0, 0, 1, -4)$ ; $L_4 - 5L_2 = (0, -5 + 5, -9 + 10, -9 + 5) = (0, 0, 1, -4)$.</p>
+<p><b>Étape 4 : Dernier pivot.</b> $L_4 - L_3 = (0, 0, 0, 0)$ : trois lignes non nulles échelonnées, rang $3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\dim\operatorname{Vect}(a, b, c, d) = 3}$, base $(a, b, c)$, et la ligne nulle donne $d = 2b + c - a$ (contrôle : $(2 + 2 - 1, 2 + 1 - 2, 2 + 1 - 3, 6 + 1 - 4) = (3, 1, 0, 3)$).</p>
+
+<p class="ml">Exemple 29 : un sous-espace de $\mathbb R^5$ défini par un système</p>
+<p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Dimension et base.</p>
+<p><b>Étape 1 : Rappel.</b> $\dim F = 5 - \operatorname{rg}$ ; base : inconnues principales en fonction des secondaires.</p>
+<p><b>Étape 2 : Le rang.</b> $L_3 - 2L_1 = (0, 1 - 4, -5 + 2, 0 - 6, -4 - 2) = (0, -3, -3, -6, -6)$, puis $+3L_2$ : $(0, 0, 0, 0, -6 - 6) = (0, 0, 0, 0, -12)$. Trois pivots : rang $3$, $\dim F = 5 - 3 = 2$.</p>
+<p><b>Étape 3 : On résout.</b> $-12x_5 = 0$ : $x_5 = 0$. $L_2$ : $x_2 = -x_3 - 2x_4$. $L_1$ : $x_1 = -2x_2 + x_3 - 3x_4 = 2x_3 + 4x_4 + x_3 - 3x_4 = 3x_3 + x_4$.</p>
+<p><b>Étape 4 : On sépare les paramètres.</b> $(3x_3 + x_4,\ -x_3 - 2x_4,\ x_3,\ x_4,\ 0) = x_3(3, -1, 1, 0, 0) + x_4(1, -2, 0, 1, 0)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\dim F = 2,\ \text{base}\ \big((3, -1, 1, 0, 0), (1, -2, 0, 1, 0)\big)}$ (non colinéaires : 3<sup>e</sup> et 4<sup>e</sup> coordonnées).</p>
+
+<p class="ml">Exemple 30 : matrices par blocs, par un isomorphisme</p>
+<p>$E = \Big\{\begin{pmatrix}A&0\\0&B\end{pmatrix},\ A\in\mathcal M_r(\mathbb K),\ B\in\mathcal M_{n-r}(\mathbb K)\Big\}$. Dimension ?</p>
+<p><b>Étape 1 : Rappel.</b> Deux espaces isomorphes ont la même dimension, et $\dim(F\times G) = \dim F + \dim G$.</p>
+<p><b>Étape 2 : L'application.</b> $\varphi\Big(\begin{pmatrix}A&0\\0&B\end{pmatrix}\Big) = (A, B)\in\mathcal M_r\times\mathcal M_{n-r}$ : linéaire (calcul par blocs : $\lambda M + M'$ a pour blocs $\lambda A + A'$ et $\lambda B + B'$).</p>
+<p><b>Étape 3 : Bijective.</b> Noyau : $(A, B) = (0, 0)$ donne $M = 0$. Surjective : tout $(A, B)$ vient de la matrice par blocs correspondante.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\dim E = r^2 + (n - r)^2}$.</p>
+
+<p class="ml">Exemple 31 : deux hyperplans distincts</p>
+<p>$H\neq H'$ hyperplans de $E$ ($\dim E = n\geq2$). Montrer $\dim(H\cap H') = n - 2$.</p>
+<p><b>Étape 1 : Rappel.</b> Grassmann.</p>
+<p><b>Étape 2 : $H + H' = E$.</b> $\dim H = \dim H'$ et $H\neq H'$, donc $H'\not\subset H$ : il existe $a\in H'\setminus H$. Alors $H\subsetneq H + H'$, donc $\dim(H + H') > n - 1$, soit $\dim(H + H') = n$.</p>
+<p><b>Étape 3 : Grassmann.</b> $n = (n - 1) + (n - 1) - \dim(H\cap H')$, donc $\dim(H\cap H') = 2n - 2 - n = n - 2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\dim(H\cap H') = n - 2}$ : deux plans distincts de $\mathbb R^3$ se coupent selon une droite.</p>
+
+<h2 id="k-sfeg">14. Montrer que deux sous-espaces sont égaux</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> En dimension finie : <b>une inclusion et l'égalité des dimensions</b> (montrer $G\subset F$ est souvent juste vérifier des équations). <b>2.</b> Sinon : <b>double inclusion</b>.</p>
+
+<p class="ml">Exemple 32 : une inclusion et les dimensions</p>
+<p>$F = \{(x, y, z, t)\in\mathbb R^4,\ x + y + z = 0,\ 2x + y + z - t = 0\}$, $G = \operatorname{Vect}(a, b, c)$ avec $a = (1, 1, -2, 1)$, $b = (1, -1, 0, 1)$, $c = (3, 1, -4, 3)$. Montrer $F = G$.</p>
+<p><b>Étape 1 : Rappel.</b> $G\subset F$ et $\dim G = \dim F$.</p>
+<p><b>Étape 2 : $G\subset F$</b> : on vérifie les deux équations sur $a, b, c$. $a$ : $1 + 1 - 2 = 0$ et $2 + 1 - 2 - 1 = 0$. $b$ : $1 - 1 + 0 = 0$ et $2 - 1 + 0 - 1 = 0$. $c$ : $3 + 1 - 4 = 0$ et $6 + 1 - 4 - 3 = 0$.</p>
+<p><b>Étape 3 : $\dim F = 2$.</b> Deux hyperplans distincts (équations non proportionnelles) de $\mathbb R^4$ : $4 - 2 = 2$ (exemple 31).</p>
+<p><b>Étape 4 : $\dim G = 2$.</b> $a$ et $b$ ne sont pas colinéaires (2<sup>e</sup> coordonnées $1$ et $-1$, 1<sup>res</sup> égales), et $c = 2a + b$ : $(2 + 1, 2 - 1, -4 + 0, 2 + 1) = (3, 1, -4, 3)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{F = G}$ : il était plus facile de montrer $G\subset F$ que $F\subset G$.</p>
+
+<h2 id="k-sfsupp">15. Montrer que des sous-espaces sont supplémentaires</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>On veut la décomposition explicite</td><td><b>Analyse-synthèse</b> : $x = y + z$ ; l'analyse donne $y, z$ (unicité), la synthèse vérifie qu'ils conviennent (existence).</td></tr>
+<tr><td>La décomposition est évidente</td><td>$E = F + G$ (on l'écrit) et $F\cap G = \{0\}$.</td></tr>
+<tr><td>Dimension finie</td><td>$F\cap G = \{0\}$ <b>et</b> $\dim F + \dim G = \dim E$.</td></tr>
+<tr><td>$p\geq3$ sous-espaces</td><td>$x_1 + \dots + x_p = 0\Rightarrow$ tous nuls, <b>et</b> $\sum\dim E_i = \dim E$. Les intersections deux à deux nulles ne suffisent <b>pas</b> (trois droites d'un plan).</td></tr>
+<tr><td>Un polynôme annulateur scindé</td><td>Lemme des noyaux (fiche Réduction).</td></tr>
+</table>
+
+<p class="ml">Exemple 33 : $u^3 = \operatorname{id}$, par analyse-synthèse</p>
+<p>Montrer $E = \ker(u - \operatorname{id})\oplus\operatorname{Im}(u - \operatorname{id})$.</p>
+<p><b>Étape 1 : Rappel.</b> Analyse : on suppose $x = x_1 + x_2$ et on trouve $x_1$ ; synthèse : on vérifie.</p>
+<p><b>Étape 2 : Analyse.</b> $u(x_1) = x_1$ et $x_2 = u(y) - y$. Alors $x = x_1 + u(y) - y$, $u(x) = x_1 + u^2(y) - u(y)$, $u^2(x) = x_1 + u^3(y) - u^2(y) = x_1 + y - u^2(y)$.</p>
+<p><b>Étape 3 : On additionne les trois.</b> Les termes en $y$ se simplifient : $(u(y) - y) + (u^2(y) - u(y)) + (y - u^2(y)) = 0$. Il reste $x + u(x) + u^2(x) = 3x_1$, donc $x_1 = \frac13\big(x + u(x) + u^2(x)\big)$ : unique, donc $x_2 = x - x_1$ aussi.</p>
+<p><b>Étape 4 : Synthèse.</b> $u(x_1) = \frac13(u(x) + u^2(x) + u^3(x)) = \frac13(u(x) + u^2(x) + x) = x_1$ : $x_1\in\ker(u - \operatorname{id})$. Et $x_2 = x - x_1 = \frac13(2x - u(x) - u^2(x)) = (u - \operatorname{id})\Big(-\frac{u(x) + 2x}3\Big)$ : contrôle, $(u - \operatorname{id})(u(x) + 2x) = u^2(x) + 2u(x) - u(x) - 2x = u^2(x) + u(x) - 2x$, et le signe $-$ donne $2x - u(x) - u^2(x)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{E = \ker(u - \operatorname{id})\oplus\operatorname{Im}(u - \operatorname{id})}$.</p>
+
+<p class="ml">Exemple 34 : intégrale nulle et constantes</p>
+<p>$E = \mathcal C([0, 1], \mathbb R)$, $H = \{f,\ \int_0^1f = 0\}$. Trouver un supplémentaire de $H$.</p>
+<p><b>Étape 1 : Rappel.</b> $E = H + D$ et $H\cap D = \{0\}$.</p>
+<p><b>Étape 2 : $H$ est un sev.</b> C'est le noyau de la forme linéaire $f\mapsto\int_0^1f$.</p>
+<p><b>Étape 3 : La décomposition.</b> On note $m = \int_0^1f$ (une constante). $f = (f - m) + m$, et $\int_0^1(f - m) = m - m\times1 = 0$ : $f - m\in H$, $m\in D$ = droite des fonctions constantes.</p>
+<p><b>Étape 4 : Intersection.</b> Une constante $c$ d'intégrale nulle : $\int_0^1c = c = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{E = H\oplus D,\ D = \text{fonctions constantes}}$.</p>
+
+<p class="ml">Exemple 35 : deux plans de $\mathbb R^4$</p>
+<p>$F$ : $x + y + z + t = 0$, $x - y + z - t = 0$ ; $G$ : $x + 2y + 3z + 4t = 0$, $x - 2y + 3z - 4t = 0$. Supplémentaires ?</p>
+<p><b>Étape 1 : Rappel.</b> $F\cap G = \{0\}$ et $\dim F + \dim G = 4$.</p>
+<p><b>Étape 2 : $F$.</b> Somme des équations : $2x + 2z = 0$, $x = -z$. Différence : $2y + 2t = 0$, $y = -t$. $F = \{(-z, -t, z, t)\}$, dimension $2$.</p>
+<p><b>Étape 3 : $G$.</b> Somme : $2x + 6z = 0$, $x = -3z$. Différence : $4y + 8t = 0$, $y = -2t$. Dimension $2$.</p>
+<p><b>Étape 4 : $F\cap G$.</b> $x = -z = -3z$ donne $2z = 0$, $z = 0$, $x = 0$. $y = -t = -2t$ donne $t = 0$, $y = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $F\cap G = \{0\}$ et $2 + 2 = 4$ : $\cG{\mathbb R^4 = F\oplus G}$.</p>
+
+<p class="ml">Exemple 36 : trois sous-espaces de $\mathbb R_3[X]$</p>
+<p>$F = \{P,\ P(0) = P(1) = P(2) = 0\}$, $G = \{P,\ P(1) = P(2) = P(3) = 0\}$, $H = \{P,\ P(-X) = P(X)\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Somme directe (décomposition de $0$ unique) et somme des dimensions $= 4$.</p>
+<p><b>Étape 2 : Les trois espaces.</b> $P\in F$ : $X(X - 1)(X - 2)$ divise $P$, de degré $\leq3$, donc $F = \operatorname{Vect}\big(X(X - 1)(X - 2)\big)$, dim $1$. De même $G = \operatorname{Vect}\big((X - 1)(X - 2)(X - 3)\big)$, dim $1$. $H = \operatorname{Vect}(1, X^2)$ (pas de termes impairs), dim $2$. Total $1 + 1 + 2 = 4 = \dim\mathbb R_3[X]$.</p>
+<p><b>Étape 3 : Somme directe.</b> $\lambda X(X - 1)(X - 2) + \mu(X - 1)(X - 2)(X - 3) + a + bX^2 = 0$. En $X = 1$ : $a + b = 0$. En $X = 2$ : $a + 4b = 0$. Différence : $3b = 0$, donc $b = a = 0$. En $X = 3$ : $\lambda\times3\times2\times1 = 6\lambda = 0$. En $X = 0$ : $\mu\times(-1)(-2)(-3) = -6\mu = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R_3[X] = F\oplus G\oplus H}$.</p>
+
+<h2 id="k-enonce">16. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« $F$ est un sev »</b><span>Vect, ou noyau d'une application linéaire, ou la caractérisation.</span></div>
 <div><b>Une équation avec second membre $\neq0$</b><span>Pas un sev : $0\notin F$.</span></div>
@@ -8932,28 +9196,62 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <p><b>Étape 3 : Une base.</b> $P(1) = 0\iff(X - 1)\mid P\iff P = (X - 1)Q$ avec $\deg Q\leq n - 1$. Donc $H = \operatorname{Vect}\big((X - 1)X^k,\ 0\leq k\leq n - 1\big)$, famille de degrés échelonnés.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\dim H = n}$ : c'est un hyperplan de $\mathbb K_n[X]$.</p>
 
+<p class="ml">Exercice 3 : une égalité de sous-espaces par double inclusion</p>
+<p>$A, B, C$ sev de $E$. Montrer $A + (B\cap(A + C)) = A + (C\cap(A + B))$.</p>
+<p><b>Étape 1 : Rappel.</b> Les rôles de $B$ et $C$ sont symétriques : une inclusion suffit, l'autre s'obtient en échangeant $B$ et $C$.</p>
+<p><b>Étape 2 : Soit $x$ dans le membre de gauche.</b> $x = a + b$ avec $a\in A$, $b\in B\cap(A + C)$, donc $b = a' + c$ avec $a'\in A$, $c\in C$.</p>
+<p><b>Étape 3 : On isole $c$.</b> $c = b - a' = (-a') + b\in A + B$, et $c\in C$ : donc $c\in C\cap(A + B)$.</p>
+<p><b>Étape 4 : On regroupe.</b> $x = a + b = a + a' + c = \underbrace{(a + a')}_{\in A} + \underbrace{c}_{\in C\cap(A + B)}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $x\in A + (C\cap(A + B))$ ; par symétrie, $\cG{A + (B\cap(A + C)) = A + (C\cap(A + B))}$.</p>
+
+<p class="ml">Exercice 4 : une intersection non nulle par le théorème du rang</p>
+<p>$\dim E = n$, $F_1, \dots, F_p$ sev avec $\sum\dim F_i > n(p - 1)$. Montrer $\bigcap F_i\neq\{0\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Théorème du rang : $\dim(\text{départ}) = \operatorname{rg} + \dim\ker$, et $\operatorname{rg}\leq\dim(\text{arrivée})$.</p>
+<p><b>Étape 2 : L'application.</b> $\psi(x_1, \dots, x_p) = (x_2 - x_1, x_3 - x_2, \dots, x_p - x_{p-1})$, de $F_1\times\dots\times F_p$ dans $E^{p-1}$, linéaire.</p>
+<p><b>Étape 3 : Le noyau.</b> $\psi = 0\iff x_1 = x_2 = \dots = x_p$, donc $\ker\psi = \{(x, \dots, x),\ x\in\bigcap F_i\}$, isomorphe à $\bigcap F_i$.</p>
+<p><b>Étape 4 : Le rang.</b> $\sum\dim F_i = \operatorname{rg}\psi + \dim\bigcap F_i$ et $\operatorname{rg}\psi\leq\dim E^{p-1} = n(p - 1)$, donc $\dim\bigcap F_i\geq\sum\dim F_i - n(p - 1) > 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\bigcap_{i=1}^pF_i\neq\{0\}}$ (pour $p = 2$ : $\dim F + \dim G > n\Rightarrow F\cap G\neq\{0\}$).</p>
+
 <h2 id="k-arbre">L'arbre des espaces vectoriels</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
 <div class="htree"><div class="hr"><span class="hq hroot">Une question d'espaces vectoriels</span><ul>
-<li><div class="hr"><em>$F$ est-il un sev ?</em><span class="hq">Comment est donné $F$ ?</span><ul>
-<li><div class="hr"><em>par des vecteurs</em><a class="hl ok" href="#k-sev">c'est un Vect</a></div></li>
-<li><div class="hr"><em>par des équations</em><a class="hl" href="#k-sev">noyau, ou paramétrer</a></div></li>
+<li><div class="hr"><em>$F$ est-il un ev, un sev ?</em><span class="hq">Comment est donné $F$ ?</span><ul>
+<li><div class="hr"><em>lois inventées</em><a class="hl" href="#k-sfev">définition complète</a></div></li>
+<li><div class="hr"><em>par des vecteurs</em><a class="hl ok" href="#k-sfev">c'est un Vect</a></div></li>
+<li><div class="hr"><em>par des équations</em><a class="hl ok" href="#k-sfev">noyau, intersection de noyaux</a></div></li>
+<li><div class="hr"><em>partie d'un ev connu</em><a class="hl" href="#k-sev">$0$, stabilité par $\lambda x + y$</a></div></li>
 <li><div class="hr"><em>second membre $\neq0$</em><a class="hl end" href="#k-sev">non : $0\notin F$</a></div></li>
 </ul></div></li>
-<li><div class="hr"><em>une famille</em><span class="hq">On veut…</span><ul>
-<li><div class="hr"><em>libre</em><a class="hl" href="#k-libre">système, évaluations, degrés</a></div></li>
-<li><div class="hr"><em>génératrice</em><a class="hl" href="#k-vect">tout $x$ en combinaison</a></div></li>
-<li><div class="hr"><em>base</em><a class="hl ok" href="#k-base">libre + bon nombre de vecteurs</a></div></li>
-<li><div class="hr"><em>son rang</em><a class="hl" href="#k-rang">relation, ou pivot</a></div></li>
+<li><div class="hr"><em>une famille libre ?</em><span class="hq">Quels vecteurs ?</span><ul>
+<li><div class="hr"><em>coordonnées, paramètre</em><a class="hl ok" href="#k-sflibre">définition, système</a></div></li>
+<li><div class="hr"><em>$e^{ax}$, croissances</em><a class="hl" href="#k-sflibre">absurde, terme dominant</a></div></li>
+<li><div class="hr"><em>indexée par $n$</em><a class="hl" href="#k-sflibre">récurrence, dériver</a></div></li>
+<li><div class="hr"><em>polynômes</em><a class="hl ok" href="#k-sflibre">degrés ou valuations distincts</a></div></li>
+<li><div class="hr"><em>fonctions</em><a class="hl" href="#k-sflibre">évaluer en des points</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une base ?</em><span class="hq">Que sait-on ?</span><ul>
+<li><div class="hr"><em>$\dim E = n$ connue, $n$ vecteurs</em><a class="hl ok" href="#k-sfbase">libre suffit, ou $\det\neq0$</a></div></li>
+<li><div class="hr"><em>on veut les coordonnées</em><a class="hl" href="#k-sfbase">existence et unicité</a></div></li>
+<li><div class="hr"><em>image d'une base</em><a class="hl" href="#k-sfbase">isomorphisme</a></div></li>
+<li><div class="hr"><em>dimension infinie</em><a class="hl" href="#k-sfbase">libre et génératrice</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>rang, dimension</em><span class="hq">Comment est donné l'objet ?</span><ul>
+<li><div class="hr"><em>fonctions</em><a class="hl" href="#k-sfrang">sous-famille libre maximale</a></div></li>
+<li><div class="hr"><em>coordonnées</em><a class="hl ok" href="#k-sfrang">pivot, déterminant</a></div></li>
+<li><div class="hr"><em>équations</em><a class="hl ok" href="#k-sfdim">$\dim E - \operatorname{rg}$</a></div></li>
+<li><div class="hr"><em>ressemble à un ev connu</em><a class="hl" href="#k-sfdim">isomorphisme</a></div></li>
+<li><div class="hr"><em>somme, intersection</em><a class="hl" href="#k-sfdim">Grassmann</a></div></li>
 </ul></div></li>
 <li><div class="hr"><em>deux sev $F$, $G$</em><span class="hq">On veut…</span><ul>
-<li><div class="hr"><em>$E = F\oplus G$</em><a class="hl" href="#k-somme">analyse-synthèse, ou dimensions</a></div></li>
-<li><div class="hr"><em>$\dim(F\cap G)$</em><a class="hl" href="#k-dimf">Grassmann</a></div></li>
+<li><div class="hr"><em>$F = G$</em><a class="hl ok" href="#k-sfeg">une inclusion + dimensions</a></div></li>
+<li><div class="hr"><em>$E = F\oplus G$, décomposition</em><a class="hl" href="#k-sfsupp">analyse-synthèse</a></div></li>
+<li><div class="hr"><em>$E = F\oplus G$, dim finie</em><a class="hl ok" href="#k-sfsupp">$F\cap G = \{0\}$ + dimensions</a></div></li>
+<li><div class="hr"><em>trois sev ou plus</em><a class="hl end" href="#k-sfsupp">décomposition de $0$ unique + dimensions</a></div></li>
 </ul></div></li>
 </ul></div></div>
 `,
 "Applications linéaires": R`
-<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-constr">Construire</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs $\cB x$ et leurs images. <span class="kR">rouge</span> : le noyau $\cR{\ker f}$. <span class="kO">orange</span> : l'image $\cO{\operatorname{Im}f}$. <span class="kV">violet</span> : les dimensions et le rang. <span class="kG">vert</span> : la conclusion.</p>
@@ -9073,7 +9371,58 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 3 : On divise par $2$.</b> $f\circ\frac{3\operatorname{id} - f}2 = \operatorname{id}$, et de même $\frac{3\operatorname{id} - f}2\circ f = \operatorname{id}$ ($f$ commute avec ses polynômes).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\in GL(E),\ f^{-1} = \frac12(3\operatorname{id} - f)}$. En plus, $E = \ker(f - \operatorname{id})\oplus\ker(f - 2\operatorname{id})$ (voir Réduction).</p>
 
-<h2 id="l-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="l-constr">9. Montrer qu'une application est linéaire, ou en construire une</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>$u$ donnée par une formule</td><td>Vérifier <b>d'abord que $u(x)$ est bien dans $F$</b> (souvent la vraie difficulté), puis la linéarité.</td></tr>
+<tr><td>Construire $u$ en donnant $u(x)$</td><td>Vérifier que la définition a un sens (pas d'ambiguïté), puis la linéarité.</td></tr>
+<tr><td>Dimension finie</td><td>Donner l'<b>image d'une base</b> : elle détermine $u$ entièrement.</td></tr>
+<tr><td>$E = S\oplus T$</td><td>Donner les <b>restrictions</b> $u_{|S}$ et $u_{|T}$ : elles déterminent $u$.</td></tr>
+</table>
+
+<p class="ml">Exemple 12 : un opérateur intégral</p>
+<p>$E_0 = \{f\in\mathcal C(\mathbb R, \mathbb R),\ f(0) = 0\}$, $T(f)(x) = \frac1x\int_0^xtf(t)\,dt$ ($x\neq0$), $T(f)(0) = 0$. Montrer que $T$ est un endomorphisme de $E_0$.</p>
+<p><b>Étape 1 : Rappel.</b> D'abord $T(f)\in E_0$ (continue, nulle en $0$), puis la linéarité.</p>
+<p><b>Étape 2 : $E_0$ est un sev.</b> Noyau de la forme linéaire $f\mapsto f(0)$.</p>
+<p><b>Étape 3 : Continuité hors de $0$.</b> $G(x) = \int_0^xtf(t)\,dt$ est la primitive de $t\mapsto tf(t)$ (continue) nulle en $0$ : $G$ est $\mathcal C^1$, et $T(f) = \frac Gx$ est continue sur $\mathbb R^*$.</p>
+<p><b>Étape 4 : En $0$.</b> $\frac{G(x)}x = \frac{G(x) - G(0)}{x - 0}\to G'(0) = 0\times f(0) = 0 = T(f)(0)$ : continue en $0$, et nulle en $0$. Donc $T(f)\in E_0$.</p>
+<p><b>Étape 5 : Linéarité.</b> $\int_0^xt(\lambda f + g)(t)\,dt = \lambda\int_0^xtf(t)\,dt + \int_0^xtg(t)\,dt$, on divise par $x$ : $T(\lambda f + g) = \lambda T(f) + T(g)$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{T\in\mathcal L(E_0)}$.</p>
+
+<p class="ml">Exemple 13 : $\operatorname{Im}w\subset\operatorname{Im}v\Rightarrow w = v\circ u$</p>
+<p>$E, F, G$ de dimension finie, $v\in\mathcal L(F, G)$, $w\in\mathcal L(E, G)$, $\operatorname{Im}w\subset\operatorname{Im}v$. Trouver $u\in\mathcal L(E, F)$ avec $w = v\circ u$.</p>
+<p><b>Étape 1 : Rappel.</b> Un supplémentaire $S$ de $\ker v$ : $v_{|S}:S\to\operatorname{Im}v$ est un isomorphisme.</p>
+<p><b>Étape 2 : L'isomorphisme.</b> $F = S\oplus\ker v$. $v_1 = v_{|S}$ est injective ($\ker v_1 = S\cap\ker v = \{0\}$) et $\dim S = \dim F - \dim\ker v = \operatorname{rg}v$ : $v_1:S\to\operatorname{Im}v$ est bijective.</p>
+<p><b>Étape 3 : La définition.</b> Pour $x\in E$, $w(x)\in\operatorname{Im}w\subset\operatorname{Im}v$ : on pose $u(x) = v_1^{-1}(w(x))\in S\subset F$. $u = v_1^{-1}\circ w$ est linéaire (composée).</p>
+<p><b>Étape 4 : Vérification.</b> $v(u(x)) = v_1\big(v_1^{-1}(w(x))\big) = w(x)$ ($v$ et $v_1$ coïncident sur $S$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{w = v\circ u}$.</p>
+
+<p class="ml">Exemple 14 : $\ker u\subset\ker w\Rightarrow w = v\circ u$</p>
+<p>$u\in\mathcal L(E, F)$, $w\in\mathcal L(E, G)$, $\ker u\subset\ker w$. Trouver $v\in\mathcal L(F, G)$ avec $w = v\circ u$.</p>
+<p><b>Étape 1 : Rappel.</b> On définit $v$ sur $\operatorname{Im}u$ par $v_1(y) = w(x)$ si $y = u(x)$, puis on prolonge.</p>
+<p><b>Étape 2 : Bien défini.</b> Si $y = u(x) = u(x')$, alors $u(x - x') = 0$, donc $x - x'\in\ker u\subset\ker w$, donc $w(x) = w(x')$ : $v_1(y)$ ne dépend pas de l'antécédent choisi.</p>
+<p><b>Étape 3 : Linéaire.</b> $y = u(x)$, $y' = u(x')$ : $\lambda y + y' = u(\lambda x + x')$, donc $v_1(\lambda y + y') = w(\lambda x + x') = \lambda w(x) + w(x') = \lambda v_1(y) + v_1(y')$.</p>
+<p><b>Étape 4 : Prolonger.</b> On choisit un supplémentaire $T$ de $\operatorname{Im}u$ dans $F$ et on pose $v = v_1$ sur $\operatorname{Im}u$, $v = 0$ sur $T$ (une application linéaire est déterminée par ses restrictions à deux supplémentaires).</p>
+<p><b>Étape 5 : Conclusion.</b> $v(u(x)) = v_1(u(x)) = w(x)$ : $\cG{w = v\circ u}$.</p>
+
+<p class="ml">Exemple 15 : une dimension par les restrictions</p>
+<p>$\dim E$ finie, $u\in\mathcal L(E)$, $A = \{v\in\mathcal L(E),\ u\circ v = v\circ u = 0\}$. Montrer que $A$ est un sev et que $\dim A = (\dim\ker u)^2$.</p>
+<p><b>Étape 1 : Rappel.</b> Une application linéaire est déterminée par ses restrictions à deux supplémentaires, et $\dim\mathcal L(S, K) = \dim S\times\dim K$.</p>
+<p><b>Étape 2 : Sev.</b> $0\in A$ ; si $v_1, v_2\in A$ : $u\circ(\lambda v_1 + v_2) = \lambda\,u\circ v_1 + u\circ v_2 = 0$, et de même $(\lambda v_1 + v_2)\circ u = 0$.</p>
+<p><b>Étape 3 : Traduire.</b> On note $K = \ker u$. $u\circ v = 0\iff\operatorname{Im}v\subset K$, et $v\circ u = 0\iff v$ est nulle sur $\operatorname{Im}u$.</p>
+<p><b>Étape 4 : L'isomorphisme.</b> On prend $S$ un supplémentaire de $\operatorname{Im}u$ : $E = \operatorname{Im}u\oplus S$. Un $v\in A$ est nul sur $\operatorname{Im}u$ et envoie $S$ dans $K$, donc $\varphi(v) = v_{|S}\in\mathcal L(S, K)$. $\varphi$ est linéaire ; injective (si $v_{|S} = 0$, $v$ est nulle sur $\operatorname{Im}u$ et sur $S$, donc $v = 0$) ; surjective (pour $w\in\mathcal L(S, K)$, on définit $v = 0$ sur $\operatorname{Im}u$ et $v = w$ sur $S$ : alors $v\in A$).</p>
+<p><b>Étape 5 : Les dimensions.</b> $\dim S = n - \operatorname{rg}u = \dim K$ (théorème du rang), donc $\dim A = \dim\mathcal L(S, K) = \dim S\times\dim K = (\dim K)^2$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\dim A = (\dim\ker u)^2}$.</p>
+
+<p class="ml">Exemple 16 : un endomorphisme de noyau $F$ et d'image $G$</p>
+<p>$\dim E = n$, $\dim F + \dim G = n$. Montrer qu'il existe $u\in\mathcal L(E)$ avec $\ker u = F$ et $\operatorname{Im}u = G$.</p>
+<p><b>Étape 1 : Rappel.</b> Une application linéaire est déterminée par l'image d'une base.</p>
+<p><b>Étape 2 : Une base adaptée.</b> $p = \dim F$. On prend une base $(e_1, \dots, e_p)$ de $F$, complétée en une base $(e_1, \dots, e_n)$ de $E$ (base incomplète). $\dim G = n - p$ : soit $(g_1, \dots, g_{n-p})$ une base de $G$.</p>
+<p><b>Étape 3 : La définition.</b> $u(e_i) = 0$ pour $i\leq p$, et $u(e_{p+j}) = g_j$ pour $1\leq j\leq n - p$.</p>
+<p><b>Étape 4 : Image et noyau.</b> $\operatorname{Im}u = \operatorname{Vect}(u(e_1), \dots, u(e_n)) = \operatorname{Vect}(g_1, \dots, g_{n-p}) = G$. Donc $\operatorname{rg}u = n - p$ et, par le théorème du rang, $\dim\ker u = p$. Or $F\subset\ker u$ (les $e_i$, $i\leq p$, sont envoyés sur $0$) et $\dim F = p$ : $\ker u = F$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = F\ \text{et}\ \operatorname{Im}u = G}$. Si de plus $E = F\oplus G$, la projection sur $G$ parallèlement à $F$ convient.</p>
+
+<h2 id="l-enonce">10. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« $f$ est linéaire »</b><span>$f(\lambda x + y) = \lambda f(x) + f(y)$.</span></div>
 <div><b>« Déterminer $\ker f$ »</b><span>Résoudre $f(x) = 0$, donner une base.</span></div>
