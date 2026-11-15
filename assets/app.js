@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2349,7 +2349,7 @@ function mlCobweb(host) {
   draw();
 }
 const apow = a => a.d === 1 && a.n > 0 ? `${a.n}^n` : `\\left(${ftex(a)}\\right)^n`;
-const ctp = (c, b) => { c = typeof c === "number" ? Fr(c) : c; if (!c.n) return ""; if (!b) return ftex(c); return c.n === c.d ? b : c.n === -c.d ? "-" + b : `${ftex(c)}\\times${b}`; };
+const ctp = (c, b) => { c = typeof c === "number" ? Fr(c) : c; if (!c.n) return ""; if (!b) return ftex(c); return c.n === c.d ? b : c.n === -c.d ? "-" + b : (/^[a-z]/i.test(b) ? `${ftex(c)}${b}` : `${ftex(c)}\\times ${b}`); };
 const csum = ts => ts.filter(Boolean).reduce((s, t) => !s ? t : t[0] === "-" ? `${s} - ${t.slice(1)}` : `${s} + ${t}`, "") || "0";
 /* Suites : arithmético-géométrique */
 function mlAriGeo(host) {
@@ -2451,6 +2451,91 @@ const QDEN = [
   ["Entre deux ensembles finis de même cardinal, une injection est une bijection.", true, "Vrai : injective $\\iff$ surjective $\\iff$ bijective."],
   ["$\\binom{n}{p} = \\binom{n}{n - p}$.", true, "Vrai : choisir les $p$ éléments pris, c'est choisir les $n - p$ laissés."],
   ["Parmi $367$ personnes, deux ont le même jour d'anniversaire.", true, "Vrai : principe des tiroirs, $367 > 366$."]
+];
+/* Intégrales impropres : Riemann en 0 et en +∞ */
+function mlRiemRef(host) {
+  let al = 1.5;
+  const I1 = (X, a) => Math.abs(a - 1) < 1e-9 ? Math.log(X) : (X ** (1 - a) - 1) / (1 - a), I0 = (e, a) => Math.abs(a - 1) < 1e-9 ? -Math.log(e) : (1 - e ** (1 - a)) / (1 - a);
+  const fm = v => !isFinite(v) || v > 1e6 ? "\\text{énorme}" : v.toFixed(3).replace(".", "{,}");
+  const draw = () => {
+    const a = al, f = t => t > 0 ? t ** -a : NaN;
+    const extra = (X, Y) => { let d1 = `M${X(1)},${Y(0)}`, d0 = `M${X(0.04)},${Y(0)}`; for (let i = 0; i <= 80; i++) { const t = 1 + 5 * i / 80; d1 += `L${X(t).toFixed(1)},${Y(Math.min(f(t), 4.5)).toFixed(1)}`; const s = 0.04 + 0.96 * i / 80; d0 += `L${X(s).toFixed(1)},${Y(Math.min(f(s), 4.5)).toFixed(1)}`; } return `<path d="${d1}L${X(6)},${Y(0)}Z" fill="rgba(43,91,215,.15)"/><path d="${d0}L${X(1)},${Y(0)}Z" fill="rgba(194,124,0,.18)"/>`; };
+    const Xs = [10, 100, 1e4, 1e6], Es = [0.1, 0.01, 1e-4, 1e-6], cvI = a > 1, cv0 = a < 1;
+    host.innerHTML = `<p class="mlt">Les intégrales de Riemann $\\int\\frac{dt}{t^\\alpha}$</p><div class="rmctl"><label class="rmn">$\\alpha = ${a.toFixed(1).replace(".", "{,}")}$ <input type="range" min="0.2" max="2.5" step="0.1" value="${a}" data-a aria-label="alpha"></label></div>${plotSvg([{ f, c: "#2B5BD7", w: 2.5 }], 0, 6, 0, 4, extra)}<table class="mtab"><tr><th>$X$</th>${Xs.map(x => `<td>$10^{${Math.log10(x)}}$</td>`).join("")}<th>bilan en $+\\infty$</th></tr><tr><th>$\\int_1^X$</th>${Xs.map(x => `<td>$${fm(I1(x, a))}$</td>`).join("")}<td>${cvI ? `$\\cG{\\text{CV vers}\\ ${fm(1 / (a - 1))}}$` : "$\\cR{\\text{DV}}$"}</td></tr><tr><th>$\\varepsilon$</th>${Es.map(x => `<td>$10^{${Math.log10(x)}}$</td>`).join("")}<th>bilan en $0$</th></tr><tr><th>$\\int_\\varepsilon^1$</th>${Es.map(x => `<td>$${fm(I0(x, a))}$</td>`).join("")}<td>${cv0 ? `$\\cG{\\text{CV vers}\\ ${fm(1 / (1 - a))}}$` : "$\\cR{\\text{DV}}$"}</td></tr></table><p class="mlnote">En bleu l'aire sur $[1, +\\infty[$ : finie si et seulement si $\\alpha > 1$. En orange l'aire sur $]0, 1]$ : finie si et seulement si $\\alpha \\lt 1$. Pour $\\alpha = 1$, les deux sont infinies (lentement : $\\ln$).</p>`;
+    $("[data-a]", host).addEventListener("input", ev => { al = +ev.target.value; draw(); $("[data-a]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QIMP = [
+  ["$\\int_1^{+\\infty}\\frac{dt}{\\sqrt t}$ converge.", false, "Faux : $\\alpha = \\frac12\\leq1$ en $+\\infty$, elle diverge."],
+  ["$\\int_0^1\\frac{dt}{\\sqrt t}$ converge.", true, "Vrai : $\\alpha = \\frac12 \\lt 1$ en $0$, elle vaut $2$."],
+  ["Si $f(t)\\to0$ en $+\\infty$, alors $\\int_1^{+\\infty}f$ converge.", false, "Faux : $\\frac1t\\to0$ et $\\int_1^{+\\infty}\\frac{dt}t$ diverge."],
+  ["$\\int_{-\\infty}^{+\\infty}t\\,dt = 0$ car la fonction est impaire.", false, "Faux : chaque morceau diverge, donc l'intégrale diverge."],
+  ["Si $|f|$ est intégrable, alors $\\int f$ converge.", true, "Vrai : convergence absolue $\\Rightarrow$ convergence."],
+  ["$\\int_1^{+\\infty}\\frac{\\sin t}t\\,dt$ est absolument convergente.", false, "Faux : elle converge (IPP), mais $\\int\\frac{|\\sin t|}t$ diverge."],
+  ["$\\int_0^1\\ln t\\,dt = -1$.", true, "Vrai : $[t\\ln t - t]_x^1 = -1 - x\\ln x + x\\to-1$."],
+  ["Pour $f$ positive décroissante, $\\sum f(n)$ et $\\int_1^{+\\infty}f$ ont même nature.", true, "Vrai : comparaison série-intégrale."]
+];
+const egcd = (a, b) => { let [r0, r1, u0, u1, v0, v1] = [a, b, 1, 0, 0, 1]; const rows = [[r0, "", u0, v0], [r1, "", u1, v1]]; while (r1) { const q = Math.floor(r0 / r1); [r0, r1] = [r1, r0 - q * r1]; [u0, u1] = [u1, u0 - q * u1]; [v0, v1] = [v1, v0 - q * v1]; rows[rows.length - 2][1] = q; rows.push([r1, "", u1, v1]); } return { d: r0, u: u0, v: v0, rows }; };
+const gcdi = (a, b) => b ? gcdi(b, a % b) : Math.abs(a);
+/* Arithmétique : Euclide étendu */
+function mlEuclZ(host) {
+  const gen = () => { const D = [1, 1, 2, 3, 6, 7, 12]; const d = D[rnd(0, 6)]; let a, b; do { a = rnd(20, 160); b = rnd(8, a - 1); } while (gcdi(a, b) !== 1); return { a: a * d, b: b * d }; };
+  const build = ({ a, b }) => {
+    const E = egcd(a, b), s = [`$$a = ${a},\\qquad b = ${b}$$`];
+    s.push(`<p class="mlstep">1. Rappel : $a = bq + r\\Rightarrow a\\wedge b = b\\wedge r$, le PGCD est le dernier reste non nul. Pour Bézout, chaque reste s'écrit $r_k = au_k + bv_k$, avec la même relation $x_{k+1} = x_{k-1} - q_kx_k$ sur $r$, $u$ et $v$.</p>`);
+    const divs = []; let x = a, y = b; while (y) { const q = Math.floor(x / y), r = x - q * y; divs.push(`${x} &= ${q}\\times${y} + ${r === 0 ? "0" : `\\cR{${r}}`}`); [x, y] = [y, r]; }
+    s.push(`<p class="mlstep">2. Les divisions successives :</p>$$\\begin{aligned}${divs.join("\\\\")}\\end{aligned}$$`);
+    s.push(`<p class="mlstep">3. Le dernier reste non nul : $\\cR{a\\wedge b = ${E.d}}$.</p>`);
+    const rows = E.rows.slice(0, -1);
+    s.push(`<p class="mlstep">4. Le tableau (chaque ligne vérifie $r = ${a}u + ${b}v$) :</p>$$\\begin{array}{c|c|c|c}r_k&q_k&u_k&v_k\\\\\\hline ${rows.map(r => `${r[0]}&${r[1]}&${r[2]}&${r[3]}`).join("\\\\")}\\end{array}$$`);
+    s.push(`<p class="mlstep">5. Conclusion : on lit la ligne du PGCD.</p>$$\\cG{${a}\\times${fpar(E.u)} + ${b}\\times${fpar(E.v)} = ${E.d}}$$<p class="mlnote">Contrôle : $${a * E.u} + ${fpar(b * E.v)} = ${E.d}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Algorithme d'Euclide étendu", gen, build);
+}
+/* Arithmétique : ax + by = c */
+function mlDioph(host) {
+  const gen = () => { const D = [1, 2, 3, 4, 6]; const d = D[rnd(0, 4)]; let a, b; do { a = rnd(2, 15); b = rnd(2, 15); } while (gcdi(a, b) !== 1 || a === b); let c = 0; while (!c) c = rnd(-9, 12); const bad = d > 1 && !rnd(0, 3); return { a: a * d, b: b * d, c: bad ? c * d + 1 : c * d }; };
+  const build = ({ a, b, c }) => {
+    const d = gcdi(a, b), s = [`$$${a}x + ${b}y = ${c}$$`];
+    s.push(`<p class="mlstep">1. Rappel : il y a des solutions $\\iff d = a\\wedge b$ divise $c$. Puis Bézout pour une solution, et Gauss pour toutes.</p>`);
+    if (c % d) { s.push(`<p class="mlstep">2. Le PGCD : $${a}\\wedge${b} = ${d}$, et $${d}\\nmid${c}$.</p>`); s.push(`<p class="mlstep">3. Conclusion : $${d}$ divise le membre de gauche pour tous $x, y$ entiers, mais pas $${c}$ : $\\cG{\\mathcal S = \\varnothing}$.</p>`); return s; }
+    const A = a / d, B = b / d, C = c / d, E = egcd(A, B), x0 = E.u * C, y0 = E.v * C;
+    s.push(`<p class="mlstep">2. Le PGCD : $${a}\\wedge${b} = ${d}$ divise $${c}$.${d > 1 ? ` On divise par $${d}$ :` : ""}</p>${d > 1 ? `$$${A}x + ${B}y = ${C}$$` : ""}`);
+    s.push(`<p class="mlstep">3. Bézout (Euclide étendu) : $${A}\\times${fpar(E.u)} + ${B}\\times${fpar(E.v)} = 1$. On multiplie par $${C}$ :</p>$$${A}\\times${fpar(x0)} + ${B}\\times${fpar(y0)} = ${C},\\qquad(x_0, y_0) = (${x0}, ${y0}).$$`);
+    s.push(`<p class="mlstep">4. On soustrait les deux égalités :</p>$$${A}\\,(${csum(["x", ctp(-x0, "")])}) = -${B}\\,(${csum(["y", ctp(-y0, "")])})$$`);
+    s.push(`<p class="mlstep">5. Gauss : $${B}$ divise $${A}\\,(x - x_0)$ et $${B}\\wedge${A} = 1$, donc $x = ${x0} + ${B}k$. On remplace : $y = ${y0} - ${A}k$.</p>`);
+    s.push(`<p class="mlstep">6. Conclusion :</p>$$\\cG{\\mathcal S = \\{(${csum([ctp(x0, ""), ctp(B, "k")])},\\ ${csum([ctp(y0, ""), ctp(-A, "k")])}),\\ k\\in\\mathbb Z\\}}$$<p class="mlnote">Contrôle $k = 0$ : $${a}\\times${fpar(x0)} + ${b}\\times${fpar(y0)} = ${a * x0 + b * y0}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Résoudre $ax + by = c$ dans $\\mathbb Z^2$", gen, build);
+}
+/* Arithmétique : a^k mod n */
+function mlPowMod(host) {
+  const gen = () => { const N = [7, 9, 10, 11, 13]; const n = N[rnd(0, 4)]; let a; do { a = rnd(2, 3 * n); } while (gcdi(a, n) !== 1 || a % n === 1); return { a, n, k: rnd(40, 2030) }; };
+  const build = ({ a, n, k }) => {
+    const a0 = a % n, pw = [1]; let m = 0; do { m++; pw.push(pw[m - 1] * a0 % n); } while (pw[m] !== 1);
+    const q = Math.floor(k / m), r = k % m, prem = [7, 11, 13].includes(n), s = [`$$\\text{Reste de}\\ ${a}^{${k}}\\ \\text{modulo}\\ ${n}$$`];
+    s.push(`<p class="mlstep">1. Rappel : on cherche $m$ avec $a^m\\equiv1\\ [n]$, puis $k = mq + r$ donne $a^k = (a^m)^qa^r\\equiv a^r$.${prem ? ` Ici $${n}$ est premier : Fermat donne $a^{${n - 1}}\\equiv1$, et $m$ divise $${n - 1}$.` : ""}</p>`);
+    if (a0 !== a) s.push(`<p class="mlstep">2. On réduit la base : $${a} = ${Math.floor(a / n)}\\times${n} + ${a0}$, donc $${a}\\equiv${a0}\\ [${n}]$.</p>`); else s.push(`<p class="mlstep">2. La base $${a}$ est déjà entre $0$ et $${n - 1}$.</p>`);
+    s.push(`<p class="mlstep">3. Les puissances successives modulo $${n}$ :</p>$$${pw.slice(1).map((v, i) => `${a0}^{${i + 1}}\\equiv${i + 1 === m ? `\\cG{${v}}` : v}`).join(",\\quad ")}$$<p class="mlnote">Chaque ligne : on multiplie la précédente par $${a0}$ et on réduit. Donc $m = ${m}$.</p>`);
+    s.push(`<p class="mlstep">4. On divise l'exposant par $${m}$ :</p>$$${k} = ${m}\\times${q} + ${r}$$`);
+    s.push(`<p class="mlstep">5. Conclusion :</p>$$${a}^{${k}} = \\big(${a}^{${m}}\\big)^{${q}}\\times${a}^{${r}}\\equiv1\\times${a0}^{${r}}\\equiv\\cG{${pw[r]}}\\ [${n}]$$`);
+    return s;
+  };
+  stepLab(host, "Calculer une puissance modulo $n$", gen, build);
+}
+const QARITH = [
+  ["Le reste de la division euclidienne de $-7$ par $3$ est $-1$.", false, "Faux : le reste est entre $0$ et $2$. $-7 = 3\\times(-3) + 2$, le reste est $2$."],
+  ["Si $6\\mid ab$, alors $6\\mid a$ ou $6\\mid b$.", false, "Faux : $6\\mid4\\times3$. Le lemme d'Euclide ne vaut que pour un premier."],
+  ["$3u + 5v = 1$ a des solutions entières.", true, "Vrai : $3\\wedge5 = 1$ (Bézout), par exemple $3\\times2 + 5\\times(-1) = 1$."],
+  ["Si $4u + 6v = 2$, alors $4\\wedge6 = 2$.", true, "Vrai ici, mais par chance : $4\\wedge6$ divise $2$ et divise $4$, donc vaut $1$ ou $2$, et $2\\mid4, 6$."],
+  ["$2^{10}\\equiv1\\ [11]$.", true, "Vrai : Fermat, $11$ premier et $11\\nmid2$."],
+  ["De $2x\\equiv2\\ [6]$ on déduit $x\\equiv1\\ [6]$.", false, "Faux : $x = 4$ marche aussi. $2\\wedge6\\neq1$, on ne peut pas simplifier."],
+  ["$(a\\wedge b)(a\\vee b) = |ab|$.", true, "Vrai : exposants $\\min + \\max = $ somme."],
+  ["$1$ est un nombre premier.", false, "Faux : un premier est $\\geq2$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

@@ -163,12 +163,31 @@ LEMME.EXMETH = {
   String.raw`Un point à problème à la fois, avec $t^\alpha|f(t)|\to0$.`,
   String.raw`IPP pour la convergence, minorer $|f|$ pour la non-intégrabilité.`,
   String.raw`Calculer sur $[0, x]$, puis $x\to+\infty$.`,
+  String.raw`Primitive sur un segment, puis limite selon $\alpha$.`,
+  String.raw`Primitive $t\ln t - t$ sur $[x, 1]$, puis $x\ln x\to0$.`,
+  String.raw`Couper en $0$, $\arctan$ de chaque côté.`,
+  String.raw`$0\leq f\leq g$ avec $\int g$ convergente.`,
+  String.raw`Équivalent en chaque point à problème, puis Riemann.`,
+  String.raw`Minorer par $\frac1t$, ou équivalent à $\frac1t$.`,
+  String.raw`$|f|\leq e^{-t}$, puis $\operatorname{Re}\int e^{(-1 + i)t}$.`,
+  String.raw`IPP sur l'intervalle (crochet nul) : $I_n = nI_{n-1}$.`,
+  String.raw`$u = e^t$, bijection $\mathcal C^1$ croissante, puis $\arctan$.`,
+  String.raw`$f$ positive décroissante : même nature que $\int\frac{dt}{t\ln t}$.`,
+  String.raw`Encadrer $\frac1k$ par des intégrales, sommer, diviser par $\ln n$.`,
+  String.raw`$f\sim g$, $\int g$ diverge : intégrales partielles équivalentes.`,
+  String.raw`$f\sim g$, $\int g$ converge : restes équivalents.`,
+  String.raw`$|ab|\leq\frac{a^2 + b^2}2$ avec $a = f$, $b = \frac1t$.`,
   String.raw`Limite simple, puis domination par une constante.`,
   String.raw`Indicatrice, limite simple, domination par $\ln(1 - u)\leqslant-u$.`,
   String.raw`Développer en série, intégrer chaque terme, vérifier $\sum\int|f_n|$.`,
   String.raw`Continuité en $x$, continuité en $t$, domination indépendante de $x$.`,
   String.raw`Limite simple en $t$, même domination.`,
   String.raw`Dominer $\frac{\partial f}{\partial x}$, dériver, IPP, équation différentielle.`
+],
+"Intégration sur un intervalle quelconque (exercices)": [
+  String.raw`Équivalent en $0$ et en $+\infty$, comparer à Riemann.`,
+  String.raw`$\ln(\sin t)\sim\ln t$, de signe constant.`,
+  String.raw`IPP avec $v = t$, puis $t^2 = (1 + t^2) - 1$.`
 ],
 "Suites et séries de fonctions": [
   String.raw`Fixer $x$, distinguer les cas, chercher la limite.`,
@@ -269,5 +288,32 @@ LEMME.EXMETH = {
   String.raw`$\frac{11!}{4!\,4!\,2!}$.`,
   String.raw`$\binom n2$ segments, moins les $n$ côtés.`,
   String.raw`Bijection avec les parties à $p$ éléments.`
+],
+"Arithmétique dans ℤ": [
+  String.raw`Combinaison qui élimine $n$.`,
+  String.raw`$n^2 + 3 = (n + 1)(n - 1) + 4$, puis diviseurs de $4$.`,
+  String.raw`$q = \lfloor\frac ab\rfloor$, reste $r = a - bq\geq0$.`,
+  String.raw`Euclide : dernier reste non nul.`,
+  String.raw`Remonter Euclide en remplaçant les restes.`,
+  String.raw`Combinaison égale à $\pm1$ : Bézout.`,
+  String.raw`Trois consécutifs : $2\mid$, $3\mid$, puis $2\wedge3 = 1$.`,
+  String.raw`$d\mid c$, Bézout, soustraire, Gauss.`,
+  String.raw`$(a\wedge b)(a\vee b) = |ab|$.`,
+  String.raw`Tester les premiers $\leq\sqrt n$.`,
+  String.raw`Exposants min pour $\wedge$, max pour $\vee$.`,
+  String.raw`Par l'absurde avec $p_1\cdots p_k + 1$.`,
+  String.raw`Puissances jusqu'à $7^4\equiv1$, division de l'exposant.`,
+  String.raw`Réduire $9\equiv2\ [7]$, factoriser $2^n$.`,
+  String.raw`Euclide remonté : $7u + 26v = 1$.`,
+  String.raw`Multiplier par l'inverse de $7$.`,
+  String.raw`Fermat : $2^{12}\equiv1\ [13]$.`,
+  String.raw`Fermat modulo $2$, $3$, $7$, puis produit.`,
+  String.raw`$x = 2 + 3k$, remplacer, inverser $3$ modulo $5$.`
+],
+"Arithmétique dans ℤ (exercices)": [
+  String.raw`$\frac pq$ irréductible, lemme d'Euclide deux fois.`,
+  String.raw`$(2n + 1)^2 - 4(n^2 + n) = 1$.`,
+  String.raw`$(p - 1)(p + 1)$ : $8$ et $3$, premiers entre eux.`,
+  String.raw`$10\equiv1\ [9]$.`
 ]
 };

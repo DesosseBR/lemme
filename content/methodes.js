@@ -3281,7 +3281,7 @@ $$\cG{u_n = e - \frac e{2n} + o\Big(\frac1n\Big)},\qquad\text{donc}\ e - u_n\sim
 </div>
 `,
 "Intégration sur un intervalle quelconque": R`
-<nav class="msum"><a href="#p-not">Notations</a><a href="#p-ref">Intégrales de référence</a><a href="#p-integ">Montrer l'intégrabilité</a><a href="#p-calc">Calculer</a><a href="#p-cvd">Convergence dominée</a><a href="#p-tat">Terme à terme</a><a href="#p-plan">Le plan pour un paramètre</a><a href="#p-cont">Continuité</a><a href="#p-lim">Limite</a><a href="#p-der">Dérivation</a><a href="#p-gamma">La fonction $\Gamma$</a><a href="#p-enonce">Ce que l'énoncé te donne</a><a href="#p-erreurs">Erreurs</a><a href="#p-entrainement">S'entraîner</a><a href="#p-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#p-not">Notations</a><a href="#p-ref">Intégrales de référence</a><a href="#p-integ">Montrer l'intégrabilité</a><a href="#p-calc">Calculer</a><a href="#p-def">Définition</a><a href="#p-pos">Comparaison</a><a href="#p-abs">Absolue, complexe</a><a href="#p-ippcv">IPP, changement de variable</a><a href="#p-serint">Série-intégrale</a><a href="#p-relc">Relations de comparaison</a><a href="#p-l2">Carré intégrable</a><a href="#p-cvd">Convergence dominée</a><a href="#p-tat">Terme à terme</a><a href="#p-plan">Le plan pour un paramètre</a><a href="#p-cont">Continuité</a><a href="#p-lim">Limite</a><a href="#p-der">Dérivation</a><a href="#p-gamma">La fonction $\Gamma$</a><a href="#p-enonce">Ce que l'énoncé te donne</a><a href="#p-erreurs">Erreurs</a><a href="#p-entrainement">S'entraîner</a><a href="#p-arbre">L'arbre</a><a href="#p-exos">Exercices</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : la fonction intégrée $f(x, t)$. <span class="kO">orange</span> : la fonction qui domine, $\varphi(t)$, indépendante de $x$. <span class="kR">rouge</span> : les points à problème (bornes infinies, singularités). <span class="kV">violet</span> : les fonctions de référence. <span class="kG">vert</span> : la conclusion.</p>
@@ -3332,7 +3332,7 @@ $$\frac{|\sin t|}t\geqslant\frac1{2t} - \frac{\cos2t}{2t}.$$
 
 <h2 id="p-calc">4. Calculer une intégrale sur un intervalle</h2>
 <p>On calcule sur un segment $[a, x]$, puis on fait tendre $x$ vers la borne. On peut aussi faire une IPP ou un changement de variable directement, à condition que <b>les crochets aient une limite finie</b>.</p>
-<p class="ml">Exemple : $\int_0^{+\infty}t\,e^{-t}\,dt$</p>
+<p class="ml">Exemple 4 : $\int_0^{+\infty}t\,e^{-t}\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> On calcule sur $[0, x]$, puis on fait tendre $x$ vers $+\infty$.</p>
 <p><b>Étape 2 : IPP sur $[0, x]$</b> ($u = t$, $v' = e^{-t}$, $v = -e^{-t}$) :</p>
 $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}.$$
@@ -3341,16 +3341,185 @@ $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^
 <p class="ml">Changement de variable</p>
 <p>Il doit être une bijection $\mathcal C^1$ strictement monotone. Il conserve alors la nature et la valeur : $\int_0^{+\infty}e^{-\sqrt t}\,dt\ \underset{\cO{t = u^2}}{=}\ \int_0^{+\infty}2u\,e^{-u}\,du = 2$.</p>
 
-<h2 id="p-cvd">5. Le théorème de convergence dominée</h2>
+<h2 id="p-def">5. Intégrale convergente : la définition, les calculs de référence</h2>
+<p class="ml">Le code couleur de cette partie</p>
+<p><span class="kB">bleu</span> : la fonction étudiée $\cB f$. <span class="kO">orange</span> : la fonction de comparaison $\cO g$. <span class="kR">rouge</span> : les points à problème. <span class="kV">violet</span> : l'exposant $\cV\alpha$. <span class="kG">vert</span> : la conclusion.</p>
+<div class="sbox">$$f\ \text{continue par morceaux sur}\ [a, b[:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf(t)\,dt\ \text{a une limite finie quand}\ x\to b^-.$$
+$$\text{Sur}\ ]a, b[:\ \text{on coupe en un}\ c\in\,]a, b[\ \text{et on demande que}\ \int_a^cf\ \text{et}\ \int_c^bf\ \text{convergent}\ \text{(les deux !)}.$$
+$$\text{Avec une primitive}\ F:\qquad\int_a^bf = \lim_{b^-}F - \lim_{a^+}F = \big[F\big]_a^b,\quad\text{si les deux limites sont finies}.$$</div>
+<p class="ml piege">Piège</p>
+<p>$\int_{-x}^xt\,dt = 0\to0$, et pourtant $\int_{-\infty}^{+\infty}t\,dt$ <b>diverge</b> : les deux bornes doivent partir <b>indépendamment</b>.</p>
+<table class="mtab">
+<tr><th>Intégrale de référence</th><th>Converge si et seulement si</th><th>Valeur</th></tr>
+<tr><td>$\int_1^{+\infty}\frac{dt}{t^{\cV\alpha}}$</td><td>$\cV\alpha > 1$</td><td>$\frac1{\alpha - 1}$</td></tr>
+<tr><td>$\int_0^1\frac{dt}{t^{\cV\alpha}}$</td><td>$\cV\alpha \lt 1$</td><td>$\frac1{1 - \alpha}$</td></tr>
+<tr><td>$\int_a^b\frac{dt}{(t - a)^{\cV\alpha}}$, $\int_a^b\frac{dt}{(b - t)^{\cV\alpha}}$</td><td>$\cV\alpha \lt 1$</td><td>$\frac{(b - a)^{1-\alpha}}{1 - \alpha}$</td></tr>
+<tr><td>$\int_0^{+\infty}e^{-\lambda t}\,dt$</td><td>$\lambda > 0$</td><td>$\frac1\lambda$</td></tr>
+<tr><td>$\int_0^1\ln t\,dt$</td><td>toujours</td><td>$-1$</td></tr>
+</table>
+
+<p class="ml">Exemple 5 : les intégrales de Riemann, à savoir refaire</p>
+<p><b>Étape 1 : Rappel.</b> On calcule sur un segment avec une primitive, puis on passe à la limite. Pour $\alpha\neq1$, une primitive de $t^{-\alpha}$ est $\frac{t^{1-\alpha}}{1 - \alpha}$ ; pour $\alpha = 1$, c'est $\ln t$.</p>
+<p><b>Étape 2 : Cas $\alpha = 1$.</b> $\int_1^x\frac{dt}t = \ln x\to+\infty$ et $\int_x^1\frac{dt}t = -\ln x\to+\infty$ quand $x\to0^+$ : divergence des deux côtés.</p>
+<p><b>Étape 3 : Cas $\alpha\neq1$, en $+\infty$.</b></p>
+$$\int_1^x\frac{dt}{t^\alpha} = \frac{x^{1-\alpha} - 1}{1 - \alpha}\longrightarrow\begin{cases}\frac1{\alpha - 1}&\text{si}\ \alpha > 1\ (x^{1-\alpha}\to0)\\+\infty&\text{si}\ \alpha \lt 1\ (x^{1-\alpha}\to+\infty)\end{cases}$$
+<p><b>Étape 4 : Cas $\alpha\neq1$, en $0$.</b></p>
+$$\int_x^1\frac{dt}{t^\alpha} = \frac{1 - x^{1-\alpha}}{1 - \alpha}\longrightarrow\begin{cases}\frac1{1 - \alpha}&\text{si}\ \alpha \lt 1\ (x^{1-\alpha}\to0)\\+\infty&\text{si}\ \alpha > 1\ (x^{1-\alpha}\to+\infty)\end{cases}$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{\int_1^{+\infty}\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha > 1}$ et $\cG{\int_0^1\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha \lt 1}$. Donc $\int_0^{+\infty}\frac{dt}{t^\alpha}$ diverge pour <b>tout</b> $\alpha$.</p>
+
+<p class="ml">Exemple 6 : $\int_0^1\ln t\,dt$</p>
+<p><b>Étape 1 : Rappel.</b> $\int_0^1f = \lim\limits_{x\to0^+}\int_x^1f$. Une primitive de $\ln$ est $t\ln t - t$.</p>
+<p><b>Étape 2 : Sur $[x, 1]$.</b></p>
+$$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x\ln x + x.$$
+<p><b>Étape 3 : La limite.</b> $x\ln x\to0$ (croissances comparées) et $x\to0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\int_0^1\ln t\,dt = -1}$ (convergente).</p>
+
+<p class="ml">Exemple 7 : deux bornes infinies</p>
+<p>Calculer $\displaystyle\int_{-\infty}^{+\infty}\frac{dt}{1 + t^2}$.</p>
+<p><b>Étape 1 : Rappel.</b> Avec deux bornes à problème, on coupe en $0$ et chaque morceau doit converger. Une primitive de $\frac1{1 + t^2}$ est $\arctan$.</p>
+<p><b>Étape 2 : Sur $[0, +\infty[$.</b> $\int_0^x\frac{dt}{1 + t^2} = \arctan x\to\frac\pi2$.</p>
+<p><b>Étape 3 : Sur $]-\infty, 0]$.</b> $\int_x^0\frac{dt}{1 + t^2} = -\arctan x\to\frac\pi2$ quand $x\to-\infty$.</p>
+<p><b>Étape 4 : Conclusion.</b> Les deux convergent : $\cG{\int_{-\infty}^{+\infty}\frac{dt}{1 + t^2} = \frac\pi2 + \frac\pi2 = \pi}$.</p>
+
+<h2 id="p-pos">6. Fonctions positives : les théorèmes de comparaison</h2>
+<div class="sbox">$$f\geq0:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf\ \text{est majorée}.$$
+$$0\leq\cB f\leq\cO g:\quad\int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV}\qquad\text{et}\qquad\int\cB f\ \text{DV}\Rightarrow\int\cO g\ \text{DV}.$$
+$$\cO g\geq0,\ \ \cB f = O(\cO g)\ \text{ou}\ \cB f = o(\cO g):\ \int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV (absolument)}.\qquad\cB f\sim\cO g,\ \text{signe constant}:\ \text{même nature}.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Repérer les points à problème $\cR{a}$, $\cR{b}$. <b>2.</b> En chacun, chercher un équivalent simple de $\cB f$ (ou une majoration). <b>3.</b> Comparer à une intégrale de référence $\cO{\frac1{t^\alpha}}$, $\cO{e^{-\lambda t}}$. <b>4.</b> Conclure pour chaque point, puis pour l'intégrale entière.</p>
+<p class="ml piege">Piège</p>
+<p>L'équivalent ne marche que si $f$ est de <b>signe constant</b> près du point. Pour un signe variable, on passe à $|f|$ (convergence absolue, §7).</p>
+
+<p class="ml">Exemple 8 : par majoration</p>
+<p>Nature de $\displaystyle\int_1^{+\infty}\frac{1 + \sin t}{t^2}\,dt$.</p>
+<p><b>Étape 1 : Rappel.</b> $0\leq\cB f\leq\cO g$ et $\int\cO g$ CV $\Rightarrow\int\cB f$ CV.</p>
+<p><b>Étape 2 : Le signe.</b> $-1\leq\sin t\leq1$, donc $0\leq1 + \sin t\leq2$ : $\cB f\geq0$.</p>
+<p><b>Étape 3 : La majoration.</b> $0\leq\frac{1 + \sin t}{t^2}\leq\cO{\frac2{t^2}}$, et $\int_1^{+\infty}\frac{dt}{t^2}$ converge (Riemann, $\cV\alpha = 2 > 1$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{l'intégrale converge}}$.</p>
+
+<p class="ml">Exemple 9 : par équivalent, deux points à problème</p>
+<p>Nature de $\displaystyle\int_0^{+\infty}\frac{\sqrt t}{1 + t^2}\,dt$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cB f\sim\cO g$ avec $\cO g\geq0$ : même nature. On traite chaque point séparément.</p>
+<p><b>Étape 2 : Les points à problème.</b> $f$ est continue et positive sur $[0, +\infty[$ : seul $\cR{+\infty}$ pose problème ($f(0) = 0$ est défini).</p>
+<p><b>Étape 3 : Un équivalent en $+\infty$.</b> $1 + t^2\sim t^2$, donc :</p>
+$$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
+<p><b>Étape 4 : La référence.</b> $\cV\alpha = \frac32 > 1$ : $\int_1^{+\infty}\frac{dt}{t^{3/2}}$ converge.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{l'intégrale converge}}$.</p>
+
+<p class="ml">Exemple 10 : montrer une divergence</p>
+<p>Nature de $\displaystyle\int_2^{+\infty}\frac{dt}{\ln t}$ et de $\displaystyle\int_0^1\frac{dt}{e^t - 1}$.</p>
+<p><b>Étape 1 : Rappel.</b> $0\leq\cO g\leq\cB f$ et $\int\cO g$ DV $\Rightarrow\int\cB f$ DV. Et $\cB f\sim\cO g\geq0$ : même nature.</p>
+<p><b>Étape 2 : La première.</b> Pour $t\geq2$ : $0 \lt \ln t\leq t$, donc $\frac1{\ln t}\geq\cO{\frac1t}$, et $\int_2^{+\infty}\frac{dt}t$ diverge ($\cV\alpha = 1$).</p>
+<p><b>Étape 3 : La seconde.</b> Seul $\cR0$ pose problème. $e^t - 1\sim t$ en $0$, donc $\frac1{e^t - 1}\sim\cO{\frac1t} > 0$, et $\int_0^1\frac{dt}t$ diverge.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{les deux intégrales divergent}}$.</p>
+
+<h2 id="p-abs">7. Convergence absolue, fonctions à valeurs complexes</h2>
+<div class="sbox">$$\int_a^b|f|\ \text{converge}\ \Longrightarrow\ \int_a^bf\ \text{converge, et}\ \Big|\int_a^bf\Big|\leq\int_a^b|f|.$$
+$$f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}f\ \text{et}\ \int\operatorname{Im}f\ \text{CV},\qquad\int f = \int\operatorname{Re}f + i\int\operatorname{Im}f.$$</div>
+<p>Une intégrale <b>convergente mais pas absolument convergente</b> est dite semi-convergente : $\int_1^{+\infty}\frac{\sin t}t\,dt$ (exemple 3). Pour la nature, on fait alors une <b>IPP</b> qui gagne une puissance de $t$.</p>
+
+<p class="ml">Exemple 11 : $\int_0^{+\infty}e^{-t}\cos t\,dt$ en passant par $\mathbb C$</p>
+<p><b>Étape 1 : Rappel.</b> $|f|$ intégrable $\Rightarrow\int f$ converge. Et $\cos t = \operatorname{Re}(e^{it})$, $\int\operatorname{Re} = \operatorname{Re}\int$.</p>
+<p><b>Étape 2 : La convergence.</b> $|e^{-t}\cos t|\leq\cO{e^{-t}}$, intégrable sur $[0, +\infty[$ : convergence absolue.</p>
+<p><b>Étape 3 : On passe en complexe.</b> $e^{-t}\cos t = \operatorname{Re}\big(e^{(-1 + i)t}\big)$. Sur $[0, x]$ :</p>
+$$\int_0^xe^{(-1 + i)t}\,dt = \Big[\frac{e^{(-1 + i)t}}{-1 + i}\Big]_0^x = \frac{e^{(-1 + i)x} - 1}{-1 + i}.$$
+<p><b>Étape 4 : La limite.</b> $|e^{(-1 + i)x}| = e^{-x}\to0$, donc l'intégrale vaut $\frac{-1}{-1 + i} = \frac1{1 - i} = \frac{1 + i}2$.</p>
+<p><b>Étape 5 : Conclusion.</b> On prend la partie réelle : $\cG{\int_0^{+\infty}e^{-t}\cos t\,dt = \frac12}$ (et $\int_0^{+\infty}e^{-t}\sin t\,dt = \frac12$ avec la partie imaginaire).</p>
+
+<h2 id="p-prop">8. Propriétés des intégrales convergentes</h2>
+<div class="sbox">$$\textbf{Linéarité}:\ \int f,\ \int g\ \text{CV}\Rightarrow\int(\lambda f + \mu g) = \lambda\int f + \mu\int g.\qquad\textbf{Chasles}\ \text{reste vrai}.$$
+$$\textbf{Positivité}:\ a\leq b,\ f\geq0\Rightarrow\int_a^bf\geq0.\qquad\textbf{Croissance}:\ f\leq g\Rightarrow\int_a^bf\leq\int_a^bg.$$
+$$f\ \textbf{continue},\ f\geq0\ \text{et}\ \int_a^bf = 0\ \Longrightarrow\ f = 0\ \text{sur}\ ]a, b[.$$</div>
+<p class="ml piege">Piège</p>
+<p>$\int(f + g)$ peut converger sans que $\int f$ et $\int g$ convergent : $\int_1^{+\infty}\big(\frac1t - \frac1t\big)$. On ne <b>sépare</b> une intégrale en deux que si les deux morceaux convergent.</p>
+
+<h2 id="p-ippcv">9. IPP et changement de variable sur un intervalle quelconque</h2>
+<div class="sbox">$$\textbf{IPP}:\ u, v\ \mathcal C^1\ \text{sur}\ ]a, b[,\ uv\ \text{a des limites finies en}\ a\ \text{et}\ b\ \Longrightarrow\ \int_a^bu'v\ \text{et}\ \int_a^buv'\ \text{de même nature, et}\ \int_a^bu'v = \big[uv\big]_a^b - \int_a^buv'.$$
+$$\textbf{Changement de variable}:\ \varphi:\,]\alpha, \beta[\to]a, b[\ \text{bijective},\ \mathcal C^1,\ \text{strictement croissante}:\ \int_a^bf(t)\,dt\ \text{et}\ \int_\alpha^\beta f(\varphi(u))\,\varphi'(u)\,du\ \text{de même nature et égales}.$$</div>
+<p>Si $\varphi$ est strictement décroissante, les bornes s'échangent. En pratique, on vérifie d'abord le <b>crochet</b>, puis on écrit l'égalité.</p>
+
+<p class="ml">Exemple 12 : $\int_0^{+\infty}t^ne^{-t}\,dt = n!$ par IPP</p>
+<p><b>Étape 1 : Rappel.</b> IPP sur un intervalle : si $uv$ a des limites finies aux bornes, $\int u'v = [uv] - \int uv'$, même nature.</p>
+<p><b>Étape 2 : On pose</b> $I_n = \int_0^{+\infty}t^ne^{-t}\,dt$. Elle converge : $t^2\cdot t^ne^{-t}\to0$, donc $t^ne^{-t} = o\big(\frac1{t^2}\big)$ en $+\infty$.</p>
+<p><b>Étape 3 : L'IPP</b> pour $n\geq1$, avec $u = t^n$, $v' = e^{-t}$, $v = -e^{-t}$ :</p>
+$$I_n = \big[-t^ne^{-t}\big]_0^{+\infty} + n\int_0^{+\infty}t^{n-1}e^{-t}\,dt.$$
+<p><b>Étape 4 : Le crochet.</b> $t^ne^{-t}\to0$ en $+\infty$ et vaut $0$ en $0$ : le crochet est nul. Donc $I_n = nI_{n-1}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $I_0 = \int_0^{+\infty}e^{-t}\,dt = 1$, et par récurrence $\cG{I_n = n\,(n - 1)\cdots1\times I_0 = n!}$.</p>
+
+<p class="ml">Exemple 13 : un changement de variable</p>
+<p>Calculer $\displaystyle\int_0^{+\infty}\frac{dt}{e^t + e^{-t}}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi$ bijective, $\mathcal C^1$, strictement monotone : même nature et même valeur.</p>
+<p><b>Étape 2 : Le changement.</b> $u = e^t$, soit $t = \ln u$ : $u\mapsto\ln u$ est une bijection $\mathcal C^1$ strictement croissante de $]1, +\infty[$ sur $]0, +\infty[$, et $dt = \frac{du}u$.</p>
+<p><b>Étape 3 : On remplace.</b></p>
+$$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\cdot\frac{du}u = \int_1^{+\infty}\frac{du}{u^2 + 1}.$$
+<p><b>Étape 4 : On calcule.</b> $\int_1^x\frac{du}{1 + u^2} = \arctan x - \frac\pi4\to\frac\pi2 - \frac\pi4$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \frac\pi4}$.</p>
+
+<h2 id="p-serint">10. Comparaison série-intégrale</h2>
+<div class="sbox">$$f\ \text{continue, positive, décroissante sur}\ [n_0, +\infty[:\qquad\sum f(n)\ \text{et}\ \int_{n_0}^{+\infty}f\ \text{sont de même nature}.$$
+$$\text{L'encadrement à refaire}:\quad\int_n^{n+1}f(t)\,dt\ \leq\ f(n)\ \leq\ \int_{n-1}^nf(t)\,dt\qquad(n - 1\geq n_0).$$</div>
+<p>On le redémontre à chaque fois : sur $[n, n + 1]$, $f(n + 1)\leq f(t)\leq f(n)$, puis on intègre (longueur $1$). Ensuite on <b>somme</b> les encadrements.</p>
+
+<p class="ml">Exemple 14 : la série $\sum\frac1{n\ln n}$</p>
+<p><b>Étape 1 : Rappel.</b> $f$ positive, continue, décroissante : $\sum f(n)$ et $\int f$ ont même nature.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = \frac1{t\ln t}$ sur $[2, +\infty[$ : positive, continue, et décroissante car $t\ln t$ est croissante et positive.</p>
+<p><b>Étape 3 : L'intégrale.</b> Une primitive est $\ln(\ln t)$ (dérivée $\frac{1/t}{\ln t}$) :</p>
+$$\int_2^x\frac{dt}{t\ln t} = \ln(\ln x) - \ln(\ln2)\longrightarrow+\infty.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq2}\frac1{n\ln n}\ \text{diverge}}$, alors que $\frac1{n\ln n} = o\big(\frac1n\big)$… la comparaison avec $\frac1n$ ne suffisait pas.</p>
+
+<p class="ml">Exemple 15 : un équivalent de $H_n = \sum_{k=1}^n\frac1k$</p>
+<p><b>Étape 1 : Rappel.</b> $\int_k^{k+1}\frac{dt}t\leq\frac1k\leq\int_{k-1}^k\frac{dt}t$, puis on somme.</p>
+<p><b>Étape 2 : Minoration.</b> On somme $\frac1k\geq\int_k^{k+1}\frac{dt}t$ pour $k = 1$ à $n$ :</p>
+$$H_n\geq\int_1^{n+1}\frac{dt}t = \ln(n + 1).$$
+<p><b>Étape 3 : Majoration.</b> On garde $\frac11 = 1$ et on somme $\frac1k\leq\int_{k-1}^k\frac{dt}t$ pour $k = 2$ à $n$ :</p>
+$$H_n\leq1 + \int_1^n\frac{dt}t = 1 + \ln n.$$
+<p><b>Étape 4 : On divise par $\ln n$</b> ($n\geq2$) : $\frac{\ln(n + 1)}{\ln n}\leq\frac{H_n}{\ln n}\leq\frac1{\ln n} + 1$, et les deux bornes tendent vers $1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{H_n\sim\ln n}$.</p>
+
+<h2 id="p-relc">11. Intégrer une relation de comparaison <span class="hp">programme de Spé</span></h2>
+<div class="sbox">$$g\geq0.\ \textbf{Si}\ \int_a^{+\infty}g\ \textbf{converge (les restes)}:\quad f = o(g)\Rightarrow\int_x^{+\infty}f = o\Big(\int_x^{+\infty}g\Big),\qquad f\sim g\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g.$$
+$$\textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:\quad f = o(g)\Rightarrow\int_a^xf = o\Big(\int_a^xg\Big),\qquad f\sim g\Rightarrow\int_a^xf\sim\int_a^xg.$$</div>
+<p>Même chose avec $O$. C'est le parallèle exact des sommes partielles et des restes de séries.</p>
+
+<p class="ml">Exemple 16 : un équivalent d'intégrale partielle</p>
+<p>Équivalent de $F(x) = \displaystyle\int_1^x\frac{dt}{\sqrt t + 1}$ quand $x\to+\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> $f\sim g\geq0$ et $\int g$ diverge $\Rightarrow\int_a^xf\sim\int_a^xg$.</p>
+<p><b>Étape 2 : L'équivalent.</b> $\sqrt t + 1\sim\sqrt t$, donc $\frac1{\sqrt t + 1}\sim\cO{\frac1{\sqrt t}}\geq0$.</p>
+<p><b>Étape 3 : La référence diverge.</b> $\int_1^x\frac{dt}{\sqrt t} = 2\sqrt x - 2\to+\infty$ ($\cV\alpha = \frac12\leq1$).</p>
+<p><b>Étape 4 : Conclusion.</b> $F(x)\sim2\sqrt x - 2\sim\cG{2\sqrt x}$.</p>
+
+<p class="ml">Exemple 17 : un équivalent de reste</p>
+<p>Équivalent de $R(x) = \displaystyle\int_x^{+\infty}\frac{dt}{t^2 + t + 1}$ quand $x\to+\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> $f\sim g\geq0$ et $\int g$ converge $\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g$.</p>
+<p><b>Étape 2 : L'équivalent.</b> $t^2 + t + 1\sim t^2$, donc $f(t)\sim\cO{\frac1{t^2}}$, dont l'intégrale converge en $+\infty$.</p>
+<p><b>Étape 3 : Le reste de référence.</b> $\int_x^{+\infty}\frac{dt}{t^2} = \Big[-\frac1t\Big]_x^{+\infty} = \frac1x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R(x)\sim\frac1x}$.</p>
+
+<h2 id="p-l2">12. Fonctions de carré intégrable</h2>
+<div class="sbox">$$f\in L^2(I)\iff f^2\ \text{intégrable sur}\ I.\qquad|fg|\leq\frac{f^2 + g^2}2:\ f, g\in L^2\Rightarrow fg\in L^1.$$
+$$\textbf{Cauchy-Schwarz}:\quad\Big|\int_Ifg\Big|\leq\sqrt{\int_If^2}\,\sqrt{\int_Ig^2}.$$</div>
+<p class="ml">Exemple 18 : $f\in L^2$ donne $\frac f t$ intégrable</p>
+<p>Si $f^2$ est intégrable sur $[1, +\infty[$, montrer que $t\mapsto\frac{f(t)}t$ l'est aussi.</p>
+<p><b>Étape 1 : Rappel.</b> $|ab|\leq\frac{a^2 + b^2}2$, car $(|a| - |b|)^2\geq0$.</p>
+<p><b>Étape 2 : On l'applique</b> avec $a = f(t)$ et $b = \frac1t$ :</p>
+$$\Big|\frac{f(t)}t\Big|\leq\frac12f(t)^2 + \frac12\cdot\cO{\frac1{t^2}}.$$
+<p><b>Étape 3 : Les deux morceaux.</b> $f^2$ est intégrable par hypothèse, $\frac1{t^2}$ aussi ($\cV\alpha = 2 > 1$).</p>
+<p><b>Étape 4 : Conclusion.</b> Par comparaison, $\cG{\frac ft\ \text{est intégrable sur}\ [1, +\infty[}$, et Cauchy-Schwarz donne $\int_1^{+\infty}\big|\frac ft\big|\leq\sqrt{\int f^2}$.</p>
+
+<h2 id="p-bert">13. Les intégrales de Bertrand <span class="hp">hors programme</span></h2>
+<div class="sbox">$$\int_e^{+\infty}\frac{dt}{t^\alpha(\ln t)^\beta}\ \text{converge}\iff\alpha > 1\ \text{ou}\ (\alpha = 1\ \text{et}\ \beta > 1).$$</div>
+<p>À <b>redémontrer</b> si on l'utilise : pour $\alpha > 1$, comparer à $\frac1{t^{\gamma}}$ avec $1 \lt \gamma \lt \alpha$ ; pour $\alpha \lt 1$, minorer par $\frac1t$ ; pour $\alpha = 1$, la primitive de $\frac1{t(\ln t)^\beta}$ est $\frac{(\ln t)^{1-\beta}}{1 - \beta}$ (ou $\ln\ln t$ si $\beta = 1$, exemple 14).</p>
+
+<h2 id="p-cvd">14. Le théorème de convergence dominée</h2>
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux sur}\ I\\&f_n\to f\ \text{simplement, avec}\ f\ \text{continue par morceaux}\\&|f_n(t)|\leqslant\cO{\varphi(t)}\ \text{pour tout}\ n,\ \text{avec}\ \cO\varphi\ \textbf{intégrable}\end{aligned}\right\}\ \Longrightarrow\ \int_If_n\xrightarrow[n\to+\infty]{}\int_If.$$</div>
 <p>La clé est la <b>domination</b> : une fonction $\cO\varphi$ qui ne dépend pas de $n$.</p>
-<p class="ml">Exemple 1 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
+<p class="ml">Exemple 19 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> Convergence dominée : limite simple + domination $|f_n|\leqslant\varphi$ intégrable, indépendante de $n$.</p>
 <p><b>Étape 2 : La limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite vaut $0$ sauf en un point.</p>
 <p><b>Étape 3 : La domination.</b> $|\sin^nt|\leqslant\cO1$, intégrable sur le segment.</p>
 <p><b>Étape 4 : Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
 
-<p class="ml">Exemple 2 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
+<p class="ml">Exemple 20 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> Convergence dominée. Une borne qui dépend de $n$ se met dans une indicatrice.</p>
 <p><b>Étape 2 : La mise en forme.</b> $f_n(t) = \big(1 - \frac tn\big)^n\mathbf 1_{[0, n]}(t)$ sur $[0, +\infty[$.</p>
 <p><b>Étape 3 : La limite simple.</b> Pour $t$ fixé et $n > t$ :</p>
@@ -3362,10 +3531,10 @@ $$0\leqslant f_n(t)\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},\ \text{intégrable 
 <p class="ml piege">Piège</p>
 <p>Sans domination, c'est faux. $f_n(t) = n\,\mathbf 1_{]0, 1/n]}(t)$ tend simplement vers $0$, mais $\int_0^1f_n = 1$ pour tout $n$. Il n'existe pas de $\varphi$ intégrable au-dessus de toutes les $f_n$.</p>
 
-<h2 id="p-tat">6. Intégrer une série terme à terme</h2>
+<h2 id="p-tat">15. Intégrer une série terme à terme</h2>
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux et intégrables sur}\ I\\&\sum f_n\ \text{converge simplement vers}\ S\ \text{continue par morceaux}\\&\sum_n\int_I|f_n|\ \textbf{converge}\end{aligned}\right\}\ \Longrightarrow\ S\ \text{intégrable et}\ \int_I\sum_{n=0}^{+\infty}f_n = \sum_{n=0}^{+\infty}\int_If_n.$$</div>
 <p><b>Méthode pratique</b> : on fait d'abord le calcul formel en échangeant $\int$ et $\sum$, puis on vérifie les hypothèses.</p>
-<p class="ml">Exemple : $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$</p>
+<p class="ml">Exemple 21 : $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$</p>
 <p><b>Étape 1 : Rappel.</b> $\int\sum f_n = \sum\int f_n$ si les $f_n$ sont intégrables et $\sum\int|f_n|$ converge.</p>
 <p><b>Étape 2 : Développer.</b> Pour $t\in\left]0, 1\right[$, $\frac1{1 - t} = \sum_{n\geqslant0}t^n$, donc $\frac{-\ln t}{1 - t} = \sum_{n\geqslant0}f_n(t)$ avec $f_n(t) = -t^n\ln t\geqslant0$.</p>
 <p><b>Étape 3 : Intégrer un terme</b> (IPP, $u = -\ln t$, $v' = t^n$) :</p>
@@ -3374,7 +3543,7 @@ $$\int_0^1-t^n\ln t\,dt = \Big[-\frac{t^{n+1}}{n + 1}\ln t\Big]_0^1 + \frac1{n +
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG{\frac{\pi^2}6}.$$
 
-<h2 id="p-plan">7. Le plan pour une intégrale à paramètre</h2>
+<h2 id="p-plan">16. Le plan pour une intégrale à paramètre</h2>
 <p>Pour $g(x) = \int_I\cB{f(x, t)}\,dt$, on vérifie toujours dans cet ordre :</p>
 <ol>
 <li><b>Régularité en $x$</b> : pour tout $t\in I$, $x\mapsto f(x, t)$ est continue (ou $\mathcal C^1$, ou a une limite).</li>
@@ -3383,9 +3552,9 @@ $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG
 <li>Si la domination n'est possible que sur des segments $[a, b]\subset A$, on la fait sur chaque segment : la continuité et la dérivabilité sont des propriétés locales.</li>
 </ol>
 
-<h2 id="p-cont">8. Continuité</h2>
+<h2 id="p-cont">17. Continuité</h2>
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{continue sur}\ A\ \text{pour tout}\ t\\&t\mapsto f(x, t)\ \text{continue par morceaux sur}\ I\ \text{pour tout}\ x\\&|f(x, t)|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\ \text{est continue sur}\ A.$$</div>
-<p class="ml">Exemple : $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$ sur $[0, +\infty[$</p>
+<p class="ml">Exemple 22 : $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$ sur $[0, +\infty[$</p>
 <p><b>Étape 1 : Rappel.</b> Continuité sous l'intégrale : continuité en $x$, continuité par morceaux en $t$, et $|f(x, t)|\leqslant\varphi(t)$ intégrable, indépendante de $x$.</p>
 <p><b>Étape 2 : En $x$.</b> Pour $t$ fixé, $x\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue.</p>
 <p><b>Étape 3 : En $t$.</b> Pour $x$ fixé, $t\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue sur $[0, +\infty[$.</p>
@@ -3393,18 +3562,18 @@ $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG
 $$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégrable sur}\ [0, +\infty[.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{g\ \text{est continue sur}\ [0, +\infty[}$, et $g(0) = \int_0^{+\infty}\frac{dt}{1 + t^2} = \frac\pi2$.</p>
 
-<h2 id="p-lim">9. Limite en une borne</h2>
+<h2 id="p-lim">18. Limite en une borne</h2>
 <div class="sbox">$$f(x, t)\xrightarrow[x\to a]{}\ell(t)\ \text{pour tout}\ t,\quad|f(x, t)|\leqslant\cO{\varphi(t)}\ \text{intégrable}\ \Longrightarrow\ \lim_{x\to a}\int_If(x, t)\,dt = \int_I\ell(t)\,dt.$$</div>
-<p class="ml">Exemple : la même $g$ en $+\infty$</p>
+<p class="ml">Exemple 23 : la même $g$ en $+\infty$</p>
 <p><b>Étape 1 : Rappel.</b> Limite sous l'intégrale : limite simple en $t$, et la même domination.</p>
 <p><b>Étape 2 : La limite simple.</b> Pour $t > 0$, $\frac{e^{-xt}}{1 + t^2}\to0$ quand $x\to+\infty$ (en $t = 0$ elle vaut $1$, un seul point).</p>
 <p><b>Étape 3 : La domination.</b> $\frac1{1 + t^2}$, comme pour la continuité.</p>
 <p><b>Étape 4 : Conclusion.</b> $\lim_{x\to+\infty}g(x) = \int_0^{+\infty}0\,dt = \cG0$.</p>
 
-<h2 id="p-der">10. Dérivation</h2>
+<h2 id="p-der">19. Dérivation</h2>
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{de classe}\ \mathcal C^1\ \text{sur}\ J\\&t\mapsto f(x, t)\ \text{intégrable},\ t\mapsto\tfrac{\partial f}{\partial x}(x, t)\ \text{continue par morceaux}\\&\Big|\tfrac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\in\mathcal C^1(J),\quad g'(x) = \int_I\frac{\partial f}{\partial x}(x, t)\,dt.$$</div>
 <p>C'est la formule de Leibniz : on dérive sous le signe intégrale. Pour $\mathcal C^k$, on domine chaque dérivée partielle jusqu'à l'ordre $k$.</p>
-<p class="ml">Exemple : $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$</p>
+<p class="ml">Exemple 24 : $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> Dérivation sous l'intégrale : dominer $\big|\frac{\partial f}{\partial x}\big|$ par $\varphi$ intégrable, puis $F'(x) = \int\frac{\partial f}{\partial x}$.</p>
 <p><b>Étape 2 : La dérivée partielle.</b> $f(x, t) = e^{-t^2}\cos(xt)$ :</p>
 $$\frac{\partial f}{\partial x}(x, t) = -t\,e^{-t^2}\sin(xt).$$
@@ -3417,7 +3586,7 @@ $$F'(x) = \underbrace{\Big[\frac12e^{-t^2}\sin(xt)\Big]_0^{+\infty}}_{= 0} - \fr
 <p><b>Étape 6 : La constante.</b> $F(0) = \int_0^{+\infty}e^{-t^2}\,dt = \frac{\sqrt\pi}2$ (intégrale de Gauss) :</p>
 $$\cG{F(x) = \frac{\sqrt\pi}2\,e^{-x^2/4}}.$$
 
-<h2 id="p-gamma">11. L'exemple central : la fonction $\Gamma$</h2>
+<h2 id="p-gamma">20. L'exemple central : la fonction $\Gamma$</h2>
 $$\Gamma(x) = \int_0^{+\infty}t^{x-1}e^{-t}\,dt.$$
 <p class="ml">Domaine de définition</p>
 <p>La fonction $t\mapsto t^{x-1}e^{-t}$ est continue et positive sur $\left]0, +\infty\right[$.</p>
@@ -3436,7 +3605,7 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 <p>Avec $\Gamma(1) = \int_0^{+\infty}e^{-t}\,dt = 1$, une récurrence donne $\cG{\Gamma(n + 1) = n!}$.</p>
 <div data-mlab="domin"></div>
 
-<h2 id="p-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="p-enonce">21. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« Montrer que $f$ est intégrable sur $I$ »</b><span>Points à problème un par un, comparaison à $\frac1{t^\alpha}$, règle $t^\alpha|f|\to0$.</span></div>
 <div><b>« Domaine de définition de $g(x) = \int\dots$ »</b><span>Pour chaque $x$ fixé, étudier l'intégrabilité en $t$.</span></div>
@@ -3450,6 +3619,15 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 <div><b>$\Gamma$, $\int e^{-t^2}$</b><span>$\Gamma(x + 1) = x\Gamma(x)$, $\Gamma(n + 1) = n!$, $\int_0^{+\infty}e^{-t^2} = \frac{\sqrt\pi}2$.</span></div>
 <div><b>Une borne qui dépend de $n$ ($\int_0^n$)</b><span>Écrire avec une indicatrice $\mathbf 1_{[0, n]}$.</span></div>
 <div><b>Domination impossible sur tout $A$</b><span>La faire sur chaque segment $[a, b]\subset A$.</span></div>
+<div><b>« Nature de $\int_a^bf$ », $f\geq0$</b><span>Points à problème, équivalent ou majoration, référence de Riemann ou $e^{-\lambda t}$.</span></div>
+<div><b>$f$ de signe variable</b><span>Étudier $|f|$ (convergence absolue). Si ça échoue : IPP (semi-convergence).</span></div>
+<div><b>« Calculer $\int_a^{+\infty}f$ »</b><span>Sur $[a, x]$ avec une primitive, IPP ou changement de variable, puis $x\to+\infty$.</span></div>
+<div><b>Deux bornes à problème</b><span>Couper en un point $c$, chaque morceau doit converger.</span></div>
+<div><b>$\cos$, $\sin$ fois exponentielle</b><span>Passer par $e^{(a + i\omega)t}$ et prendre $\operatorname{Re}$ ou $\operatorname{Im}$.</span></div>
+<div><b>$I_n$ avec un $n$</b><span>IPP pour une relation de récurrence entre $I_n$ et $I_{n-1}$.</span></div>
+<div><b>Une série $\sum f(n)$, $f$ décroissante</b><span>Comparaison série-intégrale, encadrement par $\int_n^{n+1}f$ et $\int_{n-1}^nf$.</span></div>
+<div><b>« Équivalent de $\int_x^{+\infty}f$ » ou « de $\int_a^xf$ »</b><span>Intégrer la relation de comparaison $f\sim g$.</span></div>
+<div><b>$f^2$ intégrable</b><span>$|fg|\leq\frac{f^2 + g^2}2$, Cauchy-Schwarz.</span></div>
 </div>
 
 <h2 id="p-erreurs">Les erreurs qui coûtent des points</h2>
@@ -3464,37 +3642,79 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 <p><b>8.</b> Intégrer terme à terme sans vérifier $\sum\int|f_n|\lt+\infty$.</p>
 <p><b>9.</b> Pour $\int_0^1\frac{dt}{t^\alpha}$, se tromper de sens : il faut $\alpha\lt1$.</p>
 <p><b>10.</b> Dans $\Gamma$, dominer sur $\left]0, +\infty\right[$ entier : impossible, on prend $[a, b]$.</p>
+<p><b>11.</b> Calculer $\lim\int_{-x}^xf$ pour $\int_{-\infty}^{+\infty}f$ : les deux bornes doivent être indépendantes.</p>
+<p><b>12.</b> Séparer $\int(f + g) = \int f + \int g$ sans savoir si les deux convergent.</p>
+<p><b>13.</b> Conclure « $f\to0$ en $+\infty$, donc $\int f$ converge » : $\frac1t\to0$ et diverge.</p>
+<p><b>14.</b> Un changement de variable non bijectif, ou non $\mathcal C^1$ sur l'intervalle ouvert.</p>
+<p><b>15.</b> Comparaison série-intégrale avec une $f$ non décroissante.</p>
 </div>
 
 <h2 id="p-entrainement">S'entraîner</h2>
+<div data-mlab="riemref"></div>
+<div data-mlab="quizimp"></div>
 <div data-mlab="quizipar"></div>
 
+<h2 id="p-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : nature selon $\alpha$</p>
+<p>Pour quels $\alpha$ l'intégrale $\displaystyle\int_0^{+\infty}\frac{dt}{t^\alpha(1 + t)}$ converge-t-elle ?</p>
+<p><b>Étape 1 : Rappel.</b> On coupe en $1$, on cherche un équivalent en chaque borne, et on compare à $\frac1{t^\alpha}$.</p>
+<p><b>Étape 2 : En $0$.</b> $1 + t\to1$, donc $f(t)\sim\frac1{t^\alpha} > 0$ : converge en $0$ $\iff\alpha \lt 1$.</p>
+<p><b>Étape 3 : En $+\infty$.</b> $1 + t\sim t$, donc $f(t)\sim\frac1{t^{\alpha + 1}}$ : converge en $+\infty$ $\iff\alpha + 1 > 1\iff\alpha > 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> Il faut les deux : $\cG{\text{convergente}\iff0 \lt \alpha \lt 1}$.</p>
+
+<p class="ml">Exercice 2 : $\int_0^{\pi/2}\ln(\sin t)\,dt$ converge</p>
+<p><b>Étape 1 : Rappel.</b> $f\sim g$ de signe constant : même nature. Et $\int_0^1\ln t\,dt$ converge.</p>
+<p><b>Étape 2 : Le point à problème.</b> Seul $0$ : $\sin t\to0$ et $\ln(\sin t)\to-\infty$. Sur $]0, \frac\pi2]$, $\ln(\sin t)\leq0$ : signe constant.</p>
+<p><b>Étape 3 : Un équivalent.</b> $\ln(\sin t) = \ln t + \ln\big(\frac{\sin t}t\big)$, et $\ln\big(\frac{\sin t}t\big)\to\ln1 = 0$ tandis que $\ln t\to-\infty$. Donc $\ln(\sin t)\sim\ln t$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\int_0^1\ln t\,dt$ converge, donc $\cG{\int_0^{\pi/2}\ln(\sin t)\,dt\ \text{converge}}$ (elle vaut $-\frac\pi2\ln2$).</p>
+
+<p class="ml">Exercice 3 : les intégrales $I_n = \int_0^{+\infty}\frac{dt}{(1 + t^2)^n}$</p>
+<p><b>Étape 1 : Rappel.</b> IPP sur un intervalle : vérifier que le crochet a des limites finies.</p>
+<p><b>Étape 2 : Convergence.</b> Pour $n\geq1$, $\frac1{(1 + t^2)^n}\sim\frac1{t^{2n}}$ en $+\infty$, avec $2n\geq2 > 1$ : converge.</p>
+<p><b>Étape 3 : IPP</b> avec $u = \frac1{(1 + t^2)^n}$, $v' = 1$, $v = t$, $u' = \frac{-2nt}{(1 + t^2)^{n+1}}$ :</p>
+$$I_n = \Big[\frac t{(1 + t^2)^n}\Big]_0^{+\infty} + 2n\int_0^{+\infty}\frac{t^2}{(1 + t^2)^{n+1}}\,dt.$$
+<p><b>Étape 4 : Le crochet</b> vaut $0$ ($\frac t{(1 + t^2)^n}\to0$). On écrit $t^2 = (1 + t^2) - 1$ :</p>
+$$I_n = 2n\int_0^{+\infty}\Big(\frac1{(1 + t^2)^n} - \frac1{(1 + t^2)^{n+1}}\Big)dt = 2n\,(I_n - I_{n+1}).$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{I_{n+1} = \frac{2n - 1}{2n}I_n}$, avec $I_1 = \frac\pi2$. Par exemple $I_2 = \frac12\cdot\frac\pi2 = \frac\pi4$.</p>
+
 <h2 id="p-arbre">L'arbre des méthodes</h2>
-<p>Choisis ce que tu veux faire, réponds aux questions et clique la méthode pour y aller.</p>
-<div class="tree">
-<div class="troot">Que veux-tu faire ?</div>
-<div class="tbranches">
-<div class="tb tB"><div class="tt">Intégrabilité de $f$</div>
-<div class="tq">Faux problème (prolongeable) ?</div><a class="tl" href="#p-integ">oui : rien à faire en ce point</a><div class="tno">non</div>
-<div class="tq">Équivalent simple de $|f|$ ?</div><a class="tl" href="#p-ref">oui : comparer à $\frac1{t^\alpha}$</a><div class="tno">non</div>
-<a class="tl tend" href="#p-integ">$t^\alpha|f(t)|\to0$</a></div>
-<div class="tb tR"><div class="tt">Limite de $\int f_n$</div>
-<div class="tq">Une suite de fonctions ?</div><a class="tl" href="#p-cvd">oui : convergence dominée</a><div class="tno">une série</div>
-<div class="tq">$\sum\int|f_n|$ converge ?</div><a class="tl" href="#p-tat">oui : terme à terme</a><div class="tno">non</div>
-<a class="tl tend" href="#p-cvd">sommes partielles + convergence dominée</a></div>
-<div class="tb tG"><div class="tt">Étudier $g(x) = \int f(x, t)\,dt$</div>
-<div class="tq">Continuité ?</div><a class="tl" href="#p-cont">oui : dominer $|f|$</a><div class="tno">non</div>
-<div class="tq">Dérivabilité ?</div><a class="tl" href="#p-der">oui : dominer $|\partial_xf|$</a><div class="tno">non</div>
-<div class="tq">Limite en une borne ?</div><a class="tl" href="#p-lim">oui : limite simple + domination</a><div class="tno">non</div>
-<a class="tl tend" href="#p-integ">domaine : intégrabilité à $x$ fixé</a></div>
-<div class="tb tO"><div class="tt">Domination difficile</div>
-<div class="tq">Valable sur des segments ?</div><a class="tl" href="#p-gamma">oui : $[a, b]$ (comme $\Gamma$)</a><div class="tno">non</div>
-<a class="tl tend" href="#p-cvd">indicatrice, $\ln(1 - u)\leqslant-u$, $e^{-xt}\leqslant1$</a></div>
-<div class="tb tV"><div class="tt">Calculer $g(x)$</div>
-<div class="tq">$g'$ fait réapparaître $g$ ?</div><a class="tl" href="#p-der">oui : équation différentielle</a><div class="tno">non</div>
-<a class="tl tend" href="#p-tat">développer en série, terme à terme</a></div>
-</div>
-</div>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une intégrale sur un intervalle</span><ul>
+<li><div class="hr"><em>nature</em><span class="hq">Faux problème (limite finie) ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#p-integ">prolonger par continuité</a></div></li>
+<li><div class="hr"><em>non, $f\geq0$</em><span class="hq">Équivalent simple ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#p-pos">comparer à $\frac1{t^\alpha}$, $e^{-\lambda t}$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#p-integ">majorer, ou $t^\alpha f(t)\to0$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>signe variable</em><span class="hq">$|f|$ intégrable ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#p-abs">convergence absolue</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#p-integ">IPP : semi-convergence</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>deux bornes</em><a class="hl end" href="#p-def">couper, chaque morceau doit converger</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>valeur</em><span class="hq">Quel outil ?</span><ul>
+<li><div class="hr"><em>primitive connue</em><a class="hl ok" href="#p-def">$[F]_a^b$ avec des limites</a></div></li>
+<li><div class="hr"><em>produit</em><a class="hl" href="#p-ippcv">IPP, crochet fini</a></div></li>
+<li><div class="hr"><em>$e^t$, $\sqrt t$…</em><a class="hl" href="#p-ippcv">changement de variable bijectif</a></div></li>
+<li><div class="hr"><em>$\cos$, $\sin$</em><a class="hl" href="#p-abs">passer en complexe</a></div></li>
+<li><div class="hr"><em>une suite $I_n$</em><a class="hl" href="#p-ippcv">IPP : récurrence</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une série $\sum f(n)$</em><a class="hl" href="#p-serint">série-intégrale ($f\searrow$)</a></div></li>
+<li><div class="hr"><em>un équivalent</em><span class="hq">$\int g$ converge ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#p-relc">équivalent des restes</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#p-relc">équivalent des intégrales partielles</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>limite de $\int f_n$</em><span class="hq">Suite ou série ?</span><ul>
+<li><div class="hr"><em>suite</em><a class="hl" href="#p-cvd">convergence dominée</a></div></li>
+<li><div class="hr"><em>série</em><a class="hl" href="#p-tat">terme à terme si $\sum\int|f_n|$ CV</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$g(x) = \int f(x, t)\,dt$</em><span class="hq">Quoi ?</span><ul>
+<li><div class="hr"><em>continuité</em><a class="hl" href="#p-cont">dominer $|f|$</a></div></li>
+<li><div class="hr"><em>dérivée</em><a class="hl" href="#p-der">dominer $|\partial_xf|$</a></div></li>
+<li><div class="hr"><em>limite</em><a class="hl" href="#p-lim">limite simple, domination</a></div></li>
+<li><div class="hr"><em>difficile</em><a class="hl end" href="#p-gamma">dominer sur des segments</a></div></li>
+</ul></div></li>
+</ul></div></div>
 `,
 "Suites et séries de fonctions": R`
 <nav class="msum"><a href="#f-not">Notations</a><a href="#f-cs">Convergence simple</a><a href="#f-cu">Convergence uniforme</a><a href="#f-neg">Prouver qu'il n'y a pas CU</a><a href="#f-reg">Ce que la CU conserve</a><a href="#f-series">Séries de fonctions</a><a href="#f-cn">Convergence normale</a><a href="#f-alt">CU sans CN</a><a href="#f-sreg">Régularité de la somme</a><a href="#f-zeta">L'exemple de $\zeta$</a><a href="#f-weier">Approximation</a><a href="#f-enonce">Ce que l'énoncé te donne</a><a href="#f-erreurs">Erreurs</a><a href="#f-entrainement">S'entraîner</a><a href="#f-arbre">L'arbre</a></nav>
@@ -5108,6 +5328,316 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{24\times24\times2} = \frac{39
 <li><div class="hr"><em>une égalité</em><a class="hl" href="#d-double">compter deux fois le même ensemble</a></div></li>
 <li><div class="hr"><em>une existence</em><a class="hl" href="#d-tiroirs">principe des tiroirs</a></div></li>
 <li><div class="hr"><em>rien ne marche</em><a class="hl end" href="#d-card">bijection vers un ensemble connu</a></div></li>
+</ul></div></div>
+`,
+"Arithmétique dans ℤ": R`
+<nav class="msum"><a href="#z-not">Notations</a><a href="#z-div">Divisibilité</a><a href="#z-eucl">Division euclidienne</a><a href="#z-pgcd">PGCD, Euclide</a><a href="#z-bez">Bézout</a><a href="#z-gauss">Gauss</a><a href="#z-dioph">$ax + by = c$</a><a href="#z-ppcm">PPCM</a><a href="#z-prem">Nombres premiers</a><a href="#z-cong">Congruences</a><a href="#z-inv">Inverse modulo $n$</a><a href="#z-fermat">Fermat</a><a href="#z-chin">Lemme chinois</a><a href="#z-enonce">L'énoncé</a><a href="#z-erreurs">Erreurs</a><a href="#z-entrainement">S'entraîner</a><a href="#z-exos">Exercices</a><a href="#z-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les entiers étudiés $\cB a$, $\cB b$. <span class="kR">rouge</span> : les diviseurs et le PGCD $\cR d$. <span class="kO">orange</span> : les coefficients de Bézout $\cO u$, $\cO v$. <span class="kV">violet</span> : les nombres premiers $\cV p$ et le module $\cV n$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="z-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Définition</th></tr>
+<tr><td>Divise</td><td>$a\mid b$</td><td>$\exists k\in\mathbb Z,\ b = ka$.</td></tr>
+<tr><td>Multiples</td><td>$a\mathbb Z$</td><td>$a\mid b\iff b\mathbb Z\subset a\mathbb Z$.</td></tr>
+<tr><td>Diviseurs</td><td>$\mathcal D(a)$</td><td>Ensemble des diviseurs de $a$ dans $\mathbb Z$.</td></tr>
+<tr><td>PGCD, PPCM</td><td>$a\wedge b$, $a\vee b$</td><td>Toujours $\geq0$.</td></tr>
+<tr><td>Premiers entre eux</td><td>$a\wedge b = 1$</td><td>Seuls diviseurs communs : $\pm1$.</td></tr>
+<tr><td>Nombres premiers</td><td>$\mathcal P$</td><td>$p\geq2$, seuls diviseurs positifs $1$ et $p$.</td></tr>
+<tr><td>Valuation</td><td>$v_p(a)$</td><td>Exposant de $p$ dans $a$.</td></tr>
+<tr><td>Congruence</td><td>$a\equiv b\ [n]$</td><td>$n\mid a - b$.</td></tr>
+<tr><td>Inversibles de $\mathbb Z$</td><td>$U(\mathbb Z) = \{-1, 1\}$</td><td>Associés : $a\mid b$ et $b\mid a\iff|a| = |b|$.</td></tr>
+</table>
+
+<h2 id="z-div">2. Divisibilité</h2>
+<div class="sbox">$$a\mid b\ \text{et}\ b\mid c\Rightarrow a\mid c.\qquad\cR d\mid\cB a\ \text{et}\ \cR d\mid\cB b\ \Longrightarrow\ \cR d\mid\cB au + \cB bv\quad\text{pour tous}\ u, v\in\mathbb Z.$$
+$$a\mid b,\ b\neq0\Rightarrow|a|\leq|b|.\qquad a\mid b\ \text{et}\ b\mid a\iff a = \pm b.\qquad a\mid b\Rightarrow ac\mid bc.$$</div>
+<p class="ml">La méthode</p>
+<p>Pour trouver ce que divise un $\cR d$ qui divise deux expressions, on fait une <b>combinaison</b> qui élimine $n$. Pour « $n + a$ divise $P(n)$ », on fait la division euclidienne de $P(n)$ par $n + a$.</p>
+
+<p class="ml">Exemple 1 : éliminer $n$</p>
+<p>Si $d$ divise $n + 3$ et $2n + 1$, montrer que $d\mid5$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cR d\mid\cB a$ et $\cR d\mid\cB b$ $\Rightarrow\cR d\mid\cB au + \cB bv$.</p>
+<p><b>Étape 2 : La combinaison.</b> On veut faire disparaître $n$ : $2\times(n + 3) - 1\times(2n + 1) = 2n + 6 - 2n - 1 = 5$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{d\mid5}$ : donc $(n + 3)\wedge(2n + 1)\in\{1, 5\}$.</p>
+
+<p class="ml">Exemple 2 : $n + 1$ divise $n^2 + 3$</p>
+<p>Trouver les $n\in\mathbb Z$ tels que $n + 1\mid n^2 + 3$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $d\mid a$ et $d\mid b$, alors $d$ divise toute combinaison $au + bv$.</p>
+<p><b>Étape 2 : On fait apparaître $n + 1$.</b> $n^2 + 3 = (n + 1)(n - 1) + 4$.</p>
+<p><b>Étape 3 : On élimine.</b> $n + 1\mid(n + 1)(n - 1)$, donc : $n + 1\mid n^2 + 3\iff n + 1\mid4$.</p>
+<p><b>Étape 4 : Les diviseurs de $4$.</b> $n + 1\in\{-4, -2, -1, 1, 2, 4\}$, soit $n\in\{-5, -3, -2, 0, 1, 3\}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{n\in\{-5, -3, -2, 0, 1, 3\}}$. Contrôle : $n = 3$, $4\mid12$.</p>
+
+<h2 id="z-eucl">3. Division euclidienne</h2>
+<div class="sbox">$$\cB a\in\mathbb Z,\ \cB b\in\mathbb N^*:\quad\exists!\,(q, r)\in\mathbb Z^2,\quad\cB a = \cB bq + r\quad\text{et}\quad0\leq r \lt \cB b.\qquad b\mid a\iff r = 0.$$</div>
+<p>Pour $b > 0$ : $q = \lfloor\frac ab\rfloor$. Le reste est <b>toujours positif</b>, même si $a \lt 0$.</p>
+<p class="ml">Exemple 3 : diviser un négatif</p>
+<p>Division euclidienne de $-17$ par $5$.</p>
+<p><b>Étape 1 : Rappel.</b> $a = bq + r$ avec $0\leq r \lt b$, et $q = \lfloor\frac ab\rfloor$.</p>
+<p><b>Étape 2 : Le quotient.</b> $\frac{-17}5 = -3{,}4$, donc $q = \lfloor-3{,}4\rfloor = -4$ (et non $-3$).</p>
+<p><b>Étape 3 : Le reste.</b> $r = a - bq = -17 - 5\times(-4) = -17 + 20 = 3\in[\![0, 4]\!]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{-17 = 5\times(-4) + 3}$. (Écrire $-17 = 5\times(-3) - 2$ est faux : reste négatif.)</p>
+
+<h2 id="z-pgcd">4. PGCD et algorithme d'Euclide</h2>
+<div class="sbox">$$\cB a = \cB bq + r\ \Longrightarrow\ \cB a\wedge\cB b = \cB b\wedge r.\qquad a\wedge0 = |a|,\qquad a\wedge b = |a|\wedge|b|.$$
+$$\mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b):\ \text{les diviseurs communs sont les diviseurs du PGCD}.\qquad(ka)\wedge(kb) = |k|\,(a\wedge b).$$</div>
+<p><b>Algorithme d'Euclide</b> : on remplace $(a, b)$ par $(b, r)$ jusqu'à un reste nul. Le PGCD est le <b>dernier reste non nul</b>.</p>
+
+<p class="ml">Exemple 4 : $1071\wedge462$</p>
+<p><b>Étape 1 : Rappel.</b> $a = bq + r\Rightarrow a\wedge b = b\wedge r$. On s'arrête au reste nul.</p>
+<p><b>Étape 2 : Les divisions.</b></p>
+$$\begin{aligned}1071 &= 2\times462 + \cR{147}\\462 &= 3\times147 + \cR{21}\\147 &= 7\times21 + 0\end{aligned}$$
+<p><b>Étape 3 : On lit.</b> $1071\wedge462 = 462\wedge147 = 147\wedge21 = 21\wedge0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{1071\wedge462 = 21}$.</p>
+
+<h2 id="z-bez">5. Bézout</h2>
+<div class="sbox">$$\textbf{Relation de Bézout}:\ \exists\cO u, \cO v\in\mathbb Z,\ \ \cB a\cO u + \cB b\cO v = \cB a\wedge\cB b.$$
+$$\textbf{Théorème de Bézout}:\ \cB a\wedge\cB b = 1\iff\exists\cO u, \cO v\in\mathbb Z,\ \cB a\cO u + \cB b\cO v = 1.$$</div>
+<p>Pour trouver $u, v$ : on <b>remonte</b> l'algorithme d'Euclide (ou on tient le tableau $r_k = au_k + bv_k$, voir le corrigé interactif). Pour montrer $a\wedge b = 1$ sans calcul : trouver <b>une</b> combinaison égale à $1$.</p>
+<p class="ml piege">Piège</p>
+<p>$au + bv = d$ ne prouve <b>pas</b> que $d = a\wedge b$ (sauf si $d = 1$) : $2\times2 + 4\times1 = 8$, mais $2\wedge4 = 2$. Ça prouve seulement $a\wedge b\mid d$.</p>
+
+<p class="ml">Exemple 5 : remonter Euclide</p>
+<p>Trouver $u, v$ tels que $1071u + 462v = 21$.</p>
+<p><b>Étape 1 : Rappel.</b> On part de l'avant-dernière division et on remplace les restes un par un.</p>
+<p><b>Étape 2 : On isole $21$.</b> D'après $462 = 3\times147 + 21$ : $21 = 462 - 3\times\cR{147}$.</p>
+<p><b>Étape 3 : On isole $147$.</b> D'après $1071 = 2\times462 + 147$ : $\cR{147} = 1071 - 2\times462$.</p>
+<p><b>Étape 4 : On remplace et on regroupe.</b></p>
+$$21 = 462 - 3\,(1071 - 2\times462) = 462 - 3\times1071 + 6\times462 = 7\times462 - 3\times1071.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{\cO u = -3,\ \cO v = 7}$. Contrôle : $-3213 + 3234 = 21$.</p>
+
+<p class="ml">Exemple 6 : prouver $a\wedge b = 1$ par Bézout</p>
+<p>Montrer que $(2n + 1)\wedge(3n + 2) = 1$ pour tout $n\in\mathbb Z$.</p>
+<p><b>Étape 1 : Rappel.</b> $a\wedge b = 1\iff\exists u, v,\ au + bv = 1$.</p>
+<p><b>Étape 2 : On élimine $n$.</b> $3(2n + 1) - 2(3n + 2) = 6n + 3 - 6n - 4 = -1$.</p>
+<p><b>Étape 3 : On ajuste le signe.</b> $(-3)(2n + 1) + 2(3n + 2) = 1$ : $\cO u = -3$, $\cO v = 2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(2n + 1)\wedge(3n + 2) = 1}$.</p>
+
+<h2 id="z-gauss">6. Le lemme de Gauss et ses conséquences</h2>
+<div class="sbox">$$\textbf{Gauss}:\ \cB a\mid bc\ \text{et}\ \cB a\wedge b = 1\ \Longrightarrow\ \cB a\mid c.$$
+$$a\mid n,\ b\mid n,\ a\wedge b = 1\Rightarrow ab\mid n.\qquad a\wedge b = 1\ \text{et}\ a\wedge c = 1\Rightarrow a\wedge bc = 1.\qquad\text{Si}\ d = a\wedge b,\ a = da',\ b = db',\ a'\wedge b' = 1.$$</div>
+<p class="ml piege">Piège</p>
+<p>Sans « premiers entre eux », c'est faux : $6\mid4\times3$ mais $6\nmid4$ et $6\nmid3$. Et $2\mid12$, $4\mid12$ ne donne pas $8\mid12$.</p>
+
+<p class="ml">Exemple 7 : $6$ divise $n^3 - n$</p>
+<p><b>Étape 1 : Rappel.</b> $a\mid N$, $b\mid N$ et $a\wedge b = 1$ $\Rightarrow ab\mid N$.</p>
+<p><b>Étape 2 : On factorise.</b> $n^3 - n = n(n^2 - 1) = (n - 1)\,n\,(n + 1)$ : trois entiers consécutifs.</p>
+<p><b>Étape 3 : Par $2$.</b> Parmi deux entiers consécutifs, l'un est pair : $2\mid n^3 - n$.</p>
+<p><b>Étape 4 : Par $3$.</b> Parmi trois entiers consécutifs, l'un est multiple de $3$ (les restes $0, 1, 2$ apparaissent tous) : $3\mid n^3 - n$.</p>
+<p><b>Étape 5 : Conclusion.</b> $2\wedge3 = 1$, donc $\cG{6\mid n^3 - n}$.</p>
+
+<h2 id="z-dioph">7. Les équations $ax + by = c$</h2>
+<div class="sbox">$$ax + by = c\ \text{a des solutions entières}\iff d = a\wedge b\ \text{divise}\ c.$$
+$$\text{Si}\ (x_0, y_0)\ \text{est solution}:\quad x = x_0 + k\frac bd,\quad y = y_0 - k\frac ad,\quad k\in\mathbb Z.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Calculer $d = a\wedge b$ ; si $d\nmid c$, pas de solution. <b>2.</b> Diviser par $d$. <b>3.</b> Bézout pour une solution particulière, multipliée par $\frac cd$. <b>4.</b> Soustraire, puis <b>Gauss</b> pour toutes les solutions.</p>
+
+<p class="ml">Exemple 8 : $15x + 21y = 9$</p>
+<p><b>Étape 1 : Rappel.</b> Solutions $\iff a\wedge b\mid c$. Puis Bézout et Gauss.</p>
+<p><b>Étape 2 : Le PGCD.</b> $15\wedge21 = 3$ et $3\mid9$ : il y a des solutions. On divise par $3$ : $5x + 7y = 3$.</p>
+<p><b>Étape 3 : Une solution de $5u + 7v = 1$.</b> $5\times(-4) + 7\times3 = -20 + 21 = 1$. On multiplie par $3$ : $5\times(-12) + 7\times9 = 3$, donc $(x_0, y_0) = (-12, 9)$.</p>
+<p><b>Étape 4 : On soustrait.</b> $5x + 7y = 3 = 5x_0 + 7y_0$ donne :</p>
+$$5(x + 12) = -7(y - 9).$$
+<p><b>Étape 5 : Gauss.</b> $7\mid5(x + 12)$ et $7\wedge5 = 1$, donc $7\mid x + 12$ : $x = -12 + 7k$. On remplace : $5\times7k = -7(y - 9)$, donc $y = 9 - 5k$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\mathcal S = \{(-12 + 7k,\ 9 - 5k),\ k\in\mathbb Z\}}$. Contrôle $k = 2$ : $(2, -1)$, $30 - 21 = 9$.</p>
+
+<h2 id="z-ppcm">8. PPCM</h2>
+<div class="sbox">$$a\vee b = \text{le plus petit multiple commun}\ \geq0.\qquad a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m.\qquad(a\wedge b)\times(a\vee b) = |ab|.$$</div>
+<p class="ml">Exemple 9 : $1071\vee462$</p>
+<p><b>Étape 1 : Rappel.</b> $(a\wedge b)(a\vee b) = |ab|$.</p>
+<p><b>Étape 2 : On utilise l'exemple 4.</b> $1071\wedge462 = 21$.</p>
+<p><b>Étape 3 : Le calcul.</b> $1071\vee462 = \frac{1071\times462}{21} = 51\times462$ (car $1071 = 21\times51$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{1071\vee462 = 23\,562}$.</p>
+
+<h2 id="z-prem">9. Nombres premiers</h2>
+<div class="sbox">$$\text{Tout}\ n\geq2\ \text{a un diviseur premier}.\qquad n\ \text{non premier}\Rightarrow n\ \text{a un diviseur premier}\ \cV p\leq\sqrt n.\qquad\mathcal P\ \text{est infini}.$$
+$$\textbf{Lemme d'Euclide}:\ \cV p\mid ab\Rightarrow\cV p\mid a\ \text{ou}\ \cV p\mid b.\qquad\cV p\nmid a\Rightarrow\cV p\wedge a = 1.$$
+$$\textbf{Décomposition}:\ n = \prod_{p\in\mathcal P}p^{v_p(n)}\ \text{(unique)}.\qquad a\mid b\iff\forall p,\ v_p(a)\leq v_p(b).$$
+$$a\wedge b = \prod p^{\min(v_p(a), v_p(b))},\qquad a\vee b = \prod p^{\max(v_p(a), v_p(b))}.$$</div>
+
+<p class="ml">Exemple 10 : $221$ est-il premier ?</p>
+<p><b>Étape 1 : Rappel.</b> Si $n$ n'est pas premier, il a un diviseur premier $\cV p\leq\sqrt n$.</p>
+<p><b>Étape 2 : La borne.</b> $14^2 = 196\leq221 \lt 225 = 15^2$ : on teste les premiers $\cV p\leq14$, soit $2, 3, 5, 7, 11, 13$.</p>
+<p><b>Étape 3 : Les tests.</b> $221$ est impair ; $2 + 2 + 1 = 5$ donc $3\nmid221$ ; ne finit pas par $0$ ou $5$ ; $221 = 7\times31 + 4$ ; $221 = 11\times20 + 1$ ; $221 = 13\times17$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{221 = 13\times17\ \text{n'est pas premier}}$.</p>
+
+<p class="ml">Exemple 11 : PGCD, PPCM et diviseurs par décomposition</p>
+<p>$a = 360$, $b = 84$.</p>
+<p><b>Étape 1 : Rappel.</b> $\wedge$ : exposants minimum. $\vee$ : exposants maximum.</p>
+<p><b>Étape 2 : Les décompositions.</b> $360 = 2^3\times3^2\times5$ et $84 = 2^2\times3\times7$.</p>
+<p><b>Étape 3 : Le PGCD.</b> $2^{\min(3, 2)}\times3^{\min(2, 1)}\times5^0\times7^0 = 2^2\times3 = 12$.</p>
+<p><b>Étape 4 : Le PPCM.</b> $2^3\times3^2\times5\times7 = 2520$. Contrôle : $12\times2520 = 30\,240 = 360\times84$.</p>
+<p><b>Étape 5 : Les diviseurs de $360$.</b> Un diviseur positif est $2^i3^j5^k$ avec $0\leq i\leq3$, $0\leq j\leq2$, $0\leq k\leq1$ : $4\times3\times2 = 24$ diviseurs.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{360\wedge84 = 12,\ 360\vee84 = 2520}$, et $360$ a $24$ diviseurs positifs.</p>
+
+<p class="ml">Exemple 12 : il y a une infinité de nombres premiers</p>
+<p><b>Étape 1 : Rappel.</b> Tout entier $\geq2$ a un diviseur premier.</p>
+<p><b>Étape 2 : Par l'absurde.</b> Supposons $\mathcal P = \{p_1, \dots, p_k\}$ fini. On pose $N = p_1p_2\cdots p_k + 1\geq2$.</p>
+<p><b>Étape 3 : Un diviseur premier.</b> $N$ a un diviseur premier, donc un certain $p_i\mid N$.</p>
+<p><b>Étape 4 : La contradiction.</b> $p_i\mid p_1\cdots p_k$ et $p_i\mid N$, donc $p_i\mid N - p_1\cdots p_k = 1$ : impossible.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal P\ \text{est infini}}$.</p>
+
+<h2 id="z-cong">10. Congruences</h2>
+<div class="sbox">$$a\equiv b\ [\cV n]\iff\cV n\mid a - b\iff a\ \text{et}\ b\ \text{ont le même reste dans la division par}\ \cV n.$$
+$$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv bd,\quad a^k\equiv b^k\ [n]\ (k\in\mathbb N).$$</div>
+<p class="ml piege">Piège</p>
+<p>On ne <b>divise</b> pas une congruence : $2\times3\equiv2\times0\ [6]$ mais $3\not\equiv0\ [6]$. On simplifie par $k$ seulement si $k\wedge n = 1$ (on multiplie alors par l'inverse de $k$, §11).</p>
+<p class="ml">La méthode pour $a^k\ [n]$</p>
+<p><b>1.</b> Calculer les puissances successives jusqu'à trouver $a^m\equiv1$ (ou $\pm1$). <b>2.</b> Division euclidienne $k = mq + r$. <b>3.</b> $a^k = (a^m)^q\,a^r\equiv a^r$.</p>
+<p><b>Critères de divisibilité</b> : $10\equiv1\ [9]$ donne $n\equiv$ (somme des chiffres) $[9]$, et de même $[3]$. $10\equiv-1\ [11]$ donne $n\equiv$ (somme alternée des chiffres) $[11]$.</p>
+
+<p class="ml">Exemple 13 : le dernier chiffre de $7^{2026}$</p>
+<p><b>Étape 1 : Rappel.</b> Le dernier chiffre est le reste modulo $10$. On cherche $m$ avec $7^m\equiv1\ [10]$.</p>
+<p><b>Étape 2 : Les puissances.</b> $7^1\equiv7$, $7^2 = 49\equiv9$, $7^3\equiv9\times7 = 63\equiv3$, $7^4\equiv3\times7 = 21\equiv\cG1\ [10]$.</p>
+<p><b>Étape 3 : La division de l'exposant.</b> $2026 = 4\times506 + 2$.</p>
+<p><b>Étape 4 : On réduit.</b> $7^{2026} = (7^4)^{506}\times7^2\equiv1^{506}\times49\equiv9\ [10]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{7^{2026}\ \text{se termine par}\ 9}$.</p>
+
+<p class="ml">Exemple 14 : une divisibilité pour tout $n$</p>
+<p>Montrer que $7\mid3^{2n+1} + 2^{n+2}$ pour tout $n\in\mathbb N$.</p>
+<p><b>Étape 1 : Rappel.</b> Les congruences passent aux produits et aux puissances.</p>
+<p><b>Étape 2 : On réduit $9$.</b> $3^{2n+1} = 3\times9^n$ et $9\equiv2\ [7]$, donc $3^{2n+1}\equiv3\times2^n\ [7]$.</p>
+<p><b>Étape 3 : L'autre terme.</b> $2^{n+2} = 4\times2^n$.</p>
+<p><b>Étape 4 : On additionne.</b> $3^{2n+1} + 2^{n+2}\equiv3\times2^n + 4\times2^n = 7\times2^n\equiv0\ [7]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{7\mid3^{2n+1} + 2^{n+2}}$.</p>
+
+<h2 id="z-inv">11. Inverse modulo $n$, équations $ax\equiv b\ [n]$</h2>
+<div class="sbox">$$a\ \text{est inversible modulo}\ \cV n\ (\exists u,\ au\equiv1\ [n])\iff a\wedge\cV n = 1.\qquad au + nv = 1\Rightarrow au\equiv1\ [n].$$</div>
+<p>Pour résoudre $ax\equiv b\ [n]$ avec $a\wedge n = 1$ : on multiplie par l'inverse $u$ : $x\equiv ub\ [n]$.</p>
+
+<p class="ml">Exemple 15 : l'inverse de $7$ modulo $26$</p>
+<p><b>Étape 1 : Rappel.</b> $7u + 26v = 1\Rightarrow7u\equiv1\ [26]$. On trouve $u$ par Euclide remonté.</p>
+<p><b>Étape 2 : Euclide.</b></p>
+$$\begin{aligned}26 &= 3\times7 + 5\\7 &= 1\times5 + 2\\5 &= 2\times2 + 1\end{aligned}$$
+<p><b>Étape 3 : On remonte.</b></p>
+$$1 = 5 - 2\times2 = 5 - 2\,(7 - 5) = 3\times5 - 2\times7 = 3\,(26 - 3\times7) - 2\times7 = 3\times26 - 11\times7.$$
+<p><b>Étape 4 : On lit l'inverse.</b> $7\times(-11)\equiv1\ [26]$, et $-11\equiv15\ [26]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{7^{-1}\equiv15\ [26]}$. Contrôle : $7\times15 = 105 = 4\times26 + 1$.</p>
+
+<p class="ml">Exemple 16 : résoudre $7x\equiv3\ [26]$</p>
+<p><b>Étape 1 : Rappel.</b> On multiplie les deux membres par l'inverse de $7$ (exemple 15).</p>
+<p><b>Étape 2 : On multiplie par $15$.</b> $15\times7x\equiv15\times3$, soit $x\equiv45\ [26]$.</p>
+<p><b>Étape 3 : On réduit.</b> $45 = 26 + 19$, donc $x\equiv19\ [26]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x\in19 + 26\mathbb Z}$. Contrôle : $7\times19 = 133 = 5\times26 + 3$.</p>
+
+<h2 id="z-fermat">12. Le petit théorème de Fermat</h2>
+<div class="sbox">$$\cV p\ \text{premier}:\quad\forall a\in\mathbb Z,\ a^{\cV p}\equiv a\ [\cV p].\qquad\cV p\nmid a\ \Longrightarrow\ a^{\cV p - 1}\equiv1\ [\cV p].$$
+$$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
+<p>Il donne directement l'exposant $m = p - 1$ de la méthode du §10 quand le module est premier.</p>
+
+<p class="ml">Exemple 17 : $2^{100}$ modulo $13$</p>
+<p><b>Étape 1 : Rappel.</b> $13$ est premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$.</p>
+<p><b>Étape 2 : On divise l'exposant.</b> $100 = 8\times12 + 4$.</p>
+<p><b>Étape 3 : On réduit.</b> $2^{100} = (2^{12})^8\times2^4\equiv16\equiv3\ [13]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{2^{100}\equiv3\ [13]}$.</p>
+
+<p class="ml">Exemple 18 : $42$ divise $n^7 - n$</p>
+<p><b>Étape 1 : Rappel.</b> Fermat : $n^p\equiv n\ [p]$. Et si des entiers premiers entre eux deux à deux divisent $N$, leur produit aussi.</p>
+<p><b>Étape 2 : Modulo $7$.</b> Fermat avec $p = 7$ : $n^7\equiv n\ [7]$.</p>
+<p><b>Étape 3 : Modulo $3$.</b> $n^3\equiv n$, donc $n^7 = n^3\cdot n^3\cdot n\equiv n\cdot n\cdot n = n^3\equiv n\ [3]$.</p>
+<p><b>Étape 4 : Modulo $2$.</b> $n^2\equiv n$, donc $n^7\equiv n\ [2]$ (de même, on réduit les exposants).</p>
+<p><b>Étape 5 : Conclusion.</b> $2$, $3$, $7$ divisent $n^7 - n$ et sont premiers entre eux deux à deux : $\cG{42\mid n^7 - n}$.</p>
+
+<h2 id="z-chin">13. Systèmes de congruences <span class="hp">programme de Spé</span></h2>
+<div class="sbox">$$m\wedge n = 1:\quad\begin{cases}x\equiv a\ [m]\\x\equiv b\ [n]\end{cases}\ \text{a une unique solution modulo}\ mn\ \text{(lemme chinois)}.$$</div>
+<p class="ml">Exemple 19 : $x\equiv2\ [3]$ et $x\equiv3\ [5]$</p>
+<p><b>Étape 1 : Rappel.</b> On exprime la première congruence, on remplace dans la seconde, on résout avec un inverse.</p>
+<p><b>Étape 2 : La première.</b> $x = 2 + 3k$, $k\in\mathbb Z$.</p>
+<p><b>Étape 3 : Dans la seconde.</b> $2 + 3k\equiv3\ [5]\iff3k\equiv1\ [5]$. L'inverse de $3$ modulo $5$ est $2$ ($3\times2 = 6\equiv1$), donc $k\equiv2\ [5]$ : $k = 2 + 5j$.</p>
+<p><b>Étape 4 : On remplace.</b> $x = 2 + 3(2 + 5j) = 8 + 15j$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{x\equiv8\ [15]}$. Contrôle : $8 = 2\times3 + 2$ et $8 = 5 + 3$.</p>
+
+<h2 id="z-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« $d$ divise $A(n)$ et $B(n)$ »</b><span>Combinaison qui élimine $n$ : $d$ divise une constante.</span></div>
+<div><b>« $n + a\mid P(n)$ »</b><span>Écrire $P(n) = (n + a)Q(n) + R$, donc $n + a\mid R$.</span></div>
+<div><b>« Calculer $a\wedge b$ »</b><span>Algorithme d'Euclide, ou décompositions (exposants min).</span></div>
+<div><b>« Trouver $u, v$ »</b><span>Remonter Euclide, ou le tableau $r_k = au_k + bv_k$.</span></div>
+<div><b>« Montrer $a\wedge b = 1$ »</b><span>Trouver $au + bv = 1$, ou montrer qu'aucun premier ne divise les deux.</span></div>
+<div><b>$a\mid bc$</b><span>Gauss si $a\wedge b = 1$, lemme d'Euclide si $a$ premier.</span></div>
+<div><b>« Résoudre $ax + by = c$ »</b><span>$d\mid c$, solution particulière, soustraire, Gauss.</span></div>
+<div><b>« Reste de $a^k$ par $n$ »</b><span>Puissances jusqu'à $1$ (ou Fermat si $n$ premier), division de l'exposant.</span></div>
+<div><b>« Pour tout $n$, $m$ divise … »</b><span>Congruences modulo $m$, ou récurrence, ou tableau des restes de $n$.</span></div>
+<div><b>« $ax\equiv b\ [n]$ »</b><span>Inverse de $a$ par Bézout si $a\wedge n = 1$.</span></div>
+<div><b>« $p$ premier, montrer… »</b><span>Fermat, lemme d'Euclide, $p\mid\binom pk$.</span></div>
+<div><b>« Est-il premier ? »</b><span>Tester les premiers $\leq\sqrt n$.</span></div>
+<div><b>Un nombre irrationnel ($\sqrt2$, $\sqrt p$)</b><span>Fraction irréductible $\frac ab$, puis lemme d'Euclide.</span></div>
+</div>
+
+<h2 id="z-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Un reste négatif dans la division euclidienne.</p>
+<p><b>2.</b> Utiliser Gauss sans vérifier $a\wedge b = 1$.</p>
+<p><b>3.</b> Croire que $au + bv = d$ donne $d = a\wedge b$.</p>
+<p><b>4.</b> Diviser une congruence par un nombre non premier avec le module.</p>
+<p><b>5.</b> Oublier les diviseurs négatifs : $n + 1\mid4$ donne aussi $n + 1 = -1, -2, -4$.</p>
+<p><b>6.</b> Appliquer Fermat avec $n$ non premier.</p>
+<p><b>7.</b> Écrire $a\mid n,\ b\mid n\Rightarrow ab\mid n$ sans $a\wedge b = 1$.</p>
+<p><b>8.</b> Oublier le $k\in\mathbb Z$ dans les solutions de $ax + by = c$.</p>
+<p><b>9.</b> Confondre « $1$ est premier » : il ne l'est pas ($p\geq2$).</p>
+</div>
+
+<h2 id="z-entrainement">S'entraîner</h2>
+<div data-mlab="euclz"></div>
+<div data-mlab="dioph"></div>
+<div data-mlab="powmod"></div>
+<div data-mlab="quizarith"></div>
+
+<h2 id="z-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $\sqrt2$ est irrationnel</p>
+<p><b>Étape 1 : Rappel.</b> Toute fraction s'écrit $\frac pq$ avec $p\wedge q = 1$. Lemme d'Euclide : $2\mid ab\Rightarrow2\mid a$ ou $2\mid b$.</p>
+<p><b>Étape 2 : Par l'absurde.</b> $\sqrt2 = \frac pq$ avec $p\wedge q = 1$, donc $p^2 = 2q^2$.</p>
+<p><b>Étape 3 : $p$ est pair.</b> $2\mid p^2 = p\times p$, donc $2\mid p$ : $p = 2p'$.</p>
+<p><b>Étape 4 : $q$ est pair.</b> $4p'^2 = 2q^2$, donc $q^2 = 2p'^2$ et de même $2\mid q$.</p>
+<p><b>Étape 5 : Conclusion.</b> $2\mid p\wedge q = 1$ : absurde. $\cG{\sqrt2\notin\mathbb Q}$.</p>
+
+<p class="ml">Exercice 2 : $(n^2 + n)\wedge(2n + 1)$</p>
+<p><b>Étape 1 : Rappel.</b> Bézout : $au + bv = 1\Rightarrow a\wedge b = 1$.</p>
+<p><b>Étape 2 : On élimine.</b> $(2n + 1)^2 = 4n^2 + 4n + 1 = 4(n^2 + n) + 1$.</p>
+<p><b>Étape 3 : La combinaison.</b> $(2n + 1)\times(2n + 1) + (n^2 + n)\times(-4) = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(n^2 + n)\wedge(2n + 1) = 1}$ pour tout $n$.</p>
+
+<p class="ml">Exercice 3 : $p$ premier, $p\geq5$ : $24\mid p^2 - 1$</p>
+<p><b>Étape 1 : Rappel.</b> $8\mid N$, $3\mid N$, $8\wedge3 = 1\Rightarrow24\mid N$.</p>
+<p><b>Étape 2 : On factorise.</b> $p^2 - 1 = (p - 1)(p + 1)$.</p>
+<p><b>Étape 3 : Par $8$.</b> $p$ est impair, donc $p - 1$ et $p + 1$ sont deux pairs consécutifs : l'un est multiple de $4$, l'autre de $2$. Donc $8\mid p^2 - 1$.</p>
+<p><b>Étape 4 : Par $3$.</b> Parmi $p - 1, p, p + 1$, un est multiple de $3$, et ce n'est pas $p$ (premier $\neq3$). Donc $3\mid p^2 - 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{24\mid p^2 - 1}$.</p>
+
+<p class="ml">Exercice 4 : le critère de divisibilité par $9$</p>
+<p><b>Étape 1 : Rappel.</b> Les congruences passent aux puissances et aux sommes.</p>
+<p><b>Étape 2 : L'écriture décimale.</b> $n = \sum_{k=0}^ma_k10^k$ avec $a_k\in[\![0, 9]\!]$ les chiffres.</p>
+<p><b>Étape 3 : On réduit.</b> $10\equiv1\ [9]$, donc $10^k\equiv1$ et $n\equiv\sum_{k=0}^ma_k\ [9]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{9\mid n\iff9\ \text{divise la somme de ses chiffres}}$. Exemple : $4\,725$, $4 + 7 + 2 + 5 = 18$, donc $9\mid4725$.</p>
+
+<h2 id="z-arbre">L'arbre de l'arithmétique</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question d'arithmétique</span><ul>
+<li><div class="hr"><em>divisibilité</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>$d$ divise deux expressions</em><a class="hl" href="#z-div">combinaison qui élimine $n$</a></div></li>
+<li><div class="hr"><em>$a\mid bc$</em><a class="hl" href="#z-gauss">Gauss si $a\wedge b = 1$</a></div></li>
+<li><div class="hr"><em>pour tout $n$</em><a class="hl" href="#z-cong">congruences, ou factoriser</a></div></li>
+<li><div class="hr"><em>$ab\mid N$</em><a class="hl" href="#z-gauss">$a\mid N$, $b\mid N$, $a\wedge b = 1$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>PGCD</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>sa valeur</em><a class="hl ok" href="#z-pgcd">Euclide : dernier reste non nul</a></div></li>
+<li><div class="hr"><em>$u, v$</em><a class="hl ok" href="#z-bez">remonter Euclide</a></div></li>
+<li><div class="hr"><em>$= 1$</em><a class="hl" href="#z-bez">une combinaison égale à $1$</a></div></li>
+<li><div class="hr"><em>avec décompositions</em><a class="hl" href="#z-prem">exposants min, max</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une équation</em><span class="hq">Laquelle ?</span><ul>
+<li><div class="hr"><em>$ax + by = c$</em><a class="hl" href="#z-dioph">$d\mid c$, Bézout, Gauss</a></div></li>
+<li><div class="hr"><em>$ax\equiv b\ [n]$</em><a class="hl" href="#z-inv">inverse de $a$ si $a\wedge n = 1$</a></div></li>
+<li><div class="hr"><em>deux congruences</em><a class="hl" href="#z-chin">lemme chinois (Spé)</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>un reste</em><span class="hq">Module premier ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#z-fermat">Fermat : $a^{p-1}\equiv1$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#z-cong">puissances jusqu'à $1$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>premier ?</em><a class="hl" href="#z-prem">tester $p\leq\sqrt n$</a></div></li>
+<li><div class="hr"><em>irrationalité</em><a class="hl end" href="#z-exos">$\frac pq$ irréductible, lemme d'Euclide</a></div></li>
 </ul></div></div>
 `
 };
