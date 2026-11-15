@@ -4170,7 +4170,7 @@ $$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qqua
 </div>
 `,
 "Nombres réels et suites numériques": R`
-<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#s-vocab">Suites</a><a href="#s-lim">Limite</a><a href="#s-op">Formes indéterminées</a><a href="#s-comp">Comparaison</a><a href="#s-mono">Monotone, adjacentes</a><a href="#s-part">Récurrences linéaires</a><a href="#s-rec">$u_{n+1} = f(u_n)$</a><a href="#s-cpx">Complexes</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">Arbre des réels</a><a href="#s-arbre">Arbre des suites</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : la partie $\cB A$ et ses éléments $\cB a$. <span class="kR">rouge</span> : les majorants, minorants et bornes $\cR M$, $\cR{\sup A}$, $\cR{\inf A}$. <span class="kO">orange</span> : la marge $\cO\varepsilon$. <span class="kV">violet</span> : les entiers ($\cV n$, $\cV p$, $\cV{\lfloor x\rfloor}$). <span class="kG">vert</span> : les conclusions.</p>
@@ -4411,7 +4411,249 @@ $$x \lt r + \sqrt2 \lt y.$$
 <p class="ml">Bonus : l'intervalle ouvert est ouvert <span class="hp">hors programme</span></p>
 <p>Un réel $x$ d'un intervalle $]a, b[$ y est « à l'aise » : avec $\cO\varepsilon = \min(x - a, b - x) > 0$, on a $]x - \cO\varepsilon, x + \cO\varepsilon[\subset]a, b[$. La notion d'ouvert et de fermé est traitée en Spé (topologie des espaces vectoriels normés).</p>
 
-<h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="s-vocab">11. Suites : bornée, monotone, stationnaire</h2>
+<p class="ml">Le code couleur des suites</p>
+<p><span class="kB">bleu</span> : la suite $\cB{(u_n)}$. <span class="kR">rouge</span> : la limite $\cR\ell$, ou un majorant. <span class="kO">orange</span> : la marge $\cO\varepsilon$ et la suite qui encadre. <span class="kV">violet</span> : les rangs $\cV N$, $\cV n$. <span class="kG">vert</span> : la conclusion.</p>
+<table class="mtab">
+<tr><th>Propriété</th><th>Définition</th><th>Comment le montrer</th></tr>
+<tr><td>majorée</td><td>$\exists M\in\mathbb R,\ \forall n,\ u_n\leq M$</td><td>Exhiber un $M$ qui ne dépend pas de $n$.</td></tr>
+<tr><td>bornée</td><td>$\exists C\geq0,\ \forall n,\ |u_n|\leq C$</td><td>Majorée et minorée, ou majorer $|u_n|$.</td></tr>
+<tr><td>croissante</td><td>$\forall n,\ u_n\leq u_{n+1}$</td><td>Signe de $u_{n+1} - u_n$.</td></tr>
+<tr><td>croissante, $u_n > 0$</td><td>$\forall n,\ \frac{u_{n+1}}{u_n}\geq1$</td><td>Quotient, utile avec des puissances et des factorielles.</td></tr>
+<tr><td>$u_n = f(n)$</td><td>$f$ croissante sur $[0, +\infty[$</td><td>$(u_n)$ croissante (étudier $f'$).</td></tr>
+<tr><td>stationnaire</td><td>$\exists N,\ \exists c,\ \forall n\geq N,\ u_n = c$</td><td>Constante à partir d'un rang.</td></tr>
+</table>
+<p class="ml piege">Piège</p>
+<p>Le quotient $\frac{u_{n+1}}{u_n}$ ne marche que si $u_n > 0$. Et « $u_n = f(n)$ avec $f$ croissante » ne s'applique pas aux suites récurrentes $u_{n+1} = f(u_n)$ (§18).</p>
+
+<p class="ml">Exemple 16 : monotonie par le quotient</p>
+<p>Étudier la monotonie de $u_n = \dfrac n{2^n}$, $n\geq1$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $\cB{u_n} > 0$ : $\frac{\cB{u_{n+1}}}{\cB{u_n}}\leq1$ pour tout $n\geq\cV N$ $\iff$ $(\cB{u_n})$ décroissante à partir du rang $\cV N$.</p>
+<p><b>Étape 2 : Le signe.</b> Pour $n\geq1$, $n > 0$ et $2^n > 0$, donc $u_n > 0$.</p>
+<p><b>Étape 3 : Le quotient.</b></p>
+$$\frac{u_{n+1}}{u_n} = \frac{n + 1}{2^{n+1}}\times\frac{2^n}n = \frac{n + 1}{2n}.$$
+<p><b>Étape 4 : On compare à $1$.</b> $\frac{n + 1}{2n}\leq1\iff n + 1\leq2n\iff n\geq1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{est décroissante}}$ (dès $n = 1$, avec $u_1 = u_2 = \frac12$).</p>
+
+<p class="ml">Exemple 17 : monotonie par la différence, et encadrement</p>
+<p>$u_n = \displaystyle\sum_{k=1}^n\frac1{n + k} = \frac1{n + 1} + \dots + \frac1{2n}$. Montrer que $(u_n)$ est croissante et que $\frac12\leq u_n\leq1$.</p>
+<p><b>Étape 1 : Rappel.</b> $(\cB{u_n})$ croissante $\iff\cB{u_{n+1}} - \cB{u_n}\geq0$ pour tout $n$.</p>
+<p><b>Étape 2 : On écrit les deux sommes</b> : $u_{n+1}$ va de $\frac1{n + 2}$ à $\frac1{2n + 2}$, $u_n$ de $\frac1{n + 1}$ à $\frac1{2n}$. Les termes $\frac1{n + 2},\dots,\frac1{2n}$ se simplifient :</p>
+$$u_{n+1} - u_n = \frac1{2n + 1} + \frac1{2n + 2} - \frac1{n + 1}.$$
+<p><b>Étape 3 : On simplifie.</b> $\frac1{n + 1} = \frac2{2n + 2}$, donc :</p>
+$$u_{n+1} - u_n = \frac1{2n + 1} - \frac1{2n + 2} = \frac1{(2n + 1)(2n + 2)} > 0.$$
+<p><b>Étape 4 : L'encadrement.</b> Pour $1\leq k\leq n$ : $n + 1\leq n + k\leq2n$, donc $\frac1{2n}\leq\frac1{n + k}\leq\frac1{n + 1}$. On somme ces $n$ inégalités :</p>
+$$\frac n{2n}\leq u_n\leq\frac n{n + 1}\quad\Longrightarrow\quad\frac12\leq u_n \lt 1.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{croissante, et}\ \frac12\leq u_n\leq1}$. Par le §15, elle converge (sa limite est $\ln2$, voir Intégration, sommes de Riemann).</p>
+
+<h2 id="s-lim">12. Limite d'une suite</h2>
+<div class="sbox">$$\cB{u_n}\to\cR\ell\iff\forall\cO\varepsilon > 0,\ \exists\cV N\in\mathbb N,\ \forall n\geq\cV N,\ |\cB{u_n} - \cR\ell|\leq\cO\varepsilon$$
+$$\cB{u_n}\to+\infty\iff\forall A\in\mathbb R,\ \exists\cV N\in\mathbb N,\ \forall n\geq\cV N,\ \cB{u_n}\geq A$$</div>
+<p><b>Unicité</b> : si la limite existe, elle est unique. Une suite <b>convergente</b> a une limite finie, sinon elle est <b>divergente</b> (limite infinie ou pas de limite).</p>
+<p><b>Convergente $\Rightarrow$ bornée.</b> La réciproque est fausse : $(-1)^n$ est bornée et diverge.</p>
+<p><b>Limite et signe</b> : si $u_n\to\ell > 0$, alors $u_n > 0$ à partir d'un rang (même $u_n > \frac\ell2$). Si $\ell\neq0$, $u_n\neq0$ à partir d'un rang.</p>
+<p><b>Traductions utiles</b> :</p>
+$$u_n\to\ell\iff u_n - \ell\to0\iff|u_n - \ell|\to0,\qquad u_n\to0\iff|u_n|\to0.$$
+<p class="ml">Suites extraites</p>
+<div class="sbox">$$\varphi:\mathbb N\to\mathbb N\ \text{strictement croissante}\ (\varphi(n)\geq n).\qquad u_n\to\cR\ell\ \Longrightarrow\ u_{\varphi(n)}\to\cR\ell.$$
+$$u_{2n}\to\cR\ell\ \text{et}\ u_{2n+1}\to\cR\ell\iff u_n\to\cR\ell.$$</div>
+<p><b>Pour montrer qu'une suite diverge</b> : trouver deux suites extraites de limites différentes (ou une extraite qui diverge).</p>
+
+<p class="ml">Exemple 18 : une limite avec $\varepsilon$</p>
+<p>Montrer avec la définition que $u_n = \dfrac{2n + 1}{n + 3}\to2$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cB{u_n}\to\cR\ell\iff\forall\cO\varepsilon > 0,\ \exists\cV N,\ \forall n\geq\cV N,\ |\cB{u_n} - \cR\ell|\leq\cO\varepsilon$.</p>
+<p><b>Étape 2 : On calcule l'écart</b> à $\cR\ell = 2$ :</p>
+$$u_n - 2 = \frac{2n + 1 - 2(n + 3)}{n + 3} = \frac{-5}{n + 3},\qquad|u_n - 2| = \frac5{n + 3}.$$
+<p><b>Étape 3 : On résout</b> $|u_n - 2|\leq\cO\varepsilon$ :</p>
+$$\frac5{n + 3}\leq\cO\varepsilon\iff n + 3\geq\frac5{\cO\varepsilon}\iff n\geq\frac5{\cO\varepsilon} - 3.$$
+<p><b>Étape 4 : On choisit le rang.</b> $\cV N = \lfloor\frac5{\cO\varepsilon}\rfloor + 1$ convient : pour $n\geq\cV N$, $n > \frac5{\cO\varepsilon} > \frac5{\cO\varepsilon} - 3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n\to2}$.</p>
+
+<p class="ml">Exemple 19 : montrer qu'une suite diverge</p>
+<p>Montrer que $u_n = (-1)^n\dfrac{n}{n + 1}$ n'a pas de limite.</p>
+<p><b>Étape 1 : Rappel.</b> Si $\cB{u_n}\to\cR\ell$, toute suite extraite tend vers $\cR\ell$. Deux extraites de limites différentes $\Rightarrow$ pas de limite.</p>
+<p><b>Étape 2 : Les termes pairs.</b> $u_{2n} = \frac{2n}{2n + 1}\to1$.</p>
+<p><b>Étape 3 : Les termes impairs.</b> $u_{2n+1} = -\frac{2n + 1}{2n + 2}\to-1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $1\neq-1$ : $\cG{(u_n)\ \text{diverge}}$ (elle est pourtant bornée par $1$).</p>
+
+<h2 id="s-op">13. Opérations, formes indéterminées</h2>
+<table class="mtab">
+<tr><th>$u_n\to$</th><th>$v_n\to$</th><th>$u_n + v_n$</th><th>$u_nv_n$</th><th>$\frac{u_n}{v_n}$</th></tr>
+<tr><td>$\ell$</td><td>$\ell'$</td><td>$\ell + \ell'$</td><td>$\ell\ell'$</td><td>$\frac\ell{\ell'}$ si $\ell'\neq0$</td></tr>
+<tr><td>$\ell$</td><td>$\pm\infty$</td><td>$\pm\infty$</td><td>$\pm\infty$ si $\ell\neq0$ (règle des signes)</td><td>$0$</td></tr>
+<tr><td>$+\infty$</td><td>$+\infty$</td><td>$+\infty$</td><td>$+\infty$</td><td>FI</td></tr>
+<tr><td>$+\infty$</td><td>$-\infty$</td><td><b>FI</b></td><td>$-\infty$</td><td>FI</td></tr>
+<tr><td>$0$</td><td>$\pm\infty$</td><td>$\pm\infty$</td><td><b>FI</b></td><td>$0$</td></tr>
+<tr><td>$\ell\neq0$</td><td>$0$</td><td>$\ell$</td><td>$0$</td><td>$\pm\infty$ si $v_n$ de signe constant</td></tr>
+</table>
+<p>Les quatre formes indéterminées : $\infty - \infty$, $0\times\infty$, $\frac00$, $\frac\infty\infty$. Avec les puissances : $1^\infty$, $0^0$, $\infty^0$ (on passe par $e^{v_n\ln u_n}$).</p>
+<div class="sbox">$$\textbf{Croissances comparées}\ (\alpha, \beta > 0,\ q > 1):\qquad(\ln n)^\alpha\ \ll\ n^\beta\ \ll\ q^n\ \ll\ n!\ \ll\ n^n.$$</div>
+<p class="ml">La méthode pour lever une forme indéterminée</p>
+<p><b>1.</b> Quotient de sommes : on factorise en haut et en bas par le <b>terme prépondérant</b>. <b>2.</b> Différence de racines : <b>quantité conjuguée</b>. <b>3.</b> Puissance $u_n^{v_n}$ : écrire $e^{v_n\ln u_n}$. <b>4.</b> Sinon : équivalents et DL (voir Analyse asymptotique).</p>
+
+<p class="ml">Exemple 20 : factoriser par le terme prépondérant</p>
+<p>Calculer $\lim\dfrac{3n^2 - n + 1}{2n^2 + 5}$.</p>
+<p><b>Étape 1 : Rappel.</b> Pour $\frac\infty\infty$, on factorise en haut et en bas par le terme prépondérant, puis $\frac1n\to0$.</p>
+<p><b>Étape 2 : On factorise par $n^2$</b> :</p>
+$$\frac{3n^2 - n + 1}{2n^2 + 5} = \frac{n^2\big(3 - \frac1n + \frac1{n^2}\big)}{n^2\big(2 + \frac5{n^2}\big)} = \frac{3 - \frac1n + \frac1{n^2}}{2 + \frac5{n^2}}.$$
+<p><b>Étape 3 : Les limites des morceaux.</b> $\frac1n\to0$, $\frac1{n^2}\to0$ : le numérateur tend vers $3$, le dénominateur vers $2\neq0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\lim\frac{3n^2 - n + 1}{2n^2 + 5} = \frac32}$.</p>
+
+<p class="ml">Exemple 21 : la quantité conjuguée</p>
+<p>Calculer $\lim\big(\sqrt{n^2 + n} - n\big)$.</p>
+<p><b>Étape 1 : Rappel.</b> $(a - b)(a + b) = a^2 - b^2$ : on multiplie et divise par $a + b$ pour supprimer la racine.</p>
+<p><b>Étape 2 : Forme indéterminée.</b> $\sqrt{n^2 + n}\to+\infty$ et $n\to+\infty$ : c'est $\infty - \infty$.</p>
+<p><b>Étape 3 : On multiplie par le conjugué</b> :</p>
+$$\sqrt{n^2 + n} - n = \frac{(\sqrt{n^2 + n} - n)(\sqrt{n^2 + n} + n)}{\sqrt{n^2 + n} + n} = \frac{n^2 + n - n^2}{\sqrt{n^2 + n} + n} = \frac n{\sqrt{n^2 + n} + n}.$$
+<p><b>Étape 4 : On factorise par $n$</b> (avec $\sqrt{n^2 + n} = n\sqrt{1 + \frac1n}$ pour $n > 0$) :</p>
+$$\frac n{n\sqrt{1 + \frac1n} + n} = \frac1{\sqrt{1 + \frac1n} + 1}\longrightarrow\frac1{1 + 1}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{\lim\big(\sqrt{n^2 + n} - n\big) = \frac12}$.</p>
+
+<p class="ml">Exemple 22 : croissances comparées</p>
+<p>Calculer $\lim\dfrac{n^3 + 2^n}{3^n + n^2}$.</p>
+<p><b>Étape 1 : Rappel.</b> $n^\beta\ll q^n$ pour $q > 1$ : $\frac{n^\beta}{q^n}\to0$. Et $q^n\to0$ si $|q| \lt 1$.</p>
+<p><b>Étape 2 : Le terme prépondérant</b> est $3^n$ (en haut et en bas). On factorise par $3^n$ :</p>
+$$\frac{n^3 + 2^n}{3^n + n^2} = \frac{\frac{n^3}{3^n} + \big(\frac23\big)^n}{1 + \frac{n^2}{3^n}}.$$
+<p><b>Étape 3 : Les morceaux.</b> $\frac{n^3}{3^n}\to0$ et $\frac{n^2}{3^n}\to0$ (croissances comparées), $\big(\frac23\big)^n\to0$ car $\frac23 \lt 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\lim\frac{n^3 + 2^n}{3^n + n^2} = \frac{0 + 0}{1 + 0} = 0}$.</p>
+
+<h2 id="s-comp">14. Théorèmes de comparaison</h2>
+<div class="sbox">$$\textbf{Passage à la limite}:\ u_n\leq v_n\ \text{et}\ u_n\to\ell,\ v_n\to\ell'\ \Longrightarrow\ \ell\leq\ell'.\qquad\textbf{Encadrement}:\ \cO{a_n}\leq u_n\leq\cO{b_n},\ \cO{a_n}\to\cR\ell,\ \cO{b_n}\to\cR\ell\ \Longrightarrow\ u_n\to\cR\ell.$$
+$$u_n\geq\cO{a_n}\to+\infty\Rightarrow u_n\to+\infty.\qquad|u_n - \cR\ell|\leq\cO{a_n}\to0\Rightarrow u_n\to\cR\ell.\qquad(u_n)\ \text{bornée},\ v_n\to0\Rightarrow u_nv_n\to0.$$</div>
+<p class="ml piege">Piège</p>
+<p>Le passage à la limite <b>transforme les inégalités strictes en larges</b> : $\frac1n > 0$ mais $\lim\frac1n = 0$. Et on ne passe à la limite qu'après avoir montré que les limites <b>existent</b>.</p>
+
+<p class="ml">Exemple 23 : le théorème des gendarmes sur une somme</p>
+<p>Calculer la limite de $u_n = \displaystyle\sum_{k=1}^n\frac n{n^2 + k}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\cO{a_n}\leq u_n\leq\cO{b_n}$ avec $\cO{a_n}$ et $\cO{b_n}$ de même limite $\cR\ell$ $\Rightarrow u_n\to\cR\ell$.</p>
+<p><b>Étape 2 : On encadre le terme général.</b> Pour $1\leq k\leq n$ : $n^2 + 1\leq n^2 + k\leq n^2 + n$, donc :</p>
+$$\frac n{n^2 + n}\leq\frac n{n^2 + k}\leq\frac n{n^2 + 1}.$$
+<p><b>Étape 3 : On somme les $n$ inégalités</b> (les bornes ne dépendent pas de $k$) :</p>
+$$\cO{a_n} = \frac{n^2}{n^2 + n}\leq u_n\leq\frac{n^2}{n^2 + 1} = \cO{b_n}.$$
+<p><b>Étape 4 : Les limites des bornes.</b> $\cO{a_n} = \frac1{1 + \frac1n}\to1$ et $\cO{b_n} = \frac1{1 + \frac1{n^2}}\to1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n\to1}$.</p>
+
+<p class="ml">Exemple 24 : minorer pour obtenir $+\infty$</p>
+<p>Montrer que $u_n = \displaystyle\sum_{k=1}^n\frac1{\sqrt k}\to+\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> $u_n\geq\cO{a_n}$ et $\cO{a_n}\to+\infty$ $\Rightarrow u_n\to+\infty$.</p>
+<p><b>Étape 2 : On minore chaque terme.</b> Pour $1\leq k\leq n$ : $\sqrt k\leq\sqrt n$, donc $\frac1{\sqrt k}\geq\frac1{\sqrt n}$.</p>
+<p><b>Étape 3 : On somme</b> les $n$ inégalités :</p>
+$$u_n\geq n\times\frac1{\sqrt n} = \sqrt n = \cO{a_n}.$$
+<p><b>Étape 4 : Conclusion.</b> $\sqrt n\to+\infty$, donc $\cG{u_n\to+\infty}$.</p>
+
+<h2 id="s-mono">15. Limite monotone, suites adjacentes</h2>
+<div class="sbox">$$\textbf{Limite monotone}:\ (u_n)\ \text{croissante et majorée}\ \Rightarrow\ u_n\to\cR{\sup_{n\in\mathbb N}u_n}.\qquad\text{Croissante non majorée}\ \Rightarrow\ u_n\to+\infty.$$
+$$(u_n)\ \text{croissante},\ u_n\to\ell\ \Longrightarrow\ \forall n,\ u_n\leq\ell.$$</div>
+<p>Et symétriquement : décroissante minorée $\Rightarrow$ converge vers $\inf u_n$, décroissante non minorée $\Rightarrow-\infty$. Une suite monotone a <b>toujours</b> une limite (finie ou infinie).</p>
+<div class="sbox">$$\textbf{Adjacentes}:\ (u_n)\nearrow,\ (v_n)\searrow,\ v_n - u_n\to0\ \Longrightarrow\ \text{même limite}\ \cR\ell,\ \text{et}\ \forall n,\ u_n\leq\cR\ell\leq v_n.$$</div>
+
+<p class="ml">Exemple 25 : croissante et majorée</p>
+<p>Montrer que $u_n = \displaystyle\sum_{k=1}^n\frac1{k^2}$ converge.</p>
+<p><b>Étape 1 : Rappel.</b> Croissante et majorée $\Rightarrow$ convergente.</p>
+<p><b>Étape 2 : Croissante.</b> $u_{n+1} - u_n = \frac1{(n + 1)^2} > 0$.</p>
+<p><b>Étape 3 : Une majoration télescopique.</b> Pour $k\geq2$ : $k^2\geq k(k - 1)$, donc</p>
+$$\frac1{k^2}\leq\frac1{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
+<p><b>Étape 4 : On somme de $k = 2$ à $n$</b>, les termes se télescopent :</p>
+$$u_n = 1 + \sum_{k=2}^n\frac1{k^2}\leq1 + \Big(1 - \frac1n\Big) = 2 - \frac1n\leq\cR2.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{converge}}$, vers une limite $\leq2$ (c'est $\frac{\pi^2}6$, voir Séries).</p>
+
+<p class="ml">Exemple 26 : deux suites adjacentes</p>
+<p>$u_n = \displaystyle\sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \dfrac1{n\cdot n!}$, $n\geq1$. Montrer qu'elles convergent vers la même limite.</p>
+<p><b>Étape 1 : Rappel.</b> $(u_n)\nearrow$, $(v_n)\searrow$, $v_n - u_n\to0$ $\Rightarrow$ même limite.</p>
+<p><b>Étape 2 : $(u_n)$ croissante.</b> $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
+<p><b>Étape 3 : $(v_n)$ décroissante.</b> On écrit tout sur $n(n + 1)\,(n + 1)!$, avec $n! = \frac{(n + 1)!}{n + 1}$ :</p>
+$$v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\cdot n!} = \frac{n(n + 1) + n - (n + 1)^2}{n(n + 1)\,(n + 1)!} = \frac{-1}{n(n + 1)\,(n + 1)!} \lt 0.$$
+<p><b>Étape 4 : La différence.</b> $v_n - u_n = \frac1{n\cdot n!}\to0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{(u_n)\ \text{et}\ (v_n)\ \text{sont adjacentes}}$ : même limite $\ell$ (c'est $e$), et $u_n\leq\ell\leq v_n$, ce qui donne $e$ à $\frac1{n\cdot n!}$ près.</p>
+
+<h2 id="s-bw">16. Bolzano-Weierstrass, caractérisations séquentielles</h2>
+<div class="sbox">$$\textbf{Bolzano-Weierstrass}:\ \text{de toute suite réelle (ou complexe) bornée, on peut extraire une suite convergente.}$$</div>
+<p>On s'en sert quand on n'a aucune formule : la suite est bornée, on extrait $u_{\varphi(n)}\to\ell$, puis on montre que toutes les valeurs d'adhérence sont égales.</p>
+<p><b>Caractérisations séquentielles</b> (voir §7 et §9) : $M = \sup A$ s'il majore $A$ et est limite d'une suite de $A$. $A$ est dense dans $\mathbb R$ si tout réel est limite d'une suite de $A$.</p>
+<p class="ml">Bonus : le lemme de Cesàro <span class="hp">hors programme</span></p>
+<p>Si $u_n\to\ell$, alors la moyenne $\frac{u_1 + \dots + u_n}n\to\ell$. On coupe la somme en deux : les termes d'indice $\geq N$ sont à $\varepsilon$ de $\ell$, les premiers sont en nombre fixe et divisés par $n\to+\infty$. À redémontrer si on l'utilise.</p>
+
+<h2 id="s-part">17. Suites usuelles et récurrences linéaires</h2>
+<table class="mtab">
+<tr><th>Suite</th><th>Relation</th><th>Terme général</th><th>Somme</th></tr>
+<tr><td>arithmétique</td><td>$u_{n+1} = u_n + r$</td><td>$u_n = u_0 + nr$</td><td>$\sum_{k=0}^nu_k = (n + 1)\frac{u_0 + u_n}2$</td></tr>
+<tr><td>géométrique</td><td>$u_{n+1} = qu_n$</td><td>$u_n = u_0q^n$</td><td>$\sum_{k=0}^nq^k = \frac{1 - q^{n+1}}{1 - q}$ ($q\neq1$)</td></tr>
+<tr><td>arithmético-géométrique</td><td>$u_{n+1} = au_n + b$, $a\neq1$</td><td>$u_n = \cR\ell + a^n(u_0 - \cR\ell)$, $\cR\ell = \frac b{1 - a}$</td><td>—</td></tr>
+</table>
+<p>$q^n\to0$ si $|q| \lt 1$, $q^n\to+\infty$ si $q > 1$, pas de limite si $q\leq-1$, constante si $q = 1$.</p>
+<p class="ml">Récurrence linéaire d'ordre 2 : $u_{n+2} = au_{n+1} + bu_n$ ($b\neq0$)</p>
+<p>Équation caractéristique $(E_c):\ \cV{r^2 = ar + b}$, discriminant $\Delta = a^2 + 4b$.</p>
+<div class="sbox">$$\Delta > 0:\ u_n = A\,\cV{r_1}^n + B\,\cV{r_2}^n\qquad\Delta = 0:\ u_n = (A + Bn)\,\cV{r_0}^n\qquad\Delta \lt 0:\ \cV{r = \rho e^{\pm i\theta}},\ u_n = \rho^n\big(A\cos(n\theta) + B\sin(n\theta)\big)$$</div>
+<p>$A, B$ réels, fixés par $u_0$ et $u_1$ (un système $2\times2$). Sur $\mathbb C$ avec $\Delta\neq0$ : $u_n = A\,r_1^n + B\,r_2^n$, $A, B\in\mathbb C$.</p>
+
+<p class="ml">Exemple 27 : arithmético-géométrique</p>
+<p>$u_0 = 5$, $u_{n+1} = 3u_n - 4$. Exprimer $u_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $u_{n+1} = au_n + b$ : on cherche le point fixe $\cR\ell = a\cR\ell + b$, puis $v_n = u_n - \cR\ell$ est géométrique de raison $a$.</p>
+<p><b>Étape 2 : Le point fixe.</b> $\cR\ell = 3\cR\ell - 4\iff\cR{\ell = 2}$.</p>
+<p><b>Étape 3 : La suite auxiliaire.</b> On soustrait $2 = 3\times2 - 4$ à la relation :</p>
+$$u_{n+1} - 2 = 3u_n - 4 - (3\times2 - 4) = 3(u_n - 2),\quad\text{donc}\ v_{n+1} = 3v_n.$$
+<p><b>Étape 4 : Terme général de $v$.</b> $v_0 = u_0 - 2 = 3$, donc $v_n = 3\times3^n = 3^{n+1}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2 + 3^{n+1}}$, et $u_n\to+\infty$. Contrôle : $u_1 = 3\times5 - 4 = 11 = 2 + 9$.</p>
+
+<p class="ml">Exemple 28 : ordre 2, deux racines réelles</p>
+<p>$u_0 = 0$, $u_1 = 3$, $u_{n+2} = u_{n+1} + 2u_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $\Delta > 0$ : $u_n = A\,r_1^n + B\,r_2^n$, avec $r_1, r_2$ les racines de $r^2 = ar + b$.</p>
+<p><b>Étape 2 : Équation caractéristique.</b> $r^2 = r + 2\iff r^2 - r - 2 = 0$, $\Delta = 1 + 8 = 9$, $\cV{r_1 = 2}$, $\cV{r_2 = -1}$.</p>
+<p><b>Étape 3 : Forme générale.</b> $u_n = A\,2^n + B\,(-1)^n$.</p>
+<p><b>Étape 4 : Les conditions initiales.</b></p>
+$$\left\{\begin{aligned}u_0 &= A + B = 0\\u_1 &= 2A - B = 3\end{aligned}\right.\iff\left\{\begin{aligned}A &= 1\\B &= -1\end{aligned}\right.\qquad(\text{on additionne : } 3A = 3).$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = 2^n - (-1)^n}$. Contrôle : $u_2 = 3 + 0 = 3 = 4 - 1$.</p>
+
+<p class="ml">Exemple 29 : ordre 2, racine double</p>
+<p>$u_0 = 1$, $u_1 = 4$, $u_{n+2} = 4u_{n+1} - 4u_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $\Delta = 0$ : $u_n = (A + Bn)\,r_0^n$.</p>
+<p><b>Étape 2 : Équation caractéristique.</b> $r^2 - 4r + 4 = (r - 2)^2 = 0$ : $\cV{r_0 = 2}$ double.</p>
+<p><b>Étape 3 : Les conditions initiales.</b> $u_0 = A = 1$. $u_1 = (A + B)\times2 = 4$, donc $A + B = 2$ et $B = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u_n = (n + 1)\,2^n}$. Contrôle : $u_2 = 16 - 4 = 12 = 3\times4$.</p>
+
+<p class="ml">Exemple 30 : ordre 2, racines complexes</p>
+<p>$u_0 = 1$, $u_1 = 2$, $u_{n+2} = 2u_{n+1} - 2u_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $\Delta \lt 0$, racines $\rho e^{\pm i\theta}$ : $u_n = \rho^n\big(A\cos(n\theta) + B\sin(n\theta)\big)$.</p>
+<p><b>Étape 2 : Équation caractéristique.</b> $r^2 - 2r + 2 = 0$, $\Delta = 4 - 8 = -4 = (2i)^2$, $r = \frac{2\pm2i}2 = 1\pm i$.</p>
+<p><b>Étape 3 : Forme exponentielle.</b> $|1 + i| = \sqrt2$, $\arg(1 + i) = \frac\pi4$ : $\cV{\rho = \sqrt2}$, $\cV{\theta = \frac\pi4}$.</p>
+<p><b>Étape 4 : Les conditions initiales.</b> $u_0 = A = 1$. $u_1 = \sqrt2\big(\cos\frac\pi4 + B\sin\frac\pi4\big) = \sqrt2\cdot\frac{\sqrt2}2(1 + B) = 1 + B = 2$, donc $B = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = (\sqrt2)^n\Big(\cos\frac{n\pi}4 + \sin\frac{n\pi}4\Big)}$. Contrôle : $u_2 = 4 - 2 = 2 = 2(0 + 1)$.</p>
+
+<h2 id="s-rec">18. Suites récurrentes $u_{n+1} = f(u_n)$</h2>
+<p>Ce n'est pas dans ton résumé, mais c'est dans presque tous les sujets. La méthode tient en quatre temps.</p>
+<div class="sbox">$$\textbf{1. Intervalle stable}\ I:\ f(I)\subset I\ \text{et}\ u_0\in I\ \Rightarrow\ \forall n,\ u_n\in I\ \text{(récurrence)}.$$
+$$\textbf{2. Points fixes}:\ \text{si}\ u_n\to\cR\ell\in I\ \text{et}\ f\ \text{continue en}\ \cR\ell,\ \text{alors}\ f(\cR\ell) = \cR\ell.$$
+$$\textbf{3. Monotonie}:\ \text{signe de}\ g(x) = f(x) - x\ \text{sur}\ I,\ \text{ou}\ f\ \text{croissante sur}\ I\Rightarrow(u_n)\ \text{monotone (sens donné par}\ u_1 - u_0).$$
+$$\textbf{4. Conclure}:\ \text{limite monotone, puis}\ \cR\ell\ \text{est un point fixe}.$$</div>
+<p class="ml piege">Piège</p>
+<p>« $f$ croissante » ne donne <b>pas</b> « $(u_n)$ croissante » : le sens dépend de $u_1 - u_0$. Si $f$ est <b>décroissante</b>, $(u_n)$ n'est pas monotone : on étudie $(u_{2n})$ et $(u_{2n+1})$, récurrentes pour $f\circ f$ qui est croissante.</p>
+
+<p class="ml">Exemple 31 : $u_{n+1} = \sqrt{2 + u_n}$, $u_0 = 1$</p>
+<p><b>Étape 1 : Rappel.</b> Intervalle stable, $f$ croissante et sens par $u_1 - u_0$, limite monotone, puis $\ell = f(\ell)$.</p>
+<p><b>Étape 2 : Intervalle stable.</b> $f(x) = \sqrt{2 + x}$. Si $x\in[0, 2]$, $2 + x\in[2, 4]$, donc $f(x)\in[\sqrt2, 2]\subset[0, 2]$. Comme $u_0 = 1\in[0, 2]$, par récurrence $u_n\in[0, 2]$ pour tout $n$.</p>
+<p><b>Étape 3 : Monotonie.</b> $u_1 = \sqrt3 > 1 = u_0$. Si $u_n\leq u_{n+1}$, alors, $f$ étant croissante, $f(u_n)\leq f(u_{n+1})$, soit $u_{n+1}\leq u_{n+2}$. Par récurrence, $(u_n)$ est <b>croissante</b>.</p>
+<p><b>Étape 4 : Convergence.</b> Croissante et majorée par $2$ : elle converge vers $\cR\ell\in[0, 2]$.</p>
+<p><b>Étape 5 : Le point fixe.</b> $f$ est continue, donc $\cR\ell = \sqrt{2 + \cR\ell}$, d'où $\cR\ell^2 - \cR\ell - 2 = 0$, soit $(\cR\ell - 2)(\cR\ell + 1) = 0$. Comme $\cR\ell\geq0$ :</p>
+$$\cG{u_n\to2}.$$
+
+<p class="ml">Exemple 32 : $u_{n+1} = u_n - u_n^2$, $u_0\in\,]0, 1[$</p>
+<p><b>Étape 1 : Rappel.</b> Signe de $g(x) = f(x) - x$ sur l'intervalle stable : $g\leq0$ donne $(u_n)$ décroissante.</p>
+<p><b>Étape 2 : Intervalle stable.</b> $f(x) = x - x^2 = x(1 - x)$. Pour $x\in[0, 1]$ : $x\geq0$ et $1 - x\geq0$, donc $f(x)\geq0$, et $f(x)\leq x\leq1$. Donc $[0, 1]$ est stable et $u_n\in[0, 1]$.</p>
+<p><b>Étape 3 : Monotonie.</b> $u_{n+1} - u_n = -u_n^2\leq0$ : $(u_n)$ est décroissante.</p>
+<p><b>Étape 4 : Convergence.</b> Décroissante et minorée par $0$ : elle converge vers $\cR\ell\in[0, 1]$.</p>
+<p><b>Étape 5 : Le point fixe.</b> $\cR\ell = \cR\ell - \cR\ell^2\iff\cR\ell^2 = 0$, donc $\cG{u_n\to0}$.</p>
+
+<h2 id="s-cpx">19. Suites complexes</h2>
+<div class="sbox">$$z_n\to\cR\ell\iff\operatorname{Re}(z_n)\to\operatorname{Re}(\cR\ell)\ \text{et}\ \operatorname{Im}(z_n)\to\operatorname{Im}(\cR\ell)\iff|z_n - \cR\ell|\to0.$$</div>
+<p>Une suite complexe est <b>bornée</b> si $|z_n|\leq C$, c'est-à-dire si ses parties réelle et imaginaire sont bornées. Tout ce qui n'utilise pas l'ordre reste vrai : opérations, suites extraites, Bolzano-Weierstrass. Il n'y a ni monotonie, ni encadrement, ni $\sup$ dans $\mathbb C$.</p>
+<p class="ml">Exemple 33 : une suite géométrique complexe</p>
+<p>Limite de $z_n = \Big(\dfrac{1 + i}2\Big)^n$.</p>
+<p><b>Étape 1 : Rappel.</b> $z_n\to0\iff|z_n|\to0$, et $|q^n| = |q|^n$.</p>
+<p><b>Étape 2 : Le module.</b> $\big|\frac{1 + i}2\big| = \frac{\sqrt2}2 \lt 1$.</p>
+<p><b>Étape 3 : On passe au module.</b> $|z_n| = \big(\frac{\sqrt2}2\big)^n\to0$ (géométrique réelle de raison dans $]-1, 1[$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{z_n\to0}$.</p>
+
+<h2 id="r-enonce">20. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« Résoudre $|X|\leq a$ »</b><span>Encadrer $-a\leq X\leq a$. Si $a \lt 0$ : aucune solution.</span></div>
 <div><b>« Résoudre $|X|\geq a$ »</b><span>$X\leq-a$ ou $X\geq a$ : une réunion.</span></div>
@@ -4426,6 +4668,19 @@ $$x \lt r + \sqrt2 \lt y.$$
 <div><b>« Pour tout $a\in A$, $a\leq K$ »</b><span>Passer au sup : $\sup A\leq K$.</span></div>
 <div><b>« Trouver un rationnel entre $x$ et $y$ »</b><span>$n > \frac1{y - x}$, $p = \lfloor nx\rfloor + 1$.</span></div>
 <div><b>« Montrer que $I$ est un intervalle »</b><span>Pour $x\leq z\leq y$ avec $x, y\in I$, montrer $z\in I$.</span></div>
+<div><b>« $(u_n)$ est monotone »</b><span>Signe de $u_{n+1} - u_n$, ou $\frac{u_{n+1}}{u_n}$ comparé à $1$ si $u_n > 0$.</span></div>
+<div><b>« Montrer que $u_n\to\ell$ » avec la définition</b><span>Calculer $|u_n - \ell|$, résoudre $\leq\varepsilon$, choisir $N$.</span></div>
+<div><b>« Montrer que $(u_n)$ diverge »</b><span>Deux suites extraites de limites différentes ($u_{2n}$, $u_{2n+1}$).</span></div>
+<div><b>Forme $\frac\infty\infty$</b><span>Factoriser par le terme prépondérant (croissances comparées).</span></div>
+<div><b>Différence de racines</b><span>Quantité conjuguée.</span></div>
+<div><b>Une somme $\sum_{k=1}^n$ dont on veut la limite</b><span>Encadrer le terme général par le plus petit et le plus grand, sommer, gendarmes.</span></div>
+<div><b>« Montrer que $(u_n)$ converge » sans limite donnée</b><span>Monotone et bornée, ou adjacente à une autre suite.</span></div>
+<div><b>Deux suites, l'une $\nearrow$, l'autre $\searrow$</b><span>Adjacentes : vérifier $v_n - u_n\to0$.</span></div>
+<div><b>$u_{n+1} = au_n + b$</b><span>Point fixe $\ell$, puis $u_n - \ell$ géométrique.</span></div>
+<div><b>$u_{n+2} = au_{n+1} + bu_n$</b><span>Équation caractéristique, puis $A, B$ par $u_0, u_1$.</span></div>
+<div><b>$u_{n+1} = f(u_n)$</b><span>Intervalle stable, signe de $f(x) - x$, limite monotone, point fixe.</span></div>
+<div><b>Une suite bornée, rien d'autre</b><span>Bolzano-Weierstrass : extraire une sous-suite convergente.</span></div>
+<div><b>$u_n^{v_n}$</b><span>Écrire $e^{v_n\ln u_n}$ et chercher la limite de l'exposant.</span></div>
 </div>
 
 <h2 id="r-erreurs">Les erreurs qui coûtent des points</h2>
@@ -4440,6 +4695,13 @@ $$x \lt r + \sqrt2 \lt y.$$
 <p><b>8.</b> Montrer seulement que $M$ est un majorant, et oublier que c'est le <b>plus petit</b>.</p>
 <p><b>9.</b> Croire que $a \lt M$ pour tout $a$ donne $\sup A \lt M$ : on obtient seulement $\sup A\leq M$.</p>
 <p><b>10.</b> Parler de $\sup A$ sans avoir vérifié que $A$ est non vide et majorée.</p>
+<p><b>11.</b> Passer à la limite dans $u_n \lt v_n$ et écrire $\ell \lt \ell'$ : c'est $\ell\leq\ell'$.</p>
+<p><b>12.</b> Écrire « $u_n\leq2$ donc $u_n$ converge » : il faut aussi la monotonie.</p>
+<p><b>13.</b> Dire « $f$ croissante donc $(u_n)$ croissante » pour $u_{n+1} = f(u_n)$.</p>
+<p><b>14.</b> Écrire $\ell = f(\ell)$ avant d'avoir montré que $(u_n)$ converge.</p>
+<p><b>15.</b> Croire que $1^\infty = 1$ : $(1 + \frac1n)^n\to e$.</p>
+<p><b>16.</b> Utiliser un $N$ qui dépend de $n$ dans la définition de la limite.</p>
+<p><b>17.</b> Croire qu'une suite bornée converge : $(-1)^n$.</p>
 </div>
 
 <h2 id="r-entrainement">S'entraîner</h2>
@@ -4447,6 +4709,10 @@ $$x \lt r + \sqrt2 \lt y.$$
 <div data-mlab="entx"></div>
 <div data-mlab="supeps"></div>
 <div data-mlab="quizreel"></div>
+<div data-mlab="cobweb"></div>
+<div data-mlab="arigeo"></div>
+<div data-mlab="recur2"></div>
+<div data-mlab="quizsuite"></div>
 
 <h2 id="r-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : bornes de $A = \{\frac{2n + 1}{n + 2},\ n\in\mathbb N\}$</p>
@@ -4488,6 +4754,30 @@ $$\cG{\lfloor x\rfloor + \Big\lfloor x + \frac12\Big\rfloor = \lfloor2x\rfloor\ 
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{\sup A\leq\inf B}.$$
 
+<p class="ml">Exercice 5 : la limite de $\big(1 + \frac1n\big)^n$</p>
+<p><b>Étape 1 : Rappel.</b> $u_n^{v_n} = e^{v_n\ln u_n}$, et $\lim\limits_{x\to0}\frac{\ln(1 + x)}x = 1$ (dérivée de $\ln$ en $1$).</p>
+<p><b>Étape 2 : On passe à l'exponentielle.</b> $\big(1 + \frac1n\big)^n = e^{n\ln(1 + \frac1n)}$. C'est une forme $1^\infty$.</p>
+<p><b>Étape 3 : L'exposant.</b> On pose $x = \frac1n\to0$ :</p>
+$$n\ln\Big(1 + \frac1n\Big) = \frac{\ln(1 + x)}x\longrightarrow1.$$
+<p><b>Étape 4 : Conclusion</b> par continuité de $\exp$ en $1$ : $\cG{\big(1 + \frac1n\big)^n\to e}$.</p>
+
+<p class="ml">Exercice 6 : la constante d'Euler</p>
+<p>$H_n = \sum_{k=1}^n\frac1k$, $u_n = H_n - \ln n$, $v_n = H_n - \ln(n + 1)$. Montrer qu'elles sont adjacentes.</p>
+<p><b>Étape 1 : Rappel.</b> Adjacentes : une croissante, une décroissante, différence $\to0$. Et pour $t\in[n, n + 1]$ : $\frac1{n + 1}\leq\frac1t\leq\frac1n$.</p>
+<p><b>Étape 2 : L'encadrement du logarithme.</b> On intègre sur $[n, n + 1]$ (longueur $1$) :</p>
+$$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
+<p><b>Étape 3 : $(u_n)$ décroît.</b> $u_{n+1} - u_n = \frac1{n + 1} - \big(\ln(n + 1) - \ln n\big)\leq0$ par l'inégalité de gauche.</p>
+<p><b>Étape 4 : $(v_n)$ croît.</b> $v_{n+1} - v_n = \frac1{n + 1} - \big(\ln(n + 2) - \ln(n + 1)\big)\geq\frac1{n + 1} - \frac1{n + 1} = 0$ par l'inégalité de droite au rang $n + 1$.</p>
+<p><b>Étape 5 : La différence.</b> $u_n - v_n = \ln(n + 1) - \ln n = \ln\big(1 + \frac1n\big)\to0$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\text{adjacentes}}$ : elles ont une limite commune $\gamma\approx0{,}577$, et $H_n = \ln n + \gamma + o(1)$.</p>
+
+<p class="ml">Exercice 7 : $u_{n+1} = \frac{u_n^2 + 2}3$, $u_0 = 0$</p>
+<p><b>Étape 1 : Rappel.</b> Intervalle stable, $f$ croissante et sens par $u_1 - u_0$, limite monotone, puis point fixe.</p>
+<p><b>Étape 2 : Les points fixes.</b> $\ell = \frac{\ell^2 + 2}3\iff\ell^2 - 3\ell + 2 = 0\iff\ell\in\{1, 2\}$.</p>
+<p><b>Étape 3 : Intervalle stable.</b> Pour $x\in[0, 1]$ : $x^2\in[0, 1]$, donc $f(x)\in\big[\frac23, 1\big]\subset[0, 1]$. Donc $u_n\in[0, 1]$.</p>
+<p><b>Étape 4 : Monotonie.</b> $f$ est croissante sur $[0, 1]$ et $u_1 = \frac23 > 0 = u_0$ : par récurrence, $(u_n)$ est croissante.</p>
+<p><b>Étape 5 : Conclusion.</b> Croissante, majorée par $1$ : elle converge vers un point fixe de $[0, 1]$, donc $\cG{u_n\to1}$.</p>
+
 <h2 id="r-arbre">L'arbre des nombres réels</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
 <div class="htree"><div class="hr"><span class="hq hroot">Une question sur les réels</span><ul>
@@ -4518,6 +4808,306 @@ $$\cG{\sup A\leq\inf B}.$$
 <li><div class="hr"><em>un irrationnel</em><a class="hl ok" href="#r-dens">$r + \sqrt2$, $r\in\,]x - \sqrt2, y - \sqrt2[$</a></div></li>
 </ul></div></li>
 <li><div class="hr"><em>intervalle</em><a class="hl" href="#r-int">$x, y\in I$, $x\leq z\leq y\Rightarrow z\in I$</a></div></li>
+</ul></div></div>
+
+<h2 id="s-arbre">L'arbre des suites</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une suite $(u_n)$</span><ul>
+<li><div class="hr"><em>définie par récurrence</em><span class="hq">Quelle relation ?</span><ul>
+<li><div class="hr"><em>$u_{n+1} = au_n + b$</em><a class="hl ok" href="#s-part">point fixe, $u_n - \ell$ géométrique</a></div></li>
+<li><div class="hr"><em>$u_{n+2} = au_{n+1} + bu_n$</em><a class="hl ok" href="#s-part">équation caractéristique, signe de $\Delta$</a></div></li>
+<li><div class="hr"><em>$u_{n+1} = f(u_n)$</em><span class="hq">$f$ croissante sur $I$ stable ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl" href="#s-rec">monotone, sens de $u_1 - u_0$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#s-rec">signe de $f(x) - x$, ou $u_{2n}$ et $u_{2n+1}$</a></div></li>
+<li><div class="hr"><em>limite</em><a class="hl end" href="#s-rec">un point fixe $f(\ell) = \ell$</a></div></li>
+</ul></div></li>
+</ul></div></li>
+<li><div class="hr"><em>formule explicite</em><span class="hq">Forme indéterminée ?</span><ul>
+<li><div class="hr"><em>non</em><a class="hl ok" href="#s-op">opérations sur les limites</a></div></li>
+<li><div class="hr"><em>$\frac\infty\infty$</em><a class="hl" href="#s-op">terme prépondérant</a></div></li>
+<li><div class="hr"><em>racines</em><a class="hl" href="#s-op">quantité conjuguée</a></div></li>
+<li><div class="hr"><em>$u_n^{v_n}$</em><a class="hl" href="#s-op">$e^{v_n\ln u_n}$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une somme $\sum_{k=1}^n$</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>la limite</em><a class="hl" href="#s-comp">encadrer le terme, sommer, gendarmes</a></div></li>
+<li><div class="hr"><em>$+\infty$</em><a class="hl" href="#s-comp">minorer par une suite qui tend vers $+\infty$</a></div></li>
+<li><div class="hr"><em>la convergence</em><a class="hl" href="#s-mono">croissante, majorée (télescopage)</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>pas de limite ?</em><a class="hl" href="#s-lim">deux extraites, deux limites</a></div></li>
+<li><div class="hr"><em>deux suites</em><a class="hl ok" href="#s-mono">adjacentes : $\nearrow$, $\searrow$, $v_n - u_n\to0$</a></div></li>
+<li><div class="hr"><em>bornée, sans formule</em><a class="hl" href="#s-bw">Bolzano-Weierstrass</a></div></li>
+<li><div class="hr"><em>complexe</em><a class="hl" href="#s-cpx">$\operatorname{Re}$, $\operatorname{Im}$, ou $|z_n - \ell|\to0$</a></div></li>
+</ul></div></div>
+`,
+"Dénombrement": R`
+<nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : l'ensemble qu'on compte $\cB E$. <span class="kO">orange</span> : chaque étape de choix et son nombre de possibilités. <span class="kR">rouge</span> : ce qu'on retire (complémentaire, doublons). <span class="kV">violet</span> : les entiers $\cV n$, $\cV p$, $\cV k$. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="d-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Nombre</th></tr>
+<tr><td>Cardinal</td><td>$\operatorname{Card}(E)$, $|E|$, $\#E$</td><td>Le nombre d'éléments, $\operatorname{Card}(\varnothing) = 0$.</td></tr>
+<tr><td>Entiers de $1$ à $n$</td><td>$[\![1, \cV n]\!]$</td><td>$\cV n$ éléments ; $[\![a, b]\!]$ en a $b - a + 1$.</td></tr>
+<tr><td>Applications de $E$ dans $F$</td><td>$F^E$</td><td>$\operatorname{Card}(F)^{\operatorname{Card}(E)}$</td></tr>
+<tr><td>Parties de $E$</td><td>$\mathcal P(E)$</td><td>$2^{\operatorname{Card}(E)}$</td></tr>
+<tr><td>Permutations de $E$</td><td>$S(E)$, $S_n$</td><td>$\cV n!$</td></tr>
+<tr><td>Parties à $p$ éléments</td><td>$\binom{\cV n}{\cV p}$</td><td>$\frac{n!}{p!\,(n - p)!}$ si $0\leq p\leq n$, $0$ sinon.</td></tr>
+<tr><td>$p$-listes d'éléments distincts</td><td>$A_n^p$ <span class="hp">hors programme</span></td><td>$\frac{n!}{(n - p)!} = n(n - 1)\cdots(n - p + 1)$</td></tr>
+</table>
+
+<h2 id="d-card">2. Cardinal d'un ensemble fini</h2>
+<div class="sbox">$$\textbf{Équipotence}:\ \text{s'il existe une bijection}\ E\to F,\ \text{alors}\ \operatorname{Card}(E) = \operatorname{Card}(F).$$
+$$A\subset E\Rightarrow\operatorname{Card}(A)\leq\operatorname{Card}(E),\ \text{avec égalité}\iff A = E.$$</div>
+<p>C'est l'idée la plus puissante du chapitre : <b>pour compter un ensemble difficile, on le met en bijection avec un ensemble facile</b> (exemples 10 et exercice 4).</p>
+<p class="ml">Applications entre ensembles de même cardinal</p>
+<div class="sbox">$$\operatorname{Card}(E) = \operatorname{Card}(F)\ \text{finis},\ f:E\to F:\qquad f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
+<p>Il suffit donc de vérifier <b>une seule</b> des deux propriétés.</p>
+
+<h2 id="d-union">3. Réunion, complémentaire, différence</h2>
+<div class="sbox">$$A\cap B = \varnothing:\ \operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B).\qquad\operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B) - \cR{\operatorname{Card}(A\cap B)}.$$
+$$\operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card}(A).\qquad B\subset A:\ \operatorname{Card}(A\setminus B) = \operatorname{Card}(A) - \operatorname{Card}(B).$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Si l'ensemble se coupe en <b>cas qui ne se chevauchent pas</b>, on additionne (principe additif). <b>2.</b> Si les cas se chevauchent, on retire l'intersection, comptée deux fois. <b>3.</b> « <b>Au moins un</b> » : on compte presque toujours le <b>complémentaire</b> (« aucun »).</p>
+
+<p class="ml">Exemple 1 : divisibles par $2$ ou par $3$</p>
+<p>Combien d'entiers de $[\![1, 100]\!]$ sont divisibles par $2$ ou par $3$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B) - \operatorname{Card}(A\cap B)$. Et les multiples de $d$ dans $[\![1, n]\!]$ sont au nombre de $\lfloor\frac nd\rfloor$.</p>
+<p><b>Étape 2 : Les deux ensembles.</b> $A$ : multiples de $2$, $\operatorname{Card}(A) = \lfloor\frac{100}2\rfloor = 50$. $B$ : multiples de $3$, $\operatorname{Card}(B) = \lfloor\frac{100}3\rfloor = 33$.</p>
+<p><b>Étape 3 : L'intersection.</b> Divisible par $2$ et par $3$ $\iff$ divisible par $6$ ($2$ et $3$ premiers entre eux) : $\cR{\operatorname{Card}(A\cap B) = \lfloor\frac{100}6\rfloor = 16}$.</p>
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{\operatorname{Card}(A\cup B) = 50 + 33 - 16 = 67}.$$
+
+<p class="ml">Exemple 2 : la formule du crible pour trois ensembles <span class="hp">hors programme</span></p>
+<p>Combien d'entiers de $[\![1, 100]\!]$ sont divisibles par $2$, $3$ ou $5$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Pour trois ensembles (à redémontrer en appliquant deux fois la formule à deux ensembles) :</p>
+$$|A\cup B\cup C| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap B\cap C|.$$
+<p><b>Étape 2 : Les simples.</b> $|A| = 50$ (par $2$), $|B| = 33$ (par $3$), $|C| = 20$ (par $5$).</p>
+<p><b>Étape 3 : Les doubles.</b> Par $6$ : $16$. Par $10$ : $10$. Par $15$ : $6$.</p>
+<p><b>Étape 4 : La triple.</b> Par $30$ : $3$.</p>
+<p><b>Étape 5 : Conclusion.</b></p>
+$$\cG{50 + 33 + 20 - 16 - 10 - 6 + 3 = 74}.$$
+
+<h2 id="d-prod">4. Produit cartésien, principe multiplicatif</h2>
+<div class="sbox">$$\operatorname{Card}(E\times F) = \operatorname{Card}(E)\times\operatorname{Card}(F),\qquad\operatorname{Card}(E^{\cV p}) = \operatorname{Card}(E)^{\cV p}.$$</div>
+<p><b>Principe multiplicatif</b> : si on construit un objet en $k$ étapes, avec $\cO{n_1}$ choix à la 1<sup>re</sup> étape, puis $\cO{n_2}$ choix à la 2<sup>e</sup> <b>quelle que soit</b> la 1<sup>re</sup>, etc., et si chaque objet est obtenu <b>une seule fois</b>, il y a $\cO{n_1}\times\cO{n_2}\times\dots\times\cO{n_k}$ objets.</p>
+<p class="ml piege">Piège</p>
+<p>Si un même objet peut être construit de plusieurs façons, on le compte plusieurs fois. Exemple : choisir « un premier élève, puis un deuxième » donne $n(n - 1)$ <b>couples</b>, mais chaque <b>paire</b> est comptée $2$ fois : il y a $\frac{n(n - 1)}2$ paires.</p>
+
+<p class="ml">Exemple 3 : des plaques</p>
+<p>Une plaque comporte $2$ lettres puis $3$ chiffres. Combien de plaques ? Combien avec deux lettres différentes ?</p>
+<p><b>Étape 1 : Rappel.</b> Principe multiplicatif : on multiplie les nombres de choix de chaque étape.</p>
+<p><b>Étape 2 : Les étapes.</b> 1<sup>re</sup> lettre : $\cO{26}$. 2<sup>e</sup> lettre : $\cO{26}$. Chaque chiffre : $\cO{10}$.</p>
+<p><b>Étape 3 : Le total.</b> $26^2\times10^3 = 676\,000$.</p>
+<p><b>Étape 4 : Lettres différentes.</b> La 2<sup>e</sup> lettre n'a plus que $\cO{25}$ choix : $26\times25\times10^3 = 650\,000$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{676\,000}$ plaques, dont $\cG{650\,000}$ avec deux lettres différentes.</p>
+
+<h2 id="d-modele">5. Choisir le bon modèle</h2>
+<p>Avant tout calcul, on se pose <b>deux questions</b> : l'<b>ordre</b> compte-t-il ? Les <b>répétitions</b> sont-elles permises ?</p>
+<table class="mtab">
+<tr><th></th><th>Répétitions permises</th><th>Éléments distincts</th></tr>
+<tr><td><b>Ordre compte</b></td><td>$p$-listes : $\cV n^{\cV p}$<br>tirages successifs <b>avec</b> remise</td><td>arrangements : $\frac{n!}{(n - p)!}$<br>tirages successifs <b>sans</b> remise</td></tr>
+<tr><td><b>Ordre ne compte pas</b></td><td>$\binom{n + p - 1}p$ <span class="hp">hors programme</span><br>poignées avec répétition</td><td>combinaisons : $\binom{\cV n}{\cV p}$<br>tirages <b>simultanés</b></td></tr>
+</table>
+<p>Cas particulier : ranger <b>tous</b> les $n$ éléments dans un ordre : $n!$ permutations.</p>
+
+<h2 id="d-list">6. Les $p$-listes (applications)</h2>
+<div class="sbox">$$\operatorname{Card}(F^E) = \operatorname{Card}(F)^{\operatorname{Card}(E)}:\ \text{il y a}\ \cV n^{\cV p}\ \text{applications d'un ensemble à}\ \cV p\ \text{éléments dans un ensemble à}\ \cV n\ \text{éléments}.$$</div>
+<p>Une application $f:[\![1, p]\!]\to F$, c'est la liste $(f(1), \dots, f(p))$ : chaque image a $n$ choix.</p>
+<p class="ml">Exemple 4 : des mots, et « au moins un »</p>
+<p>Combien de mots de $5$ lettres (sans sens) ? Combien contiennent au moins une fois la lettre A ?</p>
+<p><b>Étape 1 : Rappel.</b> $p$-listes d'un ensemble à $n$ éléments : $n^p$. Et $\operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card}(A)$.</p>
+<p><b>Étape 2 : Tous les mots.</b> $5$ positions, $26$ choix chacune : $26^5$.</p>
+<p><b>Étape 3 : Le complémentaire.</b> « Au moins un A » a pour contraire « aucun A » : $5$ lettres parmi $25$, soit $\cR{25^5}$ mots.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{26^5 - 25^5 = 11\,881\,376 - 9\,765\,625 = 2\,115\,751}$.</p>
+<p class="ml piege">Piège</p>
+<p>Compter « on place un A ($5$ places), puis le reste librement ($26^4$) » donne $5\times26^4$ : les mots avec plusieurs A sont comptés <b>plusieurs fois</b>. Le complémentaire évite ce piège.</p>
+
+<h2 id="d-arr">7. Les arrangements (injections)</h2>
+<div class="sbox">$$\text{Nombre d'injections de}\ E\ (\cV p\ \text{éléments})\ \text{dans}\ F\ (\cV n\ \text{éléments}):\quad n(n - 1)\cdots(n - p + 1) = \frac{n!}{(n - p)!}\ \ (p\leq n),\qquad0\ \text{si}\ p > n.$$</div>
+<p class="ml">Exemple 5 : un podium</p>
+<p>$10$ coureurs. Combien de podiums (or, argent, bronze) possibles ?</p>
+<p><b>Étape 1 : Rappel.</b> Ordre important, pas de répétition : $\frac{n!}{(n - p)!} = n(n - 1)\cdots(n - p + 1)$.</p>
+<p><b>Étape 2 : Les étapes.</b> Or : $\cO{10}$ choix. Argent : $\cO9$ (pas le médaillé d'or). Bronze : $\cO8$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{10\times9\times8 = 720}$ podiums $= \frac{10!}{7!}$.</p>
+
+<h2 id="d-perm">8. Les permutations, les anagrammes</h2>
+<div class="sbox">$$\text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!\qquad\operatorname{Card}(S_n) = n!\qquad\text{Anagrammes}:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ (\text{lettre}\ i\ \text{répétée}\ k_i\ \text{fois}).$$</div>
+<p>Pourquoi on divise : si on numérote les lettres répétées, on a $n!$ mots ; en effaçant les numéros, chaque mot a été compté $k_1!\cdots k_r!$ fois (les permutations des lettres identiques entre elles).</p>
+<p class="ml">Exemple 6 : anagrammes de BANANE</p>
+<p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$ avec $k_i$ le nombre de répétitions de chaque lettre.</p>
+<p><b>Étape 2 : On compte les lettres.</b> $n = 6$ : B ($1$), A ($2$), N ($2$), E ($1$).</p>
+<p><b>Étape 3 : On divise par les doublons.</b></p>
+$$\frac{6!}{\cR{1!\,2!\,2!\,1!}} = \frac{720}4 = 180.$$
+<p><b>Étape 4 : Autre méthode (combinaisons).</b> On place les A : $\binom62 = 15$. Puis les N parmi les $4$ places restantes : $\binom42 = 6$. Puis B et E : $2! = 2$. Total $15\times6\times2 = 180$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{180}$ anagrammes.</p>
+
+<h2 id="d-comb">9. Les combinaisons</h2>
+<div class="sbox">$$\binom{\cV n}{\cV p} = \frac{n!}{p!\,(n - p)!} = \frac{n(n - 1)\cdots(n - p + 1)}{p!}\qquad\binom np = \binom n{n - p}\qquad\binom np + \binom n{p + 1} = \binom{n + 1}{p + 1}\qquad p\binom np = n\binom{n - 1}{p - 1}$$</div>
+<p>$\binom np$ compte les <b>parties à $p$ éléments</b> d'un ensemble à $n$ éléments : les tirages simultanés, les comités, les mains de cartes, les chemins…</p>
+<p class="ml">Exemple 7 : une main de cartes</p>
+<p>On tire $5$ cartes dans un jeu de $32$ (dont $4$ as). Combien de mains ? Combien avec exactement $2$ as ?</p>
+<p><b>Étape 1 : Rappel.</b> Une main est une partie (pas d'ordre, pas de répétition) : $\binom np$. Plusieurs choix successifs : on multiplie.</p>
+<p><b>Étape 2 : Toutes les mains.</b></p>
+$$\binom{32}5 = \frac{32\times31\times30\times29\times28}{5\times4\times3\times2\times1} = 201\,376.$$
+<p><b>Étape 3 : Les $2$ as.</b> On choisit $2$ as parmi $4$ : $\cO{\binom42 = 6}$.</p>
+<p><b>Étape 4 : Les $3$ autres cartes</b> parmi les $28$ qui ne sont pas des as :</p>
+$$\cO{\binom{28}3 = \frac{28\times27\times26}6 = 3276}.$$
+<p><b>Étape 5 : Conclusion</b> (principe multiplicatif) : $\cG{6\times3276 = 19\,656}$ mains avec exactement $2$ as.</p>
+
+<p class="ml">Exemple 8 : au moins un as</p>
+<p><b>Étape 1 : Rappel.</b> « Au moins un » : on retire le complémentaire « aucun ».</p>
+<p><b>Étape 2 : Aucun as.</b> Les $5$ cartes parmi les $28$ autres :</p>
+$$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{120} = 98\,280}.$$
+<p><b>Étape 3 : Conclusion.</b> $\cG{201\,376 - 98\,280 = 103\,096}$ mains avec au moins un as.</p>
+
+<p class="ml">Exemple 9 : des chemins dans une grille</p>
+<p>Combien de chemins vont de $(0, 0)$ à $(5, 3)$ avec des pas « droite » ou « haut » ?</p>
+<p><b>Étape 1 : Rappel.</b> $\binom np$ = nombre de façons de choisir $p$ positions parmi $n$.</p>
+<p><b>Étape 2 : On code le chemin.</b> Il faut $5$ pas D et $3$ pas H, soit $8$ pas. Un chemin = un mot de $8$ lettres avec $3$ H.</p>
+<p><b>Étape 3 : La bijection.</b> Le mot est déterminé par les <b>positions</b> des $3$ H parmi les $8$ : c'est une partie à $3$ éléments de $[\![1, 8]\!]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\binom83 = \frac{8\times7\times6}6 = 56}$ chemins.</p>
+
+<h2 id="d-parties">10. Le nombre de parties</h2>
+<div class="sbox">$$\operatorname{Card}\big(\mathcal P(E)\big) = 2^{\operatorname{Card}(E)}\qquad\qquad\sum_{p=0}^n\binom np = 2^n.$$</div>
+<p class="ml">Exemple 10 : $\operatorname{Card}(\mathcal P(E)) = 2^n$ par une bijection</p>
+<p><b>Étape 1 : Rappel.</b> Une bijection conserve le cardinal, et $\operatorname{Card}(F^E) = \operatorname{Card}(F)^{\operatorname{Card}(E)}$.</p>
+<p><b>Étape 2 : La bijection.</b> À une partie $A$ de $E$, on associe sa fonction indicatrice $\mathbb 1_A:E\to\{0, 1\}$ ($1$ sur $A$, $0$ ailleurs). Réciproquement, $f:E\to\{0, 1\}$ donne $A = f^{-1}(\{1\})$.</p>
+<p><b>Étape 3 : On compte les applications.</b> $\operatorname{Card}\big(\{0, 1\}^E\big) = 2^n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Card}(\mathcal P(E)) = 2^n}$. Concrètement : chaque élément est « dedans » ou « dehors », $2$ choix, $n$ fois.</p>
+
+<h2 id="d-double">11. Démontrer une formule en comptant deux fois</h2>
+<p>Pour montrer $a = b$ entre entiers : on trouve un ensemble qu'on compte d'une façon (on trouve $a$), puis d'une autre (on trouve $b$).</p>
+
+<p class="ml">Exemple 11 : $\sum_{k=0}^n\binom nk = 2^n$</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Card}(\mathcal P(E)) = 2^n$, et une réunion disjointe se compte en additionnant.</p>
+<p><b>Étape 2 : On découpe $\mathcal P(E)$ selon la taille.</b> $\mathcal P(E) = \bigsqcup_{k=0}^n\mathcal P_k(E)$, où $\mathcal P_k(E)$ = parties à $k$ éléments. Les morceaux sont disjoints.</p>
+<p><b>Étape 3 : On compte.</b> $\operatorname{Card}(\mathcal P_k(E)) = \binom nk$, donc $\operatorname{Card}(\mathcal P(E)) = \sum_{k=0}^n\binom nk$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{k=0}^n\binom nk = 2^n}$ (on le retrouve aussi avec le binôme, $(1 + 1)^n$).</p>
+
+<p class="ml">Exemple 12 : $k\binom nk = n\binom{n - 1}{k - 1}$ (le comité et son président)</p>
+<p><b>Étape 1 : Rappel.</b> Principe multiplicatif, appliqué dans deux ordres différents.</p>
+<p><b>Étape 2 : L'ensemble.</b> Dans un groupe de $n$ personnes, on compte les comités de $k$ personnes <b>avec un président</b> choisi dans le comité.</p>
+<p><b>Étape 3 : Comité d'abord.</b> Le comité : $\cO{\binom nk}$ choix. Le président parmi ses membres : $\cO k$ choix. Total $k\binom nk$.</p>
+<p><b>Étape 4 : Président d'abord.</b> Le président : $\cO n$ choix. Les $k - 1$ autres membres parmi les $n - 1$ restants : $\cO{\binom{n - 1}{k - 1}}$. Total $n\binom{n - 1}{k - 1}$.</p>
+<p><b>Étape 5 : Conclusion.</b> Même ensemble, donc $\cG{k\binom nk = n\binom{n - 1}{k - 1}}$.</p>
+
+<p class="ml">Exemple 13 : la formule de Vandermonde</p>
+<p>Montrer que $\displaystyle\sum_{k=0}^p\binom ak\binom b{p - k} = \binom{a + b}p$.</p>
+<p><b>Étape 1 : Rappel.</b> Réunion disjointe (on additionne) et principe multiplicatif.</p>
+<p><b>Étape 2 : L'ensemble.</b> Une classe de $a$ filles et $b$ garçons. On compte les groupes de $p$ élèves : $\binom{a + b}p$.</p>
+<p><b>Étape 3 : On découpe selon le nombre $\cV k$ de filles.</b> Les cas $k = 0, 1, \dots, p$ sont disjoints.</p>
+<p><b>Étape 4 : Un cas.</b> $\cV k$ filles parmi $a$ : $\cO{\binom ak}$. Puis $p - k$ garçons parmi $b$ : $\cO{\binom b{p - k}}$. Soit $\binom ak\binom b{p - k}$ groupes.</p>
+<p><b>Étape 5 : Conclusion.</b> On additionne les cas : $\cG{\sum_{k=0}^p\binom ak\binom b{p - k} = \binom{a + b}p}$.</p>
+
+<h2 id="d-tiroirs">12. Le principe des tiroirs</h2>
+<div class="sbox">$$\text{S'il existe une injection}\ E\to F,\ \text{alors}\ \operatorname{Card}(E)\leq\operatorname{Card}(F).\quad\text{Donc si}\ \operatorname{Card}(E) > \operatorname{Card}(F),\ \text{toute}\ f:E\to F\ \text{prend deux fois la même valeur}.$$</div>
+<p class="ml">Exemple 14 : deux personnes nées le même mois</p>
+<p>Parmi $13$ personnes, montrer que deux sont nées le même mois.</p>
+<p><b>Étape 1 : Rappel.</b> Si $\operatorname{Card}(E) > \operatorname{Card}(F)$, aucune application $E\to F$ n'est injective.</p>
+<p><b>Étape 2 : L'application.</b> $f$ associe à chaque personne son mois de naissance : $E$ a $13$ éléments, $F$ = les mois en a $12$.</p>
+<p><b>Étape 3 : Conclusion.</b> $13 > 12$ : $f$ n'est pas injective, donc $\cG{\text{deux personnes ont le même mois}}$.</p>
+
+<h2 id="d-denom">13. Ensembles dénombrables <span class="hp">programme de Spé</span></h2>
+<p>$E$ est <b>dénombrable</b> s'il est en bijection avec $\mathbb N$, et <b>au plus dénombrable</b> s'il est fini ou dénombrable (en bijection avec une partie de $\mathbb N$).</p>
+<div class="sbox">$$\mathbb N,\ \mathbb N^*,\ \mathbb Z,\ \mathbb N^2,\ \mathbb Q\ \text{sont dénombrables}.\qquad\text{Un produit fini d'ensembles dénombrables est dénombrable}.$$</div>
+<p>Pour $\mathbb Z$ : $0, 1, -1, 2, -2, \dots$ ($n\mapsto2n$ pour $n > 0$, $n\mapsto-2n + 1$ pour $n\leq0$). Pour $\mathbb N^2$ : on parcourt les diagonales $x + y = 0, 1, 2, \dots$. $\mathbb R$ n'est <b>pas</b> dénombrable (argument diagonal de Cantor, <span class="hp">hors programme</span>).</p>
+
+<h2 id="d-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Tirages successifs avec remise »</b><span>Ordre, répétitions : $n^p$.</span></div>
+<div><b>« Tirages successifs sans remise »</b><span>Ordre, distincts : $\frac{n!}{(n - p)!}$.</span></div>
+<div><b>« Tirage simultané », « main », « comité »</b><span>Pas d'ordre, distincts : $\binom np$.</span></div>
+<div><b>« Au moins un »</b><span>Complémentaire : total moins « aucun ».</span></div>
+<div><b>« Exactement $k$ »</b><span>Choisir les $k$ éléments voulus, puis le reste parmi les autres, et multiplier.</span></div>
+<div><b>« A ou B »</b><span>$|A| + |B| - |A\cap B|$.</span></div>
+<div><b>Lettres répétées, objets identiques</b><span>$\frac{n!}{k_1!\cdots k_r!}$, ou placer chaque lettre avec des $\binom{}{}$.</span></div>
+<div><b>Chemins, mots binaires</b><span>Choisir les positions d'une lettre : $\binom np$.</span></div>
+<div><b>« Montrer une égalité de coefficients binomiaux »</b><span>Double comptage, ou formule de Pascal, ou binôme.</span></div>
+<div><b>« Montrer que deux … ont le même … »</b><span>Principe des tiroirs.</span></div>
+<div><b>« Combien de parties de $E$ »</b><span>$2^n$ : dedans ou dehors.</span></div>
+<div><b>« Applications strictement croissantes »</b><span>Bijection avec les parties de l'image : $\binom np$.</span></div>
+<div><b>Un ensemble compliqué</b><span>Le mettre en bijection avec un ensemble qu'on sait compter.</span></div>
+</div>
+
+<h2 id="d-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Utiliser $\frac{n!}{(n - p)!}$ quand l'ordre ne compte pas : on compte chaque groupe $p!$ fois.</p>
+<p><b>2.</b> Compter « au moins un » en fixant un élément puis le reste librement : doublons.</p>
+<p><b>3.</b> Oublier de retirer $|A\cap B|$ dans une réunion.</p>
+<p><b>4.</b> Additionner au lieu de multiplier : « et puis » = produit, « ou bien » (cas disjoints) = somme.</p>
+<p><b>5.</b> Oublier de diviser par $k!$ pour les lettres identiques.</p>
+<p><b>6.</b> Écrire $\binom np$ avec $p > n$ non nul : il vaut $0$.</p>
+<p><b>7.</b> Compter des cas qui se chevauchent comme s'ils étaient disjoints.</p>
+<p><b>8.</b> Confondre $n^p$ (applications) et $p^n$ : c'est (nombre d'images possibles)$^{\text{nombre d'éléments de départ}}$.</p>
+<p><b>9.</b> Donner un résultat sans phrase : toujours dire ce qu'on choisit à chaque étape.</p>
+</div>
+
+<h2 id="d-entrainement">S'entraîner</h2>
+<div data-mlab="modele"></div>
+<div data-mlab="denex"></div>
+<div data-mlab="pascal"></div>
+<div data-mlab="quizden"></div>
+
+<h2 id="d-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : les surjections sur $2$ et $3$ éléments</p>
+<p>Combien de surjections de $[\![1, n]\!]$ ($n\geq1$) sur $\{a, b\}$ ? Sur $\{a, b, c\}$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $n^p$ applications, complémentaire, et $|A\cup B\cup C|$ par le crible (exemple 2).</p>
+<p><b>Étape 2 : Sur $\{a, b\}$.</b> Il y a $2^n$ applications. Les non surjectives n'atteignent qu'une valeur : ce sont les $\cR2$ applications constantes. Donc $2^n - 2$ surjections.</p>
+<p><b>Étape 3 : Sur $\{a, b, c\}$, ce qu'on retire.</b> $A_a$ = applications qui évitent $a$ : $|A_a| = 2^n$, de même pour $b$ et $c$. $A_a\cap A_b$ = constantes égales à $c$ : $1$. $A_a\cap A_b\cap A_c = \varnothing$.</p>
+<p><b>Étape 4 : Le crible.</b> $|A_a\cup A_b\cup A_c| = 3\times2^n - 3\times1 + 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{2^n - 2}$ et $\cG{3^n - 3\times2^n + 3}$ surjections. Contrôle $n = 3$ : $27 - 24 + 3 = 6 = 3!$.</p>
+
+<p class="ml">Exercice 2 : MISSISSIPPI</p>
+<p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$.</p>
+<p><b>Étape 2 : Les lettres.</b> $n = 11$ : M ($1$), I ($4$), S ($4$), P ($2$).</p>
+<p><b>Étape 3 : Le calcul.</b></p>
+$$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{24\times24\times2} = \frac{39\,916\,800}{1152} = 34\,650.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{34\,650}$ anagrammes. Contrôle : $\binom{11}4\binom74\binom32 = 330\times35\times3 = 34\,650$.</p>
+
+<p class="ml">Exercice 3 : les diagonales d'un polygone</p>
+<p>Combien de diagonales a un polygone convexe à $n$ sommets ?</p>
+<p><b>Étape 1 : Rappel.</b> Un segment entre deux sommets = une paire de sommets : $\binom n2$.</p>
+<p><b>Étape 2 : Tous les segments.</b> $\binom n2 = \frac{n(n - 1)}2$.</p>
+<p><b>Étape 3 : On retire les côtés.</b> Il y a $\cR n$ côtés.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\frac{n(n - 1)}2 - n = \frac{n(n - 3)}2}$. Contrôle : un carré a $\frac{4\times1}2 = 2$ diagonales.</p>
+
+<p class="ml">Exercice 4 : les applications strictement croissantes</p>
+<p>Combien d'applications strictement croissantes de $[\![1, p]\!]$ dans $[\![1, n]\!]$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Une bijection conserve le cardinal.</p>
+<p><b>Étape 2 : La bijection.</b> À $f$ strictement croissante, on associe son image $\{f(1), \dots, f(p)\}$ : une partie à $p$ éléments (les $f(i)$ sont distincts).</p>
+<p><b>Étape 3 : Bijective.</b> Une partie à $p$ éléments, rangée dans l'ordre croissant $a_1 \lt \dots \lt a_p$, donne une seule $f$ : $f(i) = a_i$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\binom np}$ applications.</p>
+
+<h2 id="d-arbre">L'arbre du dénombrement</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Compter des objets</span><ul>
+<li><div class="hr"><em>des cas séparés</em><span class="hq">Ils se chevauchent ?</span><ul>
+<li><div class="hr"><em>non</em><a class="hl ok" href="#d-union">on additionne</a></div></li>
+<li><div class="hr"><em>oui</em><a class="hl" href="#d-union">$|A| + |B| - |A\cap B|$</a></div></li>
+<li><div class="hr"><em>« au moins un »</em><a class="hl" href="#d-list">total moins « aucun »</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des choix successifs</em><span class="hq">L'ordre compte ?</span><ul>
+<li><div class="hr"><em>oui</em><span class="hq">Répétitions ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#d-list">$n^p$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl ok" href="#d-arr">$\frac{n!}{(n - p)!}$</a></div></li>
+<li><div class="hr"><em>tous rangés</em><a class="hl ok" href="#d-perm">$n!$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>non</em><span class="hq">Répétitions ?</span><ul>
+<li><div class="hr"><em>non</em><a class="hl ok" href="#d-comb">$\binom np$</a></div></li>
+<li><div class="hr"><em>oui</em><a class="hl" href="#d-modele">$\binom{n + p - 1}p$ (hors programme)</a></div></li>
+</ul></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des mots</em><span class="hq">Lettres répétées ?</span><ul>
+<li><div class="hr"><em>non</em><a class="hl" href="#d-perm">$n!$</a></div></li>
+<li><div class="hr"><em>oui</em><a class="hl" href="#d-perm">$\frac{n!}{k_1!\cdots k_r!}$</a></div></li>
+<li><div class="hr"><em>deux lettres</em><a class="hl" href="#d-comb">positions d'une lettre : $\binom np$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>des parties</em><a class="hl" href="#d-parties">$2^n$ en tout, $\binom np$ de taille $p$</a></div></li>
+<li><div class="hr"><em>une égalité</em><a class="hl" href="#d-double">compter deux fois le même ensemble</a></div></li>
+<li><div class="hr"><em>une existence</em><a class="hl" href="#d-tiroirs">principe des tiroirs</a></div></li>
+<li><div class="hr"><em>rien ne marche</em><a class="hl end" href="#d-card">bijection vers un ensemble connu</a></div></li>
 </ul></div></div>
 `
 };

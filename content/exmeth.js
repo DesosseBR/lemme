@@ -219,12 +219,55 @@ LEMME.EXMETH = {
   String.raw`Majorer $a + b$, puis $a_n + b_n\to\sup A + \sup B$.`,
   String.raw`$x\leq z\leq y$ avec $x, y\in K\Rightarrow z\in K$.`,
   String.raw`$n > \frac1{y - x}$, $p = \lfloor nx\rfloor + 1$, rationnel $\frac pn$.`,
-  String.raw`Rationnel entre $x - \sqrt2$ et $y - \sqrt2$, puis ajouter $\sqrt2$.`
+  String.raw`Rationnel entre $x - \sqrt2$ et $y - \sqrt2$, puis ajouter $\sqrt2$.`,
+  String.raw`$u_n > 0$ : comparer $\frac{u_{n+1}}{u_n}$ à $1$.`,
+  String.raw`Signe de $u_{n+1} - u_n$ (simplifier les termes communs), puis encadrer chaque terme.`,
+  String.raw`Calculer $|u_n - \ell|$, résoudre $\leq\varepsilon$, choisir $N$.`,
+  String.raw`Deux suites extraites, deux limites différentes.`,
+  String.raw`Factoriser en haut et en bas par le terme prépondérant.`,
+  String.raw`Multiplier et diviser par la quantité conjuguée.`,
+  String.raw`Factoriser par $3^n$, croissances comparées.`,
+  String.raw`Encadrer le terme général, sommer, gendarmes.`,
+  String.raw`Minorer chaque terme par le plus petit, sommer.`,
+  String.raw`Croissante, et majorée par télescopage.`,
+  String.raw`Une croissante, une décroissante, différence vers $0$.`,
+  String.raw`Point fixe $\ell$, puis $u_n - \ell$ géométrique.`,
+  String.raw`Équation caractéristique, $\Delta > 0$ : $A r_1^n + B r_2^n$.`,
+  String.raw`Racine double : $(A + Bn)r_0^n$.`,
+  String.raw`$\Delta \lt 0$ : $\rho^n(A\cos n\theta + B\sin n\theta)$.`,
+  String.raw`Intervalle stable, $f$ croissante et $u_1 > u_0$, limite monotone, point fixe.`,
+  String.raw`Signe de $f(x) - x$, limite monotone, point fixe.`,
+  String.raw`$|z_n| = |q|^n\to0$.`
 ],
 "Nombres réels et suites numériques (exercices)": [
   String.raw`Écrire $a_n = 2 - \frac3{n + 2}$, variations, puis min et sup.`,
   String.raw`$2\leq x^2 \lt 3$, racine : $\sqrt2\leq|x| \lt \sqrt3$.`,
   String.raw`$x = k + \theta$, sortir les entiers, découper $\theta\lt\frac12$ et $\theta\geq\frac12$.`,
-  String.raw`Passer au sup ($b$ fixé), puis à l'inf.`
+  String.raw`Passer au sup ($b$ fixé), puis à l'inf.`,
+  String.raw`$e^{n\ln(1 + \frac1n)}$, puis $\frac{\ln(1 + x)}x\to1$.`,
+  String.raw`Encadrer $\ln(n + 1) - \ln n$ par une intégrale, puis adjacentes.`,
+  String.raw`Points fixes, intervalle stable $[0, 1]$, croissante majorée.`
+],
+"Dénombrement": [
+  String.raw`$|A\cup B| = |A| + |B| - |A\cap B|$, multiples : $\lfloor\frac nd\rfloor$.`,
+  String.raw`Crible : simples, moins doubles, plus triple.`,
+  String.raw`Principe multiplicatif, étape par étape.`,
+  String.raw`« Au moins un » : total moins « aucun ».`,
+  String.raw`Ordre, sans répétition : $n(n - 1)\cdots(n - p + 1)$.`,
+  String.raw`$\frac{n!}{k_1!\cdots k_r!}$, ou placer chaque lettre.`,
+  String.raw`Main = partie : $\binom ak\binom{n - a}{p - k}$.`,
+  String.raw`Total moins $\binom{28}5$ (aucun as).`,
+  String.raw`Chemin = positions des pas H : $\binom83$.`,
+  String.raw`Bijection $A\mapsto\mathbb 1_A$ avec $\{0, 1\}^E$.`,
+  String.raw`Découper $\mathcal P(E)$ selon la taille des parties.`,
+  String.raw`Compter les comités avec président de deux façons.`,
+  String.raw`Découper selon le nombre de filles.`,
+  String.raw`Plus d'éléments que de valeurs : pas injective.`
+],
+"Dénombrement (exercices)": [
+  String.raw`Retirer les non surjectives : constantes, puis crible.`,
+  String.raw`$\frac{11!}{4!\,4!\,2!}$.`,
+  String.raw`$\binom n2$ segments, moins les $n$ côtés.`,
+  String.raw`Bijection avec les parties à $p$ éléments.`
 ]
 };

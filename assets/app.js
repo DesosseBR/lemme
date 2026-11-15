@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2324,6 +2324,133 @@ const QREEL = [
   ["Entre deux réels distincts, il y a un rationnel et un irrationnel.", true, "Vrai : $\\mathbb Q$ et $\\mathbb R\\setminus\\mathbb Q$ sont denses dans $\\mathbb R$."],
   ["$\\sqrt{x^2} = x$ pour tout réel $x$.", false, "Faux : $\\sqrt{x^2} = |x|$. Pour $x = -2$, $\\sqrt4 = 2\\neq-2$."],
   ["$\\{x\\in\\mathbb Q,\\ x^2\\lt2\\}$ a une borne supérieure dans $\\mathbb Q$.", false, "Faux : dans $\\mathbb R$ c'est $\\sqrt2$, qui n'est pas rationnel."]
+];
+/* Suites : u_{n+1} = f(u_n), escalier ou escargot */
+function mlCobweb(host) {
+  const F = [
+    { t: "\\sqrt{2 + x}", f: x => Math.sqrt(2 + x), r: [0, 3], u: [0, 3, 1], c: "$[0, 2]$ est stable, $f$ croît : la suite est monotone et tend vers le point fixe $2$." },
+    { t: "x - x^2", f: x => x - x * x, r: [0, 1], u: [0, 1, 0.8], c: "$f(x) - x = -x^2\\leq0$ : la suite décroît vers le point fixe $0$." },
+    { t: "\\frac{x^2 + 2}3", f: x => (x * x + 2) / 3, r: [0, 2.6], u: [0, 2.4, 0.5], c: "Points fixes $1$ et $2$. Si $u_0 \\lt 2$, la suite tend vers $1$. Si $u_0 > 2$, elle part vers $+\\infty$ : le point fixe $2$ repousse." },
+    { t: "\\cos x", f: Math.cos, r: [0, 1.6], u: [0, 1.5, 1.2], c: "$f$ décroît : la suite n'est pas monotone, elle tourne autour du point fixe. $(u_{2n})$ et $(u_{2n+1})$ sont monotones de sens contraires." },
+    { t: "1 + \\frac1x", f: x => 1 + 1 / x, r: [0.4, 3], u: [0.5, 3, 2.5], c: "$f$ décroît sur $]0, +\\infty[$ : escargot autour de $\\frac{1 + \\sqrt5}2\\approx1{,}618$." }
+  ];
+  let fi = 0, u0 = F[0].u[2];
+  const draw = () => {
+    const g = F[fi], [a, b] = g.r, us = [u0];
+    for (let k = 0; k < 12; k++) us.push(g.f(us[k]));
+    const extra = (X, Y) => { let d = `M${X(us[0]).toFixed(1)},${Y(a).toFixed(1)}L${X(us[0]).toFixed(1)},${Y(us[1]).toFixed(1)}`; for (let k = 1; k < 12; k++) { if (!isFinite(us[k + 1]) || Math.abs(us[k]) > 50) break; d += `L${X(us[k]).toFixed(1)},${Y(us[k]).toFixed(1)}L${X(us[k]).toFixed(1)},${Y(us[k + 1]).toFixed(1)}`; } return `<path d="${d}" fill="none" stroke="#D4503B" stroke-width="1.6"/><circle cx="${X(us[0]).toFixed(1)}" cy="${Y(a).toFixed(1)}" r="4" fill="#1F8A5B"/>`; };
+    const svg = plotSvg([{ f: x => x, c: "#8a8fa0", w: 1.2, d: "5 4" }, { f: g.f, c: "#2B5BD7", w: 2.5 }], a, b, a, b, extra);
+    const fmt = v => Math.abs(v) > 1e4 ? "\\text{très grand}" : v.toFixed(4).replace(".", "{,}");
+    host.innerHTML = `<p class="mlt">Suite récurrente $u_{n+1} = f(u_n)$</p><div class="rmctl"><div class="mlseg">${F.map((h, i) => `<button type="button" data-f="${i}" aria-pressed="${i === fi}">$${h.t}$</button>`).join("")}</div><label class="rmn">$u_0 = ${u0.toFixed(2)}$ <input type="range" min="${g.u[0]}" max="${g.u[1]}" step="0.02" value="${u0}" data-u aria-label="Premier terme"></label></div>${svg}<p class="mlcalc">$$${us.slice(0, 6).map((v, k) => `u_{${k}} = ${fmt(v)}`).join(",\\quad ")}$$</p><p class="mlnote">En bleu $y = f(x)$, en pointillé $y = x$. On part de $u_0$ (point vert), on monte à la courbe, on revient à la diagonale, et ainsi de suite. ${g.c}</p>`;
+    $$("[data-f]", host).forEach(btn => btn.addEventListener("click", () => { fi = +btn.dataset.f; u0 = F[fi].u[2]; draw(); }));
+    $("[data-u]", host).addEventListener("input", ev => { u0 = +ev.target.value; draw(); $("[data-u]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const apow = a => a.d === 1 && a.n > 0 ? `${a.n}^n` : `\\left(${ftex(a)}\\right)^n`;
+const ctp = (c, b) => { c = typeof c === "number" ? Fr(c) : c; if (!c.n) return ""; if (!b) return ftex(c); return c.n === c.d ? b : c.n === -c.d ? "-" + b : `${ftex(c)}\\times${b}`; };
+const csum = ts => ts.filter(Boolean).reduce((s, t) => !s ? t : t[0] === "-" ? `${s} - ${t.slice(1)}` : `${s} + ${t}`, "") || "0";
+/* Suites : arithmético-géométrique */
+function mlAriGeo(host) {
+  const gen = () => { const L = [Fr(2), Fr(3), Fr(-2), Fr(-3), Fr(1, 2), Fr(-1, 2)]; let b = 0; while (!b) b = rnd(-6, 6); return { a: L[rnd(0, 5)], b, u0: rnd(-4, 6) }; };
+  const build = ({ a, b, u0 }) => {
+    const om = fadd(Fr(1), Fr(-a.n, a.d)), l = fdiv(Fr(b), om), v0 = fadd(Fr(u0), Fr(-l.n, l.d)), s = [];
+    s.push(`$$u_0 = ${u0},\\qquad u_{n+1} = ${fsum([[a, "u_n"], [b, ""]])}$$`);
+    s.push(`<p class="mlstep">1. Rappel : on cherche le point fixe $\\ell = a\\ell + b$, puis $v_n = u_n - \\ell$ est géométrique de raison $a$.</p>`);
+    s.push(`<p class="mlstep">2. Le point fixe :</p>$$\\ell = ${fsum([[a, "\\ell"], [b, ""]])}\\iff${fsum([[om, "\\ell"]])} = ${b}\\iff\\cR{\\ell = ${ftex(l)}}$$`);
+    s.push(`<p class="mlstep">3. On soustrait $\\ell = ${fsum([[a, "\\ell"], [b, ""]])}$ à la relation : les $${b}$ disparaissent.</p>$$u_{n+1} - \\ell = ${fsum([[a, "(u_n - \\ell)"]])},\\qquad v_{n+1} = ${fsum([[a, "v_n"]])}$$`);
+    s.push(`<p class="mlstep">4. $v_0 = u_0 - \\ell = ${u0} - ${fpar(l)} = ${ftex(v0)}$, donc :</p>$$v_n = ${csum([ctp(v0, apow(a))])}$$`);
+    const lim = v0.n === 0 ? `la suite est constante, égale à $${ftex(l)}$` : Math.abs(a.n) < a.d ? `$|a| \\lt 1$, donc $${apow(a)}\\to0$ et $\\cG{u_n\\to${ftex(l)}}$` : a.n > 0 ? `$a > 1$ et $v_0 ${v0.n > 0 ? ">" : "\\lt"} 0$, donc $\\cG{u_n\\to${v0.n > 0 ? "+" : "-"}\\infty}$` : `$a \\lt -1$ : $v_n$ change de signe et $|v_n|\\to+\\infty$, $\\cG{(u_n)\\ \\text{n'a pas de limite}}$`;
+    s.push(`<p class="mlstep">5. Conclusion :</p>$$\\cG{u_n = ${v0.n === 0 ? ftex(l) : csum([ctp(l, ""), ctp(v0, apow(a))])}}$$<p class="mlnote">Limite : ${lim}.</p>`);
+    return s;
+  };
+  stepLab(host, "Suite arithmético-géométrique", gen, build);
+}
+/* Suites : récurrence linéaire d'ordre 2 */
+function mlRecur2(host) {
+  const pw = r => r === 1 ? "" : r > 0 ? `${r}^n` : `(${r})^n`;
+  const gen = () => { const R = [-3, -2, -1, 1, 2, 3]; if (rnd(0, 2)) { const r1 = R[rnd(0, 5)]; let r2 = r1; while (r2 === r1) r2 = R[rnd(0, 5)]; return { r1: Math.max(r1, r2), r2: Math.min(r1, r2), u0: rnd(-3, 4), u1: rnd(-3, 5) }; } const r = R[rnd(0, 5)]; return { r1: r, r2: r, u0: rnd(-3, 4), u1: rnd(-3, 5) }; };
+  const build = ({ r1, r2, u0, u1 }) => {
+    const a = r1 + r2, b = -r1 * r2, D = a * a + 4 * b, s = [];
+    s.push(`$$u_0 = ${u0},\\quad u_1 = ${u1},\\qquad u_{n+2} = ${fsum([[a, "u_{n+1}"], [b, "u_n"]])}$$`);
+    s.push(`<p class="mlstep">1. Rappel : équation caractéristique $r^2 = ar + b$. $\\Delta > 0$ : $u_n = A r_1^n + B r_2^n$. $\\Delta = 0$ : $u_n = (A + Bn) r_0^n$.</p>`);
+    s.push(`<p class="mlstep">2. L'équation caractéristique :</p>$$${fsum([[1, "r^2"], [-a, "r"], [-b, ""]])} = 0,\\qquad\\Delta = ${fpar(a)}^2 + 4\\times${fpar(b)} = ${D}$$<p class="mlnote">${D ? `Deux racines : $\\cV{r_1 = ${r1}}$ et $\\cV{r_2 = ${r2}}$.` : `Racine double : $\\cV{r_0 = \\frac{${a}}2 = ${r1}}$.`}</p>`);
+    let res, chk;
+    if (D) {
+      const B = Fr(u1 - r1 * u0, r2 - r1), A = fadd(Fr(u0), Fr(-B.n, B.d));
+      s.push(`<p class="mlstep">3. Forme générale : $u_n = A\\,${pw(r1) || "1^n"} + B\\,${pw(r2) || "1^n"}$. Avec $n = 0$ et $n = 1$ :</p>$$\\left\\{\\begin{aligned}A + B &= ${u0}\\\\${fsum([[r1, "A"], [r2, "B"]])} &= ${u1}\\end{aligned}\\right.\\iff\\left\\{\\begin{aligned}A &= ${ftex(A)}\\\\B &= ${ftex(B)}\\end{aligned}\\right.$$<p class="mlnote">On remplace $A = ${u0} - B$ dans la 2<sup>e</sup> ligne : $(${r2} - ${fpar(r1)})B = ${u1} - ${fpar(r1)}\\times${fpar(u0)}$.</p>`);
+      res = csum([ctp(A, pw(r1)), ctp(B, pw(r2))]); chk = fadd(fmul(A, Fr(r1 * r1)), fmul(B, Fr(r2 * r2)));
+    } else {
+      const r = r1, B = fadd(Fr(u1, r), Fr(-u0)), A = Fr(u0);
+      s.push(`<p class="mlstep">3. Forme générale : $u_n = (A + Bn)\\,${pw(r) || "1^n"}$. Avec $n = 0$ : $A = ${u0}$. Avec $n = 1$ :</p>$$(A + B)\\times${fpar(r)} = ${u1}\\iff A + B = ${ftex(Fr(u1, r))}\\iff B = ${ftex(B)}$$`);
+      res = `${B.n === 0 ? ftex(A) : `\\left(${fsum([[A, ""], [B, "n"]])}\\right)`}${pw(r) ? "\\times" + pw(r) : ""}`; chk = fmul(fadd(A, fmul(B, Fr(2))), Fr(r * r));
+    }
+    s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{u_n = ${res}}$$<p class="mlnote">Contrôle : la relation donne $u_2 = ${a * u1 + b * u0}$, la formule donne $${ftex(chk)}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Récurrence linéaire d'ordre 2", gen, build);
+}
+const QSUITE = [
+  ["Une suite bornée converge.", false, "Faux : $(-1)^n$ est bornée et n'a pas de limite."],
+  ["Une suite convergente est bornée.", true, "Vrai : à partir d'un rang, $|u_n - \\ell|\\leq1$, et il reste un nombre fini de termes."],
+  ["Si $u_n \\lt 1$ pour tout $n$ et $u_n\\to\\ell$, alors $\\ell \\lt 1$.", false, "Faux : $\\ell\\leq1$ seulement. Exemple : $u_n = 1 - \\frac1n$."],
+  ["Une suite croissante et majorée converge.", true, "Vrai : théorème de la limite monotone, vers $\\sup u_n$."],
+  ["Si $f$ est croissante, la suite $u_{n+1} = f(u_n)$ est croissante.", false, "Faux : elle est monotone, et son sens dépend du signe de $u_1 - u_0$."],
+  ["$\\big(1 + \\frac1n\\big)^n\\to1$.", false, "Faux : forme $1^\\infty$, la limite est $e$."],
+  ["Si $u_{2n}\\to\\ell$ et $u_{2n+1}\\to\\ell$, alors $u_n\\to\\ell$.", true, "Vrai : pairs et impairs recouvrent tous les indices."],
+  ["$\\frac{n^{10}}{2^n}\\to0$.", true, "Vrai : croissances comparées, $n^\\beta\\ll q^n$ pour $q > 1$."],
+  ["Pour $u_{n+2} = 4u_{n+1} - 4u_n$, on a $u_n = A2^n + B2^n$.", false, "Faux : racine double $2$, la forme est $(A + Bn)2^n$."],
+  ["Deux suites adjacentes ont la même limite.", true, "Vrai, et la limite est entre les deux : $u_n\\leq\\ell\\leq v_n$."]
+];
+/* Dénombrement : quel modèle ? */
+function mlModele(host) {
+  let ord = true, rep = true, n = 4, p = 2;
+  const L = "abcdef";
+  const all = () => { const out = []; const go = (pre, start) => { if (pre.length === p) { out.push(pre.slice()); return; } for (let i = (ord ? 0 : start); i < n; i++) { if (!rep && pre.includes(i)) continue; pre.push(i); go(pre, rep ? i : i + 1); pre.pop(); } }; go([], 0); return out; };
+  const draw = () => {
+    const E = all(), shown = E.slice(0, 60).map(t => `<span style="white-space:nowrap">${ord ? `(${t.map(i => L[i]).join(", ")})` : `{${t.map(i => L[i]).join(", ")}}`}</span>`).join("&ensp; ");
+    const f = ord && rep ? [`\\cV n^{\\cV p} = ${n}^{${p}}`, "$p$-listes, tirages successifs avec remise"] : ord ? [`\\frac{n!}{(n - p)!} = ${Array.from({ length: p }, (_, i) => n - i).join("\\times")}`, "arrangements, tirages successifs sans remise"] : !rep ? [`\\binom{${n}}{${p}}`, "combinaisons, tirage simultané"] : [`\\binom{n + p - 1}{p} = \\binom{${n + p - 1}}{${p}}`, "combinaisons avec répétition <span class=\"hp\">hors programme</span>"];
+    host.innerHTML = `<p class="mlt">Ordre, répétitions : quel modèle ?</p><div class="rmctl"><div class="mlseg"><button type="button" data-o="1" aria-pressed="${ord}">ordre compte</button><button type="button" data-o="0" aria-pressed="${!ord}">pas d'ordre</button></div><div class="mlseg"><button type="button" data-r="1" aria-pressed="${rep}">avec répétition</button><button type="button" data-r="0" aria-pressed="${!rep}">sans répétition</button></div></div><div class="rmctl"><label class="rmn">$n = ${n}$ <input type="range" min="1" max="6" value="${n}" data-n aria-label="n"></label><label class="rmn">$p = ${p}$ <input type="range" min="1" max="4" value="${p}" data-p aria-label="p"></label></div><p class="mlcalc">$$${f[0]} = \\cG{${E.length}}$$</p><p class="mlnote">${f[1]}. On choisit $p = ${p}$ éléments dans $\\{${L.slice(0, n).split("").join(", ")}\\}$. ${E.length > 60 ? "Les 60 premiers :" : "Tous les cas :"}</p><p class="mlnote" style="font-family:var(--f-mono,monospace)">${shown || "aucun (on ne peut pas choisir $p > n$ éléments distincts)"}${E.length > 60 ? " …" : ""}</p>`;
+    $$("[data-o]", host).forEach(btn => btn.addEventListener("click", () => { ord = btn.dataset.o === "1"; draw(); }));
+    $$("[data-r]", host).forEach(btn => btn.addEventListener("click", () => { rep = btn.dataset.r === "1"; draw(); }));
+    $("[data-n]", host).addEventListener("input", ev => { n = +ev.target.value; draw(); $("[data-n]", host).focus(); });
+    $("[data-p]", host).addEventListener("input", ev => { p = +ev.target.value; draw(); $("[data-p]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const bnm = (n, k) => { if (k < 0 || k > n) return 0; let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return Math.round(r); };
+const bnTex = (n, k) => k === 0 ? `\\binom{${n}}{0} = 1` : k === 1 ? `\\binom{${n}}{1} = ${n}` : `\\binom{${n}}{${k}} = \\frac{${Array.from({ length: k }, (_, i) => n - i).join("\\times")}}{${k}!} = ${bnm(n, k).toLocaleString("fr-FR")}`;
+/* Dénombrement : mains de cartes */
+function mlDenEx(host) {
+  const gen = () => { const p = rnd(3, 5); return rnd(0, 2) ? { p, k: rnd(0, Math.min(p, 3)), au: false } : { p, au: true }; };
+  const build = ({ p, k, au }) => {
+    const s = [`<p class="mlnote">Un jeu de $32$ cartes contient $8$ cœurs. On tire $${p}$ cartes simultanément. Combien de mains contiennent ${au ? "<b>au moins un</b> cœur" : `<b>exactement</b> $${k}$ cœur${k > 1 ? "s" : ""}`} ?</p>`];
+    if (au) {
+      s.push(`<p class="mlstep">1. Rappel : une main est une partie, $\\binom np$. « Au moins un » : total moins « aucun ».</p>`);
+      s.push(`<p class="mlstep">2. Toutes les mains :</p>$$${bnTex(32, p)}$$`);
+      s.push(`<p class="mlstep">3. Aucun cœur : les $${p}$ cartes parmi les $24$ autres :</p>$$\\cR{${bnTex(24, p)}}$$`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{${bnm(32, p).toLocaleString("fr-FR")} - ${bnm(24, p).toLocaleString("fr-FR")} = ${(bnm(32, p) - bnm(24, p)).toLocaleString("fr-FR")}}$$`);
+    } else {
+      s.push(`<p class="mlstep">1. Rappel : une main est une partie, $\\binom np$. Choix successifs : on multiplie.</p>`);
+      s.push(`<p class="mlstep">2. On choisit $${k}$ cœur${k > 1 ? "s" : ""} parmi les $8$ :</p>$$\\cO{${bnTex(8, k)}}$$`);
+      s.push(`<p class="mlstep">3. On choisit les $${p - k}$ autres cartes parmi les $24$ qui ne sont pas des cœurs :</p>$$\\cO{${bnTex(24, p - k)}}$$`);
+      s.push(`<p class="mlstep">4. Conclusion (principe multiplicatif) :</p>$$\\cG{${bnm(8, k)}\\times${bnm(24, p - k).toLocaleString("fr-FR")} = ${(bnm(8, k) * bnm(24, p - k)).toLocaleString("fr-FR")}}$$<p class="mlnote">Sur $${bnm(32, p).toLocaleString("fr-FR")}$ mains en tout.</p>`);
+    }
+    return s;
+  };
+  stepLab(host, "Compter des mains de cartes", gen, build);
+}
+const QDEN = [
+  ["Il y a $n^p$ applications d'un ensemble à $n$ éléments dans un ensemble à $p$ éléments.", false, "Faux : c'est $p^n$. Chacun des $n$ éléments de départ a $p$ images possibles."],
+  ["Le nombre de parties d'un ensemble à $5$ éléments est $32$.", true, "Vrai : $2^5 = 32$."],
+  ["Un tirage simultané de $3$ boules parmi $10$ se compte avec $10\\times9\\times8$.", false, "Faux : l'ordre ne compte pas, c'est $\\binom{10}3 = \\frac{720}{6} = 120$."],
+  ["$|A\\cup B| = |A| + |B|$ pour tous ensembles finis $A, B$.", false, "Faux : seulement si $A\\cap B = \\varnothing$. Sinon on retire $|A\\cap B|$."],
+  ["Il y a $60$ anagrammes de ALLER.", true, "Vrai : $5$ lettres dont deux L, donc $\\frac{5!}{2!} = \\frac{120}2 = 60$."],
+  ["Entre deux ensembles finis de même cardinal, une injection est une bijection.", true, "Vrai : injective $\\iff$ surjective $\\iff$ bijective."],
+  ["$\\binom{n}{p} = \\binom{n}{n - p}$.", true, "Vrai : choisir les $p$ éléments pris, c'est choisir les $n - p$ laissés."],
+  ["Parmi $367$ personnes, deux ont le même jour d'anniversaire.", true, "Vrai : principe des tiroirs, $367 > 366$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };
