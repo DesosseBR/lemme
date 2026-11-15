@@ -1127,7 +1127,7 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 
 `,
 "Réduction des endomorphismes": R`
-<nav class="msum"><a href="#r-not">Notations</a><a href="#r-elts">Éléments propres</a><a href="#r-chi">Polynôme caractéristique</a><a href="#r-zeros">Faire des zéros</a><a href="#r-sanschi">Sans $\chi_A$</a><a href="#r-esp">Sous-espaces propres</a><a href="#r-crit">Critères</a><a href="#r-diag">Diagonaliser</a><a href="#r-trig">Trigonaliser</a><a href="#r-annul">Polynômes annulateurs</a><a href="#r-enonce">Ce que l'énoncé te donne</a><a href="#r-appli">Applications</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#r-not">Notations</a><a href="#r-elts">Éléments propres</a><a href="#r-chi">Polynôme caractéristique</a><a href="#r-zeros">Faire des zéros</a><a href="#r-sanschi">Sans $\chi_A$</a><a href="#r-esp">Sous-espaces propres</a><a href="#r-crit">Critères</a><a href="#r-diag">Diagonaliser</a><a href="#r-trig">Trigonaliser</a><a href="#r-annul">Polynômes annulateurs</a><a href="#r-sfelts">Éléments propres : outils</a><a href="#r-sfdiag">Diagonalisable ?</a><a href="#r-sftrig">Trigonalisation</a><a href="#r-sfpuiss">$A^n$</a><a href="#r-sfsuites">Suites</a><a href="#r-sfmat">Commutant, équations</a><a href="#r-sfstab">Stables, exponentielle</a><a href="#r-enonce">Ce que l'énoncé te donne</a><a href="#r-appli">Applications</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-arbre">L'arbre</a></nav>
 
 <h2 id="r-not">1. Les notations du programme</h2>
 <p class="mcode"><span class="kB">bleu</span> : valeurs propres &nbsp;·&nbsp; <span class="kR">rouge</span> : vecteurs propres &nbsp;·&nbsp; <span class="kG">vert</span> : sous-espaces propres &nbsp;·&nbsp; <span class="kO">orange</span> : multiplicités</p>
@@ -1384,7 +1384,294 @@ $$A\cdot\frac14(4I_2 - A) = I_2.$$
 $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&0 - 1\\0 - (-1)&4 - 3\end{pmatrix} = \frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix}}.$$
 <p>Contrôle : $\begin{pmatrix}1&1\\-1&3\end{pmatrix}\cdot\frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix} = \frac14\begin{pmatrix}4&0\\0&4\end{pmatrix} = I_2$.</p>
 
-<h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="r-sfelts">11. Trouver les éléments propres : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Dimension infinie, ou endomorphisme défini par une formule</td><td>La <b>définition</b> : résoudre $u(x) = \lambda x$, $x\neq0$, en discutant selon $\lambda$.</td></tr>
+<tr><td>On trouve une relation $P(u) = 0$</td><td>$\operatorname{Sp}(u)\subset\{\text{racines de}\ P\}$, puis on teste chaque racine.</td></tr>
+<tr><td>Petite taille ($n\leq3$, parfois $4$)</td><td>$\chi_A = \det(XI_n - A)$, en faisant des zéros avant de développer.</td></tr>
+<tr><td>Mêmes sommes sur les lignes (ou colonnes)</td><td>$(1, \dots, 1)$ est vecteur propre de $A$ (ou de $\,{}^tA$), puis <b>trace et déterminant</b> pour les autres.</td></tr>
+<tr><td>$A - \lambda I$ de petit rang $r$</td><td>$\lambda$ valeur propre d'ordre $\geq n - r$ ; les autres par la trace (et $\operatorname{tr}A^2$).</td></tr>
+<tr><td>Symétries visibles dans la matrice</td><td>Des <b>vecteurs propres évidents</b> ($e_i\pm e_j$…).</td></tr>
+<tr><td>$A = aI_n + bB$, $A = P(B)$</td><td>Les éléments propres de $B$ suffisent.</td></tr>
+<tr><td>Un sev stable visible</td><td>Réduire l'endomorphisme induit (taille plus petite).</td></tr>
+</table>
+
+<p class="ml">Exemple 3 : $u(M) = \operatorname{tr}(A)M - \operatorname{tr}(M)A$, par la définition puis par un annulateur</p>
+<p>$A\neq0$ fixée dans $\mathcal M_n(\mathbb K)$. Éléments propres de $u$ ; $u$ est-il diagonalisable ?</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $\lambda$ et $M\neq0$ avec $u(M) = \lambda M$ ; ou on cherche $P$ avec $P(u) = 0$.</p>
+<p><b>Étape 2 : Un annulateur.</b> $\operatorname{tr}(u(M)) = \operatorname{tr}A\operatorname{tr}M - \operatorname{tr}M\operatorname{tr}A = 0$, donc $u^2(M) = \operatorname{tr}(A)u(M) - \operatorname{tr}(u(M))A = \operatorname{tr}(A)u(M)$. Ainsi $X(X - \operatorname{tr}A)$ annule $u$.</p>
+<p><b>Étape 3 : Cas $\operatorname{tr}A\neq0$.</b> Annulateur scindé à racines simples $0$ et $\operatorname{tr}A$ : $u$ diagonalisable. $E_{\operatorname{tr}A}$ : $u(M) = \operatorname{tr}(A)M\iff\operatorname{tr}(M)A = 0\iff\operatorname{tr}M = 0$, un hyperplan. $E_0$ : $\operatorname{tr}(A)M = \operatorname{tr}(M)A$, donc $M\in\mathbb KA$, et $u(A) = \operatorname{tr}(A)A - \operatorname{tr}(A)A = 0$ : $E_0 = \mathbb KA$.</p>
+<p><b>Étape 4 : Cas $\operatorname{tr}A = 0$.</b> $X^2$ annule $u$ : seule valeur propre $0$. Si $u$ était diagonalisable, il serait nul ; or $u(I_n) = 0 - nA\neq0$ (si $n\neq0$ dans $\mathbb K$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u\ \text{diagonalisable}\iff\operatorname{tr}A\neq0}$, avec $\operatorname{Sp}(u) = \{0, \operatorname{tr}A\}$, $E_0 = \mathbb KA$, $E_{\operatorname{tr}A} = \ker\operatorname{tr}$ ($1 + (n^2 - 1) = n^2$ ✓).</p>
+
+<p class="ml">Exemple 4 : un opérateur intégral, en dimension infinie</p>
+<p>$E = \mathcal C([0, 1], \mathbb R)$, $\varphi(f) = F$ avec $F(x) = \frac1x\int_0^xf$ ($x > 0$), $F(0) = f(0)$. Éléments propres.</p>
+<p><b>Étape 1 : Rappel.</b> La définition : $\varphi(f) = \lambda f$, $f\neq0$.</p>
+<p><b>Étape 2 : On dérive.</b> $\int_0^xf = \lambda xf(x)$ pour $x\in]0, 1]$. Si $\lambda = 0$, $\int_0^xf = 0$ et en dérivant $f = 0$ : $0$ n'est pas valeur propre. Si $\lambda\neq0$, $f(x) = \frac1{\lambda x}\int_0^xf$ est dérivable sur $]0, 1]$ et en dérivant $f(x) = \lambda f(x) + \lambda xf'(x)$.</p>
+<p><b>Étape 3 : L'équation différentielle.</b> $f'(x) = \frac{1 - \lambda}{\lambda x}f(x)$, donc $f(x) = Cx^{\frac{1 - \lambda}\lambda}$ (primitive de $\frac{1 - \lambda}{\lambda x}$ : $\frac{1 - \lambda}\lambda\ln x$).</p>
+<p><b>Étape 4 : Le prolongement en $0$.</b> $f$ doit être continue en $0$ : il faut $\frac{1 - \lambda}\lambda\geq0$, soit $\lambda\in]0, 1]$. Réciproquement, $\int_0^xt^\alpha\,dt = \frac{x^{\alpha+1}}{\alpha + 1}$ avec $\alpha + 1 = \frac1\lambda$ donne $\varphi(f) = \lambda f$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(\varphi) = ]0, 1],\quad E_\lambda = \operatorname{Vect}\big(x\mapsto x^{\frac{1 - \lambda}\lambda}\big)}$.</p>
+
+<p class="ml">Exemple 5 : $A^2 = A + 2I_3$</p>
+<p>$a\neq0$, $A = \begin{pmatrix}0&a&a^2\\\frac1a&0&a\\\frac1{a^2}&\frac1a&0\end{pmatrix}$. Valeurs propres.</p>
+<p><b>Étape 1 : Rappel.</b> Les valeurs propres sont parmi les racines d'un annulateur.</p>
+<p><b>Étape 2 : On écrit $A = B - I_3$.</b> $B$ a des $1$ sur la diagonale, ses lignes sont proportionnelles (ligne $1 = a^2\times$ ligne $3$, ligne $2 = a\times$ ligne $3$) : $\operatorname{rg}B = 1$, $\operatorname{tr}B = 3$, donc $B^2 = 3B$.</p>
+<p><b>Étape 3 : L'annulateur.</b> $A^2 = B^2 - 2B + I_3 = 3B - 2B + I_3 = B + I_3 = (A + I_3) + I_3 = A + 2I_3$. Donc $X^2 - X - 2 = (X + 1)(X - 2)$ annule $A$.</p>
+<p><b>Étape 4 : Les deux sont valeurs propres.</b> Si une seule l'était, $A$ (diagonalisable : annulateur à racines simples) serait scalaire, ce qui est faux.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{-1, 2\}}$, $E_{-1} = \ker B$ de dimension $2$, $E_2$ de dimension $1$.</p>
+
+<p class="ml">Exemple 6 : la matrice compagnon</p>
+<p>$P = X^n + \sum_{i<n}a_iX^i$, $C$ sa matrice compagnon (des $1$ sous la diagonale, dernière colonne $-a_0, \dots, -a_{n-1}$). Éléments propres, et quand $C$ est-elle diagonalisable ?</p>
+<p><b>Étape 1 : Rappel.</b> $\chi_C = P$ (fiche Déterminants, développement selon la dernière colonne). $C$ et $\,{}^tC$ ont les mêmes valeurs propres.</p>
+<p><b>Étape 2 : $\,{}^tCX = \lambda X$.</b> Les lignes donnent $x_2 = \lambda x_1$, $x_3 = \lambda x_2$, …, $x_n = \lambda x_{n-1}$, et la dernière $-a_0x_1 - \dots - a_{n-1}x_n = \lambda x_n$.</p>
+<p><b>Étape 3 : On résout.</b> $x_i = \lambda^{i-1}x_1$ ; la dernière équation devient $P(\lambda)x_1 = 0$, automatique si $P(\lambda) = 0$. Donc $E_\lambda({}^tC) = \operatorname{Vect}(1, \lambda, \dots, \lambda^{n-1})$ : dimension $1$.</p>
+<p><b>Étape 4 : Conclusion.</b> Chaque sous-espace propre est une droite : $\cG{C\ \text{diagonalisable}\iff P\ \text{scindé à racines simples}}$, et alors $\,{}^tC = QDQ^{-1}$ avec $Q$ de Vandermonde.</p>
+
+<p class="ml">Exemple 7 : lignes de même somme, trace et déterminant</p>
+<p>$A = \begin{pmatrix}6&-6&5\\-4&-1&10\\7&-6&4\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\sum\lambda_i = \operatorname{tr}A$ et $\prod\lambda_i = \det A$ (avec multiplicités).</p>
+<p><b>Étape 2 : Une valeur propre.</b> Sommes des lignes : $6 - 6 + 5 = 5$, $-4 - 1 + 10 = 5$, $7 - 6 + 4 = 5$. Donc $A(1, 1, 1) = 5(1, 1, 1)$.</p>
+<p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 6 - 1 + 4 = 9$ et $\det A = -25$ : $5 + \lambda + \mu = 9$, $5\lambda\mu = -25$, soit $\lambda + \mu = 4$, $\lambda\mu = -5$ : racines de $t^2 - 4t - 5 = (t - 5)(t + 1)$.</p>
+<p><b>Étape 4 : Diagonalisable ?</b> $5$ est double ; $A - 5I = \begin{pmatrix}1&-6&5\\-4&-6&10\\7&-6&-1\end{pmatrix}$ a deux premières lignes non proportionnelles ($\frac{-4}1 = -4$ mais $\frac{-6}{-6} = 1$), donc $\operatorname{rg}\geq2$ ; et $5$ est valeur propre, donc $\operatorname{rg}\leq2$. Ainsi $\dim E_5 = 3 - 2 = 1 \lt 2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{5\ (\text{double}), -1\},\ A\ \text{non diagonalisable}}$.</p>
+
+<p class="ml">Exemple 8 : petit rang, puis la trace</p>
+<p>$A = \begin{pmatrix}6&-6&5\\14&-13&10\\7&-6&4\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(A - \lambda I) = r\Rightarrow\lambda$ est d'ordre $\geq n - r$.</p>
+<p><b>Étape 2 : $A + I_3$.</b> $\begin{pmatrix}7&-6&5\\14&-12&10\\7&-6&5\end{pmatrix}$ : $L_2 = 2L_1$, $L_3 = L_1$, rang $1$. Donc $-1$ est d'ordre $\geq2$.</p>
+<p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = 6 - 13 + 4 = -3 = -1 - 1 + \lambda$, donc $\lambda = -1$ : $-1$ est triple.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{-1\},\ \dim E_{-1} = 2 \lt 3}$ : non diagonalisable (sinon $A = -I_3$).</p>
+
+<p class="ml">Exemple 9 : rang $1$, et $\operatorname{tr}(A^2)$</p>
+<p>$A\in\mathcal M_n(\mathbb R)$ : $1$ sur la première et la dernière ligne, sur la première et la dernière colonne, $0$ ailleurs ($n\geq3$).</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}A = r$ donne $0$ d'ordre $\geq n - r$ ; puis $\lambda + \mu = \operatorname{tr}A$ et $\lambda^2 + \mu^2 = \operatorname{tr}(A^2)$.</p>
+<p><b>Étape 2 : Le rang.</b> Les colonnes $2, \dots, n - 1$ valent toutes $(1, 0, \dots, 0, 1)$, les colonnes $1$ et $n$ valent $(1, \dots, 1)$ : rang $2$. Donc $0$ est d'ordre $\geq n - 2$.</p>
+<p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 1 + 1 = 2$. $\operatorname{tr}(A^2) = \sum_{i,j}a_{ij}a_{ji} = \sum a_{ij}^2$ ($A$ symétrique) = nombre de $1$ = $4n - 4$. Donc $\lambda + \mu = 2$ et $\lambda^2 + \mu^2 = 4n - 4$.</p>
+<p><b>Étape 4 : On résout.</b> $2\lambda\mu = (\lambda + \mu)^2 - (\lambda^2 + \mu^2) = 4 - 4n + 4 = 8 - 4n$, $\lambda\mu = 4 - 2n$. Racines de $t^2 - 2t + 4 - 2n$ : $t = 1\pm\sqrt{1 - 4 + 2n} = 1\pm\sqrt{2n - 3}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{0, 1 + \sqrt{2n - 3}, 1 - \sqrt{2n - 3}\}}$, $0$ d'ordre $n - 2$ : $A$ symétrique réelle est diagonalisable.</p>
+
+<p class="ml">Exemple 10 : des vecteurs propres évidents</p>
+<p>$A_n(a, b)\in\mathcal M_{2n}$ : $a$ sur la diagonale, $b$ sur l'anti-diagonale, $0$ ailleurs ($b\neq0$).</p>
+<p><b>Étape 1 : Rappel.</b> La symétrie $i\leftrightarrow2n + 1 - i$ suggère $e_i\pm e_{2n+1-i}$.</p>
+<p><b>Étape 2 : Les images.</b> $Ae_i = ae_i + be_{2n+1-i}$. Donc $A(e_i + e_{2n+1-i}) = (a + b)(e_i + e_{2n+1-i})$ et $A(e_i - e_{2n+1-i}) = (a - b)(e_i - e_{2n+1-i})$.</p>
+<p><b>Étape 3 : Le compte.</b> Pour $i = 1, \dots, n$ : $n$ vecteurs libres pour $a + b$, $n$ pour $a - b$, et les $2n$ ensemble forment une base.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{diagonalisable},\ \operatorname{Sp} = \{a + b, a - b\},\ \text{chacune d'ordre}\ n}$, et $\chi_A = \big((X - a)^2 - b^2\big)^n$ sans calcul de déterminant.</p>
+
+<p class="ml">Exemple 11 : $A = aI_n + bJ_n$</p>
+<p><b>Étape 1 : Rappel.</b> $AX = \lambda X\iff bJX = (\lambda - a)X$ : les éléments propres de $J$ suffisent.</p>
+<p><b>Étape 2 : $J$.</b> $J^2 = nJ$ annule $J$, $\operatorname{Sp}J\subset\{0, n\}$. $E_0(J)$ : $x_1 + \dots + x_n = 0$, hyperplan. $J(1, \dots, 1) = n(1, \dots, 1)$ : $E_n(J) = \operatorname{Vect}(1, \dots, 1)$.</p>
+<p><b>Étape 3 : On transporte.</b> $\lambda = a + b\times0 = a$ sur l'hyperplan, $\lambda = a + nb$ sur la droite.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{a\ (n - 1\ \text{fois}),\ a + nb\}}$, $A$ diagonalisable et $\det A = a^{n-1}(a + nb)$. Pour la matrice « $a$ sur la diagonale, $b$ ailleurs » $= (a - b)I_n + bJ_n$ : valeurs propres $a - b$ ($n - 1$ fois) et $a - b + nb = a + (n - 1)b$.</p>
+
+<p class="ml">Exemple 12 : la permutation circulaire, puis les matrices circulantes</p>
+<p>$J_n$ : $1$ sur la sur-diagonale et en position $(n, 1)$, $0$ ailleurs.</p>
+<p><b>Étape 1 : Rappel.</b> $J_nX = \lambda X$ à résoudre ; $C(a_0, \dots, a_{n-1}) = \sum a_kJ_n^k$ (matrice circulante).</p>
+<p><b>Étape 2 : On résout.</b> $J_nX = (x_2, x_3, \dots, x_n, x_1) = \lambda(x_1, \dots, x_n)$ : $x_k = \lambda^{k-1}x_1$ et $x_1 = \lambda^nx_1$, avec $x_1\neq0$ : $\lambda^n = 1$.</p>
+<p><b>Étape 3 : Diagonalisable.</b> Les $n$ racines $n$-ièmes $\omega^k$ ($\omega = e^{2i\pi/n}$) sont valeurs propres, de vecteurs $(1, \omega^k, \dots, \omega^{(n-1)k})$ : $n$ valeurs propres distinctes, $J_n = PDP^{-1}$ avec $D = \operatorname{diag}(1, \omega, \dots, \omega^{n-1})$.</p>
+<p><b>Étape 4 : Conclusion.</b> $C = \sum a_kJ_n^k = P\Big(\sum a_kD^k\Big)P^{-1}$ : $\cG{\text{les circulantes sont diagonalisables, de valeurs propres}\ \sum_ka_k\omega^{jk}}$.</p>
+
+<p class="ml">Exemple 13 : le théorème spectral</p>
+<p>$A = \begin{pmatrix}1&2&-2\\2&1&2\\-2&2&1\end{pmatrix}$. Diagonaliser dans une base orthonormée.</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique réelle : diagonalisable en base orthonormée, sous-espaces propres orthogonaux, $P^{-1} = {}^tP$.</p>
+<p><b>Étape 2 : $A - 3I_3$.</b> $\begin{pmatrix}-2&2&-2\\2&-2&2\\-2&2&-2\end{pmatrix}$, rang $1$ : $3$ d'ordre $2$, $E_3$ : $x - y + z = 0$.</p>
+<p><b>Étape 3 : La dernière.</b> $\operatorname{tr}A = 3 = 3 + 3 + \lambda$, $\lambda = -3$. $E_{-3} = E_3^\perp$ : la normale $(1, -1, 1)$.</p>
+<p><b>Étape 4 : Bases orthonormées.</b> $w = \frac1{\sqrt3}(1, -1, 1)$. Dans le plan : $u = \frac1{\sqrt2}(1, 1, 0)$ ($1 - 1 + 0 = 0$ ✓), puis $v = w\wedge u = \frac1{\sqrt6}(-1, 1, 2)$ (contrôle : $-1 - 1 + 2 = 0$ ✓, $u\cdot v = \frac{-1 + 1}{\sqrt{12}} = 0$ ✓).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A = PDP^{-1},\ D = \operatorname{diag}(3, 3, -3),\ P = (u\mid v\mid w),\ P^{-1} = {}^tP}$.</p>
+
+<h2 id="r-sfdiag">12. Étudier la diagonalisabilité : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Éléments propres connus</td><td>$\sum\dim E_\lambda = n$, ou $\dim E_\lambda = m_\lambda$ pour chaque $\lambda$.</td></tr>
+<tr><td>Valeurs propres connues, triangulaire…</td><td>$\dim E_\lambda = n - \operatorname{rg}(A - \lambda I)$ : <b>théorème du rang</b>.</td></tr>
+<tr><td>Une relation polynomiale</td><td>Annulateur <b>scindé à racines simples</b> $\iff$ diagonalisable.</td></tr>
+<tr><td>Une seule valeur propre $\lambda$</td><td>Diagonalisable $\iff A = \lambda I_n$.</td></tr>
+<tr><td>$n$ valeurs propres distinctes</td><td>Diagonalisable directement.</td></tr>
+<tr><td>Symétrique réelle</td><td>Théorème spectral.</td></tr>
+<tr><td>Endomorphisme induit, $u^2$, commutation</td><td>Lemme des noyaux, sous-espaces stables.</td></tr>
+</table>
+
+<p class="ml">Exemple 14 : par le rang</p>
+<p>$A = \begin{pmatrix}1&a&b&c\\0&1&d&e\\0&0&2&f\\0&0&0&2\end{pmatrix}$. Condition de diagonalisabilité.</p>
+<p><b>Étape 1 : Rappel.</b> Valeurs propres sur la diagonale : $1$ et $2$, doubles. Il faut $\dim E_1 = \dim E_2 = 2$, soit $\operatorname{rg}(A - I) = \operatorname{rg}(A - 2I) = 2$.</p>
+<p><b>Étape 2 : $A - I_4$.</b> $\begin{pmatrix}0&a&b&c\\0&0&d&e\\0&0&1&f\\0&0&0&1\end{pmatrix}$ : les colonnes $3$ et $4$ sont libres (le bloc $\begin{pmatrix}1&f\\0&1\end{pmatrix}$), et le rang vaut $2$ ssi la colonne $2$, $(a, 0, 0, 0)$, est nulle : $a = 0$.</p>
+<p><b>Étape 3 : $A - 2I_4$.</b> $\begin{pmatrix}-1&a&b&c\\0&-1&d&e\\0&0&0&f\\0&0&0&0\end{pmatrix}$ : les lignes $1$ et $2$ sont libres, rang $2$ ssi la ligne $3$ est nulle : $f = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{diagonalisable}\iff a = f = 0}$.</p>
+
+<p class="ml">Exemple 15 : une matrice de rang $1$</p>
+<p>Montrer : $\operatorname{rg}A = 1$ ; $A$ diagonalisable $\iff\operatorname{tr}A\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> $A = C\,L$ (colonne fois ligne), puis un annulateur.</p>
+<p><b>Étape 2 : $A^2$.</b> $A^2 = C(LC)L$ et $LC = \sum\ell_ic_i = \operatorname{tr}(CL) = \operatorname{tr}A$, un scalaire : $A^2 = \operatorname{tr}(A)A$.</p>
+<p><b>Étape 3 : $\operatorname{tr}A\neq0$.</b> $X(X - \operatorname{tr}A)$ est scindé à racines simples : diagonalisable.</p>
+<p><b>Étape 4 : $\operatorname{tr}A = 0$.</b> $A^2 = 0$, seule valeur propre $0$ ; diagonalisable forcerait $A = 0$, contraire à $\operatorname{rg}A = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg}A = 1:\ A\ \text{diagonalisable}\iff\operatorname{tr}A\neq0}$.</p>
+
+<p class="ml">Exemple 16 : un sous-groupe fini de $GL_n(\mathbb R)$</p>
+<p>$G$ de cardinal $m$. Montrer $\det M = \pm1$, $|\operatorname{tr}M|\leq n$ et $\operatorname{tr}(M^{-1}) = \operatorname{tr}M$.</p>
+<p><b>Étape 1 : Rappel.</b> Lagrange : $M^m = I_n$ ; $X^m - 1$ est scindé à racines simples dans $\mathbb C$.</p>
+<p><b>Étape 2 : Diagonalisable.</b> $M$ est diagonalisable dans $\mathcal M_n(\mathbb C)$, de valeurs propres $\lambda_i$ racines $m$-ièmes de l'unité, $|\lambda_i| = 1$.</p>
+<p><b>Étape 3 : Déterminant et trace.</b> $\det M = \prod\lambda_i$, réel de module $1$ : $\pm1$. $|\operatorname{tr}M| = |\sum\lambda_i|\leq\sum|\lambda_i| = n$.</p>
+<p><b>Étape 4 : L'inverse.</b> $M^{-1}$ a pour valeurs propres $\frac1{\lambda_i} = \overline{\lambda_i}$ ($|\lambda_i| = 1$) : $\operatorname{tr}M^{-1} = \overline{\operatorname{tr}M} = \operatorname{tr}M$ (réel).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\det M = \pm1,\ |\operatorname{tr}M|\leq n,\ \operatorname{tr}M^{-1} = \operatorname{tr}M}$.</p>
+
+<p class="ml">Exemple 17 : deux endomorphismes qui commutent</p>
+<p>$u, v$ diagonalisables, $u\circ v = v\circ u$. Montrer qu'ils ont une base commune de vecteurs propres.</p>
+<p><b>Étape 1 : Rappel.</b> Si $u, v$ commutent, les $E_\lambda(v)$ sont stables par $u$ ; la restriction d'un diagonalisable à un sev stable est diagonalisable.</p>
+<p><b>Étape 2 : Stabilité.</b> $x\in E_\lambda(v)$ : $v(u(x)) = u(v(x)) = \lambda u(x)$, donc $u(x)\in E_\lambda(v)$.</p>
+<p><b>Étape 3 : Diagonaliser chaque morceau.</b> $u_{|E_\lambda(v)}$ est diagonalisable : base $\mathcal B_\lambda$ de $E_\lambda(v)$ faite de vecteurs propres de $u$ (et de $v$, car dans $E_\lambda(v)$).</p>
+<p><b>Étape 4 : Conclusion.</b> $E = \bigoplus E_\lambda(v)$ : $\cG{\bigcup_\lambda\mathcal B_\lambda\ \text{est une base commune}}$.</p>
+
+<p class="ml">Exemple 18 : $u$ diagonalisable $\iff u^2$ diagonalisable et $\ker u = \ker u^2$ (sur $\mathbb C$)</p>
+<p><b>Étape 1 : Rappel.</b> Lemme des noyaux : $\ker(u^2 - \mu^2\operatorname{id}) = \ker(u - \mu\operatorname{id})\oplus\ker(u + \mu\operatorname{id})$ si $\mu\neq0$.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> Dans une base où $u = \operatorname{diag}(\lambda_i)$, $u^2 = \operatorname{diag}(\lambda_i^2)$ est diagonale ; $\ker u\subset\ker u^2$ et ils ont la même dimension (nombre de $\lambda_i$ nuls) : égaux.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> $E = \ker u^2\oplus\bigoplus_i\ker(u^2 - \mu_i\operatorname{id})$ ($\mu_i\neq0$ valeurs propres de $u^2$). On écrit $\mu_i = \lambda_i^2$ et on coupe chaque morceau par le lemme des noyaux ($X - \lambda_i$ et $X + \lambda_i$ premiers entre eux).</p>
+<p><b>Étape 4 : Conclusion.</b> $E = \ker u\oplus\bigoplus_i\big(\ker(u - \lambda_i\operatorname{id})\oplus\ker(u + \lambda_i\operatorname{id})\big)$ : $\cG{u\ \text{diagonalisable}}$.</p>
+
+<h2 id="r-sftrig">13. Utiliser la trigonalisation, trigonaliser</h2>
+<div class="sbox">$$u\ \text{trigonalisable}\iff\chi_u\ \text{scindé}\iff\text{il existe un annulateur scindé}.\qquad\text{Sur}\ \mathbb C:\ \text{toujours}.\qquad\operatorname{tr}(A^k) = \sum\lambda_i^k.$$</div>
+
+<p class="ml">Exemple 19 : nilpotent $\iff\operatorname{Sp} = \{0\}$</p>
+<p><b>Étape 1 : Rappel.</b> Sur $\mathbb C$, $u$ est trigonalisable.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> $u^p = 0$ : $X^p$ annule $u$, donc $\operatorname{Sp}u\subset\{0\}$ ; et $u$ n'est pas injectif ($u^p$ ne l'est pas), donc $0$ est valeur propre.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> Une base où $u$ est triangulaire supérieure stricte (diagonale $= 0$) : $u(e_k)\in\operatorname{Vect}(e_1, \dots, e_{k-1})$. Donc $u^k(e_k) = 0$, et $u^n = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{nilpotent}\iff\operatorname{Sp}u = \{0\}}$, et l'indice de nilpotence est $\leq n$.</p>
+
+<p class="ml">Exemple 20 : $\operatorname{tr}(u^k) = 0$ pour $1\leq k\leq n$ entraîne $u$ nilpotent</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{tr}(u^k) = \sum m_i\lambda_i^k$ ; un Vandermonde de $\lambda_i$ distincts est inversible.</p>
+<p><b>Étape 2 : L'absurde.</b> Soient $\lambda_1, \dots, \lambda_p$ les valeurs propres non nulles distinctes, de multiplicités $m_i\geq1$ : $\sum_{i=1}^pm_i\lambda_i^k = 0$ pour $k = 1, \dots, p$.</p>
+<p><b>Étape 3 : Le système.</b> Matrice $(\lambda_i^k)_{k,i}$, de déterminant $\lambda_1\cdots\lambda_p\,V(\lambda_1, \dots, \lambda_p)\neq0$ (on sort un $\lambda_i$ de chaque colonne). Seule solution : $m_i = 0$, absurde.</p>
+<p><b>Étape 4 : Conclusion.</b> Pas de valeur propre non nulle : $\cG{u\ \text{nilpotent}}$ (exemple 19).</p>
+
+<p class="ml">Exemple 21 : trigonaliser une matrice $3\times3$</p>
+<p>$A = \begin{pmatrix}2&2&-3\\5&1&-5\\-3&4&0\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> On prend les vecteurs propres, puis on complète en cherchant $u(e_2) = e_2 + ae_1$, $u(e_3) = e_3 + be_1 + ce_2$.</p>
+<p><b>Étape 2 : $\chi_A$.</b> $\det(A - xI)$ vaut $1, 0, -1$ en $x = 0, 1, 2$ et $27$ en $-2$ : c'est $(1 - x)^3$. Seule valeur propre $1$, et $A\neq I_3$ : pas diagonalisable.</p>
+<p><b>Étape 3 : $e_1$.</b> Les lignes ont pour somme $2 + 2 - 3 = 1$, $5 + 1 - 5 = 1$, $-3 + 4 + 0 = 1$ : $e_1 = (1, 1, 1)$, et $\operatorname{rg}(A - I) = 2$ donne $E_1 = \mathbb Re_1$.</p>
+<p><b>Étape 4 : $e_2$.</b> $(A - I)X = ae_1$ avec $a = 5$ : $x + 2y - 3z = 5$, $5x - 5z = 5$, $-3x + 4y - z = 5$. Avec $x = 0$ : $z = -1$, $y = 1$. $e_2 = (0, 1, -1)$ ; contrôle $Ae_2 = (2 + 3, 1 + 5, 4) = (5, 6, 4) = 5e_1 + e_2$ ✓.</p>
+<p><b>Étape 5 : $e_3$.</b> $(A - I)X = be_1 + ce_2$ avec $b = 0$, $c = 10$ : $X = (2, -1, 0)$ ; contrôle $Ae_3 = (4 - 2, 10 - 1, -6 - 4) = (2, 9, -10) = 10e_2 + e_3$ ✓.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{A = PTP^{-1},\ T = \begin{pmatrix}1&5&0\\0&1&10\\0&0&1\end{pmatrix},\ P = \begin{pmatrix}1&0&2\\1&1&-1\\1&-1&0\end{pmatrix}}$ ($\det P = 1(0 - 1) - 0 + 2(-1 - 1) = -5\neq0$).</p>
+
+<h2 id="r-sfpuiss">14. Calculer $A^n$ : les quatre méthodes</h2>
+<table class="mtab">
+<tr><th>Méthode</th><th>Quand</th></tr>
+<tr><td>Division euclidienne de $X^n$ par un annulateur $P$ : $A^n = R_n(A)$</td><td>Toujours (Cayley-Hamilton), la plus rapide en général ; racines de $P$ simples ou pas (dériver si double).</td></tr>
+<tr><td>Diagonaliser : $A^n = PD^nP^{-1}$</td><td>Si on veut aussi $P$, ou $n\in\mathbb Z$.</td></tr>
+<tr><td>Décomposition spectrale : $A^n = \sum\lambda_i^nP_i$</td><td>Diagonalisable, sans calculer $P^{-1}$.</td></tr>
+<tr><td>Trigonaliser en $\lambda I + N$, binôme</td><td>Non diagonalisable.</td></tr>
+</table>
+
+<p class="ml">Exemple 22 : par la division euclidienne</p>
+<p>$A = \begin{pmatrix}1&3&0\\3&-2&-1\\0&-1&1\end{pmatrix}$, $\chi_A = (X - 1)(X - 3)(X + 4)$.</p>
+<p><b>Étape 1 : Rappel.</b> $X^n = Q\chi_A + a_nX^2 + b_nX + c_n$ ; en évaluant aux racines, puis $\chi_A(A) = 0$.</p>
+<p><b>Étape 2 : Le système.</b> En $1$ : $a_n + b_n + c_n = 1$. En $3$ : $9a_n + 3b_n + c_n = 3^n$. En $-4$ : $16a_n - 4b_n + c_n = (-4)^n$.</p>
+<p><b>Étape 3 : On résout.</b> Différences : $8a_n + 2b_n = 3^n - 1$ et $15a_n - 5b_n = (-4)^n - 1$. On élimine $b_n$ ($\times5$ et $\times2$) : $70a_n = 2(-4)^n + 5\times3^n - 7$. Puis $b_n = \frac{3^n - 1 - 8a_n}2 = \frac{15\times3^n - 8(-4)^n - 7}{70}$ et $c_n = 1 - a_n - b_n = \frac{6(-4)^n - 20\times3^n + 84}{70}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A^n = a_nA^2 + b_nA + c_nI_3}$ avec $A^2 = \begin{pmatrix}10&-3&-3\\-3&14&1\\-3&1&2\end{pmatrix}$. Contrôle $n = 1$ : $a_1 = \frac{-8 + 15 - 7}{70} = 0$, $b_1 = \frac{45 + 32 - 7}{70} = 1$, $c_1 = \frac{-24 - 60 + 84}{70} = 0$ ✓.</p>
+
+<p class="ml">Exemple 23 : par la décomposition spectrale</p>
+<p>$A = \begin{pmatrix}5&0&-1\\1&4&-1\\-1&0&5\end{pmatrix}$, $\chi_A = (X - 4)^2(X - 6)$. Calculer $A^p$, $p\in\mathbb Z$.</p>
+<p><b>Étape 1 : Rappel.</b> Diagonalisable : $A^p = 4^pP_4 + 6^pP_6$ avec $P_4 + P_6 = I_3$.</p>
+<p><b>Étape 2 : Diagonalisable.</b> $A - 4I_3 = \begin{pmatrix}1&0&-1\\1&0&-1\\-1&0&1\end{pmatrix}$ : rang $1$, donc $\dim E_4 = 2 = m_4$, et $\dim E_6 = 1$.</p>
+<p><b>Étape 3 : Les projecteurs.</b> $p = 0$ : $P_4 + P_6 = I_3$. $p = 1$ : $4P_4 + 6P_6 = A$. Donc $2P_6 = A - 4I_3$ et $2P_4 = 6I_3 - A$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A^p = \frac{4^p}2(6I_3 - A) + \frac{6^p}2(A - 4I_3) = (3\times4^p - 2\times6^p)I_3 + \frac{6^p - 4^p}2A}$, valable pour $p\in\mathbb Z$ ($A$ inversible). Contrôle $p = 1$ : $(12 - 12)I + \frac22A = A$ ✓.</p>
+
+<p class="ml">Exemple 24 : non diagonalisable, par trigonalisation et binôme</p>
+<p>$A = \begin{pmatrix}3&0&1\\2&1&1\\-1&1&1\end{pmatrix}$ ; montrer que $A$ est semblable à $B = \begin{pmatrix}3&0&0\\0&1&1\\0&0&1\end{pmatrix}$ et calculer $A^n$.</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $e'_1, e'_2, e'_3$ avec $u(e'_1) = 3e'_1$, $u(e'_2) = e'_2$, $u(e'_3) = e'_2 + e'_3$.</p>
+<p><b>Étape 2 : $e'_1$.</b> $(A - 3I)X = 0$ : $z = 0$, $2x - 2y + z = 0$ : $e'_1 = (1, 1, 0)$ ; contrôle $Ae'_1 = (3, 3, 0)$ ✓.</p>
+<p><b>Étape 3 : $e'_2$.</b> $(A - I)X = 0$ : $2x + z = 0$, $-x + y = 0$ : $e'_2 = (1, 1, -2)$ ; contrôle $Ae'_2 = (3 - 2, 2 + 1 - 2, -1 + 1 - 2) = (1, 1, -2)$ ✓.</p>
+<p><b>Étape 4 : $e'_3$.</b> $(A - I)X = e'_2$ : $2x + z = 1$, $-x + y = -2$. Avec $x = 0$ : $z = 1$, $y = -2$ : $e'_3 = (0, -2, 1)$ ; contrôle $Ae'_3 = (1, -1, -1) = e'_2 + e'_3$ ✓.</p>
+<p><b>Étape 5 : $B^n$.</b> $B = \operatorname{diag}(3, C)$ avec $C = I_2 + N$, $N^2 = 0$ : $C^n = I_2 + nN = \begin{pmatrix}1&n\\0&1\end{pmatrix}$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{A^n = P\begin{pmatrix}3^n&0&0\\0&1&n\\0&0&1\end{pmatrix}P^{-1},\ P = \begin{pmatrix}1&1&0\\1&1&-2\\0&-2&1\end{pmatrix}}$ ($\det P = 1(1 - 4) - 1(1 - 0) = -4\neq0$).</p>
+
+<h2 id="r-sfsuites">15. Suites récurrentes et réduction</h2>
+<p class="ml">La méthode</p>
+<p>On pose $X_n = (u_n, v_n, w_n)$ : le système devient $X_{n+1} = AX_n$, donc $X_n = A^nX_0$. Une suite $u_{n+p} = a_{p-1}u_{n+p-1} + \dots + a_0u_n$ s'écrit pareil avec la matrice compagnon.</p>
+
+<p class="ml">Exemple 25 : un système de trois suites</p>
+<p>$u_{n+1} = -u_n + v_n + w_n$, $v_{n+1} = u_n - v_n + w_n$, $w_{n+1} = u_n + v_n - w_n$, $(u_0, v_0, w_0) = (1, 0, 0)$.</p>
+<p><b>Étape 1 : Rappel.</b> $X_n = A^nX_0$ avec $A = J - 2I_3$ ($J$ remplie de $1$).</p>
+<p><b>Étape 2 : Un annulateur.</b> $J^2 = 3J$ : $A^2 = J^2 - 4J + 4I_3 = -J + 4I_3 = -(A + 2I_3) + 4I_3 = -A + 2I_3$, donc $A^2 + A - 2I_3 = 0$, soit $(X - 1)(X + 2)$.</p>
+<p><b>Étape 3 : La division.</b> $X^n = Q(X - 1)(X + 2) + a_nX + b_n$ : en $1$, $a_n + b_n = 1$ ; en $-2$, $-2a_n + b_n = (-2)^n$. Donc $3a_n = 1 - (-2)^n$ : $a_n = \frac{1 - (-2)^n}3$, $b_n = \frac{2 + (-2)^n}3$.</p>
+<p><b>Étape 4 : On applique à $X_0 = e_1$.</b> $A^ne_1 = a_nAe_1 + b_ne_1 = a_n(-1, 1, 1) + b_n(1, 0, 0)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = b_n - a_n = \frac{1 + 2(-2)^n}3,\quad v_n = w_n = \frac{1 - (-2)^n}3}$. Contrôle $n = 1$ : $u_1 = \frac{1 - 4}3 = -1$, $v_1 = \frac{1 + 2}3 = 1$ ✓.</p>
+
+<p class="ml">Exemple 26 : une suite récurrente d'ordre $4$</p>
+<p>$u_0 = 1$, $u_1 = 0$, $u_2 = 11$, $u_3 = 20$ et $u_{n+4} = 2u_{n+3} + 3u_{n+2} - 4u_{n+1} - 4u_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $X_{n+1} = AX_n$ avec la matrice compagnon ; $u_n$ est une combinaison de $\lambda^n$, $n\lambda^n$ selon les racines de $\chi_A$.</p>
+<p><b>Étape 2 : Le polynôme.</b> $\chi_A = X^4 - 2X^3 - 3X^2 + 4X + 4$. En $-1$ : $1 + 2 - 3 - 4 + 4 = 0$ ; en $2$ : $16 - 16 - 12 + 8 + 4 = 0$. On vérifie $(X + 1)^2(X - 2)^2 = (X^2 + 2X + 1)(X^2 - 4X + 4) = X^4 - 2X^3 - 3X^2 + 4X + 4$ ✓.</p>
+<p><b>Étape 3 : La forme.</b> Racines doubles : $u_n = (\alpha + \beta n)(-1)^n + (\gamma + \delta n)2^n$.</p>
+<p><b>Étape 4 : Les constantes.</b> $n = 0$ : $\alpha + \gamma = 1$. $n = 1$ : $-\alpha - \beta + 2\gamma + 2\delta = 0$. $n = 2$ : $\alpha + 2\beta + 4\gamma + 8\delta = 11$. $n = 3$ : $-\alpha - 3\beta + 8\gamma + 24\delta = 20$. Solution $\alpha = \beta = \delta = 1$, $\gamma = 0$ : contrôle $n = 1$ : $-1 - 1 + 0 + 2 = 0$ ✓ ; $n = 2$ : $1 + 2 + 0 + 8 = 11$ ✓ ; $n = 3$ : $-1 - 3 + 0 + 24 = 20$ ✓.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n = (n + 1)(-1)^n + n\,2^n}$.</p>
+
+<h2 id="r-sfmat">16. Commutant, équations matricielles, inversibilité, trace</h2>
+
+<p class="ml">Exemple 27 : la dimension du commutant d'une diagonalisable</p>
+<p>$A$ diagonalisable, valeurs propres $\lambda_1, \dots, \lambda_p$ de multiplicités $m_1, \dots, m_p$. Dimension de $\mathcal C(A) = \{M,\ AM = MA\}$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $v$ commute avec $u\iff v$ laisse stable chaque $E_{\lambda_i}(u)$ (quand $u$ est diagonalisable).</p>
+<p><b>Étape 2 : Dans une base propre.</b> $u = \operatorname{diag}(\lambda_1I_{m_1}, \dots, \lambda_pI_{m_p})$, et $v$ commute avec $u$ ssi sa matrice est diagonale par blocs $\operatorname{diag}(V_1, \dots, V_p)$, $V_i\in\mathcal M_{m_i}$ quelconque (exemple 28 de la fiche Matrices).</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\dim\mathcal C(A) = \sum_{i=1}^pm_i^2}$ ; entre $n$ (valeurs propres distinctes) et $n^2$ ($A$ scalaire).</p>
+
+<p class="ml">Exemple 28 : $M^3 = A$</p>
+<p>$A = \begin{pmatrix}-4&4&-4\\-4&4&4\\-8&8&0\end{pmatrix}$. Trouver les $M\in\mathcal M_3(\mathbb R)$ avec $M^3 = A$.</p>
+<p><b>Étape 1 : Rappel.</b> On diagonalise $A = PDP^{-1}$, $M' = P^{-1}MP$ vérifie $M'^3 = D$ ; $M'$ commute avec $D$, à coefficients diagonaux distincts, donc $M'$ est diagonale.</p>
+<p><b>Étape 2 : Diagonaliser.</b> $\chi_A = X^3 - 64X = X(X - 8)(X + 8)$ ; $P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix}$, $D = \operatorname{diag}(0, 8, -8)$. Contrôle : $A(1, 1, 0) = (0, 0, 0)$ ✓, $A(0, 1, 1) = (0, 8, 8)$ ✓, $A(1, 0, 1) = (-8, -4 + 4, -8)$… $= (-8, 0, -8)$ ✓.</p>
+<p><b>Étape 3 : $M'$.</b> $M' = \operatorname{diag}(a, b, c)$ avec $a^3 = 0$, $b^3 = 8$, $c^3 = -8$, dans $\mathbb R$ : $a = 0$, $b = 2$, $c = -2$.</p>
+<p><b>Étape 4 : Conclusion.</b> Une seule solution réelle, $\cG{M = P\operatorname{diag}(0, 2, -2)P^{-1} = \frac14A}$ (contrôle : $A^3 = 64A$ par Cayley-Hamilton, donc $\big(\frac A4\big)^3 = A$). Dans $\mathcal M_3(\mathbb C)$ : $b\in\{2, 2j, 2j^2\}$, $c\in\{-2, -2j, -2j^2\}$, soit $9$ solutions.</p>
+
+<p class="ml">Exemple 29 : $A^2 + A + I_n = 0$ dans $\mathcal M_n(\mathbb R)$</p>
+<p><b>Étape 1 : Rappel.</b> Annulateur $X^2 + X + 1 = (X - j)(X - j^2)$, scindé à racines simples sur $\mathbb C$.</p>
+<p><b>Étape 2 : $n$ est pair.</b> Les valeurs propres complexes sont dans $\{j, j^2\}$, non réelles. $\chi_A$ est réel de degré $n$ : si $n$ était impair, il aurait une racine réelle. Donc $n = 2p$, et $j$, $j^2$ ont la même multiplicité $p$ (racines conjuguées).</p>
+<p><b>Étape 3 : La forme réduite.</b> Avec $J = \begin{pmatrix}0&-1\\1&-1\end{pmatrix}$ : $\chi_J = X^2 + X + 1$, valeurs propres $j, j^2$. $A$ et $\operatorname{diag}(J, \dots, J)$ sont diagonalisables sur $\mathbb C$ avec les mêmes valeurs propres et multiplicités : semblables dans $\mathcal M_n(\mathbb C)$, donc dans $\mathcal M_n(\mathbb R)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{n\ \text{pair et}\ A\ \text{semblable à}\ \operatorname{diag}(J, \dots, J)}$ ; réciproquement ces matrices conviennent ($J^2 + J + I_2 = 0$).</p>
+
+<p class="ml">Exemple 30 : $P(A)$ inversible $\iff P\wedge\pi_A = 1$</p>
+<p><b>Étape 1 : Rappel.</b> Bézout, et $\pi_A$ (polynôme minimal) divise tout annulateur.</p>
+<p><b>Étape 2 : $\Leftarrow$.</b> $UP + V\pi_A = 1$ donne $U(A)P(A) + V(A)\pi_A(A) = I_n$, et $\pi_A(A) = 0$ : $U(A)P(A) = I_n$.</p>
+<p><b>Étape 3 : $\Rightarrow$ (contraposée).</b> $D = P\wedge\pi_A$ non constant : $\pi_A = DQ$ avec $\deg Q \lt \deg\pi_A$, donc $Q(A)\neq0$. Et $P = DR$, donc $P(A)Q(A) = R(A)D(A)Q(A) = R(A)\pi_A(A) = 0$ : $P(A)$ n'est pas inversible.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(A)\in GL_n\iff P\wedge\pi_A = 1}$, autrement dit $P$ ne s'annule sur aucune valeur propre de $A$ (dans $\mathbb C$).</p>
+
+<p class="ml">Exemple 31 : trace et déterminant de $M\mapsto a\,{}^tM + bM$</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{tr} = \sum\lambda_i$, $\det = \prod\lambda_i$ avec multiplicités.</p>
+<p><b>Étape 2 : Les sous-espaces.</b> $M\in S_n$ : $u(M) = aM + bM = (a + b)M$. $M\in A_n$ : $u(M) = -aM + bM = (b - a)M$. Et $\mathcal M_n = S_n\oplus A_n$.</p>
+<p><b>Étape 3 : Les dimensions.</b> $\dim S_n = \frac{n(n + 1)}2$, $\dim A_n = \frac{n(n - 1)}2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{tr}u = \frac{n(n + 1)}2(a + b) + \frac{n(n - 1)}2(b - a) = an + bn^2,\quad\det u = (a + b)^{\frac{n(n + 1)}2}(b - a)^{\frac{n(n - 1)}2}}$ (calcul : $\frac{n^2 + n - n^2 + n}2a + \frac{n^2 + n + n^2 - n}2b$).</p>
+
+<p class="ml">Exemple 32 : $12A^3 - 8A^2 + 7A - I_3 = 0$ entraîne $0 \lt \operatorname{tr}A \lt 2$</p>
+<p><b>Étape 1 : Rappel.</b> Valeurs propres parmi les racines de l'annulateur ; celles d'une matrice réelle non réelles vont par paires conjuguées.</p>
+<p><b>Étape 2 : Factoriser.</b> En $\frac16$ : $\frac{12}{216} - \frac8{36} + \frac76 - 1 = \frac1{18} - \frac4{18} + \frac{21}{18} - \frac{18}{18} = 0$. Donc $P = (6X - 1)(2X^2 - X + 1)$ (contrôle : $12X^3 - 6X^2 + 6X - 2X^2 + X - 1$ ✓). $2X^2 - X + 1$ : $\Delta = 1 - 8 \lt 0$, racines $\lambda, \overline\lambda$ avec $\lambda + \overline\lambda = \frac12$.</p>
+<p><b>Étape 3 : Les possibilités.</b> $\chi_A$ réel de degré $3$ : valeurs propres $\big(\frac16, \frac16, \frac16\big)$ ou $\big(\frac16, \lambda, \overline\lambda\big)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\operatorname{tr}A = \frac36 = \frac12$ ou $\frac16 + \frac12 = \frac23$ : $\cG{0 \lt \operatorname{tr}A \lt 2}$.</p>
+
+<h2 id="r-sfstab">17. Sous-espaces stables, exponentielle</h2>
+<div class="sbox">$$D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}.\qquad H:\ {}^tLX = 0\ \text{stable par}\ A\iff L\ \text{vecteur propre de}\ {}^tA.\qquad\exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}.$$</div>
+
+<p class="ml">Exemple 33 : tous les sous-espaces stables d'une matrice $3\times3$</p>
+<p>$A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&-1\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Dimensions $0$ et $3$ : évidents. Droites : vecteurs propres de $A$. Plans : $\{{}^tLX = 0\}$ avec $L$ vecteur propre de $\,{}^tA$.</p>
+<p><b>Étape 2 : Les droites.</b> $E_3$ : $(A - 3I)X = (y, 0, -4z) = 0$, donc $y = z = 0$ : $\mathbb Re_1$. $E_{-1}$ : $(4x + y, 4y, 0) = 0$ : $\mathbb Re_3$.</p>
+<p><b>Étape 3 : Les plans.</b> $\,{}^tA = \begin{pmatrix}3&0&0\\1&3&0\\0&0&-1\end{pmatrix}$. Pour $3$ : $(0, x, -4z) = 0$, $L = (0, 1, 0)$, plan $y = 0$. Pour $-1$ : $(4x, x + 4y, 0) = 0$, $L = (0, 0, 1)$, plan $z = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\{0\},\ \mathbb Re_1,\ \mathbb Re_3,\ \{y = 0\},\ \{z = 0\},\ \mathbb R^3}$ : $A$ n'est pas diagonalisable, donc il n'y en a que six.</p>
+
+<p class="ml">Exemple 34 : $\exp(A)$ par un annulateur</p>
+<p>$A = \begin{pmatrix}3&-3&2\\-1&5&-2\\-1&3&0\end{pmatrix}$, $\chi_A = (X - 2)^2(X - 4)$.</p>
+<p><b>Étape 1 : Rappel.</b> Si $\pi_A = (X - 2)(X - 4)$, $X^n = \pi_AQ + aX + b$ ; on écrit le reste dans la base $(X - 2, X - 4)$.</p>
+<p><b>Étape 2 : Diagonalisable.</b> $A - 2I_3 = \begin{pmatrix}1&-3&2\\-1&3&-2\\-1&3&-2\end{pmatrix}$ : rang $1$, $\dim E_2 = 2$ ; donc $\pi_A = (X - 2)(X - 4)$.</p>
+<p><b>Étape 3 : $A^n$.</b> Reste $R = \alpha(X - 2) + \beta(X - 4)$ : en $4$, $2\alpha = 4^n$ ; en $2$, $-2\beta = 2^n$. Donc $A^n = \frac12\big(4^n(A - 2I_3) - 2^n(A - 4I_3)\big)$.</p>
+<p><b>Étape 4 : On somme.</b> $\exp(A) = \sum\frac{A^n}{n!} = \frac12\big(e^4(A - 2I_3) - e^2(A - 4I_3)\big)$.</p>
+<p><b>Étape 5 : Conclusion.</b> Avec $A - 4I_3 = \begin{pmatrix}-1&-3&2\\-1&1&-2\\-1&3&-4\end{pmatrix}$ :</p>
+$$\cG{\exp(A) = \frac12\begin{pmatrix}e^4 + e^2&-3e^4 + 3e^2&2e^4 - 2e^2\\-e^4 + e^2&3e^4 - e^2&-2e^4 + 2e^2\\-e^4 + e^2&3e^4 - 3e^2&-2e^4 + 4e^2\end{pmatrix}}.$$
+
+<p class="ml">Exemple 35 : $\exp\big((a - b)I_n + bJ\big)$</p>
+<p><b>Étape 1 : Rappel.</b> $\exp(X + Y) = \exp X\exp Y$ si $XY = YX$, et $J^k = n^{k-1}J$.</p>
+<p><b>Étape 2 : $\exp(bJ)$.</b> $I_n + \sum_{k\geq1}\frac{b^kn^{k-1}}{k!}J = I_n + \frac1n\big(e^{nb} - 1\big)J$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\cG{\exp(A) = e^{a-b}\Big(I_n + \frac{e^{nb} - 1}nJ\Big)}$.</p>
+
+<p class="ml">Exemple 36 : $\det\exp(A) = e^{\operatorname{tr}A}$</p>
+<p><b>Étape 1 : Rappel.</b> Sur $\mathbb C$, $A = PTP^{-1}$ avec $T$ triangulaire de diagonale $\lambda_1, \dots, \lambda_n$.</p>
+<p><b>Étape 2 : $\exp(T)$.</b> $T^k$ est triangulaire de diagonale $\lambda_i^k$, donc $\exp(T)$ est triangulaire de diagonale $e^{\lambda_i}$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\det\exp A = \det\exp T = \prod e^{\lambda_i} = e^{\sum\lambda_i} = \cG{e^{\operatorname{tr}A}}$ : $\exp(A)$ est toujours inversible.</p>
+
+<h2 id="r-enonce">18. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>Les valeurs propres $\lambda_1,\dots,\lambda_n$</b><span>$\operatorname{tr}A = \sum\lambda_i$, $\det A = \prod\lambda_i$ ; $A$ inversible $\iff0\notin\operatorname{Sp}(A)$ ; $\chi_A = \prod(X - \lambda_i)$. Si elles sont distinctes : diagonalisable.</span></div>
 <div><b>Un vecteur $X$ « propre »</b><span>Calculer $AX$ : on lit $\lambda$ avec $AX = \lambda X$.</span></div>
@@ -1402,7 +1689,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 <div><b>$A$ semblable à $B$</b><span>Même $\chi$, trace, déterminant, rang ; diagonalisables en même temps.</span></div>
 </div>
 
-<h2 id="r-appli">12. À quoi ça sert</h2>
+<h2 id="r-appli">19. À quoi ça sert</h2>
 <ul>
 <li><b>Puissances</b> : $A = PDP^{-1}\Rightarrow A^n = PD^nP^{-1}$.</li>
 <li><b>Suites couplées</b> : $X_{n+1} = AX_n\Rightarrow X_n = A^nX_0$. Avec $Y_n = P^{-1}X_n$, on a $Y_{n+1} = DY_n$ : les suites se découplent.</li>
