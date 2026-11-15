@@ -352,6 +352,13 @@ function wireHome() {
   $$("[data-resume]", app).forEach(a => a.addEventListener("click", () => { try { sessionStorage.setItem("lemme-resume", a.dataset.resume); } catch (_) {} }));
 }
 
+/* Domaine d'un chapitre de maths, pour ranger Sup et Spé en Algèbre / Analyse / Probabilités */
+function domOf(t) {
+  if (/^(Logique|Ensembles)/.test(t)) return "Fondamentaux";
+  if (/Probabilit|Dénombrement/.test(t)) return "Probabilités";
+  if (/Arithmétique|Structures|Polynômes|Fractions|Matrices|Espaces vectoriels|Applications linéaires|Groupe symétrique|déterminant|Compléments d'algèbre|Réduction|préhilbertiens|euclidiens|Calcul algébrique|Nombres complexes/.test(t)) return "Algèbre";
+  return "Analyse";
+}
 let subjTab = "chapitres";
 function subjectPage(id) {
   const s = sid(id); if (!s) return notFound();
@@ -360,7 +367,11 @@ function subjectPage(id) {
   const tabs = tabsHtml([["chapitres", "Chapitres", list.length], ["classiques", "Classiques", classics.length]], subjTab);
   const body = subjTab === "classiques"
     ? (classics.length ? `<div class="exgrid stagger">${classics.map(exCard).join("")}</div>` : empty("Bientôt", ` Les classiques de ${s.name.toLowerCase()} en ${YEARS[year]} sont en préparation.`))
-    : `<div class="chaptiles stagger">${list.map((c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`) || PDFS.has(`cours-${id}-${year}-${pad(i + 1)}`); const dn = n ? exOf(id, year, i).filter(e => doneN(e.id)).length : 0; return `<a class="chaptile${n || c.r || r ? "" : " soon"}" href="#c-${id}-${year}-${i}"><span class="tt">${esc(c.t)}</span>${n ? `<span class="cbar" title="${dn} sur ${n} faits"><i style="width:${Math.round(100 * dn / n)}%"></i></span>` : ""}</a>`; }).join("")}</div>`;
+    : (() => { const tile = (c, i) => { const n = exOf(id, year, i).length, r = PDFS.has(`resume-${id}-${year}-${pad(i + 1)}`) || PDFS.has(`cours-${id}-${year}-${pad(i + 1)}`); const dn = n ? exOf(id, year, i).filter(e => doneN(e.id)).length : 0; return `<a class="chaptile${n || c.r || r ? "" : " soon"}" href="#c-${id}-${year}-${i}"><span class="tt">${esc(c.t)}</span>${n ? `<span class="cbar" title="${dn} sur ${n} faits"><i style="width:${Math.round(100 * dn / n)}%"></i></span>` : ""}</a>`; };
+        if (id !== "maths") return `<div class="chaptiles stagger">${list.map(tile).join("")}</div>`;
+        const G = ["Fondamentaux", "Algèbre", "Analyse", "Probabilités"], gr = {};
+        list.forEach((c, i) => { const g = domOf(c.t); (gr[g] = gr[g] || []).push(tile(c, i)); });
+        return G.filter(g => gr[g]).map(g => `<section class="dom"><h2 class="domh">${g}<span>${gr[g].length} chapitre${gr[g].length > 1 ? "s" : ""}</span></h2><div class="chaptiles stagger">${gr[g].join("")}</div></section>`).join(""); })();
   return phead({ crumb: [["Matières"], [s.name]], title: s.name, tabs, photo: id, tall: true })
     + `<div class="wrap layout full">${body}</div>`;
 }
