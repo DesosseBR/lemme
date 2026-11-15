@@ -6659,21 +6659,21 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 <p><b>Étape 1 : Rappel.</b> Majorer $|f - \ell|$ par une fonction de $r$ seulement, qui tend vers $0$.</p>
 <p><b>Étape 2 : On majore</b> avec $x^2\leq x^2 + y^2$ :</p>
 $$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
-<p><b>Étape 3 : La limite.</b> $\cO r\to0$ quand $(x, y)\to(0, 0)$.</p>
+<p><b>Étape 3 : La limite.</b> $r = \sqrt{x^2 + y^2}$ et $|y| = \sqrt{y^2}\leq\sqrt{x^2 + y^2} = r$. Quand $(x, y)\to(0, 0)$, $r\to0$, donc $|f(x, y) - 0|\leq\cO r\to0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est continue en}\ (0, 0)}$.</p>
 
 <p class="ml">Exemple 2 : pas de limite, par les droites</p>
 <p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$ sur $\mathbb R^2\setminus\{(0, 0)\}$.</p>
 <p><b>Étape 1 : Rappel.</b> Deux chemins, deux limites différentes $\Rightarrow$ pas de limite.</p>
-<p><b>Étape 2 : Sur la droite $y = mx$</b> ($x\neq0$) : $f(x, mx) = \frac{mx^2}{x^2(1 + m^2)} = \frac m{1 + m^2}$.</p>
-<p><b>Étape 3 : Deux droites.</b> $m = 0$ donne $0$, $m = 1$ donne $\frac12$.</p>
+<p><b>Étape 2 : Sur la droite $y = mx$</b> ($x\neq0$) : on remplace $y$ par $mx$ : numérateur $x\cdot mx = mx^2$, dénominateur $x^2 + m^2x^2 = x^2(1 + m^2)$, donc $f(x, mx) = \frac{mx^2}{x^2(1 + m^2)} = \frac m{1 + m^2}$ (on simplifie par $x^2\neq0$).</p>
+<p><b>Étape 3 : Deux droites.</b> $m = 0$ : $\frac0{1 + 0} = 0$. $m = 1$ : $\frac1{1 + 1} = \frac12$. La valeur dépend de la droite.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{n'a pas de limite en}\ (0, 0)}$ (en polaires, $f = \cos\theta\sin\theta$ dépend de $\theta$).</p>
 
 <p class="ml">Exemple 3 : les droites ne suffisent pas</p>
 <p>$f(x, y) = \dfrac{x^2y}{x^4 + y^2}$.</p>
 <p><b>Étape 1 : Rappel.</b> Avoir la même limite sur toutes les droites ne prouve <b>pas</b> la continuité.</p>
-<p><b>Étape 2 : Sur $y = mx$.</b> $f(x, mx) = \frac{mx^3}{x^4 + m^2x^2} = \frac{mx}{x^2 + m^2}\to0$ (et $f(0, y) = 0$).</p>
-<p><b>Étape 3 : Sur la parabole $y = x^2$.</b> $f(x, x^2) = \frac{x^4}{2x^4} = \frac12$.</p>
+<p><b>Étape 2 : Sur $y = mx$</b> ($m\neq0$) : $f(x, mx) = \frac{x^2\cdot mx}{x^4 + m^2x^2} = \frac{mx^3}{x^2(x^2 + m^2)} = \frac{mx}{x^2 + m^2}\to\frac{0}{0 + m^2} = 0$. Sur l'axe $x = 0$ : $f(0, y) = \frac0{y^2} = 0$.</p>
+<p><b>Étape 3 : Sur la parabole $y = x^2$.</b> Numérateur $x^2\cdot x^2 = x^4$, dénominateur $x^4 + (x^2)^2 = 2x^4$, donc $f(x, x^2) = \frac{x^4}{2x^4} = \frac12$ pour tout $x\neq0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $0\neq\frac12$ : $\cG{f\ \text{n'a pas de limite en}\ (0, 0)}$. Le chemin se choisit pour <b>équilibrer</b> les degrés ($x^4$ et $y^2$ du même ordre).</p>
 
 <h2 id="c-part">3. Dérivées partielles, dérivées directionnelles</h2>
@@ -6685,7 +6685,7 @@ $$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
 <p class="ml">Exemple 4 : des dérivées partielles en un point problématique</p>
 <p>$f(x, y) = \dfrac{xy}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> En $(0, 0)$, on utilise le taux d'accroissement.</p>
-<p><b>Étape 2 : Selon $x$.</b> $f(t, 0) = 0$, donc $\frac{f(t, 0) - f(0, 0)}t = 0\to0$ : $\frac{\partial f}{\partial x}(0, 0) = 0$.</p>
+<p><b>Étape 2 : Selon $x$.</b> Sur l'axe : $f(t, 0) = \frac{t\times0}{t^2 + 0} = 0$, donc $\frac{f(t, 0) - f(0, 0)}t = \frac{0 - 0}t = 0\to0$ : $\frac{\partial f}{\partial x}(0, 0) = 0$.</p>
 <p><b>Étape 3 : Selon $y$.</b> De même $f(0, t) = 0$ : $\frac{\partial f}{\partial y}(0, 0) = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{les dérivées partielles existent en}\ (0, 0)}$, et pourtant $f$ n'y est pas continue (exemple 2).</p>
 
@@ -6699,7 +6699,7 @@ $$\textbf{Si les dérivées partielles existent et sont continues sur}\ U\ \text
 <p class="ml">Exemple 5 : différentiable en $(0, 0)$</p>
 <p>$f(x, y) = \dfrac{x^2y^2}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> Candidat $L$ par les dérivées partielles, puis $\frac{f(h) - f(0) - L(h)}{\|h\|}\to0$.</p>
-<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = f(0, t) = 0$, donc $\partial_xf(0, 0) = \partial_yf(0, 0) = 0$ : le candidat est $L = 0$.</p>
+<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = \frac{t^2\times0}{t^2} = 0$ et de même $f(0, t) = 0$, donc les taux $\frac{f(t, 0) - 0}t$ et $\frac{f(0, t) - 0}t$ sont nuls : $\partial_xf(0, 0) = \partial_yf(0, 0) = 0$, le candidat est $L(h) = 0\cdot h_1 + 0\cdot h_2 = 0$.</p>
 <p><b>Étape 3 : On majore.</b> $(x^2 - y^2)^2\geq0$ donne $x^4 + y^4\geq2x^2y^2$, donc $(x^2 + y^2)^2 = x^4 + 2x^2y^2 + y^4\geq4x^2y^2$, soit $x^2y^2\leq\frac{(x^2 + y^2)^2}4 = \frac{r^4}4$ :</p>
 $$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\frac{r^4}{4r^3} = \cO{\frac r4}\to0.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{est différentiable en}\ (0, 0)\ \text{et}\ df(0, 0) = 0}$.</p>
@@ -6707,11 +6707,11 @@ $$\frac{|f(x, y) - 0 - 0|}{\|(x, y)\|_2} = \frac{x^2y^2}{(x^2 + y^2)\,r}\leq\fra
 <p class="ml">Exemple 6 : continue, des dérivées partielles, mais pas différentiable</p>
 <p>$f(x, y) = \dfrac{x^3 + y^3}{x^2 + y^2}$, $f(0, 0) = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> Même méthode : candidat, puis quotient.</p>
-<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = t$, $f(0, t) = t$ : $\partial_xf(0, 0) = \partial_yf(0, 0) = 1$, candidat $L(x, y) = x + y$.</p>
+<p><b>Étape 2 : Les dérivées partielles.</b> $f(t, 0) = \frac{t^3 + 0}{t^2 + 0} = t$, donc $\frac{f(t, 0) - 0}t = 1$ et $\partial_xf(0, 0) = 1$. De même $f(0, t) = t$ et $\partial_yf(0, 0) = 1$. Candidat : $L(x, y) = 1\cdot x + 1\cdot y = x + y$.</p>
 <p><b>Étape 3 : Le quotient en polaires.</b></p>
 <p>On développe $(x + y)(x^2 + y^2) = x^3 + xy^2 + x^2y + y^3$, donc $x^3 + y^3 - (x + y)(x^2 + y^2) = -xy^2 - x^2y = -xy(x + y)$ :</p>
 $$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac{-xy(x + y)}{r^3} = \frac{-r^3\cos\theta\sin\theta(\cos\theta + \sin\theta)}{r^3} = -\cos\theta\sin\theta(\cos\theta + \sin\theta).$$
-<p><b>Étape 4 : Il dépend de $\theta$.</b> Sur $\theta = \frac\pi4$ il vaut $-\frac12\cdot\sqrt2\neq0$ : il ne tend pas vers $0$.</p>
+<p><b>Étape 4 : Il dépend de $\theta$.</b> En $\theta = \frac\pi4$ : $\cos\theta = \sin\theta = \frac{\sqrt2}2$, donc $-\frac{\sqrt2}2\cdot\frac{\sqrt2}2\cdot\Big(\frac{\sqrt2}2 + \frac{\sqrt2}2\Big) = -\frac12\cdot\sqrt2\neq0$, pour tout $r$ : le quotient ne tend pas vers $0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{n'est pas différentiable en}\ (0, 0)}$, bien que continue ($|f|\leq\frac{2r^3}{r^2} = 2r$) avec des dérivées partielles.</p>
 
 <h2 id="c-exdiff">5. Différentielles à connaître</h2>
@@ -6721,15 +6721,15 @@ $$d(M\mapsto M^2)(M)(H) = MH + HM.\qquad d(\det)(I_n)(H) = \operatorname{tr}H.\q
 <p>On développe $f(a + h)$, on sépare le terme <b>linéaire en $h$</b> et le reste, et on montre que le reste est un $o(\|h\|)$ (souvent un $O(\|h\|^2)$).</p>
 <p class="ml">Exemple 7 : $f(M) = M^2$</p>
 <p><b>Étape 1 : Rappel.</b> $f(M + H) = f(M) + L(H) + o(\|H\|)$ avec $L$ linéaire.</p>
-<p><b>Étape 2 : On développe</b> (sans commuter !) : $(M + H)^2 = M^2 + MH + HM + H^2$.</p>
+<p><b>Étape 2 : On développe</b> (sans commuter !) : $(M + H)^2 = (M + H)(M + H) = M\cdot M + M\cdot H + H\cdot M + H\cdot H = M^2 + MH + HM + H^2$. On ne regroupe pas $MH + HM$ en $2MH$ : en général $MH\neq HM$.</p>
 <p><b>Étape 3 : La partie linéaire.</b> $L(H) = MH + HM$ est linéaire en $H$.</p>
-<p><b>Étape 4 : Le reste.</b> Avec une norme sous-multiplicative, $\|H^2\|\leq\|H\|^2 = o(\|H\|)$.</p>
+<p><b>Étape 4 : Le reste.</b> Avec une norme sous-multiplicative, $\|H^2\| = \|H\cdot H\|\leq\|H\|\,\|H\| = \|H\|^2$, donc $\frac{\|H^2\|}{\|H\|}\leq\|H\|\to0$ : $H^2 = o(\|H\|)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{df(M)(H) = MH + HM}$ (et $2MH$ seulement si $M$ et $H$ commutent).</p>
 
 <p class="ml">Exemple 8 : $f(x) = \|x\|^2$ dans un espace euclidien</p>
 <p><b>Étape 1 : Rappel.</b> On isole la partie linéaire de $f(x + h) - f(x)$.</p>
-<p><b>Étape 2 : On développe.</b> $\|x + h\|^2 = \|x\|^2 + 2\langle x, h\rangle + \|h\|^2$.</p>
-<p><b>Étape 3 : Les morceaux.</b> $h\mapsto2\langle x, h\rangle$ est linéaire et $\|h\|^2 = o(\|h\|)$.</p>
+<p><b>Étape 2 : On développe.</b> $\|x + h\|^2 = \langle x + h, x + h\rangle = \langle x, x\rangle + \langle x, h\rangle + \langle h, x\rangle + \langle h, h\rangle = \|x\|^2 + 2\langle x, h\rangle + \|h\|^2$ (symétrie).</p>
+<p><b>Étape 3 : Les morceaux.</b> $h\mapsto2\langle x, h\rangle$ est linéaire, et $\frac{\|h\|^2}{\|h\|} = \|h\|\to0$, donc $\|h\|^2 = o(\|h\|)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{df(x)(h) = 2\langle x, h\rangle,\quad\nabla f(x) = 2x}$.</p>
 
 <h2 id="c-chain">6. La règle de la chaîne</h2>
@@ -6739,10 +6739,10 @@ $$g(\cV u, \cV v) = f\big(x(u, v), y(u, v)\big):\quad\frac{\partial g}{\partial 
 <p class="ml">Exemple 9 : les coordonnées polaires</p>
 <p>$g(\cV r, \cV\theta) = f(r\cos\theta, r\sin\theta)$, $f$ de classe $\mathcal C^1$. Exprimer $\partial_rg$ et $\partial_\theta g$.</p>
 <p><b>Étape 1 : Rappel.</b> $\partial_ug = \partial_ux\,\partial_xf + \partial_uy\,\partial_yf$.</p>
-<p><b>Étape 2 : Les dérivées de $x = r\cos\theta$, $y = r\sin\theta$.</b> $\partial_rx = \cos\theta$, $\partial_ry = \sin\theta$, $\partial_\theta x = -r\sin\theta$, $\partial_\theta y = r\cos\theta$.</p>
+<p><b>Étape 2 : Les dérivées de $x = r\cos\theta$, $y = r\sin\theta$.</b> En $r$ ($\theta$ fixé) : $\partial_rx = \cos\theta$, $\partial_ry = \sin\theta$. En $\theta$ ($r$ fixé) : $\partial_\theta x = r\times(-\sin\theta) = -r\sin\theta$, $\partial_\theta y = r\cos\theta$.</p>
 <p><b>Étape 3 : On assemble.</b></p>
 $$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \sin\theta\,\frac{\partial f}{\partial y},\qquad\frac{\partial g}{\partial\theta} = -r\sin\theta\,\frac{\partial f}{\partial x} + r\cos\theta\,\frac{\partial f}{\partial y}.$$
-<p><b>Étape 4 : Conclusion.</b> $\cG{r\,\partial_rg = x\,\partial_xf + y\,\partial_yf\ \ \text{et}\ \ \partial_\theta g = x\,\partial_yf - y\,\partial_xf}$, à reconnaître dans les EDP.</p>
+<p><b>Étape 4 : Conclusion.</b> On multiplie la 1<sup>re</sup> formule par $r$ : $r\cos\theta = x$ et $r\sin\theta = y$. Dans la 2<sup>e</sup>, $-r\sin\theta = -y$ et $r\cos\theta = x$. D'où $\cG{r\,\partial_rg = x\,\partial_xf + y\,\partial_yf\ \ \text{et}\ \ \partial_\theta g = x\,\partial_yf - y\,\partial_xf}$, à reconnaître dans les EDP.</p>
 
 <h2 id="c-grad">7. Le gradient</h2>
 <div class="sbox">$$df(a)(h) = \langle\nabla f(a), h\rangle,\qquad\nabla f(a) = \Big(\frac{\partial f}{\partial x_1}(a), \dots, \frac{\partial f}{\partial x_n}(a)\Big)\ \text{(en BON)}.$$</div>
@@ -6757,8 +6757,8 @@ $$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \s
 <p>Résoudre $\frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} = 0$ sur $\mathbb R^2$ ($f$ de classe $\mathcal C^1$), avec $\cV u = x + y$, $\cV v = x - y$.</p>
 <p><b>Étape 1 : Rappel.</b> Règle de la chaîne, puis $\partial_ug = 0\iff g = C(v)$.</p>
 <p><b>Étape 2 : Le changement.</b> $(x, y)\mapsto(x + y, x - y)$ est une bijection linéaire de $\mathbb R^2$. On pose $f(x, y) = g(x + y, x - y)$.</p>
-<p><b>Étape 3 : Les dérivées.</b> $\partial_xf = \partial_ug + \partial_vg$ et $\partial_yf = \partial_ug - \partial_vg$.</p>
-<p><b>Étape 4 : On remplace.</b> $\partial_xf + \partial_yf = 2\,\partial_ug = 0$, donc $g(u, v) = C(v)$ avec $C$ de classe $\mathcal C^1$.</p>
+<p><b>Étape 3 : Les dérivées.</b> $u = x + y$ et $v = x - y$, donc $\partial_xu = 1$, $\partial_xv = 1$, $\partial_yu = 1$, $\partial_yv = -1$. Règle de la chaîne : $\partial_xf = \partial_xu\,\partial_ug + \partial_xv\,\partial_vg = \partial_ug + \partial_vg$ et $\partial_yf = 1\cdot\partial_ug + (-1)\cdot\partial_vg = \partial_ug - \partial_vg$.</p>
+<p><b>Étape 4 : On remplace.</b> $\partial_xf + \partial_yf = (\partial_ug + \partial_vg) + (\partial_ug - \partial_vg) = 2\,\partial_ug$. L'équation devient $2\,\partial_ug = 0$, donc $\partial_ug = 0$ sur $\mathbb R^2$ : $g$ ne dépend que de $v$, $g(u, v) = C(v)$ avec $C$ de classe $\mathcal C^1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{f(x, y) = C(x - y)}$, $C\in\mathcal C^1(\mathbb R)$. Contrôle : $\partial_xf + \partial_yf = C' - C' = 0$.</p>
 
 <p class="ml">Exemple 11 : l'équation des ondes</p>
@@ -6766,7 +6766,7 @@ $$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \s
 <p><b>Étape 1 : Rappel.</b> On dérive deux fois avec la règle de la chaîne, puis $\partial_u\partial_vg = 0\iff g = A(u) + B(v)$.</p>
 <p><b>Étape 2 : Les dérivées secondes.</b> En dérivant $\partial_xf = \partial_ug + \partial_vg$ et $\partial_yf = \partial_ug - \partial_vg$ (Schwarz pour $g$) :</p>
 $$\partial^2_{xx}f = \partial^2_{uu}g + 2\partial^2_{uv}g + \partial^2_{vv}g,\qquad\partial^2_{yy}f = \partial^2_{uu}g - 2\partial^2_{uv}g + \partial^2_{vv}g.$$
-<p><b>Étape 3 : On remplace.</b> $\partial^2_{xx}f - \partial^2_{yy}f = 4\,\partial^2_{uv}g = 0$.</p>
+<p><b>Étape 3 : On remplace.</b> On soustrait terme à terme : $(\partial^2_{uu}g - \partial^2_{uu}g) + (2\partial^2_{uv}g + 2\partial^2_{uv}g) + (\partial^2_{vv}g - \partial^2_{vv}g) = 4\,\partial^2_{uv}g$. L'équation devient $4\,\partial^2_{uv}g = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $g = A(u) + B(v)$, donc $\cG{f(x, y) = A(x + y) + B(x - y)}$, $A, B\in\mathcal C^2(\mathbb R)$.</p>
 
 <p class="ml">Exemple 12 : en polaires</p>
@@ -6789,9 +6789,9 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 <p class="ml">Exemple 13 : $f(x, y) = x^3 + y^3 - 3xy$</p>
 <p><b>Étape 1 : Rappel.</b> Points critiques par $\nabla f = 0$, puis $rt - s^2$ en chacun.</p>
 <p><b>Étape 2 : Les points critiques.</b> $\partial_xf = 3x^2 - 3y = 0$ donne $y = x^2$. On remplace dans $\partial_yf = 3y^2 - 3x = 0$ : $3x^4 - 3x = 0$, soit $3x(x^3 - 1) = 0$, donc $x = 0$ ou $x^3 = 1$, c'est-à-dire $x = 1$. Puis $y = x^2$ : points $\cR{(0, 0)}$ et $\cR{(1, 1)}$.</p>
-<p><b>Étape 3 : Les dérivées secondes.</b> $r = 6x$, $s = -3$, $t = 6y$.</p>
-<p><b>Étape 4 : En $(0, 0)$.</b> $rt - s^2 = 0 - 9 \lt 0$ : point col.</p>
-<p><b>Étape 5 : En $(1, 1)$.</b> $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : minimum local, $f(1, 1) = -1$.</p>
+<p><b>Étape 3 : Les dérivées secondes.</b> On dérive $\partial_xf = 3x^2 - 3y$ : en $x$, $r = 6x$ ; en $y$, $s = -3$. On dérive $\partial_yf = 3y^2 - 3x$ en $y$ : $t = 6y$.</p>
+<p><b>Étape 4 : En $(0, 0)$.</b> $r = 6\times0 = 0$, $t = 0$, $s = -3$ : $rt - s^2 = 0\times0 - (-3)^2 = -9 \lt 0$ : point col.</p>
+<p><b>Étape 5 : En $(1, 1)$.</b> $r = 6$, $t = 6$, $s = -3$ : $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : minimum local, de valeur $f(1, 1) = 1 + 1 - 3 = -1$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\text{col en}\ (0, 0),\ \text{min local en}\ (1, 1)}$, pas global : $f(x, 0) = x^3\to-\infty$.</p>
 
 <h2 id="c-glob">11. Extrema globaux</h2>
@@ -6801,7 +6801,7 @@ $$\text{Deux variables (Monge)}:\quad rt - s^2 > 0,\ r > 0:\ \text{min}\quad rt 
 <p class="ml">Exemple 14 : un minimum global sur $\mathbb R^2$</p>
 <p>$f(x, y) = x^2 + xy + y^2 - 3x$.</p>
 <p><b>Étape 1 : Rappel.</b> Point critique, puis signe de $f(a + h) - f(a)$ pour tout $h$.</p>
-<p><b>Étape 2 : Le point critique.</b> $2x + y - 3 = 0$ et $x + 2y = 0$ : $x = -2y$, $-3y = 3$, donc $\cR{a = (2, -1)}$, $f(a) = 4 - 2 + 1 - 6 = -3$.</p>
+<p><b>Étape 2 : Le point critique.</b> $\partial_xf = 2x + y - 3$ et $\partial_yf = x + 2y$. La 2<sup>e</sup> équation donne $x = -2y$ ; dans la 1<sup>re</sup> : $-4y + y - 3 = 0$, soit $-3y = 3$, $y = -1$, puis $x = 2$ : $\cR{a = (2, -1)}$. Valeur : $f(2, -1) = 2^2 + 2\times(-1) + (-1)^2 - 3\times2 = 4 - 2 + 1 - 6 = -3$.</p>
 <p><b>Étape 3 : L'écart exact.</b> On développe chaque morceau :</p>
 $$(2 + h)^2 = 4 + 4h + h^2,\quad(2 + h)(-1 + k) = -2 + 2k - h + hk,\quad(-1 + k)^2 = 1 - 2k + k^2,\quad-3(2 + h) = -6 - 3h.$$
 <p>On additionne : constantes $4 - 2 + 1 - 6 = -3$ ; termes en $h$ : $4h - h - 3h = 0$ ; en $k$ : $2k - 2k = 0$ (c'est le point critique) ; il reste :</p>
@@ -6811,8 +6811,8 @@ $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \fra
 <p class="ml">Exemple 15 : sur un disque fermé</p>
 <p>Extrema de $f(x, y) = x^2 + y^2 - x$ sur $D = \{x^2 + y^2\leq1\}$.</p>
 <p><b>Étape 1 : Rappel.</b> $D$ compact, $f$ continue : min et max atteints. Candidats : points critiques intérieurs et bord.</p>
-<p><b>Étape 2 : L'intérieur.</b> $\nabla f = (2x - 1, 2y) = 0$ en $\big(\frac12, 0\big)$, intérieur à $D$ : $f = \frac14 - \frac12 = -\frac14$.</p>
-<p><b>Étape 3 : Le bord.</b> Sur $x^2 + y^2 = 1$ : $f = 1 - x$ avec $x\in[-1, 1]$. Max $2$ en $(-1, 0)$, min $0$ en $(1, 0)$.</p>
+<p><b>Étape 2 : L'intérieur.</b> $\partial_xf = 2x - 1$ et $\partial_yf = 2y$ : $\nabla f = 0\iff x = \frac12,\ y = 0$. Ce point est intérieur ($\frac14 + 0 \lt 1$), et $f\big(\frac12, 0\big) = \frac14 + 0 - \frac12 = -\frac14$.</p>
+<p><b>Étape 3 : Le bord.</b> Sur $x^2 + y^2 = 1$, on remplace $x^2 + y^2$ par $1$ : $f = 1 - x$, avec $x\in[-1, 1]$. Cette fonction de $x$ décroît : max en $x = -1$, $1 - (-1) = 2$, au point $(-1, 0)$ ; min en $x = 1$, $1 - 1 = 0$, au point $(1, 0)$.</p>
 <p><b>Étape 4 : On compare</b> $-\frac14$, $0$, $2$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\min_Df = -\frac14\ \text{en}\ (\tfrac12, 0),\quad\max_Df = 2\ \text{en}\ (-1, 0)}$.</p>
 
@@ -6822,8 +6822,8 @@ $$f(2 + h, -1 + k) - f(2, -1) = h^2 + hk + k^2 = \Big(h + \frac k2\Big)^2 + \fra
 <p class="ml">Exemple 16 : max de $xy$ sur le cercle $x^2 + y^2 = 2$</p>
 <p><b>Étape 1 : Rappel.</b> $\nabla f(a) = \lambda\nabla g(a)$ aux extrema, si $\nabla g(a)\neq0$.</p>
 <p><b>Étape 2 : Existence.</b> Le cercle est compact et $f(x, y) = xy$ continue : min et max existent. $\nabla g = (2x, 2y)\neq0$ sur le cercle.</p>
-<p><b>Étape 3 : Le système.</b> $(y, x) = \lambda(2x, 2y)$ : $y = 2\lambda x$, $x = 2\lambda y$, donc $x = 4\lambda^2x$ et de même $y$. Comme $(x, y)\neq0$, $4\lambda^2 = 1$ et $y = \pm x$.</p>
-<p><b>Étape 4 : Les candidats.</b> $x^2 + x^2 = 2$ : $x = \pm1$. Points $(1, 1)$, $(-1, -1)$ (valeur $1$) et $(1, -1)$, $(-1, 1)$ (valeur $-1$).</p>
+<p><b>Étape 3 : Le système.</b> $\nabla f = (\partial_x(xy), \partial_y(xy)) = (y, x)$. L'équation $(y, x) = \lambda(2x, 2y)$ donne $y = 2\lambda x$ et $x = 2\lambda y$. On remplace $y$ dans la 2<sup>e</sup> : $x = 2\lambda\cdot2\lambda x = 4\lambda^2x$, et de même $y = 4\lambda^2y$. Comme $(x, y)\neq(0, 0)$ (on est sur le cercle), $4\lambda^2 = 1$, $\lambda = \pm\frac12$, et $y = 2\lambda x = \pm x$.</p>
+<p><b>Étape 4 : Les candidats.</b> Avec $y = \pm x$, la contrainte $x^2 + y^2 = 2$ devient $x^2 + x^2 = 2$, soit $x^2 = 1$, $x = \pm1$. Points $(1, 1)$, $(-1, -1)$ : $xy = 1$ ; points $(1, -1)$, $(-1, 1)$ : $xy = -1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\max = 1,\ \min = -1}$ (on retrouve $|xy|\leq\frac{x^2 + y^2}2$).</p>
 
 <h2 id="c-tang">13. Vecteurs tangents, plan tangent</h2>
@@ -6833,7 +6833,7 @@ $$\text{Surface}\ \{g = 0\},\ \nabla g(M_0)\neq0:\quad\text{plan tangent}\ \lang
 <p>Plan tangent à $x^2 + y^2 + z^2 = 3$ en $M_0 = (1, 1, 1)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\nabla g(M_0)$ est normal au plan tangent.</p>
 <p><b>Étape 2 : Le gradient.</b> $g(x, y, z) = x^2 + y^2 + z^2 - 3$, $\nabla g = (2x, 2y, 2z)$, donc $\nabla g(M_0) = (2, 2, 2)\neq0$.</p>
-<p><b>Étape 3 : L'équation.</b> $2(x - 1) + 2(y - 1) + 2(z - 1) = 0$.</p>
+<p><b>Étape 3 : L'équation.</b> $\langle\nabla g(M_0), M - M_0\rangle = 0$ avec $M - M_0 = (x - 1, y - 1, z - 1)$ : $2(x - 1) + 2(y - 1) + 2(z - 1) = 0$. On divise par $2$ : $x + y + z - 3 = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{x + y + z = 3}$.</p>
 
 <h2 id="c-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
