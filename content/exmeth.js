@@ -535,7 +535,21 @@ LEMME.EXMETH = {
   String.raw`Valeurs propres, vecteurs propres orthogonaux, normaliser.`,
   String.raw`Rang et trace, puis Gram-Schmidt dans $E_0$.`,
   String.raw`$X^\top A^\top AX = \|AX\|^2$.`,
-  String.raw`BON de vecteurs propres : $\langle u(x), x\rangle = \sum\lambda_ix_i^2$.`
+  String.raw`BON de vecteurs propres : $\langle u(x), x\rangle = \sum\lambda_ix_i^2$.`,
+  String.raw`$\langle u(M), N\rangle$ symétrique en $M, N$.`,
+  String.raw`$A^2 = A$, $\,{}^tA = A$, noyau $(1, 1, 1)$.`,
+  String.raw`$\,{}^t(AB) = BA$.`,
+  String.raw`$x\in\operatorname{Im}p$, puis $\langle q(x), x\rangle = \|q(x)\|^2$.`,
+  String.raw`$A = {}^tTT$, $T$ triangulaire de $1$.`,
+  String.raw`$S = \sum\lambda_iU_i{}^tU_i$.`,
+  String.raw`$\operatorname{tr}(DV) = \sum\lambda_iv_{ii}$, $v_{ii}\leq1$.`,
+  String.raw`$\langle AM, AN\rangle = \langle M, N\rangle$ pour tous $M, N$.`,
+  String.raw`Développer $\|u(x)\|^2$, Gram égales.`,
+  String.raw`Colonnes, $\det$, axe, trace, $\det(u, v, Av)$.`,
+  String.raw`Symétrique orthogonale, invariants.`,
+  String.raw`Trace $-1$ : demi-tour, axe.`,
+  String.raw`Image de la base : orthonormée directe.`,
+  String.raw`$g(u) = \pm u$ ; demi-tours.`
 ],
 "Espaces préhilbertiens et euclidiens (exercices)": [
   String.raw`$\|u(x)\| = |\lambda|\,\|x\|$.`,

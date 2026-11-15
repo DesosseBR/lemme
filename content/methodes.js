@@ -7805,7 +7805,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 </ul></div></div>
 `,
 "Espaces préhilbertiens et euclidiens": R`
-<nav class="msum"><a href="#e-rap">Rappels de Sup</a><a href="#e-hyp">Hyperplans</a><a href="#e-sym">Symétries, réflexions</a><a href="#e-iso">Isométries</a><a href="#e-on">$O(n)$</a><a href="#e-o2">$O(2)$</a><a href="#e-o3">$SO(3)$</a><a href="#e-adj">Adjoint</a><a href="#e-auto">Autoadjoints</a><a href="#e-spec">Théorème spectral</a><a href="#e-pos">Positifs</a><a href="#e-enonce">L'énoncé</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-exos">Exercices</a><a href="#e-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#e-rap">Rappels de Sup</a><a href="#e-hyp">Hyperplans</a><a href="#e-sym">Symétries, réflexions</a><a href="#e-iso">Isométries</a><a href="#e-on">$O(n)$</a><a href="#e-o2">$O(2)$</a><a href="#e-o3">$SO(3)$</a><a href="#e-adj">Adjoint</a><a href="#e-auto">Autoadjoints</a><a href="#e-spec">Théorème spectral</a><a href="#e-pos">Positifs</a><a href="#e-sfsym">Symétrique ?</a><a href="#e-sfusym">Utiliser la symétrie</a><a href="#e-sfiso">Isométrie ?</a><a href="#e-enonce">L'énoncé</a><a href="#e-erreurs">Erreurs</a><a href="#e-entrainement">S'entraîner</a><a href="#e-exos">Exercices</a><a href="#e-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs $\cB x$, $\cB y$. <span class="kR">rouge</span> : l'axe, l'hyperplan ou le sous-espace invariant. <span class="kO">orange</span> : l'angle $\cO\theta$ et les valeurs propres. <span class="kV">violet</span> : la base orthonormée et la matrice de passage $\cV P$. <span class="kG">vert</span> : la conclusion.</p>
@@ -7940,7 +7940,138 @@ $$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\la
 <p class="ml">Bonus : racine carrée d'une matrice positive <span class="hp">hors programme</span></p>
 <p>Si $S = PDP^\top\in\mathcal S_n^+$, alors $R = P\sqrt DP^\top$ est dans $\mathcal S_n^+$ et vérifie $R^2 = S$ (et c'est la seule). Classique en exercice, à redémontrer.</p>
 
-<h2 id="e-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="e-sfsym">12. Montrer qu'un endomorphisme est symétrique</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Endomorphisme donné par une formule</td><td>La <b>définition</b> : $\langle u(x), y\rangle = \langle x, u(y)\rangle$ pour tous $x, y$.</td></tr>
+<tr><td>Matrice connue dans une base</td><td>$u$ symétrique $\iff$ sa matrice dans une base <b>orthonormée</b> est symétrique.</td></tr>
+<tr><td>Projecteur</td><td>Projecteur symétrique $\iff$ projecteur orthogonal.</td></tr>
+</table>
+
+<p class="ml">Exemple 10 : $u(M) = \alpha M + \operatorname{tr}(M)I_n$ sur $\mathcal M_n(\mathbb R)$</p>
+<p><b>Étape 1 : Rappel.</b> $\langle A, B\rangle = \operatorname{tr}({}^tAB)$, et $\langle I_n, N\rangle = \operatorname{tr}N$.</p>
+<p><b>Étape 2 : On calcule.</b> $\langle u(M), N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\langle I_n, N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\operatorname{tr}(N)$.</p>
+<p><b>Étape 3 : Symétrique en $M, N$.</b> L'expression ne change pas quand on échange $M$ et $N$ : $\langle u(M), N\rangle = \langle M, u(N)\rangle$.</p>
+<p><b>Étape 4 : On le voit sur la matrice ($n = 2$).</b> Base orthonormée $(E_{11}, E_{12}, E_{21}, E_{22})$ : $u(E_{11}) = \alpha E_{11} + I_2 = (\alpha + 1)E_{11} + E_{22}$, $u(E_{12}) = \alpha E_{12}$, $u(E_{21}) = \alpha E_{21}$, $u(E_{22}) = E_{11} + (\alpha + 1)E_{22}$ :</p>
+$$\operatorname{Mat}(u) = \begin{pmatrix}\alpha + 1&0&0&1\\0&\alpha&0&0\\0&0&\alpha&0\\1&0&0&\alpha + 1\end{pmatrix}\quad\text{: symétrique.}$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{u\ \text{est un endomorphisme symétrique}}$.</p>
+
+<p class="ml">Exemple 11 : reconnaître une projection orthogonale</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}$ dans la base canonique de $\mathbb R^3$.</p>
+<p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $\,{}^tA = A$ (base orthonormée) : projection orthogonale sur $\operatorname{Im}A = (\ker A)^\perp$.</p>
+<p><b>Étape 2 : $A^2$.</b> On calcule $\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2$ : case $(1, 1)$ : $4 + 1 + 1 = 6$ ; case $(1, 2)$ : $-2 - 2 + 1 = -3$ ; par symétrie des rôles :</p>
+$$\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2 = \begin{pmatrix}6&-3&-3\\-3&6&-3\\-3&-3&6\end{pmatrix} = 3\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix},\quad\text{donc}\quad A^2 = \frac19\times3\times3A = A.$$
+<p><b>Étape 3 : Le noyau.</b> Chaque ligne a pour somme $0$ : $A\begin{pmatrix}1\\1\\1\end{pmatrix} = \begin{pmatrix}0\\0\\0\end{pmatrix}$, et $\operatorname{rg}A = \operatorname{tr}A = \frac{2 + 2 + 2}3 = 2$ : $\ker A = \mathbb R(1, 1, 1)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la projection orthogonale sur le plan}\ x + y + z = 0}$.</p>
+
+<p class="ml">Exemple 12 : $f\circ g$ symétrique $\iff f\circ g = g\circ f$</p>
+<p><b>Étape 1 : Rappel.</b> En base orthonormée : $A = {}^tA$, $B = {}^tB$.</p>
+<p><b>Étape 2 : On transpose.</b> $\,{}^t(AB) = {}^tB\,{}^tA = BA$. Donc $AB$ symétrique $\iff AB = BA$.</p>
+<p><b>Étape 3 : Un contre-exemple qui ne commute pas.</b></p>
+$$A = \begin{pmatrix}1&0\\0&0\end{pmatrix},\ B = \begin{pmatrix}0&1\\1&0\end{pmatrix}:\quad AB = \begin{pmatrix}1\times0 + 0\times1&1\times1 + 0\times0\\0&0\end{pmatrix} = \begin{pmatrix}0&1\\0&0\end{pmatrix},\ \text{pas symétrique}.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\circ g\ \text{symétrique}\iff f\circ g = g\circ f}$.</p>
+
+<h2 id="e-sfusym">13. Utiliser les endomorphismes symétriques</h2>
+<div class="sbox">$$\langle u(x), y\rangle = {}^t(AX)Y = {}^tXAY,\qquad{}^tXAX = \sum_{i,j}a_{ij}x_ix_j,\qquad{}^tX\,{}^tAA\,X = \|AX\|^2.$$
+$$u\ \text{symétrique},\ F\ \text{stable}\Rightarrow F^\perp\ \text{stable}.\qquad\textbf{Spectral}:\ S = PDP^{-1} = PD\,{}^tP,\ P\in O_n(\mathbb R).$$</div>
+
+<p class="ml">Exemple 13 : $\operatorname{Sp}(p\circ q)\subset[0, 1]$ pour deux projecteurs orthogonaux</p>
+<p><b>Étape 1 : Rappel.</b> Un projecteur orthogonal est symétrique, $\|q(x)\|\leq\|x\|$, et $\langle q(x), x\rangle = \|q(x)\|^2$.</p>
+<p><b>Étape 2 : L'équation.</b> $p(q(x)) = \lambda x$, $x\neq0$, $\lambda\neq0$. Alors $x = p\big(\frac{q(x)}\lambda\big)\in\operatorname{Im}p$, donc $p(x) = x$.</p>
+<p><b>Étape 3 : On teste contre $x$.</b> $\lambda\|x\|^2 = \langle p(q(x)), x\rangle = \langle q(x), p(x)\rangle = \langle q(x), x\rangle = \|q(x)\|^2$.</p>
+<p><b>Étape 4 : On encadre.</b> $0\leq\|q(x)\|^2\leq\|x\|^2$, donc $0\leq\lambda\leq1$.</p>
+<p><b>Étape 5 : On le voit sur des matrices.</b> $p$ = projection sur l'axe $Ox$, $q$ = projection sur la droite d'angle $\theta$ ($c = \cos\theta$, $s = \sin\theta$) :</p>
+$$p = \begin{pmatrix}1&0\\0&0\end{pmatrix},\quad q = \begin{pmatrix}c^2&cs\\cs&s^2\end{pmatrix},\quad pq = \begin{pmatrix}c^2&cs\\0&0\end{pmatrix}:\ \text{valeurs propres}\ c^2\in[0, 1]\ \text{et}\ 0.$$
+<p><b>Conclusion.</b> $\cG{\operatorname{Sp}(p\circ q)\subset[0, 1]}$.</p>
+
+<p class="ml">Exemple 14 : la matrice $\min(i, j)$ est définie positive</p>
+<p>$A = (\min(i, j))_{1\leq i,j\leq n}$, par exemple pour $n = 4$ :</p>
+$$A = \begin{pmatrix}1&1&1&1\\1&2&2&2\\1&2&3&3\\1&2&3&4\end{pmatrix}.$$
+<p><b>Étape 1 : Rappel.</b> Si $A = {}^tTT$ avec $T$ inversible, $\,{}^tXAX = \|TX\|^2 > 0$ pour $X\neq0$.</p>
+<p><b>Étape 2 : La factorisation.</b> $T$ triangulaire supérieure remplie de $1$ :</p>
+$$T = \begin{pmatrix}1&1&1&1\\0&1&1&1\\0&0&1&1\\0&0&0&1\end{pmatrix},\qquad{}^tTT = \begin{pmatrix}1&0&0&0\\1&1&0&0\\1&1&1&0\\1&1&1&1\end{pmatrix}\begin{pmatrix}1&1&1&1\\0&1&1&1\\0&0&1&1\\0&0&0&1\end{pmatrix} = \begin{pmatrix}1&1&1&1\\1&2&2&2\\1&2&3&3\\1&2&3&4\end{pmatrix}.$$
+<p>Case $(i, j)$ : ligne $i$ de $\,{}^tT$ (des $1$ jusqu'à la place $i$) fois colonne $j$ de $T$ (des $1$ jusqu'à la place $j$) : il y a $\min(i, j)$ produits $1\times1$.</p>
+<p><b>Étape 3 : La forme quadratique.</b> $TX = (x_1 + x_2 + x_3 + x_4,\ x_2 + x_3 + x_4,\ x_3 + x_4,\ x_4)$, donc $\,{}^tXAX = (x_1 + x_2 + x_3 + x_4)^2 + (x_2 + x_3 + x_4)^2 + (x_3 + x_4)^2 + x_4^2$.</p>
+<p><b>Étape 4 : Les valeurs propres.</b> $AX = \lambda X$, $X\neq0$ : $\,{}^tXAX = \lambda\|X\|^2$, et $\,{}^tXAX = \|TX\|^2 > 0$ ($T$ inversible, $\det T = 1$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{toutes les valeurs propres de}\ A\ \text{sont}\ > 0}$.</p>
+
+<p class="ml">Exemple 15 : la décomposition spectrale $S = \sum\lambda_iU_i{}^tU_i$</p>
+<p>$S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Base orthonormée de vecteurs propres $(U_1, \dots, U_n)$ : $S = \sum\lambda_iU_i{}^tU_i$ (les deux côtés coïncident sur chaque $U_j$, car $\,{}^tU_iU_j = \delta_{ij}$).</p>
+<p><b>Étape 2 : Éléments propres.</b> Somme des lignes $3$ : $U_1 = \frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix}$, $\lambda_1 = 3$. Trace $4$ : $\lambda_2 = 1$, $U_2 = \frac1{\sqrt2}\begin{pmatrix}1\\-1\end{pmatrix}$ (orthogonal à $U_1$).</p>
+<p><b>Étape 3 : Les projecteurs.</b></p>
+$$U_1{}^tU_1 = \frac12\begin{pmatrix}1\\1\end{pmatrix}\begin{pmatrix}1&1\end{pmatrix} = \frac12\begin{pmatrix}1&1\\1&1\end{pmatrix},\qquad U_2{}^tU_2 = \frac12\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.$$
+<p><b>Étape 4 : Conclusion.</b></p>
+$$\cG{3\times\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix} + 1\times\frac12\begin{pmatrix}1&-1\\-1&1\end{pmatrix} = \frac12\begin{pmatrix}3 + 1&3 - 1\\3 - 1&3 + 1\end{pmatrix} = \begin{pmatrix}2&1\\1&2\end{pmatrix} = S}.$$
+
+<p class="ml">Exemple 16 : $\operatorname{tr}(AU)\leq\operatorname{tr}A$ ($A$ symétrique positive, $U$ orthogonale)</p>
+<p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}$, $P\in O_n$, $D = \operatorname{diag}(\lambda_i)$, $\lambda_i\geq0$ ; $\operatorname{tr}(XY) = \operatorname{tr}(YX)$.</p>
+<p><b>Étape 2 : On transporte.</b> $\operatorname{tr}(AU) = \operatorname{tr}(PDP^{-1}U) = \operatorname{tr}(DP^{-1}UP)$, et $V = P^{-1}UP = (v_{ij})$ est orthogonale.</p>
+<p><b>Étape 3 : La diagonale.</b> $DV = \begin{pmatrix}\lambda_1v_{11}&\cdots&\lambda_1v_{1n}\\\vdots&&\vdots\\\lambda_nv_{n1}&\cdots&\lambda_nv_{nn}\end{pmatrix}$, donc $\operatorname{tr}(DV) = \sum\lambda_iv_{ii}$.</p>
+<p><b>Étape 4 : On majore.</b> Les colonnes de $V$ sont unitaires : $v_{ii}^2\leq\sum_kv_{ki}^2 = 1$, donc $v_{ii}\leq1$, et $\lambda_i\geq0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{tr}(AU) = \sum\lambda_iv_{ii}\leq\sum\lambda_i = \operatorname{tr}A}$.</p>
+
+<h2 id="e-sfiso">14. Montrer qu'un endomorphisme est une isométrie</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Formule</td><td>Conserver la norme (ou le produit scalaire).</td></tr>
+<tr><td>Matrice dans une base orthonormée</td><td>Colonnes orthonormées (plus rapide que calculer $\,{}^tMM$).</td></tr>
+<tr><td>Image d'une base</td><td>L'image d'une base orthonormée est une base orthonormée.</td></tr>
+<tr><td>Matrice symétrique et orthogonale</td><td>C'est une symétrie orthogonale ($A^2 = {}^tAA = I_n$).</td></tr>
+</table>
+
+<p class="ml">Exemple 17 : $M\mapsto AM$ est une isométrie $\iff A\in O_n$</p>
+<p><b>Étape 1 : Rappel.</b> Conserver le produit scalaire $\langle M, N\rangle = \operatorname{tr}({}^tMN)$.</p>
+<p><b>Étape 2 : On calcule.</b> $\langle AM, AN\rangle = \operatorname{tr}({}^tM\,{}^tAAN)$, donc $f_A$ isométrie $\iff\operatorname{tr}\big({}^tM({}^tAA - I_n)N\big) = 0$ pour tous $M, N$, soit $\langle M, ({}^tAA - I_n)N\rangle = 0$.</p>
+<p><b>Étape 3 : Le seul vecteur orthogonal à tout est $0$.</b> $({}^tAA - I_n)N = 0$ pour tout $N$ ; avec $N = I_n$ : $\,{}^tAA = I_n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f_A\ \text{isométrie}\iff A\in O_n(\mathbb R)}$. Exemple : $A = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$, $\,{}^tAA = \begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}0&-1\\1&0\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix}$ ✓.</p>
+
+<p class="ml">Exemple 18 : $\langle e_i, e_j\rangle = \langle f_i, f_j\rangle$ entraîne une isométrie $e_i\mapsto f_i$</p>
+<p><b>Étape 1 : Rappel.</b> $u$ défini par $u(e_i) = f_i$ ; on montre $\|u(x)\| = \|x\|$.</p>
+<p><b>Étape 2 : On développe.</b> $x = \sum x_ie_i$ : $\|u(x)\|^2 = \Big\langle\sum x_if_i, \sum x_jf_j\Big\rangle = \sum_{i,j}x_ix_j\langle f_i, f_j\rangle$.</p>
+<p><b>Étape 3 : L'hypothèse.</b> $\langle f_i, f_j\rangle = \langle e_i, e_j\rangle$ : la somme vaut $\sum x_ix_j\langle e_i, e_j\rangle = \|x\|^2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u\in O(E)}$ : les matrices de Gram $G = (\langle e_i, e_j\rangle)$ des deux familles sont égales.</p>
+
+<p class="ml">Exemple 19 : une rotation de $\mathbb R^3$</p>
+<p>$A = \frac13\begin{pmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Colonnes orthonormées, $\det = 1$ : rotation ; axe = invariants ; $\operatorname{tr}A = 1 + 2\cos\theta$ ; signe par $\det(u, v, Av)$.</p>
+<p><b>Étape 2 : Orthogonale.</b> Colonnes de $3A$ : $C_1 = (2, -1, 2)$, $C_2 = (2, 2, -1)$, $C_3 = (-1, 2, 2)$. Normes : $4 + 1 + 4 = 9$ chacune. Produits : $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = -2 - 2 + 4 = 0$, $C_2\cdot C_3 = -2 + 4 - 2 = 0$.</p>
+<p><b>Étape 3 : Le déterminant</b> (Sarrus sur $3A$) : $2\times(4 + 2) - 2\times(-2 - 4) + (-1)\times(1 - 4) = 12 + 12 + 3 = 27$, donc $\det A = \frac{27}{27} = 1$ : rotation.</p>
+<p><b>Étape 4 : L'axe.</b> $(3A - 3I)V = 0$ :</p>
+$$\begin{pmatrix}-1&2&-1\\-1&-1&2\\2&-1&-1\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}0\\0\\0\end{pmatrix}\iff x = y = z:\quad u = \frac1{\sqrt3}\begin{pmatrix}1\\1\\1\end{pmatrix}.$$
+<p><b>Étape 5 : L'angle.</b> $\operatorname{tr}A = \frac{2 + 2 + 2}3 = 2 = 1 + 2\cos\theta$, donc $\cos\theta = \frac12$. Avec $v = \frac1{\sqrt2}(1, -1, 0)\perp u$ : $Av = \frac1{3\sqrt2}(2 - 2, -1 - 2, 2 + 1) = \frac1{\sqrt2}(0, -1, 1)$ et $v\wedge Av = \frac12\big((-1)(1) - 0, 0 - 1, -1 - 0\big) = -\frac12(1, 1, 1) = -\frac{\sqrt3}2u$. Donc $\sin\theta = -\frac{\sqrt3}2$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{A\ \text{est la rotation d'axe}\ \mathbb R(1, 1, 1)\ \text{orienté par}\ u,\ \text{d'angle}\ -\tfrac\pi3}$.</p>
+
+<p class="ml">Exemple 20 : une réflexion, reconnue sans calcul de valeurs propres</p>
+<p>$A = \frac17\begin{pmatrix}-2&6&-3\\6&3&2\\-3&2&6\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique et orthogonale $\Rightarrow A^2 = {}^tAA = I_3$ : symétrie orthogonale par rapport à $\ker(A - I_3)$.</p>
+<p><b>Étape 2 : Orthogonale.</b> Normes des colonnes de $7A$ : $4 + 36 + 9 = 49$, $36 + 9 + 4 = 49$, $9 + 4 + 36 = 49$. Produits : $-12 + 18 - 6 = 0$, $6 + 12 - 18 = 0$, $-18 + 6 + 12 = 0$.</p>
+<p><b>Étape 3 : Les invariants.</b> $(7A - 7I_3)V = 0$ : ligne $1$ : $-9x + 6y - 3z = 0$, soit $3x - 2y + z = 0$ ; les lignes $2$ ($6x - 4y + 2z = 0$) et $3$ ($-3x + 2y - z = 0$) sont proportionnelles.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la réflexion par rapport au plan}\ 3x - 2y + z = 0}$ (et $\operatorname{tr}A = \frac{-2 + 3 + 6}7 = 1 = 1 + 1 - 1$ ✓).</p>
+
+<p class="ml">Exemple 21 : un demi-tour</p>
+<p>$A = \frac19\begin{pmatrix}-7&4&4\\4&-1&8\\4&8&-1\end{pmatrix}$.</p>
+<p><b>Étape 1 : Rappel.</b> Symétrique orthogonale : symétrie ; $\operatorname{tr}A = \dim E_1 - \dim E_{-1}$.</p>
+<p><b>Étape 2 : Orthogonale.</b> Normes : $49 + 16 + 16 = 81$, $16 + 1 + 64 = 81$, $16 + 64 + 1 = 81$. Produits : $-28 - 4 + 32 = 0$, $-28 + 32 - 4 = 0$, $16 - 8 - 8 = 0$.</p>
+<p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = \frac{-7 - 1 - 1}9 = -1$, et $\dim E_1 + \dim E_{-1} = 3$ : $\dim E_1 = 1$, $\dim E_{-1} = 2$.</p>
+<p><b>Étape 4 : L'axe.</b> $(9A - 9I_3)V = 0$ : $-16x + 4y + 4z = 0$ et $4x - 10y + 8z = 0$. La 1<sup>re</sup> donne $y + z = 4x$ ; dans la 2<sup>e</sup> : $y + z - 10y + 8z = 0$, $y = z$, puis $x = \frac y2$ : $V = (1, 2, 2)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{A\ \text{est le demi-tour (rotation d'angle}\ \pi)\ \text{d'axe}\ \mathbb R(1, 2, 2)}$.</p>
+
+<p class="ml">Exemple 22 : les endomorphismes qui conservent le produit vectoriel</p>
+<p><b>Étape 1 : Rappel.</b> $f(x)\wedge f(y) = f(x\wedge y)$ ; on regarde l'image $(I, J, K)$ de la base $(i, j, k)$.</p>
+<p><b>Étape 2 : Les relations.</b> $I\wedge J = K$, $J\wedge K = I$, $K\wedge I = J$. Si l'un est nul, les trois le sont : $f = 0$.</p>
+<p><b>Étape 3 : Sinon, orthogonaux.</b> $K = I\wedge J$ est orthogonal à $I$ et $J$, et de même pour les autres : base orthogonale directe. $\|K\| = \|I\|\|J\|$, $\|I\| = \|J\|\|K\|$, $\|J\| = \|K\|\|I\|$ ; le produit donne $\|I\|\|J\|\|K\| = 1$, puis $\|K\|^2 = 1$, etc.</p>
+<p><b>Étape 4 : Conclusion.</b> $(I, J, K)$ base orthonormée directe : $\cG{f = 0\ \text{ou}\ f\in SO(3)}$ ; la réciproque se vérifie sur la matrice $\begin{pmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}$ dans une base adaptée.</p>
+
+<p class="ml">Exemple 23 : deux rotations qui commutent</p>
+<p><b>Étape 1 : Rappel.</b> Si $f\circ g = g\circ f$, $g$ envoie l'axe de $f$ dans l'ensemble des invariants de $f$.</p>
+<p><b>Étape 2 : Même axe.</b> Deux rotations d'axe $\mathbb Rk$ commutent : leurs matrices $\begin{pmatrix}R_\theta&0\\0&1\end{pmatrix}$ et $\begin{pmatrix}R_\varphi&0\\0&1\end{pmatrix}$ se multiplient en $\begin{pmatrix}R_{\theta + \varphi}&0\\0&1\end{pmatrix}$, dans les deux ordres.</p>
+<p><b>Étape 3 : Axes distincts.</b> $g(u) = \pm u$ ; $g(u) = u$ forcerait le même axe, donc $g(u) = -u$ : $g$ a la valeur propre $-1$, c'est un demi-tour, d'axe $\perp u$ ; de même pour $f$.</p>
+<p><b>Étape 4 : Deux demi-tours d'axes orthogonaux.</b> Dans la base $(u, v, u\wedge v)$ :</p>
+$$f = \begin{pmatrix}1&0&0\\0&-1&0\\0&0&-1\end{pmatrix},\quad g = \begin{pmatrix}-1&0&0\\0&1&0\\0&0&-1\end{pmatrix},\quad fg = gf = \begin{pmatrix}-1&0&0\\0&-1&0\\0&0&1\end{pmatrix}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{f\circ g = g\circ f\iff f\ \text{ou}\ g = \operatorname{id},\ \text{ou même axe},\ \text{ou deux demi-tours d'axes orthogonaux}}$.</p>
+
+<h2 id="e-enonce">15. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« $A$ est orthogonale »</b><span>Colonnes de norme $1$, deux à deux orthogonales ; ou $A^\top A = I$.</span></div>
 <div><b>« Nature de $A\in O(3)$ »</b><span>$\det$, axe $\ker(A - I)$, $\cos\theta = \frac{\operatorname{tr}A - 1}2$, signe par $\det(u, x, Ax)$.</span></div>
