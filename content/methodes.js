@@ -7327,7 +7327,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p><b>Étape 1 : Rappel.</b> « Au moins deux » : contraire « tous différents ». Uniforme : on dénombre.</p>
 <p><b>Étape 2 : Cas possibles.</b> $\Omega$ = listes de $23$ jours : $365^{23}$.</p>
 <p><b>Étape 3 : Tous différents.</b> Listes d'éléments distincts : $365\times364\times\dots\times343$.</p>
-<p><b>Étape 4 : Le calcul.</b> $P(\text{tous différents}) = \prod_{k=0}^{22}\frac{365 - k}{365}\approx0{,}493$.</p>
+<p><b>Étape 4 : Le calcul.</b> On divise chaque facteur par $365$ : $P(\text{tous différents}) = \frac{365\times364\times\dots\times343}{365^{23}} = \frac{365}{365}\times\frac{364}{365}\times\dots\times\frac{343}{365} = \prod_{k=0}^{22}\frac{365 - k}{365}\approx0{,}493$ (à la calculatrice : $23$ facteurs, du plus grand $1$ au plus petit $\frac{343}{365}\approx0{,}94$).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{P\approx1 - 0{,}493 = 0{,}507}$ : plus d'une chance sur deux.</p>
 
 <h2 id="q-cond">4. Probabilités conditionnelles, probabilités composées</h2>
@@ -7338,7 +7338,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p><b>Étape 1 : Rappel.</b> $P(R_1\cap R_2) = P(R_1)\,P_{R_1}(R_2)$.</p>
 <p><b>Étape 2 : Premier tirage.</b> $P(R_1) = \cO{\frac35}$.</p>
 <p><b>Étape 3 : Second tirage sachant $R_1$.</b> Il reste $2$ rouges sur $4$ : $P_{R_1}(R_2) = \cO{\frac24}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{P = \frac35\times\frac12 = \frac3{10}}$. Contrôle par dénombrement : $\binom32/\binom52 = \frac3{10}$.</p>
+<p><b>Étape 4 : Conclusion.</b> Produit des branches : $\frac35\times\frac24 = \frac{3\times2}{5\times4} = \frac6{20} = \cG{\frac3{10}}$. Contrôle par dénombrement : $\binom32 = 3$ paires rouges, $\binom52 = \frac{5\times4}2 = 10$ paires en tout, $\frac3{10}$.</p>
 
 <h2 id="q-tot">5. La formule des probabilités totales</h2>
 <div class="sbox">$$\cR{(B_1, \dots, B_n)}\ \text{système complet}\ (\text{disjoints, de réunion}\ \Omega):\quad P(A) = \sum_{i=1}^nP(\cR{B_i})\,P_{\cR{B_i}}(A).$$</div>
@@ -7347,8 +7347,8 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 <p>On choisit $U_1$ ($2$ rouges, $3$ bleues) avec probabilité $\frac13$, sinon $U_2$ ($4$ rouges, $1$ bleue), puis on tire une boule. $P(R)$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Système complet $(\cR{U_1}, \cR{U_2})$ : $P(R) = P(U_1)P_{U_1}(R) + P(U_2)P_{U_2}(R)$.</p>
 <p><b>Étape 2 : Les branches.</b> $P(U_1) = \frac13$, $P_{U_1}(R) = \frac25$ ; $P(U_2) = \frac23$, $P_{U_2}(R) = \frac45$.</p>
-<p><b>Étape 3 : Le calcul.</b> $P(R) = \frac13\cdot\frac25 + \frac23\cdot\frac45 = \frac2{15} + \frac8{15}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{P(R) = \frac{10}{15} = \frac23}$.</p>
+<p><b>Étape 3 : Le calcul.</b> $P(R) = P(U_1)P_{U_1}(R) + P(U_2)P_{U_2}(R) = \frac13\times\frac25 + \frac23\times\frac45 = \frac{1\times2}{3\times5} + \frac{2\times4}{3\times5} = \frac2{15} + \frac8{15}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\frac2{15} + \frac8{15} = \frac{2 + 8}{15} = \frac{10}{15}$, et on simplifie par $5$ : $\cG{P(R) = \frac23}$.</p>
 
 <h2 id="q-bayes">6. La formule de Bayes</h2>
 <div class="sbox">$$P_{\cB A}(\cR{B_j}) = \frac{P(\cR{B_j})\,P_{\cR{B_j}}(\cB A)}{\sum_iP(\cR{B_i})\,P_{\cR{B_i}}(\cB A)}.$$</div>
@@ -7370,16 +7370,16 @@ $$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\
 <p class="ml">Exemple 7 : vérifier une indépendance</p>
 <p>Un dé équilibré, $A$ = « pair », $B$ = « $\leq4$ ».</p>
 <p><b>Étape 1 : Rappel.</b> On compare $P(A\cap B)$ et $P(A)P(B)$.</p>
-<p><b>Étape 2 : Les probabilités.</b> $P(A) = \frac36 = \frac12$, $P(B) = \frac46 = \frac23$, $A\cap B = \{2, 4\}$, $P(A\cap B) = \frac13$.</p>
-<p><b>Étape 3 : On compare.</b> $P(A)P(B) = \frac12\cdot\frac23 = \frac13 = P(A\cap B)$.</p>
+<p><b>Étape 2 : Les probabilités.</b> $A = \{2, 4, 6\}$ : $P(A) = \frac36 = \frac12$. $B = \{1, 2, 3, 4\}$ : $P(B) = \frac46 = \frac23$. $A\cap B$ = pairs et $\leq4$ = $\{2, 4\}$ : $P(A\cap B) = \frac26 = \frac13$.</p>
+<p><b>Étape 3 : On compare.</b> $P(A)P(B) = \frac12\times\frac23 = \frac2{6} = \frac13 = P(A\cap B)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{et}\ B\ \text{sont indépendants}}$.</p>
 
 <p class="ml">Exemple 8 : deux à deux, mais pas mutuellement</p>
 <p>Deux pièces équilibrées. $A$ = « 1<sup>re</sup> pile », $B$ = « 2<sup>e</sup> pile », $C$ = « les deux pièces donnent le même résultat ».</p>
 <p><b>Étape 1 : Rappel.</b> Mutuelle : aussi $P(A\cap B\cap C) = P(A)P(B)P(C)$.</p>
-<p><b>Étape 2 : Les probabilités.</b> $P(A) = P(B) = P(C) = \frac12$ (pour $C$ : $PP$ ou $FF$).</p>
-<p><b>Étape 3 : Deux à deux.</b> $A\cap B = \{PP\}$, $A\cap C = \{PP\}$, $B\cap C = \{PP\}$ : chacun $\frac14 = \frac12\cdot\frac12$.</p>
-<p><b>Étape 4 : Les trois.</b> $A\cap B\cap C = \{PP\}$, probabilité $\frac14\neq\frac18$.</p>
+<p><b>Étape 2 : Les probabilités.</b> $\Omega = \{PP, PF, FP, FF\}$, $4$ issues équiprobables. $A = \{PP, PF\}$, $B = \{PP, FP\}$, $C = \{PP, FF\}$ : chacun $\frac24 = \frac12$.</p>
+<p><b>Étape 3 : Deux à deux.</b> $A\cap B = \{PP\}$, $A\cap C = \{PP\}$, $B\cap C = \{PP\}$ : chacun $\frac14$, et $\frac12\times\frac12 = \frac14$ : égalité à chaque fois.</p>
+<p><b>Étape 4 : Les trois.</b> $A\cap B\cap C = \{PP\}$, probabilité $\frac14$, alors que $P(A)P(B)P(C) = \frac12\times\frac12\times\frac12 = \frac18$ : $\frac14\neq\frac18$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{indépendants deux à deux, pas mutuellement}}$.</p>
 
 <h2 id="q-va">8. Variables aléatoires, loi</h2>
@@ -7388,9 +7388,9 @@ $$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\
 <p>Pour $M = \max(X_1, \dots, X_n)$ : on passe par $(M\leq k) = \bigcap(X_i\leq k)$, puis $P(M = k) = P(M\leq k) - P(M\leq k - 1)$. Pour un minimum : $(m > k) = \bigcap(X_i > k)$.</p>
 <p class="ml">Exemple 9 : la loi du maximum de deux dés</p>
 <p><b>Étape 1 : Rappel.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$, puis on fait la différence.</p>
-<p><b>Étape 2 : La fonction de répartition.</b> Les dés sont indépendants : $P(M\leq k) = \frac k6\cdot\frac k6 = \frac{k^2}{36}$.</p>
+<p><b>Étape 2 : La fonction de répartition.</b> $(M\leq k) = (X_1\leq k)\cap(X_2\leq k)$. Un dé donne $\leq k$ pour $k$ faces sur $6$ : $P(X_i\leq k) = \frac k6$. Indépendance : $P(M\leq k) = \frac k6\times\frac k6 = \frac{k^2}{36}$.</p>
 <p><b>Étape 3 : La différence.</b> $k^2 - (k - 1)^2 = k^2 - (k^2 - 2k + 1) = 2k - 1$, donc $P(M = k) = \frac{k^2 - (k - 1)^2}{36} = \frac{2k - 1}{36}$, $k\in[\![1, 6]\!]$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{P(M = k) = \frac{2k - 1}{36}}$. Contrôle : $\sum_{k=1}^6(2k - 1) = 36$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(M = k) = \frac{2k - 1}{36}}$. Contrôle : $\sum_{k=1}^6(2k - 1) = 1 + 3 + 5 + 7 + 9 + 11 = 36$, donc les probabilités somment à $\frac{36}{36} = 1$.</p>
 
 <h2 id="q-lois">9. Les lois usuelles</h2>
 <table class="mtab">
@@ -7423,14 +7423,14 @@ $$\textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}
 <p class="ml">Exemple 11 : l'espérance d'une binomiale par indicatrices</p>
 <p><b>Étape 1 : Rappel.</b> $E(\mathbb 1_A) = P(A)$ et linéarité.</p>
 <p><b>Étape 2 : On découpe.</b> $X = X_1 + \dots + X_n$ où $X_i = 1$ si la $i$-ième épreuve est un succès, $X_i\sim\mathcal B(p)$.</p>
-<p><b>Étape 3 : La linéarité.</b> $E(X) = \sum E(X_i) = np$.</p>
+<p><b>Étape 3 : La linéarité.</b> $E(X_i) = 1\times p + 0\times(1 - p) = p$, donc $E(X) = E(X_1) + \dots + E(X_n) = p + \dots + p = np$ ($n$ termes).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = np}$, sans aucun calcul de somme avec des $\binom nk$.</p>
 
 <p class="ml">Exemple 12 : le nombre de points fixes d'une permutation au hasard</p>
 <p>$\sigma$ uniforme dans $S_n$, $X$ = nombre de $i$ avec $\sigma(i) = i$. Calculer $E(X)$.</p>
 <p><b>Étape 1 : Rappel.</b> Méthode des indicatrices.</p>
 <p><b>Étape 2 : On découpe.</b> $X = \sum_{i=1}^n\mathbb 1_{A_i}$ avec $A_i = (\sigma(i) = i)$.</p>
-<p><b>Étape 3 : Une probabilité.</b> Les permutations qui fixent $i$ sont $(n - 1)!$, donc $P(A_i) = \frac{(n - 1)!}{n!} = \frac1n$.</p>
+<p><b>Étape 3 : Une probabilité.</b> Si $\sigma(i) = i$, on permute librement les $n - 1$ autres : $(n - 1)!$ permutations. Donc $P(A_i) = \frac{(n - 1)!}{n!} = \frac{(n - 1)!}{n\times(n - 1)!} = \frac1n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = n\times\frac1n = 1}$, pour tout $n$ (les $A_i$ ne sont pourtant pas indépendants).</p>
 
 <h2 id="q-var">12. Variance, covariance</h2>
@@ -7440,11 +7440,11 @@ $$X, Y\ \text{indépendantes}\Rightarrow\operatorname{Cov}(X, Y) = 0\ \text{et}\
 <p class="ml">Exemple 13 : la variance de la loi uniforme</p>
 <p>$X\sim\mathcal U([\![1, n]\!])$.</p>
 <p><b>Étape 1 : Rappel.</b> $V(X) = E(X^2) - E(X)^2$, et le transfert pour $E(X^2)$.</p>
-<p><b>Étape 2 : $E(X)$.</b> $\frac1n\sum_{k=1}^nk = \frac{n + 1}2$.</p>
-<p><b>Étape 3 : $E(X^2)$.</b> $\frac1n\sum_{k=1}^nk^2 = \frac{(n + 1)(2n + 1)}6$.</p>
+<p><b>Étape 2 : $E(X)$.</b> Chaque valeur a probabilité $\frac1n$ : $E(X) = \sum_{k=1}^nk\times\frac1n = \frac1n\times\frac{n(n + 1)}2 = \frac{n + 1}2$.</p>
+<p><b>Étape 3 : $E(X^2)$.</b> Transfert : $E(X^2) = \sum_{k=1}^nk^2\times\frac1n = \frac1n\times\frac{n(n + 1)(2n + 1)}6 = \frac{(n + 1)(2n + 1)}6$.</p>
 <p><b>Étape 4 : La différence.</b></p>
-$$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 1) - 3(n + 1)\big)}{12} = \frac{(n + 1)(n - 1)}{12}.$$
-<p><b>Étape 5 : Conclusion.</b> $\cG{V(X) = \frac{n^2 - 1}{12}}$ (dé : $\frac{35}{12}$).</p>
+$$V(X) = E(X^2) - E(X)^2 = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{2(n + 1)(2n + 1) - 3(n + 1)^2}{12} = \frac{(n + 1)\big(4n + 2 - 3n - 3\big)}{12} = \frac{(n + 1)(n - 1)}{12}.$$
+<p><b>Étape 5 : Conclusion.</b> $(n + 1)(n - 1) = n^2 - 1$ : $\cG{V(X) = \frac{n^2 - 1}{12}}$ (dé, $n = 6$ : $\frac{36 - 1}{12} = \frac{35}{12}$).</p>
 
 <h2 id="q-ineg">13. Markov et Bienaymé-Tchebychev</h2>
 <div class="sbox">$$\textbf{Markov}:\ X\geq0,\ a > 0:\ P(X\geq a)\leq\frac{E(X)}a.\qquad\textbf{Bienaymé-Tchebychev}:\ P\big(|X - E(X)|\geq\varepsilon\big)\leq\frac{V(X)}{\varepsilon^2}.$$</div>
@@ -7453,7 +7453,7 @@ $$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 
 <p><b>Étape 1 : Rappel.</b> $P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}$.</p>
 <p><b>Étape 2 : Espérance et variance.</b> $S_n\sim\mathcal B\big(n, \frac12\big)$ : $E(S_n) = \frac n2$, $V(S_n) = n\cdot\frac12\cdot\frac12 = \frac n4$. Donc $E(F) = \frac1nE(S_n) = \frac12$ et $V(F) = \frac1{n^2}V(S_n) = \frac1{n^2}\cdot\frac n4 = \frac1{4n}$.</p>
 <p><b>Étape 3 : On applique</b> avec $\varepsilon = 0{,}05$, $\varepsilon^2 = 0{,}0025$ : $P\leq\frac{1/(4n)}{0{,}0025} = \frac1{4n\times0{,}0025} = \frac1{0{,}01\,n} = \frac{100}n$.</p>
-<p><b>Étape 4 : On résout</b> $\frac{100}n\leq0{,}05\iff n\geq2000$.</p>
+<p><b>Étape 4 : On résout</b> $\frac{100}n\leq0{,}05\iff100\leq0{,}05\,n\iff n\geq\frac{100}{0{,}05} = 100\times20 = 2000$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{n = 2000\ \text{lancers suffisent}}$ (la majoration est grossière, mais sûre).</p>
 
 <h2 id="q-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -7493,17 +7493,17 @@ $$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 
 <p>Trois portes, une voiture derrière l'une. Tu choisis la porte $1$. L'animateur, qui sait où est la voiture, ouvre une autre porte vide (au hasard s'il a le choix), disons la $3$. Faut-il changer pour la $2$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Bayes avec le système complet $(V_1, V_2, V_3)$ = « la voiture est derrière la porte $i$ ».</p>
 <p><b>Étape 2 : Les données.</b> $P(V_i) = \frac13$. Sachant $V_1$, l'animateur ouvre la $3$ avec probabilité $\frac12$ ; sachant $V_2$, il ouvre forcément la $3$ : $1$ ; sachant $V_3$, jamais : $0$.</p>
-<p><b>Étape 3 : Probabilités totales.</b> $P(O_3) = \frac13\cdot\frac12 + \frac13\cdot1 + 0 = \frac12$.</p>
-<p><b>Étape 4 : Bayes.</b> $P_{O_3}(V_2) = \frac{\frac13\cdot1}{\frac12} = \frac23$ et $P_{O_3}(V_1) = \frac{\frac16}{\frac12} = \frac13$.</p>
+<p><b>Étape 3 : Probabilités totales.</b> $P(O_3) = P(V_1)P_{V_1}(O_3) + P(V_2)P_{V_2}(O_3) + P(V_3)P_{V_3}(O_3) = \frac13\times\frac12 + \frac13\times1 + \frac13\times0 = \frac16 + \frac26 + 0 = \frac36 = \frac12$.</p>
+<p><b>Étape 4 : Bayes.</b> $P_{O_3}(V_2) = \frac{P(V_2)P_{V_2}(O_3)}{P(O_3)} = \frac{1/3}{1/2} = \frac13\times2 = \frac23$ et $P_{O_3}(V_1) = \frac{1/6}{1/2} = \frac16\times2 = \frac13$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{changer fait gagner avec probabilité}\ \frac23}$.</p>
 
 <p class="ml">Exercice 2 : un couple non indépendant</p>
 <p>On tire sans remise deux boules parmi trois numérotées $1, 2, 3$ ; $X$ = 1<sup>er</sup> numéro, $Y$ = 2<sup>e</sup>. Calculer $\operatorname{Cov}(X, Y)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y)$.</p>
-<p><b>Étape 2 : La loi conjointe.</b> Les $6$ couples $(i, j)$, $i\neq j$, sont équiprobables : $P(X = i, Y = j) = \frac16$. Les marginales sont uniformes sur $\{1, 2, 3\}$ : $E(X) = E(Y) = 2$.</p>
+<p><b>Étape 2 : La loi conjointe.</b> $3$ choix pour la 1<sup>re</sup> boule, puis $2$ pour la 2<sup>e</sup> : $3\times2 = 6$ couples $(i, j)$, $i\neq j$, équiprobables : $P(X = i, Y = j) = \frac16$. Marginale : $P(X = i) = \frac16 + \frac16 = \frac13$ (deux valeurs de $j$), uniforme sur $\{1, 2, 3\}$, d'où $E(X) = \frac{1 + 2 + 3}3 = 2$, et de même $E(Y) = 2$.</p>
 <p><b>Étape 3 : $E(XY)$.</b> $\big(\sum i\big)^2 = \sum_{i,j}ij$ contient aussi les termes $i = j$, qu'on retire : $\sum_{i\neq j}ij = \big(\sum i\big)^2 - \sum i^2$. Ici $\sum i = 1 + 2 + 3 = 6$, $\sum i^2 = 1 + 4 + 9 = 14$ :</p>
 $$E(XY) = \frac16\sum_{i\neq j}ij = \frac16(36 - 14) = \frac{22}6 = \frac{11}3.$$
-<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Cov}(X, Y) = \frac{11}3 - 4 = -\frac13}$ : non nulle, donc $X$ et $Y$ ne sont pas indépendantes (logique : sans remise).</p>
+<p><b>Étape 4 : Conclusion.</b> $E(X)E(Y) = 2\times2 = 4 = \frac{12}3$, donc $\cG{\operatorname{Cov}(X, Y) = \frac{11}3 - \frac{12}3 = -\frac13}$ : non nulle, donc $X$ et $Y$ ne sont pas indépendantes (logique : sans remise).</p>
 
 <p class="ml">Exercice 3 : tirages sans remise, l'espérance</p>
 <p>Une urne de $N$ boules dont $R$ rouges ; on tire $n$ boules sans remise. $X$ = nombre de rouges. $E(X)$ ?</p>
