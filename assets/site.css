@@ -2068,3 +2068,19 @@ table.pot td.pdiv{border-bottom:2px solid var(--ink)}
 .methode .fri .exn{border-color:var(--fc);color:var(--fc)}
 @media (max-width:600px){.methode .frise{padding-left:42px}.methode .frise::before{left:14px}.methode .frd{left:-42px;width:30px;height:30px;font-size:14px}}
 @media (prefers-color-scheme: dark){.methode .fri{--fc:#7FA4FF}.methode .fri.fO{--fc:#FFC266}.methode .fri.fV{--fc:#C9A2FF}.methode .fri.fG{--fc:#6FD3A3}.methode .frd{color:#0A1230}}
+
+/* Méthode puis exercice : encadré méthode, énoncé, corrigé ; tout est aéré */
+.methode .prose{line-height:1.75}
+.methode .prose > p{margin:18px 0}
+.methode .sbox{padding:20px 24px!important;margin:26px 8px 34px 0!important}
+.methode .sbl{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.methode .sbl li{position:relative;padding-left:22px;overflow-x:auto;overflow-y:hidden}
+.methode .sbl li::before{content:"";position:absolute;left:2px;top:.85em;width:8px;height:8px;border-radius:50%;background:var(--fc,var(--ink))}
+.methode .mtd{margin:14px 0 18px;padding:14px 18px;border-left:4px solid var(--fc,var(--ink));background:color-mix(in srgb,var(--fc,#2B5BD7) 7%,var(--surface))}
+.methode .mtk,.methode .exqk,.methode .exk{display:block;font:700 12px var(--f-display);letter-spacing:.09em;text-transform:uppercase;color:var(--fc,var(--muted));margin-bottom:6px}
+.methode .mtb > p{margin:6px 0}
+.methode .exq{margin:18px 0 10px;padding:14px 18px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+.methode .exqb > p{margin:6px 0}
+.methode .exk{margin:22px 0 4px}
+.methode .exc > p.exs{margin:22px 0}
+.methode mjx-container[display="true"]{margin:22px 0!important}

@@ -89,7 +89,7 @@ $$A^0 = I_n,\qquad A^1 = A,\qquad A^{k+1} = A\,A^k = A^k\,A.$$
 <li><b>Calcul de $A^2, A^3$ qui fait apparaître un motif</b> : on conjecture, puis récurrence.</li>
 <li><b>Polynôme annulateur</b> $A^2 = aA + bI_n$ : $A^n = a_nA + b_nI_n$, suites récurrentes.</li>
 </ol>
-<div class="sbox">$$D = \operatorname{diag}(d_1,\dots,d_n)\ \Longrightarrow\ D^k = \operatorname{diag}(d_1^k,\dots,d_n^k),\qquad I_n^k = I_n.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle D = \operatorname{diag}(d_1,\dots,d_n)\ \Longrightarrow\ D^k = \operatorname{diag}(d_1^k,\dots,d_n^k)$</li><li>$\displaystyle I_n^k = I_n$</li></ul></div>
 <p class="ml">Le binôme de Newton</p>
 <div class="sbox">$$AB = BA\ \Longrightarrow\ (A + B)^n = \sum_{k=0}^n\binom nkA^kB^{n-k}.$$</div>
 <p class="ml">Méthode</p>
@@ -133,12 +133,12 @@ $$N^p = 0\ \Longrightarrow\ \forall k\geqslant p,\ N^k = N^pN^{k-p} = 0.$$
 <p>Une matrice <b>triangulaire stricte</b> (zéros sur la diagonale et en dessous) est nilpotente : chaque puissance pousse les coefficients d'un cran vers le coin en haut à droite.</p>
 
 <h2 id="m-transp">7. Transposée</h2>
-<div class="sbox">$$({}^tA)_{i,j} = a_{j,i},\qquad A\in\mathcal M_{n,p}\ \Longrightarrow\ {}^tA\in\mathcal M_{p,n}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle ({}^tA)_{i,j} = a_{j,i}$</li><li>$\displaystyle A\in\mathcal M_{n,p}\ \Longrightarrow\ {}^tA\in\mathcal M_{p,n}$</li></ul></div>
 <p>La ligne $i$ de $A$ devient la colonne $i$ de $\,{}^tA$.</p>
 $$\,{}^t\!\begin{pmatrix}\cB1&\cB2&\cB3\\\cR4&\cR5&\cR6\end{pmatrix} = \begin{pmatrix}\cB1&\cR4\\\cB2&\cR5\\\cB3&\cR6\end{pmatrix}$$
 <p>La <span class="kB">ligne 1</span> devient la <span class="kB">colonne 1</span>, la <span class="kR">ligne 2</span> devient la <span class="kR">colonne 2</span>.</p>
 <p class="ml">Règles</p>
-<div class="sbox">$$\,{}^t({}^tA) = A,\qquad {}^t(\lambda A + B) = \lambda\,{}^tA + {}^tB,\qquad {}^t(AB) = {}^tB\,{}^tA.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle {}^t({}^tA) = A$</li><li>$\displaystyle {}^t(\lambda A + B) = \lambda\,{}^tA + {}^tB$</li><li>$\displaystyle {}^t(AB) = {}^tB\,{}^tA$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>$\,{}^t(AB) = {}^tA\,{}^tB$ est faux : vérifie les tailles, $\,{}^tA\,{}^tB$ n'existe même pas en général.</p>
 <p class="ml">Symétrique, antisymétrique (matrices carrées)</p>
@@ -147,7 +147,7 @@ $$\mathcal S_n:\ {}^tA = A,\qquad\mathcal A_n:\ {}^tA = -A\ \Longrightarrow\ a_{
 $$\begin{pmatrix}1&\cB2&\cR3\\\cB2&0&\cG5\\\cR3&\cG5&4\end{pmatrix}\in\mathcal S_3\ \ (\text{égaux}),\qquad\begin{pmatrix}0&\cB2&\cR{-1}\\\cB{-2}&0&\cG3\\\cR1&\cG{-3}&0\end{pmatrix}\in\mathcal A_3\ \ (\text{opposés, diagonale nulle}).$$
 
 <h2 id="m-inv">8. Matrice inverse</h2>
-<div class="sbox">$$A\in GL_n(\mathbb K)\iff\exists B\in\mathcal M_n(\mathbb K),\ AB = BA = I_n,\qquad B = A^{-1}\ \text{est unique}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle A\in GL_n(\mathbb K)\iff\exists B\in\mathcal M_n(\mathbb K),\ AB = BA = I_n$</li><li>$\displaystyle B = A^{-1}\ \text{est unique}$</li></ul></div>
 <p class="ml">À savoir</p>
 <ul>
 <li>Pour une matrice carrée, <b>un seul côté suffit</b> : $AB = I_n\Longrightarrow BA = I_n$.</li>
@@ -324,7 +324,7 @@ $$\cG{e'_1} = 7\cO{e_1} + \cO{e_2} - 4\cO{e_3},\qquad\cG{e'_2} = 8\cO{e_1} - 2\c
 <p class="ml">Ce qu'il faut savoir</p>
 <div class="sbox">$$\left\{\begin{aligned}&P_{\cO{\mathcal B}\to\cG{\mathcal B'}} = \operatorname{Mat}_{\cG{\mathcal B'},\cO{\mathcal B}}(\mathrm{id})\quad\text{(l'ordre des bases s'inverse dans la notation)}\\&P\ \text{est carrée et toujours inversible},\qquad P_{\cG{\mathcal B'}\to\cO{\mathcal B}} = P^{-1}\\&P_{\mathcal B\to\mathcal B'}\,P_{\mathcal B'\to\mathcal B''} = P_{\mathcal B\to\mathcal B''}\quad\text{(Chasles, dans le bon ordre)}\end{aligned}\right.$$</div>
 <p class="ml">Changer les coordonnées d'un vecteur</p>
-<div class="sbox">$$\cO X = P\,\cG{X'}\qquad\text{(anciennes} = P\times\text{nouvelles)},\qquad\cG{X'} = P^{-1}\cO X.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cO X = P\,\cG{X'}\qquad\text{(anciennes} = P\times\text{nouvelles)}$</li><li>$\displaystyle \cG{X'} = P^{-1}\cO X$</li></ul></div>
 <p><b>Astuce</b> : $P$ « parle » l'ancienne langue. Elle prend des coordonnées dans la nouvelle base et les traduit dans l'ancienne. C'est l'inverse de ce qu'on croit spontanément : pour obtenir les <b>nouvelles</b> coordonnées, il faut $P^{-1}$.</p>
 <p>Vérification sur $\cG{e'_1}$ : ses coordonnées nouvelles sont $\cG{X' = (1,0,0)}$, et $P\cG{X'}$ est la première colonne de $P$, soit $\cO{(7,1,-4)}$. Ce sont bien ses coordonnées anciennes.</p>
 <p class="ml piege">Piège</p>
@@ -344,7 +344,7 @@ $$\cG{e'_1} = 7\cO{e_1} + \cO{e_2} - 4\cO{e_3},\qquad\cG{e'_2} = 8\cO{e_1} - 2\c
 <line x1="360" y1="58" x2="360" y2="160" stroke="#2B5BD7" stroke-width="2.5" marker-end="url(#arB)"/><text x="372" y="114" font-size="16" fill="#2B5BD7">P⁻¹</text>
 </svg></div>
 <p>Pour aller en bas à gauche jusqu'en bas à droite, il y a deux chemins : tout droit ($\cG{A'}$), ou par le haut : monter avec $\cB P$, traverser avec $\cO A$, redescendre avec $\cB{P^{-1}}$. On écrit les étapes <b>de droite à gauche</b> :</p>
-<div class="sbox">$$\cG{A'} = \cB{P^{-1}}\,\cO A\,\cB P\qquad\Longleftrightarrow\qquad\cO A = \cB P\,\cG{A'}\,\cB{P^{-1}}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cG{A'} = \cB{P^{-1}}\,\cO A\,\cB P$</li><li>$\displaystyle \Longleftrightarrow$</li><li>$\displaystyle \cO A = \cB P\,\cG{A'}\,\cB{P^{-1}}$</li></ul></div>
 <p>Cas général $f : E\to F$, avec $P$ changement de base dans $E$ et $Q$ dans $F$ :</p>
 $$\operatorname{Mat}_{\mathcal B',\mathcal C'}(f) = Q^{-1}\operatorname{Mat}_{\mathcal B,\mathcal C}(f)\,P.$$
 <ul>
@@ -427,7 +427,7 @@ $$A = PDP^{-1},\ D = \operatorname{diag}(\lambda_1,\dots,\lambda_n)\ \Longrighta
 <p>Comme en taille 2, à condition que les tailles des blocs soient compatibles. <b>Garder l'ordre</b> dans chaque produit : $AA'$, pas $A'A$.</p>
 <p class="ml">Matrices élémentaires $E_{i,j}$</p>
 <p>$E_{i,j}$ a un seul $1$, à la ligne $i$ et à la colonne $j$, et des $0$ partout ailleurs.</p>
-<div class="sbox">$$A = \sum_{i,j}a_{i,j}E_{i,j},\qquad E_{i,\cB j}\,E_{\cB k,l} = \delta_{\cB j\cB k}\,E_{i,l}\quad(\text{nul si}\ \cB j\neq\cB k).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle A = \sum_{i,j}a_{i,j}E_{i,j}$</li><li>$\displaystyle E_{i,\cB j}\,E_{\cB k,l} = \delta_{\cB j\cB k}\,E_{i,l}\quad(\text{nul si}\ \cB j\neq\cB k)$</li></ul></div>
 <p><b>Astuce</b> : pour retenir le produit, ce sont les indices du milieu qui doivent être égaux, puis ils disparaissent (encore les dominos).</p>
 $$AE_{i,j}\ \text{a pour seule colonne non nulle la colonne}\ j,\ \text{égale à la colonne}\ i\ \text{de}\ A\ \Longrightarrow\ \operatorname{tr}(AE_{i,j}) = a_{j,i}.$$
 <p class="ml">Une preuve classique</p>
@@ -645,7 +645,7 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 <p><b>Étape 6 : Conclusion.</b> $\cG{B = P^{-1}AP}$ avec $P = \begin{pmatrix}1&0&1\\-2&1&-2\\1&0&0\end{pmatrix}$.</p>
 
 <h2 id="m-tr2">23. Utiliser la trace</h2>
-<div class="sbox">$$\operatorname{tr}(\lambda A + B) = \lambda\operatorname{tr}A + \operatorname{tr}B,\qquad\operatorname{tr}(AB) = \operatorname{tr}(BA),\qquad\operatorname{tr}(P^{-1}AP) = \operatorname{tr}A,\qquad p\ \text{projecteur}\Rightarrow\operatorname{tr}p = \operatorname{rg}p.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{tr}(\lambda A + B) = \lambda\operatorname{tr}A + \operatorname{tr}B$</li><li>$\displaystyle \operatorname{tr}(AB) = \operatorname{tr}(BA)$</li><li>$\displaystyle \operatorname{tr}(P^{-1}AP) = \operatorname{tr}A$</li><li>$\displaystyle p\ \text{projecteur}\Rightarrow\operatorname{tr}p = \operatorname{rg}p$</li></ul></div>
 
 <p class="ml">Exemple 23 : $AB - BA = A$ entraîne $A$ non inversible</p>
 <p><b>Étape 1 : Rappel.</b> Raisonner par l'absurde et prendre la trace.</p>
@@ -761,7 +761,7 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 <nav class="msum"><a href="#d-sn">Permutations</a><a href="#d-cycles">Cycles</a><a href="#d-sign">Signature</a><a href="#d-def">Définition du déterminant</a><a href="#d-2">Taille 2</a><a href="#d-tri">Triangulaire</a><a href="#d-sarrus">Sarrus</a><a href="#d-ops">Opérations</a><a href="#d-dev">Développer</a><a href="#d-form">Formules</a><a href="#d-vdm">Vandermonde</a><a href="#d-plus">Pour aller plus loin</a><a href="#d-sf">Boîte à outils</a><a href="#d-reflexes">Réflexes</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-arbre">L'arbre</a></nav>
 
 <h2 id="d-sn">1. Le groupe symétrique</h2>
-<div class="sbox">$$\mathfrak S_n = \{\sigma : [\![1,n]\!]\to[\![1,n]\!]\ \text{bijective}\},\qquad\operatorname{Card}\mathfrak S_n = n!$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \mathfrak S_n = \{\sigma : [\![1,n]\!]\to[\![1,n]\!]\ \text{bijective}\}$</li><li>$\displaystyle \operatorname{Card}\mathfrak S_n = n!$</li></ul></div>
 <ul>
 <li>La loi est la composition $\circ$ : $\sigma\tau = \sigma\circ\tau$, on applique <b>$\tau$ d'abord</b>.</li>
 <li>Neutre : $\mathrm{id}$. Inverse : $\sigma^{-1}$, on lit le tableau de bas en haut.</li>
@@ -806,9 +806,9 @@ $$\cR{2\ \xrightarrow{\ \sigma\ }\ 5\ \xrightarrow{\ \sigma\ }\ 4\ \xrightarrow{
 <div data-mlab="perm"></div>
 
 <h2 id="d-sign">3. Signature</h2>
-<div class="sbox">$$\varepsilon(\sigma) = (-1)^{N(\sigma)},\qquad N(\sigma) = \operatorname{Card}\{(i,j) : i\lt j,\ \sigma(i)\gt\sigma(j)\}\ \text{(nombre d'inversions)}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \varepsilon(\sigma) = (-1)^{N(\sigma)}$</li><li>$\displaystyle N(\sigma) = \operatorname{Card}\{(i,j) : i\lt j,\ \sigma(i)\gt\sigma(j)\}\ \text{(nombre d'inversions)}$</li></ul></div>
 <p class="ml">À retenir</p>
-<div class="sbox">$$\varepsilon(\sigma\tau) = \varepsilon(\sigma)\,\varepsilon(\tau),\qquad\varepsilon(\text{transposition}) = -1,\qquad\varepsilon(\text{cycle de longueur}\ p) = (-1)^{p-1}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \varepsilon(\sigma\tau) = \varepsilon(\sigma)\,\varepsilon(\tau)$</li><li>$\displaystyle \varepsilon(\text{transposition}) = -1$</li><li>$\displaystyle \varepsilon(\text{cycle de longueur}\ p) = (-1)^{p-1}$</li></ul></div>
 <p class="ml">Réflexe : la méthode la plus rapide</p>
 <ol>
 <li>Décomposer $\sigma$ en cycles disjoints de longueurs $p_1,\dots,p_r$.</li>
@@ -902,7 +902,7 @@ $$\cG{\det = (a + 2b)(a - b)^2}.$$
 <h2 id="d-dev">9. Développer selon une ligne ou une colonne</h2>
 <p class="ml">Les signes</p>
 $$\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix},\qquad\begin{pmatrix}+&-&+&-\\-&+&-&+\\+&-&+&-\\-&+&-&+\end{pmatrix}\qquad\text{signe de la case}\ (i,j) = (-1)^{i+j}.$$
-<div class="sbox">$$\det A = \sum_{j=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(ligne}\ i\text{)},\qquad\det A = \sum_{i=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(colonne}\ j\text{)}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \det A = \sum_{j=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(ligne}\ i\text{)}$</li><li>$\displaystyle \det A = \sum_{i=1}^n(-1)^{i+j}a_{i,j}\det A_{i,j}\ \ \text{(colonne}\ j\text{)}$</li></ul></div>
 <ul>
 <li>$A_{i,j}$ : la matrice $A$ sans sa ligne $i$ et sa colonne $j$.</li>
 <li>$\det A_{i,j}$ est le <b>mineur</b>, $(-1)^{i+j}\det A_{i,j}$ le <b>cofacteur</b>.</li>
@@ -1164,7 +1164,7 @@ $$U\begin{pmatrix}I_n&-A\\0&xI_p\end{pmatrix} = \begin{pmatrix}xI_n&0\\B&xI_p - 
 </ul>
 <div class="sbox">$$\text{Des vecteurs propres associés à des valeurs propres distinctes forment une famille libre, et}\ \sum_\lambda\cG{E_\lambda}\ \text{est directe}.$$</div>
 <p class="ml">Lien avec la trace et le déterminant (quand $\chi_A$ est scindé)</p>
-<div class="sbox">$$\chi_A = \prod_{\lambda}(X - \cB\lambda)^{\cO{m_\lambda}},\qquad\operatorname{tr}A = \sum_\lambda\cO{m_\lambda}\cB\lambda,\qquad\det A = \prod_\lambda\cB\lambda^{\cO{m_\lambda}}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \chi_A = \prod_{\lambda}(X - \cB\lambda)^{\cO{m_\lambda}}$</li><li>$\displaystyle \operatorname{tr}A = \sum_\lambda\cO{m_\lambda}\cB\lambda$</li><li>$\displaystyle \det A = \prod_\lambda\cB\lambda^{\cO{m_\lambda}}$</li></ul></div>
 
 <h2 id="r-chi">3. Le polynôme caractéristique</h2>
 <div class="sbox">$$\chi_A = \det(XI_n - A) = X^n - \operatorname{tr}(A)\,X^{n-1} + \cdots + (-1)^n\det A.$$</div>
@@ -1379,7 +1379,7 @@ $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix}
 <p><b>Astuce</b> : $T$ se lit colonne par colonne. La colonne $j$ de $T$ contient les coordonnées de $Ae_j$ dans la nouvelle base : ici $Ae_3 = 1\cdot e_1 + 0\cdot e_2 + 1\cdot e_3$.</p>
 
 <h2 id="r-annul">10. Polynômes annulateurs</h2>
-<div class="sbox">$$\chi_A(A) = 0\quad\text{(Cayley-Hamilton)},\qquad\pi_A\ \text{divise tout polynôme annulateur, en particulier}\ \chi_A.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \chi_A(A) = 0\quad\text{(Cayley-Hamilton)}$</li><li>$\displaystyle \pi_A\ \text{divise tout polynôme annulateur, en particulier}\ \chi_A$</li></ul></div>
 <ul>
 <li>Les racines de $\pi_A$ sont exactement les valeurs propres.</li>
 <li>$P(A) = 0\ \Longrightarrow\ \operatorname{Sp}(A)\subset\{\text{racines de}\ P\}$ : inclusion seulement.</li>
@@ -1547,7 +1547,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 4 : Conclusion.</b> $E = \ker u\oplus\bigoplus_i\big(\ker(u - \lambda_i\operatorname{id})\oplus\ker(u + \lambda_i\operatorname{id})\big)$ : $\cG{u\ \text{diagonalisable}}$.</p>
 
 <h2 id="r-sftrig">13. Utiliser la trigonalisation, trigonaliser</h2>
-<div class="sbox">$$u\ \text{trigonalisable}\iff\chi_u\ \text{scindé}\iff\text{il existe un annulateur scindé}.\qquad\text{Sur}\ \mathbb C:\ \text{toujours}.\qquad\operatorname{tr}(A^k) = \sum\lambda_i^k.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u\ \text{trigonalisable}\iff\chi_u\ \text{scindé}\iff\text{il existe un annulateur scindé}.\qquad\text{Sur}\ \mathbb C:\ \text{toujours}$</li><li>$\displaystyle \operatorname{tr}(A^k) = \sum\lambda_i^k$</li></ul></div>
 
 <p class="ml">Exemple 19 : nilpotent $\iff\operatorname{Sp} = \{0\}$</p>
 <p><b>Étape 1 : Rappel.</b> Sur $\mathbb C$, $u$ est trigonalisable.</p>
@@ -1668,7 +1668,7 @@ $$P = \begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix},\qquad D = \begin{pmatrix}
 <p><b>Étape 4 : Conclusion.</b> $\operatorname{tr}A = \frac36 = \frac12$ ou $\frac16 + \frac12 = \frac23$ : $\cG{0 \lt \operatorname{tr}A \lt 2}$.</p>
 
 <h2 id="r-sfstab">17. Sous-espaces stables, exponentielle</h2>
-<div class="sbox">$$D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}.\qquad H:\ {}^tLX = 0\ \text{stable par}\ A\iff L\ \text{vecteur propre de}\ {}^tA.\qquad\exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle D = \mathbb Kx\ \text{stable}\iff x\ \text{vecteur propre}$</li><li>$\displaystyle H:\ {}^tLX = 0\ \text{stable par}\ A\iff L\ \text{vecteur propre de}\ {}^tA$</li><li>$\displaystyle \exp(P^{-1}AP) = P^{-1}\exp(A)P,\quad\det\exp A = e^{\operatorname{tr}A}$</li></ul></div>
 
 <p class="ml">Exemple 33 : tous les sous-espaces stables d'une matrice $3\times3$</p>
 <p>$A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&-1\end{pmatrix}$.</p>
@@ -1823,7 +1823,7 @@ $$\cG{a(t) = -\frac75t^3}.$$
 <p>Trouver les constantes à l'étape 1, avant d'ajouter $\cR{y_p}$, donne une solution fausse. Si le second membre est nul, $\cR{y_p} = 0$.</p>
 
 <h2 id="e-o1">4. Ordre 1 : l'équation homogène</h2>
-<div class="sbox">$$y' + a(t)\,y = 0\iff y(t) = \cG\lambda\,e^{-A(t)},\qquad A\ \text{une primitive de}\ a\ (\text{sans constante}),\qquad\cG\lambda\in\mathbb K.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle y' + a(t)\,y = 0\iff y(t) = \cG\lambda\,e^{-A(t)}$</li><li>$\displaystyle A\ \text{une primitive de}\ a\ (\text{sans constante})$</li><li>$\displaystyle \cG\lambda\in\mathbb K$</li></ul></div>
 <p class="ml">Pourquoi (à savoir refaire)</p>
 <p>On multiplie par $e^{A(t)}$, qui ne s'annule pas, et on reconnaît une dérivée de produit :</p>
 $$y' + a\,y = 0\iff y'e^{A} + a\,e^{A}y = 0\iff\big(y\,e^{A}\big)' = 0\iff y\,e^{A} = \cG\lambda\iff y = \cG\lambda\,e^{-A}.$$
@@ -1959,7 +1959,7 @@ $$\lim_{t\to0^+}\lambda_1t^2 = 0 = \lim_{t\to0^-}\lambda_2t^2 = y(0).$$
 
 <h2 id="e-o2">8. Ordre 2 à coefficients constants : l'équation homogène</h2>
 <p>$(H):\ y'' + a\,y' + b\,y = 0$ avec $a, b$ <b>constants</b>. On remplace $y''$ par $r^2$, $y'$ par $r$, $y$ par $1$ :</p>
-<div class="sbox">$$\text{équation caractéristique}:\quad r^2 + a\,r + b = 0,\qquad\Delta = a^2 - 4b.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{équation caractéristique}:\quad r^2 + a\,r + b = 0$</li><li>$\displaystyle \Delta = a^2 - 4b$</li></ul></div>
 <table class="mtab">
 <tr><th>Cas</th><th>Racines</th><th>Solutions réelles $\cB{y_H}$</th></tr>
 <tr><td>$\Delta > 0$</td><td>$\cV{r_1}\neq\cV{r_2}$ réelles</td><td>$\cG\lambda\,e^{\cV{r_1}t} + \cG\mu\,e^{\cV{r_2}t}$</td></tr>
@@ -2083,7 +2083,7 @@ $$y(t) = -e^t + e^{2t} - t\,e^t.$$
 <h2 id="e-var">12. Ordre 2 à coefficients variables</h2>
 <p>$(H):\ y'' + a(t)\,y' + b(t)\,y = 0$. Plus de formule toute faite : $\mathcal S_H$ est de dimension $2$, il faut <b>trouver deux solutions indépendantes</b>.</p>
 <p class="ml">Le wronskien</p>
-<div class="sbox">$$W(t) = \varphi_1(t)\,\varphi_2'(t) - \varphi_1'(t)\,\varphi_2(t),\qquad(\varphi_1, \varphi_2)\ \text{base de}\ \mathcal S_H\iff W(t_0)\neq0\ \text{pour un}\ t_0\iff W\ \text{ne s'annule pas}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle W(t) = \varphi_1(t)\,\varphi_2'(t) - \varphi_1'(t)\,\varphi_2(t)$</li><li>$\displaystyle (\varphi_1, \varphi_2)\ \text{base de}\ \mathcal S_H\iff W(t_0)\neq0\ \text{pour un}\ t_0\iff W\ \text{ne s'annule pas}$</li></ul></div>
 <p>À savoir redémontrer : $W' = \varphi_1\varphi_2'' - \varphi_1''\varphi_2 = \varphi_1(-a\varphi_2' - b\varphi_2) - (-a\varphi_1' - b\varphi_1)\varphi_2 = -a\,W$, donc $W(t) = W(t_0)\,e^{-\int_{t_0}^ta}$.</p>
 <p class="ml">Méthode 1 : chercher une solution évidente</p>
 <p>Essayer $t^k$ (polynômes), $e^{rt}$, ou une série entière $\sum a_nt^n$.</p>
@@ -2109,7 +2109,7 @@ $$\lambda'(t) = -\sin t\cdot\frac1{\cos t} = -\tan t\ \Longrightarrow\ \lambda(t
 $$\cR{y_p(t) = \cos t\,\ln(\cos t) + t\sin t}.$$
 
 <h2 id="e-sys">13. Les systèmes $X' = AX$ ($A$ constante)</h2>
-<div class="sbox">$$X' = AX,\ X(0) = X_0\iff X(t) = e^{tA}X_0.\qquad A = PDP^{-1}\ \Longrightarrow\ \text{on pose}\ Y = P^{-1}X:\ Y' = DY.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle X' = AX,\ X(0) = X_0\iff X(t) = e^{tA}X_0$</li><li>$\displaystyle A = PDP^{-1}\ \Longrightarrow\ \text{on pose}\ Y = P^{-1}X:\ Y' = DY$</li></ul></div>
 <ol>
 <li><a href="#c-maths-mp-1">Diagonaliser</a> $A$ : valeurs propres $\cV{\lambda_i}$, vecteurs propres $V_i$.</li>
 <li>$Y' = DY$ se découple : $y_i' = \cV{\lambda_i}y_i$, donc $y_i = \cG{c_i}\,e^{\cV{\lambda_i}t}$.</li>
@@ -2228,7 +2228,7 @@ $$y' = 1 + y^2\iff\frac{y'}{1 + y^2} = 1\iff\big(\arctan y\big)' = 1\iff\arctan 
 <p><span class="kB">bleu</span> : l'indice et les bornes. <span class="kO">orange</span> : l'opération qu'on fait (changement d'indice, factorisation). <span class="kR">rouge</span> : les termes qui s'annulent. <span class="kV">violet</span> : les coefficients binomiaux. <span class="kG">vert</span> : le résultat.</p>
 
 <h2 id="a-not">1. Les notations du programme</h2>
-<div class="sbox">$$\sum_{\cB{k = p}}^{\cB n}x_k = x_p + x_{p+1} + \cdots + x_n,\qquad\prod_{\cB{k = p}}^{\cB n}x_k = x_p\times x_{p+1}\times\cdots\times x_n\qquad(p\leqslant n).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{\cB{k = p}}^{\cB n}x_k = x_p + x_{p+1} + \cdots + x_n$</li><li>$\displaystyle \prod_{\cB{k = p}}^{\cB n}x_k = x_p\times x_{p+1}\times\cdots\times x_n$</li><li>$\displaystyle (p\leqslant n)$</li></ul></div>
 <ul>
 <li><b>Nombre de termes</b> : de $\cB p$ à $\cB n$, il y a $\cB{n - p + 1}$ termes (et pas $n - p$).</li>
 <li><b>L'indice est muet</b> : $\sum_{k=1}^nk^2 = \sum_{j=1}^nj^2$. Il n'existe pas hors de la somme : on n'écrit jamais $k$ dans le résultat.</li>
@@ -2246,7 +2246,7 @@ $$\sum_{k=0}^n5 = 5(n + 1) = \cG{5n + 5}.$$
 <p>$\sum_{k=1}^n\lambda = n\lambda$, mais $\sum_{k=0}^n\lambda = (n + 1)\lambda$ : le terme $k = 0$ compte.</p>
 
 <h2 id="a-lin">2. Les règles de calcul</h2>
-<div class="sbox">$$\sum_{k=p}^n(\lambda x_k + \mu y_k) = \lambda\sum_{k=p}^nx_k + \mu\sum_{k=p}^ny_k\quad\text{(linéarité)},\qquad\sum_{k=p}^nx_k = \sum_{k=p}^mx_k + \sum_{k=m+1}^nx_k\quad\text{(Chasles)}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{k=p}^n(\lambda x_k + \mu y_k) = \lambda\sum_{k=p}^nx_k + \mu\sum_{k=p}^ny_k\quad\text{(linéarité)}$</li><li>$\displaystyle \sum_{k=p}^nx_k = \sum_{k=p}^mx_k + \sum_{k=m+1}^nx_k\quad\text{(Chasles)}$</li></ul></div>
 <ul>
 <li>Ce qui ne dépend pas de $k$ sort de la somme : $\sum_{k=1}^nn\,k = n\sum_{k=1}^nk$.</li>
 <li>On peut isoler un terme : $\sum_{k=0}^nx_k = x_0 + \sum_{k=1}^nx_k$.</li>
@@ -2293,7 +2293,7 @@ $$\cG{T = \sum_{j=0}^nj\,2^j}.$$
 <p>Dans le terme général, <b>tous</b> les $k$ doivent être remplacés : avec $j = n - k$, $k = n - j$ et $x_k = x_{n-j}$.</p>
 
 <h2 id="a-usu">4. Les sommes usuelles</h2>
-<div class="sbox">$$\sum_{k=1}^nk = \frac{n(n + 1)}{2},\qquad\sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}{6},\qquad\sum_{k=1}^nk^3 = \left(\frac{n(n + 1)}{2}\right)^2.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{k=1}^nk = \frac{n(n + 1)}{2}$</li><li>$\displaystyle \sum_{k=1}^nk^2 = \frac{n(n + 1)(2n + 1)}{6}$</li><li>$\displaystyle \sum_{k=1}^nk^3 = \left(\frac{n(n + 1)}{2}\right)^2$</li></ul></div>
 <p class="ml">La première, par retournement (Gauss)</p>
 <p>On écrit $S$ deux fois, la seconde à l'envers ($\cO{j = n + 1 - k}$), et on ajoute colonne par colonne :</p>
 $$\begin{aligned}S &= \cB1 + \cB2 + \cdots + \cB n\\S &= \cR n + \cR{(n - 1)} + \cdots + \cR1\\\hline2S &= (n + 1) + (n + 1) + \cdots + (n + 1) = n(n + 1)\end{aligned}\qquad\Longrightarrow\qquad\cG{S = \frac{n(n + 1)}{2}}.$$
@@ -2338,7 +2338,7 @@ $$= \frac15\cdot\frac53\Big(1 - \Big(\frac25\Big)^{n+1}\Big) = \cG{\frac13\Big(1
 <p>Toujours vérifier $q\neq1$. Avec un paramètre ($q = x$, $q = e^{i\theta}$), on traite le cas $q = 1$ à part.</p>
 
 <h2 id="a-tele">6. Le télescopage</h2>
-<div class="sbox">$$\sum_{k=p}^n(x_{k+1} - x_k) = x_{n+1} - x_p,\qquad\prod_{k=p}^n\frac{x_{k+1}}{x_k} = \frac{x_{n+1}}{x_p}\quad(x_k\neq0).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{k=p}^n(x_{k+1} - x_k) = x_{n+1} - x_p$</li><li>$\displaystyle \prod_{k=p}^n\frac{x_{k+1}}{x_k} = \frac{x_{n+1}}{x_p}\quad(x_k\neq0)$</li></ul></div>
 <p>On repère une différence de deux termes <b>consécutifs</b> de la même suite. On écrit les termes, ils s'annulent deux à deux, il reste le dernier et le premier.</p>
 <p class="ml">Exemple 1 : $\sum_{k=1}^n\frac1{k(k + 1)}$</p>
 <p><b>Étape 1 : Rappel.</b> Télescopage : $\sum_{k=p}^n(x_k - x_{k+1}) = x_p - x_{n+1}$.</p>
@@ -2380,7 +2380,7 @@ $$\sum_{k=1}^n\big(\ln(k + 1) - \ln k\big) = \ln(n + 1) - \ln1.$$
 <p><b>Étape 4 : Conclusion.</b> $\ln1 = 0$ : $\cG{\sum_{k=1}^n\ln\big(1 + \frac1k\big) = \ln(n + 1)}$.</p>
 
 <h2 id="a-prod">7. Les produits</h2>
-<div class="sbox">$$\prod_{k=p}^n\lambda = \lambda^{n-p+1},\qquad\prod_{k=p}^n(\lambda x_k) = \lambda^{n-p+1}\prod_{k=p}^nx_k,\qquad\ln\Big(\prod x_k\Big) = \sum\ln x_k\ (x_k > 0),\qquad e^{\sum x_k} = \prod e^{x_k}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \prod_{k=p}^n\lambda = \lambda^{n-p+1}$</li><li>$\displaystyle \prod_{k=p}^n(\lambda x_k) = \lambda^{n-p+1}\prod_{k=p}^nx_k$</li><li>$\displaystyle \ln\Big(\prod x_k\Big) = \sum\ln x_k\ (x_k > 0)$</li><li>$\displaystyle e^{\sum x_k} = \prod e^{x_k}$</li></ul></div>
 <ul>
 <li>$\prod_{k=1}^nk = n!$, et un produit est nul si et seulement si un de ses facteurs est nul.</li>
 <li>Le $\lambda$ sort avec la <b>puissance</b> $n - p + 1$, pas multiplié une fois.</li>
@@ -2441,7 +2441,7 @@ $$\binom{10}3 = \frac{10\times9\times8}{3\times2\times1} = \frac{720}6 = \cG{120
 <div data-mlab="pascal"></div>
 
 <h2 id="a-newton">9. La formule du binôme de Newton</h2>
-<div class="sbox">$$(a + b)^n = \sum_{k=0}^n\cV{\binom nk}a^kb^{n-k}\qquad(a, b\in\mathbb C,\ n\in\mathbb N).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle (a + b)^n = \sum_{k=0}^n\cV{\binom nk}a^kb^{n-k}$</li><li>$\displaystyle (a, b\in\mathbb C,\ n\in\mathbb N)$</li></ul></div>
 <p>$n + 1$ termes. Les puissances de $a$ montent de $0$ à $n$, celles de $b$ descendent de $n$ à $0$, et leur somme vaut toujours $n$. Pour des matrices, il faut $AB = BA$.</p>
 <p class="ml">Exemple 1 : $(x + 1)^5$</p>
 <p><b>Étape 1 : Rappel.</b> $(a + b)^n = \sum_{k=0}^n\binom nka^kb^{n-k}$, et les $\binom nk$ se lisent sur la ligne $n$ du triangle de Pascal.</p>
@@ -2502,7 +2502,7 @@ $$\cG{x^5 - 32 = (x - 2)(x^4 + 2x^3 + 4x^2 + 8x + 16)}.$$
 
 <h2 id="a-doubles">11. Les sommes doubles</h2>
 <p class="ml">Sur un rectangle : on intervertit librement</p>
-<div class="sbox">$$\sum_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant m}}a_{i,j} = \sum_{i=1}^n\Big(\sum_{j=1}^ma_{i,j}\Big) = \sum_{j=1}^m\Big(\sum_{i=1}^na_{i,j}\Big),\qquad\Big(\sum_{i=1}^nx_i\Big)\Big(\sum_{j=1}^my_j\Big) = \sum_{i,j}x_iy_j.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant m}}a_{i,j} = \sum_{i=1}^n\Big(\sum_{j=1}^ma_{i,j}\Big) = \sum_{j=1}^m\Big(\sum_{i=1}^na_{i,j}\Big)$</li><li>$\displaystyle \Big(\sum_{i=1}^nx_i\Big)\Big(\sum_{j=1}^my_j\Big) = \sum_{i,j}x_iy_j$</li></ul></div>
 <p class="ml">Sur un triangle : on dessine pour changer l'ordre</p>
 <div class="sbox">$$\sum_{1\leqslant i\leqslant j\leqslant n}a_{i,j} = \sum_{j=1}^n\sum_{\cB{i = 1}}^{\cB j}a_{i,j} = \sum_{i=1}^n\sum_{\cB{j = i}}^{\cB n}a_{i,j}.$$</div>
 <p>Méthode : on fixe la variable de l'extérieur, puis on lit dans la condition $1\leqslant i\leqslant j\leqslant n$ les bornes de celle de l'intérieur.</p>
@@ -2647,7 +2647,7 @@ $$\cG{\frac{2 + 3i}{1 - 2i} = -\frac45 + \frac75i},\qquad\operatorname{Re} = \cB
 
 <h2 id="z-conj">3. Le conjugué</h2>
 <div class="sbox">$$\overline{z + z'} = \overline z + \overline{z'},\quad\overline{zz'} = \overline z\,\overline{z'},\quad\overline{\Big(\frac z{z'}\Big)} = \frac{\overline z}{\overline{z'}},\quad\operatorname{Re}z = \frac{z + \overline z}2,\quad\operatorname{Im}z = \frac{z - \overline z}{2i}.$$</div>
-<div class="sbox">$$z\in\mathbb R\iff\overline z = z,\qquad z\in i\mathbb R\iff\overline z = -z.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle z\in\mathbb R\iff\overline z = z$</li><li>$\displaystyle z\in i\mathbb R\iff\overline z = -z$</li></ul></div>
 <p class="ml">Exemple : montrer qu'un nombre est réel sans le calculer</p>
 <p><b>Étape 1 : Rappel.</b> $w\in i\mathbb R\iff\overline w = -w$. Et $z\in\mathbb U\iff\overline z = \frac1z$.</p>
 <p><b>Étape 2 : On conjugue $w$.</b> Le conjugué passe sur chaque morceau :</p>
@@ -2680,7 +2680,7 @@ $$|3 + 4i| = \sqrt{9 + 16} = 5,\qquad|1 - i| = \sqrt{1 + 1} = \sqrt2.$$
 $$\Big|\frac{3 + 4i}{1 - i}\Big| = \frac5{\sqrt2} = \cG{\frac{5\sqrt2}2}.$$
 
 <h2 id="z-u">5. Le cercle $\mathbb U$, Euler et Moivre</h2>
-<div class="sbox">$$e^{i\theta} = \cos\theta + i\sin\theta,\qquad e^{i\theta}e^{i\theta'} = e^{i(\theta + \theta')},\qquad\overline{e^{i\theta}} = e^{-i\theta} = \frac1{e^{i\theta}}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle e^{i\theta} = \cos\theta + i\sin\theta$</li><li>$\displaystyle e^{i\theta}e^{i\theta'} = e^{i(\theta + \theta')}$</li><li>$\displaystyle \overline{e^{i\theta}} = e^{-i\theta} = \frac1{e^{i\theta}}$</li></ul></div>
 <div class="sbox">$$\textbf{Euler}:\ \cos\theta = \frac{e^{i\theta} + e^{-i\theta}}2,\quad\sin\theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}.\qquad\textbf{Moivre}:\ (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta).$$</div>
 <ul>
 <li>$e^{i\theta} = 1\iff\theta\equiv0\ [2\pi]$. Valeurs : $e^{i\pi} = -1$, $e^{i\pi/2} = i$, $e^{2ik\pi} = 1$, $e^{ik\pi} = (-1)^k$.</li>
@@ -2740,7 +2740,7 @@ $$\arg(zz')\equiv\arg z + \arg z',\qquad\arg\Big(\frac z{z'}\Big)\equiv\arg z - 
 
 <h2 id="z-moitie">7. La technique de l'angle moitié</h2>
 <p>Pour une somme ou une différence de deux exponentielles, on factorise par l'exponentielle de la <b>moyenne</b> des angles :</p>
-<div class="sbox">$$e^{ip} + e^{iq} = e^{i\frac{p + q}2}\Big(e^{i\frac{p - q}2} + e^{-i\frac{p - q}2}\Big) = 2\cos\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2},\qquad e^{ip} - e^{iq} = 2i\sin\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle e^{ip} + e^{iq} = e^{i\frac{p + q}2}\Big(e^{i\frac{p - q}2} + e^{-i\frac{p - q}2}\Big) = 2\cos\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2}$</li><li>$\displaystyle e^{ip} - e^{iq} = 2i\sin\Big(\frac{p - q}2\Big)\,e^{i\frac{p + q}2}$</li></ul></div>
 <p>Cas fréquents : $1 + e^{i\theta} = 2\cos\frac\theta2\,e^{i\theta/2}$ et $1 - e^{i\theta} = -2i\sin\frac\theta2\,e^{i\theta/2}$.</p>
 <p class="ml">Exemple 1 : module et argument de $1 + e^{i\theta}$, $\theta\in\left]-\pi, \pi\right[$</p>
 <p><b>Étape 1 : Rappel.</b> Angle moitié : $1 + e^{i\theta} = e^{i\theta/2}\big(e^{-i\theta/2} + e^{i\theta/2}\big)$ et $e^{ix} + e^{-ix} = 2\cos x$.</p>
@@ -2769,7 +2769,7 @@ $$\cG{\sum_{k=0}^n\cos(k\theta) = \frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta
 <p>On développe $e^{i(a+b)} = e^{ia}e^{ib}$ et on identifie parties réelles et imaginaires :</p>
 $$\cos(a + b) + i\sin(a + b) = (\cos a + i\sin a)(\cos b + i\sin b) = \cB{(\cos a\cos b - \sin a\sin b)} + i\cR{(\sin a\cos b + \cos a\sin b)}.$$
 <p class="ml">Transformer une somme en produit</p>
-<div class="sbox">$$\cos p + \cos q = 2\cos\frac{p + q}2\cos\frac{p - q}2,\qquad\sin p + \sin q = 2\sin\frac{p + q}2\cos\frac{p - q}2,$$$$\cos p - \cos q = -2\sin\frac{p + q}2\sin\frac{p - q}2,\qquad\sin p - \sin q = 2\cos\frac{p + q}2\sin\frac{p - q}2.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cos p + \cos q = 2\cos\frac{p + q}2\cos\frac{p - q}2$</li><li>$\displaystyle \sin p + \sin q = 2\sin\frac{p + q}2\cos\frac{p - q}2$</li></ul><ul class="sbl"><li>$\displaystyle \cos p - \cos q = -2\sin\frac{p + q}2\sin\frac{p - q}2$</li><li>$\displaystyle \sin p - \sin q = 2\cos\frac{p + q}2\sin\frac{p - q}2$</li></ul></div>
 <p>On les retrouve avec l'angle moitié : $\cos p + \cos q = \operatorname{Re}(e^{ip} + e^{iq}) = \operatorname{Re}\Big(2\cos\frac{p - q}2e^{i\frac{p + q}2}\Big)$.</p>
 <p class="ml">Transformer un produit en somme</p>
 $$\cos a\cos b = \frac12\big(\cos(a + b) + \cos(a - b)\big),\qquad\sin a\sin b = \frac12\big(\cos(a - b) - \cos(a + b)\big),\qquad\sin a\cos b = \frac12\big(\sin(a + b) + \sin(a - b)\big).$$
@@ -2870,8 +2870,8 @@ $$\cG{\delta = 2 + i\ \text{ou}\ \delta = -2 - i}.$$
 <div data-mlab="rac2"></div>
 
 <h2 id="z-eq2">12. Les équations du second degré</h2>
-<div class="sbox">$$az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta:\qquad z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big).$$</div>
-<div class="sbox">$$\text{Somme et produit}:\ z_1 + z_2 = -\frac ba,\qquad z_1z_2 = \frac ca.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle az^2 + bz + c = 0\ (a\neq0),\quad\Delta = b^2 - 4ac,\quad\delta^2 = \Delta:$</li><li>$\displaystyle z = \frac{-b\pm\delta}{2a}\quad\Big(\text{racine double}\ -\frac b{2a}\ \text{si}\ \Delta = 0\Big)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Somme et produit}:\ z_1 + z_2 = -\frac ba$</li><li>$\displaystyle z_1z_2 = \frac ca$</li></ul></div>
 <p class="ml">Exemple 1 : coefficients réels, $\Delta\lt0$</p>
 <p><b>Étape 1 : Rappel.</b> $az^2 + bz + c = 0$ : $\Delta = b^2 - 4ac$, puis $z = \frac{-b\pm\delta}{2a}$ avec $\delta^2 = \Delta$.</p>
 $$z^2 - 2z + 5 = 0.$$
@@ -2899,7 +2899,7 @@ $$z_1 = \frac{3 + (1 - 2i)}2 = \frac{4 - 2i}2 = \cV{2 - i},\qquad z_2 = \frac{3 
 
 <h2 id="z-racn">13. Les racines $n$-ièmes</h2>
 <p class="ml">Les racines $n$-ièmes de l'unité</p>
-<div class="sbox">$$z^n = 1\iff z\in\mathbb U_n = \Big\{\cV{e^{\frac{2ik\pi}n}} : k\in[\![0, n - 1]\!]\Big\},\qquad\sum_{k=0}^{n-1}e^{\frac{2ik\pi}n} = 0\ (n\geqslant2).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle z^n = 1\iff z\in\mathbb U_n = \Big\{\cV{e^{\frac{2ik\pi}n}} : k\in[\![0, n - 1]\!]\Big\}$</li><li>$\displaystyle \sum_{k=0}^{n-1}e^{\frac{2ik\pi}n} = 0\ (n\geqslant2)$</li></ul></div>
 <p>Il y en a exactement $n$. Ce sont les sommets d'un polygone régulier inscrit dans le cercle unité, avec un sommet en $1$.</p>
 <p><b>Pourquoi la somme est nulle</b> : c'est une somme géométrique de raison $\omega = e^{2i\pi/n}\neq1$, et $\sum_{k=0}^{n-1}\omega^k = \frac{1 - \omega^n}{1 - \omega} = \frac{1 - 1}{1 - \omega} = 0$.</p>
 <p class="ml">Le cas $n = 3$ : $j$</p>
@@ -3030,8 +3030,8 @@ $$\frac{(-1 + 2i)(1 - i)}{(1 + i)(1 - i)} = \frac{-1 + i + 2i - 2i^2}2 = \frac{1
 $$\int_0^3\lfloor t\rfloor\,dt = 0\times1 + 1\times1 + 2\times1 = \cG3.$$
 
 <h2 id="i-prop">3. Les propriétés de l'intégrale</h2>
-<div class="sbox">$$\int_a^b(\lambda f + \mu g) = \lambda\int_a^bf + \mu\int_a^bg,\qquad\int_a^bf = \int_a^cf + \int_c^bf,\qquad f\leqslant g\ \Longrightarrow\ \int_a^bf\leqslant\int_a^bg\quad(a\leqslant b).$$</div>
-<div class="sbox">$$\Big|\int_a^bf\Big|\leqslant\int_a^b|f|\leqslant(b - a)\sup_{[a, b]}|f|,\qquad\Big|\int_a^bfg\Big|\leqslant\sup_{[a, b]}|f|\int_a^b|g|.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^b(\lambda f + \mu g) = \lambda\int_a^bf + \mu\int_a^bg$</li><li>$\displaystyle \int_a^bf = \int_a^cf + \int_c^bf$</li><li>$\displaystyle f\leqslant g\ \Longrightarrow\ \int_a^bf\leqslant\int_a^bg\quad(a\leqslant b)$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \Big|\int_a^bf\Big|\leqslant\int_a^b|f|\leqslant(b - a)\sup_{[a, b]}|f|$</li><li>$\displaystyle \Big|\int_a^bfg\Big|\leqslant\sup_{[a, b]}|f|\int_a^b|g|$</li></ul></div>
 <div class="sbox">$$f\ \textbf{continue},\ f\geqslant0\ \text{et}\ \int_a^bf = 0\ \Longrightarrow\ f = 0\ \text{sur}\ [a, b].$$</div>
 <p class="ml piege">Piège</p>
 <p>La croissance demande $a\leqslant b$, et le dernier résultat demande que $f$ soit <b>continue</b> : une fonction nulle sauf en un point a une intégrale nulle.</p>
@@ -3053,8 +3053,8 @@ $$\Delta = 4\Big(\int_a^bfg\Big)^2 - 4\int_a^bf^2\int_a^bg^2\leqslant0.$$
 $$\cG{\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big)}.$$
 
 <h2 id="i-fond">4. Le théorème fondamental</h2>
-<div class="sbox">$$f\ \text{continue sur}\ I,\ a\in I:\qquad F(x) = \int_a^xf(t)\,dt\ \text{est l'unique primitive de}\ f\ \text{qui s'annule en}\ a,\qquad F' = f.$$</div>
-<div class="sbox">$$\int_a^bf(t)\,dt = F(b) - F(a)\quad\text{pour toute primitive}\ F\ \text{de}\ f,\qquad\int_a^bf'(t)\,dt = f(b) - f(a)\quad(f\ \text{de classe}\ \mathcal C^1).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue sur}\ I,\ a\in I:$</li><li>$\displaystyle F(x) = \int_a^xf(t)\,dt\ \text{est l'unique primitive de}\ f\ \text{qui s'annule en}\ a$</li><li>$\displaystyle F' = f$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf(t)\,dt = F(b) - F(a)\quad\text{pour toute primitive}\ F\ \text{de}\ f$</li><li>$\displaystyle \int_a^bf'(t)\,dt = f(b) - f(a)\quad(f\ \text{de classe}\ \mathcal C^1)$</li></ul></div>
 <p class="ml">Dériver une intégrale dont les bornes bougent</p>
 <p>On introduit une primitive $F$ de $f$, on écrit l'intégrale avec $F$, puis on dérive des fonctions composées :</p>
 $$G(x) = \int_{u(x)}^{v(x)}f(t)\,dt = F(v(x)) - F(u(x))\ \Longrightarrow\ G'(x) = f(v(x))\,v'(x) - f(u(x))\,u'(x).$$
@@ -3107,7 +3107,7 @@ $$\int_2^3\frac{dx}{x^2 - 1} = \frac12\Big[\ln|x - 1| - \ln|x + 1|\Big]_2^3 = \f
 $$= \frac12\Big(\ln\frac12 - \ln\frac13\Big) = \cG{\frac12\ln\frac32}.$$
 
 <h2 id="i-ipp">6. L'intégration par parties</h2>
-<div class="sbox">$$\int_a^b\cB{u(t)}\,\cR{v'(t)}\,dt = \Big[\cB u\,\cR v\Big]_a^b - \int_a^b\cB{u'(t)}\,\cR{v(t)}\,dt\qquad(u, v\ \text{de classe}\ \mathcal C^1\ \text{sur}\ [a, b]).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^b\cB{u(t)}\,\cR{v'(t)}\,dt = \Big[\cB u\,\cR v\Big]_a^b - \int_a^b\cB{u'(t)}\,\cR{v(t)}\,dt$</li><li>$\displaystyle (u, v\ \text{de classe}\ \mathcal C^1\ \text{sur}\ [a, b])$</li></ul></div>
 <p class="ml">Quoi dériver, quoi intégrer</p>
 <ul>
 <li><b>On dérive</b> ce qui se simplifie en dérivant : $\cB{\ln}$, $\cB{\arctan}$, $\cB{\arcsin}$, un $\cB{\text{polynôme}}$.</li>
@@ -3168,7 +3168,7 @@ $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 
 <div data-mlab="ipp"></div>
 
 <h2 id="i-chgt">7. Le changement de variable</h2>
-<div class="sbox">$$\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt\qquad(\varphi\ \text{de classe}\ \mathcal C^1,\ f\ \text{continue}).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt$</li><li>$\displaystyle (\varphi\ \text{de classe}\ \mathcal C^1,\ f\ \text{continue})$</li></ul></div>
 <p class="ml">La méthode en 4 étapes</p>
 <ol>
 <li>Poser $\cO{x = \varphi(t)}$ (ou $\cO{t = \psi(x)}$) et vérifier que c'est $\mathcal C^1$.</li>
@@ -3252,7 +3252,7 @@ $$\int_0^{\pi/2}\frac{dx}{2 + \cos x} = \int_0^1\frac{1 + t^2}{3 + t^2}\cdot\fra
 $$= \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\frac\pi6 = \cG{\frac\pi{3\sqrt3}}.$$
 
 <h2 id="i-riemann">9. Les sommes de Riemann</h2>
-<div class="sbox">$$f\in\mathcal C_{pm}([a, b]):\qquad\frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\in\mathcal C_{pm}([a, b]):$</li><li>$\displaystyle \frac{b - a}n\sum_{k=0}^{n-1}f\Big(a + k\,\frac{b - a}n\Big)\xrightarrow[n\to+\infty]{}\int_a^bf.\qquad\text{Sur}\ [0, 1]:\ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\to\int_0^1f$</li></ul></div>
 <p class="ml">Reconnaître une somme de Riemann</p>
 <ol>
 <li>Sortir un facteur $\frac1n$.</li>
@@ -3320,7 +3320,7 @@ $$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{\cV e}{(n + 1)!}.$$
 <p><b>Étape 3 : La limite.</b> $\frac e{(n + 1)!}\to0$, donc $\cG{\sum_{k=0}^n\frac1{k!}\to e}$.</p>
 
 <h2 id="i-cplx">11. Intégrer une fonction à valeurs complexes</h2>
-<div class="sbox">$$\int_a^bf = \int_a^b\operatorname{Re}f + i\int_a^b\operatorname{Im}f,\qquad\int_a^be^{\lambda t}\,dt = \Big[\frac{e^{\lambda t}}\lambda\Big]_a^b\quad(\lambda\in\mathbb C^*).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf = \int_a^b\operatorname{Re}f + i\int_a^b\operatorname{Im}f$</li><li>$\displaystyle \int_a^be^{\lambda t}\,dt = \Big[\frac{e^{\lambda t}}\lambda\Big]_a^b\quad(\lambda\in\mathbb C^*)$</li></ul></div>
 <p>Linéarité, Chasles, IPP, changement de variable et $\big|\int f\big|\leqslant\int|f|$ restent vrais. La positivité et la croissance n'ont pas de sens.</p>
 <p class="ml">Exemple : $\int_0^\pi e^t\cos t\,dt$ en une ligne</p>
 <p><b>Étape 1 : Rappel.</b> $e^t\cos t = \operatorname{Re}\big(e^{(1 + i)t}\big)$, et $\int e^{\lambda t}\,dt = \frac{e^{\lambda t}}\lambda$ pour $\lambda\in\mathbb C^*$.</p>
@@ -3433,7 +3433,7 @@ $$H_n = \sum_{k=1}^n\frac1k\geqslant\ln(n + 1) - \ln1 = \ln(n + 1).$$
 <p><b>Étape 3 : Conclusion.</b> $1\neq0$ : $\cG{\sum u_n\ \text{diverge grossièrement}}$.</p>
 
 <h2 id="s-ref">3. Les séries de référence</h2>
-<div class="sbox">$$\textbf{Géométrique}:\ \sum q^n\ \text{CV}\iff|q|\lt1,\qquad\sum_{n=0}^{+\infty}q^n = \frac1{1 - q},\qquad\sum_{n=n_0}^{+\infty}q^n = \frac{q^{n_0}}{1 - q}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Géométrique}:\ \sum q^n\ \text{CV}\iff|q|\lt1$</li><li>$\displaystyle \sum_{n=0}^{+\infty}q^n = \frac1{1 - q}$</li><li>$\displaystyle \sum_{n=n_0}^{+\infty}q^n = \frac{q^{n_0}}{1 - q}$</li></ul></div>
 <div class="sbox">$$\textbf{Riemann}:\ \sum_{n\geqslant1}\frac1{n^\alpha}\ \text{CV}\iff\alpha > 1.\qquad\textbf{Exponentielle}:\ \sum_{n=0}^{+\infty}\frac{x^n}{n!} = e^x\ \text{pour tout}\ x\in\mathbb R.$$</div>
 <div class="sbox">$$\textbf{Télescopique}:\ \sum(u_{n+1} - u_n)\ \text{CV}\iff(u_n)\ \text{converge, et alors}\ \sum_{n=0}^{+\infty}(u_{n+1} - u_n) = \lim u_n - u_0.$$</div>
 <p class="ml">Exemple 1 : une géométrique qui ne commence pas à 0</p>
@@ -3556,7 +3556,7 @@ $$u_n = \frac{(-1)^n}{\sqrt n} - \frac1{2n} + O\Big(\frac1{n^{3/2}}\Big).$$
 <p><b>Étape 4 : Conclusion.</b> CV $-$ DV $+$ CV $=$ DV : $\cG{\sum u_n\ \text{diverge}}$, alors que $u_n\sim\frac{(-1)^n}{\sqrt n}$.</p>
 
 <h2 id="s-dal">8. La règle de d'Alembert <span class="hp">programme de Spé</span></h2>
-<div class="sbox">$$u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell:\qquad\ell\lt1\Rightarrow\cG{\text{CV}},\qquad\ell > 1\Rightarrow\cG{\text{DV grossièrement}},\qquad\ell = 1\Rightarrow\text{on ne peut rien dire}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u_n > 0,\quad\frac{u_{n+1}}{u_n}\to\ell:$</li><li>$\displaystyle \ell\lt1\Rightarrow\cG{\text{CV}}$</li><li>$\displaystyle \ell > 1\Rightarrow\cG{\text{DV grossièrement}}$</li><li>$\displaystyle \ell = 1\Rightarrow\text{on ne peut rien dire}$</li></ul></div>
 <p>Elle est faite pour les <b>factorielles et les puissances $n$-ièmes</b>. Pour les fractions et les puissances de $n$, on trouve $\ell = 1$ : utiliser Riemann.</p>
 <p class="ml">Exemple 1 : $u_n = \frac{n^2}{2^n}$</p>
 <p><b>Étape 1 : Rappel.</b> D'Alembert : $\frac{u_{n+1}}{u_n}\to\ell\lt1\Rightarrow$ CV.</p>
@@ -3578,7 +3578,7 @@ $$u_n = \Big(\frac n{2n + 1}\Big)^n:\qquad\sqrt[n]{u_n} = \frac n{2n + 1}\to\fra
 
 <h2 id="s-somm">9. Sommation des relations de comparaison <span class="hp">programme de Spé</span></h2>
 <p>Pour $v_n\geqslant0$ :</p>
-<div class="sbox">$$\sum v_n\ \text{DV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=0}^nu_k\sim\sum_{k=0}^nv_k,\qquad\sum v_n\ \text{CV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=n+1}^{+\infty}u_k\sim\sum_{k=n+1}^{+\infty}v_k.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum v_n\ \text{DV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=0}^nu_k\sim\sum_{k=0}^nv_k$</li><li>$\displaystyle \sum v_n\ \text{CV et}\ u_n\sim v_n\ \Longrightarrow\ \sum_{k=n+1}^{+\infty}u_k\sim\sum_{k=n+1}^{+\infty}v_k$</li></ul></div>
 <p>Même chose avec $o$ et $O$. Divergence : on compare les <b>sommes partielles</b> ; convergence : on compare les <b>restes</b>.</p>
 <p class="ml">Exemple : le reste de $\sum\frac1{k^2}$</p>
 <p><b>Étape 1 : Rappel.</b> Termes positifs, série convergente : $u_n\sim v_n\Rightarrow\sum_{k > n}u_k\sim\sum_{k > n}v_k$.</p>
@@ -3745,7 +3745,7 @@ $$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \ln\Big(1 + \f
 <p><b>Étape 4 : Conclusion.</b> $\cG{\ln(x^2 + x)\sim2\ln x}$.</p>
 
 <h2 id="l-croiss">3. Les croissances comparées</h2>
-<div class="sbox">$$\alpha, \beta, \gamma > 0:\qquad(\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty,\qquad x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \alpha, \beta, \gamma > 0:$</li><li>$\displaystyle (\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty$</li><li>$\displaystyle x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0$</li></ul></div>
 <div class="sbox">$$\text{Suites}:\quad(\ln n)^\gamma\ll n^\alpha\ll a^n\ (a > 1)\ll n!\ll n^n.$$</div>
 <p class="ml">Exemple</p>
 <p><b>Étape 1 : Rappel.</b> Croissances comparées : $n^\alpha\ll a^n\ll n!$.</p>
@@ -3988,7 +3988,7 @@ $$\cG{u_n = e - \frac e{2n} + o\Big(\frac1n\Big)},\qquad\text{donc}\ e - u_n\sim
 </table>
 
 <h2 id="p-ref">2. Les intégrales de référence</h2>
-<div class="sbox">$$\int_1^{+\infty}\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha > 1,\qquad\int_0^1\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha\lt1,\qquad\int_0^{+\infty}e^{-\lambda t}\,dt\ \text{CV}\iff\lambda > 0,\qquad\int_0^1\ln t\,dt = -1.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_1^{+\infty}\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha > 1$</li><li>$\displaystyle \int_0^1\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha\lt1$</li><li>$\displaystyle \int_0^{+\infty}e^{-\lambda t}\,dt\ \text{CV}\iff\lambda > 0$</li><li>$\displaystyle \int_0^1\ln t\,dt = -1$</li></ul></div>
 <p>Moyen mnémotechnique : en $+\infty$, il faut décroître <b>vite</b> ($\alpha > 1$) ; en $0$, il ne faut pas exploser trop vite ($\alpha\lt1$). Pour $\alpha = 1$, ça diverge des deux côtés.</p>
 <p>Même chose en un point $a$ : $\int_a^b\frac{dt}{(t - a)^\alpha}$ converge si et seulement si $\alpha\lt1$.</p>
 
@@ -4038,7 +4038,7 @@ $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^
 <p><span class="kB">bleu</span> : la fonction étudiée $\cB f$. <span class="kO">orange</span> : la fonction de comparaison $\cO g$. <span class="kR">rouge</span> : les points à problème. <span class="kV">violet</span> : l'exposant $\cV\alpha$. <span class="kG">vert</span> : la conclusion.</p>
 <div class="sbox">$$f\ \text{continue par morceaux sur}\ [a, b[:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf(t)\,dt\ \text{a une limite finie quand}\ x\to b^-.$$
 $$\text{Sur}\ ]a, b[:\ \text{on coupe en un}\ c\in\,]a, b[\ \text{et on demande que}\ \int_a^cf\ \text{et}\ \int_c^bf\ \text{convergent}\ \text{(les deux !)}.$$
-$$\text{Avec une primitive}\ F:\qquad\int_a^bf = \lim_{b^-}F - \lim_{a^+}F = \big[F\big]_a^b,\quad\text{si les deux limites sont finies}.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{Avec une primitive}\ F:$</li><li>$\displaystyle \int_a^bf = \lim_{b^-}F - \lim_{a^+}F = \big[F\big]_a^b,\quad\text{si les deux limites sont finies}$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>$\int_{-x}^xt\,dt = 0\to0$, et pourtant $\int_{-\infty}^{+\infty}t\,dt$ <b>diverge</b> : les deux bornes doivent partir <b>indépendamment</b>.</p>
 <table class="mtab">
@@ -4075,8 +4075,8 @@ $$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x
 
 <h2 id="p-pos">6. Fonctions positives : les théorèmes de comparaison</h2>
 <div class="sbox">$$f\geq0:\quad\int_a^bf\ \text{converge}\iff x\mapsto\int_a^xf\ \text{est majorée}.$$
-$$0\leq\cB f\leq\cO g:\quad\int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV}\qquad\text{et}\qquad\int\cB f\ \text{DV}\Rightarrow\int\cO g\ \text{DV}.$$
-$$\cO g\geq0,\ \ \cB f = O(\cO g)\ \text{ou}\ \cB f = o(\cO g):\ \int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV (absolument)}.\qquad\cB f\sim\cO g,\ \text{signe constant}:\ \text{même nature}.$$</div>
+<ul class="sbl"><li>$\displaystyle 0\leq\cB f\leq\cO g:\quad\int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV}\qquad\text{et}$</li><li>$\displaystyle \int\cB f\ \text{DV}\Rightarrow\int\cO g\ \text{DV}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \cO g\geq0,\ \ \cB f = O(\cO g)\ \text{ou}\ \cB f = o(\cO g):\ \int\cO g\ \text{CV}\Rightarrow\int\cB f\ \text{CV (absolument)}$</li><li>$\displaystyle \cB f\sim\cO g,\ \text{signe constant}:\ \text{même nature}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Repérer les points à problème $\cR{a}$, $\cR{b}$. <b>2.</b> En chacun, chercher un équivalent simple de $\cB f$ (ou une majoration). <b>3.</b> Comparer à une intégrale de référence $\cO{\frac1{t^\alpha}}$, $\cO{e^{-\lambda t}}$. <b>4.</b> Conclure pour chaque point, puis pour l'intégrale entière.</p>
 <p class="ml piege">Piège</p>
@@ -4107,7 +4107,7 @@ $$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
 
 <h2 id="p-abs">7. Convergence absolue, fonctions à valeurs complexes</h2>
 <div class="sbox">$$\int_a^b|f|\ \text{converge}\ \Longrightarrow\ \int_a^bf\ \text{converge, et}\ \Big|\int_a^bf\Big|\leq\int_a^b|f|.$$
-$$f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}f\ \text{et}\ \int\operatorname{Im}f\ \text{CV},\qquad\int f = \int\operatorname{Re}f + i\int\operatorname{Im}f.$$</div>
+<ul class="sbl"><li>$\displaystyle f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}f\ \text{et}\ \int\operatorname{Im}f\ \text{CV}$</li><li>$\displaystyle \int f = \int\operatorname{Re}f + i\int\operatorname{Im}f$</li></ul></div>
 <p>Une intégrale <b>convergente mais pas absolument convergente</b> est dite semi-convergente : $\int_1^{+\infty}\frac{\sin t}t\,dt$ (exemple 3). Pour la nature, on fait alors une <b>IPP</b> qui gagne une puissance de $t$.</p>
 
 <p class="ml">Exemple 11 : $\int_0^{+\infty}e^{-t}\cos t\,dt$ en passant par $\mathbb C$</p>
@@ -4149,8 +4149,8 @@ $$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \frac\pi4}$.</p>
 
 <h2 id="p-serint">10. Comparaison série-intégrale</h2>
-<div class="sbox">$$f\ \text{continue, positive, décroissante sur}\ [n_0, +\infty[:\qquad\sum f(n)\ \text{et}\ \int_{n_0}^{+\infty}f\ \text{sont de même nature}.$$
-$$\text{L'encadrement à refaire}:\quad\int_n^{n+1}f(t)\,dt\ \leq\ f(n)\ \leq\ \int_{n-1}^nf(t)\,dt\qquad(n - 1\geq n_0).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue, positive, décroissante sur}\ [n_0, +\infty[:$</li><li>$\displaystyle \sum f(n)\ \text{et}\ \int_{n_0}^{+\infty}f\ \text{sont de même nature}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \text{L'encadrement à refaire}:\quad\int_n^{n+1}f(t)\,dt\ \leq\ f(n)\ \leq\ \int_{n-1}^nf(t)\,dt$</li><li>$\displaystyle (n - 1\geq n_0)$</li></ul></div>
 <p>On le redémontre à chaque fois : sur $[n, n + 1]$, $f(n + 1)\leq f(t)\leq f(n)$, puis on intègre (longueur $1$). Ensuite on <b>somme</b> les encadrements.</p>
 
 <p class="ml">Exemple 14 : la série $\sum\frac1{n\ln n}$</p>
@@ -4170,8 +4170,8 @@ $$H_n\leq1 + \int_1^n\frac{dt}t = 1 + \ln n.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{H_n\sim\ln n}$.</p>
 
 <h2 id="p-relc">11. Intégrer une relation de comparaison <span class="hp">programme de Spé</span></h2>
-<div class="sbox">$$g\geq0.\ \textbf{Si}\ \int_a^{+\infty}g\ \textbf{converge (les restes)}:\quad f = o(g)\Rightarrow\int_x^{+\infty}f = o\Big(\int_x^{+\infty}g\Big),\qquad f\sim g\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g.$$
-$$\textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:\quad f = o(g)\Rightarrow\int_a^xf = o\Big(\int_a^xg\Big),\qquad f\sim g\Rightarrow\int_a^xf\sim\int_a^xg.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle g\geq0.\ \textbf{Si}\ \int_a^{+\infty}g\ \textbf{converge (les restes)}:\quad f = o(g)\Rightarrow\int_x^{+\infty}f = o\Big(\int_x^{+\infty}g\Big)$</li><li>$\displaystyle f\sim g\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:\quad f = o(g)\Rightarrow\int_a^xf = o\Big(\int_a^xg\Big)$</li><li>$\displaystyle f\sim g\Rightarrow\int_a^xf\sim\int_a^xg$</li></ul></div>
 <p>Même chose avec $O$. C'est le parallèle exact des sommes partielles et des restes de séries.</p>
 
 <p class="ml">Exemple 16 : un équivalent d'intégrale partielle</p>
@@ -4189,7 +4189,7 @@ $$\textbf{Si}\ \int_a^{+\infty}g\ \textbf{diverge (les intégrales partielles)}:
 <p><b>Étape 4 : Conclusion.</b> $\cG{R(x)\sim\frac1x}$.</p>
 
 <h2 id="p-l2">12. Fonctions de carré intégrable</h2>
-<div class="sbox">$$f\in L^2(I)\iff f^2\ \text{intégrable sur}\ I.\qquad|fg|\leq\frac{f^2 + g^2}2:\ f, g\in L^2\Rightarrow fg\in L^1.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\in L^2(I)\iff f^2\ \text{intégrable sur}\ I$</li><li>$\displaystyle |fg|\leq\frac{f^2 + g^2}2:\ f, g\in L^2\Rightarrow fg\in L^1$</li></ul>
 $$\textbf{Cauchy-Schwarz}:\quad\Big|\int_Ifg\Big|\leq\sqrt{\int_If^2}\,\sqrt{\int_Ig^2}.$$</div>
 <p class="ml">Exemple 18 : $f\in L^2$ donne $\frac f t$ intégrable</p>
 <p>Si $f^2$ est intégrable sur $[1, +\infty[$, montrer que $t\mapsto\frac{f(t)}t$ l'est aussi.</p>
@@ -4625,8 +4625,8 @@ $$\lim_{x\to+\infty}\zeta(x) = 1 + 0 + 0 + \cdots = \cG1.$$
 <p>$\deg(P + Q)$ peut être <b>strictement</b> plus petit que $\max(\deg P, \deg Q)$ : $(X^2 + 1) + (-X^2) = 1$.</p>
 
 <h2 id="q-deriv">2. Dérivation et formule de Taylor</h2>
-<div class="sbox">$$(X^k)^{(j)} = \frac{k!}{(k - j)!}X^{k-j}\ (j\leqslant k),\qquad(PQ)^{(n)} = \sum_{k=0}^n\binom nkP^{(k)}Q^{(n-k)}\quad\text{(Leibniz)}.$$</div>
-<div class="sbox">$$\textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k\qquad(\text{égalité exacte, pas de reste}).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle (X^k)^{(j)} = \frac{k!}{(k - j)!}X^{k-j}\ (j\leqslant k)$</li><li>$\displaystyle (PQ)^{(n)} = \sum_{k=0}^n\binom nkP^{(k)}Q^{(n-k)}\quad\text{(Leibniz)}$</li></ul></div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Taylor}:\quad P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k$</li><li>$\displaystyle (\text{égalité exacte, pas de reste})$</li></ul></div>
 <p class="ml">Exemple : écrire $P = X^3 - 2X + 1$ en puissances de $(X - 1)$</p>
 <p><b>Étape 1 : Rappel de la formule.</b> Pour un polynôme, la formule de Taylor en $a$ est exacte :</p>
 $$P = \sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}(X - a)^k.$$
@@ -4683,7 +4683,7 @@ $$\cG{R = nX + 1 - n}.$$
 <p>Contrôle avec $n = 2$ : $X^2 = (X - 1)^2 + 2X - 1$, et la formule donne $2X - 1$.</p>
 
 <h2 id="q-rac">5. Racines et multiplicité</h2>
-<div class="sbox">$$P(a) = 0\iff(X - a)\mid P.\qquad a\ \text{racine d'ordre}\ m\iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\ \text{et}\ P^{(m)}(a)\neq0.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P(a) = 0\iff(X - a)\mid P$</li><li>$\displaystyle a\ \text{racine d'ordre}\ m\iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\ \text{et}\ P^{(m)}(a)\neq0$</li></ul></div>
 <ul>
 <li>Un polynôme non nul de degré $n$ a <b>au plus $n$ racines</b> (comptées avec multiplicité).</li>
 <li>Conséquence : un polynôme qui a une infinité de racines est nul. C'est ainsi qu'on prouve que deux polynômes sont égaux.</li>
@@ -4737,7 +4737,7 @@ $$\cG{X^6 - 1 = (X - 1)(X + 1)(X^2 - X + 1)(X^2 + X + 1)}.$$
 
 <h2 id="q-viete">7. Relations coefficients-racines</h2>
 <p>Si $P = a_nX^n + \cdots + a_0$ est scindé, de racines $x_1, \dots, x_n$ :</p>
-<div class="sbox">$$\sigma_1 = \sum_ix_i = -\frac{a_{n-1}}{a_n},\qquad\sigma_2 = \sum_{i\lt j}x_ix_j = \frac{a_{n-2}}{a_n},\qquad\dots,\qquad\sigma_n = \prod_ix_i = (-1)^n\frac{a_0}{a_n}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sigma_1 = \sum_ix_i = -\frac{a_{n-1}}{a_n}$</li><li>$\displaystyle \sigma_2 = \sum_{i\lt j}x_ix_j = \frac{a_{n-2}}{a_n}$</li><li>$\displaystyle \dots$</li><li>$\displaystyle \sigma_n = \prod_ix_i = (-1)^n\frac{a_0}{a_n}$</li></ul></div>
 <p>Degré 2 : $x_1 + x_2 = -\frac ba$ et $x_1x_2 = \frac ca$. Degré 3 : $\sigma_1 = -\frac ba$, $\sigma_2 = \frac ca$, $\sigma_3 = -\frac da$.</p>
 <p class="ml">Exemple : $x_1, x_2, x_3$ racines de $X^3 - 2X + 5$</p>
 <p><b>Étape 1 : Rappel.</b> Pour $X^3 + a_2X^2 + a_1X + a_0$ unitaire : $\sigma_1 = -a_2$, $\sigma_2 = a_1$, $\sigma_3 = -a_0$.</p>
@@ -4749,7 +4749,7 @@ $$x_1^2 + x_2^2 + x_3^2 = \sigma_1^2 - 2\sigma_2 = 0 - 2\times(-2) = \cG4.$$
 $$\frac1{x_1} + \frac1{x_2} + \frac1{x_3} = \frac{x_2x_3 + x_1x_3 + x_1x_2}{x_1x_2x_3} = \frac{\sigma_2}{\sigma_3} = \frac{-2}{-5} = \cG{\frac25}.$$
 
 <h2 id="q-lag">8. L'interpolation de Lagrange</h2>
-<div class="sbox">$$x_0, \dots, x_n\ \text{distincts}:\quad L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\quad L_i(x_j) = \delta_{i,j},\qquad P = \sum_{i=0}^ny_iL_i\ \text{est l'unique}\ P\in\mathbb K_n[X]\ \text{avec}\ P(x_i) = y_i.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle x_0, \dots, x_n\ \text{distincts}:\quad L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\quad L_i(x_j) = \delta_{i,j}$</li><li>$\displaystyle P = \sum_{i=0}^ny_iL_i\ \text{est l'unique}\ P\in\mathbb K_n[X]\ \text{avec}\ P(x_i) = y_i$</li></ul></div>
 <p class="ml">Exemple : $P(0) = 1$, $P(1) = 3$, $P(2) = 7$</p>
 <p><b>Étape 1 : Rappel.</b> Avec $x_0 = 0$, $x_1 = 1$, $x_2 = 2$ :</p>
 $$L_i = \prod_{j\neq i}\frac{X - x_j}{x_i - x_j},\qquad P = y_0L_0 + y_1L_1 + y_2L_2.$$
@@ -4806,7 +4806,7 @@ $$X - 1 = (X^4 - 1)\cdot\cG1 + (X^3 - 1)\cdot\cG{(-X)}.$$
 <h2 id="q-coef">11. Calculer les coefficients</h2>
 <p class="ml">Méthode 1 : pôle simple, on multiplie et on évalue</p>
 <p>Pour trouver le coefficient de $\frac1{X - a}$ : multiplier toute l'égalité par $\cO{(X - a)}$, puis évaluer en $\cO{X = a}$. Tous les autres termes s'annulent. En pratique, on « cache » le facteur $(X - a)$ dans la fraction et on remplace $X$ par $a$.</p>
-<div class="sbox">$$\text{Pôle simple}\ a:\qquad c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pôle simple}\ a:$</li><li>$\displaystyle c = \Big[(X - a)F(X)\Big]_{X = a} = \frac{P(a)}{Q'(a)}$</li></ul></div>
 <p>Exemple : $F = \frac{X + 3}{(X - 1)(X + 2)(X - 3)} = \frac a{X - 1} + \frac b{X + 2} + \frac c{X - 3}$.</p>
 $$\cR a = \frac{1 + 3}{(1 + 2)(1 - 3)} = \frac4{-6} = -\frac23,\qquad\cR b = \frac{-2 + 3}{(-2 - 1)(-2 - 3)} = \frac1{15},\qquad\cR c = \frac{3 + 3}{(3 - 1)(3 + 2)} = \frac35.$$
 <p>Contrôle en $X = 0$ : $F(0) = \frac3{6} = \frac12$ et $\frac23 + \frac1{30} - \frac15 = \frac{20 + 1 - 6}{30} = \frac12$.</p>
@@ -4852,7 +4852,7 @@ $$\int\frac{dx}{x^2 - 1} = \frac12\int\Big(\frac1{x - 1} - \frac1{x + 1}\Big)dx 
 <p class="ml">Télescoper une somme</p>
 $$\sum_{k=1}^n\frac1{k(k + 1)} = \sum_{k=1}^n\Big(\frac1k - \frac1{k + 1}\Big) = 1 - \frac1{n + 1}.$$
 <p class="ml">La dérivée logarithmique</p>
-<div class="sbox">$$P = \lambda\prod_{i=1}^n(X - x_i)\ \Longrightarrow\ \frac{P'}P = \sum_{i=1}^n\frac1{X - x_i}\qquad(\text{racines comptées avec multiplicité}).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P = \lambda\prod_{i=1}^n(X - x_i)\ \Longrightarrow\ \frac{P'}P = \sum_{i=1}^n\frac1{X - x_i}$</li><li>$\displaystyle (\text{racines comptées avec multiplicité})$</li></ul></div>
 <p class="ml">Dérivée $n$-ième</p>
 $$\frac1{x^2 - 1} = \frac12\Big(\frac1{x - 1} - \frac1{x + 1}\Big)\ \Longrightarrow\ \Big(\frac1{x^2 - 1}\Big)^{(n)} = \frac{(-1)^nn!}2\Big(\frac1{(x - 1)^{n+1}} - \frac1{(x + 1)^{n+1}}\Big).$$
 
@@ -5102,9 +5102,9 @@ $$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qqua
 </table>
 
 <h2 id="r-abs">2. Valeur absolue : les règles de calcul</h2>
-<div class="sbox">$$|x|\geq0,\qquad|x| = 0\iff x = 0,\qquad|xy| = |x|\,|y|,\qquad\Big|\frac xy\Big| = \frac{|x|}{|y|}\ (y\neq0),\qquad|x|^2 = x^2,\qquad\sqrt{x^2} = |x|.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle |x|\geq0$</li><li>$\displaystyle |x| = 0\iff x = 0$</li><li>$\displaystyle |xy| = |x|\,|y|$</li><li>$\displaystyle \Big|\frac xy\Big| = \frac{|x|}{|y|}\ (y\neq0)$</li><li>$\displaystyle |x|^2 = x^2$</li><li>$\displaystyle \sqrt{x^2} = |x|$</li></ul></div>
 <p>Pour $\cR a\geq0$ (la marge autorisée), on traduit une valeur absolue en encadrement :</p>
-<div class="sbox">$$|X|\leq\cR a\iff-\cR a\leq X\leq\cR a\qquad\qquad|X|\geq\cR a\iff\big(X\leq-\cR a\ \text{ou}\ X\geq\cR a\big)$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle |X|\leq\cR a\iff-\cR a\leq X\leq\cR a$</li><li>$\displaystyle |X|\geq\cR a\iff\big(X\leq-\cR a\ \text{ou}\ X\geq\cR a\big)$</li></ul>
 $$|x - c|\leq\cR r\iff x\in[c - \cR r,\ c + \cR r]\qquad\text{(boule de centre } c\text{, de rayon } r\text{)}$$</div>
 <p>Et aussi : $-|x|\leq x\leq|x|$, $|x| = |y|\iff x = \pm y$, $|x|\leq|y|\iff x^2\leq y^2$.</p>
 <p class="ml piege">Piège</p>
@@ -5146,7 +5146,7 @@ $$\cG{\mathcal S = \{-3,\ 2\}}.$$
 
 <h2 id="r-tri">3. L'inégalité triangulaire</h2>
 <div class="sbox">$$\big||x| - |y|\big|\ \leq\ |x + y|\ \leq\ |x| + |y|$$
-$$\text{Égalité à droite}\iff x\ \text{et}\ y\ \text{de même signe}\ (xy\geq0).\qquad\Big|\sum_{k=1}^{\cV n}x_k\Big|\leq\sum_{k=1}^{\cV n}|x_k|.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{Égalité à droite}\iff x\ \text{et}\ y\ \text{de même signe}\ (xy\geq0)$</li><li>$\displaystyle \Big|\sum_{k=1}^{\cV n}x_k\Big|\leq\sum_{k=1}^{\cV n}|x_k|$</li></ul></div>
 <p class="ml">Pourquoi (à savoir refaire)</p>
 <p>Les deux membres sont positifs, on compare les carrés : $|x + y|^2 = x^2 + 2xy + y^2\leq x^2 + 2|xy| + y^2 = (|x| + |y|)^2$, car $xy\leq|xy|$. L'égalité a lieu si et seulement si $xy = |xy|$, c'est-à-dire $xy\geq0$.</p>
 
@@ -5176,7 +5176,7 @@ $$\cG{|x^2\sin x - 3\cos(2x)|\leq4 + 3 = 7.}$$
 
 <h2 id="r-ent">4. La partie entière</h2>
 <div class="sbox">$$\cV{\lfloor x\rfloor} = \cV n\iff\Big(\cV n\in\mathbb Z\ \ \text{et}\ \ \cV n\leq x \lt \cV n + 1\Big)$$
-$$x - 1 \lt \lfloor x\rfloor\leq x,\qquad\lfloor x + \cV m\rfloor = \lfloor x\rfloor + \cV m\ \ (\cV m\in\mathbb Z),\qquad x\leq y\Rightarrow\lfloor x\rfloor\leq\lfloor y\rfloor.$$</div>
+<ul class="sbl"><li>$\displaystyle x - 1 \lt \lfloor x\rfloor\leq x$</li><li>$\displaystyle \lfloor x + \cV m\rfloor = \lfloor x\rfloor + \cV m\ \ (\cV m\in\mathbb Z)$</li><li>$\displaystyle x\leq y\Rightarrow\lfloor x\rfloor\leq\lfloor y\rfloor$</li></ul></div>
 <p>Exemples : $\lfloor 2{,}7\rfloor = 2$, $\lfloor-2{,}5\rfloor = -3$ (et non $-2$), $\lfloor\pi\rfloor = 3$, $\lfloor-1\rfloor = -1$.</p>
 <p class="ml piege">Attention</p>
 <p>En général $\lfloor x + y\rfloor\neq\lfloor x\rfloor + \lfloor y\rfloor$ : $\lfloor0{,}5 + 0{,}5\rfloor = 1$ mais $\lfloor0{,}5\rfloor + \lfloor0{,}5\rfloor = 0$. De même, $x \lt y$ ne donne pas $\lfloor x\rfloor \lt \lfloor y\rfloor$ ($\lfloor0{,}2\rfloor = \lfloor0{,}7\rfloor$). L'égalité $\lfloor x + m\rfloor = \lfloor x\rfloor + m$ n'est vraie que pour $m$ <b>entier</b>.</p>
@@ -5219,7 +5219,7 @@ $$\cV k\leq\frac{\lfloor nx\rfloor}n \lt \cV k + 1.$$
 $$\cG{\Big\lfloor\frac{\lfloor nx\rfloor}n\Big\rfloor = \lfloor x\rfloor}.$$
 
 <h2 id="r-dec">5. Les approximations décimales</h2>
-<div class="sbox">$$\text{Pour}\ \cV n\in\mathbb N:\qquad d_n = \frac{\lfloor10^{\cV n}x\rfloor}{10^{\cV n}}\ \leq\ x\ \lt\ d_n + \frac1{10^{\cV n}} = \frac{\lfloor10^{\cV n}x\rfloor + 1}{10^{\cV n}}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Pour}\ \cV n\in\mathbb N:$</li><li>$\displaystyle d_n = \frac{\lfloor10^{\cV n}x\rfloor}{10^{\cV n}}\ \leq\ x\ \lt\ d_n + \frac1{10^{\cV n}} = \frac{\lfloor10^{\cV n}x\rfloor + 1}{10^{\cV n}}$</li></ul></div>
 <p>$d_n$ est l'approximation décimale <b>par défaut</b> à $10^{-n}$ près, $d_n + 10^{-n}$ celle <b>par excès</b>. Ce sont des décimaux, donc des rationnels, et $0\leq x - d_n \lt 10^{-n}$, donc $d_n\to x$ : <b>tout réel est limite d'une suite de rationnels</b>.</p>
 
 <p class="ml">Exemple 8 : $\sqrt2$ à $10^{-2}$ près</p>
@@ -5266,7 +5266,7 @@ $$n = 2k:\ \ \cB a = 1 + \frac1{2k}\in\Big]1,\ \frac32\Big],\qquad n = 2k + 1:\ 
 $$\cG{\sup A = \max A = \frac32,\qquad\inf A = -1\ \text{(pas de min)}}.$$
 
 <h2 id="r-seq">7. La caractérisation séquentielle</h2>
-<div class="sbox">$$\text{Si}\ \cR M\ \text{majore}\ \cB A:\qquad\cR M = \sup\cB A\iff\text{il existe une suite}\ (\cB{a_n})\ \text{d'éléments de}\ \cB A\ \text{telle que}\ \cB{a_n}\to\cR M.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Si}\ \cR M\ \text{majore}\ \cB A:$</li><li>$\displaystyle \cR M = \sup\cB A\iff\text{il existe une suite}\ (\cB{a_n})\ \text{d'éléments de}\ \cB A\ \text{telle que}\ \cB{a_n}\to\cR M$</li></ul></div>
 <p>C'est souvent plus rapide que $\varepsilon$ : on exhibe une suite. Dans l'exemple 9, $\cB{a_n} = 1 - \frac1n\to1$ suffit.</p>
 <p class="ml">Passer au sup</p>
 <p>Si $\forall\cB a\in\cB A,\ \cB a\leq\cR K$, alors $\sup A\leq\cR K$ (car $\sup$ est le <b>plus petit</b> majorant). Et $A\subset B$ donne $\sup A\leq\sup B$.</p>
@@ -5302,7 +5302,7 @@ $$\cG{\sup(A + B) = \sup A + \sup B}.$$
 <p>La réunion ne marche pas : $[0, 1]\cup[2, 3]$ contient $1$ et $2$, mais pas $\frac32$.</p>
 
 <h2 id="r-dens">9. La densité</h2>
-<div class="sbox">$$\mathbb Q\ \text{et}\ \mathbb R\setminus\mathbb Q\ \text{sont denses dans}\ \mathbb R:\qquad\forall x \lt y,\ \ \exists r\in\mathbb Q\cap\,]x, y[\quad\text{et}\quad\exists s\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \mathbb Q\ \text{et}\ \mathbb R\setminus\mathbb Q\ \text{sont denses dans}\ \mathbb R:$</li><li>$\displaystyle \forall x \lt y,\ \ \exists r\in\mathbb Q\cap\,]x, y[\quad\text{et}\quad\exists s\in(\mathbb R\setminus\mathbb Q)\cap\,]x, y[$</li></ul>
 $$\text{Version suites : tout réel est limite d'une suite de rationnels, et d'une suite d'irrationnels.}$$</div>
 <p class="ml">La construction (à savoir refaire)</p>
 <p><b>1.</b> On prend un entier $\cV n > \frac1{y - x}$ : les pas de longueur $\frac1n$ sont plus petits que l'intervalle. <b>2.</b> On pose $\cV p = \lfloor nx\rfloor + 1$. <b>3.</b> Alors $nx \lt \cV p\leq nx + 1 \lt ny$, donc $x \lt \frac{\cV p}{\cV n} \lt y$.</p>
@@ -5329,7 +5329,7 @@ $$x \lt r + \sqrt2 \lt y.$$
 
 <h2 id="r-ach">10. La droite achevée $\overline{\mathbb R}$</h2>
 <p>On ajoute $-\infty$ et $+\infty$ à $\mathbb R$, avec $-\infty \lt x \lt +\infty$ pour tout réel $x$. Conventions utiles :</p>
-<div class="sbox">$$A\ \text{non vide, non majorée}:\ \sup A = +\infty.\qquad A\ \text{non vide, non minorée}:\ \inf A = -\infty.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle A\ \text{non vide, non majorée}:\ \sup A = +\infty$</li><li>$\displaystyle A\ \text{non vide, non minorée}:\ \inf A = -\infty$</li></ul></div>
 <p>Dans $\overline{\mathbb R}$, toute partie non vide a une borne supérieure. Exemple : $\sup\mathbb N = +\infty$, $\inf\{\frac1n,\ n\in\mathbb N^*\} = 0$. Les formes $+\infty - \infty$ et $0\times\infty$ restent indéterminées.</p>
 <p class="ml">Bonus : l'intervalle ouvert est ouvert <span class="hp">hors programme</span></p>
 <p>Un réel $x$ d'un intervalle $]a, b[$ y est « à l'aise » : avec $\cO\varepsilon = \min(x - a, b - x) > 0$, on a $]x - \cO\varepsilon, x + \cO\varepsilon[\subset]a, b[$. La notion d'ouvert et de fermé est traitée en Spé (topologie des espaces vectoriels normés).</p>
@@ -5379,7 +5379,7 @@ $$\cB{u_n}\to+\infty\iff\forall A\in\mathbb R,\ \exists\cV N\in\mathbb N,\ \fora
 <p><b>Traductions utiles</b> :</p>
 $$u_n\to\ell\iff u_n - \ell\to0\iff|u_n - \ell|\to0,\qquad u_n\to0\iff|u_n|\to0.$$
 <p class="ml">Suites extraites</p>
-<div class="sbox">$$\varphi:\mathbb N\to\mathbb N\ \text{strictement croissante}\ (\varphi(n)\geq n).\qquad u_n\to\cR\ell\ \Longrightarrow\ u_{\varphi(n)}\to\cR\ell.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \varphi:\mathbb N\to\mathbb N\ \text{strictement croissante}\ (\varphi(n)\geq n)$</li><li>$\displaystyle u_n\to\cR\ell\ \Longrightarrow\ u_{\varphi(n)}\to\cR\ell$</li></ul>
 $$u_{2n}\to\cR\ell\ \text{et}\ u_{2n+1}\to\cR\ell\iff u_n\to\cR\ell.$$</div>
 <p><b>Pour montrer qu'une suite diverge</b> : trouver deux suites extraites de limites différentes (ou une extraite qui diverge).</p>
 
@@ -5411,7 +5411,7 @@ $$\frac5{n + 3}\leq\cO\varepsilon\iff n + 3\geq\frac5{\cO\varepsilon}\iff n\geq\
 <tr><td>$\ell\neq0$</td><td>$0$</td><td>$\ell$</td><td>$0$</td><td>$\pm\infty$ si $v_n$ de signe constant</td></tr>
 </table>
 <p>Les quatre formes indéterminées : $\infty - \infty$, $0\times\infty$, $\frac00$, $\frac\infty\infty$. Avec les puissances : $1^\infty$, $0^0$, $\infty^0$ (on passe par $e^{v_n\ln u_n}$).</p>
-<div class="sbox">$$\textbf{Croissances comparées}\ (\alpha, \beta > 0,\ q > 1):\qquad(\ln n)^\alpha\ \ll\ n^\beta\ \ll\ q^n\ \ll\ n!\ \ll\ n^n.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Croissances comparées}\ (\alpha, \beta > 0,\ q > 1):$</li><li>$\displaystyle (\ln n)^\alpha\ \ll\ n^\beta\ \ll\ q^n\ \ll\ n!\ \ll\ n^n$</li></ul></div>
 <p class="ml">La méthode pour lever une forme indéterminée</p>
 <p><b>1.</b> Quotient de sommes : on factorise en haut et en bas par le <b>terme prépondérant</b>. <b>2.</b> Différence de racines : <b>quantité conjuguée</b>. <b>3.</b> Puissance $u_n^{v_n}$ : écrire $e^{v_n\ln u_n}$. <b>4.</b> Sinon : équivalents et DL (voir Analyse asymptotique).</p>
 
@@ -5443,7 +5443,7 @@ $$\frac{n^3 + 2^n}{3^n + n^2} = \frac{\frac{n^3}{3^n} + \big(\frac23\big)^n}{1 +
 
 <h2 id="s-comp">14. Théorèmes de comparaison</h2>
 <div class="sbox">$$\textbf{Passage à la limite}:\ u_n\leq v_n\ \text{et}\ u_n\to\ell,\ v_n\to\ell'\ \Longrightarrow\ \ell\leq\ell'.\qquad\textbf{Encadrement}:\ \cO{a_n}\leq u_n\leq\cO{b_n},\ \cO{a_n}\to\cR\ell,\ \cO{b_n}\to\cR\ell\ \Longrightarrow\ u_n\to\cR\ell.$$
-$$u_n\geq\cO{a_n}\to+\infty\Rightarrow u_n\to+\infty.\qquad|u_n - \cR\ell|\leq\cO{a_n}\to0\Rightarrow u_n\to\cR\ell.\qquad(u_n)\ \text{bornée},\ v_n\to0\Rightarrow u_nv_n\to0.$$</div>
+<ul class="sbl"><li>$\displaystyle u_n\geq\cO{a_n}\to+\infty\Rightarrow u_n\to+\infty$</li><li>$\displaystyle |u_n - \cR\ell|\leq\cO{a_n}\to0\Rightarrow u_n\to\cR\ell$</li><li>$\displaystyle (u_n)\ \text{bornée},\ v_n\to0\Rightarrow u_nv_n\to0$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>Le passage à la limite <b>transforme les inégalités strictes en larges</b> : $\frac1n > 0$ mais $\lim\frac1n = 0$. Et on ne passe à la limite qu'après avoir montré que les limites <b>existent</b>.</p>
 
@@ -5508,7 +5508,7 @@ $$v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\cdot n!}
 <p>$q^n\to0$ si $|q| \lt 1$, $q^n\to+\infty$ si $q > 1$, pas de limite si $q\leq-1$, constante si $q = 1$.</p>
 <p class="ml">Récurrence linéaire d'ordre 2 : $u_{n+2} = au_{n+1} + bu_n$ ($b\neq0$)</p>
 <p>Équation caractéristique $(E_c):\ \cV{r^2 = ar + b}$, discriminant $\Delta = a^2 + 4b$.</p>
-<div class="sbox">$$\Delta > 0:\ u_n = A\,\cV{r_1}^n + B\,\cV{r_2}^n\qquad\Delta = 0:\ u_n = (A + Bn)\,\cV{r_0}^n\qquad\Delta \lt 0:\ \cV{r = \rho e^{\pm i\theta}},\ u_n = \rho^n\big(A\cos(n\theta) + B\sin(n\theta)\big)$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \Delta > 0:\ u_n = A\,\cV{r_1}^n + B\,\cV{r_2}^n$</li><li>$\displaystyle \Delta = 0:\ u_n = (A + Bn)\,\cV{r_0}^n$</li><li>$\displaystyle \Delta \lt 0:\ \cV{r = \rho e^{\pm i\theta}},\ u_n = \rho^n\big(A\cos(n\theta) + B\sin(n\theta)\big)$</li></ul></div>
 <p>$A, B$ réels, fixés par $u_0$ et $u_1$ (un système $2\times2$). Sur $\mathbb C$ avec $\Delta\neq0$ : $u_n = A\,r_1^n + B\,r_2^n$, $A, B\in\mathbb C$.</p>
 
 <p class="ml">Exemple 27 : arithmético-géométrique</p>
@@ -5940,8 +5940,8 @@ $$\frac1{n + 1}\leq\ln(n + 1) - \ln n = \int_n^{n+1}\frac{dt}t\leq\frac1n.$$
 </table>
 
 <h2 id="ea-quant">2. Quantifier et nier</h2>
-<div class="sbox">$$\operatorname{non}(\forall x,\ P(x))\iff\exists x,\ \operatorname{non}P(x).\qquad\operatorname{non}(\exists x,\ P(x))\iff\forall x,\ \operatorname{non}P(x).$$
-$$\operatorname{non}(P\Rightarrow Q)\iff P\ \text{et}\ \operatorname{non}Q.\qquad\operatorname{non}(P\ \text{et}\ Q)\iff\operatorname{non}P\ \text{ou}\ \operatorname{non}Q.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{non}(\forall x,\ P(x))\iff\exists x,\ \operatorname{non}P(x)$</li><li>$\displaystyle \operatorname{non}(\exists x,\ P(x))\iff\forall x,\ \operatorname{non}P(x)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \operatorname{non}(P\Rightarrow Q)\iff P\ \text{et}\ \operatorname{non}Q$</li><li>$\displaystyle \operatorname{non}(P\ \text{et}\ Q)\iff\operatorname{non}P\ \text{ou}\ \operatorname{non}Q$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> On lit la phrase de gauche à droite et on <b>échange</b> chaque $\forall$ et $\exists$. <b>2.</b> On garde les domaines ($\forall x > 0$ devient $\exists x > 0$, on ne nie pas « $x > 0$ »). <b>3.</b> On nie seulement la propriété finale. Une implication se nie en « $P$ et non $Q$ », jamais en une autre implication.</p>
 
@@ -5962,8 +5962,8 @@ $$\cG{\forall a > 0,\ \forall b > 0,\ \exists n\in\mathbb N,\ na\geq b}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{« pas nulle »}\neq\text{« ne s'annule pas »}}$ : $x\mapsto x$ n'est pas nulle (elle vaut $1$ en $1$) mais s'annule en $0$.</p>
 
 <h2 id="ea-incl">3. Inclusion et égalité d'ensembles</h2>
-<div class="sbox">$$\cB A\subset\cB B\iff\forall\cO x,\ (\cO x\in\cB A\Rightarrow\cO x\in\cB B).\qquad\cB A = \cB B\iff(\cB A\subset\cB B\ \text{et}\ \cB B\subset\cB A).$$
-$$\varnothing\subset A,\qquad A\subset A,\qquad(A\subset B\ \text{et}\ B\subset C)\Rightarrow A\subset C.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cB A\subset\cB B\iff\forall\cO x,\ (\cO x\in\cB A\Rightarrow\cO x\in\cB B)$</li><li>$\displaystyle \cB A = \cB B\iff(\cB A\subset\cB B\ \text{et}\ \cB B\subset\cB A)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \varnothing\subset A$</li><li>$\displaystyle A\subset A$</li><li>$\displaystyle (A\subset B\ \text{et}\ B\subset C)\Rightarrow A\subset C$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Pour $A\subset B$ : on écrit « <b>soit $\cO x\in\cB A$</b> », on traduit ce que ça veut dire, et on arrive à « donc $\cO x\in\cB B$ ». <b>2.</b> Pour $A = B$ : <b>double inclusion</b>, ou une chaîne d'équivalences $x\in A\iff\dots\iff x\in B$ (si chaque étape est vraiment une équivalence). <b>3.</b> Pour $A\not\subset B$ : un seul $\cR x$ dans $A$ et pas dans $B$.</p>
 
@@ -5984,9 +5984,9 @@ $$\cO x\in\cB A\iff(x - 1)(x - 2)\leq0\iff1\leq x\leq2\iff\cO x\in[1, 2].$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{A\subset B\ \text{et}\ A\neq B}$.</p>
 
 <h2 id="ea-op">4. Opérations sur les parties</h2>
-<div class="sbox">$$A\cap(B\cup C) = (A\cap B)\cup(A\cap C),\qquad A\cup(B\cap C) = (A\cup B)\cap(A\cup C).$$
-$$\textbf{De Morgan}:\ \overline{A\cap B} = \overline A\cup\overline B,\qquad\overline{A\cup B} = \overline A\cap\overline B,\qquad\overline{\overline A} = A.$$
-$$A\setminus B = A\cap\overline B,\qquad A\subset B\iff A\cap B = A\iff A\cup B = B\iff\overline B\subset\overline A.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle A\cap(B\cup C) = (A\cap B)\cup(A\cap C)$</li><li>$\displaystyle A\cup(B\cap C) = (A\cup B)\cap(A\cup C)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{De Morgan}:\ \overline{A\cap B} = \overline A\cup\overline B$</li><li>$\displaystyle \overline{A\cup B} = \overline A\cap\overline B$</li><li>$\displaystyle \overline{\overline A} = A$</li></ul>
+<ul class="sbl"><li>$\displaystyle A\setminus B = A\cap\overline B$</li><li>$\displaystyle A\subset B\iff A\cap B = A\iff A\cup B = B\iff\overline B\subset\overline A$</li></ul></div>
 <p>Pour une famille $(A_i)_{i\in I}$ : $\overline{\bigcup_iA_i} = \bigcap_i\overline{A_i}$ et $\overline{\bigcap_iA_i} = \bigcup_i\overline{A_i}$.</p>
 <p class="ml">La méthode</p>
 <p><b>1.</b> On remplace chaque $\setminus$ par $\cap\,\overline{\phantom{A}}$. <b>2.</b> On applique De Morgan et la distributivité, comme un calcul. <b>3.</b> Si le calcul bloque : on revient aux éléments (« soit $x$ ») ou aux indicatrices (§6). <b>4.</b> Pour réfuter une égalité : un petit exemple dans $E = \{1, 2, 3\}$ suffit.</p>
@@ -6007,7 +6007,7 @@ $$A\cap(\overline B\cup\overline C) = (A\cap\overline B)\cup(A\cap\overline C) =
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\cap B = A\cap C\ \text{mais}\ B\neq C}$ ($\cR2\in B$, $2\notin C$). Même idée pour la réunion : $A = \{1, 2, 3\}$, $B = \{1\}$, $C = \{2\}$ donnent $A\cup B = A\cup C = A$. En revanche, avoir <b>les deux</b> égalités $A\cap B = A\cap C$ et $A\cup B = A\cup C$ force $B = C$ (exercice 6).</p>
 
 <h2 id="ea-parties">5. Parties d'un ensemble, produit cartésien, partitions</h2>
-<div class="sbox">$$\mathcal P(E) = \{A,\ A\subset E\},\qquad\operatorname{Card}\mathcal P(E) = 2^{\operatorname{Card}E}.\qquad E\times F = \{(x, y),\ x\in E,\ y\in F\},\quad(x, y) = (a, b)\iff x = a\ \text{et}\ y = b.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \mathcal P(E) = \{A,\ A\subset E\}$</li><li>$\displaystyle \operatorname{Card}\mathcal P(E) = 2^{\operatorname{Card}E}$</li><li>$\displaystyle E\times F = \{(x, y),\ x\in E,\ y\in F\},\quad(x, y) = (a, b)\iff x = a\ \text{et}\ y = b$</li></ul>
 $$(A_i)_{i\in I}\ \text{partition de}\ E\iff A_i\neq\varnothing,\quad A_i\cap A_j = \varnothing\ (i\neq j),\quad\bigcup_{i\in I}A_i = E.$$</div>
 <p>Le programme demande aussi des parties <b>non vides</b> dans une partition (le résumé du cours l'omet, mais c'est la définition officielle). $A$ et $\overline A$ forment une partition de $E$ si $A\neq\varnothing$ et $A\neq E$.</p>
 
@@ -6044,8 +6044,8 @@ $$\mathbb 1_{A\cap B} = \mathbb 1_A\mathbb 1_B,\quad\mathbb 1_{\overline A} = 1 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{A\Delta B} = \mathbb 1_A + \mathbb 1_B - 2\,\mathbb 1_A\mathbb 1_B = (\mathbb 1_A - \mathbb 1_B)^2}$ (contrôle : $(a - b)^2 = a^2 - 2ab + b^2 = a - 2ab + b$).</p>
 
 <h2 id="ea-app">7. Applications, égalité, composée</h2>
-<div class="sbox">$$f = g\iff(\text{même départ, même arrivée, et}\ \forall x\in E,\ f(x) = g(x)).\qquad f\neq g\iff\exists\cR{x_0},\ f(x_0)\neq g(x_0).$$
-$$g\circ f:\ E\xrightarrow{\ f\ }F\xrightarrow{\ g\ }G,\quad(g\circ f)(x) = g(f(x)),\qquad f\circ\operatorname{id}_E = \operatorname{id}_F\circ f = f,\qquad h\circ(g\circ f) = (h\circ g)\circ f.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f = g\iff(\text{même départ, même arrivée, et}\ \forall x\in E,\ f(x) = g(x))$</li><li>$\displaystyle f\neq g\iff\exists\cR{x_0},\ f(x_0)\neq g(x_0)$</li></ul>
+<ul class="sbl"><li>$\displaystyle g\circ f:\ E\xrightarrow{\ f\ }F\xrightarrow{\ g\ }G,\quad(g\circ f)(x) = g(f(x))$</li><li>$\displaystyle f\circ\operatorname{id}_E = \operatorname{id}_F\circ f = f$</li><li>$\displaystyle h\circ(g\circ f) = (h\circ g)\circ f$</li></ul></div>
 <p>En général $\cR{g\circ f\neq f\circ g}$ : la composition n'est pas commutative. Pour $f\in E^E$, $f^n = f\circ\dots\circ f$ ($n$ fois) et $f^0 = \operatorname{id}_E$.</p>
 
 <p class="ml">Exemple 11 : $g\circ f$ et $f\circ g$</p>
@@ -6057,10 +6057,10 @@ $$g\circ f:\ E\xrightarrow{\ f\ }F\xrightarrow{\ g\ }G,\quad(g\circ f)(x) = g(f(
 <p><b>Étape 5 : Conclusion.</b> $\cG{g\circ f\neq f\circ g}$ (elles coïncident seulement là où $2x = 0$, en $x = 0$).</p>
 
 <h2 id="ea-img">8. Image directe, image réciproque</h2>
-<div class="sbox">$$f(\cB A) = \{f(x),\ x\in A\}:\quad\cV y\in f(A)\iff\exists\cO x\in A,\ \cV y = f(\cO x).\qquad f^{-1}(\cB B) = \{x\in E,\ f(x)\in B\}:\quad\cO x\in f^{-1}(B)\iff\cV{f(x)}\in\cB B.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f(\cB A) = \{f(x),\ x\in A\}:\quad\cV y\in f(A)\iff\exists\cO x\in A,\ \cV y = f(\cO x)$</li><li>$\displaystyle f^{-1}(\cB B) = \{x\in E,\ f(x)\in B\}:\quad\cO x\in f^{-1}(B)\iff\cV{f(x)}\in\cB B$</li></ul>
 $$f^{-1}(B\cup B') = f^{-1}(B)\cup f^{-1}(B'),\quad f^{-1}(B\cap B') = f^{-1}(B)\cap f^{-1}(B'),\quad f^{-1}(\overline B) = \overline{f^{-1}(B)}.$$
-$$f(A\cup A') = f(A)\cup f(A'),\qquad f(A\cap A')\cR\subset f(A)\cap f(A')\ \text{(seulement une inclusion)}.$$
-$$A\subset f^{-1}(f(A)),\qquad f(f^{-1}(B))\subset B.$$</div>
+<ul class="sbl"><li>$\displaystyle f(A\cup A') = f(A)\cup f(A')$</li><li>$\displaystyle f(A\cap A')\cR\subset f(A)\cap f(A')\ \text{(seulement une inclusion)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle A\subset f^{-1}(f(A))$</li><li>$\displaystyle f(f^{-1}(B))\subset B$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> $f^{-1}(B)$ : on <b>résout</b> l'inéquation ou l'équation $f(x)\in B$. <b>2.</b> $f(A)$ : on étudie les <b>variations</b> de $f$ sur $A$ (pour une fonction réelle continue, l'image d'un intervalle est un intervalle). <b>3.</b> L'image réciproque se comporte bien avec toutes les opérations ; l'image directe <b>pas avec $\cap$</b>.</p>
 
@@ -6146,7 +6146,7 @@ $$\text{Alors}\ g = f^{-1},\quad f^{-1}(y) = x\iff y = f(x),\quad(f^{-1})^{-1} =
 
 <h2 id="ea-comp">12. Composées et propriétés</h2>
 <div class="sbox">$$f, g\ \text{injectives}\Rightarrow g\circ f\ \text{injective};\quad f, g\ \text{surjectives}\Rightarrow g\circ f\ \text{surjective};\quad f, g\ \text{bijectives}\Rightarrow g\circ f\ \text{bijective}.$$
-$$g\circ f\ \text{injective}\Rightarrow\cB f\ \text{injective}\ (\text{la première}).\qquad g\circ f\ \text{surjective}\Rightarrow\cB g\ \text{surjective}\ (\text{la dernière}).$$</div>
+<ul class="sbl"><li>$\displaystyle g\circ f\ \text{injective}\Rightarrow\cB f\ \text{injective}\ (\text{la première})$</li><li>$\displaystyle g\circ f\ \text{surjective}\Rightarrow\cB g\ \text{surjective}\ (\text{la dernière})$</li></ul></div>
 <p>Moyen mnémotechnique : l'injectivité se lit sur l'application qu'on applique en <b>premier</b> ($f$), la surjectivité sur celle qu'on applique en <b>dernier</b> ($g$).</p>
 
 <p class="ml">Exemple 21 : $g\circ f$ injective entraîne $f$ injective</p>
@@ -6162,7 +6162,7 @@ $$g\circ f\ \text{injective}\Rightarrow\cB f\ \text{injective}\ (\text{la premi�
 <p><b>Étape 4 : Conclusion.</b> $\cG{g\ \text{est surjective}}$.</p>
 
 <h2 id="ea-restr">13. Restriction, prolongement</h2>
-<div class="sbox">$$f_{|A}:A\to F,\ x\mapsto f(x)\ (A\subset E).\qquad g:E'\to F\ \text{prolonge}\ f\ (E\subset E')\iff\forall x\in E,\ g(x) = f(x).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f_{|A}:A\to F,\ x\mapsto f(x)\ (A\subset E)$</li><li>$\displaystyle g:E'\to F\ \text{prolonge}\ f\ (E\subset E')\iff\forall x\in E,\ g(x) = f(x)$</li></ul></div>
 <p>Restreindre le départ peut rendre <b>injective</b> ; réduire l'arrivée à $f(E)$ rend <b>surjective</b>. C'est ainsi qu'on fabrique $\sqrt{\phantom x}$, $\arcsin$, $\arccos$, $\arctan$.</p>
 
 <p class="ml">Exemple 23 : fabriquer une bijection à partir de $\sin$</p>
@@ -6194,8 +6194,8 @@ $$\text{équivalence} = \text{réflexive} + \text{symétrique} + \text{transitiv
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mid\ \text{est une relation d'ordre partiel sur}\ \mathbb N^*}$ : partiel car $\cR2\nmid3$ et $\cR3\nmid2$. Sur $\mathbb Z$, ce n'est plus un ordre : $2\mid-2$ et $-2\mid2$ avec $2\neq-2$.</p>
 
 <h2 id="ea-equiv">15. Relations d'équivalence, classes, partition</h2>
-<div class="sbox">$$\overline a = \{x\in E,\ x\,\mathcal R\,a\}.\qquad x\,\mathcal R\,a\iff x\in\overline a\iff\overline x = \overline a.\qquad\overline x\neq\overline a\iff\overline x\cap\overline a = \varnothing.$$
-$$\textbf{Les classes d'équivalence forment une partition de}\ E.\qquad a\equiv b\ [n]\iff n\mid a - b:\ \text{classes}\ \overline0, \overline1, \dots, \overline{n - 1}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \overline a = \{x\in E,\ x\,\mathcal R\,a\}$</li><li>$\displaystyle x\,\mathcal R\,a\iff x\in\overline a\iff\overline x = \overline a$</li><li>$\displaystyle \overline x\neq\overline a\iff\overline x\cap\overline a = \varnothing$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Les classes d'équivalence forment une partition de}\ E$</li><li>$\displaystyle a\equiv b\ [n]\iff n\mid a - b:\ \text{classes}\ \overline0, \overline1, \dots, \overline{n - 1}$</li></ul></div>
 <p>L'ensemble des classes, noté $E/\mathcal R$, est l'ensemble quotient <span class="hp">hors programme</span> en MPSI (il sert en Spé pour $\mathbb Z/n\mathbb Z$).</p>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Pour décrire $\overline a$ : on <b>résout</b> $x\,\mathcal R\,a$ d'inconnue $x$. <b>2.</b> On choisit un <b>représentant</b> simple par classe. <b>3.</b> Relation du type $x\,\mathcal R\,y\iff f(x) = f(y)$ : c'est toujours une équivalence, et les classes sont les $f^{-1}(\{c\})$, $c\in f(E)$.</p>
@@ -6227,7 +6227,7 @@ $$\text{Ordres usuels}:\ \leq\ \text{sur}\ \mathbb R\ \text{(total)},\quad\subse
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{relation d'ordre partiel}}$ : $\cR{(0, 1)}$ et $\cR{(1, 0)}$ ne sont pas comparables ($0\leq1$ mais $1 > 0$).</p>
 
 <h2 id="ea-maj">17. Majorants, plus grand et plus petit élément</h2>
-<div class="sbox">$$M\ \text{majorant de}\ A\iff\forall a\in A,\ a\preccurlyeq M.\qquad\max A = a\iff a\in A\ \text{et}\ a\ \text{majore}\ A\ \text{(unique s'il existe)}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle M\ \text{majorant de}\ A\iff\forall a\in A,\ a\preccurlyeq M$</li><li>$\displaystyle \max A = a\iff a\in A\ \text{et}\ a\ \text{majore}\ A\ \text{(unique s'il existe)}$</li></ul>
 $$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute partie non vide majorée a un max}.$$</div>
 <p>Le max doit <b>appartenir</b> à $A$. Dans un ordre partiel, un majorant doit être <b>comparable</b> à tous les éléments de $A$. La borne supérieure (plus petit majorant) est traitée dans la fiche « Nombres réels ».</p>
 
@@ -6382,9 +6382,9 @@ $$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute 
 
 <h2 id="se-rayon">2. Le rayon de convergence</h2>
 <div class="sbox">$$\textbf{Lemme d'Abel}:\ (a_n\rho^n)\ \text{bornée}\Rightarrow\sum a_nz^n\ \text{converge absolument pour}\ |z| \lt \rho.$$
-$$\cO{|z|} \lt \cV R\Rightarrow\sum a_nz^n\ \text{ACV};\qquad\cO{|z|} > \cV R\Rightarrow\sum a_nz^n\ \text{diverge grossièrement};\qquad\cR{|z| = R}:\ \text{on ne peut rien dire}.$$</div>
+<ul class="sbl"><li>$\displaystyle \cO{|z|} \lt \cV R\Rightarrow\sum a_nz^n\ \text{ACV}$</li><li>$\displaystyle \cO{|z|} > \cV R\Rightarrow\sum a_nz^n\ \text{diverge grossièrement}$</li><li>$\displaystyle \cR{|z| = R}:\ \text{on ne peut rien dire}$</li></ul></div>
 <p class="ml">Les réflexes (avec $\rho > 0$)</p>
-<div class="sbox">$$(a_n\rho^n)\ \text{bornée}\Rightarrow R\geq\rho.\qquad\sum a_n\rho^n\ \text{converge}\Rightarrow R\geq\rho.\qquad\sum a_n\rho^n\ \text{diverge}\Rightarrow R\leq\rho.\qquad a_n\rho^n\not\to0\Rightarrow R\leq\rho.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle (a_n\rho^n)\ \text{bornée}\Rightarrow R\geq\rho$</li><li>$\displaystyle \sum a_n\rho^n\ \text{converge}\Rightarrow R\geq\rho$</li><li>$\displaystyle \sum a_n\rho^n\ \text{diverge}\Rightarrow R\leq\rho$</li><li>$\displaystyle a_n\rho^n\not\to0\Rightarrow R\leq\rho$</li></ul>
 $$(a_n)\ \text{bornée}\Rightarrow R\geq1.\qquad\text{convergence pour tout}\ z\iff R = +\infty.\qquad\text{divergence pour tout}\ z\neq0\iff R = 0.$$</div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> On essaie d'abord d'Alembert (§3). <b>2.</b> Si les $a_n$ s'annulent, oscillent ($\sin n$, $(-1)^n$…) ou si la série est lacunaire : on encadre $R$ avec les réflexes, <b>une inégalité dans chaque sens</b>. <b>3.</b> Ou on compare à une série connue (§4).</p>
@@ -6402,7 +6402,7 @@ $$(a_n)\ \text{bornée}\Rightarrow R\geq1.\qquad\text{convergence pour tout}\ z\
 <p><b>Étape 4 : Conclusion.</b> $R\geq\rho$ pour tout $\rho$ : $\cG{R = +\infty}$.</p>
 
 <h2 id="se-dal">3. La règle de d'Alembert</h2>
-<div class="sbox">$$\cB{a_n}\neq0\ \text{à partir d'un rang},\quad\Big|\frac{a_{n+1}}{a_n}\Big|\to\ell\in[0, +\infty]\ \Longrightarrow\ \cV R = \frac1\ell\qquad\Big(\frac10 = +\infty,\ \frac1{+\infty} = 0\Big).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cB{a_n}\neq0\ \text{à partir d'un rang},\quad\Big|\frac{a_{n+1}}{a_n}\Big|\to\ell\in[0, +\infty]\ \Longrightarrow\ \cV R = \frac1\ell$</li><li>$\displaystyle \Big(\frac10 = +\infty,\ \frac1{+\infty} = 0\Big)$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Si tous les $a_n$ sont non nuls : on calcule $\big|\frac{a_{n+1}}{a_n}\big|$, on simplifie (factorielles, puissances), on passe à la limite. <b>2.</b> Si la série est <b>lacunaire</b> ($z^{2n}$, $z^{3n}$… : beaucoup de coefficients nuls), on applique d'Alembert <b>à la série numérique</b> $\sum|u_n(z)|$, $z\neq0$ fixé, et on lit pour quels $|z|$ la limite est $ \lt 1$.</p>
 
@@ -6432,7 +6432,7 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1{\sqrt2}}$.</p>
 
 <h2 id="se-comp">4. Comparer les coefficients</h2>
-<div class="sbox">$$|a_n|\leq|b_n|\ \text{ou}\ a_n = O(b_n)\Rightarrow R_a\geq R_b.\qquad|a_n|\sim|b_n|\Rightarrow R_a = R_b.\qquad\forall\alpha\in\mathbb R,\ \sum a_nz^n\ \text{et}\ \sum n^\alpha a_nz^n\ \text{ont le même rayon}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle |a_n|\leq|b_n|\ \text{ou}\ a_n = O(b_n)\Rightarrow R_a\geq R_b$</li><li>$\displaystyle |a_n|\sim|b_n|\Rightarrow R_a = R_b$</li><li>$\displaystyle \forall\alpha\in\mathbb R,\ \sum a_nz^n\ \text{et}\ \sum n^\alpha a_nz^n\ \text{ont le même rayon}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>On cherche un <b>équivalent simple</b> de $|a_n|$ (DL, équivalents usuels), puis on lit le rayon de la série de référence. Les facteurs $n^\alpha$, $\ln n$ (encadré entre $1$ et $n$) ou polynômes en $n$ <b>ne changent pas</b> le rayon.</p>
 
@@ -6456,7 +6456,7 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 
 <h2 id="se-op">5. Somme et produit de Cauchy</h2>
 <div class="sbox">$$\sum(a_n + b_n)z^n:\ R\geq\min(R_a, R_b),\ \text{avec}\ \cR{\text{égalité si}\ R_a\neq R_b};\quad\sum_{n=0}^{+\infty}(a_n + b_n)z^n = \sum a_nz^n + \sum b_nz^n\ \text{pour}\ |z| \lt \min(R_a, R_b).$$
-$$c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b),\qquad\sum_{n=0}^{+\infty}c_nz^n = \Big(\sum_{n=0}^{+\infty}a_nz^n\Big)\Big(\sum_{n=0}^{+\infty}b_nz^n\Big)\ \text{pour}\ |z| \lt \min(R_a, R_b).$$</div>
+<ul class="sbl"><li>$\displaystyle c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b)$</li><li>$\displaystyle \sum_{n=0}^{+\infty}c_nz^n = \Big(\sum_{n=0}^{+\infty}a_nz^n\Big)\Big(\sum_{n=0}^{+\infty}b_nz^n\Big)\ \text{pour}\ |z| \lt \min(R_a, R_b)$</li></ul></div>
 
 <p class="ml">Exemple 10 : $\sum(1 + 2^n)x^n$</p>
 <p><b>Étape 1 : Rappel.</b> $R_a\neq R_b\Rightarrow R = \min(R_a, R_b)$.</p>
@@ -6471,7 +6471,7 @@ $$c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b),\qquad\sum_{n=0}^{+\infty
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = 1,\quad\sum_{n\geq1}H_nx^n = -\frac{\ln(1 - x)}{1 - x}}$ sur $]-1, 1[$.</p>
 
 <h2 id="se-cont">6. Continuité, et ce qui se passe au bord</h2>
-<div class="sbox">$$\sum a_nz^n\ \text{converge normalement sur tout disque fermé}\ \overline D(0, r),\ r \lt R.\qquad f\ \text{est continue sur}\ D(0, R).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum a_nz^n\ \text{converge normalement sur tout disque fermé}\ \overline D(0, r),\ r \lt R$</li><li>$\displaystyle f\ \text{est continue sur}\ D(0, R)$</li></ul></div>
 <p>Au bord $\cR{|z| = R}$, tout peut arriver ; on étudie <b>à la main</b> : convergence normale si $\sum|a_n|R^n$ converge, critère des séries alternées (et sa majoration uniforme du reste) sinon. Le théorème radial d'Abel <span class="hp">hors programme</span> dit : si $\sum a_nR^n$ converge, $f(x)\to\sum a_nR^n$ quand $x\to R^-$.</p>
 
 <p class="ml">Exemple 12 : $\sum\frac{x^n}{n^2}$ est continue sur $[-1, 1]$</p>
@@ -6481,7 +6481,7 @@ $$c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b),\qquad\sum_{n=0}^{+\infty
 <p><b>Étape 4 : Conclusion.</b> Convergence normale sur $[-1, 1]$ : $\cG{f\ \text{est continue sur}\ [-1, 1]}$, bord compris.</p>
 
 <h2 id="se-der">7. Dériver et intégrer terme à terme</h2>
-<div class="sbox">$$f(x) = \sum_{n=0}^{+\infty}a_nx^n\ \text{est}\ \mathcal C^\infty\ \text{sur}\ ]-R, R[,\qquad f'(x) = \sum_{n=1}^{+\infty}na_nx^{n-1},\qquad f^{(k)}(x) = \sum_{n=k}^{+\infty}\frac{n!}{(n - k)!}a_nx^{n-k}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f(x) = \sum_{n=0}^{+\infty}a_nx^n\ \text{est}\ \mathcal C^\infty\ \text{sur}\ ]-R, R[$</li><li>$\displaystyle f'(x) = \sum_{n=1}^{+\infty}na_nx^{n-1}$</li><li>$\displaystyle f^{(k)}(x) = \sum_{n=k}^{+\infty}\frac{n!}{(n - k)!}a_nx^{n-k}$</li></ul>
 $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour}\ x\in]-R, R[\quad\text{(même rayon)}.$$</div>
 <p class="ml">La méthode</p>
 <p>Pour sommer $\sum n\,a_nx^n$ : on dérive une série connue et on multiplie par $x$. Pour sommer $\sum\frac{a_n}{n + 1}x^{n+1}$ : on intègre. <b>Ne jamais oublier la constante</b> : on la trouve en $x = 0$.</p>
@@ -6513,8 +6513,8 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq0}\binom{n + p}px^n = \frac1{(1 - x)^{p+1}}}$ sur $]-1, 1[$ (rayon $1$ : dérivées successives).</p>
 
 <h2 id="se-coef">8. Unicité, coefficients et dérivées</h2>
-<div class="sbox">$$\cB{a_n} = \frac{f^{(n)}(0)}{n!}.\qquad\sum a_nx^n = \sum b_nx^n\ \text{au voisinage de}\ 0\Rightarrow\forall n,\ a_n = b_n.$$
-$$f\ \text{paire}\Rightarrow a_{2p+1} = 0;\qquad f\ \text{impaire}\Rightarrow a_{2p} = 0.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cB{a_n} = \frac{f^{(n)}(0)}{n!}$</li><li>$\displaystyle \sum a_nx^n = \sum b_nx^n\ \text{au voisinage de}\ 0\Rightarrow\forall n,\ a_n = b_n$</li></ul>
+<ul class="sbl"><li>$\displaystyle f\ \text{paire}\Rightarrow a_{2p+1} = 0$</li><li>$\displaystyle f\ \text{impaire}\Rightarrow a_{2p} = 0$</li></ul></div>
 
 <p class="ml">Exemple 17 : $f^{(10)}(0)$ pour $f(x) = x^2e^x$</p>
 <p><b>Étape 1 : Rappel.</b> $f^{(n)}(0) = n!\,a_n$ : on lit $a_{10}$ dans le DSE.</p>
@@ -6734,12 +6734,12 @@ $$f\ \text{paire}\Rightarrow a_{2p+1} = 0;\qquad f\ \text{impaire}\Rightarrow a_
 $$A\subset E\Rightarrow\operatorname{Card}(A)\leq\operatorname{Card}(E),\ \text{avec égalité}\iff A = E.$$</div>
 <p>C'est l'idée la plus puissante du chapitre : <b>pour compter un ensemble difficile, on le met en bijection avec un ensemble facile</b> (exemples 10 et exercice 4).</p>
 <p class="ml">Applications entre ensembles de même cardinal</p>
-<div class="sbox">$$\operatorname{Card}(E) = \operatorname{Card}(F)\ \text{finis},\ f:E\to F:\qquad f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}(E) = \operatorname{Card}(F)\ \text{finis},\ f:E\to F:$</li><li>$\displaystyle f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}$</li></ul></div>
 <p>Il suffit donc de vérifier <b>une seule</b> des deux propriétés.</p>
 
 <h2 id="d-union">3. Réunion, complémentaire, différence</h2>
-<div class="sbox">$$A\cap B = \varnothing:\ \operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B).\qquad\operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B) - \cR{\operatorname{Card}(A\cap B)}.$$
-$$\operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card}(A).\qquad B\subset A:\ \operatorname{Card}(A\setminus B) = \operatorname{Card}(A) - \operatorname{Card}(B).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle A\cap B = \varnothing:\ \operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B)$</li><li>$\displaystyle \operatorname{Card}(A\cup B) = \operatorname{Card}(A) + \operatorname{Card}(B) - \cR{\operatorname{Card}(A\cap B)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \operatorname{Card}(\overline A) = \operatorname{Card}(E) - \operatorname{Card}(A)$</li><li>$\displaystyle B\subset A:\ \operatorname{Card}(A\setminus B) = \operatorname{Card}(A) - \operatorname{Card}(B)$</li></ul></div>
 <p class="ml">La méthode</p>
 <p><b>1.</b> Si l'ensemble se coupe en <b>cas qui ne se chevauchent pas</b>, on additionne (principe additif). <b>2.</b> Si les cas se chevauchent, on retire l'intersection, comptée deux fois. <b>3.</b> « <b>Au moins un</b> » : on compte presque toujours le <b>complémentaire</b> (« aucun »).</p>
 
@@ -6763,7 +6763,7 @@ $$|A\cup B\cup C| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap
 $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 
 <h2 id="d-prod">4. Produit cartésien, principe multiplicatif</h2>
-<div class="sbox">$$\operatorname{Card}(E\times F) = \operatorname{Card}(E)\times\operatorname{Card}(F),\qquad\operatorname{Card}(E^{\cV p}) = \operatorname{Card}(E)^{\cV p}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}(E\times F) = \operatorname{Card}(E)\times\operatorname{Card}(F)$</li><li>$\displaystyle \operatorname{Card}(E^{\cV p}) = \operatorname{Card}(E)^{\cV p}$</li></ul></div>
 <p><b>Principe multiplicatif</b> : si on construit un objet en $k$ étapes, avec $\cO{n_1}$ choix à la 1<sup>re</sup> étape, puis $\cO{n_2}$ choix à la 2<sup>e</sup> <b>quelle que soit</b> la 1<sup>re</sup>, etc., et si chaque objet est obtenu <b>une seule fois</b>, il y a $\cO{n_1}\times\cO{n_2}\times\dots\times\cO{n_k}$ objets.</p>
 <p class="ml piege">Piège</p>
 <p>Si un même objet peut être construit de plusieurs façons, on le compte plusieurs fois. Exemple : choisir « un premier élève, puis un deuxième » donne $n(n - 1)$ <b>couples</b>, mais chaque <b>paire</b> est comptée $2$ fois : il y a $\frac{n(n - 1)}2$ paires.</p>
@@ -6799,7 +6799,7 @@ $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 <p>Compter « on place un A ($5$ places), puis le reste librement ($26^4$) » donne $5\times26^4$ : les mots avec plusieurs A sont comptés <b>plusieurs fois</b>. Le complémentaire évite ce piège.</p>
 
 <h2 id="d-arr">7. Les arrangements (injections)</h2>
-<div class="sbox">$$\text{Nombre d'injections de}\ E\ (\cV p\ \text{éléments})\ \text{dans}\ F\ (\cV n\ \text{éléments}):\quad n(n - 1)\cdots(n - p + 1) = \frac{n!}{(n - p)!}\ \ (p\leq n),\qquad0\ \text{si}\ p > n.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Nombre d'injections de}\ E\ (\cV p\ \text{éléments})\ \text{dans}\ F\ (\cV n\ \text{éléments}):\quad n(n - 1)\cdots(n - p + 1) = \frac{n!}{(n - p)!}\ \ (p\leq n)$</li><li>$\displaystyle 0\ \text{si}\ p > n$</li></ul></div>
 <p class="ml">Exemple 5 : un podium</p>
 <p>$10$ coureurs. Combien de podiums (or, argent, bronze) possibles ?</p>
 <p><b>Étape 1 : Rappel.</b> Ordre important, pas de répétition : $\frac{n!}{(n - p)!} = n(n - 1)\cdots(n - p + 1)$.</p>
@@ -6807,7 +6807,7 @@ $$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 <p><b>Étape 3 : Conclusion.</b> $\cG{10\times9\times8 = 720}$ podiums $= \frac{10!}{7!}$.</p>
 
 <h2 id="d-perm">8. Les permutations, les anagrammes</h2>
-<div class="sbox">$$\text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!\qquad\operatorname{Card}(S_n) = n!\qquad\text{Anagrammes}:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ (\text{lettre}\ i\ \text{répétée}\ k_i\ \text{fois}).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Bijections de}\ E\ \text{dans}\ F,\ \operatorname{Card} = \cV n:\ \ \cV n!$</li><li>$\displaystyle \operatorname{Card}(S_n) = n!\qquad\text{Anagrammes}:\ \frac{n!}{\cR{k_1!\,k_2!\cdots k_r!}}\ \ (\text{lettre}\ i\ \text{répétée}\ k_i\ \text{fois})$</li></ul></div>
 <p>Pourquoi on divise : si on numérote les lettres répétées, on a $n!$ mots ; en effaçant les numéros, chaque mot a été compté $k_1!\cdots k_r!$ fois (les permutations des lettres identiques entre elles).</p>
 <p class="ml">Exemple 6 : anagrammes de BANANE</p>
 <p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$ avec $k_i$ le nombre de répétitions de chaque lettre.</p>
@@ -6818,7 +6818,7 @@ $$\frac{6!}{\cR{1!\,2!\,2!\,1!}} = \frac{6\times5\times4\times3\times2\times1}{1
 <p><b>Étape 5 : Conclusion.</b> $\cG{180}$ anagrammes.</p>
 
 <h2 id="d-comb">9. Les combinaisons</h2>
-<div class="sbox">$$\binom{\cV n}{\cV p} = \frac{n!}{p!\,(n - p)!} = \frac{n(n - 1)\cdots(n - p + 1)}{p!}\qquad\binom np = \binom n{n - p}\qquad\binom np + \binom n{p + 1} = \binom{n + 1}{p + 1}\qquad p\binom np = n\binom{n - 1}{p - 1}$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \binom{\cV n}{\cV p} = \frac{n!}{p!\,(n - p)!} = \frac{n(n - 1)\cdots(n - p + 1)}{p!}$</li><li>$\displaystyle \binom np = \binom n{n - p}$</li><li>$\displaystyle \binom np + \binom n{p + 1} = \binom{n + 1}{p + 1}$</li><li>$\displaystyle p\binom np = n\binom{n - 1}{p - 1}$</li></ul></div>
 <p>$\binom np$ compte les <b>parties à $p$ éléments</b> d'un ensemble à $n$ éléments : les tirages simultanés, les comités, les mains de cartes, les chemins…</p>
 <p class="ml">Exemple 7 : une main de cartes</p>
 <p>On tire $5$ cartes dans un jeu de $32$ (dont $4$ as). Combien de mains ? Combien avec exactement $2$ as ?</p>
@@ -6845,7 +6845,7 @@ $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\ti
 <p><b>Étape 4 : Conclusion.</b> $\binom83 = \frac{8\times7\times6}{3\times2\times1} = \frac{336}6 = 56$ : $\cG{56}$ chemins.</p>
 
 <h2 id="d-parties">10. Le nombre de parties</h2>
-<div class="sbox">$$\operatorname{Card}\big(\mathcal P(E)\big) = 2^{\operatorname{Card}(E)}\qquad\qquad\sum_{p=0}^n\binom np = 2^n.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Card}\big(\mathcal P(E)\big) = 2^{\operatorname{Card}(E)}$</li><li>$\displaystyle \sum_{p=0}^n\binom np = 2^n$</li></ul></div>
 <p class="ml">Exemple 10 : $\operatorname{Card}(\mathcal P(E)) = 2^n$ par une bijection</p>
 <p><b>Étape 1 : Rappel.</b> Une bijection conserve le cardinal, et $\operatorname{Card}(F^E) = \operatorname{Card}(F)^{\operatorname{Card}(E)}$.</p>
 <p><b>Étape 2 : La bijection.</b> À une partie $A$ de $E$, on associe sa fonction indicatrice $\mathbb 1_A:E\to\{0, 1\}$ ($1$ sur $A$, $0$ ailleurs). Réciproquement, $f:E\to\{0, 1\}$ donne $A = f^{-1}(\{1\})$.</p>
@@ -7006,8 +7006,8 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \
 </table>
 
 <h2 id="z-div">2. Divisibilité</h2>
-<div class="sbox">$$a\mid b\ \text{et}\ b\mid c\Rightarrow a\mid c.\qquad\cR d\mid\cB a\ \text{et}\ \cR d\mid\cB b\ \Longrightarrow\ \cR d\mid\cB au + \cB bv\quad\text{pour tous}\ u, v\in\mathbb Z.$$
-$$a\mid b,\ b\neq0\Rightarrow|a|\leq|b|.\qquad a\mid b\ \text{et}\ b\mid a\iff a = \pm b.\qquad a\mid b\Rightarrow ac\mid bc.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle a\mid b\ \text{et}\ b\mid c\Rightarrow a\mid c$</li><li>$\displaystyle \cR d\mid\cB a\ \text{et}\ \cR d\mid\cB b\ \Longrightarrow\ \cR d\mid\cB au + \cB bv\quad\text{pour tous}\ u, v\in\mathbb Z$</li></ul>
+<ul class="sbl"><li>$\displaystyle a\mid b,\ b\neq0\Rightarrow|a|\leq|b|$</li><li>$\displaystyle a\mid b\ \text{et}\ b\mid a\iff a = \pm b$</li><li>$\displaystyle a\mid b\Rightarrow ac\mid bc$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>Pour trouver ce que divise un $\cR d$ qui divise deux expressions, on fait une <b>combinaison</b> qui élimine $n$. Pour « $n + a$ divise $P(n)$ », on fait la division euclidienne de $P(n)$ par $n + a$.</p>
 
@@ -7026,7 +7026,7 @@ $$a\mid b,\ b\neq0\Rightarrow|a|\leq|b|.\qquad a\mid b\ \text{et}\ b\mid a\iff a
 <p><b>Étape 5 : Conclusion.</b> $\cG{n\in\{-5, -3, -2, 0, 1, 3\}}$. Contrôle : $n = 3$, $n + 1 = 4$ et $n^2 + 3 = 9 + 3 = 12 = 4\times3$.</p>
 
 <h2 id="z-eucl">3. Division euclidienne</h2>
-<div class="sbox">$$\cB a\in\mathbb Z,\ \cB b\in\mathbb N^*:\quad\exists!\,(q, r)\in\mathbb Z^2,\quad\cB a = \cB bq + r\quad\text{et}\quad0\leq r \lt \cB b.\qquad b\mid a\iff r = 0.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cB a\in\mathbb Z,\ \cB b\in\mathbb N^*:\quad\exists!\,(q, r)\in\mathbb Z^2,\quad\cB a = \cB bq + r\quad\text{et}\quad0\leq r \lt \cB b$</li><li>$\displaystyle b\mid a\iff r = 0$</li></ul></div>
 <p>Pour $b > 0$ : $q = \lfloor\frac ab\rfloor$. Le reste est <b>toujours positif</b>, même si $a \lt 0$.</p>
 <p class="ml">Exemple 3 : diviser un négatif</p>
 <p>Division euclidienne de $-17$ par $5$.</p>
@@ -7036,8 +7036,8 @@ $$a\mid b,\ b\neq0\Rightarrow|a|\leq|b|.\qquad a\mid b\ \text{et}\ b\mid a\iff a
 <p><b>Étape 4 : Conclusion.</b> $\cG{-17 = 5\times(-4) + 3}$. (Écrire $-17 = 5\times(-3) - 2$ est faux : reste négatif.)</p>
 
 <h2 id="z-pgcd">4. PGCD et algorithme d'Euclide</h2>
-<div class="sbox">$$\cB a = \cB bq + r\ \Longrightarrow\ \cB a\wedge\cB b = \cB b\wedge r.\qquad a\wedge0 = |a|,\qquad a\wedge b = |a|\wedge|b|.$$
-$$\mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b):\ \text{les diviseurs communs sont les diviseurs du PGCD}.\qquad(ka)\wedge(kb) = |k|\,(a\wedge b).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cB a = \cB bq + r\ \Longrightarrow\ \cB a\wedge\cB b = \cB b\wedge r$</li><li>$\displaystyle a\wedge0 = |a|$</li><li>$\displaystyle a\wedge b = |a|\wedge|b|$</li></ul>
+<ul class="sbl"><li>$\displaystyle \mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b):\ \text{les diviseurs communs sont les diviseurs du PGCD}$</li><li>$\displaystyle (ka)\wedge(kb) = |k|\,(a\wedge b)$</li></ul></div>
 <p><b>Algorithme d'Euclide</b> : on remplace $(a, b)$ par $(b, r)$ jusqu'à un reste nul. Le PGCD est le <b>dernier reste non nul</b>.</p>
 
 <p class="ml">Exemple 4 : $1071\wedge462$</p>
@@ -7072,7 +7072,7 @@ $$21 = 462 - 3\,(1071 - 2\times462) = 462 - 3\times1071 + 6\times462 = 7\times46
 
 <h2 id="z-gauss">6. Le lemme de Gauss et ses conséquences</h2>
 <div class="sbox">$$\textbf{Gauss}:\ \cB a\mid bc\ \text{et}\ \cB a\wedge b = 1\ \Longrightarrow\ \cB a\mid c.$$
-$$a\mid n,\ b\mid n,\ a\wedge b = 1\Rightarrow ab\mid n.\qquad a\wedge b = 1\ \text{et}\ a\wedge c = 1\Rightarrow a\wedge bc = 1.\qquad\text{Si}\ d = a\wedge b,\ a = da',\ b = db',\ a'\wedge b' = 1.$$</div>
+<ul class="sbl"><li>$\displaystyle a\mid n,\ b\mid n,\ a\wedge b = 1\Rightarrow ab\mid n$</li><li>$\displaystyle a\wedge b = 1\ \text{et}\ a\wedge c = 1\Rightarrow a\wedge bc = 1.\qquad\text{Si}\ d = a\wedge b,\ a = da',\ b = db',\ a'\wedge b' = 1$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>Sans « premiers entre eux », c'est faux : $6\mid4\times3$ mais $6\nmid4$ et $6\nmid3$. Et $2\mid12$, $4\mid12$ ne donne pas $8\mid12$.</p>
 
@@ -7099,7 +7099,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 6 : Conclusion.</b> $\cG{\mathcal S = \{(-12 + 7k,\ 9 - 5k),\ k\in\mathbb Z\}}$. Contrôle $k = 2$ : $x = -12 + 14 = 2$, $y = 9 - 10 = -1$, et $15\times2 + 21\times(-1) = 30 - 21 = 9$.</p>
 
 <h2 id="z-ppcm">8. PPCM</h2>
-<div class="sbox">$$a\vee b = \text{le plus petit multiple commun}\ \geq0.\qquad a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m.\qquad(a\wedge b)\times(a\vee b) = |ab|.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle a\vee b = \text{le plus petit multiple commun}\ \geq0$</li><li>$\displaystyle a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m$</li><li>$\displaystyle (a\wedge b)\times(a\vee b) = |ab|$</li></ul></div>
 <p class="ml">Exemple 9 : $1071\vee462$</p>
 <p><b>Étape 1 : Rappel.</b> $(a\wedge b)(a\vee b) = |ab|$.</p>
 <p><b>Étape 2 : On utilise l'exemple 4.</b> $1071\wedge462 = 21$.</p>
@@ -7107,10 +7107,10 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{1071\vee462 = 23\,562}$.</p>
 
 <h2 id="z-prem">9. Nombres premiers</h2>
-<div class="sbox">$$\text{Tout}\ n\geq2\ \text{a un diviseur premier}.\qquad n\ \text{non premier}\Rightarrow n\ \text{a un diviseur premier}\ \cV p\leq\sqrt n.\qquad\mathcal P\ \text{est infini}.$$
-$$\textbf{Lemme d'Euclide}:\ \cV p\mid ab\Rightarrow\cV p\mid a\ \text{ou}\ \cV p\mid b.\qquad\cV p\nmid a\Rightarrow\cV p\wedge a = 1.$$
-$$\textbf{Décomposition}:\ n = \prod_{p\in\mathcal P}p^{v_p(n)}\ \text{(unique)}.\qquad a\mid b\iff\forall p,\ v_p(a)\leq v_p(b).$$
-$$a\wedge b = \prod p^{\min(v_p(a), v_p(b))},\qquad a\vee b = \prod p^{\max(v_p(a), v_p(b))}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Tout}\ n\geq2\ \text{a un diviseur premier}$</li><li>$\displaystyle n\ \text{non premier}\Rightarrow n\ \text{a un diviseur premier}\ \cV p\leq\sqrt n$</li><li>$\displaystyle \mathcal P\ \text{est infini}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Lemme d'Euclide}:\ \cV p\mid ab\Rightarrow\cV p\mid a\ \text{ou}\ \cV p\mid b$</li><li>$\displaystyle \cV p\nmid a\Rightarrow\cV p\wedge a = 1$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Décomposition}:\ n = \prod_{p\in\mathcal P}p^{v_p(n)}\ \text{(unique)}$</li><li>$\displaystyle a\mid b\iff\forall p,\ v_p(a)\leq v_p(b)$</li></ul>
+<ul class="sbl"><li>$\displaystyle a\wedge b = \prod p^{\min(v_p(a), v_p(b))}$</li><li>$\displaystyle a\vee b = \prod p^{\max(v_p(a), v_p(b))}$</li></ul></div>
 
 <p class="ml">Exemple 10 : $221$ est-il premier ?</p>
 <p><b>Étape 1 : Rappel.</b> Si $n$ n'est pas premier, il a un diviseur premier $\cV p\leq\sqrt n$.</p>
@@ -7160,7 +7160,7 @@ $$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv 
 <p><b>Étape 5 : Conclusion.</b> $\cG{7\mid3^{2n+1} + 2^{n+2}}$.</p>
 
 <h2 id="z-inv">11. Inverse modulo $n$, équations $ax\equiv b\ [n]$</h2>
-<div class="sbox">$$a\ \text{est inversible modulo}\ \cV n\ (\exists u,\ au\equiv1\ [n])\iff a\wedge\cV n = 1.\qquad au + nv = 1\Rightarrow au\equiv1\ [n].$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle a\ \text{est inversible modulo}\ \cV n\ (\exists u,\ au\equiv1\ [n])\iff a\wedge\cV n = 1$</li><li>$\displaystyle au + nv = 1\Rightarrow au\equiv1\ [n]$</li></ul></div>
 <p>Pour résoudre $ax\equiv b\ [n]$ avec $a\wedge n = 1$ : on multiplie par l'inverse $u$ : $x\equiv ub\ [n]$.</p>
 
 <p class="ml">Exemple 15 : l'inverse de $7$ modulo $26$</p>
@@ -7179,7 +7179,7 @@ $$1 = 5 - 2\times2 = 5 - 2\,(7 - 5) = 3\times5 - 2\times7 = 3\,(26 - 3\times7) -
 <p><b>Étape 4 : Conclusion.</b> $\cG{x\in19 + 26\mathbb Z}$. Contrôle : $7\times19 = 133 = 5\times26 + 3$.</p>
 
 <h2 id="z-fermat">12. Le petit théorème de Fermat</h2>
-<div class="sbox">$$\cV p\ \text{premier}:\quad\forall a\in\mathbb Z,\ a^{\cV p}\equiv a\ [\cV p].\qquad\cV p\nmid a\ \Longrightarrow\ a^{\cV p - 1}\equiv1\ [\cV p].$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cV p\ \text{premier}:\quad\forall a\in\mathbb Z,\ a^{\cV p}\equiv a\ [\cV p]$</li><li>$\displaystyle \cV p\nmid a\ \Longrightarrow\ a^{\cV p - 1}\equiv1\ [\cV p]$</li></ul>
 $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p>Il donne directement l'exposant $m = p - 1$ de la méthode du §10 quand le module est premier.</p>
 
@@ -7327,9 +7327,9 @@ $$\arctan'(y) = \frac1{1 + \tan^2(\arctan y)}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\arctan'(y) = \frac1{1 + y^2}}$. Même méthode : $\arcsin'(y) = \frac1{\cos(\arcsin y)} = \frac1{\sqrt{1 - y^2}}$ (§5).</p>
 
 <h2 id="u-exp">2. Exponentielle, logarithme, puissances</h2>
-<div class="sbox">$$\ln(ab) = \ln a + \ln b,\quad\ln\frac ab = \ln a - \ln b,\quad\ln(a^\alpha) = \alpha\ln a,\qquad a^b = e^{b\ln a}\ (a > 0),\quad(a^b)^c = a^{bc},\quad a^ba^c = a^{b+c}.$$
-$$\lim_{x\to0}\frac{\ln(1 + x)}x = 1,\qquad\lim_{x\to0}\frac{e^x - 1}x = 1,\qquad\ln(1 + x)\leq x,\qquad e^x\geq1 + x.$$
-$$\textbf{Croissances comparées}:\ \frac{(\ln x)^\alpha}{x^\beta}\xrightarrow[x\to+\infty]{}0,\quad\frac{x^\beta}{e^{\gamma x}}\xrightarrow[x\to+\infty]{}0,\quad x^\beta|\ln x|^\alpha\xrightarrow[x\to0^+]{}0\qquad(\alpha, \beta, \gamma > 0).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \ln(ab) = \ln a + \ln b,\quad\ln\frac ab = \ln a - \ln b,\quad\ln(a^\alpha) = \alpha\ln a$</li><li>$\displaystyle a^b = e^{b\ln a}\ (a > 0),\quad(a^b)^c = a^{bc},\quad a^ba^c = a^{b+c}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \lim_{x\to0}\frac{\ln(1 + x)}x = 1$</li><li>$\displaystyle \lim_{x\to0}\frac{e^x - 1}x = 1$</li><li>$\displaystyle \ln(1 + x)\leq x$</li><li>$\displaystyle e^x\geq1 + x$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Croissances comparées}:\ \frac{(\ln x)^\alpha}{x^\beta}\xrightarrow[x\to+\infty]{}0,\quad\frac{x^\beta}{e^{\gamma x}}\xrightarrow[x\to+\infty]{}0,\quad x^\beta|\ln x|^\alpha\xrightarrow[x\to0^+]{}0$</li><li>$\displaystyle (\alpha, \beta, \gamma > 0)$</li></ul></div>
 <p class="ml">La méthode pour $u(x)^{v(x)}$</p>
 <p>On écrit <b>toujours</b> $u^v = e^{v\ln u}$ (avec $u > 0$), on étudie l'exposant $v\ln u$, puis on repasse à l'exponentielle.</p>
 
@@ -7349,9 +7349,9 @@ $$x\ln2 = (x - 1)\ln3.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\min_{]0, +\infty[}x^x = e^{-1/e}}$, atteint en $\frac1e$, et $f$ se prolonge par continuité en $0$ par $1$.</p>
 
 <h2 id="u-trig">3. Trigonométrie : les formules qui servent</h2>
-<div class="sbox">$$\cos(a\pm b) = \cos a\cos b\mp\sin a\sin b,\qquad\sin(a\pm b) = \sin a\cos b\pm\cos a\sin b,\qquad\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cos(a\pm b) = \cos a\cos b\mp\sin a\sin b$</li><li>$\displaystyle \sin(a\pm b) = \sin a\cos b\pm\cos a\sin b$</li><li>$\displaystyle \tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$</li></ul>
 $$\cos2a = 2\cos^2a - 1 = 1 - 2\sin^2a,\quad\sin2a = 2\sin a\cos a,\quad\cos^2a = \frac{1 + \cos2a}2.$$
-$$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\cV k\pi\ \text{ou}\ a = \pi - b + 2\cV k\pi,\qquad\tan a = \tan b\iff a = b + \cV k\pi.$$</div>
+<ul class="sbl"><li>$\displaystyle \cos a = \cos b\iff a = \pm b + 2\cV k\pi$</li><li>$\displaystyle \sin a = \sin b\iff a = b + 2\cV k\pi\ \text{ou}\ a = \pi - b + 2\cV k\pi$</li><li>$\displaystyle \tan a = \tan b\iff a = b + \cV k\pi$</li></ul></div>
 
 <p class="ml">Exemple 4 : une équation trigonométrique</p>
 <p>Résoudre $\cos(2x) = \cos x$ sur $\mathbb R$.</p>
@@ -7368,7 +7368,7 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <tr><td>Valeurs</td><td>$\arcsin x\in[-\frac\pi2, \frac\pi2]$</td><td>$\arccos x\in[0, \pi]$</td><td>$\arctan x\in\,]-\frac\pi2, \frac\pi2[$</td></tr>
 <tr><td>Sens, parité</td><td>croissante, impaire</td><td>décroissante, $\arccos(-x) = \pi - \arccos x$</td><td>croissante, impaire, $\to\pm\frac\pi2$</td></tr>
 </table>
-<div class="sbox">$$\theta = \arcsin x\iff\Big(\sin\theta = x\ \ \text{et}\ \ \theta\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]}\Big).\qquad\sin(\arcsin x) = x\ \text{pour}\ x\in[-1, 1].$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \theta = \arcsin x\iff\Big(\sin\theta = x\ \ \text{et}\ \ \theta\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]}\Big)$</li><li>$\displaystyle \sin(\arcsin x) = x\ \text{pour}\ x\in[-1, 1]$</li></ul></div>
 <table class="mtab">
 <tr><th>$x$</th><td>$0$</td><td>$\frac12$</td><td>$\frac{\sqrt2}2$</td><td>$\frac{\sqrt3}2$</td><td>$1$</td></tr>
 <tr><th>$\arcsin x$</th><td>$0$</td><td>$\frac\pi6$</td><td>$\frac\pi4$</td><td>$\frac\pi3$</td><td>$\frac\pi2$</td></tr>
@@ -7392,7 +7392,7 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 </table>
 
 <h2 id="u-comp">5. $\arcsin(\sin x)$, $\arccos(\cos x)$, $\arctan(\tan x)$</h2>
-<div class="sbox">$$\arcsin(\sin x) = x\ \textbf{seulement si}\ x\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]},\qquad\arccos(\cos x) = x\ \textbf{seulement si}\ x\in\cR{[0, \pi]}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \arcsin(\sin x) = x\ \textbf{seulement si}\ x\in\cR{\Big[-\frac\pi2, \frac\pi2\Big]}$</li><li>$\displaystyle \arccos(\cos x) = x\ \textbf{seulement si}\ x\in\cR{[0, \pi]}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>On cherche <b>l'angle $\theta$ de l'intervalle autorisé</b> qui a le même sinus (ou cosinus) que $x$, avec $\sin(\pi - x) = \sin x$, $\cos(-x) = \cos x$ et la périodicité $2\pi$.</p>
 
@@ -7443,7 +7443,7 @@ $$\tan(a + b) = \frac{x + 2x}{1 - x\cdot2x} = \frac{3x}{1 - 2x^2} = \tan\frac\pi
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \Big\{\frac{\sqrt{17} - 3}4\Big\}}$.</p>
 
 <h2 id="u-hyp">8. Fonctions hyperboliques</h2>
-<div class="sbox">$$\operatorname{ch}x = \frac{e^x + e^{-x}}2,\quad\operatorname{sh}x = \frac{e^x - e^{-x}}2,\quad\operatorname{th}x = \frac{\operatorname{sh}x}{\operatorname{ch}x},\qquad\operatorname{ch}x + \operatorname{sh}x = e^x,\qquad\operatorname{ch}^2x - \operatorname{sh}^2x = 1.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{ch}x = \frac{e^x + e^{-x}}2,\quad\operatorname{sh}x = \frac{e^x - e^{-x}}2,\quad\operatorname{th}x = \frac{\operatorname{sh}x}{\operatorname{ch}x}$</li><li>$\displaystyle \operatorname{ch}x + \operatorname{sh}x = e^x$</li><li>$\displaystyle \operatorname{ch}^2x - \operatorname{sh}^2x = 1$</li></ul>
 $$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatorname{sh}a\operatorname{sh}b,\quad\operatorname{sh}(a + b) = \operatorname{sh}a\operatorname{ch}b + \operatorname{ch}a\operatorname{sh}b,\quad\operatorname{ch}2a = 2\operatorname{ch}^2a - 1.$$</div>
 <p>$\operatorname{ch}$ est paire, $\geq1$ ; $\operatorname{sh}$ et $\operatorname{th}$ sont impaires et croissantes ; $\operatorname{th}\to\pm1$. Les formules ressemblent à la trigo, avec un changement de signe devant les produits de deux $\operatorname{sh}$.</p>
 <p class="ml">La méthode</p>
@@ -7465,7 +7465,7 @@ $$4\operatorname{ch}a\operatorname{ch}b = e^{a+b} + e^{a-b} + e^{-a+b} + e^{-a-b
 
 <h2 id="u-arg">9. Les réciproques hyperboliques <span class="hp">hors programme</span></h2>
 <div class="sbox">$$\operatorname{argsh}x = \ln\big(x + \sqrt{x^2 + 1}\big)\ (\mathbb R),\quad\operatorname{argch}x = \ln\big(x + \sqrt{x^2 - 1}\big)\ ([1, +\infty[),\quad\operatorname{argth}x = \frac12\ln\frac{1 + x}{1 - x}\ (]-1, 1[).$$
-$$\operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}},\qquad\operatorname{argch}'x = \frac1{\sqrt{x^2 - 1}},\qquad\operatorname{argth}'x = \frac1{1 - x^2}.$$</div>
+<ul class="sbl"><li>$\displaystyle \operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}}$</li><li>$\displaystyle \operatorname{argch}'x = \frac1{\sqrt{x^2 - 1}}$</li><li>$\displaystyle \operatorname{argth}'x = \frac1{1 - x^2}$</li></ul></div>
 <p>Elles ne sont plus au programme : dans une copie, on redémontre la formule logarithmique (exemple 13) ou on écrit directement le $\ln$. Elles servent surtout pour les primitives : $\int\frac{dx}{\sqrt{x^2 + 1}} = \ln(x + \sqrt{x^2 + 1})$.</p>
 <p class="ml">Exemple 13 : retrouver $\operatorname{argsh}$</p>
 <p><b>Étape 1 : Rappel.</b> On résout $\operatorname{sh}y = x$ en posant $Y = e^y > 0$.</p>
@@ -7597,8 +7597,8 @@ $$\varphi(x, x) = x_1^2 + 2x_1x_2 + 2x_2^2 = \underbrace{x_1^2 + 2x_1x_2 + x_2^2
 <p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{est un produit scalaire}}$. (Avec $x_2y_2$ au lieu de $2x_2y_2$, on aurait $(x_1 + x_2)^2$, nulle pour $x = (1, -1)$ : pas défini.)</p>
 
 <h2 id="h-cs">3. Normes, Cauchy-Schwarz</h2>
-<div class="sbox">$$\textbf{Cauchy-Schwarz}:\ |\langle x, y\rangle|\leq\|x\|\,\|y\|,\ \text{égalité}\iff x, y\ \text{colinéaires}.\qquad\|x + y\|\leq\|x\| + \|y\|.$$
-$$\|x + y\|^2 = \|x\|^2 + 2\langle x, y\rangle + \|y\|^2,\qquad\langle x, y\rangle = \frac14\big(\|x + y\|^2 - \|x - y\|^2\big),\qquad\|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \textbf{Cauchy-Schwarz}:\ |\langle x, y\rangle|\leq\|x\|\,\|y\|,\ \text{égalité}\iff x, y\ \text{colinéaires}$</li><li>$\displaystyle \|x + y\|\leq\|x\| + \|y\|$</li></ul>
+<ul class="sbl"><li>$\displaystyle \|x + y\|^2 = \|x\|^2 + 2\langle x, y\rangle + \|y\|^2$</li><li>$\displaystyle \langle x, y\rangle = \frac14\big(\|x + y\|^2 - \|x - y\|^2\big)$</li><li>$\displaystyle \|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2$</li></ul></div>
 <p class="ml">La méthode Cauchy-Schwarz</p>
 <p>Pour majorer une somme ou une intégrale de produits : <b>choisir l'espace et les deux vecteurs</b> $x$, $y$ pour que $\langle x, y\rangle$ soit ce qu'on veut majorer. Le vecteur constant $(1, \dots, 1)$ ou la fonction $1$ sont souvent le bon choix.</p>
 
@@ -7618,8 +7618,8 @@ $$\Big(\sum_{k=1}^nx_k\Big)^2\leq\Big(\sum_{k=1}^nx_k^2\Big)\times n.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{(b - a)^2\leq\int_a^bf\int_a^b\frac1f}$, égalité si $\sqrt f$ et $\frac1{\sqrt f}$ sont colinéaires, c'est-à-dire $f$ constante.</p>
 
 <h2 id="h-orth">4. Orthogonalité, Pythagore</h2>
-<div class="sbox">$$x\perp y\iff\|x + y\|^2 = \|x\|^2 + \|y\|^2\ \ (\textbf{Pythagore}).\qquad(e_1, \dots, e_p)\ \text{orthogonale}\Rightarrow\Big\|\sum e_i\Big\|^2 = \sum\|e_i\|^2.$$
-$$\text{Une famille orthogonale de vecteurs non nuls est libre}.\qquad F\subset G\Rightarrow G^\perp\subset F^\perp,\qquad F\cap F^\perp = \{0\}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle x\perp y\iff\|x + y\|^2 = \|x\|^2 + \|y\|^2\ \ (\textbf{Pythagore})$</li><li>$\displaystyle (e_1, \dots, e_p)\ \text{orthogonale}\Rightarrow\Big\|\sum e_i\Big\|^2 = \sum\|e_i\|^2$</li></ul>
+<ul class="sbl"><li>$\displaystyle \text{Une famille orthogonale de vecteurs non nuls est libre}$</li><li>$\displaystyle F\subset G\Rightarrow G^\perp\subset F^\perp$</li><li>$\displaystyle F\cap F^\perp = \{0\}$</li></ul></div>
 
 <p class="ml">Exemple 5 : les cosinus sont orthogonaux</p>
 <p>Dans $\mathcal C([0, 2\pi])$ avec $\langle f, g\rangle = \int_0^{2\pi}fg$, montrer que $c_p(t) = \cos(pt)$, $p\in\mathbb N$, sont deux à deux orthogonaux.</p>
@@ -7630,7 +7630,7 @@ $$\langle c_p, c_q\rangle = \frac12\int_0^{2\pi}\cos((p + q)t)\,dt + \frac12\int
 <p><b>Étape 4 : Conclusion.</b> $\cG{\langle c_p, c_q\rangle = 0}$ pour $p\neq q$ : la famille est orthogonale, donc libre (base des séries de Fourier).</p>
 
 <h2 id="h-bon">5. Bases orthonormées</h2>
-<div class="sbox">$$\cV{(e_1, \dots, e_n)}\ \text{BON}:\quad\cB x = \sum_{i=1}^n\cO{\langle x, e_i\rangle}\,\cV{e_i},\qquad\langle x, y\rangle = \sum x_iy_i,\qquad\|x\|^2 = \sum x_i^2.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cV{(e_1, \dots, e_n)}\ \text{BON}:\quad\cB x = \sum_{i=1}^n\cO{\langle x, e_i\rangle}\,\cV{e_i}$</li><li>$\displaystyle \langle x, y\rangle = \sum x_iy_i$</li><li>$\displaystyle \|x\|^2 = \sum x_i^2$</li></ul></div>
 <p>Dans une BON, <b>tout se calcule comme dans $\mathbb R^n$</b>. Une famille orthonormée a l'inégalité de Bessel : $\sum_{i=1}^p\langle x, e_i\rangle^2\leq\|x\|^2$.</p>
 <p class="ml piege">Piège</p>
 <p>$\langle x, y\rangle = \sum x_iy_i$ est <b>faux</b> si la base n'est pas orthonormée.</p>
@@ -7646,8 +7646,8 @@ $$\cO{\langle x, e_1\rangle} = 3\times\frac1{\sqrt2} + 1\times\frac1{\sqrt2} = \
 <p><b>Étape 4 : Conclusion.</b> $\cG{x = 2\sqrt2\,e_1 + \sqrt2\,e_2}$. Contrôle : en BON, $\|x\|^2 = (2\sqrt2)^2 + (\sqrt2)^2 = 8 + 2 = 10$, et directement $\|x\|^2 = 3^2 + 1^2 = 9 + 1 = 10$.</p>
 
 <h2 id="h-gs">6. Le procédé de Gram-Schmidt</h2>
-<div class="sbox">$$e_1 = \frac{v_1}{\|v_1\|},\qquad w_k = v_k - \sum_{j=1}^{k-1}\cO{\langle v_k, e_j\rangle}\,e_j,\qquad e_k = \frac{w_k}{\|w_k\|}.$$
-$$\operatorname{Vect}(e_1, \dots, e_k) = \operatorname{Vect}(v_1, \dots, v_k)\ \text{pour tout}\ k,\qquad\langle e_k, v_k\rangle > 0.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle e_1 = \frac{v_1}{\|v_1\|}$</li><li>$\displaystyle w_k = v_k - \sum_{j=1}^{k-1}\cO{\langle v_k, e_j\rangle}\,e_j$</li><li>$\displaystyle e_k = \frac{w_k}{\|w_k\|}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \operatorname{Vect}(e_1, \dots, e_k) = \operatorname{Vect}(v_1, \dots, v_k)\ \text{pour tout}\ k$</li><li>$\displaystyle \langle e_k, v_k\rangle > 0$</li></ul></div>
 <p>Conseil de calcul : on peut orthogonaliser sans normaliser ($w_k = v_k - \sum\frac{\langle v_k, w_j\rangle}{\|w_j\|^2}w_j$), multiplier les $w_k$ par un nombre pour enlever les fractions, et normaliser <b>à la fin</b>.</p>
 
 <p class="ml">Exemple 7 : dans $\mathbb R^3$</p>
@@ -7672,7 +7672,7 @@ $$\|w_2\|^2 = \underbrace{\int_{-1}^1t^4}_{\frac25} - \frac23\underbrace{\int_{-
 <p><b>Étape 5 : Conclusion.</b> $\cG{e_2 = \sqrt{\frac{45}8}\Big(X^2 - \frac13\Big)}$ : ce sont les polynômes de Legendre normalisés.</p>
 
 <h2 id="h-proj">7. Supplémentaire orthogonal, projection orthogonale</h2>
-<div class="sbox">$$\cR F\ \text{de dimension finie}:\ E = \cR F\oplus\cR{F^\perp},\qquad(F^\perp)^\perp = F\ (\text{si}\ E\ \text{euclidien}),\qquad\dim F^\perp = n - \dim F.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cR F\ \text{de dimension finie}:\ E = \cR F\oplus\cR{F^\perp}$</li><li>$\displaystyle (F^\perp)^\perp = F\ (\text{si}\ E\ \text{euclidien})$</li><li>$\displaystyle \dim F^\perp = n - \dim F$</li></ul>
 $$p_F(x) = \sum_{i=1}^p\cO{\langle x, e_i\rangle}\,\cV{e_i}\ \ ((e_i)\ \text{BON de}\ F).\qquad\textbf{Caractérisation}:\ y = p_F(x)\iff y\in F\ \text{et}\ x - y\in F^\perp.$$
 $$\text{Droite}\ D = \operatorname{Vect}(u):\ p_D(x) = \frac{\langle x, u\rangle}{\|u\|^2}u.\qquad\text{Hyperplan}\ H = n^\perp:\ p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n.$$</div>
 <p class="ml">Deux méthodes pour calculer $p_F(x)$</p>
@@ -7691,7 +7691,7 @@ $$p_P(x) = (1, 2, 3) - (2, 2, 2) = (1 - 2,\ 2 - 2,\ 3 - 2) = (-1, 0, 1).$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{p_P(x) = (-1, 0, 1)}$. La distance : $\|n\| = \sqrt3$ et $d(x, P) = \frac{|\langle x, n\rangle|}{\|n\|} = \frac6{\sqrt3} = \frac{6\sqrt3}{\sqrt3\sqrt3} = \frac{6\sqrt3}3 = 2\sqrt3$.</p>
 
 <h2 id="h-dist">8. Distance à un sous-espace : les problèmes de minimisation</h2>
-<div class="sbox">$$d(x, F) = \|x - p_F(x)\|,\qquad d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2,\qquad p_F(x)\ \text{est l'unique point de}\ F\ \text{où le minimum est atteint}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle d(x, F) = \|x - p_F(x)\|$</li><li>$\displaystyle d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2$</li><li>$\displaystyle p_F(x)\ \text{est l'unique point de}\ F\ \text{où le minimum est atteint}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>Un « $\inf_{a, b}\int(\dots - a\dots - b\dots)^2$ » ou « $\min\sum(\dots)^2$ » est <b>une distance au carré</b>. <b>1.</b> Trouver l'espace, le produit scalaire, le vecteur $x$ et le sous-espace $F$. <b>2.</b> Calculer $p_F(x)$ avec les conditions d'orthogonalité. <b>3.</b> $d^2 = \langle x - p_F(x), x\rangle$ (car $x - p_F(x)\perp p_F(x)$).</p>
 
@@ -7985,11 +7985,11 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 
 <h2 id="e-rap">1. Ce qui vient de Sup</h2>
 <p>Produit scalaire, Cauchy-Schwarz, bases orthonormées, Gram-Schmidt, projection orthogonale et distance sont traités en détail dans la fiche Sup « Espaces préhilbertiens réels ». À avoir en tête :</p>
-<div class="sbox">$$x = \sum\langle x, e_i\rangle e_i,\qquad p_F(x) = \sum_{i\leq p}\langle x, e_i\rangle e_i,\qquad d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2,\qquad y = p_F(x)\iff y\in F,\ x - y\in F^\perp.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle x = \sum\langle x, e_i\rangle e_i$</li><li>$\displaystyle p_F(x) = \sum_{i\leq p}\langle x, e_i\rangle e_i$</li><li>$\displaystyle d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2$</li><li>$\displaystyle y = p_F(x)\iff y\in F,\ x - y\in F^\perp$</li></ul></div>
 <p>Dans une BON $\mathcal B$, si $X = \operatorname{Mat}_{\mathcal B}(x)$ et $Y = \operatorname{Mat}_{\mathcal B}(y)$, alors $\langle x, y\rangle = X^\top Y$.</p>
 
 <h2 id="e-hyp">2. Hyperplans, vecteur normal</h2>
-<div class="sbox">$$H = n^\perp = \{x,\ \langle x, n\rangle = 0\}.\qquad d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|},\qquad p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle H = n^\perp = \{x,\ \langle x, n\rangle = 0\}$</li><li>$\displaystyle d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|}$</li><li>$\displaystyle p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$</li></ul></div>
 <p>Dans $\mathbb R^n$, l'hyperplan $a_1x_1 + \dots + a_nx_n = 0$ a pour vecteur normal $\cR{n = (a_1, \dots, a_n)}$ : on le <b>lit</b> sur l'équation.</p>
 <p class="ml">Exemple 1 : distance à un hyperplan de $\mathbb R^4$</p>
 <p>Distance de $x = (1, 2, 0, 1)$ à $H:\ x_1 + x_2 - x_3 + x_4 = 0$.</p>
@@ -8000,7 +8000,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 
 <h2 id="e-sym">3. Symétries orthogonales, réflexions</h2>
 <div class="sbox">$$s_F = 2p_F - \operatorname{id}:\ \text{symétrie par rapport à}\ F\ \text{parallèlement à}\ F^\perp.\qquad\textbf{Réflexion}\ (F = H = n^\perp):\ s(x) = x - 2\frac{\langle x, n\rangle}{\|n\|^2}n.$$
-$$\text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top\qquad(\text{symétrique et orthogonale}).$$</div>
+<ul class="sbl"><li>$\displaystyle \text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top$</li><li>$\displaystyle (\text{symétrique et orthogonale})$</li></ul></div>
 <p>Une symétrie $s$ ($s^2 = \operatorname{id}$) est <b>orthogonale</b> si et seulement si $s$ conserve la norme, si et seulement si sa matrice en BON est <b>symétrique</b>.</p>
 <p class="ml">Exemple 2 : matrice d'une réflexion</p>
 <p>Matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</p>
@@ -8017,7 +8017,7 @@ $$S = I_3 - \frac23J = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatr
 
 <h2 id="e-on">5. Matrices orthogonales</h2>
 <div class="sbox">$$A\in O(n)\iff A^\top A = I_n\iff A^{-1} = A^\top\iff\text{les colonnes forment une BON de}\ \mathbb R^n\iff\text{les lignes aussi}.$$
-$$\text{La matrice de passage entre deux BON est orthogonale}.\qquad SO(n) = \{A\in O(n),\ \det A = 1\}.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{La matrice de passage entre deux BON est orthogonale}$</li><li>$\displaystyle SO(n) = \{A\in O(n),\ \det A = 1\}$</li></ul></div>
 <p class="ml">Exemple 3 : vérifier qu'une matrice est orthogonale</p>
 <p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> $A\in O(n)\iff$ les colonnes forment une BON : normes $1$ et produits scalaires $0$.</p>
@@ -8057,13 +8057,13 @@ $$\det\begin{pmatrix}1&1&1\\1&-1&0\\1&0&-1\end{pmatrix} = 1\cdot(1 - 0) - 1\cdot
 <p><b>Étape 5 : Conclusion.</b> $\sin\theta > 0$ : $\cG{A\ \text{est la rotation d'axe}\ \mathbb R(1, 1, 1)\ \text{(orienté par ce vecteur) et d'angle}\ \frac\pi3}$.</p>
 
 <h2 id="e-adj">8. L'adjoint</h2>
-<div class="sbox">$$E\ \text{euclidien},\ u\in\mathcal L(E):\ \exists!\,u^*,\ \forall x, y,\ \langle u(x), y\rangle = \langle x, u^*(y)\rangle.\qquad\operatorname{Mat}_{\text{BON}}(u^*) = \operatorname{Mat}_{\text{BON}}(u)^\top.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle E\ \text{euclidien},\ u\in\mathcal L(E):\ \exists!\,u^*,\ \forall x, y,\ \langle u(x), y\rangle = \langle x, u^*(y)\rangle$</li><li>$\displaystyle \operatorname{Mat}_{\text{BON}}(u^*) = \operatorname{Mat}_{\text{BON}}(u)^\top$</li></ul>
 $$(u\circ v)^* = v^*\circ u^*,\quad(u^*)^* = u,\quad\ker u^* = (\operatorname{Im}u)^\perp,\quad\operatorname{Im}u^* = (\ker u)^\perp,\quad F\ \text{stable par}\ u\Rightarrow F^\perp\ \text{stable par}\ u^*.$$
 $$u\in O(E)\iff u^*u = \operatorname{id}.$$</div>
 
 <h2 id="e-auto">9. Endomorphismes autoadjoints (symétriques)</h2>
 <div class="sbox">$$u\in\mathcal S(E)\iff\forall x, y,\ \langle u(x), y\rangle = \langle x, u(y)\rangle\iff\operatorname{Mat}_{\text{BON}}(u)\ \text{symétrique}.$$
-$$p\ \text{projecteur}:\ p\ \text{orthogonal}\iff p\ \text{autoadjoint}.\qquad s\ \text{symétrie}:\ s\ \text{orthogonale}\iff s\ \text{autoadjointe}.$$</div>
+<ul class="sbl"><li>$\displaystyle p\ \text{projecteur}:\ p\ \text{orthogonal}\iff p\ \text{autoadjoint}$</li><li>$\displaystyle s\ \text{symétrie}:\ s\ \text{orthogonale}\iff s\ \text{autoadjointe}$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>« Matrice symétrique $\Rightarrow$ autoadjoint » n'est vrai que si la base est <b>orthonormée</b>.</p>
 
@@ -8093,8 +8093,8 @@ $$\cG{S = \cV P\begin{pmatrix}3&0\\0&1\end{pmatrix}\cV P^\top,\qquad\cV P = \fra
 $$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&-\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&0&-\frac2{\sqrt6}\end{pmatrix},\quad D = \operatorname{diag}(3, 0, 0)}.$$
 
 <h2 id="e-pos">11. Autoadjoints positifs, quotient de Rayleigh</h2>
-<div class="sbox">$$u\in\mathcal S^+(E)\iff\forall x,\ \langle u(x), x\rangle\geq0\iff\operatorname{Sp}(u)\subset\mathbb R_+.\qquad u\in\mathcal S^{++}(E)\iff\forall x\neq0,\ \langle u(x), x\rangle > 0\iff\operatorname{Sp}(u)\subset\mathbb R_+^*.$$
-$$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\lambda_{\min}\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_{\max}\|x\|^2.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u\in\mathcal S^+(E)\iff\forall x,\ \langle u(x), x\rangle\geq0\iff\operatorname{Sp}(u)\subset\mathbb R_+$</li><li>$\displaystyle u\in\mathcal S^{++}(E)\iff\forall x\neq0,\ \langle u(x), x\rangle > 0\iff\operatorname{Sp}(u)\subset\mathbb R_+^*$</li></ul>
+<ul class="sbl"><li>$\displaystyle \text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0$</li><li>$\displaystyle \lambda_{\min}\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_{\max}\|x\|^2$</li></ul></div>
 
 <p class="ml">Exemple 8 : $A^\top A$ est positive</p>
 <p>Pour $A\in\mathcal M_n(\mathbb R)$, montrer que $A^\top A\in\mathcal S_n^+$, et $\in\mathcal S_n^{++}\iff A$ inversible.</p>
@@ -8145,7 +8145,7 @@ $$A = \begin{pmatrix}1&0\\0&0\end{pmatrix},\ B = \begin{pmatrix}0&1\\1&0\end{pma
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\circ g\ \text{symétrique}\iff f\circ g = g\circ f}$.</p>
 
 <h2 id="e-sfusym">13. Utiliser les endomorphismes symétriques</h2>
-<div class="sbox">$$\langle u(x), y\rangle = {}^t(AX)Y = {}^tXAY,\qquad{}^tXAX = \sum_{i,j}a_{ij}x_ix_j,\qquad{}^tX\,{}^tAA\,X = \|AX\|^2.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \langle u(x), y\rangle = {}^t(AX)Y = {}^tXAY$</li><li>$\displaystyle {}^tXAX = \sum_{i,j}a_{ij}x_ix_j$</li><li>$\displaystyle {}^tX\,{}^tAA\,X = \|AX\|^2$</li></ul>
 $$u\ \text{symétrique},\ F\ \text{stable}\Rightarrow F^\perp\ \text{stable}.\qquad\textbf{Spectral}:\ S = PDP^{-1} = PD\,{}^tP,\ P\in O_n(\mathbb R).$$</div>
 
 <p class="ml">Exemple 13 : $\operatorname{Sp}(p\circ q)\subset[0, 1]$ pour deux projecteurs orthogonaux</p>
@@ -8340,7 +8340,7 @@ $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 
 <h2 id="t-norme">2. Normes</h2>
 <div class="sbox">$$N:E\to\mathbb R_+\ \text{est une norme si}:\quad\textbf{séparation}\ N(x) = 0\Rightarrow x = 0,\quad\textbf{homogénéité}\ N(\lambda x) = |\lambda|N(x),\quad\textbf{triangulaire}\ N(x + y)\leq N(x) + N(y).$$
-$$\big|\|x\| - \|y\|\big|\leq\|x - y\|.\qquad\text{Les boules sont convexes}.\qquad d(x, y) = \|x - y\|.$$</div>
+<ul class="sbl"><li>$\displaystyle \big|\|x\| - \|y\|\big|\leq\|x - y\|.\qquad\text{Les boules sont convexes}$</li><li>$\displaystyle d(x, y) = \|x - y\|$</li></ul></div>
 <p class="ml">Exemple 1 : montrer qu'on a une norme</p>
 <p>$N(x) = |x_1| + 2|x_2|$ sur $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
@@ -8384,7 +8384,7 @@ $$A^n = \Big(\frac12\Big)^nI + n\Big(\frac12\Big)^{n-1}N = \begin{pmatrix}2^{-n}
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^n\to0}$ (pour n'importe quelle norme de $\mathcal M_2$).</p>
 
 <h2 id="t-ouv">5. Ouverts, fermés</h2>
-<div class="sbox">$$\cR U\ \text{ouvert}\iff\forall a\in U,\ \exists r > 0,\ B(a, r)\subset U.\qquad\cR F\ \text{fermé}\iff E\setminus F\ \text{ouvert}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cR U\ \text{ouvert}\iff\forall a\in U,\ \exists r > 0,\ B(a, r)\subset U$</li><li>$\displaystyle \cR F\ \text{fermé}\iff E\setminus F\ \text{ouvert}$</li></ul>
 $$\textbf{Caractérisation séquentielle}:\ F\ \text{fermé}\iff\big(\forall(x_n)\in F^{\mathbb N},\ x_n\to\ell\Rightarrow\ell\in F\big).$$
 $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text{fermé})\ \text{est fermé}.$$</div>
 <p class="ml">Les deux méthodes</p>
@@ -8416,7 +8416,7 @@ $$\|f_n - 1\|_1 = \int_0^{1/n}(1 - nt)\,dt = \Big[t - \frac{nt^2}2\Big]_0^{1/n} 
 
 <h2 id="t-adh">6. Intérieur, adhérence, frontière, densité</h2>
 <div class="sbox">$$a\in\overline A\iff\forall r > 0,\ B(a, r)\cap A\neq\varnothing\iff\exists(a_n)\in A^{\mathbb N},\ a_n\to a\iff d(a, A) = 0.$$
-$$a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A.\qquad A\ \textbf{dense}\iff\overline A = E\iff\text{tout}\ x\ \text{est limite d'une suite de}\ A.$$</div>
+<ul class="sbl"><li>$\displaystyle a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A$</li><li>$\displaystyle A\ \textbf{dense}\iff\overline A = E\iff\text{tout}\ x\ \text{est limite d'une suite de}\ A$</li></ul></div>
 <p class="ml">Exemple 8 : dans $\mathbb R$</p>
 <p>$A = [0, 1[\,\cup\{2\}$. Intérieur, adhérence, frontière ?</p>
 <p><b>Étape 1 : Rappel.</b> Adhérence : limites de suites de $A$. Intérieur : points avec une petite boule incluse.</p>
@@ -8432,7 +8432,7 @@ $$a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A.\qquad A\ \textbf{dense}\i
 <p><b>Étape 5 : Conclusion.</b> $\cG{\overline{GL_n(\mathbb K)} = \mathcal M_n(\mathbb K)}$. Usage : prouver une formule pour $A$ inversible, puis passer à la limite par continuité (ex. : $\chi_{AB} = \chi_{BA}$).</p>
 
 <h2 id="t-lim">7. Limites, continuité</h2>
-<div class="sbox">$$f\ \text{continue en}\ a\iff\big(\forall(x_n),\ x_n\to a\Rightarrow f(x_n)\to f(a)\big).\qquad f\ \cO k\text{-lipschitzienne}:\ \|f(x) - f(y)\|\leq\cO k\|x - y\|\Rightarrow\text{continue}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{continue en}\ a\iff\big(\forall(x_n),\ x_n\to a\Rightarrow f(x_n)\to f(a)\big)$</li><li>$\displaystyle f\ \cO k\text{-lipschitzienne}:\ \|f(x) - f(y)\|\leq\cO k\|x - y\|\Rightarrow\text{continue}$</li></ul>
 $$\text{Sommes, produits, composées de fonctions continues sont continues. Les fonctions polynomiales en les coordonnées sont continues.}$$</div>
 <p><b>Uniformément continue</b> : $\forall\varepsilon,\ \exists\eta$ (indépendant de $x$), $\|x - y\|\leq\eta\Rightarrow\|f(x) - f(y)\|\leq\varepsilon$. Lipschitzienne $\Rightarrow$ uniformément continue $\Rightarrow$ continue.</p>
 <p class="ml">Exemple 10 : la distance à une partie est $1$-lipschitzienne</p>
@@ -8443,7 +8443,7 @@ $$\text{Sommes, produits, composées de fonctions continues sont continues. Les 
 <p><b>Étape 5 : Conclusion.</b> $\cG{x\mapsto d(x, A)\ \text{est}\ 1\text{-lipschitzienne}}$ (donc continue). Même idée : $x\mapsto\|x\|$.</p>
 
 <h2 id="t-lin">8. Applications linéaires continues</h2>
-<div class="sbox">$$u\ \text{linéaire continue}\iff\exists\cO C\geq0,\ \forall x,\ \|u(x)\|\leq\cO C\|x\|.\qquad|||u||| = \sup_{\|x\| = 1}\|u(x)\|,\qquad\|u(x)\|\leq|||u|||\,\|x\|,\qquad|||u\circ v|||\leq|||u|||\,|||v|||.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u\ \text{linéaire continue}\iff\exists\cO C\geq0,\ \forall x,\ \|u(x)\|\leq\cO C\|x\|$</li><li>$\displaystyle |||u||| = \sup_{\|x\| = 1}\|u(x)\|$</li><li>$\displaystyle \|u(x)\|\leq|||u|||\,\|x\|$</li><li>$\displaystyle |||u\circ v|||\leq|||u|||\,|||v|||$</li></ul>
 $$\textbf{En dimension finie (au départ), toute application linéaire est continue.}\quad\text{De même pour les applications multilinéaires (}\det\text{, produit matriciel).}$$</div>
 <p class="ml">La méthode</p>
 <p><b>Continuité</b> : majorer $\|u(x)\|$ par $C\|x\|$. <b>Norme subordonnée</b> : la majoration donne $|||u|||\leq C$ ; un $x_0\neq0$ avec égalité donne $|||u||| = C$. <b>Non-continuité</b> : une suite $x_n$ avec $\frac{\|u(x_n)\|}{\|x_n\|}\to+\infty$.</p>
@@ -8464,7 +8464,7 @@ $$\textbf{En dimension finie (au départ), toute application linéaire est conti
 
 <h2 id="t-comp">9. Compacts</h2>
 <div class="sbox">$$\cR K\ \text{compact}\iff\text{toute suite de}\ K\ \text{a une sous-suite qui converge dans}\ K.$$
-$$\text{Compact}\Rightarrow\text{fermé et borné}.\qquad\text{Fermé inclus dans un compact}\Rightarrow\text{compact}.\qquad K_1\times K_2\ \text{compact}.$$
+<ul class="sbl"><li>$\displaystyle \text{Compact}\Rightarrow\text{fermé et borné}.\qquad\text{Fermé inclus dans un compact}\Rightarrow\text{compact}$</li><li>$\displaystyle K_1\times K_2\ \text{compact}$</li></ul>
 $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};\ \text{si}\ f\ \text{réelle},\ \textbf{elle est bornée et atteint ses bornes}.\qquad\textbf{Heine}:\ f\ \text{continue sur}\ K\Rightarrow\text{uniformément continue}.$$</div>
 <p class="ml">Exemple 13 : la distance à un fermé est atteinte</p>
 <p>$E$ de dimension finie, $F$ fermé non vide, $a\in E$. Montrer qu'il existe $b\in F$ avec $\|a - b\| = d(a, F)$.</p>
@@ -8480,7 +8480,7 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 
 <h2 id="t-cpa">11. Connexité par arcs</h2>
 <div class="sbox">$$A\ \text{connexe par arcs}:\ \forall a, b\in A,\ \exists\gamma:[0, 1]\to A\ \text{continue},\ \gamma(0) = a,\ \gamma(1) = b.$$
-$$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qquad\text{Dans}\ \mathbb R:\ \text{connexes par arcs} = \text{intervalles}.\qquad f\ \text{continue}:\ f(A)\ \text{connexe par arcs}.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qquad\text{Dans}\ \mathbb R:\ \text{connexes par arcs} = \text{intervalles}$</li><li>$\displaystyle f\ \text{continue}:\ f(A)\ \text{connexe par arcs}$</li></ul></div>
 <p>Conséquence : <b>TVI généralisé</b>. Une fonction continue réelle sur un connexe par arcs qui prend deux valeurs prend toutes les valeurs intermédiaires.</p>
 <p class="ml">Exemple 14 : $GL_n(\mathbb R)$ n'est pas connexe par arcs</p>
 <p><b>Étape 1 : Rappel.</b> L'image continue d'un connexe par arcs de $\mathbb R$ est un intervalle.</p>
@@ -8888,8 +8888,8 @@ $$|f(x, y)| = \frac{x^2}{x^2 + y^2}\,|y|\leq1\times|y|\leq\cO r.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{les dérivées partielles existent en}\ (0, 0)}$, et pourtant $f$ n'y est pas continue (exemple 2).</p>
 
 <h2 id="c-diff">4. Différentiabilité</h2>
-<div class="sbox">$$f\ \text{différentiable en}\ \cR a\iff\exists L\in\mathcal L(E, F),\ f(\cR a + \cO h) = f(\cR a) + L(\cO h) + o(\|\cO h\|).\qquad df(a) = L.$$
-$$\text{Différentiable}\Rightarrow\text{continue}\ \text{et}\ D_vf(a) = df(a)(v).\qquad df(a)(h) = \sum_i\frac{\partial f}{\partial x_i}(a)\,h_i.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{différentiable en}\ \cR a\iff\exists L\in\mathcal L(E, F),\ f(\cR a + \cO h) = f(\cR a) + L(\cO h) + o(\|\cO h\|)$</li><li>$\displaystyle df(a) = L$</li></ul>
+<ul class="sbl"><li>$\displaystyle \text{Différentiable}\Rightarrow\text{continue}\ \text{et}\ D_vf(a) = df(a)(v)$</li><li>$\displaystyle df(a)(h) = \sum_i\frac{\partial f}{\partial x_i}(a)\,h_i$</li></ul>
 $$\textbf{Si les dérivées partielles existent et sont continues sur}\ U\ \textbf{ouvert, alors}\ f\ \textbf{est}\ \mathcal C^1,\ \textbf{donc différentiable}.$$</div>
 <p class="ml">La méthode en un point problématique</p>
 <p><b>1.</b> Continuité (sinon, pas différentiable). <b>2.</b> Dérivées partielles par taux d'accroissement : elles donnent le <b>seul candidat</b> $L(h) = \partial_xf\,h_1 + \partial_yf\,h_2$. <b>3.</b> Étudier $\frac{f(a + h) - f(a) - L(h)}{\|h\|}$ : différentiable si et seulement si ça tend vers $0$.</p>
@@ -8913,8 +8913,8 @@ $$\frac{f(x, y) - (x + y)}r = \frac{x^3 + y^3 - (x + y)(x^2 + y^2)}{r^3} = \frac
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{n'est pas différentiable en}\ (0, 0)}$, bien que continue ($|f|\leq\frac{2r^3}{r^2} = 2r$) avec des dérivées partielles.</p>
 
 <h2 id="c-exdiff">5. Différentielles à connaître</h2>
-<div class="sbox">$$u\ \text{linéaire}:\ du(a) = u.\qquad B\ \text{bilinéaire}:\ dB(a, b)(h, k) = B(h, b) + B(a, k).\qquad d(\|x\|^2)(h) = 2\langle x, h\rangle.$$
-$$d(M\mapsto M^2)(M)(H) = MH + HM.\qquad d(\det)(I_n)(H) = \operatorname{tr}H.\qquad d(M\mapsto M^{-1})(M)(H) = -M^{-1}HM^{-1}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle u\ \text{linéaire}:\ du(a) = u$</li><li>$\displaystyle B\ \text{bilinéaire}:\ dB(a, b)(h, k) = B(h, b) + B(a, k)$</li><li>$\displaystyle d(\|x\|^2)(h) = 2\langle x, h\rangle$</li></ul>
+<ul class="sbl"><li>$\displaystyle d(M\mapsto M^2)(M)(H) = MH + HM$</li><li>$\displaystyle d(\det)(I_n)(H) = \operatorname{tr}H$</li><li>$\displaystyle d(M\mapsto M^{-1})(M)(H) = -M^{-1}HM^{-1}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>On développe $f(a + h)$, on sépare le terme <b>linéaire en $h$</b> et le reste, et on montre que le reste est un $o(\|h\|)$ (souvent un $O(\|h\|^2)$).</p>
 <p class="ml">Exemple 7 : $f(M) = M^2$</p>
@@ -8931,7 +8931,7 @@ $$d(M\mapsto M^2)(M)(H) = MH + HM.\qquad d(\det)(I_n)(H) = \operatorname{tr}H.\q
 <p><b>Étape 4 : Conclusion.</b> $\cG{df(x)(h) = 2\langle x, h\rangle,\quad\nabla f(x) = 2x}$.</p>
 
 <h2 id="c-chain">6. La règle de la chaîne</h2>
-<div class="sbox">$$d(g\circ f)(a) = dg(f(a))\circ df(a),\qquad J_{g\circ f}(a) = J_g(f(a))\,J_f(a).$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle d(g\circ f)(a) = dg(f(a))\circ df(a)$</li><li>$\displaystyle J_{g\circ f}(a) = J_g(f(a))\,J_f(a)$</li></ul>
 $$\text{Le long d'une courbe}:\ \frac d{dt}f\big(x(t), y(t)\big) = x'(t)\,\frac{\partial f}{\partial x} + y'(t)\,\frac{\partial f}{\partial y}.$$
 $$g(\cV u, \cV v) = f\big(x(u, v), y(u, v)\big):\quad\frac{\partial g}{\partial u} = \frac{\partial x}{\partial u}\frac{\partial f}{\partial x} + \frac{\partial y}{\partial u}\frac{\partial f}{\partial y}\quad(\text{dérivées de}\ f\ \text{prises en}\ (x(u, v), y(u, v))).$$</div>
 <p class="ml">Exemple 9 : les coordonnées polaires</p>
@@ -8943,11 +8943,11 @@ $$\frac{\partial g}{\partial r} = \cos\theta\,\frac{\partial f}{\partial x} + \s
 <p><b>Étape 4 : Conclusion.</b> On multiplie la 1<sup>re</sup> formule par $r$ : $r\cos\theta = x$ et $r\sin\theta = y$. Dans la 2<sup>e</sup>, $-r\sin\theta = -y$ et $r\cos\theta = x$. D'où $\cG{r\,\partial_rg = x\,\partial_xf + y\,\partial_yf\ \ \text{et}\ \ \partial_\theta g = x\,\partial_yf - y\,\partial_xf}$, à reconnaître dans les EDP.</p>
 
 <h2 id="c-grad">7. Le gradient</h2>
-<div class="sbox">$$df(a)(h) = \langle\nabla f(a), h\rangle,\qquad\nabla f(a) = \Big(\frac{\partial f}{\partial x_1}(a), \dots, \frac{\partial f}{\partial x_n}(a)\Big)\ \text{(en BON)}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle df(a)(h) = \langle\nabla f(a), h\rangle$</li><li>$\displaystyle \nabla f(a) = \Big(\frac{\partial f}{\partial x_1}(a), \dots, \frac{\partial f}{\partial x_n}(a)\Big)\ \text{(en BON)}$</li></ul></div>
 <p>$\nabla f(a)$ indique la direction où $f$ <b>croît le plus vite</b> ; il est <b>orthogonal</b> aux lignes de niveau $\{f = c\}$.</p>
 
 <h2 id="c-edp">8. Équations aux dérivées partielles</h2>
-<div class="sbox">$$\text{Sur un ouvert convexe (ou un produit d'intervalles)}:\quad\frac{\partial f}{\partial x} = 0\iff f(x, y) = C(y),\qquad\frac{\partial^2f}{\partial x\partial y} = 0\iff f(x, y) = A(x) + B(y).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \text{Sur un ouvert convexe (ou un produit d'intervalles)}:\quad\frac{\partial f}{\partial x} = 0\iff f(x, y) = C(y)$</li><li>$\displaystyle \frac{\partial^2f}{\partial x\partial y} = 0\iff f(x, y) = A(x) + B(y)$</li></ul></div>
 <p class="ml">La méthode du changement de variables</p>
 <p><b>1.</b> Poser $f(x, y) = g(\cV u, \cV v)$ avec le changement donné (bijectif, $\mathcal C^1$ dans les deux sens). <b>2.</b> Calculer $\partial_xf$, $\partial_yf$ (et les dérivées secondes) en fonction de celles de $g$ par la règle de la chaîne. <b>3.</b> Remplacer : on obtient une EDP simple en $g$. <b>4.</b> La résoudre, puis revenir à $x, y$.</p>
 
@@ -9135,12 +9135,12 @@ $$x\,\partial_xf(tx, ty) + y\,\partial_yf(tx, ty) = \alpha t^{\alpha - 1}f(x, y)
 </table>
 
 <h2 id="f-serie">2. Séries dans un espace normé de dimension finie</h2>
-<div class="sbox">$$\sum\cB{u_n}\ \text{converge}\iff\text{chaque série coordonnée converge (dans une base)}.\qquad\sum\|\cB{u_n}\|\ \text{converge}\Rightarrow\sum\cB{u_n}\ \text{converge},\ \Big\|\sum\cB{u_n}\Big\|\leq\sum\|\cB{u_n}\|.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum\cB{u_n}\ \text{converge}\iff\text{chaque série coordonnée converge (dans une base)}$</li><li>$\displaystyle \sum\|\cB{u_n}\|\ \text{converge}\Rightarrow\sum\cB{u_n}\ \text{converge},\ \Big\|\sum\cB{u_n}\Big\|\leq\sum\|\cB{u_n}\|$</li></ul></div>
 <p>Le terme général d'une série convergente tend vers $0$. Toutes les normes étant équivalentes, l'absolue convergence ne dépend pas de la norme choisie.</p>
 
 <h2 id="f-exp">3. L'exponentielle de matrice</h2>
-<div class="sbox">$$e^{\cV A} = \sum_{k=0}^{+\infty}\frac{\cV A^k}{k!}.\qquad\cV A\cV B = \cV B\cV A\Rightarrow e^{A + B} = e^Ae^B.\qquad e^A\ \text{inversible},\ (e^A)^{-1} = e^{-A}.$$
-$$e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1},\qquad e^{\operatorname{diag}(\lambda_i)} = \operatorname{diag}(e^{\lambda_i}),\qquad\det(e^A) = e^{\operatorname{tr}A}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle e^{\cV A} = \sum_{k=0}^{+\infty}\frac{\cV A^k}{k!}$</li><li>$\displaystyle \cV A\cV B = \cV B\cV A\Rightarrow e^{A + B} = e^Ae^B$</li><li>$\displaystyle e^A\ \text{inversible},\ (e^A)^{-1} = e^{-A}$</li></ul>
+<ul class="sbl"><li>$\displaystyle e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1}$</li><li>$\displaystyle e^{\operatorname{diag}(\lambda_i)} = \operatorname{diag}(e^{\lambda_i})$</li><li>$\displaystyle \det(e^A) = e^{\operatorname{tr}A}$</li></ul></div>
 <p class="ml">Les méthodes de calcul</p>
 <p><b>1. Nilpotente</b> : la somme est finie. <b>2. Diagonalisable</b> : $A = PDP^{-1}$, donc $e^A = Pe^DP^{-1}$. <b>3. $A = \lambda I + N$</b> avec $N$ nilpotente : $\lambda I$ commute avec $N$, donc $e^A = e^\lambda e^N$. <b>4. Polynôme annulateur</b> ($A^2 = -I$, $A^2 = A$…) : on calcule les puissances et on reconnaît des séries connues.</p>
 <p class="ml piege">Piège</p>
@@ -9194,7 +9194,7 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <p><b>Étape 5 : Conclusion.</b> $\cG{(I - A)^{-1} = \sum_{k\geq0}A^k}$. Conséquence : $GL_n$ contient la boule $B(I, 1)$, il est ouvert.</p>
 
 <h2 id="f-pos">5. Familles de réels positifs</h2>
-<div class="sbox">$$\sum_{i\in I}a_i = \sup\Big\{\sum_{i\in J}a_i,\ J\subset I\ \text{fini}\Big\}\in[0, +\infty].\qquad I = \mathbb N:\ \text{c'est la somme de la série}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \sum_{i\in I}a_i = \sup\Big\{\sum_{i\in J}a_i,\ J\subset I\ \text{fini}\Big\}\in[0, +\infty]$</li><li>$\displaystyle I = \mathbb N:\ \text{c'est la somme de la série}$</li></ul></div>
 <p>Pour une famille <b>positive</b>, tout est permis : on peut réordonner, regrouper, intervertir les sommes, et le résultat (fini ou $+\infty$) ne change pas.</p>
 
 <h2 id="f-paq">6. Sommation par paquets</h2>
@@ -9332,12 +9332,12 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 </table>
 
 <h2 id="v-der">2. Dérivation</h2>
-<div class="sbox">$$f(t_0 + h) = f(t_0) + hf'(t_0) + o(h).\qquad f\ \text{dérivable}\iff\text{chaque coordonnée l'est}.\qquad f' = 0\ \text{sur un intervalle}\iff f\ \text{constante}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f(t_0 + h) = f(t_0) + hf'(t_0) + o(h)$</li><li>$\displaystyle f\ \text{dérivable}\iff\text{chaque coordonnée l'est}$</li><li>$\displaystyle f' = 0\ \text{sur un intervalle}\iff f\ \text{constante}$</li></ul></div>
 
 <h2 id="v-op">3. Les opérations</h2>
-<div class="sbox">$$(\cV L\circ f)' = \cV L\circ f'\ (\cV L\ \text{linéaire}),\qquad\cV B(f, g)' = \cV B(f', g) + \cV B(f, g')\ (\cV B\ \text{bilinéaire}).$$
-$$\langle f, g\rangle' = \langle f', g\rangle + \langle f, g'\rangle,\qquad(\|f\|^2)' = 2\langle f, f'\rangle,\qquad(fg)' = f'g + fg'\ \text{(matrices, sans commuter)}.$$
-$$\det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n),\qquad(f\circ\varphi)' = \varphi'\cdot(f'\circ\varphi).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle (\cV L\circ f)' = \cV L\circ f'\ (\cV L\ \text{linéaire})$</li><li>$\displaystyle \cV B(f, g)' = \cV B(f', g) + \cV B(f, g')\ (\cV B\ \text{bilinéaire})$</li></ul>
+<ul class="sbl"><li>$\displaystyle \langle f, g\rangle' = \langle f', g\rangle + \langle f, g'\rangle$</li><li>$\displaystyle (\|f\|^2)' = 2\langle f, f'\rangle$</li><li>$\displaystyle (fg)' = f'g + fg'\ \text{(matrices, sans commuter)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle \det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n)$</li><li>$\displaystyle (f\circ\varphi)' = \varphi'\cdot(f'\circ\varphi)$</li></ul></div>
 
 <p class="ml">Exemple 1 : norme constante</p>
 <p>$f:I\to E$ dérivable, $E$ euclidien, $\|f\|$ constante. Montrer $f(t)\perp f'(t)$.</p>
@@ -9362,8 +9362,8 @@ $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\varphi'(0) = \sum_ih_{ii} = \operatorname{tr}H}$.</p>
 
 <h2 id="v-int">4. Intégration, sommes de Riemann</h2>
-<div class="sbox">$$\int_a^bf = \sum_i\Big(\int_a^bf_i\Big)e_i,\qquad\cV L\Big(\int f\Big) = \int\cV L(f),\qquad\Big\|\int_a^bf\Big\|\leq\int_a^b\|f\|\ (a\leq b).$$
-$$\frac{b - a}n\sum_{k=1}^nf\Big(a + k\frac{b - a}n\Big)\xrightarrow[n\to\infty]{}\int_a^bf.\qquad f\ \text{continue}:\ \Big(\int_a^xf\Big)' = f(x).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf = \sum_i\Big(\int_a^bf_i\Big)e_i$</li><li>$\displaystyle \cV L\Big(\int f\Big) = \int\cV L(f)$</li><li>$\displaystyle \Big\|\int_a^bf\Big\|\leq\int_a^b\|f\|\ (a\leq b)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \frac{b - a}n\sum_{k=1}^nf\Big(a + k\frac{b - a}n\Big)\xrightarrow[n\to\infty]{}\int_a^bf$</li><li>$\displaystyle f\ \text{continue}:\ \Big(\int_a^xf\Big)' = f(x)$</li></ul></div>
 <p class="ml">Exemple 4 : une somme de Riemann complexe</p>
 <p>Limite de $S_n = \frac1n\sum_{k=1}^ne^{ik/n}$.</p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue sur $[0, 1]$, même à valeurs complexes.</p>
@@ -9392,8 +9392,8 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <p><b>Étape 4 : Conclusion.</b> $\cG{|e^{ix} - 1 - ix|\leq\frac{x^2}2}$ pour tout réel $x$.</p>
 
 <h2 id="v-arc">7. Arcs paramétrés : tangente</h2>
-<div class="sbox">$$\gamma(t) = (x(t), y(t)).\qquad\cR{t_0}\ \textbf{régulier}\ (\gamma'(t_0)\neq0):\ \text{tangente dirigée par}\ \gamma'(t_0) = (x'(t_0), y'(t_0)).$$
-$$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'(t_0)\neq0:\ \text{tangente horizontale}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \gamma(t) = (x(t), y(t))$</li><li>$\displaystyle \cR{t_0}\ \textbf{régulier}\ (\gamma'(t_0)\neq0):\ \text{tangente dirigée par}\ \gamma'(t_0) = (x'(t_0), y'(t_0))$</li></ul>
+<ul class="sbl"><li>$\displaystyle x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}$</li><li>$\displaystyle y'(t_0) = 0,\ x'(t_0)\neq0:\ \text{tangente horizontale}$</li></ul></div>
 
 <p class="ml">Exemple 7 : tangentes horizontales et verticales, point double</p>
 <p>$\gamma(t) = (t^2 - 1,\ t^3 - 3t)$.</p>
@@ -9501,7 +9501,7 @@ $$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'
 </table>
 
 <h2 id="q-esp">2. Espace probabilisé fini</h2>
-<div class="sbox">$$P(\overline A) = 1 - P(A),\qquad P(A\cup B) = P(A) + P(B) - P(A\cap B),\qquad A\subset B\Rightarrow P(A)\leq P(B).$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P(\overline A) = 1 - P(A)$</li><li>$\displaystyle P(A\cup B) = P(A) + P(B) - P(A\cap B)$</li><li>$\displaystyle A\subset B\Rightarrow P(A)\leq P(B)$</li></ul>
 $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}\ \sum p_\omega = 1:\quad P(A) = \sum_{\omega\in A}p_\omega.$$</div>
 <p class="ml">Exemple 1 : « au moins un »</p>
 <p>Probabilité d'obtenir au moins un $6$ en $4$ lancers d'un dé équilibré.</p>
@@ -9561,7 +9561,7 @@ $$P\ \text{est déterminée par les}\ p_\omega = P(\{\omega\})\geq0\ \text{avec}
 
 <h2 id="q-ind">7. Indépendance</h2>
 <div class="sbox">$$A, B\ \text{indépendants}\iff P(A\cap B) = P(A)P(B)\ \ (\iff P_B(A) = P(A)\ \text{si}\ P(B) > 0).$$
-$$\text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\in J}P(A_i)\ \text{pour toute partie}\ J.\qquad A, B\ \text{indépendants}\Rightarrow A, \overline B\ \text{aussi}.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{Mutuellement indépendants}:\ P\Big(\bigcap_{i\in J}A_i\Big) = \prod_{i\in J}P(A_i)\ \text{pour toute partie}\ J$</li><li>$\displaystyle A, B\ \text{indépendants}\Rightarrow A, \overline B\ \text{aussi}$</li></ul></div>
 <p class="ml piege">Piège</p>
 <p>Indépendants $\neq$ incompatibles : deux événements incompatibles de probabilités non nulles ne sont <b>jamais</b> indépendants. Et deux à deux indépendants ne suffit pas pour mutuellement (exemple 8).</p>
 
@@ -9613,8 +9613,8 @@ $$X, Y\ \text{indépendantes}\iff\forall x, y,\ P(X = x, Y = y) = P(X = x)P(Y = 
 <p>Les marginales se lisent en sommant les <b>lignes</b> et les <b>colonnes</b> du tableau de la loi conjointe. La réciproque est fausse : les marginales ne donnent pas la loi conjointe.</p>
 
 <h2 id="q-espe">11. Espérance</h2>
-<div class="sbox">$$E(X) = \sum_{x\in X(\Omega)}x\,P(X = x).\qquad\textbf{Transfert}:\ E(f(X)) = \sum_xf(x)\,P(X = x).\qquad E(\mathbb 1_A) = P(A).$$
-$$\textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}.\qquad X\leq Y\Rightarrow E(X)\leq E(Y).\qquad X, Y\ \text{indépendantes}\Rightarrow E(XY) = E(X)E(Y).$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle E(X) = \sum_{x\in X(\Omega)}x\,P(X = x).\qquad\textbf{Transfert}:\ E(f(X)) = \sum_xf(x)\,P(X = x)$</li><li>$\displaystyle E(\mathbb 1_A) = P(A)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}$</li><li>$\displaystyle X\leq Y\Rightarrow E(X)\leq E(Y)$</li><li>$\displaystyle X, Y\ \text{indépendantes}\Rightarrow E(XY) = E(X)E(Y)$</li></ul></div>
 <p class="ml">La méthode des indicatrices</p>
 <p>Si $X$ <b>compte</b> quelque chose, on l'écrit $X = \sum_i\mathbb 1_{A_i}$ (une indicatrice par objet), et $E(X) = \sum P(A_i)$, <b>même sans indépendance</b>.</p>
 
@@ -9632,8 +9632,8 @@ $$\textbf{Linéarité}:\ E(aX + bY) = aE(X) + bE(Y)\ \text{(sans indépendance)}
 <p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = n\times\frac1n = 1}$, pour tout $n$ (les $A_i$ ne sont pourtant pas indépendants).</p>
 
 <h2 id="q-var">12. Variance, covariance</h2>
-<div class="sbox">$$V(X) = E\big((X - E(X))^2\big) = E(X^2) - E(X)^2\ \ \textbf{(König-Huygens)}.\qquad V(aX + b) = a^2V(X).$$
-$$\operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y),\qquad V(X + Y) = V(X) + V(Y) + 2\operatorname{Cov}(X, Y).$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle V(X) = E\big((X - E(X))^2\big) = E(X^2) - E(X)^2\ \ \textbf{(König-Huygens)}$</li><li>$\displaystyle V(aX + b) = a^2V(X)$</li></ul>
+<ul class="sbl"><li>$\displaystyle \operatorname{Cov}(X, Y) = E(XY) - E(X)E(Y)$</li><li>$\displaystyle V(X + Y) = V(X) + V(Y) + 2\operatorname{Cov}(X, Y)$</li></ul>
 $$X, Y\ \text{indépendantes}\Rightarrow\operatorname{Cov}(X, Y) = 0\ \text{et}\ V(X + Y) = V(X) + V(Y)\ \text{(réciproque fausse)}.$$</div>
 <p class="ml">Exemple 13 : la variance de la loi uniforme</p>
 <p>$X\sim\mathcal U([\![1, n]\!])$.</p>
@@ -9765,7 +9765,7 @@ $$(1 - x)(1 - y) = 1\iff1 - y = \frac1{1 - x}\ (x\neq1)\iff y = 1 - \frac1{1 - x
 
 <h2 id="g-grp">3. Groupes</h2>
 <div class="sbox">$$(G, *)\ \text{groupe}:\ *\ \text{loi interne associative, avec un neutre, et tout élément inversible}.\qquad\text{Abélien si}\ *\ \text{commutative}.$$
-$$\text{Simplification}:\ x*a = y*a\Rightarrow x = y.\qquad x^n * x^m = x^{n+m},\quad(x^n)^{-1} = x^{-n}.$$</div>
+<ul class="sbl"><li>$\displaystyle \text{Simplification}:\ x*a = y*a\Rightarrow x = y$</li><li>$\displaystyle x^n * x^m = x^{n+m},\quad(x^n)^{-1} = x^{-n}$</li></ul></div>
 <p class="ml">La méthode</p>
 <p>Pour montrer qu'un ensemble est un groupe, on essaie <b>d'abord</b> de le voir comme un <b>sous-groupe</b> d'un groupe connu (§4) : il n'y a alors que deux points à vérifier.</p>
 <p class="ml">Exemple 2 : un groupe à partir de l'exemple 1</p>
@@ -9795,8 +9795,8 @@ $$\textbf{Sous-groupes de}\ (\mathbb Z, +):\ \text{exactement les}\ n\mathbb Z,\
 <p><b>Étape 5 : Conclusion.</b> $\cG{H = n\mathbb Z}$.</p>
 
 <h2 id="g-morph">5. Morphismes de groupes</h2>
-<div class="sbox">$$\cV f(x*y) = \cV f(x)\star\cV f(y).\qquad\cV f(e) = e',\quad\cV f(x^{-1}) = \cV f(x)^{-1},\quad\cV f(x^n) = \cV f(x)^n.$$
-$$\ker\cV f = \cV f^{-1}(\{e'\})\ \text{et}\ \operatorname{Im}\cV f\ \text{sont des sous-groupes}.\qquad\cV f\ \text{injectif}\iff\ker\cV f = \{e\}.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cV f(x*y) = \cV f(x)\star\cV f(y)$</li><li>$\displaystyle \cV f(e) = e',\quad\cV f(x^{-1}) = \cV f(x)^{-1},\quad\cV f(x^n) = \cV f(x)^n$</li></ul>
+<ul class="sbl"><li>$\displaystyle \ker\cV f = \cV f^{-1}(\{e'\})\ \text{et}\ \operatorname{Im}\cV f\ \text{sont des sous-groupes}$</li><li>$\displaystyle \cV f\ \text{injectif}\iff\ker\cV f = \{e\}$</li></ul></div>
 <p>Un morphisme bijectif est un <b>isomorphisme</b>, et sa réciproque est un morphisme. Pour montrer qu'une partie est un sous-groupe, il suffit souvent de la voir comme un <b>noyau</b> ou une <b>image</b>.</p>
 
 <p class="ml">Exemple 5 : $\exp$ est un isomorphisme</p>
@@ -9820,7 +9820,7 @@ $$\ker\cV f = \cV f^{-1}(\{e'\})\ \text{et}\ \operatorname{Im}\cV f\ \text{sont 
 
 <h2 id="g-ann">6. Anneaux</h2>
 <div class="sbox">$$(A, +, \times):\ (A, +)\ \text{groupe abélien},\ \times\ \text{associative avec neutre}\ 1_A,\ \text{distributive sur}\ +.$$
-$$0\times a = 0,\qquad(-a)b = -(ab).\qquad\textbf{Si}\ ab = ba:\ (a + b)^n = \sum_k\binom nka^kb^{n-k},\quad a^n - b^n = (a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k}.$$
+<ul class="sbl"><li>$\displaystyle 0\times a = 0$</li><li>$\displaystyle (-a)b = -(ab).\qquad\textbf{Si}\ ab = ba:\ (a + b)^n = \sum_k\binom nka^kb^{n-k},\quad a^n - b^n = (a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k}$</li></ul>
 $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \text{ou}\ b = 0.$$</div>
 <p class="ml piege">Piège</p>
 <p>Dans $\mathcal M_n(\mathbb K)$ ou $\mathcal F(\mathbb R, \mathbb R)$, $ab = 0$ n'implique <b>pas</b> $a = 0$ ou $b = 0$. Et le binôme exige $ab = ba$.</p>
@@ -9839,7 +9839,7 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R)\ \text{n'est pas intègre}}$. Même chose pour $\mathcal M_2$ : $\begin{pmatrix}0&1\\0&0\end{pmatrix}^2 = \begin{pmatrix}0\times0 + 1\times0&0\times1 + 1\times0\\0&0\end{pmatrix} = 0$.</p>
 
 <h2 id="g-sa">7. Sous-anneaux, éléments inversibles</h2>
-<div class="sbox">$$\cR B\ \text{sous-anneau de}\ A\iff1_A\in\cR B,\ \ \forall x, y\in\cR B,\ x - y\in\cR B\ \text{et}\ xy\in\cR B.\qquad A^\times\ \text{est un groupe pour}\ \times.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cR B\ \text{sous-anneau de}\ A\iff1_A\in\cR B,\ \ \forall x, y\in\cR B,\ x - y\in\cR B\ \text{et}\ xy\in\cR B$</li><li>$\displaystyle A^\times\ \text{est un groupe pour}\ \times$</li></ul></div>
 <p class="ml">Exemple 10 : $\mathbb Z[\sqrt2]$</p>
 <p>$\mathbb Z[\sqrt2] = \{a + b\sqrt2,\ a, b\in\mathbb Z\}$.</p>
 <p><b>Étape 1 : Rappel.</b> Contient $1$, stable par différence et par produit.</p>
@@ -10008,9 +10008,9 @@ $$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdo
 <p><b>Étape 4 : Conclusion.</b> $\cG{P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}}$ : pour $n$ grand et $p$ petit, $\mathcal B(n, p)\approx\mathcal P(np)$.</p>
 
 <h2 id="w-espe">5. Espérance</h2>
-<div class="sbox">$$X\ \text{admet une espérance}\iff(x\,P(X = x))_{x\in X(\Omega)}\ \text{est sommable}.\qquad E(X) = \sum_xx\,P(X = x).$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle X\ \text{admet une espérance}\iff(x\,P(X = x))_{x\in X(\Omega)}\ \text{est sommable}$</li><li>$\displaystyle E(X) = \sum_xx\,P(X = x)$</li></ul>
 $$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable, et}\ E(f(X)) = \sum_xf(x)P(X = x).$$
-$$X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n).\qquad|X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}.$$</div>
+<ul class="sbl"><li>$\displaystyle X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n)$</li><li>$\displaystyle |X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}$</li></ul></div>
 <p class="ml">Exemple 5 : l'espérance d'une géométrique, deux méthodes</p>
 <p><b>Étape 1 : Rappel.</b> $\sum_{k\geq1}kx^{k-1} = \frac1{(1 - x)^2}$ pour $|x| \lt 1$ (dérivée de la série géométrique), et $E(X) = \sum_{n\geq1}P(X\geq n)$.</p>
 <p><b>Étape 2 : Par la définition.</b> $P(X = k) = q^{k-1}p$, donc $E(X) = \sum_{k\geq1}kq^{k-1}p = p\sum_{k\geq1}kq^{k-1}$, et $\sum_{k\geq1}kq^{k-1} = \cO{\frac1{(1 - q)^2}}$ (dérivée de $\frac1{1 - q}$). Avec $1 - q = p$ : $E(X) = p\times\frac1{p^2} = \frac1p$.</p>
@@ -10024,8 +10024,8 @@ $$X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n).\qqu
 <p><b>Étape 4 : Conclusion.</b> $\frac{e^{-\lambda}}\lambda(e^\lambda - 1) = \frac{e^{-\lambda}e^\lambda - e^{-\lambda}}\lambda = \frac{1 - e^{-\lambda}}\lambda$ : $\cG{E\big(\frac1{X + 1}\big) = \frac{1 - e^{-\lambda}}\lambda}$.</p>
 
 <h2 id="w-var">6. Variance, covariance, Cauchy-Schwarz</h2>
-<div class="sbox">$$E(X^2)\ \text{finie}\Rightarrow E(X)\ \text{finie}.\qquad V(X) = E(X^2) - E(X)^2.\qquad|E(XY)|\leq\sqrt{E(X^2)}\sqrt{E(Y^2)}.$$
-$$V\Big(\sum X_i\Big) = \sum V(X_i) + 2\sum_{i \lt j}\operatorname{Cov}(X_i, X_j).\qquad\rho(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\sigma(X)\sigma(Y)}\in[-1, 1].$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle E(X^2)\ \text{finie}\Rightarrow E(X)\ \text{finie}$</li><li>$\displaystyle V(X) = E(X^2) - E(X)^2$</li><li>$\displaystyle |E(XY)|\leq\sqrt{E(X^2)}\sqrt{E(Y^2)}$</li></ul>
+<ul class="sbl"><li>$\displaystyle V\Big(\sum X_i\Big) = \sum V(X_i) + 2\sum_{i \lt j}\operatorname{Cov}(X_i, X_j)$</li><li>$\displaystyle \rho(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\sigma(X)\sigma(Y)}\in[-1, 1]$</li></ul></div>
 <p class="ml">L'astuce des moments factoriels</p>
 <p>Pour les lois avec des factorielles (Poisson, binomiale), on calcule $E(X(X - 1))$, plus simple que $E(X^2)$, puis $E(X^2) = E(X(X - 1)) + E(X)$.</p>
 <p class="ml">Exemple 7 : la variance d'une loi de Poisson</p>
@@ -10036,8 +10036,8 @@ $$\sum_{k\geq2}k(k - 1)e^{-\lambda}\frac{\lambda^k}{k!} = \lambda^2e^{-\lambda}\
 <p><b>Étape 4 : Conclusion.</b> $\cG{V(X) = \lambda}$ (comme $E(X)$).</p>
 
 <h2 id="w-gen">7. Fonctions génératrices</h2>
-<div class="sbox">$$G_X(t) = E(t^X) = \sum_{n\geq0}P(X = n)\,t^n,\quad\text{rayon}\geq1,\quad G_X(1) = 1.\qquad G_X\ \textbf{caractérise la loi}:\ P(X = n) = \frac{G_X^{(n)}(0)}{n!}.$$
-$$E(X)\ \text{finie}\iff G_X\ \text{dérivable en}\ 1,\ E(X) = G_X'(1).\qquad V(X) = G_X''(1) + G_X'(1) - G_X'(1)^2.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle G_X(t) = E(t^X) = \sum_{n\geq0}P(X = n)\,t^n,\quad\text{rayon}\geq1,\quad G_X(1) = 1$</li><li>$\displaystyle G_X\ \textbf{caractérise la loi}:\ P(X = n) = \frac{G_X^{(n)}(0)}{n!}$</li></ul>
+<ul class="sbl"><li>$\displaystyle E(X)\ \text{finie}\iff G_X\ \text{dérivable en}\ 1,\ E(X) = G_X'(1)$</li><li>$\displaystyle V(X) = G_X''(1) + G_X'(1) - G_X'(1)^2$</li></ul>
 $$X, Y\ \text{indépendantes}\Rightarrow G_{X+Y} = G_XG_Y.$$</div>
 <p class="ml">La méthode</p>
 <p>Pour trouver la loi d'une <b>somme de variables indépendantes</b> : multiplier les fonctions génératrices, puis <b>reconnaître</b> la fonction génératrice d'une loi connue.</p>
@@ -10078,7 +10078,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 
 <h2 id="w-dens">10. Variables à densité <span class="hp">hors programme</span></h2>
 <p>Elles ne sont pas au programme de MP (seulement les variables discrètes), mais on les croise en physique et dans certaines écoles.</p>
-<div class="sbox">$$P(a\leq X\leq b) = \int_a^bf(t)\,dt,\quad f\geq0,\ \int_{\mathbb R}f = 1.\qquad E(X) = \int_{\mathbb R}tf(t)\,dt.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle P(a\leq X\leq b) = \int_a^bf(t)\,dt,\quad f\geq0,\ \int_{\mathbb R}f = 1$</li><li>$\displaystyle E(X) = \int_{\mathbb R}tf(t)\,dt$</li></ul></div>
 <table class="mtab">
 <tr><th>Loi</th><th>Densité</th><th>$E(X)$</th><th>$V(X)$</th></tr>
 <tr><td>Uniforme $\mathcal U([a, b])$</td><td>$\frac1{b - a}$ sur $[a, b]$</td><td>$\frac{a + b}2$</td><td>$\frac{(b - a)^2}{12}$</td></tr>
@@ -10199,7 +10199,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est un sev},\ B\ \text{n'en est pas un}}$ (une contrainte avec second membre non nul n'en est jamais un).</p>
 
 <h2 id="k-vect">3. Vect, familles génératrices</h2>
-<div class="sbox">$$\operatorname{Vect}(\cB{u_1}, \dots, \cB{u_p}) = \Big\{\sum\cO{\lambda_i}\cB{u_i}\Big\}:\ \text{le plus petit sev contenant les}\ u_i.\qquad(u_i)\ \text{génératrice de}\ E\iff\operatorname{Vect}(u_i) = E.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{Vect}(\cB{u_1}, \dots, \cB{u_p}) = \Big\{\sum\cO{\lambda_i}\cB{u_i}\Big\}:\ \text{le plus petit sev contenant les}\ u_i$</li><li>$\displaystyle (u_i)\ \text{génératrice de}\ E\iff\operatorname{Vect}(u_i) = E$</li></ul></div>
 <p>On ne change pas $\operatorname{Vect}$ en ajoutant à un vecteur une combinaison des autres, en multipliant un vecteur par $\lambda\neq0$, ou en retirant un vecteur combinaison des autres.</p>
 <p class="ml">Exemple 3 : appartenir à un Vect</p>
 <p>$w = (1, 2, 3)\in\operatorname{Vect}\big((1, 1, 1), (0, 1, 2)\big)$ ?</p>
@@ -10237,7 +10237,7 @@ $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\
 <p><b>Étape 4 : Conclusion.</b> Contradiction : $\cG{(P_0, \dots, P_n)\ \text{est libre}}$, et c'est une base de $\mathbb K_n[X]$ (§6).</p>
 
 <h2 id="k-somme">5. Somme, somme directe, supplémentaires</h2>
-<div class="sbox">$$F + G = \{x + y,\ x\in F,\ y\in G\}.\qquad F\oplus G\ \text{(directe)}\iff F\cap G = \{0\}\iff\text{décomposition unique}.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle F + G = \{x + y,\ x\in F,\ y\in G\}$</li><li>$\displaystyle F\oplus G\ \text{(directe)}\iff F\cap G = \{0\}\iff\text{décomposition unique}$</li></ul>
 $$F\ \text{et}\ G\ \text{supplémentaires}:\ E = F\oplus G\iff\forall x\in E,\ \exists!(x_F, x_G)\in F\times G,\ x = x_F + x_G.$$</div>
 <p class="ml">La méthode analyse-synthèse</p>
 <p><b>Analyse</b> : si $x = x_F + x_G$, on trouve des formules pour $x_F$, $x_G$ (donc unicité). <b>Synthèse</b> : on vérifie que ces formules marchent (donc existence).</p>
@@ -10698,8 +10698,8 @@ $$\varphi(\lambda P + Q) = \lambda P(1) + Q(1) + \lambda P'(0) + Q'(0) = \lambda
 <p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{n'est pas linéaire}}$ (le produit $xy$ est du degré $2$).</p>
 
 <h2 id="l-ker">3. Noyau et image</h2>
-<div class="sbox">$$\cR{\ker f} = \{x,\ f(x) = 0\},\qquad\cO{\operatorname{Im}f} = \{f(x),\ x\in E\} = \operatorname{Vect}\big(f(e_1), \dots, f(e_n)\big)\ \text{si}\ (e_i)\ \text{base de}\ E.$$
-$$f\ \text{injective}\iff\ker f = \{0\}.\qquad f\ \text{surjective}\iff\operatorname{Im}f = F.\qquad f(x) = f(y)\iff x - y\in\ker f.$$</div>
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \cR{\ker f} = \{x,\ f(x) = 0\}$</li><li>$\displaystyle \cO{\operatorname{Im}f} = \{f(x),\ x\in E\} = \operatorname{Vect}\big(f(e_1), \dots, f(e_n)\big)\ \text{si}\ (e_i)\ \text{base de}\ E$</li></ul>
+<ul class="sbl"><li>$\displaystyle f\ \text{injective}\iff\ker f = \{0\}$</li><li>$\displaystyle f\ \text{surjective}\iff\operatorname{Im}f = F$</li><li>$\displaystyle f(x) = f(y)\iff x - y\in\ker f$</li></ul></div>
 <p class="ml">Exemple 3 : noyau et image dans $\mathbb R^3$</p>
 <p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\ker f$ : résoudre $f(x) = 0$. $\operatorname{Im}f = \operatorname{Vect}(f(e_1), f(e_2), f(e_3))$.</p>
@@ -10718,7 +10718,7 @@ $$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 
 <p><b>Étape 4 : Conclusion.</b> $\cG{D\ \text{surjective, non injective}}$ : c'est possible car $\mathbb K[X]$ est de dimension infinie.</p>
 
 <h2 id="l-iso">4. Isomorphismes, image d'une base</h2>
-<div class="sbox">$$f\ \text{est déterminée par les images}\ f(e_1), \dots, f(e_n)\ \text{d'une base}.\qquad f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F.$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{est déterminée par les images}\ f(e_1), \dots, f(e_n)\ \text{d'une base}$</li><li>$\displaystyle f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F$</li></ul>
 $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
 <p class="ml">Exemple 5 : l'interpolation de Lagrange</p>
 <p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$.</p>
@@ -10729,7 +10729,7 @@ $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injec
 
 <h2 id="l-proj">5. Projecteurs et symétries</h2>
 <div class="sbox">$$p\ \text{projecteur}\iff p\circ p = p.\ \text{Alors}\ E = \ker p\oplus\operatorname{Im}p,\ \operatorname{Im}p = \ker(p - \operatorname{id}),\ p\ \text{projette sur}\ \operatorname{Im}p\ \text{parallèlement à}\ \ker p.$$
-$$s\ \text{symétrie}\iff s\circ s = \operatorname{id}.\ \text{Alors}\ E = \ker(s - \operatorname{id})\oplus\ker(s + \operatorname{id}),\qquad s = 2p - \operatorname{id}.$$</div>
+<ul class="sbl"><li>$\displaystyle s\ \text{symétrie}\iff s\circ s = \operatorname{id}.\ \text{Alors}\ E = \ker(s - \operatorname{id})\oplus\ker(s + \operatorname{id})$</li><li>$\displaystyle s = 2p - \operatorname{id}$</li></ul></div>
 <p class="ml">La méthode pour la projection sur $F$ parallèlement à $G$</p>
 <p>On décompose $x = x_F + x_G$ (on écrit $x_G$ avec un paramètre, et on impose $x - x_G\in F$). Alors $p(x) = x_F$ et $s(x) = x_F - x_G$.</p>
 
@@ -10750,7 +10750,7 @@ $$M^2 = \begin{pmatrix}1\times1 + 1\times0&1\times1 + 1\times0\\0\times1 + 0\tim
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \mathbb R(1, 0)\ \text{parallèlement à}\ \mathbb R(1, -1)}$ (pas orthogonalement).</p>
 
 <h2 id="l-rang">6. Le théorème du rang</h2>
-<div class="sbox">$$\dim E\ \text{finie}:\quad\cV{\dim E = \dim\ker f + \operatorname{rg}f}.\qquad\operatorname{rg}(g\circ f)\leq\min(\operatorname{rg}f, \operatorname{rg}g).$$
+<div class="sbox"><ul class="sbl"><li>$\displaystyle \dim E\ \text{finie}:\quad\cV{\dim E = \dim\ker f + \operatorname{rg}f}$</li><li>$\displaystyle \operatorname{rg}(g\circ f)\leq\min(\operatorname{rg}f, \operatorname{rg}g)$</li></ul>
 $$\operatorname{rg}f\leq\min(\dim E, \dim F).\qquad\text{Composer par un isomorphisme ne change pas le rang}.$$</div>
 <p class="ml piege">Piège</p>
 <p>Le théorème du rang dit une égalité de <b>dimensions</b>, pas que $E = \ker f\oplus\operatorname{Im}f$ : c'est faux pour $f(x, y) = (y, 0)$, où $\ker f = \operatorname{Im}f$.</p>

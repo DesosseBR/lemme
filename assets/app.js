@@ -1592,36 +1592,51 @@ function numberSteps(body) {
 let EXT = null;
 function exBlocks(app) {
   const EM = (window.LEMME || {}).EXMETH || {}, M = EM[EXT] || [], MX = EM[EXT + " (exercices)"] || []; let idx = 0, jdx = 0;
-  const STOP = "h2, p.ml, [data-mlab], .tree, .btree, .lg, .htree, .mrefl, .merr, .exb";
+  const STOP = "h2, p.ml, [data-mlab], .tree, .btree, .lg, .htree, .mrefl, .merr, .exb, .mtab, .sbox";
+  const isStep = n => n.nodeType === 1 && n.tagName === "P" && !!n.querySelector("b") && /^\s*Étape\s*\d/.test(n.textContent);
   $$(".methode .prose > p.ml", app).forEach(p => {
-    const isEx = /^Exercice/.test(p.textContent.trim());
-    if (!isEx && !/^Exemple/.test(p.textContent.trim())) return;
-    const meth = isEx ? MX[jdx++] : M[idx++], m = isEx ? p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s ]*([^:]*?)[\s ]*:[\s ]*([\s\S]*)$/) : p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s\u00a0]*(Exemple(?:[\s\u00a0]+\d+|[\s\u00a0]+complet|[\s\u00a0]+d'usage)?)[\s\u00a0]*(?::[\s\u00a0]*)?([\s\S]*)$/);
-    const lab = m ? m[1] : "Exemple", tit = m ? m[2].trim() : "";
-    const box = document.createElement("div"); box.className = "exb";
-    box.innerHTML = `<div class="exh"><div class="exl"><span class="exu">${lab}</span>${tit ? `<span class="ext">${tit}</span>` : ""}</div>${meth ? `<div class="exm"><b>Méthode</b><div>${meth}</div></div>` : ""}</div><div class="exc"></div>`;
-    const body = box.querySelector(".exc");
-    let n = p.nextSibling;
-    while (n && !(n.nodeType === 1 && n.matches(STOP))) { const nx = n.nextSibling; body.appendChild(n); n = nx; }
+    const txt = p.textContent.trim(), isEx = /^Exercice/.test(txt);
+    if (!isEx && !/^Exemple/.test(txt)) return;
+    const meth = isEx ? MX[jdx++] : M[idx++];
+    const mm = p.innerHTML.replace(/&nbsp;/g, " ").match(/^[\s ]*(?:Exemple|Exercice)[^:]*?(?::[\s ]*([\s\S]*))?$/);
+    const tit = mm && mm[1] ? mm[1].trim() : "";
+    const nodes = []; let n = p.nextSibling;
+    while (n && !(n.nodeType === 1 && n.matches(STOP))) { nodes.push(n); n = n.nextSibling; }
+    /* l'énoncé = ce qui précède la première étape ; la méthode = l'étape « Rappel » */
+    const first = nodes.findIndex(isStep);
+    const stmt = first < 0 ? [] : nodes.slice(0, first), rest = first < 0 ? nodes : nodes.slice(first);
+    const rap = [];
+    if (rest.length && /^\s*Étape\s*1\s*:\s*Rappel/.test(rest[0].textContent)) {
+      const r0 = rest.shift(); r0.querySelector("b").remove(); rap.push(r0);
+      while (rest.length && !isStep(rest[0])) rap.push(rest.shift());
+      rest.forEach(x => { if (isStep(x)) { const bb = x.querySelector("b"); bb.innerHTML = bb.innerHTML.replace(/Étape(?:\s|&nbsp;)*(\d+)/, (a, k) => "Étape " + (k - 1)); } });
+    }
+    const box = document.createElement("div"); box.className = "exb"; if (meth) box.dataset.meth = meth;
+    box.innerHTML = `${rap.length ? `<div class="mtd"><span class="mtk">La méthode</span><div class="mtb"></div></div>` : ""}<div class="exq"><span class="exqk">Exercice</span><div class="exqb"></div></div><div class="exk">Corrigé</div><div class="exc"></div>`;
+    const mtb = box.querySelector(".mtb"), qb = box.querySelector(".exqb"), body = box.querySelector(".exc");
+    rap.forEach(x => mtb.appendChild(x));
+    const hasStmt = stmt.some(x => x.nodeType === 1 || x.textContent.trim());
+    if (hasStmt) stmt.forEach(x => qb.appendChild(x)); else { stmt.forEach(x => x.remove()); qb.innerHTML = `<p>${tit}</p>`; }
+    rest.forEach(x => body.appendChild(x));
     p.replaceWith(box);
     numberSteps(body);
   });
   friseSections(app);
 }
-/* Méthode : dans chaque type de question (h2), les exemples forment une frise « Méthode 1, 2, 3… » */
+/* Méthode : dans chaque type de question (h2), une frise « Méthode 1, 2, 3… », chacune suivie de son exercice */
 function friseSections(app) {
   const prose = $(".methode .prose", app); if (!prose || prose.dataset.frise) return; prose.dataset.frise = "1";
   const COLS = ["fB", "fO", "fV", "fG"];
   let sec = null, k = 0;
   [...prose.children].forEach(el => {
     if (el.tagName === "H2") { sec = el; k = 0; return; }
-    if (!el.classList.contains("exb") || !sec || /exos$/.test(sec.id || "")) return;
+    if (!el.classList.contains("exb")) return;
+    const exo = sec && /exos$/.test(sec.id || "");
     let fr = el.previousElementSibling;
     if (!fr || !fr.classList.contains("frise")) { fr = document.createElement("div"); fr.className = "frise"; el.before(fr); }
-    const n = k++, it = document.createElement("div"); it.className = "fri " + COLS[n % 4];
-    const mb = el.querySelector(".exm > div"), lab = mb ? mb.innerHTML : "";
-    if (mb) el.querySelector(".exm").remove();
-    it.innerHTML = `<span class="frd">${n + 1}</span><div class="frh"><span class="frk">Méthode ${n + 1}</span>${lab ? `<span class="frt">${lab}</span>` : ""}</div>`;
+    const i = k++, it = document.createElement("div"); it.className = "fri " + COLS[i % 4];
+    const lab = el.dataset.meth || "";
+    it.innerHTML = `<span class="frd">${i + 1}</span><div class="frh"><span class="frk">${exo ? "Exercice corrigé" : "Méthode"} ${i + 1}</span>${lab ? `<span class="frt">${lab}</span>` : ""}</div>`;
     fr.appendChild(it); it.appendChild(el);
   });
 }
