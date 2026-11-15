@@ -9156,6 +9156,14 @@ $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$
 <p><b>Étape 3 : Somme directe.</b> $\lambda X(X - 1)(X - 2) + \mu(X - 1)(X - 2)(X - 3) + a + bX^2 = 0$. En $X = 1$ : $a + b = 0$. En $X = 2$ : $a + 4b = 0$. Différence : $3b = 0$, donc $b = a = 0$. En $X = 3$ : $\lambda\times3\times2\times1 = 6\lambda = 0$. En $X = 0$ : $\mu\times(-1)(-2)(-3) = -6\mu = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R_3[X] = F\oplus G\oplus H}$.</p>
 
+<p class="ml">Exemple 37 : des sous-espaces propres en somme directe</p>
+<p>$f\in\mathcal L(E)$, $\lambda_1, \dots, \lambda_n$ distincts, $E_i = \ker(f - \lambda_i\operatorname{id})$. Montrer que la somme $E_1 + \dots + E_n$ est directe.</p>
+<p><b>Étape 1 : Rappel.</b> Pour $n\geq3$, les intersections deux à deux ne suffisent pas : on montre que $x_1 + \dots + x_n = 0$ ($x_i\in E_i$) force $x_i = 0$, par récurrence sur $n$.</p>
+<p><b>Étape 2 : $n = 2$.</b> $x_1 + x_2 = 0$ (1). On applique $f$ : $\lambda_1x_1 + \lambda_2x_2 = 0$ (2), car $f(x_i) = \lambda_ix_i$. Alors (2) $-\lambda_1\times$(1) : $(\lambda_2 - \lambda_1)x_2 = 0$, et $\lambda_2\neq\lambda_1$ donne $x_2 = 0$, puis $x_1 = 0$ par (1).</p>
+<p><b>Étape 3 : Hérédité.</b> On suppose le résultat pour $n$ et $\sum_{i=1}^{n+1}x_i = 0$ (1). On applique $f$ : $\sum\lambda_ix_i = 0$ (2). Alors (2) $-\lambda_{n+1}\times$(1) : $\sum_{i=1}^n(\lambda_i - \lambda_{n+1})x_i = 0$, le terme $i = n + 1$ disparaît.</p>
+<p><b>Étape 4 : On applique l'hypothèse.</b> $(\lambda_i - \lambda_{n+1})x_i\in E_i$ (un sev), donc $(\lambda_i - \lambda_{n+1})x_i = 0$, et $\lambda_i\neq\lambda_{n+1}$ donne $x_i = 0$ pour $i\leq n$. Puis (1) donne $x_{n+1} = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\text{la somme}\ \bigoplus_{i=1}^n\ker(f - \lambda_i\operatorname{id})\ \text{est directe}}$ : des vecteurs propres de valeurs propres distinctes forment une famille libre.</p>
+
 <h2 id="k-enonce">16. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« $F$ est un sev »</b><span>Vect, ou noyau d'une application linéaire, ou la caractérisation.</span></div>
@@ -9251,7 +9259,7 @@ $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$
 </ul></div></div>
 `,
 "Applications linéaires": R`
-<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-constr">Construire</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
+<nav class="msum"><a href="#l-not">Notations</a><a href="#l-lin">Linéarité</a><a href="#l-ker">Noyau, image</a><a href="#l-iso">Isomorphismes, bases</a><a href="#l-proj">Projecteurs, symétries</a><a href="#l-rang">Théorème du rang</a><a href="#l-hyp">Formes linéaires, hyperplans</a><a href="#l-poly">Polynômes d'endomorphismes</a><a href="#l-constr">Construire</a><a href="#l-nkim">Noyau, image : outils</a><a href="#l-proj2">Projecteurs, annulateurs</a><a href="#l-enonce">L'énoncé</a><a href="#l-erreurs">Erreurs</a><a href="#l-entrainement">S'entraîner</a><a href="#l-exos">Exercices</a><a href="#l-arbre">L'arbre</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : les vecteurs $\cB x$ et leurs images. <span class="kR">rouge</span> : le noyau $\cR{\ker f}$. <span class="kO">orange</span> : l'image $\cO{\operatorname{Im}f}$. <span class="kV">violet</span> : les dimensions et le rang. <span class="kG">vert</span> : la conclusion.</p>
@@ -9422,7 +9430,118 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 4 : Image et noyau.</b> $\operatorname{Im}u = \operatorname{Vect}(u(e_1), \dots, u(e_n)) = \operatorname{Vect}(g_1, \dots, g_{n-p}) = G$. Donc $\operatorname{rg}u = n - p$ et, par le théorème du rang, $\dim\ker u = p$. Or $F\subset\ker u$ (les $e_i$, $i\leq p$, sont envoyés sur $0$) et $\dim F = p$ : $\ker u = F$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = F\ \text{et}\ \operatorname{Im}u = G}$. Si de plus $E = F\oplus G$, la projection sur $G$ parallèlement à $F$ convient.</p>
 
-<h2 id="l-enonce">10. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="l-nkim">10. Trouver le noyau, l'image, le rang : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Le noyau</td><td>Résoudre $u(x) = 0$ (la définition) : c'est presque toujours la bonne porte d'entrée.</td></tr>
+<tr><td>L'image, dimension infinie</td><td>La définition $\operatorname{Im}u = \{u(x)\}$ : montrer $\operatorname{Im}u\subset F'$ puis, pour $y\in F'$, trouver un antécédent.</td></tr>
+<tr><td>L'image, une base $(e_i)$ connue</td><td>$\operatorname{Im}u = \operatorname{Vect}(u(e_i))$ : on calcule les images de la base (les colonnes de la matrice).</td></tr>
+<tr><td>Dimension finie</td><td><b>Théorème du rang</b> : trouver le plus facile des deux ($\ker$ ou $\operatorname{Im}$), en déduire la dimension de l'autre, puis une inclusion évidente.</td></tr>
+<tr><td>Composées</td><td>$\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$ ; $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$.</td></tr>
+<tr><td>Injectivité, surjectivité d'un endomorphisme</td><td>$\ker u = \{0\}$, $\operatorname{Im}u = E$. En dimension finie, l'une suffit ; en dimension <b>infinie</b>, $\cR{\text{non}}$ (la dérivation de $\mathbb K[X]$ est surjective, pas injective).</td></tr>
+</table>
+
+<p class="ml">Exemple 17 : l'image par la définition</p>
+<p>$u(f)(x) = \int_0^xf(t)\,dt$ pour $f\in\mathcal C(\mathbb R, \mathbb R)$. Déterminer $\operatorname{Im}u$.</p>
+<p><b>Étape 1 : Rappel.</b> Deux inclusions : $\operatorname{Im}u\subset F'$, puis tout élément de $F'$ a un antécédent.</p>
+<p><b>Étape 2 : Le candidat.</b> $u(f)$ est la primitive de $f$ nulle en $0$ : elle est $\mathcal C^1$ et $u(f)(0) = \int_0^0f = 0$. Donc $\operatorname{Im}u\subset F' = \{g\in\mathcal C^1,\ g(0) = 0\}$.</p>
+<p><b>Étape 3 : L'autre inclusion.</b> Soit $g\in F'$. $g'$ est continue et $u(g')(x) = \int_0^xg'(t)\,dt = g(x) - g(0) = g(x)$ : $g = u(g')$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Im}u = \{g\in\mathcal C^1(\mathbb R, \mathbb R),\ g(0) = 0\}}$.</p>
+
+<p class="ml">Exemple 18 : $P\mapsto P(X + 1) - P(X)$ sur $\mathbb R[X]$</p>
+<p><b>Étape 1 : Rappel.</b> Noyau : on résout ; image : images d'une base.</p>
+<p><b>Étape 2 : Le noyau.</b> $P(X + 1) = P(X)$ donne, par récurrence, $P(n) = P(0)$ pour tout $n\in\mathbb N$. Le polynôme $P - P(0)$ a une infinité de racines : il est nul, $P$ est constant. Réciproquement les constantes conviennent : $\ker u = \mathbb R_0[X]$.</p>
+<p><b>Étape 3 : Les images de la base $(X^n)$.</b> $u(1) = 1 - 1 = 0$ et, pour $n\geq1$, par le binôme, $u(X^n) = (X + 1)^n - X^n = \sum_{k=0}^n\binom nkX^k - X^n = \sum_{k=0}^{n-1}\binom nkX^k$, de degré $n - 1$ (coefficient $\binom n{n-1} = n\neq0$).</p>
+<p><b>Étape 4 : L'image.</b> $(u(X^n))_{n\geq1}$ est de degrés échelonnés $0, 1, 2, \dots$ : c'est une base de $\mathbb R[X]$, donc $\operatorname{Im}u = \mathbb R[X]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = \text{constantes},\ \operatorname{Im}u = \mathbb R[X]}$ : surjective sans être injective, possible car $\dim\mathbb R[X] = +\infty$.</p>
+
+<p class="ml">Exemple 19 : $P\mapsto XP(1) + X^2P(0)$ sur $\mathbb K_n[X]$</p>
+<p><b>Étape 1 : Rappel.</b> Théorème du rang et une inclusion évidente.</p>
+<p><b>Étape 2 : Endomorphisme.</b> $u(P)$ est de degré $\leq2\leq n$ ; linéarité : $u(\lambda P + Q) = X(\lambda P(1) + Q(1)) + X^2(\lambda P(0) + Q(0)) = \lambda u(P) + u(Q)$.</p>
+<p><b>Étape 3 : Le noyau.</b> $XP(1) + X^2P(0) = 0\iff P(1) = P(0) = 0$ (coefficients de $X$ et $X^2$) $\iff X(X - 1)\mid P\iff P = X(X - 1)Q$, $Q\in\mathbb K_{n-2}[X]$. Donc $\dim\ker u = \dim\mathbb K_{n-2}[X] = n - 1$.</p>
+<p><b>Étape 4 : Le rang.</b> $\operatorname{rg}u = (n + 1) - (n - 1) = 2$. Or $\operatorname{Im}u\subset\operatorname{Vect}(X, X^2)$, de dimension $2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = X(X - 1)\mathbb K_{n-2}[X],\ \operatorname{Im}u = \operatorname{Vect}(X, X^2)}$.</p>
+
+<p class="ml">Exemple 20 : un noyau lu sur les colonnes</p>
+<p>$A = \begin{pmatrix}1&0&0&1\\1&1&0&0\\0&1&1&0\\0&0&1&1\end{pmatrix}$, matrice de $u$ dans $(e_1, e_2, e_3, e_4)$. Noyau ?</p>
+<p><b>Étape 1 : Rappel.</b> Une relation entre les colonnes $\sum\alpha_iC_i = 0$ donne $u\big(\sum\alpha_ie_i\big) = 0$.</p>
+<p><b>Étape 2 : Les colonnes.</b> $C_1 = (1, 1, 0, 0)$, $C_2 = (0, 1, 1, 0)$, $C_3 = (0, 0, 1, 1)$ sont échelonnées (premières cases non nulles en lignes $1, 2, 3$) : libres.</p>
+<p><b>Étape 3 : La relation.</b> $C_1 - C_2 + C_3 = (1 - 0 + 0,\ 1 - 1 + 0,\ 0 - 1 + 1,\ 0 - 0 + 1) = (1, 0, 0, 1) = C_4$. Donc $\operatorname{rg}A = 3$ et $\dim\ker u = 4 - 3 = 1$.</p>
+<p><b>Étape 4 : Le vecteur.</b> $C_1 - C_2 + C_3 - C_4 = 0$ signifie $u(e_1) - u(e_2) + u(e_3) - u(e_4) = 0$, soit $u(e_1 - e_2 + e_3 - e_4) = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = \operatorname{Vect}(e_1 - e_2 + e_3 - e_4)}$, sans résoudre de système.</p>
+
+<p class="ml">Exemple 21 : une base adaptée, $u(P) = (X - a)(P' + P'(a)) - 2(P - P(a))$</p>
+<p>Sur $\mathbb K_n[X]$ ($n\geq3$). Noyau et image.</p>
+<p><b>Étape 1 : Rappel.</b> On calcule les images d'une base bien choisie : ici $((X - a)^k)_{0\leq k\leq n}$.</p>
+<p><b>Étape 2 : $k = 0$.</b> $P = 1$ : $P' = 0$, $P'(a) = 0$, $P - P(a) = 1 - 1 = 0$, donc $u(1) = 0$.</p>
+<p><b>Étape 3 : $k = 1$.</b> $P = X - a$ : $P' = 1$, $P'(a) = 1$, $P - P(a) = X - a$, donc $u(P) = (X - a)\times2 - 2(X - a) = 0$.</p>
+<p><b>Étape 4 : $k\geq2$.</b> $P' = k(X - a)^{k-1}$, $P'(a) = 0$, $P(a) = 0$ : $u(P) = (X - a)\,k(X - a)^{k-1} - 2(X - a)^k = (k - 2)(X - a)^k$. Nul pour $k = 2$, non nul pour $k\geq3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\operatorname{Im}u = \operatorname{Vect}\big((X - a)^3, \dots, (X - a)^n\big)$, de dimension $n - 2$ ; donc $\dim\ker u = 3$, et $1, X - a, (X - a)^2$ sont dans le noyau : $\cG{\ker u = \mathbb K_2[X]}$.</p>
+
+<p class="ml">Exemple 22 : $f^2 = 0$ dans $\mathbb R^3$</p>
+<p>$f\in\mathcal L(\mathbb R^3)$, $f\neq0$, $f\circ f = 0$. Rang de $f$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $f\circ f = 0\iff\operatorname{Im}f\subset\ker f$, et le théorème du rang.</p>
+<p><b>Étape 2 : L'inclusion.</b> $y = f(x)$ donne $f(y) = f^2(x) = 0$ : $\operatorname{Im}f\subset\ker f$, donc $\operatorname{rg}f\leq\dim\ker f$.</p>
+<p><b>Étape 3 : Le rang.</b> $3 = \operatorname{rg}f + \dim\ker f\geq2\operatorname{rg}f$, donc $\operatorname{rg}f\leq\frac32$, soit $\operatorname{rg}f\leq1$. Et $f\neq0$ : $\operatorname{rg}f\geq1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}f = 1}$ et $\dim\ker f = 2$.</p>
+
+<p class="ml">Exemple 23 : des inégalités de rang</p>
+<p>$p$ projecteur de $\mathbb R^3$ de rang $2$, $u\in\mathcal L(\mathbb R^3, \mathbb R^2)$, $v\in\mathcal L(\mathbb R^2, \mathbb R^3)$ avec $v\circ u = p$. Que vaut $u\circ v$ ?</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$.</p>
+<p><b>Étape 2 : Les rangs.</b> $2 = \operatorname{rg}p\leq\operatorname{rg}u\leq\dim\mathbb R^2 = 2$ : $u$ est surjective. De même $\operatorname{rg}v = 2 = \dim\mathbb R^2$ : $v$ est injective.</p>
+<p><b>Étape 3 : On utilise $p^2 = p$.</b> $v\circ u\circ v\circ u = v\circ u$. Pour $y\in\mathbb R^2$, $y = u(x)$ (surjectivité) : $v\big(u(v(y))\big) = v(y)$, et $v$ injective donne $u(v(y)) = y$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{u\circ v = \operatorname{id}_{\mathbb R^2}}$.</p>
+
+<h2 id="l-proj2">11. Projecteurs, polynômes annulateurs, sous-espaces stables</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>Montrer que $p$ est un projecteur</td><td>$p\circ p = p$ (ou $A^2 = A$) ; alors $p$ projette sur $\operatorname{Im}p = \ker(p - \operatorname{id})$ parallèlement à $\ker p$.</td></tr>
+<tr><td>Une symétrie</td><td>$s\circ s = \operatorname{id}$ ; $s$ est la symétrie par rapport à $\ker(s - \operatorname{id})$ parallèlement à $\ker(s + \operatorname{id})$, et $p = \frac{s + \operatorname{id}}2$.</td></tr>
+<tr><td>$P(f) = 0$, $P$ à racines simples</td><td>$E = \bigoplus\ker(f - \lambda_i\operatorname{id})$ : analyse-synthèse, ou lemme des noyaux.</td></tr>
+<tr><td>$P(f) = 0$ avec $P(0)\neq0$</td><td>$f$ est inversible, $f^{-1}$ polynôme en $f$ (exemple 11).</td></tr>
+<tr><td>$\varphi$ nilpotent</td><td>$\varphi^{p-1}(x)\neq0\Rightarrow(x, \varphi(x), \dots, \varphi^{p-1}(x))$ libre.</td></tr>
+<tr><td>$F$ stable par $\varphi$</td><td>$\varphi(F)\subset F$ ; si $\varphi\circ\psi = \psi\circ\varphi$, alors $\ker\psi$ et $\operatorname{Im}\psi$ sont stables par $\varphi$.</td></tr>
+<tr><td>$H$ hyperplan</td><td>Noyau d'une forme linéaire non nulle, ou sev de dimension $n - 1$, ou une équation $\sum a_ix_i = 0$.</td></tr>
+</table>
+
+<p class="ml">Exemple 24 : un projecteur donné par une formule</p>
+<p>$p(x, y, z) = \big(\frac{x + y}2, \frac{x + y}2, z\big)$ sur $\mathbb R^3$.</p>
+<p><b>Étape 1 : Rappel.</b> $p\circ p = p$, puis image et noyau.</p>
+<p><b>Étape 2 : $p\circ p$.</b> On applique $p$ à $(a, a, z)$ avec $a = \frac{x + y}2$ : $\big(\frac{a + a}2, \frac{a + a}2, z\big) = (a, a, z)$. Donc $p\circ p = p$.</p>
+<p><b>Étape 3 : L'image.</b> $p(x, y, z) = (a, a, z)$ a ses deux premières coordonnées égales, et tout $(a, a, z)$ est sa propre image : $\operatorname{Im}p = \{x = y\}$, un plan.</p>
+<p><b>Étape 4 : Le noyau.</b> $\frac{x + y}2 = 0$ et $z = 0$ : $y = -x$, $\ker p = \operatorname{Vect}(1, -1, 0)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p\ \text{projette sur}\ \{x = y\}\ \text{parallèlement à}\ \mathbb R(1, -1, 0)}$ (ici orthogonalement : $(1, -1, 0)$ est normal au plan $x - y = 0$).</p>
+
+<p class="ml">Exemple 25 : $(f + \operatorname{id})\circ(f - 2\operatorname{id}) = 0$</p>
+<p>Montrer $E = \ker(f + \operatorname{id})\oplus\ker(f - 2\operatorname{id})$.</p>
+<p><b>Étape 1 : Rappel.</b> Analyse-synthèse ; en développant, $f^2 - 2f + f - 2\operatorname{id} = f^2 - f - 2\operatorname{id} = 0$, donc $f^2 = f + 2\operatorname{id}$.</p>
+<p><b>Étape 2 : Analyse.</b> $x = y + z$ avec $f(y) = -y$ et $f(z) = 2z$. Alors $f(x) = -y + 2z$. On additionne avec $x = y + z$ : $x + f(x) = 3z$, donc $z = \frac13(x + f(x))$ et $y = x - z = \frac13(2x - f(x))$ : unicité.</p>
+<p><b>Étape 3 : Synthèse, $y$.</b> $(f + \operatorname{id})(2x - f(x)) = 2f(x) - f^2(x) + 2x - f(x) = f(x) + 2x - f^2(x) = f(x) + 2x - f(x) - 2x = 0$.</p>
+<p><b>Étape 4 : Synthèse, $z$.</b> $(f - 2\operatorname{id})(x + f(x)) = f(x) + f^2(x) - 2x - 2f(x) = f^2(x) - f(x) - 2x = 0$. Et $y + z = \frac{2x - f(x) + x + f(x)}3 = \frac{3x}3 = x$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{E = \ker(f + \operatorname{id})\oplus\ker(f - 2\operatorname{id})}$.</p>
+
+<p class="ml">Exemple 26 : la famille de Jordan d'un nilpotent</p>
+<p>$\varphi^p = 0$, $\varphi^{p-1}(x)\neq0$. Montrer que $(x, \varphi(x), \dots, \varphi^{p-1}(x))$ est libre.</p>
+<p><b>Étape 1 : Rappel.</b> On applique des puissances de $\varphi$ pour isoler les coefficients un par un.</p>
+<p><b>Étape 2 : L'hypothèse.</b> $\sum_{k=0}^{p-1}\lambda_k\varphi^k(x) = 0$. On applique $\varphi^{p-1}$ : $\varphi^{p-1+k}(x) = 0$ dès que $k\geq1$ (exposant $\geq p$), il reste $\lambda_0\varphi^{p-1}(x) = 0$, donc $\lambda_0 = 0$.</p>
+<p><b>Étape 3 : On recommence.</b> On applique $\varphi^{p-2}$ à $\sum_{k\geq1}\lambda_k\varphi^k(x) = 0$ : il reste $\lambda_1\varphi^{p-1}(x) = 0$, donc $\lambda_1 = 0$. Et ainsi de suite.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\text{libre}}$ ; en particulier $p\leq\dim E$, et $\varphi^{\dim E} = 0$.</p>
+
+<p class="ml">Exemple 27 : projecteur et commutation</p>
+<p>$p$ projecteur, $f\in\mathcal L(E)$. Montrer : $f\circ p = p\circ f\iff\ker p$ et $\operatorname{Im}p$ stables par $f$.</p>
+<p><b>Étape 1 : Rappel.</b> $E = \ker p\oplus\operatorname{Im}p$, et $p(y) = y$ pour $y\in\operatorname{Im}p$.</p>
+<p><b>Étape 2 : $\Rightarrow$.</b> $x\in\ker p$ : $p(f(x)) = f(p(x)) = f(0) = 0$, donc $f(x)\in\ker p$. $y\in\operatorname{Im}p$ : $f(y) = f(p(y)) = p(f(y))\in\operatorname{Im}p$.</p>
+<p><b>Étape 3 : $\Leftarrow$.</b> $x = k + y$ avec $k = x - p(x)\in\ker p$, $y = p(x)\in\operatorname{Im}p$. Alors $p(f(x)) = p(f(k)) + p(f(y)) = 0 + f(y)$ (car $f(k)\in\ker p$ et $f(y)\in\operatorname{Im}p$), et $f(p(x)) = f(y)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\circ p = p\circ f\iff\ker p,\ \operatorname{Im}p\ \text{stables par}\ f}$.</p>
+
+<p class="ml">Exemple 28 : un hyperplan de $\mathbb R_n[X]$ et un supplémentaire</p>
+<p>$H = \{P\in\mathbb R_n[X],\ P'(0) = 0\}$ ($n\geq2$).</p>
+<p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle = hyperplan ; toute droite non contenue dans $H$ est un supplémentaire.</p>
+<p><b>Étape 2 : La forme.</b> $\varphi(P) = P'(0)$ est linéaire, et non nulle : $\varphi(X) = 1$. Donc $H = \ker\varphi$ est un hyperplan.</p>
+<p><b>Étape 3 : Le supplémentaire.</b> $X\notin H$ ($\varphi(X) = 1\neq0$) : $\mathbb RX$ est un supplémentaire. Explicitement, $P = \big(P - P'(0)X\big) + P'(0)X$ et $\big(P - P'(0)X\big)'(0) = P'(0) - P'(0) = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R_n[X] = H\oplus\mathbb RX}$.</p>
+
+<h2 id="l-enonce">12. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« $f$ est linéaire »</b><span>$f(\lambda x + y) = \lambda f(x) + f(y)$.</span></div>
 <div><b>« Déterminer $\ker f$ »</b><span>Résoudre $f(x) = 0$, donner une base.</span></div>
@@ -9469,18 +9588,26 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <h2 id="l-arbre">L'arbre des applications linéaires</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
 <div class="htree"><div class="hr"><span class="hq hroot">Une application $f$</span><ul>
-<li><div class="hr"><em>linéaire ?</em><a class="hl" href="#l-lin">$f(\lambda x + y)$, ou contre-exemple</a></div></li>
-<li><div class="hr"><em>noyau, image</em><span class="hq">On veut…</span><ul>
-<li><div class="hr"><em>$\ker f$</em><a class="hl ok" href="#l-ker">résoudre $f(x) = 0$</a></div></li>
-<li><div class="hr"><em>$\operatorname{Im}f$</em><a class="hl ok" href="#l-ker">Vect des $f(e_i)$</a></div></li>
+<li><div class="hr"><em>linéaire ?</em><span class="hq">Que vérifier ?</span><ul>
+<li><div class="hr"><em>donnée par une formule</em><a class="hl ok" href="#l-constr">d'abord $f(x)\in F$, puis $f(\lambda x + y)$</a></div></li>
+<li><div class="hr"><em>pas linéaire</em><a class="hl" href="#l-lin">un contre-exemple</a></div></li>
+<li><div class="hr"><em>à construire</em><a class="hl" href="#l-constr">image d'une base, restrictions</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>noyau, image, rang</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>$\ker f$</em><a class="hl ok" href="#l-nkim">résoudre $f(x) = 0$, relation entre colonnes</a></div></li>
+<li><div class="hr"><em>$\operatorname{Im}f$, dimension infinie</em><a class="hl" href="#l-nkim">deux inclusions</a></div></li>
+<li><div class="hr"><em>$\operatorname{Im}f$, base connue</em><a class="hl ok" href="#l-nkim">Vect des $f(e_i)$</a></div></li>
 <li><div class="hr"><em>une dimension</em><a class="hl" href="#l-rang">théorème du rang</a></div></li>
+<li><div class="hr"><em>une composée</em><a class="hl" href="#l-nkim">$\operatorname{rg}(v\circ u)\leq\min$</a></div></li>
 </ul></div></li>
 <li><div class="hr"><em>bijective ?</em><span class="hq">Même dimension finie ?</span><ul>
 <li><div class="hr"><em>oui</em><a class="hl ok" href="#l-iso">$\ker f = \{0\}$ suffit</a></div></li>
-<li><div class="hr"><em>non</em><a class="hl" href="#l-ker">injective et surjective séparément</a></div></li>
-<li><div class="hr"><em>$P(f) = 0$</em><a class="hl" href="#l-poly">isoler $\operatorname{id}$</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#l-nkim">injective et surjective séparément</a></div></li>
+<li><div class="hr"><em>$P(f) = 0$, $P(0)\neq0$</em><a class="hl" href="#l-poly">isoler $\operatorname{id}$</a></div></li>
 </ul></div></li>
-<li><div class="hr"><em>$p^2 = p$, $s^2 = \operatorname{id}$</em><a class="hl" href="#l-proj">projecteur, symétrie : $\ker$, $\operatorname{Im}$</a></div></li>
+<li><div class="hr"><em>$p^2 = p$, $s^2 = \operatorname{id}$</em><a class="hl" href="#l-proj2">projecteur, symétrie : $\ker$, $\operatorname{Im}$</a></div></li>
+<li><div class="hr"><em>$P(f) = 0$, racines simples</em><a class="hl" href="#l-proj2">$E = \bigoplus\ker(f - \lambda_i\operatorname{id})$</a></div></li>
+<li><div class="hr"><em>sev stable</em><a class="hl" href="#l-proj2">commutation, $\ker$ et $\operatorname{Im}$</a></div></li>
 <li><div class="hr"><em>un hyperplan</em><a class="hl end" href="#l-hyp">noyau d'une forme non nulle</a></div></li>
 </ul></div></div>
 `,

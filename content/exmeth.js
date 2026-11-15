@@ -619,7 +619,8 @@ LEMME.EXMETH = {
   String.raw`Analyse : additionner $x$, $u(x)$, $u^2(x)$ ; synthèse.`,
   String.raw`$f = (f - m) + m$ avec $m = \int_0^1f$.`,
   String.raw`$F\cap G = \{0\}$ et $2 + 2 = 4$.`,
-  String.raw`Décomposition de $0$ unique, évaluer en $1, 2, 3, 0$.`
+  String.raw`Décomposition de $0$ unique, évaluer en $1, 2, 3, 0$.`,
+  String.raw`Appliquer $f$, éliminer le dernier, récurrence.`
 ],
 "Espaces vectoriels et dimension finie (exercices)": [
   String.raw`Évaluer en $0$, $\frac\pi2$, $\pi$.`,
@@ -643,7 +644,19 @@ LEMME.EXMETH = {
   String.raw`$v_{|S}$ isomorphisme sur $\operatorname{Im}v$, $u = v_1^{-1}\circ w$.`,
   String.raw`Définir $v$ sur $\operatorname{Im}u$, vérifier le sens, prolonger.`,
   String.raw`$v\mapsto v_{|S}$, isomorphisme vers $\mathcal L(S, \ker u)$.`,
-  String.raw`Base adaptée à $F$, image d'une base.`
+  String.raw`Base adaptée à $F$, image d'une base.`,
+  String.raw`Deux inclusions ; antécédent de $g$ : $g'$.`,
+  String.raw`$P(n) = P(0)$ pour tout $n$ ; images de $X^n$ échelonnées.`,
+  String.raw`Noyau : $X(X - 1)\mid P$ ; théorème du rang.`,
+  String.raw`Une relation entre colonnes donne un vecteur du noyau.`,
+  String.raw`Images de la base $((X - a)^k)$.`,
+  String.raw`$\operatorname{Im}f\subset\ker f$, théorème du rang.`,
+  String.raw`$\operatorname{rg}(v\circ u)\leq\min$, puis $p^2 = p$.`,
+  String.raw`$p\circ p = p$, puis image et noyau.`,
+  String.raw`Analyse : $x + f(x) = 3z$ ; synthèse avec $f^2 = f + 2\operatorname{id}$.`,
+  String.raw`Appliquer $\varphi^{p-1}$, puis $\varphi^{p-2}$…`,
+  String.raw`$x = (x - p(x)) + p(x)$.`,
+  String.raw`Noyau de $P\mapsto P'(0)$, droite $\mathbb RX$ hors de $H$.`
 ],
 "Applications linéaires (exercices)": [
   String.raw`Revenir aux définitions.`,
