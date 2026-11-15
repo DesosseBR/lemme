@@ -7559,7 +7559,7 @@ $$\text{Le neutre est unique}.\quad\text{L'inverse est unique (loi associative)}
 <p><b>Étape 1 : Rappel.</b> On vérifie associativité, commutativité, neutre, inversibles.</p>
 <p><b>Étape 2 : L'astuce.</b> $1 - x*y = 1 - x - y + xy = (1 - x)(1 - y)$.</p>
 <p><b>Étape 3 : Associativité, commutativité.</b> On applique l'astuce deux fois : $1 - (x*y)*z = (1 - x*y)(1 - z) = (1 - x)(1 - y)(1 - z)$. De même $1 - x*(y*z) = (1 - x)(1 - y*z) = (1 - x)(1 - y)(1 - z)$. Les deux sont égaux, donc $(x*y)*z = x*(y*z)$. Et $(1 - x)(1 - y) = (1 - y)(1 - x)$ donne $x*y = y*x$.</p>
-<p><b>Étape 4 : Neutre.</b> $x*0 = x + 0 - 0 = x$ : $\cO{e = 0}$.</p>
+<p><b>Étape 4 : Neutre.</b> $x*0 = x + 0 - x\times0 = x + 0 - 0 = x$, et $0*x = x$ par commutativité : $\cO{e = 0}$.</p>
 <p><b>Étape 5 : Inversibles.</b> On cherche $y$ avec $x*y = 0$, c'est-à-dire $1 - x*y = 1$ :</p>
 $$(1 - x)(1 - y) = 1\iff1 - y = \frac1{1 - x}\ (x\neq1)\iff y = 1 - \frac1{1 - x} = \frac{(1 - x) - 1}{1 - x} = \frac{-x}{1 - x} = \frac x{x - 1}.$$
 <p>Si $x = 1$, l'équation devient $0 = 1$ : pas d'inverse.</p>
@@ -7574,7 +7574,7 @@ $$\text{Simplification}:\ x*a = y*a\Rightarrow x = y.\qquad x^n * x^m = x^{n+m},
 <p>Montrer que $(\mathbb R\setminus\{1\}, *)$ est un groupe abélien.</p>
 <p><b>Étape 1 : Rappel.</b> Loi interne, associative, neutre, inverses.</p>
 <p><b>Étape 2 : Loi interne.</b> Si $x, y\neq1$ : $1 - x*y = (1 - x)(1 - y)\neq0$, donc $x*y\neq1$.</p>
-<p><b>Étape 3 : Le reste.</b> Associative, commutative, neutre $0\neq1$ (exemple 1). L'inverse $\frac x{x - 1}$ est $\neq1$ (sinon $x = x - 1$).</p>
+<p><b>Étape 3 : Le reste.</b> Associative, commutative, neutre $0\neq1$ (exemple 1). L'inverse $\frac x{x - 1}$ est $\neq1$ : sinon $\frac x{x - 1} = 1$, soit $x = x - 1$, soit $0 = -1$, absurde.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(\mathbb R\setminus\{1\}, *)\ \text{est un groupe abélien}}$ ; $x\mapsto1 - x$ en fait même un isomorphe de $(\mathbb R^*, \times)$.</p>
 
 <h2 id="g-sg">4. Sous-groupes</h2>
@@ -7630,15 +7630,15 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 <p class="ml">Exemple 8 : $1 - N$ est inversible si $N$ est nilpotent</p>
 <p>$A$ un anneau, $N^p = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> $1$ commute avec $N$ : $1 - N^p = (1 - N)\sum_{k=0}^{p-1}N^k$.</p>
-<p><b>Étape 2 : On applique.</b> $N^p = 0$, donc $(1 - N)(1 + N + \dots + N^{p-1}) = 1$.</p>
+<p><b>Étape 2 : On applique.</b> $1$ et $N$ commutent : $(1 - N)(1 + N + \dots + N^{p-1}) = (1 + N + \dots + N^{p-1}) - (N + N^2 + \dots + N^p) = 1 - N^p$, et $N^p = 0$, donc ce produit vaut $1$.</p>
 <p><b>Étape 3 : Dans l'autre sens.</b> Le même calcul donne $(1 + N + \dots + N^{p-1})(1 - N) = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(1 - N)^{-1} = \sum_{k=0}^{p-1}N^k}$ (c'est la série géométrique, qui s'arrête).</p>
 
 <p class="ml">Exemple 9 : un anneau non intègre</p>
 <p><b>Étape 1 : Rappel.</b> Intègre : $fg = 0\Rightarrow f = 0$ ou $g = 0$.</p>
 <p><b>Étape 2 : Deux fonctions.</b> Dans $\mathcal F(\mathbb R, \mathbb R)$ : $f = \mathbb 1_{]-\infty, 0]}$ et $g = \mathbb 1_{]0, +\infty[}$, toutes deux non nulles.</p>
-<p><b>Étape 3 : Le produit.</b> En tout $x$, l'une des deux vaut $0$ : $fg = 0$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R)\ \text{n'est pas intègre}}$. Même chose pour $\mathcal M_2$ : $\begin{pmatrix}0&1\\0&0\end{pmatrix}^2 = 0$.</p>
+<p><b>Étape 3 : Le produit.</b> Si $x\leq0$ : $g(x) = 0$, donc $f(x)g(x) = 1\times0 = 0$. Si $x > 0$ : $f(x) = 0$, donc $0\times1 = 0$. Ainsi $fg = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R)\ \text{n'est pas intègre}}$. Même chose pour $\mathcal M_2$ : $\begin{pmatrix}0&1\\0&0\end{pmatrix}^2 = \begin{pmatrix}0\times0 + 1\times0&0\times1 + 1\times0\\0&0\end{pmatrix} = 0$.</p>
 
 <h2 id="g-sa">7. Sous-anneaux, éléments inversibles</h2>
 <div class="sbox">$$\cR B\ \text{sous-anneau de}\ A\iff1_A\in\cR B,\ \ \forall x, y\in\cR B,\ x - y\in\cR B\ \text{et}\ xy\in\cR B.\qquad A^\times\ \text{est un groupe pour}\ \times.$$</div>
@@ -7652,9 +7652,9 @@ $$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \
 
 <p class="ml">Exemple 11 : les inversibles de $\mathbb Z[i]$</p>
 <p><b>Étape 1 : Rappel.</b> On utilise une quantité <b>multiplicative</b> : $N(z) = |z|^2 = a^2 + b^2$ pour $z = a + ib$, avec $N(zw) = N(z)N(w)$.</p>
-<p><b>Étape 2 : Si $z$ est inversible</b> dans $\mathbb Z[i]$ : $zw = 1$ donne $N(z)N(w) = 1$, avec $N(z), N(w)$ entiers $\geq0$, donc $N(z) = 1$.</p>
-<p><b>Étape 3 : On résout</b> $a^2 + b^2 = 1$ en entiers : $(\pm1, 0)$ ou $(0, \pm1)$.</p>
-<p><b>Étape 4 : Réciproque.</b> $1\cdot1 = 1$, $(-1)(-1) = 1$, $i(-i) = 1$.</p>
+<p><b>Étape 2 : Si $z$ est inversible</b> dans $\mathbb Z[i]$ : $zw = 1$, et $N(zw) = |zw|^2 = |z|^2|w|^2 = N(z)N(w)$, donc $N(z)N(w) = N(1) = 1$. Deux entiers $\geq0$ de produit $1$ valent $1$ : $N(z) = 1$.</p>
+<p><b>Étape 3 : On résout</b> $a^2 + b^2 = 1$ en entiers : si $|a|\geq1$ et $|b|\geq1$, $a^2 + b^2\geq2$ ; donc l'un est nul, et l'autre a un carré égal à $1$ : $(\pm1, 0)$ ou $(0, \pm1)$, soit $z\in\{1, -1, i, -i\}$.</p>
+<p><b>Étape 4 : Réciproque.</b> $1\cdot1 = 1$, $(-1)(-1) = 1$, $i(-i) = -i^2 = -(-1) = 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Z[i]^\times = \{1, -1, i, -i\} = \mathbb U_4}$.</p>
 
 <h2 id="g-corps">8. Corps</h2>
@@ -7988,15 +7988,15 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p class="ml">Exemple 1 : un plan de $\mathbb R^3$</p>
 <p>$F = \{(x, y, z),\ x + y - 2z = 0\}$. Sev ? Une base ?</p>
 <p><b>Étape 1 : Rappel.</b> Écrire $F$ comme un $\operatorname{Vect}$ : on exprime une inconnue en fonction des autres.</p>
-<p><b>Étape 2 : On paramètre.</b> $x = -y + 2z$, avec $y, z$ libres : $(x, y, z) = y(-1, 1, 0) + z(2, 0, 1)$.</p>
+<p><b>Étape 2 : On paramètre.</b> On isole $x$ : $x + y - 2z = 0\iff x = -y + 2z$, avec $y, z$ libres. Donc $(x, y, z) = (-y + 2z,\ y,\ z) = (-y, y, 0) + (2z, 0, z) = y(-1, 1, 0) + z(2, 0, 1)$.</p>
 <p><b>Étape 3 : On reconnaît.</b> $F = \operatorname{Vect}\big(\cB{(-1, 1, 0)}, \cB{(2, 0, 1)}\big)$ : c'est un sev.</p>
-<p><b>Étape 4 : Libre.</b> Les deux vecteurs ne sont pas colinéaires (regarder la 2<sup>e</sup> coordonnée).</p>
+<p><b>Étape 4 : Libre.</b> Si $y(-1, 1, 0) + z(2, 0, 1) = (-y + 2z, y, z) = (0, 0, 0)$, la 2<sup>e</sup> coordonnée donne $y = 0$ et la 3<sup>e</sup> $z = 0$ : la famille est libre.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{F\ \text{est un plan de base}\ ((-1, 1, 0), (2, 0, 1))}$.</p>
 
 <p class="ml">Exemple 2 : sev ou pas ?</p>
 <p>Dans $\mathcal C(\mathbb R)$ : $A = \{f,\ f(0) = 0\}$ et $B = \{f,\ f(0) = 1\}$.</p>
 <p><b>Étape 1 : Rappel.</b> Un sev contient $0$ et est stable par $\lambda f + g$.</p>
-<p><b>Étape 2 : $A$.</b> La fonction nulle vérifie $0(0) = 0$. Si $f(0) = g(0) = 0$ : $(\lambda f + g)(0) = 0$. Donc $A$ est un sev (c'est $\ker(f\mapsto f(0))$).</p>
+<p><b>Étape 2 : $A$.</b> La fonction nulle vaut $0$ en $0$ : elle est dans $A$. Si $f(0) = g(0) = 0$ : $(\lambda f + g)(0) = \lambda f(0) + g(0) = \lambda\times0 + 0 = 0$. Donc $A$ est un sev (c'est $\ker(f\mapsto f(0))$).</p>
 <p><b>Étape 3 : $B$.</b> La fonction nulle vaut $0\neq1$ en $0$ : $0\notin B$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est un sev},\ B\ \text{n'en est pas un}}$ (une contrainte avec second membre non nul n'en est jamais un).</p>
 
@@ -8007,7 +8007,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p>$w = (1, 2, 3)\in\operatorname{Vect}\big((1, 1, 1), (0, 1, 2)\big)$ ?</p>
 <p><b>Étape 1 : Rappel.</b> $w\in\operatorname{Vect}(u, v)\iff\exists a, b,\ w = au + bv$ : un système.</p>
 <p><b>Étape 2 : Le système.</b> $a(1, 1, 1) + b(0, 1, 2) = (a, a + b, a + 2b) = (1, 2, 3)$.</p>
-<p><b>Étape 3 : On résout.</b> $a = 1$, puis $b = 1$, et la 3<sup>e</sup> équation $1 + 2 = 3$ est vérifiée.</p>
+<p><b>Étape 3 : On résout.</b> 1<sup>re</sup> coordonnée : $a = 1$. 2<sup>e</sup> : $a + b = 2$, donc $b = 2 - 1 = 1$. 3<sup>e</sup> (contrôle) : $a + 2b = 1 + 2\times1 = 3$ : vérifiée.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{w = u + v\in\operatorname{Vect}(u, v)}$.</p>
 
 <h2 id="k-libre">4. Familles libres</h2>
@@ -8029,7 +8029,7 @@ $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\
 <p>$(\cos, \sin)$ est-elle libre dans $\mathcal F(\mathbb R, \mathbb R)$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Pour des fonctions, on évalue l'égalité en des points bien choisis.</p>
 <p><b>Étape 2 : L'hypothèse.</b> $a\cos x + b\sin x = 0$ pour <b>tout</b> réel $x$.</p>
-<p><b>Étape 3 : En $x = 0$.</b> $a = 0$. <b>En $x = \frac\pi2$</b> : $b = 0$.</p>
+<p><b>Étape 3 : En $x = 0$.</b> $\cos0 = 1$, $\sin0 = 0$ : $a\times1 + b\times0 = 0$, donc $a = 0$. <b>En $x = \frac\pi2$</b> : $\cos\frac\pi2 = 0$, $\sin\frac\pi2 = 1$ : $0 + b = 0$, donc $b = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(\cos, \sin)\ \text{est libre}}$.</p>
 
 <p class="ml">Exemple 6 : des polynômes de degrés échelonnés</p>
@@ -8047,17 +8047,17 @@ $$F\ \text{et}\ G\ \text{supplémentaires}:\ E = F\oplus G\iff\forall x\in E,\ \
 <p class="ml">Exemple 7 : fonctions paires et impaires</p>
 <p>Montrer $\mathcal F(\mathbb R, \mathbb R) = \mathcal P\oplus\mathcal I$.</p>
 <p><b>Étape 1 : Rappel.</b> Analyse-synthèse.</p>
-<p><b>Étape 2 : Analyse.</b> Si $f = p + i$ ($p$ paire, $i$ impaire), alors $f(-x) = p(x) - i(x)$. En combinant avec $f(x) = p(x) + i(x)$ :</p>
+<p><b>Étape 2 : Analyse.</b> Si $f = p + i$ ($p$ paire, $i$ impaire), alors $f(-x) = p(-x) + i(-x) = p(x) - i(x)$. On additionne avec $f(x) = p(x) + i(x)$ : $f(x) + f(-x) = 2p(x)$ ; on soustrait : $f(x) - f(-x) = 2i(x)$. D'où :</p>
 $$p(x) = \frac{f(x) + f(-x)}2,\qquad i(x) = \frac{f(x) - f(-x)}2.$$
 <p><b>Étape 3 : Unicité.</b> $p$ et $i$ sont déterminés par $f$.</p>
-<p><b>Étape 4 : Synthèse.</b> Ces $p$ et $i$ sont bien paire et impaire, et $p + i = f$.</p>
+<p><b>Étape 4 : Synthèse.</b> $p(-x) = \frac{f(-x) + f(x)}2 = p(x)$ : paire. $i(-x) = \frac{f(-x) - f(x)}2 = -i(x)$ : impaire. Et $p + i = \frac{f(x) + f(-x) + f(x) - f(-x)}2 = \frac{2f(x)}2 = f(x)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R) = \mathcal P\oplus\mathcal I}$ (exemple : $e^x = \operatorname{ch}x + \operatorname{sh}x$).</p>
 
 <p class="ml">Exemple 8 : un plan et une droite de $\mathbb R^3$</p>
 <p>$P:\ x + y + z = 0$ et $D = \operatorname{Vect}(1, 1, 1)$.</p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie : $F\cap G = \{0\}$ et $\dim F + \dim G = \dim E$ suffisent (§7).</p>
-<p><b>Étape 2 : L'intersection.</b> $\lambda(1, 1, 1)\in P\iff3\lambda = 0\iff\lambda = 0$.</p>
-<p><b>Étape 3 : Les dimensions.</b> $\dim P + \dim D = 2 + 1 = 3 = \dim\mathbb R^3$.</p>
+<p><b>Étape 2 : L'intersection.</b> Un vecteur de $D$ s'écrit $\lambda(1, 1, 1) = (\lambda, \lambda, \lambda)$. Il est dans $P$ si $\lambda + \lambda + \lambda = 0$, soit $3\lambda = 0$, $\lambda = 0$ : $P\cap D = \{0\}$.</p>
+<p><b>Étape 3 : Les dimensions.</b> $P$ est un plan ($x = -y - z$, deux paramètres libres) : $\dim P = 2$ ; $\dim D = 1$. $\dim P + \dim D = 2 + 1 = 3 = \dim\mathbb R^3$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R^3 = P\oplus D}$.</p>
 
 <h2 id="k-base">6. Bases, dimension</h2>
@@ -8089,7 +8089,7 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <p>$\operatorname{rg}\big((1, 2, 1), (2, 1, 0), (3, 3, 1)\big)$.</p>
 <p><b>Étape 1 : Rappel.</b> On cherche une relation de dépendance, sinon on pivote.</p>
 <p><b>Étape 2 : Une relation.</b> $(1, 2, 1) + (2, 1, 0) = (1 + 2,\ 2 + 1,\ 1 + 0) = (3, 3, 1)$ : le 3<sup>e</sup> vecteur est combinaison des deux premiers.</p>
-<p><b>Étape 3 : Les deux premiers.</b> Ils ne sont pas colinéaires ($\frac21\neq\frac12$).</p>
+<p><b>Étape 3 : Les deux premiers.</b> Si $(2, 1, 0) = \lambda(1, 2, 1)$, la 1<sup>re</sup> coordonnée donne $\lambda = 2$ et la 2<sup>e</sup> $\lambda = \frac12$ : impossible, ils ne sont pas colinéaires.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg} = 2}$ : les trois vecteurs engendrent un plan, la famille est liée.</p>
 
 <h2 id="k-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -8122,8 +8122,8 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <h2 id="k-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $(1, \cos, \cos^2)$ est libre</p>
 <p><b>Étape 1 : Rappel.</b> Évaluer $a + b\cos x + c\cos^2x = 0$ en des points.</p>
-<p><b>Étape 2 : Trois valeurs.</b> $x = \frac\pi2$ : $a = 0$. $x = 0$ : $b + c = 0$. $x = \pi$ : $-b + c = 0$.</p>
-<p><b>Étape 3 : On résout.</b> $b = c$ et $b = -c$, donc $b = c = 0$.</p>
+<p><b>Étape 2 : Trois valeurs.</b> $x = \frac\pi2$ ($\cos = 0$) : $a + 0 + 0 = 0$, $a = 0$. $x = 0$ ($\cos = 1$) : $b\times1 + c\times1^2 = b + c = 0$. $x = \pi$ ($\cos = -1$) : $b\times(-1) + c\times(-1)^2 = -b + c = 0$.</p>
+<p><b>Étape 3 : On résout.</b> En additionnant les deux dernières : $2c = 0$, $c = 0$, puis $b = -c = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(1, \cos, \cos^2)\ \text{est libre}}$.</p>
 
 <p class="ml">Exercice 2 : $H = \{P\in\mathbb K_n[X],\ P(1) = 0\}$</p>
