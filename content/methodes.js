@@ -6952,46 +6952,46 @@ $$e^{\cV P\cV D\cV P^{-1}} = \cV Pe^{\cV D}\cV P^{-1},\qquad e^{\operatorname{di
 <p>$N = \begin{pmatrix}0&1&2\\0&0&3\\0&0&0\end{pmatrix}$. Calculer $e^N$.</p>
 <p><b>Étape 1 : Rappel.</b> $e^N = \sum\frac{N^k}{k!}$, et la somme s'arrête si $N^p = 0$.</p>
 <p><b>Étape 2 : Les puissances.</b> Le seul coefficient non nul de $N^2$ est en position $(1, 3)$ : ligne $1$ de $N$ fois colonne $3$ de $N$, $0\times2 + 1\times3 + 2\times0 = 3$. Donc $N^2 = \begin{pmatrix}0&0&3\\0&0&0\\0&0&0\end{pmatrix}$, puis $N^3 = N^2N = 0$ (la ligne $1$ de $N^2$ fois une colonne de $N$ : $3\times0 = 0$).</p>
-<p><b>Étape 3 : La somme finie.</b> $e^N = I + N + \frac12N^2$.</p>
-<p><b>Étape 4 : On additionne case par case.</b> Case $(1, 3)$ : $0 + 2 + \frac12\times3 = \frac72$. Les autres cases viennent de $I + N$.</p>
+<p><b>Étape 3 : La somme finie.</b> $N^3 = N^2\cdot N = 0$ (la seule ligne non nulle de $N^2$, la 1<sup>re</sup>, tombe sur la 3<sup>e</sup> colonne de $N$, qui est nulle sauf en ligne 1 et 2… mais elle multiplie la 3<sup>e</sup> ligne de $N$, nulle). Donc tous les termes $k\geq3$ sont nuls : $e^N = \frac{N^0}{0!} + \frac{N^1}{1!} + \frac{N^2}{2!} = I + N + \frac12N^2$.</p>
+<p><b>Étape 4 : On additionne case par case.</b> Diagonale : $1 + 0 + 0 = 1$. Case $(1, 2)$ : $0 + 1 + 0 = 1$. Case $(2, 3)$ : $0 + 3 + 0 = 3$. Case $(1, 3)$ : $0 + 2 + \frac12\times3 = 2 + \frac32 = \frac72$. Sous la diagonale : $0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{e^N = \begin{pmatrix}1&1&\frac72\\0&1&3\\0&0&1\end{pmatrix}}$.</p>
 
 <p class="ml">Exemple 2 : une matrice diagonalisable</p>
 <p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}\Rightarrow e^A = Pe^DP^{-1}$.</p>
-<p><b>Étape 2 : On diagonalise.</b> Valeurs propres $3$ (vecteur $(1, 1)$) et $1$ (vecteur $(1, -1)$) : $\cV P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV P^{-1} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV D = \operatorname{diag}(3, 1)$.</p>
+<p><b>Étape 2 : On diagonalise.</b> $\chi_A(X) = (X - 2)^2 - 1\times1 = X^2 - 4X + 3 = (X - 1)(X - 3)$ : valeurs propres $3$ et $1$. Pour $3$ : $A - 3I = \begin{pmatrix}-1&1\\1&-1\end{pmatrix}$, $-x + y = 0$, vecteur $(1, 1)$. Pour $1$ : $A - I = \begin{pmatrix}1&1\\1&1\end{pmatrix}$, $x + y = 0$, vecteur $(1, -1)$. Donc $\cV P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\det P = 1\times(-1) - 1\times1 = -2$, $\cV P^{-1} = \frac1{-2}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\cV D = \operatorname{diag}(3, 1)$ et $e^D = \operatorname{diag}(e^3, e^1)$.</p>
 <p><b>Étape 3 : On calcule.</b></p>
-$$\cV P\begin{pmatrix}e^3&0\\0&e\end{pmatrix} = \begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}e^3&0\\0&e\end{pmatrix} = \begin{pmatrix}e^3&e\\e^3&-e\end{pmatrix},$$
-$$e^A = \begin{pmatrix}e^3&e\\e^3&-e\end{pmatrix}\cdot\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix} = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}.$$
+$$\cV P\begin{pmatrix}e^3&0\\0&e\end{pmatrix} = \begin{pmatrix}1\times e^3 + 1\times0&1\times0 + 1\times e\\1\times e^3 + (-1)\times0&1\times0 + (-1)\times e\end{pmatrix} = \begin{pmatrix}e^3&e\\e^3&-e\end{pmatrix},$$
+$$e^A = \frac12\begin{pmatrix}e^3\times1 + e\times1&e^3\times1 + e\times(-1)\\e^3\times1 + (-e)\times1&e^3\times1 + (-e)\times(-1)\end{pmatrix} = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^A = \frac12\begin{pmatrix}e^3 + e&e^3 - e\\e^3 - e&e^3 + e\end{pmatrix}}$. Contrôle : $\det e^A = e^4 = e^{\operatorname{tr}A}$.</p>
 
 <p class="ml">Exemple 3 : $\lambda I + N$</p>
 <p>$A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> Si $AB = BA$, $e^{A + B} = e^Ae^B$.</p>
-<p><b>Étape 2 : On découpe.</b> $A = 2I + N$ avec $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, et $2I$ commute avec $N$.</p>
-<p><b>Étape 3 : On calcule.</b> $e^{2I} = e^2I$ et $e^N = I + N$.</p>
+<p><b>Étape 2 : On découpe.</b> $A = \begin{pmatrix}2&0\\0&2\end{pmatrix} + \begin{pmatrix}0&1\\0&0\end{pmatrix} = 2I + N$. $N^2 = \begin{pmatrix}0\times0 + 1\times0&0\times1 + 1\times0\\0&0\end{pmatrix} = 0$, et $2I$ commute avec tout : $(2I)N = 2N = N(2I)$.</p>
+<p><b>Étape 3 : On calcule.</b> $(2I)^k = 2^kI$, donc $e^{2I} = \sum\frac{2^k}{k!}I = e^2I$. Comme $N^2 = 0$, $e^N = I + N = \begin{pmatrix}1&1\\0&1\end{pmatrix}$. Donc $e^A = e^{2I}e^N = e^2\begin{pmatrix}1&1\\0&1\end{pmatrix}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^A = e^2\begin{pmatrix}1&1\\0&1\end{pmatrix}}$.</p>
 
 <p class="ml">Exemple 4 : une rotation</p>
 <p>$J = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$. Calculer $e^{\theta J}$.</p>
 <p><b>Étape 1 : Rappel.</b> On utilise un polynôme annulateur pour calculer les puissances, puis on reconnaît $\cos$ et $\sin$.</p>
-<p><b>Étape 2 : Les puissances.</b> $J^2 = -I$, donc $J^{2k} = (-1)^kI$ et $J^{2k+1} = (-1)^kJ$.</p>
+<p><b>Étape 2 : Les puissances.</b> $J^2 = \begin{pmatrix}0\times0 + (-1)\times1&0\times(-1) + (-1)\times0\\1\times0 + 0\times1&1\times(-1) + 0\times0\end{pmatrix} = \begin{pmatrix}-1&0\\0&-1\end{pmatrix} = -I$. Donc $J^{2k} = (J^2)^k = (-I)^k = (-1)^kI$ et $J^{2k+1} = J^{2k}J = (-1)^kJ$.</p>
 <p><b>Étape 3 : On sépare pairs et impairs.</b></p>
 $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\theta^{2k+1}}{(2k + 1)!}J = \cos\theta\,I + \sin\theta\,J.$$
-<p><b>Étape 4 : Conclusion.</b> $\cG{e^{\theta J} = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}}$ : la rotation $R_\theta$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cos\theta\,I + \sin\theta\,J = \begin{pmatrix}\cos\theta&0\\0&\cos\theta\end{pmatrix} + \begin{pmatrix}0&-\sin\theta\\\sin\theta&0\end{pmatrix}$, donc $\cG{e^{\theta J} = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}}$ : la rotation $R_\theta$.</p>
 
 <p class="ml">Exemple 5 : $\det(e^A) = e^{\operatorname{tr}A}$</p>
 <p><b>Étape 1 : Rappel.</b> Toute $A\in\mathcal M_n(\mathbb C)$ est trigonalisable : $A = PTP^{-1}$.</p>
-<p><b>Étape 2 : On transporte.</b> $e^A = Pe^TP^{-1}$, donc $\det e^A = \det e^T$.</p>
+<p><b>Étape 2 : On transporte.</b> $(PTP^{-1})^k = PT^kP^{-1}$ (les $P^{-1}P$ du milieu se simplifient), donc $e^A = Pe^TP^{-1}$ et $\det e^A = \det P\,\det e^T\,\frac1{\det P} = \det e^T$.</p>
 <p><b>Étape 3 : $e^T$ est triangulaire.</b> $T^k$ est triangulaire de diagonale $(\lambda_i^k)$, donc $e^T$ est triangulaire de diagonale $(e^{\lambda_i})$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\det e^A = \prod e^{\lambda_i} = e^{\sum\lambda_i} = \cG{e^{\operatorname{tr}A}}$. En particulier $e^A$ est toujours inversible.</p>
+<p><b>Étape 4 : Conclusion.</b> Le déterminant d'une triangulaire est le produit de sa diagonale : $\det e^A = e^{\lambda_1}\cdots e^{\lambda_n} = e^{\lambda_1 + \dots + \lambda_n} = \cG{e^{\operatorname{tr}A}}$ (la trace est la somme des valeurs propres). En particulier $\det e^A\neq0$ : $e^A$ est toujours inversible.</p>
 
 <h2 id="f-neu">4. Série géométrique de matrices</h2>
 <div class="sbox">$$\|\cdot\|\ \text{sous-multiplicative},\ \|A\| \lt 1\ \Longrightarrow\ I - A\ \text{inversible et}\ (I - A)^{-1} = \sum_{k=0}^{+\infty}A^k.$$</div>
 <p class="ml">Exemple 6 : la démonstration</p>
 <p><b>Étape 1 : Rappel.</b> ACV $\Rightarrow$ CV en dimension finie ; $\|A^k\|\leq\|A\|^k$.</p>
 <p><b>Étape 2 : Convergence.</b> $\sum\|A^k\|\leq\sum\|A\|^k \lt +\infty$ (géométrique de raison $ \lt 1$) : $S = \sum A^k$ existe.</p>
-<p><b>Étape 3 : Télescopage.</b> $(I - A)\sum_{k=0}^NA^k = I - A^{N+1}$.</p>
+<p><b>Étape 3 : Télescopage.</b> $(I - A)(I + A + \dots + A^N) = (I + A + \dots + A^N) - (A + A^2 + \dots + A^{N+1}) = I - A^{N+1}$ : tout se simplifie sauf le premier et le dernier.</p>
 <p><b>Étape 4 : La limite.</b> $\|A^{N+1}\|\leq\|A\|^{N+1}\to0$, et le produit matriciel est continu : $(I - A)S = I$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{(I - A)^{-1} = \sum_{k\geq0}A^k}$. Conséquence : $GL_n$ contient la boule $B(I, 1)$, il est ouvert.</p>
 
@@ -7007,8 +7007,8 @@ $$e^{\theta J} = \sum_k\frac{(-1)^k\theta^{2k}}{(2k)!}I + \sum_k\frac{(-1)^k\the
 <p class="ml">Exemple 7 : $\sum_{p, q\geq1}\frac1{(p + q)^\alpha}$</p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : sommation par paquets, valeur dans $[0, +\infty]$.</p>
 <p><b>Étape 2 : Les paquets.</b> $\cR{I_n = \{(p, q)\in(\mathbb N^*)^2,\ p + q = n\}}$ pour $n\geq2$ : il y a $n - 1$ couples ($p = 1, \dots, n - 1$).</p>
-<p><b>Étape 3 : La somme d'un paquet.</b> $\sum_{(p, q)\in I_n}\frac1{(p + q)^\alpha} = \frac{n - 1}{n^\alpha}$.</p>
-<p><b>Étape 4 : La série des paquets.</b> $\frac{n - 1}{n^\alpha}\sim\frac1{n^{\alpha - 1}}$ : converge $\iff\alpha - 1 > 1$.</p>
+<p><b>Étape 3 : La somme d'un paquet.</b> Dans $I_n$, chaque terme vaut $\frac1{n^\alpha}$ (car $p + q = n$), et il y en a $n - 1$ : $\sum_{(p, q)\in I_n}\frac1{(p + q)^\alpha} = (n - 1)\times\frac1{n^\alpha} = \frac{n - 1}{n^\alpha}$.</p>
+<p><b>Étape 4 : La série des paquets.</b> $n - 1\sim n$, donc $\frac{n - 1}{n^\alpha}\sim\frac n{n^\alpha} = \frac1{n^{\alpha - 1}}$ : série de Riemann, converge $\iff\alpha - 1 > 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{sommable}\iff\alpha > 2}$.</p>
 
 <h2 id="f-som">7. Familles sommables de nombres complexes</h2>
@@ -7024,16 +7024,16 @@ $$\text{Sommable}\iff\sum_p\Big(\sum_q|a_{p,q}|\Big) \lt +\infty.\qquad\text{Pro
 <p class="ml">Exemple 8 : $\sum_{n\geq2}(\zeta(n) - 1) = 1$</p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes.</p>
 <p><b>Étape 2 : On écrit la double somme.</b> $\zeta(n) - 1 = \sum_{k\geq2}\frac1{k^n}$, donc la somme cherchée est $\sum_{n\geq2}\sum_{k\geq2}\frac1{k^n}$, termes positifs.</p>
-<p><b>Étape 3 : On intervertit.</b> Pour $k\geq2$ fixé, géométrique de raison $\frac1k$ :</p>
+<p><b>Étape 3 : On intervertit</b> (Fubini positif). Pour $k\geq2$ fixé, $\sum_{n\geq2}\frac1{k^n}$ est géométrique de raison $\frac1k \lt 1$, de premier terme $\frac1{k^2}$ :</p>
 $$\sum_{n\geq2}\Big(\frac1k\Big)^n = \frac{\text{premier terme}}{1 - \text{raison}} = \frac{1/k^2}{1 - 1/k} = \frac1{k^2}\times\frac k{k - 1} = \frac1{k(k - 1)} = \frac{k - (k - 1)}{k(k - 1)} = \frac1{k - 1} - \frac1k.$$
-<p><b>Étape 4 : On télescope.</b> $\sum_{k\geq2}\big(\frac1{k - 1} - \frac1k\big) = 1$.</p>
+<p><b>Étape 4 : On télescope.</b> $\sum_{k=2}^K\big(\frac1{k - 1} - \frac1k\big) = \big(1 - \frac12\big) + \big(\frac12 - \frac13\big) + \dots + \big(\frac1{K - 1} - \frac1K\big) = 1 - \frac1K\to1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq2}(\zeta(n) - 1) = 1}$.</p>
 
 <p class="ml">Exemple 9 : intervertir sans sommabilité</p>
 <p>$a_{p,q} = 1$ si $q = p$, $-1$ si $q = p + 1$, $0$ sinon ($p, q\in\mathbb N$).</p>
 <p><b>Étape 1 : Rappel.</b> Fubini exige la positivité ou la sommabilité.</p>
-<p><b>Étape 2 : Lignes d'abord.</b> Pour $p$ fixé : $1 - 1 = 0$. Donc $\sum_p\sum_qa_{p,q} = 0$.</p>
-<p><b>Étape 3 : Colonnes d'abord.</b> Pour $q = 0$ : $a_{0,0} = 1$. Pour $q\geq1$ : $a_{q,q} + a_{q-1,q} = 1 - 1 = 0$. Donc $\sum_q\sum_pa_{p,q} = 1$.</p>
+<p><b>Étape 2 : Lignes d'abord.</b> Ligne $p$ fixée : seuls $a_{p,p} = 1$ et $a_{p,p+1} = -1$ sont non nuls, somme $1 + (-1) = 0$. Donc $\sum_p\sum_qa_{p,q} = \sum_p0 = 0$.</p>
+<p><b>Étape 3 : Colonnes d'abord.</b> Colonne $q$ fixée : $a_{p,q}\neq0$ seulement si $p = q$ (valeur $1$) ou $p = q - 1$ (valeur $-1$). Pour $q = 0$, seul $a_{0,0} = 1$ existe ($p = -1$ est exclu). Pour $q\geq1$ : $1 + (-1) = 0$. Donc $\sum_q\sum_pa_{p,q} = 1 + 0 + 0 + \dots = 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{0\neq1}$ : la famille n'est pas sommable ($\sum|a_{p,q}| = +\infty$), et l'interversion est interdite.</p>
 
 <h2 id="f-cauchy">9. Produit de Cauchy</h2>
@@ -7042,14 +7042,14 @@ $$\sum_{n\geq2}\Big(\frac1k\Big)^n = \frac{\text{premier terme}}{1 - \text{raiso
 <p>Pour $|x| \lt 1$.</p>
 <p><b>Étape 1 : Rappel.</b> Produit de Cauchy de deux séries ACV.</p>
 <p><b>Étape 2 : Les séries.</b> $\sum x^n$ est ACV ($|x| \lt 1$), de somme $\frac1{1 - x}$.</p>
-<p><b>Étape 3 : Le terme du produit.</b> $c_n = \sum_{k=0}^nx^kx^{n-k} = (n + 1)x^n$.</p>
+<p><b>Étape 3 : Le terme du produit.</b> $c_n = \sum_{k=0}^na_kb_{n-k}$ avec $a_k = x^k$, $b_{n-k} = x^{n-k}$ : $x^kx^{n-k} = x^{k + n - k} = x^n$ ne dépend pas de $k$, et $k$ prend $n + 1$ valeurs ($0, \dots, n$) : $c_n = (n + 1)x^n$. Et $\sum c_n = \frac1{1 - x}\times\frac1{1 - x}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}}$.</p>
 
 <p class="ml">Exemple 11 : $e^ae^b = e^{a + b}$</p>
 <p><b>Étape 1 : Rappel.</b> Produit de Cauchy, et la formule du binôme.</p>
 <p><b>Étape 2 : Les séries.</b> $\sum\frac{a^n}{n!}$ et $\sum\frac{b^n}{n!}$ sont ACV pour tous $a, b\in\mathbb C$.</p>
 <p><b>Étape 3 : Le terme du produit.</b></p>
-$$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0}^n\binom nka^kb^{n-k} = \frac{(a + b)^n}{n!}.$$
+$$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0}^n\frac{n!}{k!(n - k)!}a^kb^{n-k} = \frac1{n!}\sum_{k=0}^n\binom nka^kb^{n-k} = \frac{(a + b)^n}{n!}\ \text{(binôme)}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^ae^b = e^{a + b}}$. Pour des matrices, le binôme exige $AB = BA$ : d'où l'hypothèse du §3.</p>
 
 <h2 id="f-enonce">10. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -7083,20 +7083,20 @@ $$c_n = \sum_{k=0}^n\frac{a^k}{k!}\frac{b^{n-k}}{(n - k)!} = \frac1{n!}\sum_{k=0
 <p class="ml">Exercice 1 : exponentielle d'un projecteur</p>
 <p>$P^2 = P$. Calculer $e^{tP}$.</p>
 <p><b>Étape 1 : Rappel.</b> $e^{tP} = \sum\frac{t^kP^k}{k!}$ ; polynôme annulateur pour les puissances.</p>
-<p><b>Étape 2 : Les puissances.</b> $P^k = P$ pour $k\geq1$, $P^0 = I$.</p>
-<p><b>Étape 3 : La somme.</b> $e^{tP} = I + \Big(\sum_{k\geq1}\frac{t^k}{k!}\Big)P = I + (e^t - 1)P$.</p>
+<p><b>Étape 2 : Les puissances.</b> $P^0 = I$, $P^1 = P$, $P^2 = P$, puis $P^3 = P^2P = PP = P$, et par récurrence $P^k = P$ pour $k\geq1$.</p>
+<p><b>Étape 3 : La somme.</b> On isole $k = 0$ : $e^{tP} = \frac{t^0}{0!}I + \sum_{k\geq1}\frac{t^k}{k!}P = I + \Big(\sum_{k\geq1}\frac{t^k}{k!}\Big)P$, et $\sum_{k\geq1}\frac{t^k}{k!} = \sum_{k\geq0}\frac{t^k}{k!} - 1 = e^t - 1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^{tP} = I + (e^t - 1)P}$.</p>
 
 <p class="ml">Exercice 2 : $\sum_{p, q\geq1}\frac1{p^2 + q^2}$ diverge</p>
 <p><b>Étape 1 : Rappel.</b> Famille positive : comparaison terme à terme, puis exemple 7.</p>
-<p><b>Étape 2 : La minoration.</b> $p^2 + q^2\leq(p + q)^2$, donc $\frac1{p^2 + q^2}\geq\frac1{(p + q)^2}$.</p>
+<p><b>Étape 2 : La minoration.</b> $(p + q)^2 = p^2 + 2pq + q^2\geq p^2 + q^2$ car $2pq\geq0$. On inverse (tout est positif) : $\frac1{p^2 + q^2}\geq\frac1{(p + q)^2}$.</p>
 <p><b>Étape 3 : La référence.</b> Exemple 7 avec $\alpha = 2\leq2$ : $\sum\frac1{(p + q)^2} = +\infty$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{p, q\geq1}\frac1{p^2 + q^2} = +\infty}$.</p>
 
 <p class="ml">Exercice 3 : $\sum_{n\geq1}nx^n$</p>
 <p><b>Étape 1 : Rappel.</b> Exemple 10 : $\sum_{n\geq0}(n + 1)x^n = \frac1{(1 - x)^2}$ pour $|x| \lt 1$.</p>
 <p><b>Étape 2 : On décale.</b> $\sum_{n\geq1}nx^n = x\sum_{n\geq1}nx^{n-1} = x\sum_{m\geq0}(m + 1)x^m$.</p>
-<p><b>Étape 3 : Conclusion.</b> $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$. Exemple : $\sum\frac n{2^n} = \frac{1/2}{1/4} = 2$.</p>
+<p><b>Étape 3 : Conclusion.</b> $\sum_{m\geq0}(m + 1)x^m = \frac1{(1 - x)^2}$, donc $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$. Exemple $x = \frac12$ : $1 - \frac12 = \frac12$, $(\frac12)^2 = \frac14$, $\sum\frac n{2^n} = \frac{1/2}{1/4} = \frac12\times4 = 2$.</p>
 
 <h2 id="f-arbre">L'arbre des séries et familles sommables</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
@@ -7145,7 +7145,7 @@ $$\det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n),\qquad
 <p>$f:I\to E$ dérivable, $E$ euclidien, $\|f\|$ constante. Montrer $f(t)\perp f'(t)$.</p>
 <p><b>Étape 1 : Rappel.</b> $(\|f\|^2)' = 2\langle f, f'\rangle$.</p>
 <p><b>Étape 2 : On dérive la constante.</b> $\|f\|^2$ est constante, donc sa dérivée est nulle.</p>
-<p><b>Étape 3 : On remplace.</b> $2\langle f(t), f'(t)\rangle = 0$.</p>
+<p><b>Étape 3 : On remplace.</b> $(\|f\|^2)' = \langle f, f\rangle' = \langle f', f\rangle + \langle f, f'\rangle = 2\langle f(t), f'(t)\rangle$ (symétrie), et cette dérivée vaut $0$ : $2\langle f(t), f'(t)\rangle = 0$, donc $\langle f(t), f'(t)\rangle = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f(t)\perp f'(t)}$ : sur un cercle, la vitesse est tangente (orthogonale au rayon).</p>
 
 <p class="ml">Exemple 2 : dériver $t\mapsto A(t)^{-1}$</p>
@@ -7153,14 +7153,14 @@ $$\det(c_1, \dots, c_n)' = \sum_{i=1}^n\det(c_1, \dots, c_i', \dots, c_n),\qquad
 <p><b>Étape 1 : Rappel.</b> $(fg)' = f'g + fg'$ pour le produit matriciel (bilinéaire), sans commuter.</p>
 <p><b>Étape 2 : On dérive $A(t)A(t)^{-1} = I$.</b> $t\mapsto A(t)^{-1}$ est dérivable (coefficients = cofacteurs divisés par $\det$, fractions rationnelles des coefficients).</p>
 $$A'A^{-1} + A\big(A^{-1}\big)' = 0.$$
-<p><b>Étape 3 : On isole</b> en multipliant à gauche par $A^{-1}$.</p>
+<p><b>Étape 3 : On isole</b> en multipliant à gauche par $A^{-1}$ : $A^{-1}A'A^{-1} + A^{-1}A\big(A^{-1}\big)' = 0$, et $A^{-1}A = I$, donc $A^{-1}A'A^{-1} + \big(A^{-1}\big)' = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\big(A^{-1}\big)' = -A^{-1}A'A^{-1}}$ (et pas $-\frac{A'}{A^2}$).</p>
 
 <p class="ml">Exemple 3 : dériver un déterminant</p>
 <p>$\varphi(t) = \det(I_n + tH)$. Calculer $\varphi'(0)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\det(c_1, \dots, c_n)' = \sum_i\det(c_1, \dots, c_i', \dots, c_n)$.</p>
 <p><b>Étape 2 : Les colonnes.</b> $c_i(t) = e_i + th_i$ ($h_i$ = colonne $i$ de $H$), donc $c_i' = h_i$ et $c_j(0) = e_j$.</p>
-<p><b>Étape 3 : En $t = 0$.</b> $\varphi'(0) = \sum_i\det(e_1, \dots, h_i, \dots, e_n)$, et ce déterminant vaut la $i$-ième coordonnée de $h_i$, soit $h_{ii}$.</p>
+<p><b>Étape 3 : En $t = 0$.</b> La dérivée d'un déterminant est la somme des déterminants où l'on dérive une colonne : $\varphi'(0) = \sum_i\det(e_1, \dots, h_i, \dots, e_n)$. On développe selon les autres colonnes $e_j$ : il ne reste que la $i$-ième coordonnée de $h_i$, soit $h_{ii}$ (exemple $n = 2$, $i = 1$ : $\det\begin{pmatrix}h_{11}&0\\h_{21}&1\end{pmatrix} = h_{11}\times1 - 0\times h_{21} = h_{11}$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\varphi'(0) = \sum_ih_{ii} = \operatorname{tr}H}$.</p>
 
 <h2 id="v-int">4. Intégration, sommes de Riemann</h2>
@@ -7170,8 +7170,8 @@ $$\frac{b - a}n\sum_{k=1}^nf\Big(a + k\frac{b - a}n\Big)\xrightarrow[n\to\infty]
 <p>Limite de $S_n = \frac1n\sum_{k=1}^ne^{ik/n}$.</p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue sur $[0, 1]$, même à valeurs complexes.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, continue sur $[0, 1]$.</p>
-<p><b>Étape 3 : L'intégrale.</b> $\int_0^1e^{it}\,dt = \Big[\frac{e^{it}}i\Big]_0^1 = \frac{e^i - 1}i = -i(\cos1 - 1 + i\sin1)$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{S_n\to\sin1 + i(1 - \cos1)}$.</p>
+<p><b>Étape 3 : L'intégrale.</b> Une primitive de $e^{it}$ est $\frac{e^{it}}i$ : $\int_0^1e^{it}\,dt = \frac{e^{i} - e^{0}}i = \frac{e^i - 1}i$. Comme $\frac1i = -i$ et $e^i = \cos1 + i\sin1$ : $-i(\cos1 - 1 + i\sin1) = -i\cos1 + i - i^2\sin1 = \sin1 + i(1 - \cos1)$ (car $i^2 = -1$).</p>
+<p><b>Étape 4 : Conclusion.</b> Somme de Riemann avec $a = 0$, $b = 1$ : $\cG{S_n\to\sin1 + i(1 - \cos1)}$.</p>
 
 <h2 id="v-af">5. L'inégalité des accroissements finis</h2>
 <div class="sbox">$$f\ \mathcal C^1\ \text{sur}\ [a, b],\ \|f'\|\leq\cO M\ \Longrightarrow\ \|f(b) - f(a)\|\leq\cO M\,|b - a|.$$</div>
@@ -7190,7 +7190,7 @@ $$\textbf{Taylor-Lagrange}:\ \|f^{(n+1)}\|\leq\cO M\Rightarrow\Big\|f(b) - \sum_
 <p class="ml">Exemple 6 : $|e^{ix} - 1 - ix|\leq\frac{x^2}2$</p>
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $1$ : $\|f(b) - f(a) - (b - a)f'(a)\|\leq M\frac{(b - a)^2}2$, avec $M\geq\|f''\|$.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = e^{it}$, $f'(t) = ie^{it}$, $f''(t) = -e^{it}$, donc $|f''|\leq\cO1$.</p>
-<p><b>Étape 3 : On applique</b> entre $a = 0$ et $b = x$ : $f(0) = 1$, $f'(0) = i$.</p>
+<p><b>Étape 3 : On applique</b> à l'ordre $n = 1$ entre $a = 0$ et $b = x$ : $f(0) = e^0 = 1$, $f'(0) = ie^0 = i$, donc $f(0) + (x - 0)f'(0) = 1 + ix$, et le majorant vaut $M\frac{|x - 0|^2}{2!} = 1\times\frac{x^2}2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{|e^{ix} - 1 - ix|\leq\frac{x^2}2}$ pour tout réel $x$.</p>
 
 <h2 id="v-arc">7. Arcs paramétrés : tangente</h2>
@@ -7215,8 +7215,8 @@ $$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'
 </table>
 <p class="ml">Exemple 8 : $\gamma(t) = (t^2, t^3)$ en $0$</p>
 <p><b>Étape 1 : Rappel.</b> $p$ = premier ordre de dérivée non nulle, $q$ = premier ordre non colinéaire.</p>
-<p><b>Étape 2 : Les dérivées en $0$.</b> $\gamma'(0) = (0, 0)$, $\gamma''(0) = (2, 0)$ : $p = 2$, tangente horizontale.</p>
-<p><b>Étape 3 : Ensuite.</b> $\gamma'''(0) = (0, 6)$, non colinéaire à $(2, 0)$ : $q = 3$.</p>
+<p><b>Étape 2 : Les dérivées en $0$.</b> $\gamma'(t) = (2t, 3t^2)$ donne $\gamma'(0) = (0, 0)$. $\gamma''(t) = (2, 6t)$ donne $\gamma''(0) = (2, 0)\neq(0, 0)$ : $p = 2$, tangente dirigée par $(2, 0)$, horizontale.</p>
+<p><b>Étape 3 : Ensuite.</b> $\gamma'''(t) = (0, 6)$, donc $\gamma'''(0) = (0, 6)$. Colinéaire à $(2, 0)$ ? $\det\begin{pmatrix}2&0\\0&6\end{pmatrix} = 2\times6 - 0\times0 = 12\neq0$ : non, donc $q = 3$.</p>
 <p><b>Étape 4 : Conclusion.</b> $p$ pair, $q$ impair : $\cG{\text{point de rebroussement de 1}^{\text{re}}\ \text{espèce}}$ (la cuspide).</p>
 
 <h2 id="v-etude">9. Le plan d'étude d'un arc</h2>
@@ -7261,7 +7261,7 @@ $$x'(t_0) = 0,\ y'(t_0)\neq0:\ \text{tangente verticale}.\qquad y'(t_0) = 0,\ x'
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange à l'ordre $3$ : reste $\leq M\frac{|x|^4}{4!}$ avec $M\geq|f^{(4)}|$.</p>
 <p><b>Étape 2 : Les dérivées en $0$.</b> $\cos0 = 1$, $\cos'(0) = 0$, $\cos''(0) = -1$, $\cos'''(0) = 0$, et $|\cos^{(4)}| = |\cos|\leq1$.</p>
 <p><b>Étape 3 : Le polynôme.</b> $1 + 0\cdot x - \frac{x^2}2 + 0\cdot x^3 = 1 - \frac{x^2}2$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\big|\cos x - 1 + \frac{x^2}2\big|\leq\frac{x^4}{24}}$ pour tout réel $x$.</p>
+<p><b>Étape 4 : Conclusion.</b> Ordre $n = 3$, $M = 1$, entre $0$ et $x$ : majorant $1\times\frac{|x|^4}{4!} = \frac{x^4}{24}$ ($4! = 1\times2\times3\times4 = 24$). $\cG{\big|\cos x - 1 + \frac{x^2}2\big|\leq\frac{x^4}{24}}$ pour tout réel $x$.</p>
 
 <h2 id="v-arbre">L'arbre des fonctions vectorielles</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
