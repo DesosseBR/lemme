@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD), rangfam: mlRangFam, kerim: mlKerIm, quizev: h => mlQuiz(h, QEV), quizal: h => mlQuiz(h, QAL), cordes: mlCordes, quizcvx: h => mlQuiz(h, QCVX), imgsq: mlImgSq, homog: mlHomog, relprop: mlRelProp, quizens: h => mlQuiz(h, QENS) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD), rangfam: mlRangFam, kerim: mlKerIm, quizev: h => mlQuiz(h, QEV), quizal: h => mlQuiz(h, QAL), cordes: mlCordes, quizcvx: h => mlQuiz(h, QCVX), imgsq: mlImgSq, homog: mlHomog, relprop: mlRelProp, quizens: h => mlQuiz(h, QENS), rayonda: mlRayonDA, dsefrac: mlDseFrac, quizse: h => mlQuiz(h, QSE) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -3106,6 +3106,57 @@ const QENS = [
   ["Si $f\\circ f = \\operatorname{id}_E$, alors $f$ est bijective.", true, "Vrai : $f^{-1} = f$."],
   ["Une relation non symétrique est antisymétrique.", false, "Faux : $|x - y|\\leq1$ sur $\\mathbb R$ n'est pas antisymétrique, et une relation peut n'être ni l'une ni l'autre."],
   ["$(g\\circ f)^{-1} = f^{-1}\\circ g^{-1}$ pour $f, g$ bijectives.", true, "Vrai : on défait d'abord $g$, la dernière appliquée."]
+];
+/* Séries entières : rayon par d'Alembert */
+function mlRayonDA(host) {
+  const gen = () => { const t = rnd(0, 4); return { t, p: rnd(0, 3), c: rnd(2, 5), m: rnd(1, 2), inv: rnd(0, 1) }; };
+  const Rt = (c, m, inv) => { const r = m === 1 ? String(c) : sqT(c); return inv ? r : `\\frac1{${r}}`; };
+  const build = ({ t, p, c, m, inv }) => {
+    const np = p ? (p === 1 ? "n" : `n^{${p}}`) : "", zm = m === 1 ? "z^n" : `z^{${m}n}`, s = [];
+    if (t <= 2) {
+      const a = inv ? `\\frac{${np || 1}}{${c}^n}` : `${np}${c}^n`;
+      s.push(`<p class="mlnote">Rayon de convergence de $\\sum ${a}\\,${zm}$.</p>`);
+      s.push(`<p class="mlstep">1. Rappel : ${m === 1 ? "coefficients non nuls : $R = \\frac1\\ell$ avec $\\ell = \\lim\\big|\\frac{a_{n+1}}{a_n}\\big|$." : "série lacunaire (les coefficients des autres puissances sont nuls) : d'Alembert sur $u_n = |a_n|\\,|z|^{2n}$, $z\\neq0$ fixé."}</p>`);
+      const q = `${p ? `\\Big(\\frac{n + 1}n\\Big)^{${p}}\\times` : ""}${inv ? `\\frac1{${c}}` : c}${m === 1 ? "" : "\\,|z|^2"}`;
+      s.push(`<p class="mlstep">2. Le quotient : ${p ? `$(n + 1)^{${p}}$ sur $n^{${p}}$ donne $\\big(\\frac{n + 1}n\\big)^{${p}}$, et ` : ""}$${c}^{n+1}$ sur $${c}^n$ donne $${inv ? `\\frac1{${c}}` : c}$ :</p>$$\\frac{${m === 1 ? "|a_{n+1}|" : "u_{n+1}"}}{${m === 1 ? "|a_n|" : "u_n"}} = ${q}\\longrightarrow${inv ? `\\frac1{${c}}` : c}${m === 1 ? "" : "\\,|z|^2"}$$`);
+      if (m === 2) s.push(`<p class="mlstep">3. On lit : convergence si $${inv ? `\\frac{|z|^2}{${c}}` : `${c}|z|^2`} \\lt 1\\iff|z|^2 \\lt ${inv ? c : `\\frac1{${c}}`}\\iff|z| \\lt ${Rt(c, 2, inv)}$ ; divergence grossière au-delà.</p>`);
+      else s.push(`<p class="mlstep">3. On inverse la limite : $R = \\frac1\\ell = ${inv ? c : `\\frac1{${c}}`}$${p ? ` (le facteur $${np}$ ne change pas le rayon)` : ""}.</p>`);
+      s.push(`<p class="mlstep">4. Conclusion :</p>$$\\cG{R = ${Rt(c, m, inv)}}$$`);
+    } else {
+      const a = inv ? `\\frac{n!}{${c}^n}` : `\\frac{${c}^n}{n!}`;
+      s.push(`<p class="mlnote">Rayon de convergence de $\\sum ${a}\\,z^n$.</p>`);
+      s.push(`<p class="mlstep">1. Rappel : $R = \\frac1\\ell$, avec $\\frac10 = +\\infty$ et $\\frac1{+\\infty} = 0$.</p>`);
+      s.push(`<p class="mlstep">2. Le quotient : $(n + 1)! = (n + 1)\\,n!$, donc</p>$$\\frac{a_{n+1}}{a_n} = ${inv ? `\\frac{(n + 1)!}{${c}^{n+1}}\\times\\frac{${c}^n}{n!} = \\frac{n + 1}{${c}}\\longrightarrow+\\infty` : `\\frac{${c}^{n+1}}{(n + 1)!}\\times\\frac{n!}{${c}^n} = \\frac{${c}}{n + 1}\\longrightarrow0`}.$$`);
+      s.push(`<p class="mlstep">3. Conclusion :</p>$$\\cG{R = ${inv ? "0" : "+\\infty"}}$$<p class="mlnote">${inv ? "La série ne converge qu'en $z = 0$." : `On reconnaît $e^{${c}z}$.`}</p>`);
+    }
+    return s;
+  };
+  stepLab(host, "Rayon de convergence par d'Alembert", gen, build);
+}
+/* Séries entières : DSE d'une fraction 1/((x-a)(x-b)) */
+function mlDseFrac(host) {
+  const gen = () => { let a = 0, b = 0; while (!a) a = rnd(-4, 4); while (!b || b === a) b = rnd(-4, 4); return { a, b }; };
+  const build = ({ a, b }) => {
+    const xa = csum(["x", ctp(-a)]), xb = csum(["x", ctp(-b)]), pw = v => v < 0 ? `(${v})` : `${v}`, k = a - b === 1 ? "" : a - b === -1 ? "-" : ftex(Fr(1, a - b));
+    const s = [`<p class="mlnote">Développer en série entière $f(x) = \\dfrac1{(${xa})(${xb})}$ et donner le rayon.</p>`];
+    s.push(`<p class="mlstep">1. Rappel : éléments simples, puis $\\frac1{1 - u} = \\sum u^n$ pour $|u| \\lt 1$.</p>`);
+    s.push(`<p class="mlstep">2. Éléments simples : $\\frac1{${xa}} - \\frac1{${xb}} = \\frac{(${xb}) - (${xa})}{(${xa})(${xb})} = \\frac{${a - b}}{(${xa})(${xb})}$, donc</p>$$f(x) = ${k}\\Big(\\frac1{${xa}} - \\frac1{${xb}}\\Big).$$`);
+    s.push(`<p class="mlstep">3. Chaque morceau : $\\frac1{x - c} = -\\frac1c\\times\\frac1{1 - x/c} = -\\sum_{n\\geq0}\\frac{x^n}{c^{n+1}}$ pour $|x| \\lt |c|$. Avec $c = ${a}$ puis $c = ${b}$ :</p>$$\\frac1{${xa}} = -\\sum_{n\\geq0}\\frac{x^n}{${pw(a)}^{n+1}}\\ (|x| \\lt ${Math.abs(a)}),\\qquad\\frac1{${xb}} = -\\sum_{n\\geq0}\\frac{x^n}{${pw(b)}^{n+1}}\\ (|x| \\lt ${Math.abs(b)}).$$`);
+    s.push(`<p class="mlstep">4. On regroupe :</p>$$f(x) = \\sum_{n\\geq0}${k}\\Big(\\frac1{${pw(b)}^{n+1}} - \\frac1{${pw(a)}^{n+1}}\\Big)x^n.$$`);
+    const c0 = fmul(Fr(1, a - b), fadd(Fr(1, b), Fr(-1, a))), c1 = fmul(Fr(1, a - b), fadd(Fr(1, b * b), Fr(-1, a * a)));
+    s.push(`<p class="mlstep">5. Conclusion : rayon $\\min(${Math.abs(a)}, ${Math.abs(b)}) = ${Math.min(Math.abs(a), Math.abs(b))}$ (la somme converge au moins sur le plus petit des deux intervalles, et pas au-delà car $f$ n'est pas bornée près de son pôle le plus proche de $0$).</p>$$\\cG{f(x) = ${csum([ftex(c0), ctp(c1, "x")])} + \\dots}$$<p class="mlnote">Contrôle : $f(0) = \\frac1{(${-a})\\times(${-b})} = ${ftex(Fr(1, a * b))}$.</p>`);
+    return s;
+  };
+  stepLab(host, "Développer une fraction rationnelle", gen, build);
+}
+const QSE = [
+  ["Si $\\big|\\frac{a_{n+1}}{a_n}\\big|\\to2$, le rayon vaut $2$.", false, "Faux : $R = \\frac1\\ell = \\frac12$."],
+  ["$\\sum a_nz^n$ et $\\sum n^3a_nz^n$ ont le même rayon.", true, "Vrai : un facteur polynomial ne change pas le rayon."],
+  ["Sur le cercle $|z| = R$, la série diverge toujours.", false, "Faux : $\\sum\\frac{z^n}{n^2}$ converge sur tout le cercle $|z| = 1$."],
+  ["La somme de deux séries de rayon $1$ a toujours le rayon $1$.", false, "Faux : seulement $R\\geq1$ ; $\\sum x^n + \\sum(-x^n)$ a un rayon infini."],
+  ["Si $f(x) = \\sum a_nx^n$, alors $a_n = \\frac{f^{(n)}(0)}{n!}$.", true, "Vrai : on dérive terme à terme $n$ fois et on évalue en $0$."],
+  ["Toute fonction $\\mathcal C^\\infty$ sur $\\mathbb R$ est développable en série entière en $0$.", false, "Faux : $e^{-1/x^2}$ prolongée par $0$ a une série de Taylor nulle."],
+  ["$\\ln(1 + x) = \\sum_{n\\geq1}(-1)^{n-1}\\frac{x^n}n$ pour $|x| \\lt 1$.", true, "Vrai : on intègre $\\frac1{1 + t} = \\sum(-t)^n$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

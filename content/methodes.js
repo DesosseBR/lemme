@@ -5561,6 +5561,357 @@ $$\text{Dans}\ (\mathbb N, \leq):\ \text{toute partie non vide a un min ; toute 
 <li><div class="hr"><em>une phrase à nier</em><a class="hl end" href="#ea-quant">échanger $\forall$ et $\exists$, nier la fin</a></div></li>
 </ul></div></div>
 `,
+"Séries entières": R`
+<nav class="msum"><a href="#se-not">Notations</a><a href="#se-rayon">Rayon</a><a href="#se-dal">D'Alembert</a><a href="#se-comp">Comparaison</a><a href="#se-op">Somme, produit</a><a href="#se-cont">Continuité, bord</a><a href="#se-der">Dériver, intégrer</a><a href="#se-coef">Coefficients</a><a href="#se-usuels">DSE usuels</a><a href="#se-dse">Trouver un DSE</a><a href="#se-ed">Par une EDL</a><a href="#se-somme">Calculer une somme</a><a href="#se-enonce">L'énoncé</a><a href="#se-erreurs">Erreurs</a><a href="#se-entrainement">S'entraîner</a><a href="#se-exos">Exercices</a><a href="#se-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les coefficients $\cB{a_n}$. <span class="kO">orange</span> : le module testé $\cO{|z|}$ ou $\cO\rho$. <span class="kV">violet</span> : le rayon $\cV R$. <span class="kR">rouge</span> : ce qui diverge, le bord du disque, le piège. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="se-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Sens</th></tr>
+<tr><td>Série entière</td><td>$\sum a_nz^n$</td><td>Série de fonctions $z\mapsto a_nz^n$, $z\in\mathbb C$ (ou $x\in\mathbb R$).</td></tr>
+<tr><td>Rayon de convergence</td><td>$R\in[0, +\infty]$</td><td>$R = \sup\{\rho\geq0,\ (a_n\rho^n)\ \text{bornée}\}$.</td></tr>
+<tr><td>Disque ouvert de convergence</td><td>$D(0, R)$</td><td>$\{z\in\mathbb C,\ |z| \lt R\}$.</td></tr>
+<tr><td>Intervalle ouvert de convergence</td><td>$]-R, R[$</td><td>La variable réelle.</td></tr>
+<tr><td>Somme</td><td>$f(z) = \sum_{n=0}^{+\infty}a_nz^n$</td><td>Définie au moins sur $D(0, R)$.</td></tr>
+<tr><td>Série dérivée</td><td>$\sum na_nz^{n-1}$</td><td>Même rayon que $\sum a_nz^n$.</td></tr>
+<tr><td>Produit de Cauchy</td><td>$c_n = \sum_{k=0}^na_kb_{n-k}$</td><td>$\sum c_nz^n$ a pour somme le produit des sommes.</td></tr>
+<tr><td>Développable en série entière</td><td>DSE en $0$</td><td>$f(x) = \sum a_nx^n$ sur un $]-r, r[$, $r > 0$.</td></tr>
+<tr><td>Série de Taylor</td><td>$\sum\frac{f^{(n)}(0)}{n!}x^n$</td><td>Pour $f$ de classe $\mathcal C^\infty$ près de $0$.</td></tr>
+</table>
+
+<h2 id="se-rayon">2. Le rayon de convergence</h2>
+<div class="sbox">$$\textbf{Lemme d'Abel}:\ (a_n\rho^n)\ \text{bornée}\Rightarrow\sum a_nz^n\ \text{converge absolument pour}\ |z| \lt \rho.$$
+$$\cO{|z|} \lt \cV R\Rightarrow\sum a_nz^n\ \text{ACV};\qquad\cO{|z|} > \cV R\Rightarrow\sum a_nz^n\ \text{diverge grossièrement};\qquad\cR{|z| = R}:\ \text{on ne peut rien dire}.$$</div>
+<p class="ml">Les réflexes (avec $\rho > 0$)</p>
+<div class="sbox">$$(a_n\rho^n)\ \text{bornée}\Rightarrow R\geq\rho.\qquad\sum a_n\rho^n\ \text{converge}\Rightarrow R\geq\rho.\qquad\sum a_n\rho^n\ \text{diverge}\Rightarrow R\leq\rho.\qquad a_n\rho^n\not\to0\Rightarrow R\leq\rho.$$
+$$(a_n)\ \text{bornée}\Rightarrow R\geq1.\qquad\text{convergence pour tout}\ z\iff R = +\infty.\qquad\text{divergence pour tout}\ z\neq0\iff R = 0.$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On essaie d'abord d'Alembert (§3). <b>2.</b> Si les $a_n$ s'annulent, oscillent ($\sin n$, $(-1)^n$…) ou si la série est lacunaire : on encadre $R$ avec les réflexes, <b>une inégalité dans chaque sens</b>. <b>3.</b> Ou on compare à une série connue (§4).</p>
+
+<p class="ml">Exemple 1 : $\sum\sin(n)z^n$</p>
+<p><b>Étape 1 : Rappel.</b> $(a_n)$ bornée $\Rightarrow R\geq1$ ; $a_n\rho^n\not\to0\Rightarrow R\leq\rho$. D'Alembert est impossible : $\frac{\sin(n + 1)}{\sin n}$ n'a pas de limite.</p>
+<p><b>Étape 2 : $R\geq1$.</b> $|\sin n|\leq1$ : la suite $(\cB{\sin n})$ est bornée.</p>
+<p><b>Étape 3 : $R\leq1$.</b> En $\cO{\rho = 1}$ : $a_n\times1^n = \sin n$ ne tend pas vers $0$ (sinon $\sin(n + 1) = \sin n\cos1 + \cos n\sin1$ forcerait $\cos n\to0$, puis $\sin^2n + \cos^2n\to0\neq1$). Donc $\sum\sin(n)\,1^n$ diverge grossièrement.</p>
+<p><b>Étape 4 : Conclusion.</b> $1\leq R\leq1$ : $\cG{R = 1}$.</p>
+
+<p class="ml">Exemple 2 : $\sum e^{-n^2}z^n$</p>
+<p><b>Étape 1 : Rappel.</b> $(a_n\rho^n)$ bornée pour <b>tout</b> $\rho$ $\Rightarrow R = +\infty$.</p>
+<p><b>Étape 2 : On fixe $\cO{\rho > 0}$.</b> $e^{-n^2}\rho^n = e^{-n^2}e^{n\ln\rho} = e^{-n^2 + n\ln\rho}$.</p>
+<p><b>Étape 3 : La limite.</b> $-n^2 + n\ln\rho = -n^2\big(1 - \frac{\ln\rho}n\big)\to-\infty$ (car $\frac{\ln\rho}n\to0$), donc $e^{-n^2}\rho^n\to0$ : la suite est bornée.</p>
+<p><b>Étape 4 : Conclusion.</b> $R\geq\rho$ pour tout $\rho$ : $\cG{R = +\infty}$.</p>
+
+<h2 id="se-dal">3. La règle de d'Alembert</h2>
+<div class="sbox">$$\cB{a_n}\neq0\ \text{à partir d'un rang},\quad\Big|\frac{a_{n+1}}{a_n}\Big|\to\ell\in[0, +\infty]\ \Longrightarrow\ \cV R = \frac1\ell\qquad\Big(\frac10 = +\infty,\ \frac1{+\infty} = 0\Big).$$</div>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Si tous les $a_n$ sont non nuls : on calcule $\big|\frac{a_{n+1}}{a_n}\big|$, on simplifie (factorielles, puissances), on passe à la limite. <b>2.</b> Si la série est <b>lacunaire</b> ($z^{2n}$, $z^{3n}$… : beaucoup de coefficients nuls), on applique d'Alembert <b>à la série numérique</b> $\sum|u_n(z)|$, $z\neq0$ fixé, et on lit pour quels $|z|$ la limite est $ \lt 1$.</p>
+
+<p class="ml">Exemple 3 : $\sum\frac{(3n)!}{(n!)^3}z^n$</p>
+<p><b>Étape 1 : Rappel.</b> $R = \frac1\ell$ avec $\ell = \lim\big|\frac{a_{n+1}}{a_n}\big|$.</p>
+<p><b>Étape 2 : Le quotient.</b> $(3n + 3)! = (3n + 3)(3n + 2)(3n + 1)\,(3n)!$ et $((n + 1)!)^3 = (n + 1)^3(n!)^3$ :</p>
+$$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!} = \frac{(3n + 3)(3n + 2)(3n + 1)}{(n + 1)^3}.$$
+<p><b>Étape 3 : La limite.</b> Quotient de deux polynômes de degré $3$ : le rapport des termes dominants, $\frac{3n\times3n\times3n}{n^3} = 27$. Donc $\ell = 27$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1{27}}$.</p>
+
+<p class="ml">Exemple 4 : $\sum\frac{n^n}{n!}z^n$</p>
+<p><b>Étape 1 : Rappel.</b> D'Alembert, et $\big(1 + \frac1n\big)^n\to e$.</p>
+<p><b>Étape 2 : Le quotient.</b> $\frac{(n + 1)^{n+1}}{(n + 1)!}\times\frac{n!}{n^n} = \frac{(n + 1)^{n+1}}{(n + 1)\,n^n} = \frac{(n + 1)^n}{n^n} = \Big(1 + \frac1n\Big)^n$.</p>
+<p><b>Étape 3 : La limite.</b> $\big(1 + \frac1n\big)^n = e^{n\ln(1 + 1/n)}$ et $n\ln\big(1 + \frac1n\big)\sim n\times\frac1n = 1$, donc $\ell = e^1 = e$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1e}$.</p>
+
+<p class="ml">Exemple 5 : une série lacunaire, $\sum\frac{z^{2n}}{n + 1}$</p>
+<p><b>Étape 1 : Rappel.</b> Les coefficients de $z^{2n+1}$ sont nuls : d'Alembert sur les coefficients est impossible. On l'applique à $u_n = \frac{|z|^{2n}}{n + 1}$, $z\neq0$.</p>
+<p><b>Étape 2 : Le quotient.</b> $\frac{u_{n+1}}{u_n} = \frac{|z|^{2n+2}}{n + 2}\times\frac{n + 1}{|z|^{2n}} = \frac{n + 1}{n + 2}\,|z|^2\to|z|^2$.</p>
+<p><b>Étape 3 : On lit.</b> $\cO{|z|^2} \lt 1\iff|z| \lt 1$ : convergence absolue. $\cO{|z|^2} > 1\iff|z| > 1$ : $u_n\to+\infty$, divergence grossière.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = 1}$.</p>
+
+<p class="ml">Exemple 6 : $\sum\binom{2n}nz^{4n}$</p>
+<p><b>Étape 1 : Rappel.</b> Lacunaire : d'Alembert sur $u_n = \binom{2n}n|z|^{4n}$.</p>
+<p><b>Étape 2 : Le quotient des binomiaux.</b> $\binom{2n + 2}{n + 1} = \frac{(2n + 2)!}{((n + 1)!)^2} = \frac{(2n + 2)(2n + 1)}{(n + 1)^2}\binom{2n}n$, et $\frac{(2n + 2)(2n + 1)}{(n + 1)^2} = \frac{2(n + 1)(2n + 1)}{(n + 1)^2} = \frac{2(2n + 1)}{n + 1}\to\frac{4n}n = 4$.</p>
+<p><b>Étape 3 : On lit.</b> $\frac{u_{n+1}}{u_n} = \frac{2(2n + 1)}{n + 1}|z|^4\to4|z|^4$. Or $4|z|^4 \lt 1\iff|z|^4 \lt \frac14\iff|z| \lt \frac1{\sqrt2}$ (car $\big(\frac1{\sqrt2}\big)^4 = \frac14$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1{\sqrt2}}$.</p>
+
+<h2 id="se-comp">4. Comparer les coefficients</h2>
+<div class="sbox">$$|a_n|\leq|b_n|\ \text{ou}\ a_n = O(b_n)\Rightarrow R_a\geq R_b.\qquad|a_n|\sim|b_n|\Rightarrow R_a = R_b.\qquad\forall\alpha\in\mathbb R,\ \sum a_nz^n\ \text{et}\ \sum n^\alpha a_nz^n\ \text{ont le même rayon}.$$</div>
+<p class="ml">La méthode</p>
+<p>On cherche un <b>équivalent simple</b> de $|a_n|$ (DL, équivalents usuels), puis on lit le rayon de la série de référence. Les facteurs $n^\alpha$, $\ln n$ (encadré entre $1$ et $n$) ou polynômes en $n$ <b>ne changent pas</b> le rayon.</p>
+
+<p class="ml">Exemple 7 : $\sum\ln\Big(\frac{n + 1}n\Big)x^n$</p>
+<p><b>Étape 1 : Rappel.</b> $|a_n|\sim|b_n|\Rightarrow R_a = R_b$, et $\ln(1 + u)\sim u$ en $0$.</p>
+<p><b>Étape 2 : L'équivalent.</b> $\ln\frac{n + 1}n = \ln\big(1 + \frac1n\big)\sim\frac1n$.</p>
+<p><b>Étape 3 : La référence.</b> $\sum\frac{x^n}n$ : $\big|\frac{1/(n + 1)}{1/n}\big| = \frac n{n + 1}\to1$, rayon $1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = 1}$.</p>
+
+<p class="ml">Exemple 8 : $\sum\sin(e^{-n})x^n$</p>
+<p><b>Étape 1 : Rappel.</b> $\sin u\sim u$ en $0$, puis comparaison.</p>
+<p><b>Étape 2 : L'équivalent.</b> $e^{-n}\to0$, donc $\sin(e^{-n})\sim e^{-n} = \big(\frac1e\big)^n$.</p>
+<p><b>Étape 3 : La référence.</b> $\sum\big(\frac xe\big)^n$ est géométrique : elle converge $\iff\big|\frac xe\big| \lt 1\iff|x| \lt e$. Rayon $e$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = e}$.</p>
+
+<p class="ml">Exemple 9 : $\sum\frac{n^2 + 1}{3^n}z^n$</p>
+<p><b>Étape 1 : Rappel.</b> Un facteur $n^\alpha$ ne change pas le rayon.</p>
+<p><b>Étape 2 : On simplifie.</b> $n^2 + 1\sim n^2$, donc $|a_n|\sim n^2\times\frac1{3^n}$, et $\sum n^2\frac{z^n}{3^n}$ a le même rayon que $\sum\frac{z^n}{3^n}$.</p>
+<p><b>Étape 3 : La référence.</b> $\sum\big(\frac z3\big)^n$ converge $\iff|z| \lt 3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = 3}$.</p>
+
+<h2 id="se-op">5. Somme et produit de Cauchy</h2>
+<div class="sbox">$$\sum(a_n + b_n)z^n:\ R\geq\min(R_a, R_b),\ \text{avec}\ \cR{\text{égalité si}\ R_a\neq R_b};\quad\sum_{n=0}^{+\infty}(a_n + b_n)z^n = \sum a_nz^n + \sum b_nz^n\ \text{pour}\ |z| \lt \min(R_a, R_b).$$
+$$c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b),\qquad\sum_{n=0}^{+\infty}c_nz^n = \Big(\sum_{n=0}^{+\infty}a_nz^n\Big)\Big(\sum_{n=0}^{+\infty}b_nz^n\Big)\ \text{pour}\ |z| \lt \min(R_a, R_b).$$</div>
+
+<p class="ml">Exemple 10 : $\sum(1 + 2^n)x^n$</p>
+<p><b>Étape 1 : Rappel.</b> $R_a\neq R_b\Rightarrow R = \min(R_a, R_b)$.</p>
+<p><b>Étape 2 : Les deux morceaux.</b> $\sum x^n$ : $R_a = 1$. $\sum2^nx^n = \sum(2x)^n$ converge $\iff|2x| \lt 1\iff|x| \lt \frac12$ : $R_b = \frac12$.</p>
+<p><b>Étape 3 : Le rayon.</b> $1\neq\frac12$, donc $R = \min\big(1, \frac12\big) = \frac12$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac12,\quad\sum(1 + 2^n)x^n = \frac1{1 - x} + \frac1{1 - 2x}}$ pour $|x| \lt \frac12$.</p>
+
+<p class="ml">Exemple 11 : $\sum H_nx^n$ avec $H_n = 1 + \frac12 + \dots + \frac1n$</p>
+<p><b>Étape 1 : Rappel.</b> Produit de Cauchy, et $-\ln(1 - x) = \sum_{n\geq1}\frac{x^n}n$, $\frac1{1 - x} = \sum x^n$ sur $]-1, 1[$.</p>
+<p><b>Étape 2 : On reconnaît un produit de Cauchy.</b> Avec $a_0 = 0$, $a_k = \frac1k$ ($k\geq1$) et $b_k = 1$ : $c_n = \sum_{k=0}^na_kb_{n-k} = 0 + \frac11 + \frac12 + \dots + \frac1n = H_n$.</p>
+<p><b>Étape 3 : Le rayon.</b> $R_a = R_b = 1$, donc $R\geq1$. Et $H_n\geq1$ ne tend pas vers $0$ : en $x = 1$, divergence grossière, donc $R\leq1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{R = 1,\quad\sum_{n\geq1}H_nx^n = -\frac{\ln(1 - x)}{1 - x}}$ sur $]-1, 1[$.</p>
+
+<h2 id="se-cont">6. Continuité, et ce qui se passe au bord</h2>
+<div class="sbox">$$\sum a_nz^n\ \text{converge normalement sur tout disque fermé}\ \overline D(0, r),\ r \lt R.\qquad f\ \text{est continue sur}\ D(0, R).$$</div>
+<p>Au bord $\cR{|z| = R}$, tout peut arriver ; on étudie <b>à la main</b> : convergence normale si $\sum|a_n|R^n$ converge, critère des séries alternées (et sa majoration uniforme du reste) sinon. Le théorème radial d'Abel <span class="hp">hors programme</span> dit : si $\sum a_nR^n$ converge, $f(x)\to\sum a_nR^n$ quand $x\to R^-$.</p>
+
+<p class="ml">Exemple 12 : $\sum\frac{x^n}{n^2}$ est continue sur $[-1, 1]$</p>
+<p><b>Étape 1 : Rappel.</b> Convergence normale sur un intervalle $\Rightarrow$ somme continue sur cet intervalle.</p>
+<p><b>Étape 2 : Le rayon.</b> $\frac{1/(n + 1)^2}{1/n^2} = \frac{n^2}{(n + 1)^2}\to1$ : $R = 1$.</p>
+<p><b>Étape 3 : La majoration</b> sur tout $[-1, 1]$ : $\Big|\frac{x^n}{n^2}\Big| = \frac{|x|^n}{n^2}\leq\frac1{n^2}$, terme d'une série convergente (Riemann, $2 > 1$).</p>
+<p><b>Étape 4 : Conclusion.</b> Convergence normale sur $[-1, 1]$ : $\cG{f\ \text{est continue sur}\ [-1, 1]}$, bord compris.</p>
+
+<h2 id="se-der">7. Dériver et intégrer terme à terme</h2>
+<div class="sbox">$$f(x) = \sum_{n=0}^{+\infty}a_nx^n\ \text{est}\ \mathcal C^\infty\ \text{sur}\ ]-R, R[,\qquad f'(x) = \sum_{n=1}^{+\infty}na_nx^{n-1},\qquad f^{(k)}(x) = \sum_{n=k}^{+\infty}\frac{n!}{(n - k)!}a_nx^{n-k}.$$
+$$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour}\ x\in]-R, R[\quad\text{(même rayon)}.$$</div>
+<p class="ml">La méthode</p>
+<p>Pour sommer $\sum n\,a_nx^n$ : on dérive une série connue et on multiplie par $x$. Pour sommer $\sum\frac{a_n}{n + 1}x^{n+1}$ : on intègre. <b>Ne jamais oublier la constante</b> : on la trouve en $x = 0$.</p>
+
+<p class="ml">Exemple 13 : $\sum nx^n$</p>
+<p><b>Étape 1 : Rappel.</b> On dérive $\frac1{1 - x} = \sum_{n\geq0}x^n$ sur $]-1, 1[$.</p>
+<p><b>Étape 2 : On dérive.</b> $\Big(\frac1{1 - x}\Big)' = \frac{-(-1)}{(1 - x)^2} = \frac1{(1 - x)^2}$ et $\Big(\sum x^n\Big)' = \sum_{n\geq1}nx^{n-1}$.</p>
+<p><b>Étape 3 : On multiplie par $x$.</b> $\sum_{n\geq1}nx^n = x\sum_{n\geq1}nx^{n-1} = \frac x{(1 - x)^2}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$ sur $]-1, 1[$. Exemple $x = \frac12$ : $1 - \frac12 = \frac12$, $\frac{1/2}{1/4} = 2$, donc $\sum\frac n{2^n} = 2$.</p>
+
+<p class="ml">Exemple 14 : $\ln(1 + x)$ et $\arctan x$ par intégration</p>
+<p><b>Étape 1 : Rappel.</b> On intègre terme à terme de $0$ à $x$ sur $]-1, 1[$.</p>
+<p><b>Étape 2 : $\ln(1 + x)$.</b> $\frac1{1 + t} = \sum(-t)^n = \sum(-1)^nt^n$. On intègre : $\ln(1 + x) - \ln1 = \sum_{n\geq0}(-1)^n\frac{x^{n+1}}{n + 1} = \sum_{n\geq1}(-1)^{n-1}\frac{x^n}n$ (on pose $n + 1\to n$).</p>
+<p><b>Étape 3 : $\arctan x$.</b> $\frac1{1 + t^2} = \sum(-t^2)^n = \sum(-1)^nt^{2n}$. On intègre : $\arctan x - \arctan0 = \sum_{n\geq0}(-1)^n\frac{x^{2n+1}}{2n + 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\ln(1 + x) = \sum_{n\geq1}\frac{(-1)^{n-1}}nx^n,\quad\arctan x = \sum_{n\geq0}\frac{(-1)^n}{2n + 1}x^{2n+1}}$ sur $]-1, 1[$.</p>
+
+<p class="ml">Exemple 15 : $\sum_{n\geq2}\frac{(-1)^n}{n(n - 1)}x^n$</p>
+<p><b>Étape 1 : Rappel.</b> On dérive deux fois pour tuer le $n(n - 1)$, puis on intègre deux fois avec les constantes.</p>
+<p><b>Étape 2 : Le rayon.</b> $\frac1{n(n - 1)}\sim\frac1{n^2}$, même rayon que $\sum x^n$ : $R = 1$.</p>
+<p><b>Étape 3 : On dérive deux fois.</b> $\big(x^n\big)'' = n(n - 1)x^{n-2}$, donc $f''(x) = \sum_{n\geq2}(-1)^nx^{n-2} = \sum_{m\geq0}(-x)^m = \frac1{1 + x}$ (avec $m = n - 2$ et $(-1)^n = (-1)^m$).</p>
+<p><b>Étape 4 : On intègre.</b> $f'(0) = 0$ (pas de terme en $x^1$), donc $f'(x) = \int_0^x\frac{dt}{1 + t} = \ln(1 + x)$. Puis $f(0) = 0$ et une primitive de $\ln(1 + t)$ est $(1 + t)\ln(1 + t) - t$ (dérivée : $\ln(1 + t) + 1 - 1$) : $f(x) = (1 + x)\ln(1 + x) - x - (1\times0 - 0)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{f(x) = (1 + x)\ln(1 + x) - x}$ sur $]-1, 1[$.</p>
+
+<p class="ml">Exemple 16 : $\sum\binom{n + p}px^n = \frac1{(1 - x)^{p+1}}$</p>
+<p><b>Étape 1 : Rappel.</b> On dérive $p$ fois $\frac1{1 - x} = \sum x^n$.</p>
+<p><b>Étape 2 : À gauche.</b> $\Big(\frac1{1 - x}\Big)' = \frac1{(1 - x)^2}$, $\Big(\frac1{1 - x}\Big)'' = \frac2{(1 - x)^3}$, et par récurrence $\Big(\frac1{1 - x}\Big)^{(p)} = \frac{p!}{(1 - x)^{p+1}}$.</p>
+<p><b>Étape 3 : À droite.</b> $\big(x^n\big)^{(p)} = \frac{n!}{(n - p)!}x^{n-p}$ pour $n\geq p$, $0$ sinon. Avec $m = n - p$ : $\sum_{m\geq0}\frac{(m + p)!}{m!}x^m$.</p>
+<p><b>Étape 4 : On divise par $p!$.</b> $\frac{(m + p)!}{m!\,p!} = \binom{m + p}p$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\sum_{n\geq0}\binom{n + p}px^n = \frac1{(1 - x)^{p+1}}}$ sur $]-1, 1[$ (rayon $1$ : dérivées successives).</p>
+
+<h2 id="se-coef">8. Unicité, coefficients et dérivées</h2>
+<div class="sbox">$$\cB{a_n} = \frac{f^{(n)}(0)}{n!}.\qquad\sum a_nx^n = \sum b_nx^n\ \text{au voisinage de}\ 0\Rightarrow\forall n,\ a_n = b_n.$$
+$$f\ \text{paire}\Rightarrow a_{2p+1} = 0;\qquad f\ \text{impaire}\Rightarrow a_{2p} = 0.$$</div>
+
+<p class="ml">Exemple 17 : $f^{(10)}(0)$ pour $f(x) = x^2e^x$</p>
+<p><b>Étape 1 : Rappel.</b> $f^{(n)}(0) = n!\,a_n$ : on lit $a_{10}$ dans le DSE.</p>
+<p><b>Étape 2 : Le DSE.</b> $x^2e^x = x^2\sum_{k\geq0}\frac{x^k}{k!} = \sum_{k\geq0}\frac{x^{k+2}}{k!}$. Le terme en $x^{10}$ vient de $k + 2 = 10$, soit $k = 8$ : $a_{10} = \frac1{8!}$.</p>
+<p><b>Étape 3 : On multiplie par $10!$.</b> $\frac{10!}{8!} = 10\times9 = 90$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f^{(10)}(0) = 90}$, sans dériver dix fois.</p>
+
+<p class="ml">Exemple 18 : coefficients d'une fonction paire</p>
+<p><b>Étape 1 : Rappel.</b> Unicité des coefficients.</p>
+<p><b>Étape 2 : On écrit $f(-x) = f(x)$.</b> $\sum a_n(-x)^n = \sum(-1)^na_nx^n$ et $\sum a_nx^n$ sont égales près de $0$, donc $(-1)^na_n = a_n$ pour tout $n$.</p>
+<p><b>Étape 3 : $n$ impair.</b> $(-1)^n = -1$ : $-a_n = a_n$, soit $2a_n = 0$, $a_n = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{paire}\Rightarrow a_{2p+1} = 0}$ : c'est pourquoi $\cos$ et $\operatorname{ch}$ n'ont que des puissances paires.</p>
+
+<h2 id="se-usuels">9. Les développements usuels (à connaître par cœur)</h2>
+<table class="mtab">
+<tr><th>Fonction</th><th>DSE</th><th>Rayon</th></tr>
+<tr><td>$\frac1{1 - x}$</td><td>$\sum_{n\geq0}x^n$</td><td>$1$</td></tr>
+<tr><td>$\frac1{1 + x}$</td><td>$\sum_{n\geq0}(-1)^nx^n$</td><td>$1$</td></tr>
+<tr><td>$-\ln(1 - x)$</td><td>$\sum_{n\geq1}\frac{x^n}n$</td><td>$1$</td></tr>
+<tr><td>$\ln(1 + x)$</td><td>$\sum_{n\geq1}(-1)^{n-1}\frac{x^n}n$</td><td>$1$</td></tr>
+<tr><td>$e^x$</td><td>$\sum_{n\geq0}\frac{x^n}{n!}$</td><td>$+\infty$</td></tr>
+<tr><td>$\operatorname{ch}x$, $\operatorname{sh}x$</td><td>$\sum\frac{x^{2n}}{(2n)!}$, $\sum\frac{x^{2n+1}}{(2n + 1)!}$</td><td>$+\infty$</td></tr>
+<tr><td>$\cos x$, $\sin x$</td><td>$\sum(-1)^n\frac{x^{2n}}{(2n)!}$, $\sum(-1)^n\frac{x^{2n+1}}{(2n + 1)!}$</td><td>$+\infty$</td></tr>
+<tr><td>$\arctan x$</td><td>$\sum_{n\geq0}(-1)^n\frac{x^{2n+1}}{2n + 1}$</td><td>$1$</td></tr>
+<tr><td>$\operatorname{argth}x = \frac12\ln\frac{1 + x}{1 - x}$ <span class="hp">hors programme</span></td><td>$\sum_{n\geq0}\frac{x^{2n+1}}{2n + 1}$</td><td>$1$</td></tr>
+<tr><td>$(1 + x)^\alpha$, $\alpha\in\mathbb R$</td><td>$1 + \sum_{n\geq1}\frac{\alpha(\alpha - 1)\cdots(\alpha - n + 1)}{n!}x^n$</td><td>$1$ ($+\infty$ si $\alpha\in\mathbb N$)</td></tr>
+<tr><td>$e^{az}$, $a\in\mathbb C$</td><td>$\sum\frac{a^n}{n!}z^n$</td><td>$+\infty$</td></tr>
+</table>
+
+<h2 id="se-dse">10. Trouver un développement en série entière</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> On se ramène aux usuels : <b>décomposition en éléments simples</b> pour une fraction, <b>factorisation</b> sous un $\ln$, produit, dérivée, primitive. <b>2.</b> Si ça bloque : $f$ vérifie une <b>équation différentielle</b> (§11). <b>3.</b> Le rayon : celui de l'usuel, ou le plus petit des rayons qui interviennent. <b>4.</b> L'inégalité de Taylor-Lagrange (reste $\to0$) marche aussi mais est rarement la plus rapide.</p>
+
+<p class="ml">Exemple 19 : $\frac1{(1 - x)(2 - x)}$</p>
+<p><b>Étape 1 : Rappel.</b> Éléments simples, puis $\frac1{1 - u} = \sum u^n$.</p>
+<p><b>Étape 2 : Éléments simples.</b> $\frac1{(1 - x)(2 - x)} = \frac1{1 - x} - \frac1{2 - x}$ : contrôle, $\frac{(2 - x) - (1 - x)}{(1 - x)(2 - x)} = \frac{2 - x - 1 + x}{(1 - x)(2 - x)} = \frac1{(1 - x)(2 - x)}$.</p>
+<p><b>Étape 3 : Chaque morceau.</b> $\frac1{1 - x} = \sum x^n$ ($|x| \lt 1$). $\frac1{2 - x} = \frac12\times\frac1{1 - x/2} = \frac12\sum\big(\frac x2\big)^n = \sum\frac{x^n}{2^{n+1}}$ ($|x| \lt 2$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\frac1{(1 - x)(2 - x)} = \sum_{n\geq0}\Big(1 - \frac1{2^{n+1}}\Big)x^n}$, rayon $\min(1, 2) = 1$. Contrôle $x = 0$ : $\frac1{1\times2} = \frac12$ et $1 - \frac12 = \frac12$.</p>
+
+<p class="ml">Exemple 20 : $\ln(x^2 - 5x + 6)$</p>
+<p><b>Étape 1 : Rappel.</b> On factorise, $\ln(ab) = \ln a + \ln b$, puis $\ln(1 - u) = -\sum\frac{u^n}n$.</p>
+<p><b>Étape 2 : Factoriser.</b> $\Delta = 25 - 24 = 1$, racines $\frac{5\pm1}2$, soit $2$ et $3$ : $x^2 - 5x + 6 = (x - 2)(x - 3) = (2 - x)(3 - x)$, deux facteurs $> 0$ pour $x \lt 2$.</p>
+<p><b>Étape 3 : On fait apparaître $1 - u$.</b> $2 - x = 2\big(1 - \frac x2\big)$ et $3 - x = 3\big(1 - \frac x3\big)$, donc $\ln(x^2 - 5x + 6) = \ln2 + \ln3 + \ln\big(1 - \frac x2\big) + \ln\big(1 - \frac x3\big)$.</p>
+<p><b>Étape 4 : Les DSE.</b> $\ln\big(1 - \frac x2\big) = -\sum_{n\geq1}\frac{x^n}{n2^n}$ ($|x| \lt 2$) et $\ln\big(1 - \frac x3\big) = -\sum_{n\geq1}\frac{x^n}{n3^n}$ ($|x| \lt 3$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ln(x^2 - 5x + 6) = \ln6 - \sum_{n\geq1}\frac1n\Big(\frac1{2^n} + \frac1{3^n}\Big)x^n}$, rayon $\min(2, 3) = 2$.</p>
+
+<p class="ml">Exemple 21 : $\sqrt{1 + x}$, les premiers coefficients</p>
+<p><b>Étape 1 : Rappel.</b> $(1 + x)^\alpha$ avec $a_n = \frac{\alpha(\alpha - 1)\cdots(\alpha - n + 1)}{n!}$, ici $\alpha = \frac12$.</p>
+<p><b>Étape 2 : $n = 1, 2$.</b> $a_1 = \frac12$. $a_2 = \frac{\frac12\times\big(\frac12 - 1\big)}{2!} = \frac{\frac12\times\big(-\frac12\big)}2 = \frac{-1/4}2 = -\frac18$.</p>
+<p><b>Étape 3 : $n = 3$.</b> $a_3 = \frac{\frac12\times\big(-\frac12\big)\times\big(-\frac32\big)}{3!} = \frac{3/8}6 = \frac3{48} = \frac1{16}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sqrt{1 + x} = 1 + \frac x2 - \frac{x^2}8 + \frac{x^3}{16} + \dots}$ sur $]-1, 1[$.</p>
+
+<p class="ml">Exemple 22 : $\arcsin x$</p>
+<p><b>Étape 1 : Rappel.</b> $\arcsin' x = \frac1{\sqrt{1 - x^2}} = (1 - x^2)^{-1/2}$ : on développe avec $\alpha = -\frac12$ et $u = -x^2$, puis on intègre.</p>
+<p><b>Étape 2 : Le coefficient.</b> $\frac{\big(-\frac12\big)\big(-\frac32\big)\cdots\big(-\frac{2n - 1}2\big)}{n!}(-x^2)^n$ : les $n$ signes $-$ du numérateur et le $(-1)^n$ se compensent, il reste $\frac{1\times3\times\cdots\times(2n - 1)}{2^nn!}x^{2n}$.</p>
+<p><b>Étape 3 : On simplifie.</b> $1\times3\cdots(2n - 1) = \frac{(2n)!}{2\times4\cdots(2n)} = \frac{(2n)!}{2^nn!}$, donc le coefficient vaut $\frac{(2n)!}{4^n(n!)^2} = \frac{\binom{2n}n}{4^n}$.</p>
+<p><b>Étape 4 : On intègre</b> de $0$ à $x$, avec $\arcsin0 = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin x = \sum_{n\geq0}\frac{\binom{2n}n}{4^n(2n + 1)}x^{2n+1}}$ sur $]-1, 1[$. Contrôle : $n = 1$ donne $\frac2{4\times3}x^3 = \frac{x^3}6$, comme le DL.</p>
+
+<h2 id="se-ed">11. Utiliser une équation différentielle</h2>
+<p class="ml">La méthode</p>
+<p><b>Pour trouver un DSE</b> : <b>1.</b> on trouve une EDL vérifiée par $f$ (en dérivant) ; <b>2.</b> on cherche $y = \sum a_nx^n$ de rayon $R > 0$ ; <b>3.</b> on <b>décale les indices</b> pour avoir partout $x^n$, et on identifie : relation de récurrence ; <b>4.</b> on calcule $a_n$ et le rayon ; <b>5.</b> par <b>unicité</b> (Cauchy-Lipschitz, même condition initiale), $f$ est cette somme. <b>Pour résoudre une EDL</b> à coefficients polynomiaux : mêmes étapes, puis on reconnaît la somme.</p>
+
+<p class="ml">Exemple 23 : $\frac1{(1 - x)^a}$ par une équation différentielle</p>
+<p><b>Étape 1 : Rappel.</b> EDL, récurrence, unicité de la solution du problème de Cauchy.</p>
+<p><b>Étape 2 : L'EDL.</b> $f(x) = (1 - x)^{-a}$ : $f'(x) = a(1 - x)^{-a-1}$, donc $(1 - x)f'(x) = af(x)$, avec $f(0) = 1$.</p>
+<p><b>Étape 3 : On remplace</b> $y = \sum a_nx^n$ : $(1 - x)\sum_{n\geq1}na_nx^{n-1} = \sum_{n\geq0}(n + 1)a_{n+1}x^n - \sum_{n\geq0}na_nx^n$. Coefficient de $x^n$ : $(n + 1)a_{n+1} - na_n = a\,a_n$, soit $a_{n+1} = \frac{a + n}{n + 1}a_n$.</p>
+<p><b>Étape 4 : Le terme général.</b> $a_0 = 1$, $a_1 = \frac a1$, $a_2 = \frac{a + 1}2a_1 = \frac{a(a + 1)}{2!}$, et par récurrence $a_n = \frac{a(a + 1)\cdots(a + n - 1)}{n!}$. Rayon : $\frac{a_{n+1}}{a_n} = \frac{a + n}{n + 1}\to1$ (si $a\notin-\mathbb N$), donc $R = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> La somme et $f$ résolvent le même problème de Cauchy sur $]-1, 1[$ : $\cG{\frac1{(1 - x)^a} = \sum_{n\geq0}\frac{a(a + 1)\cdots(a + n - 1)}{n!}x^n}$.</p>
+
+<h2 id="se-somme">12. Calculer la somme d'une série entière</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Coefficient <b>polynôme en $n$ sur $n!$</b> : on écrit le polynôme dans la base $1, n, n(n - 1), \dots$ et on utilise $\frac{n(n - 1)\cdots(n - k + 1)}{n!} = \frac1{(n - k)!}$. <b>2.</b> Coefficient <b>fraction rationnelle en $n$</b> : éléments simples, puis $\sum\frac{x^n}{n + k}$ par intégration. <b>3.</b> Puissances paires : on pose $X = x^2$ ou on dérive / intègre.</p>
+
+<p class="ml">Exemple 24 : $\sum\frac{(n + 1)(n - 2)}{n!}x^n$</p>
+<p><b>Étape 1 : Rappel.</b> On écrit le numérateur avec $n(n - 1)$ et des constantes.</p>
+<p><b>Étape 2 : Le numérateur.</b> $(n + 1)(n - 2) = n^2 - 2n + n - 2 = n^2 - n - 2 = n(n - 1) - 2$.</p>
+<p><b>Étape 3 : On coupe.</b> $\frac{n(n - 1)}{n!} = \frac1{(n - 2)!}$ pour $n\geq2$ (et $0$ pour $n = 0, 1$), donc $\sum_{n\geq2}\frac{x^n}{(n - 2)!} = x^2\sum_{m\geq0}\frac{x^m}{m!} = x^2e^x$. Et $\sum\frac{-2}{n!}x^n = -2e^x$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq0}\frac{(n + 1)(n - 2)}{n!}x^n = (x^2 - 2)e^x}$, $R = +\infty$. Contrôle $x = 0$ : terme $n = 0$, $\frac{1\times(-2)}1 = -2$, et $(0 - 2)e^0 = -2$.</p>
+
+<p class="ml">Exemple 25 : $\sum\frac{x^{2n}}{2n + 1}$</p>
+<p><b>Étape 1 : Rappel.</b> On multiplie par $x$ pour faire apparaître une primitive, puis on dérive.</p>
+<p><b>Étape 2 : Le rayon.</b> En $X = x^2$ : $\sum\frac{X^n}{2n + 1}$ a pour rayon $1$ ($\frac{2n + 1}{2n + 3}\to1$), donc convergence pour $x^2 \lt 1$ : $R = 1$.</p>
+<p><b>Étape 3 : On pose $g(x) = xS(x) = \sum\frac{x^{2n+1}}{2n + 1}$.</b> $g'(x) = \sum x^{2n} = \frac1{1 - x^2}$, et $\frac1{1 - x^2} = \frac12\Big(\frac1{1 - x} + \frac1{1 + x}\Big)$ (contrôle : $\frac{(1 + x) + (1 - x)}{2(1 - x^2)} = \frac2{2(1 - x^2)}$).</p>
+<p><b>Étape 4 : On intègre</b> avec $g(0) = 0$ : $g(x) = \frac12\big(-\ln(1 - x) + \ln(1 + x)\big) = \frac12\ln\frac{1 + x}{1 - x}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{S(x) = \frac1{2x}\ln\frac{1 + x}{1 - x}\ (0 \lt |x| \lt 1),\quad S(0) = 1}$.</p>
+
+<h2 id="se-enonce">13. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Rayon de convergence », $a_n\neq0$, factorielles, puissances</b><span>D'Alembert sur $\big|\frac{a_{n+1}}{a_n}\big|$.</span></div>
+<div><b>Série lacunaire ($z^{2n}$, $z^{n^2}$…)</b><span>D'Alembert sur $\sum|u_n(z)|$ à $z$ fixé.</span></div>
+<div><b>$\sin n$, $(-1)^n$, coefficients bornés</b><span>$R\geq1$ par bornitude, $R\leq1$ en testant $z = 1$.</span></div>
+<div><b>$a_n$ avec $\ln$, $\sin$ de petits termes</b><span>Équivalent, puis comparaison.</span></div>
+<div><b>Facteur $n^\alpha$, polynôme en $n$</b><span>Ne change pas le rayon.</span></div>
+<div><b>« Étudier en $x = \pm R$ »</b><span>Séries numériques : Riemann, séries alternées, grossière divergence.</span></div>
+<div><b>« Continuité sur $[-R, R]$ »</b><span>Convergence normale, ou uniforme par le critère des séries alternées.</span></div>
+<div><b>« Développer en série entière »</b><span>Usuels + éléments simples, $\ln$ d'un produit, dérivée, primitive.</span></div>
+<div><b>$\frac1{\sqrt{\cdots}}$, $\arcsin$, puissance non entière</b><span>$(1 + x)^\alpha$.</span></div>
+<div><b>« Montrer que $f$ est solution de… »</b><span>EDL : récurrence sur les $a_n$, puis unicité de Cauchy.</span></div>
+<div><b>« Calculer $f^{(n)}(0)$ »</b><span>$n!\,a_n$, lu dans le DSE.</span></div>
+<div><b>« Calculer la somme »</b><span>Base $n(n - 1)\cdots$, éléments simples, dérivation, intégration.</span></div>
+<div><b>« Prolonger en $\mathcal C^\infty$ »</b><span>Écrire la fonction comme somme d'une série entière de rayon $> 0$.</span></div>
+<div><b>« Calculer $\int_0^1$ d'une somme »</b><span>Intégration terme à terme justifiée (convergence uniforme sur $[0, 1]$, ou convergence dominée / $L^1$).</span></div>
+</div>
+
+<h2 id="se-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Appliquer d'Alembert aux coefficients d'une série lacunaire (ils sont nuls une fois sur deux).</p>
+<p><b>2.</b> Écrire $R = \lim\big|\frac{a_{n+1}}{a_n}\big|$ au lieu de son <b>inverse</b>.</p>
+<p><b>3.</b> Conclure sur la convergence en $|z| = R$ à partir du seul rayon.</p>
+<p><b>4.</b> Écrire $R = \min(R_a, R_b)$ pour une somme quand $R_a = R_b$ : seulement $\geq$ (exemple : $\sum x^n + \sum(-x^n)$, rayon $+\infty$).</p>
+<p><b>5.</b> Oublier la constante d'intégration (on la trouve en $x = 0$).</p>
+<p><b>6.</b> Décaler mal les indices en identifiant les coefficients : écrire chaque somme avec $x^n$ <b>avant</b> d'identifier.</p>
+<p><b>7.</b> Utiliser l'unicité des coefficients sans que l'égalité ait lieu sur un voisinage de $0$.</p>
+<p><b>8.</b> Oublier de justifier qu'une fonction trouvée par EDL <b>est</b> la fonction de départ (problème de Cauchy).</p>
+<p><b>9.</b> Croire qu'une fonction $\mathcal C^\infty$ est toujours DSE : $x\mapsto e^{-1/x^2}$ (prolongée par $0$) a une série de Taylor nulle.</p>
+</div>
+
+<h2 id="se-entrainement">S'entraîner</h2>
+<div data-mlab="rayonda"></div>
+<div data-mlab="dsefrac"></div>
+<div data-mlab="quizse"></div>
+
+<h2 id="se-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $f(x) = \sum_{n\geq1}\frac{x^n}{\sqrt n}$ au bord</p>
+<p>Rayon, convergence en $\pm1$, continuité en $-1$, limite en $1$.</p>
+<p><b>Étape 1 : Rappel.</b> D'Alembert, Riemann, séries alternées (reste majoré par le premier terme négligé).</p>
+<p><b>Étape 2 : Le rayon.</b> $\frac{1/\sqrt{n + 1}}{1/\sqrt n} = \sqrt{\frac n{n + 1}}\to1$ : $R = 1$.</p>
+<p><b>Étape 3 : En $\pm1$.</b> En $1$ : $\sum\frac1{n^{1/2}}$ diverge (Riemann, $\frac12\leq1$). En $-1$ : $\sum\frac{(-1)^n}{\sqrt n}$ converge (alternée, $\frac1{\sqrt n}$ décroît vers $0$).</p>
+<p><b>Étape 4 : Continuité sur $[-1, 0]$.</b> Pour $x\in[-1, 0]$, $\frac{x^n}{\sqrt n} = (-1)^n\frac{|x|^n}{\sqrt n}$ est alternée, $\frac{|x|^n}{\sqrt n}$ décroît vers $0$ : le reste vérifie $|R_n(x)|\leq\frac{|x|^{n+1}}{\sqrt{n + 1}}\leq\frac1{\sqrt{n + 1}}\to0$, uniformément. Les termes sont continus : $f$ est continue sur $[-1, 0]$, donc en $-1$.</p>
+<p><b>Étape 5 : En $1^-$.</b> Termes positifs pour $x\in[0, 1[$ : $f(x)\geq\sum_{n=1}^N\frac{x^n}{\sqrt n}\xrightarrow[x\to1]{}\sum_{n=1}^N\frac1{\sqrt n}$, qui est aussi grand qu'on veut quand $N$ grandit.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{R = 1,\ \text{CV en}\ -1,\ \text{DV en}\ 1,\ f\ \text{continue en}\ -1,\ f(x)\xrightarrow[x\to1^-]{}+\infty}$.</p>
+
+<p class="ml">Exercice 2 : DSE de $\ln(x^2 + x + 1)$</p>
+<p><b>Étape 1 : Rappel.</b> $x^3 - 1 = (x - 1)(x^2 + x + 1)$, donc $x^2 + x + 1 = \frac{1 - x^3}{1 - x}$ pour $x\neq1$.</p>
+<p><b>Étape 2 : On coupe le $\ln$.</b> Pour $|x| \lt 1$, $1 - x^3 > 0$ et $1 - x > 0$ : $\ln(x^2 + x + 1) = \ln(1 - x^3) - \ln(1 - x)$.</p>
+<p><b>Étape 3 : Les DSE.</b> $\ln(1 - x^3) = -\sum_{k\geq1}\frac{x^{3k}}k$ et $-\ln(1 - x) = \sum_{n\geq1}\frac{x^n}n$.</p>
+<p><b>Étape 4 : Coefficient de $x^n$.</b> Si $3\nmid n$ : seul le 2<sup>e</sup> morceau, $\frac1n$. Si $n = 3k$ : $-\frac1k + \frac1n = -\frac3n + \frac1n = -\frac2n$ (car $\frac1k = \frac3{3k} = \frac3n$).</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ln(x^2 + x + 1) = \sum_{n\geq1}\frac{a_n}nx^n,\ a_n = 1\ \text{si}\ 3\nmid n,\ a_n = -2\ \text{si}\ 3\mid n}$, $R = 1$. Contrôle : $x + \frac{x^2}2 - \frac{2x^3}3$ ; le DL de $\ln(1 + u)$ avec $u = x + x^2$ donne $x + x^2 - \frac{x^2}2 - \frac{2x^3}2 + \frac{x^3}3 = x + \frac{x^2}2 - \frac{2x^3}3$.</p>
+
+<p class="ml">Exercice 3 : $f(x) = \frac{\arcsin x}{\sqrt{1 - x^2}}$</p>
+<p><b>Étape 1 : Rappel.</b> Produit de deux fonctions DSE sur $]-1, 1[$ ; EDL, récurrence.</p>
+<p><b>Étape 2 : DSE.</b> $\arcsin$ et $(1 - x^2)^{-1/2}$ sont DSE de rayon $1$ (exemple 22), donc leur produit aussi, sur $]-1, 1[$.</p>
+<p><b>Étape 3 : L'EDL.</b> $f' = \frac1{\sqrt{1 - x^2}}\times\frac1{\sqrt{1 - x^2}} + \arcsin x\times\frac x{(1 - x^2)^{3/2}} = \frac1{1 - x^2} + \frac{x\,f(x)}{1 - x^2}$. On multiplie par $1 - x^2$ : $(1 - x^2)f' - xf = 1$.</p>
+<p><b>Étape 4 : La récurrence.</b> $f$ impaire : $a_{2p} = 0$. Coefficient de $x^n$ : $(n + 1)a_{n+1} - (n - 1)a_{n-1} - a_{n-1} = (n + 1)a_{n+1} - na_{n-1}$, qui vaut $1$ pour $n = 0$ (donc $a_1 = 1$) et $0$ sinon : $a_{n+1} = \frac n{n + 1}a_{n-1}$.</p>
+<p><b>Étape 5 : Le terme général.</b> $a_3 = \frac23$, $a_5 = \frac45\times\frac23$, donc $a_{2p+1} = \frac{2\times4\cdots(2p)}{3\times5\cdots(2p + 1)} = \frac{(2^pp!)^2}{(2p + 1)!}$ (on multiplie en haut et en bas par $2\times4\cdots(2p) = 2^pp!$).</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\frac{\arcsin x}{\sqrt{1 - x^2}} = \sum_{p\geq0}\frac{4^p(p!)^2}{(2p + 1)!}x^{2p+1}}$ sur $]-1, 1[$. Contrôle $p = 1$ : $\frac{4\times1}{6} = \frac23$.</p>
+
+<p class="ml">Exercice 4 : $x^2y'' + x(1 + x)y' - y = 0$</p>
+<p>Trouver une solution non nulle développable en série entière.</p>
+<p><b>Étape 1 : Rappel.</b> $y = \sum a_nx^n$, tout écrire avec $x^n$, identifier.</p>
+<p><b>Étape 2 : Les morceaux.</b> $x^2y'' = \sum n(n - 1)a_nx^n$ ; $xy' = \sum na_nx^n$ ; $x^2y' = \sum na_nx^{n+1} = \sum(n - 1)a_{n-1}x^n$.</p>
+<p><b>Étape 3 : Coefficient de $x^n$.</b> $\big(n(n - 1) + n - 1\big)a_n + (n - 1)a_{n-1} = (n^2 - 1)a_n + (n - 1)a_{n-1} = (n - 1)\big((n + 1)a_n + a_{n-1}\big) = 0$.</p>
+<p><b>Étape 4 : On résout.</b> $n = 0$ : $-a_0 = 0$. $n = 1$ : $0 = 0$, $a_1$ libre, on prend $a_1 = 1$. $n\geq2$ : $a_n = -\frac{a_{n-1}}{n + 1}$, d'où $a_2 = -\frac13$, $a_3 = \frac1{12}$, et $a_n = \frac{2(-1)^{n-1}}{(n + 1)!}$ (contrôle : $n = 2$ donne $-\frac26 = -\frac13$). Rayon $+\infty$ (d'Alembert : $\frac1{n + 2}\to0$).</p>
+<p><b>Étape 5 : La somme.</b> $\sum_{n\geq1}\frac{(-1)^{n+1}x^n}{(n + 1)!} = \frac1x\sum_{n\geq1}\frac{(-x)^{n+1}}{(n + 1)!} = \frac1x\big(e^{-x} - 1 + x\big)$ (on retire les termes $m = 0$ et $m = 1$ de $e^{-x} = \sum\frac{(-x)^m}{m!}$).</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{y(x) = \frac{2\,(e^{-x} - 1 + x)}x}$ est solution sur $]0, +\infty[$.</p>
+
+<p class="ml">Exercice 5 : $\int_0^1\frac{\ln(1 + x)}x\,dx = \sum_{n\geq1}\frac{(-1)^{n-1}}{n^2}$</p>
+<p><b>Étape 1 : Rappel.</b> Intégration terme à terme d'une série qui converge uniformément sur le segment.</p>
+<p><b>Étape 2 : Le développement.</b> Pour $x\in]0, 1]$ : $\frac{\ln(1 + x)}x = \sum_{n\geq1}(-1)^{n-1}\frac{x^{n-1}}n$ (vrai aussi en $x = 1$ : série alternée de somme $\ln2$), et la fonction se prolonge par $1$ en $0$.</p>
+<p><b>Étape 3 : Convergence uniforme sur $[0, 1]$.</b> Série alternée, $\frac{x^{n-1}}n$ décroît vers $0$ : $|R_n(x)|\leq\frac{x^n}{n + 1}\leq\frac1{n + 1}\to0$.</p>
+<p><b>Étape 4 : On intègre.</b> $\int_0^1\frac{x^{n-1}}n\,dx = \frac1n\times\Big[\frac{x^n}n\Big]_0^1 = \frac1{n^2}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^1\frac{\ln(1 + x)}x\,dx = \sum_{n\geq1}\frac{(-1)^{n-1}}{n^2}}$ $\big(= \frac{\pi^2}{12}\big)$.</p>
+
+<p class="ml">Exercice 6 : $y' - 2xy = 1$, $y(0) = 0$</p>
+<p><b>Étape 1 : Rappel.</b> On cherche $y = \sum a_nx^n$, récurrence, puis unicité de Cauchy.</p>
+<p><b>Étape 2 : Résolution directe.</b> Facteur intégrant $e^{-x^2}$ : $\big(e^{-x^2}y\big)' = e^{-x^2}$, donc $f(x) = e^{x^2}\int_0^xe^{-t^2}\,dt$.</p>
+<p><b>Étape 3 : La récurrence.</b> $\sum_{n\geq0}(n + 1)a_{n+1}x^n - \sum_{n\geq1}2a_{n-1}x^n = 1$ : $n = 0$ donne $a_1 = 1$ ; $n\geq1$ donne $a_{n+1} = \frac2{n + 1}a_{n-1}$. Et $a_0 = f(0) = 0$, donc tous les $a_{2p} = 0$.</p>
+<p><b>Étape 4 : Le terme général.</b> $a_{2p+1} = \frac2{2p + 1}a_{2p-1} = \frac{2^p}{3\times5\cdots(2p + 1)} = \frac{2^p\times2^pp!}{(2p + 1)!} = \frac{4^pp!}{(2p + 1)!}$. Rayon $+\infty$ ($\frac{a_{2p+3}}{a_{2p+1}} = \frac2{2p + 3}\to0$).</p>
+<p><b>Étape 5 : Conclusion.</b> La somme résout le même problème de Cauchy : $\cG{e^{x^2}\int_0^xe^{-t^2}\,dt = \sum_{p\geq0}\frac{4^pp!}{(2p + 1)!}x^{2p+1}}$ sur $\mathbb R$. Contrôle $p = 1$ : $\frac{4}{6} = \frac23$, et $a_3 = \frac23a_1$.</p>
+
+<h2 id="se-arbre">L'arbre des séries entières</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une série entière</span><ul>
+<li><div class="hr"><em>trouver le rayon</em><span class="hq">Quels coefficients ?</span><ul>
+<li><div class="hr"><em>non nuls, factorielles, puissances</em><a class="hl ok" href="#se-dal">d'Alembert, $R = \frac1\ell$</a></div></li>
+<li><div class="hr"><em>lacunaire</em><a class="hl ok" href="#se-dal">d'Alembert sur $|u_n(z)|$</a></div></li>
+<li><div class="hr"><em>un équivalent simple</em><a class="hl" href="#se-comp">comparaison</a></div></li>
+<li><div class="hr"><em>bornés, oscillants</em><a class="hl" href="#se-rayon">encadrer avec les réflexes</a></div></li>
+<li><div class="hr"><em>somme, produit</em><a class="hl" href="#se-op">$\geq\min(R_a, R_b)$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>étudier au bord</em><a class="hl" href="#se-cont">série numérique : Riemann, alternée, normale</a></div></li>
+<li><div class="hr"><em>calculer la somme</em><span class="hq">Quel coefficient ?</span><ul>
+<li><div class="hr"><em>$n\,a_n$, $\frac{a_n}{n + 1}$</em><a class="hl ok" href="#se-der">dériver / intégrer un usuel</a></div></li>
+<li><div class="hr"><em>polynôme sur $n!$</em><a class="hl ok" href="#se-somme">base $n(n - 1)\cdots$ et $e^x$</a></div></li>
+<li><div class="hr"><em>fraction de $n$</em><a class="hl" href="#se-somme">éléments simples, intégrer</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>développer une fonction</em><span class="hq">Quelle forme ?</span><ul>
+<li><div class="hr"><em>fraction rationnelle</em><a class="hl ok" href="#se-dse">éléments simples, $\frac1{1 - u}$</a></div></li>
+<li><div class="hr"><em>$\ln$ d'un polynôme</em><a class="hl ok" href="#se-dse">factoriser, $\ln(1 - u)$</a></div></li>
+<li><div class="hr"><em>puissance, racine, $\arcsin$</em><a class="hl" href="#se-dse">$(1 + x)^\alpha$</a></div></li>
+<li><div class="hr"><em>rien d'usuel</em><a class="hl" href="#se-ed">EDL et récurrence</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$f^{(n)}(0)$, parité</em><a class="hl end" href="#se-coef">$a_n = \frac{f^{(n)}(0)}{n!}$, unicité</a></div></li>
+</ul></div></div>
+`,
 "Dénombrement": R`
 <nav class="msum"><a href="#d-not">Notations</a><a href="#d-card">Cardinal</a><a href="#d-union">Réunion</a><a href="#d-prod">Produit</a><a href="#d-modele">Le bon modèle</a><a href="#d-list">p-listes</a><a href="#d-arr">Arrangements</a><a href="#d-perm">Permutations</a><a href="#d-comb">Combinaisons</a><a href="#d-parties">Parties</a><a href="#d-double">Double comptage</a><a href="#d-tiroirs">Tiroirs</a><a href="#d-denom">Dénombrable</a><a href="#d-enonce">L'énoncé</a><a href="#d-erreurs">Erreurs</a><a href="#d-entrainement">S'entraîner</a><a href="#d-exos">Exercices</a><a href="#d-arbre">L'arbre</a></nav>
 
