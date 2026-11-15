@@ -6005,15 +6005,17 @@ $$\|x + y\|^2 = \|x\|^2 + 2\langle x, y\rangle + \|y\|^2,\qquad\langle x, y\rang
 
 <p class="ml">Exemple 3 : $\big(\sum x_k\big)^2\leq n\sum x_k^2$</p>
 <p><b>Étape 1 : Rappel.</b> $\langle x, y\rangle^2\leq\|x\|^2\|y\|^2$ dans $\mathbb R^n$.</p>
-<p><b>Étape 2 : Le choix.</b> $x = (x_1, \dots, x_n)$ et $y = (1, \dots, 1)$ : $\cO{\langle x, y\rangle = \sum x_k}$, $\|y\|^2 = n$.</p>
-<p><b>Étape 3 : On applique.</b> $\big(\sum_{k=1}^nx_k\big)^2\leq n\sum_{k=1}^nx_k^2$.</p>
+<p><b>Étape 2 : Le choix.</b> $x = (x_1, \dots, x_n)$ et $y = (1, \dots, 1)$. On calcule les deux morceaux de Cauchy-Schwarz :</p>
+$$\cO{\langle x, y\rangle} = x_1\times1 + x_2\times1 + \dots + x_n\times1 = \cO{\sum_{k=1}^nx_k},\qquad\|y\|^2 = \underbrace{1^2 + 1^2 + \dots + 1^2}_{n\ \text{termes}} = n,\qquad\|x\|^2 = \sum_{k=1}^nx_k^2.$$
+<p><b>Étape 3 : On applique.</b> On remplace dans $\langle x, y\rangle^2\leq\|x\|^2\|y\|^2$ :</p>
+$$\Big(\sum_{k=1}^nx_k\Big)^2\leq\Big(\sum_{k=1}^nx_k^2\Big)\times n.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\big(\sum x_k\big)^2\leq n\sum x_k^2}$, avec égalité si et seulement si tous les $x_k$ sont égaux.</p>
 
 <p class="ml">Exemple 4 : $\int f\cdot\int\frac1f\geq(b - a)^2$</p>
 <p>$f$ continue et $> 0$ sur $[a, b]$.</p>
 <p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathcal C([a, b])$ : $\big(\int gh\big)^2\leq\int g^2\int h^2$.</p>
-<p><b>Étape 2 : Le choix.</b> $g = \sqrt f$ et $h = \frac1{\sqrt f}$ (continues car $f > 0$) : $gh = 1$, $g^2 = f$, $h^2 = \frac1f$.</p>
-<p><b>Étape 3 : On applique.</b> $\big(\int_a^b1\big)^2\leq\int_a^bf\cdot\int_a^b\frac1f$.</p>
+<p><b>Étape 2 : Le choix.</b> $g = \sqrt f$ et $h = \frac1{\sqrt f}$ (continues car $f > 0$). On calcule ce qui apparaît dans Cauchy-Schwarz : $gh = \sqrt f\times\frac1{\sqrt f} = 1$, $g^2 = (\sqrt f)^2 = f$, $h^2 = \big(\frac1{\sqrt f}\big)^2 = \frac1f$.</p>
+<p><b>Étape 3 : On applique.</b> On remplace : $\big(\int_a^bgh\big)^2 = \big(\int_a^b1\,dt\big)^2 = (b - a)^2$, $\int g^2 = \int_a^bf$, $\int h^2 = \int_a^b\frac1f$, donc $(b - a)^2\leq\int_a^bf\cdot\int_a^b\frac1f$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(b - a)^2\leq\int_a^bf\int_a^b\frac1f}$, égalité si $\sqrt f$ et $\frac1{\sqrt f}$ sont colinéaires, c'est-à-dire $f$ constante.</p>
 
 <h2 id="h-orth">4. Orthogonalité, Pythagore</h2>
@@ -6025,7 +6027,7 @@ $$\text{Une famille orthogonale de vecteurs non nuls est libre}.\qquad F\subset 
 <p><b>Étape 1 : Rappel.</b> $\cos a\cos b = \frac12\big(\cos(a + b) + \cos(a - b)\big)$, et $\int_0^{2\pi}\cos(mt)\,dt = 0$ pour $m\neq0$ entier.</p>
 <p><b>Étape 2 : On linéarise</b> pour $p\neq q$ :</p>
 $$\langle c_p, c_q\rangle = \frac12\int_0^{2\pi}\cos((p + q)t)\,dt + \frac12\int_0^{2\pi}\cos((p - q)t)\,dt.$$
-<p><b>Étape 3 : Les intégrales.</b> $p + q\neq0$ et $p - q\neq0$ : chaque intégrale vaut $\Big[\frac{\sin(mt)}m\Big]_0^{2\pi} = 0$.</p>
+<p><b>Étape 3 : Les intégrales.</b> Pour un entier $m\neq0$, une primitive de $\cos(mt)$ est $\frac{\sin(mt)}m$, donc $\int_0^{2\pi}\cos(mt)\,dt = \frac{\sin(2\pi m) - \sin0}m = \frac{0 - 0}m = 0$ (car $\sin(2\pi m) = 0$ pour $m$ entier). Ici $m = p + q\neq0$ et $m = p - q\neq0$ : les deux intégrales sont nulles.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\langle c_p, c_q\rangle = 0}$ pour $p\neq q$ : la famille est orthogonale, donc libre (base des séries de Fourier).</p>
 
 <h2 id="h-bon">5. Bases orthonormées</h2>
@@ -6037,9 +6039,12 @@ $$\langle c_p, c_q\rangle = \frac12\int_0^{2\pi}\cos((p + q)t)\,dt + \frac12\int
 <p class="ml">Exemple 6 : coordonnées dans une BON</p>
 <p>Dans $\mathbb R^2$, $e_1 = \frac1{\sqrt2}(1, 1)$, $e_2 = \frac1{\sqrt2}(1, -1)$. Coordonnées de $x = (3, 1)$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Dans une BON, la coordonnée sur $e_i$ est $\langle x, e_i\rangle$.</p>
-<p><b>Étape 2 : C'est une BON.</b> $\|e_1\|^2 = \frac12(1 + 1) = 1$, $\|e_2\|^2 = 1$, $\langle e_1, e_2\rangle = \frac12(1 - 1) = 0$.</p>
-<p><b>Étape 3 : Les produits scalaires.</b> $\cO{\langle x, e_1\rangle = \frac{3 + 1}{\sqrt2} = 2\sqrt2}$, $\cO{\langle x, e_2\rangle = \frac{3 - 1}{\sqrt2} = \sqrt2}$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{x = 2\sqrt2\,e_1 + \sqrt2\,e_2}$. Contrôle : $\|x\|^2 = 8 + 2 = 10 = 9 + 1$.</p>
+<p><b>Étape 2 : C'est une BON.</b> On calcule les normes et le produit scalaire, coordonnée par coordonnée :</p>
+$$\|e_1\|^2 = \Big(\frac1{\sqrt2}\Big)^2 + \Big(\frac1{\sqrt2}\Big)^2 = \frac12 + \frac12 = 1,\quad\|e_2\|^2 = \Big(\frac1{\sqrt2}\Big)^2 + \Big(-\frac1{\sqrt2}\Big)^2 = 1,\quad\langle e_1, e_2\rangle = \frac1{\sqrt2}\cdot\frac1{\sqrt2} + \frac1{\sqrt2}\cdot\Big(-\frac1{\sqrt2}\Big) = \frac12 - \frac12 = 0.$$
+<p><b>Étape 3 : Les produits scalaires.</b> $x = (3, 1)$ :</p>
+$$\cO{\langle x, e_1\rangle} = 3\times\frac1{\sqrt2} + 1\times\frac1{\sqrt2} = \frac4{\sqrt2} = \frac{4\sqrt2}2 = \cO{2\sqrt2},\qquad\cO{\langle x, e_2\rangle} = 3\times\frac1{\sqrt2} + 1\times\Big(-\frac1{\sqrt2}\Big) = \frac2{\sqrt2} = \cO{\sqrt2}.$$
+<p>(Pour simplifier $\frac4{\sqrt2}$, on multiplie en haut et en bas par $\sqrt2$ : $\frac{4\sqrt2}{\sqrt2\sqrt2} = \frac{4\sqrt2}2$.)</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{x = 2\sqrt2\,e_1 + \sqrt2\,e_2}$. Contrôle : en BON, $\|x\|^2 = (2\sqrt2)^2 + (\sqrt2)^2 = 8 + 2 = 10$, et directement $\|x\|^2 = 3^2 + 1^2 = 9 + 1 = 10$.</p>
 
 <h2 id="h-gs">6. Le procédé de Gram-Schmidt</h2>
 <div class="sbox">$$e_1 = \frac{v_1}{\|v_1\|},\qquad w_k = v_k - \sum_{j=1}^{k-1}\cO{\langle v_k, e_j\rangle}\,e_j,\qquad e_k = \frac{w_k}{\|w_k\|}.$$
@@ -6049,18 +6054,20 @@ $$\operatorname{Vect}(e_1, \dots, e_k) = \operatorname{Vect}(v_1, \dots, v_k)\ \
 <p class="ml">Exemple 7 : dans $\mathbb R^3$</p>
 <p>Orthonormaliser $v_1 = (1, 1, 0)$, $v_2 = (1, 0, 1)$, $v_3 = (0, 1, 1)$.</p>
 <p><b>Étape 1 : Rappel.</b> $e_1 = \frac{v_1}{\|v_1\|}$, $w_k = v_k - \sum_{j \lt k}\langle v_k, e_j\rangle e_j$, $e_k = \frac{w_k}{\|w_k\|}$.</p>
-<p><b>Étape 2 : $e_1$.</b> $\|v_1\| = \sqrt2$, $\cV{e_1 = \frac1{\sqrt2}(1, 1, 0)}$.</p>
-<p><b>Étape 3 : $e_2$.</b> $\cO{\langle v_2, e_1\rangle = \frac1{\sqrt2}}$, donc $w_2 = (1, 0, 1) - \frac12(1, 1, 0) = \big(\frac12, -\frac12, 1\big)$, $\|w_2\|^2 = \frac14 + \frac14 + 1 = \frac32$.</p>
+<p><b>Étape 2 : $e_1$.</b> $\|v_1\| = \sqrt{1^2 + 1^2 + 0^2} = \sqrt2$, donc $\cV{e_1 = \frac{v_1}{\|v_1\|} = \frac1{\sqrt2}(1, 1, 0)}$.</p>
+<p><b>Étape 3 : $e_2$.</b> Le produit scalaire : $\cO{\langle v_2, e_1\rangle} = \frac1{\sqrt2}(1\times1 + 0\times1 + 1\times0) = \cO{\frac1{\sqrt2}}$. Le vecteur à retirer : $\langle v_2, e_1\rangle e_1 = \frac1{\sqrt2}\times\frac1{\sqrt2}(1, 1, 0) = \frac12(1, 1, 0) = \big(\frac12, \frac12, 0\big)$. On soustrait coordonnée par coordonnée :</p>
+$$w_2 = \Big(1 - \frac12,\ 0 - \frac12,\ 1 - 0\Big) = \Big(\frac12, -\frac12, 1\Big),\qquad\|w_2\|^2 = \frac14 + \frac14 + 1 = \frac32.$$
+<p>On normalise : $\frac1{\|w_2\|} = \sqrt{\frac23}$, et $\big(\frac12, -\frac12, 1\big) = \frac12(1, -1, 2)$, donc $e_2 = \frac12\sqrt{\frac23}(1, -1, 2)$ avec $\frac12\sqrt{\frac23} = \frac{\sqrt2}{2\sqrt3} = \frac1{\sqrt2\sqrt3} = \frac1{\sqrt6}$ :</p>
 $$\cV{e_2 = \frac{w_2}{\sqrt{3/2}} = \frac1{\sqrt6}(1, -1, 2)}.$$
-<p><b>Étape 4 : $e_3$.</b> $\cO{\langle v_3, e_1\rangle = \frac1{\sqrt2}}$, $\cO{\langle v_3, e_2\rangle = \frac{0 - 1 + 2}{\sqrt6} = \frac1{\sqrt6}}$ :</p>
-$$w_3 = (0, 1, 1) - \frac12(1, 1, 0) - \frac16(1, -1, 2) = \Big(-\frac23, \frac23, \frac23\Big),\qquad\cV{e_3 = \frac1{\sqrt3}(-1, 1, 1)}.$$
-<p><b>Étape 5 : Conclusion.</b> $\cG{(e_1, e_2, e_3)\ \text{est une BON}}$. Contrôle : $\langle e_1, e_3\rangle\propto-1 + 1 = 0$, $\langle e_2, e_3\rangle\propto-1 - 1 + 2 = 0$.</p>
+<p><b>Étape 4 : $e_3$.</b> Les produits scalaires : $\cO{\langle v_3, e_1\rangle} = \frac1{\sqrt2}(0\times1 + 1\times1 + 1\times0) = \cO{\frac1{\sqrt2}}$ et $\cO{\langle v_3, e_2\rangle} = \frac1{\sqrt6}(0\times1 + 1\times(-1) + 1\times2) = \cO{\frac1{\sqrt6}}$. Les vecteurs à retirer : $\frac1{\sqrt2}e_1 = \frac12(1, 1, 0)$ et $\frac1{\sqrt6}e_2 = \frac16(1, -1, 2)$. Coordonnée par coordonnée : $x$ : $0 - \frac12 - \frac16 = -\frac23$ ; $y$ : $1 - \frac12 + \frac16 = \frac23$ ; $z$ : $1 - 0 - \frac26 = \frac23$.</p>
+$$w_3 = \Big(-\frac23, \frac23, \frac23\Big) = \frac23(-1, 1, 1),\quad\|w_3\| = \frac23\sqrt{1 + 1 + 1} = \frac23\sqrt3,\quad\cV{e_3 = \frac{w_3}{\|w_3\|} = \frac{\frac23(-1, 1, 1)}{\frac23\sqrt3} = \frac1{\sqrt3}(-1, 1, 1)}.$$
+<p><b>Étape 5 : Conclusion.</b> $\cG{(e_1, e_2, e_3)\ \text{est une BON}}$. Contrôle : $\langle(1, 1, 0), (-1, 1, 1)\rangle = -1 + 1 + 0 = 0$ et $\langle(1, -1, 2), (-1, 1, 1)\rangle = -1 - 1 + 2 = 0$.</p>
 
 <p class="ml">Exemple 8 : sur les polynômes (Legendre)</p>
 <p>Orthonormaliser $(1, X, X^2)$ pour $\langle P, Q\rangle = \int_{-1}^1PQ$.</p>
 <p><b>Étape 1 : Rappel.</b> Gram-Schmidt, et $\int_{-1}^1t^k\,dt = \frac2{k + 1}$ si $k$ est pair, $0$ si $k$ est impair.</p>
-<p><b>Étape 2 : $e_0$.</b> $\|1\|^2 = 2$, $\cV{e_0 = \frac1{\sqrt2}}$.</p>
-<p><b>Étape 3 : $e_1$.</b> $\langle X, 1\rangle = \int t = 0$ : $X$ est déjà orthogonal. $\|X\|^2 = \frac23$, $\cV{e_1 = \sqrt{\frac32}\,X}$.</p>
+<p><b>Étape 2 : $e_0$.</b> $\|1\|^2 = \int_{-1}^11\,dt = 1 - (-1) = 2$, donc $\cV{e_0 = \frac1{\sqrt2}}$.</p>
+<p><b>Étape 3 : $e_1$.</b> $\langle X, 1\rangle = \int_{-1}^1t\,dt = \Big[\frac{t^2}2\Big]_{-1}^1 = \frac12 - \frac12 = 0$ : $X$ est déjà orthogonal à $1$. $\|X\|^2 = \int_{-1}^1t^2\,dt = \Big[\frac{t^3}3\Big]_{-1}^1 = \frac13 - \big(-\frac13\big) = \frac23$, donc $\cV{e_1 = \frac X{\sqrt{2/3}} = \sqrt{\frac32}\,X}$.</p>
 <p><b>Étape 4 : $e_2$.</b> $\langle X^2, X\rangle = \int_{-1}^1t^3\,dt = 0$ et $\langle X^2, 1\rangle = \int_{-1}^1t^2\,dt = \frac23$. On retire la projection sur $1$ : coefficient $\frac{\langle X^2, 1\rangle}{\|1\|^2} = \frac{2/3}2 = \frac13$, donc $w_2 = X^2 - \frac13$. On développe $(t^2 - \frac13)^2 = t^4 - \frac23t^2 + \frac19$ et on intègre terme à terme :</p>
 $$\|w_2\|^2 = \underbrace{\int_{-1}^1t^4}_{\frac25} - \frac23\underbrace{\int_{-1}^1t^2}_{\frac23} + \frac19\underbrace{\int_{-1}^11}_{2} = \frac25 - \frac49 + \frac29 = \frac25 - \frac29 = \frac{18 - 10}{45} = \frac8{45}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{e_2 = \sqrt{\frac{45}8}\Big(X^2 - \frac13\Big)}$ : ce sont les polynômes de Legendre normalisés.</p>
@@ -6075,10 +6082,14 @@ $$\text{Droite}\ D = \operatorname{Vect}(u):\ p_D(x) = \frac{\langle x, u\rangle
 <p class="ml">Exemple 9 : projeter sur un plan de $\mathbb R^3$</p>
 <p>Projeté de $x = (1, 2, 3)$ sur $P:\ x + y + z = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> $H = n^\perp$ : $p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$.</p>
-<p><b>Étape 2 : Le vecteur normal.</b> $P = n^\perp$ avec $n = (1, 1, 1)$, $\|n\|^2 = 3$.</p>
-<p><b>Étape 3 : Le produit scalaire.</b> $\cO{\langle x, n\rangle = 1 + 2 + 3 = 6}$, donc $\frac{\langle x, n\rangle}{\|n\|^2} = 2$.</p>
-<p><b>Étape 4 : Le projeté.</b> $p_P(x) = (1, 2, 3) - 2(1, 1, 1) = (-1, 0, 1)$. Contrôle : $-1 + 0 + 1 = 0$.</p>
-<p><b>Étape 5 : Conclusion.</b> $\cG{p_P(x) = (-1, 0, 1)}$, et $d(x, P) = \frac{|\langle x, n\rangle|}{\|n\|} = \frac6{\sqrt3} = 2\sqrt3$.</p>
+<p><b>Étape 2 : Le vecteur normal.</b> On lit les coefficients de l'équation $\mathbf1\cdot x + \mathbf1\cdot y + \mathbf1\cdot z = 0$ : avec $n = (1, 1, 1)$, on a $\langle(x, y, z), n\rangle = x\times1 + y\times1 + z\times1 = x + y + z$. L'équation de $P$ dit donc exactement $\langle(x, y, z), n\rangle = 0$, c'est-à-dire $P = n^\perp$. Et :</p>
+$$\|n\|^2 = 1^2 + 1^2 + 1^2 = 1 + 1 + 1 = 3.$$
+<p><b>Étape 3 : Le produit scalaire</b>, coordonnée par coordonnée, avec $x = (1, 2, 3)$ et $n = (1, 1, 1)$ :</p>
+$$\cO{\langle x, n\rangle} = 1\times1 + 2\times1 + 3\times1 = 1 + 2 + 3 = \cO6,\qquad\text{donc}\qquad\frac{\langle x, n\rangle}{\|n\|^2} = \frac63 = 2.$$
+<p><b>Étape 4 : Le projeté.</b> $2n = 2(1, 1, 1) = (2, 2, 2)$, puis on soustrait coordonnée par coordonnée :</p>
+$$p_P(x) = (1, 2, 3) - (2, 2, 2) = (1 - 2,\ 2 - 2,\ 3 - 2) = (-1, 0, 1).$$
+<p>Contrôle : $(-1, 0, 1)$ est bien dans $P$, car $-1 + 0 + 1 = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{p_P(x) = (-1, 0, 1)}$. La distance : $\|n\| = \sqrt3$ et $d(x, P) = \frac{|\langle x, n\rangle|}{\|n\|} = \frac6{\sqrt3} = \frac{6\sqrt3}{\sqrt3\sqrt3} = \frac{6\sqrt3}3 = 2\sqrt3$.</p>
 
 <h2 id="h-dist">8. Distance à un sous-espace : les problèmes de minimisation</h2>
 <div class="sbox">$$d(x, F) = \|x - p_F(x)\|,\qquad d(x, F)^2 = \|x\|^2 - \|p_F(x)\|^2,\qquad p_F(x)\ \text{est l'unique point de}\ F\ \text{où le minimum est atteint}.$$</div>
@@ -6087,11 +6098,15 @@ $$\text{Droite}\ D = \operatorname{Vect}(u):\ p_D(x) = \frac{\langle x, u\rangle
 
 <p class="ml">Exemple 10 : $\inf_{a, b}\int_0^1(t^2 - at - b)^2\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> C'est $d(x, F)^2$ avec $x = t^2$, $F = \mathbb R_1[t] = \operatorname{Vect}(1, t)$, $\langle f, g\rangle = \int_0^1fg$. Le projeté $at + b$ vérifie $x - p\perp1$ et $x - p\perp t$.</p>
-<p><b>Étape 2 : Les intégrales utiles.</b> $\int_0^1t^k\,dt = \frac1{k + 1}$.</p>
-<p><b>Étape 3 : Les deux conditions.</b></p>
+<p><b>Étape 2 : Les intégrales utiles.</b> $\int_0^1t^k\,dt = \Big[\frac{t^{k+1}}{k + 1}\Big]_0^1 = \frac1{k + 1}$, donc $\int_0^11 = 1$, $\int_0^1t = \frac12$, $\int_0^1t^2 = \frac13$, $\int_0^1t^3 = \frac14$, $\int_0^1t^4 = \frac15$.</p>
+<p><b>Étape 3 : Les deux conditions.</b> Par linéarité, $\langle t^2 - at - b, 1\rangle = \langle t^2, 1\rangle - a\langle t, 1\rangle - b\langle1, 1\rangle = \int t^2 - a\int t - b\int1$, et de même avec $t$ (on intègre $t^3$, $t^2$, $t$) :</p>
 $$\langle t^2 - at - b, 1\rangle = \frac13 - \frac a2 - b = 0,\qquad\langle t^2 - at - b, t\rangle = \frac14 - \frac a3 - \frac b2 = 0.$$
-<p><b>Étape 4 : On résout.</b> La 1<sup>re</sup> donne $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = -\frac16$.</p>
-<p><b>Étape 5 : La distance.</b> $d^2 = \langle t^2 - t + \frac16, t^2\rangle = \frac15 - \frac14 + \frac1{18} = \frac{36 - 45 + 10}{180} = \frac1{180}$.</p>
+<p><b>Étape 4 : On résout.</b> La 1<sup>re</sup> équation donne $b = \frac13 - \frac a2$. On remplace dans la 2<sup>e</sup> : $\frac b2 = \frac16 - \frac a4$, donc</p>
+$$\frac14 - \frac a3 - \Big(\frac16 - \frac a4\Big) = \Big(\frac14 - \frac16\Big) + \Big(-\frac a3 + \frac a4\Big) = \frac{3 - 2}{12} - \frac{4a - 3a}{12} = \frac1{12} - \frac a{12} = 0,$$
+<p>donc $a = 1$, puis $b = \frac13 - \frac12 = \frac{2 - 3}6 = -\frac16$.</p>
+<p><b>Étape 5 : La distance.</b> Le projeté est $p = t - \frac16$, et $x - p = t^2 - t + \frac16$. Comme $x - p\perp p$, $d^2 = \langle x - p, x - p\rangle = \langle x - p, x\rangle$ :</p>
+$$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 + \frac16\int_0^1t^2 = \frac15 - \frac14 + \frac16\times\frac13 = \frac15 - \frac14 + \frac1{18}.$$
+<p>Dénominateur commun $180$ : $\frac{36}{180} - \frac{45}{180} + \frac{10}{180} = \frac{36 - 45 + 10}{180} = \frac1{180}$.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{\inf = \frac1{180}}$, atteint pour $a = 1$, $b = -\frac16$.</p>
 
 <h2 id="h-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -6178,9 +6193,9 @@ $$\langle t^2 - at - b, 1\rangle = \frac13 - \frac a2 - b = 0,\qquad\langle t^2 
 <p class="ml">Exemple 1 : distance à un hyperplan de $\mathbb R^4$</p>
 <p>Distance de $x = (1, 2, 0, 1)$ à $H:\ x_1 + x_2 - x_3 + x_4 = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> $d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|}$, $n$ lu sur l'équation.</p>
-<p><b>Étape 2 : Le vecteur normal.</b> $\cR{n = (1, 1, -1, 1)}$, $\|n\| = \sqrt4 = 2$.</p>
-<p><b>Étape 3 : Le produit scalaire.</b> $\langle x, n\rangle = 1 + 2 - 0 + 1 = 4$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{d(x, H) = \frac42 = 2}$, et $p_H(x) = x - \frac44n = (0, 1, 1, 0)$.</p>
+<p><b>Étape 2 : Le vecteur normal.</b> On lit les coefficients de $1\cdot x_1 + 1\cdot x_2 + (-1)\cdot x_3 + 1\cdot x_4 = 0$ : $\cR{n = (1, 1, -1, 1)}$. Sa norme : $\|n\| = \sqrt{1^2 + 1^2 + (-1)^2 + 1^2} = \sqrt{1 + 1 + 1 + 1} = \sqrt4 = 2$.</p>
+<p><b>Étape 3 : Le produit scalaire</b>, avec $x = (1, 2, 0, 1)$ : $\langle x, n\rangle = 1\times1 + 2\times1 + 0\times(-1) + 1\times1 = 1 + 2 + 0 + 1 = 4$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{d(x, H) = \frac{|4|}2 = 2}$. Et le projeté : $\frac{\langle x, n\rangle}{\|n\|^2} = \frac44 = 1$, donc $p_H(x) = x - 1\cdot n = (1 - 1,\ 2 - 1,\ 0 - (-1),\ 1 - 1) = (0, 1, 1, 0)$ ; contrôle : $0 + 1 - 1 + 0 = 0$.</p>
 
 <h2 id="e-sym">3. Symétries orthogonales, réflexions</h2>
 <div class="sbox">$$s_F = 2p_F - \operatorname{id}:\ \text{symétrie par rapport à}\ F\ \text{parallèlement à}\ F^\perp.\qquad\textbf{Réflexion}\ (F = H = n^\perp):\ s(x) = x - 2\frac{\langle x, n\rangle}{\|n\|^2}n.$$
@@ -6189,10 +6204,10 @@ $$\text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top\qqua
 <p class="ml">Exemple 2 : matrice d'une réflexion</p>
 <p>Matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</p>
 <p><b>Étape 1 : Rappel.</b> $S = I - \frac2{n^\top n}nn^\top$.</p>
-<p><b>Étape 2 : Le normal.</b> $\cR{n = (1, 1, 1)^\top}$, $n^\top n = 3$, et $nn^\top = J$ (la matrice remplie de $1$).</p>
-<p><b>Étape 3 : Le calcul.</b></p>
+<p><b>Étape 2 : Le normal.</b> On lit $\cR{n = (1, 1, 1)^\top}$ sur l'équation. $n^\top n = 1\times1 + 1\times1 + 1\times1 = 3$. Et $nn^\top$ (colonne fois ligne) a pour coefficient $(i, j)$ le produit $n_in_j = 1\times1 = 1$ : c'est $J$, la matrice remplie de $1$.</p>
+<p><b>Étape 3 : Le calcul.</b> $S = I_3 - \frac23J$ : sur la diagonale $1 - \frac23 = \frac13$, ailleurs $0 - \frac23 = -\frac23$. On factorise $\frac13$ :</p>
 $$S = I_3 - \frac23J = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatrix}.$$
-<p><b>Étape 4 : Contrôle.</b> $Sn = n - 2n = -n$ (le normal est retourné) et $S(1, -1, 0)^\top = (1, -1, 0)^\top$ (un vecteur du plan est fixe).</p>
+<p><b>Étape 4 : Contrôle.</b> $Sn$ : chaque ligne de $3S$ fois $(1, 1, 1)$ donne $1 - 2 - 2 = -3$, donc $Sn = \frac13(-3, -3, -3) = -n$ (le normal est retourné). Et $3S(1, -1, 0)^\top = (1 + 2,\ -2 - 1,\ -2 + 2) = (3, -3, 0)$, donc $S(1, -1, 0)^\top = (1, -1, 0)^\top$ (un vecteur du plan est fixe).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{S = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatrix}}$, symétrique, orthogonale, de déterminant $-1$.</p>
 
 <h2 id="e-iso">4. Isométries (automorphismes orthogonaux)</h2>
@@ -6205,9 +6220,11 @@ $$\text{La matrice de passage entre deux BON est orthogonale}.\qquad SO(n) = \{A
 <p class="ml">Exemple 3 : vérifier qu'une matrice est orthogonale</p>
 <p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> $A\in O(n)\iff$ les colonnes forment une BON : normes $1$ et produits scalaires $0$.</p>
-<p><b>Étape 2 : Les normes</b> (au facteur $\frac19$ près) : $4 + 4 + 1 = 9$, $1 + 4 + 4 = 9$, $4 + 1 + 4 = 9$ : chaque colonne est de norme $1$.</p>
-<p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2\propto-2 + 4 - 2 = 0$, $C_1\cdot C_3\propto4 - 2 - 2 = 0$, $C_2\cdot C_3\propto-2 - 2 + 4 = 0$.</p>
-<p><b>Étape 4 : Le déterminant.</b> $\det(3A) = 2(4 + 2) + 1(4 - 1) + 2(4 + 2) = 27$, donc $\det A = \frac{27}{27} = 1$.</p>
+<p><b>Étape 2 : Les normes.</b> On calcule avec $3A$ (il faudra diviser par $3^2 = 9$). Colonne $1$ : $(2, 2, -1)$, $2^2 + 2^2 + (-1)^2 = 4 + 4 + 1 = 9$. Colonne $2$ : $(-1, 2, 2)$, $1 + 4 + 4 = 9$. Colonne $3$ : $(2, -1, 2)$, $4 + 1 + 4 = 9$. Donc chaque colonne de $A$ a pour norme au carré $\frac99 = 1$.</p>
+<p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2\propto2\times(-1) + 2\times2 + (-1)\times2 = -2 + 4 - 2 = 0$ ; $C_1\cdot C_3\propto2\times2 + 2\times(-1) + (-1)\times2 = 4 - 2 - 2 = 0$ ; $C_2\cdot C_3\propto(-1)\times2 + 2\times(-1) + 2\times2 = -2 - 2 + 4 = 0$.</p>
+<p><b>Étape 4 : Le déterminant</b>, en développant $3A$ selon la première ligne $(2, -1, 2)$ :</p>
+$$\det(3A) = 2\begin{vmatrix}2&-1\\2&2\end{vmatrix} - (-1)\begin{vmatrix}2&-1\\-1&2\end{vmatrix} + 2\begin{vmatrix}2&2\\-1&2\end{vmatrix} = 2(4 + 2) + (4 - 1) + 2(4 + 2) = 12 + 3 + 12 = 27.$$
+<p>Et $\det(3A) = 3^3\det A = 27\det A$, donc $\det A = \frac{27}{27} = 1$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{A\in SO(3)}$ : c'est une rotation (étudiée à l'exemple 5).</p>
 
 <h2 id="e-o2">6. Le plan : $O(2)$</h2>
@@ -6216,8 +6233,8 @@ $$R_\theta R_\varphi = R_{\theta + \varphi}:\ SO(2)\ \text{est commutatif.}\qqua
 <p class="ml">Exemple 4 : reconnaître</p>
 <p>Nature de $A = \frac15\begin{pmatrix}3&-4\\4&3\end{pmatrix}$ et $B = \frac15\begin{pmatrix}3&4\\4&-3\end{pmatrix}$.</p>
 <p><b>Étape 1 : Rappel.</b> Dans $O(2)$ : $\det = 1$ rotation, $\det = -1$ réflexion.</p>
-<p><b>Étape 2 : Orthogonales.</b> Colonnes de norme $\frac{9 + 16}{25} = 1$, orthogonales ($-12 + 12 = 0$ et $12 - 12 = 0$).</p>
-<p><b>Étape 3 : $A$.</b> $\det A = \frac{9 + 16}{25} = 1$ : rotation d'angle $\cO\theta$ avec $\cos\theta = \frac35$, $\sin\theta = \frac45$, soit $\theta = \arctan\frac43$.</p>
+<p><b>Étape 2 : Orthogonales.</b> Colonnes de $A$ : $\frac15(3, 4)$ et $\frac15(-4, 3)$, normes au carré $\frac{3^2 + 4^2}{25} = \frac{9 + 16}{25} = 1$ et $\frac{16 + 9}{25} = 1$ ; produit scalaire $\frac{3\times(-4) + 4\times3}{25} = \frac{-12 + 12}{25} = 0$. Même calcul pour $B$ : colonnes $\frac15(3, 4)$ et $\frac15(4, -3)$, produit $\frac{12 - 12}{25} = 0$.</p>
+<p><b>Étape 3 : $A$.</b> $\det A = \frac{3\times3 - (-4)\times4}{25} = \frac{9 + 16}{25} = 1$ : rotation $R_\theta$, et on lit la 1<sup>re</sup> colonne $(\cos\theta, \sin\theta) = \big(\frac35, \frac45\big)$. Comme $\cos\theta > 0$, $\theta\in\,]-\frac\pi2, \frac\pi2[$ et $\tan\theta = \frac{4/5}{3/5} = \frac43$, donc $\cO{\theta = \arctan\frac43}$.</p>
 <p><b>Étape 4 : $B$.</b> $\det B = \frac{3\times(-3) - 4\times4}{25} = \frac{-9 - 16}{25} = -1$ : réflexion. Son axe est $\ker(B - I)$, avec $B - I = \frac15\begin{pmatrix}3 - 5&4\\4&-3 - 5\end{pmatrix} = \frac15\begin{pmatrix}-2&4\\4&-8\end{pmatrix}$. La 1<sup>re</sup> ligne donne $-2x + 4y = 0$, soit $x = 2y$ (la 2<sup>e</sup> est $-2$ fois la 1<sup>re</sup>) : l'axe est $\cR{\operatorname{Vect}(2, 1)}$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{A\ \text{rotation d'angle}\ \arctan\frac43,\ B\ \text{réflexion d'axe}\ \operatorname{Vect}(2, 1)}$.</p>
 
@@ -6233,8 +6250,8 @@ $$\operatorname{tr}A = 1 + 2\cos\theta,\qquad\text{signe de}\ \sin\theta = \text
 <p><b>Étape 2 : L'axe.</b> $(3A - 3I)X = 0$ :</p>
 $$\left\{\begin{aligned}-x - y + 2z &= 0\\2x - y - z &= 0\end{aligned}\right.\ \Longrightarrow\ x = 2z - y,\ \ 4z - 3y - z = 0\ \Longrightarrow\ y = z = x.$$
 <p>L'axe est dirigé par $\cR{u = \frac1{\sqrt3}(1, 1, 1)}$.</p>
-<p><b>Étape 3 : Le cosinus.</b> $\operatorname{tr}A = \frac{2 + 2 + 2}3 = 2$, donc $\cos\cO\theta = \frac{2 - 1}2 = \frac12$, $\theta = \pm\frac\pi3$.</p>
-<p><b>Étape 4 : Le signe.</b> On prend $x = (1, -1, 0)$ : $Ax = \frac13(3, 0, -3) = (1, 0, -1)$. Au facteur positif $\frac1{\sqrt3}$ près :</p>
+<p><b>Étape 3 : Le cosinus.</b> $\operatorname{tr}A = \frac{2 + 2 + 2}3 = \frac63 = 2$ (somme de la diagonale), donc $\cos\cO\theta = \frac{\operatorname{tr}A - 1}2 = \frac{2 - 1}2 = \frac12$ et $\theta = \pm\frac\pi3$.</p>
+<p><b>Étape 4 : Le signe.</b> On prend $x = (1, -1, 0)$, non colinéaire à $u$. $3Ax$ ligne par ligne : $2\times1 + (-1)\times(-1) + 2\times0 = 3$ ; $2\times1 + 2\times(-1) + (-1)\times0 = 0$ ; $(-1)\times1 + 2\times(-1) + 2\times0 = -3$. Donc $Ax = \frac13(3, 0, -3) = (1, 0, -1)$. On calcule $\det(u, x, Ax)$ avec $u = (1, 1, 1)$ (le facteur positif $\frac1{\sqrt3}$ ne change pas le signe), en développant selon la première ligne :</p>
 $$\det\begin{pmatrix}1&1&1\\1&-1&0\\1&0&-1\end{pmatrix} = 1\cdot(1 - 0) - 1\cdot(-1 - 0) + 1\cdot(0 + 1) = 3 > 0.$$
 <p><b>Étape 5 : Conclusion.</b> $\sin\theta > 0$ : $\cG{A\ \text{est la rotation d'axe}\ \mathbb R(1, 1, 1)\ \text{(orienté par ce vecteur) et d'angle}\ \frac\pi3}$.</p>
 
@@ -6260,17 +6277,17 @@ $$S\in\mathcal S_n(\mathbb R)\ \Longrightarrow\ \exists\cV P\in O(n),\ \exists D
 <p>Diagonaliser $S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$ dans une BON.</p>
 <p><b>Étape 1 : Rappel.</b> $S$ symétrique réelle : $S = PDP^\top$ avec $P\in O(2)$.</p>
 <p><b>Étape 2 : Valeurs propres.</b> $\chi_S = \det\begin{pmatrix}X - 2&-1\\-1&X - 2\end{pmatrix} = (X - 2)^2 - 1 = (X - 2 - 1)(X - 2 + 1) = (X - 3)(X - 1)$ : $\cO{\lambda = 1}$ et $\cO{\lambda = 3}$.</p>
-<p><b>Étape 3 : Vecteurs propres.</b> $\lambda = 3$ : $-x + y = 0$, vecteur $(1, 1)$. $\lambda = 1$ : $x + y = 0$, vecteur $(1, -1)$. Ils sont bien orthogonaux.</p>
-<p><b>Étape 4 : On normalise.</b> $\frac1{\sqrt2}(1, 1)$ et $\frac1{\sqrt2}(1, -1)$.</p>
+<p><b>Étape 3 : Vecteurs propres.</b> $\lambda = 3$ : $S - 3I = \begin{pmatrix}-1&1\\1&-1\end{pmatrix}$, la 1<sup>re</sup> ligne donne $-x + y = 0$, soit $y = x$ : vecteur $(1, 1)$. $\lambda = 1$ : $S - I = \begin{pmatrix}1&1\\1&1\end{pmatrix}$, $x + y = 0$ : vecteur $(1, -1)$. Ils sont orthogonaux : $1\times1 + 1\times(-1) = 0$.</p>
+<p><b>Étape 4 : On normalise.</b> $\|(1, 1)\| = \sqrt{1 + 1} = \sqrt2$ et $\|(1, -1)\| = \sqrt2$ : $\frac1{\sqrt2}(1, 1)$ et $\frac1{\sqrt2}(1, -1)$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{S = \cV P\begin{pmatrix}3&0\\0&1\end{pmatrix}\cV P^\top,\qquad\cV P = \frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}}.$$
 
 <p class="ml">Exemple 7 : une valeur propre double</p>
 <p>Diagonaliser $J = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}$ dans une BON.</p>
 <p><b>Étape 1 : Rappel.</b> Sous-espaces propres orthogonaux ; Gram-Schmidt dans chacun.</p>
-<p><b>Étape 2 : Valeurs propres sans calcul.</b> $\operatorname{rg}J = 1$, donc $\cO0$ est valeur propre d'ordre $2$ ; la trace $3$ donne la dernière : $\cO3$.</p>
-<p><b>Étape 3 : $E_3$.</b> $J(1, 1, 1)^\top = 3(1, 1, 1)^\top$ : $E_3 = \operatorname{Vect}(1, 1, 1)$, vecteur $\frac1{\sqrt3}(1, 1, 1)$.</p>
-<p><b>Étape 4 : $E_0$</b> est le plan $x + y + z = 0$, base $v_1 = (1, -1, 0)$, $v_2 = (1, 0, -1)$. Gram-Schmidt : $e_1 = \frac1{\sqrt2}(1, -1, 0)$, $w_2 = v_2 - \frac12v_1 = \big(\frac12, \frac12, -1\big)$, $e_2 = \frac1{\sqrt6}(1, 1, -2)$.</p>
+<p><b>Étape 2 : Valeurs propres sans calcul.</b> Les trois colonnes de $J$ sont égales : $\operatorname{rg}J = 1$, donc $\dim\ker J = 3 - 1 = 2$ et $\cO0$ est valeur propre d'ordre $2$ ($J$ est diagonalisable). La somme des valeurs propres est la trace $1 + 1 + 1 = 3$ : la dernière vaut $3 - 0 - 0 = \cO3$.</p>
+<p><b>Étape 3 : $E_3$.</b> Chaque ligne de $J$ fois $(1, 1, 1)$ donne $1 + 1 + 1 = 3$ : $J(1, 1, 1)^\top = 3(1, 1, 1)^\top$, donc $E_3 = \operatorname{Vect}(1, 1, 1)$. Norme $\sqrt{1 + 1 + 1} = \sqrt3$ : vecteur $\frac1{\sqrt3}(1, 1, 1)$.</p>
+<p><b>Étape 4 : $E_0$.</b> $JX = 0\iff x + y + z = 0$ (les trois lignes sont pareilles) : base $v_1 = (1, -1, 0)$, $v_2 = (1, 0, -1)$. Gram-Schmidt : $\|v_1\| = \sqrt2$, $e_1 = \frac1{\sqrt2}(1, -1, 0)$. $\langle v_2, v_1\rangle = 1\times1 + 0\times(-1) + (-1)\times0 = 1$, $\|v_1\|^2 = 2$, donc $w_2 = v_2 - \frac12v_1 = \big(1 - \frac12,\ 0 + \frac12,\ -1 - 0\big) = \big(\frac12, \frac12, -1\big) = \frac12(1, 1, -2)$, de norme $\frac12\sqrt{1 + 1 + 4} = \frac{\sqrt6}2$ : $e_2 = \frac1{\sqrt6}(1, 1, -2)$.</p>
 <p><b>Étape 5 : Conclusion.</b></p>
 $$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&-\frac1{\sqrt2}&\frac1{\sqrt6}\\\frac1{\sqrt3}&0&-\frac2{\sqrt6}\end{pmatrix},\quad D = \operatorname{diag}(3, 0, 0)}.$$
 
@@ -6282,15 +6299,15 @@ $$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\la
 <p>Pour $A\in\mathcal M_n(\mathbb R)$, montrer que $A^\top A\in\mathcal S_n^+$, et $\in\mathcal S_n^{++}\iff A$ inversible.</p>
 <p><b>Étape 1 : Rappel.</b> $S\in\mathcal S_n^+\iff S$ symétrique et $X^\top SX\geq0$ pour tout $X$.</p>
 <p><b>Étape 2 : Symétrique.</b> $(A^\top A)^\top = A^\top(A^\top)^\top = A^\top A$.</p>
-<p><b>Étape 3 : Positive.</b> $X^\top A^\top AX = (AX)^\top(AX) = \|AX\|^2\geq0$.</p>
+<p><b>Étape 3 : Positive.</b> On regroupe : $X^\top A^\top AX = (X^\top A^\top)(AX) = (AX)^\top(AX)$, car $(AX)^\top = X^\top A^\top$. Et $Y^\top Y = \sum y_i^2 = \|Y\|^2$ pour une colonne $Y$, donc $X^\top A^\top AX = \|AX\|^2\geq0$.</p>
 <p><b>Étape 4 : Définie positive.</b> $\|AX\|^2 = 0\iff AX = 0$. Donc $X^\top A^\top AX > 0$ pour tout $X\neq0\iff\ker A = \{0\}\iff A$ inversible.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{A^\top A\in\mathcal S_n^+,\ \text{et}\ A^\top A\in\mathcal S_n^{++}\iff A\in GL_n(\mathbb R)}$.</p>
 
 <p class="ml">Exemple 9 : l'encadrement de Rayleigh</p>
 <p><b>Étape 1 : Rappel.</b> Théorème spectral : une BON $(e_i)$ de vecteurs propres, $u(e_i) = \lambda_ie_i$.</p>
 <p><b>Étape 2 : On décompose</b> $x = \sum x_ie_i$, donc $u(x) = \sum\lambda_ix_ie_i$.</p>
-<p><b>Étape 3 : Le produit scalaire</b> (BON) : $\langle u(x), x\rangle = \sum\lambda_ix_i^2$.</p>
-<p><b>Étape 4 : On encadre.</b> $\lambda_{\min}\sum x_i^2\leq\sum\lambda_ix_i^2\leq\lambda_{\max}\sum x_i^2$, et $\sum x_i^2 = \|x\|^2$.</p>
+<p><b>Étape 3 : Le produit scalaire.</b> En BON, $\langle\sum a_ie_i, \sum b_ie_i\rangle = \sum a_ib_i$. Avec $a_i = \lambda_ix_i$ et $b_i = x_i$ : $\langle u(x), x\rangle = \sum\lambda_ix_i\cdot x_i = \sum\lambda_ix_i^2$.</p>
+<p><b>Étape 4 : On encadre.</b> Pour chaque $i$, $\lambda_{\min}\leq\lambda_i\leq\lambda_{\max}$ et $x_i^2\geq0$, donc $\lambda_{\min}x_i^2\leq\lambda_ix_i^2\leq\lambda_{\max}x_i^2$. On somme : $\lambda_{\min}\sum x_i^2\leq\sum\lambda_ix_i^2\leq\lambda_{\max}\sum x_i^2$, et $\sum x_i^2 = \|x\|^2$ (BON).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\lambda_{\min}\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_{\max}\|x\|^2}$, avec égalité pour un vecteur propre associé.</p>
 <p class="ml">Bonus : racine carrée d'une matrice positive <span class="hp">hors programme</span></p>
 <p>Si $S = PDP^\top\in\mathcal S_n^+$, alors $R = P\sqrt DP^\top$ est dans $\mathcal S_n^+$ et vérifie $R^2 = S$ (et c'est la seule). Classique en exercice, à redémontrer.</p>
@@ -6330,7 +6347,7 @@ $$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\la
 <p class="ml">Exercice 1 : valeurs propres réelles d'une isométrie</p>
 <p><b>Étape 1 : Rappel.</b> $u\in O(E)\iff\|u(x)\| = \|x\|$ pour tout $x$.</p>
 <p><b>Étape 2 : Un vecteur propre.</b> Soit $\lambda\in\mathbb R$ valeur propre, $x\neq0$ avec $u(x) = \lambda x$.</p>
-<p><b>Étape 3 : Les normes.</b> $\|x\| = \|u(x)\| = |\lambda|\,\|x\|$, et $\|x\|\neq0$.</p>
+<p><b>Étape 3 : Les normes.</b> $\|u(x)\| = \|\lambda x\| = |\lambda|\,\|x\|$ (homogénéité), et $\|u(x)\| = \|x\|$ (isométrie). Donc $|\lambda|\,\|x\| = \|x\|$, et on divise par $\|x\|\neq0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{|\lambda| = 1,\ \text{donc}\ \lambda = \pm1}$.</p>
 
 <p class="ml">Exercice 2 : projecteur orthogonal $\iff$ autoadjoint</p>
@@ -6341,7 +6358,7 @@ $$\text{En matrice}:\ S\in\mathcal S_n^+\iff\forall X,\ X^\top SX\geq0.\qquad\la
 
 <p class="ml">Exercice 3 : $\sum|a_{ij}|\leq n\sqrt n$ pour $A\in O(n)$</p>
 <p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathbb R^{n^2}$, et $\operatorname{tr}(A^\top A) = \sum a_{ij}^2$.</p>
-<p><b>Étape 2 : La somme des carrés.</b> $A^\top A = I_n$, donc $\sum_{i,j}a_{ij}^2 = \operatorname{tr}(I_n) = n$.</p>
+<p><b>Étape 2 : La somme des carrés.</b> Le coefficient $(j, j)$ de $A^\top A$ est $\sum_ia_{ij}^2$ (colonne $j$ fois colonne $j$), donc $\operatorname{tr}(A^\top A) = \sum_j\sum_ia_{ij}^2$. Comme $A^\top A = I_n$, cette somme vaut $\operatorname{tr}I_n = n$.</p>
 <p><b>Étape 3 : Cauchy-Schwarz</b> avec les $n^2$ nombres $|a_{ij}|$ et $n^2$ fois $1$ :</p>
 $$\sum_{i,j}|a_{ij}|\leq\sqrt{n^2}\,\sqrt{\sum a_{ij}^2} = n\sqrt n.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{i,j}|a_{ij}|\leq n\sqrt n}$.</p>
