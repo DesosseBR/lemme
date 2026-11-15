@@ -12,6 +12,7 @@ LEMME.METHODES = {
 <li>Matrice ligne : $n = 1$. Matrice colonne : $p = 1$.</li>
 </ul>
 <p class="ml">Exemple</p>
+<p>Soit $A = \begin{pmatrix}2&5&4\\7&-6&0\end{pmatrix}$. <b>Donner la taille de $A$ et lire les coefficients $a_{1,3}$, $a_{2,1}$ et $a_{2,2}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dans $a_{i,j}$, le premier indice $i$ est la <b>ligne</b>, le second $j$ la <b>colonne</b>. Une matrice à $n$ lignes et $p$ colonnes est dans $\mathcal M_{n,p}(\mathbb K)$.</p>
 <p><b>Étape 2 : La taille.</b> On compte $2$ lignes et $3$ colonnes :</p>
 $$A = \begin{pmatrix}2&5&\cB4\\\cR7&\cG{-6}&0\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R).$$
@@ -31,6 +32,7 @@ $$0_{n,p} = \begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix},\
 <p class="ml">Méthode</p>
 $$A + B = (a_{i,j} + b_{i,j}),\qquad \lambda A = (\lambda a_{i,j}),\qquad A + 0 = A.$$
 <p class="ml">Exemple</p>
+<p><b>Calculer $\begin{pmatrix}1&2&0\\3&-1&4\end{pmatrix} + \begin{pmatrix}5&0&2\\1&1&-4\end{pmatrix}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On additionne deux matrices <b>de même taille</b> case par case : $(A + B)_{i,j} = a_{i,j} + b_{i,j}$. Et $(\lambda A)_{i,j} = \lambda\,a_{i,j}$.</p>
 <p><b>Étape 2 : Vérifier les tailles.</b> Les deux matrices sont dans $\mathcal M_{2,3}$ : la somme existe.</p>
 <p><b>Étape 3 : Additionner case par case</b> (chaque couleur va avec la case à la même place) :</p>
@@ -100,6 +102,7 @@ $$A^0 = I_n,\qquad A^1 = A,\qquad A^{k+1} = A\,A^k = A^k\,A.$$
 <li>Appliquer la formule : seuls les termes $k\lt p$ restent.</li>
 </ol>
 <p class="ml">Exemple</p>
+<p>Soit $A = \begin{pmatrix}2&1&0\\0&2&1\\0&0&2\end{pmatrix}$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$ avec la formule du binôme.</b></p>
 <p><b>1.</b> On sépare la diagonale (en <span class="kB">bleu</span>) du reste (en <span class="kR">rouge</span>) :</p>
 $$A = \begin{pmatrix}\cB2&\cR1&0\\0&\cB2&\cR1\\0&0&\cB2\end{pmatrix} = \cB{2I_3} + \cR N,\qquad\cR N = \begin{pmatrix}0&\cR1&0\\0&0&\cR1\\0&0&0\end{pmatrix}.$$
 <p><b>2.</b> $\cB{2I_3}$ et $\cR N$ commutent, car $I_3$ commute avec tout.</p>
@@ -211,6 +214,7 @@ $$\textbf{Cramer}\ (n = p,\ A\ \text{inversible}):\ \text{une seule solution}.\q
 
 <p class="ml">Exemple : un système de Cramer</p>
 $$\left\{\begin{aligned}x + y + z &= 6\\x - y + 2z &= 5\\2x + y - z &= 1\end{aligned}\right.$$
+<p><b>Résoudre ce système.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pivot de Gauss, puis remontée.</p>
 <p><b>Étape 2 : On élimine $x$.</b> $L_2\leftarrow L_2 - L_1$ : $(1 - 1)x + (-1 - 1)y + (2 - 1)z = 5 - 6$. $L_3\leftarrow L_3 - 2L_1$ : $(2 - 2)x + (1 - 2)y + (-1 - 2)z = 1 - 12$. On obtient :</p>
 $$\left\{\begin{aligned}x + y + z &= 6\\-2y + z &= -1\\-y - 3z &= -11\end{aligned}\right.$$
@@ -220,6 +224,7 @@ $$\left\{\begin{aligned}x + y + z &= 6\\-2y + z &= -1\\-y - 3z &= -11\end{aligne
 
 <p class="ml">Exemple : un système homogène</p>
 $$\left\{\begin{aligned}x + 2y - z &= 0\\2x + 4y + z &= 0\end{aligned}\right.$$
+<p><b>Résoudre ce système et donner la dimension de l'ensemble des solutions.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\mathcal S_H$ est un sev de dimension $p - \operatorname{rg}A$.</p>
 <p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2)x + (4 - 4)y + (1 + 2)z = 0$, soit $3z = 0$, donc $z = 0$.</p>
 <p><b>Étape 3 : Le paramètre.</b> On remplace $z = 0$ dans $L_1$ : $x + 2y - 0 = 0$, donc $x = -2y$, avec $y$ libre. Ainsi $(x, y, z) = (-2y, y, 0) = y(-2, 1, 0)$.</p>
@@ -227,12 +232,14 @@ $$\left\{\begin{aligned}x + 2y - z &= 0\\2x + 4y + z &= 0\end{aligned}\right.$$
 
 <p class="ml">Exemple : un système incompatible</p>
 $$\left\{\begin{aligned}x + y &= 1\\2x + 2y &= 3\end{aligned}\right.$$
+<p><b>Résoudre ce système.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une ligne « $0 = c$ » avec $c\neq0$ : aucune solution.</p>
 <p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : à gauche $(2 - 2)x + (2 - 2)y = 0$, à droite $3 - 2\times1 = 1$ : on obtient $0 = 1$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\mathcal S = \varnothing}$ ($\operatorname{rg}A = 1\neq\operatorname{rg}(A\mid B) = 2$).</p>
 
 <p class="ml">Exemple : un système à paramètre</p>
 $$\left\{\begin{aligned}x + y + mz &= 1\\x + my + z &= 1\\mx + y + z &= 1\end{aligned}\right.\qquad m\in\mathbb R.$$
+<p><b>Résoudre ce système selon la valeur de $m$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Avec un paramètre, on cherche les valeurs qui rendent le pivot nul, et on les traite à part.</p>
 <p><b>Étape 2 : On additionne les trois lignes.</b> Chaque inconnue apparaît avec les coefficients $1$, $1$ et $m$ : $(m + 2)x + (m + 2)y + (m + 2)z = 3$, soit $(m + 2)(x + y + z) = 3$.</p>
 <p><b>Étape 3 : On soustrait deux lignes.</b> $L_1 - L_2$ : $(1 - m)y + (m - 1)z = 0$, soit $(1 - m)(y - z) = 0$. $L_2 - L_3$ : $(1 - m)x + (m - 1)y = 0$, soit $(1 - m)(x - y) = 0$.</p>
@@ -246,6 +253,7 @@ $$\operatorname{tr}\begin{pmatrix}\cB3&1&0\\2&\cB{-1}&4\\5&0&\cB{-8}\end{pmatrix
 <p>On ne garde que la <span class="kB">diagonale</span>.</p>
 <div class="sbox">$$\operatorname{tr}(A + B) = \operatorname{tr}A + \operatorname{tr}B,\quad\operatorname{tr}(\lambda A) = \lambda\operatorname{tr}A,\quad\operatorname{tr}({}^tA) = \operatorname{tr}A,\quad\operatorname{tr}(AB) = \operatorname{tr}(BA).$$</div>
 <p class="ml">Exemple d'usage</p>
+<p>Soit $n\geqslant1$. <b>Montrer qu'il n'existe pas de matrices $A, B\in\mathcal M_n(\mathbb R)$ telles que $AB - BA = I_n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pour toutes matrices carrées $A, B$ de taille $n$ : $\operatorname{tr}(AB) = \operatorname{tr}(BA)$, et $\operatorname{tr}(I_n) = n$.</p>
 <p><b>Étape 2 : On suppose</b> qu'il existe $A, B$ avec $AB - BA = I_n$, et on prend la trace des deux côtés (la trace est linéaire) :</p>
 $$\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = \operatorname{tr}(I_n).$$
@@ -262,6 +270,7 @@ $$0 = n.$$
 <div class="sbox">$$\text{La colonne}\ j\ \text{de}\ \operatorname{Mat}_{\cB{\mathcal B},\cR{\mathcal C}}(f)\ \text{contient les coordonnées de}\ f(\cB{e_j})\ \text{dans la base}\ \cR{\mathcal C}.$$</div>
 <p><b>Astuce</b> : <i>on range les images en colonnes, écrites avec les vecteurs d'arrivée.</i> Les colonnes sont étiquetées par le départ, les lignes par l'arrivée.</p>
 <p class="ml">Exemple : $f : E\to F$, $\cB{\mathcal B = (e_1,e_2,e_3)}$ base de $E$, $\cR{\mathcal C = (e'_1,e'_2)}$ base de $F$</p>
+<p>On donne $f(e_1) = 3e'_1 + 4e'_2$, $f(e_2) = -8e'_1 + 5e'_2$, $f(e_3) = 7e'_1 - 2e'_2$. <b>Écrire la matrice de $f$ dans les bases $\mathcal B$ et $\mathcal C$.</b></p>
 <p><b>Étape 1 : Rappel.</b> La colonne $j$ de $\operatorname{Mat}_{\mathcal B,\mathcal C}(f)$ contient les coordonnées de $f(e_j)$ dans la base d'arrivée $\mathcal C$.</p>
 <p><b>Étape 2 : Les images des vecteurs de $\mathcal B$</b>, écrites dans $\mathcal C$ :</p>
 $$f(\cB{e_1}) = 3\cR{e'_1} + 4\cR{e'_2},\qquad f(\cB{e_2}) = -8\cR{e'_1} + 5\cR{e'_2},\qquad f(\cB{e_3}) = 7\cR{e'_1} - 2\cR{e'_2}.$$
@@ -284,6 +293,7 @@ $$x = \cB{2e_1 - e_2 + e_3}:\qquad\begin{pmatrix}3&-8&7\\4&5&-2\end{pmatrix}\beg
 <li>Ranger les coordonnées <b>en colonne</b>, dans l'ordre des vecteurs de départ.</li>
 </ol>
 <p class="ml">Exemple : $f(P) = 2P' - P$ sur $\mathbb K_3[X]$, base $\mathcal B = (1, X, X^2, X^3)$</p>
+<p>Soit $f:\mathbb K_3[X]\to\mathbb K_3[X]$, $f(P) = 2P' - P$. <b>Écrire la matrice de $f$ dans la base $\mathcal B = (1, X, X^2, X^3)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> La colonne $j$ de $\operatorname{Mat}_{\mathcal B}(f)$ contient les coordonnées de $f(e_j)$ dans $\mathcal B$.</p>
 <p><b>Étape 2 : Les images</b> par $f(P) = 2P' - P$ :</p>
 $$f(\cB1) = 2\cdot0 - 1 = -1,\qquad f(\cB X) = 2\cdot1 - X = 2 - X,\qquad f(\cB{X^2}) = 2\cdot2X - X^2 = 4X - X^2,\qquad f(\cB{X^3}) = 6X^2 - X^3.$$
@@ -315,6 +325,7 @@ $$\cB E\ \xrightarrow{\ \ f\ \ }\ \cG F\ \xrightarrow{\ \ g\ \ }\ \cR G\qquad\Lo
 <div class="sbox">$$P_{\cO{\mathcal B}\to\cG{\mathcal B'}}:\ \text{la colonne}\ j\ \text{contient les coordonnées du}\ \textbf{nouveau}\ \text{vecteur}\ \cG{e'_j}\ \text{dans l'}\textbf{ancienne}\ \text{base}\ \cO{\mathcal B}.$$</div>
 <p><b>Astuce</b> : <i>les nouveaux en colonnes, écrits dans l'ancienne base</i>. C'est exactement la règle du §11 appliquée à l'identité.</p>
 <p class="ml">Exemple</p>
+<p>Soit $\mathcal B = (e_1, e_2, e_3)$ une base et $e'_1 = 7e_1 + e_2 - 4e_3$, $e'_2 = 8e_1 - 2e_2 + 9e_3$, $e'_3 = -3e_1 + 6e_2 + 5e_3$. <b>Écrire la matrice de passage de $\mathcal B$ à $\mathcal B' = (e'_1, e'_2, e'_3)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> La matrice de passage de $\mathcal B$ à $\mathcal B'$ a pour colonnes les <b>nouveaux</b> vecteurs, écrits dans l'<b>ancienne</b> base.</p>
 <p><b>Étape 2 : Les nouveaux vecteurs</b> dans l'ancienne base :</p>
 $$\cG{e'_1} = 7\cO{e_1} + \cO{e_2} - 4\cO{e_3},\qquad\cG{e'_2} = 8\cO{e_1} - 2\cO{e_2} + 9\cO{e_3},\qquad\cG{e'_3} = -3\cO{e_1} + 6\cO{e_2} + 5\cO{e_3}.$$
@@ -353,7 +364,7 @@ $$\operatorname{Mat}_{\mathcal B',\mathcal C'}(f) = Q^{-1}\operatorname{Mat}_{\m
 </ul>
 
 <p class="ml">Exemple complet : rendre une matrice diagonale</p>
-<p>$f$ a pour matrice $\cO{A = \begin{pmatrix}3&1\\1&3\end{pmatrix}}$ dans la base canonique. On prend la nouvelle base $\cG{e'_1 = (1,1)}$, $\cG{e'_2 = (1,-1)}$.</p>
+<p>$f$ a pour matrice $\cO{A = \begin{pmatrix}3&1\\1&3\end{pmatrix}}$ dans la base canonique. On prend la nouvelle base $\cG{e'_1 = (1,1)}$, $\cG{e'_2 = (1,-1)}$. <b>Calculer la matrice $A'$ de $f$ dans la nouvelle base, avec $A' = P^{-1}AP$.</b></p>
 <p><b>Étape 1 : $P$</b>, les nouveaux vecteurs en colonnes.</p>
 $$P = \begin{pmatrix}\cG1&\cG1\\\cG1&\cG{-1}\end{pmatrix},\qquad\det P = -2\neq0.$$
 <p><b>Étape 2 : $P^{-1}$</b>, avec la formule de taille 2.</p>
@@ -392,6 +403,7 @@ $$A = PA'P^{-1}\ \Longrightarrow\ A^n = P\,A'^n\,P^{-1} = \frac12\begin{pmatrix}
 <div><b>Que des $1$</b><span>$\cR J = \begin{pmatrix}1&\cdots&1\\\vdots&&\vdots\\1&\cdots&1\end{pmatrix}$ : $\cR{J^2} = n\cR J$, donc $\cR{J^k} = n^{k-1}\cR J$ pour $k\geqslant1$.</span></div>
 </div>
 <p class="ml">Exemple avec la matrice « que des $1$ »</p>
+<p>Soit $A = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$ avec la formule du binôme.</b></p>
 <p><b>Étape 1 : Rappel.</b> Binôme de Newton pour deux matrices qui commutent : $(M + N)^n = \sum_{k=0}^n\binom nkM^kN^{n-k}$.</p>
 <p><b>Étape 2 : On écrit $A$ avec $J$</b>, la matrice remplie de $1$ :</p>
 $$A = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix} = \cR J - \cB{I_3}.$$
@@ -480,6 +492,7 @@ $$\operatorname{com}(P) = \begin{pmatrix}2&3&1\\-4&3&1\\2&-3&1\end{pmatrix},\qqu
 <p><b>Étape 4 : Conclusion.</b> $A\times\frac19{}^tA = I_3$ : $\cG{A^{-1} = \frac19{}^tA}$, sans aucun calcul d'inverse.</p>
 
 <p class="ml">Exemple 5 : résoudre $AX = Y$ pour $a_{ij} = \min(i, j)$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb R)$ de coefficients $a_{ij} = \min(i, j)$. <b>Montrer que $A$ est inversible et calculer $A^{-1}$ en résolvant $AX = Y$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On résout $AX = Y$ ; l'expression $X = BY$ donne $A^{-1} = B$.</p>
 <p><b>Étape 2 : Le système.</b> La ligne $i$ s'écrit $x_1 + 2x_2 + \dots + (i - 1)x_{i-1} + i(x_i + x_{i+1} + \dots + x_n) = y_i$. Les opérations $L_i\leftarrow L_i - L_{i-1}$ (de $i = n$ à $2$) donnent $x_i + x_{i+1} + \dots + x_n = y_i - y_{i-1}$ (avec $y_0 = 0$).</p>
 <p><b>Étape 3 : On recommence.</b> En soustrayant deux lignes consécutives : $x_i = (y_i - y_{i-1}) - (y_{i+1} - y_i) = -y_{i-1} + 2y_i - y_{i+1}$ pour $i \lt n$, et $x_n = y_n - y_{n-1}$.</p>
@@ -498,6 +511,7 @@ $$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pma
 
 <p class="ml">Exemple 7 : la matrice $J$ remplie de $1$</p>
 $$J = \begin{pmatrix}1&1&\cdots&1\\1&1&\cdots&1\\\vdots&\vdots&\ddots&\vdots\\1&1&\cdots&1\end{pmatrix}\in\mathcal M_n(\mathbb K),\qquad\text{par exemple}\quad J^2 = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}^2 = \begin{pmatrix}3&3&3\\3&3&3\\3&3&3\end{pmatrix}\ (n = 3).$$
+<p><b>Calculer $J^p$ pour tout $p\geq1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On calcule $J^2$, on conjecture, on prouve par récurrence.</p>
 <p><b>Étape 2 : $J^2$.</b> Coefficient $(i, j)$ : $\sum_{k=1}^n1\times1 = n$. Donc $J^2 = nJ$.</p>
 <p><b>Étape 3 : Récurrence.</b> Si $J^p = n^{p-1}J$, alors $J^{p+1} = n^{p-1}J^2 = n^{p-1}\times nJ = n^pJ$.</p>
@@ -521,6 +535,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 
 <p class="ml">Exemple 10 : $A = I_n + aN$, $N$ la « sur-diagonale »</p>
 $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,\quad N = \begin{pmatrix}0&1&0&0\\0&0&1&0\\0&0&0&1\\0&0&0&0\end{pmatrix},\quad N^2 = \begin{pmatrix}0&0&1&0\\0&0&0&1\\0&0&0&0\\0&0&0&0\end{pmatrix},\quad N^3 = \begin{pmatrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{pmatrix}.$$
+<p><b>Calculer $A^p$ pour tout $p\in\mathbb N$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $N$ (des $1$ juste au-dessus de la diagonale) vérifie $N^n = 0$ ; $N^k$ a ses $1$ sur la $k$-ième sur-diagonale.</p>
 <p><b>Étape 2 : Le binôme.</b> $I_n$ et $N$ commutent : $A^p = \sum_{k=0}^{n-1}\binom pka^kN^k$ (les termes $k\geq n$ sont nuls).</p>
 <p><b>Étape 3 : On lit.</b> Le coefficient $(i, i + k)$ de $A^p$ vaut $\binom pka^k$ (et $\binom pk = 0$ si $k > p$).</p>
@@ -536,7 +551,7 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 </table>
 
 <p class="ml">Exemple 11 : une projection oblique, par l'expression analytique</p>
-<p>Matrice dans la base canonique de la projection $p$ sur $P:\ x + y + z = 0$ parallèlement à $D:\ x = \frac y2 = \frac z3$.</p>
+<p>Soit $p$ la projection sur $P:\ x + y + z = 0$ parallèlement à $D:\ x = \frac y2 = \frac z3$. <b>Écrire la matrice de $p$ dans la base canonique de $\mathbb R^3$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p(u)\in P$ et $u - p(u)\in D$.</p>
 <p><b>Étape 2 : $D$.</b> $x = \frac y2 = \frac z3 = t$ donne $(t, 2t, 3t)$ : $D = \operatorname{Vect}(1, 2, 3)$. $1 + 2 + 3 = 6\neq0$, donc $D\not\subset P$ et $\mathbb R^3 = P\oplus D$.</p>
 <p><b>Étape 3 : On écrit.</b> $u = (x, y, z)$, $p(u) = u - \lambda(1, 2, 3) = (x - \lambda, y - 2\lambda, z - 3\lambda)$. Dans $P$ : $(x + y + z) - 6\lambda = 0$, donc $\lambda = \frac{x + y + z}6$.</p>
@@ -544,12 +559,14 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 <p><b>Étape 5 : Conclusion.</b> $\cG{A = \frac16\begin{pmatrix}5&-1&-1\\-2&4&-2\\-3&-3&3\end{pmatrix}}$. Contrôle : $A(1, 2, 3) = \frac16(5 - 2 - 3, -2 + 8 - 6, -3 - 6 + 9) = 0$.</p>
 
 <p class="ml">Exemple 12 : la même, par changement de base</p>
+<p><b>Retrouver la matrice de la projection de l'exemple précédent par un changement de base.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dans une base adaptée à $P\oplus D$, la matrice est $\operatorname{diag}(1, 1, 0)$.</p>
 <p><b>Étape 2 : La base.</b> $e'_1 = (1, -1, 0)$ et $e'_2 = (1, 0, -1)$ dans $P$ ($1 - 1 + 0 = 0$, $1 + 0 - 1 = 0$), $e'_3 = (1, 2, 3)$ : $Q = \begin{pmatrix}1&1&1\\-1&0&2\\0&-1&3\end{pmatrix}$, la matrice de l'exemple 3.</p>
 <p><b>Étape 3 : Le produit.</b> $A = Q\operatorname{diag}(1, 1, 0)Q^{-1}$. $Q\operatorname{diag}(1, 1, 0)$ efface la 3<sup>e</sup> colonne de $Q$, puis on multiplie par $Q^{-1} = \frac16\begin{pmatrix}2&-4&2\\3&3&-3\\1&1&1\end{pmatrix}$ : ligne 1, $(1, 1, 0)$ donne $\frac16(2 + 3, -4 + 3, 2 - 3) = \frac16(5, -1, -1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> On retrouve $\cG{A = \frac16\begin{pmatrix}5&-1&-1\\-2&4&-2\\-3&-3&3\end{pmatrix}}$ ; méthode plus longue ici, mais elle marche pour tout endomorphisme simple dans une base connue.</p>
 
 <p class="ml">Exemple 13 : $M\mapsto AM$ dans la base $(E_{ij})$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb K)$. <b>Écrire la matrice de $M\mapsto AM$ dans la base canonique $(E_{ij})$ de $\mathcal M_n(\mathbb K)$, puis sa trace et son déterminant.</b></p>
 <p><b>Étape 1 : Rappel.</b> $AE_{ij} = \sum_ka_{ki}E_{kj}$ : la colonne $i$ de $A$ placée en colonne $j$.</p>
 <p><b>Étape 2 : On ordonne.</b> Ordre $E_{11}, E_{21}, \dots, E_{n1}, E_{12}, \dots$ (colonne par colonne). Les $E_{\cdot j}$ de la colonne $j$ sont envoyés dans $\operatorname{Vect}(E_{1j}, \dots, E_{nj})$, avec la matrice $A$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\operatorname{Mat}(M\mapsto AM) = \operatorname{diag}(A, A, \dots, A)}$ ($n$ blocs) ; donc sa trace vaut $n\operatorname{tr}A$ et son déterminant $(\det A)^n$.</p>
@@ -566,6 +583,7 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 </table>
 
 <p class="ml">Exemple 14 : $a_{ij} = (i + j - 1)^2$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb R)$ de coefficients $a_{ij} = (i + j - 1)^2$. <b>Déterminer le rang de $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si toutes les colonnes sont dans $\operatorname{Vect}(U, V, W)$, le rang est $\leq3$.</p>
 <p><b>Étape 2 : On développe.</b> $(i + j - 1)^2 = ((i - 1) + j)^2 = (i - 1)^2 + 2j(i - 1) + j^2$. Donc $C_j = U + 2jV + j^2W$ avec $U = ((i - 1)^2)_i$, $V = (i - 1)_i$, $W = (1)_i$.</p>
 <p><b>Étape 3 : Une sous-matrice.</b> Pour $n\geq3$, $\begin{vmatrix}1&4&9\\4&9&16\\9&16&25\end{vmatrix} = 1(225 - 256) - 4(100 - 144) + 9(64 - 81) = -31 + 176 - 153 = -8\neq0$.</p>
@@ -574,6 +592,7 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 <p class="ml">Exemple 15 : déterminant puis matrice extraite</p>
 <p>$A\in\mathcal M_4(\mathbb R)$ : $2$ sur la diagonale, $a$ ailleurs. Rang selon $a$.</p>
 $$A = \begin{pmatrix}2&a&a&a\\a&2&a&a\\a&a&2&a\\a&a&a&2\end{pmatrix}.$$
+<p><b>Déterminer le rang de $A$ selon la valeur de $a$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\det\neq0\iff$ rang $4$ ; sinon, chercher la plus grande sous-matrice inversible.</p>
 <p><b>Étape 2 : Le déterminant.</b> Chaque ligne a pour somme $2 + 3a$ : on fait $C_1\leftarrow C_1 + C_2 + C_3 + C_4$ et on sort $2 + 3a$, puis $L_i\leftarrow L_i - L_1$ ($i = 2, 3, 4$) :</p>
 $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix} = (2 + 3a)\begin{vmatrix}1&a&a&a\\0&2 - a&0&0\\0&0&2 - a&0\\0&0&0&2 - a\end{vmatrix} = (2 + 3a)(2 - a)^3.$$
@@ -607,16 +626,19 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 <p><b>Étape 4 : Conclusion.</b> $\cG{X = \begin{pmatrix}x&y\\0&x\end{pmatrix} = xI_2 + yN}$ : les polynômes en $A$.</p>
 
 <p class="ml">Exemple 18 : commuter avec une diagonale à coefficients distincts</p>
+<p>Soit $D = \operatorname{diag}(d_1, \dots, d_n)$ avec des $d_i$ deux à deux distincts. <b>Déterminer les matrices $A$ qui commutent avec $D$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(AD)_{ij} = a_{ij}d_j$ et $(DA)_{ij} = d_ia_{ij}$.</p>
 <p><b>Étape 2 : On compare.</b> $AD = DA\iff\forall i, j,\ (d_i - d_j)a_{ij} = 0$.</p>
 <p><b>Étape 3 : Conclusion.</b> Pour $i\neq j$, $d_i\neq d_j$ donne $a_{ij} = 0$ : $\cG{A\ \text{est diagonale}}$.</p>
 
 <p class="ml">Exemple 19 : commuter avec toutes les matrices</p>
+<p><b>Déterminer les matrices $A\in\mathcal M_n(\mathbb K)$ qui commutent avec toutes les matrices de $\mathcal M_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Tester $M = E_{ij}$ : $AE_{ij} = \sum_ka_{ki}E_{kj}$ et $E_{ij}A = \sum_la_{jl}E_{il}$.</p>
 <p><b>Étape 2 : On compare</b> les coefficients de ces deux matrices dans la base $(E_{kl})$. Coefficient de $E_{ij}$ : $a_{ii}$ à gauche, $a_{jj}$ à droite, donc $a_{ii} = a_{jj}$. Coefficient de $E_{kj}$ avec $k\neq i$ : $a_{ki}$ à gauche, $0$ à droite, donc $a_{ki} = 0$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{A = \lambda I_n}$ : seules les matrices scalaires commutent avec tout.</p>
 
 <p class="ml">Exemple 20 : $X^2 = E_{13}$ dans $\mathcal M_3(\mathbb R)$</p>
+<p><b>Résoudre dans $\mathcal M_3(\mathbb R)$ l'équation $X^2 = E_{13}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $X$ commute avec $X^2 = A$.</p>
 <p><b>Étape 2 : $AX = XA$.</b> $AX$ a pour seule ligne non nulle la ligne $1$, égale à la ligne $3$ de $X$ : $(g, h, i)$. $XA$ a pour seule colonne non nulle la colonne $3$, égale à la colonne $1$ de $X$ : $(a, d, g)$. Donc $g = h = 0$, $d = 0$, $i = a$.</p>
 <p><b>Étape 3 : On élève au carré.</b> $X = \begin{pmatrix}a&b&c\\0&e&f\\0&0&a\end{pmatrix}$ : $X^2 = \begin{pmatrix}a^2&ab + be&2ac + bf\\0&e^2&ef + fa\\0&0&a^2\end{pmatrix}$.</p>
@@ -629,7 +651,7 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 <p><b>Pas semblables</b> : un invariant différent. <b>Semblables</b> : trouver une base dans laquelle l'endomorphisme associé à $A$ a pour matrice $B$ (on cherche les vecteurs $e'_1, e'_2, \dots$ un par un), ou passer par une troisième matrice.</p>
 
 <p class="ml">Exemple 21 : même polynôme caractéristique, pas semblables</p>
-<p>$A = \begin{pmatrix}1&1&1\\0&2&0\\0&0&2\end{pmatrix}$, $B = \begin{pmatrix}1&0&1\\0&2&1\\0&0&2\end{pmatrix}$.</p>
+<p>$A = \begin{pmatrix}1&1&1\\0&2&0\\0&0&2\end{pmatrix}$, $B = \begin{pmatrix}1&0&1\\0&2&1\\0&0&2\end{pmatrix}$. <b>Montrer que $A$ et $B$ ont le même polynôme caractéristique mais ne sont pas semblables.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A$ et $B$ semblables $\Rightarrow A - 2I$ et $B - 2I$ semblables, donc de même rang.</p>
 <p><b>Étape 2 : $\chi$.</b> Triangulaires : $\chi_A = \chi_B = (X - 1)(X - 2)^2$. Ça ne conclut pas.</p>
 <p><b>Étape 3 : Les rangs.</b> $A - 2I = \begin{pmatrix}-1&1&1\\0&0&0\\0&0&0\end{pmatrix}$ : rang $1$. $B - 2I = \begin{pmatrix}-1&0&1\\0&0&1\\0&0&0\end{pmatrix}$ : deux lignes non colinéaires, rang $2$.</p>
@@ -648,12 +670,14 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \operatorname{tr}(\lambda A + B) = \lambda\operatorname{tr}A + \operatorname{tr}B$</li><li>$\displaystyle \operatorname{tr}(AB) = \operatorname{tr}(BA)$</li><li>$\displaystyle \operatorname{tr}(P^{-1}AP) = \operatorname{tr}A$</li><li>$\displaystyle p\ \text{projecteur}\Rightarrow\operatorname{tr}p = \operatorname{rg}p$</li></ul></div>
 
 <p class="ml">Exemple 23 : $AB - BA = A$ entraîne $A$ non inversible</p>
+<p>Soient $A, B\in\mathcal M_n(\mathbb K)$ avec $AB - BA = A$. <b>Montrer que $A$ n'est pas inversible.</b></p>
 <p><b>Étape 1 : Rappel.</b> Raisonner par l'absurde et prendre la trace.</p>
 <p><b>Étape 2 : On multiplie par $A^{-1}$</b> à gauche : $B - A^{-1}BA = I_n$.</p>
 <p><b>Étape 3 : La trace.</b> $\operatorname{tr}(A^{-1}BA) = \operatorname{tr}(BAA^{-1}) = \operatorname{tr}B$, donc à gauche $\operatorname{tr}B - \operatorname{tr}B = 0$, à droite $\operatorname{tr}I_n = n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $0 = n$ : absurde, $\cG{A\notin GL_n}$.</p>
 
 <p class="ml">Exemple 24 : résoudre $X + \operatorname{tr}(X)A = B$</p>
+<p>Soient $A, B\in\mathcal M_n(\mathbb K)$. <b>Résoudre l'équation $X + \operatorname{tr}(X)A = B$ d'inconnue $X\in\mathcal M_n(\mathbb K)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On prend la trace pour trouver $\operatorname{tr}X$ (un nombre), puis on remplace.</p>
 <p><b>Étape 2 : La trace.</b> $\operatorname{tr}X + \operatorname{tr}X\operatorname{tr}A = \operatorname{tr}B$, soit $(1 + \operatorname{tr}A)\operatorname{tr}X = \operatorname{tr}B$.</p>
 <p><b>Étape 3 : Cas $\operatorname{tr}A\neq-1$.</b> $\operatorname{tr}X = \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}$ et $X = B - \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}A$. Réciproquement elle convient (sa trace vaut bien $\operatorname{tr}B - \frac{\operatorname{tr}B\operatorname{tr}A}{1 + \operatorname{tr}A} = \frac{\operatorname{tr}B}{1 + \operatorname{tr}A}$).</p>
@@ -4113,11 +4137,13 @@ $$\cG{u_n = e - \frac e{2n} + o\Big(\frac1n\Big)},\qquad\text{donc}\ e - u_n\sim
 <li>Règle pratique en $+\infty$ : si $t^\alpha|f(t)|\to0$ avec $\alpha > 1$, alors $f$ est intégrable en $+\infty$.</li>
 </ol>
 <p class="ml">Exemple 1 : $f(t) = \frac{\sin t}t$ sur $\left]0, 1\right]$</p>
+<p><b>La fonction $f(t) = \frac{\sin t}t$ est-elle intégrable sur $\left]0, 1\right]$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $f$ a une limite finie en une borne ouverte, c'est un faux problème : $f$ se prolonge par continuité.</p>
 <p><b>Étape 2 : La limite en $0$.</b> $\sin t\sim t$, donc $\frac{\sin t}t\to1$.</p>
 <p><b>Étape 3 : Conclusion.</b> $f$ se prolonge par continuité sur $[0, 1]$ : $\cG{\text{intégrable sur}\ \left]0, 1\right]}$.</p>
 
 <p class="ml">Exemple 2 : $f(t) = \frac{\ln t}{\sqrt t}e^{-t}$ sur $\left]0, +\infty\right[$</p>
+<p><b>Montrer que $f(t) = \frac{\ln t}{\sqrt t}e^{-t}$ est intégrable sur $\left]0, +\infty\right[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On traite chaque point à problème séparément. En $0$ : si $t^\alpha|f|\to0$ avec $\alpha\lt1$, intégrable. En $+\infty$ : avec $\alpha > 1$.</p>
 <p><b>Étape 2 : Les points à problème.</b> $f$ est continue sur $\left]0, +\infty\right[$ : on regarde $\cR0$ et $\cR{+\infty}$.</p>
 <p><b>Étape 3 : En $0$</b>, avec $\alpha = \frac34\lt1$ :</p>
@@ -4127,6 +4153,7 @@ $$t^2|f(t)| = t^{3/2}\ln t\,e^{-t}\to0\ \Longrightarrow\ |f(t)| = o\Big(\cV{\fra
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est intégrable sur}\ \left]0, +\infty\right[}$.</p>
 
 <p class="ml">Exemple 3 : convergente mais pas intégrable</p>
+<p><b>Montrer que $\int_1^{+\infty}\frac{\sin t}t\,dt$ converge, mais que $t\mapsto\frac{\sin t}t$ n'est pas intégrable sur $[1, +\infty[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Intégrable $\Rightarrow$ convergente, mais pas l'inverse.</p>
 <p><b>Étape 2 : La convergence</b>, par IPP sur $[1, x]$ :</p>
 $$\int_1^x\frac{\sin t}t\,dt = \Big[-\frac{\cos t}t\Big]_1^x - \int_1^x\frac{\cos t}{t^2}\,dt.$$
@@ -4138,6 +4165,7 @@ $$\frac{|\sin t|}t\geqslant\frac1{2t} - \frac{\cos2t}{2t}.$$
 <h2 id="p-calc">4. Calculer une intégrale sur un intervalle</h2>
 <p>On calcule sur un segment $[a, x]$, puis on fait tendre $x$ vers la borne. On peut aussi faire une IPP ou un changement de variable directement, à condition que <b>les crochets aient une limite finie</b>.</p>
 <p class="ml">Exemple 4 : $\int_0^{+\infty}t\,e^{-t}\,dt$</p>
+<p><b>Montrer que $\int_0^{+\infty}t\,e^{-t}\,dt$ converge et calculer sa valeur.</b></p>
 <p><b>Étape 1 : Rappel.</b> On calcule sur $[0, x]$, puis on fait tendre $x$ vers $+\infty$.</p>
 <p><b>Étape 2 : IPP sur $[0, x]$</b> ($u = t$, $v' = e^{-t}$, $v = -e^{-t}$) :</p>
 $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}.$$
@@ -4164,6 +4192,7 @@ $$\text{Sur}\ ]a, b[:\ \text{on coupe en un}\ c\in\,]a, b[\ \text{et on demande 
 </table>
 
 <p class="ml">Exemple 5 : les intégrales de Riemann, à savoir refaire</p>
+<p>Soit $\alpha\in\mathbb R$. <b>Déterminer la nature de $\int_1^{+\infty}\frac{dt}{t^\alpha}$ et de $\int_0^1\frac{dt}{t^\alpha}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On calcule sur un segment avec une primitive, puis on passe à la limite. Pour $\alpha\neq1$, une primitive de $t^{-\alpha}$ est $\frac{t^{1-\alpha}}{1 - \alpha}$ ; pour $\alpha = 1$, c'est $\ln t$.</p>
 <p><b>Étape 2 : Cas $\alpha = 1$.</b> $\int_1^x\frac{dt}t = \ln x\to+\infty$ et $\int_x^1\frac{dt}t = -\ln x\to+\infty$ quand $x\to0^+$ : divergence des deux côtés.</p>
 <p><b>Étape 3 : Cas $\alpha\neq1$, en $+\infty$.</b></p>
@@ -4173,6 +4202,7 @@ $$\int_x^1\frac{dt}{t^\alpha} = \frac{1 - x^{1-\alpha}}{1 - \alpha}\longrightarr
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_1^{+\infty}\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha > 1}$ et $\cG{\int_0^1\frac{dt}{t^\alpha}\ \text{CV}\iff\alpha \lt 1}$. Donc $\int_0^{+\infty}\frac{dt}{t^\alpha}$ diverge pour <b>tout</b> $\alpha$.</p>
 
 <p class="ml">Exemple 6 : $\int_0^1\ln t\,dt$</p>
+<p><b>Montrer que $\int_0^1\ln t\,dt$ converge et calculer sa valeur.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int_0^1f = \lim\limits_{x\to0^+}\int_x^1f$. Une primitive de $\ln$ est $t\ln t - t$.</p>
 <p><b>Étape 2 : Sur $[x, 1]$.</b></p>
 $$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x\ln x + x.$$
@@ -4196,14 +4226,14 @@ $$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x
 <p>L'équivalent ne marche que si $f$ est de <b>signe constant</b> près du point. Pour un signe variable, on passe à $|f|$ (convergence absolue, §7).</p>
 
 <p class="ml">Exemple 8 : par majoration</p>
-<p>Nature de $\displaystyle\int_1^{+\infty}\frac{1 + \sin t}{t^2}\,dt$.</p>
+<p><b>Déterminer la nature de $\displaystyle\int_1^{+\infty}\frac{1 + \sin t}{t^2}\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $0\leq\cB f\leq\cO g$ et $\int\cO g$ CV $\Rightarrow\int\cB f$ CV.</p>
 <p><b>Étape 2 : Le signe.</b> $-1\leq\sin t\leq1$, donc $0\leq1 + \sin t\leq2$ : $\cB f\geq0$.</p>
 <p><b>Étape 3 : La majoration.</b> $0\leq\frac{1 + \sin t}{t^2}\leq\cO{\frac2{t^2}}$, et $\int_1^{+\infty}\frac{dt}{t^2}$ converge (Riemann, $\cV\alpha = 2 > 1$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{l'intégrale converge}}$.</p>
 
 <p class="ml">Exemple 9 : par équivalent, deux points à problème</p>
-<p>Nature de $\displaystyle\int_0^{+\infty}\frac{\sqrt t}{1 + t^2}\,dt$.</p>
+<p><b>Déterminer la nature de $\displaystyle\int_0^{+\infty}\frac{\sqrt t}{1 + t^2}\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\cB f\sim\cO g$ avec $\cO g\geq0$ : même nature. On traite chaque point séparément.</p>
 <p><b>Étape 2 : Les points à problème.</b> $f$ est continue et positive sur $[0, +\infty[$ : seul $\cR{+\infty}$ pose problème ($f(0) = 0$ est défini).</p>
 <p><b>Étape 3 : Un équivalent en $+\infty$.</b> $1 + t^2\sim t^2$, donc :</p>
@@ -4212,7 +4242,7 @@ $$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{l'intégrale converge}}$.</p>
 
 <p class="ml">Exemple 10 : montrer une divergence</p>
-<p>Nature de $\displaystyle\int_2^{+\infty}\frac{dt}{\ln t}$ et de $\displaystyle\int_0^1\frac{dt}{e^t - 1}$.</p>
+<p><b>Montrer que $\displaystyle\int_2^{+\infty}\frac{dt}{\ln t}$ et de $\displaystyle\int_0^1\frac{dt}{e^t - 1}$ divergent.</b></p>
 <p><b>Étape 1 : Rappel.</b> $0\leq\cO g\leq\cB f$ et $\int\cO g$ DV $\Rightarrow\int\cB f$ DV. Et $\cB f\sim\cO g\geq0$ : même nature.</p>
 <p><b>Étape 2 : La première.</b> Pour $t\geq2$ : $0 \lt \ln t\leq t$, donc $\frac1{\ln t}\geq\cO{\frac1t}$, et $\int_2^{+\infty}\frac{dt}t$ diverge ($\cV\alpha = 1$).</p>
 <p><b>Étape 3 : La seconde.</b> Seul $\cR0$ pose problème. $e^t - 1\sim t$ en $0$, donc $\frac1{e^t - 1}\sim\cO{\frac1t} > 0$, et $\int_0^1\frac{dt}t$ diverge.</p>
@@ -4224,6 +4254,7 @@ $$\frac{\sqrt t}{1 + t^2}\sim\frac{t^{1/2}}{t^2} = \cO{\frac1{t^{3/2}}}.$$
 <p>Une intégrale <b>convergente mais pas absolument convergente</b> est dite semi-convergente : $\int_1^{+\infty}\frac{\sin t}t\,dt$ (exemple 3). Pour la nature, on fait alors une <b>IPP</b> qui gagne une puissance de $t$.</p>
 
 <p class="ml">Exemple 11 : $\int_0^{+\infty}e^{-t}\cos t\,dt$ en passant par $\mathbb C$</p>
+<p><b>Montrer que $\int_0^{+\infty}e^{-t}\cos t\,dt$ converge et calculer sa valeur.</b></p>
 <p><b>Étape 1 : Rappel.</b> $|f|$ intégrable $\Rightarrow\int f$ converge. Et $\cos t = \operatorname{Re}(e^{it})$, $\int\operatorname{Re} = \operatorname{Re}\int$.</p>
 <p><b>Étape 2 : La convergence.</b> $|e^{-t}\cos t|\leq\cO{e^{-t}}$, intégrable sur $[0, +\infty[$ : convergence absolue.</p>
 <p><b>Étape 3 : On passe en complexe.</b> $e^{-t}\cos t = \operatorname{Re}\big(e^{(-1 + i)t}\big)$. Sur $[0, x]$ :</p>
@@ -4244,6 +4275,7 @@ $$\textbf{Changement de variable}:\ \varphi:\,]\alpha, \beta[\to]a, b[\ \text{bi
 <p>Si $\varphi$ est strictement décroissante, les bornes s'échangent. En pratique, on vérifie d'abord le <b>crochet</b>, puis on écrit l'égalité.</p>
 
 <p class="ml">Exemple 12 : $\int_0^{+\infty}t^ne^{-t}\,dt = n!$ par IPP</p>
+<p>Soit $n\in\mathbb N$. <b>Montrer que $\int_0^{+\infty}t^ne^{-t}\,dt$ converge et vaut $n!$.</b></p>
 <p><b>Étape 1 : Rappel.</b> IPP sur un intervalle : si $uv$ a des limites finies aux bornes, $\int u'v = [uv] - \int uv'$, même nature.</p>
 <p><b>Étape 2 : On pose</b> $I_n = \int_0^{+\infty}t^ne^{-t}\,dt$. Elle converge : $t^2\cdot t^ne^{-t}\to0$, donc $t^ne^{-t} = o\big(\frac1{t^2}\big)$ en $+\infty$.</p>
 <p><b>Étape 3 : L'IPP</b> pour $n\geq1$, avec $u = t^n$, $v' = e^{-t}$, $v = -e^{-t}$ :</p>
@@ -4267,6 +4299,7 @@ $$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\
 <p>On le redémontre à chaque fois : sur $[n, n + 1]$, $f(n + 1)\leq f(t)\leq f(n)$, puis on intègre (longueur $1$). Ensuite on <b>somme</b> les encadrements.</p>
 
 <p class="ml">Exemple 14 : la série $\sum\frac1{n\ln n}$</p>
+<p><b>Déterminer la nature de la série $\sum_{n\geq2}\frac1{n\ln n}$ par comparaison avec une intégrale.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f$ positive, continue, décroissante : $\sum f(n)$ et $\int f$ ont même nature.</p>
 <p><b>Étape 2 : La fonction.</b> $f(t) = \frac1{t\ln t}$ sur $[2, +\infty[$ : positive ($t > 0$ et $\ln t\geq\ln2 > 0$), continue, et décroissante car $t\ln t$ est un produit de deux fonctions croissantes positives.</p>
 <p><b>Étape 3 : L'intégrale.</b> Une primitive est $\ln(\ln t)$ (dérivée $\frac{1/t}{\ln t}$) :</p>
@@ -4274,6 +4307,7 @@ $$\int_2^x\frac{dt}{t\ln t} = \ln(\ln x) - \ln(\ln2)\longrightarrow+\infty.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq2}\frac1{n\ln n}\ \text{diverge}}$, alors que $\frac1{n\ln n} = o\big(\frac1n\big)$… la comparaison avec $\frac1n$ ne suffisait pas.</p>
 
 <p class="ml">Exemple 15 : un équivalent de $H_n = \sum_{k=1}^n\frac1k$</p>
+<p>Soit $H_n = \sum_{k=1}^n\frac1k$. <b>Montrer que $H_n\sim\ln n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int_k^{k+1}\frac{dt}t\leq\frac1k\leq\int_{k-1}^k\frac{dt}t$, puis on somme.</p>
 <p><b>Étape 2 : Minoration.</b> On somme $\frac1k\geq\int_k^{k+1}\frac{dt}t$ pour $k = 1$ à $n$ :</p>
 $$H_n\geq\int_1^{n+1}\frac{dt}t = \ln(n + 1).$$
@@ -4288,14 +4322,14 @@ $$H_n\leq1 + \int_1^n\frac{dt}t = 1 + \ln n.$$
 <p>Même chose avec $O$. C'est le parallèle exact des sommes partielles et des restes de séries.</p>
 
 <p class="ml">Exemple 16 : un équivalent d'intégrale partielle</p>
-<p>Équivalent de $F(x) = \displaystyle\int_1^x\frac{dt}{\sqrt t + 1}$ quand $x\to+\infty$.</p>
+<p><b>Déterminer un équivalent de $F(x) = \displaystyle\int_1^x\frac{dt}{\sqrt t + 1}$ quand $x\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f\sim g\geq0$ et $\int g$ diverge $\Rightarrow\int_a^xf\sim\int_a^xg$.</p>
 <p><b>Étape 2 : L'équivalent.</b> $\sqrt t + 1\sim\sqrt t$, donc $\frac1{\sqrt t + 1}\sim\cO{\frac1{\sqrt t}}\geq0$.</p>
 <p><b>Étape 3 : La référence diverge.</b> Une primitive de $t^{-1/2}$ est $\frac{t^{1/2}}{1/2} = 2\sqrt t$, donc $\int_1^x\frac{dt}{\sqrt t} = \big[2\sqrt t\big]_1^x = 2\sqrt x - 2\to+\infty$ ($\cV\alpha = \frac12\leq1$).</p>
 <p><b>Étape 4 : Conclusion.</b> $F(x)\sim2\sqrt x - 2\sim\cG{2\sqrt x}$.</p>
 
 <p class="ml">Exemple 17 : un équivalent de reste</p>
-<p>Équivalent de $R(x) = \displaystyle\int_x^{+\infty}\frac{dt}{t^2 + t + 1}$ quand $x\to+\infty$.</p>
+<p><b>Déterminer un équivalent de $R(x) = \displaystyle\int_x^{+\infty}\frac{dt}{t^2 + t + 1}$ quand $x\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f\sim g\geq0$ et $\int g$ converge $\Rightarrow\int_x^{+\infty}f\sim\int_x^{+\infty}g$.</p>
 <p><b>Étape 2 : L'équivalent.</b> $t^2 + t + 1\sim t^2$, donc $f(t)\sim\cO{\frac1{t^2}}$, dont l'intégrale converge en $+\infty$.</p>
 <p><b>Étape 3 : Le reste de référence.</b> $\int_x^{+\infty}\frac{dt}{t^2} = \Big[-\frac1t\Big]_x^{+\infty} = \frac1x$.</p>
@@ -4320,12 +4354,14 @@ $$\Big|\frac{f(t)}t\Big|\leq\frac12f(t)^2 + \frac12\cdot\cO{\frac1{t^2}}.$$
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux sur}\ I\\&f_n\to f\ \text{simplement, avec}\ f\ \text{continue par morceaux}\\&|f_n(t)|\leqslant\cO{\varphi(t)}\ \text{pour tout}\ n,\ \text{avec}\ \cO\varphi\ \textbf{intégrable}\end{aligned}\right\}\ \Longrightarrow\ \int_If_n\xrightarrow[n\to+\infty]{}\int_If.$$</div>
 <p>La clé est la <b>domination</b> : une fonction $\cO\varphi$ qui ne dépend pas de $n$.</p>
 <p class="ml">Exemple 19 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
+<p><b>Déterminer $\lim_{n\to+\infty}\int_0^{\pi/2}\sin^nt\,dt$ avec le théorème de convergence dominée.</b></p>
 <p><b>Étape 1 : Rappel.</b> Convergence dominée : limite simple + domination $|f_n|\leqslant\varphi$ intégrable, indépendante de $n$.</p>
 <p><b>Étape 2 : La limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite vaut $0$ sauf en un point.</p>
 <p><b>Étape 3 : La domination.</b> $|\sin t|\leq1$ donc $|\sin^nt| = |\sin t|^n\leqslant\cO1$, et $\int_0^{\pi/2}1\,dt = \frac\pi2$ est finie : $1$ est intégrable sur le segment.</p>
 <p><b>Étape 4 : Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
 
 <p class="ml">Exemple 20 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
+<p><b>Déterminer $\lim_{n\to+\infty}\int_0^n\big(1 - \frac tn\big)^n\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Convergence dominée. Une borne qui dépend de $n$ se met dans une indicatrice.</p>
 <p><b>Étape 2 : La mise en forme.</b> $f_n(t) = \big(1 - \frac tn\big)^n\mathbf 1_{[0, n]}(t)$ sur $[0, +\infty[$.</p>
 <p><b>Étape 3 : La limite simple.</b> Pour $t$ fixé et $n > t$ :</p>
@@ -4341,6 +4377,7 @@ $$0\leqslant f_n(t)\leqslant e^{n\cdot(-t/n)} = \cO{e^{-t}},\ \text{intégrable 
 <div class="sbox">$$\left.\begin{aligned}&f_n\ \text{continues par morceaux et intégrables sur}\ I\\&\sum f_n\ \text{converge simplement vers}\ S\ \text{continue par morceaux}\\&\sum_n\int_I|f_n|\ \textbf{converge}\end{aligned}\right\}\ \Longrightarrow\ S\ \text{intégrable et}\ \int_I\sum_{n=0}^{+\infty}f_n = \sum_{n=0}^{+\infty}\int_If_n.$$</div>
 <p><b>Méthode pratique</b> : on fait d'abord le calcul formel en échangeant $\int$ et $\sum$, puis on vérifie les hypothèses.</p>
 <p class="ml">Exemple 21 : $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$</p>
+<p><b>Montrer que $\int_0^1\frac{-\ln t}{1 - t}\,dt = \frac{\pi^2}6$, en admettant $\sum_{n\geq1}\frac1{n^2} = \frac{\pi^2}6$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int\sum f_n = \sum\int f_n$ si les $f_n$ sont intégrables et $\sum\int|f_n|$ converge.</p>
 <p><b>Étape 2 : Développer.</b> Pour $t\in\left]0, 1\right[$, $\frac1{1 - t} = \sum_{n\geqslant0}t^n$, donc $\frac{-\ln t}{1 - t} = \sum_{n\geqslant0}f_n(t)$ avec $f_n(t) = -t^n\ln t\geqslant0$.</p>
 <p><b>Étape 3 : Intégrer un terme</b> (IPP, $u = -\ln t$, $v' = t^n$) :</p>
@@ -4361,6 +4398,7 @@ $$\int_0^1\frac{-\ln t}{1 - t}\,dt = \sum_{n=0}^{+\infty}\frac1{(n + 1)^2} = \cG
 <h2 id="p-cont">17. Continuité</h2>
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{continue sur}\ A\ \text{pour tout}\ t\\&t\mapsto f(x, t)\ \text{continue par morceaux sur}\ I\ \text{pour tout}\ x\\&|f(x, t)|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\ \text{est continue sur}\ A.$$</div>
 <p class="ml">Exemple 22 : $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$ sur $[0, +\infty[$</p>
+<p>Soit $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$. <b>Montrer que $g$ est définie et continue sur $[0, +\infty[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Continuité sous l'intégrale : continuité en $x$, continuité par morceaux en $t$, et $|f(x, t)|\leqslant\varphi(t)$ intégrable, indépendante de $x$.</p>
 <p><b>Étape 2 : En $x$.</b> Pour $t$ fixé, $x\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue.</p>
 <p><b>Étape 3 : En $t$.</b> Pour $x$ fixé, $t\mapsto\frac{e^{-xt}}{1 + t^2}$ est continue sur $[0, +\infty[$.</p>
@@ -4371,6 +4409,7 @@ $$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégr
 <h2 id="p-lim">18. Limite en une borne</h2>
 <div class="sbox">$$f(x, t)\xrightarrow[x\to a]{}\ell(t)\ \text{pour tout}\ t,\quad|f(x, t)|\leqslant\cO{\varphi(t)}\ \text{intégrable}\ \Longrightarrow\ \lim_{x\to a}\int_If(x, t)\,dt = \int_I\ell(t)\,dt.$$</div>
 <p class="ml">Exemple 23 : la même $g$ en $+\infty$</p>
+<p>Avec la même fonction $g(x) = \int_0^{+\infty}\frac{e^{-xt}}{1 + t^2}\,dt$, <b>déterminer $\lim_{x\to+\infty}g(x)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Limite sous l'intégrale : limite simple en $t$, et la même domination.</p>
 <p><b>Étape 2 : La limite simple.</b> Pour $t > 0$, $\frac{e^{-xt}}{1 + t^2}\to0$ quand $x\to+\infty$ (en $t = 0$ elle vaut $1$, un seul point).</p>
 <p><b>Étape 3 : La domination.</b> $\frac1{1 + t^2}$, comme pour la continuité.</p>
@@ -4380,6 +4419,7 @@ $$\Big|\frac{e^{-xt}}{1 + t^2}\Big|\leqslant\cO{\frac1{1 + t^2}},\ \text{intégr
 <div class="sbox">$$\left.\begin{aligned}&x\mapsto f(x, t)\ \text{de classe}\ \mathcal C^1\ \text{sur}\ J\\&t\mapsto f(x, t)\ \text{intégrable},\ t\mapsto\tfrac{\partial f}{\partial x}(x, t)\ \text{continue par morceaux}\\&\Big|\tfrac{\partial f}{\partial x}(x, t)\Big|\leqslant\cO{\varphi(t)},\ \cO\varphi\ \text{intégrable}\end{aligned}\right\}\ \Longrightarrow\ g\in\mathcal C^1(J),\quad g'(x) = \int_I\frac{\partial f}{\partial x}(x, t)\,dt.$$</div>
 <p>C'est la formule de Leibniz : on dérive sous le signe intégrale. Pour $\mathcal C^k$, on domine chaque dérivée partielle jusqu'à l'ordre $k$.</p>
 <p class="ml">Exemple 24 : $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$</p>
+<p>Soit $F(x) = \int_0^{+\infty}e^{-t^2}\cos(xt)\,dt$. <b>Montrer que $F$ est de classe $\mathcal C^1$ sur $\mathbb R$, trouver une équation différentielle qu'elle vérifie et la résoudre.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dérivation sous l'intégrale : dominer $\big|\frac{\partial f}{\partial x}\big|$ par $\varphi$ intégrable, puis $F'(x) = \int\frac{\partial f}{\partial x}$.</p>
 <p><b>Étape 2 : La dérivée partielle.</b> $f(x, t) = e^{-t^2}\cos(xt)$ :</p>
 $$\frac{\partial f}{\partial x}(x, t) = -t\,e^{-t^2}\sin(xt).$$
@@ -4469,12 +4509,14 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 <p><b>Étape 4 : Conclusion.</b> Il faut les deux : $\cG{\text{convergente}\iff0 \lt \alpha \lt 1}$.</p>
 
 <p class="ml">Exercice 2 : $\int_0^{\pi/2}\ln(\sin t)\,dt$ converge</p>
+<p><b>Montrer que $\int_0^{\pi/2}\ln(\sin t)\,dt$ converge.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f\sim g$ de signe constant : même nature. Et $\int_0^1\ln t\,dt$ converge.</p>
 <p><b>Étape 2 : Le point à problème.</b> Seul $0$ : $\sin t\to0$ et $\ln(\sin t)\to-\infty$. Sur $]0, \frac\pi2]$, $\ln(\sin t)\leq0$ : signe constant.</p>
 <p><b>Étape 3 : Un équivalent.</b> $\ln(\sin t) = \ln t + \ln\big(\frac{\sin t}t\big)$, et $\ln\big(\frac{\sin t}t\big)\to\ln1 = 0$ tandis que $\ln t\to-\infty$. Donc $\ln(\sin t)\sim\ln t$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\int_0^1\ln t\,dt$ converge, donc $\cG{\int_0^{\pi/2}\ln(\sin t)\,dt\ \text{converge}}$ (elle vaut $-\frac\pi2\ln2$).</p>
 
 <p class="ml">Exercice 3 : les intégrales $I_n = \int_0^{+\infty}\frac{dt}{(1 + t^2)^n}$</p>
+<p>Soit $I_n = \int_0^{+\infty}\frac{dt}{(1 + t^2)^n}$ pour $n\geq1$. <b>Montrer que $I_n$ converge et établir une relation entre $I_{n+1}$ et $I_n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> IPP sur un intervalle : vérifier que le crochet a des limites finies.</p>
 <p><b>Étape 2 : Convergence.</b> Pour $n\geq1$, $\frac1{(1 + t^2)^n}\sim\frac1{t^{2n}}$ en $+\infty$, avec $2n\geq2 > 1$ : converge.</p>
 <p><b>Étape 3 : IPP</b> avec $u = \frac1{(1 + t^2)^n}$, $v' = 1$, $v = t$, $u' = \frac{-2nt}{(1 + t^2)^{n+1}}$ :</p>
@@ -9198,7 +9240,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <div class="sbox"><ul class="sbl"><li>$\displaystyle H = n^\perp = \{x,\ \langle x, n\rangle = 0\}$</li><li>$\displaystyle d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|}$</li><li>$\displaystyle p_H(x) = x - \frac{\langle x, n\rangle}{\|n\|^2}n$</li></ul></div>
 <p>Dans $\mathbb R^n$, l'hyperplan $a_1x_1 + \dots + a_nx_n = 0$ a pour vecteur normal $\cR{n = (a_1, \dots, a_n)}$ : on le <b>lit</b> sur l'équation.</p>
 <p class="ml">Exemple 1 : distance à un hyperplan de $\mathbb R^4$</p>
-<p>Distance de $x = (1, 2, 0, 1)$ à $H:\ x_1 + x_2 - x_3 + x_4 = 0$.</p>
+<p><b>Calculer la distance de $x = (1, 2, 0, 1)$ à $H:\ x_1 + x_2 - x_3 + x_4 = 0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $d(x, H) = \frac{|\langle x, n\rangle|}{\|n\|}$, $n$ lu sur l'équation.</p>
 <p><b>Étape 2 : Le vecteur normal.</b> On lit les coefficients de $1\cdot x_1 + 1\cdot x_2 + (-1)\cdot x_3 + 1\cdot x_4 = 0$ : $\cR{n = (1, 1, -1, 1)}$. Sa norme : $\|n\| = \sqrt{1^2 + 1^2 + (-1)^2 + 1^2} = \sqrt{1 + 1 + 1 + 1} = \sqrt4 = 2$.</p>
 <p><b>Étape 3 : Le produit scalaire</b>, avec $x = (1, 2, 0, 1)$ : $\langle x, n\rangle = 1\times1 + 2\times1 + 0\times(-1) + 1\times1 = 1 + 2 + 0 + 1 = 4$.</p>
@@ -9209,7 +9251,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 <ul class="sbl"><li>$\displaystyle \text{En matrice, dans une BON}:\quad S = I_n - \frac2{n^\top n}\,nn^\top$</li><li>$\displaystyle (\text{symétrique et orthogonale})$</li></ul></div>
 <p>Une symétrie $s$ ($s^2 = \operatorname{id}$) est <b>orthogonale</b> si et seulement si $s$ conserve la norme, si et seulement si sa matrice en BON est <b>symétrique</b>.</p>
 <p class="ml">Exemple 2 : matrice d'une réflexion</p>
-<p>Matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</p>
+<p><b>Écrire la matrice dans la base canonique de la réflexion par rapport au plan $P:\ x + y + z = 0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $S = I - \frac2{n^\top n}nn^\top$.</p>
 <p><b>Étape 2 : Le normal.</b> On lit $\cR{n = (1, 1, 1)^\top}$ sur l'équation. $n^\top n = 1\times1 + 1\times1 + 1\times1 = 3$. Et $nn^\top$ (colonne fois ligne) a pour coefficient $(i, j)$ le produit $n_in_j = 1\times1 = 1$ : c'est $J$, la matrice remplie de $1$.</p>
 <p><b>Étape 3 : Le calcul.</b> $S = I_3 - \frac23J$ : sur la diagonale $1 - \frac23 = \frac13$, ailleurs $0 - \frac23 = -\frac23$. On factorise $\frac13$ :</p>
@@ -9225,7 +9267,7 @@ $$S = I_3 - \frac23J = \frac13\begin{pmatrix}1&-2&-2\\-2&1&-2\\-2&-2&1\end{pmatr
 <div class="sbox">$$A\in O(n)\iff A^\top A = I_n\iff A^{-1} = A^\top\iff\text{les colonnes forment une BON de}\ \mathbb R^n\iff\text{les lignes aussi}.$$
 <ul class="sbl"><li>$\displaystyle \text{La matrice de passage entre deux BON est orthogonale}$</li><li>$\displaystyle SO(n) = \{A\in O(n),\ \det A = 1\}$</li></ul></div>
 <p class="ml">Exemple 3 : vérifier qu'une matrice est orthogonale</p>
-<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$.</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$. <b>Montrer que $A$ est orthogonale, et calculer $\det A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A\in O(n)\iff$ les colonnes forment une BON : normes $1$ et produits scalaires $0$.</p>
 <p><b>Étape 2 : Les normes.</b> On calcule avec $3A$ (il faudra diviser par $3^2 = 9$). Colonne $1$ : $(2, 2, -1)$, $2^2 + 2^2 + (-1)^2 = 4 + 4 + 1 = 9$. Colonne $2$ : $(-1, 2, 2)$, $1 + 4 + 4 = 9$. Colonne $3$ : $(2, -1, 2)$, $4 + 1 + 4 = 9$. Donc chaque colonne de $A$ a pour norme au carré $\frac99 = 1$.</p>
 <p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2\propto2\times(-1) + 2\times2 + (-1)\times2 = -2 + 4 - 2 = 0$ ; $C_1\cdot C_3\propto2\times2 + 2\times(-1) + (-1)\times2 = 4 - 2 - 2 = 0$ ; $C_2\cdot C_3\propto(-1)\times2 + 2\times(-1) + 2\times2 = -2 - 2 + 4 = 0$.</p>
@@ -9238,7 +9280,7 @@ $$\det(3A) = 2\begin{vmatrix}2&-1\\2&2\end{vmatrix} - (-1)\begin{vmatrix}2&-1\\-
 <div class="sbox">$$SO(2):\ R_\theta = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\ (\text{rotation d'angle}\ \theta),\qquad O(2)\setminus SO(2):\ \begin{pmatrix}\cos\theta&\sin\theta\\\sin\theta&-\cos\theta\end{pmatrix}\ (\text{réflexion}).$$
 $$R_\theta R_\varphi = R_{\theta + \varphi}:\ SO(2)\ \text{est commutatif.}\qquad\text{La réflexion a pour axe la droite d'angle}\ \frac\theta2.$$</div>
 <p class="ml">Exemple 4 : reconnaître</p>
-<p>Nature de $A = \frac15\begin{pmatrix}3&-4\\4&3\end{pmatrix}$ et $B = \frac15\begin{pmatrix}3&4\\4&-3\end{pmatrix}$.</p>
+<p>Nature de $A = \frac15\begin{pmatrix}3&-4\\4&3\end{pmatrix}$ et $B = \frac15\begin{pmatrix}3&4\\4&-3\end{pmatrix}$. <b>Montrer que $A$ et $B$ sont orthogonales et dire si ce sont des rotations ou des réflexions.</b></p>
 <p><b>Étape 1 : Rappel.</b> Dans $O(2)$ : $\det = 1$ rotation, $\det = -1$ réflexion.</p>
 <p><b>Étape 2 : Orthogonales.</b> Colonnes de $A$ : $\frac15(3, 4)$ et $\frac15(-4, 3)$, normes au carré $\frac{3^2 + 4^2}{25} = \frac{9 + 16}{25} = 1$ et $\frac{16 + 9}{25} = 1$ ; produit scalaire $\frac{3\times(-4) + 4\times3}{25} = \frac{-12 + 12}{25} = 0$. Même calcul pour $B$ : colonnes $\frac15(3, 4)$ et $\frac15(4, -3)$, produit $\frac{12 - 12}{25} = 0$.</p>
 <p><b>Étape 3 : $A$.</b> $\det A = \frac{3\times3 - (-4)\times4}{25} = \frac{9 + 16}{25} = 1$ : rotation $R_\theta$, et on lit la 1<sup>re</sup> colonne $(\cos\theta, \sin\theta) = \big(\frac35, \frac45\big)$. Comme $\cos\theta > 0$, $\theta\in\,]-\frac\pi2, \frac\pi2[$ et $\tan\theta = \frac{4/5}{3/5} = \frac43$, donc $\cO{\theta = \arctan\frac43}$.</p>
@@ -9252,7 +9294,7 @@ $$\operatorname{tr}A = 1 + 2\cos\theta,\qquad\text{signe de}\ \sin\theta = \text
 <p><b>1.</b> $A^\top A = I$. <b>2.</b> $\det A = 1$ (sinon $-A$ est une rotation : $A$ est une « antirotation »). <b>3.</b> L'axe : résoudre $AX = X$, normaliser $\cR u$ (il <b>oriente</b> l'axe). <b>4.</b> $\cos\cO\theta = \frac{\operatorname{tr}A - 1}2$. <b>5.</b> Le signe de $\sin\theta$ : celui de $\det(u, x, Ax)$ pour un $x$ simple non colinéaire à $u$.</p>
 
 <p class="ml">Exemple 5 : axe et angle</p>
-<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$ (exemple 3 : $A\in SO(3)$).</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&2\\2&2&-1\\-1&2&2\end{pmatrix}$ (exemple 3 : $A\in SO(3)$). <b>Déterminer l'axe et l'angle de la rotation de matrice $A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Axe $= \ker(A - I)$, $\cos\theta = \frac{\operatorname{tr}A - 1}2$, signe de $\sin\theta$ par $\det(u, x, Ax)$.</p>
 <p><b>Étape 2 : L'axe.</b> $(3A - 3I)X = 0$ :</p>
 $$\left\{\begin{aligned}-x - y + 2z &= 0\\2x - y - z &= 0\end{aligned}\right.\ \Longrightarrow\ x = 2z - y,\ \ 4z - 3y - z = 0\ \Longrightarrow\ y = z = x.$$
@@ -9311,6 +9353,7 @@ $$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}
 <p><b>Étape 5 : Conclusion.</b> $\cG{A^\top A\in\mathcal S_n^+,\ \text{et}\ A^\top A\in\mathcal S_n^{++}\iff A\in GL_n(\mathbb R)}$.</p>
 
 <p class="ml">Exemple 9 : l'encadrement de Rayleigh</p>
+<p>Soit $u$ un endomorphisme symétrique de valeurs propres $\lambda_1\leq\dots\leq\lambda_n$. <b>Montrer que $\lambda_1\|x\|^2\leq\langle u(x), x\rangle\leq\lambda_n\|x\|^2$ pour tout $x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Théorème spectral : une BON $(e_i)$ de vecteurs propres, $u(e_i) = \lambda_ie_i$.</p>
 <p><b>Étape 2 : On décompose</b> $x = \sum x_ie_i$, donc $u(x) = \sum\lambda_ix_ie_i$.</p>
 <p><b>Étape 3 : Le produit scalaire.</b> En BON, $\langle\sum a_ie_i, \sum b_ie_i\rangle = \sum a_ib_i$. Avec $a_i = \lambda_ix_i$ et $b_i = x_i$ : $\langle u(x), x\rangle = \sum\lambda_ix_i\cdot x_i = \sum\lambda_ix_i^2$.</p>
@@ -9328,6 +9371,7 @@ $$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}
 </table>
 
 <p class="ml">Exemple 10 : $u(M) = \alpha M + \operatorname{tr}(M)I_n$ sur $\mathcal M_n(\mathbb R)$</p>
+<p>Soit $\alpha\in\mathbb R$ et $u(M) = \alpha M + \operatorname{tr}(M)I_n$ sur $\mathcal M_n(\mathbb R)$, muni de $\langle A, B\rangle = \operatorname{tr}({}^tAB)$. <b>Montrer que $u$ est autoadjoint.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\langle A, B\rangle = \operatorname{tr}({}^tAB)$, et $\langle I_n, N\rangle = \operatorname{tr}N$.</p>
 <p><b>Étape 2 : On calcule.</b> $\langle u(M), N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\langle I_n, N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\operatorname{tr}(N)$.</p>
 <p><b>Étape 3 : Symétrique en $M, N$.</b> L'expression ne change pas quand on échange $M$ et $N$ : $\langle u(M), N\rangle = \langle M, u(N)\rangle$.</p>
@@ -9336,7 +9380,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}\alpha + 1&0&0&1\\0&\alpha&0&0\\0&0&\al
 <p><b>Étape 5 : Conclusion.</b> $\cG{u\ \text{est un endomorphisme symétrique}}$.</p>
 
 <p class="ml">Exemple 11 : reconnaître une projection orthogonale</p>
-<p>$A = \frac13\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}$ dans la base canonique de $\mathbb R^3$.</p>
+<p>$A = \frac13\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}$ dans la base canonique de $\mathbb R^3$. <b>Montrer que $A$ est la matrice d'une projection orthogonale et préciser sur quoi.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $\,{}^tA = A$ (base orthonormée) : projection orthogonale sur $\operatorname{Im}A = (\ker A)^\perp$.</p>
 <p><b>Étape 2 : $A^2$.</b> On calcule $\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2$ : case $(1, 1)$ : $4 + 1 + 1 = 6$ ; case $(1, 2)$ : $-2 - 2 + 1 = -3$ ; par symétrie des rôles :</p>
 $$\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2 = \begin{pmatrix}6&-3&-3\\-3&6&-3\\-3&-3&6\end{pmatrix} = 3\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix},\quad\text{donc}\quad A^2 = \frac19\times3\times3A = A.$$
@@ -9344,6 +9388,7 @@ $$\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2 = \begin{pmatrix}6&-3&
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la projection orthogonale sur le plan}\ x + y + z = 0}$.</p>
 
 <p class="ml">Exemple 12 : $f\circ g$ symétrique $\iff f\circ g = g\circ f$</p>
+<p>Soient $f, g$ deux endomorphismes symétriques d'un espace euclidien. <b>Montrer que $f\circ g$ est symétrique si et seulement si $f\circ g = g\circ f$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En base orthonormée : $A = {}^tA$, $B = {}^tB$.</p>
 <p><b>Étape 2 : On transpose.</b> $\,{}^t(AB) = {}^tB\,{}^tA = BA$. Donc $AB$ symétrique $\iff AB = BA$.</p>
 <p><b>Étape 3 : Un contre-exemple qui ne commute pas.</b></p>
@@ -9355,6 +9400,7 @@ $$A = \begin{pmatrix}1&0\\0&0\end{pmatrix},\ B = \begin{pmatrix}0&1\\1&0\end{pma
 $$u\ \text{symétrique},\ F\ \text{stable}\Rightarrow F^\perp\ \text{stable}.\qquad\textbf{Spectral}:\ S = PDP^{-1} = PD\,{}^tP,\ P\in O_n(\mathbb R).$$</div>
 
 <p class="ml">Exemple 13 : $\operatorname{Sp}(p\circ q)\subset[0, 1]$ pour deux projecteurs orthogonaux</p>
+<p>Soient $p, q$ deux projecteurs orthogonaux d'un espace euclidien. <b>Montrer que les valeurs propres de $p\circ q$ sont dans $[0, 1]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un projecteur orthogonal est symétrique, $\|q(x)\|\leq\|x\|$, et $\langle q(x), x\rangle = \|q(x)\|^2$.</p>
 <p><b>Étape 2 : L'équation.</b> $p(q(x)) = \lambda x$, $x\neq0$, $\lambda\neq0$. Alors $x = p\big(\frac{q(x)}\lambda\big)\in\operatorname{Im}p$, donc $p(x) = x$.</p>
 <p><b>Étape 3 : On teste contre $x$.</b> $\lambda\|x\|^2 = \langle p(q(x)), x\rangle = \langle q(x), p(x)\rangle = \langle q(x), x\rangle = \|q(x)\|^2$.</p>
@@ -9366,6 +9412,7 @@ $$p = \begin{pmatrix}1&0\\0&0\end{pmatrix},\quad q = \begin{pmatrix}c^2&cs\\cs&s
 <p class="ml">Exemple 14 : la matrice $\min(i, j)$ est définie positive</p>
 <p>$A = (\min(i, j))_{1\leq i,j\leq n}$, par exemple pour $n = 4$ :</p>
 $$A = \begin{pmatrix}1&1&1&1\\1&2&2&2\\1&2&3&3\\1&2&3&4\end{pmatrix}.$$
+<p><b>Montrer que $A$ est symétrique définie positive.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $A = {}^tTT$ avec $T$ inversible, $\,{}^tXAX = \|TX\|^2 > 0$ pour $X\neq0$.</p>
 <p><b>Étape 2 : La factorisation.</b> $T$ triangulaire supérieure remplie de $1$ :</p>
 $$T = \begin{pmatrix}1&1&1&1\\0&1&1&1\\0&0&1&1\\0&0&0&1\end{pmatrix},\qquad{}^tTT = \begin{pmatrix}1&0&0&0\\1&1&0&0\\1&1&1&0\\1&1&1&1\end{pmatrix}\begin{pmatrix}1&1&1&1\\0&1&1&1\\0&0&1&1\\0&0&0&1\end{pmatrix} = \begin{pmatrix}1&1&1&1\\1&2&2&2\\1&2&3&3\\1&2&3&4\end{pmatrix}.$$
@@ -9375,7 +9422,7 @@ $$T = \begin{pmatrix}1&1&1&1\\0&1&1&1\\0&0&1&1\\0&0&0&1\end{pmatrix},\qquad{}^tT
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{toutes les valeurs propres de}\ A\ \text{sont}\ > 0}$.</p>
 
 <p class="ml">Exemple 15 : la décomposition spectrale $S = \sum\lambda_iU_i{}^tU_i$</p>
-<p>$S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$.</p>
+<p>$S = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. <b>Écrire $S$ sous la forme $\sum\lambda_iU_i{}^tU_i$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Base orthonormée de vecteurs propres $(U_1, \dots, U_n)$ : $S = \sum\lambda_iU_i{}^tU_i$ (les deux côtés coïncident sur chaque $U_j$, car $\,{}^tU_iU_j = \delta_{ij}$).</p>
 <p><b>Étape 2 : Éléments propres.</b> Somme des lignes $3$ : $U_1 = \frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix}$, $\lambda_1 = 3$. Trace $4$ : $\lambda_2 = 1$, $U_2 = \frac1{\sqrt2}\begin{pmatrix}1\\-1\end{pmatrix}$ (orthogonal à $U_1$).</p>
 <p><b>Étape 3 : Les projecteurs.</b></p>
@@ -9384,6 +9431,7 @@ $$U_1{}^tU_1 = \frac12\begin{pmatrix}1\\1\end{pmatrix}\begin{pmatrix}1&1\end{pma
 $$\cG{3\times\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix} + 1\times\frac12\begin{pmatrix}1&-1\\-1&1\end{pmatrix} = \frac12\begin{pmatrix}3 + 1&3 - 1\\3 - 1&3 + 1\end{pmatrix} = \begin{pmatrix}2&1\\1&2\end{pmatrix} = S}.$$
 
 <p class="ml">Exemple 16 : $\operatorname{tr}(AU)\leq\operatorname{tr}A$ ($A$ symétrique positive, $U$ orthogonale)</p>
+<p>Soient $A$ symétrique positive et $U$ orthogonale de taille $n$. <b>Montrer que $\operatorname{tr}(AU)\leq\operatorname{tr}A$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $A = PDP^{-1}$, $P\in O_n$, $D = \operatorname{diag}(\lambda_i)$, $\lambda_i\geq0$ ; $\operatorname{tr}(XY) = \operatorname{tr}(YX)$.</p>
 <p><b>Étape 2 : On transporte.</b> $\operatorname{tr}(AU) = \operatorname{tr}(PDP^{-1}U) = \operatorname{tr}(DP^{-1}UP)$, et $V = P^{-1}UP = (v_{ij})$ est orthogonale.</p>
 <p><b>Étape 3 : La diagonale.</b> $DV = \begin{pmatrix}\lambda_1v_{11}&\cdots&\lambda_1v_{1n}\\\vdots&&\vdots\\\lambda_nv_{n1}&\cdots&\lambda_nv_{nn}\end{pmatrix}$, donc $\operatorname{tr}(DV) = \sum\lambda_iv_{ii}$.</p>
@@ -9400,19 +9448,21 @@ $$\cG{3\times\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix} + 1\times\frac12\begin{
 </table>
 
 <p class="ml">Exemple 17 : $M\mapsto AM$ est une isométrie $\iff A\in O_n$</p>
+<p>Soit $A\in\mathcal M_n(\mathbb R)$ et $f_A:M\mapsto AM$ sur $\mathcal M_n(\mathbb R)$ muni de $\langle M, N\rangle = \operatorname{tr}({}^tMN)$. <b>Montrer que $f_A$ est une isométrie si et seulement si $A\in O_n(\mathbb R)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Conserver le produit scalaire $\langle M, N\rangle = \operatorname{tr}({}^tMN)$.</p>
 <p><b>Étape 2 : On calcule.</b> $\langle AM, AN\rangle = \operatorname{tr}({}^tM\,{}^tAAN)$, donc $f_A$ isométrie $\iff\operatorname{tr}\big({}^tM({}^tAA - I_n)N\big) = 0$ pour tous $M, N$, soit $\langle M, ({}^tAA - I_n)N\rangle = 0$.</p>
 <p><b>Étape 3 : Le seul vecteur orthogonal à tout est $0$.</b> $({}^tAA - I_n)N = 0$ pour tout $N$ ; avec $N = I_n$ : $\,{}^tAA = I_n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f_A\ \text{isométrie}\iff A\in O_n(\mathbb R)}$. Exemple : $A = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$, $\,{}^tAA = \begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}0&-1\\1&0\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix}$ ✓.</p>
 
 <p class="ml">Exemple 18 : $\langle e_i, e_j\rangle = \langle f_i, f_j\rangle$ entraîne une isométrie $e_i\mapsto f_i$</p>
+<p>Soient $(e_1, \dots, e_n)$ une base et $(f_1, \dots, f_n)$ une famille d'un espace euclidien avec $\langle e_i, e_j\rangle = \langle f_i, f_j\rangle$ pour tous $i, j$. <b>Montrer que l'application linéaire $u$ définie par $u(e_i) = f_i$ est une isométrie.</b></p>
 <p><b>Étape 1 : Rappel.</b> $u$ défini par $u(e_i) = f_i$ ; on montre $\|u(x)\| = \|x\|$.</p>
 <p><b>Étape 2 : On développe.</b> $x = \sum x_ie_i$ : $\|u(x)\|^2 = \Big\langle\sum x_if_i, \sum x_jf_j\Big\rangle = \sum_{i,j}x_ix_j\langle f_i, f_j\rangle$.</p>
 <p><b>Étape 3 : L'hypothèse.</b> $\langle f_i, f_j\rangle = \langle e_i, e_j\rangle$ : la somme vaut $\sum x_ix_j\langle e_i, e_j\rangle = \|x\|^2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\in O(E)}$ : les matrices de Gram $G = (\langle e_i, e_j\rangle)$ des deux familles sont égales.</p>
 
 <p class="ml">Exemple 19 : une rotation de $\mathbb R^3$</p>
-<p>$A = \frac13\begin{pmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{pmatrix}$.</p>
+<p>$A = \frac13\begin{pmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{pmatrix}$. <b>Montrer que $A$ est une rotation et déterminer son axe et son angle.</b></p>
 <p><b>Étape 1 : Rappel.</b> Colonnes orthonormées, $\det = 1$ : rotation ; axe = invariants ; $\operatorname{tr}A = 1 + 2\cos\theta$ ; signe par $\det(u, v, Av)$.</p>
 <p><b>Étape 2 : Orthogonale.</b> Colonnes de $3A$ : $C_1 = (2, -1, 2)$, $C_2 = (2, 2, -1)$, $C_3 = (-1, 2, 2)$. Normes : $4 + 1 + 4 = 9$ chacune. Produits : $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = -2 - 2 + 4 = 0$, $C_2\cdot C_3 = -2 + 4 - 2 = 0$.</p>
 <p><b>Étape 3 : Le déterminant</b> de $3A$, développé selon la 1<sup>re</sup> ligne :</p>
@@ -9424,14 +9474,14 @@ $$\begin{pmatrix}-1&2&-1\\-1&-1&2\\2&-1&-1\end{pmatrix}\begin{pmatrix}x\\y\\z\en
 <p><b>Étape 6 : Conclusion.</b> $\cG{A\ \text{est la rotation d'axe}\ \mathbb R(1, 1, 1)\ \text{orienté par}\ u,\ \text{d'angle}\ -\tfrac\pi3}$.</p>
 
 <p class="ml">Exemple 20 : une réflexion, reconnue sans calcul de valeurs propres</p>
-<p>$A = \frac17\begin{pmatrix}-2&6&-3\\6&3&2\\-3&2&6\end{pmatrix}$.</p>
+<p>$A = \frac17\begin{pmatrix}-2&6&-3\\6&3&2\\-3&2&6\end{pmatrix}$. <b>Montrer que $A$ est une réflexion et préciser son plan.</b></p>
 <p><b>Étape 1 : Rappel.</b> Symétrique et orthogonale $\Rightarrow A^2 = {}^tAA = I_3$ : symétrie orthogonale par rapport à $\ker(A - I_3)$.</p>
 <p><b>Étape 2 : Orthogonale.</b> Normes des colonnes de $7A$ : $4 + 36 + 9 = 49$, $36 + 9 + 4 = 49$, $9 + 4 + 36 = 49$. Produits : $-12 + 18 - 6 = 0$, $6 + 12 - 18 = 0$, $-18 + 6 + 12 = 0$.</p>
 <p><b>Étape 3 : Les invariants.</b> $(7A - 7I_3)V = 0$ : ligne $1$ : $-9x + 6y - 3z = 0$, soit $3x - 2y + z = 0$ ; les lignes $2$ ($6x - 4y + 2z = 0$) et $3$ ($-3x + 2y - z = 0$) sont proportionnelles.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la réflexion par rapport au plan}\ 3x - 2y + z = 0}$ (et $\operatorname{tr}A = \frac{-2 + 3 + 6}7 = 1 = 1 + 1 - 1$ ✓).</p>
 
 <p class="ml">Exemple 21 : un demi-tour</p>
-<p>$A = \frac19\begin{pmatrix}-7&4&4\\4&-1&8\\4&8&-1\end{pmatrix}$.</p>
+<p>$A = \frac19\begin{pmatrix}-7&4&4\\4&-1&8\\4&8&-1\end{pmatrix}$. <b>Montrer que $A$ est un demi-tour et préciser son axe.</b></p>
 <p><b>Étape 1 : Rappel.</b> Symétrique orthogonale : symétrie ; $\operatorname{tr}A = \dim E_1 - \dim E_{-1}$.</p>
 <p><b>Étape 2 : Orthogonale.</b> Normes : $49 + 16 + 16 = 81$, $16 + 1 + 64 = 81$, $16 + 64 + 1 = 81$. Produits : $-28 - 4 + 32 = 0$, $-28 + 32 - 4 = 0$, $16 - 8 - 8 = 0$.</p>
 <p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = \frac{-7 - 1 - 1}9 = -1$, et $\dim E_1 + \dim E_{-1} = 3$ : $\dim E_1 = 1$, $\dim E_{-1} = 2$.</p>
@@ -9439,12 +9489,14 @@ $$\begin{pmatrix}-1&2&-1\\-1&-1&2\\2&-1&-1\end{pmatrix}\begin{pmatrix}x\\y\\z\en
 <p><b>Étape 5 : Conclusion.</b> $\cG{A\ \text{est le demi-tour (rotation d'angle}\ \pi)\ \text{d'axe}\ \mathbb R(1, 2, 2)}$.</p>
 
 <p class="ml">Exemple 22 : les endomorphismes qui conservent le produit vectoriel</p>
+<p><b>Déterminer les endomorphismes $f$ de $\mathbb R^3$ euclidien orienté tels que $f(x)\wedge f(y) = f(x\wedge y)$ pour tous $x, y$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f(x)\wedge f(y) = f(x\wedge y)$ ; on regarde l'image $(I, J, K)$ de la base $(i, j, k)$.</p>
 <p><b>Étape 2 : Les relations.</b> $I\wedge J = K$, $J\wedge K = I$, $K\wedge I = J$. Si l'un est nul, les trois le sont : $f = 0$.</p>
 <p><b>Étape 3 : Sinon, orthogonaux.</b> $K = I\wedge J$ est orthogonal à $I$ et $J$, et de même pour les autres : base orthogonale directe. $\|K\| = \|I\|\|J\|$, $\|I\| = \|J\|\|K\|$, $\|J\| = \|K\|\|I\|$ ; le produit donne $\|I\|\|J\|\|K\| = 1$, puis $\|K\|^2 = 1$, etc.</p>
 <p><b>Étape 4 : Conclusion.</b> $(I, J, K)$ base orthonormée directe : $\cG{f = 0\ \text{ou}\ f\in SO(3)}$ ; la réciproque se vérifie sur la matrice $\begin{pmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}$ dans une base adaptée.</p>
 
 <p class="ml">Exemple 23 : deux rotations qui commutent</p>
+<p>Soient $f, g$ deux rotations de $\mathbb R^3$, distinctes de l'identité. <b>À quelle condition $f\circ g = g\circ f$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $f\circ g = g\circ f$, $g$ envoie l'axe de $f$ dans l'ensemble des invariants de $f$.</p>
 <p><b>Étape 2 : Même axe.</b> Deux rotations d'axe $\mathbb Rk$ commutent : leurs matrices $\begin{pmatrix}R_\theta&0\\0&1\end{pmatrix}$ et $\begin{pmatrix}R_\varphi&0\\0&1\end{pmatrix}$ se multiplient en $\begin{pmatrix}R_{\theta + \varphi}&0\\0&1\end{pmatrix}$, dans les deux ordres.</p>
 <p><b>Étape 3 : Axes distincts.</b> $g(u) = \pm u$ ; $g(u) = u$ forcerait le même axe, donc $g(u) = -u$ : $g$ a la valeur propre $-1$, c'est un demi-tour, d'axe $\perp u$ ; de même pour $f$.</p>
@@ -9485,18 +9537,21 @@ $$f = \begin{pmatrix}1&0&0\\0&-1&0\\0&0&-1\end{pmatrix},\quad g = \begin{pmatrix
 
 <h2 id="e-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : valeurs propres réelles d'une isométrie</p>
+<p>Soit $u\in O(E)$. <b>Montrer que les seules valeurs propres réelles possibles de $u$ sont $1$ et $-1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $u\in O(E)\iff\|u(x)\| = \|x\|$ pour tout $x$.</p>
 <p><b>Étape 2 : Un vecteur propre.</b> Soit $\lambda\in\mathbb R$ valeur propre, $x\neq0$ avec $u(x) = \lambda x$.</p>
 <p><b>Étape 3 : Les normes.</b> $\|u(x)\| = \|\lambda x\| = |\lambda|\,\|x\|$ (homogénéité), et $\|u(x)\| = \|x\|$ (isométrie). Donc $|\lambda|\,\|x\| = \|x\|$, et on divise par $\|x\|\neq0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{|\lambda| = 1,\ \text{donc}\ \lambda = \pm1}$.</p>
 
 <p class="ml">Exercice 2 : projecteur orthogonal $\iff$ autoadjoint</p>
+<p>Soit $p$ un projecteur d'un espace euclidien. <b>Montrer que $p$ est un projecteur orthogonal si et seulement si $p$ est autoadjoint.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p$ orthogonal $\iff\ker p\perp\operatorname{Im}p$. Pour un projecteur, $x = p(x) + (x - p(x))$ avec $p(x)\in\operatorname{Im}p$ et $x - p(x)\in\ker p$.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> Si $\ker p\perp\operatorname{Im}p$ : $\langle p(x), y\rangle = \langle p(x), p(y) + (y - p(y))\rangle = \langle p(x), p(y)\rangle$, et de même $\langle x, p(y)\rangle = \langle p(x), p(y)\rangle$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> Si $p^* = p$ : pour $x\in\ker p$ et $y = p(z)\in\operatorname{Im}p$, $\langle x, y\rangle = \langle x, p(z)\rangle = \langle p(x), z\rangle = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\ \text{orthogonal}\iff p^* = p}$.</p>
 
 <p class="ml">Exercice 3 : $\sum|a_{ij}|\leq n\sqrt n$ pour $A\in O(n)$</p>
+<p>Soit $A = (a_{ij})\in O(n)$. <b>Montrer que $\sum_{i,j}|a_{ij}|\leq n\sqrt n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz dans $\mathbb R^{n^2}$, et $\operatorname{tr}(A^\top A) = \sum a_{ij}^2$.</p>
 <p><b>Étape 2 : La somme des carrés.</b> Le coefficient $(j, j)$ de $A^\top A$ est $\sum_ia_{ij}^2$ (colonne $j$ fois colonne $j$), donc $\operatorname{tr}(A^\top A) = \sum_j\sum_ia_{ij}^2$. Comme $A^\top A = I_n$, cette somme vaut $\operatorname{tr}I_n = n$.</p>
 <p><b>Étape 3 : Cauchy-Schwarz</b> avec les $n^2$ nombres $|a_{ij}|$ et $n^2$ fois $1$ :</p>
