@@ -5156,12 +5156,12 @@ $$\cG{\operatorname{Card}(A\cup B) = 50 + 33 - 16 = 67}.$$
 <p>Combien d'entiers de $[\![1, 100]\!]$ sont divisibles par $2$, $3$ ou $5$ ?</p>
 <p><b>Étape 1 : Rappel.</b> Pour trois ensembles (à redémontrer en appliquant deux fois la formule à deux ensembles) :</p>
 $$|A\cup B\cup C| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap B\cap C|.$$
-<p><b>Étape 2 : Les simples.</b> $|A| = 50$ (par $2$), $|B| = 33$ (par $3$), $|C| = 20$ (par $5$).</p>
-<p><b>Étape 3 : Les doubles.</b> Par $6$ : $16$. Par $10$ : $10$. Par $15$ : $6$.</p>
-<p><b>Étape 4 : La triple.</b> Par $30$ : $3$.</p>
+<p><b>Étape 2 : Les simples.</b> On prend la partie entière de $\frac{100}d$ : $|A| = \lfloor\frac{100}2\rfloor = 50$, $|B| = \lfloor33{,}3\ldots\rfloor = 33$, $|C| = \lfloor\frac{100}5\rfloor = 20$.</p>
+<p><b>Étape 3 : Les doubles.</b> Divisible par $2$ et $3$ $\iff$ par $2\times3 = 6$ : $\lfloor16{,}6\ldots\rfloor = 16$. Par $2\times5 = 10$ : $\frac{100}{10} = 10$. Par $3\times5 = 15$ : $\lfloor6{,}6\ldots\rfloor = 6$.</p>
+<p><b>Étape 4 : La triple.</b> Par $2\times3\times5 = 30$ : $\lfloor\frac{100}{30}\rfloor = \lfloor3{,}3\ldots\rfloor = 3$ ($30, 60, 90$).</p>
 <p><b>Étape 5 : Conclusion.</b></p>
 <p>Simples : $50 + 33 + 20 = 103$. Doubles : $16 + 10 + 6 = 32$. Triple : $3$.</p>
-$$\cG{103 - 32 + 3 = 74}.$$
+$$\cG{103 - 32 + 3 = 71 + 3 = 74}.$$
 
 <h2 id="d-prod">4. Produit cartésien, principe multiplicatif</h2>
 <div class="sbox">$$\operatorname{Card}(E\times F) = \operatorname{Card}(E)\times\operatorname{Card}(F),\qquad\operatorname{Card}(E^{\cV p}) = \operatorname{Card}(E)^{\cV p}.$$</div>
@@ -5332,22 +5332,22 @@ $$\cR{\binom{28}5 = \frac{28\times27\times26\times25\times24}{5\times4\times3\ti
 <p><b>Étape 1 : Rappel.</b> $n^p$ applications, complémentaire, et $|A\cup B\cup C|$ par le crible (exemple 2).</p>
 <p><b>Étape 2 : Sur $\{a, b\}$.</b> Il y a $2^n$ applications. Les non surjectives n'atteignent qu'une valeur : ce sont les $\cR2$ applications constantes. Donc $2^n - 2$ surjections.</p>
 <p><b>Étape 3 : Sur $\{a, b, c\}$, ce qu'on retire.</b> $A_a$ = applications qui évitent $a$ : $|A_a| = 2^n$, de même pour $b$ et $c$. $A_a\cap A_b$ = constantes égales à $c$ : $1$. $A_a\cap A_b\cap A_c = \varnothing$.</p>
-<p><b>Étape 4 : Le crible.</b> $|A_a\cup A_b\cup A_c| = 3\times2^n - 3\times1 + 0$.</p>
-<p><b>Étape 5 : Conclusion.</b> $\cG{2^n - 2}$ et $\cG{3^n - 3\times2^n + 3}$ surjections. Contrôle $n = 3$ : $27 - 24 + 3 = 6 = 3!$.</p>
+<p><b>Étape 4 : Le crible.</b> $|A_a\cup A_b\cup A_c| = (2^n + 2^n + 2^n) - (1 + 1 + 1) + 0 = 3\times2^n - 3$, et les surjections sont les $3^n$ applications moins celles-là : $3^n - (3\times2^n - 3) = 3^n - 3\times2^n + 3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{2^n - 2}$ et $\cG{3^n - 3\times2^n + 3}$ surjections. Contrôle $n = 3$ : $3^3 = 27$, $3\times2^3 = 24$, $27 - 24 + 3 = 6 = 3!$ (une surjection de $3$ sur $3$ est une bijection).</p>
 
 <p class="ml">Exercice 2 : MISSISSIPPI</p>
 <p><b>Étape 1 : Rappel.</b> $\frac{n!}{k_1!\cdots k_r!}$.</p>
 <p><b>Étape 2 : Les lettres.</b> $n = 11$ : M ($1$), I ($4$), S ($4$), P ($2$).</p>
 <p><b>Étape 3 : Le calcul.</b></p>
-$$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{24\times24\times2} = \frac{39\,916\,800}{1152} = 34\,650.$$
-<p><b>Étape 4 : Conclusion.</b> $\cG{34\,650}$ anagrammes. Contrôle : $\binom{11}4\binom74\binom32 = 330\times35\times3 = 34\,650$.</p>
+$$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \frac{39\,916\,800}{1152} = 34\,650\quad(4! = 24,\ 24\times24 = 576,\ 576\times2 = 1152).$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{34\,650}$ anagrammes. Contrôle : places des I $\binom{11}4 = \frac{11\times10\times9\times8}{24} = 330$, des S parmi les $7$ restantes $\binom74 = 35$, des P parmi $3$ : $\binom32 = 3$ ; $330\times35 = 11\,550$, $11\,550\times3 = 34\,650$.</p>
 
 <p class="ml">Exercice 3 : les diagonales d'un polygone</p>
 <p>Combien de diagonales a un polygone convexe à $n$ sommets ?</p>
 <p><b>Étape 1 : Rappel.</b> Un segment entre deux sommets = une paire de sommets : $\binom n2$.</p>
-<p><b>Étape 2 : Tous les segments.</b> $\binom n2 = \frac{n(n - 1)}2$.</p>
+<p><b>Étape 2 : Tous les segments.</b> Un segment = une paire de sommets : $\binom n2 = \frac{n(n - 1)}2$.</p>
 <p><b>Étape 3 : On retire les côtés.</b> Il y a $\cR n$ côtés.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\frac{n(n - 1)}2 - n = \frac{n(n - 3)}2}$. Contrôle : un carré a $\frac{4\times1}2 = 2$ diagonales.</p>
+<p><b>Étape 4 : Conclusion.</b> $\frac{n(n - 1)}2 - n = \frac{n(n - 1) - 2n}2 = \frac{n(n - 1 - 2)}2$ : $\cG{\frac{n(n - 3)}2}$. Contrôle : un carré, $n = 4$ : $\frac{4\times1}2 = 2$ diagonales.</p>
 
 <p class="ml">Exercice 4 : les applications strictement croissantes</p>
 <p>Combien d'applications strictement croissantes de $[\![1, p]\!]$ dans $[\![1, n]\!]$ ?</p>
@@ -5421,10 +5421,10 @@ $$a\mid b,\ b\neq0\Rightarrow|a|\leq|b|.\qquad a\mid b\ \text{et}\ b\mid a\iff a
 <p class="ml">Exemple 2 : $n + 1$ divise $n^2 + 3$</p>
 <p>Trouver les $n\in\mathbb Z$ tels que $n + 1\mid n^2 + 3$.</p>
 <p><b>Étape 1 : Rappel.</b> Si $d\mid a$ et $d\mid b$, alors $d$ divise toute combinaison $au + bv$.</p>
-<p><b>Étape 2 : On fait apparaître $n + 1$.</b> $n^2 + 3 = (n + 1)(n - 1) + 4$.</p>
+<p><b>Étape 2 : On fait apparaître $n + 1$.</b> $(n + 1)(n - 1) = n^2 - 1$, donc $n^2 + 3 = (n^2 - 1) + 4 = (n + 1)(n - 1) + 4$.</p>
 <p><b>Étape 3 : On élimine.</b> $n + 1\mid(n + 1)(n - 1)$, donc : $n + 1\mid n^2 + 3\iff n + 1\mid4$.</p>
 <p><b>Étape 4 : Les diviseurs de $4$.</b> $n + 1\in\{-4, -2, -1, 1, 2, 4\}$, soit $n\in\{-5, -3, -2, 0, 1, 3\}$.</p>
-<p><b>Étape 5 : Conclusion.</b> $\cG{n\in\{-5, -3, -2, 0, 1, 3\}}$. Contrôle : $n = 3$, $4\mid12$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{n\in\{-5, -3, -2, 0, 1, 3\}}$. Contrôle : $n = 3$, $n + 1 = 4$ et $n^2 + 3 = 9 + 3 = 12 = 4\times3$.</p>
 
 <h2 id="z-eucl">3. Division euclidienne</h2>
 <div class="sbox">$$\cB a\in\mathbb Z,\ \cB b\in\mathbb N^*:\quad\exists!\,(q, r)\in\mathbb Z^2,\quad\cB a = \cB bq + r\quad\text{et}\quad0\leq r \lt \cB b.\qquad b\mid a\iff r = 0.$$</div>
@@ -5445,7 +5445,7 @@ $$\mathcal D(a)\cap\mathcal D(b) = \mathcal D(a\wedge b):\ \text{les diviseurs c
 <p><b>Étape 1 : Rappel.</b> $a = bq + r\Rightarrow a\wedge b = b\wedge r$. On s'arrête au reste nul.</p>
 <p><b>Étape 2 : Les divisions.</b></p>
 $$\begin{aligned}1071 &= 2\times462 + \cR{147}\\462 &= 3\times147 + \cR{21}\\147 &= 7\times21 + 0\end{aligned}$$
-<p><b>Étape 3 : On lit.</b> $1071\wedge462 = 462\wedge147 = 147\wedge21 = 21\wedge0$.</p>
+<p><b>Étape 3 : On lit.</b> $a\wedge b = b\wedge r$ à chaque division : $1071\wedge462 = 462\wedge147 = 147\wedge21 = 21\wedge0 = 21$ (le dernier reste non nul).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{1071\wedge462 = 21}$.</p>
 
 <h2 id="z-bez">5. Bézout</h2>
@@ -5462,13 +5462,13 @@ $$\textbf{Théorème de Bézout}:\ \cB a\wedge\cB b = 1\iff\exists\cO u, \cO v\i
 <p><b>Étape 3 : On isole $147$.</b> D'après $1071 = 2\times462 + 147$ : $\cR{147} = 1071 - 2\times462$.</p>
 <p><b>Étape 4 : On remplace et on regroupe.</b></p>
 $$21 = 462 - 3\,(1071 - 2\times462) = 462 - 3\times1071 + 6\times462 = 7\times462 - 3\times1071.$$
-<p><b>Étape 5 : Conclusion.</b> $\cG{\cO u = -3,\ \cO v = 7}$. Contrôle : $-3213 + 3234 = 21$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\cO u = -3,\ \cO v = 7}$. Contrôle : $1071\times(-3) = -3213$, $462\times7 = 3234$, $-3213 + 3234 = 21$.</p>
 
 <p class="ml">Exemple 6 : prouver $a\wedge b = 1$ par Bézout</p>
 <p>Montrer que $(2n + 1)\wedge(3n + 2) = 1$ pour tout $n\in\mathbb Z$.</p>
 <p><b>Étape 1 : Rappel.</b> $a\wedge b = 1\iff\exists u, v,\ au + bv = 1$.</p>
 <p><b>Étape 2 : On élimine $n$.</b> $3(2n + 1) - 2(3n + 2) = 6n + 3 - 6n - 4 = -1$.</p>
-<p><b>Étape 3 : On ajuste le signe.</b> $(-3)(2n + 1) + 2(3n + 2) = 1$ : $\cO u = -3$, $\cO v = 2$.</p>
+<p><b>Étape 3 : On ajuste le signe.</b> On multiplie par $-1$ : $-3(2n + 1) + 2(3n + 2) = 1$, soit $(-3)(2n + 1) + 2(3n + 2) = 1$ : $\cO u = -3$, $\cO v = 2$. Bézout conclut.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(2n + 1)\wedge(3n + 2) = 1}$.</p>
 
 <h2 id="z-gauss">6. Le lemme de Gauss et ses conséquences</h2>
@@ -5492,12 +5492,12 @@ $$\text{Si}\ (x_0, y_0)\ \text{est solution}:\quad x = x_0 + k\frac bd,\quad y =
 
 <p class="ml">Exemple 8 : $15x + 21y = 9$</p>
 <p><b>Étape 1 : Rappel.</b> Solutions $\iff a\wedge b\mid c$. Puis Bézout et Gauss.</p>
-<p><b>Étape 2 : Le PGCD.</b> $15\wedge21 = 3$ et $3\mid9$ : il y a des solutions. On divise par $3$ : $5x + 7y = 3$.</p>
+<p><b>Étape 2 : Le PGCD.</b> $15 = 3\times5$, $21 = 3\times7$ : $15\wedge21 = 3$, et $9 = 3\times3$, donc $3\mid9$ : il y a des solutions. On divise tout par $3$ : $5x + 7y = 3$.</p>
 <p><b>Étape 3 : Une solution de $5u + 7v = 1$.</b> Euclide remonté : $7 = 1\times5 + 2$ et $5 = 2\times2 + 1$, donc $1 = 5 - 2\times2 = 5 - 2(7 - 5) = 3\times5 - 2\times7$. Une autre solution, plus pratique ici : $5\times(-4) + 7\times3 = -20 + 21 = 1$ (on obtient la seconde depuis la première en ajoutant $7$ à $u$ et en retirant $5$ à $v$ : $3 - 7 = -4$, $-2 + 5 = 3$). On multiplie par $3$ : $5\times(-12) + 7\times9 = -60 + 63 = 3$, donc $(x_0, y_0) = (-12, 9)$.</p>
 <p><b>Étape 4 : On soustrait.</b> $5x + 7y = 3 = 5x_0 + 7y_0$ donne :</p>
 $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 5 : Gauss.</b> $7\mid5(x + 12)$ et $7\wedge5 = 1$, donc $7\mid x + 12$ : $x = -12 + 7k$. On remplace : $5\times7k = -7(y - 9)$, donc $y = 9 - 5k$.</p>
-<p><b>Étape 6 : Conclusion.</b> $\cG{\mathcal S = \{(-12 + 7k,\ 9 - 5k),\ k\in\mathbb Z\}}$. Contrôle $k = 2$ : $(2, -1)$, $30 - 21 = 9$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{\mathcal S = \{(-12 + 7k,\ 9 - 5k),\ k\in\mathbb Z\}}$. Contrôle $k = 2$ : $x = -12 + 14 = 2$, $y = 9 - 10 = -1$, et $15\times2 + 21\times(-1) = 30 - 21 = 9$.</p>
 
 <h2 id="z-ppcm">8. PPCM</h2>
 <div class="sbox">$$a\vee b = \text{le plus petit multiple commun}\ \geq0.\qquad a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m.\qquad(a\wedge b)\times(a\vee b) = |ab|.$$</div>
@@ -5524,7 +5524,7 @@ $$a\wedge b = \prod p^{\min(v_p(a), v_p(b))},\qquad a\vee b = \prod p^{\max(v_p(
 <p>$a = 360$, $b = 84$.</p>
 <p><b>Étape 1 : Rappel.</b> $\wedge$ : exposants minimum. $\vee$ : exposants maximum.</p>
 <p><b>Étape 2 : Les décompositions</b>, en divisant par les premiers dans l'ordre : $360 = 2\times180 = 2\times2\times90 = 2\times2\times2\times45 = 2^3\times3\times15 = 2^3\times3^2\times5$. Et $84 = 2\times42 = 2\times2\times21 = 2^2\times3\times7$.</p>
-<p><b>Étape 3 : Le PGCD.</b> $2^{\min(3, 2)}\times3^{\min(2, 1)}\times5^0\times7^0 = 2^2\times3 = 12$.</p>
+<p><b>Étape 3 : Le PGCD.</b> On prend le plus petit exposant de chaque premier : $2^{\min(3, 2)}\times3^{\min(2, 1)}\times5^{\min(1, 0)}\times7^{\min(0, 1)} = 2^2\times3^1\times5^0\times7^0 = 4\times3\times1\times1 = 12$.</p>
 <p><b>Étape 4 : Le PPCM.</b> $2^{\max(3, 2)}\times3^{\max(2, 1)}\times5\times7 = 8\times9\times5\times7 = 72\times35 = 2520$. Contrôle : $12\times2520 = 30\,240$ et $360\times84 = 30\,240$.</p>
 <p><b>Étape 5 : Les diviseurs de $360$.</b> Un diviseur positif est $2^i3^j5^k$ avec $0\leq i\leq3$, $0\leq j\leq2$, $0\leq k\leq1$ : $4\times3\times2 = 24$ diviseurs.</p>
 <p><b>Étape 6 : Conclusion.</b> $\cG{360\wedge84 = 12,\ 360\vee84 = 2520}$, et $360$ a $24$ diviseurs positifs.</p>
@@ -5549,7 +5549,7 @@ $$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv 
 <p><b>Étape 1 : Rappel.</b> Le dernier chiffre est le reste modulo $10$. On cherche $m$ avec $7^m\equiv1\ [10]$.</p>
 <p><b>Étape 2 : Les puissances.</b> $7^1\equiv7$, $7^2 = 49\equiv9$, $7^3\equiv9\times7 = 63\equiv3$, $7^4\equiv3\times7 = 21\equiv\cG1\ [10]$.</p>
 <p><b>Étape 3 : La division de l'exposant.</b> $2026 = 4\times506 + 2$.</p>
-<p><b>Étape 4 : On réduit.</b> $7^{2026} = (7^4)^{506}\times7^2\equiv1^{506}\times49\equiv9\ [10]$.</p>
+<p><b>Étape 4 : On réduit.</b> $7^{2026} = 7^{4\times506 + 2} = (7^4)^{506}\times7^2\equiv1^{506}\times49 = 49\equiv9\ [10]$ ($49 = 4\times10 + 9$).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{7^{2026}\ \text{se termine par}\ 9}$.</p>
 
 <p class="ml">Exemple 14 : une divisibilité pour tout $n$</p>
@@ -5586,24 +5586,24 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 
 <p class="ml">Exemple 17 : $2^{100}$ modulo $13$</p>
 <p><b>Étape 1 : Rappel.</b> $13$ est premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$.</p>
-<p><b>Étape 2 : On divise l'exposant.</b> $100 = 8\times12 + 4$.</p>
+<p><b>Étape 2 : On divise l'exposant.</b> Fermat : $13$ premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$. Et $100 = 8\times12 + 4$ ($8\times12 = 96$, $100 - 96 = 4$).</p>
 <p><b>Étape 3 : On réduit.</b> $2^{100} = 2^{96}\times2^4 = (2^{12})^8\times2^4\equiv1^8\times16\ [13]$, et $16 = 13 + 3\equiv3\ [13]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{2^{100}\equiv3\ [13]}$.</p>
 
 <p class="ml">Exemple 18 : $42$ divise $n^7 - n$</p>
 <p><b>Étape 1 : Rappel.</b> Fermat : $n^p\equiv n\ [p]$. Et si des entiers premiers entre eux deux à deux divisent $N$, leur produit aussi.</p>
 <p><b>Étape 2 : Modulo $7$.</b> Fermat avec $p = 7$ : $n^7\equiv n\ [7]$.</p>
-<p><b>Étape 3 : Modulo $3$.</b> $n^3\equiv n$, donc $n^7 = n^3\cdot n^3\cdot n\equiv n\cdot n\cdot n = n^3\equiv n\ [3]$.</p>
-<p><b>Étape 4 : Modulo $2$.</b> $n^2\equiv n$, donc $n^7\equiv n\ [2]$ (de même, on réduit les exposants).</p>
-<p><b>Étape 5 : Conclusion.</b> $2$, $3$, $7$ divisent $n^7 - n$ et sont premiers entre eux deux à deux : $\cG{42\mid n^7 - n}$.</p>
+<p><b>Étape 3 : Modulo $3$.</b> Fermat : $n^3\equiv n\ [3]$. Donc $n^7 = n^3\cdot n^3\cdot n\equiv n\cdot n\cdot n = n^3\equiv n\ [3]$.</p>
+<p><b>Étape 4 : Modulo $2$.</b> $n^2\equiv n\ [2]$, donc $n^7 = n^2\cdot n^2\cdot n^2\cdot n\equiv n\cdot n\cdot n\cdot n = n^4 = n^2\cdot n^2\equiv n\cdot n = n^2\equiv n\ [2]$.</p>
+<p><b>Étape 5 : Conclusion.</b> $2$, $3$, $7$ divisent $n^7 - n$ et sont premiers entre eux deux à deux, donc leur produit $2\times3\times7 = 42$ aussi : $\cG{42\mid n^7 - n}$.</p>
 
 <h2 id="z-chin">13. Systèmes de congruences <span class="hp">programme de Spé</span></h2>
 <div class="sbox">$$m\wedge n = 1:\quad\begin{cases}x\equiv a\ [m]\\x\equiv b\ [n]\end{cases}\ \text{a une unique solution modulo}\ mn\ \text{(lemme chinois)}.$$</div>
 <p class="ml">Exemple 19 : $x\equiv2\ [3]$ et $x\equiv3\ [5]$</p>
 <p><b>Étape 1 : Rappel.</b> On exprime la première congruence, on remplace dans la seconde, on résout avec un inverse.</p>
 <p><b>Étape 2 : La première.</b> $x = 2 + 3k$, $k\in\mathbb Z$.</p>
-<p><b>Étape 3 : Dans la seconde.</b> $2 + 3k\equiv3\ [5]\iff3k\equiv1\ [5]$. L'inverse de $3$ modulo $5$ est $2$ ($3\times2 = 6\equiv1$), donc $k\equiv2\ [5]$ : $k = 2 + 5j$.</p>
-<p><b>Étape 4 : On remplace.</b> $x = 2 + 3(2 + 5j) = 8 + 15j$.</p>
+<p><b>Étape 3 : Dans la seconde.</b> $2 + 3k\equiv3\ [5]\iff3k\equiv3 - 2 = 1\ [5]$. L'inverse de $3$ modulo $5$ est $2$ ($3\times2 = 6 = 5 + 1\equiv1$) ; on multiplie par $2$ : $6k\equiv2$, soit $k\equiv2\ [5]$ : $k = 2 + 5j$.</p>
+<p><b>Étape 4 : On remplace.</b> $x = 2 + 3(2 + 5j) = 2 + 6 + 15j = 8 + 15j$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{x\equiv8\ [15]}$. Contrôle : $8 = 2\times3 + 2$ et $8 = 5 + 3$.</p>
 
 <h2 id="z-enonce">14. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
@@ -5647,26 +5647,26 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p><b>Étape 1 : Rappel.</b> Toute fraction s'écrit $\frac pq$ avec $p\wedge q = 1$. Lemme d'Euclide : $2\mid ab\Rightarrow2\mid a$ ou $2\mid b$.</p>
 <p><b>Étape 2 : Par l'absurde.</b> $\sqrt2 = \frac pq$ avec $p\wedge q = 1$, donc $p^2 = 2q^2$.</p>
 <p><b>Étape 3 : $p$ est pair.</b> $2\mid p^2 = p\times p$, donc $2\mid p$ : $p = 2p'$.</p>
-<p><b>Étape 4 : $q$ est pair.</b> $4p'^2 = 2q^2$, donc $q^2 = 2p'^2$ et de même $2\mid q$.</p>
+<p><b>Étape 4 : $q$ est pair.</b> $p^2 = (2p')^2 = 4p'^2$, donc $4p'^2 = 2q^2$ ; on divise par $2$ : $q^2 = 2p'^2$, et le même raisonnement donne $2\mid q$.</p>
 <p><b>Étape 5 : Conclusion.</b> $2\mid p\wedge q = 1$ : absurde. $\cG{\sqrt2\notin\mathbb Q}$.</p>
 
 <p class="ml">Exercice 2 : $(n^2 + n)\wedge(2n + 1)$</p>
 <p><b>Étape 1 : Rappel.</b> Bézout : $au + bv = 1\Rightarrow a\wedge b = 1$.</p>
 <p><b>Étape 2 : On élimine.</b> $(2n + 1)^2 = 4n^2 + 4n + 1 = 4(n^2 + n) + 1$.</p>
-<p><b>Étape 3 : La combinaison.</b> $(2n + 1)\times(2n + 1) + (n^2 + n)\times(-4) = 1$.</p>
+<p><b>Étape 3 : La combinaison.</b> De $(2n + 1)^2 = 4(n^2 + n) + 1$ on tire $(2n + 1)\times(2n + 1) + (n^2 + n)\times(-4) = 1$ : Bézout avec $u = 2n + 1$, $v = -4$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(n^2 + n)\wedge(2n + 1) = 1}$ pour tout $n$.</p>
 
 <p class="ml">Exercice 3 : $p$ premier, $p\geq5$ : $24\mid p^2 - 1$</p>
 <p><b>Étape 1 : Rappel.</b> $8\mid N$, $3\mid N$, $8\wedge3 = 1\Rightarrow24\mid N$.</p>
 <p><b>Étape 2 : On factorise.</b> $p^2 - 1 = (p - 1)(p + 1)$.</p>
-<p><b>Étape 3 : Par $8$.</b> $p$ est impair, donc $p - 1$ et $p + 1$ sont deux pairs consécutifs : l'un est multiple de $4$, l'autre de $2$. Donc $8\mid p^2 - 1$.</p>
+<p><b>Étape 3 : Par $8$.</b> $p$ est impair ($p\neq2$), donc $p - 1$ et $p + 1$ sont deux pairs consécutifs (écart $2$) : parmi deux pairs consécutifs, l'un est multiple de $4$. Le produit contient donc $4\times2 = 8$ : $8\mid p^2 - 1$.</p>
 <p><b>Étape 4 : Par $3$.</b> Parmi $p - 1, p, p + 1$, un est multiple de $3$, et ce n'est pas $p$ (premier $\neq3$). Donc $3\mid p^2 - 1$.</p>
-<p><b>Étape 5 : Conclusion.</b> $\cG{24\mid p^2 - 1}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $8\wedge3 = 1$, donc $8\times3 = 24$ divise : $\cG{24\mid p^2 - 1}$ (exemple $p = 5$ : $25 - 1 = 24$).</p>
 
 <p class="ml">Exercice 4 : le critère de divisibilité par $9$</p>
 <p><b>Étape 1 : Rappel.</b> Les congruences passent aux puissances et aux sommes.</p>
 <p><b>Étape 2 : L'écriture décimale.</b> $n = \sum_{k=0}^ma_k10^k$ avec $a_k\in[\![0, 9]\!]$ les chiffres.</p>
-<p><b>Étape 3 : On réduit.</b> $10\equiv1\ [9]$, donc $10^k\equiv1$ et $n\equiv\sum_{k=0}^ma_k\ [9]$.</p>
+<p><b>Étape 3 : On réduit.</b> $10 = 9 + 1\equiv1\ [9]$, donc $10^k\equiv1^k = 1$ et $n = \sum a_k10^k\equiv\sum_{k=0}^ma_k\times1\ [9]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{9\mid n\iff9\ \text{divise la somme de ses chiffres}}$. Exemple : $4\,725$, $4 + 7 + 2 + 5 = 18$, donc $9\mid4725$.</p>
 
 <h2 id="z-arbre">L'arbre de l'arithmétique</h2>
