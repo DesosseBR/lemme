@@ -8288,7 +8288,7 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \cB a\in\mathbb Z,\ \cB b\in\mathbb N^*:\quad\exists!\,(q, r)\in\mathbb Z^2,\quad\cB a = \cB bq + r\quad\text{et}\quad0\leq r \lt \cB b$</li><li>$\displaystyle b\mid a\iff r = 0$</li></ul></div>
 <p>Pour $b > 0$ : $q = \lfloor\frac ab\rfloor$. Le reste est <b>toujours positif</b>, même si $a \lt 0$.</p>
 <p class="ml">Exemple 3 : diviser un négatif</p>
-<p>Division euclidienne de $-17$ par $5$.</p>
+<p><b>Effectuer la division euclidienne de $-17$ par $5$ : donner le quotient et le reste.</b></p>
 <p><b>Étape 1 : Rappel.</b> $a = bq + r$ avec $0\leq r \lt b$, et $q = \lfloor\frac ab\rfloor$.</p>
 <p><b>Étape 2 : Le quotient.</b> $\frac{-17}5 = -3{,}4$, donc $q = \lfloor-3{,}4\rfloor = -4$ (et non $-3$).</p>
 <p><b>Étape 3 : Le reste.</b> $r = a - bq = -17 - 5\times(-4) = -17 + 20 = 3\in[\![0, 4]\!]$.</p>
@@ -8300,6 +8300,7 @@ $$\frac{11!}{1!\,4!\,4!\,2!} = \frac{39\,916\,800}{1\times24\times24\times2} = \
 <p><b>Algorithme d'Euclide</b> : on remplace $(a, b)$ par $(b, r)$ jusqu'à un reste nul. Le PGCD est le <b>dernier reste non nul</b>.</p>
 
 <p class="ml">Exemple 4 : $1071\wedge462$</p>
+<p><b>Calculer $1071\wedge462$ par l'algorithme d'Euclide.</b></p>
 <p><b>Étape 1 : Rappel.</b> $a = bq + r\Rightarrow a\wedge b = b\wedge r$. On s'arrête au reste nul.</p>
 <p><b>Étape 2 : Les divisions.</b></p>
 $$\begin{aligned}1071 &= 2\times462 + \cR{147}\\462 &= 3\times147 + \cR{21}\\147 &= 7\times21 + 0\end{aligned}$$
@@ -8336,6 +8337,7 @@ $$21 = 462 - 3\,(1071 - 2\times462) = 462 - 3\times1071 + 6\times462 = 7\times46
 <p>Sans « premiers entre eux », c'est faux : $6\mid4\times3$ mais $6\nmid4$ et $6\nmid3$. Et $2\mid12$, $4\mid12$ ne donne pas $8\mid12$.</p>
 
 <p class="ml">Exemple 7 : $6$ divise $n^3 - n$</p>
+<p><b>Montrer que pour tout entier $n$, $6$ divise $n^3 - n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $a\mid N$, $b\mid N$ et $a\wedge b = 1$ $\Rightarrow ab\mid N$.</p>
 <p><b>Étape 2 : On factorise.</b> $n^3 - n = n(n^2 - 1) = (n - 1)\,n\,(n + 1)$ : trois entiers consécutifs.</p>
 <p><b>Étape 3 : Par $2$.</b> Parmi deux entiers consécutifs, l'un est pair : $2\mid n^3 - n$.</p>
@@ -8349,6 +8351,7 @@ $$\text{Si}\ (x_0, y_0)\ \text{est solution}:\quad x = x_0 + k\frac bd,\quad y =
 <p><b>1.</b> Calculer $d = a\wedge b$ ; si $d\nmid c$, pas de solution. <b>2.</b> Diviser par $d$. <b>3.</b> Bézout pour une solution particulière, multipliée par $\frac cd$. <b>4.</b> Soustraire, puis <b>Gauss</b> pour toutes les solutions.</p>
 
 <p class="ml">Exemple 8 : $15x + 21y = 9$</p>
+<p><b>Résoudre dans $\mathbb Z^2$ l'équation $15x + 21y = 9$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Solutions $\iff a\wedge b\mid c$. Puis Bézout et Gauss.</p>
 <p><b>Étape 2 : Le PGCD.</b> $15 = 3\times5$, $21 = 3\times7$ : $15\wedge21 = 3$, et $9 = 3\times3$, donc $3\mid9$ : il y a des solutions. On divise tout par $3$ : $5x + 7y = 3$.</p>
 <p><b>Étape 3 : Une solution de $5u + 7v = 1$.</b> Euclide remonté : $7 = 1\times5 + 2$ et $5 = 2\times2 + 1$, donc $1 = 5 - 2\times2 = 5 - 2(7 - 5) = 3\times5 - 2\times7$. Une autre solution, plus pratique ici : $5\times(-4) + 7\times3 = -20 + 21 = 1$ (on obtient la seconde depuis la première en ajoutant $7$ à $u$ et en retirant $5$ à $v$ : $3 - 7 = -4$, $-2 + 5 = 3$). On multiplie par $3$ : $5\times(-12) + 7\times9 = -60 + 63 = 3$, donc $(x_0, y_0) = (-12, 9)$.</p>
@@ -8360,6 +8363,7 @@ $$5(x + 12) = -7(y - 9).$$
 <h2 id="z-ppcm">8. PPCM</h2>
 <div class="sbox"><ul class="sbl"><li>$\displaystyle a\vee b = \text{le plus petit multiple commun}\ \geq0$</li><li>$\displaystyle a\mid m\ \text{et}\ b\mid m\iff a\vee b\mid m$</li><li>$\displaystyle (a\wedge b)\times(a\vee b) = |ab|$</li></ul></div>
 <p class="ml">Exemple 9 : $1071\vee462$</p>
+<p><b>Calculer $1071\vee462$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(a\wedge b)(a\vee b) = |ab|$.</p>
 <p><b>Étape 2 : On utilise l'exemple 4.</b> $1071\wedge462 = 21$.</p>
 <p><b>Étape 3 : Le calcul.</b> $1071 = 21\times51$ (car $21\times50 = 1050$ et $1050 + 21 = 1071$), donc $1071\vee462 = \frac{1071\times462}{21} = 51\times462 = 50\times462 + 462 = 23\,100 + 462$.</p>
@@ -8372,6 +8376,7 @@ $$5(x + 12) = -7(y - 9).$$
 <ul class="sbl"><li>$\displaystyle a\wedge b = \prod p^{\min(v_p(a), v_p(b))}$</li><li>$\displaystyle a\vee b = \prod p^{\max(v_p(a), v_p(b))}$</li></ul></div>
 
 <p class="ml">Exemple 10 : $221$ est-il premier ?</p>
+<p><b>L'entier $221$ est-il premier ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $n$ n'est pas premier, il a un diviseur premier $\cV p\leq\sqrt n$.</p>
 <p><b>Étape 2 : La borne.</b> $14^2 = 196\leq221 \lt 225 = 15^2$ : on teste les premiers $\cV p\leq14$, soit $2, 3, 5, 7, 11, 13$.</p>
 <p><b>Étape 3 : Les tests, un par un.</b></p>
@@ -8379,7 +8384,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{221 = 13\times17\ \text{n'est pas premier}}$.</p>
 
 <p class="ml">Exemple 11 : PGCD, PPCM et diviseurs par décomposition</p>
-<p>$a = 360$, $b = 84$.</p>
+<p>$a = 360$, $b = 84$. <b>Décomposer $a$ et $b$ en facteurs premiers, puis calculer $a\wedge b$, $a\vee b$ et le nombre de diviseurs de $a$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\wedge$ : exposants minimum. $\vee$ : exposants maximum.</p>
 <p><b>Étape 2 : Les décompositions</b>, en divisant par les premiers dans l'ordre : $360 = 2\times180 = 2\times2\times90 = 2\times2\times2\times45 = 2^3\times3\times15 = 2^3\times3^2\times5$. Et $84 = 2\times42 = 2\times2\times21 = 2^2\times3\times7$.</p>
 <p><b>Étape 3 : Le PGCD.</b> On prend le plus petit exposant de chaque premier : $2^{\min(3, 2)}\times3^{\min(2, 1)}\times5^{\min(1, 0)}\times7^{\min(0, 1)} = 2^2\times3^1\times5^0\times7^0 = 4\times3\times1\times1 = 12$.</p>
@@ -8388,6 +8393,7 @@ $$5(x + 12) = -7(y - 9).$$
 <p><b>Étape 6 : Conclusion.</b> $\cG{360\wedge84 = 12,\ 360\vee84 = 2520}$, et $360$ a $24$ diviseurs positifs.</p>
 
 <p class="ml">Exemple 12 : il y a une infinité de nombres premiers</p>
+<p><b>Montrer qu'il existe une infinité de nombres premiers.</b></p>
 <p><b>Étape 1 : Rappel.</b> Tout entier $\geq2$ a un diviseur premier.</p>
 <p><b>Étape 2 : Par l'absurde.</b> Supposons $\mathcal P = \{p_1, \dots, p_k\}$ fini. On pose $N = p_1p_2\cdots p_k + 1\geq2$.</p>
 <p><b>Étape 3 : Un diviseur premier.</b> $N$ a un diviseur premier, donc un certain $p_i\mid N$.</p>
@@ -8404,6 +8410,7 @@ $$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv 
 <p><b>Critères de divisibilité</b> : $10\equiv1\ [9]$ donne $n\equiv$ (somme des chiffres) $[9]$, et de même $[3]$. $10\equiv-1\ [11]$ donne $n\equiv$ (somme alternée des chiffres) $[11]$.</p>
 
 <p class="ml">Exemple 13 : le dernier chiffre de $7^{2026}$</p>
+<p><b>Déterminer le dernier chiffre de $7^{2026}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Le dernier chiffre est le reste modulo $10$. On cherche $m$ avec $7^m\equiv1\ [10]$.</p>
 <p><b>Étape 2 : Les puissances.</b> $7^1\equiv7$, $7^2 = 49\equiv9$, $7^3\equiv9\times7 = 63\equiv3$, $7^4\equiv3\times7 = 21\equiv\cG1\ [10]$.</p>
 <p><b>Étape 3 : La division de l'exposant.</b> $2026 = 4\times506 + 2$.</p>
@@ -8423,6 +8430,7 @@ $$a\equiv b,\ c\equiv d\ [n]\ \Longrightarrow\ a + c\equiv b + d,\quad ac\equiv 
 <p>Pour résoudre $ax\equiv b\ [n]$ avec $a\wedge n = 1$ : on multiplie par l'inverse $u$ : $x\equiv ub\ [n]$.</p>
 
 <p class="ml">Exemple 15 : l'inverse de $7$ modulo $26$</p>
+<p><b>Déterminer l'inverse de $7$ modulo $26$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $7u + 26v = 1\Rightarrow7u\equiv1\ [26]$. On trouve $u$ par Euclide remonté.</p>
 <p><b>Étape 2 : Euclide.</b></p>
 $$\begin{aligned}26 &= 3\times7 + 5\\7 &= 1\times5 + 2\\5 &= 2\times2 + 1\end{aligned}$$
@@ -8432,6 +8440,7 @@ $$1 = 5 - 2\times2 = 5 - 2\,(7 - 5) = 3\times5 - 2\times7 = 3\,(26 - 3\times7) -
 <p><b>Étape 5 : Conclusion.</b> $\cG{7^{-1}\equiv15\ [26]}$. Contrôle : $7\times15 = 105 = 4\times26 + 1$.</p>
 
 <p class="ml">Exemple 16 : résoudre $7x\equiv3\ [26]$</p>
+<p><b>Résoudre dans $\mathbb Z$ la congruence $7x\equiv3\ [26]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On multiplie les deux membres par l'inverse de $7$ (exemple 15).</p>
 <p><b>Étape 2 : On multiplie par $15$.</b> $15\times7x\equiv15\times3$, soit $x\equiv45\ [26]$.</p>
 <p><b>Étape 3 : On réduit.</b> $45 = 26 + 19$, donc $x\equiv19\ [26]$.</p>
@@ -8443,12 +8452,14 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p>Il donne directement l'exposant $m = p - 1$ de la méthode du §10 quand le module est premier.</p>
 
 <p class="ml">Exemple 17 : $2^{100}$ modulo $13$</p>
+<p><b>Calculer le reste de la division de $2^{100}$ par $13$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $13$ est premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$.</p>
 <p><b>Étape 2 : On divise l'exposant.</b> Fermat : $13$ premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$. Et $100 = 8\times12 + 4$ ($8\times12 = 96$, $100 - 96 = 4$).</p>
 <p><b>Étape 3 : On réduit.</b> $2^{100} = 2^{96}\times2^4 = (2^{12})^8\times2^4\equiv1^8\times16\ [13]$, et $16 = 13 + 3\equiv3\ [13]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{2^{100}\equiv3\ [13]}$.</p>
 
 <p class="ml">Exemple 18 : $42$ divise $n^7 - n$</p>
+<p><b>Montrer que pour tout entier $n$, $42$ divise $n^7 - n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Fermat : $n^p\equiv n\ [p]$. Et si des entiers premiers entre eux deux à deux divisent $N$, leur produit aussi.</p>
 <p><b>Étape 2 : Modulo $7$.</b> Fermat avec $p = 7$ : $n^7\equiv n\ [7]$.</p>
 <p><b>Étape 3 : Modulo $3$.</b> Fermat : $n^3\equiv n\ [3]$. Donc $n^7 = n^3\cdot n^3\cdot n\equiv n\cdot n\cdot n = n^3\equiv n\ [3]$.</p>
@@ -8458,6 +8469,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <h2 id="z-chin">13. Systèmes de congruences <span class="hp">programme de Spé</span></h2>
 <div class="sbox">$$m\wedge n = 1:\quad\begin{cases}x\equiv a\ [m]\\x\equiv b\ [n]\end{cases}\ \text{a une unique solution modulo}\ mn\ \text{(lemme chinois)}.$$</div>
 <p class="ml">Exemple 19 : $x\equiv2\ [3]$ et $x\equiv3\ [5]$</p>
+<p><b>Résoudre dans $\mathbb Z$ le système $x\equiv2\ [3]$ et $x\equiv3\ [5]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On exprime la première congruence, on remplace dans la seconde, on résout avec un inverse.</p>
 <p><b>Étape 2 : La première.</b> $x = 2 + 3k$, $k\in\mathbb Z$.</p>
 <p><b>Étape 3 : Dans la seconde.</b> $2 + 3k\equiv3\ [5]\iff3k\equiv3 - 2 = 1\ [5]$. L'inverse de $3$ modulo $5$ est $2$ ($3\times2 = 6 = 5 + 1\equiv1$) ; on multiplie par $2$ : $6k\equiv2$, soit $k\equiv2\ [5]$ : $k = 2 + 5j$.</p>
@@ -8502,6 +8514,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 
 <h2 id="z-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $\sqrt2$ est irrationnel</p>
+<p><b>Montrer que $\sqrt2$ est irrationnel.</b></p>
 <p><b>Étape 1 : Rappel.</b> Toute fraction s'écrit $\frac pq$ avec $p\wedge q = 1$. Lemme d'Euclide : $2\mid ab\Rightarrow2\mid a$ ou $2\mid b$.</p>
 <p><b>Étape 2 : Par l'absurde.</b> $\sqrt2 = \frac pq$ avec $p\wedge q = 1$, donc $p^2 = 2q^2$.</p>
 <p><b>Étape 3 : $p$ est pair.</b> $2\mid p^2 = p\times p$, donc $2\mid p$ : $p = 2p'$.</p>
@@ -8509,12 +8522,14 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p><b>Étape 5 : Conclusion.</b> $2\mid p\wedge q = 1$ : absurde. $\cG{\sqrt2\notin\mathbb Q}$.</p>
 
 <p class="ml">Exercice 2 : $(n^2 + n)\wedge(2n + 1)$</p>
+<p>Soit $n\in\mathbb N$. <b>Calculer $(n^2 + n)\wedge(2n + 1)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bézout : $au + bv = 1\Rightarrow a\wedge b = 1$.</p>
 <p><b>Étape 2 : On élimine.</b> $(2n + 1)^2 = 4n^2 + 4n + 1 = 4(n^2 + n) + 1$.</p>
 <p><b>Étape 3 : La combinaison.</b> De $(2n + 1)^2 = 4(n^2 + n) + 1$ on tire $(2n + 1)\times(2n + 1) + (n^2 + n)\times(-4) = 1$ : Bézout avec $u = 2n + 1$, $v = -4$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(n^2 + n)\wedge(2n + 1) = 1}$ pour tout $n$.</p>
 
 <p class="ml">Exercice 3 : $p$ premier, $p\geq5$ : $24\mid p^2 - 1$</p>
+<p>Soit $p$ un nombre premier, $p\geq5$. <b>Montrer que $24$ divise $p^2 - 1$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $8\mid N$, $3\mid N$, $8\wedge3 = 1\Rightarrow24\mid N$.</p>
 <p><b>Étape 2 : On factorise.</b> $p^2 - 1 = (p - 1)(p + 1)$.</p>
 <p><b>Étape 3 : Par $8$.</b> $p$ est impair ($p\neq2$), donc $p - 1$ et $p + 1$ sont deux pairs consécutifs (écart $2$) : parmi deux pairs consécutifs, l'un est multiple de $4$. Le produit contient donc $4\times2 = 8$ : $8\mid p^2 - 1$.</p>
@@ -8522,6 +8537,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p><b>Étape 5 : Conclusion.</b> $8\wedge3 = 1$, donc $8\times3 = 24$ divise : $\cG{24\mid p^2 - 1}$ (exemple $p = 5$ : $25 - 1 = 24$).</p>
 
 <p class="ml">Exercice 4 : le critère de divisibilité par $9$</p>
+<p><b>Montrer qu'un entier est divisible par $9$ si et seulement si la somme de ses chiffres l'est.</b></p>
 <p><b>Étape 1 : Rappel.</b> Les congruences passent aux puissances et aux sommes.</p>
 <p><b>Étape 2 : L'écriture décimale.</b> $n = \sum_{k=0}^ma_k10^k$ avec $a_k\in[\![0, 9]\!]$ les chiffres.</p>
 <p><b>Étape 3 : On réduit.</b> $10 = 9 + 1\equiv1\ [9]$, donc $10^k\equiv1^k = 1$ et $n = \sum a_k10^k\equiv\sum_{k=0}^ma_k\times1\ [9]$.</p>
@@ -11516,7 +11532,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p><b>Étape 5 : Conclusion.</b> $\cG{F\ \text{est un plan de base}\ ((-1, 1, 0), (2, 0, 1))}$.</p>
 
 <p class="ml">Exemple 2 : sev ou pas ?</p>
-<p>Dans $\mathcal C(\mathbb R)$ : $A = \{f,\ f(0) = 0\}$ et $B = \{f,\ f(0) = 1\}$.</p>
+<p>Dans $\mathcal C(\mathbb R)$ : $A = \{f,\ f(0) = 0\}$ et $B = \{f,\ f(0) = 1\}$. <b>Ces parties sont-elles des sous-espaces vectoriels de $\mathcal C(\mathbb R)$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Un sev contient $0$ et est stable par $\lambda f + g$.</p>
 <p><b>Étape 2 : $A$.</b> La fonction nulle vaut $0$ en $0$ : elle est dans $A$. Si $f(0) = g(0) = 0$ : $(\lambda f + g)(0) = \lambda f(0) + g(0) = \lambda\times0 + 0 = 0$. Donc $A$ est un sev (c'est $\ker(f\mapsto f(0))$).</p>
 <p><b>Étape 3 : $B$.</b> La fonction nulle vaut $0\neq1$ en $0$ : $0\notin B$.</p>
@@ -11540,7 +11556,7 @@ $$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2
 <p>Une famille de trois vecteurs <b>deux à deux non colinéaires</b> peut être liée : $(1, 0)$, $(0, 1)$, $(1, 1)$.</p>
 
 <p class="ml">Exemple 4 : trois vecteurs de $\mathbb R^3$</p>
-<p>$u_1 = (1, 1, 0)$, $u_2 = (1, 0, 1)$, $u_3 = (0, 1, 1)$.</p>
+<p>$u_1 = (1, 1, 0)$, $u_2 = (1, 0, 1)$, $u_3 = (0, 1, 1)$. <b>La famille $(u_1, u_2, u_3)$ est-elle libre ? Est-ce une base de $\mathbb R^3$ ?</b></p>
 <p><b>Étape 1 : Rappel.</b> On résout $\lambda_1u_1 + \lambda_2u_2 + \lambda_3u_3 = 0$.</p>
 <p><b>Étape 2 : Le système.</b></p>
 $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\\lambda_2 + \lambda_3 &= 0\end{aligned}\right.$$
@@ -11555,6 +11571,7 @@ $$\left\{\begin{aligned}\lambda_1 + \lambda_2 &= 0\\\lambda_1 + \lambda_3 &= 0\\
 <p><b>Étape 4 : Conclusion.</b> $\cG{(\cos, \sin)\ \text{est libre}}$.</p>
 
 <p class="ml">Exemple 6 : des polynômes de degrés échelonnés</p>
+<p>Soit $(P_0, \dots, P_n)$ une famille de polynômes avec $\deg P_k = k$ pour tout $k$. <b>Montrer que cette famille est libre.</b></p>
 <p><b>Étape 1 : Rappel.</b> Le degré d'une somme est le plus grand degré quand il n'y a qu'un seul terme de ce degré.</p>
 <p><b>Étape 2 : L'hypothèse.</b> $\deg P_k = k$ et $\sum_{k=0}^n\lambda_kP_k = 0$, avec des $\lambda_k$ non tous nuls.</p>
 <p><b>Étape 3 : Le plus grand indice.</b> Soit $m$ le plus grand $k$ avec $\lambda_k\neq0$. La somme est de degré exactement $m$, donc non nulle.</p>
@@ -11576,7 +11593,7 @@ $$p(x) = \frac{f(x) + f(-x)}2,\qquad i(x) = \frac{f(x) - f(-x)}2.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R) = \mathcal P\oplus\mathcal I}$ (exemple : $e^x = \operatorname{ch}x + \operatorname{sh}x$).</p>
 
 <p class="ml">Exemple 8 : un plan et une droite de $\mathbb R^3$</p>
-<p>$P:\ x + y + z = 0$ et $D = \operatorname{Vect}(1, 1, 1)$.</p>
+<p>$P:\ x + y + z = 0$ et $D = \operatorname{Vect}(1, 1, 1)$. <b>Montrer que $P$ et $D$ sont supplémentaires dans $\mathbb R^3$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie : $F\cap G = \{0\}$ et $\dim F + \dim G = \dim E$ suffisent (§7).</p>
 <p><b>Étape 2 : L'intersection.</b> Un vecteur de $D$ s'écrit $\lambda(1, 1, 1) = (\lambda, \lambda, \lambda)$. Il est dans $P$ si $\lambda + \lambda + \lambda = 0$, soit $3\lambda = 0$, $\lambda = 0$ : $P\cap D = \{0\}$.</p>
 <p><b>Étape 3 : Les dimensions.</b> $P$ est un plan ($x = -y - z$, deux paramètres libres) : $\dim P = 2$ ; $\dim D = 1$. $\dim P + \dim D = 2 + 1 = 3 = \dim\mathbb R^3$.</p>
@@ -11600,6 +11617,7 @@ $$X^2 = \big(\underbrace{(X - 1)}_{a} + \underbrace{1}_{b}\big)^2 = a^2 + 2ab + 
 <div class="sbox">$$F\subset E:\ \dim F\leq\dim E,\ \text{et}\ \dim F = \dim E\Rightarrow F = E.\qquad\textbf{Grassmann}:\ \dim(F + G) = \dim F + \dim G - \dim(F\cap G).$$
 $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F + G = E\ \text{et}\ \dim F + \dim G = \dim E.$$</div>
 <p class="ml">Exemple 10 : deux plans de $\mathbb R^3$ se coupent</p>
+<p>Soient $P_1, P_2$ deux plans distincts de $\mathbb R^3$. <b>Montrer que $P_1\cap P_2$ est une droite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Grassmann.</p>
 <p><b>Étape 2 : On majore la somme.</b> $P_1 + P_2\subset\mathbb R^3$, donc $\dim(P_1 + P_2)\leq3$.</p>
 <p><b>Étape 3 : On applique.</b> $\dim(P_1\cap P_2) = 2 + 2 - \dim(P_1 + P_2)\geq4 - 3 = 1$.</p>
@@ -11608,7 +11626,7 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <h2 id="k-rang">8. Rang d'une famille</h2>
 <div class="sbox">$$\operatorname{rg}(u_1, \dots, u_p) = \dim\operatorname{Vect}(u_1, \dots, u_p)\leq p.\qquad\text{libre}\iff\operatorname{rg} = p.\qquad\text{Il se calcule par pivot de Gauss}.$$</div>
 <p class="ml">Exemple 11 : un rang</p>
-<p>$\operatorname{rg}\big((1, 2, 1), (2, 1, 0), (3, 3, 1)\big)$.</p>
+<p><b>Déterminer le rang de la famille $\big((1, 2, 1), (2, 1, 0), (3, 3, 1)\big)$ de $\mathbb R^3$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On cherche une relation de dépendance, sinon on pivote.</p>
 <p><b>Étape 2 : Une relation.</b> $(1, 2, 1) + (2, 1, 0) = (1 + 2,\ 2 + 1,\ 1 + 0) = (3, 3, 1)$ : le 3<sup>e</sup> vecteur est combinaison des deux premiers.</p>
 <p><b>Étape 3 : Les deux premiers.</b> Si $(2, 1, 0) = \lambda(1, 2, 1)$, la 1<sup>re</sup> coordonnée donne $\lambda = 2$ et la 2<sup>e</sup> $\lambda = \frac12$ : impossible, ils ne sont pas colinéaires.</p>
@@ -11680,6 +11698,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 <p><b>Étape 5 : Conclusion.</b> $\cG{(x\mapsto e^{ax})_{a\in\mathbb R}\ \text{est libre}}$ ($\mathcal F(\mathbb R, \mathbb R)$ est donc de dimension infinie).</p>
 
 <p class="ml">Exemple 17 : $(\sin(kx))_{1\leq k\leq n}$, par récurrence</p>
+<p>Soit $n\geq1$. <b>Montrer que la famille de fonctions $(x\mapsto\sin(kx))_{1\leq k\leq n}$ est libre.</b></p>
 <p><b>Étape 1 : Rappel.</b> Récurrence sur $n$ ; on dérive deux fois pour éliminer le dernier terme.</p>
 <p><b>Étape 2 : $n = 1$.</b> $\sin$ n'est pas la fonction nulle ($\sin\frac\pi2 = 1$) : la famille $(\sin)$ est libre.</p>
 <p><b>Étape 3 : Hérédité.</b> On suppose $(\sin x, \dots, \sin((n - 1)x))$ libre et $\sum_{k=1}^n\lambda_k\sin(kx) = 0$ (1). On dérive deux fois, $(\sin(kx))'' = -k^2\sin(kx)$ : $-\sum k^2\lambda_k\sin(kx) = 0$ (2).</p>
@@ -11712,7 +11731,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 </table>
 
 <p class="ml">Exemple 20 : six fonctions trigonométriques</p>
-<p>Rang de $(f_1, \dots, f_6) = (\sin, \cos, \cos(2x), \sin(x + 1), \sin^2, \cos^2)$.</p>
+<p><b>Déterminer le rang de la famille de fonctions $(f_1, \dots, f_6) = (\sin, \cos, \cos(2x), \sin(x + 1), \sin^2, \cos^2)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une sous-famille libre, puis les autres comme combinaisons.</p>
 <p><b>Étape 2 : $(f_1, f_2, f_3, f_5)$ libre.</b> $\lambda_1\sin x + \lambda_2\cos x + \lambda_3\cos2x + \lambda_5\sin^2x = 0$. En $x = 0$ : $\lambda_2 + \lambda_3 = 0$. En $x = \pi$ : $-\lambda_2 + \lambda_3 = 0$. On additionne : $2\lambda_3 = 0$, donc $\lambda_3 = \lambda_2 = 0$. En $x = \frac\pi2$ : $\lambda_1 + \lambda_5 = 0$. En $x = -\frac\pi2$ : $-\lambda_1 + \lambda_5 = 0$. Donc $\lambda_1 = \lambda_5 = 0$.</p>
 <p><b>Étape 3 : $f_4$.</b> $\sin(x + 1) = \sin x\cos1 + \cos x\sin1$ : $f_4 = \cos1\,f_1 + \sin1\,f_2$.</p>
@@ -11720,7 +11739,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 <p><b>Étape 5 : Conclusion.</b> $\operatorname{rg}(f_1, \dots, f_6) = \operatorname{rg}(f_1, f_2, f_3, f_5)$, donc $\cG{\operatorname{rg} = 4}$.</p>
 
 <p class="ml">Exemple 21 : un pivot avec un paramètre</p>
-<p>Rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$ selon $m\in\mathbb R$. On range les vecteurs en lignes :</p>
+<p><b>Déterminer, selon $m\in\mathbb R$, le rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$.</b> On range les vecteurs en lignes :</p>
 $$\begin{pmatrix}1&2&1\\2&1&m\\1&m&1\end{pmatrix}\begin{matrix}\leftarrow u\\\leftarrow v\\\leftarrow w\end{matrix}$$
 <p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes ne changent pas le rang ; on garde un pivot constant.</p>
 <p><b>Étape 2 : Premier pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2\times1,\ 1 - 2\times2,\ m - 2\times1) = (0, -3, m - 2)$. $L_3\leftarrow L_3 - L_1$ : $(1 - 1,\ m - 2,\ 1 - 1) = (0, m - 2, 0)$.</p>
@@ -11731,7 +11750,7 @@ $$\begin{pmatrix}1&2&1\\0&-3&m - 2\\0&0&(m - 2)^2\end{pmatrix}.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 3\ \text{si}\ m\neq2,\quad\operatorname{rg} = 2\ \text{si}\ m = 2}$. Contrôle $m = 2$ : $w = (1, 2, 1) = u$.</p>
 
 <p class="ml">Exemple 22 : le déterminant</p>
-<p>Dans $\mathbb R^4$, rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$, c'est-à-dire de la matrice</p>
+<p><b>Déterminer, selon $m\in\mathbb R$, le rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$ dans $\mathbb R^4$</b>, c'est-à-dire le rang de la matrice</p>
 $$M = \begin{pmatrix}m&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{pmatrix}.$$
 <p><b>Étape 1 : Rappel.</b> $4$ vecteurs en dimension $4$ : base $\iff\det\neq0$.</p>
 <p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $m + 1 + 1 + 1 = m + 3$ ; on sort $m + 3$ de la 1<sup>re</sup> colonne :</p>
@@ -11783,7 +11802,7 @@ $$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatri
 <p><b>Étape 5 : Conclusion.</b> $(L_i) = \big(\varphi^{-1}(\varepsilon_i)\big)$ : $\cG{(L_0, \dots, L_n)\ \text{est une base de}\ \mathbb K_n[X]}$, et $P = \sum_iP(a_i)L_i$.</p>
 
 <p class="ml">Exemple 27 : $v_i = u + e_i$, par le déterminant</p>
-<p>Reprendre l'exemple 15 avec $\det_{\mathcal B}$.</p>
+<p>On reprend l'exemple 15 avec $\det_{\mathcal B}$. <b>Montrer que $(v_1, \dots, v_n)$ est une base si et seulement si $u$ vérifie la condition trouvée à l'exemple 15.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\det$ est linéaire par rapport à chaque colonne, et nul dès que deux colonnes sont égales.</p>
 <p><b>Étape 2 : On développe chaque colonne</b> $u + e_i$ : on obtient $2^n$ déterminants ; ceux qui contiennent $u$ <b>deux fois</b> sont nuls. Il reste $\det(e_1, \dots, e_n) = 1$ et les $n$ termes $\det(e_1, \dots, \underbrace{u}_{i}, \dots, e_n)$.</p>
 <p><b>Étape 3 : Un terme.</b> $\det(e_1, \dots, u, \dots, e_n)$ est la matrice identité dont la $i$-ième colonne est remplacée par $(\lambda_1, \dots, \lambda_n)$ : en développant selon la $i$-ième ligne, il vaut $\lambda_i$.</p>
@@ -11811,8 +11830,9 @@ $$\longrightarrow\begin{pmatrix}1&2&3&4\\0&-1&-2&-1\\0&0&1&-4\\0&0&0&0\end{pmatr
 <p><b>Étape 5 : Conclusion.</b> $\cG{\dim\operatorname{Vect}(a, b, c, d) = 3}$, base $(a, b, c)$, et la ligne nulle donne $d = 2b + c - a$ (contrôle : $(2 + 2 - 1, 2 + 1 - 2, 2 + 1 - 3, 6 + 1 - 4) = (3, 1, 0, 3)$).</p>
 
 <p class="ml">Exemple 29 : un sous-espace de $\mathbb R^5$ défini par un système</p>
-<p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Dimension et base. Matrice du système :</p>
+<p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Matrice du système :</p>
 $$\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\2&1&-5&0&-4\end{pmatrix}.$$
+<p><b>Déterminer la dimension de $F$ et une base de $F$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\dim F = 5 - \operatorname{rg}$ ; base : inconnues principales en fonction des secondaires.</p>
 <p><b>Étape 2 : Le rang.</b> $L_3 - 2L_1 = (2 - 2,\ 1 - 4,\ -5 + 2,\ 0 - 6,\ -4 - 2) = (0, -3, -3, -6, -6)$, puis $L_3 + 3L_2 = (0,\ -3 + 3,\ -3 + 3,\ -6 + 6,\ -6 - 6) = (0, 0, 0, 0, -12)$ :</p>
 $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}:\ \text{trois pivots, rang}\ 3,\quad\dim F = 5 - 3 = 2.$$
@@ -11881,7 +11901,7 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 <p><b>Étape 5 : Conclusion.</b> $F\cap G = \{0\}$ et $2 + 2 = 4$ : $\cG{\mathbb R^4 = F\oplus G}$.</p>
 
 <p class="ml">Exemple 36 : trois sous-espaces de $\mathbb R_3[X]$</p>
-<p>$F = \{P,\ P(0) = P(1) = P(2) = 0\}$, $G = \{P,\ P(1) = P(2) = P(3) = 0\}$, $H = \{P,\ P(-X) = P(X)\}$.</p>
+<p>$F = \{P,\ P(0) = P(1) = P(2) = 0\}$, $G = \{P,\ P(1) = P(2) = P(3) = 0\}$, $H = \{P,\ P(-X) = P(X)\}$. <b>Montrer que $\mathbb R_3[X] = F\oplus G\oplus H$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Somme directe (décomposition de $0$ unique) et somme des dimensions $= 4$.</p>
 <p><b>Étape 2 : Les trois espaces.</b> $P\in F$ : $X(X - 1)(X - 2)$ divise $P$, de degré $\leq3$, donc $F = \operatorname{Vect}\big(X(X - 1)(X - 2)\big)$, dim $1$. De même $G = \operatorname{Vect}\big((X - 1)(X - 2)(X - 3)\big)$, dim $1$. $H = \operatorname{Vect}(1, X^2)$ (pas de termes impairs), dim $2$. Total $1 + 1 + 2 = 4 = \dim\mathbb R_3[X]$.</p>
 <p><b>Étape 3 : Somme directe.</b> $\lambda X(X - 1)(X - 2) + \mu(X - 1)(X - 2)(X - 3) + a + bX^2 = 0$. En $X = 1$ : $a + b = 0$. En $X = 2$ : $a + 4b = 0$. Différence : $3b = 0$, donc $b = a = 0$. En $X = 3$ : $\lambda\times3\times2\times1 = 6\lambda = 0$. En $X = 0$ : $\mu\times(-1)(-2)(-3) = -6\mu = 0$.</p>
@@ -11924,12 +11944,14 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 
 <h2 id="k-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $(1, \cos, \cos^2)$ est libre</p>
+<p><b>Montrer que la famille de fonctions $(1, \cos, \cos^2)$ est libre.</b></p>
 <p><b>Étape 1 : Rappel.</b> Évaluer $a + b\cos x + c\cos^2x = 0$ en des points.</p>
 <p><b>Étape 2 : Trois valeurs.</b> $x = \frac\pi2$ ($\cos = 0$) : $a + 0 + 0 = 0$, $a = 0$. $x = 0$ ($\cos = 1$) : $b\times1 + c\times1^2 = b + c = 0$. $x = \pi$ ($\cos = -1$) : $b\times(-1) + c\times(-1)^2 = -b + c = 0$.</p>
 <p><b>Étape 3 : On résout.</b> En additionnant les deux dernières : $2c = 0$, $c = 0$, puis $b = -c = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(1, \cos, \cos^2)\ \text{est libre}}$.</p>
 
 <p class="ml">Exercice 2 : $H = \{P\in\mathbb K_n[X],\ P(1) = 0\}$</p>
+<p>Soit $H = \{P\in\mathbb K_n[X],\ P(1) = 0\}$. <b>Montrer que $H$ est un sous-espace vectoriel et en donner une base et la dimension.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un noyau est un sev ; on cherche une base adaptée.</p>
 <p><b>Étape 2 : C'est un sev.</b> $H = \ker(P\mapsto P(1))$.</p>
 <p><b>Étape 3 : Une base.</b> $P(1) = 0\iff(X - 1)\mid P\iff P = (X - 1)Q$ avec $\deg Q\leq n - 1$. Donc $H = \operatorname{Vect}\big((X - 1)X^k,\ 0\leq k\leq n - 1\big)$, famille de degrés échelonnés.</p>
@@ -12009,14 +12031,14 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 <div class="sbox">$$f\ \text{linéaire}\iff\forall x, y\in E,\ \forall\lambda\in\mathbb K,\ f(\lambda x + y) = \lambda f(x) + f(y).\qquad\text{Alors}\ f(0) = 0.$$</div>
 <p>Pour montrer qu'elle ne l'est <b>pas</b> : $f(0)\neq0$, ou un contre-exemple numérique.</p>
 <p class="ml">Exemple 1 : sur les polynômes</p>
-<p>$\varphi:\mathbb K[X]\to\mathbb K$, $\varphi(P) = P(1) + P'(0)$.</p>
+<p>$\varphi:\mathbb K[X]\to\mathbb K$, $\varphi(P) = P(1) + P'(0)$. <b>Montrer que $\varphi$ est linéaire.</b></p>
 <p><b>Étape 1 : Rappel.</b> On vérifie $\varphi(\lambda P + Q) = \lambda\varphi(P) + \varphi(Q)$.</p>
 <p><b>Étape 2 : On calcule.</b> $(\lambda P + Q)(1) = \lambda P(1) + Q(1)$ et $(\lambda P + Q)' = \lambda P' + Q'$, donc :</p>
 $$\varphi(\lambda P + Q) = \lambda P(1) + Q(1) + \lambda P'(0) + Q'(0) = \lambda\varphi(P) + \varphi(Q).$$
 <p><b>Étape 3 : Conclusion.</b> $\cG{\varphi\ \text{est une forme linéaire}}$.</p>
 
 <p class="ml">Exemple 2 : pas linéaire</p>
-<p>$f(x, y) = (x + y, xy)$ de $\mathbb R^2$ dans $\mathbb R^2$.</p>
+<p>$f(x, y) = (x + y, xy)$ de $\mathbb R^2$ dans $\mathbb R^2$. <b>Montrer que $f$ n'est pas linéaire.</b></p>
 <p><b>Étape 1 : Rappel.</b> Linéaire $\Rightarrow f(2u) = 2f(u)$.</p>
 <p><b>Étape 2 : Un test.</b> $f(1, 1) = (1 + 1,\ 1\times1) = (2, 1)$ et $f(2, 2) = (2 + 2,\ 2\times2) = (4, 4)$. Linéaire imposerait $f(2, 2) = 2f(1, 1) = (4, 2)$, or $(4, 4)\neq(4, 2)$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{n'est pas linéaire}}$ (le produit $xy$ est du degré $2$).</p>
@@ -12025,7 +12047,7 @@ $$\varphi(\lambda P + Q) = \lambda P(1) + Q(1) + \lambda P'(0) + Q'(0) = \lambda
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \cR{\ker f} = \{x,\ f(x) = 0\}$</li><li>$\displaystyle \cO{\operatorname{Im}f} = \{f(x),\ x\in E\} = \operatorname{Vect}\big(f(e_1), \dots, f(e_n)\big)\ \text{si}\ (e_i)\ \text{base de}\ E$</li></ul>
 <ul class="sbl"><li>$\displaystyle f\ \text{injective}\iff\ker f = \{0\}$</li><li>$\displaystyle f\ \text{surjective}\iff\operatorname{Im}f = F$</li><li>$\displaystyle f(x) = f(y)\iff x - y\in\ker f$</li></ul></div>
 <p class="ml">Exemple 3 : noyau et image dans $\mathbb R^3$</p>
-<p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$.</p>
+<p>$f(x, y, z) = (x - y,\ y - z,\ z - x)$. <b>Déterminer le noyau et l'image de $f$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\ker f$ : résoudre $f(x) = 0$. $\operatorname{Im}f = \operatorname{Vect}(f(e_1), f(e_2), f(e_3))$.</p>
 <p><b>Étape 2 : Le noyau.</b> $f(x, y, z) = 0$ : $x - y = 0$ et $y - z = 0$ (la 3<sup>e</sup>, $z - x = 0$, est l'opposée de leur somme). Donc $x = y$ et $y = z$, $(x, y, z) = (x, x, x) = x(1, 1, 1)$ : $\cR{\ker f = \operatorname{Vect}(1, 1, 1)}$.</p>
 <p><b>Étape 3 : L'image.</b> On calcule les images de la base canonique :</p>
@@ -12035,7 +12057,7 @@ $$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb R(1, 1, 1),\ \operatorname{Im}f = \{a + b + c = 0\}}$. Contrôle : $1 + 2 = 3$ (théorème du rang, §6).</p>
 
 <p class="ml">Exemple 4 : la dérivation</p>
-<p>$D:\mathbb K[X]\to\mathbb K[X]$, $P\mapsto P'$.</p>
+<p>$D:\mathbb K[X]\to\mathbb K[X]$, $P\mapsto P'$. <b>$D$ est-elle injective ? surjective ?</b></p>
 <p><b>Étape 1 : Rappel.</b> Injective $\iff\ker = \{0\}$ ; surjective $\iff\operatorname{Im} = $ tout l'espace.</p>
 <p><b>Étape 2 : Le noyau.</b> $P' = 0\iff P$ constant : $\ker D = \mathbb K_0[X]$, $D$ n'est pas injective.</p>
 <p><b>Étape 3 : L'image.</b> $\big(\frac{a_k}{k + 1}X^{k+1}\big)' = \frac{a_k}{k + 1}(k + 1)X^k = a_kX^k$, donc tout $Q = \sum a_kX^k$ est la dérivée de $\sum\frac{a_k}{k + 1}X^{k+1}$ : $D$ est surjective.</p>
@@ -12045,7 +12067,7 @@ $$f(1, 0, 0) = (1 - 0,\ 0 - 0,\ 0 - 1) = (1, 0, -1),\quad f(0, 1, 0) = (0 - 1,\ 
 <div class="sbox"><ul class="sbl"><li>$\displaystyle f\ \text{est déterminée par les images}\ f(e_1), \dots, f(e_n)\ \text{d'une base}$</li><li>$\displaystyle f\ \text{isomorphisme}\iff(f(e_i))\ \text{base de}\ F$</li></ul>
 $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injective}\iff f\ \text{surjective}\iff f\ \text{bijective}.$$</div>
 <p class="ml">Exemple 5 : l'interpolation de Lagrange</p>
-<p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$.</p>
+<p>$\varphi:\mathbb R_2[X]\to\mathbb R^3$, $P\mapsto(P(0), P(1), P(2))$. <b>Montrer que $\varphi$ est un isomorphisme.</b></p>
 <p><b>Étape 1 : Rappel.</b> Même dimension finie : injective suffit.</p>
 <p><b>Étape 2 : Les dimensions.</b> $\dim\mathbb R_2[X] = 3 = \dim\mathbb R^3$, et $\varphi$ est linéaire.</p>
 <p><b>Étape 3 : Le noyau.</b> $\varphi(P) = (0, 0, 0)$ signifie $P(0) = P(1) = P(2) = 0$ : $P$, de degré $\leq2$, a $3$ racines, donc $P = 0$. $\ker\varphi = \{0\}$ : injective, donc bijective (même dimension).</p>
@@ -12058,7 +12080,7 @@ $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injec
 <p>On décompose $x = x_F + x_G$ (on écrit $x_G$ avec un paramètre, et on impose $x - x_G\in F$). Alors $p(x) = x_F$ et $s(x) = x_F - x_G$.</p>
 
 <p class="ml">Exemple 6 : une projection oblique dans $\mathbb R^3$</p>
-<p>Projection sur $P:\ x + y + z = 0$ parallèlement à $D = \operatorname{Vect}(1, 0, 0)$.</p>
+<p><b>Déterminer l'expression de la projection sur $P:\ x + y + z = 0$ parallèlement à $D = \operatorname{Vect}(1, 0, 0)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x = x_P + x_D$ avec $x_D = \lambda(1, 0, 0)$ et $x - x_D\in P$.</p>
 <p><b>Étape 2 : On impose.</b> Pour $x = (a, b, c)$ : $x - \lambda(1, 0, 0) = (a - \lambda, b, c)\in P\iff a - \lambda + b + c = 0\iff\lambda = a + b + c$.</p>
 <p><b>Étape 3 : Le projeté.</b> $p(a, b, c) = (a - \lambda, b, c)$ avec $a - \lambda = a - (a + b + c) = -b - c$ : $p(a, b, c) = (-b - c,\ b,\ c)$.</p>
@@ -12066,7 +12088,7 @@ $$E\simeq F\iff\dim E = \dim F.\qquad\text{Si}\ \dim E = \dim F:\ f\ \text{injec
 <p><b>Étape 5 : Conclusion.</b> $\cG{p(a, b, c) = (-b - c, b, c)}$. Contrôle : $p(1, 0, 0) = (-0 - 0, 0, 0) = 0$ (vecteur de $D$) et $p(-1, 1, 0) = (-1 - 0, 1, 0) = (-1, 1, 0)$ (vecteur de $P$, inchangé).</p>
 
 <p class="ml">Exemple 7 : reconnaître un projecteur</p>
-<p>$M = \begin{pmatrix}1&1\\0&0\end{pmatrix}$, endomorphisme $p$ de $\mathbb R^2$.</p>
+<p>$M = \begin{pmatrix}1&1\\0&0\end{pmatrix}$, endomorphisme $p$ de $\mathbb R^2$. <b>Montrer que $p$ est un projecteur, et préciser son image et son noyau.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p^2 = p$ ; puis $\operatorname{Im}p = \ker(p - \operatorname{id})$ et $\ker p$.</p>
 <p><b>Étape 2 : $M^2$.</b> Ligne par colonne :</p>
 $$M^2 = \begin{pmatrix}1\times1 + 1\times0&1\times1 + 1\times0\\0\times1 + 0\times0&0\times1 + 0\times0\end{pmatrix} = \begin{pmatrix}1&1\\0&0\end{pmatrix} = M:\ \text{c'est un projecteur}.$$
@@ -12080,12 +12102,13 @@ $$\operatorname{rg}f\leq\min(\dim E, \dim F).\qquad\text{Composer par un isomorp
 <p>Le théorème du rang dit une égalité de <b>dimensions</b>, pas que $E = \ker f\oplus\operatorname{Im}f$ : c'est faux pour $f(x, y) = (y, 0)$, où $\ker f = \operatorname{Im}f$.</p>
 
 <p class="ml">Exemple 8 : bijectivité par le noyau</p>
-<p>$f:\mathbb R_n[X]\to\mathbb R_n[X]$, $P\mapsto P - P'$.</p>
+<p>$f:\mathbb R_n[X]\to\mathbb R_n[X]$, $P\mapsto P - P'$. <b>Montrer que $f$ est bijective.</b></p>
 <p><b>Étape 1 : Rappel.</b> Endomorphisme en dimension finie : injectif $\iff$ bijectif.</p>
 <p><b>Étape 2 : Le noyau.</b> $f(P) = 0\iff P = P'$. Si $P\neq0$ est de degré $d$, alors $P'$ est de degré $d - 1$ (ou nul si $d = 0$) : $P$ et $P'$ n'ont pas le même degré, ils ne peuvent pas être égaux. Donc $P = 0$ et $\ker f = \{0\}$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f\ \text{est bijective}}$ : pour tout $Q$, l'équation $P - P' = Q$ a une unique solution polynomiale.</p>
 
 <p class="ml">Exemple 9 : quand $E = \ker f\oplus\operatorname{Im}f$</p>
+<p>Soit $f$ un endomorphisme d'un espace de dimension finie avec $\ker f\cap\operatorname{Im}f = \{0\}$. <b>Montrer que $E = \ker f\oplus\operatorname{Im}f$.</b></p>
 <p><b>Étape 1 : Rappel.</b> En dimension finie : $F\cap G = \{0\}$ et $\dim F + \dim G = \dim E$ suffisent.</p>
 <p><b>Étape 2 : Les dimensions.</b> Le théorème du rang donne $\dim\ker f + \dim\operatorname{Im}f = \dim E$.</p>
 <p><b>Étape 3 : Il reste l'intersection.</b> Donc $E = \ker f\oplus\operatorname{Im}f\iff\ker f\cap\operatorname{Im}f = \{0\}$.</p>
@@ -12095,7 +12118,7 @@ $$\operatorname{rg}f\leq\min(\dim E, \dim F).\qquad\text{Composer par un isomorp
 <div class="sbox">$$H\ \text{hyperplan}\iff H = \ker\varphi,\ \varphi\in E^*\setminus\{0\}\iff\dim H = n - 1\ (\text{dimension finie}).$$
 $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ \text{Deux équations d'un même}\ H\ \text{sont proportionnelles}.$$</div>
 <p class="ml">Exemple 10 : un hyperplan de polynômes</p>
-<p>$H = \{P\in\mathbb R_n[X],\ \int_0^1P(t)\,dt = 0\}$.</p>
+<p>$H = \{P\in\mathbb R_n[X],\ \int_0^1P(t)\,dt = 0\}$. <b>Montrer que $H$ est un hyperplan de $\mathbb R_n[X]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle $\Rightarrow$ hyperplan.</p>
 <p><b>Étape 2 : La forme.</b> $\varphi(P) = \int_0^1P$ est linéaire (linéarité de l'intégrale).</p>
 <p><b>Étape 3 : Non nulle.</b> $\varphi(1) = \int_0^11\,dt = 1 - 0 = 1\neq0$. Une forme linéaire non nulle a pour noyau un hyperplan : $\dim H = \dim\mathbb R_n[X] - 1 = (n + 1) - 1 = n$.</p>
@@ -12180,6 +12203,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Im}u = \{g\in\mathcal C^1(\mathbb R, \mathbb R),\ g(0) = 0\}}$.</p>
 
 <p class="ml">Exemple 18 : $P\mapsto P(X + 1) - P(X)$ sur $\mathbb R[X]$</p>
+<p>Soit $u:P\mapsto P(X + 1) - P(X)$ sur $\mathbb R[X]$. <b>Déterminer le noyau et l'image de $u$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Noyau : on résout ; image : images d'une base.</p>
 <p><b>Étape 2 : Le noyau.</b> $P(X + 1) = P(X)$ donne, par récurrence, $P(n) = P(0)$ pour tout $n\in\mathbb N$. Le polynôme $P - P(0)$ a une infinité de racines : il est nul, $P$ est constant. Réciproquement les constantes conviennent : $\ker u = \mathbb R_0[X]$.</p>
 <p><b>Étape 3 : Les images de la base $(X^n)$.</b> $u(1) = 1 - 1 = 0$ et, pour $n\geq1$, par le binôme, $u(X^n) = (X + 1)^n - X^n = \sum_{k=0}^n\binom nkX^k - X^n = \sum_{k=0}^{n-1}\binom nkX^k$, de degré $n - 1$ (coefficient $\binom n{n-1} = n\neq0$).</p>
@@ -12187,6 +12211,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = \text{constantes},\ \operatorname{Im}u = \mathbb R[X]}$ : surjective sans être injective, possible car $\dim\mathbb R[X] = +\infty$.</p>
 
 <p class="ml">Exemple 19 : $P\mapsto XP(1) + X^2P(0)$ sur $\mathbb K_n[X]$</p>
+<p>Soit $n\geq2$ et $u:P\mapsto XP(1) + X^2P(0)$ sur $\mathbb K_n[X]$. <b>Déterminer le noyau et l'image de $u$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Théorème du rang et une inclusion évidente.</p>
 <p><b>Étape 2 : Endomorphisme.</b> $u(P)$ est de degré $\leq2\leq n$ ; linéarité : $u(\lambda P + Q) = X(\lambda P(1) + Q(1)) + X^2(\lambda P(0) + Q(0)) = \lambda u(P) + u(Q)$.</p>
 <p><b>Étape 3 : Le noyau.</b> $XP(1) + X^2P(0) = 0\iff P(1) = P(0) = 0$ (coefficients de $X$ et $X^2$) $\iff X(X - 1)\mid P\iff P = X(X - 1)Q$, $Q\in\mathbb K_{n-2}[X]$. Donc $\dim\ker u = \dim\mathbb K_{n-2}[X] = n - 1$.</p>
@@ -12203,7 +12228,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}0&0&0&\cdots&0\\1&1&1&\cdots&1\\1&0&0&\
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = \operatorname{Vect}(e_1 - e_2 + e_3 - e_4)}$, sans résoudre de système.</p>
 
 <p class="ml">Exemple 21 : une base adaptée, $u(P) = (X - a)(P' + P'(a)) - 2(P - P(a))$</p>
-<p>Sur $\mathbb K_n[X]$ ($n\geq3$). Noyau et image.</p>
+<p>Sur $\mathbb K_n[X]$ ($n\geq3$). <b>Déterminer le noyau et l'image de $u$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On calcule les images d'une base bien choisie : ici $((X - a)^k)_{0\leq k\leq n}$.</p>
 <p><b>Étape 2 : $k = 0$.</b> $P = 1$ : $P' = 0$, $P'(a) = 0$, $P - P(a) = 1 - 1 = 0$, donc $u(1) = 0$.</p>
 <p><b>Étape 3 : $k = 1$.</b> $P = X - a$ : $P' = 1$, $P'(a) = 1$, $P - P(a) = X - a$, donc $u(P) = (X - a)\times2 - 2(X - a) = 0$.</p>
@@ -12238,7 +12263,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}0&&&&&\\&0&&&&\\&&0&&&\\&&&1&&\\&&&&\dd
 </table>
 
 <p class="ml">Exemple 24 : un projecteur donné par une formule</p>
-<p>$p(x, y, z) = \big(\frac{x + y}2, \frac{x + y}2, z\big)$ sur $\mathbb R^3$.</p>
+<p>$p(x, y, z) = \big(\frac{x + y}2, \frac{x + y}2, z\big)$ sur $\mathbb R^3$. <b>Montrer que $p$ est un projecteur, et déterminer son image et son noyau.</b></p>
 <p><b>Étape 1 : Rappel.</b> $p\circ p = p$, puis image et noyau.</p>
 <p><b>Étape 2 : $p\circ p$.</b> On applique $p$ à $(a, a, z)$ avec $a = \frac{x + y}2$ : $\big(\frac{a + a}2, \frac{a + a}2, z\big) = (a, a, z)$. Donc $p\circ p = p$.</p>
 <p><b>Étape 3 : L'image.</b> $p(x, y, z) = (a, a, z)$ a ses deux premières coordonnées égales, et tout $(a, a, z)$ est sa propre image : $\operatorname{Im}p = \{x = y\}$, un plan. Matrice dans la base canonique (colonnes $p(e_1) = (\frac12, \frac12, 0)$, $p(e_2) = (\frac12, \frac12, 0)$, $p(e_3) = (0, 0, 1)$) :</p>
@@ -12269,7 +12294,7 @@ $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\q
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\circ p = p\circ f\iff\ker p,\ \operatorname{Im}p\ \text{stables par}\ f}$.</p>
 
 <p class="ml">Exemple 28 : un hyperplan de $\mathbb R_n[X]$ et un supplémentaire</p>
-<p>$H = \{P\in\mathbb R_n[X],\ P'(0) = 0\}$ ($n\geq2$).</p>
+<p>$H = \{P\in\mathbb R_n[X],\ P'(0) = 0\}$ ($n\geq2$). <b>Montrer que $H$ est un hyperplan et en donner un supplémentaire.</b></p>
 <p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle = hyperplan ; toute droite non contenue dans $H$ est un supplémentaire.</p>
 <p><b>Étape 2 : La forme.</b> $\varphi(P) = P'(0)$ est linéaire, et non nulle : $\varphi(X) = 1$. Donc $H = \ker\varphi$ est un hyperplan.</p>
 <p><b>Étape 3 : Le supplémentaire.</b> $X\notin H$ ($\varphi(X) = 1\neq0$) : $\mathbb RX$ est un supplémentaire. Explicitement, $P = \big(P - P'(0)X\big) + P'(0)X$ et $\big(P - P'(0)X\big)'(0) = P'(0) - P'(0) = 0$.</p>
