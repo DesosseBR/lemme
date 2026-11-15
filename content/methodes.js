@@ -6681,7 +6681,7 @@ $$f\ \text{paire}\Rightarrow a_{2p+1} = 0;\qquad f\ \text{impaire}\Rightarrow a_
 
 <p class="ml">Exercice 6 : $y' - 2xy = 1$, $y(0) = 0$</p>
 <p><b>Étape 1 : Rappel.</b> On cherche $y = \sum a_nx^n$, récurrence, puis unicité de Cauchy.</p>
-<p><b>Étape 2 : Résolution directe.</b> Facteur intégrant $e^{-x^2}$ : $\big(e^{-x^2}y\big)' = e^{-x^2}$, donc $f(x) = e^{x^2}\int_0^xe^{-t^2}\,dt$.</p>
+<p><b>Étape 2 : Résolution directe.</b> On multiplie par $e^{-x^2}$ : $e^{-x^2}y' - 2xe^{-x^2}y = e^{-x^2}$, et le membre de gauche est $\big(e^{-x^2}y\big)'$ (dérivée d'un produit : $(e^{-x^2})' = -2xe^{-x^2}$). Donc $\big(e^{-x^2}y\big)' = e^{-x^2}$ ; on intègre de $0$ à $x$ avec $y(0) = 0$ : $e^{-x^2}f(x) = \int_0^xe^{-t^2}\,dt$, soit $f(x) = e^{x^2}\int_0^xe^{-t^2}\,dt$.</p>
 <p><b>Étape 3 : La récurrence.</b> $\sum_{n\geq0}(n + 1)a_{n+1}x^n - \sum_{n\geq1}2a_{n-1}x^n = 1$ : $n = 0$ donne $a_1 = 1$ ; $n\geq1$ donne $a_{n+1} = \frac2{n + 1}a_{n-1}$. Et $a_0 = f(0) = 0$, donc tous les $a_{2p} = 0$.</p>
 <p><b>Étape 4 : Le terme général.</b> $a_{2p+1} = \frac2{2p + 1}a_{2p-1} = \frac{2^p}{3\times5\cdots(2p + 1)} = \frac{2^p\times2^pp!}{(2p + 1)!} = \frac{4^pp!}{(2p + 1)!}$. Rayon $+\infty$ ($\frac{a_{2p+3}}{a_{2p+1}} = \frac2{2p + 3}\to0$).</p>
 <p><b>Étape 5 : Conclusion.</b> La somme résout le même problème de Cauchy : $\cG{e^{x^2}\int_0^xe^{-t^2}\,dt = \sum_{p\geq0}\frac{4^pp!}{(2p + 1)!}x^{2p+1}}$ sur $\mathbb R$. Contrôle $p = 1$ : $\frac{4}{6} = \frac23$, et $a_3 = \frac23a_1$.</p>
