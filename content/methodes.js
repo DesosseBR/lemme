@@ -5724,7 +5724,7 @@ $$\text{Lemme}:\ 1\leq k\leq p - 1\Rightarrow p\mid\binom pk.$$</div>
 <p><b>Étape 1 : Rappel.</b> $(f^{-1})'(y) = \frac1{f'(f^{-1}(y))}$. Ici $f = \tan$ sur $\cR{]-\frac\pi2, \frac\pi2[}$, $f' = 1 + \tan^2$.</p>
 <p><b>Étape 2 : On applique</b> en $y\in\mathbb R$, avec $\theta = \arctan y$ :</p>
 $$\arctan'(y) = \frac1{1 + \tan^2(\arctan y)}.$$
-<p><b>Étape 3 : On simplifie.</b> $\tan(\arctan y) = y$.</p>
+<p><b>Étape 3 : On simplifie.</b> $\arctan y$ est l'angle dont la tangente vaut $y$, donc $\tan(\arctan y) = y$ et $\tan^2(\arctan y) = y^2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\arctan'(y) = \frac1{1 + y^2}}$. Même méthode : $\arcsin'(y) = \frac1{\cos(\arcsin y)} = \frac1{\sqrt{1 - y^2}}$ (§5).</p>
 
 <h2 id="u-exp">2. Exponentielle, logarithme, puissances</h2>
@@ -5739,13 +5739,13 @@ $$\textbf{Croissances comparées}:\ \frac{(\ln x)^\alpha}{x^\beta}\xrightarrow[x
 <p><b>Étape 1 : Rappel.</b> $a^b = e^{b\ln a}$, et $\ln$ est injective sur $]0, +\infty[$.</p>
 <p><b>Étape 2 : On prend le logarithme</b> (les deux membres sont $> 0$) :</p>
 $$x\ln2 = (x - 1)\ln3.$$
-<p><b>Étape 3 : On isole $x$.</b> $x\ln3 - x\ln2 = \ln3$, soit $x(\ln3 - \ln2) = \ln3$.</p>
-<p><b>Étape 4 : Conclusion.</b> $\ln3\neq\ln2$, donc $\cG{x = \frac{\ln3}{\ln3 - \ln2} = \frac{\ln3}{\ln\frac32}}$.</p>
+<p><b>Étape 3 : On isole $x$.</b> On développe $(x - 1)\ln3 = x\ln3 - \ln3$, donc $x\ln2 = x\ln3 - \ln3$. On regroupe les $x$ à gauche : $x\ln3 - x\ln2 = \ln3$, soit $x(\ln3 - \ln2) = \ln3$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\ln3\neq\ln2$, on peut diviser : $\cG{x = \frac{\ln3}{\ln3 - \ln2} = \frac{\ln3}{\ln\frac32}}$ (car $\ln3 - \ln2 = \ln\frac32$). Valeur : $\approx\frac{1{,}099}{0{,}405}\approx2{,}71$.</p>
 
 <p class="ml">Exemple 3 : la fonction $x\mapsto x^x$</p>
 <p><b>Étape 1 : Rappel.</b> $x^x = e^{x\ln x}$ pour $x > 0$, et $x\ln x\to0$ en $0^+$.</p>
-<p><b>Étape 2 : La dérivée.</b> $(x\ln x)' = \ln x + 1$, donc $f'(x) = (\ln x + 1)\,x^x$.</p>
-<p><b>Étape 3 : Le signe.</b> $x^x > 0$, et $\ln x + 1\geq0\iff x\geq e^{-1}$ : $f$ décroît sur $]0, \frac1e]$, croît sur $[\frac1e, +\infty[$.</p>
+<p><b>Étape 2 : La dérivée.</b> $(x\ln x)' = 1\times\ln x + x\times\frac1x = \ln x + 1$ (produit). Et $(e^u)' = u'e^u$, donc $f'(x) = (\ln x + 1)\,e^{x\ln x} = (\ln x + 1)\,x^x$.</p>
+<p><b>Étape 3 : Le signe.</b> $x^x = e^{x\ln x} > 0$, donc $f'$ a le signe de $\ln x + 1$. Et $\ln x + 1\geq0\iff\ln x\geq-1\iff x\geq e^{-1} = \frac1e$ ($\exp$ croissante) : $f$ décroît sur $]0, \frac1e]$, croît sur $[\frac1e, +\infty[$.</p>
 <p><b>Étape 4 : Les valeurs.</b> $f(\frac1e) = e^{\frac1e\ln\frac1e} = e^{\frac1e\times(-1)} = e^{-1/e}\approx0{,}69$ (minimum). En $0^+$ : $x\ln x\to0$ donc $f(x)\to e^0 = 1$. En $+\infty$ : $x\ln x\to+\infty$ donc $f\to+\infty$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\min_{]0, +\infty[}x^x = e^{-1/e}}$, atteint en $\frac1e$, et $f$ se prolonge par continuité en $0$ par $1$.</p>
 
@@ -5757,9 +5757,9 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <p class="ml">Exemple 4 : une équation trigonométrique</p>
 <p>Résoudre $\cos(2x) = \cos x$ sur $\mathbb R$.</p>
 <p><b>Étape 1 : Rappel.</b> $\cos a = \cos b\iff a = b + 2k\pi$ ou $a = -b + 2k\pi$, $k\in\mathbb Z$.</p>
-<p><b>Étape 2 : Premier cas.</b> $2x = x + 2\cV k\pi\iff x = 2\cV k\pi$.</p>
-<p><b>Étape 3 : Second cas.</b> $2x = -x + 2\cV k\pi\iff3x = 2\cV k\pi\iff x = \frac{2\cV k\pi}3$.</p>
-<p><b>Étape 4 : On regroupe.</b> Les $2k\pi$ sont déjà des $\frac{2k'\pi}3$ (avec $k' = 3k$).</p>
+<p><b>Étape 2 : Premier cas</b> ($a = 2x$, $b = x$, signe $+$) : $2x = x + 2\cV k\pi\iff2x - x = 2\cV k\pi\iff x = 2\cV k\pi$.</p>
+<p><b>Étape 3 : Second cas</b> (signe $-$) : $2x = -x + 2\cV k\pi\iff2x + x = 2\cV k\pi\iff3x = 2\cV k\pi\iff x = \frac{2\cV k\pi}3$.</p>
+<p><b>Étape 4 : On regroupe.</b> Les solutions du 1<sup>er</sup> cas sont déjà dans le 2<sup>e</sup> : $2k\pi = \frac{2(3k)\pi}3$, c'est $\frac{2k'\pi}3$ avec $k' = 3k$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \Big\{\frac{2k\pi}3,\ k\in\mathbb Z\Big\}}$.</p>
 
 <h2 id="u-arc">4. Les fonctions circulaires réciproques</h2>
@@ -5782,8 +5782,8 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <p class="ml">Exemple 5 : $\cos\big(\arcsin\frac13\big)$</p>
 <p><b>Étape 1 : Rappel.</b> $\theta = \arcsin x\iff\sin\theta = x$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$. Et $\cos^2\theta = 1 - \sin^2\theta$.</p>
 <p><b>Étape 2 : On pose</b> $\theta = \arcsin\frac13$ : $\sin\theta = \frac13$ et $\theta\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
-<p><b>Étape 3 : Le carré.</b> $\cos^2\theta = 1 - \frac19 = \frac89$.</p>
-<p><b>Étape 4 : Le signe.</b> Sur $\cR{[-\frac\pi2, \frac\pi2]}$, $\cO{\cos\theta\geq0}$, donc $\cos\theta = +\sqrt{\frac89}$.</p>
+<p><b>Étape 3 : Le carré.</b> $\cos^2\theta = 1 - \sin^2\theta = 1 - \big(\frac13\big)^2 = 1 - \frac19 = \frac99 - \frac19 = \frac89$.</p>
+<p><b>Étape 4 : Le signe.</b> Sur $\cR{[-\frac\pi2, \frac\pi2]}$, $\cO{\cos\theta\geq0}$, donc $\cos\theta = +\sqrt{\frac89} = \frac{\sqrt8}{\sqrt9} = \frac{\sqrt{4\times2}}3 = \frac{2\sqrt2}3$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\cos\big(\arcsin\frac13\big) = \frac{2\sqrt2}3}$. En général : $\cos(\arcsin x) = \sqrt{1 - x^2}$.</p>
 <table class="mtab">
 <tr><th></th><th>$\theta = \arcsin x$</th><th>$\theta = \arccos x$</th><th>$\theta = \arctan x$</th></tr>
@@ -5800,15 +5800,15 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <p class="ml">Exemple 6 : deux valeurs</p>
 <p>Calculer $\arccos\big(\cos\frac{5\pi}3\big)$ et $\arcsin\big(\sin\frac{3\pi}4\big)$.</p>
 <p><b>Étape 1 : Rappel.</b> $\arccos(\cos x) = x$ si $x\in\cR{[0, \pi]}$, et $\arcsin(\sin x) = x$ si $x\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
-<p><b>Étape 2 : Le premier.</b> $\frac{5\pi}3\notin[0, \pi]$. Mais $\cos\frac{5\pi}3 = \cos\big(\frac{5\pi}3 - 2\pi\big) = \cos\big(-\frac\pi3\big) = \cos\frac\pi3$, et $\frac\pi3\in\cR{[0, \pi]}$.</p>
-<p><b>Étape 3 : Le second.</b> $\frac{3\pi}4\notin[-\frac\pi2, \frac\pi2]$. Mais $\sin\frac{3\pi}4 = \sin\big(\pi - \frac{3\pi}4\big) = \sin\frac\pi4$, et $\frac\pi4\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
+<p><b>Étape 2 : Le premier.</b> $\frac{5\pi}3\approx5{,}24 > \pi$ : il n'est pas dans $[0, \pi]$. On enlève un tour : $\frac{5\pi}3 - 2\pi = \frac{5\pi}3 - \frac{6\pi}3 = -\frac\pi3$, et $\cos$ est paire : $\cos\big(-\frac\pi3\big) = \cos\frac\pi3$. Et $\frac\pi3\in\cR{[0, \pi]}$.</p>
+<p><b>Étape 3 : Le second.</b> $\frac{3\pi}4 > \frac\pi2 = \frac{2\pi}4$ : il n'est pas dans $[-\frac\pi2, \frac\pi2]$. On utilise $\sin(\pi - a) = \sin a$ : $\pi - \frac{3\pi}4 = \frac{4\pi}4 - \frac{3\pi}4 = \frac\pi4$, donc $\sin\frac{3\pi}4 = \sin\frac\pi4$. Et $\frac\pi4\in\cR{[-\frac\pi2, \frac\pi2]}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\arccos\big(\cos\frac{5\pi}3\big) = \frac\pi3}$ et $\cG{\arcsin\big(\sin\frac{3\pi}4\big) = \frac\pi4}$.</p>
 
 <p class="ml">Exemple 7 : la courbe de $x\mapsto\arcsin(\sin x)$</p>
 <p><b>Étape 1 : Rappel.</b> $\arcsin(\sin x) = x$ sur $[-\frac\pi2, \frac\pi2]$, et $\sin(\pi - x) = \sin x$.</p>
 <p><b>Étape 2 : Période et parité.</b> $f(x) = \arcsin(\sin x)$ est $2\pi$-périodique et impaire : on l'étudie sur $[-\frac\pi2, \frac{3\pi}2]$.</p>
 <p><b>Étape 3 : Sur $[-\frac\pi2, \frac\pi2]$.</b> $f(x) = x$.</p>
-<p><b>Étape 4 : Sur $[\frac\pi2, \frac{3\pi}2]$.</b> $\pi - x\in[-\frac\pi2, \frac\pi2]$ et $\sin x = \sin(\pi - x)$, donc $f(x) = \pi - x$.</p>
+<p><b>Étape 4 : Sur $[\frac\pi2, \frac{3\pi}2]$.</b> Si $\frac\pi2\leq x\leq\frac{3\pi}2$, alors $-\frac{3\pi}2\leq-x\leq-\frac\pi2$, et en ajoutant $\pi$ : $-\frac\pi2\leq\pi - x\leq\frac\pi2$. Comme $\sin x = \sin(\pi - x)$, $f(x) = \arcsin(\sin(\pi - x)) = \pi - x$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{f\ \text{est une courbe en dents de scie}}$, de pente $+1$ puis $-1$, entre $-\frac\pi2$ et $\frac\pi2$ (voir le traceur plus bas).</p>
 
 <h2 id="u-id">6. Les identités classiques</h2>
@@ -5818,8 +5818,8 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 
 <p class="ml">Exemple 8 : $\arcsin x + \arccos x = \frac\pi2$</p>
 <p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ fonction constante.</p>
-<p><b>Étape 2 : La dérivée.</b> Sur $]-1, 1[$ : $f'(x) = \frac1{\sqrt{1 - x^2}} - \frac1{\sqrt{1 - x^2}} = 0$.</p>
-<p><b>Étape 3 : La constante.</b> $f$ est constante sur $]-1, 1[$, et $f(0) = 0 + \frac\pi2$.</p>
+<p><b>Étape 2 : La dérivée.</b> Sur $]-1, 1[$ : $\arcsin'(x) = \frac1{\sqrt{1 - x^2}}$ et $\arccos'(x) = -\frac1{\sqrt{1 - x^2}}$, donc $f'(x) = \frac1{\sqrt{1 - x^2}} - \frac1{\sqrt{1 - x^2}} = 0$.</p>
+<p><b>Étape 3 : La constante.</b> $f$ est constante sur l'intervalle $]-1, 1[$, égale à $f(0) = \arcsin0 + \arccos0 = 0 + \frac\pi2 = \frac\pi2$ ($\sin0 = 0$ et $\cos\frac\pi2 = 0$).</p>
 <p><b>Étape 4 : Les bords.</b> $f$ est continue sur $[-1, 1]$, donc l'égalité passe à $\pm1$ (ou : $f(1) = \frac\pi2 + 0$).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin x + \arccos x = \frac\pi2}$ sur $[-1, 1]$.</p>
 
@@ -5827,8 +5827,8 @@ $$\cos a = \cos b\iff a = \pm b + 2\cV k\pi,\qquad\sin a = \sin b\iff a = b + 2\
 <p><b>Étape 1 : Rappel.</b> Dérivée nulle sur un intervalle $\Rightarrow$ constante <b>sur cet intervalle</b> ; $\mathbb R^*$ n'est pas un intervalle.</p>
 <p><b>Étape 2 : La dérivée.</b> Pour $x\neq0$, avec $\big(\frac1x\big)' = -\frac1{x^2}$ :</p>
 $$f'(x) = \frac1{1 + x^2} + \Big(-\frac1{x^2}\Big)\cdot\frac1{1 + \frac1{x^2}} = \frac1{1 + x^2} - \frac1{x^2\big(1 + \frac1{x^2}\big)} = \frac1{1 + x^2} - \frac1{x^2 + 1} = 0.$$
-<p><b>Étape 3 : Sur $]0, +\infty[$.</b> $f(1) = \frac\pi4 + \frac\pi4 = \frac\pi2$.</p>
-<p><b>Étape 4 : Sur $]-\infty, 0[$.</b> $f$ est impaire, donc $f = -\frac\pi2$ (ou $f(-1) = -\frac\pi2$).</p>
+<p><b>Étape 3 : Sur $]0, +\infty[$.</b> $f$ est constante sur cet intervalle, égale à $f(1) = \arctan1 + \arctan\frac11 = \frac\pi4 + \frac\pi4 = \frac\pi2$ (car $\tan\frac\pi4 = 1$).</p>
+<p><b>Étape 4 : Sur $]-\infty, 0[$.</b> $f$ y est aussi constante, égale à $f(-1) = \arctan(-1) + \arctan(-1) = -\frac\pi4 - \frac\pi4 = -\frac\pi2$ ($\arctan$ est impaire).</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\arctan x + \arctan\frac1x = \operatorname{signe}(x)\,\frac\pi2}$.</p>
 
 <h2 id="u-eq">7. Équations avec des $\arctan$, $\arcsin$</h2>
@@ -5853,8 +5853,8 @@ $$\operatorname{ch}(a + b) = \operatorname{ch}a\operatorname{ch}b + \operatornam
 <p class="ml">Exemple 11 : résoudre $\operatorname{ch}x = 2$</p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = \frac{e^x + e^{-x}}2$. On pose $X = e^x > 0$.</p>
 <p><b>Étape 2 : En $X$.</b> $e^{-x} = \frac1X$, donc $\frac{X + \frac1X}2 = 2\iff X + \frac1X = 4\iff X^2 + 1 = 4X$ (on multiplie par $X > 0$) $\iff X^2 - 4X + 1 = 0$.</p>
-<p><b>Étape 3 : Les racines.</b> $\Delta = 16 - 4 = 12$, $X = \frac{4\pm2\sqrt3}2 = 2\pm\sqrt3$. Les deux sont $> 0$.</p>
-<p><b>Étape 4 : On revient à $x$.</b> $x = \ln(2 + \sqrt3)$ ou $x = \ln(2 - \sqrt3) = \ln\frac1{2 + \sqrt3} = -\ln(2 + \sqrt3)$.</p>
+<p><b>Étape 3 : Les racines.</b> $\Delta = (-4)^2 - 4\times1\times1 = 16 - 4 = 12$, $\sqrt{12} = \sqrt{4\times3} = 2\sqrt3$, donc $X = \frac{4\pm2\sqrt3}2 = 2\pm\sqrt3$. Les deux sont $> 0$ ($\sqrt3\approx1{,}73 \lt 2$).</p>
+<p><b>Étape 4 : On revient à $x$.</b> $e^x = X\iff x = \ln X$. Et $(2 - \sqrt3)(2 + \sqrt3) = 4 - 3 = 1$, donc $2 - \sqrt3 = \frac1{2 + \sqrt3}$ et $\ln(2 - \sqrt3) = -\ln(2 + \sqrt3)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\mathcal S = \{\pm\ln(2 + \sqrt3)\}}$ (symétrique : $\operatorname{ch}$ est paire).</p>
 
 <p class="ml">Exemple 12 : $\operatorname{ch}(a + b)$</p>
@@ -5870,8 +5870,8 @@ $$\operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}},\qquad\operatorname{argch}'x =
 <p>Elles ne sont plus au programme : dans une copie, on redémontre la formule logarithmique (exemple 13) ou on écrit directement le $\ln$. Elles servent surtout pour les primitives : $\int\frac{dx}{\sqrt{x^2 + 1}} = \ln(x + \sqrt{x^2 + 1})$.</p>
 <p class="ml">Exemple 13 : retrouver $\operatorname{argsh}$</p>
 <p><b>Étape 1 : Rappel.</b> On résout $\operatorname{sh}y = x$ en posant $Y = e^y > 0$.</p>
-<p><b>Étape 2 : En $Y$.</b> $\frac{Y - \frac1Y}2 = x\iff Y^2 - 2xY - 1 = 0$.</p>
-<p><b>Étape 3 : Les racines.</b> $Y = x\pm\sqrt{x^2 + 1}$. Comme $\sqrt{x^2 + 1} > |x|$, seule $x + \sqrt{x^2 + 1}$ est $> 0$.</p>
+<p><b>Étape 2 : En $Y$.</b> $\operatorname{sh}y = \frac{e^y - e^{-y}}2 = \frac{Y - \frac1Y}2$. Donc $\frac{Y - \frac1Y}2 = x\iff Y - \frac1Y = 2x\iff Y^2 - 1 = 2xY$ (on multiplie par $Y > 0$) $\iff Y^2 - 2xY - 1 = 0$.</p>
+<p><b>Étape 3 : Les racines.</b> $\Delta = (-2x)^2 - 4\times1\times(-1) = 4x^2 + 4 = 4(x^2 + 1)$, $\sqrt\Delta = 2\sqrt{x^2 + 1}$, donc $Y = \frac{2x\pm2\sqrt{x^2 + 1}}2 = x\pm\sqrt{x^2 + 1}$. Comme $\sqrt{x^2 + 1} > \sqrt{x^2} = |x|$, $x - \sqrt{x^2 + 1} \lt 0$ : seule $x + \sqrt{x^2 + 1}$ est $> 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{y = \ln\big(x + \sqrt{x^2 + 1}\big)}$.</p>
 
 <h2 id="u-etude">10. Le plan d'étude d'une fonction</h2>
@@ -5913,20 +5913,20 @@ $$\operatorname{argsh}'x = \frac1{\sqrt{x^2 + 1}},\qquad\operatorname{argch}'x =
 <p><b>Étape 1 : Rappel.</b> $\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a\tan b}$, et $\tan$ est injective sur $]-\frac\pi2, \frac\pi2[$.</p>
 <p><b>Étape 2 : Le $\tan$ de la somme.</b> Avec $a = \arctan\frac12$, $b = \arctan\frac13$ :</p>
 $$\tan(a + b) = \frac{\frac12 + \frac13}{1 - \frac16} = \frac{\frac56}{\frac56} = 1.$$
-<p><b>Étape 3 : L'intervalle.</b> $\frac12, \frac13\in\,]0, 1[$, donc $a, b\in\,]0, \frac\pi4[$ et $a + b\in\,]0, \frac\pi2[$.</p>
+<p><b>Étape 3 : L'intervalle.</b> $\arctan$ est croissante et $\arctan0 = 0$, $\arctan1 = \frac\pi4$. Comme $0 \lt \frac13 \lt \frac12 \lt 1$ : $a, b\in\,]0, \frac\pi4[$. On additionne : $a + b\in\,]0, \frac\pi2[$.</p>
 <p><b>Étape 4 : Conclusion.</b> Sur $]0, \frac\pi2[$, le seul angle de tangente $1$ est $\frac\pi4$ : $\cG{\arctan\frac12 + \arctan\frac13 = \frac\pi4}$.</p>
 
 <p class="ml">Exercice 2 : $\lim\limits_{x\to+\infty}\big(1 + \frac ax\big)^x$</p>
 <p><b>Étape 1 : Rappel.</b> $u^v = e^{v\ln u}$, et $\frac{\ln(1 + h)}h\to1$ quand $h\to0$.</p>
-<p><b>Étape 2 : L'exposant.</b> $x\ln\big(1 + \frac ax\big) = a\cdot\frac{\ln(1 + h)}h$ avec $h = \frac ax\to0$ (si $a\neq0$).</p>
+<p><b>Étape 2 : L'exposant.</b> On pose $h = \frac ax\to0$ (si $a\neq0$), donc $x = \frac ah$ et $x\ln\big(1 + \frac ax\big) = \frac ah\ln(1 + h) = a\cdot\frac{\ln(1 + h)}h$.</p>
 <p><b>Étape 3 : Sa limite.</b> $a\cdot1 = a$.</p>
 <p><b>Étape 4 : Conclusion.</b> Par continuité de $\exp$ : $\cG{\big(1 + \frac ax\big)^x\to e^a}$ (et c'est $1$ si $a = 0$).</p>
 
 <p class="ml">Exercice 3 : $f(x) = \arcsin\frac{2x}{1 + x^2}$ pour $|x|\leq1$</p>
 <p><b>Étape 1 : Rappel.</b> $\sin(2\theta) = \frac{2\tan\theta}{1 + \tan^2\theta}$, et $\arcsin(\sin y) = y$ si $y\in[-\frac\pi2, \frac\pi2]$.</p>
 <p><b>Étape 2 : On pose</b> $\theta = \arctan x$. Pour $|x|\leq1$, $\theta\in[-\frac\pi4, \frac\pi4]$.</p>
-<p><b>Étape 3 : On reconnaît un sinus.</b> $\frac{2x}{1 + x^2} = \frac{2\tan\theta}{1 + \tan^2\theta} = \sin(2\theta)$.</p>
-<p><b>Étape 4 : L'intervalle.</b> $2\theta\in[-\frac\pi2, \frac\pi2]$, donc $\arcsin(\sin2\theta) = 2\theta$.</p>
+<p><b>Étape 3 : On reconnaît un sinus.</b> $\sin(2\theta) = 2\sin\theta\cos\theta = 2\frac{\sin\theta}{\cos\theta}\cos^2\theta = 2\tan\theta\cdot\frac1{1 + \tan^2\theta}$ (car $\cos^2\theta = \frac1{1 + \tan^2\theta}$). Avec $\tan\theta = x$ : $\sin(2\theta) = \frac{2x}{1 + x^2}$.</p>
+<p><b>Étape 4 : L'intervalle.</b> $-\frac\pi4\leq\theta\leq\frac\pi4$, on multiplie par $2$ : $-\frac\pi2\leq2\theta\leq\frac\pi2$, donc $\arcsin(\sin2\theta) = 2\theta$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\arcsin\frac{2x}{1 + x^2} = 2\arctan x}$ sur $[-1, 1]$ (pour $x > 1$, on trouve $\pi - 2\arctan x$).</p>
 
 <h2 id="u-arbre">L'arbre des fonctions usuelles</h2>
@@ -6411,7 +6411,7 @@ $$\big|\|x\| - \|y\|\big|\leq\|x - y\|.\qquad\text{Les boules sont convexes}.\qq
 <p>$N(x) = |x_1| + 2|x_2|$ sur $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
 <p><b>Étape 2 : Positivité et séparation.</b> $N(x)\geq0$. Si $N(x) = 0$, une somme de deux termes positifs est nulle : $|x_1| = |x_2| = 0$, donc $x = 0$.</p>
-<p><b>Étape 3 : Homogénéité.</b> $N(\lambda x) = |\lambda x_1| + 2|\lambda x_2| = |\lambda|\,(|x_1| + 2|x_2|) = |\lambda|N(x)$.</p>
+<p><b>Étape 3 : Homogénéité.</b> $\lambda x = (\lambda x_1, \lambda x_2)$ et $|\lambda x_i| = |\lambda|\,|x_i|$, donc $N(\lambda x) = |\lambda|\,|x_1| + 2|\lambda|\,|x_2| = |\lambda|\,(|x_1| + 2|x_2|) = |\lambda|N(x)$ (on factorise $|\lambda|$).</p>
 <p><b>Étape 4 : Triangulaire</b>, avec $|a + b|\leq|a| + |b|$ sur chaque coordonnée :</p>
 $$N(x + y) = |x_1 + y_1| + 2|x_2 + y_2|\leq|x_1| + |y_1| + 2|x_2| + 2|y_2| = N(x) + N(y).$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{N\ \text{est une norme sur}\ \mathbb R^2}$.</p>
@@ -6425,17 +6425,17 @@ $$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{
 
 <p class="ml">Exemple 2 : les normes usuelles de $\mathbb K^n$</p>
 <p><b>Étape 1 : Rappel.</b> Il faut des constantes qui ne dépendent pas de $x$.</p>
-<p><b>Étape 2 : $\|x\|_\infty\leq\|x\|_2$.</b> Si $|x_k| = \max|x_i|$, alors $|x_k|^2\leq\sum|x_i|^2$.</p>
-<p><b>Étape 3 : $\|x\|_2\leq\|x\|_1$.</b> $\big(\sum|x_i|\big)^2 = \sum|x_i|^2 + (\text{termes croisés}\geq0)\geq\|x\|_2^2$.</p>
-<p><b>Étape 4 : $\|x\|_1\leq n\|x\|_\infty$.</b> Chacun des $n$ termes est $\leq\|x\|_\infty$.</p>
+<p><b>Étape 2 : $\|x\|_\infty\leq\|x\|_2$.</b> Soit $k$ l'indice où $|x_k| = \max_i|x_i| = \|x\|_\infty$. La somme $\sum_i|x_i|^2$ contient le terme $|x_k|^2$ et d'autres termes $\geq0$, donc $\|x\|_\infty^2 = |x_k|^2\leq\sum|x_i|^2 = \|x\|_2^2$. On prend la racine (croissante).</p>
+<p><b>Étape 3 : $\|x\|_2\leq\|x\|_1$.</b> On développe le carré d'une somme : $\big(\sum|x_i|\big)^2 = \sum|x_i|^2 + 2\sum_{i \lt j}|x_i|\,|x_j|$. Les termes croisés sont $\geq0$, donc $\|x\|_1^2\geq\sum|x_i|^2 = \|x\|_2^2$, et on prend la racine.</p>
+<p><b>Étape 4 : $\|x\|_1\leq n\|x\|_\infty$.</b> Chaque $|x_i|\leq\|x\|_\infty$ ; on additionne ces $n$ inégalités : $\sum_{i=1}^n|x_i|\leq\underbrace{\|x\|_\infty + \dots + \|x\|_\infty}_{n\ \text{fois}} = n\|x\|_\infty$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\|x\|_\infty\leq\|x\|_2\leq\|x\|_1\leq n\|x\|_\infty}$ : les trois sont équivalentes (constantes $\cO1$ et $\cO n$).</p>
 
 <p class="ml">Exemple 3 : deux normes non équivalentes</p>
 <p>Sur $\mathcal C([0, 1])$, comparer $\|f\|_1$ et $\|f\|_\infty$.</p>
 <p><b>Étape 1 : Rappel.</b> Non équivalentes si le quotient n'est pas borné le long d'une suite.</p>
-<p><b>Étape 2 : Un sens.</b> $|f(t)|\leq\|f\|_\infty$, on intègre sur $[0, 1]$ : $\|f\|_1\leq\|f\|_\infty$.</p>
+<p><b>Étape 2 : Un sens.</b> Pour tout $t\in[0, 1]$, $|f(t)|\leq\|f\|_\infty$ (c'est la définition du sup). On intègre sur $[0, 1]$ (longueur $1$) : $\|f\|_1 = \int_0^1|f(t)|\,dt\leq\int_0^1\|f\|_\infty\,dt = \|f\|_\infty$.</p>
 <p><b>Étape 3 : La suite.</b> $f_n(t) = t^n$ sur $[0, 1]$ : son max est atteint en $t = 1$, donc $\|f_n\|_\infty = 1^n = 1$. Et $\|f_n\|_1 = \int_0^1t^n\,dt = \Big[\frac{t^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}$.</p>
-<p><b>Étape 4 : Le quotient.</b> $\frac{\|f_n\|_\infty}{\|f_n\|_1} = n + 1\to+\infty$ : aucun $\cO\beta$ ne vérifie $\|f\|_\infty\leq\cO\beta\|f\|_1$.</p>
+<p><b>Étape 4 : Le quotient.</b> $\frac{\|f_n\|_\infty}{\|f_n\|_1} = \frac1{1/(n + 1)} = n + 1\to+\infty$. Si on avait $\|f\|_\infty\leq\cO\beta\|f\|_1$ pour tout $f$, on aurait $n + 1\leq\cO\beta$ pour tout $n$ : impossible.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\|\cdot\|_1\ \text{et}\ \|\cdot\|_\infty\ \text{ne sont pas équivalentes}}$, et $f_n\to0$ pour $\|\cdot\|_1$ mais pas pour $\|\cdot\|_\infty$.</p>
 
 <h2 id="t-suites">4. Suites dans un espace normé</h2>
@@ -6446,7 +6446,7 @@ $$\textbf{En dimension finie, toutes les normes sont équivalentes.}\qquad\text{
 <p><b>Étape 1 : Rappel.</b> En dimension finie, on regarde chaque coefficient.</p>
 <p><b>Étape 2 : On écrit</b> $A = \frac12I + N$, $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^2 = 0$, $IN = NI$. Binôme : $A^n = \sum_k\binom nk\big(\frac12\big)^{n-k}N^k$, et seuls $k = 0$ et $k = 1$ restent car $N^k = 0$ pour $k\geq2$ :</p>
 $$A^n = \Big(\frac12\Big)^nI + n\Big(\frac12\Big)^{n-1}N = \begin{pmatrix}2^{-n}&n\,2^{1-n}\\0&2^{-n}\end{pmatrix}.$$
-<p><b>Étape 3 : Les coefficients.</b> $2^{-n}\to0$ et $n\,2^{1-n}\to0$ (croissances comparées).</p>
+<p><b>Étape 3 : Les coefficients.</b> $2^{-n} = \frac1{2^n}\to0$. Et $n\,2^{1-n} = \frac{2n}{2^n}\to0$ car $2^n$ l'emporte sur $n$ (croissances comparées). Les quatre coefficients tendent vers $0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^n\to0}$ (pour n'importe quelle norme de $\mathcal M_2$).</p>
 
 <h2 id="t-ouv">5. Ouverts, fermés</h2>
@@ -6460,7 +6460,7 @@ $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text
 <p class="ml">Exemple 5 : par image réciproque</p>
 <p>$A = \{(x, y),\ x^2 + y^2\leq1,\ x\geq y\}$ et $U = \{(x, y),\ xy > 1\}$ dans $\mathbb R^2$.</p>
 <p><b>Étape 1 : Rappel.</b> $f$ continue : $f^{-1}(\text{fermé})$ fermé, $f^{-1}(\text{ouvert})$ ouvert.</p>
-<p><b>Étape 2 : $A$.</b> $f_1(x, y) = x^2 + y^2$ et $f_2(x, y) = x - y$ sont continues (polynomiales). $A = f_1^{-1}(]-\infty, 1])\cap f_2^{-1}([0, +\infty[)$ : intersection de deux fermés.</p>
+<p><b>Étape 2 : $A$.</b> $f_1(x, y) = x^2 + y^2$ et $f_2(x, y) = x - y$ sont continues (polynomiales). $x^2 + y^2\leq1\iff f_1(x, y)\in\,]-\infty, 1]$ et $x\geq y\iff f_2(x, y)\in[0, +\infty[$. Donc $A = f_1^{-1}(]-\infty, 1])\cap f_2^{-1}([0, +\infty[)$ : intersection de deux fermés (images réciproques d'intervalles fermés).</p>
 <p><b>Étape 3 : $U$.</b> $g(x, y) = xy$ est continue et $U = g^{-1}(]1, +\infty[)$, image réciproque d'un ouvert.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est fermé},\ U\ \text{est ouvert}}$.</p>
 
@@ -6468,7 +6468,7 @@ $$f\ \textbf{continue}:\ f^{-1}(\text{ouvert})\ \text{est ouvert},\ f^{-1}(\text
 <p><b>Étape 1 : Rappel.</b> Image réciproque par une application continue. En dimension finie, compact $\iff$ fermé et borné.</p>
 <p><b>Étape 2 : $GL_n$.</b> $\det$ est continue (polynomiale en les coefficients) et $GL_n(\mathbb R) = \det^{-1}(\mathbb R^*)$, avec $\mathbb R^*$ ouvert.</p>
 <p><b>Étape 3 : $O(n)$ fermé.</b> $\varphi(A) = A^\top A$ est continue et $O(n) = \varphi^{-1}(\{I_n\})$, image réciproque d'un fermé.</p>
-<p><b>Étape 4 : $O(n)$ borné.</b> Pour la norme $\|A\|_2 = \sqrt{\operatorname{tr}(A^\top A)}$ : $\|A\|_2 = \sqrt{\operatorname{tr}I_n} = \sqrt n$.</p>
+<p><b>Étape 4 : $O(n)$ borné.</b> Pour la norme $\|A\|_2 = \sqrt{\operatorname{tr}(A^\top A)} = \sqrt{\sum a_{ij}^2}$ : si $A\in O(n)$, $A^\top A = I_n$, donc $\|A\|_2 = \sqrt{\operatorname{tr}I_n} = \sqrt{1 + \dots + 1} = \sqrt n$. Toutes les matrices de $O(n)$ sont sur la sphère de rayon $\sqrt n$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{GL_n(\mathbb R)\ \text{ouvert},\ O(n)\ \text{compact}}$.</p>
 
 <p class="ml">Exemple 7 : fermé ou pas, selon la norme</p>
@@ -6486,15 +6486,15 @@ $$a\in\mathring A\iff\exists r > 0,\ B(a, r)\subset A.\qquad A\ \textbf{dense}\i
 <p class="ml">Exemple 8 : dans $\mathbb R$</p>
 <p>$A = [0, 1[\,\cup\{2\}$. Intérieur, adhérence, frontière ?</p>
 <p><b>Étape 1 : Rappel.</b> Adhérence : limites de suites de $A$. Intérieur : points avec une petite boule incluse.</p>
-<p><b>Étape 2 : L'adhérence.</b> $1 - \frac1n\to1$ donne $1\in\overline A$. $[0, 1]\cup\{2\}$ est fermé et contient $A$ : $\overline A = [0, 1]\cup\{2\}$.</p>
-<p><b>Étape 3 : L'intérieur.</b> $]0, 1[$ est ouvert et inclus dans $A$. En $0$ et en $2$, toute boule $]a - r, a + r[$ sort de $A$.</p>
+<p><b>Étape 2 : L'adhérence.</b> $1 - \frac1n\in[0, 1[\subset A$ pour $n\geq1$, et $1 - \frac1n\to1$ : donc $1\in\overline A$. Ensuite $[0, 1]\cup\{2\}$ est fermé (réunion de deux fermés) et contient $A$ : $\overline A\subset[0, 1]\cup\{2\}$. D'où $\overline A = [0, 1]\cup\{2\}$.</p>
+<p><b>Étape 3 : L'intérieur.</b> Si $0 \lt a \lt 1$, avec $r = \min(a, 1 - a) > 0$, on a $]a - r, a + r[\subset]0, 1[\subset A$. En $0$ : $]-r, r[$ contient $-\frac r2\notin A$. En $2$ : $]2 - r, 2 + r[$ contient $2 + \frac r2\notin A$. Donc $0$ et $2$ ne sont pas intérieurs.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathring A = \,]0, 1[,\ \overline A = [0, 1]\cup\{2\},\ \operatorname{Fr}A = \{0, 1, 2\}}$.</p>
 
 <p class="ml">Exemple 9 : $GL_n(\mathbb K)$ est dense dans $\mathcal M_n(\mathbb K)$</p>
 <p><b>Étape 1 : Rappel.</b> Dense $\iff$ toute matrice est limite d'une suite de matrices inversibles.</p>
 <p><b>Étape 2 : On perturbe.</b> Soit $A\in\mathcal M_n$. On pose $A_k = A - \frac1kI_n$.</p>
-<p><b>Étape 3 : Inversible pour $k$ grand.</b> $A_k$ n'est pas inversible $\iff\frac1k$ est valeur propre de $A$. $A$ a au plus $n$ valeurs propres, donc pour $k$ assez grand, $\frac1k$ n'en est pas une.</p>
-<p><b>Étape 4 : La limite.</b> $A_k\to A$ (seule la diagonale bouge, de $\frac1k\to0$).</p>
+<p><b>Étape 3 : Inversible pour $k$ grand.</b> $A_k = A - \frac1kI_n$ n'est pas inversible $\iff\det\big(A - \frac1kI_n\big) = 0\iff\frac1k$ est valeur propre de $A$. $A$ a au plus $n$ valeurs propres ; si $\rho$ est le plus petit module non nul d'entre elles (ou $\rho = 1$ s'il n'y en a pas), alors pour $k > \frac1\rho$, $0 \lt \frac1k \lt \rho$ et $\frac1k$ n'en est pas une.</p>
+<p><b>Étape 4 : La limite.</b> $A_k - A = -\frac1kI_n$, dont tous les coefficients sont $0$ ou $-\frac1k\to0$ : $A_k\to A$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\overline{GL_n(\mathbb K)} = \mathcal M_n(\mathbb K)}$. Usage : prouver une formule pour $A$ inversible, puis passer à la limite par continuité (ex. : $\chi_{AB} = \chi_{BA}$).</p>
 
 <h2 id="t-lim">7. Limites, continuité</h2>
@@ -6504,8 +6504,8 @@ $$\text{Sommes, produits, composées de fonctions continues sont continues. Les 
 <p class="ml">Exemple 10 : la distance à une partie est $1$-lipschitzienne</p>
 <p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$, et l'inf est le plus grand minorant.</p>
 <p><b>Étape 2 : Pour $a\in A$.</b> $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$.</p>
-<p><b>Étape 3 : On passe à l'inf en $a$.</b> $d(x, A) - \|x - y\|$ minore tous les $\|y - a\|$, donc $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
-<p><b>Étape 4 : On échange $x$ et $y$</b>, et on regroupe : $|d(x, A) - d(y, A)|\leq\|x - y\|$.</p>
+<p><b>Étape 3 : On passe à l'inf en $a$.</b> On réécrit l'étape 2 : $d(x, A) - \|x - y\|\leq\|y - a\|$ pour <b>tout</b> $a\in A$. Le nombre $d(x, A) - \|x - y\|$ est donc un minorant de $\{\|y - a\|,\ a\in A\}$, et l'inf est le plus grand minorant : $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
+<p><b>Étape 4 : On échange $x$ et $y$.</b> On obtient aussi $d(y, A) - d(x, A)\leq\|y - x\| = \|x - y\|$. Les deux inégalités donnent $-\|x - y\|\leq d(x, A) - d(y, A)\leq\|x - y\|$, soit $|d(x, A) - d(y, A)|\leq\|x - y\|$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{x\mapsto d(x, A)\ \text{est}\ 1\text{-lipschitzienne}}$ (donc continue). Même idée : $x\mapsto\|x\|$.</p>
 
 <h2 id="t-lin">8. Applications linéaires continues</h2>
@@ -6517,15 +6517,15 @@ $$\textbf{En dimension finie (au départ), toute application linéaire est conti
 <p class="ml">Exemple 11 : une forme linéaire continue et sa norme</p>
 <p>$\varphi(f) = \int_0^1f(t)\,dt$ sur $(\mathcal C([0, 1]), \|\cdot\|_\infty)$.</p>
 <p><b>Étape 1 : Rappel.</b> $|\varphi(f)|\leq C\|f\|$ donne la continuité et $|||\varphi|||\leq C$ ; un cas d'égalité donne $|||\varphi||| = C$.</p>
-<p><b>Étape 2 : La majoration.</b> $|\varphi(f)|\leq\int_0^1|f|\leq\int_0^1\|f\|_\infty = \cO1\times\|f\|_\infty$.</p>
-<p><b>Étape 3 : Le cas d'égalité.</b> $f = 1$ : $\|f\|_\infty = 1$ et $\varphi(f) = 1$.</p>
+<p><b>Étape 2 : La majoration.</b> Inégalité triangulaire intégrale, puis $|f(t)|\leq\|f\|_\infty$ pour tout $t$ : $|\varphi(f)| = \big|\int_0^1f\big|\leq\int_0^1|f|\leq\int_0^1\|f\|_\infty\,dt = \|f\|_\infty\times(1 - 0) = \cO1\times\|f\|_\infty$.</p>
+<p><b>Étape 3 : Le cas d'égalité.</b> Pour $f = 1$ (fonction constante) : $\|f\|_\infty = 1$ et $\varphi(f) = \int_0^11\,dt = 1$, donc $\frac{|\varphi(f)|}{\|f\|_\infty} = 1$ : la constante $1$ ne peut pas être améliorée.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\varphi\ \text{est continue et}\ |||\varphi||| = 1}$.</p>
 
 <p class="ml">Exemple 12 : la dérivation n'est pas continue</p>
 <p>$D:P\mapsto P'$ sur $\mathbb R[X]$, avec $\|P\| = \max|a_k|$ (coefficients).</p>
 <p><b>Étape 1 : Rappel.</b> Si $\frac{\|D(P_n)\|}{\|P_n\|}\to+\infty$, aucune constante $C$ ne convient.</p>
-<p><b>Étape 2 : La suite.</b> $P_n = X^n$ : $\|P_n\| = 1$.</p>
-<p><b>Étape 3 : L'image.</b> $D(P_n) = nX^{n-1}$ : $\|D(P_n)\| = n$.</p>
+<p><b>Étape 2 : La suite.</b> $P_n = X^n$ a un seul coefficient non nul, égal à $1$ : $\|P_n\| = \max|a_k| = 1$.</p>
+<p><b>Étape 3 : L'image.</b> $D(P_n) = (X^n)' = nX^{n-1}$, un seul coefficient non nul, égal à $n$ : $\|D(P_n)\| = n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\frac{\|D(P_n)\|}{\|P_n\|} = n\to+\infty$ : $\cG{D\ \text{n'est pas continue}}$ (c'est possible car $\mathbb R[X]$ est de dimension infinie).</p>
 
 <h2 id="t-comp">9. Compacts</h2>
@@ -6537,7 +6537,7 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 <p><b>Étape 1 : Rappel.</b> En dimension finie, fermé borné = compact ; une fonction continue réelle sur un compact atteint son min.</p>
 <p><b>Étape 2 : On se ramène à une partie bornée.</b> Soit $x_0\in F$ et $R = \|a - x_0\|$. On pose $K = F\cap B_f(a, R)$ : non vide ($x_0\in K$), fermé, borné, donc compact.</p>
 <p><b>Étape 3 : Le min sur $K$.</b> $x\mapsto\|a - x\|$ est continue : elle atteint son min sur $K$ en un $b$.</p>
-<p><b>Étape 4 : C'est le min sur $F$.</b> Si $x\in F\setminus K$, $\|a - x\| > R\geq\|a - b\|$.</p>
+<p><b>Étape 4 : C'est le min sur $F$.</b> Si $x\in F$ n'est pas dans $K$, c'est qu'il n'est pas dans la boule : $\|a - x\| > R$. Et $\|a - b\|\leq\|a - x_0\| = R$ (car $b$ réalise le min sur $K\ni x_0$). Donc $\|a - x\| > \|a - b\|$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{d(a, F) = \|a - b\|\ \text{avec}\ b\in F}$.</p>
 
 <h2 id="t-dimf">10. Ce que change la dimension finie</h2>
@@ -6551,7 +6551,7 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 <p class="ml">Exemple 14 : $GL_n(\mathbb R)$ n'est pas connexe par arcs</p>
 <p><b>Étape 1 : Rappel.</b> L'image continue d'un connexe par arcs de $\mathbb R$ est un intervalle.</p>
 <p><b>Étape 2 : Par l'absurde.</b> Si $GL_n(\mathbb R)$ était connexe par arcs, $\det(GL_n(\mathbb R))$ serait un intervalle.</p>
-<p><b>Étape 3 : Les valeurs.</b> $\det I_n = 1$ et $\det\operatorname{diag}(-1, 1, \dots, 1) = -1$, donc l'intervalle contiendrait $0$.</p>
+<p><b>Étape 3 : Les valeurs.</b> $\det I_n = 1\times\dots\times1 = 1$ et $\det\operatorname{diag}(-1, 1, \dots, 1) = (-1)\times1\times\dots\times1 = -1$ (produit de la diagonale). Un intervalle qui contient $-1$ et $1$ contient tout $[-1, 1]$, donc $0$.</p>
 <p><b>Étape 4 : Conclusion.</b> Or $\det A\neq0$ sur $GL_n$ : $\cG{GL_n(\mathbb R)\ \text{n'est pas connexe par arcs}}$.</p>
 
 <p class="ml">Bonus : suites de Cauchy, espaces complets <span class="hp">hors programme</span></p>
@@ -6597,7 +6597,7 @@ $$\text{Convexe}\Rightarrow\text{étoilé}\Rightarrow\text{connexe par arcs}.\qq
 <p class="ml">Exercice 2 : une fonction coercive atteint son minimum</p>
 <p>$f:\mathbb R^n\to\mathbb R$ continue avec $f(x)\to+\infty$ quand $\|x\|\to+\infty$.</p>
 <p><b>Étape 1 : Rappel.</b> Continue sur un compact $\Rightarrow$ min atteint ; fermé borné = compact en dimension finie.</p>
-<p><b>Étape 2 : On borne.</b> Avec $A = f(0)$ : il existe $R$ tel que $\|x\| > R\Rightarrow f(x) > A$.</p>
+<p><b>Étape 2 : On borne.</b> On pose $A = f(0)$. Comme $f(x)\to+\infty$ quand $\|x\|\to+\infty$, la définition de la limite donne un $R$ tel que $\|x\| > R\Rightarrow f(x) > A$.</p>
 <p><b>Étape 3 : Sur la boule.</b> $B_f(0, R)$ est compacte : $f$ y atteint son min en $x_0$, et $f(x_0)\leq f(0) = A$.</p>
 <p><b>Étape 4 : Ailleurs.</b> Hors de la boule, $f(x) > A\geq f(x_0)$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{f(x_0) = \min_{\mathbb R^n}f}$.</p>
