@@ -1266,7 +1266,7 @@ const mmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, v, k) => s + v
 const texM = M => `\\begin{pmatrix}${M.map(r => r.join("&")).join("\\\\")}\\end{pmatrix}`;
 function mountMlab(host) {
   const k = host.dataset.mlab; host.classList.add("mlab");
-  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR) })[k](host);
+  ({ prod: mlProd, gauss: mlGauss, puiss: mlPuiss, exos: mlExos, quiz: h => mlQuiz(h, QMAT), perm: mlPerm, sarrus: mlSarrus, dev: mlDev, colf: mlColf, chgbase: mlChg, diag: mlDiag, exred: mlExRed, quizred: h => mlQuiz(h, QRED), exdet: mlExDet, quizdet: h => mlQuiz(h, QDET), edo1: mlEdo1, edo2: mlEdo2, quizedo: h => mlQuiz(h, QEDO), pascal: mlPascal, binome: mlBinome, sommes: mlSommes, quizalg: h => mlQuiz(h, QALG), expform: mlExpForm, lin: mlLin, rac2: mlRac2, racn: mlRacn, quizcpx: h => mlQuiz(h, QCPX), riemann: mlRiemann, ipp: mlIpp, quizint: h => mlQuiz(h, QINT), nature: mlNature, partielles: mlPartielles, quizser: h => mlQuiz(h, QSER), taylor: mlTaylor, dlex: mlDlEx, quizdl: h => mlQuiz(h, QDL), domin: mlDomin, quizipar: h => mlQuiz(h, QIPAR), fn: mlFn, quizsf: h => mlQuiz(h, QSF), diveucl: mlDivEucl, des: mlDes, quizpoly: h => mlQuiz(h, QPOLY), absval: mlAbsVal, entx: mlEntX, supeps: mlSupEps, quizreel: h => mlQuiz(h, QREEL), cobweb: mlCobweb, arigeo: mlAriGeo, recur2: mlRecur2, quizsuite: h => mlQuiz(h, QSUITE), modele: mlModele, denex: mlDenEx, quizden: h => mlQuiz(h, QDEN), riemref: mlRiemRef, quizimp: h => mlQuiz(h, QIMP), euclz: mlEuclZ, dioph: mlDioph, powmod: mlPowMod, quizarith: h => mlQuiz(h, QARITH), arcval: mlArcVal, arcfx: mlArcFx, quizfu: h => mlQuiz(h, QFU), gram: mlGram, projpl: mlProjPl, quizph: h => mlQuiz(h, QPH), spec2: mlSpec2, rot3: mlRot3, quizeu: h => mlQuiz(h, QEU), boules: mlBoules, quizevn: h => mlQuiz(h, QEVN), polar: mlPolar, crit: mlCrit, quizcd: h => mlQuiz(h, QCD), expmat: mlExpMat, quizfs: h => mlQuiz(h, QFS), arcp: mlArcP, quizfv: h => mlQuiz(h, QFV), bayes: mlBayes, binomp: mlBinomP, quizpr: h => mlQuiz(h, QPR), cayley: mlCayley, quizst: h => mlQuiz(h, QST), poisapp: mlPoisApp, lfgn: mlLfgn, quizpd: h => mlQuiz(h, QPD) })[k](host);
 }
 /* 1. Produit en croix : on clique une case de AB */
 function mlProd(host) {
@@ -2896,6 +2896,70 @@ const QPR = [
   ["$V(2X) = 2V(X)$.", false, "Faux : $V(aX) = a^2V(X)$, donc $4V(X)$."],
   ["Le nombre de rouges dans des tirages sans remise suit une loi binomiale.", false, "Faux : les tirages ne sont pas indépendants (loi hypergéométrique)."],
   ["Deux à deux indépendants implique mutuellement indépendants.", false, "Faux : contre-exemple des deux pièces et « même résultat »."]
+];
+/* Structures : table de Z/nZ */
+function mlCayley(host) {
+  let n = 6, op = "+";
+  const draw = () => {
+    const g = (a, b) => gcdi(a, b), inv = op === "×" ? [...Array(n).keys()].filter(k => g(k, n) === 1) : [...Array(n).keys()];
+    const cell = (a, b) => { const v = op === "+" ? (a + b) % n : (a * b) % n, mark = op === "+" ? v === 0 : v === 1, dim = op === "×" && (g(a, n) !== 1 || g(b, n) !== 1); return `<td style="padding:4px 7px;text-align:center;${mark ? "background:rgba(194,124,0,.22);font-weight:600;" : ""}${dim ? "color:var(--muted);opacity:.55;" : ""}">${v}</td>`; };
+    const rows = [...Array(n).keys()].map(a => `<tr><th style="padding:4px 7px">${a}</th>${[...Array(n).keys()].map(b => cell(a, b)).join("")}</tr>`).join("");
+    const prem = [...Array(n - 1).keys()].every(k => g(k + 1, n) === 1);
+    const txt = op === "+" ? `Groupe abélien de neutre $0$ ; chaque ligne contient exactement une case $0$ (en orange) : tout élément a un opposé. Chaque ligne est une permutation des éléments.` : `Les inversibles (cases $1$ en orange) sont les $k$ premiers avec $${n}$ : $\\{${inv.join(", ")}\\}$, soit $${inv.length}$ éléments. Les lignes grisées n'ont pas d'inverse. ${prem ? `$${n}$ est premier : tout élément non nul est inversible, $\\mathbb Z/${n}\\mathbb Z$ est un <b>corps</b>.` : `$${n}$ n'est pas premier : $\\mathbb Z/${n}\\mathbb Z$ n'est pas intègre (cherche un produit nul entre deux non nuls).`}`;
+    host.innerHTML = `<p class="mlt">La table de $\\mathbb Z/n\\mathbb Z$ <span class="hp">programme de Spé</span></p><div class="rmctl"><div class="mlseg"><button type="button" data-o="+" aria-pressed="${op === "+"}">addition</button><button type="button" data-o="×" aria-pressed="${op === "×"}">multiplication</button></div><label class="rmn">$n = ${n}$ <input type="range" min="2" max="12" value="${n}" data-n aria-label="n"></label></div><div style="overflow-x:auto;display:flex;justify-content:center"><table style="border-collapse:collapse;font-variant-numeric:tabular-nums"><tr><th style="padding:4px 7px">${op}</th>${[...Array(n).keys()].map(b => `<th style="padding:4px 7px">${b}</th>`).join("")}</tr>${rows}</table></div><p class="mlnote">${txt}</p>`;
+    $$("[data-o]", host).forEach(b => b.addEventListener("click", () => { op = b.dataset.o; draw(); }));
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+const QST = [
+  ["Une réunion de deux sous-groupes est un sous-groupe.", false, "Faux : $2\\mathbb Z\\cup3\\mathbb Z$ contient $2$ et $3$, pas $5$."],
+  ["Le noyau d'un morphisme de groupes est un sous-groupe.", true, "Vrai, et $f$ est injectif si et seulement si $\\ker f = \\{e\\}$."],
+  ["Dans un groupe, $(xy)^{-1} = x^{-1}y^{-1}$.", false, "Faux en général : c'est $y^{-1}x^{-1}$."],
+  ["$\\mathcal M_2(\\mathbb R)$ est un anneau intègre.", false, "Faux : $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}^2 = 0$."],
+  ["Les sous-groupes de $(\\mathbb Z, +)$ sont les $n\\mathbb Z$.", true, "Vrai : on prend le plus petit élément $> 0$ et on fait une division euclidienne."],
+  ["$\\mathbb Z[i]^\\times = \\{\\pm1, \\pm i\\}$.", true, "Vrai : la norme $a^2 + b^2$ doit valoir $1$."],
+  ["Un corps est intègre.", true, "Vrai : si $ab = 0$ et $a\\neq0$, on multiplie par $a^{-1}$."]
+];
+/* Probabilités : approximation de la binomiale par Poisson */
+function mlPoisApp(host) {
+  let n = 20, lam = 3;
+  const draw = () => {
+    const p = lam / n, K = Math.max(8, Math.ceil(lam + 4 * Math.sqrt(lam))), B = [], Pz = []; let f = Math.exp(-lam), dmax = 0;
+    for (let k = 0; k <= K; k++) { B.push(k <= n ? binom(n, k) * p ** k * (1 - p) ** (n - k) : 0); Pz.push(f); f *= lam / (k + 1); dmax = Math.max(dmax, Math.abs(B[k] - Pz[k])); }
+    const mx = Math.max(...B, ...Pz), W = 520, H = 220, bw = (W - 60) / (K + 1), X = k => 40 + k * bw, Y = v => H - 25 - v / mx * (H - 45);
+    host.innerHTML = `<p class="mlt">$\\mathcal B(n, \\frac\\lambda n)$ se rapproche de $\\mathcal P(\\lambda)$</p><div class="rmctl"><label class="rmn">$n = ${n}$ <input type="range" min="5" max="200" value="${n}" data-n aria-label="n"></label><label class="rmn">$\\lambda = ${lam.toFixed(1).replace(".", "{,}")}$ <input type="range" min="0.5" max="8" step="0.5" value="${lam}" data-l aria-label="lambda"></label></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Comparaison binomiale Poisson">${B.map((v, k) => `<rect x="${(X(k) + bw * 0.15).toFixed(1)}" y="${Y(v).toFixed(1)}" width="${(bw * 0.7).toFixed(1)}" height="${(H - 25 - Y(v)).toFixed(1)}" fill="#2B5BD7" opacity=".75"/>`).join("")}${Pz.map((v, k) => `<circle cx="${(X(k) + bw / 2).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="#D4503B"/>`).join("")}${B.map((_, k) => k % (K > 16 ? 2 : 1) ? "" : `<text x="${(X(k) + bw / 2).toFixed(1)}" y="${H - 8}" class="tx" text-anchor="middle">${k}</text>`).join("")}</svg><p class="mlcalc">$$\\max_k\\big|P(X_n = k) - e^{-\\lambda}\\tfrac{\\lambda^k}{k!}\\big|\\approx${dmax.toFixed(4).replace(".", "{,}")}$$</p><p class="mlnote">Barres bleues : la binomiale $\\mathcal B(n, p)$ avec $p = \\frac\\lambda n = ${p.toFixed(3).replace(".", "{,}")}$. Points rouges : la loi de Poisson. Augmente $n$ : l'écart tend vers $0$.</p>`;
+    $("[data-n]", host).addEventListener("input", e => { n = +e.target.value; draw(); $("[data-n]", host).focus(); });
+    $("[data-l]", host).addEventListener("input", e => { lam = +e.target.value; draw(); $("[data-l]", host).focus(); });
+    typeset(host);
+  };
+  draw();
+}
+/* Probabilités : loi faible des grands nombres, simulation */
+function mlLfgn(host) {
+  let p = 0.5, N = 2000, paths = [];
+  const sim = () => { paths = [0, 1, 2].map(() => { let s = 0; const f = []; for (let i = 1; i <= N; i++) { s += Math.random() < p ? 1 : 0; f.push(s / i); } return f; }); };
+  const draw = () => {
+    const W = 520, H = 240, X = i => 40 + Math.log(i) / Math.log(N) * (W - 60), Y = v => H - 25 - v * (H - 45), eps = 0.05, cols = ["#2B5BD7", "#1F8A5B", "#7A4CC2"];
+    const band = `<rect x="40" y="${Y(Math.min(1, p + eps))}" width="${W - 60}" height="${Y(Math.max(0, p - eps)) - Y(Math.min(1, p + eps))}" fill="rgba(194,124,0,.15)"/>`;
+    const lines = paths.map((f, j) => `<path d="${f.map((v, i) => `${i ? "L" : "M"}${X(i + 1).toFixed(1)},${Y(v).toFixed(1)}`).join("")}" fill="none" stroke="${cols[j]}" stroke-width="1.6"/>`).join("");
+    const bound = Math.min(1, p * (1 - p) / (N * eps * eps));
+    host.innerHTML = `<p class="mlt">La fréquence de succès se stabilise</p><div class="rmctl"><label class="rmn">$p = ${p.toFixed(2).replace(".", "{,}")}$ <input type="range" min="0.05" max="0.95" step="0.05" value="${p}" data-p aria-label="p"></label><button type="button" class="btn btn-ghost btn-sm" data-s>Relancer</button></div><svg class="rmsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Fréquences simulées">${band}<line x1="40" x2="${W - 20}" y1="${Y(p)}" y2="${Y(p)}" stroke="#D4503B" stroke-width="1.5"/>${lines}<text x="40" y="${H - 8}" class="tx">n = 1</text><text x="${W - 20}" y="${H - 8}" class="tx" text-anchor="end">n = ${N}</text></svg><p class="mlnote">Trois simulations de $\\frac{S_n}n$ (échelle logarithmique en $n$). La bande orange est $[p - 0{,}05,\\ p + 0{,}05]$. Bienaymé-Tchebychev garantit, pour $n = ${N}$ : $P\\big(\\big|\\frac{S_n}n - p\\big|\\geq0{,}05\\big)\\leq\\frac{p(1 - p)}{n\\varepsilon^2}\\approx${bound.toFixed(3).replace(".", "{,}")}$.</p>`;
+    $("[data-p]", host).addEventListener("input", e => { p = +e.target.value; sim(); draw(); $("[data-p]", host).focus(); });
+    $("[data-s]", host).addEventListener("click", () => { sim(); draw(); });
+    typeset(host);
+  };
+  sim(); draw();
+}
+const QPD = [
+  ["Si $X\\sim\\mathcal G(p)$, alors $E(X) = \\frac1p$.", true, "Vrai : $\\sum kq^{k-1}p = \\frac p{(1 - q)^2}$."],
+  ["Si $X\\sim\\mathcal P(\\lambda)$, $V(X) = \\lambda^2$.", false, "Faux : $V(X) = \\lambda$, comme l'espérance."],
+  ["Un événement de probabilité nulle est impossible.", false, "Faux : « que des faces » à l'infini a une probabilité nulle mais n'est pas vide."],
+  ["$G_{X+Y} = G_XG_Y$ pour toutes variables.", false, "Faux : il faut l'indépendance."],
+  ["Toute variable discrète admet une espérance.", false, "Faux : $P(X = n) = \\frac1{n(n + 1)}$ donne $\\sum nP(X = n) = +\\infty$."],
+  ["La somme de deux Poisson indépendantes est une Poisson.", true, "Vrai : $\\mathcal P(\\lambda) + \\mathcal P(\\mu) = \\mathcal P(\\lambda + \\mu)$."],
+  ["La loi géométrique est sans mémoire.", true, "Vrai : $P_{(X > n)}(X > n + k) = P(X > k)$."]
 ];
 function mlDivEucl(host) {
   const gen = () => { let p, q, Q, R; p = rnd(-3, 3); q = rnd(-3, 3); if (!q) q = 1; Q = [rnd(1, 2), rnd(-3, 3), rnd(-3, 3)]; R = [rnd(-4, 4), rnd(-4, 4)]; return { B: [1, p, q], Q, R }; };

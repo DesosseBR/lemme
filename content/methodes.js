@@ -7448,5 +7448,431 @@ $$V(X) = \frac{(n + 1)(2n + 1)}6 - \frac{(n + 1)^2}4 = \frac{(n + 1)\big(2(2n + 
 </ul></div></li>
 <li><div class="hr"><em>un couple $(X, Y)$</em><a class="hl" href="#q-couple">loi conjointe, marginales, covariance</a></div></li>
 </ul></div></div>
+`,
+"Structures algébriques usuelles": R`
+<nav class="msum"><a href="#g-not">Notations</a><a href="#g-lci">Lois de composition</a><a href="#g-grp">Groupes</a><a href="#g-sg">Sous-groupes</a><a href="#g-morph">Morphismes de groupes</a><a href="#g-ann">Anneaux</a><a href="#g-sa">Sous-anneaux, inversibles</a><a href="#g-corps">Corps</a><a href="#g-enonce">L'énoncé</a><a href="#g-erreurs">Erreurs</a><a href="#g-entrainement">S'entraîner</a><a href="#g-exos">Exercices</a><a href="#g-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les éléments $\cB x$, $\cB y$. <span class="kR">rouge</span> : la partie étudiée $\cR H$ (sous-groupe, sous-anneau). <span class="kO">orange</span> : le neutre et les inverses. <span class="kV">violet</span> : le morphisme $\cV f$. <span class="kG">vert</span> : la conclusion.</p>
+
+<h2 id="g-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>Exemples</th></tr>
+<tr><td>Loi de composition interne</td><td>$*:E\times E\to E$</td><td>$+$, $\times$, $\circ$.</td></tr>
+<tr><td>Groupe</td><td>$(G, *)$, neutre $e$, inverse $x^{-1}$</td><td>$(\mathbb Z, +)$, $(\mathbb C^*, \times)$, $(GL_n(\mathbb K), \times)$, $(S_n, \circ)$.</td></tr>
+<tr><td>Racines $n$-ièmes de l'unité</td><td>$\mathbb U_n$, $\mathbb U$</td><td>Sous-groupes de $(\mathbb C^*, \times)$.</td></tr>
+<tr><td>Noyau, image</td><td>$\ker f$, $\operatorname{Im}f$</td><td>$\ker\det = SL_n(\mathbb K)$.</td></tr>
+<tr><td>Anneau</td><td>$(A, +, \times)$, $0_A$, $1_A$</td><td>$\mathbb Z$, $\mathbb K[X]$, $\mathcal M_n(\mathbb K)$, $\mathcal F(X, \mathbb R)$.</td></tr>
+<tr><td>Inversibles</td><td>$A^\times$ ou $U(A)$</td><td>$\mathbb Z^\times = \{\pm1\}$, $\mathcal M_n(\mathbb K)^\times = GL_n(\mathbb K)$.</td></tr>
+</table>
+
+<h2 id="g-lci">2. Lois de composition interne</h2>
+<div class="sbox">$$\textbf{Associative}:\ (x*y)*z = x*(y*z).\quad\textbf{Commutative}:\ x*y = y*x.\quad\textbf{Neutre}\ \cO e:\ x*e = e*x = x.\quad\textbf{Inversible}:\ \exists\cO{x'},\ x*x' = x'*x = e.$$
+$$\text{Le neutre est unique}.\quad\text{L'inverse est unique (loi associative)}.\quad(x*y)^{-1} = y^{-1}*x^{-1}\ \text{(ordre inversé)}.$$</div>
+<p class="ml">Exemple 1 : étudier une loi</p>
+<p>Sur $\mathbb R$ : $x*y = x + y - xy$.</p>
+<p><b>Étape 1 : Rappel.</b> On vérifie associativité, commutativité, neutre, inversibles.</p>
+<p><b>Étape 2 : L'astuce.</b> $1 - x*y = 1 - x - y + xy = (1 - x)(1 - y)$.</p>
+<p><b>Étape 3 : Associativité, commutativité.</b> $1 - (x*y)*z = (1 - x)(1 - y)(1 - z)$, expression symétrique : la loi est associative et commutative.</p>
+<p><b>Étape 4 : Neutre.</b> $x*0 = x + 0 - 0 = x$ : $\cO{e = 0}$.</p>
+<p><b>Étape 5 : Inversibles.</b> $x*y = 0\iff(1 - x)(1 - y) = 1\iff y = 1 - \frac1{1 - x} = \frac x{x - 1}$, possible si et seulement si $x\neq1$.</p>
+<p><b>Étape 6 : Conclusion.</b> $\cG{*\ \text{associative, commutative, neutre}\ 0,\ x\ \text{inversible}\iff x\neq1,\ x' = \frac x{x - 1}}$.</p>
+
+<h2 id="g-grp">3. Groupes</h2>
+<div class="sbox">$$(G, *)\ \text{groupe}:\ *\ \text{loi interne associative, avec un neutre, et tout élément inversible}.\qquad\text{Abélien si}\ *\ \text{commutative}.$$
+$$\text{Simplification}:\ x*a = y*a\Rightarrow x = y.\qquad x^n * x^m = x^{n+m},\quad(x^n)^{-1} = x^{-n}.$$</div>
+<p class="ml">La méthode</p>
+<p>Pour montrer qu'un ensemble est un groupe, on essaie <b>d'abord</b> de le voir comme un <b>sous-groupe</b> d'un groupe connu (§4) : il n'y a alors que deux points à vérifier.</p>
+<p class="ml">Exemple 2 : un groupe à partir de l'exemple 1</p>
+<p>Montrer que $(\mathbb R\setminus\{1\}, *)$ est un groupe abélien.</p>
+<p><b>Étape 1 : Rappel.</b> Loi interne, associative, neutre, inverses.</p>
+<p><b>Étape 2 : Loi interne.</b> Si $x, y\neq1$ : $1 - x*y = (1 - x)(1 - y)\neq0$, donc $x*y\neq1$.</p>
+<p><b>Étape 3 : Le reste.</b> Associative, commutative, neutre $0\neq1$ (exemple 1). L'inverse $\frac x{x - 1}$ est $\neq1$ (sinon $x = x - 1$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(\mathbb R\setminus\{1\}, *)\ \text{est un groupe abélien}}$ ; $x\mapsto1 - x$ en fait même un isomorphe de $(\mathbb R^*, \times)$.</p>
+
+<h2 id="g-sg">4. Sous-groupes</h2>
+<div class="sbox">$$\cR H\subset G\ \text{sous-groupe}\iff\begin{cases}\cO e\in\cR H\ (\text{ou}\ H\neq\varnothing)\\\forall x, y\in\cR H,\ x*y^{-1}\in\cR H\end{cases}\qquad\text{Une intersection de sous-groupes est un sous-groupe}.$$
+$$\textbf{Sous-groupes de}\ (\mathbb Z, +):\ \text{exactement les}\ n\mathbb Z,\ n\in\mathbb N.$$</div>
+<p class="ml piege">Piège</p>
+<p>Une <b>réunion</b> de sous-groupes n'est en général pas un sous-groupe : $2\mathbb Z\cup3\mathbb Z$ contient $2$ et $3$ mais pas $5$.</p>
+
+<p class="ml">Exemple 3 : $\mathbb U$ et $\mathbb U_n$</p>
+<p><b>Étape 1 : Rappel.</b> Sous-groupe : contient le neutre, stable par $xy^{-1}$.</p>
+<p><b>Étape 2 : $\mathbb U = \{z,\ |z| = 1\}\subset\mathbb C^*$.</b> $|1| = 1$, et si $|z| = |w| = 1$ : $|zw^{-1}| = \frac{|z|}{|w|} = 1$.</p>
+<p><b>Étape 3 : $\mathbb U_n = \{z,\ z^n = 1\}$.</b> $1^n = 1$, et si $z^n = w^n = 1$ : $(zw^{-1})^n = \frac{z^n}{w^n} = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb U\ \text{et}\ \mathbb U_n\ \text{sont des sous-groupes de}\ (\mathbb C^*, \times)}$, et $\mathbb U_n\subset\mathbb U$.</p>
+
+<p class="ml">Exemple 4 : les sous-groupes de $\mathbb Z$</p>
+<p><b>Étape 1 : Rappel.</b> Division euclidienne $a = nq + r$, $0\leq r \lt n$.</p>
+<p><b>Étape 2 : Le candidat.</b> Soit $H\neq\{0\}$ un sous-groupe de $(\mathbb Z, +)$. Il contient un entier $> 0$ (si $a\in H$, $-a\in H$). Soit $n$ le plus petit élément $> 0$ de $H$.</p>
+<p><b>Étape 3 : $n\mathbb Z\subset H$.</b> $H$ est stable par somme et opposé : $kn\in H$ pour tout $k\in\mathbb Z$.</p>
+<p><b>Étape 4 : $H\subset n\mathbb Z$.</b> Pour $a\in H$, $a = nq + r$ : $r = a - qn\in H$ et $0\leq r \lt n$. Par minimalité de $n$, $r = 0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{H = n\mathbb Z}$.</p>
+
+<h2 id="g-morph">5. Morphismes de groupes</h2>
+<div class="sbox">$$\cV f(x*y) = \cV f(x)\star\cV f(y).\qquad\cV f(e) = e',\quad\cV f(x^{-1}) = \cV f(x)^{-1},\quad\cV f(x^n) = \cV f(x)^n.$$
+$$\ker\cV f = \cV f^{-1}(\{e'\})\ \text{et}\ \operatorname{Im}\cV f\ \text{sont des sous-groupes}.\qquad\cV f\ \text{injectif}\iff\ker\cV f = \{e\}.$$</div>
+<p>Un morphisme bijectif est un <b>isomorphisme</b>, et sa réciproque est un morphisme. Pour montrer qu'une partie est un sous-groupe, il suffit souvent de la voir comme un <b>noyau</b> ou une <b>image</b>.</p>
+
+<p class="ml">Exemple 5 : $\exp$ est un isomorphisme</p>
+<p><b>Étape 1 : Rappel.</b> Morphisme : $f(x + y) = f(x)f(y)$ ; bijectif : isomorphisme.</p>
+<p><b>Étape 2 : Morphisme.</b> $\cV f = \exp:(\mathbb R, +)\to(\mathbb R_+^*, \times)$ : $e^{x + y} = e^xe^y$.</p>
+<p><b>Étape 3 : Bijectif.</b> $\exp$ est une bijection de $\mathbb R$ sur $]0, +\infty[$, de réciproque $\ln$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(\mathbb R, +)\simeq(\mathbb R_+^*, \times)}$ ; et $\ln(xy) = \ln x + \ln y$ dit que $\ln$ est l'isomorphisme réciproque.</p>
+
+<p class="ml">Exemple 6 : $z\mapsto z^n$ sur $\mathbb C^*$</p>
+<p><b>Étape 1 : Rappel.</b> $\ker f$ et $\operatorname{Im}f$ ; injectif $\iff\ker f = \{1\}$.</p>
+<p><b>Étape 2 : Morphisme.</b> $(zw)^n = z^nw^n$ ($\mathbb C^*$ est commutatif).</p>
+<p><b>Étape 3 : Le noyau.</b> $\ker f = \{z,\ z^n = 1\} = \mathbb U_n$, de cardinal $n$ : pas injectif pour $n\geq2$.</p>
+<p><b>Étape 4 : L'image.</b> Tout $w = \rho e^{i\theta}\neq0$ a une racine $n$-ième $\rho^{1/n}e^{i\theta/n}$ : surjectif.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\ker f = \mathbb U_n,\ \operatorname{Im}f = \mathbb C^*}$ (et on retrouve que $\mathbb U_n$ est un sous-groupe).</p>
+
+<p class="ml">Exemple 7 : $SL_n$ est un sous-groupe</p>
+<p><b>Étape 1 : Rappel.</b> Un noyau de morphisme est un sous-groupe.</p>
+<p><b>Étape 2 : Le morphisme.</b> $\cV{\det}:(GL_n(\mathbb K), \times)\to(\mathbb K^*, \times)$, avec $\det(AB) = \det A\det B$.</p>
+<p><b>Étape 3 : Le noyau.</b> $\ker\det = \{A,\ \det A = 1\} = SL_n(\mathbb K)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{SL_n(\mathbb K)\ \text{est un sous-groupe de}\ GL_n(\mathbb K)}$, sans aucune vérification à la main.</p>
+
+<h2 id="g-ann">6. Anneaux</h2>
+<div class="sbox">$$(A, +, \times):\ (A, +)\ \text{groupe abélien},\ \times\ \text{associative avec neutre}\ 1_A,\ \text{distributive sur}\ +.$$
+$$0\times a = 0,\qquad(-a)b = -(ab).\qquad\textbf{Si}\ ab = ba:\ (a + b)^n = \sum_k\binom nka^kb^{n-k},\quad a^n - b^n = (a - b)\sum_{k=0}^{n-1}a^kb^{n-1-k}.$$
+$$A\ \textbf{intègre}:\ \text{commutatif},\ 1\neq0,\ ab = 0\Rightarrow a = 0\ \text{ou}\ b = 0.$$</div>
+<p class="ml piege">Piège</p>
+<p>Dans $\mathcal M_n(\mathbb K)$ ou $\mathcal F(\mathbb R, \mathbb R)$, $ab = 0$ n'implique <b>pas</b> $a = 0$ ou $b = 0$. Et le binôme exige $ab = ba$.</p>
+
+<p class="ml">Exemple 8 : $1 - N$ est inversible si $N$ est nilpotent</p>
+<p>$A$ un anneau, $N^p = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $1$ commute avec $N$ : $1 - N^p = (1 - N)\sum_{k=0}^{p-1}N^k$.</p>
+<p><b>Étape 2 : On applique.</b> $N^p = 0$, donc $(1 - N)(1 + N + \dots + N^{p-1}) = 1$.</p>
+<p><b>Étape 3 : Dans l'autre sens.</b> Le même calcul donne $(1 + N + \dots + N^{p-1})(1 - N) = 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(1 - N)^{-1} = \sum_{k=0}^{p-1}N^k}$ (c'est la série géométrique, qui s'arrête).</p>
+
+<p class="ml">Exemple 9 : un anneau non intègre</p>
+<p><b>Étape 1 : Rappel.</b> Intègre : $fg = 0\Rightarrow f = 0$ ou $g = 0$.</p>
+<p><b>Étape 2 : Deux fonctions.</b> Dans $\mathcal F(\mathbb R, \mathbb R)$ : $f = \mathbb 1_{]-\infty, 0]}$ et $g = \mathbb 1_{]0, +\infty[}$, toutes deux non nulles.</p>
+<p><b>Étape 3 : Le produit.</b> En tout $x$, l'une des deux vaut $0$ : $fg = 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal F(\mathbb R, \mathbb R)\ \text{n'est pas intègre}}$. Même chose pour $\mathcal M_2$ : $\begin{pmatrix}0&1\\0&0\end{pmatrix}^2 = 0$.</p>
+
+<h2 id="g-sa">7. Sous-anneaux, éléments inversibles</h2>
+<div class="sbox">$$\cR B\ \text{sous-anneau de}\ A\iff1_A\in\cR B,\ \ \forall x, y\in\cR B,\ x - y\in\cR B\ \text{et}\ xy\in\cR B.\qquad A^\times\ \text{est un groupe pour}\ \times.$$</div>
+<p class="ml">Exemple 10 : $\mathbb Z[\sqrt2]$</p>
+<p>$\mathbb Z[\sqrt2] = \{a + b\sqrt2,\ a, b\in\mathbb Z\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Contient $1$, stable par différence et par produit.</p>
+<p><b>Étape 2 : $1$.</b> $1 = 1 + 0\sqrt2$.</p>
+<p><b>Étape 3 : Différence.</b> $(a + b\sqrt2) - (c + d\sqrt2) = (a - c) + (b - d)\sqrt2$.</p>
+<p><b>Étape 4 : Produit.</b> $(a + b\sqrt2)(c + d\sqrt2) = (ac + 2bd) + (ad + bc)\sqrt2$, coefficients entiers.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Z[\sqrt2]\ \text{est un sous-anneau de}\ \mathbb R}$ (donc intègre).</p>
+
+<p class="ml">Exemple 11 : les inversibles de $\mathbb Z[i]$</p>
+<p><b>Étape 1 : Rappel.</b> On utilise une quantité <b>multiplicative</b> : $N(z) = |z|^2 = a^2 + b^2$ pour $z = a + ib$, avec $N(zw) = N(z)N(w)$.</p>
+<p><b>Étape 2 : Si $z$ est inversible</b> dans $\mathbb Z[i]$ : $zw = 1$ donne $N(z)N(w) = 1$, avec $N(z), N(w)$ entiers $\geq0$, donc $N(z) = 1$.</p>
+<p><b>Étape 3 : On résout</b> $a^2 + b^2 = 1$ en entiers : $(\pm1, 0)$ ou $(0, \pm1)$.</p>
+<p><b>Étape 4 : Réciproque.</b> $1\cdot1 = 1$, $(-1)(-1) = 1$, $i(-i) = 1$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Z[i]^\times = \{1, -1, i, -i\} = \mathbb U_4}$.</p>
+
+<h2 id="g-corps">8. Corps</h2>
+<div class="sbox">$$\mathbb K\ \text{corps}:\ \text{anneau commutatif},\ 1\neq0,\ \text{tout élément non nul est inversible}.\qquad\text{Un corps est intègre}.$$</div>
+<p class="ml">Exemple 12 : $\mathbb Q(\sqrt2)$ est un corps</p>
+<p>$\mathbb Q(\sqrt2) = \{a + b\sqrt2,\ a, b\in\mathbb Q\}$.</p>
+<p><b>Étape 1 : Rappel.</b> Sous-anneau de $\mathbb R$ (comme l'exemple 10), puis inverses.</p>
+<p><b>Étape 2 : La quantité conjuguée.</b> $(a + b\sqrt2)(a - b\sqrt2) = a^2 - 2b^2$.</p>
+<p><b>Étape 3 : Elle n'est pas nulle.</b> Si $a^2 = 2b^2$ avec $(a, b)\neq(0, 0)$, alors $b\neq0$ et $\sqrt2 = \big|\frac ab\big|\in\mathbb Q$ : absurde.</p>
+<p><b>Étape 4 : L'inverse.</b> $\frac1{a + b\sqrt2} = \frac a{a^2 - 2b^2} - \frac b{a^2 - 2b^2}\sqrt2\in\mathbb Q(\sqrt2)$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\mathbb Q(\sqrt2)\ \text{est un corps}}$ (sous-corps de $\mathbb R$).</p>
+
+<p class="ml">Bonus : $\mathbb Z/n\mathbb Z$ et l'ordre d'un élément <span class="hp">programme de Spé</span></p>
+<p>Les anneaux $\mathbb Z/n\mathbb Z$, les groupes monogènes, l'ordre d'un élément et le théorème de Lagrange sont vus en Spé (Compléments d'algèbre). Le tableau interactif ci-dessous en donne déjà l'idée.</p>
+
+<h2 id="g-enonce">9. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Montrer que $(H, *)$ est un groupe »</b><span>Le voir comme sous-groupe d'un groupe connu : neutre, $xy^{-1}\in H$.</span></div>
+<div><b>« $H$ est un sous-groupe » et $H = \{x,\ f(x) = e'\}$</b><span>C'est un noyau de morphisme.</span></div>
+<div><b>« Étudier la loi $*$ »</b><span>Associativité, commutativité, neutre, inversibles ; chercher une factorisation.</span></div>
+<div><b>« $f$ est un morphisme injectif »</b><span>$\ker f = \{e\}$.</span></div>
+<div><b>« Sous-groupes de $\mathbb Z$ »</b><span>Ce sont les $n\mathbb Z$ (division euclidienne).</span></div>
+<div><b>« $B$ est un sous-anneau »</b><span>$1\in B$, stable par différence et produit.</span></div>
+<div><b>« Trouver les inversibles »</b><span>Une norme multiplicative à valeurs entières.</span></div>
+<div><b>« Est-ce un corps ? »</b><span>Quantité conjuguée pour inverser.</span></div>
+<div><b>$N^p = 0$</b><span>$(1 - N)^{-1} = \sum_{k \lt p}N^k$.</span></div>
+<div><b>Binôme dans un anneau</b><span>Vérifier que les deux éléments commutent.</span></div>
+</div>
+
+<h2 id="g-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Oublier de vérifier que la loi est interne (stabilité).</p>
+<p><b>2.</b> $(xy)^{-1} = x^{-1}y^{-1}$ dans un groupe non commutatif.</p>
+<p><b>3.</b> Croire qu'une réunion de sous-groupes est un sous-groupe.</p>
+<p><b>4.</b> Simplifier $ab = ac$ en $b = c$ dans un anneau non intègre.</p>
+<p><b>5.</b> Utiliser le binôme sans commutation.</p>
+<p><b>6.</b> Oublier $1_A\in B$ pour un sous-anneau.</p>
+<p><b>7.</b> Morphisme d'anneaux : oublier $f(1) = 1$.</p>
+</div>
+
+<h2 id="g-entrainement">S'entraîner</h2>
+<div data-mlab="cayley"></div>
+<div data-mlab="quizst"></div>
+
+<h2 id="g-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : $x^2 = e$ pour tout $x$, alors $G$ est abélien</p>
+<p><b>Étape 1 : Rappel.</b> $x^2 = e\iff x = x^{-1}$, et $(xy)^{-1} = y^{-1}x^{-1}$.</p>
+<p><b>Étape 2 : Tout élément est son propre inverse.</b> $x^{-1} = x$ pour tout $x$.</p>
+<p><b>Étape 3 : On l'applique à $xy$.</b> $xy = (xy)^{-1} = y^{-1}x^{-1} = yx$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{G\ \text{est abélien}}$.</p>
+
+<p class="ml">Exercice 2 : réunion de deux sous-groupes</p>
+<p>Montrer que $H\cup K$ est un sous-groupe si et seulement si $H\subset K$ ou $K\subset H$.</p>
+<p><b>Étape 1 : Rappel.</b> Sous-groupe : stable par produit.</p>
+<p><b>Étape 2 : $\Leftarrow$.</b> Si $H\subset K$, $H\cup K = K$ est un sous-groupe.</p>
+<p><b>Étape 3 : $\Rightarrow$ par l'absurde.</b> Sinon, on prend $h\in H\setminus K$ et $k\in K\setminus H$. Alors $hk\in H\cup K$.</p>
+<p><b>Étape 4 : La contradiction.</b> Si $hk\in H$, $k = h^{-1}(hk)\in H$ : faux. Si $hk\in K$, $h = (hk)k^{-1}\in K$ : faux.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{H\cup K\ \text{sous-groupe}\iff H\subset K\ \text{ou}\ K\subset H}$.</p>
+
+<p class="ml">Exercice 3 : les morphismes de $(\mathbb Q, +)$ dans $(\mathbb Z, +)$</p>
+<p><b>Étape 1 : Rappel.</b> $f(nx) = nf(x)$ pour un morphisme et $n\in\mathbb N$.</p>
+<p><b>Étape 2 : On divise.</b> Pour $x\in\mathbb Q$ et $n\geq1$ : $f(x) = f\big(n\cdot\frac xn\big) = nf\big(\frac xn\big)$.</p>
+<p><b>Étape 3 : Divisible par tout entier.</b> $f(x)\in\mathbb Z$ est donc divisible par tout $n\geq1$, en particulier par $|f(x)| + 1$.</p>
+<p><b>Étape 4 : Conclusion.</b> Seul $0$ convient : $\cG{f = 0}$ est le seul morphisme.</p>
+
+<h2 id="g-arbre">L'arbre des structures</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une structure à étudier</span><ul>
+<li><div class="hr"><em>une loi $*$</em><a class="hl" href="#g-lci">associative, neutre, inversibles</a></div></li>
+<li><div class="hr"><em>un groupe ?</em><span class="hq">Inclus dans un groupe connu ?</span><ul>
+<li><div class="hr"><em>oui</em><a class="hl ok" href="#g-sg">sous-groupe : $e$, $xy^{-1}$</a></div></li>
+<li><div class="hr"><em>c'est un noyau</em><a class="hl ok" href="#g-morph">$\ker f$ : sous-groupe d'office</a></div></li>
+<li><div class="hr"><em>non</em><a class="hl" href="#g-grp">les 4 axiomes</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>une application $f$</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>morphisme</em><a class="hl" href="#g-morph">$f(xy) = f(x)f(y)$</a></div></li>
+<li><div class="hr"><em>injective</em><a class="hl ok" href="#g-morph">$\ker f = \{e\}$</a></div></li>
+<li><div class="hr"><em>isomorphisme</em><a class="hl" href="#g-morph">morphisme bijectif</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>un anneau</em><span class="hq">On veut…</span><ul>
+<li><div class="hr"><em>sous-anneau</em><a class="hl" href="#g-sa">$1$, différence, produit</a></div></li>
+<li><div class="hr"><em>les inversibles</em><a class="hl" href="#g-sa">norme multiplicative</a></div></li>
+<li><div class="hr"><em>intègre ?</em><a class="hl" href="#g-ann">chercher $ab = 0$</a></div></li>
+<li><div class="hr"><em>un corps</em><a class="hl end" href="#g-corps">quantité conjuguée</a></div></li>
+</ul></div></li>
+</ul></div></div>
+`,
+"Probabilités et variables aléatoires discrètes": R`
+<nav class="msum"><a href="#w-not">Notations</a><a href="#w-esp">Espaces probabilisés</a><a href="#w-tot">Probabilités totales</a><a href="#w-lois">Géométrique, Poisson</a><a href="#w-espe">Espérance</a><a href="#w-var">Variance, covariance</a><a href="#w-gen">Fonctions génératrices</a><a href="#w-somme">Sommes indépendantes</a><a href="#w-lfgn">Loi des grands nombres</a><a href="#w-dens">Lois à densité</a><a href="#w-enonce">L'énoncé</a><a href="#w-erreurs">Erreurs</a><a href="#w-entrainement">S'entraîner</a><a href="#w-exos">Exercices</a><a href="#w-arbre">L'arbre</a></nav>
+
+<p class="ml">Le code couleur de toute la fiche</p>
+<p><span class="kB">bleu</span> : les variables $\cB X$, $\cB Y$ et les événements. <span class="kR">rouge</span> : le système complet par lequel on conditionne. <span class="kO">orange</span> : les séries qu'on reconnaît (géométrique, exponentielle). <span class="kV">violet</span> : les paramètres $\cV p$, $\cV\lambda$, $\cV n$. <span class="kG">vert</span> : le résultat.</p>
+
+<h2 id="w-not">1. Les notations du programme</h2>
+<table class="mtab">
+<tr><th>Objet</th><th>Notation</th><th>À retenir</th></tr>
+<tr><td>Espace probabilisé</td><td>$(\Omega, \mathcal A, P)$</td><td>$\mathcal A$ tribu : stable par complémentaire et réunion <b>dénombrable</b>.</td></tr>
+<tr><td>Variable discrète</td><td>$X:\Omega\to E$, $X(\Omega)$ au plus dénombrable</td><td>$(X = x)\in\mathcal A$ pour tout $x$.</td></tr>
+<tr><td>Fonction de répartition</td><td>$F_X(x) = P(X\leq x)$</td><td>Croissante, continue à droite, limites $0$ et $1$.</td></tr>
+<tr><td>Géométrique</td><td>$\mathcal G(\cV p)$</td><td>Rang du premier succès.</td></tr>
+<tr><td>Poisson</td><td>$\mathcal P(\cV\lambda)$</td><td>Événements rares.</td></tr>
+<tr><td>Fonction génératrice</td><td>$G_X(t) = E(t^X)$</td><td>$X$ à valeurs dans $\mathbb N$.</td></tr>
+</table>
+
+<h2 id="w-esp">2. Espaces probabilisés, continuité monotone</h2>
+<div class="sbox">$$\textbf{σ-additivité}:\ (A_n)\ \text{deux à deux disjoints}\Rightarrow P\Big(\bigcup A_n\Big) = \sum P(A_n).\qquad\textbf{Sous-additivité}:\ P\Big(\bigcup A_n\Big)\leq\sum P(A_n).$$
+$$\textbf{Continuité croissante}:\ A_n\subset A_{n+1}\Rightarrow P\Big(\bigcup A_n\Big) = \lim P(A_n).\qquad\textbf{Décroissante}:\ A_{n+1}\subset A_n\Rightarrow P\Big(\bigcap A_n\Big) = \lim P(A_n).$$</div>
+<p>Un événement de probabilité $1$ est <b>presque sûr</b> ; de probabilité $0$, <b>négligeable</b> (il n'est pas forcément vide).</p>
+<p class="ml">La méthode « jamais » / « au moins une fois »</p>
+<p>« Jamais » $= \bigcap_n B_n$ avec $B_n$ = « pas avant le rang $n$ », suite <b>décroissante</b> : on calcule $P(B_n)$ (événement fini) puis on passe à la limite.</p>
+
+<p class="ml">Exemple 1 : ne jamais obtenir pile</p>
+<p>On lance indéfiniment une pièce équilibrée. Probabilité de n'obtenir jamais pile ?</p>
+<p><b>Étape 1 : Rappel.</b> Continuité décroissante : $P\big(\bigcap B_n\big) = \lim P(B_n)$ si $B_{n+1}\subset B_n$.</p>
+<p><b>Étape 2 : Les événements.</b> $B_n$ = « face aux $n$ premiers lancers ». $B_{n+1}\subset B_n$, et « jamais pile » $= \bigcap_nB_n$.</p>
+<p><b>Étape 3 : $P(B_n)$.</b> Lancers indépendants : $P(B_n) = \big(\frac12\big)^n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(\text{jamais pile}) = \lim\big(\frac12\big)^n = 0}$ : on obtient pile presque sûrement (mais « que des faces » n'est pas impossible).</p>
+
+<h2 id="w-tot">3. Probabilités totales avec un système complet dénombrable</h2>
+<div class="sbox">$$\cR{(B_n)_{n\in\mathbb N}}\ \text{système complet}:\quad P(A) = \sum_{n=0}^{+\infty}P(\cR{B_n})\,P_{\cR{B_n}}(A).\qquad\text{En particulier}:\ P(Y = k) = \sum_nP(X = n)\,P_{(X = n)}(Y = k).$$</div>
+<p class="ml">Exemple 2 : un tri d'une loi de Poisson</p>
+<p>$X\sim\mathcal P(\lambda)$ clients arrivent ; chacun achète avec probabilité $p$, indépendamment. Loi du nombre $Y$ d'acheteurs ?</p>
+<p><b>Étape 1 : Rappel.</b> Probabilités totales sur $\cR{(X = n)_{n\in\mathbb N}}$.</p>
+<p><b>Étape 2 : Sachant $X = n$.</b> $Y\sim\mathcal B(n, p)$ : $P_{(X = n)}(Y = k) = \binom nkp^k(1 - p)^{n-k}$ pour $n\geq k$, $0$ sinon.</p>
+<p><b>Étape 3 : La somme.</b></p>
+$$P(Y = k) = \sum_{n\geq k}e^{-\lambda}\frac{\lambda^n}{n!}\cdot\frac{n!}{k!\,(n - k)!}p^k(1 - p)^{n-k} = e^{-\lambda}\frac{(\lambda p)^k}{k!}\sum_{m\geq0}\cO{\frac{(\lambda(1 - p))^m}{m!}}\ \ (m = n - k).$$
+<p><b>Étape 4 : On reconnaît l'exponentielle.</b> $\sum_m\frac{(\lambda(1 - p))^m}{m!} = e^{\lambda(1 - p)}$, et $e^{-\lambda}e^{\lambda - \lambda p} = e^{-\lambda p}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{Y\sim\mathcal P(\lambda p)}$.</p>
+
+<h2 id="w-lois">4. Lois géométrique et de Poisson</h2>
+<table class="mtab">
+<tr><th>Loi</th><th>Modèle</th><th>$P(X = k)$</th><th>$E(X)$</th><th>$V(X)$</th><th>$G_X(t)$</th></tr>
+<tr><td>$\mathcal B(n, p)$</td><td>succès en $n$ essais</td><td>$\binom nkp^kq^{n-k}$</td><td>$np$</td><td>$npq$</td><td>$(q + pt)^n$</td></tr>
+<tr><td>$\mathcal G(\cV p)$</td><td>rang du 1<sup>er</sup> succès</td><td>$q^{k-1}p$, $k\geq1$</td><td>$\frac1p$</td><td>$\frac q{p^2}$</td><td>$\frac{pt}{1 - qt}$</td></tr>
+<tr><td>$\mathcal P(\cV\lambda)$</td><td>événements rares</td><td>$e^{-\lambda}\frac{\lambda^k}{k!}$, $k\geq0$</td><td>$\lambda$</td><td>$\lambda$</td><td>$e^{\lambda(t - 1)}$</td></tr>
+</table>
+<p>Avec $q = 1 - p$. <b>Absence de mémoire</b> : $X\sim\mathcal G(p)\Rightarrow P_{(X > n)}(X > n + k) = P(X > k)$, et c'est la seule loi à valeurs dans $\mathbb N^*$ qui la vérifie. <b>Approximation</b> : si $np_n\to\lambda$, $P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}$ pour $X_n\sim\mathcal B(n, p_n)$.</p>
+
+<p class="ml">Exemple 3 : $P(X > n)$ et absence de mémoire</p>
+<p>$X\sim\mathcal G(p)$.</p>
+<p><b>Étape 1 : Rappel.</b> $(X > n)$ = « les $n$ premiers essais sont des échecs ».</p>
+<p><b>Étape 2 : La queue.</b> Essais indépendants : $P(X > n) = q^n$.</p>
+<p><b>Étape 3 : Le conditionnement.</b> $(X > n + k)\subset(X > n)$, donc :</p>
+$$P_{(X > n)}(X > n + k) = \frac{P(X > n + k)}{P(X > n)} = \frac{q^{n+k}}{q^n} = q^k.$$
+<p><b>Étape 4 : Conclusion.</b> $\cG{P_{(X > n)}(X > n + k) = P(X > k)}$ : avoir déjà attendu ne change rien.</p>
+
+<p class="ml">Exemple 4 : l'approximation par Poisson</p>
+<p><b>Étape 1 : Rappel.</b> $\binom nk = \frac{n(n - 1)\cdots(n - k + 1)}{k!}$ et $\big(1 + \frac an\big)^n\to e^a$ (plus généralement $(1 - p_n)^n\to e^{-\lambda}$ si $np_n\to\lambda$).</p>
+<p><b>Étape 2 : On écrit</b> à $k$ fixé :</p>
+$$P(X_n = k) = \frac{n(n - 1)\cdots(n - k + 1)}{n^k}\cdot\frac{(np_n)^k}{k!}\cdot(1 - p_n)^{n-k}.$$
+<p><b>Étape 3 : Les trois morceaux.</b> Le 1<sup>er</sup> tend vers $1$ ($k$ facteurs $\sim n$), le 2<sup>e</sup> vers $\frac{\lambda^k}{k!}$, le 3<sup>e</sup> vers $e^{-\lambda}$ (car $(1 - p_n)^{-k}\to1$).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(X_n = k)\to e^{-\lambda}\frac{\lambda^k}{k!}}$ : pour $n$ grand et $p$ petit, $\mathcal B(n, p)\approx\mathcal P(np)$.</p>
+
+<h2 id="w-espe">5. Espérance</h2>
+<div class="sbox">$$X\ \text{admet une espérance}\iff(x\,P(X = x))_{x\in X(\Omega)}\ \text{est sommable}.\qquad E(X) = \sum_xx\,P(X = x).$$
+$$\textbf{Transfert}:\ E(f(X))\ \text{existe}\iff(f(x)P(X = x))\ \text{sommable, et}\ E(f(X)) = \sum_xf(x)P(X = x).$$
+$$X\ \text{à valeurs dans}\ \mathbb N:\quad E(X) = \sum_{n\geq1}P(X\geq n).\qquad|X|\leq Y,\ E(Y)\ \text{finie}\Rightarrow E(X)\ \text{existe}.$$</div>
+<p class="ml">Exemple 5 : l'espérance d'une géométrique, deux méthodes</p>
+<p><b>Étape 1 : Rappel.</b> $\sum_{k\geq1}kx^{k-1} = \frac1{(1 - x)^2}$ pour $|x| \lt 1$ (dérivée de la série géométrique), et $E(X) = \sum_{n\geq1}P(X\geq n)$.</p>
+<p><b>Étape 2 : Par la définition.</b> $E(X) = \sum_{k\geq1}kq^{k-1}p = p\cdot\cO{\frac1{(1 - q)^2}} = \frac p{p^2}$.</p>
+<p><b>Étape 3 : Par les queues.</b> $P(X\geq n) = P(X > n - 1) = q^{n-1}$, donc $E(X) = \sum_{n\geq1}q^{n-1} = \cO{\frac1{1 - q}}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1p}$ : il faut en moyenne $6$ lancers pour obtenir un $6$.</p>
+
+<p class="ml">Exemple 6 : $E\big(\frac1{X + 1}\big)$ pour $X\sim\mathcal P(\lambda)$</p>
+<p><b>Étape 1 : Rappel.</b> Transfert : $E(f(X)) = \sum f(k)P(X = k)$ (termes positifs ici).</p>
+<p><b>Étape 2 : On écrit.</b> $E\big(\frac1{X + 1}\big) = \sum_{k\geq0}\frac1{k + 1}e^{-\lambda}\frac{\lambda^k}{k!} = \frac{e^{-\lambda}}\lambda\sum_{k\geq0}\frac{\lambda^{k+1}}{(k + 1)!}$.</p>
+<p><b>Étape 3 : On reconnaît.</b> $\sum_{j\geq1}\frac{\lambda^j}{j!} = \cO{e^\lambda - 1}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E\big(\frac1{X + 1}\big) = \frac{1 - e^{-\lambda}}\lambda}$.</p>
+
+<h2 id="w-var">6. Variance, covariance, Cauchy-Schwarz</h2>
+<div class="sbox">$$E(X^2)\ \text{finie}\Rightarrow E(X)\ \text{finie}.\qquad V(X) = E(X^2) - E(X)^2.\qquad|E(XY)|\leq\sqrt{E(X^2)}\sqrt{E(Y^2)}.$$
+$$V\Big(\sum X_i\Big) = \sum V(X_i) + 2\sum_{i \lt j}\operatorname{Cov}(X_i, X_j).\qquad\rho(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\sigma(X)\sigma(Y)}\in[-1, 1].$$</div>
+<p class="ml">L'astuce des moments factoriels</p>
+<p>Pour les lois avec des factorielles (Poisson, binomiale), on calcule $E(X(X - 1))$, plus simple que $E(X^2)$, puis $E(X^2) = E(X(X - 1)) + E(X)$.</p>
+<p class="ml">Exemple 7 : la variance d'une loi de Poisson</p>
+<p><b>Étape 1 : Rappel.</b> $V(X) = E(X(X - 1)) + E(X) - E(X)^2$.</p>
+<p><b>Étape 2 : $E(X(X - 1))$.</b> Les termes $k = 0, 1$ sont nuls :</p>
+$$\sum_{k\geq2}k(k - 1)e^{-\lambda}\frac{\lambda^k}{k!} = \lambda^2e^{-\lambda}\sum_{k\geq2}\frac{\lambda^{k-2}}{(k - 2)!} = \lambda^2e^{-\lambda}\cO{e^\lambda} = \lambda^2.$$
+<p><b>Étape 3 : On assemble.</b> $V(X) = \lambda^2 + \lambda - \lambda^2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{V(X) = \lambda}$ (comme $E(X)$).</p>
+
+<h2 id="w-gen">7. Fonctions génératrices</h2>
+<div class="sbox">$$G_X(t) = E(t^X) = \sum_{n\geq0}P(X = n)\,t^n,\quad\text{rayon}\geq1,\quad G_X(1) = 1.\qquad G_X\ \textbf{caractérise la loi}:\ P(X = n) = \frac{G_X^{(n)}(0)}{n!}.$$
+$$E(X)\ \text{finie}\iff G_X\ \text{dérivable en}\ 1,\ E(X) = G_X'(1).\qquad V(X) = G_X''(1) + G_X'(1) - G_X'(1)^2.$$
+$$X, Y\ \text{indépendantes}\Rightarrow G_{X+Y} = G_XG_Y.$$</div>
+<p class="ml">La méthode</p>
+<p>Pour trouver la loi d'une <b>somme de variables indépendantes</b> : multiplier les fonctions génératrices, puis <b>reconnaître</b> la fonction génératrice d'une loi connue.</p>
+
+<p class="ml">Exemple 8 : somme de deux Poisson indépendantes</p>
+<p><b>Étape 1 : Rappel.</b> $G_{X+Y} = G_XG_Y$ et $G$ caractérise la loi. Pour $\mathcal P(\lambda)$ : $G(t) = e^{\lambda(t - 1)}$.</p>
+<p><b>Étape 2 : $G$ d'une Poisson.</b> $\sum_ne^{-\lambda}\frac{\lambda^n}{n!}t^n = e^{-\lambda}\cO{e^{\lambda t}} = e^{\lambda(t - 1)}$.</p>
+<p><b>Étape 3 : Le produit.</b> $G_{X+Y}(t) = e^{\lambda(t - 1)}e^{\mu(t - 1)} = e^{(\lambda + \mu)(t - 1)}$.</p>
+<p><b>Étape 4 : Conclusion.</b> On reconnaît $\mathcal P(\lambda + \mu)$ : $\cG{X + Y\sim\mathcal P(\lambda + \mu)}$.</p>
+
+<p class="ml">Exemple 9 : espérance et variance d'une géométrique par $G$</p>
+<p><b>Étape 1 : Rappel.</b> $E = G'(1)$, $V = G''(1) + G'(1) - G'(1)^2$.</p>
+<p><b>Étape 2 : $G$.</b> $G(t) = \sum_{k\geq1}q^{k-1}pt^k = \frac{pt}{1 - qt}$ pour $|t| \lt \frac1q$.</p>
+<p><b>Étape 3 : Les dérivées.</b> $G(t) = \frac pq\Big(\frac1{1 - qt} - 1\Big)$, donc $G'(t) = \frac p{(1 - qt)^2}$, $G''(t) = \frac{2pq}{(1 - qt)^3}$. En $1$ : $G'(1) = \frac1p$, $G''(1) = \frac{2q}{p^2}$.</p>
+<p><b>Étape 4 : La variance.</b> $V = \frac{2q}{p^2} + \frac1p - \frac1{p^2} = \frac{2q + p - 1}{p^2} = \frac q{p^2}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{E(X) = \frac1p,\ V(X) = \frac q{p^2}}$.</p>
+
+<h2 id="w-somme">8. Loi d'une somme de variables indépendantes</h2>
+<div class="sbox">$$X, Y\ \text{indépendantes, à valeurs dans}\ \mathbb N:\quad P(X + Y = n) = \sum_{k=0}^nP(X = k)\,P(Y = n - k).$$</div>
+<p class="ml">Exemple 10 : somme de deux géométriques</p>
+<p>$X, Y\sim\mathcal G(p)$ indépendantes. Loi de $S = X + Y$ ?</p>
+<p><b>Étape 1 : Rappel.</b> Formule de convolution, en respectant les valeurs possibles ($\geq1$).</p>
+<p><b>Étape 2 : Les valeurs.</b> $S\geq2$. Pour $n\geq2$, $k$ va de $1$ à $n - 1$ (il faut $X\geq1$ et $Y = n - k\geq1$).</p>
+<p><b>Étape 3 : La somme.</b> $P(S = n) = \sum_{k=1}^{n-1}q^{k-1}p\cdot q^{n-k-1}p = \sum_{k=1}^{n-1}p^2q^{n-2}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(S = n) = (n - 1)p^2q^{n-2},\ n\geq2}$ : rang du 2<sup>e</sup> succès.</p>
+
+<h2 id="w-lfgn">9. Inégalités, loi faible des grands nombres</h2>
+<div class="sbox">$$\textbf{Markov}:\ P(|X|\geq a)\leq\frac{E(|X|)}a.\qquad\textbf{Bienaymé-Tchebychev}:\ P(|X - E(X)|\geq\varepsilon)\leq\frac{V(X)}{\varepsilon^2}.$$
+$$\textbf{Loi faible des grands nombres}:\ (X_n)\ \text{i.i.d., moment d'ordre 2},\ m = E(X_1),\ \sigma^2 = V(X_1):\quad P\Big(\Big|\frac{S_n}n - m\Big|\geq\varepsilon\Big)\leq\frac{\sigma^2}{n\varepsilon^2}\to0.$$</div>
+<p class="ml">Exemple 11 : la démonstration de la loi faible</p>
+<p><b>Étape 1 : Rappel.</b> Bienaymé-Tchebychev, et $V\big(\sum X_i\big) = \sum V(X_i)$ pour des variables indépendantes.</p>
+<p><b>Étape 2 : Espérance.</b> $E\big(\frac{S_n}n\big) = \frac1n\sum E(X_i) = m$.</p>
+<p><b>Étape 3 : Variance.</b> $V\big(\frac{S_n}n\big) = \frac1{n^2}\cdot n\sigma^2 = \frac{\sigma^2}n$.</p>
+<p><b>Étape 4 : On applique BT.</b> $P\big(\big|\frac{S_n}n - m\big|\geq\varepsilon\big)\leq\frac{\sigma^2}{n\varepsilon^2}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{\frac{S_n}n\to m\ \text{en probabilité}}$ : la moyenne empirique se rapproche de l'espérance.</p>
+
+<h2 id="w-dens">10. Variables à densité <span class="hp">hors programme</span></h2>
+<p>Elles ne sont pas au programme de MP (seulement les variables discrètes), mais on les croise en physique et dans certaines écoles.</p>
+<div class="sbox">$$P(a\leq X\leq b) = \int_a^bf(t)\,dt,\quad f\geq0,\ \int_{\mathbb R}f = 1.\qquad E(X) = \int_{\mathbb R}tf(t)\,dt.$$</div>
+<table class="mtab">
+<tr><th>Loi</th><th>Densité</th><th>$E(X)$</th><th>$V(X)$</th></tr>
+<tr><td>Uniforme $\mathcal U([a, b])$</td><td>$\frac1{b - a}$ sur $[a, b]$</td><td>$\frac{a + b}2$</td><td>$\frac{(b - a)^2}{12}$</td></tr>
+<tr><td>Exponentielle $\mathcal E(\lambda)$</td><td>$\lambda e^{-\lambda t}$, $t\geq0$</td><td>$\frac1\lambda$</td><td>$\frac1{\lambda^2}$</td></tr>
+<tr><td>Normale $\mathcal N(m, \sigma^2)$</td><td>$\frac1{\sigma\sqrt{2\pi}}e^{-\frac{(t - m)^2}{2\sigma^2}}$</td><td>$m$</td><td>$\sigma^2$</td></tr>
+</table>
+<p class="ml">Exemple 12 : l'espérance d'une loi exponentielle</p>
+<p><b>Étape 1 : Rappel.</b> $E(X) = \int_0^{+\infty}t\lambda e^{-\lambda t}\,dt$, IPP sur un intervalle (fiche Intégration sur un intervalle).</p>
+<p><b>Étape 2 : IPP</b> avec $u = t$, $v = -e^{-\lambda t}$ : $\int_0^{+\infty}t\lambda e^{-\lambda t}\,dt = \big[-te^{-\lambda t}\big]_0^{+\infty} + \int_0^{+\infty}e^{-\lambda t}\,dt$.</p>
+<p><b>Étape 3 : Les morceaux.</b> Le crochet est nul, et $\int_0^{+\infty}e^{-\lambda t}\,dt = \frac1\lambda$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{E(X) = \frac1\lambda}$ : c'est l'analogue continu de la loi géométrique (sans mémoire elle aussi).</p>
+
+<h2 id="w-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<div class="mrefl wide">
+<div><b>« Jamais », « au moins une fois », « infiniment »</b><span>Suite monotone d'événements, continuité croissante ou décroissante.</span></div>
+<div><b>« Rang du premier succès »</b><span>Loi géométrique, $P(X > n) = q^n$.</span></div>
+<div><b>Un nombre aléatoire $N$ d'essais</b><span>Probabilités totales sur $(N = n)_n$, puis reconnaître une série.</span></div>
+<div><b>$n$ grand, $p$ petit</b><span>Approximation $\mathcal B(n, p)\approx\mathcal P(np)$.</span></div>
+<div><b>« $E(X)$ existe ? »</b><span>Sommabilité de $(x\,P(X = x))$, ou domination $|X|\leq Y$.</span></div>
+<div><b>$X$ à valeurs dans $\mathbb N$, $E(X)$</b><span>$\sum_{n\geq1}P(X\geq n)$, souvent plus simple.</span></div>
+<div><b>Factorielles dans la loi</b><span>$E(X(X - 1))$ pour la variance.</span></div>
+<div><b>« Loi de $X + Y$ », indépendantes</b><span>Convolution, ou produit des fonctions génératrices.</span></div>
+<div><b>« $E$ et $V$ à partir de $G_X$ »</b><span>$G'(1)$ et $G''(1) + G'(1) - G'(1)^2$.</span></div>
+<div><b>« $P(X\text{ pair})$ »</b><span>$\frac{G_X(1) + G_X(-1)}2$.</span></div>
+<div><b>« Moyenne de $n$ essais »</b><span>Loi faible des grands nombres, Bienaymé-Tchebychev.</span></div>
+</div>
+
+<h2 id="w-erreurs">Les erreurs qui coûtent des points</h2>
+<div class="merr">
+<p><b>1.</b> Calculer $E(X)$ sans vérifier la sommabilité (ou la convergence absolue).</p>
+<p><b>2.</b> Confondre $\mathcal G(p)$ sur $\mathbb N^*$ (rang du premier succès) avec le nombre d'échecs avant (sur $\mathbb N$).</p>
+<p><b>3.</b> $G_{X+Y} = G_XG_Y$ sans indépendance.</p>
+<p><b>4.</b> Les bornes de la convolution : respecter les valeurs possibles de chaque variable.</p>
+<p><b>5.</b> Dire qu'un événement de probabilité nulle est impossible.</p>
+<p><b>6.</b> Oublier que $V(X)$ demande $E(X^2)$ finie.</p>
+</div>
+
+<h2 id="w-entrainement">S'entraîner</h2>
+<div data-mlab="poisapp"></div>
+<div data-mlab="lfgn"></div>
+<div data-mlab="quizpd"></div>
+
+<h2 id="w-exos">Exercices corrigés</h2>
+<p class="ml">Exercice 1 : le minimum de deux géométriques</p>
+<p>$X\sim\mathcal G(p_1)$, $Y\sim\mathcal G(p_2)$ indépendantes, $M = \min(X, Y)$.</p>
+<p><b>Étape 1 : Rappel.</b> $(M > n) = (X > n)\cap(Y > n)$, et $P(X > n) = q^n$ caractérise $\mathcal G(1 - q)$.</p>
+<p><b>Étape 2 : La queue.</b> Par indépendance : $P(M > n) = q_1^nq_2^n = (q_1q_2)^n$.</p>
+<p><b>Étape 3 : La loi.</b> $P(M = n) = P(M > n - 1) - P(M > n) = (q_1q_2)^{n-1}(1 - q_1q_2)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{M\sim\mathcal G(1 - q_1q_2)}$.</p>
+
+<p class="ml">Exercice 2 : $E(X) = \sum_{n\geq1}P(X\geq n)$</p>
+<p><b>Étape 1 : Rappel.</b> Famille positive : on peut intervertir les sommes (fiche Familles sommables).</p>
+<p><b>Étape 2 : On écrit</b> $P(X\geq n) = \sum_{k\geq n}P(X = k)$, donc $\sum_{n\geq1}P(X\geq n) = \sum_{n\geq1}\sum_{k\geq n}P(X = k)$.</p>
+<p><b>Étape 3 : On intervertit.</b> Pour $k$ fixé, $n$ va de $1$ à $k$ : $k$ termes. On obtient $\sum_{k\geq1}kP(X = k)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq1}P(X\geq n) = E(X)}$, dans $[0, +\infty]$.</p>
+
+<p class="ml">Exercice 3 : une Poisson est paire avec quelle probabilité ?</p>
+<p><b>Étape 1 : Rappel.</b> $G_X(t) = \sum P(X = n)t^n$ ; en $t = -1$, les termes impairs changent de signe.</p>
+<p><b>Étape 2 : On combine.</b> $\frac{G_X(1) + G_X(-1)}2 = \sum_{n\ \text{pair}}P(X = n) = P(X\ \text{pair})$.</p>
+<p><b>Étape 3 : On calcule.</b> $G_X(1) = 1$ et $G_X(-1) = e^{-2\lambda}$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{P(X\ \text{pair}) = \frac{1 + e^{-2\lambda}}2}$, toujours $> \frac12$.</p>
+
+<h2 id="w-arbre">L'arbre des probabilités discrètes</h2>
+<p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
+<div class="htree"><div class="hr"><span class="hq hroot">Une question de probabilité</span><ul>
+<li><div class="hr"><em>un événement infini</em><a class="hl" href="#w-esp">continuité monotone</a></div></li>
+<li><div class="hr"><em>une loi à trouver</em><span class="hq">Comment est construite $Y$ ?</span><ul>
+<li><div class="hr"><em>premier succès</em><a class="hl ok" href="#w-lois">géométrique</a></div></li>
+<li><div class="hr"><em>nombre aléatoire d'essais</em><a class="hl" href="#w-tot">probabilités totales sur $(N = n)$</a></div></li>
+<li><div class="hr"><em>somme indépendante</em><a class="hl" href="#w-gen">produit des $G$, ou convolution</a></div></li>
+<li><div class="hr"><em>min, max</em><a class="hl" href="#w-exos">queues $P(M > n)$</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>espérance, variance</em><span class="hq">Quelle méthode ?</span><ul>
+<li><div class="hr"><em>valeurs dans $\mathbb N$</em><a class="hl" href="#w-espe">$\sum P(X\geq n)$</a></div></li>
+<li><div class="hr"><em>factorielles</em><a class="hl" href="#w-var">$E(X(X - 1))$</a></div></li>
+<li><div class="hr"><em>$G_X$ connue</em><a class="hl ok" href="#w-gen">$G'(1)$, $G''(1)$</a></div></li>
+<li><div class="hr"><em>$E(f(X))$</em><a class="hl" href="#w-espe">transfert, sommabilité</a></div></li>
+</ul></div></li>
+<li><div class="hr"><em>$n$ grand</em><span class="hq">Quoi ?</span><ul>
+<li><div class="hr"><em>$p$ petit</em><a class="hl" href="#w-lois">approximation de Poisson</a></div></li>
+<li><div class="hr"><em>une moyenne</em><a class="hl end" href="#w-lfgn">loi faible, Tchebychev</a></div></li>
+</ul></div></li>
+</ul></div></div>
 `
 };

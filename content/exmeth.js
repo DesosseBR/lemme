@@ -465,5 +465,43 @@ LEMME.EXMETH = {
   String.raw`Bayes sur la porte ouverte.`,
   String.raw`Loi conjointe, $E(XY) - E(X)E(Y)$.`,
   String.raw`Indicatrices, symétrie des positions.`
+],
+"Structures algébriques usuelles": [
+  String.raw`Factoriser $1 - x*y = (1 - x)(1 - y)$.`,
+  String.raw`Stabilité, puis les axiomes de l'exemple 1.`,
+  String.raw`Neutre, puis $zw^{-1}$ dans la partie.`,
+  String.raw`Plus petit élément $> 0$, division euclidienne.`,
+  String.raw`Morphisme $e^{x + y} = e^xe^y$, bijectif.`,
+  String.raw`Noyau $\mathbb U_n$, image par les racines $n$-ièmes.`,
+  String.raw`$SL_n = \ker\det$.`,
+  String.raw`$1 - N^p = (1 - N)\sum N^k$.`,
+  String.raw`Deux indicatrices à supports disjoints.`,
+  String.raw`$1$, différence, produit.`,
+  String.raw`Norme $a^2 + b^2$ multiplicative.`,
+  String.raw`Quantité conjuguée $a^2 - 2b^2\neq0$.`
+],
+"Structures algébriques usuelles (exercices)": [
+  String.raw`$x = x^{-1}$, appliqué à $xy$.`,
+  String.raw`Absurde : $h\in H\setminus K$, $k\in K\setminus H$, et $hk$.`,
+  String.raw`$f(x) = nf(\frac xn)$ pour tout $n$.`
+],
+"Probabilités et variables aléatoires discrètes": [
+  String.raw`Continuité décroissante.`,
+  String.raw`Probabilités totales sur $(X = n)$, série exponentielle.`,
+  String.raw`$P(X > n) = q^n$, puis le quotient.`,
+  String.raw`Trois facteurs, $(1 - p_n)^n\to e^{-\lambda}$.`,
+  String.raw`Dérivée de la série géométrique, ou les queues.`,
+  String.raw`Transfert, série exponentielle décalée.`,
+  String.raw`$E(X(X - 1))$, puis $V$.`,
+  String.raw`Produit des fonctions génératrices.`,
+  String.raw`$G'(1)$ et $G''(1)$.`,
+  String.raw`Convolution avec les bonnes bornes.`,
+  String.raw`Bienaymé-Tchebychev sur la moyenne.`,
+  String.raw`IPP sur $[0, +\infty[$.`
+],
+"Probabilités et variables aléatoires discrètes (exercices)": [
+  String.raw`$P(M > n) = (q_1q_2)^n$.`,
+  String.raw`Intervertir les sommes (positivité).`,
+  String.raw`$\frac{G(1) + G(-1)}2$.`
 ]
 };
