@@ -5069,7 +5069,7 @@ $$\cG{\sum_{k=1}^n\frac{x_k^j}{P'(x_k)} = 0\ (0\leqslant j\leqslant n - 2),\qqua
 </div>
 `,
 "Nombres réels et suites numériques": R`
-<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#s-vocab">Suites</a><a href="#s-lim">Limite</a><a href="#s-op">Formes indéterminées</a><a href="#s-comp">Comparaison</a><a href="#s-mono">Monotone, adjacentes</a><a href="#s-part">Récurrences linéaires</a><a href="#s-rec">$u_{n+1} = f(u_n)$</a><a href="#s-cpx">Complexes</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">Arbre des réels</a><a href="#s-arbre">Arbre des suites</a></nav>
+<nav class="msum"><a href="#r-not">Notations</a><a href="#r-abs">Valeur absolue</a><a href="#r-tri">Inégalité triangulaire</a><a href="#r-ent">Partie entière</a><a href="#r-dec">Approximation décimale</a><a href="#r-sup">Borne supérieure</a><a href="#r-seq">Caractérisation séquentielle</a><a href="#r-int">Intervalles</a><a href="#r-dens">Densité</a><a href="#r-ach">Droite achevée</a><a href="#s-vocab">Suites</a><a href="#s-lim">Limite</a><a href="#s-op">Formes indéterminées</a><a href="#s-comp">Comparaison</a><a href="#s-mono">Monotone, adjacentes</a><a href="#s-part">Récurrences linéaires</a><a href="#s-rec">$u_{n+1} = f(u_n)$</a><a href="#s-cpx">Complexes</a><a href="#s-sfexpl">Suites explicites</a><a href="#s-sfrec">$f(u_n)$ : méthode</a><a href="#s-sfdeux">Deux suites</a><a href="#s-sfabs">Divergence, extraites</a><a href="#r-enonce">L'énoncé</a><a href="#r-erreurs">Erreurs</a><a href="#r-entrainement">S'entraîner</a><a href="#r-exos">Exercices</a><a href="#r-arbre">Arbre des réels</a><a href="#s-arbre">Arbre des suites</a></nav>
 
 <p class="ml">Le code couleur de toute la fiche</p>
 <p><span class="kB">bleu</span> : la partie $\cB A$ et ses éléments $\cB a$. <span class="kR">rouge</span> : les majorants, minorants et bornes $\cR M$, $\cR{\sup A}$, $\cR{\inf A}$. <span class="kO">orange</span> : la marge $\cO\varepsilon$. <span class="kV">violet</span> : les entiers ($\cV n$, $\cV p$, $\cV{\lfloor x\rfloor}$). <span class="kG">vert</span> : les conclusions.</p>
@@ -5565,7 +5565,153 @@ $$\cG{u_n\to2}.$$
 <p><b>Étape 3 : On passe au module.</b> $z_n = q^nz_0$, donc $|z_n| = |q|^n|z_0| = \big(\frac{\sqrt2}2\big)^n|z_0|\to0$ (géométrique réelle de raison dans $]-1, 1[$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{z_n\to0}$.</p>
 
-<h2 id="r-enonce">20. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
+<h2 id="s-sfexpl">20. Suites définies explicitement : la boîte à outils</h2>
+<table class="mtab">
+<tr><th>Situation</th><th>Méthode</th></tr>
+<tr><td>$u_n = f(n)$ avec $f$ simple</td><td>Étudier $f$ sur $[1, +\infty[$ (variations, limite).</td></tr>
+<tr><td>Monotonie utile</td><td>Signe de $u_{n+1} - u_n$, ou $\frac{u_{n+1}}{u_n}$ comparé à $1$ (termes $> 0$) ; puis limite monotone.</td></tr>
+<tr><td>Somme ou produit compliqué</td><td><b>Encadrer</b> chaque terme, puis gendarmes.</td></tr>
+<tr><td>Somme $\sum_{k\leq n}f(k)$, $f$ monotone</td><td>Comparaison série-intégrale, ou <b>somme de Riemann</b> (faire apparaître $\frac1n\sum f\big(\frac kn\big)$).</td></tr>
+<tr><td>Convergence d'une suite « différence »</td><td>Lien suite-série : $(u_n)$ converge $\iff\sum(u_{n+1} - u_n)$ converge <span class="hp">programme de Spé</span>.</td></tr>
+</table>
+
+<p class="ml">Exemple 34 : $u_n = \big(2\sin\frac1n + \frac12\cos n\big)^n$</p>
+<p><b>Étape 1 : Rappel.</b> Si $|u_n|\leq q^n$ avec $0\leq q \lt 1$, alors $u_n\to0$.</p>
+<p><b>Étape 2 : On majore la base.</b> $\sin x\leq x$ pour $x\geq0$, donc $2\sin\frac1n\leq\frac2n$ ; et $\big|\frac12\cos n\big|\leq\frac12$. Donc $\big|2\sin\frac1n + \frac12\cos n\big|\leq\frac2n + \frac12$.</p>
+<p><b>Étape 3 : Pour $n\geq5$.</b> $\frac2n + \frac12\leq\frac25 + \frac12 = \frac{4 + 5}{10} = \frac9{10}$, donc $|u_n|\leq\big(\frac9{10}\big)^n$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\big(\frac9{10}\big)^n\to0$ : $\cG{u_n\to0}$.</p>
+
+<p class="ml">Exemple 35 : sens de variation de $u_n = \sqrt n\sin\frac1n$</p>
+<p><b>Étape 1 : Rappel.</b> $u_n = f(n)$ avec $f(x) = \sqrt x\sin\frac1x$ : on étudie le signe de $f'$.</p>
+<p><b>Étape 2 : La dérivée.</b> $f'(x) = \frac1{2\sqrt x}\sin\frac1x + \sqrt x\cos\frac1x\times\Big(-\frac1{x^2}\Big) = \frac{\cos\frac1x}{2\sqrt x}\Big(\tan\frac1x - \frac2x\Big)$ (on a factorisé $\frac{\cos(1/x)}{2\sqrt x} > 0$ sur $[1, +\infty[$).</p>
+<p><b>Étape 3 : Le signe.</b> Avec $t = \frac1x\in]0, 1]$ : $\varphi(t) = \tan t - 2t$, $\varphi(0) = 0$, $\varphi'(t) = (1 + \tan^2t) - 2 = \tan^2t - 1$. Donc $\varphi$ décroît sur $\big[0, \frac\pi4\big]$ (où $\tan t\leq1$) puis croît sur $\big[\frac\pi4, 1\big]$. Elle part de $\varphi(0) = 0$ en décroissant, et à droite $\varphi(1) = \tan1 - 2\approx1{,}557 - 2 = -0{,}443 \lt 0$ : $\varphi \lt 0$ sur $]0, 1]$.</p>
+<p><b>Étape 4 : Conclusion.</b> $f' \lt 0$ sur $[1, +\infty[$ : $\cG{(u_n)\ \text{est décroissante}}$ (et $u_n\sim\frac{\sqrt n}n\to0$).</p>
+
+<p class="ml">Exemple 36 : $u_n = \sum_{k=1}^n\frac1{\sqrt k} - 2\sqrt n$ converge</p>
+<p><b>Étape 1 : Rappel.</b> Décroissante et minorée $\Rightarrow$ converge.</p>
+<p><b>Étape 2 : Décroissante.</b> $u_{n+1} - u_n = \frac1{\sqrt{n + 1}} - 2(\sqrt{n + 1} - \sqrt n) = \frac1{\sqrt{n + 1}} - \frac2{\sqrt{n + 1} + \sqrt n}$ (quantité conjuguée). Or $\sqrt{n + 1} + \sqrt n \lt 2\sqrt{n + 1}$, donc $\frac2{\sqrt{n + 1} + \sqrt n} > \frac1{\sqrt{n + 1}}$ : $u_{n+1} - u_n \lt 0$.</p>
+<p><b>Étape 3 : Minorée.</b> $\frac1{\sqrt k} = \frac2{2\sqrt k}\geq\frac2{\sqrt{k + 1} + \sqrt k} = 2(\sqrt{k + 1} - \sqrt k)$. En sommant (télescopage) : $\sum_{k=1}^n\frac1{\sqrt k}\geq2(\sqrt{n + 1} - 1)$, donc $u_n\geq2\sqrt{n + 1} - 2 - 2\sqrt n\geq-2$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(u_n)\ \text{converge}}$.</p>
+
+<p class="ml">Exemple 37 : la limite supérieure $v_n = \sup_{p\geq n}u_p$</p>
+<p><b>Étape 1 : Rappel.</b> $A\subset B\Rightarrow\sup A\leq\sup B$.</p>
+<p><b>Étape 2 : Décroissante.</b> $A_n = \{u_p,\ p\geq n\}$, et $A_{n+1}\subset A_n$, donc $v_{n+1}\leq v_n$.</p>
+<p><b>Étape 3 : Minorée.</b> $v_n\geq u_n\geq\inf_ku_k$ ($(u_n)$ bornée).</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{(v_n)\ \text{converge}}$ ; sa limite est la plus grande valeur d'adhérence de $(u_n)$ (limite supérieure, <span class="hp">hors programme</span>).</p>
+
+<p class="ml">Exemple 38 : un encadrement, $u_n = \sum_{k=0}^n\binom nk^{-1}$</p>
+<p><b>Étape 1 : Rappel.</b> Isoler les termes extrêmes, majorer ceux du milieu, gendarmes.</p>
+<p><b>Étape 2 : Les bords.</b> $k = 0$ et $k = n$ donnent $1 + 1 = 2$ ; $k = 1$ et $k = n - 1$ donnent $\frac1n + \frac1n = \frac2n$.</p>
+<p><b>Étape 3 : Le milieu</b> ($2\leq k\leq n - 2$, $n\geq4$) : $\binom nk\geq\binom n2 = \frac{n(n - 1)}2$, donc la somme des $n - 3$ termes est $\leq\frac{2(n - 3)}{n(n - 1)}$.</p>
+<p><b>Étape 4 : L'encadrement.</b> $2\leq u_n\leq2 + \frac2n + \frac{2(n - 3)}{n(n - 1)}$, et les deux derniers termes tendent vers $0$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n\to2}$ ; en recommençant avec $\binom nk\geq\binom n3$ au milieu, $u_n - 2\sim\frac2n$.</p>
+
+<p class="ml">Exemple 39 : une somme de Riemann déguisée</p>
+<p>$u_n = \sum_{k=1}^n\frac1{\sqrt{(n + k - 1)(n + k)}}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue.</p>
+<p><b>Étape 2 : On fait apparaître $\frac1n$.</b> $\sqrt{(n + k - 1)(n + k)} = n\sqrt{\big(1 + \frac{k - 1}n\big)\big(1 + \frac kn\big)}$.</p>
+<p><b>Étape 3 : On encadre.</b> $\big(1 + \frac{k - 1}n\big)\leq\big(1 + \frac kn\big)$ donne $\frac1n\sum\frac1{1 + \frac kn}\leq u_n\leq\frac1n\sum\frac1{1 + \frac{k - 1}n}$ : deux sommes de Riemann de $f(x) = \frac1{1 + x}$ sur $[0, 1]$.</p>
+<p><b>Étape 4 : La limite.</b> $\int_0^1\frac{dx}{1 + x} = \big[\ln(1 + x)\big]_0^1 = \ln2 - \ln1 = \ln2$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n\to\ln2}$.</p>
+
+<h2 id="s-sfrec">21. $u_{n+1} = f(u_n)$ : la méthode générale</h2>
+<p class="ml">La méthode</p>
+<p><b>1.</b> Un intervalle $D$ <b>stable</b> par $f$ : la suite est bien définie et reste dans $D$. <b>2.</b> Les <b>limites possibles</b> : si $f$ est continue, $\ell = f(\ell)$ ; on étudie $g(x) = f(x) - x$. <b>3.</b> $f$ <b>croissante</b> sur $D$ : $(u_n)$ est monotone, du signe de $u_1 - u_0$ ; entre deux points fixes elle est bornée. <b>4.</b> $f$ <b>décroissante</b> : $f\circ f$ est croissante, $(u_{2n})$ et $(u_{2n+1})$ sont monotones de sens contraires. <b>5.</b> Un dessin (escalier si $f$ croît, escargot si $f$ décroît) guide la discussion.</p>
+
+<p class="ml">Exemple 40 : $u_{n+1} = \frac16(u_n^2 + 8)$, $u_0\geq0$</p>
+<p><b>Étape 1 : Rappel.</b> $f(x) = \frac{x^2 + 8}6$ est croissante sur $\mathbb R_+$, qui est stable.</p>
+<p><b>Étape 2 : Les points fixes.</b> $\frac{x^2 + 8}6 = x\iff x^2 - 6x + 8 = 0\iff(x - 2)(x - 4) = 0$ : $2$ et $4$. Signe : $f(x) - x = \frac{(x - 2)(x - 4)}6$, positif hors de $[2, 4]$.</p>
+<p><b>Étape 3 : $u_0\in[0, 2[$.</b> $f([0, 2]) = \big[\frac86, \frac{12}6\big] = \big[\frac43, 2\big]\subset[0, 2]$, et $f(u_0) > u_0$ : croissante, majorée par $2$, limite $\ell\in[0, 2]$ point fixe : $\ell = 2$.</p>
+<p><b>Étape 4 : $u_0\in]2, 4[$.</b> $f(u_0) \lt u_0$ et $[2, 4]$ stable : décroissante minorée par $2$, $\to2$.</p>
+<p><b>Étape 5 : $u_0 > 4$.</b> Croissante ; si elle convergeait, la limite $\ell > 4$ serait fixe : impossible. Donc $\to+\infty$.</p>
+<p><b>Conclusion.</b> $\cG{u_n\to2\ (0\leq u_0 \lt 4),\ u_n = 4\ (u_0 = 4),\ u_n\to+\infty\ (u_0 > 4)}$.</p>
+
+<p class="ml">Exemple 41 : $u_{n+1} = \frac{10}{1 + u_n^2}$, $u_0\geq0$ ($f$ décroissante)</p>
+<p><b>Étape 1 : Rappel.</b> Étudier $f\circ f(x) - x$, puis les deux suites extraites.</p>
+<p><b>Étape 2 : Le point fixe de $f$.</b> $\frac{10}{1 + x^2} = x\iff x^3 + x - 10 = 0\iff(x - 2)(x^2 + 2x + 5) = 0$ : seul $x = 2$ ($\Delta = 4 - 20 \lt 0$ pour le second facteur).</p>
+<p><b>Étape 3 : $f\circ f$.</b> $f(f(x)) = \frac{10}{1 + \frac{100}{(1 + x^2)^2}} = \frac{10(1 + x^2)^2}{x^4 + 2x^2 + 101}$, et le numérateur de $f\circ f(x) - x$ vaut</p>
+$$10(1 + x^2)^2 - x(x^4 + 2x^2 + 101) = -x^5 + 10x^4 - 2x^3 + 20x^2 - 101x + 10 = -(x - 2)(x^2 - 10x + 1)(x^2 + 2x + 5).$$
+<p>Contrôle : $(x - 2)(x^2 + 2x + 5) = x^3 + x - 10$, puis $(x^3 + x - 10)(x^2 - 10x + 1) = x^5 - 10x^4 + 2x^3 - 20x^2 + 101x - 10$ ✓.</p>
+<p><b>Étape 4 : Les points fixes de $f\circ f$.</b> $2$, $\alpha = 5 - \sqrt{24}\approx0{,}10$, $\beta = 5 + \sqrt{24}\approx9{,}90$, avec $f(\alpha) = \beta$ et $f(\beta) = \alpha$ (un $2$-cycle). Signe de $f\circ f(x) - x$ : $+$ sur $[0, \alpha[$, $-$ sur $]\alpha, 2[$, $+$ sur $]2, \beta[$, $-$ après.</p>
+<p><b>Étape 5 : Conclusion.</b> $f\circ f$ est croissante. Pour $u_0\in]0, \alpha[$ : $(u_{2n})$ croît vers $\alpha$ et $(u_{2n+1})$ décroît vers $f(\alpha) = \beta$. Pour $u_0\in]\alpha, 2[$ : $(u_{2n})$ décroît vers $\alpha$ et $(u_{2n+1})$ croît vers $\beta$. Même chose de l'autre côté de $2$. Deux limites différentes : $\cG{(u_n)\ \text{diverge pour tout}\ u_0\neq2}$ ($u_0 = 2$ : constante ; $u_0\in\{\alpha, \beta\}$ : $2$-périodique).</p>
+
+<p class="ml">Exemple 42 : le point fixe d'une contraction, $u_{n+1} = \cos u_n$</p>
+<p><b>Étape 1 : Rappel.</b> $|f(x) - f(y)|\leq k|x - y|$ avec $k \lt 1$ sur un intervalle stable : $|u_n - \ell|\leq k^n|u_0 - \ell|\to0$.</p>
+<p><b>Étape 2 : Stable.</b> $u_1 = \cos u_0\in[-1, 1]$, puis $u_2 = \cos u_1\in[\cos1, 1]\subset[0, 1]$, et $\cos([0, 1]) = [\cos1, 1]\subset[0, 1]$.</p>
+<p><b>Étape 3 : Le point fixe.</b> $g(x) = \cos x - x$ est continue, strictement décroissante, $g(0) = 1 > 0$, $g(1) = \cos1 - 1 \lt 0$ : un unique $\ell\in]0, 1[$ avec $\cos\ell = \ell$.</p>
+<p><b>Étape 4 : Contractante.</b> $|\cos'x| = |\sin x|\leq\sin1 \lt 1$ sur $[0, 1]$ : accroissements finis, $|\cos x - \cos y|\leq\sin1\,|x - y|$.</p>
+<p><b>Étape 5 : Conclusion.</b> $|u_n - \ell|\leq(\sin1)^{n-2}|u_2 - \ell|\to0$ : $\cG{u_n\to\ell\approx0{,}739}$, pour tout $u_0\in\mathbb R$.</p>
+
+<p class="ml">Exemple 43 : $u_{n+1} = \sin u_n$, un équivalent <span class="hp">programme de Spé</span></p>
+<p><b>Étape 1 : Rappel.</b> On cherche $\alpha$ tel que $u_{n+1}^\alpha - u_n^\alpha$ ait une limite non nulle, puis Cesàro (ou les sommes partielles).</p>
+<p><b>Étape 2 : La limite.</b> $u_0\in]0, \frac\pi2]$ : $0 \lt \sin x \lt x$, donc $(u_n)$ décroît, minorée par $0$, vers $\ell = \sin\ell$, soit $\ell = 0$.</p>
+<p><b>Étape 3 : Le DL.</b> $u_{n+1}^{-2} = u_n^{-2}\Big(1 - \frac{u_n^2}6 + o(u_n^2)\Big)^{-2} = u_n^{-2}\Big(1 + \frac{u_n^2}3 + o(u_n^2)\Big)$, donc $u_{n+1}^{-2} - u_n^{-2}\to\frac13$.</p>
+<p><b>Étape 4 : On somme.</b> $u_n^{-2} - u_0^{-2} = \sum_{k \lt n}(u_{k+1}^{-2} - u_k^{-2})\sim\frac n3$.</p>
+<p><b>Étape 5 : Conclusion.</b> $\cG{u_n\sim\sqrt{\frac3n}}$.</p>
+
+<h2 id="s-sfdeux">22. Deux suites à la fois</h2>
+
+<p class="ml">Exemple 44 : $u_n = \sum_{k=0}^n\frac1{k!}$ et $v_n = u_n + \frac1{n\cdot n!}$ sont adjacentes</p>
+<p><b>Étape 1 : Rappel.</b> $(u_n)$ croissante, $(v_n)$ décroissante, $v_n - u_n\to0$.</p>
+<p><b>Étape 2 : $u$ croît.</b> $u_{n+1} - u_n = \frac1{(n + 1)!} > 0$.</p>
+<p><b>Étape 3 : $v$ décroît.</b> $v_{n+1} - v_n = \frac1{(n + 1)!} + \frac1{(n + 1)(n + 1)!} - \frac1{n\,n!} = \frac1{n!}\Big(\frac1{n + 1} + \frac1{(n + 1)^2} - \frac1n\Big)$. Au dénominateur commun $n(n + 1)^2$ : $n(n + 1) + n - (n + 1)^2 = n^2 + 2n - n^2 - 2n - 1 = -1$. Donc $v_{n+1} - v_n = -\frac1{n(n + 1)^2n!} \lt 0$.</p>
+<p><b>Étape 4 : Conclusion.</b> $v_n - u_n = \frac1{n\,n!}\to0$ : $\cG{\text{adjacentes, de limite}\ e}$.</p>
+
+<p class="ml">Exemple 45 : $u_{n+1} = \frac{u_n}2 + \frac2{v_n}$, $v_{n+1} = \frac1{2u_n} + 2v_n$</p>
+<p><b>Étape 1 : Rappel.</b> Étudier d'abord une combinaison : le produit $u_nv_n$.</p>
+<p><b>Étape 2 : $v_n\to+\infty$.</b> $v_{n+1}\geq2v_n$, donc $v_n\geq2^nv_0$.</p>
+<p><b>Étape 3 : Le produit.</b> $u_{n+1}v_{n+1} = \frac14 + u_nv_n + \frac1{u_nv_n} + 4 = \frac{17}4 + u_nv_n + \frac1{u_nv_n}$ : croissant ; s'il convergeait vers $\ell > 0$, on aurait $\ell = \frac{17}4 + \ell + \frac1\ell$, impossible. Donc $u_nv_n\to+\infty$.</p>
+<p><b>Étape 4 : $u$.</b> $u_{n+1} - u_n = \frac2{v_n} - \frac{u_n}2 = \frac{4 - u_nv_n}{2v_n} \lt 0$ à partir d'un rang : décroissante minorée par $0$, $\to\ell$ avec $\ell = \frac\ell2 + 0$, soit $\ell = 0$.</p>
+<p><b>Conclusion.</b> $\cG{u_n\to0,\ v_n\to+\infty}$.</p>
+
+<p class="ml">Exemple 46 : $u_{n+1} = \frac{u_n^2}{u_n + v_n}$, $v_{n+1} = \frac{v_n^2}{u_n + v_n}$, $0 \lt u_0 \lt v_0$</p>
+<p><b>Étape 1 : Rappel.</b> Chercher une quantité constante ou une relation simple.</p>
+<p><b>Étape 2 : La différence.</b> $u_{n+1} - v_{n+1} = \frac{u_n^2 - v_n^2}{u_n + v_n} = u_n - v_n$ : constante, égale à $u_0 - v_0$.</p>
+<p><b>Étape 3 : Le quotient.</b> $\frac{u_{n+1}}{v_{n+1}} = \Big(\frac{u_n}{v_n}\Big)^2$, donc $\frac{u_n}{v_n} = q^{2^n}$ avec $q = \frac{u_0}{v_0}\in]0, 1[$.</p>
+<p><b>Étape 4 : On résout.</b> $u_n = q^{2^n}v_n$ et $u_n - v_n = u_0 - v_0$ : $v_n = \frac{v_0 - u_0}{1 - q^{2^n}}\to v_0 - u_0$, puis $u_n = v_n + u_0 - v_0\to0$.</p>
+<p><b>Conclusion.</b> $\cG{u_n\to0,\quad v_n\to v_0 - u_0}$.</p>
+
+<h2 id="s-sfabs">23. Montrer qu'une suite diverge, utiliser des extraites</h2>
+
+<p class="ml">Exemple 47 : $\cos(n\alpha)$ et $\sin(n\alpha)$ divergent ($\alpha\notin\pi\mathbb Z$)</p>
+<p><b>Étape 1 : Rappel.</b> La négation de « $u$ et $v$ divergent » est « l'une des deux converge ».</p>
+<p><b>Étape 2 : Si l'une converge, l'autre aussi.</b> $\sin(n\alpha) = \frac{\cos(n\alpha)\cos\alpha - \cos((n + 1)\alpha)}{\sin\alpha}$ (formule d'addition, $\sin\alpha\neq0$) : si $\cos(n\alpha)\to\ell$, $\sin(n\alpha)\to\frac{\ell\cos\alpha - \ell}{\sin\alpha}$.</p>
+<p><b>Étape 3 : Les deux convergent vers $\ell, \ell'$.</b> On passe à la limite dans les formules d'addition : $\ell = \ell\cos\alpha - \ell'\sin\alpha$ et $\ell' = \ell'\cos\alpha + \ell\sin\alpha$. Système homogène de déterminant $(\cos\alpha - 1)^2 + \sin^2\alpha = 2(1 - \cos\alpha)\neq0$ : $\ell = \ell' = 0$.</p>
+<p><b>Étape 4 : Contradiction.</b> $\cos^2(n\alpha) + \sin^2(n\alpha) = 1$ donne $\ell^2 + \ell'^2 = 1$.</p>
+<p><b>Conclusion.</b> $\cG{(\cos n\alpha)\ \text{et}\ (\sin n\alpha)\ \text{divergent}}$.</p>
+
+<p class="ml">Exemple 48 : $u_{n+1} = \sqrt{2 + (-1)^{n+1}u_n}$, $u_0\in]0, 2[$</p>
+<p><b>Étape 1 : Rappel.</b> Deux extraites de limites différentes $\Rightarrow$ divergence.</p>
+<p><b>Étape 2 : Bien définie.</b> Si $u_n\in]0, 2[$ : $0 \lt 2 - u_n\leq2 + (-1)^{n+1}u_n\leq2 + u_n \lt 4$, donc $u_{n+1}\in]0, 2[$.</p>
+<p><b>Étape 3 : Les extraites.</b> $u_{2n+1} = \sqrt{2 - u_{2n}}$ et $u_{2n} = \sqrt{2 + u_{2n-1}}$. Si $u_n\to\ell$ : $\ell = \sqrt{2 + \ell}$ et $\ell = \sqrt{2 - \ell}$.</p>
+<p><b>Étape 4 : Contradiction.</b> La 1<sup>re</sup> donne $\ell^2 - \ell - 2 = 0$, $\ell = 2$ ; la 2<sup>e</sup> donne $\ell^2 + \ell - 2 = 0$, $\ell = 1$.</p>
+<p><b>Conclusion.</b> $\cG{(u_n)\ \text{diverge}}$.</p>
+
+<p class="ml">Exemple 49 : une suite d'entiers convergente est stationnaire</p>
+<p><b>Étape 1 : Rappel.</b> Définition avec $\varepsilon = \frac12$.</p>
+<p><b>Étape 2 : On applique.</b> Pour $n\geq n_0$, $u_n\in\big]\ell - \frac12, \ell + \frac12\big[$, intervalle de longueur $1$ ouvert : il contient au plus un entier.</p>
+<p><b>Conclusion.</b> $\cG{(u_n)\ \text{est constante à partir de}\ n_0}$.</p>
+
+<p class="ml">Exemple 50 : $u_{2n}\to\ell$ et $u_{2n+1}\to\ell$ entraînent $u_n\to\ell$</p>
+<p><b>Étape 1 : Rappel.</b> Définition avec $\varepsilon$.</p>
+<p><b>Étape 2 : Les rangs.</b> $|u_{2n} - \ell| \lt \varepsilon$ pour $n\geq n_0$, $|u_{2n+1} - \ell| \lt \varepsilon$ pour $n\geq n_1$.</p>
+<p><b>Conclusion.</b> Pour $N = \max(2n_0, 2n_1 + 1)$ et $n\geq N$, $|u_n - \ell| \lt \varepsilon$ : $\cG{u_n\to\ell}$.</p>
+
+<p class="ml">Exemple 51 : le théorème de Cesàro pondéré</p>
+<p>$u_n\to\ell$, $a_n > 0$, $\sum a_n$ diverge. Montrer $v_n = \frac{\sum_{k\leq n}a_ku_k}{\sum_{k\leq n}a_k}\to\ell$.</p>
+<p><b>Étape 1 : Rappel.</b> Couper la somme en $k \lt n_0$ (fixe) et $k\geq n_0$ (où $|u_k - \ell| \lt \frac\varepsilon2$).</p>
+<p><b>Étape 2 : On écrit.</b> $v_n - \ell = \frac{\sum_{k\leq n}a_k(u_k - \ell)}{\sum_{k\leq n}a_k}$, donc $|v_n - \ell|\leq\frac{\sum_{k \lt n_0}a_k|u_k - \ell|}{\sum_{k\leq n}a_k} + \frac\varepsilon2$.</p>
+<p><b>Étape 3 : Le premier terme.</b> Numérateur fixe, dénominateur $\to+\infty$ : il devient $ \lt \frac\varepsilon2$.</p>
+<p><b>Conclusion.</b> $\cG{v_n\to\ell}$ ; avec $a_n = 1$, c'est la moyenne de Cesàro.</p>
+
+<p class="ml">Exemple 52 : $\frac{p_n}{q_n}\to x\notin\mathbb Q$ entraîne $q_n\to+\infty$</p>
+<p><b>Étape 1 : Rappel.</b> Absurde + Bolzano-Weierstrass + exemple 49.</p>
+<p><b>Étape 2 : Sinon.</b> Il existe $A$ et une extraite $(q_{\varphi(n)})$ bornée par $A$ ; une nouvelle extraite converge, donc est stationnaire (entiers) : $q_{\psi(n)} = q$.</p>
+<p><b>Étape 3 : Les numérateurs.</b> $p_{\psi(n)} = q\frac{p_{\psi(n)}}{q_{\psi(n)}}\to qx$, suite d'entiers convergente, donc stationnaire égale à $p$.</p>
+<p><b>Étape 4 : Contradiction.</b> $x = \frac pq\in\mathbb Q$.</p>
+<p><b>Conclusion.</b> $\cG{q_n\to+\infty,\ \text{puis}\ |p_n| = q_n\big|\frac{p_n}{q_n}\big|\to+\infty}$ ($x\neq0$).</p>
+
+<h2 id="r-enonce">24. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
 <div class="mrefl wide">
 <div><b>« Résoudre $|X|\leq a$ »</b><span>Encadrer $-a\leq X\leq a$. Si $a \lt 0$ : aucune solution.</span></div>
 <div><b>« Résoudre $|X|\geq a$ »</b><span>$X\leq-a$ ou $X\geq a$ : une réunion.</span></div>
