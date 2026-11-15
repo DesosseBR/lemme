@@ -449,36 +449,23 @@ $$\operatorname{tr}({}^tAA) = \sum_{i,j}a_{i,j}^2\ \Longrightarrow\ \big(\operat
 <p>Réflexe : quand un énoncé dit « pour toute matrice $M$ », on teste la relation sur toutes les $E_{i,j}$.</p>
 
 <h2 id="m-inv2">17. Montrer qu'une matrice est inversible, et trouver $A^{-1}$</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>On devine un inverse</td><td>Trouver $B$ avec $AB = I_n$ : en taille finie, cela suffit (pas besoin de $BA$).</td></tr>
-<tr><td>$A$ est la matrice d'un endomorphisme $u$</td><td>Montrer $\ker u = \{0\}$ ; $A^{-1}$ est la matrice de $u^{-1}$.</td></tr>
-<tr><td>On veut $A^{-1}$ explicitement</td><td>Résoudre $AX = Y$ : $X = A^{-1}Y$ se lit sur la solution.</td></tr>
-<tr><td>Seulement l'inversibilité</td><td>$AX = 0\Rightarrow X = 0$ ; ou un $X\neq0$ avec $AX = 0$ pour montrer que non.</td></tr>
-<tr><td>Grande matrice numérique</td><td>Gauss-Jordan sur $(A\mid I_n)\to(I_n\mid A^{-1})$.</td></tr>
-<tr><td>Un polynôme annulateur $\sum a_kX^k$ avec $a_0\neq0$</td><td>On isole $I_n$ : $A^{-1}$ est un polynôme en $A$.</td></tr>
-<tr><td>Taille $2$ ou $3$, ou matrice à paramètre</td><td>Le déterminant ; la comatrice $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</td></tr>
-<tr><td>$I_n + N$, $N$ nilpotente</td><td>Comme $\frac1{1 + x} = \sum(-x)^k$ : $(I_n + N)^{-1} = \sum_{k=0}^{p-1}(-N)^k$.</td></tr>
-<tr><td>Colonnes orthogonales de même norme</td><td>$\frac1cA$ orthogonale : $A^{-1} = \frac1{c^2}{}^tA$.</td></tr>
-</table>
-
 <p class="ml">Exemple 1 : $I_n - B$ avec $B$ nilpotente</p>
 <p>$B^p = 0$. Montrer que $I_n - B$ est inversible et donner son inverse.</p>
-<p><b>Étape 1 : Rappel.</b> On imite $\frac1{1 - x} = 1 + x + x^2 + \cdots$, et un seul produit égal à $I_n$ suffit.</p>
+<p><b>Étape 1 : Rappel.</b> Comme $\frac1{1 + x} = \sum(-x)^k$ : $(I_n + N)^{-1} = \sum_{k=0}^{p-1}(-N)^k$.</p>
 <p><b>Étape 2 : Le produit.</b> $I_n$ et $B$ commutent : $(I_n - B)(I_n + B + \dots + B^{p-1}) = (I_n + B + \dots + B^{p-1}) - (B + B^2 + \dots + B^p) = I_n - B^p$.</p>
 <p><b>Étape 3 : On utilise $B^p = 0$.</b> Le produit vaut $I_n - 0 = I_n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(I_n - B)^{-1} = I_n + B + B^2 + \dots + B^{p-1}}$.</p>
 
 <p class="ml">Exemple 2 : par un polynôme annulateur</p>
 <p>$A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$. Trouver une relation entre $A^2$, $A$, $I_2$, puis $A^{-1}$.</p>
-<p><b>Étape 1 : Rappel.</b> En taille $2$ : $A^2 - (\operatorname{tr}A)A + (\det A)I_2 = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> On isole $I_n$ : $A^{-1}$ est un polynôme en $A$.</p>
 <p><b>Étape 2 : La relation.</b> $\operatorname{tr}A = 2 + 2 = 4$, $\det A = 2\times2 - 1\times1 = 3$, donc $A^2 - 4A + 3I_2 = 0$. Contrôle : $A^2 = \begin{pmatrix}4 + 1&2 + 2\\2 + 2&1 + 4\end{pmatrix} = \begin{pmatrix}5&4\\4&5\end{pmatrix}$ et $4A - 3I_2 = \begin{pmatrix}8 - 3&4\\4&8 - 3\end{pmatrix}$ : égales.</p>
 <p><b>Étape 3 : On isole $I_2$.</b> $3I_2 = 4A - A^2 = A(4I_2 - A)$, donc $A\times\frac13(4I_2 - A) = I_2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^{-1} = \frac13(4I_2 - A) = \frac13\begin{pmatrix}2&-1\\-1&2\end{pmatrix}}$ ($4 - 2 = 2$, $0 - 1 = -1$).</p>
 
 <p class="ml">Exemple 3 : la comatrice en taille $3$</p>
 <p>$P = \begin{pmatrix}1&1&1\\-1&0&2\\0&-1&3\end{pmatrix}$. Calculer $P^{-1}$.</p>
-<p><b>Étape 1 : Rappel.</b> Cofacteur $(i, j)$ : $(-1)^{i+j}\times$ le déterminant obtenu en barrant la ligne $i$ et la colonne $j$. Puis $P^{-1} = \frac1{\det P}{}^t\operatorname{com}(P)$.</p>
+<p><b>Étape 1 : Rappel.</b> Le déterminant ; la comatrice $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</p>
 <p><b>Étape 2 : Ligne 1 des cofacteurs.</b> $+\begin{vmatrix}0&2\\-1&3\end{vmatrix} = 0\times3 - 2\times(-1) = 2$ ; $-\begin{vmatrix}-1&2\\0&3\end{vmatrix} = -(-3 - 0) = 3$ ; $+\begin{vmatrix}-1&0\\0&-1\end{vmatrix} = 1 - 0 = 1$.</p>
 <p><b>Étape 3 : Le déterminant</b> (développement selon la ligne 1) : $\det P = 1\times2 + 1\times3 + 1\times1 = 6$.</p>
 <p><b>Étape 4 : Lignes 2 et 3.</b> $-\begin{vmatrix}1&1\\-1&3\end{vmatrix} = -(3 + 1) = -4$, $+\begin{vmatrix}1&1\\0&3\end{vmatrix} = 3$, $-\begin{vmatrix}1&1\\0&-1\end{vmatrix} = -(-1) = 1$. Puis $+\begin{vmatrix}1&1\\0&2\end{vmatrix} = 2$, $-\begin{vmatrix}1&1\\-1&2\end{vmatrix} = -(2 + 1) = -3$, $+\begin{vmatrix}1&1\\-1&0\end{vmatrix} = 0 + 1 = 1$.</p>
@@ -488,14 +475,14 @@ $$\operatorname{com}(P) = \begin{pmatrix}2&3&1\\-4&3&1\\2&-3&1\end{pmatrix},\qqu
 
 <p class="ml">Exemple 4 : reconnaître une matrice orthogonale</p>
 <p>$A = \begin{pmatrix}2&2&1\\1&-2&2\\2&-1&-2\end{pmatrix}$. Calculer $A^{-1}$.</p>
-<p><b>Étape 1 : Rappel.</b> Si les colonnes sont orthogonales deux à deux et de norme $c$, alors $\,{}^tAA = c^2I_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $\frac1cA$ orthogonale : $A^{-1} = \frac1{c^2}{}^tA$.</p>
 <p><b>Étape 2 : Les normes.</b> $C_1 = (2, 1, 2)$ : $4 + 1 + 4 = 9$. $C_2 = (2, -2, -1)$ : $4 + 4 + 1 = 9$. $C_3 = (1, 2, -2)$ : $1 + 4 + 4 = 9$. Toutes de norme $3$.</p>
 <p><b>Étape 3 : Les produits scalaires.</b> $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = 2 + 2 - 4 = 0$, $C_2\cdot C_3 = 2 - 4 + 2 = 0$. Donc $\,{}^tAA = 9I_3$.</p>
 <p><b>Étape 4 : Conclusion.</b> $A\times\frac19{}^tA = I_3$ : $\cG{A^{-1} = \frac19{}^tA}$, sans aucun calcul d'inverse.</p>
 
 <p class="ml">Exemple 5 : résoudre $AX = Y$ pour $a_{ij} = \min(i, j)$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb R)$ de coefficients $a_{ij} = \min(i, j)$. <b>Montrer que $A$ est inversible et calculer $A^{-1}$ en résolvant $AX = Y$.</b></p>
-<p><b>Étape 1 : Rappel.</b> On résout $AX = Y$ ; l'expression $X = BY$ donne $A^{-1} = B$.</p>
+<p><b>Étape 1 : Rappel.</b> Résoudre $AX = Y$ : $X = A^{-1}Y$ se lit sur la solution.</p>
 <p><b>Étape 2 : Le système.</b> La ligne $i$ s'écrit $x_1 + 2x_2 + \dots + (i - 1)x_{i-1} + i(x_i + x_{i+1} + \dots + x_n) = y_i$. Les opérations $L_i\leftarrow L_i - L_{i-1}$ (de $i = n$ à $2$) donnent $x_i + x_{i+1} + \dots + x_n = y_i - y_{i-1}$ (avec $y_0 = 0$).</p>
 <p><b>Étape 3 : On recommence.</b> En soustrayant deux lignes consécutives : $x_i = (y_i - y_{i-1}) - (y_{i+1} - y_i) = -y_{i-1} + 2y_i - y_{i+1}$ pour $i \lt n$, et $x_n = y_n - y_{n-1}$.</p>
 <p><b>Étape 4 : Conclusion.</b> On lit les coefficients :</p>
@@ -504,7 +491,7 @@ $$\cG{A^{-1} = \begin{pmatrix}2&-1&&\\-1&2&\ddots&\\&\ddots&2&-1\\&&-1&1\end{pma
 
 <p class="ml">Exemple 6 : inversible dans $\mathcal M_n(\mathbb Z)$</p>
 <p>Montrer : $A\in\mathcal M_n(\mathbb Z)$ a un inverse à coefficients entiers $\iff\det A = \pm1$.</p>
-<p><b>Étape 1 : Rappel.</b> $\det(AB) = \det A\det B$ ; le déterminant d'une matrice entière est un entier ; $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</p>
+<p><b>Étape 1 : Rappel.</b> Le déterminant ; la comatrice $A^{-1} = \frac1{\det A}{}^t\operatorname{com}(A)$.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $AB = I_n$ avec $B$ entière : $\det A\times\det B = 1$, deux entiers de produit $1$, donc $\det A = \pm1$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> Les cofacteurs sont des déterminants de matrices entières : entiers. Avec $\det A = \pm1$, $A^{-1} = \pm{}^t\operatorname{com}(A)$ est entière.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\in GL_n(\mathbb Z)\iff\det A = \pm1}$. Exemple : $\begin{pmatrix}2&1\\1&1\end{pmatrix}$, $\det = 2 - 1 = 1$, inverse $\begin{pmatrix}1&-1\\-1&2\end{pmatrix}$.</p>
@@ -545,16 +532,9 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 <p><b>Étape 5 : Conclusion.</b> $\cG{A^p = \Big(\tbinom{p}{j - i}a^{j-i}\Big)_{i\leq j},\quad A^{-1} = \big((-a)^{j-i}\big)_{i\leq j}}$ : c'est la formule de $A^p$ avec $p = -1$.</p>
 
 <h2 id="m-mat2">19. Trouver la matrice d'une application linéaire</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Les images des vecteurs de base se calculent</td><td>La définition : colonne $j$ = coordonnées de $u(e_j)$.</td></tr>
-<tr><td>On a une formule $y = u(x)$</td><td>L'expression analytique $Y = AX$ : on lit $A$.</td></tr>
-<tr><td>La matrice est simple dans une autre base</td><td>Changement de base $A = PA'P^{-1}$ (projecteurs, symétries, réduction).</td></tr>
-</table>
-
 <p class="ml">Exemple 11 : une projection oblique, par l'expression analytique</p>
 <p>Soit $p$ la projection sur $P:\ x + y + z = 0$ parallèlement à $D:\ x = \frac y2 = \frac z3$. <b>Écrire la matrice de $p$ dans la base canonique de $\mathbb R^3$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $p(u)\in P$ et $u - p(u)\in D$.</p>
+<p><b>Étape 1 : Rappel.</b> L'expression analytique $Y = AX$ : on lit $A$.</p>
 <p><b>Étape 2 : $D$.</b> $x = \frac y2 = \frac z3 = t$ donne $(t, 2t, 3t)$ : $D = \operatorname{Vect}(1, 2, 3)$. $1 + 2 + 3 = 6\neq0$, donc $D\not\subset P$ et $\mathbb R^3 = P\oplus D$.</p>
 <p><b>Étape 3 : On écrit.</b> $u = (x, y, z)$, $p(u) = u - \lambda(1, 2, 3) = (x - \lambda, y - 2\lambda, z - 3\lambda)$. Dans $P$ : $(x + y + z) - 6\lambda = 0$, donc $\lambda = \frac{x + y + z}6$.</p>
 <p><b>Étape 4 : Les coordonnées.</b> $x' = x - \frac{x + y + z}6 = \frac{5x - y - z}6$, $y' = y - \frac{2(x + y + z)}6 = \frac{-2x + 4y - 2z}6$, $z' = z - \frac{3(x + y + z)}6 = \frac{-3x - 3y + 3z}6$.</p>
@@ -562,31 +542,21 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 
 <p class="ml">Exemple 12 : la même, par changement de base</p>
 <p><b>Retrouver la matrice de la projection de l'exemple précédent par un changement de base.</b></p>
-<p><b>Étape 1 : Rappel.</b> Dans une base adaptée à $P\oplus D$, la matrice est $\operatorname{diag}(1, 1, 0)$.</p>
+<p><b>Étape 1 : Rappel.</b> Changement de base $A = PA'P^{-1}$ (projecteurs, symétries, réduction).</p>
 <p><b>Étape 2 : La base.</b> $e'_1 = (1, -1, 0)$ et $e'_2 = (1, 0, -1)$ dans $P$ ($1 - 1 + 0 = 0$, $1 + 0 - 1 = 0$), $e'_3 = (1, 2, 3)$ : $Q = \begin{pmatrix}1&1&1\\-1&0&2\\0&-1&3\end{pmatrix}$, la matrice de l'exemple 3.</p>
 <p><b>Étape 3 : Le produit.</b> $A = Q\operatorname{diag}(1, 1, 0)Q^{-1}$. $Q\operatorname{diag}(1, 1, 0)$ efface la 3<sup>e</sup> colonne de $Q$, puis on multiplie par $Q^{-1} = \frac16\begin{pmatrix}2&-4&2\\3&3&-3\\1&1&1\end{pmatrix}$ : ligne 1, $(1, 1, 0)$ donne $\frac16(2 + 3, -4 + 3, 2 - 3) = \frac16(5, -1, -1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> On retrouve $\cG{A = \frac16\begin{pmatrix}5&-1&-1\\-2&4&-2\\-3&-3&3\end{pmatrix}}$ ; méthode plus longue ici, mais elle marche pour tout endomorphisme simple dans une base connue.</p>
 
 <p class="ml">Exemple 13 : $M\mapsto AM$ dans la base $(E_{ij})$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb K)$. <b>Écrire la matrice de $M\mapsto AM$ dans la base canonique $(E_{ij})$ de $\mathcal M_n(\mathbb K)$, puis sa trace et son déterminant.</b></p>
-<p><b>Étape 1 : Rappel.</b> $AE_{ij} = \sum_ka_{ki}E_{kj}$ : la colonne $i$ de $A$ placée en colonne $j$.</p>
+<p><b>Étape 1 : Rappel.</b> La définition : colonne $j$ = coordonnées de $u(e_j)$.</p>
 <p><b>Étape 2 : On ordonne.</b> Ordre $E_{11}, E_{21}, \dots, E_{n1}, E_{12}, \dots$ (colonne par colonne). Les $E_{\cdot j}$ de la colonne $j$ sont envoyés dans $\operatorname{Vect}(E_{1j}, \dots, E_{nj})$, avec la matrice $A$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\operatorname{Mat}(M\mapsto AM) = \operatorname{diag}(A, A, \dots, A)}$ ($n$ blocs) ; donc sa trace vaut $n\operatorname{tr}A$ et son déterminant $(\det A)^n$.</p>
 
 <h2 id="m-rang2">20. Calculer le rang d'une matrice</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Colonnes combinaisons de quelques vecteurs fixes</td><td>$\operatorname{rg}\leq$ nombre de vecteurs, puis une sous-matrice inversible.</td></tr>
-<tr><td>Cas général</td><td>Opérations élémentaires jusqu'à une forme échelonnée.</td></tr>
-<tr><td>$A$ matrice d'un endomorphisme lisible</td><td>Théorème du rang sur l'endomorphisme.</td></tr>
-<tr><td>Paramètre</td><td>Déterminant, puis matrices extraites quand il s'annule.</td></tr>
-<tr><td>Matrice par blocs</td><td>Multiplier par des matrices inversibles par blocs ; $A = PJ_rQ$.</td></tr>
-<tr><td>Rang $1$</td><td>$A = X\,{}^tY$ : toutes les colonnes proportionnelles ; $A^2 = (\operatorname{tr}A)A$.</td></tr>
-</table>
-
 <p class="ml">Exemple 14 : $a_{ij} = (i + j - 1)^2$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb R)$ de coefficients $a_{ij} = (i + j - 1)^2$. <b>Déterminer le rang de $A$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Si toutes les colonnes sont dans $\operatorname{Vect}(U, V, W)$, le rang est $\leq3$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}\leq$ nombre de vecteurs, puis une sous-matrice inversible.</p>
 <p><b>Étape 2 : On développe.</b> $(i + j - 1)^2 = ((i - 1) + j)^2 = (i - 1)^2 + 2j(i - 1) + j^2$. Donc $C_j = U + 2jV + j^2W$ avec $U = ((i - 1)^2)_i$, $V = (i - 1)_i$, $W = (1)_i$.</p>
 <p><b>Étape 3 : Une sous-matrice.</b> Pour $n\geq3$, $\begin{vmatrix}1&4&9\\4&9&16\\9&16&25\end{vmatrix} = 1(225 - 256) - 4(100 - 144) + 9(64 - 81) = -31 + 176 - 153 = -8\neq0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}A = 3\ (n\geq3)}$ ; $n = 1$ : rang $1$ ; $n = 2$ : $\det = 9 - 16 = -7$, rang $2$.</p>
@@ -595,7 +565,7 @@ $$A = \begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\0&0&0&1\end{pmatrix} = I_4 + aN,
 <p>$A\in\mathcal M_4(\mathbb R)$ : $2$ sur la diagonale, $a$ ailleurs. Rang selon $a$.</p>
 $$A = \begin{pmatrix}2&a&a&a\\a&2&a&a\\a&a&2&a\\a&a&a&2\end{pmatrix}.$$
 <p><b>Déterminer le rang de $A$ selon la valeur de $a$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\det\neq0\iff$ rang $4$ ; sinon, chercher la plus grande sous-matrice inversible.</p>
+<p><b>Étape 1 : Rappel.</b> Déterminant, puis matrices extraites quand il s'annule.</p>
 <p><b>Étape 2 : Le déterminant.</b> Chaque ligne a pour somme $2 + 3a$ : on fait $C_1\leftarrow C_1 + C_2 + C_3 + C_4$ et on sort $2 + 3a$, puis $L_i\leftarrow L_i - L_1$ ($i = 2, 3, 4$) :</p>
 $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix} = (2 + 3a)\begin{vmatrix}1&a&a&a\\0&2 - a&0&0\\0&0&2 - a&0\\0&0&0&2 - a\end{vmatrix} = (2 + 3a)(2 - a)^3.$$
 <p>Il s'annule pour $a = 2$ ou $2 + 3a = 0$, soit $a = -\frac23$.</p>
@@ -605,43 +575,34 @@ $$\det A = (2 + 3a)\begin{vmatrix}1&a&a&a\\1&2&a&a\\1&a&2&a\\1&a&a&2\end{vmatrix
 
 <p class="ml">Exemple 16 : le rang d'une matrice par blocs diagonale</p>
 <p>Montrer $\operatorname{rg}\begin{pmatrix}A&0\\0&B\end{pmatrix} = \operatorname{rg}A + \operatorname{rg}B$.</p>
-<p><b>Étape 1 : Rappel.</b> $A = PJ_rQ$ avec $P, Q$ inversibles ; multiplier par des inversibles ne change pas le rang.</p>
+<p><b>Étape 1 : Rappel.</b> Multiplier par des matrices inversibles par blocs ; $A = PJ_rQ$.</p>
 <p><b>Étape 2 : On écrit.</b> $A = PJ_rQ$, $B = P'J_{r'}Q'$, donc $\begin{pmatrix}A&0\\0&B\end{pmatrix} = \begin{pmatrix}P&0\\0&P'\end{pmatrix}\begin{pmatrix}J_r&0\\0&J_{r'}\end{pmatrix}\begin{pmatrix}Q&0\\0&Q'\end{pmatrix}$ (produit par blocs).</p>
 <p><b>Étape 3 : Inversibles.</b> $\det\begin{pmatrix}P&0\\0&P'\end{pmatrix} = \det P\det P'\neq0$, de même pour $Q$.</p>
 <p><b>Étape 4 : Conclusion.</b> Le rang est celui de la matrice du milieu, qui a $r + r'$ coefficients $1$ sur la diagonale : $\cG{r + r'}$.</p>
 
 <h2 id="m-comm">21. Matrices qui commutent, équations matricielles</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Petite taille</td><td>$X = (x_{ij})$, on écrit $AX = XA$ coefficient par coefficient : système linéaire.</td></tr>
-<tr><td>« Pour toute matrice $M$ »</td><td>Appliquer à $M = E_{ij}$, avec $E_{ij}E_{kl} = \delta_{jk}E_{il}$.</td></tr>
-<tr><td>$A$ simple dans une autre base</td><td>$A = PDP^{-1}$, $X = PYP^{-1}$ : chercher $Y$ avec $DY = YD$.</td></tr>
-<tr><td>$X^p = A$</td><td>$X$ commute avec $X^p = A$ : on commence par $AX = XA$.</td></tr>
-<tr><td>Une égalité impossible ($AB - BA = I_n$)</td><td>La trace, le déterminant.</td></tr>
-</table>
-
 <p class="ml">Exemple 17 : le commutant d'un bloc de Jordan</p>
 <p>$A = \begin{pmatrix}1&1\\0&1\end{pmatrix}$. Trouver les $X$ avec $AX = XA$.</p>
-<p><b>Étape 1 : Rappel.</b> On identifie coefficient par coefficient.</p>
+<p><b>Étape 1 : Rappel.</b> $X = (x_{ij})$, on écrit $AX = XA$ coefficient par coefficient : système linéaire.</p>
 <p><b>Étape 2 : Les produits.</b> $X = \begin{pmatrix}x&y\\z&t\end{pmatrix}$ : $AX = \begin{pmatrix}x + z&y + t\\z&t\end{pmatrix}$, $XA = \begin{pmatrix}x&x + y\\z&z + t\end{pmatrix}$.</p>
 <p><b>Étape 3 : On identifie.</b> $x + z = x$ donne $z = 0$ ; $y + t = x + y$ donne $t = x$ ; $t = z + t$ redonne $z = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{X = \begin{pmatrix}x&y\\0&x\end{pmatrix} = xI_2 + yN}$ : les polynômes en $A$.</p>
 
 <p class="ml">Exemple 18 : commuter avec une diagonale à coefficients distincts</p>
 <p>Soit $D = \operatorname{diag}(d_1, \dots, d_n)$ avec des $d_i$ deux à deux distincts. <b>Déterminer les matrices $A$ qui commutent avec $D$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $(AD)_{ij} = a_{ij}d_j$ et $(DA)_{ij} = d_ia_{ij}$.</p>
+<p><b>Étape 1 : Rappel.</b> $X = (x_{ij})$, on écrit $AX = XA$ coefficient par coefficient : système linéaire.</p>
 <p><b>Étape 2 : On compare.</b> $AD = DA\iff\forall i, j,\ (d_i - d_j)a_{ij} = 0$.</p>
 <p><b>Étape 3 : Conclusion.</b> Pour $i\neq j$, $d_i\neq d_j$ donne $a_{ij} = 0$ : $\cG{A\ \text{est diagonale}}$.</p>
 
 <p class="ml">Exemple 19 : commuter avec toutes les matrices</p>
 <p><b>Déterminer les matrices $A\in\mathcal M_n(\mathbb K)$ qui commutent avec toutes les matrices de $\mathcal M_n(\mathbb K)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Tester $M = E_{ij}$ : $AE_{ij} = \sum_ka_{ki}E_{kj}$ et $E_{ij}A = \sum_la_{jl}E_{il}$.</p>
+<p><b>Étape 1 : Rappel.</b> Appliquer à $M = E_{ij}$, avec $E_{ij}E_{kl} = \delta_{jk}E_{il}$.</p>
 <p><b>Étape 2 : On compare</b> les coefficients de ces deux matrices dans la base $(E_{kl})$. Coefficient de $E_{ij}$ : $a_{ii}$ à gauche, $a_{jj}$ à droite, donc $a_{ii} = a_{jj}$. Coefficient de $E_{kj}$ avec $k\neq i$ : $a_{ki}$ à gauche, $0$ à droite, donc $a_{ki} = 0$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{A = \lambda I_n}$ : seules les matrices scalaires commutent avec tout.</p>
 
 <p class="ml">Exemple 20 : $X^2 = E_{13}$ dans $\mathcal M_3(\mathbb R)$</p>
 <p><b>Résoudre dans $\mathcal M_3(\mathbb R)$ l'équation $X^2 = E_{13}$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $X$ commute avec $X^2 = A$.</p>
+<p><b>Étape 1 : Rappel.</b> $X$ commute avec $X^p = A$ : on commence par $AX = XA$.</p>
 <p><b>Étape 2 : $AX = XA$.</b> $AX$ a pour seule ligne non nulle la ligne $1$, égale à la ligne $3$ de $X$ : $(g, h, i)$. $XA$ a pour seule colonne non nulle la colonne $3$, égale à la colonne $1$ de $X$ : $(a, d, g)$. Donc $g = h = 0$, $d = 0$, $i = a$.</p>
 <p><b>Étape 3 : On élève au carré.</b> $X = \begin{pmatrix}a&b&c\\0&e&f\\0&0&a\end{pmatrix}$ : $X^2 = \begin{pmatrix}a^2&ab + be&2ac + bf\\0&e^2&ef + fa\\0&0&a^2\end{pmatrix}$.</p>
 <p><b>Étape 4 : On identifie</b> avec $E_{13}$ : $a^2 = 0$ et $e^2 = 0$, donc $a = e = 0$ ; il reste $bf = 1$.</p>
@@ -1007,22 +968,9 @@ $$D_n - D_{n-1} = D_{n-1} - D_{n-2} = \cdots = D_2 - D_1 = 1\qquad\Longrightarro
 <p>Vérification : $D_4 = 5$. C'est la méthode pour toutes les matrices « en bande ».</p>
 
 <h2 id="d-sf">13. Calculer un déterminant : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Ce que tu vois</th><th>Méthode</th></tr>
-<tr><td>Une ligne ou colonne avec beaucoup de $0$</td><td><b>Développer</b> selon cette rangée.</td></tr>
-<tr><td>Même somme sur chaque ligne</td><td>$C_1\leftarrow C_1 + \dots + C_n$, sortir la somme, puis $L_i\leftarrow L_i - L_1$.</td></tr>
-<tr><td>Une « flèche », une matrice presque triangulaire</td><td>Une <b>combinaison de colonnes</b> qui annule la flèche.</td></tr>
-<tr><td>Le même vecteur dans toutes les colonnes</td><td><b>Multilinéarité</b> : les déterminants avec deux fois ce vecteur sont nuls.</td></tr>
-<tr><td>Tridiagonale, taille $n$ quelconque</td><td><b>Récurrence</b> d'ordre $2$ en développant, puis suite récurrente linéaire.</td></tr>
-<tr><td>Coefficients dépendant de $x$</td><td><b>Polynôme</b> en $x$ : degré, racines évidentes, coefficient dominant.</td></tr>
-<tr><td>$D(x)$ dérivable, colonnes dérivées simples</td><td><b>Dériver</b> colonne par colonne.</td></tr>
-<tr><td>Matrice par blocs</td><td>Opérations ou produits par blocs pour se ramener à une triangulaire par blocs.</td></tr>
-<tr><td>Un cas particulier gênant ($a_i = 0$…)</td><td><b>Continuité</b> du déterminant (polynôme en les coefficients).</td></tr>
-</table>
-
 <p class="ml">Exemple : la flèche</p>
 <p>$\Delta = \begin{vmatrix}0&1&1&\cdots&1\\1&a_1&0&\cdots&0\\1&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\1&0&\cdots&0&a_n\end{vmatrix}$ avec tous les $a_i\neq0$. <b>Calculer $\Delta$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Ajouter à une colonne une combinaison des autres ne change pas le déterminant.</p>
+<p><b>Étape 1 : Rappel.</b> Une <b>combinaison de colonnes</b> qui annule la flèche.</p>
 <p><b>Étape 2 : L'opération.</b> $C_0\leftarrow C_0 - \sum_{i=1}^n\frac1{a_i}C_i$. Ligne $i\geq1$ : $1 - \frac1{a_i}\times a_i = 0$. Ligne $0$ : $0 - \sum_i\frac1{a_i}\times1 = -\sum_i\frac1{a_i}$.</p>
 <p><b>Étape 3 : Triangulaire.</b> Après l'opération, la 1<sup>re</sup> colonne n'a plus qu'un coefficient non nul, en haut :</p>
 $$\Delta = \begin{vmatrix}-\sum_i\frac1{a_i}&1&1&\cdots&1\\0&a_1&0&\cdots&0\\0&0&a_2&&\vdots\\\vdots&\vdots&&\ddots&0\\0&0&\cdots&0&a_n\end{vmatrix} = \Big(-\sum_i\frac1{a_i}\Big)\times a_1\times a_2\times\cdots\times a_n.$$
@@ -1031,7 +979,7 @@ $$\Delta = \begin{vmatrix}-\sum_i\frac1{a_i}&1&1&\cdots&1\\0&a_1&0&\cdots&0\\0&0
 <p class="ml">Exemple : $a$ sur la diagonale, $b$ ailleurs</p>
 $$D_n(a, b) = \begin{vmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{vmatrix},\qquad\text{par exemple}\quad D_3 = \begin{vmatrix}a&b&b\\b&a&b\\b&b&a\end{vmatrix}.$$
 <p><b>Calculer $D_n(a, b)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Chaque ligne a la même somme : $C_1\leftarrow C_1 + \dots + C_n$.</p>
+<p><b>Étape 1 : Rappel.</b> $C_1\leftarrow C_1 + \dots + C_n$, sortir la somme, puis $L_i\leftarrow L_i - L_1$.</p>
 <p><b>Étape 2 : La somme.</b> Chaque ligne contient un $a$ et $n - 1$ fois $b$ : somme $a + (n - 1)b$. On la sort de la colonne $1$, qui devient remplie de $1$.</p>
 <p><b>Étape 3 : $L_i\leftarrow L_i - L_1$.</b> Ligne $1$ : $(1, b, \dots, b)$. Ligne $i$ : $1 - 1 = 0$ en colonne $1$, $a - b$ en colonne $i$, $b - b = 0$ ailleurs :</p>
 $$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\1&b&\cdots&a\end{vmatrix} = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\0&a - b&&0\\\vdots&&\ddots&\\0&0&&a - b\end{vmatrix}\quad\text{(triangulaire)}.$$
@@ -1039,7 +987,7 @@ $$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\dd
 
 <p class="ml">Exemple : la même par multilinéarité</p>
 <p><b>Retrouver $D_n(a, b)$ par la multilinéarité du déterminant.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\det$ est linéaire en chaque colonne et nul si deux colonnes sont égales.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Multilinéarité</b> : les déterminants avec deux fois ce vecteur sont nuls.</p>
 <p><b>Étape 2 : Les colonnes.</b> Avec $V = (1, \dots, 1)$ : $C_j = (a - b)E_j + bV$.</p>
 <p><b>Étape 3 : On développe.</b> Les termes contenant $bV$ au moins deux fois sont nuls. Il reste $\det((a - b)E_1, \dots, (a - b)E_n) = (a - b)^n$ et les $n$ termes où $bV$ remplace la $j$-ième colonne : chacun vaut $(a - b)^{n-1}b$ (développer selon la ligne $j$).</p>
 <p><b>Étape 4 : Conclusion.</b> $(a - b)^n + nb(a - b)^{n-1} = (a - b)^{n-1}(a - b + nb)$ : on retrouve $\cG{(a + (n - 1)b)(a - b)^{n-1}}$.</p>
@@ -1048,7 +996,7 @@ $$D_n = (a + (n - 1)b)\begin{vmatrix}1&b&\cdots&b\\1&a&\ddots&\vdots\\\vdots&\dd
 <p>$D_n$ : $a + b$ sur la diagonale, $ab$ au-dessus, $1$ en dessous. ($a\neq b$.)</p>
 $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots&\ddots&0\\\vdots&\ddots&\ddots&a + b&ab\\0&\cdots&0&1&a + b\end{vmatrix}.$$
 <p><b>Calculer $D_n$ pour tout $n\geq1$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Développer selon la 1<sup>re</sup> colonne donne une récurrence d'ordre $2$ ; puis $r^2 = (a + b)r - ab$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Récurrence</b> d'ordre $2$ en développant, puis suite récurrente linéaire.</p>
 <p><b>Étape 2 : Le développement.</b> Colonne $1$ : $(a + b)$ en ligne $1$ (mineur $D_{n-1}$) et $1$ en ligne $2$ (signe $-$). Ce second mineur a pour 1<sup>re</sup> ligne $(ab, 0, \dots, 0)$ : il vaut $ab\,D_{n-2}$. Donc $D_n = (a + b)D_{n-1} - abD_{n-2}$.</p>
 <p><b>Étape 3 : Les débuts.</b> $D_1 = a + b$, $D_2 = (a + b)^2 - ab\times1 = a^2 + ab + b^2$ ; on pose $D_0 = 1$ (alors $(a + b)^2 - ab = a^2 + ab + b^2$ ✓).</p>
 <p><b>Étape 4 : La suite récurrente.</b> $r^2 - (a + b)r + ab = (r - a)(r - b)$ : racines $a, b$, donc $D_n = \lambda a^n + \mu b^n$. $n = 0$ : $\lambda + \mu = 1$. $n = 1$ : $\lambda a + \mu b = a + b$. On remplace $\mu = 1 - \lambda$ : $\lambda a + b - \lambda b = a + b$, soit $\lambda(a - b) = a$, $\lambda = \frac a{a - b}$, puis $\mu = 1 - \frac a{a - b} = \frac{-b}{a - b}$. Donc $D_n = \frac{a\cdot a^n - b\cdot b^n}{a - b}$.</p>
@@ -1056,7 +1004,7 @@ $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots
 
 <p class="ml">Exemple : la matrice compagnon, par récurrence sur la dernière colonne</p>
 <p>$C(a_0, \dots, a_n) = \begin{vmatrix}a_0&-1&0&\cdots&0\\a_1&x&-1&&\vdots\\\vdots&&\ddots&\ddots&0\\a_{n-1}&0&&x&-1\\a_n&0&\cdots&0&x\end{vmatrix}$. <b>Calculer ce déterminant.</b></p>
-<p><b>Étape 1 : Rappel.</b> La dernière colonne n'a que deux termes non nuls : $-1$ et $x$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Développer</b> selon cette rangée.</p>
 <p><b>Étape 2 : Le développement.</b> Le $x$ (position $(n, n)$, signe $+$) donne $x\,C(a_0, \dots, a_{n-1})$. Le $-1$ (ligne de $a_{n-1}$, signe $-$) donne $(-1)\times(-1)\times\Delta' = \Delta'$, où $\Delta'$ est le mineur obtenu en barrant cette ligne et la dernière colonne. On développe $\Delta'$ selon sa dernière ligne $(a_n, 0, \dots, 0)$ : il reste $a_n$ fois un déterminant triangulaire de diagonale $-1, \dots, -1$, et les signes $(-1)^{n+1}\times(-1)^{n-1} = 1$ se compensent : $\Delta' = a_n$.</p>
 <p><b>Étape 3 : La récurrence.</b> $C(a_0, \dots, a_n) = x\,C(a_0, \dots, a_{n-1}) + a_n$, avec $C(a_0) = a_0$. Puis $C(a_0, a_1) = a_0x + a_1$ (contrôle : $a_0x - (-1)a_1$ ✓).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{C = a_0x^n + a_1x^{n-1} + \dots + a_{n-1}x + a_n}$ (Horner).</p>
@@ -1065,7 +1013,7 @@ $$D_n = \begin{vmatrix}a + b&ab&0&\cdots&0\\1&a + b&ab&\ddots&\vdots\\0&1&\ddots
 <p>$D_n(x)$ d'ordre $n + 1$ : diagonale $1, 1 - x, 2 - x, \dots, n - x$, et des $1$ partout ailleurs.</p>
 $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\vdots\\\vdots&\vdots&\ddots&\ddots&1\\1&1&\cdots&1&n - x\end{vmatrix}.$$
 <p><b>Montrer que $D_n(x)$ est un polynôme en $x$ et le factoriser.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\det = \sum_\sigma\varepsilon(\sigma)\prod m_{\sigma(i)i}$ : un polynôme en $x$. Deux lignes égales $\Rightarrow\det = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Polynôme</b> en $x$ : degré, racines évidentes, coefficient dominant.</p>
 <p><b>Étape 2 : Le degré.</b> $x$ n'apparaît que sur la diagonale ($n$ fois) ; le terme en $x^n$ vient du produit diagonal, de coefficient $(-1)^n$.</p>
 <p><b>Étape 3 : Les racines.</b> Pour $x = k$ ($0\leq k\leq n - 1$), la ligne de diagonale $(k + 1) - x$ vaut $1$ en cette position : elle est égale à la 1<sup>re</sup> ligne (toute de $1$). Donc $D_n(k) = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $n$ racines distinctes, degré $n$, coefficient dominant $(-1)^n$ : $\cG{D_n(x) = (-1)^n\prod_{k=0}^{n-1}(x - k)}$.</p>
@@ -1080,7 +1028,7 @@ $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\
 
 <p class="ml">Exemple : dériver un déterminant</p>
 <p>$D_n(x) = \begin{vmatrix}x&1&&0\\\frac{x^2}{2!}&x&\ddots&\\\vdots&\ddots&\ddots&1\\\frac{x^n}{n!}&\cdots&\frac{x^2}{2!}&x\end{vmatrix}$. Calculer $D_n'$, puis $D_n$.</p>
-<p><b>Étape 1 : Rappel.</b> $D' = \sum_j\det(C_1, \dots, C_j', \dots, C_n)$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Dériver</b> colonne par colonne.</p>
 <p><b>Étape 2 : Les colonnes dérivées.</b> $\big(\frac{x^k}{k!}\big)' = \frac{x^{k-1}}{(k - 1)!}$ : la dérivée de $C_j$ est $C_{j+1}$ pour $j \lt n$ ; ces déterminants ont deux colonnes égales, ils sont nuls.</p>
 <p><b>Étape 3 : Le dernier.</b> $C_n' = (0, \dots, 0, 1)$ : en développant selon cette colonne, il reste $D_{n-1}(x)$. Donc $D_n' = D_{n-1}$.</p>
 <p><b>Étape 4 : On intègre.</b> En $x = 0$, la 1<sup>re</sup> colonne $\big(x, \frac{x^2}{2!}, \dots\big)$ est nulle, donc $D_n(0) = 0$. Avec $D_1 = x$ : $D_2' = D_1 = x$ et $D_2(0) = 0$ donnent $D_2 = \frac{x^2}2$ ; par récurrence, si $D_{n-1} = \frac{x^{n-1}}{(n - 1)!}$, alors $D_n = \frac{x^n}{n!}$.</p>
@@ -1088,21 +1036,21 @@ $$D_n(x) = \begin{vmatrix}1&1&1&\cdots&1\\1&1 - x&1&\cdots&1\\1&1&2 - x&\ddots&\
 
 <p class="ml">Exemple : un déterminant par blocs $\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix}$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb K)$ et $a, b, c, d\in\mathbb K$. <b>Calculer $\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix}$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Ajouter à une colonne un multiple d'une autre ne change pas le déterminant ; une triangulaire par blocs a pour déterminant le produit des déterminants des blocs diagonaux.</p>
+<p><b>Étape 1 : Rappel.</b> Opérations ou produits par blocs pour se ramener à une triangulaire par blocs.</p>
 <p><b>Étape 2 : L'opération</b> (pour $d\neq0$) : $C_i\leftarrow C_i - \frac cdC_{i+n}$, $1\leq i\leq n$. En bas : $cA - \frac cd\times dA = 0$. En haut : $aA - \frac cd\times bA = \frac{ad - bc}dA$.</p>
 <p><b>Étape 3 : Triangulaire par blocs.</b> $\det = \det\Big(\frac{ad - bc}dA\Big)\det(dA) = \Big(\frac{ad - bc}d\Big)^n\det A\times d^n\det A$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\begin{vmatrix}aA&bA\\cA&dA\end{vmatrix} = (ad - bc)^n(\det A)^2}$, vrai aussi si $d = 0$ par continuité (polynôme en $d$).</p>
 
 <p class="ml">Exemple : $\det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\geq0$</p>
 <p>Soient $A, B\in\mathcal M_n(\mathbb R)$. <b>Montrer que $\det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\geq0$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Opérations par blocs avec le coefficient complexe $i$, et $\det\overline M = \overline{\det M}$.</p>
+<p><b>Étape 1 : Rappel.</b> Opérations ou produits par blocs pour se ramener à une triangulaire par blocs.</p>
 <p><b>Étape 2 : Colonnes.</b> $C_j\leftarrow C_j + iC_{j+n}$ : $\begin{vmatrix}A + iB&B\\-B + iA&A\end{vmatrix} = \begin{vmatrix}A + iB&B\\i(A + iB)&A\end{vmatrix}$ (car $i(A + iB) = iA - B$).</p>
 <p><b>Étape 3 : Lignes.</b> $L_{k+n}\leftarrow L_{k+n} - iL_k$ : en bas à gauche $i(A + iB) - i(A + iB) = 0$, en bas à droite $A - iB$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\det = \det(A + iB)\det(A - iB) = \det(A + iB)\overline{\det(A + iB)}$ ($A, B$ réelles), soit $\cG{|\det(A + iB)|^2\geq0}$.</p>
 
 <p class="ml">Exemple : $\chi_{AB} = \chi_{BA}$ par des produits par blocs</p>
 <p>$A\in\mathcal M_{n,p}$, $B\in\mathcal M_{p,n}$. Comparer $\chi_{AB}$ et $\chi_{BA}$.</p>
-<p><b>Étape 1 : Rappel.</b> $\det(MN) = \det M\det N$ et le déterminant d'une triangulaire par blocs.</p>
+<p><b>Étape 1 : Rappel.</b> Opérations ou produits par blocs pour se ramener à une triangulaire par blocs.</p>
 <p><b>Étape 2 : Premier produit.</b> $U = \begin{pmatrix}xI_n&A\\B&I_p\end{pmatrix}$. Bloc par bloc : $xI_n\cdot I_n + A\cdot(-B) = xI_n - AB$ ; $xI_n\cdot0 + A\cdot I_p = A$ ; $B\cdot I_n + I_p\cdot(-B) = 0$ ; $B\cdot0 + I_p\cdot I_p = I_p$ :</p>
 $$U\begin{pmatrix}I_n&0\\-B&I_p\end{pmatrix} = \begin{pmatrix}xI_n - AB&A\\0&I_p\end{pmatrix},\quad\text{donc}\quad\det U\times1 = \det(xI_n - AB)\times1 = \chi_{AB}(x).$$
 <p><b>Étape 3 : Second produit.</b> Bloc par bloc : $xI_n\cdot I_n + A\cdot0 = xI_n$ ; $xI_n\cdot(-A) + A\cdot xI_p = 0$ ; $B\cdot I_n + I_p\cdot0 = B$ ; $B\cdot(-A) + I_p\cdot xI_p = xI_p - BA$ :</p>
@@ -1434,21 +1382,9 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 <p>Contrôle : $\begin{pmatrix}1&1\\-1&3\end{pmatrix}\cdot\frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix} = \frac14\begin{pmatrix}4&0\\0&4\end{pmatrix} = I_2$.</p>
 
 <h2 id="r-sfelts">11. Trouver les éléments propres : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Dimension infinie, ou endomorphisme défini par une formule</td><td>La <b>définition</b> : résoudre $u(x) = \lambda x$, $x\neq0$, en discutant selon $\lambda$.</td></tr>
-<tr><td>On trouve une relation $P(u) = 0$</td><td>$\operatorname{Sp}(u)\subset\{\text{racines de}\ P\}$, puis on teste chaque racine.</td></tr>
-<tr><td>Petite taille ($n\leq3$, parfois $4$)</td><td>$\chi_A = \det(XI_n - A)$, en faisant des zéros avant de développer.</td></tr>
-<tr><td>Mêmes sommes sur les lignes (ou colonnes)</td><td>$(1, \dots, 1)$ est vecteur propre de $A$ (ou de $\,{}^tA$), puis <b>trace et déterminant</b> pour les autres.</td></tr>
-<tr><td>$A - \lambda I$ de petit rang $r$</td><td>$\lambda$ valeur propre d'ordre $\geq n - r$ ; les autres par la trace (et $\operatorname{tr}A^2$).</td></tr>
-<tr><td>Symétries visibles dans la matrice</td><td>Des <b>vecteurs propres évidents</b> ($e_i\pm e_j$…).</td></tr>
-<tr><td>$A = aI_n + bB$, $A = P(B)$</td><td>Les éléments propres de $B$ suffisent.</td></tr>
-<tr><td>Un sev stable visible</td><td>Réduire l'endomorphisme induit (taille plus petite).</td></tr>
-</table>
-
 <p class="ml">Exemple 3 : $u(M) = \operatorname{tr}(A)M - \operatorname{tr}(M)A$, par la définition puis par un annulateur</p>
 <p>$A\neq0$ fixée dans $\mathcal M_n(\mathbb K)$. Éléments propres de $u$ ; $u$ est-il diagonalisable ?</p>
-<p><b>Étape 1 : Rappel.</b> On cherche $\lambda$ et $M\neq0$ avec $u(M) = \lambda M$ ; ou on cherche $P$ avec $P(u) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : résoudre $u(x) = \lambda x$, $x\neq0$, en discutant selon $\lambda$.</p>
 <p><b>Étape 2 : Un annulateur.</b> $\operatorname{tr}(u(M)) = \operatorname{tr}A\operatorname{tr}M - \operatorname{tr}M\operatorname{tr}A = 0$, donc $u^2(M) = \operatorname{tr}(A)u(M) - \operatorname{tr}(u(M))A = \operatorname{tr}(A)u(M)$. Ainsi $X(X - \operatorname{tr}A)$ annule $u$.</p>
 <p><b>Étape 3 : Cas $\operatorname{tr}A\neq0$.</b> Annulateur scindé à racines simples $0$ et $\operatorname{tr}A$ : $u$ diagonalisable. $E_{\operatorname{tr}A}$ : $u(M) = \operatorname{tr}(A)M\iff\operatorname{tr}(M)A = 0\iff\operatorname{tr}M = 0$, un hyperplan. $E_0$ : $\operatorname{tr}(A)M = \operatorname{tr}(M)A$, donc $M\in\mathbb KA$, et $u(A) = \operatorname{tr}(A)A - \operatorname{tr}(A)A = 0$ : $E_0 = \mathbb KA$.</p>
 <p><b>Étape 4 : Cas $\operatorname{tr}A = 0$.</b> $X^2$ annule $u$ : seule valeur propre $0$. Si $u$ était diagonalisable, il serait nul ; or $u(I_n) = 0 - nA\neq0$ (si $n\neq0$ dans $\mathbb K$).</p>
@@ -1456,7 +1392,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 
 <p class="ml">Exemple 4 : un opérateur intégral, en dimension infinie</p>
 <p>$E = \mathcal C([0, 1], \mathbb R)$, $\varphi(f) = F$ avec $F(x) = \frac1x\int_0^xf$ ($x > 0$), $F(0) = f(0)$. <b>Déterminer les valeurs propres et les vecteurs propres de $\varphi$.</b></p>
-<p><b>Étape 1 : Rappel.</b> La définition : $\varphi(f) = \lambda f$, $f\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : résoudre $u(x) = \lambda x$, $x\neq0$, en discutant selon $\lambda$.</p>
 <p><b>Étape 2 : On dérive.</b> $\int_0^xf = \lambda xf(x)$ pour $x\in]0, 1]$. Si $\lambda = 0$, $\int_0^xf = 0$ et en dérivant $f = 0$ : $0$ n'est pas valeur propre. Si $\lambda\neq0$, $f(x) = \frac1{\lambda x}\int_0^xf$ est dérivable sur $]0, 1]$ et en dérivant $f(x) = \lambda f(x) + \lambda xf'(x)$.</p>
 <p><b>Étape 3 : L'équation différentielle.</b> $f'(x) = \frac{1 - \lambda}{\lambda x}f(x)$, donc $f(x) = Cx^{\frac{1 - \lambda}\lambda}$ (primitive de $\frac{1 - \lambda}{\lambda x}$ : $\frac{1 - \lambda}\lambda\ln x$).</p>
 <p><b>Étape 4 : Le prolongement en $0$.</b> $f$ doit être continue en $0$ : il faut $\frac{1 - \lambda}\lambda\geq0$, soit $\lambda\in]0, 1]$. Réciproquement, $\int_0^xt^\alpha\,dt = \frac{x^{\alpha+1}}{\alpha + 1}$ avec $\alpha + 1 = \frac1\lambda$ donne $\varphi(f) = \lambda f$.</p>
@@ -1464,7 +1400,7 @@ $$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&
 
 <p class="ml">Exemple 5 : $A^2 = A + 2I_3$</p>
 <p>$a\neq0$, $A = \begin{pmatrix}0&a&a^2\\\frac1a&0&a\\\frac1{a^2}&\frac1a&0\end{pmatrix}$. <b>Montrer que $A^2 = A + 2I_3$ et en déduire les valeurs propres de $A$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Les valeurs propres sont parmi les racines d'un annulateur.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Sp}(u)\subset\{\text{racines de}\ P\}$, puis on teste chaque racine.</p>
 <p><b>Étape 2 : On écrit $A = B - I_3$.</b> $B$ a des $1$ sur la diagonale, ses lignes sont proportionnelles (ligne $1 = a^2\times$ ligne $3$, ligne $2 = a\times$ ligne $3$) : $\operatorname{rg}B = 1$, $\operatorname{tr}B = 3$, donc $B^2 = 3B$.</p>
 <p><b>Étape 3 : L'annulateur.</b> $A^2 = B^2 - 2B + I_3 = 3B - 2B + I_3 = B + I_3 = (A + I_3) + I_3 = A + 2I_3$. Donc $X^2 - X - 2 = (X + 1)(X - 2)$ annule $A$.</p>
 <p><b>Étape 4 : Les deux sont valeurs propres.</b> Si une seule l'était, $A$ (diagonalisable : annulateur à racines simples) serait scalaire, ce qui est faux.</p>
@@ -1480,7 +1416,7 @@ $$C = \begin{pmatrix}0&0&\cdots&0&-a_0\\1&0&\cdots&0&-a_1\\0&1&\ddots&\vdots&\vd
 
 <p class="ml">Exemple 7 : lignes de même somme, trace et déterminant</p>
 <p>$A = \begin{pmatrix}6&-6&5\\-4&-1&10\\7&-6&4\end{pmatrix}$. <b>Déterminer les valeurs propres de $A$ sans calculer $\chi_A$ en entier.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\sum\lambda_i = \operatorname{tr}A$ et $\prod\lambda_i = \det A$ (avec multiplicités).</p>
+<p><b>Étape 1 : Rappel.</b> $(1, \dots, 1)$ est vecteur propre de $A$ (ou de $\,{}^tA$), puis <b>trace et déterminant</b> pour les autres.</p>
 <p><b>Étape 2 : Une valeur propre.</b> Sommes des lignes : $6 - 6 + 5 = 5$, $-4 - 1 + 10 = 5$, $7 - 6 + 4 = 5$. Donc $A(1, 1, 1) = 5(1, 1, 1)$.</p>
 <p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 6 + (-1) + 4 = 9$. Le déterminant, développé selon la 1<sup>re</sup> ligne :</p>
 $$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\7&4\end{vmatrix} + 5\begin{vmatrix}-4&-1\\7&-6\end{vmatrix} = 6(-4 + 60) + 6(-16 - 70) + 5(24 + 7) = 336 - 516 + 155 = -25.$$
@@ -1490,7 +1426,7 @@ $$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\
 
 <p class="ml">Exemple 8 : petit rang, puis la trace</p>
 <p>$A = \begin{pmatrix}6&-6&5\\14&-13&10\\7&-6&4\end{pmatrix}$. <b>Déterminer les valeurs propres de $A$ et dire si $A$ est diagonalisable.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(A - \lambda I) = r\Rightarrow\lambda$ est d'ordre $\geq n - r$.</p>
+<p><b>Étape 1 : Rappel.</b> $\lambda$ valeur propre d'ordre $\geq n - r$ ; les autres par la trace (et $\operatorname{tr}A^2$).</p>
 <p><b>Étape 2 : $A + I_3$.</b> $\begin{pmatrix}7&-6&5\\14&-12&10\\7&-6&5\end{pmatrix}$ : $L_2 = 2L_1$, $L_3 = L_1$, rang $1$. Donc $-1$ est d'ordre $\geq2$.</p>
 <p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = 6 - 13 + 4 = -3 = -1 - 1 + \lambda$, donc $\lambda = -1$ : $-1$ est triple.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{-1\},\ \dim E_{-1} = 2 \lt 3}$ : non diagonalisable (sinon $A = -I_3$).</p>
@@ -1499,7 +1435,7 @@ $$\det A = 6\begin{vmatrix}-1&10\\-6&4\end{vmatrix} - (-6)\begin{vmatrix}-4&10\\
 <p>$A\in\mathcal M_n(\mathbb R)$ : $1$ sur la première et la dernière ligne, sur la première et la dernière colonne, $0$ ailleurs ($n\geq3$).</p>
 $$A = \begin{pmatrix}1&1&\cdots&1&1\\1&0&\cdots&0&1\\\vdots&\vdots&&\vdots&\vdots\\1&0&\cdots&0&1\\1&1&\cdots&1&1\end{pmatrix},\qquad\text{par exemple}\quad\begin{pmatrix}1&1&1&1\\1&0&0&1\\1&0&0&1\\1&1&1&1\end{pmatrix}\ (n = 4).$$
 <p><b>Déterminer les valeurs propres de $A$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}A = r$ donne $0$ d'ordre $\geq n - r$ ; puis $\lambda + \mu = \operatorname{tr}A$ et $\lambda^2 + \mu^2 = \operatorname{tr}(A^2)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\lambda$ valeur propre d'ordre $\geq n - r$ ; les autres par la trace (et $\operatorname{tr}A^2$).</p>
 <p><b>Étape 2 : Le rang.</b> Les colonnes $2, \dots, n - 1$ valent toutes $(1, 0, \dots, 0, 1)$, les colonnes $1$ et $n$ valent $(1, \dots, 1)$ : rang $2$. Donc $0$ est d'ordre $\geq n - 2$.</p>
 <p><b>Étape 3 : Les deux autres.</b> $\operatorname{tr}A = 1 + 1 = 2$. $\operatorname{tr}(A^2) = \sum_{i,j}a_{ij}a_{ji} = \sum a_{ij}^2$ ($A$ symétrique) = nombre de $1$ = $4n - 4$. Donc $\lambda + \mu = 2$ et $\lambda^2 + \mu^2 = 4n - 4$.</p>
 <p><b>Étape 4 : On résout.</b> $2\lambda\mu = (\lambda + \mu)^2 - (\lambda^2 + \mu^2) = 4 - 4n + 4 = 8 - 4n$, $\lambda\mu = 4 - 2n$. Racines de $t^2 - 2t + 4 - 2n$ : $t = 1\pm\sqrt{1 - 4 + 2n} = 1\pm\sqrt{2n - 3}$.</p>
@@ -1509,14 +1445,14 @@ $$A = \begin{pmatrix}1&1&\cdots&1&1\\1&0&\cdots&0&1\\\vdots&\vdots&&\vdots&\vdot
 <p>$A_n(a, b)\in\mathcal M_{2n}$ : $a$ sur la diagonale, $b$ sur l'anti-diagonale, $0$ ailleurs ($b\neq0$).</p>
 $$A_n(a, b) = \begin{pmatrix}a&&&&&b\\&\ddots&&&\cdot^{\cdot^{\cdot}}&\\&&a&b&&\\&&b&a&&\\&\cdot^{\cdot^{\cdot}}&&&\ddots&\\b&&&&&a\end{pmatrix},\qquad\text{par exemple}\quad A_2(a, b) = \begin{pmatrix}a&0&0&b\\0&a&b&0\\0&b&a&0\\b&0&0&a\end{pmatrix}.$$
 <p><b>Déterminer les éléments propres de $A_n(a, b)$ et dire si elle est diagonalisable.</b></p>
-<p><b>Étape 1 : Rappel.</b> La symétrie $i\leftrightarrow2n + 1 - i$ suggère $e_i\pm e_{2n+1-i}$.</p>
+<p><b>Étape 1 : Rappel.</b> Des <b>vecteurs propres évidents</b> ($e_i\pm e_j$…).</p>
 <p><b>Étape 2 : Les images.</b> $Ae_i = ae_i + be_{2n+1-i}$. Donc $A(e_i + e_{2n+1-i}) = (a + b)(e_i + e_{2n+1-i})$ et $A(e_i - e_{2n+1-i}) = (a - b)(e_i - e_{2n+1-i})$.</p>
 <p><b>Étape 3 : Le compte.</b> Pour $i = 1, \dots, n$ : $n$ vecteurs libres pour $a + b$, $n$ pour $a - b$, et les $2n$ ensemble forment une base.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{diagonalisable},\ \operatorname{Sp} = \{a + b, a - b\},\ \text{chacune d'ordre}\ n}$, et $\chi_A = \big((X - a)^2 - b^2\big)^n$ sans calcul de déterminant.</p>
 
 <p class="ml">Exemple 11 : $A = aI_n + bJ_n$</p>
 <p>Soient $a, b\in\mathbb R$, $b\neq0$, $J_n$ la matrice de taille $n$ remplie de $1$, et $A = aI_n + bJ_n$. <b>Déterminer les valeurs propres de $A$, dire si $A$ est diagonalisable et calculer $\det A$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $AX = \lambda X\iff bJX = (\lambda - a)X$ : les éléments propres de $J$ suffisent.</p>
+<p><b>Étape 1 : Rappel.</b> Les éléments propres de $B$ suffisent.</p>
 <p><b>Étape 2 : $J$.</b> $J^2 = nJ$ annule $J$, $\operatorname{Sp}J\subset\{0, n\}$. $E_0(J)$ : $x_1 + \dots + x_n = 0$, hyperplan. $J(1, \dots, 1) = n(1, \dots, 1)$ : $E_n(J) = \operatorname{Vect}(1, \dots, 1)$.</p>
 <p><b>Étape 3 : On transporte.</b> $\lambda = a + b\times0 = a$ sur l'hyperplan, $\lambda = a + nb$ sur la droite.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Sp}(A) = \{a\ (n - 1\ \text{fois}),\ a + nb\}}$, $A$ diagonalisable et $\det A = a^{n-1}(a + nb)$. Pour la matrice « $a$ sur la diagonale, $b$ ailleurs » $= (a - b)I_n + bJ_n$ : valeurs propres $a - b$ ($n - 1$ fois) et $a - b + nb = a + (n - 1)b$.</p>
@@ -1525,7 +1461,7 @@ $$A_n(a, b) = \begin{pmatrix}a&&&&&b\\&\ddots&&&\cdot^{\cdot^{\cdot}}&\\&&a&b&&\
 <p>$J_n$ : $1$ sur la sur-diagonale et en position $(n, 1)$, $0$ ailleurs.</p>
 $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddots&0\\0&&&0&1\\1&0&\cdots&0&0\end{pmatrix},\qquad C(a_0, \dots, a_{n-1}) = \begin{pmatrix}a_0&a_1&\cdots&a_{n-1}\\a_{n-1}&a_0&\ddots&\vdots\\\vdots&\ddots&\ddots&a_1\\a_1&\cdots&a_{n-1}&a_0\end{pmatrix}.$$
 <p><b>Déterminer les valeurs propres de $J_n$, montrer qu'elle est diagonalisable, puis en déduire celles d'une matrice circulante.</b></p>
-<p><b>Étape 1 : Rappel.</b> $J_nX = \lambda X$ à résoudre ; $C(a_0, \dots, a_{n-1}) = \sum a_kJ_n^k$ (matrice circulante).</p>
+<p><b>Étape 1 : Rappel.</b> Les éléments propres de $B$ suffisent.</p>
 <p><b>Étape 2 : On résout.</b> $J_nX = (x_2, x_3, \dots, x_n, x_1) = \lambda(x_1, \dots, x_n)$ : $x_k = \lambda^{k-1}x_1$ et $x_1 = \lambda^nx_1$, avec $x_1\neq0$ : $\lambda^n = 1$.</p>
 <p><b>Étape 3 : Diagonalisable.</b> Les $n$ racines $n$-ièmes $\omega^k$ ($\omega = e^{2i\pi/n}$) sont valeurs propres, de vecteurs $(1, \omega^k, \dots, \omega^{(n-1)k})$ : $n$ valeurs propres distinctes, $J_n = PDP^{-1}$ avec $D = \operatorname{diag}(1, \omega, \dots, \omega^{n-1})$.</p>
 <p><b>Étape 4 : Conclusion.</b> $C = \sum a_kJ_n^k = P\Big(\sum a_kD^k\Big)P^{-1}$ : $\cG{\text{les circulantes sont diagonalisables, de valeurs propres}\ \sum_ka_k\omega^{jk}}$.</p>
@@ -1539,27 +1475,16 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 <p><b>Étape 5 : Conclusion.</b> $\cG{A = PDP^{-1},\ D = \operatorname{diag}(3, 3, -3),\ P = (u\mid v\mid w),\ P^{-1} = {}^tP}$.</p>
 
 <h2 id="r-sfdiag">12. Étudier la diagonalisabilité : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Éléments propres connus</td><td>$\sum\dim E_\lambda = n$, ou $\dim E_\lambda = m_\lambda$ pour chaque $\lambda$.</td></tr>
-<tr><td>Valeurs propres connues, triangulaire…</td><td>$\dim E_\lambda = n - \operatorname{rg}(A - \lambda I)$ : <b>théorème du rang</b>.</td></tr>
-<tr><td>Une relation polynomiale</td><td>Annulateur <b>scindé à racines simples</b> $\iff$ diagonalisable.</td></tr>
-<tr><td>Une seule valeur propre $\lambda$</td><td>Diagonalisable $\iff A = \lambda I_n$.</td></tr>
-<tr><td>$n$ valeurs propres distinctes</td><td>Diagonalisable directement.</td></tr>
-<tr><td>Symétrique réelle</td><td>Théorème spectral.</td></tr>
-<tr><td>Endomorphisme induit, $u^2$, commutation</td><td>Lemme des noyaux, sous-espaces stables.</td></tr>
-</table>
-
 <p class="ml">Exemple 14 : par le rang</p>
 <p>$A = \begin{pmatrix}1&a&b&c\\0&1&d&e\\0&0&2&f\\0&0&0&2\end{pmatrix}$. <b>À quelle condition sur $a, b, c, d, e, f$ la matrice $A$ est-elle diagonalisable ?</b></p>
-<p><b>Étape 1 : Rappel.</b> Valeurs propres sur la diagonale : $1$ et $2$, doubles. Il faut $\dim E_1 = \dim E_2 = 2$, soit $\operatorname{rg}(A - I) = \operatorname{rg}(A - 2I) = 2$.</p>
+<p><b>Étape 1 : Rappel.</b> $\dim E_\lambda = n - \operatorname{rg}(A - \lambda I)$ : <b>théorème du rang</b>.</p>
 <p><b>Étape 2 : $A - I_4$.</b> $\begin{pmatrix}0&a&b&c\\0&0&d&e\\0&0&1&f\\0&0&0&1\end{pmatrix}$ : les colonnes $3$ et $4$ sont libres (le bloc $\begin{pmatrix}1&f\\0&1\end{pmatrix}$), et le rang vaut $2$ ssi la colonne $2$, $(a, 0, 0, 0)$, est nulle : $a = 0$.</p>
 <p><b>Étape 3 : $A - 2I_4$.</b> $\begin{pmatrix}-1&a&b&c\\0&-1&d&e\\0&0&0&f\\0&0&0&0\end{pmatrix}$ : les lignes $1$ et $2$ sont libres, rang $2$ ssi la ligne $3$ est nulle : $f = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{diagonalisable}\iff a = f = 0}$.</p>
 
 <p class="ml">Exemple 15 : une matrice de rang $1$</p>
 <p>Montrer : $\operatorname{rg}A = 1$ ; $A$ diagonalisable $\iff\operatorname{tr}A\neq0$.</p>
-<p><b>Étape 1 : Rappel.</b> $A = C\,L$ (colonne fois ligne), puis un annulateur.</p>
+<p><b>Étape 1 : Rappel.</b> Annulateur <b>scindé à racines simples</b> $\iff$ diagonalisable.</p>
 <p><b>Étape 2 : $A^2$.</b> $A^2 = C(LC)L$ et $LC = \sum\ell_ic_i = \operatorname{tr}(CL) = \operatorname{tr}A$, un scalaire : $A^2 = \operatorname{tr}(A)A$.</p>
 <p><b>Étape 3 : $\operatorname{tr}A\neq0$.</b> $X(X - \operatorname{tr}A)$ est scindé à racines simples : diagonalisable.</p>
 <p><b>Étape 4 : $\operatorname{tr}A = 0$.</b> $A^2 = 0$, seule valeur propre $0$ ; diagonalisable forcerait $A = 0$, contraire à $\operatorname{rg}A = 1$.</p>
@@ -1567,7 +1492,7 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 
 <p class="ml">Exemple 16 : un sous-groupe fini de $GL_n(\mathbb R)$</p>
 <p>$G$ de cardinal $m$. Montrer $\det M = \pm1$, $|\operatorname{tr}M|\leq n$ et $\operatorname{tr}(M^{-1}) = \operatorname{tr}M$.</p>
-<p><b>Étape 1 : Rappel.</b> Lagrange : $M^m = I_n$ ; $X^m - 1$ est scindé à racines simples dans $\mathbb C$.</p>
+<p><b>Étape 1 : Rappel.</b> Annulateur <b>scindé à racines simples</b> $\iff$ diagonalisable.</p>
 <p><b>Étape 2 : Diagonalisable.</b> $M$ est diagonalisable dans $\mathcal M_n(\mathbb C)$, de valeurs propres $\lambda_i$ racines $m$-ièmes de l'unité, $|\lambda_i| = 1$.</p>
 <p><b>Étape 3 : Déterminant et trace.</b> $\det M = \prod\lambda_i$, réel de module $1$ : $\pm1$. $|\operatorname{tr}M| = |\sum\lambda_i|\leq\sum|\lambda_i| = n$.</p>
 <p><b>Étape 4 : L'inverse.</b> $M^{-1}$ a pour valeurs propres $\frac1{\lambda_i} = \overline{\lambda_i}$ ($|\lambda_i| = 1$) : $\operatorname{tr}M^{-1} = \overline{\operatorname{tr}M} = \operatorname{tr}M$ (réel).</p>
@@ -1575,14 +1500,14 @@ $$J_n = \begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\ddots&\vdots\\\vdots&&\ddots&\ddot
 
 <p class="ml">Exemple 17 : deux endomorphismes qui commutent</p>
 <p>$u, v$ diagonalisables, $u\circ v = v\circ u$. Montrer qu'ils ont une base commune de vecteurs propres.</p>
-<p><b>Étape 1 : Rappel.</b> Si $u, v$ commutent, les $E_\lambda(v)$ sont stables par $u$ ; la restriction d'un diagonalisable à un sev stable est diagonalisable.</p>
+<p><b>Étape 1 : Rappel.</b> Lemme des noyaux, sous-espaces stables.</p>
 <p><b>Étape 2 : Stabilité.</b> $x\in E_\lambda(v)$ : $v(u(x)) = u(v(x)) = \lambda u(x)$, donc $u(x)\in E_\lambda(v)$.</p>
 <p><b>Étape 3 : Diagonaliser chaque morceau.</b> $u_{|E_\lambda(v)}$ est diagonalisable : base $\mathcal B_\lambda$ de $E_\lambda(v)$ faite de vecteurs propres de $u$ (et de $v$, car dans $E_\lambda(v)$).</p>
 <p><b>Étape 4 : Conclusion.</b> $E = \bigoplus E_\lambda(v)$ : $\cG{\bigcup_\lambda\mathcal B_\lambda\ \text{est une base commune}}$.</p>
 
 <p class="ml">Exemple 18 : $u$ diagonalisable $\iff u^2$ diagonalisable et $\ker u = \ker u^2$ (sur $\mathbb C$)</p>
 <p>Soit $u$ un endomorphisme d'un $\mathbb C$-espace vectoriel de dimension finie. <b>Montrer que $u$ est diagonalisable si et seulement si $u^2$ est diagonalisable et $\ker u = \ker u^2$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Lemme des noyaux : $\ker(u^2 - \mu^2\operatorname{id}) = \ker(u - \mu\operatorname{id})\oplus\ker(u + \mu\operatorname{id})$ si $\mu\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> Lemme des noyaux, sous-espaces stables.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> Dans une base où $u = \operatorname{diag}(\lambda_i)$, $u^2 = \operatorname{diag}(\lambda_i^2)$ est diagonale ; $\ker u\subset\ker u^2$ et ils ont la même dimension (nombre de $\lambda_i$ nuls) : égaux.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $E = \ker u^2\oplus\bigoplus_i\ker(u^2 - \mu_i\operatorname{id})$ ($\mu_i\neq0$ valeurs propres de $u^2$). On écrit $\mu_i = \lambda_i^2$ et on coupe chaque morceau par le lemme des noyaux ($X - \lambda_i$ et $X + \lambda_i$ premiers entre eux).</p>
 <p><b>Étape 4 : Conclusion.</b> $E = \ker u\oplus\bigoplus_i\big(\ker(u - \lambda_i\operatorname{id})\oplus\ker(u + \lambda_i\operatorname{id})\big)$ : $\cG{u\ \text{diagonalisable}}$.</p>
@@ -1617,31 +1542,23 @@ $$= (2 - x)(x^2 - x + 20) + 10x + 30 - 69 + 9x = -x^3 + 3x^2 - 22x + 40 + 19x - 
 <p><b>Étape 6 : Conclusion.</b> $\cG{A = PTP^{-1},\ T = \begin{pmatrix}1&5&0\\0&1&10\\0&0&1\end{pmatrix},\ P = \begin{pmatrix}1&0&2\\1&1&-1\\1&-1&0\end{pmatrix}}$ ($\det P = 1(0 - 1) - 0 + 2(-1 - 1) = -5\neq0$).</p>
 
 <h2 id="r-sfpuiss">14. Calculer $A^n$ : les quatre méthodes</h2>
-<table class="mtab">
-<tr><th>Méthode</th><th>Quand</th></tr>
-<tr><td>Division euclidienne de $X^n$ par un annulateur $P$ : $A^n = R_n(A)$</td><td>Toujours (Cayley-Hamilton), la plus rapide en général ; racines de $P$ simples ou pas (dériver si double).</td></tr>
-<tr><td>Diagonaliser : $A^n = PD^nP^{-1}$</td><td>Si on veut aussi $P$, ou $n\in\mathbb Z$.</td></tr>
-<tr><td>Décomposition spectrale : $A^n = \sum\lambda_i^nP_i$</td><td>Diagonalisable, sans calculer $P^{-1}$.</td></tr>
-<tr><td>Trigonaliser en $\lambda I + N$, binôme</td><td>Non diagonalisable.</td></tr>
-</table>
-
 <p class="ml">Exemple 22 : par la division euclidienne</p>
 <p>$A = \begin{pmatrix}1&3&0\\3&-2&-1\\0&-1&1\end{pmatrix}$, $\chi_A = (X - 1)(X - 3)(X + 4)$. <b>Calculer $A^n$ pour tout $n\in\mathbb N$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $X^n = Q\chi_A + a_nX^2 + b_nX + c_n$ ; en évaluant aux racines, puis $\chi_A(A) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> Division euclidienne de $X^n$ par un annulateur $P$ : $A^n = R_n(A)$. <b>Quand</b> : Toujours (Cayley-Hamilton), la plus rapide en général ; racines de $P$ simples ou pas (dériver si double).</p>
 <p><b>Étape 2 : Le système.</b> En $1$ : $a_n + b_n + c_n = 1$. En $3$ : $9a_n + 3b_n + c_n = 3^n$. En $-4$ : $16a_n - 4b_n + c_n = (-4)^n$.</p>
 <p><b>Étape 3 : On résout.</b> Différences : $8a_n + 2b_n = 3^n - 1$ et $15a_n - 5b_n = (-4)^n - 1$. On élimine $b_n$ ($\times5$ et $\times2$) : $70a_n = 2(-4)^n + 5\times3^n - 7$. Puis $b_n = \frac{3^n - 1 - 8a_n}2 = \frac{15\times3^n - 8(-4)^n - 7}{70}$ et $c_n = 1 - a_n - b_n = \frac{6(-4)^n - 20\times3^n + 84}{70}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^n = a_nA^2 + b_nA + c_nI_3}$ avec $A^2 = \begin{pmatrix}10&-3&-3\\-3&14&1\\-3&1&2\end{pmatrix}$. Contrôle $n = 1$ : $a_1 = \frac{-8 + 15 - 7}{70} = 0$, $b_1 = \frac{45 + 32 - 7}{70} = 1$, $c_1 = \frac{-24 - 60 + 84}{70} = 0$ ✓.</p>
 
 <p class="ml">Exemple 23 : par la décomposition spectrale</p>
 <p>$A = \begin{pmatrix}5&0&-1\\1&4&-1\\-1&0&5\end{pmatrix}$, $\chi_A = (X - 4)^2(X - 6)$. Calculer $A^p$, $p\in\mathbb Z$.</p>
-<p><b>Étape 1 : Rappel.</b> Diagonalisable : $A^p = 4^pP_4 + 6^pP_6$ avec $P_4 + P_6 = I_3$.</p>
+<p><b>Étape 1 : Rappel.</b> Décomposition spectrale : $A^n = \sum\lambda_i^nP_i$. <b>Quand</b> : Diagonalisable, sans calculer $P^{-1}$.</p>
 <p><b>Étape 2 : Diagonalisable.</b> $A - 4I_3 = \begin{pmatrix}1&0&-1\\1&0&-1\\-1&0&1\end{pmatrix}$ : rang $1$, donc $\dim E_4 = 2 = m_4$, et $\dim E_6 = 1$.</p>
 <p><b>Étape 3 : Les projecteurs.</b> $p = 0$ : $P_4 + P_6 = I_3$. $p = 1$ : $4P_4 + 6P_6 = A$. Donc $2P_6 = A - 4I_3$ et $2P_4 = 6I_3 - A$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A^p = \frac{4^p}2(6I_3 - A) + \frac{6^p}2(A - 4I_3) = (3\times4^p - 2\times6^p)I_3 + \frac{6^p - 4^p}2A}$, valable pour $p\in\mathbb Z$ ($A$ inversible). Contrôle $p = 1$ : $(12 - 12)I + \frac22A = A$ ✓.</p>
 
 <p class="ml">Exemple 24 : non diagonalisable, par trigonalisation et binôme</p>
 <p>$A = \begin{pmatrix}3&0&1\\2&1&1\\-1&1&1\end{pmatrix}$ ; montrer que $A$ est semblable à $B = \begin{pmatrix}3&0&0\\0&1&1\\0&0&1\end{pmatrix}$ et calculer $A^n$.</p>
-<p><b>Étape 1 : Rappel.</b> On cherche $e'_1, e'_2, e'_3$ avec $u(e'_1) = 3e'_1$, $u(e'_2) = e'_2$, $u(e'_3) = e'_2 + e'_3$.</p>
+<p><b>Étape 1 : Rappel.</b> Trigonaliser en $\lambda I + N$, binôme. <b>Quand</b> : Non diagonalisable.</p>
 <p><b>Étape 2 : $e'_1$.</b> $(A - 3I)X = 0$ : $z = 0$, $2x - 2y + z = 0$ : $e'_1 = (1, 1, 0)$ ; contrôle $Ae'_1 = (3, 3, 0)$ ✓.</p>
 <p><b>Étape 3 : $e'_2$.</b> $(A - I)X = 0$ : $2x + z = 0$, $-x + y = 0$ : $e'_2 = (1, 1, -2)$ ; contrôle $Ae'_2 = (3 - 2, 2 + 1 - 2, -1 + 1 - 2) = (1, 1, -2)$ ✓.</p>
 <p><b>Étape 4 : $e'_3$.</b> $(A - I)X = e'_2$ : $2x + z = 1$, $-x + y = -2$. Avec $x = 0$ : $z = 1$, $y = -2$ : $e'_3 = (0, -2, 1)$ ; contrôle $Ae'_3 = (1, -1, -1) = e'_2 + e'_3$ ✓.</p>
@@ -5780,32 +5697,23 @@ $$\cG{u_n\to2}.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{z_n\to0}$.</p>
 
 <h2 id="s-sfexpl">20. Suites définies explicitement : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>$u_n = f(n)$ avec $f$ simple</td><td>Étudier $f$ sur $[1, +\infty[$ (variations, limite).</td></tr>
-<tr><td>Monotonie utile</td><td>Signe de $u_{n+1} - u_n$, ou $\frac{u_{n+1}}{u_n}$ comparé à $1$ (termes $> 0$) ; puis limite monotone.</td></tr>
-<tr><td>Somme ou produit compliqué</td><td><b>Encadrer</b> chaque terme, puis gendarmes.</td></tr>
-<tr><td>Somme $\sum_{k\leq n}f(k)$, $f$ monotone</td><td>Comparaison série-intégrale, ou <b>somme de Riemann</b> (faire apparaître $\frac1n\sum f\big(\frac kn\big)$).</td></tr>
-<tr><td>Convergence d'une suite « différence »</td><td>Lien suite-série : $(u_n)$ converge $\iff\sum(u_{n+1} - u_n)$ converge <span class="hp">programme de Spé</span>.</td></tr>
-</table>
-
 <p class="ml">Exemple 34 : $u_n = \big(2\sin\frac1n + \frac12\cos n\big)^n$</p>
 <p>Soit $u_n = \big(2\sin\frac1n + \frac12\cos n\big)^n$ pour $n\geq1$. <b>Déterminer la limite de $(u_n)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Si $|u_n|\leq q^n$ avec $0\leq q \lt 1$, alors $u_n\to0$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Encadrer</b> chaque terme, puis gendarmes.</p>
 <p><b>Étape 2 : On majore la base.</b> $\sin x\leq x$ pour $x\geq0$, donc $2\sin\frac1n\leq\frac2n$ ; et $\big|\frac12\cos n\big|\leq\frac12$. Donc $\big|2\sin\frac1n + \frac12\cos n\big|\leq\frac2n + \frac12$.</p>
 <p><b>Étape 3 : Pour $n\geq5$.</b> $\frac2n + \frac12\leq\frac25 + \frac12 = \frac{4 + 5}{10} = \frac9{10}$, donc $|u_n|\leq\big(\frac9{10}\big)^n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\big(\frac9{10}\big)^n\to0$ : $\cG{u_n\to0}$.</p>
 
 <p class="ml">Exemple 35 : sens de variation de $u_n = \sqrt n\sin\frac1n$</p>
 <p>Soit $u_n = \sqrt n\sin\frac1n$ pour $n\geq1$. <b>Étudier le sens de variation de $(u_n)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $u_n = f(n)$ avec $f(x) = \sqrt x\sin\frac1x$ : on étudie le signe de $f'$.</p>
+<p><b>Étape 1 : Rappel.</b> Étudier $f$ sur $[1, +\infty[$ (variations, limite).</p>
 <p><b>Étape 2 : La dérivée.</b> $f'(x) = \frac1{2\sqrt x}\sin\frac1x + \sqrt x\cos\frac1x\times\Big(-\frac1{x^2}\Big) = \frac{\cos\frac1x}{2\sqrt x}\Big(\tan\frac1x - \frac2x\Big)$ (on a factorisé $\frac{\cos(1/x)}{2\sqrt x} > 0$ sur $[1, +\infty[$).</p>
 <p><b>Étape 3 : Le signe.</b> Avec $t = \frac1x\in]0, 1]$ : $\varphi(t) = \tan t - 2t$, $\varphi(0) = 0$, $\varphi'(t) = (1 + \tan^2t) - 2 = \tan^2t - 1$. Donc $\varphi$ décroît sur $\big[0, \frac\pi4\big]$ (où $\tan t\leq1$) puis croît sur $\big[\frac\pi4, 1\big]$. Elle part de $\varphi(0) = 0$ en décroissant, et à droite $\varphi(1) = \tan1 - 2\approx1{,}557 - 2 = -0{,}443 \lt 0$ : $\varphi \lt 0$ sur $]0, 1]$.</p>
 <p><b>Étape 4 : Conclusion.</b> $f' \lt 0$ sur $[1, +\infty[$ : $\cG{(u_n)\ \text{est décroissante}}$ (et $u_n\sim\frac{\sqrt n}n\to0$).</p>
 
 <p class="ml">Exemple 36 : $u_n = \sum_{k=1}^n\frac1{\sqrt k} - 2\sqrt n$ converge</p>
 <p>Soit $u_n = \sum_{k=1}^n\frac1{\sqrt k} - 2\sqrt n$. <b>Montrer que $(u_n)$ converge.</b></p>
-<p><b>Étape 1 : Rappel.</b> Décroissante et minorée $\Rightarrow$ converge.</p>
+<p><b>Étape 1 : Rappel.</b> Signe de $u_{n+1} - u_n$, ou $\frac{u_{n+1}}{u_n}$ comparé à $1$ (termes $> 0$) ; puis limite monotone.</p>
 <p><b>Étape 2 : Décroissante.</b> $u_{n+1} - u_n = \frac1{\sqrt{n + 1}} - 2(\sqrt{n + 1} - \sqrt n) = \frac1{\sqrt{n + 1}} - \frac2{\sqrt{n + 1} + \sqrt n}$ (quantité conjuguée). Or $\sqrt{n + 1} + \sqrt n \lt 2\sqrt{n + 1}$, donc $\frac2{\sqrt{n + 1} + \sqrt n} > \frac1{\sqrt{n + 1}}$ : $u_{n+1} - u_n \lt 0$.</p>
 <p><b>Étape 3 : Minorée.</b> $\frac1{\sqrt k} = \frac2{2\sqrt k}\geq\frac2{\sqrt{k + 1} + \sqrt k} = 2(\sqrt{k + 1} - \sqrt k)$. En sommant (télescopage) : $\sum_{k=1}^n\frac1{\sqrt k}\geq2(\sqrt{n + 1} - 1)$, donc $u_n\geq2\sqrt{n + 1} - 2 - 2\sqrt n\geq-2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(u_n)\ \text{converge}}$.</p>
@@ -5819,7 +5727,7 @@ $$\cG{u_n\to2}.$$
 
 <p class="ml">Exemple 38 : un encadrement, $u_n = \sum_{k=0}^n\binom nk^{-1}$</p>
 <p>Soit $u_n = \sum_{k=0}^n\binom nk^{-1}$. <b>Encadrer $u_n$ et en déduire sa limite.</b></p>
-<p><b>Étape 1 : Rappel.</b> Isoler les termes extrêmes, majorer ceux du milieu, gendarmes.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Encadrer</b> chaque terme, puis gendarmes.</p>
 <p><b>Étape 2 : Les bords.</b> $k = 0$ et $k = n$ donnent $1 + 1 = 2$ ; $k = 1$ et $k = n - 1$ donnent $\frac1n + \frac1n = \frac2n$.</p>
 <p><b>Étape 3 : Le milieu</b> ($2\leq k\leq n - 2$, $n\geq4$) : $\binom nk\geq\binom n2 = \frac{n(n - 1)}2$, donc la somme des $n - 3$ termes est $\leq\frac{2(n - 3)}{n(n - 1)}$.</p>
 <p><b>Étape 4 : L'encadrement.</b> $2\leq u_n\leq2 + \frac2n + \frac{2(n - 3)}{n(n - 1)}$, et les deux derniers termes tendent vers $0$.</p>
@@ -5827,7 +5735,7 @@ $$\cG{u_n\to2}.$$
 
 <p class="ml">Exemple 39 : une somme de Riemann déguisée</p>
 <p>$u_n = \sum_{k=1}^n\frac1{\sqrt{(n + k - 1)(n + k)}}$. <b>Déterminer la limite de $(u_n)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ pour $f$ continue.</p>
+<p><b>Étape 1 : Rappel.</b> Comparaison série-intégrale, ou <b>somme de Riemann</b> (faire apparaître $\frac1n\sum f\big(\frac kn\big)$).</p>
 <p><b>Étape 2 : On fait apparaître $\frac1n$.</b> $\sqrt{(n + k - 1)(n + k)} = n\sqrt{\big(1 + \frac{k - 1}n\big)\big(1 + \frac kn\big)}$.</p>
 <p><b>Étape 3 : On encadre.</b> $\big(1 + \frac{k - 1}n\big)\leq\big(1 + \frac kn\big)$ donne $\frac1n\sum\frac1{1 + \frac kn}\leq u_n\leq\frac1n\sum\frac1{1 + \frac{k - 1}n}$ : deux sommes de Riemann de $f(x) = \frac1{1 + x}$ sur $[0, 1]$.</p>
 <p><b>Étape 4 : La limite.</b> $\int_0^1\frac{dx}{1 + x} = \big[\ln(1 + x)\big]_0^1 = \ln2 - \ln1 = \ln2$.</p>
@@ -9021,17 +8929,9 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 <p><b>Étape 6 : Conclusion.</b> $\cG{\inf = \frac1{180}}$, atteint pour $a = 1$, $b = -\frac16$.</p>
 
 <h2 id="h-sfps">9. Montrer qu'une application est un produit scalaire : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Cas général</td><td>La <b>définition</b> : bien définie (convergence d'une série, d'une intégrale…), symétrique, linéaire à gauche, positive, définie.</td></tr>
-<tr><td>Dimension finie, expression polynomiale en les coordonnées</td><td>La <b>matrice</b> $A = (\varphi(e_i, e_j))$ : $\varphi(x, y) = {}^tXAY$ ; symétrique $\iff A$ symétrique ; définie positive $\iff$ valeurs propres $> 0$ <span class="hp">programme de Spé</span>.</td></tr>
-<tr><td>« Défini » pour des polynômes</td><td>Un polynôme qui a une infinité de racines est nul.</td></tr>
-<tr><td>« Défini » pour des fonctions</td><td>Fonction continue, positive, d'intégrale nulle : nulle.</td></tr>
-</table>
-
 <p class="ml">Exemple 11 : une forme sur $\mathbb R^2$</p>
 <p>À quelle condition $\varphi((x, y), (x', y')) = axx' + bxy' + cyx' + dyy'$ est-elle un produit scalaire ?</p>
-<p><b>Étape 1 : Rappel.</b> Symétrique, bilinéaire, $\varphi(u, u) > 0$ pour $u\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : bien définie (convergence d'une série, d'une intégrale…), symétrique, linéaire à gauche, positive, définie.</p>
 <p><b>Étape 2 : Symétrie.</b> $\varphi(e_1, e_2) = b$ et $\varphi(e_2, e_1) = c$ : il faut $b = c$. Réciproquement, si $b = c$, échanger $(x, y)$ et $(x', y')$ ne change pas l'expression.</p>
 <p><b>Étape 3 : Bilinéaire.</b> Pour $(x', y')$ fixé, $(x, y)\mapsto(ax' + by')x + (bx' + dy')y$ est linéaire ; avec la symétrie, $\varphi$ est bilinéaire.</p>
 <p><b>Étape 4 : $\varphi(u, u) = ax^2 + 2bxy + dy^2$.</b> Avec $y = 0$ : $ax^2 > 0$ impose $a > 0$. Pour $y\neq0$, $t = \frac xy$ : $\varphi(u, u) = y^2(at^2 + 2bt + d)$, strictement positif pour tout $t$ ssi le trinôme n'a pas de racine réelle : $\Delta = 4b^2 - 4ad \lt 0$.</p>
@@ -9039,7 +8939,7 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 
 <p class="ml">Exemple 12 : une série sur $\mathbb R[X]$</p>
 <p>Montrer que $\varphi(P, Q) = \sum_{n\geq0}P(n)Q(n)e^{-n}$ est un produit scalaire sur $\mathbb R[X]$.</p>
-<p><b>Étape 1 : Rappel.</b> D'abord vérifier que la série converge.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : bien définie (convergence d'une série, d'une intégrale…), symétrique, linéaire à gauche, positive, définie.</p>
 <p><b>Étape 2 : Bien défini.</b> $PQ$ est un polynôme : $n^2P(n)Q(n)e^{-n}\to0$ (croissances comparées), donc $|P(n)Q(n)e^{-n}|\leq\frac1{n^2}$ à partir d'un rang ; la série converge absolument (Riemann).</p>
 <p><b>Étape 3 : Symétrique, bilinéaire.</b> $P(n)Q(n) = Q(n)P(n)$ ; la linéarité en $P$ vient de la linéarité de la somme d'une série convergente.</p>
 <p><b>Étape 4 : Positive, définie.</b> $\varphi(P, P) = \sum P(n)^2e^{-n}\geq0$. S'il est nul, tous les termes positifs sont nuls : $P(n) = 0$ pour tout $n\in\mathbb N$, une infinité de racines, donc $P = 0$.</p>
@@ -9047,7 +8947,7 @@ $$d^2 = \int_0^1\Big(t^2 - t + \frac16\Big)t^2\,dt = \int_0^1t^4 - \int_0^1t^3 +
 
 <p class="ml">Exemple 13 : par la matrice <span class="hp">programme de Spé</span></p>
 <p>$\varphi(x, y) = a\sum_ix_iy_i + b\sum_{i\neq j}x_iy_j$ sur $\mathbb R^n$ ($n\geq2$). Condition ?</p>
-<p><b>Étape 1 : Rappel.</b> $\varphi(x, y) = {}^tXAY$ avec $A$ symétrique ; $\varphi$ produit scalaire $\iff$ toutes les valeurs propres de $A$ sont $> 0$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>matrice</b> $A = (\varphi(e_i, e_j))$ : $\varphi(x, y) = {}^tXAY$ ; symétrique $\iff A$ symétrique ; définie positive $\iff$ valeurs propres $> 0$ <span class="hp">programme de Spé</span>.</p>
 <p><b>Étape 2 : La matrice.</b> $\varphi(e_i, e_i) = a$ et $\varphi(e_i, e_j) = b$ ($i\neq j$) :</p>
 $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&\cdots&b&a\end{pmatrix} = (a - b)I_n + bJ.$$
 <p><b>Étape 3 : Les valeurs propres</b> (fiche Réduction) : $a - b$ (ordre $n - 1$) et $a + (n - 1)b$.</p>
@@ -9055,24 +8955,16 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 5 : Conclusion.</b> $\cG{\varphi\ \text{produit scalaire}\iff a - b > 0\ \text{et}\ a + (n - 1)b > 0}$ (pour $b = 0$ : $a > 0$).</p>
 
 <h2 id="h-sfcs">10. Utiliser un produit scalaire : Cauchy-Schwarz, polarisation, normes</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Une inégalité « somme de produits $\leq$ racines »</td><td>Cauchy-Schwarz, en précisant l'espace, le produit scalaire et les deux vecteurs.</td></tr>
-<tr><td>On connaît des normes, on veut des produits scalaires</td><td>Polarisation : $\langle x, y\rangle = \frac12(\|x + y\|^2 - \|x\|^2 - \|y\|^2)$.</td></tr>
-<tr><td>Une inégalité sur des normes</td><td>Développer les carrés, triangle, Pythagore, parallélogramme.</td></tr>
-<tr><td>Montrer $x = y$</td><td>$\|x - y\|^2 = 0$, ou $\langle x - y, z\rangle = 0$ pour tout $z$.</td></tr>
-</table>
-
 <p class="ml">Exemple 14 : Cauchy-Schwarz avec un produit scalaire pondéré</p>
 <p>$2x^2 + y^2 + 3z^2\leq1$. Montrer $(x + y + z)^2\leq\frac{11}6$.</p>
-<p><b>Étape 1 : Rappel.</b> $\langle u, v\rangle^2\leq\langle u, u\rangle\langle v, v\rangle$, pour <b>le</b> produit scalaire adapté.</p>
+<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz, en précisant l'espace, le produit scalaire et les deux vecteurs.</p>
 <p><b>Étape 2 : Le produit scalaire.</b> $\varphi(u, v) = 2xx' + yy' + 3zz'$ (exemple 11 en dimension $3$, coefficients $> 0$).</p>
 <p><b>Étape 3 : Le bon $v$.</b> On veut $\varphi(u, v) = x + y + z$ : $2x' = 1$, $y' = 1$, $3z' = 1$, soit $v = \big(\frac12, 1, \frac13\big)$. Alors $\varphi(v, v) = 2\times\frac14 + 1 + 3\times\frac19 = \frac12 + 1 + \frac13 = \frac{11}6$.</p>
 <p><b>Étape 4 : Conclusion.</b> $(x + y + z)^2 = \varphi(u, v)^2\leq\varphi(u, u)\varphi(v, v)\leq1\times\frac{11}6$ : $\cG{(x + y + z)^2\leq\frac{11}6}$.</p>
 
 <p class="ml">Exemple 15 : $\operatorname{tr}A\leq\sqrt n\sqrt{\operatorname{tr}({}^tAA)}$ et $\|AB\|\leq\|A\|\,\|B\|$</p>
 <p>Sur $\mathcal M_n(\mathbb R)$, $\langle A, B\rangle = \operatorname{tr}({}^tAB) = \sum a_{ij}b_{ij}$. <b>Montrer que $\operatorname{tr}A\leq\sqrt n\sqrt{\operatorname{tr}({}^tAA)}$, et que $\|AB\|\leq\|A\|\,\|B\|$ pour la norme associée.</b></p>
-<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz pour ce produit scalaire et dans $\mathbb R^n$.</p>
+<p><b>Étape 1 : Rappel.</b> Cauchy-Schwarz, en précisant l'espace, le produit scalaire et les deux vecteurs.</p>
 <p><b>Étape 2 : La trace.</b> $\langle I_n, A\rangle = \operatorname{tr}A$ et $\|I_n\| = \sqrt{\operatorname{tr}I_n} = \sqrt n$ : $|\operatorname{tr}A|\leq\sqrt n\,\|A\|$, avec égalité ssi $A = \lambda I_n$ (et $\operatorname{tr}A\geq0$ pour l'inégalité sans valeur absolue).</p>
 <p><b>Étape 3 : Le produit.</b> $c_{ij} = \sum_ka_{ik}b_{kj}$, Cauchy-Schwarz dans $\mathbb R^n$ : $c_{ij}^2\leq\Big(\sum_ka_{ik}^2\Big)\Big(\sum_kb_{kj}^2\Big)$.</p>
 <p><b>Étape 4 : On somme</b> sur $i, j$ : $\|C\|^2\leq\sum_{i,k}a_{ik}^2\times\sum_{j,k}b_{kj}^2 = \|A\|^2\|B\|^2$.</p>
@@ -9080,7 +8972,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 
 <p class="ml">Exemple 16 : $u(0) = 0$ et $\|u(x) - u(y)\| = \|x - y\|$ entraîne $u$ linéaire</p>
 <p>Soit $u:E\to E$ telle que $u(0) = 0$ et $\|u(x) - u(y)\| = \|x - y\|$ pour tous $x, y$. <b>Montrer que $u$ est linéaire.</b></p>
-<p><b>Étape 1 : Rappel.</b> Polarisation, puis $\|v\|^2 = 0\Rightarrow v = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> Polarisation : $\langle x, y\rangle = \frac12(\|x + y\|^2 - \|x\|^2 - \|y\|^2)$.</p>
 <p><b>Étape 2 : Les normes.</b> $y = 0$ : $\|u(x)\| = \|x\|$.</p>
 <p><b>Étape 3 : Les produits scalaires.</b> $\langle u(x), u(y)\rangle = -\frac12\big(\|u(x) - u(y)\|^2 - \|u(x)\|^2 - \|u(y)\|^2\big) = -\frac12\big(\|x - y\|^2 - \|x\|^2 - \|y\|^2\big) = \langle x, y\rangle$.</p>
 <p><b>Étape 4 : On développe</b> $\|u(\lambda x + y) - \lambda u(x) - u(y)\|^2$ : chaque produit scalaire $\langle u(a), u(b)\rangle$ se remplace par $\langle a, b\rangle$, et on obtient $\|(\lambda x + y) - \lambda x - y\|^2 = 0$.</p>
@@ -9088,7 +8980,7 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 
 <p class="ml">Exemple 17 : un encadrement de normes</p>
 <p>Montrer $\big|\|x\|^2 - \|y\|^2\big|\leq\|x + y\|\,\|x - y\|\leq\|x\|^2 + \|y\|^2$.</p>
-<p><b>Étape 1 : Rappel.</b> On élève au carré : tout est positif.</p>
+<p><b>Étape 1 : Rappel.</b> Développer les carrés, triangle, Pythagore, parallélogramme.</p>
 <p><b>Étape 2 : Le carré du milieu.</b> $\|x + y\|^2\|x - y\|^2 = (\|x\|^2 + \|y\|^2 + 2\langle x, y\rangle)(\|x\|^2 + \|y\|^2 - 2\langle x, y\rangle) = (\|x\|^2 + \|y\|^2)^2 - 4\langle x, y\rangle^2$ ($(s + t)(s - t) = s^2 - t^2$).</p>
 <p><b>Étape 3 : À droite.</b> $-4\langle x, y\rangle^2\leq0$ : le carré est $\leq(\|x\|^2 + \|y\|^2)^2$, égalité ssi $x\perp y$.</p>
 <p><b>Étape 4 : À gauche.</b> $(\|x\|^2 + \|y\|^2)^2 = (\|x\|^2 - \|y\|^2)^2 + 4\|x\|^2\|y\|^2$, donc le carré vaut $(\|x\|^2 - \|y\|^2)^2 + 4(\|x\|^2\|y\|^2 - \langle x, y\rangle^2)\geq(\|x\|^2 - \|y\|^2)^2$ par Cauchy-Schwarz.</p>
@@ -9096,51 +8988,43 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 
 <p class="ml">Exemple 18 : $\langle f(x), y\rangle = \langle x, g(y)\rangle$ entraîne $f$ linéaire</p>
 <p>Soient $f, g:E\to E$ telles que $\langle f(x), y\rangle = \langle x, g(y)\rangle$ pour tous $x, y$. <b>Montrer que $f$ est linéaire.</b></p>
-<p><b>Étape 1 : Rappel.</b> $v = 0\iff\langle v, z\rangle = 0$ pour tout $z$.</p>
+<p><b>Étape 1 : Rappel.</b> $\|x - y\|^2 = 0$, ou $\langle x - y, z\rangle = 0$ pour tout $z$.</p>
 <p><b>Étape 2 : On calcule.</b> Pour tout $z$ : $\langle f(\lambda x + x') - \lambda f(x) - f(x'), z\rangle = \langle\lambda x + x', g(z)\rangle - \lambda\langle x, g(z)\rangle - \langle x', g(z)\rangle = 0$ (bilinéarité).</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{f(\lambda x + x') = \lambda f(x) + f(x')}$ ; par symétrie $g$ est linéaire aussi.</p>
 
 <p class="ml">Exemple 19 : $\ker A = \ker{}^tAA$, puis $\operatorname{Im}{}^tA = \operatorname{Im}{}^tAA$</p>
 <p>Soit $A\in\mathcal M_{n,p}(\mathbb R)$. <b>Montrer que $\ker A = \ker({}^tAA)$, puis que $\operatorname{Im}{}^tA = \operatorname{Im}({}^tAA)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\,{}^tXX = \|X\|^2$ dans $\mathbb R^n$ ; théorème du rang.</p>
+<p><b>Étape 1 : Rappel.</b> $\|x - y\|^2 = 0$, ou $\langle x - y, z\rangle = 0$ pour tout $z$.</p>
 <p><b>Étape 2 : $\ker A\subset\ker{}^tAA$.</b> $AX = 0\Rightarrow{}^tAAX = 0$.</p>
 <p><b>Étape 3 : L'autre inclusion.</b> $\,{}^tAAX = 0\Rightarrow{}^tX{}^tAAX = 0$, soit $\,{}^t(AX)(AX) = \|AX\|^2 = 0$, donc $AX = 0$.</p>
 <p><b>Étape 4 : Les images.</b> $\operatorname{rg}{}^tAA = n - \dim\ker{}^tAA = n - \dim\ker A = \operatorname{rg}A = \operatorname{rg}{}^tA$, et $\operatorname{Im}{}^tAA\subset\operatorname{Im}{}^tA$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker A = \ker{}^tAA,\ \operatorname{Im}{}^tA = \operatorname{Im}{}^tAA}$ : une structure euclidienne cachée débloque l'exercice.</p>
 
 <h2 id="h-sforth">11. Trouver l'orthogonal d'un sous-espace</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Dimension infinie</td><td>La <b>définition</b> $A^\perp = \{x,\ \forall a\in A,\ \langle a, x\rangle = 0\}$ ; attention, $(F^\perp)^\perp$ peut être $\neq F$.</td></tr>
-<tr><td>Supplémentaire orthogonal</td><td>Une inclusion $G\subset F^\perp$ et $E = F + G$, ou les dimensions.</td></tr>
-<tr><td>$F = \operatorname{Vect}(e_1, \dots, e_p)$</td><td>$x\in F^\perp\iff\langle x, e_i\rangle = 0$ pour tout $i$ : un système d'équations.</td></tr>
-<tr><td>$F$ donné par des équations</td><td>Les vecteurs normaux engendrent $F^\perp$.</td></tr>
-</table>
-
 <p class="ml">Exemple 20 : un hyperplan d'orthogonal nul</p>
 <p>$E = \mathcal C([0, 1], \mathbb R)$, $\langle f, g\rangle = \int_0^1fg$, $H = \{f,\ f(0) = 0\}$. Déterminer $H^\perp$.</p>
-<p><b>Étape 1 : Rappel.</b> La définition ; on choisit un $f\in H$ adapté à $g$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> $A^\perp = \{x,\ \forall a\in A,\ \langle a, x\rangle = 0\}$ ; attention, $(F^\perp)^\perp$ peut être $\neq F$.</p>
 <p><b>Étape 2 : Soit $g\in H^\perp$.</b> $f(t) = tg(t)$ est continue et $f(0) = 0$ : $f\in H$, donc $\int_0^1tg(t)^2\,dt = 0$.</p>
 <p><b>Étape 3 : Fonction positive continue d'intégrale nulle.</b> $tg(t)^2 = 0$ sur $[0, 1]$, donc $g = 0$ sur $]0, 1]$, puis en $0$ par continuité.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{H^\perp = \{0\}}$, donc $(H^\perp)^\perp = E\neq H$ : en dimension infinie, $H\oplus H^\perp\neq E$.</p>
 
 <p class="ml">Exemple 21 : deux supplémentaires orthogonaux de $\mathcal C^2$</p>
 <p>$E = \mathcal C^2([0, 1])$, $\varphi(f, g) = \int_0^1(fg + f'g')$, $F = \{f(0) = f(1) = 0\}$, $G = \{g'' = g\}$. <b>Montrer que $\varphi$ est un produit scalaire et que $F$ et $G$ sont supplémentaires orthogonaux.</b></p>
-<p><b>Étape 1 : Rappel.</b> $F\perp G$ et $E = F + G$.</p>
+<p><b>Étape 1 : Rappel.</b> Une inclusion $G\subset F^\perp$ et $E = F + G$, ou les dimensions.</p>
 <p><b>Étape 2 : Orthogonaux.</b> $g'' = g$ : $\varphi(f, g) = \int_0^1(fg'' + f'g') = \int_0^1(fg')' = f(1)g'(1) - f(0)g'(0) = 0$.</p>
 <p><b>Étape 3 : La somme.</b> $g = \lambda\operatorname{ch} + \mu\operatorname{sh}$ (solutions de $g'' = g$). On veut $h - g\in F$ : $g(0) = h(0)$ donne $\lambda = h(0)$ ; $g(1) = h(1)$ donne $\mu = \frac{h(1) - h(0)\operatorname{ch}1}{\operatorname{sh}1}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $h = (h - g) + g$ : $\cG{E = F\overset\perp\oplus G}$.</p>
 
 <p class="ml">Exemple 22 : $\mathcal S_n\perp\mathcal A_n$ et $(\ker A)^\perp = \operatorname{Im}{}^tA$</p>
 <p>Sur $\mathcal M_n(\mathbb R)$ muni de $\langle A, B\rangle = \operatorname{tr}({}^tAB)$, <b>montrer que $\mathcal S_n^\perp = \mathcal A_n$, puis que $(\ker A)^\perp = \operatorname{Im}{}^tA$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Une inclusion et les dimensions.</p>
+<p><b>Étape 1 : Rappel.</b> Une inclusion $G\subset F^\perp$ et $E = F + G$, ou les dimensions.</p>
 <p><b>Étape 2 : $\mathcal S_n\perp\mathcal A_n$.</b> $\langle S, A\rangle = \operatorname{tr}({}^tSA) = \operatorname{tr}(SA)$ et aussi $= \operatorname{tr}({}^t(SA)) = \operatorname{tr}({}^tA\,{}^tS) = -\operatorname{tr}(AS) = -\operatorname{tr}(SA)$ : donc $0$. Avec $\mathcal M_n = \mathcal S_n\oplus\mathcal A_n$ : supplémentaires orthogonaux.</p>
 <p><b>Étape 3 : $\operatorname{Im}{}^tA\subset(\ker A)^\perp$.</b> $Y = {}^tAX$, $Z\in\ker A$ : $\langle Y, Z\rangle = {}^tX AZ = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\dim\operatorname{Im}{}^tA = \operatorname{rg}A = n - \dim\ker A = \dim(\ker A)^\perp$ : $\cG{(\ker A)^\perp = \operatorname{Im}{}^tA}$.</p>
 
 <p class="ml">Exemple 23 : l'orthogonal par une base</p>
 <p>$F = \{x + y + z + t = 0,\ x - y + z - t = 0\}\subset\mathbb R^4$. <b>Déterminer $F^\perp$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $x\in F^\perp\iff x\perp$ chaque vecteur d'une base de $F$.</p>
+<p><b>Étape 1 : Rappel.</b> $x\in F^\perp\iff\langle x, e_i\rangle = 0$ pour tout $i$ : un système d'équations.</p>
 <p><b>Étape 2 : Une base de $F$.</b> Somme des équations : $2x + 2z = 0$, $z = -x$ ; différence : $2y + 2t = 0$, $t = -y$. $F = \operatorname{Vect}\big((1, 0, -1, 0), (0, 1, 0, -1)\big)$.</p>
 <p><b>Étape 3 : Les équations de $F^\perp$.</b> $u = (x, y, z, t)$ : $\langle u, e_1\rangle = x - z = 0$ et $\langle u, e_2\rangle = y - t = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{F^\perp:\ x = z,\ y = t}$, soit $\operatorname{Vect}\big((1, 1, 1, 1), (1, -1, 1, -1)\big)$ : les vecteurs normaux des équations de $F$.</p>
@@ -9173,24 +9057,16 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p><b>Étape 5 : Conclusion.</b> $\cG{|\det A|\leq\|C_1\|\cdots\|C_n\|}$, avec égalité ssi les colonnes sont orthogonales (ou une est nulle).</p>
 
 <h2 id="h-sfproj">13. Projections orthogonales : reconnaître, calculer</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Montrer qu'un projecteur est orthogonal</td><td>$p^2 = p$, puis $\ker p\perp\operatorname{Im}p$ ; ou $\|p(x)\|\leq\|x\|$ ; ou $p$ symétrique (matrice symétrique en base orthonormée).</td></tr>
-<tr><td>Base orthogonale de $F$ connue</td><td>$p_F(x) = \sum\frac{\langle e_i, x\rangle}{\|e_i\|^2}e_i$.</td></tr>
-<tr><td>Calculer moins</td><td>$p_F + p_{F^\perp} = \operatorname{id}$ : projeter sur le plus petit des deux. Symétrie : $s_F = 2p_F - \operatorname{id}$.</td></tr>
-<tr><td>Pas de base orthogonale</td><td>Revenir à la définition : $p(x)\in F$ et $x - p(x)\perp F$ (système).</td></tr>
-</table>
-
 <p class="ml">Exemple 27 : $\langle x, p(x)\rangle\geq0$ caractérise les projecteurs orthogonaux</p>
 <p>Soit $p$ un projecteur d'un espace euclidien. <b>Montrer que $p$ est orthogonal si et seulement si $\langle x, p(x)\rangle\geq0$ pour tout $x$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $p$ projecteur orthogonal $\iff\ker p\perp\operatorname{Im}p$.</p>
+<p><b>Étape 1 : Rappel.</b> $p^2 = p$, puis $\ker p\perp\operatorname{Im}p$ ; ou $\|p(x)\|\leq\|x\|$ ; ou $p$ symétrique (matrice symétrique en base orthonormée).</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $\langle p(x), x\rangle = \langle p(x), x - p(x)\rangle + \|p(x)\|^2 = 0 + \|p(x)\|^2\geq0$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $x\in\operatorname{Im}p$, $y\in\ker p$, $\lambda\in\mathbb R$ : $\langle x + \lambda y, p(x + \lambda y)\rangle = \langle x + \lambda y, x\rangle = \|x\|^2 + \lambda\langle x, y\rangle\geq0$ pour tout $\lambda$.</p>
 <p><b>Étape 4 : Conclusion.</b> Une fonction affine de $\lambda$ toujours positive a une pente nulle : $\langle x, y\rangle = 0$, $\cG{p\ \text{est orthogonal}}$.</p>
 
 <p class="ml">Exemple 28 : $p\circ q = q\circ p\iff p\circ q$ projecteur ($p, q$ orthogonaux)</p>
 <p>Soient $p, q$ deux projecteurs orthogonaux. <b>Montrer que $p\circ q = q\circ p$ si et seulement si $p\circ q$ est un projecteur orthogonal.</b></p>
-<p><b>Étape 1 : Rappel.</b> Projecteur orthogonal $\iff$ projecteur qui diminue la norme $\iff$ projecteur symétrique.</p>
+<p><b>Étape 1 : Rappel.</b> $p^2 = p$, puis $\ker p\perp\operatorname{Im}p$ ; ou $\|p(x)\|\leq\|x\|$ ; ou $p$ symétrique (matrice symétrique en base orthonormée).</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $(p\circ q)^2 = p\circ q\circ p\circ q = p\circ p\circ q\circ q = p\circ q$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $\|p(q(x))\|\leq\|q(x)\|\leq\|x\|$ : $p\circ q$ est un projecteur orthogonal, donc symétrique : $\langle p\circ q(x), y\rangle = \langle x, p\circ q(y)\rangle$. Or $\langle x, p(q(y))\rangle = \langle q(p(x)), y\rangle$ ($p, q$ symétriques). Donc $\langle(p\circ q - q\circ p)(x), y\rangle = 0$ pour tout $y$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p\circ q = q\circ p}$ (faux sans « orthogonaux » : $\begin{pmatrix}1&0\\0&0\end{pmatrix}$ et $\begin{pmatrix}0&0\\1&1\end{pmatrix}$).</p>
@@ -9198,14 +9074,14 @@ $$A = \begin{pmatrix}a&b&\cdots&b\\b&a&\ddots&\vdots\\\vdots&\ddots&\ddots&b\\b&
 <p class="ml">Exemple 29 : la matrice remplie de $\frac1n$</p>
 $$A = \frac1n\begin{pmatrix}1&1&\cdots&1\\1&1&\cdots&1\\\vdots&\vdots&\ddots&\vdots\\1&1&\cdots&1\end{pmatrix}.$$
 <p><b>Montrer que $A$ est la matrice d'une projection orthogonale de $\mathbb R^n$ et préciser sur quoi.</b></p>
-<p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $A$ symétrique en base orthonormée $\Rightarrow$ projection orthogonale.</p>
+<p><b>Étape 1 : Rappel.</b> $p^2 = p$, puis $\ker p\perp\operatorname{Im}p$ ; ou $\|p(x)\|\leq\|x\|$ ; ou $p$ symétrique (matrice symétrique en base orthonormée).</p>
 <p><b>Étape 2 : $A^2$.</b> $(A^2)_{ij} = \sum_{k=1}^n\frac1n\times\frac1n = n\times\frac1{n^2} = \frac1n$ : $A^2 = A$.</p>
 <p><b>Étape 3 : L'image.</b> Toutes les colonnes valent $\frac1n(1, \dots, 1)$ : $\operatorname{Im}A = \mathbb R(1, \dots, 1)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la projection orthogonale sur la droite}\ \mathbb R(1, \dots, 1)}$.</p>
 
 <p class="ml">Exemple 30 : une symétrie orthogonale de $\mathbb R^4$</p>
 <p>$P:\ x + y + z + t = 0,\ x + 2y + 3z + 4t = 0$. <b>Écrire les matrices de la projection orthogonale $p_P$ et de la symétrie orthogonale $s_P$ par rapport à $P$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Base orthogonale de $P$ (Gram-Schmidt), formule de $p_P$, puis $s_P = 2p_P - I_4$.</p>
+<p><b>Étape 1 : Rappel.</b> $p_F(x) = \sum\frac{\langle e_i, x\rangle}{\|e_i\|^2}e_i$.</p>
 <p><b>Étape 2 : Une base.</b> $z, t$ libres : soustraire les équations donne $y + 2z + 3t = 0$, $y = -2z - 3t$, puis $x = -y - z - t = z + 2t$. $a_1 = (1, -2, 1, 0)$ ($z = 1, t = 0$), $a_2 = (2, -3, 0, 1)$.</p>
 <p><b>Étape 3 : Orthogonaliser.</b> $\langle a_1, a_2\rangle = 2 + 6 + 0 + 0 = 8$, $\|a_1\|^2 = 1 + 4 + 1 = 6$ : $a_2 - \frac86a_1 = \big(\frac23, -\frac13, -\frac43, 1\big)$, qu'on multiplie par $3$ : $e_2 = (2, -1, -4, 3)$, $\|e_2\|^2 = 4 + 1 + 16 + 9 = 30$.</p>
 <p><b>Étape 4 : La formule.</b> $p(u) = \frac{\langle a_1, u\rangle}6a_1 + \frac{\langle e_2, u\rangle}{30}e_2$, soit la matrice $\frac16a_1{}^ta_1 + \frac1{30}e_2{}^te_2$. Coefficient $(1, 1)$ : $\frac16 + \frac4{30} = \frac{5 + 4}{30} = \frac3{10}$.</p>
@@ -9215,7 +9091,7 @@ $$\cG{M(p) = \frac1{10}\begin{pmatrix}3&-4&-1&2\\-4&7&-2&-1\\-1&-2&7&-4\\2&-1&-4
 
 <p class="ml">Exemple 31 : par la définition, sans base orthogonale</p>
 <p><b>Calculer le projeté orthogonal de $X^2$ sur $\mathbb R_1[X]$ pour $\langle P, Q\rangle = \int_0^1PQ$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $P = aX + b$ et $X^2 - P\perp1$, $X^2 - P\perp X$.</p>
+<p><b>Étape 1 : Rappel.</b> Revenir à la définition : $p(x)\in F$ et $x - p(x)\perp F$ (système).</p>
 <p><b>Étape 2 : Les équations.</b> $\int_0^1(t^2 - at - b)\,dt = \Big[\frac{t^3}3 - \frac{at^2}2 - bt\Big]_0^1 = \frac13 - \frac a2 - b = 0$ et $\int_0^1(t^3 - at^2 - bt)\,dt = \Big[\frac{t^4}4 - \frac{at^3}3 - \frac{bt^2}2\Big]_0^1 = \frac14 - \frac a3 - \frac b2 = 0$.</p>
 <p><b>Étape 3 : On résout.</b> De la 1<sup>re</sup> : $b = \frac13 - \frac a2$. Dans la 2<sup>e</sup> : $\frac14 - \frac a3 - \frac16 + \frac a4 = \frac1{12} - \frac a{12} = 0$, donc $a = 1$ et $b = \frac13 - \frac12 = -\frac16$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{p(X^2) = X - \frac16}$.</p>
@@ -9438,16 +9314,9 @@ $$\cG{J = \cV PDP^\top,\quad\cV P = \begin{pmatrix}\frac1{\sqrt3}&\frac1{\sqrt2}
 <p>Si $S = PDP^\top\in\mathcal S_n^+$, alors $R = P\sqrt DP^\top$ est dans $\mathcal S_n^+$ et vérifie $R^2 = S$ (et c'est la seule). Classique en exercice, à redémontrer.</p>
 
 <h2 id="e-sfsym">12. Montrer qu'un endomorphisme est symétrique</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Endomorphisme donné par une formule</td><td>La <b>définition</b> : $\langle u(x), y\rangle = \langle x, u(y)\rangle$ pour tous $x, y$.</td></tr>
-<tr><td>Matrice connue dans une base</td><td>$u$ symétrique $\iff$ sa matrice dans une base <b>orthonormée</b> est symétrique.</td></tr>
-<tr><td>Projecteur</td><td>Projecteur symétrique $\iff$ projecteur orthogonal.</td></tr>
-</table>
-
 <p class="ml">Exemple 10 : $u(M) = \alpha M + \operatorname{tr}(M)I_n$ sur $\mathcal M_n(\mathbb R)$</p>
 <p>Soit $\alpha\in\mathbb R$ et $u(M) = \alpha M + \operatorname{tr}(M)I_n$ sur $\mathcal M_n(\mathbb R)$, muni de $\langle A, B\rangle = \operatorname{tr}({}^tAB)$. <b>Montrer que $u$ est autoadjoint.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\langle A, B\rangle = \operatorname{tr}({}^tAB)$, et $\langle I_n, N\rangle = \operatorname{tr}N$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : $\langle u(x), y\rangle = \langle x, u(y)\rangle$ pour tous $x, y$.</p>
 <p><b>Étape 2 : On calcule.</b> $\langle u(M), N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\langle I_n, N\rangle = \alpha\langle M, N\rangle + \operatorname{tr}(M)\operatorname{tr}(N)$.</p>
 <p><b>Étape 3 : Symétrique en $M, N$.</b> L'expression ne change pas quand on échange $M$ et $N$ : $\langle u(M), N\rangle = \langle M, u(N)\rangle$.</p>
 <p><b>Étape 4 : On le voit sur la matrice ($n = 2$).</b> Base orthonormée $(E_{11}, E_{12}, E_{21}, E_{22})$ : $u(E_{11}) = \alpha E_{11} + I_2 = (\alpha + 1)E_{11} + E_{22}$, $u(E_{12}) = \alpha E_{12}$, $u(E_{21}) = \alpha E_{21}$, $u(E_{22}) = E_{11} + (\alpha + 1)E_{22}$ :</p>
@@ -9456,7 +9325,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}\alpha + 1&0&0&1\\0&\alpha&0&0\\0&0&\al
 
 <p class="ml">Exemple 11 : reconnaître une projection orthogonale</p>
 <p>$A = \frac13\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}$ dans la base canonique de $\mathbb R^3$. <b>Montrer que $A$ est la matrice d'une projection orthogonale et préciser sur quoi.</b></p>
-<p><b>Étape 1 : Rappel.</b> $A^2 = A$ et $\,{}^tA = A$ (base orthonormée) : projection orthogonale sur $\operatorname{Im}A = (\ker A)^\perp$.</p>
+<p><b>Étape 1 : Rappel.</b> $u$ symétrique $\iff$ sa matrice dans une base <b>orthonormée</b> est symétrique.</p>
 <p><b>Étape 2 : $A^2$.</b> On calcule $\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2$ : case $(1, 1)$ : $4 + 1 + 1 = 6$ ; case $(1, 2)$ : $-2 - 2 + 1 = -3$ ; par symétrie des rôles :</p>
 $$\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2 = \begin{pmatrix}6&-3&-3\\-3&6&-3\\-3&-3&6\end{pmatrix} = 3\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix},\quad\text{donc}\quad A^2 = \frac19\times3\times3A = A.$$
 <p><b>Étape 3 : Le noyau.</b> Chaque ligne a pour somme $0$ : $A\begin{pmatrix}1\\1\\1\end{pmatrix} = \begin{pmatrix}0\\0\\0\end{pmatrix}$, et $\operatorname{rg}A = \operatorname{tr}A = \frac{2 + 2 + 2}3 = 2$ : $\ker A = \mathbb R(1, 1, 1)$.</p>
@@ -9464,7 +9333,7 @@ $$\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}^2 = \begin{pmatrix}6&-3&
 
 <p class="ml">Exemple 12 : $f\circ g$ symétrique $\iff f\circ g = g\circ f$</p>
 <p>Soient $f, g$ deux endomorphismes symétriques d'un espace euclidien. <b>Montrer que $f\circ g$ est symétrique si et seulement si $f\circ g = g\circ f$.</b></p>
-<p><b>Étape 1 : Rappel.</b> En base orthonormée : $A = {}^tA$, $B = {}^tB$.</p>
+<p><b>Étape 1 : Rappel.</b> $u$ symétrique $\iff$ sa matrice dans une base <b>orthonormée</b> est symétrique.</p>
 <p><b>Étape 2 : On transpose.</b> $\,{}^t(AB) = {}^tB\,{}^tA = BA$. Donc $AB$ symétrique $\iff AB = BA$.</p>
 <p><b>Étape 3 : Un contre-exemple qui ne commute pas.</b></p>
 $$A = \begin{pmatrix}1&0\\0&0\end{pmatrix},\ B = \begin{pmatrix}0&1\\1&0\end{pmatrix}:\quad AB = \begin{pmatrix}1\times0 + 0\times1&1\times1 + 0\times0\\0&0\end{pmatrix} = \begin{pmatrix}0&1\\0&0\end{pmatrix},\ \text{pas symétrique}.$$
@@ -9514,31 +9383,23 @@ $$\cG{3\times\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix} + 1\times\frac12\begin{
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{tr}(AU) = \sum\lambda_iv_{ii}\leq\sum\lambda_i = \operatorname{tr}A}$.</p>
 
 <h2 id="e-sfiso">14. Montrer qu'un endomorphisme est une isométrie</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Formule</td><td>Conserver la norme (ou le produit scalaire).</td></tr>
-<tr><td>Matrice dans une base orthonormée</td><td>Colonnes orthonormées (plus rapide que calculer $\,{}^tMM$).</td></tr>
-<tr><td>Image d'une base</td><td>L'image d'une base orthonormée est une base orthonormée.</td></tr>
-<tr><td>Matrice symétrique et orthogonale</td><td>C'est une symétrie orthogonale ($A^2 = {}^tAA = I_n$).</td></tr>
-</table>
-
 <p class="ml">Exemple 17 : $M\mapsto AM$ est une isométrie $\iff A\in O_n$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb R)$ et $f_A:M\mapsto AM$ sur $\mathcal M_n(\mathbb R)$ muni de $\langle M, N\rangle = \operatorname{tr}({}^tMN)$. <b>Montrer que $f_A$ est une isométrie si et seulement si $A\in O_n(\mathbb R)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Conserver le produit scalaire $\langle M, N\rangle = \operatorname{tr}({}^tMN)$.</p>
+<p><b>Étape 1 : Rappel.</b> Conserver la norme (ou le produit scalaire).</p>
 <p><b>Étape 2 : On calcule.</b> $\langle AM, AN\rangle = \operatorname{tr}({}^tM\,{}^tAAN)$, donc $f_A$ isométrie $\iff\operatorname{tr}\big({}^tM({}^tAA - I_n)N\big) = 0$ pour tous $M, N$, soit $\langle M, ({}^tAA - I_n)N\rangle = 0$.</p>
 <p><b>Étape 3 : Le seul vecteur orthogonal à tout est $0$.</b> $({}^tAA - I_n)N = 0$ pour tout $N$ ; avec $N = I_n$ : $\,{}^tAA = I_n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f_A\ \text{isométrie}\iff A\in O_n(\mathbb R)}$. Exemple : $A = \begin{pmatrix}0&-1\\1&0\end{pmatrix}$, $\,{}^tAA = \begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}0&-1\\1&0\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix}$ ✓.</p>
 
 <p class="ml">Exemple 18 : $\langle e_i, e_j\rangle = \langle f_i, f_j\rangle$ entraîne une isométrie $e_i\mapsto f_i$</p>
 <p>Soient $(e_1, \dots, e_n)$ une base et $(f_1, \dots, f_n)$ une famille d'un espace euclidien avec $\langle e_i, e_j\rangle = \langle f_i, f_j\rangle$ pour tous $i, j$. <b>Montrer que l'application linéaire $u$ définie par $u(e_i) = f_i$ est une isométrie.</b></p>
-<p><b>Étape 1 : Rappel.</b> $u$ défini par $u(e_i) = f_i$ ; on montre $\|u(x)\| = \|x\|$.</p>
+<p><b>Étape 1 : Rappel.</b> L'image d'une base orthonormée est une base orthonormée.</p>
 <p><b>Étape 2 : On développe.</b> $x = \sum x_ie_i$ : $\|u(x)\|^2 = \Big\langle\sum x_if_i, \sum x_jf_j\Big\rangle = \sum_{i,j}x_ix_j\langle f_i, f_j\rangle$.</p>
 <p><b>Étape 3 : L'hypothèse.</b> $\langle f_i, f_j\rangle = \langle e_i, e_j\rangle$ : la somme vaut $\sum x_ix_j\langle e_i, e_j\rangle = \|x\|^2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\in O(E)}$ : les matrices de Gram $G = (\langle e_i, e_j\rangle)$ des deux familles sont égales.</p>
 
 <p class="ml">Exemple 19 : une rotation de $\mathbb R^3$</p>
 <p>$A = \frac13\begin{pmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{pmatrix}$. <b>Montrer que $A$ est une rotation et déterminer son axe et son angle.</b></p>
-<p><b>Étape 1 : Rappel.</b> Colonnes orthonormées, $\det = 1$ : rotation ; axe = invariants ; $\operatorname{tr}A = 1 + 2\cos\theta$ ; signe par $\det(u, v, Av)$.</p>
+<p><b>Étape 1 : Rappel.</b> Colonnes orthonormées (plus rapide que calculer $\,{}^tMM$).</p>
 <p><b>Étape 2 : Orthogonale.</b> Colonnes de $3A$ : $C_1 = (2, -1, 2)$, $C_2 = (2, 2, -1)$, $C_3 = (-1, 2, 2)$. Normes : $4 + 1 + 4 = 9$ chacune. Produits : $C_1\cdot C_2 = 4 - 2 - 2 = 0$, $C_1\cdot C_3 = -2 - 2 + 4 = 0$, $C_2\cdot C_3 = -2 + 4 - 2 = 0$.</p>
 <p><b>Étape 3 : Le déterminant</b> de $3A$, développé selon la 1<sup>re</sup> ligne :</p>
 $$\begin{vmatrix}2&2&-1\\-1&2&2\\2&-1&2\end{vmatrix} = 2\begin{vmatrix}2&2\\-1&2\end{vmatrix} - 2\begin{vmatrix}-1&2\\2&2\end{vmatrix} + (-1)\begin{vmatrix}-1&2\\2&-1\end{vmatrix} = 2(4 + 2) - 2(-2 - 4) - (1 - 4) = 12 + 12 + 3 = 27,$$
@@ -9550,14 +9411,14 @@ $$\begin{pmatrix}-1&2&-1\\-1&-1&2\\2&-1&-1\end{pmatrix}\begin{pmatrix}x\\y\\z\en
 
 <p class="ml">Exemple 20 : une réflexion, reconnue sans calcul de valeurs propres</p>
 <p>$A = \frac17\begin{pmatrix}-2&6&-3\\6&3&2\\-3&2&6\end{pmatrix}$. <b>Montrer que $A$ est une réflexion et préciser son plan.</b></p>
-<p><b>Étape 1 : Rappel.</b> Symétrique et orthogonale $\Rightarrow A^2 = {}^tAA = I_3$ : symétrie orthogonale par rapport à $\ker(A - I_3)$.</p>
+<p><b>Étape 1 : Rappel.</b> C'est une symétrie orthogonale ($A^2 = {}^tAA = I_n$).</p>
 <p><b>Étape 2 : Orthogonale.</b> Normes des colonnes de $7A$ : $4 + 36 + 9 = 49$, $36 + 9 + 4 = 49$, $9 + 4 + 36 = 49$. Produits : $-12 + 18 - 6 = 0$, $6 + 12 - 18 = 0$, $-18 + 6 + 12 = 0$.</p>
 <p><b>Étape 3 : Les invariants.</b> $(7A - 7I_3)V = 0$ : ligne $1$ : $-9x + 6y - 3z = 0$, soit $3x - 2y + z = 0$ ; les lignes $2$ ($6x - 4y + 2z = 0$) et $3$ ($-3x + 2y - z = 0$) sont proportionnelles.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A\ \text{est la réflexion par rapport au plan}\ 3x - 2y + z = 0}$ (et $\operatorname{tr}A = \frac{-2 + 3 + 6}7 = 1 = 1 + 1 - 1$ ✓).</p>
 
 <p class="ml">Exemple 21 : un demi-tour</p>
 <p>$A = \frac19\begin{pmatrix}-7&4&4\\4&-1&8\\4&8&-1\end{pmatrix}$. <b>Montrer que $A$ est un demi-tour et préciser son axe.</b></p>
-<p><b>Étape 1 : Rappel.</b> Symétrique orthogonale : symétrie ; $\operatorname{tr}A = \dim E_1 - \dim E_{-1}$.</p>
+<p><b>Étape 1 : Rappel.</b> C'est une symétrie orthogonale ($A^2 = {}^tAA = I_n$).</p>
 <p><b>Étape 2 : Orthogonale.</b> Normes : $49 + 16 + 16 = 81$, $16 + 1 + 64 = 81$, $16 + 64 + 1 = 81$. Produits : $-28 - 4 + 32 = 0$, $-28 + 32 - 4 = 0$, $16 - 8 - 8 = 0$.</p>
 <p><b>Étape 3 : La trace.</b> $\operatorname{tr}A = \frac{-7 - 1 - 1}9 = -1$, et $\dim E_1 + \dim E_{-1} = 3$ : $\dim E_1 = 1$, $\dim E_{-1} = 2$.</p>
 <p><b>Étape 4 : L'axe.</b> $(9A - 9I_3)V = 0$ : $-16x + 4y + 4z = 0$ et $4x - 10y + 8z = 0$. La 1<sup>re</sup> donne $y + z = 4x$ ; dans la 2<sup>e</sup> : $y + z - 10y + 8z = 0$, $y = z$, puis $x = \frac y2$ : $V = (1, 2, 2)$.</p>
@@ -9834,17 +9695,9 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 <p>$(x_n)$ est de Cauchy si $\|x_p - x_q\|\to0$ quand $p, q\to+\infty$. Toute suite convergente est de Cauchy ; un espace où la réciproque est vraie est dit complet (Banach). Les espaces de dimension finie sont complets ; $(\mathcal C([0, 1]), \|\cdot\|_1)$ ne l'est pas.</p>
 
 <h2 id="t-sfnorme">13. Montrer qu'une application est une norme, comparer deux normes</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Formule avec $\max$, $\sup$, valeurs absolues</td><td>La <b>définition</b> : séparation, homogénéité, inégalité triangulaire (une par une).</td></tr>
-<tr><td>Formule avec une racine d'une somme de carrés</td><td>C'est $\sqrt{\varphi(x, x)}$ : montrer que $\varphi$ est un <b>produit scalaire</b>, l'inégalité triangulaire est alors gratuite.</td></tr>
-<tr><td>Comparer $N_1$ et $N_2$</td><td>Chercher $\alpha, \beta > 0$ avec $N_1\leq\alpha N_2$ et $N_2\leq\beta N_1$.</td></tr>
-<tr><td>Montrer qu'elles ne sont pas équivalentes</td><td>Une <b>suite</b> $(x_n)$ avec $\frac{N_1(x_n)}{N_2(x_n)}\to+\infty$.</td></tr>
-</table>
-
 <p class="ml">Exemple 15 : $N(x, y) = \max(|x|, |y|, |x - y|)$ et sa boule unité</p>
 <p>Soit $N(x, y) = \max(|x|, |y|, |x - y|)$ sur $\mathbb R^2$. <b>Montrer que $N$ est une norme et dessiner sa boule unité fermée.</b></p>
-<p><b>Étape 1 : Rappel.</b> Positivité, séparation, homogénéité, inégalité triangulaire.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : séparation, homogénéité, inégalité triangulaire (une par une).</p>
 <p><b>Étape 2 : Séparation et homogénéité.</b> $N(u) = 0$ force $|x| = |y| = 0$. $N(\lambda u) = \max(|\lambda x|, |\lambda y|, |\lambda x - \lambda y|) = |\lambda|\max(|x|, |y|, |x - y|) = |\lambda|N(u)$.</p>
 <p><b>Étape 3 : Triangle.</b> $|x + x'|\leq|x| + |x'|\leq N(u) + N(v)$, de même $|y + y'|$ et $|(x - y) + (x' - y')|\leq|x - y| + |x' - y'|\leq N(u) + N(v)$. Le max des trois est donc $\leq N(u) + N(v)$.</p>
 <p><b>Étape 4 : La boule.</b> $N(x, y)\leq1\iff-1\leq x\leq1,\ -1\leq y\leq1,\ -1\leq x - y\leq1$ : le carré $[-1, 1]^2$ coupé par les droites $y = x - 1$ et $y = x + 1$.</p>
@@ -9852,52 +9705,44 @@ $$f\ \text{continue},\ K\ \text{compact}\ \Longrightarrow\ f(K)\ \text{compact};
 
 <p class="ml">Exemple 16 : $N(P) = \sqrt{\sum_{k=0}^nP(a_k)^2}$ sur $\mathbb R_n[X]$</p>
 <p>Soient $a_0, \dots, a_n$ des réels distincts et $N(P) = \sqrt{\sum_{k=0}^nP(a_k)^2}$ sur $\mathbb R_n[X]$. <b>Montrer que $N$ est une norme euclidienne.</b></p>
-<p><b>Étape 1 : Rappel.</b> Racine d'une somme de carrés : norme d'un produit scalaire.</p>
+<p><b>Étape 1 : Rappel.</b> C'est $\sqrt{\varphi(x, x)}$ : montrer que $\varphi$ est un <b>produit scalaire</b>, l'inégalité triangulaire est alors gratuite.</p>
 <p><b>Étape 2 : Le produit scalaire.</b> $\varphi(P, Q) = \sum_{k=0}^nP(a_k)Q(a_k)$ : symétrique, bilinéaire, $\varphi(P, P)\geq0$.</p>
 <p><b>Étape 3 : Défini.</b> $\varphi(P, P) = 0\Rightarrow P(a_k) = 0$ pour les $n + 1$ réels distincts $a_k$ ; $\deg P\leq n$, donc $P = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{N = \sqrt{\varphi(\cdot, \cdot)}\ \text{est une norme euclidienne}}$.</p>
 
 <p class="ml">Exemple 17 : deux normes équivalentes sur $\mathcal C^1([0, 1])$</p>
 <p>$N_1(f) = |f(0)| + \int_0^1|f'|$, $N_2(f) = |f(1)| + \int_0^1|f'|$. <b>Montrer que $N_1$ et $N_2$ sont deux normes équivalentes sur $\mathcal C^1([0, 1])$ : $N_2\leq2N_1$ et $N_1\leq2N_2$.</b></p>
-<p><b>Étape 1 : Rappel.</b> On relie $f(1)$ et $f(0)$ : $f(1) = f(0) + \int_0^1f'$.</p>
+<p><b>Étape 1 : Rappel.</b> Chercher $\alpha, \beta > 0$ avec $N_1\leq\alpha N_2$ et $N_2\leq\beta N_1$.</p>
 <p><b>Étape 2 : $N_2\leq2N_1$.</b> $|f(1)|\leq|f(0)| + \int_0^1|f'| = N_1(f)$, donc $N_2(f) = |f(1)| + \int|f'|\leq N_1(f) + N_1(f)$.</p>
 <p><b>Étape 3 : $N_1\leq2N_2$.</b> De même $f(0) = f(1) - \int_0^1f'$, donc $|f(0)|\leq|f(1)| + \int_0^1|f'| = N_2(f)$, puis $N_1(f) = |f(0)| + \int_0^1|f'|\leq N_2(f) + N_2(f) = 2N_2(f)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\tfrac12N_2\leq N_1\leq2N_2}$ : équivalentes.</p>
 
 <p class="ml">Exemple 18 : deux normes non équivalentes</p>
 <p>$E = \{f\in\mathcal C^2([0, 1]),\ f(0) = f(1) = 0\}$, $N(f) = \big(\int_0^1f''^2\big)^{1/2}$. Comparer avec $\|\cdot\|_\infty$.</p>
-<p><b>Étape 1 : Rappel.</b> Une inégalité dans un sens, une suite pour l'autre.</p>
+<p><b>Étape 1 : Rappel.</b> Une <b>suite</b> $(x_n)$ avec $\frac{N_1(x_n)}{N_2(x_n)}\to+\infty$.</p>
 <p><b>Étape 2 : $|f'(x) - f'(c)|\leq N(f)$.</b> $|f'(x) - f'(c)| = \big|\int_c^xf''\cdot1\big|\leq\big(\int_0^1f''^2\big)^{1/2}\big(\int_0^11\big)^{1/2} = N(f)$ (Cauchy-Schwarz).</p>
 <p><b>Étape 3 : Rolle.</b> $f(0) = f(1)$ donne $c$ avec $f'(c) = 0$, donc $|f'(x)|\leq N(f)$ ; puis les accroissements finis entre $0$ et $x$ : $|f(x)| = |f(x) - f(0)|\leq x\,N(f)\leq N(f)$. Donc $\|f\|_\infty\leq N(f)$ (et $N$ est bien séparante).</p>
 <p><b>Étape 4 : L'autre sens est faux.</b> $f_n(x) = \frac{\sin(n\pi x)}n$ : $\|f_n\|_\infty = \frac1n$, $f_n'' = -n\pi^2\sin(n\pi x)$, $N(f_n)^2 = n^2\pi^4\int_0^1\sin^2(n\pi x)\,dx = n^2\pi^4\times\frac12$. Donc $\frac{N(f_n)}{\|f_n\|_\infty} = \frac{n\pi^2/\sqrt2}{1/n} = \frac{n^2\pi^2}{\sqrt2}\to+\infty$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\|\cdot\|_\infty\leq N,\ \text{mais elles ne sont pas équivalentes}}$.</p>
 
 <h2 id="t-sfsuites">14. Étudier une suite dans un espace normé</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Résultat théorique</td><td>La définition avec $\varepsilon$, souvent par l'absurde (nier la convergence proprement).</td></tr>
-<tr><td>Calcul concret</td><td>$u_n\to\ell\iff\|u_n - \ell\|\to0$ : on se ramène à une suite réelle.</td></tr>
-<tr><td>Dimension finie</td><td>Les <b>suites coordonnées</b> (toutes les normes sont équivalentes).</td></tr>
-<tr><td>Image par une application continue</td><td>$u_n\to\ell$, $f$ continue en $\ell$ $\Rightarrow f(u_n)\to f(\ell)$.</td></tr>
-</table>
-
 <p class="ml">Exemple 19 : une seule valeur d'adhérence dans un compact</p>
 <p>Soit $(u_n)$ une suite d'un compact $K$ qui a une seule valeur d'adhérence $\ell$. <b>Montrer que $(u_n)$ converge vers $\ell$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Non-convergence vers $\ell$ : $\exists\varepsilon > 0,\ \forall N,\ \exists n\geq N,\ \|u_n - \ell\| > \varepsilon$.</p>
+<p><b>Étape 1 : Rappel.</b> La définition avec $\varepsilon$, souvent par l'absurde (nier la convergence proprement).</p>
 <p><b>Étape 2 : On construit une extraite.</b> On choisit $\varphi(0)$ avec $\|u_{\varphi(0)} - \ell\| > \varepsilon$, puis $\varphi(n + 1) > \varphi(n)$ de même : $\|u_{\varphi(n)} - \ell\| > \varepsilon$ pour tout $n$.</p>
 <p><b>Étape 3 : Bolzano-Weierstrass.</b> $(u_{\varphi(n)})$ est dans le compact $K$ : elle a une valeur d'adhérence $\ell'$, qui vérifie $\|\ell' - \ell\|\geq\varepsilon$, donc $\ell'\neq\ell$.</p>
 <p><b>Étape 4 : Conclusion.</b> Contradiction avec l'unicité : $\cG{(u_n)\ \text{converge vers}\ \ell}$.</p>
 
 <p class="ml">Exemple 20 : $f_n(t) = t^n$ selon la norme</p>
 <p>Soit $f_n(t) = t^n$ sur $[0, 1]$. <b>La suite $(f_n)$ tend-elle vers $0$ pour $\|\cdot\|_1$ ? pour $\|\cdot\|_\infty$ ?</b></p>
-<p><b>Étape 1 : Rappel.</b> $f_n\to0\iff\|f_n - 0\|\to0$.</p>
+<p><b>Étape 1 : Rappel.</b> $u_n\to\ell\iff\|u_n - \ell\|\to0$ : on se ramène à une suite réelle.</p>
 <p><b>Étape 2 : Norme $\|\cdot\|_1$.</b> $\|f_n\|_1 = \int_0^1t^n\,dt = \Big[\frac{t^{n+1}}{n + 1}\Big]_0^1 = \frac1{n + 1}\to0$.</p>
 <p><b>Étape 3 : Norme $\|\cdot\|_\infty$.</b> $\|f_n\|_\infty = \sup_{[0, 1]}t^n = 1^n = 1\not\to0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f_n\to0\ \text{pour}\ \|\cdot\|_1,\ \text{pas pour}\ \|\cdot\|_\infty}$ : sur $\mathcal C([0, 1])$ (dimension infinie), ces normes ne sont pas équivalentes.</p>
 
 <p class="ml">Exemple 21 : $\lim\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$</p>
 <p>Soit $a\in\mathbb R$. <b>Calculer $\lim_{n\to+\infty}\begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix}^n$.</b></p>
-<p><b>Étape 1 : Rappel.</b> En dimension finie, convergence coefficient par coefficient ; on écrit la matrice comme une rotation fois un réel.</p>
+<p><b>Étape 1 : Rappel.</b> Les <b>suites coordonnées</b> (toutes les normes sont équivalentes).</p>
 <p><b>Étape 2 : La forme polaire.</b> On pose $r_n = \sqrt{1 + \frac{a^2}{n^2}}$, $\cos\theta_n = \frac1{r_n}$, $\sin\theta_n = \frac{a/n}{r_n}$ (c'est possible car $\cos^2\theta_n + \sin^2\theta_n = \frac{1 + a^2/n^2}{r_n^2} = 1$). On sort $r_n$ de chaque coefficient, et le produit de deux rotations est la rotation d'angle somme :</p>
 $$A_n = \begin{pmatrix}1&-\frac an\\\frac an&1\end{pmatrix} = r_n\begin{pmatrix}\cos\theta_n&-\sin\theta_n\\\sin\theta_n&\cos\theta_n\end{pmatrix},\qquad A_n^n = r_n^n\begin{pmatrix}\cos(n\theta_n)&-\sin(n\theta_n)\\\sin(n\theta_n)&\cos(n\theta_n)\end{pmatrix}.$$
 <p><b>Étape 3 : L'angle.</b> $\cos\theta_n > 0$, donc $\theta_n = \arctan\frac an\sim\frac an$ et $n\theta_n\to a$.</p>
@@ -9915,113 +9760,96 @@ $$T_n = T + \begin{pmatrix}\frac1n&&&0\\&\frac2n&&\\&&\ddots&\\0&&&\frac pn\end{
 
 <p class="ml">Exemple 23 : c'est faux dans $\mathcal M_2(\mathbb R)$</p>
 <p><b>Montrer que les matrices diagonalisables ne sont pas denses dans $\mathcal M_2(\mathbb R)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Le discriminant $\Delta(M) = (a + d)^2 - 4(ad - bc)$ est continu (polynôme en les coefficients).</p>
+<p><b>Étape 1 : Rappel.</b> $u_n\to\ell$, $f$ continue en $\ell$ $\Rightarrow f(u_n)\to f(\ell)$.</p>
 <p><b>Étape 2 : La matrice.</b> $A = \begin{pmatrix}0&1\\-1&0\end{pmatrix}$ : $\chi_A = X^2 + 1$, $\Delta(A) = 0 - 4 = -4 \lt 0$.</p>
 <p><b>Étape 3 : L'absurde.</b> Si $A_n\to A$ avec $A_n$ diagonalisable dans $\mathbb R$ à valeurs propres distinctes, $\Delta(A_n) > 0$, donc $\Delta(A) = \lim\Delta(A_n)\geq0$ : contradiction. (Si une valeur propre est double, $A_n$ est scalaire, $\Delta = 0$ : même contradiction.)</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{les diagonalisables ne sont pas denses dans}\ \mathcal M_2(\mathbb R)}$.</p>
 
 <h2 id="t-sfouv">15. Montrer qu'une partie est ouverte, fermée</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Ouvert : cas simple</td><td>Définition : pour $a\in A$, une boule $B(a, r)\subset A$, avec un $r$ explicite.</td></tr>
-<tr><td>Ouvert : partie définie par des inégalités strictes</td><td><b>Image réciproque</b> d'un ouvert par une application continue.</td></tr>
-<tr><td>Ouvert : réunion</td><td>Réunion quelconque d'ouverts.</td></tr>
-<tr><td>Fermé : partie définie par des inégalités larges, des égalités</td><td>Image réciproque d'un fermé par une continue.</td></tr>
-<tr><td>Fermé : en général</td><td><b>Caractérisation séquentielle</b> : toute suite convergente de $A$ a sa limite dans $A$.</td></tr>
-<tr><td>Fermé : intersection</td><td>Intersection quelconque de fermés.</td></tr>
-</table>
-
 <p class="ml">Exemple 24 : $\{x\in\mathbb R^n,\ x_i\neq x_j\ (i\neq j)\}$ est ouvert</p>
 <p><b>Montrer que $A = \{x\in\mathbb R^n,\ x_i\neq x_j\ \text{pour}\ i\neq j\}$ est un ouvert de $\mathbb R^n$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Trouver un rayon explicite pour la norme $\|\cdot\|_\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> Définition : pour $a\in A$, une boule $B(a, r)\subset A$, avec un $r$ explicite.</p>
 <p><b>Étape 2 : Le rayon.</b> $a\in A$, $r = \frac12\min_{i\neq j}|a_i - a_j| > 0$.</p>
 <p><b>Étape 3 : La boule.</b> $x\in B(a, r)$ : $|x_i - x_j|\geq|a_i - a_j| - |x_i - a_i| - |x_j - a_j| > 2r - r - r = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $B(a, r)\subset A$ : $\cG{A\ \text{est ouvert}}$.</p>
 
 <p class="ml">Exemple 25 : $A + B$ est ouvert si $A$ l'est</p>
 <p>Soient $A, B$ deux parties d'un espace normé, $A$ ouvert. <b>Montrer que $A + B = \{a + b\}$ est ouvert.</b></p>
-<p><b>Étape 1 : Rappel.</b> $A + B = \bigcup_{b\in B}(A + \{b\})$, et une translation envoie une boule sur une boule.</p>
+<p><b>Étape 1 : Rappel.</b> Réunion quelconque d'ouverts.</p>
 <p><b>Étape 2 : Un translaté.</b> $y = x + b$, $x\in A$, $B(x, r)\subset A$ : $B(y, r) = B(x, r) + b\subset A + \{b\}$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{A + B\ \text{est ouvert}}$ (réunion d'ouverts).</p>
 
 <p class="ml">Exemple 26 : $GL_n(\mathbb K)$ est ouvert</p>
 <p><b>Montrer que $GL_n(\mathbb K)$ est un ouvert de $\mathcal M_n(\mathbb K)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\det$ est continue (polynomiale en les coefficients), $\mathbb K^* = \mathbb K\setminus\{0\}$ est ouvert.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Image réciproque</b> d'un ouvert par une application continue.</p>
 <p><b>Étape 2 : On écrit.</b> $GL_n(\mathbb K) = \det^{-1}(\mathbb K^*)$.</p>
 <p><b>Étape 3 : Concrètement.</b> $\det\begin{pmatrix}1 + \varepsilon_1&\varepsilon_2\\\varepsilon_3&1 + \varepsilon_4\end{pmatrix} = 1 + \varepsilon_1 + \varepsilon_4 + \varepsilon_1\varepsilon_4 - \varepsilon_2\varepsilon_3$ reste $\neq0$ si les $|\varepsilon_i|$ sont petits.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{GL_n(\mathbb K)\ \text{est un ouvert de}\ \mathcal M_n(\mathbb K)}$.</p>
 
 <p class="ml">Exemple 27 : une boule fermée est fermée</p>
 <p><b>Montrer qu'une boule fermée $\overline B(a, r)$ d'un espace normé est une partie fermée.</b></p>
-<p><b>Étape 1 : Rappel.</b> $x\mapsto\|x - a\|$ est $1$-lipschitzienne, donc continue.</p>
+<p><b>Étape 1 : Rappel.</b> Image réciproque d'un fermé par une continue.</p>
 <p><b>Étape 2 : Image réciproque.</b> $\overline B(a, r) = \{x,\ \|x - a\|\leq r\}$ est l'image réciproque du fermé $[0, r]$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\overline B(a, r)\ \text{est fermée}}$.</p>
 
 <p class="ml">Exemple 28 : un sous-espace de dimension finie est fermé</p>
 <p><b>Montrer qu'un sous-espace vectoriel $F$ d'un espace normé de dimension finie est fermé.</b></p>
-<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, et coordonnées dans une base adaptée $(e_1, \dots, e_n)$ ($F = \operatorname{Vect}(e_1, \dots, e_p)$).</p>
+<p><b>Étape 1 : Rappel.</b> <b>Caractérisation séquentielle</b> : toute suite convergente de $A$ a sa limite dans $A$.</p>
 <p><b>Étape 2 : Une suite.</b> $x_k\in F$, $x_k\to\ell$ : $x_k = \sum_{i\leq p}x_k^{(i)}e_i$, et chaque coordonnée converge vers celle de $\ell$.</p>
 <p><b>Étape 3 : Les coordonnées.</b> Pour $i > p$, $x_k^{(i)} = 0$ pour tout $k$, donc $\ell_i = 0$ : $\ell\in F$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{est fermé}}$ (dans un $E$ de dimension finie ; vrai aussi en général).</p>
 
 <p class="ml">Exemple 29 : un hyperplan est fermé ou dense</p>
 <p>Soit $H$ un hyperplan d'un espace normé $E$. <b>Montrer que $H$ est fermé ou dense dans $E$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $H = \ker\varphi$ ; si $H$ n'est pas fermé, une suite de $H$ converge hors de $H$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Caractérisation séquentielle</b> : toute suite convergente de $A$ a sa limite dans $A$.</p>
 <p><b>Étape 2 : Non fermé.</b> $x_n\in H$, $x_n\to a\notin H$. Tout $b\in E$ s'écrit $b = h + \lambda a$ ($E = H\oplus\mathbb Ka$).</p>
 <p><b>Étape 3 : Approcher $b$.</b> $h + \lambda x_n\in H$ et $h + \lambda x_n\to h + \lambda a = b$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{H\ \text{fermé ou dense}}$ ; en dimension finie, $\varphi$ continue donne $H = \varphi^{-1}(\{0\})$ fermé.</p>
 
 <p class="ml">Exemple 30 : $A^\perp$ est fermé</p>
 <p>Soit $A$ une partie d'un espace préhilbertien. <b>Montrer que $A^\perp$ est fermé.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\{a\}^\perp = \ker\varphi_a$ avec $\varphi_a(x) = \langle a, x\rangle$, $|\varphi_a(x)|\leq\|a\|\|x\|$ (Cauchy-Schwarz) : continue.</p>
+<p><b>Étape 1 : Rappel.</b> Intersection quelconque de fermés.</p>
 <p><b>Étape 2 : Conclusion.</b> $A^\perp = \bigcap_{a\in A}\{a\}^\perp$ : $\cG{\text{intersection de fermés, donc fermé}}$.</p>
 
 <h2 id="t-sfcomp">16. Compacité</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Montrer compact</td><td>Suites extraites ; ou image d'un compact par une continue ; ou fermé dans un compact ; en dimension finie, <b>fermé borné</b>.</td></tr>
-<tr><td>Montrer non compact</td><td>Une suite sans extraite convergente (souvent : $\|x_n - x_m\|$ ne tend pas vers $0$).</td></tr>
-<tr><td>Utiliser</td><td>Bolzano-Weierstrass, bornes atteintes, Heine.</td></tr>
-</table>
-
 <p class="ml">Exemple 31 : $O_n(\mathbb R)$ est compact</p>
 <p><b>Montrer que $O_n(\mathbb R)$ est une partie compacte de $\mathcal M_n(\mathbb R)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> En dimension finie : fermé et borné.</p>
+<p><b>Étape 1 : Rappel.</b> Suites extraites ; ou image d'un compact par une continue ; ou fermé dans un compact ; en dimension finie, <b>fermé borné</b>.</p>
 <p><b>Étape 2 : Fermé.</b> $M\mapsto{}^tMM$ est continue (coefficients polynomiaux) : $O_n = \{M,\ {}^tMM = I_n\}$ est l'image réciproque du fermé $\{I_n\}$.</p>
 <p><b>Étape 3 : Borné.</b> Les colonnes sont unitaires : $|m_{ij}|\leq1$, donc $\|M\|_\infty\leq1$. Exemple : $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{O_n(\mathbb R)\ \text{est compact}}$.</p>
 
 <p class="ml">Exemple 32 : la sphère unité de $(\mathcal C([0, 2\pi], \mathbb C), \|\cdot\|_\infty)$ n'est pas compacte</p>
 <p><b>Montrer que la sphère unité de $(\mathcal C([0, 2\pi], \mathbb C), \|\cdot\|_\infty)$ est fermée et bornée mais pas compacte.</b></p>
-<p><b>Étape 1 : Rappel.</b> Une suite dont deux termes distincts sont toujours à distance $2$ n'a pas d'extraite convergente.</p>
+<p><b>Étape 1 : Rappel.</b> Une suite sans extraite convergente (souvent : $\|x_n - x_m\|$ ne tend pas vers $0$).</p>
 <p><b>Étape 2 : La suite.</b> $f_n(t) = e^{int}$, $\|f_n\|_\infty = 1$.</p>
 <p><b>Étape 3 : L'écart.</b> $e^{int} - e^{imt} = e^{i\frac{(n + m)t}2}\times2i\sin\big(\frac{(n - m)t}2\big)$, de module max $2$ (atteint en $t = \frac\pi{n - m}$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\|f_n - f_m\|_\infty = 2$ : $\cG{S(0, 1)\ \text{fermée bornée mais non compacte}}$ (dimension infinie).</p>
 
 <p class="ml">Exemple 33 : $A + B$ compact, et distance de deux compacts atteinte</p>
 <p>Soient $A, B$ deux compacts non vides d'un espace normé $E$. <b>Montrer que $A + B$ est compact et que $d(A, B)$ est atteinte.</b></p>
-<p><b>Étape 1 : Rappel.</b> Image d'un compact par une continue ; bornes atteintes.</p>
+<p><b>Étape 1 : Rappel.</b> Suites extraites ; ou image d'un compact par une continue ; ou fermé dans un compact ; en dimension finie, <b>fermé borné</b>.</p>
 <p><b>Étape 2 : $A + B$.</b> $f(x, y) = x + y$ est continue sur $E\times E$, et $A\times B$ est compact : $A + B = f(A\times B)$ est compact.</p>
 <p><b>Étape 3 : La distance.</b> $(a, b)\mapsto\|a - b\|$ est continue sur le compact $A\times B$ : elle atteint son minimum $d(A, B)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{A + B\ \text{compact},\ \exists(a, b),\ d(A, B) = \|a - b\|}$.</p>
 
 <p class="ml">Exemple 34 : une isométrie d'un compact dans lui-même est surjective</p>
 <p>Soit $K$ un compact et $f:K\to K$ telle que $\|f(x) - f(y)\| = \|x - y\|$. <b>Montrer que $f$ est surjective.</b></p>
-<p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass appliqué à la suite des itérés.</p>
+<p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass, bornes atteintes, Heine.</p>
 <p><b>Étape 2 : Les itérés.</b> $x\in K$, $u_0 = x$, $u_{n+1} = f(u_n)$. Une extraite converge, donc $\|u_{\varphi(n+1)} - u_{\varphi(n)}\|\to0$.</p>
 <p><b>Étape 3 : On recule.</b> $f$ conserve les distances : $\|u_{\varphi(n+1)} - u_{\varphi(n)}\| = \|u_{\varphi(n+1) - \varphi(n)} - u_0\|$. Donc des $u_k$ ($k\geq1$, dans $f(K)$) s'approchent de $x$.</p>
 <p><b>Étape 4 : Conclusion.</b> $x\in\overline{f(K)} = f(K)$ ($f(K)$ compact donc fermé) : $\cG{f(K) = K}$.</p>
 
 <p class="ml">Exemple 35 : un vecteur unitaire à distance $1$ d'un sous-espace (Riesz)</p>
 <p>Soit $F$ un sous-espace de dimension finie d'un espace normé $E$, $F\neq E$. <b>Montrer qu'il existe $z$ avec $\|z\| = 1$ et $d(z, F) = 1$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Une distance à un fermé de dimension finie est atteinte.</p>
+<p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass, bornes atteintes, Heine.</p>
 <p><b>Étape 2 : Le point le plus proche.</b> $y\notin F$, $d = d(y, F) > 0$ ($F$ fermé). Sur le compact $\overline B(y, d + 1)\cap F$, la distance est atteinte : $\|y - t\| = d$.</p>
 <p><b>Étape 3 : Le vecteur.</b> $z = \frac{y - t}{\|y - t\|}$, $\|z\| = 1$, et pour $f\in F$ : $\|z - f\| = \frac1d\|y - (t + df)\|\geq\frac dd = 1$ ($t + df\in F$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\|z\| = 1\ \text{et}\ d(z, F) = 1}$ (et $d(z, F)\leq\|z - 0\| = 1$).</p>
 
 <p class="ml">Exemple 36 : un point fixe pour une application contractante au sens large</p>
 <p>$\|f(x) - f(y)\| \lt \|x - y\|$ pour $x\neq y$ dans un compact $K$. <b>Montrer que $f$ admet un unique point fixe dans $K$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\varphi(x) = \|x - f(x)\|$ est continue sur $K$ : elle atteint son minimum.</p>
+<p><b>Étape 1 : Rappel.</b> Bolzano-Weierstrass, bornes atteintes, Heine.</p>
 <p><b>Étape 2 : Le minimum.</b> $\varphi(y) = \min\varphi$. Si $f(y)\neq y$ : $\varphi(f(y)) = \|f(y) - f(f(y))\| \lt \|y - f(y)\| = \varphi(y)$, contradiction.</p>
 <p><b>Étape 3 : Unicité.</b> Deux points fixes $a\neq b$ : $\|a - b\| = \|f(a) - f(b)\| \lt \|a - b\|$, impossible.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{a un unique point fixe}}$.</p>
@@ -10052,24 +9880,16 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\ \text{strictement monotone}}$.</p>
 
 <h2 id="t-sfcont">18. Continuité des applications linéaires et des autres</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Linéaire, dimension infinie</td><td>$\|u(x)\|\leq k\|x\|$ ; sinon une suite $(x_n)$ bornée avec $\|u(x_n)\|\to+\infty$.</td></tr>
-<tr><td>Linéaire, départ de dimension finie</td><td>Toujours continue.</td></tr>
-<tr><td>Non linéaire</td><td>Lipschitzienne ; théorèmes généraux ; $\varepsilon$ ; séquentielle pour la discontinuité.</td></tr>
-<tr><td>Uniforme continuité</td><td>Lipschitzienne ; définition ; absurde avec deux suites ; Heine (compact).</td></tr>
-</table>
-
 <p class="ml">Exemple 40 : $P\mapsto P(0)$ continue, $P\mapsto P'$ non, pour $N(P) = \sum|a_k|$</p>
 <p>Sur $\mathbb R[X]$ avec $N(P) = \sum|a_k|$, <b>montrer que $u:P\mapsto P(0)$ est continue et que $v:P\mapsto P'$ ne l'est pas.</b></p>
-<p><b>Étape 1 : Rappel.</b> Critère $\|u(x)\|\leq k\|x\|$.</p>
+<p><b>Étape 1 : Rappel.</b> $\|u(x)\|\leq k\|x\|$ ; sinon une suite $(x_n)$ bornée avec $\|u(x_n)\|\to+\infty$.</p>
 <p><b>Étape 2 : $u(P) = P(0) = a_0$.</b> $|a_0|\leq\sum|a_k| = N(P)$ : continue ($k = 1$).</p>
 <p><b>Étape 3 : $v(P) = P'$.</b> $P_n = X^n$ : un seul coefficient non nul, égal à $1$, donc $N(P_n) = 1$. Et $v(P_n) = nX^{n-1}$, dont le seul coefficient vaut $n$ : $N(v(P_n)) = |n| = n\to+\infty$. Aucun $k$ ne vérifie $n\leq k\times1$ pour tout $n$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\ \text{continue},\ v\ \text{non continue}}$.</p>
 
 <p class="ml">Exemple 41 : si $A^n\to P$, alors $P$ est un projecteur qui commute avec $A$</p>
 <p>Soit $A\in\mathcal M_n(\mathbb K)$ telle que $A^n\to P$. <b>Montrer que $P$ est un projecteur qui commute avec $A$.</b></p>
-<p><b>Étape 1 : Rappel.</b> En dimension finie, $M\mapsto AM$, $M\mapsto MA$ et $(M, N)\mapsto MN$ sont continues.</p>
+<p><b>Étape 1 : Rappel.</b> Toujours continue.</p>
 <p><b>Étape 2 : Commutation.</b> $A^{n+1} = A\cdot A^n\to AP$ et $A^{n+1} = A^n\cdot A\to PA$ ; mais $(A^{n+1})$ est extraite de $(A^n)$, donc tend vers $P$ : $AP = PA = P$.</p>
 <p><b>Étape 3 : Projecteur.</b> $A^{2n} = A^n\cdot A^n\to P\cdot P$ et $A^{2n}\to P$ (extraite) : $P^2 = P$.</p>
 <p><b>Étape 4 : Exemple.</b> $A = \begin{pmatrix}1&0\\0&\frac12\end{pmatrix}$ : $A^n = \begin{pmatrix}1&0\\0&\frac1{2^n}\end{pmatrix}\to\begin{pmatrix}1&0\\0&0\end{pmatrix}$, projecteur.</p>
@@ -10077,27 +9897,27 @@ $$tD + (1 - t)I_n = \begin{pmatrix}t\lambda_1 + 1 - t&&0\\&\ddots&\\0&&t\lambda_
 
 <p class="ml">Exemple 42 : $x\mapsto d(x, A)$ est $1$-lipschitzienne</p>
 <p>Soit $A$ une partie non vide de $E$. <b>Montrer que pour tous $x, y$ : $|d(x, A) - d(y, A)|\leq\|x - y\|$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $d(x, A) = \inf_{a\in A}\|x - a\|$.</p>
+<p><b>Étape 1 : Rappel.</b> Lipschitzienne ; théorèmes généraux ; $\varepsilon$ ; séquentielle pour la discontinuité.</p>
 <p><b>Étape 2 : Triangle.</b> Pour $a\in A$ : $d(x, A)\leq\|x - a\|\leq\|x - y\| + \|y - a\|$, donc $d(x, A) - \|x - y\|$ minore tous les $\|y - a\|$ : $d(x, A) - \|x - y\|\leq d(y, A)$.</p>
 <p><b>Étape 3 : Conclusion.</b> En échangeant $x, y$ : $\cG{|d(x, A) - d(y, A)|\leq\|x - y\|}$.</p>
 
 <p class="ml">Exemple 43 : $f(x) = \lfloor x\rfloor + (x - \lfloor x\rfloor)^2$ est continue sur $\mathbb R$</p>
 <p>Soit $f(x) = \lfloor x\rfloor + (x - \lfloor x\rfloor)^2$. <b>Montrer que $f$ est continue sur $\mathbb R$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Sur chaque $]n, n + 1[$, $f(x) = n + (x - n)^2$ est continue ; aux entiers, on compare les limites à gauche et à droite avec $f(n)$.</p>
+<p><b>Étape 1 : Rappel.</b> Lipschitzienne ; théorèmes généraux ; $\varepsilon$ ; séquentielle pour la discontinuité.</p>
 <p><b>Étape 2 : En $n$, à droite.</b> $\lfloor x\rfloor = n$ : $f(x) = n + (x - n)^2\to n + 0 = n$, et $f(n) = n + 0^2 = n$.</p>
 <p><b>Étape 3 : En $n$, à gauche.</b> $x\in]n - 1, n[$ : $\lfloor x\rfloor = n - 1$, $f(x) = (n - 1) + (x - (n - 1))^2\to(n - 1) + 1^2 = n$.</p>
 <p><b>Étape 4 : Conclusion.</b> Les deux limites valent $f(n)$ : $\cG{f\ \text{est continue sur}\ \mathbb R}$, alors que $\lfloor\cdot\rfloor$ ne l'est pas.</p>
 
 <p class="ml">Exemple 44 : $\mathbb 1_{\mathbb Q}$ est discontinue partout</p>
 <p><b>Montrer que l'indicatrice $\mathbb 1_{\mathbb Q}$ n'est continue en aucun point de $\mathbb R$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Caractérisation séquentielle, densité de $\mathbb Q$ et de $\mathbb R\setminus\mathbb Q$.</p>
+<p><b>Étape 1 : Rappel.</b> Lipschitzienne ; théorèmes généraux ; $\varepsilon$ ; séquentielle pour la discontinuité.</p>
 <p><b>Étape 2 : En $a\notin\mathbb Q$.</b> Une suite de rationnels $x_n\to a$ : $f(x_n) = 1\to1\neq0 = f(a)$.</p>
 <p><b>Étape 3 : En $a\in\mathbb Q$.</b> Une suite d'irrationnels : $f(x_n) = 0\neq1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb 1_{\mathbb Q}\ \text{n'est continue en aucun point}}$.</p>
 
 <p class="ml">Exemple 45 : uniformes continuités</p>
 <p><b>Étudier l'uniforme continuité de $f\mapsto\inf_{[0, 1]}f$, de $\sqrt{\phantom x}$ sur $\mathbb R_+$ et de $x\mapsto\sin(x^2)$ sur $\mathbb R$, puis d'une fonction continue sur $\mathbb R_+$ qui a une limite finie en $+\infty$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Pour montrer l'uniforme continuité : une inégalité $|f(x) - f(y)|\leq\omega(|x - y|)$ avec $\omega(h)\to0$ (lipschitz, hölder) ou le théorème de Heine sur un segment. Pour la réfuter : deux suites $x_n, y_n$ avec $x_n - y_n\to0$ mais $|f(x_n) - f(y_n)|\not\to0$.</p>
+<p><b>Étape 1 : Rappel.</b> Lipschitzienne ; définition ; absurde avec deux suites ; Heine (compact).</p>
 <p><b>Étape 2 : $\varphi(f) = \inf_{[0, 1]}f$ est $1$-lipschitzienne pour $\|\cdot\|_\infty$.</b> $f(t)\leq g(t) + \|f - g\|_\infty$ pour tout $t$, donc $\varphi(f)\leq g(t) + \|f - g\|_\infty$, puis $\varphi(f)\leq\varphi(g) + \|f - g\|_\infty$, et par symétrie $|\varphi(f) - \varphi(g)|\leq\|f - g\|_\infty$.</p>
 <p><b>Étape 3 : $\sqrt{\phantom x}$ sur $\mathbb R_+$.</b> $|\sqrt x - \sqrt y|\leq\sqrt{|x - y|}$ (pour $y\leq x$ : $(\sqrt y + \sqrt{x - y})^2 = x + 2\sqrt{y(x - y)}\geq x$). Avec $\alpha = \varepsilon^2$ : $|x - y|\leq\alpha\Rightarrow|\sqrt x - \sqrt y|\leq\varepsilon$.</p>
 <p><b>Étape 4 : $\sin(x^2)$ ne l'est pas.</b> $x_n = \sqrt{2n\pi}$, $y_n = \sqrt{2n\pi + \frac\pi2}$ : $y_n - x_n = \frac{\pi/2}{y_n + x_n}\to0$ mais $|\sin(y_n^2) - \sin(x_n^2)| = 1 - 0 = 1$.</p>
@@ -11707,19 +11527,11 @@ $$E = F\oplus G\iff F\cap G = \{0\}\ \text{et}\ \dim F + \dim G = \dim E\iff F +
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg} = 2}$ : les trois vecteurs engendrent un plan, la famille est liée.</p>
 
 <h2 id="k-sfev">9. Montrer qu'un ensemble est un espace vectoriel : quelle méthode ?</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Lois nouvelles, inventées par l'énoncé</td><td>La <b>définition complète</b> : groupe abélien pour $+$, puis les quatre règles de la loi externe ($1\cdot x = x$, $\lambda(x + y) = \lambda x + \lambda y$, $(\lambda + \mu)x = \lambda x + \mu x$, $\lambda(\mu x) = (\lambda\mu)x$).</td></tr>
-<tr><td>Partie d'un espace connu</td><td><b>Sous-espace</b> : inclus, contient $0$, stable par $\lambda x + y$.</td></tr>
-<tr><td>Des combinaisons linéaires de vecteurs fixés</td><td>L'écrire comme un $\cB{\operatorname{Vect}(\dots)}$ : sev <b>et</b> famille génératrice d'un coup.</td></tr>
-<tr><td>Une condition « $u(x) = v(x)$ », « $= 0$ » avec $u$ linéaire</td><td>Un <b>noyau</b> : $\{x,\ u(x) = v(x)\} = \ker(u - v)$.</td></tr>
-<tr><td>Plusieurs conditions linéaires</td><td>Une <b>intersection</b> de noyaux, d'hyperplans.</td></tr>
-</table>
 <p>Ne jamais redémontrer qu'un noyau, une image, un $\operatorname{Vect}$ ou une intersection de sev est un sev : c'est le cours.</p>
 
 <p class="ml">Exemple 12 : les fonctions lipschitziennes</p>
 <p>$L = \{f:\mathbb R\to\mathbb R\ \text{lipschitzienne}\}$, où $f$ est $k$-lipschitzienne si $\forall x, y,\ |f(x) - f(y)|\leq k|x - y|$. Montrer que $L$ est un sev de $\mathcal F(\mathbb R, \mathbb R)$.</p>
-<p><b>Étape 1 : Rappel.</b> Inclus, contient $0$, stable par $\lambda f + g$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Sous-espace</b> : inclus, contient $0$, stable par $\lambda x + y$.</p>
 <p><b>Étape 2 : Inclus, non vide.</b> $L\subset\mathcal F(\mathbb R, \mathbb R)$ par définition. La fonction nulle vérifie $|0 - 0| = 0\leq0\times|x - y|$ : elle est $0$-lipschitzienne.</p>
 <p><b>Étape 3 : Stabilité.</b> $f$ $k$-lipschitzienne, $g$ $k'$-lipschitzienne, $\lambda\in\mathbb R$. Par l'inégalité triangulaire :</p>
 $$|(\lambda f + g)(x) - (\lambda f + g)(y)| = |\lambda(f(x) - f(y)) + (g(x) - g(y))|\leq|\lambda|\,|f(x) - f(y)| + |g(x) - g(y)|\leq(|\lambda|k + k')\,|x - y|.$$
@@ -11727,7 +11539,7 @@ $$|(\lambda f + g)(x) - (\lambda f + g)(y)| = |\lambda(f(x) - f(y)) + (g(x) - g(
 
 <p class="ml">Exemple 13 : des matrices écrites comme un Vect</p>
 <p>$F = \Big\{M(a, b, c) = \begin{pmatrix}a&b&c\\0&a&b\\0&0&a\end{pmatrix},\ (a, b, c)\in\mathbb R^3\Big\}$. Sev de $\mathcal M_3(\mathbb R)$ ? Une base ?</p>
-<p><b>Étape 1 : Rappel.</b> Écrire chaque élément comme combinaison de matrices fixes.</p>
+<p><b>Étape 1 : Rappel.</b> L'écrire comme un $\cB{\operatorname{Vect}(\dots)}$ : sev <b>et</b> famille génératrice d'un coup.</p>
 <p><b>Étape 2 : On sépare $a$, $b$, $c$.</b> $M(a, b, c) = a\,\cB I + b\,\cB J + c\,\cB K$ avec</p>
 $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},\quad K = \begin{pmatrix}0&0&1\\0&0&0\\0&0&0\end{pmatrix}.$$
 <p><b>Étape 3 : Sev.</b> Donc $F = \operatorname{Vect}(I, J, K)$, et $(I, J, K)$ est génératrice de $F$.</p>
@@ -11736,26 +11548,15 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 
 <p class="ml">Exemple 14 : une intersection de noyaux</p>
 <p>$F = \{f\in\mathcal C^\infty(\mathbb R, \mathbb R),\ \forall k\in[\![0, n]\!],\ f^{(k)}(0) = 0\}$. Montrer que $F$ est un sev.</p>
-<p><b>Étape 1 : Rappel.</b> Une intersection de noyaux d'applications linéaires est un sev.</p>
+<p><b>Étape 1 : Rappel.</b> Une <b>intersection</b> de noyaux, d'hyperplans.</p>
 <p><b>Étape 2 : Les formes linéaires.</b> $\varphi_k(f) = f^{(k)}(0)$. Linéaire : $(\lambda f + g)^{(k)}(0) = \lambda f^{(k)}(0) + g^{(k)}(0)$ (la dérivation et l'évaluation sont linéaires).</p>
 <p><b>Étape 3 : On reconnaît.</b> $f\in F\iff\varphi_0(f) = \dots = \varphi_n(f) = 0$, donc $F = \bigcap_{k=0}^n\ker\varphi_k$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{F\ \text{est un sev}}$ (intersection de sev). Même idée pour $\{x,\ u(x) = v(x)\} = \ker(u - v)$.</p>
 
 <h2 id="k-sflibre">10. Montrer qu'une famille est libre : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Vecteurs donnés par leurs coordonnées</td><td>La <b>définition</b> : $\sum\alpha_kv_k = 0$, système, et on montre $\alpha_k = 0$. Avec paramètre : discuter.</td></tr>
-<tr><td>Fonctions $e^{a_kx}$, $x^{a_k}$… (croissances différentes)</td><td><b>Absurde</b> + terme dominant quand $x\to+\infty$.</td></tr>
-<tr><td>Famille indexée par $n$ ($\sin(kx)$, …)</td><td><b>Récurrence</b> sur $n$, en dérivant pour éliminer le dernier.</td></tr>
-<tr><td>Polynômes</td><td><b>Degrés</b> distincts, ou <b>valuations</b> distinctes : libre directement.</td></tr>
-<tr><td>Vecteurs propres de valeurs propres distinctes</td><td>Libre directement (fiche Réduction).</td></tr>
-<tr><td>Sous-famille d'une famille libre</td><td>Libre directement.</td></tr>
-<tr><td>Fonctions</td><td>Évaluer la relation en <b>des points bien choisis</b>.</td></tr>
-</table>
-
 <p class="ml">Exemple 15 : $v_i = u + e_i$, une famille avec paramètres</p>
 <p>$(e_1, \dots, e_n)$ base de $E$, $u = \sum_{i=1}^n\lambda_ie_i$, $v_i = u + e_i$. À quelle condition $(v_1, \dots, v_n)$ est-elle libre ?</p>
-<p><b>Étape 1 : Rappel.</b> On écrit $\sum\alpha_kv_k = 0$ et on lit les coordonnées sur la base $(e_i)$.</p>
+<p><b>Étape 1 : Rappel.</b> La <b>définition</b> : $\sum\alpha_kv_k = 0$, système, et on montre $\alpha_k = 0$. Avec paramètre : discuter.</p>
 <p><b>Étape 2 : On remplace.</b> $\sum_k\alpha_k(u + e_k) = \Big(\sum_k\alpha_k\Big)u + \sum_k\alpha_ke_k$. On note $\cO s = \sum_k\alpha_k$ : $\sum\alpha_kv_k = s\sum_i\lambda_ie_i + \sum_i\alpha_ie_i = \sum_i(s\lambda_i + \alpha_i)e_i$.</p>
 <p><b>Étape 3 : Les coordonnées.</b> $(e_i)$ est libre, donc $\sum\alpha_kv_k = 0\iff\forall i,\ s\lambda_i + \alpha_i = 0$ $(\ast)$.</p>
 <p><b>Étape 4 : On somme les $n$ équations.</b> $s\sum_i\lambda_i + \sum_i\alpha_i = 0$, soit $s\sum\lambda_i + s = 0$, donc $\cO s\,\Big(1 + \sum_i\lambda_i\Big) = 0$.</p>
@@ -11765,7 +11566,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 
 <p class="ml">Exemple 16 : les exponentielles, par l'absurde</p>
 <p>Montrer que $(x\mapsto e^{ax})_{a\in\mathbb R}$ est libre.</p>
-<p><b>Étape 1 : Rappel.</b> Une famille infinie est libre si toute sous-famille finie l'est. On suppose une relation non triviale, et on regarde le terme qui domine en $+\infty$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Absurde</b> + terme dominant quand $x\to+\infty$.</p>
 <p><b>Étape 2 : L'hypothèse.</b> $a_1 \lt a_2 \lt \dots \lt a_n$ et $\sum_{i=1}^n\lambda_ie^{a_ix} = 0$ pour tout $x$, avec (quitte à retirer les termes nuls) $\cR{\lambda_n\neq0}$.</p>
 <p><b>Étape 3 : On divise par $e^{a_nx}$.</b> $\lambda_n + \sum_{i=1}^{n-1}\lambda_ie^{(a_i - a_n)x} = 0$ pour tout $x$.</p>
 <p><b>Étape 4 : On fait $x\to+\infty$.</b> $a_i - a_n \lt 0$ pour $i \lt n$, donc $e^{(a_i - a_n)x}\to0$ : il reste $\lambda_n = 0$, ce qui contredit $\lambda_n\neq0$.</p>
@@ -11773,7 +11574,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 
 <p class="ml">Exemple 17 : $(\sin(kx))_{1\leq k\leq n}$, par récurrence</p>
 <p>Soit $n\geq1$. <b>Montrer que la famille de fonctions $(x\mapsto\sin(kx))_{1\leq k\leq n}$ est libre.</b></p>
-<p><b>Étape 1 : Rappel.</b> Récurrence sur $n$ ; on dérive deux fois pour éliminer le dernier terme.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Récurrence</b> sur $n$, en dérivant pour éliminer le dernier.</p>
 <p><b>Étape 2 : $n = 1$.</b> $\sin$ n'est pas la fonction nulle ($\sin\frac\pi2 = 1$) : la famille $(\sin)$ est libre.</p>
 <p><b>Étape 3 : Hérédité.</b> On suppose $(\sin x, \dots, \sin((n - 1)x))$ libre et $\sum_{k=1}^n\lambda_k\sin(kx) = 0$ (1). On dérive deux fois, $(\sin(kx))'' = -k^2\sin(kx)$ : $-\sum k^2\lambda_k\sin(kx) = 0$ (2).</p>
 <p><b>Étape 4 : On élimine $k = n$.</b> (2) $+ n^2\times$(1) : le terme $k = n$ donne $-n^2\lambda_n + n^2\lambda_n = 0$, il reste $\sum_{k=1}^{n-1}(n^2 - k^2)\lambda_k\sin(kx) = 0$.</p>
@@ -11782,7 +11583,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 
 <p class="ml">Exemple 18 : des polynômes de valuations distinctes</p>
 <p>Montrer que $\big(X^k(1 - X)^{n-k}\big)_{0\leq k\leq n}$ est une base de $\mathbb K_n[X]$.</p>
-<p><b>Étape 1 : Rappel.</b> La valuation $v(P)$ est le plus petit $i$ tel que le coefficient de $X^i$ soit non nul. Valuations distinctes $\Rightarrow$ libre.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Degrés</b> distincts, ou <b>valuations</b> distinctes : libre directement.</p>
 <p><b>Étape 2 : Les valuations.</b> $P_k = X^k(1 - X)^{n-k}$ : $(1 - X)^{n-k} = 1 - (n - k)X + \dots$ a un terme constant $1$, donc le plus bas terme de $P_k$ est $X^k\times1$ : $v(P_k) = k$, coefficient $1$.</p>
 <p><b>Étape 3 : Libre.</b> Si $\sum\lambda_kP_k = 0$ avec des $\lambda_k$ non tous nuls, soit $k_0$ le plus petit indice avec $\lambda_{k_0}\neq0$. Le coefficient de $X^{k_0}$ ne vient que de $P_{k_0}$ (les autres $P_k$, $k > k_0$, commencent plus haut) : il vaut $\lambda_{k_0}\times1 = 0$, contradiction.</p>
 <p><b>Étape 4 : Le cardinal.</b> $n + 1$ polynômes de degré $k + (n - k) = n$, libres, dans $\mathbb K_n[X]$ de dimension $n + 1$.</p>
@@ -11790,23 +11591,16 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 
 <p class="ml">Exemple 19 : évaluer en des points bien choisis</p>
 <p>$f_k(x) = x^k\cos x$, $g_k(x) = x^k\sin x$, $0\leq k\leq n$. Montrer que $(f_0, \dots, f_n, g_0, \dots, g_n)$ est libre.</p>
-<p><b>Étape 1 : Rappel.</b> On choisit des $x$ qui tuent $\sin$ ou $\cos$, puis : un polynôme qui a une infinité de racines est nul.</p>
+<p><b>Étape 1 : Rappel.</b> Évaluer la relation en <b>des points bien choisis</b>.</p>
 <p><b>Étape 2 : L'hypothèse.</b> $\Big(\sum_ka_kx^k\Big)\cos x + \Big(\sum_kb_kx^k\Big)\sin x = 0$ pour tout $x$.</p>
 <p><b>Étape 3 : En $x\in2\pi\mathbb Z$.</b> $\cos x = 1$, $\sin x = 0$ : $\sum a_kx^k = 0$ en une infinité de points, donc le polynôme $\sum a_kX^k$ est nul : tous les $a_k = 0$.</p>
 <p><b>Étape 4 : En $x\in\frac\pi2 + 2\pi\mathbb Z$.</b> $\cos x = 0$, $\sin x = 1$ : de même tous les $b_k = 0$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\text{libre}}$ : l'espace des $x\mapsto P(x)\cos x + Q(x)\sin x$, $P, Q\in\mathbb R_n[X]$, est de dimension $2n + 2$.</p>
 
 <h2 id="k-sfrang">11. Trouver le rang d'une famille</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Fonctions, peu de vecteurs</td><td>Trouver une <b>sous-famille libre</b> de cardinal maximal, et écrire les autres comme combinaisons (formules de trigo…).</td></tr>
-<tr><td>Coordonnées, avec ou sans paramètre</td><td><b>Pivot de Gauss</b> sur la matrice (on ne change pas le rang). Choisir un pivot <b>constant</b> pour éviter les divisions par une expression en $m$.</td></tr>
-<tr><td>$n$ vecteurs en dimension $n$</td><td><b>Déterminant</b> : $\neq0\iff$ base. S'il est nul, chercher un mineur non nul.</td></tr>
-</table>
-
 <p class="ml">Exemple 20 : six fonctions trigonométriques</p>
 <p><b>Déterminer le rang de la famille de fonctions $(f_1, \dots, f_6) = (\sin, \cos, \cos(2x), \sin(x + 1), \sin^2, \cos^2)$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Une sous-famille libre, puis les autres comme combinaisons.</p>
+<p><b>Étape 1 : Rappel.</b> Trouver une <b>sous-famille libre</b> de cardinal maximal, et écrire les autres comme combinaisons (formules de trigo…).</p>
 <p><b>Étape 2 : $(f_1, f_2, f_3, f_5)$ libre.</b> $\lambda_1\sin x + \lambda_2\cos x + \lambda_3\cos2x + \lambda_5\sin^2x = 0$. En $x = 0$ : $\lambda_2 + \lambda_3 = 0$. En $x = \pi$ : $-\lambda_2 + \lambda_3 = 0$. On additionne : $2\lambda_3 = 0$, donc $\lambda_3 = \lambda_2 = 0$. En $x = \frac\pi2$ : $\lambda_1 + \lambda_5 = 0$. En $x = -\frac\pi2$ : $-\lambda_1 + \lambda_5 = 0$. Donc $\lambda_1 = \lambda_5 = 0$.</p>
 <p><b>Étape 3 : $f_4$.</b> $\sin(x + 1) = \sin x\cos1 + \cos x\sin1$ : $f_4 = \cos1\,f_1 + \sin1\,f_2$.</p>
 <p><b>Étape 4 : $f_6$.</b> $\cos2x = \cos^2x - \sin^2x$, donc $\cos^2x = \cos2x + \sin^2x$ : $f_6 = f_3 + f_5$.</p>
@@ -11815,7 +11609,7 @@ $$I = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\quad J = \begin{pmatrix}0
 <p class="ml">Exemple 21 : un pivot avec un paramètre</p>
 <p><b>Déterminer, selon $m\in\mathbb R$, le rang de $u = (1, 2, 1)$, $v = (2, 1, m)$, $w = (1, m, 1)$.</b> On range les vecteurs en lignes :</p>
 $$\begin{pmatrix}1&2&1\\2&1&m\\1&m&1\end{pmatrix}\begin{matrix}\leftarrow u\\\leftarrow v\\\leftarrow w\end{matrix}$$
-<p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes ne changent pas le rang ; on garde un pivot constant.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Pivot de Gauss</b> sur la matrice (on ne change pas le rang). Choisir un pivot <b>constant</b> pour éviter les divisions par une expression en $m$.</p>
 <p><b>Étape 2 : Premier pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2\times1,\ 1 - 2\times2,\ m - 2\times1) = (0, -3, m - 2)$. $L_3\leftarrow L_3 - L_1$ : $(1 - 1,\ m - 2,\ 1 - 1) = (0, m - 2, 0)$.</p>
 $$\begin{pmatrix}1&2&1\\2&1&m\\1&m&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&-3&m - 2\\0&m - 2&0\end{pmatrix}$$
 <p><b>Étape 3 : Second pivot</b> $-3$ (constant). $L_3\leftarrow3L_3 + (m - 2)L_2$ : 2<sup>e</sup> case $3(m - 2) + (m - 2)(-3) = 0$, 3<sup>e</sup> case $3\times0 + (m - 2)(m - 2) = (m - 2)^2$.</p>
@@ -11826,7 +11620,7 @@ $$\begin{pmatrix}1&2&1\\0&-3&m - 2\\0&0&(m - 2)^2\end{pmatrix}.$$
 <p class="ml">Exemple 22 : le déterminant</p>
 <p><b>Déterminer, selon $m\in\mathbb R$, le rang de $a = (m, 1, 1, 1)$, $b = (1, m, 1, 1)$, $c = (1, 1, m, 1)$, $d = (1, 1, 1, m)$ dans $\mathbb R^4$</b>, c'est-à-dire le rang de la matrice</p>
 $$M = \begin{pmatrix}m&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{pmatrix}.$$
-<p><b>Étape 1 : Rappel.</b> $4$ vecteurs en dimension $4$ : base $\iff\det\neq0$.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Déterminant</b> : $\neq0\iff$ base. S'il est nul, chercher un mineur non nul.</p>
 <p><b>Étape 2 : $C_1\leftarrow C_1 + C_2 + C_3 + C_4$.</b> Chaque ligne a pour somme $m + 1 + 1 + 1 = m + 3$ ; on sort $m + 3$ de la 1<sup>re</sup> colonne :</p>
 $$\det = (m + 3)\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix}.$$
 <p><b>Étape 3 : $L_i\leftarrow L_i - L_1$</b> ($i = 2, 3, 4$). Ligne 2 : $(1 - 1,\ m - 1,\ 1 - 1,\ 1 - 1) = (0, m - 1, 0, 0)$, et de même pour les lignes 3 et 4 :</p>
@@ -11835,25 +11629,16 @@ $$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatri
 <p><b>Étape 5 : Conclusion.</b> $\cG{\operatorname{rg} = 4\ (m\notin\{1, -3\}),\quad1\ (m = 1),\quad3\ (m = -3)}$.</p>
 
 <h2 id="k-sfbase">12. Montrer qu'une famille est une base</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Dimension inconnue ou infinie</td><td><b>Libre et génératrice</b>, séparément.</td></tr>
-<tr><td>On veut aussi les coordonnées</td><td><b>Existence et unicité</b> de la décomposition : on résout $x = \sum\alpha_ie_i$.</td></tr>
-<tr><td>On connaît $\dim E = n$ et on a $n$ vecteurs</td><td>Libre <b>ou</b> génératrice suffit (le plus souvent libre).</td></tr>
-<tr><td>Image d'une base connue</td><td>Par un <b>isomorphisme</b> : l'image d'une base est une base.</td></tr>
-<tr><td>$n$ vecteurs, petite dimension</td><td><b>Déterminant</b> dans une base connue $\neq0$.</td></tr>
-</table>
-
 <p class="ml">Exemple 23 : degrés échelonnés dans $\mathbb K[X]$ (dimension infinie)</p>
 <p>$(P_n)_{n\in\mathbb N}$ avec $\deg P_n = n$. Montrer que c'est une base de $\mathbb K[X]$.</p>
-<p><b>Étape 1 : Rappel.</b> Dimension infinie : libre et génératrice.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Libre et génératrice</b>, séparément.</p>
 <p><b>Étape 2 : Libre.</b> Polynômes non nuls de degrés distincts : toute sous-famille finie est libre.</p>
 <p><b>Étape 3 : Génératrice.</b> Soit $Q$ de degré $\leq N$. $(P_0, \dots, P_N)$ est libre, a $N + 1$ éléments, dans $\mathbb K_N[X]$ de dimension $N + 1$ : c'est une base de $\mathbb K_N[X]$, donc $Q = \sum_{i=0}^N\lambda_iP_i$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{(P_n)_{n\in\mathbb N}\ \text{est une base de}\ \mathbb K[X]}$.</p>
 
 <p class="ml">Exemple 24 : existence, unicité et coordonnées</p>
 <p>$u = (1, 1, 0)$, $v = (1, 0, 1)$, $w = (0, 1, 1)$. Base de $\mathbb R^3$ ? Coordonnées de $(x, y, z)$ ?</p>
-<p><b>Étape 1 : Rappel.</b> On résout $(x, y, z) = \alpha u + \beta v + \gamma w$ : une seule solution pour tout $(x, y, z)$ $\iff$ base.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Existence et unicité</b> de la décomposition : on résout $x = \sum\alpha_ie_i$.</p>
 <p><b>Étape 2 : Le système.</b> $\alpha u + \beta v + \gamma w = (\alpha + \beta,\ \alpha + \gamma,\ \beta + \gamma)$, donc $x = \alpha + \beta$ (1), $y = \alpha + \gamma$ (2), $z = \beta + \gamma$ (3).</p>
 <p><b>Étape 3 : On additionne.</b> (1) + (2) + (3) : $x + y + z = 2(\alpha + \beta + \gamma)$, donc $\alpha + \beta + \gamma = \frac{x + y + z}2$.</p>
 <p><b>Étape 4 : On retire chaque équation.</b> $\gamma = \frac{x + y + z}2 - (\alpha + \beta) = \frac{x + y + z}2 - x = \frac{-x + y + z}2$. De même $\beta = \frac{x + y + z}2 - y = \frac{x - y + z}2$ et $\alpha = \frac{x + y + z}2 - z = \frac{x + y - z}2$.</p>
@@ -11861,7 +11646,7 @@ $$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatri
 
 <p class="ml">Exemple 25 : le cardinal et la dimension</p>
 <p>Montrer que $\big(1, X, X(X - 1), \dots, X(X - 1)\cdots(X - n + 1)\big)$ est une base de $\mathbb R_n[X]$.</p>
-<p><b>Étape 1 : Rappel.</b> En dimension $n + 1$, une famille libre de $n + 1$ vecteurs est une base.</p>
+<p><b>Étape 1 : Rappel.</b> Libre <b>ou</b> génératrice suffit (le plus souvent libre).</p>
 <p><b>Étape 2 : Dans $\mathbb R_n[X]$.</b> $X(X - 1)\cdots(X - k + 1)$ a $k$ facteurs de degré $1$ : il est de degré $k\leq n$.</p>
 <p><b>Étape 3 : Libre.</b> Degrés $0, 1, \dots, n$ distincts, polynômes non nuls.</p>
 <p><b>Étape 4 : Le cardinal.</b> $n + 1$ polynômes, et $\dim\mathbb R_n[X] = n + 1$.</p>
@@ -11869,7 +11654,7 @@ $$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatri
 
 <p class="ml">Exemple 26 : les polynômes de Lagrange, par un isomorphisme</p>
 <p>$a_0, \dots, a_n$ distincts, $L_i = \prod_{j\neq i}\frac{X - a_j}{a_i - a_j}$. Montrer que $(L_0, \dots, L_n)$ est une base de $\mathbb K_n[X]$.</p>
-<p><b>Étape 1 : Rappel.</b> Un isomorphisme envoie une base sur une base ; donc l'image réciproque d'une base par un isomorphisme est une base.</p>
+<p><b>Étape 1 : Rappel.</b> Par un <b>isomorphisme</b> : l'image d'une base est une base.</p>
 <p><b>Étape 2 : L'application.</b> $\varphi(P) = (P(a_0), \dots, P(a_n))$, de $\mathbb K_n[X]$ dans $\mathbb K^{n+1}$, est linéaire.</p>
 <p><b>Étape 3 : Injective.</b> $\varphi(P) = 0$ : $P$, de degré $\leq n$, a $n + 1$ racines, donc $P = 0$. Même dimension $n + 1$ : $\varphi$ est un isomorphisme.</p>
 <p><b>Étape 4 : Les images.</b> $L_i(a_i) = \prod_{j\neq i}\frac{a_i - a_j}{a_i - a_j} = 1$ et, pour $k\neq i$, $L_i(a_k) = 0$ (le facteur $j = k$ s'annule). Donc $\varphi(L_i) = (0, \dots, 1, \dots, 0) = \cB{\varepsilon_i}$, le $i$-ième vecteur de la base canonique.</p>
@@ -11877,25 +11662,16 @@ $$\begin{vmatrix}1&1&1&1\\1&m&1&1\\1&1&m&1\\1&1&1&m\end{vmatrix} = \begin{vmatri
 
 <p class="ml">Exemple 27 : $v_i = u + e_i$, par le déterminant</p>
 <p>On reprend l'exemple 15 avec $\det_{\mathcal B}$. <b>Montrer que $(v_1, \dots, v_n)$ est une base si et seulement si $u$ vérifie la condition trouvée à l'exemple 15.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\det$ est linéaire par rapport à chaque colonne, et nul dès que deux colonnes sont égales.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Déterminant</b> dans une base connue $\neq0$.</p>
 <p><b>Étape 2 : On développe chaque colonne</b> $u + e_i$ : on obtient $2^n$ déterminants ; ceux qui contiennent $u$ <b>deux fois</b> sont nuls. Il reste $\det(e_1, \dots, e_n) = 1$ et les $n$ termes $\det(e_1, \dots, \underbrace{u}_{i}, \dots, e_n)$.</p>
 <p><b>Étape 3 : Un terme.</b> $\det(e_1, \dots, u, \dots, e_n)$ est la matrice identité dont la $i$-ième colonne est remplacée par $(\lambda_1, \dots, \lambda_n)$ : en développant selon la $i$-ième ligne, il vaut $\lambda_i$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\det_{\mathcal B}(v_1, \dots, v_n) = 1 + \sum\lambda_i$ : $\cG{\text{base}\iff1 + \sum\lambda_i\neq0}$, comme à l'exemple 15, en trois lignes.</p>
 
 <h2 id="k-sfdim">13. Trouver la dimension d'un sous-espace</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>$F = \operatorname{Vect}(\dots)$</td><td>Le rang de la famille (pivot) : $\dim F = \operatorname{rg}$, et on garde une sous-famille libre maximale comme base.</td></tr>
-<tr><td>$F$ défini par des équations</td><td>$\dim F = \dim E - \operatorname{rg}(\text{système})$ ; base : exprimer les inconnues principales avec les secondaires.</td></tr>
-<tr><td>$F$ « ressemble » à un espace connu</td><td>Un <b>isomorphisme</b> vers cet espace.</td></tr>
-<tr><td>Somme ou intersection</td><td><b>Grassmann</b> : $\dim(F + G) = \dim F + \dim G - \dim(F\cap G)$.</td></tr>
-<tr><td>$F = \ker u$</td><td><b>Théorème du rang</b> (fiche Applications linéaires).</td></tr>
-</table>
-
 <p class="ml">Exemple 28 : la dimension d'un Vect par le pivot</p>
 <p>$a = (1, 2, 3, 4)$, $b = (1, 1, 1, 3)$, $c = (2, 1, 1, 1)$, $d = (3, 1, 0, 3)$. $\dim\operatorname{Vect}(a, b, c, d)$ ? On range les vecteurs en lignes :</p>
 $$\begin{pmatrix}1&2&3&4\\1&1&1&3\\2&1&1&1\\3&1&0&3\end{pmatrix}.$$
-<p><b>Étape 1 : Rappel.</b> Les opérations sur les lignes conservent le $\operatorname{Vect}$.</p>
+<p><b>Étape 1 : Rappel.</b> Le rang de la famille (pivot) : $\dim F = \operatorname{rg}$, et on garde une sous-famille libre maximale comme base.</p>
 <p><b>Étape 2 : Premier pivot</b> $1$ (case en haut à gauche). $L_2 - L_1 = (1 - 1, 1 - 2, 1 - 3, 3 - 4) = (0, -1, -2, -1)$ ; $L_3 - 2L_1 = (2 - 2, 1 - 4, 1 - 6, 1 - 8) = (0, -3, -5, -7)$ ; $L_4 - 3L_1 = (3 - 3, 1 - 6, 0 - 9, 3 - 12) = (0, -5, -9, -9)$.</p>
 $$\longrightarrow\begin{pmatrix}1&2&3&4\\0&-1&-2&-1\\0&-3&-5&-7\\0&-5&-9&-9\end{pmatrix}$$
 <p><b>Étape 3 : Second pivot $-1$.</b> $L_3 - 3L_2 = (0, -3 + 3, -5 + 6, -7 + 3) = (0, 0, 1, -4)$ ; $L_4 - 5L_2 = (0, -5 + 5, -9 + 10, -9 + 5) = (0, 0, 1, -4)$.</p>
@@ -11907,7 +11683,7 @@ $$\longrightarrow\begin{pmatrix}1&2&3&4\\0&-1&-2&-1\\0&0&1&-4\\0&0&0&0\end{pmatr
 <p>$F$ : $x_1 + 2x_2 - x_3 + 3x_4 + x_5 = 0$, $x_2 + x_3 + 2x_4 - 2x_5 = 0$, $2x_1 + x_2 - 5x_3 - 4x_5 = 0$. Matrice du système :</p>
 $$\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\2&1&-5&0&-4\end{pmatrix}.$$
 <p><b>Déterminer la dimension de $F$ et une base de $F$.</b></p>
-<p><b>Étape 1 : Rappel.</b> $\dim F = 5 - \operatorname{rg}$ ; base : inconnues principales en fonction des secondaires.</p>
+<p><b>Étape 1 : Rappel.</b> $\dim F = \dim E - \operatorname{rg}(\text{système})$ ; base : exprimer les inconnues principales avec les secondaires.</p>
 <p><b>Étape 2 : Le rang.</b> $L_3 - 2L_1 = (2 - 2,\ 1 - 4,\ -5 + 2,\ 0 - 6,\ -4 - 2) = (0, -3, -3, -6, -6)$, puis $L_3 + 3L_2 = (0,\ -3 + 3,\ -3 + 3,\ -6 + 6,\ -6 - 6) = (0, 0, 0, 0, -12)$ :</p>
 $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}:\ \text{trois pivots, rang}\ 3,\quad\dim F = 5 - 3 = 2.$$
 <p><b>Étape 3 : On résout.</b> $-12x_5 = 0$ : $x_5 = 0$. $L_2$ : $x_2 = -x_3 - 2x_4$. $L_1$ : $x_1 = -2x_2 + x_3 - 3x_4 = 2x_3 + 4x_4 + x_3 - 3x_4 = 3x_3 + x_4$.</p>
@@ -11916,14 +11692,14 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 
 <p class="ml">Exemple 30 : matrices par blocs, par un isomorphisme</p>
 <p>$E = \Big\{\begin{pmatrix}A&0\\0&B\end{pmatrix},\ A\in\mathcal M_r(\mathbb K),\ B\in\mathcal M_{n-r}(\mathbb K)\Big\}$. Dimension ?</p>
-<p><b>Étape 1 : Rappel.</b> Deux espaces isomorphes ont la même dimension, et $\dim(F\times G) = \dim F + \dim G$.</p>
+<p><b>Étape 1 : Rappel.</b> Un <b>isomorphisme</b> vers cet espace.</p>
 <p><b>Étape 2 : L'application.</b> $\varphi\Big(\begin{pmatrix}A&0\\0&B\end{pmatrix}\Big) = (A, B)\in\mathcal M_r\times\mathcal M_{n-r}$ : linéaire (calcul par blocs : $\lambda M + M'$ a pour blocs $\lambda A + A'$ et $\lambda B + B'$).</p>
 <p><b>Étape 3 : Bijective.</b> Noyau : $(A, B) = (0, 0)$ donne $M = 0$. Surjective : tout $(A, B)$ vient de la matrice par blocs correspondante.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\dim E = r^2 + (n - r)^2}$.</p>
 
 <p class="ml">Exemple 31 : deux hyperplans distincts</p>
 <p>$H\neq H'$ hyperplans de $E$ ($\dim E = n\geq2$). Montrer $\dim(H\cap H') = n - 2$.</p>
-<p><b>Étape 1 : Rappel.</b> Grassmann.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Grassmann</b> : $\dim(F + G) = \dim F + \dim G - \dim(F\cap G)$.</p>
 <p><b>Étape 2 : $H + H' = E$.</b> $\dim H = \dim H'$ et $H\neq H'$, donc $H'\not\subset H$ : il existe $a\in H'\setminus H$. Alors $H\subsetneq H + H'$, donc $\dim(H + H') > n - 1$, soit $\dim(H + H') = n$.</p>
 <p><b>Étape 3 : Grassmann.</b> $n = (n - 1) + (n - 1) - \dim(H\cap H')$, donc $\dim(H\cap H') = 2n - 2 - n = n - 2$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\dim(H\cap H') = n - 2}$ : deux plans distincts de $\mathbb R^3$ se coupent selon une droite.</p>
@@ -11941,18 +11717,9 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 <p><b>Étape 5 : Conclusion.</b> $\cG{F = G}$ : il était plus facile de montrer $G\subset F$ que $F\subset G$.</p>
 
 <h2 id="k-sfsupp">15. Montrer que des sous-espaces sont supplémentaires</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>On veut la décomposition explicite</td><td><b>Analyse-synthèse</b> : $x = y + z$ ; l'analyse donne $y, z$ (unicité), la synthèse vérifie qu'ils conviennent (existence).</td></tr>
-<tr><td>La décomposition est évidente</td><td>$E = F + G$ (on l'écrit) et $F\cap G = \{0\}$.</td></tr>
-<tr><td>Dimension finie</td><td>$F\cap G = \{0\}$ <b>et</b> $\dim F + \dim G = \dim E$.</td></tr>
-<tr><td>$p\geq3$ sous-espaces</td><td>$x_1 + \dots + x_p = 0\Rightarrow$ tous nuls, <b>et</b> $\sum\dim E_i = \dim E$. Les intersections deux à deux nulles ne suffisent <b>pas</b> (trois droites d'un plan).</td></tr>
-<tr><td>Un polynôme annulateur scindé</td><td>Lemme des noyaux (fiche Réduction).</td></tr>
-</table>
-
 <p class="ml">Exemple 33 : $u^3 = \operatorname{id}$, par analyse-synthèse</p>
 <p>Montrer $E = \ker(u - \operatorname{id})\oplus\operatorname{Im}(u - \operatorname{id})$.</p>
-<p><b>Étape 1 : Rappel.</b> Analyse : on suppose $x = x_1 + x_2$ et on trouve $x_1$ ; synthèse : on vérifie.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Analyse-synthèse</b> : $x = y + z$ ; l'analyse donne $y, z$ (unicité), la synthèse vérifie qu'ils conviennent (existence).</p>
 <p><b>Étape 2 : Analyse.</b> $u(x_1) = x_1$ et $x_2 = u(y) - y$. Alors $x = x_1 + u(y) - y$, $u(x) = x_1 + u^2(y) - u(y)$, $u^2(x) = x_1 + u^3(y) - u^2(y) = x_1 + y - u^2(y)$.</p>
 <p><b>Étape 3 : On additionne les trois.</b> Les termes en $y$ se simplifient : $(u(y) - y) + (u^2(y) - u(y)) + (y - u^2(y)) = 0$. Il reste $x + u(x) + u^2(x) = 3x_1$, donc $x_1 = \frac13\big(x + u(x) + u^2(x)\big)$ : unique, donc $x_2 = x - x_1$ aussi.</p>
 <p><b>Étape 4 : Synthèse.</b> $u(x_1) = \frac13(u(x) + u^2(x) + u^3(x)) = \frac13(u(x) + u^2(x) + x) = x_1$ : $x_1\in\ker(u - \operatorname{id})$. Et $x_2 = x - x_1 = \frac13(2x - u(x) - u^2(x)) = (u - \operatorname{id})\Big(-\frac{u(x) + 2x}3\Big)$ : contrôle, $(u - \operatorname{id})(u(x) + 2x) = u^2(x) + 2u(x) - u(x) - 2x = u^2(x) + u(x) - 2x$, et le signe $-$ donne $2x - u(x) - u^2(x)$.</p>
@@ -11960,7 +11727,7 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 
 <p class="ml">Exemple 34 : intégrale nulle et constantes</p>
 <p>$E = \mathcal C([0, 1], \mathbb R)$, $H = \{f,\ \int_0^1f = 0\}$. Trouver un supplémentaire de $H$.</p>
-<p><b>Étape 1 : Rappel.</b> $E = H + D$ et $H\cap D = \{0\}$.</p>
+<p><b>Étape 1 : Rappel.</b> $E = F + G$ (on l'écrit) et $F\cap G = \{0\}$.</p>
 <p><b>Étape 2 : $H$ est un sev.</b> C'est le noyau de la forme linéaire $f\mapsto\int_0^1f$.</p>
 <p><b>Étape 3 : La décomposition.</b> On note $m = \int_0^1f$ (une constante). $f = (f - m) + m$, et $\int_0^1(f - m) = m - m\times1 = 0$ : $f - m\in H$, $m\in D$ = droite des fonctions constantes.</p>
 <p><b>Étape 4 : Intersection.</b> Une constante $c$ d'intégrale nulle : $\int_0^1c = c = 0$.</p>
@@ -11968,7 +11735,7 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 
 <p class="ml">Exemple 35 : deux plans de $\mathbb R^4$</p>
 <p>$F$ : $x + y + z + t = 0$, $x - y + z - t = 0$ ; $G$ : $x + 2y + 3z + 4t = 0$, $x - 2y + 3z - 4t = 0$. Supplémentaires ?</p>
-<p><b>Étape 1 : Rappel.</b> $F\cap G = \{0\}$ et $\dim F + \dim G = 4$.</p>
+<p><b>Étape 1 : Rappel.</b> $F\cap G = \{0\}$ <b>et</b> $\dim F + \dim G = \dim E$.</p>
 <p><b>Étape 2 : $F$.</b> Somme des équations : $(x + y + z + t) + (x - y + z - t) = 2x + 2z = 0$, donc $x = -z$. Différence : $(x + y + z + t) - (x - y + z - t) = 2y + 2t = 0$, donc $y = -t$. $F = \{(-z, -t, z, t)\} = \operatorname{Vect}\big((-1, 0, 1, 0), (0, -1, 0, 1)\big)$, dimension $2$.</p>
 <p><b>Étape 3 : $G$.</b> Somme : $(x + 2y + 3z + 4t) + (x - 2y + 3z - 4t) = 2x + 6z = 0$, donc $x = -3z$. Différence : $4y + 8t = 0$, donc $y = -2t$. $G = \operatorname{Vect}\big((-3, 0, 1, 0), (0, -2, 0, 1)\big)$, dimension $2$.</p>
 <p><b>Étape 4 : $F\cap G$.</b> $x = -z = -3z$ donne $2z = 0$, $z = 0$, $x = 0$. $y = -t = -2t$ donne $t = 0$, $y = 0$.</p>
@@ -11976,14 +11743,14 @@ $$\longrightarrow\begin{pmatrix}1&2&-1&3&1\\0&1&1&2&-2\\0&0&0&0&-12\end{pmatrix}
 
 <p class="ml">Exemple 36 : trois sous-espaces de $\mathbb R_3[X]$</p>
 <p>$F = \{P,\ P(0) = P(1) = P(2) = 0\}$, $G = \{P,\ P(1) = P(2) = P(3) = 0\}$, $H = \{P,\ P(-X) = P(X)\}$. <b>Montrer que $\mathbb R_3[X] = F\oplus G\oplus H$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Somme directe (décomposition de $0$ unique) et somme des dimensions $= 4$.</p>
+<p><b>Étape 1 : Rappel.</b> $x_1 + \dots + x_p = 0\Rightarrow$ tous nuls, <b>et</b> $\sum\dim E_i = \dim E$. Les intersections deux à deux nulles ne suffisent <b>pas</b> (trois droites d'un plan).</p>
 <p><b>Étape 2 : Les trois espaces.</b> $P\in F$ : $X(X - 1)(X - 2)$ divise $P$, de degré $\leq3$, donc $F = \operatorname{Vect}\big(X(X - 1)(X - 2)\big)$, dim $1$. De même $G = \operatorname{Vect}\big((X - 1)(X - 2)(X - 3)\big)$, dim $1$. $H = \operatorname{Vect}(1, X^2)$ (pas de termes impairs), dim $2$. Total $1 + 1 + 2 = 4 = \dim\mathbb R_3[X]$.</p>
 <p><b>Étape 3 : Somme directe.</b> $\lambda X(X - 1)(X - 2) + \mu(X - 1)(X - 2)(X - 3) + a + bX^2 = 0$. En $X = 1$ : $a + b = 0$. En $X = 2$ : $a + 4b = 0$. Différence : $3b = 0$, donc $b = a = 0$. En $X = 3$ : $\lambda\times3\times2\times1 = 6\lambda = 0$. En $X = 0$ : $\mu\times(-1)(-2)(-3) = -6\mu = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R_3[X] = F\oplus G\oplus H}$.</p>
 
 <p class="ml">Exemple 37 : des sous-espaces propres en somme directe</p>
 <p>$f\in\mathcal L(E)$, $\lambda_1, \dots, \lambda_n$ distincts, $E_i = \ker(f - \lambda_i\operatorname{id})$. Montrer que la somme $E_1 + \dots + E_n$ est directe.</p>
-<p><b>Étape 1 : Rappel.</b> Pour $n\geq3$, les intersections deux à deux ne suffisent pas : on montre que $x_1 + \dots + x_n = 0$ ($x_i\in E_i$) force $x_i = 0$, par récurrence sur $n$.</p>
+<p><b>Étape 1 : Rappel.</b> $x_1 + \dots + x_p = 0\Rightarrow$ tous nuls, <b>et</b> $\sum\dim E_i = \dim E$. Les intersections deux à deux nulles ne suffisent <b>pas</b> (trois droites d'un plan).</p>
 <p><b>Étape 2 : $n = 2$.</b> $x_1 + x_2 = 0$ (1). On applique $f$ : $\lambda_1x_1 + \lambda_2x_2 = 0$ (2), car $f(x_i) = \lambda_ix_i$. Alors (2) $-\lambda_1\times$(1) : $(\lambda_2 - \lambda_1)x_2 = 0$, et $\lambda_2\neq\lambda_1$ donne $x_2 = 0$, puis $x_1 = 0$ par (1).</p>
 <p><b>Étape 3 : Hérédité.</b> On suppose le résultat pour $n$ et $\sum_{i=1}^{n+1}x_i = 0$ (1). On applique $f$ : $\sum\lambda_ix_i = 0$ (2). Alors (2) $-\lambda_{n+1}\times$(1) : $\sum_{i=1}^n(\lambda_i - \lambda_{n+1})x_i = 0$, le terme $i = n + 1$ disparaît.</p>
 <p><b>Étape 4 : On applique l'hypothèse.</b> $(\lambda_i - \lambda_{n+1})x_i\in E_i$ (un sev), donc $(\lambda_i - \lambda_{n+1})x_i = 0$, et $\lambda_i\neq\lambda_{n+1}$ donne $x_i = 0$ pour $i\leq n$. Puis (1) donne $x_{n+1} = 0$.</p>
@@ -12208,17 +11975,9 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\in GL(E),\ f^{-1} = \frac12(3\operatorname{id} - f)}$. En plus, $E = \ker(f - \operatorname{id})\oplus\ker(f - 2\operatorname{id})$ (voir Réduction).</p>
 
 <h2 id="l-constr">9. Montrer qu'une application est linéaire, ou en construire une</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>$u$ donnée par une formule</td><td>Vérifier <b>d'abord que $u(x)$ est bien dans $F$</b> (souvent la vraie difficulté), puis la linéarité.</td></tr>
-<tr><td>Construire $u$ en donnant $u(x)$</td><td>Vérifier que la définition a un sens (pas d'ambiguïté), puis la linéarité.</td></tr>
-<tr><td>Dimension finie</td><td>Donner l'<b>image d'une base</b> : elle détermine $u$ entièrement.</td></tr>
-<tr><td>$E = S\oplus T$</td><td>Donner les <b>restrictions</b> $u_{|S}$ et $u_{|T}$ : elles déterminent $u$.</td></tr>
-</table>
-
 <p class="ml">Exemple 12 : un opérateur intégral</p>
 <p>$E_0 = \{f\in\mathcal C(\mathbb R, \mathbb R),\ f(0) = 0\}$, $T(f)(x) = \frac1x\int_0^xtf(t)\,dt$ ($x\neq0$), $T(f)(0) = 0$. Montrer que $T$ est un endomorphisme de $E_0$.</p>
-<p><b>Étape 1 : Rappel.</b> D'abord $T(f)\in E_0$ (continue, nulle en $0$), puis la linéarité.</p>
+<p><b>Étape 1 : Rappel.</b> Vérifier <b>d'abord que $u(x)$ est bien dans $F$</b> (souvent la vraie difficulté), puis la linéarité.</p>
 <p><b>Étape 2 : $E_0$ est un sev.</b> Noyau de la forme linéaire $f\mapsto f(0)$.</p>
 <p><b>Étape 3 : Continuité hors de $0$.</b> $G(x) = \int_0^xtf(t)\,dt$ est la primitive de $t\mapsto tf(t)$ (continue) nulle en $0$ : $G$ est $\mathcal C^1$, et $T(f) = \frac Gx$ est continue sur $\mathbb R^*$.</p>
 <p><b>Étape 4 : En $0$.</b> $\frac{G(x)}x = \frac{G(x) - G(0)}{x - 0}\to G'(0) = 0\times f(0) = 0 = T(f)(0)$ : continue en $0$, et nulle en $0$. Donc $T(f)\in E_0$.</p>
@@ -12227,7 +11986,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 
 <p class="ml">Exemple 13 : $\operatorname{Im}w\subset\operatorname{Im}v\Rightarrow w = v\circ u$</p>
 <p>$E, F, G$ de dimension finie, $v\in\mathcal L(F, G)$, $w\in\mathcal L(E, G)$, $\operatorname{Im}w\subset\operatorname{Im}v$. Trouver $u\in\mathcal L(E, F)$ avec $w = v\circ u$.</p>
-<p><b>Étape 1 : Rappel.</b> Un supplémentaire $S$ de $\ker v$ : $v_{|S}:S\to\operatorname{Im}v$ est un isomorphisme.</p>
+<p><b>Étape 1 : Rappel.</b> Donner les <b>restrictions</b> $u_{|S}$ et $u_{|T}$ : elles déterminent $u$.</p>
 <p><b>Étape 2 : L'isomorphisme.</b> $F = S\oplus\ker v$. $v_1 = v_{|S}$ est injective ($\ker v_1 = S\cap\ker v = \{0\}$) et $\dim S = \dim F - \dim\ker v = \operatorname{rg}v$ : $v_1:S\to\operatorname{Im}v$ est bijective.</p>
 <p><b>Étape 3 : La définition.</b> Pour $x\in E$, $w(x)\in\operatorname{Im}w\subset\operatorname{Im}v$ : on pose $u(x) = v_1^{-1}(w(x))\in S\subset F$. $u = v_1^{-1}\circ w$ est linéaire (composée).</p>
 <p><b>Étape 4 : Vérification.</b> $v(u(x)) = v_1\big(v_1^{-1}(w(x))\big) = w(x)$ ($v$ et $v_1$ coïncident sur $S$).</p>
@@ -12235,7 +11994,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 
 <p class="ml">Exemple 14 : $\ker u\subset\ker w\Rightarrow w = v\circ u$</p>
 <p>$u\in\mathcal L(E, F)$, $w\in\mathcal L(E, G)$, $\ker u\subset\ker w$. Trouver $v\in\mathcal L(F, G)$ avec $w = v\circ u$.</p>
-<p><b>Étape 1 : Rappel.</b> On définit $v$ sur $\operatorname{Im}u$ par $v_1(y) = w(x)$ si $y = u(x)$, puis on prolonge.</p>
+<p><b>Étape 1 : Rappel.</b> Vérifier que la définition a un sens (pas d'ambiguïté), puis la linéarité.</p>
 <p><b>Étape 2 : Bien défini.</b> Si $y = u(x) = u(x')$, alors $u(x - x') = 0$, donc $x - x'\in\ker u\subset\ker w$, donc $w(x) = w(x')$ : $v_1(y)$ ne dépend pas de l'antécédent choisi.</p>
 <p><b>Étape 3 : Linéaire.</b> $y = u(x)$, $y' = u(x')$ : $\lambda y + y' = u(\lambda x + x')$, donc $v_1(\lambda y + y') = w(\lambda x + x') = \lambda w(x) + w(x') = \lambda v_1(y) + v_1(y')$.</p>
 <p><b>Étape 4 : Prolonger.</b> On choisit un supplémentaire $T$ de $\operatorname{Im}u$ dans $F$ et on pose $v = v_1$ sur $\operatorname{Im}u$, $v = 0$ sur $T$ (une application linéaire est déterminée par ses restrictions à deux supplémentaires).</p>
@@ -12243,7 +12002,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 
 <p class="ml">Exemple 15 : une dimension par les restrictions</p>
 <p>$\dim E$ finie, $u\in\mathcal L(E)$, $A = \{v\in\mathcal L(E),\ u\circ v = v\circ u = 0\}$. Montrer que $A$ est un sev et que $\dim A = (\dim\ker u)^2$.</p>
-<p><b>Étape 1 : Rappel.</b> Une application linéaire est déterminée par ses restrictions à deux supplémentaires, et $\dim\mathcal L(S, K) = \dim S\times\dim K$.</p>
+<p><b>Étape 1 : Rappel.</b> Donner les <b>restrictions</b> $u_{|S}$ et $u_{|T}$ : elles déterminent $u$.</p>
 <p><b>Étape 2 : Sev.</b> $0\in A$ ; si $v_1, v_2\in A$ : $u\circ(\lambda v_1 + v_2) = \lambda\,u\circ v_1 + u\circ v_2 = 0$, et de même $(\lambda v_1 + v_2)\circ u = 0$.</p>
 <p><b>Étape 3 : Traduire.</b> On note $K = \ker u$. $u\circ v = 0\iff\operatorname{Im}v\subset K$, et $v\circ u = 0\iff v$ est nulle sur $\operatorname{Im}u$.</p>
 <p><b>Étape 4 : L'isomorphisme.</b> On prend $S$ un supplémentaire de $\operatorname{Im}u$ : $E = \operatorname{Im}u\oplus S$. Un $v\in A$ est nul sur $\operatorname{Im}u$ et envoie $S$ dans $K$, donc $\varphi(v) = v_{|S}\in\mathcal L(S, K)$. $\varphi$ est linéaire ; injective (si $v_{|S} = 0$, $v$ est nulle sur $\operatorname{Im}u$ et sur $S$, donc $v = 0$) ; surjective (pour $w\in\mathcal L(S, K)$, on définit $v = 0$ sur $\operatorname{Im}u$ et $v = w$ sur $S$ : alors $v\in A$).</p>
@@ -12252,33 +12011,23 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 
 <p class="ml">Exemple 16 : un endomorphisme de noyau $F$ et d'image $G$</p>
 <p>$\dim E = n$, $\dim F + \dim G = n$. Montrer qu'il existe $u\in\mathcal L(E)$ avec $\ker u = F$ et $\operatorname{Im}u = G$.</p>
-<p><b>Étape 1 : Rappel.</b> Une application linéaire est déterminée par l'image d'une base.</p>
+<p><b>Étape 1 : Rappel.</b> Donner l'<b>image d'une base</b> : elle détermine $u$ entièrement.</p>
 <p><b>Étape 2 : Une base adaptée.</b> $p = \dim F$. On prend une base $(e_1, \dots, e_p)$ de $F$, complétée en une base $(e_1, \dots, e_n)$ de $E$ (base incomplète). $\dim G = n - p$ : soit $(g_1, \dots, g_{n-p})$ une base de $G$.</p>
 <p><b>Étape 3 : La définition.</b> $u(e_i) = 0$ pour $i\leq p$, et $u(e_{p+j}) = g_j$ pour $1\leq j\leq n - p$.</p>
 <p><b>Étape 4 : Image et noyau.</b> $\operatorname{Im}u = \operatorname{Vect}(u(e_1), \dots, u(e_n)) = \operatorname{Vect}(g_1, \dots, g_{n-p}) = G$. Donc $\operatorname{rg}u = n - p$ et, par le théorème du rang, $\dim\ker u = p$. Or $F\subset\ker u$ (les $e_i$, $i\leq p$, sont envoyés sur $0$) et $\dim F = p$ : $\ker u = F$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ker u = F\ \text{et}\ \operatorname{Im}u = G}$. Si de plus $E = F\oplus G$, la projection sur $G$ parallèlement à $F$ convient.</p>
 
 <h2 id="l-nkim">10. Trouver le noyau, l'image, le rang : la boîte à outils</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Le noyau</td><td>Résoudre $u(x) = 0$ (la définition) : c'est presque toujours la bonne porte d'entrée.</td></tr>
-<tr><td>L'image, dimension infinie</td><td>La définition $\operatorname{Im}u = \{u(x)\}$ : montrer $\operatorname{Im}u\subset F'$ puis, pour $y\in F'$, trouver un antécédent.</td></tr>
-<tr><td>L'image, une base $(e_i)$ connue</td><td>$\operatorname{Im}u = \operatorname{Vect}(u(e_i))$ : on calcule les images de la base (les colonnes de la matrice).</td></tr>
-<tr><td>Dimension finie</td><td><b>Théorème du rang</b> : trouver le plus facile des deux ($\ker$ ou $\operatorname{Im}$), en déduire la dimension de l'autre, puis une inclusion évidente.</td></tr>
-<tr><td>Composées</td><td>$\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$ ; $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$.</td></tr>
-<tr><td>Injectivité, surjectivité d'un endomorphisme</td><td>$\ker u = \{0\}$, $\operatorname{Im}u = E$. En dimension finie, l'une suffit ; en dimension <b>infinie</b>, $\cR{\text{non}}$ (la dérivation de $\mathbb K[X]$ est surjective, pas injective).</td></tr>
-</table>
-
 <p class="ml">Exemple 17 : l'image par la définition</p>
 <p>$u(f)(x) = \int_0^xf(t)\,dt$ pour $f\in\mathcal C(\mathbb R, \mathbb R)$. Déterminer $\operatorname{Im}u$.</p>
-<p><b>Étape 1 : Rappel.</b> Deux inclusions : $\operatorname{Im}u\subset F'$, puis tout élément de $F'$ a un antécédent.</p>
+<p><b>Étape 1 : Rappel.</b> La définition $\operatorname{Im}u = \{u(x)\}$ : montrer $\operatorname{Im}u\subset F'$ puis, pour $y\in F'$, trouver un antécédent.</p>
 <p><b>Étape 2 : Le candidat.</b> $u(f)$ est la primitive de $f$ nulle en $0$ : elle est $\mathcal C^1$ et $u(f)(0) = \int_0^0f = 0$. Donc $\operatorname{Im}u\subset F' = \{g\in\mathcal C^1,\ g(0) = 0\}$.</p>
 <p><b>Étape 3 : L'autre inclusion.</b> Soit $g\in F'$. $g'$ est continue et $u(g')(x) = \int_0^xg'(t)\,dt = g(x) - g(0) = g(x)$ : $g = u(g')$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{Im}u = \{g\in\mathcal C^1(\mathbb R, \mathbb R),\ g(0) = 0\}}$.</p>
 
 <p class="ml">Exemple 18 : $P\mapsto P(X + 1) - P(X)$ sur $\mathbb R[X]$</p>
 <p>Soit $u:P\mapsto P(X + 1) - P(X)$ sur $\mathbb R[X]$. <b>Déterminer le noyau et l'image de $u$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Noyau : on résout ; image : images d'une base.</p>
+<p><b>Étape 1 : Rappel.</b> Résoudre $u(x) = 0$ (la définition) : c'est presque toujours la bonne porte d'entrée. $\operatorname{Im}u = \operatorname{Vect}(u(e_i))$ : on calcule les images de la base (les colonnes de la matrice).</p>
 <p><b>Étape 2 : Le noyau.</b> $P(X + 1) = P(X)$ donne, par récurrence, $P(n) = P(0)$ pour tout $n\in\mathbb N$. Le polynôme $P - P(0)$ a une infinité de racines : il est nul, $P$ est constant. Réciproquement les constantes conviennent : $\ker u = \mathbb R_0[X]$.</p>
 <p><b>Étape 3 : Les images de la base $(X^n)$.</b> $u(1) = 1 - 1 = 0$ et, pour $n\geq1$, par le binôme, $u(X^n) = (X + 1)^n - X^n = \sum_{k=0}^n\binom nkX^k - X^n = \sum_{k=0}^{n-1}\binom nkX^k$, de degré $n - 1$ (coefficient $\binom n{n-1} = n\neq0$).</p>
 <p><b>Étape 4 : L'image.</b> $(u(X^n))_{n\geq1}$ est de degrés échelonnés $0, 1, 2, \dots$ : c'est une base de $\mathbb R[X]$, donc $\operatorname{Im}u = \mathbb R[X]$.</p>
@@ -12286,7 +12035,7 @@ $$\text{Dans une base}:\ H = \{x,\ a_1x_1 + \dots + a_nx_n = 0\},\ (a_i)\neq0.\ 
 
 <p class="ml">Exemple 19 : $P\mapsto XP(1) + X^2P(0)$ sur $\mathbb K_n[X]$</p>
 <p>Soit $n\geq2$ et $u:P\mapsto XP(1) + X^2P(0)$ sur $\mathbb K_n[X]$. <b>Déterminer le noyau et l'image de $u$.</b></p>
-<p><b>Étape 1 : Rappel.</b> Théorème du rang et une inclusion évidente.</p>
+<p><b>Étape 1 : Rappel.</b> <b>Théorème du rang</b> : trouver le plus facile des deux ($\ker$ ou $\operatorname{Im}$), en déduire la dimension de l'autre, puis une inclusion évidente.</p>
 <p><b>Étape 2 : Endomorphisme.</b> $u(P)$ est de degré $\leq2\leq n$ ; linéarité : $u(\lambda P + Q) = X(\lambda P(1) + Q(1)) + X^2(\lambda P(0) + Q(0)) = \lambda u(P) + u(Q)$.</p>
 <p><b>Étape 3 : Le noyau.</b> $XP(1) + X^2P(0) = 0\iff P(1) = P(0) = 0$ (coefficients de $X$ et $X^2$) $\iff X(X - 1)\mid P\iff P = X(X - 1)Q$, $Q\in\mathbb K_{n-2}[X]$. Donc $\dim\ker u = \dim\mathbb K_{n-2}[X] = n - 1$.</p>
 <p><b>Étape 4 : Le rang.</b> $\operatorname{rg}u = \dim\mathbb K_n[X] - \dim\ker u = (n + 1) - (n - 1) = 2$. Or $\operatorname{Im}u\subset\operatorname{Vect}(X, X^2)$, de dimension $2$. Dans la base $(1, X, \dots, X^n)$ : $u(1) = X + X^2$ ($P(1) = P(0) = 1$), $u(X) = X$ ($P(1) = 1$, $P(0) = 0$), $u(X^k) = X$ pour $k\geq1$ :</p>
@@ -12295,7 +12044,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}0&0&0&\cdots&0\\1&1&1&\cdots&1\\1&0&0&\
 
 <p class="ml">Exemple 20 : un noyau lu sur les colonnes</p>
 <p>$A = \begin{pmatrix}1&0&0&1\\1&1&0&0\\0&1&1&0\\0&0&1&1\end{pmatrix}$, matrice de $u$ dans $(e_1, e_2, e_3, e_4)$. Noyau ?</p>
-<p><b>Étape 1 : Rappel.</b> Une relation entre les colonnes $\sum\alpha_iC_i = 0$ donne $u\big(\sum\alpha_ie_i\big) = 0$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Im}u = \operatorname{Vect}(u(e_i))$ : on calcule les images de la base (les colonnes de la matrice).</p>
 <p><b>Étape 2 : Les colonnes.</b> $C_1 = (1, 1, 0, 0)$, $C_2 = (0, 1, 1, 0)$, $C_3 = (0, 0, 1, 1)$ sont échelonnées (premières cases non nulles en lignes $1, 2, 3$) : libres.</p>
 <p><b>Étape 3 : La relation.</b> $C_1 - C_2 + C_3 = (1 - 0 + 0,\ 1 - 1 + 0,\ 0 - 1 + 1,\ 0 - 0 + 1) = (1, 0, 0, 1) = C_4$. Donc $\operatorname{rg}A = 3$ et $\dim\ker u = 4 - 3 = 1$.</p>
 <p><b>Étape 4 : Le vecteur.</b> $C_1 - C_2 + C_3 - C_4 = 0$ signifie $u(e_1) - u(e_2) + u(e_3) - u(e_4) = 0$, soit $u(e_1 - e_2 + e_3 - e_4) = 0$.</p>
@@ -12303,7 +12052,7 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}0&0&0&\cdots&0\\1&1&1&\cdots&1\\1&0&0&\
 
 <p class="ml">Exemple 21 : une base adaptée, $u(P) = (X - a)(P' + P'(a)) - 2(P - P(a))$</p>
 <p>Sur $\mathbb K_n[X]$ ($n\geq3$). <b>Déterminer le noyau et l'image de $u$.</b></p>
-<p><b>Étape 1 : Rappel.</b> On calcule les images d'une base bien choisie : ici $((X - a)^k)_{0\leq k\leq n}$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{Im}u = \operatorname{Vect}(u(e_i))$ : on calcule les images de la base (les colonnes de la matrice).</p>
 <p><b>Étape 2 : $k = 0$.</b> $P = 1$ : $P' = 0$, $P'(a) = 0$, $P - P(a) = 1 - 1 = 0$, donc $u(1) = 0$.</p>
 <p><b>Étape 3 : $k = 1$.</b> $P = X - a$ : $P' = 1$, $P'(a) = 1$, $P - P(a) = X - a$, donc $u(P) = (X - a)\times2 - 2(X - a) = 0$.</p>
 <p><b>Étape 4 : $k\geq2$.</b> $P = (X - a)^k$ : $P' = k(X - a)^{k-1}$, $P'(a) = k\times0^{k-1} = 0$, $P(a) = 0$. Donc $u(P) = (X - a)\times k(X - a)^{k-1} - 2\big((X - a)^k - 0\big) = k(X - a)^k - 2(X - a)^k = (k - 2)(X - a)^k$. Nul pour $k = 2$, non nul pour $k\geq3$. Matrice de $u$ dans la base $\big(1, X - a, \dots, (X - a)^n\big)$ :</p>
@@ -12312,33 +12061,22 @@ $$\operatorname{Mat}(u) = \begin{pmatrix}0&&&&&\\&0&&&&\\&&0&&&\\&&&1&&\\&&&&\dd
 
 <p class="ml">Exemple 22 : $f^2 = 0$ dans $\mathbb R^3$</p>
 <p>$f\in\mathcal L(\mathbb R^3)$, $f\neq0$, $f\circ f = 0$. Rang de $f$ ?</p>
-<p><b>Étape 1 : Rappel.</b> $f\circ f = 0\iff\operatorname{Im}f\subset\ker f$, et le théorème du rang.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$ ; $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$.</p>
 <p><b>Étape 2 : L'inclusion.</b> $y = f(x)$ donne $f(y) = f^2(x) = 0$ : $\operatorname{Im}f\subset\ker f$, donc $\operatorname{rg}f\leq\dim\ker f$.</p>
 <p><b>Étape 3 : Le rang.</b> $3 = \operatorname{rg}f + \dim\ker f\geq2\operatorname{rg}f$, donc $\operatorname{rg}f\leq\frac32$, soit $\operatorname{rg}f\leq1$. Et $f\neq0$ : $\operatorname{rg}f\geq1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\operatorname{rg}f = 1}$ et $\dim\ker f = 2$.</p>
 
 <p class="ml">Exemple 23 : des inégalités de rang</p>
 <p>$p$ projecteur de $\mathbb R^3$ de rang $2$, $u\in\mathcal L(\mathbb R^3, \mathbb R^2)$, $v\in\mathcal L(\mathbb R^2, \mathbb R^3)$ avec $v\circ u = p$. Que vaut $u\circ v$ ?</p>
-<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$.</p>
+<p><b>Étape 1 : Rappel.</b> $\operatorname{rg}(v\circ u)\leq\min(\operatorname{rg}u, \operatorname{rg}v)$ ; $f\circ g = 0\iff\operatorname{Im}g\subset\ker f$.</p>
 <p><b>Étape 2 : Les rangs.</b> $2 = \operatorname{rg}p\leq\operatorname{rg}u\leq\dim\mathbb R^2 = 2$ : $u$ est surjective. De même $\operatorname{rg}v = 2 = \dim\mathbb R^2$ : $v$ est injective.</p>
 <p><b>Étape 3 : On utilise $p^2 = p$.</b> $v\circ u\circ v\circ u = v\circ u$. Pour $y\in\mathbb R^2$, $y = u(x)$ (surjectivité) : $v\big(u(v(y))\big) = v(y)$, et $v$ injective donne $u(v(y)) = y$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{u\circ v = \operatorname{id}_{\mathbb R^2}}$.</p>
 
 <h2 id="l-proj2">11. Projecteurs, polynômes annulateurs, sous-espaces stables</h2>
-<table class="mtab">
-<tr><th>Situation</th><th>Méthode</th></tr>
-<tr><td>Montrer que $p$ est un projecteur</td><td>$p\circ p = p$ (ou $A^2 = A$) ; alors $p$ projette sur $\operatorname{Im}p = \ker(p - \operatorname{id})$ parallèlement à $\ker p$.</td></tr>
-<tr><td>Une symétrie</td><td>$s\circ s = \operatorname{id}$ ; $s$ est la symétrie par rapport à $\ker(s - \operatorname{id})$ parallèlement à $\ker(s + \operatorname{id})$, et $p = \frac{s + \operatorname{id}}2$.</td></tr>
-<tr><td>$P(f) = 0$, $P$ à racines simples</td><td>$E = \bigoplus\ker(f - \lambda_i\operatorname{id})$ : analyse-synthèse, ou lemme des noyaux.</td></tr>
-<tr><td>$P(f) = 0$ avec $P(0)\neq0$</td><td>$f$ est inversible, $f^{-1}$ polynôme en $f$ (exemple 11).</td></tr>
-<tr><td>$\varphi$ nilpotent</td><td>$\varphi^{p-1}(x)\neq0\Rightarrow(x, \varphi(x), \dots, \varphi^{p-1}(x))$ libre.</td></tr>
-<tr><td>$F$ stable par $\varphi$</td><td>$\varphi(F)\subset F$ ; si $\varphi\circ\psi = \psi\circ\varphi$, alors $\ker\psi$ et $\operatorname{Im}\psi$ sont stables par $\varphi$.</td></tr>
-<tr><td>$H$ hyperplan</td><td>Noyau d'une forme linéaire non nulle, ou sev de dimension $n - 1$, ou une équation $\sum a_ix_i = 0$.</td></tr>
-</table>
-
 <p class="ml">Exemple 24 : un projecteur donné par une formule</p>
 <p>$p(x, y, z) = \big(\frac{x + y}2, \frac{x + y}2, z\big)$ sur $\mathbb R^3$. <b>Montrer que $p$ est un projecteur, et déterminer son image et son noyau.</b></p>
-<p><b>Étape 1 : Rappel.</b> $p\circ p = p$, puis image et noyau.</p>
+<p><b>Étape 1 : Rappel.</b> $p\circ p = p$ (ou $A^2 = A$) ; alors $p$ projette sur $\operatorname{Im}p = \ker(p - \operatorname{id})$ parallèlement à $\ker p$.</p>
 <p><b>Étape 2 : $p\circ p$.</b> On applique $p$ à $(a, a, z)$ avec $a = \frac{x + y}2$ : $\big(\frac{a + a}2, \frac{a + a}2, z\big) = (a, a, z)$. Donc $p\circ p = p$.</p>
 <p><b>Étape 3 : L'image.</b> $p(x, y, z) = (a, a, z)$ a ses deux premières coordonnées égales, et tout $(a, a, z)$ est sa propre image : $\operatorname{Im}p = \{x = y\}$, un plan. Matrice dans la base canonique (colonnes $p(e_1) = (\frac12, \frac12, 0)$, $p(e_2) = (\frac12, \frac12, 0)$, $p(e_3) = (0, 0, 1)$) :</p>
 $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\qquad P^2 = \begin{pmatrix}\frac14 + \frac14&\frac14 + \frac14&0\\\frac14 + \frac14&\frac14 + \frac14&0\\0&0&1\end{pmatrix} = P.$$
@@ -12347,7 +12085,7 @@ $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\q
 
 <p class="ml">Exemple 25 : $(f + \operatorname{id})\circ(f - 2\operatorname{id}) = 0$</p>
 <p>Montrer $E = \ker(f + \operatorname{id})\oplus\ker(f - 2\operatorname{id})$.</p>
-<p><b>Étape 1 : Rappel.</b> Analyse-synthèse ; en développant, $f^2 - 2f + f - 2\operatorname{id} = f^2 - f - 2\operatorname{id} = 0$, donc $f^2 = f + 2\operatorname{id}$.</p>
+<p><b>Étape 1 : Rappel.</b> $E = \bigoplus\ker(f - \lambda_i\operatorname{id})$ : analyse-synthèse, ou lemme des noyaux.</p>
 <p><b>Étape 2 : Analyse.</b> $x = y + z$ avec $f(y) = -y$ et $f(z) = 2z$. Alors $f(x) = -y + 2z$. On additionne avec $x = y + z$ : $x + f(x) = 3z$, donc $z = \frac13(x + f(x))$ et $y = x - z = \frac13(2x - f(x))$ : unicité.</p>
 <p><b>Étape 3 : Synthèse, $y$.</b> $(f + \operatorname{id})(2x - f(x)) = 2f(x) - f^2(x) + 2x - f(x) = f(x) + 2x - f^2(x) = f(x) + 2x - f(x) - 2x = 0$.</p>
 <p><b>Étape 4 : Synthèse, $z$.</b> $(f - 2\operatorname{id})(x + f(x)) = f(x) + f^2(x) - 2x - 2f(x) = f^2(x) - f(x) - 2x = 0$. Et $y + z = \frac{2x - f(x) + x + f(x)}3 = \frac{3x}3 = x$.</p>
@@ -12355,21 +12093,21 @@ $$P = \begin{pmatrix}\frac12&\frac12&0\\\frac12&\frac12&0\\0&0&1\end{pmatrix},\q
 
 <p class="ml">Exemple 26 : la famille de Jordan d'un nilpotent</p>
 <p>$\varphi^p = 0$, $\varphi^{p-1}(x)\neq0$. Montrer que $(x, \varphi(x), \dots, \varphi^{p-1}(x))$ est libre.</p>
-<p><b>Étape 1 : Rappel.</b> On applique des puissances de $\varphi$ pour isoler les coefficients un par un.</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi^{p-1}(x)\neq0\Rightarrow(x, \varphi(x), \dots, \varphi^{p-1}(x))$ libre.</p>
 <p><b>Étape 2 : L'hypothèse.</b> $\sum_{k=0}^{p-1}\lambda_k\varphi^k(x) = 0$. On applique $\varphi^{p-1}$ : $\varphi^{p-1+k}(x) = 0$ dès que $k\geq1$ (exposant $\geq p$), il reste $\lambda_0\varphi^{p-1}(x) = 0$, donc $\lambda_0 = 0$.</p>
 <p><b>Étape 3 : On recommence.</b> On applique $\varphi^{p-2}$ à $\sum_{k\geq1}\lambda_k\varphi^k(x) = 0$ : il reste $\lambda_1\varphi^{p-1}(x) = 0$, donc $\lambda_1 = 0$. Et ainsi de suite.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\text{libre}}$ ; en particulier $p\leq\dim E$, et $\varphi^{\dim E} = 0$.</p>
 
 <p class="ml">Exemple 27 : projecteur et commutation</p>
 <p>$p$ projecteur, $f\in\mathcal L(E)$. Montrer : $f\circ p = p\circ f\iff\ker p$ et $\operatorname{Im}p$ stables par $f$.</p>
-<p><b>Étape 1 : Rappel.</b> $E = \ker p\oplus\operatorname{Im}p$, et $p(y) = y$ pour $y\in\operatorname{Im}p$.</p>
+<p><b>Étape 1 : Rappel.</b> $\varphi(F)\subset F$ ; si $\varphi\circ\psi = \psi\circ\varphi$, alors $\ker\psi$ et $\operatorname{Im}\psi$ sont stables par $\varphi$.</p>
 <p><b>Étape 2 : $\Rightarrow$.</b> $x\in\ker p$ : $p(f(x)) = f(p(x)) = f(0) = 0$, donc $f(x)\in\ker p$. $y\in\operatorname{Im}p$ : $f(y) = f(p(y)) = p(f(y))\in\operatorname{Im}p$.</p>
 <p><b>Étape 3 : $\Leftarrow$.</b> $x = k + y$ avec $k = x - p(x)\in\ker p$, $y = p(x)\in\operatorname{Im}p$. Alors $p(f(x)) = p(f(k)) + p(f(y)) = 0 + f(y)$ (car $f(k)\in\ker p$ et $f(y)\in\operatorname{Im}p$), et $f(p(x)) = f(y)$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f\circ p = p\circ f\iff\ker p,\ \operatorname{Im}p\ \text{stables par}\ f}$.</p>
 
 <p class="ml">Exemple 28 : un hyperplan de $\mathbb R_n[X]$ et un supplémentaire</p>
 <p>$H = \{P\in\mathbb R_n[X],\ P'(0) = 0\}$ ($n\geq2$). <b>Montrer que $H$ est un hyperplan et en donner un supplémentaire.</b></p>
-<p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle = hyperplan ; toute droite non contenue dans $H$ est un supplémentaire.</p>
+<p><b>Étape 1 : Rappel.</b> Noyau d'une forme linéaire non nulle, ou sev de dimension $n - 1$, ou une équation $\sum a_ix_i = 0$.</p>
 <p><b>Étape 2 : La forme.</b> $\varphi(P) = P'(0)$ est linéaire, et non nulle : $\varphi(X) = 1$. Donc $H = \ker\varphi$ est un hyperplan.</p>
 <p><b>Étape 3 : Le supplémentaire.</b> $X\notin H$ ($\varphi(X) = 1\neq0$) : $\mathbb RX$ est un supplémentaire. Explicitement, $P = \big(P - P'(0)X\big) + P'(0)X$ et $\big(P - P'(0)X\big)'(0) = P'(0) - P'(0) = 0$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\mathbb R_n[X] = H\oplus\mathbb RX}$.</p>
