@@ -3375,7 +3375,7 @@ $$\frac{|\sin t|}t\geqslant\frac1{2t} - \frac{\cos2t}{2t}.$$
 <p><b>Étape 1 : Rappel.</b> On calcule sur $[0, x]$, puis on fait tendre $x$ vers $+\infty$.</p>
 <p><b>Étape 2 : IPP sur $[0, x]$</b> ($u = t$, $v' = e^{-t}$, $v = -e^{-t}$) :</p>
 $$\int_0^xt\,e^{-t}\,dt = \big[-t\,e^{-t}\big]_0^x + \int_0^xe^{-t}\,dt = -x\,e^{-x} + 1 - e^{-x}.$$
-<p><b>Étape 3 : La limite.</b> $x\,e^{-x}\to0$ et $e^{-x}\to0$ : $\cG{\int_0^{+\infty}t\,e^{-t}\,dt = 1}$.</p>
+<p><b>Étape 3 : La limite.</b> $x\,e^{-x}\to0$ (croissances comparées) et $e^{-x}\to0$, donc $-x\,e^{-x} + 1 - e^{-x}\to-0 + 1 - 0 = 1$ : $\cG{\int_0^{+\infty}t\,e^{-t}\,dt = 1}$.</p>
 
 <p class="ml">Changement de variable</p>
 <p>Il doit être une bijection $\mathcal C^1$ strictement monotone. Il conserve alors la nature et la valeur : $\int_0^{+\infty}e^{-\sqrt t}\,dt\ \underset{\cO{t = u^2}}{=}\ \int_0^{+\infty}2u\,e^{-u}\,du = 2$.</p>
@@ -3410,14 +3410,14 @@ $$\int_x^1\frac{dt}{t^\alpha} = \frac{1 - x^{1-\alpha}}{1 - \alpha}\longrightarr
 <p><b>Étape 1 : Rappel.</b> $\int_0^1f = \lim\limits_{x\to0^+}\int_x^1f$. Une primitive de $\ln$ est $t\ln t - t$.</p>
 <p><b>Étape 2 : Sur $[x, 1]$.</b></p>
 $$\int_x^1\ln t\,dt = \big[t\ln t - t\big]_x^1 = (0 - 1) - (x\ln x - x) = -1 - x\ln x + x.$$
-<p><b>Étape 3 : La limite.</b> $x\ln x\to0$ (croissances comparées) et $x\to0$.</p>
+<p><b>Étape 3 : La limite.</b> (Primitive : $(t\ln t - t)' = \ln t + t\times\frac1t - 1 = \ln t$.) $x\ln x\to0$ (croissances comparées) et $x\to0$, donc $-1 - x\ln x + x\to-1 - 0 + 0 = -1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\int_0^1\ln t\,dt = -1}$ (convergente).</p>
 
 <p class="ml">Exemple 7 : deux bornes infinies</p>
 <p>Calculer $\displaystyle\int_{-\infty}^{+\infty}\frac{dt}{1 + t^2}$.</p>
 <p><b>Étape 1 : Rappel.</b> Avec deux bornes à problème, on coupe en $0$ et chaque morceau doit converger. Une primitive de $\frac1{1 + t^2}$ est $\arctan$.</p>
-<p><b>Étape 2 : Sur $[0, +\infty[$.</b> $\int_0^x\frac{dt}{1 + t^2} = \arctan x\to\frac\pi2$.</p>
-<p><b>Étape 3 : Sur $]-\infty, 0]$.</b> $\int_x^0\frac{dt}{1 + t^2} = -\arctan x\to\frac\pi2$ quand $x\to-\infty$.</p>
+<p><b>Étape 2 : Sur $[0, +\infty[$.</b> $\int_0^x\frac{dt}{1 + t^2} = \arctan x - \arctan0 = \arctan x\to\frac\pi2$.</p>
+<p><b>Étape 3 : Sur $]-\infty, 0]$.</b> $\int_x^0\frac{dt}{1 + t^2} = \arctan0 - \arctan x = -\arctan x\to-\big(-\frac\pi2\big) = \frac\pi2$ quand $x\to-\infty$.</p>
 <p><b>Étape 4 : Conclusion.</b> Les deux convergent : $\cG{\int_{-\infty}^{+\infty}\frac{dt}{1 + t^2} = \frac\pi2 + \frac\pi2 = \pi}$.</p>
 
 <h2 id="p-pos">6. Fonctions positives : les théorèmes de comparaison</h2>
@@ -3463,7 +3463,7 @@ $$f\ \text{à valeurs complexes}:\quad\int f\ \text{CV}\iff\int\operatorname{Re}
 <p><b>Étape 3 : On passe en complexe.</b> $e^{-t}\cos t = \operatorname{Re}\big(e^{(-1 + i)t}\big)$. Sur $[0, x]$ :</p>
 $$\int_0^xe^{(-1 + i)t}\,dt = \Big[\frac{e^{(-1 + i)t}}{-1 + i}\Big]_0^x = \frac{e^{(-1 + i)x} - 1}{-1 + i}.$$
 <p><b>Étape 4 : La limite.</b> $|e^{(-1 + i)x}| = |e^{-x}|\,|e^{ix}| = e^{-x}\to0$, donc l'intégrale vaut $\frac{0 - 1}{-1 + i} = \frac1{1 - i}$. On multiplie par le conjugué : $\frac1{1 - i} = \frac{1 + i}{(1 - i)(1 + i)} = \frac{1 + i}{1 + 1} = \frac{1 + i}2$.</p>
-<p><b>Étape 5 : Conclusion.</b> On prend la partie réelle : $\cG{\int_0^{+\infty}e^{-t}\cos t\,dt = \frac12}$ (et $\int_0^{+\infty}e^{-t}\sin t\,dt = \frac12$ avec la partie imaginaire).</p>
+<p><b>Étape 5 : Conclusion.</b> $\frac{1 + i}2 = \frac12 + \frac12i$ ; on prend la partie réelle : $\cG{\int_0^{+\infty}e^{-t}\cos t\,dt = \frac12}$ (et $\int_0^{+\infty}e^{-t}\sin t\,dt = \frac12$ avec la partie imaginaire).</p>
 
 <h2 id="p-prop">8. Propriétés des intégrales convergentes</h2>
 <div class="sbox">$$\textbf{Linéarité}:\ \int f,\ \int g\ \text{CV}\Rightarrow\int(\lambda f + \mu g) = \lambda\int f + \mu\int g.\qquad\textbf{Chasles}\ \text{reste vrai}.$$
@@ -3483,7 +3483,7 @@ $$\textbf{Changement de variable}:\ \varphi:\,]\alpha, \beta[\to]a, b[\ \text{bi
 <p><b>Étape 3 : L'IPP</b> pour $n\geq1$, avec $u = t^n$, $v' = e^{-t}$, $v = -e^{-t}$ :</p>
 $$I_n = \big[-t^ne^{-t}\big]_0^{+\infty} + n\int_0^{+\infty}t^{n-1}e^{-t}\,dt.$$
 <p><b>Étape 4 : Le crochet.</b> $t^ne^{-t}\to0$ en $+\infty$ et vaut $0$ en $0$ : le crochet est nul. Donc $I_n = nI_{n-1}$.</p>
-<p><b>Étape 5 : Conclusion.</b> $I_0 = \int_0^{+\infty}e^{-t}\,dt = 1$, et par récurrence $\cG{I_n = n\,(n - 1)\cdots1\times I_0 = n!}$.</p>
+<p><b>Étape 5 : Conclusion.</b> $I_0 = \int_0^{+\infty}e^{-t}\,dt = \big[-e^{-t}\big]_0^{+\infty} = 0 - (-1) = 1$. Puis $I_1 = 1\times I_0 = 1$, $I_2 = 2I_1 = 2$, $I_3 = 3I_2 = 6$, et par récurrence $\cG{I_n = n\,(n - 1)\cdots1\times I_0 = n!}$.</p>
 
 <p class="ml">Exemple 13 : un changement de variable</p>
 <p>Calculer $\displaystyle\int_0^{+\infty}\frac{dt}{e^t + e^{-t}}$.</p>
@@ -3492,7 +3492,7 @@ $$I_n = \big[-t^ne^{-t}\big]_0^{+\infty} + n\int_0^{+\infty}t^{n-1}e^{-t}\,dt.$$
 <p><b>Étape 3 : On remplace.</b></p>
 <p>Avec $e^t = u$, $e^{-t} = \frac1u$, $dt = \frac{du}u$, et $\big(u + \frac1u\big)\times u = u^2 + 1$ :</p>
 $$\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \int_1^{+\infty}\frac1{u + \frac1u}\cdot\frac{du}u = \int_1^{+\infty}\frac{du}{u^2 + 1}.$$
-<p><b>Étape 4 : On calcule.</b> $\int_1^x\frac{du}{1 + u^2} = \arctan x - \frac\pi4\to\frac\pi2 - \frac\pi4$.</p>
+<p><b>Étape 4 : On calcule.</b> $\int_1^x\frac{du}{1 + u^2} = \arctan x - \arctan1 = \arctan x - \frac\pi4\to\frac\pi2 - \frac\pi4 = \frac{2\pi - \pi}4 = \frac\pi4$.</p>
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^{+\infty}\frac{dt}{e^t + e^{-t}} = \frac\pi4}$.</p>
 
 <h2 id="p-serint">10. Comparaison série-intégrale</h2>
@@ -3502,7 +3502,7 @@ $$\text{L'encadrement à refaire}:\quad\int_n^{n+1}f(t)\,dt\ \leq\ f(n)\ \leq\ \
 
 <p class="ml">Exemple 14 : la série $\sum\frac1{n\ln n}$</p>
 <p><b>Étape 1 : Rappel.</b> $f$ positive, continue, décroissante : $\sum f(n)$ et $\int f$ ont même nature.</p>
-<p><b>Étape 2 : La fonction.</b> $f(t) = \frac1{t\ln t}$ sur $[2, +\infty[$ : positive, continue, et décroissante car $t\ln t$ est croissante et positive.</p>
+<p><b>Étape 2 : La fonction.</b> $f(t) = \frac1{t\ln t}$ sur $[2, +\infty[$ : positive ($t > 0$ et $\ln t\geq\ln2 > 0$), continue, et décroissante car $t\ln t$ est un produit de deux fonctions croissantes positives.</p>
 <p><b>Étape 3 : L'intégrale.</b> Une primitive est $\ln(\ln t)$ (dérivée $\frac{1/t}{\ln t}$) :</p>
 $$\int_2^x\frac{dt}{t\ln t} = \ln(\ln x) - \ln(\ln2)\longrightarrow+\infty.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq2}\frac1{n\ln n}\ \text{diverge}}$, alors que $\frac1{n\ln n} = o\big(\frac1n\big)$… la comparaison avec $\frac1n$ ne suffisait pas.</p>
@@ -3556,7 +3556,7 @@ $$\Big|\frac{f(t)}t\Big|\leq\frac12f(t)^2 + \frac12\cdot\cO{\frac1{t^2}}.$$
 <p class="ml">Exemple 19 : $\lim\int_0^{\pi/2}\sin^nt\,dt$</p>
 <p><b>Étape 1 : Rappel.</b> Convergence dominée : limite simple + domination $|f_n|\leqslant\varphi$ intégrable, indépendante de $n$.</p>
 <p><b>Étape 2 : La limite simple.</b> Pour $t\in\big[0, \frac\pi2\big[$, $0\leqslant\sin t\lt1$, donc $\sin^nt\to0$. En $\frac\pi2$, $\sin^n\frac\pi2 = 1$. La limite vaut $0$ sauf en un point.</p>
-<p><b>Étape 3 : La domination.</b> $|\sin^nt|\leqslant\cO1$, intégrable sur le segment.</p>
+<p><b>Étape 3 : La domination.</b> $|\sin t|\leq1$ donc $|\sin^nt| = |\sin t|^n\leqslant\cO1$, et $\int_0^{\pi/2}1\,dt = \frac\pi2$ est finie : $1$ est intégrable sur le segment.</p>
 <p><b>Étape 4 : Conclusion.</b> $\int_0^{\pi/2}\sin^nt\,dt\to\int_0^{\pi/2}0\,dt = \cG0$.</p>
 
 <p class="ml">Exemple 20 : $\lim\int_0^n\big(1 - \frac tn\big)^n\,dt$</p>
@@ -3715,7 +3715,7 @@ $$\Gamma(x + 1) = \int_0^{+\infty}t^xe^{-t}\,dt = \underbrace{\big[-t^xe^{-t}\bi
 $$I_n = \Big[\frac t{(1 + t^2)^n}\Big]_0^{+\infty} + 2n\int_0^{+\infty}\frac{t^2}{(1 + t^2)^{n+1}}\,dt.$$
 <p><b>Étape 4 : Le crochet</b> vaut $0$ ($\frac t{(1 + t^2)^n}\to0$). On écrit $t^2 = (1 + t^2) - 1$ :</p>
 $$I_n = 2n\int_0^{+\infty}\Big(\frac1{(1 + t^2)^n} - \frac1{(1 + t^2)^{n+1}}\Big)dt = 2n\,(I_n - I_{n+1}).$$
-<p><b>Étape 5 : Conclusion.</b> $\cG{I_{n+1} = \frac{2n - 1}{2n}I_n}$, avec $I_1 = \frac\pi2$. Par exemple $I_2 = \frac12\cdot\frac\pi2 = \frac\pi4$.</p>
+<p><b>Étape 5 : Conclusion.</b> $I_n = 2nI_n - 2nI_{n+1}\iff2nI_{n+1} = 2nI_n - I_n = (2n - 1)I_n$, donc $\cG{I_{n+1} = \frac{2n - 1}{2n}I_n}$, avec $I_1 = \frac\pi2$ (exemple 9). Par exemple $n = 1$ : $I_2 = \frac{2 - 1}2\times\frac\pi2 = \frac\pi4$.</p>
 
 <h2 id="p-arbre">L'arbre des méthodes</h2>
 <p>Lis-le de gauche à droite, et clique une conclusion pour aller à la méthode.</p>
