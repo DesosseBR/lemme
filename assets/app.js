@@ -1606,6 +1606,25 @@ function exBlocks(app) {
     p.replaceWith(box);
     numberSteps(body);
   });
+  friseSections(app);
+}
+/* Méthode : chaque section numérotée devient une étape de la frise (pastille colorée + rail) */
+function friseSections(app) {
+  const prose = $(".methode .prose", app); if (!prose || prose.dataset.frise) return; prose.dataset.frise = "1";
+  const SKIP = /(erreurs|entrainement|arbre|reflexes|exos|enonce|not)$/;
+  const COLS = ["fB", "fO", "fV", "fG"]; let c = 0;
+  [...prose.querySelectorAll(":scope > h2")].forEach(h => {
+    const m = h.textContent.trim().match(/^(\d+(?:\s*bis)?)\.\s*/);
+    if (!m || SKIP.test(h.id || "")) return;
+    const item = document.createElement("section"); item.className = "fri " + COLS[c++ % 4];
+    const dot = document.createElement("span"); dot.className = "frd"; dot.textContent = m[1].replace(/\s+/g, " ");
+    h.before(item);
+    h.innerHTML = h.innerHTML.replace(/^\s*\d+(?:\s*bis)?\.\s*/, ""); h.prepend(dot);
+    let n = h; while (n && !(n !== h && n.nodeType === 1 && n.tagName === "H2")) { const nx = n.nextSibling; item.appendChild(n); n = nx; }
+  });
+  const items = [...prose.querySelectorAll(":scope > .fri")];
+  items.forEach(it => { let p = it.previousElementSibling; if (!p || !p.classList.contains("fri")) { const w = document.createElement("div"); w.className = "frise"; it.before(w); } });
+  [...prose.querySelectorAll(":scope > .frise")].forEach(w => { let n = w.nextElementSibling; while (n && n.classList.contains("fri")) { const nx = n.nextElementSibling; w.appendChild(n); n = nx; } });
 }
 function braceTree(el) {
   const root = el.querySelector(".troot"), brs = [...el.querySelectorAll(".tb")];
