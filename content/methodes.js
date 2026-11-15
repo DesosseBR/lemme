@@ -3066,6 +3066,7 @@ $$\frac{(-1 + 2i)(1 - i)}{(1 + i)(1 - i)} = \frac{-1 + i + 2i - 2i^2}2 = \frac{1
 <li>Toute fonction continue par morceaux est approchée par des fonctions en escalier : pour tout $\varepsilon > 0$, il existe $\varphi, \psi$ en escalier avec $\varphi\leqslant f\leqslant\psi$ et $\psi - \varphi\leqslant\varepsilon$. C'est ce qui définit $\int f$.</li>
 </ul>
 <p class="ml">Exemple : la partie entière</p>
+<p><b>Calculer $\int_0^3\lfloor t\rfloor\,dt$, où $\lfloor t\rfloor$ est la partie entière de $t$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pour une fonction en escalier, $\int_a^b\varphi = \sum_kc_k(x_{k+1} - x_k)$ : la somme des aires des rectangles.</p>
 <p><b>Étape 2 : Les paliers.</b> Sur $[0, 1[$, $\lfloor t\rfloor = 0$ ; sur $[1, 2[$, il vaut $1$ ; sur $[2, 3[$, il vaut $2$.</p>
 <p><b>Étape 3 : Les aires.</b> Chaque palier a une largeur $1$ :</p>
@@ -3078,6 +3079,7 @@ $$\int_0^3\lfloor t\rfloor\,dt = 0\times1 + 1\times1 + 2\times1 = \cG3.$$
 <p class="ml piege">Piège</p>
 <p>La croissance demande $a\leqslant b$, et le dernier résultat demande que $f$ soit <b>continue</b> : une fonction nulle sauf en un point a une intégrale nulle.</p>
 <p class="ml">Exemple : la limite de $I_n = \int_0^1\frac{x^n}{1 + x}\,dx$</p>
+<p>Soit $I_n = \int_0^1\frac{x^n}{1 + x}\,dx$. <b>Montrer que $(I_n)$ converge et déterminer sa limite.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $f\leqslant g$ sur $[a, b]$ avec $a\leqslant b$, alors $\int_a^bf\leqslant\int_a^bg$.</p>
 <p><b>Étape 2 : Encadrer la fonction.</b> Pour $x\in[0, 1]$, $1 + x\geqslant1$ et $x^n\geqslant0$ :</p>
 $$0\leqslant\frac{x^n}{1 + x}\leqslant\cV{x^n}.$$
@@ -3086,6 +3088,7 @@ $$0\leqslant I_n\leqslant\int_0^1x^n\,dx = \Big[\frac{x^{n+1}}{n + 1}\Big]_0^1 =
 <p><b>Étape 4 : Conclusion</b> par encadrement : $\frac1{n + 1}\to0$, donc $\cG{I_n\to0}$.</p>
 
 <p class="ml">Exemple : l'inégalité de Cauchy-Schwarz</p>
+<p>Soient $f, g$ continues sur $[a, b]$. <b>Montrer que $\Big(\int_a^bfg\Big)^2\leqslant\int_a^bf^2\times\int_a^bg^2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un trinôme $a\lambda^2 + b\lambda + c$ avec $a > 0$, positif pour tout $\lambda$, a un discriminant $\Delta\leqslant0$.</p>
 <p><b>Étape 2 : Le polynôme positif.</b> Pour tout réel $\lambda$, $(f + \lambda g)^2\geqslant0$, donc :</p>
 $$P(\lambda) = \int_a^b(f + \lambda g)^2 = \lambda^2\int_a^bg^2 + 2\lambda\int_a^bfg + \int_a^bf^2\geqslant0.$$
@@ -3101,6 +3104,7 @@ $$\cG{\Big(\int_a^bfg\Big)^2\leqslant\Big(\int_a^bf^2\Big)\Big(\int_a^bg^2\Big)}
 <p>On introduit une primitive $F$ de $f$, on écrit l'intégrale avec $F$, puis on dérive des fonctions composées :</p>
 $$G(x) = \int_{u(x)}^{v(x)}f(t)\,dt = F(v(x)) - F(u(x))\ \Longrightarrow\ G'(x) = f(v(x))\,v'(x) - f(u(x))\,u'(x).$$
 <p class="ml">Exemple : $G(x) = \int_x^{2x}e^{-t^2}\,dt$</p>
+<p>Soit $G(x) = \int_x^{2x}e^{-t^2}\,dt$. <b>Justifier que $G$ est dérivable sur $\mathbb R$ et calculer $G'(x)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si $F$ est une primitive de $f$ : $\int_{u(x)}^{v(x)}f = F(v(x)) - F(u(x))$, puis on dérive des composées.</p>
 <p><b>Étape 2 : Une primitive.</b> $t\mapsto e^{-t^2}$ est continue : elle a une primitive $F$, avec $F' = e^{-t^2}$.</p>
 <p><b>Étape 3 : Écrire $G$ avec $F$.</b></p>
@@ -3121,6 +3125,7 @@ $$G'(x) = \cO2F'(2x) - F'(x) = 2e^{-(2x)^2} - e^{-x^2} = \cG{2e^{-4x^2} - e^{-x^
 <tr><td>$\frac1{\sqrt{1 - x^2}}$</td><td>$\arcsin x$</td><td>$1 + \tan^2x = \frac1{\cos^2x}$</td><td>$\tan x$</td></tr>
 </table>
 <p class="ml">Exemple 1 : reconnaître $u'u^\alpha$</p>
+<p><b>Calculer $\int_0^1x\sqrt{1 + x^2}\,dx$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Une primitive de $u'u^\alpha$ ($\alpha\neq-1$) est $\frac{u^{\alpha+1}}{\alpha + 1}$.</p>
 <p><b>Étape 2 : Repérer $u$.</b> $u = 1 + x^2$, $u' = 2x$, $\alpha = \frac12$. Il manque un facteur $2$ : on l'ajoute.</p>
 $$\int_0^1x\sqrt{1 + x^2}\,dx = \frac12\int_0^1\cB{2x}(1 + x^2)^{1/2}\,dx.$$
@@ -3130,6 +3135,7 @@ $$= \frac12\Big[\frac{(1 + x^2)^{3/2}}{3/2}\Big]_0^1 = \frac13\Big[(1 + x^2)^{3/
 $$= \cG{\frac13\big(2\sqrt2 - 1\big)}.$$
 
 <p class="ml">Exemple 2 : un trinôme sans racine réelle, on passe à la forme canonique</p>
+<p><b>Calculer une primitive de $\frac1{x^2 + 2x + 5}$ sur $\mathbb R$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int\frac{dx}{(x - x_0)^2 + a^2} = \frac1a\arctan\frac{x - x_0}a$.</p>
 <p><b>Étape 2 : Pas de racine réelle.</b> $\Delta = 4 - 20\lt0$ : on passe à la forme canonique.</p>
 $$x^2 + 2x + 5 = (x + 1)^2 - 1 + 5 = (x + 1)^2 + 2^2.$$
@@ -3139,6 +3145,7 @@ $$\int_{-1}^1\frac{dx}{(x + 1)^2 + 2^2} = \Big[\frac12\arctan\frac{x + 1}2\Big]_
 $$= \frac12\big(\arctan1 - \arctan0\big) = \frac12\cdot\frac\pi4 = \cG{\frac\pi8}.$$
 
 <p class="ml">Exemple 3 : un trinôme avec deux racines, on décompose</p>
+<p><b>Calculer une primitive de $\frac1{x^2 - 1}$ sur $\left]1, +\infty\right[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Avec deux racines, on décompose en éléments simples, puis $\int\frac{dx}{x - a} = \ln|x - a|$.</p>
 <p><b>Étape 2 : Factoriser.</b> $x^2 - 1 = (x - 1)(x + 1)$.</p>
 <p><b>Étape 3 : Décomposer</b> (cacher et évaluer) :</p>
@@ -3157,6 +3164,7 @@ $$= \frac12\Big(\ln\frac12 - \ln\frac13\Big) = \cG{\frac12\ln\frac32}.$$
 <li>Toujours écrire les quatre fonctions avant de calculer : $u, u', v', v$.</li>
 </ul>
 <p class="ml">Exemple 1 : $\int_0^1t\,e^t\,dt$</p>
+<p><b>Calculer $\int_0^1t\,e^t\,dt$ par intégration par parties.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int_a^buv' = [uv]_a^b - \int_a^bu'v$. On dérive le polynôme, on intègre l'exponentielle.</p>
 <p><b>Étape 2 : Les quatre fonctions.</b></p>
 $$\left\{\begin{aligned}\cB{u(t)} &= \cB t & \cB{u'(t)} &= \cB1\\\cR{v'(t)} &= \cR{e^t} & \cR{v(t)} &= \cR{e^t}\end{aligned}\right.$$
@@ -3166,6 +3174,7 @@ $$\int_0^1t\,e^t\,dt = \Big[\cB t\,\cR{e^t}\Big]_0^1 - \int_0^1\cB1\cdot\cR{e^t}
 <p><b>Étape 5 : Conclusion.</b> $e - (e - 1) = \cG1$.</p>
 
 <p class="ml">Exemple 2 : $\int_1^e\ln t\,dt$, avec un « 1 » caché</p>
+<p><b>Calculer $\int_1^e\ln t\,dt$ par intégration par parties.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\int_a^buv' = [uv]_a^b - \int_a^bu'v$. Pour $\int\ln$, on écrit $\ln t = 1\times\ln t$.</p>
 <p><b>Étape 2 : Les quatre fonctions.</b></p>
 $$\left\{\begin{aligned}\cB{u(t)} &= \cB{\ln t} & \cB{u'(t)} &= \cB{\tfrac1t}\\\cR{v'(t)} &= \cR1 & \cR{v(t)} &= \cR t\end{aligned}\right.$$
@@ -3175,6 +3184,7 @@ $$\int_1^e\ln t\,dt = \Big[\cR t\,\cB{\ln t}\Big]_1^e - \int_1^e\cB{\frac1t}\cdo
 <p><b>Étape 5 : Conclusion.</b> $e - (e - 1) = \cG1$. Une primitive de $\ln$ est $t\ln t - t$.</p>
 
 <p class="ml">Exemple 3 : $\int_0^1\arctan t\,dt$</p>
+<p><b>Calculer $\int_0^1\arctan t\,dt$ par intégration par parties.</b></p>
 <p><b>Étape 1 : Rappel.</b> IPP avec $v' = 1$ : on dérive $\arctan$, qui devient une fraction.</p>
 <p><b>Étape 2 : Les quatre fonctions.</b></p>
 $$\left\{\begin{aligned}\cB u &= \cB{\arctan t} & \cB{u'} &= \cB{\tfrac1{1 + t^2}}\\\cR{v'} &= \cR1 & \cR v &= \cR t\end{aligned}\right.$$
@@ -3186,8 +3196,8 @@ $$\int_0^1\frac t{1 + t^2}\,dt = \frac12\big[\ln(1 + t^2)\big]_0^1 = \frac{\ln2}
 <p><b>Étape 6 : Conclusion.</b> $\cG{\int_0^1\arctan t\,dt = \frac\pi4 - \frac{\ln2}2}$.</p>
 
 <p class="ml">Exemple 4 : deux IPP qui reviennent au départ</p>
+<p><b>Calculer $I = \int_0^\pi e^t\cos t\,dt$ par deux intégrations par parties.</b></p>
 <p><b>Étape 1 : Rappel.</b> Avec $e^t$ et $\cos$, deux IPP dans le même sens font réapparaître l'intégrale de départ : on obtient une équation en $I$.</p>
-$$I = \int_0^\pi e^t\cos t\,dt.$$
 <p><b>Étape 2 : Première IPP</b> ($u = \cos t$, $v' = e^t$) :</p>
 $$I = \big[e^t\cos t\big]_0^\pi + \int_0^\pi e^t\sin t\,dt = (-e^\pi - 1) + \int_0^\pi e^t\sin t\,dt.$$
 <p><b>Étape 3 : Deuxième IPP</b> ($u = \sin t$, $v' = e^t$) :</p>
@@ -3197,6 +3207,7 @@ $$I = -e^\pi - 1 - I\iff2I = -e^\pi - 1.$$
 <p><b>Étape 5 : Conclusion.</b> $\cG{I = -\frac{e^\pi + 1}2}$.</p>
 
 <p class="ml">Exemple 5 : une relation de récurrence (intégrales de Wallis)</p>
+<p>Soit $W_n = \int_0^{\pi/2}\sin^nt\,dt$. <b>Établir une relation entre $W_{n+2}$ et $W_n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $W_n = \int_0^{\pi/2}\sin^nt\,dt$. On fait une IPP qui garde un $\sin t$ à intégrer, puis $\cos^2 = 1 - \sin^2$.</p>
 <p><b>Étape 2 : On écrit $\sin^{n+2} = \sin^{n+1}\cdot\sin$</b> :</p>
 $$\left\{\begin{aligned}\cB u &= \cB{\sin^{n+1}t} & \cB{u'} &= \cB{(n + 1)\cos t\sin^nt}\\\cR{v'} &= \cR{\sin t} & \cR v &= \cR{-\cos t}\end{aligned}\right.$$
@@ -3219,6 +3230,7 @@ $$(n + 2)W_{n+2} = (n + 1)W_n\qquad\Longrightarrow\qquad\cG{W_{n+2} = \frac{n + 
 <li>Remplacer <b>tous</b> les $x$ : il ne doit plus en rester un seul.</li>
 </ol>
 <p class="ml">Exemple 1 : $\int_0^1\sqrt{1 - x^2}\,dx$ avec $x = \sin t$</p>
+<p><b>Calculer $\int_0^1\sqrt{1 - x^2}\,dx$ avec le changement de variable $x = \sin t$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Changement de variable : poser $x = \varphi(t)$, calculer $dx$, changer les bornes, remplacer tous les $x$.</p>
 <p><b>Étape 2 : On pose $\cO{x = \sin t}$</b>, $t\in\big[0, \frac\pi2\big]$ : $\cO{dx = \cos t\,dt}$.</p>
 <p><b>Étape 3 : Les bornes.</b> $x = 0\iff t = \cO0$ ; $x = 1\iff t = \cO{\frac\pi2}$.</p>
@@ -3230,6 +3242,7 @@ $$= \Big[\frac t2 + \frac{\sin2t}4\Big]_0^{\pi/2} = \frac\pi4 + 0 = \cG{\frac\pi
 <p>C'est l'aire d'un quart de disque de rayon $1$.</p>
 
 <p class="ml">Exemple 2 : $\int_0^1\frac{dx}{1 + e^x}$ avec $t = e^x$</p>
+<p><b>Calculer $\int_0^1\frac{dx}{1 + e^x}$ avec le changement de variable $t = e^x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Poser $t = \psi(x)$, exprimer $x$ et $dx$, changer les bornes, remplacer tous les $x$.</p>
 <p><b>Étape 2 : On pose $\cO{t = e^x}$</b> : $x = \ln t$ et $\cO{dx = \frac{dt}t}$.</p>
 <p><b>Étape 3 : Les bornes.</b> $x = 0\mapsto t = \cO1$ et $x = 1\mapsto t = \cO e$.</p>
@@ -3240,6 +3253,7 @@ $$\int_0^1\frac{dx}{1 + e^x} = \int_1^e\frac1{1 + t}\cdot\frac{dt}t = \int_1^e\f
 $$\big[\ln t - \ln(1 + t)\big]_1^e = (1 - \ln(1 + e)) - (0 - \ln2) = \cG{1 - \ln(1 + e) + \ln2}.$$
 
 <p class="ml">Exemple 3 : symétries (sans calcul)</p>
+<p>Soit $f$ continue. <b>Montrer, par des changements de variable, les égalités pour $f$ impaire, paire ou $T$-périodique, et $\int_0^{\pi/2}f(\sin t)\,dt = \int_0^{\pi/2}f(\cos t)\,dt$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un changement de variable simple ($x = -t$, $x = t + T$, $t = \frac\pi2 - u$) montre ces égalités sans rien calculer.</p>
 <p><b>Étape 2 : Fonction impaire.</b> Avec $x = -t$ : $\int_{-a}^0f = -\int_0^af$, donc $\int_{-a}^af = 0$. Paire : $\int_{-a}^af = 2\int_0^af$.</p>
 <p><b>Étape 3 : Fonction $T$-périodique.</b> $\int_a^{a+T}f = \int_0^Tf$ pour tout $a$.</p>
@@ -3256,6 +3270,7 @@ $$\big[\ln t - \ln(1 + t)\big]_1^e = (1 - \ln(1 + e)) - (0 - \ln2) = \cG{1 - \ln
 </table>
 <p>Moyen mnémotechnique : on pose la fonction qui est elle-même invariante par la transformation.</p>
 <p class="ml">Exemple 1 : $\int\frac{dx}{\sin x}$</p>
+<p><b>Calculer une primitive de $\frac1{\sin x}$ sur $\left]0, \pi\right[$ avec les règles de Bioche.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bioche : si $g(x) = f(x)\,dx$ est invariant par $x\mapsto-x$, on pose $t = \cos x$.</p>
 <p><b>Étape 2 : Le test.</b> $g(-x) = \frac{d(-x)}{\sin(-x)} = \frac{-dx}{-\sin x} = g(x)$ : on pose $\cO{t = \cos x}$, $dt = -\sin x\,dx$.</p>
 <p><b>Étape 3 : Faire apparaître $\sin x\,dx$</b> (on multiplie en haut et en bas par $\sin x$) :</p>
@@ -3266,6 +3281,7 @@ $$-\frac12\int\Big(\frac1{1 - t} + \frac1{1 + t}\Big)dt = -\frac12\ln\Big|\frac{
 $$= \frac12\ln\Big(\frac{1 - \cos x}{1 + \cos x}\Big) = \cG{\ln\Big|\tan\frac x2\Big|}.$$
 
 <p class="ml">Exemple 2 : $\int_0^{\pi/2}\frac{\cos x}{1 + \sin^2x}\,dx$</p>
+<p><b>Calculer $\int_0^{\pi/2}\frac{\cos x}{1 + \sin^2x}\,dx$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bioche : invariant par $x\mapsto\pi - x$, on pose $t = \sin x$.</p>
 <p><b>Étape 2 : Le test.</b> $\cos(\pi - x) = -\cos x$ et $d(\pi - x) = -dx$ : les deux signes s'annulent, $g(\pi - x) = g(x)$.</p>
 <p><b>Étape 3 : On pose $\cO{t = \sin x}$</b> : $dt = \cos x\,dx$, bornes $\cO0$ et $\cO1$.</p>
@@ -3273,6 +3289,7 @@ $$= \frac12\ln\Big(\frac{1 - \cos x}{1 + \cos x}\Big) = \cG{\ln\Big|\tan\frac x2
 $$\int_0^{\pi/2}\frac{\cos x\,dx}{1 + \sin^2x} = \int_0^1\frac{dt}{1 + t^2} = \big[\arctan t\big]_0^1 = \cG{\frac\pi4}.$$
 
 <p class="ml">Exemple 3 : $\int_0^{\pi/4}\frac{dx}{1 + \cos^2x}$</p>
+<p><b>Calculer $\int_0^{\pi/4}\frac{dx}{1 + \cos^2x}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Bioche : invariant par $x\mapsto\pi + x$, on pose $t = \tan x$, avec $dt = (1 + t^2)\,dx$ et $\cos^2x = \frac1{1 + t^2}$.</p>
 <p><b>Étape 2 : Le test.</b> $g(-x)\neq g(x)$ (le $dx$ change de signe), mais $\cos^2(\pi + x) = \cos^2x$ : $g(\pi + x) = g(x)$.</p>
 <p><b>Étape 3 : On pose $\cO{t = \tan x}$</b>, bornes $\cO0$ et $\cO1$.</p>
@@ -3283,6 +3300,7 @@ $$\int_0^{\pi/4}\frac{dx}{1 + \cos^2x} = \int_0^1\frac{1 + t^2}{2 + t^2}\cdot\fr
 $$= \Big[\frac1{\sqrt2}\arctan\frac t{\sqrt2}\Big]_0^1 = \cG{\frac1{\sqrt2}\arctan\frac1{\sqrt2}}.$$
 
 <p class="ml">Exemple 4 : aucune règle, $t = \tan\frac x2$</p>
+<p><b>Calculer $\int_0^{\pi/2}\frac{dx}{2 + \cos x}$ avec $t = \tan\frac x2$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Si aucune règle de Bioche ne marche : $t = \tan\frac x2$, $\cos x = \frac{1 - t^2}{1 + t^2}$, $dx = \frac{2\,dt}{1 + t^2}$.</p>
 <p><b>Étape 2 : Les tests échouent.</b> $x\mapsto-x$, $\pi - x$ et $\pi + x$ changent tous $2 + \cos x$ ou le $dx$.</p>
 <p><b>Étape 3 : On pose $\cO{t = \tan\frac x2}$</b> : bornes $\cO0$ et $\cO{\tan\frac\pi4 = 1}$.</p>
@@ -3302,6 +3320,7 @@ $$= \Big[\frac2{\sqrt3}\arctan\frac t{\sqrt3}\Big]_0^1 = \frac2{\sqrt3}\cdot\fra
 <li>Vérifier les bornes de $k$ ($0$ à $n - 1$, ou $1$ à $n$ : même limite).</li>
 </ol>
 <p class="ml">Exemple 1 : $S_n = \sum_{k=1}^n\frac n{n^2 + k^2}$</p>
+<p><b>Déterminer la limite de $S_n = \sum_{k=1}^n\frac n{n^2 + k^2}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$ (somme de Riemann).</p>
 <p><b>Étape 2 : Factoriser le dénominateur par $n^2$.</b></p>
 $$\frac n{n^2 + k^2} = \frac n{n^2\big(1 + (k/n)^2\big)} = \cO{\frac1n}\cdot\frac1{1 + (k/n)^2}.$$
@@ -3310,6 +3329,7 @@ $$\frac n{n^2 + k^2} = \frac n{n^2\big(1 + (k/n)^2\big)} = \cO{\frac1n}\cdot\fra
 $$S_n\to\int_0^1\frac{dx}{1 + x^2} = \big[\arctan x\big]_0^1 = \cG{\frac\pi4}.$$
 
 <p class="ml">Exemple 2 : $T_n = \sum_{k=1}^n\frac1{n + k}$</p>
+<p><b>Déterminer la limite de $T_n = \sum_{k=1}^n\frac1{n + k}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\frac1n\sum_{k=1}^nf\big(\frac kn\big)\to\int_0^1f$.</p>
 <p><b>Étape 2 : Factoriser par $n$.</b></p>
 $$\frac1{n + k} = \frac1n\cdot\frac1{1 + k/n}.$$
@@ -3318,6 +3338,7 @@ $$\frac1{n + k} = \frac1n\cdot\frac1{1 + k/n}.$$
 $$T_n\to\int_0^1\frac{dx}{1 + x} = \big[\ln(1 + x)\big]_0^1 = \cG{\ln2}.$$
 
 <p class="ml">Exemple 3 : un produit, on passe au $\ln$</p>
+<p>Soit $P_n = \prod_{k=1}^n\Big(1 + \frac kn\Big)^{1/n}$. <b>Déterminer la limite de $P_n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pour un produit, on passe au $\ln$ pour obtenir une somme : $\ln\prod = \sum\ln$.</p>
 <p><b>Étape 2 : Le logarithme.</b></p>
 $$\ln P_n = \frac1n\sum_{k=1}^n\ln\Big(1 + \frac kn\Big).$$
@@ -3342,6 +3363,7 @@ $$T_n = \frac{b - a}n\Big[\frac{f(a) + f(b)}2 + \sum_{k=1}^{n-1}f(x_k)\Big],\qqu
 <li><b>Young</b> : pour une <b>limite</b> ou un équivalent (information seulement au voisinage de $a$).</li>
 </ul>
 <p class="ml">Exemple 1 : le signe du reste ($e^x\geqslant1 + x + \frac{x^2}2$ pour $x\geqslant0$)</p>
+<p><b>Montrer que pour tout $x\geqslant0$, $e^x\geqslant1 + x + \frac{x^2}2$, avec la formule de Taylor avec reste intégral.</b></p>
 <p><b>Étape 1 : Rappel.</b> Reste intégral : $f(x) = \sum_{k=0}^n\frac{f^{(k)}(0)}{k!}x^k + \int_0^x\frac{(x - t)^n}{n!}f^{(n+1)}(t)\,dt$.</p>
 <p><b>Étape 2 : On applique à $\exp$, ordre $2$.</b> Toutes les dérivées valent $\exp$, et $e^0 = 1$ :</p>
 $$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}2\,e^t\,dt.$$
@@ -3349,6 +3371,7 @@ $$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}2\,e^t\,dt.$$
 <p><b>Étape 4 : Conclusion.</b> $\cG{e^x\geqslant1 + x + \frac{x^2}2}$ pour $x\geqslant0$.</p>
 
 <p class="ml">Exemple 2 : une majoration ($|\sin x - x|\leqslant\frac{|x|^3}6$)</p>
+<p><b>Montrer que pour tout réel $x$, $|\sin x - x|\leqslant\frac{|x|^3}6$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange : $\big|f(x) - T_n(x)\big|\leqslant\frac{|x|^{n+1}}{(n + 1)!}\sup|f^{(n+1)}|$.</p>
 <p><b>Étape 2 : Le polynôme de Taylor de $\sin$ à l'ordre $2$.</b> $\sin0 = 0$, $\sin'0 = 1$, $\sin''0 = 0$ : $T_2(x) = x$.</p>
 <p><b>Étape 3 : La dérivée troisième.</b> $\sin''' = -\cos$, donc $|\sin'''|\leqslant\cV1$.</p>
@@ -3356,6 +3379,7 @@ $$e^x = 1 + x + \frac{x^2}2 + \int_0^x\frac{(x - t)^2}2\,e^t\,dt.$$
 $$\cG{|\sin x - x|\leqslant\frac{|x|^3}{3!} = \frac{|x|^3}6}.$$
 
 <p class="ml">Exemple 3 : $e = \sum_{k=0}^{+\infty}\frac1{k!}$</p>
+<p><b>Montrer que $\sum_{k=0}^n\frac1{k!}\to e$ quand $n\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Taylor-Lagrange entre $0$ et $1$ : $\big|f(1) - \sum_{k=0}^n\frac{f^{(k)}(0)}{k!}\big|\leqslant\frac{1}{(n + 1)!}\sup_{[0, 1]}|f^{(n+1)}|$.</p>
 <p><b>Étape 2 : Avec $f = \exp$.</b> $f^{(k)}(0) = 1$ et $\sup_{[0, 1]}e^t = e$ :</p>
 $$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{\cV e}{(n + 1)!}.$$
@@ -3365,6 +3389,7 @@ $$\Big|e - \sum_{k=0}^n\frac1{k!}\Big|\leqslant\frac{\cV e}{(n + 1)!}.$$
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \int_a^bf = \int_a^b\operatorname{Re}f + i\int_a^b\operatorname{Im}f$</li><li>$\displaystyle \int_a^be^{\lambda t}\,dt = \Big[\frac{e^{\lambda t}}\lambda\Big]_a^b\quad(\lambda\in\mathbb C^*)$</li></ul></div>
 <p>Linéarité, Chasles, IPP, changement de variable et $\big|\int f\big|\leqslant\int|f|$ restent vrais. La positivité et la croissance n'ont pas de sens.</p>
 <p class="ml">Exemple : $\int_0^\pi e^t\cos t\,dt$ en une ligne</p>
+<p><b>Calculer $\int_0^\pi e^t\cos t\,dt$ en passant par l'exponentielle complexe.</b></p>
 <p><b>Étape 1 : Rappel.</b> $e^t\cos t = \operatorname{Re}\big(e^{(1 + i)t}\big)$, et $\int e^{\lambda t}\,dt = \frac{e^{\lambda t}}\lambda$ pour $\lambda\in\mathbb C^*$.</p>
 <p><b>Étape 2 : On passe en complexe.</b></p>
 $$\int_0^\pi e^t\cos t\,dt = \operatorname{Re}\int_0^\pi e^{(1 + i)t}\,dt = \operatorname{Re}\Big[\frac{e^{(1 + i)t}}{1 + i}\Big]_0^\pi.$$
@@ -3786,6 +3811,7 @@ $$\sum_{n=1}^{+\infty}\frac n{2^n} = \frac12\cdot\frac1{(1 - 1/2)^2} = \frac12\c
 <tr><td>Limite</td><td>oui : deux fonctions équivalentes ont la même limite</td></tr>
 </table>
 <p class="ml">Exemple 1 : un quotient</p>
+<p><b>Calculer $\lim_{x\to0}\frac{\sin(3x)\,(e^{2x} - 1)}{x\,\ln(1 + x)}$ avec des équivalents.</b></p>
 <p><b>Étape 1 : Rappel.</b> Les équivalents passent aux produits et aux quotients. En $0$ : $\sin u\sim u$, $e^u - 1\sim u$, $\ln(1 + u)\sim u$.</p>
 <p><b>Étape 2 : Chaque facteur.</b></p>
 $$\sin(3x)\sim3x,\qquad e^{2x} - 1\sim2x,\qquad\ln(1 + x)\sim x.$$
@@ -3794,6 +3820,7 @@ $$\frac{\sin(3x)\,(e^{2x} - 1)}{x\,\ln(1 + x)}\sim\frac{3x\cdot2x}{x\cdot x} = 6
 <p><b>Étape 4 : Conclusion.</b> Deux fonctions équivalentes ont la même limite : $\cG{\text{la limite vaut}\ 6}$.</p>
 
 <p class="ml">Exemple 2 : une somme, on factorise par le terme dominant</p>
+<p>Soit $f(x) = x^3 + 2x - \sqrt x$. <b>Donner un équivalent simple de $f(x)$ quand $x\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On n'additionne pas des équivalents : on factorise par le terme dominant.</p>
 <p><b>Étape 2 : Le terme dominant en $+\infty$.</b> $x^3$ domine $2x$ et $\sqrt x$.</p>
 <p><b>Étape 3 : On factorise.</b></p>
@@ -3801,6 +3828,7 @@ $$f(x) = \cB{x^3}\Big(1 + \frac2{x^2} - \frac1{x^{5/2}}\Big).$$
 <p><b>Étape 4 : La parenthèse tend vers $1$</b>, donc $\cG{f(x)\sim x^3}$.</p>
 
 <p class="ml">Exemple 3 : un $\ln$ (on ne compose pas, on factorise)</p>
+<p><b>Donner un équivalent simple de $\ln(x^2 + x)$ quand $x\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On ne compose pas un équivalent par $\ln$ : on factorise dans le $\ln$, puis $\ln(ab) = \ln a + \ln b$.</p>
 <p><b>Étape 2 : Factoriser.</b></p>
 $$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \ln\Big(1 + \frac1x\Big).$$
@@ -3811,6 +3839,7 @@ $$\ln(x^2 + x) = \ln\Big(x^2\Big(1 + \frac1x\Big)\Big) = 2\ln x + \ln\Big(1 + \f
 <div class="sbox"><ul class="sbl"><li>$\displaystyle \alpha, \beta, \gamma > 0:$</li><li>$\displaystyle (\ln x)^\gamma = o(x^\alpha)\ \text{et}\ x^\alpha = o(e^{\beta x})\ \text{en}\ +\infty$</li><li>$\displaystyle x^\alpha|\ln x|^\gamma\xrightarrow[x\to0^+]{}0$</li></ul></div>
 <div class="sbox">$$\text{Suites}:\quad(\ln n)^\gamma\ll n^\alpha\ll a^n\ (a > 1)\ll n!\ll n^n.$$</div>
 <p class="ml">Exemple</p>
+<p><b>Déterminer la limite de $\frac{n^{10} + 2^n}{3^n - n!}$ quand $n\to+\infty$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Croissances comparées : $n^\alpha\ll a^n\ll n!$.</p>
 <p><b>Étape 2 : Le numérateur.</b> $2^n$ domine $n^{10}$ : $n^{10} + 2^n\sim\cB{2^n}$.</p>
 <p><b>Étape 3 : Le dénominateur.</b> $n!$ domine $3^n$ : $3^n - n!\sim\cB{-n!}$.</p>
@@ -3890,6 +3919,7 @@ $$\sqrt{x^2 + x + 1} = x\sqrt{1 + \cO{\frac1x + \frac1{x^2}}}\quad(x > 0)\qquad\
 <li>Si à la fin tout s'annule, on n'est pas allé assez loin : on recommence à l'ordre suivant.</li>
 </ul>
 <p class="ml">Exemple : $\frac{\sin x - x}{x^3}$</p>
+<p><b>Calculer $\lim_{x\to0}\frac{\sin x - x}{x^3}$ avec un développement limité.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sin x = x - \frac{x^3}6 + o(x^3)$. On développe au même ordre que la puissance du dénominateur.</p>
 <p><b>Étape 2 : L'ordre.</b> Le dénominateur est $x^3$ : ordre $3$. À l'ordre $1$, on n'aurait que $\sin x - x = o(x)$, inutile.</p>
 <p><b>Étape 3 : Le numérateur.</b></p>
@@ -3904,6 +3934,7 @@ $$\frac{\sin x - x}{x^3} = -\frac16 + o(1)\ \longrightarrow\ \cG{-\frac16}.$$
 <li>Pour $u^v$ : écrire $e^{v\ln u}$.</li>
 </ol>
 <p class="ml">Exemple 1 : $\lim_{x\to0}\frac{e^x - 1 - x}{x^2}$</p>
+<p><b>Calculer $\lim_{x\to0}\frac{e^x - 1 - x}{x^2}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $e^x = 1 + x + \frac{x^2}2 + o(x^2)$.</p>
 <p><b>Étape 2 : L'ordre.</b> Dénominateur $x^2$ : ordre $2$.</p>
 <p><b>Étape 3 : Le numérateur.</b> Les termes $1$ et $x$ se compensent :</p>
@@ -3911,6 +3942,7 @@ $$e^x - 1 - x = \cR{1 + x} + \cB{\frac{x^2}2} + o(x^2)\cR{{} - 1 - x} = \frac{x^
 <p><b>Étape 4 : On divise par $x^2$.</b> $\frac{e^x - 1 - x}{x^2} = \frac12 + o(1)\to\cG{\frac12}$.</p>
 
 <p class="ml">Exemple 2 : $\lim_{x\to0}\Big(\frac1{\sin^2x} - \frac1{x^2}\Big)$</p>
+<p><b>Calculer $\lim_{x\to0}\Big(\frac1{\sin^2x} - \frac1{x^2}\Big)$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sin x = x - \frac{x^3}6 + o(x^3)$. Pour un quotient : équivalent du dénominateur, puis numérateur au même ordre.</p>
 <p><b>Étape 2 : Même dénominateur.</b></p>
 $$\frac1{\sin^2x} - \frac1{x^2} = \frac{x^2 - \sin^2x}{x^2\sin^2x}.$$
@@ -3922,6 +3954,7 @@ $$\sin^2x = \Big(x - \frac{x^3}6\Big)^2 + o(x^4) = x^2 - 2\cdot x\cdot\frac{x^3}
 $$\frac{x^2 - \sin^2x}{x^2\sin^2x}\sim\frac{x^4/3}{x^4} = \frac13\qquad\Longrightarrow\qquad\cG{\text{la limite vaut}\ \frac13}.$$
 
 <p class="ml">Exemple 3 : une forme $1^\infty$</p>
+<p>Soit $a\in\mathbb R$. <b>Calculer $\lim_{x\to+\infty}\Big(1 + \frac ax\Big)^x$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Pour $u^v$ : $u^v = e^{v\ln u}$, puis $\ln(1 + h) = h + o(h)$.</p>
 <p><b>Étape 2 : On écrit avec l'exponentielle.</b></p>
 $$\Big(1 + \frac ax\Big)^x = e^{x\ln(1 + a/x)}.$$
@@ -3930,6 +3963,7 @@ $$x\ln\Big(1 + \frac ax\Big) = x\Big(\frac ax + o\Big(\frac1x\Big)\Big) = a + o(
 <p><b>Étape 4 : Conclusion</b> ($\exp$ est continue) : $\cG{\Big(1 + \frac ax\Big)^x\to e^a}$.</p>
 
 <p class="ml">Exemple 4 : un équivalent par DL</p>
+<p><b>Donner un équivalent simple de $\operatorname{ch}x - \cos x$ quand $x\to0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\operatorname{ch}x = 1 + \frac{x^2}2 + o(x^2)$, $\cos x = 1 - \frac{x^2}2 + o(x^2)$. Le premier terme non nul du DL donne l'équivalent.</p>
 <p><b>Étape 2 : La différence.</b></p>
 $$\operatorname{ch}x - \cos x = \Big(1 + \frac{x^2}2\Big) - \Big(1 - \frac{x^2}2\Big) + o(x^2) = x^2 + o(x^2).$$
@@ -3957,6 +3991,7 @@ $$f(x) = \cB{x + \frac12} + \frac3{8x} + o\Big(\frac1x\Big).$$
 
 <h2 id="l-suites">10. Développement asymptotique d'une suite</h2>
 <p class="ml">Exemple : $u_n = \big(1 + \frac1n\big)^n$, à deux termes</p>
+<p>Soit $u_n = \big(1 + \frac1n\big)^n$. <b>Donner un développement asymptotique de $u_n$ à deux termes.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\ln(1 + h) = h - \frac{h^2}2 + o(h^2)$ et $e^h = 1 + h + o(h)$.</p>
 <p><b>Étape 2 : Le logarithme</b>, avec $h = \frac1n$ :</p>
 $$\ln u_n = n\ln\Big(1 + \frac1n\Big) = n\Big(\frac1n - \frac1{2n^2} + o\Big(\frac1{n^2}\Big)\Big) = 1 - \frac1{2n} + o\Big(\frac1n\Big).$$
@@ -6475,12 +6510,14 @@ $$(a_n)\ \text{bornée}\Rightarrow R\geq1.\qquad\text{convergence pour tout}\ z\
 <p><b>1.</b> On essaie d'abord d'Alembert (§3). <b>2.</b> Si les $a_n$ s'annulent, oscillent ($\sin n$, $(-1)^n$…) ou si la série est lacunaire : on encadre $R$ avec les réflexes, <b>une inégalité dans chaque sens</b>. <b>3.</b> Ou on compare à une série connue (§4).</p>
 
 <p class="ml">Exemple 1 : $\sum\sin(n)z^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\sin(n)z^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(a_n)$ bornée $\Rightarrow R\geq1$ ; $a_n\rho^n\not\to0\Rightarrow R\leq\rho$. D'Alembert est impossible : $\frac{\sin(n + 1)}{\sin n}$ n'a pas de limite.</p>
 <p><b>Étape 2 : $R\geq1$.</b> $|\sin n|\leq1$ : la suite $(\cB{\sin n})$ est bornée.</p>
 <p><b>Étape 3 : $R\leq1$.</b> En $\cO{\rho = 1}$ : $a_n\times1^n = \sin n$ ne tend pas vers $0$ (sinon $\sin(n + 1) = \sin n\cos1 + \cos n\sin1$ forcerait $\cos n\to0$, puis $\sin^2n + \cos^2n\to0\neq1$). Donc $\sum\sin(n)\,1^n$ diverge grossièrement.</p>
 <p><b>Étape 4 : Conclusion.</b> $1\leq R\leq1$ : $\cG{R = 1}$.</p>
 
 <p class="ml">Exemple 2 : $\sum e^{-n^2}z^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum e^{-n^2}z^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(a_n\rho^n)$ bornée pour <b>tout</b> $\rho$ $\Rightarrow R = +\infty$.</p>
 <p><b>Étape 2 : On fixe $\cO{\rho > 0}$.</b> $e^{-n^2}\rho^n = e^{-n^2}e^{n\ln\rho} = e^{-n^2 + n\ln\rho}$.</p>
 <p><b>Étape 3 : La limite.</b> $-n^2 + n\ln\rho = -n^2\big(1 - \frac{\ln\rho}n\big)\to-\infty$ (car $\frac{\ln\rho}n\to0$), donc $e^{-n^2}\rho^n\to0$ : la suite est bornée.</p>
@@ -6492,6 +6529,7 @@ $$(a_n)\ \text{bornée}\Rightarrow R\geq1.\qquad\text{convergence pour tout}\ z\
 <p><b>1.</b> Si tous les $a_n$ sont non nuls : on calcule $\big|\frac{a_{n+1}}{a_n}\big|$, on simplifie (factorielles, puissances), on passe à la limite. <b>2.</b> Si la série est <b>lacunaire</b> ($z^{2n}$, $z^{3n}$… : beaucoup de coefficients nuls), on applique d'Alembert <b>à la série numérique</b> $\sum|u_n(z)|$, $z\neq0$ fixé, et on lit pour quels $|z|$ la limite est $ \lt 1$.</p>
 
 <p class="ml">Exemple 3 : $\sum\frac{(3n)!}{(n!)^3}z^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\frac{(3n)!}{(n!)^3}z^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $R = \frac1\ell$ avec $\ell = \lim\big|\frac{a_{n+1}}{a_n}\big|$.</p>
 <p><b>Étape 2 : Le quotient.</b> $(3n + 3)! = (3n + 3)(3n + 2)(3n + 1)\,(3n)!$ et $((n + 1)!)^3 = (n + 1)^3(n!)^3$ :</p>
 $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!} = \frac{(3n + 3)(3n + 2)(3n + 1)}{(n + 1)^3}.$$
@@ -6499,18 +6537,21 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1{27}}$.</p>
 
 <p class="ml">Exemple 4 : $\sum\frac{n^n}{n!}z^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum_{n\geq1}\frac{n^n}{n!}z^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> D'Alembert, et $\big(1 + \frac1n\big)^n\to e$.</p>
 <p><b>Étape 2 : Le quotient.</b> $\frac{(n + 1)^{n+1}}{(n + 1)!}\times\frac{n!}{n^n} = \frac{(n + 1)^{n+1}}{(n + 1)\,n^n} = \frac{(n + 1)^n}{n^n} = \Big(1 + \frac1n\Big)^n$.</p>
 <p><b>Étape 3 : La limite.</b> $\big(1 + \frac1n\big)^n = e^{n\ln(1 + 1/n)}$ et $n\ln\big(1 + \frac1n\big)\sim n\times\frac1n = 1$, donc $\ell = e^1 = e$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac1e}$.</p>
 
 <p class="ml">Exemple 5 : une série lacunaire, $\sum\frac{z^{2n}}{n + 1}$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\frac{z^{2n}}{n + 1}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Les coefficients de $z^{2n+1}$ sont nuls : d'Alembert sur les coefficients est impossible. On l'applique à $u_n = \frac{|z|^{2n}}{n + 1}$, $z\neq0$.</p>
 <p><b>Étape 2 : Le quotient.</b> $\frac{u_{n+1}}{u_n} = \frac{|z|^{2n+2}}{n + 2}\times\frac{n + 1}{|z|^{2n}} = \frac{n + 1}{n + 2}\,|z|^2\to|z|^2$.</p>
 <p><b>Étape 3 : On lit.</b> $\cO{|z|^2} \lt 1\iff|z| \lt 1$ : convergence absolue. $\cO{|z|^2} > 1\iff|z| > 1$ : $u_n\to+\infty$, divergence grossière.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = 1}$.</p>
 
 <p class="ml">Exemple 6 : $\sum\binom{2n}nz^{4n}$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\binom{2n}nz^{4n}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Lacunaire : d'Alembert sur $u_n = \binom{2n}n|z|^{4n}$.</p>
 <p><b>Étape 2 : Le quotient des binomiaux.</b> $\binom{2n + 2}{n + 1} = \frac{(2n + 2)!}{((n + 1)!)^2} = \frac{(2n + 2)(2n + 1)}{(n + 1)^2}\binom{2n}n$, et $\frac{(2n + 2)(2n + 1)}{(n + 1)^2} = \frac{2(n + 1)(2n + 1)}{(n + 1)^2} = \frac{2(2n + 1)}{n + 1}\to\frac{4n}n = 4$.</p>
 <p><b>Étape 3 : On lit.</b> $\frac{u_{n+1}}{u_n} = \frac{2(2n + 1)}{n + 1}|z|^4\to4|z|^4$. Or $4|z|^4 \lt 1\iff|z|^4 \lt \frac14\iff|z| \lt \frac1{\sqrt2}$ (car $\big(\frac1{\sqrt2}\big)^4 = \frac14$).</p>
@@ -6522,18 +6563,21 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <p>On cherche un <b>équivalent simple</b> de $|a_n|$ (DL, équivalents usuels), puis on lit le rayon de la série de référence. Les facteurs $n^\alpha$, $\ln n$ (encadré entre $1$ et $n$) ou polynômes en $n$ <b>ne changent pas</b> le rayon.</p>
 
 <p class="ml">Exemple 7 : $\sum\ln\Big(\frac{n + 1}n\Big)x^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum_{n\geq1}\ln\Big(\frac{n + 1}n\Big)x^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $|a_n|\sim|b_n|\Rightarrow R_a = R_b$, et $\ln(1 + u)\sim u$ en $0$.</p>
 <p><b>Étape 2 : L'équivalent.</b> $\ln\frac{n + 1}n = \ln\big(1 + \frac1n\big)\sim\frac1n$.</p>
 <p><b>Étape 3 : La référence.</b> $\sum\frac{x^n}n$ : $\big|\frac{1/(n + 1)}{1/n}\big| = \frac n{n + 1}\to1$, rayon $1$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = 1}$.</p>
 
 <p class="ml">Exemple 8 : $\sum\sin(e^{-n})x^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\sin(e^{-n})x^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\sin u\sim u$ en $0$, puis comparaison.</p>
 <p><b>Étape 2 : L'équivalent.</b> $e^{-n}\to0$, donc $\sin(e^{-n})\sim e^{-n} = \big(\frac1e\big)^n$.</p>
 <p><b>Étape 3 : La référence.</b> $\sum\big(\frac xe\big)^n$ est géométrique : elle converge $\iff\big|\frac xe\big| \lt 1\iff|x| \lt e$. Rayon $e$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = e}$.</p>
 
 <p class="ml">Exemple 9 : $\sum\frac{n^2 + 1}{3^n}z^n$</p>
+<p><b>Déterminer le rayon de convergence de la série entière $\sum\frac{n^2 + 1}{3^n}z^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Un facteur $n^\alpha$ ne change pas le rayon.</p>
 <p><b>Étape 2 : On simplifie.</b> $n^2 + 1\sim n^2$, donc $|a_n|\sim n^2\times\frac1{3^n}$, et $\sum n^2\frac{z^n}{3^n}$ a le même rayon que $\sum\frac{z^n}{3^n}$.</p>
 <p><b>Étape 3 : La référence.</b> $\sum\big(\frac z3\big)^n$ converge $\iff|z| \lt 3$.</p>
@@ -6544,12 +6588,14 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <ul class="sbl"><li>$\displaystyle c_n = \sum_{k=0}^na_kb_{n-k}:\ R_c\geq\min(R_a, R_b)$</li><li>$\displaystyle \sum_{n=0}^{+\infty}c_nz^n = \Big(\sum_{n=0}^{+\infty}a_nz^n\Big)\Big(\sum_{n=0}^{+\infty}b_nz^n\Big)\ \text{pour}\ |z| \lt \min(R_a, R_b)$</li></ul></div>
 
 <p class="ml">Exemple 10 : $\sum(1 + 2^n)x^n$</p>
+<p><b>Déterminer le rayon de convergence de $\sum(1 + 2^n)x^n$ et calculer sa somme.</b></p>
 <p><b>Étape 1 : Rappel.</b> $R_a\neq R_b\Rightarrow R = \min(R_a, R_b)$.</p>
 <p><b>Étape 2 : Les deux morceaux.</b> $\sum x^n$ : $R_a = 1$. $\sum2^nx^n = \sum(2x)^n$ converge $\iff|2x| \lt 1\iff|x| \lt \frac12$ : $R_b = \frac12$.</p>
 <p><b>Étape 3 : Le rayon.</b> $1\neq\frac12$, donc $R = \min\big(1, \frac12\big) = \frac12$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{R = \frac12,\quad\sum(1 + 2^n)x^n = \frac1{1 - x} + \frac1{1 - 2x}}$ pour $|x| \lt \frac12$.</p>
 
 <p class="ml">Exemple 11 : $\sum H_nx^n$ avec $H_n = 1 + \frac12 + \dots + \frac1n$</p>
+<p>Soit $H_n = 1 + \frac12 + \dots + \frac1n$. <b>Déterminer le rayon de convergence de $\sum_{n\geq1}H_nx^n$ et calculer sa somme.</b></p>
 <p><b>Étape 1 : Rappel.</b> Produit de Cauchy, et $-\ln(1 - x) = \sum_{n\geq1}\frac{x^n}n$, $\frac1{1 - x} = \sum x^n$ sur $]-1, 1[$.</p>
 <p><b>Étape 2 : On reconnaît un produit de Cauchy.</b> Avec $a_0 = 0$, $a_k = \frac1k$ ($k\geq1$) et $b_k = 1$ : $c_n = \sum_{k=0}^na_kb_{n-k} = 0 + \frac11 + \frac12 + \dots + \frac1n = H_n$.</p>
 <p><b>Étape 3 : Le rayon.</b> $R_a = R_b = 1$, donc $R\geq1$. Et $H_n\geq1$ ne tend pas vers $0$ : en $x = 1$, divergence grossière, donc $R\leq1$.</p>
@@ -6560,6 +6606,7 @@ $$\frac{a_{n+1}}{a_n} = \frac{(3n + 3)!}{((n + 1)!)^3}\times\frac{(n!)^3}{(3n)!}
 <p>Au bord $\cR{|z| = R}$, tout peut arriver ; on étudie <b>à la main</b> : convergence normale si $\sum|a_n|R^n$ converge, critère des séries alternées (et sa majoration uniforme du reste) sinon. Le théorème radial d'Abel <span class="hp">hors programme</span> dit : si $\sum a_nR^n$ converge, $f(x)\to\sum a_nR^n$ quand $x\to R^-$.</p>
 
 <p class="ml">Exemple 12 : $\sum\frac{x^n}{n^2}$ est continue sur $[-1, 1]$</p>
+<p>Soit $f(x) = \sum_{n\geq1}\frac{x^n}{n^2}$. <b>Montrer que $f$ est définie et continue sur $[-1, 1]$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Convergence normale sur un intervalle $\Rightarrow$ somme continue sur cet intervalle.</p>
 <p><b>Étape 2 : Le rayon.</b> $\frac{1/(n + 1)^2}{1/n^2} = \frac{n^2}{(n + 1)^2}\to1$ : $R = 1$.</p>
 <p><b>Étape 3 : La majoration</b> sur tout $[-1, 1]$ : $\Big|\frac{x^n}{n^2}\Big| = \frac{|x|^n}{n^2}\leq\frac1{n^2}$, terme d'une série convergente (Riemann, $2 > 1$).</p>
@@ -6572,18 +6619,21 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p>Pour sommer $\sum n\,a_nx^n$ : on dérive une série connue et on multiplie par $x$. Pour sommer $\sum\frac{a_n}{n + 1}x^{n+1}$ : on intègre. <b>Ne jamais oublier la constante</b> : on la trouve en $x = 0$.</p>
 
 <p class="ml">Exemple 13 : $\sum nx^n$</p>
+<p><b>Calculer $\sum_{n\geq1}nx^n$ pour $x\in]-1, 1[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On dérive $\frac1{1 - x} = \sum_{n\geq0}x^n$ sur $]-1, 1[$.</p>
 <p><b>Étape 2 : On dérive.</b> $\Big(\frac1{1 - x}\Big)' = \frac{-(-1)}{(1 - x)^2} = \frac1{(1 - x)^2}$ et $\Big(\sum x^n\Big)' = \sum_{n\geq1}nx^{n-1}$.</p>
 <p><b>Étape 3 : On multiplie par $x$.</b> $\sum_{n\geq1}nx^n = x\sum_{n\geq1}nx^{n-1} = \frac x{(1 - x)^2}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq1}nx^n = \frac x{(1 - x)^2}}$ sur $]-1, 1[$. Exemple $x = \frac12$ : $1 - \frac12 = \frac12$, $\frac{1/2}{1/4} = 2$, donc $\sum\frac n{2^n} = 2$.</p>
 
 <p class="ml">Exemple 14 : $\ln(1 + x)$ et $\arctan x$ par intégration</p>
+<p><b>Développer $\ln(1 + x)$ et $\arctan x$ en série entière, en intégrant une série géométrique.</b></p>
 <p><b>Étape 1 : Rappel.</b> On intègre terme à terme de $0$ à $x$ sur $]-1, 1[$.</p>
 <p><b>Étape 2 : $\ln(1 + x)$.</b> $\frac1{1 + t} = \sum(-t)^n = \sum(-1)^nt^n$. On intègre : $\ln(1 + x) - \ln1 = \sum_{n\geq0}(-1)^n\frac{x^{n+1}}{n + 1} = \sum_{n\geq1}(-1)^{n-1}\frac{x^n}n$ (on pose $n + 1\to n$).</p>
 <p><b>Étape 3 : $\arctan x$.</b> $\frac1{1 + t^2} = \sum(-t^2)^n = \sum(-1)^nt^{2n}$. On intègre : $\arctan x - \arctan0 = \sum_{n\geq0}(-1)^n\frac{x^{2n+1}}{2n + 1}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\ln(1 + x) = \sum_{n\geq1}\frac{(-1)^{n-1}}nx^n,\quad\arctan x = \sum_{n\geq0}\frac{(-1)^n}{2n + 1}x^{2n+1}}$ sur $]-1, 1[$.</p>
 
 <p class="ml">Exemple 15 : $\sum_{n\geq2}\frac{(-1)^n}{n(n - 1)}x^n$</p>
+<p>Soit $f(x) = \sum_{n\geq2}\frac{(-1)^n}{n(n - 1)}x^n$. <b>Déterminer le rayon de convergence et calculer $f(x)$ sur $]-1, 1[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On dérive deux fois pour tuer le $n(n - 1)$, puis on intègre deux fois avec les constantes.</p>
 <p><b>Étape 2 : Le rayon.</b> $\frac1{n(n - 1)}\sim\frac1{n^2}$, même rayon que $\sum x^n$ : $R = 1$.</p>
 <p><b>Étape 3 : On dérive deux fois.</b> $\big(x^n\big)'' = n(n - 1)x^{n-2}$, donc $f''(x) = \sum_{n\geq2}(-1)^nx^{n-2} = \sum_{m\geq0}(-x)^m = \frac1{1 + x}$ (avec $m = n - 2$ et $(-1)^n = (-1)^m$).</p>
@@ -6591,6 +6641,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 5 : Conclusion.</b> $\cG{f(x) = (1 + x)\ln(1 + x) - x}$ sur $]-1, 1[$.</p>
 
 <p class="ml">Exemple 16 : $\sum\binom{n + p}px^n = \frac1{(1 - x)^{p+1}}$</p>
+<p>Soit $p\in\mathbb N$. <b>Montrer que pour $|x| \lt 1$, $\sum_{n\geq0}\binom{n + p}px^n = \frac1{(1 - x)^{p+1}}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On dérive $p$ fois $\frac1{1 - x} = \sum x^n$.</p>
 <p><b>Étape 2 : À gauche.</b> $\Big(\frac1{1 - x}\Big)' = \frac1{(1 - x)^2}$, $\Big(\frac1{1 - x}\Big)'' = \frac2{(1 - x)^3}$, et par récurrence $\Big(\frac1{1 - x}\Big)^{(p)} = \frac{p!}{(1 - x)^{p+1}}$.</p>
 <p><b>Étape 3 : À droite.</b> $\big(x^n\big)^{(p)} = \frac{n!}{(n - p)!}x^{n-p}$ pour $n\geq p$, $0$ sinon. Avec $m = n - p$ : $\sum_{m\geq0}\frac{(m + p)!}{m!}x^m$.</p>
@@ -6602,12 +6653,14 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <ul class="sbl"><li>$\displaystyle f\ \text{paire}\Rightarrow a_{2p+1} = 0$</li><li>$\displaystyle f\ \text{impaire}\Rightarrow a_{2p} = 0$</li></ul></div>
 
 <p class="ml">Exemple 17 : $f^{(10)}(0)$ pour $f(x) = x^2e^x$</p>
+<p>Soit $f(x) = x^2e^x$. <b>Calculer $f^{(10)}(0)$ sans dériver dix fois.</b></p>
 <p><b>Étape 1 : Rappel.</b> $f^{(n)}(0) = n!\,a_n$ : on lit $a_{10}$ dans le DSE.</p>
 <p><b>Étape 2 : Le DSE.</b> $x^2e^x = x^2\sum_{k\geq0}\frac{x^k}{k!} = \sum_{k\geq0}\frac{x^{k+2}}{k!}$. Le terme en $x^{10}$ vient de $k + 2 = 10$, soit $k = 8$ : $a_{10} = \frac1{8!}$.</p>
 <p><b>Étape 3 : On multiplie par $10!$.</b> $\frac{10!}{8!} = 10\times9 = 90$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{f^{(10)}(0) = 90}$, sans dériver dix fois.</p>
 
 <p class="ml">Exemple 18 : coefficients d'une fonction paire</p>
+<p>Soit $f(x) = \sum a_nx^n$ de rayon $R > 0$, paire sur $]-R, R[$. <b>Montrer que $a_n = 0$ pour tout $n$ impair.</b></p>
 <p><b>Étape 1 : Rappel.</b> Unicité des coefficients.</p>
 <p><b>Étape 2 : On écrit $f(-x) = f(x)$.</b> $\sum a_n(-x)^n = \sum(-1)^na_nx^n$ et $\sum a_nx^n$ sont égales près de $0$, donc $(-1)^na_n = a_n$ pour tout $n$.</p>
 <p><b>Étape 3 : $n$ impair.</b> $(-1)^n = -1$ : $-a_n = a_n$, soit $2a_n = 0$, $a_n = 0$.</p>
@@ -6634,12 +6687,14 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>1.</b> On se ramène aux usuels : <b>décomposition en éléments simples</b> pour une fraction, <b>factorisation</b> sous un $\ln$, produit, dérivée, primitive. <b>2.</b> Si ça bloque : $f$ vérifie une <b>équation différentielle</b> (§11). <b>3.</b> Le rayon : celui de l'usuel, ou le plus petit des rayons qui interviennent. <b>4.</b> L'inégalité de Taylor-Lagrange (reste $\to0$) marche aussi mais est rarement la plus rapide.</p>
 
 <p class="ml">Exemple 19 : $\frac1{(1 - x)(2 - x)}$</p>
+<p><b>Développer $\frac1{(1 - x)(2 - x)}$ en série entière et donner le rayon.</b></p>
 <p><b>Étape 1 : Rappel.</b> Éléments simples, puis $\frac1{1 - u} = \sum u^n$.</p>
 <p><b>Étape 2 : Éléments simples.</b> $\frac1{(1 - x)(2 - x)} = \frac1{1 - x} - \frac1{2 - x}$ : contrôle, $\frac{(2 - x) - (1 - x)}{(1 - x)(2 - x)} = \frac{2 - x - 1 + x}{(1 - x)(2 - x)} = \frac1{(1 - x)(2 - x)}$.</p>
 <p><b>Étape 3 : Chaque morceau.</b> $\frac1{1 - x} = \sum x^n$ ($|x| \lt 1$). $\frac1{2 - x} = \frac12\times\frac1{1 - x/2} = \frac12\sum\big(\frac x2\big)^n = \sum\frac{x^n}{2^{n+1}}$ ($|x| \lt 2$).</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\frac1{(1 - x)(2 - x)} = \sum_{n\geq0}\Big(1 - \frac1{2^{n+1}}\Big)x^n}$, rayon $\min(1, 2) = 1$. Contrôle $x = 0$ : $\frac1{1\times2} = \frac12$ et $1 - \frac12 = \frac12$.</p>
 
 <p class="ml">Exemple 20 : $\ln(x^2 - 5x + 6)$</p>
+<p><b>Développer $\ln(x^2 - 5x + 6)$ en série entière au voisinage de $0$ et donner le rayon.</b></p>
 <p><b>Étape 1 : Rappel.</b> On factorise, $\ln(ab) = \ln a + \ln b$, puis $\ln(1 - u) = -\sum\frac{u^n}n$.</p>
 <p><b>Étape 2 : Factoriser.</b> $\Delta = 25 - 24 = 1$, racines $\frac{5\pm1}2$, soit $2$ et $3$ : $x^2 - 5x + 6 = (x - 2)(x - 3) = (2 - x)(3 - x)$, deux facteurs $> 0$ pour $x \lt 2$.</p>
 <p><b>Étape 3 : On fait apparaître $1 - u$.</b> $2 - x = 2\big(1 - \frac x2\big)$ et $3 - x = 3\big(1 - \frac x3\big)$, donc $\ln(x^2 - 5x + 6) = \ln2 + \ln3 + \ln\big(1 - \frac x2\big) + \ln\big(1 - \frac x3\big)$.</p>
@@ -6647,12 +6702,14 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ln(x^2 - 5x + 6) = \ln6 - \sum_{n\geq1}\frac1n\Big(\frac1{2^n} + \frac1{3^n}\Big)x^n}$, rayon $\min(2, 3) = 2$.</p>
 
 <p class="ml">Exemple 21 : $\sqrt{1 + x}$, les premiers coefficients</p>
+<p><b>Donner les quatre premiers termes du développement en série entière de $\sqrt{1 + x}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $(1 + x)^\alpha$ avec $a_n = \frac{\alpha(\alpha - 1)\cdots(\alpha - n + 1)}{n!}$, ici $\alpha = \frac12$.</p>
 <p><b>Étape 2 : $n = 1, 2$.</b> $a_1 = \frac12$. $a_2 = \frac{\frac12\times\big(\frac12 - 1\big)}{2!} = \frac{\frac12\times\big(-\frac12\big)}2 = \frac{-1/4}2 = -\frac18$.</p>
 <p><b>Étape 3 : $n = 3$.</b> $a_3 = \frac{\frac12\times\big(-\frac12\big)\times\big(-\frac32\big)}{3!} = \frac{3/8}6 = \frac3{48} = \frac1{16}$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sqrt{1 + x} = 1 + \frac x2 - \frac{x^2}8 + \frac{x^3}{16} + \dots}$ sur $]-1, 1[$.</p>
 
 <p class="ml">Exemple 22 : $\arcsin x$</p>
+<p><b>Développer $\arcsin x$ en série entière sur $]-1, 1[$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $\arcsin' x = \frac1{\sqrt{1 - x^2}} = (1 - x^2)^{-1/2}$ : on développe avec $\alpha = -\frac12$ et $u = -x^2$, puis on intègre.</p>
 <p><b>Étape 2 : Le coefficient.</b> $\frac{\big(-\frac12\big)\big(-\frac32\big)\cdots\big(-\frac{2n - 1}2\big)}{n!}(-x^2)^n$ : les $n$ signes $-$ du numérateur et le $(-1)^n$ se compensent, il reste $\frac{1\times3\times\cdots\times(2n - 1)}{2^nn!}x^{2n}$.</p>
 <p><b>Étape 3 : On simplifie.</b> $1\times3\cdots(2n - 1) = \frac{(2n)!}{2\times4\cdots(2n)} = \frac{(2n)!}{2^nn!}$, donc le coefficient vaut $\frac{(2n)!}{4^n(n!)^2} = \frac{\binom{2n}n}{4^n}$.</p>
@@ -6664,6 +6721,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Pour trouver un DSE</b> : <b>1.</b> on trouve une EDL vérifiée par $f$ (en dérivant) ; <b>2.</b> on cherche $y = \sum a_nx^n$ de rayon $R > 0$ ; <b>3.</b> on <b>décale les indices</b> pour avoir partout $x^n$, et on identifie : relation de récurrence ; <b>4.</b> on calcule $a_n$ et le rayon ; <b>5.</b> par <b>unicité</b> (Cauchy-Lipschitz, même condition initiale), $f$ est cette somme. <b>Pour résoudre une EDL</b> à coefficients polynomiaux : mêmes étapes, puis on reconnaît la somme.</p>
 
 <p class="ml">Exemple 23 : $\frac1{(1 - x)^a}$ par une équation différentielle</p>
+<p>Soit $a\in\mathbb R$. <b>Développer $\frac1{(1 - x)^a}$ en série entière, en passant par une équation différentielle.</b></p>
 <p><b>Étape 1 : Rappel.</b> EDL, récurrence, unicité de la solution du problème de Cauchy.</p>
 <p><b>Étape 2 : L'EDL.</b> $f(x) = (1 - x)^{-a}$ : $f'(x) = a(1 - x)^{-a-1}$, donc $(1 - x)f'(x) = af(x)$, avec $f(0) = 1$.</p>
 <p><b>Étape 3 : On remplace</b> $y = \sum a_nx^n$ : $(1 - x)\sum_{n\geq1}na_nx^{n-1} = \sum_{n\geq0}(n + 1)a_{n+1}x^n - \sum_{n\geq0}na_nx^n$. Coefficient de $x^n$ : $(n + 1)a_{n+1} - na_n = a\,a_n$, soit $a_{n+1} = \frac{a + n}{n + 1}a_n$.</p>
@@ -6675,12 +6733,14 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>1.</b> Coefficient <b>polynôme en $n$ sur $n!$</b> : on écrit le polynôme dans la base $1, n, n(n - 1), \dots$ et on utilise $\frac{n(n - 1)\cdots(n - k + 1)}{n!} = \frac1{(n - k)!}$. <b>2.</b> Coefficient <b>fraction rationnelle en $n$</b> : éléments simples, puis $\sum\frac{x^n}{n + k}$ par intégration. <b>3.</b> Puissances paires : on pose $X = x^2$ ou on dérive / intègre.</p>
 
 <p class="ml">Exemple 24 : $\sum\frac{(n + 1)(n - 2)}{n!}x^n$</p>
+<p><b>Déterminer le rayon et calculer la somme de $\sum_{n\geq0}\frac{(n + 1)(n - 2)}{n!}x^n$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On écrit le numérateur avec $n(n - 1)$ et des constantes.</p>
 <p><b>Étape 2 : Le numérateur.</b> $(n + 1)(n - 2) = n^2 - 2n + n - 2 = n^2 - n - 2 = n(n - 1) - 2$.</p>
 <p><b>Étape 3 : On coupe.</b> $\frac{n(n - 1)}{n!} = \frac1{(n - 2)!}$ pour $n\geq2$ (et $0$ pour $n = 0, 1$), donc $\sum_{n\geq2}\frac{x^n}{(n - 2)!} = x^2\sum_{m\geq0}\frac{x^m}{m!} = x^2e^x$. Et $\sum\frac{-2}{n!}x^n = -2e^x$.</p>
 <p><b>Étape 4 : Conclusion.</b> $\cG{\sum_{n\geq0}\frac{(n + 1)(n - 2)}{n!}x^n = (x^2 - 2)e^x}$, $R = +\infty$. Contrôle $x = 0$ : terme $n = 0$, $\frac{1\times(-2)}1 = -2$, et $(0 - 2)e^0 = -2$.</p>
 
 <p class="ml">Exemple 25 : $\sum\frac{x^{2n}}{2n + 1}$</p>
+<p><b>Déterminer le rayon et calculer la somme $S(x) = \sum_{n\geq0}\frac{x^{2n}}{2n + 1}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> On multiplie par $x$ pour faire apparaître une primitive, puis on dérive.</p>
 <p><b>Étape 2 : Le rayon.</b> En $X = x^2$ : $\sum\frac{X^n}{2n + 1}$ a pour rayon $1$ ($\frac{2n + 1}{2n + 3}\to1$), donc convergence pour $x^2 \lt 1$ : $R = 1$.</p>
 <p><b>Étape 3 : On pose $g(x) = xS(x) = \sum\frac{x^{2n+1}}{2n + 1}$.</b> $g'(x) = \sum x^{2n} = \frac1{1 - x^2}$, et $\frac1{1 - x^2} = \frac12\Big(\frac1{1 - x} + \frac1{1 + x}\Big)$ (contrôle : $\frac{(1 + x) + (1 - x)}{2(1 - x^2)} = \frac2{2(1 - x^2)}$).</p>
@@ -6725,6 +6785,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 
 <h2 id="se-exos">Exercices corrigés</h2>
 <p class="ml">Exercice 1 : $f(x) = \sum_{n\geq1}\frac{x^n}{\sqrt n}$ au bord</p>
+<p>Soit $f(x) = \sum_{n\geq1}\frac{x^n}{\sqrt n}$. <b>Déterminer le rayon de convergence, puis étudier la convergence en $x = 1$ et en $x = -1$.</b></p>
 <p>Rayon, convergence en $\pm1$, continuité en $-1$, limite en $1$.</p>
 <p><b>Étape 1 : Rappel.</b> D'Alembert, Riemann, séries alternées (reste majoré par le premier terme négligé).</p>
 <p><b>Étape 2 : Le rayon.</b> $\frac{1/\sqrt{n + 1}}{1/\sqrt n} = \sqrt{\frac n{n + 1}}\to1$ : $R = 1$.</p>
@@ -6734,6 +6795,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 6 : Conclusion.</b> $\cG{R = 1,\ \text{CV en}\ -1,\ \text{DV en}\ 1,\ f\ \text{continue en}\ -1,\ f(x)\xrightarrow[x\to1^-]{}+\infty}$.</p>
 
 <p class="ml">Exercice 2 : DSE de $\ln(x^2 + x + 1)$</p>
+<p><b>Développer $\ln(x^2 + x + 1)$ en série entière au voisinage de $0$.</b></p>
 <p><b>Étape 1 : Rappel.</b> $x^3 - 1 = (x - 1)(x^2 + x + 1)$, donc $x^2 + x + 1 = \frac{1 - x^3}{1 - x}$ pour $x\neq1$.</p>
 <p><b>Étape 2 : On coupe le $\ln$.</b> Pour $|x| \lt 1$, $1 - x^3 > 0$ et $1 - x > 0$ : $\ln(x^2 + x + 1) = \ln(1 - x^3) - \ln(1 - x)$.</p>
 <p><b>Étape 3 : Les DSE.</b> $\ln(1 - x^3) = -\sum_{k\geq1}\frac{x^{3k}}k$ et $-\ln(1 - x) = \sum_{n\geq1}\frac{x^n}n$.</p>
@@ -6741,6 +6803,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 5 : Conclusion.</b> $\cG{\ln(x^2 + x + 1) = \sum_{n\geq1}\frac{a_n}nx^n,\ a_n = 1\ \text{si}\ 3\nmid n,\ a_n = -2\ \text{si}\ 3\mid n}$, $R = 1$. Contrôle : $x + \frac{x^2}2 - \frac{2x^3}3$ ; le DL de $\ln(1 + u)$ avec $u = x + x^2$ donne $x + x^2 - \frac{x^2}2 - \frac{2x^3}2 + \frac{x^3}3 = x + \frac{x^2}2 - \frac{2x^3}3$.</p>
 
 <p class="ml">Exercice 3 : $f(x) = \frac{\arcsin x}{\sqrt{1 - x^2}}$</p>
+<p>Soit $f(x) = \frac{\arcsin x}{\sqrt{1 - x^2}}$ sur $]-1, 1[$. <b>Montrer que $f$ est développable en série entière, trouver une équation différentielle qu'elle vérifie, et en déduire ses coefficients.</b></p>
 <p><b>Étape 1 : Rappel.</b> Produit de deux fonctions DSE sur $]-1, 1[$ ; EDL, récurrence.</p>
 <p><b>Étape 2 : DSE.</b> $\arcsin$ et $(1 - x^2)^{-1/2}$ sont DSE de rayon $1$ (exemple 22), donc leur produit aussi, sur $]-1, 1[$.</p>
 <p><b>Étape 3 : L'EDL.</b> $f' = \frac1{\sqrt{1 - x^2}}\times\frac1{\sqrt{1 - x^2}} + \arcsin x\times\frac x{(1 - x^2)^{3/2}} = \frac1{1 - x^2} + \frac{x\,f(x)}{1 - x^2}$. On multiplie par $1 - x^2$ : $(1 - x^2)f' - xf = 1$.</p>
@@ -6758,6 +6821,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 6 : Conclusion.</b> $\cG{y(x) = \frac{2\,(e^{-x} - 1 + x)}x}$ est solution sur $]0, +\infty[$.</p>
 
 <p class="ml">Exercice 5 : $\int_0^1\frac{\ln(1 + x)}x\,dx = \sum_{n\geq1}\frac{(-1)^{n-1}}{n^2}$</p>
+<p><b>Montrer que $\int_0^1\frac{\ln(1 + x)}x\,dx = \sum_{n\geq1}\frac{(-1)^{n-1}}{n^2}$.</b></p>
 <p><b>Étape 1 : Rappel.</b> Intégration terme à terme d'une série qui converge uniformément sur le segment.</p>
 <p><b>Étape 2 : Le développement.</b> Pour $x\in]0, 1]$ : $\frac{\ln(1 + x)}x = \sum_{n\geq1}(-1)^{n-1}\frac{x^{n-1}}n$ (vrai aussi en $x = 1$ : série alternée de somme $\ln2$), et la fonction se prolonge par $1$ en $0$.</p>
 <p><b>Étape 3 : Convergence uniforme sur $[0, 1]$.</b> Série alternée, $\frac{x^{n-1}}n$ décroît vers $0$ : $|R_n(x)|\leq\frac{x^n}{n + 1}\leq\frac1{n + 1}\to0$.</p>
@@ -6765,6 +6829,7 @@ $$\int_0^xf(t)\,dt = \sum_{n=0}^{+\infty}\frac{a_n}{n + 1}x^{n+1}\quad\text{pour
 <p><b>Étape 5 : Conclusion.</b> $\cG{\int_0^1\frac{\ln(1 + x)}x\,dx = \sum_{n\geq1}\frac{(-1)^{n-1}}{n^2}}$ $\big(= \frac{\pi^2}{12}\big)$.</p>
 
 <p class="ml">Exercice 6 : $y' - 2xy = 1$, $y(0) = 0$</p>
+<p><b>Résoudre $y' - 2xy = 1$ avec $y(0) = 0$, puis développer la solution en série entière.</b></p>
 <p><b>Étape 1 : Rappel.</b> On cherche $y = \sum a_nx^n$, récurrence, puis unicité de Cauchy.</p>
 <p><b>Étape 2 : Résolution directe.</b> On multiplie par $e^{-x^2}$ : $e^{-x^2}y' - 2xe^{-x^2}y = e^{-x^2}$, et le membre de gauche est $\big(e^{-x^2}y\big)'$ (dérivée d'un produit : $(e^{-x^2})' = -2xe^{-x^2}$). Donc $\big(e^{-x^2}y\big)' = e^{-x^2}$ ; on intègre de $0$ à $x$ avec $y(0) = 0$ : $e^{-x^2}f(x) = \int_0^xe^{-t^2}\,dt$, soit $f(x) = e^{x^2}\int_0^xe^{-t^2}\,dt$.</p>
 <p><b>Étape 3 : La récurrence.</b> $\sum_{n\geq0}(n + 1)a_{n+1}x^n - \sum_{n\geq1}2a_{n-1}x^n = 1$ : $n = 0$ donne $a_1 = 1$ ; $n\geq1$ donne $a_{n+1} = \frac2{n + 1}a_{n-1}$. Et $a_0 = f(0) = 0$, donc tous les $a_{2p} = 0$.</p>
