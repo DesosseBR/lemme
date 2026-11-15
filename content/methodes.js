@@ -222,13 +222,13 @@ $$\left\{\begin{aligned}x + y + z &= 6\\-2y + z &= -1\\-y - 3z &= -11\end{aligne
 $$\left\{\begin{aligned}x + 2y - z &= 0\\2x + 4y + z &= 0\end{aligned}\right.$$
 <p><b>Étape 1 : Rappel.</b> $\mathcal S_H$ est un sev de dimension $p - \operatorname{rg}A$.</p>
 <p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $(2 - 2)x + (4 - 4)y + (1 + 2)z = 0$, soit $3z = 0$, donc $z = 0$.</p>
-<p><b>Étape 3 : Le paramètre.</b> $L_1$ : $x = -2y$, avec $y$ libre.</p>
-<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_H = \operatorname{Vect}\big((-2, 1, 0)\big)}$ : une droite, $3 - 2 = 1$.</p>
+<p><b>Étape 3 : Le paramètre.</b> On remplace $z = 0$ dans $L_1$ : $x + 2y - 0 = 0$, donc $x = -2y$, avec $y$ libre. Ainsi $(x, y, z) = (-2y, y, 0) = y(-2, 1, 0)$.</p>
+<p><b>Étape 4 : Conclusion.</b> $\cG{\mathcal S_H = \operatorname{Vect}\big((-2, 1, 0)\big)}$ : une droite. Contrôle : $p = 3$ inconnues, $\operatorname{rg}A = 2$ pivots, $3 - 2 = 1$.</p>
 
 <p class="ml">Exemple : un système incompatible</p>
 $$\left\{\begin{aligned}x + y &= 1\\2x + 2y &= 3\end{aligned}\right.$$
 <p><b>Étape 1 : Rappel.</b> Une ligne « $0 = c$ » avec $c\neq0$ : aucune solution.</p>
-<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : $0 = 1$.</p>
+<p><b>Étape 2 : Pivot.</b> $L_2\leftarrow L_2 - 2L_1$ : à gauche $(2 - 2)x + (2 - 2)y = 0$, à droite $3 - 2\times1 = 1$ : on obtient $0 = 1$.</p>
 <p><b>Étape 3 : Conclusion.</b> $\cG{\mathcal S = \varnothing}$ ($\operatorname{rg}A = 1\neq\operatorname{rg}(A\mid B) = 2$).</p>
 
 <p class="ml">Exemple : un système à paramètre</p>
@@ -892,7 +892,7 @@ $$\cG{\chi_B = (X-2)^2(X - 4)}.$$
 $$A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.$$
 <p><b>Étape 2 : Le rang.</b> Les 3 lignes sont égales et non nulles : $\operatorname{rg}A = 1$.</p>
 <p><b>Étape 3 : La valeur propre $0$.</b></p>
-$$\dim\cG{E_0} = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2.$$
+$$\dim\cG{E_0} = \dim\ker A = 3 - \operatorname{rg}A = 3 - 1 = 2\ \Longrightarrow\ \cO{m_0}\geqslant2.$$
 <p><b>Étape 4 : La dernière valeur propre, avec la trace.</b></p>
 $$\operatorname{tr}A = 1 + 1 + 1 = 3 = 0 + 0 + \lambda\ \Longrightarrow\ \lambda = \cB3.$$
 <p><b>Étape 5 : Conclusion.</b></p>
@@ -1033,14 +1033,14 @@ $$P = \begin{pmatrix}\cR1&\cR1&\cG0\\\cR1&\cR0&\cG1\\\cR0&\cR1&\cG0\end{pmatrix}
 </ul>
 <p class="ml">Exemple : inverser avec Cayley-Hamilton</p>
 <p><b>Étape 1 : Rappel.</b> Cayley-Hamilton : $\chi_A(A) = 0$.</p>
-<p><b>Étape 2 : On l'applique.</b> Avec $\chi_A = X^2 - 4X + 4$ (§9, $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$) :</p>
+<p><b>Étape 2 : On l'applique.</b> $A = \begin{pmatrix}1&1\\-1&3\end{pmatrix}$ (§9) : $\operatorname{tr}A = 1 + 3 = 4$, $\det A = 1\times3 - 1\times(-1) = 3 + 1 = 4$, donc $\chi_A = X^2 - 4X + 4$ et :</p>
 $$A^2 - 4A + 4I_2 = 0.$$
 <p><b>Étape 3 : On isole $I_2$.</b></p>
 $$4I_2 = 4A - A^2 = A(4I_2 - A).$$
 <p><b>Étape 4 : On divise par $4$.</b></p>
 $$A\cdot\frac14(4I_2 - A) = I_2.$$
 <p><b>Étape 5 : Conclusion.</b> $A$ est inversible et :</p>
-$$\cG{A^{-1} = I_2 - \frac14A = \frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix}}.$$
+$$\cG{A^{-1} = I_2 - \frac14A = \frac14(4I_2 - A) = \frac14\begin{pmatrix}4 - 1&0 - 1\\0 - (-1)&4 - 3\end{pmatrix} = \frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix}}.$$
 <p>Contrôle : $\begin{pmatrix}1&1\\-1&3\end{pmatrix}\cdot\frac14\begin{pmatrix}3&-1\\1&1\end{pmatrix} = \frac14\begin{pmatrix}4&0\\0&4\end{pmatrix} = I_2$.</p>
 
 <h2 id="r-enonce">11. Ce que l'énoncé te donne, et ce que tu en déduis</h2>
