@@ -73,8 +73,8 @@ function toTex0(html) {
   const divs = [];
   s = s.replace(/\u0001(\d+)\u0001/g, (_, i) => {
     const t = tags[+i].toLowerCase();
-    if (/^<div\b/.test(t)) { const sb = /class="sbox"/.test(t); divs.push(sb); return sb ? "\n\\begin{lsbox}\n" : ""; }
-    if (t === "</div>") return divs.pop() ? "\n\\end{lsbox}\n" : "";
+    if (/^<div\b/.test(t)) { const k = /class="sbox"/.test(t) ? "lsbox" : /class="plus"/.test(t) ? "lplus" : ""; divs.push(k); return k ? "\n\\begin{" + k + "}\n" : ""; }
+    if (t === "</div>") { const k = divs.pop(); return k ? "\n\\end{" + k + "}\n" : ""; }
     if (/^<p\b/.test(t)) return "\n\n";
     if (t === "</p>") return "\n\n";
     if (/^<ul\b/.test(t)) return "\n\\begin{itemize}\n";
@@ -96,7 +96,7 @@ function toTex0(html) {
 /* ---------- Documents ---------- */
 function doc({ meta, kicker, title, titleTex, body, url }) {
   return `\\documentclass[11pt]{article}
-\\usepackage{lemme}${body.includes("\\includegraphics") ? "\n\\usepackage{graphicx}" : ""}${body.includes("{lsbox}") ? "\n\\tcbuselibrary{skins}\\newtcolorbox{lsbox}{enhanced,sharp corners,colback=white,colframe=black!85,boxrule=0.6pt,left=6pt,right=6pt,top=3pt,bottom=3pt,drop shadow=black!80}" : ""}
+\\usepackage{lemme}${body.includes("\\includegraphics") ? "\n\\usepackage{graphicx}" : ""}${body.includes("{lsbox}") ? "\n\\tcbuselibrary{skins}\\newtcolorbox{lsbox}{enhanced,sharp corners,colback=white,colframe=black!85,boxrule=0.6pt,left=6pt,right=6pt,top=3pt,bottom=3pt,drop shadow=black!80}" : ""}${body.includes("{lplus}") ? "\n\\tcbuselibrary{skins,breakable}\\newtcolorbox{lplus}{enhanced,breakable,colback=black!4,colframe=black!25,boxrule=0.5pt,arc=2pt,left=7pt,right=7pt,top=4pt,bottom=4pt}" : ""}
 \\renewcommand\\lemmemeta{${escText(meta)}}
 \\renewcommand\\lemmeurl{${escText(url || SITE_URL)}}
 \\begin{document}
