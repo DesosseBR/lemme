@@ -22,9 +22,9 @@ const figDiag = (() => {
   b += `<rect x="${X(-1)}" y="${Y(1)}" width="${2 * s}" height="${2 * s}" class="hb" style="opacity:.12"/><rect x="${X(-1)}" y="${Y(1)}" width="${2 * s}" height="${2 * s}" class="vb" style="fill:none"/>`;
   [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([a, c]) => { b += `<circle cx="${X(a)}" cy="${Y(c)}" r="5" class="ptr"/>` + S(X(a) + (a > 0 ? 8 : -8), Y(c) + (c > 0 ? -8 : 18), `diag(${a > 0 ? "" : "−"}1, ${c > 0 ? "" : "−"}1)`, a > 0 ? "start" : "end", "sm"); });
   const p = [0.5, -0.2];
-  b += `<line x1="${X(p[0])}" y1="${Y(1)}" x2="${X(p[0])}" y2="${Y(-1)}" class="thin"/><circle cx="${X(p[0])}" cy="${Y(p[1])}" r="4.5" class="pt"/>` + S(X(p[0]) + 8, Y(p[1]) + 4, "diag(s₁, s₂)", "start", "it");
+  b += `<line x1="${X(p[0])}" y1="${Y(1)}" x2="${X(p[0])}" y2="${Y(-1)}" class="thin"/><circle cx="${X(p[0])}" cy="${Y(p[1])}" r="4.5" class="pt"/>` + S(X(1.1), Y(-0.42) + 5, "diag(s₁, s₂)", "start", "it") + `<line x1="${X(1.08)}" y1="${Y(-0.4)}" x2="${X(p[0]) + 5}" y2="${Y(p[1]) - 1}" style="stroke:var(--muted);stroke-width:.8"/>`;
   b += S(X(1.45), Y(0) - 8, "a", "end", "it") + S(X(0) + 8, Y(1.35), "b", "start", "it");
-  return FIG(360, 300, b, R`Dans le plan des matrices diagonales $\operatorname{diag}(a,b)$, la boule $\mathcal B$ est le carré $|a|,|b|\leqslant1$ ; ses quatre sommets sont les matrices orthogonales diagonales $\operatorname{diag}(\pm1,\pm1)$. Un point intérieur s'écrit comme moyenne pondérée des sommets (d'abord sur le segment vertical, puis horizontalement).`, "Tranche diagonale de la boule");
+  return FIG(385, 300, b, R`Dans le plan des matrices diagonales $\operatorname{diag}(a,b)$, la boule $\mathcal B$ est le carré $|a|,|b|\leqslant1$ ; ses quatre sommets sont les matrices orthogonales diagonales $\operatorname{diag}(\pm1,\pm1)$. Un point intérieur s'écrit comme moyenne pondérée des sommets (d'abord sur le segment vertical, puis horizontalement).`, "Tranche diagonale de la boule");
 })();
 
 LEMME.exercises([

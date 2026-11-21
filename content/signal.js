@@ -51,7 +51,7 @@ ${ARR(40, 192, 40, 48, "b")}<text x="18" y="125" class="it b">vₑ</text>${ARR(3
 const H1 = w => { const a = w * 1e-4, b = w * 1e-3; return Math.sqrt((1 + a * a) / (1 + b * b)); };
 const bode1 = GRAPH({ w: 520, h: 250, x: [1, 6], y: [-25, 5], xt: [1, 2, 3, 4, 5, 6], xtl: ["10", "10²", "10³", "10⁴", "10⁵", "10⁶"], yt: [-20, -10, 0], xl: "ω (rad/s)", yl: "G (dB)",
   curves: [{ f: x => 20 * Math.log10(H1(10 ** x)), c: "b", lab: [4.4, -16.5, "courbe réelle"] },
-    { f: x => x < 3 ? 0 : x < 4 ? -20 * (x - 3) : -20, c: "r", dash: true, lab: [1.4, 2, "asymptotes"] }],
+    { f: x => x < 3 ? 0 : x < 4 ? -20 * (x - 3) : -20, c: "r", dash: true, lab: [1.4, -4, "asymptotes"] }],
   vl: [{ x: 3, t: "ω₂" }, { x: 4, t: "ω₁" }] },
   R`Diagramme de Bode en gain : $0$ dB à basse fréquence, pente $-20$ dB par décade entre $\omega_2 = 10^3$ et $\omega_1 = 10^4$ rad/s, puis palier à $20\log_{10}0{,}1 = -20$ dB.`, "Diagramme de Bode du filtre");
 const temp1 = GRAPH({ w: 520, h: 240, x: [0, 0.25], y: [-0.1, 1.1], xt: [0.0628, 0.1257, 0.1885, 0.2513], xtl: ["T", "2T", "3T", "4T"], yt: [0.5, 1], xl: "t", yl: "V",

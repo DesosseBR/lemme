@@ -30,7 +30,7 @@ const F_AVION = fig(460, 210, "Avion en phase de freinage",
 /* Chaîne fonctionnelle remplie (Q7) */
 const box2 = (x, y, w, h, title, lines, fill) => `<rect class="bx" x="${x}" y="${y}" width="${w}" height="${h}" rx="6"/><line class="sig" x1="${x}" y1="${y + 22}" x2="${x + w}" y2="${y + 22}"/>` + Tc(x + w / 2, y + 16, title, "", 14) + lines.map((l, i) => Tc(x + w / 2, y + 42 + i * 16, l, fill ? "b" : "", 13)).join("");
 const F_CHAINE = fig(540, 470, "Chaîne de puissance et d'information de l'eTras complétée",
-  `<rect class="grp" x="24" y="4" width="512" height="126" rx="10"/>${T(300, 124, "Chaîne d'information", "sm", 12)}` +
+  `<rect class="grp" x="24" y="4" width="512" height="126" rx="10"/>${T(216, 127, "Chaîne d'information", "sm", 12)}` +
   `<rect class="grp" x="24" y="168" width="512" height="298" rx="10"/>${T(34, 460, "Chaîne de puissance", "sm", 12)}` +
   box2(30, 30, 126, 84, "Acquérir", ["codeur", "+ 4 RVDT"], true) +
   box2(212, 30, 126, 84, "Traiter", ["FADEC", "(électronique", "de commande)"], false) +
@@ -40,7 +40,7 @@ const F_CHAINE = fig(540, 470, "Chaîne de puissance et d'information de l'eTras
   box2(394, 346, 126, 90, "Transmettre", ["flex-shafts", "+ renvois", "d'angle"], true) + box2(212, 346, 126, 90, "Transformer", ["4 systèmes", "vis-écrous"], true) + box2(30, 346, 126, 90, "Agir", ["partie mobile", "+ volets"], true) +
   ar(156, 233, 212, 233) + ar(338, 233, 394, 233) + ar(457, 278, 457, 346) + ar(394, 391, 338, 391) + ar(212, 391, 156, 391) +
   Tc(180, 252, "115 V~", "sm", 10) + Tc(366, 252, "24 V=", "sm", 10) + Tc(426, 318, "rotation", "sm", 10) + Tc(366, 410, "rotation", "sm", 10) + Tc(184, 410, "translation", "sm", 9.5) +
-  fl([[457, 114], [457, 150], [275, 150], [275, 188]]) + T(300, 146, "ordres", "sm", 11) +
+  fl([[457, 114], [457, 150], [275, 150], [275, 188]]) + T(283, 167, "ordres", "sm", 11) +
   fl([[457, 300], [530, 300], [530, 14], [80, 14], [80, 30]]) + T(464, 336, "codeur", "b", 12) +
   fl([[366, 391], [366, 320], [202, 320], [202, 140], [130, 140], [130, 114]]) + T(214, 314, "RVDT (angle des vis)", "b", 12),
   "En bleu, ce que l'on remplit. Le codeur lit la rotation du moteur (sortie de « Convertir ») ; les RVDT lisent la rotation des vis (sortie de « Transmettre »).", true);
@@ -179,7 +179,7 @@ const F_BODEC = (() => {
     `<line class="vr" x1="60" y1="${YP(0)}" x2="${X(w1)}" y2="${YP(0)}"/><line class="vr" x1="${X(w1)}" y1="${YP(0)}" x2="${X(w1)}" y2="${YP(90)}"/><line class="vr" x1="${X(w1)}" y1="${YP(90)}" x2="${X(w2)}" y2="${YP(90)}"/><line class="vr" x1="${X(w2)}" y1="${YP(90)}" x2="${X(w2)}" y2="${YP(0)}"/><line class="vr" x1="${X(w2)}" y1="${YP(0)}" x2="500" y2="${YP(0)}"/>` +
     `<polyline class="k" points="${cp}"/>` +
     [[w1, "1/(aτ)"], [wm, "ωmax"], [w2, "1/τ"]].map(([w, s]) => `<line class="thin" x1="${X(w)}" y1="20" x2="${X(w)}" y2="300"/>` + Tc(X(w), 334, s, "", 12)).join("") +
-    T(66, YG(0) - 6, "20 log C₂", "", 11) + T(392, YG(20 * Math.log10(a)) - 8, "20 log(a C₂)", "", 11) + T(X(wm) + 6, YG(10 * Math.log10(a)) + 20, "20 log C₂ + 10 log a", "b", 11) + T(X(w1) + 4, YG(8) - 4, "+20 dB/déc", "r", 11) +
+    T(66, YG(0) - 6, "20 log C₂", "", 11) + T(392, YG(20 * Math.log10(a)) - 8, "20 log(a C₂)", "", 11) + T(X(wm) + 6, YG(10 * Math.log10(a)) + 20, "20 log C₂ + 10 log a", "b", 11) + `<text class="r" x="${X(w1) - 6}" y="${YG(6)}" text-anchor="end" font-size="11">+20 dB/déc</text>` +
     T(X(wm) + 8, YP(Ph(wm)) - 6, "φmax", "b", 12) + T(40, YP(0) + 4, "0", "", 11) + T(36, YP(90) + 4, "90", "", 11),
     "En rouge, les asymptotes ; en noir, l'allure réelle. Le gain est décalé de $20\\log C_2$ ; la phase culmine en $\\omega_{\\max} = \\frac1{\\tau\\sqrt a}$, milieu (en échelle log) de $\\frac1{a\\tau}$ et $\\frac1\\tau$.");
 })();

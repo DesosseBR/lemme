@@ -16,11 +16,11 @@ LEMME.rappels({
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $(X,\mathcal A,\mu)$ est un espace mesuré, $p\in[1,+\infty]$, et $L^p = L^p(X,\mu)$ l'espace des (classes de) fonctions mesurables $f : X\to\mathbb C$ avec $\|f\|_p\lt+\infty$. Soit $(f_n)$ une suite de Cauchy de $L^p$. On veut montrer qu'elle converge dans $L^p$ (<b>théorème de Riesz-Fischer</b>).</p>`;
 
 /* Figure : machine à écrire */
-const figTW = (() => { const W = 480, H = 230, o = 40, w = 400; let b = "";
+const figTW = (() => { const W = 480, H = 280, o = 40, w = 400; let b = "";
   let row = 0; const rows = []; for (let k = 0; k <= 3; k++) for (let j = 0; j < 2 ** k; j++) rows.push([k, j]);
-  rows.slice(0, 15).forEach(([k, j], n) => { const y = 24 + 13 * n, x0 = o + w * j / 2 ** k, x1 = o + w * (j + 1) / 2 ** k;
+  rows.slice(0, 15).forEach(([k, j], n) => { const y = 22 + 16 * n, x0 = o + w * j / 2 ** k, x1 = o + w * (j + 1) / 2 ** k;
     b += `<line x1="${o}" y1="${y}" x2="${o + w}" y2="${y}" class="thin"/><rect x="${x0}" y="${y - 5}" width="${x1 - x0}" height="10" rx="2" class="${k % 2 ? "hr" : "hb"}" style="opacity:.75"/>` + S(o - 6, y + 4, `f${["₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", "₁₀", "₁₁", "₁₂", "₁₃", "₁₄", "₁₅"][n]}`, "end", "sm"); });
-  b += S(o, 24 + 13 * 15 + 10, "0", "middle", "sm") + S(o + w, 24 + 13 * 15 + 10, "1", "middle", "sm");
+  b += S(o, 22 + 16 * 15 + 6, "0", "middle", "sm") + S(o + w, 22 + 16 * 15 + 6, "1", "middle", "sm");
   return FIG(W, H, b, R`La « machine à écrire » : $f_n = \mathbf 1_{[j2^{-k},(j+1)2^{-k}]}$ avec $n = 2^k+j$. On a $\|f_n\|_p = 2^{-k/p}\to0$, mais en chaque point $x$, $f_n(x)$ vaut $1$ une fois par « ligne » $k$ : la suite ne converge en aucun point. La sous-suite $f_{2^k}$ (premier intervalle de chaque ligne) converge vers $0$ sauf en $0$.`, "Machine à écrire"); })();
 
 /* Figure : C([0,1]) non complet pour la norme 1 */

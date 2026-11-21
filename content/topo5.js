@@ -11,7 +11,7 @@ LEMME.rappels({
 const cheb = (n, x) => Math.cos(n * Math.acos(Math.max(-1, Math.min(1, x))));
 const figCheb = GRAPH({ w: 460, h: 250, x: [-1, 1], y: [-0.2, 0.2], xt: [-1, -0.5, 0.5, 1], xtl: ["−1", "−0,5", "0,5", "1"], yt: [-0.125, 0.125], ytl: ["−1/8", "1/8"], xl: "x",
   curves: [
-    { f: x => cheb(4, x) / 8, c: "b", lab: [0.12, 0.165, "T₄/8", "start"] },
+    { f: x => cheb(4, x) / 8, c: "b", lab: [0.2, 0.135, "T₄/8", "start"] },
     { f: x => { const v = x ** 4 - x * x / 2; return Math.abs(v) > 0.19 ? NaN : v; }, c: "r", dash: true, lab: [0.18, 0.17, "x⁴ − x²/2", "start"] }
   ],
   extra: (X, Y) => [0, 1, 2, 3, 4].map(k => { const x = Math.cos(k * Math.PI / 4); return `<circle cx="${f1(X(x))}" cy="${f1(Y(cheb(4, x) / 8))}" r="4" class="hb"/>`; }).join("") },

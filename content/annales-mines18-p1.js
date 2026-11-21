@@ -13,14 +13,15 @@ const fn = (f, a, b, n, X, Y) => { const p = []; for (let i = 0; i <= n; i++) { 
 const dash = (x1, y1, x2, y2) => `<line class="thin" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="stroke-dasharray:4 3"/>`;
 
 /* ---------- Figures de l'énoncé ---------- */
-const F_DOCI = fig(560, 250, "Modélisation du faisceau laser",
+const F_DOCI = fig(560, 306, "Modélisation du faisceau laser",
   /* i.a */ `<line class="ax" x1="20" y1="70" x2="200" y2="70"/><line class="ax" x1="30" y1="125" x2="30" y2="10"/>` + path(fn(t => Math.sin(t), 0, 6 * Math.PI, 120, t => 30 + 150 * t / (6 * Math.PI), v => 70 - 45 * v), "vb") +
   dash(30, 25, 180, 25) + dash(30, 115, 180, 115) + dash(180, 25, 180, 115) + T(2, 29, "E₀", "sm") + T(194, 66, "t", "it") + Tc(105, 140, "i.a : durée T, période T₀", "sm") +
   /* i.c */ `<line class="bold" x1="280" y1="20" x2="280" y2="130"/>` + ar(280, 75, 280, 22) + ar(280, 75, 280, 128) + `<line class="thin" x1="280" y1="20" x2="430" y2="75"/><line class="thin" x1="280" y1="130" x2="430" y2="75"/><line class="ax" x1="240" y1="75" x2="470" y2="75"/>` +
   `<rect x="430" y="45" width="8" height="60" class="gr"/>` + T(262, 80, "D", "it") + Tc(355, 14, "f′", "it") + T(400, 70, "α", "it") + T(442, 92, "O", "it") + Tc(355, 148, "i.c : focalisation sur la cible", "sm") +
-  /* i.d */ path(fn(z => 22 * Math.sqrt(1 + z * z), -2.2, 2.2, 60, z => 330 + 50 * z, v => 205 - v), "k") + path(fn(z => 22 * Math.sqrt(1 + z * z), -2.2, 2.2, 60, z => 330 + 50 * z, v => 205 + v), "k") +
-  `<line class="ax" x1="200" y1="205" x2="470" y2="205"/>` + dash(280, 183, 380, 183) + T(386, 186, "R₀", "sm") + Tc(330, 168, "2z₀ (entre les points où R = √2 R₀)", "sm") + T(474, 209, "z", "it") + Tc(330, 246, "i.d : col du faisceau au foyer", "sm"),
-  "Document I. Impulsion d'amplitude constante pendant $T$ (i.a), focalisation par une lentille de focale $f'$ et de diamètre $D$ (i.c), col de rayon $R_0$ au foyer (i.d). L'éclairement est uniforme dans un disque de rayon $R(z)$ (i.b).");
+  /* i.d */ path(fn(z => 18 * Math.sqrt(1 + z * z), -2.2, 2.2, 60, z => 330 + 50 * z, v => 230 - v), "k") + path(fn(z => 18 * Math.sqrt(1 + z * z), -2.2, 2.2, 60, z => 330 + 50 * z, v => 230 + v), "k") +
+  `<line class="ax" x1="208" y1="230" x2="456" y2="230"/>` + T(462, 234, "z", "it") +
+  ar(330, 230, 330, 212.5) + T(336, 226, "R₀", "sm") + dash(280, 207, 280, 188) + dash(380, 207, 380, 188) + ar(330, 194, 280, 194) + ar(330, 194, 380, 194) + Tc(330, 186, "2z₀", "sm") + Tc(330, 300, "i.d : col du faisceau au foyer", "sm"),
+  "Document I. Impulsion d'amplitude constante pendant $T$ (i.a), focalisation par une lentille de focale $f'$ et de diamètre $D$ (i.c), col de rayon $R_0$ au foyer (i.d) : sur la longueur $2z_0$, le rayon reste inférieur à $\sqrt2\,R_0$. L'éclairement est uniforme dans un disque de rayon $R(z)$ (i.b).");
 
 const TABI = R`<table class="mtab"><tr><th>Nature de la cible</th><th>gaz</th><th>solide</th></tr><tr><td>Durée de l'impulsion $T$</td><td>$50\ \mathrm{fs}$</td><td>$30\ \mathrm{fs}$</td></tr><tr><td>Énergie totale $W_T$</td><td>$1\ \mathrm{mJ}$</td><td>$1\ \mathrm J$</td></tr><tr><td>Diamètre du faisceau $D$</td><td>$1\ \mathrm{cm}$</td><td>$5\ \mathrm{cm}$</td></tr><tr><td>Focale de la lentille $f'$</td><td>$1\ \mathrm m$</td><td>$30\ \mathrm{cm}$</td></tr></table>`;
 
@@ -41,12 +42,12 @@ const F_FIG1 = fig(440, 170, "Train d'impulsions",
 
 const F_SLAB = fig(440, 120, "Nuage électronique déplacé",
   `<line class="ax" x1="20" y1="80" x2="430" y2="80"/>` + T(424, 96, "x", "it") + `<rect x="100" y="40" width="220" height="40" class="gr" style="opacity:.6"/><rect x="125" y="40" width="220" height="40" class="bx" style="fill:none;stroke-dasharray:5 3"/>` +
-  Tc(100, 100, "−L/2", "sm") + Tc(320, 100, "+L/2", "sm") + Tc(210, 30, "ions fixes", "sm") + T(330, 34, "électrons", "sm") + ar(210, 60, 235, 60, "r") + T(214, 74, "X(t)", "r"),
+  Tc(100, 100, "−L/2", "sm") + Tc(320, 100, "+L/2", "sm") + Tc(210, 30, "ions fixes", "sm") + T(330, 34, "électrons", "sm") + ar(210, 64, 235, 64, "r") + T(208, 56, "X(t)", "r"),
   "Le nuage électronique (pointillés) est décalé de $X(t)$ par rapport aux ions, qui restent fixes entre $-L/2$ et $+L/2$.");
 
 const F_IIIA = fig(460, 200, "Miroir plasma",
   `<rect x="260" y="20" width="60" height="160" class="gr"/>` + Tc(290, 14, "cible", "sm") + `<line class="ax" x1="80" y1="100" x2="420" y2="100"/>` + T(424, 104, "x", "it") +
-  ar(110, 180, 260, 100, "r") + ar(260, 100, 110, 20, "b") + T(60, 192, "laser incident", "r") + T(40, 16, "laser réfléchi + impulsions brèves", "b") + T(200, 126, "β", "it") + T(200, 84, "β", "it"),
+  ar(110, 180, 260, 100, "r") + ar(260, 100, 110, 20, "b") + T(60, 192, "laser incident", "r") + T(14, 16, "laser réfléchi + impulsions brèves", "b") + T(200, 126, "β", "it") + T(200, 84, "β", "it"),
   "Document III, fig. iii.a. Le plasma très dense réfléchit le laser comme un miroir ; les impulsions brèves partent dans la direction réfléchie (lois de Descartes).");
 
 const ne = x => x < -3 ? 0 : x < 0 ? Math.exp(x) : 1;
@@ -84,8 +85,8 @@ const F_IVB = fig(460, 230, "Spectres selon l'épaisseur",
 /* ---------- Figures du corrigé ---------- */
 const F_BARR = fig(440, 220, "Barrière abaissée par le champ laser",
   `<line class="ax" x1="20" y1="60" x2="430" y2="60"/><line class="ax" x1="160" y1="210" x2="160" y2="10"/>` + T(424, 56, "x", "it") +
-  path(fn(x => -1 / Math.abs(x) - 0.3 * x, -4, -0.15, 80, x => 160 + 55 * x, v => 60 - 32 * v).filter(p => p[1] > 8 && p[1] < 215), "k") + path(fn(x => -1 / Math.abs(x) - 0.3 * x, 0.15, 4.8, 120, x => 160 + 55 * x, v => 60 - 32 * v).filter(p => p[1] > 8 && p[1] < 215), "k") +
-  path(fn(x => -0.3 * x, -4, 4.8, 10, x => 160 + 55 * x, v => 60 - 32 * v), "vr") + T(30, 16, "pente e E_f cos ω₀t < 0", "r") +
+  path(fn(x => -1 / Math.abs(x) - 0.3 * x, -2.5, -0.15, 80, x => 160 + 55 * x, v => 60 - 32 * v).filter(p => p[1] > 8 && p[1] < 215), "k") + path(fn(x => -1 / Math.abs(x) - 0.3 * x, 0.15, 4.8, 120, x => 160 + 55 * x, v => 60 - 32 * v).filter(p => p[1] > 8 && p[1] < 215), "k") +
+  path(fn(x => -0.3 * x, -2.5, 4.8, 10, x => 160 + 55 * x, v => 60 - 32 * v), "vr") + T(30, 16, "pente e E_f cos ω₀t < 0", "r") +
   dash(20, 60 + 32 * 2 * Math.sqrt(0.3), 430, 60 + 32 * 2 * Math.sqrt(0.3)) + `<circle cx="${160 + 55 / Math.sqrt(0.3)}" cy="${60 + 32 * 2 * Math.sqrt(0.3)}" r="4" class="mass"/>` + T(240, 128, "sommet en x̃₀ :", "sm") + T(240, 145, "W = −2√(e³E_f/4πε₀)", "sm"),
   "Quand $\\cos\\omega_0t = -1$, le potentiel total a un maximum en $\\tilde x_0 > 0$ ; l'ionisation par-dessus la barrière a lieu quand ce sommet descend jusqu'à $-W_0$.");
 
@@ -169,10 +170,10 @@ const B = (titre, html) => `<div class="plus"><p><b>Pour aller plus loin · ${ti
 
 const F_ORB = fig(360, 220, "Électron sur son orbite",
   `<circle cx="180" cy="110" r="80" class="thin" style="fill:none;stroke-dasharray:5 3"/><circle cx="180" cy="110" r="6" class="mass"/>` + T(166, 130, "p⁺", "sm") +
-  `<circle cx="260" cy="110" r="5" class="gr"/>` + T(268, 104, "e⁻", "sm") + ar(260, 110, 214, 110, "r") + T(222, 102, "F_c", "r") + ar(260, 110, 260, 52, "b") + T(266, 60, "v", "b") + T(200, 160, "r", "it") + `<line class="thin" x1="180" y1="110" x2="260" y2="110"/>`,
+  `<circle cx="260" cy="110" r="5" class="gr"/>` + T(268, 104, "e⁻", "sm") + ar(255, 110, 196, 110, "r") + T(212, 102, "F_c", "r") + ar(260, 110, 260, 52, "b") + T(266, 60, "v", "b") + T(200, 160, "r", "it") + `<line class="thin" x1="180" y1="110" x2="260" y2="110"/>`,
   "La force coulombienne, dirigée vers le proton, est la force centripète : $m\\frac{v^2}r = \\frac{e^2}{4\\pi\\varepsilon_0r^2}$.");
 
-const F_FOC = fig(460, 190, "Focalisation du faisceau",
+const F_FOC = fig(520, 190, "Focalisation du faisceau",
   `<line class="ax" x1="20" y1="95" x2="450" y2="95"/><line class="bold" x1="80" y1="20" x2="80" y2="170"/>` + ar(80, 95, 80, 24) + ar(80, 95, 80, 166) + T(56, 100, "D", "it") +
   `<line class="vr" x1="20" y1="25" x2="80" y2="25"/><line class="vr" x1="20" y1="165" x2="80" y2="165"/><line class="vr" x1="80" y1="25" x2="380" y2="92"/><line class="vr" x1="80" y1="165" x2="380" y2="98"/>` +
   `<line class="vb" x1="380" y1="88" x2="380" y2="102"/>` + T(386, 84, "2R₀ (tache focale)", "b") + Tc(230, 186, "f′", "it") + T(300, 74, "α", "it") + T(20, 18, "disque de diamètre D", "sm"),
@@ -180,26 +181,26 @@ const F_FOC = fig(460, 190, "Focalisation du faisceau",
 
 const F_TRAJ = fig(440, 190, "Trajectoire de l'électron libéré",
   `<line class="ax" x1="30" y1="95" x2="430" y2="95"/><line class="ax" x1="40" y1="180" x2="40" y2="10"/>` + T(420, 112, "t", "it") + T(46, 16, "x(t)", "sm") +
-  path(fn(t => (Math.cos(t) - Math.cos(0.3)) + Math.sin(0.3) * (t - 0.3), 0.3, 12, 300, t => 40 + t * 32, v => 95 - v * 30), "vb") +
-  path(fn(t => (Math.cos(t) - 1), 0, 12, 300, t => 40 + t * 32, v => 95 - v * 30), "vr") +
-  T(260, 34, "t_i quelconque : dérive", "b") + T(250, 160, "t_i = 0 (cos ω₀t_i = 1) : pas de dérive", "r"),
+  path(fn(t => (Math.cos(t) - Math.cos(0.3)) + Math.sin(0.3) * (t - 0.3), 0.3, 12, 300, t => 40 + t * 32, v => 95 - v * 24), "vb") +
+  path(fn(t => (Math.cos(t) - 1), 0, 12, 300, t => 40 + t * 32, v => 95 - v * 24), "vr") +
+  T(110, 26, "t_i quelconque : dérive", "b") + T(60, 176, "t_i = 0 (cos ω₀t_i = 1) : pas de dérive", "r"),
   "Oscillation à $\\omega_0$ autour d'une position qui dérive à vitesse constante $\\frac{eE_f}{m\\omega_0}\\sin\\omega_0t_i$. Si l'ionisation a lieu à un instant privilégié ($\\sin\\omega_0t_i = 0$), l'électron oscille sans dériver et repasse par le noyau.");
 
 const F_DISP = fig(420, 200, "Relation de dispersion d'un plasma",
   `<line class="ax" x1="40" y1="180" x2="400" y2="180"/><line class="ax" x1="40" y1="190" x2="40" y2="10"/>` + T(390, 196, "k", "it") + T(46, 16, "ω", "it") +
   path(fn(k => Math.sqrt(1 + k * k), 0, 3.2, 100, k => 40 + k * 110, v => 180 - v * 48), "vb") + path(fn(k => k, 0, 3.4, 10, k => 40 + k * 110, v => 180 - v * 48), "thin") +
-  `<line class="thin" x1="40" y1="132" x2="400" y2="132" style="stroke-dasharray:4 3"/>` + T(4, 136, "ω_p", "sm") + T(300, 40, "ω = kc (vide)", "sm") + T(150, 120, "ω² = ω_p² + k²c²", "b") +
-  `<rect x="40" y="132" width="360" height="48" class="zr" style="opacity:.25"/>` + T(220, 168, "ω < ω_p : aucune onde ne se propage", "r"),
+  `<line class="thin" x1="40" y1="132" x2="400" y2="132" style="stroke-dasharray:4 3"/>` + T(4, 136, "ω_p", "sm") + T(300, 40, "ω = kc (vide)", "sm") + T(50, 90, "ω² = ω_p² + k²c²", "b") +
+  `<rect x="40" y="132" width="360" height="48" class="zr" style="opacity:.25"/>` + Tc(220, 162, "ω < ω_p : aucune onde ne se propage", "r"),
   "En dessous de $\\omega_p$, aucun $k$ réel ne convient : l'onde ne se propage pas, elle est réfléchie.");
 
 const F_TURN = fig(440, 200, "Point de rebroussement en incidence oblique",
   `<line class="ax" x1="30" y1="170" x2="430" y2="170"/>` + T(420, 186, "x", "it") + `<line class="thin" x1="330" y1="10" x2="330" y2="180"/>` + Tc(330, 196, "0", "sm") + Tc(80, 196, "−3L", "sm") +
   `<path class="vb" fill="none" d="M60,160 Q200,80 250,40 Q290,10 230,40 Q190,62 60,160"/>` + `<line class="vk" x1="250" y1="10" x2="250" y2="170" style="stroke-dasharray:3 3"/>` + Tc(250, 186, "x_r", "b") +
-  `<line class="vk" x1="300" y1="10" x2="300" y2="170" style="stroke-dasharray:3 3"/>` + Tc(300, 186, "x_c", "sm") + T(80, 30, "le rayon se courbe et repart", "b") + T(80, 46, "avant d'atteindre x_c", "b"),
+  `<line class="vk" x1="300" y1="10" x2="300" y2="170" style="stroke-dasharray:3 3"/>` + Tc(300, 186, "x_c", "sm") + T(30, 24, "le rayon se courbe et repart", "b") + T(30, 40, "avant d'atteindre x_c", "b"),
   "Dans la zone de densité croissante, $k_x$ diminue (car $k_y$ est fixé) ; le rayon se courbe et rebrousse chemin en $x_r$, là où $k_x = 0$, avant d'atteindre $x_c$.");
 
-const F_JGL = fig(420, 150, "Détente dans le vide",
-  `<rect x="40" y="40" width="140" height="80" class="gr"/><rect x="180" y="40" width="140" height="80" class="bx"/>` + Tc(110, 84, "plasma (gaz)", "sm") + Tc(250, 84, "vide", "sm") + `<line class="bold" x1="180" y1="40" x2="180" y2="120"/>` + ar(190, 140, 300, 140, "b") + T(194, 134, "expansion", "b") + Tc(180, 30, "paroi qui s'efface", "sm"),
+const F_JGL = fig(420, 168, "Détente dans le vide",
+  `<rect x="40" y="40" width="140" height="80" class="gr"/><rect x="180" y="40" width="140" height="80" class="bx"/>` + Tc(110, 84, "plasma (gaz)", "sm") + Tc(250, 84, "vide", "sm") + `<line class="bold" x1="180" y1="40" x2="180" y2="120"/>` + ar(190, 138, 300, 138, "b") + Tc(245, 160, "expansion", "b") + Tc(180, 30, "paroi qui s'efface", "sm"),
   "Détente de Joule-Gay-Lussac : le gaz occupe brusquement le vide ; il ne reçoit ni travail ni chaleur, son énergie interne ne change pas.");
 
 LEMME.exercises([

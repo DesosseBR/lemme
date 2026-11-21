@@ -592,7 +592,7 @@ const board = (x0, y0, t, shade) => {
   return s;
 };
 const TIL = { 1: ["|"], 2: ["||", "="], 3: ["|||", "|=", "=|"], 4: ["||||", "||=", "|=|", "=||", "=="] };
-const figDominos = FIG(560, 300, [1, 2, 3, 4].map((n, r) => {
+const figDominos = FIG(660, 300, [1, 2, 3, 4].map((n, r) => {
   const y = 18 + r * 70; let x = 92, s = TI(14, y + 30, `n = ${n}`, "start") + S(14, y + 48, `t<tspan dy="3" font-size="9">${n}</tspan><tspan dy="-3"> = ${TIL[n].length}</tspan>`);
   for (const t of TIL[n]) { s += board(x, y, t); x += n * C + 16; }
   return s;

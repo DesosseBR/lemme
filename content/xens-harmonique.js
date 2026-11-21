@@ -23,7 +23,7 @@ const figRect = GRAPH({ w: 440, h: 230, x: [0.7, 7.3], y: [0, 1.15], xt: [1, 2, 
 
 /* Figure : H_n - ln n */
 const figGam = GRAPH({ w: 440, h: 230, x: [0, 30], y: [0.55, 1.02], xt: [5, 10, 15, 20, 25, 30], yt: [0.6, 0.7, 0.8, 0.9, 1], ytl: ["0,6", "0,7", "0,8", "0,9", "1"], xl: "n",
-  curves: [{ f: () => 0.5772156649, c: "k", dash: true, lab: [1.5, 0.556, "γ ≈ 0,5772"] }, { f: x => x >= 1 ? 0.5772156649 + 1 / (2 * x) - 1 / (12 * x * x) : NaN, c: "g", lab: [7, 0.7, "γ + 1/(2n) − 1/(12n²)"] }],
+  curves: [{ f: () => 0.5772156649, c: "k", dash: true, lab: [1.2, 0.588, "γ ≈ 0,5772"] }, { f: x => x >= 1 ? 0.5772156649 + 1 / (2 * x) - 1 / (12 * x * x) : NaN, c: "g", lab: [7, 0.7, "γ + 1/(2n) − 1/(12n²)"] }],
   extra: (X, Y) => { let s = "", H = 0; for (let n = 1; n <= 30; n++) { H += 1 / n; s += `<circle cx="${X(n).toFixed(1)}" cy="${Y(H - Math.log(n)).toFixed(1)}" r="3" class="ptr"/>`; } return s; } },
   R`Les points $H_n-\ln n$ (rouge) décroissent vers $\gamma$, et suivent de très près $\gamma+\frac1{2n}-\frac1{12n^2}$ (orange) dès $n = 3$. Pour $n = 10$, l'écart est $\approx8{,}3\cdot10^{-7}$, de l'ordre du terme suivant $\frac1{120n^4}$.`, "Convergence vers γ");
 

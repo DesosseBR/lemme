@@ -23,7 +23,7 @@ const figCornu = (() => {
   const L = Math.sqrt(Math.PI / 8);
   let b = `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(0.95)}" y2="${Y(0)}" class="ax"/><line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(0.85)}" class="ax"/>`;
   b += `<path d="${d}" class="vb" style="fill:none;stroke-width:1.6"/>`;
-  b += `<circle cx="${X(L)}" cy="${Y(L)}" r="4.5" class="ptr"/>` + S(+X(L) + 10, +Y(L) - 8, "(√(π/8), √(π/8))", "start", "sm");
+  b += `<circle cx="${X(L)}" cy="${Y(L)}" r="4.5" class="ptr"/>` + S(+X(0.06), +Y(0.8), "(√(π/8), √(π/8))", "start", "sm") + `<line x1="${+X(0.06) + 60}" y1="${+Y(0.8) + 5}" x2="${+X(L) - 5}" y2="${+Y(L) - 4}" style="stroke:var(--muted);stroke-width:.8"/>`;
   b += `<line x1="${X(L)}" y1="${Y(0)}" x2="${X(L)}" y2="${Y(L)}" class="thin"/><line x1="${X(0)}" y1="${Y(L)}" x2="${X(L)}" y2="${Y(L)}" class="thin"/>`;
   b += S(+X(0.93), +Y(0) + 18, "Re", "end", "sm") + S(+X(0) - 6, +Y(0.82), "Im", "end", "sm");
   return FIG(380, 330, b, R`La courbe $s\mapsto\int_0^se^{ix^2}dx$ (spirale de Cornu, pour $0\leqslant s\leqslant7$). Elle s'enroule autour de sa limite $\frac{\sqrt\pi}2e^{i\pi/4} = \sqrt{\frac\pi8}(1+i)$ : l'intégrale converge, mais lentement et en oscillant.`, "Spirale de Cornu");

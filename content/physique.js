@@ -301,7 +301,7 @@ const figSpirale = (() => {
     `<line class="k" style="stroke-width:3;opacity:.25;stroke-linecap:round" x1="${ox - 130}" y1="${oy}" x2="${ox + 130}" y2="${oy}"/>` +
     `<line class="k" style="stroke-width:3;opacity:.55;stroke-linecap:round" x1="${f1(ox - 130 * Math.cos(tau))}" y1="${f1(oy + 130 * Math.sin(tau))}" x2="${f1(ex)}" y2="${f1(ey)}"/>` +
     `<path class="vb" style="fill:none" d="${d.trim()}"/>` + `<circle class="mass" cx="${ox + 26}" cy="${oy}" r="5"/>` + `<circle class="mass" cx="${f1(ex)}" cy="${f1(ey)}" r="6"/>` +
-    S(ox + 22, oy + 22, "départ") + S(f1(ex) - 8, f1(ey) - 12, "sortie", "end") + S(ox + 98, oy - 116, "bout de la tige (r = ℓ)") + OUT(ox, oy),
+    S(ox + 22, oy + 22, "départ") + S(f1(ex) - 8, f1(ey) - 12, "sortie", "end") + S(352, oy - 142, "bout de la tige (r = ℓ)", "end") + OUT(ox, oy),
     R`Trajectoire de la perle vue du sol (référentiel galiléen) avec les valeurs numériques de l'énoncé : la tige a tourné d'environ $131^\circ$ quand la perle sort. Position de la tige au départ (pâle) et à la sortie (foncée).`,
     "Trajectoire en spirale de la perle vue du sol");
 })();

@@ -11,19 +11,19 @@ const spring = (x1, x2, y, n = 10, amp = 7) => { let d = `M${x1},${y}`; const st
 
 /* Figures */
 const F_COND = fig(420, 190, "Atmosphère modélisée par un condensateur plan",
-  `<rect x="40" y="30" width="340" height="14" class="body"/>${T(390, 42, "ionosphère, +σ₀", "sm")}<rect x="40" y="150" width="340" height="14" class="body"/>${T(390, 162, "sol, σ = −σ₀", "sm")}` +
-  [90, 170, 250, 330].map(x => ar(x, 52, x, 142, "b")).join("") + T(262, 100, "E₀", "b") + `<line class="thin" x1="20" y1="44" x2="20" y2="150"/>` + T(8, 100, "z₀", "it"),
+  `<rect x="40" y="30" width="240" height="14" class="body"/>${T(292, 42, "ionosphère, +σ₀", "sm")}<rect x="40" y="150" width="240" height="14" class="body"/>${T(292, 162, "sol, σ = −σ₀", "sm")}` +
+  [75, 135, 195, 255].map(x => ar(x, 52, x, 142, "b")).join("") + T(205, 100, "E₀", "b") + `<line class="thin" x1="20" y1="44" x2="20" y2="150"/>` + T(8, 100, "z₀", "it"),
   "Le champ entre les « armatures » est uniforme et dirigé vers le sol : la Terre porte une charge négative.");
 
 const F_CONE = fig(420, 230, "Éventail de fils chargés",
   `<circle cx="210" cy="200" r="5" class="mass"/>${T(220, 214, "S")}` +
   `<ellipse cx="210" cy="60" rx="120" ry="26" class="thin"/>` +
   [[90, 60], [330, 60], [150, 82], [270, 82], [160, 38], [260, 38]].map(([x, y]) => `<line class="k" x1="210" y1="200" x2="${x}" y2="${y}"/><circle cx="${x}" cy="${y}" r="5" class="mass"/>`).join("") +
-  `<line class="ax" x1="210" y1="200" x2="210" y2="20"/>${T(214, 20, "z")}<path class="k" d="M210,160 A40,40 0 0 1 237,170"/>${T(222, 150, "α")}${T(272, 140, "L")}${T(336, 56, "q")}${T(100, 56, "q")}` +
+  `<line class="ax" x1="210" y1="200" x2="210" y2="20"/>${T(214, 20, "z")}<path class="k" d="M210,160 A40,40 0 0 1 237,170"/>${T(230, 152, "α")}${T(272, 140, "L")}${T(336, 56, "q")}${T(100, 56, "q")}` +
   `<line class="thin" x1="210" y1="60" x2="330" y2="60"/>${T(255, 74, "L sin α", "sm")}`,
   "Les $2n$ charges sont sur un cercle de rayon $R = L\\sin\\alpha$, d'axe vertical passant par $S$.");
 
-const F_CHORD = fig(300, 240, "Distance entre deux charges sur le cercle",
+const F_CHORD = fig(340, 240, "Distance entre deux charges sur le cercle",
   `<circle cx="150" cy="120" r="90" class="k"/><circle cx="150" cy="120" r="3" class="mass"/>${T(156, 116, "O")}` +
   `<line class="thin" x1="150" y1="120" x2="240" y2="120"/><line class="thin" x1="150" y1="120" x2="${(150 + 90 * Math.cos(-1.05)).toFixed(1)}" y2="${(120 + 90 * Math.sin(-1.05)).toFixed(1)}"/>` +
   `<line class="vr" x1="240" y1="120" x2="${(150 + 90 * Math.cos(-1.05)).toFixed(1)}" y2="${(120 + 90 * Math.sin(-1.05)).toFixed(1)}"/>` +
@@ -48,7 +48,7 @@ const F_V = fig(420, 220, "Fil chargé en son milieu",
 
 const F_2R = fig(420, 120, "Masse entre deux ressorts",
   `<rect x="20" y="30" width="10" height="60" class="body"/><rect x="390" y="30" width="10" height="60" class="body"/>` + spring(30, 170, 60) + spring(196, 390, 60, 12) + `<circle cx="183" cy="60" r="13" class="mass"/>${T(176, 98, "m")}` +
-  `<line class="thin" x1="210" y1="20" x2="210" y2="100"/>${T(200, 16, "repos", "sm")}` + ar(183, 60, 120, 60, "r") + T(100, 50, "−2k x", "r") + T(70, 110, "ℓ₀ − Δℓ", "sm") + T(270, 110, "ℓ₀ + Δℓ", "sm"),
+  `<line class="thin" x1="210" y1="20" x2="210" y2="100"/>${T(200, 16, "repos", "sm")}` + ar(183, 60, 120, 60, "r") + T(92, 44, "−2k x", "r") + T(70, 110, "ℓ₀ − Δℓ", "sm") + T(270, 110, "ℓ₀ + Δℓ", "sm"),
   "Écartée de $x$, la masse subit $-kx$ de chaque ressort : en tout $-2kx$.");
 
 const F_PEND = fig(360, 260, "Pendule de Spiderman",

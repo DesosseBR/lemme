@@ -15,25 +15,49 @@ const ARR = (x1, y1, x2, y2, c = "k", h = 8) => {
 /* Graphe : o = { w, h, x:[a,b], y:[c,d], xt:[...], yt:[...], xtl, ytl (libellés), curves:[{f, c, n, dash, lab:[x,y,texte]}], hl:[{y,t}], vl:[{x,t}], xl, yl, band:{f,e}, extra:(X,Y)=>"" } */
 const PL = o => {
   const w = o.w || 420, h = o.h || 240, m = { l: 40, r: 16, t: 16, b: 30 };
+  /* marge gauche assez large pour les graduations de l'axe vertical */
+  m.l = Math.max(40, Math.max(0, ...(o.ytl || o.yt || []).map(t => String(t).length)) * 6.6 + 14);
   const [a, b] = o.x, [c, d] = o.y;
   const X = x => m.l + (x - a) / (b - a) * (w - m.l - m.r), Y = y => h - m.b - (y - c) / (d - c) * (h - m.t - m.b);
   const y0 = c <= 0 && d >= 0 ? Y(0) : h - m.b, x0 = a <= 0 && b >= 0 ? X(0) : m.l;
   let s = "";
   if (o.band) { let up = "", dn = ""; for (let k = 0; k <= 200; k++) { const x = a + (b - a) * k / 200, v = o.band.f(x); up += `${k ? "L" : "M"}${f1(X(x))} ${f1(Y(Math.min(d, v + o.band.e)))} `; dn = `L${f1(X(x))} ${f1(Y(Math.max(c, v - o.band.e)))} ` + dn; } s += `<path d="${up}${dn}Z" style="fill:var(--yellow-soft);stroke:none"/>`; }
   (o.yt || []).forEach((t, i) => { s += `<line class="thin" x1="${m.l}" y1="${f1(Y(t))}" x2="${w - m.r}" y2="${f1(Y(t))}" style="stroke:var(--line);stroke-dasharray:none"/>` + S(m.l - 6, Y(t) + 4, o.ytl ? o.ytl[i] : String(t).replace(".", ","), "end"); });
-  (o.xt || []).forEach((t, i) => { s += `<line class="ax" x1="${f1(X(t))}" y1="${f1(y0 - 3)}" x2="${f1(X(t))}" y2="${f1(y0 + 3)}"/>` + S(X(t), y0 + 16, o.xtl ? o.xtl[i] : String(t).replace(".", ","), "middle"); });
+  /* axe horizontal en haut du graphe (valeurs négatives, échelle log) : graduations au-dessus de l'axe */
+  const top = c < 0 && d <= 0.25 * (d - c);
+  /* signal dense autour de l'axe : graduations sous la zone de tracé (xtBottom) */
+  const yLab = o.xtBottom ? h - m.b + 16 : top ? y0 - 8 : y0 + 16;
+  if (o.xtBottom) (o.xt || []).forEach(t => { s += `<line class="thin" x1="${f1(X(t))}" y1="${f1(y0)}" x2="${f1(X(t))}" y2="${h - m.b + 4}" style="stroke:var(--line);stroke-dasharray:none"/>`; });
+  (o.xt || []).forEach((t, i) => { s += `<line class="ax" x1="${f1(X(t))}" y1="${f1(y0 - 3)}" x2="${f1(X(t))}" y2="${f1(y0 + 3)}"/>` + S(X(t), yLab, o.xtl ? o.xtl[i] : String(t).replace(".", ","), "middle"); });
   s += ARR(m.l - 4, y0, w - m.r + 4, y0, "k", 7).replace(/class="vk"/, 'class="ax"').replace(/class="hk"/, 'class="axh"') + ARR(x0, h - m.b + 4, x0, m.t - 6, "k", 7).replace(/class="vk"/, 'class="ax"').replace(/class="hk"/, 'class="axh"');
-  if (o.xl) s += S(w - m.r, y0 - 6, o.xl, "end", "it");
-  if (o.yl) s += S(x0 + 6, m.t + 2, o.yl, "start", "it");
+  if (o.xl) s += S(w - m.r, top ? y0 + 16 : y0 - 6, o.xl, "end", "it");
+  if (o.yl) s += top ? S(x0 + 6, h - m.b - 4, o.yl, "start", "it") : S(x0 + 6, m.t + 2, o.yl, "start", "it");
   (o.hl || []).forEach(l => { s += `<line class="thin" x1="${m.l}" y1="${f1(Y(l.y))}" x2="${w - m.r}" y2="${f1(Y(l.y))}"/>` + (l.t ? S(w - m.r, Y(l.y) - 5, l.t, "end") : ""); });
   (o.vl || []).forEach(l => { s += `<line class="thin" x1="${f1(X(l.x))}" y1="${m.t}" x2="${f1(X(l.x))}" y2="${h - m.b}"/>` + (l.t ? S(X(l.x) + 4, m.t + 10, l.t) : ""); });
   (o.curves || []).forEach(cv => {
     let p = "", on = false; const n = cv.n || 300;
-    for (let k = 0; k <= n; k++) { const x = a + (b - a) * k / n, v = cv.f(x); if (!isFinite(v) || v < c - (d - c) || v > d + (d - c)) { on = false; continue; } p += `${on ? "L" : "M"}${f1(X(x))} ${f1(Y(Math.max(c - 0.02 * (d - c), Math.min(d + 0.02 * (d - c), v))))} `; on = true; }
+    /* la courbe s'arrête au bord de la zone de tracé (point d'intersection exact), sans palier artificiel */
+    const lo = c - 0.02 * (d - c), hi = d + 0.02 * (d - c);
+    let px = null, pv = null;
+    for (let k = 0; k <= n; k++) {
+      const x = a + (b - a) * k / n, v = cv.f(x), ok = isFinite(v) && v >= lo && v <= hi;
+      if (ok) {
+        if (!on && px !== null && isFinite(pv)) { const e = pv > hi ? hi : lo, t = (e - pv) / (v - pv); if (t > 0 && t < 1) p += `M${f1(X(px + (x - px) * t))} ${f1(Y(e))} `, on = true; }
+        p += `${on ? "L" : "M"}${f1(X(x))} ${f1(Y(v))} `; on = true;
+      } else if (on) {
+        if (isFinite(v)) { const e = v > hi ? hi : lo, t = (e - pv) / (v - pv); if (t > 0 && t <= 1) p += `L${f1(X(px + (x - px) * t))} ${f1(Y(e))} `; }
+        on = false;
+      }
+      px = x; pv = v;
+    }
     s += `<path class="v${cv.c || "b"}" style="fill:none;stroke-width:2.2${cv.dash ? ";stroke-dasharray:5 4" : ""}" d="${p.trim()}"/>`;
     if (cv.lab) s += S(X(cv.lab[0]), Y(cv.lab[1]), cv.lab[2], cv.lab[3] || "start", "sm " + (cv.c || "b"));
   });
+  /* légende : un trait de chaque couleur et son nom, dans une zone vide du graphe (legendAt, en coordonnées) */
+  if (o.legend) { const [lx, ly] = o.legendAt || [a + 0.6 * (b - a), c + 0.45 * (d - c)]; o.legend.forEach((g, i) => { const x0 = X(lx), y0 = Y(ly) + i * 20; s += `<line class="v${g.c || "b"}" style="stroke-width:2.2${g.dash ? ";stroke-dasharray:5 4" : ""}" x1="${f1(x0)}" y1="${f1(y0)}" x2="${f1(x0 + 24)}" y2="${f1(y0)}"/>` + S(x0 + 30, y0 + 4.5, g.t, "start", "sm " + (g.c || "b")); }); }
   if (o.extra) s += o.extra(X, Y);
+  /* zone de tracé, pour les modèles de figure (assets/figs.js) */
+  s = `<g data-plot="${m.l} ${m.t} ${w - m.r} ${h - m.b} ${f1(y0)}"></g>` + s;
   return { svg: s, w, h, X, Y };
 };
 const GRAPH = (o, cap, label) => { const g = PL(o); return FIG(g.w, g.h, g.svg, cap, label); };

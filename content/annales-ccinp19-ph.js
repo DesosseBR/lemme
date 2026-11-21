@@ -203,29 +203,29 @@ const F_LEVELS = fig(380, 170, "Émission d'un photon",
   ar(100, 44, 100, 136, "b") + `<path class="vr" fill="none" d="M120,90 q8,-10 16,0 t16,0 t16,0 t16,0"/>` + ar(184, 90, 196, 90, "r") + T(150, 76, "photon ħω₀", "r"),
   "L'atome descend d'un niveau à l'autre ; l'énergie perdue part avec le photon : $\\hbar\\omega_0 = \\mathcal E^*-\\mathcal E_1$.");
 
-const F_GAUSS = fig(380, 200, "Sphère de Gauss dans la boule",
+const F_GAUSS = fig(380, 210, "Sphère de Gauss dans la boule",
   `<circle cx="190" cy="100" r="85" class="gr" style="opacity:.6"/>` + `<circle cx="190" cy="100" r="45" class="bx" style="fill:none;stroke-dasharray:5 3"/>` + `<circle cx="190" cy="100" r="3" class="mass"/>` + T(178, 116, "O", "it") +
-  ar(190, 100, 222, 68, "r") + T(206, 78, "r", "r") + ar(222, 68, 245, 45, "b") + T(248, 44, "E", "b") + T(270, 175, "boule de rayon a, charge +e", "sm") + T(10, 30, "sphère de Gauss (r < a)", "sm"),
+  ar(190, 100, 222, 68, "r") + T(213, 96, "r", "r") + ar(222, 68, 245, 45, "b") + T(248, 44, "E", "b") + Tc(190, 204, "boule de rayon a, charge +e", "sm") + T(10, 30, "sphère de Gauss (r < a)", "sm"),
   "Sphère de Gauss de rayon $r < a$ : le champ y est radial et de même norme partout ; seule la charge à l'intérieur ($e\\frac{r^3}{a^3}$) compte.");
 
 const F_EULSTEP = fig(400, 200, "Un pas de la méthode d'Euler",
   `<line class="ax" x1="40" y1="170" x2="380" y2="170"/><line class="ax" x1="40" y1="180" x2="40" y2="14"/>` + path(fnp(t => 0.4 + Math.sin(t * 1.3), 0, 2.6, 100, t => 40 + t * 125, v => 170 - v * 90), "vb") +
   `<circle cx="${40 + 0.8 * 125}" cy="${170 - (0.4 + Math.sin(1.04)) * 90}" r="4" class="mass"/>` + `<line class="vr" x1="${40 + 0.8 * 125}" y1="${170 - (0.4 + Math.sin(1.04)) * 90}" x2="${40 + 1.6 * 125}" y2="${170 - (0.4 + Math.sin(1.04) + 0.8 * 1.3 * Math.cos(1.04)) * 90}"/>` +
   `<circle cx="${40 + 1.6 * 125}" cy="${170 - (0.4 + Math.sin(1.04) + 0.8 * 1.3 * Math.cos(1.04)) * 90}" r="4" class="mass"/>` + dsh(40 + 0.8 * 125, 170, 40 + 0.8 * 125, 40) + dsh(40 + 1.6 * 125, 170, 40 + 1.6 * 125, 40) +
-  Tc(40 + 0.8 * 125, 186, "tₙ", "sm") + Tc(40 + 1.6 * 125, 186, "tₙ₊₁ = tₙ + h", "sm") + T(250, 40, "tangente (Euler)", "r") + T(300, 150, "vraie courbe", "b"),
+  Tc(40 + 0.8 * 125, 186, "tₙ", "sm") + Tc(40 + 1.6 * 125, 186, "tₙ₊₁ = tₙ + h", "sm") + T(250, 40, "tangente (Euler)", "r") + T(48, 162, "vraie courbe", "b"),
   "Euler remplace la courbe par sa tangente sur un pas $h$ : $r_{n+1} = r_n+h\\,\\dot r(t_n)$. L'écart avec la vraie courbe est l'erreur commise à chaque pas.");
 
-const F_DIAG = fig(420, 200, "Diagramme de rayonnement du dipôle",
+const F_DIAG = fig(530, 200, "Diagramme de rayonnement du dipôle",
   `<line class="ax" x1="210" y1="190" x2="210" y2="10"/>` + T(216, 16, "z (axe du dipôle)", "sm") + ar(210, 112, 210, 88, "r") + T(194, 104, "p", "r") +
   path(fnp(th => Math.sin(th) ** 2, 0, Math.PI, 120, th => 210 + 150 * Math.sin(th) ** 2 * Math.sin(th), v => 100), "thin") +
   path((() => { const p = []; for (let i = 0; i <= 200; i++) { const th = Math.PI * i / 100; const rr = 150 * Math.sin(th) ** 2; p.push([210 + rr * Math.sin(th), 100 - rr * Math.cos(th)]); } return p; })(), "vb") +
-  T(330, 96, "maximum (θ = 90°)", "b") + T(220, 30, "rien selon l'axe", "sm"),
+  T(378, 96, "maximum (θ = 90°)", "b") + T(220, 30, "rien selon l'axe", "sm"),
   "Puissance rayonnée par unité d'angle solide, en $\\sin^2\\theta$ : nulle dans l'axe du dipôle, maximale dans le plan perpendiculaire (le « tore » de rayonnement d'une antenne).");
 
-const F_BROUILL = fig(460, 190, "Deux systèmes d'anneaux qui se brouillent",
+const F_BROUILL = fig(460, 214, "Deux systèmes d'anneaux qui se brouillent",
   `<line class="ax" x1="20" y1="160" x2="450" y2="160"/>` + T(436, 176, "δ", "it") +
   path(fnp(x => 1 + Math.cos(2 * Math.PI * x), 0, 8, 400, x => 30 + x * 50, v => 150 - v * 30), "vb") + path(fnp(x => 1 + Math.cos(2 * Math.PI * x * 1.0625), 0, 8, 400, x => 30 + x * 50, v => 100 - v * 30), "vr") +
-  T(30, 20, "fréquence ν₀", "r") + T(30, 186, "fréquence ν₀ + Δν/2", "b") + dsh(30, 30, 30, 160) + dsh(430, 30, 430, 160) + Tc(30, 176, "en phase", "sm") + Tc(430, 176, "en opposition", "sm"),
+  T(30, 20, "fréquence ν₀", "r") + T(30, 206, "fréquence ν₀ + Δν/2", "b") + dsh(30, 30, 30, 160) + dsh(430, 30, 430, 160) + Tc(30, 176, "en phase", "sm") + Tc(430, 176, "en opposition", "sm"),
   "Au contact optique ($\\delta = 0$), toutes les fréquences ont une frange brillante au même endroit ; en augmentant $\\delta$, elles se décalent jusqu'à ce qu'une frange brillante de l'une tombe sur une frange sombre de l'autre : le contraste disparaît.");
 
 const F_DOPP = fig(460, 180, "Deux maxima successifs",
@@ -234,14 +234,14 @@ const F_DOPP = fig(460, 180, "Deux maxima successifs",
   `<circle cx="110" cy="140" r="6" class="mass"/>` + `<rect x="380" y="130" width="16" height="20" class="gr"/>` + ar(118, 126, 190, 126, "r") + T(140, 120, "2e max", "r") + `<line class="thin" x1="40" y1="160" x2="110" y2="160"/>` + Tc(75, 176, "V_x T₀", "sm") + `<line class="thin" x1="110" y1="166" x2="388" y2="166"/>` + Tc(250, 178, "d − V_x T₀", "sm") + `<line class="thin" x1="40" y1="80" x2="388" y2="80"/>` + Tc(214, 94, "d", "sm"),
   "Le second maximum est émis plus près du récepteur ($d-V_xT_0$ au lieu de $d$) : il arrive moins de $T_0$ après le premier. La période reçue est raccourcie, la fréquence augmente.");
 
-const F_PUITS = fig(440, 200, "États stationnaires du puits infini",
+const F_PUITS = fig(500, 200, "États stationnaires du puits infini",
   `<line class="bold" x1="80" y1="20" x2="80" y2="180"/><line class="bold" x1="360" y1="20" x2="360" y2="180"/><line class="ax" x1="80" y1="180" x2="360" y2="180"/>` + Tc(80, 196, "0", "sm") + Tc(360, 196, "L", "sm") +
   [1, 2, 3].map(n => { const y0 = 180 - n * n * 15; return `<line class="thin" x1="80" y1="${y0}" x2="360" y2="${y0}" style="stroke-dasharray:3 3"/>` + path(fnp(x => Math.sin(n * Math.PI * x), 0, 1, 120, x => 80 + 280 * x, v => y0 - 14 * v), "vb") + T(368, y0 + 4, "n = " + n + " : ℰ = " + (n * n) + " ℰ₁", "sm"); }).join(""),
   "Comme une corde fixée aux deux bouts : $\\varphi_n$ a $n$ « ventres » ($kL = n\\pi$), et l'énergie croît comme $n^2$.");
 
 const F_FE = fig(420, 190, "Densité de probabilité de l'énergie",
   `<line class="ax" x1="40" y1="160" x2="400" y2="160"/><line class="ax" x1="40" y1="170" x2="40" y2="14"/>` + T(380, 178, "ℰ / k_BT", "sm") + T(46, 20, "f(ℰ)", "sm") +
-  path(fnp(x => Math.exp(-x) / Math.sqrt(x) / Math.sqrt(Math.PI), 0.02, 4, 200, x => 40 + x * 85, v => 160 - Math.min(v, 1.6) * 80), "vb") + dsh(40 + 0.5 * 85, 160, 40 + 0.5 * 85, 30) + Tc(40 + 0.5 * 85, 176, "⟨ℰ⟩ = k_BT/2", "sm") +
+  path(fnp(x => Math.exp(-x) / Math.sqrt(x) / Math.sqrt(Math.PI), 0.105, 4, 200, x => 40 + x * 85, v => 160 - v * 80), "vb") + dsh(40 + 0.5 * 85, 160, 40 + 0.5 * 85, 30) + T(40 + 0.5 * 85 + 6, 60, "⟨ℰ⟩ = k_BT/2", "sm") +
   [1, 2, 3, 4].map(k => Tc(40 + k * 85, 176, k, "sm")).join(""),
   "$f(\\mathcal E) = \\sqrt{\\frac\\beta\\pi}\\frac{e^{-\\beta\\mathcal E}}{\\sqrt{\\mathcal E}}$ : beaucoup d'atomes lents (densité d'états en $\\frac1{\\sqrt{\\mathcal E}}$), très peu au-delà de quelques $k_BT$ (facteur de Boltzmann).");
 

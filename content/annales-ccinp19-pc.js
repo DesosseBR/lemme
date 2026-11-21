@@ -19,11 +19,11 @@ const F1 = fig(420, 190, "Géométrie du conducteur thermique",
   "Figure 1. Plaque de longueur $L$, de hauteur $H$ et de petite épaisseur $e$ ; la température ne dépend que de $z$ et de $t$.");
 
 const F2 = fig(440, 190, "Principe de la plaque chaude gardée",
-  `<rect x="60" y="30" width="300" height="18" class="gr"/><rect x="60" y="92" width="300" height="18" class="k" style="fill:var(--ink)"/><rect x="60" y="152" width="300" height="18" class="gr"/>` +
-  `<rect x="140" y="56" width="140" height="28" class="bx"/><rect x="140" y="118" width="140" height="28" class="bx"/>` +
-  `<rect x="60" y="56" width="80" height="28" class="thin"/><rect x="280" y="56" width="80" height="28" class="thin"/><rect x="60" y="118" width="80" height="28" class="thin"/><rect x="280" y="118" width="80" height="28" class="thin"/>` +
-  Tc(210, 75, "laine (e, S)", "sm") + Tc(210, 137, "laine (e, S)", "sm") + T(368, 43, "plaque froide T_f", "sm") + T(368, 105, "plaque chaude T_c", "sm") + T(368, 165, "plaque froide T_f", "sm") + Tc(100, 75, "isolant", "sm") + Tc(320, 137, "isolant", "sm") +
-  ar(210, 92, 210, 60, "r") + ar(210, 110, 210, 142, "r") + T(216, 66, "φ", "r") + T(216, 144, "φ", "r"),
+  `<rect x="30" y="30" width="276" height="18" class="gr"/><rect x="30" y="92" width="276" height="18" class="k" style="fill:var(--ink)"/><rect x="30" y="152" width="276" height="18" class="gr"/>` +
+  `<rect x="98" y="56" width="140" height="28" class="bx"/><rect x="98" y="118" width="140" height="28" class="bx"/>` +
+  `<rect x="30" y="56" width="68" height="28" class="thin"/><rect x="238" y="56" width="68" height="28" class="thin"/><rect x="30" y="118" width="68" height="28" class="thin"/><rect x="238" y="118" width="68" height="28" class="thin"/>` +
+  Tc(150, 75, "laine (e, S)", "sm") + Tc(150, 137, "laine (e, S)", "sm") + T(316, 43, "plaque froide T_f", "sm") + T(316, 105, "plaque chaude T_c", "sm") + T(316, 165, "plaque froide T_f", "sm") + Tc(64, 75, "isolant", "sm") + Tc(272, 137, "isolant", "sm") +
+  ar(212, 92, 212, 60, "r") + ar(212, 110, 212, 142, "r") + T(219, 72, "φ", "r") + T(219, 140, "φ", "r"),
   "Figure 2. La plaque chaude, chauffée par effet Joule, envoie le flux $\\varphi$ à travers chacun des deux échantillons vers les plaques froides.");
 
 const F4 = fig(420, 170, "Modélisation de la toison",
@@ -50,7 +50,7 @@ const F67 = fig(520, 190, "Oreille moyenne sans et avec stimulus sonore",
 
 const F8 = fig(420, 190, "Œil réduit de mammifère",
   `<circle cx="210" cy="95" r="80" class="k"/><line class="ax" x1="20" y1="95" x2="400" y2="95"/>` + ar(148, 40, 148, 150) + ar(148, 150, 148, 40) +
-  `<line class="vk" x1="140" y1="35" x2="140" y2="62"/><line class="vk" x1="140" y1="128" x2="140" y2="155"/>` + T(100, 40, "iris", "sm") + T(156, 70, "cristallin", "sm") + T(268, 30, "rétine", "sm") + T(330, 88, "axe optique", "sm") +
+  `<line class="vk" x1="140" y1="35" x2="140" y2="62"/><line class="vk" x1="140" y1="128" x2="140" y2="155"/>` + T(100, 40, "iris", "sm") + T(156, 70, "cristallin", "sm") + T(278, 26, "rétine", "sm") + T(330, 88, "axe optique", "sm") +
   `<line class="thin" x1="148" y1="170" x2="290" y2="170"/>` + Tc(219, 186, "d", "it"),
   "Figure 8. Le cristallin est une lentille mince convergente ; la rétine est à la distance $d$ derrière lui.");
 
@@ -68,11 +68,11 @@ const EPH1 = EPH(T(xp(3.6), yE(1.6), "A = HClO", "b", 15) + `<line class="thin" 
   `<circle cx="${xp(0)}" cy="${yE(1.56)}" r="4" class="mass"/><circle cx="${xp(0)}" cy="${yE(1.42)}" r="4" class="mass"/>` + T(xp(7.7), yE(1.75), "pH = pKₐ = 7,5", "sm"));
 
 /* ---------- Figures du corrigé ---------- */
-const F_RES = fig(520, 150, "Résistances thermiques de la brebis",
+const F_RES = fig(520, 168, "Résistances thermiques de la brebis",
   T(6, 80, "T_int", "it") + `<line class="k" x1="50" y1="76" x2="80" y2="76"/>` + res(80, 76, 70, 18, "R_diff", "b") + `<line class="k" x1="150" y1="76" x2="200" y2="76"/>` + T(178, 66, "T_ext", "sm") +
   `<line class="k" x1="200" y1="36" x2="200" y2="116"/><line class="k" x1="200" y1="36" x2="250" y2="36"/><line class="k" x1="200" y1="116" x2="250" y2="116"/>` +
   res(250, 36, 70, 18, "R_cc", "g") + res(250, 116, 70, 18, "R_r", "r") + `<line class="k" x1="320" y1="36" x2="370" y2="36"/><line class="k" x1="320" y1="116" x2="370" y2="116"/><line class="k" x1="370" y1="36" x2="370" y2="116"/><line class="k" x1="370" y1="76" x2="410" y2="76"/>` + T(416, 80, "T_air", "it") +
-  ar(60, 140, 470, 140, "r") + T(240, 136, "flux φ", "r"),
+  ar(60, 142, 470, 142, "r") + Tc(265, 162, "flux φ", "r"),
   "Le flux traverse d'abord la laine ($R_{\\text{diff}}$), puis quitte la surface par deux voies en parallèle : convection ($R_{cc}$) et rayonnement ($R_r$).");
 
 const F_RC = fig(460, 170, "Circuit électrique équivalent",
@@ -98,16 +98,15 @@ const F_Q = fig(460, 220, "Module du rapport q en fonction de la pulsation",
   `<line class="thin" x1="${40 + 400 / 2.6}" y1="190" x2="${40 + 400 / 2.6}" y2="20"/>` + Tc(40 + 400 / 2.6, 206, "ω′ᵣ ≈ √(ω′₀² + Ω′₀²)", "sm") + T(48, 176, "Ω꜀² / (ω′₀² + Ω′₀²)", "sm"),
   "Avec frottement, le pic de résonance est fini ; il est d'autant plus haut et étroit que $\\alpha'$ est petit. Aux hautes pulsations, $|q|\\sim\\frac{\\Omega_C^2}{\\omega^2}$ tend vers $0$.");
 
-const F_VUE = fig(460, 200, "Champ de vision selon la position des yeux",
-  `<ellipse cx="120" cy="100" rx="26" ry="40" class="gr"/>` + Tc(120, 160, "yeux frontaux", "sm") +
-  `<path class="zb" d="M120,70 L60,10 L180,10 Z" style="opacity:.8"/>` + Tc(120, 30, "binoculaire", "b") + `<path class="zg" d="M110,75 L40,60 L60,10 Z"/><path class="zg" d="M130,75 L200,60 L180,10 Z"/>` +
-  `<ellipse cx="340" cy="100" rx="26" ry="40" class="gr"/>` + Tc(340, 192, "yeux latéraux (mouton)", "sm") +
-  `<path class="zb" d="M340,62 L320,10 L360,10 Z"/><path class="zg" d="M318,92 L330,62 L250,10 L230,170 L320,150 Z"/><path class="zg" d="M362,92 L350,62 L430,10 L450,170 L360,150 Z"/>` +
-  `<path class="zr" d="M330,142 L340,175 L350,142 Z"/>` + T(360, 178, "point mort", "r") + Tc(340, 8, "étroit", "b"),
+const F_VUE = fig(460, 232, "Champ de vision selon la position des yeux",
+  `<path class="zb" d="M120,92 L60,32 L180,32 Z" style="opacity:.8"/><path class="zg" d="M110,97 L40,82 L60,32 Z"/><path class="zg" d="M130,97 L200,82 L180,32 Z"/>` +
+  `<ellipse cx="120" cy="122" rx="26" ry="40" class="gr"/>` + Tc(120, 186, "yeux frontaux", "sm") + Tc(120, 20, "binoculaire", "b") +
+  `<path class="zb" d="M340,84 L320,32 L360,32 Z"/><path class="zg" d="M318,114 L330,84 L250,32 L230,192 L320,172 Z"/><path class="zg" d="M362,114 L350,84 L430,32 L450,192 L360,172 Z"/>` +
+  `<ellipse cx="340" cy="122" rx="26" ry="40" class="gr"/>` + `<path class="zr" d="M330,164 L340,197 L350,164 Z"/>` + T(360, 208, "point mort", "r") + Tc(340, 20, "étroit", "b") + Tc(340, 228, "yeux latéraux (mouton)", "sm"),
   "Placés sur les côtés de la tête, les yeux regardent vers l'extérieur : les deux champs monoculaires couvrent presque tout le tour, au prix d'une zone binoculaire étroite et d'un point mort juste derrière.");
 
 const F_LN = fig(460, 230, "ln V1 en fonction du temps",
-  `<line class="ax" x1="50" y1="190" x2="440" y2="190"/><line class="ax" x1="50" y1="190" x2="50" y2="14"/>` + T(400, 208, "t (s)", "sm") + T(56, 16, "ln V₁", "sm") +
+  `<line class="ax" x1="50" y1="190" x2="440" y2="190"/><line class="ax" x1="50" y1="190" x2="50" y2="14"/>` + T(414, 182, "t (s)", "sm") + T(56, 16, "ln V₁", "sm") +
   [0, 300, 600, 900].map(t => Tc(50 + t * 0.4, 206, t, "sm")).join("") + [0.5, 1, 1.5, 2, 2.5].map(v => T(14, 190 - v * 68 + 4, String(v).replace(".", ","), "sm")).join("") +
   path([[50, 190 - 2.5075 * 68], [50 + 900 * 0.4, 190 - (2.5075 - 2.011e-3 * 900) * 68]], "vb") +
   [[0, 2.51], [180, 2.128], [360, 1.808], [540, 1.411], [720, 1.065], [900, 0.693]].map(([t, v]) => `<circle cx="${50 + t * 0.4}" cy="${190 - v * 68}" r="4.5" class="mass"/>`).join("") +
@@ -127,7 +126,7 @@ const F_SLICE = fig(460, 190, "Bilan sur une tranche",
 const F_PROFIL = fig(420, 190, "Profil de température stationnaire",
   `<line class="ax" x1="60" y1="160" x2="400" y2="160"/><line class="ax" x1="60" y1="170" x2="60" y2="14"/>` + T(392, 176, "z", "it") + T(66, 18, "T", "it") +
   `<rect x="110" y="20" width="200" height="140" class="gr" style="opacity:.35"/>` + `<line class="vr" x1="110" y1="40" x2="310" y2="130"/>` + Tc(110, 176, "0", "sm") + Tc(310, 176, "e", "it") +
-  T(12, 44, "T_entrée", "sm") + T(12, 134, "T_sortie", "sm") + dash(60, 40, 110, 40) + dash(60, 130, 310, 130) + ar(170, 100, 250, 100, "b") + T(176, 116, "flux φ (du chaud au froid)", "b"),
+  T(12, 44, "T_entrée", "sm") + T(12, 134, "T_sortie", "sm") + dash(60, 40, 110, 40) + dash(60, 130, 310, 130) + ar(124, 148, 196, 148, "b") + T(204, 153, "flux φ", "b"),
   "En régime permanent, la température varie linéairement dans le matériau ; le flux va du chaud vers le froid.");
 
 const F_SERPAR = fig(500, 170, "Résistances en série et en parallèle",
@@ -143,7 +142,7 @@ const F_FACES = fig(460, 200, "Les six faces de la brebis",
   "La laine couvre $4$ faces de $L\\times H$ et $2$ faces de $H\\times H$ : $A = 4LH+2H^2$.");
 
 const F_DECAY = fig(460, 210, "Lecture graphique de tau",
-  `<line class="ax" x1="40" y1="180" x2="440" y2="180"/><line class="ax" x1="40" y1="190" x2="40" y2="14"/>` + T(430, 196, "t", "it") + T(46, 18, "T", "it") +
+  `<line class="ax" x1="40" y1="180" x2="440" y2="180"/><line class="ax" x1="40" y1="190" x2="40" y2="14"/>` + T(432, 172, "t", "it") + T(46, 18, "T", "it") +
   path((() => { const p = []; for (let i = 0; i <= 120; i++) { const t = 5 * i / 120; p.push([40 + 75 * t, 30 + 140 * Math.exp(-t)]); } return p; })(), "vb") +
   `<line class="vr" x1="40" y1="170" x2="115" y2="30"/>` + dash(40, 30, 440, 30) + T(380, 26, "T_lim", "sm") + T(4, 174, "T(0)", "sm") +
   dash(115, 180, 115, 30) + Tc(115, 196, "τ", "it") + dash(115, 82, 40, 82) + T(120, 80, "63 % du chemin", "r") + dash(415, 180, 415, 30) + Tc(415, 196, "5τ : 99 %", "sm"),

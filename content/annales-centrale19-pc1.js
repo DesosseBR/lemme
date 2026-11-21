@@ -70,11 +70,11 @@ const F10 = fig(420, 190, "Signal d'ionisation en fonction du champ",
   dash(40 + 130 * 1.45, 160, 40 + 130 * 1.45, 28) + Tc(40 + 130 * 1.45, 176, "E_c", "it") + T(380, 176, "E (u.a.)", "sm") + T(46, 18, "dN/dt", "sm"),
   "Figure 10 (schéma d'après la thèse d'A. Auffèves). Nombre d'atomes ionisés par unité de temps quand le champ $E$ augmente lentement ; le maximum définit le champ d'ionisation $E_c$.");
 
-const F11 = fig(440, 220, "Zone d'ionisation du détecteur",
-  `<rect x="40" y="20" width="160" height="16" class="gr"/>` + T(206, 32, "a, potentiel V_a(t)", "sm") + `<rect x="40" y="68" width="60" height="16" class="gr"/><rect x="140" y="68" width="60" height="16" class="gr"/>` + T(206, 80, "b, potentiel V_b = 32 V", "sm") +
-  `<line class="thin" x1="10" y1="52" x2="230" y2="52" style="stroke-dasharray:6 4"/><ellipse cx="60" cy="52" rx="14" ry="5" class="gr"/>` + T(14, 46, "atomes", "sm") + Tc(120, 100, "diaphragme 6 mm", "sm") +
-  `<line class="thin" x1="20" y1="36" x2="20" y2="68"/>` + T(6, 56, "4", "sm") + ar(90, 66, 90, 38, "r") + ar(150, 66, 150, 38, "r") + T(156, 62, "E(t)", "r") +
-  `<rect x="100" y="110" width="40" height="22" class="bx"/>` + T(146, 125, "électrodes c, d, e (focalisation)", "sm") + `<rect x="95" y="160" width="50" height="34" class="gr"/>` + T(150, 182, "f, puis multiplicateur d'électrons", "sm") + ar(120, 86, 120, 158, "b") + T(70, 150, "électron", "b"),
+const F11 = fig(480, 220, "Zone d'ionisation du détecteur",
+  `<rect x="90" y="20" width="160" height="16" class="gr"/>` + T(282, 32, "a, potentiel V_a(t)", "sm") + `<rect x="90" y="84" width="60" height="16" class="gr"/><rect x="190" y="84" width="60" height="16" class="gr"/>` + T(282, 96, "b, potentiel V_b = 32 V", "sm") +
+  `<line class="thin" x1="16" y1="60" x2="262" y2="60" style="stroke-dasharray:6 4"/><ellipse cx="110" cy="60" rx="14" ry="5" class="gr"/>` + T(16, 52, "atomes", "sm") + T(30, 118, "diaphragme 6 mm", "sm") +
+  `<line class="thin" x1="270" y1="36" x2="270" y2="84"/><line class="thin" x1="264" y1="36" x2="276" y2="36"/><line class="thin" x1="264" y1="84" x2="276" y2="84"/>` + T(280, 64, "4 mm", "sm") + ar(130, 82, 130, 38, "r") + ar(230, 82, 230, 38, "r") + Tc(180, 50, "E(t)", "r") +
+  `<rect x="150" y="128" width="40" height="22" class="bx"/>` + T(196, 143, "électrodes c, d, e (focalisation)", "sm") + `<rect x="145" y="176" width="50" height="34" class="gr"/>` + T(200, 197, "f, puis multiplicateur d'électrons", "sm") + ar(170, 102, 170, 174, "b") + T(112, 166, "électron", "b"),
   "Figure 11 (schéma). Entre $a$ et $b$ (écart $4\\ \\mathrm{mm}$), le champ $E(t)$ ionise l'atome ; l'électron traverse le diaphragme de $b$, est focalisé ($c$ à $e$) puis détecté derrière $f$.");
 
 const F12 = fig(420, 190, "Pointé du centre du diaphragme",
@@ -188,26 +188,26 @@ const E4 = R`<p><b>III. Couplage atome-cavité.</b> L'atome stocke l'énergie $\
 /* ---------- Bonus et schémas pédagogiques ---------- */
 const B = (titre, html) => `<div class="plus"><p><b>Pour aller plus loin · ${titre}</b></p>${html}</div>`;
 
-const F_KLECH = fig(360, 250, "Règle de Klechkowski",
-  [1, 2, 3, 4, 5, 6, 7, 8].map(S => { const c = []; for (let l = 3; l >= 0; l--) { const n = S - l; if (n >= 1 && n <= 7 && l <= n - 1) c.push([50 + 60 * l, 30 + 30 * (n - 1) - 5]); } if (c.length < 2) return ""; const [x1, y1] = c[0], [x2, y2] = c[c.length - 1]; return `<g style="opacity:.35">` + ar(x1 + 22, y1 - 11, x2 - 20, y2 + 10, "r") + `</g>`; }).join("") +
-  [["1s"], ["2s", "2p"], ["3s", "3p", "3d"], ["4s", "4p", "4d", "4f"], ["5s", "5p", "5d", "5f"], ["6s", "6p", "6d"], ["7s", "7p"]].map((row, i) => row.map((c, j) => Tc(50 + j * 60, 30 + i * 30, c, "", 15)).join("")).join("") +
-  T(250, 150, "on suit chaque flèche,", "sm") + T(250, 166, "de haut en bas,", "sm") + T(250, 182, "puis la suivante", "sm"),
+const F_KLECH = fig(380, 250, "Règle de Klechkowski",
+  `<g data-chem="1">` + [1, 2, 3, 4, 5, 6, 7, 8].map(S => { const c = []; for (let l = 3; l >= 0; l--) { const n = S - l; if (n >= 1 && n <= 7 && l <= n - 1) c.push([50 + 60 * l, 26 + 30 * (n - 1)]); } if (!c.length) return ""; const [x1, y1] = c[0], [x2, y2] = c[c.length - 1]; const u = [-60, 30], k = 0.42; return `<g style="opacity:.45">` + ar(x1 - u[0] * k, y1 - u[1] * k - 5, x2 + u[0] * k, y2 + u[1] * k - 5, "r").replace(/<line class="vr"/, '<line class="vr" style="stroke-width:1.6"') + `</g>`; }).join("") +
+  [["1s"], ["2s", "2p"], ["3s", "3p", "3d"], ["4s", "4p", "4d", "4f"], ["5s", "5p", "5d", "5f"], ["6s", "6p", "6d"], ["7s", "7p"]].map((row, i) => row.map((c, j) => `<text class="" x="${50 + j * 60}" y="${26 + i * 30}" text-anchor="middle" font-size="15" data-fixed="1">${c}</text>`).join("")).join("") + `</g>` +
+  T(262, 176, "on suit chaque flèche,", "sm") + T(262, 192, "de haut en bas,", "sm") + T(262, 208, "puis la suivante", "sm"),
   "Règle de Klechkowski : on remplit les sous-couches en suivant les diagonales : $1s$, $2s$, $2p$, $3s$, $3p$, $4s$, $3d$, $4p$, $5s$, $4d$, $5p$, $6s$…");
 
 const F_POLAR = fig(380, 220, "Base polaire",
   `<line class="ax" x1="40" y1="190" x2="360" y2="190"/><line class="ax" x1="60" y1="210" x2="60" y2="14"/>` + T(352, 206, "x", "it") + T(66, 18, "y", "it") + T(46, 204, "O", "it") +
   `<line class="thin" x1="60" y1="190" x2="230" y2="80"/><circle cx="230" cy="80" r="4.5" class="mass"/>` + T(238, 76, "M (électron)", "sm") + T(140, 150, "r", "it") +
-  ar(230, 80, 272, 53, "b") + T(276, 52, "e_r", "b") + ar(230, 80, 257, 122, "r") + T(262, 128, "e_φ", "r") + `<path class="thin" fill="none" d="M100,190 A40,40 0 0,0 94,168"/>` + T(106, 178, "φ", "it") + T(20, 30, "L = L e_z sort du plan", "sm"),
+  ar(230, 80, 272, 53, "b") + T(276, 52, "e_r", "b") + ar(230, 80, 257, 122, "r") + T(262, 128, "e_φ", "r") + `<path class="thin" fill="none" d="M100,190 A40,40 0 0,0 94,168"/>` + T(106, 178, "φ", "it") + T(150, 30, "L = L e_z sort du plan", "sm"),
   "En polaires : $\\overrightarrow{OM} = r\\,\\vec e_r$ et $\\vec v = \\dot r\\,\\vec e_r+r\\dot\\varphi\\,\\vec e_\\varphi$ ($\\dot r$ : on s'éloigne, $r\\dot\\varphi$ : on tourne).");
 
-const F_COND = fig(400, 170, "Champ entre deux plaques",
+const F_COND = fig(440, 170, "Champ entre deux plaques",
   `<rect x="60" y="20" width="280" height="12" class="gr"/><rect x="60" y="138" width="280" height="12" class="gr"/>` + T(346, 30, "a : V_a (bas)", "sm") + T(346, 148, "b : V_b (haut)", "sm") +
-  [110, 170, 230, 290].map(x => ar(x, 134, x, 38, "r")).join("") + T(296, 90, "E", "r") + `<circle cx="200" cy="90" r="5" class="mass"/>` + ar(200, 96, 200, 128, "b") + T(206, 118, "−eE : vers b", "b"),
+  [80, 130, 270, 320].map(x => ar(x, 134, x, 38, "r")).join("") + T(326, 90, "E", "r") + `<circle cx="170" cy="90" r="5" class="mass"/>` + ar(170, 96, 170, 128, "b") + T(177, 118, "−eE : vers b", "b"),
   "Le champ va du potentiel haut ($b$) vers le potentiel bas ($a$) ; l'électron, de charge négative, est poussé dans l'autre sens : vers le potentiel le plus haut.");
 
 const F_REFL = fig(420, 150, "Réflexion sur le miroir de droite",
   `<rect x="330" y="20" width="10" height="110" class="gr"/>` + `<line class="ax" x1="20" y1="120" x2="400" y2="120"/>` + T(392, 136, "z", "it") + Tc(330, 140, "z = d", "sm") +
-  ar(40, 55, 326, 55, "b") + T(100, 48, "s₀ = S₀ e^{i(ωt − kz)}", "b") + ar(326, 85, 40, 85, "r") + T(100, 102, "s₁ = S₁ e^{i(ωt + kz)}", "r") + T(240, 74, "en z = d : s₁ = r_M s₀", "sm"),
+  ar(40, 55, 326, 55, "b") + T(100, 48, "s₀ = S₀ e^{i(ωt − kz)}", "b") + ar(326, 85, 40, 85, "r") + T(100, 102, "s₁ = S₁ e^{i(ωt + kz)}", "r") + T(130, 74, "en z = d : s₁ = r_M s₀", "sm"),
   "$-kz$ dans la phase : onde vers les $z$ croissants ; $+kz$ : vers les $z$ décroissants. Sur le miroir, l'onde réfléchie vaut $r_M$ fois l'onde incidente.");
 
 const F_WIDTH = fig(420, 200, "Largeur à mi-hauteur d'un pic",

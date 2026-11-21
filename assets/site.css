@@ -2161,3 +2161,41 @@ mjx-container[display="true"]>svg{max-width:100%;height:auto}
 .methode .fmc .fm-k{font:500 13px var(--f-display);color:var(--muted);margin-bottom:6px}
 .methode .fmc .fm-s{font-size:1.12em;margin-bottom:6px}
 .methode .fmc .fm-x{line-height:1.55}
+
+/* ---------- Figures : cinq modèles de dessin (assets/figs.js) ---------- */
+svg.fx .fxl svg{overflow:visible}
+svg.fx .fx-frame{fill:none;stroke:var(--ink);stroke-width:1.1}
+svg.fx .fx-area{fill:var(--blue,#2453D6);fill-opacity:.1;stroke:none}
+svg.fx .fx-area.fx-area5{fill:var(--yellow);fill-opacity:.28}
+/* 1 · manuel : trait noir fin, flèches au bout des axes */
+svg.fx.m1 .ax{stroke:var(--ink);stroke-width:1.1}
+svg.fx.m1 .axh{fill:var(--ink)}
+/* 2 · revue scientifique : cadre, grille pleine et légère, courbes fines */
+svg.fx.m2 .ax{stroke:var(--ink);stroke-width:1}
+svg.fx.m2 .axh{fill:var(--ink)}
+svg.fx.m2 .thin{stroke:var(--line);stroke-dasharray:none;stroke-width:1}
+svg.fx.m2 .vb,svg.fx.m2 .vr,svg.fx.m2 .vg,svg.fx.m2 .vv,svg.fx.m2 .vk{stroke-width:1.9}
+/* 3 · épuré : axes gris sans flèches, courbes épaisses arrondies, aire teintée */
+svg.fx.m3 .ax{stroke:var(--muted);stroke-width:1}
+svg.fx.m3 .axh{fill:var(--muted)}
+svg.fx.m3 .vb,svg.fx.m3 .vr,svg.fx.m3 .vg,svg.fx.m3 .vv{stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+figure.fx-m3{border-color:transparent}
+/* 4 · dessin technique : noir et blanc, traits nets */
+svg.fx.m4 .ax{stroke:var(--ink);stroke-width:1}
+svg.fx.m4 .axh{fill:var(--ink)}
+svg.fx.m4 .k,svg.fx.m4 .vk{stroke:var(--ink)}
+svg.fx.m4 .mass{fill:var(--bg-2)}
+svg.fx.m4 .thin{stroke:var(--ink);stroke-width:.8;stroke-dasharray:6 3 1.5 3}
+figure.fx-m4{border-radius:6px}
+/* 5 · pédagogique : traits épais, zones teintées */
+svg.fx.m5 .ax{stroke:var(--ink);stroke-width:1.4}
+svg.fx.m5 .axh{fill:var(--ink)}
+svg.fx.m5 .vb,svg.fx.m5 .vr,svg.fx.m5 .vg,svg.fx.m5 .vv{stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round}
+svg.fx.m5 .vk,svg.fx.m5 .k{stroke-width:2.2}
+/* étiquettes LaTeX posées sur les graphiques animés (canevas) */
+.viz-wrap{position:relative}
+.viz-ov{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.viz-ov span{position:absolute;white-space:nowrap;font-size:13.5px;line-height:1;color:var(--muted)}
+.viz-ov span.it{color:var(--ink);font-size:15px}
+.viz-ov mjx-container{margin:0!important}
+svg.fx.m2:has(.fx-frame) .axh{display:none}

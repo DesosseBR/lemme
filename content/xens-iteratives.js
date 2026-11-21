@@ -28,7 +28,7 @@ const figErr = GRAPH({ w: 460, h: 250, x: [0, 60], y: [-8, 0.5], xt: [10, 20, 30
 
 const vro = x => -Math.log(2 / (1 + Math.sqrt(1 - Math.exp(-2 * x))) - 1);
 const figVit = GRAPH({ w: 460, h: 240, x: [0, 2], y: [0, 4.5], xt: [0.5, 1, 1.5, 2], xtl: ["0,5", "1", "1,5", "2"], yt: [1, 2, 3, 4], xl: "x",
-  curves: [{ f: x => x, c: "b", lab: [1.6, 1.25, "Jacobi"] }, { f: x => 2 * x, c: "g", lab: [1.45, 3.3, "Gauss-Seidel"] }, { f: x => x > 0.001 && vro(x) < 4.5 ? vro(x) : NaN, c: "r", lab: [0.25, 3.3, "relaxation optimale"] }] },
+  curves: [{ f: x => x, c: "b", lab: [1.6, 1.25, "Jacobi"] }, { f: x => 2 * x, c: "g", lab: [1.62, 2.55, "Gauss-Seidel"] }, { f: x => x > 0.001 && vro(x) < 4.5 ? vro(x) : NaN, c: "r", lab: [0.12, 3.9, "relaxation optimale"] }] },
   R`Vitesses de convergence $v = -\ln\rho$ pour une matrice symétrique définie positive tridiagonale, en fonction de la vitesse $x$ de Jacobi : $v_{GS} = 2x$ et $v_{\omega_0} = -\ln(\omega_0-1)\sim2\sqrt2\sqrt x$ quand $x\to0$. Le gain de la relaxation optimale est énorme quand Jacobi est lent ($x$ petit, cas des grands systèmes).`, "Vitesses comparées");
 
 LEMME.exercises([

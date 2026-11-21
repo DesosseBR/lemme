@@ -49,7 +49,8 @@ function toTex0(html) {
   let s = html;
   /* Figures SVG : converties en PDF (tex/fig/<empreinte>.pdf) puis incluses avec leur légende */
   s = s.replace(/<figure class="fig">\s*(<svg[\s\S]*?<\/svg>)\s*<figcaption>([\s\S]*?)<\/figcaption>\s*<\/figure>/g, (_, svg, cap) => {
-    const h = crypto.createHash("sha1").update(svg).digest("hex").slice(0, 16);
+    /* « fx1 » : figures passées par assets/figs.js (étiquettes LaTeX) ; changer ce préfixe force leur régénération */
+    const h = crypto.createHash("sha1").update("fx1" + svg).digest("hex").slice(0, 16);
     const w = +(svg.match(/viewBox="0 0 (\d+)/) || [0, 360])[1];
     FIGS.set(h, svg);
     return keep(`\n\\begin{center}\\includegraphics[width=${Math.min(0.62, w / 360 * 0.55).toFixed(2)}\\linewidth]{${path.join(ROOT, "tex", "fig", h + ".pdf")}}\\par\\vspace{0.2em}{\\small\\color{black!70}${toTex(cap)}\\par}\\end{center}\n`);

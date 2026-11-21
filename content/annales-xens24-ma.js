@@ -50,7 +50,7 @@ const omegaFig = (() => {
   const pref = new Float64Array(N + 1);
   for (let n = 1; n <= N; n++) pref[n] = pref[n - 1] + w[n];
   const mean = (t) => { const x = Math.floor(Math.pow(10, t)); return pref[Math.min(x, N)] / Math.min(x, N); };
-  return GRAPH({ w: 440, h: 230, x: [1, 5], y: [0.5, 3], xt: [1, 2, 3, 4, 5], xtl: ["10", "10²", "10³", "10⁴", "10⁵"], yt: [1, 2, 3], xl: "x", curves: [{ f: mean, c: "b", lab: [3.9, 2.25, "moyenne de ω(n), n ≤ x"] }, { f: (t) => Math.log(t * Math.log(10)), c: "r", dash: true, lab: [1.25, 0.75, "ln ln x"] }, { f: (t) => Math.log(t * Math.log(10)) + 0.2615, c: "k", lab: [1.4, 1.45, "ln ln x + 0,26"] }] }, R`La moyenne $\frac1x\sum_{n\leqslant x}\omega(n)$ (bleu, calculée par un crible) suit $\ln_2x+c_1$ avec $c_1\approx0{,}2615$ (constante de Mertens) : elle croît extrêmement lentement.`, "Nombre moyen de facteurs premiers");
+  return GRAPH({ w: 440, h: 230, x: [1, 5], y: [0.5, 3], xt: [1, 2, 3, 4, 5], xtl: ["10", "10²", "10³", "10⁴", "10⁵"], yt: [1, 2, 3], xl: "x", curves: [{ f: mean, c: "b" }, { f: (t) => Math.log(t * Math.log(10)), c: "r", dash: true }, { f: (t) => Math.log(t * Math.log(10)) + 0.2615, c: "k" }], legendAt: [1.15, 2.85], legend: [{ c: "b", t: "moyenne de ω(n), n ≤ x" }, { c: "k", t: "ln ln x + 0,26" }, { c: "r", dash: 1, t: "ln ln x" }] }, R`La moyenne $\frac1x\sum_{n\leqslant x}\omega(n)$ (bleu, calculée par un crible) suit $\ln_2x+c_1$ avec $c_1\approx0{,}2615$ (constante de Mertens) : elle croît extrêmement lentement.`, "Nombre moyen de facteurs premiers");
 })();
 
 LEMME.exercises([

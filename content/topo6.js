@@ -12,7 +12,7 @@ const poly = (X, Y, pts, cls, st = "") => `<polygon points="${pts.map(([x, y]) =
 const ell = a => Array.from({ length: 160 }, (_, k) => { const t = k * Math.PI / 80, r = 1 / Math.sqrt(1 + a * Math.sin(2 * t)); return [r * Math.cos(t), r * Math.sin(t)]; });
 const figNa = GRAPH({ w: 380, h: 340, x: [-2.4, 2.4], y: [-2.1, 2.1], xt: [-2, -1, 1, 2], xtl: ["−2", "−1", "1", "2"], yt: [-2, -1, 1, 2], ytl: ["−2", "−1", "1", "2"], xl: "x", yl: "y",
   extra: (X, Y) => poly(X, Y, ell(0), "vb", "fill:none;stroke-width:2") + poly(X, Y, ell(0.5), "vr", "fill:none;stroke-width:2") + poly(X, Y, ell(-0.8), "vg", "fill:none;stroke-width:2")
-    + S(X(0.75), Y(0.85), "a = 0", "start", "sm b") + S(X(1.15), Y(-1.2), "a = 1/2", "start", "sm r") + S(X(-2.3), Y(1.6), "a = −0,8", "start", "sm g") },
+    + S(X(1.78), Y(0.42), "a = 0", "start", "sm b") + `<line x1="${X(1.75)}" y1="${Y(0.36)}" x2="${X(0.99)}" y2="${Y(0.2)}" style="stroke:var(--muted);stroke-width:.8"/>` + S(X(1.15), Y(-1.2), "a = 1/2", "start", "sm r") + S(X(-2.3), Y(1.6), "a = −0,8", "start", "sm g") },
   R`Boules unités de $N_a(x,y) = \sqrt{x^2+2axy+y^2}$ : le disque pour $a = 0$ (bleu), une ellipse allongée le long de la seconde bissectrice pour $a = \frac12$ (rouge) et étirée le long de la première pour $a = -0{,}8$ (orange). Quand $a\to\pm1$, l'ellipse s'allonge à l'infini : ce n'est plus une norme.`, "Boules unités des normes Nₐ");
 LEMME.exercises([
 { id: "topo-93", ...P, level: 1, time: "15 min",

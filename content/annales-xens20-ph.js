@@ -40,21 +40,22 @@ const F_PW = fig(440, 200, "Décomposition en ondes planes",
   T(340, 30, "k = α e_x + γ e_z", "r") + `<path class="thin" fill="none" d="M260,100 A60,60 0 0,0 252,71"/>` + T(268, 86, "θ", "it") + T(80, 60, "|k| = ω/c", "sm"),
   "Chaque terme de l'intégrale est une onde plane de vecteur d'onde $\\alpha\\vec e_x+\\gamma\\vec e_z$, de norme $\\frac\\omega c$, inclinée de $\\theta$ ($\\tan\\theta = \\frac\\alpha\\gamma$) ; $A(\\alpha)$ est son amplitude.");
 
-const F_SINC = fig(460, 200, "Amplitude A(alpha) derrière une fente",
-  `<line class="ax" x1="20" y1="150" x2="440" y2="150"/><line class="ax" x1="230" y1="190" x2="230" y2="14"/>` + path(fn(u => sinc(u), -4.4 * Math.PI, 4.4 * Math.PI, 600, u => 230 + 14.5 * u, v => 150 - 120 * v), "vb") +
-  [-3, -1, 1, 3].map(k => Tc(230 + 14.5 * k * Math.PI, 168, (k < 0 ? "−" : "") + 2 * Math.abs(k) + "π/W₀", "sm", 11)).join("") + T(236, 26, "W₀E₀", "sm") + T(430, 144, "α", "it") + T(236, 12, "A(α)", "sm"),
+const F_SINC = fig(460, 222, "Amplitude A(alpha) derrière une fente",
+  `<line class="ax" x1="20" y1="150" x2="440" y2="150"/><line class="ax" x1="230" y1="182" x2="230" y2="14"/>` + path(fn(u => sinc(u), -4.4 * Math.PI, 4.4 * Math.PI, 600, u => 230 + 14.5 * u, v => 150 - 120 * v), "vb") +
+  [-3, -1, 1, 3].map(k => `<line class="ax" x1="${(230 + 14.5 * k * Math.PI).toFixed(1)}" y1="146" x2="${(230 + 14.5 * k * Math.PI).toFixed(1)}" y2="154"/><text class="sm" x="${(230 + 14.5 * k * Math.PI).toFixed(1)}" y="200" text-anchor="middle" data-tex="${k < 0 ? "-" : ""}\\dfrac{${2 * Math.abs(k)}\\pi}{W_0}">·</text>`).join("") +
+  `<line class="ax" x1="225" y1="30" x2="235" y2="30"/>` + `<text class="sm" x="219" y="34" text-anchor="end">W₀E₀</text>` + T(432, 144, "α", "it") + T(238, 14, "A(α)", "sm"),
   "$A(\\alpha) = W_0E_0\\,\\dfrac{\\sin(\\alpha W_0/2)}{\\alpha W_0/2}$ : maximum en $\\alpha = 0$, zéros en $\\alpha = \\frac{2m\\pi}{W_0}$, lobes secondaires de plus en plus faibles.");
 
-const F_LENS = fig(480, 230, "Lentille et plan focal",
+const F_LENS = fig(500, 230, "Lentille et plan focal",
   `<line class="ax" x1="20" y1="115" x2="460" y2="115"/><ellipse cx="200" cy="115" rx="8" ry="95" class="bx"/>` + `<line class="bold" x1="400" y1="20" x2="400" y2="210"/>` + T(406, 30, "plan focal", "sm") + Tc(200, 226, "lentille (L)", "sm") +
   [70, 115, 160].map(y => `<line class="vb" x1="30" y1="${y}" x2="200" y2="${y}"/><line class="vb" x1="200" y1="${y}" x2="400" y2="115"/>`).join("") +
   [60, 105, 150].map(y => `<line class="vr" x1="30" y1="${y - 40}" x2="200" y2="${y}"/><line class="vr" x1="200" y1="${y}" x2="400" y2="${115 + 200 * 0.235}"/>`).join("") + `<line class="vr" x1="200" y1="115" x2="400" y2="${115 + 200 * 0.235}" style="stroke-dasharray:4 3"/>` +
-  `<circle cx="400" cy="115" r="4" class="mass"/>` + T(408, 112, "F′", "it") + `<circle cx="400" cy="${115 + 47}" r="4" class="mass"/>` + T(408, 166, "x = f′ tan θ", "r") + `<line class="thin" x1="200" y1="200" x2="400" y2="200"/>` + Tc(300, 196, "f′", "it"),
+  `<circle cx="400" cy="115" r="4" class="mass"/>` + T(408, 112, "F′", "it") + `<circle cx="400" cy="${115 + 47}" r="4" class="mass"/>` + T(412, 176, "x = f′ tan θ", "r") + `<line class="thin" x1="200" y1="200" x2="400" y2="200"/>` + Tc(300, 196, "f′", "it"),
   "Des rayons parallèles à l'axe convergent en $F'$ ; des rayons parallèles entre eux, inclinés de $\\theta$, convergent au point du plan focal d'abscisse $x = f'\\tan\\theta\\approx f'\\theta$ (on suit le rayon qui passe par le centre, non dévié).");
 
-const F_FOC = fig(460, 190, "Figure de diffraction dans le plan focal",
+const F_FOC = fig(460, 204, "Figure de diffraction dans le plan focal",
   `<line class="ax" x1="20" y1="160" x2="440" y2="160"/><line class="ax" x1="230" y1="170" x2="230" y2="14"/>` + path(fn(u => sinc(u) ** 2, -3.3 * Math.PI, 3.3 * Math.PI, 600, u => 230 + 19 * u, v => 160 - 130 * v), "vr") +
-  `<line class="thin" x1="${230 - 19 * Math.PI}" y1="176" x2="${230 + 19 * Math.PI}" y2="176"/>` + Tc(230, 188, "2Δx = 2λf′/W₀", "sm") + T(436, 154, "x", "it") + T(236, 20, "intensité ∝ |A|²", "sm"),
+  `<line class="thin" x1="${230 - 19 * Math.PI}" y1="166" x2="${230 - 19 * Math.PI}" y2="180"/><line class="thin" x1="${230 + 19 * Math.PI}" y1="166" x2="${230 + 19 * Math.PI}" y2="180"/>` + ar(230, 176, 230 - 19 * Math.PI, 176) + ar(230, 176, 230 + 19 * Math.PI, 176) + Tc(230, 198, "2Δx = 2λf′/W₀", "sm") + T(436, 154, "x", "it") + T(236, 20, "intensité ∝ |A|²", "sm"),
   "Sur le capteur, l'intensité reproduit $|A(\\alpha)|^2$ avec $x = f'\\frac\\alpha k$ : une tache centrale de largeur $2\\Delta x$ et des taches latérales $20$ fois moins intenses.");
 
 const F_WAIST = fig(480, 220, "Largeur du faisceau gaussien",
@@ -74,13 +75,17 @@ const F_WF = fig(480, 200, "Surfaces d'onde du faisceau",
 
 const F_LOR = fig(460, 200, "Réponse de l'électron élastiquement lié",
   `<line class="ax" x1="30" y1="170" x2="440" y2="170"/><line class="ax" x1="40" y1="180" x2="40" y2="14"/>` + T(430, 186, "ω", "it") + T(46, 18, "|r_e,0|", "sm") +
-  path(fn(w => 1 / Math.sqrt((1 - w * w) ** 2 + 0.0025 * w * w), 0, 2, 600, w => 40 + 190 * w, v => 170 - 18 * Math.min(v, 8.5)), "vb") +
+  [[0, 0.9995], [1.0005, 2]].map(([a, b]) => path(fn(w => 1 / Math.sqrt((1 - w * w) ** 2 + 0.0025 * w * w), a, b, 400, w => 40 + 190 * w, v => 170 - 18 * v).filter(p => p[1] >= 16), "vb")).join("") +
   `<rect x="${40 + 190 * 0.045}" y="20" width="${190 * 0.07}" height="150" class="gr" style="opacity:.5"/>` + T(60, 40, "visible : ω ≈ 0,1 ω₀", "sm") + dash(230, 170, 230, 20) + Tc(230, 186, "ω₀", "it"),
   "Loin sous la résonance ($\\omega\\ll\\omega_0$), la réponse est presque indépendante de $\\omega$ : l'indice varie peu dans le visible. La résonance est dans l'ultraviolet.");
 
-const F_FORCES = fig(460, 240, "Forces sur la bille",
-  beam(230, 120, 30, 50, 100, "vb") +
-  `<circle cx="250" cy="138" r="8" class="gr"/>` + ar(250, 138, 232, 125, "g") + T(20, 160, "F_g : vers le maximum d'intensité", "g") + ar(250, 138, 250, 98, "r") + T(292, 70, "F_d : sens de propagation", "r") + ar(230, 236, 230, 205, "b") + T(240, 232, "laser", "b") + `<circle cx="230" cy="120" r="3" class="mass"/>` + T(200, 116, "O", "it"),
+const lead = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="stroke:var(--muted);stroke-width:.8"/>`;
+const F_FORCES = fig(480, 284, "Forces sur la bille",
+  beam(190, 140, 30, 50, 112, "vb") + `<line class="thin" x1="190" y1="20" x2="190" y2="258"/>` +
+  `<circle cx="190" cy="140" r="3" class="mass"/>` + `<text class="it" x="178" y="146" text-anchor="end">O</text>` +
+  `<circle cx="214" cy="92" r="9" class="gr"/>` + ar(209.5, 101, 193.4, 133.1, "g") + ar(214, 83, 214, 36, "r") +
+  lead(218, 52, 292, 44) + T(298, 48, "F_d : sens du faisceau", "r") + lead(222, 88, 292, 98) + T(298, 102, "bille", "sm") + lead(203, 118, 292, 152) + T(298, 156, "F_g : vers le col O", "g") +
+  ar(190, 282, 190, 262, "b") + T(198, 278, "laser", "b"),
   "La force de gradient ramène la bille vers le point le plus intense ; la force de diffusion la pousse dans le sens du faisceau. Le piège est stable si la première l'emporte.");
 
 const F_POT = fig(440, 190, "Puits de potentiel et agitation thermique",

@@ -21,7 +21,7 @@ const figLoi = GRAPH({ w: 440, h: 260, x: [0, 4.2], y: [0, 4.2], xt: [1, 2, 3, 4
   extra: (X, Y) => { const p = [0.5, 2], q = [3, 1 / 3], pq = [1.5, 2 / 3], sl = (q[1] - p[1]) / (q[0] - p[0]); let s = "";
     s += `<line x1="${X(0.3).toFixed(1)}" y1="${Y(p[1] + sl * (0.3 - p[0])).toFixed(1)}" x2="${X(3.7).toFixed(1)}" y2="${Y(p[1] + sl * (3.7 - p[0])).toFixed(1)}" class="vk" style="stroke-width:1.2"/>`;
     s += `<line x1="${X(0.2).toFixed(1)}" y1="${Y(1 + sl * (0.2 - 1)).toFixed(1)}" x2="${X(2.6).toFixed(1)}" y2="${Y(1 + sl * (2.6 - 1)).toFixed(1)}" class="vr" style="stroke-width:1.4;stroke-dasharray:5 4"/>`;
-    [[p, "p = (½, 2)", "ptb"], [q, "q = (3, ⅓)", "ptb"], [[1, 1], "(1, 1)", "pt"], [pq, "p ⋆ q = (3/2, 2/3)", "ptr"]].forEach(([[x, y], t, c]) => { s += `<circle cx="${X(x).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="4.5" class="${c}"/>` + S(X(x) + 8, Y(y) + (c === "ptr" ? 20 : -8), t, "start", c === "ptr" ? "sm r" : "sm"); });
+    [[p, "p = (½, 2)", "ptb"], [q, "q = (3, ⅓)", "ptb"], [[1, 1], "(1, 1)", "pt"], [pq, "p ⋆ q = (3/2, 2/3)", "ptr"]].forEach(([[x, y], t, c]) => { s += `<circle cx="${X(x).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="4.5" class="${c}"/>` + (c === "ptr" ? S(X(x) - 8, Y(y) + 18, t, "end", "sm r") : S(X(x) + 8, Y(y) - 8, t, "start", "sm")); });
     return s; } },
   R`Loi de groupe sur l'hyperbole $XY = 1$ : $p\star q$ est le second point d'intersection de l'hyperbole avec la parallèle à $(pq)$ passant par le neutre $(1,1)$ (pointillés rouges). Le calcul (Q1) montre que $p\star q$ est le produit coordonnée par coordonnée.`, "Loi de groupe sur une hyperbole");
 
@@ -29,7 +29,7 @@ const figLoi = GRAPH({ w: 440, h: 260, x: [0, 4.2], y: [0, 4.2], xt: [1, 2, 3, 4
 const figPell = GRAPH({ w: 460, h: 260, x: [-20, 20], y: [-14, 14], xt: [-17, 17], yt: [-12, 12], xl: "x", yl: "y",
   curves: [],
   extra: (X, Y) => { let s = ""; for (const sg of [1, -1]) { let d = ""; for (let k = 0; k <= 200; k++) { const y = -14 + 28 * k / 200, x = sg * Math.sqrt(1 + 2 * y * y); d += (k ? "L" : "M") + X(x).toFixed(1) + " " + Y(y).toFixed(1); } s += `<path d="${d}" class="vb" style="fill:none;stroke-width:1.8"/>`; }
-    [[1, 0, "1"], [3, 2, "ε"], [17, 12, "ε²"], [3, -2, "ε⁻¹"], [17, -12, "ε⁻²"], [-1, 0, "−1"], [-3, 2, "−ε⁻¹"], [-3, -2, "−ε"], [-17, 12, "−ε⁻²"], [-17, -12, "−ε²"]].forEach(([x, y, t]) => { s += `<circle cx="${X(x).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="4.5" class="${x > 0 ? "ptr" : "ptb"}"/>` + S(X(x) + (x > 0 ? 8 : -8), Y(y) + 4, t, x > 0 ? "start" : "end", "sm"); });
+    [[1, 0, "1"], [3, 2, "ε"], [17, 12, "ε²"], [3, -2, "ε⁻¹"], [17, -12, "ε⁻²"], [-1, 0, "−1"], [-3, 2, "−ε⁻¹"], [-3, -2, "−ε"], [-17, 12, "−ε⁻²"], [-17, -12, "−ε²"]].forEach(([x, y, t]) => { s += `<circle cx="${X(x).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="4.5" class="${x > 0 ? "ptr" : "ptb"}"/>` + (Math.abs(x) === 1 ? S(X(x), Y(y) + 17, t, "middle", "sm") : S(X(x) + (x > 0 ? 8 : -8), Y(y) + 4, t, x > 0 ? "start" : "end", "sm")); });
     return s; } },
   R`Les solutions entières de $x^2-2y^2 = 1$ sur l'hyperbole, étiquetées par $\theta(x,y) = x+y\sqrt2$, avec $\varepsilon = 3+2\sqrt2$ : $(3,2)$, $(17,12)$, $(99,70)$… Elles forment le groupe $\{\pm\varepsilon^n,\ n\in\mathbb Z\}\simeq\mathbb Z/2\mathbb Z\times\mathbb Z$ ; la branche $x>0$ correspond à $+\varepsilon^n$.`, "Solutions de x² − 2y² = 1");
 

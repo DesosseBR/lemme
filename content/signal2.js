@@ -33,21 +33,21 @@ const rd1 = GRAPH({ w: 520, h: 200, x: [0, 3], y: [-1.15, 1.15], xt: [0.5, 1, 1.
 const rd2 = GRAPH({ w: 520, h: 200, x: [0, 3], y: [-1.15, 1.15], xt: [0.5, 1, 1.5, 2, 2.5, 3], xtl: ["T/2", "T", "3T/2", "2T", "5T/2", "3T"], yt: [-1, 1], ytl: ["−A", "A"], xl: "t",
   curves: [{ f: t => Math.cos(2 * Math.PI * t), c: "b", dash: true }, { f: t => Math.abs(Math.cos(2 * Math.PI * t)), c: "r" }] },
   R`Double alternance : les alternances négatives sont retournées ; la période devient $T/2$.`, "Signal redressé double alternance");
-const sp5a = SPEC({ w: 440, h: 210, x: [-0.3, 5], y: [0, 0.6], xt: [0, 1, 2, 3, 4], xtl: ["0", "f", "2f", "3f", "4f"], yt: [], xl: "fréquence" },
+const sp5a = SPEC({ w: 440, h: 210, x: [-0.3, 5.6], y: [0, 0.6], xt: [0, 1, 2, 3, 4], xtl: ["0", "f", "2f", "3f", "4f"], yt: [], xl: "fréquence" },
   [[0, 1 / Math.PI, "r", "A/π"], [1, 0.5, "r", "A/2"], [2, 2 / (3 * Math.PI), "r", "2A/3π"], [4, 2 / (15 * Math.PI), "r", "2A/15π"]], R`Spectre du signal redressé simple alternance : raies en $0$, $f$, $2f$, $4f$, $6f$… (pas de raie en $3f$, $5f$…).`, "Spectre simple alternance");
-const sp5b = SPEC({ w: 440, h: 210, x: [-0.3, 5], y: [0, 0.75], xt: [0, 1, 2, 3, 4], xtl: ["0", "f", "2f", "3f", "4f"], yt: [], xl: "fréquence" },
+const sp5b = SPEC({ w: 440, h: 210, x: [-0.3, 5.6], y: [0, 0.75], xt: [0, 1, 2, 3, 4], xtl: ["0", "f", "2f", "3f", "4f"], yt: [], xl: "fréquence" },
   [[0, 2 / Math.PI, "r", "2A/π"], [2, 4 / (3 * Math.PI), "r", "4A/3π"], [4, 4 / (15 * Math.PI), "r", "4A/15π"]], R`Spectre du signal redressé double alternance : raies en $0$, $2f$, $4f$… La composante continue est doublée et la première raie non nulle est repoussée en $2f$.`, "Spectre double alternance");
 
 /* ===== Exercice 6 ===== */
 const saw = t => { const u = (((t + 0.5) % 1) + 1) % 1; return 2 * u - 1; };
 const fig6s = GRAPH({ w: 480, h: 200, x: [-0.6, 2], y: [-1.3, 1.3], xt: [-0.5, 0.5, 1, 1.5], xtl: ["−T/2", "T/2", "T", "3T/2"], yt: [-1, 1], ytl: ["−Sₘ", "Sₘ"], xl: "t", yl: "s(t)", curves: [{ f: saw, c: "b", n: 1200 }] },
   R`Le signal modulant $s(t)$ : dent de scie de période $T = 1$ ms, impaire, $s(t) = \frac{2S_m}Tt$ sur $\big]-\frac T2,\frac T2\big[$.`, "Signal en dent de scie");
-const fig6am = GRAPH({ w: 520, h: 230, x: [0, 2], y: [-5.5, 5.5], xt: [0.5, 1, 1.5, 2], xtl: ["T/2", "T", "3T/2", "2T"], yt: [-5, -1, 1, 5], xl: "t", yl: "u (V)",
+const fig6am = GRAPH({ w: 520, h: 236, x: [0, 2], y: [-5.5, 5.5], xt: [0.5, 1, 1.5, 2], xtl: ["T/2", "T", "3T/2", "2T"], xtBottom: true, yt: [-5, -1, 1, 5], xl: "t", yl: "u (V)",
   curves: [{ f: t => 3 * (1 + 0.67 * saw(t)) * Math.cos(2 * Math.PI * 25 * t), c: "r", n: 2400 }, { f: t => 3 * (1 + 0.67 * saw(t)), c: "b", dash: true, n: 1200 }, { f: t => -3 * (1 + 0.67 * saw(t)), c: "b", dash: true, n: 1200 }] },
   R`Signal modulé $u_{AM}(t)$ (rouge) et son enveloppe $\pm U_p\big(1+ks(t)\big)$ (pointillés), qui varie entre $1$ V et $5$ V. Pour la lisibilité, la porteuse est dessinée avec $25$ oscillations par période de $s$ au lieu de $100$.`, "Signal modulé en amplitude");
 const fig6sp = SPEC({ w: 440, h: 210, x: [0, 6], y: [0, 0.75], xt: [1, 2, 3, 4, 5], xtl: ["1", "2", "3", "4", "5"], yt: [], xl: "f (kHz)" },
   [1, 2, 3, 4, 5].map(n => [n, 2 / (n * Math.PI), "b", frs(2 / (n * Math.PI), 2)]), R`Spectre (amplitudes $|b_n|$ en volts) du signal modulant tronqué aux $5$ premiers harmoniques.`, "Spectre de s");
-const fig6am2 = SPEC({ w: 520, h: 220, x: [93.5, 106.5], y: [0, 3.4], xt: [95, 97, 99, 100, 101, 103, 105], yt: [], xl: "f (kHz)" },
+const fig6am2 = SPEC({ w: 520, h: 220, x: [93.5, 108.5], y: [0, 3.4], xt: [95, 97, 99, 100, 101, 103, 105], yt: [], xl: "f (kHz)" },
   [[100, 3, "r", "3"]].concat([1, 2, 3, 4, 5].flatMap(n => { const a = 0.67 * 3 * (2 / (n * Math.PI)) / 2; return [[100 + n, a, "b", frs(a, 2)], [100 - n, a, "b", ""]]; })),
   R`Spectre de $u_{AM}$ : la porteuse à $100$ kHz (rouge) et deux bandes latérales symétriques (bleu), d'amplitudes $\frac{kU_p|b_n|}2$, aux fréquences $f_p\pm nf$. Largeur totale : $10$ kHz.`, "Spectre du signal modulé");
 
@@ -55,11 +55,11 @@ const fig6am2 = SPEC({ w: 520, h: 220, x: [93.5, 106.5], y: [0, 3.4], xt: [95, 9
 const x7 = t => Math.cos(2 * Math.PI * 50 * t) + Math.cos(2 * Math.PI * 100 * t) + Math.cos(2 * Math.PI * 300 * t);
 const y7 = t => Math.cos(2 * Math.PI * 50 * t) + Math.cos(2 * Math.PI * 100 * t) + Math.cos(2 * Math.PI * 200 * t);
 const sp7a = SPEC({ w: 480, h: 190, x: [0, 1100], y: [0, 1.3], xt: [50, 100, 300, 500, 1000], yt: [], xl: "f (Hz)" }, [[50, 1, "b"], [100, 1, "b"], [300, 1, "b"]], R`Spectre du signal analogique : trois raies de même amplitude.`, "Spectre analogique");
-const sp7b = SPEC({ w: 480, h: 230, x: [0, 1100], y: [0, 1.3], xt: [50, 100, 200, 250, 300, 500, 1000], yt: [], xl: "f (Hz)",
+const sp7b = SPEC({ w: 480, h: 230, x: [0, 1200], y: [0, 1.3], xt: [50, 100, 200, 250, 300, 500, 1000], yt: [], xl: "f (Hz)",
   more: (X, Y) => `<line x1="${f1(X(250))}" y1="${f1(Y(1.25))}" x2="${f1(X(250))}" y2="${f1(Y(0))}" style="stroke:var(--muted);stroke-dasharray:4 4"/>` + S(X(250) + 4, Y(1.2), "fₑ/2") },
   [[50, 1, "b"], [100, 1, "b"], [300, 1, "b"], [450, 1, "g"], [400, 1, "g"], [200, 1, "r"], [550, 1, "g"], [600, 1, "g"], [800, 1, "r"], [700, 1, "r"], [950, 1, "g"], [900, 1, "g"], [1050, 1, "g"]],
   R`Spectre du signal échantillonné à $f_e = 500$ Hz : les raies d'origine (bleu), leurs copies autour de $f_e$, $2f_e$… (vert), et les copies issues de $300$ Hz (rouge). Dans $[0,f_e/2]$, on trouve $50$, $100$ et $200$ Hz : la raie à $300$ Hz s'est <b>repliée</b> en $200$ Hz.`, "Spectre échantillonné");
-const t7 = GRAPH({ w: 540, h: 240, x: [0, 0.04], y: [-1.6, 3.3], xt: [0.01, 0.02, 0.03, 0.04], xtl: ["10 ms", "20 ms", "30 ms", "40 ms"], yt: [-1, 0, 1, 2, 3], xl: "t",
+const t7 = GRAPH({ w: 540, h: 240, x: [0, 0.04], y: [-1.6, 3.3], xt: [0.01, 0.02, 0.03, 0.04], xtl: ["10 ms", "20 ms", "30 ms", "40 ms"], xtBottom: true, yt: [-1, 0, 1, 2, 3], xl: "t",
   curves: [{ f: x7, c: "b", n: 900 }, { f: y7, c: "r", n: 900, dash: true }],
   extra: (X, Y) => Array.from({ length: 21 }, (_, k) => `<circle cx="${f1(X(k / 500))}" cy="${f1(Y(x7(k / 500)))}" r="3.4" class="pt"/>`).join("") },
   R`Signal analogique (bleu), échantillons à $f_e = 500$ Hz (points) et signal reconstruit (pointillés rouges), où la composante à $300$ Hz est remplacée par une composante à $200$ Hz. Les deux courbes passent par les <b>mêmes</b> échantillons.`, "Repliement");

@@ -12,10 +12,10 @@ LEMME.rappels({
 const fTan = x => { if (x <= -0.97) return NaN; let s = 0; const N = 3000; for (let n = 0; n < N; n++) s += (n % 2 ? -1 : 1) / (x + 2 * n + 1); s += (N % 2 ? -1 : 1) / (2 * (x + 2 * N + 1)); return s > 3.2 ? NaN : s; };
 const figTan = GRAPH({ w: 460, h: 260, x: [-1, 6], y: [0, 3], xt: [-1, 0, 1, 2, 3, 4, 5, 6], xtl: ["−1", "0", "1", "2", "3", "4", "5", "6"], yt: [0.5, 1, 2, 3], ytl: ["0,5", "1", "2", "3"], xl: "x",
   curves: [
-    { f: fTan, c: "b", lab: [0.2, 1.25, "f", "start"] },
-    { f: x => { const v = 1 / (x + 1); return x <= -0.67 || v > 3.2 ? NaN : v; }, c: "g", dash: true, lab: [-0.55, 2.7, "1/(x + 1)", "start"] },
-    { f: x => { if (x < 0.2) return NaN; const v = 1 / (2 * x); return v > 3.2 ? NaN : v; }, c: "r", dash: true, lab: [4.3, 0.32, "1/(2x)", "start"] }
-  ] },
+    { f: fTan, c: "b", },
+    { f: x => { const v = 1 / (x + 1); return x <= -0.67 || v > 3.2 ? NaN : v; }, c: "g", dash: true },
+    { f: x => { if (x < 0.2) return NaN; const v = 1 / (2 * x); return v > 3.2 ? NaN : v; }, c: "r", dash: true }
+  ], legendAt: [3.2, 2.75], legend: [{ c: "b", t: "f" }, { c: "g", dash: 1, t: "1/(x + 1)" }, { c: "r", dash: 1, t: "1/(2x)" }] },
   R`La fonction $f(x) = \int_0^{\pi/4}\tan^x(t)\,dt$ (bleu) explose comme $\frac1{x+1}$ (orange, tirets) quand $x\to-1^+$, et décroît vers $0$ comme $\frac1{2x}$ (rouge, tirets) en $+\infty$.`, "La fonction f et ses deux équivalents");
 LEMME.exercises([
 { id: "ipar-86", ...P, level: 2, time: "25 min",

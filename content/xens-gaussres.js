@@ -15,14 +15,14 @@ LEMME.rappels({
 
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> On veut calculer $I = \int_{-\infty}^{+\infty}e^{-t^2}dt$ (intégrale convergente car $e^{-t^2} = o(\frac1{t^2})$). On pose $a = \sqrt\pi\,e^{i\pi/4} = \sqrt{\frac\pi2}(1+i)$, $g(z) = 1+e^{-2az}$ et $f(z) = \frac{e^{-z^2}}{g(z)}$. Pour $M>0$, $\gamma_M$ est le bord du parallélogramme $D_M = \{x+sa : x\in[-M,M],\ s\in[0,1]\}$, parcouru dans le sens direct ($-M\to M\to M+a\to-M+a\to-M$).</p>`;
 
-const figPar = (() => { const X = x => 230 + 70 * x, Y = y => 220 - 70 * y, ar = Math.sqrt(Math.PI / 2); const M = 2.6; let b = `<line x1="${X(-3.2)}" y1="${Y(0)}" x2="${X(3.4)}" y2="${Y(0)}" class="ax"/><line x1="${X(0)}" y1="${Y(-0.3)}" x2="${X(0)}" y2="${Y(3)}" class="ax"/>`;
+const figPar = (() => { const X = x => 210 + 62 * x, Y = y => 220 - 70 * y, ar = Math.sqrt(Math.PI / 2); const M = 2.6; let b = `<line x1="${X(-3)}" y1="${Y(0)}" x2="${X(3.6)}" y2="${Y(0)}" class="ax"/><line x1="${X(0)}" y1="${Y(-0.3)}" x2="${X(0)}" y2="${Y(3)}" class="ax"/>`;
   const pts = [[-M, 0], [M, 0], [M + ar, ar], [-M + ar, ar]];
   b += `<path d="M${pts.map(([x, y]) => X(x).toFixed(1) + " " + Y(y).toFixed(1)).join(" L")} Z" class="hb" style="opacity:.15"/><path d="M${pts.map(([x, y]) => X(x).toFixed(1) + " " + Y(y).toFixed(1)).join(" L")} Z" class="vb" style="fill:none;stroke-width:2"/>`;
   [[0, 0.5, 1, 0.5], [M + ar / 2, ar / 2, 0.3, 1], [0, ar, -1, 0], [-M + ar / 2, ar / 2, -0.3, -1]].forEach(([x, y, dx, dy]) => { const n = Math.hypot(dx, dy); b += `<path d="M${(X(x) - 7 * dx / n).toFixed(1)} ${(Y(y) + 7 * dy / n).toFixed(1)} L${(X(x) + 7 * dx / n).toFixed(1)} ${(Y(y) - 7 * dy / n).toFixed(1)}" class="vb" style="stroke-width:2.5" marker-end=""/>`; });
   for (let k = -2; k <= 1; k++) { const s = (2 * k + 1) / 2, x = s * ar, y = s * ar; if (Y(y) > 0 && Y(y) < 260) b += `<g transform="translate(${X(x).toFixed(1)},${Y(y).toFixed(1)})"><line x1="-5" y1="-5" x2="5" y2="5" class="vr" style="stroke-width:2.2"/><line x1="-5" y1="5" x2="5" y2="-5" class="vr" style="stroke-width:2.2"/></g>`; }
   b += S(X(ar / 2) + 8, Y(ar / 2) + 4, "a/2", "start", "sm r") + S(X(3 * ar / 2) + 8, Y(3 * ar / 2) + 4, "3a/2", "start", "sm r") + S(X(ar) + 6, Y(ar) - 6, "a", "start", "sm b");
   b += S(X(-M), Y(0) + 16, "−M", "middle", "sm") + S(X(M), Y(0) + 16, "M", "middle", "sm") + S(X(-M + ar) - 6, Y(ar) - 8, "−M + a", "end", "sm") + S(X(M + ar) + 6, Y(ar) - 8, "M + a", "start", "sm");
-  return FIG(480, 270, b, R`Le contour $\gamma_M$ (bord du parallélogramme bleu) et les pôles $\frac{2k+1}2a$ de $f$ (croix), alignés sur la droite $\mathbb Ra$. Seul $\frac a2$ est à l'intérieur. Le côté haut est le translaté du côté bas par $a$, et $f(z)-f(z+a) = e^{-z^2}$ : les deux côtés horizontaux donnent exactement $\int_{-M}^Me^{-t^2}dt$.`, "Contour d'intégration"); })();
+  return FIG(500, 270, b, R`Le contour $\gamma_M$ (bord du parallélogramme bleu) et les pôles $\frac{2k+1}2a$ de $f$ (croix), alignés sur la droite $\mathbb Ra$. Seul $\frac a2$ est à l'intérieur. Le côté haut est le translaté du côté bas par $a$, et $f(z)-f(z+a) = e^{-z^2}$ : les deux côtés horizontaux donnent exactement $\int_{-M}^Me^{-t^2}dt$.`, "Contour d'intégration"); })();
 
 LEMME.exercises([
 /* ===================== Partie I ===================== */

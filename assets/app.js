@@ -1510,7 +1510,7 @@ function mlChg(host) {
     host.innerHTML = `<p class="mlt">Changement de base : choisis $A$ et les nouveaux vecteurs</p>
       <div class="chgin"><div><span>$A$</span><div class="mlin" style="grid-template-columns:repeat(2,60px)">${A.flat().map((v, i) => `<input value="${v}" data-a="${i}" inputmode="numeric">`).join("")}</div></div>
       <div><span style="color:#1F8A5B">$e'_1$, $e'_2$ (en colonnes)</span><div class="mlin" style="grid-template-columns:repeat(2,60px)">${[E[0][0], E[1][0], E[0][1], E[1][1]].map((v, i) => `<input value="${v}" data-e="${i}" inputmode="numeric">`).join("")}</div></div>
-      <svg viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Vecteurs de la nouvelle base et leurs images"><defs>${mk}</defs>${grid}${arrow(E[0], "#1F8A5B")}${arrow(E[1], "#1F8A5B")}${arrow(img(E[0]), "#2B5BD7", 1)}${arrow(img(E[1]), "#2B5BD7", 1)}</svg></div>
+      <svg class="fx-auto" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Vecteurs de la nouvelle base et leurs images"><defs>${mk}</defs>${grid}${arrow(E[0], "#1F8A5B")}${arrow(E[1], "#1F8A5B")}${arrow(img(E[0]), "#2B5BD7", 1)}${arrow(img(E[1]), "#2B5BD7", 1)}</svg></div>
       <p class="mlnote"><span style="color:#1F8A5B">vert</span> : $e'_1$, $e'_2$ · <span style="color:#2B5BD7">bleu pointillé</span> : leurs images $f(e'_1)$, $f(e'_2)$</p>
       ${body}
       <div class="mlnav"><button type="button" class="btn btn-ghost btn-sm" data-ex>Exemple qui se diagonalise</button><button type="button" class="btn btn-ghost btn-sm" data-rnd>Au hasard</button></div>`;
@@ -3366,7 +3366,7 @@ function mlPerm(host) {
     const defs = COL.map((c, i) => `<marker id="ah${i}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join("");
     host.innerHTML = `<p class="mlt">Permutation : clique deux nombres de la ligne du bas pour les échanger</p>
       <div class="permrow"><table class="mx ptab"><tr>${p.map((_, i) => `<td>${i + 1}</td>`).join("")}</tr><tr>${p.map((v, i) => `<td class="pv${sel === i ? " on" : ""}" data-i="${i}" style="color:${colOf(i + 1)}">${v}</td>`).join("")}</tr></table>
-      <svg viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="Graphe de la permutation"><defs>${defs}</defs>${arrows}${nodes}</svg></div>
+      <svg class="fx-auto" viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="Graphe de la permutation"><defs>${defs}</defs>${arrows}${nodes}</svg></div>
       <p class="mlcalc">$\\sigma = ${cs.length ? cs.map(c => `(${c.join("\\ ")})`).join("") : "\\mathrm{id}"}$ &nbsp;·&nbsp; $${N}$ inversions &nbsp;·&nbsp; $\\varepsilon(\\sigma) = (-1)^{${N}} = ${eps}$${cs.length ? ` &nbsp;·&nbsp; par les cycles : $(-1)^{${cs.map(c => c.length - 1).join(" + ")}} = ${eps}$` : ""}</p>
       <p class="mlcalc">${cs.length ? cs.map((c, i) => `$\\textcolor[RGB]{${[1, 3, 5].map(x => parseInt(COL[i % COL.length].slice(x, x + 2), 16)).join(",")}}{${c.concat(c[0]).join("\\to")}}$`).join(" &nbsp; ") : "Tous les nombres sont fixes."}</p>
       <p class="mlnote">Inversions (paires $i\\lt j$ avec $\\sigma(i)\\gt\\sigma(j)$) : ${(() => { const L = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (p[i] > p[j]) L.push(`$(${i + 1},${j + 1})$`); return L.length ? L.join(", ") : "aucune"; })()}</p>
@@ -3828,6 +3828,28 @@ function tokens() {
 }
 function niceStep(range, target) { const raw = range / target, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
 const fmt = v => { const a = Math.abs(v); return (a !== 0 && (a < 0.01 || a >= 1e4)) ? v.toExponential(1) : String(+v.toFixed(3)).replace(".", ","); };
+/* Étiquettes d'un canevas (axes, graduations, repères) : composées en LaTeX par MathJax dans une couche HTML posée sur le canevas,
+   comme les étiquettes des figures SVG (assets/figs.js). Seul le texte qui change est recomposé. */
+/* légende d'un graphique : texte brut (sin x / x, u_n, ω₀…) vers LaTeX */
+const legTex = t => /\$/.test(String(t)) ? String(t) : window.LemmeFigs ? "$" + LemmeFigs.toTeX(String(t)) + "$" : esc(String(t));
+const fmtTex = v => { const a = Math.abs(v); if (a !== 0 && (a < 0.01 || a >= 1e4)) { const [m, e] = v.toExponential(1).split("e"); return `${m.replace(".", "{,}")}\\cdot10^{${+e}}`; } return String(+v.toFixed(3)).replace(".", "{,}").replace("-", "-"); };
+function texLayer(cv) {
+  let ov = cv.parentElement && cv.parentElement.classList.contains("viz-wrap") ? cv.parentElement.querySelector(":scope > .viz-ov") : null;
+  if (!ov) { const wrap = document.createElement("div"); wrap.className = "viz-wrap"; cv.replaceWith(wrap); wrap.appendChild(cv); ov = document.createElement("div"); ov.className = "viz-ov"; ov.setAttribute("aria-hidden", "true"); wrap.appendChild(ov); }
+  const pool = new Map();
+  return items => {
+    const seen = new Set();
+    for (const it of items) {
+      let el = pool.get(it.k);
+      if (!el) { el = document.createElement("span"); pool.set(it.k, el); ov.appendChild(el); }
+      const tex = it.tex != null ? it.tex : window.LemmeFigs ? LemmeFigs.toTeX(String(it.t)) : String(it.t);
+      if (el.dataset.t !== tex) { el.dataset.t = tex; el.textContent = "$" + tex + "$"; if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(() => {}); }
+      el.style.left = it.x.toFixed(1) + "px"; el.style.top = it.y.toFixed(1) + "px"; el.style.transform = `translate(${-(it.ax || 0) * 100}%, ${-(it.ay || 0) * 100}%)`;
+      el.className = it.cls || ""; seen.add(it.k);
+    }
+    for (const [k, el] of pool) if (!seen.has(k)) { el.remove(); pool.delete(k); }
+  };
+}
 function mountViz(host, spec) {
   if (spec.type === "lab") { const pb = host.closest(".panelbox"); if (pb) pb.id = "lab-" + spec.mode; return mountLab(host, spec); }
   if (spec.type === "dicho") return mountDicho(host);
@@ -3836,8 +3858,8 @@ function mountViz(host, spec) {
   const p = {}; (spec.params || []).forEach(x => p[x.k] = x.v);
   host.innerHTML = `${(spec.params || []).length ? `<div class="viz-ctrl">${spec.params.map(x => `<div><label for="vz-${x.k}">${x.label}<output id="vo-${x.k}">${fmt(x.v)}${x.unit ? " " + x.unit : ""}</output></label><input type="range" id="vz-${x.k}" min="${x.min}" max="${x.max}" step="${x.step}" value="${x.v}"></div>`).join("")}</div>` : ""}
     <canvas class="viz-canvas" role="img" aria-label="${esc((spec.title || "Graphique").replace(/\$/g, ""))}"></canvas>
-    <div class="viz-legend">${[...(spec.curves || spec.series || []).map((c, k) => `<span><i data-c="${k}"></i>${esc(c.label)}</span>`), ...(spec.hlines || []).concat(spec.vlines || []).map(l => `<span><i style="background:none;border-top:2px dashed currentColor;height:0"></i>${esc(l.label)}</span>`)].join("")}</div>`;
-  const cv = $("canvas", host);
+    <div class="viz-legend">${[...(spec.curves || spec.series || []).map((c, k) => `<span><i data-c="${k}"></i>${legTex(c.label)}</span>`), ...(spec.hlines || []).concat(spec.vlines || []).map(l => `<span><i style="background:none;border-top:2px dashed currentColor;height:0"></i>${legTex(l.label)}</span>`)].join("")}</div>`;
+  const cv = $("canvas", host), labs = texLayer(cv);
   (spec.params || []).forEach(x => $(`#vz-${x.k}`, host).addEventListener("input", ev => { p[x.k] = +ev.target.value; $(`#vo-${x.k}`, host).textContent = fmt(p[x.k]) + (x.unit ? " " + x.unit : ""); draw(); }));
   function draw() {
     const T = tokens();
@@ -3850,13 +3872,13 @@ function mountViz(host, spec) {
     const [x0, x1] = seq ? [spec.n[0] - 0.6, spec.n[1] + 0.6] : spec.x, [y0, y1] = spec.y;
     const X = x => m.l + (x - x0) / (x1 - x0) * pw, Y = y => m.t + (1 - (y - y0) / (y1 - y0)) * ph;
     g.font = "500 12px " + getComputedStyle(document.body).fontFamily; g.lineWidth = 1;
-    const sy = niceStep(y1 - y0, 5); g.textAlign = "right"; g.textBaseline = "middle";
-    for (let v = Math.ceil(y0 / sy) * sy; v <= y1 + 1e-9; v += sy) { g.strokeStyle = T.line; g.beginPath(); g.moveTo(m.l, Y(v)); g.lineTo(W - m.r, Y(v)); g.stroke(); g.fillStyle = T.muted; g.fillText(fmt(+v.toFixed(10)), m.l - 8, Y(v)); }
-    g.textAlign = "center"; g.textBaseline = "top";
-    if (seq) { const st = Math.max(1, Math.ceil((spec.n[1] - spec.n[0]) / 10)); for (let n = spec.n[0]; n <= spec.n[1]; n += st) { g.fillStyle = T.muted; g.fillText(String(n), X(n), H - m.b + 10); } }
-    else { const sx = niceStep(x1 - x0, 6); for (let v = Math.ceil(x0 / sx) * sx; v <= x1 + 1e-9; v += sx) { g.strokeStyle = T.line; g.beginPath(); g.moveTo(X(v), m.t); g.lineTo(X(v), H - m.b); g.stroke(); g.fillStyle = T.muted; g.fillText(fmt(+v.toFixed(10)), X(v), H - m.b + 10); } }
-    if (spec.xlabel) { g.textAlign = "right"; g.fillStyle = T.muted; g.fillText(spec.xlabel, W - m.r, H - 16); }
-    if (spec.ylabel) { g.textAlign = "left"; g.textBaseline = "top"; g.fillStyle = T.muted; g.fillText(spec.ylabel, m.l + 6, m.t + 2); }
+    const L = [];
+    const sy = niceStep(y1 - y0, 5);
+    for (let v = Math.ceil(y0 / sy) * sy; v <= y1 + 1e-9; v += sy) { g.strokeStyle = T.line; g.beginPath(); g.moveTo(m.l, Y(v)); g.lineTo(W - m.r, Y(v)); g.stroke(); L.push({ k: "y" + v.toFixed(8), tex: fmtTex(+v.toFixed(10)), x: m.l - 8, y: Y(v), ax: 1, ay: 0.5 }); }
+    if (seq) { const st = Math.max(1, Math.ceil((spec.n[1] - spec.n[0]) / 10)); for (let n = spec.n[0]; n <= spec.n[1]; n += st) L.push({ k: "n" + n, tex: String(n), x: X(n), y: H - m.b + 8, ax: 0.5, ay: 0 }); }
+    else { const sx = niceStep(x1 - x0, 6); for (let v = Math.ceil(x0 / sx) * sx; v <= x1 + 1e-9; v += sx) { g.strokeStyle = T.line; g.beginPath(); g.moveTo(X(v), m.t); g.lineTo(X(v), H - m.b); g.stroke(); L.push({ k: "x" + v.toFixed(8), tex: fmtTex(+v.toFixed(10)), x: X(v), y: H - m.b + 8, ax: 0.5, ay: 0 }); } }
+    if (spec.xlabel) L.push({ k: "xl", t: spec.xlabel, x: W - m.r, y: H - 4, ax: 1, ay: 1, cls: "it" });
+    if (spec.ylabel) L.push({ k: "yl", t: spec.ylabel, x: m.l + 6, y: m.t + 2, ax: 0, ay: 0, cls: "it" });
     if (y0 < 0 && y1 > 0) { g.strokeStyle = T.muted; g.globalAlpha = .5; g.beginPath(); g.moveTo(m.l, Y(0)); g.lineTo(W - m.r, Y(0)); g.stroke(); g.globalAlpha = 1; }
     g.save(); g.beginPath(); g.rect(m.l, m.t, pw, ph); g.clip();
     if (seq) {
@@ -3875,9 +3897,10 @@ function mountViz(host, spec) {
       });
     }
     g.setLineDash([5, 5]); g.lineWidth = 1.6; g.strokeStyle = T.muted; g.fillStyle = T.muted;
-    (spec.hlines || []).forEach(l => { const v = l.y(p); g.beginPath(); g.moveTo(m.l, Y(v)); g.lineTo(W - m.r, Y(v)); g.stroke(); g.textAlign = "right"; g.textBaseline = "bottom"; g.fillText(l.label, W - m.r - 6, Y(v) - 4); });
-    (spec.vlines || []).forEach(l => { const v = l.x(p); g.beginPath(); g.moveTo(X(v), m.t); g.lineTo(X(v), H - m.b); g.stroke(); g.textAlign = "left"; g.textBaseline = "top"; g.fillText(l.label, X(v) + 6, m.t + 4); });
+    (spec.hlines || []).forEach((l, i) => { const v = l.y(p); g.beginPath(); g.moveTo(m.l, Y(v)); g.lineTo(W - m.r, Y(v)); g.stroke(); if (v >= y0 && v <= y1) L.push({ k: "h" + i, t: l.label, x: W - m.r - 6, y: Y(v) - 4, ax: 1, ay: 1 }); });
+    (spec.vlines || []).forEach((l, i) => { const v = l.x(p); g.beginPath(); g.moveTo(X(v), m.t); g.lineTo(X(v), H - m.b); g.stroke(); if (v >= x0 && v <= x1) L.push({ k: "v" + i, t: l.label, x: X(v) + 6, y: m.t + 4, ax: 0, ay: 0 }); });
     g.restore(); g.setLineDash([]);
+    labs(L);
   }
   new ResizeObserver(draw).observe(cv);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
@@ -3937,7 +3960,7 @@ function mountTige(host, spec) {
   host.innerHTML = animControls(host, params, p) + `<canvas class="viz-canvas anim" role="img" aria-label="Animation de la perle sur la tige en rotation, vue de dessus"></canvas>
     <div class="anim-bar"><button class="btn btn-yellow btn-sm" type="button" data-play>Lancer</button><button class="btn btn-ghost btn-sm" type="button" data-reset>Recommencer</button><span class="anim-info" aria-live="polite"></span></div>
     <div class="viz-legend"><span><i style="background:var(--red)"></i>Force d'inertie d'entraînement</span><span><i style="background:var(--gold-ink)"></i>Force de Coriolis</span><span><i style="background:var(--blue)"></i>Trajectoire vue du sol</span></div>`;
-  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host);
+  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host), labs = texLayer(cv);
   const L = spec.l, r0 = spec.r0, l0 = spec.l0 || 0;
   let t, r, v, th, trail, running = false, out = false, last = 0;
   const reset = () => { t = 0; r = r0; v = 0; th = 0; trail = [[r0, 0]]; out = false; running = false; play.textContent = "Lancer"; info.textContent = ""; draw(); };
@@ -3959,7 +3982,7 @@ function mountTige(host, spec) {
     g.strokeStyle = T.line; g.lineWidth = 1; g.setLineDash([4, 5]);
     g.beginPath(); g.arc(cx, cy, L * S, 0, 7); g.stroke(); g.setLineDash([]);
     arrowTo(g, cx - L * S - 14, cy, cx + L * S + 22, cy, T.muted, 1.3); arrowTo(g, cx, cy + L * S + 14, cx, cy - L * S - 22, T.muted, 1.3);
-    g.fillStyle = T.muted; g.font = "italic 14px serif"; g.fillText("x", cx + L * S + 14, cy + 18); g.fillText("y", cx + 8, cy - L * S - 14);
+
     g.strokeStyle = T.blue; g.lineWidth = 2; g.beginPath();
     trail.forEach(([rr, a], k) => { const X = cx + rr * S * Math.cos(a), Y = cy - rr * S * Math.sin(a); k ? g.lineTo(X, Y) : g.moveTo(X, Y); }); g.stroke();
     const c = Math.cos(th), sn = Math.sin(th);
@@ -3972,7 +3995,8 @@ function mountTige(host, spec) {
     arrowTo(g, bx, by, bx + cap(fie * K) * c, by - cap(fie * K) * sn, T.red, 2.8);
     arrowTo(g, bx, by, bx + cap(fic * K) * (-sn), by - cap(fic * K) * c, T.gold, 2.8);
     g.fillStyle = T.yellow; g.strokeStyle = T.ink; g.lineWidth = 1.6; g.beginPath(); g.arc(bx, by, 8, 0, 7); g.fill(); g.stroke();
-    g.fillStyle = T.ink; g.beginPath(); g.arc(cx, cy, 3.5, 0, 7); g.fill(); g.font = "italic 14px serif"; g.fillText("O", cx - 16, cy + 16);
+    g.fillStyle = T.ink; g.beginPath(); g.arc(cx, cy, 3.5, 0, 7); g.fill();
+    labs([{ k: "x", tex: "x", x: cx + L * S + 14, y: cy + 8, ax: 0, ay: 0, cls: "it" }, { k: "y", tex: "y", x: cx + 8, y: cy - L * S - 14, ax: 0, ay: 1, cls: "it" }, { k: "O", tex: "O", x: cx - 8, y: cy + 8, ax: 1, ay: 0, cls: "it" }]);
   }
   function loop(ts) {
     if (!cv.isConnected) return;
@@ -3991,8 +4015,8 @@ function mountSismo(host, spec) {
   const params = spec.params || [], p = {}; params.forEach(x => p[x.k] = x.v);
   host.innerHTML = animControls(host, params, p) + `<canvas class="viz-canvas anim tall" role="img" aria-label="Animation du sismomètre et de son enregistrement"></canvas>
     <div class="anim-bar"><button class="btn btn-yellow btn-sm" type="button" data-play>Pause</button><span class="anim-info" aria-live="polite"></span></div>
-    <div class="viz-legend"><span><i style="background:var(--muted)"></i>Mouvement du sol z<sub>s</sub>(t)</span><span><i style="background:var(--blue)"></i>Enregistrement X(t)</span></div>`;
-  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host);
+    <div class="viz-legend"><span><i style="background:var(--muted)"></i>Mouvement du sol $z_s(t)$</span><span><i style="background:var(--blue)"></i>Enregistrement $X(t)$</span></div>`;
+  const cv = $("canvas", host), info = $(".anim-info", host), play = $("[data-play]", host), labs = texLayer(cv);
   let t = 0, running = true, last = performance.now();
   const resp = () => { const x = p.x, Q = p.Q, re = 1 - x * x, im = x / Q, den = re * re + im * im; return { G: x * x / Math.sqrt(den), phi: Math.atan2(-x * x * im, x * x * re) }; };
   function draw() {
@@ -4016,7 +4040,7 @@ function mountSismo(host, spec) {
     g.strokeStyle = T.line; g.lineWidth = 1; g.beginPath(); g.moveTo(cx0, cyM); g.lineTo(cx0 + cw, cyM); g.stroke();
     const plot = (f, color, wd) => { g.strokeStyle = color; g.lineWidth = wd; g.beginPath(); for (let k = 0; k <= 300; k++) { const tt = t - span + span * k / 300, xx = cx0 + cw * k / 300, yy = cyM - f(tt) * A * 1.6; k ? g.lineTo(xx, yy) : g.moveTo(xx, yy); } g.stroke(); };
     plot(zs, T.muted, 1.6); plot(X, T.blue, 2.6);
-    g.fillStyle = T.muted; g.font = "12px sans-serif"; g.fillText("sismogramme", cx0, 18);
+    labs([{ k: "s", t: "sismogramme", x: cx0, y: 8, ax: 0, ay: 0 }]);
     info.textContent = `ω/ω₀ = ${fmt(w)} · amplitude enregistrée / amplitude du sol = ${fmt(+G.toFixed(2))}`;
   }
   function loop(ts) { if (!cv.isConnected) return; if (running) t += Math.min(0.05, (ts - last) / 1000) * 2.2; last = ts; draw(); requestAnimationFrame(loop); }

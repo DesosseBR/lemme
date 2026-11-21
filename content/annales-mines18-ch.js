@@ -10,10 +10,10 @@ const fig = (w, h, label, inner, cap, tall) => `<figure class="fig"><svg viewBox
 
 /* Formule de Lewis de l'éthanol */
 const F_LEWIS = fig(420, 160, "Formule de Lewis de l'éthanol",
-  [[60, "H"], [120, "C"], [190, "C"], [260, "O"], [320, "H"]].map(([x, s]) => Tc(x, 86, s, "", 22)).join("") +
+  `<g data-chem="1">` + [[60, "H"], [120, "C"], [190, "C"], [260, "O"], [320, "H"]].map(([x, s]) => Tc(x, 86, s, "", 22)).join("") +
   [[72, 106], [134, 176], [204, 246], [276, 306]].map(([a, b]) => `<line class="k" x1="${a}" y1="79" x2="${b}" y2="79"/>`).join("") +
   [120, 190].map(x => `<line class="k" x1="${x}" y1="64" x2="${x}" y2="38"/><line class="k" x1="${x}" y1="94" x2="${x}" y2="120"/>` + Tc(x, 32, "H", "", 22) + Tc(x, 144, "H", "", 22)).join("") +
-  `<line class="vr" x1="250" y1="56" x2="270" y2="56"/><line class="vr" x1="250" y1="104" x2="270" y2="104"/>` + T(292, 52, "doublets", "r", 13) + T(292, 68, "non liants", "r", 13),
+  `<line class="vr" x1="250" y1="56" x2="270" y2="56"/><line class="vr" x1="250" y1="104" x2="270" y2="104"/>` + T(292, 52, "doublets", "r", 13) + T(292, 68, "non liants", "r", 13) + `</g>`,
   "Chaque atome de carbone fait 4 liaisons, l'oxygène 2 liaisons et porte 2 doublets non liants.");
 
 /* Diagramme potentiel-pH superposé */
@@ -37,12 +37,12 @@ const F_EPH = (() => {
 
 /* Pile à combustible */
 const F_PILE = fig(520, 270, "Pile à combustible à éthanol",
-  `<path class="k" d="M150,90 Q260,10 370,90"/>` + ar(240, 33, 290, 33, "b") + Tc(265, 22, "e⁻ (circuit extérieur)", "b", 13) +
+  `<g data-chem="1">` + `<path class="k" d="M150,90 Q260,10 370,90"/>` + ar(240, 33, 290, 33, "b") + Tc(265, 22, "e⁻ (circuit extérieur)", "b", 13) +
   `<rect class="bx" x="120" y="90" width="80" height="150"/><rect class="body" x="200" y="90" width="120" height="150"/><rect class="bx" x="320" y="90" width="80" height="150"/>` +
   Tc(160, 258, "anode (−)", "", 13) + Tc(260, 258, "électrolyte acide", "", 13) + Tc(360, 258, "cathode (+)", "", 13) +
   ar(222, 165, 298, 165, "r") + Tc(260, 155, "H⁺", "r", 15) +
   ar(20, 120, 118, 120) + T(8, 112, "CH₃CH₂OH", "", 13) + ar(20, 170, 118, 170) + T(8, 162, "H₂O", "b", 13) + ar(118, 215, 20, 215) + T(8, 207, "CO₂", "b", 13) +
-  ar(500, 130, 402, 130) + T(450, 122, "O₂", "", 13) + ar(402, 200, 500, 200) + T(450, 192, "H₂O", "b", 13),
+  ar(500, 130, 402, 130) + T(450, 122, "O₂", "", 13) + ar(402, 200, 500, 200) + T(450, 192, "H₂O", "b", 13) + `</g>`,
   "En bleu, ce qui était à compléter. Oxydation de l'éthanol à l'anode, réduction de $\\mathrm{O_2}$ à la cathode ; les ions $\\mathrm{H^+}$ traversent l'électrolyte de l'anode vers la cathode.");
 
 /* Face de la maille CFC */

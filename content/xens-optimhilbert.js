@@ -17,12 +17,12 @@ LEMME.rappels({
 const PRE = R`<p class="pl-pre"><b>Cadre.</b> $H$ est un espace de Hilbert réel, et $J : H\to\mathbb R$. On cherche des conditions pour que $\inf_HJ$ soit fini et <b>atteint</b>. On note $\ell^2$ l'espace des suites réelles $x = (x_k)_{k\geqslant1}$ de carré sommable, de produit scalaire $\langle x,y\rangle = \sum x_ky_k$, et $(e_k)$ sa base canonique.</p>`;
 
 /* Figure : extraction diagonale */
-const figDiag = (() => { const c = 34, o = 70, rows = 5, cols = 7; let b = "";
+const figDiag = (() => { const c = 40, o = 116, rows = 5, cols = 7; let b = "";
   const names = ["φ₀", "φ₀∘φ₁", "φ₀∘φ₁∘φ₂", "φ₀∘…∘φ₃", "φ₀∘…∘φ₄"];
   for (let i = 0; i < rows; i++) { b += S(o - 8, 34 + c * i + c / 2 + 4, names[i], "end", "sm"); for (let j = 0; j < cols; j++) { const diag = i === j; b += `<rect x="${o + c * j}" y="${34 + c * i}" width="${c - 4}" height="${c - 4}" rx="4" class="${diag ? "hr" : "thin"}" style="${diag ? "opacity:.85" : "fill:none"}"/>` + S(o + c * j + (c - 4) / 2, 34 + c * i + c / 2 + 3, j === cols - 1 ? "…" : `${j}`, "middle", diag ? "sm b" : "sm"); } }
   for (let j = 0; j < cols - 1; j++) b += S(o + c * j + (c - 4) / 2, 26, `k=${j}`, "middle", "sm");
   b += S(o + c * cols + 10, 34 + c * 2, "ligne i : ⟨xᵢ, ·⟩ converge", "start", "sm") + S(o + c * cols + 10, 34 + c * 2 + 20, "le long de cette sous-suite", "start", "sm") + S(o + c * cols + 10, 34 + c * 4, "diagonale : ψ(k)", "start", "sm r");
-  return FIG(500, 220, b, R`Extraction diagonale : la ligne $i$ est la sous-suite $\varphi_0\circ\dots\circ\varphi_i$, le long de laquelle $\langle x_i,x_{\cdot}\rangle$ converge ; chaque ligne est extraite de la précédente. La diagonale $\psi(k) = \varphi_0\circ\dots\circ\varphi_k(k)$ est, à partir du rang $i$, extraite de la ligne $i$ : elle fait converger <b>toutes</b> les suites $\langle x_i,x_{\psi(k)}\rangle$ à la fois.`, "Extraction diagonale"); })();
+  return FIG(620, 250, b, R`Extraction diagonale : la ligne $i$ est la sous-suite $\varphi_0\circ\dots\circ\varphi_i$, le long de laquelle $\langle x_i,x_{\cdot}\rangle$ converge ; chaque ligne est extraite de la précédente. La diagonale $\psi(k) = \varphi_0\circ\dots\circ\varphi_k(k)$ est, à partir du rang $i$, extraite de la ligne $i$ : elle fait converger <b>toutes</b> les suites $\langle x_i,x_{\psi(k)}\rangle$ à la fois.`, "Extraction diagonale"); })();
 
 /* Figure : projection et limite faible */
 const figProj = (() => { let b = "";
@@ -31,7 +31,7 @@ const figProj = (() => { let b = "";
   b += `<line x1="${p[0] - 20}" y1="${p[1] - 120}" x2="${p[0] + 22}" y2="${p[1] + 132}" class="thin"/>`;
   b += `<line x1="${a[0]}" y1="${a[1]}" x2="${p[0]}" y2="${p[1]}" class="vr" style="stroke-width:1.8"/><circle cx="${a[0]}" cy="${a[1]}" r="4.5" class="ptr"/><circle cx="${p[0]}" cy="${p[1]}" r="4" class="ptb"/>`;
   [[170, 120], [200, 170], [140, 180], [230, 110]].forEach(([x, y], k) => { b += `<circle cx="${x}" cy="${y}" r="3.5" class="pt"/>` + S(x + 6, y - 6, `y${["ₖ", "ₖ₊₁", "ₖ₊₂", "ₖ₊₃"][k]}`, "start", "sm"); });
-  b += S(a[0] + 8, a[1] - 6, "a ?", "start", "sm r") + S(p[0] - 8, p[1] + 18, "p(a)", "end", "sm b") + S(120, 80, "Cβ = {J ≤ β}", "middle", "sm b");
+  b += S(a[0] + 8, a[1] - 6, "a ?", "start", "sm r") + S(p[0] - 8, p[1] + 18, "p(a)", "end", "sm b") + S(110, 44, "Cβ = {J ≤ β}", "middle", "sm b");
   b += S(330, 250, "⟨y − p(a), a − p(a)⟩ ≤ 0 pour y ∈ Cβ", "middle", "sm");
   return FIG(480, 270, b, R`Si la limite faible $a$ des $y_k$ était hors du convexe fermé $C_\beta$, l'hyperplan passant par $p(a)$ et orthogonal à $a-p(a)$ séparerait $a$ de $C_\beta$. Les $y_k\in C_\beta$ sont du côté $\langle y-p(a),a-p(a)\rangle\leqslant0$, et un passage à la limite faible donne $\|a-p(a)\|^2\leqslant0$.`, "Séparation par la projection"); })();
 

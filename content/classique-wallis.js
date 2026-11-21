@@ -37,7 +37,7 @@ const ENONCE = PRE + R`<p><b>Partie I. Premières propriétés</b></p><ol start=
 
 /* Figures */
 const figSin = GRAPH({ w: 460, h: 240, x: [0, Math.PI / 2], y: [0, 1.1], xt: [Math.PI / 4, Math.PI / 2], xtl: ["π/4", "π/2"], yt: [0.5, 1], ytl: ["0,5", "1"], xl: "t",
-  curves: [1, 2, 5, 20, 80].map((n, k) => ({ f: t => Math.sin(t) ** n, c: ["b", "g", "r", "v", "k"][k], lab: [[0.55, 0.62, "n = 1"], [0.62, 0.3, "n = 2"], [0.85, 0.28, "n = 5"], [1.17, 0.3, "n = 20"], [1.33, 0.12, "n = 80"]][k] })) },
+  curves: [1, 2, 5, 20, 80].map((n, k) => ({ f: t => Math.sin(t) ** n, c: ["b", "g", "r", "v", "k"][k] })), legendAt: [0.06, 0.98], legend: [1, 2, 5, 20, 80].map((n, k) => ({ c: ["b", "g", "r", "v", "k"][k], t: "n = " + n })) },
   R`Graphes de $t\mapsto\sin^nt$ sur $[0,\frac\pi2]$ : ils sont emboîtés ($\sin^{n+1}\leqslant\sin^n$, d'où la décroissance) et se concentrent près de $\frac\pi2$, où $\sin = 1$. L'aire $W_n$ sous chaque courbe tend vers $0$, mais lentement : la largeur de la « bosse » est de l'ordre de $\frac1{\sqrt n}$.`, "Les fonctions sinⁿ");
 const Wn = (() => { const w = [Math.PI / 2, 1]; for (let n = 2; n <= 40; n++) w.push((n - 1) / n * w[n - 2]); return w; })();
 const figW = GRAPH({ w: 460, h: 240, x: [0, 40], y: [0, 1.7], xt: [10, 20, 30, 40], yt: [0.5, 1, 1.5], ytl: ["0,5", "1", "1,5"], xl: "n",
