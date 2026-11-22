@@ -422,4 +422,117 @@ A("su-06", [
   { q: R`Que vaut $\mathrm{ch}\,x$ ?`, c: [R`$\frac{\mathrm e^x+\mathrm e^{-x}}2$`, R`$\frac{\mathrm e^x-\mathrm e^{-x}}2$`, R`$\mathrm e^x+\mathrm e^{-x}$`, R`$\frac{\mathrm e^{x}}{2}$`], ok: 0, r: "su-usuel" }
 ]);
 
+/* ---------- su-07 · Suites monotones, bornées et bornes supérieures de queues ---------- */
+A("su-07", [
+  { declic: R`Une moyenne de $n$ termes croissants : on forme la différence $v_{n+1}-v_n$ et on met tout sur un dénominateur commun. Le numérateur compare $nu_{n+1}$ à la somme des $n$ premiers termes.`,
+    copie: R`<p>${ph("posons","Posons")} $A_n=u_1+\cdots+u_n$. Alors $v_{n+1}-v_n=\frac{nA_{n+1}-(n+1)A_n}{n(n+1)}=\frac{nu_{n+1}-A_n}{n(n+1)}$ (car $A_{n+1}=A_n+u_{n+1}$).</p><p>${ph("comme","Comme")} $(u_n)$ est croissante, $u_k\leqslant u_{n+1}$ pour $k\leqslant n$. ${ph("donc","Donc")} $nu_{n+1}=\sum_{k=1}^nu_{n+1}\geqslant\sum_{k=1}^nu_k=A_n$.</p><p>Le numérateur est $\geqslant0$ et le dénominateur $>0$ : $v_{n+1}-v_n\geqslant0$.</p><div class="sbox">$$(v_n)\ \text{est croissante.}$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que la moyenne est supérieure au dernier terme. C'est l'inverse : la moyenne est inférieure au maximum.</p><p><b>Premier réflexe :</b> étudier le rapport $\frac{v_{n+1}}{v_n}$. Les $u_k$ ne sont pas supposés positifs : on étudie la différence.</p>`,
+    trou: { q: R`Quelle inégalité justifie $nu_{n+1}\geqslant u_1+\cdots+u_n$ ?`, c: [R`$u_k\leqslant u_{n+1}$ pour $k\leqslant n$ (croissance)`, R`$u_k\geqslant u_{n+1}$ pour $k\leqslant n$`, R`$u_k\geqslant0$`, R`$u_{n+1}\geqslant0$`], ok: 0, why: R`La suite croît, donc les $n$ premiers termes sont tous inférieurs à $u_{n+1}$ ; leur somme est donc au plus $n\,u_{n+1}$.` },
+    bareme: { sur: 3, l: [[1, R`Calcul de $v_{n+1}-v_n$ en $\frac{nu_{n+1}-A_n}{n(n+1)}$`], [1, R`$nu_{n+1}\geqslant A_n$ par croissance`], [1, R`Signe du quotient et conclusion`]] },
+    jury: [
+      { e: R`Étudier $\frac{v_{n+1}}{v_n}$ sans connaître le signe de $v_n$.`, p: R`Méthode non justifiée : point perdu.` },
+      { e: R`Mettre au même dénominateur sans simplifier $nA_{n+1}-(n+1)A_n$.`, p: R`Le numérateur est inexploitable : deux points perdus.` }
+    ] },
+  { declic: R`On découpe $v_{2n}$ en deux moitiés : les $n$ premiers termes donnent $\frac{v_n}2$, les $n$ suivants sont tous au moins $u_n$ (croissance). Après passage à la limite, on obtient deux inégalités opposées.`,
+    copie: R`<p>$v_{2n}=\frac{v_n}2+\frac{u_{n+1}+\cdots+u_{2n}}{2n}\geqslant\frac{v_n}2+\frac{nu_n}{2n}=\frac{u_n+v_n}2$ ($n$ termes, tous $\geqslant u_n$).</p><p>Pour $k$ fixé, $u_k\leqslant u_n$ si $n\geqslant k$ ; donc $u_k\leqslant\ell$. ${ph("donc","Donc")} $v_n\leqslant\ell$ : $(v_n)$ est croissante majorée, elle converge vers $\ell'\leqslant\ell$.</p><p>${ph("ainsi","Ainsi")}, en passant à la limite dans $v_{2n}\geqslant\frac{u_n+v_n}2$ : $\ell'\geqslant\frac{\ell+\ell'}2$, soit $\ell'\geqslant\ell$.</p><p>${ph("donc","Donc")} $\ell'=\ell$.</p><div class="sbox">$$\frac{u_1+\cdots+u_n}n\to\ell.$$</div>`,
+    tete: R`<p><b>Piège :</b> supposer d'emblée que $(v_n)$ converge pour passer à la limite. Il faut d'abord la majoration (limite monotone).</p><p><b>Premier réflexe :</b> invoquer le lemme de Cesàro. Ici on le redémontre dans le cas croissant, avec une méthode plus élémentaire.</p>`,
+    trou: { q: R`Que donne le passage à la limite dans $v_{2n}\geqslant\frac{u_n+v_n}2$ ?`, c: [R`$\ell'\geqslant\frac{\ell+\ell'}2$`, R`$\ell'\leqslant\frac{\ell+\ell'}2$`, R`$\ell'>\frac{\ell+\ell'}2$`, R`$\ell'=\ell+\ell'$`], ok: 0, why: R`$(v_{2n})$ est extraite de $(v_n)$ donc tend vers $\ell'$ ; une inégalité large passe à la limite en restant large.` },
+    bareme: { sur: 5, l: [[1, R`Découpage et minoration $v_{2n}\geqslant\frac{u_n+v_n}2$`], [1, R`$u_k\leqslant\ell$ pour tout $k$, d'où $v_n\leqslant\ell$`], [1, R`Convergence de $(v_n)$ par limite monotone`], [1, R`Passage à la limite : $\ell'\geqslant\ell$`], [1, R`Conclusion $\ell'=\ell$`]] },
+    jury: [
+      { e: R`Passer à la limite avant d'avoir montré que $(v_n)$ converge.`, p: R`Limite d'une suite dont l'existence n'est pas établie : deux points perdus.` },
+      { e: R`Affirmer l'inégalité stricte à la limite.`, p: R`Erreur classique : point perdu.` }
+    ] },
+  { declic: R`Pour une suite bornée, le plus grand terme à partir du rang $n$ est une borne supérieure : elle existe, et diminue quand $n$ augmente car on retire des termes. Une suite décroissante minorée converge.`,
+    copie: R`<p>$|u_p|\leqslant M$. L'ensemble $\{u_p,\ p\geqslant n\}$ est non vide, majoré par $M$, minoré par $-M$ : $v_n=\sup$ et $w_n=\inf$ existent, et $w_n\leqslant u_n\leqslant v_n$.</p><p>$\{u_p,\ p\geqslant n+1\}\subset\{u_p,\ p\geqslant n\}$ donc $v_{n+1}\leqslant v_n$ et $w_{n+1}\geqslant w_n$ : $(v_n)$ décroît, $(w_n)$ croît.</p><p>${ph("donc","Donc")} $(v_n)$ décroissante minorée par $-M$ converge vers $L$, et $(w_n)$ croissante majorée par $M$ vers $\lambda$.</p><p>${ph("or","Or")} $w_n\leqslant v_n$ : en passant à la limite, $\lambda\leqslant L$.</p><div class="sbox">$$\lim w_n\leqslant\lim v_n.$$</div>`,
+    tete: R`<p><b>Piège :</b> confondre sup et max : le sup d'une queue peut ne pas être atteint, mais il existe toujours pour un ensemble majoré non vide.</p><p><b>Premier réflexe :</b> penser que $(v_n)$ est croissante parce que $n$ augmente. Plus $n$ est grand, moins il y a de termes : le sup diminue.</p>`,
+    trou: { q: R`Pourquoi $v_{n+1}\leqslant v_n$ ?`, c: [R`la queue à partir de $n+1$ est incluse dans celle à partir de $n$`, R`$(u_n)$ est décroissante`, R`$(u_n)$ est croissante`, R`$M$ décroît`], ok: 0, why: R`Si $A\subset B$ alors $\sup A\leqslant\sup B$ : chaque majorant de $B$ majore $A$. La suite $(u_n)$ n'est pas supposée monotone.` },
+    bareme: { sur: 4, l: [[1, R`Existence de $v_n$ et $w_n$ (ensemble non vide, majoré, minoré)`], [1, R`Monotonie par inclusion des queues`], [1, R`Convergence par limite monotone`], [1, R`$w_n\leqslant v_n$ donne $\lambda\leqslant L$`]] },
+    jury: [
+      { e: R`Dire $v_n$ « décroissante car $u_n$ décroissante ».`, p: R`$(u_n)$ n'est pas monotone : justification fausse, deux points perdus.` },
+      { e: R`Ne pas justifier l'existence de la borne supérieure.`, p: R`Il faut citer l'axiome : point perdu.` }
+    ] },
+  { declic: R`Si $u_n\to\ell$, tous les termes de la queue sont dans $[\ell-\varepsilon,\ell+\varepsilon]$ : sup et inf sont dans le même intervalle. Réciproquement, $w_n\leqslant u_n\leqslant v_n$ et gendarmes.`,
+    copie: R`<p>(5) Soit $\varepsilon>0$ et $N$ tel que $|u_p-\ell|\leqslant\varepsilon$ pour $p\geqslant N$. Pour $n\geqslant N$, $\ell+\varepsilon$ majore la queue, donc $v_n\leqslant\ell+\varepsilon$ ; et $v_n\geqslant u_n\geqslant\ell-\varepsilon$. ${ph("donc","Donc")} $|v_n-\ell|\leqslant\varepsilon$ : $v_n\to\ell$. De même $w_n\to\ell$.</p><p>(6) Si $\lim v_n=\lim w_n=\ell$, ${ph("comme","comme")} $w_n\leqslant u_n\leqslant v_n$, les gendarmes donnent $u_n\to\ell$.</p><p>Contre-exemple : $u_n=(-1)^n$ a $\lim v_n=1\neq-1=\lim w_n$ et diverge.</p><div class="sbox">$$u_n\text{ converge}\iff\lim\sup_{p\geqslant n}u_p=\lim\inf_{p\geqslant n}u_p.$$</div>`,
+    tete: R`<p><b>Piège :</b> déduire de $v_n\to\ell$ seul que $u_n\to\ell$. Il faut aussi $w_n\to\ell$ pour encadrer.</p><p><b>Premier réflexe :</b> raisonner avec des sous-suites. L'encadrement par sup et inf est plus court.</p>`,
+    trou: { q: R`Quelle inégalité encadre $u_n$ entre ses bornes de queue ?`, c: [R`$w_n\leqslant u_n\leqslant v_n$`, R`$v_n\leqslant u_n\leqslant w_n$`, R`$u_n\leqslant w_n\leqslant v_n$`, R`$w_n\leqslant v_n\leqslant u_n$`], ok: 0, why: R`$u_n$ appartient à sa propre queue : il est au plus le sup et au moins l'inf de cette queue.` },
+    bareme: { sur: 4, l: [[1, R`Majoration $v_n\leqslant\ell+\varepsilon$ pour $n\geqslant N$`], [1, R`Minoration $v_n\geqslant\ell-\varepsilon$, donc $v_n\to\ell$ (et $w_n$ de même)`], [1, R`Réciproque par gendarmes avec $w_n\leqslant u_n\leqslant v_n$`], [1, R`Contre-exemple pour deux limites différentes`]] },
+    jury: [
+      { e: R`Ne traiter que $v_n$ sans dire que $w_n$ est symétrique.`, p: R`Cas oublié : point perdu.` },
+      { e: R`Écrire $|v_n-\ell|\leqslant\varepsilon$ sans les deux inégalités.`, p: R`Il faut majorer et minorer : point perdu.` }
+    ] },
+  { declic: R`Le produit des impairs se transforme en quotient de factorielles : on multiplie et divise par le produit des pairs, qui vaut $2^n\,n!$.`,
+    copie: R`<p>$2\times4\times\cdots\times2n=2^n(1\times2\times\cdots\times n)=2^nn!$.</p><p>Le produit des impairs est $\frac{(2n)!}{2\times4\times\cdots\times2n}=\frac{(2n)!}{2^nn!}$ (car $(2n)!$ est le produit de tous les entiers de $1$ à $2n$).</p><p>${ph("donc","Donc")} $u_n=\frac{(2n)!}{(2^nn!)^2}=\frac{(2n)!}{4^n(n!)^2}$.</p><p>${ph("or","Or")} $\frac{u_{n+1}}{u_n}=\frac{2n+1}{2n+2}\lt1$ et $u_n>0$ : $(u_n)$ est décroissante minorée, donc converge.</p><div class="sbox">$$u_n=\frac{(2n)!}{4^n(n!)^2},\quad(u_n)\ \text{convergente.}$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire « $\frac1{2}\cdot\frac34\cdots$ tend vers $1$ car chaque facteur tend vers $1$ ». Le produit de $n$ facteurs qui tendent vers $1$ peut tendre vers $0$.</p><p><b>Premier réflexe :</b> simplifier terme à terme. Il n'y a pas de simplification : on passe par les factorielles.</p>`,
+    trou: { q: R`Que vaut le produit $2\times4\times\cdots\times(2n)$ ?`, c: [R`$2^n\,n!$`, R`$(2n)!$`, R`$2\,n!$`, R`$n!$`], ok: 0, why: R`On sort un $2$ de chacun des $n$ facteurs : $2^n$, et il reste $1\times2\times\cdots\times n=n!$.` },
+    bareme: { sur: 4, l: [[1, R`Produit des pairs $=2^nn!$`], [1, R`Produit des impairs $=\frac{(2n)!}{2^nn!}$`], [1, R`Écriture $u_n=\frac{(2n)!}{4^n(n!)^2}$`], [1, R`Décroissance et minoration : convergence`]] },
+    jury: [
+      { e: R`Écrire le produit des impairs comme $\frac{(2n)!}{n!}$.`, p: R`Il manque $2^n$ : deux points perdus.` }
+    ] },
+  { declic: R`$v_n=(n+1)u_n^2$ : le rapport $\frac{v_{n+1}}{v_n}$ se calcule avec la relation $\frac{u_{n+1}}{u_n}=\frac{2n+1}{2n+2}$. On compare le numérateur et le dénominateur par un développement.`,
+    copie: R`<p>$\frac{v_{n+1}}{v_n}=\frac{n+2}{n+1}\Big(\frac{2n+1}{2n+2}\Big)^2=\frac{(n+2)(2n+1)^2}{4(n+1)^3}$.</p><p>$(n+2)(2n+1)^2=4n^3+12n^2+9n+2$ et $4(n+1)^3=4n^3+12n^2+12n+4$, donc la différence vaut $-3n-2\lt0$. ${ph("donc","Donc")} $\frac{v_{n+1}}{v_n}\lt1$ : $(v_n)$ est décroissante.</p><p>${ph("comme","Comme")} $v_n\geqslant0$, elle converge vers $C\geqslant0$.</p><p>${ph("ainsi","Ainsi")} $u_n^2=\frac{v_n}{n+1}\to0$ et, $u_n\geqslant0$, $u_n\to0$.</p><div class="sbox">$$(n+1)u_n^2\to C,\qquad u_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire « $u_n$ décroissante donc $u_n\to0$ ». Une suite décroissante positive converge, mais pas forcément vers $0$.</p><p><b>Premier réflexe :</b> montrer $u_n\to0$ directement. Le facteur $(n+1)$ rend la suite $v_n$ plus facile : sa convergence implique celle de $u_n^2$ vers $0$.</p>`,
+    trou: { q: R`Pourquoi $\frac{v_n}{n+1}\to0$ ?`, c: [R`$(v_n)$ est convergente, donc bornée, et $n+1\to+\infty$`, R`$v_n\to0$`, R`$v_n$ est croissante`, R`$n+1\to0$`], ok: 0, why: R`Une suite convergente est bornée ; divisée par une suite qui tend vers $+\infty$, elle donne une limite nulle.` },
+    bareme: { sur: 4, l: [[1, R`Rapport $\frac{v_{n+1}}{v_n}$ calculé`], [1, R`Comparaison à $1$ par développement : $-3n-2\lt0$`], [1, R`Convergence de $(v_n)$ (décroissante minorée par $0$)`], [1, R`$u_n^2=\frac{v_n}{n+1}\to0$ puis $u_n\to0$`]] },
+    jury: [
+      { e: R`Se tromper dans le développement de $(n+2)(2n+1)^2$.`, p: R`Signe faux : deux points perdus.` },
+      { e: R`Conclure $u_n\to0$ sans passer à la racine.`, p: R`Il faut $u_n=\sqrt{u_n^2}$ avec $u_n\geqslant0$ : point perdu.` }
+    ] },
+  { declic: R`Un produit de $1-\frac1k$ se télescope. Pour minorer $u_n^2$, on compare chaque facteur au carré à un produit de deux facteurs voisins qui se télescope.`,
+    copie: R`<p>$\prod_{k=2}^{2n}\big(1-\frac1k\big)=\prod_{k=2}^{2n}\frac{k-1}k=\frac1{2n}$ (télescopage).</p><p>${ph("posons","Écrivons")} $u_n=\prod_{k=1}^n\big(1-\frac1{2k}\big)=\frac12\prod_{k=2}^n\big(1-\frac1{2k}\big)$.</p><p>Pour $k\geqslant2$, $1-\frac1{2k}\geqslant1-\frac1{2k-1}\geqslant0$, donc $\big(1-\frac1{2k}\big)^2\geqslant\frac{2k-1}{2k}\cdot\frac{2k-2}{2k-1}=\frac{k-1}k$.</p><p>${ph("donc","Donc")} $u_n^2\geqslant\frac14\prod_{k=2}^n\frac{k-1}k=\frac1{4n}$ et $v_n\geqslant\frac{n+1}{4n}\geqslant\frac14$ ; à la limite $C\geqslant\frac14>0$.</p><div class="sbox">$$\lim(n+1)u_n^2\geqslant\frac14>0.$$</div>`,
+    tete: R`<p><b>Piège :</b> multiplier des inégalités entre nombres de signes quelconques. Ici tous les facteurs sont positifs : on peut multiplier membre à membre.</p><p><b>Premier réflexe :</b> prendre un équivalent de $u_n$ avec Stirling. Hors programme ; l'encadrement par un produit télescopique suffit.</p>`,
+    trou: { q: R`Que vaut $\prod_{k=2}^n\frac{k-1}k$ ?`, c: [R`$\frac1n$`, R`$\frac1{n-1}$`, R`$\frac n2$`, R`$1$`], ok: 0, why: R`Le produit $\frac12\cdot\frac23\cdots\frac{n-1}n$ se télescope : tous les numérateurs sauf $1$ et tous les dénominateurs sauf $n$ se simplifient.` },
+    bareme: { sur: 4, l: [[1, R`Produit télescopique $\frac1{2n}$`], [1, R`Comparaison $1-\frac1{2k}\geqslant1-\frac1{2k-1}\geqslant0$`], [1, R`Minoration $u_n^2\geqslant\frac1{4n}$ avec produit de nombres positifs`], [1, R`$v_n\geqslant\frac14$ et $C\geqslant\frac14$`]] },
+    jury: [
+      { e: R`Multiplier des inégalités sans préciser la positivité.`, p: R`Opération non justifiée : point perdu.` },
+      { e: R`Oublier le facteur $\frac12$ en tête.`, p: R`Constante fausse : point perdu.` }
+    ] }
+], [
+  { q: R`Que dit le théorème de la limite monotone ?`, c: [R`une suite croissante et majorée converge`, R`une suite croissante converge`, R`une suite majorée converge`, R`une suite bornée converge`], ok: 0, r: "su-mono" },
+  { q: R`Si $A\subset B$ sont des parties majorées non vides de $\mathbb R$, que dit-on de $\sup A$ et $\sup B$ ?`, c: [R`$\sup A\leqslant\sup B$`, R`$\sup A\geqslant\sup B$`, R`$\sup A=\sup B$`, R`rien`], ok: 0, r: "re-sup" },
+  { q: R`Que vaut $\prod_{k=a}^b\frac{x_{k-1}}{x_k}$ ?`, c: [R`$\frac{x_{a-1}}{x_b}$`, R`$\frac{x_a}{x_b}$`, R`$x_{a-1}x_b$`, R`$x_b-x_{a-1}$`], ok: 0, r: "su-tele" }
+]);
+
+/* ---------- su-08 · Suites adjacentes : polygones, racines, carrés et séries alternées ---------- */
+A("su-08", [
+  { declic: R`Pour montrer que deux suites sont adjacentes : une croît, l'autre décroît, leur écart tend vers $0$. Ici le passage de $n$ à $n+1$ divise l'angle par $2$ : on utilise les formules de duplication $\sin2a$ et $\tan2a$.`,
+    copie: R`<p>${ph("posons","Posons")} $a=\frac\theta{2^{n+1}}\in]0,\frac\pi4[$, de sorte que $\frac\theta{2^n}=2a$.</p><p>$u_n=2^n\sin2a=2^{n+1}\sin a\cos a=u_{n+1}\cos a\leqslant u_{n+1}$ : $(u_n)$ est croissante.</p><p>$v_n=2^n\tan2a=\frac{v_{n+1}}{1-\tan^2a}\geqslant v_{n+1}$ car $0\lt1-\tan^2a\leqslant1$ : $(v_n)$ est décroissante.</p><p>${ph("or","Or")} $v_n-u_n=u_n\frac{1-\cos(\theta/2^n)}{\cos(\theta/2^n)}$ avec $0\lt u_n\leqslant\theta$ : cet écart tend vers $0$. ${ph("donc","Donc")} les deux suites sont adjacentes, de limite commune $\lim u_n=\theta\frac{\sin x_n}{x_n}\to\theta$.</p><div class="sbox">$$(u_n)\nearrow,\ (v_n)\searrow,\ v_n-u_n\to0,\ \lim u_n=\lim v_n=\theta.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier que $\tan a\lt1$ pour $a\lt\frac\pi4$ : sinon $1-\tan^2a$ peut s'annuler ou changer de signe.</p><p><b>Premier réflexe :</b> étudier $f(x)=x\sin\frac\theta x$ comme fonction de $x$. Cela marche mais exige une dérivée ; la relation entre $u_n$ et $u_{n+1}$ est immédiate avec $\sin2a$.</p>`,
+    trou: { q: R`Pourquoi $u_n=u_{n+1}\cos a\leqslant u_{n+1}$ ?`, c: [R`$u_{n+1}>0$ et $0\lt\cos a\leqslant1$`, R`$u_{n+1}\lt0$`, R`$\cos a>1$`, R`$a>\frac\pi2$`], ok: 0, why: R`Multiplier un réel strictement positif par un nombre de $]0,1]$ ne l'augmente pas ; ici $a\in]0,\frac\pi4[$ donne $\cos a\in]\frac{\sqrt2}2,1[$.` },
+    bareme: { sur: 5, l: [[1, R`Cadre : $a=\frac\theta{2^{n+1}}\in]0,\frac\pi4[$`], [1, R`$(u_n)$ croissante avec $\sin2a=2\sin a\cos a$`], [1, R`$(v_n)$ décroissante avec $\tan2a$`], [1, R`$v_n-u_n\to0$`], [1, R`Limite commune $\theta$ via $\frac{\sin x}x\to1$`]] },
+    jury: [
+      { e: R`Ne pas vérifier que $0\lt1-\tan^2a$.`, p: R`Le sens de l'inégalité n'est pas justifié : deux points perdus.` },
+      { e: R`Déduire la limite sans montrer l'adjacence.`, p: R`Théorème inapplicable : deux points perdus.` }
+    ] },
+  { declic: R`Deux suites qui diffèrent d'un décalage d'indice dans la racine : $u_n=S_n-2\sqrt n$ et $v_n=S_n-2\sqrt{n+1}$. On compare les différences successives avec la quantité conjuguée.`,
+    copie: R`<p>$u_{n+1}-u_n=\frac1{\sqrt{n+1}}-\frac2{\sqrt{n+1}+\sqrt n}\leqslant0$ car $\sqrt{n+1}+\sqrt n\leqslant2\sqrt{n+1}$ : $(u_n)$ décroît.</p><p>$v_{n+1}-v_n=\frac1{\sqrt{n+1}}-\frac2{\sqrt{n+2}+\sqrt{n+1}}\geqslant0$ car $\sqrt{n+2}+\sqrt{n+1}\geqslant2\sqrt{n+1}$ : $(v_n)$ croît.</p><p>$u_n-v_n=2(\sqrt{n+1}-\sqrt n)=\frac2{\sqrt{n+1}+\sqrt n}\to0$. ${ph("donc","Donc")} les suites sont adjacentes, de limite commune $c$.</p><p>${ph("ainsi","Ainsi")} $\frac{S_n}{2\sqrt n}=1+\frac{u_n}{2\sqrt n}\to1$.</p><div class="sbox">$$S_n=2\sqrt n+c+o(1)\sim2\sqrt n.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser que $u_n$ et $v_n$ ont le même sens de variation puisqu'elles se ressemblent. Elles sont de monotonies opposées.</p><p><b>Premier réflexe :</b> reprendre l'encadrement de la khôlle précédente. Ici on organise la même idée en suites adjacentes.</p>`,
+    trou: { q: R`Quelle inégalité justifie $\frac2{\sqrt{n+1}+\sqrt n}\geqslant\frac1{\sqrt{n+1}}$ ?`, c: [R`$\sqrt{n+1}+\sqrt n\leqslant2\sqrt{n+1}$`, R`$\sqrt{n+1}+\sqrt n\geqslant2\sqrt{n+1}$`, R`$\sqrt n\geqslant\sqrt{n+1}$`, R`$n\geqslant1$`], ok: 0, why: R`Comme $\sqrt n\leqslant\sqrt{n+1}$, la somme est au plus $2\sqrt{n+1}$ ; en passant à l'inverse (positif) le sens s'inverse.` },
+    bareme: { sur: 5, l: [[1, R`$(u_n)$ décroissante`], [1, R`$(v_n)$ croissante`], [1, R`Écart $u_n-v_n\to0$`], [1, R`Adjacence et limite $c$`], [1, R`Équivalent $S_n\sim2\sqrt n$`]] },
+    jury: [
+      { e: R`Se tromper de sens en passant à l'inverse.`, p: R`Monotonie fausse : deux points perdus.` }
+    ] },
+  { declic: R`On cherche à encadrer une limite sans la connaître : deux suites adjacentes la piègent à chaque rang. Ici $S_n$ croît et $S_n+\frac1n$ décroît.`,
+    copie: R`<p>$S_{n+1}-S_n=\frac1{(n+1)^2}>0$ : $(S_n)$ croît.</p><p>$S'_{n+1}-S'_n=\frac1{(n+1)^2}+\frac1{n+1}-\frac1n=\frac1{(n+1)^2}-\frac1{n(n+1)}=-\frac1{n(n+1)^2}\lt0$ : $(S'_n)$ décroît.</p><p>$S'_n-S_n=\frac1n\to0$. ${ph("donc","Donc")} elles sont adjacentes et convergent vers $\ell$ avec $S_n\leqslant\ell\leqslant S_n+\frac1n$.</p><p>Pour $n=10$ : $S_{10}\approx1{,}5498$, d'où $1{,}549\leqslant\ell\leqslant1{,}650$.</p><div class="sbox">$$1{,}549\leqslant\ell\leqslant1{,}650.$$</div>`,
+    tete: R`<p><b>Piège :</b> prendre $S_n$ et $S_n+\frac1{n^2}$. L'écart tend vers $0$ mais la seconde suite ne décroît pas toujours.</p><p><b>Premier réflexe :</b> comparer à $\int\frac{\mathrm dx}{x^2}$. Fonctionne aussi, mais l'adjacence donne directement l'encadrement à chaque rang.</p>`,
+    trou: { q: R`Quelle est la propriété d'un encadrement par deux suites adjacentes $(a_n)\nearrow$, $(b_n)\searrow$ ?`, c: [R`$a_n\leqslant\ell\leqslant b_n$ pour tout $n$`, R`$a_n\geqslant\ell\geqslant b_n$`, R`$a_n=b_n$`, R`$a_n\lt\ell\lt b_n$ seulement à partir d'un rang`], ok: 0, why: R`La croissante reste sous la limite et la décroissante au-dessus, à tous les rangs et pas seulement à partir d'un certain rang.` },
+    bareme: { sur: 4, l: [[1, R`$(S_n)$ croissante`], [1, R`$(S'_n)$ décroissante avec le calcul de $-\frac1{n(n+1)^2}$`], [1, R`Écart $\frac1n\to0$ : adjacence`], [1, R`Encadrement numérique avec $n=10$`]] },
+    jury: [
+      { e: R`Se tromper dans le calcul de $S'_{n+1}-S'_n$.`, p: R`Monotonie non justifiée : deux points perdus.` },
+      { e: R`Donner un encadrement sans préciser le rang.`, p: R`Valeur numérique invérifiable : point perdu.` }
+    ] },
+  { declic: R`Série alternée : les sommes paires décroissent, les impaires croissent, et leur écart est le terme $u_{2n+1}$ qui tend vers $0$. Deux suites adjacentes, donc une limite commune, avec une erreur majorée par le terme suivant.`,
+    copie: R`<p>$S_{2n+2}-S_{2n}=-u_{2n+1}+u_{2n+2}\leqslant0$ : $(S_{2n})$ décroît. $S_{2n+3}-S_{2n+1}=u_{2n+2}-u_{2n+3}\geqslant0$ : $(S_{2n+1})$ croît.</p><p>$S_{2n+1}-S_{2n}=-u_{2n+1}\to0$. ${ph("donc","Donc")} elles sont adjacentes, de limite commune $\ell$, et $S_{2n+1}\leqslant\ell\leqslant S_{2n}$.</p><p>${ph("ainsi","Ainsi")} $S_n\to\ell$ (extraites paire et impaire).</p><p>Pour $n=2m$ : $0\leqslant S_{2m}-\ell\leqslant S_{2m}-S_{2m+1}=u_{n+1}$ ; pour $n=2m+1$ de même. ${ph("donc","Donc")} $|\ell-S_n|\leqslant u_{n+1}$ ; avec $u_k=\frac1{k+1}$, $n\geqslant98$ donne l'erreur $\leqslant10^{-2}$.</p><div class="sbox">$$|\ell-S_n|\leqslant u_{n+1}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier que $u_n$ est positive : sans $u_n\geqslant0$ on ne peut pas affirmer $S_{2n+1}\leqslant S_{2n}$.</p><p><b>Premier réflexe :</b> citer le critère des séries alternées comme un théorème connu. Ici on le démontre ; la preuve passe par l'adjacence.</p>`,
+    trou: { q: R`Pourquoi $S_{2n+2}-S_{2n}=-u_{2n+1}+u_{2n+2}\leqslant0$ ?`, c: [R`$(u_n)$ décroît, donc $u_{2n+2}\leqslant u_{2n+1}$`, R`$(u_n)$ croît`, R`$u_n\geqslant1$`, R`$(-1)^n$ décroît`], ok: 0, why: R`Les deux termes ajoutés sont $-u_{2n+1}$ et $+u_{2n+2}$ ; leur somme est négative parce que $u$ est décroissante.` },
+    bareme: { sur: 5, l: [[1, R`$(S_{2n})$ décroissante`], [1, R`$(S_{2n+1})$ croissante`], [1, R`Écart $-u_{2n+1}\to0$ et adjacence`], [1, R`Convergence de $(S_n)$ par extraites`], [1, R`Majoration $|\ell-S_n|\leqslant u_{n+1}$ dans les deux parités`]] },
+    jury: [
+      { e: R`Ne traiter qu'une parité pour la majoration de l'erreur.`, p: R`Cas oublié : deux points perdus.` },
+      { e: R`Appeler « adjacentes » deux suites sans vérifier la limite de l'écart.`, p: R`Définition incomplète : point perdu.` }
+    ] }
+], [
+  { q: R`Quand dit-on que deux suites $(a_n)$ et $(b_n)$ sont adjacentes ?`, c: [R`$(a_n)\nearrow$, $(b_n)\searrow$ et $b_n-a_n\to0$`, R`$(a_n)\nearrow$ et $(b_n)\nearrow$`, R`$a_n\leqslant b_n$`, R`$b_n-a_n$ est constante`], ok: 0, r: "su-mono" },
+  { q: R`Que vaut $\tan2a$ en fonction de $\tan a$ ?`, c: [R`$\frac{2\tan a}{1-\tan^2a}$`, R`$2\tan a$`, R`$\frac{2\tan a}{1+\tan^2a}$`, R`$\tan^2a$`], ok: 0, r: "su-usuel" },
+  { q: R`Si $(a_n)$ et $(b_n)$ sont adjacentes avec $a_n\nearrow$, que dit-on de leur limite $\ell$ ?`, c: [R`$a_n\leqslant\ell\leqslant b_n$ pour tout $n$`, R`$\ell=a_0$`, R`$\ell\leqslant a_n$`, R`$\ell\geqslant b_n$`], ok: 0, r: "su-mono" }
+]);
+
 })();
