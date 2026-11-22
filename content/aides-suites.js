@@ -309,4 +309,117 @@ A("su-04", [
   { q: R`Combien de termes comporte $\sum_{k=a}^bf(k)$ ($a\leqslant b$ entiers) ?`, c: [R`$b-a+1$`, R`$b-a$`, R`$b+a$`, R`$b$`], ok: 0, r: "su-tele" }
 ]);
 
+/* ---------- su-05 · Sommes harmoniques et comparaison avec le logarithme ---------- */
+A("su-05", [
+  { declic: R`$H_n$ est croissante : pour montrer qu'elle diverge, il suffit de la minorer par une suite qui tend vers $+\infty$. Le paquet $\frac1{n+1}+\dots+\frac1{2n}$ contient $n$ termes, tous au moins $\frac1{2n}$.`,
+    copie: R`<p>$H_{2n}-H_n=\sum_{k=n+1}^{2n}\frac1k$ : $n$ termes, tous $\geqslant\frac1{2n}$ (inverse décroissante). ${ph("donc","Donc")} $H_{2n}-H_n\geqslant n\cdot\frac1{2n}=\frac12$.</p><p>Par récurrence, $H_{2^m}\geqslant1+\frac m2$ : vrai pour $m=0$ ($H_1=1$) ; si vrai au rang $m$, $H_{2^{m+1}}\geqslant H_{2^m}+\frac12\geqslant1+\frac{m+1}2$.</p><p>${ph("comme","Comme")} $(H_n)$ est croissante, pour $A\in\mathbb R$ et $m$ tel que $1+\frac m2\geqslant A$, on a $H_n\geqslant A$ dès que $n\geqslant2^m$ : $H_n\to+\infty$.</p><div class="sbox">$$H_{2n}-H_n\geqslant\tfrac12,\qquad H_n\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $\frac1k\to0$ donc la série converge ». C'est faux : la série harmonique diverge.</p><p><b>Premier réflexe :</b> chercher une comparaison avec une intégrale. C'est la question 4. Ici on cherche une minoration plus élémentaire, par paquets.</p>`,
+    trou: { q: R`Combien de termes comporte $\sum_{k=n+1}^{2n}\frac1k$ et par quoi minore-t-on chacun ?`, c: [R`$n$ termes, chacun $\geqslant\frac1{2n}$`, R`$n+1$ termes, chacun $\geqslant\frac1n$`, R`$2n$ termes, chacun $\geqslant\frac1{2n}$`, R`$n$ termes, chacun $\geqslant\frac1n$`], ok: 0, why: R`Il y a $2n-n=n$ termes ; pour $k\leqslant2n$ on a $\frac1k\geqslant\frac1{2n}$ (et non $\frac1n$, qui est plus grand que le terme).` },
+    bareme: { sur: 4, l: [[1, R`$H_{2n}-H_n\geqslant\frac12$ avec nombre de termes`], [1, R`Récurrence $H_{2^m}\geqslant1+\frac m2$`], [1, R`Monotonie de $(H_n)$`], [1, R`Passage à $+\infty$ avec $A$ et le rang $2^m$`]] },
+    jury: [
+      { e: R`Affirmer « $H_n$ croissante non majorée donc $+\infty$ » sans prouver la non-majoration.`, p: R`C'est la question : zéro.` },
+      { e: R`Se tromper dans le nombre de termes.`, p: R`La borne $\frac12$ devient fausse : deux points perdus.` }
+    ] },
+  { declic: R`Si $n(u_{n+1}-u_n)\to1$, alors à partir d'un rang $u_{n+1}-u_n\geqslant\frac1{2n}$. On somme (télescopage) : $u_n$ se minore par la série harmonique, qui diverge.`,
+    copie: R`<p>${ph("comme","Comme")} $n(u_{n+1}-u_n)\to1>\frac12$, il existe $N\geqslant1$ tel que pour $n\geqslant N$, $u_{n+1}-u_n\geqslant\frac1{2n}$.</p><p>Pour $n>N$, par télescopage : $u_n-u_N=\sum_{k=N}^{n-1}(u_{k+1}-u_k)\geqslant\frac12\big(H_{n-1}-H_{N-1}\big)$.</p><p>${ph("or","Or")} $H_{N-1}$ est une constante et $H_{n-1}\to+\infty$ (question 1). ${ph("donc","Donc")} $u_n\to+\infty$.</p><div class="sbox">$$n(u_{n+1}-u_n)\to1\implies u_n\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $u_{n+1}-u_n\to0$ donc $(u_n)$ converge ». Faux : $u_n=\ln n$ a une différence qui tend vers $0$ et diverge.</p><p><b>Premier réflexe :</b> citer le théorème de la limite monotone. Il faudrait la majoration, ce qui est faux : la suite n'est pas majorée.</p>`,
+    trou: { q: R`Pourquoi peut-on choisir $c=\frac12$ comme seuil ?`, c: [R`la limite $1$ est $>\frac12$, donc à partir d'un rang $n(u_{n+1}-u_n)>\frac12$`, R`parce que $\frac12\lt0$`, R`parce que $n(u_{n+1}-u_n)=1$ pour tout $n$`, R`parce que $u_n$ est croissante`], ok: 0, why: R`La définition de la limite avec $\varepsilon=\frac12$ donne $n(u_{n+1}-u_n)\in]\frac12,\frac32[$ à partir d'un rang.` },
+    bareme: { sur: 3, l: [[1, R`Rang $N$ avec $u_{n+1}-u_n\geqslant\frac1{2n}$ justifié`], [1, R`Sommation télescopique et minoration par $H_{n-1}-H_{N-1}$`], [1, R`Limite $+\infty$ avec $H_n\to+\infty$`]] },
+    jury: [
+      { e: R`Ne pas préciser le rang $N$ à partir duquel l'inégalité est valable.`, p: R`Inégalité fausse pour les petits $n$ : point perdu.` }
+    ] },
+  { declic: R`Une inégalité du type $\ln(1+t)\leqslant t$ : on étudie $f(t)=t-\ln(1+t)$ et on montre qu'elle est positive avec son minimum en $0$. La seconde inégalité se déduit de la première en changeant de variable.`,
+    copie: R`<p>${ph("posons","Posons")} $f(t)=t-\ln(1+t)$ sur $]-1,+\infty[$. $f'(t)=\frac t{1+t}$ est du signe de $t$ : $f$ décroît sur $]-1,0]$, croît sur $[0,+\infty[$. ${ph("donc","Donc")} $f\geqslant f(0)=0$ : $\ln(1+t)\leqslant t$.</p><p>Soit $t>-1$ et $s=-\frac t{1+t}$. Alors $1+s=\frac1{1+t}>0$, donc $s>-1$ et $\ln(1+s)\leqslant s$, c'est-à-dire $-\ln(1+t)\leqslant-\frac t{1+t}$.</p><p>${ph("ainsi","Ainsi")} $\ln(1+t)\geqslant\frac t{1+t}$.</p><div class="sbox">$$\forall t>-1,\quad\frac t{t+1}\leqslant\ln(1+t)\leqslant t.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier le domaine $t>-1$ : le logarithme n'existe pas pour $t\leqslant-1$.</p><p><b>Premier réflexe :</b> étudier directement $\ln(1+t)-\frac t{1+t}$. Possible, mais le changement de variable $s=-\frac t{1+t}$ évite un second calcul de dérivée.</p>`,
+    trou: { q: R`Quel est le signe de $f'(t)=\frac t{1+t}$ sur $]-1,+\infty[$ ?`, c: [R`celui de $t$, car $1+t>0$`, R`toujours positif`, R`toujours négatif`, R`celui de $1+t$`], ok: 0, why: R`Le dénominateur $1+t$ est strictement positif sur le domaine : le signe est celui du numérateur $t$.` },
+    bareme: { sur: 4, l: [[1, R`Dérivée de $f$ et signe sur $]-1,+\infty[$`], [1, R`Minimum en $0$ et première inégalité`], [1, R`Changement de variable $s=-\frac t{1+t}$ avec $s>-1$`], [1, R`Seconde inégalité obtenue en multipliant par $-1$`]] },
+    jury: [
+      { e: R`Oublier de vérifier que $s>-1$.`, p: R`Application illégitime de la première inégalité : point perdu.` },
+      { e: R`Ne pas inverser le sens en multipliant par $-1$.`, p: R`Inégalité fausse : deux points perdus.` }
+    ] },
+  { declic: R`Les deux inégalités du logarithme, avec $t=\frac1k$ puis $t=\frac1{k-1}$, donnent des différences $\ln(k+1)-\ln k$ qui se télescopent en sommant.`,
+    copie: R`<p>Avec $t=\frac1k$ : $\ln(k+1)-\ln k=\ln(1+\frac1k)\leqslant\frac1k$. En sommant pour $k=1,\dots,n$ : $\ln(n+1)\leqslant H_n$.</p><p>Avec $t=\frac1{k-1}$ ($k\geqslant2$) : $\frac1k=\frac{t}{t+1}\leqslant\ln(1+t)=\ln k-\ln(k-1)$. En sommant pour $k=2,\dots,n$ : $H_n-1\leqslant\ln n$.</p><p>${ph("donc","Donc")} pour $n\geqslant2$ : $\frac{\ln(n+1)}{\ln n}\leqslant\frac{H_n}{\ln n}\leqslant1+\frac1{\ln n}$. Les deux bornes tendent vers $1$ : $H_n\sim\ln n$.</p><div class="sbox">$$\ln(n+1)\leqslant H_n\leqslant1+\ln n,\qquad H_n\sim\ln n.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier le terme $k=1$ dans la majoration : l'inégalité de gauche ne s'applique pas à $t=\frac1{k-1}$ pour $k=1$, donc on somme à partir de $2$.</p><p><b>Premier réflexe :</b> comparer avec $\int_1^n\frac{\mathrm dx}x$. Fonctionne aussi, mais ici on exploite l'inégalité qui vient d'être démontrée.</p>`,
+    trou: { q: R`Pourquoi $\sum_{k=1}^n\big(\ln(k+1)-\ln k\big)=\ln(n+1)$ ?`, c: [R`somme télescopique : $\ln1=0$ reste avec $\ln(n+1)$`, R`les termes sont tous égaux`, R`$\ln$ est linéaire`, R`parce que $n\to+\infty$`], ok: 0, why: R`Chaque $\ln k$ intervient deux fois, avec signes opposés, sauf $\ln(n+1)$ et $-\ln1=0$.` },
+    bareme: { sur: 4, l: [[1, R`Minoration $H_n\geqslant\ln(n+1)$ avec $t=\frac1k$`], [1, R`Majoration $H_n-1\leqslant\ln n$ avec $t=\frac1{k-1}$`], [1, R`Division par $\ln n>0$ pour $n\geqslant2$`], [1, R`Gendarmes : limite du quotient $=1$`]] },
+    jury: [
+      { e: R`Sommer à partir de $k=1$ dans la majoration.`, p: R`Division par $0$ en $k=1$ : erreur grave, deux points perdus.` },
+      { e: R`Diviser par $\ln n$ sans préciser $n\geqslant2$.`, p: R`$\ln1=0$ : point perdu.` }
+    ] },
+  { declic: R`Deux entiers consécutifs donnent $u_{n+1}-u_n=\frac1{n+1}-\ln(1+\frac1n)$ : l'inégalité de gauche du logarithme donne le signe. Une suite décroissante et minorée converge.`,
+    copie: R`<p>$u_{n+1}-u_n=\frac1{n+1}-\ln(1+\frac1n)$. Avec $t=\frac1n$, $\ln(1+\frac1n)\geqslant\frac{1/n}{1/n+1}=\frac1{n+1}$. ${ph("donc","Donc")} $u_{n+1}-u_n\leqslant0$ : $(u_n)$ est décroissante.</p><p>Par la question 4, $H_n\geqslant\ln(n+1)\geqslant\ln n$, donc $u_n\geqslant0$.</p><p>${ph("ainsi","Ainsi")}, décroissante et minorée, $(u_n)$ converge vers $\gamma\in[0,1]$ (car $u_n\leqslant u_1=1$).</p><div class="sbox">$$H_n=\ln n+\gamma+o(1),\qquad\gamma\in[0,1].$$</div>`,
+    tete: R`<p><b>Piège :</b> penser que $u_n=H_n-\ln n$ tend vers $0$ car $H_n\sim\ln n$. L'équivalent ne dit rien sur la différence : elle converge ici vers une constante non nulle.</p><p><b>Premier réflexe :</b> montrer que la suite est de Cauchy. Le théorème de la limite monotone est plus direct.</p>`,
+    trou: { q: R`Quelle inégalité donne le signe de $u_{n+1}-u_n$ ?`, c: [R`$\ln(1+t)\geqslant\frac t{t+1}$ avec $t=\frac1n$`, R`$\ln(1+t)\leqslant t$ avec $t=\frac1n$`, R`$H_n\leqslant1+\ln n$`, R`$\ln n\leqslant n$`], ok: 0, why: R`Il faut minorer $\ln(1+\frac1n)$ par $\frac1{n+1}$, ce qui est l'inégalité de gauche. L'inégalité de droite donnerait la majoration inverse.` },
+    bareme: { sur: 3, l: [[1, R`Calcul de $u_{n+1}-u_n$ et signe grâce à la question 3`], [1, R`Minoration $u_n\geqslant0$`], [1, R`Théorème de la limite monotone et conclusion`]] },
+    jury: [
+      { e: R`Invoquer le théorème de la limite monotone sans les deux hypothèses.`, p: R`Il faut décroissante <i>et</i> minorée : point perdu.` },
+      { e: R`Écrire « $H_n\sim\ln n$ donc $u_n\to0$ ».`, p: R`Erreur de cours : deux points perdus.` }
+    ] },
+  { declic: R`Une somme de $\frac1{\sqrt k}$ : on encadre chaque terme par une différence $2(\sqrt{k+1}-\sqrt k)$ via la quantité conjuguée, puis on télescope. La suite $S_n-2\sqrt n$ est décroissante et minorée.`,
+    copie: R`<p>$2\big(\sqrt{n+1}-\sqrt n\big)=\frac2{\sqrt{n+1}+\sqrt n}$ et $2\sqrt n\leqslant\sqrt{n+1}+\sqrt n\leqslant2\sqrt{n+1}$, d'où $\frac1{\sqrt{n+1}}\leqslant2(\sqrt{n+1}-\sqrt n)\leqslant\frac1{\sqrt n}$.</p><p>${ph("donc","Donc")} $S_n\geqslant2(\sqrt{n+1}-1)\to+\infty$.</p><p>$v_n=S_n-2\sqrt n$ vérifie $v_{n+1}-v_n=\frac1{\sqrt{n+1}}-2(\sqrt{n+1}-\sqrt n)\leqslant0$ et $v_n\geqslant-2$ : $(v_n)$ converge vers $c$.</p><p>${ph("ainsi","Ainsi")} $\frac{S_n}{2\sqrt n}=1+\frac{v_n}{2\sqrt n}\to1$ : $S_n\sim2\sqrt n$.</p><div class="sbox">$$S_n\to+\infty,\quad S_n-2\sqrt n\to c,\quad S_n\sim2\sqrt n.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que $\frac1{\sqrt k}$ est « presque » $\frac1{\sqrt n}$. La somme grandit comme $2\sqrt n$, pas comme $\sqrt n$.</p><p><b>Premier réflexe :</b> comparer à $\int\frac{\mathrm dx}{\sqrt x}$. Ici l'encadrement par différences de racines est plus propre.</p>`,
+    trou: { q: R`Par quoi multiplie-t-on $\sqrt{n+1}-\sqrt n$ pour obtenir $\frac1{\sqrt{n+1}+\sqrt n}$ ?`, c: [R`$\frac{\sqrt{n+1}+\sqrt n}{\sqrt{n+1}+\sqrt n}$`, R`$\frac{\sqrt{n+1}-\sqrt n}{\sqrt{n+1}-\sqrt n}$`, R`$\sqrt n$`, R`$n$`], ok: 0, why: R`On écrit $\sqrt{n+1}-\sqrt n=\frac{(n+1)-n}{\sqrt{n+1}+\sqrt n}=\frac1{\sqrt{n+1}+\sqrt n}$ : le produit du numérateur et du conjugué fait $1$.` },
+    bareme: { sur: 4, l: [[1, R`Encadrement de $2(\sqrt{n+1}-\sqrt n)$`], [1, R`Divergence de $S_n$ par télescopage`], [1, R`$v_n=S_n-2\sqrt n$ décroissante et minorée`], [1, R`Équivalent $S_n\sim2\sqrt n$`]] },
+    jury: [
+      { e: R`Oublier de justifier que $(v_n)$ est bornée.`, p: R`Le passage au quotient n'est pas fondé : point perdu.` },
+      { e: R`Se tromper de sens dans l'encadrement.`, p: R`Monotonie fausse : deux points perdus.` }
+    ] }
+], [
+  { q: R`Que dit le théorème de la limite monotone ?`, c: [R`une suite décroissante et minorée converge`, R`une suite décroissante converge`, R`une suite bornée converge`, R`une suite minorée converge`], ok: 0, r: "su-mono" },
+  { q: R`Que vaut $\sum_{k=a}^b(x_{k+1}-x_k)$ ?`, c: [R`$x_{b+1}-x_a$`, R`$x_b-x_a$`, R`$x_{b+1}+x_a$`, R`$(b-a)x_a$`], ok: 0, r: "su-tele" },
+  { q: R`Pour $t>-1$, laquelle de ces inégalités est vraie ?`, c: [R`$\ln(1+t)\leqslant t$`, R`$\ln(1+t)\geqslant t$`, R`$\ln(1+t)\leqslant\frac t{1+t}$ pour $t>0$`, R`$\ln(1+t)\geqslant1+t$`], ok: 0, r: "su-ineg" }
+]);
+
+/* ---------- su-06 · Produits télescopiques, somme alternée et équation exponentielle ---------- */
+A("su-06", [
+  { declic: R`Un produit de cosinus d'angles qui se divisent par $2$ : on multiplie par $\sin\frac a{2^n}$ pour que $\sin x\cos x=\frac12\sin2x$ le télescope. On le démontre par récurrence.`,
+    copie: R`<p>Montrons par récurrence $\sin\frac a{2^n}\,P_n=\frac{\sin a}{2^n}$. Pour $n=1$ : $\sin\frac a2\cos\frac a2=\frac12\sin a$ ✓.</p><p>Si c'est vrai au rang $n$ : $\sin\frac a{2^{n+1}}P_{n+1}=\sin\frac a{2^{n+1}}\cos\frac a{2^{n+1}}P_n=\frac12\sin\frac a{2^n}P_n=\frac{\sin a}{2^{n+1}}$.</p><p>Pour $a=0$ : $P_n=1\to1$. Pour $a\neq0$ et $n$ grand, $\sin\frac a{2^n}\neq0$ et $P_n=\frac{\sin a}a\cdot\frac{a/2^n}{\sin(a/2^n)}$.</p><p>${ph("donc","Donc")} $P_n\to\frac{\sin a}a$ car $\frac{\sin x_n}{x_n}\to1$ avec $x_n=\frac a{2^n}\to0$.</p><div class="sbox">$$\prod_{k=1}^n\cos\frac a{2^k}\to\frac{\sin a}a\ (a\neq0).$$</div>`,
+    tete: R`<p><b>Piège :</b> diviser par $\sin\frac a{2^n}$ sans vérifier qu'il est non nul. Pour $a=0$ ou $a=2^n\pi k$, c'est impossible : on traite $a=0$ à part.</p><p><b>Premier réflexe :</b> prendre le logarithme du produit. Les cosinus peuvent être négatifs : le logarithme n'est pas défini en général.</p>`,
+    trou: { q: R`Quelle formule fait le lien entre $\sin\frac a{2^{n+1}}\cos\frac a{2^{n+1}}$ et $\sin\frac a{2^n}$ ?`, c: [R`$\sin x\cos x=\frac12\sin2x$`, R`$\sin x\cos x=\sin2x$`, R`$\sin x\cos x=\cos2x$`, R`$\sin x+\cos x=\sin2x$`], ok: 0, why: R`C'est la formule de duplication $\sin2x=2\sin x\cos x$, avec $x=\frac a{2^{n+1}}$ et $2x=\frac a{2^n}$.` },
+    bareme: { sur: 4, l: [[1, R`Initialisation de l'identité`], [1, R`Hérédité avec $\sin x\cos x=\frac12\sin2x$`], [1, R`Cas $a=0$ traité séparément`], [1, R`Cas $a\neq0$ : limite $\frac{\sin a}a$`]] },
+    jury: [
+      { e: R`Diviser par $\sin\frac a{2^n}$ sans vérifier qu'il est non nul.`, p: R`Division potentiellement par $0$ : point perdu.` },
+      { e: R`Oublier le cas $a=0$.`, p: R`Cas à part non traité : point perdu.` }
+    ] },
+  { declic: R`Le produit $\prod(1+z^{2^k})$ rappelle $(1-w)(1+w)=1-w^2$ : en multipliant par $1-z$, chaque facteur remplace $1-w$ par $1-w^2$, d'où un télescopage.`,
+    copie: R`<p>Récurrence : $(1-z)Q_n=1-z^{2^{n+1}}$. Pour $n=0$ : $(1-z)(1+z)=1-z^2$ ✓. Hérédité : $(1-z)Q_{n+1}=\big(1-z^{2^{n+1}}\big)\big(1+z^{2^{n+1}}\big)=1-z^{2^{n+2}}$.</p><p>${ph("comme","Comme")} $|z|\lt1$, $z\neq1$, donc $Q_n=\frac{1-z^{2^{n+1}}}{1-z}$.</p><p>${ph("or","Or")} $2^{n+1}\geqslant n+1$ donc $|z^{2^{n+1}}|\leqslant|z|^{n+1}\to0$. ${ph("donc","Donc")} $Q_n\to\frac1{1-z}$, soit $2$ pour $z=\frac12$.</p><div class="sbox">$$\prod_{k=0}^n\big(1+z^{2^k}\big)\to\frac1{1-z}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de vérifier $z\neq1$ avant de diviser par $1-z$. Ici $|z|\lt1$ garantit $z\neq1$.</p><p><b>Premier réflexe :</b> développer le produit. Il donne $\sum_{j=0}^{2^{n+1}-1}z^j$ (écriture binaire) mais il faut le démontrer ; la méthode télescopique est plus courte.</p>`,
+    trou: { q: R`Pourquoi $|z|^{2^{n+1}}\leqslant|z|^{n+1}$ ?`, c: [R`$0\leqslant|z|\lt1$ et $2^{n+1}\geqslant n+1$`, R`$|z|>1$`, R`$2^{n+1}\lt n+1$`, R`$z$ est réel`], ok: 0, why: R`Pour $0\leqslant r\lt1$, la fonction $m\mapsto r^m$ est décroissante : un exposant plus grand donne une valeur plus petite.` },
+    bareme: { sur: 4, l: [[1, R`Initialisation $n=0$`], [1, R`Hérédité avec $(1-w)(1+w)=1-w^2$`], [1, R`Formule $Q_n=\frac{1-z^{2^{n+1}}}{1-z}$ avec $z\neq1$`], [1, R`Limite et cas $z=\frac12$`]] },
+    jury: [
+      { e: R`Écrire $z^{2^n}\to0$ sans justifier.`, p: R`Il faut un argument de croissance de l'exposant : point perdu.` },
+      { e: R`Diviser par $1-z$ sans vérifier $z\neq1$.`, p: R`Division non justifiée : point perdu.` }
+    ] },
+  { declic: R`$\frac1p$ est encadré par deux aires sous la courbe de $\frac1x$ : à gauche de $p$ la fonction est plus grande, à droite plus petite. On somme et les logarithmes se télescopent.`,
+    copie: R`<p>Sur $[p,p+1]$, $\frac1x\leqslant\frac1p$ donc $\int_p^{p+1}\frac{\mathrm dx}x\leqslant\frac1p$. Sur $[p-1,p]$, $\frac1x\geqslant\frac1p$ donc $\int_{p-1}^p\frac{\mathrm dx}x\geqslant\frac1p$.</p><p>${ph("posons","Posons")} $p=n+k$ ($1\leqslant k\leqslant n$) : $\ln(n+k+1)-\ln(n+k)\leqslant\frac1{n+k}\leqslant\ln(n+k)-\ln(n+k-1)$.</p><p>En sommant (télescopage) : $\ln(2n+1)-\ln(n+1)\leqslant S_n\leqslant\ln2n-\ln n=\ln2$.</p><p>${ph("donc","Donc")} par gendarmes ($\frac{2n+1}{n+1}\to2$) : $S_n\to\ln2$.</p><div class="sbox">$$\ln\frac{2n+1}{n+1}\leqslant S_n\leqslant\ln2,\qquad S_n\to\ln2.$$</div>`,
+    tete: R`<p><b>Piège :</b> confondre le sens des deux encadrements : sur $[p-1,p]$ la fonction est au-dessus de $\frac1p$, sur $[p,p+1]$ au-dessous.</p><p><b>Premier réflexe :</b> reconnaître une somme de Riemann. Valable, mais ici on demande un encadrement explicite.</p>`,
+    trou: { q: R`Sur $[p-1,p]$, quel est le sens de $\frac1x$ par rapport à $\frac1p$ ?`, c: [R`$\frac1x\geqslant\frac1p$ car $x\leqslant p$`, R`$\frac1x\leqslant\frac1p$`, R`$\frac1x=\frac1p$`, R`on ne peut pas comparer`], ok: 0, why: R`Si $0\lt x\leqslant p$ alors $\frac1x\geqslant\frac1p$ (inverse décroissante).` },
+    bareme: { sur: 4, l: [[1, R`Intégrale à droite : $\int_p^{p+1}\leqslant\frac1p$`], [1, R`Intégrale à gauche : $\int_{p-1}^p\geqslant\frac1p$`], [1, R`Sommation télescopique et encadrement de $S_n$`], [1, R`Gendarmes : $S_n\to\ln2$`]] },
+    jury: [
+      { e: R`Écrire l'intégrale sans préciser le sens de $\frac1x$ par rapport à $\frac1p$.`, p: R`Inégalité non justifiée : point perdu.` },
+      { e: R`Se tromper de bornes dans le télescopage.`, p: R`Résultat faux ($\ln2$ non obtenu) : deux points perdus.` }
+    ] },
+  { declic: R`Une somme alternée jusqu'à $2n$ se réécrit : on retire deux fois les termes pairs de la somme harmonique. On retrouve $H_{2n}-H_n=S_n$. Pour une suite, on traite pairs et impairs.`,
+    copie: R`<p>Les termes d'indice pair valent $-\frac1k$ : $S'_{2n}=H_{2n}-2\sum_{j=1}^n\frac1{2j}=H_{2n}-H_n=\sum_{j=1}^n\frac1{n+j}=S_n$.</p><p>${ph("donc","Donc")} $S'_{2n}\to\ln2$ (question 3). De plus $S'_{2n+1}=S'_{2n}+\frac1{2n+1}\to\ln2$.</p><p>${ph("comme","Comme")} les suites extraites des indices pairs et impairs ont la même limite, $S'_n\to\ln2$.</p><div class="sbox">$$S'_{2n}=S_n,\qquad\sum_{k=1}^n\frac{(-1)^{k-1}}k\to\ln2.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire qu'une somme alternée tend vers $0$ car les termes alternent. Elle tend vers $\ln2$.</p><p><b>Premier réflexe :</b> invoquer le critère des séries alternées pour l'existence de la limite. Il ne donne pas sa valeur : ici le lien avec $S_n$ la calcule.</p>`,
+    trou: { q: R`Combien vaut $2\sum_{j=1}^n\frac1{2j}$ ?`, c: [R`$H_n$`, R`$H_{2n}$`, R`$\frac{H_n}2$`, R`$2H_n$`], ok: 0, why: R`$2\cdot\frac1{2j}=\frac1j$, donc la somme vaut $\sum_{j=1}^n\frac1j=H_n$.` },
+    bareme: { sur: 4, l: [[1, R`$S'_{2n}=H_{2n}-2\sum\frac1{2j}$`], [1, R`$S'_{2n}=S_n$ par changement d'indice`], [1, R`Limite de la suite des indices impairs`], [1, R`Pairs et impairs de même limite : conclusion`]] },
+    jury: [
+      { e: R`Conclure avec la seule suite des indices pairs.`, p: R`Les impairs ne sont pas traités : deux points perdus.` }
+    ] },
+  { declic: R`Deux suites dont la somme tend vers $0$ et dont $\mathrm e^u+\mathrm e^v$ tend vers $2$ : on symétrise avec la somme et la demi-différence, ce qui fait apparaître $\mathrm{ch}$. La minoration $\mathrm{ch}\,x\geqslant1+\frac{x^2}2$ donne alors $w_n\to0$.`,
+    copie: R`<p>${ph("posons","Posons")} $\varepsilon_n=u_n+v_n\to0$ et $w_n=\frac{u_n-v_n}2$. Alors $u_n=\frac{\varepsilon_n}2+w_n$, $v_n=\frac{\varepsilon_n}2-w_n$, donc $\mathrm e^{u_n}+\mathrm e^{v_n}=2\mathrm e^{\varepsilon_n/2}\mathrm{ch}\,w_n$.</p><p>${ph("donc","Donc")} $\mathrm{ch}\,w_n\to\frac2{2\mathrm e^0}=1$.</p><p>Minoration : $g(x)=\mathrm{ch}\,x-1-\frac{x^2}2$ a pour dérivées $g'=\mathrm{sh}\,x-x$ et $g''=\mathrm{ch}\,x-1\geqslant0$ ; $g'$ croissante nulle en $0$, donc $g\geqslant g(0)=0$.</p><p>${ph("ainsi","Ainsi")} $0\leqslant w_n^2\leqslant2(\mathrm{ch}\,w_n-1)\to0$, $w_n\to0$, puis $u_n\to0$ et $v_n\to0$.</p><div class="sbox">$$u_n\to0,\qquad v_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser que $\mathrm e^{u_n}+\mathrm e^{v_n}\to2$ et $u_n+v_n\to0$ suffisent « par symétrie ». Il faut contrôler $u_n-v_n$, et $\mathrm{ch}$ est pair : le signe de $w_n$ ne compte pas.</p><p><b>Premier réflexe :</b> raisonner comme au début de la khôlle avec $A_n=\mathrm e^{u_n/2}$. Ici le produit $\mathrm e^{u_n+v_n}$ n'est pas connu directement.</p>`,
+    trou: { q: R`Que vaut $\mathrm e^{u_n}+\mathrm e^{v_n}$ en fonction de $\varepsilon_n$ et $w_n$ ?`, c: [R`$2\,\mathrm e^{\varepsilon_n/2}\,\mathrm{ch}\,w_n$`, R`$2\,\mathrm e^{\varepsilon_n}\,\mathrm{ch}\,w_n$`, R`$\mathrm e^{\varepsilon_n/2}\,\mathrm{sh}\,w_n$`, R`$\mathrm e^{\varepsilon_n}+\mathrm{ch}\,w_n$`], ok: 0, why: R`On factorise $\mathrm e^{\varepsilon_n/2}$ : $\mathrm e^{\varepsilon_n/2}(\mathrm e^{w_n}+\mathrm e^{-w_n})=2\mathrm e^{\varepsilon_n/2}\mathrm{ch}\,w_n$.` },
+    bareme: { sur: 5, l: [[1, R`Symétrisation $u_n=\frac{\varepsilon_n}2+w_n$ et identité avec $\mathrm{ch}$`], [1, R`Limite $\mathrm{ch}\,w_n\to1$`], [1, R`Minoration $\mathrm{ch}\,x\geqslant1+\frac{x^2}2$ démontrée`], [1, R`$w_n^2\to0$ puis $w_n\to0$`], [1, R`Conclusion pour $u_n$ et $v_n$`]] },
+    jury: [
+      { e: R`Admettre $\mathrm{ch}\,x\geqslant1+\frac{x^2}2$ sans preuve.`, p: R`Inégalité clé non démontrée : deux points perdus.` },
+      { e: R`Oublier que $\mathrm e^{\varepsilon_n/2}\to1$ dans le quotient.`, p: R`La limite de $\mathrm{ch}\,w_n$ n'est pas justifiée : point perdu.` }
+    ] }
+], [
+  { q: R`Que vaut $\sin2x$ ?`, c: [R`$2\sin x\cos x$`, R`$\sin x\cos x$`, R`$2\sin x+2\cos x$`, R`$\sin^2x-\cos^2x$`], ok: 0, r: "su-usuel" },
+  { q: R`Que vaut $\lim_{x\to0}\frac{\sin x}x$ ?`, c: [R`$1$`, R`$0$`, R`$\frac12$`, R`n'existe pas`], ok: 0, r: "su-usuel" },
+  { q: R`Que vaut $\mathrm{ch}\,x$ ?`, c: [R`$\frac{\mathrm e^x+\mathrm e^{-x}}2$`, R`$\frac{\mathrm e^x-\mathrm e^{-x}}2$`, R`$\mathrm e^x+\mathrm e^{-x}$`, R`$\frac{\mathrm e^{x}}{2}$`], ok: 0, r: "su-usuel" }
+]);
+
 })();
