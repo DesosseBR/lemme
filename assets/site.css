@@ -2199,3 +2199,8 @@ svg.fx.m5 .vk,svg.fx.m5 .k{stroke-width:2.2}
 .viz-ov span.it{color:var(--ink);font-size:15px}
 .viz-ov mjx-container{margin:0!important}
 svg.fx.m2:has(.fx-frame) .axh{display:none}
+
+/* encadré « erreur fréquente » des corrigés pas à pas */
+.attn{margin:14px 0;padding:6px 0 6px 14px;border-left:3px solid var(--red)}
+.attn > b:first-child{display:block;font-family:var(--f-display);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+.attn p{margin:4px 0}
