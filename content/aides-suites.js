@@ -646,4 +646,144 @@ A("su-10", [
   { q: R`Quelle formule donne $\cos2x$ en fonction de $\cos x$ ?`, c: [R`$2\cos^2x-1$`, R`$2\cos x$`, R`$\cos^2x+1$`, R`$1-2\cos x$`], ok: 0, r: "su-usuel" }
 ]);
 
+/* ---------- su-11 · Négligeabilité et équivalents simples ---------- */
+A("su-11", [
+  { declic: R`Classer des suites : on compare deux par deux avec le quotient. $u_n\ll v_n$ signifie $\frac{u_n}{v_n}\to0$. On enchaîne ensuite par transitivité.`,
+    copie: R`<p>$\dfrac{1/n^2}{\ln n/n^2}=\dfrac1{\ln n}\to0$ : $\frac1{n^2}\ll\frac{\ln n}{n^2}$.</p><p>$\dfrac{\ln n/n^2}{1/(n\ln n)}=\dfrac{(\ln n)^2}n\to0$ : $\frac{\ln n}{n^2}\ll\frac1{n\ln n}$.</p><p>$\dfrac{1/(n\ln n)}{1/n}=\dfrac1{\ln n}\to0$ et $\dfrac{1/n}{\ln n/n}=\dfrac1{\ln n}\to0$.</p><p>${ph("donc","Donc")} par transitivité ($\frac uw=\frac uv\cdot\frac vw\to0$) :</p><div class="sbox">$$\frac1{n^2}\ll\frac{\ln n}{n^2}\ll\frac1{n\ln n}\ll\frac1n\ll\frac{\ln n}n.$$</div>`,
+    tete: R`<p><b>Piège :</b> classer par « taille de l'exposant de $n$ » seulement. $\frac{\ln n}{n^2}$ et $\frac1{n\ln n}$ ont des exposants différents mais le logarithme ne suffit pas à compenser l'écart d'un facteur $n$.</p><p><b>Premier réflexe :</b> évaluer chaque suite en $n=10$. Insuffisant pour une asymptotique : on fait des quotients.</p>`,
+    trou: { q: R`Que vaut $\frac{(\ln n)^2}n$ quand $n\to+\infty$ ?`, c: [R`il tend vers $0$ (croissances comparées)`, R`il tend vers $+\infty$`, R`il tend vers $1$`, R`il n'a pas de limite`], ok: 0, why: R`Une puissance de $\ln n$ est négligeable devant toute puissance positive de $n$.` },
+    bareme: { sur: 4, l: [[1, R`Définition $u_n\ll v_n\iff\frac{u_n}{v_n}\to0$`], [1, R`Quotients calculés pour les quatre couples consécutifs`], [1, R`Croissances comparées citées`], [1, R`Transitivité et classement final`]] },
+    jury: [
+      { e: R`Classer sans calculer de quotient.`, p: R`Aucune justification : zéro.` },
+      { e: R`Ne pas préciser la transitivité.`, p: R`Chaînage non justifié : point perdu.` }
+    ] },
+  { declic: R`Même méthode : quotients consécutifs. Un logarithme est négligeable devant toute puissance positive de $n$ ; deux suites qui diffèrent d'un facteur $\ln n$ se comparent par $\frac1{\ln n}\to0$.`,
+    copie: R`<p>$\dfrac{\sqrt n\ln n}n=\dfrac{\ln n}{\sqrt n}\to0$ : $\sqrt n\ln n\ll n$.</p><p>$\dfrac n{n\ln n}=\dfrac1{\ln n}\to0$ : $n\ll n\ln n$.</p><p>$\dfrac{n\ln n}{n^2/\ln n}=\dfrac{(\ln n)^2}n\to0$ et $\dfrac{n^2/\ln n}{n^2}=\dfrac1{\ln n}\to0$.</p><p>${ph("donc","Donc")}</p><div class="sbox">$$\sqrt n\ln n\ll n\ll n\ln n\ll\frac{n^2}{\ln n}\ll n^2.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que $n\ln n\ll n^2$ est une conséquence immédiate de $\ln n\ll n$ sans calcul. Elle l'est, mais le quotient $\frac{\ln n}n\to0$ doit être cité.</p><p><b>Premier réflexe :</b> placer les suites sur un graphique. On n'obtient que des tendances, pas de limite de quotient.</p>`,
+    trou: { q: R`Quelle suite est la plus grande parmi $\frac{n^2}{\ln n}$ et $n^2$ ?`, c: [R`$n^2$, car $\frac{n^2/\ln n}{n^2}=\frac1{\ln n}\to0$`, R`$\frac{n^2}{\ln n}$`, R`elles sont équivalentes`, R`on ne peut pas comparer`], ok: 0, why: R`Le quotient $\frac{n^2/\ln n}{n^2}=\frac1{\ln n}$ tend vers $0$ : la première est négligeable devant la seconde.` },
+    bareme: { sur: 3, l: [[1, R`Deux premiers quotients`], [1, R`Deux derniers quotients`], [1, R`Classement final par transitivité`]] },
+    jury: [
+      { e: R`Classer sans quotient.`, p: R`Résultat non justifié : deux points perdus.` }
+    ] },
+  { declic: R`Pour un équivalent d'une somme, on met en facteur le terme dominant : $u_n=v_n(1+\varepsilon_n)$ avec $\varepsilon_n\to0$. Les produits, quotients et puissances fixes sont compatibles avec $\sim$.`,
+    copie: R`<p>(a) $n+3\ln n=n\big(1+\frac{3\ln n}n\big)\sim n$, donc $u_n\sim n\mathrm e^{-(n+1)}\to0$ (croissances comparées).</p><p>(b) $\ln(n^2+1)=2\ln n\big(1+\frac{\ln(1+1/n^2)}{2\ln n}\big)\sim2\ln n$ et $n+1\sim n$ : $u_n\sim\frac{2\ln n}n\to0$.</p><p>(c) $n^2\pm n+1\sim n^2$ donc $\sqrt{n^2+n+1}\sim n$ et $\sqrt[3]{n^2-n+1}\sim n^{2/3}$. ${ph("donc","Donc")} $u_n\sim n^{1/3}\to+\infty$.</p><div class="sbox">$$\text{a) }\sim\tfrac n{\mathrm e^{n+1}}\to0,\quad\text{b) }\sim\tfrac{2\ln n}n\to0,\quad\text{c) }\sim n^{1/3}\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\mathrm e^{n+1}\sim\mathrm e^n$ « car $n+1\sim n$ ». Faux : le rapport vaut $\mathrm e$. On ne compose pas un équivalent par l'exponentielle.</p><p><b>Premier réflexe :</b> annuler les termes négligeables « à la main » sans factoriser. Il faut montrer que le facteur restant tend vers $1$.</p>`,
+    trou: { q: R`Pourquoi $n+3\ln n\sim n$ ?`, c: [R`$\frac{n+3\ln n}n=1+\frac{3\ln n}n\to1$`, R`parce que $\ln n\to0$`, R`parce que $3\ln n\gg n$`, R`parce que $n\to0$`], ok: 0, why: R`On forme le quotient avec $n$ : il vaut $1+\frac{3\ln n}n$ et $\frac{\ln n}n\to0$.` },
+    bareme: { sur: 4, l: [[1, R`(a) Facteur dominant et équivalent $n$`], [1, R`(a) Limite avec croissances comparées`], [1, R`(b) Équivalent du logarithme et conclusion`], [1, R`(c) Racines d'équivalents et limite $+\infty$`]] },
+    jury: [
+      { e: R`Composer un équivalent par l'exponentielle.`, p: R`Opération interdite : deux points perdus.` },
+      { e: R`Ne pas justifier $\sqrt{n^2+n+1}\sim n$.`, p: R`Compatibilité avec la racine à citer : point perdu.` }
+    ] },
+  { declic: R`Si $b_n\ll a_n$, alors $a_n+b_n=a_n(1+\frac{b_n}{a_n})\sim a_n$. On identifie le terme dominant du numérateur et du dénominateur, puis on divise.`,
+    copie: R`<p>(a) $\sqrt{n^2+1}\sim n\ll n^3$ donc $n^3-\sqrt{n^2+1}\sim n^3$. ${ph("comme","Comme")} $\ln n\ll n^2$, $\ln n-2n^2\sim-2n^2$.</p><p>${ph("donc","Donc")} $u_n\sim\frac{n^3}{-2n^2}=-\frac n2\to-\infty$.</p><p>(b) $\ln n\ll n^3$ et $1\ll n^3$ donc $2n^3-\ln n+1\sim2n^3$ ; $n^2+1\sim n^2$. ${ph("ainsi","Ainsi")} $u_n\sim2n\to+\infty$.</p><div class="sbox">$$\text{a) }u_n\sim-\tfrac n2\to-\infty,\qquad\text{b) }u_n\sim2n\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier le signe : le dénominateur dominant est $-2n^2$, d'où une limite $-\infty$.</p><p><b>Premier réflexe :</b> diviser numérateur et dénominateur par $n^3$. Marche aussi, mais produit des termes $\frac{\ln n}{n^3}$ à justifier.</p>`,
+    trou: { q: R`Quel est le terme dominant de $\ln n-2n^2$ ?`, c: [R`$-2n^2$`, R`$\ln n$`, R`$2n^2$`, R`$-\ln n$`], ok: 0, why: R`$\frac{\ln n}{n^2}\to0$ donc $\ln n$ est négligeable devant $n^2$ ; le terme dominant garde son signe : $-2n^2$.` },
+    bareme: { sur: 4, l: [[1, R`(a) numérateur $\sim n^3$`], [1, R`(a) dénominateur $\sim-2n^2$ et limite $-\infty$`], [1, R`(b) numérateur $\sim2n^3$`], [1, R`(b) quotient et limite $+\infty$`]] },
+    jury: [
+      { e: R`Perdre le signe du dénominateur.`, p: R`Limite fausse : deux points perdus.` }
+    ] },
+  { declic: R`Factorielle et exponentielles : on compare par le critère du rapport. $\frac{\mathrm e^n}{n!}\to0$, $\frac{2^n}{3^n}\to0$, puis le quotient est équivalent à $\frac{n!}{3^n}$ dont le rapport tend vers $+\infty$.`,
+    copie: R`<p>${ph("posons","Posons")} $x_n=\frac{\mathrm e^n}{n!}>0$ : $\frac{x_{n+1}}{x_n}=\frac{\mathrm e}{n+1}\to0\lt1$ donc $x_n\to0$ et $n!+\mathrm e^n=n!(1+x_n)\sim n!$.</p><p>$\big(\frac23\big)^n\to0$ donc $2^n+3^n=3^n(1+(\frac23)^n)\sim3^n$.</p><p>${ph("donc","Donc")} $u_n\sim\frac{n!}{3^n}$. Avec $y_n=\frac{n!}{3^n}$ : $\frac{y_{n+1}}{y_n}=\frac{n+1}3\to+\infty>1$, donc $y_n\to+\infty$.</p><div class="sbox">$$u_n\sim\frac{n!}{3^n}\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser que $\mathrm e^n\gg n!$ « parce qu'une exponentielle gagne ». C'est la factorielle qui gagne.</p><p><b>Premier réflexe :</b> citer la formule de Stirling. Hors programme ; le critère du rapport suffit.</p>`,
+    trou: { q: R`Que vaut $\frac{x_{n+1}}{x_n}$ pour $x_n=\frac{\mathrm e^n}{n!}$ ?`, c: [R`$\frac{\mathrm e}{n+1}$`, R`$\frac{n+1}{\mathrm e}$`, R`$\mathrm e(n+1)$`, R`$\frac{\mathrm e^n}{n+1}$`], ok: 0, why: R`$\frac{\mathrm e^{n+1}}{(n+1)!}\cdot\frac{n!}{\mathrm e^n}=\frac{\mathrm e}{n+1}$.` },
+    bareme: { sur: 4, l: [[1, R`$\mathrm e^n\ll n!$ par le critère du rapport`], [1, R`$2^n\ll3^n$ et équivalent $3^n$`], [1, R`Quotient $\sim\frac{n!}{3^n}$`], [1, R`Rapport $\frac{n+1}3\to+\infty$ et limite $+\infty$`]] },
+    jury: [
+      { e: R`Affirmer $n!\gg\mathrm e^n$ sans le justifier.`, p: R`Il faut le rapport : deux points perdus.` }
+    ] },
+  { declic: R`On ne soustrait pas des équivalents : on calcule d'abord la différence exacte (dénominateur commun ou quantité conjuguée), et seulement ensuite on cherche son équivalent.`,
+    copie: R`<p>(a) $\frac1{n-1}-\frac1{n+1}=\frac2{n^2-1}\sim\frac2{n^2}$.</p><p>(b) $\sqrt{n+1}-\sqrt{n-1}=\frac2{\sqrt{n+1}+\sqrt{n-1}}$. ${ph("comme","Comme")} les deux racines sont positives et équivalentes à $\sqrt n$, leur somme est $\sim2\sqrt n$. ${ph("donc","Donc")} la différence $\sim\frac1{\sqrt n}$.</p><p>(c) $\ln(n+1)-\ln n=\ln(1+\frac1n)\sim\frac1n$, donc $\sqrt{\ln(n+1)-\ln n}\sim\frac1{\sqrt n}$.</p><div class="sbox">$$\text{a) }\tfrac2{n^2},\qquad\text{b) }\tfrac1{\sqrt n},\qquad\text{c) }\tfrac1{\sqrt n}.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\frac1{n-1}\sim\frac1{n+1}$ donc la différence est équivalente à $0$. Un équivalent n'est jamais $0$ : on ne retranche pas des équivalents.</p><p><b>Premier réflexe :</b> développer chaque racine avec une formule du binôme. Le conjugué est plus direct.</p>`,
+    trou: { q: R`Pourquoi peut-on additionner $\sqrt{n+1}\sim\sqrt n$ et $\sqrt{n-1}\sim\sqrt n$ ?`, c: [R`les deux termes sont positifs`, R`ils sont décroissants`, R`on peut toujours additionner des équivalents`, R`ils tendent vers $0$`], ok: 0, why: R`La somme d'équivalents n'est licite que pour des termes de même signe (ici positifs) ; sinon des termes dominants peuvent s'annuler.` },
+    bareme: { sur: 4, l: [[1, R`(a) différence exacte puis équivalent`], [1, R`(b) quantité conjuguée`], [1, R`(b) somme d'équivalents positifs`], [1, R`(c) $\ln(1+\frac1n)\sim\frac1n$ puis racine`]] },
+    jury: [
+      { e: R`Soustraire deux équivalents.`, p: R`Opération interdite : deux points perdus.` }
+    ] },
+  { declic: R`Les équivalents usuels s'appliquent à une suite $x_n\to0$ : $\sin x_n\sim x_n$, $\ln(1+x_n)\sim x_n$, $\mathrm e^{x_n}-1\sim x_n$, $1-\cos x_n\sim\frac{x_n^2}2$. Quand l'argument ne se ramène pas à ces formes, on calcule directement.`,
+    copie: R`<p>(a) $x_n=\frac1{\sqrt{n+1}}\to0$ donc $\sin x_n\sim x_n\sim\frac1{\sqrt n}$.</p><p>(b) $\ln\sin\frac1n=-\ln n+\ln\big(n\sin\frac1n\big)$ avec $\ln(n\sin\frac1n)\to0$ : le rapport à $-\ln n$ tend vers $1$, donc $\sim-\ln n$.</p><p>(c) $1-\cos\frac1n\sim\frac1{2n^2}$.</p><p>(d) $n^{1/n}-1=\mathrm e^{x_n}-1$ avec $x_n=\frac{\ln n}n\to0$ : ${ph("donc","donc")} $\sim\frac{\ln n}n$.</p><div class="sbox">$$\text{a) }\tfrac1{\sqrt n},\ \text{b) }-\ln n,\ \text{c) }\tfrac1{2n^2},\ \text{d) }\tfrac{\ln n}n.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\ln\sin\frac1n\sim\ln\frac1n$ « car $\sin\frac1n\sim\frac1n$ ». On ne passe pas un équivalent au logarithme sans calcul : ici le résultat est vrai, mais il faut le justifier.</p><p><b>Premier réflexe :</b> poser $\sin x\approx x-\frac{x^3}6$. Valable, mais hors programme de Sup pour les équivalents.</p>`,
+    trou: { q: R`Quel équivalent utilise-t-on pour $1-\cos\frac1n$ ?`, c: [R`$1-\cos x_n\sim\frac{x_n^2}2$`, R`$1-\cos x_n\sim x_n$`, R`$1-\cos x_n\sim x_n^2$`, R`$1-\cos x_n\sim\frac{x_n}2$`], ok: 0, why: R`Avec $x_n=\frac1n$ on obtient $\frac1{2n^2}$ ; les autres formules ne correspondent pas au développement de $1-\cos$ en $0$.` },
+    bareme: { sur: 4, l: [[1, R`(a) $\sin x_n\sim x_n$ et passage à $\frac1{\sqrt n}$`], [1, R`(b) décomposition du logarithme et limite du rapport`], [1, R`(c) $1-\cos x_n\sim\frac{x_n^2}2$`], [1, R`(d) écriture en $\mathrm e^{x_n}-1$`]] },
+    jury: [
+      { e: R`Passer un équivalent au logarithme sans justification.`, p: R`Opération non licite : deux points perdus.` },
+      { e: R`Se tromper de coefficient dans $1-\cos x\sim\frac{x^2}2$.`, p: R`Équivalent faux : point perdu.` }
+    ] }
+], [
+  { q: R`Que signifie $u_n\sim v_n$ ?`, c: [R`$\frac{u_n}{v_n}\to1$`, R`$u_n-v_n\to0$`, R`$u_n=v_n$ à partir d'un rang`, R`$u_n\ll v_n$`], ok: 0, r: "su-equiv" },
+  { q: R`Que vaut $\lim\frac{\ln n}n$ ?`, c: [R`$0$`, R`$1$`, R`$+\infty$`, R`$\frac1{\mathrm e}$`], ok: 0, r: "su-usuel" },
+  { q: R`Si $x_n\to0$ ($x_n\neq0$), à quoi est équivalent $\ln(1+x_n)$ ?`, c: [R`$x_n$`, R`$x_n^2$`, R`$1+x_n$`, R`$\frac{x_n}2$`], ok: 0, r: "su-equiv" }
+]);
+
+/* ---------- su-12 · Équivalents et limites : puissances, sommes et intégrales ---------- */
+A("su-12", [
+  { declic: R`Un logarithme proche de $\ln(1+x_n)$ avec $x_n\to0$ est équivalent à $x_n$. On compose ensuite avec la racine carrée et on multiplie par $n$ : un produit d'équivalents.`,
+    copie: R`<p>$x_n=\frac1{n^2+1}\to0$, donc $\ln(1+x_n)\sim\frac1{n^2+1}\sim\frac1{n^2}$.</p><p>La racine carrée est compatible avec $\sim$ : $\sqrt{\ln(1+x_n)}\sim\frac1n$.</p><p>${ph("donc","Donc")} $u_n\sim n\cdot\frac1n=1$, et une suite équivalente à la constante $1\neq0$ tend vers $1$.</p><div class="sbox">$$\lim n\sqrt{\ln\Big(1+\frac1{n^2+1}\Big)}=1.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\frac1{n^2+1}\to0$ donc $u_n\to0\times\infty$ « indéterminée, donc non calculable ». Les équivalents lèvent l'indétermination.</p><p><b>Premier réflexe :</b> développer avec Taylor. Un équivalent usuel suffit.</p>`,
+    trou: { q: R`Pourquoi $u_n\sim1$ entraîne $u_n\to1$ ?`, c: [R`$\frac{u_n}1\to1$ par définition de $\sim$`, R`parce que $u_n$ est croissante`, R`parce que $u_n\geqslant0$`, R`parce que $n\to+\infty$`], ok: 0, why: R`$u_n\sim1$ signifie $\frac{u_n}{1}\to1$ : c'est exactement $u_n\to1$.` },
+    bareme: { sur: 3, l: [[1, R`$\ln(1+x_n)\sim x_n$ avec $x_n\to0$`], [1, R`Racine carrée et produit par $n$`], [1, R`Limite $1$ par équivalent à une constante non nulle`]] },
+    jury: [
+      { e: R`Écrire $\ln(1+x_n)\sim x_n$ sans dire que $x_n\to0$.`, p: R`Hypothèse manquante : point perdu.` }
+    ] },
+  { declic: R`Une puissance $n$-ième se réécrit $\mathrm e^{n\ln(\cdot)}$. On ne compose pas un équivalent par l'exponentielle : il faut une <i>limite</i> de l'exposant, puis la continuité de $\exp$.`,
+    copie: R`<p>$1+\sin\frac1n>0$ donc $u_n=\exp\big(n\ln(1+\sin\frac1n)\big)$.</p><p>$x_n=\sin\frac1n\to0$ ($x_n\neq0$) : $\ln(1+x_n)\sim x_n\sim\frac1n$. ${ph("donc","Donc")} l'exposant est $\sim n\cdot\frac1n=1$ et tend vers $1$.</p><p>${ph("ainsi","Ainsi")} par continuité de $\exp$, $u_n\to\mathrm e$.</p><div class="sbox">$$\lim\Big(1+\sin\frac1n\Big)^n=\mathrm e.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $u_n\sim\mathrm e^1$ en composant l'équivalent des exposants par $\exp$. Ici l'exposant a une limite : on passe à la limite, ce qui est licite.</p><p><b>Premier réflexe :</b> reconnaître $\big(1+\frac an\big)^n$. Ici $\sin\frac1n\sim\frac1n$ ramène à ce cas, mais le calcul direct est plus sûr.</p>`,
+    trou: { q: R`Quelle propriété permet de passer de « l'exposant tend vers $1$ » à « $u_n\to\mathrm e$ » ?`, c: [R`la continuité de $\exp$`, R`la croissance de $\exp$`, R`$\exp$ est équivalente à l'identité`, R`$\exp$ est bornée`], ok: 0, why: R`Si $y_n\to\ell$, la continuité de $\exp$ en $\ell$ donne $\mathrm e^{y_n}\to\mathrm e^\ell$.` },
+    bareme: { sur: 4, l: [[1, R`Écriture en exponentielle (avec $1+\sin\frac1n>0$)`], [1, R`$\ln(1+\sin\frac1n)\sim\sin\frac1n$`], [1, R`Équivalent de l'exposant : $\sim1$, donc limite $1$`], [1, R`Continuité de $\exp$ et conclusion $\mathrm e$`]] },
+    jury: [
+      { e: R`Composer un équivalent par $\exp$.`, p: R`Opération interdite : deux points perdus.` }
+    ] },
+  { declic: R`Une quantité $\frac{a^b}{c^d}$ : on passe à l'exponentielle et on étudie l'exposant $E_n$. C'est une différence de deux grandeurs proches : on factorise pour séparer le terme dominant.`,
+    copie: R`<p>$u_n=\exp(E_n)$, $E_n=\sqrt{n+1}\ln n-\sqrt n\ln(n+1)$.</p><p>Avec $\sqrt{n+1}=\sqrt n\sqrt{1+\frac1n}$ et $\ln(n+1)=\ln n+\ln(1+\frac1n)$ :</p><p>$E_n=\sqrt n\Big[\ln n\big(\sqrt{1+\frac1n}-1\big)-\ln\big(1+\frac1n\big)\Big]$.</p><p>${ph("or","Or")} $\sqrt{1+\frac1n}-1\sim\frac1{2n}$ et $\ln(1+\frac1n)\sim\frac1n\ll\frac{\ln n}{2n}$ : le crochet est $\sim\frac{\ln n}{2n}$.</p><p>${ph("donc","Donc")} $E_n\sim\frac{\ln n}{2\sqrt n}\to0$ et $u_n\to\mathrm e^0=1$.</p><div class="sbox">$$\lim\frac{n^{\sqrt{n+1}}}{(n+1)^{\sqrt n}}=1.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $n^{\sqrt{n+1}}\sim n^{\sqrt n}$ et $(n+1)^{\sqrt n}\sim n^{\sqrt n}$ « donc le rapport vaut $1$ ». On ne passe pas un équivalent en exposant.</p><p><b>Premier réflexe :</b> soustraire deux équivalents de $E_n$. Ils ont même ordre : leur différence doit être calculée exactement.</p>`,
+    trou: { q: R`Pourquoi le terme $\ln(1+\frac1n)$ est-il négligeable dans le crochet ?`, c: [R`$\frac{1/n}{\ln n/(2n)}=\frac2{\ln n}\to0$`, R`$\ln(1+\frac1n)\to+\infty$`, R`$\ln(1+\frac1n)=0$`, R`parce que $n\to0$`], ok: 0, why: R`Comparé au terme dominant $\frac{\ln n}{2n}$, $\frac1n$ en est un facteur $\frac2{\ln n}$ qui tend vers $0$.` },
+    bareme: { sur: 5, l: [[1, R`$u_n=\mathrm e^{E_n}$`], [1, R`Factorisation de $\sqrt n$ et décomposition de $\ln(n+1)$`], [1, R`Équivalents $\frac1{2n}$ et $\frac1n$`], [1, R`Terme dominant du crochet justifié`], [1, R`$E_n\to0$ et $u_n\to1$`]] },
+    jury: [
+      { e: R`Passer un équivalent en exposant.`, p: R`Opération interdite : deux points perdus.` },
+      { e: R`Soustraire des équivalents sans justifier le terme dominant.`, p: R`Point perdu.` }
+    ] },
+  { declic: R`Une suite décroissante a deux comportements possibles : elle converge ou elle tend vers $-\infty$. La somme $u_n+u_{n+1}\to0$ élimine le second, et la limite $\ell$ vérifie $2\ell=0$.`,
+    copie: R`<p>$u_n+u_{n+1}\sim\frac1n\to0$.</p><p>Si $u_n\to-\infty$, alors $u_n+u_{n+1}\to-\infty\neq0$ : contradiction. ${ph("donc","Donc")} $(u_n)$, décroissante non tendant vers $-\infty$, est minorée et converge vers $\ell$.</p><p>Dans $u_n+u_{n+1}\to0$ on a $2\ell=0$ donc $\ell=0$.</p><p>${ph("ainsi","Ainsi")} $(u_n)$ décroît vers $0$ : $u_n\geqslant0$ pour tout $n$.</p><div class="sbox">$$u_n\to0,\qquad u_n\geqslant0.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire qu'une suite décroissante converge toujours. Elle peut tendre vers $-\infty$.</p><p><b>Premier réflexe :</b> poser $u_n\sim\frac c n$ et chercher $c$. On ne sait pas encore que $u_n\to0$ : on le démontre d'abord.</p>`,
+    trou: { q: R`Que sait-on d'une suite décroissante qui converge vers $0$ ?`, c: [R`$u_n\geqslant0$ pour tout $n$`, R`$u_n\leqslant0$ pour tout $n$`, R`$u_n=0$ à partir d'un rang`, R`$u_n$ est stationnaire`], ok: 0, why: R`Chaque terme d'une suite décroissante est supérieur ou égal à sa limite.` },
+    bareme: { sur: 4, l: [[1, R`$u_n+u_{n+1}\to0$`], [1, R`Exclusion de $-\infty$ : suite minorée`], [1, R`Limite $\ell=0$ par $2\ell=0$`], [1, R`Positivité par décroissance`]] },
+    jury: [
+      { e: R`Supposer que $(u_n)$ converge sans le justifier.`, p: R`Il faut exclure $-\infty$ : deux points perdus.` }
+    ] },
+  { declic: R`Pour un équivalent à partir d'une somme, on encadre $u_n$ par la moyenne $\frac{u_n+u_{n+1}}2$ (à gauche) et $\frac{u_{n-1}+u_n}2$ (à droite), grâce à la décroissance. Multipliés par $2n$, les deux bornes tendent vers $1$.`,
+    copie: R`<p>${ph("comme","Comme")} $(u_n)$ décroît, $2u_{n+1}\leqslant u_n+u_{n+1}\leqslant2u_n$ ; au rang $n-1$ : $2u_n\leqslant u_{n-1}+u_n$. ${ph("donc","Donc")} $\frac{u_n+u_{n+1}}2\leqslant u_n\leqslant\frac{u_{n-1}+u_n}2$ ($n\geqslant2$).</p><p>En multipliant par $2n$ : $n(u_n+u_{n+1})\leqslant2nu_n\leqslant n(u_{n-1}+u_n)$.</p><p>Les deux bornes tendent vers $1$ ($u_n+u_{n+1}\sim\frac1n$ et $\frac n{n-1}\to1$). ${ph("donc","Donc")} par gendarmes $2nu_n\to1$ : $u_n\sim\frac1{2n}$.</p><div class="sbox">$$u_n\sim\frac1{2n}.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $u_n\approx u_{n+1}$ donc $u_n+u_{n+1}\sim2u_n$ ». C'est ce qu'on veut démontrer ; sans décroissance et encadrement, rien n'autorise de remplacer $u_{n+1}$ par $u_n$.</p><p><b>Premier réflexe :</b> invoquer $u_{n+1}\sim u_n$. Ce n'est pas donné.</p>`,
+    trou: { q: R`Pourquoi $2u_{n+1}\leqslant u_n+u_{n+1}$ ?`, c: [R`$u_{n+1}\leqslant u_n$ (décroissance)`, R`$u_{n+1}\geqslant u_n$`, R`$u_n\geqslant0$ seulement`, R`$u_n\to0$`], ok: 0, why: R`En ajoutant $u_{n+1}$ aux deux membres de $u_{n+1}\leqslant u_n$ on obtient $2u_{n+1}\leqslant u_n+u_{n+1}$.` },
+    bareme: { sur: 4, l: [[1, R`Encadrement des deux sommes par décroissance`], [1, R`Multiplication par $2n>0$`], [1, R`Limites des bornes égales à $1$`], [1, R`Gendarmes et conclusion $u_n\sim\frac1{2n}$`]] },
+    jury: [
+      { e: R`Supposer $u_{n+1}\sim u_n$ sans le démontrer.`, p: R`Hypothèse non fournie : deux points perdus.` }
+    ] },
+  { declic: R`Une somme de factorielles : le dernier terme $n!$ domine. On divise par $n!$ et on majore le reste par $\frac1n$ : chacun des $n-1$ termes restants est au plus $(n-2)!$.`,
+    copie: R`<p>$\frac{u_n}{n!}=1+\frac1n+R_n$ avec $R_n=\sum_{k=0}^{n-2}\frac{k!}{n!}\geqslant0$.</p><p>Pour $k\leqslant n-2$, $k!\leqslant(n-2)!$ ; il y a $n-1$ termes : $R_n\leqslant\frac{(n-1)(n-2)!}{n!}=\frac1n$.</p><p>${ph("donc","Donc")} $1\leqslant\frac{u_n}{n!}\leqslant1+\frac2n\to1$ : par gendarmes $\frac{u_n}{n!}\to1$.</p><div class="sbox">$$\sum_{k=0}^nk!\sim n!.$$</div>`,
+    tete: R`<p><b>Piège :</b> majorer chaque $k!$ par $(n-1)!$ : $n$ termes donne $n\,(n-1)!=n!$, la borne n'est plus petite.</p><p><b>Premier réflexe :</b> sommer terme à terme. Il n'y a pas de formule : on encadre.</p>`,
+    trou: { q: R`Quelle majoration de $\frac{(n-1)(n-2)!}{n!}$ obtient-on ?`, c: [R`$\frac1n$`, R`$1$`, R`$\frac1{n-1}$`, R`$n$`], ok: 0, why: R`$(n-1)(n-2)!=(n-1)!$ et $\frac{(n-1)!}{n!}=\frac1n$.` },
+    bareme: { sur: 3, l: [[1, R`Séparation $1+\frac1n+R_n$`], [1, R`Majoration de $R_n$ par $\frac1n$`], [1, R`Gendarmes et conclusion`]] },
+    jury: [
+      { e: R`Se tromper dans le nombre de termes.`, p: R`La borne devient fausse : deux points perdus.` }
+    ] },
+  { declic: R`Pour la somme d'équivalents, on écrit chaque suite comme $v_n(1+a_n)$ avec $a_n\to0$, puis on majore l'erreur par $(v_n+t_n)c_n$. La positivité sert à majorer sans perdre de signe.`,
+    copie: R`<p>$u_n=v_n(1+a_n)$ et $w_n=t_n(1+b_n)$ avec $a_n,b_n\to0$. Alors $u_n+w_n=(v_n+t_n)+(v_na_n+t_nb_n)$.</p><p>${ph("posons","Posons")} $c_n=\max(|a_n|,|b_n|)\to0$. ${ph("comme","Comme")} $v_n,t_n>0$ : $|v_na_n+t_nb_n|\leqslant(v_n+t_n)c_n$.</p><p>${ph("donc","Donc")} $\frac{u_n+w_n}{v_n+t_n}=1+\frac{v_na_n+t_nb_n}{v_n+t_n}\to1$.</p><p>Sans positivité : $n+1\sim n$ et $-n\sim-n$ mais $(n+1)-n=1\not\sim0$.</p><div class="sbox">$$u_n\sim v_n,\ w_n\sim t_n,\ >0\implies u_n+w_n\sim v_n+t_n.$$</div>`,
+    tete: R`<p><b>Piège :</b> sommer des équivalents de signes opposés : les termes dominants peuvent se compenser.</p><p><b>Premier réflexe :</b> citer « on peut additionner des équivalents ». Ce n'est vrai que sous une hypothèse de signe, qui est justement l'objet de la question.</p>`,
+    trou: { q: R`À quoi sert l'hypothèse $v_n,t_n>0$ dans la majoration ?`, c: [R`$v_n|a_n|+t_n|b_n|\leqslant(v_n+t_n)c_n$ sans valeur absolue sur $v_n$, $t_n$`, R`à avoir $c_n=0$`, R`à rendre $a_n$ positif`, R`à éviter que $a_n\to0$`], ok: 0, why: R`Avec $v_n,t_n>0$, $|v_na_n|=v_n|a_n|$ : on peut majorer par $v_nc_n$ et sommer sans signes.` },
+    bareme: { sur: 4, l: [[1, R`Écriture $v_n(1+a_n)$ et $t_n(1+b_n)$`], [1, R`Majoration de l'erreur par $(v_n+t_n)c_n$`], [1, R`Quotient $\to1$`], [1, R`Contre-exemple sans positivité`]] },
+    jury: [
+      { e: R`Ne pas utiliser la positivité dans la majoration.`, p: R`Inégalité non justifiée : deux points perdus.` }
+    ] },
+  { declic: R`Une intégrale d'un quotient sur $[n^2,n^3]$ : on encadre l'intégrande par $\frac1{t^2}$ et $\frac1{(1+n^{-4})t^2}$, dont on connaît les primitives.`,
+    copie: R`<p>Pour $t\geqslant n^2$ : $1+t^2\geqslant t^2$, donc $\frac1{1+t^2}\leqslant\frac1{t^2}$ et $I_n\leqslant\frac1{n^2}-\frac1{n^3}\leqslant\frac1{n^2}$.</p><p>De plus $1\leqslant\frac{t^2}{n^4}$ donc $1+t^2\leqslant t^2(1+n^{-4})$ et $I_n\geqslant\frac1{1+n^{-4}}\big(\frac1{n^2}-\frac1{n^3}\big)$.</p><p>${ph("donc","Donc")} $\frac{1-1/n}{1+n^{-4}}\leqslant n^2I_n\leqslant1$ ; la borne de gauche tend vers $1$.</p><p>${ph("ainsi","Ainsi")} par gendarmes $n^2I_n\to1$.</p><div class="sbox">$$\int_{n^2}^{n^3}\frac{\mathrm dt}{1+t^2}\sim\frac1{n^2}.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $\frac1{1+t^2}\sim\frac1{t^2}$ donc les intégrales sont équivalentes » : l'équivalent des intégrandes sur un intervalle qui dépend de $n$ doit être justifié par un encadrement uniforme.</p><p><b>Premier réflexe :</b> primitiver avec $\arctan$ : $\arctan n^3-\arctan n^2$, puis un développement. Beaucoup plus lourd.</p>`,
+    trou: { q: R`Que vaut $\int_{n^2}^{n^3}\frac{\mathrm dt}{t^2}$ ?`, c: [R`$\frac1{n^2}-\frac1{n^3}$`, R`$\frac1{n^3}-\frac1{n^2}$`, R`$\ln n$`, R`$\frac1{n^2}+\frac1{n^3}$`], ok: 0, why: R`Une primitive de $\frac1{t^2}$ est $-\frac1t$ : on obtient $-\frac1{n^3}+\frac1{n^2}$.` },
+    bareme: { sur: 4, l: [[1, R`Majoration $\frac1{1+t^2}\leqslant\frac1{t^2}$ et valeur de l'intégrale`], [1, R`Minoration avec $1+t^2\leqslant t^2(1+n^{-4})$`], [1, R`Encadrement de $n^2I_n$`], [1, R`Gendarmes et équivalent`]] },
+    jury: [
+      { e: R`Dire « équivalent des intégrandes donc des intégrales » sans encadrement.`, p: R`Justification absente : deux points perdus.` }
+    ] }
+], [
+  { q: R`Pour $x_n\to0$, $x_n\neq0$, à quoi est équivalent $\sqrt{1+x_n}-1$ ?`, c: [R`$\frac{x_n}2$`, R`$x_n$`, R`$\frac{x_n^2}2$`, R`$2x_n$`], ok: 0, r: "su-equiv" },
+  { q: R`Peut-on composer un équivalent par l'exponentielle ?`, c: [R`non : $x_n\sim y_n$ n'entraîne pas $\mathrm e^{x_n}\sim\mathrm e^{y_n}$`, R`oui, toujours`, R`oui, si $x_n>0$`, R`oui, si $x_n\to0$ seulement`], ok: 0, r: "su-equiv" },
+  { q: R`Si $(u_n)$ est décroissante, que fait-elle ?`, c: [R`converge ou tend vers $-\infty$`, R`converge toujours`, R`tend toujours vers $0$`, R`est bornée`], ok: 0, r: "su-mono" }
+]);
+
 })();
