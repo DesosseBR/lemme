@@ -2240,11 +2240,12 @@ svg.fx.m2:has(.fx-frame) .axh{display:none}
 .decbut{font:16px/1.65 var(--f-read);margin-top:4px}
 
 /* Données et but : annotations en marge */
-.enmarge{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px}
-.enmarge .mg{display:flex;flex-direction:column;justify-content:space-between;gap:18px;border-right:1px solid var(--line);padding:2px 12px 2px 0;text-align:right;font:italic 13.5px/1.45 var(--f-read);color:var(--gold-ink)}
-.enmarge .mg p{margin:0 0 8px}
+.enmarge{display:grid;grid-template-columns:clamp(160px,36%,260px) minmax(0,1fr);gap:20px}
+.enmarge .mg{display:flex;flex-direction:column;gap:22px;min-width:0;border-right:1px solid var(--line);padding:2px 16px 2px 0;text-align:left;font:italic 14px/1.5 var(--f-read);color:var(--gold-ink);overflow-wrap:anywhere}
+.enmarge .mg mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.enmarge .mg p{margin:0 0 10px;padding-left:10px;border-left:2px solid color-mix(in srgb,var(--gold-ink) 30%,transparent)}
 .mg-t{display:block;margin-bottom:4px;font:600 10.5px var(--f-display);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.mg-b{position:sticky;bottom:12px}
+.mg-b{padding-top:14px;border-top:1px solid var(--line)}
 @media (max-width:640px){.enmarge{grid-template-columns:minmax(0,1fr)}.enmarge .mg{border-right:0;border-bottom:1px solid var(--line);padding:0 0 10px;text-align:left}}
 
 /* Page : deux colonnes, séparation réglable, énoncé en tiroir */
@@ -2313,3 +2314,6 @@ body.resizing{cursor:col-resize;user-select:none}
 @media (max-width:560px){.player .copybar .prog{display:none}.player .copybar .qnav{max-width:40%}}
 @media print{.player .copybar{position:static}}
 @media (max-width:640px){#raptab,#entab{top:auto;bottom:110px;padding:10px 6px;font-size:11.5px}}
+/* marge d'annotations : on donne plus de place à la colonne de l'énoncé */
+.split.pm-colonnes:has(> .dm-marge){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width:1020px){.split.pm-colonnes:has(> .dm-marge){grid-template-columns:minmax(0,1fr)}}
