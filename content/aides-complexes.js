@@ -257,4 +257,137 @@ A("cx-04", [
   { q: R`Le carré $\cos^2a$ vaut :`, c: [R`$\dfrac{1+\cos2a}2$`, R`$\dfrac{1-\cos2a}2$`, R`$\cos2a$`, R`$1-\sin a$`], ok: 0, r: "cx-lin" },
   { q: R`Si $\rho<0$ et $\varphi\in\mathbb R$, le module de $\rho\,e^{i\varphi}$ est :`, c: [R`$-\rho$`, R`$\rho$`, R`$1$`, R`$|\varphi|$`], ok: 0, r: "cx-arg" }
 ]);
+
+/* ---------- cx-06 · Racines n-ièmes de l'unité : sommes et produits ---------- */
+A("cx-06", [
+  { declic: R`Un produit de puissances de la même base : on additionne les exposants, $0+1+\dots+(n-1)=\frac{n(n-1)}2$, puis $e^{i\pi(n-1)}=(-1)^{n-1}$.`,
+    copie: R`<p>${ph("reconnait", "On reconnaît")} la somme des premiers entiers : $\displaystyle\prod_{k=0}^{n-1}\omega^k=\omega^{0+1+\dots+(n-1)}=\omega^{\frac{n(n-1)}2}$. ${ph("donc", "Donc")}</p>$$\prod_{k=0}^{n-1}\omega^k=e^{\frac{2i\pi}n\cdot\frac{n(n-1)}2}=e^{i\pi(n-1)}=\big(e^{i\pi}\big)^{n-1}=(-1)^{n-1}.$$<div class="sbox">$$\prod_{z\in\mathbb U_n}z=(-1)^{n-1}.$$</div><p><b>Vérification.</b> $n=2$ : $1\times(-1)=-1$ ✓.</p>`,
+    tete: R`<p><b>Piège :</b> annoncer « le produit vaut $1$ par symétrie ». C'est faux pour $n$ pair : pour $n=2$, $1\times(-1)=-1$.</p><p><b>Piège :</b> se tromper sur la somme des exposants : elle va de $0$ à $n-1$ et vaut $\frac{n(n-1)}2$, pas $\frac{n(n+1)}2$.</p>`,
+    trou: { q: R`La somme $0+1+2+\dots+(n-1)$ vaut :`, c: [R`$\dfrac{n(n-1)}2$`, R`$\dfrac{n(n+1)}2$`, R`$\dfrac{(n-1)^2}2$`, R`$n(n-1)$`], ok: 0, why: R`La somme $1+2+\dots+m$ vaut $\frac{m(m+1)}2$ ; avec $m=n-1$ on obtient $\frac{(n-1)n}2$. Le terme $k=0$ ne change rien.` },
+    bareme: { sur: 3, l: [[1, R`Somme des exposants $\frac{n(n-1)}2$`], [1, R`Calcul de $e^{i\pi(n-1)}$`], [1, R`Résultat $(-1)^{n-1}$ avec vérification sur un petit $n$`]] },
+    jury: [
+      { e: R`Annoncer que le produit vaut $1$.`, p: R`Faux pour $n$ pair : contredit par $n=2$.` },
+      { e: R`Se tromper de bornes dans la somme des exposants.`, p: R`Erreur de calcul : résultat décalé.` }
+    ] },
+  { declic: R`Une somme de $n$ puissances d'une même raison $\omega^p$ : une somme géométrique. Mais il faut d'abord savoir si la raison vaut $1$, ce qui arrive exactement quand $n$ divise $p$.`,
+    copie: R`<p>${ph("posons", "Posons")} $q=\omega^p$ : $S_p=\sum_{k=1}^nq^k$. ${ph("distinguons", "Distinguons deux cas")}.</p><p>Si $n\mid p$, $q=e^{2i\pi p/n}=1$ (car $\frac pn\in\mathbb Z$), donc $S_p=n$.</p><p>Si $n\nmid p$, $q\neq1$ et ${ph("reconnait", "on reconnaît")} une somme géométrique : $S_p=q\,\dfrac{1-q^n}{1-q}=0$, car $q^n=(\omega^n)^p=1$.</p><div class="sbox">$$S_p=\begin{cases}n&\text{si }n\mid p,\\0&\text{sinon.}\end{cases}$$</div>`,
+    tete: R`<p><b>Piège :</b> appliquer la formule de la somme géométrique sans avoir écarté $q=1$ : on diviserait par $0$ quand $n\mid p$.</p><p><b>Piège :</b> oublier le facteur $q$ : la formule $\frac{1-q^n}{1-q}$ est pour une somme qui commence à $k=0$ ; ici elle commence à $k=1$.</p>`,
+    trou: { q: R`On a $\omega^p=1$ si et seulement si :`, c: [R`$n$ divise $p$`, R`$p$ divise $n$`, R`$p=n$`, R`$p$ est pair`], ok: 0, why: R`$e^{2i\pi p/n}=1\iff\frac{2\pi p}n\in2\pi\mathbb Z\iff\frac pn\in\mathbb Z$ : c'est dire que $p$ est un multiple de $n$.` },
+    bareme: { sur: 4, l: [[1, R`Équivalence $\omega^p=1\iff n\mid p$`], [1, R`Cas $n\mid p$ : $S_p=n$`], [1, R`Cas $n\nmid p$ : somme géométrique avec le facteur $q$`], [1, R`Utilisation de $q^n=1$ et résultat en deux cas`]] },
+    jury: [
+      { e: R`Appliquer la formule géométrique sans exclure $\omega^p=1$.`, p: R`Division par $0$ possible : point de rigueur perdu.` },
+      { e: R`Donner $S_p=0$ pour tout $p$.`, p: R`Résultat faux quand $n$ divise $p$.` }
+    ] },
+  { declic: R`Une somme $\sum(k+1)u^k$ : on multiplie par $u$ pour décaler les indices, puis on soustrait. Les coefficients $(j+1)$ et $j$ se compensent presque tous : il reste une somme géométrique.`,
+    copie: R`<p>$uS=\sum_{k=0}^{n-1}(k+1)u^{k+1}=\sum_{j=1}^{n}j\,u^j$ (avec $j=k+1$). ${ph("donc", "Donc")}</p>$$S-uS=1+\sum_{j=1}^{n-1}\big[(j+1)-j\big]u^j-n\,u^n=\sum_{j=0}^{n-1}u^j-n\,u^n.$$<p>${ph("comme", "Comme")} $u\neq1$ et $u^n=1$, $\sum_{j=0}^{n-1}u^j=\frac{1-u^n}{1-u}=0$ ; ${ph("donc", "donc")} $(1-u)S=-n$ et, comme $1-u\neq0$, $S=\dfrac n{u-1}$.</p><div class="sbox">$$\sum_{k=0}^{n-1}(k+1)u^k=\frac n{u-1}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier le terme $-n\,u^n$ : il est en dehors des indices communs $1,\dots,n-1$.</p><p><b>Piège :</b> écrire $uS=\sum(k+1)u^k$ sans décaler : $uS$ contient $u^{k+1}$, pas $u^k$.</p>`,
+    trou: { q: R`Dans $uS=\displaystyle\sum_{k=0}^{n-1}(k+1)u^{k+1}$, le changement d'indice $j=k+1$ donne :`, c: [R`$\displaystyle\sum_{j=1}^{n}j\,u^j$`, R`$\displaystyle\sum_{j=0}^{n-1}j\,u^j$`, R`$\displaystyle\sum_{j=1}^{n}(j+1)\,u^j$`, R`$\displaystyle\sum_{j=0}^{n}j\,u^j$`], ok: 0, why: R`Quand $k$ va de $0$ à $n-1$, $j=k+1$ va de $1$ à $n$ ; le coefficient $k+1$ devient $j$ et l'exposant $k+1$ devient aussi $j$.` },
+    bareme: { sur: 4, l: [[1, R`Changement d'indice dans $uS$`], [1, R`Différence $S-uS$ avec les termes extrêmes ($1$ et $-nu^n$)`], [1, R`Utilisation de $u^n=1$ et de $\sum u^j=0$ ($u\neq1$)`], [1, R`Division par $1-u$ et résultat $\frac n{u-1}$`]] },
+    jury: [
+      { e: R`Se tromper de bornes dans le changement d'indice.`, p: R`Somme fausse : le terme $nu^n$ est oublié ou compté deux fois.` },
+      { e: R`Ne pas justifier $\sum_{j=0}^{n-1}u^j=0$.`, p: R`C'est le point clé : une ligne de rigueur perdue.` }
+    ] },
+  { declic: R`Chaque $|\omega^k-1|$ se calcule par l'angle moitié : $2\sin\frac{k\pi}n$. Puis on additionne des sinus : un sinus est la partie imaginaire d'une exponentielle, donc c'est encore une somme géométrique.`,
+    copie: R`<p>Par l'angle moitié, $\omega^k-1=2i\sin\frac{k\pi}n\,e^{ik\pi/n}$, ${ph("donc", "donc")} $|\omega^k-1|=2\sin\frac{k\pi}n$, ${ph("comme", "comme")} $\frac{k\pi}n\in[0,\pi[$ où le sinus est positif.</p><p>${ph("posons", "Posons")} $q=e^{i\pi/n}$ : $\sum_{k=0}^{n-1}\sin\frac{k\pi}n=\mathrm{Im}\sum_{k=0}^{n-1}q^k$. Comme $q\neq1$ et $q^n=-1$, $\sum q^k=\dfrac{1-q^n}{1-q}=\dfrac2{1-e^{i\pi/n}}$.</p><p>L'angle moitié donne $1-e^{i\pi/n}=-2i\sin\frac\pi{2n}\,e^{i\pi/(2n)}$, d'où $\dfrac2{1-e^{i\pi/n}}=1+i\,\dfrac{\cos\frac\pi{2n}}{\sin\frac\pi{2n}}$, de partie imaginaire $\cot\frac\pi{2n}$.</p><div class="sbox">$$\sum_{z\in\mathbb U_n}|z-1|=2\cot\frac\pi{2n}.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $|\omega^k-1|=2\sin\frac{k\pi}n$ sans justifier le signe : un module est positif, ici c'est le sinus qui l'est parce que $0\leqslant\frac{k\pi}n<\pi$.</p><p><b>Piège :</b> prendre $q=\omega$ : les sinus ont pour angle $\frac{k\pi}n$, pas $\frac{2k\pi}n$. La raison de la somme géométrique est $e^{i\pi/n}$.</p>`,
+    trou: { q: R`La somme $\displaystyle\sum_{k=0}^{n-1}\sin\frac{k\pi}n$ est la partie imaginaire de :`, c: [R`$\displaystyle\sum_{k=0}^{n-1}e^{ik\pi/n}$`, R`$\displaystyle\sum_{k=0}^{n-1}e^{2ik\pi/n}$`, R`$\displaystyle\sum_{k=0}^{n-1}e^{k\pi/n}$`, R`$\displaystyle\sum_{k=0}^{n-1}\cos\frac{k\pi}n$`], ok: 0, why: R`$\sin\theta=\mathrm{Im}(e^{i\theta})$ avec $\theta=\frac{k\pi}n$ : c'est $e^{ik\pi/n}=q^k$ pour $q=e^{i\pi/n}$, et non $\omega=e^{2i\pi/n}$.` },
+    bareme: { sur: 5, l: [[1, R`Module $|\omega^k-1|=2\sin\frac{k\pi}n$ avec signe justifié`], [1, R`Passage à la partie imaginaire d'une somme géométrique de raison $e^{i\pi/n}$`], [1, R`$q\neq1$, $q^n=-1$ et formule de la somme géométrique`], [1, R`Angle moitié et partie imaginaire`], [1, R`Résultat $2\cot\frac\pi{2n}$`]] },
+    jury: [
+      { e: R`Oublier de vérifier que $q\neq1$ avant la formule géométrique.`, p: R`Point de rigueur perdu.` },
+      { e: R`Confondre $q=e^{i\pi/n}$ et $\omega=e^{2i\pi/n}$.`, p: R`La somme calculée n'est pas la bonne : résultat faux.` }
+    ] },
+  { declic: R`Chaque terme $\frac1{1-\omega^k}$ a pour partie réelle $\frac12$ (angle moitié), et la somme est réelle par la symétrie $k\leftrightarrow n-k$ : il suffit alors de prendre la partie réelle.`,
+    copie: R`<p>Pour $\alpha\notin2\pi\mathbb Z$, l'angle moitié donne $\dfrac1{1-e^{i\alpha}}=\dfrac12+\dfrac i2\cot\dfrac\alpha2$, de partie réelle $\frac12$. Cela s'applique à $\alpha=\frac{2k\pi}n$ pour $1\leqslant k\leqslant n-1$.</p><p>${ph("posons", "Posons")} $j=n-k$ : comme $\overline{\omega^k}=\omega^{-k}=\omega^{n-k}$, on a $\bar T=\sum_{k=1}^{n-1}\dfrac1{1-\omega^{n-k}}=\sum_{j=1}^{n-1}\dfrac1{1-\omega^j}=T$. Donc $T$ est réel.</p><p>${ph("donc", "Donc")} $T=\mathrm{Re}(T)=\sum_{k=1}^{n-1}\mathrm{Re}\dfrac1{1-\omega^k}=\dfrac{n-1}2$.</p><div class="sbox">$$\sum_{k=1}^{n-1}\frac1{1-\omega^k}=\frac{n-1}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> tenter de calculer chaque terme et de sommer les $\cot\frac{k\pi}n$ : on ne sait pas les sommer directement. Ce sont les parties imaginaires qui disparaissent, par symétrie.</p><p><b>Piège :</b> écrire $T=\mathrm{Re}(T)$ sans avoir montré d'abord que $T$ est réel.</p>`,
+    trou: { q: R`Un complexe $T$ égal à son conjugué est :`, c: [R`réel`, R`imaginaire pur`, R`de module $1$`, R`nul`], ok: 0, why: R`$\bar T=T$ s'écrit $a-ib=a+ib$, donc $b=0$ : $T$ est réel.` },
+    bareme: { sur: 4, l: [[1, R`Partie réelle de chaque terme égale à $\frac12$ (angle moitié)`], [1, R`Symétrie $\overline{\omega^k}=\omega^{n-k}$ et changement d'indice`], [1, R`$T=\bar T$, donc $T\in\mathbb R$`], [1, R`Conclusion $T=\frac{n-1}2$`]] },
+    jury: [
+      { e: R`Prendre la partie réelle de $T$ sans avoir justifié que $T$ est réel.`, p: R`Raisonnement incomplet : le cœur de la question manque.` },
+      { e: R`Compter $n$ termes au lieu de $n-1$.`, p: R`Résultat faux : $\frac n2$ au lieu de $\frac{n-1}2$.` }
+    ] }
+], [
+  { q: R`Pour $q\neq1$, la somme $\displaystyle\sum_{k=0}^{n-1}q^k$ vaut :`, c: [R`$\dfrac{1-q^n}{1-q}$`, R`$\dfrac{1-q^{n+1}}{1-q}$`, R`$\dfrac{q^n-1}{q+1}$`, R`$n\,q$`], ok: 0, r: "cx-geo" },
+  { q: R`Les racines $n$-ièmes de l'unité sont les nombres :`, c: [R`$e^{2ik\pi/n}$, $0\leqslant k\leqslant n-1$`, R`$e^{ik\pi/n}$, $0\leqslant k\leqslant n-1$`, R`$k/n$, $0\leqslant k\leqslant n-1$`, R`$\cos\frac{2k\pi}n$, $0\leqslant k\leqslant n-1$`], ok: 0, r: "cx-unite" },
+  { q: R`Le nombre $e^{ia}-1$ s'écrit :`, c: [R`$2i\sin\frac a2\,e^{ia/2}$`, R`$2\cos\frac a2\,e^{ia/2}$`, R`$2\sin a\,e^{ia}$`, R`$i\sin a$`], ok: 0, r: "cx-moitie" }
+]);
+
+/* ---------- cx-07 · Racines de l'unité particulières et produit de sinus ---------- */
+A("cx-07", [
+  { declic: R`Le nombre $j=e^{2i\pi/3}$ est une racine cubique de l'unité différente de $1$ : tout découle de $j^3=1$ et de $1+j+j^2=0$, obtenue avec $z^3-1=(z-1)(z^2+z+1)$. Pour un quotient, on multiplie par le conjugué.`,
+    copie: R`<p>Par Moivre, $j^3=e^{2i\pi}=1$. ${ph("comme", "Comme")} $z^3-1=(z-1)(z^2+z+1)$ et $j\neq1$, de $0=(j-1)(j^2+j+1)$ on tire $1+j+j^2=0$.</p><p>$|j|=1$ ${ph("donc", "donc")} $\bar j=\frac1j$ ; et $j\cdot j^2=j^3=1$ donne $\frac1j=j^2$.</p><p>${ph("or", "Or")} $j+1=-j^2$ et $j^2+1=-j$, ${ph("donc", "donc")} $j(j+1)=-j^3=-1$ et $\dfrac j{j^2+1}=\dfrac j{-j}=-1$.</p><p>Pour $\dfrac{j+1}{j-1}$, on multiplie par $\overline{j-1}$ : le numérateur est $(j+1)(\bar j-1)=\bar j-j=-i\sqrt3$ et le dénominateur $|j-1|^2=\frac94+\frac34=3$.</p><div class="sbox">$$j(j+1)=-1,\quad\frac j{j^2+1}=-1,\quad\frac{j+1}{j-1}=-\frac i{\sqrt3}.$$</div>`,
+    tete: R`<p><b>Premier réflexe :</b> remplacer $j$ par $\frac{-1+i\sqrt3}2$ partout et développer. C'est correct mais lourd et source d'erreurs de signe. Les relations $j^3=1$ et $1+j+j^2=0$ suffisent.</p><p><b>Piège :</b> simplifier par $j-1$ sans avoir dit que $j\neq1$.</p>`,
+    trou: { q: R`Comme $1+j+j^2=0$, le nombre $j+1$ vaut :`, c: [R`$-j^2$`, R`$j^2$`, R`$-j$`, R`$1-j^2$`], ok: 0, why: R`$1+j+j^2=0\iff j+1=-j^2$. De même $j^2+1=-j$.` },
+    bareme: { sur: 4, l: [[1, R`$j^3=1$ par Moivre`], [1, R`$1+j+j^2=0$ avec $j\neq1$`], [1, R`$\bar j=j^2=\frac1j$`], [1, R`Trois simplifications justes, dont le quotient (multiplication par le conjugué)`]] },
+    jury: [
+      { e: R`Écrire $1+j+j^2=0$ sans le justifier.`, p: R`Résultat admis : point perdu.` },
+      { e: R`Erreur de signe dans $(j+1)(\bar j-1)$.`, p: R`Quotient faux : la fin de la question est perdue.` }
+    ] },
+  { declic: R`Une somme nulle de trois nombres de module $1$ : on veut leurs carrés. L'identité $(u+v+w)^2=u^2+v^2+w^2+2(uv+vw+wu)$ ramène à $uv+vw+wu$, que le module $1$ (donc $\frac1u=\bar u$) permet de calculer.`,
+    copie: R`<p>${ph("posons", "Posons")} $u=e^{ix}$, $v=e^{iy}$, $w=e^{iz}$, avec $u+v+w=0$. En développant, $u^2+v^2+w^2=(u+v+w)^2-2(uv+vw+wu)=-2(uv+vw+wu)$.</p><p>Les trois nombres sont non nuls : $uv+vw+wu=uvw\Big(\dfrac1w+\dfrac1u+\dfrac1v\Big)$. ${ph("comme", "Comme")} $|u|=|v|=|w|=1$, on a $\frac1u=\bar u$, etc. ${ph("donc", "Donc")} $uv+vw+wu=uvw\,\overline{(u+v+w)}=0$.</p><p>${ph("ainsi", "Ainsi")} $u^2+v^2+w^2=0$, c'est-à-dire, par Moivre :</p><div class="sbox">$$e^{2ix}+e^{2iy}+e^{2iz}=0.$$</div>`,
+    tete: R`<p><b>Premier réflexe :</b> tout écrire avec cosinus et sinus. On obtient $\cos x+\cos y+\cos z=0$ et $\sin x+\sin y+\sin z=0$, d'où on ne sait pas facilement passer aux doubles angles.</p><p><b>Piège :</b> remplacer $\frac1u$ par $\bar u$ sans dire que c'est parce que $|u|=1$.</p>`,
+    trou: { q: R`Si $|u|=1$, alors $\dfrac1u$ vaut :`, c: [R`$\bar u$`, R`$-u$`, R`$u^2$`, R`$|u|$`], ok: 0, why: R`$u\bar u=|u|^2=1$, donc $\bar u=\frac1u$.` },
+    bareme: { sur: 4, l: [[1, R`Identité $(u+v+w)^2=\dots$ et réduction à $uv+vw+wu$`], [1, R`Mise en facteur de $uvw$`], [1, R`$\frac1u=\bar u$ justifié par $|u|=1$`], [1, R`Conclusion $u^2+v^2+w^2=0$ traduite en $e^{2ix}+\dots$`]] },
+    jury: [
+      { e: R`Utiliser $\frac1u=\bar u$ sans mentionner $|u|=1$.`, p: R`Justification manquante : point perdu.` },
+      { e: R`Ne pas relier $u^2$ à $e^{2ix}$ en conclusion.`, p: R`La conclusion porte sur des nombres, pas sur l'énoncé.` }
+    ] },
+  { declic: R`Les nombres $A$ et $B$ contiennent chacun trois des six racines septièmes non triviales : $A+B$ est la somme de toutes les racines moins $1$. Pour $AB$, on développe, on réduit les exposants modulo $7$ ($\omega^7=1$) et on regroupe.`,
+    copie: R`<p>${ph("comme", "Comme")} $\omega\neq1$ et $\omega^7=1$, $1+\omega+\dots+\omega^6=\dfrac{1-\omega^7}{1-\omega}=0$, ${ph("donc", "donc")} $A+B=\omega+\dots+\omega^6=-1$.</p><p>En développant et en utilisant $\omega^{7+r}=\omega^r$ :</p>$$AB=\omega^4+\omega^6+\omega^7+\omega^5+\omega^7+\omega^8+\omega^7+\omega^9+\omega^{10}=3+(\omega+\omega^2+\dots+\omega^6)=3-1=2.$$<div class="sbox">$$A+B=-1,\qquad AB=2.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de réduire les exposants : $\omega^8,\omega^9,\omega^{10}$ deviennent $\omega,\omega^2,\omega^3$.</p><p><b>Piège :</b> croire que $A+B=0$. La somme de toutes les racines septièmes est nulle, mais elle contient aussi le terme $1$, qui n'est ni dans $A$ ni dans $B$.</p>`,
+    trou: { q: R`Comme $\omega^7=1$, le nombre $\omega^{10}$ vaut :`, c: [R`$\omega^3$`, R`$\omega^{10}$ (rien à simplifier)`, R`$1$`, R`$\omega^7$`], ok: 0, why: R`$\omega^{10}=\omega^7\omega^3=\omega^3$.` },
+    bareme: { sur: 4, l: [[1, R`Somme des racines septièmes nulle ($\omega\neq1$, $\omega^7=1$)`], [1, R`$A+B=-1$ (le terme $1$ est exclu)`], [1, R`Développement de $AB$ en neuf termes`], [1, R`Réduction des exposants et résultat $AB=2$`]] },
+    jury: [
+      { e: R`Oublier le terme $1$ de la somme des racines pour obtenir $A+B$.`, p: R`Résultat décalé de $1$ : $0$ au lieu de $-1$.` },
+      { e: R`Ne pas réduire les exposants supérieurs à $6$.`, p: R`Calcul inachevé.` }
+    ] },
+  { declic: R`Deux nombres de somme $s$ et de produit $p$ sont les racines de $Z^2-sZ+p$. On résout, puis le signe de $\mathrm{Im}\,A$ dit laquelle des deux racines est $A$.`,
+    copie: R`<p>$(Z-A)(Z-B)=Z^2-(A+B)Z+AB=Z^2+Z+2$, ${ph("donc", "donc")} $A$ et $B$ sont les racines de $Z^2+Z+2$. Son discriminant est $\Delta=-7=(i\sqrt7)^2$ : les racines sont $\dfrac{-1\pm i\sqrt7}2$.</p><p>Pour savoir laquelle est $A$, on étudie $\mathrm{Im}\,A=\sin\frac{2\pi}7+\sin\frac{4\pi}7+\sin\frac{8\pi}7$. Or $\sin\frac{8\pi}7=-\sin\frac\pi7$ et $\sin\frac{4\pi}7=\sin\frac{3\pi}7$. ${ph("comme", "Comme")} $0<\frac\pi7<\frac{3\pi}7<\frac\pi2$ et que le sinus est croissant sur $[0,\frac\pi2]$, $\sin\frac{3\pi}7-\sin\frac\pi7>0$. ${ph("donc", "Donc")} $\mathrm{Im}\,A>0$.</p><div class="sbox">$$A=\frac{-1+i\sqrt7}2,\qquad B=\frac{-1-i\sqrt7}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> donner les deux racines sans dire laquelle est $A$. L'énoncé demande d'identifier $A$ et $B$, pas seulement l'ensemble $\{A,B\}$.</p><p><b>Piège :</b> écrire $\Delta=-7$ puis $\sqrt\Delta=\sqrt7$ : le discriminant est négatif, la racine à utiliser est $i\sqrt7$.</p>`,
+    trou: { q: R`Le trinôme $Z^2+Z+2$ a pour discriminant $-7$. Ses racines complexes sont :`, c: [R`$\dfrac{-1\pm i\sqrt7}2$`, R`$\dfrac{-1\pm\sqrt7}2$`, R`$\dfrac{1\pm i\sqrt7}2$`, R`$-1\pm i\sqrt7$`], ok: 0, why: R`Les racines sont $\frac{-b\pm\delta}{2a}$ avec $\delta^2=\Delta=-7$, par exemple $\delta=i\sqrt7$ : on obtient $\frac{-1\pm i\sqrt7}2$.` },
+    bareme: { sur: 4, l: [[1, R`$A$ et $B$ racines de $Z^2+Z+2$ (somme et produit)`], [1, R`Discriminant $-7=(i\sqrt7)^2$ et deux racines`], [1, R`Signe de $\mathrm{Im}\,A$ : réduction des sinus`], [1, R`Comparaison $\sin\frac{3\pi}7>\sin\frac\pi7$ et conclusion`]] },
+    jury: [
+      { e: R`Ne pas dire laquelle des deux racines est $A$.`, p: R`Question à moitié traitée.` },
+      { e: R`Affirmer $\mathrm{Im}\,A>0$ sans comparer les sinus.`, p: R`Affirmation non démontrée.` }
+    ] },
+  { declic: R`La somme des racines cinquièmes de l'unité est nulle : sa partie réelle relie $\cos\frac{2\pi}5$ et $\cos\frac{4\pi}5$. Avec $\cos2a=2\cos^2a-1$, tout s'écrit avec $c=\cos\frac{2\pi}5$ : un trinôme.`,
+    copie: R`<p>Avec $\omega=e^{2i\pi/5}$ : $1+\omega+\omega^2+\omega^3+\omega^4=0$. En prenant la partie réelle, et comme $\cos\frac{8\pi}5=\cos\frac{2\pi}5$ et $\cos\frac{6\pi}5=\cos\frac{4\pi}5$ :</p>$$1+2\cos\frac{2\pi}5+2\cos\frac{4\pi}5=0.$$<p>${ph("posons", "Posons")} $c=\cos\frac{2\pi}5$ : $\cos\frac{4\pi}5=2c^2-1$, ${ph("donc", "donc")} $4c^2+2c-1=0$, de racines $\frac{-1\pm\sqrt5}4$. ${ph("comme", "Comme")} $\frac{2\pi}5\in\,]0,\frac\pi2[$, on a $c>0$ : $c=\frac{\sqrt5-1}4$.</p><p>Enfin $\sin^2\frac\pi5=\dfrac{1-\cos\frac{2\pi}5}2=\dfrac{5-\sqrt5}8$, et $\sin\frac\pi5>0$ car $\frac\pi5\in\,]0,\pi[$.</p><div class="sbox">$$\cos\frac{2\pi}5=\frac{\sqrt5-1}4,\qquad\sin\frac\pi5=\sqrt{\frac{5-\sqrt5}8}.$$</div>`,
+    tete: R`<p><b>Piège :</b> garder les deux racines de $4c^2+2c-1=0$. L'une est négative, ce qui est impossible puisque $\cos\frac{2\pi}5>0$.</p><p><b>Piège :</b> prendre $-\sqrt{\dots}$ pour $\sin\frac\pi5$ : le signe est imposé par $\frac\pi5\in\,]0,\pi[$.</p>`,
+    trou: { q: R`Pourquoi a-t-on $\cos\frac{2\pi}5>0$ ?`, c: [R`Parce que $\frac{2\pi}5\in\,]0,\frac\pi2[$`, R`Parce que $\frac{2\pi}5<\pi$`, R`Parce que le cosinus est croissant`, R`Parce que $\cos\frac{2\pi}5=\frac{\sqrt5-1}4$`], ok: 0, why: R`Le cosinus est positif sur $]-\frac\pi2,\frac\pi2[$ et $0<\frac{2\pi}5<\frac\pi2$. On s'en sert avant de connaître la valeur, pour choisir la bonne racine.` },
+    bareme: { sur: 5, l: [[1, R`Relation $1+\omega+\dots+\omega^4=0$ puis partie réelle`], [1, R`Réductions $\cos\frac{8\pi}5=\cos\frac{2\pi}5$ et $\cos\frac{6\pi}5=\cos\frac{4\pi}5$`], [1, R`Trinôme $4c^2+2c-1=0$`], [1, R`Choix de la racine justifié par $c>0$`], [1, R`$\sin\frac\pi5$ par $\sin^2a=\frac{1-\cos2a}2$`]] },
+    jury: [
+      { e: R`Garder les deux racines du trinôme sans éliminer la négative.`, p: R`Valeur de $\cos\frac{2\pi}5$ non déterminée : point perdu.` },
+      { e: R`Oublier de justifier le signe de $\sin\frac\pi5$.`, p: R`Racine carrée non justifiée.` }
+    ] },
+  { declic: R`Deux écritures de $z^n-1$ : en produit (ses racines sont les $\omega^k$) et en somme (formule géométrique). Il suffit de les égaler et de simplifier par $z-1$, ce qui exige $z\neq1$.`,
+    copie: R`<p>Les $\omega^k$ ($0\leqslant k\leqslant n-1$) sont $n$ racines distinctes de $z^n-1$, polynôme unitaire de degré $n$. ${ph("donc", "Donc")} $z^n-1=\prod_{k=0}^{n-1}(z-\omega^k)=(z-1)\prod_{k=1}^{n-1}(z-\omega^k)$.</p><p>Par ailleurs, pour $z\neq1$, $z^n-1=(z-1)\sum_{\ell=0}^{n-1}z^\ell$ (somme géométrique).</p><p>On égale les deux écritures et on divise par $z-1\neq0$ :</p><div class="sbox">$$\forall z\neq1,\quad\prod_{k=1}^{n-1}(z-\omega^k)=\sum_{\ell=0}^{n-1}z^\ell.$$</div>`,
+    tete: R`<p><b>Piège :</b> diviser par $z-1$ sans préciser $z\neq1$. C'est exactement pourquoi la question suivante traite $z=1$ à part.</p><p><b>Piège :</b> écrire la factorisation sans dire que les $\omega^k$ sont $n$ racines <i>distinctes</i> : sans cela, rien ne prouve qu'on a toutes les racines.</p>`,
+    trou: { q: R`Pourquoi a-t-on $\displaystyle\prod_{k=0}^{n-1}(z-\omega^k)=z^n-1$ ?`, c: [R`Les $\omega^k$ sont $n$ racines distinctes du polynôme unitaire $z^n-1$ de degré $n$`, R`Parce que $\omega^n=1$ seulement`, R`Parce que $z\neq1$`, R`Parce que le produit des racines vaut $-1$`], ok: 0, why: R`Un polynôme unitaire de degré $n$ qui a $n$ racines distinctes est le produit des $(z-\text{racine})$. Ici $z^n-1$ a pour racines les $n$ nombres $\omega^k$.` },
+    bareme: { sur: 3, l: [[1, R`Factorisation de $z^n-1$ par ses $n$ racines, avec justification`], [1, R`Somme géométrique pour $z\neq1$`], [1, R`Égalité et division par $z-1\neq0$`]] },
+    jury: [
+      { e: R`Écrire la factorisation sans justifier que les $\omega^k$ sont toutes les racines.`, p: R`Résultat admis : point perdu.` },
+      { e: R`Diviser par $z-1$ sans préciser $z\neq1$.`, p: R`Division non justifiée.` }
+    ] },
+  { declic: R`On ne peut pas diviser par $z-1$ en $z=1$. On fait tendre $z=1+t$ vers $1$ : l'égalité, vraie pour $t\neq0$, passe à la limite parce que les deux membres sont des polynômes, donc continus.`,
+    copie: R`<p>${ph("posons", "Posons")} $P(z)=\prod_{k=1}^{n-1}(z-\omega^k)$ et $Q(z)=\sum_{\ell=0}^{n-1}z^\ell$. Ce sont des polynômes, donc des fonctions continues.</p><p>${ph("parlaq", "D'après la question 6")}, $P(1+t)=Q(1+t)$ pour tout réel $t\neq0$. En faisant tendre $t$ vers $0$ :</p>$$P(1)=\lim_{t\to0}P(1+t)=\lim_{t\to0}Q(1+t)=Q(1).$$<div class="sbox">$$\prod_{k=1}^{n-1}(1-\omega^k)=\sum_{\ell=0}^{n-1}1^\ell=n.$$</div>`,
+    tete: R`<p><b>Piège :</b> dire « on remplace $z$ par $1$ ». L'égalité de la question 6 n'a été démontrée que pour $z\neq1$.</p><p><b>Piège :</b> passer à la limite sans dire que les deux fonctions sont continues.</p>`,
+    trou: { q: R`Pour passer à la limite dans $P(1+t)=Q(1+t)$ quand $t\to0$, on utilise que :`, c: [R`$P$ et $Q$ sont continues (ce sont des polynômes)`, R`$P=Q$ en $z=1$ par définition`, R`$t$ est réel`, R`$\omega\neq1$`], ok: 0, why: R`Une fonction continue en $1$ vérifie $\lim_{t\to0}P(1+t)=P(1)$. Les polynômes sont continus : les deux limites valent $P(1)$ et $Q(1)$.` },
+    bareme: { sur: 3, l: [[1, R`Remarque : l'égalité n'est prouvée que pour $z\neq1$`], [1, R`Passage à la limite justifié par la continuité`], [1, R`Valeurs $P(1)=\prod(1-\omega^k)$ et $Q(1)=n$`]] },
+    jury: [
+      { e: R`Remplacer directement $z$ par $1$.`, p: R`Cas exclu par la question 6 : point perdu.` },
+      { e: R`Passer à la limite sans parler de continuité.`, p: R`Justification manquante.` }
+    ] },
+  { declic: R`On passe au module dans $\prod(1-\omega^k)=n$. Chaque facteur vaut $2\sin\frac{k\pi}n$ par l'angle moitié, positif car $\frac{k\pi}n\in\,]0,\pi[$ ; il y a $n-1$ facteurs $2$.`,
+    copie: R`<p>Par l'angle moitié, $1-\omega^k=-2i\sin\frac{k\pi}n\,e^{ik\pi/n}$, ${ph("donc", "donc")} $|1-\omega^k|=2\sin\frac{k\pi}n$, ${ph("comme", "comme")} $\frac{k\pi}n\in\,]0,\pi[$ où le sinus est $>0$.</p><p>${ph("parlaq", "D'après la question 7")}, $n=\prod_{k=1}^{n-1}(1-\omega^k)$. Le module d'un produit est le produit des modules :</p>$$n=\prod_{k=1}^{n-1}2\sin\frac{k\pi}n=2^{n-1}\prod_{k=1}^{n-1}\sin\frac{k\pi}n.$$<div class="sbox">$$\prod_{k=1}^{n-1}\sin\frac{k\pi}n=\frac n{2^{n-1}}.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $|1-\omega^k|=2\sin\frac{k\pi}n$ sans justifier le signe du sinus.</p><p><b>Piège :</b> se tromper sur le nombre de facteurs $2$ : le produit va de $1$ à $n-1$, donc $2^{n-1}$ et non $2^n$.</p>`,
+    trou: { q: R`Un produit de $n-1$ facteurs tous égaux à $2$ vaut :`, c: [R`$2^{n-1}$`, R`$2^n$`, R`$2(n-1)$`, R`$n-1$`], ok: 0, why: R`$n-1$ facteurs égaux à $2$ donnent $2^{n-1}$. L'indice $k$ va de $1$ à $n-1$ : il y a bien $n-1$ termes.` },
+    bareme: { sur: 3, l: [[1, R`Module de chaque facteur $2\sin\frac{k\pi}n$, signe justifié`], [1, R`Module du produit et facteur $2^{n-1}$`], [1, R`Conclusion $\frac n{2^{n-1}}$`]] },
+    jury: [
+      { e: R`Oublier de justifier que $\sin\frac{k\pi}n>0$.`, p: R`Module négatif possible : point de rigueur perdu.` },
+      { e: R`Écrire $2^n$ au lieu de $2^{n-1}$.`, p: R`Compte des facteurs faux : résultat faux.` }
+    ] }
+], [
+  { q: R`Si $|u|=1$, alors $\dfrac1u$ vaut :`, c: [R`$\bar u$`, R`$-u$`, R`$u^2$`, R`$|u|$`], ok: 0, r: "cx-module" },
+  { q: R`Pour $n\geqslant2$, la somme de toutes les racines $n$-ièmes de l'unité vaut :`, c: [R`$0$`, R`$1$`, R`$n$`, R`$-1$`], ok: 0, r: "cx-unite" },
+  { q: R`Pour tout réel $a$, $\cos2a$ vaut :`, c: [R`$2\cos^2a-1$`, R`$2\sin^2a-1$`, R`$\cos^2a+\sin^2a$`, R`$2\cos a$`], ok: 0, r: "cx-lin" }
+]);
 })();
