@@ -535,4 +535,115 @@ A("su-08", [
   { q: R`Si $(a_n)$ et $(b_n)$ sont adjacentes avec $a_n\nearrow$, que dit-on de leur limite $\ell$ ?`, c: [R`$a_n\leqslant\ell\leqslant b_n$ pour tout $n$`, R`$\ell=a_0$`, R`$\ell\leqslant a_n$`, R`$\ell\geqslant b_n$`], ok: 0, r: "su-mono" }
 ]);
 
+/* ---------- su-09 · Irrationalité de e et moyenne arithmético-géométrique ---------- */
+A("su-09", [
+  { declic: R`Deux suites encadrent $\mathrm e$ : la première est la somme des inverses de factorielles (croissante), la seconde lui ajoute un petit terme et décroît. On vérifie le signe des différences et l'écart.`,
+    copie: R`<p>$a_{n+1}-a_n=\frac1{(n+1)!}>0$ : $(a_n)$ est strictement croissante.</p><p>${ph("posons","Mettons")} $b_{n+1}-b_n$ sur le dénominateur $n(n+1)(n+1)!$ : $b_{n+1}-b_n=\frac{n(n+1)+n-(n+1)^2}{n(n+1)(n+1)!}=\frac{-1}{n(n+1)(n+1)!}\lt0$ : $(b_n)$ est strictement décroissante.</p><p>$b_n-a_n=\frac1{n\,n!}\leqslant\frac1n\to0$.</p><p>${ph("donc","Donc")} $(a_n)$ et $(b_n)$ sont adjacentes.</p><div class="sbox">$$(a_n)\nearrow,\ (b_n)\searrow,\ b_n-a_n\to0,\ a_n\lt\mathrm e\lt b_n.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que $b_n$ est croissante parce qu'elle contient des termes en plus de $a_n$. Le terme correctif $\frac1{n\,n!}$ diminue plus vite que $\frac1{(n+1)!}$ n'augmente.</p><p><b>Premier réflexe :</b> étudier $b_n$ par comparaison asymptotique. Il suffit d'une différence exacte.</p>`,
+    trou: { q: R`Que vaut $b_n-a_n$ ?`, c: [R`$\frac1{n\,n!}$`, R`$\frac1{n!}$`, R`$\frac1{(n+1)!}$`, R`$0$`], ok: 0, why: R`$b_n=a_n+\frac1{n\,n!}$ par définition : l'écart est exactement le terme correctif.` },
+    bareme: { sur: 4, l: [[1, R`$(a_n)$ strictement croissante`], [1, R`Calcul de $b_{n+1}-b_n$ avec dénominateur commun`], [1, R`Signe négatif et stricte décroissance`], [1, R`Écart $\frac1{n\,n!}\to0$ et adjacence`]] },
+    jury: [
+      { e: R`Se tromper dans la mise au même dénominateur.`, p: R`Signe de la différence non justifié : deux points perdus.` },
+      { e: R`Oublier de préciser que l'écart tend vers $0$.`, p: R`Il faut un argument de limite : point perdu.` }
+    ] },
+  { declic: R`L'encadrement de $\mathrm e$ par $a_n$ et $b_n$ donne l'erreur $\frac1{n\,n!}$. On cherche le plus petit $n$ pour lequel elle est sous $10^{-4}$.`,
+    copie: R`<p>${ph("comme","Comme")} $a_n\leqslant\mathrm e\leqslant b_n$, on a $0\leqslant\mathrm e-a_n\leqslant\frac1{n\,n!}$.</p><p>Pour $n=6$ : $\frac1{6\times720}=\frac1{4320}\approx2{,}3\times10^{-4}$, trop grand. Pour $n=7$ : $\frac1{7\times5040}=\frac1{35280}\approx2{,}8\times10^{-5}\leqslant10^{-4}$ ✓.</p><p>${ph("donc","Donc")} $a_7=1+1+\frac12+\frac16+\frac1{24}+\frac1{120}+\frac1{720}+\frac1{5040}\approx2{,}718254$.</p><div class="sbox">$$2{,}71825\leqslant\mathrm e\leqslant2{,}71829,\quad\mathrm e\approx2{,}7183.$$</div>`,
+    tete: R`<p><b>Piège :</b> arrêter la somme au terme $\frac1{n!}$ en pensant que l'erreur est ce terme. L'erreur est en réalité bien plus petite.</p><p><b>Premier réflexe :</b> ajouter des termes jusqu'à ce que l'écart de deux sommes consécutives soit petit. Ça ne garantit rien : il faut une majoration de l'erreur.</p>`,
+    trou: { q: R`Quel est le plus petit $n$ tel que $\frac1{n\,n!}\leqslant10^{-4}$ ?`, c: [R`$7$`, R`$6$`, R`$5$`, R`$8$`], ok: 0, why: R`$n=6$ donne $\frac1{4320}\approx2{,}3\times10^{-4}>10^{-4}$ et $n=7$ donne $\frac1{35280}\approx2{,}8\times10^{-5}\lt10^{-4}$. Pour $n=8$ cela convient aussi, mais n'est pas minimal.` },
+    bareme: { sur: 3, l: [[1, R`Majoration d'erreur $\mathrm e-a_n\leqslant\frac1{n\,n!}$`], [1, R`Choix de $n=7$ avec calcul de $\frac1{35280}$`], [1, R`Valeur de $a_7$ et encadrement final`]] },
+    jury: [
+      { e: R`Donner un résultat sans justifier la précision.`, p: R`Erreur non majorée : deux points perdus.` }
+    ] },
+  { declic: R`Supposer $\mathrm e=\frac pq$ et encadrer strictement entre $a_q$ et $a_q+\frac1{q\cdot q!}$. En multipliant par $q\cdot q!$, on emprisonne un entier entre deux entiers consécutifs : absurde.`,
+    copie: R`<p>${ph("posons","Supposons")} $\mathrm e=\frac pq$ avec $p\in\mathbb Z$, $q\in\mathbb N^*$.</p><p>$a_q\lt\mathrm e\lt b_q=a_q+\frac1{q\cdot q!}$ (suites strictement monotones). En multipliant par $q\cdot q!>0$ : $q\cdot q!\,a_q\lt p\cdot q!\lt q\cdot q!\,a_q+1$.</p><p>${ph("or","Or")} $q!\,a_q=\sum_{k=0}^q\frac{q!}{k!}$ est un entier : chaque $\frac{q!}{k!}=(k+1)\cdots q$ est entier. Notons $N$ cet entier. L'encadrement devient $qN\lt p\cdot q!\lt qN+1$.</p><p>${ph("donc","Donc")} l'entier $p\cdot q!$ est strictement entre deux entiers consécutifs : absurde. ${ph("ainsi","Ainsi")} $\mathrm e\notin\mathbb Q$.</p><div class="sbox">$$\mathrm e\notin\mathbb Q.$$</div>`,
+    tete: R`<p><b>Piège :</b> utiliser des inégalités larges : $a_q\leqslant\mathrm e\leqslant b_q$ n'interdit pas l'égalité avec un entier. Il faut l'encadrement <i>strict</i>, d'où la stricte monotonie de la première question.</p><p><b>Premier réflexe :</b> écrire le développement décimal de $\mathrm e$. On n'a pas de forme explicite : on raisonne avec les suites.</p>`,
+    trou: { q: R`Pourquoi $\frac{q!}{k!}$ est-il un entier pour $0\leqslant k\leqslant q$ ?`, c: [R`il vaut $(k+1)(k+2)\cdots q$, produit d'entiers`, R`parce que $q\geqslant k$ seulement`, R`parce que $q!\geqslant k!$`, R`parce que $k!$ divise $q$`], ok: 0, why: R`$q!=1\times2\times\cdots\times q=k!\times(k+1)\cdots q$ : le quotient est ce produit d'entiers (vide, donc égal à $1$, si $k=q$).` },
+    bareme: { sur: 5, l: [[1, R`Hypothèse $\mathrm e=\frac pq$`], [1, R`Encadrement strict via la stricte monotonie`], [1, R`Multiplication par $q\cdot q!$`], [1, R`$q!\,a_q\in\mathbb N$ justifié`], [1, R`Entier entre deux entiers consécutifs : contradiction`]] },
+    jury: [
+      { e: R`Utiliser des inégalités larges.`, p: R`Pas de contradiction possible : deux points perdus.` },
+      { e: R`Affirmer $q!\,a_q\in\mathbb N$ sans justification.`, p: R`Étape clé : point perdu.` }
+    ] },
+  { declic: R`Pour comparer moyenne géométrique et arithmétique, un carré fait tout le travail : $(\sqrt a-\sqrt b)^2\geqslant0$. La monotonie vient ensuite des deux inégalités $u_n\leqslant v_n$ et de la définition par récurrence.`,
+    copie: R`<p>Pour $a,b\geqslant0$ : $(\sqrt a-\sqrt b)^2\geqslant0$ donne $2\sqrt{ab}\leqslant a+b$.</p><p>Par récurrence, tous les $u_n,v_n$ sont $\geqslant0$ : les racines sont définies.</p><p>Pour $n\geqslant1$ : $u_n=\sqrt{u_{n-1}v_{n-1}}\leqslant\frac{u_{n-1}+v_{n-1}}2=v_n$.</p><p>${ph("donc","Donc")} $u_{n+1}=\sqrt{u_nv_n}\geqslant\sqrt{u_n^2}=u_n$ et $v_{n+1}=\frac{u_n+v_n}2\leqslant v_n$.</p><div class="sbox">$$\forall n\geqslant1,\ u_n\leqslant v_n,\quad u_n\leqslant u_{n+1},\quad v_{n+1}\leqslant v_n.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $u_0\leqslant v_0$ : on n'a pas cette hypothèse. Ce n'est vrai qu'à partir du rang $1$.</p><p><b>Premier réflexe :</b> montrer la croissance de $u_n$ par $\frac{u_{n+1}}{u_n}\geqslant1$. Les termes peuvent s'annuler : on compare avec $\sqrt{u_n^2}=u_n$.</p>`,
+    trou: { q: R`Pourquoi $u_{n+1}=\sqrt{u_nv_n}\geqslant u_n$ pour $n\geqslant1$ ?`, c: [R`$v_n\geqslant u_n\geqslant0$ donc $u_nv_n\geqslant u_n^2$`, R`$u_n\geqslant v_n$`, R`$u_n\leqslant0$`, R`$v_n\lt1$`], ok: 0, why: R`On multiplie $v_n\geqslant u_n$ par $u_n\geqslant0$ : $u_nv_n\geqslant u_n^2$ ; la racine, croissante, conserve l'inégalité.` },
+    bareme: { sur: 5, l: [[1, R`Inégalité des moyennes avec le carré $(\sqrt a-\sqrt b)^2$`], [1, R`Positivité par récurrence`], [1, R`$u_n\leqslant v_n$ pour $n\geqslant1$`], [1, R`$(u_n)$ croissante`], [1, R`$(v_n)$ décroissante`]] },
+    jury: [
+      { e: R`Affirmer $u_0\leqslant v_0$.`, p: R`Faux si $a>b$ : deux points perdus.` },
+      { e: R`Oublier de justifier la positivité avant d'écrire une racine.`, p: R`Racine non définie : point perdu.` }
+    ] },
+  { declic: R`Les deux suites sont coincées : $u_n$ croît et reste sous $v_1$, $v_n$ décroît et reste au-dessus de $u_1$. Elles convergent donc. Dans la relation $v_{n+1}=\frac{u_n+v_n}2$ on passe à la limite pour égaliser.`,
+    copie: R`<p>Pour $n\geqslant1$ : $u_1\leqslant u_n\leqslant v_n\leqslant v_1$.</p><p>${ph("donc","Donc")} $(u_n)$ est croissante majorée par $v_1$ et converge vers $\ell$ ; $(v_n)$ est décroissante minorée par $u_1$ et converge vers $\ell'$.</p><p>${ph("comme","Comme")} $v_{n+1}=\frac{u_n+v_n}2$, le passage à la limite donne $\ell'=\frac{\ell+\ell'}2$, soit $\ell'=\ell$.</p><div class="sbox">$$\lim u_n=\lim v_n=M(a,b).$$</div>`,
+    tete: R`<p><b>Piège :</b> passer à la limite dans $v_{n+1}=\frac{u_n+v_n}2$ avant d'avoir montré la convergence des deux suites.</p><p><b>Premier réflexe :</b> invoquer directement les suites adjacentes. L'écart $v_n-u_n\to0$ n'est pas encore connu : c'est justement ce qu'on déduit.</p>`,
+    trou: { q: R`Que dit l'égalité $\ell'=\frac{\ell+\ell'}2$ ?`, c: [R`$\ell'=\ell$`, R`$\ell'=2\ell$`, R`$\ell'=0$`, R`$\ell=0$`], ok: 0, why: R`En multipliant par $2$ : $2\ell'=\ell+\ell'$, d'où $\ell'=\ell$.` },
+    bareme: { sur: 3, l: [[1, R`Bornes $u_1\leqslant u_n\leqslant v_n\leqslant v_1$`], [1, R`Convergence de $(u_n)$ et $(v_n)$ par limite monotone`], [1, R`Égalité des limites par passage à la limite dans $v_{n+1}$`]] },
+    jury: [
+      { e: R`Passer à la limite sans avoir établi la convergence.`, p: R`Raisonnement circulaire : deux points perdus.` }
+    ] },
+  { declic: R`Chaque propriété de $M(a,b)$ se lit sur les suites : cas particuliers $a=b$ et $b=0$, homogénéité par récurrence, encadrement par $u_1$ et $v_1$.`,
+    copie: R`<p>Si $a=b$ : $u_1=\sqrt{a^2}=a$, $v_1=a$, et par récurrence $u_n=v_n=a$ : $M(a,a)=a$.</p><p>Si $b=0$ : $u_1=0$, puis $u_{n+1}=\sqrt{u_nv_n}=0$ : $M(a,0)=0$.</p><p>${ph("comme","Comme")} $\sqrt{\lambda^2}=\lambda$ pour $\lambda\geqslant0$, les suites de $(\lambda a,\lambda b)$ sont $\lambda u_n$ et $\lambda v_n$ (récurrence) ; à la limite $M(\lambda a,\lambda b)=\lambda M(a,b)$.</p><p>${ph("donc","Donc")} $u_1\leqslant M\leqslant v_1$ : $\sqrt{ab}\leqslant M(a,b)\leqslant\frac{a+b}2$.</p><p>Pour $(1,2)$ : $u_2\approx1{,}45648\leqslant M\leqslant v_2\approx1{,}45711$.</p><div class="sbox">$$M(a,a)=a,\quad M(a,0)=0,\quad M(\lambda a,\lambda b)=\lambda M(a,b),\quad\sqrt{ab}\leqslant M\leqslant\tfrac{a+b}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\sqrt{\lambda^2}=\lambda$ sans préciser $\lambda\geqslant0$ : pour un réel quelconque, $\sqrt{\lambda^2}=|\lambda|$.</p><p><b>Premier réflexe :</b> chercher une formule explicite pour $M(a,b)$. Elle fait intervenir une intégrale elliptique : hors programme.</p>`,
+    trou: { q: R`Pourquoi $M(a,b)\geqslant u_1=\sqrt{ab}$ ?`, c: [R`$(u_n)$ croissante : tous ses termes sont $\leqslant$ sa limite`, R`$(u_n)$ décroissante`, R`$u_1=M$`, R`parce que $a\geqslant b$`], ok: 0, why: R`Pour une suite croissante qui converge, chaque terme est inférieur ou égal à la limite.` },
+    bareme: { sur: 5, l: [[1, R`$M(a,a)=a$`], [1, R`$M(a,0)=0$`], [1, R`Homogénéité par récurrence avec $\lambda\geqslant0$`], [1, R`Encadrement $\sqrt{ab}\leqslant M\leqslant\frac{a+b}2$`], [1, R`Application numérique à $M(1,2)$`]] },
+    jury: [
+      { e: R`Écrire $\sqrt{\lambda^2}=\lambda$ pour $\lambda$ quelconque.`, p: R`Erreur de signe : point perdu.` },
+      { e: R`Ne pas justifier l'encadrement par la monotonie.`, p: R`Il faut citer que chaque terme encadre la limite : point perdu.` }
+    ] }
+], [
+  { q: R`Que vaut $(n+1)!$ ?`, c: [R`$(n+1)\,n!$`, R`$n!+1$`, R`$(n+1)+n!$`, R`$n\,(n+1)$`], ok: 0, r: "su-usuel" },
+  { q: R`Pour $x,y\geqslant0$, quel lien entre $\sqrt{xy}$ et $\frac{x+y}2$ ?`, c: [R`$\sqrt{xy}\leqslant\frac{x+y}2$`, R`$\sqrt{xy}\geqslant\frac{x+y}2$`, R`$\sqrt{xy}=\frac{x+y}2$`, R`aucun`], ok: 0, r: "su-ineg" },
+  { q: R`Que sait-on d'une suite croissante qui converge vers $\ell$ ?`, c: [R`tous ses termes sont $\leqslant\ell$`, R`tous ses termes sont $\geqslant\ell$`, R`elle est stationnaire`, R`$\ell$ est son premier terme`], ok: 0, r: "su-mono" }
+]);
+
+/* ---------- su-10 · Suites extraites : convergence, divergence et construction ---------- */
+A("su-10", [
+  { declic: R`Une suite croissante ne peut que monter : si une extraite converge vers $\ell$, elle ne dépasse jamais $\ell$, donc toute la suite est majorée par $\ell$. La limite monotone conclut.`,
+    copie: R`<p>$(u_{2n})$ est croissante (extraite d'une suite croissante) et converge vers $\ell$ : donc $u_{2n}\leqslant\ell$ pour tout $n$.</p><p>${ph("comme","Comme")} $n\leqslant2n$ et $(u_n)$ est croissante, $u_n\leqslant u_{2n}\leqslant\ell$ : $(u_n)$ est majorée.</p><p>${ph("donc","Donc")} $(u_n)$ est croissante et majorée : elle converge, et sa limite est celle de l'extraite, $\ell$.</p><div class="sbox">$$(u_n)\nearrow,\ u_{2n}\to\ell\implies u_n\to\ell.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire qu'une suite dont une extraite converge converge toujours. $(-1)^n$ le contredit : la croissance est indispensable.</p><p><b>Premier réflexe :</b> étudier $u_{2n+1}$ séparément. Plus long : une seule majoration suffit pour la limite monotone.</p>`,
+    trou: { q: R`Pourquoi $u_n\leqslant u_{2n}$ ?`, c: [R`$n\leqslant2n$ et $(u_n)$ est croissante`, R`$(u_n)$ est décroissante`, R`$u_{2n}$ converge`, R`$n\geqslant2n$`], ok: 0, why: R`La croissance de $(u_n)$ donne $u_a\leqslant u_b$ dès que $a\leqslant b$ ; ici $a=n$ et $b=2n$.` },
+    bareme: { sur: 3, l: [[1, R`$u_{2n}\leqslant\ell$ (extraite croissante convergente)`], [1, R`$u_n\leqslant u_{2n}\leqslant\ell$ : majoration`], [1, R`Limite monotone et limite $\ell$`]] },
+    jury: [
+      { e: R`Conclure sans utiliser la croissance de $(u_n)$.`, p: R`Faux ($(-1)^n$) : zéro à la question.` }
+    ] },
+  { declic: R`Pour montrer que deux limites sont égales, on cherche une suite qui est extraite de deux manières différentes. $u_{6n}$ est extraite de $(u_{2n})$ et de $(u_{3n})$ ; $u_{6n+3}$ de $(u_{2n+1})$ et de $(u_{3n})$.`,
+    copie: R`<p>$u_{6n}=u_{2(3n)}$ est extraite de $(u_{2n})$, donc $u_{6n}\to a$ ; c'est aussi $u_{3(2n)}$, extraite de $(u_{3n})$, donc $\to c$. Par unicité de la limite, $a=c$.</p><p>$u_{6n+3}=u_{2(3n+1)+1}$ est extraite de $(u_{2n+1})$ donc $\to b$ ; c'est aussi $u_{3(2n+1)}$, extraite de $(u_{3n})$ donc $\to c$. ${ph("donc","Donc")} $b=c$.</p><p>${ph("ainsi","Ainsi")} $a=b=c$ : les extraites paire et impaire ont la même limite, $u_n\to a$.</p><p>Chaque hypothèse est nécessaire : $(-1)^n$ sans $(u_{3n})$ ; deux suites de période $6$ pour les deux autres cas.</p><div class="sbox">$$u_{2n}\to a,\ u_{2n+1}\to b,\ u_{3n}\to c\implies a=b=c,\ u_n\to a.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que deux extraites qui couvrent tous les indices suffisent. Il faut que leurs limites soient égales : c'est le rôle de la troisième.</p><p><b>Premier réflexe :</b> prendre $u_{6n}$ sans justifier d'où elle vient. Il faut écrire la composée explicite $\psi(n)=3n$ puis $2n$.</p>`,
+    trou: { q: R`De quelle suite $u_{6n+3}$ est-elle extraite pour obtenir $b$ ?`, c: [R`$(u_{2n+1})$, avec $\psi(n)=3n+1$`, R`$(u_{2n})$`, R`$(u_{3n})$ seulement`, R`$(u_{6n})$`], ok: 0, why: R`$6n+3=2(3n+1)+1$ est un indice impair, donc $u_{6n+3}$ est extraite de $(u_{2n+1})$. C'est aussi $u_{3(2n+1)}$, extraite de $(u_{3n})$.` },
+    bareme: { sur: 4, l: [[1, R`$a=c$ avec $u_{6n}$ extraite de deux façons`], [1, R`$b=c$ avec $u_{6n+3}$`], [1, R`Conclusion : pairs et impairs de même limite`], [1, R`Contre-exemple pour l'hypothèse sur $(u_{3n})$`]] },
+    jury: [
+      { e: R`Écrire $u_{6n}$ extraite sans donner la fonction $\psi$.`, p: R`Extraction non justifiée : point perdu.` },
+      { e: R`Ne pas fournir de contre-exemple.`, p: R`La question demande d'en justifier la nécessité : point perdu.` }
+    ] },
+  { declic: R`La somme $\cos(n+1)+\cos(n-1)=2\cos n\cos1$ relie trois termes consécutifs. Si $\cos n\to\ell$, passer à la limite donne $\ell(1-\cos1)=0$ donc $\ell=0$, puis la duplication $\cos2n=2\cos^2n-1$ donne une contradiction.`,
+    copie: R`<p>${ph("posons","Supposons")} $\cos n\to\ell$. Alors $\cos(n\pm1)\to\ell$ et $\cos(n+1)+\cos(n-1)=2\cos n\cos1$ donne $2\ell=2\ell\cos1$, soit $\ell(1-\cos1)=0$. ${ph("comme","Comme")} $\cos1\neq1$, $\ell=0$.</p><p>${ph("or","Or")} $\cos2n=2\cos^2n-1\to-1$ ; mais $(\cos2n)$ est extraite de $(\cos n)$ donc tend vers $\ell=0$. Contradiction : $(\cos n)$ diverge.</p><p>Pour $\sin n$ : de même $\ell=0$, puis $\cos n=\frac{\sin(n+1)-\sin n\cos1}{\sin1}\to0$. ${ph("donc","Donc")} $\cos^2n+\sin^2n=1\to0$ : absurde.</p><div class="sbox">$$(\cos n)\ \text{et}\ (\sin n)\ \text{n'ont pas de limite.}$$</div>`,
+    tete: R`<p><b>Piège :</b> dire « $n$ est entier donc $\cos n$ prend des valeurs variées, donc diverge ». Ce n'est pas une preuve : il faut une contradiction par les limites.</p><p><b>Premier réflexe :</b> équidistribution de $n$ modulo $2\pi$. Hors programme ; on utilise des identités trigonométriques simples.</p>`,
+    trou: { q: R`Pourquoi $\cos1\neq1$ ?`, c: [R`$\cos x=1$ seulement si $x\in2\pi\mathbb Z$, et $0\lt1\lt2\pi$`, R`$\cos1=0$`, R`$\cos$ n'atteint jamais $1$`, R`$1$ est irrationnel`], ok: 0, why: R`Le cosinus vaut $1$ exactement aux multiples de $2\pi$ ; $1$ radian n'en est pas un.` },
+    bareme: { sur: 5, l: [[1, R`Hypothèse $\cos n\to\ell$ et passage à la limite dans la somme`], [1, R`$\ell=0$ avec $\cos1\neq1$ justifié`], [1, R`Contradiction par $\cos2n\to-1$`], [1, R`Pour $\sin n$ : $\ell=0$ et $\cos n\to0$`], [1, R`Contradiction avec $\cos^2+\sin^2=1$`]] },
+    jury: [
+      { e: R`Passer à la limite sans dire que $\cos(n\pm1)$ tend aussi vers $\ell$.`, p: R`Décalage d'indice non justifié : point perdu.` },
+      { e: R`Ne pas justifier $\cos1\neq1$.`, p: R`Division par $1-\cos1$ non justifiée : point perdu.` }
+    ] },
+  { declic: R`Une inégalité vraie pour tous $n$ et $p$ : on choisit $p$ en fonction de $n$ pour tomber sur des indices pairs, puis impairs. Chaque extraite est majorée par une suite qui tend vers $0$.`,
+    copie: R`<p>Avec $p=n$ : $0\leqslant u_{2n}\leqslant\frac{2n}{n^2}=\frac2n\to0$. ${ph("donc","Donc")} $u_{2n}\to0$ par gendarmes.</p><p>Avec $p=n+1$ : $0\leqslant u_{2n+1}\leqslant\frac{2n+1}{n(n+1)}\leqslant\frac{2(n+1)}{n(n+1)}=\frac2n\to0$. ${ph("donc","Donc")} $u_{2n+1}\to0$.</p><p>${ph("ainsi","Ainsi")} les deux extraites tendent vers $0$ : $u_n\to0$.</p><div class="sbox">$$u_{2n}\to0,\ u_{2n+1}\to0\implies u_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> prendre $p=n$ aussi pour les indices impairs : $n+p=2n$ est pair. Il faut $p=n+1$ pour obtenir $2n+1$.</p><p><b>Premier réflexe :</b> fixer $p$ et faire tendre $n$ vers l'infini. La borne $\frac1p$ ne tend alors pas vers $0$.</p>`,
+    trou: { q: R`Quelle valeur de $p$ donne $n+p=2n+1$ ?`, c: [R`$p=n+1$`, R`$p=n$`, R`$p=n-1$`, R`$p=2$`], ok: 0, why: R`$n+(n+1)=2n+1$ : on obtient bien un indice impair.` },
+    bareme: { sur: 3, l: [[1, R`Indices pairs avec $p=n$ : borne $\frac2n$`], [1, R`Indices impairs avec $p=n+1$ et majoration par $\frac2n$`], [1, R`Pairs et impairs tendent vers $0$ : $u_n\to0$`]] },
+    jury: [
+      { e: R`Oublier de majorer $\frac{2n+1}{n(n+1)}$ par $\frac2n$.`, p: R`Limite de la borne non justifiée : point perdu.` }
+    ] },
+  { declic: R`Pour extraire une suite proche des entiers : $u_n\to+\infty$ avec pas qui tendent vers $0$ ne peut pas « sauter » un entier de plus d'un petit $\varepsilon$. On prend le premier terme au-dessus de $n$, et on contrôle de combien il dépasse.`,
+    copie: R`<p>${ph("posons","Posons")} $\varphi(1)=\min\{k\geqslant1:u_k\geqslant1\}$ et $\varphi(n)=\min\{k>\varphi(n-1):u_k\geqslant n\}$ ; c'est bien défini car $u_k\to+\infty$. Alors $\delta_n=u_{\varphi(n)}-n\geqslant0$.</p><p>Soit $\varepsilon\in]0,\frac12[$ et $N$ tel que $|u_{k+1}-u_k|\leqslant\varepsilon$ pour $k\geqslant N$.</p><p><b>Cas A</b> ($\varphi(n)-1>\varphi(n-1)$) : $u_{\varphi(n)-1}\lt n$, donc $\delta_n\lt\varepsilon$.</p><p><b>Cas B</b> ($\varphi(n)-1=\varphi(n-1)$) : $\delta_n\leqslant\delta_{n-1}+\varepsilon-1\lt\delta_{n-1}-\frac12$, ce qui force $\delta_{n-1}>\frac12$.</p><p>${ph("donc","Donc")} B ne peut se répéter qu'un nombre fini de fois, puis A s'installe : $\delta_n\lt\varepsilon$ pour $n$ grand.</p><p>${ph("ainsi","Ainsi")} $u_{\varphi(n)}-n\to0$.</p><div class="sbox">$$\exists\varphi\nearrow,\quad u_{\varphi(n)}-n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> prendre simplement le premier $k$ tel que $u_k\geqslant n$ sans exiger $k>\varphi(n-1)$ : $\varphi$ n'est alors pas strictement croissante.</p><p><b>Premier réflexe :</b> prendre $\varphi(n)$ tel que $u_{\varphi(n)}\in[n,n+1[$. Ce $k$ existe, mais on ne contrôle pas la distance à $n$ : la limite nulle a besoin de l'hypothèse $u_{k+1}-u_k\to0$.</p>`,
+    trou: { q: R`Que garantit le choix d'un minimum dans la définition de $\varphi(n)$ ?`, c: [R`le terme précédent $u_{\varphi(n)-1}$ est $\lt n$ (cas A)`, R`$u_{\varphi(n)}=n$`, R`$\varphi$ est décroissante`, R`$u_{\varphi(n)}\leqslant n$`], ok: 0, why: R`Si $\varphi(n)-1$ est un indice admissible ($>\varphi(n-1)$) et n'a pas été choisi, c'est que $u_{\varphi(n)-1}\lt n$ ; le pas $\leqslant\varepsilon$ borne alors le dépassement.` },
+    bareme: { sur: 5, l: [[1, R`Construction de $\varphi$ strictement croissante`], [1, R`Cas A : $\delta_n\lt\varepsilon$`], [1, R`Cas B : $\delta_n\lt\delta_{n-1}-\frac12$`], [1, R`Le cas B ne se répète pas indéfiniment`], [1, R`Conclusion $\delta_n\to0$ pour tout $\varepsilon$`]] },
+    jury: [
+      { e: R`Ne pas imposer $k>\varphi(n-1)$.`, p: R`La suite extraite n'est pas strictement croissante : deux points perdus.` },
+      { e: R`Ne pas traiter le cas B.`, p: R`Cas oublié : deux points perdus.` }
+    ] }
+], [
+  { q: R`Que dit-on d'une suite extraite d'une suite qui tend vers $\ell$ ?`, c: [R`elle tend aussi vers $\ell$`, R`elle tend vers $0$`, R`elle est constante`, R`elle diverge`], ok: 0, r: "su-ext" },
+  { q: R`Si $(u_{2n})$ et $(u_{2n+1})$ tendent vers la même limite $\ell$, que dit-on de $(u_n)$ ?`, c: [R`$u_n\to\ell$`, R`$(u_n)$ diverge`, R`$u_n$ est monotone`, R`rien`], ok: 0, r: "su-ext" },
+  { q: R`Quelle formule donne $\cos2x$ en fonction de $\cos x$ ?`, c: [R`$2\cos^2x-1$`, R`$2\cos x$`, R`$\cos^2x+1$`, R`$1-2\cos x$`], ok: 0, r: "su-usuel" }
+]);
+
 })();
