@@ -2204,3 +2204,112 @@ svg.fx.m2:has(.fx-frame) .axh{display:none}
 .attn{margin:14px 0;padding:6px 0 6px 14px;border-left:3px solid var(--red)}
 .attn > b:first-child{display:block;font-family:var(--f-display);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:2px}
 .attn p{margin:4px 0}
+
+/* ===================== Réglages d'exercice (Paramètres) ===================== */
+/* Actions de l'exercice : icônes carrées avec infobulle */
+.exright{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.exright .donebox{gap:8px}
+.exright .exacts{margin-top:0;gap:10px}
+.ib{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast),transform var(--t-fast)}
+.ib svg{width:20px;height:20px}
+.ib:hover{border-color:var(--ink)}
+.ib:active{transform:scale(.96)}
+.ib[data-fav][aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.ib[data-fav][aria-pressed="true"] svg path{fill:currentColor}
+.ib.on{background:color-mix(in srgb,var(--green) 14%,var(--surface));border-color:var(--green);color:var(--green)}
+.ibn{position:absolute;top:-7px;right:-7px;min-width:18px;height:18px;border-radius:9px;background:var(--green);color:#fff;font:600 11px/18px var(--f-display);padding:0 4px}
+
+/* Panneau Paramètres, à côté d'Apparence */
+.setpop{width:270px}
+.setpop .sph{font:600 14px var(--f-display);color:var(--ink);margin:6px 8px 2px}
+.setpop p{margin-top:12px}
+.setpop .rd{width:16px;height:16px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--ink) 35%,transparent);background:none;position:relative}
+.setpop [aria-pressed="true"] .rd{border-color:var(--ink)}
+.setpop [aria-pressed="true"] .rd::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--ink)}
+.setpop .setk{font-size:12px;border-top:1px solid var(--line);padding-top:10px;margin:12px 8px 4px}
+.setpop .setk kbd{font:500 11px var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;color:var(--ink)}
+
+/* Données et but : onglets dans l'énoncé */
+.entabs-h{display:flex;align-items:center;gap:12px}
+.entabs{display:flex;gap:22px;flex:1;border-bottom:1px solid var(--line)}
+.entabs button{border:0;background:none;padding:4px 0 10px;margin-bottom:-1px;font:600 16px var(--f-display);letter-spacing:-.01em;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer}
+.entabs button:hover{color:var(--ink)}
+.entabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--navy)}
+.declist{margin:4px 0 0;padding-left:20px;font:16px/1.65 var(--f-read)}
+.declist li{margin-bottom:10px}
+.decbut{font:16px/1.65 var(--f-read);margin-top:4px}
+
+/* Données et but : annotations en marge */
+.enmarge{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px}
+.enmarge .mg{display:flex;flex-direction:column;justify-content:space-between;gap:18px;border-right:1px solid var(--line);padding:2px 12px 2px 0;text-align:right;font:italic 13.5px/1.45 var(--f-read);color:var(--gold-ink)}
+.enmarge .mg p{margin:0 0 8px}
+.mg-t{display:block;margin-bottom:4px;font:600 10.5px var(--f-display);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mg-b{position:sticky;bottom:12px}
+@media (max-width:640px){.enmarge{grid-template-columns:minmax(0,1fr)}.enmarge .mg{border-right:0;border-bottom:1px solid var(--line);padding:0 0 10px;text-align:left}}
+
+/* Page : deux colonnes, séparation réglable, énoncé en tiroir */
+.split.pm-colonnes{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px}
+.split.pm-reglable{grid-template-columns:minmax(0,var(--enw,46%)) 18px minmax(0,1fr);gap:0 6px}
+.splitter{align-self:stretch;display:flex;justify-content:center;cursor:col-resize;touch-action:none;border-radius:6px;outline-offset:-2px}
+.splitter i{position:sticky;top:45vh;margin-top:120px;width:4px;height:56px;border-radius:2px;background:var(--line);transition:background var(--t-fast)}
+.splitter:hover i,.splitter:focus-visible i,body.resizing .splitter i{background:var(--navy)}
+body.resizing{cursor:col-resize;user-select:none}
+.split.pm-tiroir{grid-template-columns:minmax(0,1fr);max-width:900px;margin:0 auto}
+.split.pm-tiroir > .side-en{position:fixed;z-index:75;top:0;left:0;bottom:0;width:min(560px,94vw);max-height:none;border-radius:0 20px 20px 0;padding-top:58px;transform:translateX(-104%);visibility:hidden;transition:transform var(--t-mid) var(--ease-out),visibility 0s linear var(--t-mid);box-shadow:24px 0 60px -28px rgba(7,16,46,.5)}
+.split.pm-tiroir.en-open > .side-en{transform:none;visibility:visible;transition:transform var(--t-mid) var(--ease-out)}
+.side-en .en-close{position:absolute;top:12px;right:12px}
+.side-en:focus{outline:none}
+#entab,#raptab{position:fixed;z-index:70;top:42%;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 12.5px var(--f-display);cursor:pointer;box-shadow:var(--shadow);transition:border-color var(--t-fast),padding var(--t-fast)}
+#entab{left:0;border-left:0;border-radius:0 12px 12px 0}
+#raptab{right:0;border-right:0;border-radius:12px 0 0 12px}
+#entab:hover,#raptab:hover{border-color:var(--ink)}
+#entab svg{width:18px;height:18px}
+#entab span,#raptab span{writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.02em}
+#raptab b{min-width:20px;height:20px;border-radius:10px;background:var(--yellow);color:var(--on-yellow);font-size:11.5px;line-height:20px;text-align:center}
+@media (max-width:1020px){.split.pm-colonnes,.split.pm-reglable{grid-template-columns:minmax(0,1fr)}.splitter{display:none}}
+@media print{#entab,#raptab,.splitter{display:none}}
+
+/* Rappels sur les mots du corrigé */
+.rterm{display:inline;border:0;background:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted;text-decoration-color:var(--gold-ink);text-decoration-thickness:1.5px;text-underline-offset:4px;border-radius:3px}
+.rterm:hover{background:var(--yellow-soft)}
+.rterm sup{font:600 10.5px var(--f-display);color:var(--gold-ink);margin-left:1px;line-height:0}
+.rterm.rsup{text-decoration:none}
+.raplist .rl-item{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.raplist h4{display:flex;gap:10px;align-items:baseline;margin:0 0 6px;font-family:var(--f-display);font-size:16px}
+.rl-n{font:600 12px var(--f-mono);color:var(--gold-ink)}
+.rl-more{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.rl-more h4{font:600 13px var(--f-display);color:var(--muted);margin:0 0 10px}
+
+/* Corrigé « copie de concours » : papier ligné léger, marge bleue, résultat encadré en ombre portée */
+.cor-copie{--copy:#3A6FD8}
+@media (prefers-color-scheme: dark){.cor-copie{--copy:#86A8FF}}
+.cor-copie .cor-h{margin:0;min-height:0;justify-content:flex-end}
+.cor-copie .cor-h .cor-lab,.cor-copie .cor-h .legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cor-copie .player .step > .count{display:none}
+.cor-copie .player .step h3{font-family:var(--f-read);font-weight:600;font-size:clamp(22px,2vw,27px);letter-spacing:-.005em;line-height:1.3;margin:0 0 18px;display:inline-block;padding-bottom:6px;border-bottom:1.5px solid var(--ink)}
+.cor-copie .player .step h3 + *{clear:both}
+.cor-copie .player .step > .prose{--lh:29px;line-height:var(--lh);padding:2px 4px 8px 34px;margin:0 -6px 0 -12px;
+  background:linear-gradient(to right,transparent 22px,color-mix(in srgb,var(--copy) 55%,transparent) 22px,color-mix(in srgb,var(--copy) 55%,transparent) 23.5px,transparent 23.5px),
+  repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--lh) - 1px),color-mix(in srgb,var(--copy) 12%,transparent) calc(var(--lh) - 1px),color-mix(in srgb,var(--copy) 12%,transparent) var(--lh));background-attachment:local}
+.cor-copie .player .step > .prose p{margin:0 0 14px}
+.cor-copie .player .step > .prose > p > b:first-child{font-weight:650;background:linear-gradient(transparent 58%,var(--yellow-soft) 58%);padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.cor-copie .player .step > .prose ul{list-style:none;padding-left:20px}
+.cor-copie .player .step > .prose ul > li{position:relative}
+.cor-copie .player .step > .prose ul > li::before{content:"";position:absolute;left:-15px;top:calc(var(--lh) / 2 - 3px);width:6px;height:6px;border-radius:50%;background:var(--copy)}
+.cor-copie .player .step > .prose ol > li::marker{color:var(--copy);font-family:var(--f-display);font-weight:600}
+.cor-copie .player .step > .prose mjx-container[display="true"]{background:var(--surface);border-radius:4px}
+.cor-copie .player .sbox{background:var(--surface);margin:18px 10px 22px 0}
+/* barre collée en bas : progression, « 3 / 5 » et les deux boutons */
+.player .copybar{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;margin:26px calc(-1 * clamp(22px,3vw,34px)) calc(-1 * clamp(22px,3vw,34px));padding:12px clamp(22px,3vw,34px) calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);border-radius:0 0 24px 24px}
+.player .copybar .prog{flex:0 1 240px;margin:0;gap:4px}
+.player .copybar .prog button{height:5px}
+.player .copybar .qnav{margin:0;flex:0 1 auto;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:4px;max-width:46%}
+.player .copybar .qnav button{min-width:36px;min-height:30px;padding:2px 8px;font-size:12.5px}
+.ccount{font:600 13.5px var(--f-display);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cgrow{flex:1}
+.player .copybar .btn{min-height:44px;padding:12px 20px;font-size:15px}
+.player .copybar .cprev{padding:12px 14px}
+.player .copybar .cprev[disabled]{opacity:.35;cursor:default}
+@media (max-width:560px){.player .copybar .prog{display:none}.player .copybar .qnav{max-width:40%}}
+@media print{.player .copybar{position:static}}
+@media (max-width:640px){#raptab,#entab{top:auto;bottom:110px;padding:10px 6px;font-size:11.5px}}
