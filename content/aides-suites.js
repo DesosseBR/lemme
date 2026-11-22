@@ -924,4 +924,199 @@ A("su-14", [
   { q: R`Quelle est la forme réelle pour des racines complexes $\rho e^{\pm\mathrm i\theta}$ ?`, c: [R`$\rho^n(\lambda\cos n\theta+\mu\sin n\theta)$`, R`$\lambda\rho^n+\mu\theta^n$`, R`$\rho(\lambda\cos\theta+\mu\sin\theta)^n$`, R`$\lambda\cos\rho+\mu\sin\rho$`], ok: 0, r: "su-lin" }
 ]);
 
+/* ---------- su-15 · Suites récurrentes u_{n+1} = f(u_n) : monotonie et point fixe ---------- */
+A("su-15", [
+  { declic: R`$u_{n+1}=u_n^2$ : on devine $u_n=a^{2^n}$ (chaque pas double l'exposant) et on le démontre par récurrence. La limite se lit ensuite selon que $|a|$ est $\lt1$, $=1$ ou $>1$.`,
+    copie: R`<p>Montrons $u_n=a^{2^n}$ : vrai pour $n=0$ ; si $u_n=a^{2^n}$, $u_{n+1}=\big(a^{2^n}\big)^2=a^{2^{n+1}}$.</p><p>${ph("distinguons","Distinguons")} : si $|a|\lt1$, $|u_n|=|a|^{2^n}\to0$ car $2^n\to+\infty$.</p><p>Si $a=\pm1$ : $u_n=1$ dès que $n\geqslant1$.</p><p>Si $|a|>1$ : $u_n=|a|^{2^n}$ (exposant pair) $\to+\infty$.</p><div class="sbox">$$u_n=a^{2^n}\to\begin{cases}0&|a|\lt1\\1&|a|=1\\+\infty&|a|>1\end{cases}$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier $a=-1$ : $u_0=-1$ mais $u_n=1$ dès $n=1$. La limite est $1$ malgré le signe.</p><p><b>Premier réflexe :</b> étudier la monotonie. Elle dépend de $a$ : mieux vaut la formule explicite, qui permet de tout lire.</p>`,
+    trou: { q: R`Que vaut $\big(a^{2^n}\big)^2$ ?`, c: [R`$a^{2^{n+1}}$`, R`$a^{2^n+2}$`, R`$a^{2\cdot2^n+1}$`, R`$a^{2^{2n}}$`], ok: 0, why: R`$(a^m)^2=a^{2m}$ avec $m=2^n$ : $2m=2^{n+1}$.` },
+    bareme: { sur: 4, l: [[1, R`Formule $u_n=a^{2^n}$ démontrée par récurrence`], [1, R`Cas $|a|\lt1$`], [1, R`Cas $a=\pm1$ (dont $a=-1$)`], [1, R`Cas $|a|>1$`]] },
+    jury: [
+      { e: R`Conclure pour $a=-1$ que $u_n=-1$.`, p: R`Faux : $u_1=1$. Deux points perdus.` },
+      { e: R`Donner la formule sans récurrence.`, p: R`Formule non démontrée : point perdu.` }
+    ] },
+  { declic: R`Pour $u_{n+1}=u_n^2+1$ : on regarde le signe de $f(x)-x$. S'il est toujours positif, la suite croît ; et sans point fixe elle ne peut pas converger, donc elle diverge vers $+\infty$.`,
+    copie: R`<p>$u_{n+1}-u_n=u_n^2-u_n+1$ ; discriminant $-3\lt0$ et coefficient dominant $>0$ : $x^2-x+1>0$ pour tout réel. ${ph("donc","Donc")} $(u_n)$ est strictement croissante.</p><p>Un point fixe vérifierait $\ell^2-\ell+1=0$ : aucune solution réelle.</p><p>${ph("or","Or")} si $(u_n)$ convergeait vers $\ell$, la continuité de $f$ donnerait $f(\ell)=\ell$ : impossible.</p><p>${ph("ainsi","Ainsi")}, croissante et non convergente, $u_n\to+\infty$.</p><div class="sbox">$$\forall u_0,\quad u_n\nearrow+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser « croissante donc converge ». Il faut aussi qu'elle soit majorée.</p><p><b>Premier réflexe :</b> étudier $u_0\geqslant0$ puis $u_0\lt0$. Inutile : le signe de $f(x)-x$ ne dépend pas de $u_0$.</p>`,
+    trou: { q: R`Pourquoi $x^2-x+1>0$ pour tout réel $x$ ?`, c: [R`discriminant $-3\lt0$ et coefficient dominant positif`, R`$x^2\geqslant x$`, R`$x\geqslant1$`, R`$x^2+1\geqslant x^2$`], ok: 0, why: R`Un trinôme sans racine réelle garde le signe de son coefficient dominant.` },
+    bareme: { sur: 3, l: [[1, R`$u_{n+1}-u_n>0$ par le discriminant`], [1, R`Pas de point fixe réel`], [1, R`Conclusion : divergence vers $+\infty$`]] },
+    jury: [
+      { e: R`Conclure « croissante donc $+\infty$ » sans exclure la convergence.`, p: R`Il faut le point fixe : deux points perdus.` }
+    ] },
+  { declic: R`$u_{n+1}=1+\ln u_n$ : on trouve un intervalle stable ($[1,+\infty[$), on étudie le signe de $f(x)-x$ avec l'inégalité $\ln x\leqslant x-1$, puis on identifie la limite par le point fixe.`,
+    copie: R`<p>Si $u_n\geqslant1$, $\ln u_n\geqslant0$ donc $u_{n+1}\geqslant1$ : $[1,+\infty[$ est stable, la suite est définie.</p><p>$u_{n+1}-u_n=-(u_n-1-\ln u_n)\leqslant0$ car $\ln x\leqslant x-1$ : $(u_n)$ est décroissante, minorée par $1$, donc converge vers $\ell\geqslant1$.</p><p>${ph("or","Or")} $\ln$ est continue en $\ell>0$ : $\ell=1+\ln\ell$, soit $\ell-1-\ln\ell=0$.</p><p>${ph("donc","Donc")} $\ell=1$, seul zéro de $x-1-\ln x$.</p><div class="sbox">$$u_n\searrow1.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de vérifier que $u_n>0$ avant de prendre $\ln u_n$.</p><p><b>Premier réflexe :</b> admettre $\ln x\leqslant x-1$. Il se démontre en une ligne : $x\mapsto x-1-\ln x$ a un minimum nul en $1$.</p>`,
+    trou: { q: R`Quel est l'unique zéro de $x-1-\ln x$ sur $]0,+\infty[$ ?`, c: [R`$1$`, R`$\mathrm e$`, R`$0$`, R`aucun`], ok: 0, why: R`La dérivée $1-\frac1x$ s'annule en $1$ : minimum de valeur $0$, atteint seulement en $1$.` },
+    bareme: { sur: 4, l: [[1, R`Intervalle stable $[1,+\infty[$`], [1, R`Décroissance par $\ln x\leqslant x-1$`], [1, R`Convergence (minorée par $1$)`], [1, R`Limite $1$ par le point fixe et l'unicité du zéro`]] },
+    jury: [
+      { e: R`Passer à la limite sans vérifier que $\ell>0$.`, p: R`$\ln\ell$ non défini : point perdu.` }
+    ] },
+  { declic: R`Pour $\mathrm e^x-1$, on compare à $x$ avec $\mathrm e^x\geqslant1+x$ : la suite croît toujours. La limite dépend de $u_0$ : $0$ est l'unique point fixe, ce qui sépare les cas $u_0\lt0$, $=0$, $>0$.`,
+    copie: R`<p>$f(x)-x=\mathrm e^x-1-x\geqslant0$, nul seulement en $0$ : $(u_n)$ est croissante et $0$ est le seul point fixe.</p><p>${ph("distinguons","Distinguons")} : si $u_0=0$, la suite est constante.</p><p>Si $u_0>0$ : $f$ conserve le signe, $u_n\geqslant u_0>0$. Une limite finie serait un point fixe non nul : impossible. ${ph("donc","Donc")} $u_n\to+\infty$.</p><p>Si $u_0\lt0$ : $u_n\lt0$ pour tout $n$, croissante majorée par $0$ : limite un point fixe, donc $0$.</p><div class="sbox">$$u_0\lt0:\ u_n\nearrow0\ ;\ u_0=0:\ u_n=0\ ;\ u_0>0:\ u_n\nearrow+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> conclure « croissante donc diverge » pour $u_0\lt0$ : elle est majorée par $0$ et converge.</p><p><b>Premier réflexe :</b> étudier $u_0>0$ seul. L'énoncé demande trois cas : le signe de $u_0$ décide.</p>`,
+    trou: { q: R`Pour $u_0\lt0$, pourquoi $u_n\lt0$ pour tout $n$ ?`, c: [R`$f(x)\lt0$ si $x\lt0$ : le signe est conservé`, R`$f$ est décroissante`, R`$u_n=-1$`, R`$\mathrm e^x\lt0$`], ok: 0, why: R`$\mathrm e^x\lt1$ pour $x\lt0$ donc $f(x)=\mathrm e^x-1\lt0$ : le signe négatif se transmet de proche en proche.` },
+    bareme: { sur: 4, l: [[1, R`$f(x)-x\geqslant0$ et seul point fixe $0$`], [1, R`Cas $u_0=0$`], [1, R`Cas $u_0>0$ : $u_n\to+\infty$`], [1, R`Cas $u_0\lt0$ : $u_n\to0^-$`]] },
+    jury: [
+      { e: R`Oublier le cas $u_0=0$.`, p: R`Cas à part non traité : point perdu.` },
+      { e: R`Conclure $+\infty$ pour $u_0\lt0$.`, p: R`Erreur de raisonnement : deux points perdus.` }
+    ] },
+  { declic: R`$f$ est croissante : un intervalle stable donne la monotonie de la suite. On encadre $u_n$ par $0$ et $\varphi$ (le point fixe positif), on montre que $x\leqslant f(x)$ sur cet intervalle, puis la limite vaut $\varphi$.`,
+    copie: R`<p>$\varphi=\frac{1+\sqrt5}2$ vérifie $\varphi^2=1+\varphi$, donc $f(\varphi)=\varphi$.</p><p>Si $0\leqslant u_n\leqslant\varphi$, $f$ croissante donne $u_{n+1}\leqslant f(\varphi)=\varphi$ : $[0,\varphi]$ est stable ; $u_0=1\leqslant\varphi$.</p><p>Pour $x\in[0,\varphi]$ : $x^2-x-1\leqslant0$ (entre les racines), donc $x\leqslant\sqrt{1+x}=f(x)$. ${ph("donc","Donc")} $(u_n)$ est croissante.</p><p>${ph("ainsi","Ainsi")} $(u_n)$ converge vers $\ell\in[1,\varphi]$ avec $f(\ell)=\ell$ : $\ell=\varphi$.</p><div class="sbox">$$u_n\nearrow\varphi=\frac{1+\sqrt5}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier l'intervalle stable : sans lui, la monotonie de $f$ ne se transmet pas.</p><p><b>Premier réflexe :</b> calculer $u_1,u_2,\dots$ numériquement. Cela ne démontre ni la monotonie ni la limite.</p>`,
+    trou: { q: R`Pourquoi seule $\varphi$ est-elle limite possible ?`, c: [R`$\ell^2=1+\ell$ et $\ell\geqslant0$ : seule la racine positive convient`, R`parce que $\varphi>2$`, R`parce que $\ell=0$`, R`parce que $\ell=-1$`], ok: 0, why: R`Les deux solutions de $\ell^2-\ell-1=0$ sont $\frac{1\pm\sqrt5}2$ ; la racine négative est exclue car une limite de racines carrées est positive.` },
+    bareme: { sur: 4, l: [[1, R`Équation du point fixe et valeur de $\varphi$`], [1, R`Intervalle stable $[0,\varphi]$ et majoration`], [1, R`Croissance par $x\leqslant\sqrt{1+x}$`], [1, R`Convergence et limite $\varphi$`]] },
+    jury: [
+      { e: R`Ne pas justifier que $\varphi$ est la bonne racine.`, p: R`Choix de racine non justifié : point perdu.` }
+    ] },
+  { declic: R`Une expression « infinie » se définit comme la limite d'une suite récurrente. Les racines imbriquées donnent la suite de la question 5 ; la fraction continue donne $v_{n+1}=1+\frac1{v_n}$, décroissante : on la traite par contraction.`,
+    copie: R`<p>$u_{n+1}=\sqrt{1+u_n}$ converge vers $\varphi$ (question 5).</p><p>$f(x)=1+\frac1x$ est décroissante. $v_1=2$, et $f([\frac32,2])\subset[\frac32,\frac53]\subset[\frac32,2]$ : $v_n\in[\frac32,2]$ pour $n\geqslant1$.</p><p>$\varphi=1+\frac1\varphi$ donc $v_{n+1}-\varphi=\frac{\varphi-v_n}{v_n\varphi}$ avec $v_n\varphi\geqslant\frac94$ : $|v_{n+1}-\varphi|\leqslant\frac49|v_n-\varphi|$.</p><p>${ph("donc","Donc")} $|v_n-\varphi|\leqslant\big(\frac49\big)^{n-1}|v_1-\varphi|\to0$ : les deux expressions valent $\varphi$.</p><div class="sbox">$$\sqrt{1+\sqrt{1+\cdots}}=1+\cfrac1{1+\cfrac1{1+\cdots}}=\frac{1+\sqrt5}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> « résoudre » $x=\sqrt{1+x}$ en supposant que la limite existe. Il faut d'abord démontrer la convergence.</p><p><b>Premier réflexe :</b> étudier la monotonie de $v_n$. Elle oscille autour de $\varphi$ : on prouve plutôt la contraction.</p>`,
+    trou: { q: R`Pourquoi $v_n\varphi\geqslant\frac94$ ?`, c: [R`$v_n\geqslant\frac32$ et $\varphi\geqslant\frac32$`, R`$v_n\leqslant\frac32$`, R`$\varphi=2$`, R`$v_n=\varphi$`], ok: 0, why: R`Le produit de deux réels $\geqslant\frac32$ est $\geqslant\frac94$.` },
+    bareme: { sur: 4, l: [[1, R`Racines imbriquées : renvoi à la question 5`], [1, R`Intervalle stable $[\frac32,2]$ pour $v_n$`], [1, R`Contraction $|v_{n+1}-\varphi|\leqslant\frac49|v_n-\varphi|$`], [1, R`Limite $\varphi$ et égalité des deux expressions`]] },
+    jury: [
+      { e: R`Résoudre $x=1+\frac1x$ sans démontrer la convergence.`, p: R`Limite supposée existante : deux points perdus.` }
+    ] },
+  { declic: R`Quand $f$ est décroissante, la suite n'est pas monotone. On calcule $u_{n+1}-\alpha$ avec un dénominateur commun et on majore le facteur par une constante $\lt1$ : c'est une contraction.`,
+    copie: R`<p>Si $u_n>0$, $u_{n+1}=\frac1{2+u_n}\in]0,\frac12[$ : la suite est définie et positive.</p><p>Point fixe : $\alpha=\frac1{2+\alpha}\iff\alpha^2+2\alpha-1=0$, $\alpha=\sqrt2-1>0$.</p><p>$u_{n+1}-\alpha=\frac{\alpha-u_n}{(2+u_n)(2+\alpha)}$ et $(2+u_n)(2+\alpha)>4$ : $|u_{n+1}-\alpha|\leqslant\frac14|u_n-\alpha|$.</p><p>${ph("donc","Donc")} $|u_n-\alpha|\leqslant4^{-n}|u_0-\alpha|\to0$.</p><div class="sbox">$$u_n\to\sqrt2-1,\quad|u_n-\alpha|\leqslant4^{-n}|u_0-\alpha|.$$</div>`,
+    tete: R`<p><b>Piège :</b> chercher la monotonie : $f$ est décroissante, la suite oscille autour de $\alpha$.</p><p><b>Premier réflexe :</b> étudier les suites $u_{2n}$ et $u_{2n+1}$ séparément ($f\circ f$ croissante). Plus long que la contraction.</p>`,
+    trou: { q: R`Pourquoi $(2+u_n)(2+\alpha)>4$ ?`, c: [R`$u_n>0$ et $\alpha>0$, donc chaque facteur est $>2$`, R`$u_n\lt0$`, R`$\alpha=0$`, R`$u_n=2$`], ok: 0, why: R`Chaque facteur est strictement supérieur à $2$ car $u_n>0$ et $\alpha>0$.` },
+    bareme: { sur: 4, l: [[1, R`Positivité et stabilité`], [1, R`Point fixe $\alpha=\sqrt2-1$`], [1, R`Différence $u_{n+1}-\alpha$ et majoration par $\frac14$`], [1, R`Récurrence : $|u_n-\alpha|\leqslant4^{-n}|u_0-\alpha|$ et limite`]] },
+    jury: [
+      { e: R`Appliquer un théorème de monotonie.`, p: R`$f$ est décroissante : point perdu.` },
+      { e: R`Majorer le facteur par $\frac12$ au lieu de $\frac14$.`, p: R`Majoration trop grossière mais valable si justifiée : point perdu si non justifiée.` }
+    ] }
+], [
+  { q: R`Si $u_{n+1}=f(u_n)$, $f$ continue et $u_n\to\ell$, que vérifie $\ell$ ?`, c: [R`$f(\ell)=\ell$`, R`$f(\ell)=0$`, R`$f'(\ell)=0$`, R`$\ell=u_0$`], ok: 0, r: "su-rec" },
+  { q: R`Que sait-on de $f(x)-x$ si la suite $u_{n+1}=f(u_n)$ est croissante ?`, c: [R`$f(u_n)-u_n\geqslant0$`, R`$f(u_n)-u_n\leqslant0$`, R`$f(u_n)=u_n$`, R`rien`], ok: 0, r: "su-rec" },
+  { q: R`Quelle inégalité lie $\mathrm e^x$ à $1+x$ ?`, c: [R`$\mathrm e^x\geqslant1+x$`, R`$\mathrm e^x\leqslant1+x$`, R`$\mathrm e^x=1+x$`, R`$\mathrm e^x\geqslant1+x^2$`], ok: 0, r: "su-ineg" }
+]);
+
+/* ---------- su-16 · Racines par récurrence : contraction, Héron et Newton ---------- */
+A("su-16", [
+  { declic: R`Une récurrence avec une racine : on vérifie à chaque pas que l'argument est positif. On cherche un intervalle $I$ avec $f(I)\subset I$ : ici $[-2,2]$.`,
+    copie: R`<p>Si $u\in[-2,2]$ alors $0\leqslant2-u\leqslant4$ donc $\sqrt{2-u}$ existe et $0\leqslant\sqrt{2-u}\leqslant2$ : $f([-2,2])\subset[-2,2]$.</p><p>${ph("donc","Donc")} par récurrence $u_n\in[-2,2]$, la suite est définie, et $u_n\geqslant0$ dès $n\geqslant1$.</p><p>Si $u_n\to\ell$, la continuité de $f$ donne $\ell=\sqrt{2-\ell}$, $\ell\geqslant0$ : $\ell^2+\ell-2=(\ell-1)(\ell+2)=0$.</p><p>${ph("ainsi","Ainsi")} $\ell=1$ ($\ell=-2$ est exclu).</p><div class="sbox">$$u_n\in[-2,2],\qquad\text{seule limite possible }1.$$</div>`,
+    tete: R`<p><b>Piège :</b> garder la racine $-2$ comme limite possible. Elle est négative alors qu'une limite de racines carrées est $\geqslant0$.</p><p><b>Premier réflexe :</b> étudier directement la monotonie. Ici $f$ est décroissante : la suite oscille et la stabilité est la première étape.</p>`,
+    trou: { q: R`Pourquoi $\ell=-2$ est-elle exclue ?`, c: [R`$u_n\geqslant0$ pour $n\geqslant1$ donc $\ell\geqslant0$`, R`$-2\notin[-2,2]$`, R`$\sqrt{2-(-2)}=2\neq-2$ n'est pas pertinent`, R`$\ell$ doit être entier`], ok: 0, why: R`Les termes sont des racines carrées, donc positifs ; une limite d'une suite positive est positive. (Et $\sqrt{4}=2\neq-2$ : $-2$ n'est pas solution de $\ell=\sqrt{2-\ell}$.)` },
+    bareme: { sur: 4, l: [[1, R`Stabilité de $[-2,2]$ et définition de la suite`], [1, R`Positivité $u_n\geqslant0$ pour $n\geqslant1$`], [1, R`Équation du point fixe $\ell^2+\ell-2=0$`], [1, R`Racine $1$ retenue, $-2$ exclue avec justification`]] },
+    jury: [
+      { e: R`Retenir $\ell=-2$.`, p: R`Racine étrangère : deux points perdus.` }
+    ] },
+  { declic: R`Quand on ne sait pas montrer la monotonie, on étudie la distance à la limite $|u_n-1|$. Avec la quantité conjuguée, on la majore par la distance précédente ; la suite des distances décroît.`,
+    copie: R`<p>$u_{n+1}-1=\sqrt{2-u_n}-1=\frac{(2-u_n)-1}{\sqrt{2-u_n}+1}=\frac{1-u_n}{1+\sqrt{2-u_n}}$.</p><p>${ph("donc","Donc")} $|u_{n+1}-1|=\frac{|u_n-1|}{1+\sqrt{2-u_n}}\leqslant|u_n-1|$ : $(|u_n-1|)$ est décroissante minorée, de limite $L\geqslant0$.</p><p>Si $L>0$, le rapport $\frac1{1+\sqrt{2-u_n}}\to1$, donc $\sqrt{2-u_n}\to0$, $u_n\to2$ ; mais alors $u_{n+1}\to0\neq2$ : absurde.</p><p>${ph("ainsi","Ainsi")} $L=0$ et $u_n\to1$.</p><div class="sbox">$$\forall a\in[-2,2],\ u_n\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> déduire $L=0$ de « décroissante » seulement. Une suite décroissante positive peut converger vers $L>0$.</p><p><b>Premier réflexe :</b> montrer $|u_{n+1}-1|\leqslant k|u_n-1|$ avec $k\lt1$. Impossible ici : le facteur $\frac1{1+\sqrt{2-u_n}}$ n'est pas uniformément $\lt1$ (il est proche de $1$ si $u_n$ est proche de $2$).</p>`,
+    trou: { q: R`Par quoi multiplie-t-on $\sqrt A-1$ pour obtenir $\frac{A-1}{\sqrt A+1}$ ?`, c: [R`$\frac{\sqrt A+1}{\sqrt A+1}$`, R`$\frac{\sqrt A-1}{\sqrt A-1}$`, R`$\sqrt A$`, R`$A$`], ok: 0, why: R`$(\sqrt A-1)(\sqrt A+1)=A-1$ : la quantité conjuguée fait disparaître la racine au numérateur.` },
+    bareme: { sur: 5, l: [[1, R`Formule $u_{n+1}-1=\frac{1-u_n}{1+\sqrt{2-u_n}}$`], [1, R`Décroissance de $|u_n-1|$`], [1, R`Convergence vers $L\geqslant0$`], [1, R`$L=0$ par l'absurde`], [1, R`Conclusion $u_n\to1$`]] },
+    jury: [
+      { e: R`Affirmer « décroissante minorée par $0$ donc de limite $0$ ».`, p: R`Faux en général : deux points perdus.` }
+    ] },
+  { declic: R`Un module dans le disque unité : on majore $|2-u_n|$ par minoration $2-|u_n|$ (inégalité triangulaire). Le module décroît et on obtient une contraction de raison $\frac1{2-|a|}\lt1$.`,
+    copie: R`<p>Si $|u_n|\lt1$ : $|2-u_n|\geqslant2-|u_n|>1$, donc $u_{n+1}$ existe et $|u_{n+1}|\leqslant\frac{|u_n|}{2-|u_n|}\lt|u_n|$.</p><p>Par récurrence $|u_n|\lt1$ pour tout $n$, et $|u_n|\leqslant|a|$.</p><p>${ph("donc","Donc")} $2-|u_n|\geqslant2-|a|$ et $|u_{n+1}|\leqslant k|u_n|$ avec $k=\frac1{2-|a|}\in]\frac12,1[$.</p><p>${ph("ainsi","Ainsi")} $|u_n|\leqslant k^n|a|\to0$ : $u_n\to0$.</p><div class="sbox">$$|u_n|\leqslant\frac{|a|}{(2-|a|)^n}\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $|2-u_n|=2-|u_n|$. Seule l'inégalité $|2-u_n|\geqslant2-|u_n|$ est vraie.</p><p><b>Premier réflexe :</b> séparer partie réelle et imaginaire. Le module règle tout plus vite.</p>`,
+    trou: { q: R`Quelle inégalité donne $|2-u_n|\geqslant2-|u_n|$ ?`, c: [R`$|x-y|\geqslant|x|-|y|$ (inégalité triangulaire inverse)`, R`$|x+y|\leqslant|x|+|y|$ dans le mauvais sens`, R`$|xy|=|x||y|$`, R`$|x|\geqslant0$`], ok: 0, why: R`C'est l'inégalité triangulaire sous la forme $|x-y|\geqslant|x|-|y|$ avec $x=2$ et $y=u_n$.` },
+    bareme: { sur: 4, l: [[1, R`Suite définie : $|2-u_n|>1$`], [1, R`$|u_{n+1}|\lt|u_n|$ et $|u_n|\lt1$ par récurrence`], [1, R`Contraction $|u_{n+1}|\leqslant k|u_n|$, $k=\frac1{2-|a|}\lt1$`], [1, R`Limite nulle`]] },
+    jury: [
+      { e: R`Écrire $|2-u_n|=2-|u_n|$.`, p: R`Égalité fausse pour un complexe : deux points perdus.` }
+    ] },
+  { declic: R`Héron : on cherche à approcher $\sqrt a$. Une moyenne arithmétique de $x$ et $\frac ax$ est toujours $\geqslant\sqrt a$ ; la suite est positive, minorée dès le rang $1$, décroissante.`,
+    copie: R`<p>Par récurrence $u_n>0$.</p><p>$u_{n+1}-\sqrt a=\frac{(u_n-\sqrt a)^2}{2u_n}\geqslant0$ : $u_n\geqslant\sqrt a$ pour $n\geqslant1$.</p><p>$u_{n+1}-u_n=\frac{a-u_n^2}{2u_n}\leqslant0$ dès $u_n\geqslant\sqrt a$ : $(u_n)_{n\geqslant1}$ décroît.</p><p>${ph("donc","Donc")} elle converge vers $\ell\geqslant\sqrt a>0$ et $\ell=\frac12(\ell+\frac a\ell)$ donne $\ell=\sqrt a$.</p><div class="sbox">$$u_n\geqslant\sqrt a\ (n\geqslant1),\quad(u_n)_{n\geqslant1}\searrow,\quad u_n\to\sqrt a.$$</div>`,
+    tete: R`<p><b>Piège :</b> dire $u_n\geqslant\sqrt a$ dès $n=0$ : faux si $u_0\lt\sqrt a$. L'inégalité n'est vraie qu'à partir du rang $1$.</p><p><b>Premier réflexe :</b> étudier $f(x)=\frac12(x+\frac ax)$ par sa dérivée. Les identités algébriques sont plus rapides.</p>`,
+    trou: { q: R`Pourquoi $\frac12\big(x+\frac ax\big)\geqslant\sqrt a$ pour $x>0$ ?`, c: [R`$(x-\sqrt a)^2\geqslant0$, donc $x^2+a\geqslant2\sqrt ax$`, R`$x\geqslant\sqrt a$`, R`$\frac ax\geqslant x$`, R`$a\geqslant1$`], ok: 0, why: R`En développant le carré, $x^2+a\geqslant2\sqrt a\,x$ ; on divise par $2x>0$.` },
+    bareme: { sur: 4, l: [[1, R`Positivité par récurrence`], [1, R`Minoration $u_{n+1}-\sqrt a=\frac{(u_n-\sqrt a)^2}{2u_n}\geqslant0$`], [1, R`Décroissance à partir du rang $1$`], [1, R`Limite $\ell=\sqrt a$ avec $\ell\neq0$`]] },
+    jury: [
+      { e: R`Supposer $u_0\geqslant\sqrt a$.`, p: R`Hypothèse non donnée : point perdu.` }
+    ] },
+  { declic: R`Pour une convergence rapide, on pose $v_n=\frac{u_n-\sqrt a}{u_n+\sqrt a}$ : les deux formules $u_{n+1}\mp\sqrt a$ se divisent et donnent $v_{n+1}=v_n^2$. L'erreur est alors doublée en nombre de décimales à chaque pas.`,
+    copie: R`<p>$u_{n+1}-\sqrt a=\frac{(u_n-\sqrt a)^2}{2u_n}$ et $u_{n+1}+\sqrt a=\frac{(u_n+\sqrt a)^2}{2u_n}$.</p><p>${ph("donc","Donc")} $v_{n+1}=v_n^2$ et $v_n=v_0^{2^n}$.</p><p>De $u_n-\sqrt a=v_n(u_n+\sqrt a)\leqslant2u_0v_n$ : $|u_n-\sqrt a|\leqslant2u_0v_0^{2^n}$.</p><p>Pour $a=2$, $u_0=\frac32$ : $v_0\approx0{,}0294$, $|u_2-\sqrt2|\leqslant3v_0^4\approx2{,}2\times10^{-6}$ et $u_2=\frac{577}{408}$.</p><div class="sbox">$$v_n=v_0^{2^n},\qquad\sqrt2\approx\frac{577}{408}=1{,}41422.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que l'erreur est divisée par une constante à chaque pas (convergence linéaire). Ici elle est <i>élevée au carré</i> : le nombre de décimales exactes double.</p><p><b>Premier réflexe :</b> majorer par une suite géométrique. Valide mais très pessimiste ; $v_{n+1}=v_n^2$ donne mieux.</p>`,
+    trou: { q: R`Que vaut $v_n$ en fonction de $v_0$ ?`, c: [R`$v_0^{2^n}$`, R`$v_0^{2n}$`, R`$(2v_0)^n$`, R`$v_0^{n+1}$`], ok: 0, why: R`Chaque pas élève au carré : $v_1=v_0^2$, $v_2=v_0^4$, $v_n=v_0^{2^n}$.` },
+    bareme: { sur: 4, l: [[1, R`Deux formules $u_{n+1}\mp\sqrt a$`], [1, R`$v_{n+1}=v_n^2$ et $v_n=v_0^{2^n}$`], [1, R`Majoration de l'erreur $2u_0v_0^{2^n}$`], [1, R`Application numérique à $\sqrt2$`]] },
+    jury: [
+      { e: R`Écrire $v_n=v_0^{2n}$.`, p: R`Exposant faux ($2^n$ et non $2n$) : deux points perdus.` }
+    ] },
+  { declic: R`Newton : on remplace la courbe par sa tangente et on cherche où elle coupe l'axe. Pour une fonction concave, la courbe est sous chaque tangente, donc la suite reste du bon côté de $\alpha$ et croît.`,
+    copie: R`<p>$f(x)=x+\ln x$ est strictement croissante, bijective de $]0,+\infty[$ sur $\mathbb R$ : unique $\alpha$ avec $f(\alpha)=0$, et $f(\frac12)\lt0\lt f(1)$ donne $\alpha\in]\frac12,1[$.</p><p>$u_{n+1}=u_n-\frac{f(u_n)}{f'(u_n)}=\frac{u_n(1-\ln u_n)}{1+u_n}$, $u_0=1$.</p><p>$f$ est concave : $0=f(\alpha)\leqslant f(u_n)+f'(u_n)(\alpha-u_n)$, d'où $u_{n+1}\leqslant\alpha$.</p><p>${ph("donc","Donc")} $f(u_n)\leqslant0$ et $u_{n+1}-u_n=-\frac{f(u_n)}{f'(u_n)}\geqslant0$ : $(u_n)$ croît, majorée par $\alpha$.</p><p>${ph("ainsi","Ainsi")} elle converge vers $\ell$ avec $f(\ell)=0$ : $\ell=\alpha$.</p><div class="sbox">$$u_{n+1}=\frac{u_n(1-\ln u_n)}{1+u_n},\quad u_n\nearrow\alpha\approx0{,}5671.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier que $f'(u_n)>0$ pour diviser l'inégalité : sans le signe, le sens est incertain.</p><p><b>Premier réflexe :</b> admettre que Newton converge. Il peut diverger : c'est la concavité et le choix de $u_0$ qui assurent la convergence.</p>`,
+    trou: { q: R`Que dit la concavité de $f$ par rapport à ses tangentes ?`, c: [R`la courbe est sous chaque tangente`, R`la courbe est au-dessus de chaque tangente`, R`la courbe coupe chaque tangente`, R`les tangentes sont horizontales`], ok: 0, why: R`Pour une fonction concave dérivable, $f(x)\leqslant f(u)+f'(u)(x-u)$ pour tous $x$, $u$.` },
+    bareme: { sur: 5, l: [[1, R`Existence et unicité de $\alpha$ (bijection)`], [1, R`Suite de Newton explicitée`], [1, R`$u_{n+1}\leqslant\alpha$ par concavité`], [1, R`Croissance de la suite`], [1, R`Convergence et limite $\alpha$`]] },
+    jury: [
+      { e: R`Admettre $u_n\leqslant\alpha$ sans la concavité.`, p: R`Étape clé : deux points perdus.` }
+    ] }
+], [
+  { q: R`Que vaut $(\sqrt A-1)(\sqrt A+1)$ ?`, c: [R`$A-1$`, R`$A+1$`, R`$\sqrt A-1$`, R`$A$`], ok: 0, r: "su-usuel" },
+  { q: R`Quelle inégalité lie $|x-y|$, $|x|$ et $|y|$ ?`, c: [R`$|x-y|\geqslant|x|-|y|$`, R`$|x-y|\leqslant|x|-|y|$`, R`$|x-y|=|x|-|y|$`, R`$|x-y|\leqslant0$`], ok: 0, r: "su-ineg-cl" },
+  { q: R`Comment définit-on la suite de Newton pour résoudre $f(x)=0$ ?`, c: [R`$u_{n+1}=u_n-\frac{f(u_n)}{f'(u_n)}$`, R`$u_{n+1}=f(u_n)$`, R`$u_{n+1}=u_n-f'(u_n)$`, R`$u_{n+1}=\frac{f(u_n)}{f'(u_n)}$`], ok: 0, r: "su-rec" }
+]);
+
+/* ---------- su-17 · Récurrences non standard : module, logarithme, racines imbriquées, loi tanh ---------- */
+A("su-17", [
+  { declic: R`Pour $\frac{z+|z|}2$ avec $z$ en forme polaire : on factorise $1+\mathrm e^{\mathrm i\varphi}$ par l'angle moitié. On obtient directement module et argument du terme suivant, donc une récurrence sur $n$.`,
+    copie: R`<p>Soit $z=r\mathrm e^{\mathrm i\varphi}$, $r>0$, $\varphi\in]0,\pi[$ : $\frac{z+|z|}2=\frac r2(\mathrm e^{\mathrm i\varphi}+1)=r\cos\frac\varphi2\,\mathrm e^{\mathrm i\varphi/2}$.</p><p>${ph("comme","Comme")} $\frac\varphi2\in]0,\frac\pi2[$, $\cos\frac\varphi2>0$ : c'est l'écriture polaire, d'argument $\frac\varphi2\in]0,\pi[$.</p><p>${ph("posons","Posons")} $\rho_n=\rho\prod_{k=1}^n\cos\frac\theta{2^k}>0$. Si $z_n=\rho_n\mathrm e^{\mathrm i\theta/2^n}$, on applique l'étape précédente avec $\varphi=\frac\theta{2^n}$ : $z_{n+1}=\rho_n\cos\frac\theta{2^{n+1}}\,\mathrm e^{\mathrm i\theta/2^{n+1}}$.</p><div class="sbox">$$z_n=\rho\Big(\prod_{k=1}^n\cos\frac\theta{2^k}\Big)\mathrm e^{\mathrm i\theta/2^n}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de vérifier que $\cos\frac\varphi2>0$ : sinon le coefficient devant l'exponentielle n'est pas un module.</p><p><b>Premier réflexe :</b> calculer $z_1,z_2$ en partie réelle et imaginaire. La forme polaire donne la formule en une ligne.</p>`,
+    trou: { q: R`Que vaut $\mathrm e^{\mathrm i\varphi}+1$ ?`, c: [R`$2\cos\frac\varphi2\,\mathrm e^{\mathrm i\varphi/2}$`, R`$2\cos\varphi\,\mathrm e^{\mathrm i\varphi}$`, R`$2\sin\frac\varphi2\,\mathrm e^{\mathrm i\varphi/2}$`, R`$\cos\varphi+1$`], ok: 0, why: R`On factorise par $\mathrm e^{\mathrm i\varphi/2}$ : $\mathrm e^{\mathrm i\varphi/2}(\mathrm e^{\mathrm i\varphi/2}+\mathrm e^{-\mathrm i\varphi/2})=2\cos\frac\varphi2\,\mathrm e^{\mathrm i\varphi/2}$.` },
+    bareme: { sur: 4, l: [[1, R`Factorisation par l'angle moitié`], [1, R`Signe de $\cos\frac\varphi2$ : écriture polaire valide`], [1, R`Hypothèse de récurrence sur $z_n$ et $\rho_n$`], [1, R`Formule finale du produit`]] },
+    jury: [
+      { e: R`Ne pas justifier $\cos\frac\varphi2>0$.`, p: R`Module non justifié : point perdu.` }
+    ] },
+  { declic: R`On multiplie le produit par $\sin\frac\theta{2^n}$ et on utilise $\sin2x=2\sin x\cos x$ : tout se télescope. Puis on reprend les cas particuliers de $z_0$ (nul, réel positif, réel négatif).`,
+    copie: R`<p>Par récurrence, $\sin\frac\theta{2^n}\prod_{k=1}^n\cos\frac\theta{2^k}=\frac{\sin\theta}{2^n}$ (car $\sin2x=2\sin x\cos x$). ${ph("donc","Donc")} $\prod\cos=\frac{\sin\theta}{2^n\sin(\theta/2^n)}\to\frac{\sin\theta}\theta$ car $\frac{\sin x}x\to1$.</p><p>${ph("ainsi","Ainsi")} pour $\theta\in]0,\pi[$ : $z_n\to\rho\frac{\sin\theta}\theta=\frac{\mathrm{Im}\,z_0}\theta$.</p><p>${ph("distinguons","Distinguons")} : $z_0=0$ donne $z_n=0$ ; $z_0>0$ donne $\frac{z_0+|z_0|}2=z_0$, suite constante ; $z_0<0$ donne $z_1=0$ puis $z_n=0$.</p><p>Si $\theta\in]-\pi,0[$ : $\cos\frac\varphi2>0$ pour $\varphi\in]-\pi,\pi[$, la même formule vaut.</p><div class="sbox">$$z_n\to\rho\frac{\sin\theta}\theta\ \ (\theta\in]-\pi,\pi[,\ \theta\neq0),\quad z_n\to\rho\ (\theta=0),\quad z_n\to0\ (z_0\in\mathbb R_-).$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier $z_0\in\mathbb R_-$ : l'argument vaut $\pi$ et la formule de la question précédente ne s'applique pas ($\cos\frac\pi2=0$).</p><p><b>Premier réflexe :</b> calculer la limite du produit terme à terme. Le télescopage par $\sin$ est le bon outil.</p>`,
+    trou: { q: R`Pourquoi $\frac{\sin\theta}{2^n\sin(\theta/2^n)}\to\frac{\sin\theta}\theta$ ?`, c: [R`$2^n\sin\frac\theta{2^n}\sim\theta$ car $\frac{\sin x}x\to1$`, R`$\sin\frac\theta{2^n}\to1$`, R`$2^n\sin\frac\theta{2^n}\to0$`, R`$\sin\theta=\theta$`], ok: 0, why: R`Avec $x=\frac\theta{2^n}\to0$ : $2^n\sin x=\theta\frac{\sin x}x\to\theta$.` },
+    bareme: { sur: 5, l: [[1, R`Identité $\sin\frac\theta{2^n}\prod\cos=\frac{\sin\theta}{2^n}$`], [1, R`Limite du produit $\frac{\sin\theta}\theta$`], [1, R`Cas $\theta\in]0,\pi[$ et $\theta\in]-\pi,0[$`], [1, R`Cas $z_0$ réel positif ou nul`], [1, R`Cas $z_0$ réel négatif`]] },
+    jury: [
+      { e: R`Oublier le cas $z_0\lt0$.`, p: R`Cas manquant : deux points perdus.` }
+    ] },
+  { declic: R`La relation $u_{n+2}u_n=u_{n+1}^2$ est multiplicative : on passe au logarithme pour la rendre additive. On reconnaît alors une suite arithmétique, donc $u_n$ est géométrique.`,
+    copie: R`<p>$u_0,u_1>0$ et si $u_n,u_{n+1}>0$ alors $u_{n+2}=\frac{u_{n+1}^2}{u_n}>0$ : les logarithmes existent.</p><p>${ph("posons","Posons")} $w_n=\ln u_n$ : $w_{n+2}+w_n=2w_{n+1}$, donc $(w_n)$ est arithmétique de raison $r=w_1-w_0=\ln\frac ba$ et $w_n=\ln a+n\ln\frac ba$.</p><p>${ph("donc","Donc")} $u_n=\mathrm e^{w_n}=a\big(\frac ba\big)^n$, géométrique de raison $q=\frac ba>0$.</p><p>Elle converge si et seulement si $q\leqslant1$ : $q\lt1$ limite $0$ ; $q=1$ constante $a$ ; $q>1$ vers $+\infty$.</p><div class="sbox">$$u_n=a\Big(\frac ba\Big)^n,\quad\text{convergente}\iff b\leqslant a.$$</div>`,
+    tete: R`<p><b>Piège :</b> prendre $\ln$ sans avoir vérifié $u_n>0$.</p><p><b>Premier réflexe :</b> calculer $u_2,u_3$ et conjecturer. Le logarithme démontre la formule sans conjecture.</p>`,
+    trou: { q: R`À quoi se ramène $u_{n+2}u_n=u_{n+1}^2$ après passage au logarithme ?`, c: [R`$w_{n+2}+w_n=2w_{n+1}$`, R`$w_{n+2}w_n=w_{n+1}^2$`, R`$w_{n+2}=w_{n+1}+w_n$`, R`$w_{n+2}-w_n=2w_{n+1}$`], ok: 0, why: R`$\ln(xy)=\ln x+\ln y$ et $\ln(x^2)=2\ln x$.` },
+    bareme: { sur: 4, l: [[1, R`Positivité des termes`], [1, R`Suite $(\ln u_n)$ arithmétique, raison $\ln\frac ba$`], [1, R`Formule $u_n=a(b/a)^n$`], [1, R`Condition de convergence $b\leqslant a$`]] },
+    jury: [
+      { e: R`Écrire $u_n=a+n(b-a)$.`, p: R`Confond arithmétique et géométrique : deux points perdus.` }
+    ] },
+  { declic: R`$u_{n+1}=\sqrt{S_n}$ : on élève au carré et on retranche deux termes consécutifs pour que la somme disparaisse. On obtient $u_{n+2}^2-u_{n+1}^2=u_{n+1}$, d'où la croissance, la divergence, puis la limite de la différence.`,
+    copie: R`<p>$u_{n+2}^2=S_{n+1}=S_n+u_{n+1}=u_{n+1}^2+u_{n+1}$ et tous les $u_n$ sont $>0$.</p><p>${ph("donc","Donc")} $u_{n+2}^2-u_{n+1}^2=u_{n+1}>0$ : $(u_n)_{n\geqslant1}$ est strictement croissante.</p><p>Si elle convergeait vers $\ell>0$, $u_{n+2}^2-u_{n+1}^2\to0$ alors qu'il vaut $u_{n+1}\to\ell>0$ : absurde. ${ph("ainsi","Ainsi")} $u_n\to+\infty$.</p><p>$u_{n+2}-u_{n+1}=\frac{u_{n+1}}{u_{n+2}+u_{n+1}}=\frac1{1+u_{n+2}/u_{n+1}}$, et $\big(\frac{u_{n+2}}{u_{n+1}}\big)^2=1+\frac1{u_{n+1}}\to1$ : le quotient tend vers $1$ (positif).</p><div class="sbox">$$u_n\to+\infty,\qquad u_{n+1}-u_n\to\frac12.$$</div>`,
+    tete: R`<p><b>Piège :</b> « croissante donc $+\infty$ » sans exclure la convergence vers un réel.</p><p><b>Premier réflexe :</b> sommer les $u_k$ à la main. Mieux vaut éliminer $S_n$ en écrivant deux relations consécutives.</p>`,
+    trou: { q: R`Que vaut $\frac{u_{n+2}^2}{u_{n+1}^2}$ ?`, c: [R`$1+\frac1{u_{n+1}}$`, R`$1+u_{n+1}$`, R`$2$`, R`$\frac1{u_{n+1}}$`], ok: 0, why: R`De $u_{n+2}^2=u_{n+1}^2+u_{n+1}$ on divise par $u_{n+1}^2$ : $1+\frac1{u_{n+1}}$.` },
+    bareme: { sur: 5, l: [[1, R`Relation $u_{n+2}^2=u_{n+1}^2+u_{n+1}$`], [1, R`Croissance`], [1, R`Divergence par l'absurde`], [1, R`Écriture $u_{n+2}-u_{n+1}=\frac1{1+u_{n+2}/u_{n+1}}$`], [1, R`Limite $\frac12$`]] },
+    jury: [
+      { e: R`Supposer d'emblée que $u_{n+1}-u_n$ a une limite.`, p: R`Existence non prouvée : deux points perdus.` }
+    ] },
+  { declic: R`On sait que $u_{n+1}-u_n\to\frac12$ : on fixe $\varepsilon$, on encadre chaque terme de la différence à partir d'un rang $N$ et on somme. C'est le lemme de Cesàro, démontré à la main.`,
+    copie: R`<p>Soit $\varepsilon>0$ : il existe $N$ tel que, pour $k\geqslant N$, $\frac12-\varepsilon\leqslant u_{k+1}-u_k\leqslant\frac12+\varepsilon$.</p><p>Pour $n>N$, on somme $n-N$ termes télescopiques : $(n-N)(\frac12-\varepsilon)\leqslant u_n-u_N\leqslant(n-N)(\frac12+\varepsilon)$.</p><p>On divise par $n$ : les bornes de $\frac{u_n}n$ tendent vers $\frac12\mp\varepsilon$ ($N$ et $u_N$ fixés).</p><p>${ph("donc","Donc")} pour $n$ assez grand $\frac12-2\varepsilon\leqslant\frac{u_n}n\leqslant\frac12+2\varepsilon$ : $\frac{u_n}n\to\frac12$.</p><div class="sbox">$$u_n\sim\frac n2.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire « $u_{n+1}-u_n\sim\frac12$ donc $u_n\sim\frac n2$ » : on ne somme pas des équivalents sans justification.</p><p><b>Premier réflexe :</b> citer le théorème de Cesàro. Il faut le redémontrer ici, la preuve étant courte.</p>`,
+    trou: { q: R`Combien y a-t-il de termes dans $\sum_{k=N}^{n-1}(u_{k+1}-u_k)$ ?`, c: [R`$n-N$`, R`$n-N+1$`, R`$n$`, R`$N$`], ok: 0, why: R`Les indices $k$ vont de $N$ à $n-1$ : $n-1-N+1=n-N$ termes.` },
+    bareme: { sur: 4, l: [[1, R`Rang $N$ pour $\varepsilon$ fixé`], [1, R`Sommation et télescopage`], [1, R`Division par $n$ et passage à la limite`], [1, R`Conclusion $\frac{u_n}n\to\frac12$ puis équivalent`]] },
+    jury: [
+      { e: R`Sommer des équivalents.`, p: R`Procédé faux en général : deux points perdus.` }
+    ] },
+  { declic: R`Les racines imbriquées se découpent : $u_{n+1}=\sqrt{n+1+u_n}$. Le minorant $\sqrt n$ donne la divergence, et un majorant par récurrence donne $u_n\leqslant n$, puis $u_n=o(n)$.`,
+    copie: R`<p>$u_{n+1}=\sqrt{n+1+u_n}$ avec $u_1=1$.</p><p>Tous les termes sous la racine sont positifs, donc $u_n\geqslant\sqrt n$ et $u_n\to+\infty$.</p><p>Récurrence : $u_1=1\leqslant1$ ; si $u_n\leqslant n$, $u_{n+1}\leqslant\sqrt{2n+1}\leqslant\sqrt{n^2+2n+1}=n+1$.</p><p>${ph("donc","Donc")} pour $n\geqslant2$, $u_n=\sqrt{n+u_{n-1}}\leqslant\sqrt{2n-1}$ et $0\leqslant\frac{u_n}n\leqslant\sqrt{\frac2n}\to0$.</p><div class="sbox">$$\sqrt n\leqslant u_n\leqslant\sqrt{2n-1},\quad u_n\to+\infty,\quad u_n=o(n).$$</div>`,
+    tete: R`<p><b>Piège :</b> confondre l'indice : $u_n=\sqrt{n+u_{n-1}}$, pas $\sqrt{n+u_n}$.</p><p><b>Premier réflexe :</b> chercher une formule explicite. Elle n'existe pas : on encadre.</p>`,
+    trou: { q: R`Pourquoi $\sqrt{2n+1}\leqslant n+1$ ?`, c: [R`$2n+1\leqslant n^2+2n+1$`, R`$2n+1\geqslant n^2$`, R`$n\leqslant0$`, R`$\sqrt{2n}\leqslant1$`], ok: 0, why: R`La racine carrée est croissante et $2n+1\leqslant(n+1)^2=n^2+2n+1$ car $n^2\geqslant0$.` },
+    bareme: { sur: 5, l: [[1, R`Relation $u_{n+1}=\sqrt{n+1+u_n}$`], [1, R`Minoration $u_n\geqslant\sqrt n$ : divergence`], [1, R`Majoration $u_n\leqslant n$ par récurrence`], [1, R`Majoration $u_n\leqslant\sqrt{2n-1}$`], [1, R`$u_n=o(n)$ par encadrement`]] },
+    jury: [
+      { e: R`Écrire $u_{n+1}=\sqrt{n+u_n}$.`, p: R`Terme $n+1$ oublié : point perdu.` }
+    ] },
+  { declic: R`Pour passer de $u_n^2\sim n$ à l'écart $u_n-\sqrt n$, on utilise la quantité conjuguée : $x-y=\frac{x^2-y^2}{x+y}$. Le numérateur devient $u_{n-1}$, dont on connaît un équivalent.`,
+    copie: R`<p>$u_n^2=n+u_{n-1}=n\big(1+\frac{u_{n-1}}n\big)$ avec $u_{n-1}=o(n)$ : $u_n^2\sim n$, donc $u_n\sim\sqrt n$.</p><p>${ph("donc","Donc")} $u_n-\sqrt n=\frac{u_n^2-n}{u_n+\sqrt n}=\frac{u_{n-1}}{u_n+\sqrt n}$.</p><p>Numérateur : $u_{n-1}\sim\sqrt{n-1}\sim\sqrt n$. Dénominateur : somme d'équivalents positifs, $u_n+\sqrt n\sim2\sqrt n$.</p><p>${ph("ainsi","Ainsi")} $u_n-\sqrt n\sim\frac{\sqrt n}{2\sqrt n}=\frac12$.</p><div class="sbox">$$u_n\sim\sqrt n,\qquad\lim(u_n-\sqrt n)=\frac12.$$</div>`,
+    tete: R`<p><b>Piège :</b> soustraire des équivalents : $u_n\sim\sqrt n$ ne permet pas d'écrire $u_n-\sqrt n\sim0$. On passe par la quantité conjuguée.</p><p><b>Premier réflexe :</b> développer $u_n$ en $\sqrt n+\dots$. Ici la quantité conjuguée est plus directe.</p>`,
+    trou: { q: R`Pourquoi peut-on ajouter les équivalents $u_n\sim\sqrt n$ et $\sqrt n\sim\sqrt n$ au dénominateur ?`, c: [R`les deux termes sont positifs`, R`les deux termes tendent vers $0$`, R`on peut toujours ajouter des équivalents`, R`parce que $u_n=\sqrt n$`], ok: 0, why: R`La somme de deux équivalents n'est équivalente que si les termes sont de même signe (ici positifs), sinon des annulations sont possibles.` },
+    bareme: { sur: 4, l: [[1, R`Équivalent $u_n\sim\sqrt n$`], [1, R`Quantité conjuguée $u_n-\sqrt n=\frac{u_{n-1}}{u_n+\sqrt n}$`], [1, R`Équivalents du numérateur et du dénominateur`], [1, R`Limite $\frac12$`]] },
+    jury: [
+      { e: R`Soustraire deux équivalents.`, p: R`Opération interdite : deux points perdus.` }
+    ] },
+  { declic: R`La loi $\frac{v+u}{1+uv}$ ressemble à l'addition des tangentes hyperboliques. On étudie $1-v_{n+1}$ et $1+v_{n+1}$ : leur quotient fait apparaître un facteur qui multiplie $w_n=\frac{1-v_n}{1+v_n}$ par au plus $\frac13$.`,
+    copie: R`<p>Si $v_n\in[0,1]$ et $u=u_{n+1}\in[\frac12,1]$ : $v_{n+1}\geqslant0$ et $1-v_{n+1}=\frac{(1-u)(1-v_n)}{1+uv_n}\geqslant0$ : $v_{n+1}\in[0,1]$.</p><p>De même $1+v_{n+1}=\frac{(1+u)(1+v_n)}{1+uv_n}$.</p><p>${ph("donc","Donc")} $w_{n+1}=\frac{1-v_{n+1}}{1+v_{n+1}}=\frac{1-u_{n+1}}{1+u_{n+1}}\,w_n$.</p><p>$x\mapsto\frac{1-x}{1+x}$ est décroissante : pour $u\in[\frac12,1]$, $0\leqslant\frac{1-u}{1+u}\leqslant\frac13$, donc $0\leqslant w_n\leqslant\frac{w_0}{3^n}\to0$.</p><p>${ph("ainsi","Ainsi")} $v_n=\frac{1-w_n}{1+w_n}\to1$.</p><div class="sbox">$$v_n\to1,\qquad0\leqslant\frac{1-v_n}{1+v_n}\leqslant\frac{w_0}{3^n}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de montrer $v_n\in[0,1]$ : sans cela $w_n$ n'est pas défini ni positif.</p><p><b>Premier réflexe :</b> chercher une limite en passant à la limite dans la récurrence. Le point fixe n'est pas unique (la loi dépend de $u_{n+1}$), on prouve la contraction.</p>`,
+    trou: { q: R`Que vaut $1-v_{n+1}$ en fonction de $u$ et $v_n$ ?`, c: [R`$\frac{(1-u)(1-v_n)}{1+uv_n}$`, R`$\frac{(1-u)(1+v_n)}{1+uv_n}$`, R`$\frac{1-u-v_n}{1+uv_n}$`, R`$\frac{(1+u)(1-v_n)}{1+uv_n}$`], ok: 0, why: R`$1-\frac{v_n+u}{1+uv_n}=\frac{1+uv_n-v_n-u}{1+uv_n}=\frac{(1-u)(1-v_n)}{1+uv_n}$.` },
+    bareme: { sur: 5, l: [[1, R`Stabilité $v_n\in[0,1]$`], [1, R`Identités pour $1-v_{n+1}$ et $1+v_{n+1}$`], [1, R`Relation $w_{n+1}=\frac{1-u}{1+u}w_n$`], [1, R`Contraction par $\frac13$`], [1, R`Retour à $v_n$ et limite $1$`]] },
+    jury: [
+      { e: R`Passer à la limite dans la récurrence sans contraction.`, p: R`Limite supposée existante : deux points perdus.` }
+    ] }
+], [
+  { q: R`Que vaut $|r\mathrm e^{\mathrm i\varphi}|$ pour $r\geqslant0$ ?`, c: [R`$r$`, R`$r\varphi$`, R`$1$`, R`$\varphi$`], ok: 0, r: "su-usuel" },
+  { q: R`Que dit $u_n\sim v_n$ ?`, c: [R`$\frac{u_n}{v_n}\to1$`, R`$u_n-v_n\to0$`, R`$u_n=v_n$`, R`$u_n=o(v_n)$`], ok: 0, r: "su-equiv" },
+  { q: R`Quelle égalité permet de passer de $\ln(xy)$ à une somme ?`, c: [R`$\ln(xy)=\ln x+\ln y$`, R`$\ln(xy)=\ln x\cdot\ln y$`, R`$\ln(x+y)=\ln x\ln y$`, R`$\ln(xy)=\ln x-\ln y$`], ok: 0, r: "su-usuel" }
+]);
+
 })();
