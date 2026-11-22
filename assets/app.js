@@ -232,7 +232,7 @@ const UIDEF = { rmots: true, rtab: true, decode: "onglets", cor: "copie", page: 
 const UI = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem("lemme-ui") || "{}") || {}; } catch (_) {} return Object.assign({}, UIDEF, o); })();
 {
   const sb = $("#set-toggle"), sp = $("#setpop");
-  const AIDES = [["deux", "Ma copie / Dans ma tête", "Deux lectures du même corrigé."], ["declic", "Pourquoi j'y pense", "Le déclic de l'étape, en languette."], ["phrases", "Phrases types", "Les tournures de rédaction surlignées."], ["hs", "Indices gradués", "Trois indices, du plus vague au plus précis."], ["trou", "Étapes à trous", "Une question avant de voir le corrigé."], ["bareme", "Barème", "Les points de la question, en languette."], ["jury", "Rapport du jury", "Les erreurs qui coûtent des points."], ["prereq", "Test de prérequis", "Trois questions avant de commencer."], ["annales", "Annales liées", "Les questions de concours où l'outil sert."], ["suivi", "Suivi élève et parents", "Carte des chapitres dans le tableau de bord."]];
+  const AIDES = [["deux", "Ma copie / Dans ma tête", "Deux lectures du même corrigé."], ["declic", "Pourquoi j'y pense", "Le déclic de l'étape, en languette."], ["phrases", "Phrases types", "Les tournures de rédaction surlignées."], ["hs", "Indices gradués", "Trois indices, du plus vague au plus précis."], ["trou", "Étapes à trous", "Une question avant de voir le corrigé."], ["bareme", "Barème", "Les points de la question, en languette."], ["jury", "Rapport du jury", "Les erreurs qui coûtent des points."], ["prereq", "Test de prérequis", "Les notions à avoir en tête avant de commencer."], ["annales", "Annales liées", "Les questions de concours où l'outil sert."], ["suivi", "Suivi élève et parents", "Carte des chapitres dans le tableau de bord."]];
   let view = "main";
   const sw = (k, l, d) => `<button type="button" class="sp-sw" data-ui="${k}" role="switch" aria-checked="${!!UI[k]}"><span class="sp-l"><b>${l}</b>${d ? `<small>${d}</small>` : ""}</span><i class="tg" aria-hidden="true"></i></button>`;
   const seg = (k, lab, os) => `<div class="sp-f"><span class="sp-t">${lab}</span><div class="sp-seg" role="radiogroup" aria-label="${lab}">${os.map(([v, l]) => `<button type="button" role="radio" data-ui="${k}" data-v="${v}" aria-checked="${UI[k] === v}">${l}</button>`).join("")}</div></div>`;
@@ -503,6 +503,51 @@ let enonceMode = "interactif";
 const PIL = () => DS.get("lemme-pilot", { pre: {}, trou: {} });
 const pilSave = f => { const o = PIL(); f(o); DS.set("lemme-pilot", o); };
 const VUE = () => { try { return localStorage.getItem("lemme-vue") || "tete"; } catch (_) { return "tete"; } };
+/* Socle automatique : sur tout le site, les aides qui peuvent se construire à partir des corrigés existants
+   (indices gradués, barème indicatif, notions à avoir en tête, annales liées). Ce qui est écrit à la main
+   dans le fichier de contenu (hs, bareme, prereq, themes) n'est jamais écrasé. */
+const rapTitle = id => ((RAPPELS[id] || {}).t || "").replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+const firstPara = b => { const m = String(b || "").match(/<p>[\s\S]*?<\/p>/); return m ? m[0] : ""; };
+function baremeAuto(st) {
+  const b = st.b || "", nm = Math.floor((b.match(/\$\$/g) || []).length / 2), np = (b.match(/<p>/g) || []).length, box = /class="sbox"/.test(b);
+  const size = nm + np, ids = (st.rappels || []).filter(r => RAPPELS[r]);
+  const outil = ids.length ? `Outil du cours nommé et utilisé à bon escient : ${esc(rapTitle(ids[0]))}` : "Méthode annoncée avant de calculer";
+  const calc = "Calculs menés étape par étape, sans saut ni signe perdu";
+  const hyp = "Hypothèses vérifiées avant d'appliquer une formule ou un théorème";
+  const res = box ? "Résultat de la question énoncé clairement et encadré" : "Conclusion de la question rédigée en une phrase";
+  if (size <= 3) return { sur: 2, auto: 1, l: [[1, outil], [1, `${calc}, puis ${res.charAt(0).toLowerCase()}${res.slice(1)}`]] };
+  if (size <= 7) return { sur: 3, auto: 1, l: [[1, outil], [1, calc], [1, res]] };
+  return { sur: 4, auto: 1, l: [[1, outil], [1, hyp], [1, calc], [1, res]] };
+}
+function enrich(e) {
+  if (!e || e._enr) return; e._enr = 1;
+  (e.steps || []).forEach(st => {
+    if (!st.hs && st.h) {
+      const ids = (st.rappels || []).filter(r => RAPPELS[r]), L = [];
+      if (ids.length) L.push(`<p>Quel outil du cours sert ici ? Pense à : ${ids.slice(0, 3).map(r => `<b>${esc(rapTitle(r))}</b>`).join(", ")}.</p>`);
+      L.push(st.h);
+      const p = firstPara(st.b); if (p && plainOf(p).trim() !== plainOf(st.h).trim()) L.push(`<p><i>Début de la rédaction.</i></p>${p}`);
+      if (L.length >= 2) st.hs = L;
+    }
+    if (!st.bareme && st.b) st.bareme = baremeAuto(st);
+  });
+  if (!e.prereq && !e.prereqAuto) {
+    const cnt = new Map(); e.steps.forEach(st => (st.rappels || []).forEach(r => RAPPELS[r] && cnt.set(r, (cnt.get(r) || 0) + 1)));
+    const ids = [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(x => x[0]);
+    if (ids.length >= 2) e.prereqAuto = ids;
+  }
+}
+let ANNALL = null;
+function themesOf(e) {
+  if (e.themes) return e.themes;
+  if (e.subj === "annales" || e._th) return e._th || [];
+  if (!ANNALL) ANNALL = EXERCISES.filter(x => x.subj === "annales").flatMap(x => x.steps.map(st => norm(plainOf(st.t + " " + st.b))));
+  const ids = [...new Set((e.steps || []).flatMap(st => st.rappels || []))].filter(r => RAPPELS[r]);
+  const cand = [...new Set(ids.map(rapTitle).filter(t => t.length >= 6 && !/[$\\^_{}]/.test(t)))];
+  const lim = Math.max(3, Math.floor(ANNALL.length * .12));
+  e._th = cand.map(t => [t, ANNALL.reduce((a, x) => a + (x.includes(norm(t)) ? 1 : 0), 0)]).filter(([, n]) => n >= 1 && n <= lim).sort((a, b) => a[1] - b[1]).slice(0, 6).map(x => x[0]);
+  return e._th;
+}
 function stepAids(e, st, i, veil) {
   const declic = "";
   let hint = "";
@@ -615,9 +660,22 @@ function prereqScreen(e, host, start) {
   });
   typeset(host);
 }
+function prereqAuto(e, host, start) {
+  const ids = e.prereqAuto, ans = [];
+  host.innerHTML = `<div class="prereq"><span class="count">Avant de commencer</span><h3>Ce que tu dois avoir en tête</h3><p class="pl">Pour chaque notion, dis honnêtement si tu peux l'énoncer sans regarder. Si non, ouvre le rappel : il sert directement dans le corrigé.</p>${ids.map((r, k) => `<fieldset class="pq" data-pq="${k}"><legend>${esc(RAPPELS[r].t)}</legend><div class="tc"><button type="button" data-pc="1" aria-pressed="false">Je sais l'énoncer</button><button type="button" data-pc="0" aria-pressed="false">À revoir</button></div><div class="pfb" hidden></div></fieldset>`).join("")}<div class="pres" hidden></div><div class="nav"><button type="button" class="btn btn-ghost" data-pskip>Passer</button><button type="button" class="btn btn-yellow" data-pgo disabled>Commencer le corrigé ${I.arrow}</button></div></div>`;
+  $$("[data-pq]", host).forEach(fs => $$("[data-pc]", fs).forEach(b => b.addEventListener("click", () => {
+    const k = +fs.dataset.pq, v = +b.dataset.pc; ans[k] = v;
+    $$("[data-pc]", fs).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    const fb = $(".pfb", fs); fb.hidden = false; fb.innerHTML = v ? `<span class="pok">Parfait : la rédaction du corrigé te sera familière.</span>` : `<span class="pko">À revoir :</span> ${rchip(ids[k], e)}`;
+    $("[data-pgo]", host).disabled = ans.filter(x => x !== undefined).length < ids.length;
+  })));
+  $("[data-pskip]", host).addEventListener("click", () => { pilSave(o => { (o.pre = o.pre || {})[e.id] = { skip: true, t: Date.now() }; }); start(); });
+  $("[data-pgo]", host).addEventListener("click", () => { const sc = ans.filter(x => x === 1).length; pilSave(o => { (o.pre = o.pre || {})[e.id] = { s: sc, n: ids.length, t: Date.now() }; }); start(); });
+  typeset(host);
+}
 const ANNTXT = new Map();
 function annLinks(e) {
-  const keys = (e.themes || []).map(t => [t, norm(t)]);
+  const keys = themesOf(e).map(t => [t, norm(t)]);
   return EXERCISES.filter(x => x.subj === "annales").map(x => {
     let T = ANNTXT.get(x.id); if (!T) { T = x.steps.map(st => norm(plainOf(st.t + " " + st.b))); ANNTXT.set(x.id, T); }
     let best = -1, bh = [], bn = 0, tot = new Set();
@@ -626,8 +684,9 @@ function annLinks(e) {
   }).filter(r => r.i >= 0).sort((a, b) => b.hit.length - a.hit.length || b.n - a.n).slice(0, 4);
 }
 function annSection(e) {
-  if (!e.themes || !UI.annales) return "";
+  if (!UI.annales || !themesOf(e).length) return "";
   const L = annLinks(e);
+  if (!L.length) return "";
   const qlab = (x, i) => { const st = x.steps[i], q = st.q || stepQ(x, i); return q ? `Question ${q}` : `Étape ${i + 1}`; };
   return `<section class="more annl"><h2>Ce thème dans les annales</h2><p class="annl-s">${L.length ? "Un clic t'emmène directement à la question du sujet où l'outil sert." : "Aucun sujet de concours du site n'utilise encore ces outils."}</p>${L.length ? `<div class="annl-g">${L.map(r => { const c = ANN()[r.x.chap] || {}; return `<a class="annl-i" href="#e-${r.x.id}" data-jump="${r.x.id}" data-jumpi="${r.i}"><span class="annl-e">${esc(c.epreuve || "Annale")}</span><b>${ttl(r.x)}</b><span class="annl-q">${qlab(r.x, r.i)} · ${stt(r.x.steps[r.i].t)}</span><span class="annl-k">${r.bh.map(esc).join(" · ")}</span></a>`; }).join("")}</div>` : ""}</section>`;
 }
@@ -735,7 +794,7 @@ function openEdge(k) {
   let kick = "", h = "", body = "";
   if (k === "declic" && st.declic) { kick = "Pourquoi j'y pense"; h = stt(st.t); body = `<div class="body course">${annotate(st.declic, e, null, true)}</div>`; }
   else if (k === "tete" && st.tete) { kick = "Ce qu'on essaie d'abord"; h = "Fausses pistes et pièges"; body = `<div class="body course">${annotate(st.tete, e, null, true)}</div>`; }
-  else if (k === "bareme" && st.bareme) { kick = "Barème de la question"; h = `${st.bareme.sur} points`; body = `<ul class="bar-l">${st.bareme.l.map(([pt, t]) => `<li><b>${pt} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul>`; }
+  else if (k === "bareme" && st.bareme) { kick = st.bareme.auto ? "Barème indicatif" : "Barème de la question"; h = `${st.bareme.sur} points`; body = `<ul class="bar-l">${st.bareme.l.map(([pt, t]) => `<li><b>${pt} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul>`; }
   else if (k === "jury" && st.jury) { kick = "Rapport du jury"; h = "Ce qui coûte des points"; body = `<p class="jsub">Remarques fréquentes des correcteurs, reformulées.</p>${st.jury.map(j => `<div class="ji"><p class="je">${annotate(j.e, e)}</p><p class="jp">${annotate(j.p, e)}</p></div>`).join("")}`; }
   else return;
   const dr = document.createElement("aside"); dr.className = "drawer edgedr edgedr-" + k; dr.dataset.kind = k; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
@@ -754,6 +813,7 @@ function openRapList() {
 }
 function exercisePage(eid) {
   const e = EXERCISES.find(x => x.id === eid); if (!e) return notFound();
+  enrich(e);
   const s = sid(e.subj), c = s.years[e.year][e.chap], pb = e.kind === "probleme";
   if (year !== e.year && !s.hidden) setYear(e.year);
   const hasPdf = PDFS.has("enonce-" + e.id);
@@ -1498,13 +1558,14 @@ function stepQ(e, i) {
 }
 let player = null;
 function mountPlayer(e, host) {
+  enrich(e);
   const n = e.steps.length;
   const all = [...new Set(e.steps.flatMap(s => s.rappels || []))];
   const state = { i: -1 };
   function intro() {
     let k = 0;
     try { if (sessionStorage.getItem("lemme-resume") === e.id) { sessionStorage.removeItem("lemme-resume"); const l = DS.get("lemme-last", null); if (l && l.id === e.id) k = Math.min(l.i, n); } } catch (_) {}
-    if (e.prereq && UI.prereq && !(PIL().pre || {})[e.id] && !k) { prereqScreen(e, host, () => show(0, 1)); return; }
+    if ((e.prereq || e.prereqAuto) && UI.prereq && !(PIL().pre || {})[e.id] && !k) { (e.prereq ? prereqScreen : prereqAuto)(e, host, () => show(0, 1)); return; }
     show(k, 0, true);
     let jump = false; try { jump = sessionStorage.getItem("lemme-jump") === "1"; sessionStorage.removeItem("lemme-jump"); } catch (_) {}
     if (jump) setTimeout(() => { const pb = host.closest(".panelbox"); if (pb) pb.scrollIntoView({ block: "start" }); }, 350);
