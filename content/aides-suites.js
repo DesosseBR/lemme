@@ -786,4 +786,142 @@ A("su-12", [
   { q: R`Si $(u_n)$ est décroissante, que fait-elle ?`, c: [R`converge ou tend vers $-\infty$`, R`converge toujours`, R`tend toujours vers $0$`, R`est bornée`], ok: 0, r: "su-mono" }
 ]);
 
+/* ---------- su-13 · Suites définies comme solutions d'équations ---------- */
+A("su-13", [
+  { declic: R`« Une unique solution » : on pense au théorème de la bijection. On étudie $f(x)=x+\ln x$ : continue, strictement croissante (dérivée positive), et on lit les limites aux bornes pour savoir quelles valeurs elle atteint.`,
+    copie: R`<p>${ph("posons","Posons")} $f(x)=x+\ln x$ sur $]0,+\infty[$. $f'(x)=1+\frac1x>0$ : $f$ est strictement croissante.</p><p>$f(x)\to+\infty$ en $+\infty$ et $f(x)\to-\infty$ en $0^+$ (car $\ln x\to-\infty$).</p><p>${ph("donc","Donc")} $f$, continue et strictement croissante, est une bijection de $]0,+\infty[$ sur $\mathbb R$.</p><p>${ph("ainsi","Ainsi")} pour tout entier $n$ l'équation $f(x)=n$ a une unique solution $x_n$.</p><div class="sbox">$$\forall n,\ \exists!\,x_n>0,\ x_n+\ln x_n=n.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier la limite en $0^+$ : sans elle, on ne sait pas que $f$ atteint les valeurs négatives.</p><p><b>Premier réflexe :</b> résoudre l'équation explicitement. Elle n'a pas de solution en fonctions usuelles : on utilise la bijection.</p>`,
+    trou: { q: R`Quelle hypothèse du théorème de la bijection vérifie-t-on avec le signe de $f'$ ?`, c: [R`la stricte monotonie`, R`la continuité seulement`, R`la dérivabilité en $0$`, R`la bornitude`], ok: 0, why: R`$f'>0$ sur un intervalle donne la stricte croissance ; la continuité vient de la dérivabilité.` },
+    bareme: { sur: 3, l: [[1, R`Dérivée $1+\frac1x>0$ : stricte croissance`], [1, R`Limites $-\infty$ en $0^+$ et $+\infty$ en $+\infty$`], [1, R`Théorème de la bijection : unicité de $x_n$`]] },
+    jury: [
+      { e: R`Affirmer l'existence sans limites aux bornes.`, p: R`L'image n'est pas connue : deux points perdus.` }
+    ] },
+  { declic: R`Comparer $x_n$ et $x_{n+1}$ : $f$ est strictement croissante donc $f(a)\lt f(b)\Rightarrow a\lt b$. Pour la limite, on raisonne par l'absurde avec une borne. L'équivalent vient de $\frac{\ln x}x\to0$.`,
+    copie: R`<p>$f(x_{n+1})=n+1>n=f(x_n)$ et $f$ est strictement croissante : $x_{n+1}>x_n$.</p><p>${ph("posons","Supposons")} $(x_n)$ majorée par $M$ : $n=f(x_n)\leqslant f(M)$ pour tout $n$, faux pour $n>f(M)$. ${ph("donc","Donc")} $x_n\to+\infty$.</p><p>$n=x_n\big(1+\frac{\ln x_n}{x_n}\big)$ avec $\frac{\ln x_n}{x_n}\to0$ : $x_n\sim n$.</p><div class="sbox">$$x_n\nearrow,\quad x_n\to+\infty,\quad x_n\sim n.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $f(x_{n+1})>f(x_n)$ donc $x_{n+1}>x_n$ sans citer que $f$ est strictement croissante.</p><p><b>Premier réflexe :</b> poser $x_n=n-\ln n$. Ce n'est qu'un équivalent : $x_n-n$ n'est pas $-\ln n$ exactement, mais $-\ln x_n$.</p>`,
+    trou: { q: R`Pourquoi $\frac{\ln x_n}{x_n}\to0$ ?`, c: [R`$x_n\to+\infty$ et croissances comparées`, R`$x_n\to0$`, R`$\ln x_n$ est bornée`, R`$x_n=n$`], ok: 0, why: R`On sait $x_n\to+\infty$ (déjà démontré) et $\frac{\ln x}x\to0$ en $+\infty$.` },
+    bareme: { sur: 4, l: [[1, R`Croissance de $(x_n)$ par stricte croissance de $f$`], [1, R`Limite $+\infty$ par l'absurde`], [1, R`Écriture $n=x_n(1+\frac{\ln x_n}{x_n})$`], [1, R`Équivalent $x_n\sim n$`]] },
+    jury: [
+      { e: R`Affirmer $x_n\to+\infty$ sans justification.`, p: R`Point perdu.` }
+    ] },
+  { declic: R`Même méthode avec $f(x)=x+\tan x$ sur $]-\frac\pi2,\frac\pi2[$. Pour la limite, on isole $\tan x_n=n-x_n$ et on applique $\arctan$.`,
+    copie: R`<p>$f'(x)=2+\tan^2x>0$ : $f$ est strictement croissante, continue, avec $f\to\pm\infty$ aux bornes. ${ph("donc","Donc")} bijection de $]-\frac\pi2,\frac\pi2[$ sur $\mathbb R$ : unique $x_n$.</p><p>$\tan x_n=n-x_n\geqslant n-\frac\pi2\to+\infty$ car $|x_n|\lt\frac\pi2$.</p><p>${ph("ainsi","Ainsi")} $x_n=\arctan(n-x_n)\to\frac\pi2$.</p><div class="sbox">$$\exists!\,x_n,\quad x_n\to\frac\pi2.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier que $\tan$ n'est pas définie en $\pm\frac\pi2$ : les limites se prennent à gauche en $\frac\pi2$ et à droite en $-\frac\pi2$.</p><p><b>Premier réflexe :</b> résoudre $\tan x=n-x$ en $x$. Impossible : on passe par $\arctan$ et une limite.</p>`,
+    trou: { q: R`Pourquoi $x_n=\arctan(n-x_n)$ ?`, c: [R`$\tan x_n=n-x_n$ et $\arctan$ est la réciproque de $\tan$ sur $]-\frac\pi2,\frac\pi2[$`, R`$\arctan x=\frac1{\tan x}$`, R`$\tan$ est périodique`, R`$x_n=n$`], ok: 0, why: R`Sur l'intervalle où $x_n$ vit, $\arctan\circ\tan=\mathrm{id}$.` },
+    bareme: { sur: 4, l: [[1, R`Dérivée $2+\tan^2x>0$`], [1, R`Limites aux bornes et bijection`], [1, R`Écriture $x_n=\arctan(n-x_n)$ avec $n-x_n\geqslant n-\frac\pi2$`], [1, R`Limite $\frac\pi2$`]] },
+    jury: [
+      { e: R`Écrire $x_n=\arctan(n)$.`, p: R`On ignore le terme $-x_n$ : valeur fausse, deux points perdus.` }
+    ] },
+  { declic: R`$x\mathrm e^x=n$ : on prend le logarithme pour séparer $x$ de $\mathrm e^x$ : $x_n+\ln x_n=\ln n$, ce qui ramène à la question 2 pour l'équivalent.`,
+    copie: R`<p>$g(x)=x\mathrm e^x$ : $g'(x)=(1+x)\mathrm e^x>0$, $g(0)=0$, $g\to+\infty$ : bijection de $\mathbb R_+$ sur $\mathbb R_+$. ${ph("donc","Donc")} unique $x_n$ pour tout $n$.</p><p>$g(x_{n+1})>g(x_n)$ donc $x_{n+1}>x_n$ ; si $(x_n)$ était majorée par $M$, $n\leqslant g(M)$ : absurde. ${ph("donc","Donc")} $x_n\to+\infty$.</p><p>Pour $n\geqslant1$ : $\ln(x_n\mathrm e^{x_n})=\ln n$ donne $x_n+\ln x_n=\ln n$, soit $\ln n=x_n\big(1+\frac{\ln x_n}{x_n}\big)$.</p><p>${ph("ainsi","Ainsi")} $x_n\sim\ln n$.</p><div class="sbox">$$x_n\to+\infty,\qquad x_n\sim\ln n.$$</div>`,
+    tete: R`<p><b>Piège :</b> appliquer le logarithme avant de savoir que $x_n>0$. Il faut $n\geqslant1$ donc $x_n>0$.</p><p><b>Premier réflexe :</b> inverser $x\mapsto x\mathrm e^x$ par la fonction de Lambert. Hors programme : on détermine seulement un équivalent.</p>`,
+    trou: { q: R`Que donne $\ln(x_n\mathrm e^{x_n})$ ?`, c: [R`$\ln x_n+x_n$`, R`$x_n\ln x_n$`, R`$\ln x_n\cdot x_n$`, R`$x_n+\mathrm e^{\ln x_n}$`], ok: 0, why: R`Le logarithme d'un produit est la somme des logarithmes : $\ln x_n+\ln\mathrm e^{x_n}=\ln x_n+x_n$.` },
+    bareme: { sur: 4, l: [[1, R`Bijection de $g$ sur $\mathbb R_+$`], [1, R`Croissance et limite $+\infty$`], [1, R`Équation $x_n+\ln x_n=\ln n$`], [1, R`Équivalent $x_n\sim\ln n$`]] },
+    jury: [
+      { e: R`Écrire $\ln(x_n\mathrm e^{x_n})=x_n\ln x_n$.`, p: R`Erreur de règle du logarithme : deux points perdus.` }
+    ] },
+  { declic: R`Pour $x^n\ln x=1$, on regarde où la fonction peut valoir $1$ : $\ln x\leqslant0$ sur $]0,1]$ donne une valeur $\leqslant0$. La solution est donc dans $]1,+\infty[$, où la fonction est strictement croissante.`,
+    copie: R`<p>Pour $0\lt x\leqslant1$ : $\ln x\leqslant0$ et $x^n>0$ donc $x^n\ln x\leqslant0\neq1$ : aucune solution.</p><p>Sur $]1,+\infty[$ : $h_n'(x)=x^{n-1}(n\ln x+1)>0$, $h_n(1)=0$ et $h_n(x)\to+\infty$.</p><p>${ph("donc","Donc")} $h_n$ est une bijection de $[1,+\infty[$ sur $[0,+\infty[$ : $1$ a un unique antécédent $x_n$, et $x_n>1$ car $h_n(1)=0\neq1$.</p><div class="sbox">$$\exists!\,x_n>0,\ x_n^n\ln x_n=1,\quad x_n>1.$$</div>`,
+    tete: R`<p><b>Piège :</b> étudier $h_n$ sur $]0,+\infty[$ : elle n'y est pas monotone ($h_n(x)\to0$ en $0^+$, négative sur $]0,1[$), le théorème de la bijection ne s'applique pas directement.</p><p><b>Premier réflexe :</b> prendre le logarithme $n\ln x+\ln\ln x=0$ : cela impose déjà $x>1$ pour que $\ln\ln x$ existe.</p>`,
+    trou: { q: R`Pourquoi $x_n>1$ strictement ?`, c: [R`$h_n(1)=0\neq1$`, R`$x_n\geqslant1$ par définition`, R`$\ln x_n\lt0$`, R`$x_n$ est croissante`], ok: 0, why: R`$x_n\geqslant1$ car $h_n\leqslant0$ sur $]0,1]$ ; l'égalité est exclue car $h_n(1)=0$.` },
+    bareme: { sur: 3, l: [[1, R`Aucune solution dans $]0,1]$ (signe de $\ln x$)`], [1, R`Stricte croissance sur $]1,+\infty[$ et limites`], [1, R`Bijection : unicité et $x_n>1$`]] },
+    jury: [
+      { e: R`Ne pas éliminer $]0,1]$.`, p: R`L'unicité n'est pas prouvée : deux points perdus.` }
+    ] },
+  { declic: R`Pour comparer $x_n$ et $x_{n+1}$, on évalue $h_{n+1}$ en $x_n$ : $h_{n+1}(x_n)=x_n\cdot h_n(x_n)=x_n>1$. Une suite décroissante minorée converge, et sa limite vaut $1$ sinon $x_n^n\ln x_n$ tendrait vers l'infini. L'équivalent passe par $y_n=\ln x_n$.`,
+    copie: R`<p>$h_{n+1}(x_n)=x_n^{n+1}\ln x_n=x_n\cdot1>1=h_{n+1}(x_{n+1})$ et $h_{n+1}$ est strictement croissante : $x_n>x_{n+1}$. ${ph("donc","Donc")} $(x_n)$ décroît, minorée par $1$ : elle converge vers $\ell\geqslant1$.</p><p>Si $\ell>1$, $x_n^n\ln x_n\geqslant\ell^n\ln\ell\to+\infty$ : contradiction. ${ph("donc","Donc")} $\ell=1$.</p><p>${ph("posons","Posons")} $y_n=\ln x_n\to0^+$ et $z_n=ny_n$ : $z_n+\ln z_n=\ln n$, donc $z_n\sim\ln n$ et $y_n\sim\frac{\ln n}n$.</p><p>${ph("ainsi","Ainsi")} $x_n-1=\mathrm e^{y_n}-1\sim y_n\sim\frac{\ln n}n$.</p><div class="sbox">$$x_n\searrow1,\qquad x_n-1\sim\frac{\ln n}n.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $x_n^n\to1^n=1$ donc $x_n^n\ln x_n\to0$ : forme indéterminée traitée à la légère.</p><p><b>Premier réflexe :</b> poser directement $x_n=1+\varepsilon_n$ et développer. L'équation en $z_n$ ramène à un cas déjà traité (question 4).</p>`,
+    trou: { q: R`Pourquoi $\ell>1$ est-il impossible ?`, c: [R`$x_n^n\ln x_n\geqslant\ell^n\ln\ell\to+\infty$, mais il vaut $1$`, R`parce que $(x_n)$ est croissante`, R`parce que $\ln\ell\lt0$`, R`parce que $\ell=0$`], ok: 0, why: R`Une suite décroissante de limite $\ell$ vérifie $x_n\geqslant\ell$ ; la quantité $x_n^n\ln x_n$ est alors minorée par une suite qui tend vers $+\infty$, ce qui contredit sa valeur constante $1$.` },
+    bareme: { sur: 5, l: [[1, R`Décroissance par $h_{n+1}(x_n)=x_n>1$`], [1, R`Convergence par limite monotone`], [1, R`$\ell=1$ par l'absurde`], [1, R`Équation $z_n+\ln z_n=\ln n$`], [1, R`Équivalent de $x_n-1$`]] },
+    jury: [
+      { e: R`Passer à la limite dans $x_n^n$ sans justification.`, p: R`Forme indéterminée $1^\infty$ : deux points perdus.` }
+    ] },
+  { declic: R`Une équation polynomiale $x+x^2+\cdots+x^n=1$ : on localise la racine avec un encadrement ($P_n(\frac12)\lt0$), puis la monotonie de $x_n$ par $P_{n+1}(x_n)=x_n^{n+1}>0$, et la limite avec la somme géométrique.`,
+    copie: R`<p>$P_n(x)=\sum x^k-1$ est strictement croissante sur $\mathbb R_+$, $P_n(0)=-1$ et $P_n(1)=n-1\geqslant0$ : unique racine $x_n\in]0,1]$. ${ph("or","Or")} $P_n(\frac12)=-2^{-n}\lt0$ donc $x_n>\frac12$.</p><p>$P_{n+1}(x_n)=x_n^{n+1}>0=P_{n+1}(x_{n+1})$ donc $x_n>x_{n+1}$ : décroissante minorée, elle converge vers $\ell\in[\frac12,1]$.</p><p>Somme géométrique : $x_n(1-x_n^n)=1-x_n$ et $0\leqslant x_n^n\leqslant x_2^n\to0$ (car $x_2\lt1$). ${ph("donc","Donc")} $\ell=1-\ell$, soit $\ell=\frac12$.</p><div class="sbox">$$x_n\in\Big]\frac12,1\Big],\quad x_n\searrow,\quad x_n\to\frac12.$$</div>`,
+    tete: R`<p><b>Piège :</b> utiliser la formule géométrique avec $x_n=1$ : elle exige $x_n\neq1$ (vrai pour $n\geqslant2$ car $P_n(1)>0$).</p><p><b>Premier réflexe :</b> passer à la limite dans la somme infinie $\frac x{1-x}=1$. On ne le justifie qu'avec $x_n^n\to0$ : c'est l'argument clé.</p>`,
+    trou: { q: R`Que vaut $\sum_{k=1}^n2^{-k}$ ?`, c: [R`$1-2^{-n}$`, R`$1$`, R`$1+2^{-n}$`, R`$2^{-n}$`], ok: 0, why: R`Somme géométrique : $\frac12\cdot\frac{1-2^{-n}}{1-\frac12}=1-2^{-n}$.` },
+    bareme: { sur: 5, l: [[1, R`Racine unique dans $]0,1]$`], [1, R`Minoration $x_n>\frac12$ avec $P_n(\frac12)=-2^{-n}$`], [1, R`Décroissance par $P_{n+1}(x_n)=x_n^{n+1}>0$`], [1, R`Majoration $x_n^n\leqslant x_2^n\to0$`], [1, R`Équation limite $\ell=1-\ell$ et conclusion $\frac12$`]] },
+    jury: [
+      { e: R`Appliquer la formule géométrique sans vérifier $x_n\neq1$.`, p: R`Division par $0$ possible : point perdu.` },
+      { e: R`Passer à la limite dans $x_n^n$ sans justifier qu'elle est nulle.`, p: R`Étape clé : deux points perdus.` }
+    ] }
+], [
+  { q: R`Que dit le théorème de la bijection (version stricte croissante) ?`, c: [R`$f$ continue strictement croissante est bijective de $I$ sur l'intervalle des limites aux bornes`, R`$f$ continue est bijective`, R`$f$ dérivable est monotone`, R`$f$ croissante est continue`], ok: 0, r: "su-bij" },
+  { q: R`Que vaut $\lim_{x\to+\infty}\frac{\ln x}x$ ?`, c: [R`$0$`, R`$1$`, R`$+\infty$`, R`$-\infty$`], ok: 0, r: "su-usuel" },
+  { q: R`Si $(x_n)$ est croissante et non majorée, que fait-elle ?`, c: [R`$x_n\to+\infty$`, R`$x_n$ converge`, R`$x_n$ oscille`, R`$x_n\to0$`], ok: 0, r: "su-mono" }
+]);
+
+/* ---------- su-14 · Suites récurrentes linéaires et systèmes de suites ---------- */
+A("su-14", [
+  { declic: R`Une suite $u_{n+1}=au_n+b$ avec $a\neq1$ : on cherche le point fixe $r=ar+b$ et on pose $v_n=u_n-r$, qui est géométrique de raison $a$.`,
+    copie: R`<p>(a) Point fixe $r=2r+1$, soit $r=-1$. ${ph("posons","Posons")} $v_n=u_n+1$ : $v_{n+1}=2u_n+2=2v_n$, $v_0=1$, donc $v_n=2^n$ et $u_n=2^n-1\to+\infty$.</p><p>(b) Point fixe $r=\frac{r+1}2$, soit $r=1$. ${ph("posons","Posons")} $v_n=u_n-1$ : $v_{n+1}=\frac{u_n-1}2=\frac{v_n}2$, $v_0=-1$, donc $v_n=-2^{-n}$ et $u_n=1-2^{-n}\to1$.</p><div class="sbox">$$\text{a) }u_n=2^n-1\to+\infty,\qquad\text{b) }u_n=1-2^{-n}\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier la condition $a\neq1$ : si $a=1$, le point fixe n'existe pas (suite arithmétique).</p><p><b>Premier réflexe :</b> calculer $u_1,u_2,\dots$ et deviner la formule. À proscrire sans démonstration ; la méthode du point fixe démontre.</p>`,
+    trou: { q: R`Pourquoi $v_n=u_n-r$ est-elle géométrique ?`, c: [R`$v_{n+1}=u_{n+1}-r=a(u_n-r)=av_n$ car $r=ar+b$`, R`parce que $u_n$ est géométrique`, R`parce que $b=0$`, R`parce que $r=0$`], ok: 0, why: R`On soustrait $r=ar+b$ à $u_{n+1}=au_n+b$ : $u_{n+1}-r=a(u_n-r)$.` },
+    bareme: { sur: 4, l: [[1, R`(a) Point fixe et suite $v_n=u_n+1$`], [1, R`(a) Formule et limite $+\infty$`], [1, R`(b) Point fixe et suite $v_n=u_n-1$`], [1, R`(b) Formule et limite $1$`]] },
+    jury: [
+      { e: R`Donner la formule sans la démontrer.`, p: R`Résultat non justifié : deux points perdus.` }
+    ] },
+  { declic: R`Une récurrence sur les parties réelle et imaginaire se lit mieux avec $z_n=x_n+\mathrm iy_n$ : on cherche un nombre complexe $c$ tel que $z_{n+1}=c\,z_n$, c'est-à-dire une suite géométrique complexe.`,
+    copie: R`<p>$(1+\mathrm i)(x_n+\mathrm iy_n)=(x_n-y_n)+\mathrm i(x_n+y_n)$, donc $z_{n+1}=\frac{1+\mathrm i}2z_n$ et $z_n=\big(\frac{1+\mathrm i}2\big)^nz_0$.</p><p>${ph("or","Or")} $\big|\frac{1+\mathrm i}2\big|=\frac{\sqrt2}2\lt1$ donc $|z_n|=\big(\frac{\sqrt2}2\big)^n|z_0|\to0$.</p><p>${ph("donc","Donc")} $|x_n|\leqslant|z_n|\to0$ et $|y_n|\leqslant|z_n|\to0$.</p><div class="sbox">$$z_n=\Big(\frac{1+\mathrm i}2\Big)^nz_0\to0,\quad x_n\to0,\ y_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> étudier $x_n$ et $y_n$ séparément : le système est couplé et ne se réduit pas à deux suites indépendantes.</p><p><b>Premier réflexe :</b> écrire la matrice $\frac12\begin{pmatrix}1&-1\\1&1\end{pmatrix}$ et chercher ses valeurs propres. Le complexe $z_n$ évite l'algèbre linéaire.</p>`,
+    trou: { q: R`Pourquoi $|x_n|\leqslant|z_n|$ ?`, c: [R`$|z_n|^2=x_n^2+y_n^2\geqslant x_n^2$`, R`$|z_n|=x_n+y_n$`, R`$z_n\geqslant0$`, R`$y_n=0$`], ok: 0, why: R`Le carré du module est la somme des carrés des parties réelle et imaginaire, donc supérieur à chacun d'eux.` },
+    bareme: { sur: 4, l: [[1, R`Relation $z_{n+1}=\frac{1+\mathrm i}2z_n$ avec calcul`], [1, R`Formule $z_n=\big(\frac{1+\mathrm i}2\big)^nz_0$`], [1, R`Module $\frac{\sqrt2}2\lt1$ et $|z_n|\to0$`], [1, R`Majoration $|x_n|,|y_n|\leqslant|z_n|$ et gendarmes`]] },
+    jury: [
+      { e: R`Ne pas vérifier la relation $z_{n+1}=\frac{1+\mathrm i}2z_n$ par le calcul.`, p: R`Étape clé non justifiée : point perdu.` }
+    ] },
+  { declic: R`Une récurrence faisant intervenir le conjugué n'est pas linéaire sur $\mathbb C$ mais l'est sur $\mathbb R$ : on sépare partie réelle et partie imaginaire.`,
+    copie: R`<p>${ph("posons","Posons")} $z_n=x_n+\mathrm iy_n$. $z_{n+1}=\frac13\big[(x_n+\mathrm iy_n)+2(x_n-\mathrm iy_n)\big]=x_n-\mathrm i\frac{y_n}3$.</p><p>${ph("donc","Donc")} $x_{n+1}=x_n$ (suite constante, $x_n=x_0$) et $y_{n+1}=-\frac{y_n}3$ (géométrique, $y_n=(-\frac13)^ny_0$).</p><p>${ph("or","Or")} $|-\frac13|\lt1$ donc $y_n\to0$.</p><p>${ph("ainsi","Ainsi")} $z_n\to x_0=\mathrm{Re}\,z_0$.</p><div class="sbox">$$z_n\to\mathrm{Re}\,z_0=\frac{z_0+\bar z_0}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> chercher $c\in\mathbb C$ avec $z_{n+1}=cz_n$ : impossible à cause du conjugué.</p><p><b>Premier réflexe :</b> prendre le module $|z_{n+1}|\leqslant\frac{|z_n|+2|z_n|}3=|z_n|$. Donne seulement la décroissance, pas la limite.</p>`,
+    trou: { q: R`Que vaut $\frac13\big[(x+\mathrm iy)+2(x-\mathrm iy)\big]$ ?`, c: [R`$x-\mathrm i\frac y3$`, R`$x+\mathrm i\frac y3$`, R`$x+\mathrm iy$`, R`$3x-\mathrm iy$`], ok: 0, why: R`La partie réelle vaut $\frac{x+2x}3=x$ et la partie imaginaire $\frac{y-2y}3=-\frac y3$.` },
+    bareme: { sur: 3, l: [[1, R`Parties réelle et imaginaire de $z_{n+1}$`], [1, R`Formules explicites $x_n=x_0$ et $y_n=(-\frac13)^ny_0$`], [1, R`Limite $\mathrm{Re}\,z_0$`]] },
+    jury: [
+      { e: R`Chercher une raison complexe.`, p: R`Méthode inadaptée : deux points perdus.` }
+    ] },
+  { declic: R`Un système de deux suites : la différence $u_n-v_n$ est constante, ce qui ramène à une seule suite arithmético-géométrique.`,
+    copie: R`<p>$u_{n+1}-v_{n+1}=(3u_n+2v_n)-(2u_n+3v_n)=u_n-v_n$ : constante égale à $u_0-v_0=-1$. ${ph("donc","Donc")} $v_n=u_n+1$.</p><p>${ph("ainsi","Ainsi")} $u_{n+1}=3u_n+2(u_n+1)=5u_n+2$, de point fixe $r=-\frac12$.</p><p>$w_n=u_n+\frac12$ vérifie $w_{n+1}=5w_n$, $w_0=\frac32$ donc $w_n=\frac32\cdot5^n$.</p><div class="sbox">$$u_n=\frac{3\cdot5^n-1}2,\qquad v_n=\frac{3\cdot5^n+1}2.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier de vérifier la formule sur $n=1$ : le système donne $u_1=7$, $v_1=8$.</p><p><b>Premier réflexe :</b> diagonaliser la matrice. Valable (valeurs propres $1$ et $5$), mais plus long qu'une somme et une différence.</p>`,
+    trou: { q: R`Quelle combinaison de $u_n,v_n$ est constante ?`, c: [R`$u_n-v_n$`, R`$u_n+v_n$`, R`$u_nv_n$`, R`$u_n+2v_n$`], ok: 0, why: R`$u_{n+1}-v_{n+1}=u_n-v_n$. La somme est multipliée par $5$ à chaque pas.` },
+    bareme: { sur: 4, l: [[1, R`$u_n-v_n$ constante, valeur $-1$`], [1, R`Récurrence $u_{n+1}=5u_n+2$`], [1, R`Résolution par point fixe $-\frac12$`], [1, R`Formules de $u_n$ et $v_n$`]] },
+    jury: [
+      { e: R`Ne pas vérifier la formule sur un rang.`, p: R`Résultat non testé : point perdu.` }
+    ] },
+  { declic: R`Récurrence linéaire d'ordre 2 : on écrit l'équation caractéristique, on calcule son discriminant (en repérant une racine carrée évidente), puis on détermine les deux constantes avec $u_0$ et $u_1$.`,
+    copie: R`<p>Équation caractéristique : $r^2-(3-2\mathrm i)r+(5-5\mathrm i)=0$.</p><p>$\Delta=(3-2\mathrm i)^2-4(5-5\mathrm i)=-15+8\mathrm i=(1+4\mathrm i)^2$.</p><p>${ph("donc","Donc")} $r_{1,2}=\frac{(3-2\mathrm i)\pm(1+4\mathrm i)}2$, soit $r_1=2+\mathrm i$ et $r_2=1-3\mathrm i$, distinctes.</p><p>$u_n=\lambda(2+\mathrm i)^n+\mu(1-3\mathrm i)^n$ avec $\lambda+\mu=0$ et $\lambda(1+4\mathrm i)=1+4\mathrm i$ : $\lambda=1$, $\mu=-1$.</p><div class="sbox">$$u_n=(2+\mathrm i)^n-(1-3\mathrm i)^n.$$</div>`,
+    tete: R`<p><b>Piège :</b> se tromper en développant $(3-2\mathrm i)^2=9-12\mathrm i+4\mathrm i^2=5-12\mathrm i$.</p><p><b>Premier réflexe :</b> chercher la racine carrée de $\Delta$ en posant $a+\mathrm ib$ et résoudre. Ici $-15+8\mathrm i=(1+4\mathrm i)^2$ se devine en cherchant $a^2-b^2=-15$ et $2ab=8$.</p>`,
+    trou: { q: R`Quelle forme générale a $u_n$ si les deux racines sont distinctes ?`, c: [R`$\lambda r_1^n+\mu r_2^n$`, R`$(\lambda+\mu n)r^n$`, R`$\lambda r_1^n r_2^n$`, R`$\lambda(r_1+r_2)^n$`], ok: 0, why: R`C'est la forme du cours pour deux racines distinctes. $(\lambda+\mu n)r^n$ est celle d'une racine double.` },
+    bareme: { sur: 4, l: [[1, R`Équation caractéristique correcte`], [1, R`Discriminant et sa racine carrée $1+4\mathrm i$`], [1, R`Racines $2+\mathrm i$ et $1-3\mathrm i$`], [1, R`Constantes $\lambda=1$, $\mu=-1$ et formule`]] },
+    jury: [
+      { e: R`Erreur dans le calcul de $\Delta$.`, p: R`Racines fausses : deux points perdus.` }
+    ] },
+  { declic: R`Trois équations caractéristiques : racine double (polynôme en $n$ devant $r^n$), deux racines réelles, deux racines complexes conjuguées (module et argument). Chaque cas a sa forme.`,
+    copie: R`<p>(a) $(r-2)^2=0$ : ${ph("donc","donc")} $u_n=(\lambda+\mu n)2^n$, $\lambda=1$, $(1+\mu)2=0$ : $u_n=(1-n)2^n$.</p><p>(b) $2r^2-3r+1=0$, $r\in\{1,\frac12\}$ : $u_n=\lambda+\mu2^{-n}$ avec $\lambda+\mu=1$, $\lambda+\frac\mu2=-1$ : $\mu=4$, $\lambda=-3$.</p><p>(c) $r^2-r+1=0$, $r=\mathrm e^{\pm\mathrm i\pi/3}$ : $u_n=\lambda\cos\frac{n\pi}3+\mu\sin\frac{n\pi}3$ avec $\lambda=1$, $\frac12+\mu\frac{\sqrt3}2=2$ : $\mu=\sqrt3$.</p><div class="sbox">$$\text{a) }(1-n)2^n,\quad\text{b) }-3+4\cdot2^{-n},\quad\text{c) }\cos\tfrac{n\pi}3+\sqrt3\sin\tfrac{n\pi}3.$$</div>`,
+    tete: R`<p><b>Piège :</b> utiliser $\lambda r^n+\mu r^n$ pour une racine double : les deux termes se confondent, il faut $n\,r^n$.</p><p><b>Premier réflexe :</b> prendre la forme complexe $\lambda r_1^n+\mu r_2^n$ en (c) : correct mais pas réelle. Pour une suite réelle on passe à la forme trigonométrique.</p>`,
+    trou: { q: R`Pour la racine double $2$ de (a), quelle forme a $u_n$ ?`, c: [R`$(\lambda+\mu n)2^n$`, R`$\lambda2^n+\mu2^n$`, R`$\lambda2^n$`, R`$\lambda n2^n$ seulement`], ok: 0, why: R`Pour une racine double $r$, les solutions sont $r^n$ et $n\,r^n$ : la forme générale est $(\lambda+\mu n)r^n$.` },
+    bareme: { sur: 5, l: [[1, R`(a) racine double et forme générale`], [1, R`(a) constantes $\lambda=1$, $\mu=-1$`], [1, R`(b) racines $1$ et $\frac12$ et constantes`], [1, R`(c) racines $\mathrm e^{\pm\mathrm i\pi/3}$ et forme trigonométrique`], [1, R`(c) constantes $\lambda=1$, $\mu=\sqrt3$`]] },
+    jury: [
+      { e: R`Mauvaise forme pour la racine double.`, p: R`Constantes non déterminables : deux points perdus.` }
+    ] },
+  { declic: R`Le discriminant $4\cos^2\theta-4=-4\sin^2\theta$ est strictement négatif : racines $\mathrm e^{\pm\mathrm i\theta}$. On met la solution sous la forme $\lambda\cos n\theta+\mu\sin n\theta$, puis on simplifie avec la formule de $\cos(a-b)$.`,
+    copie: R`<p>$\Delta=-4\sin^2\theta\lt0$ (car $\theta\in]0,\pi[$) : $r=\mathrm e^{\pm\mathrm i\theta}$, donc $u_n=\lambda\cos n\theta+\mu\sin n\theta$.</p><p>$u_0=1$ : $\lambda=1$. $u_1=1$ : $\mu=\frac{1-\cos\theta}{\sin\theta}=\frac{2\sin^2(\theta/2)}{2\sin(\theta/2)\cos(\theta/2)}=\tan\frac\theta2$.</p><p>${ph("donc","Donc")} $u_n=\cos n\theta+\tan\frac\theta2\sin n\theta=\frac{\cos\big((n-\frac12)\theta\big)}{\cos\frac\theta2}$ par $\cos(a-b)=\cos a\cos b+\sin a\sin b$.</p><div class="sbox">$$u_n=\frac{\cos\big((n-\frac12)\theta\big)}{\cos\frac\theta2}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier $\sin\theta\neq0$ avant de diviser : c'est ce qui exige $\theta\in]0,\pi[$.</p><p><b>Premier réflexe :</b> garder $\cos n\theta+\tan\frac\theta2\sin n\theta$. Correct, mais la forme simplifiée permet de vérifier plus vite $u_0=u_1=1$.</p>`,
+    trou: { q: R`Quelle formule fait passer de $1-\cos\theta$ à $2\sin^2\frac\theta2$ ?`, c: [R`$\cos\theta=1-2\sin^2\frac\theta2$`, R`$\cos2x=2\sin^2x-1$`, R`$\sin^2x+\cos^2x=2$`, R`$\cos2x=\sin x$`], ok: 0, why: R`C'est la formule de duplication $\cos2x=1-2\sin^2x$ avec $x=\frac\theta2$.` },
+    bareme: { sur: 4, l: [[1, R`Discriminant $-4\sin^2\theta\lt0$ et racines $\mathrm e^{\pm\mathrm i\theta}$`], [1, R`Forme générale réelle`], [1, R`Constantes $\lambda=1$ et $\mu=\tan\frac\theta2$`], [1, R`Simplification en $\frac{\cos((n-\frac12)\theta)}{\cos\frac\theta2}$`]] },
+    jury: [
+      { e: R`Écrire $\Delta=4\cos^2\theta+4$.`, p: R`Mauvaise nature des racines : deux points perdus.` }
+    ] },
+  { declic: R`Une équation fonctionnelle devient une récurrence en posant $u_0=x$ et $u_{n+1}=f(u_n)$. La contrainte $u_n>0$ pour tout $n$ élimine la racine $-3$.`,
+    copie: R`<p>${ph("posons","Posons")} $u_0=x>0$ et $u_{n+1}=f(u_n)$ ; $u_n>0$ pour tout $n$ et $u_{n+2}=6u_n-u_{n+1}$.</p><p>Équation caractéristique : $r^2+r-6=(r-2)(r+3)=0$ donc $u_n=\lambda2^n+\mu(-3)^n$.</p><p>Si $\mu\neq0$, $\frac{u_n}{(-3)^n}\to\mu\neq0$ : $u_n$ prend le signe de $\mu(-3)^n$ qui alterne, contradiction avec $u_n>0$. ${ph("donc","Donc")} $\mu=0$.</p><p>${ph("ainsi","Ainsi")} $u_n=x2^n$ et $f(x)=u_1=2x$. Réciproquement $f(x)=2x$ convient.</p><div class="sbox">$$f(x)=2x.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier la réciproque : on a trouvé une condition nécessaire, il faut vérifier que $f(x)=2x$ est bien solution.</p><p><b>Premier réflexe :</b> chercher $f$ affine de la forme $ax+b$. Ne montre pas l'unicité : la suite $u_n$ la démontre.</p>`,
+    trou: { q: R`Pourquoi $\mu=0$ ?`, c: [R`sinon $u_n$ change de signe avec la parité de $n$`, R`parce que $2>3$`, R`parce que $\lambda=0$`, R`parce que $u_0=0$`], ok: 0, why: R`Le terme $(-3)^n$ domine $2^n$ et alterne de signe ; or tous les $u_n$ sont strictement positifs.` },
+    bareme: { sur: 5, l: [[1, R`Suite $u_{n+1}=f(u_n)$ strictement positive`], [1, R`Récurrence linéaire d'ordre 2 et racines $2$, $-3$`], [1, R`Argument de signe : $\mu=0$`], [1, R`$f(x)=2x$ déduit de $u_1$`], [1, R`Vérification réciproque`]] },
+    jury: [
+      { e: R`Oublier la vérification réciproque.`, p: R`Équivalence non établie : deux points perdus.` },
+      { e: R`Ne pas justifier $\mu=0$.`, p: R`Étape clé : deux points perdus.` }
+    ] }
+], [
+  { q: R`Comment trouve-t-on le point fixe de $u_{n+1}=au_n+b$ ?`, c: [R`$r=ar+b$`, R`$r=a+b$`, R`$r=\frac ab$`, R`$r=\frac b a$`], ok: 0, r: "su-rec" },
+  { q: R`Quelle forme a la solution de $u_{n+2}=au_{n+1}+bu_n$ si l'équation caractéristique a deux racines distinctes ?`, c: [R`$\lambda r_1^n+\mu r_2^n$`, R`$(\lambda+\mu n)r^n$`, R`$\lambda r^n$`, R`$\lambda n r^n$`], ok: 0, r: "su-lin" },
+  { q: R`Quelle est la forme réelle pour des racines complexes $\rho e^{\pm\mathrm i\theta}$ ?`, c: [R`$\rho^n(\lambda\cos n\theta+\mu\sin n\theta)$`, R`$\lambda\rho^n+\mu\theta^n$`, R`$\rho(\lambda\cos\theta+\mu\sin\theta)^n$`, R`$\lambda\cos\rho+\mu\sin\rho$`], ok: 0, r: "su-lin" }
+]);
+
 })();
