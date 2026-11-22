@@ -152,4 +152,161 @@ A("su-02", [
   { q: R`Pour $a,b\geqslant0$ et $n\geqslant1$ : $a\leqslant b\iff$ ?`, c: [R`$a^n\leqslant b^n$`, R`$a^n\geqslant b^n$`, R`$a^n=b^n$`, R`$na\leqslant b$`], ok: 0, r: "su-ineg" }
 ]);
 
+/* ---------- su-03 · Calculs de limites ---------- */
+A("su-03", [
+  { declic: R`Numérateur et dénominateur n'ont pas de limite finie : on factorise le terme qui domine, ici $3^n$, pour faire apparaître une suite géométrique de raison de module $\lt1$.`,
+    copie: R`<p>${ph("comme","Comme")} $3^n\neq0$, on divise haut et bas par $3^n$ : $u_n=\dfrac{1-\big(\frac{-2}3\big)^n}{1+\big(\frac{-2}3\big)^n}$.</p><p>${ph("or","Or")} $\big|\frac{-2}3\big|=\frac23\lt1$, donc $\big(\frac{-2}3\big)^n\to0$.</p><p>${ph("donc","Donc")} le numérateur tend vers $1$ et le dénominateur vers $1\neq0$ : par quotient, $u_n\to1$.</p><div class="sbox">$$\lim\frac{3^n-(-2)^n}{3^n+(-2)^n}=1.$$</div>`,
+    tete: R`<p><b>Piège :</b> dire « $(-2)^n$ n'a pas de limite, donc $u_n$ non plus ». La divergence d'un terme ne se transmet pas : il est négligeable devant $3^n$.</p><p><b>Premier réflexe :</b> prendre la limite haut et bas séparément. Elles n'existent pas : on factorise.</p>`,
+    trou: { q: R`Par quel terme divise-t-on haut et bas ?`, c: [R`$3^n$, le terme de plus grand module`, R`$(-2)^n$, car il alterne`, R`$n$`, R`$3^n+(-2)^n$`], ok: 0, why: R`On factorise le terme qui domine : $|3^n|>|(-2)^n|$. Diviser par $(-2)^n$ ferait apparaître $\big(\frac3{-2}\big)^n$, qui diverge.` },
+    bareme: { sur: 3, l: [[1, R`Division par $3^n$ et nouvelle écriture de $u_n$`], [1, R`$\big(\frac{-2}3\big)^n\to0$ car $\big|\frac{-2}3\big|\lt1$`], [1, R`Quotient de limites avec dénominateur $\neq0$ et conclusion`]] },
+    jury: [
+      { e: R`Écrire $\frac{3^n}{3^n}=\frac{(-2)^n}{3^n}$ au lieu de factoriser.`, p: R`Calcul faux : le résultat est invalide, zéro.` },
+      { e: R`Ne pas justifier $\big(\frac{-2}3\big)^n\to0$.`, p: R`Citer $|q|\lt1$ : point perdu.` }
+    ] },
+  { declic: R`Une différence de racines : on multiplie par la quantité conjuguée pour obtenir $\frac{A-B}{\sqrt A+\sqrt B}$. Le quotient est ensuite divisé par $n$.`,
+    copie: R`<p>${ph("posons","Posons")} $S_n=\sqrt{n^2+n+1}+\sqrt{n^2-n+1}>0$. Alors $u_n=\dfrac{(n^2+n+1)-(n^2-n+1)}{S_n}=\dfrac{2n}{S_n}$.</p><p>En divisant par $n>0$ : $u_n=\dfrac2{\sqrt{1+\frac1n+\frac1{n^2}}+\sqrt{1-\frac1n+\frac1{n^2}}}\to\dfrac2{1+1}=1$ (continuité de la racine).</p><p>Pour $v_n=\dfrac{n-\sqrt{n^2+1}}{n+\sqrt{n^2-1}}$, on divise par $n$ : $v_n=\dfrac{1-\sqrt{1+1/n^2}}{1+\sqrt{1-1/n^2}}$, de numérateur $\to0$ et dénominateur $\to2\neq0$ : $v_n\to0$.</p><div class="sbox">$$u_n\to1,\qquad v_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $\infty-\infty=0$ » : c'est une forme indéterminée. La limite vaut ici $1$.</p><p><b>Premier réflexe :</b> factoriser $n$ sous la racine sans multiplier par le conjugué. On trouve $n(\sqrt{\cdot}-\sqrt{\cdot})$, qui reste indéterminé.</p>`,
+    trou: { q: R`Par quoi multiplie-t-on $\sqrt A-\sqrt B$ pour supprimer les racines ?`, c: [R`$\sqrt A+\sqrt B$`, R`$\sqrt A-\sqrt B$`, R`$A+B$`, R`$A-B$`], ok: 0, why: R`$(\sqrt A-\sqrt B)(\sqrt A+\sqrt B)=A-B$ : le produit n'a plus de racine. Multiplier par $\sqrt A-\sqrt B$ donne $(\sqrt A-\sqrt B)^2$, encore avec des racines.` },
+    bareme: { sur: 4, l: [[1, R`Quantité conjuguée et positivité de $S_n$`], [1, R`Simplification en $\frac{2n}{S_n}$`], [1, R`Limite de $u_n$ par division par $n$`], [1, R`Limite de $v_n$ (numérateur et dénominateur)`]] },
+    jury: [
+      { e: R`Multiplier par le conjugué sans diviser aussi le dénominateur.`, p: R`L'égalité est fausse : deux points perdus.` },
+      { e: R`Oublier de vérifier que les radicandes sont positifs.`, p: R`Racine non définie : point perdu.` }
+    ] },
+  { declic: R`On ne connaît pas la limite d'une somme de $n$ termes qui grandit : il faut une formule explicite. Pour $\sum k$, on additionne la somme à elle-même avec l'indice retourné.`,
+    copie: R`<p>${ph("posons","Posons")} $S=\sum_{k=1}^nk$. Par le changement d'indice $k\mapsto n+1-k$, $S=\sum_{k=1}^n(n+1-k)$.</p><p>En additionnant : $2S=\sum_{k=1}^n(n+1)=n(n+1)$, donc $S=\frac{n(n+1)}2$.</p><p>${ph("donc","Donc")} $u_n=\dfrac{n(n+1)}{2n^2}=\dfrac12+\dfrac1{2n}\to\dfrac12$.</p><div class="sbox">$$\lim\frac1{n^2}\sum_{k=1}^nk=\frac12.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser « somme de $n$ termes qui valent chacun $\leqslant n$, donc $\leqslant n^2$ ». Cela borne mais ne donne pas la limite exacte.</p><p><b>Premier réflexe :</b> écrire $\frac1{n^2}\times n\times\frac n2$ sans justification. La formule de la somme doit être démontrée ici.</p>`,
+    trou: { q: R`Combien vaut $\sum_{k=1}^n(n+1)$ ?`, c: [R`$n(n+1)$`, R`$n+1$`, R`$(n+1)^2$`, R`$\frac{n(n+1)}2$`], ok: 0, why: R`C'est une somme de $n$ termes tous égaux à $n+1$ : elle vaut $n\times(n+1)$. Le résultat $\frac{n(n+1)}2$ est celui de $S$, pas de $2S$.` },
+    bareme: { sur: 3, l: [[1, R`Formule $S=\frac{n(n+1)}2$ démontrée`], [1, R`Simplification $u_n=\frac12+\frac1{2n}$`], [1, R`Limite et conclusion`]] },
+    jury: [
+      { e: R`Utiliser la formule sans la démontrer ni la citer comme connue.`, p: R`Résultat non justifié : point perdu.` },
+      { e: R`Se tromper de facteur : écrire $S=n(n+1)$.`, p: R`Limite fausse ($1$ au lieu de $\frac12$) : deux points perdus.` }
+    ] },
+  { declic: R`Une puissance dépendant de $n$ : on passe à l'exponentielle, $x^y=\mathrm e^{y\ln x}$, puis on reconnaît $\frac{\ln(1+x)}x\to1$ ou $\frac{\ln n}n\to0$.`,
+    copie: R`<p>Pour $a=0$ : $(1+0)^n=1=\mathrm e^0$. Pour $a\neq0$ : $\big(1+\frac an\big)^n=\exp\big(n\ln(1+\frac an)\big)$.</p><p>${ph("posons","Posons")} $x_n=\frac an\to0$, $x_n\neq0$. Alors $n\ln(1+x_n)=a\,\dfrac{\ln(1+x_n)}{x_n}\to a\times1=a$.</p><p>${ph("donc","Donc")} par continuité de l'exponentielle, $\big(1+\frac an\big)^n\to\mathrm e^a$.</p><p>Enfin $\sqrt[n]{n^2}=\exp\big(\frac{2\ln n}n\big)\to\mathrm e^0=1$ car $\frac{\ln n}n\to0$.</p><div class="sbox">$$\Big(1+\frac an\Big)^n\to\mathrm e^a,\qquad\sqrt[n]{n^2}\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> « $1+\frac1n\to1$ donc la puissance $n$-ième tend vers $1^n=1$ ». Forme indéterminée $1^\infty$ : la limite est $\mathrm e$.</p><p><b>Premier réflexe :</b> citer $\big(1+\frac1n\big)^n\to\mathrm e$ comme connu. Ici on le redémontre à partir de $\frac{\ln(1+x)}x\to1$.</p>`,
+    trou: { q: R`Comment écrit-on $\big(1+\frac an\big)^n$ pour pouvoir passer à la limite ?`, c: [R`$\exp\big(n\ln(1+\frac an)\big)$`, R`$\exp\big(\ln(1+\frac an)\big)^n$ sans transformation`, R`$\big(1+a\big)^{n/n}$`, R`$\ln\big(n(1+\frac an)\big)$`], ok: 0, why: R`$x^y=\mathrm e^{y\ln x}$ pour $x>0$ : l'exposant $n$ devient un facteur devant le logarithme, et on peut utiliser $\frac{\ln(1+x)}x\to1$.` },
+    bareme: { sur: 4, l: [[1, R`Passage à l'exponentielle (avec $1+\frac an>0$)`], [1, R`$n\ln(1+\frac an)\to a$ par $\frac{\ln(1+x)}x\to1$`], [1, R`Continuité de $\exp$ : limite $\mathrm e^a$`], [1, R`Limite de $\sqrt[n]{n^2}$ par $\frac{\ln n}n\to0$`]] },
+    jury: [
+      { e: R`Conclure $1^\infty=1$.`, p: R`Forme indéterminée traitée comme une limite : deux points perdus.` },
+      { e: R`Oublier de vérifier la positivité de $1+\frac an$.`, p: R`Le logarithme n'est pas défini : point perdu.` }
+    ] },
+  { declic: R`Deux limites avec exposant dépendant de $n$ : on passe au logarithme. Pour $u_n$, on isole le $\frac1n$ de $\sin\frac1n$ ; pour $v_n$, on met $\frac{n-1}{n+1}$ sous la forme $1+x_n$.`,
+    copie: R`<p>$\sin\frac1n>0$ donc $u_n=\exp\big(\frac1n\ln\sin\frac1n\big)$. Or $\sin\frac1n=\frac1n\cdot n\sin\frac1n$, donc $\frac1n\ln\sin\frac1n=-\frac{\ln n}n+\frac1n\ln\big(n\sin\frac1n\big)$.</p><p>${ph("comme","Comme")} $\frac{\ln n}n\to0$ et $n\sin\frac1n\to1$ (donc $\ln(\cdot)\to0$), l'exposant tend vers $0$ : $u_n\to1$.</p><p>Pour $v_n$ : $\frac{n-1}{n+1}=1+x_n$ avec $x_n=-\frac2{n+1}\to0$, et $n\ln(1+x_n)=-\frac{2n}{n+1}\cdot\frac{\ln(1+x_n)}{x_n}\to-2$.</p><p>${ph("donc","Donc")} $v_n\to\mathrm e^{-2}$.</p><div class="sbox">$$\Big(\sin\frac1n\Big)^{1/n}\to1,\qquad\Big(\frac{n-1}{n+1}\Big)^n\to\mathrm e^{-2}.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\big(\frac{n-1}{n+1}\big)^n\to1$ car le rapport tend vers $1$. Forme $1^\infty$ : la réponse est $\mathrm e^{-2}$.</p><p><b>Premier réflexe :</b> écrire $\sin\frac1n\sim\frac1n$ puis passer à la puissance $\frac1n$. On n'a pas le droit d'élever un équivalent à une puissance qui dépend de $n$.</p>`,
+    trou: { q: R`Par quoi remplace-t-on $\ln\sin\frac1n$ pour isoler les limites usuelles ?`, c: [R`$-\ln n+\ln\big(n\sin\frac1n\big)$`, R`$-\ln n$ seulement`, R`$\ln\frac1n\cdot\sin n$`, R`$\ln(n)+\ln\big(\sin\frac1n\big)$`], ok: 0, why: R`$\sin\frac1n=\frac1n\cdot\big(n\sin\frac1n\big)$ puis le logarithme d'un produit donne une somme. On garde le facteur $n\sin\frac1n\to1$ pour ne pas perdre d'information.` },
+    bareme: { sur: 4, l: [[1, R`$u_n$ en exponentielle (avec $\sin\frac1n>0$)`], [1, R`Décomposition du logarithme et limite de l'exposant : $u_n\to1$`], [1, R`$v_n$ : $1+x_n$ et limite de l'exposant $-2$`], [1, R`Conclusion $v_n\to\mathrm e^{-2}$`]] },
+    jury: [
+      { e: R`Élever un équivalent à une puissance dépendant de $n$.`, p: R`Opération interdite : deux points perdus.` },
+      { e: R`Oublier de justifier $\sin\frac1n>0$.`, p: R`Logarithme non défini : point perdu.` }
+    ] },
+  { declic: R`Trois suites avec $\sin n$, $(-1)^n$ et $n!$ : aucune limite directe. On les encadre par des suites simples (signe borné, produit de facteurs dans $]0,1]$) et on utilise les gendarmes.`,
+    copie: R`<p>$|\sin n|\leqslant1$ et $n+(-1)^{n+1}\geqslant n-1>0$ ($n\geqslant2$), donc $|u_n|\leqslant\frac1{n-1}\to0$ : $u_n\to0$.</p><p>$\frac{n!}{n^n}=\frac1n\cdot\frac2n\cdots\frac nn$ avec tous les facteurs $\frac kn\in\,]0,1]$ : $0\lt v_n\leqslant\frac1n\to0$.</p><p>${ph("comme","Comme")} $-1\leqslant(-1)^n\leqslant1$, $\frac{n-1}{n+1}\leqslant w_n\leqslant\frac{n+1}{n-1}$ ; les deux bornes tendent vers $1$ : $w_n\to1$.</p><div class="sbox">$$u_n\to0,\qquad v_n\to0,\qquad w_n\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire « $\sin n$ n'a pas de limite donc $u_n$ non plus ». Divisé par $n$, le sinus est écrasé.</p><p><b>Premier réflexe :</b> écrire $w_n\sim\frac nn=1$ sans justifier. Ici on encadre, ce qui est plus sûr quand $(-1)^n$ oscille.</p>`,
+    trou: { q: R`Pourquoi $|u_n|\leqslant\frac1{n-1}$ ?`, c: [R`$|\sin n|\leqslant1$ et le dénominateur est $\geqslant n-1>0$`, R`$|\sin n|\leqslant n$`, R`$\sin n\to0$`, R`$(-1)^{n+1}=0$`], ok: 0, why: R`On majore le numérateur par $1$ et on minore le dénominateur par $n-1$ (qui est positif) : le quotient est majoré par $\frac1{n-1}$.` },
+    bareme: { sur: 4, l: [[1, R`$u_n$ : majoration $|u_n|\leqslant\frac1{n-1}$ justifiée`], [1, R`$v_n$ : écriture en produit de facteurs $\leqslant1$`], [1, R`$w_n$ : encadrement par $\frac{n\mp1}{n\pm1}$`], [1, R`Gendarmes appliqués trois fois avec limites des bornes`]] },
+    jury: [
+      { e: R`Majorer un quotient sans minorer le dénominateur.`, p: R`Inégalité fausse : deux points perdus.` },
+      { e: R`Ne pas préciser que le dénominateur est positif.`, p: R`Le sens de l'inégalité n'est pas justifié : point perdu.` }
+    ] },
+  { declic: R`$\frac{\mathrm e^n}{n^n}=\big(\frac{\mathrm e}n\big)^n$ : une puissance dont la base est $\lt1$ à partir d'un rang. Pour $\sqrt[n]{2+(-1)^n}$, on encadre l'intérieur entre $1$ et $3$, puis on prend la racine $n$-ième.`,
+    copie: R`<p>$u_n=\big(\frac{\mathrm e}n\big)^n$. Pour $n\geqslant3$, $0\lt\frac{\mathrm e}n\leqslant\frac{\mathrm e}3\lt1$ (car $\mathrm e\lt3$), et $x\mapsto x^n$ est croissante sur $\mathbb R_+$ : $0\lt u_n\leqslant\big(\frac{\mathrm e}3\big)^n\to0$.</p><p>${ph("comme","Comme")} $1\leqslant2+(-1)^n\leqslant3$ et $x\mapsto x^{1/n}$ est croissante, $1\leqslant v_n\leqslant3^{1/n}=\mathrm e^{\frac{\ln3}n}\to1$.</p><p>${ph("donc","Donc")} par gendarmes $u_n\to0$ et $v_n\to1$.</p><div class="sbox">$$\frac{\mathrm e^n}{n^n}\to0,\qquad\sqrt[n]{2+(-1)^n}\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que $\sqrt[n]{2+(-1)^n}$ n'a pas de limite parce que $(-1)^n$ oscille. L'oscillation est écrasée par la racine $n$-ième.</p><p><b>Premier réflexe :</b> prendre une base $\leqslant\mathrm e/n$ sans la comparer à $1$. Il faut un seuil explicite : $\frac{\mathrm e}3\lt1$.</p>`,
+    trou: { q: R`À partir de quel rang a-t-on $\frac{\mathrm e}n\lt1$ ?`, c: [R`$n\geqslant3$`, R`$n\geqslant1$`, R`$n\geqslant2$`, R`jamais`], ok: 0, why: R`$\mathrm e\approx2{,}718\lt3$ donc $\frac{\mathrm e}3\lt1$ ; pour $n=2$, $\frac{\mathrm e}2\approx1{,}36>1$ et ne convient pas.` },
+    bareme: { sur: 4, l: [[1, R`$u_n=(\mathrm e/n)^n$ avec seuil $n\geqslant3$`], [1, R`Majoration $u_n\leqslant(\mathrm e/3)^n$ par croissance de $x^n$`], [1, R`Encadrement $1\leqslant v_n\leqslant3^{1/n}$`], [1, R`$3^{1/n}=\mathrm e^{\ln3/n}\to1$ et gendarmes`]] },
+    jury: [
+      { e: R`Dire « $\frac{\mathrm e}n\lt1$ donc $u_n\to0$ » sans suite géométrique de raison fixe.`, p: R`La base dépend de $n$ : majoration non justifiée, deux points perdus.` }
+    ] },
+  { declic: R`On calcule trois limites avec la même expression $(1-\frac1n)^m$ en variant l'ordre. À chaque fois on fixe un des deux paramètres et on fait tendre l'autre.`,
+    copie: R`<p><b>1.</b> Pour $m$ fixé, $1-\frac1n\to1$ donc $\big(1-\frac1n\big)^m\to1^m=1$ ; puis $\lim_m1=1$.</p><p><b>2.</b> Pour $n$ fixé ($n\geqslant2$), $q=1-\frac1n\in\,]0,1[$ donc $q^m\to0$ ; puis $\lim_n0=0$.</p><p><b>3.</b> Par la question 4 avec $a=-1$, $\big(1-\frac1n\big)^n\to\mathrm e^{-1}$.</p><p>${ph("ainsi","Ainsi")} $1\neq0\neq\mathrm e^{-1}$ : on ne peut pas échanger les limites.</p><div class="sbox">$$1\ \neq\ 0\ \neq\ \mathrm e^{-1}.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que « $n,m\to+\infty$ » a un sens unique. Selon que l'on fixe $m$, fixe $n$ ou prend $m=n$, la limite change.</p><p><b>Premier réflexe :</b> écrire $\lim\lim=\lim\lim$ par principe. C'est faux ici.</p>`,
+    trou: { q: R`Dans la deuxième limite, pourquoi $q^m\to0$ quand $m\to+\infty$ ?`, c: [R`$q=1-\frac1n\in\,]0,1[$ est fixe quand $n$ est fixé`, R`$q$ tend vers $0$`, R`$m$ est fixe`, R`$q>1$`], ok: 0, why: R`Dans cette limite, $n$ est fixé donc $q$ est une constante de $]0,1[$ : une suite géométrique de raison $q\in\,]0,1[$ tend vers $0$.` },
+    bareme: { sur: 3, l: [[1, R`Première limite : $1^m=1$ avec $m$ fixé`], [1, R`Deuxième limite : $q^m\to0$ avec $n$ fixé`], [1, R`Troisième limite $\mathrm e^{-1}$ et conclusion de non-échange`]] },
+    jury: [
+      { e: R`Confondre quelle variable est fixée.`, p: R`Limite fausse : deux points perdus.` }
+    ] }
+], [
+  { q: R`Pour $x>0$ et $y\in\mathbb R$, que vaut $x^y$ ?`, c: [R`$\mathrm e^{y\ln x}$`, R`$\mathrm e^{x\ln y}$`, R`$y\ln x$`, R`$\ln(x^y)$`], ok: 0, r: "su-usuel" },
+  { q: R`Que vaut $\lim\dfrac{\ln(1+x)}x$ quand $x\to0$ ?`, c: [R`$1$`, R`$0$`, R`$+\infty$`, R`$\mathrm e$`], ok: 0, r: "su-usuel" },
+  { q: R`Que dit le théorème des gendarmes ?`, c: [R`$a_n\leqslant x_n\leqslant b_n$ et $a_n,b_n\to\ell$ donnent $x_n\to\ell$`, R`$x_n\leqslant b_n$ et $b_n\to\ell$ donnent $x_n\to\ell$`, R`$x_n$ bornée donne $x_n$ convergente`, R`$a_n\leqslant b_n$ donne $\lim a_n\lt\lim b_n$`], ok: 0, r: "su-ineg" }
+]);
+
+/* ---------- su-04 · Sommes à encadrer et inverses de coefficients binomiaux ---------- */
+A("su-04", [
+  { declic: R`Sommes de $n$ termes qui divergent : on minore chaque terme par le plus petit d'entre eux. Une somme de $n$ termes tous $\geqslant c$ vaut au moins $nc$.`,
+    copie: R`<p>Pour $k\geqslant1$, $\sqrt k\geqslant1$. En sommant $n$ inégalités : $S_n\geqslant n\to+\infty$. ${ph("donc","Donc")} $S_n\to+\infty$.</p><p>Pour $1\leqslant k\leqslant n$, $\sqrt k\leqslant\sqrt n$, donc $\frac1{\sqrt k}\geqslant\frac1{\sqrt n}$ (inverse décroissante). ${ph("donc","Donc")} $T_n\geqslant n\cdot\frac1{\sqrt n}=\sqrt n\to+\infty$.</p><div class="sbox">$$\sum_{k=1}^n\sqrt k\to+\infty,\qquad\sum_{k=1}^n\frac1{\sqrt k}\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> penser que $\frac1{\sqrt k}\to0$ donc la somme est bornée. Non : une somme de termes qui tendent vers $0$ peut diverger.</p><p><b>Premier réflexe :</b> chercher une formule explicite pour $\sum\frac1{\sqrt k}$. Il n'y en a pas : on minore chaque terme par le plus petit, $\frac1{\sqrt n}$.</p>`,
+    trou: { q: R`Combien vaut $\sum_{k=1}^n\frac1{\sqrt n}$ ?`, c: [R`$\sqrt n$`, R`$\frac1{\sqrt n}$`, R`$n$`, R`$1$`], ok: 0, why: R`$n$ termes égaux à $\frac1{\sqrt n}$ : la somme vaut $n\cdot\frac1{\sqrt n}=\sqrt n$.` },
+    bareme: { sur: 4, l: [[1, R`$\sqrt k\geqslant1$ et $S_n\geqslant n$`], [1, R`Divergence de $S_n$ par minoration`], [1, R`$\frac1{\sqrt k}\geqslant\frac1{\sqrt n}$ avec justification (inverse décroissante)`], [1, R`$T_n\geqslant\sqrt n\to+\infty$`]] },
+    jury: [
+      { e: R`Écrire $T_n\geqslant\frac1{\sqrt n}$ (un seul terme).`, p: R`Minoration trop faible, ne diverge pas : deux points perdus.` },
+      { e: R`Oublier de dire que la fonction inverse est décroissante.`, p: R`Sens de l'inégalité non justifié : point perdu.` }
+    ] },
+  { declic: R`Une somme de $n$ termes positifs est majorée par $n$ fois le plus grand terme. On encadre chaque terme, puis on gendarme.`,
+    copie: R`<p>Pour $1\leqslant k\leqslant n$ : $n^2+1\leqslant n^2+k^2\leqslant2n^2$, donc $\frac1{2n^2}\leqslant\frac1{n^2+k^2}\leqslant\frac1{n^2+1}$.</p><p>${ph("donc","Donc")} en sommant $n$ termes : $\frac1{2n}\leqslant S_n\leqslant\frac n{n^2+1}$. Les deux bornes tendent vers $0$ : $S_n\to0$.</p><p>Pour $n+1\leqslant k\leqslant2n$, $k\geqslant n$ donc $\frac1{k^2}\leqslant\frac1{n^2}$ ; il y a $n$ termes : $0\leqslant T_n\leqslant\frac1n\to0$.</p><div class="sbox">$$S_n\to0,\qquad T_n\to0.$$</div>`,
+    tete: R`<p><b>Piège :</b> mal compter les termes : $\sum_{k=n+1}^{2n}$ en a $n$, pas $n+1$.</p><p><b>Premier réflexe :</b> dire « chaque terme tend vers $0$ donc la somme aussi ». Faux en général : la somme a un nombre de termes qui grandit.</p>`,
+    trou: { q: R`Combien de termes comporte $\sum_{k=n+1}^{2n}$ ?`, c: [R`$n$`, R`$n+1$`, R`$2n$`, R`$n-1$`], ok: 0, why: R`$2n-(n+1)+1=n$ : le nombre de termes est la différence des bornes plus $1$.` },
+    bareme: { sur: 4, l: [[1, R`Encadrement de $\frac1{n^2+k^2}$ par deux termes indépendants de $k$`], [1, R`Somme de $n$ termes et gendarmes pour $S_n$`], [1, R`Majoration de $\frac1{k^2}$ par $\frac1{n^2}$ sur $[n+1,2n]$`], [1, R`Nombre de termes $=n$ et gendarmes pour $T_n$`]] },
+    jury: [
+      { e: R`Se tromper sur le nombre de termes de la somme.`, p: R`Borne fausse : deux points perdus.` },
+      { e: R`Passer à la limite terme à terme.`, p: R`Le nombre de termes n'est pas constant : zéro à la question.` }
+    ] },
+  { declic: R`Chaque terme est coincé entre sa valeur pour $k=n$ et pour $k=1$ : la fonction inverse est décroissante. Les deux bornes de la somme ont la même limite.`,
+    copie: R`<p>Pour $1\leqslant k\leqslant n$ : $n^2+1\leqslant n^2+k\leqslant n^2+n$, donc $\frac n{n^2+n}\leqslant\frac n{n^2+k}\leqslant\frac n{n^2+1}$.</p><p>En sommant $n$ termes : $\frac{n^2}{n^2+n}\leqslant S_n\leqslant\frac{n^2}{n^2+1}$, bornes qui tendent vers $1$. ${ph("donc","Donc")} $S_n\to1$.</p><p>De même $\frac n{\sqrt{n^2+n}}\leqslant T_n\leqslant\frac n{\sqrt{n^2+1}}$ (racine croissante puis inverse décroissante), bornes tendant vers $1$ : $T_n\to1$.</p><div class="sbox">$$S_n\to1,\qquad T_n\to1.$$</div>`,
+    tete: R`<p><b>Piège :</b> écrire $\frac n{n^2+k}\to0$ donc la somme tend vers $0$. Chaque terme est petit, mais il y en a $n$.</p><p><b>Premier réflexe :</b> reconnaître une somme de Riemann. Ici un encadrement direct est plus rapide et évite les intégrales.</p>`,
+    trou: { q: R`Pourquoi $\frac n{n^2+k}\leqslant\frac n{n^2+1}$ pour $k\geqslant1$ ?`, c: [R`la fonction inverse est décroissante et $n^2+k\geqslant n^2+1$`, R`la fonction inverse est croissante`, R`$k\leqslant n$`, R`$n\geqslant1$`], ok: 0, why: R`Si $a\geqslant b>0$ alors $\frac1a\leqslant\frac1b$ : agrandir le dénominateur diminue la fraction.` },
+    bareme: { sur: 4, l: [[1, R`Encadrement de chaque terme de $S_n$`], [1, R`Somme de $n$ termes et limites des bornes pour $S_n$`], [1, R`Encadrement de $T_n$ (racine puis inverse)`], [1, R`Conclusion par gendarmes pour $T_n$`]] },
+    jury: [
+      { e: R`Oublier de multiplier la borne par $n$ lors de la somme.`, p: R`Bornes fausses (tendent vers $0$) : deux points perdus.` },
+      { e: R`Ne pas justifier le sens des inégalités.`, p: R`Décroissance de l'inverse à citer : point perdu.` }
+    ] },
+  { declic: R`Le terme $k=n$ vaut $n!$, il domine tout le reste. On le met de côté et on majore les autres par une quantité de l'ordre de $(n-1)!$.`,
+    copie: R`<p>${ph("posons","Isolons")} le terme $k=n$ : $S_n=n!+\sum_{k=0}^{n-1}(-1)^{n-k}k!\geqslant n!-\sum_{k=0}^{n-1}k!$.</p><p>Pour $n\geqslant2$ : $\sum_{k=0}^{n-2}k!\leqslant(n-1)(n-2)!=(n-1)!$ (factorielle croissante, $n-1$ termes), donc $\sum_{k=0}^{n-1}k!\leqslant2(n-1)!$.</p><p>${ph("donc","Donc")} $S_n\geqslant n(n-1)!-2(n-1)!=(n-2)(n-1)!\geqslant n-2\to+\infty$.</p><div class="sbox">$$\sum_{k=0}^n(-1)^{n-k}k!\to+\infty.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire qu'une somme alternée oscille. Ici les termes croissent si vite que le dernier écrase la somme des précédents.</p><p><b>Premier réflexe :</b> regrouper deux à deux. C'est inutile : on minore par le terme dominant moins tous les autres.</p>`,
+    trou: { q: R`Pourquoi $\sum_{k=0}^{n-2}k!\leqslant(n-1)(n-2)!$ ?`, c: [R`$n-1$ termes, chacun au plus $(n-2)!$`, R`$k!\leqslant k$`, R`$n-2$ termes égaux à $(n-1)!$`, R`la factorielle est décroissante`], ok: 0, why: R`Les indices $0,\dots,n-2$ sont au nombre de $n-1$, et $k!\leqslant(n-2)!$ car la factorielle est croissante.` },
+    bareme: { sur: 4, l: [[1, R`Isolation du terme $n!$ et minoration par $n!-\sum k!$`], [1, R`Majoration de $\sum_{k=0}^{n-2}k!$ par $(n-1)!$`], [1, R`$S_n\geqslant(n-2)(n-1)!$`], [1, R`$(n-1)!\geqslant1$, minoration par $n-2$ et conclusion`]] },
+    jury: [
+      { e: R`Majorer chaque $k!$ par $(n-1)!$ : $n$ termes donne $n(n-1)!=n!$.`, p: R`La minoration devient nulle : inutile, deux points perdus.` },
+      { e: R`Ne pas tenir compte des signes $(-1)^{n-k}$.`, p: R`La minoration par $-k!$ doit être justifiée : point perdu.` }
+    ] },
+  { declic: R`$\binom nk$ est le plus petit aux extrémités et le plus grand au milieu. Après avoir isolé $k=0,1,n-1,n$, tous les autres coefficients sont $\geqslant\binom n2$.`,
+    copie: R`<p>Pour $n\geqslant4$ : $u_n=1+1+\frac1n+\frac1n+R_n=2+\frac2n+R_n$ avec $R_n=\sum_{k=2}^{n-2}\frac1{\binom nk}$.</p><p>Le rapport $\frac{\binom n{k+1}}{\binom nk}=\frac{n-k}{k+1}\geqslant1$ si $k\leqslant\frac{n-1}2$ : $\binom nk$ croît jusqu'au milieu, puis décroît par symétrie $\binom nk=\binom n{n-k}$. ${ph("donc","Donc")} $\binom nk\geqslant\binom n2=\frac{n(n-1)}2$ pour $2\leqslant k\leqslant n-2$.</p><p>${ph("ainsi","Ainsi")} $0\leqslant R_n\leqslant(n-3)\frac2{n(n-1)}\leqslant\frac2n\to0$ et $u_n\to2$.</p><div class="sbox">$$\sum_{k=0}^n\frac1{\binom nk}\to2.$$</div>`,
+    tete: R`<p><b>Piège :</b> minorer $\binom nk$ par $n$ pour tout $2\leqslant k\leqslant n-2$ : la borne est trop faible, $R_n\leqslant\frac{n-3}n$ ne tend pas vers $0$.</p><p><b>Premier réflexe :</b> utiliser la formule du binôme. Elle donne $\sum\binom nk$, pas la somme des inverses.</p>`,
+    trou: { q: R`Quelle est la valeur de $\binom nk$ minimale pour $2\leqslant k\leqslant n-2$ ?`, c: [R`$\binom n2$`, R`$\binom n1=n$`, R`$\binom n{n/2}$`, R`$1$`], ok: 0, why: R`La suite $k\mapsto\binom nk$ est croissante jusqu'au milieu puis décroissante symétriquement : sur $[2,n-2]$ le minimum est atteint aux bords, $\binom n2=\binom n{n-2}$.` },
+    bareme: { sur: 5, l: [[1, R`Isolement de $k=0,1,n-1,n$ : $u_n=2+\frac2n+R_n$`], [1, R`Rapport $\frac{n-k}{k+1}$ de coefficients consécutifs`], [1, R`Monotonie et symétrie : $\binom nk\geqslant\binom n2$`], [1, R`Majoration de $R_n$ par $\frac2n$`], [1, R`Limite de $u_n$`]] },
+    jury: [
+      { e: R`Affirmer $\binom nk\geqslant\binom n2$ sans justifier la monotonie.`, p: R`Étape clé non démontrée : deux points perdus.` },
+      { e: R`Compter $n-1$ termes dans $\sum_{k=2}^{n-2}$.`, p: R`Il y en a $n-3$ : majoration à corriger, point perdu.` }
+    ] },
+  { declic: R`Une relation entre deux termes consécutifs d'une suite de coefficients binomiaux : on écrit les deux coefficients en factorielles et on simplifie le rapport.`,
+    copie: R`<p>$\binom{n+p+2}{n+2}=\dfrac{(n+p+2)!}{(n+2)!\,p!}$ et $\binom{n+p+1}{n+1}=\dfrac{(n+p+1)!}{(n+1)!\,p!}$.</p><p>${ph("comme","Comme")} $(n+p+2)!=(n+p+2)(n+p+1)!$ et $(n+2)!=(n+2)(n+1)!$, on a $\binom{n+p+2}{n+2}=\frac{n+p+2}{n+2}\binom{n+p+1}{n+1}$.</p><p>${ph("donc","Donc")} en passant aux inverses (coefficients non nuls) : $u_{n+2}=\frac{n+2}{n+p+2}u_{n+1}$.</p><div class="sbox">$$(n+p+2)\,u_{n+2}=(n+2)\,u_{n+1}.$$</div>`,
+    tete: R`<p><b>Piège :</b> se tromper de sens en inversant : $u$ est l'inverse du coefficient, pas le coefficient.</p><p><b>Premier réflexe :</b> utiliser la formule de Pascal. Ici un seul rapport de factorielles suffit.</p>`,
+    trou: { q: R`Que vaut $\dfrac{(n+p+2)!}{(n+p+1)!}$ ?`, c: [R`$n+p+2$`, R`$n+p+1$`, R`$(n+p+2)!$`, R`$1$`], ok: 0, why: R`$(m+1)!=(m+1)\,m!$ avec $m=n+p+1$ : le quotient vaut $m+1=n+p+2$.` },
+    bareme: { sur: 3, l: [[1, R`Écriture des deux coefficients en factorielles`], [1, R`Rapport simplifié : $\frac{n+p+2}{n+2}$`], [1, R`Passage aux inverses et conclusion`]] },
+    jury: [
+      { e: R`Confondre $u_n$ et le coefficient.`, p: R`La relation obtenue est inversée : deux points perdus.` }
+    ] },
+  { declic: R`Une formule démontrée pour tout $n$ : récurrence. Au rang $n+1$, on ajoute $u_{n+1}$ et on utilise la relation de la question précédente pour retomber sur la forme voulue.`,
+    copie: R`<p><b>Initialisation.</b> $S_1=u_1=\frac1{p+1}$ et $\frac1{p-1}\big(1-(p+2)u_2\big)=\frac1{p-1}\big(1-\frac2{p+1}\big)=\frac1{p+1}$ ✓.</p><p><b>Hérédité.</b> ${ph("posons","Supposons")} la formule au rang $n$. Alors $S_{n+1}=S_n+u_{n+1}=\frac{1-(n+p+1)u_{n+1}+(p-1)u_{n+1}}{p-1}=\frac{1-(n+2)u_{n+1}}{p-1}$.</p><p>${ph("or","Or")} $(n+2)u_{n+1}=(n+p+2)u_{n+2}$ par la question 6. ${ph("donc","Donc")} $S_{n+1}=\frac1{p-1}\big(1-(n+p+2)u_{n+2}\big)$.</p><div class="sbox">$$S_n=\frac1{p-1}\big(1-(n+p+1)u_{n+1}\big).$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier $p\geqslant2$ : sans cela $p-1$ peut être nul et la formule n'a pas de sens.</p><p><b>Premier réflexe :</b> calculer $S_n$ en développant. Il n'y a pas de formule directe : la récurrence est la bonne méthode.</p>`,
+    trou: { q: R`Dans l'hérédité, quelle relation permet de remplacer $(n+2)u_{n+1}$ ?`, c: [R`$(n+2)u_{n+1}=(n+p+2)u_{n+2}$`, R`$u_{n+1}=u_n$`, R`$(n+2)u_{n+1}=(n+p+1)u_{n+2}$`, R`$u_{n+2}=u_{n+1}+u_n$`], ok: 0, why: R`C'est la relation de la question 6. Les autres égalités ne sont pas vraies : on les vérifie avec $p=2$, $n=0$.` },
+    bareme: { sur: 4, l: [[1, R`Initialisation $n=1$ calculée`], [1, R`Hypothèse de récurrence énoncée`], [1, R`Calcul de $S_n+u_{n+1}$`], [1, R`Utilisation de la question 6 et conclusion`]] },
+    jury: [
+      { e: R`Hérédité sans énoncer l'hypothèse.`, p: R`Raisonnement par récurrence incomplet : point perdu.` },
+      { e: R`Ne pas faire l'initialisation.`, p: R`Récurrence non démontrée : deux points perdus.` }
+    ] },
+  { declic: R`On simplifie $(n+p)u_n$ en une fraction de factorielles, on majore par une quantité qui tend vers $0$, puis la formule de la question 7 donne la limite.`,
+    copie: R`<p>$v_n=(n+p)\dfrac{n!\,p!}{(n+p)!}=\dfrac{n!\,p!}{(n+p-1)!}$.</p><p>${ph("or","Or")} $\frac{(n+p-1)!}{n!}=(n+1)\cdots(n+p-1)\geqslant n+1$ (produit de $p-1\geqslant1$ entiers $\geqslant1$, dont un est $\geqslant n+1$). ${ph("donc","Donc")} $0\leqslant v_n\leqslant\frac{p!}{n+1}\to0$.</p><p>${ph("ainsi","Ainsi")} $v_{n+1}=(n+p+1)u_{n+1}\to0$ et $S_n=\frac{1-v_{n+1}}{p-1}\to\frac1{p-1}$.</p><div class="sbox">$$v_n\to0,\qquad\sum_{k=1}^n\binom{k+p}k^{-1}\to\frac1{p-1}.$$</div>`,
+    tete: R`<p><b>Piège :</b> croire que $(n+p)u_n\to p$ car $n+p\sim n$. Le facteur $u_n$ tend vers $0$ à une vitesse polynomiale : il compense $n+p$.</p><p><b>Premier réflexe :</b> prendre un équivalent de $\binom{n+p}n\sim\frac{n^p}{p!}$. Valable, mais il faut le démontrer ; ici la majoration directe est plus rapide.</p>`,
+    trou: { q: R`Pourquoi $(n+1)\cdots(n+p-1)\geqslant n+1$ ?`, c: [R`produit d'entiers $\geqslant1$ dont l'un vaut $n+1$ (car $p-1\geqslant1$)`, R`parce que $p\geqslant n$`, R`parce que $n!\geqslant n+1$`, R`parce que le produit vaut $p!$`], ok: 0, why: R`Il y a au moins un facteur (car $p\geqslant2$), qui vaut $n+1$ ; les autres facteurs sont $\geqslant1$ : le produit est au moins $n+1$.` },
+    bareme: { sur: 4, l: [[1, R`Simplification de $v_n$ en $\frac{n!\,p!}{(n+p-1)!}$`], [1, R`Majoration $v_n\leqslant\frac{p!}{n+1}$`], [1, R`Gendarmes : $v_n\to0$`], [1, R`Limite de la somme via $v_{n+1}$ et la question 7`]] },
+    jury: [
+      { e: R`Conclure $v_n\to0$ sans majoration.`, p: R`Résultat non justifié : deux points perdus.` },
+      { e: R`Oublier de passer de $v_n$ à $v_{n+1}$.`, p: R`Il faut dire que $v_{n+1}$ est un terme d'une suite qui tend vers $0$ : point perdu.` }
+    ] }
+], [
+  { q: R`Que vaut $(m+1)!$ en fonction de $m!$ ?`, c: [R`$(m+1)\,m!$`, R`$m!+1$`, R`$(m+1)+m!$`, R`$m\,(m!)$`], ok: 0, r: "su-usuel" },
+  { q: R`Que vaut $\binom nk$ en fonction de $\binom n{n-k}$ ?`, c: [R`$\binom nk=\binom n{n-k}$`, R`$\binom nk=\binom n{k-n}$`, R`$\binom nk=1/\binom n{n-k}$`, R`$\binom nk=n-k$`], ok: 0, r: "su-usuel" },
+  { q: R`Combien de termes comporte $\sum_{k=a}^bf(k)$ ($a\leqslant b$ entiers) ?`, c: [R`$b-a+1$`, R`$b-a$`, R`$b+a$`, R`$b$`], ok: 0, r: "su-tele" }
+]);
+
 })();
