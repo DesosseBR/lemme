@@ -390,4 +390,199 @@ A("cx-07", [
   { q: R`Pour $n\geqslant2$, la somme de toutes les racines $n$-ièmes de l'unité vaut :`, c: [R`$0$`, R`$1$`, R`$n$`, R`$-1$`], ok: 0, r: "cx-unite" },
   { q: R`Pour tout réel $a$, $\cos2a$ vaut :`, c: [R`$2\cos^2a-1$`, R`$2\sin^2a-1$`, R`$\cos^2a+\sin^2a$`, R`$2\cos a$`], ok: 0, r: "cx-lin" }
 ]);
+
+/* ---------- cx-08 · Racines n-ièmes et équations de la forme (z + a)^n = (z − a)^n ---------- */
+A("cx-08", [
+  { declic: R`Résoudre $z^n=a$ : on écrit $a$ sous forme exponentielle et on cherche $z=re^{i\theta}$. Deux complexes non nuls sont égaux si et seulement si ils ont même module et des arguments égaux modulo $2\pi$.`,
+    copie: R`<p>$z=0$ n'est pas solution. ${ph("posons", "Posons")} $z=re^{i\theta}$ avec $r>0$ ; $-1=e^{i\pi}$. Par Moivre,</p>$$z^n=-1\iff r^ne^{in\theta}=e^{i\pi}\iff r^n=1\ \text{et}\ n\theta\equiv\pi\ [2\pi]\iff r=1\ \text{et}\ \theta=\frac{(2k+1)\pi}n,\ k\in\mathbb Z.$$<p>Remplacer $k$ par $k+n$ ajoute $2\pi$ à l'argument ; les valeurs $k=0,\dots,n-1$ donnent des arguments distincts dans $[0,2\pi[$ : il y a exactement $n$ solutions.</p><div class="sbox">$$z^n=-1\iff z=e^{i\frac{(2k+1)\pi}n},\quad k\in\{0,\dots,n-1\}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier que $r^n=1$ avec $r>0$ impose $r=1$ : écrire $r=\pm1$ est une erreur.</p><p><b>Piège :</b> laisser $k\in\mathbb Z$ dans la conclusion : les solutions se répètent, il faut se limiter à $n$ valeurs consécutives de $k$.</p>`,
+    trou: { q: R`L'équation $n\theta\equiv\pi\ [2\pi]$ équivaut à :`, c: [R`$\theta=\dfrac{\pi+2k\pi}n$, $k\in\mathbb Z$`, R`$\theta=\pi+2k\pi$`, R`$\theta=\dfrac\pi n$ seulement`, R`$\theta=\dfrac\pi{2n}+k\pi$`], ok: 0, why: R`$n\theta=\pi+2k\pi$ avec $k\in\mathbb Z$ ; on divise par $n$. Les $n$ valeurs $k=0,\dots,n-1$ donnent des arguments distincts modulo $2\pi$.` },
+    bareme: { sur: 4, l: [[1, R`Forme exponentielle $-1=e^{i\pi}$ et $z\neq0$`], [1, R`Égalité module/argument : $r=1$ et $n\theta\equiv\pi\ [2\pi]$`], [1, R`Les $n$ solutions distinctes ($k=0,\dots,n-1$)`], [1, R`Conclusion et vérification sur $n=2$`]] },
+    jury: [
+      { e: R`Laisser $k\in\mathbb Z$ dans l'ensemble des solutions.`, p: R`Ensemble redondant : on attend exactement $n$ solutions.` },
+      { e: R`Ne pas justifier $r=1$.`, p: R`Deux lignes de rigueur perdues sur l'égalité des modules.` }
+    ] },
+  { declic: R`Même méthode : on met le second membre sous forme exponentielle, $4\sqrt2(1+i)=8e^{i\pi/4}$. Pour la forme algébrique de $e^{i\pi/12}$, il faut $\cos\frac\pi{12}$ et $\sin\frac\pi{12}$ : on écrit $\frac\pi{12}=\frac\pi3-\frac\pi4$ et on applique les formules d'addition.`,
+    copie: R`<p>$1+i=\sqrt2\,e^{i\pi/4}$, ${ph("donc", "donc")} $4\sqrt2(1+i)=8e^{i\pi/4}$. ${ph("posons", "Posons")} $z=re^{i\theta}$ : $r^3=8$ et $3\theta\equiv\frac\pi4\ [2\pi]$, donc $r=2$ et $\theta=\frac\pi{12}+\frac{2k\pi}3$.</p><p>Les trois solutions sont $2e^{i\pi/12}$, $2e^{3i\pi/4}=-\sqrt2+i\sqrt2$ et $2e^{17i\pi/12}$.</p><p>${ph("reconnait", "On reconnaît")} $\frac\pi{12}=\frac\pi3-\frac\pi4$ : par les formules d'addition, $\cos\frac\pi{12}=\dfrac{\sqrt2+\sqrt6}4$ et $\sin\frac\pi{12}=\dfrac{\sqrt6-\sqrt2}4$.</p><div class="sbox">$$2e^{i\pi/12}=\frac{\sqrt6+\sqrt2}2+i\,\frac{\sqrt6-\sqrt2}2.$$</div>`,
+    tete: R`<p><b>Premier réflexe :</b> passer par $\cos^2a=\frac{1+\cos2a}2$ pour $a=\frac\pi{12}$. Ça marche, mais on obtient $\sqrt{2+\sqrt3}$ qu'il faut encore simplifier. La différence d'angles remarquables donne directement le résultat.</p><p><b>Piège :</b> prendre $r=8$ : c'est $r^3=8$, donc $r=2$.</p>`,
+    trou: { q: R`Le cube de $z=re^{i\theta}$ est :`, c: [R`$r^3e^{3i\theta}$`, R`$r^3e^{i\theta}$`, R`$3r\,e^{3i\theta}$`, R`$r\,e^{3i\theta}$`], ok: 0, why: R`Moivre : $(re^{i\theta})^3=r^3\,(e^{i\theta})^3=r^3e^{3i\theta}$. Le module est élevé au cube et l'argument est multiplié par $3$.` },
+    bareme: { sur: 5, l: [[1, R`Forme exponentielle $8e^{i\pi/4}$ du second membre`], [1, R`Module $r=2$ (et non $8$)`], [1, R`Les trois arguments $\frac\pi{12}+\frac{2k\pi}3$`], [1, R`$\cos\frac\pi{12}$ et $\sin\frac\pi{12}$ par $\frac\pi3-\frac\pi4$`], [1, R`Forme algébrique de la solution d'argument $\frac\pi{12}$`]] },
+    jury: [
+      { e: R`Donner seulement la solution d'argument $\frac\pi{12}$.`, p: R`Il y a trois solutions : réponse incomplète.` },
+      { e: R`Erreur de signe dans la formule de $\sin(a-b)$.`, p: R`$\sin\frac\pi{12}$ faux : la forme algébrique est perdue.` }
+    ] },
+  { declic: R`Le quotient $\frac{z+1}{z-1}$ élevé à la puissance $n$ vaut $1$ : c'est une racine $n$-ième de l'unité. On le pose égal à $\omega^k$ et on isole $z$, en traitant à part le cas $k=0$, qui ne donne rien.`,
+    copie: R`<p>$z=1$ n'est pas solution : $2^n\neq0$. Pour $z\neq1$, on divise par $(z-1)^n$ : $(z+1)^n=(z-1)^n\iff\Big(\dfrac{z+1}{z-1}\Big)^n=1\iff\dfrac{z+1}{z-1}=\omega^k$ pour un $k\in\{0,\dots,n-1\}$.</p><p>Alors $z(\omega^k-1)=\omega^k+1$. Si $k=0$ : $0=2$, impossible. Si $1\leqslant k\leqslant n-1$, $\omega^k\neq1$ et $z=\dfrac{\omega^k+1}{\omega^k-1}$.</p><p>${ph("reconnait", "On reconnaît")} l'angle moitié : avec $\alpha=\frac{2k\pi}n$, $z=\dfrac{2\cos\frac\alpha2\,e^{i\alpha/2}}{2i\sin\frac\alpha2\,e^{i\alpha/2}}=-i\cot\dfrac{k\pi}n$. Les angles $\frac{k\pi}n$ sont distincts dans $]0,\pi[$, où $\cot$ est strictement décroissante : on a $n-1$ valeurs distinctes.</p><div class="sbox">$$\mathcal S=\Big\{-i\cot\frac{k\pi}n\ \Big|\ 1\leqslant k\leqslant n-1\Big\},\quad n-1\ \text{solutions}.$$</div>`,
+    tete: R`<p><b>Piège :</b> annoncer $n$ solutions parce qu'il y a $n$ racines de l'unité : la racine $k=0$ ne donne rien. L'équation est de degré $n-1$, car les termes en $z^n$ se simplifient.</p><p><b>Piège :</b> diviser par $(z-1)^n$ sans avoir vérifié que $z=1$ n'est pas solution.</p>`,
+    trou: { q: R`L'équation $\dfrac{z+1}{z-1}=1$ a :`, c: [R`aucune solution`, R`une solution`, R`$n$ solutions`, R`une infinité de solutions`], ok: 0, why: R`$\frac{z+1}{z-1}=1\iff z+1=z-1\iff1=-1$ : impossible. La racine $1$ ne donne aucune solution ; c'est pourquoi il y a $n-1$ solutions et non $n$.` },
+    bareme: { sur: 5, l: [[1, R`Cas $z=1$ écarté, puis division par $(z-1)^n$`], [1, R`Quotient égal à une racine $n$-ième de l'unité`], [1, R`Cas $k=0$ sans solution ; pour $k\geqslant1$ : $z=\frac{\omega^k+1}{\omega^k-1}$`], [1, R`Angle moitié : $z=-i\cot\frac{k\pi}n$`], [1, R`Valeurs distinctes : exactement $n-1$ solutions`]] },
+    jury: [
+      { e: R`Annoncer $n$ solutions.`, p: R`Réponse fausse : le cas $k=0$ est sans solution.` },
+      { e: R`Ne pas justifier que les $n-1$ valeurs sont distinctes.`, p: R`Le dénombrement n'est pas démontré : point perdu.` }
+    ] },
+  { declic: R`« Sans résoudre » : on prend le module. $|z+i|^n=|z-i|^n$ donne $|z+i|=|z-i|$, c'est-à-dire un point $M$ à égale distance de $i$ et de $-i$ : il est sur la médiatrice, qui est l'axe réel.`,
+    copie: R`<p>Si $(z+i)^n=(z-i)^n$, le module donne $|z+i|^n=|z-i|^n$. ${ph("comme", "Comme")} $t\mapsto t^n$ est strictement croissante sur $\mathbb R_+$, on a $|z+i|=|z-i|$.</p><p>${ph("posons", "Posons")} $z=x+iy$ : $|z+i|^2-|z-i|^2=\big(x^2+(y+1)^2\big)-\big(x^2+(y-1)^2\big)=4y$. ${ph("donc", "Donc")} $|z+i|=|z-i|\iff y=0$.</p><p>${ph("ainsi", "Ainsi")} $z$ est réel.</p><div class="sbox">$$(z+i)^n=(z-i)^n\implies z\in\mathbb R.$$</div>`,
+    tete: R`<p><b>Piège :</b> chercher les solutions explicitement avant de montrer qu'elles sont réelles : l'énoncé demande de le montrer « sans résoudre ».</p><p><b>Piège :</b> passer de $|z+i|^n=|z-i|^n$ à $|z+i|=|z-i|$ sans dire que $t\mapsto t^n$ est injective sur $\mathbb R_+$.</p>`,
+    trou: { q: R`De $|z+i|^n=|z-i|^n$ on déduit $|z+i|=|z-i|$ parce que :`, c: [R`$t\mapsto t^n$ est strictement croissante sur $\mathbb R_+$`, R`$n$ est pair`, R`$z$ est réel`, R`$|z+i|=1$`], ok: 0, why: R`Une fonction strictement croissante est injective : sur $\mathbb R_+$, $a^n=b^n\Rightarrow a=b$. Sur $\mathbb R$ ce serait faux pour $n$ pair.` },
+    bareme: { sur: 3, l: [[1, R`Passage au module`], [1, R`Injectivité de $t\mapsto t^n$ sur $\mathbb R_+$`], [1, R`$|z+i|=|z-i|\iff\mathrm{Im}\,z=0$ (calcul ou médiatrice)`]] },
+    jury: [
+      { e: R`Passer de $|a|^n=|b|^n$ à $|a|=|b|$ sans justification.`, p: R`Point de rigueur perdu.` },
+      { e: R`Résoudre complètement l'équation alors que l'énoncé dit « sans résoudre ».`, p: R`Hors sujet : aucun point supplémentaire, et du temps perdu.` }
+    ] },
+  { declic: R`Le facteur $i$ se met en évidence : avec $z=iu$, $z+i=i(u+1)$ et $z-i=i(u-1)$. L'équation devient exactement celle de la question 3, d'inconnue $u$.`,
+    copie: R`<p>${ph("posons", "Posons")} $z=iu$ (bijection de $\mathbb C$ dans $\mathbb C$). Alors $z+i=i(u+1)$ et $z-i=i(u-1)$ ; en simplifiant par $i^n\neq0$ :</p>$$(z+i)^n=(z-i)^n\iff(u+1)^n=(u-1)^n.$$<p>${ph("parlaq", "D'après la question 3")}, $u=-i\cot\frac{k\pi}n$ avec $1\leqslant k\leqslant n-1$, ${ph("donc", "donc")} $z=iu=\cot\dfrac{k\pi}n$.</p><div class="sbox">$$(z+i)^n=(z-i)^n\iff z\in\Big\{\cot\frac{k\pi}n\ \Big|\ 1\leqslant k\leqslant n-1\Big\}.$$</div><p>Ce sont $n-1$ réels distincts, en accord avec la question 4.</p>`,
+    tete: R`<p><b>Piège :</b> refaire tout le calcul avec $(z+i)$ et $(z-i)$. Le changement d'inconnue $z=iu$ évite de recommencer.</p><p><b>Piège :</b> oublier de revenir à $z$ à la fin : la solution demandée est $z=iu$, pas $u$.</p>`,
+    trou: { q: R`Si $u=-i\cot\theta$, alors $z=iu$ vaut :`, c: [R`$\cot\theta$`, R`$-\cot\theta$`, R`$i\cot\theta$`, R`$-i\cot\theta$`], ok: 0, why: R`$z=i\times(-i\cot\theta)=-i^2\cot\theta=\cot\theta$, car $i^2=-1$.` },
+    bareme: { sur: 4, l: [[1, R`Changement d'inconnue $z=iu$`], [1, R`Équivalence avec $(u+1)^n=(u-1)^n$ (simplification par $i^n\neq0$)`], [1, R`Retour à $z$ : $z=\cot\frac{k\pi}n$`], [1, R`Nombre de solutions et accord avec la question 4`]] },
+    jury: [
+      { e: R`Donner les solutions en $u$ sans revenir à $z$.`, p: R`La réponse ne répond pas à la question posée.` },
+      { e: R`Simplifier par $i^n$ sans dire qu'il est non nul.`, p: R`Petite étape de rigueur perdue.` }
+    ] }
+], [
+  { q: R`Le module de $z^n$ est :`, c: [R`$|z|^n$`, R`$n|z|$`, R`$|z|$`, R`$|z|^{1/n}$`], ok: 0, r: "cx-racn" },
+  { q: R`Deux complexes non nuls $re^{i\theta}$ et $r'e^{i\theta'}$ ($r,r'>0$) sont égaux si et seulement si :`, c: [R`$r=r'$ et $\theta\equiv\theta'\ [2\pi]$`, R`$r=r'$ seulement`, R`$\theta=\theta'$ seulement`, R`$r+\theta=r'+\theta'$`], ok: 0, r: "cx-arg" },
+  { q: R`Il y a exactement, dans $\mathbb C$, combien de racines $n$-ièmes de $1$ ?`, c: [R`$n$`, R`$n-1$`, R`$2n$`, R`$1$`], ok: 0, r: "cx-unite" }
+]);
+
+/* ---------- cx-09 · Équations algébriques dans ℂ ---------- */
+A("cx-09", [
+  { declic: R`Pour une racine carrée complexe $\delta=x+iy$, on écrit $\delta^2$ en parties réelle et imaginaire, puis on ajoute l'égalité des modules $x^2+y^2=|5-12i|$ : c'est elle qui donne $x^2$ et $y^2$ sans système compliqué.`,
+    copie: R`<p>${ph("posons", "Posons")} $\delta=x+iy$ ($x,y\in\mathbb R$). $\delta^2=5-12i$ équivaut à $x^2-y^2=5$ et $2xy=-12$.</p><p>En prenant les modules : $x^2+y^2=|\delta|^2=|5-12i|=\sqrt{25+144}=13$. En ajoutant et en soustrayant avec $x^2-y^2=5$ : $x^2=9$ et $y^2=4$.</p><p>${ph("comme", "Comme")} $2xy=-12<0$, $x$ et $y$ sont de signes contraires.</p><div class="sbox">$$\delta=3-2i\quad\text{ou}\quad\delta=-3+2i.$$</div><p><b>Vérification.</b> $(3-2i)^2=9-12i-4=5-12i$ ✓.</p>`,
+    tete: R`<p><b>Premier réflexe :</b> résoudre $x^2-y^2=5$ et $2xy=-12$ par substitution. On tombe sur une équation bicarrée, plus longue. L'égalité des modules donne $x^2+y^2$ tout de suite.</p><p><b>Piège :</b> oublier la condition sur le signe de $xy$ et garder les quatre couples $(\pm3,\pm2)$ : deux d'entre eux ne conviennent pas.</p>`,
+    trou: { q: R`Si $\delta=x+iy$ vérifie $\delta^2=5-12i$, alors $x^2+y^2$ vaut :`, c: [R`$13$`, R`$5$`, R`$12$`, R`$169$`], ok: 0, why: R`$x^2+y^2=|\delta|^2=|\delta^2|=|5-12i|=\sqrt{25+144}=13$. Le nombre $169$ est $|5-12i|^2$, pas son module.` },
+    bareme: { sur: 4, l: [[1, R`Système $x^2-y^2=5$, $2xy=-12$`], [1, R`Égalité des modules $x^2+y^2=13$`], [1, R`Valeurs $x^2=9$ et $y^2=4$`], [1, R`Choix des signes par $xy<0$ : deux racines carrées`]] },
+    jury: [
+      { e: R`Garder les quatre couples $(\pm3,\pm2)$.`, p: R`Deux sont faux : réponse inexacte.` },
+      { e: R`Se tromper sur le module : $|5-12i|=13$, et non $169$.`, p: R`Valeurs de $x^2$ et $y^2$ fausses : la question est perdue.` }
+    ] },
+  { declic: R`Un trinôme à coefficients complexes se traite comme un trinôme réel : discriminant, puis $\frac{-b\pm\delta}{2a}$ avec $\delta^2=\Delta$. La seule difficulté est la racine carrée complexe de $\Delta$.`,
+    copie: R`<p>$\Delta=b^2-4ac=(-2i)^2-4(-1+2i)=-4+4-8i=-8i$.</p><p>${ph("posons", "Posons")} $\delta=x+iy$ avec $\delta^2=-8i$ : $x^2-y^2=0$, $2xy=-8$ et $x^2+y^2=|-8i|=8$. Donc $x^2=y^2=4$ et $xy<0$ : $\delta=2-2i$.</p><p>${ph("donc", "Donc")} $z=\dfrac{2i\pm(2-2i)}2$, soit $z=1$ ou $z=-1+2i$.</p><div class="sbox">$$\mathcal S=\{1,\ -1+2i\}.$$</div><p><b>Vérification.</b> Somme $2i=-\frac ba$ ✓ et produit $-1+2i=\frac ca$ ✓.</p>`,
+    tete: R`<p><b>Piège :</b> écrire les solutions avec « $\sqrt{-8i}$ » sans l'expliciter : il faut une racine carrée complexe calculée.</p><p><b>Piège :</b> oublier que $b=-2i$ : la formule est $\dfrac{-b\pm\delta}{2a}=\dfrac{2i\pm\delta}2$.</p>`,
+    trou: { q: R`Pour $z^2-2iz-1+2i=0$, le discriminant vaut :`, c: [R`$-8i$`, R`$8i$`, R`$-8$`, R`$-4$`], ok: 0, why: R`$b^2=(-2i)^2=-4$ et $-4ac=-4(-1+2i)=4-8i$. Donc $\Delta=-4+4-8i=-8i$.` },
+    bareme: { sur: 4, l: [[1, R`Discriminant $\Delta=-8i$`], [1, R`Racine carrée $\delta=2-2i$ avec le système`], [1, R`Formule $\frac{-b\pm\delta}{2a}$ avec $b=-2i$`], [1, R`Deux solutions $1$ et $-1+2i$, vérification somme/produit`]] },
+    jury: [
+      { e: R`Se tromper de signe sur $b$ dans $-b\pm\delta$.`, p: R`Solutions fausses : la question est perdue.` },
+      { e: R`Laisser $\sqrt{-8i}$ sans calcul.`, p: R`Racine carrée non déterminée : résolution inachevée.` }
+    ] },
+  { declic: R`Une équation en $z^4$ et $z^2$ : on pose $Z=z^2$ pour obtenir un trinôme, puis on revient à $z$ en résolvant $z^2=Z_1$ et $z^2=Z_2$. Les racines carrées complexes s'obtiennent comme à la question 1.`,
+    copie: R`<p>${ph("posons", "Posons")} $Z=z^2$ : l'équation devient $Z^2-(5-14i)Z-(24+10i)=0$, de discriminant $\Delta=(5-14i)^2+4(24+10i)=-75-100i$.</p><p>Une racine carrée de $\Delta$ : $x^2-y^2=-75$, $2xy=-100$, $x^2+y^2=|\Delta|=125$, donc $x^2=25$, $y^2=100$ et $xy<0$ : $\delta=5-10i$.</p><p>${ph("donc", "Donc")} $Z_1=\dfrac{(5-14i)+(5-10i)}2=5-12i$ et $Z_2=\dfrac{(5-14i)-(5-10i)}2=-2i$.</p><p>${ph("parlaq", "D'après la question 1")}, $z^2=5-12i\iff z=\pm(3-2i)$. Et $z^2=-2i\iff z=\pm(1-i)$.</p><div class="sbox">$$\mathcal S=\{3-2i,\ -3+2i,\ 1-i,\ -1+i\}.$$</div>`,
+    tete: R`<p><b>Piège :</b> s'arrêter aux valeurs de $Z$. L'inconnue est $z$, et chaque $Z$ donne deux valeurs opposées de $z$ : on attend $4$ solutions.</p><p><b>Piège :</b> écrire $z=\pm\sqrt{Z}$ sans expliciter : la notation $\sqrt{5-12i}$ n'est pas définie, il faut calculer les racines carrées complexes.</p>`,
+    trou: { q: R`Après avoir trouvé $Z_1=5-12i$ et $Z_2=-2i$ (non nuls), combien de solutions $z$ attend-on ?`, c: [R`$4$`, R`$2$`, R`$8$`, R`$1$`], ok: 0, why: R`Chaque équation $z^2=Z_k$ avec $Z_k\neq0$ a deux solutions opposées : $2\times2=4$ solutions, ici toutes distinctes.` },
+    bareme: { sur: 5, l: [[1, R`Changement d'inconnue $Z=z^2$ et trinôme en $Z$`], [1, R`Discriminant $-75-100i$`], [1, R`Racine carrée $5-10i$ et valeurs $Z_1$, $Z_2$`], [1, R`Retour à $z$ par les racines carrées de $Z_1$ et de $Z_2$`], [1, R`Ensemble des quatre solutions`]] },
+    jury: [
+      { e: R`S'arrêter aux valeurs de $Z$.`, p: R`Réponse en $Z$ et non en $z$ : la question n'est pas résolue.` },
+      { e: R`Écrire $\sqrt{5-12i}$ comme racine carrée.`, p: R`Notation non définie dans $\mathbb C$ : pas de point pour le calcul.` }
+    ] },
+  { declic: R`Une somme $s$ et un produit $p$ : $x$ et $y$ sont les racines de $Z^2-sZ+p$, car $(Z-x)(Z-y)=Z^2-(x+y)Z+xy$. Le système se ramène à une seule équation du second degré.`,
+    copie: R`<p>Pour tout $Z$, $(Z-x)(Z-y)=Z^2-(x+y)Z+xy$. ${ph("donc", "Donc")} $(x,y)$ est solution si et seulement si $x$ et $y$ sont les racines de $Z^2-(1+i)Z+(2-i)=0$.</p><p>$\Delta=(1+i)^2-4(2-i)=-8+6i$. Une racine carrée $\delta=p+iq$ : $p^2-q^2=-8$, $2pq=6$, $p^2+q^2=10$, donc $p^2=1$, $q^2=9$, $pq>0$ : $\delta=1+3i$.</p><p>${ph("donc", "Donc")} $Z=\dfrac{(1+i)\pm(1+3i)}2$ : $Z=1+2i$ ou $Z=-i$.</p><div class="sbox">$$(x,y)=(1+2i,\ -i)\quad\text{ou}\quad(x,y)=(-i,\ 1+2i).$$</div>`,
+    tete: R`<p><b>Premier réflexe :</b> poser $y=1+i-x$ et substituer. On retrouve la même équation du second degré, mais plus lentement.</p><p><b>Piège :</b> oublier l'ordre : $(x,y)$ est un couple, donc $(1+2i,-i)$ et $(-i,1+2i)$ sont deux solutions distinctes.</p>`,
+    trou: { q: R`Le système $x+y=s$, $xy=p$ se ramène à l'équation d'inconnue $Z$ :`, c: [R`$Z^2-sZ+p=0$`, R`$Z^2+sZ+p=0$`, R`$Z^2-pZ+s=0$`, R`$Z^2-sZ-p=0$`], ok: 0, why: R`$(Z-x)(Z-y)=Z^2-(x+y)Z+xy=Z^2-sZ+p$ : $x$ et $y$ sont les deux racines.` },
+    bareme: { sur: 4, l: [[1, R`Trinôme $Z^2-(1+i)Z+(2-i)$ justifié par $(Z-x)(Z-y)$`], [1, R`Discriminant $-8+6i$`], [1, R`Racine carrée $1+3i$`], [1, R`Deux couples solutions, ordre compris, avec vérification`]] },
+    jury: [
+      { e: R`Donner l'ensemble $\{1+2i,-i\}$ sans préciser qu'il y a deux couples.`, p: R`L'inconnue est un couple : l'ordre compte.` },
+      { e: R`Se tromper de signe sur le coefficient de $Z$.`, p: R`Trinôme faux : toute la résolution est décalée.` }
+    ] },
+  { declic: R`Un polynôme de degré $3$ : on cherche une racine « évidente », ici imaginaire pure $z=iy$ comme le suggère l'énoncé. Séparer parties réelle et imaginaire donne deux équations en $y$. Puis on factorise, et il reste un trinôme.`,
+    copie: R`<p>${ph("posons", "Posons")} $z=iy$ ($y\in\mathbb R$). L'équation devient $-iy^3+y^2+2iy^2-3y+3iy-10-10i=0$. En séparant les parties réelle et imaginaire :</p>$$y^2-3y-10=0\quad\text{et}\quad-y^3+2y^2+3y-10=0.$$<p>La première donne $y=5$ ou $y=-2$ ; seule $y=-2$ vérifie la seconde. ${ph("donc", "Donc")} $-2i$ est racine.</p><p>On écrit le polynôme $(z+2i)(z^2+az+b)$ et on identifie : $a=-1-4i$ et $b=-5+5i$ (contrôle sur le coefficient de $z$ : $b+2ia=3+3i$ ✓).</p><p>Le trinôme $z^2-(1+4i)z-5+5i$ a pour discriminant $5-12i=(3-2i)^2$ (question 1), donc $z=\dfrac{(1+4i)\pm(3-2i)}2$.</p><div class="sbox">$$\mathcal S=\{-2i,\ 2+i,\ -1+3i\}.$$</div>`,
+    tete: R`<p><b>Piège :</b> tester $z=iy$ avec une seule équation. Il faut que les <i>deux</i> équations (partie réelle et partie imaginaire) soient vérifiées en même temps.</p><p><b>Piège :</b> oublier le contrôle sur le coefficient de $z$ lors de l'identification : c'est lui qui détecte une erreur de calcul.</p>`,
+    trou: { q: R`Un complexe $a+ib$ ($a,b$ réels) est nul si et seulement si :`, c: [R`$a=0$ et $b=0$`, R`$a=0$ ou $b=0$`, R`$a=b$`, R`$|a|=|b|$`], ok: 0, why: R`Il faut les deux conditions. C'est ce qui transforme l'équation en $y$ en <b>deux</b> équations réelles, dont on cherche une solution commune.` },
+    bareme: { sur: 5, l: [[1, R`Substitution $z=iy$ et séparation parties réelle/imaginaire`], [1, R`Racine $y=-2$ retenue (les deux équations vérifiées)`], [1, R`Factorisation $(z+2i)(z^2+az+b)$ par identification`], [1, R`Discriminant du trinôme et racine carrée (question 1)`], [1, R`Ensemble des trois solutions et vérification de la somme`]] },
+    jury: [
+      { e: R`Retenir $y=5$ sans tester la seconde équation.`, p: R`Fausse racine : la factorisation est fausse.` },
+      { e: R`Factoriser sans identifier tous les coefficients.`, p: R`Erreur de calcul non détectée.` }
+    ] },
+  { declic: R`Pour connaître la nature d'un triangle dont on a les sommets, on compare les longueurs $|y-x|$. Deux côtés égaux, puis Pythagore (ou un quotient d'affixes égal à $\pm i$), donnent la nature.`,
+    copie: R`<p>La longueur $XY$ est $|y-x|$. $CA=|-2-3i|=\sqrt{13}$, $CB=|-3+2i|=\sqrt{13}$ et $AB=|-1+5i|=\sqrt{26}$.</p><p>${ph("donc", "Donc")} $CA=CB$ : le triangle est isocèle en $C$. De plus $CA^2+CB^2=26=AB^2$ : par la réciproque du théorème de Pythagore, il est rectangle en $C$.</p><p><b>Confirmation.</b> $\dfrac{b-c}{a-c}=\dfrac{-3+2i}{-2-3i}=-i$ : $\overrightarrow{CB}$ est l'image de $\overrightarrow{CA}$ par la rotation d'angle $-\frac\pi2$.</p><div class="sbox">Le triangle $ABC$ est rectangle isocèle en $C(2+i)$.</div>`,
+    tete: R`<p><b>Piège :</b> conclure d'après la figure. Un dessin ne démontre pas la nature du triangle.</p><p><b>Piège :</b> dire « rectangle » sans préciser en quel sommet : c'est celui d'où partent les deux côtés $CA$ et $CB$.</p>`,
+    trou: { q: R`Un triangle $ABC$ avec $CA=CB$ et $CA^2+CB^2=AB^2$ est :`, c: [R`rectangle isocèle en $C$`, R`équilatéral`, R`rectangle en $A$`, R`isocèle en $A$`], ok: 0, why: R`$CA=CB$ : isocèle en $C$. $CA^2+CB^2=AB^2$ : par la réciproque de Pythagore, l'angle en $C$ est droit.` },
+    bareme: { sur: 3, l: [[1, R`Trois longueurs calculées avec les modules`], [1, R`Isocèle en $C$ puis réciproque de Pythagore`], [1, R`Confirmation par le quotient $\frac{b-c}{a-c}=-i$ ou conclusion nette`]] },
+    jury: [
+      { e: R`Conclure d'après la figure.`, p: R`Aucun point : une figure n'est pas une preuve.` },
+      { e: R`Se tromper de signe dans le calcul de $AB$.`, p: R`Réciproque de Pythagore fausse : conclusion fausse.` }
+    ] },
+  { declic: R`« $x=1$ est solution » : on remplace $x$ par $1$, ce qui donne une équation en $a$. Pour chaque valeur de $a$, on factorise par $x-1$ et on résout le trinôme obtenu, dont le discriminant peut être négatif.`,
+    copie: R`<p>$x=1$ est solution si et seulement si $1+2+2a-a^2=0$, soit $a^2-2a-3=0$, soit $(a-3)(a+1)=0$ : $a=3$ ou $a=-1$.</p><p><b>Si $a=-1$ :</b> $x^3+2x^2-2x-1=(x-1)(x^2+3x+1)$. Le trinôme a pour discriminant $5$, d'où $x=\dfrac{-3\pm\sqrt5}2$.</p><p><b>Si $a=3$ :</b> $x^3+2x^2+6x-9=(x-1)(x^2+3x+9)$. Le discriminant vaut $-27=(3i\sqrt3)^2$, d'où $x=\dfrac{-3\pm3i\sqrt3}2$.</p><div class="sbox">$$a=-1:\ \Big\{1,\ \frac{-3\pm\sqrt5}2\Big\},\qquad a=3:\ \Big\{1,\ \frac{-3\pm3i\sqrt3}2\Big\}.$$</div>`,
+    tete: R`<p><b>Piège :</b> ne chercher qu'une valeur de $a$ : l'équation $a^2-2a-3=0$ en a deux.</p><p><b>Piège :</b> écrire $\sqrt{-27}$ sans passer par $i$ : le discriminant est négatif, la racine carrée complexe est $3i\sqrt3$.</p>`,
+    trou: { q: R`Pour $a=3$, le trinôme $x^2+3x+9$ a pour discriminant :`, c: [R`$-27$`, R`$27$`, R`$-9$`, R`$45$`], ok: 0, why: R`$\Delta=3^2-4\times1\times9=9-36=-27$. Il est négatif : les racines sont complexes non réelles, $\frac{-3\pm i\sqrt{27}}2$.` },
+    bareme: { sur: 4, l: [[1, R`Condition $1+2+2a-a^2=0$ et deux valeurs de $a$`], [1, R`Factorisation par $x-1$ pour chaque $a$`], [1, R`Racines réelles du cas $a=-1$`], [1, R`Racines complexes du cas $a=3$ (discriminant négatif)`]] },
+    jury: [
+      { e: R`Ne garder qu'une valeur de $a$.`, p: R`Réponse incomplète : la moitié des points manque.` },
+      { e: R`Donner des racines réelles pour $a=3$.`, p: R`Le discriminant est négatif : résultat faux.` }
+    ] }
+], [
+  { q: R`Si $\delta^2=\Delta$, les racines de $az^2+bz+c$ sont :`, c: [R`$\dfrac{-b\pm\delta}{2a}$`, R`$\dfrac{b\pm\delta}{2a}$`, R`$\dfrac{-b\pm\Delta}{2a}$`, R`$\dfrac{-b\pm\delta}{a}$`], ok: 0, r: "cx-trinome" },
+  { q: R`Pour $\delta=x+iy$ ($x,y$ réels), le carré $\delta^2$ vaut :`, c: [R`$x^2-y^2+2ixy$`, R`$x^2+y^2$`, R`$x^2+y^2+2ixy$`, R`$x^2-y^2$`], ok: 0, r: "cx-sqrt" },
+  { q: R`Un complexe $a+ib$ ($a,b$ réels) est nul si et seulement si :`, c: [R`$a=0$ et $b=0$`, R`$a=0$ ou $b=0$`, R`$a=b$`, R`$|a|=|b|$`], ok: 0, r: "cx-reel" }
+]);
+
+/* ---------- cx-10 · Exponentielle complexe et itération de polynômes ---------- */
+A("cx-10", [
+  { declic: R`« $e^z=1$ » : on écrit $z=x+iy$ et on utilise $e^z=e^xe^{iy}$, dont le module est $e^x$. Le module donne $x$, puis l'argument donne $y$ : un seul complexe, deux équations réelles.`,
+    copie: R`<p>${ph("posons", "Posons")} $z=x+iy$. Par définition $e^z=e^xe^{iy}$, de module $e^x$.</p><p>Si $e^z=1$, le module donne $e^x=1$, donc $x=0$. Il reste $e^{iy}=1$, soit $\cos y=1$ et $\sin y=0$ : $y\in2\pi\mathbb Z$.</p><p>Réciproquement, si $z=2ik\pi$, alors $e^z=e^{2ik\pi}=1$.</p><div class="sbox">$$e^z=1\iff z\in2i\pi\mathbb Z.$$</div><p><b>Vérification.</b> $e^{2i\pi}=\cos2\pi+i\sin2\pi=1$ ✓.</p>`,
+    tete: R`<p><b>Piège :</b> oublier la réciproque. Le raisonnement donne une condition nécessaire ; pour une équivalence il faut montrer que $2ik\pi$ convient.</p><p><b>Piège :</b> croire que $e^z=1$ force $z=0$ comme dans $\mathbb R$ : l'exponentielle complexe n'est pas injective.</p>`,
+    trou: { q: R`Pour $z=x+iy$ ($x,y$ réels), le module de $e^z$ vaut :`, c: [R`$e^x$`, R`$e^y$`, R`$1$`, R`$e^{x+y}$`], ok: 0, why: R`$e^z=e^xe^{iy}$, avec $e^x>0$ et $|e^{iy}|=1$ : le module est $e^x$, sans rapport avec $y$.` },
+    bareme: { sur: 4, l: [[1, R`Écriture $e^z=e^xe^{iy}$ et module $e^x$`], [1, R`Module égal à $1$ donc $x=0$`], [1, R`$\cos y=1$, $\sin y=0$ donc $y\in2\pi\mathbb Z$`], [1, R`Réciproque pour obtenir l'équivalence`]] },
+    jury: [
+      { e: R`Omettre la réciproque.`, p: R`Implication seulement : l'équivalence n'est pas démontrée.` },
+      { e: R`Écrire $|e^z|=e^{x+y}$.`, p: R`Module faux : $y$ n'intervient pas.` }
+    ] },
+  { declic: R`Pour $e^z=Z$, on met $Z$ sous forme exponentielle $\rho e^{i\alpha}$ puis on identifie module et argument avec $e^xe^{iy}$. Le module donne $x=\ln\rho$, l'argument donne $y=\alpha+2k\pi$.`,
+    copie: R`<p>$Z\neq0$ donc $Z=\rho e^{i\alpha}$ avec $\rho=|Z|>0$ et $\alpha$ un argument de $Z$.</p><p>Avec $z=x+iy$ : $e^xe^{iy}=\rho e^{i\alpha}$. Deux complexes non nuls sont égaux si et seulement s'ils ont même module et des arguments égaux modulo $2\pi$ : $e^x=\rho$ et $y\equiv\alpha\ [2\pi]$.</p><div class="sbox">$$e^z=Z\iff z=\ln|Z|+i(\alpha+2k\pi),\ k\in\mathbb Z.$$</div><p><b>Application.</b> $1+i=\sqrt2\,e^{i\pi/4}$, donc $z=\dfrac{\ln2}2+i\Big(\dfrac\pi4+2k\pi\Big)$.</p><p><b>Vérification.</b> $e^{\frac{\ln2}2+i\frac\pi4}=\sqrt2\Big(\dfrac{\sqrt2}2+i\dfrac{\sqrt2}2\Big)=1+i$ ✓.</p>`,
+    tete: R`<p><b>Piège :</b> donner une seule solution. Les arguments sont définis modulo $2\pi$ : il y a une infinité de solutions, indexées par $k\in\mathbb Z$.</p><p><b>Piège :</b> écrire $z=\ln Z$ : le logarithme n'est pas défini pour un complexe quelconque. On écrit $\ln|Z|$, un réel.</p>`,
+    trou: { q: R`Quelle valeur de $|1+i|$ faut-il pour écrire $1+i=\rho e^{i\alpha}$ ?`, c: [R`$\sqrt2$`, R`$2$`, R`$1$`, R`$\dfrac{\sqrt2}2$`], ok: 0, why: R`$|1+i|=\sqrt{1^2+1^2}=\sqrt2$, et $\alpha=\frac\pi4$ car $\cos\alpha=\sin\alpha=\frac{\sqrt2}2$.` },
+    bareme: { sur: 4, l: [[1, R`Forme $Z=\rho e^{i\alpha}$, $\rho>0$`], [1, R`Identification module et argument`], [1, R`Ensemble des solutions avec $k\in\mathbb Z$`], [1, R`Application $1+i=\sqrt2e^{i\pi/4}$ et vérification`]] },
+    jury: [
+      { e: R`Ne donner qu'une solution (pas de $2k\pi$).`, p: R`Ensemble incomplet : la moitié des points manque.` },
+      { e: R`Écrire $z=\ln Z$.`, p: R`Notation non définie sur $\mathbb C^*$ : résultat non rigoureux.` }
+    ] },
+  { declic: R`« $(1+\frac zn)^n\to e^z$ » : écrire $1+\frac zn$ sous forme $r_ne^{i\theta_n}$, puis étudier séparément le module $r_n^n$ et l'argument $n\theta_n$. Deux limites réelles à calculer, avec les équivalents usuels $\ln(1+u)\sim u$ et $\arctan t\sim t$.`,
+    copie: R`<p>${ph("posons", "Posons")} $z=a+ib$. Pour $n>|a|$, $1+\frac zn=\big(1+\frac an\big)+i\frac bn$ a une partie réelle $>0$, donc $1+\frac zn=r_ne^{i\theta_n}$ avec</p>$$r_n=\sqrt{\Big(1+\frac an\Big)^2+\frac{b^2}{n^2}},\qquad\theta_n=\arctan\frac b{n+a}.$$<p>Par Moivre, $\big(1+\frac zn\big)^n=r_n^n\,e^{in\theta_n}$.</p><p><b>Module.</b> $r_n^2=1+u_n$ avec $u_n=\frac{2a}n+\frac{a^2+b^2}{n^2}\to0$, donc $r_n^n=\exp\big(\frac n2\ln(1+u_n)\big)$. Comme $\ln(1+u_n)\sim u_n$ et $\frac n2u_n\to a$, on obtient $r_n^n\to e^a$.</p><p><b>Argument.</b> $\frac b{n+a}\to0$ donc $\theta_n\sim\frac b{n+a}$ et $n\theta_n\to b$. Par continuité de $\cos$ et $\sin$, $e^{in\theta_n}\to e^{ib}$.</p><div class="sbox">$$\Big(1+\frac zn\Big)^n\xrightarrow[n\to+\infty]{}e^ae^{ib}=e^z.$$</div><p><b>Vérification.</b> $b=0$ : on retrouve $\big(1+\frac an\big)^n\to e^a$ ✓.</p>`,
+    tete: R`<p><b>Piège :</b> passer à la limite dans $(1+\frac zn)^n$ en disant « $1+\frac zn\to1$ donc la limite est $1^n=1$ ». C'est une forme indéterminée $1^\infty$.</p><p><b>Piège :</b> oublier la condition $n>|a|$ qui assure que la partie réelle est positive : sans elle, $\arctan$ ne donne pas un argument.</p>`,
+    trou: { q: R`Quand $u_n\to0$, on a l'équivalent :`, c: [R`$\ln(1+u_n)\sim u_n$`, R`$\ln(1+u_n)\sim1$`, R`$\ln(1+u_n)\sim u_n^2$`, R`$\ln(1+u_n)\sim e^{u_n}$`], ok: 0, why: R`C'est la limite usuelle $\frac{\ln(1+u)}u\to1$ quand $u\to0$. Elle sert ici à calculer $\frac n2\ln(1+u_n)\to a$.` },
+    bareme: { sur: 6, l: [[1, R`Forme $r_ne^{i\theta_n}$ pour $n>|a|$ et Moivre`], [1, R`Écriture $r_n^n=\exp(\frac n2\ln(1+u_n))$`], [1, R`Limite du module $e^a$ par l'équivalent de $\ln$`], [1, R`Argument : $\theta_n\sim\frac b{n+a}$ puis $n\theta_n\to b$`], [1, R`Continuité de $\cos$ et $\sin$`], [1, R`Conclusion $e^ae^{ib}=e^z$ et test avec $b=0$`]] },
+    jury: [
+      { e: R`Conclure « $1^n=1$ ».`, p: R`Forme indéterminée traitée comme une limite ordinaire : question perdue.` },
+      { e: R`Ne pas justifier $n>|a|$.`, p: R`Argument non justifié : point d'argument perdu.` }
+    ] },
+  { declic: R`« $|f|^2+|g|^2$ » avec $f=u,\ g=v$ : on pense à l'identité du parallélogramme $|u+v|^2+|u-v|^2=2|u|^2+2|v|^2$. On calcule $f+g$ et $f-g$, qui sont simples.`,
+    copie: R`<p>$f(z)+g(z)=2+2z^2=2(1+z^2)$ et $f(z)-g(z)=2z$.</p><p>Pour $u,v\in\mathbb C$, en développant $|u\pm v|^2=(u\pm v)(\bar u\pm\bar v)$ et en additionnant, les termes croisés s'éliminent :</p>$$|u+v|^2+|u-v|^2=2|u|^2+2|v|^2.$$<p>Avec $u=f(z)$ et $v=g(z)$ : $4|1+z^2|^2+4|z|^2=2|f(z)|^2+2|g(z)|^2$.</p><div class="sbox">$$|f(z)|^2+|g(z)|^2=2|1+z^2|^2+2|z|^2.$$</div><p><b>Conséquence.</b> Le plus grand de deux nombres est au moins égal à leur moyenne : $\max(|f(z)|^2,|g(z)|^2)\geqslant|1+z^2|^2+|z|^2$.</p>`,
+    tete: R`<p><b>Piège :</b> développer $|1+z+z^2|^2$ directement : le calcul est long et plein de termes croisés. La somme et la différence sont immédiates.</p><p><b>Piège :</b> oublier de justifier l'identité du parallélogramme : c'est le point central.</p>`,
+    trou: { q: R`Pour $u,v\in\mathbb C$, $|u+v|^2+|u-v|^2$ vaut :`, c: [R`$2|u|^2+2|v|^2$`, R`$|u|^2+|v|^2$`, R`$2|u+v|^2$`, R`$4|u||v|$`], ok: 0, why: R`En développant, $|u\pm v|^2=|u|^2+|v|^2\pm2\mathrm{Re}(u\bar v)$ : les termes croisés s'annulent et il reste $2|u|^2+2|v|^2$.` },
+    bareme: { sur: 4, l: [[1, R`Somme $2(1+z^2)$ et différence $2z$`], [1, R`Identité du parallélogramme justifiée`], [1, R`Application et division par $2$`], [1, R`Conséquence sur le maximum`]] },
+    jury: [
+      { e: R`Admettre l'identité du parallélogramme sans la démontrer.`, p: R`Résultat central non justifié : point perdu.` },
+      { e: R`Se tromper de facteur : $|2z|^2=2|z|^2$.`, p: R`Identité fausse : $|2z|^2=4|z|^2$.` }
+    ] },
+  { declic: R`« $B$ bornée et stable » : par l'absurde, si un point sort du disque unité on construit une suite dans $B$ dont le module tend vers $+\infty$, ce qui contredit la bornitude. La question 4 donne la croissance du module.`,
+    copie: R`<p>Supposons qu'il existe $z_0\in B$ avec $r=|z_0|>1$.</p><p>Pour $w\in B$, soit $h(w)$ celui de $f(w)$, $g(w)$ de plus grand module : $h(w)\in B$. On pose $z_{k+1}=h(z_k)$ : tous les $z_k$ sont dans $B$.</p><p>Par la question 4 et $|1+z^2|\geqslant|z|^2-1$, dès que $|z_k|\geqslant1$ :</p>$$|z_{k+1}|^2\geqslant|z_k|^2+(|z_k|^2-1)^2.$$<p>Par récurrence, $|z_k|^2\geqslant r^2+k(r^2-1)^2$. Initialisation : $k=0$ ✓. Hérédité : $|z_k|^2\geqslant r^2>1$ et $t\mapsto(t-1)^2$ croît sur $[1,+\infty[$, donc $(|z_k|^2-1)^2\geqslant(r^2-1)^2$, d'où le rang $k+1$.</p><p>Comme $(r^2-1)^2>0$, $|z_k|\to+\infty$ : contradiction avec $B$ bornée.</p><div class="sbox">$$\forall z\in B,\ |z|\leqslant1.$$</div>`,
+    tete: R`<p><b>Premier réflexe :</b> chercher directement une majoration de $|z|$. Rien ne vient : l'hypothèse est la stabilité, donc on itère.</p><p><b>Piège :</b> choisir $f$ ou $g$ « au hasard » à chaque étape. On choisit celui de plus grand module pour que l'inégalité de la question 4 s'applique.</p>`,
+    trou: { q: R`Si $\lvert z\rvert\geqslant1$, l'inégalité triangulaire donne :`, c: [R`$|1+z^2|\geqslant|z|^2-1$`, R`$|1+z^2|\leqslant|z|^2-1$`, R`$|1+z^2|=|z|^2+1$`, R`$|1+z^2|\geqslant|z|^2+1$`], ok: 0, why: R`$|z^2|=|(1+z^2)-1|\leqslant|1+z^2|+1$, donc $|1+z^2|\geqslant|z|^2-1$ : c'est la forme « triangulaire inverse ».` },
+    bareme: { sur: 5, l: [[1, R`Raisonnement par l'absurde et suite $(z_k)$ dans $B$`], [1, R`Choix de $h(w)$ de module maximal`], [1, R`Minoration $|z_{k+1}|^2\geqslant|z_k|^2+(|z_k|^2-1)^2$`], [1, R`Récurrence sur $|z_k|^2\geqslant r^2+k(r^2-1)^2$`], [1, R`Contradiction avec $B$ bornée`]] },
+    jury: [
+      { e: R`Oublier la récurrence et affirmer que $|z_k|\to+\infty$.`, p: R`Minoration non démontrée : conclusion non justifiée.` },
+      { e: R`Ne pas justifier que les $z_k$ restent dans $B$.`, p: R`Contradiction avec la bornitude non valable.` }
+    ] },
+  { declic: R`Vérifier une identité polynomiale : on développe un membre, puis l'autre, et on compare. Pour $g$, on n'a pas à recalculer : $g(z)=f(-z)$, il suffit de remplacer $z$ par $-z$.`,
+    copie: R`<p>$f(z)^2=(1+z+z^2)^2=z^4+2z^3+3z^2+2z+1$, donc $1+f(z)^2=z^4+2z^3+3z^2+2z+2$.</p><p>$(1+z^2)(z^2+2z+2)=z^2+2z+2+z^4+2z^3+2z^2=z^4+2z^3+3z^2+2z+2$ : même résultat ✓.</p><p>Pour $g$ : $g(z)=f(-z)$. En remplaçant $z$ par $-z$ (et $(-z)^2=z^2$) :</p><div class="sbox">$$1+f(z)^2=(1+z^2)(z^2+2z+2),\qquad1+g(z)^2=(1+z^2)(z^2-2z+2).$$</div><p><b>Produit des seconds facteurs.</b> $(z^2+2z+2)(z^2-2z+2)=(z^2+2)^2-(2z)^2=z^4+4$, utile à la question suivante.</p>`,
+    tete: R`<p><b>Piège :</b> se tromper dans le double produit de $(1+z+z^2)^2$ : il y a trois produits croisés $2z$, $2z^2$, $2z^3$.</p><p><b>Piège :</b> recalculer $g$ entièrement. Le changement $z\to-z$ divise le travail par deux.</p>`,
+    trou: { q: R`Pour tout $z$, $g(z)=1-z+z^2$ s'écrit en fonction de $f$ :`, c: [R`$g(z)=f(-z)$`, R`$g(z)=-f(z)$`, R`$g(z)=f(z)+2z$`, R`$g(z)=\overline{f(z)}$`], ok: 0, why: R`$f(-z)=1+(-z)+(-z)^2=1-z+z^2=g(z)$ : c'est ce qui permet de transporter une identité par $z\to-z$.` },
+    bareme: { sur: 4, l: [[1, R`Développement de $f(z)^2$`], [1, R`Développement du produit $(1+z^2)(z^2+2z+2)$`], [1, R`Relation $g(z)=f(-z)$ et identité pour $g$`], [1, R`Produit $z^4+4$ des seconds facteurs`]] },
+    jury: [
+      { e: R`Oublier un produit croisé dans $(1+z+z^2)^2$.`, p: R`Identité non vérifiée : faute de calcul.` },
+      { e: R`Affirmer l'identité pour $g$ sans la justifier.`, p: R`Il faut utiliser $g(z)=f(-z)$ ou refaire le calcul.` }
+    ] },
+  { declic: R`« Déterminer $B$ » : montrer que tout $z\in B$ vérifie $1+z^2=0$ en construisant une suite où $|1+z^2|$ est multiplié par $\sqrt3$ à chaque étape, contre une borne de $|1+w^2|\leqslant2$. Puis vérifier que $\{i,-i\}$ convient.`,
+    copie: R`<p>${ph("posons", "Posons")} $\delta(z)=|1+z^2|$. Par la question 6 : $\delta(f(z))\,\delta(g(z))=\delta(z)^2\,|z^4+4|$.</p><p>Pour $z\in B$, $|z|\leqslant1$ (question 5), donc $|z^4+4|\geqslant4-|z|^4\geqslant3$ : $\delta(f(z))\,\delta(g(z))\geqslant3\,\delta(z)^2$.</p><p>L'un des deux facteurs est donc $\geqslant\sqrt3\,\delta(z)$ (sinon le produit serait $<3\delta(z)^2$). Notons $k(z)\in\{f(z),g(z)\}\subset B$ celui-là, et $z_{m+1}=k(z_m)$ : $\delta(z_m)\geqslant(\sqrt3)^m\delta(z_0)$.</p><p>Or $\delta(w)\leqslant1+|w|^2\leqslant2$ pour $w\in B$ : $\delta(z_0)\leqslant\frac2{(\sqrt3)^m}\to0$. Donc $\delta(z_0)=0$, soit $z_0^2=-1$ et $z_0\in\{i,-i\}$.</p><p>$B$ est non vide, $g(i)=-i$ et $g(-i)=i$ : si l'un est dans $B$, l'autre aussi. Réciproquement $f(i)=i$, $g(i)=-i$, $f(-i)=-i$, $g(-i)=i$ : $\{i,-i\}$ est bornée, non vide, stable.</p><div class="sbox">$$B=\{i,-i\}.$$</div>`,
+    tete: R`<p><b>Piège :</b> oublier la réciproque : on a montré $B\subset\{i,-i\}$, pas que $\{i,-i\}$ convient.</p><p><b>Piège :</b> oublier que $B$ est non vide : sinon $B=\varnothing$ serait compatible avec l'inclusion.</p>`,
+    trou: { q: R`Si $\delta(f(z))\,\delta(g(z))\geqslant3\,\delta(z)^2$ et $\delta(z)>0$, un des deux facteurs vérifie :`, c: [R`$\geqslant\sqrt3\,\delta(z)$`, R`$\geqslant3\,\delta(z)$`, R`$\geqslant\delta(z)^2$`, R`$\geqslant\frac{\delta(z)}{\sqrt3}$`], ok: 0, why: R`Si les deux étaient $<\sqrt3\,\delta(z)$, leur produit serait $<3\delta(z)^2$ : contradiction. Le plus grand est donc $\geqslant\sqrt3\,\delta(z)$.` },
+    bareme: { sur: 6, l: [[1, R`Produit $\delta(f(z))\delta(g(z))=\delta(z)^2|z^4+4|$`], [1, R`Minoration $|z^4+4|\geqslant3$ avec $|z|\leqslant1$`], [1, R`Existence d'un facteur $\geqslant\sqrt3\,\delta(z)$ et suite $(z_m)$`], [1, R`Majoration $\delta\leqslant2$ et conclusion $\delta(z_0)=0$`], [1, R`$B=\{i,-i\}$ par non-vacuité et symétrie $g(i)=-i$`], [1, R`Réciproque : $\{i,-i\}$ stable, bornée, non vide`]] },
+    jury: [
+      { e: R`Oublier la réciproque.`, p: R`Seule l'inclusion est démontrée, pas l'égalité.` },
+      { e: R`Oublier que $B$ est non vide.`, p: R`$B=\varnothing$ reste possible : conclusion incomplète.` }
+    ] }
+], [
+  { q: R`Pour $z=x+iy$ ($x,y$ réels), le module de $e^z$ vaut :`, c: [R`$e^x$`, R`$e^y$`, R`$1$`, R`$e^{x+y}$`], ok: 0, r: "cx-exp" },
+  { q: R`Deux complexes non nuls sont égaux si et seulement si :`, c: [R`même module et arguments égaux modulo $2\pi$`, R`même module`, R`même argument`, R`même partie réelle`], ok: 0, r: "cx-arg" },
+  { q: R`L'identité $|u+v|^2$ s'obtient en développant :`, c: [R`$(u+v)(\bar u+\bar v)$`, R`$(u+v)^2$`, R`$u^2+v^2$`, R`$(u+v)(u-v)$`], ok: 0, r: "cx-module" }
+]);
 })();
