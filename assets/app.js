@@ -232,24 +232,34 @@ const UIDEF = { rmots: true, rtab: true, decode: "onglets", cor: "copie", page: 
 const UI = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem("lemme-ui") || "{}") || {}; } catch (_) {} return Object.assign({}, UIDEF, o); })();
 {
   const sb = $("#set-toggle"), sp = $("#setpop");
-  const OPTS = [
-    ["Rappels de cours", null, [["rmots", "Mots du corrigé cliquables"], ["rtab", "Languette au bord de l'écran"]]],
-    ["Données et but", "decode", [["onglets", "Onglets dans l'énoncé"], ["marge", "Annotations en marge"], ["plis", "Volets repliés"]]],
-    ["Corrigé", "cor", [["copie", "Copie de concours"], ["classique", "Classique"]]],
-    ["Page d'exercice", "page", [["colonnes", "Deux colonnes"], ["reglable", "Séparation réglable"], ["tiroir", "Énoncé dans un tiroir"]]],
-    ["Aides à la rédaction", null, [["deux", "Ma copie / Dans ma tête"], ["declic", "Pourquoi j'y pense"], ["phrases", "Phrases types surlignées"], ["hs", "Indices gradués"], ["trou", "Étapes à trous"], ["bareme", "Barème"], ["jury", "Rapport du jury"], ["prereq", "Test de prérequis"], ["annales", "Annales liées"], ["suivi", "Suivi élève et parents"]]]
-  ];
-  const paint = () => { sp.innerHTML = `<p class="sph">Paramètres</p>` + OPTS.map(([t, k, os]) => `<p>${t}</p>` + os.map(([v, l]) => k
-      ? `<button type="button" data-ui="${k}" data-v="${v}" aria-pressed="${UI[k] === v}"><i class="rd"></i>${l}</button>`
-      : `<button type="button" data-ui="${v}" aria-pressed="${!!UI[v]}"><i class="sw ${UI[v] ? "on" : ""}"></i>${l}</button>`).join("")).join("")
-      + `<p class="setk"><kbd>R</kbd> rappels · <kbd>E</kbd> énoncé en tiroir</p>`; };
+  const AIDES = [["deux", "Ma copie / Dans ma tête", "Deux lectures du même corrigé."], ["declic", "Pourquoi j'y pense", "Le déclic de l'étape, en languette."], ["phrases", "Phrases types", "Les tournures de rédaction surlignées."], ["hs", "Indices gradués", "Trois indices, du plus vague au plus précis."], ["trou", "Étapes à trous", "Une question avant de voir le corrigé."], ["bareme", "Barème", "Les points de la question, en languette."], ["jury", "Rapport du jury", "Les erreurs qui coûtent des points."], ["prereq", "Test de prérequis", "Trois questions avant de commencer."], ["annales", "Annales liées", "Les questions de concours où l'outil sert."], ["suivi", "Suivi élève et parents", "Carte des chapitres dans le tableau de bord."]];
+  let view = "main";
+  const sw = (k, l, d) => `<button type="button" class="sp-sw" data-ui="${k}" role="switch" aria-checked="${!!UI[k]}"><span class="sp-l"><b>${l}</b>${d ? `<small>${d}</small>` : ""}</span><i class="tg" aria-hidden="true"></i></button>`;
+  const seg = (k, lab, os) => `<div class="sp-f"><span class="sp-t">${lab}</span><div class="sp-seg" role="radiogroup" aria-label="${lab}">${os.map(([v, l]) => `<button type="button" role="radio" data-ui="${k}" data-v="${v}" aria-checked="${UI[k] === v}">${l}</button>`).join("")}</div></div>`;
+  const back = t => `<div class="sp-h"><button type="button" class="sp-back" data-view="main" aria-label="Retour aux paramètres">‹</button><b>${t}</b></div>`;
+  const paint = () => {
+    const nOn = AIDES.filter(([k]) => UI[k]).length;
+    sp.innerHTML = view === "aides"
+      ? back("Aides à la rédaction") + `<div class="sp-b"><div class="sp-all"><button type="button" data-all="1">Tout activer</button><button type="button" data-all="0">Tout couper</button></div><div class="sp-card">${AIDES.map(([k, l, d]) => sw(k, l, d)).join("")}</div></div>`
+      : view === "keys"
+        ? back("Raccourcis clavier") + `<div class="sp-b">${KEYS.map(([g, l]) => `<p class="sp-t">${g}</p><div class="sp-card sp-keys">${l.map(([k, d]) => `<div><span>${d}</span><span>${k.split(" ").map(x => x === "à" ? x : `<kbd>${x}</kbd>`).join(" ")}</span></div>`).join("")}</div>`).join("")}</div>`
+        : `<div class="sp-h"><b>Paramètres</b><kbd title="Raccourci">S</kbd></div><div class="sp-b">`
+          + seg("cor", "Corrigé", [["copie", "Copie de concours"], ["classique", "Classique"]])
+          + seg("page", "Disposition", [["colonnes", "Colonnes"], ["reglable", "Réglable"], ["tiroir", "Tiroir"]])
+          + seg("decode", "Données et but", [["onglets", "Onglets"], ["marge", "Marge"], ["plis", "Volets"]])
+          + `<p class="sp-t">Rappels de cours</p><div class="sp-card">${sw("rmots", "Mots du corrigé cliquables")}${sw("rtab", "Languettes au bord de l'écran")}</div>`
+          + `<div class="sp-card sp-navs"><button type="button" class="sp-nav" data-view="aides"><span class="sp-l"><b>Aides à la rédaction</b><small>${nOn} sur ${AIDES.length} activées</small></span><i aria-hidden="true">›</i></button><button type="button" class="sp-nav" data-view="keys"><span class="sp-l"><b>Raccourcis clavier</b><small>Touche ? sur une page d'exercice</small></span><i aria-hidden="true">›</i></button></div></div>`;
+  };
   if (sb && sp) {
     paint();
-    sb.addEventListener("click", ev => { ev.stopPropagation(); const o = sp.hidden; sp.hidden = !o; sb.setAttribute("aria-expanded", String(o)); const tp = $("#themepop"); if (tp) tp.hidden = true; });
+    sb.addEventListener("click", ev => { ev.stopPropagation(); const o = sp.hidden; if (o) { view = "main"; paint(); } sp.hidden = !o; sb.setAttribute("aria-expanded", String(o)); const tp = $("#themepop"); if (tp) tp.hidden = true; });
     sp.addEventListener("click", ev => {
       ev.stopPropagation();
-      const b = ev.target.closest("[data-ui]"); if (!b) return;
-      const k = b.dataset.ui; UI[k] = b.dataset.v !== undefined ? b.dataset.v : !UI[k];
+      const vw = ev.target.closest("[data-view]"); if (vw) { view = vw.dataset.view; paint(); const f = $("button", sp); if (f) f.focus(); return; }
+      const al = ev.target.closest("[data-all]");
+      const b = ev.target.closest("[data-ui]"); if (!b && !al) return;
+      if (al) AIDES.forEach(([k]) => { UI[k] = al.dataset.all === "1"; });
+      else { const k = b.dataset.ui; UI[k] = b.dataset.v !== undefined ? b.dataset.v : !UI[k]; }
       try { localStorage.setItem("lemme-ui", JSON.stringify(UI)); } catch (_) {}
       paint(); const hh = location.hash.slice(1); if (/^e-/.test(hh)) uiRefresh(); else if (hh === "tableau") render(true);
     });
@@ -494,20 +504,20 @@ const PIL = () => DS.get("lemme-pilot", { pre: {}, trou: {} });
 const pilSave = f => { const o = PIL(); f(o); DS.set("lemme-pilot", o); };
 const VUE = () => { try { return localStorage.getItem("lemme-vue") || "tete"; } catch (_) { return "tete"; } };
 function stepAids(e, st, i, veil) {
-  const declic = st.declic && UI.declic ? `<div class="declic"><span class="dk">Pourquoi j'y pense</span><div class="prose">${annotate(st.declic, e)}</div></div>` : "";
+  const declic = "";
   let hint = "";
-  if (st.hs && UI.hs && hintsOn()) hint = `<div class="hints">${st.hs.map((h, k) => `<div class="hstep" data-hk="${k}" hidden><span class="hn">Indice ${k + 1}</span><div class="prose">${annotate(h, e)}</div></div>`).join("")}<button type="button" class="btn btn-ghost btn-sm hnext" data-hnext><span class="hint-ico">?</span>Indice 1 sur ${st.hs.length}</button></div>`;
+  if (st.hs && UI.hs && hintsOn()) hint = `<div class="hints">${st.hs.map((h, k) => `<div class="hstep" data-hk="${k}" hidden><span class="hn">Indice ${k + 1}</span><div class="prose">${annotate(h, e)}</div></div>`).join("")}<button type="button" class="btn btn-ghost btn-sm hnext" data-hnext><span class="hint-ico">?</span>Indice 1 sur ${st.hs.length} <kbd>I</kbd></button></div>`;
   else if (st.h && hintsOn()) hint = `<details class="hint"${veil ? " open" : ""}><summary><span class="hint-ico">?</span>Indice</summary><div class="prose">${annotate(st.h, e)}</div></details>`;
   const done = (PIL().trou || {})[e.id + ":" + i];
   const trouOn = !!(st.trou && UI.trou && !done);
-  const trou = trouOn ? `<div class="trou" data-trou><p class="tk">À toi de compléter</p><div class="prose tq">${annotate(st.trou.q, e)}</div><div class="tc">${st.trou.c.map((c, k) => `<button type="button" data-tc="${k}">${c}</button>`).join("")}</div><div class="tfb prose" hidden></div><button type="button" class="linkbtn" data-tskip>Passer et voir le corrigé</button></div>` : "";
-  const tete = annotate(st.b, e) + (st.tete && UI.deux ? `<div class="tete"><span class="dk">Ce qu'on essaie d'abord (et pourquoi ça coince)</span>${annotate(st.tete, e)}</div>` : "");
+  const trou = trouOn ? `<div class="trou" data-trou><p class="tk">À toi de compléter</p><div class="prose tq">${annotate(st.trou.q, e)}</div><div class="tc">${st.trou.c.map((c, k) => `<button type="button" data-tc="${k}"><kbd>${k + 1}</kbd>${c}</button>`).join("")}</div><div class="tfb prose" hidden></div><button type="button" class="linkbtn" data-tskip>Passer et voir le corrigé</button></div>` : "";
+  const tete = annotate(st.b, e);
   const two = st.copie && UI.deux, v = VUE();
   let body = two
-    ? `<div class="vue2" role="tablist" aria-label="Lecture du corrigé"><button type="button" role="tab" data-vue-b="tete" aria-selected="${v === "tete"}">Dans ma tête</button><button type="button" role="tab" data-vue-b="copie" aria-selected="${v === "copie"}">Ce que j'écris sur ma copie</button></div><div class="prose" data-vue="tete"${v === "tete" ? "" : " hidden"}>${tete}</div><div class="prose copie-v${UI.phrases ? " ph-on" : ""}" data-vue="copie"${v === "copie" ? "" : " hidden"}>${annotate(st.copie, e)}${UI.phrases ? `<button type="button" class="linkbtn phall" data-phall>Toutes les phrases types</button>` : ""}</div>`
+    ? `<div class="vue2" role="tablist" aria-label="Lecture du corrigé"><button type="button" role="tab" data-vue-b="tete" aria-selected="${v === "tete"}">Dans ma tête <kbd>T</kbd></button><button type="button" role="tab" data-vue-b="copie" aria-selected="${v === "copie"}">Ce que j'écris sur ma copie <kbd>C</kbd></button></div><div class="prose" data-vue="tete"${v === "tete" ? "" : " hidden"}>${tete}</div><div class="prose copie-v${UI.phrases ? " ph-on" : ""}" data-vue="copie"${v === "copie" ? "" : " hidden"}>${annotate(st.copie, e)}${UI.phrases ? `<button type="button" class="linkbtn phall" data-phall>Toutes les phrases types</button>` : ""}</div>`
     : `<div class="prose">${tete}</div>`;
-  if (st.bareme && UI.bareme) body += `<details class="bareme" open><summary>Barème de la question <span class="pts">${st.bareme.sur} points</span></summary><ul>${st.bareme.l.map(([p, t]) => `<li><b>${p} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul></details>`;
-  if (st.jury && UI.jury) body += `<div class="jury"><p class="jh">Rapport du jury <span>remarques fréquentes des correcteurs, reformulées</span></p>${st.jury.map(j => `<div class="ji"><p class="je">${annotate(j.e, e)}</p><p class="jp">${annotate(j.p, e)}</p></div>`).join("")}</div>`;
+  if (false) body += `<details class="bareme" open><summary>Barème de la question <span class="pts">${st.bareme.sur} points</span></summary><ul>${st.bareme.l.map(([p, t]) => `<li><b>${p} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul></details>`;
+  if (false) body += `<div class="jury"><p class="jh">Rapport du jury <span>remarques fréquentes des correcteurs, reformulées</span></p>${st.jury.map(j => `<div class="ji"><p class="je">${annotate(j.e, e)}</p><p class="jp">${annotate(j.p, e)}</p></div>`).join("")}</div>`;
   const hide = trouOn || veil;
   body = hide ? `${trouOn ? "" : `<button type="button" class="btn btn-ghost reveal" data-reveal>Voir le corrigé</button>`}<div class="veiled" hidden>${body}</div>` : body;
   const raps = (st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : "";
@@ -518,7 +528,7 @@ function bindAids(e, st, i, host, unveil) {
   if (hb) hb.addEventListener("click", () => {
     const next = $(".hstep[hidden]", host); if (next) next.hidden = false;
     const left = $$(".hstep[hidden]", host).length, k = st.hs.length - left;
-    if (!left) hb.remove(); else hb.innerHTML = `<span class="hint-ico">?</span>Indice ${k + 1} sur ${st.hs.length}`;
+    if (!left) hb.remove(); else hb.innerHTML = `<span class="hint-ico">?</span>Indice ${k + 1} sur ${st.hs.length} <kbd>I</kbd>`;
   });
   const tr = $("[data-trou]", host);
   if (tr) {
@@ -541,10 +551,42 @@ function bindAids(e, st, i, host, unveil) {
   $$(".ph-on [data-ph]", host).forEach(x => { x.tabIndex = 0; x.setAttribute("role", "button"); x.title = "Phrase type : voir quand l'utiliser"; x.addEventListener("click", () => openPhrases(x.dataset.ph)); x.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openPhrases(x.dataset.ph); } }); });
   const pa = $("[data-phall]", host); if (pa) pa.addEventListener("click", () => openPhrases());
 }
+/* Raccourcis de la page d'exercice. Renvoie true si la touche a servi. */
+const KEYS = [
+  ["Navigation", [["← →", "étape précédente / suivante"], ["F", "mode concentration"], ["/", "chercher"], ["E", "énoncé en tiroir"], ["S", "paramètres"], ["?", "cette aide"], ["Échap", "fermer"]]],
+  ["Lire le corrigé", [["T", "« Dans ma tête »"], ["C", "« Ce que j'écris sur ma copie »"], ["V", "basculer entre les deux"], ["I", "indice suivant"], ["1 à 4", "répondre à l'étape à trous"], ["L", "phrases types"]]],
+  ["Languettes", [["R", "rappels de cours"], ["P", "pourquoi j'y pense"], ["A", "fausses pistes"], ["B", "barème"], ["J", "rapport du jury"]]],
+  ["Exercice", [["M", "marquer comme fait"], ["G", "garder pour plus tard"]]]
+];
+function openKeys() {
+  if ($("#drawer")) return;
+  const dr = document.createElement("aside"); dr.className = "drawer keysdr"; dr.dataset.kind = "keys"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer">${I.close}</button><span class="kicker">Aide</span><h3 id="dr-t">Raccourcis clavier</h3>${KEYS.map(([g, l]) => `<section class="kg"><h4>${g}</h4><dl>${l.map(([k, d]) => `<dt>${k.split(" ").map(x => /^(à|\/)$/.test(x) && x !== "/" ? x : `<kbd>${x}</kbd>`).join(" ")}</dt><dd>${d}</dd>`).join("")}</dl></section>`).join("")}`;
+  mountDrawer(dr);
+}
+function exKey(e) {
+  const k = e.key, K = k.length === 1 ? k.toUpperCase() : k;
+  if (K === "S") { const b = $("#set-toggle"); if (b) { e.preventDefault(); b.click(); return true; } }
+  if (!/^e-/.test(location.hash.slice(1))) return false;
+  const P = $("#player"), click = el => { if (!el) return false; e.preventDefault(); el.click(); return true; };
+  if (K === "E" && $(".split.pm-tiroir")) { e.preventDefault(); enDrawer(); return true; }
+  const edge = EDGES.find(x => x[2] === K);
+  if (edge && $(`#edgetabs [data-edge="${edge[0]}"]`)) { e.preventDefault(); openEdge(edge[0]); return true; }
+  if (K === "T") return click(P && $('[data-vue-b="tete"]', P));
+  if (K === "C") return click(P && $('[data-vue-b="copie"]', P));
+  if (K === "V") return click(P && $('[data-vue-b][aria-selected="false"]', P));
+  if (K === "I") return click(P && $("[data-hnext]", P));
+  if (K === "L" && UI.phrases && P && $(".ph-on", P)) { e.preventDefault(); openPhrases(); return true; }
+  if (/^[1-4]$/.test(k)) return click(P && $(`[data-trou] [data-tc="${+k - 1}"]:not(:disabled)`, P));
+  if (K === "M") return click($('.exhead .donebox [data-done="1"]'));
+  if (K === "G") return click($(".exhead [data-fav]"));
+  return false;
+}
 function openPhrases(id) {
   const P = window.LEMME.PHRASES || {}; if ($("#drawer")) return;
   const dr = document.createElement("aside"); dr.className = "drawer phrases"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
-  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer">${I.close}</button><span class="kicker">Rédaction</span><h3 id="dr-t">Les phrases types</h3><p class="phi">Les tournures qui structurent une copie. Chacune annonce au correcteur ce que tu fais.</p>` + Object.entries(P).map(([k, x]) => `<section class="ph-i${k === id ? " on" : ""}" id="ph-${k}"><h4>${esc(x.t)}</h4><p class="phq">${x.q}</p><p class="phx">${x.ex}</p></section>`).join("");
+  dr.dataset.kind = "phr";
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer">${I.close}</button><span class="kicker">Rédaction <kbd>L</kbd></span><h3 id="dr-t">Les phrases types</h3><p class="phi">Les tournures qui structurent une copie. Chacune annonce au correcteur ce que tu fais.</p>` + Object.entries(P).map(([k, x]) => `<section class="ph-i${k === id ? " on" : ""}" id="ph-${k}"><h4>${esc(x.t)}</h4><p class="phq">${x.q}</p><p class="phx">${x.ex}</p></section>`).join("");
   mountDrawer(dr);
   (typeset(dr) || Promise.resolve()).then(() => { const on = $(".ph-i.on", dr); if (on) on.scrollIntoView({ block: "center" }); });
 }
@@ -577,15 +619,17 @@ const ANNTXT = new Map();
 function annLinks(e) {
   const keys = (e.themes || []).map(t => [t, norm(t)]);
   return EXERCISES.filter(x => x.subj === "annales").map(x => {
-    let txt = ANNTXT.get(x.id); if (!txt) { txt = norm(plainOf(x.enonce) + " " + x.steps.map(st => plainOf(st.t + " " + st.b)).join(" ")); ANNTXT.set(x.id, txt); }
-    const hit = keys.filter(([, k]) => txt.includes(k));
-    return { x, hit: hit.map(([t]) => t), n: hit.reduce((a, [, k]) => a + txt.split(k).length - 1, 0) };
-  }).filter(r => r.hit.length).sort((a, b) => b.hit.length - a.hit.length || b.n - a.n).slice(0, 4);
+    let T = ANNTXT.get(x.id); if (!T) { T = x.steps.map(st => norm(plainOf(st.t + " " + st.b))); ANNTXT.set(x.id, T); }
+    let best = -1, bh = [], bn = 0, tot = new Set();
+    T.forEach((txt, i) => { const h = keys.filter(([, k]) => txt.includes(k)); h.forEach(([t]) => tot.add(t)); const n = h.reduce((a, [, k]) => a + txt.split(k).length - 1, 0); if (h.length > bh.length || (h.length === bh.length && n > bn)) { best = i; bh = h.map(([t]) => t); bn = n; } });
+    return { x, i: best, hit: [...tot], bh, n: bn };
+  }).filter(r => r.i >= 0).sort((a, b) => b.hit.length - a.hit.length || b.n - a.n).slice(0, 4);
 }
 function annSection(e) {
   if (!e.themes || !UI.annales) return "";
   const L = annLinks(e);
-  return `<section class="more annl"><h2>Ce thème dans les annales</h2><p class="annl-s">${L.length ? "Sujets de concours du site qui utilisent les mêmes outils que cette khôlle." : "Aucun sujet de concours du site n'utilise encore ces outils."}</p>${L.length ? `<div class="annl-g">${L.map(r => { const c = ANN()[r.x.chap] || {}; return `<a class="annl-i" href="#e-${r.x.id}"><span class="annl-e">${esc(c.epreuve || "Annale")}</span><b>${ttl(r.x)}</b><span class="annl-k">${r.hit.map(esc).join(" · ")}<em>${r.n} passage${r.n > 1 ? "s" : ""}</em></span></a>`; }).join("")}</div>` : ""}</section>`;
+  const qlab = (x, i) => { const st = x.steps[i], q = st.q || stepQ(x, i); return q ? `Question ${q}` : `Étape ${i + 1}`; };
+  return `<section class="more annl"><h2>Ce thème dans les annales</h2><p class="annl-s">${L.length ? "Un clic t'emmène directement à la question du sujet où l'outil sert." : "Aucun sujet de concours du site n'utilise encore ces outils."}</p>${L.length ? `<div class="annl-g">${L.map(r => { const c = ANN()[r.x.chap] || {}; return `<a class="annl-i" href="#e-${r.x.id}" data-jump="${r.x.id}" data-jumpi="${r.i}"><span class="annl-e">${esc(c.epreuve || "Annale")}</span><b>${ttl(r.x)}</b><span class="annl-q">${qlab(r.x, r.i)} · ${stt(r.x.steps[r.i].t)}</span><span class="annl-k">${r.bh.map(esc).join(" · ")}</span></a>`; }).join("")}</div>` : ""}</section>`;
 }
 function suiviHtml(M) {
   const conf = DS.get("lemme-conf", {}), pil = PIL();
@@ -663,23 +707,46 @@ function rapWire(e, st, host, last) {
     if (UI.rtab) fold.remove();
     else if (found.size) { $$(".rchip", fold).forEach(c => { if (found.has(c.dataset.r)) c.remove(); }); const left = $$(".rchip", fold).length; if (!left) fold.remove(); else $("summary", fold).textContent = `Autres rappels (${left})`; }
   }
-  rapTab(e, ids);
+  edgeTabs(e, last ? {} : st || {}, ids);
 }
-function rapTab(e, ids) {
-  let t = $("#raptab");
+/* Languettes au bord droit : Rappels, Déclic, Fausses pistes, Barème, Jury (celles qui existent pour l'étape) */
+let EDGE = null;
+const EDGES = [
+  ["rap", "Rappels", "R"], ["declic", "Déclic", "P"], ["tete", "Fausses pistes", "A"], ["bareme", "Barème", "B"], ["jury", "Jury", "J"]
+];
+function edgeTabs(e, st, ids) {
+  EDGE = { e, st: st || {}, ids };
   const all = [...new Set(e.steps.flatMap(x => x.rappels || []))].filter(r => RAPPELS[r]);
-  if (!UI.rtab || !all.length) { if (t) t.remove(); return; }
-  if (!t) { t = document.createElement("button"); t.id = "raptab"; t.type = "button"; document.body.append(t); t.addEventListener("click", openRapList); }
-  t._ex = e; t._ids = ids;
-  t.innerHTML = `<span>Rappels</span>${ids.length ? `<b>${ids.length}</b>` : ""}`;
-  t.title = "Rappels de cours (R)";
-  t.setAttribute("aria-label", `Rappels de cours${ids.length ? `, ${ids.length} pour cette étape` : ""}. Touche R.`);
+  const S = EDGE.st;
+  const on = { rap: UI.rtab && all.length, declic: UI.declic && S.declic, tete: UI.deux && S.tete, bareme: UI.bareme && S.bareme, jury: UI.jury && S.jury };
+  const badge = { rap: ids.length || "", declic: "", tete: "", bareme: S.bareme ? S.bareme.sur + " pts" : "", jury: S.jury ? S.jury.length : "" };
+  let box = $("#edgetabs");
+  const list = EDGES.filter(([k]) => on[k]);
+  document.body.classList.toggle("has-edge", !!list.length);
+  if (!list.length) { if (box) box.remove(); return; }
+  if (!box) { box = document.createElement("nav"); box.id = "edgetabs"; box.setAttribute("aria-label", "Compléments de l'étape"); document.body.append(box); box.addEventListener("click", ev => { const b = ev.target.closest("[data-edge]"); if (b) openEdge(b.dataset.edge); }); }
+  box.innerHTML = list.map(([k, l, key]) => `<button type="button" class="edge edge-${k}" data-edge="${k}" title="${l} (touche ${key})" aria-label="${l}, touche ${key}"><span>${l}</span>${badge[k] !== "" ? `<b>${badge[k]}</b>` : ""}</button>`).join("");
+}
+function openEdge(k) {
+  if (!EDGE) return;
+  if (k === "rap") return openRapList();
+  const { e, st } = EDGE; if ($("#drawer")) return;
+  const key = (EDGES.find(x => x[0] === k) || [])[2] || "";
+  let kick = "", h = "", body = "";
+  if (k === "declic" && st.declic) { kick = "Pourquoi j'y pense"; h = stt(st.t); body = `<div class="body course">${annotate(st.declic, e, null, true)}</div>`; }
+  else if (k === "tete" && st.tete) { kick = "Ce qu'on essaie d'abord"; h = "Fausses pistes et pièges"; body = `<div class="body course">${annotate(st.tete, e, null, true)}</div>`; }
+  else if (k === "bareme" && st.bareme) { kick = "Barème de la question"; h = `${st.bareme.sur} points`; body = `<ul class="bar-l">${st.bareme.l.map(([pt, t]) => `<li><b>${pt} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul>`; }
+  else if (k === "jury" && st.jury) { kick = "Rapport du jury"; h = "Ce qui coûte des points"; body = `<p class="jsub">Remarques fréquentes des correcteurs, reformulées.</p>${st.jury.map(j => `<div class="ji"><p class="je">${annotate(j.e, e)}</p><p class="jp">${annotate(j.p, e)}</p></div>`).join("")}`; }
+  else return;
+  const dr = document.createElement("aside"); dr.className = "drawer edgedr edgedr-" + k; dr.dataset.kind = k; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer">${I.close}</button><span class="kicker">${kick} <kbd>${key}</kbd></span><h3 id="dr-t">${h}</h3>${body}`;
+  mountDrawer(dr); typeset(dr);
 }
 function openRapList() {
-  const t = $("#raptab"); if (!t || $("#drawer")) return;
-  const e = t._ex, ids = t._ids || [];
+  if (!EDGE || $("#drawer")) return;
+  const e = EDGE.e, ids = EDGE.ids || [];
   const rest = [...new Set(e.steps.flatMap(x => x.rappels || []))].filter(r => RAPPELS[r] && !ids.includes(r));
-  const dr = document.createElement("aside"); dr.className = "drawer raplist"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  const dr = document.createElement("aside"); dr.className = "drawer raplist"; dr.dataset.kind = "rap"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
   dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer les rappels">${I.close}</button><span class="kicker">Rappels de cours</span><h3 id="dr-t">${ids.length ? "Pour cette étape" : "Dans cet exercice"}</h3>`
     + ids.map((id, k) => `<section class="rl-item"><h4><span class="rl-n">${k + 1}</span>${esc(RAPPELS[id].t)}</h4><div class="body course">${annotate(RAPPELS[id].b, e, null, true)}</div></section>`).join("")
     + (rest.length ? `<div class="rl-more">${ids.length ? `<h4>Ailleurs dans l'exercice</h4>` : ""}<div class="rappels">${rest.map(r => rchip(r, e)).join("")}</div></div>` : "");
@@ -1054,6 +1121,8 @@ function openRappel(id, exId, src) {
   const p = typeset(dr); (p || Promise.resolve()).then(() => revealUsed(dr));
 }
 document.addEventListener("click", e => {
+  const jp = e.target.closest("[data-jump]");
+  if (jp) { try { sessionStorage.setItem("lemme-resume", jp.dataset.jump); sessionStorage.setItem("lemme-jump", "1"); } catch (_) {} DS.set("lemme-last", { id: jp.dataset.jump, i: +jp.dataset.jumpi }); }
   const cr = e.target.closest("[data-copyres]");
   if (cr) { const t = ($("[data-resume]") || {}).textContent || ""; try { navigator.clipboard.writeText(t).then(() => { cr.textContent = "Résumé copié"; }, () => {}); } catch (_) {} return; }
   const b = e.target.closest(".rchip, .rterm"); if (!b) return;
@@ -1437,6 +1506,8 @@ function mountPlayer(e, host) {
     try { if (sessionStorage.getItem("lemme-resume") === e.id) { sessionStorage.removeItem("lemme-resume"); const l = DS.get("lemme-last", null); if (l && l.id === e.id) k = Math.min(l.i, n); } } catch (_) {}
     if (e.prereq && UI.prereq && !(PIL().pre || {})[e.id] && !k) { prereqScreen(e, host, () => show(0, 1)); return; }
     show(k, 0, true);
+    let jump = false; try { jump = sessionStorage.getItem("lemme-jump") === "1"; sessionStorage.removeItem("lemme-jump"); } catch (_) {}
+    if (jump) setTimeout(() => { const pb = host.closest(".panelbox"); if (pb) pb.scrollIntoView({ block: "start" }); }, 350);
   }
   const seen = new Set();
   function show(i, dir, quiet) { if (quiet) return showNow(i, dir, quiet); smooth(() => showNow(i, dir, quiet)); }
@@ -1461,16 +1532,17 @@ function mountPlayer(e, host) {
             : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3>${stepAids(e, st, state.i, veil)}`}
         </div>
       </div>
-      ${copie ? `<div class="nav copybar">${topnav}<span class="ccount">${last ? "Bilan" : `${state.i + 1} / ${n}`}</span><span class="cgrow"></span><button class="btn btn-ghost btn-sm cprev" type="button" data-step="-1" aria-label="Étape précédente" ${state.i === 0 ? "disabled" : ""}>${I.left}</button>${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}</div>` : `
+      ${copie ? `<div class="nav copybar">${topnav}<span class="ccount">${last ? "Bilan" : `${state.i + 1} / ${n}`}</span><span class="cgrow"></span><button type="button" class="ckeys" data-keys aria-label="Raccourcis clavier" title="Raccourcis clavier (?)">?</button><button class="btn btn-ghost btn-sm cprev" type="button" data-step="-1" aria-label="Étape précédente" ${state.i === 0 ? "disabled" : ""}>${I.left}</button>${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}</div>` : `
       <div class="nav">
         <button class="btn btn-ghost" type="button" data-step="-1" ${state.i === 0 ? "disabled style=\"opacity:.4;cursor:default\"" : ""}>${I.left} Précédent</button>
-        <span class="keys-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> naviguer · <kbd>F</kbd> concentration · <kbd>/</kbd> chercher${UI.rtab ? " · <kbd>R</kbd> rappels" : ""}</span>
+        <span class="keys-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> naviguer · <kbd>F</kbd> concentration · <kbd>/</kbd> chercher · <kbd>?</kbd> tous les raccourcis</span>
         ${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}
       </div>`}`;
     const rv = $("[data-reveal]", host); if (rv) rv.addEventListener("click", () => { seen.add(state.i); rv.remove(); const v = $(".veiled", host); v.hidden = false; const h = $(".hint", host); if (h) h.open = false; typeset(v); });
     $$("[data-q]", host).forEach(b => b.addEventListener("click", () => { const k = e.steps.findIndex(x => String(x.q) === b.dataset.q); show(k, k >= state.i ? 1 : -1); }));
     $$("[data-go]", host).forEach(b => b.addEventListener("click", () => show(+b.dataset.go, +b.dataset.go >= state.i ? 1 : -1)));
     const big = $("[data-big]", host); if (big) big.addEventListener("click", () => openBig(e));
+    const kb = $("[data-keys]", host); if (kb) kb.addEventListener("click", openKeys);
     $$("[data-step]", host).forEach(b => b.addEventListener("click", () => {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
@@ -1502,14 +1574,15 @@ function mountPlayer(e, host) {
   intro();
 }
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape") { if ($(".split.en-open") && !$("#drawer")) { enDrawer(false); return; } closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) popDrawer(); else if ($("#bigread")) closeBig(); return; }
+  if (e.key === "Escape") { const spp = $("#setpop"); if (spp && !spp.hidden) { spp.hidden = true; const sbt = $("#set-toggle"); sbt.setAttribute("aria-expanded", "false"); sbt.focus(); return; } if ($(".split.en-open") && !$("#drawer")) { enDrawer(false); return; } closeMenus(); closeTip(); results.hidden = true; if ($("#drawer")) popDrawer(); else if ($("#bigread")) closeBig(); return; }
   const t = e.target, typing = t && (t.matches("input,textarea,select") || t.isContentEditable);
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openSearch(); return; }
+  if (!typing && !e.altKey && !e.ctrlKey && !e.metaKey && $("#drawer") && drawerStack.length === 1) { const kd = drawerStack[0].dr.dataset.kind, hit = EDGES.find(x => x[0] === kd) || (kd === "phr" ? [0, 0, "L"] : kd === "keys" ? [0, 0, "?"] : null); if (hit && e.key.toUpperCase() === hit[2]) { e.preventDefault(); popDrawer(); return; } }
+  if (!typing && e.key === "?" && !$("#drawer")) { e.preventDefault(); openKeys(); return; }
   if ($("#drawer") || $("#bigread") || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || typing) return;
   if (e.key === "/") { e.preventDefault(); openSearch(); return; }
   if (e.key === "f" || e.key === "F") { document.documentElement.classList.toggle("focus"); return; }
-  if ((e.key === "r" || e.key === "R") && $("#raptab")) { e.preventDefault(); openRapList(); return; }
-  if ((e.key === "e" || e.key === "E") && $(".split.pm-tiroir")) { e.preventDefault(); enDrawer(); return; }
+  if (exKey(e)) return;
   const fl = $(".flash", app);
   if (fl && (e.key === "ArrowRight" || e.key === "ArrowLeft")) { e.preventDefault(); flashGo(fl, e.key === "ArrowRight" ? 1 : -1); return; }
   if (fl && (e.key === " " || e.key === "Enter") && !t.closest("button")) { e.preventDefault(); const c = $(".fcard:not([hidden])", fl); if (c) c.classList.toggle("flip"); return; }
@@ -4695,7 +4768,7 @@ function render(keepScroll) {
   }
   lastRoute = h;
   if (typeof trackRoute === "function") trackRoute(h);
-  player = null; closeRappel(true); closeBig(true); closeTip(); ["#raptab", "#entab"].forEach(x => { const el = $(x); if (el) el.remove(); });
+  player = null; closeRappel(true); closeBig(true); closeTip(); ["#edgetabs", "#entab", "#kbhelp"].forEach(x => { const el = $(x); if (el) el.remove(); }); document.body.classList.remove("has-edge");
   let html, m, ex = null;
   if (h === "accueil") html = home();
   else if (h === "commando" || h === "s-xens") html = commandoPage();

@@ -21,7 +21,7 @@ const e = LEMME.EXERCISES.find(x => x.id === "cx-05");
 if (!e) return;
 const ph = (id, t) => `<span data-ph="${id}">${t}</span>`;
 e.pilote = true;
-e.themes = ["somme géométrique", "angle moitié", "racines de l'unité", "Moivre", "exponentielle complexe", "linéarisation"];
+e.themes = ["somme géométrique", "angle moitié", "racines de l'unité", "Moivre", "exponentielle complexe"];
 e.prereq = [
   { q: R`Pour $q\neq1$, la somme $\displaystyle\sum_{k=0}^nq^k$ vaut :`, c: [R`$\dfrac{1-q^{n+1}}{1-q}$`, R`$\dfrac{1-q^{n}}{1-q}$`, R`$\dfrac{q^{n+1}-1}{q+1}$`, R`$(n+1)\,q$`], ok: 0, r: "cx-geo" },
   { q: R`Le nombre $e^{ia}-1$ s'écrit :`, c: [R`$2i\sin\frac a2\,e^{ia/2}$`, R`$2\cos\frac a2\,e^{ia/2}$`, R`$2\sin a\,e^{ia}$`, R`$i\sin a$`], ok: 0, r: "cx-moitie" },
