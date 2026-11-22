@@ -2317,3 +2317,88 @@ body.resizing{cursor:col-resize;user-select:none}
 /* marge d'annotations : on donne plus de place à la colonne de l'énoncé */
 .split.pm-colonnes:has(> .dm-marge){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 @media (max-width:1020px){.split.pm-colonnes:has(> .dm-marge){grid-template-columns:minmax(0,1fr)}}
+
+/* ===================== Aides à la rédaction (pilote) ===================== */
+.setpop{max-height:min(78vh,720px);overflow:auto;overscroll-behavior:contain}
+/* Pourquoi j'y pense */
+.declic{margin:0 0 18px;padding:12px 16px 4px;border-radius:12px;background:var(--yellow-soft);border-left:4px solid var(--yellow)}
+.declic .dk,.tete .dk{display:block;font:600 12px var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:4px}
+.declic .prose p{margin:0 0 8px}
+/* indices gradués */
+.hints{margin:0 0 18px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.hstep{width:100%;border:1px dashed var(--blue);border-radius:12px;padding:8px 14px 2px;background:color-mix(in srgb,var(--blue) 5%,var(--surface))}
+.hstep .hn{font:600 12.5px var(--f-display);color:var(--blue)}
+.hnext{display:inline-flex;align-items:center;gap:8px;color:var(--blue);border-color:color-mix(in srgb,var(--blue) 40%,var(--line))}
+.hnext .hint-ico{width:20px;height:20px;border-radius:50%;background:var(--blue);color:var(--surface);display:grid;place-items:center;font-size:12px}
+/* étapes à trous et test de prérequis */
+.trou{margin:0 0 20px;padding:16px 18px;border:1.5px solid var(--ink);border-radius:14px;background:var(--surface)}
+.trou .tk{margin:0 0 6px;font:600 12px var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tq p{margin:0 0 10px}
+.tc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin:6px 0 10px}
+.tc button{text-align:left;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:16px/1.4 var(--f-read);cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast)}
+.tc button:hover:not(:disabled),.tc button[aria-pressed="true"]{border-color:var(--ink)}
+.tc button[aria-pressed="true"]{background:var(--bg-2)}
+.tc button.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--surface))}
+.tc button.ko{border-color:var(--red);background:color-mix(in srgb,var(--red) 10%,var(--surface))}
+.tc button:disabled{cursor:default}
+.tfb{margin:4px 0 0}
+.prereq h3{margin:6px 0 6px}
+.prereq .pl{color:var(--muted);margin:0 0 18px;font-family:var(--f-display)}
+.pq{border:0;border-top:1px solid var(--line);margin:0;padding:14px 0 6px}
+.pq legend{float:left;width:100%;padding:0;margin-bottom:6px;font:16.5px/1.5 var(--f-read)}
+.pq .tc{clear:both}
+.pfb{font-size:14px;margin:0 0 8px;font-family:var(--f-display)}
+.pok{color:var(--green);font-weight:600}.pko{color:var(--red);font-weight:600;margin-right:6px}
+.pres{margin:10px 0 0;padding:12px 16px;border-radius:12px;background:var(--bg-2);font-family:var(--f-display)}
+.pres p{margin:0}
+/* ma copie / dans ma tête */
+.vue2{display:inline-flex;gap:2px;padding:3px;margin:0 0 16px;border-radius:10px;background:var(--bg-2)}
+.vue2 button{border:0;background:none;padding:7px 14px;border-radius:8px;font:600 13.5px var(--f-display);color:var(--muted);cursor:pointer}
+.vue2 button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.tete{margin:18px 0 8px;padding:12px 16px 4px;border-radius:12px;border:1px dashed var(--line);background:color-mix(in srgb,var(--bg-2) 50%,var(--surface))}
+.tete p{margin:0 0 8px}
+.ph-on [data-ph]{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--blue) 18%,transparent) 60%);border-radius:2px;cursor:pointer;padding:0 1px}
+.ph-on [data-ph]:hover,.ph-on [data-ph]:focus-visible{background:color-mix(in srgb,var(--blue) 18%,transparent)}
+.phall{display:block;margin-top:6px;font-size:13px}
+.phrases .phi{color:var(--muted);font-size:14.5px;margin:4px 0 14px}
+.ph-i{border-top:1px solid var(--line);padding:12px 0 4px}
+.ph-i h4{margin:0 0 4px;font:600 15.5px var(--f-display)}
+.ph-i .phq{margin:0 0 6px;font-size:15px}
+.ph-i .phx{margin:0 0 6px;font-size:14.5px;font-style:italic;color:var(--muted)}
+.ph-i.on{background:var(--yellow-soft);margin:0 -12px;padding:12px 12px 4px;border-radius:10px;border-top-color:transparent}
+/* barème */
+.bareme{margin:20px 0 0;border:1px solid var(--line);border-radius:12px;padding:0 16px}
+.bareme summary{cursor:pointer;padding:11px 0;font:600 14.5px var(--f-display);display:flex;align-items:center;gap:10px}
+.bareme .pts{margin-left:auto;font:600 12.5px var(--f-mono);color:var(--gold-ink)}
+.bareme ul{list-style:none;margin:0 0 12px;padding:0}
+.bareme li{display:grid;grid-template-columns:48px 1fr;gap:10px;padding:7px 0;border-top:1px solid var(--line);font:15px/1.5 var(--f-read)}
+.bareme li b{font:600 12.5px var(--f-mono);color:var(--gold-ink);padding-top:2px}
+/* rapport du jury */
+.jury{margin:16px 0 0;padding:14px 18px 6px;border-left:4px solid var(--red);border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--red) 5%,var(--surface))}
+.jury .jh{margin:0 0 10px;font:600 14.5px var(--f-display);color:var(--red)}
+.jury .jh span{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.ji{border-top:1px solid color-mix(in srgb,var(--red) 18%,transparent);padding:9px 0 3px}
+.ji:first-of-type{border-top:0;padding-top:0}
+.ji p{margin:0 0 6px}
+.ji .je{font:16px/1.55 var(--f-read)}
+.ji .jp{font:600 13.5px/1.45 var(--f-display);color:var(--muted)}
+.ji .jp::before{content:"Pénalité : ";color:var(--red)}
+/* annales liées */
+.annl-s{color:var(--muted);margin:-6px 0 14px}
+.annl-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.annl-i{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color var(--t-fast)}
+.annl-i:hover{border-color:var(--ink)}
+.annl-e{font:600 12px var(--f-display);color:var(--gold-ink)}
+.annl-i b{font-weight:600;line-height:1.3}
+.annl-k{font-size:12.5px;color:var(--muted)}
+.annl-k em{font-style:normal;margin-left:8px;padding-left:8px;border-left:1px solid var(--line)}
+/* suivi élève et parents */
+.suivi .sv-s{color:var(--muted);font-size:14px;margin:-4px 0 14px}
+.sv-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.sv-c{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);border-left-width:5px;text-decoration:none;color:var(--ink);background:var(--surface)}
+.sv-v{border-left-color:var(--green)}.sv-o{border-left-color:var(--yellow)}.sv-r{border-left-color:var(--red)}
+.sv-t{font-weight:600;line-height:1.3}
+.sv-m{font-size:12.5px;color:var(--muted)}
+.sv-p{margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--bg-2)}
+.sv-p h3{margin:0 0 6px;font-size:15px}
+.sv-p p{margin:0 0 10px;font:15.5px/1.6 var(--f-read)}

@@ -228,7 +228,7 @@ const THEMES = [["auto", "Automatique", "linear-gradient(135deg,#F5F7FC 50%,#0A1
   document.addEventListener("click", () => { tp.hidden = true; tb.setAttribute("aria-expanded", "false"); });
 }
 /* ---------- Paramètres : quelles présentations l'élève veut voir dans un exercice ---------- */
-const UIDEF = { rmots: true, rtab: true, decode: "onglets", cor: "copie", page: "colonnes" };
+const UIDEF = { rmots: true, rtab: true, decode: "onglets", cor: "copie", page: "colonnes", deux: true, declic: true, hs: true, trou: true, bareme: true, jury: true, phrases: true, prereq: true, annales: true, suivi: true };
 const UI = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem("lemme-ui") || "{}") || {}; } catch (_) {} return Object.assign({}, UIDEF, o); })();
 {
   const sb = $("#set-toggle"), sp = $("#setpop");
@@ -236,7 +236,8 @@ const UI = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem("lemme
     ["Rappels de cours", null, [["rmots", "Mots du corrigé cliquables"], ["rtab", "Languette au bord de l'écran"]]],
     ["Données et but", "decode", [["onglets", "Onglets dans l'énoncé"], ["marge", "Annotations en marge"], ["plis", "Volets repliés"]]],
     ["Corrigé", "cor", [["copie", "Copie de concours"], ["classique", "Classique"]]],
-    ["Page d'exercice", "page", [["colonnes", "Deux colonnes"], ["reglable", "Séparation réglable"], ["tiroir", "Énoncé dans un tiroir"]]]
+    ["Page d'exercice", "page", [["colonnes", "Deux colonnes"], ["reglable", "Séparation réglable"], ["tiroir", "Énoncé dans un tiroir"]]],
+    ["Aides à la rédaction", null, [["deux", "Ma copie / Dans ma tête"], ["declic", "Pourquoi j'y pense"], ["phrases", "Phrases types surlignées"], ["hs", "Indices gradués"], ["trou", "Étapes à trous"], ["bareme", "Barème"], ["jury", "Rapport du jury"], ["prereq", "Test de prérequis"], ["annales", "Annales liées"], ["suivi", "Suivi élève et parents"]]]
   ];
   const paint = () => { sp.innerHTML = `<p class="sph">Paramètres</p>` + OPTS.map(([t, k, os]) => `<p>${t}</p>` + os.map(([v, l]) => k
       ? `<button type="button" data-ui="${k}" data-v="${v}" aria-pressed="${UI[k] === v}"><i class="rd"></i>${l}</button>`
@@ -250,7 +251,7 @@ const UI = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem("lemme
       const b = ev.target.closest("[data-ui]"); if (!b) return;
       const k = b.dataset.ui; UI[k] = b.dataset.v !== undefined ? b.dataset.v : !UI[k];
       try { localStorage.setItem("lemme-ui", JSON.stringify(UI)); } catch (_) {}
-      paint(); if (/^e-/.test(location.hash.slice(1))) uiRefresh();
+      paint(); const hh = location.hash.slice(1); if (/^e-/.test(hh)) uiRefresh(); else if (hh === "tableau") render(true);
     });
     $("#theme-toggle").addEventListener("click", () => { sp.hidden = true; sb.setAttribute("aria-expanded", "false"); });
     document.addEventListener("click", () => { sp.hidden = true; sb.setAttribute("aria-expanded", "false"); });
@@ -488,6 +489,124 @@ function bindDone(e, root) {
   }));
 }
 let enonceMode = "interactif";
+/* ---------- Aides à la rédaction (pilote : khôlle cx-05) ---------- */
+const PIL = () => DS.get("lemme-pilot", { pre: {}, trou: {} });
+const pilSave = f => { const o = PIL(); f(o); DS.set("lemme-pilot", o); };
+const VUE = () => { try { return localStorage.getItem("lemme-vue") || "tete"; } catch (_) { return "tete"; } };
+function stepAids(e, st, i, veil) {
+  const declic = st.declic && UI.declic ? `<div class="declic"><span class="dk">Pourquoi j'y pense</span><div class="prose">${annotate(st.declic, e)}</div></div>` : "";
+  let hint = "";
+  if (st.hs && UI.hs && hintsOn()) hint = `<div class="hints">${st.hs.map((h, k) => `<div class="hstep" data-hk="${k}" hidden><span class="hn">Indice ${k + 1}</span><div class="prose">${annotate(h, e)}</div></div>`).join("")}<button type="button" class="btn btn-ghost btn-sm hnext" data-hnext><span class="hint-ico">?</span>Indice 1 sur ${st.hs.length}</button></div>`;
+  else if (st.h && hintsOn()) hint = `<details class="hint"${veil ? " open" : ""}><summary><span class="hint-ico">?</span>Indice</summary><div class="prose">${annotate(st.h, e)}</div></details>`;
+  const done = (PIL().trou || {})[e.id + ":" + i];
+  const trouOn = !!(st.trou && UI.trou && !done);
+  const trou = trouOn ? `<div class="trou" data-trou><p class="tk">À toi de compléter</p><div class="prose tq">${annotate(st.trou.q, e)}</div><div class="tc">${st.trou.c.map((c, k) => `<button type="button" data-tc="${k}">${c}</button>`).join("")}</div><div class="tfb prose" hidden></div><button type="button" class="linkbtn" data-tskip>Passer et voir le corrigé</button></div>` : "";
+  const tete = annotate(st.b, e) + (st.tete && UI.deux ? `<div class="tete"><span class="dk">Ce qu'on essaie d'abord (et pourquoi ça coince)</span>${annotate(st.tete, e)}</div>` : "");
+  const two = st.copie && UI.deux, v = VUE();
+  let body = two
+    ? `<div class="vue2" role="tablist" aria-label="Lecture du corrigé"><button type="button" role="tab" data-vue-b="tete" aria-selected="${v === "tete"}">Dans ma tête</button><button type="button" role="tab" data-vue-b="copie" aria-selected="${v === "copie"}">Ce que j'écris sur ma copie</button></div><div class="prose" data-vue="tete"${v === "tete" ? "" : " hidden"}>${tete}</div><div class="prose copie-v${UI.phrases ? " ph-on" : ""}" data-vue="copie"${v === "copie" ? "" : " hidden"}>${annotate(st.copie, e)}${UI.phrases ? `<button type="button" class="linkbtn phall" data-phall>Toutes les phrases types</button>` : ""}</div>`
+    : `<div class="prose">${tete}</div>`;
+  if (st.bareme && UI.bareme) body += `<details class="bareme" open><summary>Barème de la question <span class="pts">${st.bareme.sur} points</span></summary><ul>${st.bareme.l.map(([p, t]) => `<li><b>${p} pt</b><span>${annotate(t, e)}</span></li>`).join("")}</ul></details>`;
+  if (st.jury && UI.jury) body += `<div class="jury"><p class="jh">Rapport du jury <span>remarques fréquentes des correcteurs, reformulées</span></p>${st.jury.map(j => `<div class="ji"><p class="je">${annotate(j.e, e)}</p><p class="jp">${annotate(j.p, e)}</p></div>`).join("")}</div>`;
+  const hide = trouOn || veil;
+  body = hide ? `${trouOn ? "" : `<button type="button" class="btn btn-ghost reveal" data-reveal>Voir le corrigé</button>`}<div class="veiled" hidden>${body}</div>` : body;
+  const raps = (st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : "";
+  return declic + hint + trou + body + raps;
+}
+function bindAids(e, st, i, host, unveil) {
+  const hb = $("[data-hnext]", host);
+  if (hb) hb.addEventListener("click", () => {
+    const next = $(".hstep[hidden]", host); if (next) next.hidden = false;
+    const left = $$(".hstep[hidden]", host).length, k = st.hs.length - left;
+    if (!left) hb.remove(); else hb.innerHTML = `<span class="hint-ico">?</span>Indice ${k + 1} sur ${st.hs.length}`;
+  });
+  const tr = $("[data-trou]", host);
+  if (tr) {
+    $$("[data-tc]", tr).forEach(b => b.addEventListener("click", () => {
+      const k = +b.dataset.tc, ok = k === st.trou.ok;
+      $$("[data-tc]", tr).forEach(x => { x.disabled = true; if (+x.dataset.tc === st.trou.ok) x.classList.add("ok"); });
+      if (!ok) b.classList.add("ko");
+      const fb = $(".tfb", tr); fb.hidden = false; fb.innerHTML = `<p><b>${ok ? "Bien vu." : "Pas tout à fait."}</b> ${annotate(st.trou.why, e)}</p>`; typeset(fb);
+      $("[data-tskip]", tr).remove();
+      pilSave(o => { (o.trou = o.trou || {})[e.id + ":" + i] = { ok, t: Date.now() }; });
+      unveil();
+    }));
+    $("[data-tskip]", tr).addEventListener("click", () => { tr.remove(); unveil(); });
+  }
+  $$("[data-vue-b]", host).forEach(b => b.addEventListener("click", () => {
+    const v = b.dataset.vueB; try { localStorage.setItem("lemme-vue", v); } catch (_) {}
+    $$("[data-vue-b]", host).forEach(x => x.setAttribute("aria-selected", String(x === b)));
+    $$("[data-vue]", host).forEach(p => { p.hidden = p.dataset.vue !== v; });
+  }));
+  $$(".ph-on [data-ph]", host).forEach(x => { x.tabIndex = 0; x.setAttribute("role", "button"); x.title = "Phrase type : voir quand l'utiliser"; x.addEventListener("click", () => openPhrases(x.dataset.ph)); x.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openPhrases(x.dataset.ph); } }); });
+  const pa = $("[data-phall]", host); if (pa) pa.addEventListener("click", () => openPhrases());
+}
+function openPhrases(id) {
+  const P = window.LEMME.PHRASES || {}; if ($("#drawer")) return;
+  const dr = document.createElement("aside"); dr.className = "drawer phrases"; dr.setAttribute("role", "dialog"); dr.setAttribute("aria-modal", "true"); dr.setAttribute("aria-labelledby", "dr-t");
+  dr.innerHTML = `<button class="iconbtn close" type="button" aria-label="Fermer">${I.close}</button><span class="kicker">Rédaction</span><h3 id="dr-t">Les phrases types</h3><p class="phi">Les tournures qui structurent une copie. Chacune annonce au correcteur ce que tu fais.</p>` + Object.entries(P).map(([k, x]) => `<section class="ph-i${k === id ? " on" : ""}" id="ph-${k}"><h4>${esc(x.t)}</h4><p class="phq">${x.q}</p><p class="phx">${x.ex}</p></section>`).join("");
+  mountDrawer(dr);
+  (typeset(dr) || Promise.resolve()).then(() => { const on = $(".ph-i.on", dr); if (on) on.scrollIntoView({ block: "center" }); });
+}
+function prereqScreen(e, host, start) {
+  const qs = e.prereq, ans = [];
+  host.innerHTML = `<div class="prereq"><span class="count">Avant de commencer</span><h3>Test de prérequis</h3><p class="pl">${qs.length} questions rapides sur ce qui sert dans le corrigé. Si tu bloques, on te montre les rappels utiles.</p>${qs.map((q, k) => `<fieldset class="pq" data-pq="${k}"><legend><b>${k + 1}.</b> ${q.q}</legend><div class="tc">${q.c.map((c, j) => `<button type="button" data-pc="${j}" aria-pressed="false">${c}</button>`).join("")}</div><div class="pfb" hidden></div></fieldset>`).join("")}<div class="pres" hidden></div><div class="nav"><button type="button" class="btn btn-ghost" data-pskip>Passer le test</button><button type="button" class="btn btn-yellow" data-pgo disabled>Voir mon résultat ${I.arrow}</button></div></div>`;
+  $$("[data-pq]", host).forEach(fs => $$("[data-pc]", fs).forEach(b => b.addEventListener("click", () => {
+    if (fs.dataset.lock) return; ans[+fs.dataset.pq] = +b.dataset.pc;
+    $$("[data-pc]", fs).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    $("[data-pgo]", host).disabled = ans.filter(x => x !== undefined).length < qs.length;
+  })));
+  $("[data-pskip]", host).addEventListener("click", () => { pilSave(o => { (o.pre = o.pre || {})[e.id] = { skip: true, t: Date.now() }; }); start(); });
+  $("[data-pgo]", host).addEventListener("click", ev => {
+    const btn = ev.currentTarget;
+    if (btn.dataset.done) { start(); return; }
+    let sc = 0;
+    $$("[data-pq]", host).forEach(fs => {
+      const k = +fs.dataset.pq, q = qs[k], ok = ans[k] === q.ok; if (ok) sc++;
+      fs.dataset.lock = "1"; $$("[data-pc]", fs).forEach(x => { x.disabled = true; if (+x.dataset.pc === q.ok) x.classList.add("ok"); else if (+x.dataset.pc === ans[k]) x.classList.add("ko"); });
+      const fb = $(".pfb", fs); fb.hidden = false; fb.innerHTML = ok ? `<span class="pok">Juste.</span>` : `<span class="pko">À revoir :</span> ${rchip(q.r, e)}`;
+    });
+    pilSave(o => { (o.pre = o.pre || {})[e.id] = { s: sc, n: qs.length, t: Date.now() }; });
+    const r = $(".pres", host); r.hidden = false;
+    r.innerHTML = `<p><b>${sc} / ${qs.length}.</b> ${sc === qs.length ? "Tu as les outils : place au corrigé." : "Ouvre les rappels signalés avant de te lancer : ils servent directement dans le corrigé."}</p>`;
+    btn.dataset.done = "1"; btn.innerHTML = `Commencer le corrigé ${I.arrow}`; $("[data-pskip]", host).remove();
+  });
+  typeset(host);
+}
+const ANNTXT = new Map();
+function annLinks(e) {
+  const keys = (e.themes || []).map(t => [t, norm(t)]);
+  return EXERCISES.filter(x => x.subj === "annales").map(x => {
+    let txt = ANNTXT.get(x.id); if (!txt) { txt = norm(plainOf(x.enonce) + " " + x.steps.map(st => plainOf(st.t + " " + st.b)).join(" ")); ANNTXT.set(x.id, txt); }
+    const hit = keys.filter(([, k]) => txt.includes(k));
+    return { x, hit: hit.map(([t]) => t), n: hit.reduce((a, [, k]) => a + txt.split(k).length - 1, 0) };
+  }).filter(r => r.hit.length).sort((a, b) => b.hit.length - a.hit.length || b.n - a.n).slice(0, 4);
+}
+function annSection(e) {
+  if (!e.themes || !UI.annales) return "";
+  const L = annLinks(e);
+  return `<section class="more annl"><h2>Ce thème dans les annales</h2><p class="annl-s">${L.length ? "Sujets de concours du site qui utilisent les mêmes outils que cette khôlle." : "Aucun sujet de concours du site n'utilise encore ces outils."}</p>${L.length ? `<div class="annl-g">${L.map(r => { const c = ANN()[r.x.chap] || {}; return `<a class="annl-i" href="#e-${r.x.id}"><span class="annl-e">${esc(c.epreuve || "Annale")}</span><b>${ttl(r.x)}</b><span class="annl-k">${r.hit.map(esc).join(" · ")}<em>${r.n} passage${r.n > 1 ? "s" : ""}</em></span></a>`; }).join("")}</div>` : ""}</section>`;
+}
+function suiviHtml(M) {
+  const conf = DS.get("lemme-conf", {}), pil = PIL();
+  const byCh = new Map();
+  EXERCISES.filter(x => x.subj !== "annales").forEach(x => { const k = `${x.subj}|${x.year}|${x.chap}`; if (!byCh.has(k)) byCh.set(k, []); byCh.get(k).push(x); });
+  const touched = new Set(M.done.map(x => `${x.subj}|${x.year}|${x.chap}`));
+  const rows = [...byCh.entries()].filter(([k]) => touched.has(k)).map(([k, xs]) => {
+    const [sj, yr, ch] = k.split("|"), s = sid(sj), c = s && s.years[yr] && s.years[yr][+ch]; if (!c) return null;
+    const d = xs.filter(x => doneN(x.id)), hard = d.filter(x => conf[x.id] === 3).length, easy = d.filter(x => conf[x.id] && conf[x.id] < 3).length;
+    const st = hard > easy || xs.some(x => FAV.has(x.id) && doneN(x.id)) ? "r" : d.length / xs.length >= 0.5 && !hard ? "v" : "o";
+    return { t: c.t, s: s.name, href: `#c-${sj}-${yr}-${ch}`, n: d.length, tot: xs.length, st };
+  }).filter(Boolean).sort((a, b) => "rov".indexOf(a.st) - "rov".indexOf(b.st));
+  const pre = Object.values(pil.pre || {}).filter(x => x.n), ps = pre.reduce((a, x) => a + x.s, 0), pn = pre.reduce((a, x) => a + x.n, 0);
+  const tr = Object.values(pil.trou || {}), tok = tr.filter(x => x.ok).length;
+  const wk = M.log.filter(([t]) => t > Date.now() - 7 * DAY).reduce((a, [, , d]) => a + d, 0);
+  const lab = { v: "solide", o: "en cours", r: "à retravailler" };
+  const good = rows.filter(r => r.st === "v").map(r => r.t), bad = rows.filter(r => r.st === "r").map(r => r.t);
+  const resume = `Cette semaine : ${wk} exercice${wk > 1 ? "s" : ""} terminé${wk > 1 ? "s" : ""}.` + (good.length ? ` Chapitres solides : ${good.slice(0, 4).join(", ")}.` : "") + (bad.length ? ` À retravailler : ${bad.slice(0, 4).join(", ")}.` : "") + (pn ? ` Tests de prérequis : ${ps} bonnes réponses sur ${pn}.` : "") + (tr.length ? ` Étapes à trous : ${tok} réussie${tok > 1 ? "s" : ""} sur ${tr.length}.` : "");
+  return `<section class="db-card suivi"><h2>Suivi par chapitre</h2><p class="sv-s">Vert : solide. Orange : en cours. Rouge : ressenti difficile ou exercices marqués à revoir.</p>${rows.length ? `<div class="sv-g">${rows.map(r => `<a class="sv-c sv-${r.st}" href="${r.href}"><span class="sv-t">${esc(r.t)}</span><span class="sv-m">${esc(r.s)} · ${r.n}/${r.tot} faits · ${lab[r.st]}</span></a>`).join("")}</div>` : `<p class="sv-s">La carte se remplit dès le premier exercice marqué comme fait.</p>`}
+    <div class="sv-p"><h3>Résumé pour les parents</h3><p data-resume>${esc(resume)}</p><div class="sv-b"><button type="button" class="btn btn-ghost btn-sm" data-copyres>Copier le résumé</button></div></div></section>`;
+}
 const enW = () => { let f = .46; try { f = +localStorage.getItem("lemme-enw") || .46; } catch (_) {} return (Math.min(.65, Math.max(.25, f)) * 100).toFixed(1) + "%"; };
 function uiRefresh() { const i = player ? player.i : 0; render(true); if (player && i > 0) player.go(i); }
 function enDrawer(force) {
@@ -538,7 +657,7 @@ function wrapTerms(root, ids, e, found) {
 function rapWire(e, st, host, last) {
   const ids = last || !st ? [] : (st.rappels || []).filter(r => RAPPELS[r]);
   const found = new Set();
-  if (UI.rmots && ids.length) $$(".step > .prose", host).forEach(p => wrapTerms(p, ids, e, found));
+  if (UI.rmots && ids.length) $$(".step .prose", host).filter(p => !p.closest(".hints, .hint, .trou, .declic, .jury, .bareme, .tete, .copie-v")).forEach(p => wrapTerms(p, ids, e, found));
   const fold = $$(".step > details.fold-sm", host).find(d => /^Rappels/.test($("summary", d).textContent));
   if (fold) {
     if (UI.rtab) fold.remove();
@@ -609,7 +728,7 @@ function exercisePage(eid) {
   } else more = others.length ? `<section class="more"><h2>Dans le même chapitre</h2><div class="exgrid">${others.map(exCard).join("")}</div></section>` : "";
   return head + `<div class="wrap wrap-wide"><div class="ex-layout wide">
       <div class="split pm-${UI.page}"${UI.page === "reglable" ? ` style="--enw:${enW()}"` : ""}><section class="panelbox side-en dm-${dm}" aria-labelledby="h-en" tabindex="-1">${UI.page === "tiroir" ? `<button class="iconbtn en-close" type="button" data-enclose aria-label="Fermer l'énoncé">${I.close}</button>` : ""}${enHead}${enBody}</section>${UI.page === "reglable" ? `<div class="splitter" role="separator" aria-orientation="vertical" aria-label="Largeur de l'énoncé (flèches gauche et droite)" tabindex="0"><i></i></div>` : ""}${cor}</div>
-      ${viz}${more}
+      ${viz}${annSection(e)}${more}
     </div></div>`;
 }
 
@@ -935,6 +1054,8 @@ function openRappel(id, exId, src) {
   const p = typeset(dr); (p || Promise.resolve()).then(() => revealUsed(dr));
 }
 document.addEventListener("click", e => {
+  const cr = e.target.closest("[data-copyres]");
+  if (cr) { const t = ($("[data-resume]") || {}).textContent || ""; try { navigator.clipboard.writeText(t).then(() => { cr.textContent = "Résumé copié"; }, () => {}); } catch (_) {} return; }
   const b = e.target.closest(".rchip, .rterm"); if (!b) return;
   openRappel(b.dataset.r, b.dataset.ex, b);
 });
@@ -1314,6 +1435,7 @@ function mountPlayer(e, host) {
   function intro() {
     let k = 0;
     try { if (sessionStorage.getItem("lemme-resume") === e.id) { sessionStorage.removeItem("lemme-resume"); const l = DS.get("lemme-last", null); if (l && l.id === e.id) k = Math.min(l.i, n); } } catch (_) {}
+    if (e.prereq && UI.prereq && !(PIL().pre || {})[e.id] && !k) { prereqScreen(e, host, () => show(0, 1)); return; }
     show(k, 0, true);
   }
   const seen = new Set();
@@ -1336,7 +1458,7 @@ function mountPlayer(e, host) {
         <div class="step" style="--anim:${dir < 0 ? "stepback" : "stepin"}">
           ${last
             ? `<span class="count">Bilan</span><div class="redac"><div class="redac-head"><h4>La rédaction complète</h4><button class="btn btn-ghost btn-sm" type="button" data-big>${I.full} Voir en grand</button></div><div class="prose">${redaction(e)}</div></div><div class="folds">${e.piege ? `<details class="fold f-trap"><summary>Le piège</summary><div>${annotate(e.piege, e)}</div></details>` : ""}${e.methode ? `<details class="fold f-meth"><summary>La méthode</summary><div>${annotate(e.methode, e)}</div></details>` : ""}${all.length ? `<details class="fold"><summary>Tous les rappels utilisés (${all.length})</summary><div class="rappels">${all.map(r => rchip(r, e)).join("")}</div></details>` : ""}</div>`
-            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3>${st.h && hintsOn() ? `<details class="hint"${veil ? " open" : ""}><summary><span class="hint-ico">?</span>Indice</summary><div class="prose">${annotate(st.h, e)}</div></details>` : ""}${veil ? `<button type="button" class="btn btn-ghost reveal" data-reveal>Voir le corrigé</button><div class="prose veiled" hidden>${annotate(st.b, e)}</div>` : `<div class="prose">${annotate(st.b, e)}</div>`}${(st.rappels || []).length ? `<details class="fold fold-sm"><summary>Rappels utilisés (${st.rappels.length})</summary><div class="rappels">${st.rappels.map(r => rchip(r, e)).join("")}</div></details>` : ""}`}
+            : `${e.qnav ? (qpos(e, state.i)[1] > 1 ? `<span class="count">Étape ${qpos(e, state.i)[0]} / ${qpos(e, state.i)[1]}</span>` : "") : `<span class="count">${st.q ? `Question ${st.q} · ` : ""}Étape ${state.i + 1} sur ${n}</span>`}<h3>${stt(st.t)}</h3>${stepAids(e, st, state.i, veil)}`}
         </div>
       </div>
       ${copie ? `<div class="nav copybar">${topnav}<span class="ccount">${last ? "Bilan" : `${state.i + 1} / ${n}`}</span><span class="cgrow"></span><button class="btn btn-ghost btn-sm cprev" type="button" data-step="-1" aria-label="Étape précédente" ${state.i === 0 ? "disabled" : ""}>${I.left}</button>${last ? `<button class="btn btn-navy" type="button" data-step="restart">Recommencer</button>` : `<button class="btn btn-yellow" type="button" data-step="1">${state.i === n - 1 ? "Voir le bilan" : "Étape suivante"} ${I.arrow}</button>`}</div>` : `
@@ -1353,7 +1475,7 @@ function mountPlayer(e, host) {
       const v = b.dataset.step;
       if (v === "restart") show(0, -1); else show(state.i + (+v), +v);
     }));
-    closeTip(); bindKeys(host, e); bindSrc(host); rapWire(e, st, host, last);
+    closeTip(); bindKeys(host, e); bindSrc(host); if (!last) bindAids(e, st, state.i, host, () => { const rb = $("[data-reveal]", host); if (rb) rb.remove(); const v = $(".veiled", host); if (v && v.hidden) { seen.add(state.i); v.hidden = false; typeset(v); } }); rapWire(e, st, host, last);
     {
       const q = last ? 0 : stepQ(e, state.i);
       const lis = $$(".side-en .enonce ol > li").filter(li => !li.parentElement.closest("li"));
@@ -4395,6 +4517,7 @@ ${M.done.length ? `
     <div class="db-start-n"><b>${Math.max(0, proj.daysLeft)}</b><span>jours avant les écrits</span></div>
   </section>
 `}
+  ${UI.suivi ? suiviHtml(M) : ""}
   <section class="db-card">
     <h2>À faire ensuite</h2>
     ${todo.length ? `<ol class="db-todo">${todo.map(x => `<li><a href="#e-${x.e.id}"><span class="db-tt">${esc(x.e.title)}</span><span class="db-tw">${esc(x.why)}</span>${I.arrow}</a></li>`).join("")}</ol>` : `<p class="db-note">Tout est fait. Impressionnant.</p>`}
